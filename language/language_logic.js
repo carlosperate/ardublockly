@@ -50,7 +50,7 @@ Blockly.Language.Boolean = {
 };
 
 Blockly.Language.disjunction = {
-  // Boolean data type: true and false.
+  // logical disjuntive: 'and', 'or'.
   category: 'Logic',
   helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
   init: function() {
@@ -67,7 +67,7 @@ Blockly.Language.disjunction = {
 
 
 Blockly.Language.not = {
-		  // Boolean data type: true and false.
+		  //negation.
 		  category: 'Logic',
 		  helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
 		  init: function() {
