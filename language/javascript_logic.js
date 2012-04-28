@@ -47,3 +47,34 @@ Blockly.JavaScript.compare.MAP = {
   '\u2265': '>='
 };
 
+
+Blockly.JavaScript.logical_operation = function(opt_dropParens) {
+  // Operations 'and', 'or'.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || 'false';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || 'false';
+  var operator = (this.getValueLabel(1) == 'and') ? '&&' : '||';
+  var code = argument0 + ' ' + operator + ' ' + argument1;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
+
+Blockly.JavaScript.boolean = function() {
+  // Boolean values true and false.
+  return Blockly.JavaScript.scrub_(this, this.getTitleText(0));
+};
+
+
+Blockly.JavaScript.negate = function(opt_dropParens) {
+  // Negation.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || 'false';
+  var code = '!' + argument0;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
+
