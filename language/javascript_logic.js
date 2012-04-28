@@ -18,26 +18,32 @@
  */
 
 /**
- * @fileoverview List blocks for Blockly.
+ * @fileoverview Core blocks language for Blockly.
  * @author fraser@google.com (Neil Fraser)
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to language files.
  */
 
-if (!Blockly.Language) {
-  Blockly.Language = {};
-}
+Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.Language.getIndex = {
-  // Get element at index.
-  category: 'Lists',
-  helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
-  init: function() {
-    this.setColour('blue');
-    this.addTitle('get item');
-    this.setOutput(true);
-    this.addInput('from list', '', Blockly.INPUT_VALUE);
-    this.addInput('at', '', Blockly.INPUT_VALUE);
-    this.setInputsInline(true);
+Blockly.JavaScript.compare = function(opt_dropParens) {
+  // Comparison operator.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
+  var operator = Blockly.JavaScript.compare.MAP[this.getValueLabel(1)];
+  var code = argument0 + ' ' + operator + ' ' + argument1;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
   }
+  return Blockly.JavaScript.scrub_(this, code);
 };
+
+Blockly.JavaScript.compare.MAP = {
+  '=': '==',
+  '\u2260': '!=',
+  '<': '<',
+  '\u2264': '<=',
+  '>': '>',
+  '\u2265': '>='
+};
+

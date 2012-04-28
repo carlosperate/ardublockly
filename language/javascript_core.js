@@ -162,42 +162,7 @@ Blockly.JavaScript.scrub_ = function(block, code) {
 // Functions for inidividual block types below.
 // The variable 'this' is the block whose code is being generated.
 
-Blockly.JavaScript.ifunless = function() {
-  // If condition.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'false';
-  var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
-  if (this.getTitleText(0) == 'unless') {
-    argument0 = '!(' + argument0 + ')';
-  }
-  var code = 'if (' + argument0 + ') {\n' + branch0 + '}\n';
-  return Blockly.JavaScript.scrub_(this, code);
-};
 
-Blockly.JavaScript.foreach = function() {
-  // For each loop.
-  var variable0 = Blockly.JavaScript.variableDB_.getVariable(
-      this.getVariableInput(0));
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '[]';
-  var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
-  var code;
-  var indexVar = Blockly.JavaScript.variableDB_.getDistinctVariable(
-      variable0 + '_index');
-  if (argument0.match(/^\w+$/)) {
-    branch0 = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' + branch0;
-    code = 'for (var ' + indexVar + ' = 0; ' + indexVar + ' < ' + argument0 + '.length; ' + indexVar + '++) {\n' +
-        branch0 + '}\n';
-  } else {
-    // The list appears to be more complicated than a simple variable.
-    // Cache it to a variable to prevent repeated look-ups.
-    var listVar = Blockly.JavaScript.variableDB_.getDistinctVariable(
-        variable0 + '_list');
-    branch0 = '  ' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' + branch0;
-    code = 'var ' + listVar + ' = ' + argument0 + ';\n' +
-        'for (var ' + indexVar + ' = 0; ' + indexVar + ' < ' + listVar + '.length; ' + indexVar + '++) {\n' +
-        branch0 + '}\n';
-  }
-  return Blockly.JavaScript.scrub_(this, code);
-};
 
 Blockly.JavaScript.text = function() {
   // Text value.
@@ -218,26 +183,6 @@ Blockly.JavaScript.number = function() {
       window.parseFloat(this.getTitleText(0)));
 };
 
-Blockly.JavaScript.compare = function(opt_dropParens) {
-  // Comparison operator.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var operator = Blockly.JavaScript.compare.MAP[this.getValueLabel(1)];
-  var code = argument0 + ' ' + operator + ' ' + argument1;
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
-  }
-  return Blockly.JavaScript.scrub_(this, code);
-};
-
-Blockly.JavaScript.compare.MAP = {
-  '=': '==',
-  '\u2260': '!=',
-  '<': '<',
-  '\u2264': '<=',
-  '>': '>',
-  '\u2265': '>='
-};
 
 Blockly.JavaScript.get = function() {
   // Variable getter.
