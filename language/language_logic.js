@@ -10,7 +10,7 @@ if (!Blockly.Language) {
 
 Blockly.Language.compare = {
   // Comparison operator.
-  category: 'Math',
+  category: 'Logic',
   helpUrl: function() {
     var map = {
       '=': 'http://en.wikipedia.org/wiki/Equality_(mathematics)',
@@ -33,3 +33,47 @@ Blockly.Language.compare = {
     this.setInputsInline(true);
   }
 };
+
+
+Blockly.Language.Boolean = {
+  // Boolean data type: true and false.
+  category: 'Logic',
+  helpUrl: 'http://en.wikipedia.org/wiki/Boolean_data_type',
+  init: function() {
+    this.setColour('green');
+    this.setOutput(true);
+    var dropdown = new Blockly.FieldDropdown('true', function() {
+      return ['true', 'false'];
+    });
+    this.addTitle(dropdown);
+  }
+};
+
+Blockly.Language.disjunction = {
+  // Boolean data type: true and false.
+  category: 'Logic',
+  helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
+  init: function() {
+    this.setColour('green');
+    this.setOutput(true);
+    this.addInput('', '', Blockly.INPUT_VALUE);
+    var dropdown = new Blockly.FieldDropdown('and', function() {
+      return ['and', 'or'];
+    });
+    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+  }
+};
+
+
+Blockly.Language.not = {
+		  // Boolean data type: true and false.
+		  category: 'Logic',
+		  helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
+		  init: function() {
+		    this.setColour('green');
+		    this.setOutput(true);
+		    this.addInput('not', '', Blockly.INPUT_VALUE);
+		    this.setInputsInline(true);
+		  }
+		};
