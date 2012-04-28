@@ -34,7 +34,7 @@ Blockly.Language.text = {
   category: 'Text',
   helpUrl: 'http://en.wikipedia.org/wiki/String_(computer_science)',
   init: function() {
-    this.setColour('baby');
+    this.setColour('brown');
     this.addTitle('\u201C');
     this.addTitle(new Blockly.FieldTextInput(''));
     this.addTitle('\u201D');
@@ -48,7 +48,7 @@ Blockly.Language.print = {
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    this.setColour('red');
+    this.setColour('brown');
     this.addTitle('print');
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);

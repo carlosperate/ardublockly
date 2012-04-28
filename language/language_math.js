@@ -44,3 +44,33 @@ Blockly.Language.number = {
     this.setOutput(true);
   }
 };
+
+
+Blockly.Language.arithmetic = {
+  // Basic arithmetic operator.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Arithmetic',
+  init: function() {
+    this.setColour('green');
+    this.setOutput(true);
+    this.addInput('', '', Blockly.INPUT_VALUE);
+    var dropdown = new Blockly.FieldDropdown('+', function() {
+      return ['+', '-', '\u00D7', '\u00F7'];
+    });
+    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Language.root = {
+  // Root operator.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Square_root',
+  init: function() {
+    this.setColour('green');
+    this.setOutput(true);
+    this.addInput('\u221A', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+  }
+};
+

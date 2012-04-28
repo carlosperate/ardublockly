@@ -34,7 +34,7 @@ Blockly.Language.get = {
   category: null,  // Variables are handled specially.
   helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
   init: function() {
-    this.setColour('blue');
+    this.setColour('red');
     this.addTitle('get');
     this.addTitle(new Blockly.FieldDropdown('item',
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
@@ -55,7 +55,7 @@ Blockly.Language.set = {
   category: null,  // Variables are handled specially.
   helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
   init: function() {
-    this.setColour('blue');
+    this.setColour('red');
     this.addTitle('set');
     this.addTitle(new Blockly.FieldDropdown('item',
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
