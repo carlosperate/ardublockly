@@ -199,6 +199,9 @@ Blockly.Toolbox.init = function() {
       Blockly.Toolbox.setFlyoutMetrics,
       false, false);
   
+  // List of background buttons that lurk behind each block to catch clicks
+  // landing in the blocks' lakes and bays.
+  Blockly.Toolbox.svgFlyoutOptions_.buttons_ = [];
 
   Blockly.Toolbox.position_();
 
@@ -373,10 +376,18 @@ Blockly.Toolbox.clearSelection = function() {
  */
 Blockly.Toolbox.hideFlyout_ = function() {
   Blockly.Toolbox.svgFlyout_.style.display = 'none';
+  // Delete all the blocks.
   var blocks = Blockly.Toolbox.flyoutWorkspace_.getTopBlocks();
   for (var x = 0, block; block = blocks[x]; x++) {
     block.destroy();
   }
+  // Delete all the background buttons.
+  for (var x = 0, rect; rect = Blockly.Toolbox.svgFlyoutOptions_.buttons_[x];
+       x++) {
+    Blockly.unbindEvent_(rect, 'mousedown', rect.wrapper_);
+    rect.parentNode.removeChild(rect);
+  }
+  Blockly.Toolbox.svgFlyoutOptions_.buttons_ = [];
 };
 
 /**
@@ -462,8 +473,9 @@ Blockly.Toolbox.showFlyout_ = function(id) {
         'fill-opacity': 0}, null);
     // Add the rectangles under the blocks, so that the blocks' tooltips work.
     svgFlyoutOptions.insertBefore(rect, svgFlyoutOptions.firstChild);
-    Blockly.bindEvent_(rect, 'mousedown', null,
-                       Blockly.Toolbox.createBlockFunc_(block));
+    rect.wrapper_ = Blockly.bindEvent_(rect, 'mousedown', null,
+        Blockly.Toolbox.createBlockFunc_(block));
+    svgFlyoutOptions.buttons_[i] = rect;
   }
 
   svgFlyoutOptions.setAttribute('transform', 'translate(0, ' + margin + ')');
