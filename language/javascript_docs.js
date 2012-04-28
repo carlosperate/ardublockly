@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Google Docs blocks language for Blockly.
+ * @fileoverview Generating JavaScript for docs blocks.
  * @author fraser@google.com (Neil Fraser)
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to language files.

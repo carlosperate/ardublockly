@@ -51,7 +51,7 @@ Blockly.Language.arithmetic = {
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Arithmetic',
   init: function() {
-    this.setColour('green');
+    this.setColour('baby');
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
     var dropdown = new Blockly.FieldDropdown('+', function() {
@@ -67,7 +67,7 @@ Blockly.Language.root = {
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Square_root',
   init: function() {
-    this.setColour('green');
+    this.setColour('baby');
     this.setOutput(true);
     this.addInput('\u221A', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
