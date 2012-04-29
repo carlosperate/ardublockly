@@ -58,3 +58,27 @@ Blockly.Dart.root = function() {
   return Blockly.Dart.scrub_(this, code);
 };
 
+
+Blockly.Dart.random_float = function() {
+  var code = 'Math.random()';
+  return Blockly.Dart.scrub_(this, code);
+};
+
+Blockly.Dart.random_int = function() {
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
+  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
+  var rand1 = '(Math.random()*(' + argument1 + '-' + argument0 + '+1' + ')+' + argument0 + ').floor()';
+  var rand2 = '(Math.random()*(' + argument0 + '-' + argument1 + '+1' + ')+' + argument1 + ').floor()';
+  var code;
+  if (argument0.match(/^[\d\.]+$/) && argument1.match(/^[\d\.]+$/)) {
+	  if (parseFloat(argument0) < parseFloat(argument1)) {
+		  code = rand1;
+	  } else {
+		  code = rand2;
+	  }
+  } else {
+    code = argument0 + ' < ' + argument1 + ' ? ' + rand1 + ' : ' + rand2;
+  }
+  return Blockly.Dart.scrub_(this, code);
+};
+
