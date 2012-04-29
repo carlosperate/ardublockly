@@ -20,7 +20,14 @@
 <script type="text/javascript" src="language/language_lists.js"></script>
 <script type="text/javascript" src="language/language_variables.js"></script>
 <script type="text/javascript" src="language/language_docs.js"></script>
-<script type="text/javascript" src="language/javascript_core.js"></script>
+<script type="text/javascript" src="language/dart.js"></script>
+<script type="text/javascript" src="language/dart_control.js"></script>
+<script type="text/javascript" src="language/dart_text.js"></script>
+<script type="text/javascript" src="language/dart_math.js"></script>
+<script type="text/javascript" src="language/dart_logic.js"></script>
+<script type="text/javascript" src="language/dart_lists.js"></script>
+<script type="text/javascript" src="language/dart_variables.js"></script>
+<script type="text/javascript" src="language/javascript.js"></script>
 <script type="text/javascript" src="language/javascript_control.js"></script>
 <script type="text/javascript" src="language/javascript_text.js"></script>
 <script type="text/javascript" src="language/javascript_math.js"></script>
@@ -131,11 +138,6 @@ function removeInput() {
   block.removeInput(index);
 }
 
-function toJavaScript() {
-  var output = document.getElementById('importExport');
-  output.value = Blockly.Generator.workspaceToCode('JavaScript');
-}
-
 function toXml() {
   var output = document.getElementById('importExport');
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -146,6 +148,16 @@ function fromXml() {
   var input = document.getElementById('importExport');
   var xml = Blockly.Xml.textToDom(input.value);
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+}
+
+function toJavaScript() {
+  var output = document.getElementById('importExport');
+  output.value = Blockly.Generator.workspaceToCode('JavaScript');
+}
+
+function toDart() {
+  var output = document.getElementById('importExport');
+  output.value = Blockly.Generator.workspaceToCode('Dart');
 }
 
 function airstrike(n) {
@@ -199,11 +211,13 @@ h1 {
 </script>
 
 <p>
-  <input type="button" value="Generate JavaScript" onclick="toJavaScript()">
-  &nbsp;
   <input type="button" value="Export to XML" onclick="toXml()">
   &nbsp;
   <input type="button" value="Import from XML" onclick="fromXml()">
+  <br>
+  <input type="button" value="Generate JavaScript" onclick="toJavaScript()">
+  &nbsp;
+  <input type="button" value="Generate Dart" onclick="toDart()">
   <br>
   <textarea id="importExport" style="width: 26%; height: 12em"></textarea>
 </p>

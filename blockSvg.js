@@ -174,7 +174,7 @@ Blockly.BlockSvg.prototype.render = function() {
   this.block_.rendered = true;
   var titleY = 18;
   if (!this.block_.collapsed &&
-      this.block_.inputsInline && this.block_.inputList &&
+      this.block_.inputsInline && this.block_.inputList.length &&
       this.block_.inputList[0].type == Blockly.INPUT_VALUE) {
     // Lower the title elements a bit in order to line up with the first
     // row of inline labels.

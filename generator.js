@@ -70,12 +70,15 @@ Blockly.Generator.get = function(name) {
 Blockly.Generator.workspaceToCode = function(name) {
   var code = [];
   var generator = Blockly.Generator.get(name);
-  code.push(generator.init());
+  generator.init();
   var blocks = Blockly.mainWorkspace.getTopBlocks();
   for (var x = 0; x < blocks.length; x++) {
     code.push(generator.blockToCode(blocks[x]));
   }
-  return code.join('\n\n');
+  code = generator.finish(code.join('\n\n'));
+  code = code.replace(/^\s+\n/, '');
+  code = code.replace(/\n\s+$/, '\n');
+  return code;
 };
 
 // The following are some helpful functions which can be used by multiple
