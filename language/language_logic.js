@@ -74,7 +74,20 @@ Blockly.Language.logical_operation = {
 };
 
 
-Blockly.Language.boolean = {
+Blockly.Language.negate = {
+  // Negation.
+  category: 'Logic',
+  helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
+  init: function() {
+    this.setColour('green');
+    this.setOutput(true);
+    this.addInput('not', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+  }
+};
+
+
+Blockly.Language.truefalse = {
   // Boolean data type: true and false.
   category: 'Logic',
   helpUrl: 'http://en.wikipedia.org/wiki/Boolean_data_type',
@@ -85,18 +98,5 @@ Blockly.Language.boolean = {
       return ['true', 'false'];
     });
     this.addTitle(dropdown);
-  }
-};
-
-
-Blockly.Language.negate = {
-  // Negation.
-  category: 'Logic',
-  helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
-  init: function() {
-    this.setColour('green');
-    this.setOutput(true);
-    this.addInput('not', '', Blockly.INPUT_VALUE);
-    this.setInputsInline(true);
   }
 };

@@ -61,12 +61,6 @@ Blockly.Dart.logical_operation = function(opt_dropParens) {
 };
 
 
-Blockly.Dart.boolean = function() {
-  // Boolean values true and false.
-  return Blockly.Dart.scrub_(this, this.getTitleText(0));
-};
-
-
 Blockly.Dart.negate = function(opt_dropParens) {
   // Negation.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || 'false';
@@ -78,3 +72,7 @@ Blockly.Dart.negate = function(opt_dropParens) {
 };
 
 
+Blockly.Dart.truefalse = function() {
+  // Boolean values true and false.
+  return Blockly.Dart.scrub_(this, this.getTitleText(0));
+};
