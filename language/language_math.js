@@ -62,6 +62,7 @@ Blockly.Language.arithmetic = {
   }
 };
 
+
 Blockly.Language.root = {
   // Root operator.
   category: 'Math',
@@ -71,6 +72,33 @@ Blockly.Language.root = {
     this.setOutput(true);
     this.addInput('\u221A', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
+  }
+};
+
+
+Blockly.Language.random_int = {
+  // Random integer between [X] and [Y].
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',
+  init: function() {
+    this.setColour('baby');
+    this.setOutput(true);
+    this.addTitle('random integer');
+    this.addInput('from', '', Blockly.INPUT_VALUE);
+    this.addInput('to', '', Blockly.INPUT_VALUE);
+    // TODO: Ensure that only number blocks may used to set range.
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Language.random_float = {
+  // Random fraction between 0 and 1.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',
+  init: function() {
+    this.setColour('baby');
+    this.setOutput(true);
+    this.addTitle('random fraction');
   }
 };
 
