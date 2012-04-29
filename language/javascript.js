@@ -66,6 +66,13 @@ Blockly.JavaScript.init = function() {
   } else {
     Blockly.JavaScript.variableDB_.reset();
   }
+  var declarations = [];
+  var variables = Blockly.Variables.allVariables();
+  for (var x = 0; x < variables.length; x++) {
+    declarations[x] = 'var ' +
+        Blockly.JavaScript.variableDB_.getDistinctVariable(variables[x]) + ';';
+  }
+  Blockly.JavaScript.declarations_ = declarations.join('\n');
 };
 
 /**
@@ -74,13 +81,7 @@ Blockly.JavaScript.init = function() {
  * @return {string} Completed code.
  */
 Blockly.JavaScript.finish = function(code) {
-  var declarations = [];
-  var variables = Blockly.Variables.allVariables();
-  for (var x = 0; x < variables.length; x++) {
-    declarations[x] = 'var ' +
-        Blockly.JavaScript.variableDB_.getDistinctVariable(variables[x]) + ';';
-  }
-  return declarations.join('\n') + '\n\n' + code;
+  return Blockly.JavaScript.declarations_ + '\n\n' + code;
 };
 
 /**

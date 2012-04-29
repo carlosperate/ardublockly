@@ -49,6 +49,13 @@ Blockly.Dart.init = function() {
   } else {
     Blockly.Dart.variableDB_.reset();
   }
+  var declarations = [];
+  var variables = Blockly.Variables.allVariables();
+  for (var x = 0; x < variables.length; x++) {
+    declarations[x] = 'var ' +
+        Blockly.Dart.variableDB_.getDistinctVariable(variables[x]) + ';';
+  }
+  Blockly.Dart.declarations_ = declarations.join('\n');
 };
 
 /**
@@ -57,19 +64,13 @@ Blockly.Dart.init = function() {
  * @return {string} Completed code.
  */
 Blockly.Dart.finish = function(code) {
-  var declarations = [];
-  var variables = Blockly.Variables.allVariables();
-  for (var x = 0; x < variables.length; x++) {
-    declarations[x] = 'var ' +
-        Blockly.Dart.variableDB_.getDistinctVariable(variables[x]) + ';';
-  }
 
   // Indent every line.
   code = '  ' + code.replace(/\n/g, '\n  ');
   code = code.replace(/\n\s+$/, '\n');
   code = 'main() {\n' + code + '}';
 
-  return declarations.join('\n') + '\n\n' + code;
+  return Blockly.Dart.declarations_ + '\n\n' + code;
 };
 
 /**

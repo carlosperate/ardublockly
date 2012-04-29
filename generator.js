@@ -73,11 +73,19 @@ Blockly.Generator.workspaceToCode = function(name) {
   generator.init();
   var blocks = Blockly.mainWorkspace.getTopBlocks();
   for (var x = 0; x < blocks.length; x++) {
-    code.push(generator.blockToCode(blocks[x]));
+    var line = generator.blockToCode(blocks[x]);
+    // Add a linefeed if this is a naked value.
+    if (line && line.charAt(line.length - 1) != '\n') {
+      line += '\n';
+    }
+    code.push(line);
   }
-  code = generator.finish(code.join('\n\n'));
+  code = code.join('\n');  // Blank line between each section.
+  code = generator.finish(code);
+  // Final scrubbing of whitespace.
   code = code.replace(/^\s+\n/, '');
   code = code.replace(/\n\s+$/, '\n');
+  code = code.replace(/[ \t]+\n/g, '\n');
   return code;
 };
 
