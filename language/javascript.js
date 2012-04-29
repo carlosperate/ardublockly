@@ -58,7 +58,6 @@ Blockly.JavaScript.RESERVED_WORDS_ =
 
 /**
  * Initialise the database of variable names.
- * @return {string} Variable declarations.
  */
 Blockly.JavaScript.init = function() {
   if (!Blockly.JavaScript.variableDB_) {
@@ -67,14 +66,21 @@ Blockly.JavaScript.init = function() {
   } else {
     Blockly.JavaScript.variableDB_.reset();
   }
+};
 
-  var code = [];
+/**
+ * Prepend the generated code with the variable definitions.
+ * @param {string} code Generated code.
+ * @return {string} Completed code.
+ */
+Blockly.JavaScript.finish = function(code) {
+  var declarations = [];
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {
-    code[x] = 'var ' +
+    declarations[x] = 'var ' +
         Blockly.JavaScript.variableDB_.getDistinctVariable(variables[x]) + ';';
   }
-  return code.join('\n');
+  return declarations.join('\n') + '\n\n' + code;
 };
 
 /**
@@ -157,59 +163,4 @@ Blockly.JavaScript.scrub_ = function(block, code) {
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
   var nextCode = this.blockToCode(nextBlock, 'JavaScript');
   return commentCode + code + nextCode;
-};
-
-// Functions for inidividual block types below.
-// The variable 'this' is the block whose code is being generated.
-
-
-
-Blockly.JavaScript.text = function() {
-  // Text value.
-  return Blockly.JavaScript.scrub_(this,
-      Blockly.JavaScript.quote_(this.getTitleText(1)));
-};
-
-Blockly.JavaScript.print = function() {
-  // Print statement.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\'';
-  var code = 'window.alert(' + argument0 + ');\n';
-  return Blockly.JavaScript.scrub_(this, code);
-};
-
-Blockly.JavaScript.number = function() {
-  // Numeric value.
-  return Blockly.JavaScript.scrub_(this,
-      window.parseFloat(this.getTitleText(0)));
-};
-
-
-Blockly.JavaScript.get = function() {
-  // Variable getter.
-  var varName = Blockly.JavaScript.variableDB_.getVariable(this.getTitleText(1));
-  return Blockly.JavaScript.scrub_(this, varName);
-};
-
-Blockly.JavaScript.set = function() {
-  // Variable setter.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  var varName = Blockly.JavaScript.variableDB_.getVariable(this.getTitleText(1));
-  var code = varName + ' = ' + argument0 + ';\n';
-  return Blockly.JavaScript.scrub_(this, code);
-};
-
-Blockly.JavaScript.getIndex = function() {
-  // Get element at index.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '[]';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '1';
-  // Blockly uses one-based arrays.
-  if (argument1.match(/^\d+$/)) {
-    // If the index is a naked number, decrement it right now.
-    argument1 = parseInt(argument1, 10) - 1;
-  } else {
-    // If the index is dynamic, decrement it in code.
-    argument1 += ' - 1';
-  }
-  var code = argument0 + '[' + argument1 + ']';
-  return Blockly.JavaScript.scrub_(this, code);
 };
