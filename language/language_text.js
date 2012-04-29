@@ -43,6 +43,17 @@ Blockly.Language.text = {
   }
 };
 
+Blockly.Language.text_length = {
+  // String length.
+  category: 'Text',
+  helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
+  init: function() {
+    this.setColour('brown');
+    this.addInput('length', '', Blockly.INPUT_VALUE);
+    this.setOutput(true);
+  }
+};
+
 Blockly.Language.text_print = {
   // Print statement.
   category: 'Text',

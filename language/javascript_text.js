@@ -33,6 +33,13 @@ Blockly.JavaScript.text = function() {
       Blockly.JavaScript.quote_(this.getTitleText(1)));
 };
 
+Blockly.JavaScript.text_length = function() {
+  // String length.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
+  var code = argument0 + '.length';
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
 Blockly.JavaScript.text_print = function() {
   // Print statement.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\'';

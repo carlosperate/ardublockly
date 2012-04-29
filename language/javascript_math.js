@@ -53,8 +53,15 @@ Blockly.JavaScript.math_arithmetic.MAP = {
 
 Blockly.JavaScript.math_negate = function() {
   // Negation operator.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var code = '- ' + argument0;
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
+Blockly.JavaScript.math_abs = function() {
+  // Absolute value operator.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var code = 'Math.abs(' + argument0 + ')';
   return Blockly.JavaScript.scrub_(this, code);
 };
 

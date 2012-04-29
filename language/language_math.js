@@ -75,6 +75,18 @@ Blockly.Language.math_negate = {
 };
 
 
+Blockly.Language.math_abs = {
+  // Absolute value operator.
+  category: 'Math',
+  helpUrl: 'http://www.purplemath.com/modules/absolute.htm',
+  init: function() {
+    this.setColour('baby');
+    this.setOutput(true);
+    this.addInput('abs', '', Blockly.INPUT_VALUE);
+  }
+};
+
+
 Blockly.Language.math_root = {
   // Root operator.
   category: 'Math',

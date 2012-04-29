@@ -58,6 +58,18 @@ Blockly.Dart.math_negate = function() {
   return Blockly.JavaScript.scrub_(this, code);
 };
 
+Blockly.Dart.math_abs = function() {
+  // Absolute value operator.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
+  if (!argument0.match(/^[\w\.]+$/)) {
+		// -4.abs() returns -4 in Dart due to strange order of operation choices.
+		// Need to wrap non trivial numbers in parentheses: (-4).abs()
+  	argument0 = '(' + argument0 + ')';
+	}
+  var code = argument0 + '.abs()';
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
 Blockly.Dart.math_root = function() {
   // Root operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';

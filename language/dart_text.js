@@ -33,6 +33,13 @@ Blockly.Dart.text = function() {
       Blockly.Dart.quote_(this.getTitleText(1)));
 };
 
+Blockly.Dart.text_length = function() {
+  // String length.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
+  var code = argument0 + '.length';
+  return Blockly.Dart.scrub_(this, code);
+};
+
 Blockly.Dart.text_print = function() {
   // Print statement.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
