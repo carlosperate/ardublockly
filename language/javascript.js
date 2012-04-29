@@ -85,6 +85,16 @@ Blockly.JavaScript.finish = function(code) {
 };
 
 /**
+ * Naked values are top-level blocks with outputs that aren't plugged into
+ * anything.  A trailing semicolon is needed to make this legal.
+ * @param {string} line Line of generated code.
+ * @param {string} Legal line of code.
+ */
+Blockly.JavaScript.scrubNakedValue = function(line) {
+  return line + ';\n';
+};
+
+/**
  * Generate JavaScript code representing the specified value input.
  * @param {!Blockly.Block} block The block containing the input.
  * @param {number} index The index of the input (0-based).

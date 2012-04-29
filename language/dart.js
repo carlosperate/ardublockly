@@ -64,13 +64,22 @@ Blockly.Dart.init = function() {
  * @return {string} Completed code.
  */
 Blockly.Dart.finish = function(code) {
-
   // Indent every line.
   code = '  ' + code.replace(/\n/g, '\n  ');
   code = code.replace(/\n\s+$/, '\n');
   code = 'main() {\n' + code + '}';
 
   return Blockly.Dart.declarations_ + '\n\n' + code;
+};
+
+/**
+ * Naked values are top-level blocks with outputs that aren't plugged into
+ * anything.  A trailing semicolon is needed to make this legal.
+ * @param {string} line Line of generated code.
+ * @param {string} Legal line of code.
+ */
+Blockly.Dart.scrubNakedValue = function(line) {
+  return line + ';\n';
 };
 
 /**

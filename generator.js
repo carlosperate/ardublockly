@@ -72,11 +72,12 @@ Blockly.Generator.workspaceToCode = function(name) {
   var generator = Blockly.Generator.get(name);
   generator.init();
   var blocks = Blockly.mainWorkspace.getTopBlocks();
-  for (var x = 0; x < blocks.length; x++) {
-    var line = generator.blockToCode(blocks[x]);
-    // Add a linefeed if this is a naked value.
-    if (line && line.charAt(line.length - 1) != '\n') {
-      line += '\n';
+  for (var x = 0, block; block = blocks[x]; x++) {
+    var line = generator.blockToCode(block);
+    if (block.outputConnection && generator.scrubNakedValue) {
+      // This block is a naked value.  Ask the language's code generator if
+      // it wants to append a semicolon, or something.
+      line = generator.scrubNakedValue(line);
     }
     code.push(line);
   }

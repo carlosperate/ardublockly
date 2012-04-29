@@ -36,6 +36,6 @@ Blockly.Dart.text = function() {
 Blockly.Dart.print = function() {
   // Print statement.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
-  var code = 'window.alert(' + argument0 + ');\n';
+  var code = 'print(' + argument0 + ');\n';
   return Blockly.Dart.scrub_(this, code);
 };
