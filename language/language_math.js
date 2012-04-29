@@ -29,7 +29,7 @@ if (!Blockly.Language) {
 }
 
 
-Blockly.Language.number = {
+Blockly.Language.math_number = {
   // Numeric value.
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Number',
@@ -46,7 +46,7 @@ Blockly.Language.number = {
 };
 
 
-Blockly.Language.arithmetic = {
+Blockly.Language.math_arithmetic = {
   // Basic arithmetic operator.
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Arithmetic',
@@ -63,7 +63,19 @@ Blockly.Language.arithmetic = {
 };
 
 
-Blockly.Language.root = {
+Blockly.Language.math_negate = {
+  // Negation operator.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Negation',
+  init: function() {
+    this.setColour('baby');
+    this.setOutput(true);
+    this.addInput('-', '', Blockly.INPUT_VALUE);
+  }
+};
+
+
+Blockly.Language.math_root = {
   // Root operator.
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Square_root',
@@ -71,12 +83,11 @@ Blockly.Language.root = {
     this.setColour('baby');
     this.setOutput(true);
     this.addInput('\u221A', '', Blockly.INPUT_VALUE);
-    this.setInputsInline(true);
   }
 };
 
 
-Blockly.Language.random_int = {
+Blockly.Language.math_random_int = {
   // Random integer between [X] and [Y].
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',
@@ -91,7 +102,7 @@ Blockly.Language.random_int = {
   }
 };
 
-Blockly.Language.random_float = {
+Blockly.Language.math_random_float = {
   // Random fraction between 0 and 1.
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',

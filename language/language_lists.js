@@ -28,7 +28,7 @@ if (!Blockly.Language) {
   Blockly.Language = {};
 }
 
-Blockly.Language.getIndex = {
+Blockly.Language.lists_getIndex = {
   // Get element at index.
   category: 'Lists',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',

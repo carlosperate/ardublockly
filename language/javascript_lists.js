@@ -27,7 +27,7 @@
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 
-Blockly.JavaScript.getIndex = function() {
+Blockly.JavaScript.lists_getIndex = function() {
   // Get element at index.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '[]';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '1';

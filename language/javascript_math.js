@@ -26,17 +26,17 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.number = function() {
+Blockly.JavaScript.math_number = function() {
   // Numeric value.
   return Blockly.JavaScript.scrub_(this,
       window.parseFloat(this.getTitleText(0)));
 };
 
-Blockly.JavaScript.arithmetic = function(opt_dropParens) {
+Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var operator = Blockly.JavaScript.arithmetic.MAP[this.getValueLabel(1)];
+  var operator = Blockly.JavaScript.math_arithmetic.MAP[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -44,26 +44,33 @@ Blockly.JavaScript.arithmetic = function(opt_dropParens) {
   return Blockly.JavaScript.scrub_(this, code);
 };
 
-Blockly.JavaScript.arithmetic.MAP = {
+Blockly.JavaScript.math_arithmetic.MAP = {
   '+': '+',
   '-': '-',
   '\u00D7': '*',
   '\u00F7': '/'
 };
 
-Blockly.JavaScript.root = function() {
+Blockly.JavaScript.math_negate = function() {
+  // Negation operator.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var code = '- ' + argument0;
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
+Blockly.JavaScript.math_root = function() {
   // Root operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
   var code = 'Math.sqrt(' + argument0 + ')';
   return Blockly.JavaScript.scrub_(this, code);
 };
 
-Blockly.JavaScript.random_float = function() {
+Blockly.JavaScript.math_random_float = function() {
   var code = 'Math.random()';
   return Blockly.JavaScript.scrub_(this, code);
 };
 
-Blockly.JavaScript.random_int = function() {
+Blockly.JavaScript.math_random_int = function() {
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
   var rand1 = 'Math.floor(Math.random()*(' + argument1 + '-' + argument0 + '+1' + ')+' + argument0 + ')';

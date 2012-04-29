@@ -26,11 +26,11 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
-Blockly.Dart.compare = function(opt_dropParens) {
+Blockly.Dart.logic_compare = function(opt_dropParens) {
   // Comparison operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
-  var operator = Blockly.Dart.compare.MAP[this.getValueLabel(1)];
+  var operator = Blockly.Dart.logic_compare.MAP[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -38,7 +38,7 @@ Blockly.Dart.compare = function(opt_dropParens) {
   return Blockly.Dart.scrub_(this, code);
 };
 
-Blockly.Dart.compare.MAP = {
+Blockly.Dart.logic_compare.MAP = {
   '=': '==',
   '\u2260': '!=',
   '<': '<',
@@ -48,7 +48,7 @@ Blockly.Dart.compare.MAP = {
 };
 
 
-Blockly.Dart.logical_operation = function(opt_dropParens) {
+Blockly.Dart.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || 'false';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || 'false';
@@ -61,7 +61,7 @@ Blockly.Dart.logical_operation = function(opt_dropParens) {
 };
 
 
-Blockly.Dart.negate = function(opt_dropParens) {
+Blockly.Dart.logic_negate = function(opt_dropParens) {
   // Negation.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || 'false';
   var code = '!' + argument0;
@@ -72,7 +72,7 @@ Blockly.Dart.negate = function(opt_dropParens) {
 };
 
 
-Blockly.Dart.truefalse = function() {
+Blockly.Dart.logic_boolean = function() {
   // Boolean values true and false.
   return Blockly.Dart.scrub_(this, this.getTitleText(0));
 };

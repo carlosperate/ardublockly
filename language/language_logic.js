@@ -30,7 +30,7 @@ if (!Blockly.Language) {
 }
 
 
-Blockly.Language.compare = {
+Blockly.Language.logic_compare = {
   // Comparison operator.
   category: 'Logic',
   helpUrl: function() {
@@ -57,7 +57,7 @@ Blockly.Language.compare = {
 };
 
 
-Blockly.Language.logical_operation = {
+Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
   category: 'Logic',
   helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
@@ -74,7 +74,7 @@ Blockly.Language.logical_operation = {
 };
 
 
-Blockly.Language.negate = {
+Blockly.Language.logic_negate = {
   // Negation.
   category: 'Logic',
   helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
@@ -82,12 +82,11 @@ Blockly.Language.negate = {
     this.setColour('green');
     this.setOutput(true);
     this.addInput('not', '', Blockly.INPUT_VALUE);
-    this.setInputsInline(true);
   }
 };
 
 
-Blockly.Language.truefalse = {
+Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.
   category: 'Logic',
   helpUrl: 'http://en.wikipedia.org/wiki/Boolean_data_type',

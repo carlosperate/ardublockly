@@ -26,17 +26,17 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
-Blockly.Dart.number = function() {
+Blockly.Dart.math_number = function() {
   // Numeric value.
   return Blockly.Dart.scrub_(this,
       window.parseFloat(this.getTitleText(0)));
 };
 
-Blockly.Dart.arithmetic = function(opt_dropParens) {
+Blockly.Dart.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
-  var operator = Blockly.Dart.arithmetic.MAP[this.getValueLabel(1)];
+  var operator = Blockly.Dart.math_arithmetic.MAP[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -44,14 +44,21 @@ Blockly.Dart.arithmetic = function(opt_dropParens) {
   return Blockly.Dart.scrub_(this, code);
 };
 
-Blockly.Dart.arithmetic.MAP = {
+Blockly.Dart.math_arithmetic.MAP = {
   '+': '+',
   '-': '-',
   '\u00D7': '*',
   '\u00F7': '/'
 };
 
-Blockly.Dart.root = function() {
+Blockly.Dart.math_negate = function() {
+  // Negation operator.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var code = '- ' + argument0;
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
+Blockly.Dart.math_root = function() {
   // Root operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
   var code = 'Math.sqrt(' + argument0 + ')';
@@ -59,12 +66,12 @@ Blockly.Dart.root = function() {
 };
 
 
-Blockly.Dart.random_float = function() {
+Blockly.Dart.math_random_float = function() {
   var code = 'Math.random()';
   return Blockly.Dart.scrub_(this, code);
 };
 
-Blockly.Dart.random_int = function() {
+Blockly.Dart.math_random_int = function() {
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
   var rand1 = '(Math.random()*(' + argument1 + '-' + argument0 + '+1' + ')+' + argument0 + ').floor()';

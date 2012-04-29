@@ -27,7 +27,7 @@
 Blockly.Dart = Blockly.Generator.get('Dart');
 
 
-Blockly.Dart.getIndex = function() {
+Blockly.Dart.lists_getIndex = function() {
   // Get element at index.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '[]';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '1';

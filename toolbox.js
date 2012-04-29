@@ -275,7 +275,7 @@ Blockly.Toolbox.populateOptions_ = function(tree) {
     options.push(option);
   }
   var option = {};
-  if (Blockly.Language.get && Blockly.Language.set) {
+  if (Blockly.Language.variables_get && Blockly.Language.variables_set) {
     // Variables have a special category that is dynamic.
     options.push({text: Blockly.MSG_VARIABLE_CATEGORY,
                   cat: Blockly.Toolbox.VARIABLE_CAT});
@@ -418,8 +418,8 @@ Blockly.Toolbox.showFlyout_ = function(id) {
       if (variableList[i] === defaultVariable) {
         continue;
       }
-      var getBlock = new Blockly.Block(Blockly.Toolbox.flyoutWorkspace_, 'set');
-      var setBlock = new Blockly.Block(Blockly.Toolbox.flyoutWorkspace_, 'get');
+      var getBlock = new Blockly.Block(Blockly.Toolbox.flyoutWorkspace_, 'variables_set');
+      var setBlock = new Blockly.Block(Blockly.Toolbox.flyoutWorkspace_, 'variables_get');
       if (variableList[i] === null) {
         defaultVariable = getBlock.getTitleText(1);
       } else {

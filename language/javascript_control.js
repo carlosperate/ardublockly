@@ -27,7 +27,7 @@
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 
-Blockly.JavaScript.ifunless = function() {
+Blockly.JavaScript.controls_if = function() {
   // If condition.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
@@ -38,7 +38,7 @@ Blockly.JavaScript.ifunless = function() {
   return Blockly.JavaScript.scrub_(this, code);
 };
 
-Blockly.JavaScript.foreach = function() {
+Blockly.JavaScript.controls_foreach = function() {
   // For each loop.
   var variable0 = Blockly.JavaScript.variableDB_.getVariable(
       this.getVariableInput(0));

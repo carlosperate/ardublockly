@@ -27,13 +27,13 @@
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 
-Blockly.JavaScript.get = function() {
+Blockly.JavaScript.variables_get = function() {
   // Variable getter.
   var varName = Blockly.JavaScript.variableDB_.getVariable(this.getTitleText(1));
   return Blockly.JavaScript.scrub_(this, varName);
 };
 
-Blockly.JavaScript.set = function() {
+Blockly.JavaScript.variables_set = function() {
   // Variable setter.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
   var varName = Blockly.JavaScript.variableDB_.getVariable(this.getTitleText(1));

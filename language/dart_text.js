@@ -33,7 +33,7 @@ Blockly.Dart.text = function() {
       Blockly.Dart.quote_(this.getTitleText(1)));
 };
 
-Blockly.Dart.print = function() {
+Blockly.Dart.text_print = function() {
   // Print statement.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
   var code = 'print(' + argument0 + ');\n';

@@ -43,7 +43,7 @@ Blockly.Language.text = {
   }
 };
 
-Blockly.Language.print = {
+Blockly.Language.text_print = {
   // Print statement.
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',

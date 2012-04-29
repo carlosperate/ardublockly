@@ -27,7 +27,7 @@
 Blockly.Dart = Blockly.Generator.get('Dart');
 
 
-Blockly.Dart.ifunless = function() {
+Blockly.Dart.controls_if = function() {
   // If condition.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || 'false';
   var branch0 = Blockly.Dart.statementToCode_(this, 0);
@@ -38,7 +38,7 @@ Blockly.Dart.ifunless = function() {
   return Blockly.Dart.scrub_(this, code);
 };
 
-Blockly.Dart.foreach = function() {
+Blockly.Dart.controls_foreach = function() {
   // For each loop.
   var variable0 = Blockly.Dart.variableDB_.getVariable(
       this.getVariableInput(0));

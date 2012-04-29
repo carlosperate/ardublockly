@@ -33,7 +33,7 @@ Blockly.JavaScript.text = function() {
       Blockly.JavaScript.quote_(this.getTitleText(1)));
 };
 
-Blockly.JavaScript.print = function() {
+Blockly.JavaScript.text_print = function() {
   // Print statement.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\'';
   var code = 'window.alert(' + argument0 + ');\n';

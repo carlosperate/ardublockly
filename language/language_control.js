@@ -28,7 +28,7 @@ if (!Blockly.Language) {
   Blockly.Language = {};
 }
 
-Blockly.Language.ifunless = {
+Blockly.Language.controls_if = {
   // If condition.
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
@@ -45,7 +45,7 @@ Blockly.Language.ifunless = {
   }
 };
 
-Blockly.Language.foreach = {
+Blockly.Language.controls_foreach = {
   // For each loop.
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/For_loop',

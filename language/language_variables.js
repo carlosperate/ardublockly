@@ -29,7 +29,7 @@ if (!Blockly.Language) {
 }
 
 
-Blockly.Language.get = {
+Blockly.Language.variables_get = {
   // Variable getter.
   category: null,  // Variables are handled specially.
   helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
@@ -50,7 +50,7 @@ Blockly.Language.get = {
   }
 };
 
-Blockly.Language.set = {
+Blockly.Language.variables_set = {
   // Variable setter.
   category: null,  // Variables are handled specially.
   helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
