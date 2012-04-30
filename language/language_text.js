@@ -54,6 +54,21 @@ Blockly.Language.text_length = {
   }
 };
 
+Blockly.Language.text_changecase = {
+  // Change capitalization.
+  category: 'Text',
+  helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
+  init: function() {
+    this.setColour('brown');
+    this.addTitle('to');
+    var menu = new Blockly.FieldDropdown('UPPER CASE', function() {
+      return ['UPPER CASE', 'lower case', 'Title Case'];
+    });
+    this.addInput(menu, '', Blockly.INPUT_VALUE);
+    this.setOutput(true);
+  }
+};
+
 Blockly.Language.text_print = {
   // Print statement.
   category: 'Text',

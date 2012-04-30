@@ -66,13 +66,17 @@ Blockly.JavaScript.init = function() {
   } else {
     Blockly.JavaScript.variableDB_.reset();
   }
-  var declarations = [];
+
+  // Create a dictionary of definitions to be printed before the code.
+  Blockly.JavaScript.definitions_ = {};
+  
+  var defvars = [];
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {
-    declarations[x] = 'var ' +
+    defvars[x] = 'var ' +
         Blockly.JavaScript.variableDB_.getDistinctVariable(variables[x]) + ';';
   }
-  Blockly.JavaScript.declarations_ = declarations.join('\n');
+  Blockly.JavaScript.definitions_['variables'] = defvars.join('\n');
 };
 
 /**
@@ -81,7 +85,12 @@ Blockly.JavaScript.init = function() {
  * @return {string} Completed code.
  */
 Blockly.JavaScript.finish = function(code) {
-  return Blockly.JavaScript.declarations_ + '\n\n' + code;
+  // Convert the definitions dictionary into a list.
+  var definitions = [];
+  for (var name in Blockly.JavaScript.definitions_) {
+    definitions.push(Blockly.JavaScript.definitions_[name]);
+  }
+  return definitions.join('\n') + '\n\n' + code;
 };
 
 /**

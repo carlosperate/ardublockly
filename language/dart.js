@@ -49,13 +49,17 @@ Blockly.Dart.init = function() {
   } else {
     Blockly.Dart.variableDB_.reset();
   }
-  var declarations = [];
+
+  // Create a dictionary of definitions to be printed before the code.
+  Blockly.Dart.definitions_ = {};
+  
+  var defvars = [];
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {
-    declarations[x] = 'var ' +
+    defvars[x] = 'var ' +
         Blockly.Dart.variableDB_.getDistinctVariable(variables[x]) + ';';
   }
-  Blockly.Dart.declarations_ = declarations.join('\n');
+  Blockly.Dart.definitions_['variables'] = defvars.join('\n');
 };
 
 /**
@@ -69,7 +73,12 @@ Blockly.Dart.finish = function(code) {
   code = code.replace(/\n\s+$/, '\n');
   code = 'main() {\n' + code + '}';
 
-  return Blockly.Dart.declarations_ + '\n\n' + code;
+  // Convert the definitions dictionary into a list.
+  var definitions = [];
+  for (var name in Blockly.Dart.definitions_) {
+    definitions.push(Blockly.Dart.definitions_[name]);
+  }
+  return definitions.join('\n') + '\n\n' + code;
 };
 
 /**

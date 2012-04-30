@@ -63,6 +63,29 @@ Blockly.Language.math_arithmetic = {
 };
 
 
+Blockly.Language.math_change = {
+  // Add to a variable in place.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Negation',
+  init: function() {
+    this.setColour('baby');
+    this.addTitle('change');
+    this.addTitle(new Blockly.FieldDropdown('item',
+        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
+    this.addInput('by', '', Blockly.INPUT_VALUE);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  },
+  getVars: function() {
+    return [this.getTitleText(1)];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Variables.nameEquals(oldName, this.getTitleText(1))) {
+      this.setTitleText(newName, 1);
+    }
+  }
+};
+
 Blockly.Language.math_negate = {
   // Negation operator.
   category: 'Math',

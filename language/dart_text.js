@@ -40,6 +40,44 @@ Blockly.Dart.text_length = function() {
   return Blockly.Dart.scrub_(this, code);
 };
 
+Blockly.Dart.text_changecase = function() {
+  // Change capitalization.
+  var operator = Blockly.Dart.text_changecase.MAP[this.getValueLabel(0)];
+  var code;
+  if (operator) {
+    // Upper and lower case are functions built into Dart.
+    var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
+    code = argument0 + '.' + operator + '()';
+  } else {
+    // Title case is not a native Dart function.  Define one.
+    var func = [];
+    func.push('Blockly_toTitleCase(str) {');
+    func.push('  RegExp exp = const RegExp(@"(\\w\\S*)");');
+    func.push('  List<String> list = str.split(exp);');
+    func.push('  String title = \'\';');
+    func.push('  for (String part in list) {');
+    func.push('    if (part.length > 0) {');
+    func.push('      title += part[0].toUpperCase();');
+    func.push('      if (part.length > 0) {');
+    func.push('        title += part.substring(1).toLowerCase();');
+    func.push('      }');
+    func.push('    }');
+    func.push('  }');
+    func.push('  return title;');
+    func.push('}');
+    Blockly.Dart.definitions_['toTitleCase'] = func.join('\n');
+    var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
+    code = 'Blockly_toTitleCase(' + argument0 + ')';
+  }
+  return Blockly.Dart.scrub_(this, code);
+};
+
+Blockly.Dart.text_changecase.MAP = {
+  'UPPER CASE': 'toUpperCase',
+  'lower case': 'toLowerCase',
+  'Title Case': null
+};
+
 Blockly.Dart.text_print = function() {
   // Print statement.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';

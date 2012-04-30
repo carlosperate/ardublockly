@@ -51,6 +51,14 @@ Blockly.Dart.math_arithmetic.MAP = {
   '\u00F7': '/'
 };
 
+Blockly.Dart.math_change = function() {
+  // Add to a variable in place.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
+  var varName = Blockly.Dart.variableDB_.getVariable(this.getTitleText(1));
+  var code = varName + ' += ' + argument0 + ';\n';
+  return Blockly.Dart.scrub_(this, code);
+};
+
 Blockly.Dart.math_negate = function() {
   // Negation operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
