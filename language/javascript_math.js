@@ -91,16 +91,15 @@ Blockly.JavaScript.math_modulo = function() {
 Blockly.JavaScript.math_round = function() {
   // Rounding functions.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  var operator = Blockly.JavaScript.math_round.MAP[this.getValueLabel(0)];
+  var operator = Blockly.JavaScript.math_round.MAP_[this.getValueLabel(0)];
   var code = operator + '(' + argument0 + ')';
   return Blockly.JavaScript.scrub_(this, code);
 };
 
-Blockly.JavaScript.math_round.MAP = {
-  'round': 'Math.round',
-  'round up': 'Math.ceil',
-  'round down': 'Math.floor'
-};  
+Blockly.JavaScript.math_round.MAP_ = {};
+Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUND] = 'Math.round';
+Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDUP] = 'Math.ceil';
+Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDDOWN] = 'Math.floor';
 
 Blockly.JavaScript.math_random_float = function() {
   var code = 'Math.random()';

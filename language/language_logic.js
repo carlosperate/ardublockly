@@ -31,28 +31,30 @@ if (!Blockly.Language) {
 Blockly.Language.logic_compare = {
   // Comparison operator.
   category: 'Logic',
-  helpUrl: function() {
-    var map = {
-      '=': 'http://en.wikipedia.org/wiki/Equality_(mathematics)',
-      '\u2260': 'http://en.wikipedia.org/wiki/Inequality_(mathematics)',
-      '<': 'http://en.wikipedia.org/wiki/Inequality_(mathematics)',
-      '\u2264': 'http://en.wikipedia.org/wiki/Inequality_(mathematics)',
-      '>': 'http://en.wikipedia.org/wiki/Inequality_(mathematics)',
-      '\u2265': 'http://en.wikipedia.org/wiki/Inequality_(mathematics)'
-    };
-    return map[this.getValueLabel(1)];
-  },
+  helpUrl: 'http://en.wikipedia.org/wiki/Inequality_(mathematics)',
   init: function() {
     this.setColour('green');
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
-    var dropdown = new Blockly.FieldDropdown('=', function() {
-      return ['=', '\u2260', '<', '\u2264', '>', '\u2265'];
+    var dropdown = new Blockly.FieldDropdown(Blockly.Language.logic_compare.MSG_EQ, function() {
+      return [Blockly.Language.logic_compare.MSG_EQ,
+              Blockly.Language.logic_compare.MSG_NEQ,
+              Blockly.Language.logic_compare.MSG_LT,
+              Blockly.Language.logic_compare.MSG_LTE,
+              Blockly.Language.logic_compare.MSG_GT,
+              Blockly.Language.logic_compare.MSG_GTE];
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
   }
 };
+
+Blockly.Language.logic_compare.MSG_EQ = '=';
+Blockly.Language.logic_compare.MSG_NEQ = '\u2260';
+Blockly.Language.logic_compare.MSG_LT = '<';
+Blockly.Language.logic_compare.MSG_LTE = '\u2264';
+Blockly.Language.logic_compare.MSG_GT = '>';
+Blockly.Language.logic_compare.MSG_GTE = '\u2265';
 
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
@@ -62,13 +64,17 @@ Blockly.Language.logic_operation = {
     this.setColour('green');
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
-    var dropdown = new Blockly.FieldDropdown('and', function() {
-      return ['and', 'or'];
+    var dropdown = new Blockly.FieldDropdown(Blockly.Language.logic_operation.MSG_AND, function() {
+      return [Blockly.Language.logic_operation.MSG_AND,
+              Blockly.Language.logic_operation.MSG_OR];
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
   }
 };
+
+Blockly.Language.logic_operation.MSG_AND = 'and';
+Blockly.Language.logic_operation.MSG_OR = 'or';
 
 Blockly.Language.logic_negate = {
   // Negation.
@@ -88,9 +94,13 @@ Blockly.Language.logic_boolean = {
   init: function() {
     this.setColour('green');
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown('true', function() {
-      return ['true', 'false'];
+    var dropdown = new Blockly.FieldDropdown(Blockly.Language.logic_boolean.MSG_TRUE, function() {
+      return [Blockly.Language.logic_boolean.MSG_TRUE,
+              Blockly.Language.logic_boolean.MSG_FALSE];
     });
     this.addTitle(dropdown);
   }
 };
+
+Blockly.Language.logic_boolean.MSG_TRUE = 'true';
+Blockly.Language.logic_boolean.MSG_FALSE = 'false';

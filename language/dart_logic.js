@@ -30,7 +30,7 @@ Blockly.Dart.logic_compare = function(opt_dropParens) {
   // Comparison operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
-  var operator = Blockly.Dart.logic_compare.MAP[this.getValueLabel(1)];
+  var operator = Blockly.Dart.logic_compare.MAP_[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -38,20 +38,19 @@ Blockly.Dart.logic_compare = function(opt_dropParens) {
   return Blockly.Dart.scrub_(this, code);
 };
 
-Blockly.Dart.logic_compare.MAP = {
-  '=': '==',
-  '\u2260': '!=',
-  '<': '<',
-  '\u2264': '<=',
-  '>': '>',
-  '\u2265': '>='
-};
+Blockly.Dart.logic_compare.MAP_ = {};
+Blockly.Dart.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_EQ] = '==';
+Blockly.Dart.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_NEQ] = '!=';
+Blockly.Dart.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_LT] = '<';
+Blockly.Dart.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_LTE] = '<=';
+Blockly.Dart.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_GT] = '>';
+Blockly.Dart.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_GTE] = '>=';
 
 Blockly.Dart.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || 'false';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || 'false';
-  var operator = (this.getValueLabel(1) == 'and') ? '&&' : '||';
+  var operator = (this.getValueLabel(1) == Blockly.Language.logic_operation.MSG_AND) ? '&&' : '||';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -71,5 +70,7 @@ Blockly.Dart.logic_negate = function(opt_dropParens) {
 
 Blockly.Dart.logic_boolean = function() {
   // Boolean values true and false.
-  return Blockly.Dart.scrub_(this, this.getTitleText(0));
+  var bool = (this.getTitleText(0) == Blockly.Language.logic_boolean.MSG_TRUE) ?
+      'true' : 'false';
+  return Blockly.Dart.scrub_(this, bool);
 };

@@ -96,22 +96,21 @@ Blockly.Dart.math_modulo = function() {
 Blockly.Dart.math_round = function() {
   // Rounding functions.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
-  var operator = Blockly.Dart.math_round.MAP[this.getValueLabel(0)];
+  var operator = Blockly.Dart.math_round.MAP_[this.getValueLabel(0)];
   if (operator != 'round()' && !argument0.match(/^[\w\.]+$/)) {
     // -1.49.ceil() returns -2 in Dart due to strange order of operation choices.
     // Need to wrap non-trivial numbers in parentheses: (-1.49).ceil().
-      // Not needed in case of round().
-  argument0 = '(' + argument0 + ')';
+    // Not needed in case of round().
+    argument0 = '(' + argument0 + ')';
   }
   var code = argument0 + '.' + operator;
   return Blockly.Dart.scrub_(this, code);
 };
 
-Blockly.Dart.math_round.MAP = {
-  'round': 'round()',
-  'round up': 'ceil()',
-  'round down': 'floor()'
-};
+Blockly.Dart.math_round.MAP_ = {};
+Blockly.Dart.math_round.MAP_[Blockly.Language.math_round.MSG_ROUND] = 'round()';
+Blockly.Dart.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDUP] = 'ceil()';
+Blockly.Dart.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDDOWN] = 'floor()';
 
 Blockly.Dart.math_random_float = function() {
   var code = 'Math.random()';

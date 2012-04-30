@@ -30,7 +30,7 @@ Blockly.JavaScript.logic_compare = function(opt_dropParens) {
   // Comparison operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var operator = Blockly.JavaScript.logic_compare.MAP[this.getValueLabel(1)];
+  var operator = Blockly.JavaScript.logic_compare.MAP_[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -38,20 +38,19 @@ Blockly.JavaScript.logic_compare = function(opt_dropParens) {
   return Blockly.JavaScript.scrub_(this, code);
 };
 
-Blockly.JavaScript.logic_compare.MAP = {
-  '=': '==',
-  '\u2260': '!=',
-  '<': '<',
-  '\u2264': '<=',
-  '>': '>',
-  '\u2265': '>='
-};
+Blockly.JavaScript.logic_compare.MAP_ = {};
+Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_EQ] = '==';
+Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_NEQ] = '!=';
+Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_LT] = '<';
+Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_LTE] = '<=';
+Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_GT] = '>';
+Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_GTE] = '>=';
 
 Blockly.JavaScript.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || 'false';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || 'false';
-  var operator = (this.getValueLabel(1) == 'and') ? '&&' : '||';
+  var operator = (this.getValueLabel(1) == Blockly.Language.logic_operation.MSG_AND) ? '&&' : '||';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -71,5 +70,7 @@ Blockly.JavaScript.logic_negate = function(opt_dropParens) {
 
 Blockly.JavaScript.logic_boolean = function() {
   // Boolean values true and false.
-  return Blockly.JavaScript.scrub_(this, this.getTitleText(0));
+  var bool = (this.getTitleText(0) == Blockly.Language.logic_boolean.MSG_TRUE) ?
+      'true' : 'false';
+  return Blockly.JavaScript.scrub_(bool);
 };

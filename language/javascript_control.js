@@ -30,9 +30,6 @@ Blockly.JavaScript.controls_if = function() {
   // If condition.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
-  if (this.getTitleText(0) == 'unless') {
-    argument0 = '!(' + argument0 + ')';
-  }
   var code = 'if (' + argument0 + ') {\n' + branch0 + '}\n';
   return Blockly.JavaScript.scrub_(this, code);
 };

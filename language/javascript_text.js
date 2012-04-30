@@ -41,30 +41,32 @@ Blockly.JavaScript.text_length = function() {
 
 Blockly.JavaScript.text_changecase = function() {
   // Change capitalization.
-  var operator = Blockly.JavaScript.text_changecase.MAP[this.getValueLabel(0)];
+  var operator = Blockly.JavaScript.text_changecase.MAP_[this.getValueLabel(0)];
   var code;
   if (operator) {
     // Upper and lower case are functions built into JavaScript.
     var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
     code = argument0 + '.' + operator + '()';
   } else {
-    // Title case is not a native JavaScript function.  Define one.
-    var func = [];
-    func.push('function Blockly_toTitleCase(str) {');
-    func.push('  return str.replace(/\\w\\S*/g, function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});');
-    func.push('}');
-    Blockly.JavaScript.definitions_['toTitleCase'] = func.join('\n');
+    if (!Blockly.JavaScript.definitions_['toTitleCase']) {
+      // Title case is not a native JavaScript function.  Define one.
+      var func = [];
+      func.push('function Blockly_toTitleCase(str) {');
+      func.push('  return str.replace(/\\w\\S*/g,');
+      func.push('      function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});');
+      func.push('}');
+      Blockly.JavaScript.definitions_['toTitleCase'] = func.join('\n');
+    }
     var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\'';
     code = 'Blockly_toTitleCase(' + argument0 + ')';
   }
   return Blockly.JavaScript.scrub_(this, code);
 };
 
-Blockly.JavaScript.text_changecase.MAP = {
-  'UPPER CASE': 'toUpperCase',
-  'lower case': 'toLowerCase',
-  'Title Case': null
-};
+Blockly.JavaScript.text_changecase.MAP_ = {};
+Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE] = 'toUpperCase';
+Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_LOWERCASE] = 'toLowerCase';
+Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE] = null;
 
 Blockly.JavaScript.text_print = function() {
   // Print statement.

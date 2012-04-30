@@ -60,13 +60,19 @@ Blockly.Language.text_changecase = {
   init: function() {
     this.setColour('brown');
     this.addTitle('to');
-    var menu = new Blockly.FieldDropdown('UPPER CASE', function() {
-      return ['UPPER CASE', 'lower case', 'Title Case'];
+    var menu = new Blockly.FieldDropdown(Blockly.Language.text_changecase.MSG_UPPERCASE, function() {
+      return [Blockly.Language.text_changecase.MSG_UPPERCASE,
+              Blockly.Language.text_changecase.MSG_LOWERCASE,
+              Blockly.Language.text_changecase.MSG_TITLECASE];
     });
     this.addInput(menu, '', Blockly.INPUT_VALUE);
     this.setOutput(true);
   }
 };
+
+Blockly.Language.text_changecase.MSG_UPPERCASE = 'UPPER CASE';
+Blockly.Language.text_changecase.MSG_LOWERCASE = 'lower case';
+Blockly.Language.text_changecase.MSG_TITLECASE = 'Title Case';
 
 Blockly.Language.text_print = {
   // Print statement.

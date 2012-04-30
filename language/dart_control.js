@@ -30,9 +30,6 @@ Blockly.Dart.controls_if = function() {
   // If condition.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || 'false';
   var branch0 = Blockly.Dart.statementToCode_(this, 0);
-  if (this.getTitleText(0) == 'unless') {
-    argument0 = '!(' + argument0 + ')';
-  }
   var code = 'if (' + argument0 + ') {\n' + branch0 + '}\n';
   return Blockly.Dart.scrub_(this, code);
 };

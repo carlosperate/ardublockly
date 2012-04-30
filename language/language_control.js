@@ -34,9 +34,7 @@ Blockly.Language.controls_if = {
   helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
     this.setColour('purple');
-    this.addTitle(new Blockly.FieldDropdown('if', function() {
-      return ['if', 'unless'];
-    }));
+    this.addTitle('if');
     this.addInput('test', '', Blockly.INPUT_VALUE);
     this.addInput('then do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);

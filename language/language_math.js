@@ -136,12 +136,18 @@ Blockly.Language.math_round = {
   init: function() {
     this.setColour('baby');
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown('round', function() {
-      return ['round', 'round up', 'round down'];
+    var dropdown = new Blockly.FieldDropdown(Blockly.Language.math_round.MSG_ROUND, function() {
+      return [Blockly.Language.math_round.MSG_ROUND,
+              Blockly.Language.math_round.MSG_ROUNDUP,
+              Blockly.Language.math_round.MSG_ROUNDDOWN];
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
   }
 };
+
+Blockly.Language.math_round.MSG_ROUND = 'round';
+Blockly.Language.math_round.MSG_ROUNDUP = 'round up';
+Blockly.Language.math_round.MSG_ROUNDDOWN = 'round down';
 
 Blockly.Language.math_random_int = {
   // Random integer between [X] and [Y].
