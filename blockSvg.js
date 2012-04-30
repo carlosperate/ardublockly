@@ -642,7 +642,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
               ', ' + (cursorY + 18) + ')');
         }
         var width = bBox.width + Blockly.BlockSvg.SEP_SPACE_X / 2;
-        steps.push('h', width);
+        steps.push('H', rightEdge + width);
         steps.push('v', row.height);
         steps.push('h', -width);
         if (Blockly.RTL) {

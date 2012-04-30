@@ -34,10 +34,10 @@ Blockly.Language.lists_getIndex = {
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
     this.setColour('blue');
-    this.addTitle('get item');
+    this.addTitle('item');
     this.setOutput(true);
-    this.addInput('from list', '', Blockly.INPUT_VALUE);
     this.addInput('at', '', Blockly.INPUT_VALUE);
+    this.addInput('in list', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
   }
 };

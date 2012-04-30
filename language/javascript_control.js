@@ -43,6 +43,29 @@ Blockly.JavaScript.controls_whileUntil = function() {
   return 'while (' + argument0 + ') {\n' + branch0 + '}\n';
 };
 
+Blockly.JavaScript.controls_for = function() {
+  // For loop.
+  var variable0 = Blockly.JavaScript.variableDB_.getVariable(
+      this.getVariableInput(0));
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1, true) || '0';
+  var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
+  var code;
+  if (argument1.match(/^\w+$/)) {
+    code = 'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + argument1 + '; ' + variable0 + '++) {\n' +
+        branch0 + '}\n';
+  } else {
+    // The end value appears to be more complicated than a simple variable.
+    // Cache it to a variable to prevent repeated look-ups.
+    var endVar = Blockly.JavaScript.variableDB_.getDistinctVariable(
+        variable0 + '_end');
+    code = 'var ' + endVar + ' = ' + argument1 + ';\n' +
+        'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + endVar + '; ' + variable0 + '++) {\n' +
+        branch0 + '}\n';
+  }
+  return code;
+};
+
 Blockly.JavaScript.controls_forEach = function() {
   // For each loop.
   var variable0 = Blockly.JavaScript.variableDB_.getVariable(

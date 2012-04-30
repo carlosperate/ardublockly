@@ -65,6 +65,31 @@ Blockly.Language.controls_whileUntil = {
 Blockly.Language.controls_whileUntil.MSG_WHILE = 'while';
 Blockly.Language.controls_whileUntil.MSG_UNTIL = 'until';
 
+Blockly.Language.controls_for = {
+  // For loop.
+  category: 'Control',
+  helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
+  init: function() {
+    this.setColour('purple');
+    this.addTitle('count');
+    this.addInput('from', '', Blockly.INPUT_VALUE);
+    this.addInput('to', '', Blockly.INPUT_VALUE);
+    this.addInput('with', '', Blockly.LOCAL_VARIABLE).setText('x');
+    this.addInput('do', '', Blockly.NEXT_STATEMENT);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setInputsInline(true);
+  },
+  getVars: function() {
+    return [this.getVariableInput(0)];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Variables.nameEquals(oldName, this.getVariableInput(0))) {
+      this.setVariableInput(0, newName);
+    }
+  }
+};
+
 Blockly.Language.controls_forEach = {
   // For each loop.
   category: 'Control',
@@ -72,7 +97,7 @@ Blockly.Language.controls_forEach = {
   init: function() {
     this.setColour('purple');
     this.addTitle('for each');
-    this.addInput('item', '', Blockly.LOCAL_VARIABLE).setText('x');
+    this.addInput('value', '', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('in list', '', Blockly.INPUT_VALUE);
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);

@@ -43,6 +43,12 @@ Blockly.Dart.text_isEmpty = function() {
   return argument0 + '.isEmpty()';
 };
 
+Blockly.Dart.text_charAt = function(opt_dropParens) {
+  // Indexing into a string is the same as indexing into a list.
+  return Blockly.Dart.lists_getIndex.call(this, opt_dropParens);
+};
+
+
 Blockly.Dart.text_changecase = function() {
   // Change capitalization.
   var operator = Blockly.Dart.text_changecase.MAP_[this.getValueLabel(0)];

@@ -43,6 +43,11 @@ Blockly.JavaScript.text_isEmpty = function() {
   return '!' + argument0 + '.length';
 };
 
+Blockly.JavaScript.text_charAt = function(opt_dropParens) {
+  // Indexing into a string is the same as indexing into a list.
+  return Blockly.JavaScript.lists_getIndex.call(this, opt_dropParens);
+};
+
 Blockly.JavaScript.text_changecase = function() {
   // Change capitalization.
   var operator = Blockly.JavaScript.text_changecase.MAP_[this.getValueLabel(0)];

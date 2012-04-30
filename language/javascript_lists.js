@@ -28,8 +28,8 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.lists_getIndex = function() {
   // Get element at index.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '[]';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '1';
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 1) || '1';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 0) || '[]';
   // Blockly uses one-based arrays.
   if (argument1.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
