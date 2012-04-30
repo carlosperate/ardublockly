@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Core blocks language for Blockly.
+ * @fileoverview Generating Dart for logic blocks.
  * @author fraser@google.com (Neil Fraser)
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to language files.
@@ -47,7 +47,6 @@ Blockly.Dart.logic_compare.MAP = {
   '\u2265': '>='
 };
 
-
 Blockly.Dart.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || 'false';
@@ -60,7 +59,6 @@ Blockly.Dart.logic_operation = function(opt_dropParens) {
   return Blockly.Dart.scrub_(this, code);
 };
 
-
 Blockly.Dart.logic_negate = function(opt_dropParens) {
   // Negation.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || 'false';
@@ -70,7 +68,6 @@ Blockly.Dart.logic_negate = function(opt_dropParens) {
   }
   return Blockly.Dart.scrub_(this, code);
 };
-
 
 Blockly.Dart.logic_boolean = function() {
   // Boolean values true and false.

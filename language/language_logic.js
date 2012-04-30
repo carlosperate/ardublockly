@@ -24,11 +24,9 @@
  * to language files.
  */
 
-
 if (!Blockly.Language) {
   Blockly.Language = {};
 }
-
 
 Blockly.Language.logic_compare = {
   // Comparison operator.
@@ -56,7 +54,6 @@ Blockly.Language.logic_compare = {
   }
 };
 
-
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
   category: 'Logic',
@@ -73,7 +70,6 @@ Blockly.Language.logic_operation = {
   }
 };
 
-
 Blockly.Language.logic_negate = {
   // Negation.
   category: 'Logic',
@@ -84,7 +80,6 @@ Blockly.Language.logic_negate = {
     this.addInput('not', '', Blockly.INPUT_VALUE);
   }
 };
-
 
 Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.

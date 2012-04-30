@@ -26,7 +26,6 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-
 Blockly.JavaScript.text = function() {
   // Text value.
   return Blockly.JavaScript.scrub_(this,

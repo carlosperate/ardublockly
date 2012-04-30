@@ -26,7 +26,6 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
-
 Blockly.Dart.text = function() {
   // Text value.
   return Blockly.Dart.scrub_(this,

@@ -70,9 +70,9 @@ Blockly.Dart.math_abs = function() {
   // Absolute value operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
   if (!argument0.match(/^[\w\.]+$/)) {
-		// -4.abs() returns -4 in Dart due to strange order of operation choices.
-		// Need to wrap non trivial numbers in parentheses: (-4).abs()
-  	argument0 = '(' + argument0 + ')';
+    // -4.abs() returns -4 in Dart due to strange order of operation choices.
+    // Need to wrap non-trivial numbers in parentheses: (-4).abs()
+    argument0 = '(' + argument0 + ')';
   }
   var code = argument0 + '.abs()';
   return Blockly.Dart.scrub_(this, code);
@@ -98,10 +98,10 @@ Blockly.Dart.math_round = function() {
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
   var operator = Blockly.Dart.math_round.MAP[this.getValueLabel(0)];
   if (operator != 'round()' && !argument0.match(/^[\w\.]+$/)) {
-		// -1.49.ceil() returns -2 in Dart due to strange order of operation choices.
-		// Need to wrap non trivial numbers in parentheses: (-1.49).ceil().
-	  	// Not needed in case of round().
-	argument0 = '(' + argument0 + ')';
+    // -1.49.ceil() returns -2 in Dart due to strange order of operation choices.
+    // Need to wrap non-trivial numbers in parentheses: (-1.49).ceil().
+      // Not needed in case of round().
+  argument0 = '(' + argument0 + ')';
   }
   var code = argument0 + '.' + operator;
   return Blockly.Dart.scrub_(this, code);
@@ -125,14 +125,13 @@ Blockly.Dart.math_random_int = function() {
   var rand2 = '(Math.random()*(' + argument0 + '-' + argument1 + '+1' + ')+' + argument1 + ').floor()';
   var code;
   if (argument0.match(/^[\d\.]+$/) && argument1.match(/^[\d\.]+$/)) {
-	  if (parseFloat(argument0) < parseFloat(argument1)) {
-		  code = rand1;
-	  } else {
-		  code = rand2;
-	  }
+    if (parseFloat(argument0) < parseFloat(argument1)) {
+      code = rand1;
+    } else {
+      code = rand2;
+    }
   } else {
     code = argument0 + ' < ' + argument1 + ' ? ' + rand1 + ' : ' + rand2;
   }
   return Blockly.Dart.scrub_(this, code);
 };
-

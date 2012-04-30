@@ -26,7 +26,6 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
-
 Blockly.Dart.variables_get = function() {
   // Variable getter.
   var varName = Blockly.Dart.variableDB_.getVariable(this.getTitleText(1));
@@ -40,4 +39,3 @@ Blockly.Dart.variables_set = function() {
   var code = varName + ' = ' + argument0 + ';\n';
   return Blockly.Dart.scrub_(this, code);
 };
-

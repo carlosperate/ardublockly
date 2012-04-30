@@ -94,7 +94,6 @@ Blockly.Language.math_negate = {
   }
 };
 
-
 Blockly.Language.math_abs = {
   // Absolute value operator.
   category: 'Math',
@@ -105,7 +104,6 @@ Blockly.Language.math_abs = {
     this.addInput('abs', '', Blockly.INPUT_VALUE);
   }
 };
-
 
 Blockly.Language.math_root = {
   // Root operator.
@@ -119,7 +117,7 @@ Blockly.Language.math_root = {
 };
 
 Blockly.Language.math_modulo = {
-  // Remainder of a division. 
+  // Remainder of a division.
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Modulo_operation',
   init: function() {
@@ -170,4 +168,3 @@ Blockly.Language.math_random_float = {
     this.addTitle('random fraction');
   }
 };
-

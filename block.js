@@ -674,7 +674,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
     this.workspace.svgBlockCanvas_.appendChild(this.svg_.svgGroup_);
     this.svg_.svgGroup_.setAttribute('transform',
         'translate(' + xy.x + ', ' + xy.y + ')');
-  
+
     // Disconnect from superior blocks.
     if (this.previousConnection && this.previousConnection.targetConnection) {
       this.previousConnection.disconnect();

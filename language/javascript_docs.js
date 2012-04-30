@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Generating JavaScript for docs blocks.
+ * @fileoverview Generating JavaScript for Google Docs blocks.
  * @author fraser@google.com (Neil Fraser)
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to language files.

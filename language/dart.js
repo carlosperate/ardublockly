@@ -52,7 +52,7 @@ Blockly.Dart.init = function() {
 
   // Create a dictionary of definitions to be printed before the code.
   Blockly.Dart.definitions_ = {};
-  
+
   var defvars = [];
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {
@@ -122,8 +122,7 @@ Blockly.Dart.statementToCode_ = function(block, index) {
 };
 
 /**
- * Encode a string as a properly escaped Dart string, complete with
- * quotes.
+ * Encode a string as a properly escaped Dart string, complete with quotes.
  * @param {string} string Text to encode.
  * @return {string} Dart string.
  * @private

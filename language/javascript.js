@@ -69,7 +69,7 @@ Blockly.JavaScript.init = function() {
 
   // Create a dictionary of definitions to be printed before the code.
   Blockly.JavaScript.definitions_ = {};
-  
+
   var defvars = [];
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {

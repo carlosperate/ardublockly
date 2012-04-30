@@ -18,14 +18,13 @@
  */
 
 /**
- * @fileoverview Core blocks language for Blockly.
+ * @fileoverview Generating JavaScript for control blocks.
  * @author fraser@google.com (Neil Fraser)
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to language files.
  */
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
-
 
 Blockly.JavaScript.controls_if = function() {
   // If condition.
@@ -63,4 +62,3 @@ Blockly.JavaScript.controls_foreach = function() {
   }
   return Blockly.JavaScript.scrub_(this, code);
 };
-

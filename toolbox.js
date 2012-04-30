@@ -153,7 +153,7 @@ Blockly.Toolbox.getFlyoutMetrics = function() {
                   Blockly.Toolbox.CORNER_RADIUS;
   var optionBox = Blockly.Toolbox.svgFlyoutOptions_.getBBox();
   return {
-    viewHeight: viewHeight - Blockly.Scrollbar.scrollbarThickness,
+    viewHeight: viewHeight,
     viewWidth: viewWidth,
     contentHeight: optionBox.height + optionBox.y,
     viewTop: -Blockly.Toolbox.svgFlyoutOptions_.scrollY,
@@ -198,7 +198,7 @@ Blockly.Toolbox.init = function() {
       Blockly.Toolbox.getFlyoutMetrics,
       Blockly.Toolbox.setFlyoutMetrics,
       false, false);
-  
+
   // List of background buttons that lurk behind each block to catch clicks
   // landing in the blocks' lakes and bays.
   Blockly.Toolbox.svgFlyoutOptions_.buttons_ = [];
@@ -216,7 +216,7 @@ Blockly.Toolbox.init = function() {
 Blockly.Toolbox.position_ = function() {
   var svgSize = Blockly.svgSize();
   Blockly.Toolbox.svgFlyoutBackground_.setAttribute('height',
-      Math.max(0, svgSize.height - Blockly.Scrollbar.scrollbarThickness));
+      Math.max(0, svgSize.height));
   if (Blockly.RTL) {
     Blockly.Toolbox.svgGroup_.setAttribute('transform',
         'translate(' + (svgSize.width - Blockly.Toolbox.width) + ',0)');

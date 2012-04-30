@@ -18,14 +18,13 @@
  */
 
 /**
- * @fileoverview Core blocks language for Blockly.
+ * @fileoverview Generating Dart for control blocks.
  * @author fraser@google.com (Neil Fraser)
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to language files.
  */
 
 Blockly.Dart = Blockly.Generator.get('Dart');
-
 
 Blockly.Dart.controls_if = function() {
   // If condition.
@@ -63,4 +62,3 @@ Blockly.Dart.controls_foreach = function() {
   }
   return Blockly.Dart.scrub_(this, code);
 };
-

@@ -149,7 +149,7 @@ Blockly.Mutator.createDom = function() {
     <rect class="blocklyScreenShadow" />
     <g>
       <rect class="blocklyMutatorBackground" />
-      <text class="blocklyHeader" x="20" y="30">Block Editor</text>
+      <text class="blocklyHeader" y="30">Block Editor</text>
       [Cancel button]
       [Change button]
     </g>
@@ -163,8 +163,7 @@ Blockly.Mutator.createDom = function() {
   Blockly.Mutator.svgBackground_ = Blockly.createSvgElement('rect',
       {class: 'blocklyMutatorBackground'}, Blockly.Mutator.svgDialog_);
   Blockly.Mutator.svgHeader_ = Blockly.createSvgElement('text',
-      {class: 'blocklyHeader', x: Blockly.ContextMenu.X_PADDING, y: 30},
-      Blockly.Mutator.svgDialog_);
+      {class: 'blocklyHeader', y: 30}, Blockly.Mutator.svgDialog_);
   var textNode = Blockly.svgDoc.createTextNode(Blockly.MSG_MUTATOR_HEADER);
   Blockly.Mutator.svgHeader_.appendChild(textNode);
 
@@ -195,7 +194,8 @@ Blockly.Mutator.init = function() {
   Blockly.Mutator.changeButton_.init();
   // Save the size of the header so that calculations on its size may be
   // performed regardless of whether it is hidden or not.
-  Blockly.Mutator.bBoxHeader_ = Blockly.Mutator.svgHeader_.getBBox();
+  Blockly.Mutator.headerLength_ =
+      Blockly.Mutator.svgHeader_.getComputedTextLength();
   Blockly.Mutator.workspace_.addTrashcan(Blockly.Mutator.getWorkspaceMetrics_);
   Blockly.Mutator.workspace_.addScrollbar(new Blockly.ScrollbarPair(
       Blockly.Mutator.workspace_.svgBlockCanvas_,
@@ -219,23 +219,38 @@ Blockly.Mutator.position_ = function() {
   Blockly.Mutator.svgBackground_.setAttribute('width', width);
   Blockly.Mutator.svgBackground_.setAttribute('height', height);
 
+  var headerX = Blockly.ContextMenu.X_PADDING;
+  if (Blockly.RTL) {
+    headerX = width - Blockly.Mutator.headerLength_ - headerX;
+  }
+  Blockly.Mutator.svgHeader_.setAttribute('x', headerX);
+
   var bBoxChange = Blockly.Mutator.changeButton_.getBBox();
   var bBoxCancel = Blockly.Mutator.cancelButton_.getBBox();
-  var cursorX = width - Blockly.ContextMenu.X_PADDING - bBoxChange.width;
-  Blockly.Mutator.changeButton_.setLocation(cursorX, 5);
-  cursorX -= Blockly.ContextMenu.X_PADDING + bBoxCancel.width;
-  Blockly.Mutator.cancelButton_.setLocation(cursorX, 5);
+  var cursorX;
+  if (Blockly.RTL) {
+    cursorX = Blockly.ContextMenu.X_PADDING;
+    Blockly.Mutator.changeButton_.setLocation(cursorX, 5);
+    cursorX += bBoxChange.width + Blockly.ContextMenu.X_PADDING
+    Blockly.Mutator.cancelButton_.setLocation(cursorX, 5);
+    cursorX += bBoxCancel.width;
+    cursorX = headerX - cursorX;
+  } else {
+    var cursorX = width - Blockly.ContextMenu.X_PADDING - bBoxChange.width;
+    Blockly.Mutator.changeButton_.setLocation(cursorX, 5);
+    cursorX -= Blockly.ContextMenu.X_PADDING + bBoxCancel.width;
+    Blockly.Mutator.cancelButton_.setLocation(cursorX, 5);
+    cursorX -= headerX + Blockly.Mutator.headerLength_;
+  }
 
   // Hide the header if the window is too small.
-  cursorX -= Blockly.Mutator.bBoxHeader_.x +
-      Blockly.Mutator.bBoxHeader_.width;
   Blockly.Mutator.svgHeader_.style.display = (cursorX > 0) ? 'block' : 'none';
 
   // Record some ayout information for Blockly.Mutator.getWorkspaceMetrics_.
   Blockly.Mutator.workspaceWidth_ = width;
   Blockly.Mutator.workspaceHeight_ = height - bBoxChange.height - 10;
   Blockly.Mutator.workspaceTop_ = bBoxChange.height + 10;
-  Blockly.Mutator.workspaceLeft_ = 0;  
+  Blockly.Mutator.workspaceLeft_ = 0;
 };
 
 /**

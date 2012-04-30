@@ -28,7 +28,6 @@ if (!Blockly.Language) {
   Blockly.Language = {};
 }
 
-
 Blockly.Language.text = {
   // Text value.
   category: 'Text',
