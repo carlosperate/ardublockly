@@ -28,7 +28,6 @@ if (!Blockly.Language) {
   Blockly.Language = {};
 }
 
-
 Blockly.Language.math_number = {
   // Numeric value.
   category: 'Math',
@@ -45,7 +44,6 @@ Blockly.Language.math_number = {
   }
 };
 
-
 Blockly.Language.math_arithmetic = {
   // Basic arithmetic operator.
   category: 'Math',
@@ -61,7 +59,6 @@ Blockly.Language.math_arithmetic = {
     this.setInputsInline(true);
   }
 };
-
 
 Blockly.Language.math_change = {
   // Add to a variable in place.
@@ -121,6 +118,32 @@ Blockly.Language.math_root = {
   }
 };
 
+Blockly.Language.math_modulo = {
+  // Remainder of a division. 
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Modulo_operation',
+  init: function() {
+    this.setColour('baby');
+    this.setOutput(true);
+    this.addInput('remainder of', '', Blockly.INPUT_VALUE);
+    this.addInput('\u00F7', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+  }
+};
+
+Blockly.Language.math_round = {
+  // Rounding functions.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Rounding',
+  init: function() {
+    this.setColour('baby');
+    this.setOutput(true);
+    var dropdown = new Blockly.FieldDropdown('round', function() {
+      return ['round', 'round up', 'round down'];
+    });
+    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+  }
+};
 
 Blockly.Language.math_random_int = {
   // Random integer between [X] and [Y].

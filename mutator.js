@@ -42,6 +42,9 @@ Blockly.Mutator.ICON_SIZE = 16;
  */
 Blockly.Mutator.isOpen = false;
 
+/**
+ * Disassemble the mutator icon to avoid memory leaks.
+ */
 Blockly.Mutator.prototype.destroy = function() {
   // Destroy and unlink the icon.
   this.iconGroup_.parentNode.removeChild(this.iconGroup_);
@@ -49,7 +52,7 @@ Blockly.Mutator.prototype.destroy = function() {
   // Disconnect links between the block and the mutator.
   this.block_.mutator = null;
   this.block_ = null;
-}
+};
 
 /**
  * Create the icon on the block.
@@ -95,7 +98,7 @@ Blockly.Mutator.prototype.createIcon_ = function(block) {
   }
 
   if (Blockly.Tooltip) {
-    this.tooltip = Blockly.MSG_MUTATOR_TOOLTIP
+    this.tooltip = Blockly.MSG_MUTATOR_TOOLTIP;
     iconShield.tooltip = this;
     iconMark.tooltip = this;
     Blockly.Tooltip.bindMouseEvents(iconShield);
@@ -346,14 +349,14 @@ Blockly.Mutator.Button = function(caption, launch, action) {
   this.caption_ = caption;
   this.launch_ = launch;
   this.action_ = action;
-}
+};
 
 /**
  * Destroy this button and unlink everything cleanly.
  */
 Blockly.Mutator.Button.prototype.destroy = function() {
   if (this.onClickWrapper_) {
-    Blockly.unbindEvent_(this.svgGroup_, 'click', this.onClickWrapper_)
+    Blockly.unbindEvent_(this.svgGroup_, 'click', this.onClickWrapper_);
     this.onClickWrapper_ = null;
   }
   this.svgGroup_.parentNode.removeChild(this.svgGroup_);

@@ -346,7 +346,7 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     var trashcan = this.workspace.trashcan;
     var closure = function() {
       Blockly.Trashcan.close(trashcan);
-    }
+    };
     window.setTimeout(closure, 100);
     // Dropping a block on the trash can will usually cause the workspace to
     // resize to contain the newly positioned block.  Force a second resize now

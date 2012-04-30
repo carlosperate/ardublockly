@@ -114,7 +114,7 @@ Blockly.JavaScript.scrubNakedValue = function(line) {
  */
 Blockly.JavaScript.valueToCode_ = function(block, index, opt_dropParens) {
   var input = block.getValueInput(index);
-  return this.blockToCode(input, 'JavaScript', opt_dropParens);
+  return this.blockToCode(input, opt_dropParens);
 };
 
 /**
@@ -126,7 +126,7 @@ Blockly.JavaScript.valueToCode_ = function(block, index, opt_dropParens) {
  */
 Blockly.JavaScript.statementToCode_ = function(block, index) {
   var input = block.getStatementInput(index);
-  var code = this.blockToCode(input, 'JavaScript');
+  var code = this.blockToCode(input);
   if (code) {
     code = Blockly.Generator.prefixLines(code, '  ');
   }
@@ -181,6 +181,6 @@ Blockly.JavaScript.scrub_ = function(block, code) {
     }
   }
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  var nextCode = this.blockToCode(nextBlock, 'JavaScript');
+  var nextCode = this.blockToCode(nextBlock);
   return commentCode + code + nextCode;
 };

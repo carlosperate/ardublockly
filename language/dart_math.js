@@ -61,9 +61,9 @@ Blockly.Dart.math_change = function() {
 
 Blockly.Dart.math_negate = function() {
   // Negation operator.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
   var code = '- ' + argument0;
-  return Blockly.JavaScript.scrub_(this, code);
+  return Blockly.Dart.scrub_(this, code);
 };
 
 Blockly.Dart.math_abs = function() {
@@ -73,9 +73,9 @@ Blockly.Dart.math_abs = function() {
 		// -4.abs() returns -4 in Dart due to strange order of operation choices.
 		// Need to wrap non trivial numbers in parentheses: (-4).abs()
   	argument0 = '(' + argument0 + ')';
-	}
+  }
   var code = argument0 + '.abs()';
-  return Blockly.JavaScript.scrub_(this, code);
+  return Blockly.Dart.scrub_(this, code);
 };
 
 Blockly.Dart.math_root = function() {
@@ -85,6 +85,33 @@ Blockly.Dart.math_root = function() {
   return Blockly.Dart.scrub_(this, code);
 };
 
+Blockly.Dart.math_modulo = function() {
+  // Remainder computation.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
+  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
+  var code = argument0 + ' % ' + argument1;
+  return Blockly.Dart.scrub_(this, code);
+};
+
+Blockly.Dart.math_round = function() {
+  // Rounding functions.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
+  var operator = Blockly.Dart.math_round.MAP[this.getValueLabel(0)];
+  if (operator != 'round()' && !argument0.match(/^[\w\.]+$/)) {
+		// -1.49.ceil() returns -2 in Dart due to strange order of operation choices.
+		// Need to wrap non trivial numbers in parentheses: (-1.49).ceil().
+	  	// Not needed in case of round().
+	argument0 = '(' + argument0 + ')';
+  }
+  var code = argument0 + '.' + operator;
+  return Blockly.Dart.scrub_(this, code);
+};
+
+Blockly.Dart.math_round.MAP = {
+  'round': 'round()',
+  'round up': 'ceil()',
+  'round down': 'floor()'
+};
 
 Blockly.Dart.math_random_float = function() {
   var code = 'Math.random()';

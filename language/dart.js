@@ -102,7 +102,7 @@ Blockly.Dart.scrubNakedValue = function(line) {
  */
 Blockly.Dart.valueToCode_ = function(block, index, opt_dropParens) {
   var input = block.getValueInput(index);
-  return this.blockToCode(input, 'Dart', opt_dropParens);
+  return this.blockToCode(input, opt_dropParens);
 };
 
 /**
@@ -114,7 +114,7 @@ Blockly.Dart.valueToCode_ = function(block, index, opt_dropParens) {
  */
 Blockly.Dart.statementToCode_ = function(block, index) {
   var input = block.getStatementInput(index);
-  var code = this.blockToCode(input, 'Dart');
+  var code = this.blockToCode(input);
   if (code) {
     code = Blockly.Generator.prefixLines(code, '  ');
   }
@@ -170,6 +170,6 @@ Blockly.Dart.scrub_ = function(block, code) {
     }
   }
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  var nextCode = this.blockToCode(nextBlock, 'Dart');
+  var nextCode = this.blockToCode(nextBlock);
   return commentCode + code + nextCode;
 };

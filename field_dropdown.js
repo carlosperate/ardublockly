@@ -121,7 +121,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
           {class: 'blocklyMenuText', y: 15}, null);
       // Insert the checkmark between the rect and text, thus preserving the
       // ability to reference them as firstChild and lastChild respectively.
-      gElement.insertBefore(checkElement, textElement)
+      gElement.insertBefore(checkElement, textElement);
       checkElement.appendChild(Blockly.svgDoc.createTextNode('\u2713'));
     }
 

@@ -29,7 +29,7 @@
  * @constructor
  */
 Blockly.Variables = function(reservedWords) {
-  this.reservedDict_ = {}
+  this.reservedDict_ = {};
   if (reservedWords) {
     for (var x = 0; x < reservedWords.length; x++) {
       this.reservedDict_[Blockly.Variables.PREFIX_ + reservedWords[x]] = true;
@@ -119,7 +119,7 @@ Blockly.Variables.prototype.safeName_ = function(name) {
     name = 'var_' + name;
   }
   return name;
-}
+};
 
 /**
  * Find all user-created variables.

@@ -80,6 +80,28 @@ Blockly.JavaScript.math_root = function() {
   return Blockly.JavaScript.scrub_(this, code);
 };
 
+Blockly.JavaScript.math_modulo = function() {
+  // Remainder computation.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
+  var code = argument0 + ' % ' + argument1;
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
+Blockly.JavaScript.math_round = function() {
+  // Rounding functions.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var operator = Blockly.JavaScript.math_round.MAP[this.getValueLabel(0)];
+  var code = operator + '(' + argument0 + ')';
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
+Blockly.JavaScript.math_round.MAP = {
+  'round': 'Math.round',
+  'round up': 'Math.ceil',
+  'round down': 'Math.floor'
+};	
+
 Blockly.JavaScript.math_random_float = function() {
   var code = 'Math.random()';
   return Blockly.JavaScript.scrub_(this, code);

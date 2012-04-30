@@ -818,7 +818,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
 Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, highlightSteps,
                                                    connectionsXY, cursorY) {
   if (this.block_.outputConnection) {
-    steps.push('V', Blockly.BlockSvg.TAB_HEIGHT)
+    steps.push('V', Blockly.BlockSvg.TAB_HEIGHT);
     steps.push('c 0,-10 -' + Blockly.BlockSvg.TAB_WIDTH + ',8 -' +
         Blockly.BlockSvg.TAB_WIDTH + ',-7.5 s ' + Blockly.BlockSvg.TAB_WIDTH +
         ',2.5 ' + Blockly.BlockSvg.TAB_WIDTH + ',-7.5');
