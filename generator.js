@@ -54,7 +54,8 @@ Blockly.Generator.get = function(name) {
         throw 'Language "' + name + '" does not know how to generate code ' +
             'for block type "' + block.type + '"';
       }
-      return func.call(block, opt_dropParens);
+      var code = func.call(block, opt_dropParens);
+      return this.scrub_(block, code);
     };
 
     Blockly.Generator.languages[name] = generator;

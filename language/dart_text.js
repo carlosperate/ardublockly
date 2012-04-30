@@ -28,22 +28,19 @@ Blockly.Dart = Blockly.Generator.get('Dart');
 
 Blockly.Dart.text = function() {
   // Text value.
-  return Blockly.Dart.scrub_(this,
-      Blockly.Dart.quote_(this.getTitleText(1)));
+  return Blockly.Dart.quote_(this.getTitleText(1));
 };
 
 Blockly.Dart.text_length = function() {
   // String length.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
-  var code = argument0 + '.length';
-  return Blockly.Dart.scrub_(this, code);
+  return argument0 + '.length';
 };
 
 Blockly.Dart.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
-  var code = argument0 + '.isEmpty()';
-  return Blockly.JavaScript.scrub_(this, code);
+  return argument0 + '.isEmpty()';
 };
 
 Blockly.Dart.text_changecase = function() {
@@ -77,7 +74,7 @@ Blockly.Dart.text_changecase = function() {
     var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
     code = 'Blockly_toTitleCase(' + argument0 + ')';
   }
-  return Blockly.Dart.scrub_(this, code);
+  return code;
 };
 
 Blockly.Dart.text_changecase.MAP_ = {};
@@ -88,6 +85,5 @@ Blockly.Dart.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE
 Blockly.Dart.text_print = function() {
   // Print statement.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
-  var code = 'print(' + argument0 + ');\n';
-  return Blockly.Dart.scrub_(this, code);
+  return 'print(' + argument0 + ');\n';
 };

@@ -30,8 +30,7 @@ Blockly.JavaScript.controls_if = function() {
   // If condition.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
-  var code = 'if (' + argument0 + ') {\n' + branch0 + '}\n';
-  return Blockly.JavaScript.scrub_(this, code);
+  return 'if (' + argument0 + ') {\n' + branch0 + '}\n';
 };
 
 Blockly.JavaScript.controls_whileUntil = function() {
@@ -41,8 +40,7 @@ Blockly.JavaScript.controls_whileUntil = function() {
   if (this.getTitleText(1) == Blockly.Language.controls_whileUntil.MSG_UNTIL) {
     argument0 = '!(' + argument0 + ')';
   }
-  var code = 'while (' + argument0 + ') {\n' + branch0 + '}\n';
-  return Blockly.JavaScript.scrub_(this, code);
+  return 'while (' + argument0 + ') {\n' + branch0 + '}\n';
 };
 
 Blockly.JavaScript.controls_forEach = function() {
@@ -68,5 +66,5 @@ Blockly.JavaScript.controls_forEach = function() {
         'for (var ' + indexVar + ' in ' + listVar + ') {\n' +
         branch0 + '}\n';
   }
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };

@@ -49,11 +49,10 @@ Blockly.JavaScript.docs_newCalendar = function() {
       dateArgument(argument2) + ', ' +
       '{location: ' + Blockly.JavaScript.quote_(argument3) + ', ' +
       'guests: ' + Blockly.JavaScript.quote_(argument4) + '})';
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };
 
 Blockly.JavaScript.docs_getSpreadsheetData = function() {
   // Get all the data for the active spreadsheet.
-  var code = 'SpreadsheetApp.getActiveSheet().getDataRange().getValues()';
-  return Blockly.JavaScript.scrub_(this, code);
+  return 'SpreadsheetApp.getActiveSheet().getDataRange().getValues()';
 };

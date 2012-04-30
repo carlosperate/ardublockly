@@ -35,7 +35,7 @@ Blockly.JavaScript.logic_compare = function(opt_dropParens) {
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };
 
 Blockly.JavaScript.logic_compare.MAP_ = {};
@@ -55,7 +55,7 @@ Blockly.JavaScript.logic_operation = function(opt_dropParens) {
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };
 
 Blockly.JavaScript.logic_negate = function(opt_dropParens) {
@@ -65,12 +65,11 @@ Blockly.JavaScript.logic_negate = function(opt_dropParens) {
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };
 
 Blockly.JavaScript.logic_boolean = function() {
   // Boolean values true and false.
-  var code = (this.getTitleText(0) == Blockly.Language.logic_boolean.MSG_TRUE) ?
+  return (this.getTitleText(0) == Blockly.Language.logic_boolean.MSG_TRUE) ?
       'true' : 'false';
-  return Blockly.JavaScript.scrub_(this, code);
 };

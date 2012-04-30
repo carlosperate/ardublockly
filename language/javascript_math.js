@@ -28,23 +28,22 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.math_number = function() {
   // Numeric value.
-  return Blockly.JavaScript.scrub_(this,
-      window.parseFloat(this.getTitleText(0)));
+  return window.parseFloat(this.getTitleText(0));
 };
 
 Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var operator = Blockly.JavaScript.math_arithmetic.MAP[this.getValueLabel(1)];
+  var operator = Blockly.JavaScript.math_arithmetic.MAP_[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };
 
-Blockly.JavaScript.math_arithmetic.MAP = {
+Blockly.JavaScript.math_arithmetic.MAP_ = {
   '+': '+',
   '-': '-',
   '\u00D7': '*',
@@ -55,45 +54,39 @@ Blockly.JavaScript.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
   var varName = Blockly.JavaScript.variableDB_.getVariable(this.getTitleText(1));
-  var code = varName + ' += ' + argument0 + ';\n';
-  return Blockly.JavaScript.scrub_(this, code);
+  return varName + ' += ' + argument0 + ';\n';
 };
 
 Blockly.JavaScript.math_negate = function() {
   // Negation operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
-  var code = '- ' + argument0;
-  return Blockly.JavaScript.scrub_(this, code);
+  return '- ' + argument0;
 };
 
 Blockly.JavaScript.math_abs = function() {
   // Absolute value operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  var code = 'Math.abs(' + argument0 + ')';
-  return Blockly.JavaScript.scrub_(this, code);
+  return 'Math.abs(' + argument0 + ')';
 };
 
 Blockly.JavaScript.math_root = function() {
   // Root operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  var code = 'Math.sqrt(' + argument0 + ')';
-  return Blockly.JavaScript.scrub_(this, code);
+  return 'Math.sqrt(' + argument0 + ')';
 };
 
 Blockly.JavaScript.math_modulo = function() {
   // Remainder computation.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var code = argument0 + ' % ' + argument1;
-  return Blockly.JavaScript.scrub_(this, code);
+  return argument0 + ' % ' + argument1;
 };
 
 Blockly.JavaScript.math_round = function() {
   // Rounding functions.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
   var operator = Blockly.JavaScript.math_round.MAP_[this.getValueLabel(0)];
-  var code = operator + '(' + argument0 + ')';
-  return Blockly.JavaScript.scrub_(this, code);
+  return operator + '(' + argument0 + ')';
 };
 
 Blockly.JavaScript.math_round.MAP_ = {};
@@ -102,8 +95,7 @@ Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDUP] = 'M
 Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDDOWN] = 'Math.floor';
 
 Blockly.JavaScript.math_random_float = function() {
-  var code = 'Math.random()';
-  return Blockly.JavaScript.scrub_(this, code);
+  return 'Math.random()';
 };
 
 Blockly.JavaScript.math_random_int = function() {
@@ -121,5 +113,5 @@ Blockly.JavaScript.math_random_int = function() {
   } else {
     code = argument0 + ' < ' + argument1 + ' ? ' + rand1 + ' : ' + rand2;
   }
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };

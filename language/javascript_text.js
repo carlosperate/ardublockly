@@ -28,22 +28,19 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.text = function() {
   // Text value.
-  return Blockly.JavaScript.scrub_(this,
-      Blockly.JavaScript.quote_(this.getTitleText(1)));
+  return Blockly.JavaScript.quote_(this.getTitleText(1));
 };
 
 Blockly.JavaScript.text_length = function() {
   // String length.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
-  var code = argument0 + '.length';
-  return Blockly.JavaScript.scrub_(this, code);
+  return argument0 + '.length';
 };
 
 Blockly.JavaScript.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
-  var code = '!' + argument0 + '.length';
-  return Blockly.JavaScript.scrub_(this, code);
+  return '!' + argument0 + '.length';
 };
 
 Blockly.JavaScript.text_changecase = function() {
@@ -67,7 +64,7 @@ Blockly.JavaScript.text_changecase = function() {
     var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\'';
     code = 'Blockly_toTitleCase(' + argument0 + ')';
   }
-  return Blockly.JavaScript.scrub_(this, code);
+  return code;
 };
 
 Blockly.JavaScript.text_changecase.MAP_ = {};
@@ -78,6 +75,5 @@ Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPP
 Blockly.JavaScript.text_print = function() {
   // Print statement.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\'';
-  var code = 'window.alert(' + argument0 + ');\n';
-  return Blockly.JavaScript.scrub_(this, code);
+  return 'window.alert(' + argument0 + ');\n';
 };

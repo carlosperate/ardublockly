@@ -38,6 +38,5 @@ Blockly.JavaScript.lists_getIndex = function() {
     // If the index is dynamic, decrement it in code.
     argument1 += ' - 1';
   }
-  var code = argument0 + '[' + argument1 + ']';
-  return Blockly.JavaScript.scrub_(this, code);
+  return argument0 + '[' + argument1 + ']';
 };
