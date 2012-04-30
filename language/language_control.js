@@ -35,15 +35,37 @@ Blockly.Language.controls_if = {
   init: function() {
     this.setColour('purple');
     this.addTitle('if');
-    this.addInput('test', '', Blockly.INPUT_VALUE);
-    this.addInput('then do', '', Blockly.NEXT_STATEMENT);
+    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(this));
   }
 };
 
-Blockly.Language.controls_foreach = {
+Blockly.Language.controls_whileUntil = {
+  // Do while/until loop.
+  category: 'Control',
+  helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
+  init: function() {
+    this.setColour('purple');
+    this.addTitle('repeat');
+    var dropdown = new Blockly.FieldDropdown(Blockly.Language.controls_whileUntil.MSG_WHILE, function() {
+      return [Blockly.Language.controls_whileUntil.MSG_WHILE,
+              Blockly.Language.controls_whileUntil.MSG_UNTIL];
+    });
+    this.addTitle(dropdown);
+    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('do', '', Blockly.NEXT_STATEMENT);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Language.controls_whileUntil.MSG_WHILE = 'while';
+Blockly.Language.controls_whileUntil.MSG_UNTIL = 'until';
+
+Blockly.Language.controls_forEach = {
   // For each loop.
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/For_loop',

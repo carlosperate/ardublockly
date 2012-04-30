@@ -70,7 +70,7 @@ Blockly.JavaScript.logic_negate = function(opt_dropParens) {
 
 Blockly.JavaScript.logic_boolean = function() {
   // Boolean values true and false.
-  var bool = (this.getTitleText(0) == Blockly.Language.logic_boolean.MSG_TRUE) ?
+  var code = (this.getTitleText(0) == Blockly.Language.logic_boolean.MSG_TRUE) ?
       'true' : 'false';
-  return Blockly.JavaScript.scrub_(bool);
+  return Blockly.JavaScript.scrub_(this, code);
 };

@@ -53,6 +53,17 @@ Blockly.Language.text_length = {
   }
 };
 
+Blockly.Language.text_isEmpty = {
+  // Is the string null?
+  category: 'Text',
+  helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
+  init: function() {
+    this.setColour('brown');
+    this.addInput('is empty', '', Blockly.INPUT_VALUE);
+    this.setOutput(true);
+  }
+};
+
 Blockly.Language.text_changecase = {
   // Change capitalization.
   category: 'Text',

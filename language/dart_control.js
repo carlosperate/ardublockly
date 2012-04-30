@@ -34,7 +34,18 @@ Blockly.Dart.controls_if = function() {
   return Blockly.Dart.scrub_(this, code);
 };
 
-Blockly.Dart.controls_foreach = function() {
+Blockly.Dart.controls_whileUntil = function() {
+  // Do while/until loop.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || 'false';
+  var branch0 = Blockly.Dart.statementToCode_(this, 0);
+  if (this.getTitleText(1) == Blockly.Language.controls_whileUntil.MSG_UNTIL) {
+    argument0 = '!(' + argument0 + ')';
+  }
+  var code = 'while (' + argument0 + ') {\n' + branch0 + '}\n';
+  return Blockly.Dart.scrub_(this, code);
+};
+
+Blockly.Dart.controls_forEach = function() {
   // For each loop.
   var variable0 = Blockly.Dart.variableDB_.getVariable(
       this.getVariableInput(0));
@@ -45,7 +56,7 @@ Blockly.Dart.controls_foreach = function() {
       variable0 + '_index');
   if (argument0.match(/^\w+$/)) {
     branch0 = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' + branch0;
-    code = 'for (var ' + indexVar + ' = 0; ' + indexVar + ' < ' + argument0 + '.length; ' + indexVar + '++) {\n' +
+    code = 'for (var ' + indexVar + ' in  ' + argument0 + ') {\n' +
         branch0 + '}\n';
   } else {
     // The list appears to be more complicated than a simple variable.
@@ -54,7 +65,7 @@ Blockly.Dart.controls_foreach = function() {
         variable0 + '_list');
     branch0 = '  ' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' + branch0;
     code = 'var ' + listVar + ' = ' + argument0 + ';\n' +
-        'for (var ' + indexVar + ' = 0; ' + indexVar + ' < ' + listVar + '.length; ' + indexVar + '++) {\n' +
+        'for (var ' + indexVar + ' in ' + listVar + ') {\n' +
         branch0 + '}\n';
   }
   return Blockly.Dart.scrub_(this, code);

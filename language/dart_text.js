@@ -39,6 +39,13 @@ Blockly.Dart.text_length = function() {
   return Blockly.Dart.scrub_(this, code);
 };
 
+Blockly.Dart.text_isEmpty = function() {
+  // Is the string null?
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
+  var code = argument0 + '.isEmpty()';
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
 Blockly.Dart.text_changecase = function() {
   // Change capitalization.
   var operator = Blockly.Dart.text_changecase.MAP_[this.getValueLabel(0)];

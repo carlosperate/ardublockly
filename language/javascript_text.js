@@ -39,6 +39,13 @@ Blockly.JavaScript.text_length = function() {
   return Blockly.JavaScript.scrub_(this, code);
 };
 
+Blockly.JavaScript.text_isEmpty = function() {
+  // Is the string null?
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
+  var code = '!' + argument0 + '.length';
+  return Blockly.JavaScript.scrub_(this, code);
+};
+
 Blockly.JavaScript.text_changecase = function() {
   // Change capitalization.
   var operator = Blockly.JavaScript.text_changecase.MAP_[this.getValueLabel(0)];
