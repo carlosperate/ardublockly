@@ -37,6 +37,14 @@ Blockly.Dart.text_length = function() {
   return argument0 + '.length';
 };
 
+Blockly.Dart.text_contains = function() {
+  // Does the text contain a substring?
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
+  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\'';
+  var code = argument0 + '.contains(' + argument1 + ')';
+  return code;
+};
+
 Blockly.Dart.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
@@ -47,7 +55,6 @@ Blockly.Dart.text_charAt = function(opt_dropParens) {
   // Indexing into a string is the same as indexing into a list.
   return Blockly.Dart.lists_getIndex.call(this, opt_dropParens);
 };
-
 
 Blockly.Dart.text_changecase = function() {
   // Change capitalization.
@@ -86,7 +93,7 @@ Blockly.Dart.text_changecase = function() {
 Blockly.Dart.text_changecase.MAP_ = {};
 Blockly.Dart.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE] = 'toUpperCase';
 Blockly.Dart.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_LOWERCASE] = 'toLowerCase';
-Blockly.Dart.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE] = null;
+Blockly.Dart.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_TITLECASE] = null;
 
 Blockly.Dart.text_print = function() {
   // Print statement.

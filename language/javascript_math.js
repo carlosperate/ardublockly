@@ -63,16 +63,51 @@ Blockly.JavaScript.math_negate = function() {
   return '- ' + argument0;
 };
 
-Blockly.JavaScript.math_abs = function() {
-  // Absolute value operator.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  return 'Math.abs(' + argument0 + ')';
-};
-
-Blockly.JavaScript.math_root = function() {
-  // Root operator.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  return 'Math.sqrt(' + argument0 + ')';
+Blockly.JavaScript.math_single = function(opt_dropParens) {
+  // Advanced math operators with single operand.
+  var argNaked = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var argParen = Blockly.JavaScript.valueToCode_(this, 0, false) || '0';
+  var operator = this.getValueLabel(0);
+  var code;
+  // First, handle cases which generate values that don't need parentheses.
+  switch (operator) {
+    case Blockly.Language.math_single.MSG_ABS:
+      code = 'Math.abs(' + argNaked + ')';
+      break;
+    case Blockly.Language.math_single.MSG_ROOT:
+      code = 'Math.sqrt(' + argNaked + ')';
+      break;
+    case Blockly.Language.math_single.MSG_SIN:
+      code = 'Math.sin(' + argParen + ' / 180 * Math.PI)';
+      break;
+    case Blockly.Language.math_single.MSG_COS:
+      code = 'Math.cos(' + argParen + ' / 180 * Math.PI)';
+      break;
+    case Blockly.Language.math_single.MSG_TAN:
+      code = 'Math.tan(' + argParen + ' / 180 * Math.PI)';
+      break;
+  }
+  if (code) {
+    return code;
+  }
+  // Second, handle cases which generate values that may need parentheses.
+  switch (operator) {
+    case Blockly.Language.math_single.MSG_ASIN:
+      code = 'Math.asin(' + argNaked + ') / Math.PI * 180';
+      break;
+    case Blockly.Language.math_single.MSG_ACOS:
+      code = 'Math.acos(' + argNaked + ') / Math.PI * 180';
+      break;
+    case Blockly.Language.math_single.MSG_ATAN:
+      code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
+      break;
+    default:
+      throw 'Unknown math operator.';
+  }
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
 };
 
 Blockly.JavaScript.math_modulo = function() {

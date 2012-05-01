@@ -28,15 +28,15 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.lists_getIndex = function() {
   // Get element at index.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 1) || '1';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 0) || '[]';
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '1';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '[]';
   // Blockly uses one-based arrays.
-  if (argument1.match(/^\d+$/)) {
+  if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
-    argument1 = parseInt(argument1, 10) - 1;
+    argument0 = parseInt(argument0, 10) - 1;
   } else {
     // If the index is dynamic, decrement it in code.
-    argument1 += ' - 1';
+    argument0 += ' - 1';
   }
-  return argument0 + '[' + argument1 + ']';
+  return argument1 + '[' + argument0 + ']';
 };

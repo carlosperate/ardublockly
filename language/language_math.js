@@ -94,27 +94,35 @@ Blockly.Language.math_negate = {
   }
 };
 
-Blockly.Language.math_abs = {
-  // Absolute value operator.
-  category: 'Math',
-  helpUrl: 'http://www.purplemath.com/modules/absolute.htm',
-  init: function() {
-    this.setColour('baby');
-    this.setOutput(true);
-    this.addInput('abs', '', Blockly.INPUT_VALUE);
-  }
-};
-
-Blockly.Language.math_root = {
-  // Root operator.
+Blockly.Language.math_single = {
+  // Advanced math operators with single operand.
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Square_root',
   init: function() {
     this.setColour('baby');
     this.setOutput(true);
-    this.addInput('\u221A', '', Blockly.INPUT_VALUE);
+    var dropdown = new Blockly.FieldDropdown(Blockly.Language.math_single.MSG_ROOT, function() {
+      return [Blockly.Language.math_single.MSG_ABS,
+              Blockly.Language.math_single.MSG_ROOT,
+              Blockly.Language.math_single.MSG_SIN,
+              Blockly.Language.math_single.MSG_COS,
+              Blockly.Language.math_single.MSG_TAN,
+              Blockly.Language.math_single.MSG_ASIN,
+              Blockly.Language.math_single.MSG_ACOS,
+              Blockly.Language.math_single.MSG_ATAN];
+    });
+    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
   }
 };
+
+Blockly.Language.math_single.MSG_ABS = 'absolute';
+Blockly.Language.math_single.MSG_ROOT = '\u221A';
+Blockly.Language.math_single.MSG_SIN = 'sin';
+Blockly.Language.math_single.MSG_COS = 'cos';
+Blockly.Language.math_single.MSG_TAN = 'tan';
+Blockly.Language.math_single.MSG_ASIN = 'asin';
+Blockly.Language.math_single.MSG_ACOS = 'acos';
+Blockly.Language.math_single.MSG_ATAN = 'atan';
 
 Blockly.Language.math_modulo = {
   // Remainder of a division.

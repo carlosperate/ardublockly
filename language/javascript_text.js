@@ -37,6 +37,17 @@ Blockly.JavaScript.text_length = function() {
   return argument0 + '.length';
 };
 
+Blockly.JavaScript.text_contains = function(opt_dropParens) {
+  // Does the text contain a substring?
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '\'\'';
+  var code = argument0 + '.indexOf(' + argument1 + ') != -1';
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
+};
+
 Blockly.JavaScript.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
@@ -75,7 +86,7 @@ Blockly.JavaScript.text_changecase = function() {
 Blockly.JavaScript.text_changecase.MAP_ = {};
 Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE] = 'toUpperCase';
 Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_LOWERCASE] = 'toLowerCase';
-Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE] = null;
+Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_TITLECASE] = null;
 
 Blockly.JavaScript.text_print = function() {
   // Print statement.

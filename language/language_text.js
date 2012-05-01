@@ -53,6 +53,19 @@ Blockly.Language.text_length = {
   }
 };
 
+Blockly.Language.text_contains = {
+  // Does the text contain a substring?
+  category: 'Text',
+  helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
+  init: function() {
+    this.setColour('brown');
+    this.setOutput(true);
+    this.addInput('text', '', Blockly.INPUT_VALUE);
+    this.addInput('contains', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+  }
+};
+
 Blockly.Language.text_isEmpty = {
   // Is the string null?
   category: 'Text',

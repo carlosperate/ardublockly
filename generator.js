@@ -74,7 +74,7 @@ Blockly.Generator.workspaceToCode = function(name) {
   generator.init();
   var blocks = Blockly.mainWorkspace.getTopBlocks();
   for (var x = 0, block; block = blocks[x]; x++) {
-    var line = generator.blockToCode(block);
+    var line = generator.blockToCode(block, true);
     if (block.outputConnection && generator.scrubNakedValue) {
       // This block is a naked value.  Ask the language's code generator if
       // it wants to append a semicolon, or something.
