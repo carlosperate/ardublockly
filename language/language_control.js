@@ -97,7 +97,7 @@ Blockly.Language.controls_forEach = {
   init: function() {
     this.setColour('purple');
     this.addTitle('for each');
-    this.addInput('value', '', Blockly.LOCAL_VARIABLE).setText('x');
+    this.addInput('item', '', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('in list', '', Blockly.INPUT_VALUE);
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);

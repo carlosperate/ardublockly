@@ -26,17 +26,22 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.lists_getIndex = function() {
-  // Get element at index.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '1';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '[]';
-  // Blockly uses one-based arrays.
-  if (argument0.match(/^\d+$/)) {
-    // If the index is a naked number, decrement it right now.
-    argument0 = parseInt(argument0, 10) - 1;
-  } else {
-    // If the index is dynamic, decrement it in code.
-    argument0 += ' - 1';
-  }
-  return argument1 + '[' + argument0 + ']';
+Blockly.JavaScript.lists_length = function(opt_dropParens) {
+  // Testing the length of a list is the same as for a string.
+  return Blockly.JavaScript.text_length.call(this, opt_dropParens);
+};
+
+Blockly.JavaScript.lists_isEmpty = function(opt_dropParens) {
+  // Testing a list for being empty is the same as for a string.
+  return Blockly.JavaScript.text_isEmpty.call(this, opt_dropParens);
+};
+
+Blockly.JavaScript.lists_contains = function(opt_dropParens) {
+  // Testing a list for a value is the same as search for a substring.
+  return Blockly.JavaScript.text_contains.call(this, opt_dropParens);
+};
+
+Blockly.JavaScript.lists_getIndex = function(opt_dropParens) {
+  // Indexing into a list is the same as indexing into a string.
+  return Blockly.JavaScript.text_charAt.call(this, opt_dropParens);
 };

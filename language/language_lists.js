@@ -28,15 +28,49 @@ if (!Blockly.Language) {
   Blockly.Language = {};
 }
 
+Blockly.Language.lists_length = {
+  // List length.
+  category: 'Lists',
+  helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
+  init: function() {
+    this.setColour('blue');
+    this.addInput('length', '', Blockly.INPUT_VALUE);
+    this.setOutput(true);
+  }
+};
+
+Blockly.Language.lists_isEmpty = {
+  // Is the list empty?
+  category: 'Lists',
+  helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
+  init: function() {
+    this.setColour('blue');
+    this.addInput('is empty', '', Blockly.INPUT_VALUE);
+    this.setOutput(true);
+  }
+};
+
+Blockly.Language.lists_contains = {
+  // Does the list contain a value?
+  category: 'Lists',
+  helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
+  init: function() {
+    this.setColour('blue');
+    this.setOutput(true);
+    this.addInput('is item', '', Blockly.INPUT_VALUE);
+    this.addInput('in list', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+  }
+};
+
 Blockly.Language.lists_getIndex = {
   // Get element at index.
   category: 'Lists',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
     this.setColour('blue');
-    this.addTitle('item');
     this.setOutput(true);
-    this.addInput('at', '', Blockly.INPUT_VALUE);
+    this.addInput('item at', '', Blockly.INPUT_VALUE);
     this.addInput('in list', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
   }

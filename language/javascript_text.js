@@ -37,6 +37,12 @@ Blockly.JavaScript.text_length = function() {
   return argument0 + '.length';
 };
 
+Blockly.JavaScript.text_isEmpty = function() {
+  // Is the string null?
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
+  return '!' + argument0 + '.length';
+};
+
 Blockly.JavaScript.text_contains = function(opt_dropParens) {
   // Does the text contain a substring?
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
@@ -48,15 +54,19 @@ Blockly.JavaScript.text_contains = function(opt_dropParens) {
   return code;
 };
 
-Blockly.JavaScript.text_isEmpty = function() {
-  // Is the string null?
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
-  return '!' + argument0 + '.length';
-};
-
-Blockly.JavaScript.text_charAt = function(opt_dropParens) {
-  // Indexing into a string is the same as indexing into a list.
-  return Blockly.JavaScript.lists_getIndex.call(this, opt_dropParens);
+Blockly.JavaScript.text_charAt = function() {
+  // Get letter at index.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '1';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '[]';
+  // Blockly uses one-based indicies.
+  if (argument0.match(/^\d+$/)) {
+    // If the index is a naked number, decrement it right now.
+    argument0 = parseInt(argument0, 10) - 1;
+  } else {
+    // If the index is dynamic, decrement it in code.
+    argument0 += ' - 1';
+  }
+  return argument1 + '[' + argument0 + ']';
 };
 
 Blockly.JavaScript.text_changecase = function() {

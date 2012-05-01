@@ -37,23 +37,38 @@ Blockly.Dart.text_length = function() {
   return argument0 + '.length';
 };
 
-Blockly.Dart.text_contains = function() {
-  // Does the text contain a substring?
-  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
-  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\'';
-  var code = argument0 + '.contains(' + argument1 + ')';
-  return code;
-};
-
 Blockly.Dart.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
   return argument0 + '.isEmpty()';
 };
 
-Blockly.Dart.text_charAt = function(opt_dropParens) {
-  // Indexing into a string is the same as indexing into a list.
-  return Blockly.Dart.lists_getIndex.call(this, opt_dropParens);
+Blockly.Dart.text_contains = function(opt_dropParens) {
+  // Does the text contain a substring?
+  // Using String.contains would be cleaner, but using .indexOf allows this
+  // block to be used on lists as well as strings.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
+  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\'';
+  var code = argument0 + '.indexOf(' + argument1 + ') != -1';
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
+};
+
+Blockly.Dart.text_charAt = function() {
+  // Get letter at index.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '1';
+  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '[]';
+  // Blockly uses one-based arrays.
+  if (argument0.match(/^\d+$/)) {
+    // If the index is a naked number, decrement it right now.
+    argument0 = parseInt(argument0, 10) - 1;
+  } else {
+    // If the index is dynamic, decrement it in code.
+    argument0 += ' - 1';
+  }
+  return argument1 + '[' + argument0 + ']';
 };
 
 Blockly.Dart.text_changecase = function() {
