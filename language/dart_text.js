@@ -49,7 +49,7 @@ Blockly.Dart.text_contains = function(opt_dropParens) {
   // block to be used on lists as well as strings.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\'';
-  var code = argument0 + '.indexOf(' + argument1 + ') != -1';
+  var code = argument1 + '.indexOf(' + argument0 + ') != -1';
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }

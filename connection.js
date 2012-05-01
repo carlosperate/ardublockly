@@ -64,11 +64,16 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     throw 'Blocks are on different workspaces.';
   }
   if (this.type == Blockly.INPUT_VALUE || this.type == Blockly.OUTPUT_VALUE) {
-    // Can't make a value connection if either side is already connected.
     if (this.targetConnection) {
+      // Can't make a value connection if male block is already connected.
       throw 'Source connection already connected (value).';
     } else if (otherConnection.targetConnection) {
-      throw 'Target connection already connected (value).';
+      // If female block is already connected, disconenct and bump the male.
+      var orphanBlock = otherConnection.targetBlock();
+      orphanBlock.setParent(null);
+      window.setTimeout(function() {
+            orphanBlock.outputConnection.bumpAwayFrom_(otherConnection);
+          }, Blockly.BUMP_DELAY);
     }
   } else {
     if (this.targetConnection) {
@@ -332,10 +337,7 @@ Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
    */
   function checkConnection_(yIndex) {
     var connection = db[yIndex];
-    if (connection.type == Blockly.INPUT_VALUE ||
-        connection.type == Blockly.OUTPUT_VALUE ||
-        connection.type == Blockly.PREVIOUS_STATEMENT) {
-      // Don't offer to connect to value blocks that are already connected.
+    if (connection.type == Blockly.PREVIOUS_STATEMENT) {
       // Don't offer to connect the bottom of a statement block to one that's
       // already connected.
       if (connection.targetConnection) {

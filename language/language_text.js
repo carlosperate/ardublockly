@@ -71,8 +71,8 @@ Blockly.Language.text_contains = {
   init: function() {
     this.setColour('brown');
     this.setOutput(true);
-    this.addInput('text', '', Blockly.INPUT_VALUE);
-    this.addInput('contains', '', Blockly.INPUT_VALUE);
+    this.addInput('is text', '', Blockly.INPUT_VALUE);
+    this.addInput('in text', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
   }
 };

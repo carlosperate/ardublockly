@@ -47,7 +47,7 @@ Blockly.JavaScript.text_contains = function(opt_dropParens) {
   // Does the text contain a substring?
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '\'\'';
-  var code = argument0 + '.indexOf(' + argument1 + ') != -1';
+  var code = argument1 + '.indexOf(' + argument0 + ') != -1';
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }

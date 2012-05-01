@@ -159,7 +159,7 @@ Blockly.SNAP_RADIUS = 12;
 /**
  * Delay in ms between trigger and bumping unconnected block out of alignment.
  */
-Blockly.BUMP_DELAY = 500;
+Blockly.BUMP_DELAY = 250;
 
 /**
  * The document object.
