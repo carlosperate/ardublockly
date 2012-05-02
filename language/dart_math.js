@@ -60,7 +60,11 @@ Blockly.Dart.math_change = function() {
 Blockly.Dart.math_negate = function() {
   // Negation operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
-  return '- ' + argument0;
+  var code = '- ' + argument0;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
 };
 
 Blockly.Dart.math_single = function(opt_dropParens) {
@@ -119,7 +123,11 @@ Blockly.Dart.math_modulo = function() {
   // Remainder computation.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
-  return argument0 + ' % ' + argument1;
+  var code = argument0 + ' % ' + argument1;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
 };
 
 Blockly.Dart.math_round = function() {

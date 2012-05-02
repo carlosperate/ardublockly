@@ -160,14 +160,14 @@ Blockly.Comment.prototype.createIcon_ = function() {
   </g>
   */
   this.iconGroup_ = Blockly.createSvgElement('g',
-      {class: 'blocklyIconGroup'}, null);
+      {'class': 'blocklyIconGroup'}, null);
   var iconShield = Blockly.createSvgElement('circle',
-      {class: 'blocklyIconShield',
+      {'class': 'blocklyIconShield',
       r: Blockly.Comment.ICON_RADIUS,
       cx: Blockly.Comment.ICON_RADIUS,
       cy: Blockly.Comment.ICON_RADIUS}, this.iconGroup_);
   this.iconMark_ = Blockly.createSvgElement('text',
-      {class: 'blocklyCommentMark',
+      {'class': 'blocklyCommentMark',
       x: Blockly.Comment.ICON_RADIUS / 2,
       y: 2 * Blockly.Comment.ICON_RADIUS - 3}, this.iconGroup_);
   this.iconMark_.appendChild(Blockly.svgDoc.createTextNode('?'));
@@ -207,21 +207,21 @@ Blockly.Comment.prototype.createBubble_ = function(commentGroup) {
       {filter: 'url(#blocklyEmboss)'}, this.bubbleGroup_);
   this.bubbleArrow_ = Blockly.createSvgElement('path', {}, bubbleEmboss);
   this.bubbleBack_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyDraggable', x: 0, y: 0,
+      {'class': 'blocklyDraggable', x: 0, y: 0,
       rx: Blockly.Comment.BORDER_WIDTH, ry: Blockly.Comment.BORDER_WIDTH},
       bubbleEmboss);
   this.resizeGroup_ = Blockly.createSvgElement('g',
-      {class: Blockly.RTL ? 'blocklyResizeSW' : 'blocklyResizeSE'},
+      {'class': Blockly.RTL ? 'blocklyResizeSW' : 'blocklyResizeSE'},
       this.bubbleGroup_);
   var resizeSize = 2 * Blockly.Comment.BORDER_WIDTH;
   Blockly.createSvgElement('polygon',
       {points: '0,x x,x x,0'.replace(/x/g, resizeSize)}, this.resizeGroup_);
   Blockly.createSvgElement('line',
-      {class: 'blocklyResizeLine',
+      {'class': 'blocklyResizeLine',
       x1: resizeSize / 3, y1: resizeSize - 1,
       x2: resizeSize - 1, y2: resizeSize / 3}, this.resizeGroup_);
   Blockly.createSvgElement('line',
-      {class: 'blocklyResizeLine',
+      {'class': 'blocklyResizeLine',
       x1: resizeSize * 2 / 3, y1: resizeSize - 1,
       x2: resizeSize - 1, y2: resizeSize * 2 / 3}, this.resizeGroup_);
   this.foreignObject_ = Blockly.createSvgElement('foreignObject',

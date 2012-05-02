@@ -53,7 +53,7 @@ Blockly.FieldTextInput.createDom = function() {
   </foreignObject>
   */
   var foreignObject = Blockly.createSvgElement('foreignObject',
-      {class: 'blocklyHidden', height: 22}, null);
+      {'class': 'blocklyHidden', height: 22}, null);
   Blockly.FieldTextInput.svgForeignObject_ = foreignObject;
   // Can't use 'Blockly.createSvgElement' since this is not in the SVG NS.
   var body = Blockly.svgDoc.createElement('body');

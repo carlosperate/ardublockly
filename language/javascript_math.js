@@ -60,7 +60,11 @@ Blockly.JavaScript.math_change = function() {
 Blockly.JavaScript.math_negate = function() {
   // Negation operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
-  return '- ' + argument0;
+  var code = '- ' + argument0;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
 };
 
 Blockly.JavaScript.math_single = function(opt_dropParens) {
@@ -114,7 +118,11 @@ Blockly.JavaScript.math_modulo = function() {
   // Remainder computation.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  return argument0 + ' % ' + argument1;
+  var code = argument0 + ' % ' + argument1;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
 };
 
 Blockly.JavaScript.math_round = function() {

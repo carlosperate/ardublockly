@@ -31,7 +31,7 @@ Blockly.FieldLabel = function(text) {
   this.sourceBlock_ = null;
   // Build the DOM.
   this.textElement_ = Blockly.createSvgElement('text',
-      {class: 'blocklyText'}, null);
+      {'class': 'blocklyText'}, null);
   this.setText(text);
 };
 

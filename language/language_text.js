@@ -91,26 +91,53 @@ Blockly.Language.text_charAt = {
   }
 };
 
-Blockly.Language.text_changecase = {
+Blockly.Language.text_changeCase = {
   // Change capitalization.
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour('brown');
     this.addTitle('to');
-    var menu = new Blockly.FieldDropdown(Blockly.Language.text_changecase.MSG_UPPERCASE, function() {
-      return [Blockly.Language.text_changecase.MSG_UPPERCASE,
-              Blockly.Language.text_changecase.MSG_LOWERCASE,
-              Blockly.Language.text_changecase.MSG_TITLECASE];
+    var menu = new Blockly.FieldDropdown(Blockly.Language.text_changeCase.MSG_UPPERCASE, function() {
+      return [Blockly.Language.text_changeCase.MSG_UPPERCASE,
+              Blockly.Language.text_changeCase.MSG_LOWERCASE,
+              Blockly.Language.text_changeCase.MSG_TITLECASE];
     });
     this.addInput(menu, '', Blockly.INPUT_VALUE);
     this.setOutput(true);
   }
 };
 
-Blockly.Language.text_changecase.MSG_UPPERCASE = 'UPPER CASE';
-Blockly.Language.text_changecase.MSG_LOWERCASE = 'lower case';
-Blockly.Language.text_changecase.MSG_TITLECASE = 'Title Case';
+Blockly.Language.text_changeCase.MSG_UPPERCASE = 'UPPER CASE';
+Blockly.Language.text_changeCase.MSG_LOWERCASE = 'lower case';
+Blockly.Language.text_changeCase.MSG_TITLECASE = 'Title Case';
+
+Blockly.Language.text_trim = {
+  // Trim spaces.
+  category: 'Text',
+  helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
+  init: function() {
+    this.setColour('brown');
+    this.addTitle('trim spaces from');
+    var menu = new Blockly.FieldDropdown(Blockly.Language.text_trim.MSG_BOTH, function() {
+      return [Blockly.Language.text_trim.MSG_LEFT,
+              Blockly.Language.text_trim.MSG_RIGHT,
+              Blockly.Language.text_trim.MSG_BOTH];
+    }, function(text) {
+      var newTitle = (text == Blockly.Language.text_trim.MSG_BOTH) ? 'sides' : 'side';
+      this.sourceBlock_.setTitleText(newTitle, 2);
+      this.setText(text);
+    });
+    this.addTitle(menu);
+    this.addTitle('sides');
+    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.setOutput(true);
+  }
+};
+
+Blockly.Language.text_trim.MSG_LEFT = 'left';
+Blockly.Language.text_trim.MSG_RIGHT = 'right';
+Blockly.Language.text_trim.MSG_BOTH = 'both';
 
 Blockly.Language.text_print = {
   // Print statement.

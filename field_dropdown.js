@@ -56,16 +56,16 @@ Blockly.FieldDropdown.createDom = function() {
     </g>
   </g>
   */
-  var svgGroup = Blockly.createSvgElement('g', {class: 'blocklyHidden'}, null);
+  var svgGroup = Blockly.createSvgElement('g', {'class': 'blocklyHidden'}, null);
   Blockly.FieldDropdown.svgGroup_ = svgGroup;
   Blockly.FieldDropdown.svgShadow_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyDropdownMenuShadow',
+      {'class': 'blocklyDropdownMenuShadow',
       x: 0, y: 1, rx: 2, ry: 2}, svgGroup);
   Blockly.FieldDropdown.svgBackground_ = Blockly.createSvgElement('rect',
       {x: -2, y: -1, rx: 2, ry: 2,
       filter: 'url(#blocklyEmboss)'}, svgGroup);
   Blockly.FieldDropdown.svgOptions_ = Blockly.createSvgElement('g',
-      {class: 'blocklyDropdownMenuOptions'}, svgGroup);
+      {'class': 'blocklyDropdownMenuOptions'}, svgGroup);
   return svgGroup;
 };
 
@@ -118,7 +118,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     // Add a checkmark next to the current item.
     if (!checkElement && option == this.text_) {
       checkElement = Blockly.createSvgElement('text',
-          {class: 'blocklyMenuText', y: 15}, null);
+          {'class': 'blocklyMenuText', y: 15}, null);
       // Insert the checkmark between the rect and text, thus preserving the
       // ability to reference them as firstChild and lastChild respectively.
       gElement.insertBefore(checkElement, textElement);

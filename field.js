@@ -38,10 +38,10 @@ Blockly.Field = function(text) {
   // Build the DOM.
   this.group_ = Blockly.createSvgElement('g', {}, null);
   this.textElement_ = Blockly.createSvgElement('text',
-      {class: 'blocklyText'}, this.group_);
+      {'class': 'blocklyText'}, this.group_);
   this.borderRect_ = Blockly.createSvgElement('rect', {}, this.group_);
   this.highlight_ = Blockly.createSvgElement('path',
-      {class: 'blocklyEditableHighlight'}, this.group_);
+      {'class': 'blocklyEditableHighlight'}, this.group_);
   if (this.CURSOR) {
     // Different field types show different cursor hints.
     this.borderRect_.style.cursor = this.CURSOR;

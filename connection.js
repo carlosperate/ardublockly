@@ -68,12 +68,40 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       // Can't make a value connection if male block is already connected.
       throw 'Source connection already connected (value).';
     } else if (otherConnection.targetConnection) {
-      // If female block is already connected, disconenct and bump the male.
+      // If female block is already connected, disconnect and bump the male.
       var orphanBlock = otherConnection.targetBlock();
       orphanBlock.setParent(null);
-      window.setTimeout(function() {
-            orphanBlock.outputConnection.bumpAwayFrom_(otherConnection);
-          }, Blockly.BUMP_DELAY);
+      // Attempt to reattach the orphan at the end of the newly inserted
+      // block.  Since this block may be a row, walk down to the end.
+      function singleInput(block) {
+        var input = false;
+        for (var x = 0; x < block.inputList.length; x++) {
+          if (block.inputList[x].type == Blockly.INPUT_VALUE) {
+            if (input) {
+              return null;  // More than one input.
+            }
+            input = block.inputList[x];
+          }
+        }
+        return input;
+      };
+      var newBlock = this.sourceBlock_;
+      var connection;
+      while (connection = singleInput(newBlock)) {  // '=' is intentional.
+        if (connection.targetBlock()) {
+          newBlock = connection.targetBlock();
+        } else {
+          connection.connect(orphanBlock.outputConnection);
+          orphanBlock = null;
+          break;
+        }
+      }
+      if (orphanBlock) {
+        // Unable to reattach orphan.  Bump it off to the side.
+        window.setTimeout(function() {
+              orphanBlock.outputConnection.bumpAwayFrom_(otherConnection);
+            }, Blockly.BUMP_DELAY);
+      }
     }
   } else {
     if (this.targetConnection) {
@@ -246,7 +274,7 @@ Blockly.Connection.prototype.highlight = function() {
   var x = this.x_ - xy.x;
   var y = this.y_ - xy.y;
   Blockly.Connection.highlightedPath_ = Blockly.createSvgElement('path',
-      {class: 'blocklyHighlightedConnectionPath',
+      {'class': 'blocklyHighlightedConnectionPath',
       d: steps,
       transform: 'translate(' + x + ', ' + y + ')'},
       this.sourceBlock_.svg_.svgGroup_);

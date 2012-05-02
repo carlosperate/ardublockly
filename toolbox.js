@@ -65,16 +65,16 @@ Blockly.Toolbox.createDom = function() {
   var svgFlyout = Blockly.createSvgElement('g', {}, svgGroup);
   Blockly.Toolbox.svgFlyout_ = svgFlyout;
   Blockly.Toolbox.svgFlyoutBackground_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyFlyoutBackground', rx: 8, ry: 8}, svgFlyout);
+      {'class': 'blocklyFlyoutBackground', rx: 8, ry: 8}, svgFlyout);
   Blockly.Toolbox.svgFlyoutOptions_ =
       Blockly.createSvgElement('g', {}, svgFlyout);
   Blockly.Toolbox.flyoutWorkspace_ = new Blockly.Workspace(false);
   Blockly.Toolbox.svgFlyoutOptions_.appendChild(
       Blockly.Toolbox.flyoutWorkspace_.createDom());
   Blockly.Toolbox.svgBackground_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyToolboxBackground', height: '100%'}, svgGroup);
+      {'class': 'blocklyToolboxBackground', height: '100%'}, svgGroup);
   Blockly.Toolbox.svgOptions_ = Blockly.createSvgElement('g',
-      {class: 'blocklyToolboxOptions'}, svgGroup);
+      {'class': 'blocklyToolboxOptions'}, svgGroup);
   return svgGroup;
 };
 

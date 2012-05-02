@@ -171,7 +171,7 @@ Blockly.Variables.dropdownCreate = function() {
 Blockly.Variables.dropdownChange = function(text) {
   function promptName(promptText, defaultText) {
     Blockly.hideChaff();
-    newVar = window.prompt(promptText, defaultText);
+    var newVar = window.prompt(promptText, defaultText);
     // Strip leading and trailing whitespace.  Beyond this, all names are legal.
     return newVar && newVar.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
   }

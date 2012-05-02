@@ -72,7 +72,7 @@ Blockly.Mutator.prototype.createIcon_ = function(block) {
     this.iconGroup_.setAttribute('class', 'blocklyIconGroup');
   }
   var iconShield = Blockly.createSvgElement('rect',
-      {class: 'blocklyIconShield',
+      {'class': 'blocklyIconShield',
       width: 8 * quantum,
       height: 8 * quantum,
       rx: 2 * quantum,
@@ -90,7 +90,7 @@ Blockly.Mutator.prototype.createIcon_ = function(block) {
     Blockly.Mutator.crossPath_ = path.join(' ');
   }
   var iconMark = Blockly.createSvgElement('path',
-      {class: 'blocklyMutatorMark',
+      {'class': 'blocklyMutatorMark',
       d: Blockly.Mutator.crossPath_}, this.iconGroup_);
   block.svg_.svgGroup_.appendChild(this.iconGroup_);
   if (block.editable) {
@@ -155,15 +155,16 @@ Blockly.Mutator.createDom = function() {
     </g>
   </g>
   */
-  var svgGroup = Blockly.createSvgElement('g', {class: 'blocklyHidden'}, null);
+  var svgGroup = Blockly.createSvgElement('g', {'class': 'blocklyHidden'},
+                                          null);
   Blockly.Mutator.svgGroup_ = svgGroup;
   Blockly.Mutator.svgShadow_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyScreenShadow'}, svgGroup);
+      {'class': 'blocklyScreenShadow'}, svgGroup);
   Blockly.Mutator.svgDialog_ = Blockly.createSvgElement('g', {}, svgGroup);
   Blockly.Mutator.svgBackground_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyMutatorBackground'}, Blockly.Mutator.svgDialog_);
+      {'class': 'blocklyMutatorBackground'}, Blockly.Mutator.svgDialog_);
   Blockly.Mutator.svgHeader_ = Blockly.createSvgElement('text',
-      {class: 'blocklyHeader', y: 30}, Blockly.Mutator.svgDialog_);
+      {'class': 'blocklyHeader', y: 30}, Blockly.Mutator.svgDialog_);
   var textNode = Blockly.svgDoc.createTextNode(Blockly.MSG_MUTATOR_HEADER);
   Blockly.Mutator.svgHeader_.appendChild(textNode);
 
@@ -274,8 +275,10 @@ Blockly.Mutator.getWorkspaceMetrics_ = function() {
   if (!Blockly.Mutator.isOpen) {
     return null;
   }
-  var viewWidth = Blockly.Mutator.workspaceWidth_ - Blockly.Scrollbar.scrollbarThickness;
-  var viewHeight = Blockly.Mutator.workspaceHeight_ - Blockly.Scrollbar.scrollbarThickness;
+  var viewWidth = Blockly.Mutator.workspaceWidth_ -
+      Blockly.Scrollbar.scrollbarThickness;
+  var viewHeight = Blockly.Mutator.workspaceHeight_ -
+      Blockly.Scrollbar.scrollbarThickness;
   var blockBox = Blockly.Mutator.workspace_.svgBlockCanvas_.getBBox();
   if (blockBox.width == -Infinity && blockBox.height == -Infinity) {
     // Opera has trouble with bounding boxes around empty objects.
@@ -313,15 +316,18 @@ Blockly.Mutator.getWorkspaceMetrics_ = function() {
 Blockly.Mutator.setWorkspaceMetrics_ = function(xyRatio) {
   var metrics = Blockly.Mutator.getWorkspaceMetrics_();
   if (typeof xyRatio.x == 'number') {
-    Blockly.Mutator.workspace_.scrollX = -metrics.contentWidth * xyRatio.x - metrics.contentLeft;
+    Blockly.Mutator.workspace_.scrollX =
+        -metrics.contentWidth * xyRatio.x - metrics.contentLeft;
   }
   if (typeof xyRatio.y == 'number') {
-    Blockly.Mutator.workspace_.scrollY = -metrics.contentHeight * xyRatio.y - metrics.contentTop;
+    Blockly.Mutator.workspace_.scrollY =
+        -metrics.contentHeight * xyRatio.y - metrics.contentTop;
   }
   var translation = 'translate(' +
       (Blockly.Mutator.workspace_.scrollX + metrics.absoluteLeft) + ',' +
       (Blockly.Mutator.workspace_.scrollY + metrics.absoluteTop) + ')';
-  Blockly.Mutator.workspace_.svgBlockCanvas_.setAttribute('transform', translation);
+  Blockly.Mutator.workspace_.svgBlockCanvas_.setAttribute('transform',
+                                                          translation);
 };
 
 /**
@@ -357,7 +363,7 @@ Blockly.Mutator.closeDialog_ = function() {
  * Class for a styled button.
  * @param {string} label Text to display on the button.
  * @param {boolean} launch True if the button should be the launch button (red).
- * @action {Function} action Function to call when the button is clicked.
+ * @param {Function} action Function to call when the button is clicked.
  * @constructor
  */
 Blockly.Mutator.Button = function(caption, launch, action) {
@@ -397,13 +403,14 @@ Blockly.Mutator.Button.prototype.createDom = function() {
   if (this.launch_) {
     className += ' blocklyLaunchButton';
   }
-  this.svgGroup_ = Blockly.createSvgElement('g', {class: className}, null);
+  this.svgGroup_ = Blockly.createSvgElement('g', {'class': className}, null);
   this.svgShadow_ = Blockly.createSvgElement('rect',
-      {rx: 5, ry: 5, x: 2, y: 2, class: 'blocklyButtonShadow'}, this.svgGroup_);
+      {rx: 5, ry: 5, x: 2, y: 2, 'class': 'blocklyButtonShadow'},
+      this.svgGroup_);
   this.svgBackground_ = Blockly.createSvgElement('rect',
-      {rx: 5, ry: 5, class: 'blocklyButtonBackground'}, this.svgGroup_);
+      {rx: 5, ry: 5, 'class': 'blocklyButtonBackground'}, this.svgGroup_);
   this.svgText_ = Blockly.createSvgElement('text',
-      {class: 'blocklyButtonText'}, this.svgGroup_);
+      {'class': 'blocklyButtonText'}, this.svgGroup_);
   this.svgText_.appendChild(Blockly.svgDoc.createTextNode(this.caption_));
 
   this.onClickWrapper_ = null;

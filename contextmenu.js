@@ -55,16 +55,16 @@ Blockly.ContextMenu.createDom = function() {
   </g>
   */
   var svgGroup =
-      Blockly.createSvgElement('g', {class: 'blocklyHidden'}, null);
+      Blockly.createSvgElement('g', {'class': 'blocklyHidden'}, null);
   Blockly.ContextMenu.svgGroup = svgGroup;
   Blockly.ContextMenu.svgShadow = Blockly.createSvgElement('rect',
-      {class: 'blocklyContextMenuShadow',
+      {'class': 'blocklyContextMenuShadow',
       x: 2, y: -2, rx: 4, ry: 4}, svgGroup);
   Blockly.ContextMenu.svgBackground = Blockly.createSvgElement('rect',
-      {class: 'blocklyContextMenuBackground',
+      {'class': 'blocklyContextMenuBackground',
       y: -4, rx: 4, ry: 4}, svgGroup);
   Blockly.ContextMenu.svgOptions = Blockly.createSvgElement('g',
-      {class: 'blocklyContextMenuOptions'}, svgGroup);
+      {'class': 'blocklyContextMenuOptions'}, svgGroup);
   return svgGroup;
 };
 
@@ -173,11 +173,11 @@ Blockly.ContextMenu.optionToDom = function(text) {
       <text class="blocklyMenuText" x="20" y="15">Make It So</text>
     </g>
   */
-  var gElement = Blockly.createSvgElement('g', {class: 'blocklyMenuDiv'}, null);
+  var gElement = Blockly.createSvgElement('g', {'class': 'blocklyMenuDiv'}, null);
   var rectElement = Blockly.createSvgElement('rect',
       {height: Blockly.ContextMenu.Y_HEIGHT}, gElement);
   var textElement = Blockly.createSvgElement('text',
-      {class: 'blocklyMenuText',
+      {'class': 'blocklyMenuText',
       x: Blockly.ContextMenu.X_PADDING,
       y: 15}, gElement);
   var textNode = Blockly.svgDoc.createTextNode(text);

@@ -605,10 +605,10 @@ Blockly.ScrollbarSvg.prototype.createDom_ = function(element) {
   */
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
   this.svgBackground_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyScrollbarBackground'}, this.svgGroup_);
+      {'class': 'blocklyScrollbarBackground'}, this.svgGroup_);
   var radius = Math.floor((Blockly.ScrollbarSvg.scrollbarThickness - 6) / 2);
   this.svgKnob_ = Blockly.createSvgElement('rect',
-      {class: 'blocklyScrollbarKnob', rx: radius, ry: radius}, this.svgGroup_);
+      {'class': 'blocklyScrollbarKnob', rx: radius, ry: radius}, this.svgGroup_);
   Blockly.Scrollbar.insertAfter_(this.svgGroup_, element);
 };
 

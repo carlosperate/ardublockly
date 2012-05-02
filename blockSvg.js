@@ -776,12 +776,13 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
     steps.push('H', Blockly.BlockSvg.NOTCH_WIDTH + ' ' +
         Blockly.BlockSvg.NOTCH_PATH_RIGHT);
     // Create next block connection.
+    var connectionX;
     if (Blockly.RTL) {
       connectionX = connectionsXY.x - Blockly.BlockSvg.NOTCH_WIDTH;
     } else {
       connectionX = connectionsXY.x + Blockly.BlockSvg.NOTCH_WIDTH;
     }
-    connectionY = connectionsXY.y + cursorY + 1;
+    var connectionY = connectionsXY.y + cursorY + 1;
     this.block_.nextConnection.moveTo(connectionX, connectionY);
     if (this.block_.nextConnection.targetConnection) {
       this.block_.nextConnection.tighten_();

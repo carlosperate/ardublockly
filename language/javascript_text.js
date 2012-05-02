@@ -69,9 +69,9 @@ Blockly.JavaScript.text_charAt = function() {
   return argument1 + '[' + argument0 + ']';
 };
 
-Blockly.JavaScript.text_changecase = function() {
+Blockly.JavaScript.text_changeCase = function() {
   // Change capitalization.
-  var operator = Blockly.JavaScript.text_changecase.MAP_[this.getValueLabel(0)];
+  var operator = Blockly.JavaScript.text_changeCase.MAP_[this.getValueLabel(0)];
   var code;
   if (operator) {
     // Upper and lower case are functions built into JavaScript.
@@ -93,10 +93,22 @@ Blockly.JavaScript.text_changecase = function() {
   return code;
 };
 
-Blockly.JavaScript.text_changecase.MAP_ = {};
-Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_UPPERCASE] = 'toUpperCase';
-Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_LOWERCASE] = 'toLowerCase';
-Blockly.JavaScript.text_changecase.MAP_[Blockly.Language.text_changecase.MSG_TITLECASE] = null;
+Blockly.JavaScript.text_changeCase.MAP_ = {};
+Blockly.JavaScript.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_UPPERCASE] = 'toUpperCase';
+Blockly.JavaScript.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_LOWERCASE] = 'toLowerCase';
+Blockly.JavaScript.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_TITLECASE] = null;
+
+Blockly.JavaScript.text_trim = function() {
+  // Trim spaces.
+  var operator = Blockly.JavaScript.text_trim.MAP_[this.getTitleText(1)];
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
+  return argument0 + '.replace(' + operator + ', \'\')';
+};
+
+Blockly.JavaScript.text_trim.MAP_ = {};
+Blockly.JavaScript.text_trim.MAP_[Blockly.Language.text_trim.MSG_LEFT] = '/^\\s+/';
+Blockly.JavaScript.text_trim.MAP_[Blockly.Language.text_trim.MSG_RIGHT] = '/\\s+$/';
+Blockly.JavaScript.text_trim.MAP_[Blockly.Language.text_trim.MSG_BOTH] = '/^\\s+|\\s+$/g';
 
 Blockly.JavaScript.text_print = function() {
   // Print statement.
