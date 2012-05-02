@@ -365,15 +365,19 @@ Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
    */
   function checkConnection_(yIndex) {
     var connection = db[yIndex];
-    if (connection.type == Blockly.PREVIOUS_STATEMENT) {
-      // Don't offer to connect the bottom of a statement block to one that's
-      // already connected.
+    if (connection.type == Blockly.OUTPUT_VALUE ||
+        connection.type == Blockly.PREVIOUS_STATEMENT) {
+      // Don't offer to connect an already connected left (male) value plug to
+      // an available right (female) value plug.  Don't offer to connect the
+      // bottom of a statement block to one that's already connected.
       if (connection.targetConnection) {
         return true;
       }
     }
     // Offering to connect the top of a statement block to an already connected
     // connection is ok, we'll just insert it into the stack.
+    // Offering to connect the left (male) of a value block to an already
+    // connected value pair is ok, we'll splice it in.
 
     // Don't let blocks try to connect to themselves or ones they nest.
     var targetSourceBlock = connection.sourceBlock_;
