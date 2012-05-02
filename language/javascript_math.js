@@ -33,21 +33,20 @@ Blockly.JavaScript.math_number = function() {
 
 Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operator.
+  var map = {};
+  map[Blockly.Language.math_arithmetic.MSG_ADD] = '+';
+  map[Blockly.Language.math_arithmetic.MSG_MINUS] = '-';
+  map[Blockly.Language.math_arithmetic.MSG_MULTIPLY] = '*';
+  map[Blockly.Language.math_arithmetic.MSG_DIVIDE] = '/';
+  var operator = map[this.getValueLabel(1)];
+
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var operator = Blockly.JavaScript.math_arithmetic.MAP_[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
   return code;
-};
-
-Blockly.JavaScript.math_arithmetic.MAP_ = {
-  '+': '+',
-  '-': '-',
-  '\u00D7': '*',
-  '\u00F7': '/'
 };
 
 Blockly.JavaScript.math_change = function() {
@@ -57,7 +56,7 @@ Blockly.JavaScript.math_change = function() {
   return varName + ' += ' + argument0 + ';\n';
 };
 
-Blockly.JavaScript.math_negate = function() {
+Blockly.JavaScript.math_negate = function(opt_dropParens) {
   // Negation operator.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var code = '- ' + argument0;
@@ -114,7 +113,7 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
   return code;
 };
 
-Blockly.JavaScript.math_modulo = function() {
+Blockly.JavaScript.math_modulo = function(opt_dropParens) {
   // Remainder computation.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
@@ -127,15 +126,23 @@ Blockly.JavaScript.math_modulo = function() {
 
 Blockly.JavaScript.math_round = function() {
   // Rounding functions.
+  var operator;
+  switch (this.getValueLabel(0)) {
+    case Blockly.Language.math_round.MSG_ROUND:
+      operator = 'round';
+      break;
+    case Blockly.Language.math_round.MSG_ROUNDUP:
+      operator = 'ceil';
+      break;
+    case Blockly.Language.math_round.MSG_ROUNDDOWN:
+      operator = 'floor';
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  var operator = Blockly.JavaScript.math_round.MAP_[this.getValueLabel(0)];
-  return operator + '(' + argument0 + ')';
+  return 'Math.' + operator + '(' + argument0 + ')';
 };
-
-Blockly.JavaScript.math_round.MAP_ = {};
-Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUND] = 'Math.round';
-Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDUP] = 'Math.ceil';
-Blockly.JavaScript.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDDOWN] = 'Math.floor';
 
 Blockly.JavaScript.math_random_float = function() {
   return 'Math.random()';

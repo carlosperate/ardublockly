@@ -71,7 +71,21 @@ Blockly.JavaScript.text_charAt = function() {
 
 Blockly.JavaScript.text_changeCase = function() {
   // Change capitalization.
-  var operator = Blockly.JavaScript.text_changeCase.MAP_[this.getValueLabel(0)];
+  var operator;
+  switch (this.getValueLabel(0)) {
+    case Blockly.Language.text_changeCase.MSG_UPPERCASE:
+      operator = 'toUpperCase';
+      break;
+    case Blockly.Language.text_changeCase.MSG_LOWERCASE:
+      operator = 'toLowerCase';
+      break;
+    case Blockly.Language.text_changeCase.MSG_TITLECASE:
+      operator = null;
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
+
   var code;
   if (operator) {
     // Upper and lower case are functions built into JavaScript.
@@ -93,22 +107,26 @@ Blockly.JavaScript.text_changeCase = function() {
   return code;
 };
 
-Blockly.JavaScript.text_changeCase.MAP_ = {};
-Blockly.JavaScript.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_UPPERCASE] = 'toUpperCase';
-Blockly.JavaScript.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_LOWERCASE] = 'toLowerCase';
-Blockly.JavaScript.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_TITLECASE] = null;
-
 Blockly.JavaScript.text_trim = function() {
   // Trim spaces.
-  var operator = Blockly.JavaScript.text_trim.MAP_[this.getTitleText(1)];
+  var operator;
+  switch (this.getTitleText(1)) {
+    case Blockly.Language.text_trim.MSG_LEFT:
+      operator = '/^\\s+/';
+      break;
+    case Blockly.Language.text_trim.MSG_RIGHT:
+      operator = '/\\s+$/';
+      break;
+    case Blockly.Language.text_trim.MSG_BOTH:
+      operator = '/^\\s+|\\s+$/g';
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
+
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';
   return argument0 + '.replace(' + operator + ', \'\')';
 };
-
-Blockly.JavaScript.text_trim.MAP_ = {};
-Blockly.JavaScript.text_trim.MAP_[Blockly.Language.text_trim.MSG_LEFT] = '/^\\s+/';
-Blockly.JavaScript.text_trim.MAP_[Blockly.Language.text_trim.MSG_RIGHT] = '/\\s+$/';
-Blockly.JavaScript.text_trim.MAP_[Blockly.Language.text_trim.MSG_BOTH] = '/^\\s+|\\s+$/g';
 
 Blockly.JavaScript.text_print = function() {
   // Print statement.

@@ -73,7 +73,21 @@ Blockly.Dart.text_charAt = function() {
 
 Blockly.Dart.text_changeCase = function() {
   // Change capitalization.
-  var operator = Blockly.Dart.text_changeCase.MAP_[this.getValueLabel(0)];
+  var operator;
+  switch (this.getValueLabel(0)) {
+    case Blockly.Language.text_changeCase.MSG_UPPERCASE:
+      operator = 'toUpperCase';
+      break;
+    case Blockly.Language.text_changeCase.MSG_LOWERCASE:
+      operator = 'toLowerCase';
+      break;
+    case Blockly.Language.text_changeCase.MSG_TITLECASE:
+      operator = null;
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
+
   var code;
   if (operator) {
     // Upper and lower case are functions built into Dart.
@@ -104,11 +118,6 @@ Blockly.Dart.text_changeCase = function() {
   }
   return code;
 };
-
-Blockly.Dart.text_changeCase.MAP_ = {};
-Blockly.Dart.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_UPPERCASE] = 'toUpperCase';
-Blockly.Dart.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_LOWERCASE] = 'toLowerCase';
-Blockly.Dart.text_changeCase.MAP_[Blockly.Language.text_changeCase.MSG_TITLECASE] = null;
 
 Blockly.Dart.text_trim = function() {
   // Trim spaces.

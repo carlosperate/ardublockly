@@ -28,23 +28,38 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.logic_compare = function(opt_dropParens) {
   // Comparison operator.
+  var operator;
+  switch (this.getValueLabel(1)) {
+    case Blockly.Language.logic_compare.MSG_EQ:
+      operator = '==';
+      break;
+    case Blockly.Language.logic_compare.MSG_NEQ:
+      operator = '!=';
+      break;
+    case Blockly.Language.math_rologic_compareund.MSG_LT:
+      operator = '<';
+      break;
+    case Blockly.Language.logic_compare.MSG_LTE:
+      operator = '<=';
+      break;
+    case Blockly.Language.logic_compare.MSG_GT:
+      operator = '>';
+      break;
+    case Blockly.Language.math_rologic_compareund.MSG_GTE:
+      operator = '>=';
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
+
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var operator = Blockly.JavaScript.logic_compare.MAP_[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
   return code;
 };
-
-Blockly.JavaScript.logic_compare.MAP_ = {};
-Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_EQ] = '==';
-Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_NEQ] = '!=';
-Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_LT] = '<';
-Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_LTE] = '<=';
-Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_GT] = '>';
-Blockly.JavaScript.logic_compare.MAP_[Blockly.Language.logic_compare.MSG_GTE] = '>=';
 
 Blockly.JavaScript.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.

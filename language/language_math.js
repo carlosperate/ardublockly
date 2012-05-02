@@ -53,12 +53,22 @@ Blockly.Language.math_arithmetic = {
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
     var dropdown = new Blockly.FieldDropdown('+', function() {
-      return ['+', '-', '\u00D7', '\u00F7'];
+      return [
+          Blockly.Language.math_arithmetic.MSG_ADD,
+          Blockly.Language.math_arithmetic.MSG_MINUS,
+          Blockly.Language.math_arithmetic.MSG_MULTIPLY,
+          Blockly.Language.math_arithmetic.MSG_DIVIDE
+        ];
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
   }
 };
+
+Blockly.Language.math_arithmetic.MSG_ADD = '+';
+Blockly.Language.math_arithmetic.MSG_MINUS = '-';
+Blockly.Language.math_arithmetic.MSG_MULTIPLY = '\u00D7';
+Blockly.Language.math_arithmetic.MSG_DIVIDE = '\u00F7';
 
 Blockly.Language.math_change = {
   // Add to a variable in place.

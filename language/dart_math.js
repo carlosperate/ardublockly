@@ -33,21 +33,20 @@ Blockly.Dart.math_number = function() {
 
 Blockly.Dart.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operator.
+  var map = {};
+  map[Blockly.Language.math_arithmetic.MSG_ADD] = '+';
+  map[Blockly.Language.math_arithmetic.MSG_MINUS] = '-';
+  map[Blockly.Language.math_arithmetic.MSG_MULTIPLY] = '*';
+  map[Blockly.Language.math_arithmetic.MSG_DIVIDE] = '/';
+  var operator = map[this.getValueLabel(1)];
+
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
-  var operator = Blockly.Dart.math_arithmetic.MAP_[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
   return code;
-};
-
-Blockly.Dart.math_arithmetic.MAP_ = {
-  '+': '+',
-  '-': '-',
-  '\u00D7': '*',
-  '\u00F7': '/'
 };
 
 Blockly.Dart.math_change = function() {
@@ -57,7 +56,7 @@ Blockly.Dart.math_change = function() {
   return varName + ' += ' + argument0 + ';\n';
 };
 
-Blockly.Dart.math_negate = function() {
+Blockly.Dart.math_negate = function(opt_dropParens) {
   // Negation operator.
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
   var code = '- ' + argument0;
@@ -119,7 +118,7 @@ Blockly.Dart.math_single = function(opt_dropParens) {
   return code;
 };
 
-Blockly.Dart.math_modulo = function() {
+Blockly.Dart.math_modulo = function(opt_dropParens) {
   // Remainder computation.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
@@ -132,21 +131,29 @@ Blockly.Dart.math_modulo = function() {
 
 Blockly.Dart.math_round = function() {
   // Rounding functions.
+  var operator;
+  switch (this.getValueLabel(0)) {
+    case Blockly.Language.math_round.MSG_ROUND:
+      operator = 'round';
+      break;
+    case Blockly.Language.math_round.MSG_ROUNDUP:
+      operator = 'ceil';
+      break;
+    case Blockly.Language.math_round.MSG_ROUNDDOWN:
+      operator = 'floor';
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
-  var operator = Blockly.Dart.math_round.MAP_[this.getValueLabel(0)];
-  if (operator != 'round()' && !argument0.match(/^[\w\.]+$/)) {
+  if (operator != 'round' && !argument0.match(/^[\w\.]+$/)) {
     // -1.49.ceil() returns -2 in Dart due to strange order of operation choices.
     // Need to wrap non-trivial numbers in parentheses: (-1.49).ceil().
     // Not needed in case of round().
     argument0 = '(' + argument0 + ')';
   }
-  return argument0 + '.' + operator;
+  return argument0 + '.' + operator + '()';
 };
-
-Blockly.Dart.math_round.MAP_ = {};
-Blockly.Dart.math_round.MAP_[Blockly.Language.math_round.MSG_ROUND] = 'round()';
-Blockly.Dart.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDUP] = 'ceil()';
-Blockly.Dart.math_round.MAP_[Blockly.Language.math_round.MSG_ROUNDDOWN] = 'floor()';
 
 Blockly.Dart.math_random_float = function() {
   return 'Math.random()';
