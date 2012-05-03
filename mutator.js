@@ -135,7 +135,7 @@ Blockly.Mutator.prototype.onMouseUp_ = function(e) {
     // Drag operation is concluding.  Don't open the editor.
     return;
   }
-  Blockly.Mutator.openDialog_();
+  Blockly.Mutator.openDialog_(this.block_);
 };
 
 
@@ -152,6 +152,8 @@ Blockly.Mutator.createDom = function() {
       <text class="blocklyHeader" y="30">Block Editor</text>
       [Cancel button]
       [Change button]
+      [Workspace]
+      [Flyout]
     </g>
   </g>
   */
@@ -180,9 +182,13 @@ Blockly.Mutator.createDom = function() {
   Blockly.Mutator.svgDialog_.appendChild(
       Blockly.Mutator.changeButton_.createDom());
 
-  var workspace = new Blockly.Workspace(true);
-  Blockly.Mutator.workspace_ = workspace;
-  Blockly.Mutator.svgDialog_.appendChild(workspace.createDom());
+  // TODO: Move workspace and flyout instantiation into constructor, once
+  // Mutator stops being a singleton.
+  Blockly.Mutator.workspace_ = new Blockly.Workspace(true);
+  Blockly.Mutator.flyout_ = new Blockly.Flyout();
+
+  Blockly.Mutator.svgDialog_.appendChild(Blockly.Mutator.workspace_.createDom());
+  Blockly.Mutator.svgDialog_.appendChild(Blockly.Mutator.flyout_.createDom());
 
   return svgGroup;
 };
@@ -202,6 +208,8 @@ Blockly.Mutator.init = function() {
       Blockly.Mutator.workspace_.svgBlockCanvas_,
       Blockly.Mutator.getWorkspaceMetrics_,
       Blockly.Mutator.getWorkspaceMetrics_));
+  Blockly.Mutator.flyout_.init(Blockly.Mutator.workspace_,
+                               Blockly.Mutator.getFlyoutMetrics_);
 };
 
 /**
@@ -252,6 +260,31 @@ Blockly.Mutator.position_ = function() {
   Blockly.Mutator.workspaceHeight_ = height - bBoxChange.height - 10;
   Blockly.Mutator.workspaceTop_ = bBoxChange.height + 10;
   Blockly.Mutator.workspaceLeft_ = 0;
+};
+
+/**
+ * Return an object with all the metrics required to size scrollbars for the
+ * mutator flyout.  The following properties are computed:
+ * .viewHeight: Height of the visible rectangle,
+ * .absoluteTop: Top-edge of view.
+ * .absoluteLeft: Left-edge of view.
+ * @return {Object} Contains size and position metrics of mutator dialog's
+ *     workspace.  Returns null if the dialog is hidden.
+ * @private
+ */
+Blockly.Mutator.getFlyoutMetrics_ = function() {
+  if (!Blockly.Mutator.isOpen) {
+    return null;
+  }
+  var left = Blockly.Mutator.workspaceLeft_;
+  if (Blockly.RTL) {
+    left += Blockly.Mutator.workspaceWidth_;
+  }
+  return {
+    viewHeight: Blockly.Mutator.workspaceHeight_,
+    absoluteTop: Blockly.Mutator.workspaceTop_,
+    absoluteLeft: left
+  };
 };
 
 /**
@@ -332,9 +365,10 @@ Blockly.Mutator.setWorkspaceMetrics_ = function(xyRatio) {
 
 /**
  * Open the dialog.
+ * @param {!Blockly.Block} block Block to mutate.
  * @private
  */
-Blockly.Mutator.openDialog_ = function() {
+Blockly.Mutator.openDialog_ = function(block) {
   Blockly.Mutator.isOpen = true;
   Blockly.removeClass_(Blockly.Mutator.svgGroup_, 'blocklyHidden');
   Blockly.Mutator.position_();
@@ -343,6 +377,7 @@ Blockly.Mutator.openDialog_ = function() {
   // If the document resizes, reposition the dialog.
   Blockly.Mutator.resizeWrapper_ =
       Blockly.bindEvent_(window, 'resize', null, Blockly.Mutator.position_);
+  Blockly.Mutator.flyout_.show(block.toolbox);
 };
 
 /**

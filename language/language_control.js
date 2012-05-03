@@ -40,6 +40,38 @@ Blockly.Language.controls_if = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(this));
+  },
+  toolbox: ['controls_if_elseif', 'controls_if_else']
+};
+
+Blockly.Language.controls_if_if = {
+  // If condition.
+  helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
+  init: function() {
+    this.setColour('purple');
+    this.addTitle('if');
+    this.addInput('', '', Blockly.NEXT_STATEMENT);
+  }
+};
+
+Blockly.Language.controls_if_elseif = {
+  // Else-If condition.
+  helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
+  init: function() {
+    this.setColour('purple');
+    this.addTitle('else if');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Language.controls_if_else = {
+  // Else condition.
+  helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
+  init: function() {
+    this.setColour('purple');
+    this.addTitle('else');
+    this.setPreviousStatement(true);
   }
 };
 

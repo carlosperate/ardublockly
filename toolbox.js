@@ -40,21 +40,14 @@ Blockly.Toolbox.width = 0;
 Blockly.Toolbox.selectedOption_ = null;
 
 /**
- * Corner radius of the flyout background.
- */
-Blockly.Toolbox.CORNER_RADIUS = 8;
-
-/**
  * Creates the toolbox's DOM.  Only needs to be called once.
  * @return {!Element} The toolbox's SVG group.
  */
 Blockly.Toolbox.createDom = function() {
+  Blockly.Toolbox.flyout_ = new Blockly.Flyout();
   /*
   <g>
-    <g>
-      <rect class="blocklyFlyoutBackground" rx="8" ry="8"/>
-      <g></g>
-    </g>
+    [flyout]
     <rect class="blocklyToolboxBackground" height="100%"/>
     <g class="blocklyToolboxOptions">
     </g>
@@ -62,15 +55,8 @@ Blockly.Toolbox.createDom = function() {
   */
   var svgGroup = Blockly.createSvgElement('g', {}, null);
   Blockly.Toolbox.svgGroup_ = svgGroup;
-  var svgFlyout = Blockly.createSvgElement('g', {}, svgGroup);
-  Blockly.Toolbox.svgFlyout_ = svgFlyout;
-  Blockly.Toolbox.svgFlyoutBackground_ = Blockly.createSvgElement('rect',
-      {'class': 'blocklyFlyoutBackground', rx: 8, ry: 8}, svgFlyout);
-  Blockly.Toolbox.svgFlyoutOptions_ =
-      Blockly.createSvgElement('g', {}, svgFlyout);
-  Blockly.Toolbox.flyoutWorkspace_ = new Blockly.Workspace(false);
-  Blockly.Toolbox.svgFlyoutOptions_.appendChild(
-      Blockly.Toolbox.flyoutWorkspace_.createDom());
+  var flyoutGroup = Blockly.Toolbox.flyout_.createDom();
+  svgGroup.appendChild(flyoutGroup);
   Blockly.Toolbox.svgBackground_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyToolboxBackground', height: '100%'}, svgGroup);
   Blockly.Toolbox.svgOptions_ = Blockly.createSvgElement('g',
@@ -80,7 +66,7 @@ Blockly.Toolbox.createDom = function() {
 
 /**
  * Return an object with all the metrics required to size scrollbars for the
- * toolbox menu.  The following properties are computed:
+ * toolbox.  The following properties are computed:
  * .viewHeight: Height of the visible rectangle,
  * .viewWidth: Width of the visible rectangle,
  * .contentHeight: Height of the contents,
@@ -90,7 +76,7 @@ Blockly.Toolbox.createDom = function() {
  * .absoluteLeft: Left-edge of view.
  * @return {!Object} Contains size and position metrics of the toolbox.
  */
-Blockly.Toolbox.getMenuMetrics = function() {
+Blockly.Toolbox.getMetrics = function() {
   var viewHeight = Blockly.svgSize().height;
   var viewWidth = Blockly.Toolbox.width;
   var optionBox = Blockly.Toolbox.svgOptions_.getBBox();
@@ -107,12 +93,12 @@ Blockly.Toolbox.getMenuMetrics = function() {
 };
 
 /**
- * Sets the Y translation of the toolbox menu to match the scrollbars.
+ * Sets the Y translation of the toolbox to match the scrollbars.
  * @param {!Object} yRatio Contains a y property which is a float
  *     between 0 and 1 specifying the degree of scrolling.
  */
-Blockly.Toolbox.setMenuMetrics = function(yRatio) {
-  var metrics = Blockly.Toolbox.getMenuMetrics();
+Blockly.Toolbox.setMetrics = function(yRatio) {
+  var metrics = Blockly.Toolbox.getMetrics();
   if (typeof yRatio.y == 'number') {
     Blockly.Toolbox.svgOptions_.scrollY = -metrics.contentHeight * yRatio.y -
         metrics.contentTop;
@@ -122,86 +108,18 @@ Blockly.Toolbox.setMenuMetrics = function(yRatio) {
 };
 
 /**
- * Return an object with all the metrics required to size scrollbars for the
- * flyout.  The following properties are computed:
- * .viewHeight: Height of the visible rectangle,
- * .viewWidth: Width of the visible rectangle,
- * .contentHeight: Height of the contents,
- * .viewTop: Offset of top edge of visible rectangle from parent,
- * .contentTop: Offset of the top-most content from the y=0 coordinate,
- * .absoluteTop: Top-edge of view.
- * .absoluteLeft: Left-edge of view.
- * @return {!Object} Contains size and position metrics of the flyout.
- */
-Blockly.Toolbox.getFlyoutMetrics = function() {
-  if (Blockly.Toolbox.svgFlyout_.style.display != 'block') {
-    // Flyout is hidden.  Return a dummy metric that disables the scrollbar.
-    return {
-      viewHeight: 10,
-      viewWidth: 10,
-      contentHeight: 1,
-      viewTop: 0,
-      contentTop: 0,
-      absoluteTop: Blockly.Toolbox.CORNER_RADIUS,
-      absoluteLeft: 0
-    };
-  }
-
-  var viewHeight = Blockly.svgSize().height -
-                   2 * Blockly.Toolbox.CORNER_RADIUS;
-  var viewWidth = Blockly.Toolbox.svgFlyout_.width +
-                  Blockly.Toolbox.CORNER_RADIUS;
-  var optionBox = Blockly.Toolbox.svgFlyoutOptions_.getBBox();
-  return {
-    viewHeight: viewHeight,
-    viewWidth: viewWidth,
-    contentHeight: optionBox.height + optionBox.y,
-    viewTop: -Blockly.Toolbox.svgFlyoutOptions_.scrollY,
-    contentTop: 0,
-    absoluteTop: Blockly.Toolbox.CORNER_RADIUS,
-    absoluteLeft: 0
-  };
-};
-
-/**
- * Sets the Y translation of the flyout to match the scrollbars.
- * @param {!Object} yRatio Contains a y property which is a float
- *     between 0 and 1 specifying the degree of scrolling.
- */
-Blockly.Toolbox.setFlyoutMetrics = function(yRatio) {
-  var metrics = Blockly.Toolbox.getFlyoutMetrics();
-  if (typeof yRatio.y == 'number') {
-    Blockly.Toolbox.svgFlyoutOptions_.scrollY =
-        -metrics.contentHeight * yRatio.y - metrics.contentTop;
-  }
-  Blockly.Toolbox.svgFlyoutOptions_.setAttribute('transform', 'translate(0,' +
-      (Blockly.Toolbox.svgFlyoutOptions_.scrollY + metrics.absoluteTop) +
-      ')');
-};
-
-/**
  * Initializes the toolbox.
  */
 Blockly.Toolbox.init = function() {
+  Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace,
+                               Blockly.getMainWorkspaceMetrics);
   Blockly.Toolbox.languageTree = Blockly.Toolbox.buildTree_();
   Blockly.Toolbox.populateOptions_(Blockly.Toolbox.languageTree);
 
-  // Add scrollbars to menu panel.
+  // Add scrollbars.
   new Blockly.Scrollbar(Blockly.Toolbox.svgOptions_,
-      Blockly.Toolbox.getMenuMetrics,
-      Blockly.Toolbox.setMenuMetrics,
+      Blockly.Toolbox.getMetrics, Blockly.Toolbox.setMetrics,
       false, false);
-
-  // Add scrollbars to flyout.
-  Blockly.Toolbox.svgFlyout_.width = 0;
-  var scrollbarPair = new Blockly.Scrollbar(Blockly.Toolbox.svgFlyoutOptions_,
-      Blockly.Toolbox.getFlyoutMetrics,
-      Blockly.Toolbox.setFlyoutMetrics,
-      false, false);
-
-  // List of background buttons that lurk behind each block to catch clicks
-  // landing in the blocks' lakes and bays.
-  Blockly.Toolbox.svgFlyoutOptions_.buttons_ = [];
 
   Blockly.Toolbox.position_();
 
@@ -215,8 +133,6 @@ Blockly.Toolbox.init = function() {
  */
 Blockly.Toolbox.position_ = function() {
   var svgSize = Blockly.svgSize();
-  Blockly.Toolbox.svgFlyoutBackground_.setAttribute('height',
-      Math.max(0, svgSize.height));
   if (Blockly.RTL) {
     Blockly.Toolbox.svgGroup_.setAttribute('transform',
         'translate(' + (svgSize.width - Blockly.Toolbox.width) + ',0)');
@@ -244,15 +160,14 @@ Blockly.Toolbox.buildTree_ = function() {
   var tree = {};
   // Populate the tree structure.
   for (var name in Blockly.Language) {
-    if (name != '$') {
-      var block = Blockly.Language[name];
-      if (block.category) {
-        var cat = Blockly.Toolbox.PREFIX_ + window.encodeURI(block.category);
-        if (cat in tree) {
-          tree[cat].push(name);
-        } else {
-          tree[cat] = [name];
-        }
+    var block = Blockly.Language[name];
+    // Blocks without a category are fragments used by the mutator dialog.
+    if (block.category) {
+      var cat = Blockly.Toolbox.PREFIX_ + window.encodeURI(block.category);
+      if (cat in tree) {
+        tree[cat].push(name);
+      } else {
+        tree[cat] = [name];
       }
     }
   }
@@ -354,7 +269,8 @@ Blockly.Toolbox.selectOption_ = function(cat, newSelectedOption) {
   Blockly.Toolbox.selectedOption_ = newSelectedOption;
   if (newSelectedOption) {
     Blockly.addClass_(newSelectedOption, 'blocklyMenuSelected');
-    Blockly.Toolbox.showFlyout_(cat);
+    var blockSet = Blockly.Toolbox.languageTree[cat] || cat;
+    Blockly.Toolbox.flyout_.show(blockSet);
   }
 };
 
@@ -365,165 +281,7 @@ Blockly.Toolbox.clearSelection = function() {
   var oldSelectedOption = Blockly.Toolbox.selectedOption_;
   if (oldSelectedOption) {
     Blockly.removeClass_(oldSelectedOption, 'blocklyMenuSelected');
-    Blockly.Toolbox.hideFlyout_();
+    Blockly.Toolbox.flyout_.hide();
     Blockly.Toolbox.selectedOption_ = null;
   }
-};
-
-/**
- * Hide and empty the flyout.
- * @private
- */
-Blockly.Toolbox.hideFlyout_ = function() {
-  Blockly.Toolbox.svgFlyout_.style.display = 'none';
-  // Delete all the blocks.
-  var blocks = Blockly.Toolbox.flyoutWorkspace_.getTopBlocks();
-  for (var x = 0, block; block = blocks[x]; x++) {
-    block.destroy();
-  }
-  // Delete all the background buttons.
-  for (var x = 0, rect; rect = Blockly.Toolbox.svgFlyoutOptions_.buttons_[x];
-       x++) {
-    Blockly.unbindEvent_(rect, 'mousedown', rect.wrapper_);
-    rect.parentNode.removeChild(rect);
-  }
-  Blockly.Toolbox.svgFlyoutOptions_.buttons_ = [];
-};
-
-/**
- * Show and populate the flyout.
- * @param {string} id The category of blocks to show.
- * @private
- */
-Blockly.Toolbox.showFlyout_ = function(id) {
-  var margin = Blockly.Toolbox.CORNER_RADIUS;
-  var svgFlyout = Blockly.Toolbox.svgFlyout_;
-  var svgFlyoutBackground = Blockly.Toolbox.svgFlyoutBackground_;
-  var svgFlyoutOptions = Blockly.Toolbox.svgFlyoutOptions_;
-  svgFlyout.style.display = 'block';
-
-  // Create the blocks to be shown in this flyout.
-  var blocks = [];
-  var gaps = [];
-  if (id == Blockly.Toolbox.VARIABLE_CAT) {
-    // Special category for variables.
-    var variableList = Blockly.Variables.allVariables();
-    variableList.sort(Blockly.caseInsensitiveComparator);
-    // In addition to the user's variables, we also want to display the default
-    // variable name at the top.  We also don't want this duplicated if the
-    // user has created a variable of the same name.
-    variableList.unshift(null);
-    var defaultVariable = undefined;
-    for (var i = 0; i < variableList.length; i++) {
-      if (variableList[i] === defaultVariable) {
-        continue;
-      }
-      var getBlock = new Blockly.Block(Blockly.Toolbox.flyoutWorkspace_, 'variables_set');
-      var setBlock = new Blockly.Block(Blockly.Toolbox.flyoutWorkspace_, 'variables_get');
-      if (variableList[i] === null) {
-        defaultVariable = getBlock.getTitleText(1);
-      } else {
-        getBlock.setTitleText(variableList[i], 1);
-        setBlock.setTitleText(variableList[i], 1);
-      }
-      blocks.push(getBlock, setBlock);
-      gaps.push(margin, margin * 3);
-    }
-  } else {
-    // Category defined in language file.
-    for (var i = 0, name; name = Blockly.Toolbox.languageTree[id][i]; i++) {
-      var block = new Blockly.Block(Blockly.Toolbox.flyoutWorkspace_, name);
-      blocks[i] = block;
-      gaps[i] = margin * 2;
-    }
-  }
-
-  // Lay out the blocks vertically.
-  var flyoutWidth = 0;
-  var cursorY = margin;
-  for (var i = 0, block; block = blocks[i]; i++) {
-    // There is no good way to handle comment bubbles inside the flyout.
-    // Blocks shouldn't come with predefined comments, but someone will
-    // try this, I'm sure.  Kill the comment.
-    Blockly.Comment && block.setCommentText(null);
-    block.render();
-    var bBox = block.svg_.svgGroup_.getBBox();
-    var x = Blockly.RTL ? 0 : margin * 2 + Blockly.BlockSvg.TAB_WIDTH;
-    block.moveBy(x, cursorY);
-    flyoutWidth = Math.max(flyoutWidth, bBox.width);
-    cursorY += bBox.height + gaps[i];
-    Blockly.bindEvent_(block.svg_.svgGroup_, 'mousedown', null,
-                       Blockly.Toolbox.createBlockFunc_(block));
-  }
-  flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
-                 Blockly.Scrollbar.scrollbarThickness;
-
-  for (var i = 0, block; block = blocks[i]; i++) {
-    if (Blockly.RTL) {
-      // With the flyoutWidth known, reposition the blocks to the right-aligned.
-      block.moveBy(flyoutWidth - margin - Blockly.BlockSvg.TAB_WIDTH, 0);
-    }
-    // Create an invisible rectangle over the block to act as a button.  Just
-    // using the block as a button is poor, since blocks have holes in them.
-    var bBox = block.svg_.svgGroup_.getBBox();
-    var xy = block.getRelativeToSurfaceXY();
-    var rect = Blockly.createSvgElement('rect',
-        {width: bBox.width, height: bBox.height,
-        x: xy.x + bBox.x, y: xy.y + bBox.y,
-        'fill-opacity': 0}, null);
-    // Add the rectangles under the blocks, so that the blocks' tooltips work.
-    svgFlyoutOptions.insertBefore(rect, svgFlyoutOptions.firstChild);
-    rect.wrapper_ = Blockly.bindEvent_(rect, 'mousedown', null,
-        Blockly.Toolbox.createBlockFunc_(block));
-    svgFlyoutOptions.buttons_[i] = rect;
-  }
-
-  svgFlyoutOptions.setAttribute('transform', 'translate(0, ' + margin + ')');
-  var svgSize = Blockly.svgSize();
-  svgFlyoutBackground.setAttribute('width', flyoutWidth + margin);
-  var x = Blockly.RTL ? -flyoutWidth : Blockly.Toolbox.width - margin;
-  svgFlyout.setAttribute('transform', 'translate(' + x + ', 0)');
-  svgFlyout.width = flyoutWidth;
-
-  // Fire a resize event to update the flyout's scrollbar.
-  Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
-};
-
-/**
- * Create a copy of this block on the workspace.
- * @param {!Blockly.Block} originBlock The toolbox block to copy.
- * @return {!Function} Function to call when block is clicked.
- * @private
- */
-Blockly.Toolbox.createBlockFunc_ = function(originBlock) {
-  return function(e) {
-    if (e.button == 2) {
-      // Right-click.  Don't create a block, let the context menu show.
-      return;
-    }
-    // Create the new block by cloning the block in the toolbox (via XML).
-    var xml = Blockly.Xml.blockToDom_(originBlock);
-    var block = Blockly.Xml.domToBlock_(Blockly.mainWorkspace, xml);
-    // Place it in the same spot as the toolbox copy.
-    var margin = Blockly.Toolbox.CORNER_RADIUS;
-    var metrics = Blockly.getMainWorkspaceMetrics();
-    var xy = Blockly.getAbsoluteXY_(originBlock.svg_.svgGroup_);
-    var x = xy.x + metrics.viewLeft - metrics.absoluteLeft;
-    var y = xy.y + metrics.viewTop - metrics.absoluteTop;
-    block.moveBy(x, y);
-    block.render();
-    // Start a dragging operation on the new block.
-    block.onMouseDown_(e);
-  };
-};
-
-/**
- * Is the specified block in the toolbox's flyout?
- * This function is used to detect and prevent the closure of the flyout if
- * the user right-clicks on a toolbox's block.
- * @param {!Blockly.Block} block The block.
- * @return {boolean} True if the block is in the flyout.
- */
-Blockly.Toolbox.isBlockInFlyout = function(block) {
-  return block.workspace == Blockly.Toolbox.flyoutWorkspace_;
 };

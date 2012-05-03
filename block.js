@@ -45,6 +45,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.parentBlock_ = null;
   this.childBlocks_ = [];
 
+  this.isInFlyout = false;
   this.workspace = workspace;
   // Create required elements: the group and the path.
   this.svg_ = new Blockly.BlockSvg(this);
@@ -244,16 +245,12 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
  * @private
  */
 Blockly.Block.prototype.onMouseDown_ = function(e) {
-  if (Blockly.Toolbox && Blockly.Toolbox.isBlockInFlyout(this)) {
-    return;
-  }
   // Update Blockly's knowledge of its own location.
   Blockly.svgResize();
 
   Blockly.Block.unbindDragEvents_();
   this.select();
-  var resetToolbox = Blockly.Toolbox && Blockly.Toolbox.isBlockInFlyout(this);
-  Blockly.hideChaff(resetToolbox);
+  Blockly.hideChaff(this.isInFlyout);
   if (e.button == 2) {
     // Right-click.
     if (Blockly.ContextMenu) {
