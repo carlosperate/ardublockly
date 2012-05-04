@@ -490,10 +490,12 @@ Blockly.getMainWorkspaceMetrics = function() {
 Blockly.setMainWorkspaceMetrics = function(xyRatio) {
   var metrics = Blockly.getMainWorkspaceMetrics();
   if (typeof xyRatio.x == 'number') {
-    Blockly.mainWorkspace.scrollX = -metrics.contentWidth * xyRatio.x - metrics.contentLeft;
+    Blockly.mainWorkspace.scrollX = -metrics.contentWidth * xyRatio.x -
+        metrics.contentLeft;
   }
   if (typeof xyRatio.y == 'number') {
-    Blockly.mainWorkspace.scrollY = -metrics.contentHeight * xyRatio.y - metrics.contentTop;
+    Blockly.mainWorkspace.scrollY = -metrics.contentHeight * xyRatio.y -
+        metrics.contentTop;
   }
   var translation = 'translate(' +
       (Blockly.mainWorkspace.scrollX + metrics.absoluteLeft) + ',' +

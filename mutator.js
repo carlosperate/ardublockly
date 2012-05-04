@@ -187,7 +187,8 @@ Blockly.Mutator.createDom = function() {
   Blockly.Mutator.workspace_ = new Blockly.Workspace(true);
   Blockly.Mutator.flyout_ = new Blockly.Flyout();
 
-  Blockly.Mutator.svgDialog_.appendChild(Blockly.Mutator.workspace_.createDom());
+  Blockly.Mutator.svgDialog_.appendChild(
+      Blockly.Mutator.workspace_.createDom());
   Blockly.Mutator.svgDialog_.appendChild(Blockly.Mutator.flyout_.createDom());
 
   return svgGroup;
@@ -239,7 +240,7 @@ Blockly.Mutator.position_ = function() {
   if (Blockly.RTL) {
     cursorX = Blockly.ContextMenu.X_PADDING;
     Blockly.Mutator.changeButton_.setLocation(cursorX, 5);
-    cursorX += bBoxChange.width + Blockly.ContextMenu.X_PADDING
+    cursorX += bBoxChange.width + Blockly.ContextMenu.X_PADDING;
     Blockly.Mutator.cancelButton_.setLocation(cursorX, 5);
     cursorX += bBoxCancel.width;
     cursorX = headerX - cursorX;
@@ -395,7 +396,7 @@ Blockly.Mutator.closeDialog_ = function() {
 
 /**
  * Class for a styled button.
- * @param {string} label Text to display on the button.
+ * @param {string} caption Text to display on the button.
  * @param {boolean} launch True if the button should be the launch button (red).
  * @param {Function} action Function to call when the button is clicked.
  * @constructor

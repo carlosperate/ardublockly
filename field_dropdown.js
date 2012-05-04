@@ -56,7 +56,8 @@ Blockly.FieldDropdown.createDom = function() {
     </g>
   </g>
   */
-  var svgGroup = Blockly.createSvgElement('g', {'class': 'blocklyHidden'}, null);
+  var svgGroup = Blockly.createSvgElement('g', {'class': 'blocklyHidden'},
+                                          null);
   Blockly.FieldDropdown.svgGroup_ = svgGroup;
   Blockly.FieldDropdown.svgShadow_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyDropdownMenuShadow',

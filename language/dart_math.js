@@ -75,12 +75,12 @@ Blockly.Dart.math_single = function(opt_dropParens) {
   // First, handle cases which generate values that don't need parentheses.
   switch (operator) {
     case Blockly.Language.math_single.MSG_ABS:
-			if (!argNaked.match(/^[\w\.]+$/)) {
-				// -4.abs() returns -4 in Dart due to strange order of operation choices.
-				// Need to wrap non-trivial numbers in parentheses: (-4).abs()
-				argNaked = '(' + argNaked + ')';
-			}
-			code = argNaked + '.abs()';
+      if (!argNaked.match(/^[\w\.]+$/)) {
+        // -4.abs() returns -4 in Dart due to strange order of operation choices.
+        // Need to wrap non-trivial numbers in parentheses: (-4).abs()
+        argNaked = '(' + argNaked + ')';
+      }
+      code = argNaked + '.abs()';
       break;
     case Blockly.Language.math_single.MSG_ROOT:
       code = 'Math.sqrt(' + argNaked + ')';

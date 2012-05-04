@@ -283,6 +283,7 @@ Blockly.Flyout.prototype.show = function(names) {
 
 /**
  * Create a copy of this block on the workspace.
+ * @param {!Blockly.Flyout} flyout Instance of the flyout.
  * @param {!Blockly.Block} originBlock The toolbox block to copy.
  * @return {!Function} Function to call when block is clicked.
  * @private
@@ -297,12 +298,9 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
     var xml = Blockly.Xml.blockToDom_(originBlock);
     var block = Blockly.Xml.domToBlock_(flyout.targetWorkspace_, xml);
     // Place it in the same spot as the toolbox copy.
-    var margin = this.CORNER_RADIUS;
-    var metrics = Blockly.getMainWorkspaceMetrics();
-    var xy = Blockly.getAbsoluteXY_(originBlock.svg_.svgGroup_);
-    var x = xy.x + metrics.viewLeft - metrics.absoluteLeft;
-    var y = xy.y + metrics.viewTop - metrics.absoluteTop;
-    block.moveBy(x, y);
+    var xyOld = Blockly.getAbsoluteXY_(originBlock.svg_.svgGroup_);
+    var xyNew = Blockly.getAbsoluteXY_(flyout.targetWorkspace_.getCanvas());
+    block.moveBy(xyOld.x - xyNew.x, xyOld.y - xyNew.y);
     block.render();
     // Start a dragging operation on the new block.
     block.onMouseDown_(e);

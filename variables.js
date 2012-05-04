@@ -99,7 +99,7 @@ Blockly.Variables.prototype.getDistinctVariable = function(name) {
  * variables.
  * Also check against list of reserved words for the current language and
  * ensure variable doesn't collide.
- * @param {string} Potentially illegal variable name.
+ * @param {string} name Potentially illegal variable name.
  * @return {string} Safe variable name.
  * @private
  */

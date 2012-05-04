@@ -149,7 +149,6 @@ Blockly.Comment.prototype.isPinned_ = false;
 
 /**
  * Create the icon on the block.
- * @param {!Blockly.Block} block The block associated with this comment.
  * @private
  */
 Blockly.Comment.prototype.createIcon_ = function() {
@@ -196,7 +195,8 @@ Blockly.Comment.prototype.createBubble_ = function(commentGroup) {
     </g>
     <foreignObject x="8" y="8" width="164" height="164">
       <body xmlns="http://www.w3.org/1999/xhtml" class="blocklyMinimalBody">
-        <textarea xmlns="http://www.w3.org/1999/xhtml" class="blocklyCommentTextarea"
+        <textarea xmlns="http://www.w3.org/1999/xhtml"
+            class="blocklyCommentTextarea"
             style="height: 164px; width: 164px;"></textarea>
       </body>
     </foreignObject>

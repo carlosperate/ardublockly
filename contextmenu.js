@@ -173,7 +173,8 @@ Blockly.ContextMenu.optionToDom = function(text) {
       <text class="blocklyMenuText" x="20" y="15">Make It So</text>
     </g>
   */
-  var gElement = Blockly.createSvgElement('g', {'class': 'blocklyMenuDiv'}, null);
+  var gElement = Blockly.createSvgElement('g', {'class': 'blocklyMenuDiv'},
+                                          null);
   var rectElement = Blockly.createSvgElement('rect',
       {height: Blockly.ContextMenu.Y_HEIGHT}, gElement);
   var textElement = Blockly.createSvgElement('text',

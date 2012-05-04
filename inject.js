@@ -47,7 +47,7 @@ Blockly.parseOptions_ = function(options) {
 
 /**
  * Create the SVG image.
- * @param {!Element} doc The document object.
+ * @param {!Element} container Containing element (probably an SVG tag).
  * @private
  */
 Blockly.createDom_ = function(container) {
@@ -115,17 +115,19 @@ Blockly.createDom_ = function(container) {
   */
   filter = Blockly.createSvgElement('filter', {id: 'blocklyEmboss'}, defs);
   Blockly.createSvgElement('feGaussianBlur',
-                {'in': 'SourceAlpha', stdDeviation: 1, result: 'blur'}, filter);
+      {'in': 'SourceAlpha', stdDeviation: 1, result: 'blur'}, filter);
   feSpecularLighting = Blockly.createSvgElement('feSpecularLighting',
-                {'in': 'blur', surfaceScale: 1, specularConstant: 0.5,
-                specularExponent: 10, 'lighting-color': 'white',
-                result: 'specOut'}, filter);
+      {'in': 'blur', surfaceScale: 1, specularConstant: 0.5,
+      specularExponent: 10, 'lighting-color': 'white', result: 'specOut'},
+      filter);
   Blockly.createSvgElement('fePointLight',
-                {x: -5000, y: -10000, z: 20000}, feSpecularLighting);
-  Blockly.createSvgElement('feComposite', {'in': 'specOut', in2: 'SourceAlpha',
-                operator: 'in', result: 'specOut'}, filter);
-  Blockly.createSvgElement('feComposite', {'in': 'SourceGraphic', in2: 'specOut',
-                operator: 'arithmetic', k1: 0, k2: 1, k3: 1, k4: 0}, filter);
+      {x: -5000, y: -10000, z: 20000}, feSpecularLighting);
+  Blockly.createSvgElement('feComposite',
+      {'in': 'specOut', in2: 'SourceAlpha', operator: 'in', result: 'specOut'},
+      filter);
+  Blockly.createSvgElement('feComposite',
+      {'in': 'SourceGraphic', in2: 'specOut', operator: 'arithmetic',
+      k1: 0, k2: 1, k3: 1, k4: 0}, filter);
   /*
     <filter id="blocklyTrashcanShadowFilter">
       <feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"/>
