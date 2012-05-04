@@ -204,10 +204,9 @@ Blockly.Mutator.init = function() {
   Blockly.Mutator.headerLength_ =
       Blockly.Mutator.svgHeader_.getComputedTextLength();
   Blockly.Mutator.workspace_.addTrashcan(Blockly.Mutator.getWorkspaceMetrics_);
-  Blockly.Mutator.workspace_.addScrollbar(new Blockly.ScrollbarPair(
-      Blockly.Mutator.workspace_.svgBlockCanvas_,
+  new Blockly.ScrollbarPair(Blockly.Mutator.workspace_.getCanvas(),
       Blockly.Mutator.getWorkspaceMetrics_,
-      Blockly.Mutator.getWorkspaceMetrics_));
+      Blockly.Mutator.getWorkspaceMetrics_);
   Blockly.Mutator.flyout_.init(Blockly.Mutator.workspace_,
                                Blockly.Mutator.getFlyoutMetrics_);
 };
@@ -255,7 +254,7 @@ Blockly.Mutator.position_ = function() {
   // Hide the header if the window is too small.
   Blockly.Mutator.svgHeader_.style.display = (cursorX > 0) ? 'block' : 'none';
 
-  // Record some ayout information for Blockly.Mutator.getWorkspaceMetrics_.
+  // Record some layout information for Blockly.Mutator.getWorkspaceMetrics_.
   Blockly.Mutator.workspaceWidth_ = width;
   Blockly.Mutator.workspaceHeight_ = height - bBoxChange.height - 10;
   Blockly.Mutator.workspaceTop_ = bBoxChange.height + 10;
@@ -312,7 +311,7 @@ Blockly.Mutator.getWorkspaceMetrics_ = function() {
       Blockly.Scrollbar.scrollbarThickness;
   var viewHeight = Blockly.Mutator.workspaceHeight_ -
       Blockly.Scrollbar.scrollbarThickness;
-  var blockBox = Blockly.Mutator.workspace_.svgBlockCanvas_.getBBox();
+  var blockBox = Blockly.Mutator.workspace_.getCanvas().getBBox();
   if (blockBox.width == -Infinity && blockBox.height == -Infinity) {
     // Opera has trouble with bounding boxes around empty objects.
     blockBox = {width: 0, height: 0, x: 0, y: 0};
@@ -359,7 +358,7 @@ Blockly.Mutator.setWorkspaceMetrics_ = function(xyRatio) {
   var translation = 'translate(' +
       (Blockly.Mutator.workspace_.scrollX + metrics.absoluteLeft) + ',' +
       (Blockly.Mutator.workspace_.scrollY + metrics.absoluteTop) + ')';
-  Blockly.Mutator.workspace_.svgBlockCanvas_.setAttribute('transform',
+  Blockly.Mutator.workspace_.getCanvas().setAttribute('transform',
                                                           translation);
 };
 

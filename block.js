@@ -51,7 +51,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.svg_ = new Blockly.BlockSvg(this);
 
   Blockly.bindEvent_(this.svg_.svgGroup_, 'mousedown', this, this.onMouseDown_);
-  workspace.svgBlockCanvas_.appendChild(this.svg_.svgGroup_);
+  workspace.getCanvas().appendChild(this.svg_.svgGroup_);
   workspace.addTopBlock(this);
 
   // Copy the type-specific functions and data from the prototype.
@@ -223,7 +223,7 @@ Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
     x += xy.x;
     y += xy.y;
     element = element.parentNode;
-  } while (element && element != this.workspace.svgBlockCanvas_);
+  } while (element && element != this.workspace.getCanvas());
   return {x: x, y: y};
 };
 
@@ -668,7 +668,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
     }
     // Move this block up the DOM.  Keep track of x/y translations.
     var xy = this.getRelativeToSurfaceXY();
-    this.workspace.svgBlockCanvas_.appendChild(this.svg_.svgGroup_);
+    this.workspace.getCanvas().appendChild(this.svg_.svgGroup_);
     this.svg_.svgGroup_.setAttribute('transform',
         'translate(' + xy.x + ', ' + xy.y + ')');
 

@@ -71,11 +71,11 @@ Blockly.Workspace.prototype.addTrashcan = function(getMetrics) {
 };
 
 /**
- * Add a scrollbar or a scrollbar pair.
- * @param {Blockly.Scrollbar|Blockly.ScrollbarPair} scrollbar The scrollbar(s).
+ * Get the SVG element that forms the drawing surface.
+ * @return {!Element} SVG element.
  */
-Blockly.Workspace.prototype.addScrollbar = function(scrollbar) {
-  this.scrollbar = scrollbar;
+Blockly.Workspace.prototype.getCanvas = function () {
+  return this.svgBlockCanvas_;
 };
 
 /**

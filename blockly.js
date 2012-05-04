@@ -450,7 +450,7 @@ Blockly.getMainWorkspaceMetrics = function() {
   }
   var viewWidth = hwView.width - Blockly.Scrollbar.scrollbarThickness;
   var viewHeight = hwView.height - Blockly.Scrollbar.scrollbarThickness;
-  var blockBox = Blockly.mainWorkspace.svgBlockCanvas_.getBBox();
+  var blockBox = Blockly.mainWorkspace.getCanvas().getBBox();
   if (blockBox.width == -Infinity && blockBox.height == -Infinity) {
     // Opera has trouble with bounding boxes around empty objects.
     blockBox = {width: 0, height: 0, x: 0, y: 0};
@@ -498,7 +498,7 @@ Blockly.setMainWorkspaceMetrics = function(xyRatio) {
   var translation = 'translate(' +
       (Blockly.mainWorkspace.scrollX + metrics.absoluteLeft) + ',' +
       (Blockly.mainWorkspace.scrollY + metrics.absoluteTop) + ')';
-  Blockly.mainWorkspace.svgBlockCanvas_.setAttribute('transform', translation);
+  Blockly.mainWorkspace.getCanvas().setAttribute('transform', translation);
   Blockly.commentCanvas.setAttribute('transform', translation);
 };
 

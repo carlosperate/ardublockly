@@ -204,9 +204,8 @@ Blockly.init_ = function() {
   }
 
   Blockly.mainWorkspace.addTrashcan(Blockly.getMainWorkspaceMetrics);
-  Blockly.mainWorkspace.addScrollbar(new Blockly.ScrollbarPair(
-      Blockly.mainWorkspace.svgBlockCanvas_,
-      Blockly.getMainWorkspaceMetrics, this.setMainWorkspaceMetrics));
+  new Blockly.ScrollbarPair(Blockly.mainWorkspace.getCanvas(),
+      Blockly.getMainWorkspaceMetrics, this.setMainWorkspaceMetrics);
 
   // Load the sounds.
   Blockly.loadAudio_('click');

@@ -66,25 +66,16 @@ Blockly.Flyout.prototype.createDom = function() {
  * .contentTop: Offset of the top-most content from the y=0 coordinate,
  * .absoluteTop: Top-edge of view.
  * .absoluteLeft: Left-edge of view.
- * @return {!Object} Contains size and position metrics of the flyout.
+ * @return {Object} Contains size and position metrics of the flyout.
  */
 Blockly.Flyout.prototype.getMetrics = function() {
   if (this.svgGroup_.style.display != 'block') {
     // Flyout is hidden.  Return a dummy metric that disables the scrollbar.
-    return {
-      viewHeight: 10,
-      viewWidth: 10,
-      contentHeight: 1,
-      viewTop: 0,
-      contentTop: 0,
-      absoluteTop: this.CORNER_RADIUS,
-      absoluteLeft: 0
-    };
+    return null;
   }
 
-  var viewHeight = Blockly.svgSize().height -
-                   2 * this.CORNER_RADIUS;
-  var viewWidth = this.svgGroup_.width;
+  var viewHeight = this.height_ - 2 * this.CORNER_RADIUS;
+  var viewWidth = this.width_;
   var optionBox = this.svgOptions_.getBBox();
   return {
     viewHeight: viewHeight,
@@ -123,7 +114,7 @@ Blockly.Flyout.prototype.init = function(workspace, workspaceMetrics) {
   this.targetWorkspace_ = workspace;
   this.targetWorkspaceMetrics_ = workspaceMetrics;
   // Add scrollbars.
-  this.svgGroup_.width = 0;
+  this.width_ = 0;
   var flyout = this;
   new Blockly.Scrollbar(this.svgOptions_,
       function() {return flyout.getMetrics()},
@@ -150,11 +141,11 @@ Blockly.Flyout.prototype.position_ = function() {
     // Hidden components will return null.
     return;
   }
-  var edgeWidth = this.svgGroup_.width - this.CORNER_RADIUS;
+  var edgeWidth = this.width_ - this.CORNER_RADIUS;
   if (Blockly.RTL) {
     edgeWidth *= -1;
   }
-  var path = ['M ' + (Blockly.RTL ? this.svgGroup_.width : 0) + ',0'];
+  var path = ['M ' + (Blockly.RTL ? this.width_ : 0) + ',0'];
   path.push('h', edgeWidth);
   path.push('a', this.CORNER_RADIUS, this.CORNER_RADIUS, 0, 0,
       Blockly.RTL ? 0 : 1,
@@ -170,10 +161,13 @@ Blockly.Flyout.prototype.position_ = function() {
   this.svgBackground_.setAttribute('d', path.join(' '));
   var x = metrics.absoluteLeft;
   if (Blockly.RTL) {
-    x -= this.svgGroup_.width;
+    x -= this.width_;
   }
   this.svgGroup_.setAttribute('transform',
       'translate(' + x + ',' + metrics.absoluteTop + ')');
+
+  // Record the height for Blockly.Flyout.getMetrics.
+  this.height_ = metrics.viewHeight;
 };
 
 /**
@@ -281,7 +275,8 @@ Blockly.Flyout.prototype.show = function(names) {
         Blockly.Flyout.createBlockFunc_(this, block));
     this.buttons_[i] = rect;
   }
-  this.svgGroup_.width = flyoutWidth;
+  // Record the width for .getMetrics and .position_.
+  this.width_ = flyoutWidth;
 
   // Fire a resize event to update the flyout's scrollbar.
   Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
