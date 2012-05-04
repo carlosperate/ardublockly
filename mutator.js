@@ -220,8 +220,8 @@ Blockly.Mutator.position_ = function() {
   Blockly.Mutator.svgShadow_.setAttribute('width', svgSize.width);
   Blockly.Mutator.svgShadow_.setAttribute('height', svgSize.height);
   var MARGIN = 40;
-  var width = svgSize.width - 2 * MARGIN;
-  var height = svgSize.height - 2 * MARGIN;
+  var width = Math.max(0, svgSize.width - 2 * MARGIN);
+  var height = Math.max(0, svgSize.height - 2 * MARGIN);
   Blockly.Mutator.svgDialog_.setAttribute('transform',
       'translate(' + MARGIN + ',' + MARGIN + ')');
   Blockly.Mutator.svgBackground_.setAttribute('width', width);

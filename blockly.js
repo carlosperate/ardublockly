@@ -271,7 +271,7 @@ Blockly.onMouseMove_ = function(e) {
 
     // Move the scrollbars and the page will scroll automatically.
     Blockly.mainWorkspace.scrollbar.set(-x - metrics.contentLeft,
-                                    -y - metrics.contentTop);
+                                        -y - metrics.contentTop);
   }
 };
 

@@ -70,10 +70,9 @@ Blockly.Flyout.prototype.createDom = function() {
  */
 Blockly.Flyout.prototype.getMetrics = function() {
   if (this.svgGroup_.style.display != 'block') {
-    // Flyout is hidden.  Return a dummy metric that disables the scrollbar.
+    // Flyout is hidden.
     return null;
   }
-
   var viewHeight = this.height_ - 2 * this.CORNER_RADIUS;
   var viewWidth = this.width_;
   var optionBox = this.svgOptions_.getBBox();
