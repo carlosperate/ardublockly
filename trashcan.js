@@ -96,7 +96,7 @@ Blockly.Trashcan.prototype.top_ = 0;
 Blockly.Trashcan.prototype.createDom = function() {
   /*
   <g filter="url(#blocklyTrashcanShadowFilter)">
-    <image width="47" height="45" href="media/trashbody.png"></image>
+    <image width="47" height="45" y="15" href="media/trashbody.png"></image>
     <image width="47" height="15" href="media/trashlid.png"></image>
   </g>
   */
@@ -107,6 +107,7 @@ Blockly.Trashcan.prototype.createDom = function() {
       this.svgGroup_);
   this.svgBody_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
       this.BODY_URL_);
+  this.svgBody_.setAttribute('y', this.LID_HEIGHT_);
   this.svgLid_ = Blockly.createSvgElement('image',
       {width: this.WIDTH_, height: this.LID_HEIGHT_},
       this.svgGroup_);
@@ -141,12 +142,10 @@ Blockly.Trashcan.prototype.position_ = function() {
     this.left_ = metrics.viewWidth + metrics.absoluteLeft -
         this.WIDTH_ - this.MARGIN_SIDE_;
   }
-  this.svgBody_.setAttribute('x', this.left_);
-  this.svgLid_.setAttribute('x', this.left_);
   this.top_ = metrics.viewHeight + metrics.absoluteTop -
       (this.BODY_HEIGHT_ + this.LID_HEIGHT_) - this.MARGIN_BOTTOM_;
-  this.svgBody_.setAttribute('y', this.top_ + this.LID_HEIGHT_);
-  this.svgLid_.setAttribute('y', this.top_);
+  this.svgGroup_.setAttribute('transform',
+      'translate(' + this.left_ + ',' + this.top_ + ')');
 };
 
 /**
@@ -156,18 +155,19 @@ Blockly.Trashcan.prototype.position_ = function() {
  */
 Blockly.Trashcan.prototype.onMouseMove = function(e) {
   /*
-    An alternative approach would be to use onMouseOver and onMouseOut events.
-    However the selected block will be between the mouse and the trash can,
-    thus these events won't fire.
-    Another approach is to use HTML5's drag & drop API, but it's widely hated.
-    Instead, we'll just have the block's drag_ function call us.
+  An alternative approach would be to use onMouseOver and onMouseOut events.
+  However the selected block will be between the mouse and the trash can,
+  thus these events won't fire.
+  Another approach is to use HTML5's drag & drop API, but it's widely hated.
+  Instead, we'll just have the block's drag_ function call us.
   */
   if (!this.svgGroup_) {
     return;
   }
-  var svgSize = Blockly.svgSize();
-  var left = this.left_ + svgSize.left;
-  var top = this.top_ + svgSize.top;
+  var hwView = Blockly.svgSize();
+  var xy = Blockly.getAbsoluteXY_(this.svgGroup_);
+  var left = xy.x + hwView.left;
+  var top = xy.y + hwView.top;
   var over = (e.clientX > left) &&
              (e.clientX < left + this.WIDTH_) &&
              (e.clientY > top) &&
@@ -201,10 +201,9 @@ Blockly.Trashcan.animateLid_ = function(trashcan) {
   trashcan.lidAngle_ += trashcan.isOpen ? 10 : -10;
   trashcan.lidAngle_ = Math.max(0, trashcan.lidAngle_);
   trashcan.svgLid_.setAttribute('transform', 'rotate(' +
-      (Blockly.RTL ? -trashcan.lidAngle_ : trashcan.lidAngle_) +
-      ', ' + (Blockly.RTL ? (trashcan.left_ + 4) :
-      (trashcan.left_ + trashcan.WIDTH_ - 4)) + ', ' +
-      (trashcan.top_ + trashcan.LID_HEIGHT_ - 2) + ')');
+      (Blockly.RTL ? -trashcan.lidAngle_ : trashcan.lidAngle_) + ', ' +
+      (Blockly.RTL ? 4 : trashcan.WIDTH_ - 4) + ', ' +
+      (trashcan.LID_HEIGHT_ - 2) + ')');
   if (trashcan.isOpen ? (trashcan.lidAngle_ < 45) : (trashcan.lidAngle_ > 0)) {
     var closure = function() {
       Blockly.Trashcan.animateLid_(trashcan);
