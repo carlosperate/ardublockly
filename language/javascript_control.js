@@ -31,7 +31,7 @@ Blockly.JavaScript.controls_if = function() {
   var n = 0;
   var argument = Blockly.JavaScript.valueToCode_(this, n, true) || 'false';
   var branch = Blockly.JavaScript.statementToCode_(this, n);
-  code = 'if (' + argument + ') {\n' + branch + '}';
+  var code = 'if (' + argument + ') {\n' + branch + '}';
   for (n = 1; n <= this.elseifCount_; n++) {
     argument = Blockly.JavaScript.valueToCode_(this, n, true) || 'false';
     branch = Blockly.JavaScript.statementToCode_(this, n);

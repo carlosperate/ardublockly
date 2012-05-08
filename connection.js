@@ -63,6 +63,9 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   if (this.sourceBlock_.workspace !== otherConnection.sourceBlock_.workspace) {
     throw 'Blocks are on different workspaces.';
   }
+  if (Blockly.OPPOSITE_TYPE[this.type] != otherConnection.type) {
+    throw 'Attempt to connect incompatible types.';
+  }
   if (this.type == Blockly.INPUT_VALUE || this.type == Blockly.OUTPUT_VALUE) {
     if (this.targetConnection) {
       // Can't make a value connection if male block is already connected.
@@ -210,14 +213,8 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
     // Don't move blocks around while the user is doing the same.
     return;
   }
-  // Find the root of the other block.
-  var block = this.sourceBlock_;
-  var rootBlock;
-  do {
-    rootBlock = block;
-    block = rootBlock.getParent();
-  } while (block);
   // Move the root block.
+  var rootBlock = this.sourceBlock_.getRootBlock();
   // Raise it to the top for extra visiblility.
   rootBlock.svg_.svgGroup_.parentNode.appendChild(rootBlock.svg_.svgGroup_);
   var dx = (staticConnection.x_ + Blockly.SNAP_RADIUS) - this.x_;

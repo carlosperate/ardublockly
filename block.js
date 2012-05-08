@@ -610,6 +610,7 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
  * @private
  */
 Blockly.Block.prototype.bumpNeighbours_ = function() {
+  var rootBlock = this.getRootBlock();
   // Loop though every connection on this block.
   var myConnections = this.getConnections_(false);
   for (var x = 0; x < myConnections.length; x++) {
@@ -627,7 +628,10 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
       // If both connections are connected, that's probably fine.  But if
       // either one of them is unconnected, then there could be confusion.
       if (!connection.targetConnection || !otherConnection.targetConnection) {
-        otherConnection.bumpAwayFrom_(connection);
+        // Only bump blocks if they are from different tree structures.
+        if (otherConnection.sourceBlock_.getRootBlock() != rootBlock) {
+          otherConnection.bumpAwayFrom_(connection);
+        }
       }
     }
   }
@@ -640,6 +644,21 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
 Blockly.Block.prototype.getParent = function() {
   // Look at the DOM to see if we are nested in another block.
   return this.parentBlock_;
+};
+
+/**
+ * Return the top-most block in this block's tree.
+ * This will return itself if this block is at the top level.
+ * @return {!Blockly.Block} The root block.
+ */
+Blockly.Block.prototype.getRootBlock = function() {
+  var rootBlock;
+  var block = this;
+  do {
+    rootBlock = block;
+    block = rootBlock.parentBlock_;
+  } while (block);
+  return rootBlock;
 };
 
 /**
