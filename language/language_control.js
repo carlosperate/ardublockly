@@ -74,6 +74,7 @@ Blockly.Language.controls_if = {
   },
   decompose: function(workspace) {
     var ifBlock = new Blockly.Block(workspace, 'controls_if_if');
+    ifBlock.deletable = false;
     var connection = ifBlock.inputList[0];
     var x = 0;
     for (; x < this.elseifCount_; x++) {

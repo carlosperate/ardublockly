@@ -292,7 +292,7 @@ Blockly.onKeyDown_ = function(e) {
   } else {
     if (e.keyCode == 8 || e.keyCode == 46) {
       // Delete or backspace.
-      if (Blockly.selected && Blockly.editable) {
+      if (Blockly.selected && Blockly.selected.deletable) {
         Blockly.playAudio('delete');
         Blockly.selected.destroy(true);
       }
