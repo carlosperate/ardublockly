@@ -29,19 +29,103 @@ if (!Blockly.Language) {
 }
 
 Blockly.Language.controls_if = {
-  // If condition.
+  // If/elseif/else condition.
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
     this.setColour('purple');
-    this.addTitle('if');
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('if', '', Blockly.INPUT_VALUE);
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(this));
+    this.setMutator(new Blockly.Mutator(this,
+        ['controls_if_elseif', 'controls_if_else']))
+    this.elseifCount_ = 0;
+    this.elseCount_ = 0;
   },
-  toolbox: ['controls_if_elseif', 'controls_if_else']
+  mutationToDom: function(workspace) {
+    var container = document.createElement('mutation');
+    if (this.elseifCount_) {
+      container.setAttribute('elseif', this.elseifCount_);
+    }
+    if (this.elseCount_) {
+      container.setAttribute('else', 1);
+    }
+    return container;
+  },
+  domToMutation: function(container) {
+    this.elseifCount_ = window.parseInt(container.getAttribute('elseif'), 10);
+    this.elseCount_ = window.parseInt(container.getAttribute('else'), 10);
+    for (var x = 0; x < this.elseifCount_; x++) {
+      this.addClause_('else if');
+    }
+    if (this.elseCount_) {
+      this.addClause_('else');
+    }
+  },
+  decompose: function(workspace) {
+    var ifBlock = new Blockly.Block(workspace, 'controls_if_if');
+    var connection = ifBlock.inputList[0];
+    var x = 0;
+    for (; x < this.elseifCount_; x++) {
+      var elseifBlock = new Blockly.Block(workspace, 'controls_if_elseif');
+      // Store a pointer to any connected blocks.
+      elseifBlock.valueInput_ = this.inputList[2 + (x * 2)].targetConnection;
+      elseifBlock.statementInput_ = this.inputList[3 + (x * 2)].targetConnection;
+      connection.connect(elseifBlock.previousConnection);
+      connection = elseifBlock.nextConnection;
+    }
+    if (this.elseCount_) {
+      var elseBlock = new Blockly.Block(workspace, 'controls_if_else');
+      elseBlock.valueInput_ = this.inputList[2 + (x * 2)].targetBlock();
+      elseBlock.statementInput_ = this.inputList[3 + (x * 2)].targetBlock();
+      connection.connect(elseBlock.previousConnection);
+    }
+    return ifBlock;
+  },
+  compose: function(ifBlock) {
+    // Disconnect all but the first two input blocks.
+    for (var x = 2; x < this.inputList.length; x++) {
+      var child = this.inputList[x].targetBlock();
+      if (child) {
+        child.setParent(null);
+      }
+    }
+    // Destroy all optional inputs.
+    while (this.inputList.length > 2) {
+      this.removeInput(2);
+    }
+    this.elseifCount_ = 0;
+    this.elseCount_ = 0;
+    // Rebuild the block's optional inputs.
+    clauseBlock = ifBlock.getStatementInput(0);
+    var x = 0;
+    while (clauseBlock) {
+      if (clauseBlock.type == 'controls_if_elseif') {
+        this.elseifCount_++;
+        this.addClause_('else if');
+      } else if (clauseBlock.type == 'controls_if_else') {
+        this.elseCount_++;
+        this.addClause_('else');
+      } else {
+        throw 'Unknown block type.';
+      }
+      // Reconnect any child blocks.
+      x += 2;
+      if (clauseBlock.valueInput_) {
+        this.inputList[x].connect(clauseBlock.valueInput_);
+      }
+      if (clauseBlock.statementInput_) {
+        this.inputList[x + 1].connect(clauseBlock.statementInput_);
+      }
+      clauseBlock = clauseBlock.nextConnection &&
+          clauseBlock.nextConnection.targetBlock();
+    }
+  },
+  addClause_: function(name) {
+      this.addInput(name, '', Blockly.INPUT_VALUE);
+      this.addInput('do', '', Blockly.NEXT_STATEMENT);
+  }
 };
 
 Blockly.Language.controls_if_if = {

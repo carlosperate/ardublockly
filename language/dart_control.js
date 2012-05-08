@@ -27,10 +27,21 @@
 Blockly.Dart = Blockly.Generator.get('Dart');
 
 Blockly.Dart.controls_if = function() {
-  // If condition.
-  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || 'false';
-  var branch0 = Blockly.Dart.statementToCode_(this, 0);
-  return 'if (' + argument0 + ') {\n' + branch0 + '}\n';
+  // If/elseif/else condition.
+  var n = 0;
+  var argument = Blockly.Dart.valueToCode_(this, n, true) || 'false';
+  var branch = Blockly.Dart.statementToCode_(this, n);
+  code = 'if (' + argument + ') {\n' + branch + '}';
+  for (n = 1; n <= this.elseifCount_; n++) {
+    argument = Blockly.Dart.valueToCode_(this, n, true) || 'false';
+    branch = Blockly.Dart.statementToCode_(this, n);
+    code += ' else if (' + argument + ') {\n' + branch + '}';
+  }
+  if (this.elseCount_) {
+    branch = Blockly.Dart.statementToCode_(this, n);
+    code += ' else {\n' + branch + '}';
+  }
+  return code + '\n';
 };
 
 Blockly.Dart.controls_whileUntil = function() {

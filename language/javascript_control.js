@@ -27,10 +27,21 @@
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.controls_if = function() {
-  // If condition.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'false';
-  var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
-  return 'if (' + argument0 + ') {\n' + branch0 + '}\n';
+  // If/elseif/else condition.
+  var n = 0;
+  var argument = Blockly.JavaScript.valueToCode_(this, n, true) || 'false';
+  var branch = Blockly.JavaScript.statementToCode_(this, n);
+  code = 'if (' + argument + ') {\n' + branch + '}';
+  for (n = 1; n <= this.elseifCount_; n++) {
+    argument = Blockly.JavaScript.valueToCode_(this, n, true) || 'false';
+    branch = Blockly.JavaScript.statementToCode_(this, n);
+    code += ' else if (' + argument + ') {\n' + branch + '}';
+  }
+  if (this.elseCount_) {
+    branch = Blockly.JavaScript.statementToCode_(this, n);
+    code += ' else {\n' + branch + '}';
+  }
+  return code + '\n';
 };
 
 Blockly.JavaScript.controls_whileUntil = function() {

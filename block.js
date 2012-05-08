@@ -1010,9 +1010,9 @@ Blockly.Block.prototype.removeInput = function(index) {
   if (input.targetConnection) {
     throw 'Must disconnect input value before removing connection.';
   }
-  var textElement = input.label;
-  if (textElement) {
-    textElement.parentNode.removeChild(textElement);
+  var field = input.label;
+  if (field) {
+    field.destroy();
   }
   if (input.destroy) {
     input.destroy();

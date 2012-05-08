@@ -27,8 +27,9 @@
  * @param {!Blockly.Block} block The block associated with this mutator.
  * @constructor
  */
-Blockly.Mutator = function(block) {
+Blockly.Mutator = function(block, toolbox) {
   this.block_ = block;
+  this.toolbox_ = toolbox;
   this.createIcon_(block);
 };
 
@@ -176,7 +177,7 @@ Blockly.Mutator.createDom = function() {
                                  Blockly.Mutator.closeDialog_);
   Blockly.Mutator.changeButton_ =
       new Blockly.Mutator.Button(Blockly.MSG_MUTATOR_CHANGE, true,
-                                 Blockly.Mutator.closeDialog_);
+                                 Blockly.Mutator.saveDialog_);
   Blockly.Mutator.svgDialog_.appendChild(
       Blockly.Mutator.cancelButton_.createDom());
   Blockly.Mutator.svgDialog_.appendChild(
@@ -377,7 +378,19 @@ Blockly.Mutator.openDialog_ = function(block) {
   // If the document resizes, reposition the dialog.
   Blockly.Mutator.resizeWrapper_ =
       Blockly.bindEvent_(window, 'resize', null, Blockly.Mutator.position_);
-  Blockly.Mutator.flyout_.show(block.toolbox);
+  Blockly.Mutator.flyout_.show(block.mutator.toolbox_);
+
+  Blockly.Mutator.sourceBlock_ = block;
+  Blockly.Mutator.rootBlock_ = block.decompose(Blockly.Mutator.workspace_);
+  var blocks = Blockly.Mutator.rootBlock_.getDescendants();
+  for (var i = 0, child; child = blocks[i]; i++) {
+    child.render();
+  }
+  var x = 150;
+  if (Blockly.RTL) {
+    x = Blockly.Mutator.workspaceWidth_ - x;
+  }
+  Blockly.Mutator.rootBlock_.moveBy(x, 50);
 };
 
 /**
@@ -389,6 +402,24 @@ Blockly.Mutator.closeDialog_ = function() {
   Blockly.addClass_(Blockly.Mutator.svgGroup_, 'blocklyHidden');
   Blockly.unbindEvent_(window, 'resize', Blockly.Mutator.resizeWrapper_);
   Blockly.Mutator.resizeWrapper_ = null;
+
+  // Empty the dialog.
+  Blockly.Mutator.flyout_.hide();
+  var blocks = Blockly.Mutator.workspace_.getTopBlocks();
+  for (var x = 0, block; block = blocks[x]; x++) {
+    block.destroy();
+  }
+  Blockly.Mutator.sourceBlock_ = null;
+  Blockly.Mutator.rootBlock_ = null;
+};
+
+/**
+ * Save the mutation and close the dialog.
+ * @private
+ */
+Blockly.Mutator.saveDialog_ = function() {
+  Blockly.Mutator.sourceBlock_.compose(Blockly.Mutator.rootBlock_);
+  Blockly.Mutator.closeDialog_();
 };
 
 // If Buttons get used for other things beyond the Mutator Dialog, then move

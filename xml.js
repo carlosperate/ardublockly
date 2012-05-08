@@ -51,6 +51,10 @@ Blockly.Xml.workspaceToDom = function(blockGroup) {
 Blockly.Xml.blockToDom_ = function(block) {
   var element = document.createElement('block');
   element.setAttribute('type', block.type);
+  if (block.mutationToDom) {
+    // Custom data for an advanced block.
+    element.appendChild(block.mutationToDom());
+  }
   for (var i = 0, title; title = block.titleRow[i]; i++) {
     var container = document.createElement('title');
     var titleText = document.createTextNode(title.getText());
@@ -209,6 +213,12 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
     var blockChild = null;
     var input;
     switch (xmlChild.tagName.toLowerCase()) {
+      case 'mutation':
+        // Custom data for an advanced block.
+        if (block.domToMutation) {
+          block.domToMutation(xmlChild);
+        }
+        break;
       case 'comment':
         block.setCommentText(xmlChild.textContent);
         var pinned = xmlChild.getAttribute('pinned');
