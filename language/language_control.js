@@ -149,6 +149,7 @@ Blockly.Language.controls_if_if = {
     this.setColour('purple');
     this.addTitle('if');
     this.addInput('', '', Blockly.NEXT_STATEMENT);
+    this.contextMenu = false;
   }
 };
 
@@ -159,6 +160,7 @@ Blockly.Language.controls_if_elseif = {
     this.addTitle('else if');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.contextMenu = false;
   }
 };
 
@@ -168,6 +170,7 @@ Blockly.Language.controls_if_else = {
     this.setColour('purple');
     this.addTitle('else');
     this.setPreviousStatement(true);
+    this.contextMenu = false;
   }
 };
 

@@ -41,6 +41,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.collapsed = false;
   this.editable = workspace.editable;
   this.tooltip = '';
+  this.contextMenu = true;
 
   this.parentBlock_ = null;
   this.childBlocks_ = [];
@@ -374,6 +375,9 @@ Blockly.Block.prototype.showHelp_ = function() {
  * @private
  */
 Blockly.Block.prototype.showContextMenu_ = function(x, y) {
+  if (!this.contextMenu) {
+    return;
+  }
   // Save the current block in a variable for use in closures.
   var block = this;
   var options = [];
