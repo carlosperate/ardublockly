@@ -39,7 +39,7 @@ Blockly.Language.controls_if = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(this,
-        ['controls_if_elseif', 'controls_if_else']))
+        ['controls_if_elseif', 'controls_if_else']));
     this.elseifCount_ = 0;
     this.elseCount_ = 0;
   },
@@ -107,7 +107,7 @@ Blockly.Language.controls_if = {
     this.elseifCount_ = 0;
     this.elseCount_ = 0;
     // Rebuild the block's optional inputs.
-    clauseBlock = ifBlock.getStatementInput(0);
+    var clauseBlock = ifBlock.getStatementInput(0);
     var x = 2;
     while (clauseBlock) {
       switch (clauseBlock.type) {
@@ -132,7 +132,7 @@ Blockly.Language.controls_if = {
           if (clauseBlock.statementInput_) {
             this.inputList[x].connect(clauseBlock.statementInput_);
           }
-          x++
+          x++;
           break;
         default:
           throw 'Unknown block type.';

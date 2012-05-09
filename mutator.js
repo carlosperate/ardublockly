@@ -148,7 +148,7 @@ Blockly.Mutator.createDom = function() {
   /*
   <g class="blocklyHidden">
     <rect class="blocklyScreenShadow" />
-    <g>
+    <svg>
       <rect class="blocklyMutatorBackground" />
       <text class="blocklyHeader" y="30">Block Editor</text>
       [Help button]
@@ -164,9 +164,10 @@ Blockly.Mutator.createDom = function() {
   Blockly.Mutator.svgGroup_ = svgGroup;
   Blockly.Mutator.svgShadow_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyScreenShadow'}, svgGroup);
-  Blockly.Mutator.svgDialog_ = Blockly.createSvgElement('g', {}, svgGroup);
+  Blockly.Mutator.svgDialog_ = Blockly.createSvgElement('svg', {}, svgGroup);
   Blockly.Mutator.svgBackground_ = Blockly.createSvgElement('rect',
-      {'class': 'blocklyMutatorBackground'}, Blockly.Mutator.svgDialog_);
+      {'class': 'blocklyMutatorBackground',
+       height: '100%', width: '100%'}, Blockly.Mutator.svgDialog_);
   Blockly.Mutator.svgHeader_ = Blockly.createSvgElement('text',
       {'class': 'blocklyHeader', y: 30}, Blockly.Mutator.svgDialog_);
   var textNode = Blockly.svgDoc.createTextNode(Blockly.MSG_MUTATOR_HEADER);
@@ -235,13 +236,16 @@ Blockly.Mutator.position_ = function() {
   var svgSize = Blockly.svgSize();
   Blockly.Mutator.svgShadow_.setAttribute('width', svgSize.width);
   Blockly.Mutator.svgShadow_.setAttribute('height', svgSize.height);
+
   var MARGIN = 40;
   var width = Math.max(0, svgSize.width - 2 * MARGIN);
   var height = Math.max(0, svgSize.height - 2 * MARGIN);
-  Blockly.Mutator.svgDialog_.setAttribute('transform',
-      'translate(' + MARGIN + ',' + MARGIN + ')');
-  Blockly.Mutator.svgBackground_.setAttribute('width', width);
-  Blockly.Mutator.svgBackground_.setAttribute('height', height);
+  Blockly.Mutator.svgDialog_.setAttribute('x', MARGIN);
+  Blockly.Mutator.svgDialog_.setAttribute('y', MARGIN);
+  Blockly.Mutator.svgDialog_.setAttribute('width', width);
+  Blockly.Mutator.svgDialog_.setAttribute('height', height);
+  Blockly.Mutator.svgDialog_.setAttribute('viewBox',
+      '0 0 ' + width + ' ' + height);
 
   var headerX = Blockly.ContextMenu.X_PADDING;
   if (Blockly.RTL) {
