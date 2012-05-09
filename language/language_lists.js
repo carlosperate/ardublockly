@@ -36,6 +36,7 @@ Blockly.Language.lists_length = {
     this.setColour('blue');
     this.addInput('length', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
+    this.setTooltip('Returns the length of a list.');
   }
 };
 
@@ -47,6 +48,7 @@ Blockly.Language.lists_isEmpty = {
     this.setColour('blue');
     this.addInput('is empty', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
+    this.setTooltip('Returns true if the list is empty.');
   }
 };
 
@@ -60,6 +62,7 @@ Blockly.Language.lists_contains = {
     this.addInput('is item', '', Blockly.INPUT_VALUE);
     this.addInput('in list', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
+    this.setTooltip('Returns true if a specified item is in a list.');
   }
 };
 
@@ -70,8 +73,9 @@ Blockly.Language.lists_getIndex = {
   init: function() {
     this.setColour('blue');
     this.setOutput(true);
-    this.addInput('item at', '', Blockly.INPUT_VALUE);
+    this.addInput('item at', 'ITEM AT', Blockly.INPUT_VALUE);
     this.addInput('in list', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
+    this.setTooltip('Returns the position of the specified item in a list.\nReturns 0 if the item is not present.');
   }
 };
