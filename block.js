@@ -40,7 +40,6 @@ Blockly.Block = function(workspace, prototypeName) {
   this.comment = null;
   this.collapsed = false;
   this.editable = workspace.editable;
-  this.deletable = this.editable;
   this.tooltip = '';
 
   this.parentBlock_ = null;
@@ -432,26 +431,24 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
       options.push(collapseOption);
     }
 
-    if (this.deletable) {
-      // Option to delete this block.
-      // Count the number of blocks that are nested in this block.
-      var descendantCount = this.getDescendants().length;
-      if (block.nextConnection && block.nextConnection.targetConnection) {
-        // Blocks in the current stack would survive this block's deletion.
-        descendantCount -= this.nextConnection.targetBlock().
-            getDescendants().length;
-      }
-      var deleteOption = {
-        text: descendantCount == 1 ? Blockly.MSG_DELETE_BLOCK :
-            Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
-        enabled: true,
-        callback: function() {
-          Blockly.playAudio('delete');
-          block.destroy(true);
-        }
-      };
-      options.push(deleteOption);
+    // Option to delete this block.
+    // Count the number of blocks that are nested in this block.
+    var descendantCount = this.getDescendants().length;
+    if (block.nextConnection && block.nextConnection.targetConnection) {
+      // Blocks in the current stack would survive this block's deletion.
+      descendantCount -= this.nextConnection.targetBlock().
+          getDescendants().length;
     }
+    var deleteOption = {
+      text: descendantCount == 1 ? Blockly.MSG_DELETE_BLOCK :
+          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
+      enabled: true,
+      callback: function() {
+        Blockly.playAudio('delete');
+        block.destroy(true);
+      }
+    };
+    options.push(deleteOption);
   }
 
   // Option to get help.
@@ -603,9 +600,7 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
       Blockly.localConnection_ = localConnection;
     }
     // Flip the trash can lid if needed.
-    if (this.deletable && this.workspace.trashcan) {
-      this.workspace.trashcan.onMouseMove(e);
-    }
+    this.workspace.trashcan && this.workspace.trashcan.onMouseMove(e);
   }
 };
 

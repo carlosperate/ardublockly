@@ -74,7 +74,7 @@ Blockly.Language.controls_if = {
   },
   decompose: function(workspace) {
     var ifBlock = new Blockly.Block(workspace, 'controls_if_if');
-    ifBlock.deletable = false;
+    ifBlock.editable = false;
     var connection = ifBlock.inputList[0];
     var x = 0;
     for (; x < this.elseifCount_; x++) {
@@ -145,7 +145,6 @@ Blockly.Language.controls_if = {
 
 Blockly.Language.controls_if_if = {
   // If condition.
-  helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
     this.setColour('purple');
     this.addTitle('if');
@@ -155,7 +154,6 @@ Blockly.Language.controls_if_if = {
 
 Blockly.Language.controls_if_elseif = {
   // Else-If condition.
-  helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
     this.setColour('purple');
     this.addTitle('else if');
@@ -166,7 +164,6 @@ Blockly.Language.controls_if_elseif = {
 
 Blockly.Language.controls_if_else = {
   // Else condition.
-  helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
     this.setColour('purple');
     this.addTitle('else');

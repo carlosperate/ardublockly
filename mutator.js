@@ -151,10 +151,11 @@ Blockly.Mutator.createDom = function() {
     <g>
       <rect class="blocklyMutatorBackground" />
       <text class="blocklyHeader" y="30">Block Editor</text>
+      [Help button]
       [Cancel button]
       [Change button]
-      [Workspace]
       [Flyout]
+      [Workspace]
     </g>
   </g>
   */
@@ -172,12 +173,17 @@ Blockly.Mutator.createDom = function() {
   Blockly.Mutator.svgHeader_.appendChild(textNode);
 
   // Buttons
+  Blockly.Mutator.helpButton_ =
+      new Blockly.Mutator.Button(Blockly.MSG_HELP, false,
+                                 Blockly.Mutator.showHelp_);
   Blockly.Mutator.cancelButton_ =
       new Blockly.Mutator.Button(Blockly.MSG_MUTATOR_CANCEL, false,
                                  Blockly.Mutator.closeDialog_);
   Blockly.Mutator.changeButton_ =
       new Blockly.Mutator.Button(Blockly.MSG_MUTATOR_CHANGE, true,
                                  Blockly.Mutator.saveDialog_);
+  Blockly.Mutator.svgDialog_.appendChild(
+      Blockly.Mutator.helpButton_.createDom());
   Blockly.Mutator.svgDialog_.appendChild(
       Blockly.Mutator.cancelButton_.createDom());
   Blockly.Mutator.svgDialog_.appendChild(
@@ -189,8 +195,9 @@ Blockly.Mutator.createDom = function() {
   Blockly.Mutator.flyout_ = new Blockly.Flyout();
 
   Blockly.Mutator.svgDialog_.appendChild(
+      Blockly.Mutator.flyout_.createDom());
+  Blockly.Mutator.svgDialog_.appendChild(
       Blockly.Mutator.workspace_.createDom());
-  Blockly.Mutator.svgDialog_.appendChild(Blockly.Mutator.flyout_.createDom());
 
   return svgGroup;
 };
@@ -199,16 +206,23 @@ Blockly.Mutator.createDom = function() {
  * Layout the buttons.  Only needs to be called once.
  */
 Blockly.Mutator.init = function() {
+  Blockly.Mutator.helpButton_.init();
   Blockly.Mutator.cancelButton_.init();
   Blockly.Mutator.changeButton_.init();
-  // Save the size of the header so that calculations on its size may be
-  // performed regardless of whether it is hidden or not.
+  // Save the size of the header and buttons so that calculations on their size
+  // may be performed regardless of whether they are hidden or not.
   Blockly.Mutator.headerLength_ =
       Blockly.Mutator.svgHeader_.getComputedTextLength();
+  Blockly.Mutator.helpLength_ = Blockly.Mutator.helpButton_.getBBox().width;
+  Blockly.Mutator.cancelLength_ = Blockly.Mutator.cancelButton_.getBBox().width;
+  var bBoxChange = Blockly.Mutator.changeButton_.getBBox();
+  Blockly.Mutator.changeLength_ = bBoxChange.width;
+
+  // Record some layout information for Blockly.Mutator.getWorkspaceMetrics_.
+  Blockly.Mutator.workspaceLeft_ = 0;
+  Blockly.Mutator.workspaceTop_ = bBoxChange.height + 10;
+
   Blockly.Mutator.workspace_.addTrashcan(Blockly.Mutator.getWorkspaceMetrics_);
-  new Blockly.ScrollbarPair(Blockly.Mutator.workspace_.getCanvas(),
-      Blockly.Mutator.getWorkspaceMetrics_,
-      Blockly.Mutator.getWorkspaceMetrics_);
   Blockly.Mutator.flyout_.init(Blockly.Mutator.workspace_,
                                Blockly.Mutator.getFlyoutMetrics_);
 };
@@ -235,21 +249,26 @@ Blockly.Mutator.position_ = function() {
   }
   Blockly.Mutator.svgHeader_.setAttribute('x', headerX);
 
-  var bBoxChange = Blockly.Mutator.changeButton_.getBBox();
-  var bBoxCancel = Blockly.Mutator.cancelButton_.getBBox();
   var cursorX;
+  var cursorY = 5;
   if (Blockly.RTL) {
     cursorX = Blockly.ContextMenu.X_PADDING;
-    Blockly.Mutator.changeButton_.setLocation(cursorX, 5);
-    cursorX += bBoxChange.width + Blockly.ContextMenu.X_PADDING;
-    Blockly.Mutator.cancelButton_.setLocation(cursorX, 5);
-    cursorX += bBoxCancel.width;
+    Blockly.Mutator.changeButton_.setLocation(cursorX, cursorY);
+    cursorX += Blockly.Mutator.changeLength_ + Blockly.ContextMenu.X_PADDING;
+    Blockly.Mutator.cancelButton_.setLocation(cursorX, cursorY);
+    cursorX += Blockly.Mutator.cancelLength_ + Blockly.ContextMenu.X_PADDING;
+    Blockly.Mutator.helpButton_.setLocation(cursorX, cursorY);
+    cursorX += Blockly.Mutator.helpLength_;
     cursorX = headerX - cursorX;
   } else {
-    var cursorX = width - Blockly.ContextMenu.X_PADDING - bBoxChange.width;
-    Blockly.Mutator.changeButton_.setLocation(cursorX, 5);
-    cursorX -= Blockly.ContextMenu.X_PADDING + bBoxCancel.width;
-    Blockly.Mutator.cancelButton_.setLocation(cursorX, 5);
+    var cursorX = width - Blockly.ContextMenu.X_PADDING -
+        Blockly.Mutator.changeLength_;
+    Blockly.Mutator.changeButton_.setLocation(cursorX, cursorY);
+    cursorX -= Blockly.ContextMenu.X_PADDING + Blockly.Mutator.cancelLength_;
+    Blockly.Mutator.cancelButton_.setLocation(cursorX, cursorY);
+    cursorX -= Blockly.ContextMenu.X_PADDING + Blockly.Mutator.helpLength_;
+    Blockly.Mutator.helpButton_.setLocation(cursorX, cursorY);
+    Blockly.Mutator.helpButton_.setVisible(cursorX > 0);
     cursorX -= headerX + Blockly.Mutator.headerLength_;
   }
 
@@ -258,9 +277,7 @@ Blockly.Mutator.position_ = function() {
 
   // Record some layout information for Blockly.Mutator.getWorkspaceMetrics_.
   Blockly.Mutator.workspaceWidth_ = width;
-  Blockly.Mutator.workspaceHeight_ = height - bBoxChange.height - 10;
-  Blockly.Mutator.workspaceTop_ = bBoxChange.height + 10;
-  Blockly.Mutator.workspaceLeft_ = 0;
+  Blockly.Mutator.workspaceHeight_ = height - Blockly.Mutator.workspaceTop_;
 };
 
 /**
@@ -289,16 +306,10 @@ Blockly.Mutator.getFlyoutMetrics_ = function() {
 };
 
 /**
- * Return an object with all the metrics required to size scrollbars for the
- * mutator dialog's workspace.  The following properties are computed:
+ * Return an object with the metrics required to position the trash can.
+ * The following properties are computed:
  * .viewHeight: Height of the visible rectangle,
  * .viewWidth: Width of the visible rectangle,
- * .contentHeight: Height of the contents,
- * .contentWidth: Width of the content,
- * .viewTop: Offset of top edge of visible rectangle from parent,
- * .viewLeft: Offset of left edge of visible rectangle from parent,
- * .contentTop: Offset of the top-most content from the y=0 coordinate,
- * .contentLeft: Offset of the left-most content from the x=0 coordinate.
  * .absoluteTop: Top-edge of view.
  * .absoluteLeft: Left-edge of view.
  * @return {Object} Contains size and position metrics of mutator dialog's
@@ -309,59 +320,21 @@ Blockly.Mutator.getWorkspaceMetrics_ = function() {
   if (!Blockly.Mutator.isOpen) {
     return null;
   }
-  var viewWidth = Blockly.Mutator.workspaceWidth_ -
-      Blockly.Scrollbar.scrollbarThickness;
-  var viewHeight = Blockly.Mutator.workspaceHeight_ -
-      Blockly.Scrollbar.scrollbarThickness;
-  var blockBox = Blockly.Mutator.workspace_.getCanvas().getBBox();
-  if (blockBox.width == -Infinity && blockBox.height == -Infinity) {
-    // Opera has trouble with bounding boxes around empty objects.
-    blockBox = {width: 0, height: 0, x: 0, y: 0};
-  }
-  // Add a border around the content that is at least half a screenful wide.
-  var leftEdge = Math.min(blockBox.x - viewWidth / 2,
-                          blockBox.x + blockBox.width - viewWidth);
-  var rightEdge = Math.max(blockBox.x + blockBox.width + viewWidth / 2,
-                           blockBox.x + viewWidth);
-  var topEdge = Math.min(blockBox.y - viewHeight / 2,
-                         blockBox.y + blockBox.height - viewHeight);
-  var bottomEdge = Math.max(blockBox.y + blockBox.height + viewHeight / 2,
-                            blockBox.y + viewHeight);
   return {
     viewHeight: Blockly.Mutator.workspaceHeight_,
     viewWidth: Blockly.Mutator.workspaceWidth_,
-    contentHeight: bottomEdge - topEdge,
-    contentWidth: rightEdge - leftEdge,
-    viewTop: -Blockly.mainWorkspace.scrollY,
-    viewLeft: -Blockly.mainWorkspace.scrollX,
-    contentTop: topEdge,
-    contentLeft: leftEdge,
     absoluteTop: Blockly.Mutator.workspaceTop_,
     absoluteLeft: Blockly.Mutator.workspaceLeft_
   };
 };
 
 /**
- * Sets the X/Y translations of the dialog's workspace to match the scrollbars.
- * @param {!Object} xyRatio Contains an x and/or y property which is a float
- *     between 0 and 1 specifying the degree of scrolling.
+ * Open the dialog.
+ * @param {!Blockly.Block} block Block to mutate.
  * @private
  */
-Blockly.Mutator.setWorkspaceMetrics_ = function(xyRatio) {
-  var metrics = Blockly.Mutator.getWorkspaceMetrics_();
-  if (typeof xyRatio.x == 'number') {
-    Blockly.Mutator.workspace_.scrollX =
-        -metrics.contentWidth * xyRatio.x - metrics.contentLeft;
-  }
-  if (typeof xyRatio.y == 'number') {
-    Blockly.Mutator.workspace_.scrollY =
-        -metrics.contentHeight * xyRatio.y - metrics.contentTop;
-  }
-  var translation = 'translate(' +
-      (Blockly.Mutator.workspace_.scrollX + metrics.absoluteLeft) + ',' +
-      (Blockly.Mutator.workspace_.scrollY + metrics.absoluteTop) + ')';
-  Blockly.Mutator.workspace_.getCanvas().setAttribute('transform',
-                                                          translation);
+Blockly.Mutator.showHelp_ = function() {
+  Blockly.Mutator.sourceBlock_.showHelp_();
 };
 
 /**
@@ -371,16 +344,17 @@ Blockly.Mutator.setWorkspaceMetrics_ = function(xyRatio) {
  */
 Blockly.Mutator.openDialog_ = function(block) {
   Blockly.Mutator.isOpen = true;
+  Blockly.Mutator.sourceBlock_ = block;
+  Blockly.Mutator.helpButton_.setVisible(!!block.helpUrl);
   Blockly.removeClass_(Blockly.Mutator.svgGroup_, 'blocklyHidden');
   Blockly.Mutator.position_();
-  // Fire an event to allow scrollbars to resize and the trashcan to position.
+  // Fire an event to allow the trashcan to position.
   Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
   // If the document resizes, reposition the dialog.
   Blockly.Mutator.resizeWrapper_ =
       Blockly.bindEvent_(window, 'resize', null, Blockly.Mutator.position_);
   Blockly.Mutator.flyout_.show(block.mutator.toolbox_);
 
-  Blockly.Mutator.sourceBlock_ = block;
   Blockly.Mutator.rootBlock_ = block.decompose(Blockly.Mutator.workspace_);
   var blocks = Blockly.Mutator.rootBlock_.getDescendants();
   for (var i = 0, child; child = blocks[i]; i++) {
@@ -516,4 +490,12 @@ Blockly.Mutator.Button.prototype.getBBox = function() {
  */
 Blockly.Mutator.Button.prototype.setLocation = function(x, y) {
   this.svgGroup_.setAttribute('transform', 'translate(' + x + ',' + y + ')');
+};
+
+/**
+ * Show or hide this button.
+ * @param {boolean} visible True if visible.
+ */
+Blockly.Mutator.Button.prototype.setVisible = function(visible) {
+  this.svgGroup_.setAttribute('display', visible ? 'block' : 'none');
 };
