@@ -32,19 +32,24 @@ Blockly.JavaScript.math_number = function() {
 };
 
 Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
-  // Basic arithmetic operator.
-  var map = {};
-  map[Blockly.Language.math_arithmetic.MSG_ADD] = '+';
-  map[Blockly.Language.math_arithmetic.MSG_MINUS] = '-';
-  map[Blockly.Language.math_arithmetic.MSG_MULTIPLY] = '*';
-  map[Blockly.Language.math_arithmetic.MSG_DIVIDE] = '/';
-  var operator = map[this.getValueLabel(1)];
-
+  // Basic arithmetic operators, and power.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
-  var code = argument0 + ' ' + operator + ' ' + argument1;
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
+  var code;
+  
+  if (this.getValueLabel(1) == Blockly.Language.math_arithmetic.MSG_POW) {
+  	code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
+  } else {
+	  var map = {};
+	  map[Blockly.Language.math_arithmetic.MSG_ADD] = '+';
+	  map[Blockly.Language.math_arithmetic.MSG_MINUS] = '-';
+	  map[Blockly.Language.math_arithmetic.MSG_MULTIPLY] = '*';
+	  map[Blockly.Language.math_arithmetic.MSG_DIVIDE] = '/';
+	  var operator = map[this.getValueLabel(1)];
+	  code = argument0 + ' ' + operator + ' ' + argument1;
+    if (!opt_dropParens) {
+      code = '(' + code + ')';
+    }
   }
   return code;
 };
@@ -56,23 +61,13 @@ Blockly.JavaScript.math_change = function() {
   return varName + ' += ' + argument0 + ';\n';
 };
 
-Blockly.JavaScript.math_negate = function(opt_dropParens) {
-  // Negation operator.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
-  var code = '- ' + argument0;
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
-  }
-  return code;
-};
-
 Blockly.JavaScript.math_single = function(opt_dropParens) {
   // Advanced math operators with single operand.
   var argNaked = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
   var argParen = Blockly.JavaScript.valueToCode_(this, 0, false) || '0';
   var operator = this.getValueLabel(0);
   var code;
-  // First, handle cases which generate values that don't need parentheses.
+  // First, handle cases which generate values that don't need parentheses wrapping the code.
   switch (operator) {
     case Blockly.Language.math_single.MSG_ABS:
       code = 'Math.abs(' + argNaked + ')';
@@ -89,12 +84,24 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
     case Blockly.Language.math_single.MSG_TAN:
       code = 'Math.tan(' + argParen + ' / 180 * Math.PI)';
       break;
+    case Blockly.Language.math_single.MSG_LN:
+      code = 'Math.log(' + argNaked + ')';
+      break;
+    case Blockly.Language.math_single.MSG_EXP:
+      code = 'Math.exp(' + argNaked + ')';
+      break;
+    case Blockly.Language.math_single.MSG_10POW:
+      code = 'Math.pow(10,' + argNaked + ')';
+      break;
   }
   if (code) {
     return code;
   }
-  // Second, handle cases which generate values that may need parentheses.
+  // Second, handle cases which generate values that may need parentheses wrapping the code.
   switch (operator) {
+    case Blockly.Language.math_single.MSG_NEG:
+      code = '-' + argParen;
+      break;
     case Blockly.Language.math_single.MSG_ASIN:
       code = 'Math.asin(' + argNaked + ') / Math.PI * 180';
       break;
@@ -103,6 +110,9 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
       break;
     case Blockly.Language.math_single.MSG_ATAN:
       code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
+      break;
+    case Blockly.Language.math_single.MSG_LOG10:
+      code = 'Math.log(' + argNaked + ') / Math.log(10)';
       break;
     default:
       throw 'Unknown math operator.';

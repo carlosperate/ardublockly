@@ -57,7 +57,8 @@ Blockly.Language.math_arithmetic = {
           Blockly.Language.math_arithmetic.MSG_ADD,
           Blockly.Language.math_arithmetic.MSG_MINUS,
           Blockly.Language.math_arithmetic.MSG_MULTIPLY,
-          Blockly.Language.math_arithmetic.MSG_DIVIDE
+          Blockly.Language.math_arithmetic.MSG_DIVIDE,
+          Blockly.Language.math_arithmetic.MSG_POW
         ];
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
@@ -69,6 +70,7 @@ Blockly.Language.math_arithmetic.MSG_ADD = '+';
 Blockly.Language.math_arithmetic.MSG_MINUS = '-';
 Blockly.Language.math_arithmetic.MSG_MULTIPLY = '\u00D7';
 Blockly.Language.math_arithmetic.MSG_DIVIDE = '\u00F7';
+Blockly.Language.math_arithmetic.MSG_POW = '^';
 
 Blockly.Language.math_change = {
   // Add to a variable in place.
@@ -93,16 +95,6 @@ Blockly.Language.math_change = {
   }
 };
 
-Blockly.Language.math_negate = {
-  // Negation operator.
-  category: 'Math',
-  helpUrl: 'http://en.wikipedia.org/wiki/Negation',
-  init: function() {
-    this.setColour('baby');
-    this.setOutput(true);
-    this.addInput('-', '', Blockly.INPUT_VALUE);
-  }
-};
 
 Blockly.Language.math_single = {
   // Advanced math operators with single operand.
@@ -113,19 +105,24 @@ Blockly.Language.math_single = {
     this.setOutput(true);
     var dropdown = new Blockly.FieldDropdown(Blockly.Language.math_single.MSG_ROOT, function() {
       return [Blockly.Language.math_single.MSG_ABS,
+              Blockly.Language.math_single.MSG_NEG,
               Blockly.Language.math_single.MSG_ROOT,
               Blockly.Language.math_single.MSG_SIN,
               Blockly.Language.math_single.MSG_COS,
               Blockly.Language.math_single.MSG_TAN,
               Blockly.Language.math_single.MSG_ASIN,
               Blockly.Language.math_single.MSG_ACOS,
-              Blockly.Language.math_single.MSG_ATAN];
+              Blockly.Language.math_single.MSG_ATAN,
+              Blockly.Language.math_single.MSG_LN,
+		      Blockly.Language.math_single.MSG_LOG10,
+		      Blockly.Language.math_single.MSG_EXP,
+		      Blockly.Language.math_single.MSG_10POW];
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
   }
 };
-
 Blockly.Language.math_single.MSG_ABS = 'absolute';
+Blockly.Language.math_single.MSG_NEG = '-';
 Blockly.Language.math_single.MSG_ROOT = '\u221A';
 Blockly.Language.math_single.MSG_SIN = 'sin';
 Blockly.Language.math_single.MSG_COS = 'cos';
@@ -133,6 +130,10 @@ Blockly.Language.math_single.MSG_TAN = 'tan';
 Blockly.Language.math_single.MSG_ASIN = 'asin';
 Blockly.Language.math_single.MSG_ACOS = 'acos';
 Blockly.Language.math_single.MSG_ATAN = 'atan';
+Blockly.Language.math_single.MSG_LN = 'ln';
+Blockly.Language.math_single.MSG_LOG10 = 'log10';
+Blockly.Language.math_single.MSG_EXP = 'e^';
+Blockly.Language.math_single.MSG_10POW = '10^';
 
 Blockly.Language.math_modulo = {
   // Remainder of a division.
