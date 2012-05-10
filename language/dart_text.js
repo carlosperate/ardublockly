@@ -43,13 +43,12 @@ Blockly.Dart.text_isEmpty = function() {
   return argument0 + '.isEmpty()';
 };
 
-Blockly.Dart.text_contains = function(opt_dropParens) {
-  // Does the text contain a substring?
-  // Using String.contains would be cleaner, but using .indexOf allows this
-  // block to be used on lists as well as strings.
+Blockly.Dart.text_indexOf = function(opt_dropParens) {
+  // Search the text for a substring.
+  var operator = this.getTitleText(1) == this.MSG_FIRST ? 'indexOf' : 'lastIndexOf';
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\'';
-  var code = argument1 + '.indexOf(' + argument0 + ') != -1';
+  var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }

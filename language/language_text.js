@@ -66,18 +66,27 @@ Blockly.Language.text_isEmpty = {
   }
 };
 
-Blockly.Language.text_contains = {
-  // Does the text contain a substring?
+Blockly.Language.text_indexOf = {
+  // Find a substring in the text.
   category: 'Text',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
     this.setColour('brown');
     this.setOutput(true);
-    this.addInput('is text', '', Blockly.INPUT_VALUE);
+    this.addTitle('find');
+    var menu = new Blockly.FieldDropdown(thisBlock.MSG_FIRST, function() {
+      return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
+    });
+    this.addTitle(menu);
+    this.addInput('occurrence of text', '', Blockly.INPUT_VALUE);
     this.addInput('in text', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
-    this.setTooltip('Returns true if the first text is contained in the second text.');
-  }
+    this.setTooltip('Returns the index of the first/last occurrence\nof first text in the second text.\nReturns 0 if text is not found.');
+  },
+  MSG_FIRST: 'first',
+  MSG_LAST: 'last'
 };
 
 Blockly.Language.text_charAt = {

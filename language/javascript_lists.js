@@ -50,9 +50,9 @@ Blockly.JavaScript.lists_isEmpty = function(opt_dropParens) {
   return Blockly.JavaScript.text_isEmpty.call(this, opt_dropParens);
 };
 
-Blockly.JavaScript.lists_contains = function(opt_dropParens) {
-  // Testing a list for a value is the same as search for a substring.
-  return Blockly.JavaScript.text_contains.call(this, opt_dropParens);
+Blockly.JavaScript.list_indexOf = function(opt_dropParens) {
+  // Searching a list for a value is the same as search for a substring.
+  return Blockly.JavaScript.text_indexOf.call(this, opt_dropParens);
 };
 
 Blockly.JavaScript.lists_getIndex = function(opt_dropParens) {

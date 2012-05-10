@@ -157,18 +157,27 @@ Blockly.Language.lists_isEmpty = {
   }
 };
 
-Blockly.Language.lists_contains = {
-  // Does the list contain a value?
+Blockly.Language.list_indexOf = {
+  // Find an item in the list.
   category: 'Lists',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
     this.setColour('blue');
     this.setOutput(true);
-    this.addInput('is item', '', Blockly.INPUT_VALUE);
+    this.addTitle('find');
+    var menu = new Blockly.FieldDropdown(thisBlock.MSG_FIRST, function() {
+      return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
+    });
+    this.addTitle(menu);
+    this.addInput('occurrence of item', '', Blockly.INPUT_VALUE);
     this.addInput('in list', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
-    this.setTooltip('Returns true if a specified item is in a list.');
-  }
+    this.setTooltip('Returns the index of the first/last occurrence\nof the item in the list.\nReturns 0 if text is not found.');
+  },
+  MSG_FIRST: 'first',
+  MSG_LAST: 'last'
 };
 
 Blockly.Language.lists_getIndex = {
