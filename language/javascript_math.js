@@ -37,16 +37,16 @@ Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '0';
   var code;
   
-  if (this.getValueLabel(1) == Blockly.Language.math_arithmetic.MSG_POW) {
-  	code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
+  if (this.getValueLabel(1) == this.MSG_POW) {
+    code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
   } else {
-	  var map = {};
-	  map[Blockly.Language.math_arithmetic.MSG_ADD] = '+';
-	  map[Blockly.Language.math_arithmetic.MSG_MINUS] = '-';
-	  map[Blockly.Language.math_arithmetic.MSG_MULTIPLY] = '*';
-	  map[Blockly.Language.math_arithmetic.MSG_DIVIDE] = '/';
-	  var operator = map[this.getValueLabel(1)];
-	  code = argument0 + ' ' + operator + ' ' + argument1;
+    var map = {};
+    map[this.MSG_ADD] = '+';
+    map[this.MSG_MINUS] = '-';
+    map[this.MSG_MULTIPLY] = '*';
+    map[this.MSG_DIVIDE] = '/';
+    var operator = map[this.getValueLabel(1)];
+    code = argument0 + ' ' + operator + ' ' + argument1;
     if (!opt_dropParens) {
       code = '(' + code + ')';
     }
@@ -69,28 +69,28 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
   var code;
   // First, handle cases which generate values that don't need parentheses wrapping the code.
   switch (operator) {
-    case Blockly.Language.math_single.MSG_ABS:
+    case this.MSG_ABS:
       code = 'Math.abs(' + argNaked + ')';
       break;
-    case Blockly.Language.math_single.MSG_ROOT:
+    case this.MSG_ROOT:
       code = 'Math.sqrt(' + argNaked + ')';
       break;
-    case Blockly.Language.math_single.MSG_SIN:
+    case this.MSG_SIN:
       code = 'Math.sin(' + argParen + ' / 180 * Math.PI)';
       break;
-    case Blockly.Language.math_single.MSG_COS:
+    case this.MSG_COS:
       code = 'Math.cos(' + argParen + ' / 180 * Math.PI)';
       break;
-    case Blockly.Language.math_single.MSG_TAN:
+    case this.MSG_TAN:
       code = 'Math.tan(' + argParen + ' / 180 * Math.PI)';
       break;
-    case Blockly.Language.math_single.MSG_LN:
+    case this.MSG_LN:
       code = 'Math.log(' + argNaked + ')';
       break;
-    case Blockly.Language.math_single.MSG_EXP:
+    case this.MSG_EXP:
       code = 'Math.exp(' + argNaked + ')';
       break;
-    case Blockly.Language.math_single.MSG_10POW:
+    case this.MSG_10POW:
       code = 'Math.pow(10,' + argNaked + ')';
       break;
   }
@@ -99,19 +99,19 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
   }
   // Second, handle cases which generate values that may need parentheses wrapping the code.
   switch (operator) {
-    case Blockly.Language.math_single.MSG_NEG:
+    case this.MSG_NEG:
       code = '-' + argParen;
       break;
-    case Blockly.Language.math_single.MSG_ASIN:
+    case this.MSG_ASIN:
       code = 'Math.asin(' + argNaked + ') / Math.PI * 180';
       break;
-    case Blockly.Language.math_single.MSG_ACOS:
+    case this.MSG_ACOS:
       code = 'Math.acos(' + argNaked + ') / Math.PI * 180';
       break;
-    case Blockly.Language.math_single.MSG_ATAN:
+    case this.MSG_ATAN:
       code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
       break;
-    case Blockly.Language.math_single.MSG_LOG10:
+    case this.MSG_LOG10:
       code = 'Math.log(' + argNaked + ') / Math.log(10)';
       break;
     default:
@@ -138,13 +138,13 @@ Blockly.JavaScript.math_round = function() {
   // Rounding functions.
   var operator;
   switch (this.getValueLabel(0)) {
-    case Blockly.Language.math_round.MSG_ROUND:
+    case this.MSG_ROUND:
       operator = 'round';
       break;
-    case Blockly.Language.math_round.MSG_ROUNDUP:
+    case this.MSG_ROUNDUP:
       operator = 'ceil';
       break;
-    case Blockly.Language.math_round.MSG_ROUNDDOWN:
+    case this.MSG_ROUNDDOWN:
       operator = 'floor';
       break;
     default:

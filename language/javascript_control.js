@@ -48,7 +48,7 @@ Blockly.JavaScript.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
-  if (this.getTitleText(1) == Blockly.Language.controls_whileUntil.MSG_UNTIL) {
+  if (this.getTitleText(1) == this.MSG_UNTIL) {
     argument0 = '!(' + argument0 + ')';
   }
   return 'while (' + argument0 + ') {\n' + branch0 + '}\n';

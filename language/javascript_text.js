@@ -73,13 +73,13 @@ Blockly.JavaScript.text_changeCase = function() {
   // Change capitalization.
   var operator;
   switch (this.getValueLabel(0)) {
-    case Blockly.Language.text_changeCase.MSG_UPPERCASE:
+    case this.MSG_UPPERCASE:
       operator = 'toUpperCase';
       break;
-    case Blockly.Language.text_changeCase.MSG_LOWERCASE:
+    case this.MSG_LOWERCASE:
       operator = 'toLowerCase';
       break;
-    case Blockly.Language.text_changeCase.MSG_TITLECASE:
+    case this.MSG_TITLECASE:
       operator = null;
       break;
     default:
@@ -111,13 +111,13 @@ Blockly.JavaScript.text_trim = function() {
   // Trim spaces.
   var operator;
   switch (this.getTitleText(1)) {
-    case Blockly.Language.text_trim.MSG_LEFT:
+    case this.MSG_LEFT:
       operator = '/^\\s+/';
       break;
-    case Blockly.Language.text_trim.MSG_RIGHT:
+    case this.MSG_RIGHT:
       operator = '/\\s+$/';
       break;
-    case Blockly.Language.text_trim.MSG_BOTH:
+    case this.MSG_BOTH:
       operator = '/^\\s+|\\s+$/g';
       break;
     default:

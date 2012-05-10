@@ -982,14 +982,14 @@ Blockly.Block.prototype.addInput = function(label, tooltip, type, opt_index) {
     if (typeof label == 'string') {
       // Text label.
       textElement = new Blockly.FieldLabel(label);
-      if (tooltip) {
-        textElement.setTooltip(tooltip);
-      }
     } else if (typeof label == 'object') {
       // Editable label.
       textElement = label;
     }
     textElement.init(this);
+    if (tooltip) {
+      textElement.setTooltip(tooltip);
+    }
   }
   var input;
   if (type == Blockly.LOCAL_VARIABLE) {

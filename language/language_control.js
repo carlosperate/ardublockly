@@ -34,23 +34,33 @@ Blockly.Language.controls_if = {
   helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
     this.setColour('purple');
-    this.addInput(this.MSG_IF, this.MSG_IF_TOOLTIP, Blockly.INPUT_VALUE);
-    this.addInput(this.MSG_THEN, this.MSG_THEN_TOOLTIP, Blockly.NEXT_STATEMENT);
+    this.addInput(this.MSG_IF, 'foobar', Blockly.INPUT_VALUE);
+    this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(this,
         ['controls_if_elseif', 'controls_if_else']));
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      if (!thisBlock.elseifCount_ && !thisBlock.elseCount_) {
+        return 'If a value is true, then do some statements.';
+      } else if (!thisBlock.elseifCount_ && thisBlock.elseCount_) {
+        return 'If a value is true, then do the first block of statements.\nOtherwise, do the second block of statements.';
+      } else if (thisBlock.elseifCount_ && !thisBlock.elseCount_) {
+        return 'If the first value is true, then do the first block of statements.\nOtherwise, if the second value is true, do the second block of statements.';
+      } else if (thisBlock.elseifCount_ && thisBlock.elseCount_) {
+        return 'If the first value is true, then do the first block of statements.\nOtherwise, if the second value is true, do the second block of statements.\nIf none of the values are true, do the last block of statements.';
+      }
+      return '';
+    });
     this.elseifCount_ = 0;
     this.elseCount_ = 0;
   },
   MSG_IF: 'if',
-  MSG_IF_TOOLTIP: 'If this input is true, then do the statements below.',
   MSG_ELSEIF: 'else if',
-  MSG_ELSEIF_TOOLTIP: 'If this input is the first one that is true, then do the statements below.',
   MSG_ELSE: 'else',
-  MSG_ELSE_TOOLTIP: 'If none of the above inputs are true, then do these statements.',
   MSG_THEN: 'then',
-  MSG_THEN_TOOLTIP: 'If the input above is true, then do these statements.',
   mutationToDom: function(workspace) {
     var container = document.createElement('mutation');
     if (this.elseifCount_) {
@@ -65,11 +75,11 @@ Blockly.Language.controls_if = {
     this.elseifCount_ = window.parseInt(container.getAttribute('elseif'), 10);
     this.elseCount_ = window.parseInt(container.getAttribute('else'), 10);
     for (var x = 0; x < this.elseifCount_; x++) {
-      this.addInput(this.MSG_ELSEIF, this.MSG_ELSEIF_TOOLTIP, Blockly.INPUT_VALUE);
-      this.addInput(this.MSG_THEN, this.MSG_THEN_TOOLTIP, Blockly.NEXT_STATEMENT);
+      this.addInput(this.MSG_ELSEIF, '', Blockly.INPUT_VALUE);
+      this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
     }
     if (this.elseCount_) {
-      this.addInput(this.MSG_ELSE, this.MSG_ELSE_TOOLTIP, Blockly.NEXT_STATEMENT);
+      this.addInput(this.MSG_ELSE, '', Blockly.NEXT_STATEMENT);
     }
   },
   decompose: function(workspace) {
@@ -113,8 +123,8 @@ Blockly.Language.controls_if = {
       switch (clauseBlock.type) {
         case 'controls_if_elseif':
           this.elseifCount_++;
-          this.addInput(this.MSG_ELSEIF, this.MSG_ELSEIF_TOOLTIP, Blockly.INPUT_VALUE);
-          this.addInput(this.MSG_THEN, this.MSG_THEN_TOOLTIP, Blockly.NEXT_STATEMENT);
+          this.addInput(this.MSG_ELSEIF, '', Blockly.INPUT_VALUE);
+          this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
           // Reconnect any child blocks.
           if (clauseBlock.valueInput_) {
             this.inputList[x].connect(clauseBlock.valueInput_);
@@ -127,7 +137,7 @@ Blockly.Language.controls_if = {
           break;
         case 'controls_if_else':
           this.elseCount_++;
-          this.addInput(this.MSG_ELSE, this.MSG_ELSE_TOOLTIP, Blockly.NEXT_STATEMENT);
+          this.addInput(this.MSG_ELSE, '', Blockly.NEXT_STATEMENT);
           // Reconnect any child blocks.
           if (clauseBlock.statementInput_) {
             this.inputList[x].connect(clauseBlock.statementInput_);
@@ -149,6 +159,7 @@ Blockly.Language.controls_if_if = {
     this.setColour('purple');
     this.addTitle('if');
     this.addInput('', '', Blockly.NEXT_STATEMENT);
+    this.setTooltip('Add, remove, or reorder sections to reconfigure this if block.');
     this.contextMenu = false;
   }
 };
@@ -160,6 +171,7 @@ Blockly.Language.controls_if_elseif = {
     this.addTitle('else if');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.setTooltip('Adds a condition to the if block.');
     this.contextMenu = false;
   }
 };
@@ -170,6 +182,7 @@ Blockly.Language.controls_if_else = {
     this.setColour('purple');
     this.addTitle('else');
     this.setPreviousStatement(true);
+    this.setTooltip('Adds a final, catch-all condition to the if block.');
     this.contextMenu = false;
   }
 };
@@ -190,11 +203,21 @@ Blockly.Language.controls_whileUntil = {
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  }
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      switch (thisBlock.getTitleText(1)) {
+        case Blockly.Language.controls_whileUntil.MSG_WHILE:
+          return 'While a value is true, then do some statements.';
+        case Blockly.Language.controls_whileUntil.MSG_UNTIL:
+          return 'While a value is false, then do some statements.';
+      }
+      return '';
+    });
+  },
+  MSG_WHILE: 'while',
+  MSG_UNTIL: 'until'
 };
-
-Blockly.Language.controls_whileUntil.MSG_WHILE = 'while';
-Blockly.Language.controls_whileUntil.MSG_UNTIL = 'until';
 
 Blockly.Language.controls_for = {
   // For loop.
@@ -210,6 +233,7 @@ Blockly.Language.controls_for = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
+    this.setTooltip('Count from a start number to an end number.\nFor each count, set the current count number to\na variable, and then do some statements.');
   },
   getVars: function() {
     return [this.getVariableInput(0)];
@@ -233,6 +257,7 @@ Blockly.Language.controls_forEach = {
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.setTooltip('For each item in a list, set the item to a\nvariable, and then do some statements.');
   },
   getVars: function() {
     return [this.getVariableInput(0)];

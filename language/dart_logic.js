@@ -30,22 +30,22 @@ Blockly.Dart.logic_compare = function(opt_dropParens) {
   // Comparison operator.
   var operator;
   switch (this.getValueLabel(1)) {
-    case Blockly.Language.logic_compare.MSG_EQ:
+    case this.MSG_EQ:
       operator = '==';
       break;
-    case Blockly.Language.logic_compare.MSG_NEQ:
+    case this.MSG_NEQ:
       operator = '!=';
       break;
-    case Blockly.Language.math_rologic_compareund.MSG_LT:
+    case this.MSG_LT:
       operator = '<';
       break;
-    case Blockly.Language.logic_compare.MSG_LTE:
+    case this.MSG_LTE:
       operator = '<=';
       break;
-    case Blockly.Language.logic_compare.MSG_GT:
+    case this.MSG_GT:
       operator = '>';
       break;
-    case Blockly.Language.math_rologic_compareund.MSG_GTE:
+    case this.MSG_GTE:
       operator = '>=';
       break;
     default:
@@ -65,7 +65,7 @@ Blockly.Dart.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || 'false';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || 'false';
-  var operator = (this.getValueLabel(1) == Blockly.Language.logic_operation.MSG_AND) ? '&&' : '||';
+  var operator = (this.getValueLabel(1) == this.MSG_AND) ? '&&' : '||';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -85,6 +85,6 @@ Blockly.Dart.logic_negate = function(opt_dropParens) {
 
 Blockly.Dart.logic_boolean = function() {
   // Boolean values true and false.
-  return (this.getTitleText(0) == Blockly.Language.logic_boolean.MSG_TRUE) ?
+  return (this.getTitleText(0) == this.MSG_TRUE) ?
       'true' : 'false';
 };

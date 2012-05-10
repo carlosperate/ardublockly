@@ -38,6 +38,7 @@ Blockly.Language.variables_get = {
     this.addTitle(new Blockly.FieldDropdown('item',
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
     this.setOutput(true);
+    this.setTooltip('Returns the value of this variable.');
   },
   getVars: function() {
     return [this.getTitleText(1)];
@@ -61,6 +62,7 @@ Blockly.Language.variables_set = {
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.setTooltip('Sets this variable to be equal to the input.');
   },
   getVars: function() {
     return [this.getTitleText(1)];

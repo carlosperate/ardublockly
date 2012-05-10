@@ -185,7 +185,6 @@ Blockly.Tooltip.hide = function() {
  * @private
  */
 Blockly.Tooltip.show_ = function() {
-  Blockly.Tooltip.visible = true;
   Blockly.Tooltip.poisonedElement = Blockly.Tooltip.element;
   if (!Blockly.Tooltip.svgGroup_) {
     return;
@@ -193,7 +192,11 @@ Blockly.Tooltip.show_ = function() {
   // Erase all existing text.
   Blockly.removeChildren_(Blockly.Tooltip.svgText_);
   // Create new text, line by line.
-  var lines = Blockly.Tooltip.element.tooltip.split('\n');
+  var tip = Blockly.Tooltip.element.tooltip;
+  if (typeof tip == 'function') {
+    tip = tip();
+  }
+  var lines = tip.split('\n');
   for (var i = 0; i < lines.length; i++) {
     var tspanElement = Blockly.createSvgElement('tspan',
         {dy: '1em', x: Blockly.Tooltip.MARGINS}, Blockly.Tooltip.svgText_);
@@ -201,6 +204,7 @@ Blockly.Tooltip.show_ = function() {
     tspanElement.appendChild(textNode);
   }
   // Display the tooltip.
+  Blockly.Tooltip.visible = true;
   Blockly.Tooltip.svgGroup_.style.display = 'block';
   // Resize the background and shadow to fit.
   var bb = Blockly.Tooltip.svgText_.getBBox();

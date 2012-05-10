@@ -83,7 +83,6 @@ Blockly.FieldLabel.prototype.render = function() {
   return bBox;
 };
 
-
 /**
  * Change the tooltip text for this field.
  * @param {string|!Element} newTip Text for tooltip or a parent element to

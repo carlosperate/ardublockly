@@ -75,13 +75,13 @@ Blockly.Dart.text_changeCase = function() {
   // Change capitalization.
   var operator;
   switch (this.getValueLabel(0)) {
-    case Blockly.Language.text_changeCase.MSG_UPPERCASE:
+    case this.MSG_UPPERCASE:
       operator = 'toUpperCase';
       break;
-    case Blockly.Language.text_changeCase.MSG_LOWERCASE:
+    case this.MSG_LOWERCASE:
       operator = 'toLowerCase';
       break;
-    case Blockly.Language.text_changeCase.MSG_TITLECASE:
+    case this.MSG_TITLECASE:
       operator = null;
       break;
     default:
@@ -123,10 +123,10 @@ Blockly.Dart.text_trim = function() {
   // Trim spaces.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
   var operator = this.getTitleText(1);
-  if (operator == Blockly.Language.text_trim.MSG_BOTH) {
+  if (operator == this.MSG_BOTH) {
     return argument0 + '.trim()';
   }
-  var regex = operator == Blockly.Language.text_trim.MSG_LEFT ? '^\\s+' : '\\s+$';
+  var regex = operator == this.MSG_LEFT ? '^\\s+' : '\\s+$';
   return argument0 + '.replaceFirst(new RegExp(@"' + regex + '"), \'\')';
 };
 

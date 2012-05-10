@@ -182,3 +182,12 @@ Blockly.Field.prototype.onMouseUp_ = function(e) {
   // Non-abstract sub-classes must define a showEditor_ method.
   this.showEditor_();
 };
+
+/**
+ * Change the tooltip text for this field.
+ * @param {string|!Element} newTip Text for tooltip or a parent element to
+ *     link to for its tooltip.
+ */
+Blockly.Field.prototype.setTooltip = function(newTip) {
+  // Non-abstract sub-classes may wish to implement this.  See FieldLabel.
+};

@@ -50,6 +50,7 @@ Blockly.Language.text_length = {
     this.setColour('brown');
     this.addInput('length', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
+    this.setTooltip('Returns number of letters (including spaces)\nin the provided text.');
   }
 };
 
@@ -61,6 +62,7 @@ Blockly.Language.text_isEmpty = {
     this.setColour('brown');
     this.addInput('is empty', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
+    this.setTooltip('Returns true if the provided text is empty.');
   }
 };
 
@@ -74,6 +76,7 @@ Blockly.Language.text_contains = {
     this.addInput('is text', '', Blockly.INPUT_VALUE);
     this.addInput('in text', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
+    this.setTooltip('Returns true if the first text is contained in the second text.');
   }
 };
 
@@ -88,6 +91,7 @@ Blockly.Language.text_charAt = {
     this.addInput('at', '', Blockly.INPUT_VALUE);
     this.addInput('in text', '', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
+    this.setTooltip('Returns the letter at the specified position.');
   }
 };
 
@@ -96,35 +100,35 @@ Blockly.Language.text_changeCase = {
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
     this.setColour('brown');
     this.addTitle('to');
-    var menu = new Blockly.FieldDropdown(Blockly.Language.text_changeCase.MSG_UPPERCASE, function() {
-      return [Blockly.Language.text_changeCase.MSG_UPPERCASE,
-              Blockly.Language.text_changeCase.MSG_LOWERCASE,
-              Blockly.Language.text_changeCase.MSG_TITLECASE];
+    var menu = new Blockly.FieldDropdown(thisBlock.MSG_UPPERCASE, function() {
+      return [thisBlock.MSG_UPPERCASE, thisBlock.MSG_LOWERCASE, thisBlock.MSG_TITLECASE];
     });
     this.addInput(menu, '', Blockly.INPUT_VALUE);
     this.setOutput(true);
-  }
+    this.setTooltip('Return a copy of the text in a different case.');
+  },
+  MSG_UPPERCASE: 'UPPER CASE',
+  MSG_LOWERCASE: 'lower case',
+  MSG_TITLECASE: 'Title Case'
 };
-
-Blockly.Language.text_changeCase.MSG_UPPERCASE = 'UPPER CASE';
-Blockly.Language.text_changeCase.MSG_LOWERCASE = 'lower case';
-Blockly.Language.text_changeCase.MSG_TITLECASE = 'Title Case';
 
 Blockly.Language.text_trim = {
   // Trim spaces.
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
     this.setColour('brown');
     this.addTitle('trim spaces from');
-    var menu = new Blockly.FieldDropdown(Blockly.Language.text_trim.MSG_BOTH, function() {
-      return [Blockly.Language.text_trim.MSG_LEFT,
-              Blockly.Language.text_trim.MSG_RIGHT,
-              Blockly.Language.text_trim.MSG_BOTH];
+    var menu = new Blockly.FieldDropdown(thisBlock.MSG_BOTH, function() {
+      return [thisBlock.MSG_LEFT, thisBlock.MSG_RIGHT, thisBlock.MSG_BOTH];
     }, function(text) {
-      var newTitle = (text == Blockly.Language.text_trim.MSG_BOTH) ? 'sides' : 'side';
+      var newTitle = (text == thisBlock.MSG_BOTH) ? 'sides' : 'side';
       this.sourceBlock_.setTitleText(newTitle, 2);
       this.setText(text);
     });
@@ -132,12 +136,12 @@ Blockly.Language.text_trim = {
     this.addTitle('sides');
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
-  }
+    this.setTooltip('Return a copy of the text with spaces\nremoved from one or both ends.');
+  },
+  MSG_LEFT: 'left',
+  MSG_RIGHT: 'right',
+  MSG_BOTH: 'both'
 };
-
-Blockly.Language.text_trim.MSG_LEFT = 'left';
-Blockly.Language.text_trim.MSG_RIGHT = 'right';
-Blockly.Language.text_trim.MSG_BOTH = 'both';
 
 Blockly.Language.text_print = {
   // Print statement.
@@ -149,5 +153,6 @@ Blockly.Language.text_print = {
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.setTooltip('Print the specified text, number or other value.');
   }
 };
