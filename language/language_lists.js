@@ -28,6 +28,18 @@ if (!Blockly.Language) {
   Blockly.Language = {};
 }
 
+Blockly.Language.lists_create_empty = {
+  // Create an empty list.
+  category: 'Lists',
+  helpUrl: 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists',
+  init: function() {
+    this.setColour('blue');
+    this.setOutput(true);
+    this.addTitle('create empty list');
+    this.setTooltip('Returns a list, of length 0, containing no data records');
+  }
+};
+
 Blockly.Language.lists_length = {
   // List length.
   category: 'Lists',

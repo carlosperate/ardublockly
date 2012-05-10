@@ -26,6 +26,11 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
+Blockly.JavaScript.lists_create_empty = function(){
+  // Create an empty list.
+  return '[]';
+};
+
 Blockly.JavaScript.lists_length = function(opt_dropParens) {
   // Testing the length of a list is the same as for a string.
   return Blockly.JavaScript.text_length.call(this, opt_dropParens);

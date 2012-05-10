@@ -26,6 +26,11 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
+Blockly.Dart.lists_create_empty = function(){
+  // Create an empty list.
+  return '[]';
+};
+
 Blockly.Dart.lists_length = function(opt_dropParens) {
   // Testing the length of a list is the same as for a string.
   return Blockly.Dart.text_length.call(this, opt_dropParens);
