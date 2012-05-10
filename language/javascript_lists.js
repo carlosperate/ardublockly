@@ -31,6 +31,15 @@ Blockly.JavaScript.lists_create_empty = function(){
   return '[]';
 };
 
+Blockly.JavaScript.lists_create_with = function() {
+  // Create a list with any number of elements of any type.
+  var code = new Array(this.itemCount_);
+  for (n = 0; n < this.itemCount_; n++) {
+    code[n] = Blockly.JavaScript.valueToCode_(this, n, true) || 'null';
+  }
+  return '[' + code.join(',') + ']';
+};
+
 Blockly.JavaScript.lists_length = function(opt_dropParens) {
   // Testing the length of a list is the same as for a string.
   return Blockly.JavaScript.text_length.call(this, opt_dropParens);
