@@ -59,3 +59,19 @@ Blockly.JavaScript.lists_getIndex = function(opt_dropParens) {
   // Indexing into a list is the same as indexing into a string.
   return Blockly.JavaScript.text_charAt.call(this, opt_dropParens);
 };
+
+Blockly.JavaScript.lists_setIndex = function() {
+  // Set element at index.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '1';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '[]';
+  var argument2 = Blockly.JavaScript.valueToCode_(this, 2, true) || 'null';
+  // Blockly uses one-based indicies.
+  if (argument0.match(/^\d+$/)) {
+    // If the index is a naked number, decrement it right now.
+    argument0 = parseInt(argument0, 10) - 1;
+  } else {
+    // If the index is dynamic, decrement it in code.
+    argument0 += ' - 1';
+  }
+  return argument1 + '[' + argument0 + '] = ' + argument2 + ';\n';
+};

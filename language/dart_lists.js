@@ -31,6 +31,15 @@ Blockly.Dart.lists_create_empty = function(){
   return '[]';
 };
 
+Blockly.Dart.lists_create_with = function() {
+  // Create a list with any number of elements of any type.
+  var code = new Array(this.itemCount_);
+  for (n = 0; n < this.itemCount_; n++) {
+    code[n] = Blockly.Dart.valueToCode_(this, n, true) || 'null';
+  }
+  return '[' + code.join(',') + ']';
+};
+
 Blockly.Dart.lists_length = function(opt_dropParens) {
   // Testing the length of a list is the same as for a string.
   return Blockly.Dart.text_length.call(this, opt_dropParens);
@@ -49,4 +58,20 @@ Blockly.Dart.lists_contains = function(opt_dropParens) {
 Blockly.Dart.lists_getIndex = function(opt_dropParens) {
   // Indexing into a list is the same as indexing into a string.
   return Blockly.Dart.text_charAt.call(this, opt_dropParens);
+};
+
+Blockly.Dart.lists_setIndex = function() {
+  // Set element at index.
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '1';
+  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '[]';
+  var argument2 = Blockly.Dart.valueToCode_(this, 2, true) || 'null';
+  // Blockly uses one-based indicies.
+  if (argument0.match(/^\d+$/)) {
+    // If the index is a naked number, decrement it right now.
+    argument0 = parseInt(argument0, 10) - 1;
+  } else {
+    // If the index is dynamic, decrement it in code.
+    argument0 += ' - 1';
+  }
+  return argument1 + '[' + argument0 + '] = ' + argument2 + ';\n';
 };

@@ -56,7 +56,7 @@ Blockly.JavaScript.text_contains = function(opt_dropParens) {
 
 Blockly.JavaScript.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '1';
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '1';
   var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '[]';
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {

@@ -34,7 +34,7 @@ Blockly.Language.controls_if = {
   helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
     this.setColour('purple');
-    this.addInput(this.MSG_IF, 'foobar', Blockly.INPUT_VALUE);
+    this.addInput(this.MSG_IF, '', Blockly.INPUT_VALUE);
     this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -171,7 +171,7 @@ Blockly.Language.controls_if_elseif = {
     this.addTitle('else if');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Adds a condition to the if block.');
+    this.setTooltip('Add a condition to the if block.');
     this.contextMenu = false;
   }
 };
@@ -182,7 +182,7 @@ Blockly.Language.controls_if_else = {
     this.setColour('purple');
     this.addTitle('else');
     this.setPreviousStatement(true);
-    this.setTooltip('Adds a final, catch-all condition to the if block.');
+    this.setTooltip('Add a final, catch-all condition to the if block.');
     this.contextMenu = false;
   }
 };

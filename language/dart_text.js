@@ -58,7 +58,7 @@ Blockly.Dart.text_contains = function(opt_dropParens) {
 
 Blockly.Dart.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '1';
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '1';
   var argument1 = Blockly.Dart.valueToCode_(this, 1) || '[]';
   // Blockly uses one-based arrays.
   if (argument0.match(/^\d+$/)) {
