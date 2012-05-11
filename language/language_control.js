@@ -226,14 +226,18 @@ Blockly.Language.controls_for = {
   init: function() {
     this.setColour('purple');
     this.addTitle('count');
+    this.addInput('with', '', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('from', '', Blockly.INPUT_VALUE);
     this.addInput('to', '', Blockly.INPUT_VALUE);
-    this.addInput('with', '', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
-    this.setTooltip('Count from a start number to an end number.\nFor each count, set the current count number to\na variable, and then do some statements.');
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return 'Count from a start number to an end number.\nFor each count, set the current count number to\nvariable "' + thisBlock.getVariableInput(0) + '", and then do some statements.';
+    });
   },
   getVars: function() {
     return [this.getVariableInput(0)];
@@ -257,7 +261,11 @@ Blockly.Language.controls_forEach = {
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('For each item in a list, set the item to a\nvariable, and then do some statements.');
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return 'For each item in a list, set the item to\nvariable "' + thisBlock.getVariableInput(0) + '", and then do some statements.';
+    });
   },
   getVars: function() {
     return [this.getVariableInput(0)];

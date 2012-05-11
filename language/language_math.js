@@ -101,7 +101,11 @@ Blockly.Language.math_change = {
     this.addInput('by', '', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Add a number to a variable.');
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return 'Add a number to variable "' + thisBlock.getTitleText(1) + '".';
+    });
   },
   getVars: function() {
     return [this.getTitleText(1)];
@@ -124,15 +128,9 @@ Blockly.Language.math_single = {
     this.setColour('baby');
     this.setOutput(true);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_ROOT, function() {
-      return [thisBlock.MSG_ABS,
+      return [thisBlock.MSG_ROOT,
+              thisBlock.MSG_ABS,
               thisBlock.MSG_NEG,
-              thisBlock.MSG_ROOT,
-              thisBlock.MSG_SIN,
-              thisBlock.MSG_COS,
-              thisBlock.MSG_TAN,
-              thisBlock.MSG_ASIN,
-              thisBlock.MSG_ACOS,
-              thisBlock.MSG_ATAN,
               thisBlock.MSG_LN,
               thisBlock.MSG_LOG10,
               thisBlock.MSG_EXP,
@@ -140,25 +138,13 @@ Blockly.Language.math_single = {
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
     this.setTooltip(function() {
-      switch (thisBlock.getValueLabel(1)) {
+      switch (thisBlock.getValueLabel(0)) {
+        case thisBlock.MSG_ROOT:
+          return 'Return the square root of a number.';
         case thisBlock.MSG_ABS:
           return 'Return the absolute value of a number.';
         case thisBlock.MSG_NEG:
           return 'Return the negation of a number.';
-        case thisBlock.MSG_ROOT:
-          return 'Return the square root of a number.';
-        case thisBlock.MSG_SIN:
-          return 'Return the sine of a degree.';
-        case thisBlock.MSG_COS:
-          return 'Return the cosine of a degree.';
-        case thisBlock.MSG_TAN:
-          return 'Return the tangent of a degree.';
-        case thisBlock.MSG_ASIN:
-          return 'Return the arcsine of a number.';
-        case thisBlock.MSG_ACOS:
-          return 'Return the arccosine of a number.';
-        case thisBlock.MSG_ATAN:
-          return 'Return the arctangent of a number.';
         case thisBlock.MSG_LN:
           return 'Return the natural logarithm of a number.';
         case thisBlock.MSG_LOG10:
@@ -171,33 +157,13 @@ Blockly.Language.math_single = {
       return '';
     });
   },
+  MSG_ROOT: 'square root',
   MSG_ABS: 'absolute',
   MSG_NEG: '-',
-  MSG_ROOT: '\u221A',
-  MSG_SIN: 'sin',
-  MSG_COS: 'cos',
-  MSG_TAN: 'tan',
-  MSG_ASIN: 'asin',
-  MSG_ACOS: 'acos',
-  MSG_ATAN: 'atan',
   MSG_LN: 'ln',
   MSG_LOG10: 'log10',
   MSG_EXP: 'e^',
   MSG_10POW: '10^'
-};
-
-Blockly.Language.math_modulo = {
-  // Remainder of a division.
-  category: 'Math',
-  helpUrl: 'http://en.wikipedia.org/wiki/Modulo_operation',
-  init: function() {
-    this.setColour('baby');
-    this.setOutput(true);
-    this.addInput('remainder of', '', Blockly.INPUT_VALUE);
-    this.addInput('\u00F7', '', Blockly.INPUT_VALUE);
-    this.setInputsInline(true);
-    this.setTooltip('Return the remainder of dividing both numbers.');
-  }
 };
 
 Blockly.Language.math_round = {
@@ -220,6 +186,64 @@ Blockly.Language.math_round = {
   MSG_ROUND: 'round',
   MSG_ROUNDUP: 'round up',
   MSG_ROUNDDOWN: 'round down'
+};
+
+Blockly.Language.math_trig = {
+  // Trigonometry operators.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Square_root',
+  init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
+    this.setColour('baby');
+    this.setOutput(true);
+    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_SIN, function() {
+      return [thisBlock.MSG_SIN,
+              thisBlock.MSG_COS,
+              thisBlock.MSG_TAN,
+              thisBlock.MSG_ASIN,
+              thisBlock.MSG_ACOS,
+              thisBlock.MSG_ATAN];
+    });
+    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+    this.setTooltip(function() {
+      switch (thisBlock.getValueLabel(0)) {
+        case thisBlock.MSG_SIN:
+          return 'Return the sine of a degree.';
+        case thisBlock.MSG_COS:
+          return 'Return the cosine of a degree.';
+        case thisBlock.MSG_TAN:
+          return 'Return the tangent of a degree.';
+        case thisBlock.MSG_ASIN:
+          return 'Return the arcsine of a number.';
+        case thisBlock.MSG_ACOS:
+          return 'Return the arccosine of a number.';
+        case thisBlock.MSG_ATAN:
+          return 'Return the arctangent of a number.';
+      }
+      return '';
+    });
+  },
+  MSG_SIN: 'sin',
+  MSG_COS: 'cos',
+  MSG_TAN: 'tan',
+  MSG_ASIN: 'asin',
+  MSG_ACOS: 'acos',
+  MSG_ATAN: 'atan'
+};
+
+Blockly.Language.math_modulo = {
+  // Remainder of a division.
+  category: 'Math',
+  helpUrl: 'http://en.wikipedia.org/wiki/Modulo_operation',
+  init: function() {
+    this.setColour('baby');
+    this.setOutput(true);
+    this.addInput('remainder of', '', Blockly.INPUT_VALUE);
+    this.addInput('\u00F7', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+    this.setTooltip('Return the remainder of dividing both numbers.');
+  }
 };
 
 Blockly.Language.math_random_int = {

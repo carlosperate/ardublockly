@@ -62,7 +62,7 @@ Blockly.JavaScript.math_change = function() {
 };
 
 Blockly.JavaScript.math_single = function(opt_dropParens) {
-  // Advanced math operators with single operand.
+  // Math operators with single operand.
   var argNaked = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
   var argParen = Blockly.JavaScript.valueToCode_(this, 0, false) || '0';
   var operator = this.getValueLabel(0);
@@ -75,15 +75,6 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
     case this.MSG_ROOT:
       code = 'Math.sqrt(' + argNaked + ')';
       break;
-    case this.MSG_SIN:
-      code = 'Math.sin(' + argParen + ' / 180 * Math.PI)';
-      break;
-    case this.MSG_COS:
-      code = 'Math.cos(' + argParen + ' / 180 * Math.PI)';
-      break;
-    case this.MSG_TAN:
-      code = 'Math.tan(' + argParen + ' / 180 * Math.PI)';
-      break;
     case this.MSG_LN:
       code = 'Math.log(' + argNaked + ')';
       break;
@@ -92,6 +83,24 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
       break;
     case this.MSG_10POW:
       code = 'Math.pow(10,' + argNaked + ')';
+      break;
+    case this.MSG_ROUND:
+      code = 'Math.round(' + argNaked + ')';
+      break;
+    case this.MSG_ROUNDUP:
+      code = 'Math.ceil(' + argNaked + ')';
+      break;
+    case this.MSG_ROUNDDOWN:
+      code = 'Math.floor(' + argNaked + ')';
+      break;
+    case this.MSG_SIN:
+      code = 'Math.sin(' + argParen + ' / 180 * Math.PI)';
+      break;
+    case this.MSG_COS:
+      code = 'Math.cos(' + argParen + ' / 180 * Math.PI)';
+      break;
+    case this.MSG_TAN:
+      code = 'Math.tan(' + argParen + ' / 180 * Math.PI)';
       break;
   }
   if (code) {
@@ -102,6 +111,9 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
     case this.MSG_NEG:
       code = '-' + argParen;
       break;
+    case this.MSG_LOG10:
+      code = 'Math.log(' + argNaked + ') / Math.log(10)';
+      break;
     case this.MSG_ASIN:
       code = 'Math.asin(' + argNaked + ') / Math.PI * 180';
       break;
@@ -110,9 +122,6 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
       break;
     case this.MSG_ATAN:
       code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
-      break;
-    case this.MSG_LOG10:
-      code = 'Math.log(' + argNaked + ') / Math.log(10)';
       break;
     default:
       throw 'Unknown math operator.';
@@ -123,6 +132,11 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
   return code;
 };
 
+// Rounding functions have a single operand.
+Blockly.JavaScript.math_round = Blockly.JavaScript.math_single;
+// Trigonometry functions have a single operand.
+Blockly.JavaScript.math_trig = Blockly.JavaScript.math_single;
+
 Blockly.JavaScript.math_modulo = function(opt_dropParens) {
   // Remainder computation.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
@@ -132,26 +146,6 @@ Blockly.JavaScript.math_modulo = function(opt_dropParens) {
     code = '(' + code + ')';
   }
   return code;
-};
-
-Blockly.JavaScript.math_round = function() {
-  // Rounding functions.
-  var operator;
-  switch (this.getValueLabel(0)) {
-    case this.MSG_ROUND:
-      operator = 'round';
-      break;
-    case this.MSG_ROUNDUP:
-      operator = 'ceil';
-      break;
-    case this.MSG_ROUNDDOWN:
-      operator = 'floor';
-      break;
-    default:
-      throw 'Unknown operator.';
-  }
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  return 'Math.' + operator + '(' + argument0 + ')';
 };
 
 Blockly.JavaScript.math_random_float = function() {
