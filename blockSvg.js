@@ -112,18 +112,18 @@ Blockly.BlockSvg.prototype.destroy = function() {
  * @param {string} colourName Name of colour as listed in Blockly.COLOURS.
  *     Colour must be in '#fff' format.
  */
-Blockly.BlockSvg.prototype.setColour = function(colourName) {
-  var hexColour = Blockly.hexColour(colourName);
+Blockly.BlockSvg.prototype.setColour = function(colourHue) {
+  var hexColour = Blockly.makeColour(colourHue);
   var r = window.parseInt(hexColour.charAt(1), 16);
   var g = window.parseInt(hexColour.charAt(2), 16);
   var b = window.parseInt(hexColour.charAt(3), 16);
-  var hex = '0123456789abcdef';
-  var rLight = hex.charAt(Math.min(r + 3, 15));
-  var gLight = hex.charAt(Math.min(g + 2, 15));
-  var bLight = hex.charAt(Math.min(b + 2, 15));
-  var rDark = hex.charAt(Math.max(r - 4, 0));
-  var gDark = hex.charAt(Math.max(g - 4, 0));
-  var bDark = hex.charAt(Math.max(b - 4, 0));
+  var HEX = '0123456789abcdef';
+  var rLight = HEX.charAt(Math.min(r + 3, 15));
+  var gLight = HEX.charAt(Math.min(g + 2, 15));
+  var bLight = HEX.charAt(Math.min(b + 2, 15));
+  var rDark = HEX.charAt(Math.max(r - 4, 0));
+  var gDark = HEX.charAt(Math.max(g - 4, 0));
+  var bDark = HEX.charAt(Math.max(b - 4, 0));
   this.svgPathLight_.setAttribute('stroke', '#' + rLight + gLight + bLight);
   this.svgPathDark_.setAttribute('fill', '#' + rDark + gDark + bDark);
   this.svgPath_.setAttribute('fill', hexColour);

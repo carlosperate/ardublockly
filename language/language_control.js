@@ -33,7 +33,7 @@ Blockly.Language.controls_if = {
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
   init: function() {
-    this.setColour('purple');
+    this.setColour(120);
     this.addInput(this.MSG_IF, '', Blockly.INPUT_VALUE);
     this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
@@ -156,7 +156,7 @@ Blockly.Language.controls_if = {
 Blockly.Language.controls_if_if = {
   // If condition.
   init: function() {
-    this.setColour('purple');
+    this.setColour(120);
     this.addTitle('if');
     this.addInput('', '', Blockly.NEXT_STATEMENT);
     this.setTooltip('Add, remove, or reorder sections to reconfigure this if block.');
@@ -167,7 +167,7 @@ Blockly.Language.controls_if_if = {
 Blockly.Language.controls_if_elseif = {
   // Else-If condition.
   init: function() {
-    this.setColour('purple');
+    this.setColour(120);
     this.addTitle('else if');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -179,7 +179,7 @@ Blockly.Language.controls_if_elseif = {
 Blockly.Language.controls_if_else = {
   // Else condition.
   init: function() {
-    this.setColour('purple');
+    this.setColour(120);
     this.addTitle('else');
     this.setPreviousStatement(true);
     this.setTooltip('Add a final, catch-all condition to the if block.');
@@ -192,7 +192,7 @@ Blockly.Language.controls_whileUntil = {
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
   init: function() {
-    this.setColour('purple');
+    this.setColour(120);
     this.addTitle('repeat');
     var dropdown = new Blockly.FieldDropdown(Blockly.Language.controls_whileUntil.MSG_WHILE, function() {
       return [Blockly.Language.controls_whileUntil.MSG_WHILE,
@@ -224,7 +224,7 @@ Blockly.Language.controls_for = {
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
   init: function() {
-    this.setColour('purple');
+    this.setColour(120);
     this.addTitle('count');
     this.addInput('with', '', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('from', '', Blockly.INPUT_VALUE);
@@ -254,7 +254,7 @@ Blockly.Language.controls_forEach = {
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
   init: function() {
-    this.setColour('purple');
+    this.setColour(120);
     this.addTitle('for each');
     this.addInput('item', '', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('in list', '', Blockly.INPUT_VALUE);

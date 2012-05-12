@@ -623,7 +623,7 @@ Blockly.Comment.prototype.setText = function(text) {
  * Change the colour of a comment to match its block.
  */
 Blockly.Comment.prototype.updateColour = function() {
-  var hexColour = Blockly.hexColour(this.block_.getColour());
+  var hexColour = Blockly.makeColour(this.block_.getColour());
   this.bubbleBack_.setAttribute('fill', hexColour);
   this.bubbleArrow_.setAttribute('fill', hexColour);
 };

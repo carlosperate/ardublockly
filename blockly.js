@@ -54,27 +54,71 @@ Blockly.MSG_MUTATOR_CHANGE = 'Change';
 Blockly.MSG_MUTATOR_CANCEL = 'Cancel';
 
 /**
- * Block colours.
- * Colours must be in '#fff' format due to parser in Blockly.Block.setColour.
+ * The HSV_SATURATION and HSV_VALUE constants provide Blockly with a consistent
+ * colour scheme, regardless of the hue.
+ * Both constants must be in the range of 0 (inclusive) to 1 (exclusive).
  */
-Blockly.COLOURS = {
-  'red': '#c66',
-  'yellow': '#ec4',
-  'green': '#6a6',
-  'baby': '#68c',
-  'blue': '#46b',
-  'purple': '#b8b',
-  'brown': '#c95',
-  'pink': '#f89'
-};
+Blockly.HSV_SATURATION = 0.45;
+Blockly.HSV_VALUE = 0.65;
+
+/*
+  Hue values for core blocks.
+  240 - Control
+  120 - Logic
+  180 - Text
+  150 - Lists
+  210 - Math
+  290 - Procedures
+  0 - Variables
+*/
 
 /**
- * Converts a blockly colour name into a hex colour value.
- * @param {string} colourName Name of the colour.
- * @return {string} The colour in #fff format.
+ * Convert a hue (HSV model) into an RGB hex triplet.
+ * @param {number} hue Hue on a colour wheel (0-360).
+ * @return {string} RGB code, e.g. '#84c'.
  */
-Blockly.hexColour = function(colourName) {
-  return Blockly.COLOURS[colourName] || '#000';
+Blockly.makeColour = function(hue) {
+  hue %= 360;
+  var topLimit = Blockly.HSV_VALUE;
+  var bottomLimit = Blockly.HSV_VALUE * (1 - Blockly.HSV_SATURATION);
+  var rangeUp = (topLimit - bottomLimit) * (hue % 60 / 60) + bottomLimit;
+  var rangeDown = (topLimit - bottomLimit) * (1 - hue % 60 / 60) + bottomLimit;
+  var r, g, b;
+  if (0 <= hue && hue < 60) {
+    r = topLimit;
+    g = rangeUp;
+    b = bottomLimit;
+  } else if (60 <= hue && hue < 120) {
+    r = rangeDown;
+    g = topLimit;
+    b = bottomLimit;
+  } else if (120 <= hue && hue < 180) {
+    r = bottomLimit;
+    g = topLimit;
+    b = rangeUp;
+  } else if (180 <= hue && hue < 240) {
+    r = bottomLimit;
+    g = rangeDown;
+    b = topLimit;
+  } else if (240 <= hue && hue < 300) {
+    r = rangeUp;
+    g = bottomLimit;
+    b = topLimit;
+  } else if (300 <= hue && hue < 360) {
+    r = topLimit;
+    g = bottomLimit;
+    b = rangeDown;
+  } else {
+    // Negative number?
+    r = 0;
+    g = 0;
+    b = 0;
+  }
+  r = Math.floor(r * 16);
+  g = Math.floor(g * 16);
+  b = Math.floor(b * 16);
+  var HEX = '0123456789abcdef';
+  return '#' + HEX.charAt(r) + HEX.charAt(g) + HEX.charAt(b);
 };
 
 /**

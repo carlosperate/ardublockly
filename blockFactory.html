@@ -49,11 +49,6 @@ var block = null;
 
 function start() {
   Blockly.inject(document.getElementById('svg'), {'rtl': rtl});
-  // Populate the colour dropdown with all available colours.
-  var select = document.getElementById('colour');
-  for (var colour in Blockly.COLOURS) {
-    select.appendChild(new Option(colour));
-  }
 }
 
 function createCustomBlock() {
@@ -236,9 +231,7 @@ h1 {
     <tr>
       <td>Colour:</td>
       <td>
-        <select id="colour" onchange="setColour()">
-          <option>--</option>
-        </select>
+        <input type="number" min="0" max="360" style="width: 4em" id="colour" value="0" onchange="setColour()"> (0 - 360)
       </td>
     </tr>
     <tr>

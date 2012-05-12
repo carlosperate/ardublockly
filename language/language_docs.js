@@ -28,7 +28,7 @@ Blockly.Language.docs_newCalendar = {
   // New Calendar Event.
   category: 'Docs',
   init: function() {
-    this.setColour('yellow');
+    this.setColour('c7');
     this.addTitle('new Calendar Event');
     this.setTooltip('Creates a new event in the Calendar.');
     this.addInput('Title', 'Title of the new event.', Blockly.INPUT_VALUE);
@@ -44,7 +44,7 @@ Blockly.Language.docs_getSpreadsheetData = {
   // Get all the data for the active spreadsheet.
   category: 'Docs',
   init: function() {
-    this.setColour('yellow');
+    this.setColour('c7');
     this.addTitle('get');
     this.addTitle('Spreadsheet Data');
     this.setTooltip('.');

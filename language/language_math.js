@@ -33,7 +33,7 @@ Blockly.Language.math_number = {
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Number',
   init: function() {
-    this.setColour('baby');
+    this.setColour(230);
     this.addTitle(new Blockly.FieldTextInput('0', function(text) {
       // Ensure that only a number may be entered.
       // TODO: Handle cases like 'o', 'ten', '1,234', '3,14', etc.
@@ -52,7 +52,7 @@ Blockly.Language.math_arithmetic = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('baby');
+    this.setColour(230);
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_ADD, function() {
@@ -94,7 +94,7 @@ Blockly.Language.math_change = {
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Negation',
   init: function() {
-    this.setColour('baby');
+    this.setColour(230);
     this.addTitle('change');
     this.addTitle(new Blockly.FieldDropdown('item',
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
@@ -125,7 +125,7 @@ Blockly.Language.math_single = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('baby');
+    this.setColour(230);
     this.setOutput(true);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_ROOT, function() {
       return [thisBlock.MSG_ROOT,
@@ -173,7 +173,7 @@ Blockly.Language.math_round = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('baby');
+    this.setColour(230);
     this.setOutput(true);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_ROUND, function() {
       return [thisBlock.MSG_ROUND,
@@ -195,7 +195,7 @@ Blockly.Language.math_trig = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('baby');
+    this.setColour(230);
     this.setOutput(true);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_SIN, function() {
       return [thisBlock.MSG_SIN,
@@ -237,7 +237,7 @@ Blockly.Language.math_modulo = {
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Modulo_operation',
   init: function() {
-    this.setColour('baby');
+    this.setColour(230);
     this.setOutput(true);
     this.addInput('remainder of', '', Blockly.INPUT_VALUE);
     this.addInput('\u00F7', '', Blockly.INPUT_VALUE);
@@ -251,7 +251,7 @@ Blockly.Language.math_random_int = {
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',
   init: function() {
-    this.setColour('baby');
+    this.setColour(230);
     this.setOutput(true);
     this.addTitle('random integer');
     this.addInput('from', '', Blockly.INPUT_VALUE);
@@ -267,7 +267,7 @@ Blockly.Language.math_random_float = {
   category: 'Math',
   helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',
   init: function() {
-    this.setColour('baby');
+    this.setColour(230);
     this.setOutput(true);
     this.addTitle('random fraction');
     this.setTooltip('Return a random fraction between\n0.0 (inclusive) and 1.0 (exclusive).');

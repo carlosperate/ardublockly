@@ -741,20 +741,19 @@ Blockly.Block.prototype.getDescendants = function() {
 
 /**
  * Get the colour of a block.
- * @return {string} colourName Name of colour.
+ * @return {string} HSV hue value.
  */
 Blockly.Block.prototype.getColour = function() {
-  return this.colourName_;
+  return this.colourHue_;
 };
 
 /**
  * Change the colour of a block.
- * @param {string} colourName Name of colour as listed in Blockly.COLOURS.
- *     Colour must be in '#fff' format.
+ * @param {number} colourHue HSV hue value.
  */
-Blockly.Block.prototype.setColour = function(colourName) {
-  this.colourName_ = colourName;
-  this.svg_.setColour(colourName);
+Blockly.Block.prototype.setColour = function(colourHue) {
+  this.colourHue_ = colourHue;
+  this.svg_.setColour(colourHue);
   if (this.comment) {
     this.comment.updateColour();
   }

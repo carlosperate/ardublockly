@@ -33,7 +33,7 @@ Blockly.Language.text = {
   category: 'Text',
   helpUrl: 'http://en.wikipedia.org/wiki/String_(computer_science)',
   init: function() {
-    this.setColour('brown');
+    this.setColour(160);
     this.addTitle('\u201C');
     this.addTitle(new Blockly.FieldTextInput(''));
     this.addTitle('\u201D');
@@ -47,7 +47,7 @@ Blockly.Language.text_length = {
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    this.setColour('brown');
+    this.setColour(160);
     this.addInput('length', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns number of letters (including spaces)\nin the provided text.');
@@ -59,7 +59,7 @@ Blockly.Language.text_isEmpty = {
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    this.setColour('brown');
+    this.setColour(160);
     this.addInput('is empty', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns true if the provided text is empty.');
@@ -73,7 +73,7 @@ Blockly.Language.text_indexOf = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('brown');
+    this.setColour(160);
     this.setOutput(true);
     this.addTitle('find');
     var menu = new Blockly.FieldDropdown(thisBlock.MSG_FIRST, function() {
@@ -94,7 +94,7 @@ Blockly.Language.text_charAt = {
   category: 'Text',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
-    this.setColour('brown');
+    this.setColour(160);
     this.addTitle('letter');
     this.setOutput(true);
     this.addInput('at', '', Blockly.INPUT_VALUE);
@@ -111,7 +111,7 @@ Blockly.Language.text_changeCase = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('brown');
+    this.setColour(160);
     this.addTitle('to');
     var menu = new Blockly.FieldDropdown(thisBlock.MSG_UPPERCASE, function() {
       return [thisBlock.MSG_UPPERCASE, thisBlock.MSG_LOWERCASE, thisBlock.MSG_TITLECASE];
@@ -132,7 +132,7 @@ Blockly.Language.text_trim = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('brown');
+    this.setColour(160);
     this.addTitle('trim spaces from');
     var menu = new Blockly.FieldDropdown(thisBlock.MSG_BOTH, function() {
       return [thisBlock.MSG_LEFT, thisBlock.MSG_RIGHT, thisBlock.MSG_BOTH];
@@ -157,7 +157,7 @@ Blockly.Language.text_print = {
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    this.setColour('brown');
+    this.setColour(160);
     this.addTitle('print');
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);

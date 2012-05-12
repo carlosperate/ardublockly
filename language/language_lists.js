@@ -33,7 +33,7 @@ Blockly.Language.lists_create_empty = {
   category: 'Lists',
   helpUrl: 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists',
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.setOutput(true);
     this.addTitle('create empty list');
     this.setTooltip('Returns a list, of length 0, containing no data records');
@@ -45,7 +45,7 @@ Blockly.Language.lists_create_with = {
   category: 'Lists',
   helpUrl: '',
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.addTitle('create list with');
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.addInput('', '', Blockly.INPUT_VALUE);
@@ -113,7 +113,7 @@ Blockly.Language.lists_create_with = {
 Blockly.Language.lists_create_with_container = {
   // Container.
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.addTitle('add');
     this.addInput('', '', Blockly.NEXT_STATEMENT);
     this.setTooltip('Add, remove, or reorder sections to reconfigure this list block.');
@@ -124,7 +124,7 @@ Blockly.Language.lists_create_with_container = {
 Blockly.Language.lists_create_with_item = {
   // Add items.
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.addTitle('item');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -138,7 +138,7 @@ Blockly.Language.lists_length = {
   category: 'Lists',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.addInput('length', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns the length of a list.');
@@ -150,7 +150,7 @@ Blockly.Language.lists_isEmpty = {
   category: 'Lists',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.addInput('is empty', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns true if the list is empty.');
@@ -164,7 +164,7 @@ Blockly.Language.list_indexOf = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('blue');
+    this.setColour(210);
     this.setOutput(true);
     this.addTitle('find');
     var menu = new Blockly.FieldDropdown(thisBlock.MSG_FIRST, function() {
@@ -185,7 +185,7 @@ Blockly.Language.lists_getIndex = {
   category: 'Lists',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.setOutput(true);
     this.addTitle('get item');
     this.addInput('at', '', Blockly.INPUT_VALUE);
@@ -200,7 +200,7 @@ Blockly.Language.lists_setIndex = {
   category: 'Lists',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
-    this.setColour('blue');
+    this.setColour(210);
     this.addTitle('set item');
     this.addInput('at', '', Blockly.INPUT_VALUE);
     this.addInput('in list', '', Blockly.INPUT_VALUE);

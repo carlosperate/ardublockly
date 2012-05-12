@@ -35,7 +35,7 @@ Blockly.Language.logic_compare = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('green');
+    this.setColour(120);
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_EQ, function() {
@@ -81,7 +81,7 @@ Blockly.Language.logic_operation = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('green');
+    this.setColour(120);
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_AND, function() {
@@ -108,7 +108,7 @@ Blockly.Language.logic_negate = {
   category: 'Logic',
   helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
   init: function() {
-    this.setColour('green');
+    this.setColour(120);
     this.setOutput(true);
     this.addInput('not', '', Blockly.INPUT_VALUE);
     this.setTooltip('Returns true if the input is false.\nReturns false if the input is true.');
@@ -122,7 +122,7 @@ Blockly.Language.logic_boolean = {
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
-    this.setColour('green');
+    this.setColour(120);
     this.setOutput(true);
     var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_TRUE, function() {
       return [thisBlock.MSG_TRUE, thisBlock.MSG_FALSE];
