@@ -25,6 +25,12 @@
 // Top level object for Blockly.
 var Blockly = {};
 
+/**
+ * Path to Blockly's directory.  Can be relative, absolute, or remote.
+ * Used for loading additional resources.
+ */
+Blockly.pathToBlockly = './';
+
 // Required name space for SVG elements.
 Blockly.SVG_NS = 'http://www.w3.org/2000/svg';
 // Required name space for HTML elements.
@@ -415,7 +421,7 @@ Blockly.isTargetInput_ = function(e) {
  * @private
  */
 Blockly.loadAudio_ = function(name) {
-  var sound = new Audio('media/' + name + '.wav');
+  var sound = new Audio(Blockly.pathToBlockly + 'media/' + name + '.wav');
   // To force the browser to load the sound, play it, but stop it immediately.
   // If this starts creating a chip on startup, turn the sound's volume down,
   // or use another caching method such as XHR.
@@ -451,7 +457,7 @@ Blockly.setCursorHand_ = function(closed) {
      http://code.google.com/p/chromium/issues/detail?id=1446 */
   var cursor = '';
   if (closed) {
-    cursor = 'url(media/handclosed.cur) 7 3, auto';
+    cursor = 'url(' + Blockly.pathToBlockly + 'media/handclosed.cur) 7 3, auto';
   }
   if (Blockly.selected) {
     Blockly.selected.svg_.svgGroup_.style.cursor = cursor;

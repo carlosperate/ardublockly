@@ -135,9 +135,12 @@ Blockly.Variables.allVariables = function() {
       var blockVariables = func.call(blocks[x]);
       for (var y = 0; y < blockVariables.length; y++) {
         var varName = blockVariables[y];
-        variableHash[Blockly.Variables.PREFIX_ +
-            (Blockly.caseSensitiveVariables ?
-            varName : varName.toLowerCase())] = varName;
+        // Variable name may be null if the block is only half-built.
+        if (varName) {
+          variableHash[Blockly.Variables.PREFIX_ +
+              (Blockly.caseSensitiveVariables ?
+              varName : varName.toLowerCase())] = varName;
+        }
       }
     }
   }

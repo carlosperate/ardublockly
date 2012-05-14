@@ -780,7 +780,7 @@ Blockly.Block.prototype.addTitle = function(title, opt_index) {
   if (typeof opt_index == 'number') {
     if (opt_index < 0 || opt_index > this.titleRow.length) {
       throw 'There are ' + this.titleRow.length +
-            ' title(s), unable to insert at position ' + opt_index + '.';
+            ' title(s), unable to insert at index ' + opt_index + '.';
     }
     this.titleRow.splice(opt_index, 0, title);
   } else {
@@ -804,7 +804,7 @@ Blockly.Block.prototype.addTitle = function(title, opt_index) {
 Blockly.Block.prototype.setTitleText = function(newText, index) {
   if (index < 0 || index >= this.titleRow.length) {
     throw 'There are ' + this.titleRow.length +
-          ' title(s), unable to set text at position ' + index + '.';
+          ' title(s), unable to set text at index ' + index + '.';
   }
   this.titleRow[index].setText(newText);
 };
@@ -812,12 +812,11 @@ Blockly.Block.prototype.setTitleText = function(newText, index) {
 /**
  * Returns the text from the title of a block.
  * @param {number} index The index (zero-based) in the title row.
- * @return {string} Text from the title.
+ * @return {!string} Text from the title or null if title does not exist.
  */
 Blockly.Block.prototype.getTitleText = function(index) {
   if (index < 0 || index >= this.titleRow.length) {
-    throw 'There are ' + this.titleRow.length +
-          ' title(s), unable to get text at position ' + index + '.';
+    return null;
   }
   return this.titleRow[index].getText();
 };
@@ -1007,7 +1006,7 @@ Blockly.Block.prototype.addInput = function(label, tooltip, type, opt_index) {
   if (typeof opt_index == 'number') {
     if (opt_index < 0 || opt_index > this.inputList.length) {
       throw 'There are ' + this.inputList.length +
-            ' input(s), unable to insert at position ' + opt_index + '.';
+            ' input(s), unable to insert at index ' + opt_index + '.';
     }
     this.inputList.splice(opt_index, 0, input);
   } else {
@@ -1029,7 +1028,7 @@ Blockly.Block.prototype.removeInput = function(index) {
   var input = this.inputList[index];
   if (!input) {
     throw 'There are ' + this.inputList.length +
-          ' input(s), unable to delete at position ' + index + '.';
+          ' input(s), unable to delete at index ' + index + '.';
   }
   if (input.targetConnection) {
     throw 'Must disconnect input value before removing connection.';
