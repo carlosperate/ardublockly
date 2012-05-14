@@ -255,7 +255,8 @@ Blockly.Language.math_on_list = {
               thisBlock.MSG_RANDOM_ITEM
               ];
     });
-    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+    this.addTitle(dropdown);
+    this.addInput('of list', '', Blockly.INPUT_VALUE);
     this.setTooltip('Evaluate a list of numbers and return a member,\nor an aggregated result.');
   },
   MSG_SUM: 'sum',
@@ -265,7 +266,7 @@ Blockly.Language.math_on_list = {
   MSG_MEDIAN: 'median',
   MSG_MODE: 'mode',
   MSG_STD_DEV: 'standard deviation',
-  MSG_RANDOM_ITEM: 'random item from'
+  MSG_RANDOM_ITEM: 'random item'
 };
 
 Blockly.Language.math_modulo = {

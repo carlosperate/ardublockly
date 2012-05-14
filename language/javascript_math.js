@@ -139,7 +139,7 @@ Blockly.JavaScript.math_trig = Blockly.JavaScript.math_single;
 
 Blockly.JavaScript.math_on_list = function() {
   // Rounding functions.
-  func = this.getValueLabel(0);
+  func = this.getTitleText(0);
   list = Blockly.JavaScript.valueToCode_(this, 0, true) || '[]';
   var code;
   switch (func) {
@@ -156,7 +156,24 @@ Blockly.JavaScript.math_on_list = function() {
       code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list + '.length)';
       break;
     case this.MSG_MEDIAN:
-      code = 'Math.max.apply(null,' + list + ')';
+      // May need to handle null. Currently Blockly_math_median([null,null,1,3]) == 0.5.
+      if (!Blockly.JavaScript.definitions_['math_median']) {
+        // Title case is not a native JavaScript function.  Define one.
+        var func = [];
+        func.push('function Blockly_math_median(list) {');
+        func.push('  if (!list.length) return 0;');
+        func.push('  var localList = [].concat(list);');
+        func.push('  localList.sort(function(a, b) {return b - a;});');
+        func.push('  if (localList.length % 2 == 0) {');
+        func.push('    return (localList[localList.length / 2 - 1] + localList[localList.length / 2]) / 2;');
+        func.push('  } else {');
+        func.push('    return localList[(localList.length - 1) / 2];');
+        func.push('  }');
+        func.push('}');
+        Blockly.JavaScript.definitions_['math_median'] = func.join('\n');
+      }
+      var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '[]';
+      code = 'Blockly_math_median(' + argument0 + ')';
       break;
     case this.MSG_MODE:
       code = 'Math.max.apply(null,' + list + ')';
