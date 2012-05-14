@@ -768,6 +768,7 @@ Blockly.Block.prototype.setColour = function(colourHue) {
  * @param {number} opt_index If present, this is the index (zero-based) where
  *     the new item will be in the title row.  If not present, the new item
  *     will be at the end of the row.
+ * @return {!Blockly.Field} The title object created.
  */
 Blockly.Block.prototype.addTitle = function(title, opt_index) {
   // Generate a FieldLabel when given a plain text title.
@@ -792,6 +793,7 @@ Blockly.Block.prototype.addTitle = function(title, opt_index) {
     // Adding a title will cause the block to change shape.
     this.bumpNeighbours_();
   }
+  return title;
 };
 
 /**
@@ -993,7 +995,7 @@ Blockly.Block.prototype.addInput = function(label, tooltip, type, opt_index) {
   var input;
   if (type == Blockly.LOCAL_VARIABLE) {
     // Add input to list.
-    input = new Blockly.FieldDropdown('item',
+    input = new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange);
     input.init(this);
     input.type = Blockly.LOCAL_VARIABLE;

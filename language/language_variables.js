@@ -35,8 +35,9 @@ Blockly.Language.variables_get = {
   init: function() {
     this.setColour(330);
     this.addTitle('get');
-    this.addTitle(new Blockly.FieldDropdown('item',
-        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
+    this.addTitle(new Blockly.FieldDropdown(
+        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange))
+        .setText('item');
     this.setOutput(true);
     this.setTooltip('Returns the value of this variable.');
   },
@@ -57,8 +58,9 @@ Blockly.Language.variables_set = {
   init: function() {
     this.setColour(330);
     this.addTitle('set');
-    this.addTitle(new Blockly.FieldDropdown('item',
-        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
+    this.addTitle(new Blockly.FieldDropdown(
+        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange))
+        .setText('item');
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

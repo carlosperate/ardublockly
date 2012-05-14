@@ -55,7 +55,7 @@ Blockly.Language.math_arithmetic = {
     this.setColour(230);
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
-    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_ADD, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [
           thisBlock.MSG_ADD,
           thisBlock.MSG_MINUS,
@@ -96,8 +96,9 @@ Blockly.Language.math_change = {
   init: function() {
     this.setColour(230);
     this.addTitle('change');
-    this.addTitle(new Blockly.FieldDropdown('item',
-        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange));
+    this.addTitle(new Blockly.FieldDropdown(
+        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange))
+        .setText('item');
     this.addInput('by', '', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -127,7 +128,7 @@ Blockly.Language.math_single = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_ROOT, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_ROOT,
               thisBlock.MSG_ABS,
               thisBlock.MSG_NEG,
@@ -175,7 +176,7 @@ Blockly.Language.math_round = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_ROUND, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_ROUND,
               thisBlock.MSG_ROUNDUP,
               thisBlock.MSG_ROUNDDOWN];
@@ -197,7 +198,7 @@ Blockly.Language.math_trig = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_SIN, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_SIN,
               thisBlock.MSG_COS,
               thisBlock.MSG_TAN,

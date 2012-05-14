@@ -76,7 +76,7 @@ Blockly.Language.text_indexOf = {
     this.setColour(160);
     this.setOutput(true);
     this.addTitle('find');
-    var menu = new Blockly.FieldDropdown(thisBlock.MSG_FIRST, function() {
+    var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
     this.addTitle(menu);
@@ -113,7 +113,7 @@ Blockly.Language.text_changeCase = {
     var thisBlock = this;
     this.setColour(160);
     this.addTitle('to');
-    var menu = new Blockly.FieldDropdown(thisBlock.MSG_UPPERCASE, function() {
+    var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_UPPERCASE, thisBlock.MSG_LOWERCASE, thisBlock.MSG_TITLECASE];
     });
     this.addInput(menu, '', Blockly.INPUT_VALUE);
@@ -134,22 +134,22 @@ Blockly.Language.text_trim = {
     var thisBlock = this;
     this.setColour(160);
     this.addTitle('trim spaces from');
-    var menu = new Blockly.FieldDropdown(thisBlock.MSG_BOTH, function() {
-      return [thisBlock.MSG_LEFT, thisBlock.MSG_RIGHT, thisBlock.MSG_BOTH];
+    var menu = new Blockly.FieldDropdown(function() {
+      return [thisBlock.MSG_BOTH, thisBlock.MSG_LEFT, thisBlock.MSG_RIGHT];
     }, function(text) {
       var newTitle = (text == thisBlock.MSG_BOTH) ? 'sides' : 'side';
-      this.sourceBlock_.setTitleText(newTitle, 2);
+      sideTitle.setText(newTitle);
       this.setText(text);
     });
     this.addTitle(menu);
-    this.addTitle('sides');
+    var sideTitle = this.addTitle('sides');
     this.addInput('', '', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Return a copy of the text with spaces\nremoved from one or both ends.');
   },
+  MSG_BOTH: 'both',
   MSG_LEFT: 'left',
-  MSG_RIGHT: 'right',
-  MSG_BOTH: 'both'
+  MSG_RIGHT: 'right'
 };
 
 Blockly.Language.text_print = {

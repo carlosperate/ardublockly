@@ -157,7 +157,7 @@ Blockly.Language.lists_isEmpty = {
   }
 };
 
-Blockly.Language.list_indexOf = {
+Blockly.Language.lists_indexOf = {
   // Find an item in the list.
   category: 'Lists',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
@@ -167,7 +167,7 @@ Blockly.Language.list_indexOf = {
     this.setColour(210);
     this.setOutput(true);
     this.addTitle('find');
-    var menu = new Blockly.FieldDropdown(thisBlock.MSG_FIRST, function() {
+    var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
     this.addTitle(menu);

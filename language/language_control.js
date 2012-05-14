@@ -194,7 +194,7 @@ Blockly.Language.controls_whileUntil = {
   init: function() {
     this.setColour(120);
     this.addTitle('repeat');
-    var dropdown = new Blockly.FieldDropdown(Blockly.Language.controls_whileUntil.MSG_WHILE, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [Blockly.Language.controls_whileUntil.MSG_WHILE,
               Blockly.Language.controls_whileUntil.MSG_UNTIL];
     });

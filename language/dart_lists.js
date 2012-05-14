@@ -50,7 +50,7 @@ Blockly.Dart.lists_isEmpty = function(opt_dropParens) {
   return Blockly.Dart.text_isEmpty.call(this, opt_dropParens);
 };
 
-Blockly.Dart.list_indexOf = function(opt_dropParens) {
+Blockly.Dart.lists_indexOf = function(opt_dropParens) {
   // Searching a list for a value is the same as search for a substring.
   return Blockly.Dart.text_indexOf.call(this, opt_dropParens);
 };

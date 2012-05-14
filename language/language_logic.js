@@ -38,7 +38,7 @@ Blockly.Language.logic_compare = {
     this.setColour(120);
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
-    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_EQ, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_EQ,
               thisBlock.MSG_NEQ,
               thisBlock.MSG_LT,
@@ -84,7 +84,7 @@ Blockly.Language.logic_operation = {
     this.setColour(120);
     this.setOutput(true);
     this.addInput('', '', Blockly.INPUT_VALUE);
-    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_AND, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_AND, thisBlock.MSG_OR];
     });
     this.addInput(dropdown, '', Blockly.INPUT_VALUE);
@@ -124,7 +124,7 @@ Blockly.Language.logic_boolean = {
     var thisBlock = this;
     this.setColour(120);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_TRUE, function() {
+    var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_TRUE, thisBlock.MSG_FALSE];
     });
     this.addTitle(dropdown);
