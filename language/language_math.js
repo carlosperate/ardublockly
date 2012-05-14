@@ -236,12 +236,13 @@ Blockly.Language.math_trig = {
 
 Blockly.Language.math_on_list = {
     // Evaluate a list of numbers to return sum, average, min, max, etc.
+    // Some functions also work on text (min, max, mode, median).
     category: 'Math',
     helpUrl: '',
     init: function() {
       // Assign 'this' to a variable for use in the closures below.
       var thisBlock = this;
-      this.setColour('baby');
+      this.setColour(230);
       this.setOutput(true);
       var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_SUM, function() {
         return [thisBlock.MSG_SUM,
