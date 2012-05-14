@@ -235,38 +235,38 @@ Blockly.Language.math_trig = {
 };
 
 Blockly.Language.math_on_list = {
-    // Evaluate a list of numbers to return sum, average, min, max, etc.
-    // Some functions also work on text (min, max, mode, median).
-    category: 'Math',
-    helpUrl: '',
-    init: function() {
-      // Assign 'this' to a variable for use in the closures below.
-      var thisBlock = this;
-      this.setColour(230);
-      this.setOutput(true);
-      var dropdown = new Blockly.FieldDropdown(thisBlock.MSG_SUM, function() {
-        return [thisBlock.MSG_SUM,
-                thisBlock.MSG_MIN,
-                thisBlock.MSG_MAX,
-                thisBlock.MSG_AVERAGE,
-                thisBlock.MSG_MEDIAN,
-                thisBlock.MSG_MODE,
-                thisBlock.MSG_STD_DEV,
-                thisBlock.MSG_RANDOM_ITEM
-                ];
-      });
-      this.addInput(dropdown, '', Blockly.INPUT_VALUE);
-      this.setTooltip('Evaluate a list of numbers and return a member,\nor an aggregated result.');
-    },
-    MSG_SUM: 'sum',
-    MSG_MIN: 'min',
-    MSG_MAX: 'max',
-    MSG_AVERAGE: 'average',
-    MSG_MEDIAN: 'median',
-    MSG_MODE: 'mode',
-    MSG_STD_DEV: 'standard deviation',
-    MSG_RANDOM_ITEM: 'random item from'
-  };
+  // Evaluate a list of numbers to return sum, average, min, max, etc.
+  // Some functions also work on text (min, max, mode, median).
+  category: 'Math',
+  helpUrl: '',
+  init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
+    this.setColour(230);
+    this.setOutput(true);
+    var dropdown = new Blockly.FieldDropdown(function() {
+      return [thisBlock.MSG_SUM,
+              thisBlock.MSG_MIN,
+              thisBlock.MSG_MAX,
+              thisBlock.MSG_AVERAGE,
+              thisBlock.MSG_MEDIAN,
+              thisBlock.MSG_MODE,
+              thisBlock.MSG_STD_DEV,
+              thisBlock.MSG_RANDOM_ITEM
+              ];
+    });
+    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+    this.setTooltip('Evaluate a list of numbers and return a member,\nor an aggregated result.');
+  },
+  MSG_SUM: 'sum',
+  MSG_MIN: 'min',
+  MSG_MAX: 'max',
+  MSG_AVERAGE: 'average',
+  MSG_MEDIAN: 'median',
+  MSG_MODE: 'mode',
+  MSG_STD_DEV: 'standard deviation',
+  MSG_RANDOM_ITEM: 'random item from'
+};
 
 Blockly.Language.math_modulo = {
   // Remainder of a division.

@@ -137,6 +137,42 @@ Blockly.JavaScript.math_round = Blockly.JavaScript.math_single;
 // Trigonometry functions have a single operand.
 Blockly.JavaScript.math_trig = Blockly.JavaScript.math_single;
 
+Blockly.JavaScript.math_on_list = function() {
+  // Rounding functions.
+  func = this.getValueLabel(0);
+  list = Blockly.JavaScript.valueToCode_(this, 0, true) || '[]';
+  var code;
+  switch (func) {
+    case this.MSG_SUM:
+      code = list + '.reduce(function(x, y) {return x + y;})';
+      break;
+    case this.MSG_MIN:
+      code = 'Math.min.apply(null,' + list + ')';
+      break;
+    case this.MSG_MAX:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    case this.MSG_AVERAGE:
+      code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list + '.length)';
+      break;
+    case this.MSG_MEDIAN:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    case this.MSG_MODE:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    case this.MSG_STD_DEV:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    case this.MSG_RANDOM_ITEM:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
+  return code;
+};
+
 Blockly.JavaScript.math_modulo = function(opt_dropParens) {
   // Remainder computation.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
