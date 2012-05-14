@@ -116,8 +116,8 @@ Blockly.Flyout.prototype.init = function(workspace, workspaceMetrics) {
   this.width_ = 0;
   var flyout = this;
   new Blockly.Scrollbar(this.svgOptions_,
-      function() {return flyout.getMetrics()},
-      function(ratio) {return flyout.setMetrics(ratio)},
+      function() {return flyout.getMetrics();},
+      function(ratio) {return flyout.setMetrics(ratio);},
       false, false);
 
   // List of background buttons that lurk behind each block to catch clicks
