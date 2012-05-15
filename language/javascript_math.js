@@ -156,9 +156,9 @@ Blockly.JavaScript.math_on_list = function() {
       code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list + '.length)';
       break;
     case this.MSG_MEDIAN:
-      // May need to handle null. Currently Blockly_math_median([null,null,1,3]) == 0.5.
       if (!Blockly.JavaScript.definitions_['math_median']) {
-        // Title case is not a native JavaScript function.  Define one.
+        // Median is not a native JavaScript function.  Define one.
+        // May need to handle null. Currently Blockly_math_median([null,null,1,3]) == 0.5.
         var func = [];
         func.push('function Blockly_math_median(list) {');
         func.push('  if (!list.length) return 0;');
@@ -172,11 +172,45 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('}');
         Blockly.JavaScript.definitions_['math_median'] = func.join('\n');
       }
-      var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '[]';
-      code = 'Blockly_math_median(' + argument0 + ')';
+      code = 'Blockly_math_median(' + list + ')';
       break;
     case this.MSG_MODE:
-      code = 'Math.max.apply(null,' + list + ')';
+      if (!Blockly.JavaScript.definitions_['math_mode']) {
+        // As a list of numbers can contain more than one mode,
+        // the returned result is provided as an array.
+        // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
+        var func = [];
+        func.push('function Blockly_math_mode(values) {');
+        func.push('  var modes = [];');
+        func.push('  var counts = [];');
+        func.push('  var maxCount = 0;');
+        func.push('  for (var i = 0; i < values.length; i++) {');
+        func.push('    var value = values[i];');
+        func.push('    var found = false;');
+        func.push('    var thisCount;');
+        func.push('    for (var j = 0; j < counts.length; j++) {');
+        func.push('      if (counts[j][0] === value) {');
+        func.push('        thisCount = ++counts[j][1];');
+        func.push('        found = true;');
+        func.push('        break;');
+        func.push('      }');
+        func.push('    }');
+        func.push('    if (!found) {');
+        func.push('      counts.push([value, 1]);');
+        func.push('      thisCount = 1;');
+        func.push('    }');
+        func.push('    maxCount = Math.max(thisCount, maxCount);');
+        func.push('  }');
+        func.push('  for (var j = 0; j < counts.length; j++) {');
+        func.push('    if (counts[j][1] == maxCount) {');
+        func.push('        modes.push(counts[j][0]);');
+        func.push('    }');
+        func.push('  }');
+        func.push('  return modes;');
+        func.push('}');
+        Blockly.JavaScript.definitions_['math_mode'] = func.join('\n');
+      }
+      code = 'Blockly_math_mode(' + list + ')';
       break;
     case this.MSG_STD_DEV:
       code = 'Math.max.apply(null,' + list + ')';

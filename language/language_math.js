@@ -264,7 +264,7 @@ Blockly.Language.math_on_list = {
   MSG_MAX: 'max',
   MSG_AVERAGE: 'average',
   MSG_MEDIAN: 'median',
-  MSG_MODE: 'mode',
+  MSG_MODE: 'modes',
   MSG_STD_DEV: 'standard deviation',
   MSG_RANDOM_ITEM: 'random item'
 };
