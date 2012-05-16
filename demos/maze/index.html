@@ -68,8 +68,8 @@
       background-image: url(pegman.png);
     }
   
-    /* Button */
-    #runButton {
+    /* Buttons */
+    button {
       margin: 5px;
       margin-right: 12px;
       margin-left: 0;
@@ -80,13 +80,13 @@
       background-color: #d43;
       color: white;
     }
-    #runButton:active {
+    button:active {
       border: 1px solid blue !important;
     }
-    #runButton:hover {
+    button:hover {
       box-shadow: 2px 2px 5px #888;
     }
-    #runButtonDiv {
+    #buttonDiv {
       text-align: center;
       padding-top: 2em;
     }
@@ -170,8 +170,9 @@
     <img src="1x1.gif" height=52 width=49 id="pegman">
   </div>
 
-  <div id="runButtonDiv">
-    <button id="runButton" onclick="Maze.execute();">Run Program</button>
+  <div id="buttonDiv">
+    <button id="runButton" onclick="Maze.runButtonClick();">Run Program</button>
+    <button id="resetButton" onclick="Maze.resetButtonClick();" style="display: none">&nbsp; Reset &nbsp;</button>
   </div>
 
 </body>

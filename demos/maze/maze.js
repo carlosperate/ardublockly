@@ -141,11 +141,21 @@ Blockly.JavaScript.maze_isWall = function() {
 Blockly.Dart.maze_isWall = Blockly.JavaScript.maze_isWall;
 Blockly.Python.maze_isWall = Blockly.JavaScript.maze_isWall;
 
-// Create a namespace for the maze.
 
+/**
+ * Create a namespace for the maze.
+ */
 var Maze = {};
 
+/**
+ * Pixel height and width of each maze square.
+ */
 Maze.SIZE = 50;
+
+/**
+ * Miliseconds between each animation frame.
+ */
+Maze.STEP_SPEED = 150;
 
 /**
  * The maze's map is a 2D array of numbers.
@@ -164,10 +174,18 @@ Maze.MAP = [
   [1, 2, 0, 0, 0, 1, 0, 1],
   [1, 1, 1, 1, 1, 1, 1, 1]];
 
+/**
+ * Constants for cardinal directions.
+ */
 Maze.NORTH = 0;
-Maze.EAST = 4;
-Maze.SOUTH = 8;
-Maze.WEST = 16;
+Maze.EAST = 1;
+Maze.SOUTH = 2;
+Maze.WEST = 3;
+
+/**
+ * PIDs of animation tasks currently executing.
+ */
+Maze.pidList = [];
 
 /**
  * Initialize Blockly and the maze.  Called on page load.
@@ -179,9 +197,20 @@ Maze.init = function() {
 
   Blockly.pathToBlockly = '../../';
   Blockly.inject(document.getElementById('editors'));
-  
+
   // Find and name the injected SVG object.
   document.getElementsByTagName('svg')[0].id = 'content_blocks';
+
+  // Load the editor with a starting block.
+  var xml = Blockly.Xml.textToDom(
+      '<xml>' +
+      '  <block type="maze_move" x="84" y="99">' +
+      '    <title>move</title>' +
+      '    <title>forward</title>' +
+      '    <next></next>' +
+      '  </block>' +
+      '</xml>');
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
 
   // Locate the start and finish squares.
   for (var y = 0; y < Maze.MAP.length; y++) {
@@ -215,15 +244,24 @@ Maze.init = function() {
   // Move the finish icon into position.
   var finishIcon = document.getElementById('finish');
   finishIcon.style.top = Maze.mapOffsetTop_ +
-      Maze.SIZE * (Maze.finish_.y + 0.5) - finishIcon.offsetHeight / 2;
+      Maze.SIZE * (Maze.finish_.y + 0.5) - finishIcon.offsetHeight;
   finishIcon.style.left = Maze.mapOffsetLeft_ +
       Maze.SIZE * (Maze.finish_.x + 0.5) - finishIcon.offsetWidth / 2;
 
+  Maze.reset();
+};
+
+Maze.reset = function() {
   Maze.pegmanX = Maze.start_.x;
   Maze.pegmanY = Maze.start_.y;
   Maze.pegmanD = Maze.EAST;
-  Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, Maze.pegmanD);
-};
+  Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4);
+  // Kill all tasks.
+  for (var x = 0; x < Maze.pidList.length; x++) {
+    window.clearTimeout(Maze.pidList[x]);
+  }
+  Maze.pidList = [];
+}
 
 /**
  * List of tab names.
@@ -261,16 +299,168 @@ Maze.tabClick = function(id) {
   }
 };
 
+Maze.runButtonClick = function() {
+  document.getElementById('runButton').style.display = 'none';
+  document.getElementById('resetButton').style.display = 'inline';
+  Maze.execute();
+};
+
+Maze.resetButtonClick = function() {
+  document.getElementById('runButton').style.display = 'inline';
+  document.getElementById('resetButton').style.display = 'none';
+  Maze.reset();
+};
+
 /**
  * Execute the user's code.  Heaven help us...
  */
 Maze.execute = function() {
+  Maze.path = [];
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   try {
     eval(code);
   } catch (e) {
-    alert(e);
+    // A boolean is thrown for normal termination.
+    // Abnormal termination is a user error.
+    if (typeof e != 'boolean') {
+      alert(e);
+    }
   }
+  // Maze.path now contains a transcript of all the user's actions.
+  // Reset the maze and animate the transcript.
+  Maze.reset();
+  Maze.pidList.push(window.setTimeout(Maze.animate, 100));
+};
+
+/**
+ * Iterate through the recorded path and animate pegman's actions.
+ */
+Maze.animate = function() {
+  // All tasks should be complete now.  Clean up the PID list.
+  Maze.pidList = [];
+  var action;
+  do {
+    action = Maze.path.shift();
+    if (!action) {
+      return;
+    }
+  } while (action == 'look');
+
+  if (action == 'north') {
+    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                  [Maze.pegmanX, Maze.pegmanY - 1, Maze.pegmanD * 4]);
+    Maze.pegmanY--;
+  } else if (action == 'east') {
+    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                  [Maze.pegmanX + 1, Maze.pegmanY, Maze.pegmanD * 4]);
+    Maze.pegmanX++;
+  } else if (action == 'south') {
+    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                  [Maze.pegmanX, Maze.pegmanY + 1, Maze.pegmanD * 4]);
+    Maze.pegmanY++;
+  } else if (action == 'west') {
+    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                  [Maze.pegmanX - 1, Maze.pegmanY, Maze.pegmanD * 4]);
+    Maze.pegmanX--;
+  } else if (action.substring(0, 4) == 'fail') {
+    Maze.scheduleFail(action.substring(5) == 'forwards');
+  } else if (action == 'left') {
+    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                  [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 - 4]);
+    Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD - 1);
+  } else if (action == 'right') {
+    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                  [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 + 4]);
+    Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD + 1);
+  } else if (action == 'finish') {
+    Maze.scheduleFinish();
+  }
+  
+  Maze.pidList.push(window.setTimeout(Maze.animate, Maze.STEP_SPEED * 5));
+};
+
+/**
+ * Schedule the animations for a move or turn.
+ * @param {!Array.<number>} startPos X, Y and direction starting points.
+ * @param {!Array.<number>} endPos X, Y and direction ending points.
+ */
+Maze.schedule = function(startPos, endPos) {
+  var deltas = [(endPos[0] - startPos[0]) / 4,
+                (endPos[1] - startPos[1]) / 4,
+                (endPos[2] - startPos[2]) / 4];
+  Maze.displayPegman(startPos[0] + deltas[0],
+                     startPos[1] + deltas[1],
+                     Maze.constrainDirection16(startPos[2] + deltas[2]));
+  Maze.pidList.push(window.setTimeout(function() {
+      Maze.displayPegman(startPos[0] + deltas[0] * 2,
+          startPos[1] + deltas[1] * 2,
+          Maze.constrainDirection16(startPos[2] + deltas[2] * 2));
+    }, Maze.STEP_SPEED));
+  Maze.pidList.push(window.setTimeout(function() {
+      Maze.displayPegman(startPos[0] + deltas[0] * 3,
+          startPos[1] + deltas[1] * 3,
+          Maze.constrainDirection16(startPos[2] + deltas[2] * 3));
+    }, Maze.STEP_SPEED * 2));
+  Maze.pidList.push(window.setTimeout(function() {
+      Maze.displayPegman(endPos[0], endPos[1],
+          Maze.constrainDirection16(endPos[2]));
+    }, Maze.STEP_SPEED * 3));
+};
+
+/**
+ * Schedule the animations for a failed move.
+ * @param {boolean} forwards True if forwards, false if backwards.
+ */
+Maze.scheduleFail = function(forwards) {
+  var deltaX = 0;
+  var deltaY = 0;
+  if (Maze.pegmanD == 0) {
+    deltaY = -0.25;
+  } else if (Maze.pegmanD == 1) {
+    deltaX = 0.25;
+  } else if (Maze.pegmanD == 2) {
+    deltaY = 0.25;
+  } else if (Maze.pegmanD == 3) {
+    deltaX = -0.25;
+  }
+  if (!forwards) {
+    deltaX = - deltaX;
+    deltaY = - deltaY;
+  }
+  var direction16 = Maze.constrainDirection16(Maze.pegmanD * 4);
+  Maze.displayPegman(Maze.pegmanX + deltaX,
+                     Maze.pegmanY + deltaY,
+                     direction16);
+  Maze.pidList.push(window.setTimeout(function() {
+    Maze.displayPegman(Maze.pegmanX,
+                       Maze.pegmanY,
+                       direction16);
+    }, Maze.STEP_SPEED));
+  Maze.pidList.push(window.setTimeout(function() {
+    Maze.displayPegman(Maze.pegmanX + deltaX,
+                       Maze.pegmanY + deltaY,
+                       direction16);
+    }, Maze.STEP_SPEED * 2));
+  Maze.pidList.push(window.setTimeout(function() {
+      Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, direction16);
+    }, Maze.STEP_SPEED * 3));
+};
+
+/**
+ * Schedule the animations for a victory dance.
+ */
+Maze.scheduleFinish = function() {
+  var direction16 = Maze.constrainDirection16(Maze.pegmanD * 4);
+  Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 16);
+  Maze.pidList.push(window.setTimeout(function() {
+    Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 17);
+    }, Maze.STEP_SPEED));
+  Maze.pidList.push(window.setTimeout(function() {
+    Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 16);
+    }, Maze.STEP_SPEED * 2));
+  Maze.pidList.push(window.setTimeout(function() {
+      Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, direction16);
+    }, Maze.STEP_SPEED * 3));
 };
 
 /**
@@ -288,30 +478,126 @@ Maze.displayPegman = function(x, y, d) {
   pegmanIcon.style.backgroundPosition = -d * pegmanIcon.offsetWidth;
 };
 
+/**
+ * Keep the direction within 0-3, wrapping at both ends.
+ * @param {number} d Potentially out-of-bounds direction value.
+ * @return {number} Legal direction value.
+ */
+Maze.constrainDirection4 = function(d) {
+  if (d < 0) {
+    d += 4;
+  } else if (d > 3) {
+    d -= 4;
+  }
+  return d;
+};
+
+/**
+ * Keep the direction within 0-15, wrapping at both ends.
+ * @param {number} d Potentially out-of-bounds direction value.
+ * @return {number} Legal direction value.
+ */
+Maze.constrainDirection16 = function(d) {
+  if (d < 0) {
+    d += 16;
+  } else if (d > 15) {
+    d -= 16;
+  }
+  return d;
+};
+
+/**
+ * If the user has executed too many actions, we're probably in an infinite
+ * loop.  Sadly I wasn't able to solve the Halting Problem for this demo.
+ * @throws {false} Throws an error to terminate the user's program.
+ */
+Maze.checkTimeout = function() {
+  if (Maze.path.length >= 1000) {
+    throw false;
+  }
+};
+
 // API
 
 /**
  * Move pegman forwards or backwards.
- * @param {number} direction Direction to move.
+ * @param {number} direction Direction to move (0 = forward, 1 = backward).
  */
 Maze.move = function(direction) {
-  
+  if (Maze.isWall(direction ? 3: 0)) {
+    Maze.path.push('fail_' + (direction ? 'backwards': 'forwards'));
+    return;
+  }
+  var effectiveDirection = Maze.pegmanD;
+  if (direction) {
+    // Moving backwards.  Flip the effective direction.
+    effectiveDirection = Maze.constrainDirection4(effectiveDirection + 2);
+  }
+  if (effectiveDirection == Maze.NORTH) {
+    Maze.pegmanY--;
+    Maze.path.push('north');
+  } else if (effectiveDirection == Maze.EAST) {
+    Maze.pegmanX++;
+    Maze.path.push('east');
+  } else if (effectiveDirection == Maze.SOUTH) {
+    Maze.pegmanY++;
+    Maze.path.push('south');
+  } else if (effectiveDirection == Maze.WEST) {
+    Maze.pegmanX--;
+    Maze.path.push('west');
+  }
+  if (Maze.pegmanX == Maze.finish_.x && Maze.pegmanY == Maze.finish_.y) {
+    // Finished.  Terminate the user's program.
+    Maze.path.push('finish');
+    throw true;
+  }
 };
 
 /**
  * Turn pegman left or right.
- * @param {number} direction Direction to turn.
+ * @param {number} direction Direction to turn (0 = left, 1 = right).
  */
 Maze.turn = function(direction) {
-  
+  Maze.checkTimeout();
+  if (direction) {
+    // Right turn (clockwise).
+    Maze.pegmanD++;
+    Maze.path.push('right');
+  } else {
+    // Left turn (counterclockwise).
+    Maze.pegmanD--;
+    Maze.path.push('left');
+  }
+  Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD);
 };
 
 /**
  * Is there a wall next to pegman?
- * @param {number} direction Direction to look.
+ * @param {number} direction Direction to look
+ *     (0 = ahead, 1 = left, 2 = right, 3 = behind).
  * @return {boolean} True if there is a wall.
  */
 Maze.isWall = function(direction) {
-  
+  Maze.checkTimeout();
+  Maze.path.push('look');
+  var effectiveDirection = Maze.pegmanD;
+  if (direction == 1) {  // Left
+    effectiveDirection--; 
+  } else if (direction == 2) { // Right
+    effectiveDirection++; 
+  } else if (direction == 3) { // Behind
+    effectiveDirection += 2;
+  }
+  effectiveDirection = Maze.constrainDirection4(effectiveDirection);
+  var square;
+  if (effectiveDirection == Maze.NORTH) {
+    square = Maze.MAP[Maze.pegmanY - 1][Maze.pegmanX];
+  } else if (effectiveDirection == Maze.EAST) {
+    square = Maze.MAP[Maze.pegmanY][Maze.pegmanX + 1];
+  } else if (effectiveDirection == Maze.SOUTH) {
+    square = Maze.MAP[Maze.pegmanY + 1][Maze.pegmanX];
+  } else if (effectiveDirection == Maze.WEST) {
+    square = Maze.MAP[Maze.pegmanY][Maze.pegmanX - 1];
+  }
+  return square == 1;
 };
-

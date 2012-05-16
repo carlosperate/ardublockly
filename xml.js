@@ -241,6 +241,10 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
   }
 
   for (var x = 0, xmlChild; xmlChild = xmlBlock.childNodes[x]; x++) {
+    if (xmlChild.nodeType == 3 && xmlChild.data.match(/^\s*$/)) {
+      // Extra whitespace between tags does not concern us.
+      continue;
+    }
     var blockChild = null;
     var input;
     switch (xmlChild.tagName.toLowerCase()) {
