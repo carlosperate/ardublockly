@@ -130,6 +130,37 @@ Blockly.Xml.domToText = function(dom) {
 };
 
 /**
+ * Converts a DOM structure into properly indented text.
+ * @param {!Element} dom A tree of XML elements.
+ * @return {string} Text representation.
+ */
+Blockly.Xml.domToPrettyText = function(dom) {
+  // This function is not guaranteed to be correct for all XML.
+  // But it handles the XML that Blockly generates.
+  var line = Blockly.Xml.domToText(dom);
+  // Add place every open and close tag on its own line.
+  var lines = line.split('<');
+  // Indent every line.
+  var indent = '';
+  for (var x = 1; x < lines.length; x++) {
+    var nextChar = lines[x][0];
+    if (nextChar == '/') {
+      indent = indent.substring(2);
+    }
+    lines[x] = indent + '<' + lines[x];
+    if (nextChar != '/') {
+      indent += '  ';
+    }
+  }
+  // Pull simple tags back together.
+  // E.g. <foo></foo>
+  var text = lines.join('\n');
+  text = text.replace(/(<(\w+)[^>]*>[^\n]*)\n *<\/\2>/g, '$1</$2>');
+  // Trim leading blank line.
+  return text.replace(/^\n/, '');
+};
+
+/**
  * Converts plain text into a DOM structure.
  * Throws an error if XML doesn't parse.
  * @param {string} text Text representation.

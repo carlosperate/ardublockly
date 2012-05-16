@@ -22,10 +22,6 @@
  * @author fraser@google.com (Neil Fraser)
  */
 
-.blocklySvg {
-  border: 1px solid black;
-}
-
 .blocklyDraggable {
   /* Hotspot coordinates are baked into the CUR file, but they are still
      required in the CSS due to a Chrome bug.
@@ -240,7 +236,7 @@
   fill: #000;
 }
 .blocklyLaunchButton>.blocklyButtonBackground {
-  fill: #f00;
+  fill: #d43;
 }
 .blocklyLaunchButton>.blocklyButtonText {
   fill: #fff;
@@ -249,9 +245,6 @@
   fill: #bbb;
   filter: url(#blocklyShadowFilter);
   display: none;
-}
-.blocklyLaunchButton>.blocklyButtonShadow {
-  fill: #999;
 }
 .blocklyButton:hover>.blocklyButtonShadow {
   display: block;

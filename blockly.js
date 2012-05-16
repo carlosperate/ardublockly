@@ -235,7 +235,7 @@ Blockly.svgResize = function() {
 
   var left = 0;
   var top = 0;
-  var node = Blockly.svg.parentNode;
+  var node = Blockly.svg;
   do {
     left += node.offsetLeft;
     top += node.offsetTop;

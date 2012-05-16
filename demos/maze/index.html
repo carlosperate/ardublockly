@@ -1,0 +1,178 @@
+<html>
+<head>
+  <title>Blockly Demo: Maze</title>
+  <script type="text/javascript" src="../../blockly.js"></script>
+  <script type="text/javascript" src="../../block.js"></script>
+  <script type="text/javascript" src="../../blockSvg.js"></script>
+  <script type="text/javascript" src="../../comment.js"></script>
+  <script type="text/javascript" src="../../connection.js"></script>
+  <script type="text/javascript" src="../../contextmenu.js"></script>
+  <script type="text/javascript" src="../../field.js"></script>
+  <script type="text/javascript" src="../../field_dropdown.js"></script>
+  <script type="text/javascript" src="../../field_label.js"></script>
+  <script type="text/javascript" src="../../field_textinput.js"></script>
+  <script type="text/javascript" src="../../flyout.js"></script>
+  <script type="text/javascript" src="../../generator.js"></script>
+  <script type="text/javascript" src="../../inject.js"></script>
+  <script type="text/javascript" src="maze.js"></script>
+  <script type="text/javascript" src="../../language/dart.js"></script>
+  <script type="text/javascript" src="../../language/dart_control.js"></script>
+  <script type="text/javascript" src="../../language/dart_text.js"></script>
+  <script type="text/javascript" src="../../language/dart_math.js"></script>
+  <script type="text/javascript" src="../../language/dart_logic.js"></script>
+  <script type="text/javascript" src="../../language/dart_lists.js"></script>
+  <script type="text/javascript" src="../../language/dart_variables.js"></script>
+  <script type="text/javascript" src="../../language/javascript.js"></script>
+  <script type="text/javascript" src="../../language/javascript_control.js"></script>
+  <script type="text/javascript" src="../../language/javascript_text.js"></script>
+  <script type="text/javascript" src="../../language/javascript_math.js"></script>
+  <script type="text/javascript" src="../../language/javascript_logic.js"></script>
+  <script type="text/javascript" src="../../language/javascript_lists.js"></script>
+  <script type="text/javascript" src="../../language/javascript_variables.js"></script>
+  <script type="text/javascript" src="../../language/python.js"></script>
+  <script type="text/javascript" src="../../language/python_control.js"></script>
+  <script type="text/javascript" src="../../language/python_text.js"></script>
+  <script type="text/javascript" src="../../language/python_math.js"></script>
+  <script type="text/javascript" src="../../language/python_logic.js"></script>
+  <script type="text/javascript" src="../../language/python_lists.js"></script>
+  <script type="text/javascript" src="../../language/python_variables.js"></script>
+  <script type="text/javascript" src="../../language/language_control.js"></script>
+  <script type="text/javascript" src="../../language/language_text.js"></script>
+  <script type="text/javascript" src="../../language/language_math.js"></script>
+  <script type="text/javascript" src="../../language/language_logic.js"></script>
+  <script type="text/javascript" src="../../language/language_lists.js"></script>
+  <script type="text/javascript" src="../../language/language_variables.js"></script>
+  <script type="text/javascript" src="../../mutator.js"></script>
+  <script type="text/javascript" src="../../scrollbar.js"></script>
+  <script type="text/javascript" src="../../toolbox.js"></script>
+  <script type="text/javascript" src="../../tooltip.js"></script>
+  <script type="text/javascript" src="../../trashcan.js"></script>
+  <script type="text/javascript" src="../../variables.js"></script>
+  <script type="text/javascript" src="../../workspace.js"></script>
+  <script type="text/javascript" src="../../xml.js"></script>
+  
+  <style>
+    body {
+      background-color: white;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #finish {
+      position: absolute;
+    }
+    #pegman {
+      position: absolute;
+      background-image: url(pegman.png);
+    }
+  
+    /* Button */
+    #runButton {
+      margin: 5px;
+      margin-right: 12px;
+      margin-left: 0;
+      padding: 10px;
+      font-size: large;
+      border-radius: 5px;
+      border: 1px solid #d43;
+      background-color: #d43;
+      color: white;
+    }
+    #runButton:active {
+      border: 1px solid blue !important;
+    }
+    #runButton:hover {
+      box-shadow: 2px 2px 5px #888;
+    }
+    #runButtonDiv {
+      text-align: center;
+      padding-top: 2em;
+    }
+  
+    /* Tabs */
+    #tabs, td {
+      border: 1px solid #ccc;
+    }
+    td.tabon {
+      border-bottom-color: #ddd;
+      background-color: #ddd;
+      padding: 5px 19px;
+    }
+    td.taboff {
+      cursor: pointer;
+      padding: 5px 19px;
+    }
+    td.taboff:hover {
+      background-color: #eee;
+    }
+    td.tabmin {
+      border-top-style: none;
+      border-left-style: none;
+      border-right-style: none;
+    }
+    td.tabmax {
+      border-top-style: none;
+      border-left-style: none;
+      border-right-style: none;
+      width: 99%;
+    }
+  
+    #editors {
+      float: right;
+      height: 95%;
+      width: 60%;
+    }
+    #editors>pre {
+      display: none;
+      width: 100%;
+      height: 99%;
+      padding: 0;
+      margin: 0;
+      border: 1px solid #ccc;
+      border-top-style: none;
+      overflow: scroll;
+    }
+    .blocklySvg {
+      border: 1px solid #ccc;
+      border-top-style: none;
+    }
+  </style>
+</head>
+<body onload="Maze.init()">
+  <div id="editors">
+    <table class="tabs" cellspacing=0>
+      <tr>
+        <td id="tab_blocks" class="tabon" onclick="Maze.tabClick(this.id)">Blocks</td>
+        <td class="tabmin">&nbsp;</td>
+        <td id="tab_javascript" class="taboff" onclick="Maze.tabClick(this.id)">JavaScript</td>
+        <td class="tabmin">&nbsp;</td>
+        <td id="tab_dart" class="taboff" onclick="Maze.tabClick(this.id)">Dart</td>
+        <td class="tabmin">&nbsp;</td>
+        <td id="tab_python" class="taboff" onclick="Maze.tabClick(this.id)">Python</td>
+        <td class="tabmin">&nbsp;</td>
+        <td id="tab_xml" class="taboff" onclick="Maze.tabClick(this.id)">XML</td>
+        <td class="tabmax">&nbsp;</td>
+      </tr>
+    </table>
+    <pre id="content_javascript"></pre>
+    <pre id="content_dart"></pre>
+    <pre id="content_python"></pre>
+    <pre id="content_xml"></pre>
+  </div>
+
+  <h1>Blockly Demo: Maze</h1>
+
+  <div>
+    <img src="map.png" height=400 width=400 id="map">
+    <img src="marker.png" height=34 width=20 id="finish">
+    <img src="1x1.gif" height=52 width=49 id="pegman">
+  </div>
+
+  <div id="runButtonDiv">
+    <button id="runButton" onclick="Maze.execute();">Run Program</button>
+  </div>
+
+</body>
+</html>
