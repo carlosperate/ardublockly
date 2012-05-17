@@ -60,20 +60,9 @@ Blockly.Python.controls_for = function() {
       this.getVariableInput(0));
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
   var argument1 = Blockly.Python.valueToCode_(this, 1, true) || '0';
-  var branch0 = Blockly.Python.statementToCode_(this, 0);
-  var code;
-  if (argument1.match(/^\w+$/)) {
-    code = 'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + argument1 + '; ' + variable0 + '++) {\n' +
-        branch0 + '}\n';
-  } else {
-    // The end value appears to be more complicated than a simple variable.
-    // Cache it to a variable to prevent repeated look-ups.
-    var endVar = Blockly.Python.variableDB_.getDistinctVariable(
-        variable0 + '_end');
-    code = 'var ' + endVar + ' = ' + argument1 + ';\n' +
-        'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + endVar + '; ' + variable0 + '++) {\n' +
-        branch0 + '}\n';
-  }
+  var branch0 = Blockly.Python.statementToCode_(this, 0) || '  pass\n';
+  var code = 'for ' + variable0 + ' in range(' + argument0 + ', ' + 
+      argument1 + '):\n' + branch0 + '\n';
   return code;
 };
 
@@ -82,23 +71,12 @@ Blockly.Python.controls_forEach = function() {
   var variable0 = Blockly.Python.variableDB_.getVariable(
       this.getVariableInput(0));
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '[]';
-  var branch0 = Blockly.Python.statementToCode_(this, 0);
-  var code;
-  var indexVar = Blockly.Python.variableDB_.getDistinctVariable(
-      variable0 + '_index');
-  if (argument0.match(/^\w+$/)) {
-    branch0 = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' + branch0;
-    code = 'for (var ' + indexVar + ' in  ' + argument0 + ') {\n' +
-        branch0 + '}\n';
-  } else {
-    // The list appears to be more complicated than a simple variable.
-    // Cache it to a variable to prevent repeated look-ups.
-    var listVar = Blockly.Python.variableDB_.getDistinctVariable(
-        variable0 + '_list');
-    branch0 = '  ' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' + branch0;
-    code = 'var ' + listVar + ' = ' + argument0 + ';\n' +
-        'for (var ' + indexVar + ' in ' + listVar + ') {\n' +
-        branch0 + '}\n';
-  }
+  var branch0 = Blockly.Python.statementToCode_(this, 0)  || '  pass\n';
+  var code = 'for ' + variable0 + ' in  ' + argument0 + ':\n' + branch0 + '\n';
   return code;
+};
+
+Blockly.Python.controls_flow_statements = function() {
+  // Flow statements pass, continue, break, return.
+  return this.getTitleText(0) + '\n';
 };

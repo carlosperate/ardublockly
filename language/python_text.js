@@ -34,13 +34,13 @@ Blockly.Python.text = function() {
 Blockly.Python.text_length = function() {
   // String length.
   var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
-  return argument0 + '.length';
+  return 'len(' + argument0 + ')';
 };
 
 Blockly.Python.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
-  return '!' + argument0 + '.length';
+  return '!len(' + argument0 + ')';
 };
 
 Blockly.Python.text_indexOf = function(opt_dropParens) {

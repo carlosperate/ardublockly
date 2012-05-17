@@ -28,6 +28,13 @@
 <script type="text/javascript" src="language/javascript_logic.js"></script>
 <script type="text/javascript" src="language/javascript_lists.js"></script>
 <script type="text/javascript" src="language/javascript_variables.js"></script>
+<script type="text/javascript" src="language/python.js"></script>
+<script type="text/javascript" src="language/python_control.js"></script>
+<script type="text/javascript" src="language/python_text.js"></script>
+<script type="text/javascript" src="language/python_math.js"></script>
+<script type="text/javascript" src="language/python_logic.js"></script>
+<script type="text/javascript" src="language/python_lists.js"></script>
+<script type="text/javascript" src="language/python_variables.js"></script>
 <script type="text/javascript" src="language/language_control.js"></script>
 <script type="text/javascript" src="language/language_text.js"></script>
 <script type="text/javascript" src="language/language_math.js"></script>
@@ -154,6 +161,11 @@ function toDart() {
   output.value = Blockly.Generator.workspaceToCode('Dart');
 }
 
+function toPython() {
+  var output = document.getElementById('importExport');
+  output.value = Blockly.Generator.workspaceToCode('Python');
+}
+
 function airstrike(n) {
   var prototypes = [];
   for (var prototype in Blockly.Language) {
@@ -215,6 +227,8 @@ h1 {
   <input type="button" value="Generate JavaScript" onclick="toJavaScript()">
   &nbsp;
   <input type="button" value="Generate Dart" onclick="toDart()">
+  &nbsp;
+  <input type="button" value="Generate Python" onclick="toPython()">
   <br>
   <textarea id="importExport" style="width: 26%; height: 12em"></textarea>
 </p>

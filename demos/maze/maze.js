@@ -89,7 +89,7 @@ Blockly.Language.maze_turnRight = {
     var dropdown = new Blockly.FieldDropdown(function() {
       return Blockly.Language.maze_turnLeft.DIRECTIONS;
     });
-    this.addTitle(dropdown)
+    this.addTitle(dropdown);
     this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1], 1);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -261,7 +261,7 @@ Maze.reset = function() {
     window.clearTimeout(Maze.pidList[x]);
   }
   Maze.pidList = [];
-}
+};
 
 /**
  * List of tab names.

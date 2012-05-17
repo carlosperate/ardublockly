@@ -279,7 +279,7 @@ Blockly.Language.controls_forEach = {
 
 
 Blockly.Language.controls_flow_statements = {
-  // Flow statements pass, continue, break, return.
+  // Flow statements: continue, break, return.
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/Control_flow',
   init: function() {
@@ -287,9 +287,8 @@ Blockly.Language.controls_flow_statements = {
     var thisBlock = this;
     var dropdown = new Blockly.FieldDropdown(function() {
       return [
-          thisBlock.MSG_PASS,
-          thisBlock.MSG_CONTINUE,
           thisBlock.MSG_BREAK,
+          thisBlock.MSG_CONTINUE,
           thisBlock.MSG_RETURN
         ];
     });
@@ -298,8 +297,7 @@ Blockly.Language.controls_flow_statements = {
     this.setTooltip('Built-in statements to insert into control flows.');
     this.contextMenu = false;
   },
-  MSG_PASS: 'pass',
-  MSG_CONTINUE: 'continue',
   MSG_BREAK: 'break',
+  MSG_CONTINUE: 'continue',
   MSG_RETURN: 'return'
 };

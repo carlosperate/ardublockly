@@ -102,3 +102,8 @@ Blockly.JavaScript.controls_forEach = function() {
   }
   return code;
 };
+
+Blockly.JavaScript.controls_flow_statements = function() {
+  // Flow statements: continue, break, return.
+  return this.getTitleText(0) + ';\n';
+};
