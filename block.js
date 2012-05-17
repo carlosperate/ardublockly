@@ -264,6 +264,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
     return;
   } else {
     // Left-click (or middle click)
+    Blockly.removeAllRanges();
     Blockly.setCursorHand_(true);
     // Look up the current translation and record it.
     var xy = this.getRelativeToSurfaceXY();
@@ -547,6 +548,7 @@ Blockly.Block.prototype.setDragging_ = function(adding) {
  * @private
  */
 Blockly.Block.prototype.onMouseMove_ = function(e) {
+  Blockly.removeAllRanges();
   var dx = e.clientX - this.startDragMouseX;
   var dy = e.clientY - this.startDragMouseY;
   if (Blockly.Block.dragMode_ == 1) {

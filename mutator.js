@@ -179,7 +179,7 @@ Blockly.Mutator.createDom = function() {
                                  Blockly.Mutator.showHelp_);
   Blockly.Mutator.cancelButton_ =
       new Blockly.Mutator.Button(Blockly.MSG_MUTATOR_CANCEL, false,
-                                 Blockly.Mutator.closeDialog_);
+                                 Blockly.Mutator.closeDialog);
   Blockly.Mutator.changeButton_ =
       new Blockly.Mutator.Button(Blockly.MSG_MUTATOR_CHANGE, true,
                                  Blockly.Mutator.saveDialog_);
@@ -373,9 +373,8 @@ Blockly.Mutator.openDialog_ = function(block) {
 
 /**
  * Close the dialog.
- * @private
  */
-Blockly.Mutator.closeDialog_ = function() {
+Blockly.Mutator.closeDialog = function() {
   Blockly.Mutator.isOpen = false;
   Blockly.addClass_(Blockly.Mutator.svgGroup_, 'blocklyHidden');
   Blockly.unbindEvent_(window, 'resize', Blockly.Mutator.resizeWrapper_);
@@ -397,7 +396,7 @@ Blockly.Mutator.closeDialog_ = function() {
  */
 Blockly.Mutator.saveDialog_ = function() {
   Blockly.Mutator.sourceBlock_.compose(Blockly.Mutator.rootBlock_);
-  Blockly.Mutator.closeDialog_();
+  Blockly.Mutator.closeDialog();
 };
 
 // If Buttons get used for other things beyond the Mutator Dialog, then move

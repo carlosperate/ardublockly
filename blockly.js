@@ -244,6 +244,7 @@ Blockly.svgResize = function() {
  */
 Blockly.onMouseDown_ = function(e) {
   Blockly.hideChaff();
+  Blockly.removeAllRanges();
   if (Blockly.isTargetInput_(e) ||
       (Blockly.Mutator && Blockly.Mutator.isOpen)) {
     return;
@@ -288,6 +289,7 @@ Blockly.onMouseUp_ = function(e) {
  */
 Blockly.onMouseMove_ = function(e) {
   if (Blockly.mainWorkspace.dragMode) {
+    Blockly.removeAllRanges();
     var dx = e.clientX - Blockly.mainWorkspace.startDragMouseX;
     var dy = e.clientY - Blockly.mainWorkspace.startDragMouseY;
     var metrics = Blockly.mainWorkspace.startDragMetrics;
@@ -320,16 +322,19 @@ Blockly.onKeyDown_ = function(e) {
   if (e.keyCode == 27) {
     // Pressing esc closes the context menu.
     Blockly.hideChaff();
-  } else {
-    if (e.keyCode == 8 || e.keyCode == 46) {
-      // Delete or backspace.
-      if (Blockly.selected && Blockly.selected.editable) {
-        Blockly.playAudio('delete');
-        Blockly.selected.destroy(true);
-      }
-      // Stop the browser from going back to the previous page.
-      e.preventDefault();
+    if (Blockly.Mutator && Blockly.Mutator.isOpen) {
+      Blockly.Mutator.closeDialog();
     }
+  } else if (e.keyCode == 8 || e.keyCode == 46) {
+    // Delete or backspace.
+    if (Blockly.selected && Blockly.selected.editable &&
+        (!Blockly.Mutator || !Blockly.Mutator.isOpen)) {
+      Blockly.hideChaff();
+      Blockly.playAudio('delete');
+      Blockly.selected.destroy(true);
+    }
+    // Stop the browser from going back to the previous page.
+    e.preventDefault();
   }
 };
 
@@ -374,25 +379,21 @@ Blockly.hideChaff = function(opt_allowToolbox) {
   if (Blockly.Toolbox && !opt_allowToolbox) {
     Blockly.Toolbox.clearSelection();
   }
-  // Chrome will select text outside the SVG when double-clicking.
-  // Deselect this text, so that it doesn't mess up any subsequent drag.
-  // But allow selected text inside Blockly (such as in an editable text field).
+};
+
+/**
+ * Destroy all selections on the webpage.
+ * Chrome will select text outside the SVG when double-clicking.
+ * Deselect this text, so that it doesn't mess up any subsequent drag.
+ */
+Blockly.removeAllRanges = function() {
   if (window.getSelection) {  // W3
     var sel = window.getSelection();
     if (sel) {
-      var node = sel.focusNode;
-      // Determine if this node is in the SVG.
-      while (node) {
-        if (node == Blockly.svg) {
-          break;
-        }
-        node = node.parentNode;
-      }
-      if (!node) {
-        window.setTimeout(function() {
-            window.getSelection().removeAllRanges();
-          }, 0);
-      }
+      window.getSelection().removeAllRanges();
+      window.setTimeout(function() {
+          window.getSelection().removeAllRanges();
+        }, 0);
     }
   }
 };

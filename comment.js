@@ -244,6 +244,8 @@ Blockly.Comment.prototype.createBubble_ = function(commentGroup) {
                      this.bubbleMouseDown_);
   Blockly.bindEvent_(this.resizeGroup_, 'mousedown', this,
                      this.resizeMouseDown_);
+  Blockly.bindEvent_(this.foreignObject_, 'mousedown', this,
+                     Blockly.noEvent);
   Blockly.bindEvent_(this.textarea_, 'mouseup', this,
                      this.textareaFocus_);
 };
