@@ -232,17 +232,9 @@ Blockly.svgResize = function() {
     Blockly.svg.setAttribute('height', height + 'px');
     Blockly.svg.cachedHeight_ = height;
   }
-
-  var left = 0;
-  var top = 0;
-  var node = Blockly.svg;
-  do {
-    left += node.offsetLeft;
-    top += node.offsetTop;
-    node = node.offsetParent;
-  } while (node);
-  Blockly.svg.cachedLeft_ = left;
-  Blockly.svg.cachedTop_ = top;
+  var bBox = Blockly.svg.getBoundingClientRect();
+  Blockly.svg.cachedLeft_ = bBox.left;
+  Blockly.svg.cachedTop_ = bBox.top;
 };
 
 /**

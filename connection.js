@@ -215,10 +215,26 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
   }
   // Move the root block.
   var rootBlock = this.sourceBlock_.getRootBlock();
+  var reverse = false;
+  if (!rootBlock.editable) {
+    // Can't bump an uneditable block away.
+    // Check to see if the other block is editable.
+    rootBlock = staticConnection.sourceBlock_.getRootBlock();
+    if (!rootBlock.editable) {
+      return;
+    }
+    // Swap the connections and move the 'static' connection instead.
+    staticConnection = this;
+    reverse = true;
+  }
   // Raise it to the top for extra visiblility.
   rootBlock.svg_.svgGroup_.parentNode.appendChild(rootBlock.svg_.svgGroup_);
   var dx = (staticConnection.x_ + Blockly.SNAP_RADIUS) - this.x_;
   var dy = (staticConnection.y_ + Blockly.SNAP_RADIUS * 2) - this.y_;
+  if (reverse) {
+    // When reversing a bump due to an uneditable block, bump up.
+    dy = -dy;
+  }
   if (Blockly.RTL) {
     dx = -dx;
   }
