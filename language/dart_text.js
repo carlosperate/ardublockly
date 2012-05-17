@@ -43,6 +43,25 @@ Blockly.Dart.text_isEmpty = function() {
   return argument0 + '.isEmpty()';
 };
 
+Blockly.Dart.text_endString = function() {
+  // Return a leading or trailing substring.
+  var first = this.getValueLabel(0) == this.MSG_FIRST;
+  var code;
+  if (first) {
+    var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
+    var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\'';
+    code = argument1 + '.substring(0, ' + argument0 + ')';
+  } else {
+    var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
+    var argument1 = Blockly.Dart.valueToCode_(this, 1, true) || '\'\'';
+    var tempVar = Blockly.Dart.variableDB_.getDistinctVariable('temp_text');
+    Blockly.Dart.definitions_['variables'] += '\nString ' + tempVar + ';';
+    code = '[' + tempVar + ' = ' + argument1 + ', ' +
+        tempVar + '.substring(' + tempVar + '.length - ' + argument0 + ')][1]';
+  }
+  return code;
+};
+
 Blockly.Dart.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
   var operator = this.getTitleText(1) == this.MSG_FIRST ? 'indexOf' : 'lastIndexOf';

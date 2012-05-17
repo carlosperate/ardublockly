@@ -40,7 +40,17 @@ Blockly.Python.text_length = function() {
 Blockly.Python.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
-  return '!len(' + argument0 + ')';
+  return 'not len(' + argument0 + ')';
+};
+
+Blockly.Python.text_endString = function() {
+  // Return a leading or trailing substring.
+  var first = this.getValueLabel(0) == this.MSG_FIRST;
+  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
+  var argument1 = Blockly.Python.valueToCode_(this, 1) || '\'\'';
+  var code = argument1 + '[' +
+      (first ? ':' + argument0 : '-' + argument0 + ':') + ']';
+  return code;
 };
 
 Blockly.Python.text_indexOf = function(opt_dropParens) {
@@ -132,5 +142,5 @@ Blockly.Python.text_trim = function() {
 Blockly.Python.text_print = function() {
   // Print statement.
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
-  return 'window.alert(' + argument0 + ');\n';
+  return 'print ' + argument0 + '\n';
 };

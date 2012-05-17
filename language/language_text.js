@@ -66,6 +66,27 @@ Blockly.Language.text_isEmpty = {
   }
 };
 
+Blockly.Language.text_endString = {
+  // Return a leading or trailing substring.
+  category: 'Text',
+  helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
+  init: function() {
+    // Assign 'this' to a variable for use in the closures below.
+    var thisBlock = this;
+    this.setColour(160);
+    this.setOutput(true);
+    var menu = new Blockly.FieldDropdown(function() {
+      return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
+    });
+    this.addInput(menu, '', Blockly.INPUT_VALUE);
+    this.addInput('letters in text', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+    this.setTooltip('Returns specified number of letters at the beginning or end of the text.');
+  },
+  MSG_FIRST: 'first',
+  MSG_LAST: 'last'
+};
+
 Blockly.Language.text_indexOf = {
   // Find a substring in the text.
   category: 'Text',
