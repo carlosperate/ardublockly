@@ -276,3 +276,30 @@ Blockly.Language.controls_forEach = {
     }
   }
 };
+
+
+Blockly.Language.controls_flow_statements = {
+  // Flow statements pass, continue, break, return.
+  category: 'Control',
+  helpUrl: 'http://en.wikipedia.org/wiki/Control_flow',
+  init: function() {
+    this.setColour(120);
+    var thisBlock = this;
+    var dropdown = new Blockly.FieldDropdown(function() {
+      return [
+          thisBlock.MSG_PASS,
+          thisBlock.MSG_CONTINUE,
+          thisBlock.MSG_BREAK,
+          thisBlock.MSG_RETURN
+        ];
+    });
+    this.addTitle(dropdown);
+    this.setPreviousStatement(true);
+    this.setTooltip('Built-in statements to insert into control flows.');
+    this.contextMenu = false;
+  },
+  MSG_PASS: 'pass',
+  MSG_CONTINUE: 'continue',
+  MSG_BREAK: 'break',
+  MSG_RETURN: 'return'
+};
