@@ -22,126 +22,6 @@
  * @author fraser@google.com (Neil Fraser)
  */
 
-// Extensions to Blockly's language and JavaScript generator.
-
-// Define Language and JavaScript, in case this file is loaded too early.
-if (!Blockly.Language) {
-  Blockly.Language = {};
-}
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
-Blockly.Dart = Blockly.Generator.get('Dart');
-Blockly.Python = Blockly.Generator.get('Python');
-
-Blockly.Language.maze_move = {
-  // Block for moving forward or backwards.
-  category: 'Maze',
-  helpUrl: null,
-  init: function() {
-    this.setColour(290);
-    this.addTitle('move');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_move.DIRECTIONS;
-    });
-    this.addTitle(dropdown);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('Moves the mouse forward or backward one space.');
-  }
-};
-
-Blockly.Language.maze_move.DIRECTIONS = ['forward', 'backward'];
-
-Blockly.JavaScript.maze_move = function() {
-  // Generate JavaScript for moving forward or backwards.
-  var direction = Blockly.Language.maze_move.DIRECTIONS
-      .indexOf(this.getTitleText(1));
-  return 'Maze.move(' + direction + ');\n';
-};
-Blockly.Dart.maze_move = Blockly.JavaScript.maze_move;
-Blockly.Python.maze_move = Blockly.JavaScript.maze_move;
-
-Blockly.Language.maze_turnLeft = {
-  // Block for turning left or right.
-  category: 'Maze',
-  helpUrl: null,
-  init: function() {
-    this.setColour(290);
-    this.addTitle('turn');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_turnLeft.DIRECTIONS;
-    });
-    this.addTitle(dropdown);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('Turns the mouse left or right by 90 degrees.');
-  }
-};
-
-Blockly.Language.maze_turnLeft.DIRECTIONS = ['left', 'right'];
-
-Blockly.Language.maze_turnRight = {
-  // Block for turning left or right.
-  category: 'Maze',
-  helpUrl: null,
-  init: function() {
-    this.setColour(290);
-    this.addTitle('turn');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_turnLeft.DIRECTIONS;
-    });
-    this.addTitle(dropdown);
-    this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1], 1);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('Turns the mouse left or right by 90 degrees.');
-  }
-};
-
-Blockly.JavaScript.maze_turnLeft = function() {
-  // Generate JavaScript for turning left or right.
-  var direction = Blockly.Language.maze_turnLeft.DIRECTIONS
-      .indexOf(this.getTitleText(1));
-  return 'Maze.turn(' + direction + ');\n';
-};
-Blockly.Dart.maze_turnLeft = Blockly.JavaScript.maze_turnLeft;
-Blockly.Python.maze_turnLeft = Blockly.JavaScript.maze_turnLeft;
-
-// Turning left and right use the same code.
-Blockly.JavaScript.maze_turnRight = Blockly.JavaScript.maze_turnLeft;
-Blockly.Dart.maze_turnRight = Blockly.Dart.maze_turnLeft;
-Blockly.Python.maze_turnRight = Blockly.Python.maze_turnLeft;
-
-Blockly.Language.maze_isWall = {
-  // Block for checking if there a wall.
-  category: 'Maze',
-  helpUrl: null,
-  init: function() {
-    this.setColour(290);
-    this.setOutput(true);
-    this.addTitle('wall');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_isWall.DIRECTIONS;
-    });
-    this.addTitle(dropdown);
-    this.addTitle('?');
-    this.setTooltip('Returns true if there is a wall in ' +
-                    'the specified direction.');
-  }
-};
-
-Blockly.Language.maze_isWall.DIRECTIONS =
-    ['ahead', 'to the left', 'to the right', 'behind'];
-
-Blockly.JavaScript.maze_isWall = function() {
-  // Generate JavaScript for checking if there is a wall.
-  var direction = Blockly.Language.maze_isWall.DIRECTIONS
-      .indexOf(this.getTitleText(1));
-  return 'Maze.isWall(' + direction + ')';
-};
-Blockly.Dart.maze_isWall = Blockly.JavaScript.maze_isWall;
-Blockly.Python.maze_isWall = Blockly.JavaScript.maze_isWall;
-
-
 /**
  * Create a namespace for the maze.
  */
@@ -190,16 +70,11 @@ Maze.pidList = [];
 /**
  * Initialize Blockly and the maze.  Called on page load.
  */
-Maze.init = function() {
+Maze.init = function(blockly) {
   //window.onbeforeunload = function() {
   //  return 'Leaving this page will result in the loss of your work.';
   //};
-
-  Blockly.pathToBlockly = '../../';
-  Blockly.inject(document.getElementById('editors'));
-
-  // Find and name the injected SVG object.
-  document.getElementsByTagName('svg')[0].id = 'content_blocks';
+  window.Blockly = blockly
 
   // Load the editor with a starting block.
   var xml = Blockly.Xml.textToDom(
@@ -233,14 +108,6 @@ Maze.init = function() {
     element = element.offsetParent;
   }
 
-  // Make the 'Blocks' tab line up with the toolbox.  
-  Blockly.bindEvent_(window, 'resize', null, function() {
-    document.getElementById('tab_blocks').style.minWidth =
-        (Blockly.Toolbox.width - 40) + 'px';
-        // Account for the 19 pixel margin and 1 pixel border on each side.
-    });
-  Blockly.fireUiEvent(document, window, 'resize');
-
   // Move the finish icon into position.
   var finishIcon = document.getElementById('finish');
   finishIcon.style.top = Maze.mapOffsetTop_ +
@@ -261,42 +128,6 @@ Maze.reset = function() {
     window.clearTimeout(Maze.pidList[x]);
   }
   Maze.pidList = [];
-};
-
-/**
- * List of tab names.
- * @private
- */
-Maze.TABS_ = ['blocks', 'javascript', 'dart', 'python', 'xml'];
-
-/**
- * Switch the visible pane when a tab is clicked.
- */
-Maze.tabClick = function(id) {
-  // First, deselect all tabs and hide all panes.
-  for (var x in Maze.TABS_) {
-    document.getElementById('tab_' + Maze.TABS_[x]).className = 'taboff';
-    document.getElementById('content_' + Maze.TABS_[x]).style.display = 'none';
-  }
-  // Second, select the active tab.
-  document.getElementById(id).className = 'tabon';
-  // Third, show the selected pane.
-  var content = document.getElementById(id.replace('tab_', 'content_'));
-  content.style.display = 'block';
-  // Fourth, initialize the pane.
-  if (id == 'tab_xml') {
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-    var xmlHtml = xmlText.replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    content.innerHTML = xmlHtml;
-  } else if (id == 'tab_javascript') {
-    content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
-  } else if (id == 'tab_dart') {
-    content.innerHTML = Blockly.Generator.workspaceToCode('Dart');
-  } else if (id == 'tab_python') {
-    content.innerHTML = Blockly.Generator.workspaceToCode('Python');
-  }
 };
 
 Maze.runButtonClick = function() {
