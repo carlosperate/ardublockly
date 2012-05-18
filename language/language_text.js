@@ -42,6 +42,98 @@ Blockly.Language.text = {
   }
 };
 
+Blockly.Language.text_join = {
+  // Create a string made up of any number of elements of any type.
+  category: 'Text',
+  helpUrl: '',
+  init: function() {
+    this.setColour(160);
+    this.addTitle('create text with');
+    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.setOutput(true);
+    this.setMutator(new Blockly.Mutator(this, ['text_create_join_item']));
+    this.setTooltip('Create a piece of text by joining\ntogether any number of items.');
+    this.itemCount_ = 2;
+  },
+  mutationToDom: function(workspace) {
+    var container = document.createElement('mutation');
+    container.setAttribute('items', this.itemCount_);
+    return container;
+  },
+  domToMutation: function(container) {
+    while (this.inputList.length) {
+      this.removeInput(0);
+    }
+    this.itemCount_ = window.parseInt(container.getAttribute('items'), 10);
+    for (var x = 0; x < this.itemCount_; x++) {
+      this.addInput('', '', Blockly.INPUT_VALUE);
+    }
+  },
+  decompose: function(workspace) {
+    var listBlock = new Blockly.Block(workspace, 'text_create_join_container');
+    listBlock.editable = false;
+    var connection = listBlock.inputList[0];
+    for (var x = 0; x < this.itemCount_; x++) {
+      var itemBlock = new Blockly.Block(workspace, 'text_create_join_item');
+      // Store a pointer to any connected blocks.
+      itemBlock.valueInput_ = this.inputList[x].targetConnection;
+      connection.connect(itemBlock.previousConnection);
+      connection = itemBlock.nextConnection;
+    }
+    return listBlock;
+  },
+  compose: function(listBlock) {
+    // Disconnect all input blocks.
+    for (var x = 0; x < this.inputList.length; x++) {
+      var child = this.inputList[x].targetBlock();
+      if (child) {
+        child.setParent(null);
+      }
+    }
+    // Destroy all inputs.
+    while (this.inputList.length) {
+      this.removeInput(0);
+    }
+    this.itemCount_ = 0;
+    // Rebuild the block's inputs.
+    var itemBlock = listBlock.getStatementInput(0);
+    while (itemBlock) {
+      this.addInput('', '', Blockly.INPUT_VALUE);
+      // Reconnect any child blocks.
+      if (itemBlock.valueInput_) {
+        this.inputList[this.itemCount_].connect(itemBlock.valueInput_);
+      }
+      this.itemCount_++;
+      itemBlock = itemBlock.nextConnection &&
+          itemBlock.nextConnection.targetBlock();
+    }
+  }
+};
+
+Blockly.Language.text_create_join_container = {
+  // Container.
+  init: function() {
+    this.setColour(160);
+    this.addTitle('add');
+    this.addInput('', '', Blockly.NEXT_STATEMENT);
+    this.setTooltip('Add, remove, or reorder sections to reconfigure this text block.');
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Language.text_create_join_item = {
+  // Add items.
+  init: function() {
+    this.setColour(160);
+    this.addTitle('item');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('Add an item to the text.');
+    this.contextMenu = false;
+  }
+};
+
 Blockly.Language.text_length = {
   // String length.
   category: 'Text',

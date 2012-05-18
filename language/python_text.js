@@ -31,16 +31,48 @@ Blockly.Python.text = function() {
   return Blockly.Python.quote_(this.getTitleText(1));
 };
 
+Blockly.Python.text_join = function(opt_dropParens) {
+  // Create a string made up of any number of elements of any type.
+  if (this.itemCount_ == 0) {
+    return '\'\'';
+  } else if (this.itemCount_ == 1) {
+    return 'str(' + (Blockly.Python.valueToCode_(this, 0, opt_dropParens) || '\'\'') + ')';
+  } else if (this.itemCount_ == 2) {
+    var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\''
+    var argument1 = Blockly.Python.valueToCode_(this, 1, true) || '\'\''
+    var code = 'str(' + argument0 + ') + str(' + argument1 + ')';
+    if (!opt_dropParens) {
+      code = '(' + code + ')';
+    }
+    return code;
+  } else {
+    var code = [];
+    for (n = 0; n < this.itemCount_; n++) {
+      code[n] = Blockly.Python.valueToCode_(this, n, true) || '\'\'';
+    }
+    var tempVar = Blockly.Python.variableDB_.getDistinctVariable('temp_value');
+    code = '\'\'.join([str(' + tempVar + ') for ' + tempVar + ' in [' + code.join(', ') + ']])';
+    if (!opt_dropParens) {
+      code = '(' + code + ')';
+    }
+    return code;
+  }
+};
+
 Blockly.Python.text_length = function() {
   // String length.
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
   return 'len(' + argument0 + ')';
 };
 
-Blockly.Python.text_isEmpty = function() {
+Blockly.Python.text_isEmpty = function(opt_dropParens) {
   // Is the string null?
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
-  return 'not len(' + argument0 + ')';
+  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
+  var code = 'not len(' + argument0 + ')';
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
 };
 
 Blockly.Python.text_endString = function() {

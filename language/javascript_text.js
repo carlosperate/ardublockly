@@ -31,6 +31,30 @@ Blockly.JavaScript.text = function() {
   return Blockly.JavaScript.quote_(this.getTitleText(1));
 };
 
+Blockly.JavaScript.text_join = function(opt_dropParens) {
+  // Create a string made up of any number of elements of any type.
+  if (this.itemCount_ == 0) {
+    return '\'\'';
+  } else if (this.itemCount_ == 1) {
+    var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\''
+    return 'String(' + argument0 + ')';
+  } else if (this.itemCount_ == 2) {
+    var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\''
+    var argument1 = Blockly.JavaScript.valueToCode_(this, 1, true) || '\'\''
+    var code = 'String(' + argument0 + ') + String(' + argument1 + ')';
+    if (!opt_dropParens) {
+      code = '(' + code + ')';
+    }
+    return code;
+  } else {
+    var code = new Array(this.itemCount_);
+    for (n = 0; n < this.itemCount_; n++) {
+      code[n] = Blockly.JavaScript.valueToCode_(this, n, true) || '\'\'';
+    }
+    return '[' + code.join(',') + '].join(\'\')';
+  }
+};
+
 Blockly.JavaScript.text_length = function() {
   // String length.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '\'\'';

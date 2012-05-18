@@ -31,6 +31,35 @@ Blockly.Dart.text = function() {
   return Blockly.Dart.quote_(this.getTitleText(1));
 };
 
+Blockly.Dart.text_join = function(opt_dropParens) {
+  // Create a string made up of any number of elements of any type.
+  if (this.itemCount_ == 0) {
+    return '\'\'';
+  } else if (this.itemCount_ == 1) {
+    var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\''
+    return argument0 + '.toString()';
+  } else if (this.itemCount_ == 2) {
+    var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\''
+    var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\''
+    var code = argument0 + '.toString() + ' + argument1 + '.toString()';
+    if (!opt_dropParens) {
+      code = '(' + code + ')';
+    }
+    return code;
+  } else {
+    var code = [];
+    code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode_(this, 0, true) || '\'\'') + ')';
+    for (n = 1; n < this.itemCount_; n++) {
+      code[n] = '.add(' + (Blockly.Dart.valueToCode_(this, n, true) || '\'\'') + ')';
+    }
+    code = code.join('') + '.toString()';
+    if (!opt_dropParens) {
+      code = '(' + code + ')';
+    }
+    return code;
+  }
+};
+
 Blockly.Dart.text_length = function() {
   // String length.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
