@@ -36,11 +36,11 @@ Blockly.Dart.text_join = function(opt_dropParens) {
   if (this.itemCount_ == 0) {
     return '\'\'';
   } else if (this.itemCount_ == 1) {
-    var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\''
+    var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
     return argument0 + '.toString()';
   } else if (this.itemCount_ == 2) {
-    var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\''
-    var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\''
+    var argument0 = Blockly.Dart.valueToCode_(this, 0) || '\'\'';
+    var argument1 = Blockly.Dart.valueToCode_(this, 1) || '\'\'';
     var code = argument0 + '.toString() + ' + argument1 + '.toString()';
     if (!opt_dropParens) {
       code = '(' + code + ')';
