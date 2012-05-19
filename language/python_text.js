@@ -91,7 +91,7 @@ Blockly.Python.text_endString = function() {
 Blockly.Python.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
   // Should we allow for non-case sensitive???
-  var operator = this.getTitleText(1) == this.MSG_FIRST ? 'index' : 'rindex';
+  var operator = this.getTitleText(1) == this.MSG_FIRST ? 'find' : 'rfind';
   var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
   var argument1 = Blockly.Python.valueToCode_(this, 1) || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';

@@ -64,14 +64,15 @@ Blockly.Python.lists_setIndex = function() {
   // Set element at index.
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '1';
   var argument1 = Blockly.Python.valueToCode_(this, 1) || '[]';
-  var argument2 = Blockly.Python.valueToCode_(this, 2, true) || 'null';
+  var argument2 = Blockly.Python.valueToCode_(this, 2, true) || 'None';
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
-    argument0 = parseInt(argument0, 10) - 1;
+    // Except we don't allow negative index like in Python. 
+    argument0 = Math.max(0, parseInt(argument0, 10) - 1);
   } else {
     // If the index is dynamic, decrement it in code.
     argument0 += ' - 1';
   }
-  return argument1 + '[' + argument0 + '] = ' + argument2 + ';\n';
+  return argument1 + '[' + argument0 + '] = ' + argument2 + '\n';
 };
