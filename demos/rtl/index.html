@@ -1,6 +1,33 @@
 <html>
 <head>
   <title>Blockly Demo: RTL</title>
+  <script type="text/javascript" src="../../blockly.js"></script>
+  <script type="text/javascript" src="../../block.js"></script>
+  <script type="text/javascript" src="../../blockSvg.js"></script>
+  <script type="text/javascript" src="../../comment.js"></script>
+  <script type="text/javascript" src="../../connection.js"></script>
+  <script type="text/javascript" src="../../contextmenu.js"></script>
+  <script type="text/javascript" src="../../field.js"></script>
+  <script type="text/javascript" src="../../field_dropdown.js"></script>
+  <script type="text/javascript" src="../../field_label.js"></script>
+  <script type="text/javascript" src="../../field_textinput.js"></script>
+  <script type="text/javascript" src="../../flyout.js"></script>
+  <script type="text/javascript" src="../../generator.js"></script>
+  <script type="text/javascript" src="../../inject.js"></script>
+  <script type="text/javascript" src="../../language/language_control.js"></script>
+  <script type="text/javascript" src="../../language/language_logic.js"></script>
+  <script type="text/javascript" src="../../language/language_math.js"></script>
+  <script type="text/javascript" src="../../language/language_text.js"></script>
+  <script type="text/javascript" src="../../language/language_lists.js"></script>
+  <script type="text/javascript" src="../../language/language_variables.js"></script>
+  <script type="text/javascript" src="../../mutator.js"></script>
+  <script type="text/javascript" src="../../scrollbar.js"></script>
+  <script type="text/javascript" src="../../toolbox.js"></script>
+  <script type="text/javascript" src="../../tooltip.js"></script>
+  <script type="text/javascript" src="../../trashcan.js"></script>
+  <script type="text/javascript" src="../../variables.js"></script>
+  <script type="text/javascript" src="../../workspace.js"></script>
+  <script type="text/javascript" src="../../xml.js"></script>
   <style>
     body {
       background-color: white;
@@ -10,27 +37,70 @@
       font-weight: normal;
       font-size: 140%;
     }
-    iframe {
-      width: 100%;
-      height: 100%;
+    #svgDiv {
+      height: 600px;
+      width: 800px;
       border: 1px solid #ccc;
     }
   </style>
+  <script>
+    function init() {
+      Blockly.pathToBlockly = '../../';
+      Blockly.inject(document.getElementById('svgDiv'), {rtl: true});
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('startBlocks'));
+    }
+  </script>
 </head>
-<body>
-  <table height="100%" width="100%">
-    <tr>
-      <td height="1em">
-        <h1><a href="http://code.google.com/p/google-blockly/">Blockly</a> &gt;
-          <a href="../">Demos</a> &gt; Right-to-Left</h1>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <iframe src="frame.html"></iframe>
-      </td>
-    </tr>
-  </table>
+<body onload="init()">
+  <h1><a href="http://code.google.com/p/google-blockly/">Blockly</a> &gt;
+    <a href="../">Demos</a> &gt; Right-to-Left</h1>
 
+  <div id="svgDiv"></div>
+
+  <xml id="startBlocks" style="display: none">
+    <block type="controls_if" inline="false" x="-120" y="80">
+      <mutation></mutation>
+      <value label="if">
+        <block type="logic_compare" inline="true">
+          <value>
+            <block type="variables_get">
+              <title>get</title>
+              <title>Count</title>
+            </block>
+          </value>
+          <value label="&lt;">
+            <block type="math_number">
+              <title>256</title>
+            </block>
+          </value>
+        </block>
+      </value>
+      <statement label="then">
+        <block type="variables_set" inline="false">
+          <title>set</title>
+          <title>Count</title>
+          <value>
+            <block type="math_number">
+              <title>0</title>
+            </block>
+          </value>
+          <next>
+            <block type="text_print" inline="false">
+              <title>print</title>
+              <value>
+                <block type="text">
+                  <title>&rdquo;</title>
+                  <title>Game Over</title>
+                  <title>&ldquo;</title>
+                </block>
+              </value>
+              <next></next>
+            </block>
+          </next>
+        </block>
+      </statement>
+      <next></next>
+    </block>
+  </xml>
 </body>
 </html>
