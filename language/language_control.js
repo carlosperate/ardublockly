@@ -31,7 +31,7 @@ if (!Blockly.Language) {
 Blockly.Language.controls_if = {
   // If/elseif/else condition.
   category: 'Control',
-  helpUrl: 'http://en.wikipedia.org/wiki/Conditional_(programming)',
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/If_Then',
   init: function() {
     this.setColour(120);
     this.addInput(this.MSG_IF, '', Blockly.INPUT_VALUE);
@@ -190,7 +190,7 @@ Blockly.Language.controls_if_else = {
 Blockly.Language.controls_whileUntil = {
   // Do while/until loop.
   category: 'Control',
-  helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Repeat',
   init: function() {
     this.setColour(120);
     this.addTitle('repeat');

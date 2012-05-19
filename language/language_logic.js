@@ -77,7 +77,7 @@ Blockly.Language.logic_compare = {
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
   category: 'Logic',
-  helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/And_Or',
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
@@ -106,7 +106,7 @@ Blockly.Language.logic_operation = {
 Blockly.Language.logic_negate = {
   // Negation.
   category: 'Logic',
-  helpUrl: 'http://en.wikipedia.org/wiki/Logical_disjunction',
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Not',
   init: function() {
     this.setColour(120);
     this.setOutput(true);
@@ -118,7 +118,7 @@ Blockly.Language.logic_negate = {
 Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.
   category: 'Logic',
-  helpUrl: 'http://en.wikipedia.org/wiki/Boolean_data_type',
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/True_False',
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;

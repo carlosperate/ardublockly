@@ -33,7 +33,7 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 Blockly.Language.maze_move = {
   // Block for moving forward or backwards.
   category: 'Maze',
-  helpUrl: null,
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Move',
   init: function() {
     this.setColour(290);
     this.addTitle('move');
@@ -59,7 +59,7 @@ Blockly.JavaScript.maze_move = function() {
 Blockly.Language.maze_turnLeft = {
   // Block for turning left or right.
   category: 'Maze',
-  helpUrl: null,
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Turn',
   init: function() {
     this.setColour(290);
     this.addTitle('turn');
@@ -106,7 +106,7 @@ Blockly.JavaScript.maze_turnRight = Blockly.JavaScript.maze_turnLeft;
 Blockly.Language.maze_isWall = {
   // Block for checking if there a wall.
   category: 'Maze',
-  helpUrl: null,
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Wall',
   init: function() {
     this.setColour(290);
     this.setOutput(true);
