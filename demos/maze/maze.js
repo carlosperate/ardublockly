@@ -74,7 +74,7 @@ Maze.init = function(blockly) {
   //window.onbeforeunload = function() {
   //  return 'Leaving this page will result in the loss of your work.';
   //};
-  window.Blockly = blockly
+  window.Blockly = blockly;
 
   // Load the editor with a starting block.
   var xml = Blockly.Xml.textToDom(

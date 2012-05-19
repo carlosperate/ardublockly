@@ -35,21 +35,16 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operators, and power.
   var argument0 = Blockly.Python.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Python.valueToCode_(this, 1) || '0';
-  var code;
-  
-  if (this.getValueLabel(1) == this.MSG_POW) {
-    code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
-  } else {
-    var map = {};
-    map[this.MSG_ADD] = '+';
-    map[this.MSG_MINUS] = '-';
-    map[this.MSG_MULTIPLY] = '*';
-    map[this.MSG_DIVIDE] = '/';
-    var operator = map[this.getValueLabel(1)];
-    code = argument0 + ' ' + operator + ' ' + argument1;
-    if (!opt_dropParens) {
-      code = '(' + code + ')';
-    }
+  var map = {};
+  map[this.MSG_ADD] = '+';
+  map[this.MSG_MINUS] = '-';
+  map[this.MSG_MULTIPLY] = '*';
+  map[this.MSG_DIVIDE] = '/';
+  map[this.MSG_POWER] = '**';
+  var operator = map[this.getValueLabel(1)];
+  var code = argument0 + ' ' + operator + ' ' + argument1;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
   }
   return code;
 };
@@ -58,7 +53,7 @@ Blockly.Python.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
   var varName = Blockly.Python.variableDB_.getVariable(this.getTitleText(1));
-  return varName + ' += ' + argument0 + ';\n';
+  return varName + ' = (' + varName + ' or 0) + ' + argument0 + '\n';
 };
 
 Blockly.Python.math_single = function(opt_dropParens) {
@@ -144,32 +139,30 @@ Blockly.Python.math_on_list = function() {
   var code;
   switch (func) {
     case this.MSG_SUM:
-      code = list + '.reduce(function(x, y) {return x + y;})';
+      code = 'sum(' + list + ')';
       break;
     case this.MSG_MIN:
-      code = 'Math.min.apply(null,' + list + ')';
+      code = 'min(' + list + ') if ' + list + ' or None';
+      // code = list.length? 'min(' + list + ')' : 'None';
       break;
     case this.MSG_MAX:
-      code = 'Math.max.apply(null,' + list + ')';
+      code = 'max(' + list + ')';
       break;
     case this.MSG_AVERAGE:
-      code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list + '.length)';
+      code = list.length? 'sum(' + list + ')/len(' + list + ')' : 0;
       break;
     case this.MSG_MEDIAN:
       if (!Blockly.Python.definitions_['math_median']) {
         // Median is not a native Python function.  Define one.
         // May need to handle null. Currently Blockly_math_median([null,null,1,3]) == 0.5.
         var func = [];
-        func.push('function Blockly_math_median(list) {');
-        func.push('  if (!list.length) return 0;');
-        func.push('  var localList = [].concat(list);');
-        func.push('  localList.sort(function(a, b) {return b - a;});');
-        func.push('  if (localList.length % 2 == 0) {');
-        func.push('    return (localList[localList.length / 2 - 1] + localList[localList.length / 2]) / 2;');
-        func.push('  } else {');
-        func.push('    return localList[(localList.length - 1) / 2];');
-        func.push('  }');
-        func.push('}');
+        func.push('def Blockly_math_median(list):');
+        func.push('  if not list: return 0');
+        func.push('  sortedL = sorted(list)');
+        func.push('  if len(list) % 2 == 0):');
+        func.push('    return (sortedL[len(list) / 2 - 1] + sortedL[len(list) / 2]) / 2');
+        func.push('  else:');
+        func.push('    return sortedL[(len(list) - 1) / 2]');
         Blockly.Python.definitions_['math_median'] = func.join('\n');
       }
       code = 'Blockly_math_median(' + list + ')';
@@ -181,8 +174,8 @@ Blockly.Python.math_on_list = function() {
         // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
         var func = [];
         func.push('function Blockly_math_mode(values) {');
-        func.push('  var modes = [];');
-        func.push('  var counts = [];');
+        func.push('  modes = []');
+        func.push('  counts = []');
         func.push('  var maxCount = 0;');
         func.push('  for (var i = 0; i < values.length; i++) {');
         func.push('    var value = values[i];');
@@ -236,23 +229,14 @@ Blockly.Python.math_modulo = function(opt_dropParens) {
 };
 
 Blockly.Python.math_random_float = function() {
-  return 'Math.random()';
+  Blockly.Python.definitions_['import_random'] = 'import random';
+  return 'random.random()';
 };
 
 Blockly.Python.math_random_int = function() {
+  Blockly.Python.definitions_['import_random'] = 'import random';
   var argument0 = Blockly.Python.valueToCode_(this, 0) || '0';
   var argument1 = Blockly.Python.valueToCode_(this, 1) || '0';
-  var rand1 = 'Math.floor(Math.random() * (' + argument1 + ' - ' + argument0 + ' + 1' + ') + ' + argument0 + ')';
-  var rand2 = 'Math.floor(Math.random() * (' + argument0 + ' - ' + argument1 + ' + 1' + ') + ' + argument1 + ')';
-  var code;
-  if (argument0.match(/^[\d\.]+$/) && argument1.match(/^[\d\.]+$/)) {
-    if (parseFloat(argument0) < parseFloat(argument1)) {
-      code = rand1;
-    } else {
-      code = rand2;
-    }
-  } else {
-    code = argument0 + ' < ' + argument1 + ' ? ' + rand1 + ' : ' + rand2;
-  }
+  code = 'random.randint('+ argument0 + ', ' + argument1 + ')';
   return code;
 };

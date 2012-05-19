@@ -63,9 +63,9 @@ Blockly.Python.logic_compare = function(opt_dropParens) {
 
 Blockly.Python.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || 'false';
-  var argument1 = Blockly.Python.valueToCode_(this, 1) || 'false';
-  var operator = (this.getValueLabel(1) == this.MSG_AND) ? '&&' : '||';
+  var argument0 = Blockly.Python.valueToCode_(this, 0) || 'False';
+  var argument1 = Blockly.Python.valueToCode_(this, 1) || 'False';
+  var operator = (this.getValueLabel(1) == this.MSG_AND) ? 'and' : 'or';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -75,8 +75,8 @@ Blockly.Python.logic_operation = function(opt_dropParens) {
 
 Blockly.Python.logic_negate = function(opt_dropParens) {
   // Negation.
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || 'false';
-  var code = '!' + argument0;
+  var argument0 = Blockly.Python.valueToCode_(this, 0) || 'False';
+  var code = 'not ' + argument0;
   if (!opt_dropParens) {
     code = '(' + code + ')';
   }
@@ -86,5 +86,5 @@ Blockly.Python.logic_negate = function(opt_dropParens) {
 Blockly.Python.logic_boolean = function() {
   // Boolean values true and false.
   return (this.getTitleText(0) == this.MSG_TRUE) ?
-      'true' : 'false';
+      'True' : 'False';
 };

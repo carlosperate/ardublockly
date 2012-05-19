@@ -58,7 +58,7 @@ Blockly.JavaScript.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
   var varName = Blockly.JavaScript.variableDB_.getVariable(this.getTitleText(1));
-  return varName + ' += ' + argument0 + ';\n';
+  return varName + ' = (' + varName + ' || 0) + ' + argument0 + ';\n';
 };
 
 Blockly.JavaScript.math_single = function(opt_dropParens) {
