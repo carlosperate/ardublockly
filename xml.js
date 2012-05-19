@@ -185,7 +185,7 @@ Blockly.Xml.textToDom = function(text) {
  */
 Blockly.Xml.domToWorkspace = function(blockGroup, xml) {
   for (var x = 0, xmlChild; xmlChild = xml.childNodes[x]; x++) {
-    if (xmlChild.nodeName == 'block') {
+    if (xmlChild.nodeName && xmlChild.nodeName.toLowerCase() == 'block') {
       var block = Blockly.Xml.domToBlock_(blockGroup, xmlChild);
       var blockX = parseInt(xmlChild.getAttribute('x'), 10);
       var blockY = parseInt(xmlChild.getAttribute('y'), 10);
@@ -247,6 +247,15 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
     }
     var blockChild = null;
     var input;
+
+    // Find the first 'real' grandchild node (that isn't whitespace).
+    var firstRealGrandchild = null;
+    for (var y = 0, grandchildNode; grandchildNode = xmlChild.childNodes[y]; y++) {
+      if (grandchildNode.nodeType != 3 || !grandchildNode.data.match(/^\s*$/)) {
+        firstRealGrandchild = grandchildNode;
+      }
+    }
+
     switch (xmlChild.tagName.toLowerCase()) {
       case 'mutation':
         // Custom data for an advanced block.
@@ -289,8 +298,9 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         if (!input) {
           throw 'Value input does not exist.';
         }
-        if (xmlChild.firstChild && xmlChild.firstChild.tagName == 'block') {
-          blockChild = Blockly.Xml.domToBlock_(blockGroup, xmlChild.firstChild);
+        if (firstRealGrandchild && firstRealGrandchild.tagName &&
+            firstRealGrandchild.tagName.toLowerCase() == 'block') {
+          blockChild = Blockly.Xml.domToBlock_(blockGroup, firstRealGrandchild);
           if (!blockChild.outputConnection) {
             throw 'Child block does not have output value.';
           }
@@ -302,8 +312,9 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         if (!input) {
           throw 'Statement input does not exist.';
         }
-        if (xmlChild.firstChild && xmlChild.firstChild.tagName == 'block') {
-          blockChild = Blockly.Xml.domToBlock_(blockGroup, xmlChild.firstChild);
+        if (firstRealGrandchild && firstRealGrandchild.tagName &&
+            firstRealGrandchild.tagName.toLowerCase() == 'block') {
+          blockChild = Blockly.Xml.domToBlock_(blockGroup, firstRealGrandchild);
           if (!blockChild.previousConnection) {
             throw 'Child block does not have previous statement.';
           }
@@ -311,14 +322,15 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         break;
       case 'next':
-        if (xmlChild.firstChild && xmlChild.firstChild.tagName == 'block') {
+        if (firstRealGrandchild && firstRealGrandchild.tagName &&
+            firstRealGrandchild.tagName.toLowerCase() == 'block') {
           if (!block.nextConnection) {
             throw 'Next statement does not exist.';
           } else if (block.nextConnection.targetConnection) {
             // This could happen if there is more than one XML 'next' tag.
             throw 'Next statement is already connected.';
           }
-          blockChild = Blockly.Xml.domToBlock_(blockGroup, xmlChild.firstChild);
+          blockChild = Blockly.Xml.domToBlock_(blockGroup, firstRealGrandchild);
           if (!blockChild.previousConnection) {
             throw 'Next block does not have previous statement.';
           }
@@ -335,4 +347,21 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
   }
   block.render();
   return block;
+};
+
+/**
+ * Find the first 'real' child of a node, skipping whitespace text nodes.
+ * Return true if that child is of the the specified type (case insensitive).
+ * @param {!Node} parentNode The parent node.
+ * @param {string} tagName The node type to check for.
+ * @return {boolean} True if the first real child is the specified type.
+ * @private
+ */
+Blockly.Xml.isFirstRealChild_ = function(parentNode, tagName) {
+  for (var x = 0, childNode; childNode = parentNode.childNodes[x]; x++) {
+    if (childNode.nodeType != 3 || !childNode.data.match(/^\s*$/)) {
+      return childNode.tagName && childNode.tagName.toLowerCase() == tagName;
+    }
+  }
+  return false;
 };
