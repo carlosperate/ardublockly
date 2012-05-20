@@ -48,6 +48,9 @@
       Blockly.pathToBlockly = '../../';
       Blockly.inject(document.getElementById('svgDiv'), {rtl: true});
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, document.getElementById('startBlocks'));
+      window.onbeforeunload = function() {
+        return 'Leaving this page will result in the loss of your work.';
+      };
     }
   </script>
 </head>
