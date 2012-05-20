@@ -143,6 +143,95 @@ Blockly.Dart.math_round = Blockly.Dart.math_single;
 // Trigonometry functions have a single operand.
 Blockly.Dart.math_trig = Blockly.Dart.math_single;
 
+Blockly.Dart.math_on_list = function() {
+  // Rounding functions.
+  func = this.getTitleText(0);
+  list = Blockly.Dart.valueToCode_(this, 0, true) || '[]';
+  var code;
+  switch (func) {
+    case this.MSG_SUM:
+      code = list + '.reduce(function(x, y) {return x + y;})';
+      break;
+    case this.MSG_MIN:
+      code = 'Math.min.apply(null,' + list + ')';
+      break;
+    case this.MSG_MAX:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    case this.MSG_AVERAGE:
+      code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list +
+      '.length)';
+      break;
+    case this.MSG_MEDIAN:
+      if (!Blockly.Dart.definitions_['math_median']) {
+        // Median is not a native Dart function.  Define one.
+        // May need to handle null. 
+        // Currently Blockly_math_median([null,null,1,3]) == 0.5.
+        var func = [];
+        func.push('function Blockly_math_median(list) {');
+        func.push('  if (!list.length) return 0;');
+        func.push('  var localList = [].concat(list);');
+        func.push('  localList.sort(function(a, b) {return b - a;});');
+        func.push('  if (localList.length % 2 == 0) {');
+        func.push('    return (localList[localList.length / 2 - 1] + localList[localList.length / 2]) / 2;');
+        func.push('  } else {');
+        func.push('    return localList[(localList.length - 1) / 2];');
+        func.push('  }');
+        func.push('}');
+        Blockly.Dart.definitions_['math_median'] = func.join('\n');
+      }
+      code = 'Blockly_math_median(' + list + ')';
+      break;
+    case this.MSG_MODE:
+      if (!Blockly.Dart.definitions_['math_mode']) {
+        // As a list of numbers can contain more than one mode,
+        // the returned result is provided as an array.
+        // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
+        var func = [];
+        func.push('function Blockly_math_mode(values) {');
+        func.push('  var modes = [];');
+        func.push('  var counts = [];');
+        func.push('  var maxCount = 0;');
+        func.push('  for (var i = 0; i < values.length; i++) {');
+        func.push('    var value = values[i];');
+        func.push('    var found = false;');
+        func.push('    var thisCount;');
+        func.push('    for (var j = 0; j < counts.length; j++) {');
+        func.push('      if (counts[j][0] === value) {');
+        func.push('        thisCount = ++counts[j][1];');
+        func.push('        found = true;');
+        func.push('        break;');
+        func.push('      }');
+        func.push('    }');
+        func.push('    if (!found) {');
+        func.push('      counts.push([value, 1]);');
+        func.push('      thisCount = 1;');
+        func.push('    }');
+        func.push('    maxCount = Math.max(thisCount, maxCount);');
+        func.push('  }');
+        func.push('  for (var j = 0; j < counts.length; j++) {');
+        func.push('    if (counts[j][1] == maxCount) {');
+        func.push('        modes.push(counts[j][0]);');
+        func.push('    }');
+        func.push('  }');
+        func.push('  return modes;');
+        func.push('}');
+        Blockly.Dart.definitions_['math_mode'] = func.join('\n');
+      }
+      code = 'Blockly_math_mode(' + list + ')';
+      break;
+    case this.MSG_STD_DEV:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    case this.MSG_RANDOM_ITEM:
+      code = 'Math.max.apply(null,' + list + ')';
+      break;
+    default:
+      throw 'Unknown operator.';
+  }
+  return code;
+};
+
 Blockly.Dart.math_modulo = function(opt_dropParens) {
   // Remainder computation.
   var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';

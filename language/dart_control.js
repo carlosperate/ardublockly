@@ -102,3 +102,8 @@ Blockly.Dart.controls_forEach = function() {
   }
   return code;
 };
+
+Blockly.Dart.controls_flow_statements = function() {
+  // Flow statements pass, continue, break, return.
+  return this.getTitleText(0) + '\n';
+};

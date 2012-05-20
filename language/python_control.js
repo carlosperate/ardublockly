@@ -72,7 +72,7 @@ Blockly.Python.controls_forEach = function() {
       this.getVariableInput(0));
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '[]';
   var branch0 = Blockly.Python.statementToCode_(this, 0)  || '  pass\n';
-  var code = 'for ' + variable0 + ' in  ' + argument0 + ':\n' + branch0 + '\n';
+  var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch0 + '\n';
   return code;
 };
 

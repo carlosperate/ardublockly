@@ -153,12 +153,14 @@ Blockly.JavaScript.math_on_list = function() {
       code = 'Math.max.apply(null,' + list + ')';
       break;
     case this.MSG_AVERAGE:
-      code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list + '.length)';
+      code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list +
+      '.length)';
       break;
     case this.MSG_MEDIAN:
       if (!Blockly.JavaScript.definitions_['math_median']) {
         // Median is not a native JavaScript function.  Define one.
-        // May need to handle null. Currently Blockly_math_median([null,null,1,3]) == 0.5.
+        // May need to handle null. 
+        // Currently Blockly_math_median([null,null,1,3]) == 0.5.
         var func = [];
         func.push('function Blockly_math_median(list) {');
         func.push('  if (!list.length) return 0;');

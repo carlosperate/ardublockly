@@ -196,7 +196,19 @@ Blockly.Python.math_on_list = function() {
       code = 'Blockly_math_mode(' + list + ')';
       break;
     case this.MSG_STD_DEV:
-      code = 'Math.max.apply(null,' + list + ')';
+      Blockly.Python.definitions_['import_math'] = 'import math';
+      if (!Blockly.Python.definitions_['math_standard_deviation']) {
+        var func = [];
+        func.push('def Blockly_math_standard_deviation(numbers):');
+        func.push('  n = len(numbers)');
+        func.push('  if n == 0: return');
+        func.push('  mean = sum(numbers)/n');
+        func.push('  variance = float(sum((x - mean)**2 for x in numbers))/n');
+        func.push('  standard_dev = math.sqrt(variance)');
+        func.push('  return standard_dev');
+        Blockly.Python.definitions_['math_standard_deviation'] = func.join('\n');
+      }
+      code = 'Blockly_math_standard_deviation(' + list + ')';
       break;
     case this.MSG_RANDOM_ITEM:
       Blockly.Python.definitions_['import_random'] = 'import random';
