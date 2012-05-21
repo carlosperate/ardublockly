@@ -71,10 +71,14 @@ Maze.pidList = [];
  * Initialize Blockly and the maze.  Called on page load.
  */
 Maze.init = function(blockly) {
-  window.onbeforeunload = function() {
-    return 'Leaving this page will result in the loss of your work.';
-  };
   window.Blockly = blockly;
+
+  window.onbeforeunload = function() {
+    if (Blockly.mainWorkspace.getAllBlocks().length > 1) {
+      return 'Leaving this page will result in the loss of your work.';
+    }
+    return null;
+  };
 
   // Load the editor with a starting block.
   var xml = Blockly.Xml.textToDom(
