@@ -65,24 +65,18 @@
   font-size: 15pt;
   fill: #000;
 }
-.blocklyNonEditableText>rect {
-  fill: #fff;
-  fill-opacity: 0.2;
-}
+.blocklyNonEditableText>rect,
 .blocklyEditableText>rect {
   fill: #fff;
-  fill-opacity: 0.2;
+  fill-opacity: 0.6;
+}
+.blocklyNonEditableText>text,
+.blocklyEditableText>text {
+  fill: #000;
 }
 .blocklyEditableText:hover>rect {
-  stroke-width: 1;
+  stroke-width: 2;
   stroke: #fff;
-}
-.blocklyEditableHighlight {
-  stroke-linecap: round;
-  stroke-width: 1;
-  stroke: #fff;
-  stroke-opacity: 0.5;
-  fill: none;
 }
 /*
  * Don't allow users to select text.

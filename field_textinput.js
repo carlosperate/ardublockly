@@ -60,6 +60,8 @@ Blockly.FieldTextInput.createDom = function() {
   body.className = 'blocklyMinimalBody';
   var input = Blockly.svgDoc.createElement('input');
   input.className = 'blocklyHtmlInput';
+  input.style.border = 'none';
+  input.style.outline = 'none';
   Blockly.FieldTextInput.htmlInput_ = input;
   body.appendChild(input);
   foreignObject.appendChild(body);
@@ -98,9 +100,14 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
   htmlInputFrame.style.display = 'block';
   var xy = Blockly.getAbsoluteXY_(this.borderRect_);
   if (!Blockly.RTL) {
-    htmlInputFrame.setAttribute('x', xy.x + 2);
+    htmlInputFrame.setAttribute('x', xy.x + 1);
   }
-  htmlInputFrame.setAttribute('y', xy.y - 3);
+  var isGecko = window.navigator.userAgent.indexOf('Gecko/') != -1;
+  if (isGecko) {
+    htmlInputFrame.setAttribute('y', xy.y - 1);
+  } else {
+    htmlInputFrame.setAttribute('y', xy.y - 3);
+  }
   htmlInput.focus();
   htmlInput.select();
   // Bind to blur -- close the editor on loss of focus.
@@ -182,7 +189,7 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
   if (Blockly.RTL) {
     // In RTL mode the left edge moves, whereas the right edge is fixed.
     var xy = Blockly.getAbsoluteXY_(this.group_);
-    htmlInputFrame.setAttribute('x', xy.x - 2);
+    htmlInputFrame.setAttribute('x', xy.x - 4);
   }
 };
 

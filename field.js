@@ -37,14 +37,13 @@ Blockly.Field = function(text) {
   this.sourceBlock_ = null;
   // Build the DOM.
   this.group_ = Blockly.createSvgElement('g', {}, null);
+  this.borderRect_ = Blockly.createSvgElement('rect',
+      {rx: 4, ry: 4}, this.group_);
   this.textElement_ = Blockly.createSvgElement('text',
       {'class': 'blocklyText'}, this.group_);
-  this.borderRect_ = Blockly.createSvgElement('rect', {}, this.group_);
-  this.highlight_ = Blockly.createSvgElement('path',
-      {'class': 'blocklyEditableHighlight'}, this.group_);
   if (this.CURSOR) {
     // Different field types show different cursor hints.
-    this.borderRect_.style.cursor = this.CURSOR;
+    this.group_.style.cursor = this.CURSOR;
   }
   this.setText(text);
 };
@@ -67,7 +66,7 @@ Blockly.Field.prototype.init = function(block) {
       block.editable ? 'blocklyEditableText' : 'blocklyNonEditableText');
   block.svg_.svgGroup_.appendChild(this.group_);
   if (block.editable) {
-    Blockly.bindEvent_(this.borderRect_, 'mouseup', this, this.onMouseUp_);
+    Blockly.bindEvent_(this.group_, 'mouseup', this, this.onMouseUp_);
   }
 };
 
@@ -116,9 +115,6 @@ Blockly.Field.prototype.render = function() {
   this.borderRect_.setAttribute('height', height);
   this.borderRect_.setAttribute('x', left);
   this.borderRect_.setAttribute('y', top);
-  var path = 'M ' + (left + width) + ',' + top;
-  path += ' v ' + height + ' h -' + width;
-  this.highlight_.setAttribute('d', path);
   return bBox;
 };
 
