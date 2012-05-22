@@ -114,7 +114,7 @@ Blockly.Toolbox.init = function() {
   Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace,
                                Blockly.getMainWorkspaceMetrics);
   Blockly.Toolbox.languageTree = Blockly.Toolbox.buildTree_();
-  Blockly.Toolbox.populateOptions_(Blockly.Toolbox.languageTree);
+  Blockly.Toolbox.redraw();
 
   // Add scrollbars.
   new Blockly.Scrollbar(Blockly.Toolbox.svgOptions_,
@@ -176,13 +176,11 @@ Blockly.Toolbox.buildTree_ = function() {
 
 /**
  * Fill the toolbox with options.
- * @param {!Object} tree Hierarchical tree of block types.
- * @private
  */
-Blockly.Toolbox.populateOptions_ = function(tree) {
+Blockly.Toolbox.redraw = function() {
   // Create an option for each category.
   var options = [];
-  for (var cat in tree) {
+  for (var cat in Blockly.Toolbox.languageTree) {
     var option = {};
     option.text =
         window.decodeURI(cat.substring(Blockly.Toolbox.PREFIX_.length));

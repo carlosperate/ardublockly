@@ -536,6 +536,15 @@ Blockly.setMainWorkspaceMetrics = function(xyRatio) {
   Blockly.commentCanvas.setAttribute('transform', translation);
 };
 
+/**
+ * Rerender certain elements which might have had their sizes changed by the
+ * CSS file and thus need realigning.
+ * Called when the CSS file has finally loaded.
+ */
+Blockly.cssLoaded = function() {
+  Blockly.Toolbox.redraw();
+};
+
 // Utility methods.
 // These methods are not specific to Blockly, and could be factored out if
 // a JavaScript framework such as Closure were used.
