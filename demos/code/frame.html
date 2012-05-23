@@ -64,9 +64,22 @@
   </style>
   <script>
     function init() {
-      Blockly.pathToBlockly = '../../';
-      Blockly.inject(document.body);
-      window.parent.init(Blockly);
+      Blockly.inject(document.body, {path: '../../'});
+
+      if (window.parent.init) {
+        // Let the top-level application know that Blockly is ready.
+        window.parent.init(Blockly);
+      } else {
+        // Attempt to diagnose the problem.
+        var msg = 'Error: Unable to communicate between frames.\n\n';
+        if (window.parent == window) {
+          msg += 'Try loading index.html instead of frame.html';
+        } else if (window.location.protocol == 'file:') {
+          msg += 'This may be due to a security restriction preventing\n' +
+              'access when using the file:// protocol.';
+        }
+        alert(msg);
+      }
     }
   </script>
 </head>
