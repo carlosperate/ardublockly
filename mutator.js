@@ -57,7 +57,7 @@ Blockly.Mutator.prototype.destroy = function() {
 
 /**
  * Create the icon on the block.
- * @param {!Blockly.Block} block The block associated with this comment.
+ * @param {!Blockly.Block} block The block associated with this mutator.
  * @private
  */
 Blockly.Mutator.prototype.createIcon_ = function(block) {
@@ -108,13 +108,13 @@ Blockly.Mutator.prototype.createIcon_ = function(block) {
 };
 
 /**
- * Render the icon for this comment.
+ * Render the icon for this mutator.
  * @param {number} titleX Horizontal offset at which to position the icon.
  * @return {number} Width of icon.
  */
 Blockly.Mutator.prototype.renderIcon = function(titleX) {
   var TOP_MARGIN = 5;
-  var diameter = 2 * Blockly.Comment.ICON_RADIUS;
+  var diameter = Blockly.Mutator.ICON_SIZE;
   if (Blockly.RTL) {
     titleX -= diameter;
   }
@@ -194,7 +194,7 @@ Blockly.Mutator.createDom = function() {
   // Mutator stops being a singleton.
   Blockly.Mutator.workspace_ = new Blockly.Workspace(true);
   Blockly.Mutator.flyout_ = new Blockly.Flyout();
-
+  Blockly.Mutator.flyout_.autoClose = false;
   Blockly.Mutator.svgDialog_.appendChild(
       Blockly.Mutator.flyout_.createDom());
   Blockly.Mutator.svgDialog_.appendChild(

@@ -19,8 +19,6 @@
 
 /**
  * @fileoverview Flyout tray containing blocks which may be created.
- * In the interests of a consistent UI, the toolbox shares some functions and
- * properties with the context menu.
  * @author fraser@google.com (Neil Fraser)
  */
 
@@ -31,6 +29,11 @@
 Blockly.Flyout = function() {
   this.workspace_ = new Blockly.Workspace(false);
 };
+
+/**
+ * Does the flyout automatically close when a block is created?
+ */
+Blockly.Flyout.prototype.autoClose = true;
 
 /**
  * Corner radius of the flyout background.
@@ -200,7 +203,7 @@ Blockly.Flyout.prototype.show = function(names) {
   // Create the blocks to be shown in this flyout.
   var blocks = [];
   var gaps = [];
-  if (names == Blockly.Toolbox.VARIABLE_CAT) {
+  if (names == Blockly.VARIABLE_CAT) {
     // Special category for variables.
     var variableList = Blockly.Variables.allVariables();
     variableList.sort(Blockly.caseInsensitiveComparator);
@@ -284,7 +287,7 @@ Blockly.Flyout.prototype.show = function(names) {
 /**
  * Create a copy of this block on the workspace.
  * @param {!Blockly.Flyout} flyout Instance of the flyout.
- * @param {!Blockly.Block} originBlock The toolbox block to copy.
+ * @param {!Blockly.Block} originBlock The flyout block to copy.
  * @return {!Function} Function to call when block is clicked.
  * @private
  */
@@ -294,14 +297,17 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
       // Right-click.  Don't create a block, let the context menu show.
       return;
     }
-    // Create the new block by cloning the block in the toolbox (via XML).
+    // Create the new block by cloning the block in the flyout (via XML).
     var xml = Blockly.Xml.blockToDom_(originBlock);
     var block = Blockly.Xml.domToBlock_(flyout.targetWorkspace_, xml);
-    // Place it in the same spot as the toolbox copy.
+    // Place it in the same spot as the flyout copy.
     var xyOld = Blockly.getAbsoluteXY_(originBlock.svg_.svgGroup_);
     var xyNew = Blockly.getAbsoluteXY_(flyout.targetWorkspace_.getCanvas());
     block.moveBy(xyOld.x - xyNew.x, xyOld.y - xyNew.y);
     block.render();
+    if (flyout.autoClose) {
+      flyout.hide();
+    }
     // Start a dragging operation on the new block.
     block.onMouseDown_(e);
   };

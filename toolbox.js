@@ -147,11 +147,6 @@ Blockly.Toolbox.position_ = function() {
 Blockly.Toolbox.PREFIX_ = 'cat_';
 
 /**
- * Category used for variables.
- */
-Blockly.Toolbox.VARIABLE_CAT = 'variables';
-
-/**
  * Build the hierarchical tree of block types.
  * @return {!Object} Tree object.
  * @private
@@ -191,7 +186,7 @@ Blockly.Toolbox.redraw = function() {
   if (Blockly.Language.variables_get && Blockly.Language.variables_set) {
     // Variables have a special category that is dynamic.
     options.push({text: Blockly.MSG_VARIABLE_CATEGORY,
-                  cat: Blockly.Toolbox.VARIABLE_CAT});
+                  cat: Blockly.VARIABLE_CAT});
   }
 
   function callbackFactory(cat, element) {

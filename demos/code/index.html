@@ -49,13 +49,15 @@ function init(blockly) {
 
   window.Blockly = blockly;
 
-  // Make the 'Blocks' tab line up with the toolbox.  
-  Blockly.bindEvent_(window, 'resize', null, function() {
-    document.getElementById('tab_blocks').style.minWidth =
-        (Blockly.Toolbox.width - 38) + 'px';
-        // Account for the 19 pixel margin and on each side.
-    });
-  Blockly.fireUiEvent(document, window, 'resize');
+  // Make the 'Blocks' tab line up with the toolbox.
+  if (Blockly.Toolbox) {
+    Blockly.bindEvent_(window, 'resize', null, function() {
+      document.getElementById('tab_blocks').style.minWidth =
+          (Blockly.Toolbox.width - 38) + 'px';
+          // Account for the 19 pixel margin and on each side.
+      });
+    Blockly.fireUiEvent(document, window, 'resize');
+  }
 }
   </script>
   <style>

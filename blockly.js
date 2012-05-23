@@ -68,6 +68,11 @@ Blockly.HSV_SATURATION = 0.45;
 Blockly.HSV_VALUE = 0.65;
 
 /**
+ * Category used for variables.
+ */
+Blockly.VARIABLE_CAT = 'variables';
+
+/**
  * Convert a hue (HSV model) into an RGB hex triplet.
  * @param {number} hue Hue on a colour wheel (0-360).
  * @return {string} RGB code, e.g. '#84c'.
@@ -542,7 +547,7 @@ Blockly.setMainWorkspaceMetrics = function(xyRatio) {
  * Called when the CSS file has finally loaded.
  */
 Blockly.cssLoaded = function() {
-  Blockly.Toolbox.redraw();
+  Blockly.Toolbox && Blockly.Toolbox.redraw();
 };
 
 // Utility methods.
