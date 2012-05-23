@@ -30,6 +30,7 @@
  * @constructor
  */
 Blockly.Block = function(workspace, prototypeName) {
+  this.id = Blockly.uniqueId();
   this.titleRow = [];
   this.outputConnection = null;
   this.nextConnection = null;
@@ -123,6 +124,7 @@ Blockly.Block.prototype.select = function() {
   }
   Blockly.selected = this;
   this.svg_.addSelect();
+  Blockly.fireUiEvent(Blockly.svgDoc, Blockly.svgDoc, 'blocklySelectChange');
 };
 
 /**
@@ -131,6 +133,7 @@ Blockly.Block.prototype.select = function() {
 Blockly.Block.prototype.unselect = function() {
   Blockly.selected = null;
   this.svg_.removeSelect();
+  Blockly.fireUiEvent(Blockly.svgDoc, Blockly.svgDoc, 'blocklySelectChange');
 };
 
 /**

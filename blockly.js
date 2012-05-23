@@ -762,3 +762,25 @@ Blockly.caseInsensitiveComparator = function(a, b) {
   }
   return 0;
 };
+
+/**
+ * Return a random id that's 8 letters long.
+ * 26*(26+10+4)^7 = 4,259,840,000,000
+ * @return {string} Random id.
+ */
+Blockly.uniqueId = function() {
+  // First character must be a letter.
+  // IE is case insensitive (in violation of the W3 spec).
+  var soup = 'abcdefghijklmnopqrstuvwxyz';
+  var id = soup.charAt(Math.random() * soup.length);
+  // Subsequent characters may include these.
+  soup += '0123456789-_:.';
+  for (var x = 1; x < 8; x++) {
+    id += soup.charAt(Math.random() * soup.length);
+  }
+  // Don't allow IDs with '--' in them since it might close a comment.
+  if (id.indexOf('--') != -1) {
+    id = Blockly.uniqueId();
+  }
+  return id;
+};

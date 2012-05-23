@@ -53,7 +53,7 @@ Blockly.JavaScript.maze_move = function() {
   // Generate JavaScript for moving forward or backwards.
   var direction = Blockly.Language.maze_move.DIRECTIONS
       .indexOf(this.getTitleText(1));
-  return 'Maze.move(' + direction + ');\n';
+  return 'Maze.move(' + direction + ', "' + this.id + '");\n';
 };
 
 Blockly.Language.maze_turnLeft = {
@@ -97,7 +97,7 @@ Blockly.JavaScript.maze_turnLeft = function() {
   // Generate JavaScript for turning left or right.
   var direction = Blockly.Language.maze_turnLeft.DIRECTIONS
       .indexOf(this.getTitleText(1));
-  return 'Maze.turn(' + direction + ');\n';
+  return 'Maze.turn(' + direction + ', "' + this.id + '");\n';
 };
 
 // Turning left and right use the same code.
@@ -128,5 +128,5 @@ Blockly.JavaScript.maze_isWall = function() {
   // Generate JavaScript for checking if there is a wall.
   var direction = Blockly.Language.maze_isWall.DIRECTIONS
       .indexOf(this.getTitleText(1));
-  return 'Maze.isWall(' + direction + ')';
+  return 'Maze.isWall(' + direction + ', "' + this.id + '")';
 };
