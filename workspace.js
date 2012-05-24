@@ -143,3 +143,42 @@ Blockly.Workspace.prototype.getBlockById = function(id) {
   }
   return null;
 };
+
+/**
+ * Turn the visual trace functionality on or off.
+ * @param {boolean} active True if the trace should be on.
+ */
+Blockly.Workspace.prototype.traceOn = function(armed) {
+  this.traceOn_ = armed;
+  if (this.traceWrapper_) {
+    Blockly.unbindEvent_(this.svgBlockCanvas_, 'blocklySelectChange',
+                         this.traceWrapper_);
+    this.traceWrapper_ = null;
+  }
+  if (armed) {
+    this.traceWrapper_ = Blockly.bindEvent_(this.svgBlockCanvas_,
+        'blocklySelectChange', this, function() {this.traceOn_ = false});
+  }
+};
+
+/**
+ * Highlight a block in the workspace.
+ * @param {string} id ID of block to find.
+ */
+Blockly.Workspace.prototype.highlightBlock = function(id) {
+  if (!this.traceOn_) {
+    return;
+  }
+  var block = this.getBlockById(id);
+  if (!block) {
+    return;
+  }
+  // Temporary turn off the listener for selection changes, so that we don't
+  // trip the monitor for detecting user activity.
+  this.traceOn(false);
+  // Select the curent block.
+  block.select();
+  // Restore the monitor for user activity.
+  this.traceOn(true);
+};
+

@@ -143,8 +143,7 @@ Maze.reset = function() {
 Maze.runButtonClick = function() {
   document.getElementById('runButton').style.display = 'none';
   document.getElementById('resetButton').style.display = 'inline';
-  Maze.traceOn_ = true;
-  Maze.traceActive_(true);
+  Blockly.mainWorkspace.traceOn(true);
   Maze.execute();
 };
 
@@ -154,27 +153,9 @@ Maze.runButtonClick = function() {
 Maze.resetButtonClick = function() {
   document.getElementById('runButton').style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
-  Maze.traceOn_ = false;
-  Maze.traceActive_(false);
+  Blockly.mainWorkspace.traceOn(false);
   Maze.reset();
 };
-
-/**
- * Turn the visual trace functionality on or off.
- * @param {boolean} active True if the trace should be on.
- */
-Maze.traceActive_ = function(active) {
-  if (active) {
-    if (Maze.traceWrapper_) {
-      Maze.traceActive_(false);
-    }
-    Maze.traceWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
-        'blocklySelectChange', null, function() {Maze.traceOn_ = false});
-  } else {
-    Blockly.unbindEvent_(Blockly.svgDoc, 'blocklySelectChange', Maze.traceWrapper_);
-    Maze.traceWrapper_ = null;
-  }
-}
 
 /**
  * Execute the user's code.  Heaven help us...
@@ -198,23 +179,6 @@ Maze.execute = function() {
 };
 
 /**
- * Highlight a block in the editor.
- * @param {Blockly.Block} block Block to be highlighted.
- */
-Maze.highlightBlock_ = function(block) {
-  if (!block || !Maze.traceOn_) {
-    return;
-  }
-  // Temporary turn off the listener for selection changes, so that we don't
-  // trip the monitor for detecting user activity.
-  Maze.traceActive_(false);
-  // Select the curent block.
-  block.select();
-  // Restore the monitor for user activity.
-  Maze.traceActive_(true);
-};
-
-/**
  * Iterate through the recorded path and animate pegman's actions.
  */
 Maze.animate = function() {
@@ -227,8 +191,7 @@ Maze.animate = function() {
       return;
     }
     action = pair[0];
-    var block = Blockly.mainWorkspace.getBlockById(pair[1]);
-    Maze.highlightBlock_(block);
+    Blockly.mainWorkspace.highlightBlock(pair[1]);
   } while (action == 'look');
 
 
