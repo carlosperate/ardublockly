@@ -104,6 +104,12 @@ Blockly.JavaScript.controls_forEach = function() {
 };
 
 Blockly.JavaScript.controls_flow_statements = function() {
-  // Flow statements: continue, break, return.
-  return this.getTitleText(0) + ';\n';
+  // Flow statements: continue, break.
+  switch (this.getTitleText(0)) {
+    case this.MSG_BREAK:
+      return 'break;\n';
+    case this.MSG_CONTINUE:
+      return 'continue;\n';
+  }
+  throw 'Unknown flow statement.';
 };

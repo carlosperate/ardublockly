@@ -279,7 +279,7 @@ Blockly.Language.controls_forEach = {
 
 
 Blockly.Language.controls_flow_statements = {
-  // Flow statements: continue, break, return.
+  // Flow statements: continue, break.
   category: 'Control',
   helpUrl: 'http://en.wikipedia.org/wiki/Control_flow',
   init: function() {
@@ -288,16 +288,22 @@ Blockly.Language.controls_flow_statements = {
     var dropdown = new Blockly.FieldDropdown(function() {
       return [
           thisBlock.MSG_BREAK,
-          thisBlock.MSG_CONTINUE,
-          thisBlock.MSG_RETURN
+          thisBlock.MSG_CONTINUE
         ];
     });
     this.addTitle(dropdown);
+    this.addTitle('of loop');
     this.setPreviousStatement(true);
-    this.setTooltip('Built-in statements to insert into control flows.');
-    this.contextMenu = false;
+    this.setTooltip(function() {
+      switch (thisBlock.getTitleText(0)) {
+        case thisBlock.MSG_BREAK:
+          return 'Break out of the containing loop.';
+        case thisBlock.MSG_CONTINUE:
+          return 'Skip the rest of this loop, and\ncontinue with the next iteration.';
+      }
+      return '';
+    });
   },
-  MSG_BREAK: 'break',
-  MSG_CONTINUE: 'continue',
-  MSG_RETURN: 'return'
+  MSG_BREAK: 'break out',
+  MSG_CONTINUE: 'continue with next iteration'
 };
