@@ -30,7 +30,6 @@
 Blockly.Mutator = function(block, toolbox) {
   this.block_ = block;
   this.toolbox_ = toolbox;
-  this.createIcon_(block);
 };
 
 /**
@@ -57,10 +56,8 @@ Blockly.Mutator.prototype.destroy = function() {
 
 /**
  * Create the icon on the block.
- * @param {!Blockly.Block} block The block associated with this mutator.
- * @private
  */
-Blockly.Mutator.prototype.createIcon_ = function(block) {
+Blockly.Mutator.prototype.createIcon = function() {
   /* Here's the markup that will be generated:
   <g class="blocklyIconGroup">
     <rect class="blocklyIconShield" width="16" height="16"/>
@@ -69,15 +66,15 @@ Blockly.Mutator.prototype.createIcon_ = function(block) {
   */
   var quantum = Blockly.Mutator.ICON_SIZE / 8;
   this.iconGroup_ = Blockly.createSvgElement('g', {}, null);
-  if (block.editable) {
+  if (this.block_.editable) {
     this.iconGroup_.setAttribute('class', 'blocklyIconGroup');
   }
   var iconShield = Blockly.createSvgElement('rect',
       {'class': 'blocklyIconShield',
-      width: 8 * quantum,
-      height: 8 * quantum,
-      rx: 2 * quantum,
-      ry: 2 * quantum}, this.iconGroup_);
+       width: 8 * quantum,
+       height: 8 * quantum,
+       rx: 2 * quantum,
+       ry: 2 * quantum}, this.iconGroup_);
   if (!Blockly.Mutator.crossPath_) {
     // Draw the cross once, and save it for future use.
     var path = [];
@@ -92,9 +89,9 @@ Blockly.Mutator.prototype.createIcon_ = function(block) {
   }
   var iconMark = Blockly.createSvgElement('path',
       {'class': 'blocklyMutatorMark',
-      d: Blockly.Mutator.crossPath_}, this.iconGroup_);
-  block.svg_.svgGroup_.appendChild(this.iconGroup_);
-  if (block.editable) {
+       d: Blockly.Mutator.crossPath_}, this.iconGroup_);
+  this.block_.getSvgRoot().appendChild(this.iconGroup_);
+  if (this.block_.editable) {
     Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.onMouseUp_);
   }
 
@@ -382,7 +379,7 @@ Blockly.Mutator.closeDialog = function() {
 
   // Empty the dialog.
   Blockly.Mutator.flyout_.hide();
-  var blocks = Blockly.Mutator.workspace_.getTopBlocks();
+  var blocks = Blockly.Mutator.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
     block.destroy();
   }

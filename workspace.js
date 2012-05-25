@@ -105,23 +105,27 @@ Blockly.Workspace.prototype.removeTopBlock = function(block) {
 };
 
 /**
- * Finds the top-level blocks and returns them.  Blocks are sorted by
- * position; top to bottom.
+ * Finds the top-level blocks and returns them.  Blocks are optionally sorted
+ * by position; top to bottom.
+ * @param {boolean} ordered Sort the list if true.
  * @return {!Array.<!Blockly.Block>} The top-level block objects.
  */
-Blockly.Workspace.prototype.getTopBlocks = function() {
+Blockly.Workspace.prototype.getTopBlocks = function(ordered) {
+  // Copy the topBlocks_ list.
   var blocks = [].concat(this.topBlocks_);
-  blocks.sort(function(a, b)
-      {return a.getRelativeToSurfaceXY().y - b.getRelativeToSurfaceXY().y;});
+  if (ordered) {
+    blocks.sort(function(a, b)
+        {return a.getRelativeToSurfaceXY().y - b.getRelativeToSurfaceXY().y;});
+  }
   return blocks;
 };
 
 /**
- * Find all blocks in workspace.
+ * Find all blocks in workspace.  No particular order.
  * @return {!Array.<!Blockly.Block>} Array of blocks.
  */
 Blockly.Workspace.prototype.getAllBlocks = function() {
-  var blocks = this.getTopBlocks();
+  var blocks = this.getTopBlocks(false);
   for (var x = 0; x < blocks.length; x++) {
     blocks = blocks.concat(blocks[x].getChildren());
   }

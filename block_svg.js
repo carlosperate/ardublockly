@@ -29,6 +29,7 @@
  */
 Blockly.BlockSvg = function(block) {
   this.block_ = block;
+  // Create core elements for the block.
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
   this.svgPathDark_ = Blockly.createSvgElement('path',
       {transform: 'translate(1, 1)'}, this.svgGroup_);
@@ -41,6 +42,37 @@ Blockly.BlockSvg = function(block) {
   if (block.editable) {
     Blockly.addClass_(this.svgGroup_, 'blocklyDraggable');
   }
+};
+
+/**
+ * Initialize the SVG representation with any block attributes which have
+ * already been defined.
+ */
+Blockly.BlockSvg.prototype.init = function() {
+  var block = this.block_;
+  this.updateColour();
+  for (var x = 0; x < block.titleRow.length; x++) {
+    block.titleRow[x].init(block, this);
+  }
+  for (var x = 0, input; input = block.inputList[x]; x++) {
+    if (input.label) {
+      input.label.init(block, this);
+    }
+    if (input.type == Blockly.LOCAL_VARIABLE) {
+      input.init(block, this);
+    }
+  }
+  if (block.mutator) {
+    block.mutator.createIcon();
+  }
+};
+
+/**
+ * Get the root SVG node.
+ * @return {!Node} The root SVG node.
+ */
+Blockly.BlockSvg.prototype.getRootNode = function() {
+  return this.svgGroup_;
 };
 
 // UI constants for rendering blocks.
@@ -109,11 +141,9 @@ Blockly.BlockSvg.prototype.destroy = function() {
 
 /**
  * Change the colour of a block.
- * @param {string} colourName Name of colour as listed in Blockly.COLOURS.
- *     Colour must be in '#fff' format.
  */
-Blockly.BlockSvg.prototype.setColour = function(colourHue) {
-  var hexColour = Blockly.makeColour(colourHue);
+Blockly.BlockSvg.prototype.updateColour = function() {
+  var hexColour = Blockly.makeColour(this.block_.getColour());
   var r = window.parseInt(hexColour.charAt(1), 16);
   var g = window.parseInt(hexColour.charAt(2), 16);
   var b = window.parseInt(hexColour.charAt(3), 16);

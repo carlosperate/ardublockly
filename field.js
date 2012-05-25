@@ -64,7 +64,7 @@ Blockly.Field.prototype.init = function(block) {
   this.sourceBlock_ = block;
   this.group_.setAttribute('class',
       block.editable ? 'blocklyEditableText' : 'blocklyNonEditableText');
-  block.svg_.svgGroup_.appendChild(this.group_);
+  block.getSvgRoot().appendChild(this.group_);
   if (block.editable) {
     Blockly.bindEvent_(this.group_, 'mouseup', this, this.onMouseUp_);
   }

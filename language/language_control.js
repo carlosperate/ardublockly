@@ -85,10 +85,12 @@ Blockly.Language.controls_if = {
   decompose: function(workspace) {
     var ifBlock = new Blockly.Block(workspace, 'controls_if_if');
     ifBlock.editable = false;
+    ifBlock.initSvg();
     var connection = ifBlock.inputList[0];
     var x = 0;
     for (; x < this.elseifCount_; x++) {
       var elseifBlock = new Blockly.Block(workspace, 'controls_if_elseif');
+      elseifBlock.initSvg();
       // Store a pointer to any connected blocks.
       elseifBlock.valueInput_ = this.inputList[2 + (x * 2)].targetConnection;
       elseifBlock.statementInput_ = this.inputList[3 + (x * 2)].targetConnection;
@@ -97,6 +99,7 @@ Blockly.Language.controls_if = {
     }
     if (this.elseCount_) {
       var elseBlock = new Blockly.Block(workspace, 'controls_if_else');
+      elseBlock.initSvg();
       elseBlock.statementInput_ = this.inputList[2 + (x * 2)].targetConnection;
       connection.connect(elseBlock.previousConnection);
     }

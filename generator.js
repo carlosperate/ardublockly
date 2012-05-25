@@ -72,7 +72,7 @@ Blockly.Generator.workspaceToCode = function(name) {
   var code = [];
   var generator = Blockly.Generator.get(name);
   generator.init();
-  var blocks = Blockly.mainWorkspace.getTopBlocks();
+  var blocks = Blockly.mainWorkspace.getTopBlocks(true);
   for (var x = 0, block; block = blocks[x]; x++) {
     var line = generator.blockToCode(block, true);
     if (block.outputConnection && generator.scrubNakedValue) {

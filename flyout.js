@@ -178,7 +178,7 @@ Blockly.Flyout.prototype.position_ = function() {
 Blockly.Flyout.prototype.hide = function() {
   this.svgGroup_.style.display = 'none';
   // Delete all the blocks.
-  var blocks = this.workspace_.getTopBlocks();
+  var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
     block.destroy();
   }
@@ -217,7 +217,9 @@ Blockly.Flyout.prototype.show = function(names) {
         continue;
       }
       var getBlock = new Blockly.Block(this.workspace_, 'variables_set');
+      getBlock.initSvg();
       var setBlock = new Blockly.Block(this.workspace_, 'variables_get');
+      setBlock.initSvg();
       if (variableList[i] === null) {
         defaultVariable = getBlock.getTitleText(1);
       } else {
@@ -230,6 +232,7 @@ Blockly.Flyout.prototype.show = function(names) {
   } else {
     for (var i = 0, name; name = names[i]; i++) {
       var block = new Blockly.Block(this.workspace_, name);
+      block.initSvg();
       blocks[i] = block;
       gaps[i] = margin * 2;
     }

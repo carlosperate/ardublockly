@@ -72,9 +72,11 @@ Blockly.Language.lists_create_with = {
   decompose: function(workspace) {
     var listBlock = new Blockly.Block(workspace, 'lists_create_with_container');
     listBlock.editable = false;
+    listBlock.initSvg();
     var connection = listBlock.inputList[0];
     for (var x = 0; x < this.itemCount_; x++) {
       var itemBlock = new Blockly.Block(workspace, 'lists_create_with_item');
+      itemBlock.initSvg();
       // Store a pointer to any connected blocks.
       itemBlock.valueInput_ = this.inputList[x].targetConnection;
       connection.connect(itemBlock.previousConnection);

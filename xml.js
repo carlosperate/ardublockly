@@ -31,7 +31,7 @@ Blockly.Xml = {};
  */
 Blockly.Xml.workspaceToDom = function(blockGroup) {
   var xml = document.createElement('xml');
-  var blocks = blockGroup.getTopBlocks();
+  var blocks = blockGroup.getTopBlocks(false);
   for (var i = 0, block; block = blocks[i]; i++) {
     var element = Blockly.Xml.blockToDom_(block);
     var xy = block.getRelativeToSurfaceXY();
@@ -207,6 +207,7 @@ Blockly.Xml.domToWorkspace = function(blockGroup, xml) {
 Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
   var prototypeName = xmlBlock.getAttribute('type');
   var block = new Blockly.Block(blockGroup, prototypeName);
+  block.initSvg();
 
   var inline = xmlBlock.getAttribute('inline');
   if (inline) {

@@ -3,7 +3,7 @@
 <title>Block Factory</title>
 <script type="text/javascript" src="blockly.js"></script>
 <script type="text/javascript" src="block.js"></script>
-<script type="text/javascript" src="blockSvg.js"></script>
+<script type="text/javascript" src="block_svg.js"></script>
 <script type="text/javascript" src="comment.js"></script>
 <script type="text/javascript" src="connection.js"></script>
 <script type="text/javascript" src="contextmenu.js"></script>
@@ -60,6 +60,7 @@ function start() {
 
 function createCustomBlock() {
   block = new Blockly.Block(Blockly.mainWorkspace, '');
+  block.initSvg();
   block.svg_.svgGroup_.setAttribute('transform', 'translate(60, 40)');
   block.render();
   document.getElementById('blockFactoryForm').reset();
@@ -176,6 +177,7 @@ function airstrike(n) {
   for (var x = 0; x < n; x++) {
     var prototype = prototypes[Math.floor(Math.random() * prototypes.length)];
     var block = new Blockly.Block(Blockly.mainWorkspace, prototype);
+    block.initSvg();
     block.svg_.svgGroup_.setAttribute('transform', 'translate(' +
         Math.round(Math.random() * 450 + 40) + ', ' +
         Math.round(Math.random() * 600 + 40) + ')');

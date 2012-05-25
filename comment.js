@@ -170,7 +170,7 @@ Blockly.Comment.prototype.createIcon_ = function() {
       x: Blockly.Comment.ICON_RADIUS / 2,
       y: 2 * Blockly.Comment.ICON_RADIUS - 3}, this.iconGroup_);
   this.iconMark_.appendChild(Blockly.svgDoc.createTextNode('?'));
-  this.block_.svg_.svgGroup_.appendChild(this.iconGroup_);
+  this.block_.getSvgRoot().appendChild(this.iconGroup_);
   Blockly.bindEvent_(this.iconGroup_, 'click', this, this.iconClick_);
   Blockly.bindEvent_(this.iconGroup_, 'mouseover', this, this.iconMouseOver_);
   Blockly.bindEvent_(this.iconGroup_, 'mouseout', this, this.iconMouseOut_);
