@@ -458,7 +458,7 @@ Blockly.setCursorHand_ = function(closed) {
     cursor = 'url(' + Blockly.pathToBlockly + 'media/handclosed.cur) 7 3, auto';
   }
   if (Blockly.selected) {
-    Blockly.selected.svg_.svgGroup_.style.cursor = cursor;
+    Blockly.selected.getSvgRoot().style.cursor = cursor;
   }
   // Set cursor on the SVG surface as well as block so that rapid movements
   // don't result in cursor changing to an arrow momentarily.

@@ -81,8 +81,9 @@ Blockly.Block.prototype.svg_ = null;
 Blockly.Block.prototype.initSvg = function() {
   this.svg_ = new Blockly.BlockSvg(this);
   this.svg_.init();
-  Blockly.bindEvent_(this.svg_.svgGroup_, 'mousedown', this, this.onMouseDown_);
-  this.workspace.getCanvas().appendChild(this.svg_.svgGroup_);
+  Blockly.bindEvent_(this.svg_.getRootNode(), 'mousedown', this,
+                     this.onMouseDown_);
+  this.workspace.getCanvas().appendChild(this.svg_.getRootNode());
 };
 
 /**
@@ -242,7 +243,7 @@ Blockly.Block.prototype.destroy = function(gentle) {
  * @return {!Object} Object with .x and .y properties.
  */
 Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
-  var element = this.svg_.svgGroup_;
+  var element = this.svg_.getRootNode();
   var x = 0;
   var y = 0;
   do {
@@ -262,7 +263,7 @@ Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
  */
 Blockly.Block.prototype.moveBy = function(dx, dy) {
   var xy = this.getRelativeToSurfaceXY();
-  this.svg_.svgGroup_.setAttribute('transform',
+  this.svg_.getRootNode().setAttribute('transform',
       'translate(' + (xy.x + dx) + ', ' + (xy.y + dy) + ')');
   this.moveConnections_(dx, dy);
 };
@@ -593,7 +594,7 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
     // Unrestricted dragging.
     var x = this.startDragX + dx;
     var y = this.startDragY + dy;
-    this.svg_.svgGroup_.setAttribute('transform',
+    this.svg_.getRootNode().setAttribute('transform',
                                      'translate(' + x + ', ' + y + ')');
     // Drag all the nested comments.
     for (var x = 0; x < this.draggedComments_.length; x++) {
@@ -720,8 +721,8 @@ Blockly.Block.prototype.setParent = function(newParent) {
     }
     // Move this block up the DOM.  Keep track of x/y translations.
     var xy = this.getRelativeToSurfaceXY();
-    this.workspace.getCanvas().appendChild(this.svg_.svgGroup_);
-    this.svg_.svgGroup_.setAttribute('transform',
+    this.workspace.getCanvas().appendChild(this.svg_.getRootNode());
+    this.svg_.getRootNode().setAttribute('transform',
         'translate(' + xy.x + ', ' + xy.y + ')');
 
     // Disconnect from superior blocks.
@@ -744,7 +745,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
     newParent.childBlocks_.push(this);
 
     var oldXY = this.getRelativeToSurfaceXY();
-    newParent.svg_.svgGroup_.appendChild(this.svg_.svgGroup_);
+    newParent.svg_.getRootNode().appendChild(this.svg_.getRootNode());
     var newXY = this.getRelativeToSurfaceXY();
     // Move the connections to match the child's new position.
     this.moveConnections_(newXY.x - oldXY.x, newXY.y - oldXY.y);
@@ -972,7 +973,7 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
       }
       var child = input.targetBlock();
       if (child) {
-        child.svg_.svgGroup_.style.display = display;
+        child.svg_.getRootNode().style.display = display;
         if (collapsed) {
           child.rendered = false;
         }

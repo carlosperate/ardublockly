@@ -228,7 +228,7 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
     reverse = true;
   }
   // Raise it to the top for extra visiblility.
-  rootBlock.svg_.svgGroup_.parentNode.appendChild(rootBlock.svg_.svgGroup_);
+  rootBlock.getSvgRoot().parentNode.appendChild(rootBlock.getSvgRoot());
   var dx = (staticConnection.x_ + Blockly.SNAP_RADIUS) - this.x_;
   var dy = (staticConnection.y_ + Blockly.SNAP_RADIUS * 2) - this.y_;
   if (reverse) {
@@ -288,9 +288,9 @@ Blockly.Connection.prototype.highlight = function() {
   var y = this.y_ - xy.y;
   Blockly.Connection.highlightedPath_ = Blockly.createSvgElement('path',
       {'class': 'blocklyHighlightedConnectionPath',
-      d: steps,
-      transform: 'translate(' + x + ', ' + y + ')'},
-      this.sourceBlock_.svg_.svgGroup_);
+       d: steps,
+       transform: 'translate(' + x + ', ' + y + ')'},
+      this.sourceBlock_.getSvgRoot());
 };
 
 /**
@@ -311,8 +311,8 @@ Blockly.Connection.prototype.tighten_ = function() {
   var dy = Math.round(this.targetConnection.y_ - this.y_);
   if (dx != 0 || dy != 0) {
     var block = this.targetBlock();
-    var xy = Blockly.getRelativeXY_(block.svg_.svgGroup_);
-    block.svg_.svgGroup_.setAttribute('transform',
+    var xy = Blockly.getRelativeXY_(block.getSvgRoot());
+    block.getSvgRoot().setAttribute('transform',
         'translate(' + (xy.x - dx) + ', ' + (xy.y - dy) + ')');
     block.moveConnections_(-dx, -dy);
   }

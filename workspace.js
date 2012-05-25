@@ -113,7 +113,7 @@ Blockly.Workspace.prototype.removeTopBlock = function(block) {
 Blockly.Workspace.prototype.getTopBlocks = function(ordered) {
   // Copy the topBlocks_ list.
   var blocks = [].concat(this.topBlocks_);
-  if (ordered) {
+  if (ordered && blocks.length > 1) {
     blocks.sort(function(a, b)
         {return a.getRelativeToSurfaceXY().y - b.getRelativeToSurfaceXY().y;});
   }

@@ -61,7 +61,7 @@ function start() {
 function createCustomBlock() {
   block = new Blockly.Block(Blockly.mainWorkspace, '');
   block.initSvg();
-  block.svg_.svgGroup_.setAttribute('transform', 'translate(60, 40)');
+  block.getSvgRoot().setAttribute('transform', 'translate(60, 40)');
   block.render();
   document.getElementById('blockFactoryForm').reset();
   document.getElementById('customTbody').style.display = 'table-row-group';
@@ -178,7 +178,7 @@ function airstrike(n) {
     var prototype = prototypes[Math.floor(Math.random() * prototypes.length)];
     var block = new Blockly.Block(Blockly.mainWorkspace, prototype);
     block.initSvg();
-    block.svg_.svgGroup_.setAttribute('transform', 'translate(' +
+    block.getSvgRoot().setAttribute('transform', 'translate(' +
         Math.round(Math.random() * 450 + 40) + ', ' +
         Math.round(Math.random() * 600 + 40) + ')');
     block.render();

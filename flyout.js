@@ -250,12 +250,12 @@ Blockly.Flyout.prototype.show = function(names) {
     // try this, I'm sure.  Kill the comment.
     Blockly.Comment && block.setCommentText(null);
     block.render();
-    var bBox = block.svg_.svgGroup_.getBBox();
+    var bBox = block.getSvgRoot().getBBox();
     var x = Blockly.RTL ? 0 : margin + Blockly.BlockSvg.TAB_WIDTH;
     block.moveBy(x, cursorY);
     flyoutWidth = Math.max(flyoutWidth, bBox.width);
     cursorY += bBox.height + gaps[i];
-    Blockly.bindEvent_(block.svg_.svgGroup_, 'mousedown', null,
+    Blockly.bindEvent_(block.getSvgRoot(), 'mousedown', null,
                        Blockly.Flyout.createBlockFunc_(this, block));
   }
   flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
@@ -268,7 +268,7 @@ Blockly.Flyout.prototype.show = function(names) {
     }
     // Create an invisible rectangle over the block to act as a button.  Just
     // using the block as a button is poor, since blocks have holes in them.
-    var bBox = block.svg_.svgGroup_.getBBox();
+    var bBox = block.getSvgRoot().getBBox();
     var xy = block.getRelativeToSurfaceXY();
     var rect = Blockly.createSvgElement('rect',
         {width: bBox.width, height: bBox.height,
@@ -304,7 +304,7 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
     var xml = Blockly.Xml.blockToDom_(originBlock);
     var block = Blockly.Xml.domToBlock_(flyout.targetWorkspace_, xml);
     // Place it in the same spot as the flyout copy.
-    var xyOld = Blockly.getAbsoluteXY_(originBlock.svg_.svgGroup_);
+    var xyOld = Blockly.getAbsoluteXY_(originBlock.getSvgRoot());
     var xyNew = Blockly.getAbsoluteXY_(flyout.targetWorkspace_.getCanvas());
     block.moveBy(xyOld.x - xyNew.x, xyOld.y - xyNew.y);
     block.render();

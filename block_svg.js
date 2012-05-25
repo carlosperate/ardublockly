@@ -345,7 +345,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
     }
     // Expand input size if there is a connection.
     if (input.targetConnection) {
-      var linkedBlock = input.targetBlock().svg_.svgGroup_;
+      var linkedBlock = input.targetBlock().getSvgRoot();
       var bBox = linkedBlock.getBBox();
       if (window.navigator.userAgent.indexOf('AppleWebKit/') != -1) {
         /* HACK:
