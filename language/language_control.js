@@ -62,6 +62,9 @@ Blockly.Language.controls_if = {
   MSG_ELSE: 'else',
   MSG_THEN: 'then',
   mutationToDom: function(workspace) {
+    if (!this.elseifCount_ && !this.elseCount_) {
+      return null;
+    }
     var container = document.createElement('mutation');
     if (this.elseifCount_) {
       container.setAttribute('elseif', this.elseifCount_);

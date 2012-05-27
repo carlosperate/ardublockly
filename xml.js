@@ -53,7 +53,10 @@ Blockly.Xml.blockToDom_ = function(block) {
   element.setAttribute('type', block.type);
   if (block.mutationToDom) {
     // Custom data for an advanced block.
-    element.appendChild(block.mutationToDom());
+    var mutation = block.mutationToDom();
+    if (mutation) {
+      element.appendChild(mutation);
+    }
   }
   for (var i = 0, title; title = block.titleRow[i]; i++) {
     if (title.EDITABLE) {
@@ -79,30 +82,43 @@ Blockly.Xml.blockToDom_ = function(block) {
     element.appendChild(commentElement);
   }
 
-  var valueInputs = false;
+  var variableCount = 0;
+  var valueCount = 0;
+  var statementCount = 0;
   for (var i = 0, input; input = block.inputList[i]; i++) {
     var container;
+    var empty = true;
     if (input.type == Blockly.LOCAL_VARIABLE) {
       container = document.createElement('variable');
-      container.setAttribute('data', input.getText());
+      container.setAttribute('name', input.getText());
+      container.setAttribute('i', variableCount);
+      variableCount++;
+      empty = false;
     } else {
+      var childBlock = input.targetBlock();
       if (input.type == Blockly.INPUT_VALUE) {
-        valueInputs = true;
         container = document.createElement('value');
+        container.setAttribute('i', valueCount);
+        valueCount++;
       } else if (input.type == Blockly.NEXT_STATEMENT) {
         container = document.createElement('statement');
+        container.setAttribute('i', statementCount);
+        statementCount++;
       }
-      var childBlock = input.targetBlock();
       if (childBlock) {
         container.appendChild(Blockly.Xml.blockToDom_(childBlock));
+        empty = false;
       }
     }
     if (input.label && input.label.EDITABLE && input.label.getText) {
       container.setAttribute('label', input.label.getText());
+      empty = false;
     }
-    element.appendChild(container);
+    if (!empty) {
+      element.appendChild(container);
+    }
   }
-  if (valueInputs) {
+  if (valueCount) {
     element.setAttribute('inline', block.inputsInline);
   }
   if (block.collapsed) {
@@ -110,12 +126,12 @@ Blockly.Xml.blockToDom_ = function(block) {
   }
 
   if (block.nextConnection) {
-    var container = document.createElement('next');
     var nextBlock = block.nextConnection.targetBlock();
     if (nextBlock) {
+      var container = document.createElement('next');
       container.appendChild(Blockly.Xml.blockToDom_(nextBlock));
+      element.appendChild(container);
     }
-    element.appendChild(container);
   }
 
   return element;
@@ -222,21 +238,16 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
     block.setCollapsed(collapsed == 'true');
   }
 
-  var inputIndicies = {};
-  inputIndicies[Blockly.LOCAL_VARIABLE] = -1;
-  inputIndicies[Blockly.INPUT_VALUE] = -1;
-  inputIndicies[Blockly.NEXT_STATEMENT] = -1;
   /**
    * Returns the next input of a given type.
-   * Closure: uses inputIndicies and block from external scope.
+   * Closure: uses block from external scope.
    * @param {number} type The type of input to search for.
+   * @param {number} n The index of this input in its type.
    * @return {Object} The next input or null if none.
    */
-  function nextInput(type) {
-    var startIndex = inputIndicies[type];
-    for (var i = startIndex + 1; i < block.inputList.length; i++) {
+  function getInput(type, n) {
+    for (var i = n; i < block.inputList.length; i++) {
       if (block.inputList[i].type == type) {
-        inputIndicies[type] = i;
         return block.inputList[i];
       }
     }
@@ -288,9 +299,10 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         block.setTitleText(xmlChild.textContent, i);
         break;
       case 'variable':
-        var data = xmlChild.getAttribute('data');
+        var i = parseInt(xmlChild.getAttribute('i'), 10);
+        var data = xmlChild.getAttribute('name');
         if (data !== null) {
-          input = nextInput(Blockly.LOCAL_VARIABLE);
+          input = getInput(Blockly.LOCAL_VARIABLE, i);
           if (!input) {
             throw 'Variable input does not exist.';
           }
@@ -298,7 +310,8 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         break;
       case 'value':
-        input = nextInput(Blockly.INPUT_VALUE);
+        var i = parseInt(xmlChild.getAttribute('i'), 10);
+        input = getInput(Blockly.INPUT_VALUE, i);
         if (!input) {
           throw 'Value input does not exist.';
         }
@@ -312,7 +325,8 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         break;
       case 'statement':
-        input = nextInput(Blockly.NEXT_STATEMENT);
+        var i = parseInt(xmlChild.getAttribute('i'), 10);
+        input = getInput(Blockly.NEXT_STATEMENT, i);
         if (!input) {
           throw 'Statement input does not exist.';
         }
