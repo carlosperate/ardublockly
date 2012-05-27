@@ -346,7 +346,12 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
     // Expand input size if there is a connection.
     if (input.targetConnection) {
       var linkedBlock = input.targetBlock().getSvgRoot();
-      var bBox = linkedBlock.getBBox();
+      try {
+        var bBox = linkedBlock.getBBox();
+      } catch (e) {
+        // Firefox has trouble with hidden elements (Bug 528969).
+        var bBox = {height: 0, width: 0};
+      }
       if (window.navigator.userAgent.indexOf('AppleWebKit/') != -1) {
         /* HACK:
          The current versions of Chrome (16.0) and Safari (5.1) with a common
@@ -368,7 +373,8 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
         input.labelWidth = input.label.getComputedTextLength();
       } else {
         // Editable label.
-        input.labelWidth = input.label.render().width;
+        var labelBox = input.label.render();
+        input.labelWidth = labelBox ? labelBox.width : 0;
       }
     } else {
       // No label.
@@ -661,7 +667,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
           labelElement.setAttribute('y', cursorY + 18);
         }
         var fieldGroup = input.getRootElement();
-        var bBox = input.render();
+        var bBox = input.render() || {height: 0, width: 0};
         if (Blockly.RTL) {
           fieldGroup.setAttribute('transform', 'translate(' +
               (-rightEdge - bBox.width + Blockly.BlockSvg.SEP_SPACE_X / 2) +

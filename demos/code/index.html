@@ -13,23 +13,49 @@ var TABS_ = ['blocks', 'javascript', 'dart', 'python', 'xml'];
  * @param {string} id ID of tab clicked.
  */
 function tabClick(id) {
-  // First, deselect all tabs and hide all panes.
+  var xmlTextarea = document.getElementById('textarea_xml');
+  // If the XML tab was open, save and render the content.
+  if (document.getElementById('tab_xml').className == 'tabon') {
+    var xmlText = xmlTextarea.value;
+    var xmlDom = null;
+    try {
+      xmlDom = Blockly.Xml.textToDom(xmlText);
+    } catch (e) {
+      var q =
+          window.confirm('Error parsing XML:\n' + e + '\n\nAbandon changes?');
+      if (!q) {
+        // Leave the user on the XML tab.
+        return;
+      }
+    }
+    if (xmlDom) {
+      Blockly.mainWorkspace.clear();
+      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+    }
+  }
+
+  // Deselect all tabs and hide all panes.
   for (var x in TABS_) {
     document.getElementById('tab_' + TABS_[x]).className = 'taboff';
     document.getElementById('content_' + TABS_[x]).style.display = 'none';
   }
-  // Second, select the active tab.
+
+  // Select the active tab.
   document.getElementById(id).className = 'tabon';
-  // Third, show the selected pane.
+  // Show the selected pane.
   var content = document.getElementById(id.replace('tab_', 'content_'));
   content.style.display = 'block';
-  // Fourth, initialize the pane.
-  if (id == 'tab_xml') {
+
+  // Initialize the pane.
+  if (id == 'tab_blocks') {
+    // If the workspace was changed by the XML tab, Firefox will have performed
+    // an incomplete rendering due to Blockly being invisible.  Rerender.
+    Blockly.mainWorkspace.render();
+  } else if (id == 'tab_xml') {
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-    var xmlHtml = xmlText.replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    content.innerHTML = xmlHtml;
+    xmlTextarea.value = xmlText;
+    xmlTextarea.focus();
   } else if (id == 'tab_javascript') {
     content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
   } else if (id == 'tab_dart') {
@@ -110,15 +136,22 @@ function init(blockly) {
     td {
       padding: 0;
     }
-    pre {
+    pre,
+    #content_xml {
       width: 100%;
       height: 100%;
       padding: 0;
       margin: 0;
       border: 1px solid #ccc;
       border-top-style: none;
-      overflow: visible;
+      overflow: hidden;
       display: none;
+    }
+    #textarea_xml {
+      width: 100%;
+      height: 100%;
+      border: none;
+      resize: none;
     }
     iframe {
       width: 100%;
@@ -159,7 +192,9 @@ function init(blockly) {
         <pre id="content_javascript"></pre>
         <pre id="content_dart"></pre>
         <pre id="content_python"></pre>
-        <pre id="content_xml"></pre>
+        <div id="content_xml">
+          <textarea id="textarea_xml"></textarea>
+        </div>
       </td>
     </tr>
   </table>

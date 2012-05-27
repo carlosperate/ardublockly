@@ -74,12 +74,17 @@ Blockly.Toolbox.createDom = function() {
  * .contentTop: Offset of the top-most content from the y=0 coordinate,
  * .absoluteTop: Top-edge of view.
  * .absoluteLeft: Left-edge of view.
- * @return {!Object} Contains size and position metrics of the toolbox.
+ * @return {Object} Contains size and position metrics of the toolbox.
  */
 Blockly.Toolbox.getMetrics = function() {
   var viewHeight = Blockly.svgSize().height;
   var viewWidth = Blockly.Toolbox.width;
-  var optionBox = Blockly.Toolbox.svgOptions_.getBBox();
+  try {
+    var optionBox = Blockly.Toolbox.svgOptions_.getBBox();
+  } catch (e) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    return null;
+  }
   return {
     viewHeight: viewHeight,
     viewWidth: viewWidth,

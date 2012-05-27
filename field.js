@@ -100,10 +100,15 @@ Blockly.Field.prototype.getRootElement = function() {
 /**
  * Draws the border in the correct location.
  * Returns the resulting bounding box.
- * @return {!Object} Object containing width/height/x/y properties.
+ * @return {Object} Object containing width/height/x/y properties.
  */
 Blockly.Field.prototype.render = function() {
-  var bBox = this.textElement_.getBBox();
+  try {
+    var bBox = this.textElement_.getBBox();
+  } catch (e) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    return null;
+  }
   if (bBox.height == 0) {
     bBox.height = 18;
   }
@@ -124,6 +129,10 @@ Blockly.Field.prototype.render = function() {
  */
 Blockly.Field.prototype.width = function() {
   var bBox = this.render();
+  if (!bBox) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    return 0;
+  }
   if (bBox.width == -Infinity) {
     // Opera has trouble with bounding boxes around empty objects.
     return 0;

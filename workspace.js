@@ -133,6 +133,27 @@ Blockly.Workspace.prototype.getAllBlocks = function() {
 };
 
 /**
+ * Destroy all blocks in workspace.
+ */
+Blockly.Workspace.prototype.clear = function() {
+  while (this.topBlocks_.length) {
+    this.topBlocks_[0].destroy();
+  }
+};
+
+/**
+ * Render all blocks in workspace.
+ */
+Blockly.Workspace.prototype.render = function() {
+  var renderList = this.getAllBlocks();
+  for (var x = 0, block; block = renderList[x]; x++) {
+    if (!block.getChildren().length) {
+      block.render();
+    }
+  }
+};
+
+/**
  * Finds the block with the specified ID in this workspace.
  * @param {string} id ID of block to find.
  * @return {Blockly.Block} The matching block, or null if not found.

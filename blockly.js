@@ -478,7 +478,7 @@ Blockly.setCursorHand_ = function(closed) {
  * .contentLeft: Offset of the left-most content from the x=0 coordinate.
  * .absoluteTop: Top-edge of view.
  * .absoluteLeft: Left-edge of view.
- * @return {!Object} Contains size and position metrics of main workspace.
+ * @return {Object} Contains size and position metrics of main workspace.
  */
 Blockly.getMainWorkspaceMetrics = function() {
   var hwView = Blockly.svgSize();
@@ -487,7 +487,12 @@ Blockly.getMainWorkspaceMetrics = function() {
   }
   var viewWidth = hwView.width - Blockly.Scrollbar.scrollbarThickness;
   var viewHeight = hwView.height - Blockly.Scrollbar.scrollbarThickness;
-  var blockBox = Blockly.mainWorkspace.getCanvas().getBBox();
+  try {
+    var blockBox = Blockly.mainWorkspace.getCanvas().getBBox();
+  } catch (e) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    return null;
+  }
   if (blockBox.width == -Infinity && blockBox.height == -Infinity) {
     // Opera has trouble with bounding boxes around empty objects.
     blockBox = {width: 0, height: 0, x: 0, y: 0};
