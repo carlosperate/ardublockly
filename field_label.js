@@ -39,6 +39,11 @@ Blockly.FieldLabel = function(text) {
 Blockly.FieldLabel.prototype = new Blockly.Field(null);
 
 /**
+ * Editable fields are saved by the XML renderer, non-editable fields are not.
+ */
+Blockly.FieldLabel.prototype.EDITABLE = false;
+
+/**
  * Install this text on a block.
  * @param {!Blockly.Block} block The block containing this text.
  */

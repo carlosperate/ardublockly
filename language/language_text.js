@@ -262,6 +262,18 @@ Blockly.Language.text_trim = {
     this.setOutput(true);
     this.setTooltip('Return a copy of the text with spaces\nremoved from one or both ends.');
   },
+  mutationToDom: function(workspace) {
+    // Save whether the third title should be plural or singular.
+    var container = document.createElement('mutation');
+    var plural = (this.getTitleText(1) == this.MSG_BOTH);
+    container.setAttribute('plural', plural);
+    return container;
+  },
+  domToMutation: function(container) {
+    // Restore the third title as plural or singular.
+    var plural = (container.getAttribute('plural') == 'true')
+    this.setTitleText(plural ? 'sides' : 'side', 2);
+  },
   MSG_BOTH: 'both',
   MSG_LEFT: 'left',
   MSG_RIGHT: 'right'

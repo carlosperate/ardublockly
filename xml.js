@@ -56,10 +56,13 @@ Blockly.Xml.blockToDom_ = function(block) {
     element.appendChild(block.mutationToDom());
   }
   for (var i = 0, title; title = block.titleRow[i]; i++) {
-    var container = document.createElement('title');
-    var titleText = document.createTextNode(title.getText());
-    container.appendChild(titleText);
-    element.appendChild(container);
+    if (title.EDITABLE) {
+      var container = document.createElement('title');
+      container.setAttribute('i', i);
+      var titleText = document.createTextNode(title.getText());
+      container.appendChild(titleText);
+      element.appendChild(container);
+    }
   }
 
   if (block.comment) {
@@ -94,7 +97,7 @@ Blockly.Xml.blockToDom_ = function(block) {
         container.appendChild(Blockly.Xml.blockToDom_(childBlock));
       }
     }
-    if (input.label && input.label.getText) {
+    if (input.label && input.label.EDITABLE && input.label.getText) {
       container.setAttribute('label', input.label.getText());
     }
     element.appendChild(container);
@@ -219,7 +222,6 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
     block.setCollapsed(collapsed == 'true');
   }
 
-  var titleIndex = -1;
   var inputIndicies = {};
   inputIndicies[Blockly.LOCAL_VARIABLE] = -1;
   inputIndicies[Blockly.INPUT_VALUE] = -1;
@@ -282,7 +284,8 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         break;
       case 'title':
-        block.setTitleText(xmlChild.textContent, ++titleIndex);
+        var i = parseInt(xmlChild.getAttribute('i'), 10);
+        block.setTitleText(xmlChild.textContent, i);
         break;
       case 'variable':
         var data = xmlChild.getAttribute('data');

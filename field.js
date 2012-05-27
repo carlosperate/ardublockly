@@ -54,6 +54,11 @@ Blockly.Field = function(text) {
 Blockly.Field.NBSP = '\u00A0';
 
 /**
+ * Editable fields are saved by the XML renderer, non-editable fields are not.
+ */
+Blockly.Field.prototype.EDITABLE = true;
+
+/**
  * Install this field on a block.
  * @param {!Blockly.Block} block The block containing this field.
  */
