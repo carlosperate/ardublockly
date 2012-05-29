@@ -84,9 +84,7 @@ Maze.init = function(blockly) {
   var xml = Blockly.Xml.textToDom(
       '<xml>' +
       '  <block type="maze_move" x="84" y="99">' +
-      '    <title>move</title>' +
-      '    <title>forward</title>' +
-      '    <next></next>' +
+      '    <title i="1">forward</title>' +
       '  </block>' +
       '</xml>');
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
