@@ -82,7 +82,9 @@ function init(blockly) {
           (Blockly.Toolbox.width - 38) + 'px';
           // Account for the 19 pixel margin and on each side.
       });
-    Blockly.fireUiEvent(document, window, 'resize');
+    window.setTimeout(function() {
+        Blockly.fireUiEvent(document, window, 'resize');
+      }, 1);
   }
 }
   </script>

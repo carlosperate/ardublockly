@@ -35,7 +35,7 @@ Blockly.Language.procedures_defnoreturn = {
   init: function() {
     this.setColour(290);
     this.addTitle(new Blockly.FieldTextInput('procedure',
-        Blockly.Procedures.procedureRename));
+        Blockly.Procedures.rename));
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
     this.setTooltip('A procedure with no return value.');
@@ -52,7 +52,7 @@ Blockly.Language.procedures_defreturn = {
   init: function() {
     this.setColour(290);
     this.addTitle(new Blockly.FieldTextInput('procedure',
-        Blockly.Procedures.procedureRename));
+        Blockly.Procedures.rename));
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.addInput('return', '', Blockly.INPUT_VALUE);
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));

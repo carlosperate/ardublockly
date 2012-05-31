@@ -44,24 +44,26 @@ Blockly.Dart.RESERVED_WORDS_ =
  * Initialise the database of variable names.
  */
 Blockly.Dart.init = function() {
-  if (!Blockly.Dart.variableDB_) {
-    Blockly.Dart.variableDB_ =
-        new Blockly.Names(Blockly.Dart.RESERVED_WORDS_.split(','));
-  } else {
-    Blockly.Dart.variableDB_.reset();
-  }
-
   // Create a dictionary of definitions to be printed before the code.
   Blockly.Dart.definitions_ = {};
 
-  var defvars = [];
-  var variables = Blockly.Variables.allVariables();
-  for (var x = 0; x < variables.length; x++) {
-    defvars[x] = 'var ' +
-        Blockly.Dart.variableDB_.getDistinctName(variables[x],
-        Blockly.Variables.NAME_TYPE) + ';';
+  if (Blockly.Variables) {
+    if (!Blockly.Dart.variableDB_) {
+      Blockly.Dart.variableDB_ =
+          new Blockly.Names(Blockly.Dart.RESERVED_WORDS_.split(','));
+    } else {
+      Blockly.Dart.variableDB_.reset();
+    }
+
+    var defvars = [];
+    var variables = Blockly.Variables.allVariables();
+    for (var x = 0; x < variables.length; x++) {
+      defvars[x] = 'var ' +
+          Blockly.Dart.variableDB_.getDistinctName(variables[x],
+          Blockly.Variables.NAME_TYPE) + ';';
+    }
+    Blockly.Dart.definitions_['variables'] = defvars.join('\n');
   }
-  Blockly.Dart.definitions_['variables'] = defvars.join('\n');
 };
 
 /**

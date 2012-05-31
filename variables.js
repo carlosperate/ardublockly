@@ -125,3 +125,44 @@ Blockly.Variables.renameVariable = function(oldName, newName) {
     }
   }
 };
+
+/**
+ * Construct the blocks required by the flyout for the variable category.
+ * @param {!Array.<!Blockly.Block>} blocks List of blocks to show.
+ * @param {!Array.<number>} gaps List of widths between blocks.
+ * @param {number} margin Standard margin width for calculating gaps.
+ * @param {!Blockly.Workspace} workspace The flyout's workspace.
+ */
+Blockly.Variables.flyoutCategory = function(blocks, gaps, margin, workspace) {
+  var variableList = Blockly.Variables.allVariables();
+  variableList.sort(Blockly.caseInsensitiveComparator);
+  // In addition to the user's variables, we also want to display the default
+  // variable name at the top.  We also don't want this duplicated if the
+  // user has created a variable of the same name.
+  variableList.unshift(null);
+  var defaultVariable = undefined;
+  for (var i = 0; i < variableList.length; i++) {
+    if (variableList[i] === defaultVariable) {
+      continue;
+    }
+    var getBlock = Blockly.Language.variables_get ?
+        new Blockly.Block(workspace, 'variables_get') : null;
+    getBlock && getBlock.initSvg();
+    var setBlock = Blockly.Language.variables_set ?
+        new Blockly.Block(workspace, 'variables_set') : null;
+    setBlock && setBlock.initSvg();
+    if (variableList[i] === null) {
+      defaultVariable = (getBlock || setBlock).getVars()[0];
+    } else {
+      getBlock && getBlock.setTitleText(variableList[i], 1);
+      setBlock && setBlock.setTitleText(variableList[i], 1);
+    }
+    setBlock && blocks.push(setBlock);
+    getBlock && blocks.push(getBlock);
+    if (getBlock && setBlock) {
+      gaps.push(margin, margin * 3);
+    } else {
+      gaps.push(margin * 2);
+    }
+  }
+};

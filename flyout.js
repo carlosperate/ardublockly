@@ -205,51 +205,10 @@ Blockly.Flyout.prototype.show = function(names) {
   var gaps = [];
   if (names == Blockly.MSG_VARIABLE_CATEGORY) {
     // Special category for variables.
-    var variableList = Blockly.Variables.allVariables();
-    variableList.sort(Blockly.caseInsensitiveComparator);
-    // In addition to the user's variables, we also want to display the default
-    // variable name at the top.  We also don't want this duplicated if the
-    // user has created a variable of the same name.
-    variableList.unshift(null);
-    var defaultVariable = undefined;
-    for (var i = 0; i < variableList.length; i++) {
-      if (variableList[i] === defaultVariable) {
-        continue;
-      }
-      var getBlock = Blockly.Language.variables_get ?
-          new Blockly.Block(this.workspace_, 'variables_get') : null;
-      getBlock && getBlock.initSvg();
-      var setBlock = Blockly.Language.variables_set ?
-          new Blockly.Block(this.workspace_, 'variables_set') : null;
-      setBlock && setBlock.initSvg();
-      if (variableList[i] === null) {
-        defaultVariable = (getBlock || setBlock).getVars()[0];
-      } else {
-        getBlock && getBlock.setTitleText(variableList[i], 1);
-        setBlock && setBlock.setTitleText(variableList[i], 1);
-      }
-      setBlock && blocks.push(setBlock);
-      getBlock && blocks.push(getBlock);
-      if (getBlock && setBlock) {
-        gaps.push(margin, margin * 3);
-      } else {
-        gaps.push(margin * 2);
-      }
-    }
+    Blockly.Variables.flyoutCategory(blocks, gaps, margin, this.workspace_);
   } else if (names == Blockly.MSG_PROCEDURE_CATEGORY) {
     // Special category for procedures.
-    if (Blockly.Language.procedures_defnoreturn) {
-      var block = new Blockly.Block(this.workspace_, 'procedures_defnoreturn');
-      block.initSvg();
-      blocks.push(block);
-      gaps.push(margin * 2);
-    }
-    if (Blockly.Language.procedures_defnoreturn) {
-      var block = new Blockly.Block(this.workspace_, 'procedures_defreturn');
-      block.initSvg();
-      blocks.push(block);
-      gaps.push(margin * 2);
-    }
+    Blockly.Procedures.flyoutCategory(blocks, gaps, margin, this.workspace_);
   } else {
     for (var i = 0, name; name = names[i]; i++) {
       var block = new Blockly.Block(this.workspace_, name);

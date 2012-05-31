@@ -60,24 +60,26 @@ Blockly.JavaScript.RESERVED_WORDS_ =
  * Initialise the database of variable names.
  */
 Blockly.JavaScript.init = function() {
-  if (!Blockly.JavaScript.variableDB_) {
-    Blockly.JavaScript.variableDB_ =
-        new Blockly.Names(Blockly.JavaScript.RESERVED_WORDS_.split(','));
-  } else {
-    Blockly.JavaScript.variableDB_.reset();
-  }
-
   // Create a dictionary of definitions to be printed before the code.
   Blockly.JavaScript.definitions_ = {};
 
-  var defvars = [];
-  var variables = Blockly.Variables.allVariables();
-  for (var x = 0; x < variables.length; x++) {
-    defvars[x] = 'var ' +
-        Blockly.JavaScript.variableDB_.getDistinctName(variables[x],
-        Blockly.Variables.NAME_TYPE) + ';';
+  if (Blockly.Variables) {
+    if (!Blockly.JavaScript.variableDB_) {
+      Blockly.JavaScript.variableDB_ =
+          new Blockly.Names(Blockly.JavaScript.RESERVED_WORDS_.split(','));
+    } else {
+      Blockly.JavaScript.variableDB_.reset();
+    }
+
+    var defvars = [];
+    var variables = Blockly.Variables.allVariables();
+    for (var x = 0; x < variables.length; x++) {
+      defvars[x] = 'var ' +
+          Blockly.JavaScript.variableDB_.getDistinctName(variables[x],
+          Blockly.Variables.NAME_TYPE) + ';';
+    }
+    Blockly.JavaScript.definitions_['variables'] = defvars.join('\n');
   }
-  Blockly.JavaScript.definitions_['variables'] = defvars.join('\n');
 };
 
 /**

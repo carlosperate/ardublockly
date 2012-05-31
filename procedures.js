@@ -56,7 +56,12 @@ Blockly.Procedures.isLegalName = function(name, opt_exclude) {
   return true;
 };
 
-Blockly.Procedures.procedureRename = function(text) {
+/**
+ * Rename a procedure.  Called by the editable field.
+ * @param {string} text The proposed new name.
+ * @return {?string} The accepted name, or null if rejected.
+ */
+Blockly.Procedures.rename = function(text) {
   // Strip leading and trailing whitespace.  Beyond this, all names are legal.
   text = text.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
   if (!text) {
@@ -67,4 +72,26 @@ Blockly.Procedures.procedureRename = function(text) {
     return text;
   }
   return null;
+};
+
+/**
+ * Construct the blocks required by the flyout for the procedure category.
+ * @param {!Array.<!Blockly.Block>} blocks List of blocks to show.
+ * @param {!Array.<number>} gaps List of widths between blocks.
+ * @param {number} margin Standard margin width for calculating gaps.
+ * @param {!Blockly.Workspace} workspace The flyout's workspace.
+ */
+Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
+  if (Blockly.Language.procedures_defnoreturn) {
+    var block = new Blockly.Block(workspace, 'procedures_defnoreturn');
+    block.initSvg();
+    blocks.push(block);
+    gaps.push(margin * 2);
+  }
+  if (Blockly.Language.procedures_defnoreturn) {
+    var block = new Blockly.Block(workspace, 'procedures_defreturn');
+    block.initSvg();
+    blocks.push(block);
+    gaps.push(margin * 2);
+  }
 };
