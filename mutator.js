@@ -111,6 +111,12 @@ Blockly.Mutator.prototype.createIcon = function() {
  * @return {number} Width of icon.
  */
 Blockly.Mutator.prototype.renderIcon = function(titleX) {
+  if (this.block_.collapsed) {
+    this.iconGroup_.setAttribute('display', 'none');
+    return 0;
+  }
+  this.iconGroup_.setAttribute('display', 'block');
+
   var TOP_MARGIN = 5;
   var diameter = Blockly.Mutator.ICON_SIZE;
   if (Blockly.RTL) {

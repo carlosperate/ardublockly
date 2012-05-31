@@ -412,7 +412,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
   var options = [];
 
   if (this.editable) {
-    if (Blockly.Comment) {
+    if (Blockly.Comment && !this.collapsed) {
       // Option to add/remove a comment.
       var commentOption = {enabled: true};
       if (this.comment) {

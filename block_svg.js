@@ -233,15 +233,20 @@ Blockly.BlockSvg.prototype.render = function() {
  */
 Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
   var titleX = -Blockly.BlockSvg.SEP_SPACE_X;
+  var iconWidth;
   // Move the comment icon into position.
   if (this.block_.comment) {
-    titleX -= this.block_.comment.renderIcon(titleX) +
-        Blockly.BlockSvg.SEP_SPACE_X;
+    iconWidth = this.block_.comment.renderIcon(titleX);
+    if (iconWidth) {
+      titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
+    }
   }
   // Move the mutator icon into position.
   if (this.block_.mutator) {
-    titleX -= this.block_.mutator.renderIcon(titleX) +
-        Blockly.BlockSvg.SEP_SPACE_X;
+    iconWidth = this.block_.mutator.renderIcon(titleX);
+    if (iconWidth) {
+      titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
+    }
   }
 
   // Move the title element(s) into position.

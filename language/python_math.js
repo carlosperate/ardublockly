@@ -155,7 +155,7 @@ Blockly.Python.math_on_list = function() {
     case this.MSG_MEDIAN:
       if (!Blockly.Python.definitions_['math_median']) {
         // Median is not a native Python function.  Define one.
-        // May need to handle null. Currently Blockly_math_median([null,null,1,3]) == 0.5.
+        // May need to handle null. Currently math_median([null,null,1,3]) == 0.5.
         var functionName = Blockly.Python.variableDB_.getDistinctName('math_median',
             Blockly.Generator.NAME_TYPE);
         Blockly.Python.math_on_list.median = functionName;

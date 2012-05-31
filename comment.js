@@ -653,6 +653,12 @@ Blockly.Comment.prototype.destroy = function() {
  * @return {number} Width of icon.
  */
 Blockly.Comment.prototype.renderIcon = function(titleX) {
+  if (this.block_.collapsed) {
+    this.iconGroup_.setAttribute('display', 'none');
+    return 0;
+  }
+  this.iconGroup_.setAttribute('display', 'block');
+
   var TOP_MARGIN = 5;
   var diameter = 2 * Blockly.Comment.ICON_RADIUS;
   if (Blockly.RTL) {
