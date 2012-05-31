@@ -46,7 +46,7 @@ Blockly.Python.RESERVED_WORDS_ =
 Blockly.Python.init = function() {
   if (!Blockly.Python.variableDB_) {
     Blockly.Python.variableDB_ =
-        new Blockly.Variables(Blockly.Python.RESERVED_WORDS_.split(','));
+        new Blockly.Names(Blockly.Python.RESERVED_WORDS_.split(','));
   } else {
     Blockly.Python.variableDB_.reset();
   }
@@ -57,8 +57,8 @@ Blockly.Python.init = function() {
   var defvars = [];
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {
-    defvars[x] = Blockly.Python.variableDB_.getDistinctVariable(variables[x]) +
-        ' = None';
+    defvars[x] = Blockly.Python.variableDB_.getDistinctName(variables[x],
+        Blockly.Variables.NAME_TYPE) + ' = None';
   }
   Blockly.Python.definitions_['variables'] = defvars.join('\n');
 };

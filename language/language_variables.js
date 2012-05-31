@@ -45,7 +45,7 @@ Blockly.Language.variables_get = {
     return [this.getTitleText(1)];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Variables.nameEquals(oldName, this.getTitleText(1))) {
+    if (Blockly.Names.equals(oldName, this.getTitleText(1))) {
       this.setTitleText(newName, 1);
     }
   }
@@ -70,7 +70,7 @@ Blockly.Language.variables_set = {
     return [this.getTitleText(1)];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Variables.nameEquals(oldName, this.getTitleText(1))) {
+    if (Blockly.Names.equals(oldName, this.getTitleText(1))) {
       this.setTitleText(newName, 1);
     }
   }

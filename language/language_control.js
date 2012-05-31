@@ -165,7 +165,8 @@ Blockly.Language.controls_if_if = {
     this.setColour(120);
     this.addTitle('if');
     this.addInput('', '', Blockly.NEXT_STATEMENT);
-    this.setTooltip('Add, remove, or reorder sections to reconfigure this if block.');
+    this.setTooltip('Add, remove, or reorder sections\n' +
+                    'to reconfigure this if block.');
     this.contextMenu = false;
   }
 };
@@ -249,7 +250,7 @@ Blockly.Language.controls_for = {
     return [this.getVariableInput(0)];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Variables.nameEquals(oldName, this.getVariableInput(0))) {
+    if (Blockly.Names.equals(oldName, this.getVariableInput(0))) {
       this.setVariableInput(0, newName);
     }
   }
@@ -277,7 +278,7 @@ Blockly.Language.controls_forEach = {
     return [this.getVariableInput(0)];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Variables.nameEquals(oldName, this.getVariableInput(0))) {
+    if (Blockly.Names.equals(oldName, this.getVariableInput(0))) {
       this.setVariableInput(0, newName);
     }
   }

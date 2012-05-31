@@ -56,8 +56,8 @@ Blockly.Python.controls_whileUntil = function() {
 
 Blockly.Python.controls_for = function() {
   // For loop.
-  var variable0 = Blockly.Python.variableDB_.getVariable(
-      this.getVariableInput(0));
+  var variable0 = Blockly.Python.variableDB_.getName(
+      this.getVariableInput(0), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
   var argument1 = Blockly.Python.valueToCode_(this, 1, true) || '0';
   var branch0 = Blockly.Python.statementToCode_(this, 0) || '  pass\n';
@@ -68,8 +68,8 @@ Blockly.Python.controls_for = function() {
 
 Blockly.Python.controls_forEach = function() {
   // For each loop.
-  var variable0 = Blockly.Python.variableDB_.getVariable(
-      this.getVariableInput(0));
+  var variable0 = Blockly.Python.variableDB_.getName(
+      this.getVariableInput(0), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '[]';
   var branch0 = Blockly.Python.statementToCode_(this, 0)  || '  pass\n';
   var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch0 + '\n';

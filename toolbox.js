@@ -188,10 +188,16 @@ Blockly.Toolbox.redraw = function() {
     options.push(option);
   }
   var option = {};
-  if (Blockly.Language.variables_get && Blockly.Language.variables_set) {
+  if (Blockly.Language.variables_get || Blockly.Language.variables_set) {
     // Variables have a special category that is dynamic.
     options.push({text: Blockly.MSG_VARIABLE_CATEGORY,
-                  cat: Blockly.VARIABLE_CAT});
+                  cat: Blockly.MSG_VARIABLE_CATEGORY});
+  }
+  if (Blockly.Language.procedures_defnoreturn ||
+      Blockly.Language.procedures_defreturn) {
+    // Procedures have a special category that is dynamic.
+    options.push({text: Blockly.MSG_PROCEDURE_CATEGORY,
+                  cat: Blockly.MSG_PROCEDURE_CATEGORY});
   }
 
   function callbackFactory(cat, element) {

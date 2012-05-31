@@ -56,8 +56,8 @@ Blockly.Dart.controls_whileUntil = function() {
 
 Blockly.Dart.controls_for = function() {
   // For loop.
-  var variable0 = Blockly.Dart.variableDB_.getVariable(
-      this.getVariableInput(0));
+  var variable0 = Blockly.Dart.variableDB_.getName(
+      this.getVariableInput(0), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
   var argument1 = Blockly.Dart.valueToCode_(this, 1, true) || '0';
   var branch0 = Blockly.Dart.statementToCode_(this, 0);
@@ -68,8 +68,8 @@ Blockly.Dart.controls_for = function() {
   } else {
     // The end value appears to be more complicated than a simple variable.
     // Cache it to a variable to prevent repeated look-ups.
-    var endVar = Blockly.Dart.variableDB_.getDistinctVariable(
-        variable0 + '_end');
+    var endVar = Blockly.Dart.variableDB_.getDistinctName(
+        variable0 + '_end', Blockly.Variables.NAME_TYPE);
     code = 'var ' + endVar + ' = ' + argument1 + ';\n' +
         'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + endVar + '; ' + variable0 + '++) {\n' +
         branch0 + '}\n';
@@ -79,13 +79,13 @@ Blockly.Dart.controls_for = function() {
 
 Blockly.Dart.controls_forEach = function() {
   // For each loop.
-  var variable0 = Blockly.Dart.variableDB_.getVariable(
-      this.getVariableInput(0));
+  var variable0 = Blockly.Dart.variableDB_.getName(
+      this.getVariableInput(0), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '[]';
   var branch0 = Blockly.Dart.statementToCode_(this, 0);
   var code;
-  var indexVar = Blockly.Dart.variableDB_.getDistinctVariable(
-      variable0 + '_index');
+  var indexVar = Blockly.Dart.variableDB_.getDistinctName(
+      variable0 + '_index', Blockly.Variables.NAME_TYPE);
   if (argument0.match(/^\w+$/)) {
     branch0 = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' + branch0;
     code = 'for (var ' + indexVar + ' in  ' + argument0 + ') {\n' +
@@ -93,8 +93,8 @@ Blockly.Dart.controls_forEach = function() {
   } else {
     // The list appears to be more complicated than a simple variable.
     // Cache it to a variable to prevent repeated look-ups.
-    var listVar = Blockly.Dart.variableDB_.getDistinctVariable(
-        variable0 + '_list');
+    var listVar = Blockly.Dart.variableDB_.getDistinctName(
+        variable0 + '_list', Blockly.Variables.NAME_TYPE);
     branch0 = '  ' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' + branch0;
     code = 'var ' + listVar + ' = ' + argument0 + ';\n' +
         'for (var ' + indexVar + ' in ' + listVar + ') {\n' +

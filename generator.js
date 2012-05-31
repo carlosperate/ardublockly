@@ -25,6 +25,8 @@
 
 Blockly.Generator = {};
 
+Blockly.Generator.NAME_TYPE = 'generated_function';
+
 /**
  * Database of code generators, one for each language.
  */

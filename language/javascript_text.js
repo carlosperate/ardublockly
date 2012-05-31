@@ -78,7 +78,8 @@ Blockly.JavaScript.text_endString = function() {
   } else {
     var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
     var argument1 = Blockly.JavaScript.valueToCode_(this, 1, true) || '\'\'';
-    var tempVar = Blockly.JavaScript.variableDB_.getDistinctVariable('temp_text');
+    var tempVar = Blockly.JavaScript.variableDB_.getDistinctName('temp_text',
+        Blockly.Variables.NAME_TYPE);
     Blockly.JavaScript.definitions_['variables'] += '\nvar ' + tempVar + ';';
     code = '[' + tempVar + ' = ' + argument1 + ', ' +
         tempVar + '.substring(' + tempVar + '.length - ' + argument0 + ')][1]';
@@ -138,15 +139,18 @@ Blockly.JavaScript.text_changeCase = function() {
   } else {
     if (!Blockly.JavaScript.definitions_['text_toTitleCase']) {
       // Title case is not a native JavaScript function.  Define one.
+      var functionName = Blockly.JavaScript.variableDB_.getDistinctName('text_toTitleCase',
+          Blockly.Generator.NAME_TYPE);
+      Blockly.JavaScript.text_changeCase.toTitleCase = functionName;
       var func = [];
-      func.push('function Blockly_text_toTitleCase(str) {');
+      func.push('function ' + functionName + '(str) {');
       func.push('  return str.replace(/\\w\\S*/g,');
       func.push('      function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});');
       func.push('}');
       Blockly.JavaScript.definitions_['text_toTitleCase'] = func.join('\n');
     }
     var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '\'\'';
-    code = 'Blockly_text_toTitleCase(' + argument0 + ')';
+    code = Blockly.JavaScript.text_changeCase.toTitleCase + '(' + argument0 + ')';
   }
   return code;
 };

@@ -52,7 +52,8 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
 Blockly.Python.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
-  var varName = Blockly.Python.variableDB_.getVariable(this.getTitleText(1));
+  var varName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
+      Blockly.Variables.NAME_TYPE);
   return varName + ' = (' + varName + ' or 0) + ' + argument0 + '\n';
 };
 
@@ -144,20 +145,22 @@ Blockly.Python.math_on_list = function() {
       break;
     case this.MSG_MIN:
       code = 'min(' + list + ') if ' + list + ' else None';
-      // code = list.length? 'min(' + list + ')' : 'None';
       break;
     case this.MSG_MAX:
       code = 'max(' + list + ')';
       break;
     case this.MSG_AVERAGE:
-      code = list.length? 'sum(' + list + ')/len(' + list + ')' : 0;
+      code = list.length? 'sum(' + list + ') / len(' + list + ')' : 0;
       break;
     case this.MSG_MEDIAN:
       if (!Blockly.Python.definitions_['math_median']) {
         // Median is not a native Python function.  Define one.
         // May need to handle null. Currently Blockly_math_median([null,null,1,3]) == 0.5.
+        var functionName = Blockly.Python.variableDB_.getDistinctName('math_median',
+            Blockly.Generator.NAME_TYPE);
+        Blockly.Python.math_on_list.median = functionName;
         var func = [];
-        func.push('def Blockly_math_median(list):');
+        func.push('def ' + functionName + '(list):');
         func.push('  if not list: return 0');
         func.push('  sortedL = sorted(list)');
         func.push('  if len(list) % 2 == 0:');
@@ -166,15 +169,18 @@ Blockly.Python.math_on_list = function() {
         func.push('    return sortedL[(len(list) - 1) / 2]');
         Blockly.Python.definitions_['math_median'] = func.join('\n');
       }
-      code = 'Blockly_math_median(' + list + ')';
+      code = Blockly.Python.math_on_list.median + '(' + list + ')';
       break;
     case this.MSG_MODE:
       if (!Blockly.Python.definitions_['math_mode']) {
         // As a list of numbers can contain more than one mode,
         // the returned result is provided as an array.
         // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
+        var functionName = Blockly.Python.variableDB_.getDistinctName('math_mode',
+            Blockly.Generator.NAME_TYPE);
+        Blockly.Python.math_on_list.mode = functionName;
         var func = [];
-        func.push('def Blockly_math_mode(some_list):');
+        func.push('def ' + functionName + '(some_list):');
         func.push('  modes = []');
         func.push('  counts = []');
         func.push('  maxCount = 1');
@@ -193,13 +199,16 @@ Blockly.Python.math_on_list = function() {
         func.push('  return modes');
         Blockly.Python.definitions_['math_mode'] = func.join('\n');
       }
-      code = 'Blockly_math_mode(' + list + ')';
+      code = Blockly.Python.math_on_list.mode + '(' + list + ')';
       break;
     case this.MSG_STD_DEV:
       Blockly.Python.definitions_['import_math'] = 'import math';
       if (!Blockly.Python.definitions_['math_standard_deviation']) {
+        var functionName = Blockly.Python.variableDB_.getDistinctName('math_standardDeviation',
+            Blockly.Generator.NAME_TYPE);
+        Blockly.Python.math_on_list.standardDeviation = functionName;
         var func = [];
-        func.push('def Blockly_math_standard_deviation(numbers):');
+        func.push('def ' + functionName + '(numbers):');
         func.push('  n = len(numbers)');
         func.push('  if n == 0: return');
         func.push('  mean = sum(numbers)/n');
@@ -208,7 +217,7 @@ Blockly.Python.math_on_list = function() {
         func.push('  return standard_dev');
         Blockly.Python.definitions_['math_standard_deviation'] = func.join('\n');
       }
-      code = 'Blockly_math_standard_deviation(' + list + ')';
+      code = Blockly.Python.math_on_list.standardDeviation + '(' + list + ')';
       break;
     case this.MSG_RANDOM_ITEM:
       Blockly.Python.definitions_['import_random'] = 'import random';

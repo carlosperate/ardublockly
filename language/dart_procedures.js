@@ -18,24 +18,28 @@
  */
 
 /**
- * @fileoverview Generating JavaScript for variable blocks.
+ * @fileoverview Generating Dart for variable blocks.
  * @author fraser@google.com (Neil Fraser)
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
  * to language files.
  */
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
+Blockly.Dart = Blockly.Generator.get('Dart');
 
-Blockly.JavaScript.variables_get = function() {
-  // Variable getter.
-  return Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
-      Blockly.Variables.NAME_TYPE);
+Blockly.Dart.procedures_defreturn = function() {
+  // Define a procedure with a return value.
+  var funcName = Blockly.Dart.variableDB_.getName(this.getTitleText(0),
+      Blockly.Procedures.NAME_TYPE);
+  var branch = Blockly.Dart.statementToCode_(this, 0);
+  var returnValue = Blockly.Dart.valueToCode_(this, 0, true) || '';
+  if (returnValue) {
+    returnValue = '  return ' + returnValue + ';\n';
+  }
+  var code = 'function ' + funcName + '() {\n' + branch + returnValue + '}\n';
+  return code;
 };
 
-Blockly.JavaScript.variables_set = function() {
-  // Variable setter.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
-      Blockly.Variables.NAME_TYPE);
-  return varName + ' = ' + argument0 + ';\n';
-};
+// Defining a procedure without a return value uses the same generator as
+// a procedure with a return value.
+Blockly.Dart.procedures_defnoreturn =
+    Blockly.Dart.procedures_defreturn;

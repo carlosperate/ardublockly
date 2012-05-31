@@ -26,16 +26,22 @@
 
 Blockly.Python = Blockly.Generator.get('Python');
 
-Blockly.Python.variables_get = function() {
-  // Variable getter.
-  return Blockly.Python.variableDB_.getName(this.getTitleText(1),
-      Blockly.Variables.NAME_TYPE);
+Blockly.Python.procedures_defreturn = function() {
+  // Define a procedure with a return value.
+  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(0),
+      Blockly.Procedures.NAME_TYPE);
+  var branch = Blockly.Python.statementToCode_(this, 0);
+  var returnValue = Blockly.Python.valueToCode_(this, 0, true) || '';
+  if (returnValue) {
+    returnValue = '  return ' + returnValue + ';\n';
+  } else if (!branch) {
+    branch = '  pass';
+  }
+  var code = 'def ' + funcName + '():\n' + branch + returnValue + '\n';
+  return code;
 };
 
-Blockly.Python.variables_set = function() {
-  // Variable setter.
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
-  var varName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
-      Blockly.Variables.NAME_TYPE);
-  return varName + ' = ' + argument0 + '\n';
-};
+// Defining a procedure without a return value uses the same generator as
+// a procedure with a return value.
+Blockly.Python.procedures_defnoreturn =
+    Blockly.Python.procedures_defreturn;

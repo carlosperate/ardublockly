@@ -83,7 +83,8 @@ Blockly.Dart.text_endString = function() {
   } else {
     var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
     var argument1 = Blockly.Dart.valueToCode_(this, 1, true) || '\'\'';
-    var tempVar = Blockly.Dart.variableDB_.getDistinctVariable('temp_text');
+    var tempVar = Blockly.Dart.variableDB_.getDistinctName('temp_text',
+        Blockly.Variables.NAME_TYPE);
     Blockly.Dart.definitions_['variables'] += '\nString ' + tempVar + ';';
     code = '[' + tempVar + ' = ' + argument1 + ', ' +
         tempVar + '.substring(' + tempVar + '.length - ' + argument0 + ')][1]';
@@ -143,8 +144,11 @@ Blockly.Dart.text_changeCase = function() {
   } else {
     if (!Blockly.Dart.definitions_['toTitleCase']) {
       // Title case is not a native Dart function.  Define one.
+      var functionName = Blockly.Dart.variableDB_.getDistinctName('text_toTitleCase',
+          Blockly.Generator.NAME_TYPE);
+      Blockly.Dart.text_changeCase.toTitleCase = functionName;
       var func = [];
-      func.push('Blockly_toTitleCase(str) {');
+      func.push('String ' + functionName + '(str) {');
       func.push('  RegExp exp = const RegExp(@"(\\w\\S*)");');
       func.push('  List<String> list = str.split(exp);');
       func.push('  String title = \'\';');
@@ -161,7 +165,7 @@ Blockly.Dart.text_changeCase = function() {
       Blockly.Dart.definitions_['toTitleCase'] = func.join('\n');
     }
     var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '\'\'';
-    code = 'Blockly_toTitleCase(' + argument0 + ')';
+    code = Blockly.Dart.text_changeCase.toTitleCase + '(' + argument0 + ')';
   }
   return code;
 };

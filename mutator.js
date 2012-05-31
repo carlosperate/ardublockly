@@ -467,7 +467,12 @@ Blockly.Mutator.Button.prototype.createDom = function() {
  */
 Blockly.Mutator.Button.prototype.init = function() {
   var X_PADDING = Blockly.ContextMenu.X_PADDING;
-  var bBox = this.svgText_.getBBox();
+  try {
+    var bBox = this.svgText_.getBBox();
+  } catch (e) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    var bBox = {height: 0, width: 0};
+  }
   this.svgShadow_.setAttribute('width', bBox.width + 2 * X_PADDING);
   this.svgShadow_.setAttribute('height', bBox.height + 10);
   this.svgBackground_.setAttribute('width', bBox.width + 2 * X_PADDING);
@@ -481,7 +486,12 @@ Blockly.Mutator.Button.prototype.init = function() {
  * @return {!Object} Bounding box with x, y, height and width properties.
  */
 Blockly.Mutator.Button.prototype.getBBox = function() {
-  return this.svgGroup_.getBBox();
+  try {
+    return this.svgGroup_.getBBox();
+  } catch (e) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    return {height: 0, width: 0};
+  }
 };
 
 /**

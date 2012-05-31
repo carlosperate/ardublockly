@@ -46,7 +46,7 @@ Blockly.Dart.RESERVED_WORDS_ =
 Blockly.Dart.init = function() {
   if (!Blockly.Dart.variableDB_) {
     Blockly.Dart.variableDB_ =
-        new Blockly.Variables(Blockly.Dart.RESERVED_WORDS_.split(','));
+        new Blockly.Names(Blockly.Dart.RESERVED_WORDS_.split(','));
   } else {
     Blockly.Dart.variableDB_.reset();
   }
@@ -58,7 +58,8 @@ Blockly.Dart.init = function() {
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {
     defvars[x] = 'var ' +
-        Blockly.Dart.variableDB_.getDistinctVariable(variables[x]) + ';';
+        Blockly.Dart.variableDB_.getDistinctName(variables[x],
+        Blockly.Variables.NAME_TYPE) + ';';
   }
   Blockly.Dart.definitions_['variables'] = defvars.join('\n');
 };

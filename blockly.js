@@ -54,6 +54,8 @@ Blockly.MSG_RENAME_VARIABLE = 'Rename variable...';
 Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 Blockly.MSG_VARIABLE_CATEGORY = 'Variables';
 
+Blockly.MSG_PROCEDURE_CATEGORY = 'Procedures';
+
 Blockly.MSG_MUTATOR_TOOLTIP = 'Edit this block';
 Blockly.MSG_MUTATOR_HEADER = 'Block Editor';
 Blockly.MSG_MUTATOR_CHANGE = 'Change';
@@ -66,11 +68,6 @@ Blockly.MSG_MUTATOR_CANCEL = 'Cancel';
  */
 Blockly.HSV_SATURATION = 0.45;
 Blockly.HSV_VALUE = 0.65;
-
-/**
- * Category used for variables.
- */
-Blockly.VARIABLE_CAT = 'variables';
 
 /**
  * Convert a hue (HSV model) into an RGB hex triplet.
@@ -172,11 +169,6 @@ Blockly.selected = null;
 Blockly.editable = true;
 
 /**
- * Should 'x' and 'X' be different variables?
- */
-Blockly.caseSensitiveVariables = false;
-
-/**
  * Currently highlighted connection (during a drag).
  * @type {Blockly.Connection}
  * @private
@@ -210,6 +202,12 @@ Blockly.BUMP_DELAY = 250;
  * @type {Document}
  */
 Blockly.svgDoc = null;
+
+/**
+ * The main workspace (defined by inject.js).
+ * @type {Blockly.Workspace}
+ */
+Blockly.mainWorkspace = null;
 
 /**
  * Returns the dimensions of the current SVG image.

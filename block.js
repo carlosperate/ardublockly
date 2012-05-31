@@ -1183,7 +1183,7 @@ Blockly.Block.prototype.getStatementLabel = function(n) {
  * @param {number} n The index (starting at 0).
  * @return {string} The label's text, or null if the input does not exist.
  */
-Blockly.Block.prototype.getVariableLabel = function(n) {
+Blockly.Block.prototype.getNameLabel = function(n) {
   return this.getLabel_(n, Blockly.LOCAL_VARIABLE);
 };
 

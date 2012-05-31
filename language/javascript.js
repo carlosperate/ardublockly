@@ -62,7 +62,7 @@ Blockly.JavaScript.RESERVED_WORDS_ =
 Blockly.JavaScript.init = function() {
   if (!Blockly.JavaScript.variableDB_) {
     Blockly.JavaScript.variableDB_ =
-        new Blockly.Variables(Blockly.JavaScript.RESERVED_WORDS_.split(','));
+        new Blockly.Names(Blockly.JavaScript.RESERVED_WORDS_.split(','));
   } else {
     Blockly.JavaScript.variableDB_.reset();
   }
@@ -74,7 +74,8 @@ Blockly.JavaScript.init = function() {
   var variables = Blockly.Variables.allVariables();
   for (var x = 0; x < variables.length; x++) {
     defvars[x] = 'var ' +
-        Blockly.JavaScript.variableDB_.getDistinctVariable(variables[x]) + ';';
+        Blockly.JavaScript.variableDB_.getDistinctName(variables[x],
+        Blockly.Variables.NAME_TYPE) + ';';
   }
   Blockly.JavaScript.definitions_['variables'] = defvars.join('\n');
 };

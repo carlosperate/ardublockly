@@ -51,7 +51,8 @@ Blockly.Python.text_join = function(opt_dropParens) {
     for (n = 0; n < this.itemCount_; n++) {
       code[n] = Blockly.Python.valueToCode_(this, n, true) || '\'\'';
     }
-    var tempVar = Blockly.Python.variableDB_.getDistinctVariable('temp_value');
+    var tempVar = Blockly.Python.variableDB_.getDistinctName('temp_value',
+        Blockly.Variables.NAME_TYPE);
     code = '\'\'.join([str(' + tempVar + ') for ' + tempVar + ' in [' + code.join(', ') + ']])';
     if (!opt_dropParens) {
       code = '(' + code + ')';

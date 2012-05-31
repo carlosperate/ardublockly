@@ -194,7 +194,7 @@ Blockly.Flyout.prototype.hide = function() {
 /**
  * Show and populate the flyout.
  * @param {!Array.<string>|string} names List of type names of blocks to show.
- *     Or 'variables' for a custom list of variables.
+ *     Variables and procedures have a custom set of blocks.
  */
 Blockly.Flyout.prototype.show = function(names) {
   var margin = this.CORNER_RADIUS;
@@ -203,7 +203,7 @@ Blockly.Flyout.prototype.show = function(names) {
   // Create the blocks to be shown in this flyout.
   var blocks = [];
   var gaps = [];
-  if (names == Blockly.VARIABLE_CAT) {
+  if (names == Blockly.MSG_VARIABLE_CATEGORY) {
     // Special category for variables.
     var variableList = Blockly.Variables.allVariables();
     variableList.sort(Blockly.caseInsensitiveComparator);
@@ -216,18 +216,39 @@ Blockly.Flyout.prototype.show = function(names) {
       if (variableList[i] === defaultVariable) {
         continue;
       }
-      var getBlock = new Blockly.Block(this.workspace_, 'variables_set');
-      getBlock.initSvg();
-      var setBlock = new Blockly.Block(this.workspace_, 'variables_get');
-      setBlock.initSvg();
+      var getBlock = Blockly.Language.variables_get ?
+          new Blockly.Block(this.workspace_, 'variables_get') : null;
+      getBlock && getBlock.initSvg();
+      var setBlock = Blockly.Language.variables_set ?
+          new Blockly.Block(this.workspace_, 'variables_set') : null;
+      setBlock && setBlock.initSvg();
       if (variableList[i] === null) {
-        defaultVariable = getBlock.getTitleText(1);
+        defaultVariable = (getBlock || setBlock).getVars()[0];
       } else {
-        getBlock.setTitleText(variableList[i], 1);
-        setBlock.setTitleText(variableList[i], 1);
+        getBlock && getBlock.setTitleText(variableList[i], 1);
+        setBlock && setBlock.setTitleText(variableList[i], 1);
       }
-      blocks.push(getBlock, setBlock);
-      gaps.push(margin, margin * 3);
+      setBlock && blocks.push(setBlock);
+      getBlock && blocks.push(getBlock);
+      if (getBlock && setBlock) {
+        gaps.push(margin, margin * 3);
+      } else {
+        gaps.push(margin * 2);
+      }
+    }
+  } else if (names == Blockly.MSG_PROCEDURE_CATEGORY) {
+    // Special category for procedures.
+    if (Blockly.Language.procedures_defnoreturn) {
+      var block = new Blockly.Block(this.workspace_, 'procedures_defnoreturn');
+      block.initSvg();
+      blocks.push(block);
+      gaps.push(margin * 2);
+    }
+    if (Blockly.Language.procedures_defnoreturn) {
+      var block = new Blockly.Block(this.workspace_, 'procedures_defreturn');
+      block.initSvg();
+      blocks.push(block);
+      gaps.push(margin * 2);
     }
   } else {
     for (var i = 0, name; name = names[i]; i++) {
