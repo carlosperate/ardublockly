@@ -364,6 +364,15 @@ Maze.checkTimeout = function() {
   }
 };
 
+/**
+ * Show the user's code in raw JavaScript.
+ */
+Maze.showCode = function() {
+  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  code += '\n\n[The serial numbers are just used to highlight blocks when run.]';
+  alert(code);
+};
+
 // API
 
 /**
@@ -426,12 +435,11 @@ Maze.turn = function(direction, id) {
  * Is there a wall next to pegman?
  * @param {number} direction Direction to look
  *     (0 = ahead, 1 = left, 2 = right, 3 = behind).
- * @param {?string} id ID of block that triggered this action or null if none.
  * @return {boolean} True if there is a wall.
  */
-Maze.isWall = function(direction, id) {
+Maze.isWall = function(direction) {
   Maze.checkTimeout();
-  Maze.path.push(['look', id]);
+  Maze.path.push(['look', null]);
   var effectiveDirection = Maze.pegmanD;
   if (direction == 1) {  // Left
     effectiveDirection--; 
