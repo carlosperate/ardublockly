@@ -1239,7 +1239,7 @@ Blockly.Block.prototype.setMutator = function(mutator) {
 };
 
 /**
- * Returns the comment on this block (or '' of none).
+ * Returns the comment on this block (or '' if none).
  * @return {string} Block's comment.
  */
 Blockly.Block.prototype.getCommentText = function() {
