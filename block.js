@@ -984,6 +984,10 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
     }
   }
 
+  if (collapsed && this.comment) {
+    this.comment.setPinned(false);
+  }
+
   if (renderList.length == 0) {
     // No child blocks, just render this block.
     renderList[0] = this;
