@@ -78,7 +78,12 @@ Blockly.Flyout.prototype.getMetrics = function() {
   }
   var viewHeight = this.height_ - 2 * this.CORNER_RADIUS;
   var viewWidth = this.width_;
-  var optionBox = this.svgOptions_.getBBox();
+  try {
+    var optionBox = this.svgOptions_.getBBox();
+  } catch (e) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    var optionBox = {height: 0, y: 0};
+  }  
   return {
     viewHeight: viewHeight,
     viewWidth: viewWidth,

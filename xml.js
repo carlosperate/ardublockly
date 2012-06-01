@@ -246,9 +246,12 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
    * @return {Object} The next input or null if none.
    */
   function getInput(type, n) {
-    for (var i = n; i < block.inputList.length; i++) {
+    for (var i = 0; i < block.inputList.length; i++) {
       if (block.inputList[i].type == type) {
-        return block.inputList[i];
+        if (!n) {
+          return block.inputList[i];
+        }
+        n--;
       }
     }
     return null;
