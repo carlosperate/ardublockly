@@ -135,6 +135,21 @@ Blockly.Language.lists_create_with_item = {
   }
 };
 
+Blockly.Language.lists_repeat = {
+  // Create a list with one element repeated.
+  category: 'Lists',
+  helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
+  init: function() {
+    this.setColour(210);
+    this.setOutput(true);
+    this.addTitle('create list');
+    this.addInput('with item', '', Blockly.INPUT_VALUE);
+    this.addInput('repeated', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+    this.setTooltip('Creates a list consisting of the given value\nrepeated the specified number of times.');
+  }
+};
+
 Blockly.Language.lists_length = {
   // List length.
   category: 'Lists',

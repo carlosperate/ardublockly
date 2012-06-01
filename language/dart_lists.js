@@ -40,6 +40,29 @@ Blockly.Dart.lists_create_with = function() {
   return '[' + code.join(',') + ']';
 };
 
+Blockly.Dart.lists_repeat = function(opt_dropParens) {
+  // Create a list with one element repeated.
+  if (!Blockly.Dart.definitions_['lists_repeat']) {
+    // Title case is not a native JavaScript function.  Define one.
+    var functionName = Blockly.Dart.variableDB_.getDistinctName('lists_repeat',
+        Blockly.Generator.NAME_TYPE);
+    Blockly.Dart.lists_repeat.repeat = functionName;
+    var func = [];
+    func.push('List ' + functionName + '(value, n) {');
+    func.push('  List array = [];');
+    func.push('  for (int i = 0; i < n; i++) {');
+    func.push('    array.add(value);');
+    func.push('  }');
+    func.push('  return array;');
+    func.push('}');
+    Blockly.Dart.definitions_['lists_repeat'] = func.join('\n');
+  }
+  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || 'null';
+  var argument1 = Blockly.Dart.valueToCode_(this, 1) || '0';
+  return Blockly.Dart.lists_repeat.repeat + '(' + argument0 + ', ' + argument1 + ')';
+  return '[]';
+};
+
 Blockly.Dart.lists_length = function(opt_dropParens) {
   // Testing the length of a list is the same as for a string.
   return Blockly.Dart.text_length.call(this, opt_dropParens);

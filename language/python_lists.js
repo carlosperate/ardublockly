@@ -40,6 +40,17 @@ Blockly.Python.lists_create_with = function() {
   return '[' + code.join(',') + ']';
 };
 
+Blockly.Python.lists_repeat = function(opt_dropParens) {
+  // Create a list with one element repeated.
+  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || 'null';
+  var argument1 = Blockly.Python.valueToCode_(this, 1) || '0';
+  var code = '[' + argument0 + '] * ' + argument1;
+  if (!opt_dropParens) {
+    code = '(' + code + ')';
+  }
+  return code;
+};
+
 Blockly.Python.lists_length = function(opt_dropParens) {
   // Testing the length of a list is the same as for a string.
   return Blockly.Python.text_length.call(this, opt_dropParens);
