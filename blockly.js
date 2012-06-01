@@ -392,8 +392,8 @@ Blockly.hideChaff = function(opt_allowToolbox) {
 Blockly.removeAllRanges = function() {
   if (window.getSelection) {  // W3
     var sel = window.getSelection();
-    if (sel) {
-      window.getSelection().removeAllRanges();
+    if (sel && sel.removeAllRanges) {
+      sel.removeAllRanges();
       window.setTimeout(function() {
           window.getSelection().removeAllRanges();
         }, 0);
