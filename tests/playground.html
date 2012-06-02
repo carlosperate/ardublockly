@@ -149,6 +149,8 @@ function toXml() {
   var output = document.getElementById('importExport');
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   output.value = Blockly.Xml.domToText(xml);
+  output.focus();
+  output.select();
 }
 
 function fromXml() {

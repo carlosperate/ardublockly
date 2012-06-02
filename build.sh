@@ -20,4 +20,4 @@ cat blockly.js \
     trashcan.js \
     variables.js \
     workspace.js \
-    xml.js > blockly_compressed.js
+    xml.js > demos/blockly_compressed.js
