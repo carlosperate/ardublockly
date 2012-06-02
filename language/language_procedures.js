@@ -40,7 +40,7 @@ Blockly.Language.procedures_defnoreturn = {
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
     this.setTooltip('A procedure with no return value.');
   },
-  getProcedureName: function() {
+  getProcedureDef: function() {
     return this.getTitleText(0);
   }
 };
@@ -58,7 +58,40 @@ Blockly.Language.procedures_defreturn = {
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
     this.setTooltip('A procedure with a return value.');
   },
-  getProcedureName: function() {
+  getProcedureDef: function() {
     return this.getTitleText(0);
+  }
+};
+
+Blockly.Language.procedures_callnoreturn = {
+  // Call a procedure with no return value.
+  category: null,  // Procedures are handled specially.
+  helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
+  init: function() {
+    this.setColour(290);
+    this.addTitle('call');
+    this.addTitle('procedure');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('Call a procedure with no return value.');
+  },
+  getProcedureCall: function() {
+    return this.getTitleText(1);
+  }
+};
+
+Blockly.Language.procedures_callreturn = {
+  // Call a procedure with a return value.
+  category: null,  // Procedures are handled specially.
+  helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
+  init: function() {
+    this.setColour(290);
+    this.addTitle('call');
+    this.addTitle('procedure');
+    this.setOutput(true);
+    this.setTooltip('Call a procedure with a return value.');
+  },
+  getProcedureCall: function() {
+    return this.getTitleText(1);
   }
 };

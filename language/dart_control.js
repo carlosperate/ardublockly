@@ -49,7 +49,10 @@ Blockly.Dart.controls_whileUntil = function() {
   var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || 'false';
   var branch0 = Blockly.Dart.statementToCode_(this, 0);
   if (this.getTitleText(1) == this.MSG_UNTIL) {
-    argument0 = '!(' + argument0 + ')';
+    if (!argument0.match(/^\w+$/)) {
+      argument0 = '(' + argument0 + ')';
+    }
+    argument0 = '!' + argument0;
   }
   return 'while (' + argument0 + ') {\n' + branch0 + '}\n';
 };

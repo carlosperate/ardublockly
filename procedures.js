@@ -44,7 +44,7 @@ Blockly.Procedures.isLegalName = function(name, opt_exclude) {
     if (blocks[x] == opt_exclude) {
       continue;
     }
-    var func = blocks[x].getProcedureName;
+    var func = blocks[x].getProcedureDef;
     if (func) {
       var procName = func.call(blocks[x]);
       // Procedure name may be null if the block is only half-built.
@@ -62,16 +62,25 @@ Blockly.Procedures.isLegalName = function(name, opt_exclude) {
  * @return {?string} The accepted name, or null if rejected.
  */
 Blockly.Procedures.rename = function(text) {
+  if (!this.sourceBlock_.editable) {
+    return text;
+  }
   // Strip leading and trailing whitespace.  Beyond this, all names are legal.
   text = text.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
   if (!text) {
     return null;
   }
   // Ensure two identically-named procedures don't exist.
-  if (Blockly.Procedures.isLegalName(text, this.sourceBlock_)) {
-    return text;
+  while (!Blockly.Procedures.isLegalName(text, this.sourceBlock_)) {
+    // Collision with another procedure.
+    var r = text.match(/^(.*?)(\d+)$/);
+    if (!r) {
+      text += '2';
+    } else {
+      text = r[1] + (parseInt(r[2], 10) + 1);
+    }
   }
-  return null;
+  return text;
 };
 
 /**

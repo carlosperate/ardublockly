@@ -49,7 +49,10 @@ Blockly.Python.controls_whileUntil = function() {
   var argument0 = Blockly.Python.valueToCode_(this, 0, true) || 'False';
   var branch0 = Blockly.Python.statementToCode_(this, 0) || '  pass\n';
   if (this.getTitleText(1) == this.MSG_UNTIL) {
-    argument0 = '!' + argument0 + '';
+    if (!argument0.match(/^\w+$/)) {
+      argument0 = '(' + argument0 + ')';
+    }
+    argument0 = 'not ' + argument0 ;
   }
   return 'while ' + argument0 + ':\n' + branch0 + '\n';
 };

@@ -43,7 +43,7 @@ Blockly.Dart.lists_create_with = function() {
 Blockly.Dart.lists_repeat = function(opt_dropParens) {
   // Create a list with one element repeated.
   if (!Blockly.Dart.definitions_['lists_repeat']) {
-    // Title case is not a native JavaScript function.  Define one.
+    // Function adapted from Closure's goog.array.repeat.
     var functionName = Blockly.Dart.variableDB_.getDistinctName('lists_repeat',
         Blockly.Generator.NAME_TYPE);
     Blockly.Dart.lists_repeat.repeat = functionName;

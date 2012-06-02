@@ -41,6 +41,17 @@ Blockly.FieldTextInput = function(text, opt_validationFunc) {
 Blockly.FieldTextInput.prototype = new Blockly.Field(null);
 
 /**
+ * Set the text in this field.
+ * @param {string} text New text.
+ */
+Blockly.FieldTextInput.prototype.setText = function(text) {
+  if (this.validationFunc_) {
+    text = this.validationFunc_(text);
+  }
+  Blockly.Field.prototype.setText.call(this, text);
+};
+
+/**
  * Create the editable text field's elements.  Only needs to be called once.
  * @return {!Element} The field's SVG foreignObject.
  */

@@ -43,7 +43,7 @@ Blockly.JavaScript.lists_create_with = function() {
 Blockly.JavaScript.lists_repeat = function() {
   // Create a list with one element repeated.
   if (!Blockly.JavaScript.definitions_['lists_repeat']) {
-    // Title case is not a native JavaScript function.  Define one.
+    // Function copied from Closure's goog.array.repeat.
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName('lists_repeat',
         Blockly.Generator.NAME_TYPE);
     Blockly.JavaScript.lists_repeat.repeat = functionName;
