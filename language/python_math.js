@@ -51,10 +51,11 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
 
 Blockly.Python.math_change = function() {
   // Add to a variable in place.
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
+  var argument0 = Blockly.Python.valueToCode_(this, 0) || '0';
   var varName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
       Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' or 0) + ' + argument0 + '\n';
+  return varName + ' = (' + varName + ' if type(' + varName + ') in (int, float) else 0)' + 
+      ' + ' + argument0 + '\n';
 };
 
 Blockly.Python.math_single = function(opt_dropParens) {
@@ -150,7 +151,7 @@ Blockly.Python.math_on_list = function() {
       code = 'max(' + list + ')';
       break;
     case this.MSG_AVERAGE:
-      code = list.length? 'sum(' + list + ') / len(' + list + ')' : 0;
+      code = 'sum(' + list + ') / len(' + list + ')';
       break;
     case this.MSG_MEDIAN:
       if (!Blockly.Python.definitions_['math_median']) {

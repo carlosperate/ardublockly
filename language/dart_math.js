@@ -56,10 +56,11 @@ Blockly.Dart.math_arithmetic = function(opt_dropParens) {
 
 Blockly.Dart.math_change = function() {
   // Add to a variable in place.
-  var argument0 = Blockly.Dart.valueToCode_(this, 0, true) || '0';
+  var argument0 = Blockly.Dart.valueToCode_(this, 0) || '0';
   var varName = Blockly.Dart.variableDB_.getName(this.getTitleText(1),
 			Blockly.Variables.NAME_TYPE);
-  return varName + ' += ' + argument0 + ';\n';
+  return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' + 
+      argument0 + ';\n';
 };
 
 Blockly.Dart.math_single = function(opt_dropParens) {

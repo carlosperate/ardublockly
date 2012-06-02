@@ -56,10 +56,11 @@ Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
 
 Blockly.JavaScript.math_change = function() {
   // Add to a variable in place.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';
   var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
       Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' || 0) + ' + argument0 + ';\n';
+  return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName + 
+      ' : 0) + ' + argument0 + ';\n';
 };
 
 Blockly.JavaScript.math_single = function(opt_dropParens) {
