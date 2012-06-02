@@ -159,11 +159,14 @@ Blockly.JavaScript.math_on_list = function() {
       break;
     case this.MSG_MEDIAN:
       if (!Blockly.JavaScript.definitions_['math_median']) {
+        var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
+            'math_median', Blockly.Generator.NAME_TYPE);
+        Blockly.JavaScript.math_on_list.math_median = functionName;
         // Median is not a native JavaScript function.  Define one.
         // May need to handle null. 
         // Currently math_median([null,null,1,3]) == 0.5.
         var func = [];
-        func.push('function math_median(list) {');
+        func.push('function ' + functionName + '(list) {');
         func.push('  if (!list.length) return 0;');
         func.push('  var localList = [].concat(list);');
         func.push('  localList.sort(function(a, b) {return b - a;});');
@@ -175,15 +178,18 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('}');
         Blockly.JavaScript.definitions_['math_median'] = func.join('\n');
       }
-      code = 'math_median(' + list + ')';
+      code = Blockly.JavaScript.math_on_list.math_median + '(' + list + ')';
       break;
     case this.MSG_MODE:
-      if (!Blockly.JavaScript.definitions_['math_mode']) {
+      if (!Blockly.JavaScript.definitions_['math_modes']) {
+        var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
+            'math_modes', Blockly.Generator.NAME_TYPE);
+        Blockly.JavaScript.math_on_list.math_modes = functionName;
         // As a list of numbers can contain more than one mode,
         // the returned result is provided as an array.
         // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
         var func = [];
-        func.push('function math_mode(values) {');
+        func.push('function ' + functionName + '(values) {');
         func.push('  var modes = [];');
         func.push('  var counts = [];');
         func.push('  var maxCount = 0;');
@@ -211,15 +217,34 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('  }');
         func.push('  return modes;');
         func.push('}');
-        Blockly.JavaScript.definitions_['math_mode'] = func.join('\n');
+        Blockly.JavaScript.definitions_['math_modes'] = func.join('\n');
       }
-      code = 'math_mode(' + list + ')';
+      code = Blockly.JavaScript.math_on_list.math_modes + '(' + list + ')';
       break;
     case this.MSG_STD_DEV:
-      code = 'Math.max.apply(null,' + list + ')';
+      if (!Blockly.JavaScript.definitions_['math_standard_deviation']) {
+        var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
+            'math_standard_deviation', Blockly.Generator.NAME_TYPE);
+        Blockly.JavaScript.math_on_list.math_standard_deviation = functionName;
+        var func = [];
+        func.push('function ' + functionName + '(numbers) {');
+        func.push('  var n = numbers.length;');
+        func.push('  if (!n) return NaN;');
+        func.push('  var mean = numbers.reduce(function(x, y) {return x + y;}) / n;');
+        func.push('  var variance = 0;');
+        func.push('  for (var j = 0; j < n; j++) {');
+        func.push('    variance += Math.pow(numbers[j] - mean, 2);');
+        func.push('  }');
+        func.push('  variance = variance / n;');
+        func.push('  standard_dev = Math.sqrt(variance);');
+        func.push('  return standard_dev;');
+        func.push('}');
+        Blockly.JavaScript.definitions_['math_standard_deviation'] = func.join('\n');
+      }
+      code = Blockly.JavaScript.math_on_list.math_standard_deviation + '(' + list + ')';
       break;
     case this.MSG_RANDOM_ITEM:
-      code = 'Math.max.apply(null,' + list + ')';
+      code = list + '[Math.floor(Math.random() * ' + list + '.length)]';
       break;
     default:
       throw 'Unknown operator.';

@@ -144,7 +144,7 @@ Blockly.Python.math_on_list = function() {
       code = 'sum(' + list + ')';
       break;
     case this.MSG_MIN:
-      code = 'min(' + list + ') if ' + list + ' else None';
+      code = 'min(' + list + ')';
       break;
     case this.MSG_MAX:
       code = 'max(' + list + ')';
@@ -172,24 +172,26 @@ Blockly.Python.math_on_list = function() {
       code = Blockly.Python.math_on_list.median + '(' + list + ')';
       break;
     case this.MSG_MODE:
-      if (!Blockly.Python.definitions_['math_mode']) {
+      if (!Blockly.Python.definitions_['math_modes']) {
         // As a list of numbers can contain more than one mode,
         // the returned result is provided as an array.
         // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
-        var functionName = Blockly.Python.variableDB_.getDistinctName('math_mode',
+        var functionName = Blockly.Python.variableDB_.getDistinctName('math_modes',
             Blockly.Generator.NAME_TYPE);
-        Blockly.Python.math_on_list.mode = functionName;
+        Blockly.Python.math_on_list.math_modes = functionName;
         var func = [];
         func.push('def ' + functionName + '(some_list):');
         func.push('  modes = []');
+        func.push('  # Using a lists of [item, count] to keep count rather than dict');
+        func.push('  # to avoid "unhashable" errors when the counted item is itself a list or dict.');
         func.push('  counts = []');
         func.push('  maxCount = 1');
         func.push('  for item in some_list:');
         func.push('    found = False');
-        func.push('    for counted_item, item_count in counts:');
-        func.push('      if counted_item == item:');
-        func.push('        item_count += 1');
-        func.push('        maxCount = max(maxCount, item_count)');
+        func.push('    for count in counts:');
+        func.push('      if count[0] == item:');
+        func.push('        count[1] += 1');
+        func.push('        maxCount = max(maxCount, count[1])');
         func.push('        found = True');
         func.push('    if not found:');
         func.push('      counts.append([item, 1])');
@@ -197,16 +199,16 @@ Blockly.Python.math_on_list = function() {
         func.push('    if item_count == maxCount:');
         func.push('      modes.append(counted_item)');
         func.push('  return modes');
-        Blockly.Python.definitions_['math_mode'] = func.join('\n');
+        Blockly.Python.definitions_['math_modes'] = func.join('\n');
       }
-      code = Blockly.Python.math_on_list.mode + '(' + list + ')';
+      code = Blockly.Python.math_on_list.math_modes + '(' + list + ')';
       break;
     case this.MSG_STD_DEV:
       Blockly.Python.definitions_['import_math'] = 'import math';
       if (!Blockly.Python.definitions_['math_standard_deviation']) {
-        var functionName = Blockly.Python.variableDB_.getDistinctName('math_standardDeviation',
+        var functionName = Blockly.Python.variableDB_.getDistinctName('math_standard_deviation',
             Blockly.Generator.NAME_TYPE);
-        Blockly.Python.math_on_list.standardDeviation = functionName;
+        Blockly.Python.math_on_list.math_standard_deviation = functionName;
         var func = [];
         func.push('def ' + functionName + '(numbers):');
         func.push('  n = len(numbers)');
@@ -217,12 +219,11 @@ Blockly.Python.math_on_list = function() {
         func.push('  return standard_dev');
         Blockly.Python.definitions_['math_standard_deviation'] = func.join('\n');
       }
-      code = Blockly.Python.math_on_list.standardDeviation + '(' + list + ')';
+      code = Blockly.Python.math_on_list.math_standard_deviation + '(' + list + ')';
       break;
     case this.MSG_RANDOM_ITEM:
-      Blockly.Python.definitions_['import_random'] = 'import random';
-      code = list + '[random.randint(0,len(' + list + ') - 1)] if ' + list + 
-      ' else None';
+      Blockly.Python.definitions_['import_random_choice'] = 'from random import choice';
+      code = 'choice(' + list + ')';
       break;
     default:
       throw 'Unknown operator.';
