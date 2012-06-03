@@ -166,16 +166,15 @@ Blockly.Dart.math_on_list = function() {
       break;
     case this.MSG_MEDIAN:
       if (!Blockly.Dart.definitions_['math_median']) {
+        var functionName = Blockly.Dart.variableDB_.getDistinctName(
+            'math_median', Blockly.Generator.NAME_TYPE);
+        Blockly.Dart.math_on_list.math_median = functionName;
         // Median is not a native Dart function.  Define one.
-        // May need to handle null. 
         // Currently math_median([null,null,1,3]) == 0.5.
-        var functionName = Blockly.Dart.variableDB_.getDistinctName('math_median',
-						Blockly.Generator.NAME_TYPE);
-        Blockly.Dart.math_on_list.median = functionName;
         var func = [];
-        func.push('num ' + functionName + '(list) {');
+        func.push('function ' + functionName + '(list) {');
         func.push('  if (!list.length) return 0;');
-        func.push('  List<num> localList = [].concat(list);');
+        func.push('  var localList = [].concat(list);');
         func.push('  localList.sort(function(a, b) {return b - a;});');
         func.push('  if (localList.length % 2 == 0) {');
         func.push('    return (localList[localList.length / 2 - 1] + localList[localList.length / 2]) / 2;');
@@ -185,26 +184,26 @@ Blockly.Dart.math_on_list = function() {
         func.push('}');
         Blockly.Dart.definitions_['math_median'] = func.join('\n');
       }
-      code = Blockly.Dart.math_on_list.median + '(' + list + ')';
+      code = Blockly.Dart.math_on_list.math_median + '(' + list + ')';
       break;
     case this.MSG_MODE:
-      if (!Blockly.Dart.definitions_['math_mode']) {
+      if (!Blockly.Dart.definitions_['math_modes']) {
+        var functionName = Blockly.Dart.variableDB_.getDistinctName(
+            'math_modes', Blockly.Generator.NAME_TYPE);
+        Blockly.Dart.math_on_list.math_modes = functionName;
         // As a list of numbers can contain more than one mode,
         // the returned result is provided as an array.
         // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
-        var functionName = Blockly.Dart.variableDB_.getDistinctName('math_mode',
-						Blockly.Generator.NAME_TYPE);
-        Blockly.Dart.math_on_list.mode = functionName;
         var func = [];
-        func.push('var ' + functionName + '(values) {');
-        func.push('  List modes = [];');
-        func.push('  List<int> counts = [];');
-        func.push('  int maxCount = 0;');
-        func.push('  for (int i = 0; i < values.length; i++) {');
+        func.push('function ' + functionName + '(values) {');
+        func.push('  var modes = [];');
+        func.push('  var counts = [];');
+        func.push('  var maxCount = 0;');
+        func.push('  for (var i = 0; i < values.length; i++) {');
         func.push('    var value = values[i];');
-        func.push('    bool found = false;');
-        func.push('    int thisCount;');
-        func.push('    for (int j = 0; j < counts.length; j++) {');
+        func.push('    var found = false;');
+        func.push('    var thisCount;');
+        func.push('    for (var j = 0; j < counts.length; j++) {');
         func.push('      if (counts[j][0] === value) {');
         func.push('        thisCount = ++counts[j][1];');
         func.push('        found = true;');
@@ -224,17 +223,34 @@ Blockly.Dart.math_on_list = function() {
         func.push('  }');
         func.push('  return modes;');
         func.push('}');
-        Blockly.Dart.definitions_['math_mode'] = func.join('\n');
+        Blockly.Dart.definitions_['math_modes'] = func.join('\n');
       }
-      code = Blockly.Dart.math_on_list.mode + '(' + list + ')';
+      code = Blockly.Dart.math_on_list.math_modes + '(' + list + ')';
       break;
     case this.MSG_STD_DEV:
-			// TODO
-      code = 'Math.max.apply(null,' + list + ')';
+      if (!Blockly.Dart.definitions_['math_standard_deviation']) {
+        var functionName = Blockly.Dart.variableDB_.getDistinctName(
+            'math_standard_deviation', Blockly.Generator.NAME_TYPE);
+        Blockly.Dart.math_on_list.math_standard_deviation = functionName;
+        var func = [];
+        func.push('function ' + functionName + '(numbers) {');
+        func.push('  var n = numbers.length;');
+        func.push('  if (!n) return NaN;');
+        func.push('  var mean = numbers.reduce(function(x, y) {return x + y;}) / n;');
+        func.push('  var variance = 0;');
+        func.push('  for (var j = 0; j < n; j++) {');
+        func.push('    variance += Math.pow(numbers[j] - mean, 2);');
+        func.push('  }');
+        func.push('  variance = variance / n;');
+        func.push('  standard_dev = Math.sqrt(variance);');
+        func.push('  return standard_dev;');
+        func.push('}');
+        Blockly.Dart.definitions_['math_standard_deviation'] = func.join('\n');
+      }
+      code = Blockly.Dart.math_on_list.math_standard_deviation + '(' + list + ')';
       break;
     case this.MSG_RANDOM_ITEM:
-			// TODO
-      code = 'Math.max.apply(null,' + list + ')';
+      code = list + '[Math.floor(Math.random() * ' + list + '.length)]';
       break;
     default:
       throw 'Unknown operator.';

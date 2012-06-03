@@ -49,9 +49,9 @@ Blockly.Dart.lists_repeat = function(opt_dropParens) {
     Blockly.Dart.lists_repeat.repeat = functionName;
     var func = [];
     func.push('List ' + functionName + '(value, n) {');
-    func.push('  List array = [];');
+    func.push('  var array = new List(n);');
     func.push('  for (int i = 0; i < n; i++) {');
-    func.push('    array.add(value);');
+    func.push('    array[i] = value;');
     func.push('  }');
     func.push('  return array;');
     func.push('}');
