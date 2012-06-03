@@ -29,16 +29,64 @@ Blockly.Procedures = {};
 Blockly.Procedures.NAME_TYPE = 'procedure';
 
 /**
+ * Find all user-created procedure definitions.
+ * @return {!Array.<string>} Array of variable names.
+ */
+Blockly.Procedures.allProcedures = function() {
+  var blocks = Blockly.mainWorkspace.getAllBlocks(false);
+  var proceduresReturn = [];
+  var proceduresNoReturn = [];
+  for (var x = 0; x < blocks.length; x++) {
+    var func = blocks[x].getProcedureDef;
+    if (func) {
+      var tuple = func.call(blocks[x]);
+      if (tuple) {
+        if (tuple[1]) {
+          proceduresReturn.push(tuple[0]);
+        } else {
+          proceduresNoReturn.push(tuple[0]);
+        }
+      }
+    }
+  }
+  proceduresNoReturn.sort(Blockly.caseInsensitiveComparator);
+  proceduresReturn.sort(Blockly.caseInsensitiveComparator);
+  return [proceduresNoReturn, proceduresReturn];
+};
+
+/**
+ * Ensure two identically-named procedures don't exist.
+ * @param {!Blockly.Block} block Block to disambiguate.
+ * @return {string} Non-colliding name.
+ */
+Blockly.Procedures.findLegalName = function(name, block) {
+  if (!block.workspace.editable) {
+    return name;
+  }
+  while (!Blockly.Procedures.isLegalName(name, block.workspace, block)) {
+    // Collision with another procedure.
+    var r = name.match(/^(.*?)(\d+)$/);
+    if (!r) {
+      name += '2';
+    } else {
+      name = r[1] + (parseInt(r[2], 10) + 1);
+    }
+  }
+  return name;
+};
+
+/**
  * Does this procedure have a legal name?  Illegal names include names of
  * procedures already defined.
  * @param {string} name The questionable name.
+ * @param {!Blockly.Workspace} workspace The workspace to scan for collisions.
  * @param {Blockly.Block} opt_exclude Optional block to exclude from
  *     comparisons (one doesn't want to collide with oneself).
  * @return {boolean} True if the name is legal.
  */
-Blockly.Procedures.isLegalName = function(name, opt_exclude) {
+Blockly.Procedures.isLegalName = function(name, workspace, opt_exclude) {
   name = name.toLowerCase();
-  var blocks = Blockly.mainWorkspace.getAllBlocks();
+  var blocks = workspace.getAllBlocks(false);
   // Iterate through every block and check the name.
   for (var x = 0; x < blocks.length; x++) {
     if (blocks[x] == opt_exclude) {
@@ -48,7 +96,7 @@ Blockly.Procedures.isLegalName = function(name, opt_exclude) {
     if (func) {
       var procName = func.call(blocks[x]);
       // Procedure name may be null if the block is only half-built.
-      if (procName && procName.toLowerCase() == name) {
+      if (procName && procName[0].toLowerCase() == name) {
         return false;
       }
     }
@@ -71,13 +119,13 @@ Blockly.Procedures.rename = function(text) {
     return null;
   }
   // Ensure two identically-named procedures don't exist.
-  while (!Blockly.Procedures.isLegalName(text, this.sourceBlock_)) {
-    // Collision with another procedure.
-    var r = text.match(/^(.*?)(\d+)$/);
-    if (!r) {
-      text += '2';
-    } else {
-      text = r[1] + (parseInt(r[2], 10) + 1);
+  text = Blockly.Procedures.findLegalName(text, this.sourceBlock_);
+  // Rename any callers.
+  var blocks = this.sourceBlock_.workspace.getAllBlocks(false);
+  for (var x = 0; x < blocks.length; x++) {
+    var func = blocks[x].renameProcedure;
+    if (func) {
+      func.call(blocks[x], this.text_, text);
     }
   }
   return text;
@@ -103,4 +151,47 @@ Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
     blocks.push(block);
     gaps.push(margin * 2);
   }
+
+  var tuple = Blockly.Procedures.allProcedures();
+  var proceduresNoReturn = tuple[0];
+  var proceduresReturn = tuple[1];
+  if (Blockly.Language.procedures_callnoreturn) {
+    for (var x = 0; x < proceduresNoReturn.length; x++) {
+      var block = new Blockly.Block(workspace, 'procedures_callnoreturn');
+      block.setTitleText(proceduresNoReturn[x], 1);
+      block.initSvg();
+      blocks.push(block);
+      gaps.push(margin * 2);
+    }
+  }
+  if (Blockly.Language.procedures_callreturn) {
+    for (var x = 0; x < proceduresReturn.length; x++) {
+      var block = new Blockly.Block(workspace, 'procedures_callreturn');
+      block.setTitleText(proceduresReturn[x], 1);
+      block.initSvg();
+      blocks.push(block);
+      gaps.push(margin * 2);
+    }
+  }
+};
+
+/**
+ * When a procedure definition is destroyed, find and destroy all its callers.
+ * @param {string} name Name of deleted procedure definition.
+ * @param {!Blockly.Workspace} workspace The workspace to delete callers from.
+ */
+Blockly.Procedures.destroyCallers = function(name, workspace) {
+  name = name.toLowerCase();
+  var blocks = workspace.getAllBlocks(false);
+  // Iterate through every block and check the name.
+  for (var x = 0; x < blocks.length; x++) {
+    var func = blocks[x].getProcedureCall;
+    if (func) {
+      var procName = func.call(blocks[x]);
+      // Procedure name may be null if the block is only half-built.
+      if (procName && procName.toLowerCase() == name) {
+        blocks[x].destroy(true);
+      }
+    }
+  }  
 };

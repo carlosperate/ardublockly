@@ -45,3 +45,19 @@ Blockly.Python.procedures_defreturn = function() {
 // a procedure with a return value.
 Blockly.Python.procedures_defnoreturn =
     Blockly.Python.procedures_defreturn;
+
+Blockly.Python.procedures_callreturn = function() {
+  // Call a procedure with a return value.
+  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
+      Blockly.Procedures.NAME_TYPE);
+  var code = funcName + '()';
+  return code;
+};
+
+Blockly.Python.procedures_callnoreturn = function() {
+  // Call a procedure with no return value.
+  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
+      Blockly.Procedures.NAME_TYPE);
+  var code = funcName + '()\n';
+  return code;
+};

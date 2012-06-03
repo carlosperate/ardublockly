@@ -43,3 +43,24 @@ Blockly.Dart.procedures_defreturn = function() {
 // a procedure with a return value.
 Blockly.Dart.procedures_defnoreturn =
     Blockly.Dart.procedures_defreturn;
+
+// Defining a procedure without a return value uses the same generator as
+// a procedure with a return value.
+Blockly.Dart.procedures_defnoreturn =
+    Blockly.Dart.procedures_defreturn;
+
+Blockly.Dart.procedures_callreturn = function() {
+  // Call a procedure with a return value.
+  var funcName = Blockly.Dart.variableDB_.getName(this.getTitleText(1),
+      Blockly.Procedures.NAME_TYPE);
+  var code = funcName + '()';
+  return code;
+};
+
+Blockly.Dart.procedures_callnoreturn = function() {
+  // Call a procedure with no return value.
+  var funcName = Blockly.Dart.variableDB_.getName(this.getTitleText(1),
+      Blockly.Procedures.NAME_TYPE);
+  var code = funcName + '();\n';
+  return code;
+};

@@ -34,14 +34,26 @@ Blockly.Language.procedures_defnoreturn = {
   helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
   init: function() {
     this.setColour(290);
-    this.addTitle(new Blockly.FieldTextInput('procedure',
-        Blockly.Procedures.rename));
+    var name = Blockly.Procedures.findLegalName('procedure', this);
+    this.addTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename));
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
-    //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
     this.setTooltip('A procedure with no return value.');
   },
+  destroy: function() {
+    var name = this.getTitleText(0);
+    var editable = this.editable;
+    var workspace = this.workspace;
+    // Call parent's destructor.
+    Blockly.Block.prototype.destroy.call(this);
+    if (this.editable) {
+      // Destroy any callers.
+      Blockly.Procedures.destroyCallers(name, workspace);
+    }
+  },
   getProcedureDef: function() {
-    return this.getTitleText(0);
+    // Return the name of the defined procedure
+    // and that it does not have a return value.
+    return [this.getTitleText(0), false];
   }
 };
 
@@ -51,15 +63,18 @@ Blockly.Language.procedures_defreturn = {
   helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
   init: function() {
     this.setColour(290);
-    this.addTitle(new Blockly.FieldTextInput('procedure',
-        Blockly.Procedures.rename));
+    var name = Blockly.Procedures.findLegalName('procedure', this);
+    this.addTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename));
     this.addInput('do', '', Blockly.NEXT_STATEMENT);
     this.addInput('return', '', Blockly.INPUT_VALUE);
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
     this.setTooltip('A procedure with a return value.');
   },
+  destroy: Blockly.Language.procedures_defnoreturn.destroy,
   getProcedureDef: function() {
-    return this.getTitleText(0);
+    // Return the name of the defined procedure
+    // and that it does not have a return value.
+    return [this.getTitleText(0), true];
   }
 };
 
@@ -77,6 +92,22 @@ Blockly.Language.procedures_callnoreturn = {
   },
   getProcedureCall: function() {
     return this.getTitleText(1);
+  },
+  renameProcedure: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleText(1))) {
+      this.setTitleText(newName, 1);
+    }
+  },
+  mutationToDom: function(workspace) {
+    // Save the name.
+    var container = document.createElement('mutation');
+    container.setAttribute('name', this.getTitleText(1));
+    return container;
+  },
+  domToMutation: function(container) {
+    // Restore the name.
+    var name = container.getAttribute('name')
+    this.setTitleText(name, 1);
   }
 };
 
@@ -91,7 +122,8 @@ Blockly.Language.procedures_callreturn = {
     this.setOutput(true);
     this.setTooltip('Call a procedure with a return value.');
   },
-  getProcedureCall: function() {
-    return this.getTitleText(1);
-  }
+  getProcedureCall: Blockly.Language.procedures_callnoreturn.getProcedureCall,
+  renameProcedure: Blockly.Language.procedures_callnoreturn.renameProcedure,
+  mutationToDom: Blockly.Language.procedures_callnoreturn.mutationToDom,
+  domToMutation: Blockly.Language.procedures_callnoreturn.domToMutation
 };

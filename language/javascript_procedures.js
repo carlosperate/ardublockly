@@ -43,3 +43,20 @@ Blockly.JavaScript.procedures_defreturn = function() {
 // a procedure with a return value.
 Blockly.JavaScript.procedures_defnoreturn =
     Blockly.JavaScript.procedures_defreturn;
+
+Blockly.JavaScript.procedures_callreturn = function() {
+  // Call a procedure with a return value.
+  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
+      Blockly.Procedures.NAME_TYPE);
+  var code = funcName + '()';
+  return code;
+};
+
+Blockly.JavaScript.procedures_callnoreturn = function() {
+  // Call a procedure with no return value.
+  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
+      Blockly.Procedures.NAME_TYPE);
+  var code = funcName + '();\n';
+  return code;
+};
+
