@@ -31,7 +31,7 @@ if (!Blockly.Language) {
 Blockly.Language.procedures_defnoreturn = {
   // Define a procedure with no return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
+  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
   init: function() {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName('procedure', this);
@@ -60,7 +60,7 @@ Blockly.Language.procedures_defnoreturn = {
 Blockly.Language.procedures_defreturn = {
   // Define a procedure with a return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
+  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
   init: function() {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName('procedure', this);
@@ -81,7 +81,7 @@ Blockly.Language.procedures_defreturn = {
 Blockly.Language.procedures_callnoreturn = {
   // Call a procedure with no return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
+  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
   init: function() {
     this.setColour(290);
     this.addTitle('call');
@@ -114,7 +114,7 @@ Blockly.Language.procedures_callnoreturn = {
 Blockly.Language.procedures_callreturn = {
   // Call a procedure with a return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Variable_(computer_science)',
+  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
   init: function() {
     this.setColour(290);
     this.addTitle('call');

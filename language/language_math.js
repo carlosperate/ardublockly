@@ -193,7 +193,7 @@ Blockly.Language.math_round = {
 Blockly.Language.math_trig = {
   // Trigonometry operators.
   category: 'Math',
-  helpUrl: 'http://en.wikipedia.org/wiki/Square_root',
+  helpUrl: 'http://en.wikipedia.org/wiki/Trigonometric_functions',
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
@@ -272,7 +272,7 @@ Blockly.Language.math_on_list = {
 Blockly.Language.math_constrain = {
   // Constrain a number between two limits.
   category: 'Math',
-  helpUrl: 'http://actionsnippet.com/?p=475',
+  helpUrl: 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29',
   init: function() {
     this.setColour(230);
     this.setOutput(true);
