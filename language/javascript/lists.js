@@ -35,7 +35,7 @@ Blockly.JavaScript.lists_create_with = function() {
   // Create a list with any number of elements of any type.
   var code = new Array(this.itemCount_);
   for (n = 0; n < this.itemCount_; n++) {
-    code[n] = Blockly.JavaScript.valueToCode_(this, n, true) || 'null';
+    code[n] = Blockly.JavaScript.valueToCode(this, n, true) || 'null';
   }
   return '[' + code.join(',') + ']';
 };
@@ -57,8 +57,8 @@ Blockly.JavaScript.lists_repeat = function() {
     func.push('}');
     Blockly.JavaScript.definitions_['lists_repeat'] = func.join('\n');
   }
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'null';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 1, true) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 0, true) || 'null';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 1, true) || '0';
   return Blockly.JavaScript.lists_repeat.repeat + '(' + argument0 + ', ' + argument1 + ')';
 };
 
@@ -84,9 +84,9 @@ Blockly.JavaScript.lists_getIndex = function(opt_dropParens) {
 
 Blockly.JavaScript.lists_setIndex = function() {
   // Set element at index.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '1';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 1) || '[]';
-  var argument2 = Blockly.JavaScript.valueToCode_(this, 2, true) || 'null';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 0, true) || '1';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 1) || '[]';
+  var argument2 = Blockly.JavaScript.valueToCode(this, 2, true) || 'null';
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.

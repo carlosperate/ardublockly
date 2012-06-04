@@ -30,8 +30,8 @@ Blockly.Dart.procedures_defreturn = function() {
   // Define a procedure with a return value.
   var funcName = Blockly.Dart.variableDB_.getName(this.getTitleText(0),
       Blockly.Procedures.NAME_TYPE);
-  var branch = Blockly.Dart.statementToCode_(this, 0);
-  var returnValue = Blockly.Dart.valueToCode_(this, 0, true) || '';
+  var branch = Blockly.Dart.statementToCode(this, 0);
+  var returnValue = Blockly.Dart.valueToCode(this, 0, true) || '';
   if (returnValue) {
     returnValue = '  return ' + returnValue + ';\n';
   }

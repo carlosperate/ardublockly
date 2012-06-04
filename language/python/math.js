@@ -33,8 +33,8 @@ Blockly.Python.math_number = function() {
 
 Blockly.Python.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operators, and power.
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '0';
-  var argument1 = Blockly.Python.valueToCode_(this, 1) || '0';
+  var argument0 = Blockly.Python.valueToCode(this, 0) || '0';
+  var argument1 = Blockly.Python.valueToCode(this, 1) || '0';
   var map = {};
   map[this.MSG_ADD] = '+';
   map[this.MSG_MINUS] = '-';
@@ -51,7 +51,7 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
 
 Blockly.Python.math_change = function() {
   // Add to a variable in place.
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '0';
+  var argument0 = Blockly.Python.valueToCode(this, 0) || '0';
   var varName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = (' + varName + ' if type(' + varName + ') in (int, float) else 0)' + 
@@ -61,8 +61,8 @@ Blockly.Python.math_change = function() {
 Blockly.Python.math_single = function(opt_dropParens) {
   // Math operators with single operand.
   Blockly.Python.definitions_['import_math'] = 'import math';
-  var argNaked = Blockly.Python.valueToCode_(this, 0, true) || '0';
-  var argParen = Blockly.Python.valueToCode_(this, 0, false) || '0';
+  var argNaked = Blockly.Python.valueToCode(this, 0, true) || '0';
+  var argParen = Blockly.Python.valueToCode(this, 0, false) || '0';
   var operator = this.getValueLabel(0);
   var code;
   // First, handle cases which generate values that don't need parentheses wrapping the code.
@@ -138,7 +138,7 @@ Blockly.Python.math_trig = Blockly.Python.math_single;
 Blockly.Python.math_on_list = function() {
   // Rounding functions.
   func = this.getTitleText(0);
-  list = Blockly.Python.valueToCode_(this, 0, true) || '[]';
+  list = Blockly.Python.valueToCode(this, 0, true) || '[]';
   var code;
   switch (func) {
     case this.MSG_SUM:
@@ -234,16 +234,16 @@ Blockly.Python.math_on_list = function() {
 
 Blockly.Python.math_constrain = function() {
   // Constrain a number between two limits.
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
-  var argument1 = Blockly.Python.valueToCode_(this, 1, true) || '0';
-  var argument2 = Blockly.Python.valueToCode_(this, 2, true) || '0';
+  var argument0 = Blockly.Python.valueToCode(this, 0, true) || '0';
+  var argument1 = Blockly.Python.valueToCode(this, 1, true) || '0';
+  var argument2 = Blockly.Python.valueToCode(this, 2, true) || '0';
   return 'min(max(' + argument0 + ', ' + argument1 + '), ' + argument2 + ')';
 };
 
 Blockly.Python.math_modulo = function(opt_dropParens) {
   // Remainder computation.
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '0';
-  var argument1 = Blockly.Python.valueToCode_(this, 1) || '0';
+  var argument0 = Blockly.Python.valueToCode(this, 0) || '0';
+  var argument1 = Blockly.Python.valueToCode(this, 1) || '0';
   var code = argument0 + ' % ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -258,8 +258,8 @@ Blockly.Python.math_random_float = function() {
 
 Blockly.Python.math_random_int = function() {
   Blockly.Python.definitions_['import_random'] = 'import random';
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '0';
-  var argument1 = Blockly.Python.valueToCode_(this, 1) || '0';
+  var argument0 = Blockly.Python.valueToCode(this, 0) || '0';
+  var argument1 = Blockly.Python.valueToCode(this, 1) || '0';
   code = 'random.randint('+ argument0 + ', ' + argument1 + ')';
   return code;
 };

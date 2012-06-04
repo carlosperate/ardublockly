@@ -37,10 +37,10 @@ Blockly.Python.text_join = function(opt_dropParens) {
   if (this.itemCount_ == 0) {
     return '\'\'';
   } else if (this.itemCount_ == 1) {
-    return 'str(' + (Blockly.Python.valueToCode_(this, 0, opt_dropParens) || '\'\'') + ')';
+    return 'str(' + (Blockly.Python.valueToCode(this, 0, opt_dropParens) || '\'\'') + ')';
   } else if (this.itemCount_ == 2) {
-    var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
-    var argument1 = Blockly.Python.valueToCode_(this, 1, true) || '\'\'';
+    var argument0 = Blockly.Python.valueToCode(this, 0, true) || '\'\'';
+    var argument1 = Blockly.Python.valueToCode(this, 1, true) || '\'\'';
     var code = 'str(' + argument0 + ') + str(' + argument1 + ')';
     if (!opt_dropParens) {
       code = '(' + code + ')';
@@ -49,7 +49,7 @@ Blockly.Python.text_join = function(opt_dropParens) {
   } else {
     var code = [];
     for (n = 0; n < this.itemCount_; n++) {
-      code[n] = Blockly.Python.valueToCode_(this, n, true) || '\'\'';
+      code[n] = Blockly.Python.valueToCode(this, n, true) || '\'\'';
     }
     var tempVar = Blockly.Python.variableDB_.getDistinctName('temp_value',
         Blockly.Variables.NAME_TYPE);
@@ -63,13 +63,13 @@ Blockly.Python.text_join = function(opt_dropParens) {
 
 Blockly.Python.text_length = function() {
   // String length.
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode(this, 0, true) || '\'\'';
   return 'len(' + argument0 + ')';
 };
 
 Blockly.Python.text_isEmpty = function(opt_dropParens) {
   // Is the string null?
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode(this, 0, true) || '\'\'';
   var code = 'not len(' + argument0 + ')';
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -82,8 +82,8 @@ Blockly.Python.text_endString = function() {
   // Do we need to prevent 'List index out of range' ERROR by checking
   // if argument 0 > len(argument1)? Or will ALL error be handled systematically?
   var first = this.getValueLabel(0) == this.MSG_FIRST;
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '0';
-  var argument1 = Blockly.Python.valueToCode_(this, 1) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode(this, 0, true) || '0';
+  var argument1 = Blockly.Python.valueToCode(this, 1) || '\'\'';
   var code = argument1 + '[' +
       (first ? ':' + argument0 : '-' + argument0 + ':') + ']';
   return code;
@@ -93,8 +93,8 @@ Blockly.Python.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
   // Should we allow for non-case sensitive???
   var operator = this.getTitleText(1) == this.MSG_FIRST ? 'find' : 'rfind';
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
-  var argument1 = Blockly.Python.valueToCode_(this, 1) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode(this, 0) || '\'\'';
+  var argument1 = Blockly.Python.valueToCode(this, 1) || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -104,8 +104,8 @@ Blockly.Python.text_indexOf = function(opt_dropParens) {
 
 Blockly.Python.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '1';
-  var argument1 = Blockly.Python.valueToCode_(this, 1) || '[]';
+  var argument0 = Blockly.Python.valueToCode(this, 0, true) || '1';
+  var argument1 = Blockly.Python.valueToCode(this, 1) || '[]';
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
@@ -134,7 +134,7 @@ Blockly.Python.text_changeCase = function() {
     default:
       throw 'Unknown operator.';
   }
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode(this, 0, true) || '\'\'';
   var code = argument0 + '.' + operator + '()';
   return code;
 };
@@ -155,12 +155,12 @@ Blockly.Python.text_trim = function() {
     default:
       throw 'Unknown operator.';
   }
-  var argument0 = Blockly.Python.valueToCode_(this, 0) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode(this, 0) || '\'\'';
   return argument0 + '.' + operator + '()';
 };
 
 Blockly.Python.text_print = function() {
   // Print statement.
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || '\'\'';
+  var argument0 = Blockly.Python.valueToCode(this, 0, true) || '\'\'';
   return 'print ' + argument0 + '\n';
 };

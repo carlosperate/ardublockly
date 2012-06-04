@@ -29,16 +29,16 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 Blockly.JavaScript.controls_if = function() {
   // If/elseif/else condition.
   var n = 0;
-  var argument = Blockly.JavaScript.valueToCode_(this, n, true) || 'false';
-  var branch = Blockly.JavaScript.statementToCode_(this, n);
+  var argument = Blockly.JavaScript.valueToCode(this, n, true) || 'false';
+  var branch = Blockly.JavaScript.statementToCode(this, n);
   var code = 'if (' + argument + ') {\n' + branch + '}';
   for (n = 1; n <= this.elseifCount_; n++) {
-    argument = Blockly.JavaScript.valueToCode_(this, n, true) || 'false';
-    branch = Blockly.JavaScript.statementToCode_(this, n);
+    argument = Blockly.JavaScript.valueToCode(this, n, true) || 'false';
+    branch = Blockly.JavaScript.statementToCode(this, n);
     code += ' else if (' + argument + ') {\n' + branch + '}';
   }
   if (this.elseCount_) {
-    branch = Blockly.JavaScript.statementToCode_(this, n);
+    branch = Blockly.JavaScript.statementToCode(this, n);
     code += ' else {\n' + branch + '}';
   }
   return code + '\n';
@@ -46,8 +46,8 @@ Blockly.JavaScript.controls_if = function() {
 
 Blockly.JavaScript.controls_whileUntil = function() {
   // Do while/until loop.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || 'false';
-  var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
+  var argument0 = Blockly.JavaScript.valueToCode(this, 0, true) || 'false';
+  var branch0 = Blockly.JavaScript.statementToCode(this, 0);
   if (this.getTitleText(1) == this.MSG_UNTIL) {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
@@ -61,9 +61,9 @@ Blockly.JavaScript.controls_for = function() {
   // For loop.
   var variable0 = Blockly.JavaScript.variableDB_.getName(
       this.getVariableInput(0), Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode_(this, 1, true) || '0';
-  var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
+  var argument0 = Blockly.JavaScript.valueToCode(this, 0, true) || '0';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 1, true) || '0';
+  var branch0 = Blockly.JavaScript.statementToCode(this, 0);
   var code;
   if (argument1.match(/^\w+$/)) {
     code = 'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + argument1 + '; ' + variable0 + '++) {\n' +
@@ -84,8 +84,8 @@ Blockly.JavaScript.controls_forEach = function() {
   // For each loop.
   var variable0 = Blockly.JavaScript.variableDB_.getName(
       this.getVariableInput(0), Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '[]';
-  var branch0 = Blockly.JavaScript.statementToCode_(this, 0);
+  var argument0 = Blockly.JavaScript.valueToCode(this, 0, true) || '[]';
+  var branch0 = Blockly.JavaScript.statementToCode(this, 0);
   var code;
   var indexVar = Blockly.JavaScript.variableDB_.getDistinctName(
       variable0 + '_index', Blockly.Variables.NAME_TYPE);

@@ -30,8 +30,8 @@ Blockly.Python.procedures_defreturn = function() {
   // Define a procedure with a return value.
   var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(0),
       Blockly.Procedures.NAME_TYPE);
-  var branch = Blockly.Python.statementToCode_(this, 0);
-  var returnValue = Blockly.Python.valueToCode_(this, 0, true) || '';
+  var branch = Blockly.Python.statementToCode(this, 0);
+  var returnValue = Blockly.Python.valueToCode(this, 0, true) || '';
   if (returnValue) {
     returnValue = '  return ' + returnValue + '\n';
   } else if (!branch) {

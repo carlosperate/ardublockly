@@ -60,6 +60,34 @@ Blockly.Generator.get = function(name) {
       return this.scrub_(block, code);
     };
 
+    /**
+     * Generate Dart code representing the specified value input.
+     * @param {!Blockly.Block} block The block containing the input.
+     * @param {number} index The index of the input (0-based).
+     * @param {?boolean} opt_dropParens If true, don't surround code with paretheses
+     *     since the caller already has a safe container.
+     * @return {string} Generated code or '' if no blocks are connected.
+     */
+    generator.valueToCode = function(block, index, opt_dropParens) {
+      var input = block.getValueInput(index);
+      return this.blockToCode(input, opt_dropParens);
+    };
+    
+    /**
+     * Generate Dart code representing the statement.  Indent the code.
+     * @param {!Blockly.Block} block The block containing the input.
+     * @param {number} index The index of the input (0-based).
+     * @return {string} Generated code or '' if no blocks are connected.
+     */
+    generator.statementToCode = function(block, index) {
+      var input = block.getStatementInput(index);
+      var code = this.blockToCode(input);
+      if (code) {
+        code = Blockly.Generator.prefixLines(code, '  ');
+      }
+      return code;
+    };
+
     Blockly.Generator.languages[name] = generator;
   }
   return Blockly.Generator.languages[name];

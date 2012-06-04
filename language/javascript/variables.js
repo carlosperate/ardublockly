@@ -34,7 +34,7 @@ Blockly.JavaScript.variables_get = function() {
 
 Blockly.JavaScript.variables_set = function() {
   // Variable setter.
-  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 0, true) || '0';
   var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = ' + argument0 + ';\n';
