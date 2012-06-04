@@ -35,14 +35,14 @@ Blockly.Python.lists_create_with = function() {
   // Create a list with any number of elements of any type.
   var code = new Array(this.itemCount_);
   for (n = 0; n < this.itemCount_; n++) {
-    code[n] = Blockly.Python.valueToCode_(this, n, true) || 'null';
+    code[n] = Blockly.Python.valueToCode_(this, n, true) || 'None';
   }
   return '[' + code.join(',') + ']';
 };
 
 Blockly.Python.lists_repeat = function(opt_dropParens) {
   // Create a list with one element repeated.
-  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || 'null';
+  var argument0 = Blockly.Python.valueToCode_(this, 0, true) || 'None';
   var argument1 = Blockly.Python.valueToCode_(this, 1) || '0';
   var code = '[' + argument0 + '] * ' + argument1;
   if (!opt_dropParens) {

@@ -40,7 +40,7 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
   map[this.MSG_MINUS] = '-';
   map[this.MSG_MULTIPLY] = '*';
   map[this.MSG_DIVIDE] = '/';
-  map[this.MSG_POWER] = '**';
+  map[this.MSG_POW] = '**';
   var operator = map[this.getValueLabel(1)];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
@@ -161,13 +161,13 @@ Blockly.Python.math_on_list = function() {
             Blockly.Generator.NAME_TYPE);
         Blockly.Python.math_on_list.median = functionName;
         var func = [];
-        func.push('def ' + functionName + '(list):');
-        func.push('  if not list: return 0');
-        func.push('  sortedL = sorted(list)');
-        func.push('  if len(list) % 2 == 0:');
-        func.push('    return (sortedL[len(list) / 2 - 1] + sortedL[len(list) / 2]) / 2');
+        func.push('def ' + functionName + '(myList):');
+        func.push('  localList = sorted([e for e in myList if type(e) in [int, float]])');
+        func.push('  if not localList: return');
+        func.push('  if len(localList) % 2 == 0:');
+        func.push('    return (localList[len(localList) / 2 - 1] + localList[len(localList) / 2]) / 2');
         func.push('  else:');
-        func.push('    return sortedL[(len(list) - 1) / 2]');
+        func.push('    return localList[(len(localList) - 1) / 2]');
         Blockly.Python.definitions_['math_median'] = func.join('\n');
       }
       code = Blockly.Python.math_on_list.median + '(' + list + ')';

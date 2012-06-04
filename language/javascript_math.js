@@ -167,9 +167,9 @@ Blockly.JavaScript.math_on_list = function() {
         // May need to handle null. 
         // Currently math_median([null,null,1,3]) == 0.5.
         var func = [];
-        func.push('function ' + functionName + '(list) {');
-        func.push('  if (!list.length) return 0;');
-        func.push('  var localList = [].concat(list);');
+        func.push('function ' + functionName + '(myList) {');
+        func.push('  var localList = myList.filter(function (x) {return typeof x == \'number\';});');
+        func.push('  if (!localList.length) return null;');
         func.push('  localList.sort(function(a, b) {return b - a;});');
         func.push('  if (localList.length % 2 == 0) {');
         func.push('    return (localList[localList.length / 2 - 1] + localList[localList.length / 2]) / 2;');
@@ -230,7 +230,7 @@ Blockly.JavaScript.math_on_list = function() {
         var func = [];
         func.push('function ' + functionName + '(numbers) {');
         func.push('  var n = numbers.length;');
-        func.push('  if (!n) return NaN;');
+        func.push('  if (!n) return null;');
         func.push('  var mean = numbers.reduce(function(x, y) {return x + y;}) / n;');
         func.push('  var variance = 0;');
         func.push('  for (var j = 0; j < n; j++) {');
