@@ -33,7 +33,7 @@ Blockly.Python.procedures_defreturn = function() {
   var branch = Blockly.Python.statementToCode_(this, 0);
   var returnValue = Blockly.Python.valueToCode_(this, 0, true) || '';
   if (returnValue) {
-    returnValue = '  return ' + returnValue + ';\n';
+    returnValue = '  return ' + returnValue + '\n';
   } else if (!branch) {
     branch = '  pass';
   }

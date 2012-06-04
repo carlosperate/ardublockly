@@ -253,6 +253,14 @@ Blockly.JavaScript.math_on_list = function() {
   return code;
 };
 
+Blockly.JavaScript.math_constrain = function() {
+  // Constrain a number between two limits.
+  var argument0 = Blockly.JavaScript.valueToCode_(this, 0, true) || '0';
+  var argument1 = Blockly.JavaScript.valueToCode_(this, 1, true) || '0';
+  var argument2 = Blockly.JavaScript.valueToCode_(this, 2, true) || '0';
+  return 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' + argument2 + ')';
+};
+
 Blockly.JavaScript.math_modulo = function(opt_dropParens) {
   // Remainder computation.
   var argument0 = Blockly.JavaScript.valueToCode_(this, 0) || '0';

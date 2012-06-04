@@ -269,6 +269,21 @@ Blockly.Language.math_on_list = {
   MSG_RANDOM_ITEM: 'random item'
 };
 
+Blockly.Language.math_constrain = {
+  // Constrain a number between two limits.
+  category: 'Math',
+  helpUrl: 'http://actionsnippet.com/?p=475',
+  init: function() {
+    this.setColour(230);
+    this.setOutput(true);
+    this.addInput('constrain', '', Blockly.INPUT_VALUE);
+    this.addInput('between (low)', '', Blockly.INPUT_VALUE);
+    this.addInput('and (high)', '', Blockly.INPUT_VALUE);
+    this.setInputsInline(true);
+    this.setTooltip('Constrain a number to be between the specified limits (inclusive).');
+  }
+};
+
 Blockly.Language.math_modulo = {
   // Remainder of a division.
   category: 'Math',
