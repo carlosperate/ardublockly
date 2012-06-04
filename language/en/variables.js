@@ -61,7 +61,7 @@ Blockly.Language.variables_set = {
     this.addTitle(new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange))
         .setText('item');
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Sets this variable to be equal to the input.');

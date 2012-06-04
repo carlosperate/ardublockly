@@ -1004,8 +1004,6 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  * Add a value input, statement input or local variable to this block.
  * @param {string|Blockly.Field} label Printed next to the input
  *     (e.g. 'x' or 'do').  May be an editable field.
- * @param {string|!Element} tooltip Text for tooltip or a parent element to
- *     link to for its tooltip.
  * @param {number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
  *     Blockly.LOCAL_VARIABLE.
  * @param {number} opt_index If present, this is the index (zero-based) where
@@ -1013,7 +1011,7 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  *     will be at the bottom of the stack.
  * @return {!Object} The input object created.
  */
-Blockly.Block.prototype.addInput = function(label, tooltip, type, opt_index) {
+Blockly.Block.prototype.addInput = function(label, type, opt_index) {
   // Create descriptive text element.
   var textElement = null;
   if (label) {
@@ -1026,9 +1024,6 @@ Blockly.Block.prototype.addInput = function(label, tooltip, type, opt_index) {
     }
     if (this.svg_) {
       textElement.init(this);
-    }
-    if (tooltip) {
-      textElement.setTooltip(tooltip);
     }
   }
   var input;

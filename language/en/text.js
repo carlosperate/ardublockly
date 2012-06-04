@@ -49,8 +49,8 @@ Blockly.Language.text_join = {
   init: function() {
     this.setColour(160);
     this.addTitle('create text with');
-    this.addInput('', '', Blockly.INPUT_VALUE);
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setMutator(new Blockly.Mutator(this, ['text_create_join_item']));
     this.setTooltip('Create a piece of text by joining\ntogether any number of items.');
@@ -67,7 +67,7 @@ Blockly.Language.text_join = {
     }
     this.itemCount_ = window.parseInt(container.getAttribute('items'), 10);
     for (var x = 0; x < this.itemCount_; x++) {
-      this.addInput('', '', Blockly.INPUT_VALUE);
+      this.addInput('', Blockly.INPUT_VALUE);
     }
   },
   decompose: function(workspace) {
@@ -101,7 +101,7 @@ Blockly.Language.text_join = {
     // Rebuild the block's inputs.
     var itemBlock = listBlock.getStatementInput(0);
     while (itemBlock) {
-      this.addInput('', '', Blockly.INPUT_VALUE);
+      this.addInput('', Blockly.INPUT_VALUE);
       // Reconnect any child blocks.
       if (itemBlock.valueInput_) {
         this.inputList[this.itemCount_].connect(itemBlock.valueInput_);
@@ -118,7 +118,7 @@ Blockly.Language.text_create_join_container = {
   init: function() {
     this.setColour(160);
     this.addTitle('add');
-    this.addInput('', '', Blockly.NEXT_STATEMENT);
+    this.addInput('', Blockly.NEXT_STATEMENT);
     this.setTooltip('Add, remove, or reorder sections to reconfigure this text block.');
     this.contextMenu = false;
   }
@@ -142,7 +142,7 @@ Blockly.Language.text_length = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour(160);
-    this.addInput('length', '', Blockly.INPUT_VALUE);
+    this.addInput('length', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns number of letters (including spaces)\nin the provided text.');
   }
@@ -154,7 +154,7 @@ Blockly.Language.text_isEmpty = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour(160);
-    this.addInput('is empty', '', Blockly.INPUT_VALUE);
+    this.addInput('is empty', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns true if the provided text is empty.');
   }
@@ -172,8 +172,8 @@ Blockly.Language.text_endString = {
     var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
-    this.addInput(menu, '', Blockly.INPUT_VALUE);
-    this.addInput('letters in text', '', Blockly.INPUT_VALUE);
+    this.addInput(menu, Blockly.INPUT_VALUE);
+    this.addInput('letters in text', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip('Returns specified number of letters at the beginning or end of the text.');
   },
@@ -195,8 +195,8 @@ Blockly.Language.text_indexOf = {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
     this.addTitle(menu);
-    this.addInput('occurrence of text', '', Blockly.INPUT_VALUE);
-    this.addInput('in text', '', Blockly.INPUT_VALUE);
+    this.addInput('occurrence of text', Blockly.INPUT_VALUE);
+    this.addInput('in text', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip('Returns the index of the first/last occurrence\nof first text in the second text.\nReturns 0 if text is not found.');
   },
@@ -212,8 +212,8 @@ Blockly.Language.text_charAt = {
     this.setColour(160);
     this.addTitle('letter');
     this.setOutput(true);
-    this.addInput('at', '', Blockly.INPUT_VALUE);
-    this.addInput('in text', '', Blockly.INPUT_VALUE);
+    this.addInput('at', Blockly.INPUT_VALUE);
+    this.addInput('in text', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip('Returns the letter at the specified position.');
   }
@@ -231,7 +231,7 @@ Blockly.Language.text_changeCase = {
     var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_UPPERCASE, thisBlock.MSG_LOWERCASE, thisBlock.MSG_TITLECASE];
     });
-    this.addInput(menu, '', Blockly.INPUT_VALUE);
+    this.addInput(menu, Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Return a copy of the text in a different case.');
   },
@@ -258,7 +258,7 @@ Blockly.Language.text_trim = {
     });
     this.addTitle(menu);
     var sideTitle = this.addTitle('sides');
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Return a copy of the text with spaces\nremoved from one or both ends.');
   },
@@ -286,7 +286,7 @@ Blockly.Language.text_print = {
   init: function() {
     this.setColour(160);
     this.addTitle('print');
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Print the specified text, number or other value.');

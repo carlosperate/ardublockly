@@ -47,9 +47,9 @@ Blockly.Language.lists_create_with = {
   init: function() {
     this.setColour(210);
     this.addTitle('create list with');
-    this.addInput('', '', Blockly.INPUT_VALUE);
-    this.addInput('', '', Blockly.INPUT_VALUE);
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setMutator(new Blockly.Mutator(this, ['lists_create_with_item']));
     this.setTooltip('Create a list with any number of items.');
@@ -66,7 +66,7 @@ Blockly.Language.lists_create_with = {
     }
     this.itemCount_ = window.parseInt(container.getAttribute('items'), 10);
     for (var x = 0; x < this.itemCount_; x++) {
-      this.addInput('', '', Blockly.INPUT_VALUE);
+      this.addInput('', Blockly.INPUT_VALUE);
     }
   },
   decompose: function(workspace) {
@@ -100,7 +100,7 @@ Blockly.Language.lists_create_with = {
     // Rebuild the block's inputs.
     var itemBlock = listBlock.getStatementInput(0);
     while (itemBlock) {
-      this.addInput('', '', Blockly.INPUT_VALUE);
+      this.addInput('', Blockly.INPUT_VALUE);
       // Reconnect any child blocks.
       if (itemBlock.valueInput_) {
         this.inputList[this.itemCount_].connect(itemBlock.valueInput_);
@@ -117,7 +117,7 @@ Blockly.Language.lists_create_with_container = {
   init: function() {
     this.setColour(210);
     this.addTitle('add');
-    this.addInput('', '', Blockly.NEXT_STATEMENT);
+    this.addInput('', Blockly.NEXT_STATEMENT);
     this.setTooltip('Add, remove, or reorder sections to reconfigure this list block.');
     this.contextMenu = false;
   }
@@ -143,8 +143,8 @@ Blockly.Language.lists_repeat = {
     this.setColour(210);
     this.setOutput(true);
     this.addTitle('create list');
-    this.addInput('with item', '', Blockly.INPUT_VALUE);
-    this.addInput('repeated', '', Blockly.INPUT_VALUE);
+    this.addInput('with item', Blockly.INPUT_VALUE);
+    this.addInput('repeated', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip('Creates a list consisting of the given value\nrepeated the specified number of times.');
   }
@@ -156,7 +156,7 @@ Blockly.Language.lists_length = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour(210);
-    this.addInput('length', '', Blockly.INPUT_VALUE);
+    this.addInput('length', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns the length of a list.');
   }
@@ -168,7 +168,7 @@ Blockly.Language.lists_isEmpty = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour(210);
-    this.addInput('is empty', '', Blockly.INPUT_VALUE);
+    this.addInput('is empty', Blockly.INPUT_VALUE);
     this.setOutput(true);
     this.setTooltip('Returns true if the list is empty.');
   }
@@ -188,8 +188,8 @@ Blockly.Language.lists_indexOf = {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
     this.addTitle(menu);
-    this.addInput('occurrence of item', '', Blockly.INPUT_VALUE);
-    this.addInput('in list', '', Blockly.INPUT_VALUE);
+    this.addInput('occurrence of item', Blockly.INPUT_VALUE);
+    this.addInput('in list', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip('Returns the index of the first/last occurrence\nof the item in the list.\nReturns 0 if text is not found.');
   },
@@ -205,8 +205,8 @@ Blockly.Language.lists_getIndex = {
     this.setColour(210);
     this.setOutput(true);
     this.addTitle('get item');
-    this.addInput('at', '', Blockly.INPUT_VALUE);
-    this.addInput('in list', '', Blockly.INPUT_VALUE);
+    this.addInput('at', Blockly.INPUT_VALUE);
+    this.addInput('in list', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip('Returns the value at the specified position in a list.');
   }
@@ -219,9 +219,9 @@ Blockly.Language.lists_setIndex = {
   init: function() {
     this.setColour(210);
     this.addTitle('set item');
-    this.addInput('at', '', Blockly.INPUT_VALUE);
-    this.addInput('in list', '', Blockly.INPUT_VALUE);
-    this.addInput('to', '', Blockly.INPUT_VALUE);
+    this.addInput('at', Blockly.INPUT_VALUE);
+    this.addInput('in list', Blockly.INPUT_VALUE);
+    this.addInput('to', Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

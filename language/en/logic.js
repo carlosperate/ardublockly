@@ -37,7 +37,7 @@ Blockly.Language.logic_compare = {
     var thisBlock = this;
     this.setColour(120);
     this.setOutput(true);
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
     var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_EQ,
               thisBlock.MSG_NEQ,
@@ -46,7 +46,7 @@ Blockly.Language.logic_compare = {
               thisBlock.MSG_GT,
               thisBlock.MSG_GTE];
     });
-    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+    this.addInput(dropdown, Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip(function() {
       switch (thisBlock.getValueLabel(1)) {
@@ -83,11 +83,11 @@ Blockly.Language.logic_operation = {
     var thisBlock = this;
     this.setColour(120);
     this.setOutput(true);
-    this.addInput('', '', Blockly.INPUT_VALUE);
+    this.addInput('', Blockly.INPUT_VALUE);
     var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_AND, thisBlock.MSG_OR];
     });
-    this.addInput(dropdown, '', Blockly.INPUT_VALUE);
+    this.addInput(dropdown, Blockly.INPUT_VALUE);
     this.setInputsInline(true);
     this.setTooltip(function() {
       switch (thisBlock.getValueLabel(1)) {
@@ -110,7 +110,7 @@ Blockly.Language.logic_negate = {
   init: function() {
     this.setColour(120);
     this.setOutput(true);
-    this.addInput('not', '', Blockly.INPUT_VALUE);
+    this.addInput('not', Blockly.INPUT_VALUE);
     this.setTooltip('Returns true if the input is false.\nReturns false if the input is true.');
   }
 };

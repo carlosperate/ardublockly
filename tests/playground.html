@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta charset="utf-8">
 <title>Blocky Playground</title>
 <script type="text/javascript" src="../blockly.js"></script>
 <script type="text/javascript" src="../block.js"></script>
@@ -132,12 +133,11 @@ function setInputsInline() {
 function addInput() {
   var type = parseInt(document.getElementById('inputType').value, 10);
   var label = document.getElementById('inputLabel').value;
-  var tooltip = document.getElementById('inputTooltip').value;
   var index = parseInt(document.getElementById('inputIndex').value, 10);
   if (isNaN(index)) {
-    block.addInput(label, tooltip, type);
+    block.addInput(label, type);
   } else {
-    block.addInput(label, tooltip, type, index);
+    block.addInput(label, type, index);
   }
 }
 
@@ -292,8 +292,9 @@ h1 {
     </tr>
     <tr>
       <td>New input:</td>
-      <td><select id="inputType"><option value=1>Value</option><option value=3>Statement</option><option value=5>Variable</option></select> called <input type="text" id="inputLabel"> at <input id="inputIndex" type="number" min="0" style="width: 3em"><br>
-      with tooltip <input id="inputTooltip" type="text"> <input type="button" onclick="addInput()" value="Add"></td>
+      <td><select id="inputType"><option value=1>Value</option><option value=3>Statement</option><option value=5>Variable</option></select> called <input type="text" id="inputLabel">
+      at <input id="inputIndex" type="number" min="0" style="width: 3em">
+      <input type="button" onclick="addInput()" value="Add"></td>
     </tr>
     <tr>
       <td>Remove input:</td>

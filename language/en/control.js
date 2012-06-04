@@ -34,8 +34,8 @@ Blockly.Language.controls_if = {
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/If_Then',
   init: function() {
     this.setColour(120);
-    this.addInput(this.MSG_IF, '', Blockly.INPUT_VALUE);
-    this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
+    this.addInput(this.MSG_IF, Blockly.INPUT_VALUE);
+    this.addInput(this.MSG_THEN, Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(this,
@@ -78,11 +78,11 @@ Blockly.Language.controls_if = {
     this.elseifCount_ = window.parseInt(container.getAttribute('elseif'), 10);
     this.elseCount_ = window.parseInt(container.getAttribute('else'), 10);
     for (var x = 0; x < this.elseifCount_; x++) {
-      this.addInput(this.MSG_ELSEIF, '', Blockly.INPUT_VALUE);
-      this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
+      this.addInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE);
+      this.addInput(this.MSG_THEN, Blockly.NEXT_STATEMENT);
     }
     if (this.elseCount_) {
-      this.addInput(this.MSG_ELSE, '', Blockly.NEXT_STATEMENT);
+      this.addInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT);
     }
   },
   decompose: function(workspace) {
@@ -129,8 +129,8 @@ Blockly.Language.controls_if = {
       switch (clauseBlock.type) {
         case 'controls_if_elseif':
           this.elseifCount_++;
-          this.addInput(this.MSG_ELSEIF, '', Blockly.INPUT_VALUE);
-          this.addInput(this.MSG_THEN, '', Blockly.NEXT_STATEMENT);
+          this.addInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE);
+          this.addInput(this.MSG_THEN, Blockly.NEXT_STATEMENT);
           // Reconnect any child blocks.
           if (clauseBlock.valueInput_) {
             this.inputList[x].connect(clauseBlock.valueInput_);
@@ -143,7 +143,7 @@ Blockly.Language.controls_if = {
           break;
         case 'controls_if_else':
           this.elseCount_++;
-          this.addInput(this.MSG_ELSE, '', Blockly.NEXT_STATEMENT);
+          this.addInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT);
           // Reconnect any child blocks.
           if (clauseBlock.statementInput_) {
             this.inputList[x].connect(clauseBlock.statementInput_);
@@ -164,7 +164,7 @@ Blockly.Language.controls_if_if = {
   init: function() {
     this.setColour(120);
     this.addTitle('if');
-    this.addInput('', '', Blockly.NEXT_STATEMENT);
+    this.addInput('', Blockly.NEXT_STATEMENT);
     this.setTooltip('Add, remove, or reorder sections\n' +
                     'to reconfigure this if block.');
     this.contextMenu = false;
@@ -206,8 +206,8 @@ Blockly.Language.controls_whileUntil = {
               Blockly.Language.controls_whileUntil.MSG_UNTIL];
     });
     this.addTitle(dropdown);
-    this.addInput('', '', Blockly.INPUT_VALUE);
-    this.addInput('do', '', Blockly.NEXT_STATEMENT);
+    this.addInput('', Blockly.INPUT_VALUE);
+    this.addInput('do', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -234,9 +234,9 @@ Blockly.Language.controls_for = {
     this.setColour(120);
     this.addTitle('count');
     this.addInput('with', '', Blockly.LOCAL_VARIABLE).setText('x');
-    this.addInput('from', '', Blockly.INPUT_VALUE);
-    this.addInput('to', '', Blockly.INPUT_VALUE);
-    this.addInput('do', '', Blockly.NEXT_STATEMENT);
+    this.addInput('from', Blockly.INPUT_VALUE);
+    this.addInput('to', Blockly.INPUT_VALUE);
+    this.addInput('do', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
@@ -264,8 +264,8 @@ Blockly.Language.controls_forEach = {
     this.setColour(120);
     this.addTitle('for each');
     this.addInput('item', '', Blockly.LOCAL_VARIABLE).setText('x');
-    this.addInput('in list', '', Blockly.INPUT_VALUE);
-    this.addInput('do', '', Blockly.NEXT_STATEMENT);
+    this.addInput('in list', Blockly.INPUT_VALUE);
+    this.addInput('do', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
