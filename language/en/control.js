@@ -233,7 +233,7 @@ Blockly.Language.controls_for = {
   init: function() {
     this.setColour(120);
     this.addTitle('count');
-    this.addInput('with', '', Blockly.LOCAL_VARIABLE).setText('x');
+    this.addInput('with', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('from', Blockly.INPUT_VALUE);
     this.addInput('to', Blockly.INPUT_VALUE);
     this.addInput('do', Blockly.NEXT_STATEMENT);
@@ -263,7 +263,7 @@ Blockly.Language.controls_forEach = {
   init: function() {
     this.setColour(120);
     this.addTitle('for each');
-    this.addInput('item', '', Blockly.LOCAL_VARIABLE).setText('x');
+    this.addInput('item', Blockly.LOCAL_VARIABLE).setText('x');
     this.addInput('in list', Blockly.INPUT_VALUE);
     this.addInput('do', Blockly.NEXT_STATEMENT);
     this.setPreviousStatement(true);
