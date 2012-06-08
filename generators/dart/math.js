@@ -37,7 +37,7 @@ Blockly.Dart.math_arithmetic = function(opt_dropParens) {
   var argument1 = Blockly.Dart.valueToCode(this, 'B') || '0';
   var code;
 
-  if (this.getValueLabel(1) == this.MSG_POW) {
+  if (this.getInputLabel('B') == this.MSG_POW) {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
   } else {
     var map = {};
@@ -45,7 +45,7 @@ Blockly.Dart.math_arithmetic = function(opt_dropParens) {
     map[this.MSG_MINUS] = '-';
     map[this.MSG_MULTIPLY] = '*';
     map[this.MSG_DIVIDE] = '/';
-    var operator = map[this.getValueLabel(1)];
+    var operator = map[this.getInputLabel('B')];
     code = argument0 + ' ' + operator + ' ' + argument1;
     if (!opt_dropParens) {
       code = '(' + code + ')';
@@ -73,7 +73,7 @@ Blockly.Dart.math_single = function(opt_dropParens) {
     // Need to wrap non-trivial numbers in parentheses: (-4).abs()
     argDartSafe = '(' + argDartSafe + ')';
   }
-  var operator = this.getValueLabel(0);
+  var operator = this.getInputLabel('NUM');
   var code;
   // First, handle cases which generate values that don't need parentheses.
   switch (operator) {

@@ -67,7 +67,7 @@ Blockly.Language.math_arithmetic = {
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
     this.setInputsInline(true);
     this.setTooltip(function() {
-      switch (thisBlock.getValueLabel(1)) {
+      switch (thisBlock.getInputLabel('B')) {
         case thisBlock.MSG_ADD:
           return 'Return the sum of the two numbers.';
         case thisBlock.MSG_MINUS:
@@ -139,7 +139,7 @@ Blockly.Language.math_single = {
     });
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip(function() {
-      switch (thisBlock.getValueLabel(0)) {
+      switch (thisBlock.getInputLabel('NUM')) {
         case thisBlock.MSG_ROOT:
           return 'Return the square root of a number.';
         case thisBlock.MSG_ABS:
@@ -209,7 +209,7 @@ Blockly.Language.math_trig = {
     });
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip(function() {
-      switch (thisBlock.getValueLabel(0)) {
+      switch (thisBlock.getInputLabel('NUM')) {
         case thisBlock.MSG_SIN:
           return 'Return the sine of a degree.';
         case thisBlock.MSG_COS:

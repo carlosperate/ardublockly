@@ -1146,7 +1146,7 @@ Blockly.Block.prototype.setInputVariable = function(name, text) {
 Blockly.Block.prototype.getInputLabel = function(name) {
   var input = this.getInput(name);
   if (input) {
-    var label = this.input.label;
+    var label = input.label;
     if (label) {
       if (label.getText) {
         // Editable field.

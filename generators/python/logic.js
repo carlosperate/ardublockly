@@ -29,7 +29,7 @@ Blockly.Python = Blockly.Generator.get('Python');
 Blockly.Python.logic_compare = function(opt_dropParens) {
   // Comparison operator.
   var operator;
-  switch (this.getValueLabel(1)) {
+  switch (this.getInputLabel('B')) {
     case this.MSG_EQ:
       operator = '==';
       break;
@@ -65,7 +65,7 @@ Blockly.Python.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.Python.valueToCode(this, 'A') || 'False';
   var argument1 = Blockly.Python.valueToCode(this, 'B') || 'False';
-  var operator = (this.getValueLabel(1) == this.MSG_AND) ? 'and' : 'or';
+  var operator = (this.getInputLabel('B') == this.MSG_AND) ? 'and' : 'or';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';

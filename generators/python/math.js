@@ -41,7 +41,7 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
   map[this.MSG_MULTIPLY] = '*';
   map[this.MSG_DIVIDE] = '/';
   map[this.MSG_POW] = '**';
-  var operator = map[this.getValueLabel(1)];
+  var operator = map[this.getInputLabel('B')];
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -63,7 +63,7 @@ Blockly.Python.math_single = function(opt_dropParens) {
   Blockly.Python.definitions_['import_math'] = 'import math';
   var argNaked = Blockly.Python.valueToCode(this, 'NUM', true) || '0';
   var argParen = Blockly.Python.valueToCode(this, 'NUM', false) || '0';
-  var operator = this.getValueLabel(0);
+  var operator = this.getInputLabel('NUM');
   var code;
   // First, handle cases which generate values that don't need parentheses wrapping the code.
   switch (operator) {

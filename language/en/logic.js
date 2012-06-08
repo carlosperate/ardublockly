@@ -49,7 +49,7 @@ Blockly.Language.logic_compare = {
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
     this.setInputsInline(true);
     this.setTooltip(function() {
-      switch (thisBlock.getValueLabel(1)) {
+      switch (thisBlock.getInputLabel('B')) {
         case thisBlock.MSG_EQ:
           return 'Return true if both inputs equal each other.';
         case thisBlock.MSG_NEQ:
@@ -90,7 +90,7 @@ Blockly.Language.logic_operation = {
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
     this.setInputsInline(true);
     this.setTooltip(function() {
-      switch (thisBlock.getValueLabel(1)) {
+      switch (thisBlock.getInputLabel('B')) {
         case thisBlock.MSG_AND:
           return 'Return true if both inputs are true.';
         case thisBlock.MSG_OR:
