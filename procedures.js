@@ -56,6 +56,7 @@ Blockly.Procedures.allProcedures = function() {
 
 /**
  * Ensure two identically-named procedures don't exist.
+ * @param {string} name Proposed procedure name.
  * @param {!Blockly.Block} block Block to disambiguate.
  * @return {string} Non-colliding name.
  */
@@ -193,5 +194,5 @@ Blockly.Procedures.destroyCallers = function(name, workspace) {
         blocks[x].destroy(true);
       }
     }
-  }  
+  }
 };

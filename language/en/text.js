@@ -265,7 +265,7 @@ Blockly.Language.text_trim = {
   },
   domToMutation: function(container) {
     // Restore the third title as plural or singular.
-    var plural = (container.getAttribute('plural') == 'true')
+    var plural = (container.getAttribute('plural') == 'true');
     this.setTitleText(plural ? 'sides' : 'side', 2);
   },
   MSG_BOTH: 'both',

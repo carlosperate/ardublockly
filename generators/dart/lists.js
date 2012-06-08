@@ -26,7 +26,7 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
-Blockly.Dart.lists_create_empty = function(){
+Blockly.Dart.lists_create_empty = function() {
   // Create an empty list.
   return '[]';
 };

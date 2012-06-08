@@ -171,7 +171,7 @@ Blockly.Workspace.prototype.getBlockById = function(id) {
 
 /**
  * Turn the visual trace functionality on or off.
- * @param {boolean} active True if the trace should be on.
+ * @param {boolean} armed True if the trace should be on.
  */
 Blockly.Workspace.prototype.traceOn = function(armed) {
   this.traceOn_ = armed;

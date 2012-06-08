@@ -69,6 +69,7 @@ Maze.pidList = [];
 
 /**
  * Initialize Blockly and the maze.  Called on page load.
+ * @param {!Blockly} blockly Instance of Blockly from iframe.
  */
 Maze.init = function(blockly) {
   window.Blockly = blockly;
@@ -222,7 +223,7 @@ Maze.animate = function() {
   } else if (action == 'finish') {
     Maze.scheduleFinish();
   }
-  
+
   Maze.pidList.push(window.setTimeout(Maze.animate, Maze.STEP_SPEED * 5));
 };
 
@@ -369,7 +370,8 @@ Maze.checkTimeout = function() {
  */
 Maze.showCode = function() {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
-  code += '\n\n[The serial numbers are just used to highlight blocks when run.]';
+  code += '\n\n' +
+          '[The serial numbers are just used to highlight blocks when run.]';
   alert(code);
 };
 
@@ -381,8 +383,8 @@ Maze.showCode = function() {
  * @param {string} id ID of block that triggered this action.
  */
 Maze.move = function(direction, id) {
-  if (Maze.isWall(direction ? 3: 0)) {
-    Maze.path.push(['fail_' + (direction ? 'backwards': 'forwards'), id]);
+  if (Maze.isWall(direction ? 3 : 0)) {
+    Maze.path.push(['fail_' + (direction ? 'backwards' : 'forwards'), id]);
     return;
   }
   var effectiveDirection = Maze.pegmanD;
@@ -442,9 +444,9 @@ Maze.isWall = function(direction) {
   Maze.path.push(['look', null]);
   var effectiveDirection = Maze.pegmanD;
   if (direction == 1) {  // Left
-    effectiveDirection--; 
+    effectiveDirection--;
   } else if (direction == 2) { // Right
-    effectiveDirection++; 
+    effectiveDirection++;
   } else if (direction == 3) { // Behind
     effectiveDirection += 2;
   }

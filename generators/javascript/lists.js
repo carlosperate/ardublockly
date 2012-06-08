@@ -26,7 +26,7 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.lists_create_empty = function(){
+Blockly.JavaScript.lists_create_empty = function() {
   // Create an empty list.
   return '[]';
 };

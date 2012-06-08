@@ -52,7 +52,7 @@ Blockly.Python.controls_whileUntil = function() {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }
-    argument0 = 'not ' + argument0 ;
+    argument0 = 'not ' + argument0;
   }
   return 'while ' + argument0 + ':\n' + branch0 + '\n';
 };
@@ -73,7 +73,7 @@ Blockly.Python.controls_for = function() {
     argument1 += ' + 1';
   }
   var branch0 = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
-  var code = 'for ' + variable0 + ' in range(' + argument0  + 
+  var code = 'for ' + variable0 + ' in range(' + argument0 +
       argument1 + '):\n' + branch0 + '\n';
   return code;
 };
@@ -83,7 +83,7 @@ Blockly.Python.controls_forEach = function() {
   var variable0 = Blockly.Python.variableDB_.getName(
       this.getInputVariable('VAR'), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Python.valueToCode(this, 'LIST', true) || '[]';
-  var branch0 = Blockly.Python.statementToCode(this, 'DO')  || '  pass\n';
+  var branch0 = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
   var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch0 + '\n';
   return code;
 };

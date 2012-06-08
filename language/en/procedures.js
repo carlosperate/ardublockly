@@ -106,7 +106,7 @@ Blockly.Language.procedures_callnoreturn = {
   },
   domToMutation: function(container) {
     // Restore the name.
-    var name = container.getAttribute('name')
+    var name = container.getAttribute('name');
     this.setTitleText(name, 1);
   }
 };

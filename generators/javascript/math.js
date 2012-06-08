@@ -36,7 +36,7 @@ Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   var argument0 = Blockly.JavaScript.valueToCode(this, 'A') || '0';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || '0';
   var code;
-  
+
   if (this.getValueLabel(1) == this.MSG_POW) {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
   } else {
@@ -59,7 +59,7 @@ Blockly.JavaScript.math_change = function() {
   var argument0 = Blockly.JavaScript.valueToCode(this, 'DELTA') || '0';
   var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
       Blockly.Variables.NAME_TYPE);
-  return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName + 
+  return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName +
       ' : 0) + ' + argument0 + ';\n';
 };
 
@@ -164,7 +164,7 @@ Blockly.JavaScript.math_on_list = function() {
             'math_median', Blockly.Generator.NAME_TYPE);
         Blockly.JavaScript.math_on_list.math_median = functionName;
         // Median is not a native JavaScript function.  Define one.
-        // May need to handle null. 
+        // May need to handle null.
         // Currently math_median([null,null,1,3]) == 0.5.
         var func = [];
         func.push('function ' + functionName + '(myList) {');

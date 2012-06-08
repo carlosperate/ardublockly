@@ -36,7 +36,7 @@ Blockly.Dart.math_arithmetic = function(opt_dropParens) {
   var argument0 = Blockly.Dart.valueToCode(this, 'A') || '0';
   var argument1 = Blockly.Dart.valueToCode(this, 'B') || '0';
   var code;
-  
+
   if (this.getValueLabel(1) == this.MSG_POW) {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
   } else {
@@ -59,7 +59,7 @@ Blockly.Dart.math_change = function() {
   var argument0 = Blockly.Dart.valueToCode(this, 'DELTA') || '0';
   var varName = Blockly.Dart.variableDB_.getName(this.getTitleText(1),
 			Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' + 
+  return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' +
       argument0 + ';\n';
 };
 
@@ -67,8 +67,8 @@ Blockly.Dart.math_single = function(opt_dropParens) {
   // Math operators with single operand.
   var argNaked = Blockly.Dart.valueToCode(this, 'NUM', true) || '0';
   var argParen = Blockly.Dart.valueToCode(this, 'NUM', false) || '0';
-	var argDartSafe = argNaked;
-	if (!argDartSafe.match(/^[\w\.]+$/)) {
+  var argDartSafe = argNaked;
+  if (!argDartSafe.match(/^[\w\.]+$/)) {
     // -4.abs() returns -4 in Dart due to strange order of operation choices.
     // Need to wrap non-trivial numbers in parentheses: (-4).abs()
     argDartSafe = '(' + argDartSafe + ')';
@@ -92,7 +92,7 @@ Blockly.Dart.math_single = function(opt_dropParens) {
     case this.MSG_10POW:
       code = 'Math.pow(10,' + argNaked + ')';
     case this.MSG_ROUND:
-			// Dart-safe parens not needed since -4.2.round() == (-4.2).round() 
+      // Dart-safe parens not needed since -4.2.round() == (-4.2).round()
       code = argParen + '.round()';
       break;
     case this.MSG_ROUNDUP:
@@ -332,9 +332,9 @@ Blockly.Dart.math_random_int = function() {
   // Random integer between [X] and [Y].
   var argument0 = Blockly.Dart.valueToCode(this, 'FROM') || '0';
   var argument1 = Blockly.Dart.valueToCode(this, 'TO') || '0';
-  var rand1 = '(Math.random() * (' + argument1 + ' - ' + argument0 + ' + 1' + 
+  var rand1 = '(Math.random() * (' + argument1 + ' - ' + argument0 + ' + 1' +
       ') + ' + argument0 + ').floor()';
-  var rand2 = '(Math.random() * (' + argument0 + ' - ' + argument1 + ' + 1' + 
+  var rand2 = '(Math.random() * (' + argument0 + ' - ' + argument1 + ' + 1' +
       ') + ' + argument1 + ').floor()';
   var code;
   if (argument0.match(/^[\d\.]+$/) && argument1.match(/^[\d\.]+$/)) {

@@ -72,6 +72,7 @@ Blockly.Block = function(workspace, prototypeName) {
 /**
  * Pointer to SVG representation of the block.
  * @type {Blockly.BlockSvg}
+ * @private
  */
 Blockly.Block.prototype.svg_ = null;
 
@@ -1139,7 +1140,7 @@ Blockly.Block.prototype.setInputVariable = function(name, text) {
 
 /**
  * Fetches the text of the label attached to the named input.
- * @param {number} n The index (starting at 0).
+ * @param {string} name The name of the input.
  * @return {string} The label's text, or null if the input does not exist.
  */
 Blockly.Block.prototype.getInputLabel = function(name) {

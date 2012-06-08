@@ -54,7 +54,7 @@ Blockly.Python.math_change = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'DELTA') || '0';
   var varName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
       Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' if type(' + varName + ') in (int, float) else 0)' + 
+  return varName + ' = (' + varName + ' if type(' + varName + ') in (int, float) else 0)' +
       ' + ' + argument0 + '\n';
 };
 
@@ -256,7 +256,7 @@ Blockly.Python.math_random_int = function() {
   Blockly.Python.definitions_['import_random'] = 'import random';
   var argument0 = Blockly.Python.valueToCode(this, 'FROM') || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'TO') || '0';
-  code = 'random.randint('+ argument0 + ', ' + argument1 + ')';
+  code = 'random.randint(' + argument0 + ', ' + argument1 + ')';
   return code;
 };
 

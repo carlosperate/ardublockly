@@ -36,7 +36,8 @@ Blockly.Dart.procedures_defreturn = function() {
     returnValue = '  return ' + returnValue + ';\n';
   }
   var returnType = returnValue ? 'dynamic' : 'void';
-  var code = returnType + ' ' + funcName + '() {\n' + branch + returnValue + '}\n';
+  var code = returnType + ' ' + funcName + '() {\n' +
+      branch + returnValue + '}\n';
   code = Blockly.Dart.scrub_(this, code);
   Blockly.Dart.definitions_[funcName] = code;
   return null;
@@ -44,13 +45,11 @@ Blockly.Dart.procedures_defreturn = function() {
 
 // Defining a procedure without a return value uses the same generator as
 // a procedure with a return value.
-Blockly.Dart.procedures_defnoreturn =
-    Blockly.Dart.procedures_defreturn;
+Blockly.Dart.procedures_defnoreturn = Blockly.Dart.procedures_defreturn;
 
 // Defining a procedure without a return value uses the same generator as
 // a procedure with a return value.
-Blockly.Dart.procedures_defnoreturn =
-    Blockly.Dart.procedures_defreturn;
+Blockly.Dart.procedures_defnoreturn = Blockly.Dart.procedures_defreturn;
 
 Blockly.Dart.procedures_callreturn = function() {
   // Call a procedure with a return value.

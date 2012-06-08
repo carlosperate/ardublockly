@@ -26,7 +26,7 @@
 
 Blockly.Python = Blockly.Generator.get('Python');
 
-Blockly.Python.lists_create_empty = function(){
+Blockly.Python.lists_create_empty = function() {
   // Create an empty list.
   return '[]';
 };
@@ -79,7 +79,7 @@ Blockly.Python.lists_setIndex = function() {
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
-    // Except we don't allow negative index like in Python. 
+    // Except we don't allow negative index like in Python.
     argument0 = Math.max(0, parseInt(argument0, 10) - 1);
   } else {
     // If the index is dynamic, decrement it in code.
