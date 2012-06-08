@@ -54,7 +54,7 @@ Blockly.Language.math_arithmetic = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    this.addInput('', Blockly.INPUT_VALUE);
+    this.appendInput('', Blockly.INPUT_VALUE, 'A');
     var dropdown = new Blockly.FieldDropdown(function() {
       return [
           thisBlock.MSG_ADD,
@@ -64,7 +64,7 @@ Blockly.Language.math_arithmetic = {
           thisBlock.MSG_POW
         ];
     });
-    this.addInput(dropdown, Blockly.INPUT_VALUE);
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
     this.setInputsInline(true);
     this.setTooltip(function() {
       switch (thisBlock.getValueLabel(1)) {
@@ -99,7 +99,7 @@ Blockly.Language.math_change = {
     this.addTitle(new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange))
         .setText('item');
-    this.addInput('by', Blockly.INPUT_VALUE);
+    this.appendInput('by', Blockly.INPUT_VALUE, 'DELTA');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -137,7 +137,7 @@ Blockly.Language.math_single = {
               thisBlock.MSG_EXP,
               thisBlock.MSG_10POW];
     });
-    this.addInput(dropdown, Blockly.INPUT_VALUE);
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip(function() {
       switch (thisBlock.getValueLabel(0)) {
         case thisBlock.MSG_ROOT:
@@ -181,7 +181,7 @@ Blockly.Language.math_round = {
               thisBlock.MSG_ROUNDUP,
               thisBlock.MSG_ROUNDDOWN];
     });
-    this.addInput(dropdown, Blockly.INPUT_VALUE);
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip('Round a number up or down.');
   },
   MSG_ROUND: 'round',
@@ -207,7 +207,7 @@ Blockly.Language.math_trig = {
               thisBlock.MSG_ACOS,
               thisBlock.MSG_ATAN];
     });
-    this.addInput(dropdown, Blockly.INPUT_VALUE);
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip(function() {
       switch (thisBlock.getValueLabel(0)) {
         case thisBlock.MSG_SIN:
@@ -256,7 +256,7 @@ Blockly.Language.math_on_list = {
               ];
     });
     this.addTitle(dropdown);
-    this.addInput('of list', Blockly.INPUT_VALUE);
+    this.appendInput('of list', Blockly.INPUT_VALUE, 'LIST');
     this.setTooltip('Evaluate a list of numbers and return a member,\nor an aggregated result.');
   },
   MSG_SUM: 'sum',
@@ -276,9 +276,9 @@ Blockly.Language.math_constrain = {
   init: function() {
     this.setColour(230);
     this.setOutput(true);
-    this.addInput('constrain', Blockly.INPUT_VALUE);
-    this.addInput('between (low)', Blockly.INPUT_VALUE);
-    this.addInput('and (high)', Blockly.INPUT_VALUE);
+    this.appendInput('constrain', Blockly.INPUT_VALUE, 'VALUE');
+    this.appendInput('between (low)', Blockly.INPUT_VALUE, 'LOW');
+    this.appendInput('and (high)', Blockly.INPUT_VALUE, 'HIGH');
     this.setInputsInline(true);
     this.setTooltip('Constrain a number to be between the specified limits (inclusive).');
   }
@@ -291,8 +291,8 @@ Blockly.Language.math_modulo = {
   init: function() {
     this.setColour(230);
     this.setOutput(true);
-    this.addInput('remainder of', Blockly.INPUT_VALUE);
-    this.addInput('\u00F7', Blockly.INPUT_VALUE);
+    this.appendInput('remainder of', Blockly.INPUT_VALUE, 'DIVIDEND');
+    this.appendInput('\u00F7', Blockly.INPUT_VALUE, 'DIVISOR');
     this.setInputsInline(true);
     this.setTooltip('Return the remainder of dividing both numbers.');
   }
@@ -306,8 +306,8 @@ Blockly.Language.math_random_int = {
     this.setColour(230);
     this.setOutput(true);
     this.addTitle('random integer');
-    this.addInput('from', Blockly.INPUT_VALUE);
-    this.addInput('to', Blockly.INPUT_VALUE);
+    this.appendInput('from', Blockly.INPUT_VALUE, 'FROM');
+    this.appendInput('to', Blockly.INPUT_VALUE, 'TO');
     // TODO: Ensure that only number blocks may used to set range.
     this.setInputsInline(true);
     this.setTooltip('Return a random integer between the two\n specified limits, inclusive.');

@@ -33,8 +33,8 @@ Blockly.JavaScript.math_number = function() {
 
 Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operators, and power.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 1) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'A') || '0';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || '0';
   var code;
   
   if (this.getValueLabel(1) == this.MSG_POW) {
@@ -56,7 +56,7 @@ Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
 
 Blockly.JavaScript.math_change = function() {
   // Add to a variable in place.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'DELTA') || '0';
   var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName + 
@@ -65,8 +65,8 @@ Blockly.JavaScript.math_change = function() {
 
 Blockly.JavaScript.math_single = function(opt_dropParens) {
   // Math operators with single operand.
-  var argNaked = Blockly.JavaScript.valueToCode(this, 0, true) || '0';
-  var argParen = Blockly.JavaScript.valueToCode(this, 0, false) || '0';
+  var argNaked = Blockly.JavaScript.valueToCode(this, 'NUM', true) || '0';
+  var argParen = Blockly.JavaScript.valueToCode(this, 'NUM', false) || '0';
   var operator = this.getValueLabel(0);
   var code;
   // First, handle cases which generate values that don't need parentheses wrapping the code.
@@ -142,7 +142,7 @@ Blockly.JavaScript.math_trig = Blockly.JavaScript.math_single;
 Blockly.JavaScript.math_on_list = function() {
   // Rounding functions.
   func = this.getTitleText(0);
-  list = Blockly.JavaScript.valueToCode(this, 0, true) || '[]';
+  list = Blockly.JavaScript.valueToCode(this, 'LIST', true) || '[]';
   var code;
   switch (func) {
     case this.MSG_SUM:
@@ -255,16 +255,16 @@ Blockly.JavaScript.math_on_list = function() {
 
 Blockly.JavaScript.math_constrain = function() {
   // Constrain a number between two limits.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0, true) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 1, true) || '0';
-  var argument2 = Blockly.JavaScript.valueToCode(this, 2, true) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE', true) || '0';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'LOW', true) || '0';
+  var argument2 = Blockly.JavaScript.valueToCode(this, 'HIGH', true) || '0';
   return 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' + argument2 + ')';
 };
 
 Blockly.JavaScript.math_modulo = function(opt_dropParens) {
   // Remainder computation.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 1) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'DIVIDEND') || '0';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'DIVISOR') || '0';
   var code = argument0 + ' % ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -272,13 +272,10 @@ Blockly.JavaScript.math_modulo = function(opt_dropParens) {
   return code;
 };
 
-Blockly.JavaScript.math_random_float = function() {
-  return 'Math.random()';
-};
-
 Blockly.JavaScript.math_random_int = function() {
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 1) || '0';
+  // Random integer between [X] and [Y].
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'FROM') || '0';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'TO') || '0';
   var rand1 = 'Math.floor(Math.random() * (' + argument1 + ' - ' + argument0 + ' + 1' + ') + ' + argument0 + ')';
   var rand2 = 'Math.floor(Math.random() * (' + argument0 + ' - ' + argument1 + ' + 1' + ') + ' + argument1 + ')';
   var code;
@@ -292,4 +289,9 @@ Blockly.JavaScript.math_random_int = function() {
     code = argument0 + ' < ' + argument1 + ' ? ' + rand1 + ' : ' + rand2;
   }
   return code;
+};
+
+Blockly.JavaScript.math_random_float = function() {
+  // Random fraction between 0 and 1.
+  return 'Math.random()';
 };

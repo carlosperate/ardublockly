@@ -30,8 +30,8 @@ Blockly.JavaScript.procedures_defreturn = function() {
   // Define a procedure with a return value.
   var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(0),
       Blockly.Procedures.NAME_TYPE);
-  var branch = Blockly.JavaScript.statementToCode(this, 0);
-  var returnValue = Blockly.JavaScript.valueToCode(this, 0, true) || '';
+  var branch = Blockly.JavaScript.statementToCode(this, 'STACK');
+  var returnValue = Blockly.JavaScript.valueToCode(this, 'RETURN', true) || '';
   if (returnValue) {
     returnValue = '  return ' + returnValue + ';\n';
   }

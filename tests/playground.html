@@ -133,17 +133,13 @@ function setInputsInline() {
 function addInput() {
   var type = parseInt(document.getElementById('inputType').value, 10);
   var label = document.getElementById('inputLabel').value;
-  var index = parseInt(document.getElementById('inputIndex').value, 10);
-  if (isNaN(index)) {
-    block.addInput(label, type);
-  } else {
-    block.addInput(label, type, index);
-  }
+  var name = document.getElementById('inputName').value;
+  block.appendInput(label, type, name);
 }
 
 function removeInput() {
-  var index = parseInt(document.getElementById('removeInputIndex').value, 10);
-  block.removeInput(index);
+  var name = document.getElementById('removeInputName').value;
+  block.removeInput(name);
 }
 
 function toXml() {
@@ -291,14 +287,13 @@ h1 {
       <td><input type="checkbox" id="inputsInline" onchange="setInputsInline()"></td>
     </tr>
     <tr>
-      <td>New input:</td>
-      <td><select id="inputType"><option value=1>Value</option><option value=3>Statement</option><option value=5>Variable</option></select> called <input type="text" id="inputLabel">
-      at <input id="inputIndex" type="number" min="0" style="width: 3em">
+      <td>Append input:</td>
+      <td><select id="inputType"><option value=1>Value</option><option value=3>Statement</option><option value=5>Variable</option></select> labled <input type="text" size=10 id="inputLabel"> with ID <input type="text" size=10 id="inputName">
       <input type="button" onclick="addInput()" value="Add"></td>
     </tr>
     <tr>
       <td>Remove input:</td>
-      <td>At <input id="removeInputIndex" type="number" min="0" style="width: 3em">
+      <td>ID <input id="removeInputName">
       <input type="button" onclick="removeInput()" value="Remove"></td>
     </tr>
   </tbody>

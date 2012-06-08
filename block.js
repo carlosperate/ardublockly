@@ -1006,12 +1006,11 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  *     (e.g. 'x' or 'do').  May be an editable field.
  * @param {number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
  *     Blockly.LOCAL_VARIABLE.
- * @param {number} opt_index If present, this is the index (zero-based) where
- *     the new input will be in the input stack.  If not present, the new input
- *     will be at the bottom of the stack.
+ * @param {string} name Language-neutral identifier which may used to find this
+ *     input again.  Should be unique to this block.
  * @return {!Object} The input object created.
  */
-Blockly.Block.prototype.addInput = function(label, type, opt_index) {
+Blockly.Block.prototype.appendInput = function(label, type, name) {
   // Create descriptive text element.
   var textElement = null;
   if (label) {
@@ -1040,6 +1039,7 @@ Blockly.Block.prototype.addInput = function(label, type, opt_index) {
     input = new Blockly.Connection(this, type);
   }
   input.label = textElement;
+  input.name = name;
   if (typeof opt_index == 'number') {
     if (opt_index < 0 || opt_index > this.inputList.length) {
       throw 'There are ' + this.inputList.length +
@@ -1059,45 +1059,44 @@ Blockly.Block.prototype.addInput = function(label, type, opt_index) {
 
 /**
  * Remove an input from this block.
- * @param {number} index Zero-based index of input to delete.
+ * @param {string} name Language-neutral identifier.
  */
-Blockly.Block.prototype.removeInput = function(index) {
-  var input = this.inputList[index];
-  if (!input) {
-    throw 'There are ' + this.inputList.length +
-          ' input(s), unable to delete at index ' + index + '.';
+Blockly.Block.prototype.removeInput = function(name) {
+  for (var x = 0; x < this.inputList.length; x++) {
+    var input = this.inputList[x];
+    if (input.name == name) {
+      if (input.targetConnection) {
+        // Disconnect any attached block.
+        input.targetBlock().setParent(null);
+      }
+      var field = input.label;
+      if (field) {
+        field.destroy();
+      }
+      if (input.destroy) {
+        input.destroy();
+      }
+      this.inputList.splice(x, 1);
+      if (this.rendered) {
+        this.render();
+        // Removing an input will cause the block to change shape.
+        this.bumpNeighbours_();
+      }
+      return;
+    }
   }
-  if (input.targetConnection) {
-    throw 'Must disconnect input value before removing connection.';
-  }
-  var field = input.label;
-  if (field) {
-    field.destroy();
-  }
-  if (input.destroy) {
-    input.destroy();
-  }
-  this.inputList.splice(index, 1);
-  if (this.rendered) {
-    this.render();
-    // Removing an input will cause the block to change shape.
-    this.bumpNeighbours_();
-  }
+  throw 'Input "' + name + '" not found.';
 };
 
 /**
- * Fetches the block attached to the nth value input.
- * @param {number} n The index (starting at 0).
- * @return {Blockly.Block} The attached value block, or null if the input is
- *     either disconnected or if the input does not exist.
+ * Fetches the named input object.
+ * @param {string} name The name of the input.
+ * @return {Object} The input object, or null of the input does not exist.
  */
-Blockly.Block.prototype.getValueInput = function(n) {
+Blockly.Block.prototype.getInput = function(name) {
   for (var x = 0; x < this.inputList.length; x++) {
-    if (this.inputList[x].type == Blockly.INPUT_VALUE) {
-      if (n == 0) {
-        return this.inputList[x].targetBlock();
-      }
-      n--;
+    if (this.inputList[x].name == name) {
+      return this.inputList[x];
     }
   }
   // This input does not exist.
@@ -1105,114 +1104,59 @@ Blockly.Block.prototype.getValueInput = function(n) {
 };
 
 /**
- * Fetches the block attached to the nth statement input.
- * @param {number} n The index (starting at 0).
+ * Fetches the block attached to the named input.
+ * @param {string} name The name of the input.
  * @return {Blockly.Block} The attached value block, or null if the input is
  *     either disconnected or if the input does not exist.
  */
-Blockly.Block.prototype.getStatementInput = function(n) {
-  for (var x = 0; x < this.inputList.length; x++) {
-    if (this.inputList[x].type == Blockly.NEXT_STATEMENT) {
-      if (n == 0) {
-        return this.inputList[x].targetBlock();
-      }
-      n--;
-    }
-  }
-  // This input does not exist.
-  return null;
+Blockly.Block.prototype.getInputTargetBlock = function(name) {
+  var input = this.getInput(name);
+  return input && input.targetBlock();
 };
 
 /**
- * Fetches the variable name attached to the nth variable input.
- * @param {number} n The index (starting at 0).
+ * Gets the variable name attached to the named variable input.
+ * @param {string} name The name of the input.
  * @return {string} The variable name, or null if the input does not exist.
  */
-Blockly.Block.prototype.getVariableInput = function(n) {
-  for (var x = 0; x < this.inputList.length; x++) {
-    if (this.inputList[x].type == Blockly.LOCAL_VARIABLE) {
-      if (n == 0) {
-        return this.inputList[x].getText();
-      }
-      n--;
-    }
+Blockly.Block.prototype.getInputVariable = function(name) {
+  var input = this.getInput(name);
+  return input && input.getText();
+};
+
+/**
+ * Sets the variable name attached to the named variable input.
+ * @param {string} name The name of the input.
+ * @param {string} text The new variable name.
+ */
+Blockly.Block.prototype.setInputVariable = function(name, text) {
+  var input = this.getInput(name);
+  if (!input) {
+    throw 'Input does not exist.';
   }
-  // This input does not exist.
-  return null;
+  input.setText(text);
 };
 
 /**
- * Sets the variable name attached to the nth variable input.
+ * Fetches the text of the label attached to the named input.
  * @param {number} n The index (starting at 0).
- * @param {string} name The new variable name.
+ * @return {string} The label's text, or null if the input does not exist.
  */
-Blockly.Block.prototype.setVariableInput = function(n, name) {
-  for (var x = 0; x < this.inputList.length; x++) {
-    if (this.inputList[x].type == Blockly.LOCAL_VARIABLE) {
-      if (n == 0) {
-        this.inputList[x].setText(name);
-        return;
+Blockly.Block.prototype.getInputLabel = function(name) {
+  var input = this.getInput(name);
+  if (input) {
+    var label = this.input.label;
+    if (label) {
+      if (label.getText) {
+        // Editable field.
+        return label.getText();
+      } else {
+        // Static text.
+        return label.textContent;
       }
-      n--;
-    }
-  }
-  throw 'Input does not exist.';
-};
-
-/**
- * Fetches the text of the label attached to the nth value input.
- * @param {number} n The index (starting at 0).
- * @return {string} The label's text, or null if the input does not exist.
- */
-Blockly.Block.prototype.getValueLabel = function(n) {
-  return this.getLabel_(n, Blockly.INPUT_VALUE);
-};
-
-/**
- * Fetches the text of the label attached to the nth statement input.
- * @param {number} n The index (starting at 0).
- * @return {string} The label's text, or null if the input does not exist.
- */
-Blockly.Block.prototype.getStatementLabel = function(n) {
-  return this.getLabel_(n, Blockly.NEXT_STATEMENT);
-};
-
-/**
- * Fetches the text of the label attached to the nth variable input.
- * @param {number} n The index (starting at 0).
- * @return {string} The label's text, or null if the input does not exist.
- */
-Blockly.Block.prototype.getNameLabel = function(n) {
-  return this.getLabel_(n, Blockly.LOCAL_VARIABLE);
-};
-
-/**
- * Fetches the text of the label attached to the nth input of the specified
- *     type (INPUT_VALUE, NEXT_STATEMENT, LOCAL_VARIABLE).
- * @param {number} n The index (starting at 0).
- * @param {number} type The type of the connection.
- * @return {string} The label's text, or null if the input does not exist.
- * @private
- */
-Blockly.Block.prototype.getLabel_ = function(n, type) {
-  for (var x = 0; x < this.inputList.length; x++) {
-    if (this.inputList[x].type == type) {
-      if (n == 0) {
-        var label = this.inputList[x].label;
-        if (label) {
-          if (label.getText) {
-            // Editable field.
-            return label.getText();
-          } else {
-            // Static text.
-            return label.textContent;
-          }
-        } else {
-          // Input exists, but label doesn't.
-          return '';
-        }
-      }
-      n--;
+    } else {
+      // Input exists, but label doesn't.
+      return '';
     }
   }
   // This input does not exist.

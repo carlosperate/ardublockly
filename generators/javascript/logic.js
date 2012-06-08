@@ -52,8 +52,8 @@ Blockly.JavaScript.logic_compare = function(opt_dropParens) {
       throw 'Unknown operator.';
   }
 
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 1) || '0';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'A') || '0';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || '0';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -63,8 +63,8 @@ Blockly.JavaScript.logic_compare = function(opt_dropParens) {
 
 Blockly.JavaScript.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0) || 'false';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 1) || 'false';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'A') || 'false';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || 'false';
   var operator = (this.getValueLabel(1) == this.MSG_AND) ? '&&' : '||';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
@@ -75,7 +75,7 @@ Blockly.JavaScript.logic_operation = function(opt_dropParens) {
 
 Blockly.JavaScript.logic_negate = function(opt_dropParens) {
   // Negation.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 0) || 'false';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL') || 'false';
   var code = '!' + argument0;
   if (!opt_dropParens) {
     code = '(' + code + ')';

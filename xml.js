@@ -82,34 +82,28 @@ Blockly.Xml.blockToDom_ = function(block) {
     element.appendChild(commentElement);
   }
 
-  var variableCount = 0;
-  var valueCount = 0;
-  var statementCount = 0;
+  var hasValues = false;
   for (var i = 0, input; input = block.inputList[i]; i++) {
     var container;
     var empty = true;
     if (input.type == Blockly.LOCAL_VARIABLE) {
       container = document.createElement('variable');
-      container.setAttribute('name', input.getText());
-      container.setAttribute('i', variableCount);
-      variableCount++;
+      container.setAttribute('data', input.getText());
       empty = false;
     } else {
       var childBlock = input.targetBlock();
       if (input.type == Blockly.INPUT_VALUE) {
         container = document.createElement('value');
-        container.setAttribute('i', valueCount);
-        valueCount++;
+        hasValues = true;
       } else if (input.type == Blockly.NEXT_STATEMENT) {
         container = document.createElement('statement');
-        container.setAttribute('i', statementCount);
-        statementCount++;
       }
       if (childBlock) {
         container.appendChild(Blockly.Xml.blockToDom_(childBlock));
         empty = false;
       }
     }
+    container.setAttribute('name', input.name);
     if (input.label && input.label.EDITABLE && input.label.getText) {
       container.setAttribute('label', input.label.getText());
       empty = false;
@@ -118,7 +112,7 @@ Blockly.Xml.blockToDom_ = function(block) {
       element.appendChild(container);
     }
   }
-  if (valueCount) {
+  if (hasValues) {
     element.setAttribute('inline', block.inputsInline);
   }
   if (block.collapsed) {
@@ -238,25 +232,6 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
     block.setCollapsed(collapsed == 'true');
   }
 
-  /**
-   * Returns the next input of a given type.
-   * Closure: uses block from external scope.
-   * @param {number} type The type of input to search for.
-   * @param {number} n The index of this input in its type.
-   * @return {Object} The next input or null if none.
-   */
-  function getInput(type, n) {
-    for (var i = 0; i < block.inputList.length; i++) {
-      if (block.inputList[i].type == type) {
-        if (!n) {
-          return block.inputList[i];
-        }
-        n--;
-      }
-    }
-    return null;
-  }
-
   for (var x = 0, xmlChild; xmlChild = xmlBlock.childNodes[x]; x++) {
     if (xmlChild.nodeType == 3 && xmlChild.data.match(/^\s*$/)) {
       // Extra whitespace between tags does not concern us.
@@ -273,6 +248,7 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
       }
     }
 
+    var name = xmlChild.getAttribute('name');
     switch (xmlChild.tagName.toLowerCase()) {
       case 'mutation':
         // Custom data for an advanced block.
@@ -302,10 +278,9 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         block.setTitleText(xmlChild.textContent, i);
         break;
       case 'variable':
-        var i = parseInt(xmlChild.getAttribute('i'), 10);
-        var data = xmlChild.getAttribute('name');
+        var data = xmlChild.getAttribute('data');
         if (data !== null) {
-          input = getInput(Blockly.LOCAL_VARIABLE, i);
+          input = block.getInput(name);
           if (!input) {
             throw 'Variable input does not exist.';
           }
@@ -313,33 +288,21 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         break;
       case 'value':
-        var i = parseInt(xmlChild.getAttribute('i'), 10);
-        input = getInput(Blockly.INPUT_VALUE, i);
-        if (!input) {
-          throw 'Value input does not exist.';
-        }
-        if (firstRealGrandchild && firstRealGrandchild.tagName &&
-            firstRealGrandchild.tagName.toLowerCase() == 'block') {
-          blockChild = Blockly.Xml.domToBlock_(blockGroup, firstRealGrandchild);
-          if (!blockChild.outputConnection) {
-            throw 'Child block does not have output value.';
-          }
-          input.connect(blockChild.outputConnection);
-        }
-        break;
       case 'statement':
-        var i = parseInt(xmlChild.getAttribute('i'), 10);
-        input = getInput(Blockly.NEXT_STATEMENT, i);
+        input = block.getInput(name);
         if (!input) {
-          throw 'Statement input does not exist.';
+          throw 'Input does not exist.';
         }
         if (firstRealGrandchild && firstRealGrandchild.tagName &&
             firstRealGrandchild.tagName.toLowerCase() == 'block') {
           blockChild = Blockly.Xml.domToBlock_(blockGroup, firstRealGrandchild);
-          if (!blockChild.previousConnection) {
-            throw 'Child block does not have previous statement.';
+          if (blockChild.outputConnection) {
+            input.connect(blockChild.outputConnection);
+          } else if (blockChild.previousConnection) {
+            input.connect(blockChild.previousConnection);
+          } else {
+            throw 'Child block does not have output or previous statement.';
           }
-          input.connect(blockChild.previousConnection);
         }
         break;
       case 'next':

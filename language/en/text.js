@@ -49,8 +49,8 @@ Blockly.Language.text_join = {
   init: function() {
     this.setColour(160);
     this.addTitle('create text with');
-    this.addInput('', Blockly.INPUT_VALUE);
-    this.addInput('', Blockly.INPUT_VALUE);
+    this.appendInput('', Blockly.INPUT_VALUE, 'ADD0');
+    this.appendInput('', Blockly.INPUT_VALUE, 'ADD1');
     this.setOutput(true);
     this.setMutator(new Blockly.Mutator(this, ['text_create_join_item']));
     this.setTooltip('Create a piece of text by joining\ntogether any number of items.');
@@ -62,12 +62,12 @@ Blockly.Language.text_join = {
     return container;
   },
   domToMutation: function(container) {
-    while (this.inputList.length) {
-      this.removeInput(0);
+    for (var x = 0; x < this.itemCount_; x++) {
+      this.removeInput('ADD' + x);
     }
     this.itemCount_ = window.parseInt(container.getAttribute('items'), 10);
     for (var x = 0; x < this.itemCount_; x++) {
-      this.addInput('', Blockly.INPUT_VALUE);
+      this.appendInput('', Blockly.INPUT_VALUE, 'ADD' + x);
     }
   },
   decompose: function(workspace) {
@@ -79,32 +79,26 @@ Blockly.Language.text_join = {
       var itemBlock = new Blockly.Block(workspace, 'text_create_join_item');
       itemBlock.initSvg();
       // Store a pointer to any connected blocks.
-      itemBlock.valueInput_ = this.inputList[x].targetConnection;
+      itemBlock.valueInput_ = this.getInput('ADD' + x).targetConnection;
       connection.connect(itemBlock.previousConnection);
       connection = itemBlock.nextConnection;
     }
     return listBlock;
   },
   compose: function(listBlock) {
-    // Disconnect all input blocks.
-    for (var x = 0; x < this.inputList.length; x++) {
-      var child = this.inputList[x].targetBlock();
-      if (child) {
-        child.setParent(null);
-      }
-    }
-    // Destroy all inputs.
-    while (this.inputList.length) {
-      this.removeInput(0);
+    // Disconnect all input blocks and destroy all inputs.
+    for (var x = 0; x < this.itemCount_; x++) {
+      this.removeInput('ADD' + x);
     }
     this.itemCount_ = 0;
     // Rebuild the block's inputs.
-    var itemBlock = listBlock.getStatementInput(0);
+    var itemBlock = listBlock.getInputTargetBlock('STACK');
     while (itemBlock) {
-      this.addInput('', Blockly.INPUT_VALUE);
+      var input =
+          this.appendInput('', Blockly.INPUT_VALUE, 'ADD' + this.itemCount_);
       // Reconnect any child blocks.
       if (itemBlock.valueInput_) {
-        this.inputList[this.itemCount_].connect(itemBlock.valueInput_);
+        input.connect(itemBlock.valueInput_);
       }
       this.itemCount_++;
       itemBlock = itemBlock.nextConnection &&
@@ -118,7 +112,7 @@ Blockly.Language.text_create_join_container = {
   init: function() {
     this.setColour(160);
     this.addTitle('add');
-    this.addInput('', Blockly.NEXT_STATEMENT);
+    this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('Add, remove, or reorder sections to reconfigure this text block.');
     this.contextMenu = false;
   }
@@ -142,7 +136,7 @@ Blockly.Language.text_length = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour(160);
-    this.addInput('length', Blockly.INPUT_VALUE);
+    this.appendInput('length', Blockly.INPUT_VALUE, 'VALUE');
     this.setOutput(true);
     this.setTooltip('Returns number of letters (including spaces)\nin the provided text.');
   }
@@ -154,7 +148,7 @@ Blockly.Language.text_isEmpty = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour(160);
-    this.addInput('is empty', Blockly.INPUT_VALUE);
+    this.appendInput('is empty', Blockly.INPUT_VALUE, 'VALUE');
     this.setOutput(true);
     this.setTooltip('Returns true if the provided text is empty.');
   }
@@ -172,8 +166,8 @@ Blockly.Language.text_endString = {
     var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
-    this.addInput(menu, Blockly.INPUT_VALUE);
-    this.addInput('letters in text', Blockly.INPUT_VALUE);
+    this.appendInput(menu, Blockly.INPUT_VALUE, 'NUM');
+    this.appendInput('letters in text', Blockly.INPUT_VALUE, 'TEXT');
     this.setInputsInline(true);
     this.setTooltip('Returns specified number of letters at the beginning or end of the text.');
   },
@@ -195,8 +189,8 @@ Blockly.Language.text_indexOf = {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
     this.addTitle(menu);
-    this.addInput('occurrence of text', Blockly.INPUT_VALUE);
-    this.addInput('in text', Blockly.INPUT_VALUE);
+    this.appendInput('occurrence of text', Blockly.INPUT_VALUE, 'FIND');
+    this.appendInput('in text', Blockly.INPUT_VALUE, 'VALUE');
     this.setInputsInline(true);
     this.setTooltip('Returns the index of the first/last occurrence\nof first text in the second text.\nReturns 0 if text is not found.');
   },
@@ -212,8 +206,8 @@ Blockly.Language.text_charAt = {
     this.setColour(160);
     this.addTitle('letter');
     this.setOutput(true);
-    this.addInput('at', Blockly.INPUT_VALUE);
-    this.addInput('in text', Blockly.INPUT_VALUE);
+    this.appendInput('at', Blockly.INPUT_VALUE, 'AT');
+    this.appendInput('in text', Blockly.INPUT_VALUE, 'VALUE');
     this.setInputsInline(true);
     this.setTooltip('Returns the letter at the specified position.');
   }
@@ -231,7 +225,7 @@ Blockly.Language.text_changeCase = {
     var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_UPPERCASE, thisBlock.MSG_LOWERCASE, thisBlock.MSG_TITLECASE];
     });
-    this.addInput(menu, Blockly.INPUT_VALUE);
+    this.appendInput(menu, Blockly.INPUT_VALUE, 'TEXT');
     this.setOutput(true);
     this.setTooltip('Return a copy of the text in a different case.');
   },
@@ -258,7 +252,7 @@ Blockly.Language.text_trim = {
     });
     this.addTitle(menu);
     var sideTitle = this.addTitle('sides');
-    this.addInput('', Blockly.INPUT_VALUE);
+    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT');
     this.setOutput(true);
     this.setTooltip('Return a copy of the text with spaces\nremoved from one or both ends.');
   },
@@ -286,7 +280,7 @@ Blockly.Language.text_print = {
   init: function() {
     this.setColour(160);
     this.addTitle('print');
-    this.addInput('', Blockly.INPUT_VALUE);
+    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Print the specified text, number or other value.');

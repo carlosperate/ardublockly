@@ -36,7 +36,7 @@ Blockly.Language.procedures_defnoreturn = {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName('procedure', this);
     this.addTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename));
-    this.addInput('do', Blockly.NEXT_STATEMENT);
+    this.appendInput('do', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('A procedure with no return value.');
   },
   destroy: function() {
@@ -65,8 +65,8 @@ Blockly.Language.procedures_defreturn = {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName('procedure', this);
     this.addTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename));
-    this.addInput('do', Blockly.NEXT_STATEMENT);
-    this.addInput('return', Blockly.INPUT_VALUE);
+    this.appendInput('do', Blockly.NEXT_STATEMENT, 'STACK');
+    this.appendInput('return', Blockly.INPUT_VALUE, 'RETURN');
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
     this.setTooltip('A procedure with a return value.');
   },

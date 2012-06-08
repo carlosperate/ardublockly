@@ -34,8 +34,8 @@ Blockly.Language.controls_if = {
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/If_Then',
   init: function() {
     this.setColour(120);
-    this.addInput(this.MSG_IF, Blockly.INPUT_VALUE);
-    this.addInput(this.MSG_THEN, Blockly.NEXT_STATEMENT);
+    this.appendInput(this.MSG_IF, Blockly.INPUT_VALUE, 'IF0');
+    this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO0');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(this,
@@ -77,12 +77,12 @@ Blockly.Language.controls_if = {
   domToMutation: function(container) {
     this.elseifCount_ = window.parseInt(container.getAttribute('elseif'), 10);
     this.elseCount_ = window.parseInt(container.getAttribute('else'), 10);
-    for (var x = 0; x < this.elseifCount_; x++) {
-      this.addInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE);
-      this.addInput(this.MSG_THEN, Blockly.NEXT_STATEMENT);
+    for (var x = 1; x <= this.elseifCount_; x++) {
+      this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE, 'IF' + x);
+      this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO' + x);
     }
     if (this.elseCount_) {
-      this.addInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT);
+      this.appendInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT, 'ELSE');
     }
   },
   decompose: function(workspace) {
@@ -90,65 +90,60 @@ Blockly.Language.controls_if = {
     ifBlock.editable = false;
     ifBlock.initSvg();
     var connection = ifBlock.inputList[0];
-    var x = 0;
-    for (; x < this.elseifCount_; x++) {
+    for (var x = 1; x <= this.elseifCount_; x++) {
       var elseifBlock = new Blockly.Block(workspace, 'controls_if_elseif');
       elseifBlock.initSvg();
       // Store a pointer to any connected blocks.
-      elseifBlock.valueInput_ = this.inputList[2 + (x * 2)].targetConnection;
-      elseifBlock.statementInput_ = this.inputList[3 + (x * 2)].targetConnection;
+      elseifBlock.valueInput_ = this.getInput('IF' + x).targetConnection;
+      elseifBlock.statementInput_ = this.getInput('DO' + x).targetConnection;
       connection.connect(elseifBlock.previousConnection);
       connection = elseifBlock.nextConnection;
     }
     if (this.elseCount_) {
       var elseBlock = new Blockly.Block(workspace, 'controls_if_else');
       elseBlock.initSvg();
-      elseBlock.statementInput_ = this.inputList[2 + (x * 2)].targetConnection;
+      elseBlock.statementInput_ = this.getInput('ELSE').targetConnection;
       connection.connect(elseBlock.previousConnection);
     }
     return ifBlock;
   },
   compose: function(ifBlock) {
-    // Disconnect all but the first two input blocks.
-    for (var x = 2; x < this.inputList.length; x++) {
-      var child = this.inputList[x].targetBlock();
-      if (child) {
-        child.setParent(null);
-      }
+    // Disconnect all the elseif input blocks and destroy the inputs.
+    for (var x = 1; x <= this.elseifCount_; x++) {
+      this.removeInput('IF' + x);
+      this.removeInput('DO' + x);
     }
-    // Destroy all optional inputs.
-    while (this.inputList.length > 2) {
-      this.removeInput(2);
+    // Disconnect the else input blocks and destroy the inputs.
+    if (this.elseCount_) {
+      this.removeInput('ELSE');
     }
     this.elseifCount_ = 0;
     this.elseCount_ = 0;
     // Rebuild the block's optional inputs.
-    var clauseBlock = ifBlock.getStatementInput(0);
-    var x = 2;
+    var clauseBlock = ifBlock.getInputTargetBlock('STACK');
     while (clauseBlock) {
       switch (clauseBlock.type) {
         case 'controls_if_elseif':
           this.elseifCount_++;
-          this.addInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE);
-          this.addInput(this.MSG_THEN, Blockly.NEXT_STATEMENT);
+          var ifInput = this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE,
+              'IF' + this.elseifCount_);
+          var doInput = this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT,
+              'DO' + this.elseifCount_);
           // Reconnect any child blocks.
           if (clauseBlock.valueInput_) {
-            this.inputList[x].connect(clauseBlock.valueInput_);
+            ifInput.connect(clauseBlock.valueInput_);
           }
-          x++;
           if (clauseBlock.statementInput_) {
-            this.inputList[x].connect(clauseBlock.statementInput_);
+            doInput.connect(clauseBlock.statementInput_);
           }
-          x++;
           break;
         case 'controls_if_else':
           this.elseCount_++;
-          this.addInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT);
+          this.appendInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT, 'ELSE');
           // Reconnect any child blocks.
           if (clauseBlock.statementInput_) {
             this.inputList[x].connect(clauseBlock.statementInput_);
           }
-          x++;
           break;
         default:
           throw 'Unknown block type.';
@@ -164,7 +159,7 @@ Blockly.Language.controls_if_if = {
   init: function() {
     this.setColour(120);
     this.addTitle('if');
-    this.addInput('', Blockly.NEXT_STATEMENT);
+    this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('Add, remove, or reorder sections\n' +
                     'to reconfigure this if block.');
     this.contextMenu = false;
@@ -206,8 +201,8 @@ Blockly.Language.controls_whileUntil = {
               Blockly.Language.controls_whileUntil.MSG_UNTIL];
     });
     this.addTitle(dropdown);
-    this.addInput('', Blockly.INPUT_VALUE);
-    this.addInput('do', Blockly.NEXT_STATEMENT);
+    this.appendInput('', Blockly.INPUT_VALUE, 'BOOL');
+    this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -233,25 +228,27 @@ Blockly.Language.controls_for = {
   init: function() {
     this.setColour(120);
     this.addTitle('count');
-    this.addInput('with', Blockly.LOCAL_VARIABLE).setText('x');
-    this.addInput('from', Blockly.INPUT_VALUE);
-    this.addInput('to', Blockly.INPUT_VALUE);
-    this.addInput('do', Blockly.NEXT_STATEMENT);
+    this.appendInput('with', Blockly.LOCAL_VARIABLE, 'VAR').setText('x');
+    this.appendInput('from', Blockly.INPUT_VALUE, 'FROM');
+    this.appendInput('to', Blockly.INPUT_VALUE, 'TO');
+    this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return 'Count from a start number to an end number.\nFor each count, set the current count number to\nvariable "' + thisBlock.getVariableInput(0) + '", and then do some statements.';
+      return 'Count from a start number to an end number.\n' +
+          'For each count, set the current count number to\n' +
+          'variable "' + thisBlock.getInputVariable('VAR') + '", and then do some statements.';
     });
   },
   getVars: function() {
-    return [this.getVariableInput(0)];
+    return [this.getInputVariable('VAR')];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getVariableInput(0))) {
-      this.setVariableInput(0, newName);
+    if (Blockly.Names.equals(oldName, this.getInputVariable('VAR'))) {
+      this.setInputVariable('VAR', newName);
     }
   }
 };
@@ -263,23 +260,24 @@ Blockly.Language.controls_forEach = {
   init: function() {
     this.setColour(120);
     this.addTitle('for each');
-    this.addInput('item', Blockly.LOCAL_VARIABLE).setText('x');
-    this.addInput('in list', Blockly.INPUT_VALUE);
-    this.addInput('do', Blockly.NEXT_STATEMENT);
+    this.appendInput('item', Blockly.LOCAL_VARIABLE, 'VAR').setText('x');
+    this.appendInput('in list', Blockly.INPUT_VALUE, 'LIST');
+    this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return 'For each item in a list, set the item to\nvariable "' + thisBlock.getVariableInput(0) + '", and then do some statements.';
+      return 'For each item in a list, set the item to\nvariable "' +
+          thisBlock.getInputVariable('VAR') + '", and then do some statements.';
     });
   },
   getVars: function() {
-    return [this.getVariableInput(0)];
+    return [this.getInputVariable('VAR')];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getVariableInput(0))) {
-      this.setVariableInput(0, newName);
+    if (Blockly.Names.equals(oldName, this.getInputVariable('VAR'))) {
+      this.setInputVariable('VAR', newName);
     }
   }
 };

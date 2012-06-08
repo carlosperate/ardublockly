@@ -36,11 +36,11 @@ Blockly.Dart.text_join = function(opt_dropParens) {
   if (this.itemCount_ == 0) {
     return '\'\'';
   } else if (this.itemCount_ == 1) {
-    var argument0 = Blockly.Dart.valueToCode(this, 0, true) || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'ADD0', true) || '\'\'';
     return argument0 + '.toString()';
   } else if (this.itemCount_ == 2) {
-    var argument0 = Blockly.Dart.valueToCode(this, 0) || '\'\'';
-    var argument1 = Blockly.Dart.valueToCode(this, 1) || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'ADD0') || '\'\'';
+    var argument1 = Blockly.Dart.valueToCode(this, 'ADD0') || '\'\'';
     var code = argument0 + '.toString() + ' + argument1 + '.toString()';
     if (!opt_dropParens) {
       code = '(' + code + ')';
@@ -48,9 +48,9 @@ Blockly.Dart.text_join = function(opt_dropParens) {
     return code;
   } else {
     var code = [];
-    code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode(this, 0, true) || '\'\'') + ')';
+    code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode(this, 'ADD0', true) || '\'\'') + ')';
     for (n = 1; n < this.itemCount_; n++) {
-      code[n] = '.add(' + (Blockly.Dart.valueToCode(this, n, true) || '\'\'') + ')';
+      code[n] = '.add(' + (Blockly.Dart.valueToCode(this, 'ADD' + n, true) || '\'\'') + ')';
     }
     code = code.join('') + '.toString()';
     if (!opt_dropParens) {
@@ -62,13 +62,13 @@ Blockly.Dart.text_join = function(opt_dropParens) {
 
 Blockly.Dart.text_length = function() {
   // String length.
-  var argument0 = Blockly.Dart.valueToCode(this, 0) || '\'\'';
+  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE') || '\'\'';
   return argument0 + '.length';
 };
 
 Blockly.Dart.text_isEmpty = function() {
   // Is the string null?
-  var argument0 = Blockly.Dart.valueToCode(this, 0) || '\'\'';
+  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE') || '\'\'';
   return argument0 + '.isEmpty()';
 };
 
@@ -77,12 +77,12 @@ Blockly.Dart.text_endString = function() {
   var first = this.getValueLabel(0) == this.MSG_FIRST;
   var code;
   if (first) {
-    var argument0 = Blockly.Dart.valueToCode(this, 0, true) || '0';
-    var argument1 = Blockly.Dart.valueToCode(this, 1) || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'NUM', true) || '0';
+    var argument1 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
     code = argument1 + '.substring(0, ' + argument0 + ')';
   } else {
-    var argument0 = Blockly.Dart.valueToCode(this, 0) || '0';
-    var argument1 = Blockly.Dart.valueToCode(this, 1, true) || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'NUM') || '0';
+    var argument1 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
     var tempVar = Blockly.Dart.variableDB_.getDistinctName('temp_text',
         Blockly.Variables.NAME_TYPE);
     Blockly.Dart.definitions_['variables'] += '\nString ' + tempVar + ';';
@@ -95,8 +95,8 @@ Blockly.Dart.text_endString = function() {
 Blockly.Dart.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
   var operator = this.getTitleText(1) == this.MSG_FIRST ? 'indexOf' : 'lastIndexOf';
-  var argument0 = Blockly.Dart.valueToCode(this, 0) || '\'\'';
-  var argument1 = Blockly.Dart.valueToCode(this, 1) || '\'\'';
+  var argument0 = Blockly.Dart.valueToCode(this, 'FIND') || '\'\'';
+  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE') || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
   if (!opt_dropParens) {
     code = '(' + code + ')';
@@ -106,8 +106,8 @@ Blockly.Dart.text_indexOf = function(opt_dropParens) {
 
 Blockly.Dart.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.Dart.valueToCode(this, 0, true) || '1';
-  var argument1 = Blockly.Dart.valueToCode(this, 1) || '[]';
+  var argument0 = Blockly.Dart.valueToCode(this, 'AT', true) || '1';
+  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE') || '[]';
   // Blockly uses one-based arrays.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
@@ -164,7 +164,7 @@ Blockly.Dart.text_changeCase = function() {
       func.push('}');
       Blockly.Dart.definitions_['toTitleCase'] = func.join('\n');
     }
-    var argument0 = Blockly.Dart.valueToCode(this, 0, true) || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
     code = Blockly.Dart.text_changeCase.toTitleCase + '(' + argument0 + ')';
   }
   return code;
@@ -172,7 +172,7 @@ Blockly.Dart.text_changeCase = function() {
 
 Blockly.Dart.text_trim = function() {
   // Trim spaces.
-  var argument0 = Blockly.Dart.valueToCode(this, 0) || '\'\'';
+  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
   var operator = this.getTitleText(1);
   if (operator == this.MSG_BOTH) {
     return argument0 + '.trim()';
@@ -183,6 +183,6 @@ Blockly.Dart.text_trim = function() {
 
 Blockly.Dart.text_print = function() {
   // Print statement.
-  var argument0 = Blockly.Dart.valueToCode(this, 0, true) || '\'\'';
+  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
   return 'print(' + argument0 + ');\n';
 };
