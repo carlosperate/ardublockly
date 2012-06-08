@@ -38,7 +38,9 @@ Blockly.Python.procedures_defreturn = function() {
     branch = '  pass';
   }
   var code = 'def ' + funcName + '():\n' + branch + returnValue + '\n';
-  return code;
+  code = Blockly.Python.scrub_(this, code);
+  Blockly.Python.definitions_[funcName] = code;
+  return null;
 };
 
 // Defining a procedure without a return value uses the same generator as

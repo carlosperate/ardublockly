@@ -36,7 +36,9 @@ Blockly.JavaScript.procedures_defreturn = function() {
     returnValue = '  return ' + returnValue + ';\n';
   }
   var code = 'function ' + funcName + '() {\n' + branch + returnValue + '}\n';
-  return code;
+  code = Blockly.JavaScript.scrub_(this, code);
+  Blockly.JavaScript.definitions_[funcName] = code;
+  return null;
 };
 
 // Defining a procedure without a return value uses the same generator as
