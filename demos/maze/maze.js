@@ -161,6 +161,7 @@ Maze.resetButtonClick = function() {
  */
 Maze.execute = function() {
   Maze.path = [];
+  Maze.ticks = 1000;
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   try {
     eval(code);
@@ -359,8 +360,12 @@ Maze.constrainDirection16 = function(d) {
  * loop.  Sadly I wasn't able to solve the Halting Problem for this demo.
  * @throws {false} Throws an error to terminate the user's program.
  */
-Maze.checkTimeout = function() {
-  if (Maze.path.length >= 1000) {
+Maze.checkTimeout = function(id) {
+  if (Maze.ticks-- < 0) {
+    if (id) {
+      // Highlight an infinite loop on death.
+      Maze.path.push(['loop', id]);
+    }
     throw false;
   }
 };
@@ -441,7 +446,6 @@ Maze.turn = function(direction, id) {
  */
 Maze.isWall = function(direction) {
   Maze.checkTimeout();
-  Maze.path.push(['look', null]);
   var effectiveDirection = Maze.pegmanD;
   if (direction == 1) {  // Left
     effectiveDirection--;

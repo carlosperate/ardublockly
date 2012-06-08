@@ -32,7 +32,7 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.Language.maze_move = {
   // Block for moving forward or backwards.
-  category: 'Maze',
+  category: 'Commands',
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/Move',
   init: function() {
     this.setColour(290);
@@ -58,7 +58,7 @@ Blockly.JavaScript.maze_move = function() {
 
 Blockly.Language.maze_turnLeft = {
   // Block for turning left or right.
-  category: 'Maze',
+  category: 'Commands',
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/Turn',
   init: function() {
     this.setColour(290);
@@ -77,7 +77,7 @@ Blockly.Language.maze_turnLeft.DIRECTIONS = ['left', 'right'];
 
 Blockly.Language.maze_turnRight = {
   // Block for turning left or right.
-  category: 'Maze',
+  category: 'Commands',
   helpUrl: null,
   init: function() {
     this.setColour(290);
@@ -105,10 +105,10 @@ Blockly.JavaScript.maze_turnRight = Blockly.JavaScript.maze_turnLeft;
 
 Blockly.Language.maze_isWall = {
   // Block for checking if there a wall.
-  category: 'Maze',
+  category: 'Logic',
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/Wall',
   init: function() {
-    this.setColour(290);
+    this.setColour(120);
     this.setOutput(true);
     this.addTitle('wall');
     var dropdown = new Blockly.FieldDropdown(function() {
@@ -128,4 +128,38 @@ Blockly.JavaScript.maze_isWall = function() {
   var direction = Blockly.Language.maze_isWall.DIRECTIONS
       .indexOf(this.getTitleText(1));
   return 'Maze.isWall(' + direction + ')';
+};
+
+Blockly.Language.controls_forever = {
+  // Do forever loop.
+  category: 'Logic',
+  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Repeat',
+  init: function() {
+    this.setColour(120);
+    this.addTitle('repeat forever');
+    this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
+    this.setPreviousStatement(true);
+    this.setTooltip('Do the enclosed statements forever.');
+  }
+};
+
+Blockly.JavaScript.controls_forever = function() {
+  // Generate JavaScript for do forever loop.
+  var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
+  return 'while (true) {\n' + branch0 +
+      '  Maze.checkTimeout("' + this.id + '");\n}\n';
+};
+
+Blockly.JavaScript.controls_whileUntil = function() {
+  // Do while/until loop.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL', true) || 'false';
+  var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
+  if (this.getTitleText(1) == this.MSG_UNTIL) {
+    if (!argument0.match(/^\w+$/)) {
+      argument0 = '(' + argument0 + ')';
+    }
+    argument0 = '!' + argument0;
+  }
+  return 'while (' + argument0 + ') {\n' + branch0 +
+      '  Maze.checkTimeout("' + this.id + '");\n}\n';
 };
