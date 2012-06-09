@@ -122,6 +122,7 @@ Blockly.Flyout.prototype.init = function(workspace, workspaceMetrics) {
   this.targetWorkspaceMetrics_ = workspaceMetrics;
   // Add scrollbars.
   this.width_ = 0;
+  this.height_ = 0;
   var flyout = this;
   new Blockly.Scrollbar(this.svgOptions_,
       function() {return flyout.getMetrics();},
