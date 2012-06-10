@@ -36,10 +36,16 @@ Blockly.Variables.NAME_TYPE = 'variable';
 
 /**
  * Find all user-created variables.
+ * @param {Blockly.Block} opt_block Optional root block.
  * @return {!Array.<string>} Array of variable names.
  */
-Blockly.Variables.allVariables = function() {
-  var blocks = Blockly.mainWorkspace.getAllBlocks();
+Blockly.Variables.allVariables = function(opt_block) {
+  var blocks;
+  if (opt_block) {
+    blocks = opt_block.getDescendants();
+  } else {
+    blocks = Blockly.mainWorkspace.getAllBlocks();
+  }
   var variableHash = {};
   // Iterate through every block and add each variable to the hash.
   for (var x = 0; x < blocks.length; x++) {

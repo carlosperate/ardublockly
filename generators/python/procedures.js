@@ -28,6 +28,13 @@ Blockly.Python = Blockly.Generator.get('Python');
 
 Blockly.Python.procedures_defreturn = function() {
   // Define a procedure with a return value.
+  // First, add a 'global' statement for every variable that is assigned.
+  var globals = Blockly.Variables.allVariables(this);
+  for (var i = 0, varName; varName = globals[i]; i++) {
+    globals[i] = Blockly.Python.variableDB_.getName(varName,
+        Blockly.Variables.NAME_TYPE);
+  }
+  globals = globals.length ? '  global ' + globals.join(', ') + '\n' : '';
   var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(0),
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Python.statementToCode(this, 'STACK');
@@ -37,7 +44,7 @@ Blockly.Python.procedures_defreturn = function() {
   } else if (!branch) {
     branch = '  pass';
   }
-  var code = 'def ' + funcName + '():\n' + branch + returnValue + '\n';
+  var code = 'def ' + funcName + '():\n' + globals + branch + returnValue + '\n';
   code = Blockly.Python.scrub_(this, code);
   Blockly.Python.definitions_[funcName] = code;
   return null;
