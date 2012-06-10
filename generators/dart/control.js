@@ -48,7 +48,7 @@ Blockly.Dart.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.Dart.valueToCode(this, 'BOOL', true) || 'false';
   var branch0 = Blockly.Dart.statementToCode(this, 'DO');
-  if (this.getTitleText(1) == this.MSG_UNTIL) {
+  if (this.getTitleText('MODE') == this.MSG_UNTIL) {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }
@@ -108,7 +108,7 @@ Blockly.Dart.controls_forEach = function() {
 
 Blockly.Dart.controls_flow_statements = function() {
   // Flow statements: continue, break.
-  switch (this.getTitleText(0)) {
+  switch (this.getTitleText('FLOW')) {
     case this.MSG_BREAK:
       return 'break;\n';
     case this.MSG_CONTINUE:

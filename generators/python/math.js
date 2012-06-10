@@ -28,7 +28,7 @@ Blockly.Python = Blockly.Generator.get('Python');
 
 Blockly.Python.math_number = function() {
   // Numeric value.
-  return window.parseFloat(this.getTitleText(0));
+  return window.parseFloat(this.getTitleText('NUM'));
 };
 
 Blockly.Python.math_arithmetic = function(opt_dropParens) {
@@ -52,7 +52,7 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
 Blockly.Python.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.Python.valueToCode(this, 'DELTA') || '0';
-  var varName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
+  var varName = Blockly.Python.variableDB_.getName(this.getTitleText('VAR'),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = (' + varName + ' if type(' + varName + ') in (int, float) else 0)' +
       ' + ' + argument0 + '\n';
@@ -137,7 +137,7 @@ Blockly.Python.math_trig = Blockly.Python.math_single;
 
 Blockly.Python.math_on_list = function() {
   // Rounding functions.
-  func = this.getTitleText(0);
+  func = this.getTitleText('OP');
   list = Blockly.Python.valueToCode(this, 'LIST', true) || '[]';
   var code;
   switch (func) {

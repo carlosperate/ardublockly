@@ -36,11 +36,11 @@ Blockly.Language.maze_move = {
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/Move',
   init: function() {
     this.setColour(290);
-    this.addTitle('move');
+    this.appendTitle('move');
     var dropdown = new Blockly.FieldDropdown(function() {
       return Blockly.Language.maze_move.DIRECTIONS;
     });
-    this.addTitle(dropdown);
+    this.appendTitle(dropdown, 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Moves the mouse forward or backward one space.');
@@ -52,7 +52,7 @@ Blockly.Language.maze_move.DIRECTIONS = ['forward', 'backward'];
 Blockly.JavaScript.maze_move = function() {
   // Generate JavaScript for moving forward or backwards.
   var direction = Blockly.Language.maze_move.DIRECTIONS
-      .indexOf(this.getTitleText(1));
+      .indexOf(this.getTitleText('DIR'));
   return 'Maze.move(' + direction + ', "' + this.id + '");\n';
 };
 
@@ -62,11 +62,11 @@ Blockly.Language.maze_turnLeft = {
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/Turn',
   init: function() {
     this.setColour(290);
-    this.addTitle('turn');
+    this.appendTitle('turn');
     var dropdown = new Blockly.FieldDropdown(function() {
       return Blockly.Language.maze_turnLeft.DIRECTIONS;
     });
-    this.addTitle(dropdown);
+    this.appendTitle(dropdown, 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Turns the mouse left or right by 90 degrees.');
@@ -81,12 +81,12 @@ Blockly.Language.maze_turnRight = {
   helpUrl: null,
   init: function() {
     this.setColour(290);
-    this.addTitle('turn');
+    this.appendTitle('turn');
     var dropdown = new Blockly.FieldDropdown(function() {
       return Blockly.Language.maze_turnLeft.DIRECTIONS;
     });
-    this.addTitle(dropdown);
-    this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1], 1);
+    this.appendTitle(dropdown, 'DIR');
+    this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1], 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Turns the mouse left or right by 90 degrees.');
@@ -96,7 +96,7 @@ Blockly.Language.maze_turnRight = {
 Blockly.JavaScript.maze_turnLeft = function() {
   // Generate JavaScript for turning left or right.
   var direction = Blockly.Language.maze_turnLeft.DIRECTIONS
-      .indexOf(this.getTitleText(1));
+      .indexOf(this.getTitleText('DIR'));
   return 'Maze.turn(' + direction + ', "' + this.id + '");\n';
 };
 
@@ -110,11 +110,11 @@ Blockly.Language.maze_isWall = {
   init: function() {
     this.setColour(120);
     this.setOutput(true);
-    this.addTitle('wall');
+    this.appendTitle('wall');
     var dropdown = new Blockly.FieldDropdown(function() {
       return Blockly.Language.maze_isWall.DIRECTIONS;
     });
-    this.addTitle(dropdown);
+    this.appendTitle(dropdown, 'DIR');
     this.setTooltip('Returns true if there is a wall in ' +
                     'the specified direction.');
   }
@@ -126,7 +126,7 @@ Blockly.Language.maze_isWall.DIRECTIONS =
 Blockly.JavaScript.maze_isWall = function() {
   // Generate JavaScript for checking if there is a wall.
   var direction = Blockly.Language.maze_isWall.DIRECTIONS
-      .indexOf(this.getTitleText(1));
+      .indexOf(this.getTitleText('DIR'));
   return 'Maze.isWall(' + direction + ')';
 };
 
@@ -136,7 +136,7 @@ Blockly.Language.controls_forever = {
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/Repeat',
   init: function() {
     this.setColour(120);
-    this.addTitle('repeat forever');
+    this.appendTitle('repeat forever');
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setTooltip('Do the enclosed statements forever.');
@@ -154,7 +154,7 @@ Blockly.JavaScript.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL', true) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
-  if (this.getTitleText(1) == this.MSG_UNTIL) {
+  if (this.getTitleText('MODE') == this.MSG_UNTIL) {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }

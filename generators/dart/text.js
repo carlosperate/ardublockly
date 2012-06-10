@@ -28,7 +28,7 @@ Blockly.Dart = Blockly.Generator.get('Dart');
 
 Blockly.Dart.text = function() {
   // Text value.
-  return Blockly.Dart.quote_(this.getTitleText(1));
+  return Blockly.Dart.quote_(this.getTitleText('TEXT'));
 };
 
 Blockly.Dart.text_join = function(opt_dropParens) {
@@ -94,7 +94,7 @@ Blockly.Dart.text_endString = function() {
 
 Blockly.Dart.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
-  var operator = this.getTitleText(1) == this.MSG_FIRST ? 'indexOf' : 'lastIndexOf';
+  var operator = this.getTitleText('END') == this.MSG_FIRST ? 'indexOf' : 'lastIndexOf';
   var argument0 = Blockly.Dart.valueToCode(this, 'FIND') || '\'\'';
   var argument1 = Blockly.Dart.valueToCode(this, 'VALUE') || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
@@ -173,7 +173,7 @@ Blockly.Dart.text_changeCase = function() {
 Blockly.Dart.text_trim = function() {
   // Trim spaces.
   var argument0 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
-  var operator = this.getTitleText(1);
+  var operator = this.getTitleText('MODE');
   if (operator == this.MSG_BOTH) {
     return argument0 + '.trim()';
   }

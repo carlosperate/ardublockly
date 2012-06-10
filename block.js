@@ -796,29 +796,21 @@ Blockly.Block.prototype.setColour = function(colourHue) {
 };
 
 /**
- * Add an item to the title row.
+ * Add an item to the end of the title row.
  * @param {*} title Something to add as a title.
- * @param {number} opt_index If present, this is the index (zero-based) where
- *     the new item will be in the title row.  If not present, the new item
- *     will be at the end of the row.
+ * @param {string} opt_name Language-neutral identifier which may used to find
+ *     this title again.  Should be unique to this block.
  * @return {!Blockly.Field} The title object created.
  */
-Blockly.Block.prototype.addTitle = function(title, opt_index) {
+Blockly.Block.prototype.appendTitle = function(title, opt_name) {
   // Generate a FieldLabel when given a plain text title.
   if (typeof title == 'string') {
     title = new Blockly.FieldLabel(title);
   }
+  title.name = opt_name;
 
   // Add the title to the title row.
-  if (typeof opt_index == 'number') {
-    if (opt_index < 0 || opt_index > this.titleRow.length) {
-      throw 'There are ' + this.titleRow.length +
-            ' title(s), unable to insert at index ' + opt_index + '.';
-    }
-    this.titleRow.splice(opt_index, 0, title);
-  } else {
-    this.titleRow.push(title);
-  }
+  this.titleRow.push(title);
 
   if (this.svg_) {
     title.init(this);
@@ -834,26 +826,30 @@ Blockly.Block.prototype.addTitle = function(title, opt_index) {
 /**
  * Change the title text for a block (e.g. 'choose' or 'remove list item').
  * @param {string} newText Text to be the new title.
- * @param {number} index The index (zero-based) in the title row.
+ * @param {string} name The name of the title.
  */
-Blockly.Block.prototype.setTitleText = function(newText, index) {
-  if (index < 0 || index >= this.titleRow.length) {
-    throw 'There are ' + this.titleRow.length +
-          ' title(s), unable to set text at index ' + index + '.';
+Blockly.Block.prototype.setTitleText = function(newText, name) {
+  for (var x = 0, title; title = this.titleRow[x]; x++) {
+    if (title.name === name) {
+      title.setText(newText);
+      return;
+    }
   }
-  this.titleRow[index].setText(newText);
+  throw 'Title "' + name + '" not found.';
 };
 
 /**
  * Returns the text from the title of a block.
- * @param {number} index The index (zero-based) in the title row.
+ * @param {string} name The name of the title.
  * @return {!string} Text from the title or null if title does not exist.
  */
-Blockly.Block.prototype.getTitleText = function(index) {
-  if (index < 0 || index >= this.titleRow.length) {
-    return null;
+Blockly.Block.prototype.getTitleText = function(name) {
+  for (var x = 0, title; title = this.titleRow[x]; x++) {
+    if (title.name === name) {
+      return title.getText();
+    }
   }
-  return this.titleRow[index].getText();
+  return null;
 };
 
 /**
@@ -1060,7 +1056,7 @@ Blockly.Block.prototype.appendInput = function(label, type, name) {
 
 /**
  * Remove an input from this block.
- * @param {string} name Language-neutral identifier.
+ * @param {string} name The name of the input.
  */
 Blockly.Block.prototype.removeInput = function(name) {
   for (var x = 0; x < this.inputList.length; x++) {

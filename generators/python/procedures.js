@@ -35,7 +35,7 @@ Blockly.Python.procedures_defreturn = function() {
         Blockly.Variables.NAME_TYPE);
   }
   globals = globals.length ? '  global ' + globals.join(', ') + '\n' : '';
-  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(0),
+  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Python.statementToCode(this, 'STACK');
   var returnValue = Blockly.Python.valueToCode(this, 'RETURN', true) || '';
@@ -57,7 +57,7 @@ Blockly.Python.procedures_defnoreturn =
 
 Blockly.Python.procedures_callreturn = function() {
   // Call a procedure with a return value.
-  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
+  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var code = funcName + '()';
   return code;
@@ -65,7 +65,7 @@ Blockly.Python.procedures_callreturn = function() {
 
 Blockly.Python.procedures_callnoreturn = function() {
   // Call a procedure with no return value.
-  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText(1),
+  var funcName = Blockly.Python.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var code = funcName + '()\n';
   return code;

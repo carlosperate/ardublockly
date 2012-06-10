@@ -79,18 +79,13 @@ function setColour() {
   block.setColour(document.getElementById('colour').value);
 }
 
-function addTitle() {
+function appendTitle() {
   var type = document.getElementById('titleType').value;
   var title = document.getElementById('titleLabel').value;
   if (type == 'textInput') {
     title = new Blockly.FieldTextInput(title);
   }
-  var index = parseInt(document.getElementById('titleIndex').value, 10);
-  if (isNaN(index)) {
-    block.addTitle(title);
-  } else {
-    block.addTitle(title, index);
-  }
+  block.appendTitle(title);
 }
 
 function setTooltip() {
@@ -260,8 +255,8 @@ h1 {
     </tr>
     <tr>
       <td>New title:</td>
-      <td><select id="titleType"><option value="label">Label</option><option value="textInput">Text Input</option></select> with text <input type="text" id="titleLabel"> at <input id="titleIndex" type="number" min="0" style="width: 3em">
-      <input type="button" onclick="addTitle()" value="Add"></td>
+      <td><select id="titleType"><option value="label">Label</option><option value="textInput">Text Input</option></select> with text <input type="text" id="titleLabel">
+      <input type="button" onclick="appendTitle()" value="Add"></td>
     </tr>
     <tr>
       <td>Tooltip:</td>

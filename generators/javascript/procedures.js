@@ -28,7 +28,7 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.procedures_defreturn = function() {
   // Define a procedure with a return value.
-  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(0),
+  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.JavaScript.statementToCode(this, 'STACK');
   var returnValue = Blockly.JavaScript.valueToCode(this, 'RETURN', true) || '';
@@ -48,7 +48,7 @@ Blockly.JavaScript.procedures_defnoreturn =
 
 Blockly.JavaScript.procedures_callreturn = function() {
   // Call a procedure with a return value.
-  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
+  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var code = funcName + '()';
   return code;
@@ -56,7 +56,7 @@ Blockly.JavaScript.procedures_callreturn = function() {
 
 Blockly.JavaScript.procedures_callnoreturn = function() {
   // Call a procedure with no return value.
-  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
+  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var code = funcName + '();\n';
   return code;

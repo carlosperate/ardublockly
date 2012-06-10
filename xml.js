@@ -59,9 +59,9 @@ Blockly.Xml.blockToDom_ = function(block) {
     }
   }
   for (var i = 0, title; title = block.titleRow[i]; i++) {
-    if (title.EDITABLE) {
+    if (title.name && title.EDITABLE) {
       var container = document.createElement('title');
-      container.setAttribute('i', i);
+      container.setAttribute('name', title.name);
       var titleText = document.createTextNode(title.getText());
       container.appendChild(titleText);
       element.appendChild(container);
@@ -274,8 +274,7 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         break;
       case 'title':
-        var i = parseInt(xmlChild.getAttribute('i'), 10);
-        block.setTitleText(xmlChild.textContent, i);
+        block.setTitleText(xmlChild.textContent, name);
         break;
       case 'variable':
         var data = xmlChild.getAttribute('data');

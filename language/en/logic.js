@@ -127,7 +127,7 @@ Blockly.Language.logic_boolean = {
     var dropdown = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_TRUE, thisBlock.MSG_FALSE];
     });
-    this.addTitle(dropdown);
+    this.appendTitle(dropdown, 'BOOL');
     this.setTooltip('Returns either true or false.');
   },
   MSG_TRUE: 'true',

@@ -28,7 +28,7 @@ Blockly.Dart = Blockly.Generator.get('Dart');
 
 Blockly.Dart.math_number = function() {
   // Numeric value.
-  return window.parseFloat(this.getTitleText(0));
+  return window.parseFloat(this.getTitleText('NUM'));
 };
 
 Blockly.Dart.math_arithmetic = function(opt_dropParens) {
@@ -57,7 +57,7 @@ Blockly.Dart.math_arithmetic = function(opt_dropParens) {
 Blockly.Dart.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.Dart.valueToCode(this, 'DELTA') || '0';
-  var varName = Blockly.Dart.variableDB_.getName(this.getTitleText(1),
+  var varName = Blockly.Dart.variableDB_.getName(this.getTitleText('VAR'),
 			Blockly.Variables.NAME_TYPE);
   return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' +
       argument0 + ';\n';
@@ -147,7 +147,7 @@ Blockly.Dart.math_trig = Blockly.Dart.math_single;
 
 Blockly.Dart.math_on_list = function() {
   // Rounding functions.
-  func = this.getTitleText(0);
+  func = this.getTitleText('OP');
   list = Blockly.Dart.valueToCode(this, 'LIST', true) || '[]';
   var code;
   switch (func) {

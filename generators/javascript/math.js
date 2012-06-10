@@ -28,7 +28,7 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.math_number = function() {
   // Numeric value.
-  return window.parseFloat(this.getTitleText(0));
+  return window.parseFloat(this.getTitleText('NUM'));
 };
 
 Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
@@ -57,7 +57,7 @@ Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
 Blockly.JavaScript.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'DELTA') || '0';
-  var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText(1),
+  var varName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('VAR'),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName +
       ' : 0) + ' + argument0 + ';\n';
@@ -141,7 +141,7 @@ Blockly.JavaScript.math_trig = Blockly.JavaScript.math_single;
 
 Blockly.JavaScript.math_on_list = function() {
   // Rounding functions.
-  func = this.getTitleText(0);
+  func = this.getTitleText('OP');
   list = Blockly.JavaScript.valueToCode(this, 'LIST', true) || '[]';
   var code;
   switch (func) {

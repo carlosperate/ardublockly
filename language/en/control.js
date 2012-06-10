@@ -158,7 +158,7 @@ Blockly.Language.controls_if_if = {
   // If condition.
   init: function() {
     this.setColour(120);
-    this.addTitle('if');
+    this.appendTitle('if');
     this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('Add, remove, or reorder sections\n' +
                     'to reconfigure this if block.');
@@ -170,7 +170,7 @@ Blockly.Language.controls_if_elseif = {
   // Else-If condition.
   init: function() {
     this.setColour(120);
-    this.addTitle('else if');
+    this.appendTitle('else if');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Add a condition to the if block.');
@@ -182,7 +182,7 @@ Blockly.Language.controls_if_else = {
   // Else condition.
   init: function() {
     this.setColour(120);
-    this.addTitle('else');
+    this.appendTitle('else');
     this.setPreviousStatement(true);
     this.setTooltip('Add a final, catch-all condition to the if block.');
     this.contextMenu = false;
@@ -195,12 +195,12 @@ Blockly.Language.controls_whileUntil = {
   helpUrl: 'http://code.google.com/p/google-blockly/wiki/Repeat',
   init: function() {
     this.setColour(120);
-    this.addTitle('repeat');
+    this.appendTitle('repeat');
     var dropdown = new Blockly.FieldDropdown(function() {
       return [Blockly.Language.controls_whileUntil.MSG_WHILE,
               Blockly.Language.controls_whileUntil.MSG_UNTIL];
     });
-    this.addTitle(dropdown);
+    this.appendTitle(dropdown, 'MODE');
     this.appendInput('', Blockly.INPUT_VALUE, 'BOOL');
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
@@ -208,7 +208,7 @@ Blockly.Language.controls_whileUntil = {
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      switch (thisBlock.getTitleText(1)) {
+      switch (thisBlock.getTitleText('MODE')) {
         case Blockly.Language.controls_whileUntil.MSG_WHILE:
           return 'While a value is true, then do some statements.';
         case Blockly.Language.controls_whileUntil.MSG_UNTIL:
@@ -227,7 +227,7 @@ Blockly.Language.controls_for = {
   helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
   init: function() {
     this.setColour(120);
-    this.addTitle('count');
+    this.appendTitle('count');
     this.appendInput('with', Blockly.LOCAL_VARIABLE, 'VAR').setText('x');
     this.appendInput('from', Blockly.INPUT_VALUE, 'FROM');
     this.appendInput('to', Blockly.INPUT_VALUE, 'TO');
@@ -259,7 +259,7 @@ Blockly.Language.controls_forEach = {
   helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
   init: function() {
     this.setColour(120);
-    this.addTitle('for each');
+    this.appendTitle('for each');
     this.appendInput('item', Blockly.LOCAL_VARIABLE, 'VAR').setText('x');
     this.appendInput('in list', Blockly.INPUT_VALUE, 'LIST');
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
@@ -296,11 +296,11 @@ Blockly.Language.controls_flow_statements = {
           thisBlock.MSG_CONTINUE
         ];
     });
-    this.addTitle(dropdown);
-    this.addTitle('of loop');
+    this.appendTitle(dropdown, 'FLOW');
+    this.appendTitle('of loop');
     this.setPreviousStatement(true);
     this.setTooltip(function() {
-      switch (thisBlock.getTitleText(0)) {
+      switch (thisBlock.getTitleText('FLOW')) {
         case thisBlock.MSG_BREAK:
           return 'Break out of the containing loop.';
         case thisBlock.MSG_CONTINUE:

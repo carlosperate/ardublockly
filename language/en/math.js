@@ -34,12 +34,12 @@ Blockly.Language.math_number = {
   helpUrl: 'http://en.wikipedia.org/wiki/Number',
   init: function() {
     this.setColour(230);
-    this.addTitle(new Blockly.FieldTextInput('0', function(text) {
+    this.appendTitle(new Blockly.FieldTextInput('0', function(text) {
       // Ensure that only a number may be entered.
       // TODO: Handle cases like 'o', 'ten', '1,234', '3,14', etc.
       var n = window.parseFloat(text || 0);
       return window.isNaN(n) ? null : String(n);
-    }));
+    }), 'NUM');
     this.setOutput(true);
     this.setTooltip('A number.');
   }
@@ -95,9 +95,9 @@ Blockly.Language.math_change = {
   helpUrl: 'http://en.wikipedia.org/wiki/Negation',
   init: function() {
     this.setColour(230);
-    this.addTitle('change');
-    this.addTitle(new Blockly.FieldDropdown(
-        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange))
+    this.appendTitle('change');
+    this.appendTitle(new Blockly.FieldDropdown(
+        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange), 'VAR')
         .setText('item');
     this.appendInput('by', Blockly.INPUT_VALUE, 'DELTA');
     this.setPreviousStatement(true);
@@ -105,15 +105,15 @@ Blockly.Language.math_change = {
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return 'Add a number to variable "' + thisBlock.getTitleText(1) + '".';
+      return 'Add a number to variable "' + thisBlock.getTitleText('VAR') + '".';
     });
   },
   getVars: function() {
-    return [this.getTitleText(1)];
+    return [this.getTitleText('VAR')];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getTitleText(1))) {
-      this.setTitleText(newName, 1);
+    if (Blockly.Names.equals(oldName, this.getTitleText('VAR'))) {
+      this.setTitleText(newName, 'VAR');
     }
   }
 };
@@ -255,7 +255,7 @@ Blockly.Language.math_on_list = {
               thisBlock.MSG_RANDOM_ITEM
               ];
     });
-    this.addTitle(dropdown);
+    this.appendTitle(dropdown, 'OP');
     this.appendInput('of list', Blockly.INPUT_VALUE, 'LIST');
     this.setTooltip('Evaluate a list of numbers and return a member,\nor an aggregated result.');
   },
@@ -305,7 +305,7 @@ Blockly.Language.math_random_int = {
   init: function() {
     this.setColour(230);
     this.setOutput(true);
-    this.addTitle('random integer');
+    this.appendTitle('random integer');
     this.appendInput('from', Blockly.INPUT_VALUE, 'FROM');
     this.appendInput('to', Blockly.INPUT_VALUE, 'TO');
     // TODO: Ensure that only number blocks may used to set range.
@@ -321,7 +321,7 @@ Blockly.Language.math_random_float = {
   init: function() {
     this.setColour(230);
     this.setOutput(true);
-    this.addTitle('random fraction');
+    this.appendTitle('random fraction');
     this.setTooltip('Return a random fraction between\n0.0 (inclusive) and 1.0 (exclusive).');
   }
 };

@@ -28,7 +28,7 @@ Blockly.Python = Blockly.Generator.get('Python');
 
 Blockly.Python.text = function() {
   // Text value.
-  return Blockly.Python.quote_(this.getTitleText(1));
+  return Blockly.Python.quote_(this.getTitleText('TEXT'));
 };
 
 Blockly.Python.text_join = function(opt_dropParens) {
@@ -92,7 +92,7 @@ Blockly.Python.text_endString = function() {
 Blockly.Python.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
   // Should we allow for non-case sensitive???
-  var operator = this.getTitleText(1) == this.MSG_FIRST ? 'find' : 'rfind';
+  var operator = this.getTitleText('END') == this.MSG_FIRST ? 'find' : 'rfind';
   var argument0 = Blockly.Python.valueToCode(this, 'FIND') || '\'\'';
   var argument1 = Blockly.Python.valueToCode(this, 'VALUE') || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
@@ -142,7 +142,7 @@ Blockly.Python.text_changeCase = function() {
 Blockly.Python.text_trim = function() {
   // Trim spaces.
   var operator;
-  switch (this.getTitleText(1)) {
+  switch (this.getTitleText('MODE')) {
     case this.MSG_LEFT:
       operator = 'lstrip';
       break;

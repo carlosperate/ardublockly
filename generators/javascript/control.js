@@ -48,7 +48,7 @@ Blockly.JavaScript.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL', true) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
-  if (this.getTitleText(1) == this.MSG_UNTIL) {
+  if (this.getTitleText('MODE') == this.MSG_UNTIL) {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }
@@ -108,7 +108,7 @@ Blockly.JavaScript.controls_forEach = function() {
 
 Blockly.JavaScript.controls_flow_statements = function() {
   // Flow statements: continue, break.
-  switch (this.getTitleText(0)) {
+  switch (this.getTitleText('FLOW')) {
     case this.MSG_BREAK:
       return 'break;\n';
     case this.MSG_CONTINUE:

@@ -159,7 +159,7 @@ Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
   if (Blockly.Language.procedures_callnoreturn) {
     for (var x = 0; x < proceduresNoReturn.length; x++) {
       var block = new Blockly.Block(workspace, 'procedures_callnoreturn');
-      block.setTitleText(proceduresNoReturn[x], 1);
+      block.setTitleText(proceduresNoReturn[x], 'NAME');
       block.initSvg();
       blocks.push(block);
       gaps.push(margin * 2);
@@ -168,7 +168,7 @@ Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
   if (Blockly.Language.procedures_callreturn) {
     for (var x = 0; x < proceduresReturn.length; x++) {
       var block = new Blockly.Block(workspace, 'procedures_callreturn');
-      block.setTitleText(proceduresReturn[x], 1);
+      block.setTitleText(proceduresReturn[x], 'NAME');
       block.initSvg();
       blocks.push(block);
       gaps.push(margin * 2);

@@ -28,7 +28,7 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.text = function() {
   // Text value.
-  return Blockly.JavaScript.quote_(this.getTitleText(1));
+  return Blockly.JavaScript.quote_(this.getTitleText('TEXT'));
 };
 
 Blockly.JavaScript.text_join = function(opt_dropParens) {
@@ -89,7 +89,7 @@ Blockly.JavaScript.text_endString = function() {
 
 Blockly.JavaScript.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
-  var operator = this.getTitleText(1) == this.MSG_FIRST ? 'indexOf' : 'lastIndexOf';
+  var operator = this.getTitleText('END') == this.MSG_FIRST ? 'indexOf' : 'lastIndexOf';
   var argument0 = Blockly.JavaScript.valueToCode(this, 'FIND') || '\'\'';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE') || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
@@ -158,7 +158,7 @@ Blockly.JavaScript.text_changeCase = function() {
 Blockly.JavaScript.text_trim = function() {
   // Trim spaces.
   var operator;
-  switch (this.getTitleText(1)) {
+  switch (this.getTitleText('MODE')) {
     case this.MSG_LEFT:
       operator = '/^\\s+/';
       break;

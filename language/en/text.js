@@ -34,9 +34,9 @@ Blockly.Language.text = {
   helpUrl: 'http://en.wikipedia.org/wiki/String_(computer_science)',
   init: function() {
     this.setColour(160);
-    this.addTitle('\u201C');
-    this.addTitle(new Blockly.FieldTextInput(''));
-    this.addTitle('\u201D');
+    this.appendTitle('\u201C');
+    this.appendTitle(new Blockly.FieldTextInput(''), 'TEXT');
+    this.appendTitle('\u201D');
     this.setOutput(true);
     this.setTooltip('A letter, word, or line of text.');
   }
@@ -48,7 +48,7 @@ Blockly.Language.text_join = {
   helpUrl: '',
   init: function() {
     this.setColour(160);
-    this.addTitle('create text with');
+    this.appendTitle('create text with');
     this.appendInput('', Blockly.INPUT_VALUE, 'ADD0');
     this.appendInput('', Blockly.INPUT_VALUE, 'ADD1');
     this.setOutput(true);
@@ -111,7 +111,7 @@ Blockly.Language.text_create_join_container = {
   // Container.
   init: function() {
     this.setColour(160);
-    this.addTitle('add');
+    this.appendTitle('add');
     this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('Add, remove, or reorder sections to reconfigure this text block.');
     this.contextMenu = false;
@@ -122,7 +122,7 @@ Blockly.Language.text_create_join_item = {
   // Add items.
   init: function() {
     this.setColour(160);
-    this.addTitle('item');
+    this.appendTitle('item');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Add an item to the text.');
@@ -184,11 +184,11 @@ Blockly.Language.text_indexOf = {
     var thisBlock = this;
     this.setColour(160);
     this.setOutput(true);
-    this.addTitle('find');
+    this.appendTitle('find');
     var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
     });
-    this.addTitle(menu);
+    this.appendTitle(menu, 'END');
     this.appendInput('occurrence of text', Blockly.INPUT_VALUE, 'FIND');
     this.appendInput('in text', Blockly.INPUT_VALUE, 'VALUE');
     this.setInputsInline(true);
@@ -204,7 +204,7 @@ Blockly.Language.text_charAt = {
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
     this.setColour(160);
-    this.addTitle('letter');
+    this.appendTitle('letter');
     this.setOutput(true);
     this.appendInput('at', Blockly.INPUT_VALUE, 'AT');
     this.appendInput('in text', Blockly.INPUT_VALUE, 'VALUE');
@@ -221,7 +221,7 @@ Blockly.Language.text_changeCase = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(160);
-    this.addTitle('to');
+    this.appendTitle('to');
     var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_UPPERCASE, thisBlock.MSG_LOWERCASE, thisBlock.MSG_TITLECASE];
     });
@@ -242,16 +242,16 @@ Blockly.Language.text_trim = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(160);
-    this.addTitle('trim spaces from');
+    this.appendTitle('trim spaces from');
     var menu = new Blockly.FieldDropdown(function() {
       return [thisBlock.MSG_BOTH, thisBlock.MSG_LEFT, thisBlock.MSG_RIGHT];
     }, function(text) {
       var newTitle = (text == thisBlock.MSG_BOTH) ? 'sides' : 'side';
-      sideTitle.setText(newTitle);
+      this.setTitleText(newTitle, 'SIDES');
       this.setText(text);
     });
-    this.addTitle(menu);
-    var sideTitle = this.addTitle('sides');
+    this.appendTitle(menu, 'MODE');
+    this.appendTitle('sides', 'SIDES');
     this.appendInput('', Blockly.INPUT_VALUE, 'TEXT');
     this.setOutput(true);
     this.setTooltip('Return a copy of the text with spaces\nremoved from one or both ends.');
@@ -259,14 +259,14 @@ Blockly.Language.text_trim = {
   mutationToDom: function(workspace) {
     // Save whether the third title should be plural or singular.
     var container = document.createElement('mutation');
-    var plural = (this.getTitleText(1) == this.MSG_BOTH);
+    var plural = (this.getTitleText('MODE') == this.MSG_BOTH);
     container.setAttribute('plural', plural);
     return container;
   },
   domToMutation: function(container) {
     // Restore the third title as plural or singular.
     var plural = (container.getAttribute('plural') == 'true');
-    this.setTitleText(plural ? 'sides' : 'side', 2);
+    this.setTitleText(plural ? 'sides' : 'side', 'SIDES');
   },
   MSG_BOTH: 'both',
   MSG_LEFT: 'left',
@@ -279,7 +279,7 @@ Blockly.Language.text_print = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
     this.setColour(160);
-    this.addTitle('print');
+    this.appendTitle('print');
     this.appendInput('', Blockly.INPUT_VALUE, 'TEXT');
     this.setPreviousStatement(true);
     this.setNextStatement(true);

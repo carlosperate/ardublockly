@@ -85,6 +85,6 @@ Blockly.JavaScript.logic_negate = function(opt_dropParens) {
 
 Blockly.JavaScript.logic_boolean = function() {
   // Boolean values true and false.
-  return (this.getTitleText(0) == this.MSG_TRUE) ?
+  return (this.getTitleText('BOOL') == this.MSG_TRUE) ?
       'true' : 'false';
 };
