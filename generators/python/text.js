@@ -82,7 +82,7 @@ Blockly.Python.text_endString = function() {
   // Do we need to prevent 'List index out of range' ERROR by checking
   // if argument 0 > len(argument1)? Or will ALL error be handled systematically?
   var first = this.getInputLabel('NUM') == this.MSG_FIRST;
-  var argument0 = Blockly.Python.valueToCode(this, 'NUM', true) || '0';
+  var argument0 = Blockly.Python.valueToCode(this, 'NUM', true) || '1';
   var argument1 = Blockly.Python.valueToCode(this, 'TEXT') || '\'\'';
   var code = argument1 + '[' +
       (first ? ':' + argument0 : '-' + argument0 + ':') + ']';

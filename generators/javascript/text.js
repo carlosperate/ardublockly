@@ -72,11 +72,11 @@ Blockly.JavaScript.text_endString = function() {
   var first = this.getInputLabel('NUM') == this.MSG_FIRST;
   var code;
   if (first) {
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM', true) || '0';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM', true) || '1';
     var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT') || '\'\'';
     code = argument1 + '.substring(0, ' + argument0 + ')';
   } else {
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM') || '0';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM') || '1';
     var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT', true) || '\'\'';
     var tempVar = Blockly.JavaScript.variableDB_.getDistinctName('temp_text',
         Blockly.Variables.NAME_TYPE);
@@ -134,7 +134,7 @@ Blockly.JavaScript.text_changeCase = function() {
   var code;
   if (operator) {
     // Upper and lower case are functions built into JavaScript.
-    var argument0 = Blockly.JavaScript.valueToCode(this, 0) || '\'\'';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT') || '\'\'';
     code = argument0 + '.' + operator + '()';
   } else {
     if (!Blockly.JavaScript.definitions_['text_toTitleCase']) {

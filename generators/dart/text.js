@@ -77,11 +77,11 @@ Blockly.Dart.text_endString = function() {
   var first = this.getInputLabel('NUM') == this.MSG_FIRST;
   var code;
   if (first) {
-    var argument0 = Blockly.Dart.valueToCode(this, 'NUM', true) || '0';
+    var argument0 = Blockly.Dart.valueToCode(this, 'NUM', true) || '1';
     var argument1 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
     code = argument1 + '.substring(0, ' + argument0 + ')';
   } else {
-    var argument0 = Blockly.Dart.valueToCode(this, 'NUM') || '0';
+    var argument0 = Blockly.Dart.valueToCode(this, 'NUM') || '1';
     var argument1 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
     var tempVar = Blockly.Dart.variableDB_.getDistinctName('temp_text',
         Blockly.Variables.NAME_TYPE);
@@ -139,7 +139,7 @@ Blockly.Dart.text_changeCase = function() {
   var code;
   if (operator) {
     // Upper and lower case are functions built into Dart.
-    var argument0 = Blockly.Dart.valueToCode(this, 0) || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
     code = argument0 + '.' + operator + '()';
   } else {
     if (!Blockly.Dart.definitions_['toTitleCase']) {
