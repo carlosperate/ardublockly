@@ -128,10 +128,13 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     gElement.setAttribute('transform',
         'translate(0, ' + (x * Blockly.ContextMenu.Y_HEIGHT) + ')');
     resizeList.push(rectElement);
-    Blockly.bindEvent_(gElement, 'mousedown', null, Blockly.noEvent);
-    Blockly.bindEvent_(gElement, 'mouseup', this, callbackFactory(option));
-    Blockly.bindEvent_(gElement, 'mouseup', null,
-                       Blockly.FieldDropdown.hideMenu);
+    this.mouseDownWrapper_ =
+        Blockly.bindEvent_(gElement, 'mousedown', null, Blockly.noEvent);
+    this.mouseUpWrapper1_ =
+        Blockly.bindEvent_(gElement, 'mouseup', this, callbackFactory(option));
+    this.mouseUpWrapper2_ =
+        Blockly.bindEvent_(gElement, 'mouseup', null,
+                           Blockly.FieldDropdown.hideMenu);
     // Compute the length of the longest text length.
     maxWidth = Math.max(maxWidth, textElement.getComputedTextLength());
   }

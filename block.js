@@ -210,7 +210,7 @@ Blockly.Block.prototype.destroy = function(gentle) {
   }
 
   // First, destroy all my children.
-  for (var x = 0; x < this.childBlocks_.length; x++) {
+  for (var x = this.childBlocks_.length - 1; x >= 0; x--) {
     this.childBlocks_[x].destroy(false);
   }
   // Then destroy myself.
@@ -223,6 +223,18 @@ Blockly.Block.prototype.destroy = function(gentle) {
   if (this.mutator) {
     this.mutator.destroy();
   }
+  // Destroy all inputs and their labels.
+  for (var x = 0; x < this.inputList.length; x++) {
+    var input = this.inputList[x];
+    if (input.label) {
+      input.label.destroy();
+    }
+    if (input.destroy) {
+      input.destroy();
+    }
+  }
+  this.inputList = [];
+  // Destroy any remaining connections (next/previous/output).
   var connections = this.getConnections_(true);
   for (var x = 0; x < connections.length; x++) {
     var connection = connections[x];

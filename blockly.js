@@ -394,7 +394,7 @@ Blockly.isTargetInput_ = function(e) {
 Blockly.loadAudio_ = function(name) {
   var sound = new Audio(Blockly.pathToBlockly + 'media/' + name + '.wav');
   // To force the browser to load the sound, play it, but stop it immediately.
-  // If this starts creating a chip on startup, turn the sound's volume down,
+  // If this starts creating a chirp on startup, turn the sound's volume down,
   // or use another caching method such as XHR.
   if (sound && sound.play) {
     sound.play();
@@ -591,21 +591,21 @@ Blockly.removeClass_ = function(node, className) {
  * Bind an event to a function call.
  * @param {!Element} element Element upon which to listen to.
  * @param {string} name Event name to listen to (e.g. 'mousedown').
- * @param {Object} object The value of 'this' in the function.
+ * @param {Object} thisObject The value of 'this' in the function.
  * @param {!Function} func Function to call when event is triggered.
  * @return {!Function} Function wrapper that was bound.  Used for unbindEvent_.
  * @private
  */
-Blockly.bindEvent_ = function(element, name, object, func) {
+Blockly.bindEvent_ = function(element, name, thisObject, func) {
   var wrapFunc;
   if (element.addEventListener) {  // W3C
     wrapFunc = function(e) {
-      func.apply(object, arguments);
+      func.apply(thisObject, arguments);
     };
     element.addEventListener(name, wrapFunc, false);
   } else {  // IE
     wrapFunc = function(e) {
-      func.apply(object, arguments);
+      func.apply(thisObject, arguments);
       e.stopPropagation();
     };
     element.attachEvent('on' + name, wrapFunc);

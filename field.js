@@ -71,7 +71,8 @@ Blockly.Field.prototype.init = function(block) {
       block.editable ? 'blocklyEditableText' : 'blocklyNonEditableText');
   block.getSvgRoot().appendChild(this.group_);
   if (block.editable) {
-    Blockly.bindEvent_(this.group_, 'mouseup', this, this.onMouseUp_);
+    this.mouseUpWrapper_ =
+        Blockly.bindEvent_(this.group_, 'mouseup', this, this.onMouseUp_);
   }
 };
 
@@ -79,6 +80,11 @@ Blockly.Field.prototype.init = function(block) {
  * Destroy all DOM objects belonging to this editable field.
  */
 Blockly.Field.prototype.destroy = function() {
+  if (this.mouseUpWrapper_) {
+    Blockly.unbindEvent_(this.group_, 'mouseup', this.mouseUpWrapper_);
+    this.mouseUpWrapper_ = null;
+  }
+  this.sourceBlock_ = null;
   this.group_.parentNode.removeChild(this.group_);
   this.group_ = null;
   this.textElement_ = null;
