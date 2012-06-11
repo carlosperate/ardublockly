@@ -37,7 +37,7 @@ Blockly.Python.lists_create_with = function() {
   for (n = 0; n < this.itemCount_; n++) {
     code[n] = Blockly.Python.valueToCode(this, 'ADD' + n, true) || 'None';
   }
-  return '[' + code.join(',') + ']';
+  return '[' + code.join(', ') + ']';
 };
 
 Blockly.Python.lists_repeat = function(opt_dropParens) {

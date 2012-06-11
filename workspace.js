@@ -136,6 +136,7 @@ Blockly.Workspace.prototype.getAllBlocks = function() {
  * Destroy all blocks in workspace.
  */
 Blockly.Workspace.prototype.clear = function() {
+  Blockly.hideChaff();
   while (this.topBlocks_.length) {
     this.topBlocks_[0].destroy();
   }

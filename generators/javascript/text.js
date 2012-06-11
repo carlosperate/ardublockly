@@ -69,7 +69,7 @@ Blockly.JavaScript.text_isEmpty = function() {
 
 Blockly.JavaScript.text_endString = function() {
   // Return a leading or trailing substring.
-  var first = this.getInputLabel(NUM) == this.MSG_FIRST;
+  var first = this.getInputLabel('NUM') == this.MSG_FIRST;
   var code;
   if (first) {
     var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM', true) || '0';

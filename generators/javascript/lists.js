@@ -37,7 +37,7 @@ Blockly.JavaScript.lists_create_with = function() {
   for (n = 0; n < this.itemCount_; n++) {
     code[n] = Blockly.JavaScript.valueToCode(this, 'ADD' + n, true) || 'null';
   }
-  return '[' + code.join(',') + ']';
+  return '[' + code.join(', ') + ']';
 };
 
 Blockly.JavaScript.lists_repeat = function() {

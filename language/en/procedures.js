@@ -118,7 +118,7 @@ Blockly.Language.procedures_callreturn = {
   init: function() {
     this.setColour(290);
     this.appendTitle('call');
-    this.appendTitle('procedure');
+    this.appendTitle('procedure', 'NAME');
     this.setOutput(true);
     this.setTooltip('Call a procedure with a return value.');
   },

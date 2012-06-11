@@ -37,7 +37,7 @@ Blockly.Dart.lists_create_with = function() {
   for (n = 0; n < this.itemCount_; n++) {
     code[n] = Blockly.Dart.valueToCode(this, 'ADD' + n, true) || 'null';
   }
-  return '[' + code.join(',') + ']';
+  return '[' + code.join(', ') + ']';
 };
 
 Blockly.Dart.lists_repeat = function(opt_dropParens) {

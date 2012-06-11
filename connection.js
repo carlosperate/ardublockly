@@ -50,6 +50,12 @@ Blockly.Connection.prototype.destroy = function() {
     this.dbList_[this.type].removeConnection_(this);
   }
   this.inDB_ = false;
+  if (Blockly.highlightedConnection_ == this) {
+    Blockly.highlightedConnection_ = null;
+  }
+  if (Blockly.localConnection_ == this) {
+    Blockly.localConnection_ = null;
+  }
 };
 
 /**
@@ -228,10 +234,6 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
     reverse = true;
   }
   // Raise it to the top for extra visiblility.
-  if (!rootBlock.getSvgRoot()) {
-    window.foo = rootBlock;
-    console.log(rootBlock);
-  }
   rootBlock.getSvgRoot().parentNode.appendChild(rootBlock.getSvgRoot());
   var dx = (staticConnection.x_ + Blockly.SNAP_RADIUS) - this.x_;
   var dy = (staticConnection.y_ + Blockly.SNAP_RADIUS * 2) - this.y_;
