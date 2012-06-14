@@ -62,7 +62,7 @@ Blockly.Xml.blockToDom_ = function(block) {
     if (title.name && title.EDITABLE) {
       var container = document.createElement('title');
       container.setAttribute('name', title.name);
-      var titleText = document.createTextNode(title.getText());
+      var titleText = document.createTextNode(title.getValue());
       container.appendChild(titleText);
       element.appendChild(container);
     }
@@ -104,8 +104,8 @@ Blockly.Xml.blockToDom_ = function(block) {
       }
     }
     container.setAttribute('name', input.name);
-    if (input.label && input.label.EDITABLE && input.label.getText) {
-      container.setAttribute('label', input.label.getText());
+    if (input.label && input.label.EDITABLE && input.label.getValue) {
+      container.setAttribute('label', input.label.getValue());
       empty = false;
     }
     if (!empty) {
@@ -274,7 +274,7 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         break;
       case 'title':
-        block.setTitleText(xmlChild.textContent, name);
+        block.setTitleValue(xmlChild.textContent, name);
         break;
       case 'variable':
         var data = xmlChild.getAttribute('data');
@@ -325,7 +325,7 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
     }
     var labelText = xmlChild.getAttribute('label');
     if (labelText !== null && input && input.label && input.label.setText) {
-      input.label.setText(labelText);
+      input.label.setValue(labelText);
     }
   }
   block.render();

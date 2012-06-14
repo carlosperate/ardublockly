@@ -77,10 +77,21 @@ Blockly.Variables.allVariables = function(opt_block) {
  */
 Blockly.Variables.dropdownCreate = function() {
   var variableList = Blockly.Variables.allVariables();
+  // Ensure that the currently selected variable is an option.
+  var name = this.getText();
+  if (name && variableList.indexOf(name) == -1) {
+    variableList.push(name);
+  }
   variableList.sort(Blockly.caseInsensitiveComparator);
   variableList.push(Blockly.MSG_RENAME_VARIABLE);
   variableList.push(Blockly.MSG_NEW_VARIABLE);
-  return variableList;
+  // Variables are not language-specific, use the name as both the user-facing
+  // text and the internal representation.
+  var options = [];
+  for (var x = 0; x < variableList.length; x++) {
+    options[x] = [variableList[x], variableList[x]];
+  }
+  return options;
 };
 
 /**

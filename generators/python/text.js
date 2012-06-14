@@ -81,7 +81,7 @@ Blockly.Python.text_endString = function() {
   // Return a leading or trailing substring.
   // Do we need to prevent 'List index out of range' ERROR by checking
   // if argument 0 > len(argument1)? Or will ALL error be handled systematically?
-  var first = this.getInputLabel('NUM') == this.MSG_FIRST;
+  var first = this.getInputLabelValue('NUM') == 'FIRST';
   var argument0 = Blockly.Python.valueToCode(this, 'NUM', true) || '1';
   var argument1 = Blockly.Python.valueToCode(this, 'TEXT') || '\'\'';
   var code = argument1 + '[' +
@@ -92,7 +92,7 @@ Blockly.Python.text_endString = function() {
 Blockly.Python.text_indexOf = function(opt_dropParens) {
   // Search the text for a substring.
   // Should we allow for non-case sensitive???
-  var operator = this.getTitleText('END') == this.MSG_FIRST ? 'find' : 'rfind';
+  var operator = this.getTitleValue('END') == 'FIRST' ? 'find' : 'rfind';
   var argument0 = Blockly.Python.valueToCode(this, 'FIND') || '\'\'';
   var argument1 = Blockly.Python.valueToCode(this, 'VALUE') || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
@@ -120,43 +120,31 @@ Blockly.Python.text_charAt = function() {
 
 Blockly.Python.text_changeCase = function() {
   // Change capitalization.
-  var operator;
-  switch (this.getInputLabel('TEXT')) {
-    case this.MSG_UPPERCASE:
-      operator = 'upper';
-      break;
-    case this.MSG_LOWERCASE:
-      operator = 'lower';
-      break;
-    case this.MSG_TITLECASE:
-      operator = 'title';
-      break;
-    default:
-      throw 'Unknown operator.';
-  }
+  var mode = this.getInputLabelValue('TEXT');
+  var operator = Blockly.JavaScript.text_changeCase.OPERATORS[mode];
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT', true) || '\'\'';
-  var code = argument0 + '.' + operator + '()';
+  var code = argument0 + operator;
   return code;
+};
+
+Blockly.Python.text_changeCase.OPERATORS = {
+  UPPERCASE: '.upper()',
+  LOWERCASE: '.lower()',
+  TITLECASE: '.title()'
 };
 
 Blockly.Python.text_trim = function() {
   // Trim spaces.
-  var operator;
-  switch (this.getTitleText('MODE')) {
-    case this.MSG_LEFT:
-      operator = 'lstrip';
-      break;
-    case this.MSG_RIGHT:
-      operator = 'rstrip';
-      break;
-    case this.MSG_BOTH:
-      operator = 'strip';
-      break;
-    default:
-      throw 'Unknown operator.';
-  }
+  var mode = this.getTitleValue('MODE');
+  var operator = Blockly.JavaScript.text_trim.OPERATORS[mode];
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT') || '\'\'';
-  return argument0 + '.' + operator + '()';
+  return argument0 + operator;
+};
+
+Blockly.Python.text_trim.OPERATORS = {
+  LEFT: '.lstrip()',
+  RIGHT: '.rstrip()',
+  BOTH: '.strip()'
 };
 
 Blockly.Python.text_print = function() {

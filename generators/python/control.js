@@ -48,7 +48,7 @@ Blockly.Python.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.Python.valueToCode(this, 'BOOL', true) || 'False';
   var branch0 = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
-  if (this.getTitleText('MODE') == this.MSG_UNTIL) {
+  if (this.getTitleValue('MODE') == 'UNTIL') {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }
@@ -90,10 +90,10 @@ Blockly.Python.controls_forEach = function() {
 
 Blockly.Python.controls_flow_statements = function() {
   // Flow statements: continue, break.
-  switch (this.getTitleText('FLOW')) {
-    case this.MSG_BREAK:
+  switch (this.getTitleValue('FLOW')) {
+    case 'BREAK':
       return 'break;\n';
-    case this.MSG_CONTINUE:
+    case 'CONTINUE':
       return 'continue;\n';
   }
   throw 'Unknown flow statement.';

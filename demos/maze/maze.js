@@ -210,7 +210,7 @@ Maze.animate = function() {
                   [Maze.pegmanX - 1, Maze.pegmanY, Maze.pegmanD * 4]);
     Maze.pegmanX--;
   } else if (action.substring(0, 4) == 'fail') {
-    Maze.scheduleFail(action.substring(5) == 'forwards');
+    Maze.scheduleFail(action.substring(5) == 'forward');
   } else if (action == 'left') {
     Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
                   [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 - 4]);
@@ -256,9 +256,9 @@ Maze.schedule = function(startPos, endPos) {
 
 /**
  * Schedule the animations for a failed move.
- * @param {boolean} forwards True if forwards, false if backwards.
+ * @param {boolean} forward True if forward, false if backward.
  */
-Maze.scheduleFail = function(forwards) {
+Maze.scheduleFail = function(forward) {
   var deltaX = 0;
   var deltaY = 0;
   if (Maze.pegmanD == 0) {
@@ -270,7 +270,7 @@ Maze.scheduleFail = function(forwards) {
   } else if (Maze.pegmanD == 3) {
     deltaX = -0.25;
   }
-  if (!forwards) {
+  if (!forward) {
     deltaX = - deltaX;
     deltaY = - deltaY;
   }
@@ -380,21 +380,53 @@ Maze.showCode = function() {
 
 // API
 
+Maze.moveForward = function(id) {
+  Maze.move(0, id);
+};
+
+Maze.moveBackward = function(id) {
+  Maze.move(2, id);
+};
+
+Maze.turnLeft = function(id) {
+  Maze.turn(0, id);
+};
+
+Maze.turnRight = function(id) {
+  Maze.turn(1, id);
+};
+
+Maze.isWallForward = function() {
+  return Maze.isWall(0);
+};
+
+Maze.isWallRight = function() {
+  return Maze.isWall(1);
+};
+
+Maze.isWallBackward = function() {
+  return Maze.isWall(2);
+};
+
+Maze.isWallLeft = function() {
+  return Maze.isWall(3);
+};
+
+//
+
 /**
- * Move pegman forwards or backwards.
- * @param {number} direction Direction to move (0 = forward, 1 = backward).
+ * Move pegman forward or backward.
+ * @param {number} direction Direction to move (0 = forward, 2 = backward).
  * @param {string} id ID of block that triggered this action.
  */
 Maze.move = function(direction, id) {
-  if (Maze.isWall(direction ? 3 : 0)) {
-    Maze.path.push(['fail_' + (direction ? 'backwards' : 'forwards'), id]);
+  if (Maze.isWall(direction)) {
+    Maze.path.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
     return;
   }
-  var effectiveDirection = Maze.pegmanD;
-  if (direction) {
-    // Moving backwards.  Flip the effective direction.
-    effectiveDirection = Maze.constrainDirection4(effectiveDirection + 2);
-  }
+  // If moving backward, flip the effective direction.
+  var effectiveDirection = Maze.pegmanD + direction;
+  effectiveDirection = Maze.constrainDirection4(effectiveDirection);
   var command;
   if (effectiveDirection == Maze.NORTH) {
     Maze.pegmanY--;
@@ -423,7 +455,6 @@ Maze.move = function(direction, id) {
  * @param {string} id ID of block that triggered this action.
  */
 Maze.turn = function(direction, id) {
-  Maze.checkTimeout();
   if (direction) {
     // Right turn (clockwise).
     Maze.pegmanD++;
@@ -439,19 +470,11 @@ Maze.turn = function(direction, id) {
 /**
  * Is there a wall next to pegman?
  * @param {number} direction Direction to look
- *     (0 = ahead, 1 = left, 2 = right, 3 = behind).
+ *     (0 = forward, 1 = right, 2 = backward, 3 = left).
  * @return {boolean} True if there is a wall.
  */
 Maze.isWall = function(direction) {
-  Maze.checkTimeout();
-  var effectiveDirection = Maze.pegmanD;
-  if (direction == 1) {  // Left
-    effectiveDirection--;
-  } else if (direction == 2) { // Right
-    effectiveDirection++;
-  } else if (direction == 3) { // Behind
-    effectiveDirection += 2;
-  }
+  var effectiveDirection = Maze.pegmanD + direction;
   effectiveDirection = Maze.constrainDirection4(effectiveDirection);
   var square;
   if (effectiveDirection == Maze.NORTH) {

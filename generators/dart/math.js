@@ -37,21 +37,24 @@ Blockly.Dart.math_arithmetic = function(opt_dropParens) {
   var argument1 = Blockly.Dart.valueToCode(this, 'B') || '0';
   var code;
 
-  if (this.getInputLabel('B') == this.MSG_POW) {
+  var mode = this.getInputLabelValue('B');
+  if (mode == 'POWER') {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
   } else {
-    var map = {};
-    map[this.MSG_ADD] = '+';
-    map[this.MSG_MINUS] = '-';
-    map[this.MSG_MULTIPLY] = '*';
-    map[this.MSG_DIVIDE] = '/';
-    var operator = map[this.getInputLabel('B')];
-    code = argument0 + ' ' + operator + ' ' + argument1;
+    var operator = Blockly.Dart.math_arithmetic.OPERATORS[mode];
+    code = argument0 + operator + argument1;
     if (!opt_dropParens) {
       code = '(' + code + ')';
     }
   }
   return code;
+};
+
+Blockly.Dart.math_arithmetic.OPERATORS = {
+  ADD: ' + ',
+  MINUS: ' - ',
+  MULTIPLY: ' * ',
+  DIVIDE: ' / '
 };
 
 Blockly.Dart.math_change = function() {
@@ -73,41 +76,41 @@ Blockly.Dart.math_single = function(opt_dropParens) {
     // Need to wrap non-trivial numbers in parentheses: (-4).abs()
     argDartSafe = '(' + argDartSafe + ')';
   }
-  var operator = this.getInputLabel('NUM');
+  var operator = this.getInputLabelValue('NUM');
   var code;
   // First, handle cases which generate values that don't need parentheses.
   switch (operator) {
-    case this.MSG_ABS:
+    case 'ABS':
       code = argDartSafe + '.abs()';
       break;
-    case this.MSG_ROOT:
+    case 'ROOT':
       code = 'Math.sqrt(' + argNaked + ')';
       break;
-    case this.MSG_LN:
+    case 'LN':
       code = 'Math.log(' + argNaked + ')';
       break;
-    case this.MSG_EXP:
+    case 'EXP':
       code = 'Math.exp(' + argNaked + ')';
       break;
-    case this.MSG_10POW:
+    case '10POW':
       code = 'Math.pow(10,' + argNaked + ')';
-    case this.MSG_ROUND:
+    case 'ROUND':
       // Dart-safe parens not needed since -4.2.round() == (-4.2).round()
       code = argParen + '.round()';
       break;
-    case this.MSG_ROUNDUP:
+    case 'ROUNDUP':
       code = argDartSafe + '.ceil()';
       break;
-    case this.MSG_ROUNDDOWN:
+    case 'ROUNDDOWN':
       operator = argDartSafe + '.floor()';
       break;
-    case this.MSG_SIN:
+    case 'SIN':
       code = 'Math.sin(' + argParen + ' / 180 * Math.PI)';
       break;
-    case this.MSG_COS:
+    case 'COS':
       code = 'Math.cos(' + argParen + ' / 180 * Math.PI)';
       break;
-    case this.MSG_TAN:
+    case 'TAN':
       code = 'Math.tan(' + argParen + ' / 180 * Math.PI)';
       break;
   }
@@ -116,19 +119,19 @@ Blockly.Dart.math_single = function(opt_dropParens) {
   }
   // Second, handle cases which generate values that may need parentheses.
   switch (operator) {
-    case this.MSG_NEG:
+    case 'NEG':
       code = '-' + argParen;
       break;
-    case this.MSG_LOG10:
+    case 'LOG10':
       code = 'Math.log(' + argNaked + ') / Math.log(10)';
       break;
-    case this.MSG_ASIN:
+    case 'ASIN':
       code = 'Math.asin(' + argNaked + ') / Math.PI * 180';
       break;
-    case this.MSG_ACOS:
+    case 'ACOS':
       code = 'Math.acos(' + argNaked + ') / Math.PI * 180';
       break;
-    case this.MSG_ATAN:
+    case 'ATAN':
       code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
       break;
     default:
@@ -147,11 +150,11 @@ Blockly.Dart.math_trig = Blockly.Dart.math_single;
 
 Blockly.Dart.math_on_list = function() {
   // Rounding functions.
-  func = this.getTitleText('OP');
+  func = this.getTitleValue('OP');
   list = Blockly.Dart.valueToCode(this, 'LIST', true) || '[]';
   var code;
   switch (func) {
-    case this.MSG_SUM:
+    case 'SUM':
       if (!Blockly.Dart.definitions_['math_sum']) {
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_sum', Blockly.Generator.NAME_TYPE);
@@ -166,7 +169,7 @@ Blockly.Dart.math_on_list = function() {
       }
       code = Blockly.Dart.math_on_list.math_sum + '(' + list + ')';
       break;
-    case this.MSG_MIN:
+    case 'MIN':
       if (!Blockly.Dart.definitions_['math_min']) {
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_min', Blockly.Generator.NAME_TYPE);
@@ -182,7 +185,7 @@ Blockly.Dart.math_on_list = function() {
       }
       code = Blockly.Dart.math_on_list.math_min + '(' + list + ')';
       break;
-    case this.MSG_MAX:
+    case 'MAX':
       if (!Blockly.Dart.definitions_['math_max']) {
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_max', Blockly.Generator.NAME_TYPE);
@@ -198,7 +201,7 @@ Blockly.Dart.math_on_list = function() {
       }
       code = Blockly.Dart.math_on_list.math_max + '(' + list + ')';
       break;
-    case this.MSG_AVERAGE:
+    case 'AVERAGE':
       if (!Blockly.Dart.definitions_['math_average']) {
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_average', Blockly.Generator.NAME_TYPE);
@@ -214,7 +217,7 @@ Blockly.Dart.math_on_list = function() {
       }
       code = Blockly.Dart.math_on_list.math_average + '(' + list + ')';
       break;
-    case this.MSG_MEDIAN:
+    case 'MEDIAN':
       if (!Blockly.Dart.definitions_['math_median']) {
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_median', Blockly.Generator.NAME_TYPE);
@@ -237,7 +240,7 @@ Blockly.Dart.math_on_list = function() {
       }
       code = Blockly.Dart.math_on_list.math_median + '(' + list + ')';
       break;
-    case this.MSG_MODE:
+    case 'MODE':
       if (!Blockly.Dart.definitions_['math_modes']) {
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_modes', Blockly.Generator.NAME_TYPE);
@@ -278,7 +281,7 @@ Blockly.Dart.math_on_list = function() {
       }
       code = Blockly.Dart.math_on_list.math_modes + '(' + list + ')';
       break;
-    case this.MSG_STD_DEV:
+    case 'STD_DEV':
       if (!Blockly.Dart.definitions_['math_standard_deviation']) {
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_standard_deviation', Blockly.Generator.NAME_TYPE);
@@ -300,7 +303,7 @@ Blockly.Dart.math_on_list = function() {
       }
       code = Blockly.Dart.math_on_list.math_standard_deviation + '(' + list + ')';
       break;
-    case this.MSG_RANDOM_ITEM:
+    case 'RANDOM':
       code = list + '[(Math.random() * ' + list + '.length).floor().toInt()]';
       break;
     default:

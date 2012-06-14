@@ -96,8 +96,7 @@ Blockly.Procedures.isLegalName = function(name, workspace, opt_exclude) {
     var func = blocks[x].getProcedureDef;
     if (func) {
       var procName = func.call(blocks[x]);
-      // Procedure name may be null if the block is only half-built.
-      if (procName && procName[0].toLowerCase() == name) {
+      if (procName[0].toLowerCase() == name) {
         return false;
       }
     }

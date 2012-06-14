@@ -53,7 +53,8 @@ Blockly.Language.text_join = {
     this.appendInput('', Blockly.INPUT_VALUE, 'ADD1');
     this.setOutput(true);
     this.setMutator(new Blockly.Mutator(this, ['text_create_join_item']));
-    this.setTooltip('Create a piece of text by joining\ntogether any number of items.');
+    this.setTooltip('Create a piece of text by joining\n' +
+                    'together any number of items.');
     this.itemCount_ = 2;
   },
   mutationToDom: function(workspace) {
@@ -138,7 +139,8 @@ Blockly.Language.text_length = {
     this.setColour(160);
     this.appendInput('length', Blockly.INPUT_VALUE, 'VALUE');
     this.setOutput(true);
-    this.setTooltip('Returns number of letters (including spaces)\nin the provided text.');
+    this.setTooltip('Returns number of letters (including spaces)\n' +
+                    'in the provided text.');
   }
 };
 
@@ -164,16 +166,17 @@ Blockly.Language.text_endString = {
     this.setColour(160);
     this.setOutput(true);
     var menu = new Blockly.FieldDropdown(function() {
-      return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
+      return Blockly.Language.text_endString.OPERATORS;
     });
     this.appendInput(menu, Blockly.INPUT_VALUE, 'NUM');
     this.appendInput('letters in text', Blockly.INPUT_VALUE, 'TEXT');
     this.setInputsInline(true);
     this.setTooltip('Returns specified number of letters at the beginning or end of the text.');
-  },
-  MSG_FIRST: 'first',
-  MSG_LAST: 'last'
+  }
 };
+
+Blockly.Language.text_endString.OPERATORS =
+    [['first', 'FIRST'], ['last', 'LAST']];
 
 Blockly.Language.text_indexOf = {
   // Find a substring in the text.
@@ -186,17 +189,20 @@ Blockly.Language.text_indexOf = {
     this.setOutput(true);
     this.appendTitle('find');
     var menu = new Blockly.FieldDropdown(function() {
-      return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
+      return Blockly.Language.text_indexOf.OPERATORS;
     });
     this.appendTitle(menu, 'END');
     this.appendInput('occurrence of text', Blockly.INPUT_VALUE, 'FIND');
     this.appendInput('in text', Blockly.INPUT_VALUE, 'VALUE');
     this.setInputsInline(true);
-    this.setTooltip('Returns the index of the first/last occurrence\nof first text in the second text.\nReturns 0 if text is not found.');
-  },
-  MSG_FIRST: 'first',
-  MSG_LAST: 'last'
+    this.setTooltip('Returns the index of the first/last occurrence\n' +
+                    'of first text in the second text.\n' +
+                    'Returns 0 if text is not found.');
+  }
 };
+
+Blockly.Language.text_indexOf.OPERATORS =
+    [['first', 'FIRST'], ['last', 'LAST']];
 
 Blockly.Language.text_charAt = {
   // Get a character from the string.
@@ -223,16 +229,18 @@ Blockly.Language.text_changeCase = {
     this.setColour(160);
     this.appendTitle('to');
     var menu = new Blockly.FieldDropdown(function() {
-      return [thisBlock.MSG_UPPERCASE, thisBlock.MSG_LOWERCASE, thisBlock.MSG_TITLECASE];
+      return Blockly.Language.text_changeCase.OPERATORS;
     });
     this.appendInput(menu, Blockly.INPUT_VALUE, 'TEXT');
     this.setOutput(true);
     this.setTooltip('Return a copy of the text in a different case.');
   },
-  MSG_UPPERCASE: 'UPPER CASE',
-  MSG_LOWERCASE: 'lower case',
-  MSG_TITLECASE: 'Title Case'
 };
+
+Blockly.Language.text_changeCase.OPERATORS =
+    [['UPPER CASE', 'UPPERCASE'],
+     ['lower case', 'LOWERCASE'],
+     ['Title Case', 'TITLECASE']];
 
 Blockly.Language.text_trim = {
   // Trim spaces.
@@ -244,9 +252,9 @@ Blockly.Language.text_trim = {
     this.setColour(160);
     this.appendTitle('trim spaces from');
     var menu = new Blockly.FieldDropdown(function() {
-      return [thisBlock.MSG_BOTH, thisBlock.MSG_LEFT, thisBlock.MSG_RIGHT];
+      return Blockly.Language.text_trim.OPERATORS;
     }, function(text) {
-      var newTitle = (text == thisBlock.MSG_BOTH) ? 'sides' : 'side';
+      var newTitle = (text == 'both') ? 'sides' : 'side';
       this.setTitleText(newTitle, 'SIDES');
       this.setText(text);
     });
@@ -254,24 +262,25 @@ Blockly.Language.text_trim = {
     this.appendTitle('sides', 'SIDES');
     this.appendInput('', Blockly.INPUT_VALUE, 'TEXT');
     this.setOutput(true);
-    this.setTooltip('Return a copy of the text with spaces\nremoved from one or both ends.');
+    this.setTooltip('Return a copy of the text with spaces\n' +
+                    'removed from one or both ends.');
   },
   mutationToDom: function(workspace) {
-    // Save whether the third title should be plural or singular.
+    // Save whether the 'sides' title should be plural or singular.
     var container = document.createElement('mutation');
-    var plural = (this.getTitleText('MODE') == this.MSG_BOTH);
+    var plural = (this.getTitleValue('MODE') == 'BOTH');
     container.setAttribute('plural', plural);
     return container;
   },
   domToMutation: function(container) {
-    // Restore the third title as plural or singular.
+    // Restore the 'sides' title as plural or singular.
     var plural = (container.getAttribute('plural') == 'true');
     this.setTitleText(plural ? 'sides' : 'side', 'SIDES');
-  },
-  MSG_BOTH: 'both',
-  MSG_LEFT: 'left',
-  MSG_RIGHT: 'right'
+  }
 };
+
+Blockly.Language.text_trim.OPERATORS =
+    [['both', 'BOTH'], ['left', 'LEFT'], ['right', 'RIGHT']];
 
 Blockly.Language.text_print = {
   // Print statement.

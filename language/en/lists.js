@@ -140,7 +140,8 @@ Blockly.Language.lists_repeat = {
     this.appendInput('with item', Blockly.INPUT_VALUE, 'ITEM');
     this.appendInput('repeated', Blockly.INPUT_VALUE, 'NUM');
     this.setInputsInline(true);
-    this.setTooltip('Creates a list consisting of the given value\nrepeated the specified number of times.');
+    this.setTooltip('Creates a list consisting of the given value\n' +
+                    'repeated the specified number of times.');
   }
 };
 
@@ -179,17 +180,20 @@ Blockly.Language.lists_indexOf = {
     this.setOutput(true);
     this.appendTitle('find');
     var menu = new Blockly.FieldDropdown(function() {
-      return [thisBlock.MSG_FIRST, thisBlock.MSG_LAST];
+      return Blockly.Language.lists_indexOf.OPERATORS;
     });
     this.appendTitle(menu, 'END');
     this.appendInput('occurrence of item', Blockly.INPUT_VALUE, 'FIND');
     this.appendInput('in list', Blockly.INPUT_VALUE, 'VALUE');
     this.setInputsInline(true);
-    this.setTooltip('Returns the index of the first/last occurrence\nof the item in the list.\nReturns 0 if text is not found.');
-  },
-  MSG_FIRST: 'first',
-  MSG_LAST: 'last'
+    this.setTooltip('Returns the index of the first/last occurrence\n' +
+                    'of the item in the list.\n' +
+                    'Returns 0 if text is not found.');
+  }
 };
+
+Blockly.Language.lists_indexOf.OPERATORS =
+    [['first', 'FIRST'], ['last', 'LAST']];
 
 Blockly.Language.lists_getIndex = {
   // Get element at index.

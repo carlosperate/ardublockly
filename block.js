@@ -836,6 +836,34 @@ Blockly.Block.prototype.appendTitle = function(title, opt_name) {
 };
 
 /**
+ * Returns the human-readable text from the title of a block.
+ * @param {string} name The name of the title.
+ * @return {!string} Text from the title or null if title does not exist.
+ */
+Blockly.Block.prototype.getTitleText = function(name) {
+  for (var x = 0, title; title = this.titleRow[x]; x++) {
+    if (title.name === name) {
+      return title.getText();
+    }
+  }
+  return null;
+};
+
+/**
+ * Returns the language-neutral value from the title of a block.
+ * @param {string} name The name of the title.
+ * @return {!string} Value from the title or null if title does not exist.
+ */
+Blockly.Block.prototype.getTitleValue = function(name) {
+  for (var x = 0, title; title = this.titleRow[x]; x++) {
+    if (title.name === name) {
+      return title.getValue();
+    }
+  }
+  return null;
+};
+
+/**
  * Change the title text for a block (e.g. 'choose' or 'remove list item').
  * @param {string} newText Text to be the new title.
  * @param {string} name The name of the title.
@@ -851,17 +879,18 @@ Blockly.Block.prototype.setTitleText = function(newText, name) {
 };
 
 /**
- * Returns the text from the title of a block.
+ * Change the title value for a block (e.g. 'CHOOSE' or 'REMOVE').
+ * @param {string} newValue Value to be the new title.
  * @param {string} name The name of the title.
- * @return {!string} Text from the title or null if title does not exist.
  */
-Blockly.Block.prototype.getTitleText = function(name) {
+Blockly.Block.prototype.setTitleValue = function(newValue, name) {
   for (var x = 0, title; title = this.titleRow[x]; x++) {
     if (title.name === name) {
-      return title.getText();
+      title.setValue(newValue);
+      return;
     }
   }
-  return null;
+  throw 'Title "' + name + '" not found.';
 };
 
 /**
@@ -1147,18 +1176,18 @@ Blockly.Block.prototype.setInputVariable = function(name, text) {
 };
 
 /**
- * Fetches the text of the label attached to the named input.
+ * Fetches the value of the label attached to the named input.
  * @param {string} name The name of the input.
  * @return {string} The label's text, or null if the input does not exist.
  */
-Blockly.Block.prototype.getInputLabel = function(name) {
+Blockly.Block.prototype.getInputLabelValue = function(name) {
   var input = this.getInput(name);
   if (input) {
     var label = input.label;
     if (label) {
       if (label.getText) {
         // Editable field.
-        return label.getText();
+        return label.getValue();
       } else {
         // Static text.
         return label.textContent;

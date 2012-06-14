@@ -43,17 +43,16 @@ Blockly.Language.maze_move = {
     this.appendTitle(dropdown, 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Moves the mouse forward or backward one space.');
+    this.setTooltip('Moves Pegman forward or backward one space.');
   }
 };
 
-Blockly.Language.maze_move.DIRECTIONS = ['forward', 'backward'];
+Blockly.Language.maze_move.DIRECTIONS =
+    [['forward', 'moveForward'], ['backward', 'moveBackward']];
 
 Blockly.JavaScript.maze_move = function() {
   // Generate JavaScript for moving forward or backwards.
-  var direction = Blockly.Language.maze_move.DIRECTIONS
-      .indexOf(this.getTitleText('DIR'));
-  return 'Maze.move(' + direction + ', "' + this.id + '");\n';
+  return 'Maze.' + this.getTitleValue('DIR') + '("' + this.id + '");\n';
 };
 
 Blockly.Language.maze_turnLeft = {
@@ -69,11 +68,12 @@ Blockly.Language.maze_turnLeft = {
     this.appendTitle(dropdown, 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Turns the mouse left or right by 90 degrees.');
+    this.setTooltip('Turns Pegman left or right by 90 degrees.');
   }
 };
 
-Blockly.Language.maze_turnLeft.DIRECTIONS = ['left', 'right'];
+Blockly.Language.maze_turnLeft.DIRECTIONS =
+    [['left', 'turnLeft'], ['right', 'turnRight']];
 
 Blockly.Language.maze_turnRight = {
   // Block for turning left or right.
@@ -86,18 +86,16 @@ Blockly.Language.maze_turnRight = {
       return Blockly.Language.maze_turnLeft.DIRECTIONS;
     });
     this.appendTitle(dropdown, 'DIR');
-    this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1], 'DIR');
+    this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1][0], 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Turns the mouse left or right by 90 degrees.');
+    this.setTooltip('Turns Pegman left or right by 90 degrees.');
   }
 };
 
 Blockly.JavaScript.maze_turnLeft = function() {
   // Generate JavaScript for turning left or right.
-  var direction = Blockly.Language.maze_turnLeft.DIRECTIONS
-      .indexOf(this.getTitleText('DIR'));
-  return 'Maze.turn(' + direction + ', "' + this.id + '");\n';
+  return 'Maze.' + this.getTitleValue('DIR') + '("' + this.id + '");\n';
 };
 
 // Turning left and right use the same code.
@@ -121,13 +119,14 @@ Blockly.Language.maze_isWall = {
 };
 
 Blockly.Language.maze_isWall.DIRECTIONS =
-    ['ahead', 'to the left', 'to the right', 'behind'];
+    [['ahead', 'isWallForward'],
+     ['to the left', 'isWallLeft'],
+     ['to the right', 'isWallRight'],
+     ['behind', 'isWallBackward']];
 
 Blockly.JavaScript.maze_isWall = function() {
   // Generate JavaScript for checking if there is a wall.
-  var direction = Blockly.Language.maze_isWall.DIRECTIONS
-      .indexOf(this.getTitleText('DIR'));
-  return 'Maze.isWall(' + direction + ')';
+  return 'Maze.' + this.getTitleValue('DIR') + '()';
 };
 
 Blockly.Language.controls_forever = {
@@ -154,7 +153,7 @@ Blockly.JavaScript.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL', true) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
-  if (this.getTitleText('MODE') == this.MSG_UNTIL) {
+  if (this.getTitleValue('MODE') == 'UNTIL') {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }

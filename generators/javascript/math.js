@@ -37,21 +37,24 @@ Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || '0';
   var code;
 
-  if (this.getInputLabel('B') == this.MSG_POW) {
+  var mode = this.getInputLabelValue('B');
+  if (mode == 'POWER') {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
   } else {
-    var map = {};
-    map[this.MSG_ADD] = '+';
-    map[this.MSG_MINUS] = '-';
-    map[this.MSG_MULTIPLY] = '*';
-    map[this.MSG_DIVIDE] = '/';
-    var operator = map[this.getInputLabel('B')];
-    code = argument0 + ' ' + operator + ' ' + argument1;
+    var operator = Blockly.JavaScript.math_arithmetic.OPERATORS[mode];
+    code = argument0 + operator + argument1;
     if (!opt_dropParens) {
       code = '(' + code + ')';
     }
   }
   return code;
+};
+
+Blockly.JavaScript.math_arithmetic.OPERATORS = {
+  ADD: ' + ',
+  MINUS: ' - ',
+  MULTIPLY: ' * ',
+  DIVIDE: ' / '
 };
 
 Blockly.JavaScript.math_change = function() {
@@ -67,41 +70,41 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
   // Math operators with single operand.
   var argNaked = Blockly.JavaScript.valueToCode(this, 'NUM', true) || '0';
   var argParen = Blockly.JavaScript.valueToCode(this, 'NUM', false) || '0';
-  var operator = this.getInputLabel('NUM');
+  var operator = this.getInputLabelValue('NUM');
   var code;
   // First, handle cases which generate values that don't need parentheses wrapping the code.
   switch (operator) {
-    case this.MSG_ABS:
+    case 'ABS':
       code = 'Math.abs(' + argNaked + ')';
       break;
-    case this.MSG_ROOT:
+    case 'ROOT':
       code = 'Math.sqrt(' + argNaked + ')';
       break;
-    case this.MSG_LN:
+    case 'LN':
       code = 'Math.log(' + argNaked + ')';
       break;
-    case this.MSG_EXP:
+    case 'EXP':
       code = 'Math.exp(' + argNaked + ')';
       break;
-    case this.MSG_10POW:
+    case '10POW':
       code = 'Math.pow(10,' + argNaked + ')';
       break;
-    case this.MSG_ROUND:
+    case 'ROUND':
       code = 'Math.round(' + argNaked + ')';
       break;
-    case this.MSG_ROUNDUP:
+    case 'ROUNDUP':
       code = 'Math.ceil(' + argNaked + ')';
       break;
-    case this.MSG_ROUNDDOWN:
+    case 'ROUNDDOWN':
       code = 'Math.floor(' + argNaked + ')';
       break;
-    case this.MSG_SIN:
+    case 'SIN':
       code = 'Math.sin(' + argParen + ' / 180 * Math.PI)';
       break;
-    case this.MSG_COS:
+    case 'COS':
       code = 'Math.cos(' + argParen + ' / 180 * Math.PI)';
       break;
-    case this.MSG_TAN:
+    case 'TAN':
       code = 'Math.tan(' + argParen + ' / 180 * Math.PI)';
       break;
   }
@@ -110,19 +113,19 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
   }
   // Second, handle cases which generate values that may need parentheses wrapping the code.
   switch (operator) {
-    case this.MSG_NEG:
+    case 'NEG':
       code = '-' + argParen;
       break;
-    case this.MSG_LOG10:
+    case 'LOG10':
       code = 'Math.log(' + argNaked + ') / Math.log(10)';
       break;
-    case this.MSG_ASIN:
+    case 'ASIN':
       code = 'Math.asin(' + argNaked + ') / Math.PI * 180';
       break;
-    case this.MSG_ACOS:
+    case 'ACOS':
       code = 'Math.acos(' + argNaked + ') / Math.PI * 180';
       break;
-    case this.MSG_ATAN:
+    case 'ATAN':
       code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
       break;
     default:
@@ -141,24 +144,24 @@ Blockly.JavaScript.math_trig = Blockly.JavaScript.math_single;
 
 Blockly.JavaScript.math_on_list = function() {
   // Rounding functions.
-  func = this.getTitleText('OP');
+  func = this.getTitleValue('OP');
   list = Blockly.JavaScript.valueToCode(this, 'LIST', true) || '[]';
   var code;
   switch (func) {
-    case this.MSG_SUM:
+    case 'SUM':
       code = list + '.reduce(function(x, y) {return x + y;})';
       break;
-    case this.MSG_MIN:
+    case 'MIN':
       code = 'Math.min.apply(null,' + list + ')';
       break;
-    case this.MSG_MAX:
+    case 'MAX':
       code = 'Math.max.apply(null,' + list + ')';
       break;
-    case this.MSG_AVERAGE:
+    case 'AVERAGE':
       code = '(' + list + '.reduce(function(x, y) {return x + y;})/' + list +
       '.length)';
       break;
-    case this.MSG_MEDIAN:
+    case 'MEDIAN':
       if (!Blockly.JavaScript.definitions_['math_median']) {
         var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
             'math_median', Blockly.Generator.NAME_TYPE);
@@ -181,7 +184,7 @@ Blockly.JavaScript.math_on_list = function() {
       }
       code = Blockly.JavaScript.math_on_list.math_median + '(' + list + ')';
       break;
-    case this.MSG_MODE:
+    case 'MODE':
       if (!Blockly.JavaScript.definitions_['math_modes']) {
         var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
             'math_modes', Blockly.Generator.NAME_TYPE);
@@ -222,7 +225,7 @@ Blockly.JavaScript.math_on_list = function() {
       }
       code = Blockly.JavaScript.math_on_list.math_modes + '(' + list + ')';
       break;
-    case this.MSG_STD_DEV:
+    case 'STD_DEV':
       if (!Blockly.JavaScript.definitions_['math_standard_deviation']) {
         var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
             'math_standard_deviation', Blockly.Generator.NAME_TYPE);
@@ -244,7 +247,7 @@ Blockly.JavaScript.math_on_list = function() {
       }
       code = Blockly.JavaScript.math_on_list.math_standard_deviation + '(' + list + ')';
       break;
-    case this.MSG_RANDOM_ITEM:
+    case 'RANDOM':
       code = list + '[Math.floor(Math.random() * ' + list + '.length)]';
       break;
     default:

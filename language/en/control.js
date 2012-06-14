@@ -46,11 +46,15 @@ Blockly.Language.controls_if = {
       if (!thisBlock.elseifCount_ && !thisBlock.elseCount_) {
         return 'If a value is true, then do some statements.';
       } else if (!thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return 'If a value is true, then do the first block of statements.\nOtherwise, do the second block of statements.';
+        return 'If a value is true, then do the first block of statements.\n' +
+               'Otherwise, do the second block of statements.';
       } else if (thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-        return 'If the first value is true, then do the first block of statements.\nOtherwise, if the second value is true, do the second block of statements.';
+        return 'If the first value is true, then do the first block of statements.\n' +
+               'Otherwise, if the second value is true, do the second block of statements.';
       } else if (thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return 'If the first value is true, then do the first block of statements.\nOtherwise, if the second value is true, do the second block of statements.\nIf none of the values are true, do the last block of statements.';
+        return 'If the first value is true, then do the first block of statements.\n' +
+               'Otherwise, if the second value is true, do the second block of statements.\n' +
+               'If none of the values are true, do the last block of statements.';
       }
       return '';
     });
@@ -197,8 +201,7 @@ Blockly.Language.controls_whileUntil = {
     this.setColour(120);
     this.appendTitle('repeat');
     var dropdown = new Blockly.FieldDropdown(function() {
-      return [Blockly.Language.controls_whileUntil.MSG_WHILE,
-              Blockly.Language.controls_whileUntil.MSG_UNTIL];
+      return Blockly.Language.controls_whileUntil.OPERATORS;
     });
     this.appendTitle(dropdown, 'MODE');
     this.appendInput('', Blockly.INPUT_VALUE, 'BOOL');
@@ -208,17 +211,19 @@ Blockly.Language.controls_whileUntil = {
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      switch (thisBlock.getTitleText('MODE')) {
-        case Blockly.Language.controls_whileUntil.MSG_WHILE:
-          return 'While a value is true, then do some statements.';
-        case Blockly.Language.controls_whileUntil.MSG_UNTIL:
-          return 'While a value is false, then do some statements.';
-      }
-      return '';
+      var op = thisBlock.getTitleValue('MODE');
+      return Blockly.Language.controls_whileUntil.TOOLTIPS[op];
     });
-  },
-  MSG_WHILE: 'while',
-  MSG_UNTIL: 'until'
+  }
+};
+
+Blockly.Language.controls_whileUntil.OPERATORS =
+    [['while', 'WHILE'],
+     ['until', 'UNTIL']];
+
+Blockly.Language.controls_whileUntil.TOOLTIPS = {
+  WHILE: 'While a value is true, then do some statements.',
+  UNTIL: 'While a value is false, then do some statements.'
 };
 
 Blockly.Language.controls_for = {
@@ -291,24 +296,22 @@ Blockly.Language.controls_flow_statements = {
     this.setColour(120);
     var thisBlock = this;
     var dropdown = new Blockly.FieldDropdown(function() {
-      return [
-          thisBlock.MSG_BREAK,
-          thisBlock.MSG_CONTINUE
-        ];
+      return Blockly.Language.controls_flow_statements.OPERATORS;
     });
     this.appendTitle(dropdown, 'FLOW');
     this.appendTitle('of loop');
     this.setPreviousStatement(true);
     this.setTooltip(function() {
-      switch (thisBlock.getTitleText('FLOW')) {
-        case thisBlock.MSG_BREAK:
-          return 'Break out of the containing loop.';
-        case thisBlock.MSG_CONTINUE:
-          return 'Skip the rest of this loop, and\ncontinue with the next iteration.';
-      }
-      return '';
+      var op = thisBlock.getTitleValue('FLOW');
+      return Blockly.Language.controls_flow_statements.TOOLTIPS[op];
     });
-  },
-  MSG_BREAK: 'break out',
-  MSG_CONTINUE: 'continue with next iteration'
+  }
+};
+
+Blockly.Language.controls_flow_statements.OPERATORS =
+    [['break out', 'BREAK'], ['continue with next iteration', 'CONTINUE']];
+
+Blockly.Language.controls_flow_statements.TOOLTIPS = {
+  BREAK: 'Break out of the containing loop.',
+  CONTINUE: 'Skip the rest of this loop, and\ncontinue with the next iteration.'
 };

@@ -54,7 +54,8 @@
           msg += 'Try loading index.html instead of frame.html';
         } else if (window.location.protocol == 'file:') {
           msg += 'This may be due to a security restriction preventing\n' +
-              'access when using the file:// protocol.';
+              'access when using the file:// protocol.\n' +
+              'http://code.google.com/p/chromium/issues/detail?id=47416';
         }
         alert(msg);
       }
