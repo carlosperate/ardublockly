@@ -55,9 +55,7 @@ Blockly.Language.math_arithmetic = {
     this.setColour(230);
     this.setOutput(true);
     this.appendInput('', Blockly.INPUT_VALUE, 'A');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.math_arithmetic.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
     this.setInputsInline(true);
     this.setTooltip(function() {
@@ -121,9 +119,7 @@ Blockly.Language.math_single = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.math_single.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip(function() {
       var mode = thisBlock.getInputLabelValue('NUM');
@@ -161,9 +157,7 @@ Blockly.Language.math_round = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.math_round.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip('Round a number up or down.');
   }
@@ -183,9 +177,7 @@ Blockly.Language.math_trig = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.math_trig.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
     this.setTooltip(function() {
       var mode = thisBlock.getInputLabelValue('NUM');
@@ -221,9 +213,7 @@ Blockly.Language.math_on_list = {
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.math_on_list.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'OP');
     this.appendInput('of list', Blockly.INPUT_VALUE, 'LIST');
     this.setTooltip(function() {

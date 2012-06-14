@@ -165,9 +165,7 @@ Blockly.Language.text_endString = {
     var thisBlock = this;
     this.setColour(160);
     this.setOutput(true);
-    var menu = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.text_endString.OPERATORS;
-    });
+    var menu = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(menu, Blockly.INPUT_VALUE, 'NUM');
     this.appendInput('letters in text', Blockly.INPUT_VALUE, 'TEXT');
     this.setInputsInline(true);
@@ -188,9 +186,7 @@ Blockly.Language.text_indexOf = {
     this.setColour(160);
     this.setOutput(true);
     this.appendTitle('find');
-    var menu = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.text_indexOf.OPERATORS;
-    });
+    var menu = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(menu, 'END');
     this.appendInput('occurrence of text', Blockly.INPUT_VALUE, 'FIND');
     this.appendInput('in text', Blockly.INPUT_VALUE, 'VALUE');
@@ -228,9 +224,7 @@ Blockly.Language.text_changeCase = {
     var thisBlock = this;
     this.setColour(160);
     this.appendTitle('to');
-    var menu = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.text_changeCase.OPERATORS;
-    });
+    var menu = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(menu, Blockly.INPUT_VALUE, 'TEXT');
     this.setOutput(true);
     this.setTooltip('Return a copy of the text in a different case.');
@@ -251,11 +245,9 @@ Blockly.Language.text_trim = {
     var thisBlock = this;
     this.setColour(160);
     this.appendTitle('trim spaces from');
-    var menu = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.text_trim.OPERATORS;
-    }, function(text) {
+    var menu = new Blockly.FieldDropdown(this.OPERATORS, function(text) {
       var newTitle = (text == 'both') ? 'sides' : 'side';
-      this.setTitleText(newTitle, 'SIDES');
+      this.sourceBlock_.setTitleText(newTitle, 'SIDES');
       this.setText(text);
     });
     this.appendTitle(menu, 'MODE');

@@ -37,9 +37,7 @@ Blockly.Language.maze_move = {
   init: function() {
     this.setColour(290);
     this.appendTitle('move');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_move.DIRECTIONS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.DIRECTIONS);
     this.appendTitle(dropdown, 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -62,9 +60,7 @@ Blockly.Language.maze_turnLeft = {
   init: function() {
     this.setColour(290);
     this.appendTitle('turn');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_turnLeft.DIRECTIONS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.DIRECTIONS);
     this.appendTitle(dropdown, 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -82,9 +78,8 @@ Blockly.Language.maze_turnRight = {
   init: function() {
     this.setColour(290);
     this.appendTitle('turn');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_turnLeft.DIRECTIONS;
-    });
+    var dropdown =
+        new Blockly.FieldDropdown(Blockly.Language.maze_turnLeft.DIRECTIONS);
     this.appendTitle(dropdown, 'DIR');
     this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1][0], 'DIR');
     this.setPreviousStatement(true);
@@ -109,9 +104,7 @@ Blockly.Language.maze_isWall = {
     this.setColour(120);
     this.setOutput(true);
     this.appendTitle('wall');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.maze_isWall.DIRECTIONS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.DIRECTIONS);
     this.appendTitle(dropdown, 'DIR');
     this.setTooltip('Returns true if there is a wall in ' +
                     'the specified direction.');

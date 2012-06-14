@@ -38,9 +38,7 @@ Blockly.Language.logic_compare = {
     this.setColour(120);
     this.setOutput(true);
     this.appendInput('', Blockly.INPUT_VALUE, 'A');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.logic_compare.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
     this.setInputsInline(true);
     this.setTooltip(function() {
@@ -81,9 +79,7 @@ Blockly.Language.logic_operation = {
     this.setColour(120);
     this.setOutput(true);
     this.appendInput('', Blockly.INPUT_VALUE, 'A');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.logic_operation.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
     this.setInputsInline(true);
     this.setTooltip(function() {
@@ -122,9 +118,7 @@ Blockly.Language.logic_boolean = {
     var thisBlock = this;
     this.setColour(120);
     this.setOutput(true);
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.logic_boolean.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'BOOL');
     this.setTooltip('Returns either true or false.');
   }

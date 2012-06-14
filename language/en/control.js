@@ -200,9 +200,7 @@ Blockly.Language.controls_whileUntil = {
   init: function() {
     this.setColour(120);
     this.appendTitle('repeat');
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.controls_whileUntil.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'MODE');
     this.appendInput('', Blockly.INPUT_VALUE, 'BOOL');
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
@@ -295,9 +293,7 @@ Blockly.Language.controls_flow_statements = {
   init: function() {
     this.setColour(120);
     var thisBlock = this;
-    var dropdown = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.controls_flow_statements.OPERATORS;
-    });
+    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'FLOW');
     this.appendTitle('of loop');
     this.setPreviousStatement(true);

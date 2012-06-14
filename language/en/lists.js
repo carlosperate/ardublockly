@@ -179,9 +179,7 @@ Blockly.Language.lists_indexOf = {
     this.setColour(210);
     this.setOutput(true);
     this.appendTitle('find');
-    var menu = new Blockly.FieldDropdown(function() {
-      return Blockly.Language.lists_indexOf.OPERATORS;
-    });
+    var menu = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(menu, 'END');
     this.appendInput('occurrence of item', Blockly.INPUT_VALUE, 'FIND');
     this.appendInput('in list', Blockly.INPUT_VALUE, 'VALUE');

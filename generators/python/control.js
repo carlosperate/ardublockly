@@ -92,9 +92,9 @@ Blockly.Python.controls_flow_statements = function() {
   // Flow statements: continue, break.
   switch (this.getTitleValue('FLOW')) {
     case 'BREAK':
-      return 'break;\n';
+      return 'break\n';
     case 'CONTINUE':
-      return 'continue;\n';
+      return 'continue\n';
   }
   throw 'Unknown flow statement.';
 };
