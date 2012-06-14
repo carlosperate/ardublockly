@@ -19,8 +19,6 @@
 
 /**
  * @fileoverview Utility functions for handling variables and procedure names.
- * Note that variables and procedures share the same name space, meaning that
- * one can't have a variable and a procedure of the same name.
  * @author fraser@google.com (Neil Fraser)
  */
 

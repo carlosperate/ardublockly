@@ -145,7 +145,7 @@ Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
     blocks.push(block);
     gaps.push(margin * 2);
   }
-  if (Blockly.Language.procedures_defnoreturn) {
+  if (Blockly.Language.procedures_defreturn) {
     var block = new Blockly.Block(workspace, 'procedures_defreturn');
     block.initSvg();
     blocks.push(block);
