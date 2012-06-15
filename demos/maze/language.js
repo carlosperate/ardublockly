@@ -2,7 +2,7 @@
  * Blockly Demo: Maze
  *
  * Copyright 2012 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 Blockly.Language.maze_move = {
   // Block for moving forward or backwards.
   category: 'Commands',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Move',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Move',
   init: function() {
     this.setColour(290);
     this.appendTitle('move');
@@ -56,7 +56,7 @@ Blockly.JavaScript.maze_move = function() {
 Blockly.Language.maze_turnLeft = {
   // Block for turning left or right.
   category: 'Commands',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Turn',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Turn',
   init: function() {
     this.setColour(290);
     this.appendTitle('turn');
@@ -99,10 +99,10 @@ Blockly.JavaScript.maze_turnRight = Blockly.JavaScript.maze_turnLeft;
 Blockly.Language.maze_isWall = {
   // Block for checking if there a wall.
   category: 'Logic',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Wall',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
   init: function() {
     this.setColour(120);
-    this.setOutput(true);
+    this.setOutput(true, Boolean);
     this.appendTitle('wall');
     var dropdown = new Blockly.FieldDropdown(this.DIRECTIONS);
     this.appendTitle(dropdown, 'DIR');
@@ -125,7 +125,7 @@ Blockly.JavaScript.maze_isWall = function() {
 Blockly.Language.controls_forever = {
   // Do forever loop.
   category: 'Logic',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Repeat',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Repeat',
   init: function() {
     this.setColour(120);
     this.appendTitle('repeat forever');

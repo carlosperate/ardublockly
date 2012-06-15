@@ -2,7 +2,7 @@
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ Blockly.Language.procedures_defreturn = {
     var name = Blockly.Procedures.findLegalName('procedure', this);
     this.appendTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'STACK');
-    this.appendInput('return', Blockly.INPUT_VALUE, 'RETURN');
+    this.appendInput('return', Blockly.INPUT_VALUE, 'RETURN', null);
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
     this.setTooltip('A procedure with a return value.');
   },
@@ -119,7 +119,7 @@ Blockly.Language.procedures_callreturn = {
     this.setColour(290);
     this.appendTitle('call');
     this.appendTitle('procedure', 'NAME');
-    this.setOutput(true);
+    this.setOutput(true, null);
     this.setTooltip('Call a procedure with a return value.');
   },
   getProcedureCall: Blockly.Language.procedures_callnoreturn.getProcedureCall,

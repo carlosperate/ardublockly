@@ -2,7 +2,7 @@
  * Visual Blocks Editor
  *
  * Copyright 2011 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -919,7 +919,7 @@ Blockly.Block.prototype.setPreviousStatement = function(newBoolean) {
       throw 'Remove output connection prior to adding previous connection.';
     }
     this.previousConnection =
-        new Blockly.Connection(this, Blockly.PREVIOUS_STATEMENT);
+        new Blockly.Connection(this, Blockly.PREVIOUS_STATEMENT, null);
   }
   if (this.rendered) {
     this.render();
@@ -940,7 +940,8 @@ Blockly.Block.prototype.setNextStatement = function(newBoolean) {
     this.nextConnection = null;
   }
   if (newBoolean) {
-    this.nextConnection = new Blockly.Connection(this, Blockly.NEXT_STATEMENT);
+    this.nextConnection =
+        new Blockly.Connection(this, Blockly.NEXT_STATEMENT, null);
   }
   if (this.rendered) {
     this.render();
@@ -951,8 +952,10 @@ Blockly.Block.prototype.setNextStatement = function(newBoolean) {
 /**
  * Set whether this block returns a value.
  * @param {boolean} newBoolean True if there is an output.
+ * @param {Object} check Returned type or list of returned types.
+ *     Null if any type could be returned (e.g. variable get).
  */
-Blockly.Block.prototype.setOutput = function(newBoolean) {
+Blockly.Block.prototype.setOutput = function(newBoolean, check) {
   if (this.outputConnection) {
     if (this.outputConnection.targetConnection) {
       throw 'Must disconnect output value before removing connection.';
@@ -964,7 +967,8 @@ Blockly.Block.prototype.setOutput = function(newBoolean) {
     if (this.previousConnection) {
       throw 'Remove previous connection prior to adding output connection.';
     }
-    this.outputConnection = new Blockly.Connection(this, Blockly.OUTPUT_VALUE);
+    this.outputConnection =
+        new Blockly.Connection(this, Blockly.OUTPUT_VALUE, check);
   }
   if (this.rendered) {
     this.render();
@@ -1046,9 +1050,11 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  *     Blockly.LOCAL_VARIABLE.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
+ * @param {Object} check Acceptable value type, or list of value types.
+ *     Null all values are acceptable.
  * @return {!Object} The input object created.
  */
-Blockly.Block.prototype.appendInput = function(label, type, name) {
+Blockly.Block.prototype.appendInput = function(label, type, name, check) {
   // Create descriptive text element.
   var textElement = null;
   if (label) {
@@ -1065,7 +1071,6 @@ Blockly.Block.prototype.appendInput = function(label, type, name) {
   }
   var input;
   if (type == Blockly.LOCAL_VARIABLE) {
-    // Add input to list.
     input = new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange);
     if (this.svg_) {
@@ -1073,20 +1078,12 @@ Blockly.Block.prototype.appendInput = function(label, type, name) {
     }
     input.type = Blockly.LOCAL_VARIABLE;
   } else {
-    // Add input to list.
-    input = new Blockly.Connection(this, type);
+    input = new Blockly.Connection(this, type, check);
   }
   input.label = textElement;
   input.name = name;
-  if (typeof opt_index == 'number') {
-    if (opt_index < 0 || opt_index > this.inputList.length) {
-      throw 'There are ' + this.inputList.length +
-            ' input(s), unable to insert at index ' + opt_index + '.';
-    }
-    this.inputList.splice(opt_index, 0, input);
-  } else {
-    this.inputList.push(input);
-  }
+  // Append input to list.
+  this.inputList.push(input);
   if (this.rendered) {
     this.render();
     // Adding an input will cause the block to change shape.

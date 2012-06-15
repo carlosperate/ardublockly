@@ -2,7 +2,7 @@
  * Visual Blocks Editor
  *
  * Copyright 2011 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -392,6 +392,10 @@ Blockly.isTargetInput_ = function(e) {
  * @private
  */
 Blockly.loadAudio_ = function(name) {
+  if (!Audio) {
+    // No browser support for Audio.
+    return;
+  }
   var sound = new Audio(Blockly.pathToBlockly + 'media/' + name + '.wav');
   // To force the browser to load the sound, play it, but stop it immediately.
   // If this starts creating a chirp on startup, turn the sound's volume down,

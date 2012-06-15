@@ -2,7 +2,7 @@
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ Blockly.Language.variables_get = {
     this.appendTitle(new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange),
         'VAR').setText('item');
-    this.setOutput(true);
+    this.setOutput(true, null);
     this.setTooltip('Returns the value of this variable.');
   },
   getVars: function() {
@@ -61,7 +61,7 @@ Blockly.Language.variables_set = {
     this.appendTitle(new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange),
         'VAR').setText('item');
-    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE');
+    this.appendInput('', Blockly.INPUT_VALUE, 'VALUE', null);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Sets this variable to be equal to the input.');

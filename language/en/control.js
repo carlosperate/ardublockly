@@ -2,7 +2,7 @@
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,10 +31,10 @@ if (!Blockly.Language) {
 Blockly.Language.controls_if = {
   // If/elseif/else condition.
   category: 'Control',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/If_Then',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/If_Then',
   init: function() {
     this.setColour(120);
-    this.appendInput(this.MSG_IF, Blockly.INPUT_VALUE, 'IF0');
+    this.appendInput(this.MSG_IF, Blockly.INPUT_VALUE, 'IF0', Boolean);
     this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO0');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -82,7 +82,7 @@ Blockly.Language.controls_if = {
     this.elseifCount_ = window.parseInt(container.getAttribute('elseif'), 10);
     this.elseCount_ = window.parseInt(container.getAttribute('else'), 10);
     for (var x = 1; x <= this.elseifCount_; x++) {
-      this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE, 'IF' + x);
+      this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE, 'IF' + x, Boolean);
       this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO' + x);
     }
     if (this.elseCount_) {
@@ -130,7 +130,7 @@ Blockly.Language.controls_if = {
         case 'controls_if_elseif':
           this.elseifCount_++;
           var ifInput = this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE,
-              'IF' + this.elseifCount_);
+              'IF' + this.elseifCount_, Boolean);
           var doInput = this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT,
               'DO' + this.elseifCount_);
           // Reconnect any child blocks.
@@ -196,13 +196,13 @@ Blockly.Language.controls_if_else = {
 Blockly.Language.controls_whileUntil = {
   // Do while/until loop.
   category: 'Control',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Repeat',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Repeat',
   init: function() {
     this.setColour(120);
     this.appendTitle('repeat');
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'MODE');
-    this.appendInput('', Blockly.INPUT_VALUE, 'BOOL');
+    this.appendInput('', Blockly.INPUT_VALUE, 'BOOL', Boolean);
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -232,8 +232,8 @@ Blockly.Language.controls_for = {
     this.setColour(120);
     this.appendTitle('count');
     this.appendInput('with', Blockly.LOCAL_VARIABLE, 'VAR').setText('x');
-    this.appendInput('from', Blockly.INPUT_VALUE, 'FROM');
-    this.appendInput('to', Blockly.INPUT_VALUE, 'TO');
+    this.appendInput('from', Blockly.INPUT_VALUE, 'FROM', Number);
+    this.appendInput('to', Blockly.INPUT_VALUE, 'TO', Number);
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -264,7 +264,7 @@ Blockly.Language.controls_forEach = {
     this.setColour(120);
     this.appendTitle('for each');
     this.appendInput('item', Blockly.LOCAL_VARIABLE, 'VAR').setText('x');
-    this.appendInput('in list', Blockly.INPUT_VALUE, 'LIST');
+    this.appendInput('in list', Blockly.INPUT_VALUE, 'LIST', Array);
     this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);

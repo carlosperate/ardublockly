@@ -2,7 +2,7 @@
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ Blockly.Language.math_number = {
       var n = window.parseFloat(text || 0);
       return window.isNaN(n) ? null : String(n);
     }), 'NUM');
-    this.setOutput(true);
+    this.setOutput(true, Number);
     this.setTooltip('A number.');
   }
 };
@@ -53,10 +53,10 @@ Blockly.Language.math_arithmetic = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(230);
-    this.setOutput(true);
-    this.appendInput('', Blockly.INPUT_VALUE, 'A');
+    this.setOutput(true, Number);
+    this.appendInput('', Blockly.INPUT_VALUE, 'A', Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B', Number);
     this.setInputsInline(true);
     this.setTooltip(function() {
       var mode = thisBlock.getInputLabelValue('B');
@@ -90,7 +90,7 @@ Blockly.Language.math_change = {
     this.appendTitle(new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange), 'VAR')
         .setText('item');
-    this.appendInput('by', Blockly.INPUT_VALUE, 'DELTA');
+    this.appendInput('by', Blockly.INPUT_VALUE, 'DELTA', Number);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -118,9 +118,9 @@ Blockly.Language.math_single = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(230);
-    this.setOutput(true);
+    this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM', Number);
     this.setTooltip(function() {
       var mode = thisBlock.getInputLabelValue('NUM');
       return Blockly.Language.math_single.TOOLTIPS[mode];
@@ -156,9 +156,9 @@ Blockly.Language.math_round = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(230);
-    this.setOutput(true);
+    this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM', Number);
     this.setTooltip('Round a number up or down.');
   }
 };
@@ -176,9 +176,9 @@ Blockly.Language.math_trig = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(230);
-    this.setOutput(true);
+    this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM');
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM', Number);
     this.setTooltip(function() {
       var mode = thisBlock.getInputLabelValue('NUM');
       return Blockly.Language.math_trig.TOOLTIPS[mode];
@@ -212,10 +212,10 @@ Blockly.Language.math_on_list = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(230);
-    this.setOutput(true);
+    this.setOutput(true, [Number, Array]);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'OP');
-    this.appendInput('of list', Blockly.INPUT_VALUE, 'LIST');
+    this.appendInput('of list', Blockly.INPUT_VALUE, 'LIST', Array);
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_on_list.TOOLTIPS[mode];
@@ -250,10 +250,10 @@ Blockly.Language.math_constrain = {
   helpUrl: 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29',
   init: function() {
     this.setColour(230);
-    this.setOutput(true);
-    this.appendInput('constrain', Blockly.INPUT_VALUE, 'VALUE');
-    this.appendInput('between (low)', Blockly.INPUT_VALUE, 'LOW');
-    this.appendInput('and (high)', Blockly.INPUT_VALUE, 'HIGH');
+    this.setOutput(true, Number);
+    this.appendInput('constrain', Blockly.INPUT_VALUE, 'VALUE', Number);
+    this.appendInput('between (low)', Blockly.INPUT_VALUE, 'LOW', Number);
+    this.appendInput('and (high)', Blockly.INPUT_VALUE, 'HIGH', Number);
     this.setInputsInline(true);
     this.setTooltip('Constrain a number to be between the specified limits (inclusive).');
   }
@@ -265,9 +265,9 @@ Blockly.Language.math_modulo = {
   helpUrl: 'http://en.wikipedia.org/wiki/Modulo_operation',
   init: function() {
     this.setColour(230);
-    this.setOutput(true);
-    this.appendInput('remainder of', Blockly.INPUT_VALUE, 'DIVIDEND');
-    this.appendInput('\u00F7', Blockly.INPUT_VALUE, 'DIVISOR');
+    this.setOutput(true, Number);
+    this.appendInput('remainder of', Blockly.INPUT_VALUE, 'DIVIDEND', Number);
+    this.appendInput('\u00F7', Blockly.INPUT_VALUE, 'DIVISOR', Number);
     this.setInputsInline(true);
     this.setTooltip('Return the remainder of dividing both numbers.');
   }
@@ -279,10 +279,10 @@ Blockly.Language.math_random_int = {
   helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',
   init: function() {
     this.setColour(230);
-    this.setOutput(true);
+    this.setOutput(true, Number);
     this.appendTitle('random integer');
-    this.appendInput('from', Blockly.INPUT_VALUE, 'FROM');
-    this.appendInput('to', Blockly.INPUT_VALUE, 'TO');
+    this.appendInput('from', Blockly.INPUT_VALUE, 'FROM', Number);
+    this.appendInput('to', Blockly.INPUT_VALUE, 'TO', Number);
     // TODO: Ensure that only number blocks may used to set range.
     this.setInputsInline(true);
     this.setTooltip('Return a random integer between the two\n specified limits, inclusive.');
@@ -295,7 +295,7 @@ Blockly.Language.math_random_float = {
   helpUrl: 'http://en.wikipedia.org/wiki/Random_number_generation',
   init: function() {
     this.setColour(230);
-    this.setOutput(true);
+    this.setOutput(true, Number);
     this.appendTitle('random fraction');
     this.setTooltip('Return a random fraction between\n0.0 (inclusive) and 1.0 (exclusive).');
   }

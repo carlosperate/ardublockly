@@ -112,7 +112,7 @@ function setNextStatement() {
 
 function setOutput() {
   try {
-    block.setOutput(document.getElementById('output').checked);
+    block.setOutput(document.getElementById('output').checked, null);
   } finally {
     document.getElementById('output').checked = !!block.outputConnection;
   }

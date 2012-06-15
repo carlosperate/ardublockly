@@ -2,7 +2,7 @@
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://code.google.com/p/google-blockly/
+ * http://code.google.com/p/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,10 +36,10 @@ Blockly.Language.logic_compare = {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(120);
-    this.setOutput(true);
-    this.appendInput('', Blockly.INPUT_VALUE, 'A');
+    this.setOutput(true, Boolean);
+    this.appendInput('', Blockly.INPUT_VALUE, 'A', null);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B', null);
     this.setInputsInline(true);
     this.setTooltip(function() {
       var op = thisBlock.getInputLabelValue('B');
@@ -72,15 +72,15 @@ Blockly.Language.logic_compare.TOOLTIPS = {
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
   category: 'Logic',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/And_Or',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/And_Or',
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(120);
-    this.setOutput(true);
-    this.appendInput('', Blockly.INPUT_VALUE, 'A');
+    this.setOutput(true, Boolean);
+    this.appendInput('', Blockly.INPUT_VALUE, 'A', Boolean);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B');
+    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B', Boolean);
     this.setInputsInline(true);
     this.setTooltip(function() {
       var op = thisBlock.getInputLabelValue('B');
@@ -99,11 +99,11 @@ Blockly.Language.logic_operation.TOOLTIPS = {
 Blockly.Language.logic_negate = {
   // Negation.
   category: 'Logic',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/Not',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Not',
   init: function() {
     this.setColour(120);
-    this.setOutput(true);
-    this.appendInput('not', Blockly.INPUT_VALUE, 'BOOL');
+    this.setOutput(true, Boolean);
+    this.appendInput('not', Blockly.INPUT_VALUE, 'BOOL', Boolean);
     this.setTooltip('Returns true if the input is false.\n' +
                     'Returns false if the input is true.');
   }
@@ -112,12 +112,12 @@ Blockly.Language.logic_negate = {
 Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.
   category: 'Logic',
-  helpUrl: 'http://code.google.com/p/google-blockly/wiki/True_False',
+  helpUrl: 'http://code.google.com/p/blockly/wiki/True_False',
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
     this.setColour(120);
-    this.setOutput(true);
+    this.setOutput(true, Boolean);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'BOOL');
     this.setTooltip('Returns either true or false.');
