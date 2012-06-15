@@ -227,7 +227,9 @@ Blockly.FieldDropdown.prototype.setValue = function(newValue) {
       return;
     }
   }
-  throw '"' + newValue + '" not found in dropdown.';
+  // Value not found.  Add it, maybe it will become valid once set
+  // (like variable names).
+  this.setText(newValue);
 };
 
 /**
