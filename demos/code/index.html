@@ -88,6 +88,11 @@ function init(blockly) {
         Blockly.fireUiEvent(document, window, 'resize');
       }, 1);
   }
+
+  restore_blocks();
+  Blockly.bindEvent_(window, 'unload', null, backup_blocks);
+
+  document.getElementById( 'clean' ).onclick = clean;
 }
 
 /**
@@ -101,6 +106,40 @@ function runJS() {
   } catch (e) {
     alert('Program error:\n' + e);
   }
+}
+
+/**
+* backup code blocks
+*/
+function backup_blocks() {
+  if(typeof(Storage)!=="undefined")
+  {
+    var xml = Blockly.Xml.workspaceToDom( Blockly.mainWorkspace );
+    localStorage.setItem('data',Blockly.Xml.domToText( xml ));
+    console.log("backuped");
+  } else {
+    // Sorry! No web storage support..
+  }
+}
+
+/**
+* restore code blocks
+*/
+function restore_blocks() {
+  if(typeof(Storage)!=="undefined"){
+    if(localStorage.data!=null){
+      var xml = Blockly.Xml.textToDom(localStorage.data);
+      Blockly.Xml.domToWorkspace( Blockly.mainWorkspace, xml );
+      console.log("restored");
+    }
+  } else {
+    // Sorry! No web storage support..
+  }
+}
+
+// clean all blocks
+function clean( event ) {
+  Blockly.mainWorkspace.clear();
 }
 
   </script>
@@ -217,6 +256,7 @@ function runJS() {
             <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
             <td class="tabmax">
               <button onclick="runJS()">Run Program</button>
+              <button id="clean">Clean</button>
             </td>
           </tr>
         </table>
