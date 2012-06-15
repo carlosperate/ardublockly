@@ -9,14 +9,16 @@
  */
 var TABS_ = ['blocks', 'javascript', 'dart', 'python', 'xml'];
 
+var selected = null;
+
 /**
  * Switch the visible pane when a tab is clicked.
  * @param {string} id ID of tab clicked.
  */
 function tabClick(id) {
-  var xmlTextarea = document.getElementById('textarea_xml');
   // If the XML tab was open, save and render the content.
   if (document.getElementById('tab_xml').className == 'tabon') {
+    var xmlTextarea = document.getElementById('textarea_xml');
     var xmlText = xmlTextarea.value;
     var xmlDom = null;
     try {
@@ -42,26 +44,35 @@ function tabClick(id) {
   }
 
   // Select the active tab.
+  selected_ = id.replace('tab_', '');
   document.getElementById(id).className = 'tabon';
   // Show the selected pane.
-  var content = document.getElementById(id.replace('tab_', 'content_'));
+  var content = document.getElementById('content_' + selected_);
   content.style.display = 'block';
+  renderContent();
+}
 
+/**
+ * Populate the currently selected pane with content generated from the blocks.
+ */
+function renderContent() {
+  var content = document.getElementById('content_' + selected_);
   // Initialize the pane.
-  if (id == 'tab_blocks') {
+  if (content.id == 'content_blocks') {
     // If the workspace was changed by the XML tab, Firefox will have performed
     // an incomplete rendering due to Blockly being invisible.  Rerender.
     Blockly.mainWorkspace.render();
-  } else if (id == 'tab_xml') {
+  } else if (content.id == 'content_xml') {
+    var xmlTextarea = document.getElementById('textarea_xml');
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     xmlTextarea.value = xmlText;
     xmlTextarea.focus();
-  } else if (id == 'tab_javascript') {
+  } else if (content.id == 'content_javascript') {
     content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
-  } else if (id == 'tab_dart') {
+  } else if (content.id == 'content_dart') {
     content.innerHTML = Blockly.Generator.workspaceToCode('Dart');
-  } else if (id == 'tab_python') {
+  } else if (content.id == 'content_python') {
     content.innerHTML = Blockly.Generator.workspaceToCode('Python');
   }
 }
@@ -133,6 +144,7 @@ function discard() {
   var count = Blockly.mainWorkspace.getAllBlocks().length;
   if (count < 2 || window.confirm('Delete all ' + count + ' blocks?')) {
     Blockly.mainWorkspace.clear();
+    renderContent();
   }
 }
   </script>
