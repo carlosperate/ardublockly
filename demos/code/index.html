@@ -110,7 +110,9 @@ function init(blockly) {
   var loadInput = document.getElementById('load');
   loadInput.addEventListener('change', load, false);
   document.getElementById('fakeload').onclick = function() {
-	loadInput.click();
+    if(confirm("XML File saved from blockly is the only support format. No plan to support load from Javascript, Dart, Python code.")){
+	  loadInput.click();
+    }
   };
 }
 
