@@ -167,3 +167,9 @@ Blockly.JavaScript.text_print = function() {
   var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', true) || '\'\'';
   return 'window.alert(' + argument0 + ');\n';
 };
+
+Blockly.JavaScript.text_prompt = function() {
+  // Prompt function.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', true) || '\'\'';
+  return 'window.prompt(' + argument0 + ')';
+};

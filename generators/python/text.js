@@ -152,3 +152,9 @@ Blockly.Python.text_print = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT', true) || '\'\'';
   return 'print ' + argument0 + '\n';
 };
+
+Blockly.Python.text_prompt = function() {
+  // Prompt function.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', true) || '\'\'';
+  return 'raw_input(' + argument0 + ')';
+};

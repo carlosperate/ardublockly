@@ -285,3 +285,16 @@ Blockly.Language.text_print = {
     this.setTooltip('Print the specified text, number or other value.');
   }
 };
+
+Blockly.Language.text_prompt = {
+  // Prompt function.
+  category: 'Text',
+  helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html',
+  init: function() {
+    this.setColour(160);
+    this.appendTitle('prompt');
+    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT', null);
+    this.setOutput(true);
+    this.setTooltip('Prompt for user input with the specified text.');
+  }
+};

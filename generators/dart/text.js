@@ -182,3 +182,10 @@ Blockly.Dart.text_print = function() {
   var argument0 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
   return 'print(' + argument0 + ');\n';
 };
+
+Blockly.Dart.text_prompt = function() {
+  // Prompt function.
+  Blockly.Dart.definitions_['import_dart_html'] = '#import(\'dart:html\');';
+  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
+  return 'window.prompt(' + argument0 + ', \'\')';
+};
