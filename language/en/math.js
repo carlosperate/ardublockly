@@ -24,9 +24,7 @@
  * to language files.
  */
 
-if (!Blockly.Language) {
-  Blockly.Language = {};
-}
+if (!Blockly.Language) Blockly.Language = {};
 
 Blockly.Language.math_number = {
   // Numeric value.

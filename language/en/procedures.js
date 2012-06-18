@@ -24,9 +24,7 @@
  * to language files.
  */
 
-if (!Blockly.Language) {
-  Blockly.Language = {};
-}
+if (!Blockly.Language) Blockly.Language = {};
 
 Blockly.Language.procedures_defnoreturn = {
   // Define a procedure with no return value.

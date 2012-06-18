@@ -46,10 +46,10 @@ function tabClick(id) {
   }
 
   // Select the active tab.
-  selected_ = id.replace('tab_', '');
+  selected = id.replace('tab_', '');
   document.getElementById(id).className = 'tabon';
   // Show the selected pane.
-  var content = document.getElementById('content_' + selected_);
+  var content = document.getElementById('content_' + selected);
   content.style.display = 'block';
   renderContent();
 }
@@ -58,7 +58,7 @@ function tabClick(id) {
  * Populate the currently selected pane with content generated from the blocks.
  */
 function renderContent() {
-  var content = document.getElementById('content_' + selected_);
+  var content = document.getElementById('content_' + selected);
   // Initialize the pane.
   if (content.id == 'content_blocks') {
     // If the workspace was changed by the XML tab, Firefox will have performed
@@ -106,13 +106,11 @@ function init(blockly) {
   restore_blocks();
   Blockly.bindEvent_(window, 'unload', null, backup_blocks);
 
-  // init load event
+  // Init load event.
   var loadInput = document.getElementById('load');
   loadInput.addEventListener('change', load, false);
   document.getElementById('fakeload').onclick = function() {
-    if(confirm("XML File saved from blockly is the only support format. No plan to support load from Javascript, Dart, Python code.")){
-	  loadInput.click();
-    }
+    loadInput.click();
   };
 }
 
@@ -150,45 +148,49 @@ function restore_blocks() {
 }
 
 /**
-* Save blocks to local file
-*/
+ * Save blocks to local file.
+ */
 function save() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var data = Blockly.Xml.domToText(xml);
 
   // Store data in blob.
-  var builder = new BlobBuilder;
+  var builder = new BlobBuilder();
   builder.append(data);
-  saveAs(builder.getBlob("text/plain;charset=utf-8"), "block.xml");
+  saveAs(builder.getBlob('text/plain;charset=utf-8'), 'block.xml');
 };
 
 /**
-* Load blocks from local file
-*
-*/
-function load(event) {
+ * Load blocks from local file.
+ */
+function load() {
   var files = event.target.files;
-  
   // Only allow uploading one file.
-  if (files.length !== 1)
+  if (files.length != 1) {
     return;
+  }
 
   // FileReader
   var reader = new FileReader();
   reader.onloadend = function(event) {
     var target = event.target;
-    // 2 === FileReader.DONE
-    if (target.readyState === 2) {
-      if (confirm("Want to clean current blocks? Press 'Cancel' will load blocks into current workspace.")) { 
+    // 2 == FileReader.DONE
+    if (target.readyState == 2) {
+      try {
+        var xml = Blockly.Xml.textToDom(target.result);
+      } catch (e) {
+        alert('Error parsing XML:\n' + e);
+        return;
+      }
+      var count = Blockly.mainWorkspace.getAllBlocks().length;
+      if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) { 
         Blockly.mainWorkspace.clear();
       }
-      var xml = Blockly.Xml.textToDom(target.result);
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
     }
-    // Reset value of input after loading
-    // because Chrome will not fire a 'change' event
-    // if the same file is loaded again.
-    loadInput.value = '';
+    // Reset value of input after loading because Chrome will not fire
+    // a 'change' event if the same file is loaded again.
+    document.getElementById('load').value = '';
   };
   reader.readAsText(files[0]);
 };
@@ -321,8 +323,8 @@ function discard() {
             <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
             <td class="tabmax">
               <button onclick="discard()">Discard</button>
-              <button onclick="save()">Save</button>
-              <button id="fakeload">Load</button>
+              <button onclick="save()">Save XML</button>
+              <button id="fakeload">Load XML</button>
               <input type="file" id="load" style="display: none;"/>
               <button class="launch" onclick="runJS()">Run Program</button>
             </td>
