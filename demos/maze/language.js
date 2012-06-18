@@ -69,7 +69,7 @@ Blockly.Language.maze_turnLeft = {
 };
 
 Blockly.Language.maze_turnLeft.DIRECTIONS =
-    [['left', 'turnLeft'], ['right', 'turnRight']];
+    [['left', 'turnLeft'], ['right', 'turnRight'], ['randomly', 'random']];
 
 Blockly.Language.maze_turnRight = {
   // Block for turning left or right.
@@ -90,7 +90,18 @@ Blockly.Language.maze_turnRight = {
 
 Blockly.JavaScript.maze_turnLeft = function() {
   // Generate JavaScript for turning left or right.
-  return 'Maze.' + this.getTitleValue('DIR') + '("' + this.id + '");\n';
+  var dir = this.getTitleValue('DIR');
+  var code;
+  if (dir == 'random') {
+    code = 'if (Math.random() < 0.5) {\n' +
+           '  Maze.turnLeft("' + this.id + '");\n' +
+           '} else {\n' +
+           '  Maze.turnRight("' + this.id + '");\n' +
+           '}\n';
+  } else {
+    code = 'Maze.' + dir + '("' + this.id + '");\n';
+  }
+  return code;
 };
 
 // Turning left and right use the same code.
