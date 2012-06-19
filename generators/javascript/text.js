@@ -170,6 +170,11 @@ Blockly.JavaScript.text_print = function() {
 
 Blockly.JavaScript.text_prompt = function() {
   // Prompt function.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', true) || '\'\'';
-  return 'window.prompt(' + argument0 + ')';
+  var msg = Blockly.JavaScript.quote_(this.getTitleValue('TEXT'));
+  var code = 'window.prompt(' + msg + ')';
+  var toNumber = this.getTitleValue('TYPE') == 'NUMBER';
+  if (toNumber) {
+    code = 'window.parseFloat(' + code + ')';
+  }
+  return code;
 };

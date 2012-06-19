@@ -155,6 +155,11 @@ Blockly.Python.text_print = function() {
 
 Blockly.Python.text_prompt = function() {
   // Prompt function.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT', true) || '\'\'';
-  return 'raw_input(' + argument0 + ')';
+  var msg = Blockly.Python.quote_(this.getTitleValue('TEXT'));
+  var code = 'raw_input(' + msg + ')';
+  var toNumber = this.getTitleValue('TYPE') == 'NUMBER';
+  if (toNumber) {
+    code = 'float(' + code + ')';
+  }
+  return code;
 };

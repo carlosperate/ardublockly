@@ -292,9 +292,14 @@ Blockly.Language.text_prompt = {
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html',
   init: function() {
     this.setColour(160);
-    this.appendTitle('prompt');
-    this.appendInput('', Blockly.INPUT_VALUE, 'TEXT', null);
-    this.setOutput(true);
+    this.appendTitle('prompt for');
+    var menu = new Blockly.FieldDropdown(this.TYPES);
+    this.appendTitle(menu, 'TYPE');
+    this.appendTitle('with message');
+    this.appendTitle(new Blockly.FieldTextInput(''), 'TEXT');
+    this.setOutput(true, [Number, String]);
     this.setTooltip('Prompt for user input with the specified text.');
   }
 };
+
+Blockly.Language.text_prompt.TYPES = [['text', 'TEXT'], ['number', 'NUMBER']];

@@ -186,6 +186,11 @@ Blockly.Dart.text_print = function() {
 Blockly.Dart.text_prompt = function() {
   // Prompt function.
   Blockly.Dart.definitions_['import_dart_html'] = '#import(\'dart:html\');';
-  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
-  return 'window.prompt(' + argument0 + ', \'\')';
+  var msg = Blockly.Dart.quote_(this.getTitleValue('TEXT'));
+  var code = 'window.prompt(' + msg + ', \'\')';
+  var toNumber = this.getTitleValue('TYPE') == 'NUMBER';
+  if (toNumber) {
+    code = 'Math.parseDouble(' + code + ')';
+  }
+  return code;
 };
