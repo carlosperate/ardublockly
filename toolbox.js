@@ -270,6 +270,7 @@ Blockly.Toolbox.redraw = function() {
  * @private
  */
 Blockly.Toolbox.selectOption_ = function(cat, newSelectedOption) {
+  Blockly.Toolbox.clearSelection();
   Blockly.Toolbox.selectedOption_ = newSelectedOption;
   if (newSelectedOption) {
     Blockly.addClass_(newSelectedOption, 'blocklyMenuSelected');
