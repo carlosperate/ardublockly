@@ -21,3 +21,5 @@ cat blockly.js \
     variables.js \
     workspace.js \
     xml.js > demos/blockly_compressed.js
+
+svn info > demos/svn_info.txt
