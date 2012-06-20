@@ -131,7 +131,7 @@ Blockly.JavaScript.text_changeCase = function() {
       Blockly.JavaScript.text_changeCase.toTitleCase = functionName;
       var func = [];
       func.push('function ' + functionName + '(str) {');
-      func.push('  return str.replace(/\\w\\S*/g,');
+      func.push('  return str.replace(/\\S+/g,');
       func.push('      function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});');
       func.push('}');
       Blockly.JavaScript.definitions_['text_toTitleCase'] = func.join('\n');
