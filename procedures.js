@@ -128,6 +128,7 @@ Blockly.Procedures.rename = function(text) {
       func.call(blocks[x], this.text_, text);
     }
   }
+  window.setTimeout(Blockly.Procedures.refreshFlyoutCategory, 1);
   return text;
 };
 
@@ -176,6 +177,18 @@ Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
 };
 
 /**
+ * Refresh the procedure flyout if it is open.
+ * Only used if the flyout's autoClose is false.
+ */
+Blockly.Procedures.refreshFlyoutCategory = function() {
+  if (Blockly.Toolbox && Blockly.Toolbox.flyout_.isVisible() &&
+      Blockly.Toolbox.selectedOption_.cat == Blockly.MSG_PROCEDURE_CATEGORY) {
+    Blockly.Toolbox.flyout_.hide();
+    Blockly.Toolbox.flyout_.show(Blockly.MSG_PROCEDURE_CATEGORY);
+  }
+};
+
+/**
  * When a procedure definition is destroyed, find and destroy all its callers.
  * @param {string} name Name of deleted procedure definition.
  * @param {!Blockly.Workspace} workspace The workspace to delete callers from.
@@ -194,4 +207,5 @@ Blockly.Procedures.destroyCallers = function(name, workspace) {
       }
     }
   }
+  window.setTimeout(Blockly.Procedures.refreshFlyoutCategory, 1);
 };

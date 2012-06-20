@@ -125,6 +125,7 @@ Blockly.Variables.dropdownChange = function(text) {
       this.setText(text);
     }
   }
+  window.setTimeout(Blockly.Variables.refreshFlyoutCategory, 1);
 };
 
 /**
@@ -181,5 +182,17 @@ Blockly.Variables.flyoutCategory = function(blocks, gaps, margin, workspace) {
     } else {
       gaps.push(margin * 2);
     }
+  }
+};
+
+/**
+ * Refresh the variable flyout if it is open.
+ * Only used if the flyout's autoClose is false.
+ */
+Blockly.Variables.refreshFlyoutCategory = function() {
+  if (Blockly.Toolbox && Blockly.Toolbox.flyout_.isVisible() &&
+      Blockly.Toolbox.selectedOption_.cat == Blockly.MSG_VARIABLE_CATEGORY) {
+    Blockly.Toolbox.flyout_.hide();
+    Blockly.Toolbox.flyout_.show(Blockly.MSG_VARIABLE_CATEGORY);
   }
 };

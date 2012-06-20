@@ -200,12 +200,14 @@ Blockly.Toolbox.redraw = function() {
                   cat: Blockly.MSG_PROCEDURE_CATEGORY});
   }
 
-  function callbackFactory(cat, element) {
+  function callbackFactory(element) {
     return function(e) {
       var oldSelectedOption = Blockly.Toolbox.selectedOption_;
       Blockly.hideChaff();
-      if (oldSelectedOption != element) {
-        Blockly.Toolbox.selectOption_(cat, element);
+      if (oldSelectedOption == element) {
+        Blockly.Toolbox.clearSelection();
+      } else {
+        Blockly.Toolbox.selectOption_(element);
       }
       // This mouse click has been handled, don't bubble up to document.
       e.stopPropagation();
@@ -226,8 +228,9 @@ Blockly.Toolbox.redraw = function() {
 
     gElement.setAttribute('transform', 'translate(0, ' +
         (x * Blockly.ContextMenu.Y_HEIGHT + TOP_MARGIN) + ')');
+    gElement.cat = option.cat;
     Blockly.bindEvent_(gElement, 'mousedown', null,
-                       callbackFactory(option.cat, gElement));
+                       callbackFactory(gElement));
     resizeList.push(rectElement);
     // Compute the length of the longest text length.
     maxWidth = Math.max(maxWidth, textElement.getComputedTextLength());
@@ -263,17 +266,16 @@ Blockly.Toolbox.redraw = function() {
 
 /**
  * Highlight the specified option.
- * @param {?string} cat The category name of the newly specified option,
- *     or null to select nothing.
  * @param {Element} newSelectedOption The SVG group for the selected option,
  *     or null to select nothing.
  * @private
  */
-Blockly.Toolbox.selectOption_ = function(cat, newSelectedOption) {
+Blockly.Toolbox.selectOption_ = function(newSelectedOption) {
   Blockly.Toolbox.clearSelection();
   Blockly.Toolbox.selectedOption_ = newSelectedOption;
   if (newSelectedOption) {
     Blockly.addClass_(newSelectedOption, 'blocklyMenuSelected');
+    var cat = newSelectedOption.cat;
     var blockSet = Blockly.Toolbox.languageTree[cat] || cat;
     Blockly.Toolbox.flyout_.show(blockSet);
   }
