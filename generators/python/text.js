@@ -121,7 +121,7 @@ Blockly.Python.text_charAt = function() {
 Blockly.Python.text_changeCase = function() {
   // Change capitalization.
   var mode = this.getInputLabelValue('TEXT');
-  var operator = Blockly.JavaScript.text_changeCase.OPERATORS[mode];
+  var operator = Blockly.Python.text_changeCase.OPERATORS[mode];
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT', true) || '\'\'';
   var code = argument0 + operator;
   return code;
@@ -136,7 +136,7 @@ Blockly.Python.text_changeCase.OPERATORS = {
 Blockly.Python.text_trim = function() {
   // Trim spaces.
   var mode = this.getTitleValue('MODE');
-  var operator = Blockly.JavaScript.text_trim.OPERATORS[mode];
+  var operator = Blockly.Python.text_trim.OPERATORS[mode];
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT') || '\'\'';
   return argument0 + operator;
 };
