@@ -27,3 +27,14 @@ Blockly.MSG_MUTATOR_TOOLTIP = 'Edit this block';
 Blockly.MSG_MUTATOR_HEADER = 'Block Editor';
 Blockly.MSG_MUTATOR_CHANGE = 'Change';
 Blockly.MSG_MUTATOR_CANCEL = 'Cancel';
+
+// Variables Blocks
+Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
+Blockly.LANG_VARIABLES_GET_TITLE_1 = 'get';
+Blockly.LANG_VARIABLES_GET_ITEM = 'item';
+Blockly.LANG_VARIABLES_GET_TOOLTIP_1 = 'Returns the value of this variable.';
+
+Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
+Blockly.LANG_VARIABLES_SET_TITLE_1 = 'set';
+Blockly.LANG_VARIABLES_SET_ITEM = 'item';
+Blockly.LANG_VARIABLES_SET_TOOLTIP_1 = 'Sets this variable to be equal to the input.';
