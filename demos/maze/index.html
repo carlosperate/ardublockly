@@ -3,7 +3,43 @@
   <meta charset="utf-8">
   <title>Blockly Demo: Maze</title>
   <script type="text/javascript" src="maze.js"></script>
+  <script>
+/**
+ * Initialize Blockly.  Called on page load.
+ * @param {!Blockly} blockly Instance of Blockly from iframe.
+ */
+function init(blockly) {
+  window.Blockly = blockly;
+  
+  // support touch inputs
+  Blockly.TouchEvents = {};
+  Blockly.TouchEvents.touchMapper = {
+    "touchstart" : "mousedown",
+	"touchmove" : "mousemove",
+	"touchend" : "mouseup"
+  };
 
+  Blockly.TouchEvents.touchHandler = function(event) {
+    if (event.touches.length > 1){
+      return; // Punt on multitouch events.
+    }
+    var touchPoint = event.changedTouches[0];
+    var mappedEvent = Blockly.TouchEvents.touchMapper[event.type];
+    if(mappedEvent == null){ // We don't handle this event type (whatever it is). Punt.
+      return;
+    }
+    var simulatedEvent = document.createEvent("MouseEvent");
+    simulatedEvent.initMouseEvent(mappedEvent, true, true,  window, 1, touchPoint.screenX, touchPoint.screenY, 
+    touchPoint.clientX, touchPoint.clientY, false, false, false, false, 0, null);
+    touchPoint.target.dispatchEvent(simulatedEvent);
+    event.preventDefault();
+  };
+
+  Blockly.svgDoc.ontouchstart = Blockly.TouchEvents.touchHandler;
+  Blockly.svgDoc.ontouchmove = Blockly.TouchEvents.touchHandler;
+  Blockly.svgDoc.ontouchend = Blockly.TouchEvents.touchHandler;
+}
+  </script>
   <style>
     body {
       background-color: white;
@@ -43,7 +79,10 @@
       text-align: center;
       padding-top: 2em;
     }
-
+    #setDiv {
+      text-align: center;
+      padding-top: 2em;
+    }
     iframe {
       height: 100%;
       width: 100%;
@@ -66,6 +105,14 @@
         <div id="buttonDiv">
           <button id="runButton" onclick="Maze.runButtonClick();">Run Program</button>
           <button id="resetButton" onclick="Maze.resetButtonClick();" style="display: none">&nbsp; Reset &nbsp;</button>
+        </div>
+        
+        <div id="setDiv">
+<h2>Change Start Location</h2>
+          <button id="set1" onclick="Maze.setClick(1);">Set1</button>
+          <button id="set2" onclick="Maze.setClick(2);">Set2</button>
+          <button id="set3" onclick="Maze.setClick(3);">Set3</button>
+          <button id="set4" onclick="Maze.setClick(4);">Set4</button>
         </div>
       </td>
       <td valign="top" rowspan=2>
