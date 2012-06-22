@@ -226,7 +226,7 @@ Blockly.Language.text_changeCase = {
     this.appendInput(menu, Blockly.INPUT_VALUE, 'TEXT', String);
     this.setOutput(true, String);
     this.setTooltip('Return a copy of the text in a different case.');
-  },
+  }
 };
 
 Blockly.Language.text_changeCase.OPERATORS =

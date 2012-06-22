@@ -66,7 +66,7 @@ Blockly.ScrollbarPair.prototype.addCorner_ = function(element) {
 
 /**
  * Recalculate both of the scrollbars' locations and lengths.
- * Also reposition the corner rectange.
+ * Also reposition the corner rectangle.
  */
 Blockly.ScrollbarPair.prototype.resize = function() {
   // Look up the host metrics once, and use for both scrollbars.
@@ -127,7 +127,7 @@ Blockly.ScrollbarPair.prototype.resize = function() {
  */
 Blockly.ScrollbarPair.prototype.set = function(x, y) {
   /* HACK:
-   Two scrollbars are about to have their sliders moved.  Moving a scollbar
+   Two scrollbars are about to have their sliders moved.  Moving a scrollbar
    will normally result in its onScroll function being called.  That function
    will update the contents.  At issue is what happens when two scrollbars are
    moved.  Calling onScroll twice may result in two rerenderings of the content
@@ -140,7 +140,7 @@ Blockly.ScrollbarPair.prototype.set = function(x, y) {
   */
   if (Blockly.Scrollbar === Blockly.ScrollbarNative) {
     // Native scrollbar mode.
-    // Set both scrollbars and supress their two separate onScroll events.
+    // Set both scrollbars and suppress their two separate onScroll events.
     this.hScroll.set(x, false);
     this.vScroll.set(y, false);
     // Redraw the surface once with the new settings for both scrollbars.
@@ -364,7 +364,7 @@ Blockly.ScrollbarNative.prototype.setVisible = function(visible) {
     For some reason Firefox requires the metrics to be recalculated after
     displaying the scrollbar.  Even though the metrics are identical and
     calculating these metrics has no side effects.  Failure to do so
-    results in a scrollbar that's crushed to 0 in an offscale range.
+    results in a scrollbar that's crushed to 0 in an off-scale range.
     */
     this.getMetrics_();
   } else {
@@ -397,7 +397,7 @@ Blockly.ScrollbarNative.prototype.set = function(value, fireEvents) {
   // If the scrollbar is part of a pair, it is slightly shorter than the view
   // and the value needs to be scaled accordingly.
   if (!fireEvents) {
-    // Temporarily supress the onscroll event handler.
+    // Temporarily suppress the onscroll event handler.
     Blockly.unbindEvent_(this.outerDiv_, 'scroll', this.onScrollWrapper_);
   }
   // Move the scrollbar slider.
@@ -407,7 +407,7 @@ Blockly.ScrollbarNative.prototype.set = function(value, fireEvents) {
     this.outerDiv_.scrollTop = value * this.ratio_;
   }
   if (!fireEvents) {
-    // Reenable the onscroll event handler.
+    // Re-enable the onscroll event handler.
     var scrollbar = this;
     Blockly.bindEvent_(this.outerDiv_, 'scroll', scrollbar,
                        this.onScrollWrapper_);

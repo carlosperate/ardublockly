@@ -44,7 +44,7 @@ Blockly.Generator.get = function(name) {
      * Generate code for the specified block (and attached blocks).
      * @param {Blockly.Block} block The block to generate code for.
      * @param {?boolean} opt_dropParens If true, don't surround code with
-     *     paretheses since the caller already has a safe container.
+     *     parentheses since the caller already has a safe container.
      * @return {string} Generated code, or '' if block is null.
      */
     generator.blockToCode = function(block, opt_dropParens) {
@@ -65,7 +65,7 @@ Blockly.Generator.get = function(name) {
      * @param {!Blockly.Block} block The block containing the input.
      * @param {string} name The name of the input.
      * @param {?boolean} opt_dropParens If true, don't surround code with
-     *     paretheses since the caller already has a safe container.
+     *     parentheses since the caller already has a safe container.
      * @return {string} Generated code or '' if no blocks are connected.
      */
     generator.valueToCode = function(block, name, opt_dropParens) {
@@ -137,7 +137,7 @@ Blockly.Generator.prefixLines = function(text, prefix) {
 /**
  * Recursively spider a tree of blocks, returning all their comments.
  * @param {!Blockly.Block} block The block from which to start spidering.
- * @return {string} Concatinated list of comments.
+ * @return {string} Concatenated list of comments.
  */
 Blockly.Generator.allNestedComments = function(block) {
   var comments = [];

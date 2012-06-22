@@ -23,7 +23,7 @@
  */
 
 /**
- * Initialise the SVG document with various handlers.
+ * Initialize the SVG document with various handlers.
  * @param {!Element} container Containing element.
  * @param {Object} opt_options Optional dictionary of options.
  */
@@ -176,7 +176,7 @@ Blockly.createDom_ = function(container) {
     svg.appendChild(Blockly.ContextMenu.createDom());
   }
 
-  // The SVG is now fuly assembled.  Add it to the container.
+  // The SVG is now fully assembled.  Add it to the container.
   container.appendChild(svg);
   Blockly.svg = svg;
   Blockly.svgResize();
@@ -184,7 +184,7 @@ Blockly.createDom_ = function(container) {
 
 
 /**
- * Initialise Blockly with various handlers.
+ * Initialize Blockly with various handlers.
  * @private
  */
 Blockly.init_ = function() {

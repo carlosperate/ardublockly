@@ -432,7 +432,7 @@ Blockly.Comment.prototype.resizeMouseMove_ = function(e) {
  */
 Blockly.Comment.prototype.textareaFocus_ = function(e) {
   // Ideally this would be hooked to the focus event for the comment.
-  // However doing so in Firefox swallows the cursor for unkown reasons.
+  // However doing so in Firefox swallows the cursor for unknown reasons.
   // So this is hooked to mouseup instead.  No big deal.
   this.promote_();
   // Since the act of moving this node within the DOM causes a loss of focus,
@@ -694,7 +694,7 @@ Blockly.Comment.prototype.setIconLocation = function(x, y) {
 
 /**
  * Notification that the icon has moved, but we don't really know where.
- * Recompute the icon's location from sratch.
+ * Recompute the icon's location from scratch.
  */
 Blockly.Comment.prototype.computeIconLocation = function() {
   // Find coordinates for the centre of the icon and update the arrow.

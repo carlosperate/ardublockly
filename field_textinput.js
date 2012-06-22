@@ -232,7 +232,7 @@ Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
       }
     }
   } else {
-    // Cancelling edit.
+    // Canceling edit.
     text = htmlInput.defaultValue;
   }
   this.setText(text);

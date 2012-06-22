@@ -98,7 +98,7 @@ Blockly.Block.prototype.getSvgRoot = function() {
 /**
  * Is the mouse dragging a block?
  * 0 - No drag operation.
- * 1 - Still inside the stickly DRAG_RADIUS.
+ * 1 - Still inside the sticky DRAG_RADIUS.
  * 2 - Freely draggable.
  * @private
  */
@@ -175,7 +175,7 @@ Blockly.Block.prototype.destroy = function(gentle) {
     if (this.previousConnection && this.previousConnection.targetConnection) {
       // Remember the connection that any next statements need to connect to.
       previousTarget = this.previousConnection.targetConnection;
-      // Detatch this block from the parent's tree.
+      // Detach this block from the parent's tree.
       this.setParent(null);
     }
     if (gentle && this.nextConnection && this.nextConnection.targetConnection) {
@@ -252,7 +252,7 @@ Blockly.Block.prototype.destroy = function(gentle) {
 
 /**
  * Return the coordinates of the top-left corner of this block relative to the
- * drawing surface's orgin (0,0).
+ * drawing surface's origin (0,0).
  * @return {!Object} Object with .x and .y properties.
  */
 Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
@@ -711,7 +711,7 @@ Blockly.Block.prototype.getRootBlock = function() {
 /**
  * Find all the blocks that are directly nested inside this one.
  * Includes value and block inputs, as well as any following statement.
- * Excludes any connection on an output tab or any preceeding statement.
+ * Excludes any connection on an output tab or any preceding statement.
  * @return {!Array.<!Blockly.Block>} Array of blocks.
  */
 Blockly.Block.prototype.getChildren = function() {
@@ -771,7 +771,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
  * Find all the blocks that are directly or indirectly nested inside this one.
  * Includes this block in the list.
  * Includes value and block inputs, as well as any following statements.
- * Excludes any connection on an output tab or any preceeding statements.
+ * Excludes any connection on an output tab or any preceding statements.
  * @return {!Array.<!Blockly.Block>} Flattened array of blocks.
  */
 Blockly.Block.prototype.getDescendants = function() {

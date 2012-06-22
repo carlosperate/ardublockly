@@ -179,7 +179,7 @@ Blockly.Flyout.prototype.position_ = function() {
 };
 
 /**
- * Is the flyout visisble?
+ * Is the flyout visible?
  * @return {boolean} True if visible.
  */
 Blockly.Flyout.prototype.isVisible = function() {

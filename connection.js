@@ -245,7 +245,7 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
     staticConnection = this;
     reverse = true;
   }
-  // Raise it to the top for extra visiblility.
+  // Raise it to the top for extra visibility.
   rootBlock.getSvgRoot().parentNode.appendChild(rootBlock.getSvgRoot());
   var dx = (staticConnection.x_ + Blockly.SNAP_RADIUS) - this.x_;
   var dy = (staticConnection.y_ + Blockly.SNAP_RADIUS * 2) - this.y_;

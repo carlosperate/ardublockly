@@ -202,7 +202,7 @@ Blockly.Workspace.prototype.highlightBlock = function(id) {
   // Temporary turn off the listener for selection changes, so that we don't
   // trip the monitor for detecting user activity.
   this.traceOn(false);
-  // Select the curent block.
+  // Select the current block.
   block.select();
   // Restore the monitor for user activity.
   this.traceOn(true);

@@ -23,7 +23,7 @@
  */
 
 /**
- * Due to a bug in Webkit concerning the stacking order of background colours,
+ * Due to a bug in WebKit concerning the stacking order of background colours,
  * it is not possible to use foreignObject to nest an HTML context menu in
  * an SVG document.  Therefore the context menu is purely SVG.
  * http://code.google.com/p/chromium/issues/detail?id=35545

@@ -228,7 +228,7 @@ Blockly.Language.math_on_list.OPERATORS =
      ['average', 'AVERAGE'],
      ['median', 'MEDIAN'],
      ['modes', 'MODE'],
-     ['standard devitation', 'STD_DEV'],
+     ['standard deviation', 'STD_DEV'],
      ['random item', 'RANDOM']];
 
 Blockly.Language.math_on_list.TOOLTIPS = {
