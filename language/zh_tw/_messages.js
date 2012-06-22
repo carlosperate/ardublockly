@@ -38,3 +38,25 @@ Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(com
 Blockly.LANG_VARIABLES_SET_TITLE_1 = '賦值';
 Blockly.LANG_VARIABLES_SET_ITEM = '變量';
 Blockly.LANG_VARIABLES_SET_TOOLTIP_1 = 'Sets this variable to be equal to the input.';
+
+// Procedures Blocks
+Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = '流程';
+Blockly.LANG_PROCEDURES_DEFNORETURN_DO = '執行';
+Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1 = 'A procedure with no return value.';
+
+Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = '流程';
+Blockly.LANG_PROCEDURES_DEFRETURN_DO = '執行';
+Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = '回傳';
+Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1 = 'A procedure with a return value.';
+
+Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = '呼叫';
+Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = '流程';
+Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP_1 = 'Call a procedure with no return value.';
+
+Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_CALLRETURN_CALL = '呼叫';
+Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = '流程';
+Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1 = 'Call a procedure with a return value.';

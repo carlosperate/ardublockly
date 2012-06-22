@@ -38,3 +38,25 @@ Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(com
 Blockly.LANG_VARIABLES_SET_TITLE_1 = 'set';
 Blockly.LANG_VARIABLES_SET_ITEM = 'item';
 Blockly.LANG_VARIABLES_SET_TOOLTIP_1 = 'Sets this variable to be equal to the input.';
+
+// Procedures Blocks
+Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = 'procedure';
+Blockly.LANG_PROCEDURES_DEFNORETURN_DO = 'do';
+Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1 = 'A procedure with no return value.';
+
+Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = 'procedure';
+Blockly.LANG_PROCEDURES_DEFRETURN_DO = 'do';
+Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'return';
+Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1 = 'A procedure with a return value.';
+
+Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'call';
+Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = 'procedure';
+Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP_1 = 'Call a procedure with no return value.';
+
+Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_CALLRETURN_CALL = 'call';
+Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = 'procedure';
+Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1 = 'Call a procedure with a return value.';

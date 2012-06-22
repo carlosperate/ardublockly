@@ -29,13 +29,13 @@ if (!Blockly.Language) Blockly.Language = {};
 Blockly.Language.procedures_defnoreturn = {
   // Define a procedure with no return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
+  helpUrl: Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL,
   init: function() {
     this.setColour(290);
-    var name = Blockly.Procedures.findLegalName('procedure', this);
+    var name = Blockly.Procedures.findLegalName(Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE, this);
     this.appendTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
-    this.appendInput('do', Blockly.NEXT_STATEMENT, 'STACK');
-    this.setTooltip('A procedure with no return value.');
+    this.appendInput(Blockly.LANG_PROCEDURES_DEFNORETURN_DO, Blockly.NEXT_STATEMENT, 'STACK');
+    this.setTooltip(Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1);
   },
   destroy: function() {
     var name = this.getTitleText('NAME');
@@ -58,15 +58,15 @@ Blockly.Language.procedures_defnoreturn = {
 Blockly.Language.procedures_defreturn = {
   // Define a procedure with a return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
+  helpUrl: Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL,
   init: function() {
     this.setColour(290);
-    var name = Blockly.Procedures.findLegalName('procedure', this);
+    var name = Blockly.Procedures.findLegalName(Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE, this);
     this.appendTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
-    this.appendInput('do', Blockly.NEXT_STATEMENT, 'STACK');
-    this.appendInput('return', Blockly.INPUT_VALUE, 'RETURN', null);
+    this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_DO, Blockly.NEXT_STATEMENT, 'STACK');
+    this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN, Blockly.INPUT_VALUE, 'RETURN', null);
     //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
-    this.setTooltip('A procedure with a return value.');
+    this.setTooltip(Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1);
   },
   destroy: Blockly.Language.procedures_defnoreturn.destroy,
   getProcedureDef: function() {
@@ -79,14 +79,14 @@ Blockly.Language.procedures_defreturn = {
 Blockly.Language.procedures_callnoreturn = {
   // Call a procedure with no return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
+  helpUrl: Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL,
   init: function() {
     this.setColour(290);
-    this.appendTitle('call');
-    this.appendTitle('procedure', 'NAME');
+    this.appendTitle(Blockly.LANG_PROCEDURES_CALLNORETURN_CALL);
+    this.appendTitle(Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE, 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Call a procedure with no return value.');
+    this.setTooltip(Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP_1);
   },
   getProcedureCall: function() {
     return this.getTitleText('NAME');
@@ -112,13 +112,13 @@ Blockly.Language.procedures_callnoreturn = {
 Blockly.Language.procedures_callreturn = {
   // Call a procedure with a return value.
   category: null,  // Procedures are handled specially.
-  helpUrl: 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29',
+  helpUrl: Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL,
   init: function() {
     this.setColour(290);
-    this.appendTitle('call');
-    this.appendTitle('procedure', 'NAME');
+    this.appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_CALL);
+    this.appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE, 'NAME');
     this.setOutput(true, null);
-    this.setTooltip('Call a procedure with a return value.');
+    this.setTooltip(Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1);
   },
   getProcedureCall: Blockly.Language.procedures_callnoreturn.getProcedureCall,
   renameProcedure: Blockly.Language.procedures_callnoreturn.renameProcedure,
