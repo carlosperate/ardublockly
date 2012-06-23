@@ -2,10 +2,10 @@ Path: .
 URL: https://blockly.googlecode.com/svn/trunk
 Repository Root: https://blockly.googlecode.com/svn
 Repository UUID: c400ca83-b69d-9dd7-9705-49c6b8615e23
-Revision: 265
+Revision: 267
 Node Kind: directory
 Schedule: normal
 Last Changed Author: neil.fraser@gmail.com
-Last Changed Rev: 265
-Last Changed Date: 2012-06-20 11:21:55 -0700 (Wed, 20 Jun 2012)
+Last Changed Rev: 267
+Last Changed Date: 2012-06-21 17:26:00 -0700 (Thu, 21 Jun 2012)
 
