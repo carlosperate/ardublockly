@@ -103,7 +103,7 @@ Maze.init = function(blockly) {
 
   // Locate the start and finish squares.
   Maze.mapSet();
-  
+
   // Record the map's offset.
   Maze.mapOffsetLeft_ = 0;
   Maze.mapOffsetTop_ = 0;

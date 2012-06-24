@@ -101,38 +101,7 @@ function init(blockly) {
         Blockly.fireUiEvent(document, window, 'resize');
       }, 1);
   }
-  
-  // support touch inputs, will be defined on a TOUCH device such as iPad or Android, etc.
-  if('ontouchstart' in document.documentElement) {
-    console.log('on touch device');
-    Blockly.TouchEvents = {};
-	Blockly.TouchEvents.touchMapper = {
-	  "touchstart" : "mousedown",
-	  "touchmove" : "mousemove",
-	  "touchend" : "mouseup"
-	};
-	
-	Blockly.TouchEvents.touchHandler = function(event) {
-	  if (event.touches.length > 1){
-	    return; // Punt on multitouch events.
-	  }
-	  var touchPoint = event.changedTouches[0];
-	  var mappedEvent = Blockly.TouchEvents.touchMapper[event.type];
-	  if(mappedEvent == null){ // We don't handle this event type (whatever it is). Punt.
-	    return;
-	  }
-	  var simulatedEvent = document.createEvent("MouseEvent");
-	  simulatedEvent.initMouseEvent(mappedEvent, true, true,  window, 1, touchPoint.screenX, touchPoint.screenY, 
-	  touchPoint.clientX, touchPoint.clientY, false, false, false, false, 0, null);
-	  touchPoint.target.dispatchEvent(simulatedEvent);
-	  event.preventDefault();
-	};
-	
-	Blockly.svgDoc.addEventListener('touchstart', Blockly.TouchEvents.touchHandler, false);
-	Blockly.svgDoc.addEventListener('touchmove', Blockly.TouchEvents.touchHandler, false);
-	Blockly.svgDoc.addEventListener('touchend', Blockly.TouchEvents.touchHandler, false);
-  }
-  
+
   // Restore/backup current works.
   restore_blocks();
   Blockly.bindEvent_(window, 'unload', null, backup_blocks);
@@ -214,7 +183,7 @@ function load() {
         return;
       }
       var count = Blockly.mainWorkspace.getAllBlocks().length;
-      if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) { 
+      if (count && confirm('Replace existing blocks?\n"Cancel" will merge.')) {
         Blockly.mainWorkspace.clear();
       }
       Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
@@ -225,7 +194,7 @@ function load() {
   };
   reader.readAsText(files[0]);
 };
-  
+
 /**
  * Discard all blocks from the workspace.
  */

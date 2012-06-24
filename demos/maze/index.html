@@ -10,34 +10,6 @@
  */
 function init(blockly) {
   window.Blockly = blockly;
-  
-  // support touch inputs
-  Blockly.TouchEvents = {};
-  Blockly.TouchEvents.touchMapper = {
-    "touchstart" : "mousedown",
-	"touchmove" : "mousemove",
-	"touchend" : "mouseup"
-  };
-
-  Blockly.TouchEvents.touchHandler = function(event) {
-    if (event.touches.length > 1){
-      return; // Punt on multitouch events.
-    }
-    var touchPoint = event.changedTouches[0];
-    var mappedEvent = Blockly.TouchEvents.touchMapper[event.type];
-    if(mappedEvent == null){ // We don't handle this event type (whatever it is). Punt.
-      return;
-    }
-    var simulatedEvent = document.createEvent("MouseEvent");
-    simulatedEvent.initMouseEvent(mappedEvent, true, true,  window, 1, touchPoint.screenX, touchPoint.screenY, 
-    touchPoint.clientX, touchPoint.clientY, false, false, false, false, 0, null);
-    touchPoint.target.dispatchEvent(simulatedEvent);
-    event.preventDefault();
-  };
-
-  Blockly.svgDoc.ontouchstart = Blockly.TouchEvents.touchHandler;
-  Blockly.svgDoc.ontouchmove = Blockly.TouchEvents.touchHandler;
-  Blockly.svgDoc.ontouchend = Blockly.TouchEvents.touchHandler;
 }
   </script>
   <style>
@@ -106,7 +78,7 @@ function init(blockly) {
           <button id="runButton" onclick="Maze.runButtonClick();">Run Program</button>
           <button id="resetButton" onclick="Maze.resetButtonClick();" style="display: none">&nbsp; Reset &nbsp;</button>
         </div>
-        
+
         <div id="setDiv">
 <h2>Change Start Location</h2>
           <button id="set1" onclick="Maze.setClick(1);">Set1</button>

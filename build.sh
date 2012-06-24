@@ -18,6 +18,7 @@ cat blockly.js \
     toolbox.js \
     tooltip.js \
     trashcan.js \
+    utils.js \
     variables.js \
     workspace.js \
     xml.js > demos/blockly_compressed.js
