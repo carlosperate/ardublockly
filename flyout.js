@@ -197,9 +197,8 @@ Blockly.Flyout.prototype.hide = function() {
     block.destroy();
   }
   // Delete all the background buttons.
-  for (var x = 0, rect; rect = this.buttons_[x];
-       x++) {
-    Blockly.unbindEvent_(rect, 'mousedown', rect.wrapper_);
+  for (var x = 0, rect; rect = this.buttons_[x]; x++) {
+    Blockly.unbindEvent_(rect.wrapper_);
     rect.parentNode.removeChild(rect);
   }
   this.buttons_ = [];

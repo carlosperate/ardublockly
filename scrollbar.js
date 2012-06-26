@@ -398,7 +398,7 @@ Blockly.ScrollbarNative.prototype.set = function(value, fireEvents) {
   // and the value needs to be scaled accordingly.
   if (!fireEvents) {
     // Temporarily suppress the onscroll event handler.
-    Blockly.unbindEvent_(this.outerDiv_, 'scroll', this.onScrollWrapper_);
+    Blockly.unbindEvent_(this.onScrollWrapper_);
   }
   // Move the scrollbar slider.
   if (this.horizontal_) {
@@ -743,13 +743,11 @@ Blockly.ScrollbarSvg.prototype.onMouseMoveKnob_ = function(e) {
  */
 Blockly.ScrollbarSvg.prototype.onMouseUpKnob_ = function(e) {
   if (Blockly.ScrollbarSvg.onMouseUpWrapper_) {
-    Blockly.unbindEvent_(Blockly.svgDoc, 'mouseup',
-                         Blockly.ScrollbarSvg.onMouseUpWrapper_);
+    Blockly.unbindEvent_(Blockly.ScrollbarSvg.onMouseUpWrapper_);
     Blockly.ScrollbarSvg.onMouseUpWrapper_ = null;
   }
   if (Blockly.ScrollbarSvg.onMouseMoveWrapper_) {
-    Blockly.unbindEvent_(Blockly.svgDoc, 'mousemove',
-                         Blockly.ScrollbarSvg.onMouseMoveWrapper_);
+    Blockly.unbindEvent_(Blockly.ScrollbarSvg.onMouseMoveWrapper_);
     Blockly.ScrollbarSvg.onMouseMoveWrapper_ = null;
   }
 };

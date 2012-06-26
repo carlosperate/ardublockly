@@ -216,9 +216,9 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
  */
 Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
   var htmlInput = Blockly.FieldTextInput.htmlInput_;
-  Blockly.unbindEvent_(htmlInput, 'blur', htmlInput.onBlurWrapper_);
-  Blockly.unbindEvent_(htmlInput, 'keyup', htmlInput.onKeyUpWrapper_);
-  Blockly.unbindEvent_(htmlInput, 'keypress', htmlInput.onKeyPressWrapper_);
+  Blockly.unbindEvent_(htmlInput.onBlurWrapper_);
+  Blockly.unbindEvent_(htmlInput.onKeyUpWrapper_);
+  Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
 
   var text;
   if (save) {

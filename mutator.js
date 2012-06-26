@@ -381,7 +381,7 @@ Blockly.Mutator.openDialog_ = function(block) {
 Blockly.Mutator.closeDialog = function() {
   Blockly.Mutator.isOpen = false;
   Blockly.addClass_(Blockly.Mutator.svgGroup_, 'blocklyHidden');
-  Blockly.unbindEvent_(window, 'resize', Blockly.Mutator.resizeWrapper_);
+  Blockly.unbindEvent_(Blockly.Mutator.resizeWrapper_);
   Blockly.Mutator.resizeWrapper_ = null;
 
   // Empty the dialog.
@@ -424,7 +424,7 @@ Blockly.Mutator.Button = function(caption, launch, action) {
  */
 Blockly.Mutator.Button.prototype.destroy = function() {
   if (this.onClickWrapper_) {
-    Blockly.unbindEvent_(this.svgGroup_, 'click', this.onClickWrapper_);
+    Blockly.unbindEvent_(this.onClickWrapper_);
     this.onClickWrapper_ = null;
   }
   this.svgGroup_.parentNode.removeChild(this.svgGroup_);

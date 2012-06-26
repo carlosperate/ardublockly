@@ -125,13 +125,11 @@ Blockly.Block.onMouseMoveWrapper_ = null;
  */
 Blockly.Block.unbindDragEvents_ = function(e) {
   if (Blockly.Block.onMouseUpWrapper_) {
-    Blockly.unbindEvent_(Blockly.svgDoc, 'mouseup',
-                         Blockly.Block.onMouseUpWrapper_);
+    Blockly.unbindEvent_(Blockly.Block.onMouseUpWrapper_);
     Blockly.Block.onMouseUpWrapper_ = null;
   }
   if (Blockly.Block.onMouseMoveWrapper_) {
-    Blockly.unbindEvent_(Blockly.svgDoc, 'mousemove',
-                         Blockly.Block.onMouseMoveWrapper_);
+    Blockly.unbindEvent_(Blockly.Block.onMouseMoveWrapper_);
     Blockly.Block.onMouseMoveWrapper_ = null;
   }
 };
@@ -649,6 +647,8 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
     // Flip the trash can lid if needed.
     this.workspace.trashcan && this.workspace.trashcan.onMouseMove(e);
   }
+  // This event has been handled.  No need to bubble up to the document.
+  e.stopPropagation();
 };
 
 /**

@@ -316,42 +316,6 @@ Blockly.onKeyDown_ = function(e) {
   }
 };
 
-// Support touch inputs, will be defined on a touch device such as iPad,
-// Android, etc.  Contributed by Tony Hursh.
-if ('ontouchstart' in document.documentElement) {
-  Blockly.TouchEvents = {};
-  Blockly.TouchEvents.touchMapper = {
-    touchstart: 'mousedown',
-    touchmove: 'mousemove',
-    touchend: 'mouseup'
-  };
-
-  Blockly.TouchEvents.touchHandler = function(event) {
-    if (event.touches.length > 1) {
-      return; // Punt on multitouch events.
-    }
-    var touchPoint = event.changedTouches[0];
-    var mappedEvent = Blockly.TouchEvents.touchMapper[event.type];
-    if (!mappedEvent) {
-      // We don't handle this event type (whatever it is). Punt.
-      return;
-    }
-    var simulatedEvent = document.createEvent('MouseEvent');
-    simulatedEvent.initMouseEvent(mappedEvent, true, true,  window, 1,
-        touchPoint.screenX, touchPoint.screenY, touchPoint.clientX,
-        touchPoint.clientY, false, false, false, false, 0, null);
-    touchPoint.target.dispatchEvent(simulatedEvent);
-    event.preventDefault();
-  };
-
-  Blockly.bindEvent_(Blockly.svgDoc, 'touchstart', null,
-                     Blockly.TouchEvents.touchHandler);
-  Blockly.bindEvent_(Blockly.svgDoc, 'touchmove', null,
-                     Blockly.TouchEvents.touchHandler);
-  Blockly.bindEvent_(Blockly.svgDoc, 'touchend', null,
-                     Blockly.TouchEvents.touchHandler);
-}
-
 /**
  * Show the context menu for the workspace.
  * @param {number} x X-coordinate of mouse click.

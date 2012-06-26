@@ -177,8 +177,7 @@ Blockly.Workspace.prototype.getBlockById = function(id) {
 Blockly.Workspace.prototype.traceOn = function(armed) {
   this.traceOn_ = armed;
   if (this.traceWrapper_) {
-    Blockly.unbindEvent_(this.svgBlockCanvas_, 'blocklySelectChange',
-                         this.traceWrapper_);
+    Blockly.unbindEvent_(this.traceWrapper_);
     this.traceWrapper_ = null;
   }
   if (armed) {

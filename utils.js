@@ -85,38 +85,75 @@ Blockly.removeClass_ = function(node, className) {
  * @param {string} name Event name to listen to (e.g. 'mousedown').
  * @param {Object} thisObject The value of 'this' in the function.
  * @param {!Function} func Function to call when event is triggered.
- * @return {!Function} Function wrapper that was bound.  Used for unbindEvent_.
+ * @return {!Array.<!Array>} Opaque data that can be passed to unbindEvent_.
  * @private
  */
 Blockly.bindEvent_ = function(element, name, thisObject, func) {
+  var bindData = [];
   var wrapFunc;
   if (element.addEventListener) {  // W3C
     wrapFunc = function(e) {
       func.apply(thisObject, arguments);
     };
     element.addEventListener(name, wrapFunc, false);
+    bindData.push([element, name, wrapFunc]);
+    // Add equivalent touch event.
+    if (name in Blockly.bindEvent_.TOUCH_MAP) {
+      wrapFunc = function(e) {
+        // Punt on multitouch events.
+        if (e.changedTouches.length == 1) {
+          // Map the touch event's properties to the event.
+          var touchPoint = e.changedTouches[0];
+          e.clientX = touchPoint.clientX;
+          e.clientY = touchPoint.clientY;
+        }
+        func.apply(thisObject, arguments);
+        // Stop the browser from scrolling/zooming the page
+        e.preventDefault();
+      };
+      element.addEventListener(Blockly.bindEvent_.TOUCH_MAP[name],
+                               wrapFunc, false);
+      bindData.push([element, Blockly.bindEvent_.TOUCH_MAP[name], wrapFunc]);
+    }
   } else {  // IE
     wrapFunc = function(e) {
       func.apply(thisObject, arguments);
       e.stopPropagation();
     };
     element.attachEvent('on' + name, wrapFunc);
+    bindData.push([element, name, wrapFunc]);
   }
-  return wrapFunc;
+  return bindData;
 };
 
+if ('ontouchstart' in document.documentElement) {
+  Blockly.bindEvent_.TOUCH_MAP = {
+    //click: 'touchstart',
+    mousedown: 'touchstart',
+    mousemove: 'touchmove',
+    mouseup: 'touchend'
+  };
+} else {
+  Blockly.bindEvent_.TOUCH_MAP = {};
+}
+
 /**
- * Unbind an event from a function call.
- * @param {!Element} element Element from which to unlisten.
- * @param {string} name Event name to listen to (e.g. 'mousedown').
- * @param {!Function} func Function to stop calling when event is triggered.
+ * Unbind one or more events event from a function call.
+ * @param {!Array.<!Array>} bindData Opaque data from bindEvent_.  This list is
+ *     emptied during the course of calling this function.
  * @private
  */
-Blockly.unbindEvent_ = function(element, name, func) {
-  if (element.removeEventListener) {  // W3C
-    element.removeEventListener(name, func, false);
-  } else {  // IE
-    element.detachEvent('on' + name, func);
+Blockly.unbindEvent_ = function(bindData) {
+  while (bindData.length) {
+    var bindDatum = bindData.pop();
+    var element = bindDatum[0];
+    var name = bindDatum[1];
+    var func = bindDatum[2];
+    if (element.removeEventListener) {  // W3C
+      element.removeEventListener(name, func, false);
+    } else {  // IE
+      element.detachEvent('on' + name, func);
+    }
   }
 };
 
@@ -147,6 +184,7 @@ Blockly.fireUiEvent = function(doc, element, eventName) {
  */
 Blockly.noEvent = function(e) {
   // This event has been handled.  No need to bubble up to the document.
+  e.preventDefault();
   e.stopPropagation();
 };
 

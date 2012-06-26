@@ -202,6 +202,7 @@ Blockly.init_ = function() {
   Blockly.bindEvent_(Blockly.svg, 'mousemove', null, Blockly.onMouseMove_);
   Blockly.bindEvent_(Blockly.svg, 'contextmenu', null, Blockly.onContextMenu_);
   Blockly.bindEvent_(doc, 'keydown', null, Blockly.onKeyDown_);
+
   if (Blockly.editable) {
     Blockly.Toolbox && Blockly.Toolbox.init();
     Blockly.Mutator && Blockly.Mutator.init();
