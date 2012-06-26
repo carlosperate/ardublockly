@@ -28,7 +28,7 @@ Blockly.Dart = Blockly.Generator.get('Dart');
 
 Blockly.Dart.logic_compare = function(opt_dropParens) {
   // Comparison operator.
-  var mode = this.getInputLabelValue('B');
+  var mode = this.getTitleValue('OP');
   var operator = Blockly.Dart.logic_compare.OPERATORS[mode];
   var argument0 = Blockly.Dart.valueToCode(this, 'A') || '0';
   var argument1 = Blockly.Dart.valueToCode(this, 'B') || '0';
@@ -52,7 +52,7 @@ Blockly.Dart.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.Dart.valueToCode(this, 'A') || 'false';
   var argument1 = Blockly.Dart.valueToCode(this, 'B') || 'false';
-  var operator = (this.getInputLabelValue('B') == 'AND') ? '&&' : '||';
+  var operator = (this.getTitleValue('OP') == 'AND') ? '&&' : '||';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';

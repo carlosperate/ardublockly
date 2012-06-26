@@ -836,15 +836,34 @@ Blockly.Block.prototype.appendTitle = function(title, opt_name) {
 };
 
 /**
+ * Returns the named title or label from a block.
+ * @param {string} name The name of the title.
+ * @return {*} Named title, or null if title does not exist.
+ * @private
+ */
+Blockly.Block.prototype.getTitle_ = function(name) {
+  for (var x = 0, title; title = this.titleRow[x]; x++) {
+    if (title.name === name) {
+      return title;
+    }
+  }
+  for (var x = 0, input; input = this.inputList[x]; x++) {
+    if (input.label && input.label.name === name) {
+      return input.label;
+    }
+  }
+  return null;
+};
+
+/**
  * Returns the human-readable text from the title of a block.
  * @param {string} name The name of the title.
  * @return {!string} Text from the title or null if title does not exist.
  */
 Blockly.Block.prototype.getTitleText = function(name) {
-  for (var x = 0, title; title = this.titleRow[x]; x++) {
-    if (title.name === name) {
-      return title.getText();
-    }
+  var title = this.getTitle_(name);
+  if (title) {
+    return title.getText();
   }
   return null;
 };
@@ -855,10 +874,9 @@ Blockly.Block.prototype.getTitleText = function(name) {
  * @return {!string} Value from the title or null if title does not exist.
  */
 Blockly.Block.prototype.getTitleValue = function(name) {
-  for (var x = 0, title; title = this.titleRow[x]; x++) {
-    if (title.name === name) {
-      return title.getValue();
-    }
+  var title = this.getTitle_(name);
+  if (title) {
+    return title.getValue();
   }
   return null;
 };
@@ -869,13 +887,12 @@ Blockly.Block.prototype.getTitleValue = function(name) {
  * @param {string} name The name of the title.
  */
 Blockly.Block.prototype.setTitleText = function(newText, name) {
-  for (var x = 0, title; title = this.titleRow[x]; x++) {
-    if (title.name === name) {
-      title.setText(newText);
-      return;
-    }
+  var title = this.getTitle_(name);
+  if (title) {
+    title.setText(newText);
+  } else {
+    throw 'Title "' + name + '" not found.';
   }
-  throw 'Title "' + name + '" not found.';
 };
 
 /**
@@ -884,13 +901,12 @@ Blockly.Block.prototype.setTitleText = function(newText, name) {
  * @param {string} name The name of the title.
  */
 Blockly.Block.prototype.setTitleValue = function(newValue, name) {
-  for (var x = 0, title; title = this.titleRow[x]; x++) {
-    if (title.name === name) {
-      title.setValue(newValue);
-      return;
-    }
+  var title = this.getTitle_(name);
+  if (title) {
+    title.setValue(newValue);
+  } else {
+    throw 'Title "' + name + '" not found.';
   }
-  throw 'Title "' + name + '" not found.';
 };
 
 /**
@@ -1044,8 +1060,9 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
 
 /**
  * Add a value input, statement input or local variable to this block.
- * @param {string|Blockly.Field} label Printed next to the input
- *     (e.g. 'x' or 'do').  May be an editable field.
+ * @param {string|Array} label Printed next to the input (e.g. 'x' or 'do').
+ *     If the label is an editable field, this argument should be a tuple with
+ *     the field and its name.
  * @param {number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
  *     Blockly.LOCAL_VARIABLE.
  * @param {string} name Language-neutral identifier which may used to find this
@@ -1061,9 +1078,10 @@ Blockly.Block.prototype.appendInput = function(label, type, name, check) {
     if (typeof label == 'string') {
       // Text label.
       textElement = new Blockly.FieldLabel(label);
-    } else if (typeof label == 'object') {
-      // Editable label.
-      textElement = label;
+    } else if (label instanceof Array) {
+      // Editable label with name.
+      textElement = label[0];
+      textElement.name = label[1];
     }
     if (this.svg_) {
       textElement.init(this);
@@ -1097,8 +1115,7 @@ Blockly.Block.prototype.appendInput = function(label, type, name, check) {
  * @param {string} name The name of the input.
  */
 Blockly.Block.prototype.removeInput = function(name) {
-  for (var x = 0; x < this.inputList.length; x++) {
-    var input = this.inputList[x];
+  for (var x = 0, input; input = this.inputList[x]; x++) {
     if (input.name == name) {
       if (input.targetConnection) {
         // Disconnect any attached block.
@@ -1129,9 +1146,9 @@ Blockly.Block.prototype.removeInput = function(name) {
  * @return {Object} The input object, or null of the input does not exist.
  */
 Blockly.Block.prototype.getInput = function(name) {
-  for (var x = 0; x < this.inputList.length; x++) {
-    if (this.inputList[x].name == name) {
-      return this.inputList[x];
+  for (var x = 0, input; input = this.inputList[x]; x++) {
+    if (input.name == name) {
+      return input;
     }
   }
   // This input does not exist.
@@ -1170,32 +1187,6 @@ Blockly.Block.prototype.setInputVariable = function(name, text) {
     throw 'Input does not exist.';
   }
   input.setText(text);
-};
-
-/**
- * Fetches the value of the label attached to the named input.
- * @param {string} name The name of the input.
- * @return {string} The label's text, or null if the input does not exist.
- */
-Blockly.Block.prototype.getInputLabelValue = function(name) {
-  var input = this.getInput(name);
-  if (input) {
-    var label = input.label;
-    if (label) {
-      if (label.getText) {
-        // Editable field.
-        return label.getValue();
-      } else {
-        // Static text.
-        return label.textContent;
-      }
-    } else {
-      // Input exists, but label doesn't.
-      return '';
-    }
-  }
-  // This input does not exist.
-  return null;
 };
 
 /**

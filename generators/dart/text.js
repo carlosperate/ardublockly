@@ -74,7 +74,7 @@ Blockly.Dart.text_isEmpty = function() {
 
 Blockly.Dart.text_endString = function() {
   // Return a leading or trailing substring.
-  var first = this.getInputLabelValue('NUM') == 'FIRST';
+  var first = this.getTitleValue('END') == 'FIRST';
   var code;
   if (first) {
     var argument0 = Blockly.Dart.valueToCode(this, 'NUM', true) || '1';
@@ -121,7 +121,7 @@ Blockly.Dart.text_charAt = function() {
 
 Blockly.Dart.text_changeCase = function() {
   // Change capitalization.
-  var mode = this.getInputLabelValue('TEXT');
+  var mode = this.getTitleValue('CASE');
   var operator = Blockly.Dart.text_changeCase.OPERATORS[mode];
   var code;
   if (operator) {

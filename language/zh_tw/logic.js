@@ -37,10 +37,10 @@ Blockly.Language.logic_compare = {
     this.setOutput(true, Boolean);
     this.appendInput('', Blockly.INPUT_VALUE, 'A', null);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B', null);
+    this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'B', null);
     this.setInputsInline(true);
     this.setTooltip(function() {
-      var op = thisBlock.getInputLabelValue('B');
+      var op = thisBlock.getTitleValue('OP');
       return Blockly.Language.logic_compare.TOOLTIPS[op];
     });
   }
@@ -78,10 +78,10 @@ Blockly.Language.logic_operation = {
     this.setOutput(true, Boolean);
     this.appendInput('', Blockly.INPUT_VALUE, 'A', Boolean);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B', Boolean);
+    this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'B', Boolean);
     this.setInputsInline(true);
     this.setTooltip(function() {
-      var op = thisBlock.getInputLabelValue('B');
+      var op = thisBlock.getTitleValue('OP');
       return Blockly.Language.logic_operation.TOOLTIPS[op];
     });
   }

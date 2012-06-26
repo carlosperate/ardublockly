@@ -164,7 +164,7 @@ Blockly.Language.text_endString = {
     this.setColour(160);
     this.setOutput(true, String);
     var menu = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(menu, Blockly.INPUT_VALUE, 'NUM', Number);
+    this.appendInput([menu, 'END'], Blockly.INPUT_VALUE, 'NUM', Number);
     this.appendInput('letters in text', Blockly.INPUT_VALUE, 'TEXT', String);
     this.setInputsInline(true);
     this.setTooltip('Returns specified number of letters at the beginning or end of the text.');
@@ -223,7 +223,7 @@ Blockly.Language.text_changeCase = {
     this.setColour(160);
     this.appendTitle('to');
     var menu = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(menu, Blockly.INPUT_VALUE, 'TEXT', String);
+    this.appendInput([menu, 'CASE'], Blockly.INPUT_VALUE, 'TEXT', String);
     this.setOutput(true, String);
     this.setTooltip('Return a copy of the text in a different case.');
   }

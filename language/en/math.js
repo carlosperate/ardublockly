@@ -54,10 +54,10 @@ Blockly.Language.math_arithmetic = {
     this.setOutput(true, Number);
     this.appendInput('', Blockly.INPUT_VALUE, 'A', Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'B', Number);
+    this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'B', Number);
     this.setInputsInline(true);
     this.setTooltip(function() {
-      var mode = thisBlock.getInputLabelValue('B');
+      var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_arithmetic.TOOLTIPS[mode];
     });
   }
@@ -118,9 +118,9 @@ Blockly.Language.math_single = {
     this.setColour(230);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM', Number);
+    this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
     this.setTooltip(function() {
-      var mode = thisBlock.getInputLabelValue('NUM');
+      var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_single.TOOLTIPS[mode];
     });
   }
@@ -156,7 +156,7 @@ Blockly.Language.math_round = {
     this.setColour(230);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM', Number);
+    this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
     this.setTooltip('Round a number up or down.');
   }
 };
@@ -176,9 +176,9 @@ Blockly.Language.math_trig = {
     this.setColour(230);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendInput(dropdown, Blockly.INPUT_VALUE, 'NUM', Number);
+    this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
     this.setTooltip(function() {
-      var mode = thisBlock.getInputLabelValue('NUM');
+      var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_trig.TOOLTIPS[mode];
     });
   }

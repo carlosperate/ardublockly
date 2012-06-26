@@ -28,7 +28,7 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.logic_compare = function(opt_dropParens) {
   // Comparison operator.
-  var mode = this.getInputLabelValue('B');
+  var mode = this.getTitleValue('OP');
   var operator = Blockly.JavaScript.logic_compare.OPERATORS[mode];
   var argument0 = Blockly.JavaScript.valueToCode(this, 'A') || '0';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || '0';
@@ -52,7 +52,7 @@ Blockly.JavaScript.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'A') || 'false';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || 'false';
-  var operator = (this.getInputLabelValue('B') == 'AND') ? '&&' : '||';
+  var operator = (this.getTitleValue('OP') == 'AND') ? '&&' : '||';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';

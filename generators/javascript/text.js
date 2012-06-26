@@ -69,7 +69,7 @@ Blockly.JavaScript.text_isEmpty = function() {
 
 Blockly.JavaScript.text_endString = function() {
   // Return a leading or trailing substring.
-  var first = this.getInputLabelValue('NUM') == 'FIRST';
+  var first = this.getTitleValue('END') == 'FIRST';
   var code;
   if (first) {
     var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM', true) || '1';
@@ -116,7 +116,7 @@ Blockly.JavaScript.text_charAt = function() {
 
 Blockly.JavaScript.text_changeCase = function() {
   // Change capitalization.
-  var mode = this.getInputLabelValue('TEXT');
+  var mode = this.getTitleValue('CASE');
   var operator = Blockly.JavaScript.text_changeCase.OPERATORS[mode];
   var code;
   if (operator) {

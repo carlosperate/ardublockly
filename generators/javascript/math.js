@@ -37,7 +37,7 @@ Blockly.JavaScript.math_arithmetic = function(opt_dropParens) {
   var argument1 = Blockly.JavaScript.valueToCode(this, 'B') || '0';
   var code;
 
-  var mode = this.getInputLabelValue('B');
+  var mode = this.getTitleValue('OP');
   if (mode == 'POWER') {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
   } else {
@@ -70,7 +70,7 @@ Blockly.JavaScript.math_single = function(opt_dropParens) {
   // Math operators with single operand.
   var argNaked = Blockly.JavaScript.valueToCode(this, 'NUM', true) || '0';
   var argParen = Blockly.JavaScript.valueToCode(this, 'NUM', false) || '0';
-  var operator = this.getInputLabelValue('NUM');
+  var operator = this.getTitleValue('OP');
   var code;
   // First, handle cases which generate values that don't need parentheses wrapping the code.
   switch (operator) {

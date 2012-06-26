@@ -89,9 +89,6 @@ Blockly.removeClass_ = function(node, className) {
  * @private
  */
 Blockly.bindEvent_ = function(element, name, thisObject, func) {
-  if (typeof func != 'function') {
-    console.log(name);
-  }
   var bindData = [];
   var wrapFunc;
   if (element.addEventListener) {  // W3C

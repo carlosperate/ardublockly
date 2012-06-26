@@ -81,7 +81,7 @@ Blockly.Python.text_endString = function() {
   // Return a leading or trailing substring.
   // Do we need to prevent 'List index out of range' ERROR by checking
   // if argument 0 > len(argument1)? Or will ALL error be handled systematically?
-  var first = this.getInputLabelValue('NUM') == 'FIRST';
+  var first = this.getTitleValue('END') == 'FIRST';
   var argument0 = Blockly.Python.valueToCode(this, 'NUM', true) || '1';
   var argument1 = Blockly.Python.valueToCode(this, 'TEXT') || '\'\'';
   var code = argument1 + '[' +
@@ -120,7 +120,7 @@ Blockly.Python.text_charAt = function() {
 
 Blockly.Python.text_changeCase = function() {
   // Change capitalization.
-  var mode = this.getInputLabelValue('TEXT');
+  var mode = this.getTitleValue('CASE');
   var operator = Blockly.Python.text_changeCase.OPERATORS[mode];
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT', true) || '\'\'';
   var code = argument0 + operator;

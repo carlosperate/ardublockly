@@ -58,13 +58,21 @@ Blockly.Xml.blockToDom_ = function(block) {
       element.appendChild(mutation);
     }
   }
-  for (var i = 0, title; title = block.titleRow[i]; i++) {
+  function titleToDom(title) {
     if (title.name && title.EDITABLE) {
       var container = document.createElement('title');
       container.setAttribute('name', title.name);
       var titleText = document.createTextNode(title.getValue());
       container.appendChild(titleText);
       element.appendChild(container);
+    }
+  }
+  for (var i = 0, title; title = block.titleRow[i]; i++) {
+    titleToDom(title);
+  }
+  for (var x = 0, input; input = block.inputList[x]; x++) {
+    if (input.label) {
+      titleToDom(input.label);
     }
   }
 
@@ -104,10 +112,6 @@ Blockly.Xml.blockToDom_ = function(block) {
       }
     }
     container.setAttribute('name', input.name);
-    if (input.label && input.label.EDITABLE && input.label.getValue) {
-      container.setAttribute('label', input.label.getValue());
-      empty = false;
-    }
     if (!empty) {
       element.appendChild(container);
     }
@@ -322,10 +326,6 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         break;
       default:
         // Unknown tag; ignore.  Same principle as HTML parsers.
-    }
-    var labelText = xmlChild.getAttribute('label');
-    if (labelText !== null && input && input.label && input.label.setText) {
-      input.label.setValue(labelText);
     }
   }
   block.render();

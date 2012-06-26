@@ -35,7 +35,7 @@ Blockly.Python.math_arithmetic = function(opt_dropParens) {
   // Basic arithmetic operators, and power.
   var argument0 = Blockly.Python.valueToCode(this, 'A') || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'B') || '0';
-  var mode = this.getInputLabelValue('B');
+  var mode = this.getTitleValue('OP');
   var operator = Blockly.Python.math_arithmetic.OPERATORS[mode];
   var code = argument0 + operator + argument1;
   if (!opt_dropParens) {
@@ -66,7 +66,7 @@ Blockly.Python.math_single = function(opt_dropParens) {
   Blockly.Python.definitions_['import_math'] = 'import math';
   var argNaked = Blockly.Python.valueToCode(this, 'NUM', true) || '0';
   var argParen = Blockly.Python.valueToCode(this, 'NUM', false) || '0';
-  var operator = this.getInputLabelValue('NUM');
+  var operator = this.getTitleValue('OP');
   var code;
   // First, handle cases which generate values that don't need parentheses wrapping the code.
   switch (operator) {

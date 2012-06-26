@@ -28,7 +28,7 @@ Blockly.Python = Blockly.Generator.get('Python');
 
 Blockly.Python.logic_compare = function(opt_dropParens) {
   // Comparison operator.
-  var mode = this.getInputLabelValue('B');
+  var mode = this.getTitleValue('OP');
   var operator = Blockly.Python.logic_compare.OPERATORS[mode];
   var argument0 = Blockly.Python.valueToCode(this, 'A') || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'B') || '0';
@@ -52,7 +52,7 @@ Blockly.Python.logic_operation = function(opt_dropParens) {
   // Operations 'and', 'or'.
   var argument0 = Blockly.Python.valueToCode(this, 'A') || 'False';
   var argument1 = Blockly.Python.valueToCode(this, 'B') || 'False';
-  var operator = (this.getInputLabelValue('B') == 'AND') ? 'and' : 'or';
+  var operator = (this.getTitleValue('OP') == 'AND') ? 'and' : 'or';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   if (!opt_dropParens) {
     code = '(' + code + ')';
