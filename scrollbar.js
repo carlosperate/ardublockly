@@ -398,6 +398,7 @@ Blockly.ScrollbarNative.prototype.set = function(value, fireEvents) {
   // and the value needs to be scaled accordingly.
   if (!fireEvents) {
     // Temporarily suppress the onscroll event handler.
+    var scrollFunc = this.onScrollWrapper_[0][2];
     Blockly.unbindEvent_(this.onScrollWrapper_);
   }
   // Move the scrollbar slider.
@@ -409,8 +410,8 @@ Blockly.ScrollbarNative.prototype.set = function(value, fireEvents) {
   if (!fireEvents) {
     // Re-enable the onscroll event handler.
     var scrollbar = this;
-    Blockly.bindEvent_(this.outerDiv_, 'scroll', scrollbar,
-                       this.onScrollWrapper_);
+    this.onScrollWrapper_ = Blockly.bindEvent_(this.outerDiv_, 'scroll',
+        scrollbar, scrollFunc);
   }
 };
 

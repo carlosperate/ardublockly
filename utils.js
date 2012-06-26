@@ -89,6 +89,9 @@ Blockly.removeClass_ = function(node, className) {
  * @private
  */
 Blockly.bindEvent_ = function(element, name, thisObject, func) {
+  if (typeof func != 'function') {
+    console.log(name);
+  }
   var bindData = [];
   var wrapFunc;
   if (element.addEventListener) {  // W3C
@@ -128,7 +131,6 @@ Blockly.bindEvent_ = function(element, name, thisObject, func) {
 
 if ('ontouchstart' in document.documentElement) {
   Blockly.bindEvent_.TOUCH_MAP = {
-    //click: 'touchstart',
     mousedown: 'touchstart',
     mousemove: 'touchmove',
     mouseup: 'touchend'
