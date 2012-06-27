@@ -137,6 +137,7 @@ Blockly.Language.lists_repeat = {
     this.appendTitle('建立列表');
     this.appendInput('使用項目', Blockly.INPUT_VALUE, 'ITEM', null);
     this.appendInput('重複', Blockly.INPUT_VALUE, 'NUM', Number);
+    this.appendInput('次數', Blockly.DUMMY_INPUT, '', null);
     this.setInputsInline(true);
     this.setTooltip('Creates a list consisting of the given value\n' +
                     'repeated the specified number of times.');

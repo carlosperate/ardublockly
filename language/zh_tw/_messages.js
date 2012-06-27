@@ -14,7 +14,7 @@ Blockly.MSG_HELP = '說明';
 // Variable renaming.
 Blockly.MSG_CHANGE_VALUE_TITLE = '修改值:';
 Blockly.MSG_NEW_VARIABLE = '新變量...';
-Blockly.MSG_NEW_VARIABLE_TITLE = 'New variable name:';
+Blockly.MSG_NEW_VARIABLE_TITLE = '新變量名稱:';
 Blockly.MSG_RENAME_VARIABLE = '重新命名變量...';
 Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 
