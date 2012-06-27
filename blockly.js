@@ -113,6 +113,10 @@ Blockly.PREVIOUS_STATEMENT = 4;
  * ENUM for an local variable.  E.g. 'for x in list'.
  */
 Blockly.LOCAL_VARIABLE = 5;
+/**
+ * ENUM for an dummy input.  Used to add a label with no input.
+ */
+Blockly.DUMMY_INPUT = 6;
 
 /**
  * Lookup table for determining the opposite type of a connection.

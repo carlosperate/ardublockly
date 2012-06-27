@@ -94,7 +94,9 @@ Blockly.Xml.blockToDom_ = function(block) {
   for (var i = 0, input; input = block.inputList[i]; i++) {
     var container;
     var empty = true;
-    if (input.type == Blockly.LOCAL_VARIABLE) {
+    if (input.type == Blockly.DUMMY_INPUT) {
+      continue;
+    } else if (input.type == Blockly.LOCAL_VARIABLE) {
       container = document.createElement('variable');
       container.setAttribute('data', input.getText());
       empty = false;

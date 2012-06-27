@@ -137,6 +137,7 @@ Blockly.Language.lists_repeat = {
     this.appendTitle('create list');
     this.appendInput('with item', Blockly.INPUT_VALUE, 'ITEM', null);
     this.appendInput('repeated', Blockly.INPUT_VALUE, 'NUM', Number);
+    this.appendInput('times', Blockly.DUMMY_INPUT, '', null);
     this.setInputsInline(true);
     this.setTooltip('Creates a list consisting of the given value\n' +
                     'repeated the specified number of times.');

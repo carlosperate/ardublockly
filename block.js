@@ -528,7 +528,8 @@ Blockly.Block.prototype.getConnections_ = function(all) {
     }
     if (all || !this.collapsed) {
       for (var x = 0, input; input = this.inputList[x]; x++) {
-        if (input.type != Blockly.LOCAL_VARIABLE) {
+        if (input.type != Blockly.LOCAL_VARIABLE &&
+            input.type != Blockly.DUMMY_INPUT) {
           myConnections.push(input);
         }
       }
@@ -1063,8 +1064,8 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  * @param {string|Array} label Printed next to the input (e.g. 'x' or 'do').
  *     If the label is an editable field, this argument should be a tuple with
  *     the field and its name.
- * @param {number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
- *     Blockly.LOCAL_VARIABLE.
+ * @param {?number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
+ *     Blockly.LOCAL_VARIABLE, or null.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
  * @param {Object} check Acceptable value type, or list of value types.
@@ -1088,7 +1089,11 @@ Blockly.Block.prototype.appendInput = function(label, type, name, check) {
     }
   }
   var input;
-  if (type == Blockly.LOCAL_VARIABLE) {
+  if (type == Blockly.DUMMY_INPUT) {
+    // Dummy input is used to show a label.
+    input = {};
+    input.type = type;
+  } else if (type == Blockly.LOCAL_VARIABLE) {
     input = new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange);
     if (this.svg_) {
