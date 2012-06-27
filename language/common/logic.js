@@ -28,8 +28,8 @@ if (!Blockly.Language) Blockly.Language = {};
 
 Blockly.Language.logic_compare = {
   // Comparison operator.
-  category: '邏輯',
-  helpUrl: 'http://en.wikipedia.org/wiki/Inequality_(mathematics)',
+  category: Blockly.LANG_CATEGORY_LOGIC,
+  helpUrl: Blockly.LANG_LOGIC_COMPARE_HELPURL,
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
@@ -55,22 +55,18 @@ Blockly.Language.logic_compare.OPERATORS =
      ['\u2265', 'GTE']];
 
 Blockly.Language.logic_compare.TOOLTIPS = {
-  EQ: 'Return true if both inputs equal each other.',
-  NEQ: 'Return true if both inputs are not equal to each other.',
-  LT: 'Return true if the first input is smaller\n' +
-      'than the second input.',
-  LTE: 'Return true if the first input is smaller\n' +
-       'than or equal to the second input.',
-  GT: 'Return true if the first input is greater\n' +
-      'than the second input.',
-  GTE: 'Return true if the first input is greater\n' +
-       'than or equal to the second input.'
+  EQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ,
+  NEQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ,
+  LT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT,
+  LTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE,
+  GT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT,
+  GTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE
 };
 
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
-  category: '邏輯',
-  helpUrl: 'http://code.google.com/p/blockly/wiki/And_Or',
+  category: Blockly.LANG_CATEGORY_LOGIC,
+  helpUrl: Blockly.LANG_LOGIC_OPERATION_HELPURL,
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
@@ -87,30 +83,29 @@ Blockly.Language.logic_operation = {
   }
 };
 
-Blockly.Language.logic_operation.OPERATORS = [['且', 'AND'], ['或', 'OR']];
+Blockly.Language.logic_operation.OPERATORS = [[Blockly.LANG_LOGIC_OPERATION_AND, 'AND'], [Blockly.LANG_LOGIC_OPERATION_OR, 'OR']];
 
 Blockly.Language.logic_operation.TOOLTIPS = {
-  AND: 'Return true if both inputs are true.',
-  OR: 'Return true if either inputs are true.'
+  AND: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND,
+  OR: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR
 };
 
 Blockly.Language.logic_negate = {
   // Negation.
-  category: '邏輯',
-  helpUrl: 'http://code.google.com/p/blockly/wiki/Not',
+  category: Blockly.LANG_CATEGORY_LOGIC,
+  helpUrl: Blockly.LANG_LOGIC_NEGATE_HELPURL,
   init: function() {
     this.setColour(120);
     this.setOutput(true, Boolean);
-    this.appendInput('非', Blockly.INPUT_VALUE, 'BOOL', Boolean);
-    this.setTooltip('Returns true if the input is false.\n' +
-                    'Returns false if the input is true.');
+    this.appendInput(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT, Blockly.INPUT_VALUE, 'BOOL', Boolean);
+    this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1);
   }
 };
 
 Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.
-  category: '邏輯',
-  helpUrl: 'http://code.google.com/p/blockly/wiki/True_False',
+  category: Blockly.LANG_CATEGORY_LOGIC,
+  helpUrl: Blockly.LANG_LOGIC_BOOLEAN_HELPURL,
   init: function() {
     // Assign 'this' to a variable for use in the closures below.
     var thisBlock = this;
@@ -118,9 +113,9 @@ Blockly.Language.logic_boolean = {
     this.setOutput(true, Boolean);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'BOOL');
-    this.setTooltip('Returns either true or false.');
+    this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1);
   }
 };
 
 Blockly.Language.logic_boolean.OPERATORS =
-    [['是', 'TRUE'], ['否', 'FALSE']];
+    [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'], [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];

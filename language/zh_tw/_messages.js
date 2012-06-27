@@ -28,6 +28,36 @@ Blockly.MSG_MUTATOR_HEADER = '積木編輯器';
 Blockly.MSG_MUTATOR_CHANGE = '修改';
 Blockly.MSG_MUTATOR_CANCEL = '取消';
 
+// Logic Blocks
+Blockly.LANG_CATEGORY_LOGIC = '邏輯';
+Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = 'Return true if the first input is smaller\n' +
+      'than the second input.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = 'Return true if the first input is smaller\n' +
+       'than or equal to the second input.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = 'Return true if the first input is greater\n' +
+      'than the second input.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = 'Return true if the first input is greater\n' +
+       'than or equal to the second input.';
+
+Blockly.LANG_LOGIC_OPERATION_HELPURL = 'http://code.google.com/p/blockly/wiki/And_Or';
+Blockly.LANG_LOGIC_OPERATION_AND = '且';
+Blockly.LANG_LOGIC_OPERATION_OR = '或';
+Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND = 'Return true if both inputs are true.';
+Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = 'Return true if either inputs are true.';
+
+Blockly.LANG_LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
+Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = '非';
+Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1 = 'Returns true if the input is false.\n' +
+                    'Returns false if the input is true.';
+
+Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
+Blockly.LANG_LOGIC_BOOLEAN_TRUE = '是';
+Blockly.LANG_LOGIC_BOOLEAN_FALSE = '否';
+Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';  
+
 // Variables Blocks
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_GET_TITLE_1 = '取值';
