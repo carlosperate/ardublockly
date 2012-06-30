@@ -139,7 +139,7 @@ Blockly.Python.math_round = Blockly.Python.math_single;
 Blockly.Python.math_trig = Blockly.Python.math_single;
 
 Blockly.Python.math_on_list = function() {
-  // Rounding functions.
+  // Math functions for lists.
   func = this.getTitleValue('OP');
   list = Blockly.Python.valueToCode(this, 'LIST', true) || '[]';
   var code;

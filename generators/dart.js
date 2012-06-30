@@ -41,6 +41,27 @@ Blockly.Dart.RESERVED_WORDS_ =
     'AssertionError,bool,Clock,Collection,Comparable,Completer,Date,double,Duration,Dynamic,Expect,FallThroughError,Function,Future,Futures,Hashable,HashMap,HashSet,int,Iterable,Iterator,LinkedHashMap,List,Map,Match,Math,num,Object,Options,Pattern,Queue,RegExp,Set,Stopwatch,String,StringBuffer,Strings,TimeZone,TypeError,BadNumberFormatException,ClosureArgumentMismatchException,EmptyQueueException,Exception,ExpectException,FutureAlreadyCompleteException,FutureNotCompleteException,IllegalAccessException,IllegalArgumentException,IllegalJSRegExpException,IndexOutOfRangeException,IntegerDivisionByZeroException,NoMoreElementsException,NoSuchMethodException,NotImplementedException,NullPointerException,ObjectNotClosureException,OutOfMemoryException,StackOverflowException,UnsupportedOperationException,WrongArgumentCountException';
 
 /**
+ * Order of operation ENUMs.
+ * http://www.dartlang.org/docs/language-tour/#operators
+ */
+Blockly.Dart.ORDER_ATOMIC = 0;         // 0 "" ...
+Blockly.Dart.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] .
+Blockly.Dart.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
+Blockly.Dart.ORDER_MULTIPLICATIVE = 3; // * / % ~/
+Blockly.Dart.ORDER_ADDITIVE = 4;       // + -
+Blockly.Dart.ORDER_SHIFT = 5;          // << >>
+Blockly.Dart.ORDER_RELATIONAL = 6;     // is is! >= > <= <
+Blockly.Dart.ORDER_EQUALITY = 7;       // == != === !==
+Blockly.Dart.ORDER_BITWISE_AND = 8;    // &
+Blockly.Dart.ORDER_BITWISE_XOR = 9;    // ^
+Blockly.Dart.ORDER_BITWISE_OR = 10;    // |
+Blockly.Dart.ORDER_LOGICAL_AND = 11;   // &&
+Blockly.Dart.ORDER_LOGICAL_OR = 12;    // ||
+Blockly.Dart.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
+Blockly.Dart.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
+Blockly.Dart.ORDER_NONE = 99;          // (...)
+
+/**
  * Initialise the database of variable names.
  */
 Blockly.Dart.init = function() {

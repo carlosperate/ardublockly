@@ -29,11 +29,13 @@ Blockly.Dart = Blockly.Generator.get('Dart');
 Blockly.Dart.controls_if = function() {
   // If/elseif/else condition.
   var n = 0;
-  var argument = Blockly.Dart.valueToCode(this, 'IF' + n, true) || 'false';
+  var argument = Blockly.Dart.valueToCode(this, 'IF' + n,
+      Blockly.Dart.ORDER_NONE) || 'false';
   var branch = Blockly.Dart.statementToCode(this, 'DO' + n);
   var code = 'if (' + argument + ') {\n' + branch + '}';
   for (n = 1; n <= this.elseifCount_; n++) {
-    argument = Blockly.Dart.valueToCode(this, 'IF' + n, true) || 'false';
+    argument = Blockly.Dart.valueToCode(this, 'IF' + n,
+      Blockly.Dart.ORDER_NONE) || 'false';
     branch = Blockly.Dart.statementToCode(this, 'DO' + n);
     code += ' else if (' + argument + ') {\n' + branch + '}';
   }
@@ -46,7 +48,8 @@ Blockly.Dart.controls_if = function() {
 
 Blockly.Dart.controls_whileUntil = function() {
   // Do while/until loop.
-  var argument0 = Blockly.Dart.valueToCode(this, 'BOOL', true) || 'false';
+  var argument0 = Blockly.Dart.valueToCode(this, 'BOOL',
+      Blockly.Dart.ORDER_NONE) || 'false';
   var branch0 = Blockly.Dart.statementToCode(this, 'DO');
   if (this.getTitleValue('MODE') == 'UNTIL') {
     if (!argument0.match(/^\w+$/)) {
@@ -61,8 +64,10 @@ Blockly.Dart.controls_for = function() {
   // For loop.
   var variable0 = Blockly.Dart.variableDB_.getName(
       this.getInputVariable('VAR'), Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.Dart.valueToCode(this, 'FROM', true) || '0';
-  var argument1 = Blockly.Dart.valueToCode(this, 'TO', true) || '0';
+  var argument0 = Blockly.Dart.valueToCode(this, 'FROM',
+      Blockly.Dart.ORDER_ASSIGNMENT) || '0';
+  var argument1 = Blockly.Dart.valueToCode(this, 'TO',
+      Blockly.Dart.ORDER_ASSIGNMENT) || '0';
   var branch0 = Blockly.Dart.statementToCode(this, 'DO');
   var code;
   if (argument1.match(/^\w+$/)) {
@@ -84,7 +89,8 @@ Blockly.Dart.controls_forEach = function() {
   // For each loop.
   var variable0 = Blockly.Dart.variableDB_.getName(
       this.getInputVariable('VAR'), Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.Dart.valueToCode(this, 'LIST', true) || '[]';
+  var argument0 = Blockly.Dart.valueToCode(this, 'LIST',
+      Blockly.Dart.ORDER_ASSIGNMENT) || '[]';
   var branch0 = Blockly.Dart.statementToCode(this, 'DO');
   var code;
   var indexVar = Blockly.Dart.variableDB_.getDistinctName(

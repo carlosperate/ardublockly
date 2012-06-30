@@ -28,48 +28,52 @@ Blockly.Dart = Blockly.Generator.get('Dart');
 
 Blockly.Dart.text = function() {
   // Text value.
-  return Blockly.Dart.quote_(this.getTitleText('TEXT'));
+  var code = Blockly.Dart.quote_(this.getTitleText('TEXT'));
+  return [code, Blockly.Dart.ORDER_ATOMIC];
 };
 
-Blockly.Dart.text_join = function(opt_dropParens) {
+Blockly.Dart.text_join = function() {
   // Create a string made up of any number of elements of any type.
+  var code;
   if (this.itemCount_ == 0) {
-    return '\'\'';
+    return ['\'\'', Blockly.Dart.ORDER_ATOMIC];
   } else if (this.itemCount_ == 1) {
-    var argument0 = Blockly.Dart.valueToCode(this, 'ADD0', true) || '\'\'';
-    return argument0 + '.toString()';
+    var argument0 = Blockly.Dart.valueToCode(this, 'ADD0',
+        Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
+    code = argument0 + '.toString()';
+    return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   } else if (this.itemCount_ == 2) {
-    var argument0 = Blockly.Dart.valueToCode(this, 'ADD0') || '\'\'';
-    var argument1 = Blockly.Dart.valueToCode(this, 'ADD0') || '\'\'';
-    var code = argument0 + '.toString() + ' + argument1 + '.toString()';
-    if (!opt_dropParens) {
-      code = '(' + code + ')';
-    }
-    return code;
+    var argument0 = Blockly.Dart.valueToCode(this, 'ADD0',
+        Blockly.Dart.ORDER_NONE) || '\'\'';
+    var argument1 = Blockly.Dart.valueToCode(this, 'ADD0',
+        Blockly.Dart.ORDER_NONE) || '\'\'';
+    code = argument0 + '.toString() + ' + argument1 + '.toString()';
+    return [code, Blockly.Dart.ORDER_ADDITIVE];
   } else {
-    var code = [];
-    code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode(this, 'ADD0', true) || '\'\'') + ')';
+    code = [];
+    code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode(this, 'ADD0',
+        Blockly.Dart.ORDER_NONE) || '\'\'') + ')';
     for (n = 1; n < this.itemCount_; n++) {
-      code[n] = '.add(' + (Blockly.Dart.valueToCode(this, 'ADD' + n, true) || '\'\'') + ')';
+      code[n] = '.add(' + (Blockly.Dart.valueToCode(this, 'ADD' + n,
+          Blockly.Dart.ORDER_NONE) || '\'\'') + ')';
     }
     code = code.join('') + '.toString()';
-    if (!opt_dropParens) {
-      code = '(' + code + ')';
-    }
-    return code;
+    return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   }
 };
 
 Blockly.Dart.text_length = function() {
   // String length.
-  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE') || '\'\'';
-  return argument0 + '.length';
+  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
+  return [argument0 + '.length', Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.text_isEmpty = function() {
   // Is the string null?
-  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE') || '\'\'';
-  return argument0 + '.isEmpty()';
+  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
+  return [argument0 + '.isEmpty()', Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.text_endString = function() {
@@ -77,37 +81,50 @@ Blockly.Dart.text_endString = function() {
   var first = this.getTitleValue('END') == 'FIRST';
   var code;
   if (first) {
-    var argument0 = Blockly.Dart.valueToCode(this, 'NUM', true) || '1';
-    var argument1 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'NUM',
+        Blockly.Dart.ORDER_NONE) || '1';
+    var argument1 = Blockly.Dart.valueToCode(this, 'TEXT',
+        Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
     code = argument1 + '.substring(0, ' + argument0 + ')';
   } else {
-    var argument0 = Blockly.Dart.valueToCode(this, 'NUM') || '1';
-    var argument1 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
-    var tempVar = Blockly.Dart.variableDB_.getDistinctName('temp_text',
-        Blockly.Variables.NAME_TYPE);
-    Blockly.Dart.definitions_['variables'] += '\nString ' + tempVar + ';';
-    code = '[' + tempVar + ' = ' + argument1 + ', ' +
-        tempVar + '.substring(' + tempVar + '.length - ' + argument0 + ')][1]';
+    if (!Blockly.Dart.definitions_['text_tailString']) {
+      var functionName = Blockly.Dart.variableDB_.getDistinctName('text_tailString',
+          Blockly.Generator.NAME_TYPE);
+      Blockly.Dart.text_endString.text_tailString = functionName;
+      var func = [];
+      func.push('String ' + functionName + '(n, myString) {');
+      func.push('  // Return a trailing substring of n characters.');
+      func.push('  return myString.substring(myString.length - n);');
+      func.push('}');
+      Blockly.Dart.definitions_['text_tailString'] = func.join('\n');
+    }
+    var argument0 = Blockly.Dart.valueToCode(this, 'NUM',
+        Blockly.Dart.ORDER_NONE) || '1';
+    var argument1 = Blockly.Dart.valueToCode(this, 'TEXT',
+        Blockly.Dart.ORDER_NONE) || '\'\'';
+    code = Blockly.Dart.text_endString.text_tailString +
+        '(' + argument0 + ', ' + argument1 + ')';
   }
-  return code;
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Dart.text_indexOf = function(opt_dropParens) {
+Blockly.Dart.text_indexOf = function() {
   // Search the text for a substring.
   var operator = this.getTitleValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
-  var argument0 = Blockly.Dart.valueToCode(this, 'FIND') || '\'\'';
-  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE') || '\'\'';
+  var argument0 = Blockly.Dart.valueToCode(this, 'FIND',
+      Blockly.Dart.ORDER_NONE) || '\'\'';
+  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
-  }
-  return code;
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.Dart.valueToCode(this, 'AT', true) || '1';
-  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE') || '[]';
+  var argument0 = Blockly.Dart.valueToCode(this, 'AT',
+      Blockly.Dart.ORDER_NONE) || '1';
+  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '[]';
   // Blockly uses one-based arrays.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
@@ -116,7 +133,8 @@ Blockly.Dart.text_charAt = function() {
     // If the index is dynamic, decrement it in code.
     argument0 += ' - 1';
   }
-  return argument1 + '[' + argument0 + ']';
+  var code = argument1 + '[' + argument0 + ']';
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.text_changeCase = function() {
@@ -126,7 +144,8 @@ Blockly.Dart.text_changeCase = function() {
   var code;
   if (operator) {
     // Upper and lower case are functions built into Dart.
-    var argument0 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'TEXT',
+        Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
     code = argument0 + operator;
   } else {
     if (!Blockly.Dart.definitions_['toTitleCase']) {
@@ -151,10 +170,11 @@ Blockly.Dart.text_changeCase = function() {
       func.push('}');
       Blockly.Dart.definitions_['toTitleCase'] = func.join('\n');
     }
-    var argument0 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
+    var argument0 = Blockly.Dart.valueToCode(this, 'TEXT',
+        Blockly.Dart.ORDER_NONE) || '\'\'';
     code = Blockly.Dart.text_changeCase.toTitleCase + '(' + argument0 + ')';
   }
-  return code;
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.text_changeCase.OPERATORS = {
@@ -167,8 +187,9 @@ Blockly.Dart.text_trim = function() {
   // Trim spaces.
   var mode = this.getTitleValue('MODE');
   var operator = Blockly.Dart.text_trim.OPERATORS[mode];
-  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT') || '\'\'';
-  return argument0 + operator;
+  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
+  return [argument0 + operator, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.text_trim.OPERATORS = {
@@ -179,7 +200,8 @@ Blockly.Dart.text_trim.OPERATORS = {
 
 Blockly.Dart.text_print = function() {
   // Print statement.
-  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT', true) || '\'\'';
+  var argument0 = Blockly.Dart.valueToCode(this, 'TEXT',
+      Blockly.Dart.ORDER_NONE) || '\'\'';
   return 'print(' + argument0 + ');\n';
 };
 
@@ -192,5 +214,5 @@ Blockly.Dart.text_prompt = function() {
   if (toNumber) {
     code = 'Math.parseDouble(' + code + ')';
   }
-  return code;
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };

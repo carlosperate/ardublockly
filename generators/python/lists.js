@@ -51,24 +51,24 @@ Blockly.Python.lists_repeat = function(opt_dropParens) {
   return code;
 };
 
-Blockly.Python.lists_length = function(opt_dropParens) {
+Blockly.Python.lists_length = function() {
   // Testing the length of a list is the same as for a string.
-  return Blockly.Python.text_length.call(this, opt_dropParens);
+  return Blockly.Python.text_length.call(this);
 };
 
-Blockly.Python.lists_isEmpty = function(opt_dropParens) {
+Blockly.Python.lists_isEmpty = function() {
   // Testing a list for being empty is the same as for a string.
-  return Blockly.Python.text_isEmpty.call(this, opt_dropParens);
+  return Blockly.Python.text_isEmpty.call(this);
 };
 
-Blockly.Python.lists_indexOf = function(opt_dropParens) {
+Blockly.Python.lists_indexOf = function() {
   // Searching a list for a value is the same as search for a substring.
-  return Blockly.Python.text_indexOf.call(this, opt_dropParens);
+  return Blockly.Python.text_indexOf.call(this);
 };
 
-Blockly.Python.lists_getIndex = function(opt_dropParens) {
+Blockly.Python.lists_getIndex = function() {
   // Indexing into a list is the same as indexing into a string.
-  return Blockly.Python.text_charAt.call(this, opt_dropParens);
+  return Blockly.Python.text_charAt.call(this);
 };
 
 Blockly.Python.lists_setIndex = function() {

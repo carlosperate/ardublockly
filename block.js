@@ -1064,15 +1064,15 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  * @param {string|Array} label Printed next to the input (e.g. 'x' or 'do').
  *     If the label is an editable field, this argument should be a tuple with
  *     the field and its name.
- * @param {?number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
- *     Blockly.LOCAL_VARIABLE, or null.
+ * @param {number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
+ *     Blockly.LOCAL_VARIABLE, or Blockly.DUMMY_INPUT.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
- * @param {Object} check Acceptable value type, or list of value types.
- *     Null all values are acceptable.
+ * @param {Object} opt_check Acceptable value type, or list of value types.
+ *     Null or undefined means all values are acceptable.
  * @return {!Object} The input object created.
  */
-Blockly.Block.prototype.appendInput = function(label, type, name, check) {
+Blockly.Block.prototype.appendInput = function(label, type, name, opt_check) {
   // Create descriptive text element.
   var textElement = null;
   if (label) {
@@ -1101,7 +1101,7 @@ Blockly.Block.prototype.appendInput = function(label, type, name, check) {
     }
     input.type = Blockly.LOCAL_VARIABLE;
   } else {
-    input = new Blockly.Connection(this, type, check);
+    input = new Blockly.Connection(this, type, opt_check);
   }
   input.label = textElement;
   input.name = name;

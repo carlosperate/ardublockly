@@ -26,20 +26,20 @@
  * Class for a connection between blocks.
  * @param {!Blockly.Block} source The block establishing this connection.
  * @param {number} type The type of the connection.
- * @param {string} check Compatible value type or list of value types.
+ * @param {string} opt_check Compatible value type or list of value types.
  *     Null if all types are compatible.
  * @constructor
  */
-Blockly.Connection = function(source, type, check) {
+Blockly.Connection = function(source, type, opt_check) {
   this.sourceBlock_ = source;
   this.targetConnection = null;
   this.type = type;
-  if (check) {
+  if (opt_check) {
     // Ensure that check is in an array.
-    if (!(check instanceof Array)) {
-      check = [check];
+    if (!(opt_check instanceof Array)) {
+      opt_check = [opt_check];
     }
-    this.check_ = check;
+    this.check_ = opt_check;
   } else {
     this.check_ = null;
   }

@@ -31,7 +31,8 @@ Blockly.JavaScript.procedures_defreturn = function() {
   var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.JavaScript.statementToCode(this, 'STACK');
-  var returnValue = Blockly.JavaScript.valueToCode(this, 'RETURN', true) || '';
+  var returnValue = Blockly.JavaScript.valueToCode(this, 'RETURN',
+      Blockly.JavaScript.ORDER_NONE) || null;
   if (returnValue) {
     returnValue = '  return ' + returnValue + ';\n';
   }
@@ -51,7 +52,7 @@ Blockly.JavaScript.procedures_callreturn = function() {
   var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var code = funcName + '()';
-  return code;
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.JavaScript.procedures_callnoreturn = function() {

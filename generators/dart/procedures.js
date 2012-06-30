@@ -31,7 +31,8 @@ Blockly.Dart.procedures_defreturn = function() {
   var funcName = Blockly.Dart.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Dart.statementToCode(this, 'STACK');
-  var returnValue = Blockly.Dart.valueToCode(this, 'RETURN', true) || '';
+  var returnValue = Blockly.Dart.valueToCode(this, 'RETURN',
+      Blockly.Dart.ORDER_NONE) || null;
   if (returnValue) {
     returnValue = '  return ' + returnValue + ';\n';
   }
@@ -47,16 +48,12 @@ Blockly.Dart.procedures_defreturn = function() {
 // a procedure with a return value.
 Blockly.Dart.procedures_defnoreturn = Blockly.Dart.procedures_defreturn;
 
-// Defining a procedure without a return value uses the same generator as
-// a procedure with a return value.
-Blockly.Dart.procedures_defnoreturn = Blockly.Dart.procedures_defreturn;
-
 Blockly.Dart.procedures_callreturn = function() {
   // Call a procedure with a return value.
   var funcName = Blockly.Dart.variableDB_.getName(this.getTitleText('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var code = funcName + '()';
-  return code;
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.procedures_callnoreturn = function() {
