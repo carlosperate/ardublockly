@@ -42,6 +42,33 @@ Blockly.Python.RESERVED_WORDS_ =
     'True,False,None,NotImplemented,Ellipsis,__debug__,quit,exit,copyright,license,credits,' +
     // http://docs.python.org/library/functions.html
     'abs,divmod,input,open,staticmethod,all,enumerate,int,ord,str,any,eval,isinstance,pow,sum,basestring,execfile,issubclass,print,super,bin,file,iter,property,tuple,bool,filter,len,range,type,bytearray,float,list,raw_input,unichr,callable,format,locals,reduce,unicode,chr,frozenset,long,reload,vars,classmethod,getattr,map,repr,xrange,cmp,globals,max,reversed,zip,compile,hasattr,memoryview,round,__import__,complex,hash,min,set,apply,delattr,help,next,setattr,buffer,dict,hex,object,slice,coerce,dir,id,oct,sorted,intern';
+
+/**
+ * Order of operation ENUMs.
+ * http://docs.python.org/reference/expressions.html#summary
+ */
+Blockly.Python.ORDER_ATOMIC = 0;         // 0 "" ...
+Blockly.Python.ORDER_COLLECTION = 1;     // range(x), [1, 2], (), {k:v}
+Blockly.Python.ORDER_STRING_CONVERSION = 1; // `expression...`
+Blockly.Python.ORDER_MEMBER = 2;         // . []
+Blockly.Python.ORDER_FUNCTION_CALL = 2;  // ()
+Blockly.Python.ORDER_EXPONENTIATION = 3; // **
+Blockly.Python.ORDER_UNARY_SIGN = 4;     // + -
+Blockly.Python.ORDER_BITWISE_NOT = 4;    // ~
+Blockly.Python.ORDER_MULTIPLICATIVE = 5; // * / // %
+Blockly.Python.ORDER_ADDITIVE = 6;       // + -
+Blockly.Python.ORDER_BITWISE_SHIFT = 7;  // << >>
+Blockly.Python.ORDER_BITWISE_AND = 8;    // &
+Blockly.Python.ORDER_BITWISE_XOR = 9;    // ^
+Blockly.Python.ORDER_BITWISE_OR = 10;    // |
+Blockly.Python.ORDER_RELATIONAL = 11;    // in, not in, is, is not, <, <=, >, >=, <>, !=, == 
+Blockly.Python.ORDER_LOGICAL_NOT = 12;   // not
+Blockly.Python.ORDER_LOGICAL_AND = 13;   // and
+Blockly.Python.ORDER_LOGICAL_OR = 14;    // or
+Blockly.Python.ORDER_CONDITIONAL = 15;   // if else
+Blockly.Python.ORDER_LAMBDA = 16;        // lambda
+Blockly.Python.ORDER_NONE = 99;          // (...)
+
 /**
  * Initialise the database of variable names.
  */
