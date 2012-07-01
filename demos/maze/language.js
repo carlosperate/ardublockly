@@ -130,7 +130,8 @@ Blockly.Language.maze_isWall.DIRECTIONS =
 
 Blockly.JavaScript.maze_isWall = function() {
   // Generate JavaScript for checking if there is a wall.
-  return 'Maze.' + this.getTitleValue('DIR') + '()';
+  var code = 'Maze.' + this.getTitleValue('DIR') + '()';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Language.controls_forever = {
@@ -155,7 +156,8 @@ Blockly.JavaScript.controls_forever = function() {
 
 Blockly.JavaScript.controls_whileUntil = function() {
   // Do while/until loop.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL', true) || 'false';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL',
+      Blockly.JavaScript.ORDER_NONE) || 'false';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
   if (this.getTitleValue('MODE') == 'UNTIL') {
     if (!argument0.match(/^\w+$/)) {

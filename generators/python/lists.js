@@ -28,27 +28,28 @@ Blockly.Python = Blockly.Generator.get('Python');
 
 Blockly.Python.lists_create_empty = function() {
   // Create an empty list.
-  return '[]';
+  return ['[]', Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 Blockly.Python.lists_create_with = function() {
   // Create a list with any number of elements of any type.
   var code = new Array(this.itemCount_);
   for (n = 0; n < this.itemCount_; n++) {
-    code[n] = Blockly.Python.valueToCode(this, 'ADD' + n, true) || 'None';
+    code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
+        Blockly.JavaScript.ORDER_NONE) || 'None';
   }
-  return '[' + code.join(', ') + ']';
+  code = '[' + code.join(', ') + ']';
+  return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 Blockly.Python.lists_repeat = function(opt_dropParens) {
   // Create a list with one element repeated.
-  var argument0 = Blockly.Python.valueToCode(this, 'ITEM', true) || 'None';
-  var argument1 = Blockly.Python.valueToCode(this, 'NUM') || '0';
+  var argument0 = Blockly.Python.valueToCode(this, 'ITEM',
+      Blockly.JavaScript.ORDER_NONE) || 'None';
+  var argument1 = Blockly.Python.valueToCode(this, 'NUM',
+      Blockly.JavaScript.ORDER_MULTIPLICATIVE) || '0';
   var code = '[' + argument0 + '] * ' + argument1;
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
-  }
-  return code;
+  return [code, Blockly.JavaScript.ORDER_MULTIPLICATIVE];
 };
 
 Blockly.Python.lists_length = function() {
@@ -73,9 +74,12 @@ Blockly.Python.lists_getIndex = function() {
 
 Blockly.Python.lists_setIndex = function() {
   // Set element at index.
-  var argument0 = Blockly.Python.valueToCode(this, 'AT', true) || '1';
-  var argument1 = Blockly.Python.valueToCode(this, 'LIST') || '[]';
-  var argument2 = Blockly.Python.valueToCode(this, 'TO', true) || 'None';
+  var argument0 = Blockly.Python.valueToCode(this, 'AT',
+      Blockly.Python.ORDER_NONE) || '1';
+  var argument1 = Blockly.Python.valueToCode(this, 'LIST',
+      Blockly.Python.ORDER_MEMBER) || '[]';
+  var argument2 = Blockly.Python.valueToCode(this, 'TO',
+      Blockly.Python.ORDER_NONE) || 'None';
   // Blockly uses one-based indicies.
   if (argument0.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
@@ -85,5 +89,6 @@ Blockly.Python.lists_setIndex = function() {
     // If the index is dynamic, decrement it in code.
     argument0 += ' - 1';
   }
-  return argument1 + '[' + argument0 + '] = ' + argument2 + '\n';
+  var code = argument1 + '[' + argument0 + '] = ' + argument2 + '\n';
+  return code;
 };
