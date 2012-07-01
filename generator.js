@@ -100,7 +100,7 @@ Blockly.Generator.get = function(name) {
     generator.statementToCode = function(block, name) {
       var input = block.getInputTargetBlock(name);
       var code = this.blockToCode(input);
-      if (!(code instanceof String)) {
+      if (typeof code != 'string') {
         // Value blocks must return code and order of operations info.
         // Statement blocks must only return code.
         throw 'Expecting code from statement block "' + input.type + '".';

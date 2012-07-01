@@ -26,17 +26,15 @@
 
 Blockly.Python = Blockly.Generator.get('Python');
 
-Blockly.Python.logic_compare = function(opt_dropParens) {
+Blockly.Python.logic_compare = function() {
   // Comparison operator.
   var mode = this.getTitleValue('OP');
   var operator = Blockly.Python.logic_compare.OPERATORS[mode];
-  var argument0 = Blockly.Python.valueToCode(this, 'A') || '0';
-  var argument1 = Blockly.Python.valueToCode(this, 'B') || '0';
+  var order = Blockly.Python.ORDER_RELATIONAL;
+  var argument0 = Blockly.Python.valueToCode(this, 'A', order) || '0';
+  var argument1 = Blockly.Python.valueToCode(this, 'B', order) || '0';
   var code = argument0 + ' ' + operator + ' ' + argument1;
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
-  }
-  return code;
+  return [code, order];
 };
 
 Blockly.Python.logic_compare.OPERATORS = {
@@ -48,29 +46,27 @@ Blockly.Python.logic_compare.OPERATORS = {
   GTE: '>='
 };
 
-Blockly.Python.logic_operation = function(opt_dropParens) {
+Blockly.Python.logic_operation = function() {
   // Operations 'and', 'or'.
-  var argument0 = Blockly.Python.valueToCode(this, 'A') || 'False';
-  var argument1 = Blockly.Python.valueToCode(this, 'B') || 'False';
   var operator = (this.getTitleValue('OP') == 'AND') ? 'and' : 'or';
+  var order = (operator == 'and') ? Blockly.Python.ORDER_LOGICAL_AND :
+      Blockly.Python.ORDER_LOGICAL_OR;
+  var argument0 = Blockly.Python.valueToCode(this, 'A', order) || 'False';
+  var argument1 = Blockly.Python.valueToCode(this, 'B', order) || 'False';
   var code = argument0 + ' ' + operator + ' ' + argument1;
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
-  }
-  return code;
+  return [code, order];
 };
 
-Blockly.Python.logic_negate = function(opt_dropParens) {
+Blockly.Python.logic_negate = function() {
   // Negation.
-  var argument0 = Blockly.Python.valueToCode(this, 'BOOL') || 'False';
+  var argument0 = Blockly.Python.valueToCode(this, 'BOOL',
+      Blockly.Python.ORDER_LOGICAL_NOT) || 'False';
   var code = 'not ' + argument0;
-  if (!opt_dropParens) {
-    code = '(' + code + ')';
-  }
-  return code;
+  return [code, Blockly.Python.ORDER_LOGICAL_NOT];
 };
 
 Blockly.Python.logic_boolean = function() {
   // Boolean values true and false.
-  return (this.getTitleValue('BOOL') == 'TRUE') ? 'True' : 'False';
+  var code = (this.getTitleValue('BOOL') == 'TRUE') ? 'True' : 'False';
+  return [code, Blockly.Python.ORDER_ATOMIC];
 };

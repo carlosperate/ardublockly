@@ -161,18 +161,19 @@ Blockly.JavaScript.math_on_list = function() {
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
           Blockly.JavaScript.ORDER_MEMBER) || '[]';
       code = list + '.reduce(function(x, y) {return x + y;})';
-      return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+      break;
     case 'MIN':
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
           Blockly.JavaScript.ORDER_COMMA) || '[]';
       code = 'Math.min.apply(null, ' + list + ')';
-      return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+      break;
     case 'MAX':
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
           Blockly.JavaScript.ORDER_COMMA) || '[]';
       code = 'Math.max.apply(null, ' + list + ')';
-      return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+      break;
     case 'AVERAGE':
+      // math_median([null,null,1,3]) == 2.0.
       if (!Blockly.JavaScript.definitions_['math_mean']) {
         var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
             'math_mean', Blockly.Generator.NAME_TYPE);
@@ -188,13 +189,11 @@ Blockly.JavaScript.math_on_list = function() {
       code = Blockly.JavaScript.math_on_list.math_mean + '(' + list + ')';
       break;
     case 'MEDIAN':
+      // math_median([null,null,1,3]) == 2.0.
       if (!Blockly.JavaScript.definitions_['math_median']) {
         var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
             'math_median', Blockly.Generator.NAME_TYPE);
         Blockly.JavaScript.math_on_list.math_median = functionName;
-        // Median is not a native JavaScript function.  Define one.
-        // May need to handle null.
-        // Currently math_median([null,null,1,3]) == 0.5.
         var func = [];
         func.push('function ' + functionName + '(myList) {');
         func.push('  var localList = myList.filter(function (x) {return typeof x == \'number\';});');

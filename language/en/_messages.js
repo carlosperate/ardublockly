@@ -29,7 +29,7 @@ Blockly.MSG_MUTATOR_CHANGE = 'Change';
 Blockly.MSG_MUTATOR_CANCEL = 'Cancel';
 
 // Logic Blocks
-Blockly.LANG_CATEGORY_LOGIC = 'logic';
+Blockly.LANG_CATEGORY_LOGIC = 'Logic';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
