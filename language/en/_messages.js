@@ -109,7 +109,8 @@ Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter
 Blockly.LANG_LISTS_SET_INDEX_TITLE ='set item';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = 'at';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = 
+Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'to';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = 'Sets the value at the specified position in a list.';
 
 // Variables Blocks
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
