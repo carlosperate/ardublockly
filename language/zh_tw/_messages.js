@@ -58,6 +58,60 @@ Blockly.LANG_LOGIC_BOOLEAN_TRUE = '是';
 Blockly.LANG_LOGIC_BOOLEAN_FALSE = '否';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';  
 
+// Lists Blocks
+Blockly.LANG_CATEGORY_LISTS = '列表';
+Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
+Blockly.LANG_LISTS_CREATE_EMPTY_TITLE_1 = '建立空列表';
+Blockly.LANG_LISTS_CREATE_EMPTY_TOOLTIP_1 = 'Returns a list, of length 0, containing no data records';
+
+Blockly.LANG_LISTS_CREATE_WITH_INPUT_WITH = '使用這些值建立列表';
+Blockly.LANG_LISTS_CREATE_WITH_TOOLTIP_1 = 'Create a list with any number of items.';
+
+Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TITLE_ADD = '加入';
+Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TOOLTIP_1 = 'Add, remove, or reorder sections to reconfigure this list block.';
+
+Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE = '項目';
+Blockly.LANG_LISTS_CREATE_WITH_ITEM_TOOLTIP_1 = 'Add an item to the list.';
+
+Blockly.LANG_LISTS_REPEAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_LISTS_REPEAT_TITLE_CREATELIST = '建立列表';
+Blockly.LANG_LISTS_REPEAT_INPUT_WITH = '使用項目';
+Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED = '重複';
+Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = '次數';
+Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = 'Creates a list consisting of the given value\n' +
+                    'repeated the specified number of times.';
+                    
+Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = '長度';
+Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = 'Returns the length of a list.';
+
+Blockly.LANG_LISTS_IS_EMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+Blockly.LANG_LISTS_INPUT_IS_EMPTY = '值為空';
+Blockly.LANG_LISTS_TOOLTIP_1 = 'Returns true if the list is empty.';
+
+Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = '找出';
+Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = '項目出現';
+Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = '在列表';
+Blockly.LANG_LISTS_INDEX_OF_TOOLTIP_1 = 'Returns the index of the first/last occurrence\n' +
+                    'of the item in the list.\n' +
+                    'Returns 0 if text is not found.';
+Blockly.LANG_LISTS_INDEX_OF_FIRST = '第一個';
+Blockly.LANG_LISTS_INDEX_OF_LAST = '最後一個';
+
+Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_LISTS_GET_INDEX_TITLE = '取得項目';
+Blockly.LANG_LISTS_GET_INDEX_INPUT_AT = '取得項目自';
+Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = '從列表';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1 = 'Returns the value at the specified position in a list.';
+
+Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_LISTS_SET_INDEX_TITLE ='設定項目';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = '設定項目';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = '從列表';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = '為';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = 'Sets the value at the specified position in a list.';
+
 // Variables Blocks
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_GET_TITLE_1 = '取值';
