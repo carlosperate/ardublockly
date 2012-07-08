@@ -50,28 +50,27 @@ Blockly.Language.text_join = {
     this.appendInput('', Blockly.INPUT_VALUE, 'ADD0', null);
     this.appendInput('', Blockly.INPUT_VALUE, 'ADD1', null);
     this.setOutput(true, String);
-    this.setMutator(new Blockly.Mutator(this, ['text_create_join_item']));
+    this.setMutator(new Blockly.Mutator(['text_create_join_item']));
     this.setTooltip('Create a piece of text by joining\n' +
                     'together any number of items.');
     this.itemCount_ = 2;
   },
-  mutationToDom: function(workspace) {
+  mutationToDom: function() {
     var container = document.createElement('mutation');
     container.setAttribute('items', this.itemCount_);
     return container;
   },
-  domToMutation: function(container) {
+  domToMutation: function(xmlElement) {
     for (var x = 0; x < this.itemCount_; x++) {
       this.removeInput('ADD' + x);
     }
-    this.itemCount_ = window.parseInt(container.getAttribute('items'), 10);
+    this.itemCount_ = window.parseInt(xmlElement.getAttribute('items'), 10);
     for (var x = 0; x < this.itemCount_; x++) {
       this.appendInput('', Blockly.INPUT_VALUE, 'ADD' + x, null);
     }
   },
   decompose: function(workspace) {
     var listBlock = new Blockly.Block(workspace, 'text_create_join_container');
-    listBlock.editable = false;
     listBlock.initSvg();
     var connection = listBlock.inputList[0];
     for (var x = 0; x < this.itemCount_; x++) {
@@ -255,7 +254,7 @@ Blockly.Language.text_trim = {
     this.setTooltip('Return a copy of the text with spaces\n' +
                     'removed from one or both ends.');
   },
-  mutationToDom: function(workspace) {
+  mutationToDom: function() {
     // Save whether the 'sides' title should be plural or singular.
     var container = document.createElement('mutation');
     var plural = (this.getTitleValue('MODE') == 'BOTH');

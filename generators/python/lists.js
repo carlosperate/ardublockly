@@ -42,7 +42,7 @@ Blockly.Python.lists_create_with = function() {
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.Python.lists_repeat = function(opt_dropParens) {
+Blockly.Python.lists_repeat = function() {
   // Create a list with one element repeated.
   var argument0 = Blockly.Python.valueToCode(this, 'ITEM',
       Blockly.JavaScript.ORDER_NONE) || 'None';

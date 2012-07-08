@@ -28,7 +28,7 @@ Blockly.MSG_MUTATOR_HEADER = '積木編輯器';
 Blockly.MSG_MUTATOR_CHANGE = '修改';
 Blockly.MSG_MUTATOR_CANCEL = '取消';
 
-// Logic Blocks
+// Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = '邏輯';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
@@ -58,7 +58,7 @@ Blockly.LANG_LOGIC_BOOLEAN_TRUE = '是';
 Blockly.LANG_LOGIC_BOOLEAN_FALSE = '否';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';  
 
-// Lists Blocks
+// Lists Blocks.
 Blockly.LANG_CATEGORY_LISTS = '列表';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
 Blockly.LANG_LISTS_CREATE_EMPTY_TITLE_1 = '建立空列表';
@@ -112,7 +112,7 @@ Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = '從列表';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = '為';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1 = 'Sets the value at the specified position in a list.';
 
-// Variables Blocks
+// Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_GET_TITLE_1 = '取值';
 Blockly.LANG_VARIABLES_GET_ITEM = '變量';
@@ -123,7 +123,7 @@ Blockly.LANG_VARIABLES_SET_TITLE_1 = '賦值';
 Blockly.LANG_VARIABLES_SET_ITEM = '變量';
 Blockly.LANG_VARIABLES_SET_TOOLTIP_1 = 'Sets this variable to be equal to the input.';
 
-// Procedures Blocks
+// Procedures Blocks.
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = '流程';
 Blockly.LANG_PROCEDURES_DEFNORETURN_DO = '執行';

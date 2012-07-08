@@ -65,7 +65,7 @@ Blockly.Language.procedures_defreturn = {
     this.appendTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
     this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_DO, Blockly.NEXT_STATEMENT, 'STACK');
     this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN, Blockly.INPUT_VALUE, 'RETURN', null);
-    //this.setMutator(new Blockly.Mutator(this, ['procedures_mutatorparam']));
+    //this.setMutator(new Blockly.Mutator(['procedures_mutatorparam']));
     this.setTooltip(Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1);
   },
   destroy: Blockly.Language.procedures_defnoreturn.destroy,
@@ -96,15 +96,15 @@ Blockly.Language.procedures_callnoreturn = {
       this.setTitleText(newName, 'NAME');
     }
   },
-  mutationToDom: function(workspace) {
+  mutationToDom: function() {
     // Save the name.
     var container = document.createElement('mutation');
     container.setAttribute('name', this.getTitleText('NAME'));
     return container;
   },
-  domToMutation: function(container) {
+  domToMutation: function(xmlElement) {
     // Restore the name.
-    var name = container.getAttribute('name');
+    var name = xmlElement.getAttribute('name');
     this.setTitleText(name, 'NAME');
   }
 };

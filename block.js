@@ -1201,10 +1201,14 @@ Blockly.Block.prototype.setInputVariable = function(name, text) {
 Blockly.Block.prototype.setMutator = function(mutator) {
   if (this.mutator && this.mutator !== mutator) {
     this.mutator.destroy();
+    this.mutator = null;
   }
-  this.mutator = mutator;
-  if (this.svg_) {
-    mutator.createIcon();
+  if (mutator) {
+    mutator.block_ = this;
+    this.mutator = mutator;
+    if (this.svg_) {
+      mutator.createIcon();
+    }
   }
 };
 

@@ -25,12 +25,11 @@
 
 /**
  * Class for a mutator dialog.
- * @param {!Blockly.Block} block The block associated with this mutator.
  * @param {!Array.<string>} quarkNames List of names of sub-blocks for flyout.
  * @constructor
  */
-Blockly.Mutator = function(block, quarkNames) {
-  this.block_ = block;
+Blockly.Mutator = function(quarkNames) {
+  this.block_ = null;
   this.quarkNames_ = quarkNames;
 };
 
@@ -52,7 +51,6 @@ Blockly.Mutator.prototype.destroy = function() {
   this.iconGroup_.parentNode.removeChild(this.iconGroup_);
   this.iconGroup_ = null;
   // Disconnect links between the block and the mutator.
-  this.block_.mutator = null;
   this.block_ = null;
 };
 
@@ -368,6 +366,8 @@ Blockly.Mutator.openDialog_ = function(block) {
   for (var i = 0, child; child = blocks[i]; i++) {
     child.render();
   }
+  // The root block should not be dragable or deletable.
+  Blockly.Mutator.rootBlock_.editable = false;
   var x = 150;
   if (Blockly.RTL) {
     x = Blockly.Mutator.workspaceWidth_ - x;

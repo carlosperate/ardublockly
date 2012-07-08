@@ -49,7 +49,7 @@ Blockly.Language.lists_create_with = {
     this.appendInput('', Blockly.INPUT_VALUE, 'ADD1', null);
     this.appendInput('', Blockly.INPUT_VALUE, 'ADD2', null);
     this.setOutput(true, Array);
-    this.setMutator(new Blockly.Mutator(this, ['lists_create_with_item']));
+    this.setMutator(new Blockly.Mutator(['lists_create_with_item']));
     this.setTooltip(Blockly.LANG_LISTS_CREATE_WITH_TOOLTIP_1);
     this.itemCount_ = 3;
   },
@@ -69,7 +69,6 @@ Blockly.Language.lists_create_with = {
   },
   decompose: function(workspace) {
     var listBlock = new Blockly.Block(workspace, 'lists_create_with_container');
-    listBlock.editable = false;
     listBlock.initSvg();
     var connection = listBlock.inputList[0];
     for (var x = 0; x < this.itemCount_; x++) {

@@ -36,8 +36,7 @@ Blockly.Language.controls_if = {
     this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO0');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(this,
-        ['controls_if_elseif', 'controls_if_else']));
+    this.setMutator(new Blockly.Mutator(['controls_if_elseif', 'controls_if_else']));
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
@@ -63,7 +62,7 @@ Blockly.Language.controls_if = {
   MSG_ELSEIF: '否則如果',
   MSG_ELSE: '否則',
   MSG_THEN: '就',
-  mutationToDom: function(workspace) {
+  mutationToDom: function() {
     if (!this.elseifCount_ && !this.elseCount_) {
       return null;
     }
@@ -76,9 +75,9 @@ Blockly.Language.controls_if = {
     }
     return container;
   },
-  domToMutation: function(container) {
-    this.elseifCount_ = window.parseInt(container.getAttribute('elseif'), 10);
-    this.elseCount_ = window.parseInt(container.getAttribute('else'), 10);
+  domToMutation: function(xmlElement) {
+    this.elseifCount_ = window.parseInt(xmlElement.getAttribute('elseif'), 10);
+    this.elseCount_ = window.parseInt(xmlElement.getAttribute('else'), 10);
     for (var x = 1; x <= this.elseifCount_; x++) {
       this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE, 'IF' + x, Boolean);
       this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO' + x);
@@ -89,7 +88,6 @@ Blockly.Language.controls_if = {
   },
   decompose: function(workspace) {
     var ifBlock = new Blockly.Block(workspace, 'controls_if_if');
-    ifBlock.editable = false;
     ifBlock.initSvg();
     var connection = ifBlock.inputList[0];
     for (var x = 1; x <= this.elseifCount_; x++) {
