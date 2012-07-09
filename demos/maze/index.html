@@ -28,6 +28,11 @@
       padding: 10px;
       font-size: large;
       border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: #eee;
+      color: black;
+    }
+    button.launch {
       border: 1px solid #d43;
       background-color: #d43;
       color: white;
@@ -38,11 +43,7 @@
     button:hover {
       box-shadow: 2px 2px 5px #888;
     }
-    #buttonDiv {
-      text-align: center;
-      padding-top: 2em;
-    }
-    #setDiv {
+    #buttonDiv, #randomizeDiv {
       text-align: center;
       padding-top: 2em;
     }
@@ -66,16 +67,12 @@
         </div>
 
         <div id="buttonDiv">
-          <button id="runButton" onclick="Maze.runButtonClick();">Run Program</button>
-          <button id="resetButton" onclick="Maze.resetButtonClick();" style="display: none">&nbsp; Reset &nbsp;</button>
+          <button id="runButton" class="launch" onclick="Maze.runButtonClick();">Run Program</button>
+          <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none">&nbsp; Reset &nbsp;</button>
         </div>
 
-        <div id="setDiv">
-          <h2>Change Start Location</h2>
-          <button id="set1" onclick="Maze.setClick(1);">Set1</button>
-          <button id="set2" onclick="Maze.setClick(2);">Set2</button>
-          <button id="set3" onclick="Maze.setClick(3);">Set3</button>
-          <button id="set4" onclick="Maze.setClick(4);">Set4</button>
+        <div id="randomizeDiv">
+          <button onclick="Maze.randomize();">Randomize Maze</button>
         </div>
       </td>
       <td valign="top" rowspan=2>
