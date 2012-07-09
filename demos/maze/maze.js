@@ -165,17 +165,26 @@ Maze.resetButtonClick = function() {
 
 /**
  * Move the start and finish to random locations.
+ * Set the starting direction randomly.
  */
 Maze.randomize = function() {
   // Clear the existing start and finish locations.
   Maze.MAP[Maze.start_.y][Maze.start_.x] = 0;
   Maze.MAP[Maze.finish_.y][Maze.finish_.x] = 0;
 
+  /**
+   * Find a random point that's a dead-end on the maze.
+   * Set this point to be either the start or finish.
+   * Closure, but does not reference any outside variables.
+   * @param {number} state 2 -> start point, 3-> finish point.
+   * @return {!Object} X-Y coordinates of new point.
+   */
   function findCorner(state) {
     while (true) {
       var x = Math.floor(Math.random() * (Maze.MAP[0].length - 2)) + 1;
       var y = Math.floor(Math.random() * (Maze.MAP.length - 2) + 1);
       if (Maze.MAP[y][x] == 0) {
+        // Count the walls.
         var walls = 0;
         if (Maze.MAP[y + 1][x] == 1) {
           walls++;
