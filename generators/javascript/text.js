@@ -51,7 +51,7 @@ Blockly.JavaScript.text_join = function() {
     return [code, Blockly.JavaScript.ORDER_ADDITION];
   } else {
     code = new Array(this.itemCount_);
-    for (n = 0; n < this.itemCount_; n++) {
+    for (var n = 0; n < this.itemCount_; n++) {
       code[n] = Blockly.JavaScript.valueToCode(this, 'ADD' + n,
           Blockly.JavaScript.ORDER_COMMA) || '\'\'';
     }

@@ -141,11 +141,11 @@ Maze.mapSet = function() {
  * Reset the maze to the start position and kill any pending animation tasks.
  */
 Maze.reset = function() {
-  eval("Maze.set"+(Maze.setting)+"();");
+  eval('Maze.set' + Maze.setting + '();');
   Maze.mapSet();
   Maze.pegmanX = Maze.start_.x;
   Maze.pegmanY = Maze.start_.y;
-  //Maze.pegmanD = Maze.EAST;
+  // Maze.pegmanD = Maze.EAST;
   Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4);
   // Kill all tasks.
   for (var x = 0; x < Maze.pidList.length; x++) {
@@ -177,7 +177,7 @@ Maze.resetButtonClick = function() {
 };
 
 Maze.setClick = function(n) {
-  eval("Maze.set" + n + "();");
+  eval('Maze.set' + n + '();');
   Maze.reset();
 };
 
@@ -439,6 +439,7 @@ Maze.constrainDirection16 = function(d) {
 /**
  * If the user has executed too many actions, we're probably in an infinite
  * loop.  Sadly I wasn't able to solve the Halting Problem for this demo.
+ * @param {?string} id ID of loop block to highlight if timeout is reached.
  * @throws {false} Throws an error to terminate the user's program.
  */
 Maze.checkTimeout = function(id) {

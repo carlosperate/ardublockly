@@ -248,7 +248,8 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
 
     // Find the first 'real' grandchild node (that isn't whitespace).
     var firstRealGrandchild = null;
-    for (var y = 0, grandchildNode; grandchildNode = xmlChild.childNodes[y]; y++) {
+    for (var y = 0, grandchildNode; grandchildNode = xmlChild.childNodes[y];
+         y++) {
       if (grandchildNode.nodeType != 3 || !grandchildNode.data.match(/^\s*$/)) {
         firstRealGrandchild = grandchildNode;
       }

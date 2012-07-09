@@ -53,7 +53,7 @@ Blockly.Dart.text_join = function() {
     code = [];
     code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode(this, 'ADD0',
         Blockly.Dart.ORDER_NONE) || '\'\'') + ')';
-    for (n = 1; n < this.itemCount_; n++) {
+    for (var n = 1; n < this.itemCount_; n++) {
       code[n] = '.add(' + (Blockly.Dart.valueToCode(this, 'ADD' + n,
           Blockly.Dart.ORDER_NONE) || '\'\'') + ')';
     }

@@ -30,10 +30,10 @@ Blockly.Dart.math_number = function() {
   // Numeric value.
   var code = window.parseFloat(this.getTitleText('NUM'));
   // -4.abs() returns -4 in Dart due to strange order of operation choices.
-	// -4 is actually an operator and a number.  Reflect this in the order.
-	var order = code < 0 ?
-	    Blockly.Dart.ORDER_UNARY_PREFIX : Blockly.Dart.ORDER_ATOMIC;
-	return [code, order];
+  // -4 is actually an operator and a number.  Reflect this in the order.
+  var order = code < 0 ?
+      Blockly.Dart.ORDER_UNARY_PREFIX : Blockly.Dart.ORDER_ATOMIC;
+  return [code, order];
 };
 
 Blockly.Dart.math_arithmetic = function() {
@@ -47,10 +47,10 @@ Blockly.Dart.math_arithmetic = function() {
   var code;
   if (!operator) {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
-		return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+    return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   }
-	code = argument0 + operator + argument1;
-	return [code, order];
+  code = argument0 + operator + argument1;
+  return [code, order];
 };
 
 Blockly.Dart.math_arithmetic.OPERATORS = {
@@ -64,7 +64,7 @@ Blockly.Dart.math_arithmetic.OPERATORS = {
 Blockly.Dart.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.Dart.valueToCode(this, 'DELTA',
-			Blockly.Dart.ORDER_ADDITIVE) || '0';
+      Blockly.Dart.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Dart.variableDB_.getName(this.getTitleText('VAR'),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' +
@@ -87,11 +87,11 @@ Blockly.Dart.math_single = function() {
     return [code, Blockly.Dart.ORDER_UNARY_PREFIX];
   }
   var argNaked = Blockly.Dart.valueToCode(this, 'NUM',
-			Blockly.Dart.ORDER_NONE) || '0';
+      Blockly.Dart.ORDER_NONE) || '0';
   var argMultiplicative = Blockly.Dart.valueToCode(this, 'NUM',
-			Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
+      Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
   var argPostfix = Blockly.Dart.valueToCode(this, 'NUM',
-			Blockly.Dart.ORDER_UNARY_POSTFIX) || '0';
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '0';
   // First, handle cases which generate values that don't need parentheses.
   switch (operator) {
     case 'ABS':
@@ -159,7 +159,7 @@ Blockly.Dart.math_on_list = function() {
   // Math functions for lists.
   func = this.getTitleValue('OP');
   list = Blockly.Dart.valueToCode(this, 'LIST',
-			Blockly.Dart.ORDER_NONE) || '[]';
+      Blockly.Dart.ORDER_NONE) || '[]';
   var code;
   switch (func) {
     case 'SUM':
@@ -334,21 +334,21 @@ Blockly.Dart.math_on_list = function() {
 Blockly.Dart.math_constrain = function() {
   // Constrain a number between two limits.
   var argument0 = Blockly.Dart.valueToCode(this, 'VALUE',
-			Blockly.Dart.ORDER_NONE) || '0';
+      Blockly.Dart.ORDER_NONE) || '0';
   var argument1 = Blockly.Dart.valueToCode(this, 'LOW',
-			Blockly.Dart.ORDER_NONE) || '0';
+      Blockly.Dart.ORDER_NONE) || '0';
   var argument2 = Blockly.Dart.valueToCode(this, 'HIGH',
-			Blockly.Dart.ORDER_NONE) || '0';
+      Blockly.Dart.ORDER_NONE) || '0';
   var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' + argument2 + ')';
-	return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.math_modulo = function() {
   // Remainder computation.
   var argument0 = Blockly.Dart.valueToCode(this, 'DIVIDEND',
-		  Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
+      Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
   var argument1 = Blockly.Dart.valueToCode(this, 'DIVISOR',
-			Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
+      Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
   var code = argument0 + ' % ' + argument1;
   return [code, Blockly.Dart.ORDER_MULTIPLICATIVE];
 };
@@ -356,15 +356,15 @@ Blockly.Dart.math_modulo = function() {
 Blockly.Dart.math_random_int = function() {
   // Random integer between [X] and [Y].
   var argument0 = Blockly.Dart.valueToCode(this, 'FROM',
-			Blockly.Dart.ORDER_NONE) || '0';
+      Blockly.Dart.ORDER_NONE) || '0';
   var argument1 = Blockly.Dart.valueToCode(this, 'TO',
-			Blockly.Dart.ORDER_NONE) || '0';
-	if (!Blockly.Dart.definitions_['math_random_int']) {
-		var functionName = Blockly.Dart.variableDB_.getDistinctName(
-				'math_random_int', Blockly.Generator.NAME_TYPE);
-		Blockly.Dart.math_random_int.random_function = functionName;
-		var func = [];
-		func.push('Dynamic ' + functionName + '( myList) {');
+      Blockly.Dart.ORDER_NONE) || '0';
+  if (!Blockly.Dart.definitions_['math_random_int']) {
+    var functionName = Blockly.Dart.variableDB_.getDistinctName(
+        'math_random_int', Blockly.Generator.NAME_TYPE);
+    Blockly.Dart.math_random_int.random_function = functionName;
+    var func = [];
+    func.push('Dynamic ' + functionName + '( myList) {');
     func.push('  if (a > b) {');
     func.push('    // Swap a and b to ensure a is smaller.');
     func.push('    var c = a;');
@@ -372,11 +372,11 @@ Blockly.Dart.math_random_int = function() {
     func.push('    b = c;');
     func.push('  }');
     func.push('  return (Math.random() * (b - a + 1) + a).floor();');
-		func.push('}');
-		Blockly.Dart.definitions_['math_random_int'] = func.join('\n');
-	}
-	code = Blockly.Dart.math_random_int.random_function +
-	    '(' + argument0 + ', ' + argument1 + ')';
+    func.push('}');
+    Blockly.Dart.definitions_['math_random_int'] = func.join('\n');
+  }
+  code = Blockly.Dart.math_random_int.random_function +
+      '(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 

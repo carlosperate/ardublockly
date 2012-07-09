@@ -34,7 +34,7 @@ Blockly.Python.lists_create_empty = function() {
 Blockly.Python.lists_create_with = function() {
   // Create a list with any number of elements of any type.
   var code = new Array(this.itemCount_);
-  for (n = 0; n < this.itemCount_; n++) {
+  for (var n = 0; n < this.itemCount_; n++) {
     code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
         Blockly.JavaScript.ORDER_NONE) || 'None';
   }

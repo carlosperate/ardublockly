@@ -54,7 +54,7 @@ Blockly.Python.math_arithmetic.OPERATORS = {
 
 Blockly.Python.math_change = function() {
   // Add to a variable in place.
-  var argument0 = Blockly.Python.valueToCode(this, 'DELTA', 
+  var argument0 = Blockly.Python.valueToCode(this, 'DELTA',
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(this.getTitleText('VAR'),
       Blockly.Variables.NAME_TYPE);
@@ -251,7 +251,7 @@ Blockly.Python.math_on_list = function() {
 
 Blockly.Python.math_constrain = function() {
   // Constrain a number between two limits.
-  var argument0 = Blockly.Python.valueToCode(this, 'VALUE', 
+  var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_NONE) || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'LOW',
       Blockly.Python.ORDER_NONE) || '0';

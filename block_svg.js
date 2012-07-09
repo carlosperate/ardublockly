@@ -222,7 +222,7 @@ Blockly.BlockSvg.prototype.render = function() {
         break;
       }
       x++;
-    } while (input && input.type == Blockly.LOCAL_VARIABLE)
+    } while (input && input.type == Blockly.LOCAL_VARIABLE);
   }
   var titleX = Blockly.RTL ?
       this.renderTitleRTL_(titleY) : this.renderTitleLTR_(titleY);
@@ -618,7 +618,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
                            ',' + (cursorY + Blockly.BlockSvg.SEP_SPACE_Y));
           inlineSteps.push('h', Blockly.BlockSvg.TAB_WIDTH - input.renderWidth);
           inlineSteps.push(Blockly.BlockSvg.TAB_PATH_DOWN);
-          inlineSteps.push('v', input.renderHeight - Blockly.BlockSvg.TAB_HEIGHT);
+          inlineSteps.push('v', input.renderHeight -
+                                Blockly.BlockSvg.TAB_HEIGHT);
           inlineSteps.push('h', input.renderWidth - Blockly.BlockSvg.TAB_WIDTH);
           inlineSteps.push('z');
           if (Blockly.RTL) {
@@ -642,9 +643,9 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
             highlightInlineSteps.push('h', Blockly.BlockSvg.TAB_WIDTH -
                                            input.renderWidth);
             highlightInlineSteps.push('M',
-                (cursorX - input.renderWidth - Blockly.BlockSvg.SEP_SPACE_X + 3.8) +
-                ',' + (cursorY + Blockly.BlockSvg.SEP_SPACE_Y +
-                       Blockly.BlockSvg.TAB_HEIGHT - 0.4));
+                (cursorX - input.renderWidth - Blockly.BlockSvg.SEP_SPACE_X +
+                 3.8) + ',' + (cursorY + Blockly.BlockSvg.SEP_SPACE_Y +
+                 Blockly.BlockSvg.TAB_HEIGHT - 0.4));
             highlightInlineSteps.push('l',
                 (Blockly.BlockSvg.TAB_WIDTH * 0.42) + ',-1.8');
           }

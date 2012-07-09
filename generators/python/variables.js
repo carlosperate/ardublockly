@@ -35,7 +35,7 @@ Blockly.Python.variables_get = function() {
 
 Blockly.Python.variables_set = function() {
   // Variable setter.
-  var argument0 = Blockly.Python.valueToCode(this, 'VALUE', 
+  var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_NONE) || '0';
   var varName = Blockly.Python.variableDB_.getName(this.getTitleText('VAR'),
       Blockly.Variables.NAME_TYPE);

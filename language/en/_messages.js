@@ -56,7 +56,7 @@ Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1 = 'Returns true if the input is false.\n' +
 Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
 Blockly.LANG_LOGIC_BOOLEAN_TRUE = 'true';
 Blockly.LANG_LOGIC_BOOLEAN_FALSE = 'false';
-Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.'; 
+Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';
 
 // Lists Blocks.
 Blockly.LANG_CATEGORY_LISTS = 'Lists';
@@ -80,7 +80,7 @@ Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED = 'repeated';
 Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = 'times';
 Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = 'Creates a list consisting of the given value\n' +
                     'repeated the specified number of times.';
-                    
+
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'length';
 Blockly.LANG_LISTS_LENGTH_TOOLTIP_1 = 'Returns the length of a list.';
@@ -106,7 +106,7 @@ Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = 'in list';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1 = 'Returns the value at the specified position in a list.';
 
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_SET_INDEX_TITLE ='set item';
+Blockly.LANG_LISTS_SET_INDEX_TITLE = 'set item';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = 'at';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'to';

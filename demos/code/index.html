@@ -11,7 +11,7 @@
  */
 var TABS_ = ['blocks', 'javascript', 'dart', 'python', 'xml'];
 
-var selected = null;
+var selected = 'blocks';
 
 /**
  * Switch the visible pane when a tab is clicked.
@@ -105,6 +105,7 @@ function init(blockly) {
   // Restore/backup current works.
   restore_blocks();
   Blockly.bindEvent_(window, 'unload', null, backup_blocks);
+  tabClick('tab_' + selected);
 
   // Init load event.
   var loadInput = document.getElementById('load');

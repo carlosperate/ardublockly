@@ -52,7 +52,7 @@ Blockly.Python.text_join = function() {
     return [code, Blockly.Python.ORDER_UNARY_SIGN];
   } else {
     var code = [];
-    for (n = 0; n < this.itemCount_; n++) {
+    for (var n = 0; n < this.itemCount_; n++) {
       code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
           Blockly.Python.ORDER_NONE) || '\'\'';
     }

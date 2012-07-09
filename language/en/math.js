@@ -70,7 +70,7 @@ Blockly.Language.math_arithmetic.OPERATORS =
      ['\u00F7', 'DIVIDE'],
      ['^', 'POWER']];
 
-Blockly.Language.math_arithmetic.TOOLTIPS ={
+Blockly.Language.math_arithmetic.TOOLTIPS = {
   ADD: 'Return the sum of the two numbers.',
   MINUS: 'Return the difference of the two numbers.',
   MULTIPLY: 'Return the product of the two numbers.',
