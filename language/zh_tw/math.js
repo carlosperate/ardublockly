@@ -48,14 +48,14 @@ Blockly.Language.math_arithmetic = {
   category: '算數',
   helpUrl: 'http://en.wikipedia.org/wiki/Arithmetic',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(230);
     this.setOutput(true, Number);
     this.appendInput('', Blockly.INPUT_VALUE, 'A', Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'B', Number);
     this.setInputsInline(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_arithmetic.TOOLTIPS[mode];
@@ -113,12 +113,12 @@ Blockly.Language.math_single = {
   category: '算數',
   helpUrl: 'http://en.wikipedia.org/wiki/Square_root',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(230);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_single.TOOLTIPS[mode];
@@ -151,8 +151,6 @@ Blockly.Language.math_round = {
   category: '算數',
   helpUrl: 'http://en.wikipedia.org/wiki/Rounding',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(230);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
@@ -171,12 +169,12 @@ Blockly.Language.math_trig = {
   category: '算數',
   helpUrl: 'http://en.wikipedia.org/wiki/Trigonometric_functions',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(230);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendInput([dropdown, 'OP'], Blockly.INPUT_VALUE, 'NUM', Number);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_trig.TOOLTIPS[mode];
@@ -207,13 +205,13 @@ Blockly.Language.math_on_list = {
   category: '算數',
   helpUrl: '',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(230);
     this.setOutput(true, [Number, Array]);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'OP');
     this.appendInput('自列表', Blockly.INPUT_VALUE, 'LIST', Array);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
       return Blockly.Language.math_on_list.TOOLTIPS[mode];

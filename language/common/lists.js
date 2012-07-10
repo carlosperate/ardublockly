@@ -171,8 +171,6 @@ Blockly.Language.lists_indexOf = {
   category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_INDEX_OF_HELPURL,
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(210);
     this.setOutput(true, Number);
     this.appendTitle(Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND);

@@ -67,7 +67,7 @@ Blockly.LANG_LISTS_CREATE_EMPTY_TOOLTIP_1 = 'Returns a list, of length 0, contai
 Blockly.LANG_LISTS_CREATE_WITH_INPUT_WITH = 'create list with';
 Blockly.LANG_LISTS_CREATE_WITH_TOOLTIP_1 = 'Create a list with any number of items.';
 
-Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TITLE_ADD = 'add';
+Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TITLE_ADD = 'list';
 Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TOOLTIP_1 = 'Add, remove, or reorder sections to reconfigure this list block.';
 
 Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE = 'item';

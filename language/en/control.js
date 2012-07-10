@@ -288,11 +288,12 @@ Blockly.Language.controls_flow_statements = {
   helpUrl: 'http://en.wikipedia.org/wiki/Control_flow',
   init: function() {
     this.setColour(120);
-    var thisBlock = this;
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'FLOW');
     this.appendTitle('of loop');
     this.setPreviousStatement(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('FLOW');
       return Blockly.Language.controls_flow_statements.TOOLTIPS[op];

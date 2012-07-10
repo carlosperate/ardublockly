@@ -109,7 +109,7 @@ Blockly.Language.text_create_join_container = {
   // Container.
   init: function() {
     this.setColour(160);
-    this.appendTitle('add');
+    this.appendTitle('join');
     this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('Add, remove, or reorder sections to reconfigure this text block.');
     this.contextMenu = false;
@@ -158,8 +158,6 @@ Blockly.Language.text_endString = {
   category: 'Text',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.setOutput(true, String);
     var menu = new Blockly.FieldDropdown(this.OPERATORS);
@@ -178,8 +176,6 @@ Blockly.Language.text_indexOf = {
   category: 'Text',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.setOutput(true, Number);
     this.appendTitle('find');
@@ -217,8 +213,6 @@ Blockly.Language.text_changeCase = {
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.appendTitle('to');
     var menu = new Blockly.FieldDropdown(this.OPERATORS);
@@ -238,8 +232,6 @@ Blockly.Language.text_trim = {
   category: 'Text',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.appendTitle('trim spaces from');
     var menu = new Blockly.FieldDropdown(this.OPERATORS, function(text) {

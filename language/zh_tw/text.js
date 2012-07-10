@@ -158,8 +158,6 @@ Blockly.Language.text_endString = {
   category: '字串',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.setOutput(true, String);
     var menu = new Blockly.FieldDropdown(this.OPERATORS);
@@ -178,8 +176,6 @@ Blockly.Language.text_indexOf = {
   category: '字串',
   helpUrl: 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.setOutput(true, Number);
     this.appendTitle('尋找');
@@ -217,8 +213,6 @@ Blockly.Language.text_changeCase = {
   category: '字串',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.appendTitle('改成');
     var menu = new Blockly.FieldDropdown(this.OPERATORS);
@@ -238,8 +232,6 @@ Blockly.Language.text_trim = {
   category: '字串',
   helpUrl: 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html',
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
-    var thisBlock = this;
     this.setColour(160);
     this.appendTitle('從');
     var menu = new Blockly.FieldDropdown(this.OPERATORS, function(text) {
