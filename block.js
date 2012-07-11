@@ -409,6 +409,21 @@ Blockly.Block.prototype.showHelp_ = function() {
 };
 
 /**
+ * Duplicate this block and its children.
+ * @private
+ */
+Blockly.Block.prototype.duplicate_ = function() {
+  // Create a duplicate via XML.
+  var xml = Blockly.Xml.blockToDom_(this);
+  var newBlock = Blockly.Xml.domToBlock_(this.workspace, xml);
+  // Move the duplicate next to the old block.
+  var xy = this.getRelativeToSurfaceXY();
+  xy.x += Blockly.SNAP_RADIUS;
+  xy.y += Blockly.SNAP_RADIUS * 2;
+  newBlock.moveBy(xy.x, xy.y);
+};
+
+/**
  * Show the context menu for this block.
  * @param {number} x X-coordinate of mouse click.
  * @param {number} y Y-coordinate of mouse click.
@@ -423,6 +438,16 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
   var options = [];
 
   if (this.editable) {
+    // Option to duplicate this block.
+    var duplicateOption = {
+      text: Blockly.MSG_DUPLICATE_BLOCK,
+      enabled: true,
+      callback: function() {
+        block.duplicate_();
+      }
+    };
+    options.push(duplicateOption);
+
     if (Blockly.Comment && !this.collapsed) {
       // Option to add/remove a comment.
       var commentOption = {enabled: true};

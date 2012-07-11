@@ -1,6 +1,7 @@
 // Text strings (factored out to make multi-language easier).
 
 // Context menus.
+Blockly.MSG_DUPLICATE_BLOCK = 'Duplicate';
 Blockly.MSG_REMOVE_COMMENT = 'Remove Comment';
 Blockly.MSG_ADD_COMMENT = 'Add Comment';
 Blockly.MSG_EXTERNAL_INPUTS = 'External Inputs';

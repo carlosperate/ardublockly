@@ -26,12 +26,12 @@ Blockly.Xml = {};
 
 /**
  * Encode a block tree as XML.
- * @param {!Object} blockGroup The SVG workspace.
+ * @param {!Object} workspace The SVG workspace.
  * @return {!Element} XML document.
  */
-Blockly.Xml.workspaceToDom = function(blockGroup) {
+Blockly.Xml.workspaceToDom = function(workspace) {
   var xml = document.createElement('xml');
-  var blocks = blockGroup.getTopBlocks(false);
+  var blocks = workspace.getTopBlocks(false);
   for (var i = 0, block; block = blocks[i]; i++) {
     var element = Blockly.Xml.blockToDom_(block);
     var xy = block.getRelativeToSurfaceXY();
@@ -199,13 +199,13 @@ Blockly.Xml.textToDom = function(text) {
 
 /**
  * Decode an XML DOM and create blocks on the workspace.
- * @param {!Object} blockGroup The SVG workspace.
+ * @param {!Object} workspace The SVG workspace.
  * @param {!Element} xml XML DOM.
  */
-Blockly.Xml.domToWorkspace = function(blockGroup, xml) {
+Blockly.Xml.domToWorkspace = function(workspace, xml) {
   for (var x = 0, xmlChild; xmlChild = xml.childNodes[x]; x++) {
     if (xmlChild.nodeName && xmlChild.nodeName.toLowerCase() == 'block') {
-      var block = Blockly.Xml.domToBlock_(blockGroup, xmlChild);
+      var block = Blockly.Xml.domToBlock_(workspace, xmlChild);
       var blockX = parseInt(xmlChild.getAttribute('x'), 10);
       var blockY = parseInt(xmlChild.getAttribute('y'), 10);
       if (!isNaN(blockX) && !isNaN(blockY)) {
@@ -218,14 +218,14 @@ Blockly.Xml.domToWorkspace = function(blockGroup, xml) {
 /**
  * Decode an XML block tag and create a block (and possibly sub blocks) on the
  * workspace.
- * @param {!Object} blockGroup The SVG workspace.
+ * @param {!Object} workspace The SVG workspace.
  * @param {!Element} xmlBlock XML block element.
  * @return {!Blockly.Block} The root block created.
  * @private
  */
-Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
+Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
   var prototypeName = xmlBlock.getAttribute('type');
-  var block = new Blockly.Block(blockGroup, prototypeName);
+  var block = new Blockly.Block(workspace, prototypeName);
   block.initSvg();
 
   var inline = xmlBlock.getAttribute('inline');
@@ -301,7 +301,7 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
         }
         if (firstRealGrandchild && firstRealGrandchild.tagName &&
             firstRealGrandchild.tagName.toLowerCase() == 'block') {
-          blockChild = Blockly.Xml.domToBlock_(blockGroup, firstRealGrandchild);
+          blockChild = Blockly.Xml.domToBlock_(workspace, firstRealGrandchild);
           if (blockChild.outputConnection) {
             input.connect(blockChild.outputConnection);
           } else if (blockChild.previousConnection) {
@@ -320,7 +320,7 @@ Blockly.Xml.domToBlock_ = function(blockGroup, xmlBlock) {
             // This could happen if there is more than one XML 'next' tag.
             throw 'Next statement is already connected.';
           }
-          blockChild = Blockly.Xml.domToBlock_(blockGroup, firstRealGrandchild);
+          blockChild = Blockly.Xml.domToBlock_(workspace, firstRealGrandchild);
           if (!blockChild.previousConnection) {
             throw 'Next block does not have previous statement.';
           }
