@@ -205,6 +205,82 @@ Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_nu
 Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = '取隨機分數';
 Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n0.0 (inclusive) and 1.0 (exclusive).';
 
+// Text Blocks.
+Blockly.LANG_CATEGORY_TEXT = '字串';
+Blockly.LANG_TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_science)';
+Blockly.LANG_TEXT_TEXT_TOOLTIP_1 = 'A letter, word, or line of text.';
+
+Blockly.LANG_TEXT_JOIN_HELPURL = '';
+Blockly.LANG_TEXT_JOIN_TITLE_CREATEWITH = '建立字串使用';
+Blockly.LANG_TEXT_JOIN_TOOLTIP_1 = 'Create a piece of text by joining\n' +
+                    'together any number of items.';
+
+Blockly.LANG_TEXT_CREATE_JOIN_TITLE_JOIN = '加入';
+Blockly.LANG_TEXT_CREATE_JOIN_TOOLTIP_1 = 'Add, remove, or reorder sections to reconfigure this text block.';
+
+Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = '字串';
+Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP_1 = 'Add an item to the text.';
+
+Blockly.LANG_TEXT_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html'; 
+Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = '長度';
+Blockly.LANG_TEXT_LENGTH_TOOLTIP_1 = 'Returns number of letters (including spaces)\n' +
+                    'in the provided text.';
+                    
+Blockly.LANG_TEXT_ISEMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = '為空';
+Blockly.LANG_TEXT_ISEMPTY_TOOLTIP_1 = 'Returns true if the provided text is empty.';
+
+Blockly.LANG_TEXT_ENDSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_TEXT_ENDSTRING_INPUT = '在字串中的字元';
+Blockly.LANG_TEXT_ENDSTRING_TOOLTIP_1 = 'Returns specified number of letters at the beginning or end of the text.';
+Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST = '第一個';
+Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST = '最後一個';
+
+Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = '尋找';
+Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = '出現的字串';
+Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = '在字串';
+Blockly.LANG_TEXT_INDEXOF_TOOLTIP_1 = 'Returns the index of the first/last occurrence\n' +
+                    'of first text in the second text.\n' +
+                    'Returns 0 if text is not found.';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = '第一個';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = '最後一個';
+
+Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm'
+Blockly.LANG_TEXT_CHARAT_TITLE_LETTER = '';
+Blockly.LANG_TEXT_CHARAT_INPUT_AT = '尋找位於';
+Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = '的字元在字串';
+Blockly.LANG_TEXT_CHARAT_TOOLTIP_1 = 'Returns the letter at the specified position.';
+
+Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = '改成';
+Blockly.LANG_TEXT_CHANGECASE_TOOLTIP_1 = 'Return a copy of the text in a different case.';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = '轉大寫';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = '轉小寫';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = '頭字母大寫';
+
+Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+Blockly.LANG_TEXT_TRIM_TITLE_SPACE = '從';
+Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '消除空格';
+Blockly.LANG_TEXT_TRIM_TOOLTIP_1 = 'Return a copy of the text with spaces\n' +
+                    'removed from one or both ends.';
+Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '消除空格';
+Blockly.LANG_TEXT_TRIM_TITLE_SIDE = '消除空格';
+Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = '兩側';
+Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = '左側';
+Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = '右側';
+
+Blockly.LANG_TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
+Blockly.LANG_TEXT_PRINT_TITLE_PRINT = '印出';
+Blockly.LANG_TEXT_PRINT_TOOLTIP_1 = 'Print the specified text, number or other value.';
+
+Blockly.LANG_TEXT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
+Blockly.LANG_TEXT_PROMPT_TITLE_PROMPT_FOR = '輸入';
+Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE = '附提示字串';
+Blockly.LANG_TEXT_PROMPT_TOOLTIP_1 = 'Prompt for user input with the specified text.';
+Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = '文字';
+Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = '數字';
+
 // Lists Blocks.
 Blockly.LANG_CATEGORY_LISTS = '列表';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
