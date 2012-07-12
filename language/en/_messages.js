@@ -31,6 +31,68 @@ Blockly.MSG_MUTATOR_HEADER = 'Block Editor';
 Blockly.MSG_MUTATOR_CHANGE = 'Change';
 Blockly.MSG_MUTATOR_CANCEL = 'Cancel';
 
+// Control Blocks
+Blockly.LANG_CATEGORY_CONTROLS = 'Control';
+Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
+               'Otherwise, do the second block of statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the first block of statements.\n' +
+               'Otherwise, if the second value is true, do the second block of statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
+               'Otherwise, if the second value is true, do the second block of statements.\n' +
+               'If none of the values are true, do the last block of statements.';
+Blockly.LANG_CONTROLS_IF_MSG_IF = 'if';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'else if';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'else';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = 'then';
+
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'if';
+Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +
+                    'to reconfigure this if block.';
+
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'else if';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = 'Add a condition to the if block.';
+
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'else';
+Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'Add a final, catch-all condition to the if block.';
+
+Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT= 'repeat';
+Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = 'do';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = 'while';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = 'until';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = 'While a value is true, then do some statements.';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'While a value is false, then do some statements.';
+
+Blockly.LANG_CONTROLS_FOR_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
+Blockly.LANG_CONTROLS_FOR_TITLE_COUNT = 'count';
+Blockly.LANG_CONTROLS_FOR_INPUT_WITH = 'with';
+Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'x';
+Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'from';
+Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'to';
+Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'do';
+Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = 'Count from a start number to an end number.\n' +
+          'For each count, set the current count number to\n' +
+          'variable "';
+Blockly.LANG_CONTROLS_FOR_TOOLTIP_2 = '", and then do some statements.';        
+
+Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
+Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = 'for each';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'item'; 
+Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'in list';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'do';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\nvariable "';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_2 = '", and then do some statements.';
+
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'of loop';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'break out';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'continue with next iteration';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\ncontinue with the next iteration.';
+
 // Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = 'Logic';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';

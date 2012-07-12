@@ -26,220 +26,24 @@
 
 if (!Blockly.Language) Blockly.Language = {};
 
-Blockly.Language.controls_if = {
-  // If/elseif/else condition.
-  category: '控制',
-  helpUrl: 'http://code.google.com/p/blockly/wiki/If_Then',
-  init: function() {
-    this.setColour(120);
-    this.appendInput(this.MSG_IF, Blockly.INPUT_VALUE, 'IF0', Boolean);
-    this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO0');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['controls_if_elseif', 'controls_if_else']));
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    this.setTooltip(function() {
-      if (!thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-        return 'If a value is true, then do some statements.';
-      } else if (!thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return 'If a value is true, then do the first block of statements.\n' +
-               'Otherwise, do the second block of statements.';
-      } else if (thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-        return 'If the first value is true, then do the first block of statements.\n' +
-               'Otherwise, if the second value is true, do the second block of statements.';
-      } else if (thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return 'If the first value is true, then do the first block of statements.\n' +
-               'Otherwise, if the second value is true, do the second block of statements.\n' +
-               'If none of the values are true, do the last block of statements.';
-      }
-      return '';
-    });
-    this.elseifCount_ = 0;
-    this.elseCount_ = 0;
-  },
-  MSG_IF: '如果',
-  MSG_ELSEIF: '否則如果',
-  MSG_ELSE: '否則',
-  MSG_THEN: '就',
-  mutationToDom: function() {
-    if (!this.elseifCount_ && !this.elseCount_) {
-      return null;
-    }
-    var container = document.createElement('mutation');
-    if (this.elseifCount_) {
-      container.setAttribute('elseif', this.elseifCount_);
-    }
-    if (this.elseCount_) {
-      container.setAttribute('else', 1);
-    }
-    return container;
-  },
-  domToMutation: function(xmlElement) {
-    this.elseifCount_ = window.parseInt(xmlElement.getAttribute('elseif'), 10);
-    this.elseCount_ = window.parseInt(xmlElement.getAttribute('else'), 10);
-    for (var x = 1; x <= this.elseifCount_; x++) {
-      this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE, 'IF' + x, Boolean);
-      this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO' + x);
-    }
-    if (this.elseCount_) {
-      this.appendInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT, 'ELSE');
-    }
-  },
-  decompose: function(workspace) {
-    var ifBlock = new Blockly.Block(workspace, 'controls_if_if');
-    ifBlock.initSvg();
-    var connection = ifBlock.inputList[0];
-    for (var x = 1; x <= this.elseifCount_; x++) {
-      var elseifBlock = new Blockly.Block(workspace, 'controls_if_elseif');
-      elseifBlock.initSvg();
-      // Store a pointer to any connected blocks.
-      elseifBlock.valueInput_ = this.getInput('IF' + x).targetConnection;
-      elseifBlock.statementInput_ = this.getInput('DO' + x).targetConnection;
-      connection.connect(elseifBlock.previousConnection);
-      connection = elseifBlock.nextConnection;
-    }
-    if (this.elseCount_) {
-      var elseBlock = new Blockly.Block(workspace, 'controls_if_else');
-      elseBlock.initSvg();
-      elseBlock.statementInput_ = this.getInput('ELSE').targetConnection;
-      connection.connect(elseBlock.previousConnection);
-    }
-    return ifBlock;
-  },
-  compose: function(ifBlock) {
-    // Disconnect all the elseif input blocks and destroy the inputs.
-    for (var x = 1; x <= this.elseifCount_; x++) {
-      this.removeInput('IF' + x);
-      this.removeInput('DO' + x);
-    }
-    // Disconnect the else input blocks and destroy the inputs.
-    if (this.elseCount_) {
-      this.removeInput('ELSE');
-    }
-    this.elseifCount_ = 0;
-    this.elseCount_ = 0;
-    // Rebuild the block's optional inputs.
-    var clauseBlock = ifBlock.getInputTargetBlock('STACK');
-    while (clauseBlock) {
-      switch (clauseBlock.type) {
-        case 'controls_if_elseif':
-          this.elseifCount_++;
-          var ifInput = this.appendInput(this.MSG_ELSEIF, Blockly.INPUT_VALUE,
-              'IF' + this.elseifCount_, Boolean);
-          var doInput = this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT,
-              'DO' + this.elseifCount_);
-          // Reconnect any child blocks.
-          if (clauseBlock.valueInput_) {
-            ifInput.connect(clauseBlock.valueInput_);
-          }
-          if (clauseBlock.statementInput_) {
-            doInput.connect(clauseBlock.statementInput_);
-          }
-          break;
-        case 'controls_if_else':
-          this.elseCount_++;
-          this.appendInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT, 'ELSE');
-          // Reconnect any child blocks.
-          if (clauseBlock.statementInput_) {
-            this.inputList[x].connect(clauseBlock.statementInput_);
-          }
-          break;
-        default:
-          throw 'Unknown block type.';
-      }
-      clauseBlock = clauseBlock.nextConnection &&
-          clauseBlock.nextConnection.targetBlock();
-    }
-  }
-};
-
-Blockly.Language.controls_if_if = {
-  // If condition.
-  init: function() {
-    this.setColour(120);
-    this.appendTitle('如果');
-    this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
-    this.setTooltip('Add, remove, or reorder sections\n' +
-                    'to reconfigure this if block.');
-    this.contextMenu = false;
-  }
-};
-
-Blockly.Language.controls_if_elseif = {
-  // Else-If condition.
-  init: function() {
-    this.setColour(120);
-    this.appendTitle('否則如果');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('Add a condition to the if block.');
-    this.contextMenu = false;
-  }
-};
-
-Blockly.Language.controls_if_else = {
-  // Else condition.
-  init: function() {
-    this.setColour(120);
-    this.appendTitle('否則');
-    this.setPreviousStatement(true);
-    this.setTooltip('Add a final, catch-all condition to the if block.');
-    this.contextMenu = false;
-  }
-};
-
-Blockly.Language.controls_whileUntil = {
-  // Do while/until loop.
-  category: '控制',
-  helpUrl: 'http://code.google.com/p/blockly/wiki/Repeat',
-  init: function() {
-    this.setColour(120);
-    this.appendTitle('重複');
-    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendTitle(dropdown, 'MODE');
-    this.appendInput('', Blockly.INPUT_VALUE, 'BOOL', Boolean);
-    this.appendInput('執行', Blockly.NEXT_STATEMENT, 'DO');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    this.setTooltip(function() {
-      var op = thisBlock.getTitleValue('MODE');
-      return Blockly.Language.controls_whileUntil.TOOLTIPS[op];
-    });
-  }
-};
-
-Blockly.Language.controls_whileUntil.OPERATORS =
-    [['當', 'WHILE'],
-     ['直到', 'UNTIL']];
-
-Blockly.Language.controls_whileUntil.TOOLTIPS = {
-  WHILE: 'While a value is true, then do some statements.',
-  UNTIL: 'While a value is false, then do some statements.'
-};
-
 Blockly.Language.controls_for = {
   // For loop.
-  category: '控制',
-  helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
+  category: Blockly.LANG_CATEGORY_CONTROLS,
+  helpUrl: Blockly.LANG_CONTROLS_FOR_HELPURL,
   init: function() {
     this.setColour(120);
-    //this.appendTitle('計數');
-    this.appendInput('使用', Blockly.LOCAL_VARIABLE, 'VAR').setText('變量');
-    this.appendInput('從範圍', Blockly.INPUT_VALUE, 'FROM', Number);
-    this.appendInput('到', Blockly.INPUT_VALUE, 'TO', Number);
-    this.appendInput('執行', Blockly.NEXT_STATEMENT, 'DO');
+    //this.appendTitle(Blockly.LANG_CONTROLS_FOR_TITLE_COUNT);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH, Blockly.LOCAL_VARIABLE, 'VAR').setText(Blockly.LANG_CONTROLS_FOR_INPUT_VAR);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM, Blockly.INPUT_VALUE, 'FROM', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_TO, Blockly.INPUT_VALUE, 'TO', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return 'Count from a start number to an end number.\n' +
-          'For each count, set the current count number to\n' +
-          'variable "' + thisBlock.getInputVariable('VAR') + '", and then do some statements.';
+      return Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 + thisBlock.getInputVariable('VAR') + Blockly.LANG_CONTROLS_FOR_TOOLTIP_2;
     });
   },
   getVars: function() {
@@ -250,61 +54,4 @@ Blockly.Language.controls_for = {
       this.setInputVariable('VAR', newName);
     }
   }
-};
-
-Blockly.Language.controls_forEach = {
-  // For each loop.
-  category: '控制',
-  helpUrl: 'http://en.wikipedia.org/wiki/For_loop',
-  init: function() {
-    this.setColour(120);
-    this.appendTitle('取出每個');
-    this.appendInput('', Blockly.LOCAL_VARIABLE, 'VAR').setText('變量');
-    this.appendInput('自列表', Blockly.INPUT_VALUE, 'LIST', Array);
-    this.appendInput('執行', Blockly.NEXT_STATEMENT, 'DO');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    this.setTooltip(function() {
-      return 'For each item in a list, set the item to\nvariable "' +
-          thisBlock.getInputVariable('VAR') + '", and then do some statements.';
-    });
-  },
-  getVars: function() {
-    return [this.getInputVariable('VAR')];
-  },
-  renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getInputVariable('VAR'))) {
-      this.setInputVariable('VAR', newName);
-    }
-  }
-};
-
-
-Blockly.Language.controls_flow_statements = {
-  // Flow statements: continue, break.
-  category: '控制',
-  helpUrl: 'http://en.wikipedia.org/wiki/Control_flow',
-  init: function() {
-    this.setColour(120);
-    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendTitle(dropdown, 'FLOW');
-    this.appendTitle('迴圈');
-    this.setPreviousStatement(true);
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    this.setTooltip(function() {
-      var op = thisBlock.getTitleValue('FLOW');
-      return Blockly.Language.controls_flow_statements.TOOLTIPS[op];
-    });
-  }
-};
-
-Blockly.Language.controls_flow_statements.OPERATORS =
-    [['停止', 'BREAK'], ['繼續下一個', 'CONTINUE']];
-
-Blockly.Language.controls_flow_statements.TOOLTIPS = {
-  BREAK: 'Break out of the containing loop.',
-  CONTINUE: 'Skip the rest of this loop, and\ncontinue with the next iteration.'
 };

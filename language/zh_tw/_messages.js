@@ -31,6 +31,68 @@ Blockly.MSG_MUTATOR_HEADER = '積木編輯器';
 Blockly.MSG_MUTATOR_CHANGE = '修改';
 Blockly.MSG_MUTATOR_CANCEL = '取消';
 
+// Control Blocks
+Blockly.LANG_CATEGORY_CONTROLS = '控制';
+Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
+               'Otherwise, do the second block of statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the first block of statements.\n' +
+               'Otherwise, if the second value is true, do the second block of statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
+               'Otherwise, if the second value is true, do the second block of statements.\n' +
+               'If none of the values are true, do the last block of statements.';
+Blockly.LANG_CONTROLS_IF_MSG_IF = '如果';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = '否則如果';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = '否則';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = '就';
+
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = '如果';
+Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +
+                    'to reconfigure this if block.';
+
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = '否則如果';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP_1 = 'Add a condition to the if block.';
+
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = '否則';
+Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP_1 = 'Add a final, catch-all condition to the if block.';
+
+Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT= '重複';
+Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = '執行';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = '當';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = '直到';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = 'While a value is true, then do some statements.';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'While a value is false, then do some statements.';
+
+Blockly.LANG_CONTROLS_FOR_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
+Blockly.LANG_CONTROLS_FOR_TITLE_COUNT = '';
+Blockly.LANG_CONTROLS_FOR_INPUT_WITH = '使用';
+Blockly.LANG_CONTROLS_FOR_INPUT_VAR = '變量';
+Blockly.LANG_CONTROLS_FOR_INPUT_FROM = '從範圍';
+Blockly.LANG_CONTROLS_FOR_INPUT_TO = '到';
+Blockly.LANG_CONTROLS_FOR_INPUT_DO = '執行';
+Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = 'Count from a start number to an end number.\n' +
+          'For each count, set the current count number to\n' +
+          'variable "';
+Blockly.LANG_CONTROLS_FOR_TOOLTIP_2 = '", and then do some statements.';        
+
+Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
+Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = '取出每個';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = ''; 
+Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = '變量';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = '自列表';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = '執行';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\nvariable "';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_2 = '", and then do some statements.';
+
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = '迴圈';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '停止';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繼續下一個';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\ncontinue with the next iteration.';
+
 // Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = '邏輯';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
