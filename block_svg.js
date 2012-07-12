@@ -32,11 +32,13 @@ Blockly.BlockSvg = function(block) {
   // Create core elements for the block.
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
   this.svgPathDark_ = Blockly.createSvgElement('path',
-      {transform: 'translate(1, 1)'}, this.svgGroup_);
-  this.svgPath_ = Blockly.createSvgElement('path', {}, this.svgGroup_);
-  this.svgPathLight_ = Blockly.createSvgElement('path',
-      {'fill': 'none', 'stroke-width': 2, 'stroke-linecap': 'round'},
+      {'class': 'blocklyPathDark', transform: 'translate(1, 1)'},
       this.svgGroup_);
+  this.svgPath_ = Blockly.createSvgElement('path', {'class': 'blocklyPath'},
+      this.svgGroup_);
+  this.svgPathLight_ = Blockly.createSvgElement('path',
+      {'class': 'blocklyPathLight', 'fill': 'none', 'stroke-width': 2,
+      'stroke-linecap': 'round'}, this.svgGroup_);
   this.svgPath_.tooltip = this.block_;
   Blockly.Tooltip && Blockly.Tooltip.bindMouseEvents(this.svgPath_);
   if (block.editable) {
@@ -166,11 +168,25 @@ Blockly.BlockSvg.prototype.updateColour = function() {
 };
 
 /**
+ * Enable or disable a block.
+ */
+Blockly.BlockSvg.prototype.updateDisabled = function() {
+  if (this.block_.disabled || this.block_.getInheritedDisabled()) {
+    Blockly.addClass_(this.svgGroup_, 'blocklyDisabled');
+  } else {
+    Blockly.removeClass_(this.svgGroup_, 'blocklyDisabled');
+  }
+  var children = this.block_.getChildren();
+  for (var x = 0, child; child = children[x]; x++) {
+    child.svg_.updateDisabled();
+  }
+};
+
+/**
  * Select this block.  Highlight it visually.
  */
 Blockly.BlockSvg.prototype.addSelect = function() {
-  Blockly.addClass_(this.svgPath_, 'blocklySelected');
-  this.svgPathLight_.setAttribute('display', 'none');
+  Blockly.addClass_(this.svgGroup_, 'blocklySelected');
   // Move the selected block to the top of the stack.
   this.svgGroup_.parentNode.appendChild(this.svgGroup_);
 };
@@ -179,8 +195,7 @@ Blockly.BlockSvg.prototype.addSelect = function() {
  * Unselect this block.  Remove its highlighting.
  */
 Blockly.BlockSvg.prototype.removeSelect = function() {
-  Blockly.removeClass_(this.svgPath_, 'blocklySelected');
-  this.svgPathLight_.setAttribute('display', 'block');
+  Blockly.removeClass_(this.svgGroup_, 'blocklySelected');
 };
 
 /**
@@ -188,18 +203,14 @@ Blockly.BlockSvg.prototype.removeSelect = function() {
  * Also disables the highlights/shadows to improve performance.
  */
 Blockly.BlockSvg.prototype.addDragging = function() {
-  Blockly.addClass_(this.svgPath_, 'blocklyDragging');
-  Blockly.addClass_(this.svgPathLight_, 'blocklyDragging');
-  this.svgPathDark_.style.display = 'none';
+  Blockly.addClass_(this.svgGroup_, 'blocklyDragging');
 };
 
 /**
  * Removes the dragging class from this block.
  */
 Blockly.BlockSvg.prototype.removeDragging = function() {
-  Blockly.removeClass_(this.svgPath_, 'blocklyDragging');
-  Blockly.removeClass_(this.svgPathLight_, 'blocklyDragging');
-  this.svgPathDark_.style.display = 'block';
+  Blockly.removeClass_(this.svgGroup_, 'blocklyDragging');
 };
 
 /**

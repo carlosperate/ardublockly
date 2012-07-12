@@ -124,6 +124,9 @@ Blockly.Xml.blockToDom_ = function(block) {
   if (block.collapsed) {
     element.setAttribute('collapsed', true);
   }
+  if (block.disabled) {
+    element.setAttribute('disabled', true);
+  }
 
   if (block.nextConnection) {
     var nextBlock = block.nextConnection.targetBlock();
@@ -236,6 +239,11 @@ Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
   var collapsed = xmlBlock.getAttribute('collapsed');
   if (collapsed) {
     block.setCollapsed(collapsed == 'true');
+  }
+
+  var disabled = xmlBlock.getAttribute('disabled');
+  if (disabled) {
+    block.setDisabled(disabled == 'true');
   }
 
   for (var x = 0, xmlChild; xmlChild = xmlBlock.childNodes[x]; x++) {

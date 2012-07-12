@@ -59,8 +59,14 @@ Blockly.Generator.get = function(name) {
       var code = func.call(block);
       if (code instanceof Array) {
         // Value blocks return tuples of code and operator order.
+        if (block.disabled) {
+          code[1] = '';
+        }
         return [this.scrub_(block, code[0]), code[1]];
       } else {
+        if (block.disabled) {
+          code = '';
+        }
         return this.scrub_(block, code);
       }
     };
@@ -85,7 +91,7 @@ Blockly.Generator.get = function(name) {
       }
       var code = tuple[0];
       var innerOrder = tuple[1];
-      if (order <= innerOrder) {
+      if (code && order <= innerOrder) {
         code = '(' + code + ')';
       }
       return code;

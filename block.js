@@ -40,6 +40,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.rendered = false;
   this.comment = null;
   this.collapsed = false;
+  this.disabled = false;
   this.editable = workspace.editable;
   this.tooltip = '';
   this.contextMenu = true;
@@ -421,6 +422,12 @@ Blockly.Block.prototype.duplicate_ = function() {
   xy.x += Blockly.SNAP_RADIUS;
   xy.y += Blockly.SNAP_RADIUS * 2;
   newBlock.moveBy(xy.x, xy.y);
+  // When a block in a stack of statements is duplicated, all blocks below the
+  // original block are also duplicated.  Maybe this is desired, maybe not.
+  // For now, delete these extra blocks.
+  if (newBlock.nextConnection && newBlock.nextConnection.targetConnection) {
+    newBlock.nextConnection.targetBlock().destroy();
+  }
 };
 
 /**
@@ -499,6 +506,17 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
       };
       options.push(collapseOption);
     }
+
+    // Option to disable/enable block.
+    var disableOption = {
+      text: this.disabled ?
+          Blockly.MSG_ENABLE_BLOCK : Blockly.MSG_DISABLE_BLOCK,
+      enabled: !this.getInheritedDisabled(),
+      callback: function() {
+        block.setDisabled(!block.disabled);
+      }
+    };
+    options.push(disableOption);
 
     // Option to delete this block.
     // Count the number of blocks that are nested in this block.
@@ -765,6 +783,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
         'translate(' + xy.x + ', ' + xy.y + ')');
 
     // Disconnect from superior blocks.
+    this.parentBlock_ = null;
     if (this.previousConnection && this.previousConnection.targetConnection) {
       this.previousConnection.disconnect();
     }
@@ -1027,6 +1046,42 @@ Blockly.Block.prototype.setInputsInline = function(newBoolean) {
   if (this.rendered) {
     this.render();
     this.bumpNeighbours_();
+  }
+};
+
+/**
+ * Set whether the block is disabled or not.
+ * @param {boolean} disabled True if disabled.
+ */
+Blockly.Block.prototype.setDisabled = function(disabled) {
+  if (this.disabled == disabled) {
+    return;
+  }
+  this.disabled = disabled;
+  this.svg_.updateDisabled();
+};
+
+/**
+ * Get whether the block is disabled or not due to parents.
+ * The block's own disabled property is not considered.
+ * @return {boolean} True if disabled.
+ */
+Blockly.Block.prototype.getInheritedDisabled = function() {
+  var block = this;
+  while (true) {
+    do {
+      var prevBlock = block;
+      block = block.getParent();
+      if (!block) {
+        // Ran off the top.
+        return false;
+      }
+    } while (block.nextConnection &&
+             block.nextConnection.targetBlock() == prevBlock);
+    // This block is an enclosing parent, not just a statement in a stack.
+    if (block.disabled) {
+      return true;
+    }
   }
 };
 

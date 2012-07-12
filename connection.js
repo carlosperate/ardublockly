@@ -177,7 +177,11 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
 
   // Rendering a node will move its connected children into position.
   if (parentBlock.rendered) {
+    parentBlock.svg_.updateDisabled();
     parentBlock.render();
+  }
+  if (childBlock.rendered) {
+    childBlock.svg_.updateDisabled();
   }
 };
 
@@ -195,16 +199,21 @@ Blockly.Connection.prototype.disconnect = function() {
   this.targetConnection = null;
 
   // Rerender the parent so that it may reflow.
-  var parentBlock;
+  var parentBlock, childBlock;
   if (this.type == Blockly.INPUT_VALUE || this.type == Blockly.NEXT_STATEMENT) {
     // Superior block.
     parentBlock = this.sourceBlock_;
+    childBlock = otherConnection.sourceBlock_;
   } else {
     // Inferior block.
     parentBlock = otherConnection.sourceBlock_;
+    childBlock = this.sourceBlock_;
   }
   if (parentBlock.rendered) {
     parentBlock.render();
+  }
+  if (childBlock.rendered) {
+    childBlock.svg_.updateDisabled();
   }
 };
 

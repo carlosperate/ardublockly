@@ -10,6 +10,8 @@ Blockly.MSG_DELETE_BLOCK = 'Delete Block';
 Blockly.MSG_DELETE_X_BLOCKS = 'Delete %1 Blocks';
 Blockly.MSG_COLLAPSE_BLOCK = 'Collapse Block';
 Blockly.MSG_EXPAND_BLOCK = 'Expand Block';
+Blockly.MSG_DISABLE_BLOCK = 'Disable Block';
+Blockly.MSG_ENABLE_BLOCK = 'Enable Block';
 Blockly.MSG_HELP = 'Help';
 
 // Variable renaming.
