@@ -173,8 +173,10 @@ Blockly.BlockSvg.prototype.updateColour = function() {
 Blockly.BlockSvg.prototype.updateDisabled = function() {
   if (this.block_.disabled || this.block_.getInheritedDisabled()) {
     Blockly.addClass_(this.svgGroup_, 'blocklyDisabled');
+    this.svgPath_.setAttribute('fill', 'url(#blocklyDisabledPattern)');
   } else {
     Blockly.removeClass_(this.svgGroup_, 'blocklyDisabled');
+    this.updateColour();
   }
   var children = this.block_.getChildren();
   for (var x = 0, child; child = children[x]; x++) {

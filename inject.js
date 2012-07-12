@@ -96,7 +96,7 @@ Blockly.createDom_ = function(container) {
   </defs>
   */
   var defs = Blockly.createSvgElement('defs', {}, svg);
-  var filter, feSpecularLighting, feMerge;
+  var filter, feSpecularLighting, feMerge, pattern;
   /*
     <!--
       Blocks are highlighted from a light source at the top-left.
@@ -157,6 +157,20 @@ Blockly.createDom_ = function(container) {
   filter = Blockly.createSvgElement('filter',
       {id: 'blocklyShadowFilter'}, defs);
   Blockly.createSvgElement('feGaussianBlur', {stdDeviation: 2}, filter);
+  /*
+    <pattern id="blocklyDisabledPattern" patternUnits="userSpaceOnUse"
+             width="10" height="10">
+      <rect width="10" height="10" fill="#aaa" />
+      <path d="M 0 0 L 10 10 M 10 0 L 0 10" stroke="#cc0" />
+    </pattern>
+  */
+  pattern = Blockly.createSvgElement('pattern',
+      {id: 'blocklyDisabledPattern', patternUnits: 'userSpaceOnUse',
+       width: 10, height: 10}, defs);
+  Blockly.createSvgElement('rect',
+      {width: 10, height: 10, fill: '#aaa'}, pattern);
+  Blockly.createSvgElement('path',
+      {d: 'M 0 0 L 10 10 M 10 0 L 0 10', stroke: '#cc0'}, pattern);
 
   Blockly.mainWorkspace = new Blockly.Workspace(Blockly.editable);
   svg.appendChild(Blockly.mainWorkspace.createDom());

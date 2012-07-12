@@ -419,7 +419,11 @@ Blockly.Block.prototype.duplicate_ = function() {
   var newBlock = Blockly.Xml.domToBlock_(this.workspace, xml);
   // Move the duplicate next to the old block.
   var xy = this.getRelativeToSurfaceXY();
-  xy.x += Blockly.SNAP_RADIUS;
+  if (Blockly.RTL) {
+    xy.x -= Blockly.SNAP_RADIUS;
+  } else {
+    xy.x += Blockly.SNAP_RADIUS;
+  }
   xy.y += Blockly.SNAP_RADIUS * 2;
   newBlock.moveBy(xy.x, xy.y);
   // When a block in a stack of statements is duplicated, all blocks below the
