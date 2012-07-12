@@ -60,7 +60,7 @@ Blockly.Generator.get = function(name) {
       if (code instanceof Array) {
         // Value blocks return tuples of code and operator order.
         if (block.disabled) {
-          code[1] = '';
+          code[0] = '';
         }
         return [this.scrub_(block, code[0]), code[1]];
       } else {
@@ -139,7 +139,7 @@ Blockly.Generator.workspaceToCode = function(name) {
       // Top-level blocks don't care about operator order.
       line = line[0];
     }
-    if (block.outputConnection && generator.scrubNakedValue) {
+    if (block.outputConnection && generator.scrubNakedValue && line) {
       // This block is a naked value.  Ask the language's code generator if
       // it wants to append a semicolon, or something.
       line = generator.scrubNakedValue(line);
