@@ -61,6 +61,88 @@ Blockly.LANG_LOGIC_BOOLEAN_TRUE = 'true';
 Blockly.LANG_LOGIC_BOOLEAN_FALSE = 'false';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1 = 'Returns either true or false.';
 
+// Math Blocks.
+Blockly.LANG_CATEGORY_MATH = 'Math';
+Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
+Blockly.LANG_MATH_NUMBER_TOOLTIP_1 = 'A number.';
+
+Blockly.LANG_MATH_ARITHMETIC_HELPURL = 'http://en.wikipedia.org/wiki/Arithmetic';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = 'Return the sum of the two numbers.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = 'Return the difference of the two numbers.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Return the product of the two numbers.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Return the quotient of the two numbers.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\nthe power of the second number.';
+
+Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
+Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
+Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'item';
+Blockly.LANG_MATH_CHANGE_INPUT_BY = 'by';
+Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = 'Add a number to variable "';
+
+Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
+Blockly.LANG_MATH_SINGLE_OP_ROOT = 'square root';
+Blockly.LANG_MATH_SINGLE_OP_ABSOLUTE = 'absolute';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ROOT = 'Return the square root of a number.';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ABS = 'Return the absolute value of a number.';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_NEG = 'Return the negation of a number.';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_LN = 'Return the natural logarithm of a number.';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_LOG10 = 'Return the base 10 logarithm of a number.';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_EXP = 'Return e to the power of a number.';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';
+
+Blockly.LANG_MATH_ROUND_HELPURL = 'http://en.wikipedia.org/wiki/Rounding';
+Blockly.LANG_MATH_ROUND_TOOLTIP_1 = 'Round a number up or down.';
+Blockly.LANG_MATH_ROUND_OPERATOR_ROUND = 'round';
+Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP = 'round up';
+Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN = 'round down';
+
+Blockly.LANG_MATH_TRIG_HELPURL = 'http://en.wikipedia.org/wiki/Trigonometric_functions';
+Blockly.LANG_MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree.';
+Blockly.LANG_MATH_TRIG_TOOLTIP_COS = 'Return the cosine of a degree.';
+Blockly.LANG_MATH_TRIG_TOOLTIP_TAN = 'Return the tangent of a degree.';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ASIN = 'Return the arcsine of a number.';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
+
+Blockly.LANG_MATH_ONLIST_HELPURL = '';
+Blockly.LANG_MATH_ONLIST_INPUT_OFLIST = 'of list';
+Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = 'sum'; 
+Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = 'min';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = 'max';
+Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = 'average';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MEDIAN = 'median';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MODE = 'modes';
+Blockly.LANG_MATH_ONLIST_OPERATOR_STD_DEV = 'standard deviation';
+Blockly.LANG_MATH_ONLIST_OPERATOR_RANDOM = 'random item';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_SUM = 'Return the sum of all the numbers in the list.';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN = 'Return the smallest number in the list.';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX = 'Return the largest number in the list.';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_AVERAGE = 'Return the arithmetic mean of the list.';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_MEDIAN = 'Return the median number in the list.';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Return a list of the most common item(s) in the list.';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_STD_DEV = 'Return the standard deviation of the list.';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_RANDOM = 'Return a random element from the list.';
+
+Blockly.LANG_MATH_CONSTRAIN_HELPURL = 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29';
+Blockly.LANG_MATH_CONSTRAIN_INPUT_CONSTRAIN = 'constrain';
+Blockly.LANG_MATH_CONSTRAIN_INPUT_LOW = 'between (low)';
+Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH = 'and (high)';
+Blockly.LANG_MATH_CONSTRAIN_TOOLTIP_1 = 'Constrain a number to be between the specified limits (inclusive).';
+
+Blockly.LANG_MATH_MODULO_HELPURL = 'http://en.wikipedia.org/wiki/Modulo_operation';
+Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND = 'remainder of';
+Blockly.LANG_MATH_MODULO_TOOLTIP_1 = 'Return the remainder of dividing both numbers.';
+
+Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
+Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM = 'random integer';
+Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'from';
+Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'to';
+Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n specified limits, inclusive.';
+
+Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
+Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
+Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n0.0 (inclusive) and 1.0 (exclusive).';
+
 // Lists Blocks.
 Blockly.LANG_CATEGORY_LISTS = 'Lists';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
