@@ -225,6 +225,7 @@ Blockly.svgResize = function() {
  * @private
  */
 Blockly.onMouseDown_ = function(e) {
+  Blockly.Block.terminateDrag_();
   Blockly.hideChaff();
   Blockly.removeAllRanges();
   if (Blockly.isTargetInput_(e) ||

@@ -124,7 +124,7 @@ Blockly.Block.onMouseMoveWrapper_ = null;
  * @param {!Event} e Mouse up event.
  * @private
  */
-Blockly.Block.unbindDragEvents_ = function(e) {
+Blockly.Block.terminateDrag_ = function(e) {
   if (Blockly.Block.onMouseUpWrapper_) {
     Blockly.unbindEvent_(Blockly.Block.onMouseUpWrapper_);
     Blockly.Block.onMouseUpWrapper_ = null;
@@ -132,6 +132,27 @@ Blockly.Block.unbindDragEvents_ = function(e) {
   if (Blockly.Block.onMouseMoveWrapper_) {
     Blockly.unbindEvent_(Blockly.Block.onMouseMoveWrapper_);
     Blockly.Block.onMouseMoveWrapper_ = null;
+  }
+  if (Blockly.Block.dragMode_ != 0) {
+    // Terminate a drag operation that started but never finished.
+    // This should never happen, but sometimes a browser will miss a mouse-up.
+    // Touch events often do this on Android.
+    Blockly.Block.dragMode_ = 0;
+    if (Blockly.selected) {
+      var selected = Blockly.selected;
+      // Update the connection locations.
+      var xy = selected.getRelativeToSurfaceXY();
+      var dx = xy.x - selected.startDragX;
+      var dy = xy.y - selected.startDragY;
+      selected.moveConnections_(dx, dy);
+      delete selected.draggedComments_;
+      selected.setDragging_(false);
+      selected.render();
+      window.setTimeout(function() {selected.bumpNeighbours_();},
+                        Blockly.BUMP_DELAY);
+      // Fire an event to allow scrollbars to resize.
+      Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+    }
   }
 };
 
@@ -205,7 +226,7 @@ Blockly.Block.prototype.destroy = function(gentle) {
   if (Blockly.selected == this) {
     Blockly.selected = null;
     // If there's a drag in-progress, unlink the mouse events.
-    Blockly.Block.unbindDragEvents_();
+    Blockly.Block.terminateDrag_();
   }
 
   // First, destroy all my children.
@@ -289,7 +310,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   // Update Blockly's knowledge of its own location.
   Blockly.svgResize();
 
-  Blockly.Block.unbindDragEvents_();
+  Blockly.Block.terminateDrag_();
   this.select();
   Blockly.hideChaff(this.isInFlyout);
   if (e.button == 2) {
@@ -341,18 +362,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
  * @private
  */
 Blockly.Block.prototype.onMouseUp_ = function(e) {
-  /* BUG:
-  In rare cases this onMouseUp event can be lost in Firefox due to a race
-  condition.  Possibly: https://bugzilla.mozilla.org/show_bug.cgi?id=672677
-  When this happens a dragged/clicked block becomes glued to the mouse
-  cursor despite no button being depressed.  This state lasts until the
-  user clicks to shake the block off.
-  Ideally the mousemove function would check which buttons are depressed.
-  Unfortunately Firefox sets e.button=0 and e.which=1 regardless of whether
-  the left button is down or not.  Thus it is impossible to know the button
-  state during mouse move.
-  */
-  Blockly.Block.unbindDragEvents_();
+  /*
   if (Blockly.Block.dragMode_ == 2) {
     if (Blockly.selected != this) {
       throw 'Dragging no object?';
@@ -363,14 +373,9 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     var dx = xy.x - this.startDragX;
     var dy = xy.y - this.startDragY;
     this.moveConnections_(dx, dy);
-    var selected = this;
-    // Fire an event to allow scrollbars to resize.
-    Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
-    window.setTimeout(function() {selected.bumpNeighbours_();},
-                      Blockly.BUMP_DELAY);
   }
-  Blockly.Block.dragMode_ = 0;
-  delete this.draggedComments_;
+  */
+  Blockly.Block.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
     Blockly.playAudio('click');
     // Connect two blocks together.
@@ -635,6 +640,16 @@ Blockly.Block.prototype.setDragging_ = function(adding) {
  * @private
  */
 Blockly.Block.prototype.onMouseMove_ = function(e) {
+  if (e.type == 'mousemove' && e.x == 1 && e.y == 0 && e.button == 0) {
+    /* HACK:
+     The current versions of Chrome for Android (18.0) has a bug where finger-
+     swipes trigger a rogue 'mousemove' event with invalid x/y coordinates.
+     Ignore events with this signature.  This may result in a one-pixel blind
+     spot in other browsers, but this shouldn't be noticable.
+    */
+    e.stopPropagation();
+    return;
+  }
   Blockly.removeAllRanges();
   var dx = e.clientX - this.startDragMouseX;
   var dy = e.clientY - this.startDragMouseY;
