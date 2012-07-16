@@ -42,13 +42,6 @@ Blockly.Dart.text_join = function() {
         Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
     code = argument0 + '.toString()';
     return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
-  } else if (this.itemCount_ == 2) {
-    var argument0 = Blockly.Dart.valueToCode(this, 'ADD0',
-        Blockly.Dart.ORDER_NONE) || '\'\'';
-    var argument1 = Blockly.Dart.valueToCode(this, 'ADD0',
-        Blockly.Dart.ORDER_NONE) || '\'\'';
-    code = argument0 + '.toString() + ' + argument1 + '.toString()';
-    return [code, Blockly.Dart.ORDER_ADDITIVE];
   } else {
     code = [];
     code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode(this, 'ADD0',
