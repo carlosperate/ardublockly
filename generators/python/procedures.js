@@ -39,7 +39,7 @@ Blockly.Python.procedures_defreturn = function() {
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Python.statementToCode(this, 'STACK');
   var returnValue = Blockly.Python.valueToCode(this, 'RETURN',
-      Blockly.Python.ORDER_NONE) || null;
+      Blockly.Python.ORDER_NONE) || '';
   if (returnValue) {
     returnValue = '  return ' + returnValue + '\n';
   } else if (!branch) {

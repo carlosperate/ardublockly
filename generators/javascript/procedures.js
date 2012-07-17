@@ -32,7 +32,7 @@ Blockly.JavaScript.procedures_defreturn = function() {
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.JavaScript.statementToCode(this, 'STACK');
   var returnValue = Blockly.JavaScript.valueToCode(this, 'RETURN',
-      Blockly.JavaScript.ORDER_NONE) || null;
+      Blockly.JavaScript.ORDER_NONE) || '';
   if (returnValue) {
     returnValue = '  return ' + returnValue + ';\n';
   }
