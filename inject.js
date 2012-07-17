@@ -174,7 +174,6 @@ Blockly.createDom_ = function(container) {
 
   Blockly.mainWorkspace = new Blockly.Workspace(Blockly.editable);
   svg.appendChild(Blockly.mainWorkspace.createDom());
-  svg.appendChild(Blockly.FieldTextInput.createDom());
   Blockly.commentCanvas = Blockly.createSvgElement('g', {}, svg);
   if (Blockly.Toolbox && Blockly.editable) {
     svg.appendChild(Blockly.Toolbox.createDom());

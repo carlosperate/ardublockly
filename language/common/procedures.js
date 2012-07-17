@@ -50,9 +50,6 @@ Blockly.Language.procedures_defnoreturn = {
     return container;
   },
   domToMutation: function(xmlElement) {
-    for (var x = 0; x < this.parameters_.length; x++) {
-      this.removeInput('PARAM' + x);
-    }
     this.parameters_ = [];
     for (var x = 0, childNode; childNode = xmlElement.childNodes[x]; x++) {
       if (childNode.nodeName == 'param') {
@@ -114,7 +111,7 @@ Blockly.Language.procedures_defreturn = {
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName(Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE, this);
     this.appendTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
-    this.appendTitle('', 'PARAMS');
+    this.appendInput(['', 'PARAMS'], Blockly.DUMMY_INPUT);
     this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_DO, Blockly.NEXT_STATEMENT, 'STACK');
     this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN, Blockly.INPUT_VALUE, 'RETURN', null);
     //this.setMutator(new Blockly.Mutator(['procedures_mutatorparam']));

@@ -1175,14 +1175,19 @@ Blockly.Block.prototype.appendInput = function(label, type, name, opt_check) {
   // Create descriptive text element.
   var textElement = null;
   if (label) {
-    if (typeof label == 'string') {
-      // Text label.
-      textElement = new Blockly.FieldLabel(label);
-    } else if (label instanceof Array) {
+    var labelElement = label;
+    var labelName = null;
+    if (label instanceof Array) {
       // Editable label with name.
-      textElement = label[0];
-      textElement.name = label[1];
+      labelElement = label[0];
+      labelName = label[1];
     }
+    if (typeof labelElement == 'string') {
+      // Text label.
+      labelElement = new Blockly.FieldLabel(labelElement);
+    }
+    textElement = labelElement;
+    textElement.name = labelName;
     if (this.svg_) {
       textElement.init(this);
     }
