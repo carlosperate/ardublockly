@@ -134,6 +134,7 @@ Blockly.Flyout.prototype.init = function(workspace, workspaceMetrics) {
   this.buttons_ = [];
 
   this.position_();
+  this.hide();
 
   // If the document resizes, reposition the toolbox.
   Blockly.bindEvent_(window, 'resize', this, this.position_);
