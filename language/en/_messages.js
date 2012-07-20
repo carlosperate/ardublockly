@@ -370,3 +370,5 @@ Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1 = 'Call a procedure with a return v
 
 Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = 'parameters';
 Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'variable:';
+
+Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight Procedure';

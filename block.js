@@ -556,6 +556,11 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
     block.showHelp_();
   };
   options.push(helpOption);
+  
+  // Allow the block to add or modify options.
+  if (this.customContextMenu) {
+    this.customContextMenu(options);
+  }
 
   Blockly.ContextMenu.show(x, y, options);
 };

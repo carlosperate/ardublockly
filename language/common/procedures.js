@@ -251,6 +251,27 @@ Blockly.Language.procedures_callnoreturn = {
         this.getInput('ARG' + x).label.setText(newName);
       }
     }
+  },
+  customContextMenu: function(options) {
+    // Add option to find caller.
+    var option = {enabled: true};
+    option.text = Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF;
+    var name = this.getTitleText('NAME');
+    var workspace = this.workspace;
+    option.callback = function() {
+      var blocks = workspace.getAllBlocks(false);
+      for (var x = 0; x < blocks.length; x++) {
+        var func = blocks[x].getProcedureDef;
+        if (func) {
+          var tuple = func.call(blocks[x]);
+          if (tuple && Blockly.Names.equals(tuple[0], name)) {
+            blocks[x].select();
+            break;
+          }
+        }
+      }
+    };
+    options.push(option);
   }
 };
 
@@ -271,5 +292,6 @@ Blockly.Language.procedures_callreturn = {
   setProcedureParameters: Blockly.Language.procedures_callnoreturn.setProcedureParameters,
   mutationToDom: Blockly.Language.procedures_callnoreturn.mutationToDom,
   domToMutation: Blockly.Language.procedures_callnoreturn.domToMutation,
-  renameVar: Blockly.Language.procedures_callnoreturn.renameVar
+  renameVar: Blockly.Language.procedures_callnoreturn.renameVar,
+  customContextMenu: Blockly.Language.procedures_callnoreturn.customContextMenu
 };
