@@ -40,6 +40,7 @@ Blockly.Workspace.prototype.scrollX = 0;
 Blockly.Workspace.prototype.scrollY = 0;
 
 Blockly.Workspace.prototype.trashcan = null;
+Blockly.Workspace.prototype.fireChangeEventPid_ = null;
 
 /**
  * Create the trash can elements.
@@ -54,6 +55,7 @@ Blockly.Workspace.prototype.createDom = function() {
   */
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
   this.svgBlockCanvas_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
+  this.fireChangeEvent();
   return this.svgGroup_;
 };
 
@@ -84,6 +86,7 @@ Blockly.Workspace.prototype.getCanvas = function() {
  */
 Blockly.Workspace.prototype.addTopBlock = function(block) {
   this.topBlocks_.push(block);
+  this.fireChangeEvent();
 };
 
 /**
@@ -102,6 +105,7 @@ Blockly.Workspace.prototype.removeTopBlock = function(block) {
   if (!found) {
     throw 'Block not present in workspace\'s list of top-most blocks.';
   }
+  this.fireChangeEvent();
 };
 
 /**
@@ -207,3 +211,19 @@ Blockly.Workspace.prototype.highlightBlock = function(id) {
   this.traceOn(true);
 };
 
+/**
+ * Fire a change event for this workspace.  Changes include new block, dropdown
+ * edits, mutations, connections, etc.  Groups of simultaneous changes (e.g.
+ * a tree of blocks being deleted) are merged into one event.
+ * Applications may hook workspace changes by listening for
+ * 'blocklyWorkspaceChange' on Blockly.mainWorkspace.getCanvas().
+ */
+Blockly.Workspace.prototype.fireChangeEvent = function() {
+  if (this.fireChangeEventPid_) {
+    window.clearTimeout(this.fireChangeEventPid_);
+  }
+  var canvas = this.svgBlockCanvas_;
+  this.fireChangeEventPid_ = window.setTimeout(function() {
+      Blockly.fireUiEvent(Blockly.svgDoc, canvas, 'blocklyWorkspaceChange');
+    }, 0);
+};

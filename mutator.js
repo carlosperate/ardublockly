@@ -400,6 +400,7 @@ Blockly.Mutator.closeDialog = function() {
  */
 Blockly.Mutator.saveDialog_ = function() {
   Blockly.Mutator.sourceBlock_.compose(Blockly.Mutator.rootBlock_);
+  Blockly.Mutator.sourceBlock_.workspace.fireChangeEvent();
   Blockly.Mutator.closeDialog();
 };
 

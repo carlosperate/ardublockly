@@ -152,6 +152,7 @@ Blockly.Block.terminateDrag_ = function(e) {
                         Blockly.BUMP_DELAY);
       // Fire an event to allow scrollbars to resize.
       Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+      selected.workspace.fireChangeEvent();
     }
   }
 };
@@ -1078,6 +1079,7 @@ Blockly.Block.prototype.setDisabled = function(disabled) {
   }
   this.disabled = disabled;
   this.svg_.updateDisabled();
+  this.workspace.fireChangeEvent();
 };
 
 /**
