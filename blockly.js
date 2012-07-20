@@ -236,7 +236,7 @@ Blockly.onMouseDown_ = function(e) {
     // Clicking on the document clears the selection.
     Blockly.selected.unselect();
   }
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
       Blockly.showContextMenu_(e.clientX, e.clientY);

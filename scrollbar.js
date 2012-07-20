@@ -662,7 +662,7 @@ Blockly.ScrollbarSvg.prototype.setVisible = function(visible) {
  */
 Blockly.ScrollbarSvg.prototype.onMouseDownBar_ = function(e) {
   Blockly.hideChaff(true);
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     // Scrollbars have no context menu.
     e.stopPropagation();
@@ -704,7 +704,7 @@ Blockly.ScrollbarSvg.prototype.onMouseDownBar_ = function(e) {
 Blockly.ScrollbarSvg.prototype.onMouseDownKnob_ = function(e) {
   Blockly.hideChaff(true);
   this.onMouseUpKnob_();
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     // Scrollbars have no context menu.
     e.stopPropagation();

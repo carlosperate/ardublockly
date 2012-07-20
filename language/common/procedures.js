@@ -36,7 +36,7 @@ Blockly.Language.procedures_defnoreturn = {
     this.appendTitle(new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
     this.appendTitle('', 'PARAMS');
     this.appendInput(Blockly.LANG_PROCEDURES_DEFNORETURN_DO, Blockly.NEXT_STATEMENT, 'STACK');
-    this.setMutator(new Blockly.Mutator(['procedures_mutatorparam']));
+    this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1);
     this.arguments_ = [];
   },
@@ -67,7 +67,7 @@ Blockly.Language.procedures_defnoreturn = {
     containerBlock.initSvg();
     var connection = containerBlock.inputList[0];
     for (var x = 0; x < this.arguments_.length; x++) {
-      var paramBlock = new Blockly.Block(workspace, 'procedures_mutatorparam');
+      var paramBlock = new Blockly.Block(workspace, 'procedures_mutatorarg');
       paramBlock.initSvg();
       paramBlock.setTitleText(this.arguments_[x], 'NAME');
       // Store the old location.
@@ -136,7 +136,7 @@ Blockly.Language.procedures_defreturn = {
     this.appendInput(['', 'PARAMS'], Blockly.DUMMY_INPUT);
     this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_DO, Blockly.NEXT_STATEMENT, 'STACK');
     this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN, Blockly.INPUT_VALUE, 'RETURN', null);
-    this.setMutator(new Blockly.Mutator(['procedures_mutatorparam']));
+    this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1);
     this.arguments_ = [];
   },
@@ -160,18 +160,18 @@ Blockly.Language.procedures_mutatorcontainer = {
   // Procedure container (for mutator dialog).
   init: function() {
     this.setColour(290);
-    this.appendTitle('parameters');
+    this.appendTitle(Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE);
     this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('');
     this.contextMenu = false;
   }
 };
 
-Blockly.Language.procedures_mutatorparam = {
-  // Procedure parameter (for mutator dialog).
+Blockly.Language.procedures_mutatorarg = {
+  // Procedure argument (for mutator dialog).
   init: function() {
     this.setColour(290);
-    this.appendTitle('variable:');
+    this.appendTitle(Blockly.LANG_PROCEDURES_MUTATORARG_TITLE);
     this.appendTitle(new Blockly.FieldTextInput('x'), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);

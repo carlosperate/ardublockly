@@ -296,3 +296,13 @@ Blockly.uniqueId = function() {
   }
   return id;
 };
+
+/**
+ * Is this event a right-click?
+ * @param {!Event} e Mouse event.
+ * @return {boolean} True if right-click.
+ */
+Blockly.isRightButton = function(e) {
+  // Control-clicking in WebKit on Mac OS X fails to change button to 2.
+  return e.button == 2 || e.ctrlKey;
+};

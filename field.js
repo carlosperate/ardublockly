@@ -206,7 +206,7 @@ Blockly.Field.prototype.setValue = function(text) {
  * @private
  */
 Blockly.Field.prototype.onMouseUp_ = function(e) {
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     return;
   } else if (Blockly.Block.dragMode_ == 2) {

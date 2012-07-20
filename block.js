@@ -313,7 +313,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   Blockly.Block.terminateDrag_();
   this.select();
   Blockly.hideChaff(this.isInFlyout);
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
       this.showContextMenu_(e.clientX, e.clientY);

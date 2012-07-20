@@ -328,7 +328,7 @@ Blockly.Comment.prototype.iconMouseOut_ = function(e) {
 Blockly.Comment.prototype.bubbleMouseDown_ = function(e) {
   this.promote_();
   Blockly.Comment.unbindDragEvents_();
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     return;
   } else if (Blockly.isTargetInput_(e)) {
@@ -378,7 +378,7 @@ Blockly.Comment.prototype.bubbleMouseMove_ = function(e) {
 Blockly.Comment.prototype.resizeMouseDown_ = function(e) {
   this.promote_();
   Blockly.Comment.unbindDragEvents_();
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     return;
   }

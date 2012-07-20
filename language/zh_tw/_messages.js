@@ -367,3 +367,6 @@ Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Proce
 Blockly.LANG_PROCEDURES_CALLRETURN_CALL = '呼叫';
 Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = '流程';
 Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1 = 'Call a procedure with a return value.';
+
+Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = 'parameters';
+Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'variable:';

@@ -132,7 +132,7 @@ Blockly.Mutator.prototype.renderIcon = function(titleX) {
  * @private
  */
 Blockly.Mutator.prototype.onMouseUp_ = function(e) {
-  if (e.button == 2) {
+  if (Blockly.isRightButton(e)) {
     // Right-click.
     return;
   } else if (Blockly.Block.dragMode_ == 2) {
