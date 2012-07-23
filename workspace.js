@@ -44,17 +44,19 @@ Blockly.Workspace.prototype.fireChangeEventPid_ = null;
 
 /**
  * Create the trash can elements.
- * @return {!Element} The trash can's SVG group.
+ * @return {!Element} The workspace's SVG group.
  */
 Blockly.Workspace.prototype.createDom = function() {
   /*
   <g>
     [Trashcan may go here]
     <g></g>
+    <g></g>
   </g>
   */
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
   this.svgBlockCanvas_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
+  this.svgBubbleCanvas_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
   this.fireChangeEvent();
   return this.svgGroup_;
 };
@@ -78,6 +80,14 @@ Blockly.Workspace.prototype.addTrashcan = function(getMetrics) {
  */
 Blockly.Workspace.prototype.getCanvas = function() {
   return this.svgBlockCanvas_;
+};
+
+/**
+ * Get the SVG element that forms the bubble surface.
+ * @return {!Element} SVG element.
+ */
+Blockly.Workspace.prototype.getBubbleCanvas = function() {
+  return this.svgBubbleCanvas_;
 };
 
 /**

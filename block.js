@@ -1347,7 +1347,7 @@ Blockly.Block.prototype.setCommentText = function(text) {
   var changedState = false;
   if (typeof text == 'string') {
     if (!this.comment) {
-      this.comment = new Blockly.Comment(this, Blockly.commentCanvas);
+      this.comment = new Blockly.Comment(this);
       changedState = true;
     }
     this.comment.setText(text);

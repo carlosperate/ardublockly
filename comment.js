@@ -25,10 +25,9 @@
 /**
  * Class for a comment.
  * @param {!Blockly.Block} block The block associated with this comment.
- * @param {!Element} commentGroup The SVG group to append the comment bubble.
  * @constructor
  */
-Blockly.Comment = function(block, commentGroup) {
+Blockly.Comment = function(block) {
   this.block_ = block;
 
   var angle = Blockly.Comment.ARROW_ANGLE;
@@ -38,7 +37,7 @@ Blockly.Comment = function(block, commentGroup) {
   this.arrow_radians_ = angle / 360 * Math.PI * 2;
 
   this.createIcon_();
-  this.createBubble_(commentGroup);
+  this.createBubble_(block.workspace.getBubbleCanvas());
 
   this.setPinned(false);
   this.updateColour();

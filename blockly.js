@@ -526,7 +526,8 @@ Blockly.setMainWorkspaceMetrics = function(xyRatio) {
       (Blockly.mainWorkspace.scrollX + metrics.absoluteLeft) + ',' +
       (Blockly.mainWorkspace.scrollY + metrics.absoluteTop) + ')';
   Blockly.mainWorkspace.getCanvas().setAttribute('transform', translation);
-  Blockly.commentCanvas.setAttribute('transform', translation);
+  Blockly.mainWorkspace.getBubbleCanvas().setAttribute('transform',
+                                                       translation);
 };
 
 /**

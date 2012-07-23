@@ -22,6 +22,7 @@ filenames = [
     'blockly.js',
     'block.js',
     'block_svg.js',
+    'bubble.js',
     'comment.js',
     'connection.js',
     'contextmenu.js',
