@@ -261,7 +261,7 @@ Blockly.Toolbox.redraw = function() {
       });
 
   // Fire a resize event since the toolbox may have changed width and height.
-  Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+  Blockly.fireUiEvent(window, 'resize');
 };
 
 /**

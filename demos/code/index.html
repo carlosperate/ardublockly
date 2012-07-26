@@ -92,18 +92,17 @@ function init(blockly) {
 
   // Make the 'Blocks' tab line up with the toolbox.
   if (Blockly.Toolbox) {
-    Blockly.bindEvent_(window, 'resize', null, function() {
-      document.getElementById('tab_blocks').style.minWidth =
-          (Blockly.Toolbox.width - 38) + 'px';
-          // Account for the 19 pixel margin and on each side.
-      });
     window.setTimeout(function() {
-        Blockly.fireUiEvent(document, window, 'resize');
-      }, 1);
+        document.getElementById('tab_blocks').style.minWidth =
+            (Blockly.Toolbox.width - 38) + 'px';
+            // Account for the 19 pixel margin and on each side.
+    }, 1);
   }
 
-  // Restore/backup current works.
-  restore_blocks();
+  // Restore saved blocks in a separate thread so that subsequent
+  // initialization is not affected from a failed load.
+  window.setTimeout(restore_blocks, 0);
+  // Hook a save function onto unload.
   Blockly.bindEvent_(window, 'unload', null, backup_blocks);
   tabClick('tab_' + selected);
 

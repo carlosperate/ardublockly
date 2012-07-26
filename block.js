@@ -151,7 +151,7 @@ Blockly.Block.terminateDrag_ = function(e) {
       window.setTimeout(function() {selected.bumpNeighbours_();},
                         Blockly.BUMP_DELAY);
       // Fire an event to allow scrollbars to resize.
-      Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+      Blockly.fireUiEvent(window, 'resize');
       selected.workspace.fireChangeEvent();
     }
   }
@@ -167,8 +167,7 @@ Blockly.Block.prototype.select = function() {
   }
   Blockly.selected = this;
   this.svg_.addSelect();
-  Blockly.fireUiEvent(Blockly.svgDoc, this.workspace.getCanvas(),
-                      'blocklySelectChange');
+  Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');
 };
 
 /**
@@ -177,8 +176,7 @@ Blockly.Block.prototype.select = function() {
 Blockly.Block.prototype.unselect = function() {
   Blockly.selected = null;
   this.svg_.removeSelect();
-  Blockly.fireUiEvent(Blockly.svgDoc, this.workspace.getCanvas(),
-                      'blocklySelectChange');
+  Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');
 };
 
 /**
@@ -396,7 +394,7 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     // Dropping a block on the trash can will usually cause the workspace to
     // resize to contain the newly positioned block.  Force a second resize now
     // that the block has been deleted.
-    Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+    Blockly.fireUiEvent(window, 'resize');
   }
   if (Blockly.highlightedConnection_) {
     Blockly.highlightedConnection_.unhighlight();

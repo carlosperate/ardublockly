@@ -300,6 +300,15 @@ Blockly.Bubble.prototype.resizeMouseMove_ = function(e) {
 };
 
 /**
+ * Register a function as a callback event for when the bubble is resized.
+ * @param {Object} thisObject The value of 'this' in the callback.
+ * @param {!Function} callback The function to call on resize.
+ */
+Blockly.Bubble.prototype.registerResizeEvent = function(thisObject, callback) {
+  Blockly.bindEvent_(this.bubbleGroup_, 'resize', thisObject, callback);
+};
+
+/**
  * Move this bubble to the top of the stack.
  * @private
  */
@@ -390,6 +399,8 @@ Blockly.Bubble.prototype.setBubbleSize = function(width, height) {
         (height - doubleBorderWidth) + ')');
   }
   this.renderArrow_();
+  // Fire an event to allow the contents to resize.
+  Blockly.fireUiEvent(this.bubbleGroup_, 'resize');
 };
 
 /**

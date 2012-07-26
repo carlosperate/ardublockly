@@ -234,6 +234,6 @@ Blockly.Workspace.prototype.fireChangeEvent = function() {
   }
   var canvas = this.svgBlockCanvas_;
   this.fireChangeEventPid_ = window.setTimeout(function() {
-      Blockly.fireUiEvent(Blockly.svgDoc, canvas, 'blocklyWorkspaceChange');
+      Blockly.fireUiEvent(canvas, 'blocklyWorkspaceChange');
     }, 0);
 };

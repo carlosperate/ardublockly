@@ -437,6 +437,7 @@ Maze.showCode = function() {
 };
 
 // API
+// Human-readable aliases.
 
 Maze.moveForward = function(id) {
   Maze.move(0, id);
@@ -470,7 +471,7 @@ Maze.isWallLeft = function() {
   return Maze.isWall(3);
 };
 
-//
+// Core functions.
 
 /**
  * Move pegman forward or backward.

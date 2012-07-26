@@ -278,7 +278,7 @@ Blockly.Flyout.prototype.show = function(names) {
   this.width_ = flyoutWidth;
 
   // Fire a resize event to update the flyout's scrollbar.
-  Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+  Blockly.fireUiEvent(window, 'resize');
 };
 
 /**

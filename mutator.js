@@ -355,7 +355,7 @@ Blockly.Mutator.openDialog_ = function(block) {
   Blockly.removeClass_(Blockly.Mutator.svgGroup_, 'blocklyHidden');
   Blockly.Mutator.position_();
   // Fire an event to allow the trashcan to position.
-  Blockly.fireUiEvent(Blockly.svgDoc, window, 'resize');
+  Blockly.fireUiEvent(window, 'resize');
   // If the document resizes, reposition the dialog.
   Blockly.Mutator.resizeWrapper_ =
       Blockly.bindEvent_(window, 'resize', null, Blockly.Mutator.position_);

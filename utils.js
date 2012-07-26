@@ -158,11 +158,11 @@ Blockly.unbindEvent_ = function(bindData) {
 
 /**
  * Fire a synthetic event.
- * @param {!Element} doc Window's document for the event.
  * @param {!Element} element The event's target element.
  * @param {string} eventName Name of event (e.g. 'click').
  */
-Blockly.fireUiEvent = function(doc, element, eventName) {
+Blockly.fireUiEvent = function(element, eventName) {
+  var doc = Blockly.svgDoc;
   if (doc.createEvent) {
     // W3
     var evt = doc.createEvent('UIEvents');
