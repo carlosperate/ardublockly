@@ -73,9 +73,8 @@ Blockly.LANG_CONTROLS_FOR_INPUT_FROM = '從範圍';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = '到';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = '執行';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 = 'Count from a start number to an end number.\n' +
-          'For each count, set the current count number to\n' +
-          'variable "';
-Blockly.LANG_CONTROLS_FOR_TOOLTIP_2 = '", and then do some statements.';        
+    'For each count, set the current count number to\n' +
+    'variable "%1", and then do some statements.';        
 
 Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH = '取出每個';
@@ -83,8 +82,8 @@ Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = '';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = '變量';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = '自列表';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = '執行';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\nvariable "';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_2 = '", and then do some statements.';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 = 'For each item in a list, set the item to\n' +
+    'variable "%1", and then do some statements.';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = '迴圈';
@@ -139,7 +138,7 @@ Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = '修改';
 Blockly.LANG_MATH_CHANGE_TITLE_ITEM = '變量';
 Blockly.LANG_MATH_CHANGE_INPUT_BY = '自';
-Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = 'Add a number to variable "';
+Blockly.LANG_MATH_CHANGE_TOOLTIP_1 = 'Add a number to variable "%1".';
 
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
 Blockly.LANG_MATH_SINGLE_OP_ROOT = '開根號';

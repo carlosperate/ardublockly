@@ -232,7 +232,8 @@ Blockly.Language.controls_for = {
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.LANG_CONTROLS_FOR_TOOLTIP_1 + thisBlock.getInputVariable('VAR') + Blockly.LANG_CONTROLS_FOR_TOOLTIP_2;
+      return Blockly.LANG_CONTROLS_FOR_TOOLTIP_1.replace('%1',
+          thisBlock.getInputVariable('VAR'));
     });
   },
   getVars: function() {
@@ -260,8 +261,8 @@ Blockly.Language.controls_forEach = {
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1 +
-          thisBlock.getInputVariable('VAR') + Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_2;
+      return Blockly.LANG_CONTROLS_FOREACH_TOOLTIP_1.replace('%1',
+          thisBlock.getInputVariable('VAR'));
     });
   },
   getVars: function() {
@@ -273,7 +274,6 @@ Blockly.Language.controls_forEach = {
     }
   }
 };
-
 
 Blockly.Language.controls_flow_statements = {
   // Flow statements: continue, break.
@@ -295,7 +295,8 @@ Blockly.Language.controls_flow_statements = {
 };
 
 Blockly.Language.controls_flow_statements.OPERATORS =
-    [[Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'], [Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
+    [[Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
+     [Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
 
 Blockly.Language.controls_flow_statements.TOOLTIPS = {
   BREAK: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,

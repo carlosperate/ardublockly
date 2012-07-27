@@ -94,7 +94,8 @@ Blockly.Language.math_change = {
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.LANG_MATH_CHANGE_TOOLTIP_1 + thisBlock.getTitleText('VAR') + '".';
+      return Blockly.LANG_MATH_CHANGE_TOOLTIP_1.replace('%1',
+          thisBlock.getTitleText('VAR'));
     });
   },
   getVars: function() {
