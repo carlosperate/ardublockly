@@ -105,7 +105,7 @@ Blockly.Comment.prototype.createIcon_ = function() {
   /* Here's the markup that will be generated:
   <g class="blocklyIconGroup">
     <circle class="blocklyIconShield" r="8" cx="8" cy="8"/>
-    <text class="blocklyCommentMark" x="4" y="13">?</text>
+    <text class="blocklyIconMark" x="4" y="13">?</text>
   </g>
   */
   this.iconGroup_ = Blockly.createSvgElement('g',
@@ -116,7 +116,7 @@ Blockly.Comment.prototype.createIcon_ = function() {
       cx: Blockly.Comment.ICON_RADIUS,
       cy: Blockly.Comment.ICON_RADIUS}, this.iconGroup_);
   this.iconMark_ = Blockly.createSvgElement('text',
-      {'class': 'blocklyCommentMark',
+      {'class': 'blocklyIconMark',
       x: Blockly.Comment.ICON_RADIUS / 2,
       y: 2 * Blockly.Comment.ICON_RADIUS - 3}, this.iconGroup_);
   this.iconMark_.appendChild(Blockly.svgDoc.createTextNode('?'));
@@ -152,6 +152,7 @@ Blockly.Comment.prototype.createEditor_ = function() {
   this.textarea_.setAttribute('dir', Blockly.RTL ? 'RTL' : 'LTR');
   body.appendChild(this.textarea_);
   this.foreignObject_.appendChild(body);
+  Blockly.bindEvent_(this.textarea_, 'mouseup', this, this.textareaFocus_);
   return this.foreignObject_;
 };
 

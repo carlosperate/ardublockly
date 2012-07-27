@@ -42,6 +42,7 @@ filenames = [
     'trashcan.js',
     'utils.js',
     'variables.js',
+    'warning.js',
     'workspace.js',
     'xml.js']
 
