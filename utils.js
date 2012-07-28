@@ -115,13 +115,15 @@ Blockly.bindEvent_ = function(element, name, thisObject, func) {
                                wrapFunc, false);
       bindData.push([element, Blockly.bindEvent_.TOUCH_MAP[name], wrapFunc]);
     }
-  } else {  // IE
+  } else if (element.attachEvent) {  // IE
     wrapFunc = function(e) {
       func.apply(thisObject, arguments);
       e.stopPropagation();
     };
     element.attachEvent('on' + name, wrapFunc);
     bindData.push([element, name, wrapFunc]);
+  } else {
+    throw 'Element is not a DOM node.';
   }
   return bindData;
 };

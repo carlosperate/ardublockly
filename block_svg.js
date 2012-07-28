@@ -261,6 +261,13 @@ Blockly.BlockSvg.prototype.render = function() {
 Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
   var titleX = -Blockly.BlockSvg.SEP_SPACE_X;
   var iconWidth;
+  // Move the mutator icon into position.
+  if (this.block_.mutator) {
+    iconWidth = this.block_.mutator.renderIcon(titleX);
+    if (iconWidth) {
+      titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
+    }
+  }
   // Move the comment icon into position.
   if (this.block_.comment) {
     iconWidth = this.block_.comment.renderIcon(titleX);
@@ -268,9 +275,9 @@ Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
       titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }
   }
-  // Move the mutator icon into position.
-  if (this.block_.mutator) {
-    iconWidth = this.block_.mutator.renderIcon(titleX);
+  // Move the warning icon into position.
+  if (this.block_.warning) {
+    iconWidth = this.block_.warning.renderIcon(titleX);
     if (iconWidth) {
       titleX -= iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }
@@ -303,6 +310,13 @@ Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
 Blockly.BlockSvg.prototype.renderTitleLTR_ = function(titleY) {
   var titleX = Blockly.BlockSvg.SEP_SPACE_X;
   var iconWidth;
+  // Move the mutator icon into position.
+  if (this.block_.mutator) {
+    iconWidth = this.block_.mutator.renderIcon(titleX);
+    if (iconWidth) {
+      titleX += iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
+    }
+  }
   // Move the comment icon into position.
   if (this.block_.comment) {
     iconWidth = this.block_.comment.renderIcon(titleX);
@@ -310,9 +324,9 @@ Blockly.BlockSvg.prototype.renderTitleLTR_ = function(titleY) {
       titleX += iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }
   }
-  // Move the mutator icon into position.
-  if (this.block_.mutator) {
-    iconWidth = this.block_.mutator.renderIcon(titleX);
+  // Move the warning icon into position.
+  if (this.block_.warning) {
+    iconWidth = this.block_.warning.renderIcon(titleX);
     if (iconWidth) {
       titleX += iconWidth + Blockly.BlockSvg.SEP_SPACE_X;
     }

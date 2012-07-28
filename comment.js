@@ -112,13 +112,13 @@ Blockly.Comment.prototype.createIcon_ = function() {
       {'class': 'blocklyIconGroup'}, null);
   var iconShield = Blockly.createSvgElement('circle',
       {'class': 'blocklyIconShield',
-      r: Blockly.Comment.ICON_RADIUS,
-      cx: Blockly.Comment.ICON_RADIUS,
-      cy: Blockly.Comment.ICON_RADIUS}, this.iconGroup_);
+       r: Blockly.Comment.ICON_RADIUS,
+       cx: Blockly.Comment.ICON_RADIUS,
+       cy: Blockly.Comment.ICON_RADIUS}, this.iconGroup_);
   this.iconMark_ = Blockly.createSvgElement('text',
       {'class': 'blocklyIconMark',
-      x: Blockly.Comment.ICON_RADIUS / 2,
-      y: 2 * Blockly.Comment.ICON_RADIUS - 3}, this.iconGroup_);
+       x: Blockly.Comment.ICON_RADIUS / 2 + 0.5,
+       y: 2 * Blockly.Comment.ICON_RADIUS - 3}, this.iconGroup_);
   this.iconMark_.appendChild(Blockly.svgDoc.createTextNode('?'));
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
   Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
@@ -127,7 +127,7 @@ Blockly.Comment.prototype.createIcon_ = function() {
 };
 
 /**
- * Create the icon's bubble.
+ * Create the editor for the comment's bubble.
  * @return {!Element} The top-level node of the editor.
  * @private
  */

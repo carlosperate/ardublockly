@@ -39,6 +39,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.inputsInline = false;
   this.rendered = false;
   this.comment = null;
+  this.warning = null;
   this.collapsed = false;
   this.disabled = false;
   this.editable = workspace.editable;
@@ -67,6 +68,11 @@ Blockly.Block = function(workspace, prototypeName) {
   // Call an initialization function, if it exists.
   if (typeof this.init == 'function') {
     this.init();
+  }
+  // Bind an onchange function, if it exists.
+  if (this.editable && typeof this.onchange == 'function') {
+    Blockly.bindEvent_(workspace.getCanvas(), 'blocklyWorkspaceChange', this,
+                       this.onchange);
   }
 };
 
@@ -145,7 +151,7 @@ Blockly.Block.terminateDrag_ = function(e) {
       var dx = xy.x - selected.startDragX;
       var dy = xy.y - selected.startDragY;
       selected.moveConnections_(dx, dy);
-      delete selected.draggedComments_;
+      delete selected.draggedBubbles_;
       selected.setDragging_(false);
       selected.render();
       window.setTimeout(function() {selected.bumpNeighbours_();},
@@ -238,6 +244,9 @@ Blockly.Block.prototype.destroy = function(gentle) {
   }
   if (this.comment) {
     this.comment.destroy();
+  }
+  if (this.warning) {
+    this.warning.destroy();
   }
   if (this.mutator) {
     this.mutator.destroy();
@@ -339,13 +348,18 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
     Blockly.Block.onMouseMoveWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
         'mousemove', this, this.onMouseMove_);
     // Build a list of comments that need to be moved and where they started.
-    this.draggedComments_ = [];
+    this.draggedBubbles_ = [];
     var descendants = this.getDescendants();
     for (var x = 0, descendant; descendant = descendants[x]; x++) {
       if (descendant.comment) {
         var data = descendant.comment.getIconLocation();
-        data.comment = descendant.comment;
-        this.draggedComments_.push(data);
+        data.bubble = descendant.comment;
+        this.draggedBubbles_.push(data);
+      }
+      if (descendant.warning) {
+        var data = descendant.warning.getIconLocation();
+        data.bubble = descendant.warning;
+        this.draggedBubbles_.push(data);
       }
     }
   }
@@ -614,6 +628,9 @@ Blockly.Block.prototype.moveConnections_ = function(dx, dy) {
   if (this.comment) {
     this.comment.computeIconLocation();
   }
+  if (this.warning) {
+    this.warning.computeIconLocation();
+  }
 
   // Recurse through all blocks attached under this one.
   for (var x = 0; x < this.childBlocks_.length; x++) {
@@ -675,10 +692,10 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
     this.svg_.getRootNode().setAttribute('transform',
                                      'translate(' + x + ', ' + y + ')');
     // Drag all the nested comments.
-    for (var x = 0; x < this.draggedComments_.length; x++) {
-      var commentData = this.draggedComments_[x];
-      commentData.comment.setIconLocation(commentData.x + dx,
-                                          commentData.y + dy);
+    for (var x = 0; x < this.draggedBubbles_.length; x++) {
+      var commentData = this.draggedBubbles_[x];
+      commentData.bubble.setIconLocation(commentData.x + dx,
+                                         commentData.y + dy);
     }
 
     // Check to see if any of this block's connections are within range of
@@ -758,6 +775,29 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
 Blockly.Block.prototype.getParent = function() {
   // Look at the DOM to see if we are nested in another block.
   return this.parentBlock_;
+};
+
+/**
+ * Return the parent block that surrounds the current block, or null if this
+ * block has no surrounding block.  A parent block might just be the previous
+ * statement, whereas the surrounding block is an if statement, while loop, etc.
+ * @return {Blockly.Block} The block that surrounds the current block.
+ */
+Blockly.Block.prototype.getSurroundParent = function() {
+  var block = this;
+  while (true) {
+    do {
+      var prevBlock = block;
+      block = block.getParent();
+      if (!block) {
+        // Ran off the top.
+        return null;
+      }
+    } while (block.nextConnection &&
+             block.nextConnection.targetBlock() == prevBlock);
+    // This block is an enclosing parent, not just a statement in a stack.
+    return block;
+  }
 };
 
 /**
@@ -869,6 +909,9 @@ Blockly.Block.prototype.setColour = function(colourHue) {
   }
   if (this.comment) {
     this.comment.updateColour();
+  }
+  if (this.warning) {
+    this.warning.updateColour();
   }
   if (this.rendered) {
     this.render();
@@ -1093,17 +1136,11 @@ Blockly.Block.prototype.setDisabled = function(disabled) {
 Blockly.Block.prototype.getInheritedDisabled = function() {
   var block = this;
   while (true) {
-    do {
-      var prevBlock = block;
-      block = block.getParent();
-      if (!block) {
-        // Ran off the top.
-        return false;
-      }
-    } while (block.nextConnection &&
-             block.nextConnection.targetBlock() == prevBlock);
-    // This block is an enclosing parent, not just a statement in a stack.
-    if (block.disabled) {
+    var block = block.getSurroundParent();
+    if (!block) {
+      // Ran off the top.
+      return false;
+    } else if (block.disabled) {
       return true;
     }
   }
@@ -1149,6 +1186,9 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
 
   if (collapsed && this.comment) {
     this.comment.setPinned(false);
+  }
+  if (collapsed && this.warning) {
+    this.warning.setPinned(false);
   }
 
   if (renderList.length == 0) {
@@ -1359,7 +1399,38 @@ Blockly.Block.prototype.setCommentText = function(text) {
   if (this.rendered) {
     this.render();
     if (changedState) {
-      // Adding or removing the comment will cause the block to change shape.
+      // Adding or removing a comment icon will cause the block to change shape.
+      this.bumpNeighbours_();
+    }
+  }
+};
+
+/**
+ * Set this block's warning text.
+ * @param {?string} text The text, or null to delete.
+ */
+Blockly.Block.prototype.setWarningText = function(text) {
+  if (!Blockly.Warning) {
+    throw 'Warnings not supported.';
+  }
+  var changedState = false;
+  if (typeof text == 'string') {
+    if (!this.warning) {
+      this.warning = new Blockly.Warning(this);
+      changedState = true;
+    }
+    this.warning.setText(text);
+  } else {
+    if (this.warning) {
+      this.warning.destroy();
+      this.warning = null;
+      changedState = true;
+    }
+  }
+  if (this.rendered) {
+    this.render();
+    if (changedState) {
+      // Adding or removing a warning icon will cause the block to change shape.
       this.bumpNeighbours_();
     }
   }

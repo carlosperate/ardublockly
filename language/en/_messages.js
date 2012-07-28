@@ -91,6 +91,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'break out';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'continue with next iteration';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\ncontinue with the next iteration.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\nThis block may only\nbe used within a loop.';
 
 // Logic Blocks.
 Blockly.LANG_CATEGORY_LOGIC = 'Logic';

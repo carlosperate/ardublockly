@@ -150,6 +150,8 @@
   font-weight: bold;
   fill: #ccc;
 }
+.blocklyWarningBody {
+}
 .blocklyMinimalBody {
   margin: 0;
   padding: 0;

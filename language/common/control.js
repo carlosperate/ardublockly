@@ -291,6 +291,25 @@ Blockly.Language.controls_flow_statements = {
       var op = thisBlock.getTitleValue('FLOW');
       return Blockly.Language.controls_flow_statements.TOOLTIPS[op];
     });
+  },
+  onchange: function() {
+    var legal = false;
+    // Is the block nested in a control statement?
+    var block = this;
+    do {
+      if (block.type == 'controls_forEach' ||
+          block.type == 'controls_for' ||
+          block.type == 'controls_whileUntil') {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
   }
 };
 
