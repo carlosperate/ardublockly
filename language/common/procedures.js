@@ -41,6 +41,22 @@ Blockly.Language.procedures_defnoreturn = {
     this.arguments_ = [];
   },
   updateParams_: function() {
+    // Check for duplicated arguments.
+    var badArg = false;
+    var hash = {};
+    for (var x = 0; x < this.arguments_.length; x++) {
+      if (hash['arg_' + this.arguments_[x].toLowerCase()]) {
+        badArg = true;
+        break;
+      }
+      hash['arg_' + this.arguments_[x].toLowerCase()] = true;
+    }
+    if (badArg) {
+      this.setWarningText(Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING);
+    } else {
+      this.setWarningText(null);
+    }
+    // Merge the arguments into a human-readable list.
     var paramString = this.arguments_.join(', ');
     this.setTitleText(paramString, 'PARAMS');
   },
@@ -172,12 +188,20 @@ Blockly.Language.procedures_mutatorarg = {
   init: function() {
     this.setColour(290);
     this.appendTitle(Blockly.LANG_PROCEDURES_MUTATORARG_TITLE);
-    this.appendTitle(new Blockly.FieldTextInput('x'), 'NAME');
+    this.appendTitle(new Blockly.FieldTextInput('x',
+        Blockly.Language.procedures_mutatorarg.validator), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
     this.contextMenu = false;
   }
+};
+
+Blockly.Language.procedures_mutatorarg.validator = function(newVar) {
+  // Merge runs of whitespace.  Strip leading and trailing whitespace.
+  // Beyond this, all names are legal.
+  newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');;
+  return newVar || null;
 };
 
 Blockly.Language.procedures_callnoreturn = {
