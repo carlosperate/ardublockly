@@ -41,6 +41,11 @@ Blockly.Flyout.prototype.autoClose = true;
 Blockly.Flyout.prototype.CORNER_RADIUS = 8;
 
 /**
+ * Wrapper function called when a resize occurs.
+ */
+Blockly.Flyout.prototype.onResizeWrapper_ = null;
+
+/**
  * Creates the flyout's DOM.  Only needs to be called once.
  * @return {!Element} The flyout's SVG group.
  */
@@ -57,6 +62,31 @@ Blockly.Flyout.prototype.createDom = function() {
   this.svgOptions_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
   this.svgOptions_.appendChild(this.workspace_.createDom());
   return this.svgGroup_;
+};
+
+/**
+ * Destroy this flyout.
+ * Unlink from all DOM elements to prevent memory leaks.
+ */
+Blockly.Flyout.prototype.destroy = function() {
+  if (this.onResizeWrapper_) {
+    Blockly.unbindEvent_(this.onResizeWrapper_);
+    this.onResizeWrapper_ = null;
+  }
+  if (this.scrollbar_) {
+    this.scrollbar_.destroy();
+    this.scrollbar_ = null;
+  }
+  this.workspace_ = null;
+  if (this.svgGroup_) {
+    this.svgGroup_.parentNode.removeChild(this.svgGroup_);
+    this.svgGroup_ = null;
+  }
+  this.svgBackground_ = null;
+  this.svgOptions_ = null;
+  this.targetWorkspace_ = null;
+  this.targetWorkspaceMetrics_ = null;
+  this.buttons_ = null;
 };
 
 /**
@@ -124,7 +154,7 @@ Blockly.Flyout.prototype.init = function(workspace, workspaceMetrics) {
   this.width_ = 0;
   this.height_ = 0;
   var flyout = this;
-  new Blockly.Scrollbar(this.svgOptions_,
+  this.scrollbar_ = new Blockly.Scrollbar(this.svgOptions_,
       function() {return flyout.getMetrics();},
       function(ratio) {return flyout.setMetrics(ratio);},
       false, false);
@@ -137,7 +167,8 @@ Blockly.Flyout.prototype.init = function(workspace, workspaceMetrics) {
   this.hide();
 
   // If the document resizes, reposition the toolbox.
-  Blockly.bindEvent_(window, 'resize', this, this.position_);
+  this.onResizeWrapper_ =
+      Blockly.bindEvent_(window, 'resize', this, this.position_);
 };
 
 /**

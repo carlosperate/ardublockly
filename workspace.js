@@ -62,6 +62,23 @@ Blockly.Workspace.prototype.createDom = function() {
 };
 
 /**
+ * Destroy this workspace.
+ * Unlink from all DOM elements to prevent memory leaks.
+ */
+Blockly.Workspace.prototype.destroy = function() {
+  if (this.svgGroup_) {
+    this.svgGroup_.parentNode.removeChild(this.svgGroup_);
+    this.svgGroup_ = null;
+  }
+  this.svgBlockCanvas_ = null;
+  this.svgBubbleCanvas_ = null;
+  if (this.trashcan) {
+    this.trashcan.destroy();
+    this.trashcan = null;
+  }
+};
+
+/**
  * Add a trashcan.
  * @param {!Function} getMetrics A function that returns workspace's metrics.
  */

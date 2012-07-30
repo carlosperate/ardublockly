@@ -43,7 +43,27 @@ Blockly.ScrollbarPair = function(element, getMetrics, setMetrics) {
 
   // If the document resizes, reposition the scrollbars.
   var pair = this;
-  Blockly.bindEvent_(window, 'resize', pair, function() {pair.resize();});
+  this.onResizeWrapper_ = Blockly.bindEvent_(window, 'resize', pair,
+      function() {pair.resize();});
+};
+
+/**
+ * Destroy this pair of scrollbars.
+ * Unlink from all DOM elements to prevent memory leaks.
+ */
+Blockly.ScrollbarPair.prototype.destroy = function() {
+  Blockly.unbindEvent_(this.onResizeWrapper_);
+  this.onResizeWrapper_ = null;
+  this.corner_.parentNode.removeChild(this.corner_);
+  this.corner_ = null;
+  this.element_ = null;
+  this.getMetrics_ = null;
+  this.setMetrics_ = null;
+  this.oldHostMetrics_ = null;
+  this.hScroll.destroy();
+  this.hScroll = null;
+  this.vScroll.destroy();
+  this.vScroll = null;
 };
 
 /**
@@ -215,9 +235,27 @@ Blockly.ScrollbarNative = function(element, getMetrics, setMetrics,
     // If this scrollbar is part of a pair, then the ScrollbarPair will handle
     // resizing and event registration.
     this.resize();
-    Blockly.bindEvent_(window, 'resize', scrollbar,
+    this.onResizeWrapper_ = Blockly.bindEvent_(window, 'resize', scrollbar,
                        function() {scrollbar.resize();});
   }
+};
+
+/**
+ * Destroy this scrollbar.
+ * Unlink from all DOM elements to prevent memory leaks.
+ */
+Blockly.ScrollbarNative.prototype.destroy = function() {
+  Blockly.unbindEvent_(this.onResizeWrapper_);
+  this.onResizeWrapper_ = null;
+  Blockly.unbindEvent_(this.onScrollWrapper_);
+  this.onScrollWrapper_ = null;
+  this.foreignObject_.parentNode.removeChild(this.foreignObject_);
+  this.foreignObject_ = null;
+  this.element_ = null;
+  this.getMetrics_ = null;
+  this.setMetrics_ = null;
+  this.outerDiv_ = null;
+  this.innerImg_ = null;
 };
 
 /**
@@ -498,13 +536,37 @@ Blockly.ScrollbarSvg = function(element, getMetrics, setMetrics,
     // If this scrollbar is part of a pair, then the ScrollbarPair will handle
     // resizing and event registration.
     this.resize();
-    Blockly.bindEvent_(window, 'resize', scrollbar,
-                       function() {scrollbar.resize();});
+    this.onResizeWrapper_ = Blockly.bindEvent_(window, 'resize', scrollbar,
+        function() {scrollbar.resize();});
   }
-  Blockly.bindEvent_(this.svgBackground_, 'mousedown', scrollbar,
-                     scrollbar.onMouseDownBar_);
-  Blockly.bindEvent_(this.svgKnob_, 'mousedown', scrollbar,
-                     scrollbar.onMouseDownKnob_);
+  this.onMouseDownBarWrapper_ = Blockly.bindEvent_(this.svgBackground_,
+      'mousedown', scrollbar, scrollbar.onMouseDownBar_);
+  this.onMouseDownKnobWrapper_ = Blockly.bindEvent_(this.svgKnob_,
+      'mousedown', scrollbar, scrollbar.onMouseDownKnob_);
+};
+
+/**
+ * Destroy this scrollbar.
+ * Unlink from all DOM elements to prevent memory leaks.
+ */
+Blockly.ScrollbarSvg.prototype.destroy = function() {
+  this.onMouseUpKnob_();
+  if (this.onResizeWrapper_) {
+    Blockly.unbindEvent_(this.onResizeWrapper_);
+    this.onResizeWrapper_ = null;
+  }
+  Blockly.unbindEvent_(this.onMouseDownBarWrapper_);
+  this.onMouseDownBarWrapper_ = null;
+  Blockly.unbindEvent_(this.onMouseDownKnobWrapper_);
+  this.onMouseDownKnobWrapper_ = null;
+
+  this.svgGroup_.parentNode.removeChild(this.svgGroup_);
+  this.svgGroup_ = null;
+  this.svgBackground_ = null;
+  this.svgKnob_ = null;
+  this.element_ = null;
+  this.getMetrics_ = null;
+  this.setMetrics_ = null;
 };
 
 /**
