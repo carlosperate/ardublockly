@@ -120,16 +120,16 @@ Blockly.Warning.prototype.createIcon_ = function() {
  * @private
  */
 Blockly.Warning.prototype.textToDom_ = function(text) {
-  var g = Blockly.createSvgElement('text',
+  var paragraph = Blockly.createSvgElement('text',
       {'class': 'blocklyText', y: Blockly.Bubble.BORDER_WIDTH}, null);
   var lines = text.split('\n');
   for (var i = 0; i < lines.length; i++) {
     var tspanElement = Blockly.createSvgElement('tspan',
-        {dy: '1em', x: Blockly.Bubble.BORDER_WIDTH}, g);
+        {dy: '1em', x: Blockly.Bubble.BORDER_WIDTH}, paragraph);
     var textNode = Blockly.svgDoc.createTextNode(lines[i]);
     tspanElement.appendChild(textNode);
   }
-  return g;
+  return paragraph;
 };
 
 /**
@@ -171,9 +171,19 @@ Blockly.Warning.prototype.setVisible_ = function(visible) {
   }
   if (visible) {
     // Create the bubble.
+    var paragraph = this.textToDom_(this.text_);
     this.bubble_ = new Blockly.Bubble(this.block_.workspace.getBubbleCanvas(),
-        this.textToDom_(this.text_), this.iconX_, this.iconY_,
+        paragraph, this.iconX_, this.iconY_,
         this.relativeLeft_, this.relativeTop_, null, null);
+    if (Blockly.RTL) {
+      // Right-align the paragraph.
+      // This cannot be done until the bubble is rendered on screen.
+      var maxWidth = paragraph.getBBox().width;
+      for (var x = 0, textElement; textElement = paragraph.childNodes[x]; x++) {
+        textElement.setAttribute('x', maxWidth -
+            textElement.getComputedTextLength() + Blockly.Bubble.BORDER_WIDTH);
+      }
+    }
     this.updateColour();
   } else {
     // Destroy the bubble.
@@ -292,7 +302,7 @@ Blockly.Warning.prototype.renderIcon = function(titleX) {
     titleX -= diameter;
   }
   this.iconGroup_.setAttribute('transform',
-                               'translate(' + titleX + ', ' + TOP_MARGIN + ')');
+      'translate(' + titleX + ', ' + TOP_MARGIN + ')');
   this.computeIconLocation();
   return diameter;
 };

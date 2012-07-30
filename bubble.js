@@ -47,6 +47,7 @@ Blockly.Bubble = function(canvas, content,
   this.content_ = content;
   canvas.appendChild(this.createDom_(content, bubbleWidth && bubbleHeight));
 
+  this.rendered_ = false;
   this.setAnchorLocation(anchorX, anchorY);
   this.setBubbleLocation(relativeX, relativeY);
   if (!bubbleWidth || !bubbleHeight) {
@@ -55,6 +56,11 @@ Blockly.Bubble = function(canvas, content,
     bubbleHeight = bBox.height + 2 * Blockly.Bubble.BORDER_WIDTH;
   }
   this.setBubbleSize(bubbleWidth, bubbleHeight);
+
+  // Render the bubble.
+  this.positionBubble_();
+  this.renderArrow_();
+  this.rendered_ = true;
 
   Blockly.bindEvent_(this.bubbleBack_, 'mousedown', this,
                      this.bubbleMouseDown_);
@@ -103,6 +109,12 @@ Blockly.Bubble.onMouseUpWrapper_ = null;
  * @private
  */
 Blockly.Bubble.onMouseMoveWrapper_ = null;
+
+/**
+ * Flag to stop incremental rendering during construction.
+ * @private
+ */
+Blockly.Bubble.rendered_ = false;
 
 /**
  * Stop binding to the global mouseup and mousemove events.
@@ -339,7 +351,9 @@ Blockly.Bubble.prototype.promote_ = function() {
 Blockly.Bubble.prototype.setAnchorLocation = function(x, y) {
   this.anchorX_ = x;
   this.anchorY_ = y;
-  this.positionBubble_();
+  if (this.rendered_) {
+    this.positionBubble_();
+  }
 };
 
 /**
@@ -359,7 +373,9 @@ Blockly.Bubble.prototype.getBubbleLocation = function() {
 Blockly.Bubble.prototype.setBubbleLocation = function(x, y) {
   this.relativeLeft_ = x;
   this.relativeTop_ = y;
-  this.positionBubble_();
+  if (this.rendered_) {
+    this.positionBubble_();
+  }
 };
 
 /**
@@ -413,7 +429,9 @@ Blockly.Bubble.prototype.setBubbleSize = function(width, height) {
           (height - doubleBorderWidth) + ')');
     }
   }
-  this.renderArrow_();
+  if (this.rendered_) {
+    this.renderArrow_();
+  }
   // Fire an event to allow the contents to resize.
   Blockly.fireUiEvent(this.bubbleGroup_, 'resize');
 };
