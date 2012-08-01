@@ -20,8 +20,6 @@
 /**
  * @fileoverview Helper functions for generating Python for blocks.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 Blockly.Python = Blockly.Generator.get('Python');
@@ -61,7 +59,8 @@ Blockly.Python.ORDER_BITWISE_SHIFT = 7;     // << >>
 Blockly.Python.ORDER_BITWISE_AND = 8;       // &
 Blockly.Python.ORDER_BITWISE_XOR = 9;       // ^
 Blockly.Python.ORDER_BITWISE_OR = 10;       // |
-Blockly.Python.ORDER_RELATIONAL = 11;       // in, not in, is, is not, <, <=, >, >=, <>, !=, ==
+Blockly.Python.ORDER_RELATIONAL = 11;       // in, not in, is, is not,
+                                            //     <, <=, >, >=, <>, !=, ==
 Blockly.Python.ORDER_LOGICAL_NOT = 12;      // not
 Blockly.Python.ORDER_LOGICAL_AND = 13;      // and
 Blockly.Python.ORDER_LOGICAL_OR = 14;       // or

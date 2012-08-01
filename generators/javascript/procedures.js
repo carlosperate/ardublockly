@@ -20,16 +20,14 @@
 /**
  * @fileoverview Generating JavaScript for procedure blocks.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.procedures_defreturn = function() {
   // Define a procedure with a return value.
-  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+  var funcName = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleText('NAME'), Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.JavaScript.statementToCode(this, 'STACK');
   var returnValue = Blockly.JavaScript.valueToCode(this, 'RETURN',
       Blockly.JavaScript.ORDER_NONE) || '';
@@ -55,8 +53,8 @@ Blockly.JavaScript.procedures_defnoreturn =
 
 Blockly.JavaScript.procedures_callreturn = function() {
   // Call a procedure with a return value.
-  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+  var funcName = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleText('NAME'), Blockly.Procedures.NAME_TYPE);
   var args = [];
   for (var x = 0; x < this.arguments_.length; x++) {
     args[x] = Blockly.JavaScript.valueToCode(this, 'ARG' + x,
@@ -68,8 +66,8 @@ Blockly.JavaScript.procedures_callreturn = function() {
 
 Blockly.JavaScript.procedures_callnoreturn = function() {
   // Call a procedure with no return value.
-  var funcName = Blockly.JavaScript.variableDB_.getName(this.getTitleText('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+  var funcName = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleText('NAME'), Blockly.Procedures.NAME_TYPE);
   var args = [];
   for (var x = 0; x < this.arguments_.length; x++) {
     args[x] = Blockly.JavaScript.valueToCode(this, 'ARG' + x,
@@ -78,4 +76,3 @@ Blockly.JavaScript.procedures_callnoreturn = function() {
   var code = funcName + '(' + args.join(', ') + ');\n';
   return code;
 };
-

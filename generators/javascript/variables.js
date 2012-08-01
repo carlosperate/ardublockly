@@ -20,8 +20,6 @@
 /**
  * @fileoverview Generating JavaScript for variable blocks.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');

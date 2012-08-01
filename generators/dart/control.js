@@ -20,8 +20,6 @@
 /**
  * @fileoverview Generating Dart for control blocks.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 Blockly.Dart = Blockly.Generator.get('Dart');
@@ -71,7 +69,8 @@ Blockly.Dart.controls_for = function() {
   var branch0 = Blockly.Dart.statementToCode(this, 'DO');
   var code;
   if (argument1.match(/^\w+$/)) {
-    code = 'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + argument1 + '; ' + variable0 + '++) {\n' +
+    code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
+        variable0 + ' <= ' + argument1 + '; ' + variable0 + '++) {\n' +
         branch0 + '}\n';
   } else {
     // The end value appears to be more complicated than a simple variable.
@@ -79,7 +78,8 @@ Blockly.Dart.controls_for = function() {
     var endVar = Blockly.Dart.variableDB_.getDistinctName(
         variable0 + '_end', Blockly.Variables.NAME_TYPE);
     code = 'var ' + endVar + ' = ' + argument1 + ';\n' +
-        'for (' + variable0 + ' = ' + argument0 + '; ' + variable0 + ' <= ' + endVar + '; ' + variable0 + '++) {\n' +
+        'for (' + variable0 + ' = ' + argument0 + '; ' +
+        variable0 + ' <= ' + endVar + '; ' + variable0 + '++) {\n' +
         branch0 + '}\n';
   }
   return code;
@@ -96,7 +96,8 @@ Blockly.Dart.controls_forEach = function() {
   var indexVar = Blockly.Dart.variableDB_.getDistinctName(
       variable0 + '_index', Blockly.Variables.NAME_TYPE);
   if (argument0.match(/^\w+$/)) {
-    branch0 = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' + branch0;
+    branch0 = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' +
+        branch0;
     code = 'for (var ' + indexVar + ' in  ' + argument0 + ') {\n' +
         branch0 + '}\n';
   } else {
@@ -104,7 +105,8 @@ Blockly.Dart.controls_forEach = function() {
     // Cache it to a variable to prevent repeated look-ups.
     var listVar = Blockly.Dart.variableDB_.getDistinctName(
         variable0 + '_list', Blockly.Variables.NAME_TYPE);
-    branch0 = '  ' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' + branch0;
+    branch0 = '  ' + variable0 + ' = ' + listVar + '[' + indexVar + '];\n' +
+        branch0;
     code = 'var ' + listVar + ' = ' + argument0 + ';\n' +
         'for (var ' + indexVar + ' in ' + listVar + ') {\n' +
         branch0 + '}\n';

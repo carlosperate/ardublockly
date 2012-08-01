@@ -20,8 +20,6 @@
 /**
  * @fileoverview Generating JavaScript for text blocks.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
@@ -108,7 +106,8 @@ Blockly.JavaScript.text_endString = function() {
 
 Blockly.JavaScript.text_indexOf = function() {
   // Search the text for a substring.
-  var operator = this.getTitleValue('END') == 'FIRST' ? 'indexOf' : 'lastIndexOf';
+  var operator = this.getTitleValue('END') == 'FIRST' ?
+      'indexOf' : 'lastIndexOf';
   var argument0 = Blockly.JavaScript.valueToCode(this, 'FIND',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE',
@@ -148,19 +147,21 @@ Blockly.JavaScript.text_changeCase = function() {
   } else {
     if (!Blockly.JavaScript.definitions_['text_toTitleCase']) {
       // Title case is not a native JavaScript function.  Define one.
-      var functionName = Blockly.JavaScript.variableDB_.getDistinctName('text_toTitleCase',
-          Blockly.Generator.NAME_TYPE);
+      var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
+          'text_toTitleCase', Blockly.Generator.NAME_TYPE);
       Blockly.JavaScript.text_changeCase.toTitleCase = functionName;
       var func = [];
       func.push('function ' + functionName + '(str) {');
       func.push('  return str.replace(/\\S+/g,');
-      func.push('      function(txt) {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});');
+      func.push('      function(txt) {return txt.charAt(0).toUpperCase() + ' +
+                'txt.substr(1).toLowerCase();});');
       func.push('}');
       Blockly.JavaScript.definitions_['text_toTitleCase'] = func.join('\n');
     }
     var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
         Blockly.JavaScript.ORDER_NONE) || '\'\'';
-    code = Blockly.JavaScript.text_changeCase.toTitleCase + '(' + argument0 + ')';
+    code = Blockly.JavaScript.text_changeCase.toTitleCase +
+        '(' + argument0 + ')';
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

@@ -20,8 +20,6 @@
 /**
  * @fileoverview Generating Python for math blocks.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 Blockly.Python = Blockly.Generator.get('Python');
@@ -58,8 +56,8 @@ Blockly.Python.math_change = function() {
       Blockly.Python.ORDER_ADDITIVE) || '0';
   var varName = Blockly.Python.variableDB_.getName(this.getTitleText('VAR'),
       Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' if type(' + varName + ') in (int, float) else 0)' +
-      ' + ' + argument0 + '\n';
+  return varName + ' = (' + varName + ' if type(' + varName +
+      ') in (int, float) else 0) + ' + argument0 + '\n';
 };
 
 Blockly.Python.math_single = function() {
@@ -76,7 +74,8 @@ Blockly.Python.math_single = function() {
       Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
   var operator = this.getTitleValue('OP');
   var code;
-  // First, handle cases which generate values that don't need parentheses wrapping the code.
+  // First, handle cases which generate values that don't need parentheses
+  // wrapping the code.
   switch (operator) {
     case 'ABS':
       code = 'math.fabs(' + argNaked + ')';
@@ -118,7 +117,8 @@ Blockly.Python.math_single = function() {
   if (code) {
     return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   }
-  // Second, handle cases which generate values that may need parentheses wrapping the code.
+  // Second, handle cases which generate values that may need parentheses
+  // wrapping the code.
   switch (operator) {
     case 'ASIN':
       code = 'math.asin(' + argNaked + ') / Math.PI * 180';
@@ -158,13 +158,15 @@ Blockly.Python.math_on_list = function() {
       break;
     case 'AVERAGE':
       if (!Blockly.Python.definitions_['math_mean']) {
-        // This operation exclude null values: math_mean([null,null,1,9]) == 5.0.
+        // This operation exclude null values:
+        //   math_mean([null,null,1,9]) == 5.0.
         var functionName = Blockly.Python.variableDB_.getDistinctName(
             'math_mean', Blockly.Generator.NAME_TYPE);
         Blockly.Python.math_on_list.math_mean = functionName;
         var func = [];
         func.push('def ' + functionName + '(myList):');
-        func.push('  localList = [e for e in myList if type(e) in [int, float]]');
+        func.push('  localList = [e for e in myList ' +
+            'if type(e) in [int, float]]');
         func.push('  if not localList: return');
         func.push('  return float(sum(localList)) / len(localList)');
         Blockly.Python.definitions_['math_mean'] = func.join('\n');
@@ -173,16 +175,19 @@ Blockly.Python.math_on_list = function() {
       break;
     case 'MEDIAN':
       if (!Blockly.Python.definitions_['math_median']) {
-        // This operation exclude null values: math_median([null,null,1,3]) == 2.0.
-        var functionName = Blockly.Python.variableDB_.getDistinctName('math_median',
-            Blockly.Generator.NAME_TYPE);
+        // This operation exclude null values:
+        //   math_median([null,null,1,3]) == 2.0.
+        var functionName = Blockly.Python.variableDB_.getDistinctName(
+            'math_median', Blockly.Generator.NAME_TYPE);
         Blockly.Python.math_on_list.math_median = functionName;
         var func = [];
         func.push('def ' + functionName + '(myList):');
-        func.push('  localList = sorted([e for e in myList if type(e) in [int, float]])');
+        func.push('  localList = sorted([e for e in myList ' +
+            'if type(e) in [int, float]])');
         func.push('  if not localList: return');
         func.push('  if len(localList) % 2 == 0:');
-        func.push('    return (localList[len(localList) / 2 - 1] + localList[len(localList) / 2]) / 2.0');
+        func.push('    return (localList[len(localList) / 2 - 1] + ' +
+            'localList[len(localList) / 2]) / 2.0');
         func.push('  else:');
         func.push('    return localList[(len(localList) - 1) / 2]');
         Blockly.Python.definitions_['math_median'] = func.join('\n');
@@ -194,14 +199,16 @@ Blockly.Python.math_on_list = function() {
         // As a list of numbers can contain more than one mode,
         // the returned result is provided as an array.
         // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
-        var functionName = Blockly.Python.variableDB_.getDistinctName('math_modes',
-            Blockly.Generator.NAME_TYPE);
+        var functionName = Blockly.Python.variableDB_.getDistinctName(
+            'math_modes', Blockly.Generator.NAME_TYPE);
         Blockly.Python.math_on_list.math_modes = functionName;
         var func = [];
         func.push('def ' + functionName + '(some_list):');
         func.push('  modes = []');
-        func.push('  # Using a lists of [item, count] to keep count rather than dict');
-        func.push('  # to avoid "unhashable" errors when the counted item is itself a list or dict.');
+        func.push('  # Using a lists of [item, count] to keep count rather ' +
+                  'than dict');
+        func.push('  # to avoid "unhashable" errors when the counted item is ' +
+                  'itself a list or dict.');
         func.push('  counts = []');
         func.push('  maxCount = 1');
         func.push('  for item in some_list:');
@@ -235,12 +242,15 @@ Blockly.Python.math_on_list = function() {
         func.push('  variance = sum((x - mean) ** 2 for x in numbers) / n');
         func.push('  standard_dev = math.sqrt(variance)');
         func.push('  return standard_dev');
-        Blockly.Python.definitions_['math_standard_deviation'] = func.join('\n');
+        Blockly.Python.definitions_['math_standard_deviation'] =
+            func.join('\n');
       }
-      code = Blockly.Python.math_on_list.math_standard_deviation + '(' + list + ')';
+      code = Blockly.Python.math_on_list.math_standard_deviation +
+          '(' + list + ')';
       break;
     case 'RANDOM':
-      Blockly.Python.definitions_['import_random_choice'] = 'from random import choice';
+      Blockly.Python.definitions_['import_random_choice'] =
+          'from random import choice';
       code = 'choice(' + list + ')';
       break;
     default:

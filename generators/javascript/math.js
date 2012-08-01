@@ -20,8 +20,6 @@
 /**
  * @fileoverview Generating JavaScript for math blocks.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
@@ -180,7 +178,8 @@ Blockly.JavaScript.math_on_list = function() {
         Blockly.JavaScript.math_on_list.math_mean = functionName;
         var func = [];
         func.push('function ' + functionName + '(myList) {');
-        func.push('  return myList.reduce(function(x, y) {return x + y;}) / myList.length;');
+        func.push('  return myList.reduce(function(x, y) {return x + y;}) / ' +
+                  'myList.length;');
         func.push('}');
         Blockly.JavaScript.definitions_['math_mean'] = func.join('\n');
       }
@@ -196,11 +195,13 @@ Blockly.JavaScript.math_on_list = function() {
         Blockly.JavaScript.math_on_list.math_median = functionName;
         var func = [];
         func.push('function ' + functionName + '(myList) {');
-        func.push('  var localList = myList.filter(function (x) {return typeof x == \'number\';});');
+        func.push('  var localList = myList.filter(function (x) ' +
+                  '{return typeof x == \'number\';});');
         func.push('  if (!localList.length) return null;');
         func.push('  localList.sort(function(a, b) {return b - a;});');
         func.push('  if (localList.length % 2 == 0) {');
-        func.push('    return (localList[localList.length / 2 - 1] + localList[localList.length / 2]) / 2;');
+        func.push('    return (localList[localList.length / 2 - 1] + ' +
+                  'localList[localList.length / 2]) / 2;');
         func.push('  } else {');
         func.push('    return localList[(localList.length - 1) / 2];');
         func.push('  }');
@@ -263,7 +264,8 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('function ' + functionName + '(numbers) {');
         func.push('  var n = numbers.length;');
         func.push('  if (!n) return null;');
-        func.push('  var mean = numbers.reduce(function(x, y) {return x + y;}) / n;');
+        func.push('  var mean = numbers.reduce(function(x, y) ' +
+                  '{return x + y;}) / n;');
         func.push('  var variance = 0;');
         func.push('  for (var j = 0; j < n; j++) {');
         func.push('    variance += Math.pow(numbers[j] - mean, 2);');
@@ -272,11 +274,13 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('  standard_dev = Math.sqrt(variance);');
         func.push('  return standard_dev;');
         func.push('}');
-        Blockly.JavaScript.definitions_['math_standard_deviation'] = func.join('\n');
+        Blockly.JavaScript.definitions_['math_standard_deviation'] =
+            func.join('\n');
       }
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
           Blockly.JavaScript.ORDER_NONE) || '[]';
-      code = Blockly.JavaScript.math_on_list.math_standard_deviation + '(' + list + ')';
+      code = Blockly.JavaScript.math_on_list.math_standard_deviation +
+          '(' + list + ')';
       break;
     case 'RANDOM':
       if (!Blockly.JavaScript.definitions_['math_random_item']) {
@@ -292,7 +296,8 @@ Blockly.JavaScript.math_on_list = function() {
       }
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
           Blockly.JavaScript.ORDER_NONE) || '[]';
-      code = Blockly.JavaScript.math_on_list.math_random_item + '(' + list + ')';
+      code = Blockly.JavaScript.math_on_list.math_random_item +
+          '(' + list + ')';
       break;
     default:
       throw 'Unknown operator.';
@@ -308,7 +313,8 @@ Blockly.JavaScript.math_constrain = function() {
       Blockly.JavaScript.ORDER_COMMA) || '0';
   var argument2 = Blockly.JavaScript.valueToCode(this, 'HIGH',
       Blockly.JavaScript.ORDER_COMMA) || '0';
-  var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' + argument2 + ')';
+  var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' +
+      argument2 + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
@@ -344,7 +350,8 @@ Blockly.JavaScript.math_random_int = function() {
     func.push('}');
     Blockly.JavaScript.definitions_['math_random_int'] = func.join('\n');
   }
-  code = Blockly.JavaScript.math_random_int.random_function + '(' + argument0 + ', ' + argument1 + ')';
+  code = Blockly.JavaScript.math_random_int.random_function +
+      '(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
