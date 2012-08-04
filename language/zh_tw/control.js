@@ -20,8 +20,6 @@
 /**
  * @fileoverview Control blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 if (!Blockly.Language) Blockly.Language = {};
@@ -33,10 +31,15 @@ Blockly.Language.controls_for = {
   init: function() {
     this.setColour(120);
     //this.appendTitle(Blockly.LANG_CONTROLS_FOR_TITLE_COUNT);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH, Blockly.LOCAL_VARIABLE, 'VAR').setText(Blockly.LANG_CONTROLS_FOR_INPUT_VAR);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM, Blockly.INPUT_VALUE, 'FROM', Number);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_TO, Blockly.INPUT_VALUE, 'TO', Number);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH,
+        Blockly.LOCAL_VARIABLE, 'VAR').setText(
+        Blockly.LANG_CONTROLS_FOR_INPUT_VAR);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM,
+        Blockly.INPUT_VALUE, 'FROM', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_TO,
+        Blockly.INPUT_VALUE, 'TO', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_DO,
+        Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);

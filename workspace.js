@@ -250,7 +250,9 @@ Blockly.Workspace.prototype.fireChangeEvent = function() {
     window.clearTimeout(this.fireChangeEventPid_);
   }
   var canvas = this.svgBlockCanvas_;
-  this.fireChangeEventPid_ = window.setTimeout(function() {
-      Blockly.fireUiEvent(canvas, 'blocklyWorkspaceChange');
-    }, 0);
+  if (canvas) {
+    this.fireChangeEventPid_ = window.setTimeout(function() {
+        Blockly.fireUiEvent(canvas, 'blocklyWorkspaceChange');
+      }, 0);
+  }
 };

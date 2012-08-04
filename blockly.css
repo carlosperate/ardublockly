@@ -132,16 +132,9 @@
   stroke-width: 1px;
   stroke: #ccc;
 }
-.blocklyMutatorMark {
-  cursor: default;
-  fill: #ccc;
-}
 .blocklyIconGroup:hover>.blocklyIconShield {
   fill: #00f;
   stroke: #fff;
-}
-.blocklyIconGroup:hover>.blocklyMutatorMark {
-  fill: #fff;
 }
 .blocklyIconMark {
   cursor: default !important;

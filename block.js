@@ -38,8 +38,6 @@ Blockly.Block = function(workspace, prototypeName) {
   this.inputList = [];
   this.inputsInline = false;
   this.rendered = false;
-  this.comment = null;
-  this.warning = null;
   this.collapsed = false;
   this.disabled = false;
   this.editable = workspace.editable;
@@ -82,6 +80,24 @@ Blockly.Block = function(workspace, prototypeName) {
  * @private
  */
 Blockly.Block.prototype.svg_ = null;
+
+/**
+ * Block's mutator icon (if any).
+ * @type {Blockly.Mutator}
+ */
+Blockly.Block.prototype.mutator = null;
+
+/**
+ * Block's comment icon (if any).
+ * @type {Blockly.Comment}
+ */
+Blockly.Block.prototype.comment = null;
+
+/**
+ * Block's warning icon (if any).
+ * @type {Blockly.Warning}
+ */
+Blockly.Block.prototype.warning = null;
 
 /**
  * Create and initialize the SVG representation of the block.
@@ -220,6 +236,7 @@ Blockly.Block.prototype.destroy = function(gentle) {
   //This block is now at the top of the workspace.
   // Remove this block from the workspace's list of top-most blocks.
   this.workspace.removeTopBlock(this);
+  this.workspace = null;
 
   // Just deleting this block from the DOM would result in a memory leak as
   // well as corruption of the connection database.  Therefore we must
@@ -242,14 +259,14 @@ Blockly.Block.prototype.destroy = function(gentle) {
   for (var x = 0; x < this.titleRow.length; x++) {
     this.titleRow[x].destroy();
   }
+  if (this.mutator) {
+    this.mutator.destroy();
+  }
   if (this.comment) {
     this.comment.destroy();
   }
   if (this.warning) {
     this.warning.destroy();
-  }
-  if (this.mutator) {
-    this.mutator.destroy();
   }
   // Destroy all inputs and their labels.
   for (var x = 0; x < this.inputList.length; x++) {
@@ -284,16 +301,18 @@ Blockly.Block.prototype.destroy = function(gentle) {
  * @return {!Object} Object with .x and .y properties.
  */
 Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
-  var element = this.svg_.getRootNode();
   var x = 0;
   var y = 0;
-  do {
-    // Loop through this block and every parent.
-    var xy = Blockly.getRelativeXY_(element);
-    x += xy.x;
-    y += xy.y;
-    element = element.parentNode;
-  } while (element && element != this.workspace.getCanvas());
+  if (this.svg_) {
+    var element = this.svg_.getRootNode();
+    do {
+      // Loop through this block and every parent.
+      var xy = Blockly.getRelativeXY_(element);
+      x += xy.x;
+      y += xy.y;
+      element = element.parentNode;
+    } while (element && element != this.workspace.getCanvas());
+  }
   return {x: x, y: y};
 };
 
@@ -351,6 +370,11 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
     this.draggedBubbles_ = [];
     var descendants = this.getDescendants();
     for (var x = 0, descendant; descendant = descendants[x]; x++) {
+      if (descendant.mutator) {
+        var data = descendant.mutator.getIconLocation();
+        data.bubble = descendant.mutator;
+        this.draggedBubbles_.push(data);
+      }
       if (descendant.comment) {
         var data = descendant.comment.getIconLocation();
         data.bubble = descendant.comment;
@@ -399,12 +423,12 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     }
   } else if (this.workspace.trashcan && this.workspace.trashcan.isOpen) {
     Blockly.playAudio('delete');
-    Blockly.selected.destroy(false);
     var trashcan = this.workspace.trashcan;
     var closure = function() {
       Blockly.Trashcan.close(trashcan);
     };
     window.setTimeout(closure, 100);
+    Blockly.selected.destroy(false);
     // Dropping a block on the trash can will usually cause the workspace to
     // resize to contain the newly positioned block.  Force a second resize now
     // that the block has been deleted.
@@ -610,7 +634,7 @@ Blockly.Block.prototype.getConnections_ = function(all) {
 
 /**
  * Move the connections for this block and all blocks attached under it.
- * Also update any attached comment.
+ * Also update any attached bubbles.
  * @param {number} dx Horizontal offset from current location.
  * @param {number} dy Vertical offset from current location.
  * @private
@@ -624,6 +648,9 @@ Blockly.Block.prototype.moveConnections_ = function(dx, dy) {
   var myConnections = this.getConnections_(false);
   for (var x = 0; x < myConnections.length; x++) {
     myConnections[x].moveBy(dx, dy);
+  }
+  if (this.mutator) {
+    this.mutator.computeIconLocation();
   }
   if (this.comment) {
     this.comment.computeIconLocation();
@@ -866,7 +893,9 @@ Blockly.Block.prototype.setParent = function(newParent) {
     newParent.childBlocks_.push(this);
 
     var oldXY = this.getRelativeToSurfaceXY();
-    newParent.svg_.getRootNode().appendChild(this.svg_.getRootNode());
+    if (newParent.svg_ && this.svg_) {
+      newParent.svg_.getRootNode().appendChild(this.svg_.getRootNode());
+    }
     var newXY = this.getRelativeToSurfaceXY();
     // Move the connections to match the child's new position.
     this.moveConnections_(newXY.x - oldXY.x, newXY.y - oldXY.y);
@@ -906,6 +935,9 @@ Blockly.Block.prototype.setColour = function(colourHue) {
   this.colourHue_ = colourHue;
   if (this.svg_) {
     this.svg_.updateColour();
+  }
+  if (this.mutator) {
+    this.mutator.updateColour();
   }
   if (this.comment) {
     this.comment.updateColour();
@@ -1184,6 +1216,9 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
     }
   }
 
+  if (collapsed && this.mutator) {
+    this.mutator.setPinned(false);
+  }
   if (collapsed && this.comment) {
     this.comment.setPinned(false);
   }
@@ -1350,7 +1385,6 @@ Blockly.Block.prototype.setInputVariable = function(name, text) {
 Blockly.Block.prototype.setMutator = function(mutator) {
   if (this.mutator && this.mutator !== mutator) {
     this.mutator.destroy();
-    this.mutator = null;
   }
   if (mutator) {
     mutator.block_ = this;
@@ -1392,7 +1426,6 @@ Blockly.Block.prototype.setCommentText = function(text) {
   } else {
     if (this.comment) {
       this.comment.destroy();
-      this.comment = null;
       changedState = true;
     }
   }
@@ -1423,7 +1456,6 @@ Blockly.Block.prototype.setWarningText = function(text) {
   } else {
     if (this.warning) {
       this.warning.destroy();
-      this.warning = null;
       changedState = true;
     }
   }

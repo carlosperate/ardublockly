@@ -1,5 +1,10 @@
 // Text strings (factored out to make multi-language easier).
 
+/**
+ * Due to the frequency of long strings, the 80-column wrap rule need not apply
+ * to message files.
+ */
+
 // Context menus.
 Blockly.MSG_DUPLICATE_BLOCK = 'Duplicate';
 Blockly.MSG_REMOVE_COMMENT = 'Remove Comment';
@@ -24,12 +29,6 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 // Toolbox.
 Blockly.MSG_VARIABLE_CATEGORY = 'Variables';
 Blockly.MSG_PROCEDURE_CATEGORY = 'Procedures';
-
-// Mutator dialog.
-Blockly.MSG_MUTATOR_TOOLTIP = 'Edit this block';
-Blockly.MSG_MUTATOR_HEADER = 'Block Editor';
-Blockly.MSG_MUTATOR_CHANGE = 'Change';
-Blockly.MSG_MUTATOR_CANCEL = 'Cancel';
 
 // Control Blocks
 Blockly.LANG_CATEGORY_CONTROLS = 'Control';
@@ -90,7 +89,8 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'of loop';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'break out';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'continue with next iteration';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\ncontinue with the next iteration.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\n' +
+    'continue with the next iteration.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
     'This block may only\n' +
     'be used within a loop.';
@@ -135,7 +135,8 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = 'Return the sum of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = 'Return the difference of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Return the product of the two numbers.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Return the quotient of the two numbers.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\nthe power of the second number.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\n' +
+    'the power of the second number.';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
@@ -201,11 +202,13 @@ Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_numb
 Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM = 'random integer';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'from';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'to';
-Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n specified limits, inclusive.';
+Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1 = 'Return a random integer between the two\n' +
+    'specified limits, inclusive.';
 
 Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
-Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n0.0 (inclusive) and 1.0 (exclusive).';
+Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP_1 = 'Return a random fraction between\n' +
+    '0.0 (inclusive) and 1.0 (exclusive).';
 
 // Text Blocks.
 Blockly.LANG_CATEGORY_TEXT = 'Text';

@@ -177,9 +177,6 @@ Blockly.createDom_ = function(container) {
   if (Blockly.Toolbox && Blockly.editable) {
     svg.appendChild(Blockly.Toolbox.createDom());
   }
-  if (Blockly.Mutator && Blockly.editable) {
-    svg.appendChild(Blockly.Mutator.createDom());
-  }
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
   if (Blockly.editable) {
     svg.appendChild(Blockly.FieldDropdown.createDom());
@@ -217,7 +214,6 @@ Blockly.init_ = function() {
 
   if (Blockly.editable) {
     Blockly.Toolbox && Blockly.Toolbox.init();
-    Blockly.Mutator && Blockly.Mutator.init();
   }
 
   Blockly.mainWorkspace.addTrashcan(Blockly.getMainWorkspaceMetrics);

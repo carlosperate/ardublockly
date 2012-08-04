@@ -142,4 +142,3 @@ def gen_compressed():
 if __name__ == '__main__':
   gen_uncompressed()
   gen_compressed()
-  

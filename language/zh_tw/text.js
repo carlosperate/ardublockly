@@ -20,8 +20,6 @@
 /**
  * @fileoverview Text blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 if (!Blockly.Language) Blockly.Language = {};
@@ -34,8 +32,10 @@ Blockly.Language.text_charAt = {
     this.setColour(160);
     //this.appendTitle(Blockly.LANG_TEXT_CHARAT_TITLE_LETTER);
     this.setOutput(true, String);
-    this.appendInput(Blockly.LANG_TEXT_CHARAT_INPUT_AT, Blockly.INPUT_VALUE, 'AT', Number);
-    this.appendInput(Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT, Blockly.INPUT_VALUE, 'VALUE', String);
+    this.appendInput(Blockly.LANG_TEXT_CHARAT_INPUT_AT,
+        Blockly.INPUT_VALUE, 'AT', Number);
+    this.appendInput(Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT,
+        Blockly.INPUT_VALUE, 'VALUE', String);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_TEXT_CHARAT_TOOLTIP_1);
   }

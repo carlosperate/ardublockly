@@ -424,10 +424,10 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
         /* HACK:
          The current versions of Chrome (16.0) and Safari (5.1) with a common
          root of WebKit 535 has a size reporting bug where the height of a
-         block is 5 pixels too large.  If WebKit browsers start under-sizing
+         block is 3 pixels too large.  If WebKit browsers start under-sizing
          connections to other blocks, then delete this entire hack.
         */
-        bBox.height -= 5;
+        bBox.height -= 3;
       }
       // Subtract one from the height due to the shadow.
       input.renderHeight = Math.max(input.renderHeight, bBox.height - 1);

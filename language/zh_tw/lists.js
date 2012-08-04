@@ -20,8 +20,6 @@
 /**
  * @fileoverview List blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 if (!Blockly.Language) Blockly.Language = {};
@@ -34,8 +32,10 @@ Blockly.Language.lists_getIndex = {
     this.setColour(210);
     this.setOutput(true, null);
     //this.appendTitle(Blockly.LANG_LISTS_GET_INDEX_TITLE);
-    this.appendInput(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST, Blockly.INPUT_VALUE, 'VALUE', Array);
-    this.appendInput(Blockly.LANG_LISTS_GET_INDEX_INPUT_AT, Blockly.INPUT_VALUE, 'AT', Number);
+    this.appendInput(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST,
+        Blockly.INPUT_VALUE, 'VALUE', Array);
+    this.appendInput(Blockly.LANG_LISTS_GET_INDEX_INPUT_AT,
+        Blockly.INPUT_VALUE, 'AT', Number);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1);
   }
@@ -48,9 +48,12 @@ Blockly.Language.lists_setIndex = {
   init: function() {
     this.setColour(210);
     //this.appendTitle(Blockly.LANG_LISTS_SET_INDEX_TITLE);
-    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST, Blockly.INPUT_VALUE, 'LIST', Array);
-    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT, Blockly.INPUT_VALUE, 'AT', Number);
-    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO, Blockly.INPUT_VALUE, 'TO', null);
+    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST,
+        Blockly.INPUT_VALUE, 'LIST', Array);
+    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT,
+        Blockly.INPUT_VALUE, 'AT', Number);
+    this.appendInput(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO,
+        Blockly.INPUT_VALUE, 'TO', null);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);

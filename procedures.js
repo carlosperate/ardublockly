@@ -172,7 +172,11 @@ Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
     for (var x = 0; x < procedureList.length; x++) {
       var block = new Blockly.Block(workspace, templateName);
       block.setTitleText(procedureList[x][0], 'NAME');
-      block.setProcedureParameters(procedureList[x][1], null);
+      var tempIds = [];
+      for (var t = 0; t < procedureList[x][1].length; t++) {
+        tempIds[t] = 'ARG' + t;
+      }
+      block.setProcedureParameters(procedureList[x][1], tempIds);
       block.initSvg();
       blocks.push(block);
       gaps.push(margin * 2);
@@ -237,14 +241,13 @@ Blockly.Procedures.destroyCallers = function(name, workspace) {
  * callers.
  * @param {string} name Name of edited procedure definition.
  * @param {!Blockly.Workspace} workspace The workspace to delete callers from.
- * @param {!Array.<string>} parameters Array of parameter names.
- * @param {!Array.<?number>} oldMap Array of indices of new parameters in old
- *     parameters.
+ * @param {!Array.<string>} paramNames Array of parameter names.
+ * @param {!Array.<string>} paramIds Array of unique parameter IDs.
  */
 Blockly.Procedures.mutateCallers = function(name, workspace,
-                                            parameters, oldMap) {
+                                            paramNames, paramIds) {
   var callers = Blockly.Procedures.getCallers(name, workspace);
   for (var x = 0; x < callers.length; x++) {
-    callers[x].setProcedureParameters(parameters, oldMap);
+    callers[x].setProcedureParameters(paramNames, paramIds);
   }
 };

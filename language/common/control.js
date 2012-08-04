@@ -20,8 +20,6 @@
 /**
  * @fileoverview Control blocks for Blockly.
  * @author fraser@google.com (Neil Fraser)
- * Due to the frequency of long strings, the 80-column wrap rule need not apply
- * to language files.
  */
 
 if (!Blockly.Language) Blockly.Language = {};
@@ -36,7 +34,8 @@ Blockly.Language.controls_if = {
     this.appendInput(this.MSG_THEN, Blockly.NEXT_STATEMENT, 'DO0');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setMutator(new Blockly.Mutator(['controls_if_elseif', 'controls_if_else']));
+    this.setMutator(new Blockly.Mutator(['controls_if_elseif',
+                                         'controls_if_else']));
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
@@ -83,40 +82,36 @@ Blockly.Language.controls_if = {
     }
   },
   decompose: function(workspace) {
-    var ifBlock = new Blockly.Block(workspace, 'controls_if_if');
-    ifBlock.initSvg();
-    var connection = ifBlock.inputList[0];
+    var containerBlock = new Blockly.Block(workspace, 'controls_if_if');
+    containerBlock.initSvg();
+    var connection = containerBlock.inputList[0];
     for (var x = 1; x <= this.elseifCount_; x++) {
       var elseifBlock = new Blockly.Block(workspace, 'controls_if_elseif');
       elseifBlock.initSvg();
-      // Store a pointer to any connected blocks.
-      elseifBlock.valueInput_ = this.getInput('IF' + x).targetConnection;
-      elseifBlock.statementInput_ = this.getInput('DO' + x).targetConnection;
       connection.connect(elseifBlock.previousConnection);
       connection = elseifBlock.nextConnection;
     }
     if (this.elseCount_) {
       var elseBlock = new Blockly.Block(workspace, 'controls_if_else');
       elseBlock.initSvg();
-      elseBlock.statementInput_ = this.getInput('ELSE').targetConnection;
       connection.connect(elseBlock.previousConnection);
     }
-    return ifBlock;
+    return containerBlock;
   },
-  compose: function(ifBlock) {
-    // Disconnect all the elseif input blocks and destroy the inputs.
-    for (var x = 1; x <= this.elseifCount_; x++) {
-      this.removeInput('IF' + x);
-      this.removeInput('DO' + x);
-    }
+  compose: function(containerBlock) {
     // Disconnect the else input blocks and destroy the inputs.
     if (this.elseCount_) {
       this.removeInput('ELSE');
     }
-    this.elseifCount_ = 0;
     this.elseCount_ = 0;
+    // Disconnect all the elseif input blocks and destroy the inputs.
+    for (var x = this.elseifCount_; x > 0; x--) {
+      this.removeInput('IF' + x);
+      this.removeInput('DO' + x);
+    }
+    this.elseifCount_ = 0;
     // Rebuild the block's optional inputs.
-    var clauseBlock = ifBlock.getInputTargetBlock('STACK');
+    var clauseBlock = containerBlock.getInputTargetBlock('STACK');
     while (clauseBlock) {
       switch (clauseBlock.type) {
         case 'controls_if_elseif':
@@ -135,11 +130,36 @@ Blockly.Language.controls_if = {
           break;
         case 'controls_if_else':
           this.elseCount_++;
-          this.appendInput(this.MSG_ELSE, Blockly.NEXT_STATEMENT, 'ELSE');
+          var elseInput = this.appendInput(this.MSG_ELSE,
+              Blockly.NEXT_STATEMENT, 'ELSE');
           // Reconnect any child blocks.
           if (clauseBlock.statementInput_) {
-            this.inputList[x].connect(clauseBlock.statementInput_);
+            elseInput.connect(clauseBlock.statementInput_);
           }
+          break;
+        default:
+          throw 'Unknown block type.';
+      }
+      clauseBlock = clauseBlock.nextConnection &&
+          clauseBlock.nextConnection.targetBlock();
+    }
+  },
+  saveConnections: function(containerBlock) {
+    // Store a pointer to any connected child blocks.
+    var clauseBlock = containerBlock.getInputTargetBlock('STACK');
+    var x = 1;
+    while (clauseBlock) {
+      switch (clauseBlock.type) {
+        case 'controls_if_elseif':
+          var inputIf = this.getInput('IF' + x);
+          var inputDo = this.getInput('DO' + x);
+          clauseBlock.valueInput_ = inputIf && inputIf.targetConnection;
+          clauseBlock.statementInput_ = inputDo && inputDo.targetConnection;
+          x++;
+          break;
+        case 'controls_if_else':
+          var inputDo = this.getInput('ELSE');
+          clauseBlock.statementInput_ = inputDo && inputDo.targetConnection;
           break;
         default:
           throw 'Unknown block type.';
@@ -194,7 +214,8 @@ Blockly.Language.controls_whileUntil = {
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendTitle(dropdown, 'MODE');
     this.appendInput('', Blockly.INPUT_VALUE, 'BOOL', Boolean);
-    this.appendInput(Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO,
+                     Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -222,10 +243,15 @@ Blockly.Language.controls_for = {
   init: function() {
     this.setColour(120);
     this.appendTitle(Blockly.LANG_CONTROLS_FOR_TITLE_COUNT);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH, Blockly.LOCAL_VARIABLE, 'VAR').setText(Blockly.LANG_CONTROLS_FOR_INPUT_VAR);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM, Blockly.INPUT_VALUE, 'FROM', Number);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_TO, Blockly.INPUT_VALUE, 'TO', Number);
-    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH,
+        Blockly.LOCAL_VARIABLE, 'VAR').setText(
+        Blockly.LANG_CONTROLS_FOR_INPUT_VAR);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM,
+        Blockly.INPUT_VALUE, 'FROM', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_TO,
+        Blockly.INPUT_VALUE, 'TO', Number);
+    this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_DO,
+        Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setInputsInline(true);
@@ -253,9 +279,13 @@ Blockly.Language.controls_forEach = {
   init: function() {
     this.setColour(120);
     this.appendTitle(Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH);
-    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM, Blockly.LOCAL_VARIABLE, 'VAR').setText(Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR);
-    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST, Blockly.INPUT_VALUE, 'LIST', Array);
-    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_DO, Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM,
+        Blockly.LOCAL_VARIABLE, 'VAR').setText(
+        Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR);
+    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST,
+        Blockly.INPUT_VALUE, 'LIST', Array);
+    this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_DO,
+        Blockly.NEXT_STATEMENT, 'DO');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -293,6 +323,10 @@ Blockly.Language.controls_flow_statements = {
     });
   },
   onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
     var legal = false;
     // Is the block nested in a control statement?
     var block = this;
