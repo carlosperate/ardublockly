@@ -269,7 +269,11 @@ Blockly.Mutator.prototype.setVisible_ = function(visible) {
     }
     // When the mutator's workspace changes, update the source block.
     Blockly.bindEvent_(this.workspace_.getCanvas(), 'blocklyWorkspaceChange',
-        this.block_, function() {thisObj.block_.compose(thisObj.rootBlock_)});
+        this.block_, function() {
+          if (thisObj.rootBlock_.workspace == thisObj.workspace_) {
+            thisObj.block_.compose(thisObj.rootBlock_)
+          }
+        });
   } else {
     // Destroy the bubble.
     this.svgDialog_ = null;
