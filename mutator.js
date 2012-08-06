@@ -73,18 +73,6 @@ Blockly.Mutator.prototype.relativeLeft_ = -180;
 Blockly.Mutator.prototype.relativeTop_ = -230;
 
 /**
- * Width of bubble.
- * @private
- */
-Blockly.Mutator.prototype.width_ = 300;
-
-/**
- * Height of bubble.
- * @private
- */
-Blockly.Mutator.prototype.height_ = 180;
-
-/**
  * Is the mutator always visible?
  * @private
  */
@@ -178,19 +166,35 @@ Blockly.Mutator.prototype.createEditor_ = function() {
  * Resize the text area accordingly.
  */
 Blockly.Mutator.prototype.resizeBubble_ = function() {
-  var size = this.bubble_.getBubbleSize();
   var doubleBorderWidth = 2 * Blockly.Bubble.BORDER_WIDTH;
-  // Record some layout information for Blockly.Mutator.getWorkspaceMetrics_.
-  this.workspaceWidth_ = size.width - doubleBorderWidth;
-  this.workspaceHeight_ = size.height - doubleBorderWidth;
-  this.svgDialog_.setAttribute('width', this.workspaceWidth_);
-  this.svgDialog_.setAttribute('height', this.workspaceHeight_);
+  var workspaceSize = this.workspace_.getCanvas().getBBox();
+  var flyoutMetrics = this.flyout_.getMetrics();
+  var width;
+  if (Blockly.RTL) {
+    width = -workspaceSize.x;
+  } else {
+    width = workspaceSize.width + workspaceSize.x;
+  }
+  var height = Math.max(workspaceSize.height + doubleBorderWidth * 3,
+                        flyoutMetrics.contentHeight);
+  width += doubleBorderWidth * 3;
+  // Only resize if the size difference is significant.  Eliminates shuddering.
+  if (Math.abs(this.workspaceWidth_ - width) > doubleBorderWidth ||
+      Math.abs(this.workspaceHeight_ - height) > doubleBorderWidth) {
+    // Record some layout information for getFlyoutMetrics_.
+    this.workspaceWidth_ = width;
+    this.workspaceHeight_ = height;
+    // Resize the bubble.
+    this.bubble_.setBubbleSize(width + doubleBorderWidth,
+                               height + doubleBorderWidth);
+    this.svgDialog_.setAttribute('width', this.workspaceWidth_);
+    this.svgDialog_.setAttribute('height', this.workspaceHeight_);
+  }
 
   if (Blockly.RTL) {
     // Scroll the workspace to always left-align.
     var translation = 'translate(' + this.workspaceWidth_ + ',0)';
     this.workspace_.getCanvas().setAttribute('transform', translation);
-    this.workspace_.getBubbleCanvas().setAttribute('transform', translation);
   }
 };
 
@@ -231,20 +235,17 @@ Blockly.Mutator.prototype.setVisible_ = function(visible) {
     // No change.
     return;
   }
-  // Save the bubble stats before the visibility switch.
+  // Save the bubble location before the visibility switch.
   var relativeXY = this.getBubbleLocation();
-  var size = this.getBubbleSize();
   if (visible) {
     // Create the bubble.
     this.bubble_ = new Blockly.Bubble(this.block_.workspace.getBubbleCanvas(),
         this.createEditor_(), this.iconX_, this.iconY_,
-        this.relativeLeft_, this.relativeTop_, this.width_, this.height_);
+        this.relativeLeft_, this.relativeTop_, null, null);
     var thisObj = this;
     this.flyout_.init(this.workspace_,
-                      function() {return thisObj.getFlyoutMetrics_()});
+                      function() {return thisObj.getFlyoutMetrics_()}, false);
     this.flyout_.show(this.quarkNames_);
-    this.bubble_.registerResizeEvent(this, this.resizeBubble_);
-    this.updateColour();
 
     this.rootBlock_ = this.block_.decompose(this.workspace_);
     var blocks = this.rootBlock_.getDescendants();
@@ -267,13 +268,16 @@ Blockly.Mutator.prototype.setVisible_ = function(visible) {
           'blocklyWorkspaceChange', this.block_,
           function() {thisObj.block_.saveConnections(thisObj.rootBlock_)});
     }
+    this.resizeBubble_();
     // When the mutator's workspace changes, update the source block.
     Blockly.bindEvent_(this.workspace_.getCanvas(), 'blocklyWorkspaceChange',
         this.block_, function() {
           if (thisObj.rootBlock_.workspace == thisObj.workspace_) {
+            thisObj.resizeBubble_();
             thisObj.block_.compose(thisObj.rootBlock_)
           }
         });
+    this.updateColour();
   } else {
     // Destroy the bubble.
     this.svgDialog_ = null;
@@ -285,14 +289,15 @@ Blockly.Mutator.prototype.setVisible_ = function(visible) {
     this.rootBlock_ = null;
     this.bubble_.destroy();
     this.bubble_ = null;
+    this.workspaceWidth_ = 0;
+    this.workspaceHeight_ = 0;
     if (this.sourceListener_) {
       Blockly.unbindEvent_(this.sourceListener_);
       this.sourceListener_ = null;
     }
   }
-  // Restore the bubble stats after the visibility switch.
+  // Restore the bubble location after the visibility switch.
   this.setBubbleLocation(relativeXY.x, relativeXY.y);
-  this.setBubbleSize(size.width, size.height);
 };
 
 /**
@@ -371,32 +376,6 @@ Blockly.Mutator.prototype.setBubbleLocation = function(x, y) {
   } else {
     this.relativeLeft_ = x;
     this.relativeTop_ = y;
-  }
-};
-
-/**
- * Get the dimensions of this mutator's bubble.
- * @return {!Object} Object with width and height properties.
- */
-Blockly.Mutator.prototype.getBubbleSize = function() {
-  if (this.isVisible_()) {
-    return this.bubble_.getBubbleSize();
-  } else {
-    return {width: this.width_, height: this.height_};
-  }
-};
-
-/**
- * Size this mutator's bubble.
- * @param {number} width Width of the bubble.
- * @param {number} height Height of the bubble.
- */
-Blockly.Mutator.prototype.setBubbleSize = function(width, height) {
-  if (this.isVisible_()) {
-    this.bubble_.setBubbleSize(width, height);
-  } else {
-    this.width_ = width;
-    this.height_ = height;
   }
 };
 

@@ -117,7 +117,7 @@ Blockly.Toolbox.setMetrics = function(yRatio) {
  */
 Blockly.Toolbox.init = function() {
   Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace,
-                               Blockly.getMainWorkspaceMetrics);
+                               Blockly.getMainWorkspaceMetrics, true);
   Blockly.Toolbox.languageTree = Blockly.Toolbox.buildTree_();
   Blockly.Toolbox.redraw();
 

@@ -251,7 +251,6 @@ Blockly.Language.procedures_callnoreturn = {
       // Reset the quarks (a mutator is about to open).
       this.quarkConnections_ = {};
       this.quarkArguments_ = null;
-      console.log('Clearing quarks.');
       return;
     }
     if (paramIds.length != paramNames.length) {
@@ -264,7 +263,6 @@ Blockly.Language.procedures_callnoreturn = {
         // No change to the parameters, allow quarkConnections_ to be
         // populated with the existing connections.
         this.quarkArguments_ = paramIds;
-        console.log('Priming the quarks.');
       }
     }
     // Update the quarkConnections_ with existing connections.
@@ -365,8 +363,8 @@ Blockly.Language.procedures_callreturn = {
     this.setOutput(true, null);
     this.setTooltip(Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP_1);
     this.arguments_ = [];
-    this.quarkMap_ = null;
-    this.quarkList_ = null;
+    this.quarkConnections_ = null;
+    this.quarkArguments_ = null;
   },
   getProcedureCall: Blockly.Language.procedures_callnoreturn.getProcedureCall,
   renameProcedure: Blockly.Language.procedures_callnoreturn.renameProcedure,

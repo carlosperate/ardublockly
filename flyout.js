@@ -146,18 +146,22 @@ Blockly.Flyout.prototype.setMetrics = function(yRatio) {
  *     blocks.
  * @param {!Function} workspaceMetrics Function which returns size information
  *     regarding the flyout's target workspace.
+ * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  */
-Blockly.Flyout.prototype.init = function(workspace, workspaceMetrics) {
+Blockly.Flyout.prototype.init =
+    function(workspace, workspaceMetrics, withScrollbar) {
   this.targetWorkspace_ = workspace;
   this.targetWorkspaceMetrics_ = workspaceMetrics;
   // Add scrollbars.
   this.width_ = 0;
   this.height_ = 0;
   var flyout = this;
-  this.scrollbar_ = new Blockly.Scrollbar(this.svgOptions_,
-      function() {return flyout.getMetrics();},
-      function(ratio) {return flyout.setMetrics(ratio);},
-      false, false);
+  if (withScrollbar) {
+    this.scrollbar_ = new Blockly.Scrollbar(this.svgOptions_,
+        function() {return flyout.getMetrics();},
+        function(ratio) {return flyout.setMetrics(ratio);},
+        false, false);
+  }
 
   // List of background buttons that lurk behind each block to catch clicks
   // landing in the blocks' lakes and bays.
