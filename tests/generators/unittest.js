@@ -33,6 +33,9 @@ Blockly.Language.unittest_main = {
     this.appendInput('', Blockly.NEXT_STATEMENT, 'DO');
     this.setTooltip('Executes the enclosed unit tests,\n' +
                     'then prints a summary.');
+  },
+  getVars: function() {
+    return ['unittestResults'];
   }
 };
 

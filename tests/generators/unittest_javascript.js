@@ -26,6 +26,8 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.unittest_main = function() {
   // Container for unit tests.
+  var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
+      Blockly.Variables.NAME_TYPE);
   if (!Blockly.JavaScript.definitions_['unittest_report']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
         'testReport', Blockly.Generator.NAME_TYPE);
@@ -36,20 +38,20 @@ Blockly.JavaScript.unittest_main = function() {
     func.push('  var report = [];');
     func.push('  var summary = [];');
     func.push('  var fails = 0;');
-    func.push('  for (var x = 0; x < unittestResults.length; x++) {');
-    func.push('    if (unittestResults[x][0]) {');
+    func.push('  for (var x = 0; x < ' + resultsVar + '.length; x++) {');
+    func.push('    if (' + resultsVar + '[x][0]) {');
     func.push('      summary.push(".");');
     func.push('    } else {');
     func.push('      summary.push("F");');
     func.push('      fails++;');
     func.push('      report.push("");');
-    func.push('      report.push("FAIL: " + unittestResults[x][2]);');
-    func.push('      report.push(unittestResults[x][1]);');
+    func.push('      report.push("FAIL: " + ' + resultsVar + '[x][2]);');
+    func.push('      report.push(' + resultsVar + '[x][1]);');
     func.push('    }');
     func.push('  }');
     func.push('  report.unshift(summary.join(""));');
     func.push('  report.push("");');
-    func.push('  report.push("Ran " + unittestResults.length + " test.");');
+    func.push('  report.push("Ran " + ' + resultsVar + '.length + " test.");');
     func.push('  report.push("");');
     func.push('  if (fails) {');
     func.push('    report.push("FAILED (failures=" + fails + ")");');
@@ -62,7 +64,7 @@ Blockly.JavaScript.unittest_main = function() {
     Blockly.JavaScript.definitions_['unittest_report'] = func.join('\n');
   }
   // Setup global to hold test results.
-  var code = 'unittestResults = [];\n';
+  var code = resultsVar + ' = [];\n';
   // Run tests (unindented).
   code += Blockly.JavaScript.statementToCode(this, 'DO')
       .replace(/^  /, '').replace(/\n  /g, '\n');
@@ -71,7 +73,7 @@ Blockly.JavaScript.unittest_main = function() {
   code += 'var ' + reportVar + ' = ' +
       Blockly.JavaScript.unittest_main.report + '();\n';
   // Destroy results.
-  code += 'delete unittestResults;\n';
+  code += resultsVar + ' = null;\n';
   // Send the report to the console (that's where errors will go anyway).
   code += 'console.log(' + reportVar + ');\n';
   return code;
@@ -79,6 +81,8 @@ Blockly.JavaScript.unittest_main = function() {
 
 Blockly.JavaScript.unittest_assertequals = function() {
   // Asserts that a value equals another value.
+  var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
+      Blockly.Variables.NAME_TYPE);
   var message = Blockly.JavaScript.quote_(this.getTitleText('MESSAGE'));
   if (!Blockly.JavaScript.definitions_['unittest_assertequals']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
@@ -87,13 +91,13 @@ Blockly.JavaScript.unittest_assertequals = function() {
     var func = [];
     func.push('function ' + functionName + '(actual, expected, message) {');
     func.push('  // Asserts that a value equals another value.');
-    func.push('  if (!unittestResults) {');
+    func.push('  if (!' + resultsVar + ') {');
     func.push('    throw "Orphaned assert equals: ' + message + '";');
     func.push('  }');
     func.push('  if (actual == expected) {');
-    func.push('    unittestResults.push([true, "OK", message]);');
+    func.push('    ' + resultsVar + '.push([true, "OK", message]);');
     func.push('  } else {');
-    func.push('    unittestResults.push([false, ' +
+    func.push('    ' + resultsVar + '.push([false, ' +
         '"Expected: " + expected + "\\nActual: " + actual, message]);');
     func.push('  }');
     func.push('}');
@@ -110,6 +114,8 @@ Blockly.JavaScript.unittest_assertequals = function() {
 
 Blockly.JavaScript.unittest_asserttrue = function() {
   // Asserts that a value is true.
+  var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
+      Blockly.Variables.NAME_TYPE);
   var message = Blockly.JavaScript.quote_(this.getTitleText('MESSAGE'));
   if (!Blockly.JavaScript.definitions_['unittest_asserttrue']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
@@ -118,13 +124,13 @@ Blockly.JavaScript.unittest_asserttrue = function() {
     var func = [];
     func.push('function ' + functionName + '(actual, message) {');
     func.push('  // Asserts that a value is true.');
-    func.push('  if (!unittestResults) {');
+    func.push('  if (!' + resultsVar + ') {');
     func.push('    throw "Orphaned assert true: ' + message + '";');
     func.push('  }');
     func.push('  if (actual == true) {');
-    func.push('    unittestResults.push([true, "OK", message]);');
+    func.push('    ' + resultsVar + '.push([true, "OK", message]);');
     func.push('  } else {');
-    func.push('    unittestResults.push([false, ' +
+    func.push('    ' + resultsVar + '.push([false, ' +
               '"Expected: true\\nActual: " + actual, message]);');
     func.push('  }');
     func.push('}');
@@ -139,6 +145,8 @@ Blockly.JavaScript.unittest_asserttrue = function() {
 
 Blockly.JavaScript.unittest_assertfalse = function() {
   // Asserts that a value is false.
+  var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
+      Blockly.Variables.NAME_TYPE);
   var message = Blockly.JavaScript.quote_(this.getTitleText('MESSAGE'));
   if (!Blockly.JavaScript.definitions_['unittest_assertfalse']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
@@ -147,13 +155,13 @@ Blockly.JavaScript.unittest_assertfalse = function() {
     var func = [];
     func.push('function ' + functionName + '(actual, message) {');
     func.push('  // Asserts that a value is false.');
-    func.push('  if (!unittestResults) {');
+    func.push('  if (!' + resultsVar + ') {');
     func.push('    throw "Orphaned assert false: ' + message + '";');
     func.push('  }');
     func.push('  if (actual == false) {');
-    func.push('    unittestResults.push([true, "OK", message]);');
+    func.push('    ' + resultsVar + '.push([true, "OK", message]);');
     func.push('  } else {');
-    func.push('    unittestResults.push([false, ' +
+    func.push('    ' + resultsVar + '.push([false, ' +
               '"Expected: false\\nActual: " + actual, message]);');
     func.push('  }');
     func.push('}');
@@ -168,6 +176,8 @@ Blockly.JavaScript.unittest_assertfalse = function() {
 
 Blockly.JavaScript.unittest_fail = function() {
   // Always assert an error.
+  var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
+      Blockly.Variables.NAME_TYPE);
   var message = Blockly.JavaScript.quote_(this.getTitleText('MESSAGE'));
   if (!Blockly.JavaScript.definitions_['unittest_fail']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
@@ -176,10 +186,10 @@ Blockly.JavaScript.unittest_fail = function() {
     var func = [];
     func.push('function ' + functionName + '(message) {');
     func.push('  // Always assert an error.');
-    func.push('  if (!unittestResults) {');
+    func.push('  if (!' + resultsVar + ') {');
     func.push('    throw "Orphaned assert fail: ' + message + '";');
     func.push('  }');
-    func.push('  unittestResults.push([false, "Fail.", message]);');
+    func.push('  ' + resultsVar + '.push([false, "Fail.", message]);');
     func.push('}');
     func.push('');
     Blockly.JavaScript.definitions_['unittest_fail'] = func.join('\n');
