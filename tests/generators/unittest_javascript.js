@@ -58,6 +58,7 @@ Blockly.JavaScript.unittest_main = function() {
     func.push('  }');
     func.push('  return report.join("\\n");');
     func.push('}');
+    func.push('');
     Blockly.JavaScript.definitions_['unittest_report'] = func.join('\n');
   }
   // Setup global to hold test results.
@@ -96,6 +97,7 @@ Blockly.JavaScript.unittest_assertequals = function() {
         '"Expected: " + expected + "\\nActual: " + actual, message]);');
     func.push('  }');
     func.push('}');
+    func.push('');
     Blockly.JavaScript.definitions_['unittest_assertequals'] = func.join('\n');
   }
   var actual = Blockly.JavaScript.valueToCode(this, 'ACTUAL',
@@ -117,7 +119,7 @@ Blockly.JavaScript.unittest_asserttrue = function() {
     func.push('function ' + functionName + '(actual, message) {');
     func.push('  // Asserts that a value is true.');
     func.push('  if (!unittestResults) {');
-    func.push('    throw "Orphaned assert equals: ' + message + '";');
+    func.push('    throw "Orphaned assert true: ' + message + '";');
     func.push('  }');
     func.push('  if (actual == true) {');
     func.push('    unittestResults.push([true, "OK", message]);');
@@ -126,6 +128,7 @@ Blockly.JavaScript.unittest_asserttrue = function() {
               '"Expected: true\\nActual: " + actual, message]);');
     func.push('  }');
     func.push('}');
+    func.push('');
     Blockly.JavaScript.definitions_['unittest_asserttrue'] = func.join('\n');
   }
   var actual = Blockly.JavaScript.valueToCode(this, 'ACTUAL',
@@ -145,7 +148,7 @@ Blockly.JavaScript.unittest_assertfalse = function() {
     func.push('function ' + functionName + '(actual, message) {');
     func.push('  // Asserts that a value is false.');
     func.push('  if (!unittestResults) {');
-    func.push('    throw "Orphaned assert equals: ' + message + '";');
+    func.push('    throw "Orphaned assert false: ' + message + '";');
     func.push('  }');
     func.push('  if (actual == false) {');
     func.push('    unittestResults.push([true, "OK", message]);');
@@ -154,6 +157,7 @@ Blockly.JavaScript.unittest_assertfalse = function() {
               '"Expected: false\\nActual: " + actual, message]);');
     func.push('  }');
     func.push('}');
+    func.push('');
     Blockly.JavaScript.definitions_['unittest_assertfalse'] = func.join('\n');
   }
   var actual = Blockly.JavaScript.valueToCode(this, 'ACTUAL',
@@ -173,10 +177,11 @@ Blockly.JavaScript.unittest_fail = function() {
     func.push('function ' + functionName + '(message) {');
     func.push('  // Always assert an error.');
     func.push('  if (!unittestResults) {');
-    func.push('    throw "Orphaned assert equals: ' + message + '";');
+    func.push('    throw "Orphaned assert fail: ' + message + '";');
     func.push('  }');
     func.push('  unittestResults.push([false, "Fail.", message]);');
     func.push('}');
+    func.push('');
     Blockly.JavaScript.definitions_['unittest_fail'] = func.join('\n');
   }
   return Blockly.JavaScript.unittest_fail.assert + '(' + message + ');\n';
