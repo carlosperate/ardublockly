@@ -84,7 +84,7 @@ Blockly.Python.unittest_assertequals = function() {
         'assertEquals', Blockly.Generator.NAME_TYPE);
     Blockly.Python.unittest_assertequals.assert = functionName;
     var func = [];
-    func.push('def ' + functionName + '(actual, expected, message)');
+    func.push('def ' + functionName + '(actual, expected, message):');
     func.push('  # Asserts that a value equals another value.');
     func.push('  if ' + resultsVar + ' == None:');
     func.push('    raise Exception("Orphaned assert equals: ' + message + '")');
