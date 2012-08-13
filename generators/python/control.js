@@ -98,13 +98,13 @@ Blockly.Python.controls_for = function() {
     if (!argument0.match(/^\w+$/) && !argument0.match(/^-?\d+$/)) {
       var startVar = Blockly.Python.variableDB_.getDistinctName(
           variable0 + '_start', Blockly.Variables.NAME_TYPE);
-      code += 'var ' + startVar + ' = ' + argument0 + ';\n';
+      code += startVar + ' = ' + argument0 + '\n';
     }
     var endVar = argument1;
     if (!argument1.match(/^\w+$/) && !argument1.match(/^-?\d+$/)) {
       var endVar = Blockly.Python.variableDB_.getDistinctName(
           variable0 + '_end', Blockly.Variables.NAME_TYPE);
-      code += 'var ' + endVar + ' = ' + argument1 + ';\n';
+      code += endVar + ' = ' + argument1 + '\n';
     }
     range = '(' + startVar + ' <= ' + endVar + ') and ' +
         'range(' + startVar + ', ' + endVar + ' + 1) or ' +
