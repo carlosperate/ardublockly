@@ -457,8 +457,9 @@ Blockly.Block.prototype.showHelp_ = function() {
  */
 Blockly.Block.prototype.duplicate_ = function() {
   // Create a duplicate via XML.
-  var xml = Blockly.Xml.blockToDom_(this);
-  var newBlock = Blockly.Xml.domToBlock_(this.workspace, xml);
+  var xmlBlock = Blockly.Xml.blockToDom_(this);
+  Blockly.Xml.deleteNext(xmlBlock);
+  var newBlock = Blockly.Xml.domToBlock_(this.workspace, xmlBlock);
   // Move the duplicate next to the old block.
   var xy = this.getRelativeToSurfaceXY();
   if (Blockly.RTL) {
@@ -468,12 +469,6 @@ Blockly.Block.prototype.duplicate_ = function() {
   }
   xy.y += Blockly.SNAP_RADIUS * 2;
   newBlock.moveBy(xy.x, xy.y);
-  // When a block in a stack of statements is duplicated, all blocks below the
-  // original block are also duplicated.  Maybe this is desired, maybe not.
-  // For now, delete these extra blocks.
-  if (newBlock.nextConnection && newBlock.nextConnection.targetConnection) {
-    newBlock.nextConnection.targetBlock().destroy();
-  }
 };
 
 /**
