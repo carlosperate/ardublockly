@@ -36,25 +36,25 @@ Blockly.Dart.unittest_main = function() {
     func.push('String ' + functionName + '() {');
     func.push('  // Create test report.');
     func.push('  List report = [];');
-    func.push('  List summary = [];');
+    func.push('  StringBuffer summary = new StringBuffer();');
     func.push('  int fails = 0;');
-    func.push('  for (var x = 0; x < ' + resultsVar + '.length; x++) {');
+    func.push('  for (int x = 0; x < ' + resultsVar + '.length; x++) {');
     func.push('    if (' + resultsVar + '[x][0]) {');
     func.push('      summary.add(".");');
     func.push('    } else {');
     func.push('      summary.add("F");');
     func.push('      fails++;');
     func.push('      report.add("");');
-    func.push('      report.add("FAIL: " + ' + resultsVar + '[x][2]);');
+    func.push('      report.add("FAIL: ${' + resultsVar + '[x][2]}");');
     func.push('      report.add(' + resultsVar + '[x][1]);');
     func.push('    }');
     func.push('  }');
-    func.push('  report.insertRange(0, 1, Strings.join(summary, ""));');
+    func.push('  report.insertRange(0, 1, summary.toString());');
     func.push('  report.add("");');
-    func.push('  report.add("Ran " + ' + resultsVar + '.length + " test.");');
+    func.push('  report.add("Ran ${' + resultsVar + '.length} tests.");');
     func.push('  report.add("");');
-    func.push('  if (fails == 0) {');
-    func.push('    report.add("FAILED (failures=" + fails + ")");');
+    func.push('  if (fails != 0) {');
+    func.push('    report.add("FAILED (failures=$fails)");');
     func.push('  } else {');
     func.push('    report.add("OK");');
     func.push('  }');
@@ -99,7 +99,7 @@ Blockly.Dart.unittest_assertequals = function() {
     func.push('    ' + resultsVar + '.add([true, "OK", message]);');
     func.push('  } else {');
     func.push('    ' + resultsVar + '.add([false, ' +
-        '"Expected: " + expected + "\\nActual: " + actual, message]);');
+        '"Expected: $expected\\nActual: $actual", message]);');
     func.push('  }');
     func.push('}');
     func.push('');
@@ -132,7 +132,7 @@ Blockly.Dart.unittest_asserttrue = function() {
     func.push('    ' + resultsVar + '.add([true, "OK", message]);');
     func.push('  } else {');
     func.push('    ' + resultsVar + '.add([false, ' +
-              '"Expected: true\\nActual: " + actual, message]);');
+              '"Expected: true\\nActual: $actual", message]);');
     func.push('  }');
     func.push('}');
     func.push('');
@@ -163,7 +163,7 @@ Blockly.Dart.unittest_assertfalse = function() {
     func.push('    ' + resultsVar + '.add([true, "OK", message]);');
     func.push('  } else {');
     func.push('    ' + resultsVar + '.add([false, ' +
-              '"Expected: false\\nActual: " + actual, message]);');
+              '"Expected: false\\nActual: $actual", message]);');
     func.push('  }');
     func.push('}');
     func.push('');
