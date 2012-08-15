@@ -1,0 +1,44 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="unittest_main" x="0" y="1">
+    <statement name="DO">
+      <block type="procedures_callnoreturn">
+        <mutation name="test empty"></mutation>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="248" y="42">
+    <mutation></mutation>
+    <title name="NAME">test empty</title>
+    <statement name="STACK">
+      <block type="unittest_assertfalse" inline="false">
+        <title name="MESSAGE">not empty</title>
+        <value name="ACTUAL">
+          <block type="lists_isEmpty" inline="false">
+            <value name="VALUE">
+              <block type="lists_create_with" inline="false">
+                <mutation items="1"></mutation>
+                <value name="ADD0">
+                  <block type="text">
+                    <title name="TEXT">cat</title>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_asserttrue" inline="false">
+            <title name="MESSAGE">empty</title>
+            <value name="ACTUAL">
+              <block type="lists_isEmpty" inline="false">
+                <value name="VALUE">
+                  <block type="lists_create_empty"></block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

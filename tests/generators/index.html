@@ -79,7 +79,7 @@ function loadXml() {
     }
   }
   var xmlText = fetchFile(url);
-  if (xmlText) {
+  if (xmlText !== null) {
     fromXml(xmlText);
   }
 }
@@ -180,6 +180,11 @@ h1 {
     <select id="testUrl">
       <option value="control.xml">Control</option>
       <option value="logic.xml">Logic</option>
+      <option value="math.xml">Math</option>
+      <option value="text.xml">Text</option>
+      <option value="lists.xml">Lists</option>
+      <option value="variables.xml">Variables</option>
+      <option value="procedures.xml">Procedures</option>
       <option value="">Other...</option>
     </select>
     <input type="button" value="Load" onclick="loadXml()">
@@ -193,7 +198,7 @@ h1 {
     <input type="button" value="Python" onclick="toPython()">
   </p>
 </td></tr><tr><td height="99%">
-  <textarea id="importExport" readonly="readonly"></textarea>
+  <textarea id="importExport" readonly="readonly" wrap="off"></textarea>
 </td></tr></table>
 </body>
 </html>

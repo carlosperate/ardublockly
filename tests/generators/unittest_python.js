@@ -52,7 +52,7 @@ Blockly.Python.unittest_main = function() {
     func.push('  report.append("Ran %d test." % len(' + resultsVar + '))');
     func.push('  report.append("")');
     func.push('  if fails:');
-    func.push('    report.append("FAILED (failures=" + fails + ")")');
+    func.push('    report.append("FAILED (failures=%d)" % fails)');
     func.push('  else:');
     func.push('    report.append("OK")');
     func.push('  return "\\n".join(report)');
@@ -92,7 +92,7 @@ Blockly.Python.unittest_assertequals = function() {
     func.push('    ' + resultsVar + '.append((True, "OK", message))');
     func.push('  else:');
     func.push('    ' + resultsVar + '.append((False, ' +
-        '"Expected: " + expected + "\\nActual: " + actual, message))');
+        '"Expected: %s\\nActual: %s" % (expected, actual), message))');
     func.push('');
     Blockly.Python.definitions_['unittest_assertequals'] = func.join('\n');
   }
@@ -122,7 +122,7 @@ Blockly.Python.unittest_asserttrue = function() {
     func.push('    ' + resultsVar + '.append((True, "OK", message))');
     func.push('  else:');
     func.push('    ' + resultsVar + '.append((False, ' +
-              '"Expected: true\\nActual: " + actual, message))');
+              '"Expected: true\\nActual: %s" % actual, message))');
     func.push('');
     Blockly.Python.definitions_['unittest_asserttrue'] = func.join('\n');
   }
@@ -150,7 +150,7 @@ Blockly.Python.unittest_assertfalse = function() {
     func.push('    ' + resultsVar + '.append((True, "OK", message))');
     func.push('  else:');
     func.push('    ' + resultsVar + '.append((False, ' +
-              '"Expected: false\\nActual: " + actual, message))');
+              '"Expected: false\\nActual: %s" % actual, message))');
     func.push('');
     Blockly.Python.definitions_['unittest_assertfalse'] = func.join('\n');
   }
