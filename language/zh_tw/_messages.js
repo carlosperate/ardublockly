@@ -287,7 +287,7 @@ Blockly.LANG_TEXT_PRINT_TOOLTIP_1 = 'Print the specified text, number or other v
 
 Blockly.LANG_TEXT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
 Blockly.LANG_TEXT_PROMPT_TITLE_PROMPT_FOR = '輸入';
-Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE = '附提示字串';
+Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE = '並顯示提示訊息';
 Blockly.LANG_TEXT_PROMPT_TOOLTIP_1 = 'Prompt for user input with the specified text.';
 Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = '文字';
 Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = '數字';
