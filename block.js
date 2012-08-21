@@ -1295,6 +1295,51 @@ Blockly.Block.prototype.appendInput = function(label, type, name, opt_check) {
 };
 
 /**
+ * Move an input to a different location on this block.
+ * @param {string} name The name of the input.
+ * @param {number} index New index.
+ */
+Blockly.Block.prototype.moveInputBefore = function(name, refName) {
+  if (name == refName) {
+    throw 'Can\'t move "' + name + '" to itself.';
+  }
+  // Find both inputs.
+  var inputIndex = -1;
+  var refIndex = -1;
+  for (var x = 0, input; input = this.inputList[x]; x++) {
+    if (input.name == name) {
+      inputIndex = x;
+      if (refIndex != -1) {
+        break;
+      }
+    } else if (input.name == refName) {
+      refIndex = x;
+      if (inputIndex != -1) {
+        break;
+      }
+    }
+  }
+  if (inputIndex == -1) {
+    throw 'Named input "' + name + '" not found.';
+  }
+  if (refIndex == -1) {
+    throw 'Reference input "' + name + '" not found.';
+  }
+  // Remove input.
+  this.inputList.splice(inputIndex, 1);
+  if (inputIndex < refIndex) {
+    refIndex--;
+  }
+  // Reinsert input.
+  this.inputList.splice(refIndex, 0, input);
+  if (this.rendered) {
+    this.render();
+    // Moving an input will cause the block to change shape.
+    this.bumpNeighbours_();
+  }
+};
+
+/**
  * Remove an input from this block.
  * @param {string} name The name of the input.
  */
