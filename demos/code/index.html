@@ -163,7 +163,7 @@ function save() {
 /**
  * Load blocks from local file.
  */
-function load() {
+function load(event) {
   var files = event.target.files;
   // Only allow uploading one file.
   if (files.length != 1) {
