@@ -39,20 +39,20 @@ Maze.STEP_SPEED = 150;
 
 /**
  * The maze's map is a 2D array of numbers.
- * 0: Empty space.
- * 1: Wall.
+ * 0: Wall.
+ * 1: Open road.
  * 2: Starting square.
  * 3. Finish square.
  */
 Maze.MAP = [
-  [1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 0, 0, 1, 0, 1, 3, 1],
-  [1, 0, 0, 1, 0, 0, 0, 1],
-  [1, 0, 1, 1, 0, 1, 1, 1],
-  [1, 0, 0, 0, 0, 0, 0, 1],
-  [1, 1, 0, 1, 1, 1, 0, 1],
-  [1, 2, 0, 0, 0, 1, 0, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1]];
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 0, 1, 0, 3, 0],
+  [0, 1, 1, 0, 1, 1, 1, 0],
+  [0, 1, 0, 0, 1, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 1, 0],
+  [0, 0, 1, 0, 0, 0, 1, 0],
+  [0, 2, 1, 1, 1, 0, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]];
 
 /**
  * Constants for cardinal directions.
@@ -169,8 +169,8 @@ Maze.resetButtonClick = function() {
  */
 Maze.randomize = function() {
   // Clear the existing start and finish locations.
-  Maze.MAP[Maze.start_.y][Maze.start_.x] = 0;
-  Maze.MAP[Maze.finish_.y][Maze.finish_.x] = 0;
+  Maze.MAP[Maze.start_.y][Maze.start_.x] = 1;
+  Maze.MAP[Maze.finish_.y][Maze.finish_.x] = 1;
 
   /**
    * Find a random point that's a dead-end on the maze.
@@ -183,19 +183,19 @@ Maze.randomize = function() {
     while (true) {
       var x = Math.floor(Math.random() * (Maze.MAP[0].length - 2)) + 1;
       var y = Math.floor(Math.random() * (Maze.MAP.length - 2) + 1);
-      if (Maze.MAP[y][x] == 0) {
+      if (Maze.MAP[y][x] == 1) {
         // Count the walls.
         var walls = 0;
-        if (Maze.MAP[y + 1][x] == 1) {
+        if (Maze.MAP[y + 1][x] == 0) {
           walls++;
         }
-        if (Maze.MAP[y - 1][x] == 1) {
+        if (Maze.MAP[y - 1][x] == 0) {
           walls++;
         }
-        if (Maze.MAP[y][x + 1] == 1) {
+        if (Maze.MAP[y][x + 1] == 0) {
           walls++;
         }
-        if (Maze.MAP[y][x - 1] == 1) {
+        if (Maze.MAP[y][x - 1] == 0) {
           walls++;
         }
         if (walls == 3) {
@@ -545,5 +545,5 @@ Maze.isWall = function(direction) {
   } else if (effectiveDirection == Maze.WEST) {
     square = Maze.MAP[Maze.pegmanY][Maze.pegmanX - 1];
   }
-  return square == 1;
+  return square == 0;
 };
