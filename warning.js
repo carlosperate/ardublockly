@@ -180,8 +180,8 @@ Blockly.Warning.prototype.setVisible_ = function(visible) {
       // This cannot be done until the bubble is rendered on screen.
       var maxWidth = paragraph.getBBox().width;
       for (var x = 0, textElement; textElement = paragraph.childNodes[x]; x++) {
-        textElement.setAttribute('x', maxWidth -
-            textElement.getComputedTextLength() + Blockly.Bubble.BORDER_WIDTH);
+        textElement.setAttribute('text-anchor', 'end');
+        textElement.setAttribute('x', maxWidth + Blockly.Bubble.BORDER_WIDTH);
       }
     }
     this.updateColour();

@@ -127,8 +127,8 @@ Blockly.ContextMenu.show = function(anchorX, anchorY, options) {
     for (var x = 0, gElement;
          gElement = Blockly.ContextMenu.svgOptions.childNodes[x]; x++) {
       var textElement = gElement.lastChild;
-      textElement.setAttribute('x', maxWidth -
-          textElement.getComputedTextLength() - Blockly.ContextMenu.X_PADDING);
+      textElement.setAttribute('text-anchor', 'end');
+      textElement.setAttribute('x', maxWidth - Blockly.ContextMenu.X_PADDING);
     }
   }
   Blockly.ContextMenu.svgBackground.setAttribute('height',
@@ -145,8 +145,6 @@ Blockly.ContextMenu.show = function(anchorX, anchorY, options) {
     anchorY -= node.offsetTop;
     node = node.offsetParent;
   }
-  var width = Blockly.svg.parentNode.offsetWidth;
-  var height = Blockly.svg.parentNode.offsetHeight;
   if (anchorY + bBox.height > svgSize.height) {
     // Falling off the bottom of the screen; shift the menu up.
     anchorY -= bBox.height - 10;
