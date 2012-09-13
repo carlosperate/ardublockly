@@ -76,6 +76,9 @@
   font-size: 11pt;
   fill: #fff;
 }
+.blocklyNonEditableText>text {
+  pointer-events: none;
+}
 .blocklyNonEditableText>rect,
 .blocklyEditableText>rect {
   fill: #fff;

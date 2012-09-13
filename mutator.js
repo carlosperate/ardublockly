@@ -232,6 +232,9 @@ Blockly.Mutator.prototype.isVisible_ = function() {
  */
 Blockly.Mutator.prototype.setVisible_ = function(visible) {
   if (visible == this.isVisible_()) {
+    if (this.bubble_) {
+      this.bubble_.setDisabled(!this.isPinned_);
+    }
     // No change.
     return;
   }
@@ -277,6 +280,7 @@ Blockly.Mutator.prototype.setVisible_ = function(visible) {
             thisObj.block_.compose(thisObj.rootBlock_)
           }
         });
+    this.bubble_.setDisabled(!this.isPinned_);
     this.updateColour();
   } else {
     // Destroy the bubble.

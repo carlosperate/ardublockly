@@ -203,6 +203,9 @@ Blockly.Comment.prototype.isVisible_ = function() {
  */
 Blockly.Comment.prototype.setVisible_ = function(visible) {
   if (visible == this.isVisible_()) {
+    if (this.bubble_) {
+      this.bubble_.setDisabled(!this.isPinned_);
+    }
     // No change.
     return;
   }
@@ -216,6 +219,7 @@ Blockly.Comment.prototype.setVisible_ = function(visible) {
         this.createEditor_(), this.iconX_, this.iconY_,
         this.relativeLeft_, this.relativeTop_, this.width_, this.height_);
     this.bubble_.registerResizeEvent(this, this.resizeBubble_);
+    this.bubble_.setDisabled(!this.isPinned_);
     this.updateColour();
     this.text_ = null;
   } else {

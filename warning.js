@@ -166,6 +166,9 @@ Blockly.Warning.prototype.isVisible_ = function() {
  */
 Blockly.Warning.prototype.setVisible_ = function(visible) {
   if (visible == this.isVisible_()) {
+    if (this.bubble_) {
+      this.bubble_.setDisabled(!this.isPinned_);
+    }
     // No change.
     return;
   }
@@ -184,6 +187,7 @@ Blockly.Warning.prototype.setVisible_ = function(visible) {
         textElement.setAttribute('x', maxWidth + Blockly.Bubble.BORDER_WIDTH);
       }
     }
+    this.bubble_.setDisabled(!this.isPinned_);
     this.updateColour();
   } else {
     // Destroy the bubble.
