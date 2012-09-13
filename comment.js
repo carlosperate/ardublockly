@@ -184,7 +184,9 @@ Blockly.Comment.prototype.isPinned = function() {
 Blockly.Comment.prototype.setPinned = function(pinned) {
   this.isPinned_ = pinned;
   this.iconMark_.style.fill = pinned ? '#fff' : '';
-  this.setVisible_(pinned);
+  if (this.bubble_) {
+    this.bubble_.setDisabled(!this.isPinned_);
+  }
 };
 
 /**
@@ -203,9 +205,6 @@ Blockly.Comment.prototype.isVisible_ = function() {
  */
 Blockly.Comment.prototype.setVisible_ = function(visible) {
   if (visible == this.isVisible_()) {
-    if (this.bubble_) {
-      this.bubble_.setDisabled(!this.isPinned_);
-    }
     // No change.
     return;
   }
