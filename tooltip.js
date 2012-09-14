@@ -232,13 +232,12 @@ Blockly.Tooltip.show_ = function() {
     anchorX += Blockly.Tooltip.OFFSET_X;
   }
   var anchorY = Blockly.Tooltip.lastY + Blockly.Tooltip.OFFSET_Y;
-  // Measure the offset of the SVG.
-  var node = Blockly.svg.parentNode;
-  while (node) {
-    anchorX -= node.offsetLeft;
-    anchorY -= node.offsetTop;
-    node = node.offsetParent;
-  }
+
+  // Convert the mouse coordinates into SVG coordinates.
+  var xy = Blockly.mouseToSvg(anchorX, anchorY);
+  anchorX = xy.x;
+  anchorY = xy.y;
+
   var svgSize = Blockly.svgSize();
   if (anchorY + bBox.height > svgSize.height) {
     // Falling off the bottom of the screen; shift the tooltip up.
@@ -249,7 +248,8 @@ Blockly.Tooltip.show_ = function() {
     anchorX = Math.max(Blockly.Tooltip.MARGINS, anchorX);
   } else {
     if (anchorX + bBox.width > svgSize.width - 2 * Blockly.Tooltip.MARGINS) {
-      // Falling off the right edge of the screen; clamp the tooltip on the edge.
+      // Falling off the right edge of the screen;
+      // clamp the tooltip on the edge.
       anchorX = svgSize.width - bBox.width - 2 * Blockly.Tooltip.MARGINS;
     }
   }
