@@ -319,7 +319,7 @@ Blockly.onKeyDown_ = function(e) {
         (!Blockly.Mutator || !Blockly.Mutator.isOpen)) {
       Blockly.hideChaff();
       Blockly.playAudio('delete');
-      Blockly.selected.destroy(true);
+      Blockly.selected.destroy(true, true);
     }
     // Stop the browser from going back to the previous page.
     e.preventDefault();
@@ -334,7 +334,7 @@ Blockly.onKeyDown_ = function(e) {
         // 'x' for cut.
         Blockly.copy_(Blockly.selected);
         Blockly.playAudio('delete');
-        Blockly.selected.destroy(true);
+        Blockly.selected.destroy(true, true);
       }
     }
     if (e.keyCode == 86) {

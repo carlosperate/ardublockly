@@ -148,6 +148,50 @@ Blockly.BlockSvg.prototype.destroy = function() {
 };
 
 /**
+ * Deeply clone the current block, then animate its destruction.
+ */
+Blockly.BlockSvg.prototype.animatedDestroy = function() {
+  var xy = Blockly.getAbsoluteXY_(this.svgGroup_);
+  clone = this.svgGroup_.cloneNode(true);
+  clone.translateX_ = xy.x;
+  clone.translateY_ = xy.y;
+  clone.setAttribute('transform',
+      'translate(' + clone.translateX_ + ',' + clone.translateY_ + ')');
+  Blockly.svg.appendChild(clone);
+  clone.bBox_ = clone.getBBox();
+  // Start the animation.
+  clone.startDate_ = new Date();
+  Blockly.BlockSvg.animateDestroyStep_(clone);
+};
+
+/**
+ * Animate a cloned block and eventually destroy it.
+ * @param {!Element} clone SVG element to animate and destroy.
+ */
+Blockly.BlockSvg.animateDestroyStep_ = function(clone) {
+  var ms = (new Date()) - clone.startDate_;
+  var percent = ms / 150;
+  if (percent > 1) {
+    clone.parentNode.removeChild(clone);
+  } else {
+    var translate =
+        (clone.translateX_ + clone.bBox_.width / 2 * percent) + ', ' +
+        (clone.translateY_ + clone.bBox_.height * percent);
+    var rotate = (30 * percent) + ', ' +
+        (clone.bBox_.width / 2 * percent) + ', ' +
+        (clone.bBox_.height / 2 * percent);
+    var scale = 1 - percent;
+    clone.setAttribute('transform', 'translate(' + translate + ')' +
+        ' scale(' + scale + ')'+
+        ' rotate(' + rotate + ')');
+    var closure = function() {
+      Blockly.BlockSvg.animateDestroyStep_(clone);
+    }
+    window.setTimeout(closure, 10);
+  }
+};
+
+/**
  * Change the colour of a block.
  */
 Blockly.BlockSvg.prototype.updateColour = function() {

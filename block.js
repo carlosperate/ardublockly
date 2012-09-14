@@ -206,8 +206,9 @@ Blockly.Block.prototype.unselect = function() {
  * @param {boolean} gentle If gentle, then try to heal any gap by connecting
  *     the next statement with the previous statement.  Otherwise, destroy all
  *     children of this block.
+ * @param {boolean} animate If true, show a destroy animation.
  */
-Blockly.Block.prototype.destroy = function(gentle) {
+Blockly.Block.prototype.destroy = function(gentle, animate) {
   if (this.outputConnection) {
     // Detach this block from the parent's tree.
     this.setParent(null);
@@ -231,6 +232,10 @@ Blockly.Block.prototype.destroy = function(gentle) {
         previousTarget.connect(nextTarget);
       }
     }
+  }
+
+  if (animate && this.svg_) {
+    this.svg_.animatedDestroy();
   }
 
   //This block is now at the top of the workspace.
@@ -428,7 +433,7 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
       Blockly.Trashcan.close(trashcan);
     };
     window.setTimeout(closure, 100);
-    Blockly.selected.destroy(false);
+    Blockly.selected.destroy(false, true);
     // Dropping a block on the trash can will usually cause the workspace to
     // resize to contain the newly positioned block.  Force a second resize now
     // that the block has been deleted.
@@ -573,7 +578,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
       enabled: true,
       callback: function() {
         Blockly.playAudio('delete');
-        block.destroy(true);
+        block.destroy(true, true);
       }
     };
     options.push(deleteOption);
