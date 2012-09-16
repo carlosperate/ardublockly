@@ -206,7 +206,7 @@ Blockly.Block.prototype.unselect = function() {
  * @param {boolean} gentle If gentle, then try to heal any gap by connecting
  *     the next statement with the previous statement.  Otherwise, destroy all
  *     children of this block.
- * @param {boolean} animate If true, show a destroy animation.
+ * @param {boolean} animate If true, show a destroy animation and sound.
  */
 Blockly.Block.prototype.destroy = function(gentle, animate) {
   if (this.outputConnection) {
@@ -235,7 +235,7 @@ Blockly.Block.prototype.destroy = function(gentle, animate) {
   }
 
   if (animate && this.svg_) {
-    this.svg_.animatedDestroy();
+    this.svg_.destroyUiEffect();
   }
 
   //This block is now at the top of the workspace.
@@ -404,30 +404,27 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
  * @private
  */
 Blockly.Block.prototype.onMouseUp_ = function(e) {
-  /*
-  if (Blockly.Block.dragMode_ == 2) {
-    if (Blockly.selected != this) {
-      throw 'Dragging no object?';
-    }
-    this.setDragging_(false);
-    // Update the connection locations.
-    var xy = this.getRelativeToSurfaceXY();
-    var dx = xy.x - this.startDragX;
-    var dy = xy.y - this.startDragY;
-    this.moveConnections_(dx, dy);
-  }
-  */
   Blockly.Block.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
-    Blockly.playAudio('click');
     // Connect two blocks together.
     Blockly.localConnection_.connect(Blockly.highlightedConnection_);
+    if (this.svg_) {
+      // Trigger a connection animation.
+      // Determine which connection is inferior (lower in the source stack).
+      var inferiorConnection;
+      if (Blockly.localConnection_.type == Blockly.OUTPUT_VALUE ||
+          Blockly.localConnection_.type == Blockly.PREVIOUS_STATEMENT) {
+        inferiorConnection = Blockly.localConnection_;
+      } else {
+        inferiorConnection = Blockly.highlightedConnection_;
+      }
+      inferiorConnection.sourceBlock_.svg_.connectionUiEffect();
+    }
     if (this.workspace.trashcan && this.workspace.trashcan.isOpen) {
       // Don't throw an object in the trash can if it just got connected.
       Blockly.Trashcan.close(this.workspace.trashcan);
     }
   } else if (this.workspace.trashcan && this.workspace.trashcan.isOpen) {
-    Blockly.playAudio('delete');
     var trashcan = this.workspace.trashcan;
     var closure = function() {
       Blockly.Trashcan.close(trashcan);
@@ -577,7 +574,6 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
           Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
       enabled: true,
       callback: function() {
-        Blockly.playAudio('delete');
         block.destroy(true, true);
       }
     };

@@ -148,10 +148,13 @@ Blockly.BlockSvg.prototype.destroy = function() {
 };
 
 /**
- * Deeply clone the current block, then animate its destruction.
+ * Play some UI effects (sound, animation) when destroying a block.
  */
-Blockly.BlockSvg.prototype.animatedDestroy = function() {
+Blockly.BlockSvg.prototype.destroyUiEffect = function() {
+  Blockly.playAudio('delete');
+
   var xy = Blockly.getAbsoluteXY_(this.svgGroup_);
+  // Deeply clone the current block.
   clone = this.svgGroup_.cloneNode(true);
   clone.translateX_ = xy.x;
   clone.translateY_ = xy.y;
@@ -161,14 +164,15 @@ Blockly.BlockSvg.prototype.animatedDestroy = function() {
   clone.bBox_ = clone.getBBox();
   // Start the animation.
   clone.startDate_ = new Date();
-  Blockly.BlockSvg.animateDestroyStep_(clone);
+  Blockly.BlockSvg.destroyUiStep_(clone);
 };
 
 /**
  * Animate a cloned block and eventually destroy it.
  * @param {!Element} clone SVG element to animate and destroy.
+ * @private
  */
-Blockly.BlockSvg.animateDestroyStep_ = function(clone) {
+Blockly.BlockSvg.destroyUiStep_ = function(clone) {
   var ms = (new Date()) - clone.startDate_;
   var percent = ms / 150;
   if (percent > 1) {
@@ -177,15 +181,56 @@ Blockly.BlockSvg.animateDestroyStep_ = function(clone) {
     var translate =
         (clone.translateX_ + clone.bBox_.width / 2 * percent) + ', ' +
         (clone.translateY_ + clone.bBox_.height * percent);
-    var rotate = (30 * percent) + ', ' +
-        (clone.bBox_.width / 2 * percent) + ', ' +
-        (clone.bBox_.height / 2 * percent);
     var scale = 1 - percent;
     clone.setAttribute('transform', 'translate(' + translate + ')' +
-        ' scale(' + scale + ')'+
-        ' rotate(' + rotate + ')');
+        ' scale(' + scale + ')');
     var closure = function() {
-      Blockly.BlockSvg.animateDestroyStep_(clone);
+      Blockly.BlockSvg.destroyUiStep_(clone);
+    }
+    window.setTimeout(closure, 10);
+  }
+};
+
+/**
+ * Play some UI effects (sound, ripple) after a connection has been established.
+ */
+Blockly.BlockSvg.prototype.connectionUiEffect = function() {
+  Blockly.playAudio('click');
+
+  // Determine the absolute coordinates of the inferior block.
+  var xy = Blockly.getAbsoluteXY_(this.svgGroup_);
+  // Offset the coordinates based on the two connection types.
+  if (this.block_.outputConnection) {
+    xy.x -= 3;
+    xy.y += 13;
+  } else if (this.block_.previousConnection) {
+    xy.x += 23;
+    xy.y += 3;
+  }
+  var ripple = Blockly.createSvgElement('circle',
+      {cx: xy.x, cy: xy.y, r: 0, fill: 'none',
+       stroke: '#888', 'stroke-width': 10},
+      Blockly.svg);
+  // Start the animation.
+  ripple.startDate_ = new Date();
+  Blockly.BlockSvg.connectionUiStep_(ripple);
+};
+
+/**
+ * Expand a ripple around a connection.
+ * @param {!Element} ripple Element to animate.
+ * @private
+ */
+Blockly.BlockSvg.connectionUiStep_ = function(ripple) {
+  var ms = (new Date()) - ripple.startDate_;
+  var percent = ms / 150;
+  if (percent > 1) {
+    ripple.parentNode.removeChild(ripple);
+  } else {
+    ripple.setAttribute('r', percent * 25);
+    ripple.style.opacity = 1 - percent;
+    var closure = function() {
+      Blockly.BlockSvg.connectionUiStep_(ripple);
     }
     window.setTimeout(closure, 10);
   }

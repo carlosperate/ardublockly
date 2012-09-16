@@ -156,7 +156,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     }
   }
 
-  // Determine which block is superior (higher in the source stack)
+  // Determine which block is superior (higher in the source stack).
   var parentBlock, childBlock;
   if (this.type == Blockly.INPUT_VALUE || this.type == Blockly.NEXT_STATEMENT) {
     // Superior block.
