@@ -412,11 +412,10 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
       // Trigger a connection animation.
       // Determine which connection is inferior (lower in the source stack).
       var inferiorConnection;
-      if (Blockly.localConnection_.type == Blockly.OUTPUT_VALUE ||
-          Blockly.localConnection_.type == Blockly.PREVIOUS_STATEMENT) {
-        inferiorConnection = Blockly.localConnection_;
-      } else {
+      if (Blockly.localConnection_.isSuperior()) {
         inferiorConnection = Blockly.highlightedConnection_;
+      } else {
+        inferiorConnection = Blockly.localConnection_;
       }
       inferiorConnection.sourceBlock_.svg_.connectionUiEffect();
     }
@@ -770,9 +769,7 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
   for (var x = 0; x < myConnections.length; x++) {
     var connection = myConnections[x];
     // Spider down from this block bumping all sub-blocks.
-    if (connection.targetConnection &&
-        (connection.type == Blockly.INPUT_VALUE ||
-         connection.type == Blockly.NEXT_STATEMENT)) {
+    if (connection.targetConnection && connection.isSuperior()) {
       connection.targetBlock().bumpNeighbours_();
     }
 
@@ -784,7 +781,12 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
       if (!connection.targetConnection || !otherConnection.targetConnection) {
         // Only bump blocks if they are from different tree structures.
         if (otherConnection.sourceBlock_.getRootBlock() != rootBlock) {
-          otherConnection.bumpAwayFrom_(connection);
+          // Always bump the inferior block.
+          if (connection.isSuperior()) {
+            otherConnection.bumpAwayFrom_(connection);
+          } else {
+            connection.bumpAwayFrom_(otherConnection);
+          }
         }
       }
     }
