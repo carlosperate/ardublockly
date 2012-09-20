@@ -96,6 +96,7 @@ function onchange() {
  * Update the language code.
  */
 function updateLanguage() {
+  // Generate name and category.
   var cat = rootBlock.getTitleText('CAT');
   var code = [];
   if (cat) {
@@ -107,59 +108,66 @@ function updateLanguage() {
   code.push('Blockly.Language.' + blockType + ' = {');
   code.push('  category: ' + cat + ',');
   code.push('  init: function() {');
+  // Generate colour.
   var colourBlock = rootBlock.getInputTargetBlock('COLOUR');
   if (colourBlock) {
     code.push('    this.setColour(' + colourBlock.getTitleValue('HUE') + ');');
   }
+  // Generate titles.
+  var titles = getTitles(rootBlock.getInputTargetBlock('TITLES'));
+  for (var x = 0; x < titles.length; x++) {
+    code.push('    this' + titles[x]);
+  }
+  // Generate inputs.
+  var TYPES = {'input_value': 'Blockly.INPUT_VALUE',
+               'input_statement': 'Blockly.NEXT_STATEMENT',
+               'input_dummy': 'Blockly.DUMMY_INPUT'};
+  var inputVarDefined = false;
   var contentsBlock = rootBlock.getInputTargetBlock('INPUTS');
   while (contentsBlock) {
-    switch (contentsBlock.type) {
-      case 'input_value':
-        var name = escapeString(contentsBlock.getTitleText('NAME'));
-        var type = getTypesFrom(contentsBlock, 'TYPE');
-        if (type.length == 1) {
-          type = type[0];
-        } else {
-          type = '[' + type.join(', ') + ']';
-        }
-        var titles = getTitles(contentsBlock.getInputTargetBlock('TITLES'));
-        code.push('    this.appendInput(' + titles +
-                  ', Blockly.INPUT_VALUE, ' + name + ', ' + type + ');');
-        break;
-      case 'input_statement':
-        var name = escapeString(contentsBlock.getTitleText('NAME'));
-        var titles = getTitles(contentsBlock.getInputTargetBlock('TITLES'));
-        code.push('    this.appendInput(' + titles +
-                  ', Blockly.NEXT_STATEMENT, ' + name + ');');
-        break;
-      case 'input_variable':
-        break;
+    var titles = getTitles(contentsBlock.getInputTargetBlock('TITLES'));
+    var inputVar = '';
+    if (titles.length) {
+      if (inputVarDefined) {
+        inputVar = 'input = ';
+      } else {
+        inputVar = 'var input = ';
+      }
+      inputVarDefined = true;
+    }
+    var name = escapeString(contentsBlock.getTitleText('NAME') || '');
+    var check = getOptTypesFrom(contentsBlock, 'TYPE');
+    code.push('    ' + inputVar + 'this.appendInput(' +
+              TYPES[contentsBlock.type] + ', ' + name + check + ');');
+    for (var x = 0; x < titles.length; x++) {
+      code.push('    input' + titles[x]);
     }
     contentsBlock = contentsBlock.nextConnection &&
         contentsBlock.nextConnection.targetBlock();
   }
+  // Generate inline/external switch.
   if (rootBlock.getTitleValue('INLINE') == 'INT') {
     code.push('    this.setInputsInline(true);');
   }
+  // Generate output, or next/previous connections.
   switch (rootBlock.getTitleValue('CONNECTIONS')) {
     case 'LEFT':
-      var type = getTypesFrom(rootBlock, 'OUTPUTTYPE');
-      if (type.length == 1) {
-        type = type[0];
-      } else {
-        type = '[' + type.join(', ') + ']';
-      }
-      code.push('    this.setOutput(true, ' + type + ');');
+      var outputType = getOptTypesFrom(rootBlock, 'OUTPUTTYPE');
+      code.push('    this.setOutput(true' + outputType + ');');
       break;
     case 'BOTH':
-      code.push('    this.setPreviousStatement(true);');
-      code.push('    this.setNextStatement(true);');
+      var topType = getOptTypesFrom(rootBlock, 'TOPTYPE');
+      code.push('    this.setPreviousStatement(true' + topType + ');');
+      var bottomType = getOptTypesFrom(rootBlock, 'BOTTOMTYPE');
+      code.push('    this.setNextStatement(true' + bottomType + ');');
       break;
     case 'TOP':
-      code.push('    this.setPreviousStatement(true);');
+      var topType = getOptTypesFrom(rootBlock, 'TOPTYPE');
+      code.push('    this.setPreviousStatement(true' + topType + ');');
       break;
     case 'BOTTOM':
-      code.push('    this.setNextStatement(true);');
+      var bottomType = getOptTypesFrom(rootBlock, 'BOTTOMTYPE');
+      code.push('    this.setNextStatement(true' + bottomType + ');');
       break;
   }
   code.push('  }');
@@ -175,10 +183,24 @@ function updateLanguage() {
  * @return {string} Title string.
  */
 function getTitles(block) {
-  if (!block) {
-    return '\'\'';
+  var titles = [];
+  while (block) {
+    switch (block.type) {
+      case 'title_static':
+        // Result: .appendTitle('hello');
+        titles.push('.appendTitle(' + escapeString(block.getTitleText('TEXT')) +
+                    ');');
+        break;
+      case 'title_input':
+        // Result: .appendTitle(new Blockly.FieldTextInput('Hello'), 'GREET');
+        titles.push('.appendTitle(new Blockly.FieldTextInput(' +
+                    escapeString(block.getTitleText('TEXT')) + '), ' +
+                    escapeString(block.getTitleText('NAME')) + ');');
+        break;
+    }
+    block = block.nextConnection && block.nextConnection.targetBlock();
   }
-  return escapeString(block.getTitleText('TEXT'));
+  return titles;
 }
 
 /**
@@ -196,21 +218,56 @@ function escapeString(string) {
 
 /**
  * Fetch the type(s) defined in the given input.
+ * Format as a string for appending to the generated code.
+ * @param {!Blockly.Block} block Block with input. 
+ * @param {string} name Name of the input.
+ * @return {string} String defining the types.
+ */
+function getOptTypesFrom(block, name) {
+  var types = getTypesFrom_(block, name);
+  if (types.length == 0) {
+    return '';
+  } else if (types.length == 1) {
+    return ', ' + types[0];
+  } else if (types.indexOf('null') != -1) {
+    return ['null'];
+  } else {
+    return ', [' + types.join(', ') + ']';
+  }
+}
+
+/**
+ * Fetch the type(s) defined in the given input.
  * @param {!Blockly.Block} block Block with input. 
  * @param {string} name Name of the input.
  * @return {!Array.<string>} List of types.
+ * @private
  */
-function getTypesFrom(block, name) {
+function getTypesFrom_(block, name) {
   var typeBlock = block.getInputTargetBlock(name);
-  var type;
+  var types;
   if (!typeBlock) {
-    type = 'null';
+    types = [];
   } else if (typeBlock.type == 'type_other') {
-    type = escapeString(typeBlock.getTitleText('TYPE'));
+    types = [escapeString(typeBlock.getTitleText('TYPE'))];
+  } else if (typeBlock.type == 'type_group') {
+    types = [];
+    for (var n = 0; n < typeBlock.typeCount_; n++) {
+      types = types.concat(getTypesFrom_(typeBlock, 'TYPE' + n));
+    }
+    // Remove duplicates.
+    var hash = {};
+    for (var n = types.length - 1; n >= 0; n--) {
+      if (hash['X_' + types[n]]) {
+        types.splice(n, 1);
+        continue;
+      }
+      hash['X_' + types[n]] = true;
+    }
   } else {
-    type = typeBlock.valueType;
+    types = [typeBlock.valueType];
   }
-  return [type];
+  return types;
 }
 
 /**
