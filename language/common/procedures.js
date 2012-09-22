@@ -83,7 +83,7 @@ Blockly.Language.procedures_defnoreturn = {
     var containerBlock = new Blockly.Block(workspace,
                                            'procedures_mutatorcontainer');
     containerBlock.initSvg();
-    var connection = containerBlock.inputList[0];
+    var connection = containerBlock.getInput('STACK').connection;
     for (var x = 0; x < this.arguments_.length; x++) {
       var paramBlock = new Blockly.Block(workspace, 'procedures_mutatorarg');
       paramBlock.initSvg();

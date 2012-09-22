@@ -250,7 +250,7 @@ Blockly.Language.type_group = {
     var containerBlock = new Blockly.Block(workspace,
                                            'type_group_container');
     containerBlock.initSvg();
-    var connection = containerBlock.inputList[0];
+    var connection = containerBlock.getInput('STACK').connection;
     for (var x = 0; x < this.typeCount_; x++) {
       var typeBlock = new Blockly.Block(workspace, 'type_group_item');
       typeBlock.initSvg();

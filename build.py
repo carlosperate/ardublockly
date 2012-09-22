@@ -33,6 +33,7 @@ filenames = [
     'flyout.js',
     'generator.js',
     'inject.js',
+    'input.js',
     'mutator.js',
     'names.js',
     'procedures.js',

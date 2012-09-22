@@ -98,10 +98,10 @@ Blockly.Xml.blockToDom_ = function(block) {
       continue;
     } else if (input.type == Blockly.LOCAL_VARIABLE) {
       container = document.createElement('variable');
-      container.setAttribute('data', input.getText());
+      container.setAttribute('data', input.variable.getText());
       empty = false;
     } else {
-      var childBlock = input.targetBlock();
+      var childBlock = input.connection.targetBlock();
       if (input.type == Blockly.INPUT_VALUE) {
         container = document.createElement('value');
         hasValues = true;
@@ -283,7 +283,7 @@ Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
           if (!input) {
             throw 'Variable input does not exist.';
           }
-          input.setText(data);
+          input.variable.setText(data);
         }
         break;
       case 'value':
@@ -296,9 +296,9 @@ Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
             firstRealGrandchild.tagName.toLowerCase() == 'block') {
           blockChild = Blockly.Xml.domToBlock_(workspace, firstRealGrandchild);
           if (blockChild.outputConnection) {
-            input.connect(blockChild.outputConnection);
+            input.connection.connect(blockChild.outputConnection);
           } else if (blockChild.previousConnection) {
-            input.connect(blockChild.previousConnection);
+            input.connection.connect(blockChild.previousConnection);
           } else {
             throw 'Child block does not have output or previous statement.';
           }

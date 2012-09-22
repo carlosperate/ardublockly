@@ -278,6 +278,27 @@ function updateGenerator() {
   var code = [];
   code.push('Blockly.' + language + '.' + blockType + ' = {');
   code.push('  // TODO: Assemble ' + language + ' into code variable.');
+  // Loop through every block, and generate getters for any fields or inputs.
+  var blocks = rootBlock.getDescendants();
+  for (var x = 0, block; block = blocks[x]; x++) {
+    var name = block.getTitleText('NAME');
+    switch (block.type) {
+      case 'title_input':
+        code.push('  var field_' + name.toLowerCase() +
+                  ' = this.getTitleText(\'' + name + '\');');
+        break;
+      case 'input_value':
+        code.push('  var value_' + name.toLowerCase() +
+                  ' = Blockly.' + language + '.valueToCode(this, \'' + name +
+                  '\', Blockly.' + language + '.ORDER_ATOMIC);');
+        break;
+      case 'input_statement':
+        code.push('  var statements_' + name.toLowerCase() +
+                  ' = Blockly.' + language + '.statementToCode(this, \'' +
+                  name + '\');');
+        break;
+    }
+  }
   code.push('  var code = \'...\'');
   if (rootBlock.getTitleValue('CONNECTIONS') == 'LEFT') {
     code.push('  // TODO: Change ORDER_NONE to the correct strength.');

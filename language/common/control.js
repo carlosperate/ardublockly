@@ -84,7 +84,7 @@ Blockly.Language.controls_if = {
   decompose: function(workspace) {
     var containerBlock = new Blockly.Block(workspace, 'controls_if_if');
     containerBlock.initSvg();
-    var connection = containerBlock.inputList[0];
+    var connection = containerBlock.getInput('STACK').connection;
     for (var x = 1; x <= this.elseifCount_; x++) {
       var elseifBlock = new Blockly.Block(workspace, 'controls_if_elseif');
       elseifBlock.initSvg();
@@ -244,7 +244,7 @@ Blockly.Language.controls_for = {
     this.setColour(120);
     this.appendTitle(Blockly.LANG_CONTROLS_FOR_TITLE_COUNT);
     this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_WITH,
-        Blockly.LOCAL_VARIABLE, 'VAR').setText(
+        Blockly.LOCAL_VARIABLE, 'VAR').variable.setText(
         Blockly.Variables.generateUniqueName());
     this.appendInput(Blockly.LANG_CONTROLS_FOR_INPUT_FROM,
         Blockly.INPUT_VALUE, 'FROM', Number);
@@ -280,7 +280,7 @@ Blockly.Language.controls_forEach = {
     this.setColour(120);
     this.appendTitle(Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH);
     this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM,
-        Blockly.LOCAL_VARIABLE, 'VAR').setText(
+        Blockly.LOCAL_VARIABLE, 'VAR').variable.setText(
         Blockly.Variables.generateUniqueName());
     this.appendInput(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST,
         Blockly.INPUT_VALUE, 'LIST', Array);

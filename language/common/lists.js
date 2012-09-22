@@ -69,7 +69,7 @@ Blockly.Language.lists_create_with = {
     var containerBlock = new Blockly.Block(workspace,
                                            'lists_create_with_container');
     containerBlock.initSvg();
-    var connection = containerBlock.inputList[0];
+    var connection = containerBlock.getInput('STACK').connection;
     for (var x = 0; x < this.itemCount_; x++) {
       var itemBlock = new Blockly.Block(workspace, 'lists_create_with_item');
       itemBlock.initSvg();

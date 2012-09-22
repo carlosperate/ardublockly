@@ -617,9 +617,8 @@ Blockly.Block.prototype.getConnections_ = function(all) {
     }
     if (all || !this.collapsed) {
       for (var x = 0, input; input = this.inputList[x]; x++) {
-        if (input.type != Blockly.LOCAL_VARIABLE &&
-            input.type != Blockly.DUMMY_INPUT) {
-          myConnections.push(input);
+        if (input.connection) {
+          myConnections.push(input.connection);
         }
       }
     }
@@ -1283,23 +1282,20 @@ Blockly.Block.prototype.appendInput = function(label, type, name, opt_check) {
       textElement.init(this);
     }
   }
-  var input;
-  if (type == Blockly.DUMMY_INPUT) {
-    // Dummy input is used to show a label.
-    input = {};
-    input.type = type;
-  } else if (type == Blockly.LOCAL_VARIABLE) {
-    input = new Blockly.FieldDropdown(
+  var connection = null;
+  if (type == Blockly.INPUT_VALUE || type == Blockly.NEXT_STATEMENT) {
+    connection = new Blockly.Connection(this, type, opt_check);
+  }
+  var input = new Blockly.Input(type, name, connection);
+  if (type == Blockly.LOCAL_VARIABLE) {
+    input.variable = new Blockly.FieldDropdown(
         Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange);
     if (this.svg_) {
-      input.init(this);
+      input.variable.init(this);
     }
     input.type = Blockly.LOCAL_VARIABLE;
-  } else {
-    input = new Blockly.Connection(this, type, opt_check);
   }
   input.label = textElement;
-  input.name = name;
   // Append input to list.
   this.inputList.push(input);
   if (this.rendered) {
@@ -1362,17 +1358,15 @@ Blockly.Block.prototype.moveInputBefore = function(name, refName) {
 Blockly.Block.prototype.removeInput = function(name) {
   for (var x = 0, input; input = this.inputList[x]; x++) {
     if (input.name == name) {
-      if (input.targetConnection) {
+      if (input.connection && input.connection.targetConnection) {
         // Disconnect any attached block.
-        input.targetBlock().setParent(null);
+        input.connection.targetBlock().setParent(null);
       }
       var field = input.label;
       if (field) {
         field.destroy();
       }
-      if (input.destroy) {
-        input.destroy();
-      }
+      input.destroy();
       this.inputList.splice(x, 1);
       if (this.rendered) {
         this.render();
@@ -1408,7 +1402,7 @@ Blockly.Block.prototype.getInput = function(name) {
  */
 Blockly.Block.prototype.getInputTargetBlock = function(name) {
   var input = this.getInput(name);
-  return input && input.targetBlock();
+  return input && input.connection && input.connection.targetBlock();
 };
 
 /**
@@ -1418,7 +1412,7 @@ Blockly.Block.prototype.getInputTargetBlock = function(name) {
  */
 Blockly.Block.prototype.getInputVariable = function(name) {
   var input = this.getInput(name);
-  return input && input.getText();
+  return input && input.variable && input.variable.getText();
 };
 
 /**
@@ -1431,7 +1425,7 @@ Blockly.Block.prototype.setInputVariable = function(name, text) {
   if (!input) {
     throw 'Input does not exist.';
   }
-  input.setText(text);
+  input.variable.setText(text);
 };
 
 /**
