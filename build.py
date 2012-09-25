@@ -30,6 +30,7 @@ filenames = [
     'field_dropdown.js',
     'field_label.js',
     'field_textinput.js',
+    'field_variable.js',
     'flyout.js',
     'generator.js',
     'inject.js',

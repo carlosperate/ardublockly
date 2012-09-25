@@ -274,14 +274,8 @@ Blockly.Block.prototype.destroy = function(gentle, animate) {
     this.warning.destroy();
   }
   // Destroy all inputs and their labels.
-  for (var x = 0; x < this.inputList.length; x++) {
-    var input = this.inputList[x];
-    if (input.label) {
-      input.label.destroy();
-    }
-    if (input.destroy) {
-      input.destroy();
-    }
+  for (var x = 0, input; input = this.inputList[x]; x++) {
+    input.destroy();
   }
   this.inputList = [];
   // Destroy any remaining connections (next/previous/output).
@@ -988,8 +982,10 @@ Blockly.Block.prototype.getTitle_ = function(name) {
     }
   }
   for (var x = 0, input; input = this.inputList[x]; x++) {
-    if (input.label && input.label.name === name) {
-      return input.label;
+    for (var y = 0, title; title = input.titleRow[y]; y++) {
+      if (title.name === name) {
+        return title;
+      }
     }
   }
   return null;
@@ -1201,9 +1197,9 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
   var display = collapsed ? 'none' : 'block';
   var renderList = [];
   for (var x = 0, input; input = this.inputList[x]; x++) {
-    if (input.label) {
-      var labelElement = input.label.getRootElement ?
-          input.label.getRootElement() : input.label;
+    for (var y = 0, title; title = input.titleRow[y]; y++) {
+      var labelElement = title.getRootElement ?
+          title.getRootElement() : title;
       labelElement.style.display = display;
     }
     if (input.targetBlock) {
@@ -1250,52 +1246,20 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
 
 /**
  * Add a value input, statement input or local variable to this block.
- * @param {string|Array} label Printed next to the input (e.g. 'x' or 'do').
- *     If the label is an editable field, this argument should be a tuple with
- *     the field and its name.
  * @param {number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
- *     Blockly.LOCAL_VARIABLE, or Blockly.DUMMY_INPUT.
+ *     Blockly.DUMMY_INPUT.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
  * @param {Object} opt_check Acceptable value type, or list of value types.
  *     Null or undefined means all values are acceptable.
  * @return {!Object} The input object created.
  */
-Blockly.Block.prototype.appendInput = function(label, type, name, opt_check) {
-  // Create descriptive text element.
-  var textElement = null;
-  if (label) {
-    var labelElement = label;
-    var labelName = null;
-    if (label instanceof Array) {
-      // Editable label with name.
-      labelElement = label[0];
-      labelName = label[1];
-    }
-    if (typeof labelElement == 'string') {
-      // Text label.
-      labelElement = new Blockly.FieldLabel(labelElement);
-    }
-    textElement = labelElement;
-    textElement.name = labelName;
-    if (this.svg_) {
-      textElement.init(this);
-    }
-  }
+Blockly.Block.prototype.appendInput = function(type, name, opt_check) {
   var connection = null;
   if (type == Blockly.INPUT_VALUE || type == Blockly.NEXT_STATEMENT) {
     connection = new Blockly.Connection(this, type, opt_check);
   }
-  var input = new Blockly.Input(type, name, connection);
-  if (type == Blockly.LOCAL_VARIABLE) {
-    input.variable = new Blockly.FieldDropdown(
-        Blockly.Variables.dropdownCreate, Blockly.Variables.dropdownChange);
-    if (this.svg_) {
-      input.variable.init(this);
-    }
-    input.type = Blockly.LOCAL_VARIABLE;
-  }
-  input.label = textElement;
+  var input = new Blockly.Input(type, name, this, connection);
   // Append input to list.
   this.inputList.push(input);
   if (this.rendered) {
@@ -1362,10 +1326,6 @@ Blockly.Block.prototype.removeInput = function(name) {
         // Disconnect any attached block.
         input.connection.targetBlock().setParent(null);
       }
-      var field = input.label;
-      if (field) {
-        field.destroy();
-      }
       input.destroy();
       this.inputList.splice(x, 1);
       if (this.rendered) {
@@ -1403,29 +1363,6 @@ Blockly.Block.prototype.getInput = function(name) {
 Blockly.Block.prototype.getInputTargetBlock = function(name) {
   var input = this.getInput(name);
   return input && input.connection && input.connection.targetBlock();
-};
-
-/**
- * Gets the variable name attached to the named variable input.
- * @param {string} name The name of the input.
- * @return {string} The variable name, or null if the input does not exist.
- */
-Blockly.Block.prototype.getInputVariable = function(name) {
-  var input = this.getInput(name);
-  return input && input.variable && input.variable.getText();
-};
-
-/**
- * Sets the variable name attached to the named variable input.
- * @param {string} name The name of the input.
- * @param {string} text The new variable name.
- */
-Blockly.Block.prototype.setInputVariable = function(name, text) {
-  var input = this.getInput(name);
-  if (!input) {
-    throw 'Input does not exist.';
-  }
-  input.variable.setText(text);
 };
 
 /**

@@ -141,7 +141,7 @@ Blockly.Language.controls_forever = {
   init: function() {
     this.setColour(120);
     this.appendTitle('repeat forever');
-    this.appendInput('do', Blockly.NEXT_STATEMENT, 'DO');
+    this.appendInput(Blockly.NEXT_STATEMENT, 'DO').appendTitle('do');
     this.setPreviousStatement(true);
     this.setTooltip('Do the enclosed statements forever.');
   }

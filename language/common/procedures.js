@@ -35,8 +35,8 @@ Blockly.Language.procedures_defnoreturn = {
     this.appendTitle(new Blockly.FieldTextInput(name,
         Blockly.Procedures.rename), 'NAME');
     this.appendTitle('', 'PARAMS');
-    this.appendInput(Blockly.LANG_PROCEDURES_DEFNORETURN_DO,
-        Blockly.NEXT_STATEMENT, 'STACK');
+    this.appendInput(Blockly.NEXT_STATEMENT, 'STACK')
+        .appendTitle(Blockly.LANG_PROCEDURES_DEFNORETURN_DO);
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP_1);
     this.arguments_ = [];
@@ -166,11 +166,12 @@ Blockly.Language.procedures_defreturn = {
         Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE, this);
     this.appendTitle(
         new Blockly.FieldTextInput(name, Blockly.Procedures.rename), 'NAME');
-    this.appendInput(['', 'PARAMS'], Blockly.DUMMY_INPUT);
-    this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_DO,
-        Blockly.NEXT_STATEMENT, 'STACK');
-    this.appendInput(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN,
-        Blockly.INPUT_VALUE, 'RETURN', null);
+    this.appendInput(Blockly.DUMMY_INPUT, '')
+        .appendTitle('', 'PARAMS');
+    this.appendInput(Blockly.NEXT_STATEMENT, 'STACK')
+        .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_DO);
+    this.appendInput(Blockly.INPUT_VALUE, 'RETURN', null)
+        .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN);
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1);
     this.arguments_ = [];
@@ -196,7 +197,7 @@ Blockly.Language.procedures_mutatorcontainer = {
   init: function() {
     this.setColour(290);
     this.appendTitle(Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE);
-    this.appendInput('', Blockly.NEXT_STATEMENT, 'STACK');
+    this.appendInput(Blockly.NEXT_STATEMENT, 'STACK');
     this.setTooltip('');
     this.contextMenu = false;
   }
@@ -267,7 +268,7 @@ Blockly.Language.procedures_callnoreturn = {
     }
     // Update the quarkConnections_ with existing connections.
     for (var x = 0; x < this.arguments_.length; x++) {
-      var connection = this.getInput('ARG' + x).targetConnection;
+      var connection = this.getInput('ARG' + x).connection.targetConnection;
       this.quarkConnections_[this.quarkArguments_[x]] = connection;
     }
     // Disconnect all argument blocks and destroy all inputs.
@@ -278,8 +279,8 @@ Blockly.Language.procedures_callnoreturn = {
     this.arguments_ = [].concat(paramNames);
     this.quarkArguments_ = paramIds;
     for (var x = 0; x < this.arguments_.length; x++) {
-      var input = this.appendInput(this.arguments_[x], Blockly.INPUT_VALUE,
-          'ARG' + x, null);
+      var input = this.appendInput(Blockly.INPUT_VALUE, 'ARG' + x, null);
+      input.appendTitle(this.arguments_[x]);
       if (this.quarkArguments_) {
         // Reconnect any child blocks.
         var quarkName = this.quarkArguments_[x];
@@ -290,7 +291,7 @@ Blockly.Language.procedures_callnoreturn = {
             // Block no longer exists or has been attached elsewhere.
             delete this.quarkConnections_[quarkName];
           } else {
-            input.connect(connection);
+            input.connection.connect(connection);
           }
         }
       }
@@ -315,8 +316,8 @@ Blockly.Language.procedures_callnoreturn = {
     for (var x = 0, childNode; childNode = xmlElement.childNodes[x]; x++) {
       if (childNode.tagName && childNode.tagName.toLowerCase() == 'arg') {
         var paramName = childNode.getAttribute('name');
-        this.appendInput(paramName, Blockly.INPUT_VALUE,
-            'ARG' + this.arguments_.length, null);
+        this.appendInput(Blockly.INPUT_VALUE, 'ARG' + this.arguments_.length)
+            .appendTitle(paramName);
         this.arguments_.push(paramName);
       }
     }
@@ -325,7 +326,7 @@ Blockly.Language.procedures_callnoreturn = {
     for (var x = 0; x < this.arguments_.length; x++) {
       if (Blockly.Names.equals(oldName, this.arguments_[x])) {
         this.arguments_[x] = newName;
-        this.getInput('ARG' + x).label.setText(newName);
+        this.getInput('ARG' + x).titleRow[0].setText(newName);
       }
     }
   },

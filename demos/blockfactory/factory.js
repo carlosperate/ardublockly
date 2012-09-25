@@ -197,6 +197,14 @@ function getTitles(block) {
                     escapeString(block.getTitleText('TEXT')) + '), ' +
                     escapeString(block.getTitleText('NAME')) + ');');
         break;
+      case 'title_variable':
+        // Result:
+        // .appendTitle(new Blockly.FieldVariable('item'), 'VAR');
+        var varname = block.getTitleText('TEXT');
+        varname = varname ? escapeString(varname) : 'null';
+        titles.push('.appendTitle(new Blockly.FieldVariable(' +
+            varname + '), ' + escapeString(block.getTitleText('NAME')) + ');');
+        break;
     }
     block = block.nextConnection && block.nextConnection.targetBlock();
   }
