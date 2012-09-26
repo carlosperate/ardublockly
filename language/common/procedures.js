@@ -272,7 +272,7 @@ Blockly.Language.procedures_callnoreturn = {
       this.quarkConnections_[this.quarkArguments_[x]] = connection;
     }
     // Switch off rendering while the block is rebuilt.
-    savedRendered = this.rendered;
+    var savedRendered = this.rendered;
     this.rendered = false;
     // Disconnect all argument blocks and destroy all inputs.
     for (var x = this.arguments_.length - 1; x >= 0 ; x--) {

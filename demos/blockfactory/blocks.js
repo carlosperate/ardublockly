@@ -309,36 +309,6 @@ Blockly.Language.input_dummy = {
   }
 };
 
-(function() {
-  var ColourBlock = function(hue) {
-    this.colourHue = hue;
-  };
-  ColourBlock.prototype.category = 'Colour';
-  ColourBlock.prototype.init = function() {
-    this.setColour(this.colourHue);
-    this.appendTitle('hue:');
-    this.appendTitle(new Blockly.FieldTextInput(String(this.colourHue),
-                                                ColourBlock.validator), 'HUE');
-    this.setOutput(true, 'Colour');
-    this.setTooltip('');
-  };
-  ColourBlock.validator = function(text) {
-    // Ensure that only a number may be entered.
-    var n = window.parseInt(text || 0, 10);
-    if (window.isNaN(n) || n < 0) {
-      return null;
-    }
-    n %= 360;
-    this.sourceBlock_.setColour(n);
-    return String(n);
-  };
-
-  var colours = [65, 120, 160, 210, 230, 290, 330];
-  for (var x = 0; x < colours.length; x++) {
-    Blockly.Language['colour_' + x] = new ColourBlock(colours[x]);
-  }
-})();
-
 Blockly.Language.type_group = {
   // Group of types.
   category: 'Type',
@@ -508,3 +478,33 @@ Blockly.Language.type_other = {
     this.setTooltip('');
   }
 };
+
+(function() {
+  var ColourBlock = function(hue) {
+    this.colourHue = hue;
+  };
+  ColourBlock.prototype.category = 'Colour';
+  ColourBlock.prototype.init = function() {
+    this.setColour(this.colourHue);
+    this.appendTitle('hue:');
+    this.appendTitle(new Blockly.FieldTextInput(String(this.colourHue),
+                                                ColourBlock.validator), 'HUE');
+    this.setOutput(true, 'Colour');
+    this.setTooltip('');
+  };
+  ColourBlock.validator = function(text) {
+    // Ensure that only a number may be entered.
+    var n = window.parseInt(text || 0, 10);
+    if (window.isNaN(n) || n < 0) {
+      return null;
+    }
+    n %= 360;
+    this.sourceBlock_.setColour(n);
+    return String(n);
+  };
+
+  var colours = [65, 120, 160, 210, 230, 290, 330];
+  for (var x = 0; x < colours.length; x++) {
+    Blockly.Language['colour_' + x] = new ColourBlock(colours[x]);
+  }
+})();
