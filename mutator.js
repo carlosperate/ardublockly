@@ -276,7 +276,16 @@ Blockly.Mutator.prototype.setVisible_ = function(visible) {
         this.block_, function() {
           if (thisObj.rootBlock_.workspace == thisObj.workspace_) {
             thisObj.resizeBubble_();
+            // Switch off rendering while the block is rebuilt.
+            savedRendered = thisObj.block_.rendered;
+            thisObj.block_.rendered = false;
+            // Allow the block to rebuild itself.
             thisObj.block_.compose(thisObj.rootBlock_)
+            // Restore rendering and show the changes.
+            thisObj.block_.rendered = savedRendered;
+            if (thisObj.block_.rendered) {
+              thisObj.block_.render();
+            }
           }
         });
     this.bubble_.setDisabled(!this.isPinned_);

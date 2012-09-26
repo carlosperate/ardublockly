@@ -58,6 +58,11 @@ Blockly.Input.prototype.appendTitle = function(title, opt_name) {
 
   // Add the title to the title row.
   this.titleRow.push(title);
+  if (this.sourceBlock_.rendered) {
+    this.sourceBlock_.render();
+    // Adding a title will cause the block to change shape.
+    this.sourceBlock_.bumpNeighbours_();
+  }
   return title;
 };
 
