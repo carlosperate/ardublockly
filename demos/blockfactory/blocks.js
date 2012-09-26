@@ -136,22 +136,111 @@ Blockly.Language.title_dropdown = {
     this.appendTitle('dropdown');
     var input = this.appendInput(Blockly.DUMMY_INPUT, '');
     input.appendTitle(new Blockly.FieldTextInput('NAME'), 'NAME');
-    input = this.appendInput(Blockly.DUMMY_INPUT, '');
-    input.appendTitle(new Blockly.FieldTextInput('item'), 'USER1');
+    input = this.appendInput(Blockly.DUMMY_INPUT, 'OPTION0');
+    input.appendTitle(new Blockly.FieldTextInput('option'), 'USER0');
     input.appendTitle(',');
-    input.appendTitle(new Blockly.FieldTextInput('ITEM'), 'CPU1');
-    input = this.appendInput(Blockly.DUMMY_INPUT, '');
-    input.appendTitle(new Blockly.FieldTextInput('item'), 'USER2');
+    input.appendTitle(new Blockly.FieldTextInput('OPTIONNAME'), 'CPU0');
+    input = this.appendInput(Blockly.DUMMY_INPUT, 'OPTION1');
+    input.appendTitle(new Blockly.FieldTextInput('option'), 'USER1');
     input.appendTitle(',');
-    input.appendTitle(new Blockly.FieldTextInput('ITEM'), 'CPU2');
-    input = this.appendInput(Blockly.DUMMY_INPUT, '');
-    input.appendTitle(new Blockly.FieldTextInput('item'), 'USER3');
+    input.appendTitle(new Blockly.FieldTextInput('OPTIONNAME'), 'CPU1');
+    input = this.appendInput(Blockly.DUMMY_INPUT, 'OPTION2');
+    input.appendTitle(new Blockly.FieldTextInput('option'), 'USER2');
     input.appendTitle(',');
-    input.appendTitle(new Blockly.FieldTextInput('ITEM'), 'CPU3');
+    input.appendTitle(new Blockly.FieldTextInput('OPTIONNAME'), 'CPU2');
     this.setPreviousStatement(true, 'Title');
     this.setNextStatement(true, 'Title');
+    this.setMutator(new Blockly.Mutator(['title_dropdown_option']));
     this.setTooltip('');
-    this.itemCount_ = 3;
+    this.optionCount_ = 3;
+  },
+  mutationToDom: function(workspace) {
+    var container = document.createElement('mutation');
+    container.setAttribute('options', this.optionCount_);
+    return container;
+  },
+  domToMutation: function(container) {
+    for (var x = 0; x < this.optionCount_; x++) {
+      this.removeInput('OPTION' + x);
+    }
+    this.optionCount_ = window.parseInt(container.getAttribute('options'), 10);
+    for (var x = 0; x < this.optionCount_; x++) {
+      var input = this.appendInput(Blockly.DUMMY_INPUT, 'OPTION' + x);
+      input.appendTitle(new Blockly.FieldTextInput('option'), 'USER' + x);
+      input.appendTitle(',');
+      input.appendTitle(new Blockly.FieldTextInput('OPTIONNAME'), 'CPU' + x);
+    }
+  },
+  decompose: function(workspace) {
+    var containerBlock = new Blockly.Block(workspace,
+                                           'title_dropdown_container');
+    containerBlock.initSvg();
+    var connection = containerBlock.getInput('STACK').connection;
+    for (var x = 0; x < this.optionCount_; x++) {
+      var optionBlock = new Blockly.Block(workspace, 'title_dropdown_option');
+      optionBlock.initSvg();
+      connection.connect(optionBlock.previousConnection);
+      connection = optionBlock.nextConnection;
+    }
+    return containerBlock;
+  },
+  compose: function(containerBlock) {
+    // Disconnect all input blocks and destroy all inputs.
+    for (var x = this.optionCount_ - 1; x >= 0; x--) {
+      this.removeInput('OPTION' + x);
+    }
+    this.optionCount_ = 0;
+    // Rebuild the block's inputs.
+    var optionBlock = containerBlock.getInputTargetBlock('STACK');
+    while (optionBlock) {
+      var input = this.appendInput(Blockly.DUMMY_INPUT,
+          'OPTION' + this.optionCount_);
+      input.appendTitle(
+          new Blockly.FieldTextInput(optionBlock.userData_ || 'option'),
+          'USER' + this.optionCount_);
+      input.appendTitle(',');
+      input.appendTitle(
+          new Blockly.FieldTextInput(optionBlock.cpuData_ || 'OPTIONNAME'),
+          'CPU' + this.optionCount_);
+      this.optionCount_++;
+      optionBlock = optionBlock.nextConnection &&
+          optionBlock.nextConnection.targetBlock();
+    }
+  },
+  saveConnections: function(containerBlock) {
+    // Store names and values for each option.
+    var optionBlock = containerBlock.getInputTargetBlock('STACK');
+    var x = 0;
+    while (optionBlock) {
+      optionBlock.userData_ = this.getTitleText('USER' + x);
+      optionBlock.cpuData_ = this.getTitleText('CPU' + x);
+      x++;
+      optionBlock = optionBlock.nextConnection &&
+          optionBlock.nextConnection.targetBlock();
+    }
+  }
+};
+
+Blockly.Language.title_dropdown_container = {
+  // Container.
+  init: function() {
+    this.setColour(160);
+    this.appendTitle('add options');
+    this.appendInput(Blockly.NEXT_STATEMENT, 'STACK');
+    this.setTooltip('');
+    this.contextMenu = false;
+  }
+};
+
+Blockly.Language.title_dropdown_option = {
+  // Add option.
+  init: function() {
+    this.setColour(160);
+    this.appendTitle('option');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip('');
+    this.contextMenu = false;
   }
 };
 

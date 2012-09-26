@@ -205,6 +205,21 @@ function getTitles(block) {
         titles.push('.appendTitle(new Blockly.FieldVariable(' +
             varname + '), ' + escapeString(block.getTitleText('NAME')) + ');');
         break;
+      case 'title_dropdown':
+        // Result:
+        // .appendTitle(new Blockly.FieldDropdown(
+        //     [['yes', '1'], ['no', '0']]), 'TOGGLE');
+        var options = [];
+        for (var x = 0; x < block.optionCount_; x++) {
+          options[x] = '[' + escapeString(block.getTitleText('USER' + x)) +
+              ', ' + escapeString(block.getTitleText('CPU' + x)) + ']';
+        }
+        if (options.length) {
+          titles.push('.appendTitle(new Blockly.FieldDropdown([' +
+              options.join(', ') + ']), ' +
+              escapeString(block.getTitleText('NAME')) + ');');
+        }
+        break;
     }
     block = block.nextConnection && block.nextConnection.targetBlock();
   }
@@ -292,8 +307,10 @@ function updateGenerator() {
     var name = block.getTitleText('NAME');
     switch (block.type) {
       case 'title_input':
+      case 'title_variable':
+      case 'title_dropdown':
         code.push('  var field_' + name.toLowerCase() +
-                  ' = this.getTitleText(\'' + name + '\');');
+                  ' = this.getTitleValue(\'' + name + '\');');
         break;
       case 'input_value':
         code.push('  var value_' + name.toLowerCase() +
