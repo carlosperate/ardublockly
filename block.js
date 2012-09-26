@@ -992,19 +992,6 @@ Blockly.Block.prototype.getTitle_ = function(name) {
 };
 
 /**
- * Returns the human-readable text from the title of a block.
- * @param {string} name The name of the title.
- * @return {!string} Text from the title or null if title does not exist.
- */
-Blockly.Block.prototype.getTitleText = function(name) {
-  var title = this.getTitle_(name);
-  if (title) {
-    return title.getText();
-  }
-  return null;
-};
-
-/**
  * Returns the language-neutral value from the title of a block.
  * @param {string} name The name of the title.
  * @return {!string} Value from the title or null if title does not exist.
@@ -1018,20 +1005,6 @@ Blockly.Block.prototype.getTitleValue = function(name) {
 };
 
 /**
- * Change the title text for a block (e.g. 'choose' or 'remove list item').
- * @param {string} newText Text to be the new title.
- * @param {string} name The name of the title.
- */
-Blockly.Block.prototype.setTitleText = function(newText, name) {
-  var title = this.getTitle_(name);
-  if (title) {
-    title.setText(newText);
-  } else {
-    throw 'Title "' + name + '" not found.';
-  }
-};
-
-/**
  * Change the title value for a block (e.g. 'CHOOSE' or 'REMOVE').
  * @param {string} newValue Value to be the new title.
  * @param {string} name The name of the title.
@@ -1040,6 +1013,41 @@ Blockly.Block.prototype.setTitleValue = function(newValue, name) {
   var title = this.getTitle_(name);
   if (title) {
     title.setValue(newValue);
+  } else {
+    throw 'Title "' + name + '" not found.';
+  }
+};
+
+/**
+ * Returns the human-readable text from the title of a block.
+ * @param {string} name The name of the title.
+ * @return {!string} Text from the title or null if title does not exist.
+ * @deprecated
+ */
+Blockly.Block.prototype.getTitleText = function(name) {
+  // In September 2012 getTitleText was deprecated in favour of getTitleValue.
+  // At some future date this section should be deleted.
+  console.log('Obsolete call to getTitleText.  Please use getTitleValue.');
+  var title = this.getTitle_(name);
+  if (title) {
+    return title.getText();
+  }
+  return null;
+};
+
+/**
+ * Change the title text for a block (e.g. 'choose' or 'remove list item').
+ * @param {string} newText Text to be the new title.
+ * @param {string} name The name of the title.
+ * @deprecated
+ */
+Blockly.Block.prototype.setTitleText = function(newText, name) {
+  // In September 2012 setTitleText was deprecated in favour of setTitleValue.
+  // At some future date this section should be deleted.
+  console.log('Obsolete call to setTitleText.  Please use setTitleValue.');
+  var title = this.getTitle_(name);
+  if (title) {
+    title.setText(newText);
   } else {
     throw 'Title "' + name + '" not found.';
   }

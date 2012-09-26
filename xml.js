@@ -279,7 +279,7 @@ Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
         console.log('Obsolete variable tag.  Please regenerate XML.');
         var data = xmlChild.getAttribute('data');
         if (data !== null) {
-          block.setTitleText(data, name);
+          block.setTitleValue(data, name);
         }
         break;
       case 'value':

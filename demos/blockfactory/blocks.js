@@ -212,8 +212,8 @@ Blockly.Language.title_dropdown = {
     var optionBlock = containerBlock.getInputTargetBlock('STACK');
     var x = 0;
     while (optionBlock) {
-      optionBlock.userData_ = this.getTitleText('USER' + x);
-      optionBlock.cpuData_ = this.getTitleText('CPU' + x);
+      optionBlock.userData_ = this.getTitleValue('USER' + x);
+      optionBlock.cpuData_ = this.getTitleValue('CPU' + x);
       x++;
       optionBlock = optionBlock.nextConnection &&
           optionBlock.nextConnection.targetBlock();

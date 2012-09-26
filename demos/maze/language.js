@@ -81,7 +81,7 @@ Blockly.Language.maze_turnRight = {
     var dropdown =
         new Blockly.FieldDropdown(Blockly.Language.maze_turnLeft.DIRECTIONS);
     this.appendTitle(dropdown, 'DIR');
-    this.setTitleText(Blockly.Language.maze_turnLeft.DIRECTIONS[1][0], 'DIR');
+    this.setTitleValue(Blockly.Language.maze_turnLeft.DIRECTIONS[1][1], 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Turns Pegman left or right by 90 degrees.');

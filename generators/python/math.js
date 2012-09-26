@@ -31,7 +31,7 @@ Blockly.Python.RESERVED_WORDS_ += 'math,random,';
 
 Blockly.Python.math_number = function() {
   // Numeric value.
-  var code = window.parseFloat(this.getTitleText('NUM'));
+  var code = window.parseFloat(this.getTitleValue('NUM'));
   return [code, Blockly.Python.ORDER_UNARY_SIGN];
 };
 
@@ -65,7 +65,7 @@ Blockly.Python.math_change = function() {
   // Add to a variable in place.
   var argument0 = Blockly.Python.valueToCode(this, 'DELTA',
       Blockly.Python.ORDER_ADDITIVE) || '0';
-  var varName = Blockly.Python.variableDB_.getName(this.getTitleText('VAR'),
+  var varName = Blockly.Python.variableDB_.getName(this.getTitleValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = (' + varName + ' if type(' + varName +
       ') in (int, float) else 0) + ' + argument0 + '\n';

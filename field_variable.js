@@ -43,6 +43,23 @@ Blockly.FieldVariable = function(varname) {
 Blockly.FieldVariable.prototype = new Blockly.FieldDropdown([[null]]);
 
 /**
+ * Get the variable's name (use a variableDB to convert into a real name).
+ * Unline a regular dropdown, variables are literal and have no neutral value.
+ * @return {string} Current text.
+ */
+Blockly.FieldVariable.prototype.getValue = function() {
+  return this.getText();
+};
+
+/**
+ * Set the variable name.
+ * @param {string} text New text.
+ */
+Blockly.FieldVariable.prototype.setValue = function(text) {
+  this.setText(text);
+};
+
+/**
  * Return a sorted list of variable names for variable dropdown menus.
  * Include a special option at the end for creating a new variable name.
  * @return {!Array.<string>} Array of variable names.

@@ -26,7 +26,7 @@ Blockly.Python = Blockly.Generator.get('Python');
 
 Blockly.Python.text = function() {
   // Text value.
-  var code = Blockly.Python.quote_(this.getTitleText('TEXT'));
+  var code = Blockly.Python.quote_(this.getTitleValue('TEXT'));
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
@@ -64,7 +64,7 @@ Blockly.Python.text_join = function() {
 
 Blockly.Python.text_append = function() {
   // Append to a variable in place.
-  var varName = Blockly.Python.variableDB_.getName(this.getTitleText('VAR'),
+  var varName = Blockly.Python.variableDB_.getName(this.getTitleValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT',
       Blockly.Python.ORDER_NONE) || '\'\'';

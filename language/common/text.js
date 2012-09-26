@@ -153,15 +153,15 @@ Blockly.Language.text_append = {
     var thisBlock = this;
     this.setTooltip(function() {
       return Blockly.LANG_TEXT_APPEND_TOOLTIP_1.replace('%1',
-          thisBlock.getTitleText('VAR'));
+          thisBlock.getTitleValue('VAR'));
     });
   },
   getVars: function() {
-    return [this.getTitleText('VAR')];
+    return [this.getTitleValue('VAR')];
   },
   renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getTitleText('VAR'))) {
-      this.setTitleText(newName, 'VAR');
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
     }
   }
 };
@@ -284,7 +284,7 @@ Blockly.Language.text_trim = {
       var newTitle = (text == Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH) ?
           Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
           Blockly.LANG_TEXT_TRIM_TITLE_SIDE;
-      this.sourceBlock_.setTitleText(newTitle, 'SIDES');
+      this.sourceBlock_.setTitleValue(newTitle, 'SIDES');
       this.setText(text);
     });
     this.appendTitle(menu, 'MODE');
@@ -303,7 +303,7 @@ Blockly.Language.text_trim = {
   domToMutation: function(xmlElement) {
     // Restore the 'sides' title as plural or singular.
     var plural = (xmlElement.getAttribute('plural') == 'true');
-    this.setTitleText(plural ? Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
+    this.setTitleValue(plural ? Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
                       Blockly.LANG_TEXT_TRIM_TITLE_SIDE, 'SIDES');
   }
 };

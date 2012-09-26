@@ -77,8 +77,8 @@ function initEditor(blockly) {
  * When the workspace changes, update the three other displays.
  */
 function onchange() {
-  var cat = rootBlock.getTitleText('CAT');
-  var name = rootBlock.getTitleText('NAME');
+  var cat = rootBlock.getTitleValue('CAT');
+  var name = rootBlock.getTitleValue('NAME');
   var code = [];
   var type;
   if (cat) {
@@ -97,7 +97,7 @@ function onchange() {
  */
 function updateLanguage() {
   // Generate name and category.
-  var cat = rootBlock.getTitleText('CAT');
+  var cat = rootBlock.getTitleValue('CAT');
   var code = [];
   if (cat) {
     cat = cat.replace(/\\/g, '\\\\').replace(/'/g, '\\\'');
@@ -107,6 +107,7 @@ function updateLanguage() {
   }
   code.push('Blockly.Language.' + blockType + ' = {');
   code.push('  category: ' + cat + ',');
+  code.push('  helpUrl: \'http://www.example.com/\',');
   code.push('  init: function() {');
   // Generate colour.
   var colourBlock = rootBlock.getInputTargetBlock('COLOUR');
@@ -135,7 +136,7 @@ function updateLanguage() {
       }
       inputVarDefined = true;
     }
-    var name = escapeString(contentsBlock.getTitleText('NAME') || '');
+    var name = escapeString(contentsBlock.getTitleValue('NAME') || '');
     var check = getOptTypesFrom(contentsBlock, 'TYPE');
     code.push('    ' + inputVar + 'this.appendInput(' +
               TYPES[contentsBlock.type] + ', ' + name + check + ');');
@@ -170,6 +171,7 @@ function updateLanguage() {
       code.push('    this.setNextStatement(true' + bottomType + ');');
       break;
   }
+  code.push('    this.setTooltip(\'\');');
   code.push('  }');
   code.push('};');
 
@@ -188,22 +190,22 @@ function getTitles(block) {
     switch (block.type) {
       case 'title_static':
         // Result: .appendTitle('hello');
-        titles.push('.appendTitle(' + escapeString(block.getTitleText('TEXT')) +
+        titles.push('.appendTitle(' + escapeString(block.getTitleValue('TEXT')) +
                     ');');
         break;
       case 'title_input':
         // Result: .appendTitle(new Blockly.FieldTextInput('Hello'), 'GREET');
         titles.push('.appendTitle(new Blockly.FieldTextInput(' +
-                    escapeString(block.getTitleText('TEXT')) + '), ' +
-                    escapeString(block.getTitleText('NAME')) + ');');
+                    escapeString(block.getTitleValue('TEXT')) + '), ' +
+                    escapeString(block.getTitleValue('NAME')) + ');');
         break;
       case 'title_variable':
         // Result:
         // .appendTitle(new Blockly.FieldVariable('item'), 'VAR');
-        var varname = block.getTitleText('TEXT');
+        var varname = block.getTitleValue('TEXT');
         varname = varname ? escapeString(varname) : 'null';
         titles.push('.appendTitle(new Blockly.FieldVariable(' +
-            varname + '), ' + escapeString(block.getTitleText('NAME')) + ');');
+            varname + '), ' + escapeString(block.getTitleValue('NAME')) + ');');
         break;
       case 'title_dropdown':
         // Result:
@@ -211,13 +213,13 @@ function getTitles(block) {
         //     [['yes', '1'], ['no', '0']]), 'TOGGLE');
         var options = [];
         for (var x = 0; x < block.optionCount_; x++) {
-          options[x] = '[' + escapeString(block.getTitleText('USER' + x)) +
-              ', ' + escapeString(block.getTitleText('CPU' + x)) + ']';
+          options[x] = '[' + escapeString(block.getTitleValue('USER' + x)) +
+              ', ' + escapeString(block.getTitleValue('CPU' + x)) + ']';
         }
         if (options.length) {
           titles.push('.appendTitle(new Blockly.FieldDropdown([' +
               options.join(', ') + ']), ' +
-              escapeString(block.getTitleText('NAME')) + ');');
+              escapeString(block.getTitleValue('NAME')) + ');');
         }
         break;
     }
@@ -272,7 +274,7 @@ function getTypesFrom_(block, name) {
   if (!typeBlock) {
     types = [];
   } else if (typeBlock.type == 'type_other') {
-    types = [escapeString(typeBlock.getTitleText('TYPE'))];
+    types = [escapeString(typeBlock.getTitleValue('TYPE'))];
   } else if (typeBlock.type == 'type_group') {
     types = [];
     for (var n = 0; n < typeBlock.typeCount_; n++) {
@@ -300,17 +302,21 @@ function updateGenerator() {
   var language = document.getElementById('language').value;
   var code = [];
   code.push('Blockly.' + language + '.' + blockType + ' = {');
-  code.push('  // TODO: Assemble ' + language + ' into code variable.');
   // Loop through every block, and generate getters for any fields or inputs.
   var blocks = rootBlock.getDescendants();
   for (var x = 0, block; block = blocks[x]; x++) {
-    var name = block.getTitleText('NAME');
+    var name = block.getTitleValue('NAME');
     switch (block.type) {
       case 'title_input':
-      case 'title_variable':
       case 'title_dropdown':
         code.push('  var field_' + name.toLowerCase() +
                   ' = this.getTitleValue(\'' + name + '\');');
+        break;
+      case 'title_variable':
+        code.push('  var variable_' + name.toLowerCase() +
+                  ' = Blockly.' + language +
+                  '.variableDB_.getName(this.getTitleValue(\'' + name +
+                  '\'), Blockly.Variables.NAME_TYPE);');
         break;
       case 'input_value':
         code.push('  var value_' + name.toLowerCase() +
@@ -324,6 +330,7 @@ function updateGenerator() {
         break;
     }
   }
+  code.push('  // TODO: Assemble ' + language + ' into code variable.');
   code.push('  var code = \'...\'');
   if (rootBlock.getTitleValue('CONNECTIONS') == 'LEFT') {
     code.push('  // TODO: Change ORDER_NONE to the correct strength.');
