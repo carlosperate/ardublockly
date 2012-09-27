@@ -136,7 +136,7 @@ function updateLanguage() {
       }
       inputVarDefined = true;
     }
-    var name = escapeString(contentsBlock.getTitleValue('NAME') || '');
+    var name = escapeString(contentsBlock.getTitleValue('INPUTNAME') || '');
     var check = getOptTypesFrom(contentsBlock, 'TYPE');
     code.push('    ' + inputVar + 'this.appendInput(' +
               TYPES[contentsBlock.type] + ', ' + name + check + ');');
@@ -197,7 +197,7 @@ function getTitles(block) {
         // Result: .appendTitle(new Blockly.FieldTextInput('Hello'), 'GREET');
         titles.push('.appendTitle(new Blockly.FieldTextInput(' +
                     escapeString(block.getTitleValue('TEXT')) + '), ' +
-                    escapeString(block.getTitleValue('NAME')) + ');');
+                    escapeString(block.getTitleValue('TITLENAME')) + ');');
         break;
       case 'title_variable':
         // Result:
@@ -205,7 +205,7 @@ function getTitles(block) {
         var varname = block.getTitleValue('TEXT');
         varname = varname ? escapeString(varname) : 'null';
         titles.push('.appendTitle(new Blockly.FieldVariable(' +
-            varname + '), ' + escapeString(block.getTitleValue('NAME')) + ');');
+            varname + '), ' + escapeString(block.getTitleValue('TITLENAME')) + ');');
         break;
       case 'title_dropdown':
         // Result:
@@ -219,7 +219,7 @@ function getTitles(block) {
         if (options.length) {
           titles.push('.appendTitle(new Blockly.FieldDropdown([' +
               options.join(', ') + ']), ' +
-              escapeString(block.getTitleValue('NAME')) + ');');
+              escapeString(block.getTitleValue('TITLENAME')) + ');');
         }
         break;
     }
@@ -299,35 +299,43 @@ function getTypesFrom_(block, name) {
  * Update the generator code.
  */
 function updateGenerator() {
+  function makeVar(root, name) {
+    name = name.toLowerCase().replace(/\W/g, '_');
+    return '  var ' + root + '_' + name;
+  }
   var language = document.getElementById('language').value;
   var code = [];
   code.push('Blockly.' + language + '.' + blockType + ' = {');
   // Loop through every block, and generate getters for any fields or inputs.
   var blocks = rootBlock.getDescendants();
   for (var x = 0, block; block = blocks[x]; x++) {
-    var name = block.getTitleValue('NAME');
     switch (block.type) {
       case 'title_input':
-        code.push('  var input_' + name.toLowerCase() +
+        var name = block.getTitleValue('TITLENAME');
+        code.push(makeVar('text', name) +
                   ' = this.getTitleValue(\'' + name + '\');');
         break;
       case 'title_dropdown':
-        code.push('  var dropdown_' + name.toLowerCase() +
+        var name = block.getTitleValue('TITLENAME');
+        code.push(makeVar('dropdown', name) +
                   ' = this.getTitleValue(\'' + name + '\');');
         break;
       case 'title_variable':
-        code.push('  var variable_' + name.toLowerCase() +
+        var name = block.getTitleValue('TITLENAME');
+        code.push(makeVar('variable', name) +
                   ' = Blockly.' + language +
                   '.variableDB_.getName(this.getTitleValue(\'' + name +
                   '\'), Blockly.Variables.NAME_TYPE);');
         break;
       case 'input_value':
-        code.push('  var value_' + name.toLowerCase() +
+        var name = block.getTitleValue('INPUTNAME');
+        code.push(makeVar('value', name) +
                   ' = Blockly.' + language + '.valueToCode(this, \'' + name +
                   '\', Blockly.' + language + '.ORDER_ATOMIC);');
         break;
       case 'input_statement':
-        code.push('  var statements_' + name.toLowerCase() +
+        var name = block.getTitleValue('INPUTNAME');
+        code.push(makeVar('statements', name) +
                   ' = Blockly.' + language + '.statementToCode(this, \'' +
                   name + '\');');
         break;

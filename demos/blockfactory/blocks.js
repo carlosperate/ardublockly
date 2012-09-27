@@ -121,10 +121,17 @@ Blockly.Language.title_input = {
     this.appendTitle('text input');
     this.appendTitle(new Blockly.FieldTextInput('default'), 'TEXT');
     this.appendTitle(',');
-    this.appendTitle(new Blockly.FieldTextInput('NAME'), 'NAME');
+    this.appendTitle(new Blockly.FieldTextInput('NAME'), 'TITLENAME');
     this.setPreviousStatement(true, 'Title');
     this.setNextStatement(true, 'Title');
     this.setTooltip('');
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    titleNameCheck(this);
   }
 };
 
@@ -135,7 +142,7 @@ Blockly.Language.title_dropdown = {
     this.setColour(160);
     this.appendTitle('dropdown');
     var input = this.appendInput(Blockly.DUMMY_INPUT, '');
-    input.appendTitle(new Blockly.FieldTextInput('NAME'), 'NAME');
+    input.appendTitle(new Blockly.FieldTextInput('NAME'), 'TITLENAME');
     input = this.appendInput(Blockly.DUMMY_INPUT, 'OPTION0');
     input.appendTitle(new Blockly.FieldTextInput('option'), 'USER0');
     input.appendTitle(',');
@@ -218,6 +225,17 @@ Blockly.Language.title_dropdown = {
       optionBlock = optionBlock.nextConnection &&
           optionBlock.nextConnection.targetBlock();
     }
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    if (this.optionCount_ < 1) {
+      this.setWarningText('Drop down menu must\nhave at least one option.');
+    } else {
+      titleNameCheck(this);
+    }
   }
 };
 
@@ -252,10 +270,17 @@ Blockly.Language.title_variable = {
     this.appendTitle('variable');
     this.appendTitle(new Blockly.FieldTextInput('item'), 'TEXT');
     this.appendTitle(',');
-    this.appendTitle(new Blockly.FieldTextInput('NAME'), 'NAME');
+    this.appendTitle(new Blockly.FieldTextInput('NAME'), 'TITLENAME');
     this.setPreviousStatement(true, 'Title');
     this.setNextStatement(true, 'Title');
     this.setTooltip('');
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    titleNameCheck(this);
   }
 };
 
@@ -266,7 +291,7 @@ Blockly.Language.input_value = {
     this.setColour(210);
     this.appendTitle('value input');
     this.appendInput(Blockly.DUMMY_INPUT, '')
-        .appendTitle(new Blockly.FieldTextInput('NAME'), 'NAME');
+        .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
     this.appendInput(Blockly.NEXT_STATEMENT, 'TITLES', 'Title')
         .appendTitle('titles');
     this.appendInput(Blockly.INPUT_VALUE, 'TYPE', 'Type')
@@ -274,6 +299,13 @@ Blockly.Language.input_value = {
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');
     this.setTooltip('');
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    inputNameCheck(this);
   }
 };
 
@@ -284,7 +316,7 @@ Blockly.Language.input_statement = {
     this.setColour(210);
     this.appendTitle('statement input');
     this.appendInput(Blockly.DUMMY_INPUT, '')
-        .appendTitle(new Blockly.FieldTextInput('NAME'), 'NAME');
+        .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
     this.appendInput(Blockly.NEXT_STATEMENT, 'TITLES', 'Title')
         .appendTitle('titles');
     this.appendInput(Blockly.INPUT_VALUE, 'TYPE', 'Type')
@@ -292,6 +324,13 @@ Blockly.Language.input_statement = {
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');
     this.setTooltip('');
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    inputNameCheck(this);
   }
 };
 
@@ -508,3 +547,47 @@ Blockly.Language.type_other = {
     Blockly.Language['colour_' + x] = new ColourBlock(colours[x]);
   }
 })();
+
+/**
+ * Check to see if more than one title has this name.
+ * Highly inefficient (On^2), but n is small.
+ * @param {!Blockly.Block} referenceBlock Block to check.
+ */
+function titleNameCheck(referenceBlock) {
+  var name = referenceBlock.getTitleValue('TITLENAME').toLowerCase();
+  count = 0;
+  var blocks = referenceBlock.workspace.getAllBlocks();
+  for (var x = 0, block; block = blocks[x]; x++) {
+    var otherName = block.getTitleValue('TITLENAME');
+    if (otherName) {
+      if (otherName.toLowerCase() == name) {
+        count++;
+      }
+    }
+  }
+  var msg =  (count > 1) ?
+      'There are ' + count + ' title blocks\n with this name.' : null;
+  referenceBlock.setWarningText(msg);
+}
+
+/**
+ * Check to see if more than one input has this name.
+ * Highly inefficient (On^2), but n is small.
+ * @param {!Blockly.Block} referenceBlock Block to check.
+ */
+function inputNameCheck(referenceBlock) {
+  var name = referenceBlock.getTitleValue('INPUTNAME').toLowerCase();
+  count = 0;
+  var blocks = referenceBlock.workspace.getAllBlocks();
+  for (var x = 0, block; block = blocks[x]; x++) {
+    var otherName = block.getTitleValue('INPUTNAME');
+    if (otherName) {
+      if (otherName.toLowerCase() == name) {
+        count++;
+      }
+    }
+  }
+  var msg =  (count > 1) ?
+      'There are ' + count + ' input blocks\n with this name.' : null;
+  referenceBlock.setWarningText(msg);
+}
