@@ -173,9 +173,10 @@ Blockly.BlockSvg.destroyUiStep_ = function(clone) {
   if (percent > 1) {
     clone.parentNode.removeChild(clone);
   } else {
-    var translate =
-        (clone.translateX_ + clone.bBox_.width / 2 * percent) + ', ' +
-        (clone.translateY_ + clone.bBox_.height * percent);
+    var x = clone.translateX_ +
+        (Blockly.RTL ? -1 : 1) * clone.bBox_.width / 2 * percent;
+    var y = clone.translateY_ + clone.bBox_.height * percent;
+    var translate = x + ', ' + y;
     var scale = 1 - percent;
     clone.setAttribute('transform', 'translate(' + translate + ')' +
         ' scale(' + scale + ')');
