@@ -104,7 +104,7 @@ Blockly.Dart.math_single = function() {
     case 'EXP':
       code = 'Math.exp(' + argNaked + ')';
       break;
-    case '10POW':
+    case 'POW10':
       code = 'Math.pow(10,' + argNaked + ')';
     case 'ROUND':
       code = argPostfix + '.round()';
@@ -143,7 +143,7 @@ Blockly.Dart.math_single = function() {
       code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
       break;
     default:
-      throw 'Unknown math operator.';
+      throw 'Unknown math operator: ' + operator;
   }
   return [code, Blockly.Dart.ORDER_MULTIPLICATIVE];
 };
@@ -330,7 +330,7 @@ Blockly.Dart.math_on_list = function() {
       code = Blockly.Dart.math_on_list.math_random_item + '(' + list + ')';
       break;
     default:
-      throw 'Unknown operator.';
+      throw 'Unknown operator: ' + func;
   }
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };

@@ -117,9 +117,9 @@ Blockly.Python.text_charAt = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'AT',
       Blockly.Python.ORDER_NONE) || '1';
   var argument1 = Blockly.Python.valueToCode(this, 'VALUE',
-      Blockly.Python.ORDER_MEMBER) || '[]';
+      Blockly.Python.ORDER_MEMBER) || '\'\'';
   // Blockly uses one-based indicies.
-  if (argument0.match(/^\d+$/)) {
+  if (argument0.match(/^-?\d+$/)) {
     // If the index is a naked number, decrement it right now.
     // Except not allowing negative index by constraining at 0.
     argument0 = Math.max(0, parseInt(argument0, 10) - 1);

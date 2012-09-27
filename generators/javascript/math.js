@@ -99,7 +99,7 @@ Blockly.JavaScript.math_single = function() {
     case 'EXP':
       code = 'Math.exp(' + argNaked + ')';
       break;
-    case '10POW':
+    case 'POW10':
       code = 'Math.pow(10,' + argNaked + ')';
       break;
     case 'ROUND':
@@ -140,7 +140,7 @@ Blockly.JavaScript.math_single = function() {
       code = 'Math.atan(' + argNaked + ') / Math.PI * 180';
       break;
     default:
-      throw 'Unknown math operator.';
+      throw 'Unknown math operator: ' + operator;
   }
   return [code, Blockly.JavaScript.ORDER_DIVISION];
 };
@@ -300,7 +300,7 @@ Blockly.JavaScript.math_on_list = function() {
           '(' + list + ')';
       break;
     default:
-      throw 'Unknown operator.';
+      throw 'Unknown operator: ' + func;
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
