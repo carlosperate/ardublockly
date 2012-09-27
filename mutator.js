@@ -163,7 +163,7 @@ Blockly.Mutator.prototype.createEditor_ = function() {
 
 /**
  * Callback function triggered when the bubble has resized.
- * Resize the text area accordingly.
+ * Resize the workspace accordingly.
  */
 Blockly.Mutator.prototype.resizeBubble_ = function() {
   var doubleBorderWidth = 2 * Blockly.Bubble.BORDER_WIDTH;

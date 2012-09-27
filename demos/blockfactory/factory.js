@@ -308,8 +308,11 @@ function updateGenerator() {
     var name = block.getTitleValue('NAME');
     switch (block.type) {
       case 'title_input':
+        code.push('  var input_' + name.toLowerCase() +
+                  ' = this.getTitleValue(\'' + name + '\');');
+        break;
       case 'title_dropdown':
-        code.push('  var field_' + name.toLowerCase() +
+        code.push('  var dropdown_' + name.toLowerCase() +
                   ' = this.getTitleValue(\'' + name + '\');');
         break;
       case 'title_variable':
