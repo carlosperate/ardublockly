@@ -105,7 +105,7 @@ Blockly.Dart.finish = function(code) {
   for (var name in Blockly.Dart.definitions_) {
     definitions.push(Blockly.Dart.definitions_[name]);
   }
-  return definitions.join('\n') + '\n\n' + code;
+  return definitions.join('\n\n') + '\n\n\n' + code;
 };
 
 /**

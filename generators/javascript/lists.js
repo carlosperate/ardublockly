@@ -54,7 +54,7 @@ Blockly.JavaScript.lists_repeat = function() {
     func.push('    array[i] = value;');
     func.push('  }');
     func.push('  return array;');
-    func.push('}\n');
+    func.push('}');
     Blockly.JavaScript.definitions_['lists_repeat'] = func.join('\n');
   }
   var argument0 = Blockly.JavaScript.valueToCode(this, 'ITEM',

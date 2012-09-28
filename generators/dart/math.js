@@ -171,7 +171,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  num sumVal = 0;');
         func.push('  myList.forEach((num entry) {sumVal += entry;});');
         func.push('  return sumVal;');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_sum'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_sum + '(' + list + ')';
@@ -188,7 +188,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  myList.forEach((num entry) ' +
 									'{minVal = Math.min(minVal, entry);});');
         func.push('  return minVal;');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_min'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_min + '(' + list + ')';
@@ -205,7 +205,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  myList.forEach((num entry) ' +
 									'{maxVal = Math.max(maxVal, entry);});');
         func.push('  return maxVal;');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_max'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_max + '(' + list + ')';
@@ -225,7 +225,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  num sumVal = 0;');
         func.push('  localList.forEach((num entry) {sumVal += entry;});');
         func.push('  return sumVal / localList.length;');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_average'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_average + '(' + list + ')';
@@ -250,7 +250,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  } else {');
         func.push('    return (localList[index - 1] + localList[index]) / 2;');
         func.push('  }');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_median'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_median + '(' + list + ')';
@@ -291,7 +291,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('    }');
         func.push('  }');
         func.push('  return modes;');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_modes'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_modes + '(' + list + ')';
@@ -315,7 +315,7 @@ Blockly.Dart.math_on_list = function() {
 									'Math.pow(x - mean, 2));');
         func.push('  num standard_dev = Math.sqrt(sumSquare / n);');
         func.push('  return standard_dev;');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_standard_deviation'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_standard_deviation +
@@ -330,7 +330,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('Dynamic ' + functionName + '(List myList) {');
         func.push('  int x = (Math.random() * myList.length).floor().toInt();');
         func.push('  return myList[x];');
-        func.push('}\n');
+        func.push('}');
         Blockly.Dart.definitions_['math_random_item'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_random_item + '(' + list + ')';
@@ -383,7 +383,7 @@ Blockly.Dart.math_random_int = function() {
     func.push('    b = c;');
     func.push('  }');
     func.push('  return (Math.random() * (b - a + 1) + a).floor();');
-    func.push('}\n');
+    func.push('}');
     Blockly.Dart.definitions_['math_random_int'] = func.join('\n');
   }
   code = Blockly.Dart.math_random_int.random_function +

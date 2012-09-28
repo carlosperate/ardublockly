@@ -76,7 +76,7 @@ Blockly.Python.lists_indexOf = function() {
       func.push('def ' + functionName + '(myList, elem):');
       func.push('  try: theIndex = myList.index(elem) + 1');
       func.push('  except: theIndex = 0');
-      func.push('  return theIndex\n');
+      func.push('  return theIndex');
       Blockly.Python.definitions_['first_index'] = func.join('\n');
     }
     code = Blockly.Python.lists_indexOf.first_index + '(' +
@@ -92,7 +92,7 @@ Blockly.Python.lists_indexOf = function() {
       func.push('def ' + functionName + '(myList, elem):');
       func.push('  try: theIndex = len(myList) - myList[::-1].index(elem)');
       func.push('  except: theIndex = 0');
-      func.push('  return theIndex\n');
+      func.push('  return theIndex');
       Blockly.Python.definitions_['last_index'] = func.join('\n');
     }
     code = Blockly.Python.lists_indexOf.last_index + '(' +

@@ -104,12 +104,18 @@ Blockly.Python.init = function() {
  */
 Blockly.Python.finish = function(code) {
   // Convert the definitions dictionary into a list.
+  var imports = [];
   var definitions = [];
   for (var name in Blockly.Python.definitions_) {
-    definitions.push(Blockly.Python.definitions_[name]);
+    var def = Blockly.Python.definitions_[name];
+    if (def.indexOf('import ') == 0) {
+      imports.push(def);
+    } else {
+      definitions.push(def);
+    }
   }
-  var stringOfDefs = definitions.join('\n').replace(/\n(\n)+/g,'\n\n') 
-  return stringOfDefs.replace(/(\n)+$/,'\n\n\n') + code;
+  var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
+  return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
 /**
