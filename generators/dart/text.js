@@ -169,7 +169,7 @@ Blockly.Dart.text_changeCase = function() {
       func.push('    }');
       func.push('  }');
       func.push('  return title;');
-      func.push('}');
+      func.push('}\n');
       Blockly.Dart.definitions_['toTitleCase'] = func.join('\n');
     }
     var argument0 = Blockly.Dart.valueToCode(this, 'TEXT',

@@ -108,7 +108,8 @@ Blockly.Python.finish = function(code) {
   for (var name in Blockly.Python.definitions_) {
     definitions.push(Blockly.Python.definitions_[name]);
   }
-  return definitions.join('\n') + '\n\n' + code;
+  var stringOfDefs = definitions.join('\n').replace(/\n(\n)+/g,'\n\n') 
+  return stringOfDefs.replace(/(\n)+$/,'\n\n\n') + code;
 };
 
 /**

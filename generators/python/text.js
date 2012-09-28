@@ -181,7 +181,7 @@ Blockly.Python.text_prompt = function() {
     func.push('  try:');
     func.push('    return raw_input(msg)');
     func.push('  except NameError:');
-    func.push('    return input(msg)');
+    func.push('    return input(msg)\n');
     Blockly.Python.definitions_['text_prompt'] = func.join('\n');
   }
   var msg = Blockly.Python.quote_(this.getTitleValue('TEXT'));

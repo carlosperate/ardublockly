@@ -68,13 +68,36 @@ Blockly.Python.lists_indexOf = function() {
       Blockly.Python.ORDER_MEMBER) || '\'\'';
   var code;
   if (this.getTitleValue('END') == 'FIRST') {
-    code = argument1 + '.index(' + argument0 + ') + 1';
+    if (!Blockly.Python.definitions_['first_index']) {
+      var functionName = Blockly.Python.variableDB_.getDistinctName(
+          'first_index', Blockly.Generator.NAME_TYPE);
+      Blockly.Python.lists_indexOf.first_index = functionName;
+      var func = [];
+      func.push('def ' + functionName + '(myList, elem):');
+      func.push('  try: theIndex = myList.index(elem) + 1');
+      func.push('  except: theIndex = 0');
+      func.push('  return theIndex\n');
+      Blockly.Python.definitions_['first_index'] = func.join('\n');
+    }
+    code = Blockly.Python.lists_indexOf.first_index + '(' +
+        argument1 + ', ' + argument0 + ')';
     return [code, Blockly.Python.ORDER_MEMBER];
   }
   else {
-    code = 'len(' + argument1 + ') - ' + argument1 + '[::-1].index(' +
-        argument0 + ')';
-    return [code, Blockly.Python.ORDER_ADDITIVE];
+    if (!Blockly.Python.definitions_['last_index']) {
+      var functionName = Blockly.Python.variableDB_.getDistinctName(
+          'last_index', Blockly.Generator.NAME_TYPE);
+      Blockly.Python.lists_indexOf.last_index = functionName;
+      var func = [];
+      func.push('def ' + functionName + '(myList, elem):');
+      func.push('  try: theIndex = len(myList) - myList[::-1].index(elem)');
+      func.push('  except: theIndex = 0');
+      func.push('  return theIndex\n');
+      Blockly.Python.definitions_['last_index'] = func.join('\n');
+    }
+    code = Blockly.Python.lists_indexOf.last_index + '(' +
+        argument1 + ', ' + argument0 + ')';
+    return [code, Blockly.Python.ORDER_MEMBER];
   }
 };
 

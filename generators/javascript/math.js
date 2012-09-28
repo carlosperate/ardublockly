@@ -180,7 +180,7 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('function ' + functionName + '(myList) {');
         func.push('  return myList.reduce(function(x, y) {return x + y;}) / ' +
                   'myList.length;');
-        func.push('}');
+        func.push('}\n');
         Blockly.JavaScript.definitions_['math_mean'] = func.join('\n');
       }
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
@@ -205,7 +205,7 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('  } else {');
         func.push('    return localList[(localList.length - 1) / 2];');
         func.push('  }');
-        func.push('}');
+        func.push('}\n');
         Blockly.JavaScript.definitions_['math_median'] = func.join('\n');
       }
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
@@ -248,7 +248,7 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('    }');
         func.push('  }');
         func.push('  return modes;');
-        func.push('}');
+        func.push('}\n');
         Blockly.JavaScript.definitions_['math_modes'] = func.join('\n');
       }
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
@@ -273,7 +273,7 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('  variance = variance / n;');
         func.push('  standard_dev = Math.sqrt(variance);');
         func.push('  return standard_dev;');
-        func.push('}');
+        func.push('}\n');
         Blockly.JavaScript.definitions_['math_standard_deviation'] =
             func.join('\n');
       }
@@ -291,7 +291,7 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('function ' + functionName + '(list) {');
         func.push('  var x = Math.floor(Math.random() * list.length);');
         func.push('  return list[x];');
-        func.push('}');
+        func.push('}\n');
         Blockly.JavaScript.definitions_['math_random_item'] = func.join('\n');
       }
       list = Blockly.JavaScript.valueToCode(this, 'LIST',
@@ -347,7 +347,7 @@ Blockly.JavaScript.math_random_int = function() {
     func.push('    b = c;');
     func.push('  }');
     func.push('  return Math.floor(Math.random() * (b - a + 1) + a);');
-    func.push('}');
+    func.push('}\n');
     Blockly.JavaScript.definitions_['math_random_int'] = func.join('\n');
   }
   code = Blockly.JavaScript.math_random_int.random_function +

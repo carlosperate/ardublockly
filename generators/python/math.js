@@ -169,8 +169,8 @@ Blockly.Python.math_on_list = function() {
       break;
     case 'AVERAGE':
       if (!Blockly.Python.definitions_['math_mean']) {
-        // This operation exclude null values:
-        //   math_mean([null,null,1,9]) == 5.0.
+        // This operation exclude null and values that are not int or float:
+        //   math_mean([null,null,"aString",1,9]) == 5.0.
         var functionName = Blockly.Python.variableDB_.getDistinctName(
             'math_mean', Blockly.Generator.NAME_TYPE);
         Blockly.Python.math_on_list.math_mean = functionName;

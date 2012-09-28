@@ -101,7 +101,7 @@ Blockly.JavaScript.text_endString = function() {
       func.push('function ' + functionName + '(n, myString) {');
       func.push('  // Return a trailing substring of n characters.');
       func.push('  return myString.substring(myString.length - n);');
-      func.push('}');
+      func.push('}\n');
       Blockly.JavaScript.definitions_['text_tailString'] = func.join('\n');
     }
     var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
@@ -165,7 +165,7 @@ Blockly.JavaScript.text_changeCase = function() {
       func.push('  return str.replace(/\\S+/g,');
       func.push('      function(txt) {return txt.charAt(0).toUpperCase() + ' +
                 'txt.substr(1).toLowerCase();});');
-      func.push('}');
+      func.push('}\n');
       Blockly.JavaScript.definitions_['text_toTitleCase'] = func.join('\n');
     }
     var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',

@@ -54,7 +54,7 @@ Blockly.Dart.lists_repeat = function() {
     func.push('    array[i] = value;');
     func.push('  }');
     func.push('  return array;');
-    func.push('}');
+    func.push('}\n');
     Blockly.Dart.definitions_['lists_repeat'] = func.join('\n');
   }
   var argument0 = Blockly.Dart.valueToCode(this, 'ITEM', true) || 'null';
