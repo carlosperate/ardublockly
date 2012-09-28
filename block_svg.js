@@ -721,6 +721,9 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
           labelY += Blockly.BlockSvg.SEP_SPACE_Y;
         }
         cursorX = this.renderTitles_(input.titleRow, labelX, labelY);
+        if (Blockly.RTL) {
+          cursorX = -cursorX;
+        }
         if (input.type != Blockly.DUMMY_INPUT) {
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
         }
