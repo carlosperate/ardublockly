@@ -131,9 +131,9 @@ Blockly.JavaScript.text_charAt = function() {
   var argument0 = Blockly.JavaScript.valueToCode(this, 'AT',
       Blockly.JavaScript.ORDER_NONE) || '1';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE',
-      Blockly.JavaScript.ORDER_MEMBER) || '[]';
+      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
   // Blockly uses one-based indicies.
-  if (argument0.match(/^\d+$/)) {
+  if (argument0.match(/^-?\d+$/)) {
     // If the index is a naked number, decrement it right now.
     argument0 = parseInt(argument0, 10) - 1;
   } else {

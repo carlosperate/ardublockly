@@ -565,7 +565,7 @@ function titleNameCheck(referenceBlock) {
       }
     }
   }
-  var msg =  (count > 1) ?
+  var msg = (count > 1) ?
       'There are ' + count + ' title blocks\n with this name.' : null;
   referenceBlock.setWarningText(msg);
 }
@@ -587,7 +587,7 @@ function inputNameCheck(referenceBlock) {
       }
     }
   }
-  var msg =  (count > 1) ?
+  var msg = (count > 1) ?
       'There are ' + count + ' input blocks\n with this name.' : null;
   referenceBlock.setWarningText(msg);
 }
