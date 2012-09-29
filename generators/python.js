@@ -108,7 +108,7 @@ Blockly.Python.finish = function(code) {
   var definitions = [];
   for (var name in Blockly.Python.definitions_) {
     var def = Blockly.Python.definitions_[name];
-    if (def.indexOf('import ') == 0) {
+    if (def.match(/^(from\s+\S+\s+)?import\s+\S+/)) {
       imports.push(def);
     } else {
       definitions.push(def);

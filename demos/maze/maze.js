@@ -228,6 +228,15 @@ Maze.draw_map = function() {
     v_line.setAttribute('stroke-width', 2);
     svg.appendChild(v_line);   
   }
+  
+  // Add finish marker.
+  var finishMarker = document.createElementNS(Blockly.SVG_NS, 'image');
+  finishMarker.setAttribute('id', 'finish');
+  finishMarker.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+      'marker.png');
+  finishMarker.setAttribute('height', 34);
+  finishMarker.setAttribute('width', 20);
+  svg.appendChild(finishMarker);   
 };
 
 /**
@@ -288,10 +297,10 @@ Maze.reset = function() {
 
   // Move the finish icon into position.
   var finishIcon = document.getElementById('finish');
-  finishIcon.style.top = Maze.mapOffsetTop_ +
-      Maze.SQUARE_SIZE * (Maze.finish_.y + 0.5) - finishIcon.offsetHeight;
-  finishIcon.style.left = Maze.mapOffsetLeft_ +
-      Maze.SQUARE_SIZE * (Maze.finish_.x + 0.5) - finishIcon.offsetWidth / 2;
+  finishIcon.setAttribute('x', Maze.SQUARE_SIZE * (Maze.finish_.x + 0.5) -
+      finishIcon.getAttribute('width') / 2);
+  finishIcon.setAttribute('y', Maze.SQUARE_SIZE * (Maze.finish_.y + 0.6) -
+      finishIcon.getAttribute('height'));
 
   // Kill all tasks.
   for (var x = 0; x < Maze.pidList.length; x++) {

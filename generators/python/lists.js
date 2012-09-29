@@ -115,10 +115,9 @@ Blockly.Python.lists_setIndex = function() {
   var argument2 = Blockly.Python.valueToCode(this, 'TO',
       Blockly.Python.ORDER_NONE) || 'None';
   // Blockly uses one-based indicies.
-  if (argument0.match(/^\d+$/)) {
+  if (argument0.match(/^-?\d+$/)) {
     // If the index is a naked number, decrement it right now.
-    // Except we don't allow negative index like in Python.
-    argument0 = Math.max(0, parseInt(argument0, 10) - 1);
+    argument0 = parseInt(argument0, 10) - 1;
   } else {
     // If the index is dynamic, decrement it in code.
     argument0 += ' - 1';
