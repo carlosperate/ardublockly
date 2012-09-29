@@ -121,7 +121,7 @@ Blockly.Field.prototype.render = function() {
     return null;
   }
   if (bBox.height == 0) {
-    bBox.height = 18;
+    bBox.height = Blockly.BlockSvg.TITLE_HEIGHT;
   }
   var width = bBox.width + Blockly.BlockSvg.SEP_SPACE_X;
   var height = bBox.height;
@@ -132,23 +132,6 @@ Blockly.Field.prototype.render = function() {
   this.borderRect_.setAttribute('x', left);
   this.borderRect_.setAttribute('y', top);
   return bBox;
-};
-
-/**
- * Returns the width of the title.
- * @return {number} Width.
- */
-Blockly.Field.prototype.width = function() {
-  var bBox = this.render();
-  if (!bBox) {
-    // Firefox has trouble with hidden elements (Bug 528969).
-    return 0;
-  }
-  if (bBox.width == -Infinity) {
-    // Opera has trouble with bounding boxes around empty objects.
-    return 0;
-  }
-  return bBox.width;
 };
 
 /**

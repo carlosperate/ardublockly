@@ -73,7 +73,7 @@ Blockly.Dart.init = function() {
   if (Blockly.Variables) {
     if (!Blockly.Dart.variableDB_) {
       Blockly.Dart.variableDB_ =
-          new Blockly.Names(Blockly.Dart.RESERVED_WORDS_.split(','));
+          new Blockly.Names(Blockly.Dart.RESERVED_WORDS_);
     } else {
       Blockly.Dart.variableDB_.reset();
     }

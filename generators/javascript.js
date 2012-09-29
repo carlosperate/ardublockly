@@ -106,7 +106,7 @@ Blockly.JavaScript.init = function() {
   if (Blockly.Variables) {
     if (!Blockly.JavaScript.variableDB_) {
       Blockly.JavaScript.variableDB_ =
-          new Blockly.Names(Blockly.JavaScript.RESERVED_WORDS_.split(','));
+          new Blockly.Names(Blockly.JavaScript.RESERVED_WORDS_);
     } else {
       Blockly.JavaScript.variableDB_.reset();
     }

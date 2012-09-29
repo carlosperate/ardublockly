@@ -32,11 +32,11 @@ Blockly.Language.text = {
     this.setColour(160);
     //this.appendTitle('\u201C');
     this.appendTitle(new Blockly.FieldImage(Blockly.pathToBlockly +
-        'media/quote0.png', 12, 12));
+        'media/quote0.png', 120, 120));
     this.appendTitle(new Blockly.FieldTextInput(''), 'TEXT');
     //this.appendTitle('\u201D');
     this.appendTitle(new Blockly.FieldImage(Blockly.pathToBlockly +
-        'media/quote1.png', 12, 12));
+        'media/quote1.png', 120, 120));
     this.setOutput(true, String);
     this.setTooltip(Blockly.LANG_TEXT_TEXT_TOOLTIP_1);
   }

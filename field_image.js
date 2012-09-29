@@ -38,7 +38,7 @@ Blockly.FieldImage = function(src, height, width) {
   this.imageElement_ = Blockly.createSvgElement('image',
       {height: height + 'px',
        width: width + 'px',
-       y: -12}, this.group_);
+       y: 6 - Blockly.BlockSvg.TITLE_HEIGHT}, this.group_);
   this.setText(src);
   var isGecko = window.navigator.userAgent.indexOf('Gecko/') != -1;
   if (isGecko) {
@@ -47,7 +47,7 @@ Blockly.FieldImage = function(src, height, width) {
     this.rectElement_ = Blockly.createSvgElement('rect',
         {height: height + 'px',
          width: width + 'px',
-         y: -12,
+         y: 6 - Blockly.BlockSvg.TITLE_HEIGHT,
          'fill-opacity': 0}, this.group_);
   }
 };

@@ -88,7 +88,7 @@ Blockly.FieldLabel.prototype.render = function() {
     return null;
   }
   if (bBox.height == 0) {
-    bBox.height = 18;
+    bBox.height = Blockly.BlockSvg.TITLE_HEIGHT;
   }
   return bBox;
 };

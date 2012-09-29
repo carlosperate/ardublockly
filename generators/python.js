@@ -82,7 +82,7 @@ Blockly.Python.init = function() {
   if (Blockly.Variables) {
     if (!Blockly.Python.variableDB_) {
       Blockly.Python.variableDB_ =
-          new Blockly.Names(Blockly.Python.RESERVED_WORDS_.split(','));
+          new Blockly.Names(Blockly.Python.RESERVED_WORDS_);
     } else {
       Blockly.Python.variableDB_.reset();
     }
