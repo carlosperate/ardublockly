@@ -190,22 +190,22 @@ function getTitles(block) {
     switch (block.type) {
       case 'title_static':
         // Result: .appendTitle('hello');
-        titles.push('.appendTitle(' + escapeString(block.getTitleValue('TEXT')) +
-                    ');');
+        titles.push('.appendTitle(' +
+            escapeString(block.getTitleValue('TEXT')) + ');');
         break;
       case 'title_input':
         // Result: .appendTitle(new Blockly.FieldTextInput('Hello'), 'GREET');
         titles.push('.appendTitle(new Blockly.FieldTextInput(' +
-                    escapeString(block.getTitleValue('TEXT')) + '), ' +
-                    escapeString(block.getTitleValue('TITLENAME')) + ');');
+            escapeString(block.getTitleValue('TEXT')) + '), ' +
+            escapeString(block.getTitleValue('TITLENAME')) + ');');
         break;
       case 'title_variable':
         // Result:
         // .appendTitle(new Blockly.FieldVariable('item'), 'VAR');
         var varname = block.getTitleValue('TEXT');
         varname = varname ? escapeString(varname) : 'null';
-        titles.push('.appendTitle(new Blockly.FieldVariable(' +
-            varname + '), ' + escapeString(block.getTitleValue('TITLENAME')) + ');');
+        titles.push('.appendTitle(new Blockly.FieldVariable(' + varname +
+            '), ' + escapeString(block.getTitleValue('TITLENAME')) + ');');
         break;
       case 'title_dropdown':
         // Result:
@@ -221,6 +221,14 @@ function getTitles(block) {
               options.join(', ') + ']), ' +
               escapeString(block.getTitleValue('TITLENAME')) + ');');
         }
+        break;
+      case 'title_image':
+        // Result: .appendTitle(new Blockly.FieldImage('http://...'));
+        var src = escapeString(block.getTitleValue('SRC'));
+        var width = escapeString(block.getTitleValue('WIDTH'));
+        var height = escapeString(block.getTitleValue('HEIGHT'));
+        titles.push('.appendTitle(new Blockly.FieldImage(' +
+            src + ', ' + width + ', ' + height + '));');
         break;
     }
     block = block.nextConnection && block.nextConnection.targetBlock();

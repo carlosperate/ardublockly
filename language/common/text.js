@@ -30,9 +30,13 @@ Blockly.Language.text = {
   helpUrl: Blockly.LANG_TEXT_TEXT_HELPURL,
   init: function() {
     this.setColour(160);
-    this.appendTitle('\u201C');
+    //this.appendTitle('\u201C');
+    this.appendTitle(new Blockly.FieldImage(Blockly.pathToBlockly +
+        'media/quote0.png', 12, 12));
     this.appendTitle(new Blockly.FieldTextInput(''), 'TEXT');
-    this.appendTitle('\u201D');
+    //this.appendTitle('\u201D');
+    this.appendTitle(new Blockly.FieldImage(Blockly.pathToBlockly +
+        'media/quote1.png', 12, 12));
     this.setOutput(true, String);
     this.setTooltip(Blockly.LANG_TEXT_TEXT_TOOLTIP_1);
   }

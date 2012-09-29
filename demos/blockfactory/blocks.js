@@ -284,6 +284,26 @@ Blockly.Language.title_variable = {
   }
 };
 
+Blockly.Language.title_image = {
+  // Image.
+  category: 'Title',
+  init: function() {
+    this.setColour(160);
+    this.appendTitle('image');
+    var src = 'http://www.gstatic.com/codesite/ph/images/star_on.gif';
+    var input = this.appendInput(Blockly.DUMMY_INPUT, '');
+    input.appendTitle(new Blockly.FieldTextInput(src), 'SRC');
+    input = this.appendInput(Blockly.DUMMY_INPUT, '');
+    input.appendTitle('width');
+    input.appendTitle(new Blockly.FieldTextInput('15'), 'WIDTH');
+    input.appendTitle('height');
+    input.appendTitle(new Blockly.FieldTextInput('15'), 'HEIGHT');
+    this.setPreviousStatement(true, 'Title');
+    this.setNextStatement(true, 'Title');
+    this.setTooltip('');
+  }
+};
+
 Blockly.Language.input_value = {
   // Value input.
   category: 'Input',
