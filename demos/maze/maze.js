@@ -58,6 +58,8 @@ Maze.MAP = [
 Maze.ROWS = Maze.MAP.length;
 Maze.COLS = Maze.MAP[0].length;
 Maze.SQUARE_SIZE = 50;
+Maze.PEGMAN_HEIGHT = 52;
+Maze.PEGMAN_WIDTH = 49;
 
 Maze.MAZE_WIDTH = Maze.SQUARE_SIZE * Maze.COLS;
 Maze.MAZE_HEIGHT = Maze.SQUARE_SIZE * Maze.ROWS;
@@ -237,6 +239,26 @@ Maze.draw_map = function() {
   finishMarker.setAttribute('height', 34);
   finishMarker.setAttribute('width', 20);
   svg.appendChild(finishMarker);   
+  
+  // Add pegman.
+  var pegmanIcon = document.createElementNS(Blockly.SVG_NS, 'image');
+  pegmanIcon.setAttribute('id', 'pegman');
+  pegmanIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+      'pegman.png');
+  pegmanIcon.setAttribute('height', Maze.PEGMAN_HEIGHT);
+  pegmanIcon.setAttribute('width', Maze.PEGMAN_WIDTH * 18); //49 * 18 = 882
+  pegmanIcon.setAttribute('clip-path', 'url(#pegmanClipPath)');
+  svg.appendChild(pegmanIcon);   
+
+  // Pegman's clipPath element, whose (x, y) is reset by Maze.displayPegman
+  var pegmanClip = document.createElementNS(Blockly.SVG_NS, 'clipPath');
+  pegmanClip.setAttribute('id', 'pegmanClipPath');
+  var clipRect = document.createElementNS(Blockly.SVG_NS, 'rect');
+  clipRect.setAttribute('id', 'clipRect');
+  clipRect.setAttribute('width', Maze.PEGMAN_WIDTH);
+  clipRect.setAttribute('height', Maze.PEGMAN_HEIGHT);
+  pegmanClip.appendChild(clipRect);
+  svg.appendChild(pegmanClip);
 };
 
 /**
@@ -543,11 +565,13 @@ Maze.scheduleFinish = function() {
  */
 Maze.displayPegman = function(x, y, d) {
   var pegmanIcon = document.getElementById('pegman');
-  pegmanIcon.style.top = Maze.mapOffsetTop_ +
-      Maze.SQUARE_SIZE * (y + 0.5) - pegmanIcon.offsetHeight / 2 - 8;
-  pegmanIcon.style.left = Maze.mapOffsetLeft_ +
-      Maze.SQUARE_SIZE * (x + 0.5) - pegmanIcon.offsetHeight / 2 + 2;
-  pegmanIcon.style.backgroundPosition = -d * pegmanIcon.offsetWidth;
+  pegmanIcon.setAttribute('x', x * Maze.SQUARE_SIZE - d * Maze.PEGMAN_WIDTH);
+  pegmanIcon.setAttribute('y', Maze.SQUARE_SIZE * (y + 0.5) -
+      Maze.PEGMAN_HEIGHT / 2 - 8);
+
+  var clipRect = document.getElementById('clipRect');
+  clipRect.setAttribute('x', x * Maze.SQUARE_SIZE);
+  clipRect.setAttribute('y', pegmanIcon.getAttribute('y'));
 };
 
 /**
