@@ -38,14 +38,18 @@ Blockly.Field = function(text) {
   // Build the DOM.
   this.group_ = Blockly.createSvgElement('g', {}, null);
   this.borderRect_ = Blockly.createSvgElement('rect',
-      {rx: 4, ry: 4}, this.group_);
+      {rx: 4,
+       ry: 4,
+       x: -1 - Blockly.BlockSvg.SEP_SPACE_X / 2,
+       y: -12,
+       height: 16}, this.group_);
   this.textElement_ = Blockly.createSvgElement('text',
       {'class': 'blocklyText'}, this.group_);
   if (this.CURSOR) {
     // Different field types show different cursor hints.
     this.group_.style.cursor = this.CURSOR;
   }
-  this.size_ = {height: 0, width: 0};
+  this.size_ = {height: Blockly.BlockSvg.TITLE_HEIGHT, width: 0};
   this.setText(text);
 };
 
@@ -110,37 +114,32 @@ Blockly.Field.prototype.getRootElement = function() {
 };
 
 /**
- * Draws the border in the correct location.
- * Saves the computed width and height in a property.
+ * Cache of text lengths.
+ * Blockly has a lot of repeating strings (if, then, do, etc).  Only measure
+ * their lengths once.  Subsequent instances can be looked up in this cache.
+ */
+Blockly.Field.textLengthCache = {};
+
+/**
+ * Draws the border with the correct width.
+ * Saves the computed width in a property.
  * @private
  */
 Blockly.Field.prototype.render_ = function() {
-  try {
-    var bBox = this.textElement_.getBBox();
-  } catch (e) {
-    var bBox = null;
+  // This function is called a lot.  Optimizations help.
+  if (Blockly.Field.textLengthCache.hasOwnProperty(this.text_)) {
+    // Length found in cache.
+    var width = Blockly.Field.textLengthCache[this.text_];
+  } else {
+    var width = this.textElement_.getComputedTextLength();
+    // Cache the current width.
+    Blockly.Field.textLengthCache[this.text_] = width;
   }
-  if (!bBox || bBox.width == -Infinity) {
-    // Firefox has trouble with hidden elements (Bug 528969).
-    // Opera has trouble with bounding boxes around empty objects.
-    var bBox = {width: 0, height: 0, x: 0, y: 0};
-  }
-  if (bBox.height == 0) {
-    bBox.height = Blockly.BlockSvg.TITLE_HEIGHT;
-  }
-  var width = bBox.width + Blockly.BlockSvg.SEP_SPACE_X;
-  var height = bBox.height;
   if (this.borderRect_) {
-    var left = bBox.x - Blockly.BlockSvg.SEP_SPACE_X / 2;
-    var top = bBox.y;
-    this.borderRect_.setAttribute('width', width);
-    this.borderRect_.setAttribute('height', height);
-    this.borderRect_.setAttribute('x', left);
-    this.borderRect_.setAttribute('y', top);
+    this.borderRect_.setAttribute('width',
+        width + Blockly.BlockSvg.SEP_SPACE_X);
   }
-  // Cache the current size.
-  this.size_.width = bBox.width;
-  this.size_.height = bBox.height;
+  this.size_.width = width;
 };
 
 /**
