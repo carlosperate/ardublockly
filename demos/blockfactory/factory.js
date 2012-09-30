@@ -225,8 +225,8 @@ function getTitles(block) {
       case 'title_image':
         // Result: .appendTitle(new Blockly.FieldImage('http://...'));
         var src = escapeString(block.getTitleValue('SRC'));
-        var width = escapeString(block.getTitleValue('WIDTH'));
-        var height = escapeString(block.getTitleValue('HEIGHT'));
+        var width = Number(block.getTitleValue('WIDTH'));
+        var height = Number(block.getTitleValue('HEIGHT'));
         titles.push('.appendTitle(new Blockly.FieldImage(' +
             src + ', ' + width + ', ' + height + '));');
         break;

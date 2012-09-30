@@ -31,6 +31,9 @@
  */
 Blockly.FieldImage = function(src, height, width) {
   this.sourceBlock_ = null;
+  // Ensure height and width are numbers.  Strings are bad at math.
+  height = Number(height);
+  width = Number(width);
   this.size_ = {height: height, width: width};
   // Build the DOM.
   this.group_ = Blockly.createSvgElement('g', {}, null);
