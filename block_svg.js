@@ -436,14 +436,9 @@ Blockly.BlockSvg.prototype.renderTitles_ = function(titleList,
   var maxHeight = 0;
   for (var t = 0, title; title = titleList[t]; t++) {
     // Get the dimensions of the title.
-    var bBox = title.render();
-    if (!bBox || bBox.width == -Infinity) {
-      // Firefox has trouble with hidden elements (Bug 528969).
-      // Opera has trouble with bounding boxes around empty objects.
-      bBox = {height: 0, width: 0};
-    }
-    var titleWidth = bBox.width;
-    var titleHeight = bBox.height;
+    var titleSize = title.getSize();
+    var titleWidth = titleSize.width;
+    var titleHeight = titleSize.height;
     if (maxHeight < titleHeight) {
       maxHeight = titleHeight;
     }
@@ -550,14 +545,9 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
       if (j != 0) {
         input.labelWidth += Blockly.BlockSvg.SEP_SPACE_X;
       }
-      if (title.getComputedTextLength) {
-        // Plain text label.
-        input.labelWidth += title.getComputedTextLength();
-      } else {
-        // Editable label.
-        var labelBox = title.render();
-        input.labelWidth += labelBox ? labelBox.width : 0;
-      }
+      // Get the dimensions of the title.
+      var titleSize = title.getSize();
+      input.labelWidth += titleSize.width;
     }
 
     if (row.type == Blockly.BlockSvg.INLINE) {

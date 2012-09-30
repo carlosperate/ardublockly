@@ -31,8 +31,7 @@
  */
 Blockly.FieldImage = function(src, height, width) {
   this.sourceBlock_ = null;
-  this.height_ = height;
-  this.width_ = width;
+  this.size_ = {height: height, width: width};
   // Build the DOM.
   this.group_ = Blockly.createSvgElement('g', {}, null);
   this.imageElement_ = Blockly.createSvgElement('image',
@@ -91,20 +90,6 @@ Blockly.FieldImage.prototype.destroy = function() {
   this.group_ = null;
   this.imageElement_ = null;
   this.rectElement_ = null;
-};
-
-/**
- * Returns the resulting bounding box.
- * @return {Object} Object containing width/height/x/y properties.
- */
-Blockly.FieldImage.prototype.render = function() {
-  try {
-    var bBox = this.imageElement_.getBBox();
-  } catch (e) {
-    // Firefox has trouble with hidden elements (Bug 528969).
-    return null;
-  }
-  return bBox;
 };
 
 /**

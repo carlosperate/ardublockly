@@ -45,6 +45,7 @@ Blockly.Field = function(text) {
     // Different field types show different cursor hints.
     this.group_.style.cursor = this.CURSOR;
   }
+  this.size_ = {height: 0, width: 0};
   this.setText(text);
 };
 
@@ -110,28 +111,47 @@ Blockly.Field.prototype.getRootElement = function() {
 
 /**
  * Draws the border in the correct location.
- * Returns the resulting bounding box.
- * @return {Object} Object containing width/height/x/y properties.
+ * Saves the computed width and height in a property.
+ * @private
  */
-Blockly.Field.prototype.render = function() {
+Blockly.Field.prototype.render_ = function() {
   try {
     var bBox = this.textElement_.getBBox();
   } catch (e) {
+    var bBox = null;
+  }
+  if (!bBox || bBox.width == -Infinity) {
     // Firefox has trouble with hidden elements (Bug 528969).
-    return null;
+    // Opera has trouble with bounding boxes around empty objects.
+    var bBox = {width: 0, height: 0, x: 0, y: 0};
   }
   if (bBox.height == 0) {
     bBox.height = Blockly.BlockSvg.TITLE_HEIGHT;
   }
   var width = bBox.width + Blockly.BlockSvg.SEP_SPACE_X;
   var height = bBox.height;
-  var left = bBox.x - Blockly.BlockSvg.SEP_SPACE_X / 2;
-  var top = bBox.y;
-  this.borderRect_.setAttribute('width', width);
-  this.borderRect_.setAttribute('height', height);
-  this.borderRect_.setAttribute('x', left);
-  this.borderRect_.setAttribute('y', top);
-  return bBox;
+  if (this.borderRect_) {
+    var left = bBox.x - Blockly.BlockSvg.SEP_SPACE_X / 2;
+    var top = bBox.y;
+    this.borderRect_.setAttribute('width', width);
+    this.borderRect_.setAttribute('height', height);
+    this.borderRect_.setAttribute('x', left);
+    this.borderRect_.setAttribute('y', top);
+  }
+  // Cache the current size.
+  this.size_.width = bBox.width;
+  this.size_.height = bBox.height;
+};
+
+/**
+ * Returns the height and width of the title.
+ * @return {!Object} Height and width.
+ */
+Blockly.Field.prototype.getSize = function() {
+  if (!this.size_.width) {
+    this.render_();
+  }
+  return this.size_;
 };
 
 /**
@@ -158,6 +178,10 @@ Blockly.Field.prototype.setText = function(text) {
   }
   var textNode = Blockly.svgDoc.createTextNode(text);
   this.textElement_.appendChild(textNode);
+
+  // Cached size is obsolete.  Clear it.
+  this.size_.width = 0;
+  this.size_.height = 0;
 
   if (this.sourceBlock_ && this.sourceBlock_.rendered) {
     this.sourceBlock_.render();
