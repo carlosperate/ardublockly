@@ -321,10 +321,10 @@ Blockly.BlockSvg.prototype.render = function() {
       }
     }
   }
-  var xy = Blockly.RTL ?
+  var titleXY = Blockly.RTL ?
       this.renderTitleRTL_(titleY) : this.renderTitleLTR_(titleY);
   var inputRows = this.renderCompute_(this.block_.inputList);
-  this.renderDraw_(xy, inputRows);
+  this.renderDraw_(titleXY, inputRows);
 
   // Render all blocks above this one (propagate a reflow).
   var parentBlock = this.block_.getParent();
@@ -548,6 +548,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
       // Get the dimensions of the title.
       var titleSize = title.getSize();
       input.labelWidth += titleSize.width;
+      row.height = Math.max(row.height, titleSize.height);
     }
 
     if (row.type == Blockly.BlockSvg.INLINE) {
@@ -587,32 +588,31 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
 /**
  * Draw the path of the block.
  * Move the labels to the correct locations.
- * @param {!Array.<number>} xy A tuple containing the XY coordinates of the
- *     bottom-right of the title row (plus a gap).
+ * @param {!Array.<number>} titleXY Height and width of the title row.
  * @param {!Array.<!Array.<!Object>>} inputRows 2D array of objects, each
  *     containing position information.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDraw_ = function(xy, inputRows) {
+Blockly.BlockSvg.prototype.renderDraw_ = function(titleXY, inputRows) {
   if (this.block_.inputsInline && inputRows.hasStatement) {
     // The 'rightEdge' is not used for inline blocks.
     // Set a minimum title size to prevent ugly collapses on pathological
     // blocks where a statement input is wider than a value or dummy input.
-    xy.x = Math.max(xy.x, Blockly.BlockSvg.NOTCH_WIDTH +
-                          Blockly.BlockSvg.SEP_SPACE_X);
+    titleXY.x = Math.max(titleXY.x, Blockly.BlockSvg.NOTCH_WIDTH +
+                                    Blockly.BlockSvg.SEP_SPACE_X);
   }
   // Fetch the block's coordinates on the surface for use in anchoring
   // the connections.
   var connectionsXY = this.block_.getRelativeToSurfaceXY();
   // Compute the preferred right edge.  Inline blocks may extend beyond.
-  var rightEdge = xy.x;
+  var rightEdge = titleXY.x;
   if (inputRows.hasStatement) {
     rightEdge = Math.max(rightEdge,
         Blockly.BlockSvg.SEP_SPACE_X + inputRows.labelStatementWidth +
         Blockly.BlockSvg.SEP_SPACE_X + Blockly.BlockSvg.NOTCH_WIDTH);
   }
   if (inputRows.hasValue) {
-    rightEdge = Math.max(rightEdge, xy.x +
+    rightEdge = Math.max(rightEdge, titleXY.x +
         (inputRows.labelValueWidth ? inputRows.labelValueWidth +
         Blockly.BlockSvg.SEP_SPACE_X : 0) + Blockly.BlockSvg.TAB_WIDTH);
   }
@@ -628,7 +628,7 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(xy, inputRows) {
 
   this.renderDrawTop_(steps, highlightSteps, connectionsXY, rightEdge);
   var cursorY = this.renderDrawRight_(steps, highlightSteps, inlineSteps,
-      highlightInlineSteps, connectionsXY, rightEdge, inputRows, xy);
+      highlightInlineSteps, connectionsXY, rightEdge, inputRows, titleXY);
   this.renderDrawBottom_(steps, highlightSteps, connectionsXY, cursorY);
   this.renderDrawLeft_(steps, highlightSteps, connectionsXY, cursorY);
 
@@ -705,8 +705,7 @@ Blockly.BlockSvg.prototype.renderDrawTop_ = function(steps, highlightSteps,
  * @param {number} rightEdge Minimum width of block.
  * @param {!Array.<!Array.<!Object>>} inputRows 2D array of objects, each
  *     containing position information.
- * @param {!Array.<number>} xy A tuple containing the XY coordinates of the
- *     bottom-right of the title row (plus a gap).
+ * @param {!Array.<number>} titleXY Height and width of the title row.
  * @return {number} Height of block.
  * @private
  */
@@ -943,11 +942,11 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
         highlightSteps.push('h 8');
       }
     }
-    steps.push('V', Blockly.BlockSvg.MIN_BLOCK_Y);
+    cursorY = Math.max(Blockly.BlockSvg.MIN_BLOCK_Y, titleXY.y);
+    steps.push('V', cursorY);
     if (Blockly.RTL) {
-      highlightSteps.push('V', Blockly.BlockSvg.MIN_BLOCK_Y - 1);
+      highlightSteps.push('V', cursorY - 1);
     }
-    cursorY = Blockly.BlockSvg.MIN_BLOCK_Y;
   }
   return cursorY;
 };
