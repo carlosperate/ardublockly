@@ -1258,9 +1258,9 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  *     Blockly.DUMMY_INPUT.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
- * @param {Object} opt_check Acceptable value type, or list of value types.
+ * @param {*} opt_check Acceptable value type, or list of value types.
  *     Null or undefined means all values are acceptable.
- * @return {!Object} The input object created.
+ * @return {!Blockly.Input} The input object created.
  */
 Blockly.Block.prototype.appendInput = function(type, name, opt_check) {
   var connection = null;

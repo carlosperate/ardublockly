@@ -26,7 +26,7 @@
  * Class for a connection between blocks.
  * @param {!Blockly.Block} source The block establishing this connection.
  * @param {number} type The type of the connection.
- * @param {string} opt_check Compatible value type or list of value types.
+ * @param {*} opt_check Compatible value type or list of value types.
  *     Null if all types are compatible.
  * @constructor
  */
@@ -34,15 +34,7 @@ Blockly.Connection = function(source, type, opt_check) {
   this.sourceBlock_ = source;
   this.targetConnection = null;
   this.type = type;
-  if (opt_check) {
-    // Ensure that check is in an array.
-    if (!(opt_check instanceof Array)) {
-      opt_check = [opt_check];
-    }
-    this.check_ = opt_check;
-  } else {
-    this.check_ = null;
-  }
+  this.setCheck(opt_check);
   this.x_ = 0;
   this.y_ = 0;
   this.inDB_ = false;
@@ -477,6 +469,33 @@ Blockly.Connection.prototype.checkType_ = function(otherConnection) {
   }
   // No intersection.
   return false;
+};
+
+/**
+ * Change a connection's compatibility.
+ * @param {*} opt_check Compatible value type or list of value types.
+ *     Null if all types are compatible.
+ */
+Blockly.Connection.prototype.setCheck = function(check) {
+  if (check) {
+    // Ensure that check is in an array.
+    if (!(check instanceof Array)) {
+      check = [check];
+    }
+    this.check_ = check;
+    // The new value type may not be compatible with the existing connection.
+    if (this.targetConnection && !this.checkType_(this.targetConnection)) {
+      if (this.isSuperior()) {
+        this.targetBlock().setParent(null);
+      } else {
+        this.sourceBlock_.setParent(null);
+      }
+      // Bump away.
+      this.sourceBlock_.bumpNeighbours_();
+    }
+  } else {
+    this.check_ = null;
+  }
 };
 
 /**
