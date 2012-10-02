@@ -155,11 +155,8 @@ Blockly.Block.terminateDrag_ = function(e) {
     Blockly.unbindEvent_(Blockly.Block.onMouseMoveWrapper_);
     Blockly.Block.onMouseMoveWrapper_ = null;
   }
-  if (Blockly.Block.dragMode_ != 0) {
-    // Terminate a drag operation that started but never finished.
-    // This should never happen, but sometimes a browser will miss a mouse-up.
-    // Touch events often do this on Android.
-    Blockly.Block.dragMode_ = 0;
+  if (Blockly.Block.dragMode_ == 2) {
+    // Terminate a drag operation.
     if (Blockly.selected) {
       var selected = Blockly.selected;
       // Update the connection locations.
@@ -177,6 +174,7 @@ Blockly.Block.terminateDrag_ = function(e) {
       selected.workspace.fireChangeEvent();
     }
   }
+  Blockly.Block.dragMode_ = 0;
 };
 
 /**

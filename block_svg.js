@@ -594,6 +594,32 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(inputList) {
  * @private
  */
 Blockly.BlockSvg.prototype.renderDraw_ = function(titleXY, inputRows) {
+  // Should the top and bottom left corners be rounded or square?
+  if (this.block_.outputConnection) {
+    this.squareTopLeftCorner_ = true;
+    this.squareBottomLeftCorner_ = true;
+  } else {
+    this.squareTopLeftCorner_ = false;
+    this.squareBottomLeftCorner_ = false;
+    // If this block is in the middle of a stack, square the corners.
+    if (this.block_.previousConnection) {
+      var prevBlock = this.block_.previousConnection.targetBlock();
+      if (prevBlock && prevBlock.nextConnection &&
+          prevBlock.nextConnection.targetConnection ==
+          this.block_.previousConnection) {
+        this.squareTopLeftCorner_ = true;
+       }
+    }
+    if (this.block_.nextConnection) {
+      var nextBlock = this.block_.nextConnection.targetBlock();
+      if (nextBlock && nextBlock.previousConnection &&
+          nextBlock.previousConnection.targetConnection ==
+          this.block_.nextConnection) {
+        this.squareBottomLeftCorner_ = true;
+      }
+    }
+  }
+
   if (this.block_.inputsInline && inputRows.hasStatement) {
     // The 'rightEdge' is not used for inline blocks.
     // Set a minimum title size to prevent ugly collapses on pathological
@@ -655,8 +681,9 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(titleXY, inputRows) {
  */
 Blockly.BlockSvg.prototype.renderDrawTop_ = function(steps, highlightSteps,
                                                    connectionsXY, rightEdge) {
+
   // Position the cursor at the top-left starting point.
-  if (this.block_.outputConnection) {
+  if (this.squareTopLeftCorner_) {
     steps.push('m 0,0');
     highlightSteps.push('m 1,1');
   } else {
@@ -977,8 +1004,13 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
       this.block_.nextConnection.tighten_();
     }
   }
-  if (this.block_.outputConnection) {
+
+  // Should the bottom-left corner be rounded or square?
+  if (this.squareBottomLeftCorner_) {
     steps.push('H 0');
+    if (!Blockly.RTL) {
+      highlightSteps.push('M', '1,' + cursorY);
+    }
   } else {
     steps.push('H', Blockly.BlockSvg.CORNER_RADIUS);
     if (Blockly.BlockSvg.CORNER_RADIUS) {
@@ -1008,6 +1040,9 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
 Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, highlightSteps,
                                                    connectionsXY, cursorY) {
   if (this.block_.outputConnection) {
+    // Create output connection.
+    this.block_.outputConnection.moveTo(connectionsXY.x, connectionsXY.y);
+    // This connection will be tightened when the parent renders.
     steps.push('V', Blockly.BlockSvg.TAB_HEIGHT);
     steps.push('c 0,-10 -' + Blockly.BlockSvg.TAB_WIDTH + ',8 -' +
         Blockly.BlockSvg.TAB_WIDTH + ',-7.5 s ' + Blockly.BlockSvg.TAB_WIDTH +
@@ -1016,7 +1051,6 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, highlightSteps,
       highlightSteps.push('M', (Blockly.BlockSvg.TAB_WIDTH * -0.3) + ',8.9');
       highlightSteps.push('l', (Blockly.BlockSvg.TAB_WIDTH * -0.45) + ',-2.1');
     } else {
-      highlightSteps.push('M', '1,' + cursorY);
       highlightSteps.push('V', Blockly.BlockSvg.TAB_HEIGHT - 1);
       highlightSteps.push('m', (Blockly.BlockSvg.TAB_WIDTH * -0.92) +
                           ',-1 q ' + (Blockly.BlockSvg.TAB_WIDTH * -0.19) +
@@ -1024,11 +1058,10 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, highlightSteps,
       highlightSteps.push('m', (Blockly.BlockSvg.TAB_WIDTH * 0.92) +
                           ',1 V 1 H 2');
     }
-    // Create output connection.
-    this.block_.outputConnection.moveTo(connectionsXY.x, connectionsXY.y);
-    // This connection will be tightened when the parent renders.
-  } else {
-    if (!Blockly.RTL) {
+  } else if (!Blockly.RTL) {
+    if (this.squareTopLeftCorner_) {
+      highlightSteps.push('V', 1);
+    } else {
       highlightSteps.push('V', Blockly.BlockSvg.CORNER_RADIUS);
     }
   }
