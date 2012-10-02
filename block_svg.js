@@ -198,10 +198,10 @@ Blockly.BlockSvg.prototype.connectionUiEffect = function() {
   var xy = Blockly.getAbsoluteXY_(this.svgGroup_);
   // Offset the coordinates based on the two connection types.
   if (this.block_.outputConnection) {
-    xy.x -= 3;
+    xy.x -= Blockly.RTL ? -3 : 3;
     xy.y += 13;
   } else if (this.block_.previousConnection) {
-    xy.x += 23;
+    xy.x += Blockly.RTL ? -23 : 23;
     xy.y += 3;
   }
   var ripple = Blockly.createSvgElement('circle',
