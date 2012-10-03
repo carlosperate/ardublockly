@@ -749,6 +749,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       cursorX = Math.max(titleXY.x + inputRows.labelValueWidth,
                          inputRows.labelStatementWidth);
       cursorX -= row[0].labelWidth;
+      if (y == 0) {
+        // Titles can expand the first row.
+        row.height = Math.max(row.height, titleXY.y);
+      }
       for (var x = 0, input; input = row[x]; x++) {
         var labelX = Blockly.RTL ? -cursorX : cursorX;
         var labelY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
@@ -835,6 +839,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       }
       var labelY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
       this.renderTitles_(input.titleRow, labelX, labelY);
+      if (y == 0) {
+        // Titles can expand the first row.
+        row.height = Math.max(row.height, titleXY.y);
+      }
       steps.push(Blockly.BlockSvg.TAB_PATH_DOWN);
       steps.push('v', row.height - Blockly.BlockSvg.TAB_HEIGHT);
       if (Blockly.RTL) {
@@ -866,7 +874,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       }
       var labelY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
       var xy = this.renderTitles_(input.titleRow, labelX, labelY);
-      cursorX = xy.x;
+      if (y == 0) {
+        // Titles can expand the first row.
+        row.height = Math.max(row.height, titleXY.y);
+      }
       steps.push('v', row.height);
       if (Blockly.RTL) {
         highlightSteps.push('v', row.height - 2);
@@ -874,13 +885,15 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
     } else if (row.type == Blockly.NEXT_STATEMENT) {
       // Nested statement.
       var input = row[0];
-      // If the first row is a block, add a header row on top.
       if (y == 0) {
-        steps.push('v', Blockly.BlockSvg.MIN_BLOCK_Y);
+        // If the first row is a block, add a header row on top.
+        // Titles can expand the header row.
+        var headerHeight = Math.max(Blockly.BlockSvg.SEP_SPACE_Y, titleXY.y);
+        steps.push('v', headerHeight);
         if (Blockly.RTL) {
-          highlightSteps.push('v', Blockly.BlockSvg.MIN_BLOCK_Y - 2);
+          highlightSteps.push('v', headerHeight - 2);
         }
-        cursorY += Blockly.BlockSvg.MIN_BLOCK_Y;
+        cursorY += headerHeight;
       }
       var labelX = Blockly.BlockSvg.SEP_SPACE_X +
           inputRows.labelStatementWidth - input.labelWidth;
