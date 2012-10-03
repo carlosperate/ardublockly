@@ -313,7 +313,7 @@ function updateGenerator() {
   }
   var language = document.getElementById('language').value;
   var code = [];
-  code.push('Blockly.' + language + '.' + blockType + ' = {');
+  code.push('Blockly.' + language + '.' + blockType + ' = function() {');
   // Loop through every block, and generate getters for any fields or inputs.
   var blocks = rootBlock.getDescendants();
   for (var x = 0, block; block = blocks[x]; x++) {
