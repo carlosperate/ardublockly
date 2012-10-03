@@ -60,7 +60,8 @@ Blockly.FieldImage.prototype = new Blockly.Field(null);
 /**
  * Rectangular mask used by Firefox.
  * @type {Element}
- */ 
+ * @private
+ */
 Blockly.FieldImage.prototype.rectElement_ = null;
 
 /**
@@ -115,7 +116,7 @@ Blockly.FieldImage.prototype.getText = function() {
 
 /**
  * Set the source URL of this image.
- * @param {string} text New text.
+ * @param {string} src New source.
  */
 Blockly.FieldImage.prototype.setText = function(src) {
   this.src_ = src;

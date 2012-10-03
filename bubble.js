@@ -30,7 +30,7 @@
  * @param {number} anchorY Absolute vertical position of bubbles anchor point.
  * @param {number} relativeX Distance between anchorX and bubble center.
  * @param {number} relativeY Distance between anchorY and bubble center.
- * @param {?number} bubblewidth Width of bubble, or null if not resizable.
+ * @param {?number} bubbleWidth Width of bubble, or null if not resizable.
  * @param {?number} bubbleHeight Height of bubble, or null if not resizable.
  * @constructor
  */

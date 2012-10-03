@@ -475,7 +475,7 @@ Blockly.Connection.prototype.checkType_ = function(otherConnection) {
 
 /**
  * Change a connection's compatibility.
- * @param {*} opt_check Compatible value type or list of value types.
+ * @param {*} check Compatible value type or list of value types.
  *     Null if all types are compatible.
  */
 Blockly.Connection.prototype.setCheck = function(check) {

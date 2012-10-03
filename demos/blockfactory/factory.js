@@ -238,7 +238,7 @@ function getTitles(block) {
 
 /**
  * Escape a string.
- * @param {string} String to escape.
+ * @param {string} string String to escape.
  * @return {string} Escaped string surrouned by quotes.
  */
 function escapeString(string) {
@@ -252,7 +252,7 @@ function escapeString(string) {
 /**
  * Fetch the type(s) defined in the given input.
  * Format as a string for appending to the generated code.
- * @param {!Blockly.Block} block Block with input. 
+ * @param {!Blockly.Block} block Block with input.
  * @param {string} name Name of the input.
  * @return {string} String defining the types.
  */
@@ -271,7 +271,7 @@ function getOptTypesFrom(block, name) {
 
 /**
  * Fetch the type(s) defined in the given input.
- * @param {!Blockly.Block} block Block with input. 
+ * @param {!Blockly.Block} block Block with input.
  * @param {string} name Name of the input.
  * @return {!Array.<string>} List of types.
  * @private

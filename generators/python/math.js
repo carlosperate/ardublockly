@@ -45,7 +45,7 @@ Blockly.Python.math_arithmetic = function() {
   var argument1 = Blockly.Python.valueToCode(this, 'B', order) || '0';
   var code = argument0 + operator + argument1;
   return [code, order];
-  // In case of 'DIVIDE', division between integers returns different results 
+  // In case of 'DIVIDE', division between integers returns different results
   // in Python 2 and 3. However, is not an issue since Blockly does not
   // guarantee identical results in all languages.  To do otherwise would
   // require every operator to be wrapped in a function call.  This would kill

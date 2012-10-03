@@ -198,18 +198,19 @@ Maze.draw_map = function() {
   for (var y = 0; y < Maze.ROWS; y++) {
     for (var x = 0; x < Maze.COLS; x++) {
       var tile = String(Math.min(1, Maze.MAP[y][x])) +
-          (y == 0 ? 0 : Math.min(1, Maze.MAP[y - 1][x])) +  
-          (x == Maze.COLS - 1 ? 0 : Math.min(1, Maze.MAP[y][x + 1])) + 
+          (y == 0 ? 0 : Math.min(1, Maze.MAP[y - 1][x])) +
+          (x == Maze.COLS - 1 ? 0 : Math.min(1, Maze.MAP[y][x + 1])) +
           (y == Maze.ROWS - 1 ? 0 : Math.min(1, Maze.MAP[y + 1][x])) +
           (x == 0 ? 0 : Math.min(1, Maze.MAP[y][x - 1]));
 
       if (Maze.tile_SHAPES[tile]) {
         var shape = Maze.tile_SHAPES[tile][0];
         var angle = Maze.tile_SHAPES[tile][1];
-        svg.appendChild(shape(x * Maze.SQUARE_SIZE, y * Maze.SQUARE_SIZE, angle));
+        svg.appendChild(shape(x * Maze.SQUARE_SIZE,
+                              y * Maze.SQUARE_SIZE, angle));
       }
-    } 
-  } 
+    }
+  }
 
   // Draw the grid lines.
   for (var k = 1; k < Maze.ROWS; k++) {
@@ -228,9 +229,9 @@ Maze.draw_map = function() {
     v_line.setAttribute('y2', Maze.MAZE_HEIGHT);
     v_line.setAttribute('stroke', '#C8BEAE');
     v_line.setAttribute('stroke-width', 2);
-    svg.appendChild(v_line);   
+    svg.appendChild(v_line);
   }
-  
+
   // Add finish marker.
   var finishMarker = document.createElementNS(Blockly.SVG_NS, 'image');
   finishMarker.setAttribute('id', 'finish');
@@ -238,8 +239,8 @@ Maze.draw_map = function() {
       'marker.png');
   finishMarker.setAttribute('height', 34);
   finishMarker.setAttribute('width', 20);
-  svg.appendChild(finishMarker);   
-  
+  svg.appendChild(finishMarker);
+
   // Add pegman.
   var pegmanIcon = document.createElementNS(Blockly.SVG_NS, 'image');
   pegmanIcon.setAttribute('id', 'pegman');
@@ -248,7 +249,7 @@ Maze.draw_map = function() {
   pegmanIcon.setAttribute('height', Maze.PEGMAN_HEIGHT);
   pegmanIcon.setAttribute('width', Maze.PEGMAN_WIDTH * 18); //49 * 18 = 882
   pegmanIcon.setAttribute('clip-path', 'url(#pegmanClipPath)');
-  svg.appendChild(pegmanIcon);   
+  svg.appendChild(pegmanIcon);
 
   // Pegman's clipPath element, whose (x, y) is reset by Maze.displayPegman
   var pegmanClip = document.createElementNS(Blockly.SVG_NS, 'clipPath');

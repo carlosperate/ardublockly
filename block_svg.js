@@ -183,7 +183,7 @@ Blockly.BlockSvg.destroyUiStep_ = function(clone) {
         ' scale(' + scale + ')');
     var closure = function() {
       Blockly.BlockSvg.destroyUiStep_(clone);
-    }
+    };
     window.setTimeout(closure, 10);
   }
 };
@@ -198,7 +198,7 @@ Blockly.BlockSvg.prototype.connectionUiEffect = function() {
   var xy = Blockly.getAbsoluteXY_(this.svgGroup_);
   // Offset the coordinates based on the two connection types.
   if (this.block_.outputConnection) {
-    xy.x -= Blockly.RTL ? -3 : 3;
+    xy.x += Blockly.RTL ? 3 : -3;
     xy.y += 13;
   } else if (this.block_.previousConnection) {
     xy.x += Blockly.RTL ? -23 : 23;
@@ -228,7 +228,7 @@ Blockly.BlockSvg.connectionUiStep_ = function(ripple) {
     ripple.style.opacity = 1 - percent;
     var closure = function() {
       Blockly.BlockSvg.connectionUiStep_(ripple);
-    }
+    };
     window.setTimeout(closure, 10);
   }
 };

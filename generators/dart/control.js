@@ -95,7 +95,8 @@ Blockly.Dart.controls_for = function() {
         '    (' + startVar + ' <= ' + endVar + ') ? ' +
         variable0 + ' <= ' + endVar + ' : ' +
         variable0 + ' >= ' + endVar + ';\n' +
-        '    ' + variable0 + ' += (' + startVar + ' <= ' + endVar + ') ? 1 : -1) {\n' +
+        '    ' + variable0 + ' += (' + startVar + ' <= ' + endVar +
+            ') ? 1 : -1) {\n' +
         branch0 + '}\n';
   }
   return code;

@@ -579,7 +579,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
     block.showHelp_();
   };
   options.push(helpOption);
-  
+
   // Allow the block to add or modify options.
   if (this.customContextMenu) {
     this.customContextMenu(options);
@@ -1020,7 +1020,7 @@ Blockly.Block.prototype.setTitleValue = function(newValue, name) {
  * Returns the human-readable text from the title of a block.
  * @param {string} name The name of the title.
  * @return {!string} Text from the title or null if title does not exist.
- * @deprecated
+ * @deprecated Use getValueText instead.
  */
 Blockly.Block.prototype.getTitleText = function(name) {
   // In September 2012 getTitleText was deprecated in favour of getTitleValue.
@@ -1037,7 +1037,7 @@ Blockly.Block.prototype.getTitleText = function(name) {
  * Change the title text for a block (e.g. 'choose' or 'remove list item').
  * @param {string} newText Text to be the new title.
  * @param {string} name The name of the title.
- * @deprecated
+ * @deprecated Use setValueText instead.
  */
 Blockly.Block.prototype.setTitleText = function(newText, name) {
   // In September 2012 setTitleText was deprecated in favour of setTitleValue.
@@ -1278,8 +1278,8 @@ Blockly.Block.prototype.appendInput = function(type, name, opt_check) {
 
 /**
  * Move an input to a different location on this block.
- * @param {string} name The name of the input.
- * @param {number} index New index.
+ * @param {string} name The name of the input to move.
+ * @param {string} refName Name of input that should be after the moved input.
  */
 Blockly.Block.prototype.moveInputBefore = function(name, refName) {
   if (name == refName) {

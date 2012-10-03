@@ -186,7 +186,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  if (myList.isEmpty()) return null;');
         func.push('  num minVal = myList[0];');
         func.push('  myList.forEach((num entry) ' +
-									'{minVal = Math.min(minVal, entry);});');
+                  '{minVal = Math.min(minVal, entry);});');
         func.push('  return minVal;');
         func.push('}');
         Blockly.Dart.definitions_['math_min'] = func.join('\n');
@@ -203,7 +203,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  if (myList.isEmpty()) return null;');
         func.push('  num maxVal = myList[0];');
         func.push('  myList.forEach((num entry) ' +
-									'{maxVal = Math.max(maxVal, entry);});');
+                  '{maxVal = Math.max(maxVal, entry);});');
         func.push('  return maxVal;');
         func.push('}');
         Blockly.Dart.definitions_['math_max'] = func.join('\n');
@@ -238,9 +238,9 @@ Blockly.Dart.math_on_list = function() {
         var func = [];
         func.push('num ' + functionName + '(List myList) {');
         func.push('  // First filter list for numbers only, then sort, '+
-									'then return middle value');
+                  'then return middle value');
         func.push('  // or the average of two middle values if list has an ' +
-									'even number of elements.');
+                  'even number of elements.');
         func.push('  List localList = myList.filter((a) => a is num);');
         func.push('  if (localList.isEmpty()) return null;');
         func.push('  localList.sort((a, b) => (a - b));');
@@ -312,14 +312,14 @@ Blockly.Dart.math_on_list = function() {
         func.push('  num mean = sum / n;');
         func.push('  num sumSquare = 0;');
         func.push('  numbers.forEach((x) => sumSquare += ' +
-									'Math.pow(x - mean, 2));');
+                  'Math.pow(x - mean, 2));');
         func.push('  num standard_dev = Math.sqrt(sumSquare / n);');
         func.push('  return standard_dev;');
         func.push('}');
         Blockly.Dart.definitions_['math_standard_deviation'] = func.join('\n');
       }
       code = Blockly.Dart.math_on_list.math_standard_deviation +
-			    '(' + list + ')';
+          '(' + list + ')';
       break;
     case 'RANDOM':
       if (!Blockly.Dart.definitions_['math_random_item']) {
@@ -350,7 +350,7 @@ Blockly.Dart.math_constrain = function() {
   var argument2 = Blockly.Dart.valueToCode(this, 'HIGH',
       Blockly.Dart.ORDER_NONE) || '0';
   var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' +
-	    argument2 + ')';
+      argument2 + ')';
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
