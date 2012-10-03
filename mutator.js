@@ -177,7 +177,7 @@ Blockly.Mutator.prototype.resizeBubble_ = function() {
     width = workspaceSize.width + workspaceSize.x;
   }
   var height = Math.max(workspaceSize.height + doubleBorderWidth * 3,
-                        flyoutMetrics.contentHeight);
+                        flyoutMetrics.contentHeight + 20);
   width += doubleBorderWidth * 3;
   // Only resize if the size difference is significant.  Eliminates shuddering.
   if (Math.abs(this.workspaceWidth_ - width) > doubleBorderWidth ||
