@@ -271,7 +271,7 @@ Blockly.Block.prototype.destroy = function(gentle, animate) {
   if (this.warning) {
     this.warning.destroy();
   }
-  // Destroy all inputs and their labels.
+  // Destroy all inputs and their titles.
   for (var x = 0, input; input = this.inputList[x]; x++) {
     input.destroy();
   }
@@ -968,7 +968,7 @@ Blockly.Block.prototype.appendTitle = function(title, opt_name) {
 };
 
 /**
- * Returns the named title or label from a block.
+ * Returns the named title from a block.
  * @param {string} name The name of the title.
  * @return {*} Named title, or null if title does not exist.
  * @private
@@ -1204,9 +1204,9 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
   var renderList = [];
   for (var x = 0, input; input = this.inputList[x]; x++) {
     for (var y = 0, title; title = input.titleRow[y]; y++) {
-      var labelElement = title.getRootElement ?
+      var titleElement = title.getRootElement ?
           title.getRootElement() : title;
-      labelElement.style.display = display;
+      titleElement.style.display = display;
     }
     if (input.targetBlock) {
       // This is a connection.
