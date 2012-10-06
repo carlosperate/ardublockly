@@ -59,9 +59,6 @@ Blockly.BlockSvg.INLINE = -1;
 Blockly.BlockSvg.prototype.init = function() {
   var block = this.block_;
   this.updateColour();
-  for (var x = 0; x < block.titleRow.length; x++) {
-    block.titleRow[x].init(block);
-  }
   for (var x = 0, input; input = block.inputList[x]; x++) {
     input.init();
   }
@@ -452,11 +449,6 @@ Blockly.BlockSvg.prototype.renderTitleRTL_ = function(titleY) {
     }
   }
 
-  // Move the title element(s) into position.
-  xy = this.renderTitles_(this.block_.titleRow, titleX, titleY);
-  titleX = xy.x;
-  maxHeight = Math.max(maxHeight, xy.y);
-
   if (this.block_.previousConnection || this.block_.nextConnection) {
     titleX = Math.min(titleX, -Blockly.BlockSvg.NOTCH_WIDTH -
                               Blockly.BlockSvg.SEP_SPACE_X);
@@ -499,11 +491,6 @@ Blockly.BlockSvg.prototype.renderTitleLTR_ = function(titleY) {
       maxHeight = Math.max(maxHeight, xy.y + Blockly.BlockSvg.SEP_SPACE_Y);
     }
   }
-
-  // Move the title element(s) into position.
-  xy = this.renderTitles_(this.block_.titleRow, titleX, titleY);
-  titleX = xy.x;
-  maxHeight = Math.max(maxHeight, xy.y);
 
   if (this.block_.previousConnection || this.block_.nextConnection) {
     titleX = Math.max(titleX, Blockly.BlockSvg.NOTCH_WIDTH +

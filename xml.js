@@ -67,9 +67,6 @@ Blockly.Xml.blockToDom_ = function(block) {
       element.appendChild(container);
     }
   }
-  for (var i = 0, title; title = block.titleRow[i]; i++) {
-    titleToDom(title);
-  }
   for (var x = 0, input; input = block.inputList[x]; x++) {
     for (var y = 0, title; title = input.titleRow[y]; y++) {
       titleToDom(title);

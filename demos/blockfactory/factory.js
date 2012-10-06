@@ -114,35 +114,23 @@ function updateLanguage() {
   if (colourBlock) {
     code.push('    this.setColour(' + colourBlock.getTitleValue('HUE') + ');');
   }
-  // Generate titles.
-  var titles = getTitles(rootBlock.getInputTargetBlock('TITLES'));
-  for (var x = 0; x < titles.length; x++) {
-    code.push('    this' + titles[x]);
-  }
   // Generate inputs.
-  var TYPES = {'input_value': 'Blockly.INPUT_VALUE',
-               'input_statement': 'Blockly.NEXT_STATEMENT',
-               'input_dummy': 'Blockly.DUMMY_INPUT'};
+  var TYPES = {'input_value': 'appendValueInput',
+               'input_statement': 'appendStatementInput',
+               'input_dummy': 'appendDummyInput'};
   var inputVarDefined = false;
   var contentsBlock = rootBlock.getInputTargetBlock('INPUTS');
   while (contentsBlock) {
     var titles = getTitles(contentsBlock.getInputTargetBlock('TITLES'));
-    var inputVar = '';
-    if (titles.length) {
-      if (inputVarDefined) {
-        inputVar = 'input = ';
-      } else {
-        inputVar = 'var input = ';
-      }
-      inputVarDefined = true;
-    }
     var name = escapeString(contentsBlock.getTitleValue('INPUTNAME') || '');
     var check = getOptTypesFrom(contentsBlock, 'TYPE');
-    code.push('    ' + inputVar + 'this.appendInput(' +
-              TYPES[contentsBlock.type] + ', ' + name + check + ');');
+    code.push('    this.' + TYPES[contentsBlock.type] +
+        '(' + name + check + ')');
     for (var x = 0; x < titles.length; x++) {
-      code.push('    input' + titles[x]);
+      code.push('        .appendTitle(' + titles[x] + ')');
     }
+    // Add semicolon to last line to finish the statement.
+    code[code.length - 1] += ';';
     contentsBlock = contentsBlock.nextConnection &&
         contentsBlock.nextConnection.targetBlock();
   }
@@ -189,46 +177,44 @@ function getTitles(block) {
   while (block) {
     switch (block.type) {
       case 'title_static':
-        // Result: .appendTitle('hello');
-        titles.push('.appendTitle(' +
-            escapeString(block.getTitleValue('TEXT')) + ');');
+        // Result: 'hello'
+        titles.push(escapeString(block.getTitleValue('TEXT')));
         break;
       case 'title_input':
-        // Result: .appendTitle(new Blockly.FieldTextInput('Hello'), 'GREET');
-        titles.push('.appendTitle(new Blockly.FieldTextInput(' +
+        // Result: new Blockly.FieldTextInput('Hello'), 'GREET'
+        titles.push('new Blockly.FieldTextInput(' +
             escapeString(block.getTitleValue('TEXT')) + '), ' +
-            escapeString(block.getTitleValue('TITLENAME')) + ');');
+            escapeString(block.getTitleValue('TITLENAME')));
         break;
       case 'title_variable':
         // Result:
-        // .appendTitle(new Blockly.FieldVariable('item'), 'VAR');
+        // new Blockly.FieldVariable('item'), 'VAR'
         var varname = block.getTitleValue('TEXT');
         varname = varname ? escapeString(varname) : 'null';
-        titles.push('.appendTitle(new Blockly.FieldVariable(' + varname +
-            '), ' + escapeString(block.getTitleValue('TITLENAME')) + ');');
+        titles.push('new Blockly.FieldVariable(' + varname + '), ' +
+            escapeString(block.getTitleValue('TITLENAME')));
         break;
       case 'title_dropdown':
         // Result:
-        // .appendTitle(new Blockly.FieldDropdown(
-        //     [['yes', '1'], ['no', '0']]), 'TOGGLE');
+        // new Blockly.FieldDropdown([['yes', '1'], ['no', '0']]), 'TOGGLE'
         var options = [];
         for (var x = 0; x < block.optionCount_; x++) {
           options[x] = '[' + escapeString(block.getTitleValue('USER' + x)) +
               ', ' + escapeString(block.getTitleValue('CPU' + x)) + ']';
         }
         if (options.length) {
-          titles.push('.appendTitle(new Blockly.FieldDropdown([' +
+          titles.push('new Blockly.FieldDropdown([' +
               options.join(', ') + ']), ' +
-              escapeString(block.getTitleValue('TITLENAME')) + ');');
+              escapeString(block.getTitleValue('TITLENAME')));
         }
         break;
       case 'title_image':
-        // Result: .appendTitle(new Blockly.FieldImage('http://...'));
+        // Result: new Blockly.FieldImage('http://...', 80, 60)
         var src = escapeString(block.getTitleValue('SRC'));
         var width = Number(block.getTitleValue('WIDTH'));
         var height = Number(block.getTitleValue('HEIGHT'));
-        titles.push('.appendTitle(new Blockly.FieldImage(' +
-            src + ', ' + width + ', ' + height + '));');
+        titles.push('new Blockly.FieldImage(' +
+            src + ', ' + width + ', ' + height + ')');
         break;
     }
     block = block.nextConnection && block.nextConnection.targetBlock();

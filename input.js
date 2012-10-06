@@ -44,7 +44,7 @@ Blockly.Input = function(type, name, block, connection) {
  * @param {*} title Something to add as a title.
  * @param {string} opt_name Language-neutral identifier which may used to find
  *     this title again.  Should be unique to the host block.
- * @return {!Blockly.Field} The title object created.
+ * @return {!Blockly.Input} The input being append to (to allow chaining).
  */
 Blockly.Input.prototype.appendTitle = function(title, opt_name) {
   // Generate a FieldLabel when given a plain text title.
@@ -63,7 +63,7 @@ Blockly.Input.prototype.appendTitle = function(title, opt_name) {
     // Adding a title will cause the block to change shape.
     this.sourceBlock_.bumpNeighbours_();
   }
-  return title;
+  return this;
 };
 
 /**

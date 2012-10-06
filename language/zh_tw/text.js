@@ -32,9 +32,9 @@ Blockly.Language.text_charAt = {
     this.setColour(160);
     //this.appendTitle(Blockly.LANG_TEXT_CHARAT_TITLE_LETTER);
     this.setOutput(true, String);
-    this.appendInput(Blockly.INPUT_VALUE, 'AT', Number)
+    this.appendValueInput('AT', Number)
         .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_AT);
-    this.appendInput(Blockly.INPUT_VALUE, 'VALUE', String)
+    this.appendValueInput('VALUE', String)
         .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_TEXT_CHARAT_TOOLTIP_1);
