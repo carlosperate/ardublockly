@@ -271,7 +271,6 @@ Blockly.Language.text_charAt = {
     this.setColour(160);
     this.setOutput(true, String);
     this.appendValueInput('AT', Number)
-        .appendTitle(Blockly.LANG_TEXT_CHARAT_TITLE_LETTER)
         .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_AT);
     this.appendValueInput('VALUE', String)
         .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT);

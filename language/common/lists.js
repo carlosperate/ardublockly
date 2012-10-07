@@ -163,7 +163,6 @@ Blockly.Language.lists_repeat = {
     this.setColour(210);
     this.setOutput(true, Array);
     this.appendValueInput('ITEM', null)
-        .appendTitle(Blockly.LANG_LISTS_REPEAT_TITLE_CREATELIST)
         .appendTitle(Blockly.LANG_LISTS_REPEAT_INPUT_WITH);
     this.appendValueInput('NUM', Number)
         .appendTitle(Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED);
@@ -230,7 +229,6 @@ Blockly.Language.lists_getIndex = {
     this.setColour(210);
     this.setOutput(true, null);
     this.appendValueInput('AT', Number)
-        .appendTitle(Blockly.LANG_LISTS_GET_INDEX_TITLE)
         .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_AT);
     this.appendValueInput('VALUE', Array)
         .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST);
@@ -246,7 +244,6 @@ Blockly.Language.lists_setIndex = {
   init: function() {
     this.setColour(210);
     this.appendValueInput('AT', Number)
-        .appendTitle(Blockly.LANG_LISTS_SET_INDEX_TITLE)
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT);
     this.appendValueInput('LIST', Array)
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST);

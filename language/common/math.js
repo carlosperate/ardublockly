@@ -293,7 +293,6 @@ Blockly.Language.math_random_int = {
     this.setColour(230);
     this.setOutput(true, Number);
     this.appendValueInput('FROM', Number)
-        .appendTitle(Blockly.LANG_MATH_RANDOM_INT_TITLE_RANDOM)
         .appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM);
     this.appendValueInput('TO', Number)
         .appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_TO);

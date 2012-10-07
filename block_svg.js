@@ -422,8 +422,7 @@ Blockly.BlockSvg.prototype.render = function() {
  * @param {!Array.<!Blockly.Field>} titleList List of titles.
  * @param {number} cursorX X-coordinate to start the titles.
  * @param {number} cursorY Y-coordinate to start the titles.
- * @return {!Array.<number>} A tuple containing the XY coordinates of the
- *     bottom-right of the title row (plus a gap).
+ * @return {number} X-coordinate of the end of the title row (plus a gap).
  * @private
  */
 Blockly.BlockSvg.prototype.renderTitles_ = function(titleList,
@@ -431,15 +430,10 @@ Blockly.BlockSvg.prototype.renderTitles_ = function(titleList,
   if (Blockly.RTL) {
     cursorX = -cursorX;
   }
-  var maxHeight = 0;
   for (var t = 0, title; title = titleList[t]; t++) {
     // Get the dimensions of the title.
     var titleSize = title.getSize();
     var titleWidth = titleSize.width;
-    var titleHeight = titleSize.height;
-    if (maxHeight < titleHeight) {
-      maxHeight = titleHeight;
-    }
 
     if (Blockly.RTL) {
       cursorX -= titleWidth;
@@ -456,7 +450,7 @@ Blockly.BlockSvg.prototype.renderTitles_ = function(titleList,
       }
     }
   }
-  return {x: cursorX, y: maxHeight};
+  return Blockly.RTL ? -cursorX : cursorX;
 };
 
 /**
@@ -746,8 +740,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
           // Lower the title slightly.
           titleY += Blockly.BlockSvg.SEP_SPACE_Y;
         }
-        var xy = this.renderTitles_(input.titleRow, titleX, titleY);
-        cursorX = Blockly.RTL ? -xy.x : xy.x;
+        cursorX = this.renderTitles_(input.titleRow, titleX, titleY);
         if (input.type != Blockly.DUMMY_INPUT) {
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
         }
@@ -845,7 +838,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       var input = row[0];
       var titleX = cursorX;
       var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
-      var xy = this.renderTitles_(input.titleRow, titleX, titleY);
+      this.renderTitles_(input.titleRow, titleX, titleY);
       steps.push('v', row.height);
       if (Blockly.RTL) {
         highlightSteps.push('v', row.height - 2);

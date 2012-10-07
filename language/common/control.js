@@ -250,7 +250,6 @@ Blockly.Language.controls_for = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_CONTROLS_FOR_TITLE_COUNT)
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_WITH)
         .appendTitle(new Blockly.FieldVariable(null), 'VAR');
     this.appendValueInput('FROM', Number)
@@ -286,7 +285,6 @@ Blockly.Language.controls_forEach = {
   init: function() {
     this.setColour(120);
     this.appendValueInput('LIST', Array)
-        .appendTitle(Blockly.LANG_CONTROLS_FOREACH_TITLE_FOREACH)
         .appendTitle(Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM)
         .appendTitle(new Blockly.FieldVariable(null), 'VAR')
         .appendTitle(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST);
