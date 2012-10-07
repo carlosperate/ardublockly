@@ -235,25 +235,30 @@ Blockly.Warning.prototype.destroy = function() {
 
 /**
  * Render the icon for this warning.
- * @param {number} titleX Horizontal offset at which to position the icon.
- * @return {Object} Height and width of icon, or null if not displayed.
+ * @param {number} cursorX Horizontal offset at which to position the icon.
+ * @return {number} Horizontal offset for next item to draw.
  */
-Blockly.Warning.prototype.renderIcon = function(titleX) {
+Blockly.Warning.prototype.renderIcon = function(cursorX) {
   if (this.block_.collapsed) {
     this.iconGroup_.setAttribute('display', 'none');
-    return null;
+    return cursorX;
   }
   this.iconGroup_.setAttribute('display', 'block');
 
   var TOP_MARGIN = 5;
   var diameter = 2 * Blockly.Warning.ICON_RADIUS;
   if (Blockly.RTL) {
-    titleX -= diameter;
+    cursorX -= diameter;
   }
   this.iconGroup_.setAttribute('transform',
-      'translate(' + titleX + ', ' + TOP_MARGIN + ')');
+      'translate(' + cursorX + ', ' + TOP_MARGIN + ')');
   this.computeIconLocation();
-  return {x: diameter, y: diameter};
+  if (Blockly.RTL) {
+    cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
+  } else {
+    cursorX += diameter + Blockly.BlockSvg.SEP_SPACE_X;
+  }
+  return cursorX;
 };
 
 /**

@@ -388,24 +388,29 @@ Blockly.Mutator.prototype.destroy = function() {
 
 /**
  * Render the icon for this mutator.
- * @param {number} titleX Horizontal offset at which to position the icon.
- * @return {Object} Height and width of icon, or null if not displayed.
+ * @param {number} cursorX Horizontal offset at which to position the icon.
+ * @return {number} Horizontal offset for next item to draw.
  */
-Blockly.Mutator.prototype.renderIcon = function(titleX) {
+Blockly.Mutator.prototype.renderIcon = function(cursorX) {
   if (this.block_.collapsed) {
     this.iconGroup_.setAttribute('display', 'none');
-    return null;
+    return cursorX;
   }
   this.iconGroup_.setAttribute('display', 'block');
 
   var TOP_MARGIN = 5;
   if (Blockly.RTL) {
-    titleX -= Blockly.Mutator.ICON_SIZE;
+    cursorX -= Blockly.Mutator.ICON_SIZE;
   }
   this.iconGroup_.setAttribute('transform',
-                               'translate(' + titleX + ', ' + TOP_MARGIN + ')');
+      'translate(' + cursorX + ', ' + TOP_MARGIN + ')');
   this.computeIconLocation();
-  return {x: Blockly.Mutator.ICON_SIZE, y: Blockly.Mutator.ICON_SIZE};
+  if (Blockly.RTL) {
+    cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
+  } else {
+    cursorX += Blockly.Mutator.ICON_SIZE + Blockly.BlockSvg.SEP_SPACE_X;
+  }
+  return cursorX;
 };
 
 /**
