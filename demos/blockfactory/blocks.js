@@ -35,7 +35,8 @@ Blockly.Language.factory_base = {
     this.appendDummyInput()
         .appendTitle('name')
         .appendTitle(new Blockly.FieldTextInput('foo'), 'NAME');
-    this.appendStatementInput('INPUTS', 'Input')
+    this.appendStatementInput('INPUTS')
+        .setCheck('Input')
         .appendTitle('inputs');
     var dropdown = new Blockly.FieldDropdown([
         ['external inputs', 'EXT'],
@@ -55,7 +56,8 @@ Blockly.Language.factory_base = {
           var bottomExists = block.getInput('BOTTOMTYPE');
           if (option == 'left output') {
             if (!outputExists) {
-              block.appendValueInput('OUTPUTTYPE', 'Type')
+              block.appendValueInput('OUTPUTTYPE')
+                  .setCheck('Type')
                   .appendTitle('output type');
               block.moveInputBefore('OUTPUTTYPE', 'COLOUR');
             }
@@ -65,7 +67,8 @@ Blockly.Language.factory_base = {
           if (option == 'top connection' ||
               option == 'top+bottom connections') {
             if (!topExists) {
-              block.appendValueInput('TOPTYPE', 'Type')
+              block.appendValueInput('TOPTYPE')
+                  .setCheck('Type')
                   .appendTitle('top type');
               block.moveInputBefore('TOPTYPE', 'COLOUR');
             }
@@ -75,7 +78,8 @@ Blockly.Language.factory_base = {
           if (option == 'bottom connection' ||
               option == 'top+bottom connections') {
             if (!bottomExists) {
-              block.appendValueInput('BOTTOMTYPE', 'Type')
+              block.appendValueInput('BOTTOMTYPE')
+                  .setCheck('Type')
                   .appendTitle('bottom type');
               block.moveInputBefore('BOTTOMTYPE', 'COLOUR');
             }
@@ -86,12 +90,15 @@ Blockly.Language.factory_base = {
         });
     this.appendDummyInput()
         .appendTitle(dropdown, 'CONNECTIONS');
-    this.appendValueInput('COLOUR', 'Colour')
+    this.appendValueInput('COLOUR')
+        .setCheck('Colour')
         .appendTitle('colour');
     /*
-    this.appendValueInput('TOOLTIP', String)
+    this.appendValueInput('TOOLTIP')
+        .setCheck(String)
         .appendTitle('tooltip');
-    this.appendValueInput('HELP', String)
+    this.appendValueInput('HELP')
+        .setCheck(String)
         .appendTitle('help url');
     */
     this.setTooltip('Build a custom block by plugging\n' +
@@ -307,6 +314,9 @@ Blockly.Language.title_image = {
   }
 };
 
+var ALIGNMENT_OPTIONS =
+    [['left', 'LEFT'], ['right', 'RIGHT'], ['centre', 'CENTRE']];
+
 Blockly.Language.input_value = {
   // Value input.
   category: 'Input',
@@ -315,9 +325,12 @@ Blockly.Language.input_value = {
     this.appendDummyInput()
         .appendTitle('value input')
         .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
-    this.appendStatementInput('TITLES', 'Title')
-        .appendTitle('titles');
-    this.appendValueInput('TYPE', 'Type')
+    this.appendStatementInput('TITLES')
+        .setCheck('Title')
+        .appendTitle('titles')
+        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
+    this.appendValueInput('TYPE')
+        .setCheck('Type')
         .appendTitle('type');
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');
@@ -340,9 +353,12 @@ Blockly.Language.input_statement = {
     this.appendDummyInput()
         .appendTitle('statement input')
         .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
-    this.appendStatementInput('TITLES', 'Title')
-        .appendTitle('titles');
-    this.appendValueInput('TYPE', 'Type')
+    this.appendStatementInput('TITLES')
+        .setCheck('Title')
+        .appendTitle('titles')
+        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
+    this.appendValueInput('TYPE')
+        .setCheck('Type')
         .appendTitle('type');
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');
@@ -364,8 +380,10 @@ Blockly.Language.input_dummy = {
     this.setColour(210);
     this.appendDummyInput()
         .appendTitle('dummy input');
-    this.appendStatementInput('TITLES', 'Title')
-        .appendTitle('titles');
+    this.appendStatementInput('TITLES')
+        .setCheck('Title')
+        .appendTitle('titles')
+        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');
     this.setTooltip('For adding titles on a separate\n' +
@@ -378,9 +396,11 @@ Blockly.Language.type_group = {
   category: 'Type',
   init: function() {
     this.setColour(230);
-    this.appendValueInput('TYPE0', 'Type')
+    this.appendValueInput('TYPE0')
+        .setCheck('Type')
         .appendTitle('any of');
-    this.appendValueInput('TYPE1', 'Type');
+    this.appendValueInput('TYPE1')
+        .setCheck('Type');
     this.setOutput(true, 'Type');
     this.setMutator(new Blockly.Mutator(['type_group_item']));
     this.setTooltip('Allows more than one type to be accepted.');
@@ -397,7 +417,8 @@ Blockly.Language.type_group = {
     }
     this.typeCount_ = window.parseInt(container.getAttribute('types'), 10);
     for (var x = 0; x < this.typeCount_; x++) {
-      var input = this.appendValueInput('TYPE' + x, null);
+      var input = this.appendValueInput('TYPE' + x)
+                      .setCheck('Type');
       if (x == 0) {
         input.appendTitle('any of');
       }
@@ -425,7 +446,8 @@ Blockly.Language.type_group = {
     // Rebuild the block's inputs.
     var typeBlock = containerBlock.getInputTargetBlock('STACK');
     while (typeBlock) {
-      var input = this.appendValueInput('TYPE' + this.typeCount_, null);
+      var input = this.appendValueInput('TYPE' + this.typeCount_)
+                      .setCheck('Type');
       if (this.typeCount_ == 0) {
         input.appendTitle('any of');
       }

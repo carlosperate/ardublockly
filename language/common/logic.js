@@ -31,8 +31,8 @@ Blockly.Language.logic_compare = {
   init: function() {
     this.setColour(120);
     this.setOutput(true, Boolean);
-    this.appendValueInput('A', null);
-    this.appendValueInput('B', null)
+    this.appendValueInput('A');
+    this.appendValueInput('B')
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -68,8 +68,10 @@ Blockly.Language.logic_operation = {
   init: function() {
     this.setColour(120);
     this.setOutput(true, Boolean);
-    this.appendValueInput('A', Boolean);
-    this.appendValueInput('B', Boolean)
+    this.appendValueInput('A')
+        .setCheck(Boolean);
+    this.appendValueInput('B')
+        .setCheck(Boolean)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -97,7 +99,8 @@ Blockly.Language.logic_negate = {
   init: function() {
     this.setColour(120);
     this.setOutput(true, Boolean);
-    this.appendValueInput('BOOL', Boolean)
+    this.appendValueInput('BOOL')
+        .setCheck(Boolean)
         .appendTitle(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT);
     this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP_1);
   }

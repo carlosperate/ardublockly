@@ -1045,7 +1045,8 @@ Blockly.Block.prototype.setPreviousStatement = function(newBoolean, opt_check) {
       opt_check = null;
     }
     this.previousConnection =
-        new Blockly.Connection(this, Blockly.PREVIOUS_STATEMENT, opt_check);
+        new Blockly.Connection(this, Blockly.PREVIOUS_STATEMENT);
+    this.previousConnection.setCheck(opt_check);
   }
   if (this.rendered) {
     this.render();
@@ -1072,7 +1073,8 @@ Blockly.Block.prototype.setNextStatement = function(newBoolean, opt_check) {
       opt_check = null;
     }
     this.nextConnection =
-        new Blockly.Connection(this, Blockly.NEXT_STATEMENT, opt_check);
+        new Blockly.Connection(this, Blockly.NEXT_STATEMENT);
+    this.nextConnection.setCheck(opt_check);
   }
   if (this.rendered) {
     this.render();
@@ -1102,7 +1104,8 @@ Blockly.Block.prototype.setOutput = function(newBoolean, opt_check) {
       opt_check = null;
     }
     this.outputConnection =
-        new Blockly.Connection(this, Blockly.OUTPUT_VALUE, opt_check);
+        new Blockly.Connection(this, Blockly.OUTPUT_VALUE);
+    this.outputConnection.setCheck(opt_check);
   }
   if (this.rendered) {
     this.render();
@@ -1217,24 +1220,20 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
  * Shortcut for appending a value input row.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
- * @param {*} opt_check Acceptable value type, or list of value types.
- *     Null or undefined means all values are acceptable.
  * @return {!Blockly.Input} The input object created.
  */
-Blockly.Block.prototype.appendValueInput = function(name, opt_check) {
-  return this.appendInput_(Blockly.INPUT_VALUE, name, opt_check);
+Blockly.Block.prototype.appendValueInput = function(name) {
+  return this.appendInput_(Blockly.INPUT_VALUE, name);
 };
 
 /**
  * Shortcut for appending a statement input row.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
- * @param {*} opt_check Acceptable value type, or list of value types.
- *     Null or undefined means all values are acceptable.
  * @return {!Blockly.Input} The input object created.
  */
-Blockly.Block.prototype.appendStatementInput = function(name, opt_check) {
-  return this.appendInput_(Blockly.NEXT_STATEMENT, name, opt_check);
+Blockly.Block.prototype.appendStatementInput = function(name) {
+  return this.appendInput_(Blockly.NEXT_STATEMENT, name);
 };
 
 /**
@@ -1253,15 +1252,13 @@ Blockly.Block.prototype.appendDummyInput = function(opt_name) {
  *     Blockly.DUMMY_INPUT.
  * @param {string} name Language-neutral identifier which may used to find this
  *     input again.  Should be unique to this block.
- * @param {*} opt_check Acceptable value type, or list of value types.
- *     Null or undefined means all values are acceptable.
  * @return {!Blockly.Input} The input object created.
  * @private
  */
-Blockly.Block.prototype.appendInput_ = function(type, name, opt_check) {
+Blockly.Block.prototype.appendInput_ = function(type, name) {
   var connection = null;
   if (type == Blockly.INPUT_VALUE || type == Blockly.NEXT_STATEMENT) {
-    connection = new Blockly.Connection(this, type, opt_check);
+    connection = new Blockly.Connection(this, type);
   }
   var input = new Blockly.Input(type, name, this, connection);
   // Append input to list.

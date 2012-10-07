@@ -32,9 +32,11 @@ Blockly.Language.lists_getIndex = {
     this.setColour(210);
     this.setOutput(true, null);
     //this.appendTitle(Blockly.LANG_LISTS_GET_INDEX_TITLE);
-    this.appendValueInput('VALUE', Array)
+    this.appendValueInput('VALUE')
+        .setCheck(Array)
         .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST);
-    this.appendValueInput('AT', Number)
+    this.appendValueInput('AT')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_AT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1);
@@ -48,11 +50,13 @@ Blockly.Language.lists_setIndex = {
   init: function() {
     this.setColour(210);
     //this.appendTitle(Blockly.LANG_LISTS_SET_INDEX_TITLE);
-    this.appendValueInput('LIST', Array)
+    this.appendValueInput('LIST')
+        .setCheck(Array)
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST);
-    this.appendValueInput('AT', Number)
+    this.appendValueInput('AT')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT);
-    this.appendValueInput('TO', null)
+    this.appendValueInput('TO')
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO);
     this.setInputsInline(true);
     this.setPreviousStatement(true);

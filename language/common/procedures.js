@@ -171,7 +171,7 @@ Blockly.Language.procedures_defreturn = {
         .appendTitle('', 'PARAMS');
     this.appendStatementInput('STACK')
         .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_DO);
-    this.appendValueInput('RETURN', null)
+    this.appendValueInput('RETURN')
         .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN);
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1);
@@ -286,7 +286,7 @@ Blockly.Language.procedures_callnoreturn = {
     this.arguments_ = [].concat(paramNames);
     this.quarkArguments_ = paramIds;
     for (var x = 0; x < this.arguments_.length; x++) {
-      var input = this.appendValueInput('ARG' + x, null);
+      var input = this.appendValueInput('ARG' + x);
       input.appendTitle(this.arguments_[x]);
       if (this.quarkArguments_) {
         // Reconnect any child blocks.

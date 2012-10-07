@@ -34,9 +34,11 @@ Blockly.Language.controls_for = {
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_WITH)
         .appendTitle(new Blockly.FieldVariable(null), 'VAR');
-    this.appendValueInput('FROM', Number)
+    this.appendValueInput('FROM')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_FROM);
-    this.appendValueInput('TO', Number)
+    this.appendValueInput('TO')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_TO);
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_DO);

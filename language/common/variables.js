@@ -53,7 +53,7 @@ Blockly.Language.variables_set = {
   helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   init: function() {
     this.setColour(330);
-    this.appendValueInput('VALUE', null)
+    this.appendValueInput('VALUE')
         .appendTitle(Blockly.LANG_VARIABLES_SET_TITLE_1)
         .appendTitle(new Blockly.FieldVariable(
         Blockly.LANG_VARIABLES_SET_ITEM), 'VAR');

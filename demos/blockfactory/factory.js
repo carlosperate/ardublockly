@@ -121,11 +121,18 @@ function updateLanguage() {
   var inputVarDefined = false;
   var contentsBlock = rootBlock.getInputTargetBlock('INPUTS');
   while (contentsBlock) {
+    var align = contentsBlock.getTitleValue('ALIGN');
     var titles = getTitles(contentsBlock.getInputTargetBlock('TITLES'));
     var name = escapeString(contentsBlock.getTitleValue('INPUTNAME') || '');
     var check = getOptTypesFrom(contentsBlock, 'TYPE');
     code.push('    this.' + TYPES[contentsBlock.type] +
-        '(' + name + check + ')');
+        '(' + name + ')');
+    if (check && check != 'null') {
+      code.push('        .setCheck(' + check + ')');
+    }
+    if (align != 'LEFT') {
+      code.push('        .setAlign(Blockly.ALIGN_' + align + ')');
+    }
     for (var x = 0; x < titles.length; x++) {
       code.push('        .appendTitle(' + titles[x] + ')');
     }
@@ -142,20 +149,35 @@ function updateLanguage() {
   switch (rootBlock.getTitleValue('CONNECTIONS')) {
     case 'LEFT':
       var outputType = getOptTypesFrom(rootBlock, 'OUTPUTTYPE');
+      if (outputType) {
+        outputType = ', ' + outputType;
+      }
       code.push('    this.setOutput(true' + outputType + ');');
       break;
     case 'BOTH':
       var topType = getOptTypesFrom(rootBlock, 'TOPTYPE');
+      if (outputType) {
+        outputType = ', ' + outputType;
+      }
       code.push('    this.setPreviousStatement(true' + topType + ');');
       var bottomType = getOptTypesFrom(rootBlock, 'BOTTOMTYPE');
+      if (outputType) {
+        outputType = ', ' + outputType;
+      }
       code.push('    this.setNextStatement(true' + bottomType + ');');
       break;
     case 'TOP':
       var topType = getOptTypesFrom(rootBlock, 'TOPTYPE');
+      if (outputType) {
+        outputType = ', ' + outputType;
+      }
       code.push('    this.setPreviousStatement(true' + topType + ');');
       break;
     case 'BOTTOM':
       var bottomType = getOptTypesFrom(rootBlock, 'BOTTOMTYPE');
+      if (outputType) {
+        outputType = ', ' + outputType;
+      }
       code.push('    this.setNextStatement(true' + bottomType + ');');
       break;
   }
@@ -247,11 +269,11 @@ function getOptTypesFrom(block, name) {
   if (types.length == 0) {
     return '';
   } else if (types.length == 1) {
-    return ', ' + types[0];
+    return types[0];
   } else if (types.indexOf('null') != -1) {
-    return ', null';
+    return 'null';
   } else {
-    return ', [' + types.join(', ') + ']';
+    return '[' + types.join(', ') + ']';
   }
 }
 

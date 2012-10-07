@@ -52,8 +52,10 @@ Blockly.Language.math_arithmetic = {
   init: function() {
     this.setColour(230);
     this.setOutput(true, Number);
-    this.appendValueInput('A', Number);
-    this.appendValueInput('B', Number)
+    this.appendValueInput('A')
+        .setCheck(Number);
+    this.appendValueInput('B')
+        .setCheck(Number)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -86,7 +88,8 @@ Blockly.Language.math_change = {
   helpUrl: Blockly.LANG_MATH_CHANGE_HELPURL,
   init: function() {
     this.setColour(230);
-    this.appendValueInput('DELTA', Number)
+    this.appendValueInput('DELTA')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_MATH_CHANGE_TITLE_CHANGE)
         .appendTitle(new Blockly.FieldVariable(
         Blockly.LANG_MATH_CHANGE_TITLE_ITEM), 'VAR')
@@ -118,7 +121,8 @@ Blockly.Language.math_single = {
   init: function() {
     this.setColour(230);
     this.setOutput(true, Number);
-    this.appendValueInput('NUM', Number)
+    this.appendValueInput('NUM')
+        .setCheck(Number)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
@@ -156,7 +160,8 @@ Blockly.Language.math_round = {
   init: function() {
     this.setColour(230);
     this.setOutput(true, Number);
-    this.appendValueInput('NUM', Number)
+    this.appendValueInput('NUM')
+        .setCheck(Number)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     this.setTooltip(Blockly.LANG_MATH_ROUND_TOOLTIP_1);
   }
@@ -174,7 +179,8 @@ Blockly.Language.math_trig = {
   init: function() {
     this.setColour(230);
     this.setOutput(true, Number);
-    this.appendValueInput('NUM', Number)
+    this.appendValueInput('NUM')
+        .setCheck(Number)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
@@ -220,7 +226,8 @@ Blockly.Language.math_on_list = {
       }
       this.setText(newOp);
     });
-    this.appendValueInput('LIST', Array)
+    this.appendValueInput('LIST')
+        .setCheck(Array)
         .appendTitle(dropdown, 'OP')
         .appendTitle(Blockly.LANG_MATH_ONLIST_INPUT_OFLIST);
     this.setTooltip(function() {
@@ -258,11 +265,14 @@ Blockly.Language.math_constrain = {
   init: function() {
     this.setColour(230);
     this.setOutput(true, Number);
-    this.appendValueInput('VALUE', Number)
+    this.appendValueInput('VALUE')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_MATH_CONSTRAIN_INPUT_CONSTRAIN);
-    this.appendValueInput('LOW', Number)
+    this.appendValueInput('LOW')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_MATH_CONSTRAIN_INPUT_LOW);
-    this.appendValueInput('HIGH', Number)
+    this.appendValueInput('HIGH')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_CONSTRAIN_TOOLTIP_1);
@@ -276,9 +286,11 @@ Blockly.Language.math_modulo = {
   init: function() {
     this.setColour(230);
     this.setOutput(true, Number);
-    this.appendValueInput('DIVIDEND', Number)
+    this.appendValueInput('DIVIDEND')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND);
-    this.appendValueInput('DIVISOR', Number)
+    this.appendValueInput('DIVISOR')
+        .setCheck(Number)
         .appendTitle('\u00F7');
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_MODULO_TOOLTIP_1);
@@ -292,9 +304,11 @@ Blockly.Language.math_random_int = {
   init: function() {
     this.setColour(230);
     this.setOutput(true, Number);
-    this.appendValueInput('FROM', Number)
+    this.appendValueInput('FROM')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM);
-    this.appendValueInput('TO', Number)
+    this.appendValueInput('TO')
+        .setCheck(Number)
         .appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_TO);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1);

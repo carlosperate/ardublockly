@@ -67,6 +67,30 @@ Blockly.Input.prototype.appendTitle = function(title, opt_name) {
 };
 
 /**
+ * Change a connection's compatibility.
+ * @param {*} check Compatible value type or list of value types.
+ *     Null if all types are compatible.
+ * @return {!Blockly.Input} The input being modified (to allow chaining).
+ */
+Blockly.Input.prototype.setCheck = function(check) {
+  if (!this.connection) {
+    throw 'This input does not have a connection.';
+  }
+  this.connection.setCheck(check);
+  return this;
+};
+
+/**
+ * Change the alignment of the connection's title(s).
+ * @param {number} align One of Blockly.ALIGN_LEFT, ALIGN_CENTRE, ALIGN_RIGHT.
+ * @return {!Blockly.Input} The input being modified (to allow chaining).
+ */
+Blockly.Input.prototype.setAlign = function(align) {
+  // TODO
+  return this;
+};
+
+/**
  * Initialize the titles on this input.
  */
 Blockly.Input.prototype.init = function() {
