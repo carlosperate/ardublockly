@@ -106,6 +106,85 @@ Blockly.Language.factory_base = {
   }
 };
 
+var ALIGNMENT_OPTIONS =
+    [['left', 'LEFT'], ['right', 'RIGHT'], ['centre', 'CENTRE']];
+
+Blockly.Language.input_value = {
+  // Value input.
+  category: 'Input',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle('value input')
+        .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
+    this.appendStatementInput('TITLES')
+        .setCheck('Title')
+        .appendTitle('titles')
+        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
+    this.appendValueInput('TYPE')
+        .setCheck('Type')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle('type');
+    this.setPreviousStatement(true, 'Input');
+    this.setNextStatement(true, 'Input');
+    this.setTooltip('A value socket for horizontal connections.');
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    inputNameCheck(this);
+  }
+};
+
+Blockly.Language.input_statement = {
+  // Statement input.
+  category: 'Input',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle('statement input')
+        .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
+    this.appendStatementInput('TITLES')
+        .setCheck('Title')
+        .appendTitle('titles')
+        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
+    this.appendValueInput('TYPE')
+        .setCheck('Type')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle('type');
+    this.setPreviousStatement(true, 'Input');
+    this.setNextStatement(true, 'Input');
+    this.setTooltip('A statement socket for enclosed vertical stacks.');
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    inputNameCheck(this);
+  }
+};
+
+Blockly.Language.input_dummy = {
+  // Dummy input.
+  category: 'Input',
+  init: function() {
+    this.setColour(210);
+    this.appendDummyInput()
+        .appendTitle('dummy input');
+    this.appendStatementInput('TITLES')
+        .setCheck('Title')
+        .appendTitle('titles')
+        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
+    this.setPreviousStatement(true, 'Input');
+    this.setNextStatement(true, 'Input');
+    this.setTooltip('For adding titles on a separate\n' +
+                    'row with no connections.');
+  }
+};
+
 Blockly.Language.title_static = {
   // Text value.
   category: 'Title',
@@ -311,85 +390,6 @@ Blockly.Language.title_image = {
     this.setNextStatement(true, 'Title');
     this.setTooltip('Static image (JPEG, PNG, GIF, SVG, BMP).\n' +
                     'Retains aspect ratio regardless of height and width.');
-  }
-};
-
-var ALIGNMENT_OPTIONS =
-    [['left', 'LEFT'], ['right', 'RIGHT'], ['centre', 'CENTRE']];
-
-Blockly.Language.input_value = {
-  // Value input.
-  category: 'Input',
-  init: function() {
-    this.setColour(210);
-    this.appendDummyInput()
-        .appendTitle('value input')
-        .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
-    this.appendStatementInput('TITLES')
-        .setCheck('Title')
-        .appendTitle('titles')
-        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
-    this.appendValueInput('TYPE')
-        .setCheck('Type')
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle('type');
-    this.setPreviousStatement(true, 'Input');
-    this.setNextStatement(true, 'Input');
-    this.setTooltip('A value socket for horizontal connections.');
-  },
-  onchange: function() {
-    if (!this.workspace) {
-      // Block has been deleted.
-      return;
-    }
-    inputNameCheck(this);
-  }
-};
-
-Blockly.Language.input_statement = {
-  // Statement input.
-  category: 'Input',
-  init: function() {
-    this.setColour(210);
-    this.appendDummyInput()
-        .appendTitle('statement input')
-        .appendTitle(new Blockly.FieldTextInput('NAME'), 'INPUTNAME');
-    this.appendStatementInput('TITLES')
-        .setCheck('Title')
-        .appendTitle('titles')
-        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
-    this.appendValueInput('TYPE')
-        .setCheck('Type')
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle('type');
-    this.setPreviousStatement(true, 'Input');
-    this.setNextStatement(true, 'Input');
-    this.setTooltip('A statement socket for enclosed vertical stacks.');
-  },
-  onchange: function() {
-    if (!this.workspace) {
-      // Block has been deleted.
-      return;
-    }
-    inputNameCheck(this);
-  }
-};
-
-Blockly.Language.input_dummy = {
-  // Dummy input.
-  category: 'Input',
-  init: function() {
-    this.setColour(210);
-    this.appendDummyInput()
-        .appendTitle('dummy input');
-    this.appendStatementInput('TITLES')
-        .setCheck('Title')
-        .appendTitle('titles')
-        .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
-    this.setPreviousStatement(true, 'Input');
-    this.setNextStatement(true, 'Input');
-    this.setTooltip('For adding titles on a separate\n' +
-                    'row with no connections.');
   }
 };
 
