@@ -287,8 +287,9 @@ Blockly.Language.procedures_callnoreturn = {
     this.arguments_ = [].concat(paramNames);
     this.quarkArguments_ = paramIds;
     for (var x = 0; x < this.arguments_.length; x++) {
-      var input = this.appendValueInput('ARG' + x);
-      input.appendTitle(this.arguments_[x]);
+      var input = this.appendValueInput('ARG' + x)
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendTitle(this.arguments_[x]);
       if (this.quarkArguments_) {
         // Reconnect any child blocks.
         var quarkName = this.quarkArguments_[x];
@@ -330,6 +331,7 @@ Blockly.Language.procedures_callnoreturn = {
       if (childNode.tagName && childNode.tagName.toLowerCase() == 'arg') {
         var paramName = childNode.getAttribute('name');
         this.appendValueInput('ARG' + this.arguments_.length)
+            .setAlign(Blockly.ALIGN_RIGHT)
             .appendTitle(paramName);
         this.arguments_.push(paramName);
       }

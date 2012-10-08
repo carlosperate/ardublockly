@@ -64,8 +64,9 @@ Blockly.Language.unittest_asserttrue = {
     this.setColour(65);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.appendValueInput('ACTUAL', Boolean)
+    this.appendDummyInput()
         .appendTitle(new Blockly.FieldTextInput('test name'), 'MESSAGE')
+    this.appendValueInput('ACTUAL', Boolean)
         .appendTitle('assert true');
     this.setTooltip('Tests that the value is true.');
   }
@@ -78,8 +79,9 @@ Blockly.Language.unittest_assertfalse = {
     this.setColour(65);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.appendValueInput('ACTUAL', Boolean)
+    this.appendDummyInput()
         .appendTitle(new Blockly.FieldTextInput('test name'), 'MESSAGE')
+    this.appendValueInput('ACTUAL', Boolean)
         .appendTitle('assert false');
     this.setTooltip('Tests that the value is false.');
   }
