@@ -37,6 +37,7 @@ Blockly.Input = function(type, name, block, connection) {
   this.sourceBlock_ = block;
   this.connection = connection;
   this.titleRow = [];
+  this.align = Blockly.ALIGN_LEFT;
 };
 
 /**
@@ -83,10 +84,14 @@ Blockly.Input.prototype.setCheck = function(check) {
 /**
  * Change the alignment of the connection's title(s).
  * @param {number} align One of Blockly.ALIGN_LEFT, ALIGN_CENTRE, ALIGN_RIGHT.
+ *   In RTL mode directions are reversed, and ALIGN_RIGHT aligns to the left.
  * @return {!Blockly.Input} The input being modified (to allow chaining).
  */
 Blockly.Input.prototype.setAlign = function(align) {
-  // TODO
+  this.align = align;
+  if (this.sourceBlock_.rendered) {
+    this.sourceBlock_.render();
+  }
   return this;
 };
 

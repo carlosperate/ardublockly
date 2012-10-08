@@ -257,9 +257,11 @@ Blockly.Language.controls_for = {
         .appendTitle(new Blockly.FieldVariable(null), 'VAR');
     this.appendValueInput('FROM')
         .setCheck(Number)
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_FROM);
     this.appendValueInput('TO')
         .setCheck(Number)
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_TO);
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_DO);

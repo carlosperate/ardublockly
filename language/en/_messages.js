@@ -44,7 +44,7 @@ Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the fi
 Blockly.LANG_CONTROLS_IF_MSG_IF = 'if';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'else if';
 Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'else';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = 'then';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = 'do';
 
 Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'if';
 Blockly.LANG_CONTROLS_IF_IF_TOOLTIP_1 = 'Add, remove, or reorder sections\n' +

@@ -331,6 +331,7 @@ Blockly.Language.input_value = {
         .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
     this.appendValueInput('TYPE')
         .setCheck('Type')
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle('type');
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');
@@ -359,6 +360,7 @@ Blockly.Language.input_statement = {
         .appendTitle(new Blockly.FieldDropdown(ALIGNMENT_OPTIONS), 'ALIGN');
     this.appendValueInput('TYPE')
         .setCheck('Type')
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle('type');
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');

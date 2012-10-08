@@ -291,6 +291,7 @@ Blockly.Language.math_modulo = {
         .appendTitle(Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND);
     this.appendValueInput('DIVISOR')
         .setCheck(Number)
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle('\u00F7');
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_MODULO_TOOLTIP_1);
@@ -309,6 +310,7 @@ Blockly.Language.math_random_int = {
         .appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM);
     this.appendValueInput('TO')
         .setCheck(Number)
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.LANG_MATH_RANDOM_INT_INPUT_TO);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_RANDOM_INT_TOOLTIP_1);

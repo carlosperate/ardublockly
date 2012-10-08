@@ -172,6 +172,7 @@ Blockly.Language.procedures_defreturn = {
     this.appendStatementInput('STACK')
         .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_DO);
     this.appendValueInput('RETURN')
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN);
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP_1);

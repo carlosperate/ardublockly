@@ -594,6 +594,9 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
         Blockly.BlockSvg.SEP_SPACE_X * 2);
   }
  
+  inputRows.hasValue = hasValue;
+  inputRows.hasStatement = hasStatement;
+  inputRows.hasDummy = hasDummy;
   return inputRows;
 };
 
@@ -740,6 +743,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
           // Lower the title slightly.
           titleY += Blockly.BlockSvg.SEP_SPACE_Y;
         }
+        // TODO: Align inline title rows (left/right/centre).
         cursorX = this.renderTitles_(input.titleRow, titleX, titleY);
         if (input.type != Blockly.DUMMY_INPUT) {
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
@@ -811,6 +815,15 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       var input = row[0];
       var titleX = cursorX;
       var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
+      if (input.align != Blockly.ALIGN_LEFT) {
+        var titleRightX = inputRows.rightEdge - input.titleWidth -
+            Blockly.BlockSvg.TAB_WIDTH - Blockly.BlockSvg.SEP_SPACE_X;
+        if (input.align == Blockly.ALIGN_RIGHT) {
+          titleX = titleRightX;
+        } else if (input.align == Blockly.ALIGN_CENTRE) {
+          titleX = (titleRightX + titleX) / 2;
+        }
+      }
       this.renderTitles_(input.titleRow, titleX, titleY);
       steps.push(Blockly.BlockSvg.TAB_PATH_DOWN);
       steps.push('v', row.height - Blockly.BlockSvg.TAB_HEIGHT);
@@ -838,6 +851,18 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       var input = row[0];
       var titleX = cursorX;
       var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
+      if (input.align != Blockly.ALIGN_LEFT) {
+        var titleRightX = inputRows.rightEdge - input.titleWidth -
+            Blockly.BlockSvg.SEP_SPACE_X;
+        if (inputRows.hasValues) {
+          titleRightX -= Blockly.BlockSvg.TAB_WIDTH;
+        }
+        if (input.align == Blockly.ALIGN_RIGHT) {
+          titleX = titleRightX;
+        } else if (input.align == Blockly.ALIGN_CENTRE) {
+          titleX = (titleRightX + titleX) / 2;
+        }
+      }
       this.renderTitles_(input.titleRow, titleX, titleY);
       steps.push('v', row.height);
       if (Blockly.RTL) {
@@ -856,6 +881,15 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       }
       var titleX = cursorX;
       var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
+      if (input.align != Blockly.ALIGN_LEFT) {
+        var titleRightX = inputRows.statementEdge - input.titleWidth -
+            Blockly.BlockSvg.SEP_SPACE_X;
+        if (input.align == Blockly.ALIGN_RIGHT) {
+          titleX = titleRightX;
+        } else if (input.align == Blockly.ALIGN_CENTRE) {
+          titleX = (titleRightX + titleX) / 2;
+        }
+      }
       this.renderTitles_(input.titleRow, titleX, titleY);
       cursorX = inputRows.statementEdge + Blockly.BlockSvg.NOTCH_WIDTH;
       steps.push('H', cursorX);
