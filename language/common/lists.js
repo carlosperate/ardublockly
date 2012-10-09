@@ -166,9 +166,9 @@ Blockly.Language.lists_repeat = {
         .appendTitle(Blockly.LANG_LISTS_REPEAT_INPUT_WITH);
     this.appendValueInput('NUM')
         .setCheck(Number)
-        .appendTitle(Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED);
+        .appendTitle(Blockly.LANG_LISTS_REPEAT_INPUT_REPEATED);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_LISTS_REPEAT_INPIT_TIMES);
+        .appendTitle(Blockly.LANG_LISTS_REPEAT_INPUT_TIMES);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_REPEAT_TOOLTIP_1);
   }

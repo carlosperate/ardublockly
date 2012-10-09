@@ -305,8 +305,8 @@ Blockly.LANG_LISTS_CREATE_WITH_ITEM_TOOLTIP_1 = 'Add an item to the list.';
 
 Blockly.LANG_LISTS_REPEAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_REPEAT_INPUT_WITH = 'create list with item';
-Blockly.LANG_LISTS_REPEAT_INPIT_REPEATED = 'repeated';
-Blockly.LANG_LISTS_REPEAT_INPIT_TIMES = 'times';
+Blockly.LANG_LISTS_REPEAT_INPUT_REPEATED = 'repeated';
+Blockly.LANG_LISTS_REPEAT_INPUT_TIMES = 'times';
 Blockly.LANG_LISTS_REPEAT_TOOLTIP_1 = 'Creates a list consisting of the given value\n' +
     'repeated the specified number of times.';
 

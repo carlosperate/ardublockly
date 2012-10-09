@@ -366,7 +366,7 @@ Maze.randomize = function() {
   /**
    * Find a random point that's a dead-end on the maze.
    * Set this point to be either the start or finish.
-   * Closure, but does not reference any outside variables.
+   * This function is a closure, but does not reference any outside variables.
    * @param {number} state 2 -> start point, 3-> finish point.
    * @return {!Object} X-Y coordinates of new point.
    */
