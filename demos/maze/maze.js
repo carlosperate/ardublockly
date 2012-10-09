@@ -241,16 +241,6 @@ Maze.draw_map = function() {
   finishMarker.setAttribute('width', 20);
   svg.appendChild(finishMarker);
 
-  // Add pegman.
-  var pegmanIcon = document.createElementNS(Blockly.SVG_NS, 'image');
-  pegmanIcon.setAttribute('id', 'pegman');
-  pegmanIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-      'pegman.png');
-  pegmanIcon.setAttribute('height', Maze.PEGMAN_HEIGHT);
-  pegmanIcon.setAttribute('width', Maze.PEGMAN_WIDTH * 18); //49 * 18 = 882
-  pegmanIcon.setAttribute('clip-path', 'url(#pegmanClipPath)');
-  svg.appendChild(pegmanIcon);
-
   // Pegman's clipPath element, whose (x, y) is reset by Maze.displayPegman
   var pegmanClip = document.createElementNS(Blockly.SVG_NS, 'clipPath');
   pegmanClip.setAttribute('id', 'pegmanClipPath');
@@ -260,6 +250,16 @@ Maze.draw_map = function() {
   clipRect.setAttribute('height', Maze.PEGMAN_HEIGHT);
   pegmanClip.appendChild(clipRect);
   svg.appendChild(pegmanClip);
+
+  // Add pegman.
+  var pegmanIcon = document.createElementNS(Blockly.SVG_NS, 'image');
+  pegmanIcon.setAttribute('id', 'pegman');
+  pegmanIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+      'pegman.png');
+  pegmanIcon.setAttribute('height', Maze.PEGMAN_HEIGHT);
+  pegmanIcon.setAttribute('width', Maze.PEGMAN_WIDTH * 18); //49 * 18 = 882
+  pegmanIcon.setAttribute('clip-path', 'url(#pegmanClipPath)');
+  svg.appendChild(pegmanIcon);
 };
 
 /**
