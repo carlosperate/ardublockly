@@ -854,7 +854,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       if (input.align != Blockly.ALIGN_LEFT) {
         var titleRightX = inputRows.rightEdge - input.titleWidth -
             Blockly.BlockSvg.SEP_SPACE_X;
-        if (inputRows.hasValues) {
+        if (inputRows.hasValue) {
           titleRightX -= Blockly.BlockSvg.TAB_WIDTH;
         }
         if (input.align == Blockly.ALIGN_RIGHT) {

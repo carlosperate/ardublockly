@@ -74,7 +74,7 @@ Blockly.Dart.math_single = function() {
   // Math operators with single operand.
   var operator = this.getTitleValue('OP');
   var code;
-	var arg;
+  var arg;
   if (operator == 'NEG') {
     // Negation is a special case given its different operator precedence.
     arg = Blockly.Dart.valueToCode(this, 'NUM',
@@ -86,16 +86,16 @@ Blockly.Dart.math_single = function() {
     code = '-' + arg;
     return [code, Blockly.Dart.ORDER_UNARY_PREFIX];
   }
-	if (operator == 'ABS' || operator.substring(0, 5) == 'ROUND') {
+  if (operator == 'ABS' || operator.substring(0, 5) == 'ROUND') {
     arg = Blockly.Dart.valueToCode(this, 'NUM',
         Blockly.Dart.ORDER_UNARY_POSTFIX) || '0';
-	} else if (operator == 'SIN' || operator == 'COS' || operator == 'TAN') {
+  } else if (operator == 'SIN' || operator == 'COS' || operator == 'TAN') {
     arg = Blockly.Dart.valueToCode(this, 'NUM',
-				Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
-	} else {
+        Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
+  } else {
     arg = Blockly.Dart.valueToCode(this, 'NUM',
         Blockly.Dart.ORDER_NONE) || '0';
-	}
+  }
   // First, handle cases which generate values that don't need parentheses.
   switch (operator) {
     case 'ABS':

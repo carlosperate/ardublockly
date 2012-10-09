@@ -123,7 +123,11 @@ function updateLanguage() {
   while (contentsBlock) {
     var align = contentsBlock.getTitleValue('ALIGN');
     var titles = getTitles(contentsBlock.getInputTargetBlock('TITLES'));
-    var name = escapeString(contentsBlock.getTitleValue('INPUTNAME') || '');
+    var name = '';
+    // Dummy inputs don't have names.  Other inputs do.
+    if (contentsBlock.type != 'input_dummy') {
+      name = escapeString(contentsBlock.getTitleValue('INPUTNAME'));
+    }
     var check = getOptTypesFrom(contentsBlock, 'TYPE');
     code.push('    this.' + TYPES[contentsBlock.type] +
         '(' + name + ')');
