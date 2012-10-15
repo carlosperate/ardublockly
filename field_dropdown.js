@@ -23,6 +23,7 @@
  * properties with the context menu.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * Class for an editable dropdown field.

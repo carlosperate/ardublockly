@@ -21,6 +21,7 @@
  * @fileoverview Factory for building blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * The uneditable container block that everything else attaches to.

@@ -21,6 +21,7 @@
  * @fileoverview Text input field.  Used for editable titles and variables.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * Class for an editable text field.

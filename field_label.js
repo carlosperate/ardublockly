@@ -21,6 +21,7 @@
  * @fileoverview Non-editable text field.  Used for titles, labels, etc.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * Class for a non-editable field.

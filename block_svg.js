@@ -21,6 +21,7 @@
  * @fileoverview Methods for graphically rendering a block as SVG.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * Class for a block's SVG representation.
@@ -228,7 +229,7 @@ Blockly.BlockSvg.prototype.destroyUiEffect = function() {
 
   var xy = Blockly.getAbsoluteXY_(this.svgGroup_);
   // Deeply clone the current block.
-  clone = this.svgGroup_.cloneNode(true);
+  var clone = this.svgGroup_.cloneNode(true);
   clone.translateX_ = xy.x;
   clone.translateY_ = xy.y;
   clone.setAttribute('transform',

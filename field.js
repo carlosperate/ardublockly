@@ -23,6 +23,7 @@
  * instances would be Blockly.FieldTextInput, Blockly.FieldDropdown, etc.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * Class for an editable field.

@@ -21,6 +21,7 @@
  * @fileoverview Image field.  Used for titles, labels, etc.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * Class for an image.

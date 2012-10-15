@@ -21,6 +21,7 @@
  * @fileoverview Blocks for building blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 if (!Blockly.Language) Blockly.Language = {};
 

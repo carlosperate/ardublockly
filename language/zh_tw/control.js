@@ -18,9 +18,10 @@
  */
 
 /**
- * @fileoverview Control blocks for Blockly.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Custom control blocks for Traditional Chinese.
+ * @author gasolin@gmail.com (Fred Lin)
  */
+'use strict';
 
 if (!Blockly.Language) Blockly.Language = {};
 

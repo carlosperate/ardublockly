@@ -21,6 +21,7 @@
  * @fileoverview Generating JavaScript for math blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
@@ -355,7 +356,7 @@ Blockly.JavaScript.math_random_int = function() {
     func.push('}');
     Blockly.JavaScript.definitions_['math_random_int'] = func.join('\n');
   }
-  code = Blockly.JavaScript.math_random_int.random_function +
+  var code = Blockly.JavaScript.math_random_int.random_function +
       '(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

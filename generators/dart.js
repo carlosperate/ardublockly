@@ -21,6 +21,7 @@
  * @fileoverview Helper functions for generating Dart for blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 

@@ -21,6 +21,7 @@
  * @fileoverview Generating JavaScript for procedure blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 

@@ -21,6 +21,7 @@
  * @fileoverview Generating Dart for math blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
@@ -162,8 +163,8 @@ Blockly.Dart.math_trig = Blockly.Dart.math_single;
 
 Blockly.Dart.math_on_list = function() {
   // Math functions for lists.
-  func = this.getTitleValue('OP');
-  list = Blockly.Dart.valueToCode(this, 'LIST',
+  var func = this.getTitleValue('OP');
+  var list = Blockly.Dart.valueToCode(this, 'LIST',
       Blockly.Dart.ORDER_NONE) || '[]';
   var code;
   switch (func) {
@@ -392,7 +393,7 @@ Blockly.Dart.math_random_int = function() {
     func.push('}');
     Blockly.Dart.definitions_['math_random_int'] = func.join('\n');
   }
-  code = Blockly.Dart.math_random_int.random_function +
+  var code = Blockly.Dart.math_random_int.random_function +
       '(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };

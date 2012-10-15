@@ -21,6 +21,7 @@
  * @fileoverview Generating Dart for text blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
@@ -59,7 +60,7 @@ Blockly.Dart.text_append = function() {
       Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Dart.valueToCode(this, 'TEXT',
       Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
-  return code = varName + ' = new StringBuffer(' + varName +
+  return varName + ' = new StringBuffer(' + varName +
       ').add(' + argument0 + ').toString();\n';
 };
 

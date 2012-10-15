@@ -21,6 +21,7 @@
  * @fileoverview Generating JavaScript for text blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
@@ -64,8 +65,7 @@ Blockly.JavaScript.text_append = function() {
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
-  return code = varName +
-      ' = String(' + varName + ') + String(' + argument0 + ');\n';
+  return varName + ' = String(' + varName + ') + String(' + argument0 + ');\n';
 };
 
 Blockly.JavaScript.text_length = function() {

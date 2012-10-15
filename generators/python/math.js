@@ -21,6 +21,7 @@
  * @fileoverview Generating Python for math blocks.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.Python = Blockly.Generator.get('Python');
 
@@ -158,8 +159,8 @@ Blockly.Python.math_trig = Blockly.Python.math_single;
 
 Blockly.Python.math_on_list = function() {
   // Math functions for lists.
-  func = this.getTitleValue('OP');
-  list = Blockly.Python.valueToCode(this, 'LIST',
+  var func = this.getTitleValue('OP');
+  var list = Blockly.Python.valueToCode(this, 'LIST',
       Blockly.Python.ORDER_NONE) || '[]';
   var code;
   switch (func) {
@@ -282,7 +283,8 @@ Blockly.Python.math_constrain = function() {
       Blockly.Python.ORDER_NONE) || '0';
   var argument2 = Blockly.Python.valueToCode(this, 'HIGH',
       Blockly.Python.ORDER_NONE) || '0';
-  code = 'min(max(' + argument0 + ', ' + argument1 + '), ' + argument2 + ')';
+  var code = 'min(max(' + argument0 + ', ' + argument1 + '), ' +
+      argument2 + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
@@ -303,7 +305,7 @@ Blockly.Python.math_random_int = function() {
       Blockly.Python.ORDER_NONE) || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'TO',
       Blockly.Python.ORDER_NONE) || '0';
-  code = 'random.randint(' + argument0 + ', ' + argument1 + ')';
+  var code = 'random.randint(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 

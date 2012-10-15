@@ -22,6 +22,7 @@
  * Blockly code.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 Blockly.Generator = {};
 

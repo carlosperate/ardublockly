@@ -21,6 +21,7 @@
  * @fileoverview Demonstration of Blockly: Solving a maze.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 // Extensions to Blockly's language and JavaScript generator.
 

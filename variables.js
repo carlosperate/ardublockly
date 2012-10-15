@@ -23,6 +23,7 @@
  * one can't have a variable and a procedure of the same name.
  * @author fraser@google.com (Neil Fraser)
  */
+'use strict';
 
 /**
  * Class for a database of variables.
