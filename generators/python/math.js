@@ -257,8 +257,7 @@ Blockly.Python.math_on_list = function() {
         func.push('  if n == 0: return');
         func.push('  mean = float(sum(numbers)) / n');
         func.push('  variance = sum((x - mean) ** 2 for x in numbers) / n');
-        func.push('  standard_dev = math.sqrt(variance)');
-        func.push('  return standard_dev');
+        func.push('  return math.sqrt(variance)');
         Blockly.Python.definitions_['math_standard_deviation'] =
             func.join('\n');
       }

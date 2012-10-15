@@ -94,10 +94,10 @@ function test_DB_removeConnection() {
 }
 
 function test_removeChildren() {
-  p = document.createElement('p');
-  span = document.createElement('span');
-  text = document.createTextNode('Hello World');
-  hr = document.createElement('hr');
+  var p = document.createElement('p');
+  var span = document.createElement('span');
+  var text = document.createTextNode('Hello World');
+  var hr = document.createElement('hr');
   p.appendChild(span);
   span.appendChild(text);
   p.appendChild(hr);
@@ -112,7 +112,7 @@ function test_removeChildren() {
 }
 
 function test_addClass() {
-  p = document.createElement('p');
+  var p = document.createElement('p');
   Blockly.addClass_(p, 'one');
   assertEquals('Adding "one"', 'one', p.className);
   Blockly.addClass_(p, 'one');
@@ -126,7 +126,7 @@ function test_addClass() {
 }
 
 function test_removeClass() {
-  p = document.createElement('p');
+  var p = document.createElement('p');
   p.className = ' one three  two three  ';
   Blockly.removeClass_(p, 'two');
   assertEquals('Removing "two"', 'one three three', p.className);

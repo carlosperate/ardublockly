@@ -277,8 +277,7 @@ Blockly.JavaScript.math_on_list = function() {
         func.push('    variance += Math.pow(numbers[j] - mean, 2);');
         func.push('  }');
         func.push('  variance = variance / n;');
-        func.push('  standard_dev = Math.sqrt(variance);');
-        func.push('  return standard_dev;');
+        func.push('  return Math.sqrt(variance);');
         func.push('}');
         Blockly.JavaScript.definitions_['math_standard_deviation'] =
             func.join('\n');

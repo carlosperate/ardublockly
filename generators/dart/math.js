@@ -320,8 +320,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  num sumSquare = 0;');
         func.push('  numbers.forEach((x) => sumSquare += ' +
                   'Math.pow(x - mean, 2));');
-        func.push('  num standard_dev = Math.sqrt(sumSquare / n);');
-        func.push('  return standard_dev;');
+        func.push('  return Math.sqrt(sumSquare / n);');
         func.push('}');
         Blockly.Dart.definitions_['math_standard_deviation'] = func.join('\n');
       }
