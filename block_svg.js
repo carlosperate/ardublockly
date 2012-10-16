@@ -38,8 +38,7 @@ Blockly.BlockSvg = function(block) {
   this.svgPath_ = Blockly.createSvgElement('path', {'class': 'blocklyPath'},
       this.svgGroup_);
   this.svgPathLight_ = Blockly.createSvgElement('path',
-      {'class': 'blocklyPathLight', 'fill': 'none', 'stroke-width': 2,
-      'stroke-linecap': 'round'}, this.svgGroup_);
+      {'class': 'blocklyPathLight'}, this.svgGroup_);
   this.svgPath_.tooltip = this.block_;
   Blockly.Tooltip && Blockly.Tooltip.bindMouseEvents(this.svgPath_);
   if (block.editable) {
