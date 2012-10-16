@@ -662,6 +662,7 @@ Blockly.ConnectionDB = function() {
 };
 
 Blockly.ConnectionDB.prototype = new Array();
+Blockly.ConnectionDB.constructor = Blockly.ConnectionDB;
 
 /**
  * Add a connection to the database.  Must not already exist in DB.

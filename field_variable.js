@@ -42,6 +42,7 @@ Blockly.FieldVariable = function(varname) {
 
 // FieldDropdown is a subclass of FieldDropdown.
 Blockly.FieldVariable.prototype = new Blockly.FieldDropdown([[null]]);
+Blockly.FieldVariable.constructor = Blockly.FieldVariable;
 
 /**
  * Get the variable's name (use a variableDB to convert into a real name).

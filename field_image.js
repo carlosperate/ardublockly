@@ -58,6 +58,7 @@ Blockly.FieldImage = function(src, width, height) {
 
 // FieldImage is a subclass of Field.
 Blockly.FieldImage.prototype = new Blockly.Field(null);
+Blockly.FieldImage.constructor = Blockly.FieldImage;
 
 /**
  * Rectangular mask used by Firefox.
