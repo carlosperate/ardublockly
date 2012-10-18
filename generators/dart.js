@@ -106,7 +106,7 @@ Blockly.Dart.finish = function(code) {
   var definitions = [];
   for (var name in Blockly.Dart.definitions_) {
     var def = Blockly.Dart.definitions_[name];
-    if (def.match(/^#import\(/)) {
+    if (def.match(/^import\s/)) {
       imports.push(def);
     } else {
       definitions.push(def);

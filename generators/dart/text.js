@@ -210,11 +210,14 @@ Blockly.Dart.text_print = function() {
 
 Blockly.Dart.text_prompt = function() {
   // Prompt function.
-  Blockly.Dart.definitions_['import_dart_html'] = '#import(\'dart:html\');';
+  Blockly.Dart.definitions_['import_dart_html'] =
+      'import \'dart:html\' as Html;';
   var msg = Blockly.Dart.quote_(this.getTitleValue('TEXT'));
-  var code = 'window.prompt(' + msg + ', \'\')';
+  var code = 'Html.window.prompt(' + msg + ', \'\')';
   var toNumber = this.getTitleValue('TYPE') == 'NUMBER';
   if (toNumber) {
+    Blockly.Dart.definitions_['import_dart_math'] =
+        'import \'dart:math\' as Math;';
     code = 'Math.parseDouble(' + code + ')';
   }
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
