@@ -158,18 +158,18 @@ Blockly.Dart.text_changeCase = function() {
       Blockly.Dart.text_changeCase.toTitleCase = functionName;
       var func = [];
       func.push('String ' + functionName + '(str) {');
-      func.push('  RegExp exp = const RegExp(@"(\\S+)");');
+      func.push('  RegExp exp = const RegExp(r\'\\b\');');
       func.push('  List<String> list = str.split(exp);');
-      func.push('  String title = \'\';');
+      func.push('  final title = new StringBuffer();');
       func.push('  for (String part in list) {');
       func.push('    if (part.length > 0) {');
-      func.push('      title += part[0].toUpperCase();');
+      func.push('      title.add(part[0].toUpperCase());');
       func.push('      if (part.length > 0) {');
-      func.push('        title += part.substring(1).toLowerCase();');
+      func.push('        title.add(part.substring(1).toLowerCase());');
       func.push('      }');
       func.push('    }');
       func.push('  }');
-      func.push('  return title;');
+      func.push('  return title.toString();');
       func.push('}');
       Blockly.Dart.definitions_['toTitleCase'] = func.join('\n');
     }
@@ -196,8 +196,8 @@ Blockly.Dart.text_trim = function() {
 };
 
 Blockly.Dart.text_trim.OPERATORS = {
-  LEFT: '.replaceFirst(new RegExp(@"^\\s+"), \'\')',
-  RIGHT: '.replaceFirst(new RegExp(@"\\s+$"), \'\')',
+  LEFT: '.replaceFirst(new RegExp(r\'^\\s+\'), \'\')',
+  RIGHT: '.replaceFirst(new RegExp(r\'\\s+$\'), \'\')',
   BOTH: '.trim()'
 };
 

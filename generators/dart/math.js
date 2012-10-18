@@ -25,6 +25,11 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
+if (!Blockly.Dart.RESERVED_WORDS_) {
+  Blockly.Dart.RESERVED_WORDS_ = '';
+}
+Blockly.Dart.RESERVED_WORDS_ += 'Math,';
+
 Blockly.Dart.math_number = function() {
   // Numeric value.
   var code = window.parseFloat(this.getTitleValue('NUM'));
@@ -46,6 +51,8 @@ Blockly.Dart.math_arithmetic = function() {
   var code;
   // Power in Dart requires a special case since it has no operator.
   if (!operator) {
+    Blockly.Dart.definitions_['import_dart_math'] =
+        '#import(\'dart:math\', prefix:\'Math\');';
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
     return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   }
@@ -87,6 +94,8 @@ Blockly.Dart.math_single = function() {
     code = '-' + arg;
     return [code, Blockly.Dart.ORDER_UNARY_PREFIX];
   }
+  Blockly.Dart.definitions_['import_dart_math'] =
+      '#import(\'dart:math\', prefix:\'Math\');';
   if (operator == 'ABS' || operator.substring(0, 5) == 'ROUND') {
     arg = Blockly.Dart.valueToCode(this, 'NUM',
         Blockly.Dart.ORDER_UNARY_POSTFIX) || '0';
@@ -185,6 +194,8 @@ Blockly.Dart.math_on_list = function() {
       break;
     case 'MIN':
       if (!Blockly.Dart.definitions_['math_min']) {
+        Blockly.Dart.definitions_['import_dart_math'] =
+            '#import(\'dart:math\', prefix:\'Math\');';
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_min', Blockly.Generator.NAME_TYPE);
         Blockly.Dart.math_on_list.math_min = functionName;
@@ -202,6 +213,8 @@ Blockly.Dart.math_on_list = function() {
       break;
     case 'MAX':
       if (!Blockly.Dart.definitions_['math_max']) {
+        Blockly.Dart.definitions_['import_dart_math'] =
+            '#import(\'dart:math\', prefix:\'Math\');';
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_max', Blockly.Generator.NAME_TYPE);
         Blockly.Dart.math_on_list.math_max = functionName;
@@ -214,6 +227,8 @@ Blockly.Dart.math_on_list = function() {
         func.push('  return maxVal;');
         func.push('}');
         Blockly.Dart.definitions_['math_max'] = func.join('\n');
+        Blockly.Dart.definitions_['import_dart_math'] =
+            '#import(\'dart:math\', prefix:\'Math\');';
       }
       code = Blockly.Dart.math_on_list.math_max + '(' + list + ')';
       break;
@@ -264,6 +279,8 @@ Blockly.Dart.math_on_list = function() {
       break;
     case 'MODE':
       if (!Blockly.Dart.definitions_['math_modes']) {
+        Blockly.Dart.definitions_['import_dart_math'] =
+            '#import(\'dart:math\', prefix:\'Math\');';
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_modes', Blockly.Generator.NAME_TYPE);
         Blockly.Dart.math_on_list.math_modes = functionName;
@@ -305,6 +322,8 @@ Blockly.Dart.math_on_list = function() {
       break;
     case 'STD_DEV':
       if (!Blockly.Dart.definitions_['math_standard_deviation']) {
+        Blockly.Dart.definitions_['import_dart_math'] =
+            '#import(\'dart:math\', prefix:\'Math\');';
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_standard_deviation', Blockly.Generator.NAME_TYPE);
         Blockly.Dart.math_on_list.math_standard_deviation = functionName;
@@ -329,12 +348,14 @@ Blockly.Dart.math_on_list = function() {
       break;
     case 'RANDOM':
       if (!Blockly.Dart.definitions_['math_random_item']) {
+        Blockly.Dart.definitions_['import_dart_math'] =
+            '#import(\'dart:math\', prefix:\'Math\');';
         var functionName = Blockly.Dart.variableDB_.getDistinctName(
             'math_random_item', Blockly.Generator.NAME_TYPE);
         Blockly.Dart.math_on_list.math_random_item = functionName;
         var func = [];
         func.push('Dynamic ' + functionName + '(List myList) {');
-        func.push('  int x = (Math.random() * myList.length).toInt();');
+        func.push('  int x = new Math.Random().nextInt(myList.length);');
         func.push('  return myList[x];');
         func.push('}');
         Blockly.Dart.definitions_['math_random_item'] = func.join('\n');
@@ -388,7 +409,7 @@ Blockly.Dart.math_random_int = function() {
     func.push('    a = b;');
     func.push('    b = c;');
     func.push('  }');
-    func.push('  return (Math.random() * (b - a + 1) + a).toInt();');
+    func.push('  return new Math.Random().nextInt(b - a + 1) + a;');
     func.push('}');
     Blockly.Dart.definitions_['math_random_int'] = func.join('\n');
   }
@@ -399,5 +420,5 @@ Blockly.Dart.math_random_int = function() {
 
 Blockly.Dart.math_random_float = function() {
   // Random fraction between 0 and 1.
-  return ['Math.random()', Blockly.Dart.ORDER_UNARY_POSTFIX];
+  return ['new Math.Random().nextDouble()', Blockly.Dart.ORDER_UNARY_POSTFIX];
 };

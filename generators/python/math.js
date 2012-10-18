@@ -246,8 +246,8 @@ Blockly.Python.math_on_list = function() {
       code = Blockly.Python.math_on_list.math_modes + '(' + list + ')';
       break;
     case 'STD_DEV':
-      Blockly.Python.definitions_['import_math'] = 'import math';
       if (!Blockly.Python.definitions_['math_standard_deviation']) {
+        Blockly.Python.definitions_['import_math'] = 'import math';
         var functionName = Blockly.Python.variableDB_.getDistinctName(
             'math_standard_deviation', Blockly.Generator.NAME_TYPE);
         Blockly.Python.math_on_list.math_standard_deviation = functionName;
