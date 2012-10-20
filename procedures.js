@@ -253,3 +253,23 @@ Blockly.Procedures.mutateCallers = function(name, workspace,
     callers[x].setProcedureParameters(paramNames, paramIds);
   }
 };
+
+/**
+ * Find the definition block for the named procedure.
+ * @param {string} name Name of procedure.
+ * @param {!Blockly.Workspace} workspace The workspace to search.
+ * @return {Blockly.Block} The procedure definition block, or null not found.
+ */
+Blockly.Procedures.getDefinition = function(name, workspace) {
+  var blocks = workspace.getAllBlocks(false);
+  for (var x = 0; x < blocks.length; x++) {
+    var func = blocks[x].getProcedureDef;
+    if (func) {
+      var tuple = func.call(blocks[x]);
+      if (tuple && Blockly.Names.equals(tuple[0], name)) {
+        return blocks[x];
+      }
+    }
+  }
+  return null;
+};
