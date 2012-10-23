@@ -288,17 +288,18 @@ Blockly.Language.procedures_callnoreturn = {
         this.quarkArguments_ = [];
       }
     }
-    // Update the quarkConnections_ with existing connections.
-    for (var x = 0; x < this.arguments_.length; x++) {
-      var connection = this.getInput('ARG' + x).connection.targetConnection;
-      this.quarkConnections_[this.quarkArguments_[x]] = connection;
-    }
     // Switch off rendering while the block is rebuilt.
     var savedRendered = this.rendered;
     this.rendered = false;
-    // Disconnect all argument blocks and destroy all inputs.
+    // Update the quarkConnections_ with existing connections.
     for (var x = this.arguments_.length - 1; x >= 0; x--) {
-      this.removeInput('ARG' + x);
+      var input = this.getInput('ARG' + x);
+      if (input) {
+        var connection = input.connection.targetConnection;
+        this.quarkConnections_[this.quarkArguments_[x]] = connection;
+        // Disconnect all argument blocks and destroy all inputs.
+        this.removeInput('ARG' + x);
+      }
     }
     // Rebuild the block's arguments.
     this.arguments_ = [].concat(paramNames);
