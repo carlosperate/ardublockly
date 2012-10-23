@@ -354,7 +354,9 @@ Blockly.Language.procedures_callnoreturn = {
           this.arguments_.push(childNode.getAttribute('name'));
         }
       }
-      this.setProcedureParameters(this.arguments_, null);
+      // For the second argument (paramIds) use the arguments list as a dummy
+      // list.
+      this.setProcedureParameters(this.arguments_, this.arguments_);
     }
   },
   renameVar: function(oldName, newName) {
