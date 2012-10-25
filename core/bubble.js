@@ -25,7 +25,8 @@
 
 /**
  * Class for UI bubble.
- * @param {!Blockly.Workspace} workspace The workspace on which to draw the bubble.
+ * @param {!Blockly.Workspace} workspace The workspace on which to draw the
+ *     bubble.
  * @param {!Element} content SVG content for the bubble.
  * @param {Element} shape SVG element to avoid eclipsing.
  * @param {number} anchorX Absolute horizontal position of bubbles anchor point.

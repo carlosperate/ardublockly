@@ -177,8 +177,8 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
 /**
  * Does the given block have one and only one connection point that will accept
  * the orphaned block?
- * @pram {!Blockly.Block} block The superior block.
- * @pram {!Blockly.Block} orphanBlock The inferior block.
+ * @param {!Blockly.Block} block The superior block.
+ * @param {!Blockly.Block} orphanBlock The inferior block.
  * @return {Blockly.Connection} The suitable connection point on 'block',
  *     or null.
  * @private

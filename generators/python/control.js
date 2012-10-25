@@ -109,7 +109,7 @@ Blockly.Python.controls_for = function() {
     }
     range = '(' + startVar + ' <= ' + endVar + ') and ' +
         'range(' + startVar + ', ' + endVar + ' + 1) or ' +
-        'range(' + startVar + ', ' + endVar + ' - 1, -1)'
+        'range(' + startVar + ', ' + endVar + ' - 1, -1)';
   }
   code += 'for ' + variable0 + ' in ' + range + ':\n' +
       branch0;

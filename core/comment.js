@@ -85,7 +85,7 @@ Blockly.Comment.prototype.createIcon_ = function() {
   /* Here's the markup that will be generated:
   <g class="blocklyIconGroup">
     <circle class="blocklyIconShield" r="8" cx="8" cy="8"/>
-    <text class="blocklyIconMark" x="4" y="13">?</text>
+    <text class="blocklyIconMark" x="8" y="13">?</text>
   </g>
   */
   this.iconGroup_ = Blockly.createSvgElement('g',

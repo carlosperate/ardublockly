@@ -594,7 +594,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     inputRows.rightEdge = Math.max(inputRows.rightEdge, titleValueWidth +
         Blockly.BlockSvg.SEP_SPACE_X * 2);
   }
- 
+
   inputRows.hasValue = hasValue;
   inputRows.hasStatement = hasStatement;
   inputRows.hasDummy = hasDummy;
@@ -803,7 +803,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
           }
         }
       }
-      
+
       cursorX = Math.max(cursorX, inputRows.rightEdge);
       steps.push('H', cursorX);
       highlightSteps.push('H', cursorX + (Blockly.RTL ? -1 : 0));
@@ -903,7 +903,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
             (cursorX - Blockly.BlockSvg.NOTCH_WIDTH +
              Blockly.BlockSvg.DISTANCE_45_OUTSIDE) +
             ',' + (cursorY + Blockly.BlockSvg.DISTANCE_45_OUTSIDE));
-        highlightSteps.push(Blockly.BlockSvg.INNER_TOP_LEFT_CORNER_HIGHLIGHT_RTL);
+        highlightSteps.push(
+            Blockly.BlockSvg.INNER_TOP_LEFT_CORNER_HIGHLIGHT_RTL);
         highlightSteps.push('v',
             row.height - 2 * Blockly.BlockSvg.CORNER_RADIUS);
         highlightSteps.push(
