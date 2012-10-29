@@ -876,6 +876,9 @@ Blockly.ScrollbarSvg.prototype.set = function(value, fireEvents) {
  */
 Blockly.ScrollbarSvg.scrollbarThickness = 15;
 
+/**
+ * Name space for the scrollbar singleton.
+ */
 Blockly.Scrollbar = {};
 
 /**

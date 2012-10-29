@@ -131,6 +131,12 @@ Blockly.bindEvent_ = function(element, name, thisObject, func) {
   return bindData;
 };
 
+/**
+ * The TOUCH_MAP lookup dictionary specifies additional touch events to fire,
+ * in conjunction with mouse events.
+ * @type {Object}
+ */
+Blockly.bindEvent_.TOUCH_MAP = {};
 if ('ontouchstart' in document.documentElement) {
   Blockly.bindEvent_.TOUCH_MAP = {
     mousedown: 'touchstart',

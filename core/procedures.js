@@ -24,9 +24,13 @@
 'use strict';
 
 /**
+ * Name space for the procedures singleton.
  */
 Blockly.Procedures = {};
 
+/**
+ * Category to separate procedure names from variables and generated functions.
+ */
 Blockly.Procedures.NAME_TYPE = 'procedure';
 
 /**

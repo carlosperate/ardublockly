@@ -24,8 +24,14 @@
  */
 'use strict';
 
+/**
+ * Name space for the generator singleton.
+ */
 Blockly.Generator = {};
 
+/**
+ * Category to separate generated function names from variables and procedures.
+ */
 Blockly.Generator.NAME_TYPE = 'generated_function';
 
 /**

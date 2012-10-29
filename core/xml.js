@@ -23,6 +23,9 @@
  */
 'use strict';
 
+/**
+ * Name space for the XML singleton.
+ */
 Blockly.Xml = {};
 
 /**

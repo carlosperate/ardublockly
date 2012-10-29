@@ -58,6 +58,10 @@ Blockly.FieldImage = function(src, width, height) {
 
 // FieldImage is a subclass of Field.
 Blockly.FieldImage.prototype = new Blockly.Field(null);
+/**
+ * Don't inherit the constructor from Field.
+ * @type {!Function}
+ */
 Blockly.FieldImage.constructor = Blockly.FieldImage;
 
 /**

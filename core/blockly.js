@@ -32,17 +32,24 @@ var Blockly = {};
  */
 Blockly.pathToBlockly = './';
 
-// Required name space for SVG elements.
+/**
+ * Required name space for SVG elements.
+ */
 Blockly.SVG_NS = 'http://www.w3.org/2000/svg';
-// Required name space for HTML elements.
+/**
+ * Required name space for HTML elements.
+ */
 Blockly.HTML_NS = 'http://www.w3.org/1999/xhtml';
 
 /**
- * The HSV_SATURATION and HSV_VALUE constants provide Blockly with a consistent
- * colour scheme, regardless of the hue.
- * Both constants must be in the range of 0 (inclusive) to 1 (exclusive).
+ * The richness of block colours, regardless of the hue.
+ * Must be in the range of 0 (inclusive) to 1 (exclusive).
  */
 Blockly.HSV_SATURATION = 0.45;
+/**
+ * The intensity of block colours, regardless of the hue.
+ * Must be in the range of 0 (inclusive) to 1 (exclusive).
+ */
 Blockly.HSV_VALUE = 0.65;
 
 /**

@@ -26,13 +26,13 @@
 'use strict';
 
 /**
- * Class for a database of variables.
- * @param {Array.<string>} reservedWords An array of words that are illegal for
- *     use as variable names in a language (e.g. ['new', 'if', 'this', ...]).
- * @constructor
+ * Name space for the variables singleton.
  */
 Blockly.Variables = {};
 
+/**
+ * Category to separate variable names from procedures and generated functions.
+ */
 Blockly.Variables.NAME_TYPE = 'variable';
 
 /**

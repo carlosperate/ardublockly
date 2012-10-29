@@ -76,23 +76,50 @@ Blockly.BlockSvg.prototype.getRootNode = function() {
 };
 
 // UI constants for rendering blocks.
-Blockly.BlockSvg.SEP_SPACE_X = 10;   // Horizontal space between elements.
-Blockly.BlockSvg.SEP_SPACE_Y = 5;    // Vertical space between elements.
-Blockly.BlockSvg.MIN_BLOCK_Y = 25;   // Minimum height of a block.
-Blockly.BlockSvg.TAB_HEIGHT = 20;    // Height of horizontal puzzle tab.
-Blockly.BlockSvg.TAB_WIDTH = 8;      // Width of horizontal puzzle tab.
-Blockly.BlockSvg.NOTCH_WIDTH = 30;   // Width of vertical tab (inc left margin).
-Blockly.BlockSvg.CORNER_RADIUS = 8;  // Rounded corner radius.
-Blockly.BlockSvg.TITLE_HEIGHT = 18;  // Minimum height of title rows.
-// Distance from shape edge to intersect with a curved corner at 45 degrees.
-// Applies to highlighting on around the inside of a curve.
+/**
+ * Horizontal space between elements.
+ */
+Blockly.BlockSvg.SEP_SPACE_X = 10;
+/**
+ * Vertical space between elements.
+ */
+Blockly.BlockSvg.SEP_SPACE_Y = 5;
+/**
+ * Minimum height of a block.
+ */
+Blockly.BlockSvg.MIN_BLOCK_Y = 25;
+/**
+ * Height of horizontal puzzle tab.
+ */
+Blockly.BlockSvg.TAB_HEIGHT = 20;
+/**
+ * Width of horizontal puzzle tab.
+ */
+Blockly.BlockSvg.TAB_WIDTH = 8;
+/**
+ * Width of vertical tab (inc left margin).
+ */
+Blockly.BlockSvg.NOTCH_WIDTH = 30;
+/**
+ * Rounded corner radius.
+ */
+Blockly.BlockSvg.CORNER_RADIUS = 8;
+/**
+ * Minimum height of title rows.
+ */
+Blockly.BlockSvg.TITLE_HEIGHT = 18;
+/**
+ * Distance from shape edge to intersect with a curved corner at 45 degrees.
+ * Applies to highlighting on around the inside of a curve.
+ */
 Blockly.BlockSvg.DISTANCE_45_INSIDE = (1 - Math.SQRT1_2) *
       (Blockly.BlockSvg.CORNER_RADIUS - 1) + 1;
-// Distance from shape edge to intersect with a curved corner at 45 degrees.
-// Applies to highlighting on around the outside of a curve.
+/**
+ * Distance from shape edge to intersect with a curved corner at 45 degrees.
+ * Applies to highlighting on around the outside of a curve.
+ */
 Blockly.BlockSvg.DISTANCE_45_OUTSIDE = (1 - Math.SQRT1_2) *
       (Blockly.BlockSvg.CORNER_RADIUS + 1) - 1;
-
 /**
  * SVG path for drawing next/previous notch from left to right.
  */
