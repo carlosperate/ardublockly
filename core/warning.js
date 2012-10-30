@@ -53,17 +53,17 @@ Blockly.Warning.prototype.text_ = '';
 
 /**
  * Absolute X coordinate of icon's center.
- * @type {?number}
+ * @type {number}
  * @private
  */
-Blockly.Warning.prototype.iconX_ = null;
+Blockly.Warning.prototype.iconX_ = 0;
 
 /**
  * Absolute Y coordinate of icon's centre.
- * @type {?number}
+ * @type {number}
  * @private
  */
-Blockly.Warning.prototype.iconY_ = null;
+Blockly.Warning.prototype.iconY_ = 0;
 
 /**
  * Create the icon on the block.
@@ -131,7 +131,8 @@ Blockly.Warning.prototype.setVisible = function(visible) {
   if (visible) {
     // Create the bubble.
     var paragraph = this.textToDom_(this.text_);
-    this.bubble_ = new Blockly.Bubble(this.block_.workspace,
+    this.bubble_ = new Blockly.Bubble(
+        /** @type {!Blockly.Workspace} */ (this.block_.workspace),
         paragraph, this.block_.svg_.svgGroup_,
         this.iconX_, this.iconY_, null, null);
     if (Blockly.RTL) {

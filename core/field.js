@@ -111,7 +111,7 @@ Blockly.Field.prototype.setVisible = function(visible) {
  * @return {!Element} The group element.
  */
 Blockly.Field.prototype.getRootElement = function() {
-  return this.group_;
+  return /** @type {!Element} */ (this.group_);
 };
 
 /**
@@ -169,7 +169,7 @@ Blockly.Field.prototype.getText = function() {
 Blockly.Field.prototype.setText = function(text) {
   this.text_ = text;
   // Empty the text element.
-  Blockly.removeChildren_(this.textElement_);
+  Blockly.removeChildren_(/** @type {!Element} */ (this.textElement_));
   // Replace whitespace with non-breaking spaces so the text doesn't collapse.
   text = text.replace(/\s/g, Blockly.Field.NBSP);
   if (!text) {

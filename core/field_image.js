@@ -110,7 +110,7 @@ Blockly.FieldImage.prototype.destroy = function() {
  */
 Blockly.FieldImage.prototype.setTooltip = function(newTip) {
   var topElement = this.rectElement_ || this.imageElement_;
-  topElement_.tooltip = newTip;
+  topElement.tooltip = newTip;
 };
 
 /**

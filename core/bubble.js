@@ -48,7 +48,7 @@ Blockly.Bubble = function(workspace, content, shape,
   this.content_ = content;
   this.shape_ = shape;
   var canvas = workspace.getBubbleCanvas();
-  canvas.appendChild(this.createDom_(content, bubbleWidth && bubbleHeight));
+  canvas.appendChild(this.createDom_(content, !bubbleWidth || !bubbleHeight));
 
   this.setAnchorLocation(anchorX, anchorY);
   if (!bubbleWidth || !bubbleHeight) {
@@ -99,24 +99,23 @@ Blockly.Bubble.ANCHOR_RADIUS = 8;
 
 /**
  * Wrapper function called when a mouseUp occurs during a drag operation.
- * @type {Function}
+ * @type {Array.<!Array>}
  * @private
  */
 Blockly.Bubble.onMouseUpWrapper_ = null;
 
 /**
  * Wrapper function called when a mouseMove occurs during a drag operation.
- * @type {Function}
+ * @type {Array.<!Array>}
  * @private
  */
 Blockly.Bubble.onMouseMoveWrapper_ = null;
 
 /**
  * Stop binding to the global mouseup and mousemove events.
- * @param {!Event} e Mouse up event.
  * @private
  */
-Blockly.Bubble.unbindDragEvents_ = function(e) {
+Blockly.Bubble.unbindDragEvents_ = function() {
   if (Blockly.Bubble.onMouseUpWrapper_) {
     Blockly.unbindEvent_(Blockly.Bubble.onMouseUpWrapper_);
     Blockly.Bubble.onMouseUpWrapper_ = null;
@@ -253,9 +252,11 @@ Blockly.Bubble.prototype.bubbleMouseDown_ = function(e) {
   }
   this.dragDeltaY = this.relativeTop_ - e.clientY;
 
-  Blockly.Bubble.onMouseUpWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
+  Blockly.Bubble.onMouseUpWrapper_ = Blockly.bindEvent_(
+      /** @type {!Element} */ (Blockly.svgDoc),
       'mouseup', this, Blockly.Bubble.unbindDragEvents_);
-  Blockly.Bubble.onMouseMoveWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
+  Blockly.Bubble.onMouseMoveWrapper_ = Blockly.bindEvent_(
+      /** @type {!Element} */ (Blockly.svgDoc),
       'mousemove', this, this.bubbleMouseMove_);
   Blockly.hideChaff();
   // This event has been handled.  No need to bubble up to the document.
@@ -301,9 +302,11 @@ Blockly.Bubble.prototype.resizeMouseDown_ = function(e) {
   }
   this.resizeDeltaHeight = this.height_ - e.clientY;
 
-  Blockly.Bubble.onMouseUpWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
+  Blockly.Bubble.onMouseUpWrapper_ = Blockly.bindEvent_(
+      /** @type {!Element} */ (Blockly.svgDoc),
       'mouseup', this, Blockly.Bubble.unbindDragEvents_);
-  Blockly.Bubble.onMouseMoveWrapper_ = Blockly.bindEvent_(Blockly.svgDoc,
+  Blockly.Bubble.onMouseMoveWrapper_ = Blockly.bindEvent_(
+      /** @type {!Element} */ (Blockly.svgDoc),
       'mousemove', this, this.resizeMouseMove_);
   Blockly.hideChaff();
   // This event has been handled.  No need to bubble up to the document.

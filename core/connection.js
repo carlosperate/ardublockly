@@ -90,12 +90,16 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       // If female block is already connected, disconnect and bump the male.
       var orphanBlock = otherConnection.targetBlock();
       orphanBlock.setParent(null);
+      if (!orphanBlock.outputConnection) {
+        throw 'Orphan block does not have an output connection.';
+      }
       // Attempt to reattach the orphan at the end of the newly inserted
       // block.  Since this block may be a row, walk down to the end.
       var newBlock = this.sourceBlock_;
       var connection;
       while (connection =
-          Blockly.Connection.singleConnection_(newBlock, orphanBlock)) {
+          Blockly.Connection.singleConnection_(
+          /** @type {!Blockly.Block} */ (newBlock), orphanBlock)) {
         // '=' is intentional in line above.
         if (connection.targetBlock()) {
           newBlock = connection.targetBlock();
@@ -123,6 +127,9 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       // Split the stack.
       var orphanBlock = otherConnection.targetBlock();
       orphanBlock.setParent(null);
+      if (!orphanBlock.previousConnection) {
+        throw 'Orphan block does not have a previous connection.';
+      }
       // Attempt to reattach the orphan at the bottom of the newly inserted
       // block.  Since this block may be a stack, walk down to the end.
       var newBlock = this.sourceBlock_;
@@ -352,7 +359,11 @@ Blockly.Connection.prototype.tighten_ = function() {
   var dy = Math.round(this.targetConnection.y_ - this.y_);
   if (dx != 0 || dy != 0) {
     var block = this.targetBlock();
-    var xy = Blockly.getRelativeXY_(block.getSvgRoot());
+    var svgRoot = block.getSvgRoot();
+    if (!svgRoot) {
+      throw 'block is not rendered.';
+    }
+    var xy = Blockly.getRelativeXY_(svgRoot);
     block.getSvgRoot().setAttribute('transform',
         'translate(' + (xy.x - dx) + ', ' + (xy.y - dy) + ')');
     block.moveConnections_(-dx, -dy);
@@ -742,7 +753,7 @@ Blockly.ConnectionDB.prototype.removeConnection_ = function(connection) {
 
 /**
  * Initialize a set of connection DBs for a specified workspace.
- * @param {!Element} workspace SVG root element.
+ * @param {!Blockly.Workspace} workspace The workspace this DB is for.
  */
 Blockly.ConnectionDB.init = function(workspace) {
   // Create four databases, one for each connection type.

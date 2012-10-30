@@ -250,7 +250,8 @@ Blockly.Tooltip.show_ = function() {
     return;
   }
   // Erase all existing text.
-  Blockly.removeChildren_(Blockly.Tooltip.svgText_);
+  Blockly.removeChildren_(
+      /** @type {!Element} */ (Blockly.Tooltip.svgText_));
   // Create new text, line by line.
   var tip = Blockly.Tooltip.element_.tooltip;
   if (typeof tip == 'function') {

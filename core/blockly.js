@@ -454,17 +454,16 @@ Blockly.isTargetInput_ = function(e) {
  * @private
  */
 Blockly.loadAudio_ = function(name) {
-  if (!Audio) {
+  if (!window.Audio) {
     // No browser support for Audio.
     return;
   }
-  var sound = new Audio(Blockly.pathToBlockly + 'media/' + name + '.wav');
-  // To force the browser to load the sound, play it, but stop it immediately.
-  // If this starts creating a chirp on startup, turn the sound's volume down,
-  // or use another caching method such as XHR.
+  var sound = new window.Audio(Blockly.pathToBlockly +
+                               'media/' + name + '.wav');
+  // To force the browser to load the sound, play it, but at zero volume.
   if (sound && sound.play) {
     sound.play();
-    sound.pause();
+    sound.volume = 0;
     Blockly.SOUNDS_[name] = sound;
   }
 };
@@ -476,6 +475,7 @@ Blockly.loadAudio_ = function(name) {
 Blockly.playAudio = function(name) {
   var sound = Blockly.SOUNDS_[name];
   if (sound) {
+    sound.volume = 1;
     sound.play();
   }
 };
