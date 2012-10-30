@@ -183,7 +183,8 @@ Blockly.ScrollbarPair.prototype.set = function(x, y) {
 
 /**
  * Common properties and methods for ScrollbarNative and ScrollbarSvg.
- * Prevents the compiler from choosing incompatible names for proprties on each.
+ * Prevents the compiler from choosing incompatible names for properties on
+ * each.
  * @interface
  */
 Blockly.ScrollbarInterface = function() {};
@@ -202,7 +203,6 @@ Blockly.ScrollbarInterface.prototype.resize = function() {};
 Blockly.ScrollbarInterface.prototype.isVisible = function() {};
 /**
  * Set whether the scrollbar is visible.
- * Only applies to non-paired scrollbars.
  * @param {boolean} visible True if visible.
  */
 Blockly.ScrollbarInterface.prototype.setVisible = function(visible) {};
