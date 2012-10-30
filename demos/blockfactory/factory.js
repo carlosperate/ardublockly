@@ -70,8 +70,24 @@ function initEditor(blockly) {
   rootBlock.render();
   rootBlock.editable = false;
 
-  EditorBlockly.bindEvent_(EditorBlockly.mainWorkspace.getCanvas(),
+  bindEvent(EditorBlockly.mainWorkspace.getCanvas(),
       'blocklyWorkspaceChange', null, onchange);
+}
+
+/**
+ * Bind an event to a function call.
+ * @param {!Element} element Element upon which to listen.
+ * @param {string} name Event name to listen to (e.g. 'mousedown').
+ * @param {!Function} func Function to call when event is triggered.
+ *     W3 browsers will call the function with the event object as a parameter,
+ *     MSIE will not.
+ */
+function bindEvent(element, name, func) {
+  if (element.addEventListener) {  // W3C
+    element.addEventListener(name, func, false);
+  } else if (element.attachEvent) {  // IE
+    element.attachEvent('on' + name, func);
+  }
 }
 
 /**

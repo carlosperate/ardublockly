@@ -25,10 +25,6 @@
 
 // Extensions to Blockly's language and JavaScript generator.
 
-// Define Language and JavaScript, in case this file is loaded too early.
-if (!Blockly.Language) {
-  Blockly.Language = {};
-}
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.Language.maze_move = {

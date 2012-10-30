@@ -23,8 +23,6 @@
  */
 'use strict';
 
-if (!Blockly.Language) Blockly.Language = {};
-
 Blockly.Language.text_charAt = {
   // Get a character from the string.
   category: Blockly.LANG_CATEGORY_TEXT,

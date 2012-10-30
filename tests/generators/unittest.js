@@ -23,8 +23,6 @@
  */
 'use strict';
 
-if (!Blockly.Language) Blockly.Language = {};
-
 Blockly.Language.unittest_main = {
   // Container for unit tests.
   category: 'Unit test',

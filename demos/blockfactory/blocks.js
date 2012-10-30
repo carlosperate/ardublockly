@@ -23,8 +23,6 @@
  */
 'use strict';
 
-if (!Blockly.Language) Blockly.Language = {};
-
 Blockly.Language.factory_base = {
   // Base of new block.
   category: null,

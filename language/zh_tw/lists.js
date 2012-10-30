@@ -23,8 +23,6 @@
  */
 'use strict';
 
-if (!Blockly.Language) Blockly.Language = {};
-
 Blockly.Language.lists_getIndex = {
   // Get element at index.
   category: Blockly.LANG_CATEGORY_LISTS,
