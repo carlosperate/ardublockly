@@ -71,7 +71,7 @@ function initEditor(blockly) {
   rootBlock.editable = false;
 
   bindEvent(EditorBlockly.mainWorkspace.getCanvas(),
-      'blocklyWorkspaceChange', null, onchange);
+      'blocklyWorkspaceChange', onchange);
 }
 
 /**
@@ -98,10 +98,10 @@ function onchange() {
   var name = rootBlock.getTitleValue('NAME');
   var code = [];
   var type;
-  if (cat) {
+  if (cat && name) {
     type = cat + '_' + name;
   } else {
-    type = name;
+    type = name || cat || '_';
   }
   blockType = type.replace(/\W/g, '_').replace(/^(d)/, '_\\1').toLowerCase();
   updateLanguage();
@@ -129,7 +129,8 @@ function updateLanguage() {
   // Generate colour.
   var colourBlock = rootBlock.getInputTargetBlock('COLOUR');
   if (colourBlock) {
-    code.push('    this.setColour(' + colourBlock.getTitleValue('HUE') + ');');
+    var hue = parseInt(colourBlock.getTitleValue('HUE'), 10);
+    code.push('    this.setColour(' + hue + ');');
   }
   // Generate inputs.
   var TYPES = {'input_value': 'appendValueInput',
@@ -401,7 +402,7 @@ function updatePreview() {
     return;
   }
   if (previewBlock) {
-    previewBlock.destroy();
+    previewBlock.dispose();
   }
   var type = blockType;
   var code = document.getElementById('languageTextarea').value;

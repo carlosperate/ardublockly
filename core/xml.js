@@ -34,7 +34,7 @@ Blockly.Xml = {};
  * @return {!Element} XML document.
  */
 Blockly.Xml.workspaceToDom = function(workspace) {
-  var xml = document.createElement('xml');
+  var xml = goog.dom.createDom('xml');
   var blocks = workspace.getTopBlocks(false);
   for (var i = 0, block; block = blocks[i]; i++) {
     var element = Blockly.Xml.blockToDom_(block);
@@ -53,7 +53,7 @@ Blockly.Xml.workspaceToDom = function(workspace) {
  * @private
  */
 Blockly.Xml.blockToDom_ = function(block) {
-  var element = document.createElement('block');
+  var element = goog.dom.createDom('block');
   element.setAttribute('type', block.type);
   if (block.mutationToDom) {
     // Custom data for an advanced block.
@@ -64,10 +64,8 @@ Blockly.Xml.blockToDom_ = function(block) {
   }
   function titleToDom(title) {
     if (title.name && title.EDITABLE) {
-      var container = document.createElement('title');
+      var container = goog.dom.createDom('title', null, title.getValue());
       container.setAttribute('name', title.name);
-      var titleText = document.createTextNode(title.getValue());
-      container.appendChild(titleText);
       element.appendChild(container);
     }
   }
@@ -78,9 +76,8 @@ Blockly.Xml.blockToDom_ = function(block) {
   }
 
   if (block.comment) {
-    var commentElement = document.createElement('comment');
-    var commentText = document.createTextNode(block.comment.getText());
-    commentElement.appendChild(commentText);
+    var commentElement = goog.dom.createDom('comment', null,
+        block.comment.getText());
     commentElement.setAttribute('pinned', block.comment.isVisible());
     var hw = block.comment.getBubbleSize();
     commentElement.setAttribute('h', hw.height);
@@ -97,10 +94,10 @@ Blockly.Xml.blockToDom_ = function(block) {
     } else {
       var childBlock = input.connection.targetBlock();
       if (input.type == Blockly.INPUT_VALUE) {
-        container = document.createElement('value');
+        container = goog.dom.createDom('value');
         hasValues = true;
       } else if (input.type == Blockly.NEXT_STATEMENT) {
-        container = document.createElement('statement');
+        container = goog.dom.createDom('statement');
       }
       if (childBlock) {
         container.appendChild(Blockly.Xml.blockToDom_(childBlock));
@@ -125,8 +122,8 @@ Blockly.Xml.blockToDom_ = function(block) {
   if (block.nextConnection) {
     var nextBlock = block.nextConnection.targetBlock();
     if (nextBlock) {
-      var container = document.createElement('next');
-      container.appendChild(Blockly.Xml.blockToDom_(nextBlock));
+      var container = goog.dom.createDom('next', null,
+          Blockly.Xml.blockToDom_(nextBlock));
       element.appendChild(container);
     }
   }

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Unit tests for Blockly</title>
+    <script type="text/javascript" src="../../closure-library-read-only/closure/goog/base.js"></script>
     <script type="text/javascript" src="../core/blockly.js"></script>
     <script type="text/javascript" src="../core/connection.js"></script>
     <script type="text/javascript" src="../core/utils.js"></script>
@@ -66,11 +67,8 @@
       var tests = [
           'test_DB_addConnection',
           'test_DB_removeConnection',
-          'test_removeChildren',
           'test_addClass',
           'test_removeClass',
-          'testCaseInsensitiveComparator',
-          'testUniqueId',
 
           'test_get',
           'test_prefix',

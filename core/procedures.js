@@ -238,14 +238,15 @@ Blockly.Procedures.getCallers = function(name, workspace) {
 };
 
 /**
- * When a procedure definition is destroyed, find and destroy all its callers.
+ * When a procedure definition is disposed of, find and dispose of all its
+ *     callers.
  * @param {string} name Name of deleted procedure definition.
  * @param {!Blockly.Workspace} workspace The workspace to delete callers from.
  */
-Blockly.Procedures.destroyCallers = function(name, workspace) {
+Blockly.Procedures.disposeCallers = function(name, workspace) {
   var callers = Blockly.Procedures.getCallers(name, workspace);
   for (var x = 0; x < callers.length; x++) {
-    callers[x].destroy(true, false);
+    callers[x].dispose(true, false);
   }
   window.setTimeout(Blockly.Procedures.refreshFlyoutCategory, 1);
 };

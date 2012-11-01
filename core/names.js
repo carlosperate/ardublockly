@@ -53,6 +53,7 @@ Blockly.Names = function(reservedWords) {
  * JavaScript doesn't have a true hashtable, it uses object properties.
  * Since even clean objects have a few properties, prepend this prefix onto
  * names so that they don't collide with any builtins.
+ * @const
  * @private
  */
 Blockly.Names.PREFIX_ = 'v_';

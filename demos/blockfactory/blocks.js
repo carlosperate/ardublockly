@@ -278,7 +278,7 @@ Blockly.Language.title_dropdown = {
     return containerBlock;
   },
   compose: function(containerBlock) {
-    // Disconnect all input blocks and destroy all inputs.
+    // Disconnect all input blocks and remove all inputs.
     for (var x = this.optionCount_ - 1; x >= 0; x--) {
       this.removeInput('OPTION' + x);
     }
@@ -439,7 +439,7 @@ Blockly.Language.type_group = {
     return containerBlock;
   },
   compose: function(containerBlock) {
-    // Disconnect all input blocks and destroy all inputs.
+    // Disconnect all input blocks and remove all inputs.
     for (var x = this.typeCount_ - 1; x >= 0; x--) {
       this.removeInput('TYPE' + x);
     }
@@ -617,7 +617,7 @@ Blockly.Language.type_other = {
  */
 function titleNameCheck(referenceBlock) {
   var name = referenceBlock.getTitleValue('TITLENAME').toLowerCase();
-  count = 0;
+  var count = 0;
   var blocks = referenceBlock.workspace.getAllBlocks();
   for (var x = 0, block; block = blocks[x]; x++) {
     var otherName = block.getTitleValue('TITLENAME');
@@ -639,7 +639,7 @@ function titleNameCheck(referenceBlock) {
  */
 function inputNameCheck(referenceBlock) {
   var name = referenceBlock.getTitleValue('INPUTNAME').toLowerCase();
-  count = 0;
+  var count = 0;
   var blocks = referenceBlock.workspace.getAllBlocks();
   for (var x = 0, block; block = blocks[x]; x++) {
     var otherName = block.getTitleValue('INPUTNAME');
