@@ -230,9 +230,11 @@ Blockly.svgResize = function() {
  * @private
  */
 Blockly.onMouseDown_ = function(e) {
-  Blockly.Block.terminateDrag_();
+  Blockly.Block.terminateDrag_(); // In case mouse-up event was lost.
   Blockly.hideChaff();
-  if (Blockly.selected && e.target.nodeName == 'svg') {
+  var isTargetSvg = e.target && e.target.nodeName &&
+      e.target.nodeName.toLowerCase() == 'svg';
+  if (Blockly.selected && isTargetSvg) {
     // Clicking on the document clears the selection.
     Blockly.selected.unselect();
   }
@@ -241,7 +243,7 @@ Blockly.onMouseDown_ = function(e) {
     if (Blockly.ContextMenu) {
       Blockly.showContextMenu_(e.clientX, e.clientY);
     }
-  } else if (e.target.nodeName == 'svg' || !Blockly.editable) {
+  } else if (!Blockly.editable || isTargetSvg) {
     // If the workspace is editable, only allow dragging when gripping empty
     // space.  Otherwise, allow dragging when gripping anywhere.
     Blockly.mainWorkspace.dragMode = true;

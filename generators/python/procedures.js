@@ -35,8 +35,8 @@ Blockly.Python.procedures_defreturn = function() {
       globals[i] = Blockly.Python.variableDB_.getName(varName,
           Blockly.Variables.NAME_TYPE);
     } else {
-      // This variable has been explicitly passed to the function.
-      // Do not include it in the list of globals.
+      // This variable is actually a parameter name.  Do not include it in
+      // the list of globals, thus allowing it be of local scope.
       globals.splice(i, 1);
     }
   }

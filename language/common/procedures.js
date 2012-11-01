@@ -73,7 +73,7 @@ Blockly.Language.procedures_defnoreturn = {
   domToMutation: function(xmlElement) {
     this.arguments_ = [];
     for (var x = 0, childNode; childNode = xmlElement.childNodes[x]; x++) {
-      if (childNode.nodeName == 'arg') {
+      if (childNode.nodeName.toLowerCase() == 'arg') {
         this.arguments_.push(childNode.getAttribute('name'));
       }
     }
@@ -349,7 +349,7 @@ Blockly.Language.procedures_callnoreturn = {
     } else {
       this.arguments_ = [];
       for (var x = 0, childNode; childNode = xmlElement.childNodes[x]; x++) {
-        if (childNode.tagName && childNode.tagName.toLowerCase() == 'arg') {
+        if (childNode.nodeName.toLowerCase() == 'arg') {
           this.arguments_.push(childNode.getAttribute('name'));
         }
       }

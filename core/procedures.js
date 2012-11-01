@@ -256,7 +256,7 @@ Blockly.Procedures.disposeCallers = function(name, workspace) {
  * callers.
  * @param {string} name Name of edited procedure definition.
  * @param {!Blockly.Workspace} workspace The workspace to delete callers from.
- * @param {!Array.<string>} paramNames Array of parameter names.
+ * @param {!Array.<string>} paramNames Array of new parameter names.
  * @param {!Array.<string>} paramIds Array of unique parameter IDs.
  */
 Blockly.Procedures.mutateCallers = function(name, workspace,
