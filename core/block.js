@@ -704,8 +704,8 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
     var y = this.startDragY + dy;
     this.svg_.getRootElement().setAttribute('transform',
         'translate(' + x + ', ' + y + ')');
-    // Drag all the nested comments.
-    for (var i = 0; x < this.draggedBubbles_.length; i++) {
+    // Drag all the nested bubbles.
+    for (var i = 0; i < this.draggedBubbles_.length; i++) {
       var commentData = this.draggedBubbles_[i];
       commentData.bubble.setIconLocation(commentData.x + dx,
                                          commentData.y + dy);
