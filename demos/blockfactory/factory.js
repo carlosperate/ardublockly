@@ -364,6 +364,11 @@ function updateGenerator() {
         code.push(makeVar('dropdown', name) +
                   ' = this.getTitleValue(\'' + name + '\');');
         break;
+      case 'title_checkbox':
+        var name = block.getTitleValue('TITLENAME');
+        code.push(makeVar('checkbox', name) +
+                  ' = this.getTitleValue(\'' + name + '\') == \'TRUE\';');
+        break;
       case 'title_variable':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('variable', name) +
