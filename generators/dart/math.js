@@ -87,7 +87,7 @@ Blockly.Dart.math_single = function() {
     // Negation is a special case given its different operator precedence.
     arg = Blockly.Dart.valueToCode(this, 'NUM',
         Blockly.Dart.ORDER_UNARY_PREFIX) || '0';
-    if (arg.charAt(0) == '-') {
+    if (arg[0] == '-') {
       // --3 is not legal in Dart.
       arg = ' ' + arg;
     }

@@ -76,7 +76,7 @@ Blockly.JavaScript.math_single = function() {
     // Negation is a special case given its different operator precedence.
     arg = Blockly.JavaScript.valueToCode(this, 'NUM',
         Blockly.JavaScript.ORDER_UNARY_NEGATION) || '0';
-    if (arg.charAt(0) == '-') {
+    if (arg[0] == '-') {
       // --3 is not legal in JS.
       arg = ' ' + arg;
     }
