@@ -91,9 +91,18 @@ Blockly.JavaScript.text_endString = function() {
   var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT',
       Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
   if (first) {
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
+        Blockly.JavaScript.ORDER_COMMA) || '1';
     code = argument1 + '.substring(0, ' + argument0 + ')';
   } else {
-    code = argument1 + '.slice(-' + argument0 + ' || Infinity)';
+    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
+        Blockly.JavaScript.ORDER_UNARY_NEGATION) || '1';
+    if (argument0.match(/^\d+$/) && !argument0.match(/^0+$/)) {
+      // Shortcut for a plain positive number.
+      code = argument1 + '.slice(-' + argument0 + ')';
+    } else {
+      code = argument1 + '.slice(- ' + argument0 + ' || Infinity)';
+    }
   }
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
