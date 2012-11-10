@@ -47,6 +47,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.collapsed = false;
   this.disabled = false;
   this.editable = workspace.editable;
+  this.deletable = workspace.editable;
   this.tooltip = '';
   this.contextMenu = true;
 
@@ -479,7 +480,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
   var block = this;
   var options = [];
 
-  if (this.editable) {
+  if (this.deletable) {
     // Option to duplicate this block.
     var duplicateOption = {
       text: Blockly.MSG_DUPLICATE_BLOCK,
@@ -742,7 +743,9 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
       Blockly.localConnection_ = localConnection;
     }
     // Flip the trash can lid if needed.
-    this.workspace.trashcan && this.workspace.trashcan.onMouseMove(e);
+    if (this.workspace.trashcan && this.deletable) {
+      this.workspace.trashcan.onMouseMove(e);
+    }
   }
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();

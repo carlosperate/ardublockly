@@ -69,6 +69,7 @@ function initEditor(blockly) {
   rootBlock.initSvg();
   rootBlock.render();
   rootBlock.editable = false;
+  rootBlock.deletable = false;
 
   bindEvent(EditorBlockly.mainWorkspace.getCanvas(),
       'blocklyWorkspaceChange', onchange);
@@ -423,5 +424,6 @@ function updatePreview() {
   previewBlock.initSvg();
   previewBlock.render();
   previewBlock.editable = false;
+  previewBlock.deletable = false;
 }
 
