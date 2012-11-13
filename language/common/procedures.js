@@ -404,3 +404,32 @@ Blockly.Language.procedures_callreturn = {
   renameVar: Blockly.Language.procedures_callnoreturn.renameVar,
   customContextMenu: Blockly.Language.procedures_callnoreturn.customContextMenu
 };
+
+Blockly.Language.procedures_return = {
+  // Return value in a procedure 
+  category: null,
+  helpUrl: null,
+  init: function() {
+    this.setColour(290);
+    this.appendValueInput("VALUE", Number)
+      .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip("return in procedure");
+  }
+};
+
+Blockly.Language.procedures_null = {
+  // Return nothing
+  category: null,
+  helpUrl: null,
+  init: function() {
+    this.setColour(290);
+    this.appendDummyInput()
+        .appendTitle('Null');
+    this.setOutput(true,null);
+    this.setTooltip('Return nothing');
+  }
+};
+

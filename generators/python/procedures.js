@@ -93,3 +93,16 @@ Blockly.Python.procedures_callnoreturn = function() {
   var code = funcName + '(' + args.join(', ') + ')\n';
   return code;
 };
+
+Blockly.Python.procedures_return = function() {
+  // Return value in a procedure
+  var value = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_ATOMIC);
+  var code = "return "+value+";\n";
+  return code;
+};
+
+Blockly.Python.procedures_null = function() {
+  // Return nothing
+  var code = 'None';
+  return [code ,Blockly.Python.ORDER_NONE];
+};

@@ -77,3 +77,16 @@ Blockly.Dart.procedures_callnoreturn = function() {
   var code = funcName + '(' + args.join(', ') + ');\n';
   return code;
 };
+
+Blockly.Dart.procedures_return = function() {
+  // Return value in a procedure
+  var value = Blockly.Dart.valueToCode(this, 'VALUE', Blockly.Dart.ORDER_ATOMIC);
+  var code = "return "+value+";\n";
+  return code;
+};
+
+Blockly.Dart.procedures_null = function() {
+  // Return nothing
+  var code = 'null';
+  return [code ,Blockly.Dart.ORDER_NONE];
+};
