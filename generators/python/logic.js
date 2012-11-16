@@ -69,3 +69,8 @@ Blockly.Python.logic_boolean = function() {
   var code = (this.getTitleValue('BOOL') == 'TRUE') ? 'True' : 'False';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.logic_null = function() {
+  // Null data type.
+  return ['None', Blockly.Python.ORDER_ATOMIC];
+};

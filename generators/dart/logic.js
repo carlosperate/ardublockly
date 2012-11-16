@@ -70,3 +70,8 @@ Blockly.Dart.logic_boolean = function() {
   var code = (this.getTitleValue('BOOL') == 'TRUE') ? 'true' : 'false';
   return [code, Blockly.Dart.ORDER_ATOMIC];
 };
+
+Blockly.Dart.logic_null = function() {
+  // Null data type.
+  return ['null', Blockly.Dart.ORDER_ATOMIC];
+};

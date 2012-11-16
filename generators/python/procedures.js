@@ -100,9 +100,3 @@ Blockly.Python.procedures_return = function() {
   var code = "return "+value+";\n";
   return code;
 };
-
-Blockly.Python.procedures_null = function() {
-  // Return nothing
-  var code = 'None';
-  return [code ,Blockly.Python.ORDER_NONE];
-};

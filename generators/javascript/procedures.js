@@ -84,9 +84,3 @@ Blockly.JavaScript.procedures_return = function() {
   var code = "return "+value+";\n";
   return code;
 };
-
-Blockly.JavaScript.procedures_null = function() {
-  // Return nothing
-  var code = 'null';
-  return [code ,Blockly.JavaScript.ORDER_NONE];
-};

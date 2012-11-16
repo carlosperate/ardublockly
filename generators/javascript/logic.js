@@ -71,3 +71,8 @@ Blockly.JavaScript.logic_boolean = function() {
   var code = (this.getTitleValue('BOOL') == 'TRUE') ? 'true' : 'false';
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
+
+Blockly.JavaScript.logic_null = function() {
+  // Null data type.
+  return ['null', Blockly.JavaScript.ORDER_ATOMIC];
+};
