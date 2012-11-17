@@ -78,9 +78,18 @@ Blockly.Dart.procedures_callnoreturn = function() {
   return code;
 };
 
-Blockly.Dart.procedures_return = function() {
-  // Return value in a procedure
-  var value = Blockly.Dart.valueToCode(this, 'VALUE', Blockly.Dart.ORDER_ATOMIC);
-  var code = "return "+value+";\n";
+Blockly.Dart.procedures_ifreturn = function() {
+  // Conditionally return value from a procedure.
+  var condition = Blockly.Dart.valueToCode(this, 'CONDITION',
+      Blockly.Dart.ORDER_NONE) || 'false';
+  var code = 'if (' + condition + ') {\n';
+  if (this.hasReturnValue_) {
+    var value = Blockly.Dart.valueToCode(this, 'VALUE',
+        Blockly.Dart.ORDER_NONE) || 'null';
+    code += '  return ' + value + ';\n';
+  } else {
+    code += '  return;\n';
+  }
+  code += '}\n';
   return code;
 };

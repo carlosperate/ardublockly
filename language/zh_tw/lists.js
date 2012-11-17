@@ -38,7 +38,7 @@ Blockly.Language.lists_getIndex = {
         .setCheck(Number)
         .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_AT);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_1);
+    this.setTooltip(Blockly.LANG_LISTS_GET_INDEX_TOOLTIP);
   }
 };
 
@@ -60,6 +60,6 @@ Blockly.Language.lists_setIndex = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_1);
+    this.setTooltip(Blockly.LANG_LISTS_SET_INDEX_TOOLTIP);
   }
 };

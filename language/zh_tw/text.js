@@ -37,6 +37,6 @@ Blockly.Language.text_charAt = {
         .setCheck(String)
         .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT);
     this.setInputsInline(true);
-    this.setTooltip(Blockly.LANG_TEXT_CHARAT_TOOLTIP_1);
+    this.setTooltip(Blockly.LANG_TEXT_CHARAT_TOOLTIP);
   }
 };

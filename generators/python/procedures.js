@@ -94,9 +94,17 @@ Blockly.Python.procedures_callnoreturn = function() {
   return code;
 };
 
-Blockly.Python.procedures_return = function() {
-  // Return value in a procedure
-  var value = Blockly.Python.valueToCode(this, 'VALUE', Blockly.Python.ORDER_ATOMIC);
-  var code = "return "+value+";\n";
+Blockly.Python.procedures_ifreturn = function() {
+  // Conditionally return value from a procedure.
+  var condition = Blockly.Python.valueToCode(this, 'CONDITION',
+      Blockly.Python.ORDER_NONE) || 'False';
+  var code = 'if ' + condition + ':\n';
+  if (this.hasReturnValue_) {
+    var value = Blockly.Python.valueToCode(this, 'VALUE',
+        Blockly.Python.ORDER_NONE) || 'None';
+    code += '  return ' + value + '\n';
+  } else {
+    code += '  return\n';
+  }
   return code;
 };

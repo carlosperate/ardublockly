@@ -47,7 +47,7 @@ Blockly.Language.controls_for = {
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return Blockly.LANG_CONTROLS_FOR_TOOLTIP_1.replace('%1',
+      return Blockly.LANG_CONTROLS_FOR_TOOLTIP.replace('%1',
           thisBlock.getTitleValue('VAR'));
     });
   },
