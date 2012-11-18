@@ -80,7 +80,7 @@ Blockly.Dart.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.Dart.valueToCode(this, 'VALUE',
       Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
-  return [argument0 + '.isEmpty()', Blockly.Dart.ORDER_UNARY_POSTFIX];
+  return [argument0 + '.isEmpty', Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.text_endString = function() {

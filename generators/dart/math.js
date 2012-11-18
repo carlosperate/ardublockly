@@ -201,7 +201,7 @@ Blockly.Dart.math_on_list = function() {
         Blockly.Dart.math_on_list.math_min = functionName;
         var func = [];
         func.push('num ' + functionName + '(List myList) {');
-        func.push('  if (myList.isEmpty()) return null;');
+        func.push('  if (myList.isEmpty) return null;');
         func.push('  num minVal = myList[0];');
         func.push('  myList.forEach((num entry) ' +
                   '{minVal = Math.min(minVal, entry);});');
@@ -220,7 +220,7 @@ Blockly.Dart.math_on_list = function() {
         Blockly.Dart.math_on_list.math_max = functionName;
         var func = [];
         func.push('num ' + functionName + '(List myList) {');
-        func.push('  if (myList.isEmpty()) return null;');
+        func.push('  if (myList.isEmpty) return null;');
         func.push('  num maxVal = myList[0];');
         func.push('  myList.forEach((num entry) ' +
                   '{maxVal = Math.max(maxVal, entry);});');
@@ -243,7 +243,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('num ' + functionName + '(List myList) {');
         func.push('  // First filter list for numbers only.');
         func.push('  List localList = myList.filter((a) => a is num);');
-        func.push('  if (localList.isEmpty()) return null;');
+        func.push('  if (localList.isEmpty) return null;');
         func.push('  num sumVal = 0;');
         func.push('  localList.forEach((num entry) {sumVal += entry;});');
         func.push('  return sumVal / localList.length;');
@@ -264,7 +264,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  // or the average of two middle values if list has an ' +
                   'even number of elements.');
         func.push('  List localList = myList.filter((a) => a is num);');
-        func.push('  if (localList.isEmpty()) return null;');
+        func.push('  if (localList.isEmpty) return null;');
         func.push('  localList.sort((a, b) => (a - b));');
         func.push('  int index = (localList.length / 2).toInt();');
         func.push('  if (localList.length % 2 == 1) {');
@@ -331,7 +331,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('num ' + functionName + '(myList) {');
         func.push('  // First filter list for numbers only.');
         func.push('  List numbers = myList.filter((a) => a is num);');
-        func.push('  if (numbers.isEmpty()) return null;');
+        func.push('  if (numbers.isEmpty) return null;');
         func.push('  num n = numbers.length;');
         func.push('  num sum = 0;');
         func.push('  numbers.forEach((x) => sum += x);');
