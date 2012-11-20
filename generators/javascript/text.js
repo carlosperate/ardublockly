@@ -185,9 +185,9 @@ Blockly.JavaScript.text_trim = function() {
 };
 
 Blockly.JavaScript.text_trim.OPERATORS = {
-  LEFT: '.replace(/^\\s+/, \'\')',
-  RIGHT: '.replace(/\\s+$/, \'\')',
-  BOTH: '.replace(/^\\s+|\\s+$/g, \'\')'
+  LEFT: '.trimLeft()',
+  RIGHT: '.trimRight()',
+  BOTH: '.trim()'
 };
 
 Blockly.JavaScript.text_print = function() {

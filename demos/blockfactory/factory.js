@@ -237,6 +237,12 @@ function getTitles(block) {
             escapeString(block.getTitleValue('CHECKED')) + '), ' +
             escapeString(block.getTitleValue('TITLENAME')));
         break;
+      case 'title_colour':
+        // Result: new Blockly.FieldColour('#ff0000'), 'COLOUR'
+        titles.push('new Blockly.FieldColour(' +
+            escapeString(block.getTitleValue('COLOUR')) + '), ' +
+            escapeString(block.getTitleValue('TITLENAME')));
+        break;
       case 'title_variable':
         // Result:
         // new Blockly.FieldVariable('item'), 'VAR'
@@ -369,6 +375,11 @@ function updateGenerator() {
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('checkbox', name) +
                   ' = this.getTitleValue(\'' + name + '\') == \'TRUE\';');
+        break;
+      case 'title_colour':
+        var name = block.getTitleValue('TITLENAME');
+        code.push(makeVar('colour', name) +
+                  ' = this.getTitleValue(\'' + name + '\');');
         break;
       case 'title_variable':
         var name = block.getTitleValue('TITLENAME');

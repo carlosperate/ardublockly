@@ -371,6 +371,29 @@ Blockly.Language.title_checkbox = {
   }
 };
 
+Blockly.Language.title_colour = {
+  // Colour input.
+  category: 'Title',
+  init: function() {
+    this.setColour(160);
+    this.appendDummyInput()
+        .appendTitle('colour')
+        .appendTitle(new Blockly.FieldColour('#ff0000'), 'COLOUR')
+        .appendTitle(',')
+        .appendTitle(new Blockly.FieldTextInput('NAME'), 'TITLENAME');
+    this.setPreviousStatement(true, 'Title');
+    this.setNextStatement(true, 'Title');
+    this.setTooltip('Colour input field.');
+  },
+  onchange: function() {
+    if (!this.workspace) {
+      // Block has been deleted.
+      return;
+    }
+    titleNameCheck(this);
+  }
+};
+
 Blockly.Language.title_variable = {
   // Dropdown for variables.
   category: 'Title',
