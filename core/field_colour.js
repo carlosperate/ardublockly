@@ -76,6 +76,7 @@ Blockly.FieldColour.prototype.setValue = function(colour) {
  * @private
  */
 Blockly.FieldColour.prototype.showEditor_ = function() {
+  // Create the palette using Closure.
   Blockly.FieldColour.isOpen_ = true;
   goog.dom.removeChildren(Blockly.widgetDiv);
   Blockly.widgetDiv.style.display = 'block';
@@ -86,11 +87,18 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   // Position the palette to line up with the field.
   var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
   var borderBBox = this.borderRect_.getBBox();
+  if (Blockly.RTL) {
+    xy.x += borderBBox.width;
+  }
   xy.y += borderBBox.height - 1;
   xy = Blockly.convertCoordinates(xy.x, xy.y, false);
+  if (Blockly.RTL) {
+    xy.x -= Blockly.widgetDiv.offsetWidth;
+  }
   Blockly.widgetDiv.style.left = xy.x + 'px';
   Blockly.widgetDiv.style.top = xy.y + 'px';
 
+  // Configure event handler.
   var thisObj = this;
   Blockly.FieldColour.changeEventKey_ = goog.events.listen(picker,
       goog.ui.ColorPicker.EventType.CHANGE,
