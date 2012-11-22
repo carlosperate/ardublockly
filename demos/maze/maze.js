@@ -24,7 +24,7 @@
 'use strict';
 
 /**
- * Create a namespace for the maze.
+ * Create a namespace for the application.
  */
 var Maze = {};
 
@@ -258,7 +258,7 @@ Maze.draw_map = function() {
   pegmanIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
       'pegman.png');
   pegmanIcon.setAttribute('height', Maze.PEGMAN_HEIGHT);
-  pegmanIcon.setAttribute('width', Maze.PEGMAN_WIDTH * 18); //49 * 18 = 882
+  pegmanIcon.setAttribute('width', Maze.PEGMAN_WIDTH * 18); // 49 * 18 = 882
   pegmanIcon.setAttribute('clip-path', 'url(#pegmanClipPath)');
   svg.appendChild(pegmanIcon);
 };
@@ -284,16 +284,6 @@ Maze.init = function(blockly) {
       '  <block type="maze_move" x="85" y="100"></block>' +
       '</xml>');
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-
-  // Record the map's offset.
-  Maze.mapOffsetLeft_ = 0;
-  Maze.mapOffsetTop_ = 0;
-  var element = document.getElementById('svgMaze').parentNode;
-  while (element) {
-    Maze.mapOffsetLeft_ += element.offsetLeft;
-    Maze.mapOffsetTop_ += element.offsetTop;
-    element = element.offsetParent;
-  }
 
   // Locate the start and finish squares.
   for (var y = 0; y < Maze.ROWS; y++) {
