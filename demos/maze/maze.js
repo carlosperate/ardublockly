@@ -617,7 +617,8 @@ Maze.checkTimeout = function(id) {
 Maze.showCode = function() {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   // Strip out serial numbers.
-  code = code.replace(/"[a-z][-:\.\w]+"/g, '');
+  code = code.replace(/"\d+"/g, '');
+  code = code.replace(/\s*Maze\.checkTimeout\(\);/g, '');
   alert(code);
 };
 
