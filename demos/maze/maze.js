@@ -23,6 +23,13 @@
  */
 'use strict';
 
+var STORAGE_DISCARD_WARNING = 'Delete all "%1" blocks?';
+var STORAGE_HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+var STORAGE_LINK_ALERT = 'Share your blocks with this link:\n\n';
+var STORAGE_HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+var STORAGE_XML_ERROR = 'Could not load your saved file.\n'+
+    'Perhaps it was created with a different version of Blockly?\nXML: ';
+
 /**
  * Create a namespace for the application.
  */
@@ -277,13 +284,17 @@ Maze.init = function(blockly) {
     }
     return null;
   };
-
-  // Load the editor with a starting block.
-  var xml = Blockly.Xml.textToDom(
-      '<xml>' +
-      '  <block type="maze_move" x="85" y="100"></block>' +
-      '</xml>');
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  
+  // An href with #key trigers an AJAX call to retrieve saved blocks.
+  if (window.location.hash.length > 1) {
+    retrieveXML(window.location.hash.substring(1));
+  } else { // Load the editor with a starting block.
+    var xml = Blockly.Xml.textToDom(
+        '<xml>' +
+        '  <block type="maze_move" x="85" y="100"></block>' +
+        '</xml>');
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);    
+  }
 
   // Locate the start and finish squares.
   for (var y = 0; y < Maze.ROWS; y++) {
@@ -329,7 +340,7 @@ Maze.reset = function() {
 Maze.runButtonClick = function() {
   document.getElementById('runButton').style.display = 'none';
   document.getElementById('resetButton').style.display = 'inline';
-  document.getElementById('randomizeDiv').style.visibility = 'hidden';
+  document.getElementById('randomizeCodeLinkDiv').style.visibility = 'hidden';
   Blockly.mainWorkspace.traceOn(true);
   Maze.execute();
 };
@@ -340,7 +351,7 @@ Maze.runButtonClick = function() {
 Maze.resetButtonClick = function() {
   document.getElementById('runButton').style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
-  document.getElementById('randomizeDiv').style.visibility = 'visible';
+  document.getElementById('randomizeCodeLinkDiv').style.visibility = 'visible';
   Blockly.mainWorkspace.traceOn(false);
   Maze.reset();
 };

@@ -3,6 +3,7 @@
   <meta charset="utf-8">
   <title>Blockly Demo: Maze</title>
   <script type="text/javascript" src="maze.js"></script>
+  <script type="text/javascript" src="/storage.js"></script>
   <style>
     body {
       background-color: white;
@@ -36,7 +37,13 @@
     button:hover {
       box-shadow: 2px 2px 5px #888;
     }
-    #buttonDiv, #randomizeDiv {
+    button>img {
+      opacity: 0.6;
+    }
+    button:hover>img {
+      opacity: 1;
+    }
+    #buttonDiv, #randomizeCodeLinkDiv {
       text-align: center;
       padding-top: 2em;
     }
@@ -58,21 +65,26 @@
         </div>
 
         <div id="buttonDiv">
-          <button id="runButton" class="launch" onclick="Maze.runButtonClick();">Run Program</button>
+          <button id="runButton" class="launch" onclick="Maze.runButtonClick();">
+            Run Program
+          </button>
           <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none">&nbsp; Reset &nbsp;</button>
         </div>
 
-        <div id="randomizeDiv">
-          <button onclick="Maze.randomize();">Randomize Maze</button>
+        <div id="randomizeCodeLinkDiv">
+          <button title="Randomize maze" onclick="Maze.randomize();">
+            <img src='randomize.png' height=21 width=21>
+          </button>
+          <button title="See generated JavaScript code" onclick="Maze.showCode()">
+              <img src='code.png' height=21 width=21>
+          </button>
+          <button title="Save and link to blocks" onclick="link()">
+              <img src='link.png' height=21 width=21>
+          </button>
         </div>
       </td>
       <td valign="top" rowspan=2>
         <iframe src="frame.html"></iframe>
-      </td>
-    </tr>
-    <tr>
-      <td align="right" valign="bottom">
-        <small>[<a href="javascript:void(Maze.showCode())">See generated JavaScript code.</a>]</small>
       </td>
     </tr>
   </table>

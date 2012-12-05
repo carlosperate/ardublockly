@@ -2,9 +2,7 @@
 <head>
   <meta charset="utf-8">
   <title>Blockly正體中文版</title>
-  <script type="text/javascript" src="BlobBuilder.min.js"></script>
-  <script type="text/javascript" src="FileSaver.min.js"></script>
-  <script type="text/javascript" src="blockly_helper.js"></script>
+  <script type="text/javascript" src="/storage.js"></script>
   <script>
 /**
  * List of tab names.
@@ -13,6 +11,13 @@
 var TABS_ = ['blocks', 'javascript', 'dart', 'python', 'xml'];
 
 var selected = 'blocks';
+var STORAGE_DISCARD_WARNING = 'Delete all "%1" blocks?';
+var STORAGE_HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+var STORAGE_LINK_ALERT = 'Share your blocks with this link:\n\n';
+var STORAGE_HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+var STORAGE_XML_ERROR = 'Could not load your saved file.\n'+
+    'Perhaps it was created with a different version of Blockly?\nXML: ';
+
 
 /**
  * Switch the visible pane when a tab is clicked.
@@ -100,7 +105,32 @@ function init(blockly) {
     }, 1);
   }
 
-  auto_save_and_restore_blocks();
+  // An href with #key trigers an AJAX call to retrieve saved blocks.
+  if (window.location.hash.length > 1) {
+    retrieveXML(window.location.hash.substring(1));
+  } else {
+    // Restore saved blocks in a separate thread so that subsequent
+    // initialization is not affected from a failed load.
+    window.setTimeout(restore_blocks, 0);
+  }
+
+  // Hook a save function onto unload.
+  bindEvent(window, 'unload', backup_blocks);
+
+  tabClick('tab_' + selected);
+}
+
+/**
+ * Execute the user's code.
+ * Just a quick and dirty eval.  No checks for infinite loops, etc.
+ */
+function runJS() {
+  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  try {
+    eval(code);
+  } catch (e) {
+    alert('Program error:\n' + e);
+  }
 }
   </script>
   <style>
@@ -112,7 +142,7 @@ function init(blockly) {
       font-weight: normal;
       font-size: 140%;
     }
-    td {
+    td, button {
       vertical-align: top;
     }
 
@@ -185,10 +215,18 @@ function init(blockly) {
       background-color: #eee;
       color: black;
     }
+    button>img {
+      opacity: 0.6;
+    }
+    button:hover>img {
+      opacity: 1;
+    }
     button.launch {
       border: 1px solid #d43;
       background-color: #d43;
-      color: white;
+    }
+    button.launch>img {
+      opacity: 1;
     }
     button:active {
       border: 1px solid blue !important;
@@ -219,11 +257,15 @@ function init(blockly) {
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
             <td class="tabmax">
-              <button onclick="discard()">拋棄</button>
-              <button onclick="save()">存為XML</button>
-              <button id="fakeload">載入XML</button>
-              <input type="file" id="load" style="display: none;"/>
-              <button class="launch" onclick="runJS()">執行程式</button>
+              <button title="Discard all blocks" onclick="discard(); renderContent();">
+                <img src='discard.png' height=21 width=21>
+              </button>
+              <button title="Save and link to blocks" onclick="link()">
+                <img src='link.png' height=21 width=21>
+              </button>
+              <button title="Run program" class="launch" onclick="runJS()">
+                <img src='play.png' height=21 width=21>
+              </button>
             </td>
           </tr>
         </table>
