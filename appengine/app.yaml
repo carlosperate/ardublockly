@@ -20,3 +20,6 @@ handlers:
   
 - url: /closure-library-read-only
   static_dir: closure-library-read-only
+
+- url: /
+  script: index_redirect.py
