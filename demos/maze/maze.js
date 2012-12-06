@@ -2,7 +2,7 @@
  * Blockly Demo: Maze
  *
  * Copyright 2012 Google Inc.
- * http://code.google.com/p/blockly/
+ * http://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,11 +23,11 @@
  */
 'use strict';
 
-var STORAGE_DISCARD_WARNING = 'Delete all "%1" blocks?';
-var STORAGE_HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-var STORAGE_LINK_ALERT = 'Share your blocks with this link:\n\n';
-var STORAGE_HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-var STORAGE_XML_ERROR = 'Could not load your saved file.\n'+
+BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
+BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
     'Perhaps it was created with a different version of Blockly?\nXML: ';
 
 /**
@@ -287,7 +287,7 @@ Maze.init = function(blockly) {
   
   // An href with #key trigers an AJAX call to retrieve saved blocks.
   if (window.location.hash.length > 1) {
-    retrieveXML(window.location.hash.substring(1));
+    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
   } else { // Load the editor with a starting block.
     var xml = Blockly.Xml.textToDom(
         '<xml>' +

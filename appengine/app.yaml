@@ -1,5 +1,5 @@
 application: blockly-demo
-version: 3
+version: 1
 runtime: python
 api_version: 1
 threadsafe: yes
@@ -12,8 +12,11 @@ handlers:
   static_files: storage.js
   upload: storage\.js
 
+- url: /static
+  static_dir: static
+# Obsolete URL.
 - url: /blockly
-  static_dir: blockly
+  static_dir: static
   
 - url: /closure-library-read-only
   static_dir: closure-library-read-only

@@ -11,11 +11,11 @@
 var TABS_ = ['blocks', 'javascript', 'dart', 'python', 'xml'];
 
 var selected = 'blocks';
-var STORAGE_DISCARD_WARNING = 'Delete all "%1" blocks?';
-var STORAGE_HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-var STORAGE_LINK_ALERT = 'Share your blocks with this link:\n\n';
-var STORAGE_HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-var STORAGE_XML_ERROR = 'Could not load your saved file.\n'+
+BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
+BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
     'Perhaps it was created with a different version of Blockly?\nXML: ';
 
 
@@ -107,15 +107,15 @@ function init(blockly) {
 
   // An href with #key trigers an AJAX call to retrieve saved blocks.
   if (window.location.hash.length > 1) {
-    retrieveXML(window.location.hash.substring(1));
+    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
   } else {
     // Restore saved blocks in a separate thread so that subsequent
     // initialization is not affected from a failed load.
-    window.setTimeout(restore_blocks, 0);
+    window.setTimeout(BlocklyStorage.restoreBlocks, 0);
   }
 
   // Hook a save function onto unload.
-  bindEvent(window, 'unload', backup_blocks);
+  BlocklyStorage.backupOnUnload();
 
   tabClick('tab_' + selected);
 }
@@ -240,7 +240,7 @@ function runJS() {
   <table height="100%" width="100%">
     <tr>
       <td>
-        <h1><a href="http://code.google.com/p/blockly/">Blockly</a> &gt; <a href="../index.html">Demos</a> &gt; Code</h1>
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Demos</a> &gt; Code</h1>
       </td>
     </tr>
     <tr>
@@ -257,10 +257,10 @@ function runJS() {
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
             <td class="tabmax">
-              <button title="Discard all blocks" onclick="discard(); renderContent();">
+              <button title="Discard all blocks" onclick="BlocklyStorage.discard(); renderContent();">
                 <img src='discard.png' height=21 width=21>
               </button>
-              <button title="Save and link to blocks" onclick="link()">
+              <button title="Save and link to blocks" onclick="BlocklyStorage.link()">
                 <img src='link.png' height=21 width=21>
               </button>
               <button title="Run program" class="launch" onclick="runJS()">
