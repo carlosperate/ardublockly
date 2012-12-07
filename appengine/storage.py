@@ -22,6 +22,7 @@ limitations under the License.
 __author__ = "q.neutron@gmail.com (Quynh Neutron)"
 
 import cgi
+import re
 from random import randint
 from google.appengine.ext import db
 from google.appengine.api import memcache
@@ -47,19 +48,19 @@ if "xml" in forms:
   # Store XML and return a generated key.
   xml_content = forms["xml"].value
   xml_hash = hash(xml_content)
-  hash_lookup = db.GqlQuery("SELECT * FROM Xml WHERE xml_hash = %d" % xml_hash)
-  xml_keys = [row.xml_key for row in hash_lookup]
-  if xml_keys: xml_key = xml_keys[0]
+  lookup_query = db.GqlQuery("SELECT * FROM Xml WHERE xml_hash = %d" % xml_hash)
+  lookup_result = lookup_query.get()
+  if lookup_result: xml_key = lookup_result.xml_key
   else:
-    xml_key = ""
-    prev_keys = set([row.xml_key for row in db.GqlQuery(
-        "SELECT xml_key FROM Xml")])
     trials = 0
-    while xml_key == "" or xml_key in prev_keys:
+    result = True
+    while result:
       trials += 1
       if trials == 100:
         raise Exception("Sorry, the generator failed to get a key for you.")
       xml_key = keyGen()
+      query = db.GqlQuery("SELECT * FROM Xml WHERE xml_key = '%s'" % xml_key)
+      result = query.get()
     xml = db.Text(xml_content, encoding="utf_8")
     row = Xml(xml_key = xml_key, xml_hash = xml_hash, xml_content = xml)
     row.put()
@@ -70,16 +71,19 @@ if "key" in forms:
   key_provided = forms["key"].value
   xml = memcache.get(key_provided)
   if not xml:
-    query_result = db.GqlQuery("SELECT * FROM Xml WHERE xml_key = '%s'" %
-                               key_provided)
-    xml_content = [row.xml_content for row in query_result]
-    if not xml_content:
+    if not re.match('^\w+$', key_provided):
       xml = ""
     else:
-      xml = xml_content[0]
-      if not memcache.add(key_provided, xml, 3600):
-        logging.error("Memcache set failed.")
-  print xml.encode("utf-8") 
+      query = db.GqlQuery("SELECT * FROM Xml WHERE xml_key = '%s'" %
+                                 key_provided)
+      result = query.get()
+      if not result:
+        xml = ""
+      else:
+        xml = result.xml_content
+        if not memcache.add(key_provided, xml, 3600):
+          logging.error("Memcache set failed.")
+  print xml.encode("utf-8")
   stats = memcache.get_stats()
   logging.info("Memcache Statistics: " + str(stats))
   
