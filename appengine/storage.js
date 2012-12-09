@@ -42,11 +42,7 @@ BlocklyStorage.backupBlocks_ = function() {
  * Bind the localStorage backup function to the unload event.
  */
 BlocklyStorage.backupOnUnload = function() {
-  if (window.addEventListener) {  // W3C
-    window.addEventListener('unload', BlocklyStorage.backupBlocks_, false);
-  } else if (window.attachEvent) {  // IE
-    window.attachEvent('onunload', BlocklyStorage.backupBlocks_);
-  }
+  window.addEventListener('unload', BlocklyStorage.backupBlocks_, false);
 };
 
 /**
@@ -92,7 +88,7 @@ BlocklyStorage.discard = function() {
 BlocklyStorage.link = function() {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var data = Blockly.Xml.domToText(xml);
-  BlocklyStorage.makeRequest_('/storage.py', 'xml', data);
+  BlocklyStorage.makeRequest_('/storage', 'xml', data);
 };
 
 /**
@@ -101,7 +97,7 @@ BlocklyStorage.link = function() {
  */
 BlocklyStorage.retrieveXml = function(key) {
   var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  BlocklyStorage.makeRequest_('/storage.py', 'key', key);
+  BlocklyStorage.makeRequest_('/storage', 'key', key);
 };
 
 /**
@@ -140,7 +136,7 @@ BlocklyStorage.makeRequest_ = function(url, name, content) {
 BlocklyStorage.handleRequest_ = function() {
   if (BlocklyStorage.httpRequest_.readyState == 4) {
     if (BlocklyStorage.httpRequest_.status != 200) {
-      alert(BlocklyStorage.HTTPREQUEST_ERROR + 
+      alert(BlocklyStorage.HTTPREQUEST_ERROR +
             'httpRequest_.status: ' + BlocklyStorage.httpRequest_.status);
     } else {
       var data = BlocklyStorage.httpRequest_.responseText.trim();
@@ -154,14 +150,35 @@ BlocklyStorage.handleRequest_ = function() {
           BlocklyStorage.loadXml_(data);
         }
       }
+      BlocklyStorage.monitorChanges_();
     }
     BlocklyStorage.httpRequest_ = null;
   }
 };
 
 /**
+ * Start monitoring the workspace.  If a change is made that changes the XML,
+ * clear the key from the URL.  Stop monitoring the workspace once such a
+ * change is detected.
+ */
+BlocklyStorage.monitorChanges_ = function() {
+  var startXmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var startXmlText = Blockly.Xml.domToText(startXmlDom);
+  var canvas = Blockly.mainWorkspace.getCanvas();
+  function change() {
+    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlText = Blockly.Xml.domToText(xmlDom);
+    if (startXmlText != xmlText) {
+      window.location.hash = '';
+      canvas.removeEventListener('blocklyWorkspaceChange', change, false);
+    }
+  }
+  canvas.addEventListener('blocklyWorkspaceChange', change, false);
+};
+
+/**
  * Load blocks from XML.
- * @param {string} xml Text represetation of XML.
+ * @param {string} xml Text representation of XML.
  * @private
  */
 BlocklyStorage.loadXml_ = function(xml) {

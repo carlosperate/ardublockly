@@ -284,7 +284,7 @@ Maze.init = function(blockly) {
     }
     return null;
   };
-  
+
   // An href with #key trigers an AJAX call to retrieve saved blocks.
   if (window.location.hash.length > 1) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
@@ -293,7 +293,7 @@ Maze.init = function(blockly) {
         '<xml>' +
         '  <block type="maze_move" x="85" y="100"></block>' +
         '</xml>');
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);    
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
 
   // Locate the start and finish squares.
