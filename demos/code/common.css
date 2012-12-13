@@ -1,0 +1,123 @@
+/**
+ * Visual Blocks Editor
+ *
+ * Copyright 2012 Google Inc.
+ * http://blockly.googlecode.com/
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @fileoverview Style sheet for Blockly code demo (langaue-neutral).
+ * @author fraser@google.com (Neil Fraser)
+ */
+body {
+  background-color: white;
+  font-family: sans-serif;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+}
+td, button {
+  vertical-align: top;
+}
+
+/* Tabs */
+#tabRow>td {
+  border: 1px solid #ccc;
+}
+td.tabon {
+  border-bottom-color: #ddd !important;
+  background-color: #ddd;
+  padding: 5px 19px;
+}
+td.taboff {
+  cursor: pointer;
+  padding: 5px 19px;
+}
+td.taboff:hover {
+  background-color: #eee;
+}
+td.tabmin {
+  border-top-style: none !important;
+  border-left-style: none !important;
+  border-right-style: none !important;
+}
+td.tabmax {
+  border-top-style: none !important;
+  border-left-style: none !important;
+  border-right-style: none !important;
+  width: 99%;
+  text-align: right;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+td {
+  padding: 0;
+}
+pre,
+#content_xml {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-top-style: none;
+  overflow: hidden;
+  display: none;
+}
+#textarea_xml {
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+}
+iframe {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+  border-top-style: none;
+}
+button {
+  padding: 1px 1em;
+  font-size: 90%;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #eee;
+  color: black;
+}
+button>img {
+  opacity: 0.6;
+}
+button:hover>img {
+  opacity: 1;
+}
+button.launch {
+  border: 1px solid #d43;
+  background-color: #d43;
+}
+button.launch>img {
+  opacity: 1;
+}
+button:active {
+  border: 1px solid blue !important;
+}
+button:hover {
+  box-shadow: 2px 2px 5px #888;
+}

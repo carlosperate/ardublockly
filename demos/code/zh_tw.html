@@ -1,0 +1,68 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly正體中文版</title>
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="common.js"></script>
+  <script>
+BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
+BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+    'Perhaps it was created with a different version of Blockly?\nXML: ';
+
+var BAD_XML = 'Error parsing XML:\n%1\n\nAbandon changes?';
+var BAD_CODE = 'Program error:\n%1';
+  </script>
+  <link href="common.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <table height="100%" width="100%">
+    <tr>
+      <td>
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Demos</a> &gt; Code</h1>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table>
+          <tr id="tabRow" height="1em">
+            <td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">積木</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_javascript" class="taboff" onclick="tabClick(this.id)">JavaScript</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_dart" class="taboff" onclick="tabClick(this.id)">Dart</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_python" class="taboff" onclick="tabClick(this.id)">Python</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
+            <td class="tabmax">
+              <button title="Discard all blocks" onclick="BlocklyStorage.discard(); renderContent();">
+                <img src='discard.png' height=21 width=21>
+              </button>
+              <button title="Save and link to blocks" onclick="BlocklyStorage.link()">
+                <img src='link.png' height=21 width=21>
+              </button>
+              <button title="Run program" class="launch" onclick="runJS()">
+                <img src='play.png' height=21 width=21>
+              </button>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td height="99%">
+        <iframe id="content_blocks" src="zh_tw_frame.html"></iframe>
+        <pre id="content_javascript"></pre>
+        <pre id="content_dart"></pre>
+        <pre id="content_python"></pre>
+        <div id="content_xml">
+          <textarea id="textarea_xml"></textarea>
+        </div>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
