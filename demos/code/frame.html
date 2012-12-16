@@ -47,10 +47,8 @@
       for (var x = 0; x < files.length; x++) {
         var file = files[x];
         if (file.match(/^\w+\/\w+\.js$/)) {
-          var tag = document.createElement('script');
-          tag.setAttribute('type', 'text/javascript');
-          tag.setAttribute('src', '../../language/' + file);
-          document.head.appendChild(tag);
+          document.writeln('<script type="text/javascript" ' +
+              'src="../../language/' + file + '"><' + '/script>');
         } else {
           console.error('Illegal language file: ' + file);
         }
