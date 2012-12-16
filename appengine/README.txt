@@ -27,9 +27,9 @@ blockly/
      |- language/
      |- media/
      `- tests/
- 
+
  Instructions for fetching Closure may be found here:
  http://code.google.com/p/blockly/wiki/Closure
- 
+
 Finally, upload this directory structure to your App Engine account,
 wait a minute, then go to http://YOURNAME.appspot.com/

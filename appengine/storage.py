@@ -30,7 +30,7 @@ import logging
 print "Content-Type: text/plain\n"
 
 def keyGen():
-  # Generate a random string of len KEY_LEN.
+  # Generate a random string of length KEY_LEN.
   KEY_LEN = 6
   CHARS = "abcdefghijkmnopqrstuvwxyz23456789" # Exclude l, 0, 1.
   max_index = len(CHARS) - 1
@@ -47,7 +47,7 @@ if "xml" in forms:
   xml_content = forms["xml"].value
   xml_hash = hash(xml_content)
   lookup_query = db.Query(Xml)
-  lookup_query.filter('xml_hash =', xml_hash)
+  lookup_query.filter("xml_hash =", xml_hash)
   lookup_result = lookup_query.get()
   if lookup_result:
     xml_key = lookup_result.key().name()
@@ -59,7 +59,7 @@ if "xml" in forms:
       if trials == 100:
         raise Exception("Sorry, the generator failed to get a key for you.")
       xml_key = keyGen()
-      result = db.get(db.Key.from_path('Xml', xml_key))
+      result = db.get(db.Key.from_path("Xml", xml_key))
     xml = db.Text(xml_content, encoding="utf_8")
     row = Xml(key_name = xml_key, xml_hash = xml_hash, xml_content = xml)
     row.put()
@@ -74,7 +74,7 @@ if "key" in forms:
   xml = memcache.get("XML_" + key_provided)
   if xml is None:
     # Check datastore for a definitive match.
-    result = db.get(db.Key.from_path('Xml', key_provided))
+    result = db.get(db.Key.from_path("Xml", key_provided))
     if not result:
       xml = ""
     else:

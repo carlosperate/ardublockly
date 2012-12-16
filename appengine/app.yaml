@@ -12,6 +12,13 @@ handlers:
   static_files: storage.js
   upload: storage\.js
 
+# Web worker reflector.
+- url: /reflector
+  script: reflector.py
+- url: /reflector\.js
+  static_files: reflector.js
+  upload: reflector\.js
+
 # Blockly files.
 - url: /static
   static_dir: static
