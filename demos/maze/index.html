@@ -43,6 +43,14 @@
     button:hover>img {
       opacity: 1;
     }
+    button.disabled:hover>img {
+      opacity: 0.6;
+    }
+    button.disabled {
+      cursor: not-allowed;
+      border: 1px solid #ddd !important;
+      box-shadow: none;
+    }
     #buttonDiv, #randomizeCodeLinkDiv {
       text-align: center;
       padding-top: 2em;
@@ -78,7 +86,7 @@
           <button title="See generated JavaScript code" onclick="Maze.showCode()">
               <img src='code.png' height=21 width=21>
           </button>
-          <button title="Save and link to blocks" onclick="BlocklyStorage.link()">
+          <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link()">
               <img src='link.png' height=21 width=21>
           </button>
         </div>

@@ -5,13 +5,14 @@
   <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="common.js"></script>
   <script>
-BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
-BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
-BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-    'Perhaps it was created with a different version of Blockly?\nXML: ';
-
+if ('BlocklyStorage' in window) {
+  BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
+  BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+  BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+  BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+  BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+      'Perhaps it was created with a different version of Blockly?\nXML: ';
+}
 var BAD_XML = 'Error parsing XML:\n%1\n\nAbandon changes?';
 var BAD_CODE = 'Program error:\n%1';
   </script>
@@ -41,7 +42,7 @@ var BAD_CODE = 'Program error:\n%1';
               <button title="Discard all blocks" onclick="BlocklyStorage.discard(); renderContent();">
                 <img src='discard.png' height=21 width=21>
               </button>
-              <button title="Save and link to blocks" onclick="BlocklyStorage.link()">
+              <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link()">
                 <img src='link.png' height=21 width=21>
               </button>
               <button title="Run program" class="launch" onclick="runJS()">
@@ -54,7 +55,21 @@ var BAD_CODE = 'Program error:\n%1';
     </tr>
     <tr>
       <td height="99%">
-        <iframe id="content_blocks" src="zh_tw_frame.html"></iframe>
+        <iframe id="content_blocks"></iframe>
+        <script type="text/javascript">
+var src = ['zh_tw/_messages.js',
+           'common/control.js',
+           'zh_tw/control.js',
+           'common/logic.js',
+           'common/math.js',
+           'common/text.js',
+           'zh_tw/text.js',
+           'common/lists.js',
+           'zh_tw/lists.js',
+           'common/variables.js',
+           'common/procedures.js'];
+document.getElementById('content_blocks').src = 'frame.html?' + src.join('&');
+        </script>
         <pre id="content_javascript"></pre>
         <pre id="content_dart"></pre>
         <pre id="content_python"></pre>

@@ -121,3 +121,11 @@ button:active {
 button:hover {
   box-shadow: 2px 2px 5px #888;
 }
+button.disabled:hover>img {
+  opacity: 0.6;
+}
+button.disabled {
+  cursor: not-allowed;
+  border: 1px solid #ddd !important;
+  box-shadow: none;
+}

@@ -116,17 +116,20 @@ function init(blockly) {
     }, 1);
   }
 
-  // An href with #key trigers an AJAX call to retrieve saved blocks.
-  if (window.location.hash.length > 1) {
-    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+  if ('BlocklyStorage' in window) {
+    // An href with #key trigers an AJAX call to retrieve saved blocks.
+    if (window.location.hash.length > 1) {
+      BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+    } else {
+      // Restore saved blocks in a separate thread so that subsequent
+      // initialization is not affected from a failed load.
+      window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+    }  
+    // Hook a save function onto unload.
+    BlocklyStorage.backupOnUnload();
   } else {
-    // Restore saved blocks in a separate thread so that subsequent
-    // initialization is not affected from a failed load.
-    window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+    document.getElementById('linkButton').className = 'disabled';
   }
-
-  // Hook a save function onto unload.
-  BlocklyStorage.backupOnUnload();
 
   tabClick('tab_' + selected);
 }
