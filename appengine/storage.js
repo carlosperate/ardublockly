@@ -33,7 +33,8 @@ var BlocklyStorage = {};
 BlocklyStorage.backupBlocks_ = function() {
   if ('localStorage' in window) {
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-    var url = BlocklyStorage.getUrl_();
+    // Gets the current URL, not including the hash.
+    var url = window.location.href.split('#')[0];
     window.localStorage.setItem(url, Blockly.Xml.domToText(xml));
   }
 };
@@ -49,25 +50,11 @@ BlocklyStorage.backupOnUnload = function() {
  * Restore code blocks from localStorage.
  */
 BlocklyStorage.restoreBlocks = function() {
-  var url = BlocklyStorage.getUrl_();
+  var url = window.location.href.split('#')[0];
   if ('localStorage' in window && window.localStorage[url]) {
     var xml = Blockly.Xml.textToDom(window.localStorage[url]);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
-};
-
-/**
- * Gets the current URL, not including the hash.
- * @return {string} Current URL.
- * @private
- */
-BlocklyStorage.getUrl_ = function() {
-  var url = window.location.href;
-  var hash = url.indexOf('#');
-  if (hash != -1) {
-    url = url.substring(0, hash)
-  }
-  return url;
 };
 
 /**
