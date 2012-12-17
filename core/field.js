@@ -129,8 +129,10 @@ Blockly.Field.prototype.render_ = function() {
     var width = Blockly.Field.textLengthCache[this.text_];
   } else {
     var width = this.textElement_.getComputedTextLength();
-    // Cache the current width.
-    Blockly.Field.textLengthCache[this.text_] = width;
+    // If a valid width was obtained, cache the current width.
+    if (width) {
+      Blockly.Field.textLengthCache[this.text_] = width;
+    }
   }
   if (this.borderRect_) {
     this.borderRect_.setAttribute('width',
