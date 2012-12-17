@@ -278,6 +278,7 @@ Maze.draw_map = function() {
  */
 Maze.init = function(blockly) {
   window.Blockly = blockly;
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Maze.checkTimeout(%1);\n';
   Maze.draw_map();
 
   window.onbeforeunload = function() {
@@ -633,7 +634,7 @@ Maze.checkTimeout = function(id) {
 Maze.showCode = function() {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   // Strip out serial numbers.
-  code = code.replace(/"\d+"/g, '');
+  code = code.replace(/'\d+'/g, '');
   code = code.replace(/\s*Maze\.checkTimeout\(\);/g, '');
   alert(code);
 };

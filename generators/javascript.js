@@ -98,6 +98,14 @@ Blockly.JavaScript.ORDER_COMMA = 17;         // ,
 Blockly.JavaScript.ORDER_NONE = 99;          // (...)
 
 /**
+ * Arbitrary code to inject into locations that risk causing infinite loops.
+ * Any instances of '%1' will be replaced by the block ID that failed.
+ * E.g. '  checkTimeout(%1);\n'
+ * @type ?string
+ */
+Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+
+/**
  * Initialise the database of variable names.
  */
 Blockly.JavaScript.init = function() {

@@ -44,6 +44,10 @@ Blockly.Python.procedures_defreturn = function() {
   var funcName = Blockly.Python.variableDB_.getName(this.getTitleValue('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Python.statementToCode(this, 'STACK');
+  if (Blockly.Python.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '"' + this.id + '"') + branch;
+  }
   var returnValue = Blockly.Python.valueToCode(this, 'RETURN',
       Blockly.Python.ORDER_NONE) || '';
   if (returnValue) {

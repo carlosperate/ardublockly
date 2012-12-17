@@ -51,14 +51,18 @@ Blockly.Python.controls_whileUntil = function() {
   var argument0 = Blockly.Python.valueToCode(this, 'BOOL',
       until ? Blockly.Python.ORDER_LOGICAL_NOT :
       Blockly.Python.ORDER_NONE) || 'False';
-  var branch0 = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  if (Blockly.Python.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '"' + this.id + '"') + branch;
+  }
   if (this.getTitleValue('MODE') == 'UNTIL') {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }
     argument0 = 'not ' + argument0;
   }
-  return 'while ' + argument0 + ':\n' + branch0;
+  return 'while ' + argument0 + ':\n' + branch;
 };
 
 Blockly.Python.controls_for = function() {
@@ -69,7 +73,11 @@ Blockly.Python.controls_for = function() {
       Blockly.Python.ORDER_NONE) || '0';
   var argument1 = Blockly.Python.valueToCode(this, 'TO',
       Blockly.Python.ORDER_NONE) || '0';
-  var branch0 = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  if (Blockly.Python.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '"' + this.id + '"') + branch;
+  }
 
   var code = '';
   var range;
@@ -112,7 +120,7 @@ Blockly.Python.controls_for = function() {
         'range(' + startVar + ', ' + endVar + ' - 1, -1)';
   }
   code += 'for ' + variable0 + ' in ' + range + ':\n' +
-      branch0;
+      branch;
   return code;
 };
 
@@ -122,8 +130,12 @@ Blockly.Python.controls_forEach = function() {
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Python.valueToCode(this, 'LIST',
       Blockly.Python.ORDER_RELATIONAL) || '[]';
-  var branch0 = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
-  var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch0;
+  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  if (Blockly.Python.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '"' + this.id + '"') + branch;
+  }
+  var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch;
   return code;
 };
 

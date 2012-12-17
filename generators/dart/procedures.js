@@ -30,6 +30,10 @@ Blockly.Dart.procedures_defreturn = function() {
   var funcName = Blockly.Dart.variableDB_.getName(this.getTitleValue('NAME'),
       Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Dart.statementToCode(this, 'STACK');
+  if (Blockly.Dart.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Dart.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
   var returnValue = Blockly.Dart.valueToCode(this, 'RETURN',
       Blockly.Dart.ORDER_NONE) || '';
   if (returnValue) {

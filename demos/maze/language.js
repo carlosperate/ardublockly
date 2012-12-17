@@ -47,7 +47,7 @@ Blockly.Language.maze_move.DIRECTIONS =
 
 Blockly.JavaScript.maze_move = function() {
   // Generate JavaScript for moving forward or backwards.
-  return 'Maze.' + this.getTitleValue('DIR') + '("' + this.id + '");\n';
+  return 'Maze.' + this.getTitleValue('DIR') + '(\'' + this.id + '\');\n';
 };
 
 Blockly.Language.maze_turnLeft = {
@@ -91,12 +91,12 @@ Blockly.JavaScript.maze_turnLeft = function() {
   var code;
   if (dir == 'random') {
     code = 'if (Math.random() < 0.5) {\n' +
-           '  Maze.turnLeft("' + this.id + '");\n' +
+           '  Maze.turnLeft("' + this.id + '\');\n' +
            '} else {\n' +
-           '  Maze.turnRight("' + this.id + '");\n' +
+           '  Maze.turnRight(\'' + this.id + '\');\n' +
            '}\n';
   } else {
-    code = 'Maze.' + dir + '("' + this.id + '");\n';
+    code = 'Maze.' + dir + '(\'' + this.id + '\');\n';
   }
   return code;
 };
@@ -147,24 +147,12 @@ Blockly.Language.controls_forever = {
 
 Blockly.JavaScript.controls_forever = function() {
   // Generate JavaScript for do forever loop.
-  var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
-  return 'while (true) {\n' + branch0 +
-      '  Maze.checkTimeout("' + this.id + '");\n}\n';
-};
-
-Blockly.JavaScript.controls_whileUntil = function() {
-  // Do while/until loop.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL',
-      Blockly.JavaScript.ORDER_NONE) || 'false';
-  var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
-  if (this.getTitleValue('MODE') == 'UNTIL') {
-    if (!argument0.match(/^\w+$/)) {
-      argument0 = '(' + argument0 + ')';
-    }
-    argument0 = '!' + argument0;
+  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
+  if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
+    branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
   }
-  return 'while (' + argument0 + ') {\n' + branch0 +
-      '  Maze.checkTimeout("' + this.id + '");\n}\n';
+  return 'while (true) {\n' + branch + '}\n';
 };
 
 function init() {

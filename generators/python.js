@@ -74,6 +74,14 @@ Blockly.Python.ORDER_LAMBDA = 16;           // lambda
 Blockly.Python.ORDER_NONE = 99;             // (...)
 
 /**
+ * Arbitrary code to inject into locations that risk causing infinite loops.
+ * Any instances of '%1' will be replaced by the block ID that failed.
+ * E.g. '  checkTimeout(%1)\n'
+ * @type ?string
+ */
+Blockly.Python.INFINITE_LOOP_TRAP = null;
+
+/**
  * Initialise the database of variable names.
  */
 Blockly.Python.init = function() {

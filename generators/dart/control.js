@@ -49,14 +49,18 @@ Blockly.Dart.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.Dart.valueToCode(this, 'BOOL',
       Blockly.Dart.ORDER_NONE) || 'false';
-  var branch0 = Blockly.Dart.statementToCode(this, 'DO');
+  var branch = Blockly.Dart.statementToCode(this, 'DO');
+  if (Blockly.Dart.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Dart.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
   if (this.getTitleValue('MODE') == 'UNTIL') {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }
     argument0 = '!' + argument0;
   }
-  return 'while (' + argument0 + ') {\n' + branch0 + '}\n';
+  return 'while (' + argument0 + ') {\n' + branch + '}\n';
 };
 
 Blockly.Dart.controls_for = function() {
@@ -67,7 +71,11 @@ Blockly.Dart.controls_for = function() {
       Blockly.Dart.ORDER_ASSIGNMENT) || '0';
   var argument1 = Blockly.Dart.valueToCode(this, 'TO',
       Blockly.Dart.ORDER_ASSIGNMENT) || '0';
-  var branch0 = Blockly.Dart.statementToCode(this, 'DO');
+  var branch = Blockly.Dart.statementToCode(this, 'DO');
+  if (Blockly.Dart.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Dart.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
   var code;
   if (argument0.match(/^-?\d+(\.\d+)?$/) &&
       argument1.match(/^-?\d+(\.\d+)?$/)) {
@@ -76,7 +84,7 @@ Blockly.Dart.controls_for = function() {
     code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
         variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ' +
         variable0 + (up ? '++' : '--') + ') {\n' +
-        branch0 + '}\n';
+        branch + '}\n';
   } else {
     code = '';
     // Cache non-trivial values to variables to prevent repeated look-ups.
@@ -98,7 +106,7 @@ Blockly.Dart.controls_for = function() {
         variable0 + ' >= ' + endVar + ';\n' +
         '    ' + variable0 + ' += (' + startVar + ' <= ' + endVar +
             ') ? 1 : -1) {\n' +
-        branch0 + '}\n';
+        branch + '}\n';
   }
   return code;
 };
@@ -109,9 +117,13 @@ Blockly.Dart.controls_forEach = function() {
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Dart.valueToCode(this, 'LIST',
       Blockly.Dart.ORDER_ASSIGNMENT) || '[]';
-  var branch0 = Blockly.Dart.statementToCode(this, 'DO');
+  var branch = Blockly.Dart.statementToCode(this, 'DO');
+  if (Blockly.Dart.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Dart.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
   var code = 'for (var ' + variable0 + ' in  ' + argument0 + ') {\n' +
-      branch0 + '}\n';
+      branch + '}\n';
   return code;
 };
 

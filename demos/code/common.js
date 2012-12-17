@@ -44,7 +44,7 @@ function tabClick(id) {
       xmlDom = Blockly.Xml.textToDom(xmlText);
     } catch (e) {
       var q =
-          window.confirm(BAD_XML.replace('%1', e));
+          window.confirm(MSG_BAD_XML.replace('%1', e));
       if (!q) {
         // Leave the user on the XML tab.
         return;
@@ -107,6 +107,10 @@ function init(blockly) {
 
   window.Blockly = blockly;
 
+  Blockly.JavaScript.RESERVED_WORDS_ +=
+    'code,timeouts,' +  // Local variables in execution evironment (runJS).
+    'checkTimeout,';  // Infinite loop detection function.
+
   // Make the 'Blocks' tab line up with the toolbox.
   if (Blockly.Toolbox) {
     window.setTimeout(function() {
@@ -139,10 +143,18 @@ function init(blockly) {
  * Just a quick and dirty eval.  No checks for infinite loops, etc.
  */
 function runJS() {
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  checkTimeout();\n';
+  var timeouts = 0;
+  var checkTimeout = function() {
+    if (timeouts++ > 10000) {
+      throw MSG_TIMEOUT;
+    }
+  };
   var code = Blockly.Generator.workspaceToCode('JavaScript');
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
   try {
     eval(code);
   } catch (e) {
-    alert(BAD_CODE.replace('%1', e));
+    alert(MSG_BAD_CODE.replace('%1', e));
   }
 }
