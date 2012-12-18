@@ -128,6 +128,7 @@ Blockly.Generator.allNestedComments = function(block) {
  */
 Blockly.CodeGenerator = function(name) {
   this.name_ = name;
+  this.RESERVED_WORDS_ = '';
 };
 
 /**
@@ -210,4 +211,13 @@ Blockly.CodeGenerator.prototype.statementToCode = function(block, name) {
     code = Blockly.Generator.prefixLines(/** @type {string} */ (code), '  ');
   }
   return code;
+};
+
+/**
+ * Add one or more words to the list of reserved words for this language. 
+ * @param {string} Comma-separated list of words to add to the list.
+ *     No spaces.  Duplicates are ok.
+ */
+Blockly.CodeGenerator.prototype.addReservedWords = function(words) {
+  this.RESERVED_WORDS_ += words + ',';
 };
