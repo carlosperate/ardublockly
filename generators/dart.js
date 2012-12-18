@@ -32,16 +32,12 @@ Blockly.Dart = Blockly.Generator.get('Dart');
  * accidentally clobbering a built-in object or function.
  * @private
  */
-if (!Blockly.Dart.RESERVED_WORDS_) {
-  Blockly.Dart.RESERVED_WORDS_ = '';
-}
-
-Blockly.Dart.RESERVED_WORDS_ +=
+Blockly.Dart.addReservedWords(
     // http://www.dartlang.org/docs/spec/latest/dart-language-specification.pdf
     // Section 15.1.1
     'assert,break,case,catch,class,const,continue,default,do,else,extends,false,final,finally,for,if,in,is,new,null,return,super,switch,this,throw,true,try,var,void,while,' +
     // http://api.dartlang.org/dart_core.html
-    'AbstractClassInstantiationError,ArgumentError,AssertionError,bool,CastError,Collection,Comparable,Completer,Date,double,Duration,Error,Expando,Expect,FallThroughError,Function,Future,Futures,Hashable,HashSet,int,Iterable,Iterator,Match,NoSuchMethodError,num,Object,Options,Pattern,Queue,RuntimeError,Set,Stopwatch,StringBuffer,Strings,Type,TypeError,HashMap,LinkedHashMap,List,Map,RegExp,String,Comparator,ClosureArgumentMismatchException,EmptyQueueException,Exception,ExpectException,FormatException,FutureAlreadyCompleteException,FutureNotCompleteException,IllegalAccessException,IllegalArgumentException,IllegalJSRegExpException,IndexOutOfRangeException,IntegerDivisionByZeroException,NoMoreElementsException,NotImplementedException,NullPointerException,ObjectNotClosureException,OutOfMemoryException,StackOverflowException,UnsupportedOperationException,WrongArgumentCountException,';
+    'AbstractClassInstantiationError,ArgumentError,AssertionError,bool,CastError,Collection,Comparable,Completer,Date,double,Duration,Error,Expando,Expect,FallThroughError,Function,Future,Futures,Hashable,HashSet,int,Iterable,Iterator,Match,NoSuchMethodError,num,Object,Options,Pattern,Queue,RuntimeError,Set,Stopwatch,StringBuffer,Strings,Type,TypeError,HashMap,LinkedHashMap,List,Map,RegExp,String,Comparator,ClosureArgumentMismatchException,EmptyQueueException,Exception,ExpectException,FormatException,FutureAlreadyCompleteException,FutureNotCompleteException,IllegalAccessException,IllegalArgumentException,IllegalJSRegExpException,IndexOutOfRangeException,IntegerDivisionByZeroException,NoMoreElementsException,NotImplementedException,NullPointerException,ObjectNotClosureException,OutOfMemoryException,StackOverflowException,UnsupportedOperationException,WrongArgumentCountException');
 
 /**
  * Order of operation ENUMs.

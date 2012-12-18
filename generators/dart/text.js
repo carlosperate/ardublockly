@@ -25,10 +25,7 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
-if (!Blockly.Dart.RESERVED_WORDS_) {
-  Blockly.Dart.RESERVED_WORDS_ = '';
-}
-Blockly.Dart.RESERVED_WORDS_ += 'Html,Math,';
+Blockly.Dart.addReservedWords('Html,Math');
 
 Blockly.Dart.text = function() {
   // Text value.

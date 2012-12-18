@@ -51,7 +51,7 @@
       border: 1px solid #ddd !important;
       box-shadow: none;
     }
-    #buttonDiv, #randomizeCodeLinkDiv {
+    #buttonDiv, #toolbarDiv {
       text-align: center;
       padding-top: 2em;
     }
@@ -76,10 +76,12 @@
           <button id="runButton" class="launch" onclick="Maze.runButtonClick();">
             Run Program
           </button>
-          <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none">&nbsp; Reset &nbsp;</button>
+          <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none">
+            &nbsp; Reset &nbsp;
+          </button>
         </div>
 
-        <div id="randomizeCodeLinkDiv">
+        <div id="toolbarDiv">
           <button title="Randomize maze" onclick="Maze.randomize();">
             <img src='randomize.png' height=21 width=21>
           </button>

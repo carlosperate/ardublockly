@@ -25,10 +25,7 @@
 
 Blockly.Python = Blockly.Generator.get('Python');
 
-if (!Blockly.Python.RESERVED_WORDS_) {
-  Blockly.Python.RESERVED_WORDS_ = '';
-}
-Blockly.Python.RESERVED_WORDS_ += 'math,random,';
+Blockly.Python.addReservedWords('math,random');
 
 Blockly.Python.math_number = function() {
   // Numeric value.

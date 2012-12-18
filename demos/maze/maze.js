@@ -346,7 +346,7 @@ Maze.reset = function() {
 Maze.runButtonClick = function() {
   document.getElementById('runButton').style.display = 'none';
   document.getElementById('resetButton').style.display = 'inline';
-  document.getElementById('randomizeCodeLinkDiv').style.visibility = 'hidden';
+  document.getElementById('toolbarDiv').style.visibility = 'hidden';
   Blockly.mainWorkspace.traceOn(true);
   Maze.execute();
 };
@@ -357,7 +357,7 @@ Maze.runButtonClick = function() {
 Maze.resetButtonClick = function() {
   document.getElementById('runButton').style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
-  document.getElementById('randomizeCodeLinkDiv').style.visibility = 'visible';
+  document.getElementById('toolbarDiv').style.visibility = 'visible';
   Blockly.mainWorkspace.traceOn(false);
   Maze.reset();
 };
@@ -438,45 +438,52 @@ Maze.execute = function() {
 Maze.animate = function() {
   // All tasks should be complete now.  Clean up the PID list.
   Maze.pidList = [];
-  var action;
-  do {
-    var pair = Maze.path.shift();
-    if (!pair) {
-      return;
-    }
-    action = pair[0];
-    Blockly.mainWorkspace.highlightBlock(pair[1]);
-  } while (action == 'look');
 
+  var action = Maze.path.shift();
+  if (!action) {
+    return;
+  }
+  Blockly.mainWorkspace.highlightBlock(action[1]);
 
-  if (action == 'north') {
-    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
-                  [Maze.pegmanX, Maze.pegmanY - 1, Maze.pegmanD * 4]);
-    Maze.pegmanY--;
-  } else if (action == 'east') {
-    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
-                  [Maze.pegmanX + 1, Maze.pegmanY, Maze.pegmanD * 4]);
-    Maze.pegmanX++;
-  } else if (action == 'south') {
-    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
-                  [Maze.pegmanX, Maze.pegmanY + 1, Maze.pegmanD * 4]);
-    Maze.pegmanY++;
-  } else if (action == 'west') {
-    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
-                  [Maze.pegmanX - 1, Maze.pegmanY, Maze.pegmanD * 4]);
-    Maze.pegmanX--;
-  } else if (action.substring(0, 4) == 'fail') {
-    Maze.scheduleFail(action.substring(5) == 'forward');
-  } else if (action == 'left') {
-    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
-                  [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 - 4]);
-    Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD - 1);
-  } else if (action == 'right') {
-    Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
-                  [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 + 4]);
-    Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD + 1);
-  } else if (action == 'finish') {
-    Maze.scheduleFinish();
+  switch (action[0]) {
+    case 'north':
+      Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                    [Maze.pegmanX, Maze.pegmanY - 1, Maze.pegmanD * 4]);
+      Maze.pegmanY--;
+      break;
+    case 'east':
+      Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                    [Maze.pegmanX + 1, Maze.pegmanY, Maze.pegmanD * 4]);
+      Maze.pegmanX++;
+      break;
+    case 'south':
+      Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                    [Maze.pegmanX, Maze.pegmanY + 1, Maze.pegmanD * 4]);
+      Maze.pegmanY++;
+      break;
+    case 'west':
+      Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                    [Maze.pegmanX - 1, Maze.pegmanY, Maze.pegmanD * 4]);
+      Maze.pegmanX--;
+      break;
+    case 'fail_forward':
+      Maze.scheduleFail(true);
+      break;
+    case 'fail_backward':
+      Maze.scheduleFail(false);
+      break;
+    case 'left':
+      Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                    [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 - 4]);
+      Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD - 1);
+      break;
+    case 'right':
+      Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                    [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 + 4]);
+      Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD + 1);
+      break;
+    case 'finish':
+      Maze.scheduleFinish();
   }
 
   Maze.pidList.push(window.setTimeout(Maze.animate, Maze.STEP_SPEED * 5));

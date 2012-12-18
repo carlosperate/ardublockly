@@ -107,9 +107,9 @@ function init(blockly) {
 
   window.Blockly = blockly;
 
-  Blockly.JavaScript.RESERVED_WORDS_ +=
-    'code,timeouts,' +  // Local variables in execution evironment (runJS).
-    'checkTimeout,';  // Infinite loop detection function.
+  // Add to reserved word list: Local variables in execution evironment (runJS)
+  // and the infinite loop detection function.
+  Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
 
   // Make the 'Blocks' tab line up with the toolbox.
   if (Blockly.Toolbox) {

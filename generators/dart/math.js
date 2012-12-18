@@ -25,10 +25,7 @@
 
 Blockly.Dart = Blockly.Generator.get('Dart');
 
-if (!Blockly.Dart.RESERVED_WORDS_) {
-  Blockly.Dart.RESERVED_WORDS_ = '';
-}
-Blockly.Dart.RESERVED_WORDS_ += 'Math,';
+Blockly.Dart.addReservedWords('Math');
 
 Blockly.Dart.math_number = function() {
   // Numeric value.
