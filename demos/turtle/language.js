@@ -53,7 +53,7 @@ Blockly.JavaScript.draw_move = function() {
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
   return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', ' + this.id + ');\n';
+      '(' + value + ', \'' + this.id + '\');\n';
 };
 
 Blockly.Language.draw_turn = {
@@ -82,7 +82,7 @@ Blockly.JavaScript.draw_turn = function() {
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
   return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', ' + this.id + ');\n';
+      '(' + value + ', \'' + this.id + '\');\n';
 };
 
 Blockly.Language.draw_pen = {
@@ -104,7 +104,7 @@ Blockly.Language.draw_pen.STATE = [['up', 'penUp'], ['down', 'penDown']];
 
 Blockly.JavaScript.draw_pen = function() {
   // Generate JavaScript for pen up/down.
-  return 'Turtle.' + this.getTitleValue('PEN') + '(' + this.id + ');\n';
+  return 'Turtle.' + this.getTitleValue('PEN') + '(\'' + this.id + '\');\n';
 };
 
 Blockly.Language.draw_colour = {
@@ -124,8 +124,8 @@ Blockly.Language.draw_colour = {
 
 Blockly.JavaScript.draw_colour = function() {
   // Generate JavaScript for setting the colour.
-  return 'Turtle.penColour(\'' + this.getTitleValue('COLOUR') + '\', ' +
-      this.id + ');\n';
+  return 'Turtle.penColour(\'' + this.getTitleValue('COLOUR') + '\', \'' +
+      this.id + '\');\n';
 };
 
 Blockly.Language.draw_width = {
@@ -147,7 +147,7 @@ Blockly.JavaScript.draw_width = function() {
   // Generate JavaScript for setting the width.
   var value = Blockly.JavaScript.valueToCode(this, 'WIDTH',
       Blockly.JavaScript.ORDER_NONE) || '1';
-  return 'Turtle.penWidth(' + value + ', ' + this.id + ');\n';
+  return 'Turtle.penWidth(' + value + ', \'' + this.id + '\');\n';
 };
 
 

@@ -180,15 +180,21 @@ Turtle.animate = function() {
 
   switch (tuple[0]) {
     case 'FD':
-      var distance = tuple[1];
       if (Turtle.penDownValue) {
         Turtle.ctx.beginPath();
         Turtle.ctx.moveTo(Turtle.x, Turtle.y);
       }
-      Turtle.x += distance * Math.sin(2 * Math.PI * Turtle.heading / 360);
-      Turtle.y -= distance * Math.cos(2 * Math.PI * Turtle.heading / 360);
+      var distance = tuple[1];
+      if (distance) {
+        Turtle.x += distance * Math.sin(2 * Math.PI * Turtle.heading / 360);
+        Turtle.y -= distance * Math.cos(2 * Math.PI * Turtle.heading / 360);
+        var bump = 0;
+      } else {
+        // WebKit (unlike Gecko) draws nothing for a zero-length line.
+        var bump = 0.1;
+      }
       if (Turtle.penDownValue) {
-        Turtle.ctx.lineTo(Turtle.x, Turtle.y);
+        Turtle.ctx.lineTo(Turtle.x, Turtle.y + bump);
         Turtle.ctx.stroke();
       }
       break;
