@@ -1,0 +1,251 @@
+/**
+ * Blockly Demo: Turtle Graphics
+ *
+ * Copyright 2012 Google Inc.
+ * http://blockly.googlecode.com/
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @fileoverview Demonstration of Blockly: Turtle Graphics.
+ * @author fraser@google.com (Neil Fraser)
+ */
+'use strict';
+
+/**
+ * Create a namespace for the application.
+ */
+var Turtle = {};
+
+Turtle.HEIGHT = 400;
+Turtle.WIDTH = 400;
+
+/**
+ * Milliseconds between each animation frame.
+ */
+Turtle.STEP_SPEED = 0;
+
+/**
+ * PID of animation task currently executing.
+ */
+Turtle.pid = 0;
+
+/**
+ * Initialize Blockly and the turtle.  Called on page load.
+ * @param {!Blockly} blockly Instance of Blockly from iframe.
+ */
+Turtle.init = function(blockly) {
+  window.Blockly = blockly;
+
+  // Add to reserved word list: API, local variables in execution evironment
+  // (execute) and the infinite loop detection function.
+  Blockly.JavaScript.addReservedWords('Turtle,code,timeouts,checkTimeout');
+
+  window.onbeforeunload = function() {
+    if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
+      return 'Leaving this page will result in the loss of your work.';
+    }
+    return null;
+  };
+
+  if (!('BlocklyStorage' in window)) {
+    document.getElementById('linkButton').className = 'disabled';
+  }
+
+  // Load the editor with a starting block.
+  var xml = Blockly.Xml.textToDom(
+      '<xml>' +
+      '  <block type="draw_move" x="85" y="100">' +
+      '    <value name="VALUE">' +
+      '      <block type="math_number">' +
+      '        <title name="NUM">10</title>' +
+      '      </block>' +
+      '    </value>' +
+      '  </block>' +
+      '</xml>');
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+
+  var c = document.getElementById('display');
+  Turtle.ctx = c.getContext('2d');
+  Turtle.reset();
+};
+
+/**
+ * Reset the maze to the start position and kill any pending animation tasks.
+ */
+Turtle.reset = function() {
+  // Starting location and heading of the turtle.
+  Turtle.x = Turtle.HEIGHT / 2;
+  Turtle.y = Turtle.WIDTH / 2;
+  Turtle.heading = 0;
+  Turtle.penDownValue = true;
+
+  // Clear the display.
+  Turtle.ctx.clearRect(0, 0, Turtle.WIDTH, Turtle.HEIGHT);
+  Turtle.ctx.strokeStyle = '#000000';
+  Turtle.ctx.lineWidth = 1;
+  Turtle.ctx.lineCap = 'round';
+
+  // Kill any task.
+  if (Turtle.pid) {
+    window.clearTimeout(Turtle.pid);
+  }
+  Turtle.pid = 0;
+};
+
+/**
+ * Click the run button.  Start the program.
+ */
+Turtle.runButtonClick = function() {
+  document.getElementById('runButton').style.display = 'none';
+  document.getElementById('resetButton').style.display = 'inline';
+  Blockly.mainWorkspace.traceOn(true);
+  Turtle.execute();
+};
+
+/**
+ * Click the reset button.  Reset the Turtle.
+ */
+Turtle.resetButtonClick = function() {
+  document.getElementById('runButton').style.display = 'inline';
+  document.getElementById('resetButton').style.display = 'none';
+  Blockly.mainWorkspace.traceOn(false);
+  Turtle.reset();
+};
+
+
+/**
+ * Execute the user's code.  Heaven help us...
+ */
+Turtle.execute = function() {
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  checkTimeout();\n';
+  var timeouts = 0;
+  var checkTimeout = function() {
+    if (timeouts++ > 100000) {
+      throw null;
+    }
+  };
+  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
+  Turtle.path = [];
+  try {
+    eval(code);
+  } catch (e) {
+    // Null is thrown for infinite loop.
+    // Otherwise, abnormal termination is a user error.
+    if (e !== null) {
+      alert(e);
+    }
+  }
+
+  // Turtle.path now contains a transcript of all the user's actions.
+  // Reset the graphic and animate the transcript.
+  Turtle.reset();
+  Turtle.pid = window.setTimeout(Turtle.animate, 100);
+};
+
+/**
+ * Show the user's code in raw JavaScript.
+ */
+Turtle.showCode = function() {
+  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  // Strip out serial numbers.
+  code = code.replace(/(,\s*)?'\d+'\)/g, ')');
+  alert(code);
+};
+
+/**
+ * Iterate through the recorded path and animate the turtle's actions.
+ */
+Turtle.animate = function() {
+  // All tasks should be complete now.  Clean up the PID list.
+  Turtle.pid = 0;
+
+  var tuple = Turtle.path.shift();
+  if (!tuple) {
+    return;
+  }
+  Blockly.mainWorkspace.highlightBlock(tuple.pop());
+
+  switch (tuple[0]) {
+    case 'FD':
+      var distance = tuple[1];
+      if (Turtle.penDownValue) {
+        Turtle.ctx.beginPath();
+        Turtle.ctx.moveTo(Turtle.x, Turtle.y);
+      }
+      Turtle.x += distance * Math.sin(2 * Math.PI * Turtle.heading / 360);
+      Turtle.y -= distance * Math.cos(2 * Math.PI * Turtle.heading / 360);
+      if (Turtle.penDownValue) {
+        Turtle.ctx.lineTo(Turtle.x, Turtle.y);
+        Turtle.ctx.stroke();
+      }
+      break;
+    case 'RT':
+      Turtle.heading += tuple[1];
+      Turtle.heading %= 360;
+      if (Turtle.heading < 0) {
+        Turtle.heading += 360;
+      }
+      break;
+    case 'PU':
+      Turtle.penDownValue = false;
+      break;
+    case 'PD':
+      Turtle.penDownValue = true;
+      break;
+    case 'PW':
+      Turtle.ctx.lineWidth = tuple[1];
+      break;
+    case 'PC':
+      Turtle.ctx.strokeStyle = tuple[1];
+      break;
+  }
+
+  Turtle.pid = window.setTimeout(Turtle.animate, Turtle.STEP_SPEED);
+};
+
+// Turtle API.
+
+Turtle.moveForward = function(distance, id) {
+  Turtle.path.push(['FD', distance, id]);
+};
+
+Turtle.moveBackward = function(distance, id) {
+  Turtle.path.push(['FD', -distance, id]);
+};
+
+Turtle.turnRight = function(angle, id) {
+  Turtle.path.push(['RT', angle, id]);
+};
+
+Turtle.turnLeft = function(angle, id) {
+  Turtle.path.push(['RT', -angle, id]);
+};
+
+Turtle.penUp = function(id) {
+  Turtle.path.push(['PU', id]);
+};
+
+Turtle.penDown = function(id) {
+  Turtle.path.push(['PD', id]);
+};
+
+Turtle.penWidth = function(width, id) {
+  Turtle.path.push(['PW', width, id]);
+};
+
+Turtle.penColour = function(colour, id) {
+  Turtle.path.push(['PC', colour, id]);
+};
