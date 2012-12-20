@@ -32,11 +32,6 @@ Turtle.HEIGHT = 400;
 Turtle.WIDTH = 400;
 
 /**
- * Milliseconds between each animation frame.
- */
-Turtle.STEP_SPEED = 0;
-
-/**
  * PID of animation task currently executing.
  */
 Turtle.pid = 0;
@@ -62,6 +57,10 @@ Turtle.init = function(blockly) {
   if (!('BlocklyStorage' in window)) {
     document.getElementById('linkButton').className = 'disabled';
   }
+
+  // Initialize the slider.
+  Turtle.speedSlider =
+      new Slider(10, 35, 130, document.getElementById('slider'));
 
   // Load the editor with a starting block.
   var xml = Blockly.Xml.textToDom(
@@ -219,7 +218,9 @@ Turtle.animate = function() {
       break;
   }
 
-  Turtle.pid = window.setTimeout(Turtle.animate, Turtle.STEP_SPEED);
+  // Scale the speed non-linearly, to give better precision at the fast end.
+  var stepSpeed = 1000 * Math.pow(Turtle.speedSlider.getValue(), 2);
+  Turtle.pid = window.setTimeout(Turtle.animate, stepSpeed);
 };
 
 // Turtle API.
