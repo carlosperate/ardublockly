@@ -23,6 +23,16 @@
  */
 'use strict';
 
+if ('BlocklyStorage' in window) {
+  BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
+  BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+  BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+  BlocklyStorage.HASH_ERROR =
+      'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+  BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+      'Perhaps it was created with a different version of Blockly?\nXML: ';
+}
+
 /**
  * Create a namespace for the application.
  */
@@ -62,18 +72,22 @@ Turtle.init = function(blockly) {
   Turtle.speedSlider =
       new Slider(10, 35, 130, document.getElementById('slider'));
 
-  // Load the editor with a starting block.
-  var xml = Blockly.Xml.textToDom(
-      '<xml>' +
-      '  <block type="draw_move" x="85" y="100">' +
-      '    <value name="VALUE">' +
-      '      <block type="math_number">' +
-      '        <title name="NUM">10</title>' +
-      '      </block>' +
-      '    </value>' +
-      '  </block>' +
-      '</xml>');
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  // An href with #key trigers an AJAX call to retrieve saved blocks.
+  if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+  } else { // Load the editor with starting blocks.
+    var xml = Blockly.Xml.textToDom(
+        '<xml>' +
+        '  <block type="draw_move" x="85" y="100">' +
+        '    <value name="VALUE">' +
+        '      <block type="math_number">' +
+        '        <title name="NUM">10</title>' +
+        '      </block>' +
+        '    </value>' +
+        '  </block>' +
+        '</xml>');
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  }
 
   var c = document.getElementById('display');
   Turtle.ctx = c.getContext('2d');
