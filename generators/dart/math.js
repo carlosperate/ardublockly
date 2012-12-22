@@ -263,7 +263,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('  List localList = myList.filter((a) => a is num);');
         func.push('  if (localList.isEmpty) return null;');
         func.push('  localList.sort((a, b) => (a - b));');
-        func.push('  int index = (localList.length / 2).toInt();');
+        func.push('  int index = localList.length ~/ 2;');
         func.push('  if (localList.length % 2 == 1) {');
         func.push('    return localList[index];');
         func.push('  } else {');
@@ -294,7 +294,7 @@ Blockly.Dart.math_on_list = function() {
         func.push('    bool found = false;');
         func.push('    int thisCount;');
         func.push('    for (int j = 0; j < counts.length; j++) {');
-        func.push('      if (counts[j][0] === value) {');
+        func.push('      if (counts[j][0] == value) {');
         func.push('        thisCount = ++counts[j][1];');
         func.push('        found = true;');
         func.push('        break;');
@@ -351,7 +351,7 @@ Blockly.Dart.math_on_list = function() {
             'math_random_item', Blockly.Generator.NAME_TYPE);
         Blockly.Dart.math_on_list.math_random_item = functionName;
         var func = [];
-        func.push('Dynamic ' + functionName + '(List myList) {');
+        func.push('dynamic ' + functionName + '(List myList) {');
         func.push('  int x = new Math.Random().nextInt(myList.length);');
         func.push('  return myList[x];');
         func.push('}');

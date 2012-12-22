@@ -160,7 +160,7 @@ Blockly.Dart.text_changeCase = function() {
       Blockly.Dart.text_changeCase.toTitleCase = functionName;
       var func = [];
       func.push('String ' + functionName + '(str) {');
-      func.push('  RegExp exp = const RegExp(r\'\\b\');');
+      func.push('  RegExp exp = new RegExp(r\'\\b\');');
       func.push('  List<String> list = str.split(exp);');
       func.push('  final title = new StringBuffer();');
       func.push('  for (String part in list) {');

@@ -32,7 +32,7 @@ Blockly.Language.draw_move = {
   category: 'Draw',
   helpUrl: '',
   init: function() {
-    this.setColour(20);
+    this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck(Number)
         .appendTitle('move')
@@ -61,7 +61,7 @@ Blockly.Language.draw_turn = {
   category: 'Draw',
   helpUrl: '',
   init: function() {
-    this.setColour(20);
+    this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck(Number)
         .appendTitle('turn')
@@ -90,7 +90,7 @@ Blockly.Language.draw_pen = {
   category: 'Draw',
   helpUrl: '',
   init: function() {
-    this.setColour(20);
+    this.setColour(160);
     this.appendDummyInput()
         .appendTitle('pen')
         .appendTitle(new Blockly.FieldDropdown(this.STATE), 'PEN');
@@ -112,7 +112,7 @@ Blockly.Language.draw_colour = {
   category: 'Draw',
   helpUrl: '',
   init: function() {
-    this.setColour(20);
+    this.setColour(160);
     this.appendDummyInput()
         .appendTitle('set colour')
         .appendTitle(new Blockly.FieldColour('#ffcc33'), 'COLOUR');
@@ -133,7 +133,7 @@ Blockly.Language.draw_width = {
   category: 'Draw',
   helpUrl: '',
   init: function() {
-    this.setColour(20);
+    this.setColour(160);
     this.appendValueInput('WIDTH')
         .setCheck(Number)
         .appendTitle('set width')
