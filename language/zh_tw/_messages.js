@@ -53,7 +53,26 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = '將所有 "%1" 變量重新命名為:';
 Blockly.MSG_VARIABLE_CATEGORY = '變量';
 Blockly.MSG_PROCEDURE_CATEGORY = '流程';
 
-// Control Blocks
+// Colour Blocks.
+Blockly.LANG_CATEGORY_COLOUR = 'Colour';
+Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
+Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Choose a colour form the palette.';
+
+Blockly.LANG_COLOUR_RGB_HELPURL = 'http://en.wikipedia.org/wiki/RGB_color_model';
+Blockly.LANG_COLOUR_RGB_TITLE = 'colour with';
+Blockly.LANG_COLOUR_RGB_RED = 'red';
+Blockly.LANG_COLOUR_RGB_GREEN = 'green';
+Blockly.LANG_COLOUR_RGB_BLUE = 'blue';
+Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Create a colour with the specified amount of red, green,\n' +
+    'and blue.  All values must be between 0.0 and 1.0.';
+
+Blockly.LANG_COLOUR_BLEND_TITLE = 'blend';
+Blockly.LANG_COLOUR_BLEND_COLOUR1 = 'colour 1';
+Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'colour 2';
+Blockly.LANG_COLOUR_BLEND_RATIO = 'ratio';
+Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Blends two colours together with a given ratio (0.0 - 1.0).';
+
+// Control Blocks.
 Blockly.LANG_CATEGORY_CONTROLS = '控制';
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
