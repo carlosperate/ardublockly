@@ -58,7 +58,7 @@ Turtle.init = function(blockly) {
   Blockly.JavaScript.addReservedWords('Turtle,code,timeouts,checkTimeout');
 
   window.onbeforeunload = function() {
-    if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
+    if (Blockly.mainWorkspace.getAllBlocks().length > 1) {
       return 'Leaving this page will result in the loss of your work.';
     }
     return null;
@@ -78,13 +78,7 @@ Turtle.init = function(blockly) {
   } else { // Load the editor with starting blocks.
     var xml = Blockly.Xml.textToDom(
         '<xml>' +
-        '  <block type="draw_move" x="85" y="100">' +
-        '    <value name="VALUE">' +
-        '      <block type="math_number">' +
-        '        <title name="NUM">10</title>' +
-        '      </block>' +
-        '    </value>' +
-        '  </block>' +
+        '  <block type="draw_move_int" x="85" y="100"></block>' +
         '</xml>');
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
@@ -264,7 +258,7 @@ Turtle.penDown = function(id) {
 };
 
 Turtle.penWidth = function(width, id) {
-  Turtle.path.push(['PW', width, id]);
+  Turtle.path.push(['PW', Math.max(width, 0), id]);
 };
 
 Turtle.penColour = function(colour, id) {
