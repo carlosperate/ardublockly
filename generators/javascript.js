@@ -120,7 +120,7 @@ Blockly.JavaScript.init = function() {
     var variables = Blockly.Variables.allVariables();
     for (var x = 0; x < variables.length; x++) {
       defvars[x] = 'var ' +
-          Blockly.JavaScript.variableDB_.getDistinctName(variables[x],
+          Blockly.JavaScript.variableDB_.getName(variables[x],
           Blockly.Variables.NAME_TYPE) + ';';
     }
     Blockly.JavaScript.definitions_['variables'] = defvars.join('\n');

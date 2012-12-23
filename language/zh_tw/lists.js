@@ -30,7 +30,6 @@ Blockly.Language.lists_getIndex = {
   init: function() {
     this.setColour(210);
     this.setOutput(true, null);
-    //this.appendTitle(Blockly.LANG_LISTS_GET_INDEX_TITLE);
     this.appendValueInput('VALUE')
         .setCheck(Array)
         .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST);
@@ -48,7 +47,6 @@ Blockly.Language.lists_setIndex = {
   helpUrl: Blockly.LANG_LISTS_SET_INDEX_HELPURL,
   init: function() {
     this.setColour(210);
-    //this.appendTitle(Blockly.LANG_LISTS_SET_INDEX_TITLE);
     this.appendValueInput('LIST')
         .setCheck(Array)
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST);

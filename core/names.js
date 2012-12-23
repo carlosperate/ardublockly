@@ -77,9 +77,10 @@ Blockly.Names.prototype.getName = function(name, type) {
   var normalized = Blockly.Names.PREFIX_ + name.toLowerCase() + 'X' + type;
   if (normalized in this.db_) {
     return this.db_[normalized];
-  } else {
-    return this.getDistinctName(name, type);
   }
+  var safeName = this.getDistinctName(name, type);
+  this.db_[normalized] = safeName;
+  return safeName;
 };
 
 /**
@@ -101,7 +102,6 @@ Blockly.Names.prototype.getDistinctName = function(name, type) {
     i = i ? i + 1 : 2;
   }
   safeName += i;
-  this.db_[Blockly.Names.PREFIX_ + name.toLowerCase() + 'X' + type] = safeName;
   this.dbReverse_[Blockly.Names.PREFIX_ + safeName] = true;
   return safeName;
 };

@@ -45,6 +45,23 @@ Blockly.Dart.controls_if = function() {
   return code + '\n';
 };
 
+Blockly.Dart.controls_repeat = function() {
+  // Repeat n times.
+  var repeats = Number(this.getTitleValue('TIMES'));
+  var branch = Blockly.Dart.statementToCode(this, 'DO');
+  if (Blockly.Dart.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Dart.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
+  var loopVar = Blockly.Dart.variableDB_.getDistinctName(
+      'count', Blockly.Variables.NAME_TYPE);
+  var code = 'for (' + loopVar + ' = 0; ' +
+      loopVar + ' < ' + repeats + '; ' +
+      loopVar + '++) {\n' +
+      branch + '}\n';
+  return code;
+};
+
 Blockly.Dart.controls_whileUntil = function() {
   // Do while/until loop.
   var argument0 = Blockly.Dart.valueToCode(this, 'BOOL',

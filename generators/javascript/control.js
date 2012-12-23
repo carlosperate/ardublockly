@@ -45,6 +45,23 @@ Blockly.JavaScript.controls_if = function() {
   return code + '\n';
 };
 
+Blockly.JavaScript.controls_repeat = function() {
+  // Repeat n times.
+  var repeats = Number(this.getTitleValue('TIMES'));
+  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
+  if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
+    branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
+  var loopVar = Blockly.JavaScript.variableDB_.getDistinctName(
+      'count', Blockly.Variables.NAME_TYPE);
+  var code = 'for (' + loopVar + ' = 0; ' +
+      loopVar + ' < ' + repeats + '; ' +
+      loopVar + '++) {\n' +
+      branch + '}\n';
+  return code;
+};
+
 Blockly.JavaScript.controls_whileUntil = function() {
   // Do while/until loop.
   var until = this.getTitleValue('MODE') == 'UNTIL';

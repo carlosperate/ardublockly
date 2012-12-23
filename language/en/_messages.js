@@ -98,6 +98,12 @@ Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Add a condition to the if block.';
 Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'else';
 Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Add a final, catch-all condition to the if block.';
 
+Blockly.LANG_CONTROLS_REPEAT_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
+Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT = 'repeat';
+Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES = 'times';
+Blockly.LANG_CONTROLS_REPEAT_INPUT_DO = 'do';
+Blockly.LANG_CONTROLS_REPEAT_TOOLTIP = 'Do some statements several times.';
+
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT = 'repeat';
 Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = 'do';
