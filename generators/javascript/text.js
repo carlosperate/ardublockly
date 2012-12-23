@@ -79,7 +79,7 @@ Blockly.JavaScript.text_isEmpty = function() {
   // Is the string null?
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
-  return ['!' + argument0 + '.length', Blockly.JavaScript.ORDER_LOGICAL_NOT];
+  return ['!' + argument0, Blockly.JavaScript.ORDER_LOGICAL_NOT];
 };
 
 Blockly.JavaScript.text_endString = function() {

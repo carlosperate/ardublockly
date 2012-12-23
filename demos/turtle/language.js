@@ -99,7 +99,7 @@ Blockly.Language.draw_turn_int = {
         .appendTitle('turn')
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR')
         .appendTitle('by')
-        .appendTitle(new Blockly.FieldTextInput('10',
+        .appendTitle(new Blockly.FieldTextInput('90',
             Blockly.Language.math_number.validator), 'VALUE');
     this.setPreviousStatement(true);
     this.setNextStatement(true);

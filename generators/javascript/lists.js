@@ -68,23 +68,47 @@ Blockly.JavaScript.lists_repeat = function() {
 };
 
 Blockly.JavaScript.lists_length = function() {
-  // Testing the length of a list is the same as for a string.
-  return Blockly.JavaScript.text_length.call(this);
+  // List length.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+      Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
+  return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
 };
 
 Blockly.JavaScript.lists_isEmpty = function() {
-  // Testing a list for being empty is the same as for a string.
-  return Blockly.JavaScript.text_isEmpty.call(this);
+  // Is the list empty?
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+      Blockly.JavaScript.ORDER_MEMBER) || '[]';
+  return ['!' + argument0 + '.length', Blockly.JavaScript.ORDER_LOGICAL_NOT];
 };
 
 Blockly.JavaScript.lists_indexOf = function() {
-  // Searching a list for a value is the same as search for a substring.
-  return Blockly.JavaScript.text_indexOf.call(this);
+  // Find an item in the list.
+  var operator = this.getTitleValue('END') == 'FIRST' ?
+      'indexOf' : 'lastIndexOf';
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'FIND',
+      Blockly.JavaScript.ORDER_NONE) || '\'\'';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+      Blockly.JavaScript.ORDER_MEMBER) || '[]';
+  var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
+  return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
 Blockly.JavaScript.lists_getIndex = function() {
-  // Indexing into a list is the same as indexing into a string.
-  return Blockly.JavaScript.text_charAt.call(this);
+  // Get element at index.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'AT',
+      Blockly.JavaScript.ORDER_NONE) || '1';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+      Blockly.JavaScript.ORDER_MEMBER) || '[]';
+  // Blockly uses one-based indicies.
+  if (argument0.match(/^-?\d+$/)) {
+    // If the index is a naked number, decrement it right now.
+    argument0 = parseInt(argument0, 10) - 1;
+  } else {
+    // If the index is dynamic, decrement it in code.
+    argument0 += ' - 1';
+  }
+  var code = argument1 + '[' + argument0 + ']';
+  return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
 Blockly.JavaScript.lists_setIndex = function() {

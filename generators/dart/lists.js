@@ -66,23 +66,47 @@ Blockly.Dart.lists_repeat = function() {
 };
 
 Blockly.Dart.lists_length = function() {
-  // Testing the length of a list is the same as for a string.
-  return Blockly.Dart.text_length.call(this);
+  // List length.
+  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '[]';
+  return [argument0 + '.length', Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.lists_isEmpty = function() {
-  // Testing a list for being empty is the same as for a string.
-  return Blockly.Dart.text_isEmpty.call(this);
+  // Is the list empty?
+  var argument0 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '[]';
+  return [argument0 + '.isEmpty', Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.lists_indexOf = function() {
-  // Searching a list for a value is the same as search for a substring.
-  return Blockly.Dart.text_indexOf.call(this);
+  // Find an item in the list.
+  var operator = this.getTitleValue('END') == 'FIRST' ?
+      'indexOf' : 'lastIndexOf';
+  var argument0 = Blockly.Dart.valueToCode(this, 'FIND',
+      Blockly.Dart.ORDER_NONE) || '\'\'';
+  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '[]';
+  var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.lists_getIndex = function() {
-  // Indexing into a list is the same as indexing into a string.
-  return Blockly.Dart.text_charAt.call(this);
+  // Get element at index.
+  var argument0 = Blockly.Dart.valueToCode(this, 'AT',
+      Blockly.Dart.ORDER_NONE) || '1';
+  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE',
+      Blockly.Dart.ORDER_UNARY_POSTFIX) || '[]';
+  // Blockly uses one-based arrays.
+  if (argument0.match(/^-?\d+$/)) {
+    // If the index is a naked number, decrement it right now.
+    argument0 = parseInt(argument0, 10) - 1;
+  } else {
+    // If the index is dynamic, decrement it in code.
+    argument0 += ' - 1';
+  }
+  var code = argument1 + '[' + argument0 + ']';
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Dart.lists_setIndex = function() {
