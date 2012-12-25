@@ -164,6 +164,7 @@ Turtle.display = function() {
 Turtle.runButtonClick = function() {
   document.getElementById('runButton').style.display = 'none';
   document.getElementById('resetButton').style.display = 'inline';
+  document.getElementById('spinner').style.visibility = 'visible';
   Blockly.mainWorkspace.traceOn(true);
   Turtle.execute();
 };
@@ -174,6 +175,7 @@ Turtle.runButtonClick = function() {
 Turtle.resetButtonClick = function() {
   document.getElementById('runButton').style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
+  document.getElementById('spinner').style.visibility = 'hidden';
   Blockly.mainWorkspace.traceOn(false);
   Turtle.reset();
 };
@@ -228,6 +230,8 @@ Turtle.animate = function() {
 
   var tuple = Turtle.path.shift();
   if (!tuple) {
+    document.getElementById('spinner').style.visibility = 'hidden';
+    Blockly.mainWorkspace.highlightBlock(null);
     return;
   }
   Blockly.mainWorkspace.highlightBlock(tuple.pop());

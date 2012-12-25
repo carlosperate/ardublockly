@@ -441,6 +441,7 @@ Maze.animate = function() {
 
   var action = Maze.path.shift();
   if (!action) {
+    Blockly.mainWorkspace.highlightBlock(null);
     return;
   }
   Blockly.mainWorkspace.highlightBlock(action[1]);

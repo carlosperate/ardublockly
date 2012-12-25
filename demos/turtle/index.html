@@ -90,9 +90,9 @@
           <canvas id="scratch" width="400" height="400" style="display: none"></canvas>
           <canvas id="display" width="400" height="400"></canvas>
         </div>
-        <table style="width: 400px; padding-top: 1em;">
+        <table style="padding-top: 1em;">
           <tr>
-            <td style="width: 50%; text-align: center">
+            <td style="width: 190px; text-align: center">
 <svg
    id="slider"
    xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,10 @@
   <image xlink:href="fast.png" height="16" width="26" x="120" y="10" />
 </svg>
             </td>
-            <td style="width: 50%; text-align: center">
+            <td style="width: 15px;">
+              <img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15>
+            </td>
+            <td style="width: 190px; text-align: center">
 <button id="runButton" class="launch" onclick="Turtle.runButtonClick();">
   Run Program
 </button>
