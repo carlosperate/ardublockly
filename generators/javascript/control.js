@@ -55,7 +55,7 @@ Blockly.JavaScript.controls_repeat = function() {
   }
   var loopVar = Blockly.JavaScript.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
-  var code = 'for (' + loopVar + ' = 0; ' +
+  var code = 'for (var ' + loopVar + ' = 0; ' +
       loopVar + ' < ' + repeats + '; ' +
       loopVar + '++) {\n' +
       branch + '}\n';

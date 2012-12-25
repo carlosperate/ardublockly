@@ -83,8 +83,8 @@ Turtle.init = function(blockly) {
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
 
-  var c = document.getElementById('display');
-  Turtle.ctx = c.getContext('2d');
+  Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
+  Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');
   Turtle.reset();
 };
 
@@ -99,16 +99,63 @@ Turtle.reset = function() {
   Turtle.penDownValue = true;
 
   // Clear the display.
-  Turtle.ctx.clearRect(0, 0, Turtle.WIDTH, Turtle.HEIGHT);
-  Turtle.ctx.strokeStyle = '#000000';
-  Turtle.ctx.lineWidth = 1;
-  Turtle.ctx.lineCap = 'round';
+  Turtle.ctxScratch.canvas.width = Turtle.ctxScratch.canvas.width;
+  Turtle.ctxScratch.strokeStyle = '#000000';
+  Turtle.ctxScratch.lineWidth = 1;
+  Turtle.ctxScratch.lineCap = 'round';
+  Turtle.display();
 
   // Kill any task.
   if (Turtle.pid) {
     window.clearTimeout(Turtle.pid);
   }
   Turtle.pid = 0;
+};
+
+/**
+ * Copy the scratch canvas to the display canvas. Add a turtle marker.
+ */
+Turtle.display = function() {
+  Turtle.ctxDisplay.globalCompositeOperation = 'copy';
+  Turtle.ctxDisplay.drawImage(Turtle.ctxScratch.canvas, 0, 0);
+  Turtle.ctxDisplay.globalCompositeOperation = 'source-over';
+
+  // Draw the turtle body.
+  var radius = Turtle.ctxScratch.lineWidth / 2 + 10;
+  Turtle.ctxDisplay.beginPath();
+  Turtle.ctxDisplay.arc(Turtle.x, Turtle.y, radius, 0, 2 * Math.PI, false);
+  Turtle.ctxDisplay.lineWidth = 3;
+  Turtle.ctxDisplay.strokeStyle = '#339933';
+  Turtle.ctxDisplay.stroke();
+
+  // Draw the turtle head.
+  var WIDTH = 0.3;
+  var HEAD_TIP = 10;
+  var ARROW_TIP = 4;
+  var BEND = 6;
+  var radians = 2 * Math.PI * Turtle.heading / 360;
+  var tipX = Turtle.x + (radius + HEAD_TIP) * Math.sin(radians);
+  var tipY = Turtle.y - (radius + HEAD_TIP) * Math.cos(radians);
+  radians -= WIDTH;
+  var leftX = Turtle.x + (radius + ARROW_TIP) * Math.sin(radians);
+  var leftY = Turtle.y - (radius + ARROW_TIP) * Math.cos(radians);
+  radians += WIDTH / 2;
+  var leftControlX = Turtle.x + (radius + BEND) * Math.sin(radians);
+  var leftControlY = Turtle.y - (radius + BEND) * Math.cos(radians);
+  radians += WIDTH;
+  var rightControlX = Turtle.x + (radius + BEND) * Math.sin(radians);
+  var rightControlY = Turtle.y - (radius + BEND) * Math.cos(radians);
+  radians += WIDTH / 2;
+  var rightX = Turtle.x + (radius + ARROW_TIP) * Math.sin(radians);
+  var rightY = Turtle.y - (radius + ARROW_TIP) * Math.cos(radians);
+  Turtle.ctxDisplay.beginPath();
+  Turtle.ctxDisplay.fillStyle = '#339933';
+  Turtle.ctxDisplay.moveTo(tipX, tipY);
+  Turtle.ctxDisplay.lineTo(leftX, leftY);
+  Turtle.ctxDisplay.bezierCurveTo(leftControlX, leftControlY,
+      rightControlX, rightControlY, rightX, rightY);
+  Turtle.ctxDisplay.closePath();
+  Turtle.ctxDisplay.fill();
 };
 
 /**
@@ -188,8 +235,8 @@ Turtle.animate = function() {
   switch (tuple[0]) {
     case 'FD':
       if (Turtle.penDownValue) {
-        Turtle.ctx.beginPath();
-        Turtle.ctx.moveTo(Turtle.x, Turtle.y);
+        Turtle.ctxScratch.beginPath();
+        Turtle.ctxScratch.moveTo(Turtle.x, Turtle.y);
       }
       var distance = tuple[1];
       if (distance) {
@@ -201,8 +248,8 @@ Turtle.animate = function() {
         var bump = 0.1;
       }
       if (Turtle.penDownValue) {
-        Turtle.ctx.lineTo(Turtle.x, Turtle.y + bump);
-        Turtle.ctx.stroke();
+        Turtle.ctxScratch.lineTo(Turtle.x, Turtle.y + bump);
+        Turtle.ctxScratch.stroke();
       }
       break;
     case 'RT':
@@ -219,12 +266,13 @@ Turtle.animate = function() {
       Turtle.penDownValue = true;
       break;
     case 'PW':
-      Turtle.ctx.lineWidth = tuple[1];
+      Turtle.ctxScratch.lineWidth = tuple[1];
       break;
     case 'PC':
-      Turtle.ctx.strokeStyle = tuple[1];
+      Turtle.ctxScratch.strokeStyle = tuple[1];
       break;
   }
+  Turtle.display();
 
   // Scale the speed non-linearly, to give better precision at the fast end.
   var stepSpeed = 1000 * Math.pow(Turtle.speedSlider.getValue(), 2);

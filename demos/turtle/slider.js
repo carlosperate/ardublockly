@@ -75,6 +75,7 @@ var Slider = function(x, y, width, svgParent, opt_changeFunc) {
   });
   Slider.bindEvent_(this.SVG_, 'mouseup', Slider.knobMouseUp_);
   Slider.bindEvent_(this.SVG_, 'mousemove', Slider.knobMouseMove_);
+  Slider.bindEvent_(document, 'mouseover', Slider.mouseOver_);
 };
 
 Slider.SVG_NS_ = 'http://www.w3.org/2000/svg';
@@ -111,6 +112,25 @@ Slider.prototype.knobMouseDown_ = function(e) {
  */
 Slider.knobMouseUp_ = function(e) {
   Slider.activeSlider_ = null;
+};
+
+/**
+ * Stop a drag when the mouse enters a node not part of the SVG.
+ * @param {Event} e Mouse-up event.
+ * @private
+ */
+Slider.mouseOver_ = function(e) {
+  if (!Slider.activeSlider_) {
+    return;
+  }
+  var node = e.target;
+  // Find the root SVG object.
+  do {
+    if (node == Slider.activeSlider_.SVG_) {
+      return;
+    }
+  } while (node = node.parentNode)
+  Slider.knobMouseUp_(e);
 };
 
 /**
