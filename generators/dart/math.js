@@ -40,7 +40,7 @@ Blockly.Dart.math_number = function() {
 Blockly.Dart.math_arithmetic = function() {
   // Basic arithmetic operators, and power.
   var mode = this.getTitleValue('OP');
-  var tuple = Blockly.JavaScript.math_arithmetic.OPERATORS[mode];
+  var tuple = Blockly.Dart.math_arithmetic.OPERATORS[mode];
   var operator = tuple[0];
   var order = tuple[1];
   var argument0 = Blockly.Dart.valueToCode(this, 'A', order) || '0';
@@ -49,7 +49,7 @@ Blockly.Dart.math_arithmetic = function() {
   // Power in Dart requires a special case since it has no operator.
   if (!operator) {
     Blockly.Dart.definitions_['import_dart_math'] =
-        'import \'dart:math\', prefix:\'Math\';';
+        'import \'dart:math\' as Math;';
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
     return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   }
@@ -63,16 +63,6 @@ Blockly.Dart.math_arithmetic.OPERATORS = {
   MULTIPLY: [' * ', Blockly.Dart.ORDER_MULTIPLICATIVE],
   DIVIDE: [' / ', Blockly.Dart.ORDER_MULTIPLICATIVE],
   POWER: [null, Blockly.Dart.ORDER_NONE]  // Handle power separately.
-};
-
-Blockly.Dart.math_change = function() {
-  // Add to a variable in place.
-  var argument0 = Blockly.Dart.valueToCode(this, 'DELTA',
-      Blockly.Dart.ORDER_ADDITIVE) || '0';
-  var varName = Blockly.Dart.variableDB_.getName(this.getTitleValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' +
-      argument0 + ';\n';
 };
 
 Blockly.Dart.math_single = function() {
@@ -160,6 +150,35 @@ Blockly.Dart.math_single = function() {
       throw 'Unknown math operator: ' + operator;
   }
   return [code, Blockly.Dart.ORDER_MULTIPLICATIVE];
+};
+
+Blockly.Dart.math_constant = function() {
+  // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+  var constant = this.getTitleValue('CONSTANT');
+  if (constant != 'INFINITY') {
+    Blockly.Dart.definitions_['import_dart_math'] =
+        'import \'dart:math\' as Math;';
+  }
+  return Blockly.Dart.math_constant.CONSTANTS[constant];
+};
+
+Blockly.Dart.math_constant.CONSTANTS = {
+  PI: ['Math.PI', Blockly.Dart.ORDER_MEMBER],
+  E: ['Math.E', Blockly.Dart.ORDER_MEMBER],
+  GOLDEN_RATIO: ['(1 + Math.sqrt(5)) / 2', Blockly.Dart.ORDER_DIVISION],
+  SQRT2: ['Math.SQRT1_2', Blockly.Dart.ORDER_MEMBER],
+  SQRT1_2: ['Math.SQRT1_2', Blockly.Dart.ORDER_MEMBER],
+  INFINITY: ['double.INFINITY', Blockly.Dart.ORDER_ATOMIC]
+};
+
+Blockly.Dart.math_change = function() {
+  // Add to a variable in place.
+  var argument0 = Blockly.Dart.valueToCode(this, 'DELTA',
+      Blockly.Dart.ORDER_ADDITIVE) || '0';
+  var varName = Blockly.Dart.variableDB_.getName(this.getTitleValue('VAR'),
+      Blockly.Variables.NAME_TYPE);
+  return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' +
+      argument0 + ';\n';
 };
 
 // Rounding functions have a single operand.
@@ -365,6 +384,16 @@ Blockly.Dart.math_on_list = function() {
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
 };
 
+Blockly.Dart.math_modulo = function() {
+  // Remainder computation.
+  var argument0 = Blockly.Dart.valueToCode(this, 'DIVIDEND',
+      Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
+  var argument1 = Blockly.Dart.valueToCode(this, 'DIVISOR',
+      Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
+  var code = argument0 + ' % ' + argument1;
+  return [code, Blockly.Dart.ORDER_MULTIPLICATIVE];
+};
+
 Blockly.Dart.math_constrain = function() {
   // Constrain a number between two limits.
   var argument0 = Blockly.Dart.valueToCode(this, 'VALUE',
@@ -376,16 +405,6 @@ Blockly.Dart.math_constrain = function() {
   var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' +
       argument2 + ')';
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
-};
-
-Blockly.Dart.math_modulo = function() {
-  // Remainder computation.
-  var argument0 = Blockly.Dart.valueToCode(this, 'DIVIDEND',
-      Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
-  var argument1 = Blockly.Dart.valueToCode(this, 'DIVISOR',
-      Blockly.Dart.ORDER_MULTIPLICATIVE) || '0';
-  var code = argument0 + ' % ' + argument1;
-  return [code, Blockly.Dart.ORDER_MULTIPLICATIVE];
 };
 
 Blockly.Dart.math_random_int = function() {

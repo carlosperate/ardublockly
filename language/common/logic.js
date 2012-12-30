@@ -113,12 +113,12 @@ Blockly.Language.logic_boolean = {
     this.setColour(120);
     this.setOutput(true, Boolean);
     this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'BOOL');
+        .appendTitle(new Blockly.FieldDropdown(this.BOOLEANS), 'BOOL');
     this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP);
   }
 };
 
-Blockly.Language.logic_boolean.OPERATORS =
+Blockly.Language.logic_boolean.BOOLEANS =
     [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'],
      [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
 

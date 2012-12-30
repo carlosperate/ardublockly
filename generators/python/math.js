@@ -25,6 +25,7 @@
 
 Blockly.Python = Blockly.Generator.get('Python');
 
+// If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('math,random');
 
 Blockly.Python.math_number = function() {
@@ -57,16 +58,6 @@ Blockly.Python.math_arithmetic.OPERATORS = {
   MULTIPLY: [' * ', Blockly.Python.ORDER_MULTIPLICATIVE],
   DIVIDE: [' / ', Blockly.Python.ORDER_MULTIPLICATIVE],
   POWER: [' ** ', Blockly.Python.ORDER_EXPONENTIATION]
-};
-
-Blockly.Python.math_change = function() {
-  // Add to a variable in place.
-  var argument0 = Blockly.Python.valueToCode(this, 'DELTA',
-      Blockly.Python.ORDER_ADDITIVE) || '0';
-  var varName = Blockly.Python.variableDB_.getName(this.getTitleValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' if type(' + varName +
-      ') in (int, float) else 0) + ' + argument0 + '\n';
 };
 
 Blockly.Python.math_single = function() {
@@ -147,6 +138,34 @@ Blockly.Python.math_single = function() {
       throw 'Unknown math operator: ' + operator;
   }
   return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
+};
+
+Blockly.Python.math_constant = function() {
+  // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+  var constant = this.getTitleValue('CONSTANT');
+  if (constant != 'INFINITY') {
+    Blockly.Python.definitions_['import_math'] = 'import math';
+  }
+  return Blockly.Python.math_constant.CONSTANTS[constant];
+};
+
+Blockly.Python.math_constant.CONSTANTS = {
+  PI: ['math.pi', Blockly.Python.ORDER_MEMBER],
+  E: ['math.e', Blockly.Python.ORDER_MEMBER],
+  GOLDEN_RATIO: ['(1 + math.sqrt(5)) / 2', Blockly.Python.ORDER_MULTIPLICATIVE],
+  SQRT2: ['math.sqrt(2)', Blockly.Python.ORDER_MEMBER],
+  SQRT1_2: ['math.sqrt(1 / 2)', Blockly.Python.ORDER_MEMBER],
+  INFINITY: ['float(\'inf\')', Blockly.Python.ORDER_ATOMIC]
+};
+
+Blockly.Python.math_change = function() {
+  // Add to a variable in place.
+  var argument0 = Blockly.Python.valueToCode(this, 'DELTA',
+      Blockly.Python.ORDER_ADDITIVE) || '0';
+  var varName = Blockly.Python.variableDB_.getName(this.getTitleValue('VAR'),
+      Blockly.Variables.NAME_TYPE);
+  return varName + ' = (' + varName + ' if type(' + varName +
+      ') in (int, float) else 0) + ' + argument0 + '\n';
 };
 
 // Rounding functions have a single operand.
@@ -271,6 +290,16 @@ Blockly.Python.math_on_list = function() {
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
+Blockly.Python.math_modulo = function() {
+  // Remainder computation.
+  var argument0 = Blockly.Python.valueToCode(this, 'DIVIDEND',
+      Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
+  var argument1 = Blockly.Python.valueToCode(this, 'DIVISOR',
+      Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
+  var code = argument0 + ' % ' + argument1;
+  return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
+};
+
 Blockly.Python.math_constrain = function() {
   // Constrain a number between two limits.
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
@@ -282,16 +311,6 @@ Blockly.Python.math_constrain = function() {
   var code = 'min(max(' + argument0 + ', ' + argument1 + '), ' +
       argument2 + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
-};
-
-Blockly.Python.math_modulo = function() {
-  // Remainder computation.
-  var argument0 = Blockly.Python.valueToCode(this, 'DIVIDEND',
-      Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
-  var argument1 = Blockly.Python.valueToCode(this, 'DIVISOR',
-      Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
-  var code = argument0 + ' % ' + argument1;
-  return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
 };
 
 Blockly.Python.math_random_int = function() {

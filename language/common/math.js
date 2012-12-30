@@ -81,38 +81,6 @@ Blockly.Language.math_arithmetic.TOOLTIPS = {
   POWER: Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER
 };
 
-Blockly.Language.math_change = {
-  // Add to a variable in place.
-  category: Blockly.LANG_CATEGORY_MATH,
-  helpUrl: Blockly.LANG_MATH_CHANGE_HELPURL,
-  init: function() {
-    this.setColour(230);
-    this.appendValueInput('DELTA')
-        .setCheck(Number)
-        .appendTitle(Blockly.LANG_MATH_CHANGE_TITLE_CHANGE)
-        .appendTitle(new Blockly.FieldVariable(
-        Blockly.LANG_MATH_CHANGE_TITLE_ITEM), 'VAR')
-        .appendTitle(Blockly.LANG_MATH_CHANGE_INPUT_BY);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    this.setTooltip(function() {
-      return Blockly.LANG_MATH_CHANGE_TOOLTIP.replace('%1',
-          thisBlock.getTitleValue('VAR'));
-    });
-  },
-  getVars: function() {
-    return [this.getTitleValue('VAR')];
-  },
-  renameVar: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
-      this.setTitleValue(newName, 'VAR');
-    }
-  }
-};
-
-
 Blockly.Language.math_single = {
   // Advanced math operators with single operand.
   category: Blockly.LANG_CATEGORY_MATH,
@@ -151,26 +119,6 @@ Blockly.Language.math_single.TOOLTIPS = {
   POW10: Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10
 };
 
-
-Blockly.Language.math_round = {
-  // Rounding functions.
-  category: Blockly.LANG_CATEGORY_MATH,
-  helpUrl: Blockly.LANG_MATH_ROUND_HELPURL,
-  init: function() {
-    this.setColour(230);
-    this.setOutput(true, Number);
-    this.appendValueInput('NUM')
-        .setCheck(Number)
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
-    this.setTooltip(Blockly.LANG_MATH_ROUND_TOOLTIP);
-  }
-};
-
-Blockly.Language.math_round.OPERATORS =
-    [[Blockly.LANG_MATH_ROUND_OPERATOR_ROUND, 'ROUND'],
-     [Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP, 'ROUNDUP'],
-     [Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN, 'ROUNDDOWN']];
-
 Blockly.Language.math_trig = {
   // Trigonometry operators.
   category: Blockly.LANG_CATEGORY_MATH,
@@ -206,6 +154,77 @@ Blockly.Language.math_trig.TOOLTIPS = {
   ACOS: Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS,
   ATAN: Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN
 };
+
+Blockly.Language.math_constant = {
+  // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+  category: Blockly.LANG_CATEGORY_MATH,
+  helpUrl: Blockly.LANG_MATH_CONSTANT_HELPURL,
+  init: function() {
+    this.setColour(230);
+    this.setOutput(true, Number);
+    this.appendDummyInput()
+        .appendTitle(new Blockly.FieldDropdown(this.CONSTANTS), 'CONSTANT');
+    this.setTooltip(Blockly.LANG_MATH_CONSTANT_TOOLTIP);
+  }
+};
+
+Blockly.Language.math_constant.CONSTANTS =
+    [['\u03c0', 'PI'],
+     ['e', 'E'],
+     ['\u03c6', 'GOLDEN_RATIO'],
+     ['sqrt(2)', 'SQRT2'],
+     ['sqrt(1/2)', 'SQRT1_2'],
+     ['\u221e', 'INFINITY']];
+
+Blockly.Language.math_change = {
+  // Add to a variable in place.
+  category: Blockly.LANG_CATEGORY_MATH,
+  helpUrl: Blockly.LANG_MATH_CHANGE_HELPURL,
+  init: function() {
+    this.setColour(230);
+    this.appendValueInput('DELTA')
+        .setCheck(Number)
+        .appendTitle(Blockly.LANG_MATH_CHANGE_TITLE_CHANGE)
+        .appendTitle(new Blockly.FieldVariable(
+        Blockly.LANG_MATH_CHANGE_TITLE_ITEM), 'VAR')
+        .appendTitle(Blockly.LANG_MATH_CHANGE_INPUT_BY);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return Blockly.LANG_MATH_CHANGE_TOOLTIP.replace('%1',
+          thisBlock.getTitleValue('VAR'));
+    });
+  },
+  getVars: function() {
+    return [this.getTitleValue('VAR')];
+  },
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
+      this.setTitleValue(newName, 'VAR');
+    }
+  }
+};
+
+Blockly.Language.math_round = {
+  // Rounding functions.
+  category: Blockly.LANG_CATEGORY_MATH,
+  helpUrl: Blockly.LANG_MATH_ROUND_HELPURL,
+  init: function() {
+    this.setColour(230);
+    this.setOutput(true, Number);
+    this.appendValueInput('NUM')
+        .setCheck(Number)
+        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+    this.setTooltip(Blockly.LANG_MATH_ROUND_TOOLTIP);
+  }
+};
+
+Blockly.Language.math_round.OPERATORS =
+    [[Blockly.LANG_MATH_ROUND_OPERATOR_ROUND, 'ROUND'],
+     [Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP, 'ROUNDUP'],
+     [Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN, 'ROUNDDOWN']];
 
 Blockly.Language.math_on_list = {
   // Evaluate a list of numbers to return sum, average, min, max, etc.
@@ -256,6 +275,25 @@ Blockly.Language.math_on_list.TOOLTIPS = {
   RANDOM: Blockly.LANG_MATH_ONLIST_TOOLTIP_RANDOM
 };
 
+Blockly.Language.math_modulo = {
+  // Remainder of a division.
+  category: Blockly.LANG_CATEGORY_MATH,
+  helpUrl: Blockly.LANG_MATH_MODULO_HELPURL,
+  init: function() {
+    this.setColour(230);
+    this.setOutput(true, Number);
+    this.appendValueInput('DIVIDEND')
+        .setCheck(Number)
+        .appendTitle(Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND);
+    this.appendValueInput('DIVISOR')
+        .setCheck(Number)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle('\u00F7');
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.LANG_MATH_MODULO_TOOLTIP);
+  }
+};
+
 Blockly.Language.math_constrain = {
   // Constrain a number between two limits.
   category: Blockly.LANG_CATEGORY_MATH,
@@ -274,25 +312,6 @@ Blockly.Language.math_constrain = {
         .appendTitle(Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_MATH_CONSTRAIN_TOOLTIP);
-  }
-};
-
-Blockly.Language.math_modulo = {
-  // Remainder of a division.
-  category: Blockly.LANG_CATEGORY_MATH,
-  helpUrl: Blockly.LANG_MATH_MODULO_HELPURL,
-  init: function() {
-    this.setColour(230);
-    this.setOutput(true, Number);
-    this.appendValueInput('DIVIDEND')
-        .setCheck(Number)
-        .appendTitle(Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND);
-    this.appendValueInput('DIVISOR')
-        .setCheck(Number)
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle('\u00F7');
-    this.setInputsInline(true);
-    this.setTooltip(Blockly.LANG_MATH_MODULO_TOOLTIP);
   }
 };
 

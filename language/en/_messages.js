@@ -195,12 +195,6 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Return the quotient of the two nu
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Return the first number raised to\n' +
     'the power of the second number.';
 
-Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
-Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
-Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'item';
-Blockly.LANG_MATH_CHANGE_INPUT_BY = 'by';
-Blockly.LANG_MATH_CHANGE_TOOLTIP = 'Add a number to variable "%1".';
-
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
 Blockly.LANG_MATH_SINGLE_OP_ROOT = 'square root';
 Blockly.LANG_MATH_SINGLE_OP_ABSOLUTE = 'absolute';
@@ -212,19 +206,29 @@ Blockly.LANG_MATH_SINGLE_TOOLTIP_LOG10 = 'Return the base 10 logarithm of a numb
 Blockly.LANG_MATH_SINGLE_TOOLTIP_EXP = 'Return e to the power of a number.';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';
 
+Blockly.LANG_MATH_TRIG_HELPURL = 'http://en.wikipedia.org/wiki/Trigonometric_functions';
+Blockly.LANG_MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree (not radian).';
+Blockly.LANG_MATH_TRIG_TOOLTIP_COS = 'Return the cosine of a degree (not radian).';
+Blockly.LANG_MATH_TRIG_TOOLTIP_TAN = 'Return the tangent of a degree (not radian).';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ASIN = 'Return the arcsine of a number.';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
+Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
+
+Blockly.LANG_MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
+Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0, e, '+
+    '\u03c6 (the Golden Ratio 1.618...),\nsqrt(2), and sqrt(1/2). Also include \u221e (Infinity)';
+
+Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
+Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
+Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'item';
+Blockly.LANG_MATH_CHANGE_INPUT_BY = 'by';
+Blockly.LANG_MATH_CHANGE_TOOLTIP = 'Add a number to variable "%1".';
+
 Blockly.LANG_MATH_ROUND_HELPURL = 'http://en.wikipedia.org/wiki/Rounding';
 Blockly.LANG_MATH_ROUND_TOOLTIP = 'Round a number up or down.';
 Blockly.LANG_MATH_ROUND_OPERATOR_ROUND = 'round';
 Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP = 'round up';
 Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN = 'round down';
-
-Blockly.LANG_MATH_TRIG_HELPURL = 'http://en.wikipedia.org/wiki/Trigonometric_functions';
-Blockly.LANG_MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_COS = 'Return the cosine of a degree.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_TAN = 'Return the tangent of a degree.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_ASIN = 'Return the arcsine of a number.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
-Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
 
 Blockly.LANG_MATH_ONLIST_HELPURL = '';
 Blockly.LANG_MATH_ONLIST_INPUT_OFLIST = 'of list';
@@ -245,15 +249,15 @@ Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Return a list of the most common item(s
 Blockly.LANG_MATH_ONLIST_TOOLTIP_STD_DEV = 'Return the standard deviation of the list.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_RANDOM = 'Return a random element from the list.';
 
-Blockly.LANG_MATH_CONSTRAIN_HELPURL = 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29';
-Blockly.LANG_MATH_CONSTRAIN_INPUT_CONSTRAIN = 'constrain';
-Blockly.LANG_MATH_CONSTRAIN_INPUT_LOW = 'between (low)';
-Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH = 'and (high)';
-Blockly.LANG_MATH_CONSTRAIN_TOOLTIP = 'Constrain a number to be between the specified limits (inclusive).';
-
 Blockly.LANG_MATH_MODULO_HELPURL = 'http://en.wikipedia.org/wiki/Modulo_operation';
 Blockly.LANG_MATH_MODULO_INPUT_DIVIDEND = 'remainder of';
 Blockly.LANG_MATH_MODULO_TOOLTIP = 'Return the remainder of dividing both numbers.';
+
+Blockly.LANG_MATH_CONSTRAIN_HELPURL = 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29';
+Blockly.LANG_MATH_CONSTRAIN_INPUT_CONSTRAIN = 'constrain';
+Blockly.LANG_MATH_CONSTRAIN_INPUT_LOW = 'low';
+Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH = 'high';
+Blockly.LANG_MATH_CONSTRAIN_TOOLTIP = 'Constrain a number to be between the specified limits (inclusive).';
 
 Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'random integer from';

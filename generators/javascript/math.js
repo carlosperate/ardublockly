@@ -57,16 +57,6 @@ Blockly.JavaScript.math_arithmetic.OPERATORS = {
   POWER: [null, Blockly.JavaScript.ORDER_COMMA]  // Handle power separately.
 };
 
-Blockly.JavaScript.math_change = function() {
-  // Add to a variable in place.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'DELTA',
-      Blockly.JavaScript.ORDER_ADDITION) || '0';
-  var varName = Blockly.JavaScript.variableDB_.getName(
-      this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
-  return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName +
-      ' : 0) + ' + argument0 + ';\n';
-};
-
 Blockly.JavaScript.math_single = function() {
   // Math operators with single operand.
   var operator = this.getTitleValue('OP');
@@ -149,6 +139,31 @@ Blockly.JavaScript.math_single = function() {
       throw 'Unknown math operator: ' + operator;
   }
   return [code, Blockly.JavaScript.ORDER_DIVISION];
+};
+
+Blockly.JavaScript.math_constant = function() {
+  // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+  var constant = this.getTitleValue('CONSTANT');
+  return Blockly.JavaScript.math_constant.CONSTANTS[constant];
+};
+
+Blockly.JavaScript.math_constant.CONSTANTS = {
+  PI: ['Math.PI', Blockly.JavaScript.ORDER_MEMBER],
+  E: ['Math.E', Blockly.JavaScript.ORDER_MEMBER],
+  GOLDEN_RATIO: ['(1 + Math.sqrt(5)) / 2', Blockly.JavaScript.ORDER_DIVISION],
+  SQRT2: ['Math.SQRT1_2', Blockly.JavaScript.ORDER_MEMBER],
+  SQRT1_2: ['Math.SQRT1_2', Blockly.JavaScript.ORDER_MEMBER],
+  INFINITY: ['Infinity', Blockly.JavaScript.ORDER_ATOMIC]
+};
+
+Blockly.JavaScript.math_change = function() {
+  // Add to a variable in place.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'DELTA',
+      Blockly.JavaScript.ORDER_ADDITION) || '0';
+  var varName = Blockly.JavaScript.variableDB_.getName(
+      this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
+  return varName + ' = (typeof ' + varName + ' == \'number\' ? ' + varName +
+      ' : 0) + ' + argument0 + ';\n';
 };
 
 // Rounding functions have a single operand.
@@ -310,6 +325,16 @@ Blockly.JavaScript.math_on_list = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
+Blockly.JavaScript.math_modulo = function() {
+  // Remainder computation.
+  var argument0 = Blockly.JavaScript.valueToCode(this, 'DIVIDEND',
+      Blockly.JavaScript.ORDER_MODULUS) || '0';
+  var argument1 = Blockly.JavaScript.valueToCode(this, 'DIVISOR',
+      Blockly.JavaScript.ORDER_MODULUS) || '0';
+  var code = argument0 + ' % ' + argument1;
+  return [code, Blockly.JavaScript.ORDER_MODULUS];
+};
+
 Blockly.JavaScript.math_constrain = function() {
   // Constrain a number between two limits.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
@@ -322,17 +347,7 @@ Blockly.JavaScript.math_constrain = function() {
       argument2 + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
-
-Blockly.JavaScript.math_modulo = function() {
-  // Remainder computation.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'DIVIDEND',
-      Blockly.JavaScript.ORDER_MODULUS) || '0';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 'DIVISOR',
-      Blockly.JavaScript.ORDER_MODULUS) || '0';
-  var code = argument0 + ' % ' + argument1;
-  return [code, Blockly.JavaScript.ORDER_MODULUS];
-};
-
+  
 Blockly.JavaScript.math_random_int = function() {
   // Random integer between [X] and [Y].
   var argument0 = Blockly.JavaScript.valueToCode(this, 'FROM',
