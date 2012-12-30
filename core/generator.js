@@ -139,9 +139,15 @@ Blockly.CodeGenerator = function(name) {
  *     operator order value.  Returns '' if block is null.
  */
 Blockly.CodeGenerator.prototype.blockToCode = function(block) {
-  if (!block || block.disabled) {
+  if (!block) {
     return '';
   }
+  if (block.disabled) {
+    // Skip past this block if it is disabled.
+    var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
+    return this.blockToCode(nextBlock);
+  }
+
   var func = this[block.type];
   if (!func) {
     throw 'Language "' + this.name_ + '" does not know how to generate code ' +
