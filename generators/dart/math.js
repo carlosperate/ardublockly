@@ -372,7 +372,7 @@ Blockly.Dart.math_constrain = function() {
   var argument1 = Blockly.Dart.valueToCode(this, 'LOW',
       Blockly.Dart.ORDER_NONE) || '0';
   var argument2 = Blockly.Dart.valueToCode(this, 'HIGH',
-      Blockly.Dart.ORDER_NONE) || '0';
+      Blockly.Dart.ORDER_NONE) || 'double.INFINITY';
   var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' +
       argument2 + ')';
   return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];

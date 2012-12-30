@@ -149,7 +149,7 @@ Blockly.Language.logic_ternary = {
         .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_TRUE);
     this.appendValueInput('ELSE')
         .setCheck(null)
-        .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'if false');
+        .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_FALSE);
     this.setOutput(true, null);
     this.setTooltip(Blockly.LANG_LOGIC_TERNARY_TOOLTIP);
   }

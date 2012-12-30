@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Blocks for graph demo.
+ * @fileoverview Blocks for Graphing Calculator application.
  * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
@@ -33,6 +33,7 @@ Blockly.Language.graph_get_x = {
         .appendTitle(Blockly.LANG_VARIABLES_GET_TITLE)
         .appendTitle('x');
     this.setOutput(true, null);
+    this.setTooltip(Blockly.LANG_VARIABLES_GET_TOOLTIP);
   }
 };
 
@@ -40,11 +41,11 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.JavaScript.graph_get_x = function() {
   // x variable getter.
-  return ['x', Blockly.JavaScript.ORDER_MEMBER];
+  return ['x', Blockly.JavaScript.ORDER_ATOMIC];
 };
 
 Blockly.Language.graph_set_y = {
-  // Y variable setter.
+  // y variable setter.
   category: null,
   helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   deletable: false,
@@ -58,7 +59,7 @@ Blockly.Language.graph_set_y = {
 };
 
 Blockly.JavaScript.graph_set_y = function() {
-  // Y variable setter.
+  // y variable setter.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '';
   return argument0 + ';';

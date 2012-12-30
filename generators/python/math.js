@@ -278,7 +278,7 @@ Blockly.Python.math_constrain = function() {
   var argument1 = Blockly.Python.valueToCode(this, 'LOW',
       Blockly.Python.ORDER_NONE) || '0';
   var argument2 = Blockly.Python.valueToCode(this, 'HIGH',
-      Blockly.Python.ORDER_NONE) || '0';
+      Blockly.Python.ORDER_NONE) || 'float(\'inf\')';
   var code = 'min(max(' + argument0 + ', ' + argument1 + '), ' +
       argument2 + ')';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];

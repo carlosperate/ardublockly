@@ -76,6 +76,7 @@ Blockly.Python.logic_null = function() {
 };
 
 Blockly.Python.logic_ternary = function() {
+  // Ternary operator.
   var value_if = Blockly.Python.valueToCode(this, 'IF',
       Blockly.Python.ORDER_CONDITIONAL) || 'False';
   var value_then = Blockly.Python.valueToCode(this, 'THEN',

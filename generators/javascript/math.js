@@ -317,7 +317,7 @@ Blockly.JavaScript.math_constrain = function() {
   var argument1 = Blockly.JavaScript.valueToCode(this, 'LOW',
       Blockly.JavaScript.ORDER_COMMA) || '0';
   var argument2 = Blockly.JavaScript.valueToCode(this, 'HIGH',
-      Blockly.JavaScript.ORDER_COMMA) || '0';
+      Blockly.JavaScript.ORDER_COMMA) || 'Infinity';
   var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' +
       argument2 + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];

@@ -180,7 +180,7 @@ Blockly.LANG_LOGIC_TERNARY_CONDITION = 'test';
 Blockly.LANG_LOGIC_TERNARY_IF_TRUE = 'if true';
 Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'if false';
 Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Check the condition in "test". If the condition is true\n' +
-'returns the "if true" value, otherwise returns the "if false" value.';
+    'returns the "if true" value, otherwise returns the "if false" value.';
 
 // Math Blocks.
 Blockly.LANG_CATEGORY_MATH = 'Math';

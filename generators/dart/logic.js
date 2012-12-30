@@ -77,6 +77,7 @@ Blockly.Dart.logic_null = function() {
 };
 
 Blockly.Dart.logic_ternary = function() {
+  // Ternary operator.
   var value_if = Blockly.Dart.valueToCode(this, 'IF',
       Blockly.Dart.ORDER_CONDITIONAL) || 'false';
   var value_then = Blockly.Dart.valueToCode(this, 'THEN',

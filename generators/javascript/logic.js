@@ -78,6 +78,7 @@ Blockly.JavaScript.logic_null = function() {
 };
 
 Blockly.JavaScript.logic_ternary = function() {
+  // Ternary operator.
   var value_if = Blockly.JavaScript.valueToCode(this, 'IF',
       Blockly.JavaScript.ORDER_CONDITIONAL) || 'false';
   var value_then = Blockly.JavaScript.valueToCode(this, 'THEN',

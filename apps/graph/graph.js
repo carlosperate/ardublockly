@@ -37,12 +37,6 @@ if ('BlocklyStorage' in window) {
 var Graph = {};
 
 /**
- * 'Set y' block.
- * @type Blockly.Block
- */
-Graph.yBlock = null;
-
-/**
  * Initialize Blockly and the graph.  Called on page load.
  * @param {!Blockly} blockly Instance of Blockly from iframe.
  */
@@ -72,35 +66,41 @@ Graph.init = function(blockly) {
   }
   
   Blockly.mainWorkspace.getCanvas().addEventListener('blocklyWorkspaceChange',
-      window.parent.drawVisualization, false);
+      window.parent.Graph.drawVisualization, false);
 };
-
+// Load the Google Chart Tools Visualization API and the chart package.
 google.load('visualization', '1', {packages: ['corechart']});
 
-var drawVisualization = function() {
+/**
+ * Visualize the graph of y = f(x) using Google Chart Tools.
+ * For more documentation on Google Chart Tools, see this linechart example:
+ * google-developers.appspot.com/chart/interactive/docs/gallery/linechart
+ */
+Graph.drawVisualization = function() {
   // Create and populate the data table.
   var data = google.visualization.arrayToDataTable(Graph.plot());
   
   var options = { //curveType: "function",
                   width: 400, height: 400,
-                  chartArea: {left:"10%", width:"85%", height:"85%"},
+                  chartArea: {left: '10%', width: '85%', height: '85%'},
                   legend: {position: 'top', textStyle: {color: 'blue'}}
                 };
 
-  // Create and draw the visualization.
+  // Create and draw the visualization, passing in the data and options.
   new google.visualization.LineChart(document.getElementById('visualization')).
       draw(data, options);
 };
 
 /**
- * Plot points as as array of arrays.
+ * Plot points on the function y = f(x).
+ * @return {!Array.<!Array>} 2D Array of points on the graph.
  */
 Graph.plot = function() {
   // Get JavaScript code for f(x).
   var formula = Graph.getFunction();
   // Initialize a table with two column headings.
   var table = [['x', 'y = ' + formula]];
-  var y = NaN;
+  var y;
   // TODO: Improve range and scale of graph
   for (var x = -10; x <= 10; x = Math.round((x + 0.1) * 10) / 10) {
     try {
@@ -116,26 +116,31 @@ Graph.plot = function() {
     }
   }
   // If there is no value row in table, add a [0, 0] row to prevent graph error.
-  return (table.length == 1) ? [['x', 'y = ' + formula], [0, 0]] : table;
+  if (table.length == 1) {
+    table.push([0, 0]);
+  }
+  return table;
 };
 
 /**
- * Get the right hand side content of the function y = f(x).
+ * Get from blocks the right hand side content of the function y = f(x).
+ * @return {String} Formula in JavaScipt for f(x).
  */
 Graph.getFunction = function() {
   var topBlocks = Blockly.mainWorkspace.getTopBlocks(false);
+  var yBlock;
   // Set yBlock to only the code plugged into 'graph_set_y'.
   for (var j = 0; j < topBlocks.length; j++) {
     if (topBlocks[j].type == 'graph_set_y') {
-      Graph.yBlock = topBlocks[j];      
+      yBlock = topBlocks[j];      
     }
   }
-  if (!Graph.yBlock) {
+  if (!yBlock) {
     return NaN;
   }
   var generator = Blockly.Generator.get('JavaScript');
   generator.init();
-  var code = generator.blockToCode(Graph.yBlock);
+  var code = generator.blockToCode(yBlock);
   // Remove the ";" generally ending the JavaScript statement y = {code};.
   return code.replace(/;$/, "");
 };
