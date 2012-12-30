@@ -18,12 +18,14 @@ blockly/
  |- storage.py
  |- closure-library-read-only/
  `- static/
+     |- apps/
      |- core/
      |- demos/
      |- generators/
      |- language/
      |- media/
-     `- tests/
+     |- tests/
+     `- blockly_compressed.js
 
 Instructions for fetching Closure may be found here:
   http://code.google.com/p/blockly/wiki/Closure

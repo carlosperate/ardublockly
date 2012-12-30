@@ -565,6 +565,25 @@ Blockly.setMainWorkspaceMetrics = function(xyRatio) {
 };
 
 /**
+ * When something in Blockly's workspace changes, call a function.
+ * @param {!Function} func Function to call.
+ * @return {!Array.<!Array>} Opaque data that can be passed to
+ *     removeChangeListener.
+ */
+Blockly.addChangeListener = function(func) {
+  return Blockly.bindEvent_(Blockly.mainWorkspace.getCanvas(),
+                            'blocklyWorkspaceChange', null, func);
+};
+
+/**
+ * Stop listening for Blockly's workspace changes.
+ * @param {!Array.<!Array>} bindData Opaque data from addChangeListener.
+ */
+Blockly.removeChangeListener = function(bindData) {
+  Blockly.unbindEvent_(bindData);
+};
+
+/**
  * Rerender certain elements which might have had their sizes changed by the
  * CSS file and thus need realigning.
  * Called when the CSS file has finally loaded.

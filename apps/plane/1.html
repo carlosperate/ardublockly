@@ -1,0 +1,44 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Plane (1)</title>
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../language/en/_messages.js"></script>
+  <script type="text/javascript" src="../../language/common/math.js"></script>
+  <script type="text/javascript" src="../../generators/javascript.js"></script>
+  <script type="text/javascript" src="../../generators/javascript/math.js"></script>
+  <script type="text/javascript" src="common.js"></script>
+  <script type="text/javascript" src="blocks1.js"></script>
+  <style>
+    body {
+      background-color: white;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #svgDiv {
+      height: 300px;
+      width: 100%;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body onload="init()">
+  <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Demos</a> &gt; Plane (1)</h1>
+
+  <embed src="plane.svg" height=256 width=600 type="image/svg+xml"/>
+  <p>
+    An airplane has two seats in the flight deck (for the pilot and co-pilot),
+    and a number of rows of passenger seats.  Each row contains four seats.
+  </p>
+  <p>
+    Build a formula (below) that calculates the total number of seats on
+    the airplane as the rows are changed (above).
+  </p>
+
+  <div id="svgDiv"></div>
+
+</body>
+</html>

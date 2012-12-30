@@ -157,10 +157,10 @@ BlocklyStorage.monitorChanges_ = function() {
     var xmlText = Blockly.Xml.domToText(xmlDom);
     if (startXmlText != xmlText) {
       window.location.hash = '';
-      canvas.removeEventListener('blocklyWorkspaceChange', change, false);
+      Blockly.removeChangeListener(bindData);
     }
   }
-  canvas.addEventListener('blocklyWorkspaceChange', change, false);
+  var bindData = Blockly.addChangeListener(change);
 };
 
 /**

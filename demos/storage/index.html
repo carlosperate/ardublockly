@@ -1,0 +1,64 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Cloud Storage</title>
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../language/en/_messages.js"></script>
+  <script type="text/javascript" src="../../language/common/control.js"></script>
+  <script type="text/javascript" src="../../language/common/logic.js"></script>
+  <script type="text/javascript" src="../../language/common/math.js"></script>
+  <script type="text/javascript" src="../../language/common/text.js"></script>
+  <style>
+    body {
+      background-color: white;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #sorry {
+      padding: 1ex;
+      background-color: #f9edbe;
+      border: solid 1px #f0c36d;
+    }
+  </style>
+</head>
+<body>
+  <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;
+    <a href="../index.html">Demos</a> &gt; Cloud Storage</h1>
+
+  <p>This is a simple demo of cloud storage using App Engine.</p>
+
+  <script>
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
+      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+          'Perhaps it was created with a different version of Blockly?\nXML: ';
+    } else {
+      document.write('<p id="sorry">Sorry, cloud storage is not available.  This demo must be hosted on App Engine.</p>');
+    }
+  </script>
+
+  <p>&rarr; More info on <a href="http://code.google.com/p/blockly/wiki/CloudStorage">Cloud Storage</a>...</p>
+
+  <p>
+    <button onclick="BlocklyStorage.link()">Save Blocks</button>
+  </p>
+
+  <div id="blocklyDiv" style="height: 480px; width: 600px; border: 1px solid #ccc;"></div>
+  <script>
+    Blockly.inject(document.getElementById('blocklyDiv'), {path: '../../'});
+
+    // An href with #key trigers an AJAX call to retrieve saved blocks.
+    if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+      BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+    }
+  </script>
+
+</body>
+</html>

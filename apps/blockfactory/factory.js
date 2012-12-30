@@ -71,8 +71,7 @@ function initEditor(blockly) {
   rootBlock.editable = false;
   rootBlock.deletable = false;
 
-  bindEvent(EditorBlockly.mainWorkspace.getCanvas(),
-      'blocklyWorkspaceChange', onchange);
+  Blockly.addChangeListener(onchange);
 }
 
 /**
