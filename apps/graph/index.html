@@ -1,0 +1,74 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Demo: Graphing Calculator</title>
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>  
+  <script type="text/javascript" src="graph.js"></script>
+    
+  <style>
+    body {
+      background-color: white;
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+
+    /* Buttons */
+    button {
+      margin: 5px;
+      margin-right: 12px;
+      margin-left: 0;
+      padding: 5px 10px;
+      font-size: large;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      background-color: #eee;
+      color: black;
+    }
+    #linkButton {
+      float:right;
+    }
+    button:active {
+      border: 1px solid blue !important;
+    }
+    button:hover {
+      box-shadow: 2px 2px 5px #888;
+    }
+    button>img {
+      opacity: 0.6;
+    }
+    button:hover>img {
+      opacity: 1;
+    }
+    #visualization {
+      margin-top: 3em;
+    }
+    iframe {
+      height: 100%;
+      width: 100%;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <table width="100%" height="100%">
+    <tr>
+      <td width="410" valign="top">
+        <h1>
+          <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link()">
+              <img src='link.png' height=21 width=21>
+          </button>
+          <a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; Graph
+        </h1>
+        <div id="visualization"></div>
+      </td>
+      <td valign="top">
+        <iframe src="frame.html"></iframe>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

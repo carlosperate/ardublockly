@@ -74,3 +74,14 @@ Blockly.Python.logic_null = function() {
   // Null data type.
   return ['None', Blockly.Python.ORDER_ATOMIC];
 };
+
+Blockly.Python.logic_ternary = function() {
+  var value_if = Blockly.Python.valueToCode(this, 'IF',
+      Blockly.Python.ORDER_CONDITIONAL) || 'False';
+  var value_then = Blockly.Python.valueToCode(this, 'THEN',
+      Blockly.Python.ORDER_CONDITIONAL) || 'None';
+  var value_else = Blockly.Python.valueToCode(this, 'ELSE',
+      Blockly.Python.ORDER_CONDITIONAL) || 'None';
+  var code = value_then + ' if ' + value_if + ' else ' + value_else
+  return [code, Blockly.Python.ORDER_CONDITIONAL];
+};

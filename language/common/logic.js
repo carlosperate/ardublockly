@@ -134,3 +134,23 @@ Blockly.Language.logic_null = {
     this.setTooltip(Blockly.LANG_LOGIC_NULL_TOOLTIP);
   }
 };
+
+Blockly.Language.logic_ternary = {
+  // Ternary operator.
+  category: Blockly.LANG_CATEGORY_LOGIC,
+  helpUrl: Blockly.LANG_LOGIC_TERNARY_HELPURL,
+  init: function() {
+    this.setColour(120);
+    this.appendValueInput('IF')
+        .setCheck(Boolean)
+        .appendTitle(Blockly.LANG_LOGIC_TERNARY_CONDITION);
+    this.appendValueInput('THEN')
+        .setCheck(null)
+        .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_TRUE);
+    this.appendValueInput('ELSE')
+        .setCheck(null)
+        .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'if false');
+    this.setOutput(true, null);
+    this.setTooltip(Blockly.LANG_LOGIC_TERNARY_TOOLTIP);
+  }
+};

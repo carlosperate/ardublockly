@@ -101,10 +101,6 @@ function renderContent() {
  * @param {!Blockly} blockly Instance of Blockly from iframe.
  */
 function init(blockly) {
-  //window.onbeforeunload = function() {
-  //  return 'Leaving this page will result in the loss of your work.';
-  //};
-
   window.Blockly = blockly;
 
   // Add to reserved word list: Local variables in execution evironment (runJS)

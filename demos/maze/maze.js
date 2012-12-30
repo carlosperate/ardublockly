@@ -282,7 +282,8 @@ Maze.init = function(blockly) {
   Maze.draw_map();
 
   window.onbeforeunload = function() {
-    if (Blockly.mainWorkspace.getAllBlocks().length > 1) {
+    if (Blockly.mainWorkspace.getAllBlocks().length > 1 &&
+        window.location.hash.length <= 1) {
       return 'Leaving this page will result in the loss of your work.';
     }
     return null;

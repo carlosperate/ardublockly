@@ -75,3 +75,14 @@ Blockly.Dart.logic_null = function() {
   // Null data type.
   return ['null', Blockly.Dart.ORDER_ATOMIC];
 };
+
+Blockly.Dart.logic_ternary = function() {
+  var value_if = Blockly.Dart.valueToCode(this, 'IF',
+      Blockly.Dart.ORDER_CONDITIONAL) || 'false';
+  var value_then = Blockly.Dart.valueToCode(this, 'THEN',
+      Blockly.Dart.ORDER_CONDITIONAL) || 'null';
+  var value_else = Blockly.Dart.valueToCode(this, 'ELSE',
+      Blockly.Dart.ORDER_CONDITIONAL) || 'null';
+  var code = value_if + ' ? ' + value_then + ' : ' + value_else
+  return [code, Blockly.Dart.ORDER_CONDITIONAL];
+};

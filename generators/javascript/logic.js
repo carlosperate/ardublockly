@@ -76,3 +76,14 @@ Blockly.JavaScript.logic_null = function() {
   // Null data type.
   return ['null', Blockly.JavaScript.ORDER_ATOMIC];
 };
+
+Blockly.JavaScript.logic_ternary = function() {
+  var value_if = Blockly.JavaScript.valueToCode(this, 'IF',
+      Blockly.JavaScript.ORDER_CONDITIONAL) || 'false';
+  var value_then = Blockly.JavaScript.valueToCode(this, 'THEN',
+      Blockly.JavaScript.ORDER_CONDITIONAL) || 'null';
+  var value_else = Blockly.JavaScript.valueToCode(this, 'ELSE',
+      Blockly.JavaScript.ORDER_CONDITIONAL) || 'null';
+  var code = value_if + ' ? ' + value_then + ' : ' + value_else
+  return [code, Blockly.JavaScript.ORDER_CONDITIONAL];
+};
