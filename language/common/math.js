@@ -223,7 +223,6 @@ Blockly.Language.math_on_list = {
       } else {
         thisBlock.outputConnection.setCheck(Number);
       }
-      this.setText(newOp);
     });
     this.appendValueInput('LIST')
         .setCheck(Array)

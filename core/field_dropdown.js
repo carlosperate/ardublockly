@@ -119,10 +119,13 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   function callbackFactory(text) {
     return function(e) {
       if (this.changeHandler_) {
-        this.changeHandler_(text);
-      } else {
-        this.setText(text);
+        // Call any change handler, and allow it to override.
+        var override = this.changeHandler_(text);
+        if (override !== undefined) {
+          text = override;
+        }
       }
+      this.setText(text);
       // This mouse click has been handled, don't bubble up to document.
       e.stopPropagation();
     };

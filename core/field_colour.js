@@ -26,10 +26,13 @@
 /**
  * Class for a colour input field.
  * @param {string} colour The initial colour in '#rrggbb' format.
+ * @param {Function} opt_changeHandler A function that is executed when a new
+ *     option is selected.
  * @extends Blockly.Field
  * @constructor
  */
-Blockly.FieldColour = function(colour) {
+Blockly.FieldColour = function(colour, opt_changeHandler) {
+  this.changeHandler_ = opt_changeHandler;
   // Call parent's constructor.
   Blockly.Field.call(this, '\u00A0\u00A0\u00A0');
   this.borderRect_.style.fillOpacity = 1;
@@ -105,7 +108,16 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
       function(event) {
         var color = event.target.getSelectedColor() || '#000000';
         Blockly.FieldColour.hide();
-        thisObj.setValue(color);
+        if (thisObj.changeHandler_) {
+          // Call any change handler, and allow it to override.
+          var override = thisObj.changeHandler_(colour);
+          if (override !== undefined) {
+            colour = override;
+          }
+        }
+        if (colour !== null) {
+          thisObj.setValue(color);
+        }
       });
 };
 

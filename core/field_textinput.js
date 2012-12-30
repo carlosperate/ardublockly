@@ -26,17 +26,17 @@
 /**
  * Class for an editable text field.
  * @param {string} text The initial content of the field.
- * @param {Function} opt_validationFunc An optional function that is called
+ * @param {Function} opt_changeHandler An optional function that is called
  *     to validate any constraints on what the user entered.  Takes the new
  *     text as an argument and returns the accepted text or null to abort
  *     the change.
  * @extends Blockly.Field
  * @constructor
  */
-Blockly.FieldTextInput = function(text, opt_validationFunc) {
+Blockly.FieldTextInput = function(text, opt_changeHandler) {
   // Call parent's constructor.
   Blockly.Field.call(this, text);
-  this.validationFunc_ = opt_validationFunc;
+  this.changeHandler_ = opt_changeHandler;
 };
 
 // FieldTextInput is a subclass of Field.
@@ -47,11 +47,11 @@ goog.inherits(Blockly.FieldTextInput, Blockly.Field);
  * @param {string} text New text.
  */
 Blockly.FieldTextInput.prototype.setText = function(text) {
-  if (this.validationFunc_) {
-    var validated = this.validationFunc_(text);
+  if (this.changeHandler_) {
+    var validated = this.changeHandler_(text);
     // If the new text is invalid, validation returns null.
     // In this case we still want to display the illegal result.
-    if (validated !== null) {
+    if (validated !== null && validated !== undefined) {
       text = validated;
     }
   }
@@ -109,8 +109,11 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
      If Opera starts supporting foreignObjects, then delete this entire hack.
     */
     var newValue = window.prompt(Blockly.MSG_CHANGE_VALUE_TITLE, this.text_);
-    if (this.validationFunc_) {
-      newValue = this.validationFunc_(newValue);
+    if (this.changeHandler_) {
+      var override = this.changeHandler_(newValue);
+      if (override !== undefined) {
+        newValue = override;
+      }
     }
     if (newValue !== null) {
       this.setText(newValue);
@@ -194,13 +197,13 @@ Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
 Blockly.FieldTextInput.prototype.validate_ = function() {
   var valid = true;
   var htmlInput = Blockly.FieldTextInput.htmlInput_;
-  if (this.validationFunc_) {
-    valid = this.validationFunc_(htmlInput.value);
+  if (this.changeHandler_) {
+    valid = this.changeHandler_(htmlInput.value);
   }
-  if (valid) {
-    Blockly.removeClass_(htmlInput, 'blocklyInvalidInput');
-  } else {
+  if (valid === null) {
     Blockly.addClass_(htmlInput, 'blocklyInvalidInput');
+  } else {
+    Blockly.removeClass_(htmlInput, 'blocklyInvalidInput');
   }
 };
 
@@ -239,8 +242,8 @@ Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
   if (save) {
     // Save the edit (if it validates).
     text = htmlInput.value;
-    if (this.validationFunc_) {
-      text = this.validationFunc_(text);
+    if (this.changeHandler_) {
+      text = this.changeHandler_(text);
       if (text === null) {
         // Invalid edit.
         text = htmlInput.defaultValue;

@@ -162,9 +162,13 @@ Blockly.Field.prototype.getText = function() {
 
 /**
  * Set the text in this field.  Trigger a rerender of the source block.
- * @param {string} text New text.
+ * @param {?string} text New text.
  */
 Blockly.Field.prototype.setText = function(text) {
+  if (text === null) {
+    // No change if null.
+    return;
+  }
   this.text_ = text;
   // Empty the text element.
   goog.dom.removeChildren(/** @type {!Element} */ (this.textElement_));

@@ -85,7 +85,6 @@ Blockly.Language.factory_base = {
           } else if (bottomExists) {
             block.removeInput('BOTTOMTYPE');
           }
-          this.setText(option);
         });
     this.appendDummyInput()
         .appendTitle(dropdown, 'CONNECTIONS');

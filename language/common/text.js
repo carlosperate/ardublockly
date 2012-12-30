@@ -317,7 +317,6 @@ Blockly.Language.text_trim = {
           Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
           Blockly.LANG_TEXT_TRIM_TITLE_SIDE;
       this.sourceBlock_.setTitleValue(newTitle, 'SIDES');
-      this.setText(text);
     });
     this.appendValueInput('TEXT')
         .setCheck(String)
