@@ -34,11 +34,10 @@ Blockly.Dart = Blockly.Generator.get('Dart');
  */
 Blockly.Dart.addReservedWords(
     // http://www.dartlang.org/docs/spec/latest/dart-language-specification.pdf
-    // Section 15.1.1
-    'assert,break,case,catch,class,const,continue,default,do,else,extends,false,final,finally,for,if,in,is,new,null,return,super,switch,this,throw,true,try,var,void,while,' +
+    // Section 16.1.1
+    'assert,break,case,catch,class,const,continue,default,do,else,extends,false,final,finally,for,if,in,is,new,null,return,super,switch,this,throw,true,try,var,void,while,with,' +
     // http://api.dartlang.org/dart_core.html
-    'AbstractClassInstantiationError,ArgumentError,AssertionError,bool,CastError,Collection,Comparable,Completer,Date,double,Duration,Error,Expando,Expect,FallThroughError,Function,Future,Futures,Hashable,HashSet,int,Iterable,Iterator,Match,NoSuchMethodError,num,Object,Options,Pattern,Queue,RuntimeError,Set,Stopwatch,StringBuffer,Strings,Type,TypeError,HashMap,LinkedHashMap,List,Map,RegExp,String,Comparator,ClosureArgumentMismatchException,EmptyQueueException,Exception,ExpectException,FormatException,FutureAlreadyCompleteException,FutureNotCompleteException,IllegalAccessException,IllegalArgumentException,IllegalJSRegExpException,IndexOutOfRangeException,IntegerDivisionByZeroException,NoMoreElementsException,NotImplementedException,NullPointerException,ObjectNotClosureException,OutOfMemoryException,StackOverflowException,UnsupportedOperationException,WrongArgumentCountException');
-
+    'Collection,Comparable,Completer,Date,double,Function,Future,Hashable,HashMap,HashSet,int,InvocationMirror,Iterable,Iterator,LinkedHashMap,List,Map,Match,num,Options,Pattern,Queue,RegExp,Sequence,SequenceCollection,Set,Stopwatch,String,StringBuffer,Strings,Type,bool,DoubleLinkedQueue,DoubleLinkedQueueEntry,Duration,Expando,Expect,Futures,Object,SequenceIterator,SequenceList,Comparator,AbstractClassInstantiationError,ArgumentError,AssertionError,CastError,Error,Exception,ExpectException,FallThroughError,FormatException,FutureAlreadyCompleteException,FutureNotCompleteException,FutureUnhandledException,IllegalJSRegExpException,IntegerDivisionByZeroException,NoSuchMethodError,NullThrownError,OutOfMemoryError,RangeError,RuntimeError,StackOverflowError,StateError,TypeError,UnimplementedError,UnsupportedError');
 /**
  * Order of operation ENUMs.
  * http://www.dartlang.org/docs/dart-up-and-running/ch02.html#operator_table
