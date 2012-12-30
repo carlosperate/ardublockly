@@ -1069,7 +1069,7 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
  * @private
  */
 Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, highlightSteps,
-                                                   connectionsXY, cursorY) {
+                                                      connectionsXY, cursorY) {
   if (this.block_.outputConnection) {
     // Create output connection.
     this.block_.outputConnection.moveTo(connectionsXY.x, connectionsXY.y);
