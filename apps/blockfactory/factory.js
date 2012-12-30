@@ -71,7 +71,7 @@ function initEditor(blockly) {
   rootBlock.editable = false;
   rootBlock.deletable = false;
 
-  Blockly.addChangeListener(onchange);
+  EditorBlockly.addChangeListener(onchange);
 }
 
 /**
