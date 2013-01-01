@@ -65,8 +65,8 @@ Blockly.JavaScript.graph_set_y = function() {
   return argument0 + ';';
 };
 
-var keepers = ['math_number', 'math_arithmetic', 'math_single', 'math_round',
-               'math_trig', 'math_constrain', 'math_modulo',
+var keepers = ['math_number', 'math_arithmetic', 'math_single', 'math_trig',
+               'math_constant', 'math_round', 'math_modulo', 'math_constrain',
                'math_random_int', 'math_random_float', 
                'graph_get_x', 'graph_set_y',
                'logic_ternary', 'logic_compare', 'logic_operation',
