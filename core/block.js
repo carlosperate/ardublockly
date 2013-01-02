@@ -1094,6 +1094,7 @@ Blockly.Block.prototype.setInputsInline = function(newBoolean) {
   if (this.rendered) {
     this.render();
     this.bumpNeighbours_();
+    this.workspace.fireChangeEvent();
   }
 };
 

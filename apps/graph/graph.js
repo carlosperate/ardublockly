@@ -50,7 +50,7 @@ Graph.init = function(blockly) {
     }
     return null;
   };
-  
+
   if (!('BlocklyStorage' in window)) {
     document.getElementById('linkButton').className = 'disabled';
   }
@@ -64,7 +64,7 @@ Graph.init = function(blockly) {
         '</xml>');
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
-  
+
   Blockly.mainWorkspace.getCanvas().addEventListener('blocklyWorkspaceChange',
       window.parent.Graph.drawVisualization, false);
 };
@@ -79,7 +79,7 @@ google.load('visualization', '1', {packages: ['corechart']});
 Graph.drawVisualization = function() {
   // Create and populate the data table.
   var data = google.visualization.arrayToDataTable(Graph.plot());
-  
+
   var options = { //curveType: "function",
                   width: 400, height: 400,
                   chartArea: {left: '10%', width: '85%', height: '85%'},
@@ -132,7 +132,7 @@ Graph.getFunction = function() {
   // Set yBlock to only the code plugged into 'graph_set_y'.
   for (var j = 0; j < topBlocks.length; j++) {
     if (topBlocks[j].type == 'graph_set_y') {
-      yBlock = topBlocks[j];      
+      yBlock = topBlocks[j];
     }
   }
   if (!yBlock) {

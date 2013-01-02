@@ -220,7 +220,7 @@ Blockly.CodeGenerator.prototype.statementToCode = function(block, name) {
 };
 
 /**
- * Add one or more words to the list of reserved words for this language. 
+ * Add one or more words to the list of reserved words for this language.
  * @param {string} Comma-separated list of words to add to the list.
  *     No spaces.  Duplicates are ok.
  */

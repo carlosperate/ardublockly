@@ -69,7 +69,7 @@ Blockly.JavaScript.colour_blend = function() {
       Blockly.JavaScript.ORDER_COMMA) || '\'#000000\'';
   var ratio = Blockly.JavaScript.valueToCode(this, 'RATIO',
       Blockly.JavaScript.ORDER_COMMA) || 0.5;
-  
+
   if (!Blockly.JavaScript.definitions_['colour_blend']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
         'colour_blend', Blockly.Generator.NAME_TYPE);

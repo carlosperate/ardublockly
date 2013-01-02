@@ -26,3 +26,8 @@ handlers:
 # Redirect for root directory.
 - url: /
   script: index_redirect.py
+
+# Favicon.
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico

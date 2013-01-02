@@ -124,7 +124,7 @@ function init(blockly) {
       // Restore saved blocks in a separate thread so that subsequent
       // initialization is not affected from a failed load.
       window.setTimeout(BlocklyStorage.restoreBlocks, 0);
-    }  
+    }
     // Hook a save function onto unload.
     BlocklyStorage.backupOnUnload();
   } else {

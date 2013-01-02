@@ -347,7 +347,7 @@ Blockly.JavaScript.math_constrain = function() {
       argument2 + ')';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
-  
+
 Blockly.JavaScript.math_random_int = function() {
   // Random integer between [X] and [Y].
   var argument0 = Blockly.JavaScript.valueToCode(this, 'FROM',
