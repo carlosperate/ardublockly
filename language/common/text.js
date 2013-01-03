@@ -313,7 +313,7 @@ Blockly.Language.text_trim = {
   init: function() {
     this.setColour(160);
     var menu = new Blockly.FieldDropdown(this.OPERATORS, function(text) {
-      var newTitle = (text == Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH) ?
+      var newTitle = (text == 'BOTH') ?
           Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
           Blockly.LANG_TEXT_TRIM_TITLE_SIDE;
       this.sourceBlock_.setTitleValue(newTitle, 'SIDES');

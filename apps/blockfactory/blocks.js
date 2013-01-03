@@ -53,7 +53,7 @@ Blockly.Language.factory_base = {
           var outputExists = block.getInput('OUTPUTTYPE');
           var topExists = block.getInput('TOPTYPE');
           var bottomExists = block.getInput('BOTTOMTYPE');
-          if (option == 'left output') {
+          if (option == 'LEFT') {
             if (!outputExists) {
               block.appendValueInput('OUTPUTTYPE')
                   .setCheck('Type')
@@ -63,8 +63,7 @@ Blockly.Language.factory_base = {
           } else if (outputExists) {
             block.removeInput('OUTPUTTYPE');
           }
-          if (option == 'top connection' ||
-              option == 'top+bottom connections') {
+          if (option == 'TOP' || option == 'BOTH') {
             if (!topExists) {
               block.appendValueInput('TOPTYPE')
                   .setCheck('Type')
@@ -74,8 +73,7 @@ Blockly.Language.factory_base = {
           } else if (topExists) {
             block.removeInput('TOPTYPE');
           }
-          if (option == 'bottom connection' ||
-              option == 'top+bottom connections') {
+          if (option == 'BOTTOM' || option == 'BOTH') {
             if (!bottomExists) {
               block.appendValueInput('BOTTOMTYPE')
                   .setCheck('Type')

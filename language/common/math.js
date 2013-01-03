@@ -237,7 +237,7 @@ Blockly.Language.math_on_list = {
     this.setColour(230);
     this.setOutput(true, Number);
     var dropdown = new Blockly.FieldDropdown(this.OPERATORS, function(newOp) {
-      if (newOp == Blockly.LANG_MATH_ONLIST_OPERATOR_MODE) {
+      if (newOp == 'MODE') {
         thisBlock.outputConnection.setCheck(Array);
       } else {
         thisBlock.outputConnection.setCheck(Number);

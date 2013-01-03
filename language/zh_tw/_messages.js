@@ -209,7 +209,7 @@ Blockly.LANG_MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';
 Blockly.LANG_MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
 Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0, e, '+
     '\u03c6 (the Golden Ratio 1.618...),\nsqrt(2), and sqrt(1/2). Also include \u221e (Infinity)';
-    
+
 Blockly.LANG_MATH_TRIG_HELPURL = 'http://en.wikipedia.org/wiki/Trigonometric_functions';
 Blockly.LANG_MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree.';
 Blockly.LANG_MATH_TRIG_TOOLTIP_COS = 'Return the cosine of a degree.';
