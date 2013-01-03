@@ -136,13 +136,13 @@ function init(blockly) {
 
 /**
  * Execute the user's code.
- * Just a quick and dirty eval.  No checks for infinite loops, etc.
+ * Just a quick and dirty eval.  Catch infinite loops.
  */
 function runJS() {
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  checkTimeout();\n';
   var timeouts = 0;
   var checkTimeout = function() {
-    if (timeouts++ > 10000) {
+    if (timeouts++ > 1000000) {
       throw MSG_TIMEOUT;
     }
   };

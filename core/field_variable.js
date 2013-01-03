@@ -35,9 +35,9 @@ Blockly.FieldVariable = function(varname) {
   Blockly.FieldDropdown.call(this, Blockly.FieldVariable.dropdownCreate,
                                    Blockly.FieldVariable.dropdownChange);
   if (varname) {
-    this.setText(varname);
+    this.setValue(varname);
   } else {
-    this.setText(Blockly.Variables.generateUniqueName());
+    this.setValue(Blockly.Variables.generateUniqueName());
   }
 };
 
@@ -58,6 +58,7 @@ Blockly.FieldVariable.prototype.getValue = function() {
  * @param {string} text New text.
  */
 Blockly.FieldVariable.prototype.setValue = function(text) {
+  this.value_ = text;
   this.setText(text);
 };
 
@@ -109,16 +110,16 @@ Blockly.FieldVariable.dropdownChange = function(text) {
     if (text) {
       Blockly.Variables.renameVariable(oldVar, text);
     }
-  } else {
-    if (text == Blockly.MSG_NEW_VARIABLE) {
-      text = promptName(Blockly.MSG_NEW_VARIABLE_TITLE, '');
-      // Since variables are case-insensitive, ensure that if the new variable
-      // matches with an existing variable, the new case prevails throughout.
-      Blockly.Variables.renameVariable(text, text);
-    }
+    return null;
+  } else if (text == Blockly.MSG_NEW_VARIABLE) {
+    text = promptName(Blockly.MSG_NEW_VARIABLE_TITLE, '');
+    // Since variables are case-insensitive, ensure that if the new variable
+    // matches with an existing variable, the new case prevails throughout.
     if (text) {
+      Blockly.Variables.renameVariable(text, text);
       return text;
     }
+    return null;
   }
-  return null;
+  return undefined;
 };

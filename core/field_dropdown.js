@@ -126,7 +126,9 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
           value = override;
         }
       }
-      this.setValue(value);
+      if (value !== null) {
+        this.setValue(value);
+      }
       // This mouse click has been handled, don't bubble up to document.
       e.stopPropagation();
     };
