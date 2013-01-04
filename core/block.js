@@ -205,36 +205,13 @@ Blockly.Block.prototype.unselect = function() {
 
 /**
  * Dispose of this block.
- * @param {boolean} gentle If gentle, then try to heal any gap by connecting
+ * @param {boolean} healStack If true, then try to heal any gap by connecting
  *     the next statement with the previous statement.  Otherwise, dispose of
  *     all children of this block.
  * @param {boolean} animate If true, show a disposal animation and sound.
  */
-Blockly.Block.prototype.dispose = function(gentle, animate) {
-  if (this.outputConnection) {
-    // Detach this block from the parent's tree.
-    this.setParent(null);
-  } else {
-    var previousTarget = null;
-    if (this.previousConnection && this.previousConnection.targetConnection) {
-      // Remember the connection that any next statements need to connect to.
-      previousTarget = this.previousConnection.targetConnection;
-      // Detach this block from the parent's tree.
-      this.setParent(null);
-    }
-    if (gentle && this.nextConnection && this.nextConnection.targetConnection) {
-      // Disconnect the next statement.
-      var nextTarget = this.nextConnection.targetConnection;
-      var nextBlock = this.nextConnection.targetBlock();
-      this.nextConnection.disconnect();
-      nextBlock.setParent(null);
-
-      if (previousTarget) {
-        // Attach the next statement to the previous statement.
-        previousTarget.connect(nextTarget);
-      }
-    }
-  }
+Blockly.Block.prototype.dispose = function(healStack, animate) {
+  this.unplug(healStack);
 
   if (animate && this.svg_) {
     this.svg_.disposeUiEffect();
@@ -290,6 +267,48 @@ Blockly.Block.prototype.dispose = function(gentle, animate) {
   if (this.svg_) {
     this.svg_.dispose();
     this.svg_ = null;
+  }
+};
+
+/**
+ * Unplug this block from its superior block.  If this block is a statement,
+ * optionally reconnect the block underneath with the block on top.
+ * @param {boolean} healStack Disconnect child statement and reconnect stack.
+ * @param {boolean} bump Move the unplugged block sideways a short distance.
+ */
+Blockly.Block.prototype.unplug = function(healStack, bump) {
+  bump = bump && !!this.getParent();
+  if (this.outputConnection) {
+    if (this.outputConnection.targetConnection) {
+      // Disconnect from any superior block.
+      this.setParent(null);
+    }
+  } else {
+    var previousTarget = null;
+    if (this.previousConnection && this.previousConnection.targetConnection) {
+      // Remember the connection that any next statements need to connect to.
+      previousTarget = this.previousConnection.targetConnection;
+      // Detach this block from the parent's tree.
+      this.setParent(null);
+    }
+    if (healStack && this.nextConnection &&
+        this.nextConnection.targetConnection) {
+      // Disconnect the next statement.
+      var nextTarget = this.nextConnection.targetConnection;
+      var nextBlock = this.nextConnection.targetBlock();
+      this.nextConnection.disconnect();
+      nextBlock.setParent(null);
+      if (previousTarget) {
+        // Attach the next statement to the previous statement.
+        previousTarget.connect(nextTarget);
+      }
+    }
+  }
+  if (bump) {
+    // Bump the block sideways.
+    var dx = Blockly.SNAP_RADIUS * (Blockly.RTL ? -1 : 1);
+    var dy = Blockly.SNAP_RADIUS * 2;
+    this.moveBy(dx, dy);
   }
 };
 

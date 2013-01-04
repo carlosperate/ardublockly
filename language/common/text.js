@@ -312,12 +312,7 @@ Blockly.Language.text_trim = {
   helpUrl: Blockly.LANG_TEXT_TRIM_HELPURL,
   init: function() {
     this.setColour(160);
-    var menu = new Blockly.FieldDropdown(this.OPERATORS, function(text) {
-      var newTitle = (text == 'BOTH') ?
-          Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
-          Blockly.LANG_TEXT_TRIM_TITLE_SIDE;
-      this.sourceBlock_.setTitleValue(newTitle, 'SIDES');
-    });
+    var menu = new Blockly.FieldDropdown(this.OPERATORS, this.updatePlural);
     this.appendValueInput('TEXT')
         .setCheck(String)
         .appendTitle(Blockly.LANG_TEXT_TRIM_TITLE_SPACE)
@@ -327,17 +322,23 @@ Blockly.Language.text_trim = {
     this.setTooltip(Blockly.LANG_TEXT_TRIM_TOOLTIP);
   },
   mutationToDom: function() {
-    // Save whether the 'sides' title should be plural or singular.
-    var container = document.createElement('mutation');
-    var plural = (this.getTitleValue('MODE') == 'BOTH');
-    container.setAttribute('plural', plural);
-    return container;
+    // Save a mutation stub.
+    return document.createElement('mutation');
   },
   domToMutation: function(xmlElement) {
-    // Restore the 'sides' title as plural or singular.
-    var plural = (xmlElement.getAttribute('plural') == 'true');
-    this.setTitleValue(plural ? Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
-                      Blockly.LANG_TEXT_TRIM_TITLE_SIDE, 'SIDES');
+    // The mutation stub triggers a recalculation of the plural title.
+    this.updatePlural();
+  },
+  updatePlural: function() {
+    // Set the 'sides' title as plural or singular.
+    // Wait 0ms so that the menus can adjust to their final values.
+    // 'This' might be the menu (change event) or the block (mutator).
+    var thisBlock = this.sourceBlock_ || this;
+    window.setTimeout(function() {
+      var plural = (thisBlock.getTitleValue('MODE') == 'BOTH');
+      thisBlock.setTitleValue(plural ? Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
+          Blockly.LANG_TEXT_TRIM_TITLE_SIDE, 'SIDES');
+    }, 0);
   }
 };
 
