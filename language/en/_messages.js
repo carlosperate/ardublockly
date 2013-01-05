@@ -182,16 +182,6 @@ Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'if false';
 Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Check the condition in "test". If the condition is true\n' +
     'returns the "if true" value, otherwise returns the "if false" value.';
 
-Blockly.LANG_LOGIC_IS_EVEN = 'is even';
-Blockly.LANG_LOGIC_IS_ODD = 'is odd';
-Blockly.LANG_LOGIC_IS_PRIME = 'is prime';
-Blockly.LANG_LOGIC_IS_WHOLE = 'is whole';
-Blockly.LANG_LOGIC_IS_POSITIVE = 'is positive';
-Blockly.LANG_LOGIC_IS_NEGATIVE = 'is negative';
-Blockly.LANG_LOGIC_IS_DIVISIBLE_BY = 'is divisible by';
-Blockly.LANG_LOGIC_IS_TOOLTIP = 'Check if a number is an even, odd, prime, whole, positive, or negative number,\n' +
-    'or if it is divisible by certain number. Returns true or false.';
-
 // Math Blocks.
 Blockly.LANG_CATEGORY_MATH = 'Math';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
@@ -225,8 +215,18 @@ Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
 Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
 
 Blockly.LANG_MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
-Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0, e, '+
-    '\u03c6 (the Golden Ratio 1.618...),\nsqrt(2), and sqrt(1/2). Also include \u221e (Infinity)';
+Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0, e, \u03c6 (the Golden Ratio 1.618...),\n' +
+    'sqrt(2), and sqrt(1/2). Also include \u221e (Infinity)';
+
+Blockly.LANG_MATH_IS_EVEN = 'is even';
+Blockly.LANG_MATH_IS_ODD = 'is odd';
+Blockly.LANG_MATH_IS_PRIME = 'is prime';
+Blockly.LANG_MATH_IS_WHOLE = 'is whole';
+Blockly.LANG_MATH_IS_POSITIVE = 'is positive';
+Blockly.LANG_MATH_IS_NEGATIVE = 'is negative';
+Blockly.LANG_MATH_IS_DIVISIBLE_BY = 'is divisible by';
+Blockly.LANG_MATH_IS_TOOLTIP = 'Check if a number is an even, odd, prime, whole, positive, or negative number,\n' +
+    'or if it is divisible by certain number. Returns true or false.';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';

@@ -176,6 +176,60 @@ Blockly.Language.math_constant.CONSTANTS =
      ['sqrt(1/2)', 'SQRT1_2'],
      ['\u221e', 'INFINITY']];
 
+Blockly.Language.math_number_property = {
+  // Check if a number is even, odd, prime, whole, positive, or negative
+  // or if it is divisible by certain number. Returns true or false.
+  category: Blockly.LANG_CATEGORY_MATH,
+  helpUrl: '',
+  init: function() {
+    this.setColour(230);
+    this.appendValueInput('NUMBER_TO_CHECK')
+        .setCheck(Number);
+    var dropdown = new Blockly.FieldDropdown(this.PROPERTIES, function(option) {
+      var divisorInput = (option == 'DIVISIBLE_BY');
+      this.sourceBlock_.updateShape(divisorInput);
+    });
+    this.appendDummyInput()
+        .appendTitle(dropdown, 'PROPERTY');
+    this.setInputsInline(true);
+    this.setOutput(true, Boolean);
+    this.setTooltip(Blockly.LANG_MATH_IS_TOOLTIP);
+  },
+  mutationToDom: function() {
+    // Save whether the 'divisorInput' should be true of false (present or not).
+    var container = document.createElement('mutation');
+    var divisorInput = (this.getTitleValue('PROPERTY') == 'DIVISIBLE_BY');
+    container.setAttribute('divisor_input', divisorInput);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the 'divisorInput'.
+    var divisorInput = (xmlElement.getAttribute('divisor_input') == 'true');
+    this.updateShape(divisorInput);
+  },
+  updateShape: function(divisorInput) {
+    // Add or remove a Value Input.
+    var inputExists = this.getInput('DIVISOR');
+    if (divisorInput) {
+      if (!inputExists) {
+        this.appendValueInput('DIVISOR')
+                 .setCheck(Number);
+      }
+    } else if (inputExists) {
+      this.removeInput('DIVISOR');
+    }
+  }
+};
+
+Blockly.Language.math_number_property.PROPERTIES =
+    [[Blockly.LANG_MATH_IS_EVEN, 'EVEN'],
+     [Blockly.LANG_MATH_IS_ODD, 'ODD'],
+     [Blockly.LANG_MATH_IS_PRIME, 'PRIME'],
+     [Blockly.LANG_MATH_IS_WHOLE, 'WHOLE'],
+     [Blockly.LANG_MATH_IS_POSITIVE, 'POSITIVE'],
+     [Blockly.LANG_MATH_IS_NEGATIVE, 'NEGATIVE'],
+     [Blockly.LANG_MATH_IS_DIVISIBLE_BY, 'DIVISIBLE_BY']];
+
 Blockly.Language.math_change = {
   // Add to a variable in place.
   category: Blockly.LANG_CATEGORY_MATH,

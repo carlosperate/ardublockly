@@ -66,11 +66,12 @@ Blockly.JavaScript.graph_set_y = function() {
 };
 
 var keepers = ['math_number', 'math_arithmetic', 'math_single', 'math_trig',
-               'math_constant', 'math_round', 'math_modulo', 'math_constrain',
+               'math_constant', 'math_number_property',
+               'math_round', 'math_modulo', 'math_constrain',
                'math_random_int', 'math_random_float',
                'graph_get_x', 'graph_set_y',
                'logic_ternary', 'logic_compare', 'logic_operation',
-               'logic_negate', 'logic_boolean', 'logic_number_property'];
+               'logic_negate', 'logic_boolean'];
 
 /**
  * Initialize Blockly.

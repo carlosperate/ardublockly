@@ -82,13 +82,17 @@ Graph.drawVisualization = function() {
 
   var options = { //curveType: "function",
                   width: 400, height: 400,
-                  chartArea: {left: '10%', width: '85%', height: '85%'},
-                  legend: {position: 'top', textStyle: {color: 'blue'}}
+                  chartArea: {left: '10%', width: '85%', height: '85%'}
                 };
 
   // Create and draw the visualization, passing in the data and options.
   new google.visualization.LineChart(document.getElementById('visualization')).
       draw(data, options);
+  var funcText = document.getElementById('funcText');
+  if (funcText.lastChild) {
+    funcText.removeChild(funcText.lastChild);
+  }
+  funcText.appendChild(document.createTextNode('y = ' + Graph.getFunction()));
 };
 
 /**
@@ -99,7 +103,7 @@ Graph.plot = function() {
   // Get JavaScript code for f(x).
   var formula = Graph.getFunction();
   // Initialize a table with two column headings.
-  var table = [['x', 'y = ' + formula]];
+  var table = [];
   var y;
   // TODO: Improve range and scale of graph
   for (var x = -10; x <= 10; x = Math.round((x + 0.1) * 10) / 10) {
@@ -115,9 +119,12 @@ Graph.plot = function() {
       table.push([x, y]);
     }
   }
+  // Add column heading to table.
+  if (table.length == 0) {
   // If there is no value row in table, add a [0, 0] row to prevent graph error.
-  if (table.length == 1) {
-    table.push([0, 0]);
+    table.unshift(['x', 'y'], [0, 0]);
+  } else {
+    table.unshift(['x', 'y']);
   }
   return table;
 };

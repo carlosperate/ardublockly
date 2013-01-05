@@ -363,7 +363,7 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="4" y="177">
+  <block type="procedures_defnoreturn" x="23" y="194">
     <mutation></mutation>
     <title name="NAME">test arithmetic</title>
     <statement name="STACK">
@@ -492,7 +492,228 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="9" y="1980">
+  <block type="procedures_defnoreturn" x="391" y="2879">
+    <mutation></mutation>
+    <title name="NAME">test constraint</title>
+    <statement name="STACK">
+      <block type="unittest_assertequals" inline="false">
+        <title name="MESSAGE">constraint</title>
+        <value name="ACTUAL">
+          <block type="math_constrain" inline="true">
+            <value name="VALUE">
+              <block type="math_number">
+                <title name="NUM">100</title>
+              </block>
+            </value>
+            <value name="LOW">
+              <block type="math_number">
+                <title name="NUM">0</title>
+              </block>
+            </value>
+            <value name="HIGH">
+              <block type="math_number">
+                <title name="NUM">42</title>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="EXPECTED">
+          <block type="math_number">
+            <title name="NUM">42</title>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="16" y="727">
+    <mutation></mutation>
+    <title name="NAME">test trig</title>
+    <statement name="STACK">
+      <block type="unittest_assertequals" inline="false">
+        <title name="MESSAGE">sin</title>
+        <value name="ACTUAL">
+          <block type="math_trig" inline="false">
+            <title name="OP">SIN</title>
+            <value name="NUM">
+              <block type="math_number">
+                <title name="NUM">90</title>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="EXPECTED">
+          <block type="math_number">
+            <title name="NUM">1</title>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_assertequals" inline="false">
+            <title name="MESSAGE">cos</title>
+            <value name="ACTUAL">
+              <block type="math_trig" inline="false">
+                <title name="OP">COS</title>
+                <value name="NUM">
+                  <block type="math_number">
+                    <title name="NUM">180</title>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="EXPECTED">
+              <block type="math_number">
+                <title name="NUM">-1</title>
+              </block>
+            </value>
+            <next>
+              <block type="unittest_assertequals" inline="false">
+                <title name="MESSAGE">tan</title>
+                <value name="ACTUAL">
+                  <block type="math_trig" inline="false">
+                    <title name="OP">TAN</title>
+                    <value name="NUM">
+                      <block type="math_number">
+                        <title name="NUM">0</title>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="EXPECTED">
+                  <block type="math_number">
+                    <title name="NUM">0</title>
+                  </block>
+                </value>
+                <next>
+                  <block type="unittest_assertequals" inline="false">
+                    <title name="MESSAGE">asin</title>
+                    <value name="ACTUAL">
+                      <block type="math_trig" inline="false">
+                        <title name="OP">ASIN</title>
+                        <value name="NUM">
+                          <block type="math_number">
+                            <title name="NUM">-1</title>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="EXPECTED">
+                      <block type="math_number">
+                        <title name="NUM">-90</title>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="unittest_assertequals" inline="false">
+                        <title name="MESSAGE">acos</title>
+                        <value name="ACTUAL">
+                          <block type="math_trig" inline="false">
+                            <title name="OP">ACOS</title>
+                            <value name="NUM">
+                              <block type="math_number">
+                                <title name="NUM">1</title>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="EXPECTED">
+                          <block type="math_number">
+                            <title name="NUM">0</title>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="unittest_assertequals" inline="false">
+                            <title name="MESSAGE">atan</title>
+                            <value name="ACTUAL">
+                              <block type="math_trig" inline="false">
+                                <title name="OP">ATAN</title>
+                                <value name="NUM">
+                                  <block type="math_number">
+                                    <title name="NUM">1</title>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="EXPECTED">
+                              <block type="math_number">
+                                <title name="NUM">45</title>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="364" y="826">
+    <mutation></mutation>
+    <title name="NAME">test constant</title>
+    <statement name="STACK">
+      <block type="unittest_asserttrue" inline="false">
+        <title name="MESSAGE">test name</title>
+        <value name="ACTUAL">
+          <block type="logic_compare" inline="true">
+            <title name="OP">GT</title>
+            <value name="A">
+              <block type="math_constant">
+                <title name="CONSTANT">PI</title>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_constant">
+                <title name="CONSTANT">E</title>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_asserttrue" inline="false">
+            <title name="MESSAGE">test name</title>
+            <value name="ACTUAL">
+              <block type="logic_compare" inline="true">
+                <title name="OP">GTE</title>
+                <value name="A">
+                  <block type="math_constant">
+                    <title name="CONSTANT">GOLDEN_RATIO</title>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_constant">
+                    <title name="CONSTANT">SQRT2</title>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="unittest_asserttrue" inline="false">
+                <title name="MESSAGE">test name</title>
+                <value name="ACTUAL">
+                  <block type="logic_compare" inline="true">
+                    <title name="OP">LT</title>
+                    <value name="A">
+                      <block type="math_constant">
+                        <title name="CONSTANT">SQRT1_2</title>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_constant">
+                        <title name="CONSTANT">INFINITY</title>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="26" y="2558">
     <mutation></mutation>
     <title name="NAME">test operations on list</title>
     <statement name="STACK">
@@ -824,40 +1045,7 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="391" y="2879">
-    <mutation></mutation>
-    <title name="NAME">test constraint</title>
-    <statement name="STACK">
-      <block type="unittest_assertequals" inline="false">
-        <title name="MESSAGE">constraint</title>
-        <value name="ACTUAL">
-          <block type="math_constrain" inline="true">
-            <value name="VALUE">
-              <block type="math_number">
-                <title name="NUM">100</title>
-              </block>
-            </value>
-            <value name="LOW">
-              <block type="math_number">
-                <title name="NUM">0</title>
-              </block>
-            </value>
-            <value name="HIGH">
-              <block type="math_number">
-                <title name="NUM">42</title>
-              </block>
-            </value>
-          </block>
-        </value>
-        <value name="EXPECTED">
-          <block type="math_number">
-            <title name="NUM">42</title>
-          </block>
-        </value>
-      </block>
-    </statement>
-  </block>
-  <block type="procedures_defreturn" inline="false" x="13" y="1503">
+  <block type="procedures_defreturn" inline="false" x="25" y="2052">
     <mutation>
       <arg name="a"></arg>
       <arg name="b"></arg>
@@ -1016,7 +1204,244 @@
       </block>
     </value>
   </block>
-  <block type="procedures_defnoreturn" x="369" y="1194">
+  <block type="procedures_defnoreturn" x="18" y="1279">
+    <mutation></mutation>
+    <title name="NAME">test number properties</title>
+    <statement name="STACK">
+      <block type="unittest_assertequals" inline="true">
+        <title name="MESSAGE">even</title>
+        <value name="ACTUAL">
+          <block type="math_number_property" inline="true">
+            <mutation divisor_input="false"></mutation>
+            <title name="PROPERTY">EVEN</title>
+            <value name="NUMBER_TO_CHECK">
+              <block type="math_number">
+                <title name="NUM">42</title>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="EXPECTED">
+          <block type="logic_boolean">
+            <title name="BOOL">TRUE</title>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_assertequals" inline="true">
+            <title name="MESSAGE">odd</title>
+            <value name="ACTUAL">
+              <block type="math_number_property" inline="true">
+                <mutation divisor_input="false"></mutation>
+                <title name="PROPERTY">ODD</title>
+                <value name="NUMBER_TO_CHECK">
+                  <block type="math_number">
+                    <title name="NUM">42.1</title>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="EXPECTED">
+              <block type="logic_boolean">
+                <title name="BOOL">FALSE</title>
+              </block>
+            </value>
+            <next>
+              <block type="unittest_assertequals" inline="true">
+                <title name="MESSAGE">prime_5</title>
+                <value name="ACTUAL">
+                  <block type="math_number_property" inline="true">
+                    <mutation divisor_input="false"></mutation>
+                    <title name="PROPERTY">PRIME</title>
+                    <value name="NUMBER_TO_CHECK">
+                      <block type="math_number">
+                        <title name="NUM">5</title>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="EXPECTED">
+                  <block type="logic_boolean">
+                    <title name="BOOL">TRUE</title>
+                  </block>
+                </value>
+                <next>
+                  <block type="unittest_assertequals" inline="true">
+                    <title name="MESSAGE">prime_25</title>
+                    <value name="ACTUAL">
+                      <block type="math_number_property" inline="true">
+                        <mutation divisor_input="false"></mutation>
+                        <title name="PROPERTY">PRIME</title>
+                        <value name="NUMBER_TO_CHECK">
+                          <block type="math_number">
+                            <title name="NUM">25</title>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="EXPECTED">
+                      <block type="logic_boolean">
+                        <title name="BOOL">FALSE</title>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="unittest_assertequals" inline="true">
+                        <title name="MESSAGE">prime_negative</title>
+                        <value name="ACTUAL">
+                          <block type="math_number_property" inline="true">
+                            <mutation divisor_input="false"></mutation>
+                            <title name="PROPERTY">PRIME</title>
+                            <value name="NUMBER_TO_CHECK">
+                              <block type="math_number">
+                                <title name="NUM">-31.1</title>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="EXPECTED">
+                          <block type="logic_boolean">
+                            <title name="BOOL">FALSE</title>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="unittest_assertequals" inline="true">
+                            <title name="MESSAGE">whole</title>
+                            <value name="ACTUAL">
+                              <block type="math_number_property" inline="true">
+                                <mutation divisor_input="false"></mutation>
+                                <title name="PROPERTY">WHOLE</title>
+                                <value name="NUMBER_TO_CHECK">
+                                  <block type="math_constant">
+                                    <title name="CONSTANT">PI</title>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="EXPECTED">
+                              <block type="logic_boolean">
+                                <title name="BOOL">FALSE</title>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="unittest_assertequals" inline="true">
+                                <title name="MESSAGE">positive</title>
+                                <value name="ACTUAL">
+                                  <block type="math_number_property" inline="true">
+                                    <mutation divisor_input="false"></mutation>
+                                    <title name="PROPERTY">POSITIVE</title>
+                                    <value name="NUMBER_TO_CHECK">
+                                      <block type="math_constant">
+                                        <title name="CONSTANT">INFINITY</title>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="EXPECTED">
+                                  <block type="logic_boolean">
+                                    <title name="BOOL">TRUE</title>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="unittest_assertequals" inline="true">
+                                    <title name="MESSAGE">negative</title>
+                                    <value name="ACTUAL">
+                                      <block type="math_number_property" inline="true">
+                                        <mutation divisor_input="false"></mutation>
+                                        <title name="PROPERTY">NEGATIVE</title>
+                                        <value name="NUMBER_TO_CHECK">
+                                          <block type="math_number">
+                                            <title name="NUM">-42</title>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="EXPECTED">
+                                      <block type="logic_boolean">
+                                        <title name="BOOL">TRUE</title>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="unittest_assertequals" inline="true">
+                                        <title name="MESSAGE">divisible</title>
+                                        <value name="ACTUAL">
+                                          <block type="math_number_property" inline="true">
+                                            <mutation divisor_input="true"></mutation>
+                                            <title name="PROPERTY">DIVISIBLE_BY</title>
+                                            <value name="NUMBER_TO_CHECK">
+                                              <block type="math_number">
+                                                <title name="NUM">42</title>
+                                              </block>
+                                            </value>
+                                            <value name="DIVISOR">
+                                              <block type="math_number">
+                                                <title name="NUM">2</title>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="EXPECTED">
+                                          <block type="logic_boolean">
+                                            <title name="BOOL">TRUE</title>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="29" y="1794">
+    <mutation></mutation>
+    <title name="NAME">test change</title>
+    <statement name="STACK">
+      <block type="variables_set" inline="false">
+        <title name="VAR">varToChange</title>
+        <value name="VALUE">
+          <block type="math_number">
+            <title name="NUM">100</title>
+          </block>
+        </value>
+        <next>
+          <block type="math_change" inline="false">
+            <title name="VAR">varToChange</title>
+            <value name="DELTA">
+              <block type="math_number">
+                <title name="NUM">42</title>
+              </block>
+            </value>
+            <next>
+              <block type="unittest_assertequals" inline="false">
+                <title name="MESSAGE">change</title>
+                <value name="ACTUAL">
+                  <block type="variables_get">
+                    <title name="VAR">varToChange</title>
+                  </block>
+                </value>
+                <value name="EXPECTED">
+                  <block type="math_number">
+                    <title name="NUM">142</title>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="383" y="1784">
     <mutation></mutation>
     <title name="NAME">test round</title>
     <statement name="STACK">
@@ -1071,233 +1496,6 @@
                 <value name="EXPECTED">
                   <block type="math_number">
                     <title name="NUM">42</title>
-                  </block>
-                </value>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="procedures_defnoreturn" x="18" y="1288">
-    <mutation></mutation>
-    <title name="NAME">test change</title>
-    <statement name="STACK">
-      <block type="variables_set" inline="false">
-        <title name="VAR">varToChange</title>
-        <value name="VALUE">
-          <block type="math_number">
-            <title name="NUM">100</title>
-          </block>
-        </value>
-        <next>
-          <block type="math_change" inline="false">
-            <title name="VAR">varToChange</title>
-            <value name="DELTA">
-              <block type="math_number">
-                <title name="NUM">42</title>
-              </block>
-            </value>
-            <next>
-              <block type="unittest_assertequals" inline="false">
-                <title name="MESSAGE">change</title>
-                <value name="ACTUAL">
-                  <block type="variables_get">
-                    <title name="VAR">varToChange</title>
-                  </block>
-                </value>
-                <value name="EXPECTED">
-                  <block type="math_number">
-                    <title name="NUM">142</title>
-                  </block>
-                </value>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="procedures_defnoreturn" x="16" y="727">
-    <mutation></mutation>
-    <title name="NAME">test trig</title>
-    <statement name="STACK">
-      <block type="unittest_assertequals" inline="false">
-        <title name="MESSAGE">sin</title>
-        <value name="ACTUAL">
-          <block type="math_trig" inline="false">
-            <title name="OP">SIN</title>
-            <value name="NUM">
-              <block type="math_number">
-                <title name="NUM">90</title>
-              </block>
-            </value>
-          </block>
-        </value>
-        <value name="EXPECTED">
-          <block type="math_number">
-            <title name="NUM">1</title>
-          </block>
-        </value>
-        <next>
-          <block type="unittest_assertequals" inline="false">
-            <title name="MESSAGE">cos</title>
-            <value name="ACTUAL">
-              <block type="math_trig" inline="false">
-                <title name="OP">COS</title>
-                <value name="NUM">
-                  <block type="math_number">
-                    <title name="NUM">180</title>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <value name="EXPECTED">
-              <block type="math_number">
-                <title name="NUM">-1</title>
-              </block>
-            </value>
-            <next>
-              <block type="unittest_assertequals" inline="false">
-                <title name="MESSAGE">tan</title>
-                <value name="ACTUAL">
-                  <block type="math_trig" inline="false">
-                    <title name="OP">TAN</title>
-                    <value name="NUM">
-                      <block type="math_number">
-                        <title name="NUM">0</title>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <value name="EXPECTED">
-                  <block type="math_number">
-                    <title name="NUM">0</title>
-                  </block>
-                </value>
-                <next>
-                  <block type="unittest_assertequals" inline="false">
-                    <title name="MESSAGE">asin</title>
-                    <value name="ACTUAL">
-                      <block type="math_trig" inline="false">
-                        <title name="OP">ASIN</title>
-                        <value name="NUM">
-                          <block type="math_number">
-                            <title name="NUM">-1</title>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <value name="EXPECTED">
-                      <block type="math_number">
-                        <title name="NUM">-90</title>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="unittest_assertequals" inline="false">
-                        <title name="MESSAGE">acos</title>
-                        <value name="ACTUAL">
-                          <block type="math_trig" inline="false">
-                            <title name="OP">ACOS</title>
-                            <value name="NUM">
-                              <block type="math_number">
-                                <title name="NUM">1</title>
-                              </block>
-                            </value>
-                          </block>
-                        </value>
-                        <value name="EXPECTED">
-                          <block type="math_number">
-                            <title name="NUM">0</title>
-                          </block>
-                        </value>
-                        <next>
-                          <block type="unittest_assertequals" inline="false">
-                            <title name="MESSAGE">atan</title>
-                            <value name="ACTUAL">
-                              <block type="math_trig" inline="false">
-                                <title name="OP">ATAN</title>
-                                <value name="NUM">
-                                  <block type="math_number">
-                                    <title name="NUM">1</title>
-                                  </block>
-                                </value>
-                              </block>
-                            </value>
-                            <value name="EXPECTED">
-                              <block type="math_number">
-                                <title name="NUM">45</title>
-                              </block>
-                            </value>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="procedures_defnoreturn" x="364" y="826">
-    <mutation></mutation>
-    <title name="NAME">test constant</title>
-    <statement name="STACK">
-      <block type="unittest_asserttrue" inline="false">
-        <title name="MESSAGE">test name</title>
-        <value name="ACTUAL">
-          <block type="logic_compare" inline="true">
-            <title name="OP">GT</title>
-            <value name="A">
-              <block type="math_constant">
-                <title name="CONSTANT">PI</title>
-              </block>
-            </value>
-            <value name="B">
-              <block type="math_constant">
-                <title name="CONSTANT">E</title>
-              </block>
-            </value>
-          </block>
-        </value>
-        <next>
-          <block type="unittest_asserttrue" inline="false">
-            <title name="MESSAGE">test name</title>
-            <value name="ACTUAL">
-              <block type="logic_compare" inline="true">
-                <title name="OP">GTE</title>
-                <value name="A">
-                  <block type="math_constant">
-                    <title name="CONSTANT">GOLDEN_RATIO</title>
-                  </block>
-                </value>
-                <value name="B">
-                  <block type="math_constant">
-                    <title name="CONSTANT">SQRT2</title>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <next>
-              <block type="unittest_asserttrue" inline="false">
-                <title name="MESSAGE">test name</title>
-                <value name="ACTUAL">
-                  <block type="logic_compare" inline="true">
-                    <title name="OP">LT</title>
-                    <value name="A">
-                      <block type="math_constant">
-                        <title name="CONSTANT">SQRT1_2</title>
-                      </block>
-                    </value>
-                    <value name="B">
-                      <block type="math_constant">
-                        <title name="CONSTANT">INFINITY</title>
-                      </block>
-                    </value>
                   </block>
                 </value>
               </block>

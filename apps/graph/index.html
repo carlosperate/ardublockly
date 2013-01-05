@@ -44,7 +44,22 @@
       opacity: 1;
     }
     #visualization {
-      margin-top: 3em;
+      margin-top: 1em;
+    }
+    #funcText {
+      margin-top: 1em;
+      margin-left: 1.5em;
+      font-family: sans-serif;
+      font-size: small;
+    }
+    #funcText>img {
+      height: 3px;
+      width: 15px;
+      vertical-align: middle;
+      margin-right: .5em;
+    }
+    #y1 {
+      background-color: #36c;
     }
     iframe {
       height: 100%;
@@ -64,6 +79,10 @@
           <a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; Graph
         </h1>
         <div id="visualization"></div>
+        <div id="funcText">
+          <img id="y1" src="1x1.gif">
+          ...
+        </div>
       </td>
       <td valign="top">
         <iframe src="frame.html"></iframe>
