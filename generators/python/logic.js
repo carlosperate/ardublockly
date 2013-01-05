@@ -86,3 +86,71 @@ Blockly.Python.logic_ternary = function() {
   var code = value_then + ' if ' + value_if + ' else ' + value_else
   return [code, Blockly.Python.ORDER_CONDITIONAL];
 };
+
+Blockly.Python.logic_number_property = function() {
+  var number_to_check = Blockly.Python.valueToCode(this, 'NUMBER_TO_CHECK',
+      Blockly.Python.ORDER_MULTIPLICATIVE);
+  if (!number_to_check) {
+    return ['False', Blockly.Python.ORDER_ATOMIC];
+  }
+  var dropdown_property = this.getTitleValue('PROPERTY');
+  var code;
+  if (dropdown_property == 'PRIME') {
+    // Prime is a special case as it is not a one-liner test.
+    if (!Blockly.Python.definitions_['isPrime']) {
+      var functionName = Blockly.Python.variableDB_.getDistinctName(
+          'isPrime', Blockly.Generator.NAME_TYPE);
+      Blockly.Python.logic_prime= functionName;
+      var func = [];
+      func.push('def ' + functionName + '(n):');
+      func.push('  # http://en.wikipedia.org/wiki/Primality_test#Naive_methods');
+      func.push('  # If n is not a number but a string, try parsing it.');
+      func.push('  if type(n) not in (int, float, long):');
+      func.push('    try:');
+      func.push('      n = float(n)');
+      func.push('    except:');
+      func.push('      return False');
+      func.push('  if n == 2 or n == 3:');
+      func.push('    return True');
+      func.push('  # False if n is negative, is 1, or not whole,' +
+                ' or if n is divisible by 2 or 3.');
+      func.push('  if n <= 1 or n % 1 != 0 or n % 2 == 0 or n % 3 == 0:');
+      func.push('    return False');
+      func.push('  # Check all the numbers of form 6k +/- 1, up to sqrt(n).');
+      func.push('  for x in range(6, int(math.sqrt(n)) + 2, 6):');
+      func.push('    if n % (x - 1) == 0 or n % (x + 1) == 0:');
+      func.push('      return False');
+      func.push('  return True');
+      Blockly.Python.definitions_['isPrime'] = func.join('\n');
+    }
+    code = Blockly.Python.logic_prime + '(' + number_to_check + ')';
+    return [code, Blockly.Python.ORDER_FUNCTION_CALL];
+  }
+  switch (dropdown_property) {
+    case 'EVEN':
+      code = number_to_check + ' % 2 == 0';
+      break;
+    case 'ODD':
+      code = number_to_check + ' % 2 == 1';
+      break;
+    case 'WHOLE':
+      code = number_to_check + ' % 1 == 0';
+      break;
+    case 'POSITIVE':
+      code = number_to_check + ' > 0';
+      break;
+    case 'NEGATIVE':
+      code = number_to_check + ' < 0';
+      break;
+    case 'DIVISIBLE_BY':
+      var divisor = Blockly.Python.valueToCode(this, 'DIVISOR',
+          Blockly.Python.ORDER_MULTIPLICATIVE);
+      // If 'divisor' is some code that evals to 0, Python will raise an error.
+      if (!divisor || divisor == '0') {
+        return ['False', Blockly.Python.ORDER_ATOMIC];
+      }
+      code = number_to_check + ' % ' + divisor + ' == 0';
+      break;
+  }
+  return [code, Blockly.Python.ORDER_EQUALITY];
+};

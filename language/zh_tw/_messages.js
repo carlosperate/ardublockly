@@ -182,6 +182,16 @@ Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'if false';
 Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Check the condition in "test". If the condition is true\n' +
     'returns the "if true" value, otherwise returns the "if false" value.';
 
+Blockly.LANG_LOGIC_IS_EVEN = 'is even';
+Blockly.LANG_LOGIC_IS_ODD = 'is odd';
+Blockly.LANG_LOGIC_IS_PRIME = 'is prime';
+Blockly.LANG_LOGIC_IS_WHOLE = 'is whole';
+Blockly.LANG_LOGIC_IS_POSITIVE = 'is positive';
+Blockly.LANG_LOGIC_IS_NEGATIVE = 'is negative';
+Blockly.LANG_LOGIC_IS_DIVISIBLE_BY = 'is divisible by';
+Blockly.LANG_LOGIC_IS_TOOLTIP = 'Check if a number is an even, odd, prime, whole, positive, or negative number,\n' +
+    'or if it is divisible by certain number. Returns true or false.';
+
 // Math Blocks.
 Blockly.LANG_CATEGORY_MATH = '算數';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';

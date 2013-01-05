@@ -31,7 +31,9 @@ Blockly.Python.addReservedWords('math,random');
 Blockly.Python.math_number = function() {
   // Numeric value.
   var code = window.parseFloat(this.getTitleValue('NUM'));
-  return [code, Blockly.Python.ORDER_UNARY_SIGN];
+  var order = code < 0 ? Blockly.Python.ORDER_UNARY_SIGN :
+              Blockly.Python.ORDER_ATOMIC;
+  return [code, order];
 };
 
 Blockly.Python.math_arithmetic = function() {
@@ -165,7 +167,7 @@ Blockly.Python.math_change = function() {
   var varName = Blockly.Python.variableDB_.getName(this.getTitleValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = (' + varName + ' if type(' + varName +
-      ') in (int, float) else 0) + ' + argument0 + '\n';
+      ') in (int, float, long) else 0) + ' + argument0 + '\n';
 };
 
 // Rounding functions have a single operand.
@@ -199,7 +201,7 @@ Blockly.Python.math_on_list = function() {
         var func = [];
         func.push('def ' + functionName + '(myList):');
         func.push('  localList = [e for e in myList ' +
-            'if type(e) in [int, float]]');
+            'if type(e) in (int, float, long)]');
         func.push('  if not localList: return');
         func.push('  return float(sum(localList)) / len(localList)');
         Blockly.Python.definitions_['math_mean'] = func.join('\n');
@@ -216,7 +218,7 @@ Blockly.Python.math_on_list = function() {
         var func = [];
         func.push('def ' + functionName + '(myList):');
         func.push('  localList = sorted([e for e in myList ' +
-            'if type(e) in [int, float]])');
+            'if type(e) in (int, float, long)])');
         func.push('  if not localList: return');
         func.push('  if len(localList) % 2 == 0:');
         func.push('    return (localList[len(localList) / 2 - 1] + ' +

@@ -154,3 +154,56 @@ Blockly.Language.logic_ternary = {
     this.setTooltip(Blockly.LANG_LOGIC_TERNARY_TOOLTIP);
   }
 };
+
+Blockly.Language.logic_number_property = {
+  category: Blockly.LANG_CATEGORY_LOGIC,
+  helpUrl: '',
+  init: function() {
+    this.setColour(120);
+    this.appendValueInput('NUMBER_TO_CHECK')
+        .setCheck(Number);
+    var dropdown = new Blockly.FieldDropdown(this.PROPERTIES, function(property) {
+      var divisorInput = (property == 'DIVISIBLE_BY');
+      this.sourceBlock_.updateShape(divisorInput);
+    });
+    this.appendDummyInput()
+        .appendTitle(dropdown, 'PROPERTY');
+    this.setInputsInline(true);
+    this.setOutput(true, Boolean);
+    this.setTooltip(Blockly.LANG_LOGIC_IS_TOOLTIP);
+  },
+  mutationToDom: function() {
+    // Save whether the 'divisorInput' should be true of false (present or not).
+    var container = document.createElement('mutation');
+    var divisorInput = (this.getTitleValue('PROPERTY') == 'DIVISIBLE_BY');
+    container.setAttribute('divisor_input', divisorInput);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the 'divisorInput'.
+    var divisorInput = (xmlElement.getAttribute('divisor_input') == 'true');
+    this.updateShape(divisorInput);
+  },
+  updateShape: function(divisorInput) {
+    // Add or remove a Value Input.
+    var inputExists = this.getInput('DIVISOR');
+    if (divisorInput) {
+      if (!inputExists) {
+        this.appendValueInput('DIVISOR')
+                 .setCheck(Number);
+      }
+    } else if (inputExists) {
+      this.removeInput('DIVISOR');
+    }
+  }
+};
+
+Blockly.Language.logic_number_property.PROPERTIES =
+    [[Blockly.LANG_LOGIC_IS_EVEN, 'EVEN'],
+     [Blockly.LANG_LOGIC_IS_ODD, 'ODD'],
+     [Blockly.LANG_LOGIC_IS_PRIME, 'PRIME'],
+     [Blockly.LANG_LOGIC_IS_WHOLE, 'WHOLE'],
+     [Blockly.LANG_LOGIC_IS_POSITIVE, 'POSITIVE'],
+     [Blockly.LANG_LOGIC_IS_NEGATIVE, 'NEGATIVE'],
+     [Blockly.LANG_LOGIC_IS_DIVISIBLE_BY, 'DIVISIBLE_BY']];
+

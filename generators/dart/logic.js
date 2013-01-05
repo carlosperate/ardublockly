@@ -87,3 +87,73 @@ Blockly.Dart.logic_ternary = function() {
   var code = value_if + ' ? ' + value_then + ' : ' + value_else
   return [code, Blockly.Dart.ORDER_CONDITIONAL];
 };
+
+Blockly.Dart.logic_number_property = function() {
+  var number_to_check = Blockly.Dart.valueToCode(this, 'NUMBER_TO_CHECK',
+      Blockly.Dart.ORDER_MULTIPLICATIVE);
+  if (!number_to_check) {
+    return ['false', Blockly.Python.ORDER_ATOMIC];
+  }
+  var dropdown_property = this.getTitleValue('PROPERTY');
+  var code;
+  if (dropdown_property == 'PRIME') {
+    // Prime is a special case as it is not a one-liner test.
+    if (!Blockly.Dart.definitions_['isPrime']) {
+      Blockly.Dart.definitions_['import_dart_math'] =
+          'import \'dart:math\' as Math;';
+      var functionName = Blockly.Dart.variableDB_.getDistinctName(
+          'isPrime', Blockly.Generator.NAME_TYPE);
+      Blockly.Dart.logic_prime= functionName;
+      var func = [];
+      func.push('bool ' + functionName + '(n) {');
+      func.push('  // http://en.wikipedia.org/wiki/Primality_test#Naive_methods');
+      func.push('  if (n == 2 || n == 3) {');
+      func.push('    return true;');
+      func.push('  }');
+      func.push('  // False if n is null, negative, is 1, or not whole.');
+      func.push('  // And false if n is divisible by 2 or 3.');
+      func.push('  if (n == null || n <= 1 || n % 1 != 0 || n % 2 == 0 ||' +
+                ' n % 3 == 0) {');
+      func.push('    return false;');
+      func.push('  }');
+      func.push('  // Check all the numbers of form 6k +/- 1, up to sqrt(n).');
+      func.push('  for (var x = 6; x <= Math.sqrt(n) + 1; x += 6) {');
+      func.push('    if (n % (x - 1) == 0 || n % (x + 1) == 0) {');
+      func.push('      return false;');
+      func.push('    }');
+      func.push('  }');
+      func.push('  return true;');
+      func.push('}');
+      Blockly.Dart.definitions_['isPrime'] = func.join('\n');
+    }
+    code = Blockly.Dart.logic_prime + '(' + number_to_check + ')';
+    return [code, Blockly.Dart.ORDER_FUNCTION_CALL];
+  }
+  switch (dropdown_property) {
+    case 'EVEN':
+      code = number_to_check + ' % 2 == 0';
+      break;
+    case 'ODD':
+      code = number_to_check + ' % 2 == 1';
+      break;
+    case 'WHOLE':
+      code = number_to_check + ' % 1 == 0';
+      break;
+    case 'POSITIVE':
+      code = number_to_check + ' > 0';
+      break;
+    case 'NEGATIVE':
+      code = number_to_check + ' < 0';
+      break;
+    case 'DIVISIBLE_BY':
+      var divisor = Blockly.Dart.valueToCode(this, 'DIVISOR',
+          Blockly.Dart.ORDER_MULTIPLICATIVE);
+      if (!divisor) {
+        return ['false', Blockly.Python.ORDER_ATOMIC];
+      }
+      code = number_to_check + ' % ' + divisor + ' == 0';
+      break;
+  }
+  return [code, Blockly.Dart.ORDER_EQUALITY];
+};
+

@@ -1,69 +1,4 @@
 <xml>
-  <block type="unittest_main" x="-8" y="15">
-    <statement name="DO">
-      <block type="unittest_asserttrue" inline="false">
-        <title name="MESSAGE">True</title>
-        <value name="ACTUAL">
-          <block type="logic_boolean">
-            <title name="BOOL">TRUE</title>
-          </block>
-        </value>
-        <next>
-          <block type="unittest_assertfalse" inline="false">
-            <title name="MESSAGE">False</title>
-            <value name="ACTUAL">
-              <block type="logic_boolean">
-                <title name="BOOL">FALSE</title>
-              </block>
-            </value>
-            <next>
-              <block type="unittest_asserttrue" inline="false">
-                <title name="MESSAGE">Not true</title>
-                <value name="ACTUAL">
-                  <block type="logic_negate" inline="false">
-                    <value name="BOOL">
-                      <block type="logic_boolean">
-                        <title name="BOOL">FALSE</title>
-                      </block>
-                    </value>
-                  </block>
-                </value>
-                <next>
-                  <block type="unittest_assertfalse" inline="false">
-                    <title name="MESSAGE">Not false</title>
-                    <value name="ACTUAL">
-                      <block type="logic_negate" inline="false">
-                        <value name="BOOL">
-                          <block type="logic_boolean">
-                            <title name="BOOL">TRUE</title>
-                          </block>
-                        </value>
-                      </block>
-                    </value>
-                    <next>
-                      <block type="procedures_callnoreturn">
-                        <mutation name="test equalities"></mutation>
-                        <next>
-                          <block type="procedures_callnoreturn">
-                            <mutation name="test and"></mutation>
-                            <next>
-                              <block type="procedures_callnoreturn">
-                                <mutation name="test or"></mutation>
-                              </block>
-                            </next>
-                          </block>
-                        </next>
-                      </block>
-                    </next>
-                  </block>
-                </next>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
   <block type="procedures_defnoreturn" x="-7" y="384">
     <mutation></mutation>
     <title name="NAME">test equalities</title>
@@ -392,7 +327,7 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="-5" y="1524">
+  <block type="procedures_defnoreturn" x="385" y="1208">
     <mutation></mutation>
     <title name="NAME">test and</title>
     <statement name="STACK">
@@ -476,14 +411,14 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="-1" y="1843">
+  <block type="procedures_defnoreturn" x="3" y="1527">
     <mutation></mutation>
     <title name="NAME">test_ternary</title>
     <statement name="STACK">
       <block type="unittest_assertequals" inline="false">
         <title name="MESSAGE">if true</title>
         <value name="ACTUAL">
-          <block type="logic_ternary" inline="false">
+          <block type="logic_ternary" inline="true">
             <value name="IF">
               <block type="logic_boolean">
                 <title name="BOOL">TRUE</title>
@@ -510,7 +445,7 @@
           <block type="unittest_assertequals" inline="false">
             <title name="MESSAGE">if true</title>
             <value name="ACTUAL">
-              <block type="logic_ternary" inline="false">
+              <block type="logic_ternary" inline="true">
                 <value name="IF">
                   <block type="logic_boolean">
                     <title name="BOOL">FALSE</title>
@@ -533,6 +468,279 @@
                 <title name="NUM">99</title>
               </block>
             </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="13" y="1773">
+    <mutation></mutation>
+    <title name="NAME">test_number_properties</title>
+    <statement name="STACK">
+      <block type="unittest_assertequals" inline="true">
+        <title name="MESSAGE">even</title>
+        <value name="ACTUAL">
+          <block type="logic_number_property" inline="true">
+            <mutation divisor_input="false"></mutation>
+            <title name="PROPERTY">EVEN</title>
+            <value name="NUMBER_TO_CHECK">
+              <block type="math_number">
+                <title name="NUM">42</title>
+              </block>
+            </value>
+          </block>
+        </value>
+        <value name="EXPECTED">
+          <block type="logic_boolean">
+            <title name="BOOL">TRUE</title>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_assertequals" inline="true">
+            <title name="MESSAGE">odd</title>
+            <value name="ACTUAL">
+              <block type="logic_number_property" inline="true">
+                <mutation divisor_input="false"></mutation>
+                <title name="PROPERTY">ODD</title>
+                <value name="NUMBER_TO_CHECK">
+                  <block type="math_number">
+                    <title name="NUM">42.1</title>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="EXPECTED">
+              <block type="logic_boolean">
+                <title name="BOOL">FALSE</title>
+              </block>
+            </value>
+            <next>
+              <block type="unittest_assertequals" inline="true">
+                <title name="MESSAGE">prime_5</title>
+                <value name="ACTUAL">
+                  <block type="logic_number_property" inline="true">
+                    <mutation divisor_input="false"></mutation>
+                    <title name="PROPERTY">PRIME</title>
+                    <value name="NUMBER_TO_CHECK">
+                      <block type="math_number">
+                        <title name="NUM">5</title>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="EXPECTED">
+                  <block type="logic_boolean">
+                    <title name="BOOL">TRUE</title>
+                  </block>
+                </value>
+                <next>
+                  <block type="unittest_assertequals" inline="true">
+                    <title name="MESSAGE">prime_25</title>
+                    <value name="ACTUAL">
+                      <block type="logic_number_property" inline="true">
+                        <mutation divisor_input="false"></mutation>
+                        <title name="PROPERTY">PRIME</title>
+                        <value name="NUMBER_TO_CHECK">
+                          <block type="math_number">
+                            <title name="NUM">25</title>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="EXPECTED">
+                      <block type="logic_boolean">
+                        <title name="BOOL">FALSE</title>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="unittest_assertequals" inline="true">
+                        <title name="MESSAGE">prime_negative</title>
+                        <value name="ACTUAL">
+                          <block type="logic_number_property" inline="true">
+                            <mutation divisor_input="false"></mutation>
+                            <title name="PROPERTY">PRIME</title>
+                            <value name="NUMBER_TO_CHECK">
+                              <block type="math_number">
+                                <title name="NUM">-31.1</title>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="EXPECTED">
+                          <block type="logic_boolean">
+                            <title name="BOOL">FALSE</title>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="unittest_assertequals" inline="true">
+                            <title name="MESSAGE">whole</title>
+                            <value name="ACTUAL">
+                              <block type="logic_number_property" inline="true">
+                                <mutation divisor_input="false"></mutation>
+                                <title name="PROPERTY">WHOLE</title>
+                                <value name="NUMBER_TO_CHECK">
+                                  <block type="math_constant">
+                                    <title name="CONSTANT">PI</title>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="EXPECTED">
+                              <block type="logic_boolean">
+                                <title name="BOOL">FALSE</title>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="unittest_assertequals" inline="true">
+                                <title name="MESSAGE">positive</title>
+                                <value name="ACTUAL">
+                                  <block type="logic_number_property" inline="true">
+                                    <mutation divisor_input="false"></mutation>
+                                    <title name="PROPERTY">POSITIVE</title>
+                                    <value name="NUMBER_TO_CHECK">
+                                      <block type="math_constant">
+                                        <title name="CONSTANT">INFINITY</title>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="EXPECTED">
+                                  <block type="logic_boolean">
+                                    <title name="BOOL">TRUE</title>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="unittest_assertequals" inline="true">
+                                    <title name="MESSAGE">negative</title>
+                                    <value name="ACTUAL">
+                                      <block type="logic_number_property" inline="true">
+                                        <mutation divisor_input="false"></mutation>
+                                        <title name="PROPERTY">NEGATIVE</title>
+                                        <value name="NUMBER_TO_CHECK">
+                                          <block type="math_number">
+                                            <title name="NUM">-42</title>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <value name="EXPECTED">
+                                      <block type="logic_boolean">
+                                        <title name="BOOL">TRUE</title>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="unittest_assertequals" inline="true">
+                                        <title name="MESSAGE">divisible</title>
+                                        <value name="ACTUAL">
+                                          <block type="logic_number_property" inline="true">
+                                            <mutation divisor_input="true"></mutation>
+                                            <title name="PROPERTY">DIVISIBLE_BY</title>
+                                            <value name="NUMBER_TO_CHECK">
+                                              <block type="math_number">
+                                                <title name="NUM">42</title>
+                                              </block>
+                                            </value>
+                                            <value name="DIVISOR">
+                                              <block type="math_number">
+                                                <title name="NUM">2</title>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                        <value name="EXPECTED">
+                                          <block type="logic_boolean">
+                                            <title name="BOOL">TRUE</title>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+  <block type="unittest_main" x="-4" y="-12">
+    <statement name="DO">
+      <block type="unittest_asserttrue" inline="false">
+        <title name="MESSAGE">True</title>
+        <value name="ACTUAL">
+          <block type="logic_boolean">
+            <title name="BOOL">TRUE</title>
+          </block>
+        </value>
+        <next>
+          <block type="unittest_assertfalse" inline="false">
+            <title name="MESSAGE">False</title>
+            <value name="ACTUAL">
+              <block type="logic_boolean">
+                <title name="BOOL">FALSE</title>
+              </block>
+            </value>
+            <next>
+              <block type="unittest_asserttrue" inline="false">
+                <title name="MESSAGE">Not true</title>
+                <value name="ACTUAL">
+                  <block type="logic_negate" inline="false">
+                    <value name="BOOL">
+                      <block type="logic_boolean">
+                        <title name="BOOL">FALSE</title>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="unittest_assertfalse" inline="false">
+                    <title name="MESSAGE">Not false</title>
+                    <value name="ACTUAL">
+                      <block type="logic_negate" inline="false">
+                        <value name="BOOL">
+                          <block type="logic_boolean">
+                            <title name="BOOL">TRUE</title>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="procedures_callnoreturn">
+                        <mutation name="test equalities"></mutation>
+                        <next>
+                          <block type="procedures_callnoreturn">
+                            <mutation name="test and"></mutation>
+                            <next>
+                              <block type="procedures_callnoreturn">
+                                <mutation name="test or"></mutation>
+                                <next>
+                                  <block type="procedures_callnoreturn">
+                                    <mutation name="test_ternary"></mutation>
+                                    <next>
+                                      <block type="procedures_callnoreturn">
+                                        <mutation name="test_number_properties"></mutation>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
           </block>
         </next>
       </block>

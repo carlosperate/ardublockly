@@ -70,7 +70,7 @@ var keepers = ['math_number', 'math_arithmetic', 'math_single', 'math_trig',
                'math_random_int', 'math_random_float',
                'graph_get_x', 'graph_set_y',
                'logic_ternary', 'logic_compare', 'logic_operation',
-               'logic_negate', 'logic_boolean'];
+               'logic_negate', 'logic_boolean', 'logic_number_property'];
 
 /**
  * Initialize Blockly.
