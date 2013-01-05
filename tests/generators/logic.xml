@@ -1,4 +1,4 @@
-<xml>
+<xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="procedures_defnoreturn" x="-7" y="384">
     <mutation></mutation>
     <title name="NAME">test equalities</title>
@@ -413,7 +413,7 @@
   </block>
   <block type="procedures_defnoreturn" x="3" y="1527">
     <mutation></mutation>
-    <title name="NAME">test_ternary</title>
+    <title name="NAME">test ternary</title>
     <statement name="STACK">
       <block type="unittest_assertequals" inline="false">
         <title name="MESSAGE">if true</title>
@@ -475,7 +475,7 @@
   </block>
   <block type="procedures_defnoreturn" x="13" y="1773">
     <mutation></mutation>
-    <title name="NAME">test_number_properties</title>
+    <title name="NAME">test number properties</title>
     <statement name="STACK">
       <block type="unittest_assertequals" inline="true">
         <title name="MESSAGE">even</title>
@@ -723,10 +723,10 @@
                                 <mutation name="test or"></mutation>
                                 <next>
                                   <block type="procedures_callnoreturn">
-                                    <mutation name="test_ternary"></mutation>
+                                    <mutation name="test ternary"></mutation>
                                     <next>
                                       <block type="procedures_callnoreturn">
-                                        <mutation name="test_number_properties"></mutation>
+                                        <mutation name="test number properties"></mutation>
                                       </block>
                                     </next>
                                   </block>

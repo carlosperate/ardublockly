@@ -172,6 +172,9 @@ Blockly.CodeGenerator.prototype.blockToCode = function(block) {
  *     specified input does not exist.
  */
 Blockly.CodeGenerator.prototype.valueToCode = function(block, name, order) {
+  if (isNaN(order)) {
+    throw 'Expecting valid order from block "' + block.type + '".';
+  }
   var targetBlock = block.getInputTargetBlock(name);
   if (!targetBlock) {
     return '';
@@ -188,6 +191,9 @@ Blockly.CodeGenerator.prototype.valueToCode = function(block, name, order) {
   }
   var code = tuple[0];
   var innerOrder = tuple[1];
+  if (isNaN(innerOrder)) {
+    throw 'Expecting valid order from value block "' + targetBlock.type + '".';
+  }
   if (code && order <= innerOrder) {
     // The operators outside this code are stonger than the operators
     // inside this code.  To prevent the code from being pulled apart,

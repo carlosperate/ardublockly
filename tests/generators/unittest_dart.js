@@ -107,9 +107,9 @@ Blockly.Dart.unittest_assertequals = function() {
     Blockly.Dart.definitions_['unittest_assertequals'] = func.join('\n');
   }
   var actual = Blockly.Dart.valueToCode(this, 'ACTUAL',
-      Blockly.Dart.ORDER_COMMA) || 'null';
+      Blockly.Dart.ORDER_NONE) || 'null';
   var expected = Blockly.Dart.valueToCode(this, 'EXPECTED',
-      Blockly.Dart.ORDER_COMMA) || 'null';
+      Blockly.Dart.ORDER_NONE) || 'null';
   return Blockly.Dart.unittest_assertequals.assert + '(' +
       actual + ', ' + expected + ', ' + message + ');\n';
 };
@@ -140,7 +140,7 @@ Blockly.Dart.unittest_asserttrue = function() {
     Blockly.Dart.definitions_['unittest_asserttrue'] = func.join('\n');
   }
   var actual = Blockly.Dart.valueToCode(this, 'ACTUAL',
-      Blockly.Dart.ORDER_COMMA) || 'true';
+      Blockly.Dart.ORDER_NONE) || 'true';
   return Blockly.Dart.unittest_asserttrue.assert +
       '(' + actual + ', ' + message + ');\n';
 };
@@ -171,7 +171,7 @@ Blockly.Dart.unittest_assertfalse = function() {
     Blockly.Dart.definitions_['unittest_assertfalse'] = func.join('\n');
   }
   var actual = Blockly.Dart.valueToCode(this, 'ACTUAL',
-      Blockly.Dart.ORDER_COMMA) || 'false';
+      Blockly.Dart.ORDER_NONE) || 'false';
   return Blockly.Dart.unittest_assertfalse.assert +
       '(' + actual + ', ' + message + ');\n';
 };

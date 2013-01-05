@@ -129,7 +129,7 @@ Blockly.Dart.logic_number_property = function() {
       Blockly.Dart.definitions_['isPrime'] = func.join('\n');
     }
     code = Blockly.Dart.logic_prime + '(' + number_to_check + ')';
-    return [code, Blockly.Dart.ORDER_FUNCTION_CALL];
+    return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   }
   switch (dropdown_property) {
     case 'EVEN':
@@ -158,4 +158,3 @@ Blockly.Dart.logic_number_property = function() {
   }
   return [code, Blockly.Dart.ORDER_EQUALITY];
 };
-

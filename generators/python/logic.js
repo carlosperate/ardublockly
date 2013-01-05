@@ -154,5 +154,5 @@ Blockly.Python.logic_number_property = function() {
       code = number_to_check + ' % ' + divisor + ' == 0';
       break;
   }
-  return [code, Blockly.Python.ORDER_EQUALITY];
+  return [code, Blockly.Python.ORDER_RELATIONAL];
 };
