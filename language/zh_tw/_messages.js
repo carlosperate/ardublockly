@@ -402,8 +402,15 @@ Blockly.LANG_LISTS_INDEX_OF_FIRST = '第一個';
 Blockly.LANG_LISTS_INDEX_OF_LAST = '最後一個';
 
 Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_GET_INDEX_INPUT_AT = '取得項目取得項目自';
-Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = '從列表';
+Blockly.LANG_LISTS_GET_INDEX_GET = 'get';
+Blockly.LANG_LISTS_GET_INDEX_GET_REMOVE = 'get and remove';
+Blockly.LANG_LISTS_GET_INDEX_REMOVE = 'remove';
+Blockly.LANG_LISTS_GET_INDEX_FROM_START = '#';
+Blockly.LANG_LISTS_GET_INDEX_FROM_END = '# from end';
+Blockly.LANG_LISTS_GET_INDEX_FIRST = 'first';
+Blockly.LANG_LISTS_GET_INDEX_LAST = 'last';
+Blockly.LANG_LISTS_GET_INDEX_RANDOM = 'random';
+Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = 'in list';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP = 'Returns the value at the specified position in a list.';
 
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
