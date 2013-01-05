@@ -19,7 +19,7 @@
 
 /**
  * @fileoverview Generating Dart for logic blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
@@ -89,6 +89,8 @@ Blockly.Dart.logic_ternary = function() {
 };
 
 Blockly.Dart.logic_number_property = function() {
+  // Check if a number is even, odd, prime, whole, positive, or negative
+  // or if it is divisible by certain number. Returns true or false.
   var number_to_check = Blockly.Dart.valueToCode(this, 'NUMBER_TO_CHECK',
       Blockly.Dart.ORDER_MULTIPLICATIVE);
   if (!number_to_check) {

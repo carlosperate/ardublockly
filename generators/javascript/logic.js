@@ -19,7 +19,7 @@
 
 /**
  * @fileoverview Generating JavaScript for logic blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
@@ -90,6 +90,8 @@ Blockly.JavaScript.logic_ternary = function() {
 };
 
 Blockly.JavaScript.logic_number_property = function() {
+  // Check if a number is even, odd, prime, whole, positive, or negative
+  // or if it is divisible by certain number. Returns true or false.
   var number_to_check = Blockly.JavaScript.valueToCode(this, 'NUMBER_TO_CHECK',
       Blockly.JavaScript.ORDER_MODULUS) || 'NaN';
   var dropdown_property = this.getTitleValue('PROPERTY');

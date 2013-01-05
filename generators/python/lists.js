@@ -19,7 +19,7 @@
 
 /**
  * @fileoverview Generating Python for list blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 

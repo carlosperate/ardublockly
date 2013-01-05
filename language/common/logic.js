@@ -19,7 +19,7 @@
 
 /**
  * @fileoverview Logic blocks for Blockly.
- * @author fraser@google.com (Neil Fraser)
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
@@ -156,14 +156,16 @@ Blockly.Language.logic_ternary = {
 };
 
 Blockly.Language.logic_number_property = {
+  // Check if a number is even, odd, prime, whole, positive, or negative
+  // or if it is divisible by certain number. Returns true or false.
   category: Blockly.LANG_CATEGORY_LOGIC,
   helpUrl: '',
   init: function() {
     this.setColour(120);
     this.appendValueInput('NUMBER_TO_CHECK')
         .setCheck(Number);
-    var dropdown = new Blockly.FieldDropdown(this.PROPERTIES, function(property) {
-      var divisorInput = (property == 'DIVISIBLE_BY');
+    var dropdown = new Blockly.FieldDropdown(this.PROPERTIES, function(option) {
+      var divisorInput = (option == 'DIVISIBLE_BY');
       this.sourceBlock_.updateShape(divisorInput);
     });
     this.appendDummyInput()

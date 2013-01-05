@@ -19,7 +19,7 @@
 
 /**
  * @fileoverview Generating Python for logic blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
@@ -88,6 +88,8 @@ Blockly.Python.logic_ternary = function() {
 };
 
 Blockly.Python.logic_number_property = function() {
+  // Check if a number is even, odd, prime, whole, positive, or negative
+  // or if it is divisible by certain number. Returns true or false.
   var number_to_check = Blockly.Python.valueToCode(this, 'NUMBER_TO_CHECK',
       Blockly.Python.ORDER_MULTIPLICATIVE);
   if (!number_to_check) {

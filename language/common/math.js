@@ -19,7 +19,7 @@
 
 /**
  * @fileoverview Math blocks for Blockly.
- * @author fraser@google.com (Neil Fraser)
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
