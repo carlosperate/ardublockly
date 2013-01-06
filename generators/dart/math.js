@@ -166,7 +166,7 @@ Blockly.Dart.math_constant.CONSTANTS = {
   PI: ['Math.PI', Blockly.Dart.ORDER_UNARY_POSTFIX],
   E: ['Math.E', Blockly.Dart.ORDER_UNARY_POSTFIX],
   GOLDEN_RATIO: ['(1 + Math.sqrt(5)) / 2', Blockly.Dart.ORDER_MULTIPLICATIVE],
-  SQRT2: ['Math.SQRT1_2', Blockly.Dart.ORDER_UNARY_POSTFIX],
+  SQRT2: ['Math.SQRT2', Blockly.Dart.ORDER_UNARY_POSTFIX],
   SQRT1_2: ['Math.SQRT1_2', Blockly.Dart.ORDER_UNARY_POSTFIX],
   INFINITY: ['double.INFINITY', Blockly.Dart.ORDER_ATOMIC]
 };

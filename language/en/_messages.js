@@ -328,7 +328,12 @@ Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = 'first';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = 'last';
 
 Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_CHARAT_INPUT_AT = 'letter at';
+Blockly.LANG_TEXT_CHARAT_GET = 'get';
+Blockly.LANG_TEXT_CHARAT_FROM_START = 'letter #';
+Blockly.LANG_TEXT_CHARAT_FROM_END = 'letter # from end';
+Blockly.LANG_TEXT_CHARAT_FIRST = 'first letter';
+Blockly.LANG_TEXT_CHARAT_LAST = 'last letter';
+Blockly.LANG_TEXT_CHARAT_RANDOM = 'random letter';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'in text';
 Blockly.LANG_TEXT_CHARAT_TOOLTIP = 'Returns the letter at the specified position.';
 

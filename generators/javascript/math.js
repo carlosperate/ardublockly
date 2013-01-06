@@ -151,7 +151,7 @@ Blockly.JavaScript.math_constant.CONSTANTS = {
   PI: ['Math.PI', Blockly.JavaScript.ORDER_MEMBER],
   E: ['Math.E', Blockly.JavaScript.ORDER_MEMBER],
   GOLDEN_RATIO: ['(1 + Math.sqrt(5)) / 2', Blockly.JavaScript.ORDER_DIVISION],
-  SQRT2: ['Math.SQRT1_2', Blockly.JavaScript.ORDER_MEMBER],
+  SQRT2: ['Math.SQRT2', Blockly.JavaScript.ORDER_MEMBER],
   SQRT1_2: ['Math.SQRT1_2', Blockly.JavaScript.ORDER_MEMBER],
   INFINITY: ['Infinity', Blockly.JavaScript.ORDER_ATOMIC]
 };

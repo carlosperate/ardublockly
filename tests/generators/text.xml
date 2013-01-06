@@ -436,12 +436,14 @@
     <title name="NAME">test letter</title>
     <statement name="STACK">
       <block type="unittest_assertequals" inline="false">
-        <title name="MESSAGE">letter</title>
+        <title name="MESSAGE">letter #</title>
         <value name="ACTUAL">
           <block type="text_charAt" inline="true">
+            <mutation at="true"></mutation>
+            <title name="WHERE">FROM_START</title>
             <value name="AT">
               <block type="math_number">
-                <title name="NUM">4</title>
+                <title name="NUM">3</title>
               </block>
             </value>
             <value name="VALUE">
@@ -453,13 +455,113 @@
         </value>
         <value name="EXPECTED">
           <block type="text">
-            <title name="TEXT">c</title>
+            <title name="TEXT">o</title>
           </block>
         </value>
+        <next>
+          <block type="unittest_assertequals" inline="false">
+            <title name="MESSAGE">letter # from end</title>
+            <value name="ACTUAL">
+              <block type="text_charAt" inline="true">
+                <mutation at="true"></mutation>
+                <title name="WHERE">FROM_END</title>
+                <value name="AT">
+                  <block type="math_number">
+                    <title name="NUM">3</title>
+                  </block>
+                </value>
+                <value name="VALUE">
+                  <block type="text">
+                    <title name="TEXT">Blockly</title>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="EXPECTED">
+              <block type="text">
+                <title name="TEXT">k</title>
+              </block>
+            </value>
+            <next>
+              <block type="unittest_assertequals" inline="false">
+                <title name="MESSAGE">first letter</title>
+                <value name="ACTUAL">
+                  <block type="text_charAt" inline="true">
+                    <mutation at="false"></mutation>
+                    <title name="WHERE">FIRST</title>
+                    <value name="VALUE">
+                      <block type="text">
+                        <title name="TEXT">Blockly</title>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="EXPECTED">
+                  <block type="text">
+                    <title name="TEXT">B</title>
+                  </block>
+                </value>
+                <next>
+                  <block type="unittest_assertequals" inline="false">
+                    <title name="MESSAGE">last letter</title>
+                    <value name="ACTUAL">
+                      <block type="text_charAt" inline="true">
+                        <mutation at="false"></mutation>
+                        <title name="WHERE">LAST</title>
+                        <value name="VALUE">
+                          <block type="text">
+                            <title name="TEXT">Blockly</title>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="EXPECTED">
+                      <block type="text">
+                        <title name="TEXT">y</title>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="unittest_asserttrue" inline="false">
+                        <title name="MESSAGE">random letter</title>
+                        <value name="ACTUAL">
+                          <block type="math_number_property" inline="true">
+                            <mutation divisor_input="false"></mutation>
+                            <title name="PROPERTY">POSITIVE</title>
+                            <value name="NUMBER_TO_CHECK">
+                              <block type="text_indexOf" inline="false">
+                                <title name="END">FIRST</title>
+                                <value name="FIND">
+                                  <block type="text_charAt" inline="true">
+                                    <mutation at="false"></mutation>
+                                    <title name="WHERE">RANDOM</title>
+                                    <value name="VALUE">
+                                      <block type="text">
+                                        <title name="TEXT">Blockly</title>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="VALUE">
+                                  <block type="text">
+                                    <title name="TEXT">Blockly</title>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="-17" y="1989">
+  <block type="procedures_defnoreturn" x="-20" y="2295">
     <mutation></mutation>
     <title name="NAME">test case</title>
     <statement name="STACK">
@@ -523,7 +625,7 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="-18" y="2313">
+  <block type="procedures_defnoreturn" x="-20" y="2598">
     <mutation></mutation>
     <title name="NAME">test trim</title>
     <statement name="STACK">

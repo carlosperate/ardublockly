@@ -275,16 +275,62 @@ Blockly.Language.text_charAt = {
   init: function() {
     this.setColour(160);
     this.setOutput(true, String);
-    this.appendValueInput('AT')
-        .setCheck(Number)
-        .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_AT);
+    this.appendDummyInput('AT');
     this.appendValueInput('VALUE')
         .setCheck(String)
         .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT);
     this.setInputsInline(true);
+    this.updateAt(true);
     this.setTooltip(Blockly.LANG_TEXT_CHARAT_TOOLTIP);
+  },
+  mutationToDom: function() {
+    // Save whether there is an 'AT' input.
+    var container = document.createElement('mutation');
+    var isAt = this.getInput('AT').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at', isAt);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the 'AT' input.
+    // Note: Until January 2013 this block did not have mutations,
+    // so 'at' defaults to true.
+    var isAt = (xmlElement.getAttribute('at') != 'false');
+    this.updateAt(isAt);
+  },
+  updateAt: function(isAt) {
+    // Create or delete an input for the numeric index.
+    // Destroy old 'AT' input.
+    this.removeInput('AT');
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT').setCheck(Number);
+    } else {
+      this.appendDummyInput('AT');
+    }
+    this.moveInputBefore('AT', 'VALUE');
+    var menu = new Blockly.FieldDropdown(this.WHERE, function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt(newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setTitleValue(value, 'WHERE');
+        return null;
+      }
+      return undefined;
+    });
+    this.getInput('AT').appendTitle(Blockly.LANG_TEXT_CHARAT_GET)
+        .appendTitle(menu, 'WHERE');
   }
 };
+
+Blockly.Language.text_charAt.WHERE =
+    [[Blockly.LANG_TEXT_CHARAT_FROM_START, 'FROM_START'],
+     [Blockly.LANG_TEXT_CHARAT_FROM_END, 'FROM_END'],
+     [Blockly.LANG_TEXT_CHARAT_FIRST, 'FIRST'],
+     [Blockly.LANG_TEXT_CHARAT_LAST, 'LAST'],
+     [Blockly.LANG_TEXT_CHARAT_RANDOM, 'RANDOM']];
 
 Blockly.Language.text_changeCase = {
   // Change capitalization.

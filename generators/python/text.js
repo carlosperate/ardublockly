@@ -115,20 +115,50 @@ Blockly.Python.text_indexOf = function() {
 
 Blockly.Python.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.Python.valueToCode(this, 'AT',
-      Blockly.Python.ORDER_NONE) || '1';
-  var argument1 = Blockly.Python.valueToCode(this, 'VALUE',
+  // Note: Until January 2013 this block did not have the WHERE input.
+  var where = this.getTitleValue('WHERE') || 'FROM_START';
+  var at = Blockly.Python.valueToCode(this, 'AT',
+      Blockly.Python.ORDER_UNARY_SIGN) || '1';
+  var text = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_MEMBER) || '\'\'';
-  // Blockly uses one-based indicies.
-  if (argument0.match(/^-?\d+$/)) {
-    // If the index is a naked number, decrement it right now.
-    argument0 = parseInt(argument0, 10) - 1;
-  } else {
-    // If the index is dynamic, decrement it in code.
-    argument0 += ' - 1';
+  switch (where) {
+    case 'FIRST':
+      var code = text + '[0]';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'LAST':
+      var code = text + '[-1]';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'FROM_START':
+      // Blockly uses one-based indicies.
+      if (at.match(/^-?\d+$/)) {
+        // If the index is a naked number, decrement it right now.
+        at = parseInt(at, 10) - 1;
+      } else {
+        // If the index is dynamic, decrement it in code.
+        at += ' - 1';
+      }
+      var code = text + '[' + at + ']';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'FROM_END':
+      var code = text + '[-' + at + ']';
+      return [code, Blockly.Python.ORDER_MEMBER];
+    case 'RANDOM':
+      if (!Blockly.Python.definitions_['text_random_letter']) {
+        Blockly.Python.definitions_['import_random'] = 'import random';
+        var functionName = Blockly.Python.variableDB_.getDistinctName(
+            'text_random_letter', Blockly.Generator.NAME_TYPE);
+        Blockly.Python.text_charAt.text_random_letter = functionName;
+        var func = [];
+        func.push('def ' + functionName + '(text):');
+        func.push('  x = int(random.random() * len(text))');
+        func.push('  return text[x];');
+        Blockly.Python.definitions_['text_random_letter'] = func.join('\n');
+      }
+      code = Blockly.Python.text_charAt.text_random_letter +
+          '(' + text + ')';
+      return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   }
-  var code = argument1 + '[' + argument0 + ']';
-  return [code, Blockly.Python.ORDER_MEMBER];
+  throw 'Unhandled option (text_charAt).';
 };
 
 Blockly.Python.text_changeCase = function() {

@@ -126,20 +126,63 @@ Blockly.Dart.text_indexOf = function() {
 
 Blockly.Dart.text_charAt = function() {
   // Get letter at index.
-  var argument0 = Blockly.Dart.valueToCode(this, 'AT',
+  // Note: Until January 2013 this block did not have the WHERE input.
+  var where = this.getTitleValue('WHERE') || 'FROM_START';
+  var at = Blockly.Dart.valueToCode(this, 'AT',
       Blockly.Dart.ORDER_NONE) || '1';
-  var argument1 = Blockly.Dart.valueToCode(this, 'VALUE',
+  var text = Blockly.Dart.valueToCode(this, 'VALUE',
       Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
-  // Blockly uses one-based arrays.
-  if (argument0.match(/^-?\d+$/)) {
-    // If the index is a naked number, decrement it right now.
-    argument0 = parseInt(argument0, 10) - 1;
-  } else {
-    // If the index is dynamic, decrement it in code.
-    argument0 += ' - 1';
+  switch (where) {
+    case 'FIRST':
+      var code = text + '[0]';
+      return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+    case 'FROM_START':
+      // Blockly uses one-based indicies.
+      if (at.match(/^-?\d+$/)) {
+        // If the index is a naked number, decrement it right now.
+        at = parseInt(at, 10) - 1;
+      } else {
+        // If the index is dynamic, decrement it in code.
+        at += ' - 1';
+      }
+      var code = text + '[' + at + ']';
+      return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+    case 'LAST':
+      at = 1;
+      // Fall through.
+    case 'FROM_END':
+      if (!Blockly.Dart.definitions_['text_get_from_end']) {
+        var functionName = Blockly.Dart.variableDB_.getDistinctName(
+            'text_get_from_end', Blockly.Generator.NAME_TYPE);
+        Blockly.Dart.text_charAt.text_get_from_end = functionName;
+        var func = [];
+        func.push('String ' + functionName + '(String text, num x) {');
+        func.push('  return text[text.length - x];');
+        func.push('}');
+        Blockly.Dart.definitions_['text_get_from_end'] = func.join('\n');
+      }
+      code = Blockly.Dart.text_charAt.text_get_from_end +
+          '(' + text + ', ' + at + ')';
+      return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+    case 'RANDOM':
+      if (!Blockly.Dart.definitions_['text_random_letter']) {
+        Blockly.Dart.definitions_['import_dart_math'] =
+            'import \'dart:math\' as Math;';
+        var functionName = Blockly.Dart.variableDB_.getDistinctName(
+            'text_random_letter', Blockly.Generator.NAME_TYPE);
+        Blockly.Dart.text_charAt.text_random_letter = functionName;
+        var func = [];
+        func.push('String ' + functionName + '(String text) {');
+        func.push('  int x = new Math.Random().nextInt(text.length);');
+        func.push('  return text[x];');
+        func.push('}');
+        Blockly.Dart.definitions_['text_random_letter'] = func.join('\n');
+      }
+      code = Blockly.Dart.text_charAt.text_random_letter +
+          '(' + text + ')';
+      return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   }
-  var code = argument1 + '[' + argument0 + ']';
-  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+  throw 'Unhandled option (text_charAt).';
 };
 
 Blockly.Dart.text_changeCase = function() {

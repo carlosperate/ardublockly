@@ -137,14 +137,14 @@ Blockly.JavaScript.lists_getIndex = function() {
       return [code, Blockly.JavaScript.ORDER_MEMBER];
     } else if (mode == 'GET_REMOVE') {
       var code = list + '.splice(' + at + ', 1)[0]';
-      return [code, Blockly.JavaScript.ORDER_MEMBER];
+      return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
     } else if (mode == 'REMOVE') {
       return list + '.splice(' + at + ', 1);\n';
     }
   } else if (where == 'FROM_END') {
     if (mode == 'GET') {
       var code = list + '.slice(-' + at + ')[0]';
-      return [code, Blockly.JavaScript.ORDER_MEMBER];
+      return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
     } else if (mode == 'GET_REMOVE' || mode == 'REMOVE') {
       if (!Blockly.JavaScript.definitions_['lists_remove_from_end']) {
         var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
