@@ -35,7 +35,7 @@ Blockly.Xml = {};
  */
 Blockly.Xml.workspaceToDom = function(workspace) {
   var xml = goog.dom.createDom('xml');
-  var blocks = workspace.getTopBlocks(false);
+  var blocks = workspace.getTopBlocks(true);
   for (var i = 0, block; block = blocks[i]; i++) {
     var element = Blockly.Xml.blockToDom_(block);
     var xy = block.getRelativeToSurfaceXY();

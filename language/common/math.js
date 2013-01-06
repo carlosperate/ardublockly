@@ -173,7 +173,7 @@ Blockly.Language.math_constant.CONSTANTS =
      ['e', 'E'],
      ['\u03c6', 'GOLDEN_RATIO'],
      ['sqrt(2)', 'SQRT2'],
-     ['sqrt(1/2)', 'SQRT1_2'],
+     ['sqrt(\u00bd)', 'SQRT1_2'],
      ['\u221e', 'INFINITY']];
 
 Blockly.Language.math_number_property = {

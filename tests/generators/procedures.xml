@@ -134,32 +134,6 @@
       </block>
     </statement>
   </block>
-  <block type="procedures_defnoreturn" x="307" y="435">
-    <mutation>
-      <arg name="proc x"></arg>
-    </mutation>
-    <title name="NAME">procedure 2</title>
-    <statement name="STACK">
-      <block type="procedures_ifreturn" inline="true">
-        <mutation value="0"></mutation>
-        <value name="CONDITION">
-          <block type="variables_get">
-            <title name="VAR">proc x</title>
-          </block>
-        </value>
-        <next>
-          <block type="variables_set" inline="false">
-            <title name="VAR">proc w</title>
-            <value name="VALUE">
-              <block type="logic_boolean">
-                <title name="BOOL">TRUE</title>
-              </block>
-            </value>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
   <block type="procedures_defnoreturn" x="302" y="277">
     <mutation>
       <arg name="proc x"></arg>
@@ -184,6 +158,32 @@
             </value>
           </block>
         </value>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defnoreturn" x="307" y="435">
+    <mutation>
+      <arg name="proc x"></arg>
+    </mutation>
+    <title name="NAME">procedure 2</title>
+    <statement name="STACK">
+      <block type="procedures_ifreturn" inline="true">
+        <mutation value="0"></mutation>
+        <value name="CONDITION">
+          <block type="variables_get">
+            <title name="VAR">proc x</title>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" inline="false">
+            <title name="VAR">proc w</title>
+            <value name="VALUE">
+              <block type="logic_boolean">
+                <title name="BOOL">TRUE</title>
+              </block>
+            </value>
+          </block>
+        </next>
       </block>
     </statement>
   </block>
@@ -325,6 +325,95 @@
       </block>
     </statement>
   </block>
+  <block type="procedures_defreturn" inline="false" x="-3" y="1384">
+    <mutation>
+      <arg name="func x"></arg>
+      <arg name="func y"></arg>
+    </mutation>
+    <title name="NAME">function 1</title>
+    <statement name="STACK">
+      <block type="variables_set" inline="false">
+        <title name="VAR">func z</title>
+        <value name="VALUE">
+          <block type="text">
+            <title name="TEXT">side effect</title>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="math_arithmetic" inline="true">
+        <title name="OP">MINUS</title>
+        <value name="A">
+          <block type="variables_get">
+            <title name="VAR">func x</title>
+          </block>
+        </value>
+        <value name="B">
+          <block type="variables_get">
+            <title name="VAR">func y</title>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="procedures_defreturn" inline="false" x="-1" y="1503">
+    <mutation>
+      <arg name="func a"></arg>
+    </mutation>
+    <title name="NAME">function 2</title>
+    <statement name="STACK">
+      <block type="math_change" inline="false">
+        <title name="VAR">func a</title>
+        <value name="DELTA">
+          <block type="math_number">
+            <title name="NUM">1</title>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="text_join" inline="false">
+        <mutation items="2"></mutation>
+        <value name="ADD0">
+          <block type="variables_get">
+            <title name="VAR">func a</title>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="variables_get">
+            <title name="VAR">func c</title>
+          </block>
+        </value>
+      </block>
+    </value>
+  </block>
+  <block type="procedures_defreturn" inline="false" x="0" y="1655">
+    <mutation>
+      <arg name="func a"></arg>
+    </mutation>
+    <title name="NAME">function 3</title>
+    <statement name="STACK">
+      <block type="procedures_ifreturn" inline="true">
+        <mutation value="1"></mutation>
+        <value name="CONDITION">
+          <block type="variables_get">
+            <title name="VAR">func a</title>
+          </block>
+        </value>
+        <value name="VALUE">
+          <block type="logic_boolean">
+            <title name="BOOL">TRUE</title>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="logic_boolean">
+        <title name="BOOL">FALSE</title>
+      </block>
+    </value>
+  </block>
   <block type="procedures_defreturn" inline="false" x="0" y="1789">
     <mutation>
       <arg name="n"></arg>
@@ -422,95 +511,6 @@
     <value name="RETURN">
       <block type="variables_get">
         <title name="VAR">text</title>
-      </block>
-    </value>
-  </block>
-  <block type="procedures_defreturn" inline="false" x="0" y="1655">
-    <mutation>
-      <arg name="func a"></arg>
-    </mutation>
-    <title name="NAME">function 3</title>
-    <statement name="STACK">
-      <block type="procedures_ifreturn" inline="true">
-        <mutation value="1"></mutation>
-        <value name="CONDITION">
-          <block type="variables_get">
-            <title name="VAR">func a</title>
-          </block>
-        </value>
-        <value name="VALUE">
-          <block type="logic_boolean">
-            <title name="BOOL">TRUE</title>
-          </block>
-        </value>
-      </block>
-    </statement>
-    <value name="RETURN">
-      <block type="logic_boolean">
-        <title name="BOOL">FALSE</title>
-      </block>
-    </value>
-  </block>
-  <block type="procedures_defreturn" inline="false" x="-1" y="1503">
-    <mutation>
-      <arg name="func a"></arg>
-    </mutation>
-    <title name="NAME">function 2</title>
-    <statement name="STACK">
-      <block type="math_change" inline="false">
-        <title name="VAR">func a</title>
-        <value name="DELTA">
-          <block type="math_number">
-            <title name="NUM">1</title>
-          </block>
-        </value>
-      </block>
-    </statement>
-    <value name="RETURN">
-      <block type="text_join" inline="false">
-        <mutation items="2"></mutation>
-        <value name="ADD0">
-          <block type="variables_get">
-            <title name="VAR">func a</title>
-          </block>
-        </value>
-        <value name="ADD1">
-          <block type="variables_get">
-            <title name="VAR">func c</title>
-          </block>
-        </value>
-      </block>
-    </value>
-  </block>
-  <block type="procedures_defreturn" inline="false" x="-3" y="1384">
-    <mutation>
-      <arg name="func x"></arg>
-      <arg name="func y"></arg>
-    </mutation>
-    <title name="NAME">function 1</title>
-    <statement name="STACK">
-      <block type="variables_set" inline="false">
-        <title name="VAR">func z</title>
-        <value name="VALUE">
-          <block type="text">
-            <title name="TEXT">side effect</title>
-          </block>
-        </value>
-      </block>
-    </statement>
-    <value name="RETURN">
-      <block type="math_arithmetic" inline="true">
-        <title name="OP">MINUS</title>
-        <value name="A">
-          <block type="variables_get">
-            <title name="VAR">func x</title>
-          </block>
-        </value>
-        <value name="B">
-          <block type="variables_get">
-            <title name="VAR">func y</title>
-          </block>
-        </value>
       </block>
     </value>
   </block>

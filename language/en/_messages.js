@@ -215,8 +215,8 @@ Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
 Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
 
 Blockly.LANG_MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
-Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0, e, \u03c6 (the Golden Ratio 1.618...),\n' +
-    'sqrt(2), and sqrt(1/2). Also include \u221e (Infinity)';
+Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026),\n' +
+    'sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026), or \u221e (infinity).';
 
 Blockly.LANG_MATH_IS_EVEN = 'is even';
 Blockly.LANG_MATH_IS_ODD = 'is odd';
@@ -225,8 +225,8 @@ Blockly.LANG_MATH_IS_WHOLE = 'is whole';
 Blockly.LANG_MATH_IS_POSITIVE = 'is positive';
 Blockly.LANG_MATH_IS_NEGATIVE = 'is negative';
 Blockly.LANG_MATH_IS_DIVISIBLE_BY = 'is divisible by';
-Blockly.LANG_MATH_IS_TOOLTIP = 'Check if a number is an even, odd, prime, whole, positive, or negative number,\n' +
-    'or if it is divisible by certain number. Returns true or false.';
+Blockly.LANG_MATH_IS_TOOLTIP = 'Check if a number is an even, odd, prime, whole, positive, negative,\n' +
+    'or if it is divisible by certain number.  Returns true or false.';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
@@ -411,7 +411,27 @@ Blockly.LANG_LISTS_GET_INDEX_FIRST = 'first';
 Blockly.LANG_LISTS_GET_INDEX_LAST = 'last';
 Blockly.LANG_LISTS_GET_INDEX_RANDOM = 'random';
 Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = 'in list';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP = 'Returns the value at the specified position in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = 'Returns the item at the specified position in a list.\n' +
+    '#1 is the first item.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_END = 'Returns the item at the specified position in a list.\n' +
+    '#1 is the last item.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FIRST = 'Returns the first item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_LAST = 'Returns the last item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_RANDOM = 'Returns a random item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_START = 'Removes and returns the item at the specified position\n' +
+    ' in a list.  #1 is the first item.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_END = 'Removes and returns the item at the specified position\n' +
+    ' in a list.  #1 is the last item.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST = 'Removes and returns the first item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST = 'Removes and returns the last item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM = 'Removes and returns a random item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_START = 'Removes the item at the specified position\n' +
+    ' in a list.  #1 is the first item.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_END = 'Removes the item at the specified position\n' +
+    ' in a list.  #1 is the last item.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST = 'Removes the first item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST = 'Removes the last item in a list.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM = 'Removes a random item in a list.';
 
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_AT = 'set item at';

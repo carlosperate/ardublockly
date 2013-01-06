@@ -244,7 +244,13 @@ Blockly.Language.lists_getIndex = {
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.updateAt(true);
-    this.setTooltip(Blockly.LANG_LISTS_GET_INDEX_TOOLTIP);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      var combo = thisBlock.getTitleValue('MODE') + '_' +
+          thisBlock.getTitleValue('WHERE');
+      return Blockly['LANG_LISTS_GET_INDEX_TOOLTIP_' + combo];
+    });
   },
   mutationToDom: function() {
     // Save whether the block is a statement or a value.

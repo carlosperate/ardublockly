@@ -595,7 +595,7 @@
         </value>
         <next>
           <block type="unittest_assertequals" inline="false">
-            <title name="MESSAGE">test get first</title>
+            <title name="MESSAGE">get first</title>
             <value name="ACTUAL">
               <block type="lists_getIndex" inline="true">
                 <mutation statement="false" at="false"></mutation>
@@ -615,7 +615,7 @@
             </value>
             <next>
               <block type="unittest_assertequals" inline="false">
-                <title name="MESSAGE">test get last</title>
+                <title name="MESSAGE">get last</title>
                 <value name="ACTUAL">
                   <block type="lists_getIndex" inline="true">
                     <mutation statement="false" at="false"></mutation>
@@ -635,7 +635,7 @@
                 </value>
                 <next>
                   <block type="unittest_asserttrue" inline="false">
-                    <title name="MESSAGE">test get random</title>
+                    <title name="MESSAGE">get random</title>
                     <value name="ACTUAL">
                       <block type="math_number_property" inline="true">
                         <mutation divisor_input="false"></mutation>
@@ -666,7 +666,7 @@
                     </value>
                     <next>
                       <block type="unittest_assertequals" inline="false">
-                        <title name="MESSAGE">test get #</title>
+                        <title name="MESSAGE">get #</title>
                         <value name="ACTUAL">
                           <block type="lists_getIndex" inline="true">
                             <mutation statement="false" at="true"></mutation>
@@ -691,7 +691,7 @@
                         </value>
                         <next>
                           <block type="unittest_assertequals" inline="false">
-                            <title name="MESSAGE">test get #-end</title>
+                            <title name="MESSAGE">get #-end</title>
                             <value name="ACTUAL">
                               <block type="lists_getIndex" inline="true">
                                 <mutation statement="false" at="true"></mutation>
@@ -755,7 +755,7 @@
         </value>
         <next>
           <block type="unittest_assertequals" inline="false">
-            <title name="MESSAGE">test getremove first</title>
+            <title name="MESSAGE">getremove first</title>
             <value name="ACTUAL">
               <block type="lists_getIndex" inline="true">
                 <mutation statement="false" at="false"></mutation>
@@ -775,7 +775,7 @@
             </value>
             <next>
               <block type="unittest_asserttrue" inline="false">
-                <title name="MESSAGE">test getremove first list</title>
+                <title name="MESSAGE">getremove first list</title>
                 <value name="ACTUAL">
                   <block type="procedures_callreturn" inline="false">
                     <mutation name="assert list equal">
@@ -829,7 +829,7 @@
                     </value>
                     <next>
                       <block type="unittest_assertequals" inline="false">
-                        <title name="MESSAGE">test getremove last</title>
+                        <title name="MESSAGE">getremove last</title>
                         <value name="ACTUAL">
                           <block type="lists_getIndex" inline="true">
                             <mutation statement="false" at="false"></mutation>
@@ -849,7 +849,7 @@
                         </value>
                         <next>
                           <block type="unittest_asserttrue" inline="false">
-                            <title name="MESSAGE">test getremove last list</title>
+                            <title name="MESSAGE">getremove last list</title>
                             <value name="ACTUAL">
                               <block type="procedures_callreturn" inline="false">
                                 <mutation name="assert list equal">
@@ -903,7 +903,7 @@
                                 </value>
                                 <next>
                                   <block type="unittest_asserttrue" inline="false">
-                                    <title name="MESSAGE">test getremove random</title>
+                                    <title name="MESSAGE">getremove random</title>
                                     <value name="ACTUAL">
                                       <block type="logic_compare" inline="true">
                                         <title name="OP">EQ</title>
@@ -938,7 +938,7 @@
                                     </value>
                                     <next>
                                       <block type="unittest_assertequals" inline="false">
-                                        <title name="MESSAGE">test getremove random list</title>
+                                        <title name="MESSAGE">getremove random list</title>
                                         <value name="ACTUAL">
                                           <block type="lists_length" inline="false">
                                             <value name="VALUE">
@@ -978,7 +978,7 @@
                                             </value>
                                             <next>
                                               <block type="unittest_assertequals" inline="false">
-                                                <title name="MESSAGE">test getremove #</title>
+                                                <title name="MESSAGE">getremove #</title>
                                                 <value name="ACTUAL">
                                                   <block type="lists_getIndex" inline="true">
                                                     <mutation statement="false" at="true"></mutation>
@@ -1003,7 +1003,7 @@
                                                 </value>
                                                 <next>
                                                   <block type="unittest_asserttrue" inline="false">
-                                                    <title name="MESSAGE">test getremove # list</title>
+                                                    <title name="MESSAGE">getremove # list</title>
                                                     <value name="ACTUAL">
                                                       <block type="procedures_callreturn" inline="false">
                                                         <mutation name="assert list equal">
@@ -1057,7 +1057,7 @@
                                                         </value>
                                                         <next>
                                                           <block type="unittest_assertequals" inline="false">
-                                                            <title name="MESSAGE">test getremove #-end</title>
+                                                            <title name="MESSAGE">getremove #-end</title>
                                                             <value name="ACTUAL">
                                                               <block type="lists_getIndex" inline="true">
                                                                 <mutation statement="false" at="true"></mutation>
@@ -1082,7 +1082,7 @@
                                                             </value>
                                                             <next>
                                                               <block type="unittest_asserttrue" inline="false">
-                                                                <title name="MESSAGE">test getremove #-end list</title>
+                                                                <title name="MESSAGE">getremove #-end list</title>
                                                                 <value name="ACTUAL">
                                                                   <block type="procedures_callreturn" inline="false">
                                                                     <mutation name="assert list equal">
@@ -1180,7 +1180,7 @@
             </value>
             <next>
               <block type="unittest_asserttrue" inline="false">
-                <title name="MESSAGE">test remove first list</title>
+                <title name="MESSAGE">remove first list</title>
                 <value name="ACTUAL">
                   <block type="procedures_callreturn" inline="false">
                     <mutation name="assert list equal">
@@ -1244,7 +1244,7 @@
                         </value>
                         <next>
                           <block type="unittest_asserttrue" inline="false">
-                            <title name="MESSAGE">test remove last list</title>
+                            <title name="MESSAGE">remove last list</title>
                             <value name="ACTUAL">
                               <block type="procedures_callreturn" inline="false">
                                 <mutation name="assert list equal">
@@ -1308,7 +1308,7 @@
                                     </value>
                                     <next>
                                       <block type="unittest_assertequals" inline="false">
-                                        <title name="MESSAGE">test remove random list</title>
+                                        <title name="MESSAGE">remove random list</title>
                                         <value name="ACTUAL">
                                           <block type="lists_length" inline="false">
                                             <value name="VALUE">
@@ -1363,7 +1363,7 @@
                                                 </value>
                                                 <next>
                                                   <block type="unittest_asserttrue" inline="false">
-                                                    <title name="MESSAGE">test remove # list</title>
+                                                    <title name="MESSAGE">remove # list</title>
                                                     <value name="ACTUAL">
                                                       <block type="procedures_callreturn" inline="false">
                                                         <mutation name="assert list equal">
@@ -1432,7 +1432,7 @@
                                                             </value>
                                                             <next>
                                                               <block type="unittest_asserttrue" inline="false">
-                                                                <title name="MESSAGE">test remove #-end list</title>
+                                                                <title name="MESSAGE">remove #-end list</title>
                                                                 <value name="ACTUAL">
                                                                   <block type="procedures_callreturn" inline="false">
                                                                     <mutation name="assert list equal">
@@ -1537,7 +1537,7 @@
             </value>
             <next>
               <block type="unittest_asserttrue" inline="false">
-                <title name="MESSAGE">test name</title>
+                <title name="MESSAGE">set at</title>
                 <value name="ACTUAL">
                   <block type="procedures_callreturn" inline="false">
                     <mutation name="assert list equal">
