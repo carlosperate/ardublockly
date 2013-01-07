@@ -227,7 +227,7 @@ Blockly.CodeGenerator.prototype.statementToCode = function(block, name) {
 
 /**
  * Add one or more words to the list of reserved words for this language.
- * @param {string} Comma-separated list of words to add to the list.
+ * @param {string} words Comma-separated list of words to add to the list.
  *     No spaces.  Duplicates are ok.
  */
 Blockly.CodeGenerator.prototype.addReservedWords = function(words) {

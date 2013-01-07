@@ -156,7 +156,7 @@ Blockly.Xml.domToPrettyText = function(dom) {
   // Indent every line.
   var indent = '';
   for (var x = 1; x < lines.length; x++) {
-    var line = lines[x]
+    var line = lines[x];
     if (line[0] == '/') {
       indent = indent.substring(2);
     }

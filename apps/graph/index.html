@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <title>Blockly Graphing Calculator</title>
   <script type="text/javascript" src="/storage.js"></script>
-  <script type="text/javascript" src="//www.google.com/jsapi"></script>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
   <script type="text/javascript" src="graph.js"></script>
 
   <style>
@@ -42,6 +42,14 @@
     }
     button:hover>img {
       opacity: 1;
+    }
+    button.disabled:hover>img {
+      opacity: 0.6;
+    }
+    button.disabled {
+      cursor: not-allowed;
+      border: 1px solid #ddd !important;
+      box-shadow: none;
     }
     #visualization {
       margin-top: 1em;

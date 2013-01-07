@@ -147,6 +147,7 @@ BlocklyStorage.handleRequest_ = function() {
  * Start monitoring the workspace.  If a change is made that changes the XML,
  * clear the key from the URL.  Stop monitoring the workspace once such a
  * change is detected.
+ * @private
  */
 BlocklyStorage.monitorChanges_ = function() {
   var startXmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);

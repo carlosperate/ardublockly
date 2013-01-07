@@ -92,6 +92,9 @@ Blockly.FieldVariable.dropdownCreate = function() {
  * Special case the 'New variable...' and 'Rename variable...' options.
  * In both of these special cases, prompt the user for a new name.
  * @param {string} text The selected dropdown menu option.
+ * @return {null|undefined|string} An acceptable new variable name, or null if
+ *     change is to be either aborted (cancel button) or has been already
+ *     handled (rename), or undefined if an existing variable was chosen.
  * @this {!Blockly.FieldVariable}
  */
 Blockly.FieldVariable.dropdownChange = function(text) {

@@ -53,7 +53,18 @@ function setText(id, text) {
 var rowSlider = new Slider(60, 330, 425, SVG, sliderChange);
 rowSlider.setValue(0.225);
 
-// Give the parent page a handle to this window.
-parent.planeLoaded(window);
+if (parent.planeLoaded) {
+  // Give the parent page a handle to this window.
+  parent.planeLoaded(window);
+} else {
+  // Attempt to diagnose the problem.
+  var msg = 'Error: Unable to communicate between HTML & SVG.\n\n';
+  if (window.location.protocol == 'file:') {
+    msg += 'This may be due to a security restriction preventing\n' +
+        'access when using the file:// protocol.\n' +
+        'http://code.google.com/p/chromium/issues/detail?id=47416';
+  }
+  alert(msg);
+}
 // Draw five 1st class rows.
 parent.redraw(5);
