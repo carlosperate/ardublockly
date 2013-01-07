@@ -31,17 +31,10 @@ Blockly.Language.math_number = {
     this.setColour(230);
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldTextInput('0',
-        Blockly.Language.math_number.validator), 'NUM');
+        Blockly.FieldTextInput.numberValidator), 'NUM');
     this.setOutput(true, Number);
     this.setTooltip(Blockly.LANG_MATH_NUMBER_TOOLTIP);
   }
-};
-
-Blockly.Language.math_number.validator = function(text) {
-  // Ensure that only a number may be entered.
-  // TODO: Handle cases like 'o', 'ten', '1,234', '3,14', etc.
-  var n = window.parseFloat(text || 0);
-  return window.isNaN(n) ? null : String(n);
 };
 
 Blockly.Language.math_arithmetic = {

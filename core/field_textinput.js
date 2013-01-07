@@ -257,3 +257,31 @@ Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
   Blockly.FieldTextInput.disposeDom_();
   this.sourceBlock_.render();
 };
+
+/**
+ * Ensure that only a number may be entered.
+ * @param {string} text The user's text.
+ * @return {?string} A string representing a valid number, or null if invalid.
+ */
+Blockly.FieldTextInput.numberValidator = function(text) {
+  // TODO: Handle cases like 'ten', '1.203,14', etc.
+  // 'O' is sometimes mistaken for '0' by inexperienced users.
+  text = text.replace(/O/ig, '0');
+  // Strip out thousands separators.
+  text = text.replace(/,/g, '');
+  var n = parseFloat(text || 0);
+  return isNaN(n) ? null : String(n);
+};
+
+/**
+ * Ensure that only a nonnegative integer may be entered.
+ * @param {string} text The user's text.
+ * @return {?string} A string representing a valid int, or null if invalid.
+ */
+Blockly.FieldTextInput.nonnegativeIntegerValidator = function(text) {
+  var n = Blockly.FieldTextInput.numberValidator(text);
+  if (n) {
+    n = String(Math.max(0, Math.floor(n)));
+  }
+  return n;
+};

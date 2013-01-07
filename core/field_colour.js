@@ -106,7 +106,7 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   Blockly.FieldColour.changeEventKey_ = goog.events.listen(picker,
       goog.ui.ColorPicker.EventType.CHANGE,
       function(event) {
-        var color = event.target.getSelectedColor() || '#000000';
+        var colour = event.target.getSelectedColor() || '#000000';
         Blockly.FieldColour.hide();
         if (thisObj.changeHandler_) {
           // Call any change handler, and allow it to override.
@@ -116,7 +116,7 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
           }
         }
         if (colour !== null) {
-          thisObj.setValue(color);
+          thisObj.setValue(colour);
         }
       });
 };

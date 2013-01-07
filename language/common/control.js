@@ -222,7 +222,7 @@ Blockly.Language.controls_repeat = {
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT)
         .appendTitle(new Blockly.FieldTextInput('10',
-        Blockly.Language.math_number.validator), 'TIMES')
+            Blockly.FieldTextInput.nonnegativeIntegerValidator), 'TIMES')
         .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES);
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_REPEAT_INPUT_DO);

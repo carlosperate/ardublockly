@@ -39,7 +39,7 @@ Blockly.Language.draw_move_int = {
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR')
         .appendTitle('by')
         .appendTitle(new Blockly.FieldTextInput('10',
-            Blockly.Language.math_number.validator), 'VALUE');
+            Blockly.FieldTextInput.numberValidator), 'VALUE');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Moves the turtle forward or backward\n' +
@@ -100,7 +100,7 @@ Blockly.Language.draw_turn_int = {
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR')
         .appendTitle('by')
         .appendTitle(new Blockly.FieldTextInput('90',
-            Blockly.Language.math_number.validator), 'VALUE');
+            Blockly.FieldTextInput.numberValidator), 'VALUE');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Turns the turtle left or right\n' +
@@ -158,7 +158,7 @@ Blockly.Language.draw_width_int = {
     this.appendDummyInput()
         .appendTitle('set width')
         .appendTitle(new Blockly.FieldTextInput('1',
-            Blockly.Language.math_number.validator), 'WIDTH');
+            Blockly.FieldTextInput.numberValidator), 'WIDTH');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');
