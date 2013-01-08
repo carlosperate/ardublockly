@@ -66,6 +66,7 @@ Blockly.LANG_COLOUR_RGB_BLUE = 'blue';
 Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Create a colour with the specified amount of red, green,\n' +
     'and blue.  All values must be between 0.0 and 1.0.';
 
+Blockly.LANG_COLOUR_BLEND_HELPURL = 'http://meyerweb.com/eric/tools/color-blend/';
 Blockly.LANG_COLOUR_BLEND_TITLE = 'blend';
 Blockly.LANG_COLOUR_BLEND_COLOUR1 = 'colour 1';
 Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'colour 2';

@@ -63,7 +63,7 @@ Blockly.Language.colour_rgb = {
 Blockly.Language.colour_blend = {
   // Blend two colours together.
   category: Blockly.LANG_CATEGORY_COLOUR,
-  helpUrl: 'http://meyerweb.com/eric/tools/color-blend/',
+  helpUrl: Blockly.LANG_COLOUR_BLEND_HELPURL,
   init: function() {
     this.setColour(20);
     this.appendValueInput('COLOUR1')
