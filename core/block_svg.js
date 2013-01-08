@@ -872,11 +872,11 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
       if (input.align != Blockly.ALIGN_LEFT) {
         var titleRightX = inputRows.rightEdge - input.titleWidth -
-            Blockly.BlockSvg.TAB_WIDTH - Blockly.BlockSvg.SEP_SPACE_X;
+            Blockly.BlockSvg.TAB_WIDTH - 2 * Blockly.BlockSvg.SEP_SPACE_X;
         if (input.align == Blockly.ALIGN_RIGHT) {
-          titleX = titleRightX;
+          titleX += titleRightX;
         } else if (input.align == Blockly.ALIGN_CENTRE) {
-          titleX = (titleRightX + titleX) / 2;
+          titleX += (titleRightX + titleX) / 2;
         }
       }
       this.renderTitles_(input.titleRow, titleX, titleY);
@@ -908,14 +908,14 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
       if (input.align != Blockly.ALIGN_LEFT) {
         var titleRightX = inputRows.rightEdge - input.titleWidth -
-            Blockly.BlockSvg.SEP_SPACE_X;
+            2 * Blockly.BlockSvg.SEP_SPACE_X;
         if (inputRows.hasValue) {
           titleRightX -= Blockly.BlockSvg.TAB_WIDTH;
         }
         if (input.align == Blockly.ALIGN_RIGHT) {
-          titleX = titleRightX;
+          titleX += titleRightX;
         } else if (input.align == Blockly.ALIGN_CENTRE) {
-          titleX = (titleRightX + titleX) / 2;
+          titleX += (titleRightX + titleX) / 2;
         }
       }
       this.renderTitles_(input.titleRow, titleX, titleY);
@@ -938,11 +938,11 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
       if (input.align != Blockly.ALIGN_LEFT) {
         var titleRightX = inputRows.statementEdge - input.titleWidth -
-            Blockly.BlockSvg.SEP_SPACE_X;
+            2 * Blockly.BlockSvg.SEP_SPACE_X;
         if (input.align == Blockly.ALIGN_RIGHT) {
-          titleX = titleRightX;
+          titleX += titleRightX;
         } else if (input.align == Blockly.ALIGN_CENTRE) {
-          titleX = (titleRightX + titleX) / 2;
+          titleX += (titleRightX + titleX) / 2;
         }
       }
       this.renderTitles_(input.titleRow, titleX, titleY);
