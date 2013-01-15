@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.control');
+
+goog.require('Blockly.Language');
+
 Blockly.Language.controls_if = {
   // If/elseif/else condition.
   category: Blockly.LANG_CATEGORY_CONTROLS,

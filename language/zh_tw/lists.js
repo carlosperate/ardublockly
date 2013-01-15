@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.lists.zh_tw');
+
+goog.require('Blockly.Language.lists');
+
 Blockly.Language.lists_setIndex = {
   // Set element at index.
   category: Blockly.LANG_CATEGORY_LISTS,

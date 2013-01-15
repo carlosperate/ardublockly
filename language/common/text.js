@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.text');
+
+goog.require('Blockly.Language');
+
 Blockly.Language.text = {
   // Text value.
   category: Blockly.LANG_CATEGORY_TEXT,

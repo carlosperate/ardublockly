@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.logic');
+
+goog.require('Blockly.Language');
+
 Blockly.Language.logic_compare = {
   // Comparison operator.
   category: Blockly.LANG_CATEGORY_LOGIC,

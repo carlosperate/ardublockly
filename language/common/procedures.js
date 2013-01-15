@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.procedures');
+
+goog.require('Blockly.Language');
+
 Blockly.Language.procedures_defnoreturn = {
   // Define a procedure with no return value.
   category: null,  // Procedures are handled specially.

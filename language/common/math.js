@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.math');
+
+goog.require('Blockly.Language');
+
 Blockly.Language.math_number = {
   // Numeric value.
   category: Blockly.LANG_CATEGORY_MATH,

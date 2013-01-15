@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.colour');
+
+goog.require('Blockly.Language');
+
 Blockly.Language.colour_picker = {
   // Colour picker.
   category: Blockly.LANG_CATEGORY_COLOUR,

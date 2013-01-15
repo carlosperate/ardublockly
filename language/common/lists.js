@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.lists');
+
+goog.require('Blockly.Language');
+
 Blockly.Language.lists_create_empty = {
   // Create an empty list.
   category: Blockly.LANG_CATEGORY_LISTS,
