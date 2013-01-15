@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
+goog.provide('Blockly.JavaScript.control');
+
+goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript.controls_if = function() {
   // If/elseif/else condition.

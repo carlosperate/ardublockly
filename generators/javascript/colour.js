@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
+goog.provide('Blockly.JavaScript.colour');
+
+goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript.colour_picker = function() {
   // Colour picker.

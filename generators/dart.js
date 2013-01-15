@@ -23,6 +23,10 @@
  */
 'use strict';
 
+goog.provide('Blockly.Dart');
+
+goog.require('Blockly.CodeGenerator');
+
 Blockly.Dart = Blockly.Generator.get('Dart');
 
 /**

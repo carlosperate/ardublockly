@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Python = Blockly.Generator.get('Python');
+goog.provide('Blockly.Python.variables');
+
+goog.require('Blockly.Python');
 
 Blockly.Python.variables_get = function() {
   // Variable getter.

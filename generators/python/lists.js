@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Python = Blockly.Generator.get('Python');
+goog.provide('Blockly.Python.lists');
+
+goog.require('Blockly.Python');
 
 Blockly.Python.lists_create_empty = function() {
   // Create an empty list.

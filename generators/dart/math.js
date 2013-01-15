@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Dart = Blockly.Generator.get('Dart');
+goog.provide('Blockly.Dart.math');
+
+goog.require('Blockly.Dart');
 
 Blockly.Dart.addReservedWords('Math');
 

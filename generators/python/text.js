@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.Python = Blockly.Generator.get('Python');
+goog.provide('Blockly.Python.text');
+
+goog.require('Blockly.Python');
+
 
 Blockly.Python.text = function() {
   // Text value.

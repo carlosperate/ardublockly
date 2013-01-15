@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Python = Blockly.Generator.get('Python');
+goog.provide('Blockly.Python.control');
+
+goog.require('Blockly.Python');
 
 Blockly.Python.controls_if = function() {
   // If/elseif/else condition.

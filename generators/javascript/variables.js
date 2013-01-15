@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
+goog.provide('Blockly.JavaScript.variables');
+
+goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript.variables_get = function() {
   // Variable getter.

@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Dart = Blockly.Generator.get('Dart');
+goog.provide('Blockly.Dart.procedures');
+
+goog.require('Blockly.Dart');
 
 Blockly.Dart.procedures_defreturn = function() {
   // Define a procedure with a return value.

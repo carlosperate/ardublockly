@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
+goog.provide('Blockly.JavaScript.text');
+
+goog.require('Blockly.JavaScript');
 
 Blockly.JavaScript.text = function() {
   // Text value.

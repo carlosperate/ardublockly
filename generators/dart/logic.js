@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Dart = Blockly.Generator.get('Dart');
+goog.provide('Blockly.Dart.logic');
+
+goog.require('Blockly.Dart');
 
 Blockly.Dart.logic_compare = function() {
   // Comparison operator.

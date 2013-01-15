@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Dart = Blockly.Generator.get('Dart');
+goog.provide('Blockly.Dart.variables');
+
+goog.require('Blockly.Dart');
 
 Blockly.Dart.variables_get = function() {
   // Variable getter.

@@ -23,7 +23,9 @@
  */
 'use strict';
 
-Blockly.Python = Blockly.Generator.get('Python');
+goog.provide('Blockly.Python.math');
+
+goog.require('Blockly.Python');
 
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('math,random');
