@@ -23,6 +23,8 @@
  */
 'use strict';
 
+goog.provide('Blockly.BlockSvg');
+
 /**
  * Class for a block's SVG representation.
  * @param {!Blockly.Block} block The underlying block object.

@@ -23,6 +23,15 @@
  */
 'use strict';
 
+goog.provide('Blockly.Workspace');
+
+// TODO(scr): Fix circular dependencies
+// goog.require('Blockly.Block');
+goog.require('Blockly.ScrollbarPair');
+goog.require('Blockly.Trashcan');
+goog.require('Blockly.Xml');
+
+
 /**
  * Class for a workspace.
  * @param {boolean} editable Is this workspace freely interactive?

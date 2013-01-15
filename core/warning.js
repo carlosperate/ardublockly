@@ -23,6 +23,9 @@
  */
 'use strict';
 
+goog.provide('Blockly.Warning');
+
+
 /**
  * Class for a warning.
  * @param {!Blockly.Block} block The block associated with this warning.

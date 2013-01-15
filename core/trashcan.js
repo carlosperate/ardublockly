@@ -23,6 +23,9 @@
  */
 'use strict';
 
+goog.provide('Blockly.Trashcan');
+
+
 /**
  * Class for a trash can.
  * @param {!Function} getMetrics A function that returns workspace's metrics.

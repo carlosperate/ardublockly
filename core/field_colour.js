@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.FieldColour');
+
+goog.require('Blockly.Field');
+
+
 /**
  * Class for a colour input field.
  * @param {string} colour The initial colour in '#rrggbb' format.

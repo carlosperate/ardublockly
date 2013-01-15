@@ -23,10 +23,11 @@
  */
 'use strict';
 
-/**
- * Name space for the XML singleton.
- */
-Blockly.Xml = {};
+goog.provide('Blockly.Xml');
+
+// TODO(scr): Fix circular dependencies
+// goog.require('Blockly.Block');
+
 
 /**
  * Encode a block tree as XML.

@@ -24,6 +24,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.Mutator');
+
+goog.require('Blockly.Bubble');
+
+
 /**
  * Class for a mutator dialog.
  * @param {!Array.<string>} quarkNames List of names of sub-blocks for flyout.

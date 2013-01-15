@@ -25,10 +25,10 @@
  */
 'use strict';
 
-/**
- * Name space for the toolbox singleton.
- */
-Blockly.Toolbox = {};
+goog.provide('Blockly.Toolbox');
+
+goog.require('Blockly.ContextMenu');
+
 
 /**
  * Width of the toolbox.

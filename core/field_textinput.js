@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.FieldTextInput');
+
+goog.require('Blockly.Field');
+
+
 /**
  * Class for an editable text field.
  * @param {string} text The initial content of the field.

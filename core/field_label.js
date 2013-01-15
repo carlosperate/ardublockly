@@ -23,6 +23,12 @@
  */
 'use strict';
 
+goog.provide('Blockly.FieldLabel');
+
+goog.require('Blockly.Field');
+goog.require('Blockly.Tooltip');
+
+
 /**
  * Class for a non-editable field.
  * @param {string} text The initial content of the field.

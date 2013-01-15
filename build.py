@@ -52,6 +52,7 @@ filenames = [
     'input.js',
     'mutator.js',
     'names.js',
+    'language.js',
     'procedures.js',
     'scrollbar.js',
     'toolbox.js',

@@ -23,11 +23,17 @@
  */
 'use strict';
 
+goog.provide('Blockly.FieldVariable');
+
+goog.require('Blockly.FieldDropdown');
+goog.require('Blockly.Variables');
+
+
 /**
  * Class for a variable's dropdown field.
  * @param {!string} varname The default name for the variable.  If null,
  *     a unique variable name will be generated.
- * @extends Blockly.FieldDropdown
+ * @extends {Blockly.FieldDropdown}
  * @constructor
  */
 Blockly.FieldVariable = function(varname) {

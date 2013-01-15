@@ -28,6 +28,9 @@ if (!window.goog) {
         'http://code.google.com/p/blockly/wiki/Closure\n');
 }
 
+// Top level object for Blockly.
+goog.provide('Blockly');
+
 // Closure dependencies.
 goog.require('goog.dom');
 goog.require('goog.color');
@@ -36,8 +39,12 @@ goog.require('goog.string');
 goog.require('goog.ui.ColorPicker');
 goog.require('goog.userAgent');
 
-// Top level object for Blockly.
-var Blockly = {};
+// Blockly dependencies.
+goog.require('Blockly.Block');
+goog.require('Blockly.Connection');
+goog.require('Blockly.Toolbox');
+goog.require('Blockly.Workspace');
+
 
 /**
  * Path to Blockly's directory.  Can be relative, absolute, or remote.
@@ -591,9 +598,3 @@ Blockly.removeChangeListener = function(bindData) {
 Blockly.cssLoaded = function() {
   Blockly.Toolbox && Blockly.Toolbox.redraw();
 };
-
-/**
- * Name space for the Language singleton.
- * Language gets populated in the language files.
- */
-Blockly.Language = {};

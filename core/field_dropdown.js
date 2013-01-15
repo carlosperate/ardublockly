@@ -25,13 +25,18 @@
  */
 'use strict';
 
+goog.provide('Blockly.FieldDropdown');
+
+goog.require('Blockly.Field');
+
+
 /**
  * Class for an editable dropdown field.
  * @param {(!Array.<string>|!Function)} menuGenerator An array of options
  *     for a dropdown list, or a function which generates these options.
  * @param {Function} opt_changeHandler A function that is executed when a new
  *     option is selected.
- * @extends Blockly.Field
+ * @extends {Blockly.Field}
  * @constructor
  */
 Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {

@@ -23,6 +23,14 @@
  */
 'use strict';
 
+goog.provide('Blockly.Input');
+
+// TODO(scr): Fix circular dependencies
+// goog.require('Blockly.Block');
+goog.require('Blockly.Connection');
+goog.require('Blockly.FieldLabel');
+
+
 /**
  * Class for an input with an optional title.
  * @param {number} type The type of the input.

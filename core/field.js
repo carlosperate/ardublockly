@@ -25,6 +25,13 @@
  */
 'use strict';
 
+goog.provide('Blockly.Field');
+
+// TODO(scr): Fix circular dependencies
+// goog.require('Blockly.Block');
+goog.require('Blockly.BlockSvg');
+
+
 /**
  * Class for an editable field.
  * @param {string} text The initial content of the field.

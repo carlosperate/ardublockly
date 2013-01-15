@@ -23,6 +23,9 @@
  */
 'use strict';
 
+goog.provide('Blockly.Comment');
+
+
 /**
  * Class for a comment.
  * @param {!Blockly.Block} block The block associated with this comment.

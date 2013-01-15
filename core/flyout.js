@@ -23,6 +23,12 @@
  */
 'use strict';
 
+goog.provide('Blockly.Flyout');
+
+goog.require('Blockly.Block');
+goog.require('Blockly.Comment');
+
+
 /**
  * Class for a flyout.
  * @constructor

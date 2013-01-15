@@ -23,6 +23,20 @@
  */
 'use strict';
 
+goog.provide('Blockly.Block');
+
+goog.require('Blockly.BlockSvg');
+goog.require('Blockly.Comment');
+goog.require('Blockly.Connection');
+goog.require('Blockly.Input');
+goog.require('Blockly.Language');
+goog.require('Blockly.Mutator');
+goog.require('Blockly.ContextMenu');
+goog.require('Blockly.Warning');
+goog.require('Blockly.Workspace');
+goog.require('Blockly.Xml');
+
+
 /**
  * Unique ID counter for created blocks.
  * @private

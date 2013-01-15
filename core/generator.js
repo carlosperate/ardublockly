@@ -24,6 +24,12 @@
  */
 'use strict';
 
+goog.provide('Blockly.CodeGenerator');
+goog.provide('Blockly.Generator');
+
+goog.require('Blockly.Block');
+
+
 /**
  * Name space for the generator singleton.
  */
@@ -42,7 +48,7 @@ Blockly.Generator.languages = {};
 /**
  * Return the code generator for the specified language.  Create one if needed.
  * @param {string} name The language's name.
- * @return {!Object} Generator for this language.
+ * @return {!Blockly.CodeGenerator} Generator for this language.
  */
 Blockly.Generator.get = function(name) {
   if (!(name in Blockly.Generator.languages)) {

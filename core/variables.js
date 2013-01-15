@@ -25,10 +25,13 @@
  */
 'use strict';
 
-/**
- * Name space for the variables singleton.
- */
-Blockly.Variables = {};
+goog.provide('Blockly.Variables');
+
+// TODO(scr): Fix circular dependencies
+// goog.require('Blockly.Block');
+goog.require('Blockly.Toolbox');
+goog.require('Blockly.Workspace');
+
 
 /**
  * Category to separate variable names from procedures and generated functions.

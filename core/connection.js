@@ -23,6 +23,12 @@
  */
 'use strict';
 
+goog.provide('Blockly.Connection');
+goog.provide('Blockly.ConnectionDB');
+
+goog.require('Blockly.Workspace');
+
+
 /**
  * Class for a connection between blocks.
  * @param {!Blockly.Block} source The block establishing this connection.

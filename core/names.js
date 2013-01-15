@@ -23,6 +23,9 @@
  */
 'use strict';
 
+goog.provide('Blockly.Names');
+
+
 /**
  * Class for a database of entity names (variables, functions, etc).
  * @param {string} reservedWords A comma-separated string of words that are

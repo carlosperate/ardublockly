@@ -28,10 +28,8 @@
  */
 'use strict';
 
-/**
- * Name space for the tooltip singleton.
- */
-Blockly.Tooltip = {};
+goog.provide('Blockly.Tooltip');
+
 
 /**
  * Is a tooltip currently showing?

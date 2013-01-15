@@ -25,6 +25,9 @@
  */
 'use strict';
 
+goog.provide('Blockly.utils');
+
+
 /**
  * Add a CSS class to a element.
  * Similar to Closure's goog.dom.classes.add, except it handles SVG elements.

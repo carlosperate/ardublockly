@@ -23,10 +23,8 @@
  */
 'use strict';
 
-/**
- * Name space for the context menu singleton.
- */
-Blockly.ContextMenu = {};
+goog.provide('Blockly.ContextMenu');
+
 
 /**
  * Horizontal padding on either side of each option.

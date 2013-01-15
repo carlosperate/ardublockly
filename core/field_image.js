@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.FieldImage');
+
+goog.require('Blockly.Field');
+
+
 /**
  * Class for an image.
  * @param {string} src The URL of the image.

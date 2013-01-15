@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.FieldCheckbox');
+
+goog.require('Blockly.Field');
+
+
 /**
  * Class for a checkbox field.
  * @param {string} state The initial state of the field ('TRUE' or 'FALSE').
