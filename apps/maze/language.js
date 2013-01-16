@@ -91,7 +91,7 @@ Blockly.JavaScript.maze_turnLeft = function() {
   var code;
   if (dir == 'random') {
     code = 'if (Math.random() < 0.5) {\n' +
-           '  Maze.turnLeft("' + this.id + '\');\n' +
+           '  Maze.turnLeft(\'' + this.id + '\');\n' +
            '} else {\n' +
            '  Maze.turnRight(\'' + this.id + '\');\n' +
            '}\n';

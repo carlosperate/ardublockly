@@ -164,37 +164,17 @@ function updateLanguage() {
   // Generate output, or next/previous connections.
   switch (rootBlock.getTitleValue('CONNECTIONS')) {
     case 'LEFT':
-      var outputType = getOptTypesFrom(rootBlock, 'OUTPUTTYPE');
-      if (outputType) {
-        outputType = ', ' + outputType;
-      }
-      code.push('    this.setOutput(true' + outputType + ');');
+      code.push(connectionLine_('setOutput', 'OUTPUTTYPE'));
       break;
     case 'BOTH':
-      var topType = getOptTypesFrom(rootBlock, 'TOPTYPE');
-      if (outputType) {
-        outputType = ', ' + outputType;
-      }
-      code.push('    this.setPreviousStatement(true' + topType + ');');
-      var bottomType = getOptTypesFrom(rootBlock, 'BOTTOMTYPE');
-      if (outputType) {
-        outputType = ', ' + outputType;
-      }
-      code.push('    this.setNextStatement(true' + bottomType + ');');
+      code.push(connectionLine_('setPreviousStatement', 'TOPTYPE'));
+      code.push(connectionLine_('setNextStatement', 'BOTTOMTYPE'));
       break;
     case 'TOP':
-      var topType = getOptTypesFrom(rootBlock, 'TOPTYPE');
-      if (outputType) {
-        outputType = ', ' + outputType;
-      }
-      code.push('    this.setPreviousStatement(true' + topType + ');');
+      code.push(connectionLine_('setPreviousStatement', 'TOPTYPE'));
       break;
     case 'BOTTOM':
-      var bottomType = getOptTypesFrom(rootBlock, 'BOTTOMTYPE');
-      if (outputType) {
-        outputType = ', ' + outputType;
-      }
-      code.push('    this.setNextStatement(true' + bottomType + ');');
+      code.push(connectionLine_('setNextStatement', 'BOTTOMTYPE'));
       break;
   }
   code.push('    this.setTooltip(\'\');');
@@ -203,6 +183,21 @@ function updateLanguage() {
 
   var ta = document.getElementById('languageTextarea');
   ta.value = code.join('\n');
+}
+
+/**
+ * Create JS code required to create a top, bottom, or value connection.
+ * @param {string} functionName JavaScript function name.
+ * @param {string} typeName Name of type input.
+ * @return {string} Line of JavaScript code to create connection.
+ * @private
+ */
+function connectionLine_(functionName, typeName) {
+  var type = getOptTypesFrom(rootBlock, typeName);
+  if (type) {
+    type = ', ' + type;
+  }
+  return '    this.' + functionName + '(true' + type + ');';
 }
 
 /**
@@ -430,4 +425,3 @@ function updatePreview() {
   previewBlock.editable = false;
   previewBlock.deletable = false;
 }
-
