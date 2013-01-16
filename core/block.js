@@ -480,6 +480,7 @@ Blockly.Block.prototype.showHelp_ = function() {
 
 /**
  * Duplicate this block and its children.
+ * @return {!Blockly.Block} The duplicate.
  * @private
  */
 Blockly.Block.prototype.duplicate_ = function() {
@@ -497,6 +498,7 @@ Blockly.Block.prototype.duplicate_ = function() {
   }
   xy.y += Blockly.SNAP_RADIUS * 2;
   newBlock.moveBy(xy.x, xy.y);
+  return newBlock;
 };
 
 /**
