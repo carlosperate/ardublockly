@@ -98,7 +98,8 @@
   <table width="100%" height="100%">
     <tr>
       <td width="410" valign="top">
-        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; Turtle Graphics</h1>
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;
+            <a href="../index.html">Apps</a> &gt; Turtle Graphics</h1>
 
         <div>
           <canvas id="scratch" width="400" height="400" style="display: none"></canvas>
@@ -107,26 +108,39 @@
         <table style="padding-top: 1em;">
           <tr>
             <td style="width: 190px; text-align: center">
-<svg
-   id="slider"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   version="1.1"
-   width="150"
-   height="50">
-</svg>
+              <svg
+                 id="slider"
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:svg="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                 version="1.1"
+                 width="150"
+                 height="50">
+                <!-- Slow icon. -->
+                <clipPath id="slowClipPath">
+                  <rect width=26 height=12 x=5 y=14 />
+                </clipPath>
+                <image xlink:href="icons.png" height=42 width=84 x=-21 y=-10
+                    clip-path="url(#slowClipPath)" />
+                <!-- Fast icon. -->
+                <clipPath id="fastClipPath">
+                  <rect width=26 height=16 x=120 y=10 />
+                </clipPath>
+                <image xlink:href="icons.png" height=42 width=84 x=120 y=-11
+                    clip-path="url(#fastClipPath)" />
+              </svg>
             </td>
             <td style="width: 15px;">
               <img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15>
             </td>
             <td style="width: 190px; text-align: center">
-<button id="runButton" class="launch" onclick="Turtle.runButtonClick();">
-  Run Program
-</button>
-<button id="resetButton" class="launch" onclick="Turtle.resetButtonClick();" style="display: none">
-  &nbsp; Reset &nbsp;
-</button>
+              <button id="runButton" class="launch" onclick="Turtle.runButtonClick();">
+                Run Program
+              </button>
+              <button id="resetButton" class="launch" onclick="Turtle.resetButtonClick();"
+                      style="display: none">
+                &nbsp; Reset &nbsp;
+              </button>
             </td>
           </tr>
         </table>
