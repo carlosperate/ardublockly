@@ -60,6 +60,26 @@
       width: 100%;
       border: 1px solid #ccc;
     }
+
+    /* Sprited icons. */
+    .random {
+      height: 21px;
+      width: 21px;
+      background-image: url(icons.png);
+      background-position: -63px 0px;
+    }
+    .code {
+      height: 21px;
+      width: 21px;
+      background-image: url(icons.png);
+      background-position: -42px 0px;
+    }
+    .link {
+      height: 21px;
+      width: 21px;
+      background-image: url(icons.png);
+      background-position: -21px 0px;
+    }
   </style>
 </head>
 <body>
@@ -83,13 +103,13 @@
 
         <div id="toolbarDiv">
           <button title="Randomize maze" onclick="Maze.randomize();">
-            <img src='randomize.png' height=21 width=21>
+            <img src='../../media/1x1.gif' class="random">
           </button>
-          <button title="See generated JavaScript code" onclick="Maze.showCode()">
-              <img src='code.png' height=21 width=21>
+          <button title="See generated JavaScript code" onclick="Maze.showCode();">
+            <img src='../../media/1x1.gif' class="code">
           </button>
-          <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link()">
-              <img src='link.png' height=21 width=21>
+          <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link();">
+            <img src='../../media/1x1.gif' class="link">
           </button>
         </div>
       </td>

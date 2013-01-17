@@ -78,6 +78,20 @@
     .sliderKnob:hover {
       fill: #eee;
     }
+
+    /* Sprited icons. */
+    .code {
+      height: 21px;
+      width: 21px;
+      background-image: url(icons.png);
+      background-position: -42px 0px;
+    }
+    .link {
+      height: 21px;
+      width: 21px;
+      background-image: url(icons.png);
+      background-position: -21px 0px;
+    }
   </style>
 </head>
 <body id="body">
@@ -101,8 +115,6 @@
    version="1.1"
    width="150"
    height="50">
-  <image xlink:href="slow.png" height="12" width="26" x="5" y="14" />
-  <image xlink:href="fast.png" height="16" width="26" x="120" y="10" />
 </svg>
             </td>
             <td style="width: 15px;">
@@ -120,11 +132,11 @@
         </table>
 
         <div id="toolbarDiv">
-          <button title="See generated JavaScript code" onclick="Turtle.showCode()">
-              <img src='code.png' height=21 width=21>
+          <button title="See generated JavaScript code" onclick="Turtle.showCode();">
+            <img src='../../media/1x1.gif' class="code">
           </button>
-          <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link()">
-              <img src='link.png' height=21 width=21>
+          <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link();">
+            <img src='../../media/1x1.gif' class="link">
           </button>
         </div>
       </td>

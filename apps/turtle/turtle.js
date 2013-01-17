@@ -69,8 +69,48 @@ Turtle.init = function(blockly) {
   }
 
   // Initialize the slider.
-  Turtle.speedSlider =
-      new Slider(10, 35, 130, document.getElementById('slider'));
+  var svg = document.getElementById('slider');
+  Turtle.speedSlider = new Slider(10, 35, 130, svg);
+
+  // Slow icon's clipPath.
+  var clipPath = document.createElementNS(Blockly.SVG_NS, 'clipPath');
+  clipPath.setAttribute('id', 'slowClipPath');
+  var clipRect = document.createElementNS(Blockly.SVG_NS, 'rect');
+  clipRect.setAttribute('width', 26);
+  clipRect.setAttribute('height', 12);
+  clipRect.setAttribute('x', 5);
+  clipRect.setAttribute('y', 14);
+  clipPath.appendChild(clipRect);
+  svg.appendChild(clipPath);
+  var spriteIcon = document.createElementNS(Blockly.SVG_NS, 'image');
+  spriteIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+      'icons.png');
+  spriteIcon.setAttribute('height', 42);
+  spriteIcon.setAttribute('width', 84);
+  spriteIcon.setAttribute('clip-path', 'url(#slowClipPath)');
+  spriteIcon.setAttribute('x', -21);
+  spriteIcon.setAttribute('y', -10);
+  svg.appendChild(spriteIcon);
+
+  // Fast icon's clipPath.
+  var clipPath = document.createElementNS(Blockly.SVG_NS, 'clipPath');
+  clipPath.setAttribute('id', 'fastClipPath');
+  var clipRect = document.createElementNS(Blockly.SVG_NS, 'rect');
+  clipRect.setAttribute('width', 26);
+  clipRect.setAttribute('height', 16);
+  clipRect.setAttribute('x', 120);
+  clipRect.setAttribute('y', 10);
+  clipPath.appendChild(clipRect);
+  svg.appendChild(clipPath);
+  var spriteIcon = document.createElementNS(Blockly.SVG_NS, 'image');
+  spriteIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+      'icons.png');
+  spriteIcon.setAttribute('height', 42);
+  spriteIcon.setAttribute('width', 84);
+  spriteIcon.setAttribute('clip-path', 'url(#fastClipPath)');
+  spriteIcon.setAttribute('x', 120);
+  spriteIcon.setAttribute('y', -11);
+  svg.appendChild(spriteIcon);
 
   // An href with #key trigers an AJAX call to retrieve saved blocks.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
