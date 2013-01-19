@@ -23,11 +23,6 @@
  */
 'use strict';
 
-if (!window.goog) {
-  alert('Error: Closure not found.  Read this:\n' +
-        'http://code.google.com/p/blockly/wiki/Closure\n');
-}
-
 // Top level object for Blockly.
 goog.provide('Blockly');
 
@@ -41,9 +36,39 @@ goog.require('goog.userAgent');
 
 // Blockly dependencies.
 goog.require('Blockly.Block');
+goog.require('Blockly.BlockSvg');
+goog.require('Blockly.Bubble');
+goog.require('Blockly.Comment');
 goog.require('Blockly.Connection');
+goog.require('Blockly.ConnectionDB');
+goog.require('Blockly.ContextMenu');
+goog.require('Blockly.Field');
+goog.require('Blockly.FieldCheckbox');
+goog.require('Blockly.FieldColour');
+goog.require('Blockly.FieldDropdown');
+goog.require('Blockly.FieldImage');
+goog.require('Blockly.FieldLabel');
+goog.require('Blockly.FieldTextInput');
+goog.require('Blockly.FieldVariable');
+goog.require('Blockly.Flyout');
+goog.require('Blockly.CodeGenerator');
+goog.require('Blockly.Generator');
+goog.require('Blockly.inject');
+goog.require('Blockly.Input');
+goog.require('Blockly.Language');
+goog.require('Blockly.Mutator');
+goog.require('Blockly.Names');
+goog.require('Blockly.Procedures');
+goog.require('Blockly.Scrollbar');
+goog.require('Blockly.ScrollbarPair');
 goog.require('Blockly.Toolbox');
+goog.require('Blockly.Tooltip');
+goog.require('Blockly.Trashcan');
+goog.require('Blockly.utils');
+goog.require('Blockly.Variables');
+goog.require('Blockly.Warning');
 goog.require('Blockly.Workspace');
+goog.require('Blockly.Xml');
 
 
 /**
@@ -596,5 +621,6 @@ Blockly.removeChangeListener = function(bindData) {
  * Called when the CSS file has finally loaded.
  */
 Blockly.cssLoaded = function() {
+  Blockly.Field && (Blockly.Field.textLengthCache = {});
   Blockly.Toolbox && Blockly.Toolbox.redraw();
 };

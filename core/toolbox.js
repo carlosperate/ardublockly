@@ -28,6 +28,7 @@
 goog.provide('Blockly.Toolbox');
 
 goog.require('Blockly.ContextMenu');
+goog.require('Blockly.Flyout');
 
 
 /**

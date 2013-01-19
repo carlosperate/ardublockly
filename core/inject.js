@@ -25,7 +25,6 @@
 
 goog.provide('Blockly.inject');
 
-
 /**
  * Initialize the SVG document with various handlers.
  * @param {!Element} container Containing element.
@@ -174,10 +173,10 @@ Blockly.createDom_ = function(container) {
     svg.appendChild(Blockly.Toolbox.createDom());
   }
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
-  if (Blockly.editable) {
+  if (Blockly.editable && Blockly.FieldDropdown) {
     svg.appendChild(Blockly.FieldDropdown.createDom());
   }
-  if (Blockly.ContextMenu) {
+  if (Blockly.ContextMenu && Blockly.ContextMenu) {
     svg.appendChild(Blockly.ContextMenu.createDom());
   }
 
