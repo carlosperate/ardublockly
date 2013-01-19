@@ -28,7 +28,7 @@
 # been renamed.  The uncompressed file also allows for a faster developement
 # cycle since there is no need to rebuild or recompile, just reload.
 
-import httplib, json, os, urllib, sys
+import httplib, json, os, re, sys, urllib
 
 def import_path(fullpath):
   """Import a file with full path specification.
@@ -67,8 +67,35 @@ def gen_uncompressed(search_paths):
         'http://code.google.com/p/blockly/wiki/Closure\\n');
 }
 
+// Find name of current directory.
+var BLOCKLY_DIR = (function() {
+  var scripts = document.getElementsByTagName('script');
+  var re = new RegExp('([^\\/]+)[\\/]blockly_uncompressed\\.js$');
+  for (var x = 0, script; script = scripts[x]; x++) {
+    var match = re.exec(script.src);
+    if (match) {
+      return match[1];
+    }
+  }
+  alert('Could not detect Blockly\\'s directory name.');
+  return '';
+})();
+
+// Build map of all dependencies (used and unused).
 """)
-  calcdeps.PrintDeps(search_paths, [], f)
+  add_dependency = []
+  base_path = calcdeps.FindClosureBasePath(search_paths)
+  for dep in calcdeps.BuildDependenciesFromFiles(search_paths):
+    add_dependency.append(calcdeps.GetDepsLine(dep, base_path))
+  add_dependency = '\n'.join(add_dependency)
+  # Find the Blockly directory name and replace it with a JS variable.
+  # This allows blockly_uncompressed.js to be compiled on one computer and be
+  # used on another, even if the directory name differs.
+  m = re.search('[\\/]([^\\/]+)[\\/]core[\\/]blockly.js', add_dependency)
+  add_dependency = re.sub('([\\/])' + re.escape(m.group(1)) + '([\\/]core[\\/])',
+                          '\\1" + BLOCKLY_DIR + "\\2', add_dependency)
+  f.write(add_dependency + '\n')
+
   provides = []
   for dep in calcdeps.BuildDependenciesFromFiles(search_paths):
     if not dep.filename.startswith('../'):
