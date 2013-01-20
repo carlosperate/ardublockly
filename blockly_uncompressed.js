@@ -951,7 +951,7 @@ goog.require('Blockly.utils');
 
 delete window.BLOCKLY_DIR;
 delete window.BLOCKLY_BOOT;
-}
+};
 
 document.write('<script type="text/javascript" src="' + window.BLOCKLY_DIR + '/../closure-library-read-only/closure/goog/base.js"></script>');
 document.write('<script type="text/javascript">window.BLOCKLY_BOOT()</script>');

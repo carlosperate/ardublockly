@@ -46,7 +46,8 @@ var rtl = (document.location.search == '?rtl');
 var block = null;
 
 function start() {
-  Blockly.inject(document.getElementById('svg'), {'rtl': rtl, path: '../'});
+  Blockly.inject(document.getElementById('svg'),
+                 {'rtl': rtl, path: '../'});
 }
 
 function toXml() {
@@ -63,19 +64,9 @@ function fromXml() {
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
 }
 
-function toJavaScript() {
+function toCode(lang) {
   var output = document.getElementById('importExport');
-  output.value = Blockly.Generator.workspaceToCode('JavaScript');
-}
-
-function toDart() {
-  var output = document.getElementById('importExport');
-  output.value = Blockly.Generator.workspaceToCode('Dart');
-}
-
-function toPython() {
-  var output = document.getElementById('importExport');
-  output.value = Blockly.Generator.workspaceToCode('Python');
+  output.value = Blockly.Generator.workspaceToCode(lang);
 }
 
 function airstrike(n) {
@@ -118,41 +109,41 @@ h1 {
 </head>
 <body onload="start()">
 
-<div id="svg"></div>
+  <div id="svg"></div>
 
-<h1>Blockly Playground</h1>
+  <h1>Blockly Playground</h1>
 
-<p><a href="javascript:void(document.getElementById('svg').style.display = 'block')">Show</a>
- - <a href="javascript:void(document.getElementById('svg').style.display = 'none')">Hide</a></p>
+  <p><a href="javascript:void(document.getElementById('svg').style.display = 'block')">Show</a>
+   - <a href="javascript:void(document.getElementById('svg').style.display = 'none')">Hide</a></p>
 
-<script type="text/javascript">
-  if (rtl) {
-    document.write('[ &larr; RTL. Switch to <A HREF="?ltr">LTR</A>. ]');
-  } else {
-    document.write('[ &rarr; LTR. Switch to <A HREF="?rtl">RTL</A>. ]');
-  }
-</script>
+  <script type="text/javascript">
+    if (rtl) {
+      document.write('[ &larr; RTL. Switch to <A HREF="?ltr">LTR</A>. ]');
+    } else {
+      document.write('[ &rarr; LTR. Switch to <A HREF="?rtl">RTL</A>. ]');
+    }
+  </script>
 
-<p>
-  <input type="button" value="Export to XML" onclick="toXml()">
-  &nbsp;
-  <input type="button" value="Import from XML" onclick="fromXml()">
-  <br>
-  <input type="button" value="Generate JavaScript" onclick="toJavaScript()">
-  &nbsp;
-  <input type="button" value="Generate Dart" onclick="toDart()">
-  &nbsp;
-  <input type="button" value="Generate Python" onclick="toPython()">
-  <br>
-  <textarea id="importExport" style="width: 26%; height: 12em"></textarea>
-</p>
-<hr>
+  <p>
+    <input type="button" value="Export to XML" onclick="toXml()">
+    &nbsp;
+    <input type="button" value="Import from XML" onclick="fromXml()">
+    <br>
+    <input type="button" value="Generate JavaScript" onclick="toCode('JavaScript')">
+    &nbsp;
+    <input type="button" value="Generate Dart" onclick="toCode('Dart')">
+    &nbsp;
+    <input type="button" value="Generate Python" onclick="toCode('Python')">
+    <br>
+    <textarea id="importExport" style="width: 26%; height: 12em"></textarea>
+  </p>
+  <hr>
 
-<p>
-  Stress test with an <input type="button" value="Airstrike!" onclick="airstrike(100)">
-</p>
+  <p>
+    Stress test with an <input type="button" value="Airstrike!" onclick="airstrike(100)">
+  </p>
 
-</form>
+  </form>
 
 </body>
 </html>

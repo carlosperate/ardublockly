@@ -113,7 +113,7 @@ var dir = window.BLOCKLY_DIR.match(/[^\\/]+$/)[0];
   f.write("""
 delete window.BLOCKLY_DIR;
 delete window.BLOCKLY_BOOT;
-}
+};
 
 document.write('<script type="text/javascript" src="' + window.BLOCKLY_DIR + '/../closure-library-read-only/closure/goog/base.js"></script>');
 document.write('<script type="text/javascript">window.BLOCKLY_BOOT()</script>');
@@ -157,7 +157,7 @@ def gen_compressed(search_paths):
   conn.request('POST', '/compile', urllib.urlencode(params), headers)
   response = conn.getresponse()
   json_str = response.read()
-  conn.close
+  conn.close()
 
   # Parse the JSON response.
   json_data = json.loads(json_str)

@@ -64,8 +64,8 @@ Blockly.createDom_ = function(container) {
   var link = goog.dom.createDom('link', {
       'href': Blockly.pathToBlockly + 'media/blockly.css',
       'rel': 'stylesheet',
-      'type': 'text/css',
-      'onload': 'Blockly.cssLoaded()'});
+      'type': 'text/css'});
+  Blockly.bindEvent_(link, 'load', null, Blockly.cssLoaded);
   var head = document.head || document.getElementsByTagName('head')[0];
   if (!head) {
     throw 'No head in document.';
