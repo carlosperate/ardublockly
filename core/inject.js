@@ -25,6 +25,8 @@
 
 goog.provide('Blockly.inject');
 
+goog.require('goog.dom');
+
 /**
  * Initialize the SVG document with various handlers.
  * @param {!Element} container Containing element.
@@ -59,6 +61,11 @@ Blockly.parseOptions_ = function(options) {
  * @private
  */
 Blockly.createDom_ = function(container) {
+  // Sadly browsers (Chrome vs Firefox) are currently inconsistent in laying
+  // out content in RTL mode.  Therefore Blockly forces the use of LTR,
+  // then manually positions content in RTL as needed.
+  container.setAttribute('dir', 'LTR');
+
   // Load CSS.
   //<link href="blockly.css" rel="stylesheet" type="text/css" />
   var link = goog.dom.createDom('link', {

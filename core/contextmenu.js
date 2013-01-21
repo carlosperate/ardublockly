@@ -75,7 +75,7 @@ Blockly.ContextMenu.createDom = function() {
  * @param {!Array.<Object>} options Array of menu options.
  */
 Blockly.ContextMenu.show = function(anchorX, anchorY, options) {
-  if (options.length == 0) {
+  if (!options.length) {
     Blockly.ContextMenu.hide();
     return;
   }
