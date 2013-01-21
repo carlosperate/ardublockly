@@ -26,6 +26,8 @@
 goog.provide('Blockly.Scrollbar');
 goog.provide('Blockly.ScrollbarPair');
 
+goog.require('goog.userAgent');
+
 
 /**
  * Class for a pair of scrollbars.  Horizontal and vertical.

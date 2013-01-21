@@ -26,6 +26,7 @@
 goog.provide('Blockly.FieldTextInput');
 
 goog.require('Blockly.Field');
+goog.require('goog.userAgent');
 
 
 /**

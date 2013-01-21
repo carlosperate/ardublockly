@@ -39,6 +39,7 @@ goog.require('Blockly.Block');
 goog.require('Blockly.Connection');
 goog.require('Blockly.Toolbox');
 goog.require('Blockly.Workspace');
+goog.require('Blockly.renaming_map');
 
 
 /**

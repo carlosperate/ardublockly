@@ -27,6 +27,7 @@ goog.provide('Blockly.inject');
 
 goog.require('goog.dom');
 
+
 /**
  * Initialize the SVG document with various handlers.
  * @param {!Element} container Containing element.
