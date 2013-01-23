@@ -54,6 +54,9 @@ Blockly.parseOptions_ = function(options) {
   Blockly.RTL = !!options['rtl'];
   Blockly.editable = !options['readOnly'];
   Blockly.pathToBlockly = options['path'] || './';
+  if (options['trashcan'] === false) {
+    delete Blockly.Trashcan;
+  }
 };
 
 /**

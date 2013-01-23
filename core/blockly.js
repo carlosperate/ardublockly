@@ -37,6 +37,7 @@ goog.require('goog.userAgent');
 // Blockly dependencies.
 goog.require('Blockly.Block');
 goog.require('Blockly.Connection');
+goog.require('Blockly.utils');
 goog.require('Blockly.Toolbox');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.renaming_map');
