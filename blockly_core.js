@@ -28,6 +28,7 @@ goog.require('Blockly.Names');
 goog.require('Blockly.Procedures');
 goog.require('Blockly.Scrollbar');
 goog.require('Blockly.ScrollbarPair');
+goog.require('Blockly.SvgComponent');
 goog.require('Blockly.Toolbox');
 goog.require('Blockly.Tooltip');
 goog.require('Blockly.Trashcan');
