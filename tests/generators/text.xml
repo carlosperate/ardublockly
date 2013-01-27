@@ -92,8 +92,9 @@
     <mutation></mutation>
     <title name="NAME">test empty</title>
     <statement name="STACK">
-      <block type="unittest_assertfalse" inline="false">
+      <block type="unittest_assertvalue" inline="false">
         <title name="MESSAGE">not empty</title>
+        <title name="EXPECTED">FALSE</title>
         <value name="ACTUAL">
           <block type="text_isEmpty" inline="false">
             <value name="VALUE">
@@ -104,8 +105,9 @@
           </block>
         </value>
         <next>
-          <block type="unittest_asserttrue" inline="false">
+          <block type="unittest_assertvalue" inline="false">
             <title name="MESSAGE">empty</title>
+            <title name="EXPECTED">TRUE</title>
             <value name="ACTUAL">
               <block type="text_isEmpty" inline="false">
                 <value name="VALUE">
@@ -521,8 +523,9 @@
                       </block>
                     </value>
                     <next>
-                      <block type="unittest_asserttrue" inline="false">
+                      <block type="unittest_assertvalue" inline="false">
                         <title name="MESSAGE">random letter</title>
+                        <title name="EXPECTED">TRUE</title>
                         <value name="ACTUAL">
                           <block type="math_number_property" inline="true">
                             <mutation divisor_input="false"></mutation>

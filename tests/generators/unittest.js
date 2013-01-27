@@ -53,11 +53,14 @@ Blockly.Language.unittest_assertequals = {
     this.appendValueInput('EXPECTED', null)
         .appendTitle('expected');
     this.setTooltip('Tests that "actual == expected".');
+  },
+  getVars: function() {
+    return ['unittestResults'];
   }
 };
 
-Blockly.Language.unittest_asserttrue = {
-  // Asserts that a value is true.
+Blockly.Language.unittest_assertvalue = {
+  // Asserts that a value is true, false, or null.
   category: 'Unit test',
   init: function() {
     this.setColour(65);
@@ -66,23 +69,13 @@ Blockly.Language.unittest_asserttrue = {
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldTextInput('test name'), 'MESSAGE');
     this.appendValueInput('ACTUAL', Boolean)
-        .appendTitle('assert true');
-    this.setTooltip('Tests that the value is true.');
-  }
-};
-
-Blockly.Language.unittest_assertfalse = {
-  // Asserts that a value is false.
-  category: 'Unit test',
-  init: function() {
-    this.setColour(65);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.appendDummyInput()
-        .appendTitle(new Blockly.FieldTextInput('test name'), 'MESSAGE');
-    this.appendValueInput('ACTUAL', Boolean)
-        .appendTitle('assert false');
-    this.setTooltip('Tests that the value is false.');
+        .appendTitle('assert')
+        .appendTitle(new Blockly.FieldDropdown(
+        [['true', 'TRUE'], ['false', 'FALSE'], ['null', 'NULL']]), 'EXPECTED');
+    this.setTooltip('Tests that the value is true, false, or null.');
+  },
+  getVars: function() {
+    return ['unittestResults'];
   }
 };
 
@@ -97,5 +90,8 @@ Blockly.Language.unittest_fail = {
         .appendTitle(new Blockly.FieldTextInput('test name'), 'MESSAGE')
         .appendTitle('fail');
     this.setTooltip('Records an error.');
+  },
+  getVars: function() {
+    return ['unittestResults'];
   }
 };

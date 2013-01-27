@@ -77,8 +77,9 @@
                   </block>
                 </statement>
                 <next>
-                  <block type="unittest_asserttrue" inline="false">
+                  <block type="unittest_assertvalue" inline="false">
                     <title name="MESSAGE">if true</title>
+                    <title name="EXPECTED">TRUE</title>
                     <value name="ACTUAL">
                       <block type="variables_get">
                         <title name="VAR">ok</title>
@@ -116,8 +117,9 @@
                               </block>
                             </statement>
                             <next>
-                              <block type="unittest_asserttrue" inline="false">
+                              <block type="unittest_assertvalue" inline="false">
                                 <title name="MESSAGE">if/else false</title>
+                                <title name="EXPECTED">TRUE</title>
                                 <value name="ACTUAL">
                                   <block type="variables_get">
                                     <title name="VAR">ok</title>
@@ -155,8 +157,9 @@
                                           </block>
                                         </statement>
                                         <next>
-                                          <block type="unittest_asserttrue" inline="false">
+                                          <block type="unittest_assertvalue" inline="false">
                                             <title name="MESSAGE">if/else true</title>
+                                            <title name="EXPECTED">TRUE</title>
                                             <value name="ACTUAL">
                                               <block type="variables_get">
                                                 <title name="VAR">ok</title>
@@ -214,8 +217,9 @@
                                                       </block>
                                                     </statement>
                                                     <next>
-                                                      <block type="unittest_asserttrue" inline="false">
+                                                      <block type="unittest_assertvalue" inline="false">
                                                         <title name="MESSAGE">elseif 4</title>
+                                                        <title name="EXPECTED">TRUE</title>
                                                         <value name="ACTUAL">
                                                           <block type="variables_get">
                                                             <title name="VAR">ok</title>

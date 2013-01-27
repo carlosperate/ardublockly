@@ -205,8 +205,9 @@
     <mutation></mutation>
     <title name="NAME">test create</title>
     <statement name="STACK">
-      <block type="unittest_asserttrue" inline="false">
+      <block type="unittest_assertvalue" inline="false">
         <title name="MESSAGE">test create empty</title>
+        <title name="EXPECTED">TRUE</title>
         <value name="ACTUAL">
           <block type="procedures_callreturn" inline="false">
             <mutation name="assert list equal">
@@ -224,8 +225,9 @@
           </block>
         </value>
         <next>
-          <block type="unittest_asserttrue" inline="false">
+          <block type="unittest_assertvalue" inline="false">
             <title name="MESSAGE">test create items</title>
+            <title name="EXPECTED">TRUE</title>
             <value name="ACTUAL">
               <block type="procedures_callreturn" inline="false">
                 <mutation name="assert list equal">
@@ -265,8 +267,9 @@
               </block>
             </value>
             <next>
-              <block type="unittest_asserttrue" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">test create repeated</title>
+                <title name="EXPECTED">TRUE</title>
                 <value name="ACTUAL">
                   <block type="procedures_callreturn" inline="false">
                     <mutation name="assert list equal">
@@ -320,8 +323,9 @@
     <mutation></mutation>
     <title name="NAME">test empty</title>
     <statement name="STACK">
-      <block type="unittest_assertfalse" inline="false">
+      <block type="unittest_assertvalue" inline="false">
         <title name="MESSAGE">not empty</title>
+        <title name="EXPECTED">FALSE</title>
         <value name="ACTUAL">
           <block type="lists_isEmpty" inline="false">
             <value name="VALUE">
@@ -337,8 +341,9 @@
           </block>
         </value>
         <next>
-          <block type="unittest_asserttrue" inline="false">
+          <block type="unittest_assertvalue" inline="false">
             <title name="MESSAGE">empty</title>
+            <title name="EXPECTED">TRUE</title>
             <value name="ACTUAL">
               <block type="lists_isEmpty" inline="false">
                 <value name="VALUE">
@@ -634,8 +639,9 @@
                   </block>
                 </value>
                 <next>
-                  <block type="unittest_asserttrue" inline="false">
+                  <block type="unittest_assertvalue" inline="false">
                     <title name="MESSAGE">get random</title>
+                    <title name="EXPECTED">TRUE</title>
                     <value name="ACTUAL">
                       <block type="math_number_property" inline="true">
                         <mutation divisor_input="false"></mutation>
@@ -774,8 +780,9 @@
               </block>
             </value>
             <next>
-              <block type="unittest_asserttrue" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">getremove first list</title>
+                <title name="EXPECTED">TRUE</title>
                 <value name="ACTUAL">
                   <block type="procedures_callreturn" inline="false">
                     <mutation name="assert list equal">
@@ -848,8 +855,9 @@
                           </block>
                         </value>
                         <next>
-                          <block type="unittest_asserttrue" inline="false">
+                          <block type="unittest_assertvalue" inline="false">
                             <title name="MESSAGE">getremove last list</title>
+                            <title name="EXPECTED">TRUE</title>
                             <value name="ACTUAL">
                               <block type="procedures_callreturn" inline="false">
                                 <mutation name="assert list equal">
@@ -902,8 +910,9 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="unittest_asserttrue" inline="false">
+                                  <block type="unittest_assertvalue" inline="false">
                                     <title name="MESSAGE">getremove random</title>
+                                    <title name="EXPECTED">TRUE</title>
                                     <value name="ACTUAL">
                                       <block type="logic_compare" inline="true">
                                         <title name="OP">EQ</title>
@@ -1002,8 +1011,9 @@
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="unittest_asserttrue" inline="false">
+                                                  <block type="unittest_assertvalue" inline="false">
                                                     <title name="MESSAGE">getremove # list</title>
+                                                    <title name="EXPECTED">TRUE</title>
                                                     <value name="ACTUAL">
                                                       <block type="procedures_callreturn" inline="false">
                                                         <mutation name="assert list equal">
@@ -1081,8 +1091,9 @@
                                                               </block>
                                                             </value>
                                                             <next>
-                                                              <block type="unittest_asserttrue" inline="false">
+                                                              <block type="unittest_assertvalue" inline="false">
                                                                 <title name="MESSAGE">getremove #-end list</title>
+                                                                <title name="EXPECTED">TRUE</title>
                                                                 <value name="ACTUAL">
                                                                   <block type="procedures_callreturn" inline="false">
                                                                     <mutation name="assert list equal">
@@ -1179,8 +1190,9 @@
               </block>
             </value>
             <next>
-              <block type="unittest_asserttrue" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">remove first list</title>
+                <title name="EXPECTED">TRUE</title>
                 <value name="ACTUAL">
                   <block type="procedures_callreturn" inline="false">
                     <mutation name="assert list equal">
@@ -1243,8 +1255,9 @@
                           </block>
                         </value>
                         <next>
-                          <block type="unittest_asserttrue" inline="false">
+                          <block type="unittest_assertvalue" inline="false">
                             <title name="MESSAGE">remove last list</title>
+                            <title name="EXPECTED">TRUE</title>
                             <value name="ACTUAL">
                               <block type="procedures_callreturn" inline="false">
                                 <mutation name="assert list equal">
@@ -1362,8 +1375,9 @@
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="unittest_asserttrue" inline="false">
+                                                  <block type="unittest_assertvalue" inline="false">
                                                     <title name="MESSAGE">remove # list</title>
+                                                    <title name="EXPECTED">TRUE</title>
                                                     <value name="ACTUAL">
                                                       <block type="procedures_callreturn" inline="false">
                                                         <mutation name="assert list equal">
@@ -1431,8 +1445,9 @@
                                                               </block>
                                                             </value>
                                                             <next>
-                                                              <block type="unittest_asserttrue" inline="false">
+                                                              <block type="unittest_assertvalue" inline="false">
                                                                 <title name="MESSAGE">remove #-end list</title>
+                                                                <title name="EXPECTED">TRUE</title>
                                                                 <value name="ACTUAL">
                                                                   <block type="procedures_callreturn" inline="false">
                                                                     <mutation name="assert list equal">
@@ -1536,8 +1551,9 @@
               </block>
             </value>
             <next>
-              <block type="unittest_asserttrue" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">set at</title>
+                <title name="EXPECTED">TRUE</title>
                 <value name="ACTUAL">
                   <block type="procedures_callreturn" inline="false">
                     <mutation name="assert list equal">

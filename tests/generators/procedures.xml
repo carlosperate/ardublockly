@@ -84,8 +84,9 @@
                       </block>
                     </value>
                     <next>
-                      <block type="unittest_asserttrue" inline="false">
+                      <block type="unittest_assertvalue" inline="false">
                         <title name="MESSAGE">procedure no return</title>
+                        <title name="EXPECTED">TRUE</title>
                         <value name="ACTUAL">
                           <block type="variables_get">
                             <title name="VAR">proc w</title>
@@ -110,8 +111,9 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="unittest_assertfalse" inline="false">
+                                  <block type="unittest_assertvalue" inline="false">
                                     <title name="MESSAGE">procedure return</title>
+                                    <title name="EXPECTED">FALSE</title>
                                     <value name="ACTUAL">
                                       <block type="variables_get">
                                         <title name="VAR">proc w</title>
@@ -279,8 +281,9 @@
                               </block>
                             </value>
                             <next>
-                              <block type="unittest_asserttrue" inline="false">
+                              <block type="unittest_assertvalue" inline="false">
                                 <title name="MESSAGE">function return</title>
+                                <title name="EXPECTED">TRUE</title>
                                 <value name="ACTUAL">
                                   <block type="procedures_callreturn" inline="false">
                                     <mutation name="function 3">
@@ -294,8 +297,9 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="unittest_assertfalse" inline="false">
+                                  <block type="unittest_assertvalue" inline="false">
                                     <title name="MESSAGE">function no return</title>
+                                    <title name="EXPECTED">FALSE</title>
                                     <value name="ACTUAL">
                                       <block type="procedures_callreturn" inline="false">
                                         <mutation name="function 3">

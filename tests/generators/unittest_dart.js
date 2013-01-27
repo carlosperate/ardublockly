@@ -80,21 +80,19 @@ Blockly.Dart.unittest_main = function() {
   return code;
 };
 
-Blockly.Dart.unittest_assertequals = function() {
-  // Asserts that a value equals another value.
+Blockly.Dart.unittest_main.defineAssert_ = function() {
+  if (!Blockly.Dart.definitions_['unittest_assertequals']) {
   var resultsVar = Blockly.Dart.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
-  var message = Blockly.Dart.quote_(this.getTitleValue('MESSAGE'));
-  if (!Blockly.Dart.definitions_['unittest_assertequals']) {
     var functionName = Blockly.Dart.variableDB_.getDistinctName(
         'assertEquals', Blockly.Generator.NAME_TYPE);
-    Blockly.Dart.unittest_assertequals.assert = functionName;
+    Blockly.Dart.unittest_main.assert_ = functionName;
     var func = [];
     func.push('void ' + functionName +
         '(dynamic actual, dynamic expected, String message) {');
     func.push('  // Asserts that a value equals another value.');
     func.push('  if (' + resultsVar + ' == null) {');
-    func.push('    throw "Orphaned assert equals: ' + message + '";');
+    func.push('    throw "Orphaned assert: ' + message + '";');
     func.push('  }');
     func.push('  if (actual == expected) {');
     func.push('    ' + resultsVar + '.add([true, "OK", message]);');
@@ -106,74 +104,39 @@ Blockly.Dart.unittest_assertequals = function() {
     func.push('');
     Blockly.Dart.definitions_['unittest_assertequals'] = func.join('\n');
   }
+  return Blockly.Dart.unittest_main.assert_;
+};
+
+Blockly.Dart.unittest_assertequals = function() {
+  // Asserts that a value equals another value.
+  var resultsVar = Blockly.Dart.variableDB_.getName('unittestResults',
+      Blockly.Variables.NAME_TYPE);
+  var message = Blockly.Dart.quote_(this.getTitleValue('MESSAGE'));
   var actual = Blockly.Dart.valueToCode(this, 'ACTUAL',
       Blockly.Dart.ORDER_NONE) || 'null';
   var expected = Blockly.Dart.valueToCode(this, 'EXPECTED',
       Blockly.Dart.ORDER_NONE) || 'null';
-  return Blockly.Dart.unittest_assertequals.assert + '(' +
-      actual + ', ' + expected + ', ' + message + ');\n';
+  return Blockly.Dart.unittest_main.defineAssert_() +
+      '(' + actual + ', ' + expected + ', ' + message + ');\n';
 };
 
-Blockly.Dart.unittest_asserttrue = function() {
-  // Asserts that a value is true.
+Blockly.Dart.unittest_assertvalue = function() {
+  // Asserts that a value is true, false, or null.
   var resultsVar = Blockly.Dart.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
   var message = Blockly.Dart.quote_(this.getTitleValue('MESSAGE'));
-  if (!Blockly.Dart.definitions_['unittest_asserttrue']) {
-    var functionName = Blockly.Dart.variableDB_.getDistinctName(
-        'assertTrue', Blockly.Generator.NAME_TYPE);
-    Blockly.Dart.unittest_asserttrue.assert = functionName;
-    var func = [];
-    func.push('void ' + functionName + '(bool actual, String message) {');
-    func.push('  // Asserts that a value is true.');
-    func.push('  if (' + resultsVar + ' == null) {');
-    func.push('    throw "Orphaned assert true: ' + message + '";');
-    func.push('  }');
-    func.push('  if (actual == true) {');
-    func.push('    ' + resultsVar + '.add([true, "OK", message]);');
-    func.push('  } else {');
-    func.push('    ' + resultsVar + '.add([false, ' +
-              '"Expected: true\\nActual: $actual", message]);');
-    func.push('  }');
-    func.push('}');
-    func.push('');
-    Blockly.Dart.definitions_['unittest_asserttrue'] = func.join('\n');
-  }
   var actual = Blockly.Dart.valueToCode(this, 'ACTUAL',
       Blockly.Dart.ORDER_NONE) || 'true';
-  return Blockly.Dart.unittest_asserttrue.assert +
-      '(' + actual + ', ' + message + ');\n';
-};
-
-Blockly.Dart.unittest_assertfalse = function() {
-  // Asserts that a value is false.
-  var resultsVar = Blockly.Dart.variableDB_.getName('unittestResults',
-      Blockly.Variables.NAME_TYPE);
-  var message = Blockly.Dart.quote_(this.getTitleValue('MESSAGE'));
-  if (!Blockly.Dart.definitions_['unittest_assertfalse']) {
-    var functionName = Blockly.Dart.variableDB_.getDistinctName(
-        'assertFalse', Blockly.Generator.NAME_TYPE);
-    Blockly.Dart.unittest_assertfalse.assert = functionName;
-    var func = [];
-    func.push('void ' + functionName + '(bool actual, String message) {');
-    func.push('  // Asserts that a value is false.');
-    func.push('  if (' + resultsVar + ' == null) {');
-    func.push('    throw "Orphaned assert false: ' + message + '";');
-    func.push('  }');
-    func.push('  if (actual == false) {');
-    func.push('    ' + resultsVar + '.add([true, "OK", message]);');
-    func.push('  } else {');
-    func.push('    ' + resultsVar + '.add([false, ' +
-              '"Expected: false\\nActual: $actual", message]);');
-    func.push('  }');
-    func.push('}');
-    func.push('');
-    Blockly.Dart.definitions_['unittest_assertfalse'] = func.join('\n');
+  var expected = this.getTitleValue('EXPECTED');
+  if (expected == 'TRUE') {
+    expected = 'true';
+  } else if (expected == 'FALSE') {
+    expected = 'false';
+  } else if (expected == 'NULL') {
+    expected = 'null';
   }
-  var actual = Blockly.Dart.valueToCode(this, 'ACTUAL',
-      Blockly.Dart.ORDER_NONE) || 'false';
-  return Blockly.Dart.unittest_assertfalse.assert +
-      '(' + actual + ', ' + message + ');\n';
+  return Blockly.Dart.unittest_main.defineAssert_() +
+      '(' + actual + ', ' + expected + ', ' + message + ');\n';
 };
 
 Blockly.Dart.unittest_fail = function() {

@@ -1,24 +1,27 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
   <block type="unittest_main" x="-4" y="-12">
     <statement name="DO">
-      <block type="unittest_asserttrue" inline="false">
+      <block type="unittest_assertvalue" inline="false">
         <title name="MESSAGE">True</title>
+        <title name="EXPECTED">TRUE</title>
         <value name="ACTUAL">
           <block type="logic_boolean">
             <title name="BOOL">TRUE</title>
           </block>
         </value>
         <next>
-          <block type="unittest_assertfalse" inline="false">
+          <block type="unittest_assertvalue" inline="false">
             <title name="MESSAGE">False</title>
+            <title name="EXPECTED">FALSE</title>
             <value name="ACTUAL">
               <block type="logic_boolean">
                 <title name="BOOL">FALSE</title>
               </block>
             </value>
             <next>
-              <block type="unittest_asserttrue" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">Not true</title>
+                <title name="EXPECTED">TRUE</title>
                 <value name="ACTUAL">
                   <block type="logic_negate" inline="false">
                     <value name="BOOL">
@@ -29,8 +32,9 @@
                   </block>
                 </value>
                 <next>
-                  <block type="unittest_assertfalse" inline="false">
+                  <block type="unittest_assertvalue" inline="false">
                     <title name="MESSAGE">Not false</title>
+                    <title name="EXPECTED">FALSE</title>
                     <value name="ACTUAL">
                       <block type="logic_negate" inline="false">
                         <value name="BOOL">
@@ -52,11 +56,6 @@
                                 <next>
                                   <block type="procedures_callnoreturn">
                                     <mutation name="test ternary"></mutation>
-                                    <next>
-                                      <block type="procedures_callnoreturn">
-                                        <mutation name="test number properties"></mutation>
-                                      </block>
-                                    </next>
                                   </block>
                                 </next>
                               </block>
@@ -78,8 +77,9 @@
     <mutation></mutation>
     <title name="NAME">test equalities</title>
     <statement name="STACK">
-      <block type="unittest_asserttrue" inline="false">
+      <block type="unittest_assertvalue" inline="false">
         <title name="MESSAGE">Equal yes</title>
+        <title name="EXPECTED">TRUE</title>
         <value name="ACTUAL">
           <block type="logic_compare" inline="true">
             <title name="OP">EQ</title>
@@ -96,8 +96,9 @@
           </block>
         </value>
         <next>
-          <block type="unittest_assertfalse" inline="false">
+          <block type="unittest_assertvalue" inline="false">
             <title name="MESSAGE">Equal no</title>
+            <title name="EXPECTED">FALSE</title>
             <value name="ACTUAL">
               <block type="logic_compare" inline="true">
                 <title name="OP">EQ</title>
@@ -114,8 +115,9 @@
               </block>
             </value>
             <next>
-              <block type="unittest_asserttrue" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">Not equal yes</title>
+                <title name="EXPECTED">TRUE</title>
                 <value name="ACTUAL">
                   <block type="logic_compare" inline="true">
                     <title name="OP">NEQ</title>
@@ -132,8 +134,9 @@
                   </block>
                 </value>
                 <next>
-                  <block type="unittest_assertfalse" inline="false">
+                  <block type="unittest_assertvalue" inline="false">
                     <title name="MESSAGE">Not equal no</title>
+                    <title name="EXPECTED">FALSE</title>
                     <value name="ACTUAL">
                       <block type="logic_compare" inline="true">
                         <title name="OP">EQ</title>
@@ -150,8 +153,9 @@
                       </block>
                     </value>
                     <next>
-                      <block type="unittest_asserttrue" inline="false">
+                      <block type="unittest_assertvalue" inline="false">
                         <title name="MESSAGE">Smaller yes</title>
+                        <title name="EXPECTED">TRUE</title>
                         <value name="ACTUAL">
                           <block type="logic_compare" inline="true">
                             <title name="OP">LT</title>
@@ -168,8 +172,9 @@
                           </block>
                         </value>
                         <next>
-                          <block type="unittest_assertfalse" inline="false">
+                          <block type="unittest_assertvalue" inline="false">
                             <title name="MESSAGE">Smaller no</title>
+                            <title name="EXPECTED">FALSE</title>
                             <value name="ACTUAL">
                               <block type="logic_compare" inline="true">
                                 <title name="OP">LT</title>
@@ -186,8 +191,9 @@
                               </block>
                             </value>
                             <next>
-                              <block type="unittest_asserttrue" inline="false">
+                              <block type="unittest_assertvalue" inline="false">
                                 <title name="MESSAGE">Greater yes</title>
+                                <title name="EXPECTED">TRUE</title>
                                 <value name="ACTUAL">
                                   <block type="logic_compare" inline="true">
                                     <title name="OP">GT</title>
@@ -204,8 +210,9 @@
                                   </block>
                                 </value>
                                 <next>
-                                  <block type="unittest_assertfalse" inline="false">
+                                  <block type="unittest_assertvalue" inline="false">
                                     <title name="MESSAGE">Greater no</title>
+                                    <title name="EXPECTED">FALSE</title>
                                     <value name="ACTUAL">
                                       <block type="logic_compare" inline="true">
                                         <title name="OP">GT</title>
@@ -222,8 +229,9 @@
                                       </block>
                                     </value>
                                     <next>
-                                      <block type="unittest_asserttrue" inline="false">
+                                      <block type="unittest_assertvalue" inline="false">
                                         <title name="MESSAGE">Smaller-equal yes</title>
+                                        <title name="EXPECTED">TRUE</title>
                                         <value name="ACTUAL">
                                           <block type="logic_compare" inline="true">
                                             <title name="OP">LTE</title>
@@ -240,8 +248,9 @@
                                           </block>
                                         </value>
                                         <next>
-                                          <block type="unittest_assertfalse" inline="false">
+                                          <block type="unittest_assertvalue" inline="false">
                                             <title name="MESSAGE">Smaller-equal no</title>
+                                            <title name="EXPECTED">FALSE</title>
                                             <value name="ACTUAL">
                                               <block type="logic_compare" inline="true">
                                                 <title name="OP">LTE</title>
@@ -258,8 +267,9 @@
                                               </block>
                                             </value>
                                             <next>
-                                              <block type="unittest_asserttrue" inline="false">
+                                              <block type="unittest_assertvalue" inline="false">
                                                 <title name="MESSAGE">Greater-equal yes</title>
+                                                <title name="EXPECTED">TRUE</title>
                                                 <value name="ACTUAL">
                                                   <block type="logic_compare" inline="true">
                                                     <title name="OP">GTE</title>
@@ -276,8 +286,9 @@
                                                   </block>
                                                 </value>
                                                 <next>
-                                                  <block type="unittest_assertfalse" inline="false">
+                                                  <block type="unittest_assertvalue" inline="false">
                                                     <title name="MESSAGE">Greater-equal no</title>
+                                                    <title name="EXPECTED">FALSE</title>
                                                     <value name="ACTUAL">
                                                       <block type="logic_compare" inline="true">
                                                         <title name="OP">GTE</title>
@@ -322,8 +333,9 @@
     <mutation></mutation>
     <title name="NAME">test or</title>
     <statement name="STACK">
-      <block type="unittest_asserttrue" inline="false">
+      <block type="unittest_assertvalue" inline="false">
         <title name="MESSAGE">Or true/true</title>
+        <title name="EXPECTED">TRUE</title>
         <value name="ACTUAL">
           <block type="logic_operation" inline="true">
             <title name="OP">OR</title>
@@ -340,8 +352,9 @@
           </block>
         </value>
         <next>
-          <block type="unittest_asserttrue" inline="false">
+          <block type="unittest_assertvalue" inline="false">
             <title name="MESSAGE">Or false/true</title>
+            <title name="EXPECTED">TRUE</title>
             <value name="ACTUAL">
               <block type="logic_operation" inline="true">
                 <title name="OP">OR</title>
@@ -358,8 +371,9 @@
               </block>
             </value>
             <next>
-              <block type="unittest_asserttrue" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">Or true/false</title>
+                <title name="EXPECTED">TRUE</title>
                 <value name="ACTUAL">
                   <block type="logic_operation" inline="true">
                     <title name="OP">OR</title>
@@ -376,8 +390,9 @@
                   </block>
                 </value>
                 <next>
-                  <block type="unittest_assertfalse" inline="false">
+                  <block type="unittest_assertvalue" inline="false">
                     <title name="MESSAGE">Or false/false</title>
+                    <title name="EXPECTED">FALSE</title>
                     <value name="ACTUAL">
                       <block type="logic_operation" inline="true">
                         <title name="OP">OR</title>
@@ -406,8 +421,9 @@
     <mutation></mutation>
     <title name="NAME">test and</title>
     <statement name="STACK">
-      <block type="unittest_asserttrue" inline="false">
+      <block type="unittest_assertvalue" inline="false">
         <title name="MESSAGE">And true/true</title>
+        <title name="EXPECTED">TRUE</title>
         <value name="ACTUAL">
           <block type="logic_operation" inline="true">
             <title name="OP">AND</title>
@@ -424,8 +440,9 @@
           </block>
         </value>
         <next>
-          <block type="unittest_assertfalse" inline="false">
+          <block type="unittest_assertvalue" inline="false">
             <title name="MESSAGE">And false/true</title>
+            <title name="EXPECTED">FALSE</title>
             <value name="ACTUAL">
               <block type="logic_operation" inline="true">
                 <title name="OP">AND</title>
@@ -442,8 +459,9 @@
               </block>
             </value>
             <next>
-              <block type="unittest_assertfalse" inline="false">
+              <block type="unittest_assertvalue" inline="false">
                 <title name="MESSAGE">And true/false</title>
+                <title name="EXPECTED">FALSE</title>
                 <value name="ACTUAL">
                   <block type="logic_operation" inline="true">
                     <title name="OP">AND</title>
@@ -460,8 +478,9 @@
                   </block>
                 </value>
                 <next>
-                  <block type="unittest_assertfalse" inline="false">
+                  <block type="unittest_assertvalue" inline="false">
                     <title name="MESSAGE">And false/false</title>
+                    <title name="EXPECTED">FALSE</title>
                     <value name="ACTUAL">
                       <block type="logic_operation" inline="true">
                         <title name="OP">AND</title>
