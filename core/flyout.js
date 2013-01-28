@@ -27,15 +27,26 @@ goog.provide('Blockly.Flyout');
 
 goog.require('Blockly.Block');
 goog.require('Blockly.Comment');
+goog.require('goog.Disposable');
+
 
 
 /**
  * Class for a flyout.
  * @constructor
+ * @extends {goog.Disposable}
  */
 Blockly.Flyout = function() {
+  Blockly.Flyout.superClass_.constructor(this);
+
+  /**
+   * @type {!Blockly.Workspace}
+   * @private
+   */
   this.workspace_ = new Blockly.Workspace(false);
 };
+goog.inherits(Blockly.Flyout, goog.Disposable);
+
 
 /**
  * Does the flyout automatically close when a block is created?
@@ -69,15 +80,16 @@ Blockly.Flyout.prototype.createDom = function() {
   this.svgBackground_ = Blockly.createSvgElement('path',
       {'class': 'blocklyFlyoutBackground'}, this.svgGroup_);
   this.svgOptions_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
-  this.svgOptions_.appendChild(this.workspace_.createDom());
+  this.workspace_.render(this.svgOptions_);
   return this.svgGroup_;
 };
 
 /**
  * Dispose of this flyout.
  * Unlink from all DOM elements to prevent memory leaks.
+ * @override
  */
-Blockly.Flyout.prototype.dispose = function() {
+Blockly.Flyout.prototype.disposeInternal = function() {
   if (this.onResizeWrapper_) {
     Blockly.unbindEvent_(this.onResizeWrapper_);
     this.onResizeWrapper_ = null;
@@ -86,6 +98,7 @@ Blockly.Flyout.prototype.dispose = function() {
     this.scrollbar_.dispose();
     this.scrollbar_ = null;
   }
+  goog.dispose(this.workspace_);
   this.workspace_ = null;
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
@@ -96,6 +109,8 @@ Blockly.Flyout.prototype.dispose = function() {
   this.targetWorkspace_ = null;
   this.targetWorkspaceMetrics_ = null;
   this.buttons_ = null;
+
+  Blockly.Flyout.superClass_.disposeInternal(this);
 };
 
 /**

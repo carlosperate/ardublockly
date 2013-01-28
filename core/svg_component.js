@@ -72,6 +72,8 @@ Blockly.SvgComponent.prototype.createDom = function() {
     'version': '1.1',
     'class': 'blocklySvg'
   }, null);
+  this.setElementInternal(svg);
+
   /*
   <defs>
     ... filters go here ...
@@ -155,20 +157,8 @@ Blockly.SvgComponent.prototype.createDom = function() {
    * @private
    */
   this.workspace_ = new Blockly.Workspace(Blockly.editable);
-  svg.appendChild(this.workspace_.createDom());
-  if (Blockly.Toolbox && Blockly.editable) {
-    svg.appendChild(Blockly.Toolbox.createDom());
-  }
-  Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
-  if (Blockly.editable && Blockly.FieldDropdown) {
-    svg.appendChild(Blockly.FieldDropdown.createDom());
-  }
-  if (Blockly.ContextMenu && Blockly.ContextMenu) {
-    svg.appendChild(Blockly.ContextMenu.createDom());
-  }
-
-  // The SVG is now fully assembled.
-  this.setElementInternal(svg);
+  this.addChild(this.workspace_);
+  this.workspace_.render(svg);
 
   /**
    * Create an HTML container for popup overlays (e.g. editor widgets).
@@ -190,6 +180,21 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
   var element = this.getElement();
   var container = element.parentElement;
   container.setAttribute('dir', 'LTR');
+
+  var svg = this.getSvg();
+
+  // TODO(scr): make components out of these children as well and add
+  // them in createDom().
+  if (Blockly.Toolbox && Blockly.editable) {
+    svg.appendChild(Blockly.Toolbox.createDom());
+  }
+  Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
+  if (Blockly.editable && Blockly.FieldDropdown) {
+    svg.appendChild(Blockly.FieldDropdown.createDom());
+  }
+  if (Blockly.ContextMenu && Blockly.ContextMenu) {
+    svg.appendChild(Blockly.ContextMenu.createDom());
+  }
 
   Blockly.svgResize(element);
   container.appendChild(this.widget_);

@@ -25,15 +25,22 @@
 
 goog.provide('Blockly.Trashcan');
 
+goog.require('goog.Disposable');
+
+
 
 /**
  * Class for a trash can.
  * @param {!Function} getMetrics A function that returns workspace's metrics.
  * @constructor
+ * @extends {goog.Disposable}
  */
 Blockly.Trashcan = function(getMetrics) {
+  Blockly.Trashcan.superClass_.constructor(this);
+
   this.getMetrics_ = getMetrics;
 };
+goog.inherits(Blockly.Trashcan, goog.Disposable);
 
 /**
  * URL of the trashcan image (minus lid).
@@ -161,8 +168,9 @@ Blockly.Trashcan.prototype.init = function() {
 /**
  * Dispose of this trash can.
  * Unlink from all DOM elements to prevent memory leaks.
+ * @override
  */
-Blockly.Trashcan.prototype.dispose = function() {
+Blockly.Trashcan.prototype.disposeInternal = function() {
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
     this.svgGroup_ = null;
@@ -171,6 +179,8 @@ Blockly.Trashcan.prototype.dispose = function() {
   this.svgLid_ = null;
   this.getMetrics_ = null;
   window.clearTimeout(this.lidTask_);
+
+  Blockly.Trashcan.superClass_.disposeInternal(this);
 };
 
 /**
