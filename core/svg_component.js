@@ -42,17 +42,7 @@ goog.inherits(Blockly.SvgComponent, goog.ui.Component);
 /** @override */
 Blockly.SvgComponent.prototype.createDom = function() {
   // Load CSS.
-  //<link href="blockly.css" rel="stylesheet" type="text/css" />
-  var link = goog.dom.createDom('link', {
-      'href': Blockly.pathToBlockly + 'media/blockly.css',
-      'rel': 'stylesheet',
-      'type': 'text/css'});
-  Blockly.bindEvent_(link, 'load', null, Blockly.cssLoaded);
-  var head = document.head || document.getElementsByTagName('head')[0];
-  if (!head) {
-    throw 'No head in document.';
-  }
-  head.appendChild(link);
+  Blockly.loadCss();
 
   // Build the SVG DOM.
   /*

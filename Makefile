@@ -81,7 +81,7 @@ $(addsuffix .tmp, $(OUT_COMPILED_JS)): blockly_%.js.tmp : blockly_core.js $(CLOS
 
 blockly_core_deps.js.tmp: blockly_core.js $(IN_JS) $(OUT_RENAMING_JS)
 	python $(CLOSURE_DEPSWRITER) --root_with_prefix "$(CLOSURE_LIBRARY_DIR) $(CLOSURE_LIBRARY_DIR)" --root_with_prefix "$(SRC_DIR) $(SRC_DIR)" $< --output_file $@
-	perl -pi -e "s|'([^/]+?.js)'|'../../../blockly/\\1'|;s|'core/|'../../../blockly/core/|;s|'.*?/closure/goog/|'|; s|'$(CLOSURE_LIBRARY_DIR)|'../../..|;" $@
+	perl -pi -e "s|'([^/]+?.js)'|'../../../blockly/\\1'|;s|'core/|'../../../blockly/core/|; s|'$(CLOSURE_LIBRARY_DIR)|'../..|;" $@
 
 blockly_core.js.tmp: $(IN_JS) $(OUT_RENAMING_JS)
 	env PYTHONPATH=$$PYTHONPATH:$(CLOSURE_LIBRARY_DIR)/closure/bin/build python requireprovides.py $(IN_JS) -p Blockly.core -o $@

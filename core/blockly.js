@@ -27,6 +27,7 @@
 goog.provide('Blockly');
 
 // Closure dependencies.
+goog.require('goog.async.Deferred');
 goog.require('goog.dom');
 goog.require('goog.color');
 goog.require('goog.events');
@@ -598,4 +599,42 @@ Blockly.removeChangeListener = function(bindData) {
 Blockly.cssLoaded = function() {
   Blockly.Field && (Blockly.Field.textLengthCache = {});
   Blockly.Toolbox && Blockly.Toolbox.redraw();
+};
+
+/**
+ * Loads the CSS once, returning a deferred to addCallbacks.
+ * @return {goog.async.Deferred}
+ */
+Blockly.loadCss = function() {
+  if (Blockly.loadCss.loading_)
+    return Blockly.loadCss.loading_;
+
+  /** @type {goog.async.Deferred} */
+  var d;
+
+  /** @type {Element} */
+  var head = document.head || document.getElementsByTagName('head')[0];
+
+  if (!head) {
+    d = fail(new Error('No head in document.'));
+  } else {
+    d = new goog.async.Deferred();
+
+    var link = goog.dom.createDom('link', {
+        'href': Blockly.pathToBlockly + 'media/blockly.css',
+        'rel': 'stylesheet',
+        'type': 'text/css'});
+    goog.events.listenOnce(link, goog.events.EventType.LOAD, function(e) {
+                             d.callback(link);
+                           });
+
+    /**
+     * @type {goog.async.Deferred}
+     * @private
+     */
+    Blockly.loadCss.loading_ = d;
+    head.appendChild(link);
+  }
+
+  return d.addCallback(Blockly.cssLoaded);
 };
