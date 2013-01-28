@@ -86,7 +86,7 @@ Blockly.Python.unittest_main.defineAssert_ = function() {
     func.push('def ' + functionName + '(actual, expected, message):');
     func.push('  # Asserts that a value equals another value.');
     func.push('  if ' + resultsVar + ' == None:');
-    func.push('    raise Exception("Orphaned assert equals: ' + message + '")');
+    func.push('    raise Exception("Orphaned assert equals: " + message)');
     func.push('  if actual == expected:');
     func.push('    ' + resultsVar + '.append((True, "OK", message))');
     func.push('  else:');
