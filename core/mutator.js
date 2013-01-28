@@ -38,7 +38,7 @@ goog.require('goog.Disposable');
  * @extends {goog.Disposable}
  */
 Blockly.Mutator = function(quarkNames) {
-  Blockly.Mutator.superClass_.constructor(this);
+  Blockly.Mutator.superClass_.constructor.call(this);
   this.block_ = null;
   this.quarkNames_ = quarkNames;
 };
@@ -356,7 +356,7 @@ Blockly.Mutator.prototype.disposeInternal = function() {
   this.block_ = null;
   goog.dispose(this.workspace_);
 
-  Blockly.Mutator.superClass_.disposeInternal(this);
+  Blockly.Mutator.superClass_.disposeInternal.call(this);
 };
 
 /**

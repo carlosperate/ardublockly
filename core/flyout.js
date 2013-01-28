@@ -37,7 +37,7 @@ goog.require('goog.Disposable');
  * @extends {goog.Disposable}
  */
 Blockly.Flyout = function() {
-  Blockly.Flyout.superClass_.constructor(this);
+  Blockly.Flyout.superClass_.constructor.call(this);
 
   /**
    * @type {!Blockly.Workspace}
@@ -110,7 +110,7 @@ Blockly.Flyout.prototype.disposeInternal = function() {
   this.targetWorkspaceMetrics_ = null;
   this.buttons_ = null;
 
-  Blockly.Flyout.superClass_.disposeInternal(this);
+  Blockly.Flyout.superClass_.disposeInternal.call(this);
 };
 
 /**

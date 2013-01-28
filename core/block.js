@@ -35,6 +35,7 @@ goog.require('Blockly.ContextMenu');
 goog.require('Blockly.Warning');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
+goog.require('goog.Timer');
 
 
 /**
@@ -185,8 +186,8 @@ Blockly.Block.terminateDrag_ = function() {
       delete selected.draggedBubbles_;
       selected.setDragging_(false);
       selected.render();
-      window.setTimeout(function() {selected.bumpNeighbours_();},
-                        Blockly.BUMP_DELAY);
+      goog.Timer.callOnce(
+          selected.bumpNeighbours_, Blockly.BUMP_DELAY, selected);
       // Fire an event to allow scrollbars to resize.
       Blockly.fireUiEvent(window, 'resize');
       selected.workspace.fireChangeEvent();
@@ -447,14 +448,11 @@ Blockly.Block.prototype.onMouseUp_ = function(e) {
     }
     if (this.workspace.trashcan && this.workspace.trashcan.isOpen) {
       // Don't throw an object in the trash can if it just got connected.
-      Blockly.Trashcan.close(this.workspace.trashcan);
+      this.workspace.trashcan.close();
     }
   } else if (this.workspace.trashcan && this.workspace.trashcan.isOpen) {
     var trashcan = this.workspace.trashcan;
-    var closure = function() {
-      Blockly.Trashcan.close(trashcan);
-    };
-    window.setTimeout(closure, 100);
+    goog.Timer.callOnce(trashcan.close, 100, trashcan);
     Blockly.selected.dispose(false, true);
     // Dropping a block on the trash can will usually cause the workspace to
     // resize to contain the newly positioned block.  Force a second resize now

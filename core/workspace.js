@@ -41,7 +41,7 @@ goog.require('goog.ui.Component');
  * @extends {goog.ui.Component}
  */
 Blockly.Workspace = function(editable) {
-  Blockly.Workspace.superClass_.constructor(this);
+  Blockly.Workspace.superClass_.constructor.call(this);
 
   /** @type {boolean} */
   this.editable = editable;
@@ -122,6 +122,8 @@ Blockly.Workspace.prototype.createDom = function() {
 
 /** @override */
 Blockly.Workspace.prototype.enterDocument = function() {
+  Blockly.Workspace.superClass_.enterDocument.call(this);
+  // TODO(scr): when all blocks are components, this shouldn't be needed.
   this.renderBlocks();
   this.fireChangeEvent();
 };
@@ -143,7 +145,7 @@ Blockly.Workspace.prototype.disposeInternal = function() {
     this.trashcan.dispose();
     this.trashcan = null;
   }
-  Blockly.Workspace.superClass_.disposeInternal(this);
+  Blockly.Workspace.superClass_.disposeInternal.call(this);
 };
 
 
@@ -153,11 +155,9 @@ Blockly.Workspace.prototype.disposeInternal = function() {
  */
 Blockly.Workspace.prototype.addTrashcan = function(getMetrics) {
   if (Blockly.Trashcan && this.editable) {
-    // TODO(scr): Make Trashcan be a Component.
     this.trashcan = new Blockly.Trashcan(getMetrics);
-    var svgTrashcan = this.trashcan.createDom();
-    this.svgGroup_.insertBefore(svgTrashcan, this.svgBlockCanvas_);
-    this.trashcan.init();
+    this.addChild(this.trashcan);
+    this.trashcan.renderBefore(this.svgBlockCanvas_);
   }
 };
 
