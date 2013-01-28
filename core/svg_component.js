@@ -157,8 +157,8 @@ Blockly.SvgComponent.prototype.createDom = function() {
    * @private
    */
   this.workspace_ = new Blockly.Workspace(Blockly.editable);
-  this.addChild(this.workspace_);
-  this.workspace_.render(svg);
+  this.registerDisposable(this.workspace_);
+  this.addChild(this.workspace_, true);
 
   /**
    * Create an HTML container for popup overlays (e.g. editor widgets).
