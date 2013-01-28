@@ -141,10 +141,7 @@ Blockly.Workspace.prototype.disposeInternal = function() {
   }
   this.svgBlockCanvas_ = null;
   this.svgBubbleCanvas_ = null;
-  if (this.trashcan) {
-    this.trashcan.dispose();
-    this.trashcan = null;
-  }
+  this.trashcan = null;
   Blockly.Workspace.superClass_.disposeInternal.call(this);
 };
 

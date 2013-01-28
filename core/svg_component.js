@@ -157,7 +157,6 @@ Blockly.SvgComponent.prototype.createDom = function() {
    * @private
    */
   this.workspace_ = new Blockly.Workspace(Blockly.editable);
-  this.registerDisposable(this.workspace_);
   this.addChild(this.workspace_, true);
 
   /**
