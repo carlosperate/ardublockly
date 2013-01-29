@@ -48,7 +48,8 @@ Blockly.inject = function(container, opt_options) {
 
   Blockly.inject.svgComponent_ = new Blockly.SvgComponent();
   Blockly.inject.svgComponent_.render(container);
-  Blockly.mainWorkspace = Blockly.inject.svgComponent_.getWorkspace();
+  // TODO(scr): When Toolbox is a component, add this line back.
+  // Blockly.mainWorkspace = Blockly.inject.svgComponent_.getWorkspace();
   Blockly.svg = Blockly.inject.svgComponent_.getSvg();
   Blockly.widgetDiv = Blockly.inject.svgComponent_.getWidget();
   Blockly.init_();

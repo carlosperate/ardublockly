@@ -175,6 +175,8 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
   // TODO(scr): make components out of these children as well and add
   // them in createDom().
   if (Blockly.Toolbox && Blockly.editable) {
+    // TODO(scr): When Toolbox is a component, remove this line.
+    Blockly.mainWorkspace = this.workspace_;
     svg.appendChild(Blockly.Toolbox.createDom());
   }
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());

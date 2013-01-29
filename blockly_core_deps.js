@@ -863,7 +863,7 @@ goog.addDependency('../../../blockly/core/field_image.js', ['Blockly.FieldImage'
 goog.addDependency('../../../blockly/core/field_label.js', ['Blockly.FieldLabel'], ['Blockly.Field', 'Blockly.Tooltip']);
 goog.addDependency('../../../blockly/core/field_textinput.js', ['Blockly.FieldTextInput'], ['Blockly.Field', 'goog.userAgent']);
 goog.addDependency('../../../blockly/core/field_variable.js', ['Blockly.FieldVariable'], ['Blockly.FieldDropdown', 'Blockly.Variables']);
-goog.addDependency('../../../blockly/core/flyout.js', ['Blockly.Flyout'], ['Blockly.Block', 'Blockly.Comment', 'goog.Disposable']);
+goog.addDependency('../../../blockly/core/flyout.js', ['Blockly.Flyout'], ['Blockly.Block', 'Blockly.Comment', 'goog.ui.Component']);
 goog.addDependency('../../../blockly/core/generator.js', ['Blockly.CodeGenerator', 'Blockly.Generator'], ['Blockly.Block']);
 goog.addDependency('../../../blockly/core/inject.js', ['Blockly.inject'], ['goog.dom']);
 goog.addDependency('../../../blockly/core/input.js', ['Blockly.Input'], ['Blockly.Connection', 'Blockly.FieldLabel']);

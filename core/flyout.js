@@ -27,16 +27,21 @@ goog.provide('Blockly.Flyout');
 
 goog.require('Blockly.Block');
 goog.require('Blockly.Comment');
-goog.require('goog.Disposable');
+goog.require('goog.ui.Component');
 
 
 
 /**
  * Class for a flyout.
+ * @param {!Blockly.Workspace} workspace The workspace in which to create new
+ *     blocks.
+ * @param {!Function} workspaceMetrics Function which returns size information
+ *     regarding the flyout's target workspace.
+ * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  * @constructor
- * @extends {goog.Disposable}
+ * @extends {goog.ui.Component}
  */
-Blockly.Flyout = function() {
+Blockly.Flyout = function(workspace, workspaceMetrics, withScrollbar) {
   Blockly.Flyout.superClass_.constructor.call(this);
 
   /**
@@ -44,30 +49,65 @@ Blockly.Flyout = function() {
    * @private
    */
   this.workspace_ = new Blockly.Workspace(false);
+
+  /**
+   * @type {!Blockly.Workspace}
+   * @private
+   */
+  this.targetWorkspace_ = workspace;
+
+  /**
+   * @type {!Function}
+   * @private
+   */
+  this.targetWorkspaceMetrics_ = workspaceMetrics;
+
+  /**
+   * @type {!boolean}
+   * @private
+   */
+  this.withScrollbar_ = withScrollbar;
+
+  /**
+   * @type {!number}
+   * @private
+   */
+  this.width_ = 0;
+
+  /**
+   * @type {!number}
+   * @private
+   */
+  this.height_ = 0;
+
+  /**
+   * List of background buttons that lurk behind each block to catch clicks
+   * landing in the blocks' lakes and bays.
+   * @type {!Array.<!Element>}
+   * @private
+   */
+  this.buttons_ = [];
 };
-goog.inherits(Blockly.Flyout, goog.Disposable);
+goog.inherits(Blockly.Flyout, goog.ui.Component);
 
 
 /**
  * Does the flyout automatically close when a block is created?
+ * @type {!boolean}
  */
 Blockly.Flyout.prototype.autoClose = true;
 
+
 /**
  * Corner radius of the flyout background.
+ * @type {!number}
+ * @const
  */
 Blockly.Flyout.prototype.CORNER_RADIUS = 8;
 
-/**
- * Wrapper function called when a resize occurs.
- * @type {Array.<!Array>}
- * @private
- */
-Blockly.Flyout.prototype.onResizeWrapper_ = null;
 
 /**
  * Creates the flyout's DOM.  Only needs to be called once.
- * @return {!Element} The flyout's SVG group.
  */
 Blockly.Flyout.prototype.createDom = function() {
   /*
@@ -80,9 +120,11 @@ Blockly.Flyout.prototype.createDom = function() {
   this.svgBackground_ = Blockly.createSvgElement('path',
       {'class': 'blocklyFlyoutBackground'}, this.svgGroup_);
   this.svgOptions_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
+  this.addChild(this.workspace_);
   this.workspace_.render(this.svgOptions_);
-  return this.svgGroup_;
+  this.setElementInternal(this.svgGroup_);
 };
+
 
 /**
  * Dispose of this flyout.
@@ -90,15 +132,10 @@ Blockly.Flyout.prototype.createDom = function() {
  * @override
  */
 Blockly.Flyout.prototype.disposeInternal = function() {
-  if (this.onResizeWrapper_) {
-    Blockly.unbindEvent_(this.onResizeWrapper_);
-    this.onResizeWrapper_ = null;
-  }
   if (this.scrollbar_) {
     this.scrollbar_.dispose();
     this.scrollbar_ = null;
   }
-  goog.dispose(this.workspace_);
   this.workspace_ = null;
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
@@ -112,6 +149,7 @@ Blockly.Flyout.prototype.disposeInternal = function() {
 
   Blockly.Flyout.superClass_.disposeInternal.call(this);
 };
+
 
 /**
  * Return an object with all the metrics required to size scrollbars for the
@@ -164,40 +202,36 @@ Blockly.Flyout.prototype.setMetrics = function(yRatio) {
   this.svgOptions_.setAttribute('transform', 'translate(0,' + y + ')');
 };
 
+
 /**
  * Initializes the flyout.
- * @param {!Blockly.Workspace} workspace The workspace in which to create new
- *     blocks.
- * @param {!Function} workspaceMetrics Function which returns size information
- *     regarding the flyout's target workspace.
- * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  */
-Blockly.Flyout.prototype.init =
-    function(workspace, workspaceMetrics, withScrollbar) {
-  this.targetWorkspace_ = workspace;
-  this.targetWorkspaceMetrics_ = workspaceMetrics;
+Blockly.Flyout.prototype.init = function() {
+  // TODO(scr): when Blockly.Toolbox becomes a component, change this
+  // to enterDocument and call its superclass method.
+  // Blockly.Flyout.superClass_.enterDocument.call(this);
+
   // Add scrollbars.
-  this.width_ = 0;
-  this.height_ = 0;
-  var flyout = this;
-  if (withScrollbar) {
-    this.scrollbar_ = new Blockly.Scrollbar(this.svgOptions_,
-        function() {return flyout.getMetrics();},
-        function(ratio) {return flyout.setMetrics(ratio);},
+  if (this.withScrollbar_) {
+    /**
+     * @type {Blockly.Scrollbar}
+     * @private
+     */
+    this.scrollbar_ = new Blockly.Scrollbar(
+        this.svgOptions_,
+        goog.bind(this.getMetrics, this),
+        goog.bind(this.setMetrics, this),
         false, false);
   }
-
-  // List of background buttons that lurk behind each block to catch clicks
-  // landing in the blocks' lakes and bays.
-  this.buttons_ = [];
 
   this.position_();
   this.hide();
 
   // If the document resizes, reposition the toolbox.
-  this.onResizeWrapper_ =
-      Blockly.bindEvent_(window, 'resize', this, this.position_);
+  this.getHandler().listen(
+    goog.global, goog.events.EventType.RESIZE, this.position_);
 };
+
 
 /**
  * Move the toolbox to the edge of the workspace.
@@ -238,6 +272,7 @@ Blockly.Flyout.prototype.position_ = function() {
   this.height_ = metrics.viewHeight;
 };
 
+
 /**
  * Is the flyout visible?
  * @return {boolean} True if visible.
@@ -245,6 +280,7 @@ Blockly.Flyout.prototype.position_ = function() {
 Blockly.Flyout.prototype.isVisible = function() {
   return this.svgGroup_.style.display != 'none';
 };
+
 
 /**
  * Hide and empty the flyout.
@@ -263,6 +299,7 @@ Blockly.Flyout.prototype.hide = function() {
   }
   this.buttons_ = [];
 };
+
 
 /**
  * Show and populate the flyout.
@@ -342,6 +379,7 @@ Blockly.Flyout.prototype.show = function(names) {
   // Fire a resize event to update the flyout's scrollbar.
   Blockly.fireUiEvent(window, 'resize');
 };
+
 
 /**
  * Create a copy of this block on the workspace.

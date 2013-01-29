@@ -48,7 +48,14 @@ Blockly.Toolbox.selectedOption_ = null;
  * @return {!Element} The toolbox's SVG group.
  */
 Blockly.Toolbox.createDom = function() {
-  Blockly.Toolbox.flyout_ = new Blockly.Flyout();
+
+  /**
+   * @type {Blockly.Flyout}
+   * @private
+   */
+  Blockly.Toolbox.flyout_ = new Blockly.Flyout(
+      Blockly.mainWorkspace, Blockly.getMainWorkspaceMetrics, true);
+
   /*
   <g>
     [flyout]
@@ -59,8 +66,7 @@ Blockly.Toolbox.createDom = function() {
   */
   var svgGroup = Blockly.createSvgElement('g', {}, null);
   Blockly.Toolbox.svgGroup_ = svgGroup;
-  var flyoutGroup = Blockly.Toolbox.flyout_.createDom();
-  svgGroup.appendChild(flyoutGroup);
+  Blockly.Toolbox.flyout_.render(svgGroup);
   Blockly.Toolbox.svgBackground_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyToolboxBackground', 'height': '100%'}, svgGroup);
   Blockly.Toolbox.svgOptions_ = Blockly.createSvgElement('g',
@@ -120,8 +126,7 @@ Blockly.Toolbox.setMetrics = function(yRatio) {
  * Initializes the toolbox.
  */
 Blockly.Toolbox.init = function() {
-  Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace,
-                               Blockly.getMainWorkspaceMetrics, true);
+  Blockly.Toolbox.flyout_.init();
   Blockly.Toolbox.languageTree = Blockly.Toolbox.buildTree_();
   Blockly.Toolbox.redraw();
 
