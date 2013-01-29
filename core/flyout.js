@@ -229,7 +229,7 @@ Blockly.Flyout.prototype.init = function() {
 
   // If the document resizes, reposition the toolbox.
   this.getHandler().listen(
-    goog.global, goog.events.EventType.RESIZE, this.position_);
+      goog.global, goog.events.EventType.RESIZE, this.position_);
 };
 
 
