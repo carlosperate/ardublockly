@@ -29,7 +29,6 @@ goog.require('Blockly.Language.lists');
 
 Blockly.Language.lists_setIndex = {
   // Set element at index.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_SET_INDEX_HELPURL,
   init: function() {
     this.setColour(210);

@@ -224,7 +224,6 @@ Blockly.Flyout.prototype.init = function() {
         false, false);
   }
 
-  this.position_();
   this.hide();
 
   // If the document resizes, reposition the toolbox.
@@ -238,6 +237,9 @@ Blockly.Flyout.prototype.init = function() {
  * @private
  */
 Blockly.Flyout.prototype.position_ = function() {
+  if (!this.isVisible()) {
+    return;
+  }
   var metrics = this.targetWorkspaceMetrics_();
   if (!metrics) {
     // Hidden components will return null.
@@ -261,8 +263,10 @@ Blockly.Flyout.prototype.position_ = function() {
   path.push('h', -edgeWidth);
   path.push('z');
   this.svgBackground_.setAttribute('d', path.join(' '));
+
   var x = metrics.absoluteLeft;
   if (Blockly.RTL) {
+    x += metrics.viewWidth;
     x -= this.width_;
   }
   this.svgGroup_.setAttribute('transform',
@@ -278,7 +282,7 @@ Blockly.Flyout.prototype.position_ = function() {
  * @return {boolean} True if visible.
  */
 Blockly.Flyout.prototype.isVisible = function() {
-  return this.svgGroup_.style.display != 'none';
+  return this.svgGroup_.style.display == 'block';
 };
 
 
@@ -286,6 +290,9 @@ Blockly.Flyout.prototype.isVisible = function() {
  * Hide and empty the flyout.
  */
 Blockly.Flyout.prototype.hide = function() {
+  if (!this.isVisible()) {
+    return;
+  }
   this.svgGroup_.style.display = 'none';
   // Delete all the blocks.
   var blocks = this.workspace_.getTopBlocks(false);
@@ -303,29 +310,29 @@ Blockly.Flyout.prototype.hide = function() {
 
 /**
  * Show and populate the flyout.
- * @param {!Array.<string>|string} names List of type names of blocks to show.
+ * @param {!Array|string} xmlList List of blocks to show.
  *     Variables and procedures have a custom set of blocks.
  */
-Blockly.Flyout.prototype.show = function(names) {
+Blockly.Flyout.prototype.show = function(xmlList) {
+  this.hide();
   var margin = this.CORNER_RADIUS;
   this.svgGroup_.style.display = 'block';
 
   // Create the blocks to be shown in this flyout.
   var blocks = [];
   var gaps = [];
-  if (names == Blockly.MSG_VARIABLE_CATEGORY) {
+  if (xmlList == Blockly.Variables.NAME_TYPE) {
     // Special category for variables.
     Blockly.Variables.flyoutCategory(blocks, gaps, margin,
         /** @type {!Blockly.Workspace} */ (this.workspace_));
-  } else if (names == Blockly.MSG_PROCEDURE_CATEGORY) {
+  } else if (xmlList == Blockly.Procedures.NAME_TYPE) {
     // Special category for procedures.
     Blockly.Procedures.flyoutCategory(blocks, gaps, margin,
         /** @type {!Blockly.Workspace} */ (this.workspace_));
   } else {
-    for (var i = 0, name; name = names[i]; i++) {
-      var block = new Blockly.Block(
-          /** @type {!Blockly.Workspace} */ (this.workspace_), name);
-      block.initSvg();
+    for (var i = 0, xml; xml = xmlList[i]; i++) {
+      var block = Blockly.Xml.domToBlock_(
+          /** @type {!Blockly.Workspace} */ (this.workspace_), xml);
       blocks[i] = block;
       gaps[i] = margin * 2;
     }

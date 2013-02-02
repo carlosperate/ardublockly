@@ -29,7 +29,6 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.Language.maze_move = {
   // Block for moving forward or backwards.
-  category: 'Commands',
   helpUrl: 'http://code.google.com/p/blockly/wiki/Move',
   init: function() {
     this.setColour(290);
@@ -50,9 +49,8 @@ Blockly.JavaScript.maze_move = function() {
   return 'Maze.' + this.getTitleValue('DIR') + '(\'' + this.id + '\');\n';
 };
 
-Blockly.Language.maze_turnLeft = {
+Blockly.Language.maze_turn = {
   // Block for turning left or right.
-  category: 'Commands',
   helpUrl: 'http://code.google.com/p/blockly/wiki/Turn',
   init: function() {
     this.setColour(290);
@@ -65,27 +63,10 @@ Blockly.Language.maze_turnLeft = {
   }
 };
 
-Blockly.Language.maze_turnLeft.DIRECTIONS =
+Blockly.Language.maze_turn.DIRECTIONS =
     [['left', 'turnLeft'], ['right', 'turnRight'], ['randomly', 'random']];
 
-Blockly.Language.maze_turnRight = {
-  // Block for turning left or right.
-  category: 'Commands',
-  helpUrl: null,
-  init: function() {
-    this.setColour(290);
-    this.appendDummyInput()
-        .appendTitle('turn')
-        .appendTitle(new Blockly.FieldDropdown(
-                     Blockly.Language.maze_turnLeft.DIRECTIONS), 'DIR');
-    this.setTitleValue(Blockly.Language.maze_turnLeft.DIRECTIONS[1][1], 'DIR');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('Turns Pegman left or right by 90 degrees.');
-  }
-};
-
-Blockly.JavaScript.maze_turnLeft = function() {
+Blockly.JavaScript.maze_turn = function() {
   // Generate JavaScript for turning left or right.
   var dir = this.getTitleValue('DIR');
   var code;
@@ -101,12 +82,12 @@ Blockly.JavaScript.maze_turnLeft = function() {
   return code;
 };
 
-// Turning left and right use the same code.
-Blockly.JavaScript.maze_turnRight = Blockly.JavaScript.maze_turnLeft;
+// Before Jan 2013 there were separate left and right blocks.
+Blockly.JavaScript.maze_turnLeft = Blockly.JavaScript.maze_turn;
+Blockly.JavaScript.maze_turnRight = Blockly.JavaScript.maze_turn;
 
 Blockly.Language.maze_isWall = {
   // Block for checking if there a wall.
-  category: 'Logic',
   helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
   init: function() {
     this.setColour(120);
@@ -133,7 +114,6 @@ Blockly.JavaScript.maze_isWall = function() {
 
 Blockly.Language.controls_forever = {
   // Do forever loop.
-  category: 'Logic',
   helpUrl: 'http://code.google.com/p/blockly/wiki/Repeat',
   init: function() {
     this.setColour(120);
@@ -156,24 +136,8 @@ Blockly.JavaScript.controls_forever = function() {
 };
 
 function init() {
-  // Whitelist of blocks to keep.
-  var newLanguage = {};
-  var keepers = ['maze_move', 'maze_turnLeft', 'maze_turnRight',
-      'maze_isWall', 'controls_if', 'controls_if_if', 'controls_if_elseif',
-      'controls_if_else', 'controls_forever', 'controls_whileUntil',
-      'logic_operation', 'logic_negate'];
-  for (var x = 0; x < keepers.length; x++) {
-    newLanguage[keepers[x]] = Blockly.Language[keepers[x]];
-  }
-  // Fold control category into logic category.
-  for (var name in newLanguage) {
-    if (newLanguage[name].category == 'Control') {
-      newLanguage[name].category = 'Logic';
-    }
-  }
-  Blockly.Language = newLanguage;
-
-  Blockly.inject(document.body, {path: '../../'});
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
 
   if (window.parent.Maze) {
     // Let the top-level application know that Blockly is ready.

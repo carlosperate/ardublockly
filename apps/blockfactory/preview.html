@@ -18,10 +18,10 @@
   </style>
   <script>
     function init() {
-      delete Blockly.Toolbox;
       Blockly.inject(document.body,
           {path: '../../',
            readonly: true,
+           toolbox: null,
            trashcan: false});
 
       if (window.parent.initPreview) {

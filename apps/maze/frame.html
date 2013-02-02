@@ -25,5 +25,20 @@
   </style>
 </head>
 <body onload="init()">
+  <xml id="toolbox" style="display: none">
+    <category name="Commands">
+      <block type="maze_move"></block>
+      <block type="maze_turn"><title name="DIR">turnLeft</title></block>
+      <block type="maze_turn"><title name="DIR">turnRight</title></block>
+    </category>
+    <category name="Logic">
+      <block type="maze_isWall"></block>
+      <block type="controls_if"></block>
+      <block type="controls_forever"></block>
+      <block type="controls_whileUntil"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+    </category>
+  </xml>
 </body>
 </html>

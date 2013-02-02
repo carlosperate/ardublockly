@@ -51,12 +51,7 @@ Blockly.MSG_NEW_VARIABLE_TITLE = '新變量名稱:';
 Blockly.MSG_RENAME_VARIABLE = '重新命名變量...';
 Blockly.MSG_RENAME_VARIABLE_TITLE = '將所有 "%1" 變量重新命名為:';
 
-// Toolbox.
-Blockly.MSG_VARIABLE_CATEGORY = '變量';
-Blockly.MSG_PROCEDURE_CATEGORY = '流程';
-
 // Colour Blocks.
-Blockly.LANG_CATEGORY_COLOUR = 'Colour';
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Choose a colour form the palette.';
 
@@ -76,7 +71,6 @@ Blockly.LANG_COLOUR_BLEND_RATIO = 'ratio';
 Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Blends two colours together with a given ratio (0.0 - 1.0).';
 
 // Control Blocks.
-Blockly.LANG_CATEGORY_CONTROLS = '控制';
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
@@ -145,7 +139,6 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
     'be used within a loop.';
 
 // Logic Blocks.
-Blockly.LANG_CATEGORY_LOGIC = '邏輯';
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
@@ -186,7 +179,6 @@ Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Check the condition in "test". If the cond
     'returns the "if true" value, otherwise returns the "if false" value.';
 
 // Math Blocks.
-Blockly.LANG_CATEGORY_MATH = '算數';
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
 Blockly.LANG_MATH_NUMBER_TOOLTIP = 'A number.';
 
@@ -284,7 +276,6 @@ Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP = 'Return a random fraction between\n' +
     '0.0 (inclusive) and 1.0 (exclusive).';
 
 // Text Blocks.
-Blockly.LANG_CATEGORY_TEXT = '字串';
 Blockly.LANG_TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_science)';
 Blockly.LANG_TEXT_TEXT_TOOLTIP = 'A letter, word, or line of text.';
 
@@ -371,7 +362,6 @@ Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = '文字';
 Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = '數字';
 
 // Lists Blocks.
-Blockly.LANG_CATEGORY_LISTS = '列表';
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
 Blockly.LANG_LISTS_CREATE_EMPTY_TITLE = '建立空列表';
 Blockly.LANG_LISTS_CREATE_EMPTY_TOOLTIP = 'Returns a list, of length 0, containing no data records';

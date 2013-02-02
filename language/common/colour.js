@@ -29,7 +29,6 @@ goog.require('Blockly.Language');
 
 Blockly.Language.colour_picker = {
   // Colour picker.
-  category: Blockly.LANG_CATEGORY_COLOUR,
   helpUrl: Blockly.LANG_COLOUR_PICKER_HELPURL,
   init: function() {
     this.setColour(20);
@@ -42,7 +41,6 @@ Blockly.Language.colour_picker = {
 
 Blockly.Language.colour_rgb = {
   // Compose a colour from RGB components.
-  category: Blockly.LANG_CATEGORY_COLOUR,
   helpUrl: Blockly.LANG_COLOUR_RGB_HELPURL,
   init: function() {
     this.setColour(20);
@@ -66,7 +64,6 @@ Blockly.Language.colour_rgb = {
 
 Blockly.Language.colour_blend = {
   // Blend two colours together.
-  category: Blockly.LANG_CATEGORY_COLOUR,
   helpUrl: Blockly.LANG_COLOUR_BLEND_HELPURL,
   init: function() {
     this.setColour(20);

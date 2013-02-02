@@ -25,7 +25,6 @@
 
 Blockly.Language.plane_set_seats = {
   // Seat variable setter.
-  category: null,
   helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   deletable: false,
   init: function() {
@@ -56,14 +55,9 @@ var seatsBlock = null;
  * Initialize Blockly and the SVG.
  */
 function init() {
-  // Whitelist of blocks to keep.
-  var newLanguage = {};
-  for (var x = 0; x < keepers.length; x++) {
-    newLanguage[keepers[x]] = Blockly.Language[keepers[x]];
-  }
-  Blockly.Language = newLanguage;
-
-  Blockly.inject(document.getElementById('svgDiv'), {path: '../../'});
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('svgDiv'),
+                 {path: '../../', toolbox: toolbox});
 
   // Load the editor with a starting block.
   var xml = Blockly.Xml.textToDom(

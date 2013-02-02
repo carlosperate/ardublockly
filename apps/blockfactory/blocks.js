@@ -25,15 +25,11 @@
 
 Blockly.Language.factory_base = {
   // Base of new block.
-  category: null,
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle('category')
-        .appendTitle(new Blockly.FieldTextInput('Math'), 'CAT');
-    this.appendDummyInput()
         .appendTitle('name')
-        .appendTitle(new Blockly.FieldTextInput('foo'), 'NAME');
+        .appendTitle(new Blockly.FieldTextInput('math_foo'), 'NAME');
     this.appendStatementInput('INPUTS')
         .setCheck('Input')
         .appendTitle('inputs');
@@ -107,7 +103,6 @@ var ALIGNMENT_OPTIONS =
 
 Blockly.Language.input_value = {
   // Value input.
-  category: 'Input',
   init: function() {
     this.setColour(210);
     this.appendDummyInput()
@@ -136,7 +131,6 @@ Blockly.Language.input_value = {
 
 Blockly.Language.input_statement = {
   // Statement input.
-  category: 'Input',
   init: function() {
     this.setColour(210);
     this.appendDummyInput()
@@ -165,7 +159,6 @@ Blockly.Language.input_statement = {
 
 Blockly.Language.input_dummy = {
   // Dummy input.
-  category: 'Input',
   init: function() {
     this.setColour(210);
     this.appendDummyInput()
@@ -183,7 +176,6 @@ Blockly.Language.input_dummy = {
 
 Blockly.Language.title_static = {
   // Text value.
-  category: 'Title',
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
@@ -197,7 +189,6 @@ Blockly.Language.title_static = {
 
 Blockly.Language.title_input = {
   // Text input.
-  category: 'Title',
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
@@ -220,7 +211,6 @@ Blockly.Language.title_input = {
 
 Blockly.Language.title_dropdown = {
   // Dropdown menu.
-  category: 'Title',
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
@@ -347,7 +337,6 @@ Blockly.Language.title_dropdown_option = {
 
 Blockly.Language.title_checkbox = {
   // Checkbox.
-  category: 'Title',
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
@@ -370,7 +359,6 @@ Blockly.Language.title_checkbox = {
 
 Blockly.Language.title_colour = {
   // Colour input.
-  category: 'Title',
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
@@ -393,7 +381,6 @@ Blockly.Language.title_colour = {
 
 Blockly.Language.title_variable = {
   // Dropdown for variables.
-  category: 'Title',
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
@@ -416,7 +403,6 @@ Blockly.Language.title_variable = {
 
 Blockly.Language.title_image = {
   // Image.
-  category: 'Title',
   init: function() {
     this.setColour(160);
     var src = 'http://www.gstatic.com/codesite/ph/images/star_on.gif';
@@ -437,7 +423,6 @@ Blockly.Language.title_image = {
 
 Blockly.Language.type_group = {
   // Group of types.
-  category: 'Type',
   init: function() {
     this.setColour(230);
     this.appendValueInput('TYPE0')
@@ -545,7 +530,6 @@ Blockly.Language.type_group_item = {
 
 Blockly.Language.type_null = {
   // Null type.
-  category: 'Type',
   valueType: 'null',
   init: function() {
     this.setColour(230);
@@ -558,7 +542,6 @@ Blockly.Language.type_null = {
 
 Blockly.Language.type_boolean = {
   // Boolean type.
-  category: 'Type',
   valueType: 'Boolean',
   init: function() {
     this.setColour(230);
@@ -571,7 +554,6 @@ Blockly.Language.type_boolean = {
 
 Blockly.Language.type_number = {
   // Number type.
-  category: 'Type',
   valueType: 'Number',
   init: function() {
     this.setColour(230);
@@ -584,7 +566,6 @@ Blockly.Language.type_number = {
 
 Blockly.Language.type_string = {
   // String type.
-  category: 'Type',
   valueType: 'String',
   init: function() {
     this.setColour(230);
@@ -597,7 +578,6 @@ Blockly.Language.type_string = {
 
 Blockly.Language.type_list = {
   // List type.
-  category: 'Type',
   valueType: 'Array',
   init: function() {
     this.setColour(230);
@@ -610,8 +590,6 @@ Blockly.Language.type_list = {
 
 Blockly.Language.type_other = {
   // Other type.
-  category: 'Type',
-  valueType: undefined,
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -622,21 +600,17 @@ Blockly.Language.type_other = {
   }
 };
 
-(function() {
-  var ColourBlock = function(hue) {
-    this.colourHue = hue;
-  };
-  ColourBlock.prototype.category = 'Colour';
-  ColourBlock.prototype.init = function() {
-    this.setColour(this.colourHue);
+Blockly.Language.colour_hue = {
+  // Set the colour of the block.
+  init: function() {
     this.appendDummyInput()
         .appendTitle('hue:')
         .appendTitle(new Blockly.FieldTextInput(String(this.colourHue),
-                                                ColourBlock.validator), 'HUE');
+                                                this.validator), 'HUE');
     this.setOutput(true, 'Colour');
     this.setTooltip('Paint the block with this colour.');
-  };
-  ColourBlock.validator = function(text) {
+  },
+  validator: function(text) {
     // Ensure that only a number may be entered.
     var n = window.parseInt(text || 0, 10);
     if (window.isNaN(n) || n < 0) {
@@ -645,13 +619,8 @@ Blockly.Language.type_other = {
     n %= 360;
     this.sourceBlock_.setColour(n);
     return String(n);
-  };
-
-  var colours = [65, 120, 160, 210, 230, 290, 330];
-  for (var x = 0; x < colours.length; x++) {
-    Blockly.Language['colour_' + x] = new ColourBlock(colours[x]);
   }
-})();
+};
 
 /**
  * Check to see if more than one title has this name.

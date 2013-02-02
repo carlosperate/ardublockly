@@ -41,6 +41,9 @@ goog.inherits(Blockly.SvgComponent, goog.ui.Component);
 
 /** @override */
 Blockly.SvgComponent.prototype.createDom = function() {
+  // Closure can be trusted to create HTML widgets with the proper direction.
+  goog.ui.Component.setDefaultRightToLeft(Blockly.RTL);
+
   // Load CSS.
   Blockly.loadCss();
 
@@ -142,7 +145,7 @@ Blockly.SvgComponent.prototype.createDom = function() {
   Blockly.createSvgElement('path',
       {'d': 'M 0 0 L 10 10 M 10 0 L 0 10', 'stroke': '#cc0'}, pattern);
 
-  /** 
+  /**
    * @type {!Blockly.Workspace}
    * @private
    */
@@ -161,7 +164,7 @@ Blockly.SvgComponent.prototype.createDom = function() {
 
 /** @override */
 Blockly.SvgComponent.prototype.enterDocument = function() {
-  Blockly.SvgComponent.superClass_.enterDocument.call(this);    
+  Blockly.SvgComponent.superClass_.enterDocument.call(this);
 
   // Sadly browsers (Chrome vs Firefox) are currently inconsistent in laying
   // out content in RTL mode.  Therefore Blockly forces the use of LTR,
@@ -177,7 +180,7 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
   if (Blockly.Toolbox && Blockly.editable) {
     // TODO(scr): When Toolbox is a component, remove this line.
     Blockly.mainWorkspace = this.workspace_;
-    svg.appendChild(Blockly.Toolbox.createDom());
+    Blockly.Toolbox.createDom(svg, container);
   }
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
   if (Blockly.editable && Blockly.FieldDropdown) {

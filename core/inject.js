@@ -62,14 +62,18 @@ Blockly.inject = function(container, opt_options) {
  * @private
  */
 Blockly.parseOptions_ = function(options) {
+  var tree = options['toolbox'] || '<xml />';
+  if (typeof tree == 'string') {
+    tree = Blockly.Xml.textToDom(tree);
+  }
   return {
       RTL: !!options['rtl'],
       editable: !options['readOnly'],
       pathToBlockly: options['path'] || './',
-      Trashcan: (options['trashcan'] === false) ? undefined : Blockly.Trashcan
-  };
+      Trashcan: (options['trashcan'] === false) ? undefined : Blockly.Trashcan,
+      languageTree: tree
+  }
 };
-
 
 /**
  * Initialize Blockly with various handlers.

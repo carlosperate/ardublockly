@@ -25,7 +25,6 @@
 
 Blockly.Language.plane_get_rows = {
   // Row variable getter.
-  category: 'Variables',
   helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
     this.setColour(330);
@@ -40,9 +39,6 @@ Blockly.JavaScript.plane_get_rows = function() {
   // Row variable getter.
   return ['planeSvg.rows1st', Blockly.JavaScript.ORDER_MEMBER];
 };
-
-var keepers = ['math_number', 'math_arithmetic',
-               'plane_get_rows', 'plane_set_seats'];
 
 /**
  * Redraw the SVG to show a new number of rows.

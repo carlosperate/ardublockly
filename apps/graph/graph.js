@@ -69,7 +69,11 @@ Graph.init = function(blockly) {
       window.parent.Graph.drawVisualization, false);
 };
 // Load the Google Chart Tools Visualization API and the chart package.
-google.load('visualization', '1', {packages: ['corechart']});
+if (typeof google == 'object') {
+  google.load('visualization', '1', {packages: ['corechart']});
+} else {
+  alert('Unable to load Google\'s chart API.\nAre you connected to the Internet?');
+}
 
 /**
  * Visualize the graph of y = f(x) using Google Chart Tools.

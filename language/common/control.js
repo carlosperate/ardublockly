@@ -29,7 +29,6 @@ goog.require('Blockly.Language');
 
 Blockly.Language.controls_if = {
   // If/elseif/else condition.
-  category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_IF_HELPURL,
   init: function() {
     this.setColour(120);
@@ -219,7 +218,6 @@ Blockly.Language.controls_if_else = {
 
 Blockly.Language.controls_repeat = {
   // Repeat n times.
-  category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_REPEAT_HELPURL,
   init: function() {
     this.setColour(120);
@@ -238,7 +236,6 @@ Blockly.Language.controls_repeat = {
 
 Blockly.Language.controls_whileUntil = {
   // Do while/until loop.
-  category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL,
   init: function() {
     this.setColour(120);
@@ -270,7 +267,6 @@ Blockly.Language.controls_whileUntil.TOOLTIPS = {
 
 Blockly.Language.controls_for = {
   // For loop.
-  category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_FOR_HELPURL,
   init: function() {
     this.setColour(120);
@@ -309,7 +305,6 @@ Blockly.Language.controls_for = {
 
 Blockly.Language.controls_forEach = {
   // For each loop.
-  category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_FOREACH_HELPURL,
   init: function() {
     this.setColour(120);
@@ -341,7 +336,6 @@ Blockly.Language.controls_forEach = {
 
 Blockly.Language.controls_flow_statements = {
   // Flow statements: continue, break.
-  category: Blockly.LANG_CATEGORY_CONTROLS,
   helpUrl: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL,
   init: function() {
     this.setColour(120);

@@ -92,7 +92,7 @@ iframe {
   width: 100%;
   height: 100%;
   border: 1px solid #ccc;
-  border-top-style: none;
+  border-top: 0;
 }
 button {
   padding: 1px 1em;

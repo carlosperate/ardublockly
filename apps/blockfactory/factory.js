@@ -88,16 +88,8 @@ function bindEvent(element, name, func) {
  * When the workspace changes, update the three other displays.
  */
 function onchange() {
-  var cat = rootBlock.getTitleValue('CAT');
   var name = rootBlock.getTitleValue('NAME');
-  var code = [];
-  var type;
-  if (cat && name) {
-    type = cat + '_' + name;
-  } else {
-    type = name || cat || '_';
-  }
-  blockType = type.replace(/\W/g, '_').replace(/^(d)/, '_\\1').toLowerCase();
+  blockType = name.replace(/\W/g, '_').replace(/^(d)/, '_\\1').toLowerCase();
   updateLanguage();
   updateGenerator();
   updatePreview();
@@ -107,17 +99,9 @@ function onchange() {
  * Update the language code.
  */
 function updateLanguage() {
-  // Generate name and category.
-  var cat = rootBlock.getTitleValue('CAT');
+  // Generate name.
   var code = [];
-  if (cat) {
-    cat = cat.replace(/\\/g, '\\\\').replace(/'/g, '\\\'');
-    cat = '\'' + cat + '\'';
-  } else {
-    cat = 'null';
-  }
   code.push('Blockly.Language.' + blockType + ' = {');
-  code.push('  category: ' + cat + ',');
   code.push('  helpUrl: \'http://www.example.com/\',');
   code.push('  init: function() {');
   // Generate colour.

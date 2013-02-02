@@ -29,7 +29,6 @@ goog.require('Blockly.Language');
 
 Blockly.Language.logic_compare = {
   // Comparison operator.
-  category: Blockly.LANG_CATEGORY_LOGIC,
   helpUrl: Blockly.LANG_LOGIC_COMPARE_HELPURL,
   init: function() {
     this.setColour(120);
@@ -66,7 +65,6 @@ Blockly.Language.logic_compare.TOOLTIPS = {
 
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
-  category: Blockly.LANG_CATEGORY_LOGIC,
   helpUrl: Blockly.LANG_LOGIC_OPERATION_HELPURL,
   init: function() {
     this.setColour(120);
@@ -97,7 +95,6 @@ Blockly.Language.logic_operation.TOOLTIPS = {
 
 Blockly.Language.logic_negate = {
   // Negation.
-  category: Blockly.LANG_CATEGORY_LOGIC,
   helpUrl: Blockly.LANG_LOGIC_NEGATE_HELPURL,
   init: function() {
     this.setColour(120);
@@ -111,7 +108,6 @@ Blockly.Language.logic_negate = {
 
 Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.
-  category: Blockly.LANG_CATEGORY_LOGIC,
   helpUrl: Blockly.LANG_LOGIC_BOOLEAN_HELPURL,
   init: function() {
     this.setColour(120);
@@ -128,7 +124,6 @@ Blockly.Language.logic_boolean.BOOLEANS =
 
 Blockly.Language.logic_null = {
   // Null data type.
-  category: Blockly.LANG_CATEGORY_LOGIC,
   helpUrl: Blockly.LANG_LOGIC_NULL_HELPURL,
   init: function() {
     this.setColour(120);
@@ -141,7 +136,6 @@ Blockly.Language.logic_null = {
 
 Blockly.Language.logic_ternary = {
   // Ternary operator.
-  category: Blockly.LANG_CATEGORY_LOGIC,
   helpUrl: Blockly.LANG_LOGIC_TERNARY_HELPURL,
   init: function() {
     this.setColour(120);

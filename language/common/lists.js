@@ -29,7 +29,6 @@ goog.require('Blockly.Language');
 
 Blockly.Language.lists_create_empty = {
   // Create an empty list.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL,
   init: function() {
     this.setColour(210);
@@ -42,7 +41,6 @@ Blockly.Language.lists_create_empty = {
 
 Blockly.Language.lists_create_with = {
   // Create a list with any number of elements of any type.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: '',
   init: function() {
     this.setColour(210);
@@ -160,7 +158,6 @@ Blockly.Language.lists_create_with_item = {
 
 Blockly.Language.lists_repeat = {
   // Create a list with one element repeated.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_REPEAT_HELPURL,
   init: function() {
     this.setColour(210);
@@ -179,7 +176,6 @@ Blockly.Language.lists_repeat = {
 
 Blockly.Language.lists_length = {
   // List length.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_LENGTH_HELPURL,
   init: function() {
     this.setColour(210);
@@ -193,7 +189,6 @@ Blockly.Language.lists_length = {
 
 Blockly.Language.lists_isEmpty = {
   // Is the list empty?
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_IS_EMPTY_HELPURL,
   init: function() {
     this.setColour(210);
@@ -207,7 +202,6 @@ Blockly.Language.lists_isEmpty = {
 
 Blockly.Language.lists_indexOf = {
   // Find an item in the list.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_INDEX_OF_HELPURL,
   init: function() {
     this.setColour(210);
@@ -230,7 +224,6 @@ Blockly.Language.lists_indexOf.OPERATORS =
 
 Blockly.Language.lists_getIndex = {
   // Get element at index.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_GET_INDEX_HELPURL,
   init: function() {
     this.setColour(210);
@@ -332,7 +325,6 @@ Blockly.Language.lists_getIndex.WHERE =
 
 Blockly.Language.lists_setIndex = {
   // Set element at index.
-  category: Blockly.LANG_CATEGORY_LISTS,
   helpUrl: Blockly.LANG_LISTS_SET_INDEX_HELPURL,
   init: function() {
     this.setColour(210);

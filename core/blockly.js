@@ -33,6 +33,7 @@ goog.require('goog.color');
 goog.require('goog.events');
 goog.require('goog.string');
 goog.require('goog.ui.ColorPicker');
+goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.userAgent');
 
 // Blockly dependencies.
@@ -219,8 +220,9 @@ Blockly.svgSize = function() {
  */
 Blockly.svgResize = function(opt_svg) {
   var svg = opt_svg ? opt_svg : Blockly.svg;
-  var width = svg.parentNode.offsetWidth;
-  var height = svg.parentNode.offsetHeight;
+  var div = svg.parentNode;
+  var width = div.offsetWidth;
+  var height = div.offsetHeight;
   if (svg.cachedWidth_ != width) {
     svg.setAttribute('width', width + 'px');
     svg.cachedWidth_ = width;
@@ -229,9 +231,15 @@ Blockly.svgResize = function(opt_svg) {
     svg.setAttribute('height', height + 'px');
     svg.cachedHeight_ = height;
   }
-  var bBox = svg.getBoundingClientRect();
-  svg.cachedLeft_ = bBox.left;
-  svg.cachedTop_ = bBox.top;
+  // Can't use Blockly.svg.getBoundingClientRect() due to bugs in Firefox.
+  // Can't use Blockly.svg.offsetLeft due to bugs in Firefox.
+  svg.cachedLeft_ = 0;
+  svg.cachedTop_ = 0;
+  while (div) {
+    svg.cachedLeft_ += div.offsetLeft;
+    svg.cachedTop_ += div.offsetTop;
+    div = div.offsetParent;
+  }
 };
 
 /**
@@ -598,7 +606,7 @@ Blockly.removeChangeListener = function(bindData) {
  */
 Blockly.cssLoaded = function() {
   Blockly.Field && (Blockly.Field.textLengthCache = {});
-  Blockly.Toolbox && Blockly.Toolbox.redraw();
+  Blockly.fireUiEvent(window, 'resize');
 };
 
 /**

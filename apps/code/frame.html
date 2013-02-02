@@ -59,7 +59,11 @@
     })();
 
     function init() {
-      Blockly.inject(document.body, {path: '../../'});
+      var toolbox = null;
+      if (window.parent.document) {
+        toolbox = window.parent.document.getElementById('toolbox');
+      }
+      Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
 
       if (window.parent.init) {
         // Let the top-level application know that Blockly is ready.

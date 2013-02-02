@@ -40,7 +40,13 @@ goog.require('goog.Disposable');
 Blockly.Mutator = function(quarkNames) {
   Blockly.Mutator.superClass_.constructor.call(this);
   this.block_ = null;
-  this.quarkNames_ = quarkNames;
+  this.quarkXml_ = [];
+  // Convert the list of names into a list of XML objects for the flyout.
+  for (var x = 0; x < quarkNames.length; x++) {
+    var element = goog.dom.createDom('block');
+    element.setAttribute('type', quarkNames[x]);
+    this.quarkXml_[x] = element;
+  }
 };
 goog.inherits(Blockly.Mutator, goog.Disposable);
 
@@ -214,7 +220,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     var thisObj = this;
     this.flyout_.init(this.workspace_,
                       function() {return thisObj.getFlyoutMetrics_()}, false);
-    this.flyout_.show(this.quarkNames_);
+    this.flyout_.show(this.quarkXml_);
 
     this.rootBlock_ = this.block_.decompose(this.workspace_);
     var blocks = this.rootBlock_.getDescendants();

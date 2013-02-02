@@ -411,7 +411,6 @@ Blockly.Language.procedures_callreturn = {
 
 Blockly.Language.procedures_ifreturn = {
   // Conditionally return value from a procedure.
-  category: null,
   helpUrl: 'http://c2.com/cgi/wiki?GuardClause',
   init: function() {
     this.setColour(290);

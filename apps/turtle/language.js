@@ -27,19 +27,17 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.Language.draw_move_int = {
+Blockly.Language.draw_move = {
   // Block for moving forward or backwards.
-  // Internal input.
-  category: 'Draw',
   helpUrl: '',
   init: function() {
     this.setColour(160);
-    this.appendDummyInput()
+    this.appendValueInput('VALUE')
+        .setCheck(Number)
         .appendTitle('move')
-        .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR')
-        .appendTitle('by')
-        .appendTitle(new Blockly.FieldTextInput('10',
-            Blockly.FieldTextInput.numberValidator), 'VALUE');
+        .appendTitle(new Blockly.FieldDropdown(
+            Blockly.Language.draw_move.DIRECTIONS), 'DIR')
+        .appendTitle('by');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Moves the turtle forward or backward\n' +
@@ -47,40 +45,11 @@ Blockly.Language.draw_move_int = {
   }
 };
 
-Blockly.Language.draw_move_int.DIRECTIONS =
+Blockly.Language.draw_move.DIRECTIONS =
     [['forward', 'moveForward'], ['backward', 'moveBackward']];
 
-Blockly.JavaScript.draw_move_int = function() {
+Blockly.JavaScript.draw_move = function() {
   // Generate JavaScript for moving forward or backwards.
-  // Internal input.
-  var value = window.parseFloat(this.getTitleValue('VALUE'));
-  return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', \'' + this.id + '\');\n';
-};
-
-Blockly.Language.draw_move_ext = {
-  // Block for moving forward or backwards.
-  // External input.
-  category: 'Draw',
-  helpUrl: '',
-  init: function() {
-    this.setColour(160);
-    this.appendValueInput('VALUE')
-        .setCheck(Number)
-        .appendTitle('move')
-        .appendTitle(new Blockly.FieldDropdown(
-            Blockly.Language.draw_move_int.DIRECTIONS), 'DIR')
-        .appendTitle('by');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('Moves the turtle forward or backward\n' +
-                    'by the specified amount.');
-  }
-};
-
-Blockly.JavaScript.draw_move_ext = function() {
-  // Generate JavaScript for moving forward or backwards.
-  // External input.
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
   return 'Turtle.' + this.getTitleValue('DIR') +
@@ -88,19 +57,17 @@ Blockly.JavaScript.draw_move_ext = function() {
 };
 
 
-Blockly.Language.draw_turn_int = {
+Blockly.Language.draw_turn = {
   // Block for turning left or right.
-  // Internal input.
-  category: 'Draw',
   helpUrl: '',
   init: function() {
     this.setColour(160);
-    this.appendDummyInput()
+    this.appendValueInput('VALUE')
+        .setCheck(Number)
         .appendTitle('turn')
-        .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR')
-        .appendTitle('by')
-        .appendTitle(new Blockly.FieldTextInput('90',
-            Blockly.FieldTextInput.numberValidator), 'VALUE');
+        .appendTitle(new Blockly.FieldDropdown(
+            Blockly.Language.draw_turn.DIRECTIONS), 'DIR')
+        .appendTitle('by');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Turns the turtle left or right\n' +
@@ -108,74 +75,19 @@ Blockly.Language.draw_turn_int = {
   }
 };
 
-Blockly.Language.draw_turn_int.DIRECTIONS =
+Blockly.Language.draw_turn.DIRECTIONS =
     [['right', 'turnRight'], ['left', 'turnLeft']];
 
-Blockly.JavaScript.draw_turn_int = function() {
+Blockly.JavaScript.draw_turn = function() {
   // Generate JavaScript for turning left or right.
-  // Internal input.
-  var value = window.parseFloat(this.getTitleValue('VALUE'));
-  return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', \'' + this.id + '\');\n';
-};
-
-Blockly.Language.draw_turn_ext = {
-  // Block for turning left or right.
-  // External input.
-  category: 'Draw',
-  helpUrl: '',
-  init: function() {
-    this.setColour(160);
-    this.appendValueInput('VALUE')
-        .setCheck(Number)
-        .appendTitle('turn')
-        .appendTitle(new Blockly.FieldDropdown(
-            Blockly.Language.draw_turn_int.DIRECTIONS), 'DIR')
-        .appendTitle('by');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('Turns the turtle left or right\n' +
-                    'by the specified number of degrees.');
-  }
-};
-
-Blockly.JavaScript.draw_turn_ext = function() {
-  // Generate JavaScript for turning left or right.
-  // External input.
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
   return 'Turtle.' + this.getTitleValue('DIR') +
       '(' + value + ', \'' + this.id + '\');\n';
 };
 
-Blockly.Language.draw_width_int = {
+Blockly.Language.draw_width = {
   // Block for setting the width.
-  // Internal input.
-  category: 'Draw',
-  helpUrl: '',
-  init: function() {
-    this.setColour(160);
-    this.appendDummyInput()
-        .appendTitle('set width')
-        .appendTitle(new Blockly.FieldTextInput('1',
-            Blockly.FieldTextInput.numberValidator), 'WIDTH');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};
-
-Blockly.JavaScript.draw_width_int = function() {
-  // Generate JavaScript for setting the width.
-  // Internal input.
-  var width = window.parseFloat(this.getTitleValue('WIDTH'));
-  return 'Turtle.penWidth(' + width + ', \'' + this.id + '\');\n';
-};
-
-Blockly.Language.draw_width_ext = {
-  // Block for setting the width.
-  // External input.
-  category: 'Draw',
   helpUrl: '',
   init: function() {
     this.setColour(160);
@@ -188,18 +100,15 @@ Blockly.Language.draw_width_ext = {
   }
 };
 
-Blockly.JavaScript.draw_width_ext = function() {
+Blockly.JavaScript.draw_width = function() {
   // Generate JavaScript for setting the width.
-  // External input.
   var width = Blockly.JavaScript.valueToCode(this, 'WIDTH',
       Blockly.JavaScript.ORDER_NONE) || '1';
   return 'Turtle.penWidth(' + width + ', \'' + this.id + '\');\n';
 };
 
-Blockly.Language.draw_pen_int = {
+Blockly.Language.draw_pen = {
   // Block for pen up/down.
-  // Internal input.
-  category: 'Draw',
   helpUrl: '',
   init: function() {
     this.setColour(160);
@@ -212,41 +121,15 @@ Blockly.Language.draw_pen_int = {
   }
 };
 
-Blockly.Language.draw_pen_int.STATE = [['up', 'penUp'], ['down', 'penDown']];
+Blockly.Language.draw_pen.STATE = [['up', 'penUp'], ['down', 'penDown']];
 
-Blockly.JavaScript.draw_pen_int = function() {
+Blockly.JavaScript.draw_pen = function() {
   // Generate JavaScript for pen up/down.
-  // Internal input.
   return 'Turtle.' + this.getTitleValue('PEN') + '(\'' + this.id + '\');\n';
 };
 
-Blockly.Language.draw_colour_int = {
+Blockly.Language.draw_colour = {
   // Block for setting the colour.
-  // Internal input.
-  category: 'Colour',
-  helpUrl: '',
-  init: function() {
-    this.setColour(20);
-    this.appendDummyInput()
-        .appendTitle('set colour')
-        .appendTitle(new Blockly.FieldColour('#ffcc33'), 'COLOUR');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip('');
-  }
-};
-
-Blockly.JavaScript.draw_colour_int = function() {
-  // Generate JavaScript for setting the colour.
-  // Internal input.
-  return 'Turtle.penColour(\'' + this.getTitleValue('COLOUR') + '\', \'' +
-      this.id + '\');\n';
-};
-
-Blockly.Language.draw_colour_ext = {
-  // Block for setting the colour.
-  // External input.
-  category: 'Colour',
   helpUrl: '',
   init: function() {
     this.setColour(20);
@@ -259,9 +142,8 @@ Blockly.Language.draw_colour_ext = {
   }
 };
 
-Blockly.JavaScript.draw_colour_ext = function() {
+Blockly.JavaScript.draw_colour = function() {
   // Generate JavaScript for setting the colour.
-  // External input.
   var colour = Blockly.JavaScript.valueToCode(this, 'COLOUR',
       Blockly.JavaScript.ORDER_NONE) || '\'#000000\'';
   return 'Turtle.penColour(' + colour + ', \'' +
@@ -270,7 +152,8 @@ Blockly.JavaScript.draw_colour_ext = function() {
 
 
 function init() {
-  Blockly.inject(document.body, {path: '../../'});
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
 
   if (window.parent.Turtle) {
     // Let the top-level application know that Blockly is ready.

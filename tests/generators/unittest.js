@@ -25,7 +25,6 @@
 
 Blockly.Language.unittest_main = {
   // Container for unit tests.
-  category: 'Unit test',
   init: function() {
     this.setColour(65);
     this.appendDummyInput()
@@ -41,7 +40,6 @@ Blockly.Language.unittest_main = {
 
 Blockly.Language.unittest_assertequals = {
   // Asserts that a value equals another value.
-  category: 'Unit test',
   init: function() {
     this.setColour(65);
     this.setPreviousStatement(true);
@@ -61,7 +59,6 @@ Blockly.Language.unittest_assertequals = {
 
 Blockly.Language.unittest_assertvalue = {
   // Asserts that a value is true, false, or null.
-  category: 'Unit test',
   init: function() {
     this.setColour(65);
     this.setPreviousStatement(true);
@@ -81,7 +78,6 @@ Blockly.Language.unittest_assertvalue = {
 
 Blockly.Language.unittest_fail = {
   // Always assert an error.
-  category: 'Unit test',
   init: function() {
     this.setColour(65);
     this.setPreviousStatement(true);
