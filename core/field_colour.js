@@ -26,6 +26,7 @@
 goog.provide('Blockly.FieldColour');
 
 goog.require('Blockly.Field');
+goog.require('goog.ui.ColorPicker');
 
 
 /**
@@ -88,7 +89,7 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   Blockly.FieldColour.isOpen_ = true;
   goog.dom.removeChildren(Blockly.widgetDiv);
   Blockly.widgetDiv.style.display = 'block';
-  var picker = new goog.ui.ColorPicker.createSimpleColorGrid();
+  var picker = goog.ui.ColorPicker.createSimpleColorGrid();
   picker.render(Blockly.widgetDiv);
   picker.setSelectedColor(this.getValue());
 

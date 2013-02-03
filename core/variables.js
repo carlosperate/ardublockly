@@ -40,7 +40,7 @@ Blockly.Variables.NAME_TYPE = 'VARIABLE';
 
 /**
  * Find all user-created variables.
- * @param {Blockly.Block} opt_block Optional root block.
+ * @param {Blockly.Block=} opt_block Optional root block.
  * @return {!Array.<string>} Array of variable names.
  */
 Blockly.Variables.allVariables = function(opt_block) {

@@ -42,6 +42,10 @@ if options.provide:
 
 # Gather the namespaces provided by the args as requirements to print.
 requires = set()
+
+# Workaround to squelch the type issue for goog.events.
+requires.update(set(['goog.debug.ErrorHandler']))
+
 for filename in args:
     src = source.Source(source.GetFileContents(filename))
     requires.update(set(src.provides))

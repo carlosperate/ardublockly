@@ -26,6 +26,7 @@
 goog.provide('Blockly.Toolbox');
 
 goog.require('Blockly.Flyout');
+goog.require('goog.asserts');
 goog.require('goog.style');
 goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.ui.tree.TreeNode');
@@ -71,12 +72,15 @@ Blockly.Toolbox.createDom = function(svg, container) {
   Blockly.Toolbox.HtmlDiv.setAttribute('dir', Blockly.RTL ? 'RTL' : 'LTR');
   container.appendChild(Blockly.Toolbox.HtmlDiv);
 
+  var mainWorkspace = Blockly.mainWorkspace;
+  goog.asserts.assertObject(mainWorkspace);
+
   /**
    * @type {Blockly.Flyout}
    * @private
    */
   Blockly.Toolbox.flyout_ = new Blockly.Flyout(
-      Blockly.mainWorkspace, Blockly.getMainWorkspaceMetrics, true);
+      mainWorkspace, Blockly.getMainWorkspaceMetrics, true);
   Blockly.Toolbox.flyout_.render(svg);
 
   // Clicking on toolbar closes popups.

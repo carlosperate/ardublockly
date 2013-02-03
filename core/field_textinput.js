@@ -26,6 +26,7 @@
 goog.provide('Blockly.FieldTextInput');
 
 goog.require('Blockly.Field');
+goog.require('goog.asserts');
 goog.require('goog.userAgent');
 
 
@@ -50,7 +51,8 @@ goog.inherits(Blockly.FieldTextInput, Blockly.Field);
 
 /**
  * Set the text in this field.
- * @param {string} text New text.
+ * @param {?string} text New text.
+ * @override
  */
 Blockly.FieldTextInput.prototype.setText = function(text) {
   if (this.changeHandler_) {
@@ -202,7 +204,8 @@ Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
  */
 Blockly.FieldTextInput.prototype.validate_ = function() {
   var valid = true;
-  var htmlInput = Blockly.FieldTextInput.htmlInput_;
+  goog.asserts.assertObject(Blockly.FieldTextInput.htmlInput_);
+  var htmlInput = /** @type {!Element} */ (Blockly.FieldTextInput.htmlInput_);
   if (this.changeHandler_) {
     valid = this.changeHandler_(htmlInput.value);
   }

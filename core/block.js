@@ -220,15 +220,15 @@ Blockly.Block.prototype.unselect = function() {
 
 /**
  * Dispose of this block.
- * @param {boolean} healStack If true, then try to heal any gap by connecting
+ * @param {boolean=} opt_healStack If true, then try to heal any gap by connecting
  *     the next statement with the previous statement.  Otherwise, dispose of
  *     all children of this block.
- * @param {boolean} animate If true, show a disposal animation and sound.
+ * @param {boolean=} opt_animate If true, show a disposal animation and sound.
  */
-Blockly.Block.prototype.dispose = function(healStack, animate) {
-  this.unplug(healStack);
+Blockly.Block.prototype.dispose = function(opt_healStack, opt_animate) {
+  this.unplug(opt_healStack);
 
-  if (animate && this.svg_) {
+  if (opt_animate && this.svg_) {
     this.svg_.disposeUiEffect();
   }
 
@@ -288,11 +288,11 @@ Blockly.Block.prototype.dispose = function(healStack, animate) {
 /**
  * Unplug this block from its superior block.  If this block is a statement,
  * optionally reconnect the block underneath with the block on top.
- * @param {boolean} healStack Disconnect child statement and reconnect stack.
- * @param {boolean} bump Move the unplugged block sideways a short distance.
+ * @param {boolean=} opt_healStack Disconnect child statement and reconnect stack.
+ * @param {boolean=} opt_bump Move the unplugged block sideways a short distance.
  */
-Blockly.Block.prototype.unplug = function(healStack, bump) {
-  bump = bump && !!this.getParent();
+Blockly.Block.prototype.unplug = function(opt_healStack, opt_bump) {
+  var bump = opt_bump && !!this.getParent();
   if (this.outputConnection) {
     if (this.outputConnection.targetConnection) {
       // Disconnect from any superior block.
@@ -306,7 +306,7 @@ Blockly.Block.prototype.unplug = function(healStack, bump) {
       // Detach this block from the parent's tree.
       this.setParent(null);
     }
-    if (healStack && this.nextConnection &&
+    if (opt_healStack && this.nextConnection &&
         this.nextConnection.targetConnection) {
       // Disconnect the next statement.
       var nextTarget = this.nextConnection.targetConnection;
@@ -342,7 +342,7 @@ Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
       var xy = Blockly.getRelativeXY_(element);
       x += xy.x;
       y += xy.y;
-      element = element.parentNode;
+      element = element.parentElement;
     } while (element && element != this.workspace.getCanvas());
   }
   return {x: x, y: y};

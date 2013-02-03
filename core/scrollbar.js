@@ -230,7 +230,7 @@ Blockly.ScrollbarInterface.prototype.set = function(value, fireEvents) {};
  * @param {Function} setMetrics A function that sets scrolling metrics.
  * @param {?boolean} horizontal True if horizontal, false if vertical.
  *     Null is used to create a test scrollbar to measure thickness.
- * @param {boolean} opt_pair True if the scrollbar is part of a horiz/vert pair.
+ * @param {boolean=} opt_pair True if the scrollbar is part of a horiz/vert pair.
  * @constructor
  * @implements {Blockly.ScrollbarInterface}
  */
@@ -302,7 +302,7 @@ Blockly.ScrollbarNative.prototype.dispose = function() {
 
 /**
  * Recalculate the scrollbar's location and its length.
- * @param {Object} opt_metrics A data structure of from the describing all the
+ * @param {Object=} opt_metrics A data structure of from the describing all the
  * required dimensions.  If not provided, it will be fetched from the host
  * object.
  */
@@ -607,7 +607,7 @@ Blockly.ScrollbarSvg.prototype.dispose = function() {
 
 /**
  * Recalculate the scrollbar's location and its length.
- * @param {Object} opt_metrics A data structure of from the describing all the
+ * @param {Object=} opt_metrics A data structure of from the describing all the
  * required dimensions.  If not provided, it will be fetched from the host
  * object.
  */

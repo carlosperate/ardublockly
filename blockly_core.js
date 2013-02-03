@@ -39,5 +39,6 @@ goog.require('Blockly.Xml');
 goog.require('Blockly.inject');
 goog.require('Blockly.renaming_map');
 goog.require('Blockly.utils');
+goog.require('goog.debug.ErrorHandler');
 
 

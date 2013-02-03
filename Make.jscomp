@@ -5,6 +5,7 @@ JSCOMP_ERRORS = \
 	const \
 	constantProperty \
 	es5Strict \
+	invalidCasts \
 	nonStandardJsDocs \
 	strictModuleDepCheck \
 	suspiciousCode \
@@ -20,7 +21,6 @@ JSCOMP_UNUSED = \
 	accessControls \
 	checkTypes \
 	duplicate \
-	invalidCasts \
 	missingProperties \
 	visibility \
 

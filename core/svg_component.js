@@ -25,6 +25,7 @@
 
 goog.provide('Blockly.SvgComponent');
 
+goog.require('goog.asserts');
 goog.require('goog.ui.Component');
 
 
@@ -207,7 +208,9 @@ Blockly.SvgComponent.prototype.getWorkspace = function() {
  * @return {!Element} The svg.
  */
 Blockly.SvgComponent.prototype.getSvg = function() {
-  return this.getElement();
+  var svg = this.getElement();
+  goog.asserts.assertObject(svg);
+  return svg;
 };
 
 

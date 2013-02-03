@@ -117,6 +117,7 @@ Blockly.FieldImage.prototype.setTooltip = function(newTip) {
 /**
  * Get the source URL of this image.
  * @return {string} Current text.
+ * @override
  */
 Blockly.FieldImage.prototype.getText = function() {
   return this.src_;
@@ -124,10 +125,11 @@ Blockly.FieldImage.prototype.getText = function() {
 
 /**
  * Set the source URL of this image.
- * @param {string} src New source.
+ * @param {?string} src New source.
+ * @override
  */
 Blockly.FieldImage.prototype.setText = function(src) {
   this.src_ = src;
   this.imageElement_.setAttributeNS('http://www.w3.org/1999/xlink',
-      'xlink:href', src);
+      'xlink:href', goog.isString(src) ? src : '');
 };

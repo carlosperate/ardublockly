@@ -63,19 +63,19 @@ Blockly.Flyout = function(workspace, workspaceMetrics, withScrollbar) {
   this.targetWorkspaceMetrics_ = workspaceMetrics;
 
   /**
-   * @type {!boolean}
+   * @type {boolean}
    * @private
    */
   this.withScrollbar_ = withScrollbar;
 
   /**
-   * @type {!number}
+   * @type {number}
    * @private
    */
   this.width_ = 0;
 
   /**
-   * @type {!number}
+   * @type {number}
    * @private
    */
   this.height_ = 0;
@@ -93,14 +93,14 @@ goog.inherits(Blockly.Flyout, goog.ui.Component);
 
 /**
  * Does the flyout automatically close when a block is created?
- * @type {!boolean}
+ * @type {boolean}
  */
 Blockly.Flyout.prototype.autoClose = true;
 
 
 /**
  * Corner radius of the flyout background.
- * @type {!number}
+ * @type {number}
  * @const
  */
 Blockly.Flyout.prototype.CORNER_RADIUS = 8;
@@ -132,20 +132,12 @@ Blockly.Flyout.prototype.createDom = function() {
  * @override
  */
 Blockly.Flyout.prototype.disposeInternal = function() {
-  if (this.scrollbar_) {
-    this.scrollbar_.dispose();
-    this.scrollbar_ = null;
-  }
-  this.workspace_ = null;
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
     this.svgGroup_ = null;
   }
   this.svgBackground_ = null;
   this.svgOptions_ = null;
-  this.targetWorkspace_ = null;
-  this.targetWorkspaceMetrics_ = null;
-  this.buttons_ = null;
 
   Blockly.Flyout.superClass_.disposeInternal.call(this);
 };
@@ -222,6 +214,7 @@ Blockly.Flyout.prototype.init = function() {
         goog.bind(this.getMetrics, this),
         goog.bind(this.setMetrics, this),
         false, false);
+    this.registerDisposable(this.scrollbar_);
   }
 
   this.hide();
@@ -304,7 +297,7 @@ Blockly.Flyout.prototype.hide = function() {
     Blockly.unbindEvent_(rect.wrapper_);
     goog.dom.removeNode(rect);
   }
-  this.buttons_ = [];
+  this.buttons_.splice(0);
 };
 
 

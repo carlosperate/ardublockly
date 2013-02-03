@@ -216,7 +216,8 @@ Blockly.Bubble.prototype.createDom_ = function(content, hasResize) {
         this.bubbleGroup_);
     var resizeSize = 2 * Blockly.Bubble.BORDER_WIDTH;
     Blockly.createSvgElement('polygon',
-        {'points': '0,x x,x x,0'.replace(/x/g, resizeSize)}, this.resizeGroup_);
+        {'points': '0,x x,x x,0'.replace(/x/g, resizeSize.toString())},
+        this.resizeGroup_);
     Blockly.createSvgElement('line',
         {'class': 'blocklyResizeLine',
         'x1': resizeSize / 3, 'y1': resizeSize - 1,
