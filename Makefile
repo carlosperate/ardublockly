@@ -7,6 +7,8 @@ PRETTY_PRINT = --pretty-print
 FORMATTING.compressed =
 COMPILATION_LEVEL.compressed = SIMPLE_OPTIMIZATIONS
 
+include Make.jscomp
+
 ##############################
 # Directories
 ##############################
@@ -77,7 +79,7 @@ $(addsuffix .tmp, $(OUT_CSS)): $(IN_GSS) $(GSS_COMPILER)
 	perl -pi -e "print qq/goog.provide('Blockly.renaming_map');\n/ if ($$. == 1);" $(OUT_RENAMING_JS).tmp
 
 $(addsuffix .tmp, $(OUT_COMPILED_JS)): blockly_%.js.tmp : blockly_core.js $(CLOSURE_COMPILER) $(OUT_RENAMING_JS)
-	python $(CLOSURE_BUILDER) $(DEBUG_FLAG) -c $(CLOSURE_COMPILER) --root $(CLOSURE_LIBRARY_DIR) --root $(SRC_DIR) -o compiled -f --compilation_level -f $(COMPILATION_LEVEL.$*) $(FORMATTING.$*) --namespace Blockly.core --output_file $@ $<
+	python $(CLOSURE_BUILDER) $(DEBUG_FLAG) -c $(CLOSURE_COMPILER) --root $(CLOSURE_LIBRARY_DIR) --root $(SRC_DIR) -o compiled -f --compilation_level -f $(COMPILATION_LEVEL.$*) $(FORMATTING.$*) $(JSCOMP_ERROR_FLAGS) --namespace Blockly.core --output_file $@ $<
 
 blockly_core_deps.js.tmp: blockly_core.js $(IN_JS) $(OUT_RENAMING_JS)
 	python $(CLOSURE_DEPSWRITER) --root_with_prefix "$(CLOSURE_LIBRARY_DIR) $(CLOSURE_LIBRARY_DIR)" --root_with_prefix "$(SRC_DIR) $(SRC_DIR)" $< --output_file $@

@@ -873,7 +873,7 @@ goog.addDependency('../../../blockly/core/names.js', ['Blockly.Names'], []);
 goog.addDependency('../../../blockly/core/procedures.js', ['Blockly.Procedures'], ['Blockly.FieldVariable', 'Blockly.Names', 'Blockly.Workspace']);
 goog.addDependency('../../../blockly/core/scrollbar.js', ['Blockly.Scrollbar', 'Blockly.ScrollbarPair'], ['goog.userAgent']);
 goog.addDependency('../../../blockly/core/svg_component.js', ['Blockly.SvgComponent'], ['goog.ui.Component']);
-goog.addDependency('../../../blockly/core/toolbox.js', ['Blockly.Toolbox'], ['Blockly.Flyout', 'goog.ui.tree.TreeControl', 'goog.ui.tree.TreeNode']);
+goog.addDependency('../../../blockly/core/toolbox.js', ['Blockly.Toolbox'], ['Blockly.Flyout', 'goog.style', 'goog.ui.tree.TreeControl', 'goog.ui.tree.TreeNode']);
 goog.addDependency('../../../blockly/core/tooltip.js', ['Blockly.Tooltip'], []);
 goog.addDependency('../../../blockly/core/trashcan.js', ['Blockly.Trashcan'], ['goog.Timer', 'goog.ui.Component']);
 goog.addDependency('../../../blockly/core/utils.js', ['Blockly.utils'], []);

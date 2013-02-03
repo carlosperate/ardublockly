@@ -26,6 +26,7 @@
 goog.provide('Blockly.Toolbox');
 
 goog.require('Blockly.Flyout');
+goog.require('goog.style');
 goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.ui.tree.TreeNode');
 
@@ -126,17 +127,17 @@ Blockly.Toolbox.init = function() {
  */
 Blockly.Toolbox.position_ = function() {
   var treeDiv = Blockly.Toolbox.HtmlDiv;
-  var svgCss = getComputedStyle(Blockly.svg);
+  var svgBox = goog.style.getBorderBox(Blockly.svg);
   var svgSize = Blockly.svgSize();
   if (Blockly.RTL) {
     var x = svgSize.left + 1;
     x += svgSize.width - treeDiv.offsetWidth;
     treeDiv.style.left = x + 'px';
   } else {
-    treeDiv.style.marginLeft = svgCss.borderLeftWidth;
+    treeDiv.style.marginLeft = svgBox.left;
   }
   var y = svgSize.top +
-      parseInt(svgCss.borderTopWidth, 10);
+      parseInt(svgBox.top, 10);
   treeDiv.style.top = y + 'px';
   treeDiv.style.height = svgSize.height + 'px';
   Blockly.Toolbox.width = treeDiv.offsetWidth;

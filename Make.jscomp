@@ -1,0 +1,33 @@
+# -*- mode: makefile -*-
+JSCOMP_ERRORS = \
+	checkRegExp \
+	checkVars \
+	const \
+	constantProperty \
+	es5Strict \
+	nonStandardJsDocs \
+	strictModuleDepCheck \
+	suspiciousCode \
+	undefinedNames \
+	undefinedVars \
+	uselessCode \
+
+
+JSCOMP_WARNINGS = \
+
+
+JSCOMP_UNUSED = \
+	accessControls \
+	checkTypes \
+	duplicate \
+	invalidCasts \
+	missingProperties \
+	visibility \
+
+define TOFLAGS
+$(foreach flag, $(2), -f $(strip $(1)) -f $(flag))
+endef
+
+JSCOMP_ERROR_FLAGS = \
+	$(call TOFLAGS, --jscomp_error, $(JSCOMP_ERRORS)) \
+	$(call TOFLAGS, --jscomp_warning, $(JSCOMP_WARNINGS)) \

@@ -624,7 +624,7 @@ Blockly.loadCss = function() {
   var head = document.head || document.getElementsByTagName('head')[0];
 
   if (!head) {
-    d = fail(new Error('No head in document.'));
+    d = goog.async.Deferred.fail(new Error('No head in document.'));
   } else {
     d = new goog.async.Deferred();
 
