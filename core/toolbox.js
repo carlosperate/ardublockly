@@ -118,11 +118,8 @@ Blockly.Toolbox.init = function() {
 
   // If the document resizes, reposition the toolbox.
   goog.events.listen(window, 'resize', Blockly.Toolbox.position_);
-  goog.events.listen(Blockly.Toolbox.tree_,
-      goog.ui.tree.BaseNode.EventType.EXPAND, Blockly.Toolbox.position_);
-  goog.events.listen(Blockly.Toolbox.tree_,
-      goog.ui.tree.BaseNode.EventType.COLLAPSE, Blockly.Toolbox.position_);
-  Blockly.Toolbox.position_();
+
+  //Blockly.Toolbox.position_();
 };
 
 /**
@@ -227,7 +224,7 @@ Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
     return;
   }
   goog.ui.tree.TreeControl.prototype.setSelectedItem.call(this, node);
-  if (node) {
+  if (node && node.blocks && node.blocks.length) {
     Blockly.Toolbox.flyout_.show(node.blocks);
   } else {
     // Hide the flyout.
@@ -247,6 +244,14 @@ Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
  */
 Blockly.Toolbox.TreeNode = function(html, opt_config, opt_domHelper) {
   goog.ui.tree.TreeNode.call(this, html, opt_config, opt_domHelper);
+  var resize = function() {
+    Blockly.fireUiEvent(window, 'resize');
+  };
+  // Fire a resize event since the toolbox may have changed width.
+  goog.events.listen(Blockly.Toolbox.tree_,
+      goog.ui.tree.BaseNode.EventType.EXPAND, resize);
+  goog.events.listen(Blockly.Toolbox.tree_,
+      goog.ui.tree.BaseNode.EventType.COLLAPSE, resize);
 };
 goog.inherits(Blockly.Toolbox.TreeNode, goog.ui.tree.TreeNode);
 
