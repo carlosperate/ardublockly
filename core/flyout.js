@@ -335,13 +335,16 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   var flyoutWidth = 0;
   var cursorY = margin;
   for (var i = 0, block; block = blocks[i]; i++) {
-    // Mark blocks as being inside a flyout.  This is used to detect and prevent
-    // the closure of the flyout if the user right-clicks on such a block.
-    block.isInFlyout = true;
-    // There is no good way to handle comment bubbles inside the flyout.
-    // Blocks shouldn't come with predefined comments, but someone will
-    // try this, I'm sure.  Kill the comment.
-    Blockly.Comment && block.setCommentText(null);
+    var allBlocks = block.getDescendants();
+    for (var j = 0, child; child = allBlocks[j]; j++) {
+      // Mark blocks as being inside a flyout.  This is used to detect and prevent
+      // the closure of the flyout if the user right-clicks on such a block.
+      child.isInFlyout = true;
+      // There is no good way to handle comment bubbles inside the flyout.
+      // Blocks shouldn't come with predefined comments, but someone will
+      // try this, I'm sure.  Kill the comment.
+      Blockly.Comment && child.setCommentText(null);
+    }
     block.render();
     var bBox = block.getSvgRoot().getBBox();
     var x = Blockly.RTL ? 0 : margin + Blockly.BlockSvg.TAB_WIDTH;

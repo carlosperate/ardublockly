@@ -366,12 +366,14 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
  * @private
  */
 Blockly.Block.prototype.onMouseDown_ = function(e) {
+  if (this.isInFlyout) {
+    return;
+  }
   // Update Blockly's knowledge of its own location.
   Blockly.svgResize();
-
   Blockly.Block.terminateDrag_();
   this.select();
-  Blockly.hideChaff(this.isInFlyout);
+  Blockly.hideChaff();
   if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {

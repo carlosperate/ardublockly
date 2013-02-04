@@ -118,8 +118,6 @@ Blockly.Toolbox.init = function() {
 
   // If the document resizes, reposition the toolbox.
   goog.events.listen(window, 'resize', Blockly.Toolbox.position_);
-
-  //Blockly.Toolbox.position_();
 };
 
 /**
