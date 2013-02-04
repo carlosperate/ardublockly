@@ -26,18 +26,18 @@
 goog.provide('Blockly.SvgComponent');
 
 goog.require('goog.asserts');
-goog.require('goog.ui.Component');
+goog.require('Blockly.Component');
 
 
 
 /**
  * @constructor
- * @extends {goog.ui.Component}
+ * @extends {Blockly.Component}
  */
 Blockly.SvgComponent = function() {
   Blockly.SvgComponent.superClass_.constructor.call(this);
 };
-goog.inherits(Blockly.SvgComponent, goog.ui.Component);
+goog.inherits(Blockly.SvgComponent, Blockly.Component);
 
 
 /** @override */

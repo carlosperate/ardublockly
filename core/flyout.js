@@ -27,7 +27,7 @@ goog.provide('Blockly.Flyout');
 
 goog.require('Blockly.Block');
 goog.require('Blockly.Comment');
-goog.require('goog.ui.Component');
+goog.require('Blockly.Component');
 
 
 
@@ -39,7 +39,7 @@ goog.require('goog.ui.Component');
  *     regarding the flyout's target workspace.
  * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  * @constructor
- * @extends {goog.ui.Component}
+ * @extends {Blockly.Component}
  */
 Blockly.Flyout = function(workspace, workspaceMetrics, withScrollbar) {
   Blockly.Flyout.superClass_.constructor.call(this);
@@ -88,7 +88,7 @@ Blockly.Flyout = function(workspace, workspaceMetrics, withScrollbar) {
    */
   this.buttons_ = [];
 };
-goog.inherits(Blockly.Flyout, goog.ui.Component);
+goog.inherits(Blockly.Flyout, Blockly.Component);
 
 
 /**

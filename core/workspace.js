@@ -27,10 +27,10 @@ goog.provide('Blockly.Workspace');
 
 // TODO(scr): Fix circular dependencies
 // goog.require('Blockly.Block');
+goog.require('Blockly.Component');
 goog.require('Blockly.ScrollbarPair');
 goog.require('Blockly.Trashcan');
 goog.require('Blockly.Xml');
-goog.require('goog.ui.Component');
 
 
 
@@ -38,7 +38,7 @@ goog.require('goog.ui.Component');
  * Class for a workspace.
  * @param {boolean} editable Is this workspace freely interactive?
  * @constructor
- * @extends {goog.ui.Component}
+ * @extends {Blockly.Component}
  */
 Blockly.Workspace = function(editable) {
   Blockly.Workspace.superClass_.constructor.call(this);
@@ -54,7 +54,7 @@ Blockly.Workspace = function(editable) {
 
   Blockly.ConnectionDB.init(this);
 };
-goog.inherits(Blockly.Workspace, goog.ui.Component);
+goog.inherits(Blockly.Workspace, Blockly.Component);
 
 
 /**

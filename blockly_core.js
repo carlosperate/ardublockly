@@ -8,6 +8,7 @@ goog.require('Blockly.BlockSvg');
 goog.require('Blockly.Bubble');
 goog.require('Blockly.CodeGenerator');
 goog.require('Blockly.Comment');
+goog.require('Blockly.Component');
 goog.require('Blockly.Connection');
 goog.require('Blockly.ConnectionDB');
 goog.require('Blockly.ContextMenu');

@@ -25,8 +25,8 @@
 
 goog.provide('Blockly.Trashcan');
 
+goog.require('Blockly.Component');
 goog.require('goog.Timer');
-goog.require('goog.ui.Component');
 
 
 
@@ -34,14 +34,14 @@ goog.require('goog.ui.Component');
  * Class for a trash can.
  * @param {!Function} getMetrics A function that returns workspace's metrics.
  * @constructor
- * @extends {goog.ui.Component}
+ * @extends {Blockly.Component}
  */
 Blockly.Trashcan = function(getMetrics) {
   Blockly.Trashcan.superClass_.constructor.call(this);
 
   this.getMetrics_ = getMetrics;
 };
-goog.inherits(Blockly.Trashcan, goog.ui.Component);
+goog.inherits(Blockly.Trashcan, Blockly.Component);
 
 
 /**
