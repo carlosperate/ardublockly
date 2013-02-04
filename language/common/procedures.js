@@ -157,7 +157,26 @@ Blockly.Language.procedures_defnoreturn = {
         }
       }
     }
-  }
+  },
+  customContextMenu: function(options) {
+    // Add option to create caller.
+    var option = {enabled: true};
+    var name = this.getTitleValue('NAME');
+    option.text = Blockly.LANG_PROCEDURES_CREATE_DO.replace('%1', name);
+    option.callback = Blockly.ContextMenu.callbackFactory(this,
+        this.callType_, 'NAME', name);
+    options.push(option);
+    // Add options to create getters for each parameter.
+    for (var x = 0; x < this.arguments_.length; x++) {
+      var option = {enabled: true};
+      var name = this.arguments_[x];
+      option.text = Blockly.LANG_VARIABLES_SET_CREATE_GET.replace('%1', name);
+      option.callback = Blockly.ContextMenu.callbackFactory(this,
+          'variables_get', 'VAR', name);
+      options.push(option);
+    }
+  },
+  callType_: 'procedures_callnoreturn'
 };
 
 Blockly.Language.procedures_defreturn = {
@@ -194,7 +213,9 @@ Blockly.Language.procedures_defreturn = {
     return [this.getTitleValue('NAME'), this.arguments_, true];
   },
   getVars: Blockly.Language.procedures_defnoreturn.getVars,
-  renameVar: Blockly.Language.procedures_defnoreturn.renameVar
+  renameVar: Blockly.Language.procedures_defnoreturn.renameVar,
+  customContextMenu: Blockly.Language.procedures_defnoreturn.customContextMenu,
+  callType_: 'procedures_callreturn'
 };
 
 Blockly.Language.procedures_mutatorcontainer = {

@@ -300,6 +300,14 @@ Blockly.Language.controls_for = {
     if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
       this.setTitleValue(newName, 'VAR');
     }
+  },
+  customContextMenu: function(options) {
+    var option = {enabled: true};
+    var name = this.getTitleValue('VAR');
+    option.text = Blockly.LANG_VARIABLES_SET_CREATE_GET.replace('%1', name);
+    option.callback = Blockly.ContextMenu.callbackFactory(this,
+        'variables_get', 'VAR', name);
+    options.push(option);
   }
 };
 
@@ -331,6 +339,14 @@ Blockly.Language.controls_forEach = {
     if (Blockly.Names.equals(oldName, this.getTitleValue('VAR'))) {
       this.setTitleValue(newName, 'VAR');
     }
+  },
+  customContextMenu: function(options) {
+    var option = {enabled: true};
+    var name = this.getTitleValue('VAR');
+    option.text = Blockly.LANG_VARIABLES_SET_CREATE_GET.replace('%1', name);
+    option.callback = Blockly.ContextMenu.callbackFactory(this,
+        'variables_get', 'VAR', name);
+    options.push(option);
   }
 };
 

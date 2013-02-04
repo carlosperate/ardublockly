@@ -200,6 +200,9 @@ Blockly.Block.terminateDrag_ = function() {
  * Select this block.  Highlight it visually.
  */
 Blockly.Block.prototype.select = function() {
+  if (!this.svg_) {
+    throw 'Block is not rendered.'
+  }
   if (Blockly.selected) {
     // Unselect any previously selected block.
     Blockly.selected.unselect();
@@ -213,6 +216,9 @@ Blockly.Block.prototype.select = function() {
  * Unselect this block.  Remove its highlighting.
  */
 Blockly.Block.prototype.unselect = function() {
+  if (!this.svg_) {
+    throw 'Block is not rendered.'
+  }
   Blockly.selected = null;
   this.svg_.removeSelect();
   Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');

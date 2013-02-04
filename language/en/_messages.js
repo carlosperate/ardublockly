@@ -442,11 +442,13 @@ Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(com
 Blockly.LANG_VARIABLES_GET_TITLE = 'get';
 Blockly.LANG_VARIABLES_GET_ITEM = 'item';
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Returns the value of this variable.';
+Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Create "set %1"';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_SET_TITLE = 'set';
 Blockly.LANG_VARIABLES_SET_ITEM = 'item';
 Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Sets this variable to be equal to the input.';
+Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Create "get %1"';
 
 // Procedures Blocks.
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
@@ -478,6 +480,7 @@ Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = 'parameters';
 Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'variable:';
 
 Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight Procedure';
+Blockly.LANG_PROCEDURES_CREATE_DO = 'Create "do %1"';
 
 Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a value.';
 Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Warning:\n' +

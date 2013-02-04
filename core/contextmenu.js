@@ -202,3 +202,30 @@ Blockly.ContextMenu.hide = function() {
     Blockly.ContextMenu.visible = false;
   }
 };
+
+/**
+ * Create a callback function that creates and configures a block,
+ *   then places the new block next to the original.
+ * @param {!Blockly.Block} block Original block.
+ * @param {string} type Type of new block.
+ * @param {string} name Name of field to set.
+ * @param {string} value Value to set in named field.
+ */
+Blockly.ContextMenu.callbackFactory = function(block, type, name, value) {
+  return function() {
+    var newBlock = new Blockly.Block(block.workspace, type);
+    newBlock.setTitleValue(value, name);
+    newBlock.initSvg();
+    newBlock.render();
+    // Move the new block next to the old block.
+    var xy = block.getRelativeToSurfaceXY();
+    if (Blockly.RTL) {
+      xy.x -= Blockly.SNAP_RADIUS;
+    } else {
+      xy.x += Blockly.SNAP_RADIUS;
+    }
+    xy.y += Blockly.SNAP_RADIUS * 2;
+    newBlock.moveBy(xy.x, xy.y);
+    newBlock.select();
+  }
+};
