@@ -5,9 +5,11 @@ JSCOMP_ERRORS = \
 	checkVars \
 	const \
 	constantProperty \
+	duplicate \
 	es5Strict \
 	invalidCasts \
 	nonStandardJsDocs \
+	missingProperties \
 	strictModuleDepCheck \
 	suspiciousCode \
 	undefinedNames \
@@ -20,8 +22,6 @@ JSCOMP_WARNINGS = \
 
 JSCOMP_UNUSED = \
 	accessControls \
-	duplicate \
-	missingProperties \
 	visibility \
 
 JSCOMP_ERROR_FLAGS = \
