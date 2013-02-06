@@ -40,7 +40,7 @@ Blockly.ScrollbarPair = function(element, getMetrics, setMetrics) {
   this.element_ = element;
   this.getMetrics_ = getMetrics;
   this.setMetrics_ = setMetrics;
-  this.oldHostMetrics_ = {};
+  this.oldHostMetrics_ = null;
   this.hScroll = new Blockly.Scrollbar(element, getMetrics, setMetrics,
                                        true, true);
   this.vScroll = new Blockly.Scrollbar(element, getMetrics, setMetrics,
@@ -106,7 +106,8 @@ Blockly.ScrollbarPair.prototype.resize = function() {
   // Only change the scrollbars if there has been a change in metrics.
   var resizeH = false;
   var resizeV = false;
-  if (this.oldHostMetrics_.viewWidth != hostMetrics.viewWidth ||
+  if (!this.oldHostMetrics_ ||
+      this.oldHostMetrics_.viewWidth != hostMetrics.viewWidth ||
       this.oldHostMetrics_.viewHeight != hostMetrics.viewHeight ||
       this.oldHostMetrics_.absoluteTop != hostMetrics.absoluteTop ||
       this.oldHostMetrics_.absoluteLeft != hostMetrics.absoluteLeft) {
@@ -115,12 +116,14 @@ Blockly.ScrollbarPair.prototype.resize = function() {
     resizeV = true;
   } else {
     // Has the content been resized or moved?
-    if (this.oldHostMetrics_.contentWidth != hostMetrics.contentWidth ||
+    if (!this.oldHostMetrics_ ||
+        this.oldHostMetrics_.contentWidth != hostMetrics.contentWidth ||
         this.oldHostMetrics_.viewLeft != hostMetrics.viewLeft ||
         this.oldHostMetrics_.contentLeft != hostMetrics.contentLeft) {
       resizeH = true;
     }
-    if (this.oldHostMetrics_.contentHeight != hostMetrics.contentHeight ||
+    if (!this.oldHostMetrics_ ||
+        this.oldHostMetrics_.contentHeight != hostMetrics.contentHeight ||
         this.oldHostMetrics_.viewTop != hostMetrics.viewTop ||
         this.oldHostMetrics_.contentTop != hostMetrics.contentTop) {
       resizeV = true;
@@ -134,11 +137,13 @@ Blockly.ScrollbarPair.prototype.resize = function() {
   }
 
   // Reposition the corner square.
-  if (this.oldHostMetrics_.viewWidth != hostMetrics.viewWidth ||
+  if (!this.oldHostMetrics_ ||
+      this.oldHostMetrics_.viewWidth != hostMetrics.viewWidth ||
       this.oldHostMetrics_.absoluteLeft != hostMetrics.absoluteLeft) {
     this.corner_.setAttribute('x', this.vScroll.xCoordinate);
   }
-  if (this.oldHostMetrics_.viewHeight != hostMetrics.viewHeight ||
+  if (!this.oldHostMetrics_ ||
+      this.oldHostMetrics_.viewHeight != hostMetrics.viewHeight ||
       this.oldHostMetrics_.absoluteTop != hostMetrics.absoluteTop) {
     this.corner_.setAttribute('y', this.hScroll.yCoordinate);
   }
@@ -184,6 +189,11 @@ Blockly.ScrollbarPair.prototype.set = function(x, y) {
     this.vScroll.set(y, true);
   }
 };
+
+/**
+ * @type {?Blockly.Metrics}
+ */
+Blockly.ScrollbarPair.prototype.oldHostMetrics_ = null;
 
 // --------------------------------------------------------------------
 

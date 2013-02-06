@@ -147,8 +147,8 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     var text = options[x][0];  // Human-readable text.
     var value = options[x][1]; // Language-neutral value.
     var gElement = Blockly.ContextMenu.optionToDom(text);
-    var rectElement = gElement.firstChild;
-    var textElement = gElement.lastChild;
+    var rectElement = /** @type {SVGRectElement} */ (gElement.firstChild);
+    var textElement = /** @type {SVGTextElement} */ (gElement.lastChild);
     svgOptions.appendChild(gElement);
     // Add a checkmark next to the current item.
     if (!checkElement && value == this.value_) {

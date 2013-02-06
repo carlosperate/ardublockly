@@ -43,7 +43,7 @@ Blockly.ContextMenu.visible = false;
 
 /**
  * Creates the context menu's DOM.  Only needs to be called once.
- * @return {!Element} The context menu's SVG group.
+ * @return {!SVGGElement} The context menu's SVG group.
  */
 Blockly.ContextMenu.createDom = function() {
   /*
@@ -54,8 +54,8 @@ Blockly.ContextMenu.createDom = function() {
     </g>
   </g>
   */
-  var svgGroup =
-      Blockly.createSvgElement('g', {'class': 'blocklyHidden'}, null);
+  var svgGroup = /** @type {!SVGGElement} */ (
+      Blockly.createSvgElement('g', {'class': 'blocklyHidden'}, null));
   Blockly.ContextMenu.svgGroup = svgGroup;
   Blockly.ContextMenu.svgShadow = Blockly.createSvgElement('rect',
       {'class': 'blocklyContextMenuShadow',
@@ -100,8 +100,8 @@ Blockly.ContextMenu.show = function(anchorX, anchorY, options) {
                     Blockly.ContextMenu.svgShadow];
   for (var x = 0, option; option = options[x]; x++) {
     var gElement = Blockly.ContextMenu.optionToDom(option.text);
-    var rectElement = gElement.firstChild;
-    var textElement = gElement.lastChild;
+    var rectElement = /** @type {SVGRectElement} */ (gElement.firstChild);
+    var textElement = /** @type {SVGTextElement} */ (gElement.lastChild);
     Blockly.ContextMenu.svgOptions.appendChild(gElement);
 
     gElement.setAttribute('transform',
@@ -227,5 +227,7 @@ Blockly.ContextMenu.callbackFactory = function(block, type, name, value) {
     xy.y += Blockly.SNAP_RADIUS * 2;
     newBlock.moveBy(xy.x, xy.y);
     newBlock.select();
-  }
+  };
 };
+
+

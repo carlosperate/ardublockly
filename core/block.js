@@ -604,7 +604,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
     }
     var deleteOption = {
       text: descendantCount == 1 ? Blockly.MSG_DELETE_BLOCK :
-          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
+          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount.toString()),
       enabled: true,
       callback: function() {
         block.dispose(true, true);
@@ -1474,3 +1474,37 @@ Blockly.Block.prototype.setWarningText = function(text) {
 Blockly.Block.prototype.render = function() {
   this.svg_.render();
 };
+
+
+/**
+ * @type {?function(): Array}
+ */
+Blockly.Block.prototype.getProcedureDef = null;
+
+
+/**
+ * @type {?function(string, string)}
+ */
+Blockly.Block.prototype.renameVar = null;
+
+
+/**
+ * @type {?function(string, string)}
+ */
+Blockly.Block.prototype.renameProcedure = null;
+
+
+/**
+ * @type {?function(Array.<string>, Array.<string>)}
+ */
+Blockly.Block.prototype.setProcedureParameters = null;
+
+/**
+ * @type {?function(): string}
+ */
+Blockly.Block.prototype.getProcedureCall = null;
+
+/**
+ * @type {?function(): Array.<string>}
+ */
+Blockly.Block.prototype.getVars = null;

@@ -1,6 +1,7 @@
 # -*- mode: makefile -*-
 JSCOMP_ERRORS = \
 	checkRegExp \
+	checkTypes \
 	checkVars \
 	const \
 	constantProperty \
@@ -19,14 +20,9 @@ JSCOMP_WARNINGS = \
 
 JSCOMP_UNUSED = \
 	accessControls \
-	checkTypes \
 	duplicate \
 	missingProperties \
 	visibility \
-
-define TOFLAGS
-$(foreach flag, $(2), -f $(strip $(1)) -f $(flag))
-endef
 
 JSCOMP_ERROR_FLAGS = \
 	$(call TOFLAGS, --jscomp_error, $(JSCOMP_ERRORS)) \

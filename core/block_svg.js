@@ -35,14 +35,40 @@ goog.require('goog.userAgent');
 Blockly.BlockSvg = function(block) {
   this.block_ = block;
   // Create core elements for the block.
-  this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
-  this.svgPathDark_ = Blockly.createSvgElement('path',
-      {'class': 'blocklyPathDark', 'transform': 'translate(1, 1)'},
-      this.svgGroup_);
-  this.svgPath_ = Blockly.createSvgElement('path', {'class': 'blocklyPath'},
-      this.svgGroup_);
-  this.svgPathLight_ = Blockly.createSvgElement('path',
-      {'class': 'blocklyPathLight'}, this.svgGroup_);
+
+  /**
+   * @type {!SVGGElement}
+   * @private
+   */
+  this.svgGroup_ = /** @type {!SVGGElement} */ (
+      Blockly.createSvgElement('g', {}, null));
+
+  /**
+   * @type {!SVGPathElement}
+   * @private
+   */
+  this.svgPathDark_ = /** @type {!SVGPathElement} */ (
+      Blockly.createSvgElement(
+          'path',
+          {'class': 'blocklyPathDark', 'transform': 'translate(1, 1)'},
+          this.svgGroup_));
+
+  /**
+   * @type {!SVGPathElement}
+   * @private
+   */
+  this.svgPath_ = /** @type {!SVGPathElement} */ (
+      Blockly.createSvgElement(
+          'path', {'class': 'blocklyPath'}, this.svgGroup_));
+
+  /**
+   * @type {!SVGPathElement}
+   * @private
+   */
+  this.svgPathLight_ = /** @type {!SVGPathElement} */ (
+      Blockly.createSvgElement(
+          'path', {'class': 'blocklyPathLight'}, this.svgGroup_));
+
   this.svgPath_.tooltip = this.block_;
   Blockly.Tooltip && Blockly.Tooltip.bindMouseEvents(this.svgPath_);
   if (block.editable) {
@@ -270,11 +296,7 @@ Blockly.BlockSvg.INNER_BOTTOM_LEFT_CORNER_HIGHLIGHT_LTR =
  */
 Blockly.BlockSvg.prototype.dispose = function() {
   goog.dom.removeNode(this.svgGroup_);
-  // Sever JavaScript to DOM connections.
-  this.svgGroup_ = null;
-  this.svgPath_ = null;
-  this.svgPathLight_ = null;
-  this.svgPathDark_ = null;
+
   // Break circular references.
   this.block_ = null;
 };
@@ -287,7 +309,7 @@ Blockly.BlockSvg.prototype.disposeUiEffect = function() {
 
   var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.svgGroup_));
   // Deeply clone the current block.
-  var clone = this.svgGroup_.cloneNode(true);
+  var clone = /** @type {!SVGGElement} */ (this.svgGroup_.cloneNode(true));
   clone.translateX_ = xy.x;
   clone.translateY_ = xy.y;
   clone.setAttribute('transform',

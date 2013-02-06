@@ -501,17 +501,8 @@ Blockly.setCursorHand_ = function(closed) {
 /**
  * Return an object with all the metrics required to size scrollbars for the
  * main workspace.  The following properties are computed:
- * .viewHeight: Height of the visible rectangle,
- * .viewWidth: Width of the visible rectangle,
- * .contentHeight: Height of the contents,
- * .contentWidth: Width of the content,
- * .viewTop: Offset of top edge of visible rectangle from parent,
- * .viewLeft: Offset of left edge of visible rectangle from parent,
- * .contentTop: Offset of the top-most content from the y=0 coordinate,
- * .contentLeft: Offset of the left-most content from the x=0 coordinate.
- * .absoluteTop: Top-edge of view.
- * .absoluteLeft: Left-edge of view.
- * @return {Object} Contains size and position metrics of main workspace.
+ * @return {Blockly.Metrics} Contains size and position metrics of main
+ *     workspace.
  */
 Blockly.getMainWorkspaceMetrics = function() {
   var hwView = Blockly.svgSize();
@@ -543,7 +534,7 @@ Blockly.getMainWorkspaceMetrics = function() {
   if (Blockly.Toolbox && !Blockly.RTL) {
     absoluteLeft = Blockly.Toolbox.width;
   }
-  return {
+  return new Blockly.Metrics({
     viewHeight: hwView.height,
     viewWidth: hwView.width,
     contentHeight: bottomEdge - topEdge,
@@ -554,7 +545,7 @@ Blockly.getMainWorkspaceMetrics = function() {
     contentLeft: leftEdge,
     absoluteTop: 0,
     absoluteLeft: absoluteLeft
-  };
+  });
 };
 
 /**

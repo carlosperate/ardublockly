@@ -1,3 +1,12 @@
+include Make.jscomp
+
+##############################
+# Methods
+##############################
+define TOFLAGS
+$(foreach flag, $(2), -f $(strip $(1)) -f $(flag))
+endef
+
 ##############################
 # Definitions
 ##############################
@@ -6,8 +15,6 @@ DEBUG_FLAG = -f --define -f goog.DEBUG=false
 PRETTY_PRINT = --pretty-print
 FORMATTING.compressed =
 COMPILATION_LEVEL.compressed = SIMPLE_OPTIMIZATIONS
-
-include Make.jscomp
 
 ##############################
 # Directories
@@ -39,6 +46,9 @@ IN_SOY_JS = $(addsuffix .js, $(IN_SOY))
 IN_RENAMING_JS = $(SRC_DIR)/blockly_renaming_map.js
 IN_GSS = $(wildcard $(SRC_DIR)/*.gss)
 IN_JS = $(filter-out $(IN_SOY_JS) $(IN_RENAMING_JS), $(wildcard $(SRC_DIR)/*.js)) $(IN_SOY_JS) $(OUT_RENAMING_JS)
+IN_EXTERN_CONFS = $(wildcard externs/gen/*.conf)
+IN_EXTERN_CONFS_JS = $(patsubst externs/gen/%.conf, externs/%.js, $(IN_EXTERN_CONFS))
+IN_EXTERN_JS = $(filter-out $(IN_EXTERN_CONFS_JS), $(wildcard externs/*.js)) $(OUT_EXTERN_CONFS_JS)
 
 ##############################
 # Targets
@@ -48,14 +58,17 @@ OUT_JS = $(OUT_COMPILED_JS) blockly_core_deps.js blockly_core.js
 OUT_RENAMING_JS = $(IN_RENAMING_JS)
 OUT_CSS = media/blockly.css
 OUT_SOY_JS = $(IN_SOY_JS)
+OUT_EXTERN_CONFS_JS = $(IN_EXTERN_CONFS_JS)
 
-OUTPUTS = $(OUT_JS) $(OUT_SOY_JS) $(OUT_RENAMING_JS) $(OUT_CSS)
+OUTPUTS = $(OUT_JS) $(OUT_SOY_JS) $(OUT_RENAMING_JS) $(OUT_CSS) $(OUT_EXTERN_CONFS_JS)
 TMP_OUTPUTS = $(addsuffix .tmp, $(OUTPUTS))
 
 ##############################
 # Rules
 ##############################
 all: $(OUTPUTS)
+
+.PHONY: all clean
 
 clean:
 	-rm -f $(OUTPUTS)
@@ -79,7 +92,10 @@ $(addsuffix .tmp, $(OUT_CSS)): $(IN_GSS) $(GSS_COMPILER)
 	perl -pi -e "print qq/goog.provide('Blockly.renaming_map');\n/ if ($$. == 1);" $(OUT_RENAMING_JS).tmp
 
 $(addsuffix .tmp, $(OUT_COMPILED_JS)): blockly_%.js.tmp : blockly_core.js $(CLOSURE_COMPILER) $(OUT_RENAMING_JS)
-	python $(CLOSURE_BUILDER) $(DEBUG_FLAG) -c $(CLOSURE_COMPILER) --root $(CLOSURE_LIBRARY_DIR) --root $(SRC_DIR) -o compiled -f --compilation_level -f $(COMPILATION_LEVEL.$*) $(FORMATTING.$*) $(JSCOMP_ERROR_FLAGS) --namespace Blockly.core --output_file $@ $<
+	python $(CLOSURE_BUILDER) $(DEBUG_FLAG) -c $(CLOSURE_COMPILER) --root $(CLOSURE_LIBRARY_DIR) --root $(SRC_DIR) -o compiled -f --compilation_level -f $(COMPILATION_LEVEL.$*) $(FORMATTING.$*) $(JSCOMP_ERROR_FLAGS) $(call TOFLAGS, --externs, $(IN_EXTERN_JS)) --namespace Blockly.core --output_file $@ $<
+
+$(OUT_EXTERN_CONFS_JS).tmp : externs/%.js.tmp : externs/gen/%.conf externs/gen/gen.pl
+	perl externs/gen/gen.pl $< > $@
 
 blockly_core_deps.js.tmp: blockly_core.js $(IN_JS) $(OUT_RENAMING_JS)
 	python $(CLOSURE_DEPSWRITER) --root_with_prefix "$(CLOSURE_LIBRARY_DIR) $(CLOSURE_LIBRARY_DIR)" --root_with_prefix "$(SRC_DIR) $(SRC_DIR)" $< --output_file $@

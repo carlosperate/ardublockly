@@ -24,6 +24,7 @@ goog.require('Blockly.Flyout');
 goog.require('Blockly.Generator');
 goog.require('Blockly.Input');
 goog.require('Blockly.Language');
+goog.require('Blockly.Metrics');
 goog.require('Blockly.Mutator');
 goog.require('Blockly.Names');
 goog.require('Blockly.Procedures');

@@ -217,8 +217,10 @@ Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
  * Only used if the flyout's autoClose is false.
  */
 Blockly.Procedures.refreshFlyoutCategory = function() {
+  // TODO(neil): Determine whether this is needed (there was no
+  //     MSG_PROCEDURE_CATEGORY).
   if (Blockly.Toolbox && Blockly.Toolbox.flyout_.isVisible() &&
-      Blockly.Toolbox.selectedOption_.cat == Blockly.MSG_PROCEDURE_CATEGORY) {
+      Blockly.Toolbox.selectedOption_['cat'] == Blockly.MSG_PROCEDURE_CATEGORY) {
     Blockly.Toolbox.flyout_.hide();
     Blockly.Toolbox.flyout_.show(Blockly.MSG_PROCEDURE_CATEGORY);
   }

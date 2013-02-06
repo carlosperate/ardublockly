@@ -51,6 +51,11 @@ Blockly.MSG_NEW_VARIABLE_TITLE = 'New variable name:';
 Blockly.MSG_RENAME_VARIABLE = 'Rename variable...';
 Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 
+// TODO(neil): Did you want to remove these?  There was still code referring to them.
+// Toolbox.
+Blockly.MSG_VARIABLE_CATEGORY = 'Variables';
+Blockly.MSG_PROCEDURE_CATEGORY = 'Procedures';
+
 // Colour Blocks.
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Choose a colour form the palette.';

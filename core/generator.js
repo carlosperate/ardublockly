@@ -239,3 +239,27 @@ Blockly.CodeGenerator.prototype.statementToCode = function(block, name) {
 Blockly.CodeGenerator.prototype.addReservedWords = function(words) {
   this.RESERVED_WORDS_ += words + ',';
 };
+
+/**
+ * Initialize the database of variable names.
+ */
+Blockly.CodeGenerator.prototype.init = goog.abstractMethod;
+
+/**
+ * Prepend the generated code with the variable definitions.
+ * @param {string} code Generated code.
+ * @return {string} Completed code.
+ */
+Blockly.CodeGenerator.prototype.finish = goog.abstractMethod;
+
+/**
+ * Common tasks for generating JavaScript from blocks.
+ * Handles comments for the specified block and any connected value blocks.
+ * Calls any statements following this block.
+ * @param {!Blockly.Block} block The current block.
+ * @param {string} code The JavaScript code created for this block.
+ * @return {string} JavaScript code with comments and subsequent blocks added.
+ * @this {Blockly.CodeGenerator}
+ * @protected
+ */
+Blockly.CodeGenerator.prototype.scrub_ = goog.abstractMethod;

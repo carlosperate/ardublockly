@@ -846,13 +846,13 @@ goog.addDependency('../../third_party/closure/goog/loremipsum/text/loremipsum.js
 goog.addDependency('../../third_party/closure/goog/mochikit/async/deferred.js', ['goog.async.Deferred', 'goog.async.Deferred.AlreadyCalledError', 'goog.async.Deferred.CancelledError'], ['goog.array', 'goog.asserts', 'goog.debug.Error']);
 goog.addDependency('../../third_party/closure/goog/mochikit/async/deferredlist.js', ['goog.async.DeferredList'], ['goog.array', 'goog.async.Deferred']);
 goog.addDependency('../../third_party/closure/goog/osapi/osapi.js', ['goog.osapi'], []);
-goog.addDependency('../../../blockly/blockly_core.js', ['Blockly.core'], ['Blockly', 'Blockly.Block', 'Blockly.BlockSvg', 'Blockly.Bubble', 'Blockly.CodeGenerator', 'Blockly.Comment', 'Blockly.Component', 'Blockly.Connection', 'Blockly.ConnectionDB', 'Blockly.ContextMenu', 'Blockly.Field', 'Blockly.FieldCheckbox', 'Blockly.FieldColour', 'Blockly.FieldDropdown', 'Blockly.FieldImage', 'Blockly.FieldLabel', 'Blockly.FieldTextInput', 'Blockly.FieldVariable', 'Blockly.Flyout', 'Blockly.Generator', 'Blockly.Input', 'Blockly.Language', 'Blockly.Mutator', 'Blockly.Names', 'Blockly.Procedures', 'Blockly.Scrollbar', 'Blockly.ScrollbarPair', 'Blockly.SvgComponent', 'Blockly.Toolbox', 'Blockly.Tooltip', 'Blockly.Trashcan', 'Blockly.Variables', 'Blockly.Warning', 'Blockly.Workspace', 'Blockly.Xml', 'Blockly.inject', 'Blockly.renaming_map', 'Blockly.utils', 'goog.debug.ErrorHandler']);
+goog.addDependency('../../../blockly/blockly_core.js', ['Blockly.core'], ['Blockly', 'Blockly.Block', 'Blockly.BlockSvg', 'Blockly.Bubble', 'Blockly.CodeGenerator', 'Blockly.Comment', 'Blockly.Component', 'Blockly.Connection', 'Blockly.ConnectionDB', 'Blockly.ContextMenu', 'Blockly.Field', 'Blockly.FieldCheckbox', 'Blockly.FieldColour', 'Blockly.FieldDropdown', 'Blockly.FieldImage', 'Blockly.FieldLabel', 'Blockly.FieldTextInput', 'Blockly.FieldVariable', 'Blockly.Flyout', 'Blockly.Generator', 'Blockly.Input', 'Blockly.Language', 'Blockly.Metrics', 'Blockly.Mutator', 'Blockly.Names', 'Blockly.Procedures', 'Blockly.Scrollbar', 'Blockly.ScrollbarPair', 'Blockly.SvgComponent', 'Blockly.Toolbox', 'Blockly.Tooltip', 'Blockly.Trashcan', 'Blockly.Variables', 'Blockly.Warning', 'Blockly.Workspace', 'Blockly.Xml', 'Blockly.inject', 'Blockly.renaming_map', 'Blockly.utils', 'goog.debug.ErrorHandler']);
 goog.addDependency('../../../blockly/core/block.js', ['Blockly.Block'], ['Blockly.BlockSvg', 'Blockly.Comment', 'Blockly.Connection', 'Blockly.ContextMenu', 'Blockly.Input', 'Blockly.Language', 'Blockly.Mutator', 'Blockly.Warning', 'Blockly.Workspace', 'Blockly.Xml', 'goog.Timer']);
 goog.addDependency('../../../blockly/core/block_svg.js', ['Blockly.BlockSvg'], ['goog.userAgent']);
 goog.addDependency('../../../blockly/core/blockly.js', ['Blockly'], ['Blockly.Block', 'Blockly.Connection', 'Blockly.Toolbox', 'Blockly.Workspace', 'Blockly.renaming_map', 'Blockly.utils', 'goog.async.Deferred', 'goog.color', 'goog.dom', 'goog.events', 'goog.string', 'goog.ui.ColorPicker', 'goog.ui.tree.TreeControl', 'goog.userAgent']);
 goog.addDependency('../../../blockly/core/blockly_renaming_map.js', ['Blockly.renaming_map'], []);
 goog.addDependency('../../../blockly/core/bubble.js', ['Blockly.Bubble'], ['Blockly.Workspace']);
-goog.addDependency('../../../blockly/core/comment.js', ['Blockly.Comment'], []);
+goog.addDependency('../../../blockly/core/comment.js', ['Blockly.Comment'], ['goog.functions']);
 goog.addDependency('../../../blockly/core/component.js', ['Blockly.Component'], ['goog.asserts', 'goog.ui.Component']);
 goog.addDependency('../../../blockly/core/connection.js', ['Blockly.Connection', 'Blockly.ConnectionDB'], ['Blockly.Workspace']);
 goog.addDependency('../../../blockly/core/contextmenu.js', ['Blockly.ContextMenu'], []);
@@ -869,6 +869,7 @@ goog.addDependency('../../../blockly/core/generator.js', ['Blockly.CodeGenerator
 goog.addDependency('../../../blockly/core/inject.js', ['Blockly.inject'], ['goog.dom']);
 goog.addDependency('../../../blockly/core/input.js', ['Blockly.Input'], ['Blockly.Connection', 'Blockly.FieldLabel']);
 goog.addDependency('../../../blockly/core/language.js', ['Blockly.Language'], []);
+goog.addDependency('../../../blockly/core/metrics.js', ['Blockly.Metrics'], ['goog.object']);
 goog.addDependency('../../../blockly/core/mutator.js', ['Blockly.Mutator'], ['Blockly.Bubble', 'goog.Disposable']);
 goog.addDependency('../../../blockly/core/names.js', ['Blockly.Names'], []);
 goog.addDependency('../../../blockly/core/procedures.js', ['Blockly.Procedures'], ['Blockly.FieldVariable', 'Blockly.Names', 'Blockly.Workspace']);

@@ -40,15 +40,19 @@ goog.require('Blockly.BlockSvg');
 Blockly.Field = function(text) {
   this.sourceBlock_ = null;
   // Build the DOM.
-  this.group_ = Blockly.createSvgElement('g', {}, null);
-  this.borderRect_ = Blockly.createSvgElement('rect',
-      {'rx': 4,
-       'ry': 4,
-       'x': -Blockly.BlockSvg.SEP_SPACE_X / 2,
-       'y': -12,
-       'height': 16}, this.group_);
-  this.textElement_ = Blockly.createSvgElement('text',
-      {'class': 'blocklyText'}, this.group_);
+  this.group_ = /** @type {!SVGGElement} */ (
+      Blockly.createSvgElement('g', {}, null));
+  this.borderRect_ = /** @type {!SVGRectElement} */ (
+      Blockly.createSvgElement(
+          'rect',
+          {'rx': 4,
+           'ry': 4,
+           'x': -Blockly.BlockSvg.SEP_SPACE_X / 2,
+           'y': -12,
+           'height': 16},
+          this.group_));
+  this.textElement_ = /** @type {!SVGTextElement} */ (
+      Blockly.createSvgElement('text', {'class': 'blocklyText'}, this.group_));
   if (this.CURSOR) {
     // Different field types show different cursor hints.
     this.group_.style.cursor = this.CURSOR;

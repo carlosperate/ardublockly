@@ -38,7 +38,7 @@ Blockly.Toolbox.width = 0;
 
 /**
  * The SVG group currently selected.
- * @type {Element}
+ * @type {SVGGElement}
  * @private
  */
 Blockly.Toolbox.selectedOption_ = null;
