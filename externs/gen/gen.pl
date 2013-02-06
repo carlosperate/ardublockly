@@ -1,6 +1,10 @@
 #!/usr/bin/perl
 use strict;
 use File::Slurp;
+use Getopt::Long;
+
+GetOptions('v' => \$::verbose,
+    ) or die;
 
 my $filename = shift or die;
 my $contents = read_file($filename);
@@ -68,13 +72,20 @@ sub jstype {
 
 sub printattribute {
     my($class, $type, $name, $throw) = @_;
-    warn "printattribute <$class>, <$type>, <$name>, <$throw>";
+    warn "printattribute <$class>, <$type>, <$name>, <$throw>" if $::verbose;
     printf("/** \@type {%s} */ %s.prototype.%s;\n", jstype($type), $class, $name);
+}
+
+sub printconst {
+    my($class, $type, $name) = @_;
+    warn "printconst <$class>, <$type>, <$name>" if $::verbose;
+    printf("\n\n/**\n * \@type {%s}\n * \@const\n */\n%s.prototype.%s;\n",
+           jstype($type), $class, $name);
 }
 
 sub printmethod {
     my($class, $ret, $name, $args, $throw) = @_;
-    warn "printmethod <$class>, <$ret>, <$name>, <$args>, <$throw>\n";
+    warn "printmethod <$class>, <$ret>, <$name>, <$args>, <$throw>\n" if $::verbose;
     printf("\n/**\n");
     $args = [split(/,/, $args)];
     my @argnames;
@@ -97,8 +108,13 @@ sub printmethod {
 
 sub printmember {
     my($class, $member) = @_;
-    if ($member =~ /attribute\s+(.*?)\s+(\w+)(?:\s+setraises\((\w+)\))?;/) {
+    if ($member =~ m(//)) {
+    }
+    elsif ($member =~ /attribute\s+(.*?)\s+(\w+)(?:\s+setraises\((\w+)\))?;/) {
         printattribute($class, $1, $2, $3);
+    }
+    elsif ($member =~ /const\s+(.*?)\s+(\w+)\s*=\s*[^;]+?;/) {
+        printconst($class, $1, $2);
     }
     elsif ($member =~ /\s*(\w+)\s*(\w+)\(([^\)]*)\)(?:\s*raises\((\w+)\))?;/) {
         printmethod($class, $1, $2, $3, $4);

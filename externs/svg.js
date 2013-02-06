@@ -237,6 +237,83 @@ function SVGAnimatedNumberList() {}
  * @interface
  */
 function SVGLength() {}
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_NUMBER;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_PERCENTAGE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_EMS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_EXS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_PX;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_CM;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_MM;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_IN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_PT;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGLength.prototype.SVG_LENGTHTYPE_PC;
 /** @type {number} */ SVGLength.prototype.unitType;
 /** @type {number} */ SVGLength.prototype.value;
 /** @type {number} */ SVGLength.prototype.valueInSpecifiedUnits;
@@ -284,6 +361,27 @@ function SVGAnimatedEnumeration() {}
  * @implements {SVGStylable}
  */
 function SVGTextContentElement() {}
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTextContentElement.prototype.LENGTHADJUST_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTextContentElement.prototype.LENGTHADJUST_SPACING;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTextContentElement.prototype.LENGTHADJUST_SPACINGANDGLYPHS;
 /** @type {SVGAnimatedLength} */ SVGTextContentElement.prototype.textLength;
 /** @type {SVGAnimatedEnumeration} */ SVGTextContentElement.prototype.lengthAdjust;
 
@@ -470,6 +568,55 @@ SVGMatrix.prototype.skewY = function(angle) {};
  * @interface
  */
 function SVGTransform() {}
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTransform.prototype.SVG_TRANSFORM_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTransform.prototype.SVG_TRANSFORM_MATRIX;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTransform.prototype.SVG_TRANSFORM_TRANSLATE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTransform.prototype.SVG_TRANSFORM_SCALE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTransform.prototype.SVG_TRANSFORM_ROTATE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTransform.prototype.SVG_TRANSFORM_SKEWX;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGTransform.prototype.SVG_TRANSFORM_SKEWY;
 /** @type {number} */ SVGTransform.prototype.type;
 /** @type {SVGMatrix} */ SVGTransform.prototype.matrix;
 /** @type {number} */ SVGTransform.prototype.angle;
@@ -764,6 +911,27 @@ function SVGRect() {}
  * @interface
  */
 function SVGZoomAndPan() {}
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGZoomAndPan.prototype.SVG_ZOOMANDPAN_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGZoomAndPan.prototype.SVG_ZOOMANDPAN_DISABLE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGZoomAndPan.prototype.SVG_ZOOMANDPAN_MAGNIFY;
 /** @type {number} */ SVGZoomAndPan.prototype.zoomAndPan;
 
 
@@ -781,6 +949,104 @@ function SVGAnimatedRect() {}
  * @interface
  */
 function SVGPreserveAspectRatio() {}
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_NONE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMINYMIN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMIDYMIN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMAXYMIN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMINYMID;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMIDYMID;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMAXYMID;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMINYMAX;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMIDYMAX;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_PRESERVEASPECTRATIO_XMAXYMAX;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_MEETORSLICE_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_MEETORSLICE_MEET;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPreserveAspectRatio.prototype.SVG_MEETORSLICE_SLICE;
 /** @type {number} */ SVGPreserveAspectRatio.prototype.align;
 /** @type {number} */ SVGPreserveAspectRatio.prototype.meetOrSlice;
 
@@ -817,6 +1083,27 @@ function SVGViewSpec() {}
 /** @type {string} */ SVGViewSpec.prototype.transformString;
 /** @type {string} */ SVGViewSpec.prototype.viewTargetString;
 // Members of SVGZoomAndPan
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGViewSpec.prototype.SVG_ZOOMANDPAN_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGViewSpec.prototype.SVG_ZOOMANDPAN_DISABLE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGViewSpec.prototype.SVG_ZOOMANDPAN_MAGNIFY;
 /** @type {number} */ SVGViewSpec.prototype.zoomAndPan;
 // Members of SVGFitToViewBox
 /** @type {SVGAnimatedRect} */ SVGViewSpec.prototype.viewBox;
@@ -843,6 +1130,41 @@ SVGPoint.prototype.matrixTransform = function(matrix) {};
  * @interface
  */
 function SVGAngle() {}
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGAngle.prototype.SVG_ANGLETYPE_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGAngle.prototype.SVG_ANGLETYPE_UNSPECIFIED;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGAngle.prototype.SVG_ANGLETYPE_DEG;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGAngle.prototype.SVG_ANGLETYPE_RAD;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGAngle.prototype.SVG_ANGLETYPE_GRAD;
 /** @type {number} */ SVGAngle.prototype.unitType;
 /** @type {number} */ SVGAngle.prototype.value;
 /** @type {number} */ SVGAngle.prototype.valueInSpecifiedUnits;
@@ -1108,6 +1430,27 @@ SVGSVGElement.prototype.getTransformToElement = function(element) {};
 /** @type {SVGAnimatedRect} */ SVGSVGElement.prototype.viewBox;
 /** @type {SVGAnimatedPreserveAspectRatio} */ SVGSVGElement.prototype.preserveAspectRatio;
 // Members of SVGZoomAndPan
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGSVGElement.prototype.SVG_ZOOMANDPAN_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGSVGElement.prototype.SVG_ZOOMANDPAN_DISABLE;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGSVGElement.prototype.SVG_ZOOMANDPAN_MAGNIFY;
 /** @type {number} */ SVGSVGElement.prototype.zoomAndPan;
 // Members of SVGDocumentEvent
 
@@ -1275,6 +1618,146 @@ SVGRectElement.prototype.getTransformToElement = function(element) {};
  * @interface
  */
 function SVGPathSeg() {}
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSeg.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSeg.prototype.pathSegType;
 /** @type {string} */ SVGPathSeg.prototype.pathSegTypeAsLetter;
 
@@ -1286,6 +1769,146 @@ function SVGPathSeg() {}
  */
 function SVGPathSegClosePath() {}
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegClosePath.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegClosePath.prototype.pathSegType;
 /** @type {string} */ SVGPathSegClosePath.prototype.pathSegTypeAsLetter;
 
@@ -1299,6 +1922,146 @@ function SVGPathSegMovetoRel() {}
 /** @type {number} */ SVGPathSegMovetoRel.prototype.x;
 /** @type {number} */ SVGPathSegMovetoRel.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegMovetoRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegMovetoRel.prototype.pathSegTypeAsLetter;
 
@@ -1312,6 +2075,146 @@ function SVGPathSegMovetoAbs() {}
 /** @type {number} */ SVGPathSegMovetoAbs.prototype.x;
 /** @type {number} */ SVGPathSegMovetoAbs.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegMovetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegMovetoAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegMovetoAbs.prototype.pathSegTypeAsLetter;
 
@@ -1325,6 +2228,146 @@ function SVGPathSegLinetoAbs() {}
 /** @type {number} */ SVGPathSegLinetoAbs.prototype.x;
 /** @type {number} */ SVGPathSegLinetoAbs.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegLinetoAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegLinetoAbs.prototype.pathSegTypeAsLetter;
 
@@ -1338,6 +2381,146 @@ function SVGPathSegLinetoRel() {}
 /** @type {number} */ SVGPathSegLinetoRel.prototype.x;
 /** @type {number} */ SVGPathSegLinetoRel.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegLinetoRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegLinetoRel.prototype.pathSegTypeAsLetter;
 
@@ -1350,6 +2533,146 @@ function SVGPathSegLinetoRel() {}
 function SVGPathSegLinetoHorizontalRel() {}
 /** @type {number} */ SVGPathSegLinetoHorizontalRel.prototype.x;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegLinetoHorizontalRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegLinetoHorizontalRel.prototype.pathSegTypeAsLetter;
 
@@ -1362,6 +2685,146 @@ function SVGPathSegLinetoHorizontalRel() {}
 function SVGPathSegLinetoHorizontalAbs() {}
 /** @type {number} */ SVGPathSegLinetoHorizontalAbs.prototype.x;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoHorizontalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegLinetoHorizontalAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegLinetoHorizontalAbs.prototype.pathSegTypeAsLetter;
 
@@ -1374,6 +2837,146 @@ function SVGPathSegLinetoHorizontalAbs() {}
 function SVGPathSegLinetoVerticalAbs() {}
 /** @type {number} */ SVGPathSegLinetoVerticalAbs.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegLinetoVerticalAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegLinetoVerticalAbs.prototype.pathSegTypeAsLetter;
 
@@ -1386,6 +2989,146 @@ function SVGPathSegLinetoVerticalAbs() {}
 function SVGPathSegLinetoVerticalRel() {}
 /** @type {number} */ SVGPathSegLinetoVerticalRel.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegLinetoVerticalRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegLinetoVerticalRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegLinetoVerticalRel.prototype.pathSegTypeAsLetter;
 
@@ -1399,6 +3142,146 @@ function SVGPathSegCurvetoQuadraticSmoothRel() {}
 /** @type {number} */ SVGPathSegCurvetoQuadraticSmoothRel.prototype.x;
 /** @type {number} */ SVGPathSegCurvetoQuadraticSmoothRel.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoQuadraticSmoothRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoQuadraticSmoothRel.prototype.pathSegTypeAsLetter;
 
@@ -1412,6 +3295,146 @@ function SVGPathSegCurvetoQuadraticSmoothAbs() {}
 /** @type {number} */ SVGPathSegCurvetoQuadraticSmoothAbs.prototype.x;
 /** @type {number} */ SVGPathSegCurvetoQuadraticSmoothAbs.prototype.y;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoQuadraticSmoothAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoQuadraticSmoothAbs.prototype.pathSegTypeAsLetter;
 
@@ -1427,6 +3450,146 @@ function SVGPathSegCurvetoCubicSmoothRel() {}
 /** @type {number} */ SVGPathSegCurvetoCubicSmoothRel.prototype.x2;
 /** @type {number} */ SVGPathSegCurvetoCubicSmoothRel.prototype.y2;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoCubicSmoothRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoCubicSmoothRel.prototype.pathSegTypeAsLetter;
 
@@ -1442,6 +3605,146 @@ function SVGPathSegCurvetoCubicSmoothAbs() {}
 /** @type {number} */ SVGPathSegCurvetoCubicSmoothAbs.prototype.x2;
 /** @type {number} */ SVGPathSegCurvetoCubicSmoothAbs.prototype.y2;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicSmoothAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoCubicSmoothAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoCubicSmoothAbs.prototype.pathSegTypeAsLetter;
 
@@ -1460,6 +3763,146 @@ function SVGPathSegArcRel() {}
 /** @type {boolean} */ SVGPathSegArcRel.prototype.largeArcFlag;
 /** @type {boolean} */ SVGPathSegArcRel.prototype.sweepFlag;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegArcRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegArcRel.prototype.pathSegTypeAsLetter;
 
@@ -1478,6 +3921,146 @@ function SVGPathSegArcAbs() {}
 /** @type {boolean} */ SVGPathSegArcAbs.prototype.largeArcFlag;
 /** @type {boolean} */ SVGPathSegArcAbs.prototype.sweepFlag;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegArcAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegArcAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegArcAbs.prototype.pathSegTypeAsLetter;
 
@@ -1493,6 +4076,146 @@ function SVGPathSegCurvetoQuadraticRel() {}
 /** @type {number} */ SVGPathSegCurvetoQuadraticRel.prototype.x1;
 /** @type {number} */ SVGPathSegCurvetoQuadraticRel.prototype.y1;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoQuadraticRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoQuadraticRel.prototype.pathSegTypeAsLetter;
 
@@ -1508,6 +4231,146 @@ function SVGPathSegCurvetoQuadraticAbs() {}
 /** @type {number} */ SVGPathSegCurvetoQuadraticAbs.prototype.x1;
 /** @type {number} */ SVGPathSegCurvetoQuadraticAbs.prototype.y1;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoQuadraticAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoQuadraticAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoQuadraticAbs.prototype.pathSegTypeAsLetter;
 
@@ -1525,6 +4388,146 @@ function SVGPathSegCurvetoCubicRel() {}
 /** @type {number} */ SVGPathSegCurvetoCubicRel.prototype.x2;
 /** @type {number} */ SVGPathSegCurvetoCubicRel.prototype.y2;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicRel.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoCubicRel.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoCubicRel.prototype.pathSegTypeAsLetter;
 
@@ -1542,6 +4545,146 @@ function SVGPathSegCurvetoCubicAbs() {}
 /** @type {number} */ SVGPathSegCurvetoCubicAbs.prototype.x2;
 /** @type {number} */ SVGPathSegCurvetoCubicAbs.prototype.y2;
 // Members of SVGPathSeg
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_UNKNOWN;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CLOSEPATH;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_MOVETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_MOVETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_LINETO_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_LINETO_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_CUBIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_CUBIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_QUADRATIC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_QUADRATIC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_ARC_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_ARC_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_LINETO_HORIZONTAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_LINETO_HORIZONTAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_LINETO_VERTICAL_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_LINETO_VERTICAL_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_CUBIC_SMOOTH_REL;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_ABS;
+
+
+/**
+ * @type {number}
+ * @const
+ */
+SVGPathSegCurvetoCubicAbs.prototype.PATHSEG_CURVETO_QUADRATIC_SMOOTH_REL;
 /** @type {number} */ SVGPathSegCurvetoCubicAbs.prototype.pathSegType;
 /** @type {string} */ SVGPathSegCurvetoCubicAbs.prototype.pathSegTypeAsLetter;
 
