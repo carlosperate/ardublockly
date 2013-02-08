@@ -45,7 +45,7 @@ Blockly.Workspace = function(editable) {
 
   /** @type {boolean} */
   this.editable = editable;
-  
+
   /**
    * @type {!Array.<Blockly.Block>}
    * @private

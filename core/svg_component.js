@@ -205,7 +205,8 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
             var xy = block.getRelativeToSurfaceXY();
             var bBox = block.getSvgRoot().getBBox();
             if ((xy.y < MARGIN - bBox.height) ||  // Off the top.
-                (Blockly.RTL ? xy.x > svgSize.width - this.flyout_.width_ + MARGIN :
+                (Blockly.RTL ?
+                 xy.x > svgSize.width - this.flyout_.width_ + MARGIN :
                  xy.x < this.flyout_.width_ - MARGIN) ||  // Over the flyout.
                 (xy.y > svgSize.height - MARGIN) || // Off the bottom.
                 (Blockly.RTL ? xy.x < MARGIN :

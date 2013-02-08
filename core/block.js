@@ -174,10 +174,10 @@ Blockly.Block.terminateDrag_ = function() {
     Blockly.unbindEvent_(Blockly.Block.onMouseMoveWrapper_);
     Blockly.Block.onMouseMoveWrapper_ = null;
   }
+  var selected = Blockly.selected;
   if (Blockly.Block.dragMode_ == 2) {
     // Terminate a drag operation.
-    if (Blockly.selected) {
-      var selected = Blockly.selected;
+    if (selected) {
       // Update the connection locations.
       var xy = selected.getRelativeToSurfaceXY();
       var dx = xy.x - selected.startDragX;
@@ -190,8 +190,10 @@ Blockly.Block.terminateDrag_ = function() {
           selected.bumpNeighbours_, Blockly.BUMP_DELAY, selected);
       // Fire an event to allow scrollbars to resize.
       Blockly.fireUiEvent(window, 'resize');
-      selected.workspace.fireChangeEvent();
     }
+  }
+  if (selected) {
+    selected.workspace.fireChangeEvent();
   }
   Blockly.Block.dragMode_ = 0;
 };
