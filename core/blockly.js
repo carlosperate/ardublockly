@@ -261,7 +261,8 @@ Blockly.onMouseDown_ = function(e) {
     if (Blockly.ContextMenu) {
       Blockly.showContextMenu_(e.clientX, e.clientY);
     }
-  } else if (!Blockly.editable || isTargetSvg) {
+  } else if ((!Blockly.editable || isTargetSvg) &&
+             Blockly.mainWorkspace.scrollbar) {
     // If the workspace is editable, only allow dragging when gripping empty
     // space.  Otherwise, allow dragging when gripping anywhere.
     Blockly.mainWorkspace.dragMode = true;

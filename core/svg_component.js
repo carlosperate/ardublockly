@@ -178,10 +178,51 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
 
   // TODO(scr): make components out of these children as well and add
   // them in createDom().
-  if (Blockly.Toolbox && Blockly.editable) {
-    // TODO(scr): When Toolbox is a component, remove this line.
-    Blockly.mainWorkspace = this.workspace_;
-    Blockly.Toolbox.createDom(svg, container);
+  Blockly.mainWorkspace = this.workspace_;
+  if (Blockly.editable) {
+    // Determine if there needs to be a category tree, or a simple list of
+    // blocks.  This cannot be changed later, since the UI is very different.
+    if (Blockly.Toolbox) {
+      // TODO(scr): When Toolbox is a component, remove this line.
+      Blockly.Toolbox.createDom(svg, container);
+    } else {
+      /**
+       * @type {Blockly.Flyout}
+       * @private
+       */
+      this.workspace_.flyout_ = new Blockly.Flyout(
+          this.workspace_, Blockly.getMainWorkspaceMetrics, true);
+      this.workspace_.flyout_.autoClose = false;
+      // Insert the flyout behind the workspace so that blocks appear on top.
+      this.workspace_.flyout_.renderBefore(this.workspace_.svgGroup_);
+      var workspaceChanged = function() {
+        // Delete any block that's sitting on top of the flyout, or off window.
+        if (Blockly.Block.dragMode_ == 0) {
+          var blocks = this.getTopBlocks(false);
+          var svgSize = Blockly.svgSize();
+          var MARGIN = 10;
+          for (var b = 0, block; block = blocks[b]; b++) {
+            var xy = block.getRelativeToSurfaceXY();
+            var bBox = block.getSvgRoot().getBBox();
+            if ((xy.y < MARGIN - bBox.height) ||  // Off the top.
+                (Blockly.RTL ? xy.x > svgSize.width - this.flyout_.width_ + MARGIN :
+                 xy.x < this.flyout_.width_ - MARGIN) ||  // Over the flyout.
+                (xy.y > svgSize.height - MARGIN) || // Off the bottom.
+                (Blockly.RTL ? xy.x < MARGIN :
+                 xy.x > svgSize.width - MARGIN) // Off the far edge.
+                ) {
+              block.dispose(false, true);
+            }
+          }
+        }
+      }
+      Blockly.bindEvent_(this.workspace_.getCanvas(), 'blocklyWorkspaceChange',
+          this.workspace_, workspaceChanged);
+    }
+  } else {
+    // Not editable.  Neither of these will be needed.
+    delete Blockly.Toolbox;
+    delete Blockly.Flyout;
   }
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
   if (Blockly.editable && Blockly.FieldDropdown) {

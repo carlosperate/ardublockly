@@ -219,9 +219,10 @@ Blockly.Flyout.prototype.init = function() {
 
   this.hide();
 
-  // If the document resizes, reposition the toolbox.
+  // If the document resizes, reposition the flyout.
   this.getHandler().listen(
       goog.global, goog.events.EventType.RESIZE, this.position_);
+  this.position_();
 };
 
 
@@ -324,10 +325,12 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         /** @type {!Blockly.Workspace} */ (this.workspace_));
   } else {
     for (var i = 0, xml; xml = xmlList[i]; i++) {
-      var block = Blockly.Xml.domToBlock_(
-          /** @type {!Blockly.Workspace} */ (this.workspace_), xml);
-      blocks[i] = block;
-      gaps[i] = margin * 2;
+      if (xml.tagName && xml.tagName.toUpperCase() == 'BLOCK') {
+        var block = Blockly.Xml.domToBlock_(
+            /** @type {!Blockly.Workspace} */ (this.workspace_), xml);
+        blocks.push(block);
+        gaps.push(margin * 2);
+      }
     }
   }
 

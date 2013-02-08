@@ -66,11 +66,16 @@ Blockly.parseOptions_ = function(options) {
   if (typeof tree == 'string') {
     tree = Blockly.Xml.textToDom(tree);
   }
+  var hasCategories = !!tree.getElementsByTagName('category').length;
+  if (options['trashcan'] === undefined) {
+    options['trashcan'] = hasCategories;
+  }
   return {
       RTL: !!options['rtl'],
       editable: !options['readOnly'],
       pathToBlockly: options['path'] || './',
-      Trashcan: (options['trashcan'] === false) ? undefined : Blockly.Trashcan,
+      Toolbox: hasCategories ? Blockly.Toolbox : undefined,
+      Trashcan: options['trashcan'] ? Blockly.Trashcan : undefined,
       languageTree: tree
   }
 };
@@ -94,14 +99,18 @@ Blockly.init_ = function() {
   Blockly.bindEvent_(Blockly.svg, 'contextmenu', null, Blockly.onContextMenu_);
   Blockly.bindEvent_(document, 'keydown', null, Blockly.onKeyDown_);
 
-  if (Blockly.editable) {
-    Blockly.Toolbox && Blockly.Toolbox.init();
+  if (Blockly.Toolbox) {
+    Blockly.Toolbox.init();
+    Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
+        Blockly.mainWorkspace.getBubbleCanvas(),
+        Blockly.getMainWorkspaceMetrics, Blockly.setMainWorkspaceMetrics);
+  } else if (Blockly.Flyout) {
+    // Build a fixed flyout with the root blocks.
+    Blockly.mainWorkspace.flyout_.init();
+    Blockly.mainWorkspace.flyout_.show(Blockly.languageTree.childNodes);
   }
 
   Blockly.mainWorkspace.addTrashcan(Blockly.getMainWorkspaceMetrics);
-  Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
-      Blockly.mainWorkspace.getBubbleCanvas(),
-      Blockly.getMainWorkspaceMetrics, Blockly.setMainWorkspaceMetrics);
 
   // Load the sounds.
   Blockly.loadAudio_('click');

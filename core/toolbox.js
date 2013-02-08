@@ -117,7 +117,8 @@ Blockly.Toolbox.init = function() {
   tree.render(Blockly.Toolbox.HtmlDiv);
 
   // If the document resizes, reposition the toolbox.
-  goog.events.listen(window, 'resize', Blockly.Toolbox.position_);
+  goog.events.listen(window, goog.events.EventType.RESIZE,
+                     Blockly.Toolbox.position_);
 };
 
 /**
@@ -143,11 +144,12 @@ Blockly.Toolbox.position_ = function() {
 };
 
 /**
- * Fill the toolbox with options.
+ * Fill the toolbox with categories and blocks.
  * @private
  */
 Blockly.Toolbox.populate_ = function() {
   var rootOut = Blockly.Toolbox.tree_;
+  rootOut.blocks = [];
   function syncTrees(treeIn, treeOut) {
     for (var i = 0, childIn; childIn = treeIn.childNodes[i]; i++) {
       if (!childIn.tagName) {
@@ -172,6 +174,10 @@ Blockly.Toolbox.populate_ = function() {
     }
   }
   syncTrees(Blockly.languageTree, Blockly.Toolbox.tree_);
+
+  if (rootOut.blocks.length) {
+    throw 'Toolbox cannot have both blocks and categories in the root level.';
+  }
 
   // Fire a resize event since the toolbox may have changed width and height.
   Blockly.fireUiEvent(window, 'resize');

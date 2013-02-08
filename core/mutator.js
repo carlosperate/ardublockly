@@ -30,7 +30,6 @@ goog.require('Blockly.Bubble');
 goog.require('goog.Disposable');
 
 
-
 /**
  * Class for a mutator dialog.
  * @param {!Array.<string>} quarkNames List of names of sub-blocks for flyout.
@@ -148,7 +147,6 @@ Blockly.Mutator.prototype.createEditor_ = function() {
       {'class': 'blocklyMutatorBackground',
        'height': '100%', 'width': '100%'}, this.svgDialog_);
 
-  
   this.workspace_ = new Blockly.Workspace(true);
   this.flyout_ = new Blockly.Flyout(
     this.workspace_, goog.bind(this.getFlyoutMetrics_, this), false);

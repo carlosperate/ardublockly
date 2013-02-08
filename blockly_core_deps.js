@@ -48,7 +48,7 @@ goog.addDependency('../../closure/goog/date/relative.js', ['goog.date.relative']
 goog.addDependency('../../closure/goog/date/utcdatetime.js', ['goog.date.UtcDateTime'], ['goog.date', 'goog.date.Date', 'goog.date.DateTime', 'goog.date.Interval']);
 goog.addDependency('../../closure/goog/db/cursor.js', ['goog.db.Cursor'], ['goog.async.Deferred', 'goog.db.Error', 'goog.debug', 'goog.events.EventTarget']);
 goog.addDependency('../../closure/goog/db/db.js', ['goog.db'], ['goog.async.Deferred', 'goog.db.Error', 'goog.db.IndexedDb', 'goog.db.Transaction']);
-goog.addDependency('../../closure/goog/db/error.js', ['goog.db.Error', 'goog.db.Error.ErrorCode', 'goog.db.Error.ErrorName', 'goog.db.Error.VersionChangeBlockedError'], ['goog.debug.Error']);
+goog.addDependency('../../closure/goog/db/error.js', ['goog.db.Error', 'goog.db.Error.ErrorCode', 'goog.db.Error.VersionChangeBlockedError'], ['goog.debug.Error']);
 goog.addDependency('../../closure/goog/db/index.js', ['goog.db.Index'], ['goog.async.Deferred', 'goog.db.Error', 'goog.debug']);
 goog.addDependency('../../closure/goog/db/indexeddb.js', ['goog.db.IndexedDb'], ['goog.async.Deferred', 'goog.db.Error', 'goog.db.Error.VersionChangeBlockedError', 'goog.db.ObjectStore', 'goog.db.Transaction', 'goog.db.Transaction.TransactionMode', 'goog.events.Event', 'goog.events.EventHandler', 'goog.events.EventTarget']);
 goog.addDependency('../../closure/goog/db/keyrange.js', ['goog.db.KeyRange'], []);
@@ -481,7 +481,7 @@ goog.addDependency('../../closure/goog/result/result_interface.js', ['goog.resul
 goog.addDependency('../../closure/goog/result/resultutil.js', ['goog.result'], ['goog.array', 'goog.result.DependentResult', 'goog.result.Result', 'goog.result.SimpleResult']);
 goog.addDependency('../../closure/goog/result/simpleresult.js', ['goog.result.SimpleResult', 'goog.result.SimpleResult.StateError'], ['goog.debug.Error', 'goog.result.Result']);
 goog.addDependency('../../closure/goog/soy/data.js', ['goog.soy.data', 'goog.soy.data.SanitizedContent', 'goog.soy.data.SanitizedContentKind'], []);
-goog.addDependency('../../closure/goog/soy/renderer.js', ['goog.soy.InjectedDataSupplier', 'goog.soy.Renderer'], ['goog.asserts', 'goog.dom', 'goog.soy', 'goog.soy.data.SanitizedContent', 'goog.soy.data.SanitizedContentKind']);
+goog.addDependency('../../closure/goog/soy/renderer.js', ['goog.soy.InjectedDataSupplier', 'goog.soy.Renderer'], ['goog.asserts', 'goog.dom', 'goog.soy']);
 goog.addDependency('../../closure/goog/soy/soy.js', ['goog.soy'], ['goog.asserts', 'goog.dom', 'goog.dom.NodeType', 'goog.dom.TagName', 'goog.soy.data']);
 goog.addDependency('../../closure/goog/soy/soy_test.js', ['goog.soy.testHelper'], ['goog.dom', 'goog.soy.data.SanitizedContent', 'goog.soy.data.SanitizedContentKind', 'goog.string', 'goog.userAgent']);
 goog.addDependency('../../closure/goog/spell/spellcheck.js', ['goog.spell.SpellCheck', 'goog.spell.SpellCheck.WordChangedEvent'], ['goog.Timer', 'goog.events.EventTarget', 'goog.structs.Set']);
@@ -511,7 +511,6 @@ goog.addDependency('../../closure/goog/string/linkify.js', ['goog.string.linkify
 goog.addDependency('../../closure/goog/string/parser.js', ['goog.string.Parser'], []);
 goog.addDependency('../../closure/goog/string/path.js', ['goog.string.path'], ['goog.array', 'goog.string']);
 goog.addDependency('../../closure/goog/string/string.js', ['goog.string', 'goog.string.Unicode'], []);
-goog.addDependency('../../closure/goog/string/string_test.js', ['goog.stringTest'], ['goog.functions', 'goog.object', 'goog.string', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit']);
 goog.addDependency('../../closure/goog/string/stringbuffer.js', ['goog.string.StringBuffer'], []);
 goog.addDependency('../../closure/goog/string/stringformat.js', ['goog.string.format'], ['goog.string']);
 goog.addDependency('../../closure/goog/string/stringifier.js', ['goog.string.Stringifier'], []);
@@ -553,7 +552,7 @@ goog.addDependency('../../closure/goog/testing/editor/dom.js', ['goog.testing.ed
 goog.addDependency('../../closure/goog/testing/editor/fieldmock.js', ['goog.testing.editor.FieldMock'], ['goog.dom', 'goog.dom.Range', 'goog.editor.Field', 'goog.testing.LooseMock', 'goog.testing.mockmatchers']);
 goog.addDependency('../../closure/goog/testing/editor/testhelper.js', ['goog.testing.editor.TestHelper'], ['goog.Disposable', 'goog.dom', 'goog.dom.Range', 'goog.editor.BrowserFeature', 'goog.editor.node', 'goog.testing.dom']);
 goog.addDependency('../../closure/goog/testing/events/eventobserver.js', ['goog.testing.events.EventObserver'], ['goog.array']);
-goog.addDependency('../../closure/goog/testing/events/events.js', ['goog.testing.events', 'goog.testing.events.Event'], ['goog.events', 'goog.events.BrowserEvent', 'goog.events.BrowserEvent.MouseButton', 'goog.events.BrowserFeature', 'goog.events.EventTarget', 'goog.events.EventType', 'goog.events.KeyCodes', 'goog.events.Listenable', 'goog.object', 'goog.style', 'goog.userAgent']);
+goog.addDependency('../../closure/goog/testing/events/events.js', ['goog.testing.events', 'goog.testing.events.Event'], ['goog.events', 'goog.events.BrowserEvent', 'goog.events.BrowserEvent.MouseButton', 'goog.events.BrowserFeature', 'goog.events.EventType', 'goog.events.KeyCodes', 'goog.object', 'goog.style', 'goog.userAgent']);
 goog.addDependency('../../closure/goog/testing/events/matchers.js', ['goog.testing.events.EventMatcher'], ['goog.events.Event', 'goog.testing.mockmatchers.ArgumentMatcher']);
 goog.addDependency('../../closure/goog/testing/events/onlinehandler.js', ['goog.testing.events.OnlineHandler'], ['goog.events.EventTarget', 'goog.net.NetworkStatusMonitor']);
 goog.addDependency('../../closure/goog/testing/expectedfailures.js', ['goog.testing.ExpectedFailures'], ['goog.debug.DivConsole', 'goog.debug.Logger', 'goog.dom', 'goog.dom.TagName', 'goog.events', 'goog.events.EventType', 'goog.style', 'goog.testing.JsUnitException', 'goog.testing.TestCase', 'goog.testing.asserts']);
@@ -658,7 +657,7 @@ goog.addDependency('../../closure/goog/ui/css3buttonrenderer.js', ['goog.ui.Css3
 goog.addDependency('../../closure/goog/ui/css3menubuttonrenderer.js', ['goog.ui.Css3MenuButtonRenderer'], ['goog.dom', 'goog.dom.TagName', 'goog.ui.ControlContent', 'goog.ui.INLINE_BLOCK_CLASSNAME', 'goog.ui.MenuButton', 'goog.ui.MenuButtonRenderer', 'goog.ui.registry']);
 goog.addDependency('../../closure/goog/ui/cssnames.js', ['goog.ui.INLINE_BLOCK_CLASSNAME'], []);
 goog.addDependency('../../closure/goog/ui/custombutton.js', ['goog.ui.CustomButton'], ['goog.ui.Button', 'goog.ui.ControlContent', 'goog.ui.CustomButtonRenderer', 'goog.ui.registry']);
-goog.addDependency('../../closure/goog/ui/custombuttonrenderer.js', ['goog.ui.CustomButtonRenderer'], ['goog.a11y.aria.Role', 'goog.dom', 'goog.dom.classes', 'goog.string', 'goog.ui.ButtonRenderer', 'goog.ui.ControlContent', 'goog.ui.INLINE_BLOCK_CLASSNAME']);
+goog.addDependency('../../closure/goog/ui/custombuttonrenderer.js', ['goog.ui.CustomButtonRenderer'], ['goog.a11y.aria', 'goog.dom', 'goog.dom.classes', 'goog.string', 'goog.ui.ButtonRenderer', 'goog.ui.ControlContent', 'goog.ui.INLINE_BLOCK_CLASSNAME']);
 goog.addDependency('../../closure/goog/ui/customcolorpalette.js', ['goog.ui.CustomColorPalette'], ['goog.color', 'goog.dom', 'goog.ui.ColorPalette']);
 goog.addDependency('../../closure/goog/ui/datepicker.js', ['goog.ui.DatePicker', 'goog.ui.DatePicker.Events', 'goog.ui.DatePickerEvent'], ['goog.a11y.aria', 'goog.asserts', 'goog.date', 'goog.date.Date', 'goog.date.Interval', 'goog.dom', 'goog.dom.classes', 'goog.events', 'goog.events.Event', 'goog.events.EventType', 'goog.events.KeyHandler', 'goog.events.KeyHandler.EventType', 'goog.i18n.DateTimeFormat', 'goog.i18n.DateTimeSymbols', 'goog.style', 'goog.ui.Component', 'goog.ui.IdGenerator']);
 goog.addDependency('../../closure/goog/ui/decorate.js', ['goog.ui.decorate'], ['goog.ui.registry']);
@@ -812,7 +811,7 @@ goog.addDependency('../../closure/goog/ui/tree/typeahead.js', ['goog.ui.tree.Typ
 goog.addDependency('../../closure/goog/ui/tristatemenuitem.js', ['goog.ui.TriStateMenuItem', 'goog.ui.TriStateMenuItem.State'], ['goog.dom.classes', 'goog.ui.Component.EventType', 'goog.ui.Component.State', 'goog.ui.ControlContent', 'goog.ui.MenuItem', 'goog.ui.TriStateMenuItemRenderer', 'goog.ui.registry']);
 goog.addDependency('../../closure/goog/ui/tristatemenuitemrenderer.js', ['goog.ui.TriStateMenuItemRenderer'], ['goog.dom.classes', 'goog.ui.MenuItemRenderer']);
 goog.addDependency('../../closure/goog/ui/twothumbslider.js', ['goog.ui.TwoThumbSlider'], ['goog.a11y.aria', 'goog.a11y.aria.Role', 'goog.dom', 'goog.ui.SliderBase']);
-goog.addDependency('../../closure/goog/ui/zippy.js', ['goog.ui.Zippy', 'goog.ui.Zippy.Events', 'goog.ui.ZippyEvent'], ['goog.a11y.aria', 'goog.a11y.aria.Role', 'goog.a11y.aria.State', 'goog.dom', 'goog.dom.classes', 'goog.events', 'goog.events.Event', 'goog.events.EventHandler', 'goog.events.EventTarget', 'goog.events.EventType', 'goog.events.KeyCodes', 'goog.style']);
+goog.addDependency('../../closure/goog/ui/zippy.js', ['goog.ui.Zippy', 'goog.ui.Zippy.Events', 'goog.ui.ZippyEvent'], ['goog.a11y.aria', 'goog.a11y.aria.Role', 'goog.dom', 'goog.dom.classes', 'goog.events', 'goog.events.Event', 'goog.events.EventHandler', 'goog.events.EventTarget', 'goog.events.EventType', 'goog.events.KeyCodes', 'goog.style']);
 goog.addDependency('../../closure/goog/uri/uri.js', ['goog.Uri', 'goog.Uri.QueryData'], ['goog.array', 'goog.string', 'goog.structs', 'goog.structs.Map', 'goog.uri.utils', 'goog.uri.utils.ComponentIndex']);
 goog.addDependency('../../closure/goog/uri/utils.js', ['goog.uri.utils', 'goog.uri.utils.ComponentIndex', 'goog.uri.utils.QueryArray', 'goog.uri.utils.QueryValue', 'goog.uri.utils.StandardQueryParam'], ['goog.asserts', 'goog.string', 'goog.userAgent']);
 goog.addDependency('../../closure/goog/useragent/adobereader.js', ['goog.userAgent.adobeReader'], ['goog.string', 'goog.userAgent']);
@@ -846,6 +845,9 @@ goog.addDependency('../../third_party/closure/goog/loremipsum/text/loremipsum.js
 goog.addDependency('../../third_party/closure/goog/mochikit/async/deferred.js', ['goog.async.Deferred', 'goog.async.Deferred.AlreadyCalledError', 'goog.async.Deferred.CancelledError'], ['goog.array', 'goog.asserts', 'goog.debug.Error']);
 goog.addDependency('../../third_party/closure/goog/mochikit/async/deferredlist.js', ['goog.async.DeferredList'], ['goog.array', 'goog.async.Deferred']);
 goog.addDependency('../../third_party/closure/goog/osapi/osapi.js', ['goog.osapi'], []);
+goog.addDependency('../../third_party/closure/goog/silverlight/clipboardbutton.js', ['goog.silverlight.ClipboardButton', 'goog.silverlight.ClipboardButtonType', 'goog.silverlight.ClipboardEvent', 'goog.silverlight.CopyButton', 'goog.silverlight.PasteButton', 'goog.silverlight.PasteButtonEvent'], ['goog.asserts', 'goog.events.Event', 'goog.math.Size', 'goog.silverlight', 'goog.ui.Component']);
+goog.addDependency('../../third_party/closure/goog/silverlight/silverlight.js', ['goog.silverlight'], []);
+goog.addDependency('../../third_party/closure/goog/silverlight/supporteduseragent.js', ['goog.silverlight.supportedUserAgent'], []);
 goog.addDependency('../../../blockly/blockly_core.js', ['Blockly.core'], ['Blockly', 'Blockly.Block', 'Blockly.BlockSvg', 'Blockly.Bubble', 'Blockly.CodeGenerator', 'Blockly.Comment', 'Blockly.Component', 'Blockly.Connection', 'Blockly.ConnectionDB', 'Blockly.ContextMenu', 'Blockly.Field', 'Blockly.FieldCheckbox', 'Blockly.FieldColour', 'Blockly.FieldDropdown', 'Blockly.FieldImage', 'Blockly.FieldLabel', 'Blockly.FieldTextInput', 'Blockly.FieldVariable', 'Blockly.Flyout', 'Blockly.Generator', 'Blockly.Input', 'Blockly.Language', 'Blockly.Metrics', 'Blockly.Mutator', 'Blockly.Names', 'Blockly.Procedures', 'Blockly.Scrollbar', 'Blockly.ScrollbarPair', 'Blockly.SvgComponent', 'Blockly.Toolbox', 'Blockly.Tooltip', 'Blockly.Trashcan', 'Blockly.Variables', 'Blockly.Warning', 'Blockly.Workspace', 'Blockly.Xml', 'Blockly.inject', 'Blockly.renaming_map', 'Blockly.utils', 'goog.debug.ErrorHandler']);
 goog.addDependency('../../../blockly/core/block.js', ['Blockly.Block'], ['Blockly.BlockSvg', 'Blockly.Comment', 'Blockly.Connection', 'Blockly.ContextMenu', 'Blockly.Input', 'Blockly.Language', 'Blockly.Mutator', 'Blockly.Warning', 'Blockly.Workspace', 'Blockly.Xml', 'goog.Timer']);
 goog.addDependency('../../../blockly/core/block_svg.js', ['Blockly.BlockSvg'], ['goog.userAgent']);
