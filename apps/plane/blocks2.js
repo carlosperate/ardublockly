@@ -58,6 +58,14 @@ Blockly.JavaScript.plane_get_rows2nd = function() {
 };
 
 /**
+ * Calculate the correct answer.
+ * @return {number} Number of seats.
+ */
+function answer() {
+  return 2 + (planeSvg.rows1st * 4) + (planeSvg.rows2nd * 5);
+}
+
+/**
  * Redraw the SVG to show a new number of rows.
  * @param {number} newRows
  */

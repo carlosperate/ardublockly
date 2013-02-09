@@ -94,6 +94,7 @@ function recalculate() {
     // Allow seats to remain NaN.
   }
   planeSvg.setText('seatText', 'Seats: ' + (isNaN(seats) ? '?' : seats));
+  planeSvg.setCorrect(isNaN(seats) ? null : (answer() == seats));
 }
 
 /**

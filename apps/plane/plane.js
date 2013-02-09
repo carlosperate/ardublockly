@@ -49,6 +49,22 @@ function setText(id, text) {
   el.appendChild(document.createTextNode(text));
 }
 
+/**
+ * Display a checkmark or cross next to the answer.
+ * @param {?boolean} ok True for checkmark, false for cross, null for nothing.
+ */
+function setCorrect(ok) {
+  var yes = document.getElementById('seatYes');
+  var no = document.getElementById('seatNo');
+  yes.style.display = 'none';
+  no.style.display = 'none';
+  if (ok === true) {
+    yes.style.display = 'block';
+  } else if (ok === false) {
+    no.style.display = 'block';
+  }
+}
+
 // Initialize the slider.
 var rowSlider = new Slider(60, 330, 425, SVG, sliderChange);
 rowSlider.setValue(0.225);
