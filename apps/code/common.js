@@ -80,7 +80,7 @@ function renderContent() {
   if (content.id == 'content_blocks') {
     // If the workspace was changed by the XML tab, Firefox will have performed
     // an incomplete rendering due to Blockly being invisible.  Rerender.
-    Blockly.mainWorkspace.render();
+    Blockly.mainWorkspace.renderBlocks();
   } else if (content.id == 'content_xml') {
     var xmlTextarea = document.getElementById('textarea_xml');
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
