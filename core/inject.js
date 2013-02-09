@@ -77,7 +77,7 @@ Blockly.parseOptions_ = function(options) {
       Toolbox: hasCategories ? Blockly.Toolbox : undefined,
       Trashcan: options['trashcan'] ? Blockly.Trashcan : undefined,
       languageTree: tree
-  }
+  };
 };
 
 /**

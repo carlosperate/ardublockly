@@ -81,6 +81,9 @@
 .blocklyHidden {
   display: none;
 }
+.blocklyFieldDropdown:not(.blocklyHidden)  {
+  display: block;
+}
 .blocklyTooltipBackground {
   fill: #ffffc7;
   stroke-width: 1px;

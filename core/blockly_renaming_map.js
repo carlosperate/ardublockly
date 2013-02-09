@@ -17,6 +17,7 @@ goog.setCssNameMapping({
   "blocklyNonEditableText": "blocklyNonEditableText",
   "blocklyEditableText": "blocklyEditableText",
   "blocklyHidden": "blocklyHidden",
+  "blocklyFieldDropdown": "blocklyFieldDropdown",
   "blocklyTooltipBackground": "blocklyTooltipBackground",
   "blocklyTooltipShadow": "blocklyTooltipShadow",
   "blocklyContextMenuShadow": "blocklyContextMenuShadow",

@@ -57,14 +57,14 @@ goog.inherits(Blockly.FieldDropdown, Blockly.Field);
  */
 Blockly.FieldDropdown.createDom = function() {
   /*
-  <g class="blocklyHidden">
+  <g class="blocklyHidden blocklyFieldDropdown">
     <rect class="blocklyDropdownMenuShadow" x="0" y="1" rx="2" ry="2"/>
     <rect x="-2" y="-1" rx="2" ry="2"/>
     <g class="blocklyDropdownMenuOptions">
     </g>
   </g>
   */
-  var svgGroup = Blockly.createSvgElement('g', {'class': 'blocklyHidden'},
+  var svgGroup = Blockly.createSvgElement('g', {'class': 'blocklyHidden blocklyFieldDropdown'},
                                           null);
   Blockly.FieldDropdown.svgGroup_ = svgGroup;
   Blockly.FieldDropdown.svgShadow_ = Blockly.createSvgElement('rect',
@@ -119,7 +119,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   goog.dom.removeChildren(svgOptions);
   // The menu must be made visible early since otherwise BBox and
   // getComputedTextLength will return 0.
-  svgGroup.style.display = 'block';
+  svgGroup.setAttribute('class', 'blocklyFieldDropdown');
   Blockly.FieldDropdown.openDropdown_ = this;
 
   function callbackFactory(value) {
@@ -262,6 +262,8 @@ Blockly.FieldDropdown.prototype.setValue = function(newValue) {
  * Hide the dropdown menu.
  */
 Blockly.FieldDropdown.hide = function() {
-  Blockly.FieldDropdown.svgGroup_.style.display = 'none';
+  var svgGroup = Blockly.FieldDropdown.svgGroup_;
+  if (svgGroup)
+    svgGroup.setAttribute('class', 'blocklyHidden blocklyFieldDropdown');
   Blockly.FieldDropdown.openDropdown_ = null;
 };
