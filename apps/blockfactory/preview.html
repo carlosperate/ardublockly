@@ -18,11 +18,7 @@
   </style>
   <script>
     function init() {
-      Blockly.inject(document.body,
-          {path: '../../',
-           readonly: true,
-           toolbox: null,
-           trashcan: false});
+      Blockly.inject(document.body, {path: '../../', readOnly: true});
 
       if (window.parent.initPreview) {
         // Let the top-level application know that Blockly is ready.

@@ -132,20 +132,6 @@ Blockly.Variables.flyoutCategory = function(blocks, gaps, margin, workspace) {
 };
 
 /**
- * Refresh the variable flyout if it is open.
- * Only used if the flyout's autoClose is false.
- */
-Blockly.Variables.refreshFlyoutCategory = function() {
-  // TODO(neil): Determine whether this is needed (there was no
-  //     MSG_PROCEDURE_CATEGORY).
-  if (Blockly.Toolbox && Blockly.Toolbox.flyout_.isVisible() &&
-      Blockly.Toolbox.selectedOption_['cat'] == Blockly.MSG_VARIABLE_CATEGORY) {
-    Blockly.Toolbox.flyout_.hide();
-    Blockly.Toolbox.flyout_.show(Blockly.MSG_VARIABLE_CATEGORY);
-  }
-};
-
-/**
 * Return a new variable name that is not yet being used. This will try to
 * generate single letter variable names in the range 'i' to 'z' to start with.
 * If no unique name is located it will try 'i1' to 'z1', then 'i2' to 'z2' etc.

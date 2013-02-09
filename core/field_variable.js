@@ -112,7 +112,6 @@ Blockly.FieldVariable.dropdownChange = function(text) {
     // Beyond this, all names are legal.
     return newVar && newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
   }
-  window.setTimeout(Blockly.Variables.refreshFlyoutCategory, 1);
   if (text == Blockly.MSG_RENAME_VARIABLE) {
     var oldVar = this.getText();
     text = promptName(Blockly.MSG_RENAME_VARIABLE_TITLE.replace('%1', oldVar),
