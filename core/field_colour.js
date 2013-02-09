@@ -29,15 +29,18 @@ goog.require('Blockly.Field');
 goog.require('goog.ui.ColorPicker');
 
 
+
 /**
  * Class for a colour input field.
  * @param {string} colour The initial colour in '#rrggbb' format.
  * @param {Function} opt_changeHandler A function that is executed when a new
  *     option is selected.
- * @extends Blockly.Field
+ * @extends {Blockly.Field}
  * @constructor
  */
 Blockly.FieldColour = function(colour, opt_changeHandler) {
+  Blockly.FieldColour.superClass_.constructor.call(this);
+
   this.changeHandler_ = opt_changeHandler;
   // Call parent's constructor.
   Blockly.Field.call(this, '\u00A0\u00A0\u00A0');
@@ -45,9 +48,8 @@ Blockly.FieldColour = function(colour, opt_changeHandler) {
   // Set the initial state.
   this.setValue(colour);
 };
-
-// FieldColour is a subclass of Field.
 goog.inherits(Blockly.FieldColour, Blockly.Field);
+
 
 /**
  * Is there a colour palette open?

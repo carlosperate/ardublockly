@@ -30,14 +30,20 @@ goog.provide('Blockly.Field');
 // TODO(scr): Fix circular dependencies
 // goog.require('Blockly.Block');
 goog.require('Blockly.BlockSvg');
+goog.require('goog.Disposable');
+goog.require('goog.events.EventHandler');
+
 
 
 /**
  * Class for an editable field.
- * @param {string} text The initial content of the field.
+ * @param {string=} opt_text The initial content of the field.
  * @constructor
+ * @extends {goog.Disposable}
  */
-Blockly.Field = function(text) {
+Blockly.Field = function(opt_text) {
+  Blockly.Field.superClass_.constructor.call(this);
+
   this.sourceBlock_ = null;
   // Build the DOM.
   this.group_ = /** @type {!SVGGElement} */ (
@@ -58,8 +64,11 @@ Blockly.Field = function(text) {
     this.group_.style.cursor = this.CURSOR;
   }
   this.size_ = {height: 25, width: 0};
-  this.setText(text);
+  if (goog.isDef(opt_text))
+    this.setText(opt_text);
 };
+goog.inherits(Blockly.Field, goog.Disposable);
+
 
 /**
  * Non-breaking space.
@@ -91,8 +100,9 @@ Blockly.Field.prototype.init = function(block) {
 
 /**
  * Dispose of all DOM objects belonging to this editable field.
+ * @override
  */
-Blockly.Field.prototype.dispose = function() {
+Blockly.Field.prototype.disposeInternal = function() {
   if (this.mouseUpWrapper_) {
     Blockly.unbindEvent_(this.mouseUpWrapper_);
     this.mouseUpWrapper_ = null;
@@ -102,6 +112,8 @@ Blockly.Field.prototype.dispose = function() {
   this.group_ = null;
   this.textElement_ = null;
   this.borderRect_ = null;
+
+  Blockly.Field.superClass_.disposeInternal.call(this);
 };
 
 /**

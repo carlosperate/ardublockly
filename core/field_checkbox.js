@@ -28,15 +28,18 @@ goog.provide('Blockly.FieldCheckbox');
 goog.require('Blockly.Field');
 
 
+
 /**
  * Class for a checkbox field.
  * @param {string} state The initial state of the field ('TRUE' or 'FALSE').
  * @param {Function} opt_changeHandler A function that is executed when a new
  *     option is selected.
- * @extends Blockly.Field
+ * @extends {Blockly.Field}
  * @constructor
  */
 Blockly.FieldCheckbox = function(state, opt_changeHandler) {
+  Blockly.FieldCheckbox.superClass_.constructor.call(this);
+
   this.changeHandler_ = opt_changeHandler;
   // Call parent's constructor.
   Blockly.Field.call(this, '');
@@ -49,9 +52,8 @@ Blockly.FieldCheckbox = function(state, opt_changeHandler) {
   // Set the initial state.
   this.setValue(state);
 };
-
-// FieldCheckbox is a subclass of Field.
 goog.inherits(Blockly.FieldCheckbox, Blockly.Field);
+
 
 /**
  * Mouse cursor style when over the hotspot that initiates editability.

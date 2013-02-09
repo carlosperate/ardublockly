@@ -30,6 +30,7 @@ goog.require('goog.asserts');
 goog.require('goog.userAgent');
 
 
+
 /**
  * Class for an editable text field.
  * @param {string} text The initial content of the field.
@@ -37,17 +38,16 @@ goog.require('goog.userAgent');
  *     to validate any constraints on what the user entered.  Takes the new
  *     text as an argument and returns the accepted text or null to abort
  *     the change.
- * @extends Blockly.Field
+ * @extends {Blockly.Field}
  * @constructor
  */
 Blockly.FieldTextInput = function(text, opt_changeHandler) {
-  // Call parent's constructor.
-  Blockly.Field.call(this, text);
+  Blockly.FieldTextInput.superClass_.constructor.call(this, text);
+
   this.changeHandler_ = opt_changeHandler;
 };
-
-// FieldTextInput is a subclass of Field.
 goog.inherits(Blockly.FieldTextInput, Blockly.Field);
+
 
 /**
  * Set the text in this field.

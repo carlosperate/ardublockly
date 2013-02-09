@@ -859,7 +859,7 @@ goog.addDependency('../../../blockly/core/comment.js', ['Blockly.Comment'], ['go
 goog.addDependency('../../../blockly/core/component.js', ['Blockly.Component'], ['goog.asserts', 'goog.ui.Component']);
 goog.addDependency('../../../blockly/core/connection.js', ['Blockly.Connection', 'Blockly.ConnectionDB'], ['Blockly.Workspace']);
 goog.addDependency('../../../blockly/core/contextmenu.js', ['Blockly.ContextMenu'], []);
-goog.addDependency('../../../blockly/core/field.js', ['Blockly.Field'], ['Blockly.BlockSvg']);
+goog.addDependency('../../../blockly/core/field.js', ['Blockly.Field'], ['Blockly.BlockSvg', 'goog.Disposable', 'goog.events.EventHandler']);
 goog.addDependency('../../../blockly/core/field_checkbox.js', ['Blockly.FieldCheckbox'], ['Blockly.Field']);
 goog.addDependency('../../../blockly/core/field_colour.js', ['Blockly.FieldColour'], ['Blockly.Field', 'goog.ui.ColorPicker']);
 goog.addDependency('../../../blockly/core/field_dropdown.js', ['Blockly.FieldDropdown'], ['Blockly.Field']);

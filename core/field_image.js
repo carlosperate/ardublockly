@@ -29,15 +29,18 @@ goog.require('Blockly.Field');
 goog.require('goog.userAgent');
 
 
+
 /**
  * Class for an image.
  * @param {string} src The URL of the image.
  * @param {number} width Width of the image.
  * @param {number} height Height of the image.
- * @extends Blockly.Field
+ * @extends {Blockly.Field}
  * @constructor
  */
 Blockly.FieldImage = function(src, width, height) {
+  Blockly.FieldImage.superClass_.constructor.call(this);
+
   this.sourceBlock_ = null;
   // Ensure height and width are numbers.  Strings are bad at math.
   height = Number(height);
@@ -61,9 +64,8 @@ Blockly.FieldImage = function(src, width, height) {
          'fill-opacity': 0}, this.group_);
   }
 };
-
-// FieldImage is a subclass of Field.
 goog.inherits(Blockly.FieldImage, Blockly.Field);
+
 
 /**
  * Rectangular mask used by Firefox.
@@ -96,12 +98,15 @@ Blockly.FieldImage.prototype.init = function(block) {
 
 /**
  * Dispose of all DOM objects belonging to this text.
+ * @override
  */
-Blockly.FieldImage.prototype.dispose = function() {
+Blockly.FieldImage.prototype.disposeInternal = function() {
   goog.dom.removeNode(this.group_);
   this.group_ = null;
   this.imageElement_ = null;
   this.rectElement_ = null;
+
+  Blockly.FieldImage.superClass_.disposeInternal.call(this);
 };
 
 /**

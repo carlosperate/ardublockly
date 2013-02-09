@@ -30,6 +30,7 @@ goog.provide('Blockly.FieldDropdown');
 goog.require('Blockly.Field');
 
 
+
 /**
  * Class for an editable dropdown field.
  * @param {(!Array.<string>|!Function)} menuGenerator An array of options
@@ -40,16 +41,19 @@ goog.require('Blockly.Field');
  * @constructor
  */
 Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
+  // TODO(scr): Find a way to call superclass's constructor at the
+  //     beginning.
+
   this.menuGenerator_ = menuGenerator;
   this.changeHandler_ = opt_changeHandler;
   var firstTuple = this.getOptions_()[0];
   this.value_ = firstTuple[1];
-  // Call parent's constructor.
-  Blockly.Field.call(this, firstTuple[0]);
-};
 
-// FieldDropdown is a subclass of Field.
+  // Call parent's constructor.
+  Blockly.FieldDropdown.superClass_.constructor.call(this, firstTuple[0]);
+};
 goog.inherits(Blockly.FieldDropdown, Blockly.Field);
+
 
 /**
  * Create the dropdown field's elements.  Only needs to be called once.
@@ -80,13 +84,14 @@ Blockly.FieldDropdown.createDom = function() {
 
 /**
  * Close the dropdown and dispose of all UI.
+ * @override
  */
-Blockly.FieldDropdown.prototype.dispose = function() {
+Blockly.FieldDropdown.prototype.disposeInternal = function() {
   if (Blockly.FieldDropdown.openDropdown_ == this) {
     Blockly.FieldDropdown.hide();
   }
-  // Call parent's destructor.
-  Blockly.Field.prototype.dispose.call(this);
+
+  Blockly.FieldDropdown.superClass_.disposeInternal.call(this);
 };
 
 /**
