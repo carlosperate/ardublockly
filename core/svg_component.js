@@ -20,6 +20,7 @@
 /**
  * @fileoverview Functions for injecting Blockly into a web page.
  * @author fraser@google.com (Neil Fraser)
+ * @author scr@google.com (Sheridan Rawlins)
  */
 'use strict';
 
@@ -31,11 +32,12 @@ goog.require('Blockly.Component');
 
 
 /**
+ * @param {goog.dom.DomHelper=} opt_domHelper Optional DOM helper.
  * @constructor
  * @extends {Blockly.Component}
  */
-Blockly.SvgComponent = function() {
-  Blockly.SvgComponent.superClass_.constructor.call(this);
+Blockly.SvgComponent = function(opt_domHelper) {
+  Blockly.SvgComponent.superClass_.constructor.call(this, opt_domHelper);
 };
 goog.inherits(Blockly.SvgComponent, Blockly.Component);
 
@@ -216,7 +218,7 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
             }
           }
         }
-      }
+      };
       Blockly.bindEvent_(this.workspace_.getCanvas(), 'blocklyWorkspaceChange',
           this.workspace_, workspaceChanged);
     }
@@ -238,27 +240,21 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
 };
 
 
-/**
- * @return {!Blockly.Workspace} The workspace.
- */
-Blockly.SvgComponent.prototype.getWorkspace = function() {
+/** @override */
+Blockly.SvgComponent.prototype.getWorkspace_ = function() {
   return this.workspace_;
 };
 
 
-/**
- * @return {!Element} The svg.
- */
-Blockly.SvgComponent.prototype.getSvg = function() {
+/** @override */
+Blockly.SvgComponent.prototype.getSvg_ = function() {
   var svg = this.getElement();
   goog.asserts.assertObject(svg);
   return svg;
 };
 
 
-/**
- * @return {!Element} The widget.
- */
-Blockly.SvgComponent.prototype.getWidget = function() {
+/** @override */
+Blockly.SvgComponent.prototype.getWidget_ = function() {
   return this.widget_;
 };

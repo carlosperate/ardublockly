@@ -25,7 +25,7 @@
 
 goog.provide('Blockly.Component');
 
-goog.require('goog.asserts');
+goog.require('goog.functions');
 goog.require('goog.ui.Component');
 
 
@@ -42,12 +42,18 @@ goog.inherits(Blockly.Component, goog.ui.Component);
 
 
 /**
+ * @return {boolean} True if this is the topmost blockly component.
+ */
+Blockly.Component.prototype.isBlocklyTop = goog.functions.FALSE;
+
+
+/**
  * Get the topmost component in this tree of components.
  * @return {!goog.ui.Component} The topmost component.
  */
 Blockly.Component.prototype.topComponent = function() {
   var top = this;
-  while(top.parent_) {
+  while(top.parent_ && !top.isBlocklyTop()) {
     top = top.parent_;
   }
   return top;
@@ -55,15 +61,37 @@ Blockly.Component.prototype.topComponent = function() {
 
 
 /**
+ * @return {!Blockly.Workspace}
+ * @throws {Error} When the top component has not overridden getWorkspace_.
+ */
+Blockly.Component.prototype.getWorkspace = function() {
+  return this.topComponent().getWorkspace_();
+};
+
+
+/**
  * @return {!Element}
- * @throws {Error} When the top component does not have a getSvg_
- *     method or has not overridden it.
+ * @throws {Error} When the top component has not overridden getSvg_.
  */
 Blockly.Component.prototype.getSvg = function() {
-  var top = this.topComponent();
-  goog.asserts.assertFunction(top.getSvg_);
-  return top.getSvg_();
+  return this.topComponent().getSvg_();
 };
+
+
+/**
+ * @return {!Element}
+ * @throws {Error} When the top component has not overridden getWidget_.
+ */
+Blockly.Component.prototype.getWidget = function() {
+  return this.topComponent().getWidget_();
+};
+
+
+/**
+ * Top components must override this method.
+ * @return {!Blockly.Workspace} The workspace.
+ */
+Blockly.Component.prototype.getWorkspace_ = goog.abstractMethod;
 
 
 /**
@@ -71,3 +99,10 @@ Blockly.Component.prototype.getSvg = function() {
  * @return {!Element} The svg element.
  */
 Blockly.Component.prototype.getSvg_ = goog.abstractMethod;
+
+
+/**
+ * Top components must override this method.
+ * @return {!Element} The widget element.
+ */
+Blockly.Component.prototype.getWidget_ = goog.abstractMethod;

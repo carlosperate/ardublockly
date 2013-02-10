@@ -25,6 +25,7 @@
 
 goog.provide('Blockly.inject');
 
+goog.require('Blockly.TopComponent');
 goog.require('goog.dom');
 
 
@@ -46,12 +47,12 @@ Blockly.inject = function(container, opt_options) {
   if (Blockly.inject.svgComponent_)
     throw 'Error: Blockly already injected';
 
-  Blockly.inject.svgComponent_ = new Blockly.SvgComponent();
-  Blockly.inject.svgComponent_.render(container);
+  Blockly.inject.topComponent_ = new Blockly.TopComponent();
+  Blockly.inject.topComponent_.decorate(container);
   // TODO(scr): When Toolbox is a component, add this line back.
-  // Blockly.mainWorkspace = Blockly.inject.svgComponent_.getWorkspace();
-  Blockly.svg = Blockly.inject.svgComponent_.getSvg();
-  Blockly.widgetDiv = Blockly.inject.svgComponent_.getWidget();
+  // Blockly.mainWorkspace = Blockly.inject.topComponent_.getWorkspace();
+  Blockly.svg = Blockly.inject.topComponent_.getSvg();
+  Blockly.widgetDiv = Blockly.inject.topComponent_.getWidget();
   Blockly.init_();
 };
 

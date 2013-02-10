@@ -33,6 +33,7 @@ goog.require('Blockly.ScrollbarPair');
 goog.require('Blockly.SvgComponent');
 goog.require('Blockly.Toolbox');
 goog.require('Blockly.Tooltip');
+goog.require('Blockly.TopComponent');
 goog.require('Blockly.Trashcan');
 goog.require('Blockly.Variables');
 goog.require('Blockly.Warning');
