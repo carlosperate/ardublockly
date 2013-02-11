@@ -69,6 +69,13 @@ Blockly.Flyout = function(workspace, workspaceMetrics, withScrollbar) {
   this.withScrollbar_ = withScrollbar;
 
   /**
+   * Opaque data that can be passed to removeChangeListener.
+   * @type {Array.<!Array>}
+   * @private
+   */
+  this.changeWrapper_ = null;
+
+  /**
    * @type {number}
    * @private
    */
@@ -132,6 +139,10 @@ Blockly.Flyout.prototype.createDom = function() {
  * @override
  */
 Blockly.Flyout.prototype.disposeInternal = function() {
+  if (this.changeWrapper_) {
+    Blockly.unbindEvent_(this.changeWrapper_);
+    this.changeWrapper_ = null;
+  }
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
     this.svgGroup_ = null;
@@ -223,6 +234,8 @@ Blockly.Flyout.prototype.init = function() {
   this.getHandler().listen(
       goog.global, goog.events.EventType.RESIZE, this.position_);
   this.position_();
+  this.changeWrapper_ = Blockly.bindEvent_(this.targetWorkspace_.getCanvas(),
+      'blocklyWorkspaceChange', this, this.filterForCapacity_);
 };
 
 
@@ -354,8 +367,10 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     block.moveBy(x, cursorY);
     flyoutWidth = Math.max(flyoutWidth, bBox.width);
     cursorY += bBox.height + gaps[i];
-    Blockly.bindEvent_(block.getSvgRoot(), 'mousedown', null,
-                       Blockly.Flyout.createBlockFunc_(this, block));
+    if (!block.disabled) {
+      Blockly.bindEvent_(block.getSvgRoot(), 'mousedown', null,
+                         Blockly.Flyout.createBlockFunc_(this, block));
+    }
   }
   flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
                  Blockly.Scrollbar.scrollbarThickness;
@@ -382,10 +397,11 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   // Record the width for .getMetrics and .position_.
   this.width_ = flyoutWidth;
 
+  this.filterForCapacity_();
+
   // Fire a resize event to update the flyout's scrollbar.
   Blockly.fireUiEvent(window, 'resize');
 };
-
 
 /**
  * Create a copy of this block on the workspace.
@@ -398,6 +414,10 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
   return function(e) {
     if (Blockly.isRightButton(e)) {
       // Right-click.  Don't create a block, let the context menu show.
+      return;
+    }
+    if (originBlock.disabled) {
+      // Beyond capacity.
       return;
     }
     // Create the new block by cloning the block in the flyout (via XML).
@@ -414,8 +434,25 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
     block.render();
     if (flyout.autoClose) {
       flyout.hide();
+    } else {
+      flyout.filterForCapacity_();
     }
     // Start a dragging operation on the new block.
     block.onMouseDown_(e);
   };
+};
+
+
+/**
+ * Filter the blocks on the flyout to disable the ones that are above the
+ * capacity limit.
+ */
+Blockly.Flyout.prototype.filterForCapacity_ = function() {
+  var remainingCapacity = this.targetWorkspace_.remainingCapacity();
+  var blocks = this.workspace_.getTopBlocks(false);
+  for (var i = 0, block; block = blocks[i]; i++) {
+    var allBlocks = block.getDescendants();
+    var disabled = allBlocks.length > remainingCapacity;
+    block.setDisabled(disabled);
+  }
 };

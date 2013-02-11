@@ -82,6 +82,7 @@ Blockly.parseOptions_ = function(options) {
   return {
       RTL: !!options['rtl'],
       editable: editable,
+      maxBlocks: options['maxBlocks'] || Infinity,
       pathToBlockly: options['path'] || './',
       Toolbox: hasCategories ? Blockly.Toolbox : undefined,
       Trashcan: hasTrashcan ? Blockly.Trashcan : undefined,

@@ -75,16 +75,6 @@ function initEditor(blockly) {
 }
 
 /**
- * Bind an event to a function call.
- * @param {!Element} element Element upon which to listen.
- * @param {string} name Event name to listen to (e.g. 'mousedown').
- * @param {!Function} func Function to call when event is triggered.
- */
-function bindEvent(element, name, func) {
-  element.addEventListener(name, func, false);
-}
-
-/**
  * When the workspace changes, update the three other displays.
  */
 function onchange() {

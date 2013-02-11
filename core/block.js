@@ -532,6 +532,9 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
         block.duplicate_();
       }
     };
+    if (this.getDescendants().length > this.workspace.remainingCapacity()) {
+      duplicateOption.enabled = false;
+    }
     options.push(duplicateOption);
 
     if (Blockly.Comment && !this.collapsed) {

@@ -349,6 +349,10 @@ Blockly.Workspace.prototype.fireChangeEvent = function() {
  * @param {!Element} xmlBlock XML block element.
  */
 Blockly.Workspace.prototype.paste = function(xmlBlock) {
+  if (xmlBlock.getElementsByTagName('block').length >=
+      this.remainingCapacity()) {
+    return;
+  }
   var block = Blockly.Xml.domToBlock_(this, xmlBlock);
   // Move the duplicate to original position.
   var blockX = parseInt(xmlBlock.getAttribute('x'), 10);
@@ -378,4 +382,16 @@ Blockly.Workspace.prototype.paste = function(xmlBlock) {
     block.moveBy(blockX, blockY);
   }
   block.select();
+};
+
+/**
+ * The number of blocks that may be added to the workspace before reaching
+ *     the maxBlocks.
+ * @return {number} Number of blocks left.
+ */
+Blockly.Workspace.prototype.remainingCapacity = function() {
+  if (this.maxBlocks == Infinity) {
+    return Infinity;
+  }
+  return this.maxBlocks - this.getAllBlocks().length;
 };

@@ -181,6 +181,7 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
   // TODO(scr): make components out of these children as well and add
   // them in createDom().
   Blockly.mainWorkspace = this.workspace_;
+  Blockly.mainWorkspace.maxBlocks = Blockly.maxBlocks;
   if (Blockly.editable) {
     // Determine if there needs to be a category tree, or a simple list of
     // blocks.  This cannot be changed later, since the UI is very different.
