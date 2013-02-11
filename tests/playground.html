@@ -72,10 +72,10 @@ function toCode(lang) {
 
 function airstrike(n) {
   var prototypes = [];
-  for (var prototype in Blockly.Language) {
-    if (Blockly.Language[prototype].category) {
-      prototypes.push(prototype);
-    }
+  var toolbox = document.getElementById('toolbox');
+  var blocks = toolbox.getElementsByTagName('block');
+  for (var x = 0, block; block = blocks[x]; x++) {
+    prototypes.push(block.getAttribute('type'));
   }
   for (var x = 0; x < n; x++) {
     var prototype = prototypes[Math.floor(Math.random() * prototypes.length)];
