@@ -202,6 +202,7 @@ Blockly.mainWorkspace = null;
 Blockly.clipboard_ = null;
 
 /**
+ * TODO(scr): remove Blockly.svgSize altogether in favor of Component.svgSize.
  * Returns the dimensions of the current SVG image.
  * @return {!Object} Contains width, height, top and left properties.
  */
@@ -411,8 +412,8 @@ Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
   Blockly.FieldColour && Blockly.FieldColour.hide();
   if (Blockly.Toolbox && !opt_allowToolbox &&
-      Blockly.Toolbox.flyout_.autoClose) {
-    Blockly.Toolbox.clearSelection();
+      Blockly.Toolbox.getInstance().getFlyout().autoClose) {
+    Blockly.Toolbox.getInstance().clearSelection();
   }
 };
 
@@ -508,7 +509,7 @@ Blockly.setCursorHand_ = function(closed) {
 Blockly.getMainWorkspaceMetrics = function() {
   var hwView = Blockly.svgSize();
   if (Blockly.Toolbox) {
-    hwView.width -= Blockly.Toolbox.width;
+    hwView.width -= Blockly.Toolbox.getInstance().width;
   }
   var viewWidth = hwView.width - Blockly.Scrollbar.scrollbarThickness;
   var viewHeight = hwView.height - Blockly.Scrollbar.scrollbarThickness;
@@ -533,7 +534,7 @@ Blockly.getMainWorkspaceMetrics = function() {
                             blockBox.y + viewHeight);
   var absoluteLeft = 0;
   if (Blockly.Toolbox && !Blockly.RTL) {
-    absoluteLeft = Blockly.Toolbox.width;
+    absoluteLeft = Blockly.Toolbox.getInstance().width;
   }
   return new Blockly.Metrics({
     viewHeight: hwView.height,

@@ -233,10 +233,13 @@
   background: #faa;
 }
 
+.blocklyToolboxDiv:not(.blocklyHidden) {
+  display: block;
+}
+
 /* Category tree in Toolbox. */
 .blocklyToolboxDiv {
   background-color: #ddd;
-  display: none;
   overflow-x: visible;
   overflow-y: auto;
   position: absolute;

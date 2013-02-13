@@ -47,9 +47,6 @@ Blockly.SvgComponent.prototype.createDom = function() {
   // Closure can be trusted to create HTML widgets with the proper direction.
   goog.ui.Component.setDefaultRightToLeft(Blockly.RTL);
 
-  // Load CSS.
-  Blockly.loadCss();
-
   // Build the SVG DOM.
   /*
   <svg
@@ -185,10 +182,7 @@ Blockly.SvgComponent.prototype.enterDocument = function() {
   if (Blockly.editable) {
     // Determine if there needs to be a category tree, or a simple list of
     // blocks.  This cannot be changed later, since the UI is very different.
-    if (Blockly.Toolbox) {
-      // TODO(scr): When Toolbox is a component, remove this line.
-      Blockly.Toolbox.createDom(svg, container);
-    } else {
+    if (!Blockly.Toolbox) {
       /**
        * @type {Blockly.Flyout}
        * @private

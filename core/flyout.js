@@ -209,10 +209,8 @@ Blockly.Flyout.prototype.setMetrics = function(yRatio) {
 /**
  * Initializes the flyout.
  */
-Blockly.Flyout.prototype.init = function() {
-  // TODO(scr): when Blockly.Toolbox becomes a component, change this
-  // to enterDocument and call its superclass method.
-  // Blockly.Flyout.superClass_.enterDocument.call(this);
+Blockly.Flyout.prototype.enterDocument = function() {
+  Blockly.Flyout.superClass_.enterDocument.call(this);
 
   // Add scrollbars.
   if (this.withScrollbar_) {
@@ -455,4 +453,13 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
     var disabled = allBlocks.length > remainingCapacity;
     block.setDisabled(disabled);
   }
+};
+
+
+/**
+ * @enum {string}
+ */
+Blockly.Flyout.EventType = {
+  SHOWFLYOUT: 'showflyout',
+  HIDEFLYOUT: 'hideflyout'
 };
