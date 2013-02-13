@@ -156,11 +156,11 @@ Blockly.Mutator.prototype.createEditor_ = function() {
        'height': '100%', 'width': '100%'}, this.svgDialog_);
 
   this.workspace_ = new Blockly.Workspace(true);
+  this.workspace_.render(this.svgDialog_);
   this.flyout_ = new Blockly.Flyout(
     this.workspace_, goog.bind(this.getFlyoutMetrics_, this), false);
   this.flyout_.autoClose = false;
-  this.flyout_.render(this.svgDialog_);
-  this.workspace_.render(this.svgDialog_);
+  this.flyout_.renderBefore(this.workspace_.getElement());
   return this.svgDialog_;
 };
 
@@ -226,7 +226,6 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
         this.createEditor_(), this.block_.svg_.svgGroup_,
         this.iconX_, this.iconY_, null, null);
     var thisObj = this;
-    this.flyout_.init();
     this.flyout_.show(this.quarkXml_);
 
     this.rootBlock_ = this.block_.decompose(this.workspace_);

@@ -124,12 +124,27 @@ Blockly.Flyout.prototype.createDom = function() {
   </g>
   */
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
+  this.setElementInternal(this.svgGroup_);
   this.svgBackground_ = Blockly.createSvgElement('path',
       {'class': 'blocklyFlyoutBackground'}, this.svgGroup_);
   this.svgOptions_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
   this.addChild(this.workspace_);
   this.workspace_.render(this.svgOptions_);
-  this.setElementInternal(this.svgGroup_);
+  // Add scrollbars.
+  if (this.withScrollbar_) {
+    /**
+     * @type {Blockly.Scrollbar}
+     * @private
+     */
+    this.scrollbar_ = new Blockly.Scrollbar(
+        this.svgOptions_,
+        goog.bind(this.getMetrics, this),
+        goog.bind(this.setMetrics, this),
+        false, false);
+    this.registerDisposable(this.scrollbar_);
+  }
+
+  this.hide();
 };
 
 
@@ -209,26 +224,8 @@ Blockly.Flyout.prototype.setMetrics = function(yRatio) {
 /**
  * Initializes the flyout.
  */
-Blockly.Flyout.prototype.init = function() {
-  // TODO(scr): when Blockly.Toolbox becomes a component, change this
-  // to enterDocument and call its superclass method.
-  // Blockly.Flyout.superClass_.enterDocument.call(this);
-
-  // Add scrollbars.
-  if (this.withScrollbar_) {
-    /**
-     * @type {Blockly.Scrollbar}
-     * @private
-     */
-    this.scrollbar_ = new Blockly.Scrollbar(
-        this.svgOptions_,
-        goog.bind(this.getMetrics, this),
-        goog.bind(this.setMetrics, this),
-        false, false);
-    this.registerDisposable(this.scrollbar_);
-  }
-
-  this.hide();
+Blockly.Flyout.prototype.enterDocument = function() {
+  Blockly.Flyout.superClass_.enterDocument.call(this);
 
   // If the document resizes, reposition the flyout.
   this.getHandler().listen(
@@ -455,4 +452,13 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
     var disabled = allBlocks.length > remainingCapacity;
     block.setDisabled(disabled);
   }
+};
+
+
+/**
+ * @enum {string}
+ */
+Blockly.Flyout.EventType = {
+  SHOWFLYOUT: 'showflyout',
+  HIDEFLYOUT: 'hideflyout'
 };

@@ -31,6 +31,7 @@ goog.require('goog.dom.classes');
 goog.require('goog.functions');
 goog.require('Blockly.Component');
 goog.require('Blockly.SvgComponent');
+goog.require('Blockly.Toolbox');
 
 
 
@@ -45,6 +46,7 @@ Blockly.TopComponent = function(opt_domHelper) {
   Blockly.TopComponent.superClass_.constructor.call(this, opt_domHelper);
 };
 goog.inherits(Blockly.TopComponent, Blockly.Component);
+goog.addSingletonGetter(Blockly.TopComponent);
 
 
 /**
@@ -55,11 +57,22 @@ Blockly.TopComponent.prototype.populateDom_ = function() {
   goog.dom.classes.add(this.getElement(), 'blocklyDiv');
 
   /**
-   * @type {Blockly.SvgComponent}
+   * @type {!Blockly.SvgComponent}
    * @private
    */
   this.svgComponent_ = new Blockly.SvgComponent(this.getDomHelper());
   this.addChild(this.svgComponent_, true);
+
+  if (Blockly.editable) {
+    /**
+     * @type {!Blockly.Toolbox}
+     * @private
+     */
+    this.toolbox_ = Blockly.Toolbox.getInstance();
+    // TODO(scr): Once use of getInstance is removed, change to this line:
+    // this.toolbox_ = new Blockly.Toolbox(this.getDomHelper());
+    this.addChild(this.toolbox_, true);
+  }
 };
 
 
@@ -98,4 +111,10 @@ Blockly.TopComponent.prototype.getSvg_ = function() {
 /** @override */
 Blockly.TopComponent.prototype.getWidget_ = function() {
   return this.svgComponent_.getWidget_();
+};
+
+
+/** @override */
+Blockly.TopComponent.prototype.getToolbox_ = function() {
+  return this.toolbox_;
 };

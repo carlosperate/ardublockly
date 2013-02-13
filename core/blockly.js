@@ -28,21 +28,20 @@ goog.provide('Blockly');
 
 // Closure dependencies.
 goog.require('goog.async.Deferred');
-goog.require('goog.dom');
 goog.require('goog.color');
+goog.require('goog.dom');
 goog.require('goog.events');
 goog.require('goog.string');
 goog.require('goog.ui.ColorPicker');
-goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.userAgent');
 
 // Blockly dependencies.
 goog.require('Blockly.Block');
 goog.require('Blockly.Connection');
-goog.require('Blockly.utils');
-goog.require('Blockly.Toolbox');
+goog.require('Blockly.TopComponent');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.renaming_map');
+goog.require('Blockly.utils');
 
 
 /**
@@ -202,6 +201,7 @@ Blockly.mainWorkspace = null;
 Blockly.clipboard_ = null;
 
 /**
+ * TODO(scr): remove Blockly.svgSize altogether in favor of Component.svgSize.
  * Returns the dimensions of the current SVG image.
  * @return {!Object} Contains width, height, top and left properties.
  */
@@ -411,8 +411,8 @@ Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
   Blockly.FieldColour && Blockly.FieldColour.hide();
   if (Blockly.Toolbox && !opt_allowToolbox &&
-      Blockly.Toolbox.flyout_.autoClose) {
-    Blockly.Toolbox.clearSelection();
+      Blockly.TopComponent.getInstance().getToolbox().getFlyout().autoClose) {
+    Blockly.TopComponent.getInstance().getToolbox().clearSelection();
   }
 };
 
@@ -508,7 +508,7 @@ Blockly.setCursorHand_ = function(closed) {
 Blockly.getMainWorkspaceMetrics = function() {
   var hwView = Blockly.svgSize();
   if (Blockly.Toolbox) {
-    hwView.width -= Blockly.Toolbox.width;
+    hwView.width -= Blockly.TopComponent.getInstance().getToolbox().width;
   }
   var viewWidth = hwView.width - Blockly.Scrollbar.scrollbarThickness;
   var viewHeight = hwView.height - Blockly.Scrollbar.scrollbarThickness;
@@ -533,7 +533,7 @@ Blockly.getMainWorkspaceMetrics = function() {
                             blockBox.y + viewHeight);
   var absoluteLeft = 0;
   if (Blockly.Toolbox && !Blockly.RTL) {
-    absoluteLeft = Blockly.Toolbox.width;
+    absoluteLeft = Blockly.TopComponent.getInstance().getToolbox().width;
   }
   return new Blockly.Metrics({
     viewHeight: hwView.height,
