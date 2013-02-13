@@ -406,14 +406,11 @@ Blockly.onContextMenu_ = function(e) {
  * @param {boolean=} opt_allowToolbox If true, don't close the toolbox.
  */
 Blockly.hideChaff = function(opt_allowToolbox) {
-  Blockly.Tooltip && Blockly.Tooltip.hide();
-  Blockly.ContextMenu && Blockly.ContextMenu.hide();
-  Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
-  Blockly.FieldColour && Blockly.FieldColour.hide();
-  if (Blockly.Toolbox && !opt_allowToolbox &&
-      Blockly.TopComponent.getInstance().getToolbox().getFlyout().autoClose) {
-    Blockly.TopComponent.getInstance().getToolbox().clearSelection();
-  }
+  Blockly.TopComponent.getInstance().dispatchEvent(
+      {
+        type: Blockly.TopComponent.EventType.HIDECHAFF,
+        allowToolbox: opt_allowToolbox
+      });
 };
 
 /**

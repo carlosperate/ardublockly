@@ -157,13 +157,26 @@ Blockly.Toolbox.prototype.enterDocument = function() {
       this.getElement(), goog.events.EventType.MOUSEDOWN, this.onMouseDown_);
 
   // Tree events.
-  handler.listen(
-      this.tree_, Blockly.Flyout.EventType.SHOWFLYOUT, this.onShowFlyout_);
-  handler.listen(
-      this.tree_, Blockly.Flyout.EventType.HIDEFLYOUT, this.onHideFlyout_);
+  handler.listen(this, Blockly.Flyout.EventType.SHOWFLYOUT, this.onShowFlyout_);
+  handler.listen(this, Blockly.Flyout.EventType.HIDEFLYOUT, this.onHideFlyout_);
+
+  // Hide the chaff.
+  handler.listen(this.topComponent(),
+                 Blockly.TopComponent.EventType.HIDECHAFF, this.onHideChaff_);
   
   // Fire a resize event since the toolbox may have changed width and height.
   Blockly.fireUiEvent(window, 'resize');
+};
+
+
+/**
+ * @param {!goog.events.Event} e The event.
+ * @private
+ */
+Blockly.Toolbox.prototype.onHideChaff_ = function(e) {
+  if (!e['allowToolbox'] && this.getFlyout().autoClose) {
+    this.getToolbox().clearSelection();
+  }
 };
 
 

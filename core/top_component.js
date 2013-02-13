@@ -93,6 +93,29 @@ Blockly.TopComponent.prototype.decorateInternal = function(element) {
 
 
 /** @override */
+Blockly.TopComponent.prototype.enterDocument = function() {
+  Blockly.TopComponent.superClass_.enterDocument.call(this);
+
+  this.getHandler().listen(
+      this, Blockly.TopComponent.EventType.HIDECHAFF, this.onHideChaff_, true);
+};
+
+
+/**
+ * @param {!goog.events.Event} e The event.
+ */
+Blockly.TopComponent.prototype.onHideChaff_ = function(e) {
+  // TODO(scr): Ultimately, stop listening to ourself and all
+  // subcomponents should hide themselves on this event. See Toolbox
+  // for an example.
+  Blockly.Tooltip && Blockly.Tooltip.hide();
+  Blockly.ContextMenu && Blockly.ContextMenu.hide();
+  Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
+  Blockly.FieldColour && Blockly.FieldColour.hide();
+};
+
+
+/** @override */
 Blockly.TopComponent.prototype.isBlocklyTop = goog.functions.TRUE;
 
 
@@ -117,4 +140,12 @@ Blockly.TopComponent.prototype.getWidget_ = function() {
 /** @override */
 Blockly.TopComponent.prototype.getToolbox_ = function() {
   return this.toolbox_;
+};
+
+
+/**
+ * @enum {string}
+ */
+Blockly.TopComponent.EventType = {
+  HIDECHAFF: 'hidechaff'
 };
