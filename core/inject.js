@@ -47,17 +47,13 @@ Blockly.inject = function(container, opt_options) {
   if (Blockly.inject.svgComponent_)
     throw 'Error: Blockly already injected';
 
-  // Load CSS.
-  Blockly.loadCss().addCallback(
-      function() {
-        Blockly.inject.topComponent_ = new Blockly.TopComponent();
-        Blockly.inject.topComponent_.decorate(container);
-        // TODO(scr): When Toolbox is a component, add this line back.
-        // Blockly.mainWorkspace = Blockly.inject.topComponent_.getWorkspace();
-        Blockly.svg = Blockly.inject.topComponent_.getSvg();
-        Blockly.widgetDiv = Blockly.inject.topComponent_.getWidget();
-        Blockly.init_();
-      });
+  Blockly.inject.topComponent_ = new Blockly.TopComponent();
+  Blockly.inject.topComponent_.decorate(container);
+  // TODO(scr): When Toolbox is a component, add this line back.
+  // Blockly.mainWorkspace = Blockly.inject.topComponent_.getWorkspace();
+  Blockly.svg = Blockly.inject.topComponent_.getSvg();
+  Blockly.widgetDiv = Blockly.inject.topComponent_.getWidget();
+  Blockly.init_();
 };
 
 /**
@@ -116,7 +112,7 @@ Blockly.init_ = function() {
   var addScrollbars = true;
   if (Blockly.languageTree) {
     if (Blockly.Toolbox) {
-      // Blockly.Toolbox.init();
+      Blockly.Toolbox.init();
     } else if (Blockly.Flyout) {
       // Build a fixed flyout with the root blocks.
       Blockly.mainWorkspace.flyout_.init();

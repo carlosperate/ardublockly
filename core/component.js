@@ -70,42 +70,12 @@ Blockly.Component.prototype.getWorkspace = function() {
 
 
 /**
- * Top components must override this method.
- * @return {!Blockly.Workspace} The workspace.
- */
-Blockly.Component.prototype.getWorkspace_ = goog.abstractMethod;
-
-
-/**
- * @return {!Blockly.Toolbox}
- * @throws {Error} When the top component has not overridden getWorkspace_.
- */
-Blockly.Component.prototype.getToolbox = function() {
-  return this.topComponent().getToolbox_();
-};
-
-
-/**
- * Top components must override this method.
- * @return {!Blockly.Toolbox} The toolbox.
- */
-Blockly.Component.prototype.getToolbox_ = goog.abstractMethod;
-
-
-/**
  * @return {!Element}
  * @throws {Error} When the top component has not overridden getSvg_.
  */
 Blockly.Component.prototype.getSvg = function() {
   return this.topComponent().getSvg_();
 };
-
-
-/**
- * Top components must override this method.
- * @return {!Element} The svg element.
- */
-Blockly.Component.prototype.getSvg_ = goog.abstractMethod;
 
 
 /**
@@ -119,22 +89,20 @@ Blockly.Component.prototype.getWidget = function() {
 
 /**
  * Top components must override this method.
- * @return {!Element} The widget element.
+ * @return {!Blockly.Workspace} The workspace.
  */
-Blockly.Component.prototype.getWidget_ = goog.abstractMethod;
+Blockly.Component.prototype.getWorkspace_ = goog.abstractMethod;
 
 
 /**
- * Returns the dimensions of the current SVG image.
- * @return {!Object}
+ * Top components must override this method.
+ * @return {!Element} The svg element.
  */
-Blockly.Component.prototype.svgSize = function() {
-  var svg = this.getSvg();
+Blockly.Component.prototype.getSvg_ = goog.abstractMethod;
 
-  return {
-    width: svg.cachedWidth_,
-    height: svg.cachedHeight_,
-    top: svg.cachedTop_,
-    left: svg.cachedLeft_
-  };
-};
+
+/**
+ * Top components must override this method.
+ * @return {!Element} The widget element.
+ */
+Blockly.Component.prototype.getWidget_ = goog.abstractMethod;
