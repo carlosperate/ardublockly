@@ -23,6 +23,9 @@
  */
 'use strict';
 
+var MSG = window.parent.MSG;
+var toolbox = window.parent.document.getElementById('toolbox');
+
 // Extensions to Blockly's language and JavaScript generator.
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
@@ -34,19 +37,18 @@ Blockly.Language.draw_move = {
     this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck(Number)
-        .appendTitle('move')
+        .appendTitle(MSG.move)
         .appendTitle(new Blockly.FieldDropdown(
             Blockly.Language.draw_move.DIRECTIONS), 'DIR')
-        .appendTitle('by');
+        .appendTitle(MSG.moveBy);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Moves the turtle forward or backward\n' +
-                    'by the specified amount.');
+    this.setTooltip(MSG.moveTooltip);
   }
 };
 
 Blockly.Language.draw_move.DIRECTIONS =
-    [['forward', 'moveForward'], ['backward', 'moveBackward']];
+    [[MSG.forward, 'moveForward'], [MSG.backward, 'moveBackward']];
 
 Blockly.JavaScript.draw_move = function() {
   // Generate JavaScript for moving forward or backwards.
@@ -64,19 +66,18 @@ Blockly.Language.draw_turn = {
     this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck(Number)
-        .appendTitle('turn')
+        .appendTitle(MSG.turn)
         .appendTitle(new Blockly.FieldDropdown(
             Blockly.Language.draw_turn.DIRECTIONS), 'DIR')
-        .appendTitle('by');
+        .appendTitle(MSG.turnBy);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Turns the turtle left or right\n' +
-                    'by the specified number of degrees.');
+    this.setTooltip(MSG.turnTooltip);
   }
 };
 
 Blockly.Language.draw_turn.DIRECTIONS =
-    [['right', 'turnRight'], ['left', 'turnLeft']];
+    [[MSG.right, 'turnRight'], [MSG.left, 'turnLeft']];
 
 Blockly.JavaScript.draw_turn = function() {
   // Generate JavaScript for turning left or right.
@@ -93,10 +94,10 @@ Blockly.Language.draw_width = {
     this.setColour(160);
     this.appendValueInput('WIDTH')
         .setCheck(Number)
-        .appendTitle('set width')
+        .appendTitle(MSG.setWidth)
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('');
+    this.setTooltip(MSG.widthTooltip);
   }
 };
 
@@ -113,15 +114,15 @@ Blockly.Language.draw_pen = {
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle('pen')
+        .appendTitle(MSG.pen)
         .appendTitle(new Blockly.FieldDropdown(this.STATE), 'PEN');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('');
+    this.setTooltip(MSG.penTooltip);
   }
 };
 
-Blockly.Language.draw_pen.STATE = [['up', 'penUp'], ['down', 'penDown']];
+Blockly.Language.draw_pen.STATE = [[MSG.up, 'penUp'], [MSG.down, 'penDown']];
 
 Blockly.JavaScript.draw_pen = function() {
   // Generate JavaScript for pen up/down.
@@ -138,7 +139,7 @@ Blockly.Language.draw_colour = {
         .appendTitle('set colour');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('');
+    this.setTooltip(MSG.colourTooltip);
   }
 };
 
@@ -152,7 +153,6 @@ Blockly.JavaScript.draw_colour = function() {
 
 
 function init() {
-  var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
 
   if (window.parent.Turtle) {

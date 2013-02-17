@@ -2,7 +2,7 @@
 
 /**
  * This is a Closure Template.  Build with:
- * java -jar soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
  */
 
 /**
@@ -12,7 +12,8 @@
   <table width="100%" height="100%">
     <tr>
       <td width="410" valign="top">
-        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
+            <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
 
         <p class="levelLine">{$ij.MSG.level}: &nbsp;
         {for $i in range(1, 11)}
@@ -35,10 +36,10 @@
         <table width="100%">
           <tr>
             <td id="toolbarDiv">
-              <button title="See generated JavaScript code" onclick="Maze.showCode();">
+              <button title="{$ij.MSG.codeTooltip}" onclick="Maze.showCode();">
                 <img src='../../media/1x1.gif' class="code">
               </button>
-              <button id="linkButton" title="Save and link to blocks" onclick="BlocklyStorage.link();">
+              <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link();">
                 <img src='../../media/1x1.gif' class="link">
               </button>
             </td>
@@ -56,10 +57,7 @@
 
       <td valign="top">
         {call .toolbox /}
-        <iframe id="blockly_iframe"></iframe>
-        <script type="text/javascript">
-           document.getElementById('blockly_iframe').src = '{$ij.frameSrc|escapeJsString}';
-        </script>
+        <iframe src="frame.html?{$ij.frameSrc}"></iframe>
       </td>
     </tr>
   </table>

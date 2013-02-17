@@ -23,15 +23,8 @@
  */
 'use strict';
 
-if ('BlocklyStorage' in window) {
-  BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
-  BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-  BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
-  BlocklyStorage.HASH_ERROR =
-      'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-  BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-      'Perhaps it was created with a different version of Blockly?\nXML: ';
-}
+document.write(turtlepage.start({}, null,
+    {MSG: MSG, frameSrc: frameSrc.join('&')}));
 
 /**
  * Create a namespace for the application.
@@ -59,7 +52,7 @@ Turtle.init = function(blockly) {
 
   window.onbeforeunload = function() {
     if (Blockly.mainWorkspace.getAllBlocks().length > 1) {
-      return 'Leaving this page will result in the loss of your work.';
+      return MSG.unloadWarning;
     }
     return null;
   };

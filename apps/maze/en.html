@@ -4,11 +4,11 @@
   <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script type="text/javascript" src="/storage.js"></script>
-  <script type="text/javascript" src="soy/soyutils.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
   <script type="text/javascript" src="template.js"></script>
   <script>
     var MSG = {
-      // Block text
+      // Block text.
       move: 'move',
       forward: 'forward',
       backward: 'backward',
@@ -34,6 +34,8 @@
           'then do the first block of actions.\n' +
           'Otherwise, do the second block of actions.',
       whileTooltip: 'Repeat the enclosed actions until finish point is reached.',
+      codeTooltip: 'See generated JavaScript code.',
+      linkTooltip: 'Save and link to blocks.',
       // Level hints.
       hints: [undefined, // There is no level 0.
           "A program is a sequence of statements.  Connect a couple of 'move forward' blocks together to reach the goal.",
