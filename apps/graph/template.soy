@@ -1,0 +1,87 @@
+{namespace graphpage}
+
+/**
+ * This is a Closure Template.  Build with:
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ */
+
+/**
+ * Web page structure.
+ */
+{template .start}
+  <table width="100%" height="100%">
+    <tr>
+      <td width="410" valign="top">
+        <h1>
+          <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link()">
+              <img src='link.png' height=21 width=21>
+          </button>
+          <a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
+          <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}
+        </h1>
+        <div id="visualization"></div>
+        <div id="funcText">
+          <img id="y1" src="1x1.gif">
+          ...
+        </div>
+      </td>
+      <td valign="top">
+        {call .toolbox /}
+        <iframe src="frame.html?{$ij.frameSrc}"></iframe>
+      </td>
+    </tr>
+  </table>
+{/template}
+
+/**
+ * Toolbox.
+ */
+{template .toolbox}
+  <xml id="toolbox" style="display: none">
+    <category name="{$ij.MSG.catMath}">
+      <block type="math_number"></block>
+      <block type="math_arithmetic"></block>
+      <block type="math_single"></block>
+      <block type="math_trig"></block>
+      <block type="math_constant"></block>
+      <block type="math_number_property"></block>
+      <block type="math_round"></block>
+      <block type="math_modulo"></block>
+      <block type="math_constrain">
+        <value name="LOW">
+          <block type="math_number">
+            <title name="NUM">1</title>
+          </block>
+        </value>
+        <value name="HIGH">
+          <block type="math_number">
+            <title name="NUM">100</title>
+          </block>
+        </value>
+      </block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <block type="math_number">
+            <title name="NUM">1</title>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="math_number">
+            <title name="NUM">100</title>
+          </block>
+        </value>
+      </block>
+      <block type="math_random_float"></block>
+    </category>
+    <category name="{$ij.MSG.catVariables}">
+      <block type="graph_get_x"></block>
+    </category>
+    <category name="{$ij.MSG.catLogic}">
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+      <block type="logic_ternary"></block>
+    </category>
+  </xml>
+{/template}

@@ -23,14 +23,16 @@
  */
 'use strict';
 
-if ('BlocklyStorage' in window) {
-  BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
-  BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-  BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
-  BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-  BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-      'Perhaps it was created with a different version of Blockly?\nXML: ';
+// Load the Google Chart Tools Visualization API and the chart package.
+if (typeof google == 'object') {
+  google.load('visualization', '1', {packages: ['corechart']});
+} else {
+  alert('Unable to load Google\'s chart API.\nAre you connected to the Internet?');
 }
+
+document.write(graphpage.start({}, null,
+    {MSG: MSG, frameSrc: frameSrc.join('&')}));
+
 /**
  * Create a namespace for the application.
  */
@@ -46,7 +48,7 @@ Graph.init = function(blockly) {
   window.onbeforeunload = function() {
     if (Blockly.mainWorkspace.getAllBlocks().length > 1 &&
         window.location.hash.length <= 1) {
-      return 'Leaving this page will result in the loss of your work.';
+      return MSG.unloadWarning;
     }
     return null;
   };
@@ -68,12 +70,6 @@ Graph.init = function(blockly) {
   Blockly.mainWorkspace.getCanvas().addEventListener('blocklyWorkspaceChange',
       window.parent.Graph.drawVisualization, false);
 };
-// Load the Google Chart Tools Visualization API and the chart package.
-if (typeof google == 'object') {
-  google.load('visualization', '1', {packages: ['corechart']});
-} else {
-  alert('Unable to load Google\'s chart API.\nAre you connected to the Internet?');
-}
 
 /**
  * Visualize the graph of y = f(x) using Google Chart Tools.
@@ -153,5 +149,5 @@ Graph.getFunction = function() {
   generator.init();
   var code = generator.blockToCode(yBlock);
   // Remove the ";" generally ending the JavaScript statement y = {code};.
-  return code.replace(/;$/, "");
+  return code.replace(/;$/, '');
 };

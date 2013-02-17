@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Graphing Calculator</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+  <script>
+    var MSG = {
+      // Tooltips.
+      linkTooltip: 'Save and link to blocks.',
+      // Toolbox categories.
+      catLogic: 'Logic',
+      catMath: 'Math',
+      catVariables: 'Variables',
+      // Misc text.
+      unloadWarning: 'Leaving this page will result in the loss of your work.',
+      title: 'Graph'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+          'Perhaps it was created with a different version of Blockly?\nXML: ';
+    }
+    var frameSrc = ['en/_messages.js',
+        'common/logic.js',
+        'common/math.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="graph.js"></script>
+</body>
+</html>

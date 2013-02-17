@@ -23,6 +23,9 @@
  */
 'use strict';
 
+var MSG = window.parent.MSG;
+var toolbox = window.parent.document.getElementById('toolbox');
+
 Blockly.Language.graph_get_x = {
   // x variable getter.
   helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
@@ -67,7 +70,6 @@ Blockly.JavaScript.graph_set_y = function() {
  * Initialize Blockly.
  */
 function init() {
-  var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
 
   if (window.parent.Graph) {
