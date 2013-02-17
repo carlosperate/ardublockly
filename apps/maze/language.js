@@ -107,7 +107,7 @@ Blockly.Language.maze_isWall.DIRECTIONS =
      [MSG.behind, 'isWallBackward']];
 
 Blockly.JavaScript.maze_isWall = function() {
-   // Generate JavaScript for checking if there is a wall.
+  // Generate JavaScript for checking if there is a wall.
   var code = 'Maze.' + this.getTitleValue('DIR') + '()';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
@@ -195,7 +195,7 @@ Blockly.JavaScript.maze_forever = function() {
 
 function init() {
   Blockly.inject(document.body,
-      {path: '../../', toolbox: toolbox, maxBlocks: maxBlocks});
+      {path: '../../', maxBlocks: maxBlocks, toolbox: toolbox, trashcan: true});
 
   if (window.parent.Maze) {
     // Let the top-level application know that Blockly is ready.

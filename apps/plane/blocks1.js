@@ -29,8 +29,7 @@ Blockly.Language.plane_get_rows = {
   init: function() {
     this.setColour(330);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_VARIABLES_GET_TITLE)
-        .appendTitle('rows');
+        .appendTitle(MSG.getRows);
     this.setOutput(true, null);
   }
 };
@@ -70,7 +69,7 @@ function redraw(newRows) {
           'xlink:href', '#row1st');
       planeSvg.SVG.appendChild(row);
     }
-    planeSvg.setText('row1stText', 'Rows: ' + rows1st);
+    planeSvg.setText('row1stText', MSG.rows.replace('%1', rows1st));
     planeSvg.rows1st = rows1st;
     recalculate();
   }

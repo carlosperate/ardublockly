@@ -30,8 +30,7 @@ Blockly.Language.plane_set_seats = {
   init: function() {
     this.setColour(330);
     this.appendValueInput('VALUE')
-        .appendTitle(Blockly.LANG_VARIABLES_SET_TITLE)
-        .appendTitle('seats');
+        .appendTitle(MSG.setSeats);
     this.setTooltip(Blockly.LANG_VARIABLES_SET_TOOLTIP);
   }
 };
@@ -93,7 +92,8 @@ function recalculate() {
   } catch (e) {
     // Allow seats to remain NaN.
   }
-  planeSvg.setText('seatText', 'Seats: ' + (isNaN(seats) ? '?' : seats));
+  planeSvg.setText('seatText',
+      MSG.seats.replace('%1', isNaN(seats) ? '?' : seats));
   planeSvg.setCorrect(isNaN(seats) ? null : (answer() == seats));
 }
 

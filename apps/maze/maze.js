@@ -27,7 +27,7 @@ var level = window.location.search.match(/[?&]level=(\d+)/);
 level = level ? level[1] : 1;
 level = Math.min(Math.max(1, level), 10);
 var frameSrc = 'frame.html?' + (level > 9 ? frameSrc10 : frameSrc9).join('&');
-document.write(mazetutorial.start({}, null,
+document.write(mazepage.start({}, null,
     {'MSG': MSG, 'level': level, frameSrc: frameSrc}));
 var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 10, 10, 10, 10, 10, Infinity][level];
@@ -546,7 +546,7 @@ Maze.animate = function() {
 };
 
 Maze.congratulations = function() {
-  if (level < 9) {
+  if (level < 10) {
     var proceed = window.confirm(MSG.nextLevel.replace('%1', level + 1));
     if (proceed) {
       window.location = window.location.protocol + '//' +

@@ -29,8 +29,7 @@ Blockly.Language.plane_get_rows1st = {
   init: function() {
     this.setColour(330);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_VARIABLES_GET_TITLE)
-        .appendTitle('1st class rows');
+        .appendTitle(MSG.getRows1);
     this.setOutput(true, null);
   }
 };
@@ -41,8 +40,7 @@ Blockly.Language.plane_get_rows2nd = {
   init: function() {
     this.setColour(330);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_VARIABLES_GET_TITLE)
-        .appendTitle('2nd class rows');
+        .appendTitle(MSG.getRows2);
     this.setOutput(true, null);
   }
 };
@@ -106,8 +104,8 @@ function redraw(newRows) {
       planeSvg.SVG.appendChild(row);
     }
 
-    planeSvg.setText('row1stText', '1st class rows: ' + rows1st);
-    planeSvg.setText('row2ndText', '2nd class rows: ' + rows2nd);
+    planeSvg.setText('row1stText', MSG.rows1.replace('%1', rows1st));
+    planeSvg.setText('row2ndText', MSG.rows2.replace('%1', rows2nd));
     planeSvg.rows1st = rows1st;
     planeSvg.rows2nd = rows2nd;
     recalculate();
