@@ -136,7 +136,7 @@ Blockly.Language.draw_colour = {
     this.setColour(20);
     this.appendValueInput('COLOUR')
         .setCheck('Colour')
-        .appendTitle('set colour');
+        .appendTitle(MSG.setColour);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(MSG.colourTooltip);
