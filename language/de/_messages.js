@@ -64,10 +64,10 @@ Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Kreiere eine Farbe mit selbst definierten rot
     'und blau Werten. Alle Werte müssen zwischen 0.0. und 1.0 liegen.';
 
 Blockly.LANG_COLOUR_BLEND_HELPURL = 'http://meyerweb.com/eric/tools/color-blend/';
-Blockly.LANG_COLOUR_BLEND_TITLE = 'mischen';
+Blockly.LANG_COLOUR_BLEND_TITLE = 'mische';
 Blockly.LANG_COLOUR_BLEND_COLOUR1 = 'Farbe 1';
-Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'Farbe 2';
-Blockly.LANG_COLOUR_BLEND_RATIO = 'Verhältniss';
+Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'mit Farbe 2';
+Blockly.LANG_COLOUR_BLEND_RATIO = 'im Verhältniss';
 Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Vermische 2 Farbe mit konfigurierbaren Farbverhältniss (0.0 - 1.0).';
 
 // Control Blocks.
@@ -269,8 +269,8 @@ Blockly.LANG_MATH_CONSTRAIN_INPUT_HIGH = 'bis';
 Blockly.LANG_MATH_CONSTRAIN_TOOLTIP = 'Begrenzt den Wertebereich mittels von / bis Werte. (inklusiv)';
 
 Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://de.wikipedia.org/wiki/Zufallszahlen';
-Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'ganzahlige Zufallswerte von';
-Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'bis';
+Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'ganzahliger Zufallswerte zwischen';
+Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'und';
 Blockly.LANG_MATH_RANDOM_INT_TOOLTIP = 'Erzeug eine ganzahligen Zufallswert zwischen\n' +
     'zwei Werten (inklusiv).';
 
@@ -309,10 +309,10 @@ Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = 'ist leer?';
 Blockly.LANG_TEXT_ISEMPTY_TOOLTIP = 'Ist wahr (true), wenn der Text leer ist.';
 
 Blockly.LANG_TEXT_ENDSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_ENDSTRING_INPUT = 'Buchstaben von';
+Blockly.LANG_TEXT_ENDSTRING_INPUT = 'ten Buchstaben aus';
 Blockly.LANG_TEXT_ENDSTRING_TOOLTIP = 'Extrahiert die erste / letzten X Buchstaben von einem Text.';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST = 'ersten';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST = 'letzten';
+Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST = 'von vorn';
+Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST = 'von hinten';
 
 Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'Suche';
@@ -340,7 +340,7 @@ Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Wandelt schreibweise von Texten um,\n' +
     'in Grossbuchstaben, Kleinbuchstaben oder\n' +
     'den ersten Buchstaben jedes Wortes gross und die anderen klein.';
 Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = 'GROSSBUCHSTABEN';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'kleinbuchstbane';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'kleinbuchstaben';
 Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = 'Wörter';
 
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
@@ -381,9 +381,9 @@ Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE = 'Element';
 Blockly.LANG_LISTS_CREATE_WITH_ITEM_TOOLTIP = 'Ein Element zur Liste hinzufügen.';
 
 Blockly.LANG_LISTS_REPEAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_REPEAT_INPUT_WITH = 'Erzeuge Liste mit';
-Blockly.LANG_LISTS_REPEAT_INPUT_REPEATED = 'repeated';
-Blockly.LANG_LISTS_REPEAT_INPUT_TIMES = 'times';
+Blockly.LANG_LISTS_REPEAT_INPUT_WITH = 'Erzeuge Liste mit Element';
+Blockly.LANG_LISTS_REPEAT_INPUT_REPEATED = 'wiederhole es';
+Blockly.LANG_LISTS_REPEAT_INPUT_TIMES = 'mal';
 Blockly.LANG_LISTS_REPEAT_TOOLTIP = 'Erzeugt eine Liste mit einer variablen\n' +
     'Anzahl von Elementen';
 
@@ -458,7 +458,7 @@ Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP = 'Ein Funktionsblock ohne Rückgabe
 Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://de.wikipedia.org/wiki/Prozedur_%28Programmierung%29';
 Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE;
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
-Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'Gibt zurück';
+Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'gebe zurück';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Ein Funktionsblock mit Rückgabewert.';
 
 Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warnung:\n' +

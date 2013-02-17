@@ -9,8 +9,8 @@
   <script>
     var MSG = {
       // Tooltips.
-      trashTooltip: 'Entsorgen Sie alle Blöcke.',
-      linkTooltip: 'Speichern und verbinden die Blöcke.',
+      trashTooltip: 'Alle Blöcke löschen.',
+      linkTooltip: 'Speichern und verbinden der Blöcke.',
       runTooltip: 'Programm ausführen.',
       // Toolbox categories.
       catControl: 'Steuerung',
@@ -20,21 +20,21 @@
       catLists: 'Listen',
       catColour: 'Farbe',
       catVariables: 'Variablen',
-      catProcedures: 'Funktions',
+      catProcedures: 'Funktionen',
       // Misc text.
       blocks: 'Blöcke',
-      badXml: 'Error parsing XML:\n%1\n\nAbandon changes?',
-      badCode: 'Program error:\n%1',
+      badXml: 'Fehler beim XML parsen:\n%1\n\nÄnderungen verwerfen?',
+      badCode: 'Programmfehler:\n%1',
       timeout: 'Maximum execution iterations exceeded.',
       title: 'Code'
     };
     if ('BlocklyStorage' in window) {
-      BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
-      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+      BlocklyStorage.DISCARD_WARNING = 'Alle "%1" Blöcke löschen?';
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Problem während der HTTP Anfrage.\n';
+      BlocklyStorage.LINK_ALERT = 'Blöcke mit diesem Link teilen:\n\n';
       BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-          'Perhaps it was created with a different version of Blockly?\nXML: ';
+      BlocklyStorage.XML_ERROR = 'Kann Sicherungsdatei nicht laden.\n'+
+          'Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?\nXML: ';
     }
     var frameSrc = ['de/_messages.js',
         'common/control.js',
