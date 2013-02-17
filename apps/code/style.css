@@ -125,9 +125,7 @@ button.disabled:hover>img {
   opacity: 0.6;
 }
 button.disabled {
-  cursor: not-allowed;
-  border: 1px solid #ddd !important;
-  box-shadow: none;
+  display: none;
 }
 
 /* Sprited icons. */

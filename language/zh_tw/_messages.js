@@ -23,7 +23,7 @@
  */
 'use strict';
 
-goog.provides('Blockly.messages.zh_tw');
+goog.provide('Blockly.messages.zh_tw');
 
 /**
  * Due to the frequency of long strings, the 80-column wrap rule need not apply
