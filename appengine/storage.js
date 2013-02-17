@@ -58,18 +58,6 @@ BlocklyStorage.restoreBlocks = function() {
 };
 
 /**
- * Discard all blocks from the workspace.
- */
-BlocklyStorage.discard = function() {
-  var count = Blockly.mainWorkspace.getAllBlocks().length;
-  if (count < 2 ||
-      window.confirm(BlocklyStorage.DISCARD_WARNING.replace('%1', count))) {
-    Blockly.mainWorkspace.clear();
-    window.location.hash = '';
-  }
-};
-
-/**
  * Save blocks to database and return a link containing key to XML.
  */
 BlocklyStorage.link = function() {

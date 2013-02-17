@@ -157,3 +157,15 @@ function runJS() {
     alert(MSG.badCode.replace('%1', e));
   }
 }
+
+/**
+ * Discard all blocks from the workspace.
+ */
+function discard() {
+  var count = Blockly.mainWorkspace.getAllBlocks().length;
+  if (count < 2 ||
+      window.confirm(MSG.discard.replace('%1', count))) {
+    Blockly.mainWorkspace.clear();
+    window.location.hash = '';
+  }
+}
