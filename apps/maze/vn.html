@@ -1,0 +1,97 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Maze</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      move: 'move',
+      forward: 'forward',
+      backward: 'backward',
+      turn: 'turn',
+      left: 'left',
+      right: 'right',
+      randomly: 'randomly',
+      wall: 'wall',
+      ifWall: 'if wall',
+      do: 'do',
+      else: 'else',
+      ahead: 'ahead',
+      toTheLeft: 'to the left',
+      toTheRight: 'to the right',
+      behind: 'behind',
+      repeatUntilFinished: 'repeat until finished',
+      // Tooltips.
+      moveTooltip: 'Moves Pegman forward or backward one space.',
+      turnTooltip: 'Turns Pegman left or right by 90 degrees.',
+      ifTooltip: 'If there is a wall in the specified direction,\n' +
+          'then do some actions.',
+      ifelseTooltip: 'If there is a wall in the specified direction,\n' +
+          'then do the first block of actions.\n' +
+          'Otherwise, do the second block of actions.',
+      whileTooltip: 'Repeat the enclosed actions until finish point is reached.',
+      codeTooltip: 'See generated JavaScript code.',
+      linkTooltip: 'Save and link to blocks.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+          "A program is a sequence of statements.  Connect a couple of 'move forward' blocks together to reach the goal.",
+          "What is the sequence of steps for this maze?",
+          "Computers have limited memory.  This maze needs to be solved with only two blocks.  Use 'repeat' to run a block more than once.",
+          "This maze needs to be solved with only five blocks.",
+          "An 'if' condition will do something only if the condition is true.  Try turning left if there is a wall ahead.",
+          "This maze looks more complicated than the previous one, but it is not.",
+          "If-else statements will do one thing or the other.",
+          "You can use more than one 'if-else' statement.",
+          "Can you solve this complicated maze?  Try following a wall.",
+          "This maze might require using data structures.  Advanced programmers only!"
+      ],
+      // Level 10 categories.
+      catMaze: 'Maze',
+      catControl: 'Control',
+      catLogic: 'Logic',
+      catMath: 'Math',
+      catLists: 'Lists',
+      catVariables: 'Variables',
+      catProcedures: 'Procedures',
+      // Misc text.
+      level: 'Level',
+      capacity0: 'You have <span id="capacityNumber">0</span> blocks left.',
+      capacity1: 'You have <span id="capacityNumber">1</span> block left.',
+      capacity2: 'You have <span id="capacityNumber">%1</span> blocks left.',
+      runProgram: 'Run Program',
+      resetProgram: '\u00A0 \u00A0 Reset \u00A0 \u00A0',
+      nextLevel: 'Congratulations!\nAre you ready to proceed to level %1?',
+      finalLevel: 'Congratulations!\nYou have solved the final level.',
+      title: 'Maze'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
+      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
+      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
+          'Perhaps it was created with a different version of Blockly?\nXML: ';
+    }
+    var frameSrc9 = ['language/en/_messages.js'];
+    var frameSrc10 = ['language/en/_messages.js',
+        'language/common/control.js',
+        'language/common/logic.js',
+        'language/common/math.js',
+        'language/common/lists.js',
+        'language/common/variables.js',
+        'language/common/procedures.js',
+        'generators/javascript/control.js',
+        'generators/javascript/logic.js',
+        'generators/javascript/math.js',
+        'generators/javascript/lists.js',
+        'generators/javascript/variables.js',
+        'generators/javascript/procedures.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>

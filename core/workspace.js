@@ -52,6 +52,9 @@ Blockly.Workspace = function(editable) {
    */
   this.topBlocks_ = [];
 
+  /** @type {number} */
+  this.maxBlocks = Infinity;
+
   Blockly.ConnectionDB.init(this);
 };
 goog.inherits(Blockly.Workspace, Blockly.Component);
