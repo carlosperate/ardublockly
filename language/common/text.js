@@ -416,7 +416,13 @@ Blockly.Language.text_prompt = {
         .appendTitle(new Blockly.FieldImage(Blockly.pathToBlockly +
         'media/quote1.png', 12, 12));
     this.setOutput(true, [Number, String]);
-    this.setTooltip(Blockly.LANG_TEXT_PROMPT_TOOLTIP);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return (thisBlock.getTitleValue('TYPE') == 'TEXT') ?
+          Blockly.LANG_TEXT_PROMPT_TOOLTIP_TEXT :
+          Blockly.LANG_TEXT_PROMPT_TOOLTIP_NUMBER;
+    });
   }
 };
 

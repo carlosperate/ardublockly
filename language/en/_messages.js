@@ -223,7 +223,7 @@ Blockly.LANG_MATH_IS_DIVISIBLE_BY = 'is divisible by';
 Blockly.LANG_MATH_IS_TOOLTIP = 'Check if a number is an even, odd, prime, whole, positive, negative,\n' +
     'or if it is divisible by certain number.  Returns true or false.';
 
-Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Negation';
+Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'change';
 Blockly.LANG_MATH_CHANGE_TITLE_ITEM = 'item';
 Blockly.LANG_MATH_CHANGE_INPUT_BY = 'by';
@@ -356,7 +356,8 @@ Blockly.LANG_TEXT_PRINT_TOOLTIP = 'Print the specified text, number or other val
 Blockly.LANG_TEXT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
 Blockly.LANG_TEXT_PROMPT_TITLE_PROMPT_FOR = 'prompt for';
 Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE = 'with message';
-Blockly.LANG_TEXT_PROMPT_TOOLTIP = 'Prompt for user input with the specified text.';
+Blockly.LANG_TEXT_PROMPT_TOOLTIP_NUMBER = 'Prompt for user for a number.';
+Blockly.LANG_TEXT_PROMPT_TOOLTIP_TEXT = 'Prompt for user for some text.';
 Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = 'text';
 Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = 'number';
 
