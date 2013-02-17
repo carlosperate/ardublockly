@@ -1,5 +1,5 @@
-<html lang="en">
-<head>
+<html lang="vn">
+<head>vn
   <meta charset="utf-8">
   <title>Blockly Code</title>
   <link href="style.css" rel="stylesheet" type="text/css">
@@ -9,34 +9,34 @@
   <script>
     var MSG = {
       // Tooltips.
-      trashTooltip: 'Discard all blocks.',
-      linkTooltip: 'Save and link to blocks.',
-      runTooltip: 'Run program',
+      trashTooltip: 'Xóa tất cả mọi mảnh.',
+      linkTooltip: 'Lưu và lấy địa chỉ liên kết.',
+      runTooltip: 'Chạy chương trình.',
       // Toolbox categories.
-      catControl: 'Control',
-      catLogic: 'Logic',
-      catMath: 'Math',
-      catText: 'Text',
-      catLists: 'Lists',
-      catColour: 'Colour',
-      catVariables: 'Variables',
-      catProcedures: 'Procedures',
+      catControl: 'Điều khiển',
+      catLogic: 'Lôgit',
+      catMath: 'Toán',
+      catText: 'Văn bản',
+      catLists: 'Danh sách',
+      catColour: 'Màu',
+      catVariables: 'Biến',
+      catProcedures: 'Phương thức',
       // Misc text.
-      blocks: 'Blocks',
-      badXml: 'Error parsing XML:\n%1\n\nAbandon changes?',
-      badCode: 'Program error:\n%1',
-      timeout: 'Maximum execution iterations exceeded.',
+      blocks: 'Các mảnh',
+      badXml: 'Lỗi khi đọc XML:\n%1\n\nNên hủy các mảnh đã tạo?',
+      badCode: 'Lỗi chương trình:\n%1',
+      timeout: 'Đã vượt quá số lần lặp cho phép.',
       title: 'Code'
     };
     if ('BlocklyStorage' in window) {
-      BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
-      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-          'Perhaps it was created with a different version of Blockly?\nXML: ';
+      BlocklyStorage.DISCARD_WARNING = 'Xóa hết "%1" mảnh?';
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.\n';
+      BlocklyStorage.LINK_ALERT = 'Dùng liên kết này để chia sẽ chương trình của bạn:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Không tìm thấy chương trình được lưu ở "%1".';
+      BlocklyStorage.XML_ERROR = 'Không mở được chương trình của bạn.\n'+
+          'Có thể nó nằm trong một phiên bản khác của Blockly?\nXML là: ';
     }
-    var frameSrc = ['en/_messages.js',
+    var frameSrc = ['vn/_messages.js',
         'common/control.js',
         'common/logic.js',
         'common/math.js',
