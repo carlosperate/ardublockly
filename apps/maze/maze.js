@@ -23,14 +23,14 @@
  */
 'use strict';
 
-if ('BlocklyStorage' in window) {
-  BlocklyStorage.DISCARD_WARNING = 'Delete all "%1" blocks?';
-  BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-  BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
-  BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-  BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-      'Perhaps it was created with a different version of Blockly?\nXML: ';
-}
+var level = window.location.search.match(/[?&]level=(\d+)/);
+level = level ? level[1] : 1;
+level = Math.min(Math.max(1, level), 10);
+var frameSrc = 'frame.html?' + (level > 9 ? frameSrc10 : frameSrc9).join('&');
+document.write(mazetutorial.start({}, null,
+    {'MSG': MSG, 'level': level, frameSrc: frameSrc}));
+var maxBlocks = [undefined, // Level 0.
+    Infinity, Infinity, 2, 5, 10, 10, 10, 10, 10, Infinity][level];
 
 /**
  * Create a namespace for the application.
@@ -50,14 +50,99 @@ Maze.STEP_SPEED = 150;
  * 3. Finish square.
  */
 Maze.MAP = [
+ // Level 0.
+ undefined,
+ // Level 1.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 1, 1, 0, 1, 0, 3, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 2, 1, 3, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 2.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 1, 3, 0, 0, 0],
+  [0, 0, 2, 1, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 3.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 2, 1, 1, 1, 1, 3, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 4.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 1, 3, 0],
+  [0, 0, 0, 0, 1, 1, 0, 0],
+  [0, 0, 0, 1, 1, 0, 0, 0],
+  [0, 0, 1, 1, 0, 0, 0, 0],
+  [0, 2, 1, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 5.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0, 0],
+  [0, 1, 0, 0, 0, 1, 0, 0],
+  [0, 1, 1, 3, 0, 1, 0, 0],
+  [0, 0, 0, 0, 0, 1, 0, 0],
+  [0, 2, 1, 1, 1, 1, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 6.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 1, 1, 0],
+  [0, 2, 1, 1, 1, 1, 0, 0],
+  [0, 0, 0, 0, 0, 1, 1, 0],
+  [0, 1, 1, 3, 0, 1, 0, 0],
+  [0, 1, 0, 1, 0, 1, 0, 0],
+  [0, 1, 1, 1, 1, 1, 1, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 7.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 1, 1, 3, 0, 0, 0],
+  [0, 0, 1, 0, 0, 0, 0, 0],
+  [0, 0, 1, 1, 1, 0, 0, 0],
+  [0, 0, 0, 0, 1, 0, 0, 0],
+  [0, 0, 2, 1, 1, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 8.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 0, 0, 0],
+  [0, 1, 0, 0, 1, 1, 0, 0],
+  [0, 1, 1, 1, 0, 1, 0, 0],
+  [0, 0, 0, 1, 0, 1, 0, 0],
+  [0, 2, 1, 1, 0, 3, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 9.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 0, 3, 0, 1, 0],
   [0, 1, 1, 0, 1, 1, 1, 0],
-  [0, 1, 0, 0, 1, 0, 0, 0],
+  [0, 1, 0, 0, 0, 1, 0, 0],
   [0, 1, 1, 1, 1, 1, 1, 0],
   [0, 0, 1, 0, 0, 0, 1, 0],
   [0, 2, 1, 1, 1, 0, 1, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0]];
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 10.
+ [[1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 1, 0, 1, 3, 1],
+  [1, 0, 1, 1, 0, 1, 1, 1],
+  [1, 1, 1, 1, 0, 1, 1, 0],
+  [1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 0, 1, 0, 1, 0],
+  [1, 2, 1, 0, 1, 1, 1, 1],
+  [1, 1, 1, 0, 1, 1, 1, 1]]
+][level];
 
 /**
  * Measure maze dimensions and set sizes.
@@ -281,13 +366,13 @@ Maze.init = function(blockly) {
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Maze.checkTimeout(%1);\n';
   Maze.draw_map();
 
-  window.onbeforeunload = function() {
-    if (Blockly.mainWorkspace.getAllBlocks().length > 1 &&
-        window.location.hash.length <= 1) {
-      return 'Leaving this page will result in the loss of your work.';
-    }
-    return null;
-  };
+  //window.onbeforeunload = function() {
+  //  if (Blockly.mainWorkspace.getAllBlocks().length > 1 &&
+  //      window.location.hash.length <= 1) {
+  //    return 'Leaving this page will result in the loss of your work.';
+  //  }
+  //  return null;
+  //};
 
   if (!('BlocklyStorage' in window)) {
     document.getElementById('linkButton').className = 'disabled';
@@ -295,10 +380,11 @@ Maze.init = function(blockly) {
   // An href with #key trigers an AJAX call to retrieve saved blocks.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-  } else { // Load the editor with a starting block.
+  } else {
+    // Load the editor with a starting block.
     var xml = Blockly.Xml.textToDom(
         '<xml>' +
-        '  <block type="maze_move" x="85" y="100"></block>' +
+        '  <block type="maze_move" x="250" y="70"></block>' +
         '</xml>');
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
@@ -315,6 +401,23 @@ Maze.init = function(blockly) {
   }
 
   Maze.reset();
+
+  function onchange() {
+    var cap = Blockly.mainWorkspace.remainingCapacity();
+    var p = document.getElementById('capacity');
+    if (cap == Infinity) {
+      p.innerHTML = '';
+    } else if (cap == 0) {
+      p.innerHTML = MSG.capacity0;
+    } else if (cap == 1) {
+      p.innerHTML = MSG.capacity1;
+    } else {
+      cap = Number(cap);
+      p.innerHTML = MSG.capacity2.replace('%1', cap);
+    }
+  }
+
+  Blockly.addChangeListener(onchange);
 };
 
 /**
@@ -347,7 +450,6 @@ Maze.reset = function() {
 Maze.runButtonClick = function() {
   document.getElementById('runButton').style.display = 'none';
   document.getElementById('resetButton').style.display = 'inline';
-  document.getElementById('toolbarDiv').style.visibility = 'hidden';
   Blockly.mainWorkspace.traceOn(true);
   Maze.execute();
 };
@@ -358,56 +460,7 @@ Maze.runButtonClick = function() {
 Maze.resetButtonClick = function() {
   document.getElementById('runButton').style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
-  document.getElementById('toolbarDiv').style.visibility = 'visible';
   Blockly.mainWorkspace.traceOn(false);
-  Maze.reset();
-};
-
-/**
- * Move the start and finish to random locations.
- * Set the starting direction randomly.
- */
-Maze.randomize = function() {
-  // Clear the existing start and finish locations.
-  Maze.MAP[Maze.start_.y][Maze.start_.x] = 1;
-  Maze.MAP[Maze.finish_.y][Maze.finish_.x] = 1;
-
-  /**
-   * Find a random point that's a dead-end on the maze.
-   * Set this point to be either the start or finish.
-   * This function is a closure, but does not reference any outside variables.
-   * @param {number} state 2 -> start point, 3-> finish point.
-   * @return {!Object} X-Y coordinates of new point.
-   */
-  function findCorner(state) {
-    while (true) {
-      var x = Math.floor(Math.random() * (Maze.MAP[0].length - 2)) + 1;
-      var y = Math.floor(Math.random() * (Maze.MAP.length - 2) + 1);
-      if (Maze.MAP[y][x] == 1) {
-        // Count the walls.
-        var walls = 0;
-        if (Maze.MAP[y + 1][x] == 0) {
-          walls++;
-        }
-        if (Maze.MAP[y - 1][x] == 0) {
-          walls++;
-        }
-        if (Maze.MAP[y][x + 1] == 0) {
-          walls++;
-        }
-        if (Maze.MAP[y][x - 1] == 0) {
-          walls++;
-        }
-        if (walls == 3) {
-          Maze.MAP[y][x] = state;
-          return {x: x, y: y};
-        }
-      }
-    }
-  }
-  Maze.start_ = findCorner(2);
-  Maze.finish_ = findCorner(3);
-  Maze.startDirection = Math.floor(Math.random() * 4);
   Maze.reset();
 };
 
@@ -486,9 +539,23 @@ Maze.animate = function() {
       break;
     case 'finish':
       Maze.scheduleFinish();
+      window.setTimeout(Maze.congratulations, 1000);
   }
 
   Maze.pidList.push(window.setTimeout(Maze.animate, Maze.STEP_SPEED * 5));
+};
+
+Maze.congratulations = function() {
+  if (level < 9) {
+    var proceed = window.confirm(MSG.nextLevel.replace('%1', level + 1));
+    if (proceed) {
+      window.location = window.location.protocol + '//' +
+          window.location.hostname + window.location.pathname +
+          '?level=' + (level + 1)
+    }
+  } else {
+    alert(MSG.finalLevel);
+  }
 };
 
 /**
@@ -749,13 +816,15 @@ Maze.isWall = function(direction) {
   effectiveDirection = Maze.constrainDirection4(effectiveDirection);
   var square;
   if (effectiveDirection == Maze.NORTH) {
-    square = Maze.MAP[Maze.pegmanY - 1][Maze.pegmanX];
+    square = Maze.MAP[Maze.pegmanY - 1] &&
+      Maze.MAP[Maze.pegmanY - 1][Maze.pegmanX];
   } else if (effectiveDirection == Maze.EAST) {
     square = Maze.MAP[Maze.pegmanY][Maze.pegmanX + 1];
   } else if (effectiveDirection == Maze.SOUTH) {
-    square = Maze.MAP[Maze.pegmanY + 1][Maze.pegmanX];
+    square = Maze.MAP[Maze.pegmanY + 1] &&
+        Maze.MAP[Maze.pegmanY + 1][Maze.pegmanX];
   } else if (effectiveDirection == Maze.WEST) {
     square = Maze.MAP[Maze.pegmanY][Maze.pegmanX - 1];
   }
-  return square == 0;
+  return square === 0 || square === undefined;
 };

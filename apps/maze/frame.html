@@ -6,16 +6,34 @@
   <script type="text/javascript" src="../../generators/javascript.js"></script>
   <script type="text/javascript" src="../../generators/javascript/control.js"></script>
   <script type="text/javascript" src="../../generators/javascript/logic.js"></script>
+  <script type="text/javascript" src="../../generators/javascript/math.js"></script>
+  <script type="text/javascript" src="../../generators/javascript/text.js"></script>
+  <script type="text/javascript" src="../../generators/javascript/lists.js"></script>
+  <script type="text/javascript" src="../../generators/javascript/colour.js"></script>
+  <script type="text/javascript" src="../../generators/javascript/variables.js"></script>
+  <script type="text/javascript" src="../../generators/javascript/procedures.js"></script>
   <script type="text/javascript" src="language.js"></script>
-  <script type="text/javascript" src="../../language/en/_messages.js"></script>
-  <script type="text/javascript" src="../../language/common/control.js"></script>
-  <script type="text/javascript" src="../../language/common/logic.js"></script>
-
+  <script>
+    (function() {
+      // Load the language-specific files listed on the URL.
+      var files =
+          decodeURIComponent(window.location.search.substring(1)).split('&');
+      for (var x = 0; x < files.length; x++) {
+        var file = files[x];
+        if (file.match(/^(\w+\/)+\w+\.js$/)) {
+          document.writeln('<script type="text/javascript" ' +
+              'src="../../' + file + '"><' + '/script>');
+        } else {
+          console.error('Illegal language file: ' + file);
+        }
+      }
+    })();
+  </script>
   <style>
     html, body {
       background-color: #fff;
       margin: 0;
-      padding:0;
+      padding: 0;
       overflow: hidden;
     }
     .blocklySvg {
@@ -25,20 +43,5 @@
   </style>
 </head>
 <body onload="init()">
-  <xml id="toolbox" style="display: none">
-    <category name="Commands">
-      <block type="maze_move"></block>
-      <block type="maze_turn"><title name="DIR">turnLeft</title></block>
-      <block type="maze_turn"><title name="DIR">turnRight</title></block>
-    </category>
-    <category name="Logic">
-      <block type="maze_isWall"></block>
-      <block type="controls_if"></block>
-      <block type="controls_forever"></block>
-      <block type="controls_whileUntil"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-    </category>
-  </xml>
 </body>
 </html>

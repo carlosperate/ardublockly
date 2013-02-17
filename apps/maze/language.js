@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var MSG = window.parent.MSG;
+var maxBlocks = window.parent.maxBlocks;
+var toolbox = window.parent.document.getElementById('toolbox');
+
 // Extensions to Blockly's language and JavaScript generator.
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
@@ -33,16 +37,16 @@ Blockly.Language.maze_move = {
   init: function() {
     this.setColour(290);
     this.appendDummyInput()
-        .appendTitle('move')
+        .appendTitle(MSG.move)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Moves Pegman forward or backward one space.');
+    this.setTooltip(MSG.moveTooltip);
   }
 };
 
 Blockly.Language.maze_move.DIRECTIONS =
-    [['forward', 'moveForward'], ['backward', 'moveBackward']];
+    [[MSG.forward, 'moveForward'], [MSG.backward, 'moveBackward']];
 
 Blockly.JavaScript.maze_move = function() {
   // Generate JavaScript for moving forward or backwards.
@@ -55,16 +59,16 @@ Blockly.Language.maze_turn = {
   init: function() {
     this.setColour(290);
     this.appendDummyInput()
-        .appendTitle('turn')
+        .appendTitle(MSG.turn)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Turns Pegman left or right by 90 degrees.');
+    this.setTooltip(MSG.turnTooltip);
   }
 };
 
 Blockly.Language.maze_turn.DIRECTIONS =
-    [['left', 'turnLeft'], ['right', 'turnRight'], ['randomly', 'random']];
+    [[MSG.left, 'turnLeft'], [MSG.right, 'turnRight'], [MSG.randomly, 'random']];
 
 Blockly.JavaScript.maze_turn = function() {
   // Generate JavaScript for turning left or right.
@@ -82,10 +86,6 @@ Blockly.JavaScript.maze_turn = function() {
   return code;
 };
 
-// Before Jan 2013 there were separate left and right blocks.
-Blockly.JavaScript.maze_turnLeft = Blockly.JavaScript.maze_turn;
-Blockly.JavaScript.maze_turnRight = Blockly.JavaScript.maze_turn;
-
 Blockly.Language.maze_isWall = {
   // Block for checking if there a wall.
   helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
@@ -93,7 +93,7 @@ Blockly.Language.maze_isWall = {
     this.setColour(120);
     this.setOutput(true, Boolean);
     this.appendDummyInput()
-        .appendTitle('wall')
+        .appendTitle(MSG.wall)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.setTooltip('Returns true if there is a wall\n' +
                     'in the specified direction.');
@@ -101,31 +101,89 @@ Blockly.Language.maze_isWall = {
 };
 
 Blockly.Language.maze_isWall.DIRECTIONS =
-    [['ahead', 'isWallForward'],
-     ['to the left', 'isWallLeft'],
-     ['to the right', 'isWallRight'],
-     ['behind', 'isWallBackward']];
+    [[MSG.ahead, 'isWallForward'],
+     [MSG.toTheLeft, 'isWallLeft'],
+     [MSG.toTheRight, 'isWallRight'],
+     [MSG.behind, 'isWallBackward']];
 
 Blockly.JavaScript.maze_isWall = function() {
-  // Generate JavaScript for checking if there is a wall.
+   // Generate JavaScript for checking if there is a wall.
   var code = 'Maze.' + this.getTitleValue('DIR') + '()';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Language.controls_forever = {
+Blockly.Language.maze_if = {
+  // Block for 'if' conditional if there a wall.
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
+  init: function() {
+    this.setColour(120);
+    this.appendDummyInput()
+        .appendTitle(MSG.ifWall)
+        .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
+    this.appendStatementInput('DO')
+        .appendTitle(MSG.do);
+    this.setTooltip(MSG.ifTooltip);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Language.maze_if.DIRECTIONS =
+    Blockly.Language.maze_isWall.DIRECTIONS;
+
+Blockly.JavaScript.maze_if = function() {
+  // Generate JavaScript for 'if' conditional if there is a wall.
+  var argument = 'Maze.' + this.getTitleValue('DIR') + '()';
+  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
+  var code = 'if (' + argument + ') {\n' + branch + '}';
+  return code;
+};
+
+Blockly.Language.maze_ifelse = {
+  // Block for 'if/else' conditional if there a wall.
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
+  init: function() {
+    this.setColour(120);
+    this.appendDummyInput()
+        .appendTitle(MSG.ifWall)
+        .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
+    this.appendStatementInput('DO')
+        .appendTitle(MSG.do);
+    this.appendStatementInput('ELSE')
+        .appendTitle(MSG.else);
+    this.setTooltip(MSG.ifelseTooltip);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+};
+
+Blockly.Language.maze_ifelse.DIRECTIONS =
+    Blockly.Language.maze_isWall.DIRECTIONS;
+
+Blockly.JavaScript.maze_ifelse = function() {
+  // Generate JavaScript for 'if/else' conditional if there is a wall.
+  var argument = 'Maze.' + this.getTitleValue('DIR') + '()';
+  var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
+  var branch1 = Blockly.JavaScript.statementToCode(this, 'ELSE');
+  var code = 'if (' + argument + ') {\n' + branch0 + '} else {\n' +
+      branch1 + '}';
+  return code;
+};
+
+Blockly.Language.maze_forever = {
   // Do forever loop.
   helpUrl: 'http://code.google.com/p/blockly/wiki/Repeat',
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle('repeat until finished');
-    this.appendStatementInput('DO').appendTitle('do');
+        .appendTitle(MSG.repeatUntilFinished);
+    this.appendStatementInput('DO').appendTitle(MSG.do);
     this.setPreviousStatement(true);
-    this.setTooltip('Repeat the enclosed steps until finish point is reached.');
+    this.setTooltip(MSG.whileTooltip);
   }
 };
 
-Blockly.JavaScript.controls_forever = function() {
+Blockly.JavaScript.maze_forever = function() {
   // Generate JavaScript for do forever loop.
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
@@ -136,8 +194,8 @@ Blockly.JavaScript.controls_forever = function() {
 };
 
 function init() {
-  var toolbox = document.getElementById('toolbox');
-  Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
+  Blockly.inject(document.body,
+      {path: '../../', toolbox: toolbox, maxBlocks: maxBlocks});
 
   if (window.parent.Maze) {
     // Let the top-level application know that Blockly is ready.
