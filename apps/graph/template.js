@@ -5,7 +5,7 @@ if (typeof graphpage == 'undefined') { var graphpage = {}; }
 
 
 graphpage.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<table width="100%" height="100%"><tr><td width="410" valign="top"><h1><button id="linkButton" title="' + soy.$$escapeHtml(opt_ijData.MSG.linkTooltip) + '" onclick="BlocklyStorage.link()"><img src=\'link.png\' height=21 width=21></button><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; ' + soy.$$escapeHtml(opt_ijData.MSG.title) + '</h1><div id="visualization"></div><div id="funcText"><img id="y1" src="1x1.gif">...</div></td><td valign="top">' + graphpage.toolbox(null, null, opt_ijData) + '<iframe src="frame.html?' + soy.$$escapeHtml(opt_ijData.frameSrc) + '"></iframe></td></tr></table>';
+  return '<table width="100%" height="100%"><tr><td width="410" valign="top"><h1><button id="linkButton" title="' + soy.$$escapeHtml(opt_ijData.MSG.linkTooltip) + '" onclick="BlocklyStorage.link()"><img src=\'link.png\' height=21 width=21></button><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; ' + soy.$$escapeHtml(opt_ijData.MSG.title) + '</h1><div id="visualization"></div><div id="funcText"><img id="y1" src="../../media/1x1.gif">...</div></td><td valign="top">' + graphpage.toolbox(null, null, opt_ijData) + '<iframe src="frame.html?' + soy.$$escapeHtml(opt_ijData.frameSrc) + '"></iframe></td></tr></table>';
 };
 
 
