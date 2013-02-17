@@ -1,17 +1,17 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Blockly Plane (1)</title>
+  <title>Máy Bay Blockly (1)</title>
   <script type="text/javascript">
     var MSG = {
-      getRows: 'get rows',
-      rows: 'Rows: %1',
-      setSeats: 'set seats',
-      seats: 'Seats: %1'
+      getRows: 'đếm số hàng ghế',
+      rows: 'Số hàng ghế: %1',
+      setSeats: 'Tính số chỗ ngồi',
+      seats: 'Số chỗ ngồi: %1'
     };
   </script>
   <script type="text/javascript" src="../../blockly_compressed.js"></script>
-  <script type="text/javascript" src="../../language/en/_messages.js"></script>
+  <script type="text/javascript" src="../../language/vn/_messages.js"></script>
   <script type="text/javascript" src="../../language/common/math.js"></script>
   <script type="text/javascript" src="../../generators/javascript.js"></script>
   <script type="text/javascript" src="../../generators/javascript/math.js"></script>
@@ -20,16 +20,16 @@
   <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body onload="init()">
-  <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; Plane (1)</h1>
+  <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; Máy Bay (1)</h1>
 
   <embed src="plane.svg" height=256 width=600 type="image/svg+xml"/>
   <p>
-    An airplane has two seats in the flight deck (for the pilot and co-pilot),
-    and a number of rows of passenger seats.  Each row contains four seats.
+    Một máy bay có hai ghế trong buồng lái (dành cho phi công trưởng và phi công phụ),
+    và một loạt hàng ghế cho hành khách. Mỗi hàng có bốn ghế (bốn chỗ ngồi).
   </p>
   <p>
-    Build a formula (below) that calculates the total number of seats on
-    the airplane as the rows are changed (above).
+    Dưới đây hãy tạo công thức tính số chỗ ngồi trên máy bay
+    để nó thay đổi tùy theo số lượng hàng ghế (hình trên).
   </p>
 
   <div id="svgDiv"></div>

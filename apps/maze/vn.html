@@ -1,7 +1,7 @@
 <html lang="vn">
 <head>
   <meta charset="utf-8">
-  <title>Blockly Maze</title>
+  <title>Ma Trận Blockly</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
@@ -34,7 +34,7 @@
           'hãy thực hiện các lệnh thứ nhất.\n' +
           'Nếu không, thực hiện các lệnh thứ hai.',
       whileTooltip: 'Thực hiện các lệnh được bao gồm cho đến khi đến đích thì ngưng.',
-      codeTooltip: 'Xem kết quả trong ngôn ngữ JavaScript.',
+      codeTooltip: 'Xem code đã tạo bằng JavaScript.',
       linkTooltip: 'Lưu và lấy địa chỉ liên kết.',
       // Level hints.
       hints: [undefined, // There is no level 0.
@@ -62,12 +62,13 @@
       capacity0: 'Bạn còn <span id="capacityNumber">0</span> mảnh.',
       capacity1: 'Bạn còn <span id="capacityNumber">1</span> mảnh.',
       capacity2: 'Bạn còn <span id="capacityNumber">%1</span> mảnh.',
+      runProgram: '\u00A0 \u00A0 Chạy \u00A0 \u00A0',
+      resetProgram: 'Về Điểm Khởi Đầu',
       nextLevel: 'Chúc mừng!\nBạn sẵn sàng lên cấp %1?',
       finalLevel: 'Chúc mừng!\nBạn đã giải xong cấp cuối cùng.',
       title: 'Ma trận'
     };
     if ('BlocklyStorage' in window) {
-      BlocklyStorage.DISCARD_WARNING = 'Xóa hết "%1" mảnh?';
       BlocklyStorage.HTTPREQUEST_ERROR = 'Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.\n';
       BlocklyStorage.LINK_ALERT = 'Dùng liên kết này để chia sẽ chương trình của bạn:\n\n';
       BlocklyStorage.HASH_ERROR = 'Không tìm thấy chương trình được lưu ở "%1".';

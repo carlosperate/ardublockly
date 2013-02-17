@@ -1,7 +1,7 @@
-<html lang="en">
+<html lang="vn">
 <head>
   <meta charset="utf-8">
-  <title>Blockly Turtle Graphics</title>
+  <title>Đồ Họa Con Rùa Blockly</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
@@ -11,54 +11,55 @@
     var MSG = {
       // Block text.
       // Parts for: 'move forward by 10'.
-      move: 'move',
-      moveBy: 'by',
-      forward: 'forward',
-      backward: 'backward',
-      // Parts for: 'turn right by 90'.
-      turn: 'turn',
-      turnBy: 'by',
-      right: 'right',
-      left: 'left',
-      setWidth: 'set width',
-      pen: 'pen',
-      up: 'up',
-      down: 'down',
+      move: 'đi',
+      moveBy: '',
+      forward: 'tới',
+      backward: 'lui',
+      // Parts for: 'quay qua phải 90 (độ)'.
+      turn: 'quay qua',
+      turnBy: '',
+      right: 'tay phải',
+      left: 'tay trái',
+      setWidth: 'đặt chiều rộng',
+      setColour: 'gán màu',
+      pen: 'bút vẽ',
+      up: 'nhấc lên',
+      down: 'đặt xuống',
       // Tooltips.
-      moveTooltip: 'Moves the turtle forward or backward\n' +
-          'by the specified amount.',
-      turnTooltip: 'Turns the turtle left or right\n' +
-          'by the specified number of degrees.',
-      widthTooltip: 'Changes the width of the pen.',
-      penTooltip: 'Lifts or lowers the pen,\n' +
-          'to start or stop drawing.',
-      colourTooltip: 'Changes the colour of the pen.',
-      codeTooltip: 'See generated JavaScript code.',
-      linkTooltip: 'Save and link to blocks.',
+      moveTooltip: 'Di chuyển con rùa tới hoặc lui\n' +
+          'một đoạn tùy ý.',
+      turnTooltip: 'Quay con rùa qua tay trái hoặc tay phải \n' +
+          'một số độ tùy ý.',
+      widthTooltip: 'Thay đổi độ rộng của bút vẽ.',
+      penTooltip: 'Nhất bút vẽ lên hoặc đặt xuống,\n' +
+          'để bắt đầu hoặc ngưng nét vẽ.',
+      colourTooltip: 'Thay màu của bút vẽ.',
+      codeTooltip: 'Xem code đã tạo bằng JavaScript.',
+      linkTooltip: 'Lưu và lấy địa chỉ liên kết.',
       // Toolbox categories.
-      catDraw: 'Draw',
-      catControl: 'Control',
-      catLogic: 'Logic',
-      catMath: 'Math',
-      catLists: 'Lists',
-      catColour: 'Colour',
-      catVariables: 'Variables',
-      catProcedures: 'Procedures',
+      catDraw: 'Đồ họa',
+      catControl: 'Điều khiển',
+      catLogic: 'Lôgit',
+      catMath: 'Toán',
+      catLists: 'Danh sách',
+      catColour: 'Màu',
+      catVariables: 'Biến',
+      catProcedures: 'Phương thức',
       // Misc text.
-      unloadWarning: 'Leaving this page will result in the loss of your work.',
-      runProgram: 'Run Program',
-      resetProgram: '\u00A0 \u00A0 Reset \u00A0 \u00A0',
-      title: 'Turtle Graphics'
+      unloadWarning: 'Nếu rời khỏi trang này bạn sẽ mất kết quả hiện tại.',
+      runProgram: '\u00A0 \u00A0 Chạy \u00A0 \u00A0',
+      resetProgram: '\u00A0 Trở Về \u00A0',
+      title: 'Đồ Họa Con Rùa'
     };
     if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
-      BlocklyStorage.HASH_ERROR =
-          'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-          'Perhaps it was created with a different version of Blockly?\nXML: ';
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.\n';
+      BlocklyStorage.LINK_ALERT = 'Dùng liên kết này để chia sẽ chương trình của bạn:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Không tìm thấy chương trình được lưu ở "%1".';
+      BlocklyStorage.XML_ERROR = 'Không mở được chương trình của bạn.\n'+
+          'Có thể nó nằm trong một phiên bản khác của Blockly?\nXML là: ';
     }
-    var frameSrc = ['en/_messages.js',
+
+    var frameSrc = ['vn/_messages.js',
         'common/control.js',
         'common/logic.js',
         'common/math.js',
