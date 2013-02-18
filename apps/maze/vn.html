@@ -12,41 +12,41 @@
       move: 'đi',
       forward: 'tới',
       backward: 'lui',
-      turn: 'quay qua',
+      turn: 'quay',
       left: 'bên trái',
       right: 'bên phải',
       randomly: 'tùy hứng',
-      path: 'bức tường', // TODO: wall->path
-      ifPath: 'nếu có tường', // TODO: wall->path
+      path: 'đường',
+      ifPath: 'nếu có đường',
       do: 'hãy',
       else: 'nếu không',
       ahead: 'phía trước',
-      toTheLeft: 'bên trái',
-      toTheRight: 'bên phải',
+      toTheLeft: 'qua trái',
+      toTheRight: 'qua phải',
       behind: 'đằng sau',
       repeatUntilFinished: 'lặp lại cho đến đích',
       // Tooltips.
       moveTooltip: 'Di chuyển Pegman tới hoặc lùi một bước.',
       turnTooltip: 'Quay Pegman qua bên trái hoặc bên phải 90 độ.',
-      ifTooltip: 'Nếu có bức tường ở một hướng nào,\n' + // TODO: wall->path
-          'hãy thực hiện các lệnh được đặc ra.',
-      ifelseTooltip: 'Nếu có bức tường ở một hướng nào,\n' + // TODO: wall->path
+      ifTooltip: 'Nếu có đường ở hướng đấy,\n' +
+          'hãy thực hiện các lệnh đưa ra.',
+      ifelseTooltip: 'Nếu có đường ở hướng đấy,\n' +
           'hãy thực hiện các lệnh thứ nhất.\n' +
           'Nếu không, thực hiện các lệnh thứ hai.',
-      whileTooltip: 'Thực hiện các lệnh được bao gồm cho đến khi đến đích thì ngưng.',
+      whileTooltip: 'Thực hiện các lệnh được bao gồm cho đến khi đến đích',
       codeTooltip: 'Xem code đã tạo bằng JavaScript.',
       linkTooltip: 'Lưu và lấy địa chỉ liên kết.',
       // Level hints.
       hints: [undefined, // There is no level 0.
           "Một chương trình là một chuỗi các lệnh.  Nối hai mảnh 'đi tới' để đến đích.",
-          "Để giải ma trận này thì cần tạo chuỗi lệnh gì?",
-          "Bộ nhớ của máy vi tính có hạn. Bạn chỉ có thể dùng hai mảnh để giải ma trận này.  Dùng mảnh ‘lặp lại' để chạy một lệnh nhiều lần.",
-          "Bạn chỉ có thể dùng năm mảnh để giải ma trận này.",
-          "Mảnh 'nếu' chỉ thực hiện lệnh khi điều kiện đưa vào là đúng. Hãy thử rẽ trái nếu gặp bức tường phía trước.", // TODO: wall->path
-          "Ma trận này nhìn rắc rối hơn cái trước, nhưng thực sự lại không.",
-          "Bạn có thể dùng hơn một mảnh 'nếu'.",
-          "Mảnh 'nếu-nếu không' sẽ thực hiện một trong hai bộ lệnh.",
-          "Bạn có thể giải cái ma trận rắc rối này? Thử đi sát theo một bức tường.",
+          "Chuỗi lệnh gì sẽ giải ma trận này?",
+          "Bộ nhớ của máy vi tính có hạn. Ở chặn này bạn chỉ được dùng hai mảnh để đến đích.  Mảnh 'lặp lại' sẽ chạy một lệnh nhiều lần.",
+          "Để giải ma trận này, bạn chỉ được dùng năm mảnh.",
+          "Mảnh 'nếu [điều kiện]' nhìn vào điều kiện và chỉ thực hiện lệnh nếu có điều kiện ấy. Hãy thử rẽ trái nếu có đường bên trái.",
+          "Ma trận này nhìn rắc rối hơn cái trước, nhưng thực sự chúng cũng khá giống nhau.",
+          "Bạn có thể dùng hơn một mảnh 'nếu...', để sử lý nhiều điều kiện khác nhau.",
+          "Mảnh 'nếu-nếu không' sẽ giúp bạn. Nó sẽ thực hiện một trong hai lệnh hoặc nhóm lệnh đưa ra. Lệnh ở 'nếu không' chỉ chạy khi điều kiện ấy không có thật.",
+          "Bạn có thể giải cái ma trận rắc rối này? Gợi ý: Thử đi sát theo một bức tường, y như bạn đang giữ một tay theo suốt bức tường ấy, dù nó rẻ phải hay trái.",
           "Ma trận này đòi hỏi phải dùng cấu trúc dữ liệu. Chỉ dành cho người lập trình nâng cao!"
       ],
       // Level 10 categories.
