@@ -455,37 +455,37 @@ Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Tạo mảnh "lấy %1"';
 
 // Procedures Blocks.
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = 'phương thức';
+Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = 'thủ tục';
 Blockly.LANG_PROCEDURES_DEFNORETURN_DO = 'thực hiện';
-Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP = 'Một phương thức không có giá trị hoàn trả.';
+Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP = 'Một thủ tục không có giá trị hoàn trả.';
 
 Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE;
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'hoàn trả';
-Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Một phương thức có giá trị hoàn trả.';
+Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Một thủ tục có giá trị hoàn trả.';
 
 Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Cẩn thận:\n' +
-    'Phương thức này có lặp lại\n' +
+    'Thủ tục này có lặp lại\n' +
     'tên các tham số.';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'thực hiện';
-Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = 'phương thức';
-Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP = 'Chạy một phương thức không có giá trị hoàn trả.';
+Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = 'thủ tục';
+Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP = 'Chạy một thủ tục không có giá trị hoàn trả.';
 
 Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLRETURN_CALL = Blockly.LANG_PROCEDURES_CALLNORETURN_CALL;
 Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE;
-Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP = 'Chạy một phương thức có giá trị hoàn trả.';
+Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP = 'Chạy một thủ tục có giá trị hoàn trả.';
 
 Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = 'các tham số';
 Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'biến:';
 
-Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Làm nổi bật phương thức';
+Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Làm nổi bật thủ tục';
 Blockly.LANG_PROCEDURES_CREATE_DO = 'Tạo mảnh "thực hiện %1"';
 
 Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'Khi điều kiện đúng thì hoàn trả một giá trị.';
 Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Warning:\n' +
     'Mảnh này chỉ có thể dùng\n' +
-    'trong một phương thức.';
+    'trong một thủ tục.';
