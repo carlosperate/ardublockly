@@ -30,6 +30,18 @@ a:hover {
 #capacityNumber {
   font-weight: bold;
 }
+#bubble {
+  width: 385px;
+  padding: 7px;
+  border: 1px solid #CCB;
+  border-radius: 15px;
+  background-color: #ff7;
+}
+#pegman_bubble {
+  position: relative;
+  top: -1px;
+  margin-left: 20px;
+}
 
 /* Buttons */
 button {
