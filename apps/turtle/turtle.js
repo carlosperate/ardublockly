@@ -71,7 +71,13 @@ Turtle.init = function(blockly) {
   } else { // Load the editor with starting blocks.
     var xml = Blockly.Xml.textToDom(
         '<xml>' +
-        '  <block type="draw_move" x="85" y="100"></block>' +
+        '  <block type="draw_move" x="85" y="100">' +
+        '    <value name="VALUE">' +
+        '      <block type="math_number">' +
+        '        <title name="NUM">10</title>' +
+        '      </block>' +
+        '    </value>' +
+        '  </block>' +
         '</xml>');
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
