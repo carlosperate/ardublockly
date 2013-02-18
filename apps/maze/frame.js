@@ -86,39 +86,39 @@ Blockly.JavaScript.maze_turn = function() {
   return code;
 };
 
-Blockly.Language.maze_isWall = {
-  // Block for checking if there a wall.
-  helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
+Blockly.Language.maze_isPath = {
+  // Block for checking if there a path.
+  helpUrl: '',
   init: function() {
     this.setColour(120);
     this.setOutput(true, Boolean);
     this.appendDummyInput()
-        .appendTitle(MSG.wall)
+        .appendTitle(MSG.path)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
-    this.setTooltip('Returns true if there is a wall\n' +
+    this.setTooltip('Returns true if there is a path\n' +
                     'in the specified direction.');
   }
 };
 
-Blockly.Language.maze_isWall.DIRECTIONS =
-    [[MSG.ahead, 'isWallForward'],
-     [MSG.toTheLeft, 'isWallLeft'],
-     [MSG.toTheRight, 'isWallRight'],
-     [MSG.behind, 'isWallBackward']];
+Blockly.Language.maze_isPath.DIRECTIONS =
+    [[MSG.ahead, 'isPathForward'],
+     [MSG.toTheLeft, 'isPathLeft'],
+     [MSG.toTheRight, 'isPathRight'],
+     [MSG.behind, 'isPathBackward']];
 
-Blockly.JavaScript.maze_isWall = function() {
-  // Generate JavaScript for checking if there is a wall.
+Blockly.JavaScript.maze_isPath = function() {
+  // Generate JavaScript for checking if there is a path.
   var code = 'Maze.' + this.getTitleValue('DIR') + '()';
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Language.maze_if = {
-  // Block for 'if' conditional if there a wall.
-  helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
+  // Block for 'if' conditional if there a path.
+  helpUrl: '',
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle(MSG.ifWall)
+        .appendTitle(MSG.ifPath)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.appendStatementInput('DO')
         .appendTitle(MSG.do);
@@ -129,10 +129,10 @@ Blockly.Language.maze_if = {
 };
 
 Blockly.Language.maze_if.DIRECTIONS =
-    Blockly.Language.maze_isWall.DIRECTIONS;
+    Blockly.Language.maze_isPath.DIRECTIONS;
 
 Blockly.JavaScript.maze_if = function() {
-  // Generate JavaScript for 'if' conditional if there is a wall.
+  // Generate JavaScript for 'if' conditional if there is a path.
   var argument = 'Maze.' + this.getTitleValue('DIR') + '()';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   var code = 'if (' + argument + ') {\n' + branch + '}';
@@ -140,12 +140,12 @@ Blockly.JavaScript.maze_if = function() {
 };
 
 Blockly.Language.maze_ifelse = {
-  // Block for 'if/else' conditional if there a wall.
-  helpUrl: 'http://code.google.com/p/blockly/wiki/Wall',
+  // Block for 'if/else' conditional if there a path.
+  helpUrl: '',
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle(MSG.ifWall)
+        .appendTitle(MSG.ifPath)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.appendStatementInput('DO')
         .appendTitle(MSG.do);
@@ -158,10 +158,10 @@ Blockly.Language.maze_ifelse = {
 };
 
 Blockly.Language.maze_ifelse.DIRECTIONS =
-    Blockly.Language.maze_isWall.DIRECTIONS;
+    Blockly.Language.maze_isPath.DIRECTIONS;
 
 Blockly.JavaScript.maze_ifelse = function() {
-  // Generate JavaScript for 'if/else' conditional if there is a wall.
+  // Generate JavaScript for 'if/else' conditional if there is a path.
   var argument = 'Maze.' + this.getTitleValue('DIR') + '()';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
   var branch1 = Blockly.JavaScript.statementToCode(this, 'ELSE');

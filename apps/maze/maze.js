@@ -30,7 +30,7 @@ var frameSrc = (level > 9 ? frameSrc10 : frameSrc9).join('&');
 document.write(mazepage.start({}, null,
     {MSG: MSG, level: level, frameSrc: frameSrc}));
 var maxBlocks = [undefined, // Level 0.
-    Infinity, Infinity, 2, 5, 10, 10, 10, 10, 10, Infinity][level];
+    Infinity, Infinity, 2, 5, 10, 10, 10, 7, 10, Infinity][level];
 
 /**
  * Create a namespace for the application.
@@ -80,14 +80,14 @@ Maze.MAP = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
  // Level 4.
- [[0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
+ [[0, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 0, 0, 0, 0, 1, 1],
   [0, 0, 0, 0, 0, 1, 3, 0],
   [0, 0, 0, 0, 1, 1, 0, 0],
   [0, 0, 0, 1, 1, 0, 0, 0],
   [0, 0, 1, 1, 0, 0, 0, 0],
   [0, 2, 1, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0]],
+  [1, 1, 0, 0, 0, 0, 0, 0]],
  // Level 5.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -109,20 +109,20 @@ Maze.MAP = [
  // Level 7.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 1, 1, 3, 0, 0, 0],
-  [0, 0, 1, 0, 0, 0, 0, 0],
-  [0, 0, 1, 1, 1, 0, 0, 0],
-  [0, 0, 0, 0, 1, 0, 0, 0],
-  [0, 0, 2, 1, 1, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 8.
- [[0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 1, 1, 1, 0, 0, 0],
   [0, 1, 0, 0, 1, 1, 0, 0],
   [0, 1, 1, 1, 0, 1, 0, 0],
   [0, 0, 0, 1, 0, 1, 0, 0],
   [0, 2, 1, 1, 0, 3, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0, 0]],
+ // Level 8.
+ [[0, 0, 0, 0, 0, 0, 0, 0],
+  [0, 1, 1, 1, 1, 1, 0, 0],
+  [0, 0, 1, 0, 0, 0, 0, 0],
+  [3, 1, 1, 1, 1, 1, 1, 0],
+  [0, 1, 0, 1, 0, 1, 1, 0],
+  [1, 1, 1, 1, 1, 0, 1, 0],
+  [0, 1, 0, 1, 0, 2, 1, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
  // Level 9.
  [[0, 0, 0, 0, 0, 0, 0, 0],
@@ -734,20 +734,20 @@ Maze.turnRight = function(id) {
   Maze.turn(1, id);
 };
 
-Maze.isWallForward = function() {
-  return Maze.isWall(0);
+Maze.isPathForward = function() {
+  return Maze.isPath(0);
 };
 
-Maze.isWallRight = function() {
-  return Maze.isWall(1);
+Maze.isPathRight = function() {
+  return Maze.isPath(1);
 };
 
-Maze.isWallBackward = function() {
-  return Maze.isWall(2);
+Maze.isPathBackward = function() {
+  return Maze.isPath(2);
 };
 
-Maze.isWallLeft = function() {
-  return Maze.isWall(3);
+Maze.isPathLeft = function() {
+  return Maze.isPath(3);
 };
 
 // Core functions.
@@ -758,7 +758,7 @@ Maze.isWallLeft = function() {
  * @param {string} id ID of block that triggered this action.
  */
 Maze.move = function(direction, id) {
-  if (Maze.isWall(direction)) {
+  if (!Maze.isPath(direction)) {
     Maze.path.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
     return;
   }
@@ -806,12 +806,12 @@ Maze.turn = function(direction, id) {
 };
 
 /**
- * Is there a wall next to pegman?
+ * Is there a path next to pegman?
  * @param {number} direction Direction to look
  *     (0 = forward, 1 = right, 2 = backward, 3 = left).
- * @return {boolean} True if there is a wall.
+ * @return {boolean} True if there is a path.
  */
-Maze.isWall = function(direction) {
+Maze.isPath = function(direction) {
   var effectiveDirection = Maze.pegmanD + direction;
   effectiveDirection = Maze.constrainDirection4(effectiveDirection);
   var square;
@@ -826,5 +826,5 @@ Maze.isWall = function(direction) {
   } else if (effectiveDirection == Maze.WEST) {
     square = Maze.MAP[Maze.pegmanY][Maze.pegmanX - 1];
   }
-  return square === 0 || square === undefined;
+  return square !== 0 && square !== undefined;
 };

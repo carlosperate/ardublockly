@@ -16,8 +16,8 @@
       left: 'bên trái',
       right: 'bên phải',
       randomly: 'tùy hứng',
-      wall: 'bức tường',
-      ifWall: 'nếu có tường',
+      path: 'bức tường', // TODO: wall->path
+      ifPath: 'nếu có tường', // TODO: wall->path
       do: 'hãy',
       else: 'nếu không',
       ahead: 'phía trước',
@@ -28,9 +28,9 @@
       // Tooltips.
       moveTooltip: 'Di chuyển Pegman tới hoặc lùi một bước.',
       turnTooltip: 'Quay Pegman qua bên trái hoặc bên phải 90 độ.',
-      ifTooltip: 'Nếu có bức tường ở một hướng nào,\n' +
+      ifTooltip: 'Nếu có bức tường ở một hướng nào,\n' + // TODO: wall->path
           'hãy thực hiện các lệnh được đặc ra.',
-      ifelseTooltip: 'Nếu có bức tường ở một hướng nào,\n' +
+      ifelseTooltip: 'Nếu có bức tường ở một hướng nào,\n' + // TODO: wall->path
           'hãy thực hiện các lệnh thứ nhất.\n' +
           'Nếu không, thực hiện các lệnh thứ hai.',
       whileTooltip: 'Thực hiện các lệnh được bao gồm cho đến khi đến đích thì ngưng.',
@@ -42,10 +42,10 @@
           "Để giải ma trận này thì cần tạo chuỗi lệnh gì?",
           "Bộ nhớ của máy vi tính có hạn. Bạn chỉ có thể dùng hai mảnh để giải ma trận này.  Dùng mảnh ‘lặp lại' để chạy một lệnh nhiều lần.",
           "Bạn chỉ có thể dùng năm mảnh để giải ma trận này.",
-          "Mảnh 'nếu' chỉ thực hiện lệnh khi điều kiện đưa vào là đúng. Hãy thử rẽ trái nếu gặp bức tường phía trước.",
+          "Mảnh 'nếu' chỉ thực hiện lệnh khi điều kiện đưa vào là đúng. Hãy thử rẽ trái nếu gặp bức tường phía trước.", // TODO: wall->path
           "Ma trận này nhìn rắc rối hơn cái trước, nhưng thực sự lại không.",
+          "Bạn có thể dùng hơn một mảnh 'nếu'.",
           "Mảnh 'nếu-nếu không' sẽ thực hiện một trong hai bộ lệnh.",
-          "Bạn có thể dùng hơn một mảnh 'nếu-nếu không'.",
           "Bạn có thể giải cái ma trận rắc rối này? Thử đi sát theo một bức tường.",
           "Ma trận này đòi hỏi phải dùng cấu trúc dữ liệu. Chỉ dành cho người lập trình nâng cao!"
       ],

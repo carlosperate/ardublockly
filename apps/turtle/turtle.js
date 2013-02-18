@@ -51,7 +51,7 @@ Turtle.init = function(blockly) {
   Blockly.JavaScript.addReservedWords('Turtle,code,timeouts,checkTimeout');
 
   window.onbeforeunload = function() {
-    if (Blockly.mainWorkspace.getAllBlocks().length > 1) {
+    if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
       return MSG.unloadWarning;
     }
     return null;

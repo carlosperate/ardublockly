@@ -76,7 +76,7 @@
         <block type="maze_forever"></block>
         {if $ij.level > 4}
           <block type="maze_if"></block>
-          {if $ij.level > 6}
+          {if $ij.level > 7}
             <block type="maze_ifelse"></block>
           {/if}
         {/if}
@@ -88,7 +88,7 @@
         <block type="maze_move"></block>
         <block type="maze_turn"><title name="DIR">turnLeft</title></block>
         <block type="maze_turn"><title name="DIR">turnRight</title></block>
-        <block type="maze_isWall"></block>
+        <block type="maze_isPath"></block>
       </category>
       <category name="{$ij.MSG.catControl}">
         <block type="controls_if"></block>
