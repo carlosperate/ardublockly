@@ -193,8 +193,10 @@ Blockly.Language.lists_isEmpty = {
   init: function() {
     this.setColour(210);
     this.appendValueInput('VALUE')
-        .setCheck([Array, String])
+        .setCheck([Array, String]);
+    this.appendDummyInput()
         .appendTitle(Blockly.LANG_LISTS_INPUT_IS_EMPTY);
+    this.setInputsInline(true);
     this.setOutput(true, Boolean);
     this.setTooltip(Blockly.LANG_LISTS_TOOLTIP);
   }

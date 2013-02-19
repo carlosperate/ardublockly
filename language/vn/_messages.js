@@ -79,8 +79,8 @@ Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Nếu điều kiện đúng, thực hiện
 Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
     'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
-    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.' +
-    'Nếu không điều kiện nào đúng, thực hiện các lệnh thứ cuối cùng.';
+    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.\n' +
+    'Nếu không điều kiện nào đúng, thực hiện các lệnh cuối cùng.';
 Blockly.LANG_CONTROLS_IF_MSG_IF = 'nếu';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'nếu không nếu';
 Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'nếu không';
@@ -299,7 +299,7 @@ Blockly.LANG_TEXT_APPEND_VARIABLE = 'vật';
 Blockly.LANG_TEXT_APPEND_TOOLTIP = 'Thêm một mảng văn bản vào biến "%1".';
 
 Blockly.LANG_TEXT_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'độ dài';
+Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'độ dài của';
 Blockly.LANG_TEXT_LENGTH_TOOLTIP = 'Hoàn trả số lượng ký tự (kể cả khoảng trắng)\n' +
     'trong văn bản đầu vào.';
 
@@ -385,7 +385,7 @@ Blockly.LANG_LISTS_REPEAT_TOOLTIP = 'Tạo danh sách gồm một số lượng 
     'với mỗi vật đều giống nhau.';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'độ dài';
+Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'độ dài của';
 Blockly.LANG_LISTS_LENGTH_TOOLTIP = 'Hoàn trả độ dài của một danh sách.';
 
 Blockly.LANG_LISTS_IS_EMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';

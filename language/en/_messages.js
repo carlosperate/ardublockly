@@ -297,7 +297,7 @@ Blockly.LANG_TEXT_APPEND_VARIABLE = 'item';
 Blockly.LANG_TEXT_APPEND_TOOLTIP = 'Append some text to variable "%1".';
 
 Blockly.LANG_TEXT_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'length';
+Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'length of';
 Blockly.LANG_TEXT_LENGTH_TOOLTIP = 'Returns number of letters (including spaces)\n' +
     'in the provided text.';
 
@@ -383,7 +383,7 @@ Blockly.LANG_LISTS_REPEAT_TOOLTIP = 'Creates a list consisting of the given valu
     'repeated the specified number of times.';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'length';
+Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'length of';
 Blockly.LANG_LISTS_LENGTH_TOOLTIP = 'Returns the length of a list.';
 
 Blockly.LANG_LISTS_IS_EMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
