@@ -104,6 +104,16 @@
       </block>
       <block type="draw_pen"></block>
     </category>
+    <category name="{$ij.MSG.catColour}">
+      <block type="draw_colour">
+        <value name="COLOUR">
+          <block type="colour_picker"></block>
+        </value>
+      </block>
+      <block type="colour_picker"></block>
+      <block type="colour_rgb"></block>
+      <block type="colour_blend"></block>
+    </category>
     <category name="{$ij.MSG.catControl}">
       <block type="controls_if"></block>
       <block type="controls_repeat"></block>
@@ -189,16 +199,6 @@
       <block type="lists_indexOf"></block>
       <block type="lists_getIndex"></block>
       <block type="lists_setIndex"></block>
-    </category>
-    <category name="{$ij.MSG.catColour}">
-      <block type="draw_colour">
-        <value name="COLOUR">
-          <block type="colour_picker"></block>
-        </value>
-      </block>
-      <block type="colour_picker"></block>
-      <block type="colour_rgb"></block>
-      <block type="colour_blend"></block>
     </category>
     <category name="{$ij.MSG.catVariables}" custom="VARIABLE"></category>
     <category name="{$ij.MSG.catProcedures}" custom="PROCEDURE"></category>

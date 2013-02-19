@@ -1,0 +1,75 @@
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Turtle Graphics</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script type="text/javascript" src="slider.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      // Parts for: 'move forward by 10'.
+      move: 'laufe',
+      moveBy: 'um x Pixel',
+      forward: 'vorwärts',
+      backward: 'zurück',
+      // Parts for: 'turn right by 90'.
+      turn: 'drehe',
+      turnBy: 'herum, um x Grad',
+      right: 'rechts',
+      left: 'links',
+      setWidth: 'setze die Linienbreite auf',
+      setColour: 'ändere die Farbe in',
+      pen: 'Zeichnen',
+      up: 'an',
+      down: 'aus',
+      // Tooltips.
+      moveTooltip: 'Bewege die Schildkröte um angebenden Wert\n' +
+          'vorwärts oder rückwärts.',
+      turnTooltip: 'Dreht die Schildkröte um den angebenden Gradwert\n' +
+          'nach rechts oder links.',
+      widthTooltip: 'Ändere die Breite des Stiftes.',
+      penTooltip: 'De/aktiviert den Stift.\n' +
+          'Die Schildkröte zeichnet nur mit aktiven\n' +
+          'Stift eine Linie.',
+      colourTooltip: 'Ändere die Farbe des Stiftes.',
+      codeTooltip: 'Erzeugten JavaScript Code anzeigen.',
+      linkTooltip: 'Blöcke abspeichern und Link erzeugen.',
+      // Toolbox categories.
+      catDraw: 'Zeichnen',
+      catControl: 'Steuerung',
+      catLogic: 'Logik',
+      catMath: 'Mathe',
+      catLists: 'Listen',
+      catColour: 'Farben',
+      catVariables: 'Variablen',
+      catProcedures: 'Funktionen',
+      // Misc text.
+      unloadWarning: 'Ihre Arbeit geht verloren, wenn Sie diese Seite verlassen.',
+      runProgram: 'Programm ausführen',
+      resetProgram: '\u00A0 \u00A0 Zurücksetzen \u00A0 \u00A0',
+      title: 'Die zeichnende Schildkröte'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Es gab ein Problem während der HTTP Anfrage.\n';
+      BlocklyStorage.LINK_ALERT = 'Blöcke mit diesem Link teilen:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Entschuldigung, konnte die gespeicherten Blöcke für "%1" nicht finden.';
+      BlocklyStorage.XML_ERROR = 'Kann Sicherungsdatei nicht laden.\n'+
+          'Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?\nXML: ';
+    }
+    var frameSrc = ['de/_messages.js',
+        'common/control.js',
+        'common/logic.js',
+        'common/math.js',
+        'common/lists.js',
+        'common/colour.js',
+        'common/variables.js',
+        'common/procedures.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="turtle.js"></script>
+</body>
+</html>

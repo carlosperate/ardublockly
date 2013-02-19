@@ -1,0 +1,98 @@
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Labyrinth</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      move: 'laufe',
+      forward: 'vorwärts',
+      backward: 'zurück',
+      turn: 'drehen',
+      left: 'links herum',
+      right: 'rechts herum',
+      randomly: 'zufällig',
+      path: 'ein Pfad ist',
+      ifPath: 'wenn ein Pfad',
+      do: 'mache',
+      else: 'ansonsten',
+      ahead: 'vor Packman',
+      toTheLeft: 'links von Packman',
+      toTheRight: 'rechts von Packman',
+      behind: 'hinter Packman',
+      repeatUntilFinished: 'wiederhole bis zum Ziel',
+      // Tooltips.
+      moveTooltip: 'Packman läuft 1 Feld vor oder zurück.',
+      turnTooltip: 'Dreht Packman nach links oder rechts.',
+      ifTooltip: 'Führe eine Aktion aus,\n' +
+          'falls sich an der angegebenen Position\n' +
+          'ein Pfad befindet.',
+      ifelseTooltip: 'Falls sich an der angegebenen Position ein Pfad befindet,\n' +
+          'dann führe die erste Anweisung aus.\n' +
+          'Anderfalls führe die zweite Anweisung aus.',
+      whileTooltip: 'Führe die angegebene Aktion aus, bis das Ziel erreicht wurde.',
+      codeTooltip: 'Erzeugten JavaScript Code anzeigen.',
+      linkTooltip: 'Blöcke abspeichern und Link erzeugen.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+          "Ein Programm besteht aus einer Aneinanderreihungen von Anweisungen. Verbinde einige 'laufe vorwärts' Blöcke mir zu helfen um das Ziel zu erreichen.",
+          "Welche Anweisungen werden benötigt um dieses Labyrinth zu durchlaufen?",
+          "Computer haben begrenzten Speicher. Dieses Labyrinth lässt sich mit nur 2 Anweisungen lösen. Benutze 'wiederholen' um eine Anweisung mehr als ein mal aus zu führen.",
+          "Für dieses Labyrinth hast du nur 5 Anweisungen zur verfügung.",
+          "Eine 'wenn' Bedingung wird führt etwas nur aus, wenn die Bedingung wahr ist.  Versuche die Anweisung 'wenn ein Pfad vor Packman' aus.",
+          "Dieses Labyrinth sieht schwieriger aus als die vorherigen. Ist es aber nicht.",
+          "Du kannst zwei 'wenn' Bedingungen benutzen.",
+          "Wenn-ansonsten Anweisungen führen etwas aus wenn eine Bedingung zutrifft oder eine Alternative.",
+          "Schaffst du dieses komplexe Labyrinth.  Folge der Wand.",
+          "Dieses Labyrinth ist für fortgeschrittene!"
+      ],
+      // Level 10 categories.
+      catMaze: 'Labyrinth',
+      catControl: 'Steuerung',
+      catLogic: 'Logik',
+      catMath: 'Mathe',
+      catLists: 'Listen',
+      catVariables: 'Variablen',
+      catProcedures: 'Funktionen',
+      // Misc text.
+      level: 'Level',
+      capacity0: 'Du hast <span id="capacityNumber">0</span> Anweisungen zur Verfügung.',
+      capacity1: 'Du hast <span id="capacityNumber">1</span> Anweisung zur Verfügung.',
+      capacity2: 'Du hast <span id="capacityNumber">%1</span> Anweisungen zur Verfügung.',
+      runProgram: 'Programm ausführen',
+      resetProgram: '\u00A0 \u00A0 Zurücksetzen \u00A0 \u00A0',
+      nextLevel: 'Gratulation!\nIn das Level %1 gehen?',
+      finalLevel: 'Gratulation!\nDu hast das Spiel beendet.',
+      title: 'Labyrinth'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Es gab ein Problem während der HTTP Anfrage.\n';
+      BlocklyStorage.LINK_ALERT = 'Blöcke mit diesem Link teilen:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Entschuldigung, konnte die gespeicherten Blöcke für "%1" nicht finden.';
+      BlocklyStorage.XML_ERROR = 'Kann Sicherungsdatei nicht laden.\n'+
+          'Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?\nXML: ';
+    }
+    var frameSrc9 = ['language/de/_messages.js'];
+    var frameSrc10 = ['language/de/_messages.js',
+        'language/common/control.js',
+        'language/common/logic.js',
+        'language/common/math.js',
+        'language/common/lists.js',
+        'language/common/variables.js',
+        'language/common/procedures.js',
+        'generators/javascript/control.js',
+        'generators/javascript/logic.js',
+        'generators/javascript/math.js',
+        'generators/javascript/lists.js',
+        'generators/javascript/variables.js',
+        'generators/javascript/procedures.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>

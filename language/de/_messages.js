@@ -48,8 +48,8 @@ Blockly.MSG_HELP = 'Hilfe';
 Blockly.MSG_CHANGE_VALUE_TITLE = 'Wert ändern:';
 Blockly.MSG_NEW_VARIABLE = 'Neue Variable...';
 Blockly.MSG_NEW_VARIABLE_TITLE = 'Name der neuen Variable:';
-Blockly.MSG_RENAME_VARIABLE = 'Variable umbennen...';
-Blockly.MSG_RENAME_VARIABLE_TITLE = 'Alle "%1" Variablen umbennen in:';
+Blockly.MSG_RENAME_VARIABLE = 'Variable umbenennen...';
+Blockly.MSG_RENAME_VARIABLE_TITLE = 'Alle "%1" Variablen umbenennen in:';
 
 // Colour Blocks.
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://de.wikipedia.org/wiki/Farbe';
@@ -131,7 +131,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://de.wikipedia.org/wiki/Ko
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'aus der Schleife';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'ausbrechen';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'mit der nächsten Iteration fortfahren';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Die umgebnene Schleife beenden.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Die umgebene Schleife beenden.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Diese Anweisung abbrechen\n' +
     'und mit der nächsten Schleifeniteration fortfahren.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warnung:\n' +
@@ -176,8 +176,8 @@ Blockly.LANG_LOGIC_TERNARY_HELPURL = 'http://de.wikipedia.org/wiki/%3F:#Auswahlo
 Blockly.LANG_LOGIC_TERNARY_CONDITION = 'test';
 Blockly.LANG_LOGIC_TERNARY_IF_TRUE = 'wenn wahr';
 Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'wenn falsch';
-Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Überprüft eine Bedingung "test". Wenn die Bedingugn wahr ist\n' +
-    'wird der "wenn wahr" Wert zurückgegeben, andernfals der "wenn falsch" Wert';
+Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Überprüft eine Bedingung "test". Wenn die Bedingung wahr ist\n' +
+    'wird der "wenn wahr" Wert zurückgegeben, andernfalls der "wenn falsch" Wert';
 
 // Math Blocks.
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://de.wikipedia.org/wiki/Zahl';
@@ -195,7 +195,7 @@ Blockly.LANG_MATH_SINGLE_HELPURL = 'http://de.wikipedia.org/wiki/Quadratwurzel';
 Blockly.LANG_MATH_SINGLE_OP_ROOT = 'Quadratwurzel';
 Blockly.LANG_MATH_SINGLE_OP_ABSOLUTE = 'Absolutwert';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_ROOT = 'Ist die Qudratwurzel eines Wertes.';
-Blockly.LANG_MATH_SINGLE_TOOLTIP_ABS = 'Ist der absolutwert eines Wertes.';
+Blockly.LANG_MATH_SINGLE_TOOLTIP_ABS = 'Ist der Absolutwert eines Wertes.';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_NEG = 'Negiert einen Wert.';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_LN = 'Ist der natürliche Logarithmus eines Wertes.';
 Blockly.LANG_MATH_SINGLE_TOOLTIP_LOG10 = 'Ist der dekadische Logarithmus eines Wertes.';
@@ -252,9 +252,9 @@ Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN = 'Ist der kleinste Wert in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX = 'Ist der grösste Wert in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_AVERAGE = 'Ist der Durchschnittswert aller Werte in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MEDIAN = 'Ist der Zentralwert aller Werte in einer Liste.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Findet den am haüfigsten vorkommenden Wert in einer Liste.\n' +
+Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Findet den am häufigsten vorkommenden Wert in einer Liste.\n' +
     'Falls kein Wert öfter vorkomme als alle anderen,\n' +
-    'wird die original Liste zurückgegen';
+    'wird die originale Liste zurückgegen';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_STD_DEV = 'Ist die standartiesierte Standartabweichung aller Werte in der Liste';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_RANDOM = 'Gebe einen Zufallswert aus der Liste zurück.';
 
@@ -271,12 +271,12 @@ Blockly.LANG_MATH_CONSTRAIN_TOOLTIP = 'Begrenzt den Wertebereich mittels von / b
 Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://de.wikipedia.org/wiki/Zufallszahlen';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'ganzahliger Zufallswerte zwischen';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'und';
-Blockly.LANG_MATH_RANDOM_INT_TOOLTIP = 'Erzeug eine ganzahligen Zufallswert zwischen\n' +
+Blockly.LANG_MATH_RANDOM_INT_TOOLTIP = 'Erzeuge eine ganzahligen Zufallswert zwischen\n' +
     'zwei Werten (inklusiv).';
 
 Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://de.wikipedia.org/wiki/Zufallszahlen';
 Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'Zufallszahl (0.0 -1.0)';
-Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP = 'Erzeug eine Zufallszahl\n' +
+Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP = 'Erzeuge eine Zufallszahl\n' +
     'zwischen 0.0 (inklusiv) und 1.0 (exklusiv).';
 
 // Text Blocks.
@@ -336,7 +336,7 @@ Blockly.LANG_TEXT_CHARAT_TOOLTIP = 'Extrahiere einen Buchstaben von einer spezif
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = 'umwandeln in';
-Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Wandelt schreibweise von Texten um,\n' +
+Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Wandelt Schreibweise von Texten um,\n' +
     'in Grossbuchstaben, Kleinbuchstaben oder\n' +
     'den ersten Buchstaben jedes Wortes gross und die anderen klein.';
 Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = 'GROSSBUCHSTABEN';
@@ -346,7 +346,7 @@ Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = 'Wörter';
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_TRIM_TITLE_SPACE = 'entferne Leerzeichen von';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '';
-Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Enfernt Leerzeichen vom Anfang und / oder Ende\n' +
+Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Entfernt Leerzeichen vom Anfang und / oder Ende\n' +
     'eines Textes.';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'Seiten';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDE = 'Seite';
@@ -375,7 +375,7 @@ Blockly.LANG_LISTS_CREATE_WITH_INPUT_WITH = 'Erzeuge Liste mit';
 Blockly.LANG_LISTS_CREATE_WITH_TOOLTIP = 'Erzeugt eine List mit konfigurierten Elementen.';
 
 Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TITLE_ADD = 'Liste';
-Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TOOLTIP = 'Hinzufügen, entfernen und sortieren von Elmenten.';
+Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TOOLTIP = 'Hinzufügen, entfernen und sortieren von Elementen.';
 
 Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE = 'Element';
 Blockly.LANG_LISTS_CREATE_WITH_ITEM_TOOLTIP = 'Ein Element zur Liste hinzufügen.';
