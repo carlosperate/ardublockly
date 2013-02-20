@@ -86,10 +86,14 @@ $(addsuffix .tmp, $(OUT_SOY_JS)): %.js.tmp: % $(SOY_COMPILER)
 	java -jar $(SOY_COMPILER) $(SOY_FLAGS) --outputPathFormat $@ --srcs $<
 	perl -pi -e 's/soy/goog.soy/g; s/soydata/soy.data/g' $@
 
-$(addsuffix .tmp, $(OUT_RENAMING_JS)): $(OUT_CSS)
-$(addsuffix .tmp, $(OUT_CSS)): $(IN_GSS) $(GSS_COMPILER)
+.css-built: $(IN_GSS) $(GSS_COMPILER)
 	java -jar $(GSS_COMPILER) $(GSS_FLAGS) --output-renaming-map $(OUT_RENAMING_JS).tmp --output-file $@ $(IN_GSS)
-	perl -pi -e "print qq/goog.provide('Blockly.renaming_map');\n/ if ($$. == 1);" $(OUT_RENAMING_JS).tmp
+
+$(addsuffix .tmp, $(OUT_CSS)): .css-built
+	cp $< $@
+
+$(addsuffix .tmp, $(OUT_RENAMING_JS)): .css-built
+	perl -pi -e "print qq/goog.provide('Blockly.renaming_map');\n/ if ($$. == 1);" $@
 
 $(addsuffix .tmp, $(OUT_COMPILED_JS)): blockly_%.js.tmp : blockly_core.js $(CLOSURE_COMPILER) $(OUT_RENAMING_JS) $(IN_EXTERN_JS)
 	python $(CLOSURE_BUILDER) $(DEBUG_FLAG) -c $(CLOSURE_COMPILER) --root $(CLOSURE_LIBRARY_DIR) --root $(SRC_DIR) -o compiled -f --compilation_level -f $(COMPILATION_LEVEL.$*) $(FORMATTING.$*) $(JSCOMP_ERROR_FLAGS) $(call TOFLAGS, --externs, $(IN_EXTERN_JS)) --namespace Blockly.core --output_file $@ $<
