@@ -9,6 +9,7 @@
   <script>
     var MSG = {
       // Block text.
+      moveForward: 'đi tới',
       move: 'đi',
       forward: 'tới',
       backward: 'lui',
@@ -25,7 +26,11 @@
       toTheRight: 'bên phải',
       behind: 'đằng sau',
       repeatUntilFinished: 'lặp lại cho đến đích',
+      getX: 'get X position',
+      getY: 'get Y position',
+      getDirection: 'get direction',
       // Tooltips.
+      moveForwardTooltip: 'Di chuyển Pegman tới hoặc lùi một bước.',
       moveTooltip: 'Di chuyển Pegman tới hoặc lùi một bước.',
       turnTooltip: 'Quay Pegman qua bên trái hoặc bên phải 90 độ.',
       ifTooltip: 'Nếu có đường ở hướng đấy,\n' +
@@ -36,6 +41,14 @@
       whileTooltip: 'Thực hiện các lệnh được bao gồm cho đến khi đến đích',
       codeTooltip: 'Xem code đã tạo bằng JavaScript.',
       linkTooltip: 'Lưu và lấy địa chỉ liên kết.',
+      isPathTooltip: 'Returns true if there is a path\n' +
+          'in the specified direction.',
+      getXTooltip: 'Returns Pegman\'s horizontal position.\n' +
+          'Left edge is 1, right edge is 8.',
+      getYTooltip: 'Returns Pegman\'s vertical position.\n' +
+          'Top edge is 1, bottom edge is 8.',
+      getDirectionTooltip: 'Retuns Pegman\'s direction.\n' +
+          'North: 0, East: 1, South: 2, West: 3.',
       // Level hints.
       hints: [undefined, // There is no level 0.
           "Một chương trình là một chuỗi các lệnh.  Nối hai mảnh 'đi tới' để giúp tớ đến đích.",

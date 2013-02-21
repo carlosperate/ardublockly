@@ -126,9 +126,11 @@
      fill="url(#grad2)" />
   <text id="row1stText" x="55" y="380"></text>
   <text id="row2ndText" x="350" y="380"></text>
-  <text id="seatText" x="55" y="210"></text>
-  <text id="seatYes" x="180" y="220" style="fill: #0c0;">&#x2713;</text>
-  <text id="seatNo" x="180" y="220" style="fill: #f00;">&#x2717;</text>
+  <text x="55" y="210">
+    <tspan id="seatText"></tspan>
+    <tspan id="seatYes" style="fill: #0c0;" dy="10">&#x2713;</tspan>
+    <tspan id="seatNo" style="fill: #f00;" dy="10">&#x2717;</tspan>
+  </text>
   <rect
       id="crew_right" class="crew"
       width="10" height="10"

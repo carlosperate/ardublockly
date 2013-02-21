@@ -248,14 +248,14 @@ Blockly.Language.text_indexOf = {
   init: function() {
     this.setColour(160);
     this.setOutput(true, Number);
+    this.appendValueInput('VALUE')
+        .setCheck(String)
+        .appendTitle(Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT);
     this.appendValueInput('FIND')
         .setCheck(String)
         .appendTitle(Blockly.LANG_TEXT_INDEXOF_TITLE_FIND)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'END')
         .appendTitle(Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE);
-    this.appendValueInput('VALUE')
-        .setCheck(String)
-        .appendTitle(Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_TEXT_INDEXOF_TOOLTIP);
   }
@@ -271,10 +271,10 @@ Blockly.Language.text_charAt = {
   init: function() {
     this.setColour(160);
     this.setOutput(true, String);
-    this.appendDummyInput('AT');
     this.appendValueInput('VALUE')
         .setCheck(String)
         .appendTitle(Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT);
+    this.appendDummyInput('AT');
     this.setInputsInline(true);
     this.updateAt(true);
     this.setTooltip(Blockly.LANG_TEXT_CHARAT_TOOLTIP);
@@ -303,7 +303,6 @@ Blockly.Language.text_charAt = {
     } else {
       this.appendDummyInput('AT');
     }
-    this.moveInputBefore('AT', 'VALUE');
     var menu = new Blockly.FieldDropdown(this.WHERE, function(value) {
       var newAt = (value == 'FROM_START') || (value == 'FROM_END');
       // The 'isAt' variable is available due to this function being a closure.

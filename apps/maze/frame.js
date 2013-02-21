@@ -31,8 +31,26 @@ var toolbox = window.parent.document.getElementById('toolbox');
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
+Blockly.Language.maze_moveForward = {
+  // Block for moving forward.
+  helpUrl: 'http://code.google.com/p/blockly/wiki/Move',
+  init: function() {
+    this.setColour(290);
+    this.appendDummyInput()
+        .appendTitle(MSG.moveForward);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(MSG.moveTooltip);
+  }
+};
+
+Blockly.JavaScript.maze_moveForward = function() {
+  // Generate JavaScript for moving forward.
+  return 'Maze.moveForward(\'' + this.id + '\');\n';
+};
+
 Blockly.Language.maze_move = {
-  // Block for moving forward or backwards.
+  // Block for moving forward or backward.
   helpUrl: 'http://code.google.com/p/blockly/wiki/Move',
   init: function() {
     this.setColour(290);
@@ -49,7 +67,7 @@ Blockly.Language.maze_move.DIRECTIONS =
     [[MSG.forward, 'moveForward'], [MSG.backward, 'moveBackward']];
 
 Blockly.JavaScript.maze_move = function() {
-  // Generate JavaScript for moving forward or backwards.
+  // Generate JavaScript for moving forward or backward.
   return 'Maze.' + this.getTitleValue('DIR') + '(\'' + this.id + '\');\n';
 };
 
@@ -95,8 +113,7 @@ Blockly.Language.maze_isPath = {
     this.appendDummyInput()
         .appendTitle(MSG.path)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
-    this.setTooltip('Returns true if there is a path\n' +
-                    'in the specified direction.');
+    this.setTooltip(MSG.isPathTooltip);
   }
 };
 
@@ -139,7 +156,7 @@ Blockly.JavaScript.maze_if = function() {
   return code;
 };
 
-Blockly.Language.maze_ifelse = {
+Blockly.Language.maze_ifElse = {
   // Block for 'if/else' conditional if there a path.
   helpUrl: '',
   init: function() {
@@ -157,10 +174,10 @@ Blockly.Language.maze_ifelse = {
   }
 };
 
-Blockly.Language.maze_ifelse.DIRECTIONS =
+Blockly.Language.maze_ifElse.DIRECTIONS =
     Blockly.Language.maze_isPath.DIRECTIONS;
 
-Blockly.JavaScript.maze_ifelse = function() {
+Blockly.JavaScript.maze_ifElse = function() {
   // Generate JavaScript for 'if/else' conditional if there is a path.
   var argument = 'Maze.' + this.getTitleValue('DIR') + '()';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
@@ -191,6 +208,60 @@ Blockly.JavaScript.maze_forever = function() {
         '\'' + this.id + '\'') + branch;
   }
   return 'while (true) {\n' + branch + '}\n';
+};
+
+Blockly.Language.maze_getX = {
+  // Block for getting Pegman's horizontal position.
+  helpUrl: '',
+  init: function() {
+    this.setColour(330);
+    this.setOutput(true, Number);
+    this.appendDummyInput()
+        .appendTitle(MSG.getX);
+    this.setTooltip(MSG.getXTooltip);
+  }
+};
+
+Blockly.JavaScript.maze_getX = function() {
+  // Generate JavaScript for getting Pegman's horizontal position.
+  var code = 'Maze.pegmanX + 1';
+  return [code, Blockly.JavaScript.ORDER_ADDITION];
+};
+
+Blockly.Language.maze_getY = {
+  // Block for getting Pegman's vertical position.
+  helpUrl: '',
+  init: function() {
+    this.setColour(330);
+    this.setOutput(true, Number);
+    this.appendDummyInput()
+        .appendTitle(MSG.getY);
+    this.setTooltip(MSG.getYTooltip);
+  }
+};
+
+Blockly.JavaScript.maze_getY = function() {
+  // Generate JavaScript for getting Pegman's vertical position.
+  var code = 'Maze.pegmanY + 1';
+  return [code, Blockly.JavaScript.ORDER_ADDITION];
+};
+
+Blockly.Language.maze_getDirection = {
+  // Block for getting Pegman's direction.
+  helpUrl: '',
+  init: function() {
+    this.setColour(330);
+    this.setOutput(true, Number);
+    this.appendDummyInput()
+        .appendTitle(MSG.getDirection);
+    this.setTooltip(MSG.getDirectionTooltip);
+  }
+};
+
+Blockly.JavaScript.maze_getDirection = function() {
+  // Generate JavaScript for getting Pegman's direction.
+  var code = 'Maze.pegmanD';
+  return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
 function init() {

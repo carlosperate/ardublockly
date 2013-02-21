@@ -382,10 +382,17 @@ Maze.init = function(blockly) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
   } else {
     // Load the editor with a starting block.
-    var xml = Blockly.Xml.textToDom(
-        '<xml>' +
-        '  <block type="maze_move" x="250" y="70"></block>' +
-        '</xml>');
+    if (level < 10) {
+      var xml = Blockly.Xml.textToDom(
+          '<xml>' +
+          '  <block type="maze_moveForward" x="250" y="70"></block>' +
+          '</xml>');
+    } else {
+      var xml = Blockly.Xml.textToDom(
+          '<xml>' +
+          '  <block type="maze_move" x="100" y="70"></block>' +
+          '</xml>');
+    }
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
 

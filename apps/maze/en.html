@@ -9,6 +9,7 @@
   <script>
     var MSG = {
       // Block text.
+      moveForward: 'move forward',
       move: 'move',
       forward: 'forward',
       backward: 'backward',
@@ -25,7 +26,11 @@
       toTheRight: 'to the right',
       behind: 'behind',
       repeatUntilFinished: 'repeat until finished',
+      getX: 'get X position',
+      getY: 'get Y position',
+      getDirection: 'get direction',
       // Tooltips.
+      moveForwardTooltip: 'Moves Pegman forward one space.',
       moveTooltip: 'Moves Pegman forward or backward one space.',
       turnTooltip: 'Turns Pegman left or right by 90 degrees.',
       ifTooltip: 'If there is a path in the specified direction,\n' +
@@ -34,19 +39,27 @@
           'then do the first block of actions.\n' +
           'Otherwise, do the second block of actions.',
       whileTooltip: 'Repeat the enclosed actions until finish point is reached.',
+      isPathTooltip: 'Returns true if there is a path\n' +
+          'in the specified direction.',
+      getXTooltip: 'Returns Pegman\'s horizontal position.\n' +
+          'Left edge is 1, right edge is 8.',
+      getYTooltip: 'Returns Pegman\'s vertical position.\n' +
+          'Top edge is 1, bottom edge is 8.',
+      getDirectionTooltip: 'Retuns Pegman\'s direction.\n' +
+          'North: 0, East: 1, South: 2, West: 3.',
       codeTooltip: 'See generated JavaScript code.',
       linkTooltip: 'Save and link to blocks.',
       // Level hints.
       hints: [undefined, // There is no level 0.
-          "A program is a sequence of statements.  Connect a couple of 'move forward' blocks together to help me reach the goal.",
-          "What is the sequence of steps for this maze?",
-          "Computers have limited memory.  This maze needs to be solved with only two blocks.  Use 'repeat' to run a block more than once.",
-          "This maze needs to be solved with only five blocks.",
+          "A program is a sequence of statements.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
+          "What is the sequence of steps to follow this path?",
+          "Computers have limited memory.  Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.",
+          "Reach the goal using only five blocks.",
           "An 'if' condition will do something only if the condition is true.  Try turning left if there is a path to the left.",
           "This maze looks more complicated than the previous one, but it is not.",
           "You can use more than one 'if' statement.",
           "If-else statements will do one thing or the other.",
-          "Can you solve this complicated maze?  Try following a wall.",
+          "Can you solve this complicated maze?  Try following the left-hand wall.",
           "This maze might require using data structures.  Advanced programmers only!"
       ],
       // Level 10 categories.

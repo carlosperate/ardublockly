@@ -208,13 +208,13 @@ Blockly.Language.lists_indexOf = {
   init: function() {
     this.setColour(210);
     this.setOutput(true, Number);
+    this.appendValueInput('VALUE')
+        .setCheck(Array)
+        .appendTitle(Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST);
     this.appendValueInput('FIND')
         .appendTitle(Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'END')
         .appendTitle(Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE);
-    this.appendValueInput('VALUE')
-        .setCheck(Array)
-        .appendTitle(Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST);
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_INDEX_OF_TOOLTIP);
   }
@@ -233,13 +233,13 @@ Blockly.Language.lists_getIndex = {
       var isStatement = (value == 'REMOVE');
       this.sourceBlock_.updateStatement(isStatement);
     });
+    this.appendValueInput('VALUE')
+        .setCheck(Array)
+        .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST);
     this.appendDummyInput()
         .appendTitle(modeMenu, 'MODE')
         .appendTitle('');
     this.appendDummyInput('AT');
-    this.appendValueInput('VALUE')
-        .setCheck(Array)
-        .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST);
     this.setInputsInline(true);
     this.setOutput(true, null);
     this.updateAt(true);
@@ -296,7 +296,6 @@ Blockly.Language.lists_getIndex = {
     } else {
       this.appendDummyInput('AT');
     }
-    this.moveInputBefore('AT', 'VALUE');
     var menu = new Blockly.FieldDropdown(this.WHERE, function(value) {
       var newAt = (value == 'FROM_START') || (value == 'FROM_END');
       // The 'isAt' variable is available due to this function being a closure.
@@ -330,12 +329,12 @@ Blockly.Language.lists_setIndex = {
   helpUrl: Blockly.LANG_LISTS_SET_INDEX_HELPURL,
   init: function() {
     this.setColour(210);
-    this.appendValueInput('AT')
-        .setCheck(Number)
-        .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT);
     this.appendValueInput('LIST')
         .setCheck(Array)
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST);
+    this.appendValueInput('AT')
+        .setCheck(Number)
+        .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT);
     this.appendValueInput('TO')
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO);
     this.setInputsInline(true);

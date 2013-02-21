@@ -71,7 +71,7 @@
 {template .toolbox}
   {if $ij.level < 10}
     <xml id="toolbox" style="display: none">
-      <block type="maze_move"></block>
+      <block type="maze_moveForward"></block>
       <block type="maze_turn"><title name="DIR">turnLeft</title></block>
       <block type="maze_turn"><title name="DIR">turnRight</title></block>
       {if $ij.level > 2}
@@ -79,7 +79,7 @@
         {if $ij.level > 4}
           <block type="maze_if"></block>
           {if $ij.level > 7}
-            <block type="maze_ifelse"></block>
+            <block type="maze_ifElse"></block>
           {/if}
         {/if}
       {/if}
@@ -91,6 +91,9 @@
         <block type="maze_turn"><title name="DIR">turnLeft</title></block>
         <block type="maze_turn"><title name="DIR">turnRight</title></block>
         <block type="maze_isPath"></block>
+        <block type="maze_getX"></block>
+        <block type="maze_getY"></block>
+        <block type="maze_getDirection"></block>
       </category>
       <category name="{$ij.MSG.catControl}">
         <block type="controls_if"></block>
