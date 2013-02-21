@@ -213,8 +213,10 @@ Blockly.Language.text_isEmpty = {
   init: function() {
     this.setColour(160);
     this.appendValueInput('VALUE')
-        .setCheck([String, Array])
+        .setCheck([String, Array]);
+    this.appendDummyInput()
         .appendTitle(Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY);
+    this.setInputsInline(true);
     this.setOutput(true, Boolean);
     this.setTooltip(Blockly.LANG_TEXT_ISEMPTY_TOOLTIP);
   }

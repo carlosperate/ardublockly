@@ -26,11 +26,11 @@
       toTheRight: 'bên phải',
       behind: 'đằng sau',
       repeatUntilFinished: 'lặp lại cho đến đích',
-      getX: 'get X position',
-      getY: 'get Y position',
-      getDirection: 'get direction',
+      getX: 'định vị theo X',
+      getY: 'định vị theo Y',
+      getDirection: 'định hướng',
       // Tooltips.
-      moveForwardTooltip: 'Di chuyển Pegman tới hoặc lùi một bước.',
+      moveForwardTooltip: 'Di chuyển Pegman tới một bước.',
       moveTooltip: 'Di chuyển Pegman tới hoặc lùi một bước.',
       turnTooltip: 'Quay Pegman qua bên trái hoặc bên phải 90 độ.',
       ifTooltip: 'Nếu có đường ở hướng đấy,\n' +
@@ -41,17 +41,17 @@
       whileTooltip: 'Thực hiện các lệnh được bao gồm cho đến khi đến đích',
       codeTooltip: 'Xem code đã tạo bằng JavaScript.',
       linkTooltip: 'Lưu và lấy địa chỉ liên kết.',
-      isPathTooltip: 'Returns true if there is a path\n' +
-          'in the specified direction.',
-      getXTooltip: 'Returns Pegman\'s horizontal position.\n' +
-          'Left edge is 1, right edge is 8.',
-      getYTooltip: 'Returns Pegman\'s vertical position.\n' +
-          'Top edge is 1, bottom edge is 8.',
-      getDirectionTooltip: 'Retuns Pegman\'s direction.\n' +
-          'North: 0, East: 1, South: 2, West: 3.',
+      isPathTooltip: 'Hoàn trả “đúng" nếu có đường đi\n' +
+          'về hướng được chọn.',
+      getXTooltip: 'Hoàn trả vị trí của Pegman theo chiều ngang.\n' +
+          'Sát mép trái là 1, sát mép phải là 8.',
+      getYTooltip: 'Hoàn trả vị trí của Pegman theo chiều dọc.\n' +
+          'Sát mép trên là 1, sát mép dưới là 8.',
+      getDirectionTooltip: 'Hoàn trả hướng Pegman đang quay mặt tới.\n' +
+          'Bắc: 0, Đông: 1, Nam: 2, Tây: 3.',
       // Level hints.
       hints: [undefined, // There is no level 0.
-          "Một chương trình là một chuỗi các lệnh.  Nối hai mảnh 'đi tới' để giúp tớ đến đích.",
+          "Một chương trình là một chuỗi các lệnh.  Chồng hai mảnh 'đi tới' lên nhau để giúp tớ đến đích.",
           "Chuỗi lệnh gì sẽ giải ma trận này?",
           "Bộ nhớ của máy vi tính có hạn. Ở vòng này bạn chỉ được dùng hai mảnh để đến đích.  Mảnh 'lặp lại' sẽ chạy một lệnh nhiều lần.",
           "Để giải ma trận này, bạn chỉ được dùng năm mảnh.",
