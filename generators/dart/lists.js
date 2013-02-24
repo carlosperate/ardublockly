@@ -182,12 +182,12 @@ Blockly.Dart.lists_getIndex = function() {
       }
     }
   } else if (where == 'RANDOM') {
-    if (!Blockly.Dart.definitions_['lists_random_item']) {
+    if (!Blockly.Dart.definitions_['lists_get_random_item']) {
       Blockly.Dart.definitions_['import_dart_math'] =
           'import \'dart:math\' as Math;';
       var functionName = Blockly.Dart.variableDB_.getDistinctName(
-          'lists_random_item', Blockly.Generator.NAME_TYPE);
-      Blockly.Dart.lists_getIndex.lists_random_item = functionName;
+          'lists_get_random_item', Blockly.Generator.NAME_TYPE);
+      Blockly.Dart.lists_getIndex.random = functionName;
       var func = [];
       func.push('dynamic ' + functionName + '(List myList, bool remove) {');
       func.push('  int x = new Math.Random().nextInt(myList.length);');
@@ -197,9 +197,9 @@ Blockly.Dart.lists_getIndex = function() {
       func.push('    return myList[x];');
       func.push('  }');
       func.push('}');
-      Blockly.Dart.definitions_['lists_random_item'] = func.join('\n');
+      Blockly.Dart.definitions_['lists_get_random_item'] = func.join('\n');
     }
-    code = Blockly.Dart.lists_getIndex.lists_random_item +
+    code = Blockly.Dart.lists_getIndex.random +
         '(' + list + ', ' + (mode != 'GET') + ')';
     if (mode == 'GET' || mode == 'GET_REMOVE') {
       return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
@@ -212,19 +212,79 @@ Blockly.Dart.lists_getIndex = function() {
 
 Blockly.Dart.lists_setIndex = function() {
   // Set element at index.
-  var argument0 = Blockly.Dart.valueToCode(this, 'AT',
-      Blockly.Dart.ORDER_ADDITIVE) || '1';
-  var argument1 = Blockly.Dart.valueToCode(this, 'LIST',
+  // Note: Until February 2013 this block did not have MODE or WHERE inputs.
+  var list = Blockly.Dart.valueToCode(this, 'LIST',
       Blockly.Dart.ORDER_UNARY_POSTFIX) || '[]';
-  var argument2 = Blockly.Dart.valueToCode(this, 'TO',
+  var mode = this.getTitleValue('MODE') || 'GET';
+  var where = this.getTitleValue('WHERE') || 'FROM_START';
+  var at = Blockly.Dart.valueToCode(this, 'AT',
+      Blockly.Dart.ORDER_ADDITIVE) || '1';
+  var value = Blockly.Dart.valueToCode(this, 'TO',
       Blockly.Dart.ORDER_ASSIGNMENT) || 'null';
-  // Blockly uses one-based indicies.
-  if (argument0.match(/^\d+$/)) {
-    // If the index is a naked number, decrement it right now.
-    argument0 = parseInt(argument0, 10) - 1;
-  } else {
-    // If the index is dynamic, decrement it in code.
-    argument0 += ' - 1';
+  // Cache non-trivial values to variables to prevent repeated look-ups.
+  // Closure, which accesses and modifies 'list'.
+  function cacheList() {
+    if (list.match(/^\w+$/)) {
+      return '';
+    }
+    var listVar = Blockly.Dart.variableDB_.getDistinctName(
+        'tmp_list', Blockly.Variables.NAME_TYPE);
+    var code = 'List ' + listVar + ' = ' + list + ';\n';
+    list = listVar;
+    return code;
   }
-  return argument1 + '[' + argument0 + '] = ' + argument2 + ';\n';
+  if (where == 'FIRST') {
+    if (mode == 'SET') {
+      return list + '[0] = ' + value + ';\n';
+    } else if (mode == 'INSERT') {
+      return list + '.insertRange(0, 1, ' + value + ');\n';
+    }
+  } else if (where == 'LAST') {
+    if (mode == 'SET') {
+      var code = cacheList();
+      code += list + '[' + list + '.length - 1] = ' + value + ';\n';
+      return code;
+    } else if (mode == 'INSERT') {
+      return list + '.addLast(' + value + ');\n';
+    }
+  } else if (where == 'FROM_START') {
+    // Blockly uses one-based indicies.
+    if (at.match(/^\d+$/)) {
+      // If the index is a naked number, decrement it right now.
+      at = parseInt(at, 10) - 1;
+    } else {
+      // If the index is dynamic, decrement it in code.
+      at += ' - 1';
+    }
+    if (mode == 'SET') {
+      return list + '[' + at + '] = ' + value + ';\n';
+    } else if (mode == 'INSERT') {
+      return list + '.insertRange(' + at + ', 1, ' + value + ');\n';
+    }
+  } else if (where == 'FROM_END') {
+    var code = cacheList();
+    if (mode == 'SET') {
+      code += list + '[' + list + '.length - ' + at + '] = ' + value + ';\n';
+      return code;
+    } else if (mode == 'INSERT') {
+      code += list + '.insertRange(' + list + '.length - ' + at + ', 1, ' +
+          value + ');\n';
+      return code;
+    }
+  } else if (where == 'RANDOM') {
+    Blockly.Dart.definitions_['import_dart_math'] =
+        'import \'dart:math\' as Math;';
+    var code = cacheList();
+    var xVar = Blockly.Dart.variableDB_.getDistinctName(
+        'tmp_x', Blockly.Variables.NAME_TYPE);
+    code += 'int ' + xVar + ' = new Math.Random().nextInt(' + list + '.length);';
+    if (mode == 'SET') {
+      code += list + '[' + xVar + '] = ' + value + ';\n';
+      return code;
+    } else if (mode == 'INSERT') {
+      code += list + '.insertRange(' + xVar + ', 1, ' + value + ');\n';
+      return code;
+    }
+  }
+  throw 'Unhandled combination (lists_setIndex).';
 };

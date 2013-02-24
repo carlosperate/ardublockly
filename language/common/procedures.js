@@ -236,8 +236,7 @@ Blockly.Language.procedures_mutatorarg = {
     this.setColour(290);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_PROCEDURES_MUTATORARG_TITLE)
-        .appendTitle(new Blockly.FieldTextInput('x',
-        Blockly.Language.procedures_mutatorarg.validator), 'NAME');
+        .appendTitle(new Blockly.FieldTextInput('x', this.validator), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('');

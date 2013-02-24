@@ -251,7 +251,7 @@ Blockly.Language.controls_whileUntil = {
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('MODE');
-      return Blockly.Language.controls_whileUntil.TOOLTIPS[op];
+      return thisBlock.TOOLTIPS[op];
     });
   }
 };
@@ -364,7 +364,7 @@ Blockly.Language.controls_flow_statements = {
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('FLOW');
-      return Blockly.Language.controls_flow_statements.TOOLTIPS[op];
+      return thisBlock.TOOLTIPS[op];
     });
   },
   onchange: function() {

@@ -196,9 +196,27 @@
       </block>
       <block type="lists_length"></block>
       <block type="lists_isEmpty"></block>
-      <block type="lists_indexOf"></block>
-      <block type="lists_getIndex"></block>
-      <block type="lists_setIndex"></block>
+      <block type="lists_indexOf">
+        <value name="VALUE">
+          <block type="variables_get">
+            <title name="VAR">list</title>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getIndex">
+        <value name="VALUE">
+          <block type="variables_get">
+            <title name="VAR">list</title>
+          </block>
+        </value>
+      </block>
+      <block type="lists_setIndex">
+        <value name="LIST">
+          <block type="variables_get">
+            <title name="VAR">list</title>
+          </block>
+        </value>
+      </block>
     </category>
     <category name="{$ij.MSG.catVariables}" custom="VARIABLE"></category>
     <category name="{$ij.MSG.catProcedures}" custom="PROCEDURE"></category>

@@ -56,7 +56,7 @@ Blockly.Language.math_arithmetic = {
     var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
-      return Blockly.Language.math_arithmetic.TOOLTIPS[mode];
+      return thisBlock.TOOLTIPS[mode];
     });
   }
 };
@@ -89,7 +89,7 @@ Blockly.Language.math_single = {
     var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
-      return Blockly.Language.math_single.TOOLTIPS[mode];
+      return thisBlock.TOOLTIPS[mode];
     });
   }
 };
@@ -126,7 +126,7 @@ Blockly.Language.math_trig = {
     var thisBlock = this;
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
-      return Blockly.Language.math_trig.TOOLTIPS[mode];
+      return thisBlock.TOOLTIPS[mode];
     });
   }
 };
@@ -291,7 +291,7 @@ Blockly.Language.math_on_list = {
         .appendTitle(Blockly.LANG_MATH_ONLIST_INPUT_OFLIST);
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
-      return Blockly.Language.math_on_list.TOOLTIPS[mode];
+      return thisBlock.TOOLTIPS[mode];
     });
   }
 };

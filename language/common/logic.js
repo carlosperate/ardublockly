@@ -41,7 +41,7 @@ Blockly.Language.logic_compare = {
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('OP');
-      return Blockly.Language.logic_compare.TOOLTIPS[op];
+      return thisBlock.TOOLTIPS[op];
     });
   }
 };
@@ -79,7 +79,7 @@ Blockly.Language.logic_operation = {
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('OP');
-      return Blockly.Language.logic_operation.TOOLTIPS[op];
+      return thisBlock.TOOLTIPS[op];
     });
   }
 };
@@ -152,4 +152,3 @@ Blockly.Language.logic_ternary = {
     this.setTooltip(Blockly.LANG_LOGIC_TERNARY_TOOLTIP);
   }
 };
-

@@ -332,14 +332,68 @@ Blockly.Language.lists_setIndex = {
     this.appendValueInput('LIST')
         .setCheck(Array)
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST);
-    this.appendValueInput('AT')
-        .setCheck(Number)
-        .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_AT);
+    this.appendDummyInput()
+        .appendTitle(new Blockly.FieldDropdown(this.MODE), 'MODE')
+        .appendTitle('');
+    this.appendDummyInput('AT');
     this.appendValueInput('TO')
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.LANG_LISTS_SET_INDEX_TOOLTIP);
+    this.updateAt(true);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      var combo = thisBlock.getTitleValue('MODE') + '_' +
+          thisBlock.getTitleValue('WHERE');
+      return Blockly['LANG_LISTS_SET_INDEX_TOOLTIP_' + combo];
+    });
+  },
+  mutationToDom: function() {
+    // Save whether there is an 'AT' input.
+    var container = document.createElement('mutation');
+    var isAt = this.getInput('AT').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at', isAt);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the block shape.
+    // Note: Until January 2013 this block did not have mutations,
+    // so 'at' defaults to true.
+    var isAt = (xmlElement.getAttribute('at') != 'false');
+    this.updateAt(isAt);
+  },
+  updateAt: function(isAt) {
+    // Create or delete an input for the numeric index.
+    // Destroy old 'AT' input.
+    this.removeInput('AT');
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT').setCheck(Number);
+    } else {
+      this.appendDummyInput('AT');
+    }
+    var menu = new Blockly.FieldDropdown(this.WHERE, function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt(newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setTitleValue(value, 'WHERE');
+        return null;
+      }
+      return undefined;
+    });
+    this.moveInputBefore('AT', 'TO');
+    this.getInput('AT').appendTitle(menu, 'WHERE');
   }
 };
+
+Blockly.Language.lists_setIndex.MODE =
+    [[Blockly.LANG_LISTS_SET_INDEX_SET, 'SET'],
+     [Blockly.LANG_LISTS_SET_INDEX_INSERT, 'INSERT']];
+
+Blockly.Language.lists_setIndex.WHERE = Blockly.Language.lists_getIndex.WHERE;
