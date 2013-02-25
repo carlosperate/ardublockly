@@ -3,16 +3,6 @@
 <meta charset="utf-8">
 <title>Blockly Generator Test</title>
 <script type="text/javascript" src="../../blockly_uncompressed.js"></script>
-<script type="text/javascript" src="../../generators/dart.js"></script>
-<script type="text/javascript" src="unittest_dart.js"></script>
-<script type="text/javascript" src="../../generators/dart/control.js"></script>
-<script type="text/javascript" src="../../generators/dart/logic.js"></script>
-<script type="text/javascript" src="../../generators/dart/math.js"></script>
-<script type="text/javascript" src="../../generators/dart/text.js"></script>
-<script type="text/javascript" src="../../generators/dart/lists.js"></script>
-<script type="text/javascript" src="../../generators/dart/colour.js"></script>
-<script type="text/javascript" src="../../generators/dart/variables.js"></script>
-<script type="text/javascript" src="../../generators/dart/procedures.js"></script>
 <script type="text/javascript" src="../../generators/javascript.js"></script>
 <script type="text/javascript" src="unittest_javascript.js"></script>
 <script type="text/javascript" src="../../generators/javascript/control.js"></script>
@@ -116,11 +106,6 @@ function toXml() {
 function toJavaScript() {
   var code = '\'use strict\';\n\n'
   code += Blockly.Generator.workspaceToCode('JavaScript');
-  setOutput(code);
-}
-
-function toDart() {
-  var code = Blockly.Generator.workspaceToCode('Dart');
   setOutput(code);
 }
 
@@ -329,7 +314,6 @@ h1 {
       Generate:
       <input type="button" value="XML" onclick="toXml()">
       <input type="button" value="JavaScript" onclick="toJavaScript()">
-      <input type="button" value="Dart" onclick="toDart()">
       <input type="button" value="Python" onclick="toPython()">
     </p>
   </td></tr><tr><td height="99%">

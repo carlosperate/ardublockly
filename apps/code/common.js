@@ -29,7 +29,7 @@ document.write(codepage.start({}, null,
  * List of tab names.
  * @private
  */
-var TABS_ = ['blocks', 'javascript', 'dart', 'python', 'xml'];
+var TABS_ = ['blocks', 'javascript', 'python', 'xml'];
 
 var selected = 'blocks';
 
@@ -92,8 +92,6 @@ function renderContent() {
     xmlTextarea.focus();
   } else if (content.id == 'content_javascript') {
     content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
-  } else if (content.id == 'content_dart') {
-    content.innerHTML = Blockly.Generator.workspaceToCode('Dart');
   } else if (content.id == 'content_python') {
     content.innerHTML = Blockly.Generator.workspaceToCode('Python');
   }
