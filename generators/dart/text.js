@@ -46,14 +46,12 @@ Blockly.Dart.text_join = function() {
     code = argument0 + '.toString()';
     return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   } else {
-    code = [];
-    code[0] = 'new StringBuffer(' + (Blockly.Dart.valueToCode(this, 'ADD0',
-        Blockly.Dart.ORDER_NONE) || '\'\'') + ')';
-    for (var n = 1; n < this.itemCount_; n++) {
-      code[n] = '.add(' + (Blockly.Dart.valueToCode(this, 'ADD' + n,
-          Blockly.Dart.ORDER_NONE) || '\'\'') + ')';
+    code = new Array(this.itemCount_);
+    for (var n = 0; n < this.itemCount_; n++) {
+      code[n] = Blockly.Dart.valueToCode(this, 'ADD' + n,
+          Blockly.Dart.ORDER_NONE) || '\'\'';
     }
-    code = code.join('') + '.toString()';
+    code = '[' + code.join(',') + '].join()';
     return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
   }
 };
@@ -64,8 +62,7 @@ Blockly.Dart.text_append = function() {
       Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Dart.valueToCode(this, 'TEXT',
       Blockly.Dart.ORDER_UNARY_POSTFIX) || '\'\'';
-  return varName + ' = new StringBuffer(' + varName +
-      ').add(' + argument0 + ').toString();\n';
+  return varName + ' = [' + varName + ', ' + argument0 + '].join();\n';
 };
 
 Blockly.Dart.text_length = function() {
@@ -210,9 +207,9 @@ Blockly.Dart.text_changeCase = function() {
       func.push('  final title = new StringBuffer();');
       func.push('  for (String part in list) {');
       func.push('    if (part.length > 0) {');
-      func.push('      title.add(part[0].toUpperCase());');
+      func.push('      title.write(part[0].toUpperCase());');
       func.push('      if (part.length > 0) {');
-      func.push('        title.add(part.substring(1).toLowerCase());');
+      func.push('        title.write(part.substring(1).toLowerCase());');
       func.push('      }');
       func.push('    }');
       func.push('  }');

@@ -41,9 +41,9 @@ Blockly.Dart.unittest_main = function() {
     func.push('  int fails = 0;');
     func.push('  for (int x = 0; x < ' + resultsVar + '.length; x++) {');
     func.push('    if (' + resultsVar + '[x][0]) {');
-    func.push('      summary.add(".");');
+    func.push('      summary.write(".");');
     func.push('    } else {');
-    func.push('      summary.add("F");');
+    func.push('      summary.write("F");');
     func.push('      fails++;');
     func.push('      report.add("");');
     func.push('      report.add("FAIL: ${' + resultsVar + '[x][2]}");');
@@ -59,7 +59,7 @@ Blockly.Dart.unittest_main = function() {
     func.push('  } else {');
     func.push('    report.add("OK");');
     func.push('  }');
-    func.push('  return Strings.join(report, "\\n");');
+    func.push('  return report.join("\\n");');
     func.push('}');
     func.push('');
     Blockly.Dart.definitions_['unittest_report'] = func.join('\n');
@@ -92,7 +92,7 @@ Blockly.Dart.unittest_main.defineAssert_ = function() {
         '(dynamic actual, dynamic expected, String message) {');
     func.push('  // Asserts that a value equals another value.');
     func.push('  if (' + resultsVar + ' == null) {');
-    func.push('    throw "Orphaned assert: " + message;');
+    func.push('    throw "Orphaned assert: ${message}";');
     func.push('  }');
     func.push('  if (actual == expected) {');
     func.push('    ' + resultsVar + '.add([true, "OK", message]);');

@@ -51,17 +51,17 @@ Blockly.Dart.colour_rgb = function() {
         'colour_rgb', Blockly.Generator.NAME_TYPE);
     Blockly.Dart.colour_rgb.functionName = functionName;
     var func = [];
-    func.push('String ' + functionName + '(r, g, b) {');
-    func.push('  String rs = (Math.max(Math.min(r, 1), 0) * 255).round()' +
-              '.toRadixString(16);');
-    func.push('  String gs = (Math.max(Math.min(g, 1), 0) * 255).round()' +
-              '.toRadixString(16);');
-    func.push('  String bs = (Math.max(Math.min(b, 1), 0) * 255).round()' +
-              '.toRadixString(16);');
+    func.push('String ' + functionName + '(num r, num g, num b) {');
+    func.push('  num rn = (Math.max(Math.min(r, 1), 0) * 255).round();');
+    func.push('  String rs = rn.toInt().toRadixString(16);');
     func.push('  rs = \'0$rs\';');
     func.push('  rs = rs.substring(rs.length - 2);');
+    func.push('  num gn = (Math.max(Math.min(g, 1), 0) * 255).round();');
+    func.push('  String gs = gn.toInt().toRadixString(16);');
     func.push('  gs = \'0$gs\';');
     func.push('  gs = gs.substring(gs.length - 2);');
+    func.push('  num bn = (Math.max(Math.min(b, 1), 0) * 255).round();');
+    func.push('  String bs = bn.toInt().toRadixString(16);');
     func.push('  bs = \'0$bs\';');
     func.push('  bs = bs.substring(bs.length - 2);');
     func.push('  return \'#$rs$gs$bs\';');
@@ -89,7 +89,7 @@ Blockly.Dart.colour_blend = function() {
         'colour_blend', Blockly.Generator.NAME_TYPE);
     Blockly.Dart.colour_blend.functionName = functionName;
     var func = [];
-    func.push('String ' + functionName + '(c1, c2, ratio) {');
+    func.push('String ' + functionName + '(String c1, String c2, num ratio) {');
     func.push('  ratio = Math.max(Math.min(ratio, 1), 0);');
     func.push('  int r1 = int.parse(\'0x${c1.substring(1, 3)}\');');
     func.push('  int g1 = int.parse(\'0x${c1.substring(3, 5)}\');');
@@ -97,12 +97,12 @@ Blockly.Dart.colour_blend = function() {
     func.push('  int r2 = int.parse(\'0x${c2.substring(1, 3)}\');');
     func.push('  int g2 = int.parse(\'0x${c2.substring(3, 5)}\');');
     func.push('  int b2 = int.parse(\'0x${c2.substring(5, 7)}\');');
-    func.push('  String rs = (r1 * (1 - ratio) + r2 * ratio).round()' +
-              '.toRadixString(16);');
-    func.push('  String gs = (g1 * (1 - ratio) + g2 * ratio).round()' +
-              '.toRadixString(16);');
-    func.push('  String bs = (b1 * (1 - ratio) + b2 * ratio).round()' +
-              '.toRadixString(16);');
+    func.push('  num rn = (r1 * (1 - ratio) + r2 * ratio).round();');
+    func.push('  String rs = rn.toInt().toRadixString(16);');
+    func.push('  num gn = (g1 * (1 - ratio) + g2 * ratio).round();');
+    func.push('  String gs = gn.toInt().toRadixString(16);');
+    func.push('  num bn = (b1 * (1 - ratio) + b2 * ratio).round();');
+    func.push('  String bs = bn.toInt().toRadixString(16);');
     func.push('  rs = \'0$rs\';');
     func.push('  rs = rs.substring(rs.length - 2);');
     func.push('  gs = \'0$gs\';');

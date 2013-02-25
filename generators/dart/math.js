@@ -331,7 +331,8 @@ Blockly.Dart.math_on_list = function() {
         var func = [];
         func.push('num ' + functionName + '(List myList) {');
         func.push('  // First filter list for numbers only.');
-        func.push('  List localList = myList.filter((a) => a is num);');
+        func.push('  List localList = new List.from(myList);');
+        func.push('  localList.removeMatching((a) => a is! num);');
         func.push('  if (localList.isEmpty) return null;');
         func.push('  num sumVal = 0;');
         func.push('  localList.forEach((num entry) {sumVal += entry;});');
@@ -352,7 +353,8 @@ Blockly.Dart.math_on_list = function() {
                   'then return middle value');
         func.push('  // or the average of two middle values if list has an ' +
                   'even number of elements.');
-        func.push('  List localList = myList.filter((a) => a is num);');
+        func.push('  List localList = new List.from(myList);');
+        func.push('  localList.removeMatching((a) => a is! num);');
         func.push('  if (localList.isEmpty) return null;');
         func.push('  localList.sort((a, b) => (a - b));');
         func.push('  int index = localList.length ~/ 2;');
@@ -417,9 +419,10 @@ Blockly.Dart.math_on_list = function() {
             'math_standard_deviation', Blockly.Generator.NAME_TYPE);
         Blockly.Dart.math_on_list.math_standard_deviation = functionName;
         var func = [];
-        func.push('num ' + functionName + '(myList) {');
+        func.push('num ' + functionName + '(List myList) {');
         func.push('  // First filter list for numbers only.');
-        func.push('  List numbers = myList.filter((a) => a is num);');
+        func.push('  List numbers = new List.from(myList);');
+        func.push('  numbers.removeMatching((a) => a is! num);');
         func.push('  if (numbers.isEmpty) return null;');
         func.push('  num n = numbers.length;');
         func.push('  num sum = 0;');
