@@ -23,9 +23,15 @@
  */
 'use strict';
 
+/**
+ * Create a namespace for the application.
+ */
+var Maze = {};
+
+Maze.MAX_LEVEL = 10;
 var level = window.location.search.match(/[?&]level=(\d+)/);
 level = level ? level[1] : 1;
-level = Math.min(Math.max(1, level), 10);
+level = Math.min(Math.max(1, level), Maze.MAX_LEVEL);
 var frameSrc = (level > 9 ? frameSrc10 : frameSrc9).join('&');
 document.write(mazepage.start({}, null,
     {MSG: MSG, level: level, frameSrc: frameSrc}));
@@ -33,22 +39,20 @@ var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 10, 10, 10, 7, 10, Infinity][level];
 
 /**
- * Create a namespace for the application.
- */
-var Maze = {};
-
-/**
  * Milliseconds between each animation frame.
  */
 Maze.STEP_SPEED = 150;
 
 /**
- * The maze's map is a 2D array of numbers.
- * 0: Wall.
- * 1: Open road.
- * 2: Starting square.
- * 3. Finish square.
+ * The maze's map is a 2D array of numbers in the range 0..3.
  */
+Maze.WALL_SQUARE = 0;
+Maze.OPEN_SQUARE = 1;
+Maze.START_SQUARE = 2;
+Maze.FINISH_SQUARE = 3;
+
+// The maze square constants defined above are inlined here
+// for ease of reading and writing the static mazes.
 Maze.MAP = [
  // Level 0.
  undefined,
@@ -382,7 +386,7 @@ Maze.init = function(blockly) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
   } else {
     // Load the editor with a starting block.
-    if (level < 10) {
+    if (level < Maze.MAX_LEVEL) {
       var xml = Blockly.Xml.textToDom(
           '<xml>' +
           '  <block type="maze_moveForward" x="250" y="70"></block>' +
@@ -399,9 +403,9 @@ Maze.init = function(blockly) {
   // Locate the start and finish squares.
   for (var y = 0; y < Maze.ROWS; y++) {
     for (var x = 0; x < Maze.COLS; x++) {
-      if (Maze.MAP[y][x] == 2) {
+      if (Maze.MAP[y][x] == Maze.START_SQUARE) {
         Maze.start_ = {x: x, y: y};
-      } else if (Maze.MAP[y][x] == 3) {
+      } else if (Maze.MAP[y][x] == Maze.FINISH_SQUARE) {
         Maze.finish_ = {x: x, y: y};
       }
     }
@@ -553,7 +557,7 @@ Maze.animate = function() {
 };
 
 Maze.congratulations = function() {
-  if (level < 10) {
+  if (level < Maze.MAX_LEVEL) {
     var proceed = window.confirm(MSG.nextLevel.replace('%1', level + 1));
     if (proceed) {
       window.location = window.location.protocol + '//' +
@@ -600,13 +604,13 @@ Maze.schedule = function(startPos, endPos) {
 Maze.scheduleFail = function(forward) {
   var deltaX = 0;
   var deltaY = 0;
-  if (Maze.pegmanD == 0) {
+  if (Maze.pegmanD == Maze.NORTH) {
     deltaY = -0.25;
-  } else if (Maze.pegmanD == 1) {
+  } else if (Maze.pegmanD == Maze.EAST) {
     deltaX = 0.25;
-  } else if (Maze.pegmanD == 2) {
+  } else if (Maze.pegmanD == Maze.SOUTH) {
     deltaY = 0.25;
-  } else if (Maze.pegmanD == 3) {
+  } else if (Maze.pegmanD == Maze.WEST) {
     deltaX = -0.25;
   }
   if (!forward) {
