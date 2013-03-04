@@ -307,12 +307,6 @@ Blockly.LANG_TEXT_ISEMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTML
 Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = 'trống không';
 Blockly.LANG_TEXT_ISEMPTY_TOOLTIP = 'Hoàn trả “đúng nếu văn bản không có ký tự nào.';
 
-Blockly.LANG_TEXT_ENDSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_ENDSTRING_INPUT = 'ký tự trong văn bản';
-Blockly.LANG_TEXT_ENDSTRING_TOOLTIP = 'Hoàn trả một số ký tự ở đầu hay cuối văn bản, theo độ dài nêu ra.';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST = 'lấy từ đầu';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST = 'lấy từ cuối';
-
 Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'tìm sự có mặt';
 Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = 'của';
@@ -332,6 +326,12 @@ Blockly.LANG_TEXT_CHARAT_LAST = 'ký tự cuối cùng';
 Blockly.LANG_TEXT_CHARAT_RANDOM = 'ký tự bất kỳ';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'trong văn bản';
 Blockly.LANG_TEXT_CHARAT_TOOLTIP = 'Hoàn trả ký tự ở vị trí đặt ra.';
+
+Blockly.LANG_TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_IN_TEXT = 'in text';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_AT1 = 'get substring from';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_AT2 = 'to';
+Blockly.LANG_TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = 'thành';

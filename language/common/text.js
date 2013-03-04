@@ -222,28 +222,6 @@ Blockly.Language.text_isEmpty = {
   }
 };
 
-Blockly.Language.text_endString = {
-  // Return a leading or trailing substring.
-  helpUrl: Blockly.LANG_TEXT_ENDSTRING_HELPURL,
-  init: function() {
-    this.setColour(160);
-    this.setOutput(true, String);
-    var menu = new Blockly.FieldDropdown(this.OPERATORS);
-    this.appendValueInput('NUM')
-        .setCheck(Number)
-        .appendTitle(menu, 'END');
-    this.appendValueInput('TEXT')
-        .setCheck(String)
-        .appendTitle(Blockly.LANG_TEXT_ENDSTRING_INPUT);
-    this.setInputsInline(true);
-    this.setTooltip(Blockly.LANG_TEXT_ENDSTRING_TOOLTIP);
-  }
-};
-
-Blockly.Language.text_endString.OPERATORS =
-    [[Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST, 'FIRST'],
-     [Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST, 'LAST']];
-
 Blockly.Language.text_indexOf = {
   // Find a substring in the text.
   helpUrl: Blockly.LANG_TEXT_INDEXOF_HELPURL,
@@ -328,6 +306,76 @@ Blockly.Language.text_charAt.WHERE =
      [Blockly.LANG_TEXT_CHARAT_FIRST, 'FIRST'],
      [Blockly.LANG_TEXT_CHARAT_LAST, 'LAST'],
      [Blockly.LANG_TEXT_CHARAT_RANDOM, 'RANDOM']];
+
+Blockly.Language.text_getSubstring = {
+  // Get substring.
+  helpUrl: Blockly.LANG_TEXT_SUBSTRING_HELPURL,
+  init: function() {
+    this.setColour(160);
+    this.appendValueInput('STRING')
+        .setCheck(String)
+        .appendTitle(Blockly.LANG_TEXT_SUBSTRING_INPUT_IN_TEXT);
+    this.appendDummyInput('AT1');
+    this.appendDummyInput('AT2');
+    this.setInputsInline(true);
+    this.setOutput(true, String);
+    this.updateAt(1, true);
+    this.updateAt(2, true);
+    this.setTooltip(Blockly.LANG_TEXT_SUBSTRING_TOOLTIP);
+  },
+  mutationToDom: function() {
+    // Save whether there are 'AT' inputs.
+    var container = document.createElement('mutation');
+    var isAt1 = this.getInput('AT1').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at1', isAt1);
+    var isAt2 = this.getInput('AT2').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at2', isAt2);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the block shape.
+    var isAt1 = (xmlElement.getAttribute('at1') == 'true');
+    var isAt2 = (xmlElement.getAttribute('at1') == 'true');
+    this.updateAt(1, isAt1);
+    this.updateAt(2, isAt2);
+  },
+  updateAt: function(n, isAt) {
+    // Create or delete an input for the numeric index.
+    // Destroy old 'AT' input.
+    this.removeInput('AT' + n);
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT' + n).setCheck(Number);
+    } else {
+      this.appendDummyInput('AT' + n);
+    }
+    var menu = new Blockly.FieldDropdown(this['WHERE' + n], function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt(n, newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setTitleValue(value, 'WHERE' + n);
+        return null;
+      }
+      return undefined;
+    });
+    this.getInput('AT' + n)
+        .appendTitle(Blockly['LANG_TEXT_SUBSTRING_INPUT_AT' + n])
+        .appendTitle(menu, 'WHERE' + n);
+    if (n == 1) {
+      this.moveInputBefore('AT1', 'AT2');
+    }
+  }
+};
+
+Blockly.Language.text_getSubstring.WHERE1 = Blockly.Language.text_charAt.WHERE
+    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
+            tuple[1] == 'FROM_END' || tuple[1] == 'FIRST';});
+Blockly.Language.text_getSubstring.WHERE2 = Blockly.Language.text_charAt.WHERE
+    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
+            tuple[1] == 'FROM_END' || tuple[1] == 'LAST';});
 
 Blockly.Language.text_changeCase = {
   // Change capitalization.

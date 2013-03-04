@@ -90,20 +90,6 @@ Blockly.Python.text_isEmpty = function() {
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
 };
 
-Blockly.Python.text_endString = function() {
-  // Return a leading or trailing substring.
-  // Do we need to prevent 'List index out of range' ERROR by checking if
-  // argument 0 > len(argument1)? Or will ALL error be handled systematically?
-  var first = this.getTitleValue('END') == 'FIRST';
-  var argument0 = Blockly.Python.valueToCode(this, 'NUM',
-      Blockly.Python.ORDER_NONE) || '1';
-  var argument1 = Blockly.Python.valueToCode(this, 'TEXT',
-      Blockly.Python.ORDER_MEMBER) || '\'\'';
-  var code = argument1 + '[' +
-      (first ? ':' + argument0 : '-' + argument0 + ':') + ']';
-  return [code, Blockly.Python.ORDER_MEMBER];
-};
-
 Blockly.Python.text_indexOf = function() {
   // Search the text for a substring.
   // Should we allow for non-case sensitive???
@@ -162,6 +148,49 @@ Blockly.Python.text_charAt = function() {
       return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   }
   throw 'Unhandled option (text_charAt).';
+};
+
+Blockly.Python.text_getSubstring = function() {
+  // Get substring.
+  var text = Blockly.Python.valueToCode(this, 'STRING',
+      Blockly.Python.ORDER_MEMBER) || '\'\'';
+  var where1 = this.getTitleValue('WHERE1');
+  var where2 = this.getTitleValue('WHERE2');
+  var at1 = Blockly.Python.valueToCode(this, 'AT1',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  var at2 = Blockly.Python.valueToCode(this, 'AT2',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  if (where1 == 'FIRST' || (where1 == 'FROM_START' && at1 == '1')) {
+    at1 = '';
+  } else if (where1 == 'FROM_START') {
+    // Blockly uses one-based indicies.
+    if (at1.match(/^-?\d+$/)) {
+      // If the index is a naked number, decrement it right now.
+      at1 = parseInt(at1, 10) - 1;
+    } else {
+      // If the index is dynamic, decrement it in code.
+      at1 += ' - 1';
+    }
+  } else if (where1 == 'FROM_END') {
+    at1 = '-' + at1;
+  }
+  if (where2 == 'LAST' || (where2 == 'FROM_END' && at2 == '1')) {
+    at2 = '';
+  } else if (where1 == 'FROM_START') {
+    at2 = at2;
+  } else if (where1 == 'FROM_END') {
+    if (at2.match(/^-?\d+$/)) {
+      // If the index is a naked number, increment it right now.
+      at2 = 1 - parseInt(at2, 10);
+    } else {
+      // If the index is dynamic, increment it in code.
+      at2 = '1 - ' + at2;
+    }
+    Blockly.Python.definitions_['import_sys'] = 'import sys';
+    at2 += ' or sys.maxsize';
+  }
+  var code = text + '[' + at1 + ' : ' + at2 + ']';
+  return [code, Blockly.Python.ORDER_MEMBER];
 };
 
 Blockly.Python.text_changeCase = function() {

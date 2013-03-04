@@ -141,7 +141,6 @@
       </block>
       <block type="text_length"></block>
       <block type="text_isEmpty"></block>
-      <block type="text_endString"></block>
       <block type="text_indexOf">
         <value name="VALUE">
           <block type="variables_get">
@@ -151,6 +150,13 @@
       </block>
       <block type="text_charAt">
         <value name="VALUE">
+          <block type="variables_get">
+            <title name="VAR">text</title>
+          </block>
+        </value>
+      </block>
+      <block type="text_getSubstring">
+        <value name="STRING">
           <block type="variables_get">
             <title name="VAR">text</title>
           </block>

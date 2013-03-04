@@ -308,12 +308,6 @@ Blockly.LANG_TEXT_ISEMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTML
 Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = 'ist leer?';
 Blockly.LANG_TEXT_ISEMPTY_TOOLTIP = 'Ist wahr (true), wenn der Text leer ist.';
 
-Blockly.LANG_TEXT_ENDSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_ENDSTRING_INPUT = 'ten Buchstaben aus';
-Blockly.LANG_TEXT_ENDSTRING_TOOLTIP = 'Extrahiert die erste / letzten X Buchstaben von einem Text.';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_FIRST = 'von vorn';
-Blockly.LANG_TEXT_ENDSTRING_OPERATOR_LAST = 'von hinten';
-
 Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'Suche';
 Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = 'Vorkommniss des Begriff';
@@ -333,6 +327,12 @@ Blockly.LANG_TEXT_CHARAT_LAST = 'letzten Buchstabe';
 Blockly.LANG_TEXT_CHARAT_RANDOM = 'zufälligen Buchstabe';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'vom Text';
 Blockly.LANG_TEXT_CHARAT_TOOLTIP = 'Extrahiere einen Buchstaben von einer spezifizierten Position.';
+
+Blockly.LANG_TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_IN_TEXT = 'in text';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_AT1 = 'get substring from';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_AT2 = 'to';
+Blockly.LANG_TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = 'umwandeln in';

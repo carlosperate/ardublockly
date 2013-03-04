@@ -84,31 +84,6 @@ Blockly.JavaScript.text_isEmpty = function() {
   return ['!' + argument0, Blockly.JavaScript.ORDER_LOGICAL_NOT];
 };
 
-Blockly.JavaScript.text_endString = function() {
-  // Return a leading or trailing substring.
-  var first = this.getTitleValue('END') == 'FIRST';
-  var code;
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
-      Blockly.JavaScript.ORDER_COMMA) || '1';
-  var argument1 = Blockly.JavaScript.valueToCode(this, 'TEXT',
-      Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
-  if (first) {
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
-        Blockly.JavaScript.ORDER_COMMA) || '1';
-    code = argument1 + '.substring(0, ' + argument0 + ')';
-  } else {
-    var argument0 = Blockly.JavaScript.valueToCode(this, 'NUM',
-        Blockly.JavaScript.ORDER_UNARY_NEGATION) || '1';
-    if (argument0.match(/^\d+$/) && !argument0.match(/^0+$/)) {
-      // Shortcut for a plain positive number.
-      code = argument1 + '.slice(-' + argument0 + ')';
-    } else {
-      code = argument1 + '.slice(- ' + argument0 + ' || Infinity)';
-    }
-  }
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-};
-
 Blockly.JavaScript.text_indexOf = function() {
   // Search the text for a substring.
   var operator = this.getTitleValue('END') == 'FIRST' ?
@@ -167,6 +142,53 @@ Blockly.JavaScript.text_charAt = function() {
       return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
   }
   throw 'Unhandled option (text_charAt).';
+};
+
+Blockly.JavaScript.text_getSubstring = function() {
+  // Get substring.
+  var text = Blockly.JavaScript.valueToCode(this, 'STRING',
+      Blockly.JavaScript.ORDER_MEMBER) || '[]';
+  var where1 = this.getTitleValue('WHERE1');
+  var where2 = this.getTitleValue('WHERE2');
+  var at1 = Blockly.JavaScript.valueToCode(this, 'AT1',
+      Blockly.JavaScript.ORDER_NONE) || '1';
+  var at2 = Blockly.JavaScript.valueToCode(this, 'AT2',
+      Blockly.JavaScript.ORDER_NONE) || '1';
+  if (where1 == 'FIRST' && where2 == 'LAST') {
+    var code = text;
+  } else {
+    if (!Blockly.JavaScript.definitions_['text_get_substring']) {
+      var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
+          'text_get_substring', Blockly.Generator.NAME_TYPE);
+      Blockly.JavaScript.text_getSubstring.func = functionName;
+      var func = [];
+      func.push('function ' + functionName +
+          '(text, where1, at1, where2, at2) {');
+      func.push('  function getAt(where, at) {');
+      func.push('    if (where == \'FROM_START\') {');
+      func.push('      at--;');
+      func.push('    } else if (where == \'FROM_END\') {');
+      func.push('      at = text.length - at;');
+      func.push('    } else if (where == \'FIRST\') {');
+      func.push('      at = 0;');
+      func.push('    } else if (where == \'LAST\') {');
+      func.push('      at = text.length - 1;');
+      func.push('    } else {');
+      func.push('      throw \'Unhandled option (text_getSubstring).\';');
+      func.push('    }');
+      func.push('    return at;');
+      func.push('  }');
+      func.push('  at1 = getAt(where1, at1);');
+      func.push('  at2 = getAt(where2, at2) + 1;');
+      func.push('  return text.slice(at1, at2);');
+      func.push('}');
+      Blockly.JavaScript.definitions_['text_get_substring'] =
+          func.join('\n');
+    }
+    var code = Blockly.JavaScript.text_getSubstring.func + '(' + text + ', \'' +
+        where1 + '\', ' + at1 + ', \'' + where2 + '\', ' + at2 + ')';
+  }
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.JavaScript.text_changeCase = function() {
