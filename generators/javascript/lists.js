@@ -273,3 +273,50 @@ Blockly.JavaScript.lists_setIndex = function() {
   }
   throw 'Unhandled combination (lists_setIndex).';
 };
+
+Blockly.JavaScript.lists_getSublist = function() {
+  // Get sublist.
+  var list = Blockly.JavaScript.valueToCode(this, 'LIST',
+      Blockly.JavaScript.ORDER_MEMBER) || '[]';
+  var where1 = this.getTitleValue('WHERE1');
+  var where2 = this.getTitleValue('WHERE2');
+  var at1 = Blockly.JavaScript.valueToCode(this, 'AT1',
+      Blockly.JavaScript.ORDER_NONE) || '1';
+  var at2 = Blockly.JavaScript.valueToCode(this, 'AT2',
+      Blockly.JavaScript.ORDER_NONE) || '1';
+  if (where1 == 'FIRST' && where2 == 'LAST') {
+    var code = list + '.concat()';
+  } else {
+    if (!Blockly.JavaScript.definitions_['lists_get_sublist']) {
+      var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
+          'lists_get_sublist', Blockly.Generator.NAME_TYPE);
+      Blockly.JavaScript.lists_getSublist.func = functionName;
+      var func = [];
+      func.push('function ' + functionName +
+          '(list, where1, at1, where2, at2) {');
+      func.push('  function getAt(where, at) {');
+      func.push('    if (where == \'FROM_START\') {');
+      func.push('      at--;');
+      func.push('    } else if (where == \'FROM_END\') {');
+      func.push('      at = list.length - at;');
+      func.push('    } else if (where == \'FIRST\') {');
+      func.push('      at = 0;');
+      func.push('    } else if (where == \'LAST\') {');
+      func.push('      at = list.length - 1;');
+      func.push('    } else {');
+      func.push('      throw \'Unhandled option (lists_getSublist).\';');
+      func.push('    }');
+      func.push('    return at;');
+      func.push('  }');
+      func.push('  at1 = getAt(where1, at1);');
+      func.push('  at2 = getAt(where2, at2) + 1;');
+      func.push('  return list.slice(at1, at2);');
+      func.push('}');
+      Blockly.JavaScript.definitions_['lists_get_sublist'] =
+          func.join('\n');
+    }
+    var code = Blockly.JavaScript.lists_getSublist.func + '(' + list + ', \'' +
+        where1 + '\', ' + at1 + ', \'' + where2 + '\', ' + at2 + ')';
+  }
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};

@@ -397,3 +397,73 @@ Blockly.Language.lists_setIndex.MODE =
      [Blockly.LANG_LISTS_SET_INDEX_INSERT, 'INSERT']];
 
 Blockly.Language.lists_setIndex.WHERE = Blockly.Language.lists_getIndex.WHERE;
+
+Blockly.Language.lists_getSublist = {
+  // Get sublist.
+  helpUrl: Blockly.LANG_LISTS_GET_SUBLIST_HELPURL,
+  init: function() {
+    this.setColour(210);
+    this.appendValueInput('LIST')
+        .setCheck(Array)
+        .appendTitle(Blockly.LANG_LISTS_GET_SUBLIST_INPUT_IN_LIST);
+    this.appendDummyInput('AT1');
+    this.appendDummyInput('AT2');
+    this.setInputsInline(true);
+    this.setOutput(true, Array);
+    this.updateAt(1, true);
+    this.updateAt(2, true);
+    this.setTooltip(Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP);
+  },
+  mutationToDom: function() {
+    // Save whether there are 'AT' inputs.
+    var container = document.createElement('mutation');
+    var isAt1 = this.getInput('AT1').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at1', isAt1);
+    var isAt2 = this.getInput('AT2').type == Blockly.INPUT_VALUE;
+    container.setAttribute('at2', isAt2);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the block shape.
+    var isAt1 = (xmlElement.getAttribute('at1') == 'true');
+    var isAt2 = (xmlElement.getAttribute('at1') == 'true');
+    this.updateAt(1, isAt1);
+    this.updateAt(2, isAt2);
+  },
+  updateAt: function(n, isAt) {
+    // Create or delete an input for the numeric index.
+    // Destroy old 'AT' input.
+    this.removeInput('AT' + n);
+    // Create either a value 'AT' input or a dummy input.
+    if (isAt) {
+      this.appendValueInput('AT' + n).setCheck(Number);
+    } else {
+      this.appendDummyInput('AT' + n);
+    }
+    var menu = new Blockly.FieldDropdown(this['WHERE' + n], function(value) {
+      var newAt = (value == 'FROM_START') || (value == 'FROM_END');
+      // The 'isAt' variable is available due to this function being a closure.
+      if (newAt != isAt) {
+        var block = this.sourceBlock_;
+        block.updateAt(n, newAt);
+        // This menu has been destroyed and replaced.  Update the replacement.
+        block.setTitleValue(value, 'WHERE' + n);
+        return null;
+      }
+      return undefined;
+    });
+    this.getInput('AT' + n)
+        .appendTitle(Blockly['LANG_LISTS_GET_SUBLIST_INPUT_AT' + n])
+        .appendTitle(menu, 'WHERE' + n);
+    if (n == 1) {
+      this.moveInputBefore('AT1', 'AT2');
+    }
+  }
+};
+
+Blockly.Language.lists_getSublist.WHERE1 = Blockly.Language.lists_getIndex.WHERE
+    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
+            tuple[1] == 'FROM_END' || tuple[1] == 'FIRST';});
+Blockly.Language.lists_getSublist.WHERE2 = Blockly.Language.lists_getIndex.WHERE
+    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
+            tuple[1] == 'FROM_END' || tuple[1] == 'LAST';});

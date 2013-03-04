@@ -36,7 +36,7 @@ var frameSrc = (level > 9 ? frameSrc10 : frameSrc9).join('&');
 document.write(mazepage.start({}, null,
     {MSG: MSG, level: level, frameSrc: frameSrc}));
 var maxBlocks = [undefined, // Level 0.
-    Infinity, Infinity, 2, 5, 10, 10, 10, 7, 10, Infinity][level];
+    Infinity, Infinity, 2, 5, 5, 5, 10, 7, 10, Infinity][level];
 
 /**
  * Milliseconds between each animation frame.

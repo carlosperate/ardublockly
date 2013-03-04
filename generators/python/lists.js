@@ -272,3 +272,46 @@ Blockly.Python.lists_setIndex = function() {
   }
   throw 'Unhandled combination (lists_setIndex).';
 };
+
+Blockly.Python.lists_getSublist = function() {
+  // Get sublist.
+  var list = Blockly.Python.valueToCode(this, 'LIST',
+      Blockly.Python.ORDER_MEMBER) || '[]';
+  var where1 = this.getTitleValue('WHERE1');
+  var where2 = this.getTitleValue('WHERE2');
+  var at1 = Blockly.Python.valueToCode(this, 'AT1',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  var at2 = Blockly.Python.valueToCode(this, 'AT2',
+      Blockly.Python.ORDER_ADDITIVE) || '1';
+  if (where1 == 'FIRST' || (where1 == 'FROM_START' && at1 == '1')) {
+    at1 = '';
+  } else if (where1 == 'FROM_START') {
+    // Blockly uses one-based indicies.
+    if (at1.match(/^-?\d+$/)) {
+      // If the index is a naked number, decrement it right now.
+      at1 = parseInt(at1, 10) - 1;
+    } else {
+      // If the index is dynamic, decrement it in code.
+      at1 += ' - 1';
+    }
+  } else if (where1 == 'FROM_END') {
+    at1 = '-' + at1;
+  }
+  if (where2 == 'LAST' || (where2 == 'FROM_END' && at2 == '1')) {
+    at2 = '';
+  } else if (where1 == 'FROM_START') {
+    at2 = at2;
+  } else if (where1 == 'FROM_END') {
+    if (at2.match(/^-?\d+$/)) {
+      // If the index is a naked number, increment it right now.
+      at2 = 1 - parseInt(at2, 10);
+    } else {
+      // If the index is dynamic, increment it in code.
+      at2 = '1 - ' + at2;
+    }
+    Blockly.Python.definitions_['import_sys'] = 'import sys';
+    at2 += ' or sys.maxsize';
+  }
+  var code = list + '[' + at1 + ' : ' + at2 + ']';
+  return [code, Blockly.Python.ORDER_MEMBER];
+};

@@ -454,6 +454,12 @@ Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST = 'Inserts the item at the sta
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_LAST = 'Append the item to theend of a list.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM = 'Inserts the item randomly in a list.';
 
+Blockly.LANG_LISTS_GET_SUBLIST_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_LISTS_GET_SUBLIST_INPUT_IN_LIST = 'in list';
+Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT1 = 'get sub-list from';
+Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT2 = 'to';
+Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portion of a list.';
+
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_GET_TITLE = 'lấy';
