@@ -182,7 +182,7 @@ Maze.startDirection = Maze.EAST;
  */
 Maze.pidList = [];
 
-Maze.dead_end = function(x, y, angle) {
+Maze.deadEnd = function(x, y, angle) {
   var path = document.createElementNS(Blockly.SVG_NS, 'path');
   path.setAttribute('d',
       'M' + (x + Maze.PATH_WIDTH) + ',' + (y + Maze.SQUARE_SIZE) +
@@ -264,10 +264,10 @@ Maze.cross = function(x, y, angle) {
 };
 
 Maze.tile_SHAPES = {
-  '10010': [Maze.dead_end, 0],
-  '10001': [Maze.dead_end, 90],
-  '11000': [Maze.dead_end, 180],
-  '10100': [Maze.dead_end, -90],
+  '10010': [Maze.deadEnd, 0],
+  '10001': [Maze.deadEnd, 90],
+  '11000': [Maze.deadEnd, 180],
+  '10100': [Maze.deadEnd, -90],
   '11010': [Maze.thru, 0],
   '10101': [Maze.thru, 90],
   '10110': [Maze.elbow, 0],
@@ -281,7 +281,7 @@ Maze.tile_SHAPES = {
   '11111': [Maze.cross, -90]
 };
 
-Maze.draw_map = function() {
+Maze.drawMap = function() {
   var svg = document.getElementById('svgMaze');
 
   // Draw the outer square.
@@ -294,14 +294,27 @@ Maze.draw_map = function() {
   svg.appendChild(square);
 
   // Draw the tiles making up the maze map.
+
+  // Return a value of '0' if the specified square is wall or out of bounds,
+  // '1' otherwise (empty, start, finish).
+  var normalize = function(x, y) {
+    if (x < 0 || x >= Maze.COLS || y < 0 || y >= Maze.ROWS) {
+      return '0';
+    }
+    return (Maze.MAP[y][x] == Maze.WALL_SQUARE) ? '0' : '1';
+  };
+
+  // Compute and draw the tile for each square.
   for (var y = 0; y < Maze.ROWS; y++) {
     for (var x = 0; x < Maze.COLS; x++) {
-      var tile = String(Math.min(1, Maze.MAP[y][x])) +
-          (y == 0 ? 0 : Math.min(1, Maze.MAP[y - 1][x])) +
-          (x == Maze.COLS - 1 ? 0 : Math.min(1, Maze.MAP[y][x + 1])) +
-          (y == Maze.ROWS - 1 ? 0 : Math.min(1, Maze.MAP[y + 1][x])) +
-          (x == 0 ? 0 : Math.min(1, Maze.MAP[y][x - 1]));
+      // Compute the tile index.
+      var tile = normalize(x, y) +
+          normalize(x, y - 1) +  // North.
+          normalize(x + 1, y) +  // West.
+          normalize(x, y + 1) +  // South.
+          normalize(x - 1, y);   // East.
 
+      // Draw the tile (or nothing, if wall).
       if (Maze.tile_SHAPES[tile]) {
         var shape = Maze.tile_SHAPES[tile][0];
         var angle = Maze.tile_SHAPES[tile][1];
@@ -368,7 +381,7 @@ Maze.draw_map = function() {
 Maze.init = function(blockly) {
   window.Blockly = blockly;
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Maze.checkTimeout(%1);\n';
-  Maze.draw_map();
+  Maze.drawMap();
 
   //window.onbeforeunload = function() {
   //  if (Blockly.mainWorkspace.getAllBlocks().length > 1 &&
@@ -837,5 +850,5 @@ Maze.isPath = function(direction) {
   } else if (effectiveDirection == Maze.WEST) {
     square = Maze.MAP[Maze.pegmanY][Maze.pegmanX - 1];
   }
-  return square !== 0 && square !== undefined;
+  return square !== Maze.WALL_SQUARE && square !== undefined;
 };
