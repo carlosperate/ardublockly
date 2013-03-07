@@ -44,12 +44,16 @@ var maxBlocks = [undefined, // Level 0.
 Maze.STEP_SPEED = 150;
 
 /**
- * The maze's map is a 2D array of numbers in the range 0..3.
+ * The types of squares in the maze, which is represented
+ * as a 2D array of SquareType values.
+ * @enum {number}
  */
-Maze.WALL_SQUARE = 0;
-Maze.OPEN_SQUARE = 1;
-Maze.START_SQUARE = 2;
-Maze.FINISH_SQUARE = 3;
+Maze.SquareType = {
+  WALL: 0,
+  OPEN: 1,
+  START: 2,
+  FINISH: 3
+};
 
 // The maze square constants defined above are inlined here
 // for ease of reading and writing the static mazes.
@@ -165,17 +169,21 @@ Maze.MAZE_HEIGHT = Maze.SQUARE_SIZE * Maze.ROWS;
 Maze.PATH_WIDTH = Maze.SQUARE_SIZE / 3;
 
 /**
- * Constants for cardinal directions.
+ * Constants for cardinal directions.  Subsequent code assumes these are
+ * in the range 0..3 and that opposites have an absolute difference of 2.
+ * @enum {number}
  */
-Maze.NORTH = 0;
-Maze.EAST = 1;
-Maze.SOUTH = 2;
-Maze.WEST = 3;
+Maze.DirectionType = {
+  NORTH: 0,
+  EAST: 1,
+  SOUTH: 2,
+  WEST : 3
+};
 
 /**
  * Starting direction.
  */
-Maze.startDirection = Maze.EAST;
+Maze.startDirection = Maze.DirectionType.EAST;
 
 /**
  * PIDs of animation tasks currently executing.
@@ -301,7 +309,7 @@ Maze.drawMap = function() {
     if (x < 0 || x >= Maze.COLS || y < 0 || y >= Maze.ROWS) {
       return '0';
     }
-    return (Maze.MAP[y][x] == Maze.WALL_SQUARE) ? '0' : '1';
+    return (Maze.MAP[y][x] == Maze.SquareType.WALL) ? '0' : '1';
   };
 
   // Compute and draw the tile for each square.
@@ -416,9 +424,9 @@ Maze.init = function(blockly) {
   // Locate the start and finish squares.
   for (var y = 0; y < Maze.ROWS; y++) {
     for (var x = 0; x < Maze.COLS; x++) {
-      if (Maze.MAP[y][x] == Maze.START_SQUARE) {
+      if (Maze.MAP[y][x] == Maze.SquareType.START) {
         Maze.start_ = {x: x, y: y};
-      } else if (Maze.MAP[y][x] == Maze.FINISH_SQUARE) {
+      } else if (Maze.MAP[y][x] == Maze.SquareType.FINISH) {
         Maze.finish_ = {x: x, y: y};
       }
     }
@@ -617,14 +625,19 @@ Maze.schedule = function(startPos, endPos) {
 Maze.scheduleFail = function(forward) {
   var deltaX = 0;
   var deltaY = 0;
-  if (Maze.pegmanD == Maze.NORTH) {
-    deltaY = -0.25;
-  } else if (Maze.pegmanD == Maze.EAST) {
-    deltaX = 0.25;
-  } else if (Maze.pegmanD == Maze.SOUTH) {
-    deltaY = 0.25;
-  } else if (Maze.pegmanD == Maze.WEST) {
-    deltaX = -0.25;
+  switch (Maze.pegmanD) {
+    case Maze.DirectionType.NORTH:
+      deltaY = -0.25;
+      break;
+    case Maze.DirectionType.EAST:
+      deltaX = 0.25;
+      break;
+    case Maze.DirectionType.SOUTH:
+      deltaY = 0.25;
+      break;
+    case Maze.DirectionType.WEST:
+      deltaX = -0.25;
+      break;
   }
   if (!forward) {
     deltaX = - deltaX;
@@ -788,20 +801,24 @@ Maze.move = function(direction, id) {
   }
   // If moving backward, flip the effective direction.
   var effectiveDirection = Maze.pegmanD + direction;
-  effectiveDirection = Maze.constrainDirection4(effectiveDirection);
   var command;
-  if (effectiveDirection == Maze.NORTH) {
-    Maze.pegmanY--;
-    command = 'north';
-  } else if (effectiveDirection == Maze.EAST) {
-    Maze.pegmanX++;
-    command = 'east';
-  } else if (effectiveDirection == Maze.SOUTH) {
-    Maze.pegmanY++;
-    command = 'south';
-  } else if (effectiveDirection == Maze.WEST) {
-    Maze.pegmanX--;
-    command = 'west';
+  switch (Maze.constrainDirection4(effectiveDirection)) {
+    case Maze.DirectionType.NORTH:
+      Maze.pegmanY--;
+      command = 'north';
+      break;
+    case Maze.DirectionType.EAST:
+      Maze.pegmanX++;
+      command = 'east';
+      break;
+    case Maze.DirectionType.SOUTH:
+      Maze.pegmanY++;
+      command = 'south';
+      break;
+    case Maze.DirectionType.WEST:
+      Maze.pegmanX--;
+      command = 'west';
+      break;
   }
   Maze.path.push([command, id]);
   if (Maze.pegmanX == Maze.finish_.x && Maze.pegmanY == Maze.finish_.y) {
@@ -837,18 +854,22 @@ Maze.turn = function(direction, id) {
  */
 Maze.isPath = function(direction) {
   var effectiveDirection = Maze.pegmanD + direction;
-  effectiveDirection = Maze.constrainDirection4(effectiveDirection);
   var square;
-  if (effectiveDirection == Maze.NORTH) {
-    square = Maze.MAP[Maze.pegmanY - 1] &&
-      Maze.MAP[Maze.pegmanY - 1][Maze.pegmanX];
-  } else if (effectiveDirection == Maze.EAST) {
-    square = Maze.MAP[Maze.pegmanY][Maze.pegmanX + 1];
-  } else if (effectiveDirection == Maze.SOUTH) {
-    square = Maze.MAP[Maze.pegmanY + 1] &&
-        Maze.MAP[Maze.pegmanY + 1][Maze.pegmanX];
-  } else if (effectiveDirection == Maze.WEST) {
-    square = Maze.MAP[Maze.pegmanY][Maze.pegmanX - 1];
+  switch (Maze.constrainDirection4(effectiveDirection)) {
+    case Maze.DirectionType.NORTH:
+      square = Maze.MAP[Maze.pegmanY - 1] &&
+          Maze.MAP[Maze.pegmanY - 1][Maze.pegmanX];
+      break;
+    case Maze.DirectionType.EAST:
+      square = Maze.MAP[Maze.pegmanY][Maze.pegmanX + 1];
+      break;
+    case Maze.DirectionType.SOUTH:
+      square = Maze.MAP[Maze.pegmanY + 1] &&
+          Maze.MAP[Maze.pegmanY + 1][Maze.pegmanX];
+      break;
+    case Maze.DirectionType.WEST:
+      square = Maze.MAP[Maze.pegmanY][Maze.pegmanX - 1];
+      break;
   }
-  return square !== Maze.WALL_SQUARE && square !== undefined;
+  return square !== Maze.SquareType.WALL && square !== undefined;
 };
