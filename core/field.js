@@ -96,6 +96,8 @@ Blockly.Field.prototype.init = function(block) {
     this.mouseUpWrapper_ =
         Blockly.bindEvent_(this.group_, 'mouseup', this, this.onMouseUp_);
   }
+  // Bump to set the colours for dropdown arrows.
+  this.setText(null);
 };
 
 /**

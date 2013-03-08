@@ -55,6 +55,10 @@ goog.inherits(Blockly.FieldTextInput, Blockly.Field);
  * @override
  */
 Blockly.FieldTextInput.prototype.setText = function(text) {
+  if (text === null) {
+    // No change if null.
+    return;
+  }
   if (this.changeHandler_) {
     var validated = this.changeHandler_(text);
     // If the new text is invalid, validation returns null.

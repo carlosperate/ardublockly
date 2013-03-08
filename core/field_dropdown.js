@@ -48,6 +48,10 @@ Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
   this.changeHandler_ = opt_changeHandler;
   var firstTuple = this.getOptions_()[0];
   this.value_ = firstTuple[1];
+  // Add dropdown arrow: "option ▾" (LTR) or "▾ אופציה" (RTL)
+  this.arrow_ = Blockly.createSvgElement('tspan', {}, null);
+  this.arrow_.appendChild(document.createTextNode(
+      Blockly.RTL ? '\u25BE ' : ' \u25BE'));
 
   // Call parent's constructor.
   Blockly.FieldDropdown.superClass_.constructor.call(this, firstTuple[0]);
@@ -68,8 +72,8 @@ Blockly.FieldDropdown.createDom = function() {
     </g>
   </g>
   */
-  var svgGroup = Blockly.createSvgElement('g', {'class': 'blocklyHidden blocklyFieldDropdown'},
-                                          null);
+  var svgGroup = Blockly.createSvgElement('g',
+      {'class': 'blocklyHidden blocklyFieldDropdown'}, null);
   Blockly.FieldDropdown.svgGroup_ = svgGroup;
   Blockly.FieldDropdown.svgShadow_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyDropdownMenuShadow',
@@ -261,6 +265,48 @@ Blockly.FieldDropdown.prototype.setValue = function(newValue) {
   // Value not found.  Add it, maybe it will become valid once set
   // (like variable names).
   this.setText(newValue);
+};
+
+/**
+ * Set the text in this field.  Trigger a rerender of the source block.
+ * @param {?string} text New text.
+ */
+Blockly.FieldDropdown.prototype.setText = function(text) {
+  if (this.sourceBlock_) {
+    // Update arrow's colour.
+    this.arrow_.style.fill = Blockly.makeColour(this.sourceBlock_.getColour());
+  }
+  if (text === null) {
+    // No change if null.
+    return;
+  }
+  this.text_ = text;
+  // Empty the text element.
+  goog.dom.removeChildren(/** @type {!Element} */ (this.textElement_));
+  // Replace whitespace with non-breaking spaces so the text doesn't collapse.
+  text = text.replace(/\s/g, Blockly.Field.NBSP);
+  if (!text) {
+    // Prevent the field from disappearing if empty.
+    text = Blockly.Field.NBSP;
+  }
+  var textNode = document.createTextNode(text);
+  this.textElement_.appendChild(textNode);
+
+  // Insert dropdown arrow.
+  if (Blockly.RTL) {
+    this.textElement_.insertBefore(this.arrow_, this.textElement_.firstChild);
+  } else {
+    this.textElement_.appendChild(this.arrow_);
+  }
+
+  // Cached width is obsolete.  Clear it.
+  this.size_.width = 0;
+
+  if (this.sourceBlock_ && this.sourceBlock_.rendered) {
+    this.sourceBlock_.render();
+    this.sourceBlock_.bumpNeighbours_();
+    this.sourceBlock_.workspace.fireChangeEvent();
+  }
 };
 
 /**
