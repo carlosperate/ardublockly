@@ -84,6 +84,12 @@ iframe {
 }
 
 /* Sprited icons. */
+.random  {
+  height: 21px;
+  width: 21px;
+  background-image: url(icons.png);
+  background-position: -63px 0px;
+}
 .code {
   height: 21px;
   width: 21px;
