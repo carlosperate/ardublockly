@@ -27,8 +27,6 @@
 
 goog.provide('Blockly.utils');
 
-goog.require('goog.events.EventTarget');
-
 
 /**
  * Add a CSS class to a element.
@@ -74,24 +72,24 @@ Blockly.removeClass_ = function(element, className) {
 
 /**
  * Bind an event to a function call.
- * @param {!EventTarget|!goog.events.EventTarget} target Target to listen to.
+ * @param {!Element} element Element upon which to listen.
  * @param {string} name Event name to listen to (e.g. 'mousedown').
  * @param {Object} thisObject The value of 'this' in the function.
  * @param {!Function} func Function to call when event is triggered.
  * @return {!Array.<!Array>} Opaque data that can be passed to unbindEvent_.
  * @private
  */
-Blockly.bindEvent_ = function(target, name, thisObject, func) {
+Blockly.bindEvent_ = function(element, name, thisObject, func) {
   var bindData = [];
   var wrapFunc;
-  if (!target.addEventListener) {
-    throw 'EventTarget does not have addEventListener.';
+  if (!element.addEventListener) {
+    throw 'Element is not a DOM node with addEventListener.';
   }
   wrapFunc = function(e) {
     func.apply(thisObject, arguments);
   };
-  target.addEventListener(name, wrapFunc, false);
-  bindData.push([target, name, wrapFunc]);
+  element.addEventListener(name, wrapFunc, false);
+  bindData.push([element, name, wrapFunc]);
   // Add equivalent touch event.
   if (name in Blockly.bindEvent_.TOUCH_MAP) {
     wrapFunc = function(e) {
@@ -106,9 +104,9 @@ Blockly.bindEvent_ = function(target, name, thisObject, func) {
       // Stop the browser from scrolling/zooming the page
       e.preventDefault();
     };
-    target.addEventListener(Blockly.bindEvent_.TOUCH_MAP[name],
-                            wrapFunc, false);
-    bindData.push([target, Blockly.bindEvent_.TOUCH_MAP[name], wrapFunc]);
+    element.addEventListener(Blockly.bindEvent_.TOUCH_MAP[name],
+                             wrapFunc, false);
+    bindData.push([element, Blockly.bindEvent_.TOUCH_MAP[name], wrapFunc]);
   }
   return bindData;
 };
@@ -149,20 +147,20 @@ Blockly.unbindEvent_ = function(bindData) {
 
 /**
  * Fire a synthetic event.
- * @param {!EventTarget|!goog.events.EventTarget} target The event's target.
+ * @param {!Element} element The event's target element.
  * @param {string} eventName Name of event (e.g. 'click').
  */
-Blockly.fireUiEvent = function(target, eventName) {
+Blockly.fireUiEvent = function(element, eventName) {
   var doc = document;
   if (doc.createEvent) {
     // W3
     var evt = doc.createEvent('UIEvents');
     evt.initEvent(eventName, true, true);  // event type, bubbling, cancelable
-    target.dispatchEvent(evt);
+    element.dispatchEvent(evt);
   } else if (doc.createEventObject) {
     // MSIE
     var evt = doc.createEventObject();
-    target.fireEvent('on' + eventName, evt);
+    element.fireEvent('on' + eventName, evt);
   } else {
     throw 'FireEvent: No event creation mechanism.';
   }
@@ -219,12 +217,13 @@ Blockly.getRelativeXY_ = function(element) {
 Blockly.getAbsoluteXY_ = function(element) {
   var x = 0;
   var y = 0;
-  for (var el = element; el; el = el.parentElement) {
+  do {
     // Loop through this block and every parent.
-    var xy = Blockly.getRelativeXY_(el);
+    var xy = Blockly.getRelativeXY_(element);
     x += xy.x;
     y += xy.y;
-  }
+    element = element.parentNode;
+  } while (element && element != document);
   return {x: x, y: y};
 };
 

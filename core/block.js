@@ -228,15 +228,15 @@ Blockly.Block.prototype.unselect = function() {
 
 /**
  * Dispose of this block.
- * @param {boolean=} opt_healStack If true, then try to heal any gap by connecting
+ * @param {boolean} healStack If true, then try to heal any gap by connecting
  *     the next statement with the previous statement.  Otherwise, dispose of
  *     all children of this block.
- * @param {boolean=} opt_animate If true, show a disposal animation and sound.
+ * @param {boolean} animate If true, show a disposal animation and sound.
  */
-Blockly.Block.prototype.dispose = function(opt_healStack, opt_animate) {
-  this.unplug(opt_healStack);
+Blockly.Block.prototype.dispose = function(healStack, animate) {
+  this.unplug(healStack);
 
-  if (opt_animate && this.svg_) {
+  if (animate && this.svg_) {
     this.svg_.disposeUiEffect();
   }
 
@@ -296,11 +296,11 @@ Blockly.Block.prototype.dispose = function(opt_healStack, opt_animate) {
 /**
  * Unplug this block from its superior block.  If this block is a statement,
  * optionally reconnect the block underneath with the block on top.
- * @param {boolean=} opt_healStack Disconnect child statement and reconnect stack.
- * @param {boolean=} opt_bump Move the unplugged block sideways a short distance.
+ * @param {boolean} healStack Disconnect child statement and reconnect stack.
+ * @param {boolean} bump Move the unplugged block sideways a short distance.
  */
-Blockly.Block.prototype.unplug = function(opt_healStack, opt_bump) {
-  var bump = opt_bump && !!this.getParent();
+Blockly.Block.prototype.unplug = function(healStack, bump) {
+  bump = bump && !!this.getParent();
   if (this.outputConnection) {
     if (this.outputConnection.targetConnection) {
       // Disconnect from any superior block.
@@ -314,7 +314,7 @@ Blockly.Block.prototype.unplug = function(opt_healStack, opt_bump) {
       // Detach this block from the parent's tree.
       this.setParent(null);
     }
-    if (opt_healStack && this.nextConnection &&
+    if (healStack && this.nextConnection &&
         this.nextConnection.targetConnection) {
       // Disconnect the next statement.
       var nextTarget = this.nextConnection.targetConnection;
@@ -609,7 +609,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
     }
     var deleteOption = {
       text: descendantCount == 1 ? Blockly.MSG_DELETE_BLOCK :
-          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount.toString()),
+          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
       enabled: true,
       callback: function() {
         block.dispose(true, true);
@@ -1485,37 +1485,3 @@ Blockly.Block.prototype.setWarningText = function(text) {
 Blockly.Block.prototype.render = function() {
   this.svg_.render();
 };
-
-
-/**
- * @type {?function(): Array}
- */
-Blockly.Block.prototype.getProcedureDef = null;
-
-
-/**
- * @type {?function(string, string)}
- */
-Blockly.Block.prototype.renameVar = null;
-
-
-/**
- * @type {?function(string, string)}
- */
-Blockly.Block.prototype.renameProcedure = null;
-
-
-/**
- * @type {?function(Array.<string>, Array.<string>)}
- */
-Blockly.Block.prototype.setProcedureParameters = null;
-
-/**
- * @type {?function(): string}
- */
-Blockly.Block.prototype.getProcedureCall = null;
-
-/**
- * @type {?function(): Array.<string>}
- */
-Blockly.Block.prototype.getVars = null;

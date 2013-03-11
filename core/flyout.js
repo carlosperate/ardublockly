@@ -27,46 +27,18 @@ goog.provide('Blockly.Flyout');
 
 goog.require('Blockly.Block');
 goog.require('Blockly.Comment');
-goog.require('Blockly.Component');
-
 
 
 /**
  * Class for a flyout.
- * @param {!Blockly.Workspace} workspace The workspace in which to create new
- *     blocks.
- * @param {!Function} workspaceMetrics Function which returns size information
- *     regarding the flyout's target workspace.
- * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  * @constructor
- * @extends {Blockly.Component}
  */
-Blockly.Flyout = function(workspace, workspaceMetrics, withScrollbar) {
-  Blockly.Flyout.superClass_.constructor.call(this);
-
+Blockly.Flyout = function() {
   /**
    * @type {!Blockly.Workspace}
    * @private
    */
   this.workspace_ = new Blockly.Workspace(false);
-
-  /**
-   * @type {!Blockly.Workspace}
-   * @private
-   */
-  this.targetWorkspace_ = workspace;
-
-  /**
-   * @type {!Function}
-   * @private
-   */
-  this.targetWorkspaceMetrics_ = workspaceMetrics;
-
-  /**
-   * @type {boolean}
-   * @private
-   */
-  this.withScrollbar_ = withScrollbar;
 
   /**
    * Opaque data that can be passed to removeChangeListener.
@@ -95,15 +67,12 @@ Blockly.Flyout = function(workspace, workspaceMetrics, withScrollbar) {
    */
   this.buttons_ = [];
 };
-goog.inherits(Blockly.Flyout, Blockly.Component);
-
 
 /**
  * Does the flyout automatically close when a block is created?
  * @type {boolean}
  */
 Blockly.Flyout.prototype.autoClose = true;
-
 
 /**
  * Corner radius of the flyout background.
@@ -112,9 +81,16 @@ Blockly.Flyout.prototype.autoClose = true;
  */
 Blockly.Flyout.prototype.CORNER_RADIUS = 8;
 
+/**
+ * Wrapper function called when a resize occurs.
+ * @type {Array.<!Array>}
+ * @private
+ */
+Blockly.Flyout.prototype.onResizeWrapper_ = null;
 
 /**
  * Creates the flyout's DOM.  Only needs to be called once.
+ * @return {!Element} The flyout's SVG group.
  */
 Blockly.Flyout.prototype.createDom = function() {
   /*
@@ -124,50 +100,41 @@ Blockly.Flyout.prototype.createDom = function() {
   </g>
   */
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
-  this.setElementInternal(this.svgGroup_);
   this.svgBackground_ = Blockly.createSvgElement('path',
       {'class': 'blocklyFlyoutBackground'}, this.svgGroup_);
   this.svgOptions_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
-  this.addChild(this.workspace_);
-  this.workspace_.render(this.svgOptions_);
-  // Add scrollbars.
-  if (this.withScrollbar_) {
-    /**
-     * @type {Blockly.Scrollbar}
-     * @private
-     */
-    this.scrollbar_ = new Blockly.Scrollbar(
-        this.svgOptions_,
-        goog.bind(this.getMetrics, this),
-        goog.bind(this.setMetrics, this),
-        false, false);
-    this.registerDisposable(this.scrollbar_);
-  }
-
-  this.hide();
+  this.svgOptions_.appendChild(this.workspace_.createDom());
+  return this.svgGroup_;
 };
-
 
 /**
  * Dispose of this flyout.
  * Unlink from all DOM elements to prevent memory leaks.
- * @override
  */
-Blockly.Flyout.prototype.disposeInternal = function() {
+Blockly.Flyout.prototype.dispose = function() {
+  if (this.onResizeWrapper_) {
+    Blockly.unbindEvent_(this.onResizeWrapper_);
+    this.onResizeWrapper_ = null;
+  }
   if (this.changeWrapper_) {
     Blockly.unbindEvent_(this.changeWrapper_);
     this.changeWrapper_ = null;
   }
+  if (this.scrollbar_) {
+    this.scrollbar_.dispose();
+    this.scrollbar_ = null;
+  }
+  this.workspace_ = null;
   if (this.svgGroup_) {
     goog.dom.removeNode(this.svgGroup_);
     this.svgGroup_ = null;
   }
   this.svgBackground_ = null;
   this.svgOptions_ = null;
-
-  Blockly.Flyout.superClass_.disposeInternal.call(this);
+  this.targetWorkspace_ = null;
+  this.targetWorkspaceMetrics_ = null;
+  this.buttons_.splice(0);
 };
-
 
 /**
  * Return an object with all the metrics required to size scrollbars for the
@@ -220,21 +187,36 @@ Blockly.Flyout.prototype.setMetrics = function(yRatio) {
   this.svgOptions_.setAttribute('transform', 'translate(0,' + y + ')');
 };
 
-
 /**
  * Initializes the flyout.
+ * @param {!Blockly.Workspace} workspace The workspace in which to create new
+ *     blocks.
+ * @param {!Function} workspaceMetrics Function which returns size information
+ *     regarding the flyout's target workspace.
+ * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  */
-Blockly.Flyout.prototype.enterDocument = function() {
-  Blockly.Flyout.superClass_.enterDocument.call(this);
+Blockly.Flyout.prototype.init =
+    function(workspace, workspaceMetrics, withScrollbar) {
+  this.targetWorkspace_ = workspace;
+  this.targetWorkspaceMetrics_ = workspaceMetrics;
+  // Add scrollbars.
+  var flyout = this;
+  if (withScrollbar) {
+    this.scrollbar_ = new Blockly.Scrollbar(this.svgOptions_,
+        function() {return flyout.getMetrics();},
+        function(ratio) {return flyout.setMetrics(ratio);},
+        false, false);
+  }
+
+  this.hide();
 
   // If the document resizes, reposition the flyout.
-  this.getHandler().listen(
-      goog.global, goog.events.EventType.RESIZE, this.position_);
+  this.onResizeWrapper_ = Blockly.bindEvent_(window,
+      goog.events.EventType.RESIZE, this, this.position_);
   this.position_();
   this.changeWrapper_ = Blockly.bindEvent_(this.targetWorkspace_.getCanvas(),
       'blocklyWorkspaceChange', this, this.filterForCapacity_);
 };
-
 
 /**
  * Move the toolbox to the edge of the workspace.
@@ -280,7 +262,6 @@ Blockly.Flyout.prototype.position_ = function() {
   this.height_ = metrics.viewHeight;
 };
 
-
 /**
  * Is the flyout visible?
  * @return {boolean} True if visible.
@@ -288,7 +269,6 @@ Blockly.Flyout.prototype.position_ = function() {
 Blockly.Flyout.prototype.isVisible = function() {
   return this.svgGroup_.style.display == 'block';
 };
-
 
 /**
  * Hide and empty the flyout.
@@ -310,7 +290,6 @@ Blockly.Flyout.prototype.hide = function() {
   }
   this.buttons_.splice(0);
 };
-
 
 /**
  * Show and populate the flyout.
@@ -439,7 +418,6 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
   };
 };
 
-
 /**
  * Filter the blocks on the flyout to disable the ones that are above the
  * capacity limit.
@@ -452,13 +430,4 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
     var disabled = allBlocks.length > remainingCapacity;
     block.setDisabled(disabled);
   }
-};
-
-
-/**
- * @enum {string}
- */
-Blockly.Flyout.EventType = {
-  SHOWFLYOUT: 'showflyout',
-  HIDEFLYOUT: 'hideflyout'
 };

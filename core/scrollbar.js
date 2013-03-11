@@ -190,11 +190,6 @@ Blockly.ScrollbarPair.prototype.set = function(x, y) {
   }
 };
 
-/**
- * @type {?Blockly.Metrics}
- */
-Blockly.ScrollbarPair.prototype.oldHostMetrics_ = null;
-
 // --------------------------------------------------------------------
 
 /**
@@ -968,4 +963,3 @@ Blockly.Scrollbar.insertAfter_ = function(newNode, refNode) {
     parentNode.appendChild(newNode);
   }
 };
-

@@ -27,17 +27,14 @@
 goog.provide('Blockly.Mutator');
 
 goog.require('Blockly.Bubble');
-goog.require('goog.Disposable');
 
 
 /**
  * Class for a mutator dialog.
  * @param {!Array.<string>} quarkNames List of names of sub-blocks for flyout.
  * @constructor
- * @extends {goog.Disposable}
  */
 Blockly.Mutator = function(quarkNames) {
-  Blockly.Mutator.superClass_.constructor.call(this);
   this.block_ = null;
   this.quarkXml_ = [];
   // Convert the list of names into a list of XML objects for the flyout.
@@ -47,7 +44,6 @@ Blockly.Mutator = function(quarkNames) {
     this.quarkXml_[x] = element;
   }
 };
-goog.inherits(Blockly.Mutator, goog.Disposable);
 
 /**
  * Height and width of the mutator icon.
@@ -156,11 +152,10 @@ Blockly.Mutator.prototype.createEditor_ = function() {
        'height': '100%', 'width': '100%'}, this.svgDialog_);
 
   this.workspace_ = new Blockly.Workspace(true);
-  this.workspace_.render(this.svgDialog_);
-  this.flyout_ = new Blockly.Flyout(
-    this.workspace_, goog.bind(this.getFlyoutMetrics_, this), false);
+  this.flyout_ = new Blockly.Flyout();
   this.flyout_.autoClose = false;
-  this.flyout_.renderBefore(this.workspace_.getElement());
+  this.svgDialog_.appendChild(this.flyout_.createDom());
+  this.svgDialog_.appendChild(this.workspace_.createDom());
   return this.svgDialog_;
 };
 
@@ -226,6 +221,8 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
         this.createEditor_(), this.block_.svg_.svgGroup_,
         this.iconX_, this.iconY_, null, null);
     var thisObj = this;
+    this.flyout_.init(this.workspace_,
+                      function() {return thisObj.getFlyoutMetrics_()}, false);
     this.flyout_.show(this.quarkXml_);
 
     this.rootBlock_ = this.block_.decompose(this.workspace_);
@@ -361,9 +358,8 @@ Blockly.Mutator.prototype.updateColour = function() {
 
 /**
  * Dispose of this mutator.
- * @override
  */
-Blockly.Mutator.prototype.disposeInternal = function() {
+Blockly.Mutator.prototype.dispose = function() {
   // Dispose of and unlink the icon.
   goog.dom.removeNode(this.iconGroup_);
   this.iconGroup_ = null;
@@ -372,9 +368,6 @@ Blockly.Mutator.prototype.disposeInternal = function() {
   // Disconnect links between the block and the mutator.
   this.block_.mutator = null;
   this.block_ = null;
-  goog.dispose(this.workspace_);
-
-  Blockly.Mutator.superClass_.disposeInternal.call(this);
 };
 
 /**

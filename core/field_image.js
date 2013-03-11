@@ -28,8 +28,6 @@ goog.provide('Blockly.FieldImage');
 goog.require('Blockly.Field');
 goog.require('goog.userAgent');
 
-
-
 /**
  * Class for an image.
  * @param {string} src The URL of the image.
@@ -39,8 +37,6 @@ goog.require('goog.userAgent');
  * @constructor
  */
 Blockly.FieldImage = function(src, width, height) {
-  Blockly.FieldImage.superClass_.constructor.call(this);
-
   this.sourceBlock_ = null;
   // Ensure height and width are numbers.  Strings are bad at math.
   height = Number(height);
@@ -65,7 +61,6 @@ Blockly.FieldImage = function(src, width, height) {
   }
 };
 goog.inherits(Blockly.FieldImage, Blockly.Field);
-
 
 /**
  * Rectangular mask used by Firefox.
@@ -98,15 +93,12 @@ Blockly.FieldImage.prototype.init = function(block) {
 
 /**
  * Dispose of all DOM objects belonging to this text.
- * @override
  */
-Blockly.FieldImage.prototype.disposeInternal = function() {
+Blockly.FieldImage.prototype.dispose = function() {
   goog.dom.removeNode(this.group_);
   this.group_ = null;
   this.imageElement_ = null;
   this.rectElement_ = null;
-
-  Blockly.FieldImage.superClass_.disposeInternal.call(this);
 };
 
 /**
@@ -134,6 +126,10 @@ Blockly.FieldImage.prototype.getText = function() {
  * @override
  */
 Blockly.FieldImage.prototype.setText = function(src) {
+  if (src === null) {
+    // No change if null.
+    return;
+  }
   this.src_ = src;
   this.imageElement_.setAttributeNS('http://www.w3.org/1999/xlink',
       'xlink:href', goog.isString(src) ? src : '');

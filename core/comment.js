@@ -25,9 +25,6 @@
 
 goog.provide('Blockly.Comment');
 
-goog.require('goog.functions');
-
-
 
 /**
  * Class for a comment.
@@ -352,9 +349,3 @@ Blockly.Comment.prototype.computeIconLocation = function() {
 Blockly.Comment.prototype.getIconLocation = function() {
   return {x: this.iconX_, y: this.iconY_};
 };
-
-
-/**
- * @return {boolean} Whether this comment is pinned.
- */
-Blockly.Comment.prototype.isPinned = goog.functions.FALSE;
