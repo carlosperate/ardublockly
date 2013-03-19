@@ -48,12 +48,17 @@ Blockly.Language.variables_get = {
       this.setTitleValue(newName, 'VAR');
     }
   },
+  contextMenuMsg_: Blockly.LANG_VARIABLES_GET_CREATE_SET,
+  contextMenuType_: 'variables_set',
   customContextMenu: function(options) {
     var option = {enabled: true};
     var name = this.getTitleValue('VAR');
-    option.text = Blockly.LANG_VARIABLES_GET_CREATE_SET.replace('%1', name);
-    option.callback = Blockly.ContextMenu.callbackFactory(this,
-        'variables_set', 'VAR', name);
+    option.text = this.contextMenuMsg_.replace('%1', name);
+    var xmlTitle = goog.dom.createDom('title', null, name);
+    xmlTitle.setAttribute('name', 'VAR');
+    var xmlBlock = goog.dom.createDom('block', null, xmlTitle);
+    xmlBlock.setAttribute('type', 'variables_set');
+    option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
     options.push(option);
   }
 };
@@ -80,12 +85,7 @@ Blockly.Language.variables_set = {
       this.setTitleValue(newName, 'VAR');
     }
   },
-  customContextMenu: function(options) {
-    var option = {enabled: true};
-    var name = this.getTitleValue('VAR');
-    option.text = Blockly.LANG_VARIABLES_SET_CREATE_GET.replace('%1', name);
-    option.callback = Blockly.ContextMenu.callbackFactory(this,
-        'variables_get', 'VAR', name);
-    options.push(option);
-  }
+  contextMenuMsg_: Blockly.LANG_VARIABLES_GET_CREATE_GET,
+  contextMenuType_: 'variables_get',
+  customContextMenu: Blockly.Language.variables_get.customContextMenu
 };

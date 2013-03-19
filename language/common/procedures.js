@@ -163,16 +163,29 @@ Blockly.Language.procedures_defnoreturn = {
     var option = {enabled: true};
     var name = this.getTitleValue('NAME');
     option.text = Blockly.LANG_PROCEDURES_CREATE_DO.replace('%1', name);
-    option.callback = Blockly.ContextMenu.callbackFactory(this,
-        this.callType_, 'NAME', name);
+
+    var xmlMutation = goog.dom.createDom('mutation');
+    xmlMutation.setAttribute('name', name);
+    for (var x = 0; x < this.arguments_.length; x++) {
+      var xmlArg = goog.dom.createDom('arg');
+      xmlArg.setAttribute('name', this.arguments_[x]);
+      xmlMutation.appendChild(xmlArg);
+    }
+    var xmlBlock = goog.dom.createDom('block', null, xmlMutation);
+    xmlBlock.setAttribute('type', this.callType_);
+    option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
+
     options.push(option);
     // Add options to create getters for each parameter.
     for (var x = 0; x < this.arguments_.length; x++) {
       var option = {enabled: true};
       var name = this.arguments_[x];
       option.text = Blockly.LANG_VARIABLES_SET_CREATE_GET.replace('%1', name);
-      option.callback = Blockly.ContextMenu.callbackFactory(this,
-          'variables_get', 'VAR', name);
+      var xmlTitle = goog.dom.createDom('title', null, name);
+      xmlTitle.setAttribute('name', 'VAR');
+      var xmlBlock = goog.dom.createDom('block', null, xmlTitle);
+      xmlBlock.setAttribute('type', 'variables_get');
+      option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
       options.push(option);
     }
   },

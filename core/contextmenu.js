@@ -207,16 +207,11 @@ Blockly.ContextMenu.hide = function() {
  * Create a callback function that creates and configures a block,
  *   then places the new block next to the original.
  * @param {!Blockly.Block} block Original block.
- * @param {string} type Type of new block.
- * @param {string} name Name of field to set.
- * @param {string} value Value to set in named field.
+ * @param {!Element} xml XML representation of new block.
  */
-Blockly.ContextMenu.callbackFactory = function(block, type, name, value) {
+Blockly.ContextMenu.callbackFactory = function(block, xml) {
   return function() {
-    var newBlock = new Blockly.Block(block.workspace, type);
-    newBlock.setTitleValue(value, name);
-    newBlock.initSvg();
-    newBlock.render();
+    var newBlock = Blockly.Xml.domToBlock_(block.workspace, xml);
     // Move the new block next to the old block.
     var xy = block.getRelativeToSurfaceXY();
     if (Blockly.RTL) {

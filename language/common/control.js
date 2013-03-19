@@ -305,8 +305,11 @@ Blockly.Language.controls_for = {
     var option = {enabled: true};
     var name = this.getTitleValue('VAR');
     option.text = Blockly.LANG_VARIABLES_SET_CREATE_GET.replace('%1', name);
-    option.callback = Blockly.ContextMenu.callbackFactory(this,
-        'variables_get', 'VAR', name);
+    var xmlTitle = goog.dom.createDom('title', null, name);
+    xmlTitle.setAttribute('name', 'VAR');
+    var xmlBlock = goog.dom.createDom('block', null, xmlTitle);
+    xmlBlock.setAttribute('type', 'variables_get');
+    option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
     options.push(option);
   }
 };
@@ -340,14 +343,7 @@ Blockly.Language.controls_forEach = {
       this.setTitleValue(newName, 'VAR');
     }
   },
-  customContextMenu: function(options) {
-    var option = {enabled: true};
-    var name = this.getTitleValue('VAR');
-    option.text = Blockly.LANG_VARIABLES_SET_CREATE_GET.replace('%1', name);
-    option.callback = Blockly.ContextMenu.callbackFactory(this,
-        'variables_get', 'VAR', name);
-    options.push(option);
-  }
+  customContextMenu: Blockly.Language.controls_for.customContextMenu
 };
 
 Blockly.Language.controls_flow_statements = {

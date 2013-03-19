@@ -200,7 +200,6 @@ Blockly.createDom_ = function(container) {
     // Determine if there needs to be a category tree, or a simple list of
     // blocks.  This cannot be changed later, since the UI is very different.
     if (Blockly.Toolbox) {
-      // TODO(scr): When Toolbox is a component, remove this line.
       Blockly.Toolbox.createDom(svg, container);
     } else {
       /**
@@ -208,25 +207,26 @@ Blockly.createDom_ = function(container) {
        * @private
        */
       Blockly.mainWorkspace.flyout_ = new Blockly.Flyout();
-      var flyoutSvg = Blockly.mainWorkspace.flyout_.createDom();
-      Blockly.mainWorkspace.flyout_.init(Blockly.mainWorkspace,
+      var flyout = Blockly.mainWorkspace.flyout_;
+      var flyoutSvg = flyout.createDom();
+      flyout.init(Blockly.mainWorkspace,
           Blockly.getMainWorkspaceMetrics, true);
-      Blockly.mainWorkspace.flyout_.autoClose = false;
+      flyout.autoClose = false;
       // Insert the flyout behind the workspace so that blocks appear on top.
       goog.dom.insertSiblingBefore(flyoutSvg, Blockly.mainWorkspace.svgGroup_);
       var workspaceChanged = function() {
         // Delete any block that's sitting on top of the flyout, or off window.
         if (Blockly.Block.dragMode_ == 0) {
-          var blocks = Blockly.getTopBlocks(false);
           var svgSize = Blockly.svgSize();
           var MARGIN = 10;
+          var blocks = Blockly.mainWorkspace.getTopBlocks(false);
           for (var b = 0, block; block = blocks[b]; b++) {
             var xy = block.getRelativeToSurfaceXY();
             var bBox = block.getSvgRoot().getBBox();
             if ((xy.y < MARGIN - bBox.height) ||  // Off the top.
                 (Blockly.RTL ?
-                 xy.x > svgSize.width - Blockly.flyout_.width_ + MARGIN :
-                 xy.x < Blockly.flyout_.width_ - MARGIN) ||  // Over the flyout.
+                 xy.x > svgSize.width - flyout.width_ + MARGIN :
+                 xy.x < flyout.width_ - MARGIN) ||  // Over the flyout.
                 (xy.y > svgSize.height - MARGIN) ||  // Off the bottom.
                 (Blockly.RTL ? xy.x < MARGIN :
                  xy.x > svgSize.width - MARGIN)  // Off the far edge.
