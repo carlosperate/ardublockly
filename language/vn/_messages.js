@@ -55,21 +55,21 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Thay tên tất cả "%1" biến này thàn
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Chọn một màu từ bảng màu.';
 
-Blockly.LANG_COLOUR_RGB_HELPURL = 'http://en.wikipedia.org/wiki/RGB_color_model';
+Blockly.LANG_COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html;
 Blockly.LANG_COLOUR_RGB_TITLE = 'Tạo màu từ';
 Blockly.LANG_COLOUR_RGB_RED = 'màu đỏ';
 Blockly.LANG_COLOUR_RGB_GREEN = 'màu xanh lá cây';
 Blockly.LANG_COLOUR_RGB_BLUE = 'màu xanh dương';
 Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Tạo màu từ ba màu: đỏ, xanh lá cây,\n' +
     'xanh dương với số lượng cụ thể.\n' +
-    'Mỗi số phải có giá trị từ 0.0 đến 1.0.';
+    'Mỗi số phải có giá trị từ 0 đến 100.';
 
 Blockly.LANG_COLOUR_BLEND_HELPURL = 'http://meyerweb.com/eric/tools/color-blend/';
 Blockly.LANG_COLOUR_BLEND_TITLE = 'pha';
 Blockly.LANG_COLOUR_BLEND_COLOUR1 = 'màu 1';
 Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'màu 2';
 Blockly.LANG_COLOUR_BLEND_RATIO = 'tỉ lệ';
-Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Pha hai màu với nhau theo tỉ lệ (0.0 - 1.0).';
+Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Pha hai màu với nhau theo tỉ lệ (0 - 100).';
 
 // Control Blocks.
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';

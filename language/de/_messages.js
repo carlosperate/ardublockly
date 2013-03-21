@@ -54,14 +54,13 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Alle "%1" Variablen umbenennen in:';
 // Colour Blocks.
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://de.wikipedia.org/wiki/Farbe';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Wählen eine Farbe von der Palette.';
-
 Blockly.LANG_COLOUR_RGB_HELPURL = 'http://de.wikipedia.org/wiki/RGB-Farbraum';
 Blockly.LANG_COLOUR_RGB_TITLE = 'Farbe mit';
 Blockly.LANG_COLOUR_RGB_RED = 'rot';
 Blockly.LANG_COLOUR_RGB_GREEN = 'grün';
 Blockly.LANG_COLOUR_RGB_BLUE = 'blau';
 Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Kreiere eine Farbe mit selbst definierten rot, grün\n' +
-    'und blau Werten. Alle Werte müssen zwischen 0.0. und 1.0 liegen.';
+    'und blau Werten. Alle Werte müssen zwischen 0 und 100 liegen.';
 
 Blockly.LANG_COLOUR_BLEND_HELPURL = 'http://meyerweb.com/eric/tools/color-blend/';
 Blockly.LANG_COLOUR_BLEND_TITLE = 'mische';

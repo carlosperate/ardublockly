@@ -34,7 +34,7 @@ Blockly.JavaScript.colour_picker = function() {
 };
 
 Blockly.JavaScript.colour_rgb = function() {
-  // Compose a colour from RGB components.
+  // Compose a colour from RGB components expressed as percentages.
   var red = Blockly.JavaScript.valueToCode(this, 'RED',
       Blockly.JavaScript.ORDER_COMMA) || 0;
   var green = Blockly.JavaScript.valueToCode(this, 'GREEN',
@@ -48,9 +48,9 @@ Blockly.JavaScript.colour_rgb = function() {
     Blockly.JavaScript.colour_rgb.functionName = functionName;
     var func = [];
     func.push('function ' + functionName + '(r, g, b) {');
-    func.push('  r = Math.round(Math.max(Math.min(Number(r), 1), 0) * 255);');
-    func.push('  g = Math.round(Math.max(Math.min(Number(g), 1), 0) * 255);');
-    func.push('  b = Math.round(Math.max(Math.min(Number(b), 1), 0) * 255);');
+    func.push('  r = Math.round(Math.max(Math.min(Number(r), 100), 0) * 2.55);');
+    func.push('  g = Math.round(Math.max(Math.min(Number(g), 100), 0) * 2.55);');
+    func.push('  b = Math.round(Math.max(Math.min(Number(b), 100), 0) * 2.55);');
     func.push('  r = (\'0\' + (r || 0).toString(16)).slice(-2);');
     func.push('  g = (\'0\' + (g || 0).toString(16)).slice(-2);');
     func.push('  b = (\'0\' + (b || 0).toString(16)).slice(-2);');

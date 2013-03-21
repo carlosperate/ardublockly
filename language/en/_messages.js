@@ -54,14 +54,13 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Rename all "%1" variables to:';
 // Colour Blocks.
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Choose a colour from the palette.';
-
-Blockly.LANG_COLOUR_RGB_HELPURL = 'http://en.wikipedia.org/wiki/RGB_color_model';
+Blockly.LANG_COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html';
 Blockly.LANG_COLOUR_RGB_TITLE = 'colour with';
 Blockly.LANG_COLOUR_RGB_RED = 'red';
 Blockly.LANG_COLOUR_RGB_GREEN = 'green';
 Blockly.LANG_COLOUR_RGB_BLUE = 'blue';
 Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Create a colour with the specified amount of red, green,\n' +
-    'and blue.  All values must be between 0.0 and 1.0.';
+    'and blue.  All values must be between 0 and 100.';
 
 Blockly.LANG_COLOUR_BLEND_HELPURL = 'http://meyerweb.com/eric/tools/color-blend/';
 Blockly.LANG_COLOUR_BLEND_TITLE = 'blend';
