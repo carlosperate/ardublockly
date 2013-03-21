@@ -1,0 +1,113 @@
+<html lang="sr">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly (Блоклијев) лавиринт</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'иди напред',
+      move: 'иди',
+      forward: 'напред',
+      backward: 'назат',
+      turn: 'окрени се',
+      left: 'лево',
+      right: 'десно',
+      randomly: 'произвољно',
+      path: 'пут',
+      ifPath: 'ако постоји пут',
+      do: 'ради',
+      else: 'у супротном',
+      ahead: 'напред',
+      toTheLeft: 'лово',
+      toTheRight: 'десно',
+      behind: 'иза',
+      repeatUntilFinished: 'понављај док не комплетираш',
+      getX: 'дај X положај',
+      getY: 'дај Y положај',
+      getDirection: 'дај смер',
+      // Tooltips.
+      moveForwardTooltip: 'Помера Штипаљка једну позицију напред.',
+      moveTooltip: 'Помера Штипаљка једну позицију напред или назат.',
+      turnTooltip: 'Окреће Штипаљка лево или десно за 90 степени.',
+      ifTooltip: 'Ако постоји пут у датом правцу,\n' +
+          'онда уради следеће.',
+      ifelseTooltip: 'Ако постоји пут у датом правцу,\n' +
+          'онда изврши прву групу акција.\n' +
+          'У супротном, уради другу групу акција.',
+      whileTooltip: 'Понављај следеће акције док не комплетираш задатак.',
+      isPathTooltip: 'Враћа true ако постоји пут\n' +
+          'у датом правцу.',
+      getXTooltip: 'Враћа штипаљкову хоризонталну (X) позицију.\n' +
+          'Лева ивица је 1, десна 8.',
+      getYTooltip: 'Враћа штипаљкову вертикалну (Y) позицију.\n' +
+          'Гпрња овица је 1, а доња 8.',
+      getDirectionTooltip: 'Враћа Штипаљкову усмереност.\n' +
+          'Север: 0, Источно: 1, Југ: 2, Западно: 3.',
+      codeTooltip: 'Погледај генерисани JavaScript код.',
+      linkTooltip: 'Сачувај и повежи са блоковима.',
+      randomizeTooltip1: 'Постави, на случајан начин, почетну и крајњу ознаку.',
+      randomizeTooltip2: 'Постави случајан лавиринт.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+          "Програм је низ исказа.  Наређај неколико 'иди напред' блокова да би ми помогао да достигнем циљ.",
+          "Који низ корака треба да се предузме да би се прошао пут?",
+          "Рачунари имају ограничену меморију.  Дођи до краја пута употребивши само два блока.  Искористи 'понављај' да би извршио блок бише пута.",
+          "Достигни циљ употребом само пет блокова.",
+          "'ако' блок ће урадити нешто једино ако је услов испуњен.  Покушај окрет у лево ако постоји пут са леве стране.",
+          "Овај лавиринт изгледа сложеније него предходни, али није.",
+          "Можете да употребите више 'ако' блокова.",
+          "Ако-у-супротмом блок урадиће једно или друго.",
+          "Можеш ли да решиш овај сложени лавиринт?  Покшај да се крећеш уз леви зид.",
+          "Решавање овог лавиринта може да захтева употреву структура података.  Само за напредне програмере!"
+      ],
+      // Level 10 categories.
+      catMaze: 'Лавиринт',
+      catControl: 'Управљање',
+      catLogic: 'Логика',
+      catMath: 'Математика',
+      catLists: 'Листе',
+      catVariables: 'Променљиве',
+      catProcedures: 'Процедуре',
+      // Misc text.
+      level: 'Ниво',
+      capacity0: 'Број блокова који ти је остао је <span id="capacityNumber">0</span>.',
+      capacity1: 'Број блокова који ти је остао је <span id="capacityNumber">1</span>.',
+      capacity2: 'Број блокова који ти је остао је <span id="capacityNumber">%1</span>.',
+      runProgram: 'Покрени\u00A0програм',
+      resetProgram: 'Поново\u00A0постави',
+      nextLevel: 'Честитамо!\nДа ли сте спремни да пређете на ниво %1?',
+      finalLevel: 'Честитамо!\nРешили сте последњи ниво.',
+      title: 'Лавиринт',
+      oneTopBlock: 'На овом нивоу, потребно је да поређаш све блокове у бели радни простор.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Настао је проблем при извршењу траженог.\n';
+      BlocklyStorage.LINK_ALERT = 'Делите своје блокове употребом ове везе:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Жао нам је, "%1" не одговара ни једној сачуваној Блокли датотеци.';
+      BlocklyStorage.XML_ERROR = 'Не могу да учитам датотеку коју сте сачували.\n'+
+          'Можда је направљена другом верзијом Блоклија?\nXML: ';
+    }
+    var frameSrc9 = ['language/en/_messages.js'];
+    var frameSrc10 = ['language/en/_messages.js',
+        'language/common/control.js',
+        'language/common/logic.js',
+        'language/common/math.js',
+        'language/common/lists.js',
+        'language/common/variables.js',
+        'language/common/procedures.js',
+        'generators/javascript/control.js',
+        'generators/javascript/logic.js',
+        'generators/javascript/math.js',
+        'generators/javascript/lists.js',
+        'generators/javascript/variables.js',
+        'generators/javascript/procedures.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
