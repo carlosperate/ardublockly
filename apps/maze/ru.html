@@ -1,0 +1,112 @@
+﻿<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly (Блoкли) Лабиринт</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'идите вперёд',
+      move: 'продвиньтесь',
+      forward: 'вперёд',
+      backward: 'назад',
+      turn: 'повернитесь',
+      left: 'налево',
+      right: 'направо',
+      randomly: 'наугад',
+      path: 'путь',
+      ifPath: 'если путь',
+      do: 'сделайте  ',
+      else: 'иначе',
+      ahead: 'впереди',
+      toTheLeft: 'cлева',
+      toTheRight: 'cправа',
+      behind: 'сзади',
+      repeatUntilFinished: 'повторяйте пока не закончите',
+      getX: 'получите позицию X',
+      getY: 'получите позицию Y',
+      getDirection: 'получите направление',
+      // Tooltips.
+      moveForwardTooltip: 'Продвиньте Пегмена вперёд на один шаг .',
+      moveTooltip: 'Продвиньте Пегмена вперёд или назад на один шаг',
+      turnTooltip: 'Поверните Пегмена на 90 градусов  влево или вправо.',
+      ifTooltip: 'Если путь в указанном направление действителен,\n' +
+          'то произведите какие-нибудь действия.',
+      ifelseTooltip: 'Если путь в указанном направление действителен,\n' +
+          'то произведите первый блок действий .\n' +
+          'Иначе, произведите второй блок действий.',
+      whileTooltip: 'Повторяйте действия заключенные в скобках до достижения конечной точки.',
+      isPathTooltip: 'Возвращает верно, если путь в указанном направление действителен.',
+      getXTooltip: 'Возвращает позицию Пегмена по-горизонтали.\n' +
+          'Левый край равен 1, правый край равен 8.',
+      getYTooltip: 'Возвращает позицию Пегмена по-вертикали.\n' +
+          'Верхний край равен 1, нижний край равен 8.',
+      getDirectionTooltip: 'Возвращает позицию Пегмена.\n' +
+          'Север: 0, Восток: 1, Юг: 2, Запад: 3.',
+      codeTooltip: 'См. полученный код JavaScript.',
+      linkTooltip: 'Сохраните и закрепите за блоком.',
+      randomizeTooltip1: 'Создайте произвольные  начальную и конечную точки.',
+      randomizeTooltip2: 'Создайте произвольный лабиринт.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+          "Программа-это последовательность выполняемых операций. Сгруппируйте несколько 'идите вперёд' блоков, чтобы помочь мне достичь цели.",
+          "Какие шаги надо принять, чтобы пройти этот путь?",
+          "Память компьютеров ограничена. Пройдите до конца этого пути, используя только два блока. Для запуска блока более одного раза используйте команду 'повтор'.",
+          "Дойдите до цели, используя только пять блоков.",
+          "Команда 'если' будет выполнена только в случае верного условия. Попробуйте повернуть налево, если путь влево доступен.",
+          "Этот лабиринт кажется намного сложнее предыдущего, но это не так.",
+          "Вы можете использовать команду 'если' несколько раз.",
+          "Команда 'если-иначе' выполнит одно или другое действие.",
+          "Можете ли вы решить этот сложный лабиринт?  Попробуйте придерживаться левой стены.",
+          "Чтобы решить данный  лабиринт, необходимо использовать структуру данных. Высший уровень программирования!"
+      ],
+      // Level 10 categories.
+      catMaze: 'Лабиринт',
+      catControl: 'Контроль',
+      catLogic: 'Логика',
+      catMath: 'Математика',
+      catLists: 'Списки',
+      catVariables: 'Переменные',
+      catProcedures: 'Процедуры',
+      // Misc text.
+      level: 'Уровень',
+      capacity0: 'У вас осталось <span id="capacityNumber">0</span> блоков.',
+      capacity1: 'У вас осталось <span id="capacityNumber">1</span> блоков.',
+      capacity2: 'У вас осталось <span id="capacityNumber">%1</span> блоков.',
+      runProgram: 'Запустить Программу',
+      resetProgram: '\u00A0 \u00A0 Сбросить \u00A0 \u00A0',
+      nextLevel: 'Поздравляем!\nВы готовы перейти на уровень%1?',
+      finalLevel: 'Поздравляем!\nВы прошли заключительный уровень.',
+      title: 'Лабиринт',
+      oneTopBlock: 'На данном уровне вам необходимо сложить вместе все блоки на белом рабочем поле.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Произошла проблема при запросе.\n';
+      BlocklyStorage.LINK_ALERT = 'Поделитесь своими блоками по этой ссылке:\n\n';
+      BlocklyStorage.HASH_ERROR = 'К сожалению, "%1" не соответствует ни одному сохраненному файлу Блокли.';
+      BlocklyStorage.XML_ERROR = 'Не удалось загрузить ваш сохраненный файл.\n'+
+          'Возможно, он был создан с другой версией Блокли?\nXML: ';
+    }
+    var frameSrc9 = ['language/en/_messages.js'];
+    var frameSrc10 = ['language/en/_messages.js',
+        'language/common/control.js',
+        'language/common/logic.js',
+        'language/common/math.js',
+        'language/common/lists.js',
+        'language/common/variables.js',
+        'language/common/procedures.js',
+        'generators/javascript/control.js',
+        'generators/javascript/logic.js',
+        'generators/javascript/math.js',
+        'generators/javascript/lists.js',
+        'generators/javascript/variables.js',
+        'generators/javascript/procedures.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
