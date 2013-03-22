@@ -267,7 +267,8 @@ Blockly.JavaScript.maze_getDirection = function() {
 function init() {
   Blockly.inject(document.body,
       {path: '../../', maxBlocks: maxBlocks, toolbox: toolbox, trashcan: true});
-
+  Blockly.loadAudio_('whack');
+  Blockly.loadAudio_('win');
   if (window.parent.Maze) {
     // Let the top-level application know that Blockly is ready.
     window.parent.Maze.init(Blockly);

@@ -782,7 +782,7 @@ Maze.schedule = function(startPos, endPos) {
 };
 
 /**
- * Schedule the animations for a failed move.
+ * Schedule the animations and sounds for a failed move.
  * @param {boolean} forward True if forward, false if backward.
  */
 Maze.scheduleFail = function(forward) {
@@ -816,21 +816,28 @@ Maze.scheduleFail = function(forward) {
                        direction16);
     }, Maze.STEP_SPEED));
   Maze.pidList.push(window.setTimeout(function() {
+    Blockly.playAudio('whack', .5);
+   }, Maze.STEP_SPEED));
+  Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX + deltaX,
                        Maze.pegmanY + deltaY,
                        direction16);
     }, Maze.STEP_SPEED * 2));
+  Maze.pidList.push(window.setTimeout(function() {
+    Blockly.playAudio('whack', .5);
+   }, Maze.STEP_SPEED));
   Maze.pidList.push(window.setTimeout(function() {
       Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, direction16);
     }, Maze.STEP_SPEED * 3));
 };
 
 /**
- * Schedule the animations for a victory dance.
+ * Schedule the animations and sound for a victory dance.
  */
 Maze.scheduleFinish = function() {
   var direction16 = Maze.constrainDirection16(Maze.pegmanD * 4);
   Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 16);
+  Blockly.playAudio('win', .5);
   Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 17);
     }, Maze.STEP_SPEED));

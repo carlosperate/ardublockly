@@ -469,13 +469,15 @@ Blockly.loadAudio_ = function(name) {
 };
 
 /**
- * Play an audio file.
+ * Play an audio file at specified value.  If volume is not specified,
+ * use full volume (1).
  * @param {string} name Name of sound.
+ * @param {?number} volume Volume of sound (0-1).
  */
-Blockly.playAudio = function(name) {
+Blockly.playAudio = function(name, opt_volume) {
   var sound = Blockly.SOUNDS_[name];
   if (sound) {
-    sound.volume = 1;
+    sound.volume = (opt_volume === undefined ? 1 : opt_volume);
     sound.play();
   }
 };
