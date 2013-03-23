@@ -54,6 +54,7 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Alle "%1" Variablen umbenennen in:';
 // Colour Blocks.
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://de.wikipedia.org/wiki/Farbe';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Wählen eine Farbe von der Palette.';
+
 Blockly.LANG_COLOUR_RGB_HELPURL = 'http://de.wikipedia.org/wiki/RGB-Farbraum';
 Blockly.LANG_COLOUR_RGB_TITLE = 'Farbe mit';
 Blockly.LANG_COLOUR_RGB_RED = 'rot';

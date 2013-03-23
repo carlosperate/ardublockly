@@ -55,7 +55,7 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = 'Thay tên tất cả "%1" biến này thàn
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Chọn một màu từ bảng màu.';
 
-Blockly.LANG_COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html;
+Blockly.LANG_COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html';
 Blockly.LANG_COLOUR_RGB_TITLE = 'Tạo màu từ';
 Blockly.LANG_COLOUR_RGB_RED = 'màu đỏ';
 Blockly.LANG_COLOUR_RGB_GREEN = 'màu xanh lá cây';

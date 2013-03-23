@@ -463,7 +463,7 @@ Blockly.loadAudio_ = function(name) {
   // To force the browser to load the sound, play it, but at zero volume.
   if (sound && sound.play) {
     sound.play();
-    sound.volume = 0;
+    sound.volume = 0.01;
     Blockly.SOUNDS_[name] = sound;
   }
 };
@@ -472,7 +472,7 @@ Blockly.loadAudio_ = function(name) {
  * Play an audio file at specified value.  If volume is not specified,
  * use full volume (1).
  * @param {string} name Name of sound.
- * @param {?number} volume Volume of sound (0-1).
+ * @param {?number} opt_volume Volume of sound (0-1).
  */
 Blockly.playAudio = function(name, opt_volume) {
   var sound = Blockly.SOUNDS_[name];
