@@ -19,7 +19,7 @@
 
 /**
  * @fileoverview Vietnamese strings.
- * @author fraser@google.com (Quynh Neutron)
+ * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';
 
@@ -293,7 +293,7 @@ Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = 'vật';
 Blockly.LANG_TEXT_CREATE_JOIN_ITEM_TOOLTIP = 'thêm vật mới vào văn bản.';
 
 Blockly.LANG_TEXT_APPEND_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_APPEND_TO = 'ở ';
+Blockly.LANG_TEXT_APPEND_TO = 'ở cuối';
 Blockly.LANG_TEXT_APPEND_APPENDTEXT = 'thêm văn bản';
 Blockly.LANG_TEXT_APPEND_VARIABLE = 'vật';
 Blockly.LANG_TEXT_APPEND_TOOLTIP = 'Thêm một mảng văn bản vào biến "%1".';
@@ -328,10 +328,10 @@ Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'trong văn bản';
 Blockly.LANG_TEXT_CHARAT_TOOLTIP = 'Hoàn trả ký tự ở vị trí đặt ra.';
 
 Blockly.LANG_TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_SUBSTRING_INPUT_IN_TEXT = 'in text';
-Blockly.LANG_TEXT_SUBSTRING_INPUT_AT1 = 'get substring from';
-Blockly.LANG_TEXT_SUBSTRING_INPUT_AT2 = 'to';
-Blockly.LANG_TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_IN_TEXT = 'trong văn bản';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_AT1 = 'lấy từ';
+Blockly.LANG_TEXT_SUBSTRING_INPUT_AT2 = 'đến';
+Blockly.LANG_TEXT_SUBSTRING_TOOLTIP = 'Hoàn trả một mảng ký tự ấn định từ trong văn bản.';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = 'thành';
@@ -432,45 +432,45 @@ Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_END = 'Xóa thành tố trong d
     'Số 1 là thành tố cuối cùng.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST = 'Xóa thành tố đầu tiên trong danh sách.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST = 'Xóa thành tố cuối cùng trong danh sách.';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM = 'Xóa thành tố bất kỳ trong danh sách..';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM = 'Xóa thành tố bất kỳ trong danh sách.';
 
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
-Blockly.LANG_LISTS_SET_INDEX_SET = 'set';
-Blockly.LANG_LISTS_SET_INDEX_INSERT = 'insert';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'thành';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Sets the item at the specified position in a list.\n' +
-    '#1 is the first item.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Sets the item at the specified position in a list.\n' +
-    '#1 is the last item.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FIRST = 'Sets the first item in a list.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_LAST = 'Sets the last item in a list.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_RANDOM = 'Sets a random item in a list.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Inserts the item at the specified position in a list.\n' +
-    '#1 is the first item.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Inserts the item at the specified position in a list.\n' +
-    '#1 is the last item.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST = 'Inserts the item at the start of a list.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_LAST = 'Append the item to theend of a list.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM = 'Inserts the item randomly in a list.';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'trong danh sách';
+Blockly.LANG_LISTS_SET_INDEX_SET = 'đặt thành tố';
+Blockly.LANG_LISTS_SET_INDEX_INSERT = 'gắn chèn vào vị trí';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'giá trị';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Đặt giá trị của thành tố ở vị trí ấn định trong một danh sách.\n' +
+    '#1 là thành tố đầu tiên.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Đặt giá trị của thành tố trong một danh sách ở vị trí ấn định từ phía cuối.\n' +
+    '#1 là thành tố cuối cùng.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FIRST = 'Đặt giá trị của thành tố đầu tiên trong danh sách.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_LAST = 'Đặt giá trị của thành tố cuối cùng trong danh sách.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_RANDOM = 'Đặt giá trị của thành tố ngẫu nhiên trong danh sách.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Gắn chèn vật vào danh sách theo vị trí ấn định.\n' +
+    '#1 là thành tố đầu tiên.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Gắn chèn vật vào danh sách theo vị trí ấn định từ phía cuối.\n' +
+    '#1 là thành tố cuối cùng.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST = 'Gắn chèn vật vào đầu danh sách.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_LAST = 'Gắn thêm vật vào cuối danh sách.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM = 'Gắn chèn vật vào danh sách ở vị trí ngẫu nhiên.';
 
 Blockly.LANG_LISTS_GET_SUBLIST_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_GET_SUBLIST_INPUT_IN_LIST = 'in list';
-Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT1 = 'get sub-list from';
-Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT2 = 'to';
-Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portion of a list.';
+Blockly.LANG_LISTS_GET_SUBLIST_INPUT_IN_LIST = 'từ danh sách';
+Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT1 = 'lấy một danh sách con từ';
+Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT2 = 'đến';
+Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Lấy một mảng của danh sách này để tạo danh sách con.';
 
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_GET_TITLE = 'lấy';
 Blockly.LANG_VARIABLES_GET_ITEM = 'vật';
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Hoàn trả giá trị của.';
-Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Tạo mảnh "gán vào %1"';
+Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Tạo mảnh "đặt vào %1"';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_SET_TITLE = 'gán vào';
+Blockly.LANG_VARIABLES_SET_TITLE = 'đặt vào';
 Blockly.LANG_VARIABLES_SET_ITEM = 'vật';
-Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Gán vào biến này giá trị của đầu vào.';
+Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Đặt giá trị của biến này thành...';
 Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Tạo mảnh "lấy %1"';
 
 // Procedures Blocks.
@@ -484,7 +484,6 @@ Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETUR
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'hoàn trả';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Một thủ tục có giá trị hoàn trả.';
-
 Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Cẩn thận:\n' +
     'Thủ tục này có lặp lại\n' +
     'tên các tham số.';

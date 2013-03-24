@@ -435,8 +435,8 @@ Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM = 'Removes a random item in a
 Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
 Blockly.LANG_LISTS_SET_INDEX_SET = 'set';
-Blockly.LANG_LISTS_SET_INDEX_INSERT = 'insert';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'to';
+Blockly.LANG_LISTS_SET_INDEX_INSERT = 'insert at';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'as';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Sets the item at the specified position in a list.\n' +
     '#1 is the first item.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Sets the item at the specified position in a list.\n' +
