@@ -745,7 +745,7 @@ Maze.congratulations = function() {
     var proceed = window.confirm(MSG.nextLevel.replace('%1', level + 1));
     if (proceed) {
       window.location = window.location.protocol + '//' +
-          window.location.hostname + window.location.pathname +
+          window.location.host + window.location.pathname +
           '?level=' + (level + 1);
     }
   } else {

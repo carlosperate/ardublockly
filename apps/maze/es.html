@@ -1,0 +1,113 @@
+<html lang="es">
+<head>
+ <meta charset="utf-8">
+ <title>Blockly Maze</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <script type="text/javascript" src="/storage.js"></script>
+ <script type="text/javascript" src="../_soy/soyutils.js"></script>
+ <script type="text/javascript" src="template.js"></script>
+ <script>
+   var MSG = {
+     // Block text.
+     moveForward: 'avanza',
+     move: 'mueve',
+     forward: 'adelante',
+     backward: 'atrás',
+     turn: 'voltea',
+     left: 'izquierda',
+     right: 'derecha',
+     randomly: 'al azar',
+     path: 'camino',
+     ifPath: 'si hay un camino',
+     do: 'haz esto',
+     else: 'sino',
+     ahead: 'enfrente',
+     toTheLeft: 'a la izquierda',
+     toTheRight: 'a la derecha',
+     behind: 'detras',
+     repeatUntilFinished: 'repite hasta terminar',
+     getX: 'obtén la posición x',
+     getY: 'obtén la posición y',
+     getDirection: 'obtén la dirección',
+     // Tooltips.
+     moveForwardTooltip: 'Mueve a Pegman un cuadro para adelante.',
+     moveTooltip: 'Mueve a Pegman un cuadro para adelante o para atras.',
+     turnTooltip: 'Turns Pegman left or right by 90 degrees.',
+     ifTooltip: ' Si hay un camino en la dirección especificada,\n' +
+         'entonces toma unas acciones.',
+     ifelseTooltip: ' Si hay un camino en la dirección especificada,\n' +
+         'entonces haz las primeras acciones.\n' +
+         'Sino, haz el segundo set de acciones.',
+     whileTooltip: 'Repite las acciones enclaupsuradas hasta terminar.',
+     isPathTooltip: 'Regresa verdadero si hay un camino\n' +
+         'en la direccíon especificada.',
+     getXTooltip: 'Regresa la posición horizontal del Pegman.\n' +
+         'La arista izquierda es 1, La arista derecha es 8.',
+     getYTooltip: 'Regresa la posición vertical del Pegman.\n' +
+         'La arista de arriba es 1, La arista de abajo es 8.',
+     getDirectionTooltip: 'Regresa la direción del Pegman. \n' +
+         'North: 0, East: 1, South: 2, West: 3.',
+     codeTooltip: 'Mira el código JavaScript generado.',
+     linkTooltip: 'Guarda conexión a los bloques.',
+     randomizeTooltip1: 'Randomize start and finish markers.',
+     randomizeTooltip2: 'Randomize el laberinto.',
+     // Level hints.
+     hints: [undefined, // There is no level 0.
+         "Un programa es una secuencia de declaraciones.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
+         "¿Cuál es la secuencia  de pasos para seguir este camino?",
+         "Las computadoras tienen memoria limitada. Llega al final de este camino usando tan sólo  dos bloques.  Utiliza 'repeat' para ejecutar un bloque más de una vez.",
+         "Llega a la meta con tan sólo cinco bloquez.",
+         "Una condición 'si' va hacer algo solamente si la condición es verdadera.  Try turning left if there is a path to the left.",
+         "This maze looks more complicated than the previous one, but it is not.",
+         "Puedes usar mas de una declaración 'si'.",
+         "Declaraciones 'si-sino' hacen una cosa o otra.",
+         "¿Can you solve this complicated maze?  Try following the left-hand wall.",
+         "Este laberinto puede requerir el uso de escructuras de datos. Solamente para programadores avanzados!"
+     ],
+     // Level 10 categories.
+     catMaze: 'Laberinto',
+     catControl: 'Control',
+     catLogic: 'Lógica',
+     catMath: 'Matemáticas',
+     catLists: 'Listas',
+     catVariables: 'Variables',
+     catProcedures: 'Procedimientos',
+     // Misc text.
+     level: 'Nivel',
+     capacity0: 'Te quedan <span id="capacityNumber">0</span> bloques.',
+     capacity1: 'Te quedan <span id="capacityNumber">1</span> bloque.',
+     capacity2: 'Te quedan<span id="capacityNumber">%1</span> bloques.',
+     runProgram: 'Ejecuta el programa.',
+     resetProgram: '\u00A0 \u00A0 Reinicializar \u00A0 \u00A0',
+     nextLevel: '¡Felicidades!\n¿Estas listo/a para seguir al siguiente nivel %1?',
+     finalLevel: '¡Felicidades!\nHaz resuelto el último nivel.',
+     title: 'Laberinto',
+     oneTopBlock: 'En este nivel, necesitas encimar los bloques en el espacio en blanco.'
+   };
+   if ('BlocklyStorage' in window) {
+     BlocklyStorage.HTTPREQUEST_ERROR = 'Hubo un problema con la petición.\n';
+     BlocklyStorage.LINK_ALERT = 'Comparte tus bloques con esta conexión:\n\n';
+     BlocklyStorage.HASH_ERROR = 'Lo siento, "%1" no corresponde con ningún archivo Blockly guardado. ';
+     BlocklyStorage.XML_ERROR = 'No se pudo cargar el archivo guardado. \n'+
+         '¿Quizás fue creado con otra versión de Blockly? \nXML: ';
+   }
+   var frameSrc9 = ['language/en/_messages.js'];
+   var frameSrc10 = ['language/en/_messages.js',
+       'language/common/control.js',
+       'language/common/logic.js',
+       'language/common/math.js',
+       'language/common/lists.js',
+       'language/common/variables.js',
+       'language/common/procedures.js',
+       'generators/javascript/control.js',
+       'generators/javascript/logic.js',
+       'generators/javascript/math.js',
+       'generators/javascript/lists.js',
+       'generators/javascript/variables.js',
+       'generators/javascript/procedures.js'];
+ </script>
+</head>
+<body>
+ <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>

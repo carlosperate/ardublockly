@@ -28,7 +28,6 @@ var maxBlocks = window.parent.maxBlocks;
 // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
 // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
 var rtl = window.parent.document.body.parentNode.dir == 'rtl';
-console.log(window.parent.document.dir)
 var toolbox = window.parent.document.getElementById('toolbox');
 
 // Extensions to Blockly's language and JavaScript generator.
