@@ -24,6 +24,9 @@
 'use strict';
 
 var MSG = window.parent.MSG;
+// document.dir fails in Mozilla, use document.body.parentNode.dir instead.
+// https://bugzilla.mozilla.org/show_bug.cgi?id=151407
+var rtl = window.parent.document.body.parentNode.dir == 'rtl';
 var toolbox = window.parent.document.getElementById('toolbox');
 
 Blockly.Language.graph_get_x = {
@@ -70,7 +73,8 @@ Blockly.JavaScript.graph_set_y = function() {
  * Initialize Blockly.
  */
 function init() {
-  Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
+  Blockly.inject(document.body,
+      {path: '../../', rtl: rtl, toolbox: toolbox});
 
   if (window.parent.Graph) {
     // Let the top-level application know that Blockly is ready.

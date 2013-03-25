@@ -1,1 +1,1 @@
-print "Location: /static/demos/index.html"
+print "Location: /static/apps/index.html"
