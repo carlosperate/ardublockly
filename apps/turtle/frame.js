@@ -154,6 +154,28 @@ Blockly.JavaScript.draw_colour = function() {
       this.id + '\');\n';
 };
 
+Blockly.Language.turtle_visibility = {
+  // Block for changing turtle visiblity.
+  helpUrl: '',
+  init: function() {
+    this.setColour(160);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.appendDummyInput()
+        .appendTitle(new Blockly.FieldDropdown(this.STATE), 'VISIBILITY')
+        .appendTitle(MSG.turtle);
+    this.setTooltip(MSG.turtleVisibilityTooltip);
+  }
+};
+
+Blockly.Language.turtle_visibility.STATE =
+    [[MSG.hide, 'hideTurtle'], [MSG.show, 'showTurtle']];
+
+Blockly.JavaScript.turtle_visibility = function() {
+  // Generate JavaScript for changing turtle visibility.
+  return 'Turtle.' + this.getTitleValue('VISIBILITY') +
+      '(\'' + this.id + '\');\n';
+};
 
 function init() {
   Blockly.inject(document.body,
