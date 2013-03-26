@@ -1,0 +1,113 @@
+<html dir="ltr" lang="ca">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Laberint</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'mou endavant',
+      move: 'mou',
+      forward: 'endavant',
+      backward: 'enrere',
+      turn: 'gira',
+      left: 'esquerra',
+      right: 'dreta',
+      randomly: 'aleatòriament',
+      path: 'camí',
+      ifPath: 'si camí',
+      do: 'fes',
+      else: 'si no',
+      ahead: 'ahead',
+      toTheLeft: 'a l\'esquerra',
+      toTheRight: 'a la dreta',
+      behind: 'darrere',
+      repeatUntilFinished: 'repeteix fins al final',
+      getX: 'obtenir la posició de X',
+      getY: 'obtenir la posició de Y',
+      getDirection: 'obtenir la direcció',
+      // Tooltips.
+      moveForwardTooltip: 'Mou el Pegman endavant un espai.',
+      moveTooltip: 'Mou el Pegman endavant o enrere un espai.',
+      turnTooltip: 'Gira el Pegman a l\'esquerra o a la dreta 90 graus.',
+      ifTooltip: 'Si hi ha un camí en la direcció especificada,\n' +
+          'llavors fes algunes accions.',
+      ifelseTooltip: 'Si hi ha un camí en la direcció especificada,\n' +
+          'llavors fes el primer bloc d\'accions.\n' +
+          'Si no, fes el segon bloc d\'accions.',
+      whileTooltip: 'Repeteix les accions de dins del bloc fins arribar al punt final.',
+      isPathTooltip: 'Retorna \'cert\' si hi ha un camí\n' +
+          'en la direcció especificada.',
+      getXTooltip: 'Retorna la posició horitzontal del Pegman.\n' +
+          'El marge esquerre és 1, el marge dreta és 8.',
+      getYTooltip: 'Retorna la posició vertical del Pegman.\n' +
+          'El marge superior és 1, el marge inferior és 8.',
+      getDirectionTooltip: 'Retorna la direcció del Pegman.\n' +
+          'Nord: 0, Est: 1, Sud: 2, Oest: 3.',
+      codeTooltip: 'Veure el codi JavaScript generat.',
+      linkTooltip: 'Desa i enllaça als blocs.',
+      randomizeTooltip1: 'Aleatoritza l\'inici i finalitza els marcadors.',
+      randomizeTooltip2: 'Aleatoritza el laberint.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+          "Un programa és una seqüència de declaracions.  Apila un parell de blocs 'mou endavant' junts per ajudar-me a arribar a la meta.",
+          "Quina és la seqüència de passos per a seguir aquest camí?",
+          "Els ordinadors tenen una memòria limitada. Arriba al final d'aquest camí utilitzant només dos blocs. Utilitza 'repeteix' per a executar un bloc més d'una vegada.",
+          "Arriba a la meta utilitzant només cinc blocs.",
+          "Una condició 'si' farà fer alguna cosa només si la condició és certa. Prova de girar a l'esquerra si hi ha un camí a l'esquerra.",
+          "Aquest laberint sembla més complicat que l'anterior, però no ho és!.",
+          "Pots utilitzar més d'una declaració 'si'.",
+          "Les declaracions 'si-si no' faran fer una cosa o una altra.",
+          "Pots resoldre aquest complicat laberint? Prova de seguir la paret de l'esquerra.",
+          "Aquest laberint podria requerir l'ús d'estructures de dades. Només programadors avançats!"
+      ],
+      // Level 10 categories.
+      catMaze: 'Laberint',
+      catControl: 'Control',
+      catLogic: 'Lògiques',
+      catMath: 'Matemàtiques',
+      catLists: 'Llistes',
+      catVariables: 'Variables',
+      catProcedures: 'Procediments',
+      // Misc text.
+      level: 'Nivell',
+      capacity0: 'Et resten <span id="capacityNumber">0</span> blocs.',
+      capacity1: 'Et resten <span id="capacityNumber">1</span> blocs.',
+      capacity2: 'Et resten <span id="capacityNumber">%1</span> blocs.',
+      runProgram: 'Executa el programa',
+      resetProgram: '\u00A0 \u00A0 Reinicialitza \u00A0 \u00A0',
+      nextLevel: 'Felicitats!\nEstàs preparat per a procedir amb el nivell %1?',
+      finalLevel: 'Felicitats!\nHas resolt el nivell final.',
+      title: 'Laberint',
+      oneTopBlock: 'En aquest nivell, has d\'apilar junts tots els blocs a l\'espai de treball blanc.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Hi ha hagut un problema amb la sol·licitud.\n';
+      BlocklyStorage.LINK_ALERT = 'Comparteix els teus blocs amb aquest enllaç:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Ho sentim, "%1" no es correspon amb cap fitxer desat de Blockly.';
+      BlocklyStorage.XML_ERROR = 'No s\'ha pogut carregar el teu fitxer desat.\n'+
+          'Potser va ser creat amb una versió diferent de Blockly?\nXML: ';
+    }
+    var frameSrc9 = ['language/en/_messages.js'];
+    var frameSrc10 = ['language/en/_messages.js',
+        'language/common/control.js',
+        'language/common/logic.js',
+        'language/common/math.js',
+        'language/common/lists.js',
+        'language/common/variables.js',
+        'language/common/procedures.js',
+        'generators/javascript/control.js',
+        'generators/javascript/logic.js',
+        'generators/javascript/math.js',
+        'generators/javascript/lists.js',
+        'generators/javascript/variables.js',
+        'generators/javascript/procedures.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
