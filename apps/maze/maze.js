@@ -449,23 +449,7 @@ Maze.init = function(blockly) {
   }
 
   Maze.reset();
-
-  function onchange() {
-    var cap = Blockly.mainWorkspace.remainingCapacity();
-    var p = document.getElementById('capacity');
-    if (cap == Infinity) {
-      p.innerHTML = '';
-    } else if (cap == 0) {
-      p.innerHTML = MSG.capacity0;
-    } else if (cap == 1) {
-      p.innerHTML = MSG.capacity1;
-    } else {
-      cap = Number(cap);
-      p.innerHTML = MSG.capacity2.replace('%1', cap);
-    }
-  }
-
-  Blockly.addChangeListener(onchange);
+  Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
 };
 
 /**
@@ -741,16 +725,7 @@ Maze.animate = function() {
 };
 
 Maze.congratulations = function() {
-  if (level < Maze.MAX_LEVEL) {
-    var proceed = window.confirm(MSG.nextLevel.replace('%1', level + 1));
-    if (proceed) {
-      window.location = window.location.protocol + '//' +
-          window.location.host + window.location.pathname +
-          '?level=' + (level + 1);
-    }
-  } else {
-    alert(MSG.finalLevel);
-  }
+  Blockly.Apps.congratulations(window, level, Maze.MAX_LEVEL, MSG);
 };
 
 /**
@@ -909,17 +884,6 @@ Maze.checkTimeout = function(id) {
     }
     throw false;
   }
-};
-
-/**
- * Show the user's code in raw JavaScript.
- */
-Maze.showCode = function() {
-  var code = Blockly.Generator.workspaceToCode('JavaScript');
-  // Strip out serial numbers.
-  code = code.replace(/'\d+'/g, '');
-  code = code.replace(/\s*Maze\.checkTimeout\(\);/g, '');
-  alert(code);
 };
 
 // API
