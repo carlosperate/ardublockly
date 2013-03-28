@@ -24,6 +24,7 @@
 'use strict';
 
 var MSG = window.parent.MSG;
+var maxBlocks = window.parent.maxBlocks;
 // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
 // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
 var rtl = window.parent.document.body.parentNode.dir == 'rtl';
@@ -32,6 +33,52 @@ var toolbox = window.parent.document.getElementById('toolbox');
 // Extensions to Blockly's language and JavaScript generator.
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
+
+// Restricted blocks for tutorial.
+
+Blockly.Language.draw_move_forward_100 = {
+  // Block for moving forward 100 pixels.
+  helpUrl: '',
+  init: function() {
+    this.setColour(160);
+    this.appendDummyInput()
+        .appendTitle(MSG.move)
+        .appendTitle(MSG.forward)
+        .appendTitle(MSG.moveBy)
+        .appendTitle('100');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(MSG.moveForward100Tooltip);
+  }
+};
+
+Blockly.JavaScript.draw_move_forward_100 = function() {
+  // Generate JavaScript for moving forward 100 pixels.
+  return 'Turtle.moveForward(100, \'' + this.id + '\');\n';
+};
+
+Blockly.Language.draw_turn_right_90 = {
+  // Block for turning right 90 degrees.
+  helpUrl: '',
+  init: function() {
+    this.setColour(160);
+    this.appendDummyInput()
+        .appendTitle(MSG.turn)
+        .appendTitle(MSG.right)
+        .appendTitle(MSG.turnBy)
+        .appendTitle('90');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(MSG.turnRight90Tooltip);
+  }
+};
+
+Blockly.JavaScript.draw_turn_right_90 = function() {
+  // Generate JavaScript for turning right 90 degrees.
+  return 'Turtle.turnRight(90, \'' + this.id + '\');\n';
+};
+
+// General blocks.
 
 Blockly.Language.draw_move = {
   // Block for moving forward or backwards.
@@ -97,7 +144,7 @@ Blockly.Language.draw_width = {
     this.setColour(160);
     this.appendValueInput('WIDTH')
         .setCheck(Number)
-        .appendTitle(MSG.setWidth)
+        .appendTitle(MSG.setWidth);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(MSG.widthTooltip);
@@ -179,7 +226,11 @@ Blockly.JavaScript.turtle_visibility = function() {
 
 function init() {
   Blockly.inject(document.body,
-      {path: '../../', rtl: rtl, toolbox: toolbox});
+      {path: '../../',
+       maxBlocks: maxBlocks,
+       rtl: rtl,
+       toolbox: toolbox,
+       trashcan: true});
 
   if (window.parent.Turtle) {
     // Let the top-level application know that Blockly is ready.

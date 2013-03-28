@@ -28,7 +28,7 @@
       hide: 'hide',
       show: 'show',
       turtle: 'turtle',
-      // Tooltips.
+      // Tooltips for general blocks.
       moveTooltip: 'Moves the turtle forward or backward\n' +
           'by the specified amount.',
       turnTooltip: 'Turns the turtle left or right\n' +
@@ -40,6 +40,9 @@
       turtleVisibilityTooltip: 'Makes the turtle (green circle and arrow) visible or invisible.',
       codeTooltip: 'See generated JavaScript code.',
       linkTooltip: 'Save and link to blocks.',
+      // Tooltips for tutorial-only blocks.
+      moveForward100Tooltip: 'Moves the turtle forward 100 pixels.',
+      turnRight90Tooltip: 'Turns the turtle right by 90 degrees.',
       // Toolbox categories.
       catTurtle: 'Turtle',
       catControl: 'Control',
@@ -50,10 +53,21 @@
       catVariables: 'Variables',
       catProcedures: 'Procedures',
       // Misc text.
+      level: 'Level',
+      capacity0: 'You have <span id="capacityNumber">0</span> blocks left.',
+      capacity1: 'You have <span id="capacityNumber">1</span> block left.',
+      capacity2: 'You have <span id="capacityNumber">%1</span> blocks left.',
       unloadWarning: 'Leaving this page will result in the loss of your work.',
       runProgram: 'Run Program',
       resetProgram: '\u00A0 \u00A0 Reset \u00A0 \u00A0',
-      title: 'Turtle Graphics'
+      title: 'Turtle Graphics',
+      // Level hints.
+      hints: ['level 0', // There is no level 0.
+         'I\'m a turtle holding a pen in my tail. Help me draw a square.',
+         'Now help me draw a square using only 3 blocks.\n' +
+             'Hint: It doesn\'t matter which way I face at the end.',
+         'Have fun!'
+      ]
     };
     if ('BlocklyStorage' in window) {
       BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';

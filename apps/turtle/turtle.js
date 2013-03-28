@@ -23,13 +23,23 @@
  */
 'use strict';
 
-document.write(turtlepage.start({}, null,
-    {MSG: MSG, frameSrc: frameSrc.join('&')}));
-
 /**
  * Create a namespace for the application.
  */
 var Turtle = {};
+
+Turtle.MAX_LEVEL = 3;
+Turtle.level = window.location.search.match(/[?&]level=(\d+)/);
+Turtle.level = Turtle.level ? Turtle.level[1] : 1;
+Turtle.level = Math.min(Math.max(1, Turtle.level), Turtle.MAX_LEVEL);
+document.write(turtlepage.start({}, null,
+    {MSG: MSG,
+    level: Turtle.level,
+    maxLevel: Turtle.MAX_LEVEL,
+    frameSrc: frameSrc.join('&')}));
+// This is referenced in frame.js.
+var maxBlocks = [undefined, // Level 0.
+    7, 3, Infinity][Turtle.level];
 
 Turtle.HEIGHT = 400;
 Turtle.WIDTH = 400;
@@ -70,30 +80,41 @@ Turtle.init = function(blockly) {
   var sliderSvg = document.getElementById('slider');
   Turtle.speedSlider = new Slider(10, 35, 130, sliderSvg);
 
+  // Add the starting block(s).
   // An href with #key trigers an AJAX call to retrieve saved blocks.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-  } else { // Load the editor with starting blocks.
-    var xml = Blockly.Xml.textToDom(
-        '<xml>' +
-        '  <block type="draw_move" x="85" y="100">' +
-        '    <value name="VALUE">' +
-        '      <block type="math_number">' +
-        '        <title name="NUM">10</title>' +
-        '      </block>' +
-        '    </value>' +
-        '  </block>' +
-        '</xml>');
+  } else {
+    var xml;
+    if (Turtle.level <= 2) {
+      xml = '<xml>' +
+          '  <block type="draw_move_forward_100" x="350" y="70"></block>' +
+          '</xml>';
+    } else {
+      // Load the editor with starting blocks.
+      xml = '<xml>' +
+          '  <block type="draw_move" x="85" y="100">' +
+          '    <value name="VALUE">' +
+          '      <block type="math_number">' +
+          '        <title name="NUM">10</title>' +
+          '      </block>' +
+          '    </value>' +
+          '  </block>' +
+          '</xml>';
+    }
+    xml = Blockly.Xml.textToDom(xml);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
 
   Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
   Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');
   Turtle.reset();
+  Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
 };
 
 /**
- * Reset the maze to the start position and kill any pending animation tasks.
+ * Reset the turtle to the start position, clear the display, and kill any
+ * pending tasks.
  */
 Turtle.reset = function() {
   // Starting location and heading of the turtle.
