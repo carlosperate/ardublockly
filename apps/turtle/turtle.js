@@ -216,7 +216,7 @@ Turtle.execute = function() {
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  checkTimeout();\n';
   var timeouts = 0;
   var checkTimeout = function() {
-    if (timeouts++ > 100000) {
+    if (timeouts++ > 1000000) {
       throw null;
     }
   };
