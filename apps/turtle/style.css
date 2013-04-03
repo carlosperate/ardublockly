@@ -81,6 +81,8 @@ iframe {
 #display {
   border: 1px solid #ccc;
 }
+
+/* Slider. */
 .sliderTrack {
   stroke: #aaa;
   stroke-width: 6px;

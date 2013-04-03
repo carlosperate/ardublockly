@@ -23,9 +23,15 @@ a:hover {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-#hint,
-#capacity {
+#hint {
   font-style: italic;
+}
+#capacity {
+  padding: 15px 1ex 0;
+  float: right;
+}
+html[dir=rtl] #capacity {
+  float: left;
 }
 #capacityNumber {
   font-weight: bold;
@@ -76,15 +82,30 @@ button>img {
 button.disabled {
   visibility: hidden;
 }
-#buttonDiv, #toolbarDiv {
+#toolbarDiv {
   text-align: center;
   padding-top: 1em;
-  width: 50%;
 }
 iframe {
   height: 100%;
   width: 100%;
   border: 1px solid #ccc;
+}
+
+/* Slider. */
+.sliderTrack {
+  stroke: #aaa;
+  stroke-width: 6px;
+  stroke-linecap: round;
+}
+.sliderKnob {
+  fill: #ddd;
+  stroke: #bbc;
+  stroke-width: 1px;
+  stroke-linejoin: round;
+}
+.sliderKnob:hover {
+  fill: #eee;
 }
 
 /* Sprited icons. */

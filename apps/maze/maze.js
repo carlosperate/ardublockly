@@ -39,11 +39,6 @@ var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 5, 5, 10, 7, 10, Infinity][level];
 
 /**
- * Milliseconds between each animation frame.
- */
-Maze.STEP_SPEED = 150;
-
-/**
  * The types of squares in the maze, which is represented
  * as a 2D array of SquareType values.
  * @enum {number}
@@ -394,7 +389,7 @@ Maze.drawMap = function() {
  */
 Maze.init = function(blockly) {
   window.Blockly = blockly;
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Maze.checkTimeout(%1);\n';
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Blockly.Apps.checkTimeout(%1);\n';
   if (level === 10) {
     Maze.randomizeMaze();
   }
@@ -447,6 +442,10 @@ Maze.init = function(blockly) {
       }
     }
   }
+
+  // Initialize the slider.
+  var sliderSvg = document.getElementById('slider');
+  Maze.speedSlider = new Slider(10, 35, 130, sliderSvg);
 
   Maze.reset();
   Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
@@ -647,8 +646,8 @@ Maze.randomize = function() {
  * Execute the user's code.  Heaven help us...
  */
 Maze.execute = function() {
-  Maze.path = [];
-  Maze.ticks = 1000;
+  Blockly.Apps.log = [];
+  Blockly.Apps.ticks = 1000;
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   try {
     eval(code);
@@ -659,7 +658,7 @@ Maze.execute = function() {
       alert(e);
     }
   }
-  // Maze.path now contains a transcript of all the user's actions.
+  // Blockly.Apps.log now contains a transcript of all the user's actions.
   // Reset the maze and animate the transcript.
   Maze.reset();
   Maze.pidList.push(window.setTimeout(Maze.animate, 100));
@@ -672,7 +671,7 @@ Maze.animate = function() {
   // All tasks should be complete now.  Clean up the PID list.
   Maze.pidList = [];
 
-  var action = Maze.path.shift();
+  var action = Blockly.Apps.log.shift();
   if (!action) {
     Blockly.mainWorkspace.highlightBlock(null);
     return;
@@ -721,6 +720,8 @@ Maze.animate = function() {
       window.setTimeout(Maze.congratulations, 1000);
   }
 
+  // Scale the speed non-linearly, to give better precision at the fast end.
+  Maze.STEP_SPEED = 200 * Math.pow(Maze.speedSlider.getValue(), 2);
   Maze.pidList.push(window.setTimeout(Maze.animate, Maze.STEP_SPEED * 5));
 };
 
@@ -791,16 +792,10 @@ Maze.scheduleFail = function(forward) {
                        direction16);
     }, Maze.STEP_SPEED));
   Maze.pidList.push(window.setTimeout(function() {
-    Blockly.playAudio('whack', .5);
-   }, Maze.STEP_SPEED));
-  Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX + deltaX,
                        Maze.pegmanY + deltaY,
                        direction16);
     }, Maze.STEP_SPEED * 2));
-  Maze.pidList.push(window.setTimeout(function() {
-    Blockly.playAudio('whack', .5);
-   }, Maze.STEP_SPEED));
   Maze.pidList.push(window.setTimeout(function() {
       Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, direction16);
     }, Maze.STEP_SPEED * 3));
@@ -870,22 +865,6 @@ Maze.constrainDirection16 = function(d) {
   return d;
 };
 
-/**
- * If the user has executed too many actions, we're probably in an infinite
- * loop.  Sadly I wasn't able to solve the Halting Problem for this demo.
- * @param {?string} id ID of loop block to highlight if timeout is reached.
- * @throws {false} Throws an error to terminate the user's program.
- */
-Maze.checkTimeout = function(id) {
-  if (Maze.ticks-- < 0) {
-    if (id) {
-      // Highlight an infinite loop on death.
-      Maze.path.push(['loop', id]);
-    }
-    throw false;
-  }
-};
-
 // API
 // Human-readable aliases.
 
@@ -930,7 +909,7 @@ Maze.isPathLeft = function() {
  */
 Maze.move = function(direction, id) {
   if (!Maze.isPath(direction)) {
-    Maze.path.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
+    Blockly.Apps.log.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
     return;
   }
   // If moving backward, flip the effective direction.
@@ -954,10 +933,10 @@ Maze.move = function(direction, id) {
       command = 'west';
       break;
   }
-  Maze.path.push([command, id]);
+  Blockly.Apps.log.push([command, id]);
   if (Maze.pegmanX == Maze.finish_.x && Maze.pegmanY == Maze.finish_.y) {
     // Finished.  Terminate the user's program.
-    Maze.path.push(['finish', null]);
+    Blockly.Apps.log.push(['finish', null]);
     throw true;
   }
 };
@@ -971,11 +950,11 @@ Maze.turn = function(direction, id) {
   if (direction) {
     // Right turn (clockwise).
     Maze.pegmanD++;
-    Maze.path.push(['right', id]);
+    Blockly.Apps.log.push(['right', id]);
   } else {
     // Left turn (counterclockwise).
     Maze.pegmanD--;
-    Maze.path.push(['left', id]);
+    Blockly.Apps.log.push(['left', id]);
   }
   Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD);
 };

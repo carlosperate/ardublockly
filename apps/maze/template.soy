@@ -27,8 +27,8 @@
 
         <div id="bubble">
           <div id="hint">{$ij.MSG.hints[$ij.level]}</div>
-          <div id="capacity"></div>
         </div>
+        <div id="capacity"></div>
         <img id="pegman_bubble" height=42 width=55 src="pegman_bubble.png">
 
         <div>
@@ -37,18 +37,34 @@
 
         <table width="100%">
           <tr>
-            <td id="toolbarDiv">
-              <button title="{$ij.MSG.codeTooltip}" onclick="Blockly.Apps.showCode();">
-                <img src='../../media/1x1.gif' class="code">
-              </button>
-              <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link();">
-                <img src='../../media/1x1.gif' class="link">
-              </button>
-              <button id="randomizeButton" onclick="Maze.randomize();" style="display: none">
-                <img src='../../media/1x1.gif' class="random">
-              </button>
+            <td style="width: 190px; text-align: center">
+              <script type="text/javascript" src="slider.js"></script>
+              <svg
+                 id="slider"
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:svg="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                 version="1.1"
+                 width="150"
+                 height="50">
+                <!-- Slow icon. -->
+                <clipPath id="slowClipPath">
+                  <rect width=26 height=12 x=5 y=14 />
+                </clipPath>
+                <image xlink:href="icons.png" height=42 width=84 x=-21 y=-10
+                    clip-path="url(#slowClipPath)" />
+                <!-- Fast icon. -->
+                <clipPath id="fastClipPath">
+                  <rect width=26 height=16 x=120 y=10 />
+                </clipPath>
+                <image xlink:href="icons.png" height=42 width=84 x=120 y=-11
+                    clip-path="url(#fastClipPath)" />
+              </svg>
             </td>
-            <td id="buttonDiv">
+            <td style="width: 15px;">
+              <img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15>
+            </td>
+            <td>
               <button id="runButton" class="launch" onclick="Maze.runButtonClick();">
                 {$ij.MSG.runProgram}
               </button>
@@ -58,6 +74,17 @@
             </td>
           </tr>
         </table>
+        <div id="toolbarDiv">
+          <button title="{$ij.MSG.codeTooltip}" onclick="Blockly.Apps.showCode();">
+            <img src='../../media/1x1.gif' class="code">
+          </button>
+          <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link();">
+            <img src='../../media/1x1.gif' class="link">
+          </button>
+          <button id="randomizeButton" onclick="Maze.randomize();" style="display: none">
+            <img src='../../media/1x1.gif' class="random">
+          </button>
+        </div>
       </td>
 
       <td valign="top">

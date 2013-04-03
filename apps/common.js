@@ -71,16 +71,38 @@ Blockly.Apps.congratulations = function(window, level, maxLevel, MSG) {
 };
 
 /**
+ * Log the block.
+ * @param {string} id ID of block that triggered this action.
+ */
+Blockly.Apps.highlight = function(id) {
+  Blockly.Apps.log.push([null, id]);
+};
+
+/**
+ * If the user has executed too many actions, we're probably in an infinite
+ * loop.  Sadly I wasn't able to solve the Halting Problem.
+ * @param {string} id ID of loop block to highlight if timeout is reached.
+ * @throws {false} Throws an error to terminate the user's program.
+ */
+Blockly.Apps.checkTimeout = function(id) {
+  Blockly.Apps.highlight(id);
+  if (Blockly.Apps.ticks-- < 0) {
+    // Highlight an infinite loop on death.
+    throw false;
+  }
+};
+
+/**
  * Convert the user's code to raw JavaScript.
  * @param {string} code Generated code.
  * @return {string} The code without serial numbers and timeout checks.
  */
 Blockly.Apps.stripCode = function(code) {
-  // Strip out serial numbers.
-  code = code.replace(/'\d+'/g, '');
+  // Strip out tracking commands.
+  code = code.replace(/ *Blockly\.Apps\.highlight\('\d+'\);\n/g, '');
   // Remove timeouts.
   var regex = new RegExp(Blockly.JavaScript.INFINITE_LOOP_TRAP
-      .replace('(%1)', '\\(\\)'), 'g');
+      .replace('(%1)', '\\(\'\\d+\'\\)'), 'g');
   return code.replace(regex, '');
 };
 
