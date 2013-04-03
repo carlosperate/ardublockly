@@ -85,7 +85,7 @@ Blockly.Language.variables_set = {
       this.setTitleValue(newName, 'VAR');
     }
   },
-  contextMenuMsg_: Blockly.LANG_VARIABLES_GET_CREATE_GET,
+  contextMenuMsg_: Blockly.LANG_VARIABLES_SET_CREATE_GET,
   contextMenuType_: 'variables_get',
   customContextMenu: Blockly.Language.variables_get.customContextMenu
 };
