@@ -14,6 +14,7 @@
       <td width="410" valign="top">
         <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
             <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
+<!--Temp disabling of levels.
         <p class="levelLine">{$ij.MSG.level}: &nbsp;
           {for $i in range(1, $ij.maxLevel + 1)}
             {if $i == $ij.level}
@@ -28,6 +29,7 @@
           <div id="hint">{$ij.MSG.hints[$ij.level]}</div>
           <div id="capacity"></div>
         </div>
+-->
         <div>
           <canvas id="scratch" width="400" height="400" style="display: none"></canvas>
           <canvas id="display" width="400" height="400"></canvas>
@@ -35,7 +37,7 @@
         <table style="padding-top: 1em;">
           <tr>
             <td style="width: 190px; text-align: center">
-              <script type="text/javascript" src="slider.js"></script>
+              <script type="text/javascript" src="../slider.js"></script>
               <svg
                  id="slider"
                  xmlns="http://www.w3.org/2000/svg"

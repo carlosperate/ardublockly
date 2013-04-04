@@ -32,6 +32,10 @@ Turtle.MAX_LEVEL = 3;
 Turtle.level = window.location.search.match(/[?&]level=(\d+)/);
 Turtle.level = Turtle.level ? Turtle.level[1] : 1;
 Turtle.level = Math.min(Math.max(1, Turtle.level), Turtle.MAX_LEVEL);
+
+// Temp disabling of levels.
+Turtle.level = Turtle.MAX_LEVEL;
+
 document.write(turtlepage.start({}, null,
     {MSG: MSG,
     level: Turtle.level,

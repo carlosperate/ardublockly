@@ -140,6 +140,6 @@
       width="10" height="10"
       x="35" y="274" />
 
-  <script type="text/ecmascript" xlink:href="slider.js"/>
+  <script type="text/ecmascript" xlink:href="../slider.js"/>
   <script type="text/ecmascript" xlink:href="plane.js"/>
 </svg>
