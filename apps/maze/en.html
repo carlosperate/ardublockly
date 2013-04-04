@@ -50,28 +50,19 @@
       codeTooltip: 'See generated JavaScript code.',
       linkTooltip: 'Save and link to blocks.',
       randomizeTooltip1: 'Randomize start and finish markers.',
-      randomizeTooltip2: 'Randomize maze.',
+      randomizeTooltip2: 'Randomize maze.',  // Not currently used.
       // Level hints.
       hints: [undefined, // There is no level 0.
-          "A program is a sequence of statements.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
-          "What is the sequence of steps to follow this path?",
-          "Computers have limited memory.  Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.",
-          "Reach the goal using only five blocks.",
-          "An 'if' condition will do something only if the condition is true.  Try turning left if there is a path to the left.",
-          "This maze looks more complicated than the previous one, but it is not.",
-          "You can use more than one 'if' statement.",
-          "If-else statements will do one thing or the other.",
-          "Can you solve this complicated maze?  Try following the left-hand wall.",
-          "This maze might require using data structures.  Advanced programmers only!"
-      ],
-      // Level 10 categories.
-      catMaze: 'Maze',
-      catControl: 'Control',
-      catLogic: 'Logic',
-      catMath: 'Math',
-      catLists: 'Lists',
-      catVariables: 'Variables',
-      catProcedures: 'Procedures',
+        "A program is a sequence of statements.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
+        "What is the sequence of steps to follow this path?",
+        "Computers have limited memory.  Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.",
+        "Reach the goal using only five blocks.",
+        "Pegman will have to turn left when he cannot go straight.",
+        "An 'if' condition will do something only if the condition is true.  Try turning left if there is a path to the left.",
+        "This maze looks more complicated than the previous one, but it is not.",
+        "You can use more than one 'if' statement.",
+        "If-else statements will do one thing or the other.",
+        "Can you solve this complicated maze?  Try following the left-hand wall."],
       // Misc text.
       level: 'Level',
       capacity0: 'You have <span id="capacityNumber">0</span> blocks left.',
@@ -91,20 +82,7 @@
       BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
           'Perhaps it was created with a different version of Blockly?\nXML: ';
     }
-    var frameSrc9 = ['language/en/_messages.js'];
-    var frameSrc10 = ['language/en/_messages.js',
-        'language/common/control.js',
-        'language/common/logic.js',
-        'language/common/math.js',
-        'language/common/lists.js',
-        'language/common/variables.js',
-        'language/common/procedures.js',
-        'generators/javascript/control.js',
-        'generators/javascript/logic.js',
-        'generators/javascript/math.js',
-        'generators/javascript/lists.js',
-        'generators/javascript/variables.js',
-        'generators/javascript/procedures.js'];
+    var frameSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
