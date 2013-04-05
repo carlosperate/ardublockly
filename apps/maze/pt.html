@@ -1,0 +1,92 @@
+<html dir="ltr" lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Blockly Quebra-cabeça</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'Mover para a frente',
+      move: 'mover',
+      forward: 'frente',
+      backward: 'atrás',
+      turn: 'gire para a ',
+      left: 'esquerda',
+      right: 'direita',
+      randomly: 'aleatoriamente',
+      path: 'caminho',
+      ifPath: 'se existe um caminho',
+      do: 'faça',
+      else: 'senão',
+      ahead: 'em frente',
+      toTheLeft: 'para a esquerda',
+      toTheRight: 'para a direita',
+      behind: 'atrás',
+      repeatUntilFinished: 'repita até o final',
+      getX: 'obtém a posição X',
+      getY: 'obtém a posição Y',
+      getDirection: 'obtém direção',
+      // Tooltips.
+      moveForwardTooltip: 'Move o Pegman um quadro para frente.',
+      moveTooltip: 'Move o Pegman um quadro para frente ou para traz.',
+      turnTooltip: 'Gire o Pegman 90 graus para esquerda ou para a direita.',
+      ifTooltip: 'Se existe um caminho na direção especificada,\n' +
+          'entao executa algumas ações.',
+      ifelseTooltip: 'Se não existe um caminho na direção especificada,\n' +
+          'então execute o primeiro bloco de ações.\n' +
+          'Senão, execute o segundo bloco de ações.',
+      whileTooltip: 'Repita as ações seguintes até que o ponto final seja alcançado.',
+      isPathTooltip: 'Retorna verdadeiro se existe um caminho\n' +
+          'na direção especificada.',
+      getXTooltip: 'Retorna a posição horizontal do Pegman.' +
+          'A aresta esquerda vale 1, a direita 8.',
+      getYTooltip: 'Returna a posição vertical do Pegman.\n' +
+          'A aresta superior vale 1, a inferior 8.',
+      getDirectionTooltip: 'Retorna a direção do  Pegman.\n' +
+          'Norte: 0, Leste: 1, Sul: 2, Oeste: 3.',
+      codeTooltip: 'Veja o código JavaScript gerado.',
+      linkTooltip: 'Salva conexão com o blockly.',
+      randomizeTooltip1: 'Gera ponto final e inicial aleatórios.',
+      randomizeTooltip2: 'Gera um quebra cabeças aleatório.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+          "Um programa é uma sequência de declarações.  Empilhe alguns blocos 'Mover para a frente' para ajudar-me a chegar ao destino.",
+          "Qual é a sequência de passos para seguir este caminho?",
+          "Os computadores têm uma memoria limitada. Chegue ao destino usando apenas dois blocos. Utilize o comando 'repita' para executar um bloco várias vezes.",
+          "Chegue ao destino utilizando apenas cinco blocos.",
+          "Pegman will have to turn left when he cannot go straight.",
+          "A condição  'se' executa algo apenas se a condição for verdadeira.  Tente girar à esquerda se existe um caminho à esquerda",
+          "Este quebra-cabeças parece ser mais complicado que o anterior, mas nao é.",
+          "Você pode utilizar mais de um comando 'se'.",
+          "O comando 'Se-senão'  faz uma coisa ou outra.",
+          "Você consegue resolver este quebra cabeças complexo. Tente seguir o muro do lado esquerdo.  Para programadores avançados apenas!"
+      ],
+      // Misc text.
+      level: 'Nível',
+      capacity0: 'Você tem mais <span id="capacityNumber">0</span> blocos.',
+      capacity1: 'Você tem mais <span id="capacityNumber">1</span> blocos.',
+      capacity2: 'Você tem mais <span id="capacityNumber">%1</span> blocos.',
+      runProgram: 'Executar programa',
+      resetProgram: '\u00A0 \u00A0 Reiniciar \u00A0 \u00A0',
+      nextLevel: 'Parabéns!\nVocê está apto para o nível %1?',
+      finalLevel: 'Parabéns!\nVocê resolveu o nível final.',
+      title: 'Quebra-cabeça',
+      oneTopBlock: 'Neste nível, você precisa empilhar todos os blocos nos espaços em branco.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Houve um problema com a solicitação.\n';
+      BlocklyStorage.LINK_ALERT = 'Compartilhe os seus blocos com este link:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Desculpe, "%1" não corresponde a um blockly salvo.';
+      BlocklyStorage.XML_ERROR = 'Não foi possível ler o seu arquivo salvo.\n'+
+          'Talvez ele tenha sido gerado por uma versão antiga do Blockly?\nXML: ';
+    }
+    var frameSrc = ['language/en/_messages.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
