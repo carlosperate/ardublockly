@@ -39,6 +39,11 @@ var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][level];
 
 /**
+ * Milliseconds between each animation frame.
+ */
+Maze.STEP_SPEED = 150;
+
+/**
  * The types of squares in the maze, which is represented
  * as a 2D array of SquareType values.
  * @enum {number}
@@ -429,10 +434,6 @@ Maze.init = function(blockly) {
     }
   }
 
-  // Initialize the slider.
-  var sliderSvg = document.getElementById('slider');
-  Maze.speedSlider = new Slider(10, 35, 130, sliderSvg);
-
   Maze.reset();
   Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
 };
@@ -616,8 +617,6 @@ Maze.animate = function() {
       window.setTimeout(Maze.congratulations, 1000);
   }
 
-  // Scale the speed non-linearly, to give better precision at the fast end.
-  Maze.STEP_SPEED = 200 * Math.pow(Maze.speedSlider.getValue(), 2);
   Maze.pidList.push(window.setTimeout(Maze.animate, Maze.STEP_SPEED * 5));
 };
 
@@ -682,6 +681,7 @@ Maze.scheduleFail = function(forward) {
   Maze.displayPegman(Maze.pegmanX + deltaX,
                      Maze.pegmanY + deltaY,
                      direction16);
+  Blockly.playAudio('whack', .5);
   Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX,
                        Maze.pegmanY,
@@ -691,7 +691,8 @@ Maze.scheduleFail = function(forward) {
     Maze.displayPegman(Maze.pegmanX + deltaX,
                        Maze.pegmanY + deltaY,
                        direction16);
-    }, Maze.STEP_SPEED * 2));
+    Blockly.playAudio('whack', .5);
+  }, Maze.STEP_SPEED * 2));
   Maze.pidList.push(window.setTimeout(function() {
       Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, direction16);
     }, Maze.STEP_SPEED * 3));

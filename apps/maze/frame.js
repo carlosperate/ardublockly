@@ -276,8 +276,8 @@ function init() {
        rtl: rtl,
        toolbox: toolbox,
        trashcan: true});
-  Blockly.loadAudio_('whack');
-  Blockly.loadAudio_('win');
+  Blockly.loadAudio_('apps/maze/win.wav', 'win');
+  Blockly.loadAudio_('apps/maze/whack.wav', 'whack');
   if (window.parent.Maze) {
     // Let the top-level application know that Blockly is ready.
     window.parent.Maze.init(Blockly);
