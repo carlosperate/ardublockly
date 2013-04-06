@@ -39,8 +39,7 @@ Turtle.level = Turtle.MAX_LEVEL;
 document.write(turtlepage.start({}, null,
     {MSG: MSG,
     level: Turtle.level,
-    maxLevel: Turtle.MAX_LEVEL,
-    frameSrc: frameSrc.join('&')}));
+    maxLevel: Turtle.MAX_LEVEL}));
 // This is referenced in frame.js.
 var maxBlocks = [undefined, // Level 0.
     7, 3, Infinity][Turtle.level];
@@ -60,22 +59,38 @@ Turtle.visible = true;
 
 /**
  * Initialize Blockly and the turtle.  Called on page load.
- * @param {!Blockly} blockly Instance of Blockly from iframe.
  */
-Turtle.init = function(blockly) {
-  window.Blockly = blockly;
+Turtle.init = function() {
+  var rtl = document.body.parentNode.dir == 'rtl';
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       maxBlocks: maxBlocks,
+       rtl: rtl,
+       toolbox: toolbox,
+       trashcan: true});
+
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Blockly.Apps.checkTimeout(%1);\n';
 
   // Add to reserved word list: API, local variables in execution evironment
   // (execute) and the infinite loop detection function.
   Blockly.JavaScript.addReservedWords('Turtle,code');
 
-  window.onbeforeunload = function() {
+  window.addEventListener('beforeunload', function(e) {
     if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-      return MSG.unloadWarning;
+      e.returnValue = MSG.unloadWarning;  // Gecko.
+      return MSG.unloadWarning;  // Webkit.
     }
     return null;
+  });
+  var blocklyDiv = document.getElementById('blockly');
+  var onresize = function(e) {
+    blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
+        'px';
+    blocklyDiv.style.height = (window.innerHeight - 22) + 'px';
   };
+  window.addEventListener('resize', onresize);
+  onresize();
 
   if (!('BlocklyStorage' in window)) {
     document.getElementById('linkButton').className = 'disabled';
@@ -114,8 +129,10 @@ Turtle.init = function(blockly) {
   Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
   Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');
   Turtle.reset();
-  Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
+  //Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
 };
+
+window.addEventListener('load', Turtle.init);
 
 /**
  * Reset the turtle to the start position, clear the display, and kill any

@@ -73,10 +73,8 @@ button.disabled {
   text-align: center;
   padding-top: 1em;
 }
-iframe {
-  height: 100%;
-  width: 100%;
-  border: 1px solid #ccc;
+#blockly {
+  position: fixed;
 }
 #display {
   border: 1px solid #ccc;
