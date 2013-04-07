@@ -35,7 +35,7 @@ Blockly.Apps = {};
  */
 Blockly.Apps.updateCapacity = function(MSG) {
   var cap = Blockly.mainWorkspace.remainingCapacity();
-  var p = parent.document.getElementById('capacity');
+  var p = document.getElementById('capacity');
   if (cap == Infinity) {
     p.innerHTML = '';
   } else if (cap == 0) {

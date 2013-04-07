@@ -23,13 +23,6 @@
  */
 'use strict';
 
-var MSG = window.parent.MSG;
-var maxBlocks = window.parent.maxBlocks;
-// document.dir fails in Mozilla, use document.body.parentNode.dir instead.
-// https://bugzilla.mozilla.org/show_bug.cgi?id=151407
-var rtl = window.parent.document.body.parentNode.dir == 'rtl';
-var toolbox = window.parent.document.getElementById('toolbox');
-
 // Extensions to Blockly's language and JavaScript generator.
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
@@ -268,29 +261,3 @@ Blockly.JavaScript.maze_getDirection = function() {
   var code = 'Maze.pegmanD';
   return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
-
-function init() {
-  Blockly.inject(document.body,
-      {path: '../../',
-       maxBlocks: maxBlocks,
-       rtl: rtl,
-       toolbox: toolbox,
-       trashcan: true});
-  Blockly.loadAudio_('apps/maze/win.wav', 'win');
-  Blockly.loadAudio_('apps/maze/whack.wav', 'whack');
-  if (window.parent.Maze) {
-    // Let the top-level application know that Blockly is ready.
-    window.parent.Maze.init(Blockly);
-  } else {
-    // Attempt to diagnose the problem.
-    var msg = 'Error: Unable to communicate between frames.\n\n';
-    if (window.parent == window) {
-      msg += 'Try loading index.html instead of frame.html';
-    } else if (window.location.protocol == 'file:') {
-      msg += 'This may be due to a security restriction preventing\n' +
-          'access when using the file:// protocol.\n' +
-          'http://code.google.com/p/chromium/issues/detail?id=47416';
-    }
-    alert(msg);
-  }
-}

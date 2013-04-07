@@ -32,9 +32,9 @@ Maze.MAX_LEVEL = 10;
 var level = window.location.search.match(/[?&]level=(\d+)/);
 level = level ? level[1] : 1;
 level = Math.min(Math.max(1, level), Maze.MAX_LEVEL);
-var frameSrc = frameSrc.join('&');
 document.write(mazepage.start({}, null,
-    {MSG: MSG, level: level, frameSrc: frameSrc}));
+    {MSG: MSG,
+     level: level}));
 var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][level];
 
@@ -389,20 +389,39 @@ Maze.drawMap = function() {
 
 /**
  * Initialize Blockly and the maze.  Called on page load.
- * @param {!Blockly} blockly Instance of Blockly from iframe.
  */
-Maze.init = function(blockly) {
-  window.Blockly = blockly;
+Maze.init = function() {
+  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
+  var rtl = document.body.parentNode.dir == 'rtl';
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       maxBlocks: maxBlocks,
+       rtl: rtl,
+       toolbox: toolbox,
+       trashcan: true});
+  Blockly.loadAudio_('apps/maze/win.wav', 'win');
+  Blockly.loadAudio_('apps/maze/whack.wav', 'whack');
+
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Blockly.Apps.checkTimeout(%1);\n';
   Maze.drawMap();
 
-  //window.onbeforeunload = function() {
-  //  if (Blockly.mainWorkspace.getAllBlocks().length > 1 &&
-  //      window.location.hash.length <= 1) {
-  //    return 'Leaving this page will result in the loss of your work.';
+  //window.addEventListener('beforeunload', function(e) {
+  //  if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
+  //    e.returnValue = MSG.unloadWarning;  // Gecko.
+  //    return MSG.unloadWarning;  // Webkit.
   //  }
   //  return null;
-  //};
+  //});
+  var blocklyDiv = document.getElementById('blockly');
+  var onresize = function(e) {
+    blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
+        'px';
+    blocklyDiv.style.height = (window.innerHeight - 22) + 'px';
+  };
+  window.addEventListener('resize', onresize);
+  onresize();
 
   if (!('BlocklyStorage' in window)) {
     document.getElementById('linkButton').className = 'disabled';
@@ -437,6 +456,8 @@ Maze.init = function(blockly) {
   Maze.reset();
   Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
 };
+
+window.addEventListener('load', Maze.init);
 
 /**
  * Reset the maze to the start position and kill any pending animation tasks.

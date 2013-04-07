@@ -40,7 +40,6 @@ document.write(turtlepage.start({}, null,
     {MSG: MSG,
     level: Turtle.level,
     maxLevel: Turtle.MAX_LEVEL}));
-// This is referenced in frame.js.
 var maxBlocks = [undefined, // Level 0.
     7, 3, Infinity][Turtle.level];
 
@@ -61,6 +60,8 @@ Turtle.visible = true;
  * Initialize Blockly and the turtle.  Called on page load.
  */
 Turtle.init = function() {
+  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
   var rtl = document.body.parentNode.dir == 'rtl';
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
