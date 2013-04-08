@@ -50,11 +50,18 @@
     })();
 
     function init() {
+      var rtl = false;
       var toolbox = null;
       if (window.parent.document) {
+        // document.dir fails in Mozilla, use document.body.parentNode.dir.
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
+        rtl = window.parent.document.body.parentNode.dir == 'rtl';
         toolbox = window.parent.document.getElementById('toolbox');
       }
-      Blockly.inject(document.body, {path: '../../', toolbox: toolbox});
+      Blockly.inject(document.body,
+          {path: '../../',
+           rtl: rtl,
+           toolbox: toolbox});
 
       if (window.parent.init) {
         // Let the top-level application know that Blockly is ready.

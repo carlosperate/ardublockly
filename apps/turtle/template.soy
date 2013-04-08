@@ -93,22 +93,11 @@
         <script type="text/javascript" src="../../generators/javascript/colour.js"></script>
         <script type="text/javascript" src="../../generators/javascript/variables.js"></script>
         <script type="text/javascript" src="../../generators/javascript/procedures.js"></script>
+        <script type="text/javascript" src="../common.js"></script>
         <script type="text/javascript">
-          // Load the specified language file(s).
-          (function() {lb}
-            for (var x = 0; x < languageSrc.length; x++) {lb}
-              var file = languageSrc[x];
-              if (file.match(/^\w+\/\w+\.js$/)) {lb}
-                document.writeln('<script type="text/javascript" ' +
-                    'src="../../language/' + file + '"><' + '/script>');
-              {rb} else {lb}
-                console.error('Illegal language file: ' + file);
-              {rb}
-            {rb}
-          {rb})();
+          Blockly.Apps.loadLanguageScripts(languageSrc);
         </script>
         <script type="text/javascript" src="blocks.js"></script>
-        <script type="text/javascript" src="../common.js"></script>
         {call .toolbox /}
         <div id="blockly"></div>
       </td>

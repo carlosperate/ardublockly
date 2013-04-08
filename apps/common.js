@@ -27,6 +27,22 @@
 Blockly.Apps = {};
 
 /**
+ * Load the specified language file(s).
+ * @param {!Array<string>} languageSrc Array of language files.
+ */
+Blockly.Apps.loadLanguageScripts = function(languageSrc) {
+  for (var x = 0; x < languageSrc.length; x++) {
+    var file = languageSrc[x];
+    if (file.match(/^\w+\/\w+\.js$/)) {
+      document.writeln('<script type="text/javascript" ' +
+          'src="../../language/' + file + '"><' + '/script>');
+    } else {
+      console.error('Illegal language file: ' + file);
+    }
+  }
+};
+
+/**
  * Updates the document's 'capacity' element's innerHTML with a message
  * indicating how many more blocks are permitted.  The capacity
  * is retrieved from Blockly.mainWorkspace.remainingCapacity().
