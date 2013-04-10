@@ -1,0 +1,91 @@
+<html dir="ltr" lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Václav Novotný">
+  <title>Blockly Bludiště</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'pohyb vpřed',
+      move: 'pohyb',
+      forward: 'vpřed',
+      backward: 'zpět',
+      turn: 'otočit',
+      left: 'levá',
+      right: 'pravá',
+      randomly: 'náhodně',
+      path: 'cesta',
+      ifPath: 'pokud cesta',
+      do: 'udělej',
+      else: 'jinak',
+      ahead: 'vpřed',
+      toTheLeft: 'doleva',
+      toTheRight: 'doprava',
+      behind: 'za',
+      repeatUntilFinished: 'opakuj až do konce',
+      getX: 'vezmi pozici X',
+      getY: 'vezmi pozici Y',
+      getDirection: 'vezmi směr',
+      // Tooltips.
+      moveForwardTooltip: 'Pohne Pegmanem vpřed o jedno pole.',
+      moveTooltip: 'Pohne Pegmanem vpřed nebo zpět o jedno pole.',
+      turnTooltip: 'Otočí Pegmana vlevo nebo vpravo o 90 stupňů.',
+      ifTooltip: 'Pokud je v daném směru cesta,\n' +
+          'pak proveď nějakou akci.',
+      ifelseTooltip: 'Pokud je v danném směru cesta,\n' +
+          'pak proveď posloupnost akcí.\n' +
+          'V opačném případě proveď druhou posloupnost akcí.',
+      whileTooltip: 'Opakuj obsažené akce do té doby, dokud není dosažen cílový bod.',
+      isPathTooltip: 'Vrací pravdu pokud existuje cesta v daném směru.',
+      getXTooltip: 'Vrací Pagmanovu horizontální pozici.\n' +
+          'Levý kraj je 1, pravý kraj je 8.',
+      getYTooltip: 'Vrací Pagmanovu vertikální pozici.\n' +
+          'Horní okraj je 1, spodní okraj je 8.',
+      getDirectionTooltip: 'Vrací Pagmanův směr.\n' +
+          'Sever: 0, Východ: 1, Jih: 2, Západ: 3.',
+      codeTooltip: 'Zobraz generovaný JavaScriptový kód.',
+      linkTooltip: 'Ulož a spoj bloky..',
+      randomizeTooltip1: 'Vygeneruj náhodně pozice startovního a cílového bodu.',
+      randomizeTooltip2: 'Vygeneruj náhodné bludiště.',  // Not currently used.
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+        "Program je posloupnost příkazů.  Poskládej několik pohybů vpřed dohromady a pomoc mi dosáhnout cíle.",
+        "Jaká je posloupnost kroků pro následování této cesty?",
+        "Počítače mají omezenou paměť.  Dosáhni cíle s použitím pouze dvou bloků.  Použij příkaz 'opakuj' pro zopakování příkazu.",
+        "Dosáhni cíle s použitím peti bloků.",
+        "Pegman se bude muset otočit vlevo, pokud nebude moci jít rovně.",
+        "Podmínka 'pokud' udělá něco pouze v případě, že je splněna její podmínka.  Zkus se otočit vlevo, pokud je nalevo cesta.",
+        "Toto bludiště na první pohled vypadá komplikovaněji než to předchozí, ale není.",
+        "Můžeš použít více něž jeden výraz 'pokud'.",
+        "Příkaz 'pokud-jinak' provede buď něco, nebo něco jiného.",
+        "Dokážeš vyřešit toto komplikované bludiště?  Zkus se přidržovat zdi po levé ruce."],
+      // Misc text.
+      level: 'Level',
+      capacity0: 'Počet zbývajících bloků <span id="capacityNumber">0</span>.',
+      capacity1: 'Počet zbývajících bloků <span id="capacityNumber">1</span>.',
+      capacity2: 'Počet zbývajících bloků <span id="capacityNumber">%1</span>.',
+      runProgram: 'Spusť program',
+      resetProgram: '\u00A0 \u00A0 Reset \u00A0 \u00A0',
+      nextLevel: 'Blahopřejeme!\nJsi připraven vstoupit do levelu %1?',
+      finalLevel: 'Blahopřejeme!\nVyřešil jsi poslední level.',
+      title: 'Bludiště',
+      oneTopBlock: 'V tomto levelu musíš posbírat všechny bloky na bílém pozadí.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'V požadavku došlo k chybě.\n';
+      BlocklyStorage.LINK_ALERT = 'Sdílej bloky tímto odkazem:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Omlouváme se, "%1" nesouhlasí s žádným z uložených souborů.';
+      BlocklyStorage.XML_ERROR = 'Nepodařilo se uložit vás soubor.\n'+
+          'Pravděpodobně byl vytvořen jinou verzí Blockly?\nXML: ';
+    }
+    var languageSrc = ['cs/_messages.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
