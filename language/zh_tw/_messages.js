@@ -55,6 +55,9 @@ Blockly.MSG_RENAME_VARIABLE_TITLE = '將所有 "%1" 變量重新命名為:';
 Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Choose a colour form the palette.';
 
+Blockly.LANG_COLOUR_RANDOM_HELPURL = 'http://randomcolour.com';
+Blockly.LANG_COLOUR_RANDOM_TOOLTIP = 'Choose a colour at random.';
+
 Blockly.LANG_COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html';
 Blockly.LANG_COLOUR_RGB_TITLE = 'colour with';
 Blockly.LANG_COLOUR_RGB_RED = 'red';

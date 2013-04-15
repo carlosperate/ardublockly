@@ -33,6 +33,23 @@ Blockly.JavaScript.colour_picker = function() {
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
+Blockly.JavaScript.colour_random = function() {
+  // Generate a random colour.
+  if (!Blockly.JavaScript.definitions_['colour_random']) {
+    var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
+        'colour_random', Blockly.Generator.NAME_TYPE);
+    Blockly.JavaScript.colour_random.functionName = functionName;
+    var func = [];
+    func.push('function ' + functionName + '() {');
+    func.push('  var num = Math.floor(Math.random() * Math.pow(2, 24));');
+    func.push('  return \'#\' + (\'00000\' + num.toString(16)).substr(-6);');
+    func.push('}');
+    Blockly.JavaScript.definitions_['colour_random'] = func.join('\n');
+  }
+  var code = Blockly.JavaScript.colour_random.functionName + '()';
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
 Blockly.JavaScript.colour_rgb = function() {
   // Compose a colour from RGB components expressed as percentages.
   var red = Blockly.JavaScript.valueToCode(this, 'RED',

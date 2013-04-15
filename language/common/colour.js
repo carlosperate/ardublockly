@@ -39,6 +39,18 @@ Blockly.Language.colour_picker = {
   }
 };
 
+Blockly.Language.colour_random = {
+  // Random colour.
+  helpUrl: Blockly.LANG_COLOUR_RANDOM_HELPURL,
+  init: function() {
+    this.setColour(20);
+    this.appendDummyInput()
+        .appendTitle("random colour");
+    this.setOutput(true, 'Colour');
+    this.setTooltip(Blockly.LANG_COLOUR_RANDOM_TOOLTIP);
+  }
+};
+
 Blockly.Language.colour_rgb = {
   // Compose a colour from RGB components.
   helpUrl: Blockly.LANG_COLOUR_RGB_HELPURL,
