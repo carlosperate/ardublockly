@@ -241,7 +241,6 @@ Blockly.Language.controls_whileUntil = {
     this.setColour(120);
     this.appendValueInput('BOOL')
         .setCheck(Boolean)
-        .appendTitle(Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT)
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'MODE');
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO);
@@ -351,10 +350,8 @@ Blockly.Language.controls_flow_statements = {
   helpUrl: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL,
   init: function() {
     this.setColour(120);
-    var dropdown = new Blockly.FieldDropdown(this.OPERATORS);
     this.appendDummyInput()
-        .appendTitle(dropdown, 'FLOW')
-        .appendTitle(Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP);
+        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'FLOW');
     this.setPreviousStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;

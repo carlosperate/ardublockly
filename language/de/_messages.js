@@ -104,10 +104,9 @@ Blockly.LANG_CONTROLS_REPEAT_INPUT_DO = 'mache';
 Blockly.LANG_CONTROLS_REPEAT_TOOLTIP = 'Eine Anweisung mehrfach ausführen.';
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://de.wikipedia.org/wiki/Schleife_%28Programmierung%29';
-Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT = 'Wiederhole';
 Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = 'mache';
-Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = 'solange';
-Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = 'bis';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = 'Wiederhole solange';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = 'Wiederhole bis';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = 'Führe die Anweisung solange aus wie die Bedingung wahr (true) ist.';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'Führe die Anweisung solange aus wie die Bedingung falsch (false) ist.';
 
@@ -131,9 +130,8 @@ Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'Führe eine Anweisung für jeden Wert i
     'auf den aktuellen Listen Wert.';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://de.wikipedia.org/wiki/Kontrollstruktur';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'aus der Schleife';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'ausbrechen';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'mit der nächsten Iteration fortfahren';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'ausbrechen aus der Schleife';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'mit der nächsten Iteration fortfahren aus der Schleife';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Die umgebene Schleife beenden.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Diese Anweisung abbrechen\n' +
     'und mit der nächsten Schleifeniteration fortfahren.';
@@ -241,15 +239,14 @@ Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP = 'auf runden';
 Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN = 'ab runden';
 
 Blockly.LANG_MATH_ONLIST_HELPURL = 'http://www.sysplus.ch/einstieg.php?links=menu&seite=4125&grad=Crash&prog=Excel';
-Blockly.LANG_MATH_ONLIST_INPUT_OFLIST = 'einer Liste';
-Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = 'Summme';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = 'Minimalwert';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = 'Maximalwert';
-Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = 'Mittelwert';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MEDIAN = 'Median';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MODE = 'Modulo / Restwert';
-Blockly.LANG_MATH_ONLIST_OPERATOR_STD_DEV = 'Standart Abweichung';
-Blockly.LANG_MATH_ONLIST_OPERATOR_RANDOM = 'Zufallswert';
+Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = 'Summme einer Liste';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = 'Minimalwert einer Liste';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = 'Maximalwert einer Liste';
+Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = 'Mittelwert einer Liste';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MEDIAN = 'Median einer Liste';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MODE = 'Modulo / Restwert einer Liste';
+Blockly.LANG_MATH_ONLIST_OPERATOR_STD_DEV = 'Standart Abweichung einer Liste';
+Blockly.LANG_MATH_ONLIST_OPERATOR_RANDOM = 'Zufallswert einer Liste';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_SUM = 'Ist die Summe aller Werte in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN = 'Ist der kleinste Wert in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX = 'Ist der grösste Wert in einer Liste.';
@@ -312,23 +309,20 @@ Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = 'ist leer?';
 Blockly.LANG_TEXT_ISEMPTY_TOOLTIP = 'Ist wahr (true), wenn der Text leer ist.';
 
 Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = 'Suche';
-Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = 'Vorkommniss des Begriff';
 Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = 'im Text';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = 'Suche erstes Vorkommniss des Begriff';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = 'Suche letztes Vorkommniss des Begriff';
 Blockly.LANG_TEXT_INDEXOF_TOOLTIP = 'Findest das erste / letzte Vorkommniss\n' +
     'eines cuchbegriffes in einem Text.\n' +
     'Gibt die Position des Begriffes oder 0 zurück.';
-Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = 'erstes';
-Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = 'letztes';
 
 Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_CHARAT_GET = 'Nehme';
-Blockly.LANG_TEXT_CHARAT_FROM_START = 'Buchstabe #ten';
-Blockly.LANG_TEXT_CHARAT_FROM_END = '#te Buchstabe von hinten';
-Blockly.LANG_TEXT_CHARAT_FIRST = 'ersten Buchstabe';
-Blockly.LANG_TEXT_CHARAT_LAST = 'letzten Buchstabe';
-Blockly.LANG_TEXT_CHARAT_RANDOM = 'zufälligen Buchstabe';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'vom Text';
+Blockly.LANG_TEXT_CHARAT_FROM_START = 'Nehme Buchstabe #ten';
+Blockly.LANG_TEXT_CHARAT_FROM_END = 'Nehme #te Buchstabe von hinten';
+Blockly.LANG_TEXT_CHARAT_FIRST = 'Nehme ersten Buchstabe';
+Blockly.LANG_TEXT_CHARAT_LAST = 'Nehme letzten Buchstabe';
+Blockly.LANG_TEXT_CHARAT_RANDOM = 'Nehme zufälligen Buchstabe';
 Blockly.LANG_TEXT_CHARAT_TOOLTIP = 'Extrahiere einen Buchstaben von einer spezifizierten Position.';
 
 Blockly.LANG_TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
@@ -338,36 +332,31 @@ Blockly.LANG_TEXT_SUBSTRING_INPUT_AT2 = 'to';
 Blockly.LANG_TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = 'umwandeln in';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = 'umwandeln in GROSSBUCHSTABEN';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'umwandeln in kleinbuchstaben';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = 'umwandeln in Wörter';
 Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Wandelt Schreibweise von Texten um,\n' +
     'in Grossbuchstaben, Kleinbuchstaben oder\n' +
     'den ersten Buchstaben jedes Wortes gross und die anderen klein.';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = 'GROSSBUCHSTABEN';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'kleinbuchstaben';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = 'Wörter';
 
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_TRIM_TITLE_SPACE = 'entferne Leerzeichen von';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '';
-Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Entfernt Leerzeichen vom Anfang und / oder Ende\n' +
-    'eines Textes.';
+Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'entferne Leerzeichen von Anfang und Ende';
+Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'entferne Leerzeichen von Anfang';
+Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'entferne Leerzeichen von Ende';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'Seiten';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDE = 'Seite';
-Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'Anfang und Ende';
-Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'Anfang';
-Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'Ende';
+Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Entfernt Leerzeichen vom Anfang und / oder Ende\n' +
+    'eines Textes.';
 
 Blockly.LANG_TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_PRINT_TITLE_PRINT = 'Ausgabe';
 Blockly.LANG_TEXT_PRINT_TOOLTIP = 'Gib den Inhalt einer Variable aus.';
 
 Blockly.LANG_TEXT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
-Blockly.LANG_TEXT_PROMPT_TITLE_PROMPT_FOR = 'Fragt nach';
-Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE = 'mit Hinweis';
+Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = 'Fragt nach Text mit Hinweis';
+Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = 'Fragt nach Zahl mit Hinweis';
 Blockly.LANG_TEXT_PROMPT_TOOLTIP_NUMBER = 'Fragt den Benutzer nach ein Zahl.';
 Blockly.LANG_TEXT_PROMPT_TOOLTIP_TEXT = 'Fragt den Benutzer nach einem Text.';
-Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = 'Text';
-Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = 'Zahl';
 
 // Lists Blocks.
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
@@ -399,13 +388,11 @@ Blockly.LANG_LISTS_INPUT_IS_EMPTY = 'ist leer?';
 Blockly.LANG_LISTS_TOOLTIP = 'Ist wahr (true), wenn die Liste leer ist.';
 
 Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = 'Suche';
-Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = 'Vorkommniss';
 Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = 'in der Liste';
+Blockly.LANG_LISTS_INDEX_OF_FIRST = 'Suche erstes Vorkommniss';
+Blockly.LANG_LISTS_INDEX_OF_LAST = 'Suche letztes Vorkommniss';
 Blockly.LANG_LISTS_INDEX_OF_TOOLTIP = 'Sucht die Position (index) eines Elementes in der Liste\n' +
     'Gibt 0 zurück wenn nichts gefunden wurde.';
-Blockly.LANG_LISTS_INDEX_OF_FIRST = 'erstes';
-Blockly.LANG_LISTS_INDEX_OF_LAST = 'letztes';
 
 Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_GET_INDEX_GET = 'Nehme';

@@ -287,8 +287,7 @@ Blockly.Language.math_on_list = {
     });
     this.appendValueInput('LIST')
         .setCheck(Array)
-        .appendTitle(dropdown, 'OP')
-        .appendTitle(Blockly.LANG_MATH_ONLIST_INPUT_OFLIST);
+        .appendTitle(dropdown, 'OP');
     this.setTooltip(function() {
       var mode = thisBlock.getTitleValue('OP');
       return thisBlock.TOOLTIPS[mode];

@@ -212,9 +212,7 @@ Blockly.Language.lists_indexOf = {
         .setCheck(Array)
         .appendTitle(Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST);
     this.appendValueInput('FIND')
-        .appendTitle(Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND)
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'END')
-        .appendTitle(Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE);
+        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'END');
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_INDEX_OF_TOOLTIP);
   }

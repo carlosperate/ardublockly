@@ -105,10 +105,9 @@ Blockly.LANG_CONTROLS_REPEAT_INPUT_DO = '執行';
 Blockly.LANG_CONTROLS_REPEAT_TOOLTIP = 'Do some statements several times.';
 
 Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL = 'http://code.google.com/p/blockly/wiki/Repeat';
-Blockly.LANG_CONTROLS_WHILEUNTIL_TITLE_REPEAT = '重複';
 Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = '執行';
-Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = '當';
-Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = '直到';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = '重複 當';
+Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = '重複 直到';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = 'While a value is true, then do some statements.';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'While a value is false, then do some statements.';
 
@@ -131,9 +130,8 @@ Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'For each item in a list, set the item t
     'variable "%1", and then do some statements.';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = '迴圈';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '停止';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繼續下一個';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = '停止 迴圈';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = '繼續下一個 迴圈';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Break out of the containing loop.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Skip the rest of this loop, and\n' +
     'continue with the next iteration.';
@@ -239,15 +237,14 @@ Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDUP = '無條件進位';
 Blockly.LANG_MATH_ROUND_OPERATOR_ROUNDDOWN = '無條件捨去';
 
 Blockly.LANG_MATH_ONLIST_HELPURL = '';
-Blockly.LANG_MATH_ONLIST_INPUT_OFLIST = '自列表';
-Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = '總和';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = '最小值';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = '最大值';
-Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = '平均值';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MEDIAN = '中位數';
-Blockly.LANG_MATH_ONLIST_OPERATOR_MODE = '比較眾數';
-Blockly.LANG_MATH_ONLIST_OPERATOR_STD_DEV = '標準差';
-Blockly.LANG_MATH_ONLIST_OPERATOR_RANDOM = '隨機抽取';
+Blockly.LANG_MATH_ONLIST_OPERATOR_SUM = '總和 自列表';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MIN = '最小值 自列表';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MAX = '最大值 自列表';
+Blockly.LANG_MATH_ONLIST_OPERATOR_AVERAGE = '平均值 自列表';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MEDIAN = '中位數 自列表';
+Blockly.LANG_MATH_ONLIST_OPERATOR_MODE = '比較眾數 自列表';
+Blockly.LANG_MATH_ONLIST_OPERATOR_STD_DEV = '標準差 自列表';
+Blockly.LANG_MATH_ONLIST_OPERATOR_RANDOM = '隨機抽取 自列表';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_SUM = 'Return the sum of all the numbers in the list.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN = 'Return the smallest number in the list.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX = 'Return the largest number in the list.';
@@ -309,24 +306,20 @@ Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = '為空';
 Blockly.LANG_TEXT_ISEMPTY_TOOLTIP = 'Returns true if the provided text is empty.';
 
 Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_INDEXOF_TITLE_FIND = '尋找';
-Blockly.LANG_TEXT_INDEXOF_INPUT_OCCURRENCE = '出現的字串';
 Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = '在字串';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = '尋找 第一個 出現的字串';
+Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = '尋找 最後一個 出現的字串';
 Blockly.LANG_TEXT_INDEXOF_TOOLTIP = 'Returns the index of the first/last occurrence\n' +
     'of first text in the second text.\n' +
     'Returns 0 if text is not found.';
-Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = '第一個';
-Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = '最後一個';
 
 Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_TEXT_CHARAT_GET = 'get';
-Blockly.LANG_TEXT_CHARAT_FROM_START = 'letter #';
-Blockly.LANG_TEXT_CHARAT_FROM_END = 'letter # from end';
-Blockly.LANG_TEXT_CHARAT_FIRST = 'first letter';
-Blockly.LANG_TEXT_CHARAT_LAST = 'last letter';
-Blockly.LANG_TEXT_CHARAT_RANDOM = 'random letter';
-Blockly.LANG_TEXT_CHARAT_INPUT_AT = 'letter at';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = '的字元在字串';
+Blockly.LANG_TEXT_CHARAT_FROM_START = 'get letter #';
+Blockly.LANG_TEXT_CHARAT_FROM_END = 'get letter # from end';
+Blockly.LANG_TEXT_CHARAT_FIRST = 'get first letter';
+Blockly.LANG_TEXT_CHARAT_LAST = 'get last letter';
+Blockly.LANG_TEXT_CHARAT_RANDOM = 'get random letter';
 Blockly.LANG_TEXT_CHARAT_TOOLTIP = 'Returns the letter at the specified position.';
 
 Blockly.LANG_TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
@@ -336,34 +329,29 @@ Blockly.LANG_TEXT_SUBSTRING_INPUT_AT2 = 'to';
 Blockly.LANG_TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_CHANGECASE_TITLE_TO = '改成';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = '改成 轉大寫';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = '改成 轉小寫';
+Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = '改成 頭字母大寫';
 Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Return a copy of the text in a different case.';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = '轉大寫';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = '轉小寫';
-Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = '頭字母大寫';
 
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_TRIM_TITLE_SPACE = '從';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '消除空格';
-Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Return a copy of the text with spaces\n' +
-    'removed from one or both ends.';
+Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = '從 兩側';
+Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = '從 左側';
+Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = '從 右側';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '消除空格';
 Blockly.LANG_TEXT_TRIM_TITLE_SIDE = '消除空格';
-Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = '兩側';
-Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = '左側';
-Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = '右側';
+Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Return a copy of the text with spaces\n' +
+    'removed from one or both ends.';
 
 Blockly.LANG_TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_PRINT_TITLE_PRINT = '印出';
 Blockly.LANG_TEXT_PRINT_TOOLTIP = 'Print the specified text, number or other value.';
 
 Blockly.LANG_TEXT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
-Blockly.LANG_TEXT_PROMPT_TITLE_PROMPT_FOR = '輸入';
-Blockly.LANG_TEXT_PROMPT_TITILE_WITH_MESSAGE = '並顯示提示訊息';
+Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = '輸入 文字 並顯示提示訊息';
+Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = '輸入 數字 並顯示提示訊息';
 Blockly.LANG_TEXT_PROMPT_TOOLTIP_NUMBER = 'Prompt for user for a number.';
 Blockly.LANG_TEXT_PROMPT_TOOLTIP_TEXT = 'Prompt for user for some text.';
-Blockly.LANG_TEXT_PROMPT_TYPE_TEXT = '文字';
-Blockly.LANG_TEXT_PROMPT_TYPE_NUMBER = '數字';
 
 // Lists Blocks.
 Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL = 'http://en.wikipedia.org/wiki/Linked_list#Empty_lists';
@@ -395,14 +383,12 @@ Blockly.LANG_LISTS_INPUT_IS_EMPTY = '值為空';
 Blockly.LANG_LISTS_TOOLTIP = 'Returns true if the list is empty.';
 
 Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_INDEX_OF_TITLE_FIND = '找出';
-Blockly.LANG_LISTS_INDEX_OF_INPUT_OCCURRENCE = '項目出現';
 Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = '在列表';
+Blockly.LANG_LISTS_INDEX_OF_FIRST = '找出 第一個 項目出現';
+Blockly.LANG_LISTS_INDEX_OF_LAST = '找出 最後一個 項目出現';
 Blockly.LANG_LISTS_INDEX_OF_TOOLTIP = 'Returns the index of the first/last occurrence\n' +
     'of the item in the list.\n' +
     'Returns 0 if text is not found.';
-Blockly.LANG_LISTS_INDEX_OF_FIRST = '第一個';
-Blockly.LANG_LISTS_INDEX_OF_LAST = '最後一個';
 
 Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_GET_INDEX_GET = 'get';
