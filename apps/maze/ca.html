@@ -11,28 +11,16 @@
     var MSG = {
       // Block text.
       moveForward: 'mou endavant',
-      move: 'mou',
-      forward: 'endavant',
-      backward: 'enrere',
-      turn: 'gira',
-      left: 'esquerra',
-      right: 'dreta',
-      randomly: 'aleatòriament',
-      path: 'camí',
-      ifPath: 'si camí',
+      turnLeft: 'gira esquerra',
+      turnRight: 'gira dreta',
       do: 'fes',
       else: 'si no',
-      ahead: 'al davant',
-      toTheLeft: 'a l\'esquerra',
-      toTheRight: 'a la dreta',
-      behind: 'al darrere',
+      pathAhead: 'al davant',
+      pathLeft: 'si camí a\u00A0l\'esquerra',
+      pathRight: 'si camí a la dreta',
       repeatUntilFinished: 'repeteix fins al final',
-      getX: 'obtenir la posició de X',
-      getY: 'obtenir la posició de Y',
-      getDirection: 'obtenir la direcció',
       // Tooltips.
       moveForwardTooltip: 'Mou el Pegman endavant un espai.',
-      moveTooltip: 'Mou el Pegman endavant o enrere un espai.',
       turnTooltip: 'Gira el Pegman a l\'esquerra o a la dreta 90 graus.',
       ifTooltip: 'Si hi ha un camí en la direcció especificada,\n' +
           'llavors fes algunes accions.',
@@ -40,30 +28,21 @@
           'llavors fes el primer bloc d\'accions.\n' +
           'Si no, fes el segon bloc d\'accions.',
       whileTooltip: 'Repeteix les accions de dins del bloc fins arribar al punt final.',
-      isPathTooltip: 'Retorna \'cert\' si hi ha un camí\n' +
-          'en la direcció especificada.',
-      getXTooltip: 'Retorna la posició horitzontal del Pegman.\n' +
-          'El marge esquerre és 1, el marge dreta és 8.',
-      getYTooltip: 'Retorna la posició vertical del Pegman.\n' +
-          'El marge superior és 1, el marge inferior és 8.',
-      getDirectionTooltip: 'Retorna la direcció del Pegman.\n' +
-          'Nord: 0, Est: 1, Sud: 2, Oest: 3.',
       codeTooltip: 'Veure el codi JavaScript generat.',
       linkTooltip: 'Desa i enllaça als blocs.',
       randomizeTooltip1: 'Aleatoritza l\'inici i finalitza els marcadors.',
-      randomizeTooltip2: 'Aleatoritza el laberint.',
       // Level hints.
       hints: [undefined, // There is no level 0.
-          "Un programa és una seqüència de declaracions.  Apila un parell de blocs 'mou endavant' junts per ajudar-me a arribar a la meta.",
-          "Quina és la seqüència de passos per a seguir aquest camí?",
-          "Els ordinadors tenen una memòria limitada. Arriba al final d'aquest camí utilitzant només dos blocs. Utilitza 'repeteix' per a executar un bloc més d'una vegada.",
-          "Arriba a la meta utilitzant només cinc blocs.",
-          "Pegman haurà de girar a l'esquerra quan no pugui continuar endavant.",
-          "Una condició 'si' farà fer alguna cosa només si la condició és certa. Prova de girar a l'esquerra si hi ha un camí a l'esquerra.",
-          "Aquest laberint sembla més complicat que l'anterior, però no ho és!.",
-          "Pots utilitzar més d'una declaració 'si'.",
-          "Les declaracions 'si-si no' faran fer una cosa o una altra.",
-          "Pots resoldre aquest complicat laberint? Prova de seguir la paret de l'esquerra.  Només programadors avançats!"
+        "Un programa és una seqüència de declaracions.  Apila un parell de blocs 'mou endavant' junts per ajudar-me a arribar a la meta.",
+        "Quina és la seqüència de passos per a seguir aquest camí?",
+        "Els ordinadors tenen una memòria limitada. Arriba al final d'aquest camí utilitzant només dos blocs. Utilitza 'repeteix' per a executar un bloc més d'una vegada.",
+        "Arriba a la meta utilitzant només cinc blocs.",
+        "Pegman haurà de girar a l'esquerra quan no pugui continuar endavant.",
+        "Una condició 'si' farà fer alguna cosa només si la condició és certa. Prova de girar a l'esquerra si hi ha un camí a l'esquerra.",
+        "Aquest laberint sembla més complicat que l'anterior, però no ho és!.",
+        "Pots utilitzar més d'una declaració 'si'.",
+        "Les declaracions 'si-si no' faran fer una cosa o una altra.",
+        "Pots resoldre aquest complicat laberint? Prova de seguir la paret de l'esquerra.  Només programadors avançats!"
       ],
       // Misc text.
       level: 'Nivell',

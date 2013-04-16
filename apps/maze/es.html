@@ -10,28 +10,16 @@
     var MSG = {
       // Block text.
       moveForward: 'Mover hacia delante',
-      move: 'mueve',
-      forward: 'adelante',
-      backward: 'atrás',
-      turn: 'gira',
-      left: 'izquierda',
-      right: 'derecha',
-      randomly: 'aleatorio',
-      path: 'camino',
-      ifPath: 'si hay camino',
+      turnLeft: 'gira izquierda',
+      turnRight: 'gira derecha',
       do: 'haz esto',
       else: 'sino',
-      ahead: 'enfrente',
-      toTheLeft: 'a la izquierda',
-      toTheRight: 'a la derecha',
-      behind: 'detras',
+      pathAhead: 'si hay camino enfrente',
+      pathLeft: 'si hay camino a la izquierda',
+      pathRight: 'si hay camino a la derecha',
       repeatUntilFinished: 'repite hasta terminar',
-      getX: 'obtén la posición x',
-      getY: 'obtén la posición y',
-      getDirection: 'obtén la dirección',
       // Tooltips.
       moveForwardTooltip: 'Mueve a Pegman un cuadro hacia delante.',
-      moveTooltip: 'Mueve a Pegman un cuadro hacia delante o hacia atras.',
       turnTooltip: 'Gira a Pegman a izquierda o derecha 90 grados.',
       ifTooltip: ' Si hay un camino en la dirección especificada,\n' +
           'entonces ejecuta unas acciones.',
@@ -39,30 +27,21 @@
           'entonces ejecuta las primeras acciones.\n' +
           'Sino, haz el segundo conjunto de acciones.',
       whileTooltip: 'Repite las acciones encapsuladas hasta terminar.',
-      isPathTooltip: 'Devuelve verdadero si hay camino\n' +
-          'en la direccíon especificada.',
-      getXTooltip: 'Devuelve la posición horizontal del Pegman.\n' +
-          'La arista izquierda es 1, La arista derecha es 8.',
-      getYTooltip: 'Devuelve la posición vertical del Pegman.\n' +
-          'La arista de arriba es 1, La arista de abajo es 8.',
-      getDirectionTooltip: 'Devuelve la direción del Pegman. \n' +
-          'Norte: 0, Este: 1, Sur: 2, Oeste: 3.',
       codeTooltip: 'Mira el código JavaScript generado.',
       linkTooltip: 'Guarda conexión a los bloques.',
       randomizeTooltip1: 'Situa aleatoriamente los marcadores de comienzo y final.',
-      randomizeTooltip2: 'Genera el laberinto aleatoriamente.',
       // Level hints.
       hints: [undefined, // There is no level 0.
-          "Un programa es una secuencia de declaraciones. Une un par de bloques de ‘avanza’ para ayudarme a llegar a la meta.",
-          "¿Cuál es la secuencia  de pasos para seguir este camino?",
-          "Las computadoras tienen memoria limitada. Llega al final de este camino usando tan sólo dos bloques. Utiliza 'repetir' para ejecutar un bloque más de una vez.",
-          "Llega a la meta con tan sólo cinco bloques.",
-          "Pegman will have to turn left when he cannot go straight.",
-          "Una condición 'si' va hacer algo solamente si la condición es verdadera. Intenta girar a la izquierda si hay camino a la izquierda.",
-          "Este laberinto parece más complicado que el anterior, pero no lo es.",
-          "Puedes usar más de una declaración 'si'.",
-          "Las declaraciones 'si-sino' hacen una cosa u otra.",
-          "¿Puedes resolver este complicado laberinto? Intenta seguir la pared de la izquierda."
+        "Un programa es una secuencia de declaraciones. Une un par de bloques de ‘avanza’ para ayudarme a llegar a la meta.",
+        "¿Cuál es la secuencia  de pasos para seguir este camino?",
+        "Las computadoras tienen memoria limitada. Llega al final de este camino usando tan sólo dos bloques. Utiliza 'repetir' para ejecutar un bloque más de una vez.",
+        "Llega a la meta con tan sólo cinco bloques.",
+        "Pegman will have to turn left when he cannot go straight.",
+        "Una condición 'si' va hacer algo solamente si la condición es verdadera. Intenta girar a la izquierda si hay camino a la izquierda.",
+        "Este laberinto parece más complicado que el anterior, pero no lo es.",
+        "Puedes usar más de una declaración 'si'.",
+        "Las declaraciones 'si-sino' hacen una cosa u otra.",
+        "¿Puedes resolver este complicado laberinto? Intenta seguir la pared de la izquierda."
       ],
       // Misc text.
       level: 'Nivel',

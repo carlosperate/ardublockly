@@ -35,9 +35,7 @@ Blockly.Language.draw_move_forward_100 = {
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle(MSG.move)
         .appendTitle(MSG.forward)
-        .appendTitle(MSG.moveBy)
         .appendTitle('100');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -56,9 +54,7 @@ Blockly.Language.draw_turn_right_90 = {
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle(MSG.turn)
         .appendTitle(MSG.right)
-        .appendTitle(MSG.turnBy)
         .appendTitle('90');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -80,10 +76,8 @@ Blockly.Language.draw_move = {
     this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck(Number)
-        .appendTitle(MSG.move)
         .appendTitle(new Blockly.FieldDropdown(
-            Blockly.Language.draw_move.DIRECTIONS), 'DIR')
-        .appendTitle(MSG.moveBy);
+            Blockly.Language.draw_move.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(MSG.moveTooltip);
@@ -91,7 +85,7 @@ Blockly.Language.draw_move = {
 };
 
 Blockly.Language.draw_move.DIRECTIONS =
-    [[MSG.forward, 'moveForward'], [MSG.backward, 'moveBackward']];
+    [[MSG.moveForward, 'moveForward'], [MSG.moveBackward, 'moveBackward']];
 
 Blockly.JavaScript.draw_move = function() {
   // Generate JavaScript for moving forward or backwards.
@@ -109,10 +103,8 @@ Blockly.Language.draw_turn = {
     this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck(Number)
-        .appendTitle(MSG.turn)
         .appendTitle(new Blockly.FieldDropdown(
-            Blockly.Language.draw_turn.DIRECTIONS), 'DIR')
-        .appendTitle(MSG.turnBy);
+            Blockly.Language.draw_turn.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(MSG.turnTooltip);
@@ -120,7 +112,7 @@ Blockly.Language.draw_turn = {
 };
 
 Blockly.Language.draw_turn.DIRECTIONS =
-    [[MSG.right, 'turnRight'], [MSG.left, 'turnLeft']];
+    [[MSG.turnRight, 'turnRight'], [MSG.turnLeft, 'turnLeft']];
 
 Blockly.JavaScript.draw_turn = function() {
   // Generate JavaScript for turning left or right.

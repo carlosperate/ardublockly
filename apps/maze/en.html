@@ -10,28 +10,16 @@
     var MSG = {
       // Block text.
       moveForward: 'move forward',
-      move: 'move',
-      forward: 'forward',
-      backward: 'backward',
-      turn: 'turn',
-      left: 'left',
-      right: 'right',
-      randomly: 'randomly',
-      path: 'path',
-      ifPath: 'if path',
+      turnLeft: 'turn left',
+      turnRight: 'turn right',
       do: 'do',
       else: 'else',
-      ahead: 'ahead',
-      toTheLeft: 'to the left',
-      toTheRight: 'to the right',
-      behind: 'behind',
+      pathAhead: 'if path ahead',
+      pathLeft: 'if path to the left',
+      pathRight: 'if path to the right',
       repeatUntilFinished: 'repeat until finished',
-      getX: 'get X position',
-      getY: 'get Y position',
-      getDirection: 'get direction',
       // Tooltips.
       moveForwardTooltip: 'Moves Pegman forward one space.',
-      moveTooltip: 'Moves Pegman forward or backward one space.',
       turnTooltip: 'Turns Pegman left or right by 90 degrees.',
       ifTooltip: 'If there is a path in the specified direction,\n' +
           'then do some actions.',
@@ -39,18 +27,9 @@
           'then do the first block of actions.\n' +
           'Otherwise, do the second block of actions.',
       whileTooltip: 'Repeat the enclosed actions until finish point is reached.',
-      isPathTooltip: 'Returns true if there is a path\n' +
-          'in the specified direction.',
-      getXTooltip: 'Returns Pegman\'s horizontal position.\n' +
-          'Left edge is 1, right edge is 8.',
-      getYTooltip: 'Returns Pegman\'s vertical position.\n' +
-          'Top edge is 1, bottom edge is 8.',
-      getDirectionTooltip: 'Retuns Pegman\'s direction.\n' +
-          'North: 0, East: 1, South: 2, West: 3.',
       codeTooltip: 'See generated JavaScript code.',
       linkTooltip: 'Save and link to blocks.',
       randomizeTooltip1: 'Randomize start and finish markers.',
-      randomizeTooltip2: 'Randomize maze.',  // Not currently used.
       // Level hints.
       hints: [undefined, // There is no level 0.
         "A program is a sequence of statements.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
@@ -62,7 +41,8 @@
         "This maze looks more complicated than the previous one, but it is not.",
         "You can use more than one 'if' statement.",
         "If-else statements will do one thing or the other.",
-        "Can you solve this complicated maze?  Try following the left-hand wall."],
+        "Can you solve this complicated maze?  Try following the left-hand wall. Advanced programmers only!"
+      ],
       // Misc text.
       level: 'Level',
       capacity0: 'You have <span id="capacityNumber">0</span> blocks left.',

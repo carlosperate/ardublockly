@@ -11,28 +11,16 @@
     var MSG = {
       // Block text.
       moveForward: 'pohyb vpřed',
-      move: 'pohyb',
-      forward: 'vpřed',
-      backward: 'zpět',
-      turn: 'otočit',
-      left: 'levá',
-      right: 'pravá',
-      randomly: 'náhodně',
-      path: 'cesta',
-      ifPath: 'pokud cesta',
+      turnLeft: 'otočit levá',
+      turnRight: 'otočit pravá',
       do: 'udělej',
       else: 'jinak',
-      ahead: 'vpřed',
-      toTheLeft: 'doleva',
-      toTheRight: 'doprava',
-      behind: 'za',
+      pathAhead: 'pokud cesta vpřed',
+      pathLeft: 'pokud cesta doleva',
+      pathRight: 'pokud cesta doprava',
       repeatUntilFinished: 'opakuj až do konce',
-      getX: 'vezmi pozici X',
-      getY: 'vezmi pozici Y',
-      getDirection: 'vezmi směr',
       // Tooltips.
       moveForwardTooltip: 'Pohne Pegmanem vpřed o jedno pole.',
-      moveTooltip: 'Pohne Pegmanem vpřed nebo zpět o jedno pole.',
       turnTooltip: 'Otočí Pegmana vlevo nebo vpravo o 90 stupňů.',
       ifTooltip: 'Pokud je v daném směru cesta,\n' +
           'pak proveď nějakou akci.',
@@ -40,17 +28,9 @@
           'pak proveď posloupnost akcí.\n' +
           'V opačném případě proveď druhou posloupnost akcí.',
       whileTooltip: 'Opakuj obsažené akce do té doby, dokud není dosažen cílový bod.',
-      isPathTooltip: 'Vrací pravdu pokud existuje cesta v daném směru.',
-      getXTooltip: 'Vrací Pagmanovu horizontální pozici.\n' +
-          'Levý kraj je 1, pravý kraj je 8.',
-      getYTooltip: 'Vrací Pagmanovu vertikální pozici.\n' +
-          'Horní okraj je 1, spodní okraj je 8.',
-      getDirectionTooltip: 'Vrací Pagmanův směr.\n' +
-          'Sever: 0, Východ: 1, Jih: 2, Západ: 3.',
       codeTooltip: 'Zobraz generovaný JavaScriptový kód.',
       linkTooltip: 'Ulož a spoj bloky..',
       randomizeTooltip1: 'Vygeneruj náhodně pozice startovního a cílového bodu.',
-      randomizeTooltip2: 'Vygeneruj náhodné bludiště.',  // Not currently used.
       // Level hints.
       hints: [undefined, // There is no level 0.
         "Program je posloupnost příkazů.  Poskládej několik pohybů vpřed dohromady a pomoc mi dosáhnout cíle.",
@@ -62,7 +42,8 @@
         "Toto bludiště na první pohled vypadá komplikovaněji než to předchozí, ale není.",
         "Můžeš použít více něž jeden výraz 'pokud'.",
         "Příkaz 'pokud-jinak' provede buď něco, nebo něco jiného.",
-        "Dokážeš vyřešit toto komplikované bludiště?  Zkus se přidržovat zdi po levé ruce."],
+        "Dokážeš vyřešit toto komplikované bludiště?  Zkus se přidržovat zdi po levé ruce."
+      ],
       // Misc text.
       level: 'Level',
       capacity0: 'Počet zbývajících bloků <span id="capacityNumber">0</span>.',

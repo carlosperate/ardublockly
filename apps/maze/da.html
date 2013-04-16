@@ -11,28 +11,16 @@
     var MSG = {
       // Block text.
       moveForward: 'flyt fremad',
-      move: 'flyt',
-      forward: 'fremad',
-      backward: 'tilbage',
-      turn: 'drej',
-      left: 'venstre',
-      right: 'højre',
-      randomly: 'tilfældigt',
-      path: 'sti',
-      ifPath: 'hvis sti',
+      turnLeft: 'drej venstre',
+      turnRight: 'drej højre',
       do: 'gør',
       else: 'ellers',
-      ahead: 'foran',
-      toTheLeft: 'til venstre',
-      toTheRight: 'til højre',
-      behind: 'bagved',
+      pathAhead: 'hvis sti foran',
+      pathLeft: 'hvis sti til venstre',
+      pathRight: 'hvis sti til højre',
       repeatUntilFinished: 'gentag indtil færdig',
-      getX: 'hent X position',
-      getY: 'hent Y position',
-      getDirection: 'hent retning',
       // Tooltips.
       moveForwardTooltip: 'Flytter pindemand et tern fremad.',
-      moveTooltip: 'Flytter pindemand et tern fremad eller et tern tilbage.',
       turnTooltip: 'Drejer pindemand 90 grader til højre eller venstre.',
       ifTooltip: 'Hvis der er en sti i den angivne retning,\n' +
           'så udfør nogle handlinger.',
@@ -40,30 +28,21 @@
           'så udfør den første handlingsblok.\n' +
           'Hvis ikke, så udfør den anden handlingsblok.',
       whileTooltip: 'Gentag handlingsblok indtil slutpunktet er nået.',
-      isPathTooltip: 'Returnerer sand hvis der er en sti\n' +
-          'i den angivne retning.',
-      getXTooltip: 'Returnerer Pindemands horisontale position..\n' +
-          'Venstre kant er 1, højre kant er 8.',
-      getYTooltip: 'Returnerer Pindemands vertikale positiion.\n' +
-          'Øverste kant er 1, nederste kant er 8.',
-      getDirectionTooltip: 'Returnerer Pindemands retning.\n' +
-          'Nord: 0, Øst: 1, Syd: 2, Vest: 3.',
       codeTooltip: 'Se den genererede JavaScript kode.',
       linkTooltip: 'Gem og link til blokke.',
       randomizeTooltip1: 'Placér tilfældige startpunkter og slutpunkter.',
-      randomizeTooltip2: 'Lav en tilfældig labyrint.',
       // Level hints.
       hints: [undefined, // There is no level 0.
-                  "Et program er en sekvens af erklæringer. Sæt et par 'flyt fremad' blokke sammen for at hjælpe mig til at nå målet,",
-                  "Hvad er sekvensen af handlinger for at følge denne sti?",
-                  "Computere har begrænset hukommelse. Prøv at nå enden af denne sti ved kun at bruge to blokke. Brug 'gentag' til at køre en blok mere end én gang.",
-                  "Nå målet ved kun at bruge fem blokke.",
-                  "Pindeman er nødt til at dreje til venstre når han ikke kan gå lige ud.",
-                  "En 'hvis' sætning vil kun gøre noget hvis betingelsen er sand. Prøv at dreje til venstre hvis der er en sti til venstre.",
-                  "Denne labyring ser mere kompliceret ud en den forrige, men det er den ikke.",
-                  "Du kan bruge mere end en 'hvis' sætning.",
-                  "Hvis-ellers sætninger vil gøre den ene eller anden ting.",
-                  "Kan du løse denne komplicerede labyrint? Prøv at følge den væggen på venstre hånd."
+        "Et program er en sekvens af erklæringer. Sæt et par 'flyt fremad' blokke sammen for at hjælpe mig til at nå målet,",
+        "Hvad er sekvensen af handlinger for at følge denne sti?",
+        "Computere har begrænset hukommelse. Prøv at nå enden af denne sti ved kun at bruge to blokke. Brug 'gentag' til at køre en blok mere end én gang.",
+        "Nå målet ved kun at bruge fem blokke.",
+        "Pindeman er nødt til at dreje til venstre når han ikke kan gå lige ud.",
+        "En 'hvis' sætning vil kun gøre noget hvis betingelsen er sand. Prøv at dreje til venstre hvis der er en sti til venstre.",
+        "Denne labyring ser mere kompliceret ud en den forrige, men det er den ikke.",
+        "Du kan bruge mere end en 'hvis' sætning.",
+        "Hvis-ellers sætninger vil gøre den ene eller anden ting.",
+        "Kan du løse denne komplicerede labyrint? Prøv at følge den væggen på venstre hånd."
       ],
       // Misc text.
       level: 'Bane',

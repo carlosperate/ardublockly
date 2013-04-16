@@ -10,28 +10,16 @@
     var MSG = {
       // Block text.
       moveForward: 'laufe vorwärts',
-      move: 'laufe',
-      forward: 'vorwärts',
-      backward: 'zurück',
-      turn: 'drehen',
-      left: 'links herum',
-      right: 'rechts herum',
-      randomly: 'zufällig',
-      path: 'ein Pfad ist',
-      ifPath: 'wenn ein Pfad',
+      turnLeft: 'drehen links herum',
+      turnRight: 'drehen rechts herum',
       do: 'mache',
       else: 'ansonsten',
-      ahead: 'vor Packman',
-      toTheLeft: 'links von Packman',
-      toTheRight: 'rechts von Packman',
-      behind: 'hinter Packman',
+      pathAhead: 'wenn ein Pfad vor Packman',
+      pathLeft: 'wenn ein Pfad links von Packman',
+      pathRight: 'wenn ein Pfad rechts von Packman',
       repeatUntilFinished: 'wiederhole bis zum Ziel',
-      getX: 'get X position',
-      getY: 'get Y position',
-      getDirection: 'get direction',
       // Tooltips.
       moveForwardTooltip: 'Packman läuft 1 Feld vor.',
-      moveTooltip: 'Packman läuft 1 Feld vor oder zurück.',
       turnTooltip: 'Dreht Packman nach links oder rechts.',
       ifTooltip: 'Führe eine Aktion aus,\n' +
           'falls sich an der angegebenen Position\n' +
@@ -40,31 +28,23 @@
           'dann führe die erste Anweisung aus.\n' +
           'Anderfalls führe die zweite Anweisung aus.',
       whileTooltip: 'Führe die angegebene Aktion aus, bis das Ziel erreicht wurde.',
-      isPathTooltip: 'Returns true if there is a path\n' +
-          'in the specified direction.',
-      getXTooltip: 'Returns Pegman\'s horizontal position.\n' +
-          'Left edge is 1, right edge is 8.',
-      getYTooltip: 'Returns Pegman\'s vertical position.\n' +
-          'Top edge is 1, bottom edge is 8.',
-      getDirectionTooltip: 'Retuns Pegman\'s direction.\n' +
-          'North: 0, East: 1, South: 2, West: 3.',
       codeTooltip: 'Erzeugten JavaScript Code anzeigen.',
       linkTooltip: 'Blöcke abspeichern und Link erzeugen.',
       randomizeTooltip1: 'Randomize start and finish markers.',
-      randomizeTooltip2: 'Randomize maze.',
       // Level hints.
       hints: [undefined, // There is no level 0.
-          "Ein Programm besteht aus einer Aneinanderreihungen von Anweisungen. Verbinde einige 'laufe vorwärts' Blöcke, um mir zu helfen um das Ziel zu erreichen.",
-          "Welche Anweisungen werden benötigt um dieses Labyrinth zu durchlaufen?",
-          "Computer haben begrenzten Speicher. Dieses Labyrinth lässt sich mit nur 2 Anweisungen lösen. Benutze 'wiederholen' um eine Anweisung mehr als ein mal aus zu führen.",
-          "Für dieses Labyrinth hast du nur 5 Anweisungen zur verfügung.",
-          "Pacman dreht sich links herum, wenn er nicht weiter geradeaus gehen kann.",
-          "Eine 'wenn' Bedingung wird führt etwas nur aus, wenn die Bedingung wahr ist.  Versuche die Anweisung 'wenn ein Pfad vor Packman' aus.",
-          "Dieses Labyrinth sieht schwieriger aus als die vorherigen. Ist es aber nicht.",
-          "Du kannst zwei 'wenn' Bedingungen in einander verschachteln.",
-          "Wenn-ansonsten Anweisungen führen etwas aus wenn eine Bedingung zutrifft oder eine Alternative.",
-          "Schaffst du dieses komplexe Labyrinth.  Folge der Wand."
+        "Ein Programm besteht aus einer Aneinanderreihungen von Anweisungen. Verbinde einige 'laufe vorwärts' Blöcke, um mir zu helfen um das Ziel zu erreichen.",
+        "Welche Anweisungen werden benötigt um dieses Labyrinth zu durchlaufen?",
+        "Computer haben begrenzten Speicher. Dieses Labyrinth lässt sich mit nur 2 Anweisungen lösen. Benutze 'wiederholen' um eine Anweisung mehr als ein mal aus zu führen.",
+        "Für dieses Labyrinth hast du nur 5 Anweisungen zur verfügung.",
+        "Pacman dreht sich links herum, wenn er nicht weiter geradeaus gehen kann.",
+        "Eine 'wenn' Bedingung wird führt etwas nur aus, wenn die Bedingung wahr ist.  Versuche die Anweisung 'wenn ein Pfad vor Packman' aus.",
+        "Dieses Labyrinth sieht schwieriger aus als die vorherigen. Ist es aber nicht.",
+        "Du kannst zwei 'wenn' Bedingungen in einander verschachteln.",
+        "Wenn-ansonsten Anweisungen führen etwas aus wenn eine Bedingung zutrifft oder eine Alternative.",
+        "Schaffst du dieses komplexe Labyrinth.  Folge der Wand."
       ],
+      // Misc text.
       level: 'Level',
       capacity0: 'Du hast <span id="capacityNumber">0</span> Anweisungen zur Verfügung.',
       capacity1: 'Du hast <span id="capacityNumber">1</span> Anweisung zur Verfügung.',
