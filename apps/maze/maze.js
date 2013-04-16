@@ -821,14 +821,16 @@ Maze.isPathLeft = function() {
 // Core functions.
 
 /**
- * Move pegman forward or backward.
+ * Attempt to move pegman forward or backward.
  * @param {number} direction Direction to move (0 = forward, 2 = backward).
  * @param {string} id ID of block that triggered this action.
+ * @throws {true} If the end of the maze is reached.
+ * @throws {false} If Pegman collides with a wall.
  */
 Maze.move = function(direction, id) {
   if (!Maze.isPath(direction)) {
     Blockly.Apps.log.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
-    return;
+    throw false;
   }
   // If moving backward, flip the effective direction.
   var effectiveDirection = Maze.pegmanD + direction;
