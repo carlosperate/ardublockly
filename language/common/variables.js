@@ -57,7 +57,7 @@ Blockly.Language.variables_get = {
     var xmlTitle = goog.dom.createDom('title', null, name);
     xmlTitle.setAttribute('name', 'VAR');
     var xmlBlock = goog.dom.createDom('block', null, xmlTitle);
-    xmlBlock.setAttribute('type', 'variables_set');
+    xmlBlock.setAttribute('type', this.contextMenuType_);
     option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
     options.push(option);
   }
