@@ -341,8 +341,6 @@ Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90
 Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'xóa khoảng trắng từ bên trái và phải';
 Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'xóa khoảng trắng từ bên trái';
 Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'xóa khoảng trắng từ bên phải';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDE = '';
 Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Hoàn trả bản sao của văn bản sau khi\n' +
     'xóa khoảng trắng từ một hoặc hai bên.';
 

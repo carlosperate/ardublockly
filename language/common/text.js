@@ -397,33 +397,11 @@ Blockly.Language.text_trim = {
   helpUrl: Blockly.LANG_TEXT_TRIM_HELPURL,
   init: function() {
     this.setColour(160);
-    var menu = new Blockly.FieldDropdown(this.OPERATORS, function(value) {
-      var plural = (value == 'BOTH');
-      this.sourceBlock_.updatePlural(plural);
-    });
     this.appendValueInput('TEXT')
         .setCheck(String)
-        .appendTitle(menu, 'MODE')
-        .appendTitle(Blockly.LANG_TEXT_TRIM_TITLE_SIDES, 'SIDES');
+        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'MODE');
     this.setOutput(true, String);
     this.setTooltip(Blockly.LANG_TEXT_TRIM_TOOLTIP);
-  },
-  mutationToDom: function() {
-    // Save whether the 'sides' title should be plural or singular.
-    var container = document.createElement('mutation');
-    var plural = (this.getTitleValue('MODE') == 'BOTH');
-    container.setAttribute('plural', plural);
-    return container;
-  },
-  domToMutation: function(xmlElement) {
-    // Restore the 'sides' title as plural or singular.
-    var plural = (xmlElement.getAttribute('plural') == 'true');
-    this.updatePlural(plural);
-  },
-  updatePlural: function(plural) {
-    // Set the 'sides' title as plural or singular.
-    this.setTitleValue(plural ? Blockly.LANG_TEXT_TRIM_TITLE_SIDES :
-        Blockly.LANG_TEXT_TRIM_TITLE_SIDE, 'SIDES');
   }
 };
 

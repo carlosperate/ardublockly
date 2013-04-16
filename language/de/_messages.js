@@ -340,11 +340,9 @@ Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Wandelt Schreibweise von Texten um,\n' +
     'den ersten Buchstaben jedes Wortes gross und die anderen klein.';
 
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'entferne Leerzeichen von Anfang und Ende';
-Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'entferne Leerzeichen von Anfang';
-Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'entferne Leerzeichen von Ende';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'Seiten';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDE = 'Seite';
+Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'entferne Leerzeichen von Anfang und Ende Seiten';
+Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'entferne Leerzeichen von Anfang Seite';
+Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'entferne Leerzeichen von Ende Seite';
 Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Entfernt Leerzeichen vom Anfang und / oder Ende\n' +
     'eines Textes.';
 

@@ -335,11 +335,9 @@ Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = 'to Title Case';
 Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Return a copy of the text in a different case.';
 
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'trim spaces from both';
-Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'trim spaces from left';
-Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'trim spaces from right';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = 'sides';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDE = 'side';
+Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'trim spaces from both sides';
+Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'trim spaces from left side';
+Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'trim spaces from right side';
 Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Return a copy of the text with spaces\n' +
     'removed from one or both ends.';
 

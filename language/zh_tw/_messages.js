@@ -335,11 +335,9 @@ Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = '改成 頭字母大寫';
 Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Return a copy of the text in a different case.';
 
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = '從 兩側';
-Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = '從 左側';
-Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = '從 右側';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDES = '消除空格';
-Blockly.LANG_TEXT_TRIM_TITLE_SIDE = '消除空格';
+Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = '從 兩側 消除空格';
+Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = '從 左側 消除空格';
+Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = '從 右側 消除空格';
 Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Return a copy of the text with spaces\n' +
     'removed from one or both ends.';
 
