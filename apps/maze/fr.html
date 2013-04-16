@@ -1,0 +1,71 @@
+<html dir="ltr" lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Thierry Grandpierre">
+  <title>Le Labyrinthe Blockly</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'avance',
+      turnLeft: 'tourne à gauche',
+      turnRight: 'tourne à droite',
+      do: 'faire',
+      else: 'sinon',
+      pathAhead: 'si chemin devant',
+      pathLeft: 'si chemin vers la gauche',
+      pathRight: 'si chem vers la droite',
+      repeatUntilFinished: 'répète jusqu\'a l\'arrivée',
+      // Tooltips.
+      moveForwardTooltip: 'Fais avancer monsieur Pegman en avant d\'un espace.',
+      turnTooltip: 'Fais tourner monsieur Pegman à gauche ou à droite de 90 degrés.',
+      ifTooltip: 'Si il y\'a un chemin dans la direction specifiée,\n' +
+          'alors effectue ces actions.',
+      ifelseTooltip: 'Si il y\'a un chemin dans la direction specifiée,\n' +
+          'alors fais le premier bloc d\'actions.\n' +
+          'Sinon fais le second bloc d\'actions.',
+      whileTooltip: 'Répète les blocs qui sont à l\'intérieur jusqu\'à atteindre le but.',
+      codeTooltip: 'Voir le code JavaScript généré\'.',
+      linkTooltip: 'Sauvegarde et lies aux blocs.',
+      randomizeTooltip1: 'Tire au hasard la position de début et de fin.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+        "Un programme est une séquence d'instructions.  Empile des blocs d'instructions 'avance' pour m'aider à atteindre mon but.",
+        "Qu\'elle est la séquence de blocs à exécuter pour suivre ce chemin ?",
+        "Les ordinateurs n\'ont pas beaucoup de mémoire. Utilise seulement deux blocs pour atteindre le but.  Utilise le bloc 'repète' pour exécuter un bloc plus d'une fois.",
+        "Atteint le but en utilisant seulement cinq blocs.",
+        "Monsieur Pegman devra tourner à gauche quand il ne pourra plus avancer tout droit.",
+        "Un bloc 'si' va exécuter ce qu'il y a dedans seulement si la condition est vraie. Essaie de tourner à gauche si il y a un chemin sur la gauche.",
+        "Ce labyrinthe a l\'air plus compliqué que le précédent, mais il ne l'est pas.",
+        "Tu peux utiliser plus d'une seule instruction 'si'.",
+        "Un bloc 'Si-Sinon' exécute une chose ou une autre.",
+        "Peux tu résoudre ce labyrinthe plus difficile?  Essaie de suivre le mur du côté de ta main gauche."],
+      // Misc text.
+      level: 'Level',
+      capacity0: 'Il te reste <span id="capacityNumber">0</span> blocs.',
+      capacity1: 'Il te reste <span id="capacityNumber">1</span> bloc.',
+      capacity2: 'Il te reste <span id="capacityNumber">%1</span> blocs.',
+      runProgram: 'Execute le programme',
+      resetProgram: '\u00A0 \u00A0 Reset \u00A0 \u00A0',
+      nextLevel: 'Bravo !\nEst tu prêt pour le niveau %1?',
+      finalLevel: 'Bravo !\n Tu as fini le dernier niveau.',
+      title: 'Labyrinthe Blocky',
+      oneTopBlock: 'Dans ce niveau, tu as besoin d\'empiler les blocs les uns au dessus des autres dans la zone de travail blanche.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Il y a eu un problème avec la demande.\n';
+      BlocklyStorage.LINK_ALERT = 'Partagez vos blocs grâce à ce lien:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Désolé, "%1" ne correspond pas à un fichier Blockly sauvegarde.';
+      BlocklyStorage.XML_ERROR = 'Impossible de charger le fichier de sauvegarde.\n'+
+          'Peut être a t-il ete créé avec une autre version de Blockly?\nXML: ';
+    }
+    var languageSrc = ['fr/_messages.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
