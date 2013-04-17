@@ -433,7 +433,7 @@ Maze.init = function() {
     // Load the editor with a starting block.
     var xml = Blockly.Xml.textToDom(
         '<xml>' +
-        '  <block type="maze_moveForward" x="250" y="70"></block>' +
+        '  <block type="maze_moveForward" x="70" y="70"></block>' +
         '</xml>');
     // Configure any level-specific buttons.
     if (level > 9) {

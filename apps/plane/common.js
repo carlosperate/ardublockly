@@ -61,7 +61,7 @@ function init() {
   // Load the editor with a starting block.
   var xml = Blockly.Xml.textToDom(
       '<xml>' +
-      '  <block type="plane_set_seats" x="220" y="50"></block>' +
+      '  <block type="plane_set_seats" x="70" y="70"></block>' +
       '</xml>');
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   seatsBlock = Blockly.mainWorkspace.getTopBlocks(false)[0];

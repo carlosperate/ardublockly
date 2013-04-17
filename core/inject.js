@@ -223,14 +223,17 @@ Blockly.createDom_ = function(container) {
           for (var b = 0, block; block = blocks[b]; b++) {
             var xy = block.getRelativeToSurfaceXY();
             var bBox = block.getSvgRoot().getBBox();
-            if ((xy.y < MARGIN - bBox.height) ||  // Off the top.
-                (Blockly.RTL ?
-                 xy.x > svgSize.width - flyout.width_ + MARGIN * 2 :
-                 xy.x < flyout.width_ - MARGIN * 2) ||  // Over the flyout.
-                (xy.y > svgSize.height - MARGIN) ||  // Off the bottom.
-                (Blockly.RTL ? xy.x < MARGIN :
-                 xy.x > svgSize.width - MARGIN)  // Off the far edge.
-                ) {
+            var offTop = xy.y < MARGIN - bBox.height;
+            var offBottom = xy.y > svgSize.height - MARGIN;
+            var overFlyout = Blockly.RTL ?
+                xy.x > svgSize.width - flyout.width_ + MARGIN * 2 -
+                Blockly.mainWorkspace.scrollX :
+                xy.x < flyout.width_ - MARGIN * 2 -
+                Blockly.mainWorkspace.scrollX;
+            var offEdge = Blockly.RTL ?
+                xy.x < MARGIN - Blockly.mainWorkspace.scrollX :
+                xy.x > svgSize.width - MARGIN - Blockly.mainWorkspace.scrollX;
+            if (offTop || offBottom || overFlyout || offEdge) {
               block.dispose(false, true);
             }
           }
@@ -293,6 +296,12 @@ Blockly.init_ = function() {
       Blockly.mainWorkspace.flyout_.init(Blockly.mainWorkspace,
           Blockly.getMainWorkspaceMetrics, true);
       Blockly.mainWorkspace.flyout_.show(Blockly.languageTree.childNodes);
+      // Translate the workspace sideways to avoid the fixed flyout.
+      Blockly.mainWorkspace.scrollX = Blockly.mainWorkspace.flyout_.width_;
+      var translation = 'translate(' + Blockly.mainWorkspace.scrollX + ', 0)';
+      Blockly.mainWorkspace.getCanvas().setAttribute('transform', translation);
+      Blockly.mainWorkspace.getBubbleCanvas().setAttribute('transform',
+                                                           translation);
       addScrollbars = false;
     }
   }

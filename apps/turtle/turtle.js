@@ -109,12 +109,12 @@ Turtle.init = function() {
     var xml;
     if (Turtle.level <= 2) {
       xml = '<xml>' +
-          '  <block type="draw_move_forward_100" x="350" y="70"></block>' +
+          '  <block type="draw_move_forward_100" x="70" y="70"></block>' +
           '</xml>';
     } else {
       // Load the editor with starting blocks.
       xml = '<xml>' +
-          '  <block type="draw_move" x="85" y="100">' +
+          '  <block type="draw_move" x="70" y="70">' +
           '    <value name="VALUE">' +
           '      <block type="math_number">' +
           '        <title name="NUM">10</title>' +
