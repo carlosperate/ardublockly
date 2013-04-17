@@ -35,7 +35,7 @@ Blockly.Language.draw_move_forward_100 = {
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle(MSG.forward)
+        .appendTitle(MSG.moveForward)
         .appendTitle('100');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -54,7 +54,7 @@ Blockly.Language.draw_turn_right_90 = {
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle(MSG.right)
+        .appendTitle(MSG.turnRight)
         .appendTitle('90');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -149,7 +149,6 @@ Blockly.Language.draw_pen = {
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle(MSG.pen)
         .appendTitle(new Blockly.FieldDropdown(this.STATE), 'PEN');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -157,7 +156,7 @@ Blockly.Language.draw_pen = {
   }
 };
 
-Blockly.Language.draw_pen.STATE = [[MSG.up, 'penUp'], [MSG.down, 'penDown']];
+Blockly.Language.draw_pen.STATE = [[MSG.penUp, 'penUp'], [MSG.penDown, 'penDown']];
 
 Blockly.JavaScript.draw_pen = function() {
   // Generate JavaScript for pen up/down.
@@ -194,14 +193,13 @@ Blockly.Language.turtle_visibility = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown(this.STATE), 'VISIBILITY')
-        .appendTitle(MSG.turtle);
+        .appendTitle(new Blockly.FieldDropdown(this.STATE), 'VISIBILITY');
     this.setTooltip(MSG.turtleVisibilityTooltip);
   }
 };
 
 Blockly.Language.turtle_visibility.STATE =
-    [[MSG.hide, 'hideTurtle'], [MSG.show, 'showTurtle']];
+    [[MSG.hideTurtle, 'hideTurtle'], [MSG.showTurtle, 'showTurtle']];
 
 Blockly.JavaScript.turtle_visibility = function() {
   // Generate JavaScript for changing turtle visibility.
