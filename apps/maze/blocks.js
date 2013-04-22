@@ -59,7 +59,8 @@ Blockly.Language.maze_turn = {
 };
 
 Blockly.Language.maze_turn.DIRECTIONS =
-    [[MSG.turnLeft, 'turnLeft'], [MSG.turnRight, 'turnRight']];
+    [[MSG.turnLeft + ' \u27F2', 'turnLeft'],
+     [MSG.turnRight + ' \u27F3', 'turnRight']];
 
 Blockly.JavaScript.maze_turn = function() {
   // Generate JavaScript for turning left or right.
@@ -81,8 +82,8 @@ Blockly.Language.maze_isPath = {
 
 Blockly.Language.maze_isPath.DIRECTIONS =
     [[MSG.pathAhead, 'isPathForward'],
-     [MSG.pathLeft, 'isPathLeft'],
-     [MSG.pathRight, 'isPathRight']];
+     [MSG.pathLeft + ' \u27F2', 'isPathLeft'],
+     [MSG.pathRight + ' \u27F3', 'isPathRight']];
 
 Blockly.JavaScript.maze_isPath = function() {
   // Generate JavaScript for checking if there is a path.
