@@ -55,7 +55,7 @@ Blockly.Language.draw_turn_right_90 = {
     this.setColour(160);
     this.appendDummyInput()
         .appendTitle(MSG.turnRight)
-        .appendTitle('90');
+        .appendTitle('90\u00B0');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(MSG.turnRight90Tooltip);
