@@ -221,6 +221,9 @@ Blockly.createDom_ = function(container) {
           var MARGIN = 20;
           var blocks = Blockly.mainWorkspace.getTopBlocks(false);
           for (var b = 0, block; block = blocks[b]; b++) {
+            if (!block.deletable) {
+              continue;
+            }
             var xy = block.getRelativeToSurfaceXY();
             var bBox = block.getSvgRoot().getBBox();
             var offTop = xy.y < MARGIN - bBox.height;

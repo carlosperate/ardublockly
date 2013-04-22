@@ -1483,5 +1483,8 @@ Blockly.Block.prototype.setWarningText = function(text) {
  * Lays out and reflows a block based on its contents and settings.
  */
 Blockly.Block.prototype.render = function() {
+  if (!this.svg_) {
+    throw 'Uninitialized block cannot be rendered.  Call block.initSvg()';
+  }
   this.svg_.render();
 };

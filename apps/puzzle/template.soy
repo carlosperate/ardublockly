@@ -1,0 +1,39 @@
+{namespace puzzlepage}
+
+/**
+ * This is a Closure Template.  Build with:
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ */
+
+/**
+ * Web page structure.
+ */
+{template .start}
+  <table id="header" width="100%">
+    <tr>
+      <td valign="bottom">
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
+            <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
+      </td>
+      <td align="right">
+        <button id="helpButton" onclick="Puzzle.showHelp();">{$ij.MSG.help}</button>
+        <button id="checkButton" class="launch" onclick="Puzzle.checkAnswers();">{$ij.MSG.checkAnswers}</button>
+      </td>
+    </tr>
+  </table>
+
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../language/{$ij.MSG.languageSrc}"></script>
+  <script type="text/javascript" src="blocks.js"></script>
+  <div id="blockly"></div>
+
+  <div id="shadow"></div>
+
+  <div id="help">
+    <div style="padding-bottom: 0.7ex">{$ij.MSG.helpText}</div>
+    <div><img src="{$ij.MSG.helpImage}"></div>
+    <div style="text-align: right; padding-top: 1ex; padding-right: 3ex">
+      <button id="okButton" onclick="Puzzle.hideHelp()">{$ij.MSG.helpOk}</button>
+    </div>
+  </div>
+{/template}

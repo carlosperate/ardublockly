@@ -1,0 +1,63 @@
+body {
+  background-color: white;
+  font-family: sans-serif;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+}
+
+/* Buttons */
+button {
+  margin: 5px;
+  margin-right: 12px;
+  margin-left: 0;
+  padding: 10px;
+  font-size: large;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  background-color: #eee;
+  color: black;
+}
+button.launch {
+  border: 1px solid #d43;
+  background-color: #d43;
+  color: white;
+}
+button:active {
+  border: 1px solid blue !important;
+}
+button:hover {
+  box-shadow: 2px 2px 5px #888;
+}
+#blockly {
+  position: fixed;
+}
+#help {
+  display: none;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid black;
+  width: 50%;
+  position: absolute;
+  left: 2.5em;
+  top: 5em;
+  z-index: 1;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  -moz-box-shadow: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  box-shadow: 5px 5px 5px #888;
+  padding: 10px;
+}
+#shadow {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.3;
+}
