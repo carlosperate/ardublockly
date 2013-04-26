@@ -2,38 +2,232 @@
 
 /**
  * This is a Closure Template.  Build with:
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
  */
 
 /**
  * Web page structure.
  */
 {template .start}
+  <div id="MSG" style="display:none">
+    <span id="country1">{msg meaning="Puzzle.country1" desc="the name of the country Australia"}Australia{/msg}</span>
+    <span id="country1Flag">flag_au.png</span>
+    <span id="country1FlagHeight">50</span>
+    <span id="country1FlagWidth">100</span>
+    <span id="country1Language">
+      {msg meaning="Puzzle.country1Language" desc="the English language"}
+        English
+      {/msg}
+    </span>
+    <span id="country1City1">
+      {msg meaning="Puzzle.country1City1" desc="the city Melbourne in Australia"}
+         Melbourne
+      {/msg}
+    </span>
+    <span id="country1City2">
+      {msg meaning="Puzzle.country1City2" desc="the city Sydney in Australia"}
+        Sydney
+      {/msg}
+    </span>
+    <span id="country1HelpUrl">
+      {msg meaning="Puzzle.country1HelpUrl"
+           desc="the URL of a page with basic information about Australia"}
+        http://en.wikipedia.org/wiki/Australia
+      {/msg}
+    </span>
+    <span id="country2">
+      {msg meaning="Puzzle.country2" desc="the country Germany"}
+        Germany
+      {/msg}
+    </span>
+    <span id="country2Flag">flag_de.png</span>
+    <span id="country2FlagHeight">60</span>
+    <span id="country2FlagWidth">100</span>
+    <span id="country2Language">
+      {msg meaning="Puzzle.country2Language" desc="the German language"}
+        German
+      {/msg}
+    </span>
+    <span id="country2City1">
+      {msg meaning="Puzzle.country2City1" desc="the city Berlin in Germany"}
+        Berlin
+      {/msg}
+    </span>
+    <span id="country2City2">
+      {msg meaning="Puzzle.country2City2" desc="the city Munich (München) in Germany"}
+        Munich
+      {/msg}
+    </span>
+    <span id="country2HelpUrl">
+      {msg meaning="Puzzle.country2HelpUrl"
+           desc="the URL of a page with basic information about Germany"}
+        http://en.wikipedia.org/wiki/Germany
+      {/msg}
+    </span>
+    <span id="country3">
+      {msg meaning="Puzzle.country3" desc="the People's Republic of China"}
+        China
+      {/msg}
+    </span>
+    <span id="country3Flag">flag_cn.png</span>
+    <span id="country3FlagHeight">66</span>
+    <span id="country3FlagWidth">100</span>
+    <span id="country3Language">
+      {msg meaning="Puzzle.country3Language" desc="the Chinese language"}
+        Chinese
+      {/msg}
+    </span>
+    <span id="country3City1">
+      {msg meaning="Puzzle.country3City1" desc="the capital city of China (also known as Peking_)"}
+        Beijing
+      {/msg}
+    </span>
+    <span id="country3City2">
+      {msg meaning="Puzzle.country3City2" desc="the city Shanghai in China"}
+        Shanghai
+      {/msg}
+    </span>
+    <span id="country3HelpUrl">
+      {msg meaning="Puzzle.country3HelpUrl"
+           desc="the URL of a page with basic information about China"}
+        http://en.wikipedia.org/wiki/China
+      {/msg}
+    </span>
+    <span id="country4">
+      {msg meaning="Puzzle.country4" desc="the name of the country Brazil"}
+        Brazil
+      {/msg}
+    </span>
+    <span id="country4Flag">flag_br.png</span>
+    <span id="country4FlagHeight">70</span>
+    <span id="country4FlagWidth">100</span>
+    <span id="country4Language">
+      {msg meaning="Puzzle.country4Language" desc="the Portuguese language"}
+        Portuguese
+      {/msg}
+    </span>
+    <span id="country4City1">
+      {msg meaning="Puzzle.country4City1" desc="the city Rio de Janeiro in Brazil"}
+        Rio de Janeiro
+      {/msg}
+    </span>
+    <span id="country4City2">
+      {msg meaning="Puzzle.country4City2" desc="the city São Paulo in Brazil"}
+        São Paulo
+      {/msg}
+    </span>
+    <span id="country4HelpUrl">
+      {msg meaning="Puzzle.country4HelpUrl"
+           desc="the URL of a page with basic information about Brazil"}
+        http://en.wikipedia.org/wiki/Brazil
+      {/msg}
+    </span>
+    <span id="flag">
+      {msg meaning="Puzzle.flag" desc="noun - the official flag representing a country"}
+        flag
+      {/msg}
+    </span>
+    <span id="language">
+      {msg meaning="Puzzle.language"
+           desc="prompt for the user to provide the official lantgage of a country"}
+        language:
+      {/msg}
+    </span>
+    <span id="languageChoose">
+      {msg meaning="Puzzle.languageChoose"
+           desc="initial text displayed in a dropdown menu from which the user should choose the language spoken in the indicated country"}
+        choose...
+      {/msg}
+    </span>
+    <span id="cities">
+      {msg meaning="Puzzle.cities" desc="a label preceding a list of cities"}
+        cities:
+      {/msg}
+    </span>
+    <span id="error0">
+      {msg meaning="Puzzle.error0"
+           desc="a congratulatory message displayed if the user placed all %1 blocks correctly, where %1 is an integer greater than 1.  The use of '\n', which indicates a new line, is optional."}
+        Perfect!\nAll %1 blocks are correct.
+      {/msg}
+    </span>
+    <span id="error1">
+      {msg meaning="Puzzle.error1"
+           desc="an encouraging error message displayed if the user placed all blocks except 1 correctly."}
+        Almost! One block is incorrect.
+      {/msg}
+    </span>
+    <span id="error2">
+      {msg meaning="Puzzle.error2"
+           desc="an error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one."}
+        %1 blocks are incorrect.
+      {/msg}
+    </span>
+    <span id="tryAgain">
+       {msg meaning="Puzzle.tryAgain"
+            desc="a message indicating that a visually distinguished block is incorrect and that the user should try to fix it.  The use of '\n', which indicates a new line, is optional."}
+         The highlighted block is not correct.\nKeep trying.
+       {/msg}
+    </span>
+    <span id="fullTitle">
+      {msg meaning="Puzzle.fullTitle"
+           desc="full title for page.  'Blockly' can be left unchanged or transliterated."}
+        Blockly Puzzle
+      {/msg}
+    </span>
+  </div>
   <table id="header" width="100%">
     <tr>
       <td valign="bottom">
         <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
-            <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
+            <a href="../index.html">Apps</a> &gt;
+            {msg meaning="Puzzle.title"
+                 desc="brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle."}
+              Puzzle
+            {/msg}
+        </h1>
       </td>
       <td align="right">
-        <button id="helpButton" onclick="Puzzle.showHelp();">{$ij.MSG.help}</button>
-        <button id="checkButton" class="launch" onclick="Puzzle.checkAnswers();">{$ij.MSG.checkAnswers}</button>
+        <button id="helpButton" onclick="Puzzle.showHelp();">
+          {msg meaning="Puzzle.help"
+               desc="the label on a button the user can press for help"}
+            Help
+          {/msg}
+        </button>
+        <button id="checkButton" class="launch" onclick="Puzzle.checkAnswers();">
+          {msg meaning="Puzzle.checkAnswers"
+               desc="a label on a button the user can press to check his/her answers"}
+            Check Answers
+          {/msg}
+        </button>
       </td>
     </tr>
   </table>
 
-  <script type="text/javascript" src="../../blockly_compressed.js"></script>
-  <script type="text/javascript" src="../../language/{$ij.MSG.languageSrc}"></script>
   <script type="text/javascript" src="blocks.js"></script>
   <div id="blockly"></div>
 
   <div id="shadow"></div>
 
   <div id="help">
-    <div style="padding-bottom: 0.7ex">{$ij.MSG.helpText}</div>
-    <div><img src="{$ij.MSG.helpImage}"></div>
+    <div style="padding-bottom: 0.7ex">
+      {msg meaning="Puzzle.helpText"
+           desc="Instructions for the puzzle.  For context, see 'http://blockly-demo.appspot.com/static/apps/puzzle/index.html'."}
+        For each country (green), attach its flag, choose its language, and make a stack of its cities.
+      {/msg}
+    </div>
+    <div>
+      <img src="{msg meaning="Puzzle.helpImage"
+                     desc="url of helpful image; this should only be changed by Blockly developers, not translators. (Later, create instructors for translators.)"}
+                  help_en.png
+                {/msg}">
+    </div>
     <div style="text-align: right; padding-top: 1ex; padding-right: 3ex">
-      <button id="okButton" onclick="Puzzle.hideHelp()">{$ij.MSG.helpOk}</button>
+      <button id="okButton" onclick="Puzzle.hideHelp()">
+        {msg meaning="Puzzle.helpOk"
+             desc="label on button for user to press when done reading help information"}
+          OK
+        {/msg}
+      </button>
     </div>
   </div>
 {/template}

@@ -28,13 +28,21 @@
  */
 var Puzzle = {};
 
-document.write(puzzlepage.start({}, null,
-    {MSG: MSG}));
+document.write(puzzlepage.start());
+
+var MSG = {};
 
 /**
  * Initialize Blockly and the puzzle.  Called on page load.
  */
 Puzzle.init = function() {
+  var spans = document.getElementById("MSG").getElementsByTagName("span");
+  for (var x = 0, span; span = spans[x]; x++) {
+    MSG[span.id] = span.innerHTML;
+    // Convert newline sequences.
+    MSG[span.id] = MSG[span.id].replace(/\\n/g, '\n');
+  }
+  document.title = MSG.fullTitle;
   // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
   // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
   var rtl = document.body.parentNode.dir == 'rtl';
