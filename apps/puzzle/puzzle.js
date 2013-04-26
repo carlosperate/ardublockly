@@ -67,6 +67,7 @@ Puzzle.init = function() {
     var block = new Blockly.Block(Blockly.mainWorkspace, 'country');
     block.setTitleValue(country, 'NAME');
     block.country = i;
+    block.helpUrl = MSG['country' + i + 'HelpUrl'];
     blocks.push(block);
     var flag = MSG['country' + i + 'Flag'];
     var flagHeight = MSG['country' + i + 'FlagHeight'];
