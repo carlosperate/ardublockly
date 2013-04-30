@@ -492,8 +492,14 @@ Maze.runButtonClick = function() {
     window.alert(MSG.oneTopBlock);
     return;
   }
-  document.getElementById('runButton').style.display = 'none';
-  document.getElementById('resetButton').style.display = 'inline';
+  var runButton = document.getElementById('runButton');
+  var resetButton = document.getElementById('resetButton');
+  // Ensure that Reset button is at least as wide as Run button.
+  if (!resetButton.style.minWidth) {
+    resetButton.style.minWidth = runButton.offsetWidth;
+  }
+  runButton.style.display = 'none';
+  resetButton.style.display = 'inline';
   Blockly.mainWorkspace.traceOn(true);
   Maze.execute();
 };
