@@ -28,20 +28,8 @@
  */
 var Turtle = {};
 
-Turtle.MAX_LEVEL = 3;
-Turtle.level = window.location.search.match(/[?&]level=(\d+)/);
-Turtle.level = Turtle.level ? Turtle.level[1] : 1;
-Turtle.level = Math.min(Math.max(1, Turtle.level), Turtle.MAX_LEVEL);
-
-// Temp disabling of levels.
-Turtle.level = Turtle.MAX_LEVEL;
-
 document.write(turtlepage.start({}, null,
-    {MSG: MSG,
-    level: Turtle.level,
-    maxLevel: Turtle.MAX_LEVEL}));
-var maxBlocks = [undefined, // Level 0.
-    7, 3, Infinity][Turtle.level];
+    {MSG: MSG}));
 
 Turtle.HEIGHT = 400;
 Turtle.WIDTH = 400;
@@ -66,7 +54,6 @@ Turtle.init = function() {
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
-       maxBlocks: maxBlocks,
        rtl: rtl,
        toolbox: toolbox,
        trashcan: true});
@@ -106,23 +93,16 @@ Turtle.init = function() {
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
   } else {
-    var xml;
-    if (Turtle.level <= 2) {
-      xml = '<xml>' +
-          '  <block type="draw_move_forward_100" x="70" y="70"></block>' +
-          '</xml>';
-    } else {
-      // Load the editor with starting blocks.
-      xml = '<xml>' +
-          '  <block type="draw_move" x="70" y="70">' +
-          '    <value name="VALUE">' +
-          '      <block type="math_number">' +
-          '        <title name="NUM">10</title>' +
-          '      </block>' +
-          '    </value>' +
-          '  </block>' +
-          '</xml>';
-    }
+    // Load the editor with starting blocks.
+    var xml = '<xml>' +
+        '  <block type="draw_move" x="70" y="70">' +
+        '    <value name="VALUE">' +
+        '      <block type="math_number">' +
+        '        <title name="NUM">10</title>' +
+        '      </block>' +
+        '    </value>' +
+        '  </block>' +
+        '</xml>';
     xml = Blockly.Xml.textToDom(xml);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
@@ -130,7 +110,6 @@ Turtle.init = function() {
   Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
   Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');
   Turtle.reset();
-  //Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
 };
 
 window.addEventListener('load', Turtle.init);
