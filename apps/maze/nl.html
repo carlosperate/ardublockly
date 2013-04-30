@@ -1,0 +1,72 @@
+<html dir="ltr" lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Johan Coppieters (johan.coppieters@howest.be)">
+  <title>Blockly Doolhof</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'ga vooruit',
+      turnLeft: 'draai links',
+      turnRight: 'draai rechts',
+      do: 'doe',
+      else: 'anders',
+      pathAhead: 'als de weg verder',
+      pathLeft: 'als de weg naar links',
+      pathRight: 'als de weg naar rechts',
+      repeatUntilFinished: 'doe tot gedaan',
+      // Tooltips.
+      moveForwardTooltip: 'Zet Pegman een blokje vooruit.',
+      turnTooltip: 'Draai Pegman links of rechts over 90 graden.',
+      ifTooltip: 'Als er een weg in de opgegeven richting is,\n' +
+          'doe dan bepaalde acties.',
+      ifelseTooltip: 'Als er een weg in de opgegeven richting is,\n' +
+          'doe dan de eerste groep acties.\n' +
+          'anders doe de tweede groep acties.',
+      whileTooltip: 'Doe de ingesloten instructies tot het doel bereikt is.',
+      codeTooltip: 'Bekijk de gegenereerde JavaScript code.',
+      linkTooltip: 'Bewaar en verwijs naar blokken.',
+      randomizeMarkerTooltip: 'Willekeurige start en einde.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+        "Een programma is een lijst van instructies.  Stop een paar 'ga vooruit' instructies samen en help me op mijn doel te bereiken.",
+        "Wat is de volgorde van instructies om de weg te volgen?",
+        "Computers hebben een beperkt geheugen.  Bereik het einde van de weg met enkel 2 instructies.  Gebruik 'herhaal' om een instructie meerdere keren uit te voeren.",
+        "Bereik het doel met enkel 5 instructies.",
+        "Een 'als' instructie zal enkel iets doen als de voorwaarde 'waar' is.  Probeer naar links te draaien als er een weg naar links is.",
+        "Dit doolhof ziet er ingewikkelder uit dan het vorige, maar dit is niet zo.",
+        "Je kan meer dan 1 'als' instructie gebruiken.",
+        "'als' / 'anders' instructies doen het ene of het andere.",
+        "Kun je dit ingewikkelde doolhof oplossen?  Probeer de linker muur te volgen.",
+        "Dit doolhof heeft gegevens structuren nodig. Enkel voor geavanceerde programmeurs!"
+      ],
+      // Misc text.
+      level: 'Niveau',
+      capacity0: 'Je hebt <span id="capacityNumber">0</span> instructies over.',
+      capacity1: 'Je hebt <span id="capacityNumber">1</span> instructie over.',
+      capacity2: 'Je hebt <span id="capacityNumber">%1</span> instructies over.',
+      runProgram: 'Test programma',
+      resetProgram: '\u00A0 \u00A0 Opnieuw \u00A0 \u00A0',
+      nextLevel: 'Proficiat!\nBen je klaar om naar niveau %1 te gaan?',
+      finalLevel: 'Proficiat!\nJe hebt het laatste niveau opgelost.',
+      title: 'Doolhof',
+      oneTopBlock: 'Op dit niveau moet je alle instructies samenleggen in het witte gedeelte.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Er was een probleem met de aanvraag.\n';
+      BlocklyStorage.LINK_ALERT = 'Deel je oplossing via deze link:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Sorry, "%1" Komt niet overeen met opgeslagen instructies';
+      BlocklyStorage.XML_ERROR = 'Kon je bewaarde instructies niet opladen.\n'+
+          'Misschien waren ze gemaakt met een andere versie van Blockly?\nXML: ';
+    }
+    var languageSrc = ['en/_messages.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
