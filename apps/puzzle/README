@@ -7,7 +7,7 @@ java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs templat
 java -jar ../../../closure-templates-msg-extractor/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
 
 # Create en.json, qqq.json.
-~/src/blockly2/blockly/branches/i18n/i18n/xliff_to_json.py extracted_msgs.xlf
+../../i18n/xliff_to_json.py extracted_msgs.xlf
 
 # Upload to translatewiki.net or:
 # Make a copy of en.json, changing name and locale string to target language.
@@ -19,7 +19,7 @@ sed -i 's/"locale": "en"/"locale": "de"/' de.json
 # Edit target file.
 
 # Create fr.xlf.
-~/src/blockly2/blockly/branches/i18n/i18n/json_to_xliff.py fr.json
+../../i18n/json_to_xliff.py fr.json
 
 # Create fr.js.
 java -jar ../_soy/SoyToJsSrcCompiler.jar --locales fr --messageFilePathFormat fr.xlf --outputPathFormat fr.js template.soy
