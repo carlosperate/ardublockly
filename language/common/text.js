@@ -23,10 +23,6 @@
  */
 'use strict';
 
-goog.provide('Blockly.Language.text');
-
-goog.require('Blockly.Language');
-
 Blockly.Language.text = {
   // Text value.
   helpUrl: Blockly.LANG_TEXT_TEXT_HELPURL,

@@ -24,9 +24,9 @@
           decodeURIComponent(window.location.search.substring(1)).split('&');
       for (var x = 0; x < files.length; x++) {
         var file = files[x];
-        if (file.match(/^\w+\/\w+\.js$/)) {
+        if (file.match(/^\w+\.js$/)) {
           document.writeln('<script type="text/javascript" ' +
-              'src="../../language/' + file + '"><' + '/script>');
+              'src="../../' + file + '"><' + '/script>');
         } else {
           console.error('Illegal language file: ' + file);
         }

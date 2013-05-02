@@ -23,10 +23,6 @@
  */
 'use strict';
 
-goog.provide('Blockly.Language.colour');
-
-goog.require('Blockly.Language');
-
 Blockly.Language.colour_picker = {
   // Colour picker.
   helpUrl: Blockly.LANG_COLOUR_PICKER_HELPURL,

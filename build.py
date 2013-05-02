@@ -140,6 +140,10 @@ class Gen_compressed(threading.Thread):
     self.gen_core()
     self.gen_generator('javascript')
     self.gen_generator('python')
+    self.gen_language('de')
+    self.gen_language('en')
+    self.gen_language('vn')
+    self.gen_language('zh_tw')
 
   def gen_core(self):
     target_filename = 'blockly_compressed.js'
@@ -182,6 +186,30 @@ class Gen_compressed(threading.Thread):
     # Read in all the source files.
     filenames = glob.glob('./generators/%s/*.js' % language)
     filenames.insert(0, './generators/%s.js' % language)
+    for filename in filenames:
+      f = open(filename)
+      params.append(('js_code', ''.join(f.readlines())))
+      f.close()
+
+    self.do_compile(params, target_filename, filenames)
+
+  def gen_language(self, language):
+    target_filename = language + '_compressed.js'
+    # Define the parameters for the POST request.
+    params = [
+        ('compilation_level', 'SIMPLE_OPTIMIZATIONS'),
+        ('output_format', 'json'),
+        ('output_info', 'compiled_code'),
+        ('output_info', 'warnings'),
+        ('output_info', 'errors'),
+        ('output_info', 'statistics'),
+      ]
+
+    # Read in all the source files.
+    filenames = glob.glob('./language/common/*.js')
+    filenames += glob.glob('./language/%s/*.js' % language)
+    filenames.remove('./language/%s/_messages.js' % language)
+    filenames.insert(0, './language/%s/_messages.js' % language)
     for filename in filenames:
       f = open(filename)
       params.append(('js_code', ''.join(f.readlines())))

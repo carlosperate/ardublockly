@@ -23,10 +23,6 @@
  */
 'use strict';
 
-goog.provide('Blockly.Language.logic');
-
-goog.require('Blockly.Language');
-
 Blockly.Language.logic_compare = {
   // Comparison operator.
   helpUrl: Blockly.LANG_LOGIC_COMPARE_HELPURL,

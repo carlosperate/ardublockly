@@ -23,10 +23,6 @@
  */
 'use strict';
 
-goog.provide('Blockly.Language.math');
-
-goog.require('Blockly.Language');
-
 Blockly.Language.math_number = {
   // Numeric value.
   helpUrl: Blockly.LANG_MATH_NUMBER_HELPURL,

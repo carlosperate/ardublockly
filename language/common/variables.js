@@ -23,10 +23,6 @@
  */
 'use strict';
 
-goog.provide('Blockly.Language.variables');
-
-goog.require('Blockly.Language');
-
 Blockly.Language.variables_get = {
   // Variable getter.
   category: null,  // Variables are handled specially.
