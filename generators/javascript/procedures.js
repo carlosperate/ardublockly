@@ -23,9 +23,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.JavaScript.procedures');
-
-goog.require('Blockly.JavaScript');
+Blockly.JavaScript.procedures = {};
 
 Blockly.JavaScript.procedures_defreturn = function() {
   // Define a procedure with a return value.

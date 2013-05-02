@@ -23,9 +23,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.Python.colour');
-
-goog.require('Blockly.Python');
+Blockly.Python.colour = {};
 
 Blockly.Python.colour_picker = function() {
   // Colour picker.

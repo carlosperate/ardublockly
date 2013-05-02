@@ -23,9 +23,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.JavaScript.lists');
-
-goog.require('Blockly.JavaScript');
+Blockly.JavaScript.lists = {}
 
 Blockly.JavaScript.lists_create_empty = function() {
   // Create an empty list.

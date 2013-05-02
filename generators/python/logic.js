@@ -23,9 +23,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.Python.logic');
-
-goog.require('Blockly.Python');
+Blockly.Python.logic = {};
 
 Blockly.Python.logic_compare = function() {
   // Comparison operator.

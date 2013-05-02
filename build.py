@@ -28,7 +28,7 @@
 # been renamed.  The uncompressed file also allows for a faster developement
 # cycle since there is no need to rebuild or recompile, just reload.
 
-import httplib, json, os, re, sys, threading, urllib
+import glob, httplib, json, os, re, sys, threading, urllib
 
 def import_path(fullpath):
   """Import a file with full path specification.
@@ -137,6 +137,11 @@ class Gen_compressed(threading.Thread):
     self.search_paths = search_paths
 
   def run(self):
+    self.gen_core()
+    self.gen_generator('javascript')
+    self.gen_generator('python')
+
+  def gen_core(self):
     target_filename = 'blockly_compressed.js'
     # Define the parameters for the POST request.
     params = [
@@ -160,6 +165,31 @@ class Gen_compressed(threading.Thread):
       params.append(('js_code', ''.join(f.readlines())))
       f.close()
 
+    self.do_compile(params, target_filename, filenames)
+
+  def gen_generator(self, language):
+    target_filename = language + '_compressed.js'
+    # Define the parameters for the POST request.
+    params = [
+        ('compilation_level', 'SIMPLE_OPTIMIZATIONS'),
+        ('output_format', 'json'),
+        ('output_info', 'compiled_code'),
+        ('output_info', 'warnings'),
+        ('output_info', 'errors'),
+        ('output_info', 'statistics'),
+      ]
+
+    # Read in all the source files.
+    filenames = glob.glob('./generators/%s/*.js' % language)
+    filenames.insert(0, './generators/%s.js' % language)
+    for filename in filenames:
+      f = open(filename)
+      params.append(('js_code', ''.join(f.readlines())))
+      f.close()
+
+    self.do_compile(params, target_filename, filenames)
+
+  def do_compile(self, params, target_filename, filenames):
     # Send the request to Google.
     headers = { "Content-type": "application/x-www-form-urlencoded" }
     conn = httplib.HTTPConnection('closure-compiler.appspot.com')

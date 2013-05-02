@@ -23,9 +23,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.JavaScript.logic');
-
-goog.require('Blockly.JavaScript');
+Blockly.JavaScript.logic = {};
 
 Blockly.JavaScript.logic_compare = function() {
   // Comparison operator.
