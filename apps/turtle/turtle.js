@@ -236,16 +236,6 @@ Turtle.execute = function() {
 };
 
 /**
- * Show the user's code in raw JavaScript.
- */
-Turtle.showCode = function() {
-  var code = Blockly.Generator.workspaceToCode('JavaScript');
-  // Strip out serial numbers.
-  code = code.replace(/(,\s*)?'\d+'\)/g, ')');
-  alert(code);
-};
-
-/**
  * Iterate through the recorded path and animate the turtle's actions.
  */
 Turtle.animate = function() {

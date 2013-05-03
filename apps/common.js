@@ -67,13 +67,12 @@ Blockly.Apps.updateCapacity = function(MSG) {
 /**
  * Congratulates the user for completing the level and offers to
  * direct them to the next level, if available.
- * @param {!Object} window
  * @param {number} level The current level.
  * @param {number} maxLevel The maxmium available level.
  * @param {!Object} MSG An object with appropriate text properties for
  *     MSG.nextLevel and MSG.finalLevel.
  */
-Blockly.Apps.congratulations = function(window, level, maxLevel, MSG) {
+Blockly.Apps.congratulations = function(level, maxLevel, MSG) {
   if (level < maxLevel) {
     var proceed = window.confirm(MSG.nextLevel.replace('%1', level + 1));
     if (proceed) {
@@ -82,7 +81,7 @@ Blockly.Apps.congratulations = function(window, level, maxLevel, MSG) {
           '?level=' + (level + 1);
     }
   } else {
-    alert(MSG.finalLevel);
+    window.alert(MSG.finalLevel);
   }
 };
 
@@ -114,11 +113,11 @@ Blockly.Apps.checkTimeout = function(opt_id) {
  * @return {string} The code without serial numbers and timeout checks.
  */
 Blockly.Apps.stripCode = function(code) {
-  // Strip out tracking commands.
-  code = code.replace(/ *Blockly\.Apps\.highlight\('\d+'\);\n/g, '');
+  // Strip out serial numbers.
+  code = code.replace(/(,\s*)?'\d+'\);/g, ');');
   // Remove timeouts.
   var regex = new RegExp(Blockly.JavaScript.INFINITE_LOOP_TRAP
-      .replace('(%1)', '\\(\'\\d+\'\\)'), 'g');
+      .replace('(%1)', '\\(\\)'), 'g');
   return code.replace(regex, '');
 };
 
@@ -128,5 +127,5 @@ Blockly.Apps.stripCode = function(code) {
 Blockly.Apps.showCode = function() {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   code = Blockly.Apps.stripCode(code);
-  alert(code);
+  window.alert(code);
 };

@@ -29,14 +29,14 @@
 var Maze = {};
 
 Maze.MAX_LEVEL = 10;
-var level = window.location.search.match(/[?&]level=(\d+)/);
-level = level ? level[1] : 1;
-level = Math.min(Math.max(1, level), Maze.MAX_LEVEL);
+Maze.level = window.location.search.match(/[?&]level=(\d+)/);
+Maze.level = Maze.level ? Maze.level[1] : 1;
+Maze.level = Math.min(Math.max(1, Maze.level), Maze.MAX_LEVEL);
 document.write(mazepage.start({}, null,
     {MSG: MSG,
-     level: level}));
+     level: Maze.level}));
 var maxBlocks = [undefined, // Level 0.
-    Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][level];
+    Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][Maze.level];
 
 /**
  * Milliseconds between each animation frame.
@@ -150,7 +150,7 @@ Maze.map = [
   [0, 0, 1, 0, 0, 0, 1, 0],
   [0, 2, 1, 1, 1, 0, 1, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]]
-][level];
+][Maze.level];
 
 /**
  * Measure maze dimensions and set sizes.
@@ -407,13 +407,6 @@ Maze.init = function() {
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Blockly.Apps.checkTimeout(%1);\n';
   Maze.drawMap();
 
-  //window.addEventListener('beforeunload', function(e) {
-  //  if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-  //    e.returnValue = MSG.unloadWarning;  // Gecko.
-  //    return MSG.unloadWarning;  // Webkit.
-  //  }
-  //  return null;
-  //});
   var blocklyDiv = document.getElementById('blockly');
   var onresize = function(e) {
     blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
@@ -436,7 +429,7 @@ Maze.init = function() {
         '  <block type="maze_moveForward" x="70" y="70"></block>' +
         '</xml>');
     // Configure any level-specific buttons.
-    if (level > 9) {
+    if (Maze.level > 9) {
       document.getElementById('randomizeButton').style.display = 'inline';
     }
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
@@ -488,7 +481,7 @@ Maze.reset = function() {
  */
 Maze.runButtonClick = function() {
   // Only allow a single top block on levels 1 and 2.
-  if (level <= 2 && Blockly.mainWorkspace.getTopBlocks().length > 1) {
+  if (Maze.level <= 2 && Blockly.mainWorkspace.getTopBlocks().length > 1) {
     window.alert(MSG.oneTopBlock);
     return;
   }
@@ -648,7 +641,7 @@ Maze.animate = function() {
 };
 
 Maze.congratulations = function() {
-  Blockly.Apps.congratulations(window, level, Maze.MAX_LEVEL, MSG);
+  Blockly.Apps.congratulations(Maze.level, Maze.MAX_LEVEL, MSG);
 };
 
 /**
