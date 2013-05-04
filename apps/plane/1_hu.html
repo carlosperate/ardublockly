@@ -1,0 +1,46 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Takács Viktor László (tviktor75@gmail.com)">
+  <title>Blockly Repülőgép (1)</title>
+  <script type="text/javascript">
+    var MSG = {
+      getRows: 'Sorok száma',
+      rows: 'Sorok száma: %1',
+      setSeats: 'Ülések száma',
+      seats: 'Ülések száma összesen: %1'
+    };
+  </script>
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../en_compressed.js"></script>
+  <script type="text/javascript" src="../../javascript_compressed.js"></script>
+  <script type="text/javascript" src="common.js"></script>
+  <script type="text/javascript" src="blocks1.js"></script>
+  <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body onload="init()">
+  <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;
+      <a href="../index.html">Apps</a> &gt; Repülőgép (1)</h1>
+
+  <embed src="plane.svg" height=256 width=600 type="image/svg+xml"/>
+  <p>
+    Egy repülőgépnek 2 ülése van a pilótafülkében (a pliótának és a másodpilótának),
+    az utasok több sorban ülnek az utastérben.  Az utastér minden sorában négy szék van.
+  </p>
+  <p>
+    Készítsd el a képletet (lent) amivel kiszámolható, hogy hány ülés van összesen a repülőgépen
+        annak függvényében, ahogy (fent) állítod a sorok számát.
+  </p>
+
+  <div id="svgDiv"></div>
+
+  <xml id="toolbox" style="display: none">
+    <block type="math_number"></block>
+    <block type="math_arithmetic"></block>
+    <block type="math_arithmetic">
+      <title name="OP">MULTIPLY</title>
+    </block>
+    <block type="plane_get_rows"></block>
+  </xml>
+</body>
+</html>

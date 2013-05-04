@@ -1,0 +1,77 @@
+<html dir="ltr" lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Takács Viktor László (tviktor75@gmail.com)">
+  <title>Blockly Teknőc Grafika</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'Menj előre (pixel)',
+      moveBackward: 'Menj vissza (pixel)',
+      turnRight: 'Fordulj jobbra (fok)',
+      turnLeft: 'Fordulj balra (fok)',
+      setWidth: 'Vonalvastagság',
+      setColour: 'Rajzolás színe',
+      penUp: 'Tollat fel',
+      penDown: 'Tollat le',
+      hideTurtle: 'Teknőc elrejtése',
+      showTurtle: 'Teknőc felfedése',
+      // Tooltips for general blocks.
+      moveTooltip: 'A teknőcöt mozgatja előre, vagy hátra\n' +
+          'a pixelben megadott értékkel.',
+      turnTooltip: 'A teknőcöt jobbra, vagy balra fordítja\n' +
+          'a fokban megadott értékkel.',
+      widthTooltip: 'Vonalvastagság beállítása.',
+      penTooltip: 'Toll felemelése letevése,\n' +
+          'attól függően, hogy elkezdjük vagy befejezzük a rajzolást.',
+      colourTooltip: 'A rajzolás színének változtatása.',
+      turtleVisibilityTooltip: 'a teknőc (zöld kör és nyíl) láthatóvá tétele, vagy elrejtése.',
+      codeTooltip: 'A JavaScript forráskód megtekintése.',
+      linkTooltip: 'Save and link to blocks.',
+      // Tooltips for tutorial-only blocks.
+      moveForward100Tooltip: 'Mentés és Hivatkozás a kódhoz.',
+      turnRight90Tooltip: 'A teknőc 90 fokkal jobbra fordítása.',
+      // Toolbox categories.
+      catTurtle: 'Teknőc',
+      catControl: 'Vezérlés',
+      catLogic: 'Logikai műveletek',
+      catMath: 'Matematikai műveletek',
+      catLists: 'Listakezelés',
+      catColour: 'Színek',
+      catVariables: 'Változók',
+      catProcedures: 'Eljárások',
+      // Misc text.
+      level: 'Szint',
+      capacity0: 'Nem használhatsz fel több blokkot.',
+      capacity1: 'Még <span id="capacityNumber">1</span> blokkot használhatsz fel.',
+      capacity2: 'Még <span id="capacityNumber">%1</span> blokkot használhatsz fel.',
+      unloadWarning: 'Az oldal elhagyása a munkád elvesztését eredményezi.',
+      runProgram: 'Program futtatása',
+      resetProgram: '\u00A0 \u00A0 Alaphelyzet \u00A0 \u00A0',
+      title: 'Teknőc Grafika',
+      // Level hints.
+      hints: ['level 0', // There is no level 0.
+         'Én egy olyan teknőc vagyok, aki rajzolni tud a farkával. Segíts nekem négyzetet rajzolni.',
+         'Mindössze 3 blokk felhasználásával kell megoldanod a feladatot.\n' +
+             'Segítség: Nem számít, hogy a végén milyen irányba nézek.',
+         'Jó szórakozást!'
+      ]
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'A kéréssel kapcsolatban probléma merült fel.\n';
+      BlocklyStorage.LINK_ALERT = 'Ezzel a hivatkozással tudod megosztani a programodat:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Elnézést, a "%1" hivatkozásnem tartozik egyetlen programhoz sem.';
+      BlocklyStorage.XML_ERROR = 'A programodat nem lehet betölteni.\n'+
+          'Elképzelhető, hogy a Blockly egy másik verziójában készült?\nXML: ';
+     }
+    var languageSrc = ['en_compressed.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="turtle.js"></script>
+</body>
+</html>

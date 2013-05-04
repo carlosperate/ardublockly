@@ -1,0 +1,72 @@
+<html dir="ltr" lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Takács Viktor László (tviktor75@gmail.com)">
+  <title>Blockly Labirintus</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'Menj előre',
+      turnLeft: 'Fordulj balra',
+      turnRight: 'Fordulj jobbra',
+      do: 'akkor',
+      else: 'egyébként',
+      pathAhead: 'Ha szabad az út előtted',
+      pathLeft: 'Ha szabad az út balra',
+      pathRight: 'Ha szabad az út jobbra',
+      repeatUntilFinished: 'Ismételd a célbaérésig',
+      // Tooltips.
+      moveForwardTooltip: 'Pegman előre lép egy mezőt.',
+      turnTooltip: 'Pegman 90 fokot fordul balra, vagy jobbra.',
+      ifTooltip: 'Ha szabad az út a megadott irányban,\n' +
+          'akkor végrehajtja az utasításokat.',
+      ifelseTooltip: 'Ha szabad az út a megadott irányban,\n' +
+          'akkor végrehajtja az első blokkban megadott utasításokat.\n' +
+          'Egyébként a második blokkban szereplő utasításokat hajtja végre.',
+      whileTooltip: 'A beágyazott utasításokat hajtja végre a cél eléréséig.',
+      codeTooltip: 'JavaScript forráskód megtekintése.',
+      linkTooltip: 'Mentés és Hivatkozás a kódhoz.',
+      randomizeMarkerTooltip: 'Start és Cél véletlenszerű elhelyezése.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+        "Egy program utasítások sorozatából áll. Segíts eljutatni Pegmant a célig, kapcsolj össze néhány 'Menj előre' blokkot!",
+        "Milyen lépések sorozata kell, hogy eljuttasd Pegmant a célig?",
+        "A számítógépeknek véges a memóriájuk.  Juttasd el Pegmant a célig mindössze 2 blokk felhasználásával.  Használd az 'Ismételd a célbaérésig' blokkot egy másik blokk ismételt végrehajtásához.",
+        "Juttasd el Pegmant a célig mindössze 5 blokk felhasználásával.",
+        "Pegmannak balra kellene fordulnia, ha nem tud előre menni az úton.",
+        "Egy 'Ha' esetén az utasítások csak akkor kerülnek végrehajtásra, ha a feltétel igaz.  Próbáld Pegmant balra fordítani, ha van út balra.",
+        "Ez a labirintus bonyolultabbank tűnik az előzőnél, de ez csak a látszat.",
+        "Egynél több 'Ha' feltételt is használhatsz.",
+        "A Ha-egyébként feltétel esetén vagy az egyik, vagy a másik utasítás-csoport kerül végrehajtásra.",
+        "Végig tudod vezetni Pegmant ezen a bonyolult labirintuson?  Próbáld a bal oldali falat követni. Haladó programozóknak!"
+      ],
+      // Misc text.
+      level: 'Szint',
+      capacity0: 'Nem használhatsz fel több blokkot.',
+      capacity1: 'Még <span id="capacityNumber">1</span> blokkot használhatsz fel.',
+      capacity2: 'Még <span id="capacityNumber">%1</span> blokkot használhatsz fel.',
+      runProgram: 'Program futtatása',
+      resetProgram: 'Alaphelyzet',
+      nextLevel: 'Gratulálok!\nKész vagy megoldani a(z) %1. szintet?',
+      finalLevel: 'Gratulálok!\nSikeresen megoldottad az utolsó szintet.',
+      title: 'Labirintus',
+      oneTopBlock: 'Ezen a szinten össze kell kapcsolnod minden blokkot a munkaterületen.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'A kéréssel kapcsolatban probléma merült fel.\n';
+      BlocklyStorage.LINK_ALERT = 'Ezzel a hivatkozással tudod megosztani a programodat:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Elnézést, a "%1" hivatkozásnem tartozik egyetlen programhoz sem.';
+      BlocklyStorage.XML_ERROR = 'A programodat nem lehet betölteni.\n'+
+          'Elképzelhető, hogy a Blockly egy másik verziójában készült?\nXML: ';
+    }
+    var languageSrc = ['language/en/_messages.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>

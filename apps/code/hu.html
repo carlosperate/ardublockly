@@ -1,0 +1,46 @@
+﻿<html lang="hu">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Takács Viktor László (tviktor75@gmail.com)">
+  <title>Blockly Kódszerkesztő</title>
+  <link href="style.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Tooltips.
+      trashTooltip: 'Összes blokk törlése.',
+      linkTooltip: 'Mentés és Hivatkozás a kódhoz.',
+      runTooltip: 'Program futtatása.',
+      // Toolbox categories.
+      catControl: 'Vezérlés',
+      catLogic: 'Logikai műveletek',
+      catMath: 'Matematikai műveletek',
+      catText: 'Sztring műveletek',
+      catLists: 'Listakezelés',
+      catColour: 'Színek',
+      catVariables: 'Változók',
+      catProcedures: 'Eljárások',
+      // Misc text.
+      blocks: 'Blokkok',
+      badXml: 'Hiba az XML feldolgozásakor:\n%1\n\nVáltozások elvetése?',
+      badCode: 'Program hiba:\n%1',
+      timeout: 'A program elérte a maximális végrehajtási időt.',
+      discard: 'Az összes "%1" blokk törlése?',
+      title: 'Kódszerkesztő'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'A kéréssel kapcsolatban probléma merült fel.\n';
+      BlocklyStorage.LINK_ALERT = 'Ezzel a hivatkozással tudod megosztani a programodat:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Elnézést, a "%1" hivatkozásnem tartozik egyetlen programhoz sem.';
+      BlocklyStorage.XML_ERROR = 'A programodat nem lehet betölteni.\n'+
+          'Elképzelhető, hogy a Blockly egy másik verziójában készült?\nXML: ';
+    }
+    var frameSrc = ['en_compressed.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="code.js"></script>
+</body>
+</html>
