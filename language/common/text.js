@@ -363,12 +363,15 @@ Blockly.Language.text_getSubstring = {
   }
 };
 
-Blockly.Language.text_getSubstring.WHERE1 = Blockly.Language.text_charAt.WHERE
-    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
-            tuple[1] == 'FROM_END' || tuple[1] == 'FIRST';});
-Blockly.Language.text_getSubstring.WHERE2 = Blockly.Language.text_charAt.WHERE
-    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
-            tuple[1] == 'FROM_END' || tuple[1] == 'LAST';});
+Blockly.Language.text_getSubstring.WHERE1 =
+    [[Blockly.LANG_TEXT_SUBSTRING_FROM_START, 'FROM_START'],
+     [Blockly.LANG_TEXT_SUBSTRING_FROM_END, 'FROM_END'],
+     [Blockly.LANG_TEXT_SUBSTRING_FIRST, 'FIRST']];
+
+Blockly.Language.text_getSubstring.WHERE2 =
+    [[Blockly.LANG_TEXT_SUBSTRING_FROM_START, 'FROM_START'],
+     [Blockly.LANG_TEXT_SUBSTRING_FROM_END, 'FROM_END'],
+     [Blockly.LANG_TEXT_SUBSTRING_LAST, 'LAST']];
 
 Blockly.Language.text_changeCase = {
   // Change capitalization.

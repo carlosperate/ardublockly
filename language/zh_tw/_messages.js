@@ -324,6 +324,10 @@ Blockly.LANG_TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/
 Blockly.LANG_TEXT_SUBSTRING_INPUT_IN_TEXT = 'in text';
 Blockly.LANG_TEXT_SUBSTRING_INPUT_AT1 = 'get substring from';
 Blockly.LANG_TEXT_SUBSTRING_INPUT_AT2 = 'to';
+Blockly.LANG_TEXT_SUBSTRING_FROM_START = 'letter #';
+Blockly.LANG_TEXT_SUBSTRING_FROM_END = 'letter # from end';
+Blockly.LANG_TEXT_SUBSTRING_FIRST = 'first letter';
+Blockly.LANG_TEXT_SUBSTRING_LAST = 'last letter';
 Blockly.LANG_TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
 
 Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
