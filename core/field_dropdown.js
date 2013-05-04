@@ -209,7 +209,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   var hexColour = Blockly.makeColour(this.sourceBlock_.getColour());
   svgBackground.setAttribute('fill', hexColour);
   // Position the dropdown to line up with the field.
-  var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
+  var xy = Blockly.getSvgXY_(/** @type {!Element} */ (this.borderRect_));
   var borderBBox = this.borderRect_.getBBox();
   var x;
   if (Blockly.RTL) {

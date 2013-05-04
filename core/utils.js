@@ -210,11 +210,12 @@ Blockly.getRelativeXY_ = function(element) {
 
 /**
  * Return the absolute coordinates of the top-left corner of this element.
+ * The origin (0,0) is the top-left corner of the Blockly svg.
  * @param {!Element} element Element to find the coordinates of.
  * @return {!Object} Object with .x and .y properties.
  * @private
  */
-Blockly.getAbsoluteXY_ = function(element) {
+Blockly.getSvgXY_ = function(element) {
   var x = 0;
   var y = 0;
   do {
@@ -223,8 +224,20 @@ Blockly.getAbsoluteXY_ = function(element) {
     x += xy.x;
     y += xy.y;
     element = element.parentNode;
-  } while (element && element != document);
+  } while (element && element != Blockly.svg);
   return {x: x, y: y};
+};
+
+/**
+ * Return the absolute coordinates of the top-left corner of this element.
+ * The origin (0,0) is the top-left corner of the page body.
+ * @param {!Element} element Element to find the coordinates of.
+ * @return {!Object} Object with .x and .y properties.
+ * @private
+ */
+Blockly.getAbsoluteXY_ = function(element) {
+  var xy = Blockly.getSvgXY_(element);
+  return Blockly.convertCoordinates(xy.x, xy.y, false);
 };
 
 /**
