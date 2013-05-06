@@ -292,11 +292,6 @@ Maze.tile_SHAPES = {
 Maze.drawMap = function() {
   var svg = document.getElementById('svgMaze');
 
-  // On subsequent calls within a level, the map must first be cleared.
-  while (svg.firstChild) {
-    svg.removeChild(svg.firstChild);
-  }
-
   // Draw the outer square.
   var square = document.createElementNS(Blockly.SVG_NS, 'rect');
   square.setAttribute('width', Maze.MAZE_WIDTH);
@@ -469,6 +464,11 @@ Maze.reset = function() {
   finishIcon.setAttribute('y', Maze.SQUARE_SIZE * (Maze.finish_.y + 0.6) -
       finishIcon.getAttribute('height'));
 
+  // Make 'look' icon invisible and promote to top.
+  var lookIcon = document.getElementById('look');
+  lookIcon.style.display = 'none';
+  lookIcon.parentNode.appendChild(lookIcon);
+
   // Kill all tasks.
   for (var x = 0; x < Maze.pidList.length; x++) {
     window.clearTimeout(Maze.pidList[x]);
@@ -616,6 +616,18 @@ Maze.animate = function() {
                     [Maze.pegmanX - 1, Maze.pegmanY, Maze.pegmanD * 4]);
       Maze.pegmanX--;
       break;
+    case 'look_north':
+      Maze.scheduleLook(Maze.DirectionType.NORTH);
+      break;
+    case 'look_east':
+      Maze.scheduleLook(Maze.DirectionType.EAST);
+      break;
+    case 'look_south':
+      Maze.scheduleLook(Maze.DirectionType.SOUTH);
+      break;
+    case 'look_west':
+      Maze.scheduleLook(Maze.DirectionType.WEST);
+      break;
     case 'fail_forward':
       Maze.scheduleFail(true);
       break;
@@ -755,6 +767,59 @@ Maze.displayPegman = function(x, y, d) {
 };
 
 /**
+ * Display the look icon at Pegman's current location,
+ * in the specified direction.
+ * @param {!Maze.DirectionType} d Direction (0 - 3).
+ */
+Maze.scheduleLook = function(d) {
+  var x = Maze.pegmanX;
+  var y = Maze.pegmanY;
+  switch (d) {
+    case Maze.DirectionType.NORTH:
+      x += 0.5;
+      break;
+    case Maze.DirectionType.EAST:
+      x += 1;
+      y += 0.5;
+      break;
+    case Maze.DirectionType.SOUTH:
+      x += 0.5;
+      y += 1;
+      break;
+    case Maze.DirectionType.WEST:
+      y += 0.5;
+      break;
+  }
+  x *= Maze.SQUARE_SIZE;
+  y *= Maze.SQUARE_SIZE;
+  d = d * 90 - 45;
+
+  var lookIcon = document.getElementById('look');
+  lookIcon.setAttribute('transform',
+      'translate(' + x + ', ' + y + ') ' +
+      'rotate(' + d + ' 0 0) scale(.4)');
+  var paths = lookIcon.getElementsByTagName('path');
+  lookIcon.style.display = 'inline';
+  for (var x = 0, path; path = paths[x]; x++) {
+    Maze.scheduleLookStep(path, Maze.STEP_SPEED * x);
+  }
+};
+
+/**
+ * Schedule one of the 'look' icon's waves to appear, then disappear.
+ * @param {!Element} path Element to make appear.
+ * @param {number} delay Milliseconds to wait before making wave appear.
+ */
+Maze.scheduleLookStep = function(path, delay) {
+  Maze.pidList.push(window.setTimeout(function() {
+    path.style.display = 'inline';
+    window.setTimeout(function() {
+      path.style.display = 'none';
+    }, Maze.STEP_SPEED * 2);
+  }, delay));
+};
+
+/**
  * Keep the direction within 0-3, wrapping at both ends.
  * @param {number} d Potentially out-of-bounds direction value.
  * @return {number} Legal direction value.
@@ -801,20 +866,20 @@ Maze.turnRight = function(id) {
   Maze.turn(1, id);
 };
 
-Maze.isPathForward = function() {
-  return Maze.isPath(0);
+Maze.isPathForward = function(id) {
+  return Maze.isPath(0, id);
 };
 
-Maze.isPathRight = function() {
-  return Maze.isPath(1);
+Maze.isPathRight = function(id) {
+  return Maze.isPath(1, id);
 };
 
-Maze.isPathBackward = function() {
-  return Maze.isPath(2);
+Maze.isPathBackward = function(id) {
+  return Maze.isPath(2, id);
 };
 
-Maze.isPathLeft = function() {
-  return Maze.isPath(3);
+Maze.isPathLeft = function(id) {
+  return Maze.isPath(3, id);
 };
 
 // Core functions.
@@ -827,7 +892,7 @@ Maze.isPathLeft = function() {
  * @throws {false} If Pegman collides with a wall.
  */
 Maze.move = function(direction, id) {
-  if (!Maze.isPath(direction)) {
+  if (!Maze.isPath(direction, null)) {
     Blockly.Apps.log.push(['fail_' + (direction ? 'backward' : 'forward'), id]);
     throw false;
   }
@@ -882,26 +947,36 @@ Maze.turn = function(direction, id) {
  * Is there a path next to pegman?
  * @param {number} direction Direction to look
  *     (0 = forward, 1 = right, 2 = backward, 3 = left).
+ * @param {?string} id ID of block that triggered this action.
+ *     Null if called as a helper function in Maze.move().
  * @return {boolean} True if there is a path.
  */
-Maze.isPath = function(direction) {
+Maze.isPath = function(direction, id) {
   var effectiveDirection = Maze.pegmanD + direction;
   var square;
+  var command;
   switch (Maze.constrainDirection4(effectiveDirection)) {
     case Maze.DirectionType.NORTH:
       square = Maze.map[Maze.pegmanY - 1] &&
           Maze.map[Maze.pegmanY - 1][Maze.pegmanX];
+      command = 'look_north';
       break;
     case Maze.DirectionType.EAST:
       square = Maze.map[Maze.pegmanY][Maze.pegmanX + 1];
+      command = 'look_east';
       break;
     case Maze.DirectionType.SOUTH:
       square = Maze.map[Maze.pegmanY + 1] &&
           Maze.map[Maze.pegmanY + 1][Maze.pegmanX];
+      command = 'look_south';
       break;
     case Maze.DirectionType.WEST:
       square = Maze.map[Maze.pegmanY][Maze.pegmanX - 1];
+      command = 'look_west';
       break;
+  }
+  if (id) {
+    Blockly.Apps.log.push([command, id]);
   }
   return square !== Maze.SquareType.WALL && square !== undefined;
 };

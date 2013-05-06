@@ -53,6 +53,16 @@ html[dir=rtl] #pegman_bubble {
   transform: scaleX(-1);
 }
 
+/* 'Look' icon */
+#look>path {
+  display: none;
+  fill: none;
+  stroke: #000;
+  stroke-width: 10;
+  stroke-linecap: round;
+  stroke-opacity: 0.7;
+}
+
 /* Buttons */
 button {
   margin: 5px;

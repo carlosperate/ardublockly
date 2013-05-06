@@ -112,10 +112,9 @@ Blockly.Language.maze_if.DIRECTIONS =
 
 Blockly.JavaScript.maze_if = function() {
   // Generate JavaScript for 'if' conditional if there is a path.
-  var argument = 'Maze.' + this.getTitleValue('DIR') + '()';
+  var argument = 'Maze.' + this.getTitleValue('DIR') + '(\'' + this.id + '\')';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  var code = 'Blockly.Apps.highlight(\'' + this.id + '\');\n' +
-             'if (' + argument + ') {\n' + branch + '}';
+  var code = 'if (' + argument + ') {\n' + branch + '}';
   return code;
 };
 
@@ -141,11 +140,10 @@ Blockly.Language.maze_ifElse.DIRECTIONS =
 
 Blockly.JavaScript.maze_ifElse = function() {
   // Generate JavaScript for 'if/else' conditional if there is a path.
-  var argument = 'Maze.' + this.getTitleValue('DIR') + '()';
+  var argument = 'Maze.' + this.getTitleValue('DIR') + '(\'' + this.id + '\')';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
   var branch1 = Blockly.JavaScript.statementToCode(this, 'ELSE');
-  var code = 'Blockly.Apps.highlight(\'' + this.id + '\');\n' +
-             'if (' + argument + ') {\n' + branch0 +
+  var code = 'if (' + argument + ') {\n' + branch0 +
              '} else {\n' + branch1 + '}';
   return code;
 };
