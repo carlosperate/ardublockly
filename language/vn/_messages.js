@@ -54,6 +54,7 @@ Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Chọn một màu từ bảng màu.';
 
 Blockly.LANG_COLOUR_RANDOM_HELPURL = 'http://randomcolour.com';
+Blockly.LANG_COLOUR_RANDOM_TITLE = 'random colour';
 Blockly.LANG_COLOUR_RANDOM_TOOLTIP = 'Choose a colour at random.';
 
 Blockly.LANG_COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html';
