@@ -206,3 +206,62 @@ Blockly.JavaScript.turtle_visibility = function() {
   return 'Turtle.' + this.getTitleValue('VISIBILITY') +
       '(\'' + this.id + '\');\n';
 };
+
+Blockly.Language.draw_print = {
+  // Block for printing text.
+  helpUrl: MSG.printHelpUrl,
+  init: function() {
+    this.setColour(160);
+    this.appendValueInput('TEXT')
+        .appendTitle(MSG.print);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(MSG.printTooltip);
+  }
+};
+
+Blockly.JavaScript.draw_print = function() {
+  // Generate JavaScript for printing text.
+  var argument0 = String(Blockly.JavaScript.valueToCode(this, 'TEXT',
+      Blockly.JavaScript.ORDER_NONE) || '\'\'');
+  return 'Turtle.drawPrint(' + argument0 + ', \'' +
+      this.id + '\');\n';
+};
+
+Blockly.Language.draw_font = {
+  // Block for setting the font.
+  helpUrl: MSG.fontHelpUrl,
+  init: function() {
+    this.setColour(160);
+    this.appendDummyInput()
+        .appendTitle(MSG.font)
+        .appendTitle(new Blockly.FieldDropdown(this.FONTLIST), 'FONT');
+    this.appendDummyInput()
+        .appendTitle(MSG.fontSize)
+        .appendTitle(new Blockly.FieldTextInput('18',
+                     Blockly.FieldTextInput.nonnegativeIntegerValidator),
+                     'FONTSIZE');
+    this.appendDummyInput()
+        .appendTitle(new Blockly.FieldDropdown(this.STYLE), 'FONTSTYLE');
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setTooltip(MSG.fontTooltip);
+  }
+};
+
+Blockly.Language.draw_font.FONTLIST =
+    // Common font names (intentionally not localized)
+    [['Arial', 'Arial'], ['Courier New', 'Courier New'], ['Georgia', 'Georgia'],
+     ['Impact', 'Impact'], ['Times New Roman', 'Times New Roman'],
+     ['Trebuchet MS', 'Trebuchet MS'], ['Verdana', 'Verdana']];
+
+Blockly.Language.draw_font.STYLE =
+    [[MSG.fontNormal, 'normal'], [MSG.fontItalic, 'italic'],
+     [MSG.fontBold, 'bold']];
+
+Blockly.JavaScript.draw_font = function() {
+  // Generate JavaScript for setting the font.
+  return 'Turtle.drawFont(\'' + this.getTitleValue('FONT') + '\',' +
+         Number(this.getTitleValue('FONTSIZE')) + ',\'' +
+         this.getTitleValue('FONTSTYLE') + '\', \'' + this.id + '\');\n';
+};
