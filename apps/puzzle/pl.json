@@ -1,0 +1,42 @@
+{
+    "Puzzle.country1": "Australia",
+    "Puzzle.country1Language": "Angielski",
+    "Puzzle.country1City1": "Melbourne",
+    "Puzzle.country1City2": "Sydney",
+    "Puzzle.country1HelpUrl": "http://pl.wikipedia.org/wiki/Australia",
+    "Puzzle.country2": "Niemcy",
+    "Puzzle.country2Language": "Niemiecki",
+    "Puzzle.country2City1": "Berlin",
+    "Puzzle.country2City2": "Monachium",
+    "Puzzle.country2HelpUrl": "http://pl.wikipedia.org/wiki/Niemcy",
+    "Puzzle.country3": "Chiny",
+    "Puzzle.country3Language": "Chi\u0144ski",
+    "Puzzle.country3City1": "Pekin",
+    "Puzzle.country3City2": "Szanghaj",
+    "Puzzle.country3HelpUrl": "http://pl.wikipedia.org/wiki/Chiny",
+    "Puzzle.country4": "Brazylia",
+    "Puzzle.country4Language": "Portugalski",
+    "Puzzle.country4City1": "Rio de Janeiro",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4HelpUrl": "http://pl.wikipedia.org/wiki/Brazylia",
+    "Puzzle.flag": "flaga",
+    "Puzzle.language": "j\u0119zyk:",
+    "Puzzle.languageChoose": "wybierz...",
+    "Puzzle.cities": "miasta:",
+    "Puzzle.error0": "Doskonale!\nWszystkie %1 bloki s\u0105 poprawne.",
+    "Puzzle.error1": "Prawie! Jeden blok jest niepoprawny.",
+    "Puzzle.error2": "%1 blok\u00f3w jest nieprawid\u0142owych.",
+    "Puzzle.tryAgain": "Zaznaczony blok nie jest poprawny.\nSpr\u00f3buj jeszcze raz.",
+    "Puzzle.fullTitle": "Blockly Puzzle",
+    "Puzzle.title": "Puzzle",
+    "Puzzle.help": "Pomoc",
+    "Puzzle.checkAnswers": "Sprawd\u017a Odpowiedzi",
+    "Puzzle.helpText": "Dla ka\u017cdego kraju (zielony), za\u0142\u0105cz jego flag\u0119, wybierz j\u0119zyk urz\u0119dowy, i okre\u015bl miasta, znajduj\u0105cych si\u0119 w tym kraju.",
+    "Puzzle.helpImage": "help_en.png",
+    "Puzzle.helpOk": "OK",
+    "@metadata": {
+        "authors": [
+            "Rezonansowy"
+        ]
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "Puzzle.country1": "Australi\u00eb",
+    "Puzzle.country1Language": "Engels",
+    "Puzzle.country1City1": "Melbourne",
+    "Puzzle.country1City2": "Sydney",
+    "Puzzle.country1HelpUrl": "http://nl.wikipedia.org/wiki/Australi\u00eb",
+    "Puzzle.country2": "Duitsland",
+    "Puzzle.country2Language": "Duits",
+    "Puzzle.country2City1": "Berlijn",
+    "Puzzle.country2City2": "M\u00fcnchen",
+    "Puzzle.country2HelpUrl": "http://nl.wikipedia.org/wiki/Duitsland",
+    "Puzzle.country3": "China",
+    "Puzzle.country3Language": "Chinees",
+    "Puzzle.country3City1": "Beijing",
+    "Puzzle.country3City2": "Shanghai",
+    "Puzzle.country3HelpUrl": "http://nl.wikipedia.org/wiki/China",
+    "Puzzle.country4": "Brazili\u00eb",
+    "Puzzle.country4Language": "Portugees",
+    "Puzzle.country4City1": "Rio de Janeiro",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4HelpUrl": "http://nl.wikipedia.org/wiki/Brazili\u00eb",
+    "Puzzle.flag": "vlag",
+    "Puzzle.language": "taal:",
+    "Puzzle.languageChoose": "kies...",
+    "Puzzle.cities": "steden:",
+    "Puzzle.error0": "Perfect\nAlle %1 blokken zijn correct.",
+    "Puzzle.error1": "Bijna! E\u00e9n blok is onjuist.",
+    "Puzzle.error2": "%1 blokken zijn onjuist.",
+    "Puzzle.tryAgain": "Het gemarkeerde blok is niet correct.\nBlijf het proberen.",
+    "Puzzle.fullTitle": "Blockly puzzel",
+    "Puzzle.title": "Puzzel",
+    "Puzzle.help": "Hulp",
+    "Puzzle.checkAnswers": "Antwoorden controleren",
+    "Puzzle.helpText": "Koppel de vlag, kies de taal en maak een stapel van de steden voor iedere lang (groen).",
+    "Puzzle.helpImage": "help_en.png",
+    "Puzzle.helpOk": "OK",
+    "@metadata": {
+        "authors": [
+            "Siebrand"
+        ]
+    }
+}

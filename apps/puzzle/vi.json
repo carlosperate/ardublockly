@@ -1,0 +1,43 @@
+{
+    "Puzzle.country1": "\u00dac",
+    "Puzzle.country1Language": "Ti\u1ebfng Anh",
+    "Puzzle.country1City1": "Melbourne",
+    "Puzzle.country1City2": "Sydney",
+    "Puzzle.country1HelpUrl": "http://vi.wikipedia.org/wiki/%C3%9Ac",
+    "Puzzle.country2": "\u0110\u1ee9c",
+    "Puzzle.country2Language": "Ti\u1ebfng \u0110\u1ee9c",
+    "Puzzle.country2City1": "B\u00e9clin",
+    "Puzzle.country2City2": "Munich",
+    "Puzzle.country2HelpUrl": "http://vi.wikipedia.org/wiki/%C4%90%E1%BB%A9c",
+    "Puzzle.country3": "Trung Qu\u1ed1c",
+    "Puzzle.country3Language": "Ti\u1ebfng Hoa",
+    "Puzzle.country3City1": "B\u1eafc Kinh",
+    "Puzzle.country3City2": "Th\u01b0\u1ee3ng H\u1ea3i",
+    "Puzzle.country3HelpUrl": "http://vi.wikipedia.org/wiki/Trung_Qu%E1%BB%91c",
+    "Puzzle.country4": "Braxin",
+    "Puzzle.country4Language": "Ti\u1ebfng B\u1ed3 \u0110\u00e0o Nha",
+    "Puzzle.country4City1": "Rio de Janeiro",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4HelpUrl": "http://vi.wikipedia.org/wiki/Brasil",
+    "Puzzle.flag": "c\u1edd",
+    "Puzzle.language": "ng\u00f4n ng\u1eef:",
+    "Puzzle.languageChoose": "ch\u1ecdn...",
+    "Puzzle.cities": "c\u00e1c th\u00e0nh ph\u1ed1:",
+    "Puzzle.error0": "R\u1ea5t ho\u00e0n ch\u1ec9nh!\nT\u1ea5t c\u1ea3 %1 m\u1ea3nh \u0111\u1ec1u ch\u00ednh x\u00e1c.",
+    "Puzzle.error1": "G\u1ea7n \u0111\u00fang r\u1ed3i! M\u1ed9t m\u1ea3nh c\u00f2n ch\u01b0a ch\u00ednh x\u00e1c.",
+    "Puzzle.error2": "%1 m\u1ea3nh c\u00f2n ch\u01b0a ch\u00ednh x\u00e1c.",
+    "Puzzle.tryAgain": "C\u00e1c m\u1ea3nh \u0111\u01b0\u1ee3c \u0111\u00e1nh d\u1ea5u l\u00e0 kh\u00f4ng \u0111\u00fang.\nC\u1ed1 l\u00ean!",
+    "Puzzle.fullTitle": "\u0110\u1ed1 vui c\u1ee7a Blockly",
+    "Puzzle.title": "\u0110\u1ed1 vui",
+    "Puzzle.help": "Tr\u1ee3 gi\u00fap",
+    "Puzzle.checkAnswers": "Ki\u1ec3m tra \u0111\u00e1p \u00e1n",
+    "Puzzle.helpText": "V\u1edbi m\u1ed7i qu\u1ed1c gia (m\u00e0u xanh l\u00e1 c\u00e2y), h\u00e3y g\u1eafn v\u00e0o \u0111\u00f3 l\u00e1 c\u1edd \u0111\u00fang c\u1ee7a qu\u1ed1c gia \u0111\u00f3, ch\u1ecdn ng\u00f4n ng\u1eef, v\u00e0 n\u1ed1i ch\u1ed3ng c\u00e1c th\u00e0nh ph\u1ed1 c\u1ee7a n\u00f3 v\u00e0o qu\u1ed1c gia \u0111\u00f3.",
+    "Puzzle.helpImage": "help_en.png",
+    "Puzzle.helpOk": "OK",
+    "@metadata": {
+        "authors": [
+            "Qneutron",
+            "Tuankiet65"
+        ]
+    }
+}
