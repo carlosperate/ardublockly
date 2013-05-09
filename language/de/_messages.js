@@ -115,6 +115,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'von';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'bis';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'mache';
+Blockly.LANG_CONTROLS_FOR_TAIL = '';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Zähle die Variable "%1" von einem Startwert\n' +
     'bis zu einem Zielwert und führe für jeden Wert\n' +
     'eine Anweisung aus.';
@@ -123,6 +124,7 @@ Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://de.wikipedia.org/wiki/For-Schlei
 Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'Für Wert';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'aus der Liste';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST_TAIL = '';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'mache';
 Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'Führe eine Anweisung für jeden Wert in der Liste aus\n' +
     'und setzte dabei die Variable "%1" \n' +

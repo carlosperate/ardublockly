@@ -116,6 +116,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'from';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'to';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'do';
+Blockly.LANG_CONTROLS_FOR_TAIL = '';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Count from a start number to an end number.\n' +
     'For each count, set the current count number to\n' +
     'variable "%1", and then do some statements.';
@@ -124,6 +125,7 @@ Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'for each item';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'in list';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST_TAIL = '';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'do';
 Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'For each item in a list, set the item to\n' +
     'variable "%1", and then do some statements.';

@@ -276,6 +276,10 @@ Blockly.Language.controls_for = {
         .setCheck(Number)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_TO);
+    if (Blockly.LANG_CONTROLS_FOR_TAIL) {
+      this.appendDummyInput()
+          .appendTitle(Blockly.LANG_CONTROLS_FOR_TAIL);
+    }
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_DO);
     this.setPreviousStatement(true);
@@ -319,6 +323,11 @@ Blockly.Language.controls_forEach = {
         .appendTitle(Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM)
         .appendTitle(new Blockly.FieldVariable(null), 'VAR')
         .appendTitle(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST);
+    if (Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST_TAIL) {
+      this.appendDummyInput()
+          .appendTitle(Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST_TAIL);
+      this.setInputsInline(true);
+    }
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_FOREACH_INPUT_DO);
     this.setPreviousStatement(true);

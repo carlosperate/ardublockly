@@ -118,6 +118,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'từ';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'đến';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'thực hiện';
+Blockly.LANG_CONTROLS_FOR_TAIL = '';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Đếm từ số đầu đến số cuối.\n' +
     'Khi đến mỗi số, gán số vào biến "%1"\n' +
     'rồi thực hiện các lệnh.';
@@ -126,6 +127,7 @@ Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'với mỗi thành phần';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'trong danh sách';
+Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST_TAIL = '';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'thực hiện';
 Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'Trong một danh sách, lấy từng thành phần, gán vào\n' +
     'biến "%1", rồi thực hiện một số lệnh.';
