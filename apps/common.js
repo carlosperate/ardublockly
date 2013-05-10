@@ -53,14 +53,17 @@ Blockly.Apps.updateCapacity = function(MSG) {
   var cap = Blockly.mainWorkspace.remainingCapacity();
   var p = document.getElementById('capacity');
   if (cap == Infinity) {
-    p.innerHTML = '';
-  } else if (cap == 0) {
-    p.innerHTML = MSG.capacity0;
-  } else if (cap == 1) {
-    p.innerHTML = MSG.capacity1;
+    p.style.display = 'none';
   } else {
-    cap = Number(cap);
-    p.innerHTML = MSG.capacity2.replace('%1', cap);
+    p.style.display = 'inline';
+    if (cap == 0) {
+      p.innerHTML = MSG.capacity0;
+    } else if (cap == 1) {
+      p.innerHTML = MSG.capacity1;
+    } else {
+      cap = Number(cap);
+      p.innerHTML = MSG.capacity2.replace('%1', cap);
+    }
   }
 };
 
