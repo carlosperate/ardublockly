@@ -94,16 +94,15 @@ Turtle.init = function() {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
   } else {
     // Load the editor with starting blocks.
-    var xml = '<xml>' +
+    var xml =
         '  <block type="draw_move" x="70" y="70">' +
         '    <value name="VALUE">' +
         '      <block type="math_number">' +
-        '        <title name="NUM">10</title>' +
+        '        <title name="NUM">100</title>' +
         '      </block>' +
         '    </value>' +
-        '  </block>' +
-        '</xml>';
-    xml = Blockly.Xml.textToDom(xml);
+        '  </block>';
+    xml = Blockly.Xml.textToDom('<xml>' + xml + '</xml>');
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
 
@@ -149,7 +148,7 @@ Turtle.display = function() {
   Turtle.ctxDisplay.globalCompositeOperation = 'copy';
   Turtle.ctxDisplay.drawImage(Turtle.ctxScratch.canvas, 0, 0);
   Turtle.ctxDisplay.globalCompositeOperation = 'source-over';
-
+  // Draw the turtle.
   if (Turtle.visible) {
     // Draw the turtle body.
     var radius = Turtle.ctxScratch.lineWidth / 2 + 10;
@@ -264,7 +263,7 @@ Turtle.animate = function() {
 /**
  * Execute one step.
  * @param {string} command Logo-style command (e.g. 'FD' or 'RT').
- * @param {!Array} values List of arguments for the cammand.
+ * @param {!Array} values List of arguments for the command.
  */
 Turtle.step = function(command, values) {
   switch (command) {
@@ -295,13 +294,11 @@ Turtle.step = function(command, values) {
       }
       break;
     case 'DP':  // Draw Print
-      if (Turtle.penDownValue) {
-        Turtle.ctxScratch.save();
-        Turtle.ctxScratch.translate(Turtle.x, Turtle.y);
-        Turtle.ctxScratch.rotate(2 * Math.PI * (Turtle.heading - 90) / 360);
-        Turtle.ctxScratch.fillText(values[0], 0, 0);
-        Turtle.ctxScratch.restore();
-      }
+      Turtle.ctxScratch.save();
+      Turtle.ctxScratch.translate(Turtle.x, Turtle.y);
+      Turtle.ctxScratch.rotate(2 * Math.PI * (Turtle.heading - 90) / 360);
+      Turtle.ctxScratch.fillText(values[0], 0, 0);
+      Turtle.ctxScratch.restore();
       break;
     case 'DF':  // Draw Font
       Turtle.ctxScratch.font = values[2] + ' ' + values[1] + 'pt ' + values[0];
@@ -315,7 +312,7 @@ Turtle.step = function(command, values) {
     case 'PW':  // Pen Width
       Turtle.ctxScratch.lineWidth = values[0];
       break;
-    case 'PC':  // Pen Color
+    case 'PC':  // Pen Colour
       Turtle.ctxScratch.strokeStyle = values[0];
       Turtle.ctxScratch.fillStyle = values[0];
       break;

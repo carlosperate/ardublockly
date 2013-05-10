@@ -27,48 +27,6 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-// Restricted blocks for tutorial.
-
-Blockly.Language.draw_move_forward_100 = {
-  // Block for moving forward 100 pixels.
-  helpUrl: '',
-  init: function() {
-    this.setColour(160);
-    this.appendDummyInput()
-        .appendTitle(MSG.moveForward)
-        .appendTitle('100');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip(MSG.moveForward100Tooltip);
-  }
-};
-
-Blockly.JavaScript.draw_move_forward_100 = function() {
-  // Generate JavaScript for moving forward 100 pixels.
-  return 'Turtle.moveForward(100, \'' + this.id + '\');\n';
-};
-
-Blockly.Language.draw_turn_right_90 = {
-  // Block for turning right 90 degrees.
-  helpUrl: '',
-  init: function() {
-    this.setColour(160);
-    this.appendDummyInput()
-        .appendTitle(MSG.turnRight)
-        .appendTitle('90\u00B0');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip(MSG.turnRight90Tooltip);
-  }
-};
-
-Blockly.JavaScript.draw_turn_right_90 = function() {
-  // Generate JavaScript for turning right 90 degrees.
-  return 'Turtle.turnRight(90, \'' + this.id + '\');\n';
-};
-
-// General blocks.
-
 Blockly.Language.draw_move = {
   // Block for moving forward or backwards.
   helpUrl: '',
