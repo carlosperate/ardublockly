@@ -15,7 +15,7 @@
         <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
             <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
 
-        <p class="levelLine">{$ij.MSG.level}: &nbsp;
+        <div>{$ij.MSG.level}: &nbsp;
         {for $i in range(1, 11)}
           {if $i == $ij.level}
             <span class="tab" id="selected">{$i}</span>
@@ -23,22 +23,22 @@
             <a class="tab" href="?level={$i}">{$i}</a>
           {/if}
         {/for}
-        </p>
-
-        <div id="bubble">
-          <div id="hint">{$ij.MSG.hints[$ij.level]}</div>
         </div>
-        <div id="capacity"></div>
-        <img id="pegman_bubble" height=42 width=55 src="pegman_bubble.png">
 
-        <div>
-          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="400px">
+        <div style="position: relative">
+          <div id="hintBubble">
+            <div id="hint">{$ij.MSG.hints[$ij.level]}</div>
+          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px">
             <g id="look">
               <path d="M 0,-15 a 15 15 0 0 1 15 15" />
               <path d="M 0,-35 a 35 35 0 0 1 35 35" />
               <path d="M 0,-55 a 55 55 0 0 1 55 55" />
             </g>
           </svg>
+          <div id="capacityBubble">
+            <div id="capacity"></div>
+          </div>
         </div>
 
         <table width="100%">

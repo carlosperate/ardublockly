@@ -166,6 +166,8 @@ Maze.map = [
   [0, 2, 1, 1, 1, 0, 1, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]]
 ][Maze.LEVEL];
+// Add blank row at top for hint bubble.
+Maze.map.unshift([0, 0, 0, 0, 0, 0, 0, 0]);
 
 /**
  * Measure maze dimensions and set sizes.
@@ -205,103 +207,25 @@ Maze.startDirection = Maze.DirectionType.EAST;
  */
 Maze.pidList = [];
 
-Maze.deadEnd = function(x, y, angle) {
-  var path = document.createElementNS(Blockly.SVG_NS, 'path');
-  path.setAttribute('d',
-      'M' + (x + Maze.PATH_WIDTH) + ',' + (y + Maze.SQUARE_SIZE) +
-      ' v' + -Maze.SQUARE_SIZE / 2 +
-      ' a' + (Maze.PATH_WIDTH / 2) + ',' + (Maze.PATH_WIDTH / 2) + ' 0 0,1 ' +
-          Maze.PATH_WIDTH + ',0' +
-      ' v' + Maze.SQUARE_SIZE / 2);
-  path.setAttribute('fill', 'yellow');
-  path.setAttribute('stroke-width', 1);
-  path.setAttribute('stroke', '#C8BEAE');
-  path.setAttribute('transform', 'rotate(' + angle + ' ' +
-      (x + Maze.SQUARE_SIZE / 2) + ' ' + (y + Maze.SQUARE_SIZE / 2) + ')');
-  return path;
-};
-
-Maze.thru = function(x, y, angle) {
-  var rect = document.createElementNS(Blockly.SVG_NS, 'rect');
-  rect.setAttribute('x', x + Maze.PATH_WIDTH);
-  rect.setAttribute('y', y);
-  rect.setAttribute('width', Maze.PATH_WIDTH);
-  rect.setAttribute('height', Maze.SQUARE_SIZE);
-  rect.setAttribute('fill', 'yellow');
-  rect.setAttribute('stroke-width', 1);
-  rect.setAttribute('stroke', '#C8BEAE');
-  rect.setAttribute('transform', 'rotate(' + angle + ' ' +
-      (x + Maze.SQUARE_SIZE / 2) + ' ' + (y + Maze.SQUARE_SIZE / 2) + ')');
-  return rect;
-};
-
-Maze.elbow = function(x, y, angle) {
-  var rx = Maze.PATH_WIDTH / 2;
-  var path = document.createElementNS(Blockly.SVG_NS, 'path');
-  path.setAttribute('fill', 'yellow');
-  path.setAttribute('stroke-width', 1);
-  path.setAttribute('stroke', '#C8BEAE');
-  path.setAttribute('d',
-      'M' + (x + Maze.PATH_WIDTH) + ',' + (y + Maze.SQUARE_SIZE) +
-      ' v' + -(Maze.SQUARE_SIZE / 2) +
-      ' a' + rx + ',' + rx + ' 0 0,1 ' + rx + ',' + -rx +
-      ' h' + (Maze.SQUARE_SIZE / 2) +
-      ' v' + Maze.PATH_WIDTH +
-      ' h' + -Maze.PATH_WIDTH +
-      ' v' + Maze.PATH_WIDTH);
-  path.setAttribute('transform', 'rotate(' + angle + ' ' +
-      (x + Maze.SQUARE_SIZE / 2) + ' ' + (y + Maze.SQUARE_SIZE / 2) + ')');
-  return path;
-};
-
-Maze.junction = function(x, y, angle) {
-  var path = document.createElementNS(Blockly.SVG_NS, 'path');
-  path.setAttribute('fill', 'yellow');
-  path.setAttribute('stroke-width', 1);
-  path.setAttribute('stroke', '#C8BEAE');
-  path.setAttribute('d', 'M' + (x + Maze.PATH_WIDTH) + ',' + y +
-      ' h' + Maze.PATH_WIDTH + ' v' + Maze.PATH_WIDTH +
-      ' h' + Maze.PATH_WIDTH + ' v' + Maze.PATH_WIDTH +
-      ' h' + -Maze.PATH_WIDTH + ' v' + Maze.PATH_WIDTH +
-      ' h' + -Maze.PATH_WIDTH + ' v' + -Maze.SQUARE_SIZE);
-  path.setAttribute('transform', 'rotate(' + angle + ' ' +
-      (x + Maze.SQUARE_SIZE / 2) + ' ' + (y + Maze.SQUARE_SIZE / 2) + ')');
-  return path;
-};
-
-Maze.cross = function(x, y, angle) {
-  var path = document.createElementNS(Blockly.SVG_NS, 'path');
-  path.setAttribute('fill', 'yellow');
-  path.setAttribute('stroke-width', 1);
-  path.setAttribute('stroke', '#C8BEAE');
-  path.setAttribute('d', 'M' + (x + Maze.PATH_WIDTH) + ',' + y +
-      ' h' + Maze.PATH_WIDTH + ' v' + Maze.PATH_WIDTH +
-      ' h' + Maze.PATH_WIDTH + ' v' + Maze.PATH_WIDTH +
-      ' h' + -Maze.PATH_WIDTH + ' v' + Maze.PATH_WIDTH +
-      ' h' + -Maze.PATH_WIDTH + ' v' + -Maze.PATH_WIDTH +
-      ' h' + -Maze.PATH_WIDTH + ' v' + -Maze.PATH_WIDTH +
-      ' h' + Maze.PATH_WIDTH + ' v' + -Maze.PATH_WIDTH);
-  path.setAttribute('transform', 'rotate(' + angle + ' ' +
-      (x + Maze.SQUARE_SIZE / 2) + ' ' + (y + Maze.SQUARE_SIZE / 2) + ')');
-  return path;
-};
-
+// Map each possible shape to a sprite.
+// Input: Binary string representing Centre/North/West/South/East squares.
+// Output: [x, y] coordinates of each tile's sprite in tiles.png.
 Maze.tile_SHAPES = {
-  '10010': [Maze.deadEnd, 0],
-  '10001': [Maze.deadEnd, 90],
-  '11000': [Maze.deadEnd, 180],
-  '10100': [Maze.deadEnd, -90],
-  '11010': [Maze.thru, 0],
-  '10101': [Maze.thru, 90],
-  '10110': [Maze.elbow, 0],
-  '10011': [Maze.elbow, 90],
-  '11001': [Maze.elbow, 180],
-  '11100': [Maze.elbow, -90],
-  '11110': [Maze.junction, 0],
-  '10111': [Maze.junction, 90],
-  '11011': [Maze.junction, 180],
-  '11101': [Maze.junction, -90],
-  '11111': [Maze.cross, -90]
+  '10010': [4, 0],  // Dead ends
+  '10001': [3, 3],
+  '11000': [0, 1],
+  '10100': [0, 2],
+  '11010': [4, 1],  // Vertical
+  '10101': [3, 2],  // Horizontal
+  '10110': [0, 0],  // Elbows
+  '10011': [2, 0],
+  '11001': [4, 2],
+  '11100': [2, 3],
+  '11110': [1, 1],  // Junctions
+  '10111': [1, 0],
+  '11011': [2, 1],
+  '11101': [1, 2],
+  '11111': [2, 2]   // Cross
 };
 
 Maze.drawMap = function() {
@@ -313,8 +237,32 @@ Maze.drawMap = function() {
   square.setAttribute('height', Maze.MAZE_HEIGHT);
   square.setAttribute('fill', '#F1EEE7');
   square.setAttribute('stroke-width', 1);
-  square.setAttribute('stroke', '#C8BEAE');
+  square.setAttribute('stroke', '#CCB');
   svg.appendChild(square);
+
+  // Draw the grid lines.
+  // The grid lines are offset so that the lines pass through the centre of
+  // each square.  A half-pixel offset is also added to as standard SVG
+  // practice to avoid blurriness.
+  var offset = Maze.SQUARE_SIZE / 2 + 0.5;
+  for (var k = 0; k < Maze.ROWS; k++) {
+    var h_line = document.createElementNS(Blockly.SVG_NS, 'line');
+    h_line.setAttribute('y1', k * Maze.SQUARE_SIZE + offset);
+    h_line.setAttribute('x2', Maze.MAZE_WIDTH);
+    h_line.setAttribute('y2', k * Maze.SQUARE_SIZE + offset);
+    h_line.setAttribute('stroke', '#CCB');
+    h_line.setAttribute('stroke-width', 1);
+    svg.appendChild(h_line);
+  }
+  for (var k = 0; k < Maze.COLS; k++) {
+    var v_line = document.createElementNS(Blockly.SVG_NS, 'line');
+    v_line.setAttribute('x1', k * Maze.SQUARE_SIZE + offset);
+    v_line.setAttribute('x2', k * Maze.SQUARE_SIZE + offset);
+    v_line.setAttribute('y2', Maze.MAZE_HEIGHT);
+    v_line.setAttribute('stroke', '#CCB');
+    v_line.setAttribute('stroke-width', 1);
+    svg.appendChild(v_line);
+  }
 
   // Draw the tiles making up the maze map.
 
@@ -328,6 +276,7 @@ Maze.drawMap = function() {
   };
 
   // Compute and draw the tile for each square.
+  var tileId = 0;
   for (var y = 0; y < Maze.ROWS; y++) {
     for (var x = 0; x < Maze.COLS; x++) {
       // Compute the tile index.
@@ -339,32 +288,33 @@ Maze.drawMap = function() {
 
       // Draw the tile (or nothing, if wall).
       if (Maze.tile_SHAPES[tile]) {
-        var shape = Maze.tile_SHAPES[tile][0];
-        var angle = Maze.tile_SHAPES[tile][1];
-        svg.appendChild(shape(x * Maze.SQUARE_SIZE,
-                              y * Maze.SQUARE_SIZE, angle));
+        var left = Maze.tile_SHAPES[tile][0];
+        var top = Maze.tile_SHAPES[tile][1];
+        // Tile's clipPath element.
+        var tileClip = document.createElementNS(Blockly.SVG_NS, 'clipPath');
+        tileClip.setAttribute('id', 'tileClipPath' + tileId);
+        var clipRect = document.createElementNS(Blockly.SVG_NS, 'rect');
+        clipRect.setAttribute('width', Maze.SQUARE_SIZE);
+        clipRect.setAttribute('height', Maze.SQUARE_SIZE);
+
+        clipRect.setAttribute('x', x * Maze.SQUARE_SIZE);
+        clipRect.setAttribute('y', y * Maze.SQUARE_SIZE);
+
+        tileClip.appendChild(clipRect);
+        svg.appendChild(tileClip);
+        // Tile sprite.
+        var tile = document.createElementNS(Blockly.SVG_NS, 'image');
+        tile.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+            'tiles.png');
+        tile.setAttribute('height', Maze.SQUARE_SIZE * 4);
+        tile.setAttribute('width', Maze.SQUARE_SIZE * 5);
+        tile.setAttribute('clip-path', 'url(#tileClipPath' + tileId + ')');
+        tile.setAttribute('x', (x - left) * Maze.SQUARE_SIZE);
+        tile.setAttribute('y', (y - top) * Maze.SQUARE_SIZE);
+        svg.appendChild(tile);
+        tileId++;
       }
     }
-  }
-
-  // Draw the grid lines.
-  for (var k = 1; k < Maze.ROWS; k++) {
-    var h_line = document.createElementNS(Blockly.SVG_NS, 'line');
-    h_line.setAttribute('y1', k * Maze.SQUARE_SIZE);
-    h_line.setAttribute('x2', Maze.MAZE_WIDTH);
-    h_line.setAttribute('y2', k * Maze.SQUARE_SIZE);
-    h_line.setAttribute('stroke', '#C8BEAE');
-    h_line.setAttribute('stroke-width', 2);
-    svg.appendChild(h_line);
-  }
-  for (var k = 1; k < Maze.COLS; k++) {
-    var v_line = document.createElementNS(Blockly.SVG_NS, 'line');
-    v_line.setAttribute('x1', k * Maze.SQUARE_SIZE);
-    v_line.setAttribute('x2', k * Maze.SQUARE_SIZE);
-    v_line.setAttribute('y2', Maze.MAZE_HEIGHT);
-    v_line.setAttribute('stroke', '#C8BEAE');
-    v_line.setAttribute('stroke-width', 2);
-    svg.appendChild(v_line);
   }
 
   // Add finish marker.
