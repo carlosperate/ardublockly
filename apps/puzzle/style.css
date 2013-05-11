@@ -6,6 +6,18 @@ h1 {
   font-weight: normal;
   font-size: 140%;
 }
+.farSide {
+  text-align: right;
+}
+html[dir="RTL"] .farSide {
+  text-align: left;
+}
+html[dir="RTL"] .ltrShow {
+  display: none;
+}
+html[dir="LTR"] .rtlShow {
+  display: none;
+}
 
 /* Buttons */
 button {
@@ -40,7 +52,7 @@ button:hover {
   border: 1px solid black;
   width: 50%;
   position: absolute;
-  left: 2.5em;
+  left: 25%;
   top: 5em;
   z-index: 1;
   -moz-border-radius: 8px;

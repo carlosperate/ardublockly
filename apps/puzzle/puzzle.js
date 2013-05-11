@@ -60,8 +60,7 @@ Puzzle.init = function() {
   // });
   var blocklyDiv = document.getElementById('blockly');
   var onresize = function(e) {
-    blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
-        'px';
+    blocklyDiv.style.width = (window.innerWidth - 20) + 'px';
     blocklyDiv.style.height = (window.innerHeight - blocklyDiv.offsetTop - 22) +
         'px';
   };

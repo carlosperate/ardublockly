@@ -175,18 +175,21 @@
       {/msg}
     </span>
   </div>
+
   <table id="header" width="100%">
     <tr>
       <td valign="bottom">
-        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
-            <a href="../index.html">Apps</a> &gt;
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a>
+            <span class="ltrShow"> &gt; </span><span class="rtlShow"> &lt; </span>
+            <a href="../index.html">Apps</a>
+            <span class="ltrShow"> &gt; </span><span class="rtlShow"> &lt; </span>
             {msg meaning="Puzzle.title"
                  desc="brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle."}
               Puzzle
             {/msg}
         </h1>
       </td>
-      <td align="right">
+      <td class="farSide">
         <button id="helpButton" onclick="Puzzle.showHelp();">
           {msg meaning="Puzzle.help"
                desc="the label on a button the user can press for help"}
@@ -221,7 +224,7 @@
                   help_en.png
                 {/msg}">
     </div>
-    <div style="text-align: right; padding-top: 1ex; padding-right: 3ex">
+    <div class="farSide" style="padding: 1ex 3ex 0">
       <button id="okButton" onclick="Puzzle.hideHelp()">
         {msg meaning="Puzzle.helpOk"
              desc="label on button for user to press when done reading help information"}
