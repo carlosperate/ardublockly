@@ -1216,14 +1216,16 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
     }
   }
 
-  if (collapsed && this.mutator) {
-    this.mutator.setVisible(false);
-  }
-  if (collapsed && this.comment) {
-    this.comment.setVisible(false);
-  }
-  if (collapsed && this.warning) {
-    this.warning.setVisible(false);
+  if (collapsed) {
+    if (this.mutator) {
+      this.mutator.setVisible(false);
+    }
+    if (this.comment) {
+      this.comment.setVisible(false);
+    }
+    if (this.warning) {
+      this.warning.setVisible(false);
+    }
   }
 
   if (renderList.length == 0) {

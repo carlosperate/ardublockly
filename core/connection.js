@@ -612,9 +612,15 @@ Blockly.Connection.prototype.hideAll = function() {
           this.dbList_[connection.type].removeConnection_(connection);
         }
       }
-      // Hide all comments of all children.
+      // Close all bubbles of all children.
+      if (block.mutator) {
+        block.mutator.setVisible(false);
+      }
       if (block.comment) {
         block.comment.setVisible(false);
+      }
+      if (block.warning) {
+        block.warning.setVisible(false);
       }
     }
   }

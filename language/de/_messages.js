@@ -41,6 +41,8 @@ Blockly.MSG_EXPAND_BLOCK = 'Block entfalten';
 Blockly.MSG_DISABLE_BLOCK = 'Block deaktivieren';
 Blockly.MSG_ENABLE_BLOCK = 'Block aktivieren';
 Blockly.MSG_HELP = 'Hilfe';
+Blockly.MSG_COLLAPSE_ALL = 'Collapse Blocks';
+Blockly.MSG_EXPAND_ALL = 'Expand Blocks';
 
 // Variable renaming.
 Blockly.MSG_CHANGE_VALUE_TITLE = 'Wert ändern:';

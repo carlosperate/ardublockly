@@ -41,6 +41,8 @@ Blockly.MSG_EXPAND_BLOCK = 'Mở Lớn';
 Blockly.MSG_DISABLE_BLOCK = 'Ngưng Tác Dụng';
 Blockly.MSG_ENABLE_BLOCK = 'Phục Hồi Tác Dụng';
 Blockly.MSG_HELP = 'Trợ Giúp';
+Blockly.MSG_COLLAPSE_ALL = 'Collapse Blocks';
+Blockly.MSG_EXPAND_ALL = 'Expand Blocks';
 
 // Variable renaming.
 Blockly.MSG_CHANGE_VALUE_TITLE = 'Thay giá trị thành:';

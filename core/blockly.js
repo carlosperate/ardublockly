@@ -385,6 +385,37 @@ Blockly.copy_ = function(block) {
 Blockly.showContextMenu_ = function(x, y) {
   var options = [];
 
+  var hasCollapsedBlocks = false;
+  var hasExpandedBlocks = false;
+  var topBlocks = Blockly.mainWorkspace.getTopBlocks(false);
+  for (var i = 0; i < topBlocks.length; i++) {
+    if (topBlocks[i].collapsed) {
+      hasCollapsedBlocks = true;
+    } else {
+      hasExpandedBlocks = true;
+    }
+  }
+
+  // Option to collapse top blocks.
+  var collapseOption = {enabled: hasExpandedBlocks};
+  collapseOption.text = Blockly.MSG_COLLAPSE_ALL;
+  collapseOption.callback = function() {
+    for (var i = 0; i < topBlocks.length; i++) {
+      topBlocks[i].setCollapsed(true);
+    }
+  };
+  options.push(collapseOption);
+
+  // Option to expand top blocks.
+  var expandOption = {enabled: hasCollapsedBlocks};
+  expandOption.text = Blockly.MSG_EXPAND_ALL;
+  expandOption.callback = function() {
+    for (var i = 0; i < topBlocks.length; i++) {
+      topBlocks[i].setCollapsed(false);
+    }
+  };
+  options.push(expandOption);
+
   // Option to get help.
   var helpOption = {enabled: false};
   helpOption.text = Blockly.MSG_HELP;

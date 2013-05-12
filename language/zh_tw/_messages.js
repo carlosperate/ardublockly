@@ -41,6 +41,8 @@ Blockly.MSG_EXPAND_BLOCK = '展開積木';
 Blockly.MSG_DISABLE_BLOCK = '停用積木';
 Blockly.MSG_ENABLE_BLOCK = '啟用積木';
 Blockly.MSG_HELP = '說明';
+Blockly.MSG_COLLAPSE_ALL = 'Collapse Blocks';
+Blockly.MSG_EXPAND_ALL = 'Expand Blocks';
 
 // Variable renaming.
 Blockly.MSG_CHANGE_VALUE_TITLE = '修改值:';
