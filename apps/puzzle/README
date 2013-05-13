@@ -4,28 +4,32 @@ After changing template.soy:
 java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
 
 # Extract messages from template.soy.
-java -jar ../../../closure-templates-msg-extractor/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
+java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
 
 # Create en.json, qqq.json.
 ../../i18n/xliff_to_json.py extracted_msgs.xlf
 
 # Upload to translatewiki.net or:
 # Make a copy of en.json, changing name and locale string to target language.
+# Example given is for German.
 cp en.json de.json
 sed -i 's/"locale": "en"/"locale": "de"/' de.json
+# Edit target file.
 
 # Optionally create new help image.
 
-# Edit target file.
+# Create *.xlf.  By default, en.json and qqq.json are skipped.
+../../i18n/json_to_xliff.py *.json
 
-# Create fr.xlf.
-../../i18n/json_to_xliff.py fr.json
+# Run the command-line provided by the previous script.  It will look something like:
+java -jar ../_soy/SoyToJsSrcCompiler.jar --locales af,de,vn --messageFilePathFormat {LOCALE}.xlf --outputPathFormat {LOCALE}.js --srcs template.soy
 
-# Create fr.js.
-java -jar ../_soy/SoyToJsSrcCompiler.jar --locales fr --messageFilePathFormat fr.xlf --outputPathFormat fr.js template.soy
-
-# Manually create fr.html by copying and editing en.html.
+# Manually create each <LANG>.html by copying and editing en.html.
+# Example given is for French.
 - Edit top line: <html dir="ltr" lang=fr">
 - No need to change title: it's done programmatically.
 - Include fr.js instead of en.js
 - Optionally replace language/en/_messages.js.
+
+# Add new language to index.html.
+

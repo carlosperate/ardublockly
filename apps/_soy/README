@@ -18,6 +18,9 @@ Contents:
 + SoyToJsSrcCompiler.jar
     Executable jar that compiles template files into JavaScript files.
 
++ SoyMsgExtractor.jar
+    Executable jar that extracts messages from template files into XLF files.
+
 + soyutils.js
     Helper utilities required by all JavaScript code that SoyToJsSrcCompiler
     generates. Equivalent functionality to soyutils_usegoog.js, but this
