@@ -73,7 +73,7 @@ Blockly.Language.maze_isPath = {
   helpUrl: '',
   init: function() {
     this.setColour(120);
-    this.setOutput(true, Boolean);
+    this.setOutput(true, 'Boolean');
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.setTooltip(MSG.isPathTooltip);
@@ -100,7 +100,7 @@ Blockly.Language.maze_if = {
         .appendTitle(MSG.ifPath)
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.appendStatementInput('DO')
-        .appendTitle(MSG.do);
+        .appendTitle(MSG.doCode);
     this.setTooltip(MSG.ifTooltip);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -126,9 +126,9 @@ Blockly.Language.maze_ifElse = {
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.appendStatementInput('DO')
-        .appendTitle(MSG.do);
+        .appendTitle(MSG.doCode);
     this.appendStatementInput('ELSE')
-        .appendTitle(MSG.else);
+        .appendTitle(MSG.elseCode);
     this.setTooltip(MSG.ifelseTooltip);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -155,7 +155,7 @@ Blockly.Language.maze_forever = {
     this.setColour(120);
     this.appendDummyInput()
         .appendTitle(MSG.repeatUntilFinished);
-    this.appendStatementInput('DO').appendTitle(MSG.do);
+    this.appendStatementInput('DO').appendTitle(MSG.doCode);
     this.setPreviousStatement(true);
     this.setTooltip(MSG.whileTooltip);
   }
