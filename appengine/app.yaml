@@ -12,6 +12,10 @@ handlers:
   static_files: storage.js
   upload: storage\.js
 
+# Report service.
+- url: /report
+  script: report.py
+
 # Blockly files.
 - url: /static
   static_dir: static
