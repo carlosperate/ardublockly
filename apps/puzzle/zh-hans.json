@@ -32,7 +32,7 @@
     "Puzzle.help": "\u5e2e\u52a9",
     "Puzzle.checkAnswers": "\u8d26\u6237\u6838\u67e5",
     "Puzzle.helpText": "\u4e3a\u6bcf\u4e2a\u56fd\u5bb6 \uff08\u7eff\u8272\uff09\u6dfb\u52a0\u56fd\u65d7\u3001 \u9009\u62e9\u8bed\u8a00\uff0c\u548c\u521b\u5efa\u57ce\u5e02\u5217\u8868\u3002",
-    "Puzzle.helpImage": "help_en.png",
+    "Puzzle.helpImage": "help_zh-hans.png",
     "Puzzle.helpOk": "\u786e\u8ba4",
     "@metadata": {
         "authors": [
