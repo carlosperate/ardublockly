@@ -1,0 +1,72 @@
+<html dir="ltr" lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Robert Posiadała">
+  <title>Labirynt z Blockly</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="template.js"></script>
+  <script>
+    var MSG = {
+      // Block text.
+      moveForward: 'idź naprzód',
+      turnLeft: 'skręć w lewo',
+      turnRight: 'skręć w prawo',
+      do: 'wykonaj',
+      else: 'albo',
+      pathAhead: 'jeśli droga prowadzi prosto',
+      pathLeft: 'jeśli droga skręca w lewo',
+      pathRight: 'jeśli droga skręca w prawo',
+      repeatUntilFinished: 'powtarzaj dopóki nie skończysz',
+      // Tooltips.
+      moveForwardTooltip: 'Przesuwa Pegman-a prosto o jedno pole.',
+      turnTooltip: 'Obraca Pegman-a w lewo lub prawo o 90 stopni.',
+      ifTooltip: 'Jeśli droga prowadzi we wskazanym kierunku,\n' +
+          'wykonaj polecenia.',
+      ifelseTooltip: 'Jeśli droga prowadzi we wskazanym kierunku,\n' +
+          'wykonaj pierwszy zestaw poleceń.\n' +
+          'W przeciwnym razie, wykonaj drugi zestaw poleceń.',
+      whileTooltip: 'Wykonuj zestaw poleceń dopóki nie osiągniesz punktu końcowego.',
+      codeTooltip: 'Zobacz utworzony kod JavaScript.',
+      linkTooltip: 'Podziel się swoim programem.',
+      randomizeMarkerTooltip: 'Wylosuj początek i koniec drogi.',
+      // Level hints.
+      hints: [undefined, // There is no level 0.
+        "Program jest ciągiem poleceń.  Ustaw kilka poleceń 'idź naprzód' jedno po drugi abym doszedł do celu.",
+        "Jaki jest ciąg poleceń abym przeszedł tą drogą?",
+        "Komputery mają ograniczoną pamięć. Dojdź do końca drogi używając 2 poleceń.  Użyj 'powtarzaj dopóki nie skończysz' aby wykonać polecenie więcej niż raz.",
+        "Dojdź do końca używając tylko 5 poleceń.",
+        "Pegman powinien skręcić w lewo jeśli nie może iść naprzód.",
+        "Warunek 'jeśli' wykona polecenia jeśli jest prawdziwy. Spróbuj skręcić w lewo jeśli droga skręca w lewo.",
+        "Ten labirynt wydaje się bardziej skomplikowany niż poprzedni, ale nie jest.",
+        "Możesz użyć więcej razy warunek 'jeśli'.",
+        "Warunek jeśli-albo służy do wykonania jednego zestawu poleceń albo drugiego.",
+        "Czy dasz radę przejść ten trudny labirynt? Wypróbnuj metodę trzymania się lewą ręką ściany. Tylko dla zaawansowanych programistów!"
+      ],
+      // Misc text.
+      level: 'Poziom',
+      capacity0: 'Pozostało <span id="capacityNumber">0</span> poleceń.',
+      capacity1: 'Wykorzystano <span id="capacityNumber">1</span> polecenie.',
+      capacity2: 'Wykorzystano <span id="capacityNumber">%1</span> poleceń.',
+      runProgram: 'Uruchom program',
+      resetProgram: 'Wyczyść',
+      nextLevel: 'Gratulacje!\nCzy chcesz przejść na poziom %1?',
+      finalLevel: 'Gratulacje!\nOstatni poziom został rozwiązany.',
+      title: 'Labirynt',
+      oneTopBlock: 'Na tym poziomie, ustaw wszystkie polecania na białym polu.'
+    };
+    if ('BlocklyStorage' in window) {
+      BlocklyStorage.HTTPREQUEST_ERROR = 'Wystąpił problem z przesłaniem żądania.\n';
+      BlocklyStorage.LINK_ALERT = 'Udostępnij link ze swoimi poleceniami:\n\n';
+      BlocklyStorage.HASH_ERROR = 'Przepraszamy, "%1" jest nieodpowiedni do zapisanych plików Blockly.';
+      BlocklyStorage.XML_ERROR = 'Nie można wgrać pliku.\n'+
+          'Może plik został zapisany w innej wersji Blockly?\nXML: ';
+    }
+    var languageSrc = ['language/en/_messages.js'];
+  </script>
+</head>
+<body>
+  <script type="text/javascript" src="maze.js"></script>
+</body>
+</html>
