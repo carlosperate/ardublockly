@@ -114,7 +114,8 @@ Blockly.FieldTextInput.prototype.CURSOR = 'text';
  * @private
  */
 Blockly.FieldTextInput.prototype.showEditor_ = function() {
-  if (window.opera) {
+  if (goog.userAgent.MOBILE || window.opera) {
+    // Mobile browsers have issues with in-line textareas (focus & keyboards).
     /* HACK:
      The current version of Opera (12.00) does not support foreignObject
      content.  Instead of presenting an inline editor, use a modal prompt.
