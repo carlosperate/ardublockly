@@ -28,7 +28,7 @@ Blockly.Language.logic_compare = {
   helpUrl: Blockly.LANG_LOGIC_COMPARE_HELPURL,
   init: function() {
     this.setColour(120);
-    this.setOutput(true, Boolean);
+    this.setOutput(true, 'Boolean');
     this.appendValueInput('A');
     this.appendValueInput('B')
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
@@ -64,11 +64,11 @@ Blockly.Language.logic_operation = {
   helpUrl: Blockly.LANG_LOGIC_OPERATION_HELPURL,
   init: function() {
     this.setColour(120);
-    this.setOutput(true, Boolean);
+    this.setOutput(true, 'Boolean');
     this.appendValueInput('A')
-        .setCheck(Boolean);
+        .setCheck('Boolean');
     this.appendValueInput('B')
-        .setCheck(Boolean)
+        .setCheck('Boolean')
         .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -94,9 +94,9 @@ Blockly.Language.logic_negate = {
   helpUrl: Blockly.LANG_LOGIC_NEGATE_HELPURL,
   init: function() {
     this.setColour(120);
-    this.setOutput(true, Boolean);
+    this.setOutput(true, 'Boolean');
     this.appendValueInput('BOOL')
-        .setCheck(Boolean)
+        .setCheck('Boolean')
         .appendTitle(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT);
     this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP);
   }
@@ -107,7 +107,7 @@ Blockly.Language.logic_boolean = {
   helpUrl: Blockly.LANG_LOGIC_BOOLEAN_HELPURL,
   init: function() {
     this.setColour(120);
-    this.setOutput(true, Boolean);
+    this.setOutput(true, 'Boolean');
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldDropdown(this.BOOLEANS), 'BOOL');
     this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP);
@@ -123,7 +123,7 @@ Blockly.Language.logic_null = {
   helpUrl: Blockly.LANG_LOGIC_NULL_HELPURL,
   init: function() {
     this.setColour(120);
-    this.setOutput(true, null);
+    this.setOutput(true);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_LOGIC_NULL);
     this.setTooltip(Blockly.LANG_LOGIC_NULL_TOOLTIP);
@@ -136,15 +136,13 @@ Blockly.Language.logic_ternary = {
   init: function() {
     this.setColour(120);
     this.appendValueInput('IF')
-        .setCheck(Boolean)
+        .setCheck('Boolean')
         .appendTitle(Blockly.LANG_LOGIC_TERNARY_CONDITION);
     this.appendValueInput('THEN')
-        .setCheck(null)
         .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_TRUE);
     this.appendValueInput('ELSE')
-        .setCheck(null)
         .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_FALSE);
-    this.setOutput(true, null);
+    this.setOutput(true);
     this.setTooltip(Blockly.LANG_LOGIC_TERNARY_TOOLTIP);
   }
 };

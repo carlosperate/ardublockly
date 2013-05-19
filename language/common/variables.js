@@ -33,7 +33,7 @@ Blockly.Language.variables_get = {
         .appendTitle(Blockly.LANG_VARIABLES_GET_TITLE)
         .appendTitle(new Blockly.FieldVariable(
         Blockly.LANG_VARIABLES_GET_ITEM), 'VAR');
-    this.setOutput(true, null);
+    this.setOutput(true);
     this.setTooltip(Blockly.LANG_VARIABLES_GET_TOOLTIP);
   },
   getVars: function() {

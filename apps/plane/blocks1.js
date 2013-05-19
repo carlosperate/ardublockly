@@ -30,7 +30,7 @@ Blockly.Language.plane_get_rows = {
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(MSG.getRows);
-    this.setOutput(true, null);
+    this.setOutput(true, 'Number');
   }
 };
 

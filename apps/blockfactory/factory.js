@@ -303,7 +303,7 @@ function getTypesFrom_(block, name) {
       hash['X_' + types[n]] = true;
     }
   } else {
-    types = [typeBlock.valueType];
+    types = [escapeString(typeBlock.valueType)];
   }
   return types;
 }

@@ -33,7 +33,7 @@ Blockly.Language.draw_move = {
   init: function() {
     this.setColour(160);
     this.appendValueInput('VALUE')
-        .setCheck(Number)
+        .setCheck('Number')
         .appendTitle(new Blockly.FieldDropdown(
             Blockly.Language.draw_move.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
@@ -50,7 +50,7 @@ Blockly.JavaScript.draw_move = function() {
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
   return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', \'' + this.id + '\');\n';
+      '(' + value + ', \'block_id_' + this.id + '\');\n';
 };
 
 
@@ -60,7 +60,7 @@ Blockly.Language.draw_turn = {
   init: function() {
     this.setColour(160);
     this.appendValueInput('VALUE')
-        .setCheck(Number)
+        .setCheck('Number')
         .appendTitle(new Blockly.FieldDropdown(
             Blockly.Language.draw_turn.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
@@ -77,7 +77,7 @@ Blockly.JavaScript.draw_turn = function() {
   var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
   return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', \'' + this.id + '\');\n';
+      '(' + value + ', \'block_id_' + this.id + '\');\n';
 };
 
 Blockly.Language.draw_width = {
@@ -86,7 +86,7 @@ Blockly.Language.draw_width = {
   init: function() {
     this.setColour(160);
     this.appendValueInput('WIDTH')
-        .setCheck(Number)
+        .setCheck('Number')
         .appendTitle(MSG.setWidth);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -98,7 +98,7 @@ Blockly.JavaScript.draw_width = function() {
   // Generate JavaScript for setting the width.
   var width = Blockly.JavaScript.valueToCode(this, 'WIDTH',
       Blockly.JavaScript.ORDER_NONE) || '1';
-  return 'Turtle.penWidth(' + width + ', \'' + this.id + '\');\n';
+  return 'Turtle.penWidth(' + width + ', \'block_id_' + this.id + '\');\n';
 };
 
 Blockly.Language.draw_pen = {
@@ -118,7 +118,8 @@ Blockly.Language.draw_pen.STATE = [[MSG.penUp, 'penUp'], [MSG.penDown, 'penDown'
 
 Blockly.JavaScript.draw_pen = function() {
   // Generate JavaScript for pen up/down.
-  return 'Turtle.' + this.getTitleValue('PEN') + '(\'' + this.id + '\');\n';
+  return 'Turtle.' + this.getTitleValue('PEN') +
+      '(\'block_id_' + this.id + '\');\n';
 };
 
 Blockly.Language.draw_colour = {
@@ -139,7 +140,7 @@ Blockly.JavaScript.draw_colour = function() {
   // Generate JavaScript for setting the colour.
   var colour = Blockly.JavaScript.valueToCode(this, 'COLOUR',
       Blockly.JavaScript.ORDER_NONE) || '\'#000000\'';
-  return 'Turtle.penColour(' + colour + ', \'' +
+  return 'Turtle.penColour(' + colour + ', \'block_id_' +
       this.id + '\');\n';
 };
 
@@ -162,7 +163,7 @@ Blockly.Language.turtle_visibility.STATE =
 Blockly.JavaScript.turtle_visibility = function() {
   // Generate JavaScript for changing turtle visibility.
   return 'Turtle.' + this.getTitleValue('VISIBILITY') +
-      '(\'' + this.id + '\');\n';
+      '(\'block_id_' + this.id + '\');\n';
 };
 
 Blockly.Language.draw_print = {
@@ -182,7 +183,7 @@ Blockly.JavaScript.draw_print = function() {
   // Generate JavaScript for printing text.
   var argument0 = String(Blockly.JavaScript.valueToCode(this, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'');
-  return 'Turtle.drawPrint(' + argument0 + ', \'' +
+  return 'Turtle.drawPrint(' + argument0 + ', \'block_id_' +
       this.id + '\');\n';
 };
 
@@ -220,6 +221,7 @@ Blockly.Language.draw_font.STYLE =
 Blockly.JavaScript.draw_font = function() {
   // Generate JavaScript for setting the font.
   return 'Turtle.drawFont(\'' + this.getTitleValue('FONT') + '\',' +
-         Number(this.getTitleValue('FONTSIZE')) + ',\'' +
-         this.getTitleValue('FONTSTYLE') + '\', \'' + this.id + '\');\n';
+      Number(this.getTitleValue('FONTSIZE')) + ',\'' +
+      this.getTitleValue('FONTSTYLE') + '\', \'block_id_' +
+      this.id + '\');\n';
 };

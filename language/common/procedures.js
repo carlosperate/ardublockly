@@ -422,7 +422,7 @@ Blockly.Language.procedures_callreturn = {
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_CALL)
         .appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE, 'NAME');
-    this.setOutput(true, null);
+    this.setOutput(true);
     this.setTooltip(Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP);
     this.arguments_ = [];
     this.quarkConnections_ = null;
@@ -444,7 +444,7 @@ Blockly.Language.procedures_ifreturn = {
   init: function() {
     this.setColour(290);
     this.appendValueInput('CONDITION')
-        .setCheck(Boolean)
+        .setCheck('Boolean')
         .appendTitle(Blockly.LANG_CONTROLS_IF_MSG_IF);
     this.appendValueInput('VALUE')
         .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_RETURN);

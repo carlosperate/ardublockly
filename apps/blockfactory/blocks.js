@@ -87,10 +87,10 @@ Blockly.Language.factory_base = {
         .appendTitle('colour');
     /*
     this.appendValueInput('TOOLTIP')
-        .setCheck(String)
+        .setCheck('String')
         .appendTitle('tooltip');
     this.appendValueInput('HELP')
-        .setCheck(String)
+        .setCheck('String')
         .appendTitle('help url');
     */
     this.setTooltip('Build a custom block by plugging\n' +

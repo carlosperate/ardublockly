@@ -31,7 +31,7 @@ Blockly.Language.graph_get_x = {
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_VARIABLES_GET_TITLE)
         .appendTitle('x');
-    this.setOutput(true, null);
+    this.setOutput(true, 'Number');
     this.setTooltip(Blockly.LANG_VARIABLES_GET_TOOLTIP);
   }
 };
