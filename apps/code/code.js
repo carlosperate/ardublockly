@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview JavaScript for Blockly code demo (langaue-neutral).
+ * @fileoverview JavaScript for Blockly code demo (language-neutral).
  * @author fraser@google.com (Neil Fraser)
  */
 
