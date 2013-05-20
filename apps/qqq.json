@@ -1,0 +1,7 @@
+{
+        "Apps.subtitle": "Descriptive subtitle for Blockly, as in 'Blockly: a visual programming environment'; this refers to Blockly's use of pictures (blocks) and not just text for creating computer programs.  See [https://plus.google.com/105063463762828771517/about the picture at the top of the Blockly Google+ page].",
+        "Apps.httpRequestError: "alert - The URL is invalid or a server error occurred; %1 is further information about the error.",
+        "Apps.linkAlert" "alert - After the user has pressed a button to save his/her program, this provides the URL (%1) to retrieve the program.",
+        "Apps.hashError": "alert - A request to retrieve a stored program does not have a valid URL. %1 is the invalid portion of the URL. 'Blockly' is the name of the system.  It should be left untranslated or transliterated.  See [[Translating:Blockly#Special_terms]] and  {{msg-blockly|Puzzle-Puzzle.fullTitle}}."
+        "Apps.xmlError": "alert - There was a problem loading a file previously saved by the user.  The most likely reason for the problem is that it was created with an earlier, incompatible version of Blockly.  Debugging information follows.",
+}
