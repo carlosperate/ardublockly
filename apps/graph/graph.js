@@ -76,7 +76,11 @@ Graph.init = function() {
   } else { // Load the editor with a starting block.
     var xml = Blockly.Xml.textToDom(
         '<xml>' +
-        '  <block type="graph_set_y" x="85" y="100"></block>' +
+        '  <block type="graph_set_y" x="85" y="100">' +
+        '    <value name="VALUE">' +
+        '      <block type="graph_get_x"></block>' +
+        '    </value>' +
+        '  </block>' +
         '</xml>');
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   }
