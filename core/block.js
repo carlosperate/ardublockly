@@ -571,21 +571,23 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
       }
     }
 
-    // Option to collapse/expand block.
-    if (this.collapsed) {
-      var expandOption = {enabled: true};
-      expandOption.text = Blockly.MSG_EXPAND_BLOCK;
-      expandOption.callback = function() {
-        block.setCollapsed(false);
-      };
-      options.push(expandOption);
-    } else {
-      var collapseOption = {enabled: true};
-      collapseOption.text = Blockly.MSG_COLLAPSE_BLOCK;
-      collapseOption.callback = function() {
-        block.setCollapsed(true);
-      };
-      options.push(collapseOption);
+    if (Blockly.collapse) {
+      // Option to collapse/expand block.
+      if (this.collapsed) {
+        var expandOption = {enabled: true};
+        expandOption.text = Blockly.MSG_EXPAND_BLOCK;
+        expandOption.callback = function() {
+          block.setCollapsed(false);
+        };
+        options.push(expandOption);
+      } else {
+        var collapseOption = {enabled: true};
+        collapseOption.text = Blockly.MSG_COLLAPSE_BLOCK;
+        collapseOption.callback = function() {
+          block.setCollapsed(true);
+        };
+        options.push(collapseOption);
+      }
     }
 
     // Option to disable/enable block.
