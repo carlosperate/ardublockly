@@ -89,11 +89,17 @@ Blockly.Apps.congratulations = function(level, maxLevel, MSG) {
 };
 
 /**
- * Log the block.
- * @param {string} id ID of block that triggered this action.
+ * Highlight the block (or clear highlighting).
+ * @param {?string} id ID of block that triggered this action.
  */
 Blockly.Apps.highlight = function(id) {
-  Blockly.Apps.log.push([null, id]);
+  if (id) {
+    var m = id.match(/^block_id_(\d+)$/)
+    if (m) {
+      id = m[1];
+    }
+  }
+  Blockly.mainWorkspace.highlightBlock(id);
 };
 
 /**
@@ -103,7 +109,9 @@ Blockly.Apps.highlight = function(id) {
  * @throws {false} Throws an error to terminate the user's program.
  */
 Blockly.Apps.checkTimeout = function(opt_id) {
-  opt_id && Blockly.Apps.highlight(opt_id);
+  if (opt_id) {
+    Blockly.Apps.log.push([null, opt_id]);
+  }
   if (Blockly.Apps.ticks-- < 0) {
     // Highlight an infinite loop on death.
     throw false;
@@ -117,7 +125,7 @@ Blockly.Apps.checkTimeout = function(opt_id) {
  */
 Blockly.Apps.stripCode = function(code) {
   // Strip out serial numbers.
-  code = code.replace(/(,\s*)?'\d+'\);/g, ');');
+  code = code.replace(/(,\s*)?'block_id_\d+'\)/g, ')');
   // Remove timeouts.
   var regex = new RegExp(Blockly.JavaScript.INFINITE_LOOP_TRAP
       .replace('(%1)', '\\(\\)'), 'g');

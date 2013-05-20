@@ -42,7 +42,7 @@ Blockly.Language.maze_moveForward = {
 
 Blockly.JavaScript.maze_moveForward = function() {
   // Generate JavaScript for moving forward.
-  return 'Maze.moveForward(\'' + this.id + '\');\n';
+  return 'Maze.moveForward(\'block_id_' + this.id + '\');\n';
 };
 
 Blockly.Language.maze_turn = {
@@ -65,7 +65,7 @@ Blockly.Language.maze_turn.DIRECTIONS =
 Blockly.JavaScript.maze_turn = function() {
   // Generate JavaScript for turning left or right.
   var dir = this.getTitleValue('DIR');
-  return 'Maze.' + dir + '(\'' + this.id + '\');\n';
+  return 'Maze.' + dir + '(\'block_id_' + this.id + '\');\n';
 };
 
 Blockly.Language.maze_isPath = {
@@ -112,9 +112,10 @@ Blockly.Language.maze_if.DIRECTIONS =
 
 Blockly.JavaScript.maze_if = function() {
   // Generate JavaScript for 'if' conditional if there is a path.
-  var argument = 'Maze.' + this.getTitleValue('DIR') + '(\'' + this.id + '\')';
+  var argument = 'Maze.' + this.getTitleValue('DIR') +
+      '(\'block_id_' + this.id + '\')';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
-  var code = 'if (' + argument + ') {\n' + branch + '}';
+  var code = 'if (' + argument + ') {\n' + branch + '}\n';
   return code;
 };
 
@@ -140,11 +141,12 @@ Blockly.Language.maze_ifElse.DIRECTIONS =
 
 Blockly.JavaScript.maze_ifElse = function() {
   // Generate JavaScript for 'if/else' conditional if there is a path.
-  var argument = 'Maze.' + this.getTitleValue('DIR') + '(\'' + this.id + '\')';
+  var argument = 'Maze.' + this.getTitleValue('DIR') +
+      '(\'block_id_' + this.id + '\')';
   var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
   var branch1 = Blockly.JavaScript.statementToCode(this, 'ELSE');
   var code = 'if (' + argument + ') {\n' + branch0 +
-             '} else {\n' + branch1 + '}';
+             '} else {\n' + branch1 + '}\n';
   return code;
 };
 
@@ -166,7 +168,7 @@ Blockly.JavaScript.maze_forever = function() {
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
     branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
-        '\'' + this.id + '\'') + branch;
+        '\'block_id_' + this.id + '\'') + branch;
   }
   return 'while (true) {\n' + branch + '}\n';
 };

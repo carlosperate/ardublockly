@@ -36,11 +36,11 @@ Blockly.JavaScript.controls_if = function() {
     argument = Blockly.JavaScript.valueToCode(this, 'IF' + n,
         Blockly.JavaScript.ORDER_NONE) || 'false';
     branch = Blockly.JavaScript.statementToCode(this, 'DO' + n);
-    code += ' else if (' + argument + ') {\n' + branch + '}';
+    code += ' else if (' + argument + ') {\n' + branch + '}\n';
   }
   if (this.elseCount_) {
     branch = Blockly.JavaScript.statementToCode(this, 'ELSE');
-    code += ' else {\n' + branch + '}';
+    code += ' else {\n' + branch + '}\n';
   }
   return code + '\n';
 };

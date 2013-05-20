@@ -250,8 +250,7 @@ Turtle.animate = function() {
     return;
   }
   var command = tuple.shift();
-  var id = tuple.pop();
-  Blockly.mainWorkspace.highlightBlock(id);
+  Blockly.Apps.highlight(tuple.pop());
   Turtle.step(command, tuple);
   Turtle.display();
 

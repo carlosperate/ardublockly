@@ -368,6 +368,9 @@ Maze.init = function() {
        trashcan: true});
   Blockly.loadAudio_('apps/maze/win.wav', 'win');
   Blockly.loadAudio_('apps/maze/whack.wav', 'whack');
+  if (Maze.LEVEL == 1) {
+    Blockly.SNAP_RADIUS *= 2;
+  }
 
   Blockly.JavaScript.INFINITE_LOOP_TRAP = '  Blockly.Apps.checkTimeout(%1);\n';
   Maze.drawMap();
@@ -619,10 +622,10 @@ Maze.animate = function() {
 
   var action = Blockly.Apps.log.shift();
   if (!action) {
-    Blockly.mainWorkspace.highlightBlock(null);
+    Blockly.Apps.highlight(null);
     return;
   }
-  Blockly.mainWorkspace.highlightBlock(action[1]);
+  Blockly.Apps.highlight(action[1]);
 
   switch (action[0]) {
     case 'north':
