@@ -170,7 +170,9 @@ Blockly.Language.input_dummy = {
     this.setPreviousStatement(true, 'Input');
     this.setNextStatement(true, 'Input');
     this.setTooltip('For adding titles on a separate\n' +
-                    'row with no connections.');
+                    'row with no connections.\n' +
+                    'Alignment options (left, right, centre)\n' +
+                    'apply only to multi-line titles.');
   }
 };
 
