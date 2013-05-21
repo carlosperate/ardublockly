@@ -59,6 +59,11 @@ var maxBlocks = [undefined, // Level 0.
 Maze.STEP_SPEED = 150;
 
 /**
+ * Display a less-realistic, more mathematical map with grid lines.
+ */
+Maze.GRAPH_UI = true;
+
+/**
  * The types of squares in the maze, which is represented
  * as a 2D array of SquareType values.
  * @enum {number}
@@ -230,7 +235,12 @@ Maze.tile_SHAPES = {
   '10111': [1, 0],
   '11011': [2, 1],
   '11101': [1, 2],
-  '11111': [2, 2]   // Cross
+  '11111': [2, 2],  // Cross
+  'null0': [4, 3],  // Empty
+  'null1': [3, 0],
+  'null2': [3, 1],
+  'null3': [0, 3],
+  'null4': [1, 3]
 };
 
 Maze.drawMap = function() {
@@ -245,28 +255,30 @@ Maze.drawMap = function() {
   square.setAttribute('stroke', '#CCB');
   svg.appendChild(square);
 
-  // Draw the grid lines.
-  // The grid lines are offset so that the lines pass through the centre of
-  // each square.  A half-pixel offset is also added to as standard SVG
-  // practice to avoid blurriness.
-  var offset = Maze.SQUARE_SIZE / 2 + 0.5;
-  for (var k = 0; k < Maze.ROWS; k++) {
-    var h_line = document.createElementNS(Blockly.SVG_NS, 'line');
-    h_line.setAttribute('y1', k * Maze.SQUARE_SIZE + offset);
-    h_line.setAttribute('x2', Maze.MAZE_WIDTH);
-    h_line.setAttribute('y2', k * Maze.SQUARE_SIZE + offset);
-    h_line.setAttribute('stroke', '#CCB');
-    h_line.setAttribute('stroke-width', 1);
-    svg.appendChild(h_line);
-  }
-  for (var k = 0; k < Maze.COLS; k++) {
-    var v_line = document.createElementNS(Blockly.SVG_NS, 'line');
-    v_line.setAttribute('x1', k * Maze.SQUARE_SIZE + offset);
-    v_line.setAttribute('x2', k * Maze.SQUARE_SIZE + offset);
-    v_line.setAttribute('y2', Maze.MAZE_HEIGHT);
-    v_line.setAttribute('stroke', '#CCB');
-    v_line.setAttribute('stroke-width', 1);
-    svg.appendChild(v_line);
+  if (Maze.GRAPH_UI) {
+    // Draw the grid lines.
+    // The grid lines are offset so that the lines pass through the centre of
+    // each square.  A half-pixel offset is also added to as standard SVG
+    // practice to avoid blurriness.
+    var offset = Maze.SQUARE_SIZE / 2 + 0.5;
+    for (var k = 0; k < Maze.ROWS; k++) {
+      var h_line = document.createElementNS(Blockly.SVG_NS, 'line');
+      h_line.setAttribute('y1', k * Maze.SQUARE_SIZE + offset);
+      h_line.setAttribute('x2', Maze.MAZE_WIDTH);
+      h_line.setAttribute('y2', k * Maze.SQUARE_SIZE + offset);
+      h_line.setAttribute('stroke', '#CCB');
+      h_line.setAttribute('stroke-width', 1);
+      svg.appendChild(h_line);
+    }
+    for (var k = 0; k < Maze.COLS; k++) {
+      var v_line = document.createElementNS(Blockly.SVG_NS, 'line');
+      v_line.setAttribute('x1', k * Maze.SQUARE_SIZE + offset);
+      v_line.setAttribute('x2', k * Maze.SQUARE_SIZE + offset);
+      v_line.setAttribute('y2', Maze.MAZE_HEIGHT);
+      v_line.setAttribute('stroke', '#CCB');
+      v_line.setAttribute('stroke-width', 1);
+      svg.appendChild(v_line);
+    }
   }
 
   // Draw the tiles making up the maze map.
@@ -291,34 +303,41 @@ Maze.drawMap = function() {
           normalize(x, y + 1) +  // South.
           normalize(x - 1, y);   // East.
 
-      // Draw the tile (or nothing, if wall).
-      if (Maze.tile_SHAPES[tile]) {
-        var left = Maze.tile_SHAPES[tile][0];
-        var top = Maze.tile_SHAPES[tile][1];
-        // Tile's clipPath element.
-        var tileClip = document.createElementNS(Blockly.SVG_NS, 'clipPath');
-        tileClip.setAttribute('id', 'tileClipPath' + tileId);
-        var clipRect = document.createElementNS(Blockly.SVG_NS, 'rect');
-        clipRect.setAttribute('width', Maze.SQUARE_SIZE);
-        clipRect.setAttribute('height', Maze.SQUARE_SIZE);
+      // Draw the tile.
+      if (!Maze.tile_SHAPES[tile]) {
+       if (Maze.GRAPH_UI) {
+          tile = 'null0';
+        } else if (tile == '00000' && Math.random() > 0.3) {
+          tile = 'null0';
+        } else {
+          tile = 'null' + Math.floor(1 + Math.random() * 4);
+        }
+       }
+      var left = Maze.tile_SHAPES[tile][0];
+      var top = Maze.tile_SHAPES[tile][1];
+      // Tile's clipPath element.
+      var tileClip = document.createElementNS(Blockly.SVG_NS, 'clipPath');
+      tileClip.setAttribute('id', 'tileClipPath' + tileId);
+      var clipRect = document.createElementNS(Blockly.SVG_NS, 'rect');
+      clipRect.setAttribute('width', Maze.SQUARE_SIZE);
+      clipRect.setAttribute('height', Maze.SQUARE_SIZE);
 
-        clipRect.setAttribute('x', x * Maze.SQUARE_SIZE);
-        clipRect.setAttribute('y', y * Maze.SQUARE_SIZE);
+      clipRect.setAttribute('x', x * Maze.SQUARE_SIZE);
+      clipRect.setAttribute('y', y * Maze.SQUARE_SIZE);
 
-        tileClip.appendChild(clipRect);
-        svg.appendChild(tileClip);
-        // Tile sprite.
-        var tile = document.createElementNS(Blockly.SVG_NS, 'image');
-        tile.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
-            'tiles.png');
-        tile.setAttribute('height', Maze.SQUARE_SIZE * 4);
-        tile.setAttribute('width', Maze.SQUARE_SIZE * 5);
-        tile.setAttribute('clip-path', 'url(#tileClipPath' + tileId + ')');
-        tile.setAttribute('x', (x - left) * Maze.SQUARE_SIZE);
-        tile.setAttribute('y', (y - top) * Maze.SQUARE_SIZE);
-        svg.appendChild(tile);
-        tileId++;
-      }
+      tileClip.appendChild(clipRect);
+      svg.appendChild(tileClip);
+      // Tile sprite.
+      var tile = document.createElementNS(Blockly.SVG_NS, 'image');
+      tile.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
+          'tiles.png');
+      tile.setAttribute('height', Maze.SQUARE_SIZE * 4);
+      tile.setAttribute('width', Maze.SQUARE_SIZE * 5);
+      tile.setAttribute('clip-path', 'url(#tileClipPath' + tileId + ')');
+      tile.setAttribute('x', (x - left) * Maze.SQUARE_SIZE);
+      tile.setAttribute('y', (y - top) * Maze.SQUARE_SIZE);
+      svg.appendChild(tile);
+      tileId++;
     }
   }
 
