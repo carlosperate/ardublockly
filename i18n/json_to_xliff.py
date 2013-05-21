@@ -21,6 +21,7 @@ import argparse
 import codecs  # for codecs.open(..., 'utf-8')
 import json    # for json.load()
 import os      # for os.path()
+import sys     # for sys.argv
 from common import InputError
 
 # Store parsed command-line arguments in global variable.
@@ -130,15 +131,14 @@ def _close_xlf(xlf_file):
     xlf_file.close()
 
 
-def _process_file(filename, key_dict):
+def _process_file(target_lang, key_dict):
     """Creates an .xlf file corresponding to the specified .json input file.
 
-    The base name of the file will be the locale specified in the input file's
-    metadata.
+    The name of the input file must be target_lang followed by '.json'.
+    The name of the output file will be target_lang followed by '.js'.
 
     Args:
-        filename: The name of a .json file produced directly or indirectly by
-            xliff_to_json.py.
+        target_lang: A IETF language code (RFC 4646), such as 'es' or 'pt-br'.
         key_dict: Dictionary mapping Blockly keys (e.g., Maze.turnLeft) to
             Closure keys (hash numbers).
 
@@ -147,18 +147,13 @@ def _process_file(filename, key_dict):
         ValueError: Input JSON could not be parsed.
         InputError: Input JSON lacked required fields.
     """
+    filename = target_lang + '.json'
     in_file = open(filename)
     try:
         j = json.load(in_file)
         in_file.close()
     except ValueError, e:
         raise InputError(file, str(e))
-    metadata = j['@metadata']
-    if not metadata:
-        raise InputError(filename, 'metadata not found')
-    if not metadata.get('locale'):
-        raise InputError(filename, 'metadata does not contain "locale"')
-    target_lang = metadata.get('locale')
     out_file = _create_xlf(target_lang)
     for key in j:
         if key != '@metadata':
@@ -203,10 +198,24 @@ def main():
     key_file.close()
 
     # Process each input file.
+    processed_langs = []
     for filename in args.files:
-        _process_file(filename, key_dict)
+      if not filename.endswith('.json'):
+        raise InputError(filename, 'filenames must end with ".json"')
+      target_lang = filename[:filename.index('.')]
+      if not target_lang in ('qqq', 'keys'):
+        processed_langs.append(target_lang)
+        _process_file(target_lang, key_dict)
 
+    # Output command line for Closure compiler.
+    if processed_langs:
+      path_to_jar = os.path.normpath(os.path.join(
+          os.path.dirname(sys.argv[0]), '../apps/_soy'))
+      print('You will likely want to run:')
+      print('java -jar ' + path_to_jar + '/SoyToJsSrcCompiler.jar --locales '
+            + ','.join(processed_langs) +
+            ' --messageFilePathFormat {LOCALE}.xlf ' +
+            '--outputPathFormat {LOCALE}.js --srcs template.soy')
 
 if __name__ == '__main__':
     main()
-
