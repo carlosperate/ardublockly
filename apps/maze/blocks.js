@@ -156,7 +156,8 @@ Blockly.Language.maze_forever = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle(MSG.repeatUntilFinished);
+        .appendTitle(MSG.repeatUntil)
+        .appendTitle(new Blockly.FieldImage('marker.png', 12, 16));
     this.appendStatementInput('DO').appendTitle(MSG.doCode);
     this.setPreviousStatement(true);
     this.setTooltip(MSG.whileTooltip);
