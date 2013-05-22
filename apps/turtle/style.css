@@ -79,6 +79,9 @@ button.disabled {
 #display {
   border: 1px solid #ccc;
 }
+#downloadImageLink {
+  display: none;
+}
 
 /* Slider. */
 .sliderTrack {
@@ -102,6 +105,12 @@ button.disabled {
   width: 21px;
   background-image: url(icons.png);
   background-position: -42px 0px;
+}
+.img {
+  height: 21px;
+  width: 21px;
+  background-image: url(icons.png);
+  background-position: -84px 0px;
 }
 .link {
   height: 21px;

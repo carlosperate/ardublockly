@@ -84,6 +84,13 @@ Turtle.init = function() {
     document.getElementById('linkButton').className = 'disabled';
   }
 
+  // Hide download button if browser lacks support
+  // (http://caniuse.com/#feat=download).
+  if (!(goog.userAgent.GECKO ||
+       (goog.userAgent.WEBKIT && !goog.userAgent.SAFARI))) {
+    document.getElementById('captureButton').className = 'disabled';
+  }
+
   // Initialize the slider.
   var sliderSvg = document.getElementById('slider');
   Turtle.speedSlider = new Slider(10, 35, 130, sliderSvg);
@@ -322,6 +329,19 @@ Turtle.step = function(command, values) {
       Turtle.visible = true;
       break;
   }
+};
+
+/**
+ * Save an image of the SVG canvas.
+ */
+Turtle.createImageLink = function() {
+  var imgLink = document.getElementById('downloadImageLink');
+  imgLink.setAttribute('href',
+      document.getElementById('display').toDataURL('image/png'));
+  var temp = window.onbeforeunload;
+  window.onbeforeunload = null;
+  imgLink.click();
+  window.onbeforeunload = temp;
 };
 
 // Turtle API.
