@@ -270,11 +270,11 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
   // Move the root block.
   var rootBlock = this.sourceBlock_.getRootBlock();
   var reverse = false;
-  if (!rootBlock.editable) {
+  if (!rootBlock.movable) {
     // Can't bump an uneditable block away.
     // Check to see if the other block is editable.
     rootBlock = staticConnection.sourceBlock_.getRootBlock();
-    if (!rootBlock.editable) {
+    if (!rootBlock.movable) {
       return;
     }
     // Swap the connections and move the 'static' connection instead.

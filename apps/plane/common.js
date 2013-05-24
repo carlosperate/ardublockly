@@ -26,7 +26,6 @@
 Blockly.Language.plane_set_seats = {
   // Seat variable setter.
   helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
-  deletable: false,
   init: function() {
     this.setColour(330);
     this.appendValueInput('VALUE')
@@ -60,9 +59,8 @@ function init() {
 
   // Load the editor with a starting block.
   var xml = Blockly.Xml.textToDom(
-      '<xml>' +
-      '  <block type="plane_set_seats" x="70" y="70"></block>' +
-      '</xml>');
+      '<xml><block type="plane_set_seats" deletable="false" x="70" y="70">' +
+      '</block></xml>');
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   seatsBlock = Blockly.mainWorkspace.getTopBlocks(false)[0];
 

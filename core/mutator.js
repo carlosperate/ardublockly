@@ -91,11 +91,11 @@ Blockly.Mutator.prototype.createIcon = function() {
     <path class="blocklyMutatorMark" d="..."></path>
   </g>
   */
-  var quantum = Blockly.Mutator.ICON_SIZE / 8;
   this.iconGroup_ = Blockly.createSvgElement('g', {}, null);
-  if (this.block_.editable) {
+  if (!this.block_.isInFlyout) {
     this.iconGroup_.setAttribute('class', 'blocklyIconGroup');
   }
+  var quantum = Blockly.Mutator.ICON_SIZE / 8;
   var iconShield = Blockly.createSvgElement('rect',
       {'class': 'blocklyIconShield',
        'width': 8 * quantum,
@@ -126,7 +126,7 @@ Blockly.Mutator.prototype.createIcon = function() {
       {'class': 'blocklyIconMark',
        'd': Blockly.Mutator.plusPath_}, this.iconGroup_);
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
-  if (this.block_.editable) {
+  if (!this.block_.isInFlyout) {
     Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
   }
 };
@@ -151,7 +151,7 @@ Blockly.Mutator.prototype.createEditor_ = function() {
       {'class': 'blocklyMutatorBackground',
        'height': '100%', 'width': '100%'}, this.svgDialog_);
 
-  this.workspace_ = new Blockly.Workspace(true);
+  this.workspace_ = new Blockly.Workspace();
   this.flyout_ = new Blockly.Flyout();
   this.flyout_.autoClose = false;
   this.svgDialog_.appendChild(this.flyout_.createDom());
@@ -231,7 +231,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
       child.render();
     }
     // The root block should not be dragable or deletable.
-    this.rootBlock_.editable = false;
+    this.rootBlock_.movable = false;
     this.rootBlock_.deletable = false;
     var margin = this.flyout_.CORNER_RADIUS * 2;
     var x = this.flyout_.width_ + margin;

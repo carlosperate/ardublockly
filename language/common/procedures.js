@@ -113,15 +113,11 @@ Blockly.Language.procedures_defnoreturn = {
         this.workspace, this.arguments_, this.paramIds_);
   },
   dispose: function() {
+    // Dispose of any callers.
     var name = this.getTitleValue('NAME');
-    var editable = this.editable;
-    var workspace = this.workspace;
+    Blockly.Procedures.disposeCallers(name, this.workspace);
     // Call parent's destructor.
     Blockly.Block.prototype.dispose.apply(this, arguments);
-    if (editable) {
-      // Dispose of any callers.
-      Blockly.Procedures.disposeCallers(name, workspace);
-    }
   },
   getProcedureDef: function() {
     // Return the name of the defined procedure,

@@ -77,9 +77,9 @@ Blockly.Field.prototype.init = function(block) {
   }
   this.sourceBlock_ = block;
   this.group_.setAttribute('class',
-      block.editable ? 'blocklyEditableText' : 'blocklyNonEditableText');
+      Blockly.editable ? 'blocklyEditableText' : 'blocklyNonEditableText');
   block.getSvgRoot().appendChild(this.group_);
-  if (block.editable) {
+  if (Blockly.editable) {
     this.mouseUpWrapper_ =
         Blockly.bindEvent_(this.group_, 'mouseup', this, this.onMouseUp_);
   }

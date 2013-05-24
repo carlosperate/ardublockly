@@ -38,7 +38,8 @@ Blockly.Flyout = function() {
    * @type {!Blockly.Workspace}
    * @private
    */
-  this.workspace_ = new Blockly.Workspace(false);
+  this.workspace_ = new Blockly.Workspace();
+  this.workspace_.isFlyout = true;
 
   /**
    * Opaque data that can be passed to removeChangeListener.
@@ -281,7 +282,9 @@ Blockly.Flyout.prototype.hide = function() {
   // Delete all the blocks.
   var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
-    block.dispose(false, false);
+    if (block.workspace == this.workspace_) {
+      block.dispose(false, false);
+    }
   }
   // Delete all the background buttons.
   for (var x = 0, rect; rect = this.buttons_[x]; x++) {

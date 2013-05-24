@@ -68,7 +68,7 @@ function initEditor(blockly) {
                                       'factory_base');
   rootBlock.initSvg();
   rootBlock.render();
-  rootBlock.editable = false;
+  rootBlock.movable = false;
   rootBlock.deletable = false;
 
   EditorBlockly.addChangeListener(onchange);
@@ -396,6 +396,6 @@ function updatePreview() {
   previewBlock = new Blockly.Block(Blockly.mainWorkspace, type);
   previewBlock.initSvg();
   previewBlock.render();
-  previewBlock.editable = false;
+  previewBlock.movable = false;
   previewBlock.deletable = false;
 }

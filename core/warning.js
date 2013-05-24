@@ -79,8 +79,10 @@ Blockly.Warning.prototype.createIcon_ = function() {
     <text class="blocklyIconMark" x="8" y="13">!</text>
   </g>
   */
-  this.iconGroup_ = Blockly.createSvgElement('g',
-      {'class': 'blocklyIconGroup'}, null);
+  this.iconGroup_ = Blockly.createSvgElement('g', {}, null);
+  if (!this.block_.isInFlyout) {
+    this.iconGroup_.setAttribute('class', 'blocklyIconGroup');
+  }
   var iconShield = Blockly.createSvgElement('path',
       {'class': 'blocklyIconShield',
        'd': 'M 2,15 Q -1,15 0.5,12 L 6.5,1.7 Q 8,-1 9.5,1.7 L 15.5,12 ' +

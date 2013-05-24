@@ -94,7 +94,8 @@ Blockly.Procedures.procTupleComparator_ = function(ta, tb) {
  * @return {string} Non-colliding name.
  */
 Blockly.Procedures.findLegalName = function(name, block) {
-  if (!block.workspace.editable) {
+  if (block.isInFlyout) {
+    // Flyouts can have multiple procedures called 'procedure'.
     return name;
   }
   while (!Blockly.Procedures.isLegalName(name, block.workspace, block)) {
@@ -143,9 +144,6 @@ Blockly.Procedures.isLegalName = function(name, workspace, opt_exclude) {
  * @this {!Blockly.FieldVariable}
  */
 Blockly.Procedures.rename = function(text) {
-  if (!this.sourceBlock_.editable) {
-    return text;
-  }
   // Strip leading and trailing whitespace.  Beyond this, all names are legal.
   text = text.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
 

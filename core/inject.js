@@ -198,7 +198,7 @@ Blockly.createDom_ = function(container) {
       {'width': 10, 'height': 10, 'fill': '#aaa'}, pattern);
   Blockly.createSvgElement('path',
       {'d': 'M 0 0 L 10 10 M 10 0 L 0 10', 'stroke': '#cc0'}, pattern);
-  Blockly.mainWorkspace = new Blockly.Workspace(Blockly.editable);
+  Blockly.mainWorkspace = new Blockly.Workspace();
   svg.appendChild(Blockly.mainWorkspace.createDom());
   Blockly.mainWorkspace.maxBlocks = Blockly.maxBlocks;
 
