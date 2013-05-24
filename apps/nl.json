@@ -1,0 +1,7 @@
+{
+    "Apps.subtitle": "een visuele programmeeromgeving",
+    "Apps.httpRequestError": "Er was een probleem met de aanvraag.",
+    "Apps.linkAlert": "Deel je oplossing via deze link:\n\n%1",
+    "Apps.hashError": "Sorry, '%1' Komt niet overeen met opgeslagen instructies.",
+    "Apps.xmlError": "Kon je bewaarde instructies niet opladen.  Misschien waren ze gemaakt met een andere versie van Blockly?"
+ }

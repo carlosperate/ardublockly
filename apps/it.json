@@ -1,0 +1,6 @@
+{
+    "Apps.httpRequestError": "La richiesta non è stata soddisfatta.",
+    "Apps.linkAlert": "Condividi i tuoi blocchi con questo indirizzo:\n\n%1",
+    "Apps.hashError": "Mi spiace, '%1' non corrisponde con nessun documento di saved Blockly salvato.",
+    "Apps.xmlError": "Non è stato possibile caricare il documento.  Forse è stato creato con una versione diversa di Blockly?"
+ }

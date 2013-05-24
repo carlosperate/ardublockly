@@ -1,0 +1,8 @@
+{
+        "Apps.subtitle": "un entorn visual de programació",
+        "Apps.httpRequestError": "Hi ha hagut un problema amb la sol·licitud.",
+        "Apps.linkAlert": "Comparteix els teus blocs amb aquest enllaç: %1",
+        "Apps.hashError": "Ho sentim, '%1' no es correspon amb cap fitxer desat de Blockly.",
+        "Apps.xmlError": "No s'ha pogut carregar el teu fitxer desat.  Potser va ser creat amb una versió diferent de Blockly?"
+}
+

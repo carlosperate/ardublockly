@@ -1,0 +1,6 @@
+{
+    "Apps.httpRequestError": "Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.",
+    "Apps.linkAlert": "Dùng liên kết này để chia sẽ chương trình của bạn:\n\n%1",
+    "Apps.hashError": "Không tìm thấy chương trình được lưu ở '%1'.",
+    "Apps.xmlError": "Không mở được chương trình của bạn.  Có thể nó nằm trong một phiên bản khác của Blockly?"
+}

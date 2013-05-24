@@ -1,0 +1,7 @@
+{
+    "Apps.subtitle":"graficzne środowisko programistyczne",
+    "Apps.httpRequestError": "Wystąpił problem z przesłaniem żądania.",
+    "Apps.linkAlert": "Udostępnij link ze swoimi poleceniami:\n\n%1",
+    "Apps.hashError": "Przepraszamy, '%1' jest nieodpowiedni do zapisanych plików Blockly.",
+    "Apps.xmlError": "Nie można wgrać pliku.  Może plik został zapisany w innej wersji Blockly?"
+ }

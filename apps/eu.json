@@ -1,0 +1,6 @@
+{
+    "Apps.httpRequestError": "Eskaerarekin arazo bat egon da.",
+    "Apps.linkAlert": "Elkarbanatu blokeak lotura honekin:\n\n%1",
+    "Apps.hashError": "Barkatu, '%1' barcinak Blocky fitxategi hau lapurtu du ere.",
+    "Apps.xmlError": "Ezin izan da zure fitxategia kargatu.  Agian Blockly-ren beste bertsio batekin sortua izan zen?"
+ }

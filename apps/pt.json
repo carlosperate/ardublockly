@@ -1,0 +1,6 @@
+{
+    "Apps.httpRequestError": "Houve um problema com a solicitação.",
+    "Apps.linkAlert": "Compartilhe os seus blocos com este link:\n\n%1",
+    "Apps.hashError": "Desculpe, '%1' não corresponde a um blockly salvo.",
+    "Apps.xmlError": "Não foi possível ler o seu arquivo salvo.  Talvez ele tenha sido gerado por uma versão antiga do Blockly?"
+ }
