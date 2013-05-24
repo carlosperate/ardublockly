@@ -114,14 +114,14 @@ def _create_lang_file():
     lang_file = codecs.open(lang_file_name, 'w', 'utf-8')
     print 'Created file: ' + lang_file_name
     # string.format doesn't like printing braces, so break up our writes.
-    lang_file.write('{\n\t"@metadata": {')
+    lang_file.write('{\n    "@metadata": {')
     lang_file.write("""
-\t\t"author": "{0}",
-\t\t"last-updated": "{1}",
-\t\t"locale": "{2}",
-\t\t"message-documentation" : "qqq"
+        "author": "{0}",
+        "lastupdated": "{1}",
+        "locale": "{2}",
+        "messagedocumentation" : "qqq"
 """.format(args.author, str(datetime.now()), args.lang))
-    lang_file.write('\t},\n')
+    lang_file.write('    },\n')
     return lang_file
 
 
@@ -247,13 +247,14 @@ def _write_files(units):
             lang_file.write(',\n')
             key_file.write(',\n')
             qqq_file.write(',\n')
-        lang_file.write(u'\t"{0}": "{1}"'.format(
+        lang_file.write(u'    "{0}": "{1}"'.format(
             unit['meaning'],
             unit['source'].replace('"', "'")))
         key_file.write('"{0}": "{1}"'.format(unit['meaning'], unit['key']))
-        qqq_file.write(u'\t"{0}": "{1}"'.format(
+        qqq_file.write(u'    "{0}": "{1}"'.format(
             unit['meaning'],
-            unit['description'].replace('"', "'")))
+            unit['description'].replace('"', "'").replace(
+                '{lb}', '{').replace('{rb}', '}')));
         first_entry = False
     _close_lang_file(lang_file)
     _close_key_file(key_file)
