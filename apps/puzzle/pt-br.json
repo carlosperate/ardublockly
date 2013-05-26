@@ -1,4 +1,10 @@
 {
+    "@metadata": {
+        "authors": [
+            "Luckas",
+            "TheGabrielZaum"
+        ]
+    },
     "Puzzle.country1": "Austr\u00e1lia",
     "Puzzle.country1Language": "Ingl\u00eas",
     "Puzzle.country1City1": "Melbourne",
@@ -33,11 +39,5 @@
     "Puzzle.checkAnswers": "Checar respostas",
     "Puzzle.helpText": "Para cada pa\u00eds (verde), anexe sua bandeira, escolha seu idioma, e agrupe suas cidades.",
     "Puzzle.helpImage": "help_pt-br.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Luckas",
-            "TheGabrielZaum"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

@@ -1,4 +1,10 @@
 {
+    "@metadata": {
+        "authors": [
+            "Bellayet",
+            "Runab"
+        ]
+    },
     "Puzzle.country1": "\u0985\u09b8\u09cd\u099f\u09cd\u09b0\u09c7\u09b2\u09bf\u09af\u09bc\u09be",
     "Puzzle.country1Language": "\u0987\u0982\u09b0\u09c7\u099c\u09bf",
     "Puzzle.country1City1": "\u09ae\u09c7\u09b2\u09ac\u09cb\u09b0\u09cd\u09a8",
@@ -20,10 +26,6 @@
     "Puzzle.languageChoose": "\u09aa\u099b\u09a8\u09cd\u09a6 \u0995\u09b0\u09c1\u09a8...",
     "Puzzle.cities": "\u09b6\u09b9\u09b0:",
     "Puzzle.help": "\u09b8\u09be\u09b9\u09be\u09af\u09cd\u09af",
-    "Puzzle.helpOk": "\u09a0\u09bf\u0995 \u0986\u099b\u09c7",
-    "@metadata": {
-        "authors": [
-            "Bellayet"
-        ]
-    }
+    "Puzzle.checkAnswers": "\u0989\u09a4\u09cd\u09a4\u09b0 \u09af\u09be\u099a\u09be\u0987 \u0995\u09b0\u09c1\u09a8",
+    "Puzzle.helpOk": "\u09a0\u09bf\u0995 \u0986\u099b\u09c7"
 }

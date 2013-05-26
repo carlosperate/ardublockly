@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Rezonansowy"
+        ]
+    },
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "Angielski",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Sprawd\u017a Odpowiedzi",
     "Puzzle.helpText": "Dla ka\u017cdego kraju (zielony), za\u0142\u0105cz jego flag\u0119, wybierz j\u0119zyk urz\u0119dowy, i okre\u015bl miasta, znajduj\u0105cych si\u0119 w tym kraju.",
     "Puzzle.helpImage": "help_pl.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Rezonansowy"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Tifinaghes"
+        ]
+    },
     "Puzzle.country1": "\u2d53\u2d59\u2d5c\u2d54\u2d30\u2d4d\u2d62\u2d30",
     "Puzzle.country1Language": "\u2d5c\u2d49\u2d4f\u2d33\u2d4d\u2d49\u2d63\u2d49\u2d5c",
     "Puzzle.country1City2": "\u2d59\u2d49\u2d37\u2d4f\u2d49",
@@ -11,10 +16,5 @@
     "Puzzle.country3City1": "\u2d31\u2d49\u2d3d\u2d49\u2d4f",
     "Puzzle.country3City2": "\u2d5b\u2d30\u2d4f\u2d33\u2d40\u2d30\u2d62",
     "Puzzle.flag": "\u2d30\u2d5b\u2d4f\u2d62\u2d30\u2d4d",
-    "Puzzle.language": "\u2d5c\u2d53\u2d5c\u2d4d\u2d30\u2d62\u2d5c:",
-    "@metadata": {
-        "authors": [
-            "Tifinaghes"
-        ]
-    }
+    "Puzzle.language": "\u2d5c\u2d53\u2d5c\u2d4d\u2d30\u2d62\u2d5c:"
 }

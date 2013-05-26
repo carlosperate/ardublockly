@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Toli\u00f1o"
+        ]
+    },
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "ingl\u00e9s",
     "Puzzle.country1City1": "Melbourne",
@@ -10,7 +15,7 @@
     "Puzzle.country2City2": "M\u00fanic",
     "Puzzle.country2HelpUrl": "http://gl.wikipedia.org/wiki/Alema%C3%B1a__Deutschland",
     "Puzzle.country3": "China",
-    "Puzzle.country3Language": "chino",
+    "Puzzle.country3Language": "chin\u00e9s",
     "Puzzle.country3City1": "Pequ\u00edn",
     "Puzzle.country3City2": "Shanghai",
     "Puzzle.country3HelpUrl": "http://gl.wikipedia.org/wiki/Rep%C3%BAblica_Popular_da_China",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Comprobar as respostas",
     "Puzzle.helpText": "A cada pa\u00eds (en verde) faille corresponder a s\u00faa bandeira, sinala a s\u00faa lingua e api\u00f1a as s\u00faas cidades.",
     "Puzzle.helpImage": "help_gl.png",
-    "Puzzle.helpOk": "Aceptar",
-    "@metadata": {
-        "authors": [
-            "Toli\u00f1o"
-        ]
-    }
+    "Puzzle.helpOk": "Aceptar"
 }

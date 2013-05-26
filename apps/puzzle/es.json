@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Fortega"
+        ]
+    },
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "Ingl\u00e9s",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Comprobar las respuestas",
     "Puzzle.helpText": "Para cada pa\u00eds (verde), asocia su bandera, elige su idioma y agrupa sus ciudades.",
     "Puzzle.helpImage": "help_es.png",
-    "Puzzle.helpOk": "Aceptar",
-    "@metadata": {
-        "authors": [
-            "Fortega"
-        ]
-    }
+    "Puzzle.helpOk": "Aceptar"
 }

@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Grin"
+        ]
+    },
     "Puzzle.country1": "Ausztr\u00e1lia",
     "Puzzle.country1Language": "Angol",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "V\u00e1laszok ellen\u0151rz\u00e9se",
     "Puzzle.helpText": "Minden orsz\u00e1ghoz (z\u00f6ld sz\u00edn\u0171ek) add hozz\u00e1 a z\u00e1szl\u00f3j\u00e1t, v\u00e1laszd ki a nyelvet amit besz\u00e9lnek \u00e9s k\u00e9sz\u00edts egy tornyot a v\u00e1rosaib\u00f3l.",
     "Puzzle.helpImage": "help_en.png",
-    "Puzzle.helpOk": "Elolvastam",
-    "@metadata": {
-        "authors": [
-            "Grin"
-        ]
-    }
+    "Puzzle.helpOk": "Elolvastam"
 }

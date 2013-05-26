@@ -1,4 +1,10 @@
 {
+    "@metadata": {
+        "authors": [
+            "Anson2812",
+            "Jetlag"
+        ]
+    },
     "Puzzle.country1": "\u6fb3\u5927\u5229\u4e9e",
     "Puzzle.country1Language": "\u82f1\u8a9e",
     "Puzzle.country1City1": "\u58a8\u723e\u672c",
@@ -23,7 +29,7 @@
     "Puzzle.language": "\u8a9e\u8a00",
     "Puzzle.languageChoose": "\u9078\u64c7",
     "Puzzle.cities": "\u57ce\u5e02",
-    "Puzzle.error0": "\u8b9a\uff01\n\u5168\u90e8 %1 \u683c\u4ed4\u6b63\u78ba\u3002",
+    "Puzzle.error0": "\u8b9a\uff01\n%1 \u683c\u4ed4\u5168\u90e8\u6b63\u78ba\u3002",
     "Puzzle.error1": "\u5dee\u6ef4\uff01\u6709 1 \u683c\u6bcb\u8457\u3002",
     "Puzzle.error2": "%1 \u683c\u6bcb\u8457\u3002",
     "Puzzle.tryAgain": "\u52a0\u5149\u4e2a\u683c\u4ed4\u6bcb\u8457\u3002\n\u7e7c\u7e8c\u52aa\u529b\u3002",
@@ -33,11 +39,5 @@
     "Puzzle.checkAnswers": "\u6838\u5c0d\u7b54\u6848",
     "Puzzle.helpText": "\u6bcf\u96bb\u570b\u5bb6\uff08\u9752\u8272\uff09\uff0c\u9078\u64c7\u5176\u5c0d\u61c9\u4e2a\u65d7\u5e5f\uff0c\u8a9e\u8a00\uff0c\u8207\u57ce\u5e02\u3002",
     "Puzzle.helpImage": "help_hak.png",
-    "Puzzle.helpOk": "\u78ba\u5b9a",
-    "@metadata": {
-        "authors": [
-            "Anson2812",
-            "Jetlag"
-        ]
-    }
+    "Puzzle.helpOk": "\u78ba\u5b9a"
 }

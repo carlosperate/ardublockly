@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Robby"
+        ]
+    },
     "Puzzle.country1": "Australien",
     "Puzzle.country1Language": "Englesch",
     "Puzzle.country1City1": "Melbourne",
@@ -27,10 +32,5 @@
     "Puzzle.help": "H\u00ebllef",
     "Puzzle.checkAnswers": "\u00c4ntwerten nokucken",
     "Puzzle.helpImage": "help_lb.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Robby"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

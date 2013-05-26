@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Luckas"
+        ]
+    },
     "Puzzle.country1": "Austr\u00e1lia",
     "Puzzle.country1Language": "Ingl\u00eas",
     "Puzzle.country1City1": "Melbourne",
@@ -19,10 +24,5 @@
     "Puzzle.cities": "cidades:",
     "Puzzle.help": "Ajuda",
     "Puzzle.checkAnswers": "Verificar respostas",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Luckas"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Beta16"
+        ]
+    },
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "Inglese",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Controlla le risposte",
     "Puzzle.helpText": "Per ogni paese (verde), attaccaci la sua bandiera, scegli la lingua e fai la lista della sua citt\u00e0.",
     "Puzzle.helpImage": "help_it.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Beta16"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

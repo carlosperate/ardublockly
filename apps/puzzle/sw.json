@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Carolinechumo"
+        ]
+    },
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "Kingereza",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Kuangalia Majibu",
     "Puzzle.helpText": "Kwa kila nchi (kijani), ambatisha bendera yake, kuchagua lugha yake, na kupanganya miji yake.",
     "Puzzle.helpImage": "help_sw.png",
-    "Puzzle.helpOk": "Sawa",
-    "@metadata": {
-        "authors": [
-            "Carolinechumo"
-        ]
-    }
+    "Puzzle.helpOk": "Sawa"
 }

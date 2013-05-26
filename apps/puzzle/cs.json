@@ -1,4 +1,10 @@
 {
+    "@metadata": {
+        "authors": [
+            "Mormegil",
+            "Reaperman"
+        ]
+    },
     "Puzzle.country1": "Austr\u00e1lie",
     "Puzzle.country1Language": "Angli\u010dtina",
     "Puzzle.country1City1": "Melbourne",
@@ -33,11 +39,5 @@
     "Puzzle.checkAnswers": "Zkontrolovat odpov\u011bdi",
     "Puzzle.helpText": "Pro ka\u017ed\u00fd st\u00e1t (zelen\u011b) p\u0159ipoj jeho vlajku, zvol jazyk a p\u0159i\u0159a\u010f m\u011bsta.",
     "Puzzle.helpImage": "help_cs.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Mormegil",
-            "Reaperman"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

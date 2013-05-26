@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "McDutchie"
+        ]
+    },
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "Anglese",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Verificar responses",
     "Puzzle.helpText": "Pro cata pais (in verde), attacha su bandiera, selige su lingua, e face un pila de su citates.",
     "Puzzle.helpImage": "help_ia.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "McDutchie"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "AhmedNajibBiabaniIbrahimkhel"
+        ]
+    },
     "Puzzle.country1": "\u0622\u0633\u067c\u0631\u0627\u0644\u064a\u0627",
     "Puzzle.country1Language": "\u0627\u0646\u06ab\u0631\u06d0\u0632\u064a",
     "Puzzle.country1City1": "\u0645\u06d0\u0644\u0628\u0648\u0631\u0646",
@@ -28,10 +33,5 @@
     "Puzzle.error2": "%1 \u0628\u0646\u062f\u064a\u0632\u0648\u0646\u0647 \u0633\u0645 \u0646\u0647 \u062f\u064a.",
     "Puzzle.help": "\u0644\u0627\u0631\u069a\u0648\u062f",
     "Puzzle.checkAnswers": "\u0681\u0648\u0627\u0628\u0648\u0646\u0647 \u06a9\u0631\u0647 \u06a9\u0648\u0644",
-    "Puzzle.helpOk": "\u069a\u0647",
-    "@metadata": {
-        "authors": [
-            "AhmedNajibBiabaniIbrahimkhel"
-        ]
-    }
+    "Puzzle.helpOk": "\u069a\u0647"
 }

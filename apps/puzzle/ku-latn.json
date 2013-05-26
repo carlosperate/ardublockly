@@ -1,4 +1,11 @@
 {
+    "@metadata": {
+        "authors": [
+            "George Animal"
+        ]
+    },
+    "Puzzle.country1": "Awistralya",
+    "Puzzle.country1Language": "\u00cengil\u00eez\u00ee",
     "Puzzle.country2": "Elmanya",
     "Puzzle.country2Language": "Elman\u00ee",
     "Puzzle.country2City1": "Berl\u00een",
@@ -8,10 +15,5 @@
     "Puzzle.cities": "bajar:",
     "Puzzle.help": "Al\u00eekar\u00ee",
     "Puzzle.checkAnswers": "Bersivan kontrol bike",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "George Animal"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

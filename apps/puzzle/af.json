@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Naudefj"
+        ]
+    },
     "Puzzle.country1": "Australi\u00eb",
     "Puzzle.country1Language": "Engels",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Kontroleer antwoorde",
     "Puzzle.helpText": "Vir elke land (groen), koppel die vlag, kies die taal en maak 'n stapel van sy stede.",
     "Puzzle.helpImage": "help_af.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Naudefj"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

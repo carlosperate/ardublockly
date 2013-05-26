@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Siebrand"
+        ]
+    },
     "Puzzle.country1": "Australi\u00eb",
     "Puzzle.country1Language": "Engels",
     "Puzzle.country1City1": "Melbourne",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Antwoorden controleren",
     "Puzzle.helpText": "Koppel de vlag, kies de taal en maak een stapel van de steden voor iedere lang (groen).",
     "Puzzle.helpImage": "help_nl.png",
-    "Puzzle.helpOk": "OK",
-    "@metadata": {
-        "authors": [
-            "Siebrand"
-        ]
-    }
+    "Puzzle.helpOk": "OK"
 }

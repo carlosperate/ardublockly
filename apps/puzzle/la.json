@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Autokrator"
+        ]
+    },
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "Lingua Anglica",
     "Puzzle.country1City1": "Melburnia",
@@ -33,10 +38,5 @@
     "Puzzle.checkAnswers": "Responsa examinare",
     "Puzzle.helpText": "Unicuique civitati vexillum proprium adiunge, linguam elige et urbes eius indice.",
     "Puzzle.helpImage": "help_la.png",
-    "Puzzle.helpOk": "ASSENTIOR",
-    "@metadata": {
-        "authors": [
-            "Autokrator"
-        ]
-    }
+    "Puzzle.helpOk": "ASSENTIOR"
 }
