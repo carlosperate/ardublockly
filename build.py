@@ -123,7 +123,7 @@ document.write('<script type="text/javascript" src="' + window.BLOCKLY_DIR +
 document.write('<script type="text/javascript">window.BLOCKLY_BOOT()</script>');
 """)
     f.close()
-    print 'SUCCESS: ' + target_filename
+    print('SUCCESS: ' + target_filename)
 
 
 class Gen_compressed(threading.Thread):
@@ -238,23 +238,28 @@ class Gen_compressed(threading.Thread):
     if json_data.has_key('errors'):
       errors = json_data['errors']
       for error in errors:
-        print 'FATAL ERROR'
-        print error['error']
-        print '%s at line %d:' % (
-            file_lookup(error['file']), error['lineno'])
-        print error['line']
-        print (' ' * error['charno']) + '^'
+        print('FATAL ERROR')
+        print(error['error'])
+        print('%s at line %d:' % (
+            file_lookup(error['file']), error['lineno']))
+        print(error['line'])
+        print((' ' * error['charno']) + '^')
+        sys.exit(1)
     else:
       if json_data.has_key('warnings'):
         warnings = json_data['warnings']
         for warning in warnings:
-          print 'WARNING'
-          print warning['warning']
-          print '%s at line %d:' % (
-              file_lookup(warning['file']), warning['lineno'])
-          print warning['line']
-          print (' ' * warning['charno']) + '^'
-        print
+          print('WARNING')
+          print(warning['warning'])
+          print('%s at line %d:' % (
+              file_lookup(warning['file']), warning['lineno']))
+          print(warning['line'])
+          print((' ' * warning['charno']) + '^')
+        print()
+
+      if not json_data.has_key('compiledCode'):
+        print('FATAL ERROR: Compiler did not return compiledCode.')
+        sys.exit(1)
 
       code = HEADER + '\n' + json_data['compiledCode']
 
@@ -269,9 +274,9 @@ class Gen_compressed(threading.Thread):
         original_kb = int(original_b / 1024 + 0.5)
         compressed_kb = int(compressed_b / 1024 + 0.5)
         ratio = int(float(compressed_b) / float(original_b) * 100 + 0.5)
-        print 'SUCCESS: ' + target_filename
-        print 'Size changed from %d KB to %d KB (%d%%).' % (
-            original_kb, compressed_kb, ratio)
+        print('SUCCESS: ' + target_filename)
+        print('Size changed from %d KB to %d KB (%d%%).' % (
+            original_kb, compressed_kb, ratio))
       else:
         print 'UNKNOWN ERROR'
 
@@ -281,8 +286,8 @@ if __name__ == '__main__':
     calcdeps = import_path(
           '../closure-library-read-only/closure/bin/calcdeps.py')
   except ImportError:
-    print """Error: Closure not found.  Read this:
-http://code.google.com/p/blockly/wiki/Closure"""
+    print("""Error: Closure not found.  Read this:
+http://code.google.com/p/blockly/wiki/Closure""")
     sys.exit(1)
   search_paths = calcdeps.ExpandDirectories(
       ['core/', '../closure-library-read-only/'])
