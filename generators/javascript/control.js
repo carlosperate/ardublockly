@@ -46,7 +46,7 @@ Blockly.JavaScript.controls_if = function() {
 };
 
 Blockly.JavaScript.controls_repeat = function() {
-  // Repeat n times.
+  // Repeat n times (internal number).
   var repeats = Number(this.getTitleValue('TIMES'));
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
@@ -57,6 +57,31 @@ Blockly.JavaScript.controls_repeat = function() {
       'count', Blockly.Variables.NAME_TYPE);
   var code = 'for (var ' + loopVar + ' = 0; ' +
       loopVar + ' < ' + repeats + '; ' +
+      loopVar + '++) {\n' +
+      branch + '}\n';
+  return code;
+};
+
+Blockly.JavaScript.controls_repeat_ext = function() {
+  // Repeat n times (external number).
+  var repeats = Blockly.JavaScript.valueToCode(this, 'TIMES',
+      Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
+  if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
+    branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
+  var code = '';
+  var loopVar = Blockly.JavaScript.variableDB_.getDistinctName(
+      'count', Blockly.Variables.NAME_TYPE);
+  var endVar = repeats;
+  if (!repeats.match(/^\w+$/) && !Blockly.isNumber(repeats)) {
+    var endVar = Blockly.JavaScript.variableDB_.getDistinctName(
+        'repeat_end', Blockly.Variables.NAME_TYPE);
+    code += 'var ' + endVar + ' = ' + repeats + ';\n';
+  }
+  code += 'for (var ' + loopVar + ' = 0; ' +
+      loopVar + ' < ' + endVar + '; ' +
       loopVar + '++) {\n' +
       branch + '}\n';
   return code;
@@ -93,8 +118,7 @@ Blockly.JavaScript.controls_for = function() {
         '\'' + this.id + '\'') + branch;
   }
   var code;
-  if (argument0.match(/^-?\d+(\.\d+)?$/) &&
-      argument1.match(/^-?\d+(\.\d+)?$/)) {
+  if (Blockly.isNumber(argument0) && Blockly.isNumber(argument1)) {
     // Both arguments are simple numbers.
     var up = parseFloat(argument0) <= parseFloat(argument1);
     code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
@@ -105,13 +129,13 @@ Blockly.JavaScript.controls_for = function() {
     code = '';
     // Cache non-trivial values to variables to prevent repeated look-ups.
     var startVar = argument0;
-    if (!argument0.match(/^\w+$/) && !argument0.match(/^-?\d+(\.\d+)?$/)) {
+    if (!argument0.match(/^\w+$/) && !Blockly.isNumber(argument0)) {
       var startVar = Blockly.JavaScript.variableDB_.getDistinctName(
           variable0 + '_start', Blockly.Variables.NAME_TYPE);
       code += 'var ' + startVar + ' = ' + argument0 + ';\n';
     }
     var endVar = argument1;
-    if (!argument1.match(/^\w+$/) && !argument1.match(/^-?\d+(\.\d+)?$/)) {
+    if (!argument1.match(/^\w+$/) && !Blockly.isNumber(argument1)) {
       var endVar = Blockly.JavaScript.variableDB_.getDistinctName(
           variable0 + '_end', Blockly.Variables.NAME_TYPE);
       code += 'var ' + endVar + ' = ' + argument1 + ';\n';

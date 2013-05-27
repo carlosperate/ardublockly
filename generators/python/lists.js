@@ -142,12 +142,12 @@ Blockly.Python.lists_getIndex = function() {
     }
   } else if (where == 'FROM_START') {
     // Blockly uses one-based indicies.
-    if (at.match(/^-?\d+$/)) {
+    if (Blockly.isNumber(at)) {
       // If the index is a naked number, decrement it right now.
       at = parseInt(at, 10) - 1;
     } else {
       // If the index is dynamic, decrement it in code.
-      at += ' - 1';
+      at = 'int(' + at + ' - 1)';
     }
     if (mode == 'GET') {
       var code = list + '[' + at + ']';
@@ -236,12 +236,12 @@ Blockly.Python.lists_setIndex = function() {
     }
   } else if (where == 'FROM_START') {
     // Blockly uses one-based indicies.
-    if (at.match(/^-?\d+$/)) {
+    if (Blockly.isNumber(at)) {
       // If the index is a naked number, decrement it right now.
       at = parseInt(at, 10) - 1;
     } else {
       // If the index is dynamic, decrement it in code.
-      at += ' - 1';
+      at = 'int(' + at + ' - 1)';
     }
     if (mode == 'SET') {
       return list + '[' + at + '] = ' + value + '\n';
@@ -285,30 +285,41 @@ Blockly.Python.lists_getSublist = function() {
     at1 = '';
   } else if (where1 == 'FROM_START') {
     // Blockly uses one-based indicies.
-    if (at1.match(/^-?\d+$/)) {
+    if (Blockly.isNumber(at1)) {
       // If the index is a naked number, decrement it right now.
       at1 = parseInt(at1, 10) - 1;
     } else {
       // If the index is dynamic, decrement it in code.
-      at1 += ' - 1';
+      at1 = 'int(' + at1 + ' - 1)';
     }
   } else if (where1 == 'FROM_END') {
-    at1 = '-' + at1;
+    if (Blockly.isNumber(at1)) {
+      at1 = -parseInt(at1, 10);
+    } else {
+      at1 = '-int(' + at1 + ')';
+    }
   }
   if (where2 == 'LAST' || (where2 == 'FROM_END' && at2 == '1')) {
     at2 = '';
   } else if (where1 == 'FROM_START') {
-    at2 = at2;
+    if (Blockly.isNumber(at2)) {
+      at2 = parseInt(at2, 10);
+    } else {
+      at2 = 'int(' + at2 + ')';
+    }
   } else if (where1 == 'FROM_END') {
-    if (at2.match(/^-?\d+$/)) {
+    if (Blockly.isNumber(at2)) {
       // If the index is a naked number, increment it right now.
+      // Add special case for -0.
       at2 = 1 - parseInt(at2, 10);
+      if (at2 == 0) {
+        at2 = '';
+      }
     } else {
       // If the index is dynamic, increment it in code.
-      at2 = '1 - ' + at2;
+      Blockly.Python.definitions_['import_sys'] = 'import sys';
+      at2 = 'int(1 - ' + at2 + ') or sys.maxsize';
     }
-    Blockly.Python.definitions_['import_sys'] = 'import sys';
-    at2 += ' or sys.maxsize';
   }
   var code = list + '[' + at1 + ' : ' + at2 + ']';
   return [code, Blockly.Python.ORDER_MEMBER];

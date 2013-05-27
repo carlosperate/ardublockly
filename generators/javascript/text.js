@@ -111,9 +111,9 @@ Blockly.JavaScript.text_charAt = function() {
       return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
     case 'FROM_START':
       // Blockly uses one-based indicies.
-      if (at.match(/^-?\d+$/)) {
+      if (Blockly.isNumber(at)) {
         // If the index is a naked number, decrement it right now.
-        at = parseInt(at, 10) - 1;
+        at = parseFloat(at) - 1;
       } else {
         // If the index is dynamic, decrement it in code.
         at += ' - 1';

@@ -213,7 +213,7 @@ Blockly.Language.controls_if_else = {
 };
 
 Blockly.Language.controls_repeat = {
-  // Repeat n times.
+  // Repeat n times (internal number).
   helpUrl: Blockly.LANG_CONTROLS_REPEAT_HELPURL,
   init: function() {
     this.setColour(120);
@@ -226,6 +226,25 @@ Blockly.Language.controls_repeat = {
         .appendTitle(Blockly.LANG_CONTROLS_REPEAT_INPUT_DO);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
+    this.setTooltip(Blockly.LANG_CONTROLS_REPEAT_TOOLTIP);
+  }
+};
+
+Blockly.Language.controls_repeat_ext = {
+  // Repeat n times (external number).
+  helpUrl: Blockly.LANG_CONTROLS_REPEAT_HELPURL,
+  init: function() {
+    this.setColour(120);
+    this.appendValueInput('TIMES')
+        .setCheck('Number')
+        .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT)
+    this.appendDummyInput()
+        .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES);
+    this.appendStatementInput('DO')
+        .appendTitle(Blockly.LANG_CONTROLS_REPEAT_INPUT_DO);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_CONTROLS_REPEAT_TOOLTIP);
   }
 };

@@ -46,8 +46,28 @@ Blockly.Python.controls_if = function() {
 };
 
 Blockly.Python.controls_repeat = function() {
-  // Repeat n times.
-  var repeats = Number(this.getTitleValue('TIMES'));
+  // Repeat n times (internal number).
+  var repeats = parseInt(this.getTitleValue('TIMES'), 10);
+  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  if (Blockly.Python.INFINITE_LOOP_TRAP) {
+    branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
+        '\'' + this.id + '\'') + branch;
+  }
+  var loopVar = Blockly.Python.variableDB_.getDistinctName(
+      'count', Blockly.Variables.NAME_TYPE);
+  var code = 'for ' + loopVar + ' in range(' + repeats + '):\n' + branch;
+  return code;
+};
+
+Blockly.Python.controls_repeat_ext = function() {
+  // Repeat n times (external number).
+  var repeats = Blockly.Python.valueToCode(this, 'TIMES',
+      Blockly.Python.ORDER_NONE) || '0';
+  if (Blockly.isNumber(repeats)) {
+    repeats = parseInt(repeats, 10);
+  } else {
+    repeats = 'int(' + repeats + ')';
+  }
   var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
   if (Blockly.Python.INFINITE_LOOP_TRAP) {
     branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
@@ -95,9 +115,8 @@ Blockly.Python.controls_for = function() {
 
   var code = '';
   var range;
-  if (argument0.match(/^-?\d+$/) &&
-      argument1.match(/^-?\d+$/)) {
-    // Both arguments are simple integers.
+  if (Blockly.isNumber(argument0) && Blockly.isNumber(argument1)) {
+    // Both arguments are simple numbers.
     argument0 = parseInt(argument0, 10);
     argument1 = parseInt(argument1, 10);
     if (argument0 <= argument1) {
@@ -117,18 +136,24 @@ Blockly.Python.controls_for = function() {
     range = 'range(' + range + ')';
   } else {
     // Cache non-trivial values to variables to prevent repeated look-ups.
-    var startVar = argument0;
-    if (!argument0.match(/^\w+$/) && !argument0.match(/^-?\d+$/)) {
-      var startVar = Blockly.Python.variableDB_.getDistinctName(
-          variable0 + '_start', Blockly.Variables.NAME_TYPE);
-      code += startVar + ' = ' + argument0 + '\n';
-    }
-    var endVar = argument1;
-    if (!argument1.match(/^\w+$/) && !argument1.match(/^-?\d+$/)) {
-      var endVar = Blockly.Python.variableDB_.getDistinctName(
-          variable0 + '_end', Blockly.Variables.NAME_TYPE);
-      code += endVar + ' = ' + argument1 + '\n';
-    }
+    var scrub = function(arg, suffix) {
+      if (Blockly.isNumber(arg)) {
+        // Simple number.
+        arg = parseInt(arg, 10);
+      } else if (arg.match(/^\w+$/)) {
+        // Variable.
+        arg = 'int(' + arg + ')';
+      } else {
+        // It's complicated.
+        var varName = Blockly.Python.variableDB_.getDistinctName(
+            variable0 + suffix, Blockly.Variables.NAME_TYPE);
+        code += varName + ' = int(' + arg + ')\n';
+        arg = varName;
+      }
+      return arg;
+    };
+    var startVar = scrub(argument0, '_start');
+    var endVar = scrub(argument1, '_end');
     range = '(' + startVar + ' <= ' + endVar + ') and ' +
         'range(' + startVar + ', ' + endVar + ' + 1) or ' +
         'range(' + startVar + ', ' + endVar + ' - 1, -1)';

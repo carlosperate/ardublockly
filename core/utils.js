@@ -373,3 +373,12 @@ Blockly.commonWordSuffix = function(array, opt_shortest) {
   }
   return max;
 };
+
+/**
+ * Is the given string a number (includes negative and decimals).
+ * @param {string} str Input string.
+ * @return {boolean} True if number, false otherwise.
+ */
+Blockly.isNumber = function(str) {
+  return !!str.match(/^\s*-?\d+(\.\d+)?\s*$/);
+};
