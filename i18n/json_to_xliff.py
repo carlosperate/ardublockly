@@ -55,7 +55,7 @@ def _insert_breaks(s, min_length, max_length):
     # then return one per line.
     if not [sen for sen in sentences if
             len(sen) > max_length or len(sen) < min_length]:
-        return newline.join([sen.strip() for sen in sentences])
+        return newline.join([sen.strip() + '.' for sen in sentences])
 
     # Otherwise, divide into words, and use a greedy algorithm for the first
     # line, and try to get later lines as close as possible in length.
