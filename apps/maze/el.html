@@ -1,72 +1,17 @@
 <html dir="ltr" lang="el">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Alexandros Zountas (azountas@gmail.com)">
-  <title>Ο Λαβύρινθος του Μπλοκλι (Blockly)</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../el.js"></script>
+  <script type="text/javascript" src="el.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'προχώρησε', //'κινήσου εμπρός',
-      turnLeft: 'στρίψε αριστερά',
-      turnRight: 'στρίψε δεξιά',
-      doCode: 'κάνε',
-      elseCode: 'ειδάλλως',
-      pathAhead: 'εαν υπάρχει μονοπάτι μπροστά',
-      pathLeft: 'εαν υπάρχει μονοπάτι προς τα αριστερά',
-      pathRight: 'εαν υπάρχει μονοπάτι προς τα δεξιά',
-      repeatUntil: 'επανάλαβε μέχρι',
-      // Tooltips.
-      moveForwardTooltip: 'Κινεί το ανθρωπάκι μία θέση μπροστά.',
-      turnTooltip: 'Το ανθρωπάκι στρίβει αριστερά ή δεξιά κατά 90 μοίρες.',
-      ifTooltip: 'Αν υπάρχει ένα μονοπάτι προς τη specified κατεύθυνση,\n' +
-          'τότε κάνε μερικές δουλειές.',
-      ifelseTooltip: 'Αν υπάρχει ένα μονοπάτι προς τη specified κατεύθυνση,\n' +
-          'τότε κάνε το πρώτο block από δουλειές.\n' +
-          'Ειδάλλως, κάνε το δεύτερο block από δουλειές.',
-      whileTooltip: 'Επανέλαβε τις περικλειόμενες εργασίες until finish point is reached.',
-      codeTooltip: 'See generated JavaScript code.',
-      linkTooltip: 'Save and link to blocks.',
-      randomizeMarkerTooltip: 'Δημιουγία τυχαίων σημείων αφετηρίας και τερματισμού.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Το πρόγραμμα είναι μια ακολουθία από εντολές. Στοίβαξε δύο μπλοκ 'προχώρησε' για να φτάσω στο τέρμα.",
-        "Ποια είναι η ακολουθία των βημάτων που πρέπει να ακολουθήσω σε αυτό το μονοπάτι;",
-        "Οι υπολογιστές έχουν περιορισμένη μνήμη. Προσπάθησε να φτάσεις στο τέλος του μονοπατιού χρησιμοποιώντας μόνο δύο μπλοκ. Χρησιμοποίησε το μπλοκ 'επανέλαβε' για να τρέξεις το μπλοκ που θέλεις περισσότερες φορές.",
-        "Φτάσε στο τέρμα χρησιμοπιώντας μόνο πέντε μπλοκ",
-        "Το ανθρωπάκι πρέπει να στρίψει αριστερά όταν δεν μπορεί να πάει μπροστά.",
-        "Μια συνθήκη 'εάν' θα εκτελέσει κάτι μόνο αν είναι αληθής. Προσπάθησε να στρίψεις αριστερά, εάν υπάρχει μονοπάτι προς τα αριστερά.",
-        "Αυτός ο λαβύρινθος φαίνεται πιο περίπλοκος από τον προηγούμενο, αλλά δεν είναι.",
-        "Μπορείς να χρησιμοποιήσεις περισσότερα από ένα μπλοκ 'εάν'.",
-        "Τα μπλοκ 'εάν...ειδάλλως' θα κάνουν είτε το ένα είτε το άλλο.",
-        "Μπορείς να επιλύσεις αυτόν τον περίπλοκο λαβύρινθο; Προσπάθησε να ακολουθήσεις τον αριστερό τοίχο. Μόνο προχωρημένοι προγραμματιστές!"
-      ],
-      // Misc text.
-      level: 'Επίπεδο',
-      capacity0: 'Έχεις άλλα <span id="capacityNumber">0</span> blocks ακόμα.',
-      capacity1: 'Έχεις άλλα <span id="capacityNumber">1</span> block ακόμα.',
-      capacity2: 'Έχεις άλλα <span id="capacityNumber">%1</span> blocks ακόμα.',
-      runProgram: 'Εκτέλεση Προγράμματος',
-      resetProgram: '\u00A0 \u00A0 Επανεκκίνηση \u00A0 \u00A0',
-      nextLevel: 'Συγχαρητήρια!\nΘα προχωρήσεις στο επίπεδο %1?',
-      finalLevel: 'Congratulations!\nΈλυσες το τελευταίο επίπεδο.',
-      title: 'Λαβύρινθος',
-      oneTopBlock: 'Σε αυτό το επίπεδο, πρέπει να στοιβάξεις όλα τα blocks στο λευκό χώρο εργασίας.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Υπήρξε πρόβλημα με το αίτημα.\n';
-      BlocklyStorage.LINK_ALERT = 'Μοιράσου τα blocks σου με αυτό το σύνδεσμο:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Λυπάμαι, το "%1" δεν αντιστοιχεί σε κανένα αποθηκευμένο αρχείο Μπλόκλι.';
-      BlocklyStorage.XML_ERROR = 'Δεν μπορώ να φορτώσω το αποθηκευμένο αρχείο σου.\n'+
-          'Μήπως δημιουργήθηκε από μία παλιότερη έκδοση του Μπλόκλι\nXML: ';
-    };
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

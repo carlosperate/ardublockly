@@ -1,72 +1,17 @@
 <html dir="ltr" lang="eu">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="xabierg@gmail.com">
-  <title>Blockly Labirintoa</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../eu.js"></script>
+  <script type="text/javascript" src="eu.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'mugi aurrera',
-      turnLeft: 'biratu ezker',
-      turnRight: 'biratu eskuin',
-      doCode: 'egin',
-      elseCode: 'bestela',
-      pathAhead: 'bidea badago aurrera',
-      pathLeft: 'bidea badago ezkerrera',
-      pathRight: 'bidea badago eskuinera',
-      repeatUntil: 'arte errepikatu',
-      // Tooltips.
-      moveForwardTooltip: 'Pegman aurreruntz tarte bat mugitzen du.',
-      turnTooltip: 'Pegman ezkerrerantz edo eskuinerantz 90 gradu biratzen du.',
-      ifTooltip: 'Esandako norantzan bidea badago,\n' +
-          'ekintza batzu burutu.',
-      ifelseTooltip: 'Esandako norantzan bidea badago,\n' +
-          'ekintzen lehenengo blokea burutu.\n' +
-          'Bestela, ekintzen bigarren blokea burutu.',
-      whileTooltip: 'Errepikatu barruko ekintzak bukaera punturaino iritsi arte.',
-      codeTooltip: 'Ikusi sorturiko JavaScript kodea.',
-      linkTooltip: 'Gorde eta lotura sortu.',
-      randomizeMarkerTooltip: 'Ausazko hasiera eta bukaera puntuak.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Programa bat agindu multzo edo sekuentzia bat da.  Elkartu 'mugi aurrera' bloke pare bat helmugara iritsi ahal izateko.",
-        "Zein da pausuen sekuentzia bide hau egiteko?",
-        "Ordenagailuek memoria mugatua daukate. Saiatu zaitez bide honen bukaerara iristen soilik bi bloke erabiliz. Erabili 'errepikatu' bloke bat behin baino gehiagotan to run a block more than once.",
-        "Iritsi helmugara soilik bost bloke  erabiliz.",
-        "Pegman-ek ezkerrera egin beharko du aurrera joan ezin denean.",
-        "'if' bloke batek zeozer egingo du bakarrik baldintza betetzen bada.  Saiatu ezkerrera biratzen ezkerrera bidea baldin badago.",
-        "Labirinto honek aurrekoa baino zailagoa ematen du, baina ez da.",
-        "'if' bloke bat baino gehiago erabili ditzakezu.",
-        "If-else blokeek gauza bat edo bestea egingo dute.",
-        "Labirinto zail honi irtenbidea aurkitu diezaiokezu? Saia zaitez ezker-pareta jarraitzen."
-      ],
-      // Misc text.
-      level: 'Maila',
-      capacity0: '<span id="capacityNumber">0</span> bloke geratzen dira.',
-      capacity1: 'Bloke <span id="capacityNumber">1</span> geratzen da.',
-      capacity2: '<span id="capacityNumber">%1</span> bloke geratzen dira.',
-      runProgram: 'Programa exekutatu',
-      resetProgram: '\u00A0 \u00A0 Berriz hasi \u00A0 \u00A0',
-      nextLevel: 'Zorionak!\Prest al zaude %1 mailara pasatzeko?',
-      finalLevel: 'Zorionak!\nAzken maila gainditu duzu.',
-      title: 'Labirintoa',
-      oneTopBlock: 'Maila honetan, bloke guztiak lan-eremu txurian pilatu behar dituzu.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Eskaerarekin arazo bat egon da.\n';
-      BlocklyStorage.LINK_ALERT = 'Elkarbanatu blokeak lotura honekin:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Barkatu, "%1" barcinak Blocky fitxategi hau lapurtu du ere.';
-      BlocklyStorage.XML_ERROR = 'Ezin izan da zure fitxategia kargatu.\n'+
-          'Agian Blockly-ren beste bertsio batekin sortua izan zen?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

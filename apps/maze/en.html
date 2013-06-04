@@ -3,69 +3,15 @@
   <meta charset="utf-8">
   <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../en.js"></script>
+  <script type="text/javascript" src="en.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'move forward',
-      turnLeft: 'turn left',
-      turnRight: 'turn right',
-      doCode: 'do',
-      elseCode: 'else',
-      pathAhead: 'if path ahead',
-      pathLeft: 'if path to the left',
-      pathRight: 'if path to the right',
-      repeatUntil: 'repeat until',
-      // Tooltips.
-      moveForwardTooltip: 'Moves Pegman forward one space.',
-      turnTooltip: 'Turns Pegman left or right by 90 degrees.',
-      ifTooltip: 'If there is a path in the specified direction,\n' +
-          'then do some actions.',
-      ifelseTooltip: 'If there is a path in the specified direction,\n' +
-          'then do the first block of actions.\n' +
-          'Otherwise, do the second block of actions.',
-      whileTooltip: 'Repeat the enclosed actions until finish point is reached.',
-      codeTooltip: 'See generated JavaScript code.',
-      linkTooltip: 'Save and link to blocks.',
-      randomizeMarkerTooltip: 'Randomize start and finish markers.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "A program is a sequence of statements.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
-        "What is the sequence of steps to follow this path?",
-        "Computers have limited memory.  Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.",
-        "Reach the goal using only five blocks.",
-        "Pegman will have to turn left when he cannot go straight.",
-        "An 'if' condition will do something only if the condition is true.  Try turning left if there is a path to the left.",
-        "This maze looks more complicated than the previous one, but it is not.",
-        "You can use more than one 'if' statement.",
-        "If-else statements will do one thing or the other.",
-        "Can you solve this complicated maze?  Try following the left-hand wall. Advanced programmers only!"
-      ],
-      // Misc text.
-      level: 'Level',
-      capacity0: 'You have <span id="capacityNumber">0</span> blocks left.',
-      capacity1: 'You have <span id="capacityNumber">1</span> block left.',
-      capacity2: 'You have <span id="capacityNumber">%1</span> blocks left.',
-      runProgram: 'Run Program',
-      resetProgram: '\u00A0 \u00A0 Reset \u00A0 \u00A0',
-      nextLevel: 'Congratulations!\nAre you ready to proceed to level %1?',
-      finalLevel: 'Congratulations!\nYou have solved the final level.',
-      title: 'Maze',
-      oneTopBlock: 'On this level, you need to stack together all of the blocks in the white workspace.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'There was a problem with the request.\n';
-      BlocklyStorage.LINK_ALERT = 'Share your blocks with this link:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Sorry, "%1" doesn\'t correspond with any saved Blockly file.';
-      BlocklyStorage.XML_ERROR = 'Could not load your saved file.\n'+
-          'Perhaps it was created with a different version of Blockly?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

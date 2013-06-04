@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <title>Blockly Turtle Graphics</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../de.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
   <script type="text/javascript" src="template.js"></script>
   <script>
@@ -60,17 +60,11 @@
       title: 'Die zeichnende Schildkröte',
       imgFilename: 'drawing.png'
     };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Es gab ein Problem während der HTTP Anfrage.\n';
-      BlocklyStorage.LINK_ALERT = 'Blöcke mit diesem Link teilen:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Entschuldigung, konnte die gespeicherten Blöcke für "%1" nicht finden.';
-      BlocklyStorage.XML_ERROR = 'Kann Sicherungsdatei nicht laden.\n'+
-          'Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?\nXML: ';
-    }
     var languageSrc = ['de_compressed.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="turtle.js"></script>
 </body>
 </html>

@@ -1,72 +1,17 @@
 <html dir="ltr" lang="da">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Peter Frøkjær Strand">
-  <title>Blockly Labyrint</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../da.js"></script>
+  <script type="text/javascript" src="da.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'flyt fremad',
-      turnLeft: 'drej venstre',
-      turnRight: 'drej højre',
-      doCode: 'gør',
-      elseCode: 'ellers',
-      pathAhead: 'hvis sti foran',
-      pathLeft: 'hvis sti til venstre',
-      pathRight: 'hvis sti til højre',
-      repeatUntil: 'gentag indtil',
-      // Tooltips.
-      moveForwardTooltip: 'Flytter pindemand et tern fremad.',
-      turnTooltip: 'Drejer pindemand 90 grader til højre eller venstre.',
-      ifTooltip: 'Hvis der er en sti i den angivne retning,\n' +
-          'så udfør nogle handlinger.',
-      ifelseTooltip: 'Hvis der er en sti i den angivne retning,\n' +
-          'så udfør den første handlingsblok.\n' +
-          'Hvis ikke, så udfør den anden handlingsblok.',
-      whileTooltip: 'Gentag handlingsblok indtil slutpunktet er nået.',
-      codeTooltip: 'Se den genererede JavaScript kode.',
-      linkTooltip: 'Gem og link til blokke.',
-      randomizeMarkerTooltip: 'Placér tilfældige startpunkter og slutpunkter.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Et program er en sekvens af erklæringer. Sæt et par 'flyt fremad' blokke sammen for at hjælpe mig til at nå målet,",
-        "Hvad er sekvensen af handlinger for at følge denne sti?",
-        "Computere har begrænset hukommelse. Prøv at nå enden af denne sti ved kun at bruge to blokke. Brug 'gentag' til at køre en blok mere end én gang.",
-        "Nå målet ved kun at bruge fem blokke.",
-        "Pindeman er nødt til at dreje til venstre når han ikke kan gå lige ud.",
-        "En 'hvis' sætning vil kun gøre noget hvis betingelsen er sand. Prøv at dreje til venstre hvis der er en sti til venstre.",
-        "Denne labyring ser mere kompliceret ud en den forrige, men det er den ikke.",
-        "Du kan bruge mere end en 'hvis' sætning.",
-        "Hvis-ellers sætninger vil gøre den ene eller anden ting.",
-        "Kan du løse denne komplicerede labyrint? Prøv at følge den væggen på venstre hånd."
-      ],
-      // Misc text.
-      level: 'Bane',
-      capacity0: 'Du har <span id="capacityNumber">0</span> blokke tilbage.',
-      capacity1: 'Du har <span id="capacityNumber">1</span> blok tilbage.',
-      capacity2: 'Du har <span id="capacityNumber">%1</span> blokke tilbage.',
-      runProgram: 'Kør Program',
-      resetProgram: '\u00A0 \u00A0 Nulstil \u00A0 \u00A0',
-      nextLevel: 'Tillykke!\nEr du klar til at fortsætte til bane %1?',
-      finalLevel: 'Tillykke!\nDu har klaret den sidste bane!.',
-      title: 'Labyrint',
-      oneTopBlock: 'På denne bane skal du sætte alle blokkene sammen i det hvide arbejdsfelt.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Der var et problem med forespørgslen..\n';
-      BlocklyStorage.LINK_ALERT = 'Del dine blokke med dette link:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Beklager, "%1" passer ikke med nogen gemt Blockly fil.';
-      BlocklyStorage.XML_ERROR = 'Kunne ikke hente din gemte fil.\n'+
-          'Måske er den lavet med en anden udgave af Blockly?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

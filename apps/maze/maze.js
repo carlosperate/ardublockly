@@ -45,11 +45,9 @@ Maze.getNumberFromUrl = function(name, min_value, max_value) {
   return val;
 };
 
-Maze.MAX_LEVEL = MSG.hints.length - 1;
+Maze.MAX_LEVEL = 10;
 Maze.LEVEL = Maze.getNumberFromUrl('level', 1, Maze.MAX_LEVEL);
-document.write(mazepage.start({}, null,
-    {MSG: MSG,
-     level: Maze.LEVEL}));
+document.write(mazepage.start({}, null, {level: Maze.LEVEL}));
 var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][Maze.LEVEL];
 
@@ -375,6 +373,7 @@ Maze.drawMap = function() {
  * Initialize Blockly and the maze.  Called on page load.
  */
 Maze.init = function() {
+  document.title = Blockly.Apps.getMsg('fullTitle');
   // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
   // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
   var rtl = document.body.parentNode.dir == 'rtl';
@@ -434,7 +433,7 @@ Maze.init = function() {
   }
 
   Maze.reset();
-  Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity(MSG)});
+  Blockly.addChangeListener(function() {Blockly.Apps.updateCapacity()});
 };
 
 window.addEventListener('load', Maze.init);
@@ -474,7 +473,7 @@ Maze.reset = function() {
 Maze.runButtonClick = function() {
   // Only allow a single top block on levels 1 and 2.
   if (Maze.LEVEL <= 2 && Blockly.mainWorkspace.getTopBlocks().length > 1) {
-    window.alert(MSG.oneTopBlock);
+    window.alert(Blockly.Apps.getMsg('oneTopBlock'));
     return;
   }
   var runButton = document.getElementById('runButton');
@@ -704,7 +703,7 @@ Maze.animate = function() {
 };
 
 Maze.congratulations = function() {
-  Blockly.Apps.congratulations(Maze.LEVEL, Maze.MAX_LEVEL, MSG);
+  Blockly.Apps.congratulations(Maze.LEVEL, Maze.MAX_LEVEL);
 };
 
 /**

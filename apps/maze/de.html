@@ -1,72 +1,17 @@
 <html dir="ltr" lang="de">
 <head>
   <meta charset="utf-8">
-  <title>Blockly Labyrinth</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../de.js"></script>
+  <script type="text/javascript" src="de.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'laufe vorwärts',
-      turnLeft: 'drehen links herum',
-      turnRight: 'drehen rechts herum',
-      doCode: 'mache',
-      elseCode: 'ansonsten',
-      pathAhead: 'wenn ein Pfad vor Packman',
-      pathLeft: 'wenn ein Pfad links von Packman',
-      pathRight: 'wenn ein Pfad rechts von Packman',
-      repeatUntil: 'wiederhole bis zum',
-      // Tooltips.
-      moveForwardTooltip: 'Packman läuft 1 Feld vor.',
-      turnTooltip: 'Dreht Packman nach links oder rechts.',
-      ifTooltip: 'Führe eine Aktion aus,\n' +
-          'falls sich an der angegebenen Position\n' +
-          'ein Pfad befindet.',
-      ifelseTooltip: 'Falls sich an der angegebenen Position ein Pfad befindet,\n' +
-          'dann führe die erste Anweisung aus.\n' +
-          'Anderfalls führe die zweite Anweisung aus.',
-      whileTooltip: 'Führe die angegebene Aktion aus, bis das Ziel erreicht wurde.',
-      codeTooltip: 'Erzeugten JavaScript Code anzeigen.',
-      linkTooltip: 'Blöcke abspeichern und Link erzeugen.',
-      randomizeMarkerTooltip: 'Randomize start and finish markers.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Ein Programm besteht aus einer Aneinanderreihungen von Anweisungen. Verbinde einige 'laufe vorwärts' Blöcke, um mir zu helfen um das Ziel zu erreichen.",
-        "Welche Anweisungen werden benötigt um dieses Labyrinth zu durchlaufen?",
-        "Computer haben begrenzten Speicher. Dieses Labyrinth lässt sich mit nur 2 Anweisungen lösen. Benutze 'wiederholen' um eine Anweisung mehr als ein mal aus zu führen.",
-        "Für dieses Labyrinth hast du nur 5 Anweisungen zur verfügung.",
-        "Pacman dreht sich links herum, wenn er nicht weiter geradeaus gehen kann.",
-        "Eine 'wenn' Bedingung wird führt etwas nur aus, wenn die Bedingung wahr ist.  Versuche die Anweisung 'wenn ein Pfad vor Packman' aus.",
-        "Dieses Labyrinth sieht schwieriger aus als die vorherigen. Ist es aber nicht.",
-        "Du kannst zwei 'wenn' Bedingungen in einander verschachteln.",
-        "Wenn-ansonsten Anweisungen führen etwas aus wenn eine Bedingung zutrifft oder eine Alternative.",
-        "Schaffst du dieses komplexe Labyrinth.  Folge der Wand."
-      ],
-      // Misc text.
-      level: 'Level',
-      capacity0: 'Du hast <span id="capacityNumber">0</span> Anweisungen zur Verfügung.',
-      capacity1: 'Du hast <span id="capacityNumber">1</span> Anweisung zur Verfügung.',
-      capacity2: 'Du hast <span id="capacityNumber">%1</span> Anweisungen zur Verfügung.',
-      runProgram: 'Programm ausführen',
-      resetProgram: '\u00A0 \u00A0 Zurücksetzen \u00A0 \u00A0',
-      nextLevel: 'Gratulation!\nIn das Level %1 gehen?',
-      finalLevel: 'Gratulation!\nDu hast das Spiel beendet.',
-      title: 'Labyrinth',
-      oneTopBlock: 'On this level, you need to stack together all of the blocks in the white workspace.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Es gab ein Problem während der HTTP Anfrage.\n';
-      BlocklyStorage.LINK_ALERT = 'Blöcke mit diesem Link teilen:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Entschuldigung, konnte die gespeicherten Blöcke für "%1" nicht finden.';
-      BlocklyStorage.XML_ERROR = 'Kann Sicherungsdatei nicht laden.\n'+
-          'Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?\nXML: ';
-    }
     var languageSrc = ['language/de/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

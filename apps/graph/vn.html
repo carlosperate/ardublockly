@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <title>Đồ Thị bằng Blockly</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../vi.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
   <script type="text/javascript" src="template.js"></script>
   <script type="text/javascript" src="http://www.google.com/jsapi"></script>
@@ -19,17 +19,11 @@
       unloadWarning: 'Nếu rời khỏi trang này bạn sẽ mất kết quả hiện tại.',
       title: 'Đồ Thị'
     };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.\n';
-      BlocklyStorage.LINK_ALERT = 'Dùng liên kết này để chia sẽ chương trình của bạn:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Không tìm thấy chương trình được lưu ở "%1".';
-      BlocklyStorage.XML_ERROR = 'Không mở được chương trình của bạn.\n'+
-          'Có thể nó nằm trong một phiên bản khác của Blockly?\nXML là: ';
-    }
     var languageSrc = ['vn_compressed.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="graph.js"></script>
 </body>
 </html>

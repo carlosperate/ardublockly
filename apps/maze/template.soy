@@ -1,21 +1,61 @@
 {namespace mazepage}
 
 /**
- * This is a Closure Template.  Build with:
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ * This is a Closure Template.  Build multilingually:
+ *
+ * # Create en.js.
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
+ *
+ * # Extract messages from template.soy.
+ * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
+ *
+ * # Create en.json, qqq.json.
+ * ../../i18n/xliff_to_json.py extracted_msgs.xlf
+ *
+ * Once translations have been made into <LANG>.json:
+ *
+ * # Create *.xlf.  By default, qqq.json is skipped.
+ * ../../i18n/json_to_xliff.py *.json
+ *
+ * # Create .js files by running script recommended by previous command.  It will
+ * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
  */
 
 /**
  * Web page structure.
  */
 {template .start}
+  <div id="MSG" style="display:none">
+    <span id="fullTitle">{msg meaning="Maze.fullTitle" desc="noun - the full title for the page.  'Blockly' can be left unchanged or can be transliterated.  For example, the Russian title is: 'Blockly (Блoкли) Лабиринт'."}Blockly Maze{/msg}</span>
+    <span id="moveForward">{msg meaning="Maze.moveForward" desc="verb - imperative or infinitive for a person moving (walking) in the direction he/she is facing." }move forward{/msg}</span>
+    <span id="turnLeft">{msg meaning="Maze.turnLeft" desc="verb - imperative or infinitive for a person turning his head and body one quarter rotation counter-clockwise.  Prefer a translation that has text in common with the translation of 'turn right'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn left{/msg}</span>
+    <span id="turnRight">{msg meaning="Maze.turnRight" desc="verb - imperative or infinitive for a person turning his head and body one quarter rotation clockwise.  Prefer a translation that has text in common with the translation of 'turn left'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn right{/msg}</span>
+    <span id="doCode">{msg meaning="Maze.doCode" desc="verb - imperative or infinitive preceding one or more commands to a person."}do{/msg}</span>
+    <span id="elseCode">{msg meaning="Maze.elseCode" desc="conjunction - 'otherwise', introducing commands to be performed if a previous condition was not true, as in 'if x>3, do this, else do that'."}else{/msg}</span>
+    <span id="pathAhead">{msg meaning="Maze.pathAhead" desc="condensed form of 'if there is a path ahead', as in: 'if path ahead, go forward'."}if path ahead{/msg}</span>
+    <span id="pathLeft">{msg meaning="Maze.pathLeft" desc="condensed form of 'if there is a path to the left', as in: 'if path to the left, turn left'."}if path to the left{/msg}</span>
+    <span id="pathRight">{msg meaning="Maze.pathRight" desc="condensed form of 'if there is a path to the right', as in: 'if path to the right, turn right'."}if path to the right{/msg}</span>
+    <span id="repeatUntil">{msg meaning="Maze.repeatUntil" desc="verb - imperative or infinitive to repeat the following commands.  The phrase is followed by the symbol denoting the end of the maze."}repeat until{/msg}</span>
+    <span id="moveForwardTooltip">{msg meaning="Maze.moveForwardTooltip" desc="tooltip (pop-up help) - Pegman is the humanoid icon used in Google Maps.  See picture at http://goo.gl/9I64i (http://maps.google.com/intl/en/help/maps/streetview/learn/pegman.html).  The term 'space' refers to a single square within a maze."}Moves Pegman forward one space.{/msg}</span>
+    <span id="turnTooltip">{msg meaning="Maze.turnTooltip" desc="tooltip (pop-up help) - Pegman is the humanoid icon used in Google Maps.  See picture at http://goo.gl/9I64i (http://maps.google.com/intl/en/help/maps/streetview/learn/pegman.html). The term 'space' refers to a single square within a maze."}Turns Pegman left or right by 90 degrees.{/msg}</span>
+    <span id="ifTooltip">{msg meaning="Maze.ifTooltip" desc="tooltip (pop-up help) - 'path' refers to a path through a maze. "}If there is a path in the specified direction, then do some actions.{/msg}</span>
+    <span id="ifelseTooltip">{msg meaning="Maze.ifelseTooltip" desc="tooltip (pop-up help) - 'path' refers to a path through a maze."}If there is a path in the specified direction, then do the first block of actions. Otherwise, do the second block of actions.{/msg}</span>
+    <span id="whileTooltip">{msg meaning="Maze.whileTooltip" desc="tooltip (pop-up help) - Repeat the enclosed commands until the maze has been successfully completed (the end point reached)."}Repeat the enclosed actions until finish point is reached.{/msg}</span>
+    <span id="capacity0">{msg meaning="Maze.capacity0" desc="warning - No more blocks may be added until some are removed.  Do not alter the portions between pointy brackets (< and >), although you may move them within the phrase and replace 0 with one or more words."}You have <span id='capacityNumber'>0</span> blocks left.{/msg}</span>
+    <span id="capacity1">{msg meaning="Maze.capacity1" desc="warning - Only one more block may be added.  Do not alter the portions between pointy brackets (< and >), although you may move them within the phrase and replace 1 with one or more words."}You have <span id='capacityNumber'>1</span> block left.{/msg}</span>
+    <span id="capacity2">{msg meaning="Maze.capacity2" desc="warning - Only %1 more blocks may be used, where %1 is an integer greater than 1.  Do not alter the portions between pointy brackets (< and >), although you may move them within the phrase."}You have <span id='capacityNumber'>%1</span> blocks left.{/msg}</span>
+    <span id="nextLevel">{msg meaning="Maze.nextLevel" desc="alert - This is displayed when the user solves the maze, inviting them to precede to the next level of difficulty.  %1 is an integer greater than 1."}Congratulations! Are you ready to proceed to level %1?{/msg}</span>
+    <span id="finalLevel">{msg meaning="Maze.finalLevel" desc="alert - This is displayed when the user solves the most difficult level."}Congratulations! You have solved the final level.{/msg}</span>
+    <span id="oneTopBlock">{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</span>
+    <span id="fullTitle">{{msg meaning="Maze.fullTitle" desc="title - This is the title of the maze tutorial web page.  Do not translate 'Blockly', but do transliterate (show how to pronounce) it, if it would be unclear to a speaker of your language. For example, the Russian translation includes 'Blockly (Блoкли)'.  The word for 'maze' should be the same as in {lb}{lb}msg-Blockly|Maze-Maze.title{rb}{rb}"}}Blockly Maze{{/msg}}</span>
+  </div>
   <table width="100%" height="100%">
     <tr>
       <td width="410" valign="top">
         <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
-            <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
+            <a href="../index.html">Apps</a> &gt; {{msg meaning="Maze.title" desc="brief title - This is displayed near the top of the page to indicate that this is Blockly's 'maze' application (and not one of Blockly's other applications).  The word for 'maze' should be the same as in {lb}{lb}msg-Blockly|Maze-Maze.fullTitle{rb}{rb}"}}Maze{{/msg}}</h1>
 
-        <div>{$ij.MSG.level}: &nbsp;
+        <div>{{msg meaning="Maze.level" desc="noun - This is displayed next to the numbers that indicate which level of the game the user is on.  See [http://blockly-demo.appspot.com] and note trailing colon (:).  The same word should be used as for {lb}{lb}msg-Blockly|Maze-Maze.nextLevel{rb}{rb}"}}Level:{{/msg}} &nbsp;
         {for $i in range(1, 11)}
           {if $i == $ij.level}
             <span class="tab" id="selected">{$i}</span>
@@ -27,7 +67,30 @@
 
         <div style="position: relative">
           <div id="hintBubble">
-            <div id="hint">{$ij.MSG.hints[$ij.level]}</div>
+            <div id="hint">
+            {switch $ij.level}
+              {case 1}
+                {msg meaning="Maze.instructions1" desc="instructions - the word 'program' refers to a computer program, and thewords for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead."}A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
+              {case 2}
+                {msg meaning="Maze.instructions2" desc="instructions - the word 'steps' refers to instructions in a computer program; 'path' refers to the path through a maze.  See previous description for tense."}What is the sequence of steps to follow this path?{/msg}
+              {case 3}
+                {msg meaning="Maze.instructions3" desc="instructions - 'path' refers to a path through a maze, and 'block' refers to a child's building block."}Computers have limited memory.  Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.{/msg}
+              {case 4}
+                {msg meaning="Maze.instructions4" desc="instructions - the goal is reaching the end point in a maze; 'block' refers to a child's building block."}Reach the goal using only five blocks.{/msg}
+              {case 5}
+                {msg meaning="Maze.instructions5" desc="instructions - 'turn left' refers to rotating in place a quarter circle counter-clockwise."}Pegman will have to turn left when he cannot go straight.{/msg}
+              {case 6}
+                {msg meaning="Maze.instructions6" desc="instructions - an example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true.  Try turning left if there is a path to the left.{/msg}
+              {case 7}
+                {msg meaning="Maze.instructions7" desc="instructions displayed along with a new maze for the user to solve."}This maze looks more complicated than the previous one, but it is not.{/msg}
+              {case 8}
+                {msg meaning="Maze.instructions8" desc="instructions - 'block' refers to a child's building block."}You can use more than one 'if' block.{/msg}
+              {case 9}
+                {msg meaning="Maze.instructions9" desc="instructions - 'block' refers to a child's building block.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}
+              {case 10}
+                {msg meaning="Maze.instructions10" desc="instructions - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!{/msg}
+            {/switch}
+            </div>
           </div>
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px">
             <g id="look">
@@ -44,13 +107,13 @@
         <table width="100%">
           <tr>
             <td style="width: 190px; text-align: center">
-              <button title="{$ij.MSG.codeTooltip}" onclick="Blockly.Apps.showCode();">
+               <button title="{msg meaning="Maze.codeTooltip" desc="tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user."}See generated JavaScript code.{/msg}" onclick="Blockly.Apps.showCode();">
                 <img src='../../media/1x1.gif' class="code">
               </button>
-              <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link();">
+              <button id="linkButton" title="{msg meaning="Maze.linkTooltip" desc="tooltip (pop-up help) for button; pressing the button causes the user's program to be saved and for a URL to be provided for retrieving it.  The word 'blocks' is as in children's toy blocks."}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
                 <img src='../../media/1x1.gif' class="link">
               </button>
-                <button id="randomizeButton" title="$ij.MSG.randomizeMarkerTooltip" onclick="Maze.randomizeMarkers();" style="display: none">
+              <button id="randomizeButton" title="{msg meaning="Maze.randomizeMarkerTooltip" desc="tooltip (pop-up help) for button; pressing the button causes the start marker and finish markers in the current maze to be moved to random locations, without othwerise changing the maze."}Randomize start and finish markers.{/msg} onclick="Maze.randomizeMarkers();" style="display: none">
                 <img src='../../media/1x1.gif' class="random">
               </button>
             </td>
@@ -59,10 +122,10 @@
             </td>
             <td>
               <button id="runButton" class="launch" onclick="Maze.runButtonClick();">
-                {$ij.MSG.runProgram}
+                {msg meaning="Maze.runProgram" desc="button label - Pressing the button runs the computer program the user has written."}Run Program{/msg}
               </button>
               <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none">
-                {$ij.MSG.resetProgram}
+                {msg meaning="Maze.resetProgram" desc="button label - Pressing the button causes Pegman return to the start of the maze (but does not delete the user's program.)"}Reset{/msg}
               </button>
             </td>
           </tr>

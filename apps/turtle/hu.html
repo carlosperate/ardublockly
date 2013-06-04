@@ -4,7 +4,7 @@
   <meta name="author" content="Takács Viktor László (tviktor75@gmail.com)">
   <title>Blockly Teknőc Grafika</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../hu.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
   <script type="text/javascript" src="template.js"></script>
   <script>
@@ -60,17 +60,11 @@
       title: 'Teknőc Grafika',
       imgFilename: 'drawing.png'
     };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'A kéréssel kapcsolatban probléma merült fel.\n';
-      BlocklyStorage.LINK_ALERT = 'Ezzel a hivatkozással tudod megosztani a programodat:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Elnézést, a "%1" hivatkozásnem tartozik egyetlen programhoz sem.';
-      BlocklyStorage.XML_ERROR = 'A programodat nem lehet betölteni.\n'+
-          'Elképzelhető, hogy a Blockly egy másik verziójában készült?\nXML: ';
-     }
     var languageSrc = ['en_compressed.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="turtle.js"></script>
 </body>
 </html>

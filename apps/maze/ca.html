@@ -1,72 +1,17 @@
 <html dir="ltr" lang="ca">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Toni Hortal (toni@hortal.cat)">
-  <title>Blockly Laberint</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../ca.js"></script>
+  <script type="text/javascript" src="ca.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'mou endavant',
-      turnLeft: 'gira esquerra',
-      turnRight: 'gira dreta',
-      doCode: 'fes',
-      elseCode: 'si no',
-      pathAhead: 'al davant',
-      pathLeft: 'si camí a\u00A0l\'esquerra',
-      pathRight: 'si camí a la dreta',
-      repeatUntil: 'repeteix fins al',
-      // Tooltips.
-      moveForwardTooltip: 'Mou el Pegman endavant un espai.',
-      turnTooltip: 'Gira el Pegman a l\'esquerra o a la dreta 90 graus.',
-      ifTooltip: 'Si hi ha un camí en la direcció especificada,\n' +
-          'llavors fes algunes accions.',
-      ifelseTooltip: 'Si hi ha un camí en la direcció especificada,\n' +
-          'llavors fes el primer bloc d\'accions.\n' +
-          'Si no, fes el segon bloc d\'accions.',
-      whileTooltip: 'Repeteix les accions de dins del bloc fins arribar al punt final.',
-      codeTooltip: 'Veure el codi JavaScript generat.',
-      linkTooltip: 'Desa i enllaça als blocs.',
-      randomizeMarkerTooltip: 'Aleatoritza l\'inici i finalitza els marcadors.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Un programa és una seqüència de declaracions.  Apila un parell de blocs 'mou endavant' junts per ajudar-me a arribar a la meta.",
-        "Quina és la seqüència de passos per a seguir aquest camí?",
-        "Els ordinadors tenen una memòria limitada. Arriba al final d'aquest camí utilitzant només dos blocs. Utilitza 'repeteix' per a executar un bloc més d'una vegada.",
-        "Arriba a la meta utilitzant només cinc blocs.",
-        "Pegman haurà de girar a l'esquerra quan no pugui continuar endavant.",
-        "Una condició 'si' farà fer alguna cosa només si la condició és certa. Prova de girar a l'esquerra si hi ha un camí a l'esquerra.",
-        "Aquest laberint sembla més complicat que l'anterior, però no ho és!.",
-        "Pots utilitzar més d'una declaració 'si'.",
-        "Les declaracions 'si-si no' faran fer una cosa o una altra.",
-        "Pots resoldre aquest complicat laberint? Prova de seguir la paret de l'esquerra.  Només programadors avançats!"
-      ],
-      // Misc text.
-      level: 'Nivell',
-      capacity0: 'Et resten <span id="capacityNumber">0</span> blocs.',
-      capacity1: 'Et resten <span id="capacityNumber">1</span> blocs.',
-      capacity2: 'Et resten <span id="capacityNumber">%1</span> blocs.',
-      runProgram: 'Executa el programa',
-      resetProgram: '\u00A0 \u00A0 Reinicialitza \u00A0 \u00A0',
-      nextLevel: 'Felicitats!\nEstàs preparat per a procedir amb el nivell %1?',
-      finalLevel: 'Felicitats!\nHas resolt el nivell final.',
-      title: 'Laberint',
-      oneTopBlock: 'En aquest nivell, has d\'apilar junts tots els blocs a l\'espai de treball blanc.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Hi ha hagut un problema amb la sol·licitud.\n';
-      BlocklyStorage.LINK_ALERT = 'Comparteix els teus blocs amb aquest enllaç:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Ho sentim, "%1" no es correspon amb cap fitxer desat de Blockly.';
-      BlocklyStorage.XML_ERROR = 'No s\'ha pogut carregar el teu fitxer desat.\n'+
-          'Potser va ser creat amb una versió diferent de Blockly?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

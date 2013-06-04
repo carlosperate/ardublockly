@@ -1,71 +1,17 @@
 <html dir="ltr" lang="sr">
 <head>
   <meta charset="utf-8">
-  <title>Blockly (Блоклијев) лавиринт</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../sr.js"></script>
+  <script type="text/javascript" src="sr.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'иди напред',
-      turnLeft: 'окрени се лево',
-      turnRight: 'окрени се десно',
-      doCode: 'ради',
-      elseCode: 'у супротном',
-      pathAhead: 'ако постоји пут напред',
-      pathLeft: 'ако постоји пут лово',
-      pathRight: 'ако постоји пут десно',
-      repeatUntil: 'понављај док не',
-      // Tooltips.
-      moveForwardTooltip: 'Помера Штипаљка једну позицију напред.',
-      turnTooltip: 'Окреће Штипаљка лево или десно за 90 степени.',
-      ifTooltip: 'Ако постоји пут у датом правцу,\n' +
-          'онда уради следеће.',
-      ifelseTooltip: 'Ако постоји пут у датом правцу,\n' +
-          'онда изврши прву групу акција.\n' +
-          'У супротном, уради другу групу акција.',
-      whileTooltip: 'Понављај следеће акције док не комплетираш задатак.',
-      codeTooltip: 'Погледај генерисани JavaScript код.',
-      linkTooltip: 'Сачувај и повежи са блоковима.',
-      randomizeMarkerTooltip: 'Постави, на случајан начин, почетну и крајњу ознаку.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Програм је низ исказа.  Наређај неколико 'иди напред' блокова да би ми помогао да достигнем циљ.",
-        "Који низ корака треба да се предузме да би се прошао пут?",
-        "Рачунари имају ограничену меморију.  Дођи до краја пута употребивши само два блока.  Искористи 'понављај' да би извршио блок бише пута.",
-        "Достигни циљ употребом само пет блокова.",
-        "Pegman will have to turn left when he cannot go straight.",
-        "'ако' блок ће урадити нешто једино ако је услов испуњен.  Покушај окрет у лево ако постоји пут са леве стране.",
-        "Овај лавиринт изгледа сложеније него предходни, али није.",
-        "Можете да употребите више 'ако' блокова.",
-        "Ако-у-супротмом блок урадиће једно или друго.",
-        "Можеш ли да решиш овај сложени лавиринт?  Покшај да се крећеш уз леви зид."
-      ],
-      // Misc text.
-      level: 'Ниво',
-      capacity0: 'Број блокова који ти је остао је <span id="capacityNumber">0</span>.',
-      capacity1: 'Број блокова који ти је остао је <span id="capacityNumber">1</span>.',
-      capacity2: 'Број блокова који ти је остао је <span id="capacityNumber">%1</span>.',
-      runProgram: 'Покрени\u00A0програм',
-      resetProgram: 'Поново\u00A0постави',
-      nextLevel: 'Честитамо!\nДа ли сте спремни да пређете на ниво %1?',
-      finalLevel: 'Честитамо!\nРешили сте последњи ниво.',
-      title: 'Лавиринт',
-      oneTopBlock: 'На овом нивоу, потребно је да поређаш све блокове у бели радни простор.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Настао је проблем при извршењу траженог.\n';
-      BlocklyStorage.LINK_ALERT = 'Делите своје блокове употребом ове везе:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Жао нам је, "%1" не одговара ни једној сачуваној Блокли датотеци.';
-      BlocklyStorage.XML_ERROR = 'Не могу да учитам датотеку коју сте сачували.\n'+
-          'Можда је направљена другом верзијом Блоклија?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

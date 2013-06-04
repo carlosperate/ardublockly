@@ -1,71 +1,17 @@
 <html dir="ltr" lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Blockly Laberinto</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../es.js"></script>
+  <script type="text/javascript" src="es.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'Mover hacia delante',
-      turnLeft: 'gira izquierda',
-      turnRight: 'gira derecha',
-      doCode: 'haz esto',
-      elseCode: 'sino',
-      pathAhead: 'si hay camino enfrente',
-      pathLeft: 'si hay camino a la izquierda',
-      pathRight: 'si hay camino a la derecha',
-      repeatUntil: 'repite hasta',
-      // Tooltips.
-      moveForwardTooltip: 'Mueve a Pegman un cuadro hacia delante.',
-      turnTooltip: 'Gira a Pegman a izquierda o derecha 90 grados.',
-      ifTooltip: ' Si hay un camino en la dirección especificada,\n' +
-          'entonces ejecuta unas acciones.',
-      ifelseTooltip: ' Si hay un camino en la dirección especificada,\n' +
-          'entonces ejecuta las primeras acciones.\n' +
-          'Sino, haz el segundo conjunto de acciones.',
-      whileTooltip: 'Repite las acciones encapsuladas hasta terminar.',
-      codeTooltip: 'Mira el código JavaScript generado.',
-      linkTooltip: 'Guarda conexión a los bloques.',
-      randomizeMarkerTooltip: 'Situa aleatoriamente los marcadores de comienzo y final.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Un programa es una secuencia de declaraciones. Une un par de bloques de ‘avanza’ para ayudarme a llegar a la meta.",
-        "¿Cuál es la secuencia  de pasos para seguir este camino?",
-        "Las computadoras tienen memoria limitada. Llega al final de este camino usando tan sólo dos bloques. Utiliza 'repetir' para ejecutar un bloque más de una vez.",
-        "Llega a la meta con tan sólo cinco bloques.",
-        "Pegman tiene que girar a la izquierda cuando no pueda ir recto.",
-        "Una condición 'si' va hacer algo solamente si la condición es verdadera. Intenta girar a la izquierda si hay camino a la izquierda.",
-        "Este laberinto parece más complicado que el anterior, pero no lo es.",
-        "Puedes usar más de una declaración 'si'.",
-        "Las declaraciones 'si-sino' hacen una cosa u otra.",
-        "¿Puedes resolver este complicado laberinto? Intenta seguir la pared de la izquierda."
-      ],
-      // Misc text.
-      level: 'Nivel',
-      capacity0: 'Te quedan <span id="capacityNumber">0</span> bloques.',
-      capacity1: 'Te quedan <span id="capacityNumber">1</span> bloque.',
-      capacity2: 'Te quedan <span id="capacityNumber">%1</span> bloques.',
-      runProgram: 'Ejecuta el programa.',
-      resetProgram: '\u00A0 \u00A0 Reinicializar \u00A0 \u00A0',
-      nextLevel: '¡Felicidades!\n¿Estas listo/a para seguir al siguiente nivel %1?',
-      finalLevel: '¡Felicidades!\nHaz resuelto el último nivel.',
-      title: 'Laberinto',
-      oneTopBlock: 'En este nivel, necesitas apilar los bloques en el espacio en blanco.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Hubo un problema con la petición.\n';
-      BlocklyStorage.LINK_ALERT = 'Comparte tus bloques con esta conexión:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Lo siento, "%1" no corresponde con ningún archivo Blockly guardado. ';
-      BlocklyStorage.XML_ERROR = 'No se pudo cargar el archivo guardado. \n'+
-          '¿Quizá fue creado con otra versión de Blockly? \nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

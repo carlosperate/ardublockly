@@ -1,72 +1,17 @@
 <html dir="ltr" lang="it">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Tevac.com">
-  <title lang="it">il labirinto dei blocchi</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../it.js"></script>
+  <script type="text/javascript" src="it.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'avanza diritto',
-      turnLeft: 'svolta a sinistra',
-      turnRight: 'svolta a destra',
-      doCode: 'fa\'',
-      elseCode: 'altrimenti',
-      pathAhead: 'se c\'è strada avanti',
-      pathLeft: 'se c\'è strada a sinistra',
-      pathRight: 'se c\'è strada a destra',
-      repeatUntil: 'ripeti sino alla',
-      // Tooltips.
-      moveForwardTooltip: 'Avanza la pedina di una casella.',
-      turnTooltip: 'Gira la pedina verso destra o sinistra di 90 gradi.',
-      ifTooltip: 'Se c\'è strada nella direzione indicata,\n' +
-          'allora fa\' qualcosa.',
-      ifelseTooltip: 'Se c\'è strada nella direzione indicata,\n' +
-          'Allora esegui la prima serie di azioni.\n' +
-          'Altrimenti esegui la seconda serie di azioni.',
-      whileTooltip: 'Ripeti l\'azione scelta sino al punto di arrivo.',
-      codeTooltip: 'Guarda il codice Javascript generato.',
-      linkTooltip: 'Salva e crea un link ai blocchi.',
-      randomizeMarkerTooltip: 'Sposta a caso i segnali di partenza e arrivo.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-          "Un programma è una sequenza di istruzioni. Impila un paio di blocchi 'avanza diritto' per aiutarmi a raggiungere l'arrivo.",
-          "Che passi sono necessari per seguire questa strada?",
-          "I computer hanno una memoria limitata.  Raggiungi l'arrivo usando solo due blocchi.  Scegli 'ripeti' per eseguire un blocco più di una volta.",
-          "Raggiungi l'obiettivo usando solo cinque blocchi.",
-          "La pedina dovrà girare a sinistra quando non può procedere diritto.",
-          "Con 'se' l'azione verrà eseguita solo se la condizione è soddisfatta.  Prova a girare a sinistra se c'è una strada a sinistra.",
-          "Questo labirinto sembra più difficile del precedente, ma non lo è.",
-          "Puoi usare più di una istruzione 'se'.",
-          "Le istruzioni if-else cercheranno di compiere la prima azione o la seconda.",
-          "Sai risolvere questo labirinto intricato?  Prova a seguire il muro di sinistra.  Solo per programmatori avanzati!"
-      ],
-      // Misc text.
-      level: 'Livello',
-      capacity0: 'Puoi usare altri <span id="capacityNumber">0</span> blocchi.',
-      capacity1: 'Puoi usare altri <span id="capacityNumber">1</span> blocchi.',
-      capacity2: 'Puoi usare altri <span id="capacityNumber">%1</span> blocchi.',
-      runProgram: 'Esegui il programma',
-      resetProgram: '\u00A0 \u00A0 Ricomincia \u00A0 \u00A0',
-      nextLevel: 'Gaudio!\nSei pronto a passare al livello %1?',
-      finalLevel: 'Tripudio!\nHai risolto l\'ultimo livello.',
-      title: 'Labirinto',
-      oneTopBlock: 'In questo livello dovrai impilare tutti i blocchi nella zona bianca.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'La richiesta non è stata soddisfatta.\n';
-      BlocklyStorage.LINK_ALERT = 'Condividi i tuoi blocchi con questo indirizzo:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Mi spiace, "%1" non corrisponde con nessun documento di saved Blockly salvato.';
-      BlocklyStorage.XML_ERROR = 'Non è stato possibile caricare il documento.\n'+
-          'Forse è stato creato con una versione diversa di Blockly?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

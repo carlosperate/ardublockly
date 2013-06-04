@@ -1,72 +1,17 @@
 <html dir="ltr" lang="sw">
 <head>
- <meta charset="utf-8">
- <meta name="author" value="CarolineChumo@gmail.com">
- <title>Mzingile Blockly</title>
- <link rel="stylesheet" type="text/css" href="style.css">
- <script type="text/javascript" src="/storage.js"></script>
- <script type="text/javascript" src="../_soy/soyutils.js"></script>
- <script type="text/javascript" src="template.js"></script>
- <script>
-   var MSG = {
-     // Block text.
-     moveForward: 'songa mbele',
-     turnLeft: 'geuka kushoto',
-     turnRight: 'geuka kulia',
-     doCode: 'fanya',
-     elseCode: 'vingenevyo',
-     pathAhead: 'kama kuna njia mbele',
-     pathLeft: 'kama kuna njia kusoto',
-     pathRight: 'kama kuna njia kulia',
-     repeatUntil: 'rudia mpaka',
-     // Tooltips.
-     moveForwardTooltip: 'Kusogeza Bw. Banzi mbele nafasi moja.',
-     turnTooltip: 'Kugeuza Bw. Banzi kushoto au kulia kwa digrii 90.',
-     ifTooltip: 'Iwapo mwelekeo uliobainishwa una njia,\n' +
-         'kisha fanya matendo fulani.',
-     ifelseTooltip: 'Iwapo mwelekeo uliobainishwa una njia,\n' +
-         'kisha fanya seti ya kwanza ya matendo.\n' +
-         'Vingenevyo, fanya seti ya pili ya matendo.',
-     whileTooltip: 'Rudia matendo yalioambatanishwa mpaka mwisho.',
-     codeTooltip: 'Tazama mwandiko wa JavaScript inayotokana.',
-     linkTooltip: 'Hifadhi na kiungo cha vishiku.',
-     randomizeMarkerTooltip: 'Unda mwanzo na mwisho kwa bahati nasibu.',
-     // Level hints.
-     hints: [undefined, // There is no level 0.
-       "Programu ni mlolongo wa vishiku. Panganya vishiku vichache vya 'songa mbele' ili kunisaidia kufikia lengo.",
-       "Inabidi kutumia mlolongo gani ya hatua ili kufuata njia hii?",
-       "Kompyuta ina kumbukumbu ndogo. Fikia mwisho wa njia hii kwa kutumia vishiku viwili tu. Tumia 'rudia' kusudi vishiku viende zaidi ya mara moja.",
-       "Fikia lengo kwa kutumia vishiku vitano tu.",
-       "Itabidi Bw. Banzi ageuke kushoto kama hawezi kwenda mbele.",
-       "Vishiku vya 'iwapo' vitatenda kama masharti yake ni kweli tu. Jaribu kugeuka kushota kama kuna njia kwenda kushoto.",
-       "Mzingile huu unaonekana mgumu zaidi kuliko ule uliotangulia, lakini sio hivyo.",
-       "Unaweza kutumia zaidi ya kishiku kimoja ya 'iwapo'.",
-       "Hifadhi na kiungo cha vishiku.",
-       "Je, unaweza kutatua mzingile mgumu huu? Jaribu kufuatia ukuta wa kushoto. Wanaprogramu wa juu tu!"
-     ],
-     // Misc text.
-     level: 'Sehemu',
-     capacity0: 'Unavyo bado vishiku vi<span id="capacityNumber">0</span>.',
-     capacity1: 'Unacho bado <span id="capacityNumber">kishiku kimoja</span>.',
-     capacity2: 'Unavyo bado vishiku vi<span id="capacityNumber">%1</span>.',
-     runProgram: 'Endesha Programu',
-     resetProgram: 'Seti upya',
-     nextLevel: 'Hongera!\nUko tayari kuendelea na sehemu ya %1?',
-     finalLevel: 'Hongera!\nUmetatua sehemu ya mwisho.',
-     title: 'Mzingile',
-     oneTopBlock: 'Katika sehemu hii, itabidi upanganye vishiku vyote ndani ya eneo ya kazi nyeupe.'
-   };
-   if ('BlocklyStorage' in window) {
-     BlocklyStorage.HTTPREQUEST_ERROR = 'Kuna shida na amri.\n';
-     BlocklyStorage.LINK_ALERT = 'Sambaza vishiku vyako na kiungo hiki: %1';
-     BlocklyStorage.HASH_ERROR = 'Samahani, "%1" haiendani na faili yoyote ya Blockly.';
-     BlocklyStorage.XML_ERROR = 'Upakiaji wa faili yako iliyohifadhiwa haiwezekani.\n'+
-         'Labda iliundwa na toleo tofauti ya Blockly?\nXML: ';
-   }
-   var languageSrc = ['en/_messages.js'];
- </script>
+  <meta charset="utf-8">
+  <title>Blockly Maze</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../sw.js"></script>
+  <script type="text/javascript" src="sw.js"></script>
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script>
+    var languageSrc = ['language/en/_messages.js'];
+  </script>
 </head>
 <body>
- <script type="text/javascript" src="maze.js"></script>
+  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

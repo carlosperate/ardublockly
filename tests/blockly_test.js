@@ -152,6 +152,10 @@ function test_commonWordPrefix() {
   assertEquals('List of one', 11, len);
   len = Blockly.commonWordPrefix([]);
   assertEquals('Empty list', 0, len);
+  len = Blockly.commonWordPrefix('turn&nbsp;left,turn&nbsp;right'.split(','));
+  assertEquals('No prefix due to &amp;nbsp;', 0, len);
+  len = Blockly.commonWordPrefix('turn\u00A0left,turn\u00A0right'.split(','));
+  assertEquals('No prefix due to \\u00A0', 0, len);
 }
 
 function test_commonWordSuffix() {

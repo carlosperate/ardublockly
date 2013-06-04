@@ -1,72 +1,17 @@
 <html dir="ltr" lang="lv">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="Leo Selavo">
-  <title>Blockly labirints</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../lv.js"></script>
+  <script type="text/javascript" src="lv.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'ej uz priekšu',
-      turnLeft: 'pagriezies pa kreisi',
-      turnRight: 'pagriezies pa labi',
-      doCode: 'dari',
-      elseCode: 'citādi',
-      pathAhead: 'ja priekšā ir brīvs ceļš',
-      pathLeft: 'ja pa kreisi ir brīvs ceļš',
-      pathRight: 'ja pa labi ir brīvs ceļš',
-      repeatUntil: 'atkārto tikmēr kamēr',
-      // Tooltips.
-      moveForwardTooltip: 'Pārvieto cilvēciņu uz priekšu par vienu soli.',
-      turnTooltip: 'Pārvieto cilvēciņu pa kreisi vai pa labi par 90 grādiem.',
-      ifTooltip: 'Ja attiecīgajā virzienā ir brīvs ceļš,\n' +
-          'tad izpildīt attiecīgās darbības.',
-      ifelseTooltip: 'Ja attiecīgajā virzienā ir brīvs ceļš,\n' +
-          'tad izpildīt pirmo bloku ar darbībām.\n' +
-          'Citādi izpildīt otro bloku ar darbībām.',
-      whileTooltip: 'Atkārtot iekļautās darbības kamēr sasniegts mērķis.',
-      codeTooltip: 'Apskatīt ģenerēto JavaScript pirmkodu.',
-      linkTooltip: 'Saglamāt un piesaistīt blokiem.',
-      randomizeMarkerTooltip: 'Ģenerēt nejaušus starta un finiša marķierus.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Programma ir vairākas secīgas darbības.  Saliec kopā dažus 'ej uz priekšu' blokus lai mēs varētu sasniegt mērķi.",
-        "Kāda ir darbību kārtība, lai varētu sekot šim ceļam?",
-        "Datoriem ir ierobežota atmiņa.  Sasniedz ceļa mērķi lietojot tikai divus blokus.  Lieto atkārtošanas bloku lai varētu izpildīt darbību vairāk kā vienu reizi.",
-        "Sasniedz mērķi lietojot tikai piecus blokus.",
-        "Cilvēciņam jāpagriežas pa kreisi tad, kad viņš vairs nevarēs iet taisni.",
-        "Pārbaudes komanda 'ja' dara kaut ko tikai tad, ja pārbaude ir patiesa.  Pamēģini pagriezties pa kreisi, ja pa kreisi ir brīvs ceļš.",
-        "Šis labirints izskatās sarežģītāks ne kā iepriekšējais, bet patiesībā tā nav.",
-        "Tu vari lietot vairākas pārbaudes komandas 'ja'.",
-        "Pārbaudes komandas 'ja-citādi' izpildīs vai nu vienu, vai otru bloku atkarībā no pārbaudes.",
-        "Vai tu vari atrisināt šo sarežģīto labirintu?  Mēģini sekot sienai kreisajā pusē. Šis ir pieredzējušiem programmētājiem!"
-      ],
-      // Misc text.
-      level: 'Līmenis',
-      capacity0: 'Tev atlikuši <span id="capacityNumber">0</span> bloki.',
-      capacity1: 'Tev atlicis <span id="capacityNumber">1</span> bloks.',
-      capacity2: 'Tev atlikuši <span id="capacityNumber">%1</span> bloki.',
-      runProgram: 'Izpildīt programmu',
-      resetProgram: 'Sākt no sākuma',
-      nextLevel: 'Apsveicu!\nVai esi gatavs turpināt ar %1 līmeni?',
-      finalLevel: 'Apsveicu!\nTu esi atrisinājis pēdējo līmeni.',
-      title: 'Labirints',
-      oneTopBlock: 'Šajā līmenī tev bloki jāsaliek kopā baltajā laumumā.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Pieprasījuma kļūda.\n';
-      BlocklyStorage.LINK_ALERT = 'Dalies ar saviem blokiem ar šo saiti:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Atvaino, bet "%1" neatbilst nevienam saglabātajam bloku failam.';
-      BlocklyStorage.XML_ERROR = 'Nevaru ielādēt tavu saglabāto failu.\n'+
-          'Iespējams, tas tika izveidots ar citu Blockly versiju?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

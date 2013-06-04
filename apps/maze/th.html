@@ -1,71 +1,17 @@
 <html dir="ltr" lang="th">
 <head>
   <meta charset="utf-8">
-  <title>เขาวงกต Blockly (บล็อค-ลี่)</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../th.js"></script>
+  <script type="text/javascript" src="th.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'เคลื่อน ไปข้างหน้า',
-      turnLeft: 'หัน ซ้าย',
-      turnRight: 'หัน ขวา',
-      doCode: 'ทำ',
-      elseCode: 'นอกเหนือจากนี้',
-      pathAhead: 'ถ้า เส้นทาง ไปข้างหน้า',
-      pathLeft: 'ถ้า เส้นทาง ไปทางซ้าย',
-      pathRight: 'ถ้า เส้นทาง ไปทางขวา',
-      repeatUntil: 'ทำซ้ำจนกว่าจะ',
-      // Tooltips.
-      moveForwardTooltip: 'เคลื่อน Pegman ไปข้างหน้า หนึ่งช่อง',
-      turnTooltip: 'หัน Pegman ไปทางซ้ายหรือขวา 90 องศา',
-      ifTooltip: 'ถ้ามีเส้นทางไปทางทิศทางที่กำหนด \n' +
-          'แล้วให้กระทำการบางอย่าง',
-      ifelseTooltip: 'ถ้ามีเส้นทางไปทางทิศทางที่ระบุ \n' +
-          'แล้วให้ทำการกระทำต่างๆภายในบล็อคแรก \n' +
-          'ไม่เช่นนั้น ให้ทำการกระทำต่างๆภายในบล็อคที่สอง',
-      whileTooltip: 'ทำซ้ำทุกการกระทำภายใน จนกว่าจะถึงจุดสิ้นสุด',
-      codeTooltip: 'ดูโค้ด JavaScript ที่ถูกสร้างขึ้น',
-      linkTooltip: 'บันทึกและเชื่อมโยงไปยังบล็อค',
-      randomizeMarkerTooltip: 'ทำการสุ่ม จุดเริ่มต้น และจุดสิ้นสุด',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "โปรแกรม คือ ลำดับของคำสั่งหลายๆคำสั่ง -> ต่อบล็อค 'เคลื่อน ไปข้างหน้า' สองอันเข้าด้วยกัน เพื่อช่วยให้ฉันถึงจุดหมายปลายทาง",
-        "ลำดับขั้นตอนเพื่อไปตามเส้นทางนี้คืออะไร?",
-        "คอมพิวเตอร์มีหน่วยความจำที่จำกัด -> ไปให้ถึงปลายทางนี้โดยใช้เพียงสองบล็อค -> ใช้ 'ทำซ้ำ' เพื่อเรียกใช้บล็อคมากกว่าหนึ่งครั้ง",
-        "ถึงจุดหมายปลายทางโดยใช้เพียงห้าบล็อค",
-        "Pegman will have to turn left when he cannot go straight.",
-        "เงื่อนไข 'ถ้า' จะทำอะไรบางอย่างก็ต่อเมื่อเงื่อนไขเป็นจริงเท่านั้น -> ลองหันซ้ายถ้ามีเส้นทางไปทางซ้าย",
-        "เขาวงกตนี้ดูเหมือนจะซับซ้อนกว่าอันก่อนหน้านี้ -> แต่เปล่าเลย",
-        "คุณสามารถใช้ คำสั่ง 'ถ้า' ได้มากกว่าหนึ่ง",
-        "คำสั่ง 'ถ้า-นอกเหนือจากนี้' จะทำสิ่งหนึ่ง หรือ อื่นๆ",
-        "คุณสามารถไขปัญหาเขาวงกตที่ซับซ้อนนี้ได้หรือไม่? -> ลองตามผนังด้านซ้ายมือดู"
-      ],
-      // Misc text.
-      level: 'ระดับ',
-      capacity0: 'คุณมีบล็อคเหลือ <span id="capacityNumber">0</span>',
-      capacity1: 'คุณมีบล็อคเหลือ <span id="capacityNumber">1</span>',
-      capacity2: 'คุณมีบล็อคเหลือ <span id="capacityNumber">%1</span>',
-      runProgram: 'เรียกใช้โปรแกรม',
-      resetProgram: '\u00A0 \u00A0 ตั้งค่าใหม่ \u00A0 \u00A0',
-      nextLevel: 'ยินดีด้วย!\nคุณพร้อมที่จะไปต่อที่ระดับ %1 แล้วหรือยัง?',
-      finalLevel: 'ยินดีด้วย!\nคุณได้ไขปัญหาในระดับสุดท้ายสำเร็จแล้ว',
-      title: 'เขาวงกต',
-      oneTopBlock: 'ในระดับนี้ คุณต้องต่อทุกบล็อคเข้าด้วยกันบนพื้นที่ว่างสีขาว'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'มีปัญหาเกี่ยวกับการร้องขอ\n';
-      BlocklyStorage.LINK_ALERT = 'แบ่งปันบล็อคต่างๆของคุณด้วยลิงก์นี้:\n\n';
-      BlocklyStorage.HASH_ERROR = 'ขอโทษด้วย, "%1" ไม่สอดคล้องกับไฟล์ Blockly ที่บันทึกไว้';
-      BlocklyStorage.XML_ERROR = 'ไม่สามารถโหลดไฟล์ที่บันทึกไว้ของคุณได้\n'+
-          'บางทีมันอาจจะถูกสร้างขึ้นด้วย Blockly เวอร์ชันที่แตกต่างกัน?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>
