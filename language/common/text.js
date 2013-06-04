@@ -426,15 +426,24 @@ Blockly.Language.text_prompt = {
   // Prompt function.
   helpUrl: Blockly.LANG_TEXT_PROMPT_HELPURL,
   init: function() {
+    // Assign 'this' to a variable for use in the closure below.
+    var thisBlock = this;
     this.setColour(160);
+    var dropdown = new Blockly.FieldDropdown(this.TYPES, function(newOp) {
+      if (newOp == 'NUMBER') {
+        thisBlock.outputConnection.setCheck('Number');
+      } else {
+        thisBlock.outputConnection.setCheck('String');
+      }
+    });
     this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown(this.TYPES), 'TYPE')
+        .appendTitle(dropdown, 'TYPE')
         .appendTitle(new Blockly.FieldImage(Blockly.pathToBlockly +
         'media/quote0.png', 12, 12))
         .appendTitle(new Blockly.FieldTextInput(''), 'TEXT')
         .appendTitle(new Blockly.FieldImage(Blockly.pathToBlockly +
         'media/quote1.png', 12, 12));
-    this.setOutput(true, ['Number', 'String']);
+    this.setOutput(true, 'String');
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {

@@ -238,8 +238,10 @@ Blockly.Language.controls_repeat_ext = {
     this.appendValueInput('TIMES')
         .setCheck('Number')
         .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT)
-    this.appendDummyInput()
-        .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES);
+    if (Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES) {
+      this.appendDummyInput()
+          .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES);
+    }
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_REPEAT_INPUT_DO);
     this.setPreviousStatement(true);

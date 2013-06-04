@@ -270,7 +270,7 @@ Blockly.Language.math_on_list = {
   // Some functions also work on text (min, max, mode, median).
   helpUrl: Blockly.LANG_MATH_ONLIST_HELPURL,
   init: function() {
-    // Assign 'this' to a variable for use in the closures below.
+    // Assign 'this' to a variable for use in the closure below.
     var thisBlock = this;
     this.setColour(230);
     this.setOutput(true, 'Number');
