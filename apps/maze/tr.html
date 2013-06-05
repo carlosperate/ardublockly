@@ -1,72 +1,17 @@
 <html dir="ltr" lang="tr">
 <head>
   <meta charset="utf-8">
-  <meta name="author" content="bahadir@bahadir.me (Irfan Bahadir Katipoglu)">
-  <title>Blockly Labirent</title>
+  <title>Blockly Maze</title>
   <link rel="stylesheet" type="text/css" href="style.css">
-  <script type="text/javascript" src="/storage.js"></script>
+  <script type="text/javascript" src="../en.js"></script>
+  <script type="text/javascript" src="tr.js"></script>
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'ileri git',
-      turnLeft: 'sola dön',
-      turnRight: 'sağa dön',
-      doCode: 'yap',
-      elseCode: 'yoksa',
-      pathAhead: 'eğer önde yol varsa',
-      pathLeft: 'eğer solda yol varsa',
-      pathRight: 'eğer sağda yol varsa',
-      repeatUntil: 'kadar tekrar et',
-      // Tooltips.
-      moveForwardTooltip: "Pegman\'i bir boşluk ileri götürür.",
-      turnTooltip: "Pegman\'i sola veya sağa döndürür.",
-      ifTooltip: 'Eğer belirtilen yönde yol varsa,\n' +
-          'belirtilen hareketleri yap.',
-      ifelseTooltip: 'Eğer belirtilen yönde yol varsa,\n' +
-          'belirtilen hareketleri ilk bloğunu yap,\n' +
-          'yoksa ikinci bloğu yap.',
-      whileTooltip: 'Bitiş noktasına ulaşana kadar kapsanan hareketleri yap.',
-      codeTooltip: 'Oluşturulan JavaScript kodunu görüntüle.',
-      linkTooltip: 'Blokları ve bağlantı adresini kaydet.',
-      randomizeMarkerTooltip: 'Başlangıç ve bitiş adreslerini rastgele yerleştir.',
-      // Level hints.
-      hints: [undefined, // There is no level 0.
-        "Program demek, bir ifadeler sıralaması demektir. Bir kaç 'ileri git' bloğunu bir araya getirerek beni hedefe ulaştır.",
-        "Bu yolu izlemek için hangi adımları izlemeli?",
-        "Bilgisayarların sınırlı hafızaları vardır. Bu yüzden sende hedefe sadece iki blok kullanarak ulaşmalısın. 'tekrar' bloğunu kullanarak aynı bloğu birden fazla kullanabilirsin.",
-        "Hedefe sadece beş blok kullanarak ulaş.",
-        "Pegman ileri gidemediğinden sola dönmeli.",
-        "Bir 'eğer' koşulu ancak belirtilen koşul doğru oluyorsa birşeyler yapar. Eğer solda yol varsa sola dönmeyi dene.",
-        "Bu labirent öncekine göre daha karmaşık gözüküyor, ama aslında öyle değil.",
-        "Birden fazla 'eğer' ifadesi kullanabilirsin.",
-        "Eğer-değilse ifadeleri ya bir şeyi ya da diğerini yapar.",
-        "Bu karmaşık labirenti de çözebilir misin? Soldaki duvarı dene. Sadece gelişmiş programcılar için!"
-      ],
-      // Misc text.
-      level: 'Seviye',
-      capacity0: '<span id="capacityNumber">0</span> adet bloğun kaldı.',
-      capacity1: '<span id="capacityNumber">1</span> adet bloğun kaldı.',
-      capacity2: '<span id="capacityNumber">%1</span> adet bloğun kaldı',
-      runProgram: 'Programı Çalıştır',
-      resetProgram: '\u00A0 \u00A0 Tekrar \u00A0 \u00A0',
-      nextLevel: 'Tebrikler!\n %1. seviyeye geçmeye hazır mısın?',
-      finalLevel: 'Tebrikler!\nSon seviyeyi de tamamladın!',
-      title: 'Labirent',
-      oneTopBlock: 'Bu bölümde beyaz çalışma alanındaki bütün blokları bir araya getirmelisin.'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'İstek ile ilgili bir problem var\n';
-      BlocklyStorage.LINK_ALERT = 'Bloklarını bu link ile paylaş:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Üzgünüz, "%1" herhangi bir blok kaydı ile uyuşmuyor';
-      BlocklyStorage.XML_ERROR = 'Kaydedilen dosyanız yüklenemiyor\n'+
-          'Blockly\'nin önceki sürümü ile kaydedilmiş olabilir mi?\nXML: ';
-    }
     var languageSrc = ['language/en/_messages.js'];
   </script>
 </head>
 <body>
+  <script type="text/javascript" src="/storage.js"></script>
   <script type="text/javascript" src="maze.js"></script>
 </body>
 </html>

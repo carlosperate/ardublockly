@@ -1,0 +1,52 @@
+// This file was automatically generated from template.soy.
+// Please don't edit this file by hand.
+
+if (typeof mazepage == 'undefined') { var mazepage = {}; }
+
+
+mazepage.start = function(opt_data, opt_ignored, opt_ijData) {
+  var output = '<div id="MSG" style="display:none"><span id="fullTitle">il labirinto dei blocchi</span><span id="moveForward">avanza diritto</span><span id="turnLeft">svolta a sinistra</span><span id="turnRight">svolta a destra</span><span id="doCode">fa\'</span><span id="elseCode">altrimenti</span><span id="pathAhead">se c\'è strada avanti</span><span id="pathLeft">se c\'è strada a sinistra</span><span id="pathRight">se c\'è strada a destra</span><span id="repeatUntil">ripeti sino alla</span><span id="moveForwardTooltip">Avanza la pedina di una casella.</span><span id="turnTooltip">Gira la pedina verso destra o sinistra di 90 gradi.</span><span id="ifTooltip">Se c\'è strada nella direzione indicata, \\nallora fa\' qualcosa. </span><span id="ifelseTooltip">Se c\'è strada nella direzione indicata, \\nAllora esegui la prima serie di azioni. \\nAltrimenti esegui la seconda serie di \\nazioni. </span><span id="whileTooltip">Ripeti l\'azione scelta sino al punto di arrivo.</span><span id="capacity0">Puoi usare altri 0 blocchi.</span><span id="capacity1">Puoi usare altri 1 blocchi.</span><span id="capacity2">Puoi usare altri %1 blocchi.</span><span id="nextLevel">Gaudio! Sei pronto a passare al livello %1?</span><span id="finalLevel">Tripudio! Hai risolto l\'ultimo livello.</span><span id="oneTopBlock">In questo livello dovrai impilare tutti i blocchi nella zona bianca.</span><span id="fullTitle">il labirinto dei blocchi</span></div><table width="100%" height="100%"><tr><td width="410" valign="top"><h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt; <a href="../index.html">Apps</a> &gt; Labirinto</h1><div>Livello &nbsp;';
+  for (var i112 = 1; i112 < 11; i112++) {
+    output += (i112 == opt_ijData.level) ? '<span class="tab" id="selected">' + soy.$$escapeHtml(i112) + '</span>' : '<a class="tab" href="?level=' + soy.$$escapeHtml(i112) + '">' + soy.$$escapeHtml(i112) + '</a>';
+  }
+  output += '</div><div style="position: relative"><div id="hintBubble"><div id="hint">';
+  switch (opt_ijData.level) {
+    case 1:
+      output += 'Un programma è una sequenza di istruzioni. Impila un paio di blocchi \'avanza diritto\' per aiutarmi a raggiungere l\'arrivo.';
+      break;
+    case 2:
+      output += 'Che passi sono necessari per seguire questa strada?';
+      break;
+    case 3:
+      output += 'I computer hanno una memoria limitata. Raggiungi l\'arrivo usando solo due blocchi. Scegli \'ripeti\' per eseguire un blocco più di una volta.';
+      break;
+    case 4:
+      output += 'Raggiungi l\'obiettivo usando solo cinque blocchi.';
+      break;
+    case 5:
+      output += 'La pedina dovrà girare a sinistra quando non può procedere diritto.';
+      break;
+    case 6:
+      output += 'Con \'se\' l\'azione verrà eseguita solo se la condizione è soddisfatta. Prova a girare a sinistra se c\'è una strada a sinistra.';
+      break;
+    case 7:
+      output += 'Questo labirinto sembra più difficile del precedente, ma non lo è.';
+      break;
+    case 8:
+      output += 'Puoi usare più di una istruzione \'se\'.';
+      break;
+    case 9:
+      output += 'Le istruzioni if-else cercheranno di compiere la prima azione o la seconda.';
+      break;
+    case 10:
+      output += 'Sai risolvere questo labirinto intricato? Prova a seguire il muro di sinistra. Solo per programmatori avanzati!';
+      break;
+  }
+  output += '</div></div><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px"><g id="look"><path d="M 0,-15 a 15 15 0 0 1 15 15" /><path d="M 0,-35 a 35 35 0 0 1 35 35" /><path d="M 0,-55 a 55 55 0 0 1 55 55" /></g></svg><div id="capacityBubble"><div id="capacity"></div></div></div><table width="100%"><tr><td style="width: 190px; text-align: center"><button title="Guarda il codice Javascript generato." onclick="Blockly.Apps.showCode();"><img src=\'../../media/1x1.gif\' class="code"></button><button id="linkButton" title="Salva e crea un link ai blocchi." onclick="BlocklyStorage.link();"><img src=\'../../media/1x1.gif\' class="link"></button><button id="randomizeButton" title="Sposta a caso i segnali di partenza e arrivo. onclick="Maze.randomizeMarkers();" style="display: none"><img src=\'../../media/1x1.gif\' class="random"></button></td><td style="width: 15px;"><img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15></td><td><button id="runButton" class="launch" onclick="Maze.runButtonClick();">Esegui il programma</button><button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none">Ricomincia</button></td></tr></table></td><td valign="top"><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../generators/javascript.js"><\/script><script type="text/javascript" src="../common.js"><\/script><script type="text/javascript">Blockly.Apps.loadLanguageScripts(languageSrc);<\/script><script type="text/javascript" src="blocks.js"><\/script>' + mazepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div></td></tr></table>';
+  return output;
+};
+
+
+mazepage.toolbox = function(opt_data, opt_ignored, opt_ijData) {
+  return '<xml id="toolbox" style="display: none"><block type="maze_moveForward"></block><block type="maze_turn"><title name="DIR">turnLeft</title></block><block type="maze_turn"><title name="DIR">turnRight</title></block>' + ((opt_ijData.level > 2) ? '<block type="maze_forever"></block>' + ((opt_ijData.level == 6) ? '<block type="maze_if"><title name="DIR">isPathLeft</title></block>' : (opt_ijData.level > 6) ? '<block type="maze_if"></block>' + ((opt_ijData.level > 8) ? '<block type="maze_ifElse"></block>' : '') : '') : '') + '</xml>';
+};
