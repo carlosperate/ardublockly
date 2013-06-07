@@ -26,6 +26,9 @@
 // Create a namespace.
 var BlocklyStorage = {};
 
+// Write messages to document once the page is loaded.
+document.write(BlocklyCommonMessages.messages(null, null));
+
 /**
  * Backup code blocks to localStorage.
  * @private
@@ -111,16 +114,16 @@ BlocklyStorage.makeRequest_ = function(url, name, content) {
 BlocklyStorage.handleRequest_ = function() {
   if (BlocklyStorage.httpRequest_.readyState == 4) {
     if (BlocklyStorage.httpRequest_.status != 200) {
-      window.alert(BlocklyStorage.HTTPREQUEST_ERROR +
-          'httpRequest_.status: ' + BlocklyStorage.httpRequest_.status);
+      window.alert(Blockly.Apps.getMsg('httpRequestError') +
+          '  httpRequest_.status: ' + BlocklyStorage.httpRequest_.status);
     } else {
       var data = BlocklyStorage.httpRequest_.responseText.trim();
       if (BlocklyStorage.httpRequest_.name == 'xml') {
         window.location.hash = data;
-        window.alert(BlocklyStorage.LINK_ALERT + window.location.href);
+        window.alert(Blockly.Apps.getMsg('linkAlert').replace('%1', window.location.href));
       } else if (BlocklyStorage.httpRequest_.name == 'key') {
         if (!data.length) {
-          window.alert(BlocklyStorage.HASH_ERROR.replace('%1',
+          window.alert(Blockly.Apps.getMsg('hashError').replace('%1',
               window.location.hash));
         } else {
           BlocklyStorage.loadXml_(data);
@@ -162,7 +165,7 @@ BlocklyStorage.loadXml_ = function(xml) {
   try {
     xml = Blockly.Xml.textToDom(xml);
   } catch (e) {
-    window.alert(BlocklyStorage.XML_ERROR + xml);
+    window.alert(Blockly.Apps.getMsg(xmlError) + '\nxml: ' + xml);
     return;
   }
   // Clear the workspace to avoid merge.

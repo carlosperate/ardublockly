@@ -46,10 +46,8 @@ Blockly.Apps.loadLanguageScripts = function(languageSrc) {
  * Updates the document's 'capacity' element's innerHTML with a message
  * indicating how many more blocks are permitted.  The capacity
  * is retrieved from Blockly.mainWorkspace.remainingCapacity().
- * @param {!Object} MSG An object with appropriate text properties for
- *     capacity0, capacity1, and capacity2.
  */
-Blockly.Apps.updateCapacity = function(MSG) {
+Blockly.Apps.updateCapacity = function() {
   var cap = Blockly.mainWorkspace.remainingCapacity();
   var p = document.getElementById('capacity');
   if (cap == Infinity) {
@@ -57,12 +55,12 @@ Blockly.Apps.updateCapacity = function(MSG) {
   } else {
     p.style.display = 'inline';
     if (cap == 0) {
-      p.innerHTML = MSG.capacity0;
+      p.innerHTML = Blockly.Apps.getMsg('capacity0');
     } else if (cap == 1) {
-      p.innerHTML = MSG.capacity1;
+      p.innerHTML = Blockly.Apps.getMsg('capacity1');
     } else {
       cap = Number(cap);
-      p.innerHTML = MSG.capacity2.replace('%1', cap);
+      p.innerHTML = Blockly.Apps.getMsg('capacity2').replace('%1', cap);
     }
   }
 };
@@ -72,19 +70,18 @@ Blockly.Apps.updateCapacity = function(MSG) {
  * direct them to the next level, if available.
  * @param {number} level The current level.
  * @param {number} maxLevel The maxmium available level.
- * @param {!Object} MSG An object with appropriate text properties for
- *     MSG.nextLevel and MSG.finalLevel.
  */
-Blockly.Apps.congratulations = function(level, maxLevel, MSG) {
+Blockly.Apps.congratulations = function(level, maxLevel) {
   if (level < maxLevel) {
-    var proceed = window.confirm(MSG.nextLevel.replace('%1', level + 1));
+    var proceed = window.confirm(Blockly.Apps.getMsg('nextLevel')
+        .replace('%1', level + 1));
     if (proceed) {
       window.location = window.location.protocol + '//' +
           window.location.host + window.location.pathname +
           '?level=' + (level + 1);
     }
   } else {
-    window.alert(MSG.finalLevel);
+    window.alert(Blockly.Apps.getMsg('finalLevel'));
   }
 };
 
@@ -139,4 +136,19 @@ Blockly.Apps.showCode = function() {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   code = Blockly.Apps.stripCode(code);
   window.alert(code);
+};
+
+/**
+ * Gets the message with the given key from the document.
+ * @param {string} key The key of the document element.
+ * @return {string} The innerHTML of the specified element, or undefined if the
+ *     element was not found.
+ */
+Blockly.Apps.getMsg = function(key) {
+  var element = document.getElementById(key);
+  if (element) {
+    return element.innerHTML;
+  } else {
+    return '[Unknown message: ' +  key + ']';
+  }
 };
