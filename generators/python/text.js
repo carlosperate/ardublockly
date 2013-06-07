@@ -129,19 +129,13 @@ Blockly.Python.text_charAt = function() {
       var code = text + '[-' + at + ']';
       return [code, Blockly.Python.ORDER_MEMBER];
     case 'RANDOM':
-      if (!Blockly.Python.definitions_['text_random_letter']) {
-        Blockly.Python.definitions_['import_random'] = 'import random';
-        var functionName = Blockly.Python.variableDB_.getDistinctName(
-            'text_random_letter', Blockly.Generator.NAME_TYPE);
-        Blockly.Python.text_charAt.text_random_letter = functionName;
-        var func = [];
-        func.push('def ' + functionName + '(text):');
-        func.push('  x = int(random.random() * len(text))');
-        func.push('  return text[x];');
-        Blockly.Python.definitions_['text_random_letter'] = func.join('\n');
-      }
-      code = Blockly.Python.text_charAt.text_random_letter +
-          '(' + text + ')';
+      Blockly.Python.definitions_['import_random'] = 'import random';
+      var functionName = Blockly.Python.provideFunction_(
+          'text_random_letter',
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(text):',
+           '  x = int(random.random() * len(text))',
+           '  return text[x];']);
+      code = functionName + '(' + text + ')';
       return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   }
   throw 'Unhandled option (text_charAt).';
@@ -242,20 +236,15 @@ Blockly.Python.text_print = function() {
 
 Blockly.Python.text_prompt = function() {
   // Prompt function.
-  if (!Blockly.Python.definitions_['text_prompt']) {
-    var functionName = Blockly.Python.variableDB_.getDistinctName(
-        'text_prompt', Blockly.Generator.NAME_TYPE);
-    Blockly.Python.text_prompt.text_prompt = functionName;
-    var func = [];
-    func.push('def ' + functionName + '(msg):');
-    func.push('  try:');
-    func.push('    return raw_input(msg)');
-    func.push('  except NameError:');
-    func.push('    return input(msg)');
-    Blockly.Python.definitions_['text_prompt'] = func.join('\n');
-  }
+  var functionName = Blockly.Python.provideFunction_(
+      'text_prompt',
+      ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(msg):',
+       '  try:',
+       '    return raw_input(msg)',
+       '  except NameError:',
+       '    return input(msg)']);
   var msg = Blockly.Python.quote_(this.getTitleValue('TEXT'));
-  var code = Blockly.Python.text_prompt.text_prompt + '(' + msg + ')';
+  var code = functionName + '(' + msg + ')';
   var toNumber = this.getTitleValue('TYPE') == 'NUMBER';
   if (toNumber) {
     code = 'float(' + code + ')';

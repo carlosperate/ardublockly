@@ -156,7 +156,7 @@ Blockly.Python.math_constant.CONSTANTS = {
   E: ['math.e', Blockly.Python.ORDER_MEMBER],
   GOLDEN_RATIO: ['(1 + math.sqrt(5)) / 2', Blockly.Python.ORDER_MULTIPLICATIVE],
   SQRT2: ['math.sqrt(2)', Blockly.Python.ORDER_MEMBER],
-  SQRT1_2: ['math.sqrt(1 / 2)', Blockly.Python.ORDER_MEMBER],
+  SQRT1_2: ['math.sqrt(1.0 / 2)', Blockly.Python.ORDER_MEMBER],
   INFINITY: ['float(\'inf\')', Blockly.Python.ORDER_ATOMIC]
 };
 
@@ -171,34 +171,29 @@ Blockly.Python.math_number_property = function() {
   var dropdown_property = this.getTitleValue('PROPERTY');
   var code;
   if (dropdown_property == 'PRIME') {
-    // Prime is a special case as it is not a one-liner test.
-    if (!Blockly.Python.definitions_['isPrime']) {
-      var functionName = Blockly.Python.variableDB_.getDistinctName(
-          'isPrime', Blockly.Generator.NAME_TYPE);
-      Blockly.Python.logic_prime= functionName;
-      var func = [];
-      func.push('def ' + functionName + '(n):');
-      func.push('  # http://en.wikipedia.org/wiki/Primality_test#Naive_methods');
-      func.push('  # If n is not a number but a string, try parsing it.');
-      func.push('  if type(n) not in (int, float, long):');
-      func.push('    try:');
-      func.push('      n = float(n)');
-      func.push('    except:');
-      func.push('      return False');
-      func.push('  if n == 2 or n == 3:');
-      func.push('    return True');
-      func.push('  # False if n is negative, is 1, or not whole,' +
-                ' or if n is divisible by 2 or 3.');
-      func.push('  if n <= 1 or n % 1 != 0 or n % 2 == 0 or n % 3 == 0:');
-      func.push('    return False');
-      func.push('  # Check all the numbers of form 6k +/- 1, up to sqrt(n).');
-      func.push('  for x in range(6, int(math.sqrt(n)) + 2, 6):');
-      func.push('    if n % (x - 1) == 0 or n % (x + 1) == 0:');
-      func.push('      return False');
-      func.push('  return True');
-      Blockly.Python.definitions_['isPrime'] = func.join('\n');
-    }
-    code = Blockly.Python.logic_prime + '(' + number_to_check + ')';
+    Blockly.Python.definitions_['import_math'] = 'import math';
+    var functionName = Blockly.Python.provideFunction_(
+        'isPrime',
+        ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(n):',
+         '  # http://en.wikipedia.org/wiki/Primality_test#Naive_methods',
+         '  # If n is not a number but a string, try parsing it.',
+         '  if type(n) not in (int, float, long):',
+         '    try:',
+         '      n = float(n)',
+         '    except:',
+         '      return False',
+         '  if n == 2 or n == 3:',
+         '    return True',
+         '  # False if n is negative, is 1, or not whole,' +
+             ' or if n is divisible by 2 or 3.',
+         '  if n <= 1 or n % 1 != 0 or n % 2 == 0 or n % 3 == 0:',
+         '    return False',
+         '  # Check all the numbers of form 6k +/- 1, up to sqrt(n).',
+         '  for x in range(6, int(math.sqrt(n)) + 2, 6):',
+         '    if n % (x - 1) == 0 or n % (x + 1) == 0:',
+         '      return False',
+         '  return True']);
+    code = functionName + '(' + number_to_check + ')';
     return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   }
   switch (dropdown_property) {
@@ -262,95 +257,71 @@ Blockly.Python.math_on_list = function() {
       code = 'max(' + list + ')';
       break;
     case 'AVERAGE':
-      if (!Blockly.Python.definitions_['math_mean']) {
-        // This operation exclude null and values that are not int or float:
-        //   math_mean([null,null,"aString",1,9]) == 5.0.
-        var functionName = Blockly.Python.variableDB_.getDistinctName(
-            'math_mean', Blockly.Generator.NAME_TYPE);
-        Blockly.Python.math_on_list.math_mean = functionName;
-        var func = [];
-        func.push('def ' + functionName + '(myList):');
-        func.push('  localList = [e for e in myList ' +
-            'if type(e) in (int, float, long)]');
-        func.push('  if not localList: return');
-        func.push('  return float(sum(localList)) / len(localList)');
-        Blockly.Python.definitions_['math_mean'] = func.join('\n');
-      }
-      code = Blockly.Python.math_on_list.math_mean + '(' + list + ')';
+      var functionName = Blockly.Python.provideFunction_(
+          'math_mean',
+          // This operation excludes null and values that are not int or float:',
+          // math_mean([null, null, "aString", 1, 9]) == 5.0.',
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
+           '  localList = [e for e in myList if type(e) in (int, float, long)]',
+           '  if not localList: return',
+           '  return float(sum(localList)) / len(localList)']);
+      code = functionName + '(' + list + ')';
       break;
     case 'MEDIAN':
-      if (!Blockly.Python.definitions_['math_median']) {
-        // This operation exclude null values:
-        //   math_median([null,null,1,3]) == 2.0.
-        var functionName = Blockly.Python.variableDB_.getDistinctName(
-            'math_median', Blockly.Generator.NAME_TYPE);
-        Blockly.Python.math_on_list.math_median = functionName;
-        var func = [];
-        func.push('def ' + functionName + '(myList):');
-        func.push('  localList = sorted([e for e in myList ' +
-            'if type(e) in (int, float, long)])');
-        func.push('  if not localList: return');
-        func.push('  if len(localList) % 2 == 0:');
-        func.push('    return (localList[len(localList) / 2 - 1] + ' +
-            'localList[len(localList) / 2]) / 2.0');
-        func.push('  else:');
-        func.push('    return localList[(len(localList) - 1) / 2]');
-        Blockly.Python.definitions_['math_median'] = func.join('\n');
-      }
-      code = Blockly.Python.math_on_list.math_median + '(' + list + ')';
+      var functionName = Blockly.Python.provideFunction_(
+          'math_median',
+          // This operation excludes null values:
+          // math_median([null, null, 1, 3]) == 2.0.
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
+           '  localList = sorted([e for e in myList ' +
+               'if type(e) in (int, float, long)])',
+           '  if not localList: return',
+           '  if len(localList) % 2 == 0:',
+           '    return (localList[len(localList) / 2 - 1] + ' +
+               'localList[len(localList) / 2]) / 2.0',
+           '  else:',
+           '    return localList[(len(localList) - 1) / 2]']);
+      code = functionName + '(' + list + ')';
       break;
     case 'MODE':
-      if (!Blockly.Python.definitions_['math_modes']) {
-        // As a list of numbers can contain more than one mode,
-        // the returned result is provided as an array.
-        // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
-        var functionName = Blockly.Python.variableDB_.getDistinctName(
-            'math_modes', Blockly.Generator.NAME_TYPE);
-        Blockly.Python.math_on_list.math_modes = functionName;
-        var func = [];
-        func.push('def ' + functionName + '(some_list):');
-        func.push('  modes = []');
-        func.push('  # Using a lists of [item, count] to keep count rather ' +
-                  'than dict');
-        func.push('  # to avoid "unhashable" errors when the counted item is ' +
-                  'itself a list or dict.');
-        func.push('  counts = []');
-        func.push('  maxCount = 1');
-        func.push('  for item in some_list:');
-        func.push('    found = False');
-        func.push('    for count in counts:');
-        func.push('      if count[0] == item:');
-        func.push('        count[1] += 1');
-        func.push('        maxCount = max(maxCount, count[1])');
-        func.push('        found = True');
-        func.push('    if not found:');
-        func.push('      counts.append([item, 1])');
-        func.push('  for counted_item, item_count in counts:');
-        func.push('    if item_count == maxCount:');
-        func.push('      modes.append(counted_item)');
-        func.push('  return modes');
-        Blockly.Python.definitions_['math_modes'] = func.join('\n');
-      }
-      code = Blockly.Python.math_on_list.math_modes + '(' + list + ')';
+      var functionName = Blockly.Python.provideFunction_(
+          'math_modes',
+          // As a list of numbers can contain more than one mode,
+          // the returned result is provided as an array.
+          // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(some_list):',
+           '  modes = []',
+           '  # Using a lists of [item, count] to keep count rather than dict',
+           '  # to avoid "unhashable" errors when the counted item is ' +
+               'itself a list or dict.',
+           '  counts = []',
+           '  maxCount = 1',
+           '  for item in some_list:',
+           '    found = False',
+           '    for count in counts:',
+           '      if count[0] == item:',
+           '        count[1] += 1',
+           '        maxCount = max(maxCount, count[1])',
+           '        found = True',
+           '    if not found:',
+           '      counts.append([item, 1])',
+           '  for counted_item, item_count in counts:',
+           '    if item_count == maxCount:',
+           '      modes.append(counted_item)',
+           '  return modes']);
+      code = functionName + '(' + list + ')';
       break;
     case 'STD_DEV':
-      if (!Blockly.Python.definitions_['math_standard_deviation']) {
-        Blockly.Python.definitions_['import_math'] = 'import math';
-        var functionName = Blockly.Python.variableDB_.getDistinctName(
-            'math_standard_deviation', Blockly.Generator.NAME_TYPE);
-        Blockly.Python.math_on_list.math_standard_deviation = functionName;
-        var func = [];
-        func.push('def ' + functionName + '(numbers):');
-        func.push('  n = len(numbers)');
-        func.push('  if n == 0: return');
-        func.push('  mean = float(sum(numbers)) / n');
-        func.push('  variance = sum((x - mean) ** 2 for x in numbers) / n');
-        func.push('  return math.sqrt(variance)');
-        Blockly.Python.definitions_['math_standard_deviation'] =
-            func.join('\n');
-      }
-      code = Blockly.Python.math_on_list.math_standard_deviation +
-          '(' + list + ')';
+      Blockly.Python.definitions_['import_math'] = 'import math';
+      var functionName = Blockly.Python.provideFunction_(
+          'math_standard_deviation',
+          ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(numbers):',
+           '  n = len(numbers)',
+           '  if n == 0: return',
+           '  mean = float(sum(numbers)) / n',
+           '  variance = sum((x - mean) ** 2 for x in numbers) / n',
+           '  return math.sqrt(variance)']);
+      code = functionName + '(' + list + ')';
       break;
     case 'RANDOM':
       Blockly.Python.definitions_['import_random'] = 'import random';
