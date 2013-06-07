@@ -50,7 +50,8 @@ Blockly.Python.unittest_main = function() {
     func.push('      report.append(log)');
     func.push('  report.insert(0, "".join(summary))');
     func.push('  report.append("")');
-    func.push('  report.append("Ran %d test." % len(' + resultsVar + '))');
+    func.push('  report.append("Number of tests run: %d" % len(' +
+        resultsVar + '))');
     func.push('  report.append("")');
     func.push('  if fails:');
     func.push('    report.append("FAILED (failures=%d)" % fails)');

@@ -603,7 +603,7 @@
                         </value>
                         <next>
                           <block type="unittest_assertvalue" inline="false">
-                            <title name="MESSAGE">const infitity</title>
+                            <title name="MESSAGE">const infinity</title>
                             <title name="EXPECTED">TRUE</title>
                             <value name="ACTUAL">
                               <block type="logic_compare" inline="true">

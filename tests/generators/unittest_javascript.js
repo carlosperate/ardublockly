@@ -52,7 +52,7 @@ Blockly.JavaScript.unittest_main = function() {
     func.push('  }');
     func.push('  report.unshift(summary.join(""));');
     func.push('  report.push("");');
-    func.push('  report.push("Ran " + ' + resultsVar + '.length + " test.");');
+    func.push('  report.push("Number of tests run: " + ' + resultsVar + ');');
     func.push('  report.push("");');
     func.push('  if (fails) {');
     func.push('    report.push("FAILED (failures=" + fails + ")");');
