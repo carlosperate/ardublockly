@@ -112,19 +112,28 @@ Blockly.JavaScript.controls_for = function() {
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'TO',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
+  var increment = Blockly.JavaScript.valueToCode(this, 'BY',
+      Blockly.JavaScript.ORDER_ASSIGNMENT) || '1';
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
     branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
         '\'' + this.id + '\'') + branch;
   }
   var code;
-  if (Blockly.isNumber(argument0) && Blockly.isNumber(argument1)) {
-    // Both arguments are simple numbers.
+  if (Blockly.isNumber(argument0) && Blockly.isNumber(argument1) &&
+      Blockly.isNumber(increment)) {
+    // All arguments are simple numbers.
     var up = parseFloat(argument0) <= parseFloat(argument1);
     code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
         variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ' +
-        variable0 + (up ? '++' : '--') + ') {\n' +
-        branch + '}\n';
+        variable0;
+    var step = Math.abs(parseFloat(increment));
+    if (step == 1) {
+      code += up ? '++' : '--';
+    } else {
+      code += (up ? ' += ' : ' -= ') + step;
+    }
+    code += ') {\n' + branch + '}\n';
   } else {
     code = '';
     // Cache non-trivial values to variables to prevent repeated look-ups.
@@ -140,12 +149,24 @@ Blockly.JavaScript.controls_for = function() {
           variable0 + '_end', Blockly.Variables.NAME_TYPE);
       code += 'var ' + endVar + ' = ' + argument1 + ';\n';
     }
+    // Determine loop direction at start, in case one of the bounds
+    // changes during loop execution.
+    var incVar = Blockly.JavaScript.variableDB_.getDistinctName(
+        variable0 + '_inc', Blockly.Variables.NAME_TYPE);
+    code += 'var ' + incVar + ' = ';
+    if (Blockly.isNumber(increment)) {
+      code += Math.abs(increment) + ');\n';
+    } else {
+      code += 'Math.abs(' + increment + ');\n';
+    }
+    code += 'if (' + startVar + ' > ' + endVar + ') {\n';
+    code += '  ' + incVar + ' = -' + incVar +';\n';
+    code += '}\n';
     code += 'for (' + variable0 + ' = ' + startVar + ';\n' +
-        '    (' + startVar + ' <= ' + endVar + ') ? ' +
+        '     '  + incVar + ' >= 0 ? ' +
         variable0 + ' <= ' + endVar + ' : ' +
         variable0 + ' >= ' + endVar + ';\n' +
-        '    ' + variable0 +
-        ' += (' + startVar + ' <= ' + endVar + ') ? 1 : -1) {\n' +
+        '     ' + variable0 + ' += ' + incVar + ') {\n' +
         branch + '}\n';
   }
   return code;

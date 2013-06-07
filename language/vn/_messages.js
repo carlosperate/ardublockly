@@ -119,6 +119,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_WITH = 'đếm theo';
 Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'từ';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'đến';
+Blockly.LANG_CONTROLS_FOR_INPUT_BY = 'mỗi lần thêm';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'thực hiện';
 Blockly.LANG_CONTROLS_FOR_TAIL = '';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Đếm từ số đầu đến số cuối.\n' +

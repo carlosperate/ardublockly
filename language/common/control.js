@@ -297,6 +297,10 @@ Blockly.Language.controls_for = {
         .setCheck('Number')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_TO);
+    this.appendValueInput('BY')
+        .setCheck('Number')
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_BY);
     if (Blockly.LANG_CONTROLS_FOR_TAIL) {
       this.appendDummyInput()
           .appendTitle(Blockly.LANG_CONTROLS_FOR_TAIL);

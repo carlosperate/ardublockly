@@ -117,9 +117,10 @@ Blockly.LANG_CONTROLS_FOR_INPUT_WITH = '使用';
 Blockly.LANG_CONTROLS_FOR_INPUT_VAR = '變量';
 Blockly.LANG_CONTROLS_FOR_INPUT_FROM = '從範圍';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = '到';
+Blockly.LANG_CONTROLS_FOR_INPUT_BY = '每隔';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = '執行';
 Blockly.LANG_CONTROLS_FOR_TAIL = '';
-Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Count from a start number to an end number.\n' +
+Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Count from a start number to an end number by the specified interval.\n' +
     'For each count, set the current count number to\n' +
     'variable "%1", and then do some statements.';
 

@@ -117,6 +117,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOR_INPUT_FROM = 'von';
 Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'bis';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'mache';
+Blockly.LANG_CONTROLS_FOR_INPUT_BY = 'by';
 Blockly.LANG_CONTROLS_FOR_TAIL = '';
 Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Zähle die Variable "%1" von einem Startwert\n' +
     'bis zu einem Zielwert und führe für jeden Wert\n' +
