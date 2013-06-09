@@ -62,7 +62,8 @@ Graph.init = function() {
   var onresize = function(e) {
     blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
         'px';
-    blocklyDiv.style.height = (window.innerHeight - 22) + 'px';
+    blocklyDiv.style.height = (window.innerHeight - blocklyDiv.offsetTop - 18) +
+        'px';
   };
   window.addEventListener('resize', onresize);
   onresize();

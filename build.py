@@ -142,7 +142,7 @@ class Gen_compressed(threading.Thread):
     self.gen_generator('python')
     self.gen_language('de')
     self.gen_language('en')
-    self.gen_language('vn')
+    self.gen_language('vi')
     self.gen_language('zh_tw')
 
   def gen_core(self):

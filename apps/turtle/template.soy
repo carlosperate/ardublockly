@@ -10,10 +10,15 @@
  */
 {template .start}
   <table width="100%" height="100%">
+    <tr height="50">
+      <td colspan=2>
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
+            <a href="../index.html">Apps</a> &gt;{sp}
+            {$ij.MSG.title}</h1>
+      </td>
+    </tr>
     <tr>
       <td width="410" valign="top">
-        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
-            <a href="../index.html">Apps</a> &gt; {$ij.MSG.title}</h1>
         <div>
           <canvas id="scratch" width="400" height="400" style="display: none"></canvas>
           <canvas id="display" width="400" height="400"></canvas>

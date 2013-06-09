@@ -303,14 +303,14 @@ Maze.drawMap = function() {
 
       // Draw the tile.
       if (!Maze.tile_SHAPES[tile]) {
-       if (Maze.GRAPH_UI) {
+        if (Maze.GRAPH_UI) {
           tile = 'null0';
         } else if (tile == '00000' && Math.random() > 0.3) {
           tile = 'null0';
         } else {
           tile = 'null' + Math.floor(1 + Math.random() * 4);
         }
-       }
+      }
       var left = Maze.tile_SHAPES[tile][0];
       var top = Maze.tile_SHAPES[tile][1];
       // Tile's clipPath element.
@@ -397,7 +397,8 @@ Maze.init = function() {
   var onresize = function(e) {
     blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
         'px';
-    blocklyDiv.style.height = (window.innerHeight - 22) + 'px';
+    blocklyDiv.style.height = (window.innerHeight - blocklyDiv.offsetTop - 18) +
+        'px';
   };
   window.addEventListener('resize', onresize);
   onresize();

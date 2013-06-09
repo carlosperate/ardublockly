@@ -92,12 +92,11 @@ Blockly.JavaScript.maze_isPath = function() {
 };
 
 Blockly.Language.maze_if = {
-  // Block for 'if' conditional if there a path.
+  // Block for 'if' conditional if there is a path.
   helpUrl: '',
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle(Blockly.Apps.getMsg('ifPath'))
         .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.appendStatementInput('DO')
         .appendTitle(Blockly.Apps.getMsg('doCode'));
@@ -120,7 +119,7 @@ Blockly.JavaScript.maze_if = function() {
 };
 
 Blockly.Language.maze_ifElse = {
-  // Block for 'if/else' conditional if there a path.
+  // Block for 'if/else' conditional if there is a path.
   helpUrl: '',
   init: function() {
     this.setColour(120);

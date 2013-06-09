@@ -1,37 +1,34 @@
-<html dir="ltr" lang="vn">
+<html dir="ltr" lang="vi">
 <head>
   <meta charset="utf-8">
-  <title>Máy Bay Blockly (2)</title>
+  <title>Máy Bay Blockly (1)</title>
   <script type="text/javascript">
     var MSG = {
-      getRows1: 'số hàng hạng nhất',
-      getRows2: 'số hàng hạng hai',
-      rows1: 'Hàng hạng nhất: %1',
-      rows2: 'Hàng hạng hai: %1',
+      getRows: 'đếm số hàng ghế',
+      rows: 'Số hàng ghế: %1',
       setSeats: 'Tính số chỗ ngồi',
       seats: 'Số chỗ ngồi: %1'
     };
   </script>
   <script type="text/javascript" src="../../blockly_compressed.js"></script>
-  <script type="text/javascript" src="../../vn_compressed.js"></script>
+  <script type="text/javascript" src="../../vi_compressed.js"></script>
   <script type="text/javascript" src="../../javascript_compressed.js"></script>
   <script type="text/javascript" src="common.js"></script>
-  <script type="text/javascript" src="blocks2.js"></script>
+  <script type="text/javascript" src="blocks1.js"></script>
   <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body onload="init()">
   <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;
-      <a href="../index.html">Apps</a> &gt; Máy Bay (2)</h1>
+      <a href="../index.html">Apps</a> &gt; Máy Bay (1)</h1>
 
   <embed src="plane.svg" height=256 width=600 type="image/svg+xml"/>
   <p>
     Một máy bay có hai ghế trong buồng lái (dành cho phi công trưởng và phi công phụ),
-    và một loạt hàng ghế cho hành khách ở hạng nhất và hạng hai. Mỗi hàng hạng nhất có
-    bốn chỗ ngồi. Mỗi hàng hạng hai có năm chỗ ngồi.
+    và một loạt hàng ghế cho hành khách. Mỗi hàng có bốn ghế (bốn chỗ ngồi).
   </p>
   <p>
     Dưới đây hãy tạo công thức tính số chỗ ngồi trên máy bay
-    để nó thay đổi tùy theo số lượng các hàng ghế (hình trên).
+    để nó thay đổi tùy theo số lượng hàng ghế (hình trên).
   </p>
 
   <div id="svgDiv"></div>
@@ -42,8 +39,7 @@
     <block type="math_arithmetic">
       <title name="OP">MULTIPLY</title>
     </block>
-    <block type="plane_get_rows1st"></block>
-    <block type="plane_get_rows2nd"></block>
+    <block type="plane_get_rows"></block>
   </xml>
 </body>
 </html>

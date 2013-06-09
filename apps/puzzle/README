@@ -22,7 +22,7 @@ sed -i 's/"locale": "en"/"locale": "de"/' de.json
 ../../i18n/json_to_xliff.py *.json
 
 # Run the command-line provided by the previous script.  It will look something like:
-java -jar ../_soy/SoyToJsSrcCompiler.jar --locales af,de,vn --messageFilePathFormat {LOCALE}.xlf --outputPathFormat {LOCALE}.js --srcs template.soy
+java -jar ../_soy/SoyToJsSrcCompiler.jar --locales af,de,vi --messageFilePathFormat {LOCALE}.xlf --outputPathFormat {LOCALE}.js --srcs template.soy
 
 # Manually create each <LANG>.html by copying and editing en.html.
 # Example given is for French.
@@ -32,4 +32,3 @@ java -jar ../_soy/SoyToJsSrcCompiler.jar --locales af,de,vn --messageFilePathFor
 - Optionally replace language/en/_messages.js.
 
 # Add new language to index.html.
-

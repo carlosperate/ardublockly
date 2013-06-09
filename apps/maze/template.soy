@@ -50,21 +50,29 @@
     <span id="fullTitle">{{msg meaning="Maze.fullTitle" desc="title - This is the title of the maze tutorial web page.  Do not translate 'Blockly', but do transliterate (show how to pronounce) it, if it would be unclear to a speaker of your language. For example, the Russian translation includes 'Blockly (Блoкли)'.  The word for 'maze' should be the same as in {lb}{lb}msg-Blockly|Maze-Maze.title{rb}{rb}"}}Blockly Maze{{/msg}}</span>
   </div>
   <table width="100%" height="100%">
+    <tr height="50">
+      <td colspan=2>
+        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
+            <a href="../index.html">Apps</a> &gt;{sp}
+            {{msg meaning="Maze.title" desc="brief title - This is displayed near the top of the page to indicate that this is Blockly's 'maze' application (and not one of Blockly's other applications).  The word for 'maze' should be the same as in {lb}{lb}msg-Blockly|Maze-Maze.fullTitle{rb}{rb}"}}Maze{{/msg}}
+            &nbsp;
+          {for $i in range(1, 11)}
+            {sp}
+            {if $i == $ij.level}
+              <span class="tab" id="selected">{$i}</span>
+            {else}
+              {if $i < $ij.level}
+                <a class="tab previous" href="?level={$i}">{$i}</a>
+              {else}
+                <a class="tab" href="?level={$i}">{$i}</a>
+              {/if}
+            {/if}
+          {/for}
+          </h1>
+      </td>
+    </tr>
     <tr>
       <td width="410" valign="top">
-        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
-            <a href="../index.html">Apps</a> &gt; {{msg meaning="Maze.title" desc="brief title - This is displayed near the top of the page to indicate that this is Blockly's 'maze' application (and not one of Blockly's other applications).  The word for 'maze' should be the same as in {lb}{lb}msg-Blockly|Maze-Maze.fullTitle{rb}{rb}"}}Maze{{/msg}}</h1>
-
-        <div>{{msg meaning="Maze.level" desc="noun - This is displayed next to the numbers that indicate which level of the game the user is on.  See [http://blockly-demo.appspot.com] and note trailing colon (:).  The same word should be used as for {lb}{lb}msg-Blockly|Maze-Maze.nextLevel{rb}{rb}"}}Level:{{/msg}} &nbsp;
-        {for $i in range(1, 11)}
-          {if $i == $ij.level}
-            <span class="tab" id="selected">{$i}</span>
-          {else}
-            <a class="tab" href="?level={$i}">{$i}</a>
-          {/if}
-        {/for}
-        </div>
-
         <div style="position: relative">
           <div id="hintBubble">
             <div id="hint">
