@@ -1,4 +1,9 @@
 {
+    "@metadata": {
+        "authors": [
+            "Shirayuki"
+        ]
+    },
     "Puzzle.country1": "The name of the country Australia\n{{Identical|Australia}}",
     "Puzzle.country1Language": "The English language.{{Identical|English}}",
     "Puzzle.country1City1": "The city Melbourne in Australia.",
@@ -7,7 +12,7 @@
     "Puzzle.country2": "The country Germany.\n{{Identical|Germany}}",
     "Puzzle.country2Language": "The German language.\n{{Identical|German}}",
     "Puzzle.country2City1": "The city Berlin in Germany.",
-    "Puzzle.country2City2": "The city Munich (München) in Germany.",
+    "Puzzle.country2City2": "The city Munich (M\u00fcnchen) in Germany.",
     "Puzzle.country2HelpUrl": "The URL of a page with basic information about Germany.",
     "Puzzle.country3": "The People's Republic of China.",
     "Puzzle.country3Language": "The Chinese language.\n{{Identical|Chinese}}",
@@ -17,15 +22,15 @@
     "Puzzle.country4": "The name of the country Brazil.",
     "Puzzle.country4Language": "The Portuguese language.\n{{Identical|Portuguese}}",
     "Puzzle.country4City1": "The city Rio de Janeiro in Brazil.",
-    "Puzzle.country4City2": "The city São Paulo in Brazil.",
+    "Puzzle.country4City2": "The city S\u00e3o Paulo in Brazil.",
     "Puzzle.country4HelpUrl": "The URL of a page with basic information about Brazil.",
-    "Puzzle.flag": "The official flag (noun) representing a country.",
+    "Puzzle.flag": "[[File:Config-language.png|left||32px]]\nnoun  the official flag representing a country (the national flag).\n{{Identical|Flag}}",
     "Puzzle.language": "Prompt for the user to provide the official language of a country.\n{{Identical|Language}}",
     "Puzzle.languageChoose": "Initial text displayed in a dropdown menu from which the user should choose the language spoken in the indicated country.",
     "Puzzle.cities": "A label preceding a list of cities.\n{{Identical|City}}",
-    "Puzzle.error0": "A congratulatory message displayed if the user placed all %1 blocks correctly, where %1 is an integer greater than 1.  The use of '\n', which indicates a new line, is optional.",
-    "Puzzle.error1": "An encouraging error message displayed if the user placed all blocks except 1 correctly.\n\nIf the number of incorrect blocks is 2 or more, {{msgblockly|PuzzlePuzzle.error2}} is used instead.",
-    "Puzzle.error2": "An error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one.\n\nIf the number of incorrect blocks is 1, {{msgblockly|PuzzlePuzzle.error1}} is used.",
+    "Puzzle.error0": "A congratulatory message displayed if the user placed all %1 blocks correctly, where %1 is an integer greater than 1.\n\nThe use of a new line character is optional.",
+    "Puzzle.error1": "an encouraging error message displayed if the user placed all blocks except 1 correctly.\n\nIf the number of incorrect blocks is 2 or more, {{msg-blockly|Puzzle-Puzzle.error2}} is used instead.",
+    "Puzzle.error2": "an error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one.\n\nIf the number of incorrect blocks is 1, {{msg-blockly|Puzzle-Puzzle.error1}} is used.",
     "Puzzle.tryAgain": "A message indicating that a visually distinguished block is incorrect and that the user should try to fix it.  The use of '\n', which indicates a new line, is optional.",
     "Puzzle.fullTitle": "The full title for the page.  'Blockly' can be left unchanged or can be transliterated.",
     "Puzzle.title": "A brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle.",

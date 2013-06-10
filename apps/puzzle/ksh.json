@@ -6,6 +6,8 @@
     },
     "Puzzle.country1": "Au\u00dftraalije",
     "Puzzle.country1Language": "\u00c4nglesch",
+    "Puzzle.country1City1": "M\u00e4lb\u00f6rn",
+    "Puzzle.country1City2": "Sydney",
     "Puzzle.country1HelpUrl": "http://ksh.wikipedia.org/wiki/Au\u00dftraalijje_(Schtaat)",
     "Puzzle.country2": "Deutschland",
     "Puzzle.country2Language": "Deutsch",
@@ -19,6 +21,8 @@
     "Puzzle.country3HelpUrl": "http://ksh.wikipedia.org/wiki/Schiina",
     "Puzzle.country4": "Brasiilije",
     "Puzzle.country4Language": "Pochtojeesesch",
+    "Puzzle.country4City1": "Rio_de_Schaneero",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
     "Puzzle.country4HelpUrl": "http://ksh.wikipedia.org/wiki/Brasiilije",
     "Puzzle.flag": "Fahn",
     "Puzzle.language": "Schprooch:",
@@ -33,6 +37,6 @@
     "Puzzle.help": "H\u00f6lp",
     "Puzzle.checkAnswers": "Pr\u00f6\u00f6ve!",
     "Puzzle.helpText": "F\u00f6r jedes Land, en Jr\u00f6hn, donn d\u00e4m sing Fahn draan, s\u00f6hk sing Schprooch u\u00df, un donn d\u00e4m sing Scht\u00e4dt ople\u00dfte.",
-    "Puzzle.helpOk": "Jebongt!",
-    "Puzzle.helpImage": "help_ksh.png"
+    "Puzzle.helpImage": "help_ksh.png",
+    "Puzzle.helpOk": "Jebongt!"
 }

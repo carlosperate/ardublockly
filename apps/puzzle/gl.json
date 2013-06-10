@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Espertus",
             "Toli\u00f1o"
         ]
     },
@@ -14,7 +15,7 @@
     "Puzzle.country2City1": "Berl\u00edn",
     "Puzzle.country2City2": "M\u00fanic",
     "Puzzle.country2HelpUrl": "http://gl.wikipedia.org/wiki/Alema%C3%B1a__Deutschland",
-    "Puzzle.country3": "China",
+    "Puzzle.country3": "Chin\u00e9s",
     "Puzzle.country3Language": "chin\u00e9s",
     "Puzzle.country3City1": "Pequ\u00edn",
     "Puzzle.country3City2": "Shanghai",
