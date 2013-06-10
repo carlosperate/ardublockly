@@ -18,7 +18,7 @@ sed -i 's/"locale": "en"/"locale": "de"/' de.json
 
 # Optionally create new help image.
 
-# Create *.xlf.  By default, en.json and qqq.json are skipped.
+# Create *.xlf.  By default, keys.json and qqq.json are skipped.
 ../../i18n/json_to_xliff.py *.json
 
 # Run the command-line provided by the previous script.  It will look something like:
