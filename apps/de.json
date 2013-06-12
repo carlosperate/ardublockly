@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly",
     "Apps.httpRequestError": "Es gab ein Problem während der HTTP Anfrage.",
     "Apps.linkAlert": "Blöcke mit diesem Link teilen:\n\n%1",
     "Apps.hashError": "Entschuldigung, konnte die gespeicherten Blöcke für '%1' nicht finden.",

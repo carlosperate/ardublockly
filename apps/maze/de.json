@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Labyrinth",
 "Maze.moveForward" : "laufe vorwärts",
 "Maze.turnLeft" : "drehen links herum",
 "Maze.turnRight" : "drehen rechts herum",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Du kannst zwei 'wenn' Bedingungen in einander verschachteln.",
 "Maze.instructions9" : "Wenn-ansonsten Anweisungen führen etwas aus wenn eine Bedingung zutrifft oder eine Alternative.",
 "Maze.instructions10" : "Schaffst du dieses komplexe Labyrinth. Folge der Wand.",
-"Maze.level" : "Level",
 "Maze.capacity0" : "Du hast 0 Anweisungen zur Verfügung.",
 "Maze.capacity1" : "Du hast 1 Anweisung zur Verfügung.",
 "Maze.capacity2" : "Du hast %1 Anweisungen zur Verfügung.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Zurücksetzen",
 "Maze.nextLevel" : "Gratulation! In das Level %1 gehen?",
 "Maze.finalLevel" : "Gratulation! Du hast das Spiel beendet.",
-"Maze.title" : "Labyrinth",
+"Maze.maze" : "Labyrinth",
 "Maze.oneTopBlock" : "On this level, you need to stack together all of the blocks in the white workspace."
 }

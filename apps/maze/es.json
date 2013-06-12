@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Laberinto",
 "Maze.moveForward" : "Mover hacia delante",
 "Maze.turnLeft" : "gira izquierda",
 "Maze.turnRight" : "gira derecha",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Puedes usar más de una declaración 'si'.",
 "Maze.instructions9" : "Las declaraciones 'si-sino' hacen una cosa u otra.",
 "Maze.instructions10" : "¿Puedes resolver este complicado laberinto? Intenta seguir la pared de la izquierda.",
-"Maze.level" : "Nivel",
 "Maze.capacity0" : "Te quedan 0 bloques.",
 "Maze.capacity1" : "Te quedan 1 bloque.",
 "Maze.capacity2" : "Te quedan %1 bloques.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Reinicializar",
 "Maze.nextLevel" : "¡Felicidades! ¿Estas listo/a para seguir al siguiente nivel %1?",
 "Maze.finalLevel" : "¡Felicidades! Haz resuelto el último nivel.",
-"Maze.title" : "Laberinto",
+"Maze.maze" : "Laberinto",
 "Maze.oneTopBlock" : "En este nivel, necesitas apilar los bloques en el espacio en blanco."
 }

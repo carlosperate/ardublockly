@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Le Labyrinthe Blockly",
 "Maze.moveForward" : "avance",
 "Maze.turnLeft" : "tourne à gauche",
 "Maze.turnRight" : "tourne à droite",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Tu peux utiliser plus d'une seule instruction 'si'.",
 "Maze.instructions9" : "Un bloc 'Si-Sinon' exécute une chose ou une autre.",
 "Maze.instructions10" : "Peux tu résoudre ce labyrinthe plus difficile? Essaie de suivre le mur du côté de ta main gauche.",
-"Maze.level" : "Level",
 "Maze.capacity0" : "Il te reste 0 blocs.",
 "Maze.capacity1" : "Il te reste 1 bloc.",
 "Maze.capacity2" : "Il te reste %1 blocs.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Reset",
 "Maze.nextLevel" : "Bravo ! Est tu prêt pour le niveau %1?",
 "Maze.finalLevel" : "Bravo ! Tu as fini le dernier niveau.",
-"Maze.title" : "Labyrinthe Blocky",
+"Maze.maze" : "Labyrinthe Blocky",
 "Maze.oneTopBlock" : "Dans ce niveau, tu as besoin d'empiler les blocs les uns au dessus des autres dans la zone de travail blanche."
 }

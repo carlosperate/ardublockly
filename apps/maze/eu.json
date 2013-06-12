@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Labirintoa",
 "Maze.moveForward" : "mugi aurrera",
 "Maze.turnLeft" : "biratu ezker",
 "Maze.turnRight" : "biratu eskuin",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "'if' bloke bat baino gehiago erabili ditzakezu.",
 "Maze.instructions9" : "If-else blokeek gauza bat edo bestea egingo dute.",
 "Maze.instructions10" : "Labirinto zail honi irtenbidea aurkitu diezaiokezu? Saia zaitez ezker-pareta jarraitzen.",
-"Maze.level" : "Maila",
 "Maze.capacity0" : "0 bloke geratzen dira.",
 "Maze.capacity1" : "Bloke 1 geratzen da.",
 "Maze.capacity2" : "%1 bloke geratzen dira.",
@@ -35,7 +33,7 @@
 "Maze.resetProgram" : "Berriz hasi",
 "Maze.nextLevel" : "Zorionak! Prest al zaude %1 mailara pasatzeko?",
 "Maze.finalLevel" : "Zorionak! Azken maila gainditu duzu.",
-"Maze.title" : "Labirintoa",
+"Maze.maze" : "Labirintoa",
 "Maze.oneTopBlock" : "Maila honetan, bloke guztiak lan-eremu txurian pilatu behar dituzu."
 }
 

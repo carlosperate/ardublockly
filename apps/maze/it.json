@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "il labirinto dei blocchi",
 "Maze.moveForward" : "avanza diritto",
 "Maze.turnLeft" : "svolta a sinistra",
 "Maze.turnRight" : "svolta a destra",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Puoi usare più di una istruzione 'se'.",
 "Maze.instructions9" : "Le istruzioni if-else cercheranno di compiere la prima azione o la seconda.",
 "Maze.instructions10" : "Sai risolvere questo labirinto intricato? Prova a seguire il muro di sinistra. Solo per programmatori avanzati!",
-"Maze.level" : "Livello",
 "Maze.capacity0" : "Puoi usare altri 0 blocchi.",
 "Maze.capacity1" : "Puoi usare altri 1 blocchi.",
 "Maze.capacity2" : "Puoi usare altri %1 blocchi.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Ricomincia",
 "Maze.nextLevel" : "Gaudio! Sei pronto a passare al livello %1?",
 "Maze.finalLevel" : "Tripudio! Hai risolto l'ultimo livello.",
-"Maze.title" : "Labirinto",
+"Maze.maze" : "Labirinto",
 "Maze.oneTopBlock" : "In questo livello dovrai impilare tutti i blocchi nella zona bianca."
 }

@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Laberint",
 "Maze.moveForward" : "mou endavant",
 "Maze.turnLeft" : "gira esquerra",
 "Maze.turnRight" : "gira dreta",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Pots utilitzar més d'una declaració 'si'.",
 "Maze.instructions9" : "Les declaracions 'si-si no' faran fer una cosa o una altra.",
 "Maze.instructions10" : "Pots resoldre aquest complicat laberint? Prova de seguir la paret de l'esquerra. Només programadors avançats!",
-"Maze.level" : "Nivell",
 "Maze.capacity0" : "Et resten 0 blocs.",
 "Maze.capacity1" : "Et resten 1 blocs.",
 "Maze.capacity2" : "Et resten %1 blocs.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Reinicialitza",
 "Maze.nextLevel" : "Felicitats! Estàs preparat per a procedir amb el nivell %1?",
 "Maze.finalLevel" : "Felicitats! Has resolt el nivell final.",
-"Maze.title" : "Laberint",
+"Maze.maze" : "Laberint",
 "Maze.oneTopBlock" : "En aquest nivell, has d'apilar junts tots els blocs a l'espai de treball blanc."
 }

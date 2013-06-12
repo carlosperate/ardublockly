@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Ma Trận Blockly",
 "Maze.moveForward" : "đi tới",
 "Maze.turnLeft" : "quay qua trái",
 "Maze.turnRight" : "quay qua phải",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Bạn có thể dùng hơn một mảnh 'nếu...', để xử lý nhiều điều kiện khác nhau.",
 "Maze.instructions9" : "Mảnh 'nếu-nếu không' sẽ giúp bạn. Nó sẽ thực hiện một trong hai lệnh hoặc nhóm lệnh đưa ra. Lệnh ở 'nếu không' chỉ chạy khi điều kiện ấy không có thật.",
 "Maze.instructions10" : "Bạn có thể giải cái ma trận rắc rối này? Gợi ý: Thử đi sát theo một bức tường, y như bạn đang giữ một tay theo suốt bức tường ấy, dù nó rẻ phải hay trái.",
-"Maze.level" : "Vòng",
 "Maze.capacity0" : "Bạn còn 0 mảnh.",
 "Maze.capacity1" : "Bạn còn 1 mảnh.",
 "Maze.capacity2" : "Bạn còn %1 mảnh.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Về Điểm Khởi Đầu",
 "Maze.nextLevel" : "Chúc mừng! Bạn đã sẵn sàng qua vòng %1?",
 "Maze.finalLevel" : "Chúc mừng! Bạn đã giải xong vòng cuối cùng.",
-"Maze.title" : "Ma trận",
+"Maze.maze" : "Ma trận",
 "Maze.oneTopBlock" : "Ở vòng này, bạn cần gắn chồng các mảnh lệnh lên nhau trong khoảng trắng (còn được gọi là sân chơi) để tạo chuỗi mệnh lệnh cần thiết."
 }

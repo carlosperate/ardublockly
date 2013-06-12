@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Labyrint",
 "Maze.moveForward" : "flyt fremad",
 "Maze.turnLeft" : "drej venstre",
 "Maze.turnRight" : "drej højre",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Du kan bruge mere end en 'hvis' sætning.",
 "Maze.instructions9" : "Hvis-ellers sætninger vil gøre den ene eller anden ting.",
 "Maze.instructions10" : "Kan du løse denne komplicerede labyrint? Prøv at følge den væggen på venstre hånd.",
-"Maze.level" : "Bane",
 "Maze.capacity0" : "Du har 0 blokke tilbage.",
 "Maze.capacity1" : "Du har 1 blok tilbage.",
 "Maze.capacity2" : "Du har %1 blokke tilbage.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Nulstil",
 "Maze.nextLevel" : "Tillykke! Er du klar til at fortsætte til bane %1?",
 "Maze.finalLevel" : "Tillykke! Du har klaret den sidste bane!.",
-"Maze.title" : "Labyrint",
+"Maze.maze" : "Labyrint",
 "Maze.oneTopBlock" : "På denne bane skal du sætte alle blokkene sammen i det hvide arbejdsfelt."
 }

@@ -19,6 +19,9 @@
  *
  * # Create .js files by running script recommended by previous command.  It will
  * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
+ *
+ * # The .xlf files may be deleted.  They should not be checked in.
+ * rm *.xlf
  */
 
 /**
@@ -26,7 +29,6 @@
  */
 {template .start}
   <div id="MSG" style="display:none">
-    <span id="fullTitle">{msg meaning="Maze.fullTitle" desc="noun - the full title for the page.  'Blockly' can be left unchanged or can be transliterated.  For example, the Russian title is: 'Blockly (Блoкли) Лабиринт'."}Blockly Maze{/msg}</span>
     <span id="moveForward">{msg meaning="Maze.moveForward" desc="verb - imperative or infinitive for a person moving (walking) in the direction he/she is facing." }move forward{/msg}</span>
     <span id="turnLeft">{msg meaning="Maze.turnLeft" desc="verb - imperative or infinitive for a person turning his head and body one quarter rotation counter-clockwise.  Prefer a translation that has text in common with the translation of 'turn right'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn left{/msg}</span>
     <span id="turnRight">{msg meaning="Maze.turnRight" desc="verb - imperative or infinitive for a person turning his head and body one quarter rotation clockwise.  Prefer a translation that has text in common with the translation of 'turn left'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn right{/msg}</span>
@@ -47,14 +49,11 @@
     <span id="nextLevel">{msg meaning="Maze.nextLevel" desc="alert - This is displayed when the user solves the maze, inviting them to precede to the next level of difficulty.  %1 is an integer greater than 1."}Congratulations! Are you ready to proceed to level %1?{/msg}</span>
     <span id="finalLevel">{msg meaning="Maze.finalLevel" desc="alert - This is displayed when the user solves the most difficult level."}Congratulations! You have solved the final level.{/msg}</span>
     <span id="oneTopBlock">{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</span>
-    <span id="fullTitle">{{msg meaning="Maze.fullTitle" desc="title - This is the title of the maze tutorial web page.  Do not translate 'Blockly', but do transliterate (show how to pronounce) it, if it would be unclear to a speaker of your language. For example, the Russian translation includes 'Blockly (Блoкли)'.  The word for 'maze' should be the same as in {lb}{lb}msg-Blockly|Maze-Maze.title{rb}{rb}"}}Blockly Maze{{/msg}}</span>
   </div>
   <table width="100%" height="100%">
     <tr height="50">
       <td colspan=2>
-        <h1><a href="http://blockly.googlecode.com/">Blockly</a> &gt;{sp}
-            <a href="../index.html">Apps</a> &gt;{sp}
-            {{msg meaning="Maze.title" desc="brief title - This is displayed near the top of the page to indicate that this is Blockly's 'maze' application (and not one of Blockly's other applications).  The word for 'maze' should be the same as in {lb}{lb}msg-Blockly|Maze-Maze.fullTitle{rb}{rb}"}}Maze{{/msg}}
+        <h1><a href="../index.html"><span id="blocklyName">Blockly</span></a> &gt; <span id="maze">{msg meaning="Maze.maze" desc="brief title - Specifies that this is Blockly's '''Maze''' tutorial."}Maze{/msg}</span>
             &nbsp;
           {for $i in range(1, 11)}
             {sp}

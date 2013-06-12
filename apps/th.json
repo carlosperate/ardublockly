@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly (บล็อค-ลี่)",
     "Apps.httpRequestError": "มีปัญหาเกี่ยวกับการร้องขอ",
     "Apps.linkAlert": "แบ่งปันบล็อคต่างๆของคุณด้วยลิงก์นี้:\n\n%1",
     "Apps.hashError": "ขอโทษด้วย, '%1' ไม่สอดคล้องกับไฟล์ Blockly ที่บันทึกไว้",

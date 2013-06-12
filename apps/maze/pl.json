@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Labirynt z Blockly",
 "Maze.moveForward" : "idź naprzód",
 "Maze.turnLeft" : "skręć w lewo",
 "Maze.turnRight" : "skręć w prawo",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Możesz użyć więcej razy warunek 'jeśli'.",
 "Maze.instructions9" : "Warunek jeśli-albo służy do wykonania jednego zestawu poleceń albo drugiego.",
 "Maze.instructions10" : "Czy dasz radę przejść ten trudny labirynt? Wypróbnuj metodę trzymania się lewą ręką ściany. Tylko dla zaawansowanych programistów!",
-"Maze.level" : "Poziom",
 "Maze.capacity0" : "Pozostało 0 poleceń.",
 "Maze.capacity1" : "Wykorzystano 1 polecenie.",
 "Maze.capacity2" : "Wykorzystano %1 poleceń.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Wyczyść",
 "Maze.nextLevel" : "Gratulacje! Czy chcesz przejść na poziom %1?",
 "Maze.finalLevel" : "Gratulacje! Ostatni poziom został rozwiązany.",
-"Maze.title" : "Labirynt",
+"Maze.maze" : "Labirynt",
 "Maze.oneTopBlock" : "Na tym poziomie, ustaw wszystkie polecania na białym polu."
 }

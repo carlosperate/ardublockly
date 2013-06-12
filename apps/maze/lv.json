@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly labirints",
 "Maze.moveForward" : "ej uz priekšu",
 "Maze.turnLeft" : "pagriezies pa kreisi",
 "Maze.turnRight" : "pagriezies pa labi",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Tu vari lietot vairākas pārbaudes komandas 'ja'.",
 "Maze.instructions9" : "Pārbaudes komandas 'ja-citādi' izpildīs vai nu vienu, vai otru bloku atkarībā no pārbaudes.",
 "Maze.instructions10" : "Vai tu vari atrisināt šo sarežģīto labirintu? Mēģini sekot sienai kreisajā pusē. Šis ir pieredzējušiem programmētājiem!",
-"Maze.level" : "Līmenis",
 "Maze.capacity0" : "Tev atlikuši 0 bloki.",
 "Maze.capacity1" : "Tev atlicis 1 bloks.",
 "Maze.capacity2" : "Tev atlikuši %1 bloki.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Sākt no sākuma",
 "Maze.nextLevel" : "Apsveicu! Vai esi gatavs turpināt ar %1 līmeni?",
 "Maze.finalLevel" : "Apsveicu! Tu esi atrisinājis pēdējo līmeni.",
-"Maze.title" : "Labirints",
+"Maze.maze" : "Labirints",
 "Maze.oneTopBlock" : "Šajā līmenī tev bloki jāsaliek kopā baltajā laumumā."
 }

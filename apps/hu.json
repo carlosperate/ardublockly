@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly",
     "Apps.subtitle": "vizuális programozási környezet",
     "Apps.httpRequestError": "A kéréssel kapcsolatban probléma merült fel.",
     "Apps.linkAlert": "Ezzel a hivatkozással tudod megosztani a programodat:\n\n%1",

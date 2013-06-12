@@ -1,11 +1,10 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-06-04 12:36:33.607745",
+        "lastupdated": "2013-06-12 09:56:46.157110",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
-    "Maze.fullTitle": "Blockly Maze",
     "Maze.moveForward": "move forward",
     "Maze.turnLeft": "turn left",
     "Maze.turnRight": "turn right",
@@ -26,8 +25,7 @@
     "Maze.nextLevel": "Congratulations! Are you ready to proceed to level %1?",
     "Maze.finalLevel": "Congratulations! You have solved the final level.",
     "Maze.oneTopBlock": "On this level, you need to stack together all of the blocks in the white workspace.",
-    "Maze.title": "Maze",
-    "Maze.level": "Level:",
+    "Maze.maze": "Maze",
     "Maze.instructions1": "A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
     "Maze.instructions2": "What is the sequence of steps to follow this path?",
     "Maze.instructions3": "Computers have limited memory.  Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.",

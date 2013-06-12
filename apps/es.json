@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly",
     "Apps.subtitle": "un entorno de programación visual",
     "Apps.httpRequestError": "Hubo un problema con la petición.",
     "Apps.linkAlert": "Comparte tus bloques con esta conexión:\n\n%1",

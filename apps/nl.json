@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly",
     "Apps.subtitle": "een visuele programmeeromgeving",
     "Apps.httpRequestError": "Er was een probleem met de aanvraag.",
     "Apps.linkAlert": "Deel je oplossing via deze link:\n\n%1",

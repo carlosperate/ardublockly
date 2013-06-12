@@ -51,6 +51,8 @@ document.write(mazepage.start({}, null, {level: Maze.LEVEL}));
 var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][Maze.LEVEL];
 
+document.write(BlocklyCommonMessages.messages(null, null));
+
 /**
  * Milliseconds between each animation frame.
  */
@@ -373,7 +375,10 @@ Maze.drawMap = function() {
  * Initialize Blockly and the maze.  Called on page load.
  */
 Maze.init = function() {
-  document.title = Blockly.Apps.getMsg('fullTitle');
+  document.title = Blockly.Apps.getMsg('blocklyMessage') +
+      ' : ' + Blockly.Apps.getMsg('maze');
+  document.getElementById('blocklyName').innerHTML =
+      Blockly.Apps.getMsg('blocklyMessage');
   // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
   // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
   var rtl = document.body.parentNode.dir == 'rtl';

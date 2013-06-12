@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly",
     "Apps.subtitle": "vizuāla programmēšanas vide",
     "Apps.httpRequestError": "Pieprasījuma kļūda.",
     "Apps.linkAlert": "Dalies ar saviem blokiem ar šo saiti:\n\n%1",

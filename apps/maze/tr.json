@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Labirent",
 "Maze.moveForward" : "ileri git",
 "Maze.turnLeft" : "sola dön",
 "Maze.turnRight" : "sağa dön",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Birden fazla 'eğer' ifadesi kullanabilirsin.",
 "Maze.instructions9" : "Eğer-değilse ifadeleri ya bir şeyi ya da diğerini yapar.",
 "Maze.instructions10" : "Bu karmaşık labirenti de çözebilir misin? Soldaki duvarı dene. Sadece gelişmiş programcılar için!",
-"Maze.level" : "Seviye",
 "Maze.capacity0" : "0 adet bloğun kaldı.",
 "Maze.capacity1" : "1 adet bloğun kaldı.",
 "Maze.capacity2" : "%1 adet bloğun kaldı.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Tekrar",
 "Maze.nextLevel" : "Tebrikler! %1. seviyeye geçmeye hazır mısın?",
 "Maze.finalLevel" : "Tebrikler! Son seviyeyi de tamamladın!",
-"Maze.title" : "Labirent",
+"Maze.maze" : "Labirent",
 "Maze.oneTopBlock" : "Bu bölümde beyaz çalışma alanındaki bütün blokları bir araya getirmelisin."
 }

@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Quebra-cabeça",
 "Maze.moveForward" : "Mover para a frente",
 "Maze.turnLeft" : "gire para a esquerda",
 "Maze.turnRight" : "gire para a direita",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Você pode utilizar mais de um comando 'se'.",
 "Maze.instructions9" : "O comando 'Se-senão' faz uma coisa ou outra.",
 "Maze.instructions10" : "Você consegue resolver este quebra cabeças complexo. Tente seguir o muro do lado esquerdo. Para programadores avançados apenas!",
-"Maze.level" : "Nível",
 "Maze.capacity0" : "Você tem mais 0 blocos.",
 "Maze.capacity1" : "Você tem mais 1 blocos.",
 "Maze.capacity2" : "Você tem mais %1 blocos.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Reiniciar",
 "Maze.nextLevel" : "Parabéns! Você está apto para o nível %1?",
 "Maze.finalLevel" : "Parabéns! Você resolveu o nível final.",
-"Maze.title" : "Quebra-cabeça",
+"Maze.maze" : "Quebra-cabeça",
 "Maze.oneTopBlock" : "Neste nível, você precisa empilhar todos os blocos nos espaços em branco."
 }

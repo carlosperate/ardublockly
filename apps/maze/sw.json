@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Mzingile Blockly",
 "Maze.moveForward" : "songa mbele",
 "Maze.turnLeft" : "geuka kushoto",
 "Maze.turnRight" : "geuka kulia",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Unaweza kutumia zaidi ya kishiku kimoja ya 'iwapo'.",
 "Maze.instructions9" : "Hifadhi na kiungo cha vishiku.",
 "Maze.instructions10" : "Je, unaweza kutatua mzingile mgumu huu? Jaribu kufuatia ukuta wa kushoto. Wanaprogramu wa juu tu!",
-"Maze.level" : "Sehemu",
 "Maze.capacity0" : "Unavyo bado vishiku vi0.",
 "Maze.capacity1" : "Unacho bado kishiku kimoja.",
 "Maze.capacity2" : "Unavyo bado vishiku vi%1.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Seti upya",
 "Maze.nextLevel" : "Hongera! Uko tayari kuendelea na sehemu ya %1?",
 "Maze.finalLevel" : "Hongera! Umetatua sehemu ya mwisho.",
-"Maze.title" : "Mzingile",
+"Maze.maze" : "Mzingile",
 "Maze.oneTopBlock" : "Katika sehemu hii, itabidi upanganye vishiku vyote ndani ya eneo ya kazi nyeupe."
 }

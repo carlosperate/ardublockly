@@ -1,5 +1,4 @@
 {
-    "Maze.fullTitle": "noun - the full title for the page.  'Blockly' can be left unchanged or can be transliterated.  For example, the Russian title is: 'Blockly (Блoкли) Лабиринт'.",
     "Maze.moveForward": "verb - imperative or infinitive for a person moving (walking) in the direction he/she is facing.",
     "Maze.turnLeft": "verb - imperative or infinitive for a person turning his head and body one quarter rotation counter-clockwise.  Prefer a translation that has text in common with the translation of 'turn right'.  See [[Translating:Blockly#Drop-Down_Menus]].",
     "Maze.turnRight": "verb - imperative or infinitive for a person turning his head and body one quarter rotation clockwise.  Prefer a translation that has text in common with the translation of 'turn left'.  See [[Translating:Blockly#Drop-Down_Menus]].",
@@ -20,8 +19,7 @@
     "Maze.nextLevel": "alert - This is displayed when the user solves the maze, inviting them to precede to the next level of difficulty.  %1 is an integer greater than 1.",
     "Maze.finalLevel": "alert - This is displayed when the user solves the most difficult level.",
     "Maze.oneTopBlock": "alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack.",
-    "Maze.title": "brief title - This is displayed near the top of the page to indicate that this is Blockly's 'maze' application (and not one of Blockly's other applications).  The word for 'maze' should be the same as in {{msg-Blockly|Maze-Maze.fullTitle}}",
-    "Maze.level": "noun - This is displayed next to the numbers that indicate which level of the game the user is on.  See [http://blockly-demo.appspot.com] and note trailing colon (:).  The same word should be used as for {{msg-Blockly|Maze-Maze.nextLevel}}",
+    "Maze.maze": "brief title - Specifies that this is Blockly's '''Maze''' tutorial.",
     "Maze.instructions1": "instructions - the word 'program' refers to a computer program, and thewords for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.",
     "Maze.instructions2": "instructions - the word 'steps' refers to instructions in a computer program; 'path' refers to the path through a maze.  See previous description for tense.",
     "Maze.instructions3": "instructions - 'path' refers to a path through a maze, and 'block' refers to a child's building block.",

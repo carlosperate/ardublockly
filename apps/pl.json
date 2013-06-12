@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly",
     "Apps.subtitle":"graficzne środowisko programistyczne",
     "Apps.httpRequestError": "Wystąpił problem z przesłaniem żądania.",
     "Apps.linkAlert": "Udostępnij link ze swoimi poleceniami:\n\n%1",

@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Bludiště",
 "Maze.moveForward" : "pohyb vpřed",
 "Maze.turnLeft" : "otočit levá",
 "Maze.turnRight" : "otočit pravá",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Můžeš použít více něž jeden výraz 'pokud'.",
 "Maze.instructions9" : "Příkaz 'pokud-jinak' provede buď něco, nebo něco jiného.",
 "Maze.instructions10" : "Dokážeš vyřešit toto komplikované bludiště? Zkus se přidržovat zdi po levé ruce.",
-"Maze.level" : "Level",
 "Maze.capacity0" : "Počet zbývajících bloků 0.",
 "Maze.capacity1" : "Počet zbývajících bloků 1.",
 "Maze.capacity2" : "Počet zbývajících bloků %1.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Reset",
 "Maze.nextLevel" : "Blahopřejeme! Jsi připraven vstoupit do levelu %1?",
 "Maze.finalLevel" : "Blahopřejeme! Vyřešil jsi poslední level.",
-"Maze.title" : "Bludiště",
+"Maze.maze" : "Bludiště",
 "Maze.oneTopBlock" : "V tomto levelu musíš posbírat všechny bloky na bílém pozadí."
 }

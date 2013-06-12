@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Labirintus",
 "Maze.moveForward" : "Menj előre",
 "Maze.turnLeft" : "Fordulj balra",
 "Maze.turnRight" : "Fordulj jobbra",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "Egynél több 'Ha' feltételt is használhatsz.",
 "Maze.instructions9" : "A Ha-egyébként feltétel esetén vagy az egyik, vagy a másik utasítás-csoport kerül végrehajtásra.",
 "Maze.instructions10" : "Végig tudod vezetni Pegmant ezen a bonyolult labirintuson? Próbáld a bal oldali falat követni. Haladó programozóknak!",
-"Maze.level" : "Szint",
 "Maze.capacity0" : "Nem használhatsz fel több blokkot.",
 "Maze.capacity1" : "Még 1 blokkot használhatsz fel.",
 "Maze.capacity2" : "Még %1 blokkot használhatsz fel.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Alaphelyzet",
 "Maze.nextLevel" : "Gratulálok! Kész vagy megoldani a(z) %1. szintet?",
 "Maze.finalLevel" : "Gratulálok! Sikeresen megoldottad az utolsó szintet.",
-"Maze.title" : "Labirintus",
+"Maze.maze" : "Labirintus",
 "Maze.oneTopBlock" : "Ezen a szinten össze kell kapcsolnod minden blokkot a munkaterületen."
 }

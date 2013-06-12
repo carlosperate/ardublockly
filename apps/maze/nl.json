@@ -1,5 +1,4 @@
 {
-"Maze.fullTitle" : "Blockly Doolhof",
 "Maze.moveForward" : "ga vooruit",
 "Maze.turnLeft" : "draai links",
 "Maze.turnRight" : "draai rechts",
@@ -27,7 +26,6 @@
 "Maze.instructions8" : "'als' / 'anders' instructies doen het ene of het andere.",
 "Maze.instructions9" : "Kun je dit ingewikkelde doolhof oplossen? Probeer de linker muur te volgen.",
 "Maze.instructions10" : "Dit doolhof heeft gegevens structuren nodig. Enkel voor geavanceerde programmeurs!",
-"Maze.level" : "Niveau",
 "Maze.capacity0" : "Je hebt 0 instructies over.",
 "Maze.capacity1" : "Je hebt 1 instructie over.",
 "Maze.capacity2" : "Je hebt %1 instructies over.",
@@ -35,6 +33,6 @@
 "Maze.resetProgram" : "Opnieuw",
 "Maze.nextLevel" : "Proficiat! Ben je klaar om naar niveau %1 te gaan?",
 "Maze.finalLevel" : "Proficiat! Je hebt het laatste niveau opgelost.",
-"Maze.title" : "Doolhof",
+"Maze.maze" : "Doolhof",
 "Maze.oneTopBlock" : "Op dit niveau moet je alle instructies samenleggen in het witte gedeelte."
 }

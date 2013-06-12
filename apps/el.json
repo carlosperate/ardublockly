@@ -1,4 +1,5 @@
 {
+    "Apps.blocklyMessage": "Blockly (Μπλοκλι)",
     "Apps.subtitle": "Ένα οπτικό περιβάλλον προγραμματισμού",
     "Apps.httpRequestError": "Υπήρξε πρόβλημα με το αίτημα.",
     "Apps.linkAlert": "Μοιράσου τα blocks σου με αυτό το σύνδεσμο:\n\n%1",
