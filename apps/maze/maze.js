@@ -54,7 +54,7 @@ var maxBlocks = [undefined, // Level 0.
 /**
  * Milliseconds between each animation frame.
  */
-Maze.STEP_SPEED = 150;
+Maze.stepSpeed;
 
 /**
  * Display a less-realistic, more mathematical map with grid lines.
@@ -620,11 +620,12 @@ Maze.execute = function() {
     }
   }
 
-
   // Report result to server.
   Maze.report('maze', Maze.LEVEL_ID, Maze.LEVEL, result,
               Blockly.Apps.stripCode(code));
 
+  // Fast animation if execution is successful.  Slow otherwise.
+  Maze.stepSpeed = (result == Maze.ResultType.SUCCESS) ? 100 : 150;
 
   // Blockly.Apps.log now contains a transcript of all the user's actions.
   // Reset the maze and animate the transcript.
@@ -700,7 +701,7 @@ Maze.animate = function() {
       window.setTimeout(Maze.congratulations, 1000);
   }
 
-  Maze.pidList.push(window.setTimeout(Maze.animate, Maze.STEP_SPEED * 5));
+  Maze.pidList.push(window.setTimeout(Maze.animate, Maze.stepSpeed * 5));
 };
 
 Maze.congratulations = function() {
@@ -723,16 +724,16 @@ Maze.schedule = function(startPos, endPos) {
       Maze.displayPegman(startPos[0] + deltas[0] * 2,
           startPos[1] + deltas[1] * 2,
           Maze.constrainDirection16(startPos[2] + deltas[2] * 2));
-    }, Maze.STEP_SPEED));
+    }, Maze.stepSpeed));
   Maze.pidList.push(window.setTimeout(function() {
       Maze.displayPegman(startPos[0] + deltas[0] * 3,
           startPos[1] + deltas[1] * 3,
           Maze.constrainDirection16(startPos[2] + deltas[2] * 3));
-    }, Maze.STEP_SPEED * 2));
+    }, Maze.stepSpeed * 2));
   Maze.pidList.push(window.setTimeout(function() {
       Maze.displayPegman(endPos[0], endPos[1],
           Maze.constrainDirection16(endPos[2]));
-    }, Maze.STEP_SPEED * 3));
+    }, Maze.stepSpeed * 3));
 };
 
 /**
@@ -769,16 +770,16 @@ Maze.scheduleFail = function(forward) {
     Maze.displayPegman(Maze.pegmanX,
                        Maze.pegmanY,
                        direction16);
-    }, Maze.STEP_SPEED));
+    }, Maze.stepSpeed));
   Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX + deltaX,
                        Maze.pegmanY + deltaY,
                        direction16);
     Blockly.playAudio('whack', .5);
-  }, Maze.STEP_SPEED * 2));
+  }, Maze.stepSpeed * 2));
   Maze.pidList.push(window.setTimeout(function() {
       Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, direction16);
-    }, Maze.STEP_SPEED * 3));
+    }, Maze.stepSpeed * 3));
 };
 
 /**
@@ -788,15 +789,16 @@ Maze.scheduleFinish = function() {
   var direction16 = Maze.constrainDirection16(Maze.pegmanD * 4);
   Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 16);
   Blockly.playAudio('win', .5);
+  Maze.stepSpeed = 150;  // Slow down victory animation a bit.
   Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 17);
-    }, Maze.STEP_SPEED));
+    }, Maze.stepSpeed));
   Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 16);
-    }, Maze.STEP_SPEED * 2));
+    }, Maze.stepSpeed * 2));
   Maze.pidList.push(window.setTimeout(function() {
       Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, direction16);
-    }, Maze.STEP_SPEED * 3));
+    }, Maze.stepSpeed * 3));
 };
 
 /**
@@ -852,7 +854,7 @@ Maze.scheduleLook = function(d) {
   var paths = lookIcon.getElementsByTagName('path');
   lookIcon.style.display = 'inline';
   for (var x = 0, path; path = paths[x]; x++) {
-    Maze.scheduleLookStep(path, Maze.STEP_SPEED * x);
+    Maze.scheduleLookStep(path, Maze.stepSpeed * x);
   }
 };
 
@@ -866,7 +868,7 @@ Maze.scheduleLookStep = function(path, delay) {
     path.style.display = 'inline';
     window.setTimeout(function() {
       path.style.display = 'none';
-    }, Maze.STEP_SPEED * 2);
+    }, Maze.stepSpeed * 2);
   }, delay));
 };
 
