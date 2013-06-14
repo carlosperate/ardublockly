@@ -24,13 +24,13 @@
 
 'use strict';
 
-Blockly.Apps = {};
+var BlocklyApps = {};
 
 /**
  * Load the specified language file(s).
  * @param {!Array<string>} languageSrc Array of language files.
  */
-Blockly.Apps.loadLanguageScripts = function(languageSrc) {
+BlocklyApps.loadLanguageScripts = function(languageSrc) {
   for (var x = 0; x < languageSrc.length; x++) {
     var file = languageSrc[x];
     if (file.match(/^(\w+\/)*\w+\.js$/)) {
@@ -47,7 +47,7 @@ Blockly.Apps.loadLanguageScripts = function(languageSrc) {
  * indicating how many more blocks are permitted.  The capacity
  * is retrieved from Blockly.mainWorkspace.remainingCapacity().
  */
-Blockly.Apps.updateCapacity = function() {
+BlocklyApps.updateCapacity = function() {
   var cap = Blockly.mainWorkspace.remainingCapacity();
   var p = document.getElementById('capacity');
   if (cap == Infinity) {
@@ -55,12 +55,12 @@ Blockly.Apps.updateCapacity = function() {
   } else {
     p.style.display = 'inline';
     if (cap == 0) {
-      p.innerHTML = Blockly.Apps.getMsg('capacity0');
+      p.innerHTML = BlocklyApps.getMsg('capacity0');
     } else if (cap == 1) {
-      p.innerHTML = Blockly.Apps.getMsg('capacity1');
+      p.innerHTML = BlocklyApps.getMsg('capacity1');
     } else {
       cap = Number(cap);
-      p.innerHTML = Blockly.Apps.getMsg('capacity2').replace('%1', cap);
+      p.innerHTML = BlocklyApps.getMsg('capacity2').replace('%1', cap);
     }
   }
 };
@@ -71,9 +71,9 @@ Blockly.Apps.updateCapacity = function() {
  * @param {number} level The current level.
  * @param {number} maxLevel The maxmium available level.
  */
-Blockly.Apps.congratulations = function(level, maxLevel) {
+BlocklyApps.congratulations = function(level, maxLevel) {
   if (level < maxLevel) {
-    var proceed = window.confirm(Blockly.Apps.getMsg('nextLevel')
+    var proceed = window.confirm(BlocklyApps.getMsg('nextLevel')
         .replace('%1', level + 1));
     if (proceed) {
       window.location = window.location.protocol + '//' +
@@ -81,7 +81,7 @@ Blockly.Apps.congratulations = function(level, maxLevel) {
           '?level=' + (level + 1);
     }
   } else {
-    window.alert(Blockly.Apps.getMsg('finalLevel'));
+    window.alert(BlocklyApps.getMsg('finalLevel'));
   }
 };
 
@@ -89,7 +89,7 @@ Blockly.Apps.congratulations = function(level, maxLevel) {
  * Highlight the block (or clear highlighting).
  * @param {?string} id ID of block that triggered this action.
  */
-Blockly.Apps.highlight = function(id) {
+BlocklyApps.highlight = function(id) {
   if (id) {
     var m = id.match(/^block_id_(\d+)$/)
     if (m) {
@@ -105,11 +105,11 @@ Blockly.Apps.highlight = function(id) {
  * @param {?string} opt_id ID of loop block to highlight if timeout is reached.
  * @throws {false} Throws an error to terminate the user's program.
  */
-Blockly.Apps.checkTimeout = function(opt_id) {
+BlocklyApps.checkTimeout = function(opt_id) {
   if (opt_id) {
-    Blockly.Apps.log.push([null, opt_id]);
+    BlocklyApps.log.push([null, opt_id]);
   }
-  if (Blockly.Apps.ticks-- < 0) {
+  if (BlocklyApps.ticks-- < 0) {
     // Highlight an infinite loop on death.
     throw false;
   }
@@ -120,7 +120,7 @@ Blockly.Apps.checkTimeout = function(opt_id) {
  * @param {string} code Generated code.
  * @return {string} The code without serial numbers and timeout checks.
  */
-Blockly.Apps.stripCode = function(code) {
+BlocklyApps.stripCode = function(code) {
   // Strip out serial numbers.
   code = code.replace(/(,\s*)?'block_id_\d+'\)/g, ')');
   // Remove timeouts.
@@ -132,9 +132,9 @@ Blockly.Apps.stripCode = function(code) {
 /**
  * Show the user's code in raw JavaScript.
  */
-Blockly.Apps.showCode = function() {
+BlocklyApps.showCode = function() {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
-  code = Blockly.Apps.stripCode(code);
+  code = BlocklyApps.stripCode(code);
   window.alert(code);
 };
 
@@ -144,7 +144,7 @@ Blockly.Apps.showCode = function() {
  * @return {string} The innerHTML of the specified element, or undefined if the
  *     element was not found.
  */
-Blockly.Apps.getMsg = function(key) {
+BlocklyApps.getMsg = function(key) {
   var element = document.getElementById(key);
   if (element) {
     return element.innerHTML;

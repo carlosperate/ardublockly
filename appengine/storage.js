@@ -114,16 +114,16 @@ BlocklyStorage.makeRequest_ = function(url, name, content) {
 BlocklyStorage.handleRequest_ = function() {
   if (BlocklyStorage.httpRequest_.readyState == 4) {
     if (BlocklyStorage.httpRequest_.status != 200) {
-      window.alert(Blockly.Apps.getMsg('httpRequestError') +
+      window.alert(BlocklyApps.getMsg('httpRequestError') +
           '  httpRequest_.status: ' + BlocklyStorage.httpRequest_.status);
     } else {
       var data = BlocklyStorage.httpRequest_.responseText.trim();
       if (BlocklyStorage.httpRequest_.name == 'xml') {
         window.location.hash = data;
-        window.alert(Blockly.Apps.getMsg('linkAlert').replace('%1', window.location.href));
+        window.alert(BlocklyApps.getMsg('linkAlert').replace('%1', window.location.href));
       } else if (BlocklyStorage.httpRequest_.name == 'key') {
         if (!data.length) {
-          window.alert(Blockly.Apps.getMsg('hashError').replace('%1',
+          window.alert(BlocklyApps.getMsg('hashError').replace('%1',
               window.location.hash));
         } else {
           BlocklyStorage.loadXml_(data);
@@ -165,7 +165,7 @@ BlocklyStorage.loadXml_ = function(xml) {
   try {
     xml = Blockly.Xml.textToDom(xml);
   } catch (e) {
-    window.alert(Blockly.Apps.getMsg(xmlError) + '\nxml: ' + xml);
+    window.alert(BlocklyApps.getMsg(xmlError) + '\nxml: ' + xml);
     return;
   }
   // Clear the workspace to avoid merge.
