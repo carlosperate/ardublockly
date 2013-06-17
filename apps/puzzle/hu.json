@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Grin"
+            "Grin",
+            "Tak\u00e1cs Viktor L\u00e1szl\u00f3"
         ]
     },
     "Puzzle.country1": "Ausztr\u00e1lia",
@@ -28,15 +29,15 @@
     "Puzzle.language": "nyelv:",
     "Puzzle.languageChoose": "v\u00e1lassz\u2026",
     "Puzzle.cities": "v\u00e1rosok:",
-    "Puzzle.error0": "T\u00f6k\u00e9letes!\nMinden %1 blokk helyes.",
-    "Puzzle.error1": "Majdnem siker\u00fclt! Egy blokk helytelen.",
-    "Puzzle.error2": "%1 blokk helytelen.",
-    "Puzzle.tryAgain": "A kiemelt blokk helytelen.\nPr\u00f3b\u00e1lkozz tov\u00e1bb!",
-    "Puzzle.fullTitle": "Blokkrejtv\u00e9ny",
-    "Puzzle.title": "Rejtv\u00e9ny",
-    "Puzzle.help": "Seg\u00edts\u00e9g",
+    "Puzzle.error0": "T\u00f6k\u00e9letes!\nMind a %1 blokk a hely\u00e9n van.",
+    "Puzzle.error1": "Majdnem siker\u00fclt! 1 blokk rossz helyre ker\u00fclt.",
+    "Puzzle.error2": "\u03251 blokk rossz helyre ker\u00fclt.",
+    "Puzzle.tryAgain": "A kiemelt blokk nincs a hely\u00e9n.\nPr\u00f3b\u00e1ld \u00fajra",
+    "Puzzle.fullTitle": "Blokk kirak\u00f3s",
+    "Puzzle.title": "Kirak\u00f3s",
+    "Puzzle.help": "Sug\u00f3",
     "Puzzle.checkAnswers": "V\u00e1laszok ellen\u0151rz\u00e9se",
-    "Puzzle.helpText": "Minden orsz\u00e1ghoz (z\u00f6ld sz\u00edn\u0171ek) add hozz\u00e1 a z\u00e1szl\u00f3j\u00e1t, v\u00e1laszd ki a nyelvet amit besz\u00e9lnek \u00e9s k\u00e9sz\u00edts egy tornyot a v\u00e1rosaib\u00f3l.",
+    "Puzzle.helpText": "Minden orsz\u00e1got jelk\u00e9pez\u0151 blokkhoz (z\u00f6ld), kapcsold hozz\u00e1 a z\u00e1szl\u00f3j\u00e1t, v\u00e1laszd ki a nyelvet amit besz\u00e9lnek \u00e9s h\u00fazg\u00e1ld bele a v\u00e1rosait.",
     "Puzzle.helpImage": "help_en.png",
     "Puzzle.helpOk": "Elolvastam"
 }
