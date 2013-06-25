@@ -152,3 +152,25 @@ BlocklyApps.getMsg = function(key) {
     return '[Unknown message: ' +  key + ']';
   }
 };
+
+/**
+ * On touch enabled browsers, add touch-friendly variants of event handlers
+ * for elements such as buttons whose event handlers are specified in the 
+ * markup. For example, ontouchend is treated as equivalent to onclick.
+ */
+Blockly.addTouchEvents = function() {
+  // Do nothing if the browser doesn't support touch.
+  if (!('ontouchstart' in document.documentElement)) {
+    return;
+  }
+  // Treat ontouchend as equivalent to onclick for buttons.
+  var buttons = document.getElementsByTagName('button'); 
+  for (var i = 0, button; button = buttons[i]; i++) {
+    if (!button.ontouchend) { 
+      button.ontouchend = button.onclick;
+    }
+  }
+};
+
+// Add events for touch devices when the window is done loading.
+goog.events.listen(window, 'load', Blockly.addTouchEvents);
