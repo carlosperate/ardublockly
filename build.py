@@ -235,7 +235,12 @@ class Gen_compressed(threading.Thread):
       n = int(name[6:])
       return filenames[n]
 
-    if json_data.has_key('errors'):
+    if json_data.has_key('serverErrors'):
+      errors = json_data['serverErrors']
+      for error in errors:
+        print 'SERVER ERROR: %s' % target_filename
+        print error['error']
+    elif json_data.has_key('errors'):
       errors = json_data['errors']
       for error in errors:
         print('FATAL ERROR')
