@@ -469,37 +469,38 @@ Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Create "get %1"';
 
 // Procedures Blocks.
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_DEFNORETURN_TITLE = 'to';
 Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = '流程';
-Blockly.LANG_PROCEDURES_DEFNORETURN_DO = '執行';
-Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP = 'A procedure with no return value.';
+Blockly.LANG_PROCEDURES_BEFORE_PARAMS = 'with:';
+Blockly.LANG_PROCEDURES_DEFNORETURN_DO = '';
+Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP = 'Creates a function with no output.';
 
 Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+Blockly.LANG_PROCEDURES_DEFRETURN_TITLE = Blockly.LANG_PROCEDURES_DEFNORETURN_TITLE;
 Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE;
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = '回傳';
-Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'A procedure with a return value.';
+Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Creates a function with an output.';
 
 Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning:\n' +
-    'This procedure has\n' +
+    'This function has\n' +
     'duplicate parameters.';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = '呼叫';
-Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE = '流程';
-Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP = 'Call a procedure with no return value.';
+Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP = 'Run the user-defined function "%1".';
 
 Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLRETURN_CALL = Blockly.LANG_PROCEDURES_CALLNORETURN_CALL;
-Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE;
-Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP = 'Call a procedure with a return value.';
+Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP = 'Run the user-defined function "%1" and use its output.';
 
 Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = '參數';
 Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = '變量:';
 
-Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight Procedure';
+Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight procedure definition';
 Blockly.LANG_PROCEDURES_CREATE_DO = 'Create "do %1"';
 
 Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a value.';
 Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Warning:\n' +
     'This block may only be\n' +
-    'used within a procedure.';
+    'used within a new function definition.';

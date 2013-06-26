@@ -32,6 +32,7 @@ Blockly.Language.procedures_defnoreturn = {
     var name = Blockly.Procedures.findLegalName(
         Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE, this);
     this.appendDummyInput()
+        .appendTitle(Blockly.LANG_PROCEDURES_DEFNORETURN_TITLE)
         .appendTitle(new Blockly.FieldTextInput(name,
         Blockly.Procedures.rename), 'NAME')
         .appendTitle('', 'PARAMS');
@@ -58,7 +59,11 @@ Blockly.Language.procedures_defnoreturn = {
       this.setWarningText(null);
     }
     // Merge the arguments into a human-readable list.
-    var paramString = this.arguments_.join(', ');
+    var paramString = '';
+    if (this.arguments_.length) {
+      paramString = Blockly.LANG_PROCEDURES_BEFORE_PARAMS +
+          ' ' + this.arguments_.join(', ');
+    }
     this.setTitleValue(paramString, 'PARAMS');
   },
   mutationToDom: function() {
@@ -193,6 +198,7 @@ Blockly.Language.procedures_defreturn = {
     var name = Blockly.Procedures.findLegalName(
         Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE, this);
     this.appendDummyInput()
+        .appendTitle(Blockly.LANG_PROCEDURES_DEFRETURN_TITLE)
         .appendTitle(new Blockly.FieldTextInput(name,
         Blockly.Procedures.rename), 'NAME')
         .appendTitle('', 'PARAMS');
@@ -264,7 +270,7 @@ Blockly.Language.procedures_callnoreturn = {
     this.setColour(290);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_PROCEDURES_CALLNORETURN_CALL)
-        .appendTitle(Blockly.LANG_PROCEDURES_CALLNORETURN_PROCEDURE, 'NAME');
+        .appendTitle('', 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP);
@@ -278,6 +284,10 @@ Blockly.Language.procedures_callnoreturn = {
   renameProcedure: function(oldName, newName) {
     if (Blockly.Names.equals(oldName, this.getTitleValue('NAME'))) {
       this.setTitleValue(newName, 'NAME');
+      this.setTooltip(
+          (this.outputConnection ? Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP
+           : Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP)
+          .replace('%1', newName));
     }
   },
   setProcedureParameters: function(paramNames, paramIds) {
@@ -371,6 +381,9 @@ Blockly.Language.procedures_callnoreturn = {
     // Restore the name and parameters.
     var name = xmlElement.getAttribute('name');
     this.setTitleValue(name, 'NAME');
+    this.setTooltip(
+        (this.outputConnection ? Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP
+         : Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP).replace('%1', name));
     var def = Blockly.Procedures.getDefinition(name, this.workspace);
     if (def && def.mutator.isVisible()) {
       // Initialize caller with the mutator's IDs.
@@ -417,7 +430,7 @@ Blockly.Language.procedures_callreturn = {
     this.setColour(290);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_CALL)
-        .appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_PROCEDURE, 'NAME');
+        .appendTitle('', 'NAME');
     this.setOutput(true);
     this.setTooltip(Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP);
     this.arguments_ = [];
