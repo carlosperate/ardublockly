@@ -805,6 +805,10 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
  * @private
  */
 Blockly.Block.prototype.bumpNeighbours_ = function() {
+  if (Blockly.Block.dragMode_ != 0) {
+    // Don't bump blocks during a drag.
+    return;
+  }
   var rootBlock = this.getRootBlock();
   // Loop though every connection on this block.
   var myConnections = this.getConnections_(false);
@@ -1477,12 +1481,10 @@ Blockly.Block.prototype.setWarningText = function(text) {
       changedState = true;
     }
   }
-  if (this.rendered) {
+  if (changedState && this.rendered) {
     this.render();
-    if (changedState) {
-      // Adding or removing a warning icon will cause the block to change shape.
-      this.bumpNeighbours_();
-    }
+    // Adding or removing a warning icon will cause the block to change shape.
+    this.bumpNeighbours_();
   }
 };
 

@@ -1,0 +1,22 @@
+{
+    "@metadata": {
+        "author": "Quynh Neutron",
+        "lastupdated": "2013-06-27 11:58:50.295715",
+        "locale": "vi",
+        "messagedocumentation" : "qqq"
+    },
+    "Plane.rows": "Số hàng ghế: %1",
+    "Plane.getRows": "đếm số hàng ghế (%1)",
+    "Plane.rows1": "Hàng hạng nhất: %1",
+    "Plane.getRows1": "số hàng hạng nhất (%1)",
+    "Plane.rows2": "Hàng hạng hai: %1",
+    "Plane.getRows2": "số hàng hạng hai (%1)",
+    "Plane.seats": "Số chỗ ngồi: %1",
+    "Plane.setSeats": "Tính số chỗ ngồi =",
+    "Apps.blocklyMessage": "Blockly",
+    "Plane.plane": "Máy Bay",
+    "Plane.description1": "An airplane has a number of rows of passenger seats.  Each row contains four seats.",
+    "Plane.description2": "Một máy bay có hai ghế trong buồng lái (dành cho phi công trưởng và phi công phụ), và một loạt hàng ghế cho hành khách. Mỗi hàng có bốn ghế (bốn chỗ ngồi).",
+    "Plane.description3": "An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of 1<x id='START_SUP'/>st<x id='END_SUP'/> class and 2<x id='START_SUP'/>nd<x id='END_SUP'/> class passenger seats.  Each 1<x id='START_SUP'/>st<x id='END_SUP'/> class row contains four seats. Each 2<x id='START_SUP'/>nd<x id='END_SUP'/> class row contains five seats.",
+    "Plane.instructions": "Dưới đây hãy tạo công thức tính số chỗ ngồi trên máy bay để nó thay đổi tùy theo số lượng hàng ghế (hình trên)."
+}

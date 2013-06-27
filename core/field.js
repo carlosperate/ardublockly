@@ -157,7 +157,7 @@ Blockly.Field.prototype.getText = function() {
  * @param {?string} text New text.
  */
 Blockly.Field.prototype.setText = function(text) {
-  if (text === null) {
+  if (text === null || text === this.text_) {
     // No change if null.
     return;
   }

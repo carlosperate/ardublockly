@@ -1,0 +1,16 @@
+{
+    "Plane.rows": "Total number of rows of seats on a plane.  %1 is an integer greater or equal to zero.",
+    "Plane.getRows": "Last term of mathematical equation.  E.g. seats = 4 * rows (5).  %1 is an integer greater or equal to zero.",
+    "Plane.rows1": "Total number of rows of first class seats on a plane.  %1 is an integer greater or equal to zero.",
+    "Plane.getRows1": "Last term of mathematical equation.  E.g. seats = 4 * 1st class rows (5).  %1 is an integer greater or equal to zero.",
+    "Plane.rows2": "Total number of rows of second class seats on a plane.  %1 is an integer greater or equal to zero..",
+    "Plane.getRows2": "Last term of mathematical equation.  E.g. seats = 4 * 2nd class rows (5).  %1 is an integer greater or equal to zero.",
+    "Plane.seats": "Total number of seats on a plane.  %1 is an integer greater or equal to zero.",
+    "Plane.setSeats": "First half of mathematical equation.  E.g. seats = 4 * rows",
+    "Apps.blocklyMessage": "The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.",
+    "Plane.plane": "brief title - Specifies that this is Blockly's '''Plane''' tutorial.",
+    "Plane.description1": "description - There is only one type of seat on this plane.",
+    "Plane.description2": "description - There are two types of seats on this plane.",
+    "Plane.description3": "description - There are three types of seats on this plane.",
+    "Plane.instructions": "instructions - The formula is located below this text and he airplane graphic is located above this text.  The number of rows an the graphic may be changed by the user with a slider."
+}

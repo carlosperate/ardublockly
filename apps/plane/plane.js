@@ -23,37 +23,58 @@
  */
 'use strict';
 
-var rows1st = 0;
-var rows2nd = 0;
-var SVG = document.getElementById('plane');
+/**
+ * Create a namespace for the application.
+ */
+var Plane = {};
+
+// Supported languages.
+BlocklyApps.LANGUAGES = {
+  // Format: ['Language name', 'direction', 'XX_compressed.js']
+  en: ['English', 'ltr', 'en_compressed.js'],
+  hu: ['Magyar', 'ltr', 'en_compressed.js'],
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js']};
+BlocklyApps.LANG = BlocklyApps.getLang();
+
+document.write('<script type="text/javascript" src="../' +
+               BlocklyApps.LANG + '.js"></script>\n');
+document.write('<script type="text/javascript" src="' +
+               BlocklyApps.LANG + '.js"></script>\n');
+
+Plane.MAX_LEVEL = 3;
+Plane.LEVEL = BlocklyApps.getNumberParamFromUrl('level', 1, Plane.MAX_LEVEL);
+
+
+Plane.rows1st = 0;
+Plane.rows2nd = 0;
 
 /**
  * Redraw the rows when the slider has moved.
  * @param {number} value New slider position.
  */
-function sliderChange(value) {
+Plane.sliderChange = function(value) {
   var newRows = Math.round((1 - value) * 410 / 20);
-  parent.redraw(newRows);
-}
+  Plane.redraw(newRows);
+};
 
 /**
  * Change the text of a label.
  * @param {string} id ID of element to change.
  * @param {string} text New text.
  */
-function setText(id, text) {
+Plane.setText = function(id, text) {
   var el = document.getElementById(id);
   while (el.firstChild) {
     el.removeChild(el.firstChild);
   }
   el.appendChild(document.createTextNode(text));
-}
+};
 
 /**
  * Display a checkmark or cross next to the answer.
  * @param {?boolean} ok True for checkmark, false for cross, null for nothing.
  */
-function setCorrect(ok) {
+Plane.setCorrect = function(ok) {
   var yes = document.getElementById('seatYes');
   var no = document.getElementById('seatNo');
   yes.style.display = 'none';
@@ -63,24 +84,193 @@ function setCorrect(ok) {
   } else if (ok === false) {
     no.style.display = 'block';
   }
-}
+};
 
-// Initialize the slider.
-var rowSlider = new Slider(60, 330, 425, SVG, sliderChange);
-rowSlider.setValue(0.225);
+/**
+ * 'Set seat' block.
+ * @type Blockly.Block
+ */
+Plane.seatsBlock = null;
 
-if (parent.planeLoaded) {
-  // Give the parent page a handle to this window.
-  parent.planeLoaded(window);
-} else {
-  // Attempt to diagnose the problem.
-  var msg = 'Error: Unable to communicate between HTML & SVG.\n\n';
-  if (window.location.protocol == 'file:') {
-    msg += 'This may be due to a security restriction preventing\n' +
-        'access when using the file:// protocol.\n' +
-        'http://code.google.com/p/chromium/issues/detail?id=47416';
+/**
+ * Initialize Blockly and the SVG.
+ */
+Plane.init = function() {
+  document.title = document.getElementById('title').textContent;
+  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  document.head.parentElement.setAttribute('dir',
+      BlocklyApps.LANGUAGES[BlocklyApps.LANG][1]);
+  document.head.parentElement.setAttribute('lang', BlocklyApps.LANG);
+
+  // Populate the language selection menu.
+  var languageMenu = document.getElementById('languageMenu');
+  languageMenu.options.length = 0;
+  for (var lang in BlocklyApps.LANGUAGES) {
+    var option = new Option(BlocklyApps.LANGUAGES[lang][0], lang);
+    if (lang == BlocklyApps.LANG) {
+      option.selected = true;
+    }
+    languageMenu.options.add(option);
   }
-  alert(msg);
-}
-// Draw five 1st class rows.
-parent.redraw(5);
+  // HACK: Firefox v21 does not allow the setting of style.float.
+  // Use setAttribute instead.
+  //languageMenu.parentElement.style.display = 'block';
+  //languageMenu.parentElement.style.float = rtl ? 'left' : 'right';
+  languageMenu.parentElement.setAttribute('style',
+      'display: block; float: ' + (rtl ? 'left' : 'right') + ';');
+
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       rtl: rtl,
+       toolbox: toolbox});
+
+  if (window.sessionStorage.loadOnceBlocks) {
+    var text = window.sessionStorage.loadOnceBlocks;
+    delete window.sessionStorage.loadOnceBlocks;
+    var xml = Blockly.Xml.textToDom(text);
+  } else {
+    // Load the editor with a starting block.
+    var xml = Blockly.Xml.textToDom(
+        '<xml><block type="plane_set_seats" deletable="false" x="70" y="70">' +
+        '</block></xml>');
+  }
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  Plane.seatsBlock = Blockly.mainWorkspace.getTopBlocks(false)[0];
+
+  Blockly.addChangeListener(Plane.recalculate);
+
+  //window.onbeforeunload = function() {
+  //  return 'Leaving this page will result in the loss of your work.';
+  //};
+
+  // Initialize the slider.
+  var svg = document.getElementById('plane');
+  Plane.rowSlider = new Slider(60, 330, 425, svg, Plane.sliderChange);
+  Plane.rowSlider.setValue(0.225);
+
+  // Draw five 1st class rows.
+  Plane.redraw(5);
+};
+
+window.addEventListener('load', Plane.init);
+
+/**
+ * Save the blocks and reload with a different language.
+ */
+Plane.changeLanguage = function() {
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var text = Blockly.Xml.domToText(xml);
+  window.sessionStorage.loadOnceBlocks = text;
+  var languageMenu = document.getElementById('languageMenu');
+  var newLang = languageMenu.options[languageMenu.selectedIndex].value;
+  window.location = window.location.protocol + '//' +
+      window.location.host + window.location.pathname +
+      '?lang=' + newLang + '&level=' + Plane.LEVEL;
+};
+
+/**
+ * Use the blocks to calculate the number of seats.
+ * Display the calculated number.
+ */
+Plane.recalculate = function() {
+  var seats = NaN;
+  var generator = Blockly.Generator.get('JavaScript');
+  generator.init();
+  var code = generator.blockToCode(Plane.seatsBlock);
+  try {
+    seats = eval(code);
+  } catch (e) {
+    // Allow seats to remain NaN.
+  }
+  Plane.setText('seatText',
+      BlocklyApps.getMsg('seats').replace('%1', isNaN(seats) ? '?' : seats));
+  Plane.setCorrect(isNaN(seats) ? null : (Plane.answer() == seats));
+
+  // Update blocks to show values.
+  function updateBlocks(blocks) {
+    for (var i = 0, block; block = blocks[i]; i++) {
+      block.customUpdate && block.customUpdate();
+    }
+  }
+  updateBlocks(Blockly.mainWorkspace.getAllBlocks());
+  updateBlocks(Blockly.mainWorkspace.flyout_.workspace_.getAllBlocks());
+};
+
+/**
+ * Calculate the correct answer.
+ * @return {number} Number of seats.
+ */
+Plane.answer = function() {
+  if (Plane.LEVEL == 1) {
+    return Plane.rows1st * 4;
+  } else if (Plane.LEVEL == 2) {
+    return 2 + (Plane.rows1st * 4);
+  } else if (Plane.LEVEL == 3) {
+    return 2 + (Plane.rows1st * 4) + (Plane.rows2nd * 5);
+  }
+  throw 'Unknown level.';
+};
+
+/**
+ * Redraw the SVG to show a new number of rows.
+ * @param {number} newRows
+ */
+Plane.redraw = function(newRows) {
+  var rows1st = Plane.rows1st;
+  var rows2nd = Plane.rows2nd;
+  var svg = document.getElementById('plane');
+  if (newRows != rows1st) {
+    while (newRows < rows1st) {
+      var row = document.getElementById('row1st' + rows1st);
+      row.parentNode.removeChild(row);
+      rows1st--;
+    }
+    while (newRows > rows1st) {
+      rows1st++;
+      var row = document.createElementNS('http://www.w3.org/2000/svg',
+                                                  'use');
+      row.setAttribute('id', 'row1st' + rows1st);
+      // Row of 4 seats.
+      row.setAttribute('x', (rows1st - 1) * 20);
+      row.setAttributeNS('http://www.w3.org/1999/xlink',
+          'xlink:href', '#row1st');
+      svg.appendChild(row);
+    }
+
+    if (Plane.LEVEL == 3) {
+      newRows = Math.floor((21 - newRows) * 1.11);
+      while (newRows < rows2nd) {
+        var row = document.getElementById('row2nd' + rows2nd);
+        row.parentNode.removeChild(row);
+        rows2nd--;
+      }
+      while (newRows > rows2nd) {
+        rows2nd++;
+        var row = document.createElementNS('http://www.w3.org/2000/svg',
+                                                    'use');
+        row.setAttribute('id', 'row2nd' + rows2nd);
+        row.setAttribute('x', 400 - (rows2nd - 1) * 18);
+        row.setAttributeNS('http://www.w3.org/1999/xlink',
+            'xlink:href', '#row2nd');
+        svg.appendChild(row);
+      }
+    }
+
+    if (Plane.LEVEL < 3) {
+      Plane.setText('row1stText',
+          BlocklyApps.getMsg('rows').replace('%1', rows1st));
+    } else {
+      Plane.setText('row1stText',
+          BlocklyApps.getMsg('rows1').replace('%1', rows1st));
+      Plane.setText('row2ndText',
+          BlocklyApps.getMsg('rows2').replace('%1', rows2nd));
+    }
+
+    Plane.rows1st = rows1st;
+    Plane.rows2nd = rows2nd;
+    Plane.recalculate();
+  }
+};
