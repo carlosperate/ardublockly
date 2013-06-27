@@ -50,7 +50,6 @@ Convert.json = {
   "Maze.nextLevel": "Congratulations! Are you ready to proceed to level %1?",
   "Maze.finalLevel": "Congratulations! You have solved the final level.",
   "Maze.title": "Maze",
-  "Maze.fullTitle": "Blockly Maze",
   "Maze.oneTopBlock": "On this level, you need to stack together all of the blocks in the white workspace."
 };
 

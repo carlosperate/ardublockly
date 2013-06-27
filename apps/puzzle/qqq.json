@@ -32,7 +32,6 @@
     "Puzzle.error1": "an encouraging error message displayed if the user placed all blocks except 1 correctly.\n\nIf the number of incorrect blocks is 2 or more, {{msg-blockly|Puzzle-Puzzle.error2}} is used instead.",
     "Puzzle.error2": "an error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one.\n\nIf the number of incorrect blocks is 1, {{msg-blockly|Puzzle-Puzzle.error1}} is used.",
     "Puzzle.tryAgain": "A message indicating that a visually distinguished block is incorrect and that the user should try to fix it.\n\nThe use of a new line character is optional.",
-    "Puzzle.fullTitle": "The full title for the page.  'Blockly' can be left unchanged or can be transliterated.",
     "Puzzle.title": "A brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle.",
     "Puzzle.help": "The label on a button the user can press for help.\n{{Identical|Help}}",
     "Puzzle.checkAnswers": "A label on a button the user can press to check his/her answers.",

@@ -40,7 +40,23 @@ Blockly.Language.country = {
     this.appendStatementInput('CITIES')
         .appendTitle(MSG.cities);
   },
+  mutationToDom: function() {
+    // Save the country number.
+    var container = document.createElement('mutation');
+    container.setAttribute('country', this.country);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the country number.
+    this.populate(parseInt(xmlElement.getAttribute('country'), 10));
+  },
   country: 0,
+  populate: function(n) {
+    this.country = n;
+    // Set the country name.
+    this.setTitleValue(MSG['country' + n], 'NAME');
+    this.helpUrl = MSG['country' + n + 'HelpUrl'];
+  },
   isCorrect: function() {
     return this.getTitleValue('LANG') == this.country;
   }
@@ -54,7 +70,18 @@ Blockly.Language.flag = {
     this.setOutput(true);
     this.setTooltip('');
   },
+  mutationToDom: Blockly.Language.country.mutationToDom,
+  domToMutation: Blockly.Language.country.domToMutation,
   country: 0,
+  populate: function(n) {
+    this.country = n;
+    // Set the flag image.
+    var flag = MSG['country' + n + 'Flag'];
+    var flagHeight = MSG['country' + n + 'FlagHeight'];
+    var flagWidth = MSG['country' + n + 'FlagWidth'];
+    this.getInput('IMG')
+        .appendTitle(new Blockly.FieldImage(flag, flagWidth, flagHeight));
+  },
   isCorrect: function() {
     var parent = this.getParent();
     return parent && (parent.country == this.country);
@@ -69,7 +96,26 @@ Blockly.Language.city = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
   },
+  mutationToDom: function() {
+    // Save the country and city numbers.
+    var container = document.createElement('mutation');
+    container.setAttribute('country', this.country);
+    container.setAttribute('city', this.city);
+    return container;
+  },
+  domToMutation: function(xmlElement) {
+    // Restore the country and city numbers.
+    this.populate(parseInt(xmlElement.getAttribute('country'), 10),
+                  parseInt(xmlElement.getAttribute('city'), 10));
+  },
   country: 0,
+  city: 0,
+  populate: function(n, m) {
+    this.country = n;
+    this.city = m;
+    // Set the city name.
+    this.setTitleValue(MSG['country' + n + 'City' + m], 'NAME');
+  },
   isCorrect: function() {
     var parent = this.getSurroundParent();
     return parent && (parent.country == this.country);

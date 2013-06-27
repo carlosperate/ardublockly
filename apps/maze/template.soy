@@ -28,7 +28,7 @@
  * Web page structure.
  */
 {template .start}
-  <div id="MSG" style="display:none">
+  <div id="MSG" style="display: none">
     <span id="moveForward">{msg meaning="Maze.moveForward" desc="verb - imperative or infinitive for a person moving (walking) in the direction he/she is facing." }move forward{/msg}</span>
     <span id="turnLeft">{msg meaning="Maze.turnLeft" desc="verb - imperative or infinitive for a person turning his head and body one quarter rotation counter-clockwise.  Prefer a translation that has text in common with the translation of 'turn right'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn left{/msg}</span>
     <span id="turnRight">{msg meaning="Maze.turnRight" desc="verb - imperative or infinitive for a person turning his head and body one quarter rotation clockwise.  Prefer a translation that has text in common with the translation of 'turn left'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn right{/msg}</span>
@@ -50,24 +50,30 @@
     <span id="finalLevel">{msg meaning="Maze.finalLevel" desc="alert - This is displayed when the user solves the most difficult level."}Congratulations! You have solved the final level.{/msg}</span>
     <span id="oneTopBlock">{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</span>
   </div>
+
   <table width="100%" height="100%">
     <tr height="50">
       <td colspan=2>
-        <h1><a href="../index.html"><span id="blocklyName">Blockly</span></a> &gt; <span id="maze">{msg meaning="Maze.maze" desc="brief title - Specifies that this is Blockly's '''Maze''' tutorial."}Maze{/msg}</span>
-            &nbsp;
+        <div style="display: none;"><select id="languageMenu" onchange="Maze.changeLanguage();"></select></div>
+        <h1><span id="title"><a href="../index.html"><span id="blocklyName">Blockly</span></a>
+            {sp}:{sp}
+            {msg meaning="Maze.maze" desc="brief title - Specifies that this is Blockly's '''Maze''' tutorial."}
+              Maze
+            {/msg}</span>
+            {sp}&nbsp;{sp}
           {for $i in range(1, 11)}
             {sp}
             {if $i == $ij.level}
               <span class="tab" id="selected">{$i}</span>
             {else}
               {if $i < $ij.level}
-                <a class="tab previous" href="?level={$i}">{$i}</a>
+                <a class="tab previous" href="?lang={$ij.lang}&level={$i}">{$i}</a>
               {else}
-                <a class="tab" href="?level={$i}">{$i}</a>
+                <a class="tab" href="?lang={$ij.lang}&level={$i}">{$i}</a>
               {/if}
             {/if}
           {/for}
-          </h1>
+        </h1>
       </td>
     </tr>
     <tr>
@@ -77,7 +83,7 @@
             <div id="hint">
             {switch $ij.level}
               {case 1}
-                {msg meaning="Maze.instructions1" desc="instructions - the word 'program' refers to a computer program, and thewords for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead."}A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
+                {msg meaning="Maze.instructions1" desc="instructions - the word 'program' refers to a computer program, and the words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead."}A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
               {case 2}
                 {msg meaning="Maze.instructions2" desc="instructions - the word 'steps' refers to instructions in a computer program; 'path' refers to the path through a maze.  See previous description for tense."}What is the sequence of steps to follow this path?{/msg}
               {case 3}
@@ -141,11 +147,8 @@
 
       <td valign="top">
         <script type="text/javascript" src="../../blockly_compressed.js"></script>
-        <script type="text/javascript" src="../../generators/javascript.js"></script>
-        <script type="text/javascript" src="../common.js"></script>
-        <script type="text/javascript">
-          BlocklyApps.loadLanguageScripts(languageSrc);
-        </script>
+        <script type="text/javascript" src="../../javascript_compressed.js"></script>
+        <script type="text/javascript" src="../../{$ij.langSrc}"></script>
         <script type="text/javascript" src="blocks.js"></script>
         {call .toolbox /}
         <div id="blockly"></div>

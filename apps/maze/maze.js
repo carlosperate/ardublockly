@@ -28,30 +28,41 @@
  */
 var Maze = {};
 
-/**
- * Extracts a numeric parameter from the URL.
- * If the parameter is absent or less than min_value, min_value is
- * returned.  If it is greater than max_value, max_value is returned.
- *
- * @param {string} name the name of the parameter.
- * @param {number} min_value the minimum legal value.
- * @param {number} max_value the maximum legal value.
- * @return {number} a number in the range [min_value, max_value]
- */
-Maze.getNumberFromUrl = function(name, min_value, max_value) {
-  var val = window.location.search.match(new RegExp('[?&]' + name + '=(\\d+)'));
-  val = val ? val[1] : min_value;
-  val = Math.min(Math.max(min_value, val), max_value);
-  return val;
-};
+// Supported languages.
+BlocklyApps.LANGUAGES = {
+  // Format: ['Language name', 'direction', 'XX_compressed.js']
+  ca: ['Català', 'ltr', 'en_compressed.js'],
+  cs: ['Čeština', 'ltr', 'en_compressed.js'],
+  sr: ['српски', 'ltr', 'en_compressed.js'],
+  da: ['Dansk', 'ltr', 'en_compressed.js'],
+  de: ['Deutsch', 'ltr', 'de_compressed.js'],
+  en: ['English', 'ltr', 'en_compressed.js'],
+  es: ['Español', 'ltr', 'en_compressed.js'],
+  eu: ['Euskara', 'ltr', 'en_compressed.js'],
+  el: ['Eλληνικά', 'ltr', 'en_compressed.js'],
+  fr: ['Français', 'ltr', 'en_compressed.js'],
+  it: ['Italiano', 'ltr', 'en_compressed.js'],
+  sw: ['Kishwahili', 'ltr', 'en_compressed.js'],
+  lv: ['Latviešu', 'ltr', 'en_compressed.js'],
+  hu: ['Magyar', 'ltr', 'en_compressed.js'],
+  nl: ['Nederlands', 'ltr', 'en_compressed.js'],
+  pl: ['Polski', 'ltr', 'en_compressed.js'],
+  pt: ['Português', 'ltr', 'en_compressed.js'],
+  ru: ['русский язык', 'ltr', 'en_compressed.js'],
+  tr: ['Türkçe', 'ltr', 'en_compressed.js'],
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
+  th: ['ภาษาไทย', 'ltr', 'en_compressed.js']};
+BlocklyApps.LANG = BlocklyApps.getLang();
+
+document.write('<script type="text/javascript" src="../' +
+               BlocklyApps.LANG + '.js"></script>\n');
+document.write('<script type="text/javascript" src="' +
+               BlocklyApps.LANG + '.js"></script>\n');
 
 Maze.MAX_LEVEL = 10;
-Maze.LEVEL = Maze.getNumberFromUrl('level', 1, Maze.MAX_LEVEL);
-document.write(mazepage.start({}, null, {level: Maze.LEVEL}));
+Maze.LEVEL = BlocklyApps.getNumberParamFromUrl('level', 1, Maze.MAX_LEVEL);
 var maxBlocks = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][Maze.LEVEL];
-
-document.write(BlocklyCommonMessages.messages(null, null));
 
 /**
  * Milliseconds between each animation frame.
@@ -375,13 +386,33 @@ Maze.drawMap = function() {
  * Initialize Blockly and the maze.  Called on page load.
  */
 Maze.init = function() {
-  document.title = BlocklyApps.getMsg('blocklyMessage') +
-      ' : ' + BlocklyApps.getMsg('maze');
-  document.getElementById('blocklyName').innerHTML =
+  document.getElementById('blocklyName').textContent =
       BlocklyApps.getMsg('blocklyMessage');
+  document.title = document.getElementById('title').textContent;
   // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
   // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
-  var rtl = document.body.parentNode.dir == 'rtl';
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  document.head.parentElement.setAttribute('dir',
+      BlocklyApps.LANGUAGES[BlocklyApps.LANG][1]);
+  document.head.parentElement.setAttribute('lang', BlocklyApps.LANG);
+
+  // Populate the language selection menu.
+  var languageMenu = document.getElementById('languageMenu');
+  languageMenu.options.length = 0;
+  for (var lang in BlocklyApps.LANGUAGES) {
+    var option = new Option(BlocklyApps.LANGUAGES[lang][0], lang);
+    if (lang == BlocklyApps.LANG) {
+      option.selected = true;
+    }
+    languageMenu.options.add(option);
+  }
+  // HACK: Firefox v21 does not allow the setting of style.float.
+  // Use setAttribute instead.
+  //languageMenu.parentElement.style.display = 'block';
+  //languageMenu.parentElement.style.float = rtl ? 'left' : 'right';
+  languageMenu.parentElement.setAttribute('style',
+      'display: block; float: ' + (rtl ? 'left' : 'right') + ';');
+
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
@@ -414,17 +445,22 @@ Maze.init = function() {
   // An href with #key trigers an AJAX call to retrieve saved blocks.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+  } else if (window.sessionStorage.loadOnceBlocks) {
+    var text = window.sessionStorage.loadOnceBlocks;
+    delete window.sessionStorage.loadOnceBlocks;
+    var xml = Blockly.Xml.textToDom(text);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   } else {
     // Load the editor with a starting block.
     var xml = Blockly.Xml.textToDom(
         '<xml>' +
         '  <block type="maze_moveForward" x="70" y="70"></block>' +
         '</xml>');
-    // Configure any level-specific buttons.
-    if (Maze.LEVEL > 9) {
-      document.getElementById('randomizeButton').style.display = 'inline';
-    }
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  }
+  // Configure any level-specific buttons.
+  if (Maze.LEVEL > 9) {
+    document.getElementById('randomizeButton').style.display = 'inline';
   }
 
   // Locate the start and finish squares.
@@ -443,6 +479,20 @@ Maze.init = function() {
 };
 
 window.addEventListener('load', Maze.init);
+
+/**
+ * Save the blocks and reload with a different language.
+ */
+Maze.changeLanguage = function() {
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var text = Blockly.Xml.domToText(xml);
+  window.sessionStorage.loadOnceBlocks = text;
+  var languageMenu = document.getElementById('languageMenu');
+  var newLang = languageMenu.options[languageMenu.selectedIndex].value;
+  window.location = window.location.protocol + '//' +
+      window.location.host + window.location.pathname +
+      '?lang=' + newLang + '&level=' + Maze.LEVEL;
+};
 
 /**
  * Reset the maze to the start position and kill any pending animation tasks.

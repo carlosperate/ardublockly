@@ -12,18 +12,10 @@ h1 {
 html[dir="RTL"] .farSide {
   text-align: left;
 }
-html[dir="RTL"] .ltrShow {
-  display: none;
-}
-html[dir="LTR"] .rtlShow {
-  display: none;
-}
 
 /* Buttons */
 button {
-  margin: 5px;
-  margin-right: 12px;
-  margin-left: 0;
+  margin: 5px 0;
   padding: 10px;
   font-size: large;
   border-radius: 5px;

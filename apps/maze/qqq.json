@@ -20,7 +20,7 @@
     "Maze.finalLevel": "alert - This is displayed when the user solves the most difficult level.",
     "Maze.oneTopBlock": "alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack.",
     "Maze.maze": "brief title - Specifies that this is Blockly's '''Maze''' tutorial.",
-    "Maze.instructions1": "instructions - the word 'program' refers to a computer program, and thewords for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.",
+    "Maze.instructions1": "instructions - the word 'program' refers to a computer program, and the words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.",
     "Maze.instructions2": "instructions - the word 'steps' refers to instructions in a computer program; 'path' refers to the path through a maze.  See previous description for tense.",
     "Maze.instructions3": "instructions - 'path' refers to a path through a maze, and 'block' refers to a child's building block.",
     "Maze.instructions4": "instructions - the goal is reaching the end point in a maze; 'block' refers to a child's building block.",

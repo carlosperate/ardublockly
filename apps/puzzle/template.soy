@@ -1,15 +1,34 @@
 {namespace puzzlepage}
 
 /**
- * This is a Closure Template.  Build with:
+ * This is a Closure Template.  Build multilingually:
+ *
+ * # Create en.js.
  * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
+ *
+ * # Extract messages from template.soy.
+ * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
+ *
+ * # Create en.json, qqq.json.
+ * ../../i18n/xliff_to_json.py extracted_msgs.xlf
+ *
+ * Once translations have been made into <LANG>.json:
+ *
+ * # Create *.xlf.  By default, qqq.json and keys.json are skipped.
+ * ../../i18n/json_to_xliff.py *.json
+ *
+ * # Create .js files by running script recommended by previous command.  It will
+ * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
+ *
+ * # The .xlf files may be deleted.  They should not be checked in.
+ * rm *.xlf
  */
 
 /**
  * Web page structure.
  */
 {template .start}
-  <div id="MSG" style="display:none">
+  <div id="MSG" style="display: none">
     <span id="country1">{{msg meaning="Puzzle.country1" desc="The name of the country Australia\n{lb}{lb}Identical|Australia{rb}{rb}"}}Australia{{/msg}}</span>
     <span id="country1Flag">flag_au.png</span>
     <span id="country1FlagHeight">50</span>
@@ -124,7 +143,7 @@
     </span>
     <span id="flag">
       {msg meaning="Puzzle.flag" desc="The official flag (noun) representing a country."}
-        flag
+        flag:
       {/msg}
     </span>
     <span id="language">
@@ -168,34 +187,28 @@
          The highlighted block is not correct.\nKeep trying.
        {/msg}
     </span>
-    <span id="fullTitle">
-      {msg meaning="Puzzle.fullTitle"
-           desc="The full title for the page.  'Blockly' can be left unchanged or can be transliterated."}
-        Blockly Puzzle
-      {/msg}
-    </span>
   </div>
 
   <table id="header" width="100%">
     <tr>
       <td valign="bottom">
-        <h1><a href="http://blockly.googlecode.com/">Blockly</a>
-            <span class="ltrShow"> &gt; </span><span class="rtlShow"> &lt; </span>
-            <a href="../index.html">Apps</a>
-            <span class="ltrShow"> &gt; </span><span class="rtlShow"> &lt; </span>
-            {msg meaning="Puzzle.title"
-                 desc="A brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle."}
+        <h1><span id="title"><a href="../index.html"><span id="blocklyName">Blockly</span></a>
+            {sp}:{sp}
+            {msg meaning="Puzzle.title" desc="A brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle."}
               Puzzle
-            {/msg}
+            {/msg}</span>
         </h1>
       </td>
       <td class="farSide">
+        <select id="languageMenu" onchange="Puzzle.changeLanguage();"></select>
+        &nbsp; &nbsp;
         <button id="helpButton" onclick="Puzzle.showHelp();">
           {{msg meaning="Puzzle.help"
                desc="The label on a button the user can press for help.\n{lb}{lb}Identical|Help{rb}{rb}"}}
             Help
           {{/msg}}
         </button>
+        &nbsp; &nbsp;
         <button id="checkButton" class="launch" onclick="Puzzle.checkAnswers();">
           {msg meaning="Puzzle.checkAnswers"
                desc="A label on a button the user can press to check his/her answers."}
@@ -206,6 +219,8 @@
     </tr>
   </table>
 
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../{$ij.langSrc}"></script>
   <script type="text/javascript" src="blocks.js"></script>
   <div id="blockly"></div>
 
