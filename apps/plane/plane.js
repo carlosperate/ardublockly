@@ -87,12 +87,6 @@ Plane.setCorrect = function(ok) {
 };
 
 /**
- * 'Set seat' block.
- * @type Blockly.Block
- */
-Plane.seatsBlock = null;
-
-/**
  * Initialize Blockly and the SVG.
  */
 Plane.init = function() {
@@ -138,7 +132,6 @@ Plane.init = function() {
         '</block></xml>');
   }
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-  Plane.seatsBlock = Blockly.mainWorkspace.getTopBlocks(false)[0];
 
   Blockly.addChangeListener(Plane.recalculate);
 
@@ -176,10 +169,18 @@ Plane.changeLanguage = function() {
  * Display the calculated number.
  */
 Plane.recalculate = function() {
+  // Find the 'set' block and use it as the formula root.
+  var rootBlock = null;
+  var blocks = Blockly.mainWorkspace.getTopBlocks(false);
+  for (var i = 0, block; block = blocks[i]; i++) {
+    if (block.type == 'plane_set_seats') {
+      rootBlock = block;
+    }
+  }
   var seats = NaN;
   var generator = Blockly.Generator.get('JavaScript');
   generator.init();
-  var code = generator.blockToCode(Plane.seatsBlock);
+  var code = generator.blockToCode(rootBlock);
   try {
     seats = eval(code);
   } catch (e) {
