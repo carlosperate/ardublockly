@@ -57,6 +57,13 @@ Blockly.parseOptions_ = function(options) {
   var editable = !options['readOnly'];
   if (editable) {
     var tree = options['toolbox'] || '<xml />';
+    if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
+      // In this case the tree will not have been properly built by the
+      // browser. The HTML will be contained in the element, but it will
+      // not have the proper DOM structure since the browser doesn't support
+      // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
+      tree = tree.outerHTML;
+    }
     if (typeof tree == 'string') {
       tree = Blockly.Xml.textToDom(tree);
     }
