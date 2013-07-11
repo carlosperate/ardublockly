@@ -253,6 +253,12 @@ Blockly.createSvgElement = function(name, attrs, opt_parent) {
   for (var key in attrs) {
     e.setAttribute(key, attrs[key]);
   }
+  // IE defines a unique attribute "runtimeStyle", it is NOT applied to
+  // elements created with createElementNS. However, Closure checks for IE
+  // and assumes the presence of the attribute and crashes.
+  if (document.body.runtimeStyle) {  // Indicates presence of IE-only attr.
+    e.runtimeStyle = e.currentStyle = e.style;
+  }
   if (opt_parent) {
     opt_parent.appendChild(e);
   }
