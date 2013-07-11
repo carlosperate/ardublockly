@@ -568,10 +568,6 @@ Blockly.getMainWorkspaceMetrics = function() {
     // Firefox has trouble with hidden elements (Bug 528969).
     return null;
   }
-  if (blockBox.width == -Infinity && blockBox.height == -Infinity) {
-    // Opera has trouble with bounding boxes around empty objects.
-    blockBox = {width: 0, height: 0, x: 0, y: 0};
-  }
   // Add a border around the content that is at least half a screenful wide.
   var leftEdge = Math.min(blockBox.x - viewWidth / 2,
                           blockBox.x + blockBox.width - viewWidth);
