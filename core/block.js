@@ -350,7 +350,7 @@ Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
       var xy = Blockly.getRelativeXY_(element);
       x += xy.x;
       y += xy.y;
-      element = element.parentElement;
+      element = element.parentNode;
     } while (element && element != this.workspace.getCanvas());
   }
   return {x: x, y: y};
