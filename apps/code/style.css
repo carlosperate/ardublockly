@@ -21,6 +21,9 @@
  * @fileoverview Style sheet for Blockly code demo (langaue-neutral).
  * @author fraser@google.com (Neil Fraser)
  */
+body, html {
+  height: 100%;
+}
 body {
   background-color: white;
   font-family: sans-serif;
