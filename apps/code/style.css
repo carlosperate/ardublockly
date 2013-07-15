@@ -132,21 +132,17 @@ button.disabled {
 }
 
 /* Sprited icons. */
-.trash {
+.icon21 {
   height: 21px;
   width: 21px;
   background-image: url(icons.png);
+}
+.trash {
   background-position: 0px 0px;
 }
 .link {
-  height: 21px;
-  width: 21px;
-  background-image: url(icons.png);
   background-position: -21px 0px;
 }
 .run {
-  height: 21px;
-  width: 21px;
-  background-image: url(icons.png);
-  background-position: -63px -21px;
+  background-position: -42px 0px;
 }

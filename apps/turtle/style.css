@@ -50,6 +50,15 @@ button.launch {
   border: 1px solid #d43;
   background-color: #d43;
   color: white;
+  /* Can't use "text-align: start" due to IE. */
+  text-align: left;
+}
+html[dir="RTL"] button.launch {
+  text-align: right;
+}
+button.launch>img {
+  opacity: 1;
+  vertical-align: text-bottom;
 }
 button:active {
   border: 1px solid blue !important;
@@ -100,21 +109,23 @@ button.disabled {
 }
 
 /* Sprited icons. */
-.code {
+.icon21 {
   height: 21px;
   width: 21px;
   background-image: url(icons.png);
-  background-position: -42px 0px;
 }
-.img {
-  height: 21px;
-  width: 21px;
-  background-image: url(icons.png);
-  background-position: -84px 0px;
+.code {
+  background-position: -21px 0px;
 }
 .link {
-  height: 21px;
-  width: 21px;
-  background-image: url(icons.png);
-  background-position: -21px 0px;
+  background-position: 0px 0px;
+}
+.img {
+  background-position: -42px 0px;
+}
+.run {
+  background-position: -63px -21px;
+}
+.stop {
+  background-position: -63px 0px;
 }

@@ -201,8 +201,14 @@ Turtle.display = function() {
  * Click the run button.  Start the program.
  */
 Turtle.runButtonClick = function() {
-  document.getElementById('runButton').style.display = 'none';
-  document.getElementById('resetButton').style.display = 'inline';
+  var runButton = document.getElementById('runButton');
+  var resetButton = document.getElementById('resetButton');
+  // Ensure that Reset button is at least as wide as Run button.
+  if (!resetButton.style.minWidth) {
+    resetButton.style.minWidth = runButton.offsetWidth + 'px';
+  }
+  runButton.style.display = 'none';
+  resetButton.style.display = 'inline';
   document.getElementById('spinner').style.visibility = 'visible';
   Blockly.mainWorkspace.traceOn(true);
   Turtle.execute();
