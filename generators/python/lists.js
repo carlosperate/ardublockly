@@ -169,7 +169,6 @@ Blockly.Python.lists_getIndex = function() {
       var functionName = Blockly.Python.provideFunction_(
           'lists_remove_random_item',
           ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
-           'def ' + functionName + '(myList):',
            '  x = int(random.random() * len(myList))',
            '  return myList.pop(x)']);
       code = functionName + '(' + list + ')';

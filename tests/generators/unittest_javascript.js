@@ -80,6 +80,34 @@ Blockly.JavaScript.unittest_main = function() {
   return code;
 };
 
+// Code by Tomáš Zato on Stack Overflow [overflow.com/questions/7837456]
+// with minor changes for style.
+Array.prototype.equals = function(array) {
+  // Is it an array?
+  if (!array || !(array instanceof Array)) {
+    return false;
+  }
+
+  // Are they the same length?
+  if (this.length != array.length) {
+    return false;
+  }
+
+  for (var i = 0; i < this.length; i++) {
+    // Check for nested arrays.
+    if (this[i] instanceof Array && array[i] instanceof Array) {
+      // Recurse into the nested arrays.
+      if (!this[i].equals(array[i])) {
+        return false;
+      }
+    }
+    else if (this[i] !== array[i]) {
+      return false;
+    }
+  }
+  return true;
+};
+
 Blockly.JavaScript.unittest_main.defineAssert_ = function() {
   if (!Blockly.JavaScript.definitions_['unittest_assertequals']) {
     var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
@@ -93,7 +121,9 @@ Blockly.JavaScript.unittest_main.defineAssert_ = function() {
     func.push('  if (!' + resultsVar + ') {');
     func.push('    throw "Orphaned assert: " + message;');
     func.push('  }');
-    func.push('  if (actual === expected) {');
+    func.push('  if ((expected instanceof Array &&');
+    func.push('       expected.equals(actual)) ||');
+    func.push('      actual === expected) {');
     func.push('    ' + resultsVar + '.push([true, "OK", message]);');
     func.push('  } else {');
     func.push('    ' + resultsVar + '.push([false, ' +
