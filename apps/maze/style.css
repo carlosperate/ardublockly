@@ -59,7 +59,6 @@ html[dir=rtl] #capacity {
 #look>path {
   display: none;
   fill: none;
-  stroke: #000;
   stroke-width: 10;
   stroke-linecap: round;
   stroke-opacity: 0.7;
@@ -81,11 +80,20 @@ button.launch {
   border: 1px solid #d43;
   background-color: #d43;
   color: white;
+  /* Can't use "text-align: start" due to IE. */
+  text-align: left;
+}
+html[dir="RTL"] button.launch {
+  text-align: right;
+}
+button.launch>img {
+  opacity: 1;
+  vertical-align: text-bottom;
 }
 button:active {
   border: 1px solid blue !important;
 }
-button:hover {
+button:hover, .buttonHover {
   box-shadow: 2px 2px 5px #888;
 }
 button>img {
@@ -94,30 +102,76 @@ button>img {
 button.disabled {
   visibility: hidden;
 }
-#toolbarDiv {
-  text-align: center;
-  padding-top: 1em;
-}
 #blockly {
   position: fixed;
 }
+#languageMenu {
+  vertical-align: top;
+  margin-top: 12px;
+}
 
 /* Sprited icons. */
-.random  {
+.icon21 {
   height: 21px;
   width: 21px;
   background-image: url(icons.png);
-  background-position: -63px 0px;
 }
 .code {
-  height: 21px;
-  width: 21px;
-  background-image: url(icons.png);
-  background-position: -42px 0px;
-}
-.link {
-  height: 21px;
-  width: 21px;
-  background-image: url(icons.png);
   background-position: -21px 0px;
 }
+.link {
+  background-position: 0px 0px;
+}
+.run {
+  background-position: 0px -21px;
+}
+.stop {
+  background-position: -21px -21px;
+}
+
+#pegmanButton {
+  padding: 0;
+  margin: 0 5px;
+  position: relative;
+}
+#pegmanButton:active {
+  border: 1px solid #ddd !important;
+}
+#pegmanButton>img {
+  margin-left: -0.5ex;
+  margin-right: 0.5ex;
+  height: 38px;
+  width: 49px;
+  background-position: -980px 0px;
+  opacity: 0.8;
+}
+html[dir="RTL"] #pegmanButton>img {
+  margin-left: 0.5ex;
+  margin-right: -0.5ex;
+}
+#pegmanButton>span {
+  position: absolute;
+  top: 0.8ex;
+  margin-left: -15px;
+}
+html[dir="RTL"] #pegmanButton>span {
+  margin-right: -15px;
+}
+#pegmanMenu {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px #888;
+  display: none;
+  position: absolute;
+}
+#pegmanMenu>div {
+  background-color: #fff;
+}
+#pegmanMenu>div:hover {
+  background-color: #57e;
+}
+#pegmanMenu>div>img {
+  height: 38px;
+  width: 49px;
+  background-position: -980px 0px;
+};

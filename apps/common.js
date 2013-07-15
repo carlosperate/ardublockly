@@ -149,26 +149,6 @@ BlocklyApps.updateCapacity = function() {
 };
 
 /**
- * Congratulates the user for completing the level and offers to
- * direct them to the next level, if available.
- * @param {number} level The current level.
- * @param {number} maxLevel The maxmium available level.
- */
-BlocklyApps.congratulations = function(level, maxLevel) {
-  if (level < maxLevel) {
-    var proceed = window.confirm(BlocklyApps.getMsg('nextLevel')
-        .replace('%1', level + 1));
-    if (proceed) {
-      window.location = window.location.protocol + '//' +
-          window.location.host + window.location.pathname +
-          '?lang=' + BlocklyApps.LANG + '&level=' + (level + 1);
-    }
-  } else {
-    window.alert(BlocklyApps.getMsg('finalLevel'));
-  }
-};
-
-/**
  * Highlight the block (or clear highlighting).
  * @param {?string} id ID of block that triggered this action.
  */

@@ -156,7 +156,7 @@ Blockly.Language.maze_forever = {
     this.setColour(120);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('repeatUntil'))
-        .appendTitle(new Blockly.FieldImage('marker.png', 12, 16));
+        .appendTitle(new Blockly.FieldImage(Maze.SKIN.marker, 12, 16));
     this.appendStatementInput('DO').appendTitle(BlocklyApps.getMsg('doCode'));
     this.setPreviousStatement(true);
     this.setTooltip(BlocklyApps.getMsg('whileTooltip'));
