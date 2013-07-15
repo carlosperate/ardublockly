@@ -155,7 +155,7 @@ Blockly.JavaScript.controls_for = function() {
         variable0 + '_inc', Blockly.Variables.NAME_TYPE);
     code += 'var ' + incVar + ' = ';
     if (Blockly.isNumber(increment)) {
-      code += Math.abs(increment) + ');\n';
+      code += Math.abs(increment) + ';\n';
     } else {
       code += 'Math.abs(' + increment + ');\n';
     }
