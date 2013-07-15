@@ -50,7 +50,7 @@ BlocklyApps.LANGUAGES = {
   nl: ['Nederlands, Vlaams', 'ltr', 'en_compressed.js'],
   pl: ['Polski', 'ltr', 'en_compressed.js'],
   'pt-br': ['Português', 'ltr', 'en_compressed.js'],
-  ru: ['русский язык', 'ltr', 'en_compressed.js'],
+  ru: ['русский', 'ltr', 'en_compressed.js'],
   ksh: ['Ripoarėsch', 'ltr', 'en_compressed.js'],
   sv: ['Svenska', 'ltr', 'en_compressed.js'],
   vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
