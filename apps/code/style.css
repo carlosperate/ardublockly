@@ -18,19 +18,23 @@
  */
 
 /**
- * @fileoverview Style sheet for Blockly code demo (langaue-neutral).
+ * @fileoverview Style sheet for Blockly Code App.
  * @author fraser@google.com (Neil Fraser)
  */
-body, html {
+html, body {
   height: 100%;
 }
 body {
   background-color: white;
   font-family: sans-serif;
+  margin: 0;
+  overflow: hidden
 }
 h1 {
   font-weight: normal;
   font-size: 140%;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 td, button {
   vertical-align: top;
@@ -63,6 +67,7 @@ td.tabmax {
   border-right-style: none !important;
   width: 99%;
   text-align: right;
+  padding-right: 10px;
 }
 
 table {
@@ -98,8 +103,9 @@ iframe {
   border-top: 0;
 }
 button {
-  padding: 1px 1em;
-  font-size: 90%;
+  padding: 1px 10px;
+  margin: 1px 5px;
+  font-size: 10%;
   border-radius: 4px;
   border: 1px solid #ddd;
   background-color: #eee;

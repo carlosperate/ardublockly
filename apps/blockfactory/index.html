@@ -5,19 +5,22 @@
   <title>Blockly : Block Factory</title>
   <script type="text/javascript" src="factory.js"></script>
   <style>
-    body, html {
+    html, body {
       height: 100%;
     }
     body {
       background-color: white;
       font-family: sans-serif;
+      margin: 0 5px;
+      overflow: hidden
     }
     h1 {
       font-weight: normal;
       font-size: 140%;
     }
     h3 {
-      margin-bottom: 1px;
+      margin-top: 5px;
+      margin-bottom: 0;
     }
     iframe {
       border-style: solid;
@@ -51,28 +54,28 @@
       <td>
         <table>
           <tr>
-            <td height="4%">
+            <td height="1%">
               <h3>Preview:</h3>
             </td>
           </tr>
           <tr>
-            <td height="30%">
+            <td height="33%">
               <iframe src="preview.html"></iframe>
             </td>
           </tr>
           <tr>
-            <td height="3%">
+            <td height="1%">
               <h3>Language code:</h3>
             </td>
           </tr>
           <tr>
-            <td height="30%">
+            <td height="32%">
               <textarea id="languageTextarea" readonly="readonly" wrap="off"
               onfocus="this.select()"></textarea>
             </td>
           </tr>
           <tr>
-            <td height="3%">
+            <td height="1%">
               <h3>Generator stub:
                 <select id="language" onchange="updateGenerator()">
                   <option value="JavaScript">JavaScript</option>
@@ -82,7 +85,7 @@
             </td>
           </tr>
           <tr>
-            <td height="30%">
+            <td height="32%">
               <textarea id="generatorTextarea" readonly="readonly" wrap="off"
               onfocus="this.select()"></textarea>
             </td>

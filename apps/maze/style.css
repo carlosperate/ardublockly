@@ -70,16 +70,17 @@ button {
   margin-right: 12px;
   margin-left: 0;
   padding: 10px;
-  font-size: large;
   border-radius: 5px;
   border: 1px solid #ddd;
   background-color: #eee;
+  font-size: 10%;
   color: black;
 }
 button.launch {
   border: 1px solid #d43;
   background-color: #d43;
   color: white;
+  font-size: large;
   /* Can't use "text-align: start" due to IE. */
   text-align: left;
 }
