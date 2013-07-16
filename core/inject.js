@@ -290,6 +290,22 @@ Blockly.createDom_ = function(container) {
  * @private
  */
 Blockly.init_ = function() {
+  if (goog.userAgent.WEBKIT) {
+    /* HACK:
+     WebKit bug 67298 causes control points to be included in the reported
+     bounding box.  Detect if this browser suffers from this bug by drawing a
+     shape that is 50px high, and has a control point that sticks up by 5px.
+     If the getBBox function returns a height of 55px instead of 50px, then
+     this browser has broken control points.
+    */
+    var path = Blockly.createSvgElement('path',
+        {'d': 'm 0,0 c 0,-5 0,-5 0,0 H 50 V 50 z'}, Blockly.svg);
+    if (path.getBBox().height >= 55) {
+      Blockly.BROKEN_CONTROL_POINTS = true;
+    }
+    Blockly.svg.removeChild(path);
+  }
+
   // Bind events for scrolling the workspace.
   // Most of these events should be bound to the SVG's surface.
   // However, 'mouseup' has to be on the whole document so that a block dragged

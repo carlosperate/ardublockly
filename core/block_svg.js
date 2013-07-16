@@ -574,21 +574,24 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     }
     // Expand input size if there is a connection.
     if (input.connection && input.connection.targetConnection) {
-      var linkedBlock = input.connection.targetBlock().getSvgRoot();
+      var linkedBlock = input.connection.targetBlock();
       try {
-        var bBox = linkedBlock.getBBox();
+        var bBox = linkedBlock.getSvgRoot().getBBox();
       } catch (e) {
         // Firefox has trouble with hidden elements (Bug 528969).
         var bBox = {height: 0, width: 0};
       }
-      if (goog.userAgent.WEBKIT) {
+      if (Blockly.BROKEN_CONTROL_POINTS) {
         /* HACK:
-         The current versions of Chrome (16.0) and Safari (5.1) with a common
-         root of WebKit 535 has a size reporting bug where the height of a
-         block is 3 pixels too large.  If WebKit browsers start under-sizing
-         connections to other blocks, then delete this entire hack.
+         WebKit bug 67298 causes control points to be included in the reported
+         bounding box.  The render functions (below) add two 5px spacer control
+         points that we need to subtract.
         */
-        bBox.height -= 3;
+        bBox.height -= 10;
+        if (linkedBlock.nextConnection) {
+          // Bottom control point partially masked by lower tab.
+          bBox.height += 4;
+        }
       }
       // Subtract one from the height due to the shadow.
       input.renderHeight = Math.max(input.renderHeight, bBox.height - 1);
@@ -755,6 +758,13 @@ Blockly.BlockSvg.prototype.renderDrawTop_ =
     // Top-left rounded corner.
     steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
     highlightSteps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_HIGHLIGHT);
+  }
+  if (Blockly.BROKEN_CONTROL_POINTS) {
+    /* HACK:
+     WebKit bug 67298 causes control points to be included in the reported
+     bounding box.  Add 5px control point to the top of the path.
+    */
+    steps.push('c 0,5 0,-5 0,0');
   }
 
   // Top edge.
@@ -1047,6 +1057,13 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
     }
   }
 
+  if (Blockly.BROKEN_CONTROL_POINTS) {
+    /* HACK:
+     WebKit bug 67298 causes control points to be included in the reported
+     bounding box.  Add 5px control point to the bottom of the path.
+    */
+    steps.push('c 0,5 0,-5 0,0');
+  }
   // Should the bottom-left corner be rounded or square?
   if (this.squareBottomLeftCorner_) {
     steps.push('H 0');
