@@ -15,7 +15,9 @@ This graphic needs to be brightend, shrunk, and sharpened for use.
 
 Panda:
 * bamboo.xcf -- A Gimp file containing the slices needed to create all 15
-permutations of the bamboo road.
+permutations of the bamboo road.  Original graphics created with:
+http://www.ignorancia.org/en/index.php?page=bamboo
+(Jaime Vives Piqueres, Creative Commons, Attribution-ShareAlike)
 * tiles_panda.xcf -- A Gimp file containing all the bamboo sprites as layers.
 This graphic needs to be shrunk for use.
 

@@ -40,9 +40,6 @@ button.disabled:hover>img {
 button.disabled {
   display: none;
 }
-#visualization {
-  margin-top: 1em;
-}
 #funcText {
   margin-top: 1em;
   margin-left: 1.5em;

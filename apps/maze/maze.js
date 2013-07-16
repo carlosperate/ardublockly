@@ -538,7 +538,7 @@ Maze.init = function() {
     }
   }
 
-  Maze.reset();
+  Maze.reset(true);
   Blockly.addChangeListener(function() {BlocklyApps.updateCapacity()});
 };
 
@@ -609,13 +609,32 @@ Maze.hidePegmanMenu = function() {
 
 /**
  * Reset the maze to the start position and kill any pending animation tasks.
+ * @param {boolean} first True if an opening animation is to be played.
  */
-Maze.reset = function() {
+Maze.reset = function(first) {
+  // Kill all tasks.
+  for (var x = 0; x < Maze.pidList.length; x++) {
+    window.clearTimeout(Maze.pidList[x]);
+  }
+  Maze.pidList = [];
+
   // Move Pegman into position.
   Maze.pegmanX = Maze.start_.x;
   Maze.pegmanY = Maze.start_.y;
-  Maze.pegmanD = Maze.startDirection;
-  Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4);
+
+  if (first) {
+    Maze.pegmanD = Maze.startDirection + 1;
+    Maze.scheduleFinish(false);
+    Maze.pidList.push(window.setTimeout(function() {
+      Maze.stepSpeed = 100;
+      Maze.schedule([Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4],
+                    [Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4 - 4]);
+      Maze.pegmanD++;
+    }, Maze.stepSpeed * 5));
+  } else {
+    Maze.pegmanD = Maze.startDirection;
+    Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, Maze.pegmanD * 4);
+  }
 
   // Move the finish icon into position.
   var finishIcon = document.getElementById('finish');
@@ -632,12 +651,6 @@ Maze.reset = function() {
   for (var i = 0, path; path = paths[i]; i++) {
     path.setAttribute('stroke', Maze.SKIN.look);
   }
-
-  // Kill all tasks.
-  for (var x = 0; x < Maze.pidList.length; x++) {
-    window.clearTimeout(Maze.pidList[x]);
-  }
-  Maze.pidList = [];
 };
 
 /**
@@ -658,6 +671,7 @@ Maze.runButtonClick = function() {
   runButton.style.display = 'none';
   resetButton.style.display = 'inline';
   Blockly.mainWorkspace.traceOn(true);
+  Maze.reset(false);
   Maze.execute();
 };
 
@@ -668,7 +682,7 @@ Maze.resetButtonClick = function() {
   document.getElementById('runButton').style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
   Blockly.mainWorkspace.traceOn(false);
-  Maze.reset();
+  Maze.reset(false);
 };
 
 /**
@@ -749,7 +763,7 @@ Maze.execute = function() {
 
   // BlocklyApps.log now contains a transcript of all the user's actions.
   // Reset the maze and animate the transcript.
-  Maze.reset();
+  Maze.reset(false);
   Maze.pidList.push(window.setTimeout(Maze.animate, 100));
 };
 
@@ -817,7 +831,7 @@ Maze.animate = function() {
       Maze.pegmanD = Maze.constrainDirection4(Maze.pegmanD + 1);
       break;
     case 'finish':
-      Maze.scheduleFinish();
+      Maze.scheduleFinish(true);
       window.setTimeout(Maze.congratulations, 1000);
   }
 
@@ -893,8 +907,8 @@ Maze.scheduleFail = function(forward) {
       break;
   }
   if (!forward) {
-    deltaX = - deltaX;
-    deltaY = - deltaY;
+    deltaX = -deltaX;
+    deltaY = -deltaY;
   }
   var direction16 = Maze.constrainDirection16(Maze.pegmanD * 4);
   Maze.displayPegman(Maze.pegmanX + deltaX,
@@ -919,11 +933,14 @@ Maze.scheduleFail = function(forward) {
 
 /**
  * Schedule the animations and sound for a victory dance.
+ * @param {boolean} sound Play the victory sound.
  */
-Maze.scheduleFinish = function() {
+Maze.scheduleFinish = function(sound) {
   var direction16 = Maze.constrainDirection16(Maze.pegmanD * 4);
   Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 16);
-  Blockly.playAudio('win', .5);
+  if (sound) {
+    Blockly.playAudio('win', .5);
+  }
   Maze.stepSpeed = 150;  // Slow down victory animation a bit.
   Maze.pidList.push(window.setTimeout(function() {
     Maze.displayPegman(Maze.pegmanX, Maze.pegmanY, 18);
