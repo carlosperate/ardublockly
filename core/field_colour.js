@@ -79,6 +79,19 @@ Blockly.FieldColour.prototype.setValue = function(colour) {
 };
 
 /**
+ * An array of colour strings for the palette.
+ * See bottom of this page for the default:
+ * http://docs.closure-library.googlecode.com/git/closure_goog_ui_colorpicker.js.source.html
+ * @type {!Array.<string>}
+ */
+Blockly.FieldColour.COLOURS = goog.ui.ColorPicker.SIMPLE_GRID_COLORS;
+
+/**
+ * Number of columns in the palette.
+ */
+Blockly.FieldColour.COLUMNS = 7;
+
+/**
  * Create a palette under the colour field.
  * @private
  */
@@ -87,7 +100,9 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   Blockly.FieldColour.isOpen_ = true;
   goog.dom.removeChildren(Blockly.widgetDiv);
   Blockly.widgetDiv.style.display = 'block';
-  var picker = goog.ui.ColorPicker.createSimpleColorGrid();
+  var picker = new goog.ui.ColorPicker();
+  picker.setSize(Blockly.FieldColour.COLUMNS);
+  picker.setColors(Blockly.FieldColour.COLOURS);
   picker.render(Blockly.widgetDiv);
   picker.setSelectedColor(this.getValue());
 

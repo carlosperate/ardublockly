@@ -239,7 +239,7 @@ Turtle.execute = function() {
   } catch (e) {
     // Null is thrown for infinite loop.
     // Otherwise, abnormal termination is a user error.
-    if (e !== null) {
+    if (e !== Infinity) {
       alert(e);
     }
   }

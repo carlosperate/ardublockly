@@ -746,8 +746,10 @@ Maze.execute = function() {
   } catch (e) {
     // A boolean is thrown for normal termination.
     // Abnormal termination is a user error.
-    if (typeof e == 'boolean') {
-      result = e ? Maze.ResultType.SUCCESS : Maze.ResultType.TIMEOUT;
+    if (e === Infinity) {
+      result = Maze.ResultType.TIMEOUT;
+    } else if (e === true) {
+      result = Maze.ResultType.SUCCESS;
     } else {
       result = Maze.ResultType.ERROR;
       alert(e);
