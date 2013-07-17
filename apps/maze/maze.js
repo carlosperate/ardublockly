@@ -486,8 +486,8 @@ Maze.init = function() {
        rtl: rtl,
        toolbox: toolbox,
        trashcan: true});
-  Blockly.loadAudio_('apps/maze/win.wav', 'win');
-  Blockly.loadAudio_('apps/maze/whack.wav', 'whack');
+  Blockly.loadAudio_(['apps/maze/win.mp3', 'apps/maze/win.ogg'], 'win');
+  Blockly.loadAudio_(['apps/maze/whack.mp3','apps/maze/whack.ogg'], 'whack');
   if (Maze.LEVEL == 1) {
     Blockly.SNAP_RADIUS *= 2;
   }

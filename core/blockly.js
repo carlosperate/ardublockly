@@ -483,16 +483,28 @@ Blockly.isTargetInput_ = function(e) {
 
 /**
  * Load an audio file.  Cache it, ready for instantaneous playing.
- * @param {string} filename Path and filename from Blockly's root.
+ * @param {!Array.<string>} filenames List of file types in decreasing order of
+ *   preference (i.e. increasing size).  E.g. ['media/go.mp3', 'media/go.wav']
+ *   Filenames include path from Blockly's root.  File extensions matter.
  * @param {string} name Name of sound.
  * @private
  */
-Blockly.loadAudio_ = function(filename, name) {
-  if (!window.Audio) {
+Blockly.loadAudio_ = function(filenames, name) {
+  if (!window.Audio || !filenames.length) {
     // No browser support for Audio.
     return;
   }
-  var sound = new window.Audio(Blockly.pathToBlockly + filename);
+  var sound;
+  var audioTest = new window.Audio();
+  for (var i = 0; i < filenames.length; i++) {
+    var filename = filenames[i];
+    var ext = filename.match(/\.(\w+)$/);
+    if (ext && audioTest.canPlayType('audio/' + ext[1])) {
+      // Found an audio format we can play.
+      sound = new window.Audio(Blockly.pathToBlockly + filename);
+      break;
+    }
+  }
   // To force the browser to load the sound, play it, but at nearly zero volume.
   if (sound && sound.play) {
     sound.play();
