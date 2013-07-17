@@ -7,61 +7,9 @@
   <title>Blockly : Teknőc Grafika</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
+  <script type="text/javascript" src="hu.js"></script>
   <script type="text/javascript" src="../common.js"></script>
   <script>
-    var MSG = {
-      // Block text.
-      moveForward: 'Menj előre (pixel)',
-      moveBackward: 'Menj vissza (pixel)',
-      turnRight: 'Fordulj jobbra (fok)',
-      turnLeft: 'Fordulj balra (fok)',
-      setWidth: 'Vonalvastagság',
-      setColour: 'Rajzolás színe',
-      penUp: 'Tollat fel',
-      penDown: 'Tollat le',
-      hideTurtle: 'Teknőc elrejtése',
-      showTurtle: 'Teknőc felfedése',
-      print: 'print',
-      font: 'font',
-      fontSize: 'size',
-      fontNormal: 'normal',
-      fontBold: 'bold',
-      fontItalic: 'italic',
-      // Tooltips for general blocks.
-      moveTooltip: 'A teknőcöt mozgatja előre, vagy hátra\n' +
-          'a pixelben megadott értékkel.',
-      turnTooltip: 'A teknőcöt jobbra, vagy balra fordítja\n' +
-          'a fokban megadott értékkel.',
-      widthTooltip: 'Vonalvastagság beállítása.',
-      penTooltip: 'Toll felemelése letevése,\n' +
-          'attól függően, hogy elkezdjük vagy befejezzük a rajzolást.',
-      colourTooltip: 'A rajzolás színének változtatása.',
-      turtleVisibilityTooltip: 'a teknőc (zöld kör és nyíl) láthatóvá tétele, vagy elrejtése.',
-      printTooltip: 'Draws text in the turtle\'s direction at its location.',
-      fontTooltip: 'Sets the font used by the print block.',
-      codeTooltip: 'A JavaScript forráskód megtekintése.',
-      linkTooltip: 'Save and link to blocks.',
-      captureTooltip: 'Save the drawing.',
-      // HelpUrl links.
-      printHelpUrl: 'http://en.wikipedia.org/wiki/Printing',
-      fontHelpUrl: 'http://en.wikipedia.org/wiki/Font',
-      // Toolbox categories.
-      catTurtle: 'Teknőc',
-      catControl: 'Vezérlés',
-      catLogic: 'Logikai műveletek',
-      catMath: 'Matematikai műveletek',
-      catLists: 'Listakezelés',
-      catColour: 'Színek',
-      catVariables: 'Változók',
-      catProcedures: 'Eljárások',
-      // Misc text.
-      unloadWarning: 'Az oldal elhagyása a munkád elvesztését eredményezi.',
-      runProgram: 'Program futtatása',
-      resetProgram: 'Alaphelyzet',
-      title: 'Teknőc Grafika',
-      imgFilename: 'drawing.png'
-    };
     var languageSrc = ['en_compressed.js'];
   </script>
 </head>

@@ -38,12 +38,13 @@ Blockly.Language.draw_move = {
             Blockly.Language.draw_move.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(MSG.moveTooltip);
+    this.setTooltip(BlocklyApps.getMsg('moveTooltip'));
   }
 };
 
 Blockly.Language.draw_move.DIRECTIONS =
-    [[MSG.moveForward, 'moveForward'], [MSG.moveBackward, 'moveBackward']];
+    [[BlocklyApps.getMsg('moveForward'), 'moveForward'],
+     [BlocklyApps.getMsg('moveBackward'), 'moveBackward']];
 
 Blockly.JavaScript.draw_move = function() {
   // Generate JavaScript for moving forward or backwards.
@@ -65,12 +66,13 @@ Blockly.Language.draw_turn = {
             Blockly.Language.draw_turn.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(MSG.turnTooltip);
+    this.setTooltip(BlocklyApps.getMsg('turnTooltip'));
   }
 };
 
 Blockly.Language.draw_turn.DIRECTIONS =
-    [[MSG.turnRight, 'turnRight'], [MSG.turnLeft, 'turnLeft']];
+    [[BlocklyApps.getMsg('turnRight'), 'turnRight'],
+     [BlocklyApps.getMsg('turnLeft'), 'turnLeft']];
 
 Blockly.JavaScript.draw_turn = function() {
   // Generate JavaScript for turning left or right.
@@ -87,10 +89,10 @@ Blockly.Language.draw_width = {
     this.setColour(160);
     this.appendValueInput('WIDTH')
         .setCheck('Number')
-        .appendTitle(MSG.setWidth);
+        .appendTitle(BlocklyApps.getMsg('setWidth'));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(MSG.widthTooltip);
+    this.setTooltip(BlocklyApps.getMsg('widthTooltip'));
   }
 };
 
@@ -110,11 +112,12 @@ Blockly.Language.draw_pen = {
         .appendTitle(new Blockly.FieldDropdown(this.STATE), 'PEN');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(MSG.penTooltip);
+    this.setTooltip(BlocklyApps.getMsg('penTooltip'));
   }
 };
 
-Blockly.Language.draw_pen.STATE = [[MSG.penUp, 'penUp'], [MSG.penDown, 'penDown']];
+Blockly.Language.draw_pen.STATE = [[BlocklyApps.getMsg('penUp'), 'penUp'],
+                                   [BlocklyApps.getMsg('penDown'), 'penDown']];
 
 Blockly.JavaScript.draw_pen = function() {
   // Generate JavaScript for pen up/down.
@@ -129,10 +132,10 @@ Blockly.Language.draw_colour = {
     this.setColour(20);
     this.appendValueInput('COLOUR')
         .setCheck('Colour')
-        .appendTitle(MSG.setColour);
+        .appendTitle(BlocklyApps.getMsg('setColour'));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(MSG.colourTooltip);
+    this.setTooltip(BlocklyApps.getMsg('colourTooltip'));
   }
 };
 
@@ -153,12 +156,13 @@ Blockly.Language.turtle_visibility = {
     this.setNextStatement(true, null);
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldDropdown(this.STATE), 'VISIBILITY');
-    this.setTooltip(MSG.turtleVisibilityTooltip);
+    this.setTooltip(BlocklyApps.getMsg('turtleVisibilityTooltip'));
   }
 };
 
 Blockly.Language.turtle_visibility.STATE =
-    [[MSG.hideTurtle, 'hideTurtle'], [MSG.showTurtle, 'showTurtle']];
+    [[BlocklyApps.getMsg('hideTurtle'), 'hideTurtle'],
+     [BlocklyApps.getMsg('showTurtle'), 'showTurtle']];
 
 Blockly.JavaScript.turtle_visibility = function() {
   // Generate JavaScript for changing turtle visibility.
@@ -168,14 +172,14 @@ Blockly.JavaScript.turtle_visibility = function() {
 
 Blockly.Language.draw_print = {
   // Block for printing text.
-  helpUrl: MSG.printHelpUrl,
+  helpUrl: BlocklyApps.getMsg('printHelpUrl'),
   init: function() {
     this.setColour(160);
     this.appendValueInput('TEXT')
-        .appendTitle(MSG.print);
+        .appendTitle(BlocklyApps.getMsg('print'));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(MSG.printTooltip);
+    this.setTooltip(BlocklyApps.getMsg('printTooltip'));
   }
 };
 
@@ -189,14 +193,14 @@ Blockly.JavaScript.draw_print = function() {
 
 Blockly.Language.draw_font = {
   // Block for setting the font.
-  helpUrl: MSG.fontHelpUrl,
+  helpUrl: BlocklyApps.getMsg('fontHelpUrl'),
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle(MSG.font)
+        .appendTitle(BlocklyApps.getMsg('font'))
         .appendTitle(new Blockly.FieldDropdown(this.FONTLIST), 'FONT');
     this.appendDummyInput()
-        .appendTitle(MSG.fontSize)
+        .appendTitle(BlocklyApps.getMsg('fontSize'))
         .appendTitle(new Blockly.FieldTextInput('18',
                      Blockly.FieldTextInput.nonnegativeIntegerValidator),
                      'FONTSIZE');
@@ -204,7 +208,7 @@ Blockly.Language.draw_font = {
         .appendTitle(new Blockly.FieldDropdown(this.STYLE), 'FONTSTYLE');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(MSG.fontTooltip);
+    this.setTooltip(BlocklyApps.getMsg('fontTooltip'));
   }
 };
 
@@ -215,8 +219,9 @@ Blockly.Language.draw_font.FONTLIST =
      ['Trebuchet MS', 'Trebuchet MS'], ['Verdana', 'Verdana']];
 
 Blockly.Language.draw_font.STYLE =
-    [[MSG.fontNormal, 'normal'], [MSG.fontItalic, 'italic'],
-     [MSG.fontBold, 'bold']];
+    [[BlocklyApps.getMsg('fontNormal'), 'normal'],
+     [BlocklyApps.getMsg('fontItalic'), 'italic'],
+     [BlocklyApps.getMsg('fontBold'), 'bold']];
 
 Blockly.JavaScript.draw_font = function() {
   // Generate JavaScript for setting the font.

@@ -1,14 +1,68 @@
 {namespace turtlepage}
 
 /**
- * This is a Closure Template.  Build with:
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ * This is a Closure Template.  Build multilingually:
+ *
+ * # Create en.js.
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
+ *
+ * # Extract messages from template.soy.
+ * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
+ *
+ * # Create en.json, qqq.json.
+ * ../../i18n/xliff_to_json.py extracted_msgs.xlf
+ *
+ * Once translations have been made into <LANG>.json:
+ *
+ * # Create *.xlf.  By default, qqq.json and keys.json are skipped.
+ * ../../i18n/json_to_xliff.py *.json
+ *
+ * # Create .js files by running script recommended by previous command.  It will
+ * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
+ *
+ * # The .xlf files may be deleted.  They should not be checked in.
+ * rm *.xlf
  */
 
 /**
  * Web page structure.
  */
 {template .start}
+  <div id="MSG" style="display: none">
+    // Block text.
+    <span id="moveForward">{msg meaning="Turtle.moveForward" desc="TODO"}move forward by{/msg}</span>
+    <span id="moveBackward">{msg meaning="Turtle.moveBackward" desc="TODO"}move backward by{/msg}</span>
+    <span id="turnRight">{msg meaning="Turtle.turnRight" desc="TODO"}turn right by{/msg}</span>
+    <span id="turnLeft">{msg meaning="Turtle.turnLeft" desc="TODO"}turn left by{/msg}</span>
+    <span id="setWidth">{msg meaning="Turtle.setWidth" desc="TODO"}set width{/msg}</span>
+    <span id="setColour">{msg meaning="Turtle.setColour" desc="TODO"}set colour{/msg}</span>
+    <span id="penUp">{msg meaning="Turtle.penUp" desc="TODO"}pen up{/msg}</span>
+    <span id="penDown">{msg meaning="Turtle.penDown" desc="TODO"}pen down{/msg}</span>
+    <span id="hideTurtle">{msg meaning="Turtle.hideTurtle" desc="TODO"}hide turtle{/msg}</span>
+    <span id="showTurtle">{msg meaning="Turtle.showTurtle" desc="TODO"}show turtle{/msg}</span>
+    <span id="print">{msg meaning="Turtle.print" desc="TODO"}print{/msg}</span>
+    <span id="font">{msg meaning="Turtle.font" desc="TODO"}font{/msg}</span>
+    <span id="fontSize">{msg meaning="Turtle.fontSize" desc="TODO"}size{/msg}</span>
+    <span id="fontNormal">{msg meaning="Turtle.fontNormal" desc="TODO"}normal{/msg}</span>
+    <span id="fontBold">{msg meaning="Turtle.fontBold" desc="TODO"}bold{/msg}</span>
+    <span id="fontItalic">{msg meaning="Turtle.fontItalic" desc="TODO"}italic{/msg}</span>
+    // Tooltips for general blocks.
+    <span id="moveTooltip">{msg meaning="Turtle.moveTooltip" desc="TODO"}Moves the turtle forward or backward by the specified amount.{/msg}</span>
+    <span id="turnTooltip">{msg meaning="Turtle.turnTooltip" desc="TODO"}Turns the turtle left or right by the specified number of degrees.{/msg}</span>
+    <span id="widthTooltip">{msg meaning="Turtle.widthTooltip" desc="TODO"}Changes the width of the pen.{/msg}</span>
+    <span id="penTooltip">{msg meaning="Turtle.penTooltip" desc="TODO"}Lifts or lowers the pen, to start or stop drawing.{/msg}</span>
+    <span id="colourTooltip">{msg meaning="Turtle.colourTooltip" desc="TODO"}Changes the colour of the pen.{/msg}</span>
+    <span id="turtleVisibilityTooltip">{msg meaning="Turtle.turtleVisibilityTooltip" desc="TODO"}Makes the turtle (green circle and arrow) visible or invisible.{/msg}</span>
+    <span id="printTooltip">{msg meaning="Turtle.printTooltip" desc="TODO"}Draws text in the turtle's direction at its location.{/msg}</span>
+    <span id="fontTooltip">{msg meaning="Turtle.fontTooltip" desc="TODO"}Sets the font used by the print block.{/msg}</span>
+    <span id="codeTooltip">{msg meaning="Turtle.codeTooltip" desc="TODO"}See generated JavaScript code.{/msg}</span>
+    // HelpUrl links.
+    <span id="printHelpUrl">{msg meaning="Turtle.printHelpUrl" desc="TODO"}http://en.wikipedia.org/wiki/Printing{/msg}</span>
+    <span id="fontHelpUrl">{msg meaning="Turtle.fontHelpUrl" desc="TODO"}http://en.wikipedia.org/wiki/Font{/msg}</span>
+    // Misc text.
+    <span id="unloadWarning">{msg meaning="Turtle.unloadWarning" desc="TODO"}Leaving this page will result in the loss of your work.{/msg}</span>
+  </div>
+
   // Common messages follow.  They are inlined here and in the other
   // apps/*/template.soy files instead of being shared in the parent directory
   // in order to avoid:
@@ -30,7 +84,7 @@
       <td colspan=2>
         <h1><a href="../index.html">Blockly</a>
             {sp}:{sp}
-            {$ij.MSG.title}</h1>
+            {msg meaning="Turtle.title" desc="TODO"}Turtle Graphics{/msg}</h1>
       </td>
     </tr>
     <tr>
@@ -70,26 +124,26 @@
             </td>
             <td style="width: 190px; text-align: center">
               <button id="runButton" class="launch" onclick="Turtle.runButtonClick();">
-                <img src="../../media/1x1.gif" class="run icon21"> {$ij.MSG.runProgram}
+                <img src="../../media/1x1.gif" class="run icon21">{msg meaning="Turtle.runProgram" desc="TODO"}Run Program{/msg}
               </button>
               <button id="resetButton" class="launch" onclick="Turtle.resetButtonClick();" style="display: none">
-                <img src="../../media/1x1.gif" class="stop icon21"> {$ij.MSG.resetProgram}
+                <img src="../../media/1x1.gif" class="stop icon21">{msg meaning="Turtle.resetProgram" desc="TODO"}Reset{/msg}
               </button>
             </td>
           </tr>
         </table>
 
         <div id="toolbarDiv">
-          <button title="{$ij.MSG.codeTooltip}" onclick="BlocklyApps.showCode();">
+          <button title="{msg meaning="Turtle.codeTooltip" desc="TODO"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode();">
             <img src='../../media/1x1.gif' class="code icon21">
           </button>
-          <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link();">
+          <button id="linkButton" title="{msg meaning="Turtle.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
             <img src='../../media/1x1.gif' class="link icon21">
           </button>
-          <button id="captureButton" title="{$ij.MSG.captureTooltip}" onclick="Turtle.createImageLink();">
+          <button id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="TODO"}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">
             <img src='../../media/1x1.gif' class="img icon21">
           </button>
-          <a id="downloadImageLink" download="{$ij.MSG.imgFilename}"></a>
+          <a id="downloadImageLink" download="{msg meaning="Turtle.imgFilename" desc="TODO"}drawing.png{/msg}"></a>
         </div>
       </td>
       <td valign="top">
@@ -111,7 +165,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{$ij.MSG.catTurtle}">
+    <category name="{msg meaning="Turtle.catTurtle" desc="TODO"}Turtle{/msg}">
       <block type="draw_move">
         <value name="VALUE">
           <block type="math_number">
@@ -142,7 +196,7 @@
       </block>
       <block type="draw_font"></block>
     </category>
-    <category name="{$ij.MSG.catColour}">
+    <category name="{msg meaning="Turtle.catColour" desc="TODO"}Colour{/msg}">
       <block type="draw_colour">
         <value name="COLOUR">
           <block type="colour_picker"></block>
@@ -153,7 +207,7 @@
       <block type="colour_rgb"></block>
       <block type="colour_blend"></block>
     </category>
-    <category name="{$ij.MSG.catControl}">
+    <category name="{msg meaning="Turtle.catControl" desc="TODO"}Control{/msg}">
       <block type="controls_if"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
@@ -183,14 +237,14 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="{$ij.MSG.catLogic}">
+    <category name="{msg meaning="Turtle.catLogic" desc="TODO"}Logic{/msg}">
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
       <block type="logic_boolean"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="{$ij.MSG.catMath}">
+    <category name="{msg meaning="Turtle.catMath" desc="TODO"}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -233,7 +287,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{$ij.MSG.catLists}">
+    <category name="{msg meaning="Turtle.catLists" desc="TODO"}Lists{/msg}">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
       <block type="lists_repeat">
@@ -274,7 +328,7 @@
         </value>
       </block>
     </category>
-    <category name="{$ij.MSG.catVariables}" custom="VARIABLE"></category>
-    <category name="{$ij.MSG.catProcedures}" custom="PROCEDURE"></category>
+    <category name="{msg meaning="Turtle.catVariables" desc="TODO"}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Turtle.catProcedures" desc="TODO"}Functions{/msg}" custom="PROCEDURE"></category>
   </xml>
 {/template}

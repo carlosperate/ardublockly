@@ -28,8 +28,7 @@
  */
 var Turtle = {};
 
-document.write(turtlepage.start({}, null,
-    {MSG: MSG}));
+document.write(turtlepage.start({}, null, null));
 
 Turtle.HEIGHT = 400;
 Turtle.WIDTH = 400;
@@ -66,8 +65,8 @@ Turtle.init = function() {
 
   window.addEventListener('beforeunload', function(e) {
     if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-      e.returnValue = MSG.unloadWarning;  // Gecko.
-      return MSG.unloadWarning;  // Webkit.
+      e.returnValue = BlocklyApps.getMsg('unloadWarning');  // Gecko.
+      return BlocklyApps.getMsg('unloadWarning');  // Webkit.
     }
     return null;
   });
