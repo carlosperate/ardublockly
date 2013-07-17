@@ -109,13 +109,13 @@ function init(blockly) {
   Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
 
   // Make the 'Blocks' tab line up with the toolbox.
-  if (Blockly.Toolbox) {
-    window.setTimeout(function() {
+  window.setTimeout(function() {
+      if (Blockly.Toolbox.width) {
         document.getElementById('tab_blocks').style.minWidth =
             (Blockly.Toolbox.width - 38) + 'px';
             // Account for the 19 pixel margin and on each side.
-    }, 1);
-  }
+      }
+  }, 1);
 
   if ('BlocklyStorage' in window) {
     // An href with #key trigers an AJAX call to retrieve saved blocks.

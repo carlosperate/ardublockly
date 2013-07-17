@@ -130,7 +130,7 @@ Blockly.Workspace.prototype.dispose = function() {
  * @param {!Function} getMetrics A function that returns workspace's metrics.
  */
 Blockly.Workspace.prototype.addTrashcan = function(getMetrics) {
-  if (Blockly.Trashcan && Blockly.editable) {
+  if (Blockly.hasTrashcan && Blockly.editable) {
     this.trashcan = new Blockly.Trashcan(getMetrics);
     var svgTrashcan = this.trashcan.createDom();
     this.svgGroup_.insertBefore(svgTrashcan, this.svgBlockCanvas_);

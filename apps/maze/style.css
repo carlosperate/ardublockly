@@ -134,6 +134,7 @@ button.disabled {
   padding: 0;
   margin: 0 5px;
   position: relative;
+  font-size: large;
 }
 #pegmanButton:active {
   border: 1px solid #ddd !important;

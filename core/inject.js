@@ -88,8 +88,8 @@ Blockly.parseOptions_ = function(options) {
     editable: editable,
     maxBlocks: options['maxBlocks'] || Infinity,
     pathToBlockly: options['path'] || './',
-    Toolbox: hasCategories ? Blockly.Toolbox : undefined,
-    Trashcan: hasTrashcan ? Blockly.Trashcan : undefined,
+    hasCategories: hasCategories,
+    hasTrashcan: hasTrashcan,
     languageTree: tree
   };
 };
@@ -212,7 +212,7 @@ Blockly.createDom_ = function(container) {
   if (Blockly.editable) {
     // Determine if there needs to be a category tree, or a simple list of
     // blocks.  This cannot be changed later, since the UI is very different.
-    if (Blockly.Toolbox) {
+    if (Blockly.hasCategories) {
       Blockly.Toolbox.createDom(svg, container);
     } else {
       /**
@@ -258,10 +258,6 @@ Blockly.createDom_ = function(container) {
       Blockly.bindEvent_(Blockly.mainWorkspace.getCanvas(),
           'blocklyWorkspaceChange', Blockly.mainWorkspace, workspaceChanged);
     }
-  } else {
-    // Not editable.  Neither of these will be needed.
-    delete Blockly.Toolbox;
-    delete Blockly.Flyout;
   }
 
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
@@ -333,9 +329,9 @@ Blockly.init_ = function() {
 
   var addScrollbars = true;
   if (Blockly.languageTree) {
-    if (Blockly.Toolbox) {
+    if (Blockly.hasCategories) {
       Blockly.Toolbox.init();
-    } else if (Blockly.Flyout) {
+    } else {
       // Build a fixed flyout with the root blocks.
       Blockly.mainWorkspace.flyout_.init(Blockly.mainWorkspace,
           Blockly.getMainWorkspaceMetrics, true);

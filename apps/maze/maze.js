@@ -750,7 +750,10 @@ Maze.execute = function() {
       result = Maze.ResultType.TIMEOUT;
     } else if (e === true) {
       result = Maze.ResultType.SUCCESS;
+    } else if (e === false) {
+      result = Maze.ResultType.ERROR;
     } else {
+      // Syntax error, can't happen.
       result = Maze.ResultType.ERROR;
       alert(e);
     }

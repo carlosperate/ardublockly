@@ -448,8 +448,8 @@ Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.ContextMenu && Blockly.ContextMenu.hide();
   Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
   Blockly.FieldColour && Blockly.FieldColour.hide();
-  if (Blockly.Toolbox && !opt_allowToolbox &&
-      Blockly.Toolbox.flyout_.autoClose) {
+  if (!opt_allowToolbox &&
+      Blockly.Toolbox.flyout_ && Blockly.Toolbox.flyout_.autoClose) {
     Blockly.Toolbox.clearSelection();
   }
 };
@@ -557,9 +557,7 @@ Blockly.setCursorHand_ = function(closed) {
  */
 Blockly.getMainWorkspaceMetrics = function() {
   var hwView = Blockly.svgSize();
-  if (Blockly.Toolbox) {
-    hwView.width -= Blockly.Toolbox.width;
-  }
+  hwView.width -= Blockly.Toolbox.width;  // Zero if no Toolbox.
   var viewWidth = hwView.width - Blockly.Scrollbar.scrollbarThickness;
   var viewHeight = hwView.height - Blockly.Scrollbar.scrollbarThickness;
   try {
@@ -577,10 +575,7 @@ Blockly.getMainWorkspaceMetrics = function() {
                          blockBox.y + blockBox.height - viewHeight);
   var bottomEdge = Math.max(blockBox.y + blockBox.height + viewHeight / 2,
                             blockBox.y + viewHeight);
-  var absoluteLeft = 0;
-  if (Blockly.Toolbox && !Blockly.RTL) {
-    absoluteLeft = Blockly.Toolbox.width;
-  }
+  var absoluteLeft = Blockly.RTL ? 0 : Blockly.Toolbox.width;
   return {
     viewHeight: hwView.height,
     viewWidth: hwView.width,
