@@ -322,6 +322,12 @@ Blockly.init_ = function() {
     Blockly.bindEvent_(window, 'resize', document, Blockly.svgResize);
     Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_);
     Blockly.bindEvent_(document, 'keydown', null, Blockly.onKeyDown_);
+    // Some iPad versions don't fire resize after portrait to landscape change.
+    if (goog.userAgent.IPAD) {
+      Blockly.bindEvent_(window, 'orientationchange', document, function() {
+        Blockly.fireUiEvent(window, 'resize');
+      }, false);
+    };
     Blockly.documentEventsBound_ = true;
   }
 
