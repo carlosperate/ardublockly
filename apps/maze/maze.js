@@ -54,8 +54,6 @@ BlocklyApps.LANGUAGES = {
   th: ['ภาษาไทย', 'ltr', 'en_compressed.js']};
 BlocklyApps.LANG = BlocklyApps.getLang();
 
-document.write('<script type="text/javascript" src="../' +
-               BlocklyApps.LANG + '.js"></script>\n');
 document.write('<script type="text/javascript" src="' +
                BlocklyApps.LANG + '.js"></script>\n');
 

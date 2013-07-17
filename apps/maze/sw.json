@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Rudia matendo yalioambatanishwa mpaka mwisho.",
 "Maze.codeTooltip" : "Tazama mwandiko wa JavaScript inayotokana.",
 "Maze.linkTooltip" : "Hifadhi na kiungo cha vishiku.",
-"Maze.randomizeMarkerTooltip" : "Unda mwanzo na mwisho kwa bahati nasibu.",
 "Maze.instructions1" : "Programu ni mlolongo wa vishiku. Panganya vishiku vichache vya 'songa mbele' ili kunisaidia kufikia lengo.",
 "Maze.instructions2" : "Inabidi kutumia mlolongo gani ya hatua ili kufuata njia hii?",
 "Maze.instructions3" : "Kompyuta ina kumbukumbu ndogo. Fikia mwisho wa njia hii kwa kutumia vishiku viwili tu. Tumia 'rudia' kusudi vishiku viende zaidi ya mara moja.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Hongera! Uko tayari kuendelea na sehemu ya %1?",
 "Maze.finalLevel" : "Hongera! Umetatua sehemu ya mwisho.",
 "Maze.maze" : "Mzingile",
-"Maze.oneTopBlock" : "Katika sehemu hii, itabidi upanganye vishiku vyote ndani ya eneo ya kazi nyeupe."
+"Maze.oneTopBlock" : "Katika sehemu hii, itabidi upanganye vishiku vyote ndani ya eneo ya kazi nyeupe.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Kuna shida na amri.",
+"Apps.linkAlert": "Sambaza vishiku vyako na kiungo hiki: \n\n%1",
+"Apps.hashError": "Samahani, '%1' haiendani na faili yoyote ya Blockly.",
+"Apps.xmlError": "Upakiaji wa faili yako iliyohifadhiwa haiwezekani.  Labda iliundwa na toleo tofauti ya Blockly?"
 }

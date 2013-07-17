@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Répète les blocs qui sont à l'intérieur jusqu'à atteindre le but.",
 "Maze.codeTooltip" : "Voir le code JavaScript généré'.",
 "Maze.linkTooltip" : "Sauvegarde et lies aux blocs.",
-"Maze.randomizeMarkerTooltip" : "Tire au hasard la position de début et de fin.",
 "Maze.instructions1" : "Un programme est une séquence d'instructions. Empile des blocs d'instructions 'avance' pour m'aider à atteindre mon but.",
 "Maze.instructions2" : "Qu'elle est la séquence de blocs à exécuter pour suivre ce chemin ?",
 "Maze.instructions3" : "Les ordinateurs n'ont pas beaucoup de mémoire. Utilise seulement deux blocs pour atteindre le but. Utilise le bloc 'repète' pour exécuter un bloc plus d'une fois.",
@@ -33,6 +32,11 @@
 "Maze.resetProgram" : "Reset",
 "Maze.nextLevel" : "Bravo ! Est tu prêt pour le niveau %1?",
 "Maze.finalLevel" : "Bravo ! Tu as fini le dernier niveau.",
-"Maze.maze" : "Labyrinthe Blocky",
-"Maze.oneTopBlock" : "Dans ce niveau, tu as besoin d'empiler les blocs les uns au dessus des autres dans la zone de travail blanche."
+"Maze.maze" : "Labyrinthe",
+"Maze.oneTopBlock" : "Dans ce niveau, tu as besoin d'empiler les blocs les uns au dessus des autres dans la zone de travail blanche.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Il y a eu un problème avec la demande.",
+"Apps.linkAlert": "Partagez vos blocs grâce à ce lien:\n\n%1",
+"Apps.hashError": "Désolé, '%1' ne correspond pas à un fichier Blockly sauvegarde.",
+"Apps.xmlError": "Impossible de charger le fichier de sauvegarde.  Peut être a t-il ete créé avec une autre version de Blockly?"
 }

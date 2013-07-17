@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Repite las acciones encapsuladas hasta terminar.",
 "Maze.codeTooltip" : "Mira el código JavaScript generado.",
 "Maze.linkTooltip" : "Guarda conexión a los bloques.",
-"Maze.randomizeMarkerTooltip" : "Situa aleatoriamente los marcadores de comienzo y final.",
 "Maze.instructions1" : "Un programa es una secuencia de declaraciones. Une un par de bloques de ‘avanza’ para ayudarme a llegar a la meta.",
 "Maze.instructions2" : "¿Cuál es la secuencia de pasos para seguir este camino?",
 "Maze.instructions3" : "Las computadoras tienen memoria limitada. Llega al final de este camino usando tan sólo dos bloques. Utiliza 'repetir' para ejecutar un bloque más de una vez.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "¡Felicidades! ¿Estas listo/a para seguir al siguiente nivel %1?",
 "Maze.finalLevel" : "¡Felicidades! Haz resuelto el último nivel.",
 "Maze.maze" : "Laberinto",
-"Maze.oneTopBlock" : "En este nivel, necesitas apilar los bloques en el espacio en blanco."
+"Maze.oneTopBlock" : "En este nivel, necesitas apilar los bloques en el espacio en blanco.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Hubo un problema con la petición.",
+"Apps.linkAlert": "Comparte tus bloques con esta conexión:\n\n%1",
+"Apps.hashError": "Lo siento, '%1' no corresponde con ningún archivo Blockly guardado.",
+"Apps.xmlError": "No se pudo cargar el archivo guardado.  ¿Quizá fue creado con otra versión de Blockly?"
 }

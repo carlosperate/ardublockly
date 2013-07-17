@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Wykonuj zestaw poleceń dopóki nie osiągniesz punktu końcowego.",
 "Maze.codeTooltip" : "Zobacz utworzony kod JavaScript.",
 "Maze.linkTooltip" : "Podziel się swoim programem.",
-"Maze.randomizeMarkerTooltip" : "Wylosuj początek i koniec drogi.",
 "Maze.instructions1" : "Program jest ciągiem poleceń. Ustaw kilka poleceń 'idź naprzód' jedno po drugi abym doszedł do celu.",
 "Maze.instructions2" : "Jaki jest ciąg poleceń abym przeszedł tą drogą?",
 "Maze.instructions3" : "Komputery mają ograniczoną pamięć. Dojdź do końca drogi używając 2 poleceń. Użyj 'powtarzaj dopóki nie skończysz' aby wykonać polecenie więcej niż raz.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Gratulacje! Czy chcesz przejść na poziom %1?",
 "Maze.finalLevel" : "Gratulacje! Ostatni poziom został rozwiązany.",
 "Maze.maze" : "Labirynt",
-"Maze.oneTopBlock" : "Na tym poziomie, ustaw wszystkie polecania na białym polu."
+"Maze.oneTopBlock" : "Na tym poziomie, ustaw wszystkie polecania na białym polu.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Wystąpił problem z przesłaniem żądania.",
+"Apps.linkAlert": "Udostępnij link ze swoimi poleceniami:\n\n%1",
+"Apps.hashError": "Przepraszamy, '%1' jest nieodpowiedni do zapisanych plików Blockly.",
+"Apps.xmlError": "Nie można wgrać pliku.  Może plik został zapisany w innej wersji Blockly?"
 }

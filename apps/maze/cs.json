@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Opakuj obsažené akce do té doby, dokud není dosažen cílový bod.",
 "Maze.codeTooltip" : "Zobraz generovaný JavaScriptový kód.",
 "Maze.linkTooltip" : "Ulož a spoj bloky..",
-"Maze.randomizeMarkerTooltip" : "Vygeneruj náhodně pozice startovního a cílového bodu.",
 "Maze.instructions1" : "Program je posloupnost příkazů. Poskládej několik pohybů vpřed dohromady a pomoc mi dosáhnout cíle.",
 "Maze.instructions2" : "Jaká je posloupnost kroků pro následování této cesty?",
 "Maze.instructions3" : "Počítače mají omezenou paměť. Dosáhni cíle s použitím pouze dvou bloků. Použij příkaz 'opakuj' pro zopakování příkazu.",
@@ -34,5 +33,9 @@
 "Maze.nextLevel" : "Blahopřejeme! Jsi připraven vstoupit do levelu %1?",
 "Maze.finalLevel" : "Blahopřejeme! Vyřešil jsi poslední level.",
 "Maze.maze" : "Bludiště",
-"Maze.oneTopBlock" : "V tomto levelu musíš posbírat všechny bloky na bílém pozadí."
+"Maze.oneTopBlock" : "V tomto levelu musíš posbírat všechny bloky na bílém pozadí.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.linkAlert": "Sdílej bloky tímto odkazem: %1",
+"Apps.hashError": "Omlouváme se, '%1' nesouhlasí s žádným z uložených souborů.",
+"Apps.xmlError": "Nepodařilo se uložit vás soubor.  Pravděpodobně byl vytvořen jinou verzí Blockly?"
 }

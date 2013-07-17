@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Gentag handlingsblok indtil slutpunktet er nået.",
 "Maze.codeTooltip" : "Se den genererede JavaScript kode.",
 "Maze.linkTooltip" : "Gem og link til blokke.",
-"Maze.randomizeMarkerTooltip" : "Placér tilfældige startpunkter og slutpunkter.",
 "Maze.instructions1" : "Et program er en sekvens af erklæringer. Sæt et par 'flyt fremad' blokke sammen for at hjælpe mig til at nå målet,",
 "Maze.instructions2" : "Hvad er sekvensen af handlinger for at følge denne sti?",
 "Maze.instructions3" : "Computere har begrænset hukommelse. Prøv at nå enden af denne sti ved kun at bruge to blokke. Brug 'gentag' til at køre en blok mere end én gang.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Tillykke! Er du klar til at fortsætte til bane %1?",
 "Maze.finalLevel" : "Tillykke! Du har klaret den sidste bane!.",
 "Maze.maze" : "Labyrint",
-"Maze.oneTopBlock" : "På denne bane skal du sætte alle blokkene sammen i det hvide arbejdsfelt."
+"Maze.oneTopBlock" : "På denne bane skal du sætte alle blokkene sammen i det hvide arbejdsfelt.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Der var et problem med forespørgslen.",
+"Apps.linkAlert": "Del dine blokke med dette link:\n\n%1",
+"Apps.hashError": "Beklager, '%1' passer ikke med nogen gemt Blockly fil.",
+"Apps.xmlError": "Kunne ikke hente din gemte fil.  Måske er den lavet med en anden udgave af Blockly?"
 }

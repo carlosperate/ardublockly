@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Atkārtot iekļautās darbības kamēr sasniegts mērķis.",
 "Maze.codeTooltip" : "Apskatīt ģenerēto JavaScript pirmkodu.",
 "Maze.linkTooltip" : "Saglamāt un piesaistīt blokiem.",
-"Maze.randomizeMarkerTooltip" : "Ģenerēt nejaušus starta un finiša marķierus.",
 "Maze.instructions1" : "Programma ir vairākas secīgas darbības. Saliec kopā dažus 'ej uz priekšu' blokus lai mēs varētu sasniegt mērķi.",
 "Maze.instructions2" : "Kāda ir darbību kārtība, lai varētu sekot šim ceļam?",
 "Maze.instructions3" : "Datoriem ir ierobežota atmiņa. Sasniedz ceļa mērķi lietojot tikai divus blokus. Lieto atkārtošanas bloku lai varētu izpildīt darbību vairāk kā vienu reizi.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Apsveicu! Vai esi gatavs turpināt ar %1 līmeni?",
 "Maze.finalLevel" : "Apsveicu! Tu esi atrisinājis pēdējo līmeni.",
 "Maze.maze" : "Labirints",
-"Maze.oneTopBlock" : "Šajā līmenī tev bloki jāsaliek kopā baltajā laumumā."
+"Maze.oneTopBlock" : "Šajā līmenī tev bloki jāsaliek kopā baltajā laumumā.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Pieprasījuma kļūda.",
+"Apps.linkAlert": "Dalies ar saviem blokiem ar šo saiti:\n\n%1",
+"Apps.hashError": "Atvaino, bet '%1' neatbilst nevienam saglabātajam bloku failam.",
+"Apps.xmlError": "Nevaru ielādēt tavu saglabāto failu.  Iespējams, tas tika izveidots ar citu Blockly versiju?"
 }

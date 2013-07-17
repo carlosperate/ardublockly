@@ -1,7 +1,0 @@
-{
-    "Apps.blocklyMessage": "Blockly",
-    "Apps.httpRequestError": "İstek ile ilgili bir problem var.",
-    "Apps.linkAlert": "Bloklarını bu link ile paylaş:\n\n%1",
-    "Apps.hashError": "Üzgünüz, '%1' herhangi bir blok kaydı ile uyuşmuyor",
-    "Apps.xmlError": "Kaydedilen dosyanız yüklenemiyor\nBlockly'nin önceki sürümü ile kaydedilmiş olabilir mi?"
-}

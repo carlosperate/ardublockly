@@ -1,8 +1,3 @@
 {
-    "Apps.blocklyMessage": "Blockly",
-    "Apps.subtitle": "vizuális programozási környezet",
-    "Apps.httpRequestError": "A kéréssel kapcsolatban probléma merült fel.",
-    "Apps.linkAlert": "Ezzel a hivatkozással tudod megosztani a programodat:\n\n%1",
-    "Apps.hashError": "Elnézést, a '%1' hivatkozásnem tartozik egyetlen programhoz sem.",
-    "Apps.xmlError": "A programodat nem lehet betölteni.  Elképzelhető, hogy a Blockly egy másik verziójában készült?"
- }
+    "Apps.subtitle": "vizuális programozási környezet"
+}

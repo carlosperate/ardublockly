@@ -26,9 +26,6 @@
 // Create a namespace.
 var BlocklyStorage = {};
 
-// Write messages to document once the page is loaded.
-document.write(BlocklyCommonMessages.messages(null, null));
-
 /**
  * Backup code blocks to localStorage.
  * @private

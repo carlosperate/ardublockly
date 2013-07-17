@@ -1,7 +1,0 @@
-{
-    "Apps.blocklyMessage": "Blockly",
-    "Apps.httpRequestError": "V požadavku došlo k chybě.",
-    "Apps.linkAlert": "Sdílej bloky tímto odkazem: %1",
-    "Apps.hashError": "Omlouváme se, '%1' nesouhlasí s žádným z uložených souborů.",
-    "Apps.xmlError": "Nepodařilo se uložit vás soubor.  Pravděpodobně byl vytvořen jinou verzí Blockly?"
- }

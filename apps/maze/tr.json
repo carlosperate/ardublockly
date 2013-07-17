@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Bitiş noktasına ulaşana kadar kapsanan hareketleri yap.",
 "Maze.codeTooltip" : "Oluşturulan JavaScript kodunu görüntüle.",
 "Maze.linkTooltip" : "Blokları ve bağlantı adresini kaydet.",
-"Maze.randomizeMarkerTooltip" : "Başlangıç ve bitiş adreslerini rastgele yerleştir.",
 "Maze.instructions1" : "Program demek, bir ifadeler sıralaması demektir. Bir kaç 'ileri git' bloğunu bir araya getirerek beni hedefe ulaştır.",
 "Maze.instructions2" : "Bu yolu izlemek için hangi adımları izlemeli?",
 "Maze.instructions3" : "Bilgisayarların sınırlı hafızaları vardır. Bu yüzden sende hedefe sadece iki blok kullanarak ulaşmalısın. 'tekrar' bloğunu kullanarak aynı bloğu birden fazla kullanabilirsin.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Tebrikler! %1. seviyeye geçmeye hazır mısın?",
 "Maze.finalLevel" : "Tebrikler! Son seviyeyi de tamamladın!",
 "Maze.maze" : "Labirent",
-"Maze.oneTopBlock" : "Bu bölümde beyaz çalışma alanındaki bütün blokları bir araya getirmelisin."
+"Maze.oneTopBlock" : "Bu bölümde beyaz çalışma alanındaki bütün blokları bir araya getirmelisin.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "İstek ile ilgili bir problem var.",
+"Apps.linkAlert": "Bloklarını bu link ile paylaş:\n\n%1",
+"Apps.hashError": "Üzgünüz, '%1' herhangi bir blok kaydı ile uyuşmuyor",
+"Apps.xmlError": "Kaydedilen dosyanız yüklenemiyor\nBlockly'nin önceki sürümü ile kaydedilmiş olabilir mi?"
 }

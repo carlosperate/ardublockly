@@ -1,8 +1,3 @@
 {
-    "Apps.blocklyMessage": "Blockly",
-    "Apps.subtitle": "vizuāla programmēšanas vide",
-    "Apps.httpRequestError": "Pieprasījuma kļūda.",
-    "Apps.linkAlert": "Dalies ar saviem blokiem ar šo saiti:\n\n%1",
-    "Apps.hashError": "Atvaino, bet '%1' neatbilst nevienam saglabātajam bloku failam.",
-    "Apps.xmlError": "Nevaru ielādēt tavu saglabāto failu.  Iespējams, tas tika izveidots ar citu Blockly versiju?"
- }
+    "Apps.subtitle": "vizuāla programmēšanas vide"
+}

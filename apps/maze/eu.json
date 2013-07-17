@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Errepikatu barruko ekintzak bukaera punturaino iritsi arte.",
 "Maze.codeTooltip" : "Ikusi sorturiko JavaScript kodea.",
 "Maze.linkTooltip" : "Gorde eta lotura sortu.",
-"Maze.randomizeMarkerTooltip" : "Ausazko hasiera eta bukaera puntuak.",
 "Maze.instructions1" : "Programa bat agindu multzo edo sekuentzia bat da. Elkartu 'mugi aurrera' bloke pare bat helmugara iritsi ahal izateko.",
 "Maze.instructions2" : "Zein da pausuen sekuentzia bide hau egiteko?",
 "Maze.instructions3" : "Ordenagailuek memoria mugatua daukate. Saiatu zaitez bide honen bukaerara iristen soilik bi bloke erabiliz. Erabili 'errepikatu' bloke bat behin baino gehiagotan to run a block more than once.",
@@ -34,6 +33,11 @@
 "Maze.nextLevel" : "Zorionak! Prest al zaude %1 mailara pasatzeko?",
 "Maze.finalLevel" : "Zorionak! Azken maila gainditu duzu.",
 "Maze.maze" : "Labirintoa",
-"Maze.oneTopBlock" : "Maila honetan, bloke guztiak lan-eremu txurian pilatu behar dituzu."
+"Maze.oneTopBlock" : "Maila honetan, bloke guztiak lan-eremu txurian pilatu behar dituzu.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Eskaerarekin arazo bat egon da.",
+"Apps.linkAlert": "Elkarbanatu blokeak lotura honekin:\n\n%1",
+"Apps.hashError": "Barkatu, '%1' barcinak Blocky fitxategi hau lapurtu du ere.",
+"Apps.xmlError": "Ezin izan da zure fitxategia kargatu.  Agian Blockly-ren beste bertsio batekin sortua izan zen?"
 }
 

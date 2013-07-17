@@ -1,8 +1,3 @@
 {
-    "Apps.blocklyMessage": "Blockly",
-    "Apps.subtitle": "un environnement de programmation visuel",
-    "Apps.httpRequestError": "Il y a eu un problème avec la demande.",
-    "Apps.linkAlert": "Partagez vos blocs grâce à ce lien:\n\n%1",
-    "Apps.hashError": "Désolé, '%1' ne correspond pas à un fichier Blockly sauvegarde.",
-    "Apps.xmlError": "Impossible de charger le fichier de sauvegarde.  Peut être a t-il ete créé avec une autre version de Blockly?"
- }
+    "Apps.subtitle": "un environnement de programmation visuel"
+}

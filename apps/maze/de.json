@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Führe die angegebene Aktion aus, bis das Ziel erreicht wurde.",
 "Maze.codeTooltip" : "Erzeugten JavaScript Code anzeigen.",
 "Maze.linkTooltip" : "Blöcke abspeichern und Link erzeugen.",
-"Maze.randomizeMarkerTooltip" : "Randomize start and finish markers.",
 "Maze.instructions1" : "Ein Programm besteht aus einer Aneinanderreihungen von Anweisungen. Verbinde einige 'laufe vorwärts' Blöcke, um mir zu helfen um das Ziel zu erreichen.",
 "Maze.instructions2" : "Welche Anweisungen werden benötigt um dieses Labyrinth zu durchlaufen?",
 "Maze.instructions3" : "Computer haben begrenzten Speicher. Dieses Labyrinth lässt sich mit nur 2 Anweisungen lösen. Benutze 'wiederholen' um eine Anweisung mehr als ein mal aus zu führen.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Gratulation! In das Level %1 gehen?",
 "Maze.finalLevel" : "Gratulation! Du hast das Spiel beendet.",
 "Maze.maze" : "Labyrinth",
-"Maze.oneTopBlock" : "On this level, you need to stack together all of the blocks in the white workspace."
+"Maze.oneTopBlock" : "On this level, you need to stack together all of the blocks in the white workspace.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Es gab ein Problem während der HTTP Anfrage.",
+"Apps.linkAlert": "Blöcke mit diesem Link teilen:\n\n%1",
+"Apps.hashError": "Entschuldigung, konnte die gespeicherten Blöcke für '%1' nicht finden.",
+"Apps.xmlError": "Kann Sicherungsdatei nicht laden.  Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?"
 }

@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-06-12 09:56:46.157110",
+        "lastupdated": "2013-07-17 11:26:57.908942",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -25,6 +25,11 @@
     "Maze.nextLevel": "Congratulations! Are you ready to proceed to level %1?",
     "Maze.finalLevel": "Congratulations! You have solved the final level.",
     "Maze.oneTopBlock": "On this level, you need to stack together all of the blocks in the white workspace.",
+    "Apps.blocklyMessage": "Blockly",
+    "Apps.httpRequestError": "There was a problem with the request.",
+    "Apps.linkAlert": "Share your blocks with this link:\n\n%1",
+    "Apps.hashError": "Sorry, '%1' doesn't correspond with any saved Blockly file.",
+    "Apps.xmlError": "Could not load your saved file.  Perhaps it was created with a different version of Blockly?",
     "Maze.maze": "Maze",
     "Maze.instructions1": "A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
     "Maze.instructions2": "What is the sequence of steps to follow this path?",
@@ -38,7 +43,6 @@
     "Maze.instructions10": "Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!",
     "Maze.codeTooltip": "See generated JavaScript code.",
     "Maze.linkTooltip": "Save and link to blocks.",
-    "Maze.randomizeMarkerTooltip": "Randomize start and finish markers.",
     "Maze.runProgram": "Run Program",
     "Maze.resetProgram": "Reset"
 }

@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "Doe de ingesloten instructies tot het doel bereikt is.",
 "Maze.codeTooltip" : "Bekijk de gegenereerde JavaScript code.",
 "Maze.linkTooltip" : "Bewaar en verwijs naar blokken.",
-"Maze.randomizeMarkerTooltip" : "Willekeurige start en einde.",
 "Maze.instructions1" : "Een programma is een lijst van instructies. Stop een paar 'ga vooruit' instructies samen en help me op mijn doel te bereiken.",
 "Maze.instructions2" : "Wat is de volgorde van instructies om de weg te volgen?",
 "Maze.instructions3" : "Computers hebben een beperkt geheugen. Bereik het einde van de weg met enkel 2 instructies. Gebruik 'herhaal' om een instructie meerdere keren uit te voeren.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Proficiat! Ben je klaar om naar niveau %1 te gaan?",
 "Maze.finalLevel" : "Proficiat! Je hebt het laatste niveau opgelost.",
 "Maze.maze" : "Doolhof",
-"Maze.oneTopBlock" : "Op dit niveau moet je alle instructies samenleggen in het witte gedeelte."
+"Maze.oneTopBlock" : "Op dit niveau moet je alle instructies samenleggen in het witte gedeelte.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "Er was een probleem met de aanvraag.",
+"Apps.linkAlert": "Deel je oplossing via deze link:\n\n%1",
+"Apps.hashError": "Sorry, '%1' Komt niet overeen met opgeslagen instructies.",
+"Apps.xmlError": "Kon je bewaarde instructies niet opladen.  Misschien waren ze gemaakt met een andere versie van Blockly?"
 }

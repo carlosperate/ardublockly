@@ -19,6 +19,11 @@
 "Maze.nextLevel": "7358214333593766572",
 "Maze.finalLevel": "7149849676690329496",
 "Maze.oneTopBlock": "4051416073809352347",
+"Apps.blocklyMessage": "6650354588969822092",
+"Apps.httpRequestError": "6491926390857975299",
+"Apps.linkAlert": "6192625840582724866",
+"Apps.hashError": "1518803428383703114",
+"Apps.xmlError": "5758425077401246127",
 "Maze.maze": "34428208008617605",
 "Maze.instructions1": "3542684864087093156",
 "Maze.instructions2": "3107464560858837706",
@@ -32,7 +37,6 @@
 "Maze.instructions10": "4572857545803877392",
 "Maze.codeTooltip": "5729392237036335843",
 "Maze.linkTooltip": "2194902007208446636",
-"Maze.randomizeMarkerTooltip": "4569563074235560111",
 "Maze.runProgram": "8195626643865709645",
 "Maze.resetProgram": "8086403647682698529"
 }

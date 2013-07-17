@@ -15,7 +15,6 @@
 "Maze.whileTooltip" : "A beágyazott utasításokat hajtja végre a cél eléréséig.",
 "Maze.codeTooltip" : "JavaScript forráskód megtekintése.",
 "Maze.linkTooltip" : "Mentés és Hivatkozás a kódhoz.",
-"Maze.randomizeMarkerTooltip" : "Start és Cél véletlenszerű elhelyezése.",
 "Maze.instructions1" : "Egy program utasítások sorozatából áll. Segíts eljutatni Pegmant a célig, kapcsolj össze néhány 'Menj előre' blokkot!",
 "Maze.instructions2" : "Milyen lépések sorozata kell, hogy eljuttasd Pegmant a célig?",
 "Maze.instructions3" : "A számítógépeknek véges a memóriájuk. Juttasd el Pegmant a célig mindössze 2 blokk felhasználásával. Használd az 'Ismételd a célbaérésig' blokkot egy másik blokk ismételt végrehajtásához.",
@@ -34,5 +33,10 @@
 "Maze.nextLevel" : "Gratulálok! Kész vagy megoldani a(z) %1. szintet?",
 "Maze.finalLevel" : "Gratulálok! Sikeresen megoldottad az utolsó szintet.",
 "Maze.maze" : "Labirintus",
-"Maze.oneTopBlock" : "Ezen a szinten össze kell kapcsolnod minden blokkot a munkaterületen."
+"Maze.oneTopBlock" : "Ezen a szinten össze kell kapcsolnod minden blokkot a munkaterületen.",
+"Apps.blocklyMessage": "Blockly",
+"Apps.httpRequestError": "A kéréssel kapcsolatban probléma merült fel.",
+"Apps.linkAlert": "Ezzel a hivatkozással tudod megosztani a programodat:\n\n%1",
+"Apps.hashError": "Elnézést, a '%1' hivatkozásnem tartozik egyetlen programhoz sem.",
+"Apps.xmlError": "A programodat nem lehet betölteni.  Elképzelhető, hogy a Blockly egy másik verziójában készült?"
 }
