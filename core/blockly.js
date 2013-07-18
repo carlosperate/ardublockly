@@ -522,7 +522,16 @@ Blockly.loadAudio_ = function(filenames, name) {
 Blockly.playAudio = function(name, opt_volume) {
   var sound = Blockly.SOUNDS_[name];
   if (sound) {
-    var mySound = sound.cloneNode();
+    var mySound;
+    var ie9 = goog.userAgent.DOCUMENT_MODE && goog.userAgent.DOCUMENT_MODE === 9;
+    if (ie9 || goog.userAgent.IPAD || goog.userAgent.ANDROID) { 
+      // Creating a new audio node causes lag in IE9, Android and iPad. Android
+      // and IE9 refetch the file from the server, iPad uses a singleton audio node
+      // which must be deleted and recreated for each new audio tag.
+      mySound = sound;
+    } else {
+      mySound = sound.cloneNode();
+    }
     mySound.volume = (opt_volume === undefined ? 1 : opt_volume);
     mySound.play();
   }
