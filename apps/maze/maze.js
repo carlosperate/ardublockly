@@ -33,7 +33,7 @@ BlocklyApps.LANGUAGES = {
   // Format: ['Language name', 'direction', 'XX_compressed.js']
   ca: ['Català', 'ltr', 'en_compressed.js'],
   cs: ['Čeština', 'ltr', 'en_compressed.js'],
-  sr: ['српски', 'ltr', 'en_compressed.js'],
+  sr: ['Српски', 'ltr', 'en_compressed.js'],
   da: ['Dansk', 'ltr', 'en_compressed.js'],
   de: ['Deutsch', 'ltr', 'de_compressed.js'],
   en: ['English', 'ltr', 'en_compressed.js'],
@@ -48,7 +48,7 @@ BlocklyApps.LANGUAGES = {
   nl: ['Nederlands', 'ltr', 'en_compressed.js'],
   pl: ['Polski', 'ltr', 'en_compressed.js'],
   pt: ['Português', 'ltr', 'en_compressed.js'],
-  ru: ['русский', 'ltr', 'en_compressed.js'],
+  ru: ['Русский', 'ltr', 'en_compressed.js'],
   tr: ['Türkçe', 'ltr', 'en_compressed.js'],
   vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
   th: ['ภาษาไทย', 'ltr', 'en_compressed.js']};
