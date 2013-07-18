@@ -296,7 +296,8 @@ Blockly.init_ = function() {
     */
     var path = Blockly.createSvgElement('path',
         {'d': 'm 0,0 c 0,-5 0,-5 0,0 H 50 V 50 z'}, Blockly.svg);
-    if (path.getBBox().height >= 55) {
+    if (path.getBBox().height > 50) {
+      // Chrome (v28) and Opera (v15) report 55, Safari (v6.0.5) reports 53.75.
       Blockly.BROKEN_CONTROL_POINTS = true;
     }
     Blockly.svg.removeChild(path);

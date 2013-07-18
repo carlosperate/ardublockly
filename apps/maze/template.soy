@@ -59,8 +59,6 @@
   // Messages in the other apps' template.soy files reference these to
   // minimize extra work for translators.
   <div id="COMMON_MSG" style="display: none">
-    // Suffix "Message" distinguishes id from other uses of "Blockly".
-    <span id="blocklyMessage">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'."}}Blockly{{/msg}}</span>
     <span id="httpRequestError">{msg meaning="Apps.httpRequestError" desc="alert - The URL is invalid or a server error occurred.  This message will be followed by technical information useful to engineers trying to understand the problem."}There was a problem with the request.{/msg}</span>
     <span id="linkAlert">{msg meaning="Apps.linkAlert" desc="alert - After the user has pressed a button to save his/her program, this provides the URL (%1) to retrieve the program.  The characters '\n\n' indicate that a blank line will be displayed before the URL (in English).  Leave those in unless you move %1 to the beginning or middle of the text, in which case you should use your judgment about where blank lines would be most useful."}Share your blocks with this link:\n\n%1{/msg}</span>
     <span id="hashError">{{msg meaning="Apps.hashError" desc="alert - A request to retrieve a stored program does not have a valid URL. %1 is the invalid portion of the URL. 'Blockly' is the name of the system.  It should be left untranslated or it should be transliterated.  See [[Translating:Blockly#Special_terms]]."}}Sorry, '%1' doesn't correspond with any saved Blockly file.{{/msg}}</span>
@@ -78,12 +76,15 @@
             <span>&#x25BE;</span>
           </button>
         </div>
-        <h1><span id="title"><a href="../index.html"><span id="blocklyName">Blockly</span></a>
+        <h1>
+          <span id="title">
+            <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
             {sp}:{sp}
             {msg meaning="Maze.maze" desc="brief title - Specifies that this is Blockly's '''Maze''' tutorial."}
               Maze
-            {/msg}</span>
-            {sp}&nbsp;{sp}
+            {/msg}
+          </span>
+          {sp}&nbsp;{sp}
           {for $i in range(1, 11)}
             {sp}
             {if $i == $ij.level}

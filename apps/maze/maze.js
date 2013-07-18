@@ -94,7 +94,7 @@ Maze.SKINS = [
     // Spring canopy, photo by Rupert Fleetingly, CC licensed for reuse.
     graph: false,
     look: '#000'
-  },
+  }
 ];
 Maze.SKIN_ID = BlocklyApps.getNumberParamFromUrl('skin', 0, Maze.SKINS.length);
 Maze.SKIN = Maze.SKINS[Maze.SKIN_ID];
@@ -149,6 +149,12 @@ Maze.map = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
  // Level 4.
+/**
+ * Note, the path continues past the start and the goal in both directions.
+ * This is intentionally done so kids see the maze is about getting from
+ * the start to the goal and not necessarily about moving over every part of
+ * the maze, 'mowing the lawn' as Neil calls it.
+ */
  [[0, 0, 0, 0, 0, 0, 0, 1],
   [0, 0, 0, 0, 0, 0, 1, 1],
   [0, 0, 0, 0, 0, 1, 3, 0],
@@ -426,8 +432,6 @@ Maze.drawMap = function() {
  * Initialize Blockly and the maze.  Called on page load.
  */
 Maze.init = function() {
-  document.getElementById('blocklyName').textContent =
-      BlocklyApps.getMsg('blocklyMessage');
   document.title = document.getElementById('title').textContent;
   // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
   // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
@@ -455,7 +459,7 @@ Maze.init = function() {
     return function() {
       Maze.changePegman(n);
     };
-  }
+  };
   for (var i = 0; i < Maze.SKINS.length; i++) {
     if (i == Maze.SKIN_ID) {
       continue;
@@ -487,7 +491,7 @@ Maze.init = function() {
        toolbox: toolbox,
        trashcan: true});
   Blockly.loadAudio_(['apps/maze/win.mp3', 'apps/maze/win.ogg'], 'win');
-  Blockly.loadAudio_(['apps/maze/whack.mp3','apps/maze/whack.ogg'], 'whack');
+  Blockly.loadAudio_(['apps/maze/whack.mp3', 'apps/maze/whack.ogg'], 'whack');
   if (Maze.LEVEL == 1) {
     Blockly.SNAP_RADIUS *= 2;
   }

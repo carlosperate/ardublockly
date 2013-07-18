@@ -73,7 +73,7 @@
       {/msg}
     </span>
     <span id="country2City2">
-      {msg meaning="Puzzle.country2City2" desc="The city Munich (München) in Germany."}
+      {msg meaning="Puzzle.country2City2" desc="The city Munich (M\u00fcnchen) in Germany."}
         Munich
       {/msg}
     </span>
@@ -131,8 +131,8 @@
       {/msg}
     </span>
     <span id="country4City2">
-      {msg meaning="Puzzle.country4City2" desc="The city São Paulo in Brazil."}
-        São Paulo
+      {msg meaning="Puzzle.country4City2" desc="The city S\u00e3o Paulo in Brazil."}
+        S\u00e3o Paulo
       {/msg}
     </span>
     <span id="country4HelpUrl">
@@ -142,7 +142,7 @@
       {/msg}
     </span>
     <span id="flag">
-      {msg meaning="Puzzle.flag" desc="The official flag (noun) representing a country."}
+      {{msg meaning="Puzzle.flag" desc="[[File:Config-language.png|left||32px]]\nnoun the official flag representing a country (the national flag).\n{lb}{lb}Identical|Flag{rb}{rb}"}}
         flag:
       {/msg}
     </span>
@@ -165,25 +165,25 @@
     </span>
     <span id="error0">
       {msg meaning="Puzzle.error0"
-           desc="A congratulatory message displayed if the user placed all %1 blocks correctly, where %1 is an integer greater than 1.  The use of '\n', which indicates a new line, is optional."}
+           desc="A congratulatory message displayed if the user placed all %1 blocks correctly, where %1 is an integer greater than 1.\n\nThe use of a new line character is optional."}
         Perfect!\nAll %1 blocks are correct.
       {/msg}
     </span>
     <span id="error1">
       {{msg meaning="Puzzle.error1"
-           desc="An encouraging error message displayed if the user placed all blocks except 1 correctly.\n\nIf the number of incorrect blocks is 2 or more, {lb}{lb}msgblockly|PuzzlePuzzle.error2{rb}{rb} is used instead."}}
+           desc="an encouraging error message displayed if the user placed all blocks except 1 correctly.\n\nIf the number of incorrect blocks is 2 or more, {lb}{lb}msg-blockly|Puzzle-Puzzle.error2{rb}{rb} is used instead."}}
         Almost! One block is incorrect.
       {{/msg}}
     </span>
     <span id="error2">
       {{msg meaning="Puzzle.error2"
-           desc="An error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one.\n\nIf the number of incorrect blocks is 1, {lb}{lb}msgblockly|PuzzlePuzzle.error1{rb}{rb} is used."}}
+           desc="an error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one.\n\nIf the number of incorrect blocks is 1, {lb}{lb}msg-blockly|Puzzle-Puzzle.error1{rb}{rb} is used."}}
         %1 blocks are incorrect.
       {{/msg}}
     </span>
     <span id="tryAgain">
        {msg meaning="Puzzle.tryAgain"
-            desc="A message indicating that a visually distinguished block is incorrect and that the user should try to fix it.  The use of '\n', which indicates a new line, is optional."}
+            desc="A message indicating that a visually distinguished block is incorrect and that the user should try to fix it.\n\nThe use of a new line character is optional."}
          The highlighted block is not correct.\nKeep trying.
        {/msg}
     </span>
@@ -192,11 +192,14 @@
   <table id="header" width="100%">
     <tr>
       <td valign="bottom">
-        <h1><span id="title"><a href="../index.html"><span id="blocklyName">Blockly</span></a>
+        <h1>
+          <span id="title">
+            <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
             {sp}:{sp}
             {msg meaning="Puzzle.title" desc="A brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle."}
               Puzzle
-            {/msg}</span>
+            {/msg}
+          </span>
         </h1>
       </td>
       <td class="farSide">

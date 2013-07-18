@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-05-23 10:49:22.314299",
+        "lastupdated": "2013-07-18 15:29:11.233289",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -23,9 +23,9 @@
     "Puzzle.country4": "Brazil",
     "Puzzle.country4Language": "Portuguese",
     "Puzzle.country4City1": "Rio de Janeiro",
-    "Puzzle.country4City2": "São Paulo",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
     "Puzzle.country4HelpUrl": "http://en.wikipedia.org/wiki/Brazil",
-    "Puzzle.flag": "flag",
+    "Puzzle.flag": "flag:",
     "Puzzle.language": "language:",
     "Puzzle.languageChoose": "choose...",
     "Puzzle.cities": "cities:",
@@ -33,7 +33,7 @@
     "Puzzle.error1": "Almost! One block is incorrect.",
     "Puzzle.error2": "%1 blocks are incorrect.",
     "Puzzle.tryAgain": "The highlighted block is not correct.\nKeep trying.",
-    "Puzzle.fullTitle": "Blockly Puzzle",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Puzzle",
     "Puzzle.help": "Help",
     "Puzzle.checkAnswers": "Check Answers",

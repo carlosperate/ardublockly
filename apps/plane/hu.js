@@ -5,7 +5,7 @@ if (typeof planepage == 'undefined') { var planepage = {}; }
 
 
 planepage.start = function(opt_data, opt_ignored, opt_ijData) {
-  var output = '<div id="MSG" style="display: none"><span id="rows">Sorok száma: %1</span><span id="getRows">Sorok száma (%1)</span><span id="rows1">1. osztály: %1 sor</span><span id="getRows1">1. osztály sorai (%1)</span><span id="rows2">2. osztály: %1 sor</span><span id="getRows2">2. osztály sorai (%1)</span><span id="seats">Ülések száma összesen: %1</span><span id="setSeats">Ülések száma =</span></div><div style="display: none;"><select id="languageMenu" onchange="Plane.changeLanguage();"></select></div><h1><span id="title"><a href="../index.html"><span id="blocklyName">Blockly</span></a> : Repülőgép</span> &nbsp; ';
+  var output = '<div id="MSG" style="display: none"><span id="rows">Sorok száma: %1</span><span id="getRows">Sorok száma (%1)</span><span id="rows1">1. osztály: %1 sor</span><span id="getRows1">1. osztály sorai (%1)</span><span id="rows2">2. osztály: %1 sor</span><span id="getRows2">2. osztály sorai (%1)</span><span id="seats">Ülések száma összesen: %1</span><span id="setSeats">Ülések száma =</span></div><div style="display: none;"><select id="languageMenu" onchange="Plane.changeLanguage();"></select></div><h1><span id="title"><a href="../index.html">Blockly</a> : Repülőgép</span> &nbsp; ';
   for (var i34 = 1; i34 < 4; i34++) {
     output += ' ' + ((i34 == opt_ijData.level) ? '<span class="tab" id="selected">' + soy.$$escapeHtml(i34) + '</span>' : (i34 < opt_ijData.level) ? '<a class="tab previous" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i34) + '">' + soy.$$escapeHtml(i34) + '</a>' : '<a class="tab" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i34) + '">' + soy.$$escapeHtml(i34) + '</a>');
   }
@@ -18,7 +18,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Egy repülőgépnek 2 ülése van a pilótafülkében (a pliótának és a másodpilótának), az utasok több sorban ülnek az utastérben.  Az utastér minden sorában négy szék van.';
       break;
     case 3:
-      output += 'An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of 1st class and 2nd class passenger seats.  Each 1st class row contains four seats. Each 2nd class row contains five seats.';
+      output += 'Egy repülőgépnek 2 ülése van a pilótafülkében (a pliótának és a másodpilótának), az utasok 1. és 2. osztályon utazhatnak. Az 1. osztályon négy szék van egy sorban. A 2. osztályon öt szék van egy sorban.';
       break;
   }
   output += '</p><p>Készítsd el a képletet (lent) amivel kiszámolható, hogy hány ülés van összesen a repülőgépen annak függvényében, ahogy (fent) állítod a sorok számát.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';

@@ -32,7 +32,6 @@
     "Puzzle.error1": "Fast! Ein Baustein ist falsch.",
     "Puzzle.error2": "%1 Bausteine sind falsch.",
     "Puzzle.tryAgain": "Der hervorgehobene Baustein ist falsch. Versuche es noch einmal.",
-    "Puzzle.fullTitle": "Blockly-Puzzle",
     "Puzzle.title": "Puzzle",
     "Puzzle.help": "Hilfe",
     "Puzzle.checkAnswers": "Antworten \u00fcberpr\u00fcfen",

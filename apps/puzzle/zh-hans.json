@@ -33,7 +33,6 @@
     "Puzzle.error1": "\u5dee\u4e0d\u591a\u4e86 \uff01\u8fd8\u6709\u4e00\u4e2a\u5757\u662f\u4e0d\u6b63\u786e\u7684\u3002",
     "Puzzle.error2": "%1 \u5757\u4e0d\u6b63\u786e",
     "Puzzle.tryAgain": "\u9ad8\u4eae\u5757\u4e0d\u6b63\u786e\uff0c\u8bf7\u91cd\u8bd5\u3002",
-    "Puzzle.fullTitle": "Blockly Puzzle",
     "Puzzle.title": "Puzzle",
     "Puzzle.help": "\u5e2e\u52a9",
     "Puzzle.checkAnswers": "\u8d26\u6237\u6838\u67e5",

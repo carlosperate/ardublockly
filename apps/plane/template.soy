@@ -40,13 +40,15 @@
   </div>
 
   <div style="display: none;"><select id="languageMenu" onchange="Plane.changeLanguage();"></select></div>
-  <h1><span id="title">
-    <a href="../index.html"><span id="blocklyName">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'."}}Blockly{{/msg}}</span></a>
+  <h1>
+    <span id="title">
+      <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
       {sp}:{sp}
       {msg meaning="Plane.plane" desc="brief title - Specifies that this is Blockly's '''Plane''' tutorial."}
         Plane
-      {/msg}</span>
-      {sp}&nbsp;{sp}
+      {/msg}
+    </span>
+    {sp}&nbsp;{sp}
     {for $i in range(1, 4)}
       {sp}
       {if $i == $ij.level}
