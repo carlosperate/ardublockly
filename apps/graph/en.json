@@ -1,0 +1,19 @@
+{
+    "@metadata": {
+        "author": "Ellen Spertus <ellen.spertus@gmail.com>",
+        "lastupdated": "2013-07-17 16:01:33.800292",
+        "locale": "en",
+        "messagedocumentation" : "qqq"
+    },
+    "Graph.title": "Graph",
+    "Graph.unloadWarning": "Leaving this page will result in the loss of your work.",
+    "Apps.blocklyMessage": "Blockly",
+    "Apps.httpRequestError": "There was a problem with the request.",
+    "Apps.linkAlert": "Share your blocks with this link:\n\n%1",
+    "Apps.hashError": "Sorry, '%1' doesn't correspond with any saved Blockly file.",
+    "Apps.xmlError": "Could not load your saved file.  Perhaps it was created with a different version of Blockly?",
+    "Graph.linkTooltip": "Save and link to blocks.",
+    "Graph.catMath": "Math",
+    "Graph.catVariables": "Variables",
+    "Graph.catLogic": "Logic"
+}

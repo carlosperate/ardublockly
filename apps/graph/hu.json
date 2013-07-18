@@ -1,0 +1,13 @@
+{
+    "Graph.title": "Függvényrajzoló",
+    "Graph.unloadWarning": "Az oldal elhagyása a munkád elvesztését eredményezi.",
+    "Apps.blocklyMessage": "Blockly",
+    "Apps.httpRequestError": "A kéréssel kapcsolatban probléma merült fel.",
+    "Apps.linkAlert": "Ezzel a hivatkozással tudod megosztani a programodat:\n\n%1",
+    "Apps.hashError": "Elnézést, a '%1' hivatkozásnem tartozik egyetlen programhoz sem.",
+    "Apps.xmlError": "A programodat nem lehet betölteni.  Elképzelhető, hogy a Blockly egy másik verziójában készült?",
+    "Graph.linkTooltip": "Mentés és Hivatkozás a kódhoz.",
+    "Graph.catMath": "Matematikai műveletek",
+    "Graph.catVariables": "Változók",
+    "Graph.catLogic": "Logikai műveletek"
+}

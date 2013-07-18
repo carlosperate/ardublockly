@@ -1,0 +1,13 @@
+{
+    "Graph.title": "Graph",
+    "Graph.unloadWarning": "Leaving this page will result in the loss of your work.",
+    "Apps.blocklyMessage": "Blockly",
+    "Apps.httpRequestError": "Es gab ein Problem während der HTTP Anfrage.",
+    "Apps.linkAlert": "Blöcke mit diesem Link teilen:\n\n%1",
+    "Apps.hashError": "Entschuldigung, konnte die gespeicherten Blöcke für '%1' nicht finden.",
+    "Apps.xmlError": "Kann Sicherungsdatei nicht laden.  Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?",
+    "Graph.linkTooltip": "Blöcke abspeichern und Link erzeugen.",
+    "Graph.catMath": "Mathe",
+    "Graph.catVariables": "Variablen",
+    "Graph.catLogic": "Logik"
+}

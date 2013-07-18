@@ -30,8 +30,7 @@ if (typeof google == 'object') {
   alert('Unable to load Google\'s chart API.\nAre you connected to the Internet?');
 }
 
-document.write(graphpage.start({}, null,
-    {MSG: MSG}));
+document.write(graphpage.start({}, null, null));
 
 /**
  * Create a namespace for the application.
@@ -53,8 +52,8 @@ Graph.init = function() {
 
   window.addEventListener('beforeunload', function(e) {
     if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-      e.returnValue = MSG.unloadWarning;  // Gecko.
-      return MSG.unloadWarning;  // Webkit.
+      e.returnValue = BlocklyApps.getMsg('unloadWarning');  // Gecko.
+      return BlocklyApps.getMsg('unloadWarning');  // Webkit.
     }
     return null;
   });

@@ -1,14 +1,37 @@
 {namespace graphpage}
 
 /**
- * This is a Closure Template.  Build with:
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ * This is a Closure Template.  Build multilingually:
+ *
+ * # Create en.js.
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
+ *
+ * # Extract messages from template.soy.
+ * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
+ *
+ * # Create en.json, qqq.json.
+ * ../../i18n/xliff_to_json.py extracted_msgs.xlf
+ *
+ * Once translations have been made into <LANG>.json:
+ *
+ * # Create *.xlf.  By default, qqq.json and keys.json are skipped.
+ * ../../i18n/json_to_xliff.py *.json
+ *
+ * # Create .js files by running script recommended by previous command.  It will
+ * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
+ *
+ * # The .xlf files may be deleted.  They should not be checked in.
+ * rm *.xlf
  */
 
 /**
  * Web page structure.
  */
 {template .start}
+  <div id="MSG" style="display: none">
+    <span id="title">{msg meaning="Graph.title" desc="TODO"}Graph{/msg}</span>
+    <span id="unloadWarning">{msg meaning="Graph.unloadWarning" desc="TODO"}Leaving this page will result in the loss of your work.{/msg}</span>
+
   // Common messages follow.  They are inlined here and in the other
   // apps/*/template.soy files instead of being shared in the parent directory
   // in order to avoid:
@@ -28,8 +51,8 @@
   <table width="100%" height="100%">
     <tr height="50">
       <td colspan=2>
-        <h1><a href="../index.html">Blockly</a> : {$ij.MSG.title}
-          <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link()">
+        <h1><a href="../index.html">Blockly</a> : Graphing Calculator
+          <button id="linkButton" title="{msg meaning="Graph.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
               <img src='link.png' height=21 width=21>
           </button>
         </h1>
@@ -63,7 +86,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{$ij.MSG.catMath}">
+    <category name="{msg meaning="Graph.catMath" desc="TODO"}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -98,10 +121,10 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{$ij.MSG.catVariables}">
+    <category name="{msg meaning="Graph.catVariables" desc="TODO"}Variables{/msg}" custom="VARIABLE"></category>
       <block type="graph_get_x"></block>
     </category>
-    <category name="{$ij.MSG.catLogic}">
+    <category name="{msg meaning="Graph.catLogic" desc="TODO"}Logic{/msg}">
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
