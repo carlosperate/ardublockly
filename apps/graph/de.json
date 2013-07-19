@@ -1,6 +1,5 @@
 {
     "Graph.title": "Graph",
-    "Graph.unloadWarning": "Leaving this page will result in the loss of your work.",
     "Apps.blocklyMessage": "Blockly",
     "Apps.httpRequestError": "Es gab ein Problem während der HTTP Anfrage.",
     "Apps.linkAlert": "Blöcke mit diesem Link teilen:\n\n%1",

@@ -1,6 +1,5 @@
 {
     "Graph.title": "Đồ Thị",
-    "Graph.unloadWarning": "Nếu rời khỏi trang này bạn sẽ mất kết quả hiện tại.",
     "Apps.blocklyMessage": "Blockly",
     "Apps.httpRequestError": "Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.",
     "Apps.linkAlert": "Dùng liên kết này để chia sẽ chương trình của bạn:\n\n%1",

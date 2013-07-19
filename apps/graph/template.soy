@@ -28,10 +28,6 @@
  * Web page structure.
  */
 {template .start}
-  <div id="MSG" style="display: none">
-    <span id="title">{msg meaning="Graph.title" desc="TODO"}Graph{/msg}</span>
-    <span id="unloadWarning">{msg meaning="Graph.unloadWarning" desc="TODO"}Leaving this page will result in the loss of your work.{/msg}</span>
-
   // Common messages follow.  They are inlined here and in the other
   // apps/*/template.soy files instead of being shared in the parent directory
   // in order to avoid:
@@ -40,8 +36,6 @@
   // These reference the messages in maze to minimize extra work for
   // translators.
   <div id="COMMON_MSG" style="display: none">
-    // Suffix "Message" distinguishes id from other uses of "Blockly".
-    <span id="blocklyMessage">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</span>
     <span id="httpRequestError">{{msg meaning="Apps.httpRequestError" desc="alert - The URL is invalid or a server error occurred.  This message will be followed by technical information useful to engineers trying to understand the problem.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.httpRequestError{rb}{rb}"}}There was a problem with the request.{{/msg}}</span>
     <span id="linkAlert">{{msg meaning="Apps.linkAlert" desc="alert - After the user has pressed a button to save his/her program, this provides the URL (%1) to retrieve the program.  The characters '\n\n' indicate that a blank line will be displayed before the URL (in English).  Leave those in unless you move %1 to the beginning or middle of the text, in which case you should use your judgment about where blank lines would be most useful.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.linkAlert{rb}{rb}."}}Share your blocks with this link:\n\n%1{{/msg}}</span>
     <span id="hashError">{{msg meaning="Apps.hashError" desc="alert - A request to retrieve a stored program does not have a valid URL. %1 is the invalid portion of the URL. 'Blockly' is the name of the system.  It should be left untranslated or it should be transliterated.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.hashError{rb}{rb}."}}Sorry, '%1' doesn't correspond with any saved Blockly file.{{/msg}}</span>
@@ -51,10 +45,21 @@
   <table width="100%" height="100%">
     <tr height="50">
       <td colspan=2>
-        <h1><a href="../index.html">Blockly</a> : Graphing Calculator
+        <div style="display: none;">
+          <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
+          &nbsp; &nbsp;
           <button id="linkButton" title="{msg meaning="Graph.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
               <img src='link.png' height=21 width=21>
           </button>
+        </div>
+        <h1>
+          <span id="title">
+            <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
+            {sp}:{sp}
+            {msg meaning="Graph.title" desc="TODO"}
+              Graphing Calculator
+            {/msg}
+          </span>
         </h1>
       </td>
     </tr>
@@ -69,10 +74,7 @@
       <td valign="top">
         <script type="text/javascript" src="../../blockly_compressed.js"></script>
         <script type="text/javascript" src="../../javascript_compressed.js"></script>
-        <script type="text/javascript" src="../common.js"></script>
-        <script type="text/javascript">
-          BlocklyApps.loadLanguageScripts(languageSrc);
-        </script>
+        <script type="text/javascript" src="../../{$ij.langSrc}"></script>
         <script type="text/javascript" src="blocks.js"></script>
         {call .toolbox /}
         <div id="blockly"></div>
@@ -121,7 +123,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{msg meaning="Graph.catVariables" desc="TODO"}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Graph.catVariables" desc="TODO"}Variables{/msg}">
       <block type="graph_get_x"></block>
     </category>
     <category name="{msg meaning="Graph.catLogic" desc="TODO"}Logic{/msg}">

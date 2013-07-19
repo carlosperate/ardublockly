@@ -27,10 +27,21 @@
 if (typeof google == 'object') {
   google.load('visualization', '1', {packages: ['corechart']});
 } else {
-  alert('Unable to load Google\'s chart API.\nAre you connected to the Internet?');
+  alert('Unable to load Google\'s chart API.\n' +
+        'Are you connected to the Internet?');
 }
 
-document.write(graphpage.start({}, null, null));
+// Supported languages.
+BlocklyApps.LANGUAGES = {
+  // Format: ['Language name', 'direction', 'XX_compressed.js']
+  en: ['English', 'ltr', 'en_compressed.js'],
+  de: ['Deutsch', 'ltr', 'de_compressed.js'],
+  hu: ['Magyar', 'ltr', 'en_compressed.js'],
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js']};
+BlocklyApps.LANG = BlocklyApps.getLang();
+
+document.write('<script type="text/javascript" src="' +
+               BlocklyApps.LANG + '.js"></script>\n');
 
 /**
  * Create a namespace for the application.
@@ -41,22 +52,15 @@ var Graph = {};
  * Initialize Blockly and the graph.  Called on page load.
  */
 Graph.init = function() {
-  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
-  var rtl = document.body.parentNode.dir == 'rtl';
+  BlocklyApps.init();
+
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
        rtl: rtl,
        toolbox: toolbox});
 
-  window.addEventListener('beforeunload', function(e) {
-    if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-      e.returnValue = BlocklyApps.getMsg('unloadWarning');  // Gecko.
-      return BlocklyApps.getMsg('unloadWarning');  // Webkit.
-    }
-    return null;
-  });
   var blocklyDiv = document.getElementById('blockly');
   var onresize = function(e) {
     blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
@@ -67,23 +71,15 @@ Graph.init = function() {
   window.addEventListener('resize', onresize);
   onresize();
 
-  if (!('BlocklyStorage' in window)) {
-    document.getElementById('linkButton').className = 'disabled';
-  }
-  // An href with #key trigers an AJAX call to retrieve saved blocks.
-  if ('BlocklyStorage' in window && window.location.hash.length > 1) {
-    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-  } else { // Load the editor with a starting block.
-    var xml = Blockly.Xml.textToDom(
-        '<xml>' +
-        '  <block type="graph_set_y" deletable="false" x="85" y="100">' +
-        '    <value name="VALUE">' +
-        '      <block type="graph_get_x"></block>' +
-        '    </value>' +
-        '  </block>' +
-        '</xml>');
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-  }
+  var defaultXml =
+      '<xml>' +
+      '  <block type="graph_set_y" deletable="false" x="85" y="100">' +
+      '    <value name="VALUE">' +
+      '      <block type="graph_get_x"></block>' +
+      '    </value>' +
+      '  </block>' +
+      '</xml>';
+  BlocklyApps.loadBlocks(defaultXml);
 
   Blockly.mainWorkspace.getCanvas().addEventListener('blocklyWorkspaceChange',
       window.parent.Graph.drawVisualization, false);
