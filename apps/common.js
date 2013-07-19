@@ -110,19 +110,93 @@ BlocklyApps.LANG = undefined;
 BlocklyApps.LANGUAGES = undefined;
 
 /**
- * Load the specified language file(s).
- * @param {!Array<string>} languageSrc Array of language files.
+ * Common startup tasks for all apps.
  */
-BlocklyApps.loadLanguageScripts = function(languageSrc) {
-  for (var x = 0; x < languageSrc.length; x++) {
-    var file = languageSrc[x];
-    if (file.match(/^(\w+\/)*\w+\.js$/)) {
-      document.writeln('<script type="text/javascript" ' +
-          'src="../../' + file + '"><' + '/script>');
-    } else {
-      console.error('Illegal language file: ' + file);
+BlocklyApps.init = function() {
+  // Set the page title with the content of the H1 title.
+  document.title = document.getElementById('title').textContent;
+
+  // Set the HTML's language and direction.
+  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
+  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  document.head.parentElement.setAttribute('dir',
+      BlocklyApps.LANGUAGES[BlocklyApps.LANG][1]);
+  document.head.parentElement.setAttribute('lang', BlocklyApps.LANG);
+
+  // Populate the language selection menu.
+  var languageMenu = document.getElementById('languageMenu');
+  languageMenu.options.length = 0;
+  for (var lang in BlocklyApps.LANGUAGES) {
+    var option = new Option(BlocklyApps.LANGUAGES[lang][0], lang);
+    if (lang == BlocklyApps.LANG) {
+      option.selected = true;
     }
+    languageMenu.options.add(option);
   }
+
+  // Move the language menu div (which may include other elements) to the far
+  // side of the screen.
+  // HACK: Firefox v21 does not allow the setting of style.float.
+  // Use setAttribute instead.
+  languageMenu.parentElement.setAttribute('style',
+      'display: block; float: ' + (rtl ? 'left' : 'right') + ';');
+
+  // Disable the link button if page isn't backed by App Engine storage.
+  var linkButton = document.getElementById('linkButton');
+  if (linkButton && !('BlocklyStorage' in window)) {
+    linkButton.className = 'disabled';
+  }
+};
+
+/**
+ * Load blocks saved on App Engine Storage or in session/local storage.
+ * @param {string} defaultXml Text representation of default blocks.
+ */
+BlocklyApps.loadBlocks = function(defaultXml) {
+  if ('BlocklyStorage' in window && window.location.hash.length > 1) {
+    // An href with #key trigers an AJAX call to retrieve saved blocks.
+    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
+  } else if (window.sessionStorage.loadOnceBlocks) {
+    // Language switching stores the blocks during the reload.
+    var text = window.sessionStorage.loadOnceBlocks;
+    delete window.sessionStorage.loadOnceBlocks;
+    var xml = Blockly.Xml.textToDom(text);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  } else if (defaultXml) {
+    // Load the editor with default starting blocks.
+    var xml = Blockly.Xml.textToDom(defaultXml);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  } else if ('BlocklyStorage' in window) {
+    // Restore saved blocks in a separate thread so that subsequent
+    // initialization is not affected from a failed load.
+    window.setTimeout(BlocklyStorage.restoreBlocks, 0);
+  }
+};
+
+/**
+ * Save the blocks and reload with a different language.
+ */
+BlocklyApps.changeLanguage = function() {
+  // Store the blocks for the duration of the reload.
+  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var text = Blockly.Xml.domToText(xml);
+  window.sessionStorage.loadOnceBlocks = text;
+
+  var languageMenu = document.getElementById('languageMenu');
+  var newLang = encodeURIComponent(
+      languageMenu.options[languageMenu.selectedIndex].value);
+  var search = window.location.search;
+  if (search.length <= 1) {
+    search = '?lang=' + newLang;
+  } else if (search.match(/[?&]lang=[^&]*/)) {
+    search = search.replace(/([?&]lang=)[^&]*/, '$1' + newLang)
+  } else {
+    search = search.replace(/\?/, '?lang=' + newLang + '&')
+  }
+
+  window.location = window.location.protocol + '//' +
+      window.location.host + window.location.pathname + search;
 };
 
 /**
@@ -203,15 +277,29 @@ BlocklyApps.showCode = function() {
 /**
  * Gets the message with the given key from the document.
  * @param {string} key The key of the document element.
- * @return {string} The innerHTML of the specified element, or undefined if the
- *     element was not found.
+ * @return {string} The innerHTML of the specified element,
+ *     or an error message if the element was not found.
  */
 BlocklyApps.getMsg = function(key) {
+  var msg = BlocklyApps.getMsgOrNull(key)
+  return msg === null ? '[Unknown message: ' +  key + ']' : msg;
+};
+
+/**
+ * Gets the message with the given key from the document.
+ * @param {string} key The key of the document element.
+ * @return {string} The innerHTML of the specified element,
+ *     or null if the element was not found.
+ */
+BlocklyApps.getMsgOrNull = function(key) {
   var element = document.getElementById(key);
   if (element) {
-    return element.innerHTML;
+    var text = element.innerHTML;
+    // Convert newline sequences.
+    text = text.replace(/\\n/g, '\n');
+    return text;
   } else {
-    return '[Unknown message: ' +  key + ']';
+    return null;
   }
 };
 

@@ -32,13 +32,13 @@ Blockly.Language.country = {
         .appendTitle('', 'NAME');
     this.appendValueInput('FLAG')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(MSG.flag);
+        .appendTitle(BlocklyApps.getMsg('flag'));
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(MSG.language)
+        .appendTitle(BlocklyApps.getMsg('language'))
         .appendTitle(new Blockly.FieldDropdown(Puzzle.languages), 'LANG');
     this.appendStatementInput('CITIES')
-        .appendTitle(MSG.cities);
+        .appendTitle(BlocklyApps.getMsg('cities'));
   },
   mutationToDom: function() {
     // Save the country number.
@@ -54,8 +54,8 @@ Blockly.Language.country = {
   populate: function(n) {
     this.country = n;
     // Set the country name.
-    this.setTitleValue(MSG['country' + n], 'NAME');
-    this.helpUrl = MSG['country' + n + 'HelpUrl'];
+    this.setTitleValue(BlocklyApps.getMsg('country' + n), 'NAME');
+    this.helpUrl = BlocklyApps.getMsg('country' + n + 'HelpUrl');
   },
   isCorrect: function() {
     return this.getTitleValue('LANG') == this.country;
@@ -76,9 +76,9 @@ Blockly.Language.flag = {
   populate: function(n) {
     this.country = n;
     // Set the flag image.
-    var flag = MSG['country' + n + 'Flag'];
-    var flagHeight = MSG['country' + n + 'FlagHeight'];
-    var flagWidth = MSG['country' + n + 'FlagWidth'];
+    var flag = BlocklyApps.getMsg('country' + n + 'Flag');
+    var flagHeight = BlocklyApps.getMsg('country' + n + 'FlagHeight');
+    var flagWidth = BlocklyApps.getMsg('country' + n + 'FlagWidth');
     this.getInput('IMG')
         .appendTitle(new Blockly.FieldImage(flag, flagWidth, flagHeight));
   },
@@ -114,7 +114,7 @@ Blockly.Language.city = {
     this.country = n;
     this.city = m;
     // Set the city name.
-    this.setTitleValue(MSG['country' + n + 'City' + m], 'NAME');
+    this.setTitleValue(BlocklyApps.getMsg('country' + n + 'City' + m), 'NAME');
   },
   isCorrect: function() {
     var parent = this.getSurroundParent();

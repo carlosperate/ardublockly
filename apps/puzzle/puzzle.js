@@ -64,60 +64,23 @@ BlocklyApps.LANG = BlocklyApps.getLang();
 document.write('<script type="text/javascript" src="' +
                BlocklyApps.LANG + '.js"></script>\n');
 
-var MSG = {};
-
 /**
  * Initialize Blockly and the puzzle.  Called on page load.
  */
 Puzzle.init = function() {
-  var spans = document.getElementById('MSG').getElementsByTagName('span');
-  for (var x = 0, span; span = spans[x]; x++) {
-    MSG[span.id] = span.innerHTML;
-    // Convert newline sequences.
-    MSG[span.id] = MSG[span.id].replace(/\\n/g, '\n');
-  }
-  document.title = document.getElementById('title').textContent;
-  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
+  BlocklyApps.init();
+
   var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
-  document.head.parentElement.setAttribute('dir',
-      BlocklyApps.LANGUAGES[BlocklyApps.LANG][1]);
-  document.head.parentElement.setAttribute('lang', BlocklyApps.LANG);
-
-  // Populate the language selection menu.
-  var languageMenu = document.getElementById('languageMenu');
-  languageMenu.options.length = 0;
-  for (var lang in BlocklyApps.LANGUAGES) {
-    var option = new Option(BlocklyApps.LANGUAGES[lang][0], lang);
-    if (lang == BlocklyApps.LANG) {
-      option.selected = true;
-    }
-    languageMenu.options.add(option);
-  }
-  // HACK: Firefox v21 does not allow the setting of style.float.
-  // Use setAttribute instead.
-  //languageMenu.parentElement.style.display = 'block';
-  //languageMenu.parentElement.style.float = rtl ? 'left' : 'right';
-  languageMenu.parentElement.setAttribute('style',
-      'display: block; float: ' + (rtl ? 'left' : 'right') + ';');
-
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
        rtl: rtl,
        trashcan: false});
 
-  // window.addEventListener('beforeunload', function(e) {
-  //   if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-  //     e.returnValue = MSG.unloadWarning;  // Gecko.
-  //     return MSG.unloadWarning;  // Webkit.
-  //   }
-  //   return null;
-  // });
   var blocklyDiv = document.getElementById('blockly');
   var onresize = function(e) {
     blocklyDiv.style.width = (window.innerWidth - 20) + 'px';
-    blocklyDiv.style.height = (window.innerHeight - blocklyDiv.offsetTop - 22) +
-        'px';
+    blocklyDiv.style.height =
+        (window.innerHeight - blocklyDiv.offsetTop - 22) + 'px';
   };
   onresize();
   window.addEventListener('resize', onresize);
@@ -134,18 +97,22 @@ Puzzle.init = function() {
     var blocksCountries = [];
     var blocksFlags = [];
     var blocksCities = [];
-    for (var i = 1, country; country = MSG['country' + i]; i++) {
+    var i = 1;
+    while (BlocklyApps.getMsgOrNull('country' + i)) {
       var block = new Blockly.Block(Blockly.mainWorkspace, 'country');
       block.populate(i);
       blocksCountries.push(block);
       var block = new Blockly.Block(Blockly.mainWorkspace, 'flag');
       block.populate(i);
       blocksFlags.push(block);
-      for (var j = 1; MSG['country' + i + 'City' + j]; j++) {
+      var j = 1;
+      while (BlocklyApps.getMsgOrNull('country' + i + 'City' + j)) {
         var block = new Blockly.Block(Blockly.mainWorkspace, 'city');
         block.populate(i, j);
         blocksCities.push(block);
+        j++;
       }
+      i++;
     }
     blocksCountries.sort(Puzzle.shuffleComp);
     blocksFlags.sort(Puzzle.shuffleComp);
@@ -208,9 +175,12 @@ Puzzle.shuffleComp = function(a, b) {
  *   language-neutral tuples.
  */
 Puzzle.languages = function() {
-  var list = [[MSG.languageChoose, '0']];
-  for (var i = 1, lang; lang = MSG['country' + i + 'Language']; i++) {
+  var list = [[BlocklyApps.getMsg('languageChoose'), '0']];
+  var i = 1;
+  var lang;
+  while (lang = BlocklyApps.getMsgOrNull('country' + i + 'Language')) {
     list[i] = [lang, String(i)];
+    i++;
   }
   return list;
 };
@@ -227,15 +197,16 @@ Puzzle.checkAnswers = function() {
       // Bring the offending block to the front.
       block.select();
     }
-
   }
   var message;
   if (errors == 1) {
-    message = MSG.error1 + '\n' + MSG.tryAgain;
+    message = BlocklyApps.getMsg('error1') + '\n' +
+        BlocklyApps.getMsg('tryAgain');
   } else if (errors) {
-    message = MSG.error2.replace('%1', errors) + '\n' + MSG.tryAgain;
+    message = BlocklyApps.getMsg('error2').replace('%1', errors) + '\n' +
+        BlocklyApps.getMsg('tryAgain');
   } else {
-    message = MSG.error0.replace('%1', blocks.length);
+    message = BlocklyApps.getMsg('error0').replace('%1', blocks.length);
   }
   alert(message);
 };
@@ -276,15 +247,3 @@ Puzzle.keyDown = function(e) {
   }
 };
 
- /**
-  * Save the blocks and reload with a different language.
-  */
-Puzzle.changeLanguage = function() {
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var text = Blockly.Xml.domToText(xml);
-  window.sessionStorage.loadOnceBlocks = text;
-  var languageMenu = document.getElementById('languageMenu');
-  var newLang = languageMenu.options[languageMenu.selectedIndex].value;
-  window.location = window.location.protocol + '//' +
-      window.location.host + window.location.pathname + '?lang=' + newLang;
-};

@@ -5,7 +5,7 @@ if (typeof planepage == 'undefined') { var planepage = {}; }
 
 
 planepage.start = function(opt_data, opt_ignored, opt_ijData) {
-  var output = '<div id="MSG" style="display: none"><span id="rows">Rows: %1</span><span id="getRows">rows (%1)</span><span id="rows1">1st class rows: %1</span><span id="getRows1">1st class rows (%1)</span><span id="rows2">2nd class rows: %1</span><span id="getRows2">2nd class rows (%1)</span><span id="seats">Seats: %1</span><span id="setSeats">seats =</span></div><div style="display: none;"><select id="languageMenu" onchange="Plane.changeLanguage();"></select></div><h1><span id="title"><a href="../index.html">Blockly</a> : Plane</span> &nbsp; ';
+  var output = '<div id="MSG" style="display: none"><span id="rows">Rows: %1</span><span id="getRows">rows (%1)</span><span id="rows1">1st class rows: %1</span><span id="getRows1">1st class rows (%1)</span><span id="rows2">2nd class rows: %1</span><span id="getRows2">2nd class rows (%1)</span><span id="seats">Seats: %1</span><span id="setSeats">seats =</span></div><div style="display: none;"><select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select></div><h1><span id="title"><a href="../index.html">Blockly</a> : Plane</span> &nbsp; ';
   for (var i34 = 1; i34 < 4; i34++) {
     output += ' ' + ((i34 == opt_ijData.level) ? '<span class="tab" id="selected">' + soy.$$escapeHtml(i34) + '</span>' : (i34 < opt_ijData.level) ? '<a class="tab previous" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i34) + '">' + soy.$$escapeHtml(i34) + '</a>' : '<a class="tab" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i34) + '">' + soy.$$escapeHtml(i34) + '</a>');
   }

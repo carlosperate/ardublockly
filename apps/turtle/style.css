@@ -1,5 +1,5 @@
 body {
-  background-color: white;
+  background-color: #fff;
   font-family: sans-serif;
 }
 h1 {
@@ -49,7 +49,7 @@ button {
 button.launch {
   border: 1px solid #d43;
   background-color: #d43;
-  color: white;
+  color: #fff;
   font-size: large;
   /* Can't use "text-align: start" due to IE. */
   text-align: left;
@@ -92,7 +92,10 @@ button.disabled {
 #downloadImageLink {
   display: none;
 }
-
+#languageMenu {
+  vertical-align: top;
+  margin-top: 12px;
+}
 /* Slider. */
 .sliderTrack {
   stroke: #aaa;

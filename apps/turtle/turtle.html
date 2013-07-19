@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html dir="ltr" lang="de">
+<html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="target-densitydpi=device-dpi, height=660, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Blockly : Turtle Graphics</title>
   <link rel="stylesheet" type="text/css" href="style.css">
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="de.js"></script>
   <script type="text/javascript" src="../common.js"></script>
-  <script>
-    var languageSrc = ['de_compressed.js'];
-  </script>
+  <script type="text/javascript" src="turtle.js"></script>
+  <script type="text/javascript" src="/storage.js"></script>
 </head>
 <body>
-  <script type="text/javascript" src="/storage.js"></script>
-  <script type="text/javascript" src="turtle.js"></script>
+  <script type="text/javascript">
+    document.write(turtlepage.start({}, null,
+        {langSrc: BlocklyApps.LANGUAGES[BlocklyApps.LANG][2]}));
+  </script>
 </body>
 </html>

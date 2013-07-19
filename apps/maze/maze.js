@@ -432,24 +432,7 @@ Maze.drawMap = function() {
  * Initialize Blockly and the maze.  Called on page load.
  */
 Maze.init = function() {
-  document.title = document.getElementById('title').textContent;
-  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
-  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
-  document.head.parentElement.setAttribute('dir',
-      BlocklyApps.LANGUAGES[BlocklyApps.LANG][1]);
-  document.head.parentElement.setAttribute('lang', BlocklyApps.LANG);
-
-  // Populate the language selection menu.
-  var languageMenu = document.getElementById('languageMenu');
-  languageMenu.options.length = 0;
-  for (var lang in BlocklyApps.LANGUAGES) {
-    var option = new Option(BlocklyApps.LANGUAGES[lang][0], lang);
-    if (lang == BlocklyApps.LANG) {
-      option.selected = true;
-    }
-    languageMenu.options.add(option);
-  }
+  BlocklyApps.init();
 
   // Setup the Pegman menu.
   var pegmanImg = document.querySelector('#pegmanButton>img');
@@ -474,15 +457,7 @@ Maze.init = function() {
   }
   Blockly.bindEvent_(window, 'resize', null, Maze.hidePegmanMenu);
 
-  // Show the language menu and Pegman menu on the far side (right in LTR).
-  var farSideDiv = document.getElementById('farSide');
-  // HACK: Firefox v22 does not allow the setting of style.float.
-  // Use setAttribute instead.
-  //farSideDiv.style.display = 'block';
-  //farSideDiv.style.float = rtl ? 'left' : 'right';
-  farSideDiv.setAttribute('style',
-      'display: block; float: ' + (rtl ? 'left' : 'right') + ';');
-
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
@@ -509,25 +484,11 @@ Maze.init = function() {
   window.addEventListener('resize', onresize);
   onresize();
 
-  if (!('BlocklyStorage' in window)) {
-    document.getElementById('linkButton').className = 'disabled';
-  }
-  // An href with #key trigers an AJAX call to retrieve saved blocks.
-  if ('BlocklyStorage' in window && window.location.hash.length > 1) {
-    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-  } else if (window.sessionStorage.loadOnceBlocks) {
-    var text = window.sessionStorage.loadOnceBlocks;
-    delete window.sessionStorage.loadOnceBlocks;
-    var xml = Blockly.Xml.textToDom(text);
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-  } else {
-    // Load the editor with a starting block.
-    var xml = Blockly.Xml.textToDom(
-        '<xml>' +
-        '  <block type="maze_moveForward" x="70" y="70"></block>' +
-        '</xml>');
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-  }
+  var defaultXml =
+      '<xml>' +
+      '  <block type="maze_moveForward" x="70" y="70"></block>' +
+      '</xml>';
+  BlocklyApps.loadBlocks(defaultXml);
 
   // Locate the start and finish squares.
   for (var y = 0; y < Maze.ROWS; y++) {
@@ -545,18 +506,6 @@ Maze.init = function() {
 };
 
 window.addEventListener('load', Maze.init);
-
-/**
- * Reload with a different language.
- */
-Maze.changeLanguage = function() {
-  Maze.saveToStorage();
-  var languageMenu = document.getElementById('languageMenu');
-  var newLang = languageMenu.options[languageMenu.selectedIndex].value;
-  window.location = window.location.protocol + '//' +
-      window.location.host + window.location.pathname +
-      '?lang=' + newLang + '&level=' + Maze.LEVEL + '&skin=' + Maze.SKIN_ID;
-};
 
 /**
  * Reload with a different Pegman skin.

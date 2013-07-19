@@ -138,6 +138,10 @@ Blockly.Toolbox.position_ = function() {
   }
   treeDiv.style.height = (svgSize.height + 1) + 'px';
   Blockly.Toolbox.width = treeDiv.offsetWidth;
+  if (!Blockly.RTL) {
+    // For some reason the LTR toolbox now reports as 1px too wide.
+    Blockly.Toolbox.width -= 1;
+  }
 };
 
 /**

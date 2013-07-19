@@ -28,7 +28,17 @@
  */
 var Turtle = {};
 
-document.write(turtlepage.start({}, null, null));
+// Supported languages.
+BlocklyApps.LANGUAGES = {
+  // Format: ['Language name', 'direction', 'XX_compressed.js']
+  en: ['English', 'ltr', 'en_compressed.js'],
+  de: ['Deutsch', 'ltr', 'de_compressed.js'],
+  hu: ['Magyar', 'ltr', 'en_compressed.js'],
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js']};
+BlocklyApps.LANG = BlocklyApps.getLang();
+
+document.write('<script type="text/javascript" src="' +
+               BlocklyApps.LANG + '.js"></script>\n');
 
 Turtle.HEIGHT = 400;
 Turtle.WIDTH = 400;
@@ -47,9 +57,9 @@ Turtle.visible = true;
  * Initialize Blockly and the turtle.  Called on page load.
  */
 Turtle.init = function() {
-  // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
-  // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
-  var rtl = document.body.parentNode.dir == 'rtl';
+  BlocklyApps.init();
+
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
@@ -80,10 +90,6 @@ Turtle.init = function() {
   window.addEventListener('resize', onresize);
   onresize();
 
-  if (!('BlocklyStorage' in window)) {
-    document.getElementById('linkButton').className = 'disabled';
-  }
-
   // Hide download button if browser lacks support
   // (http://caniuse.com/#feat=download).
   if (!(goog.userAgent.GECKO ||
@@ -95,23 +101,17 @@ Turtle.init = function() {
   var sliderSvg = document.getElementById('slider');
   Turtle.speedSlider = new Slider(10, 35, 130, sliderSvg);
 
-  // Add the starting block(s).
-  // An href with #key trigers an AJAX call to retrieve saved blocks.
-  if ('BlocklyStorage' in window && window.location.hash.length > 1) {
-    BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-  } else {
-    // Load the editor with starting blocks.
-    var xml =
-        '  <block type="draw_move" x="70" y="70">' +
-        '    <value name="VALUE">' +
-        '      <block type="math_number">' +
-        '        <title name="NUM">100</title>' +
-        '      </block>' +
-        '    </value>' +
-        '  </block>';
-    xml = Blockly.Xml.textToDom('<xml>' + xml + '</xml>');
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-  }
+  var defaultXml =
+      '<xml>' +
+      '  <block type="draw_move" x="70" y="70">' +
+      '    <value name="VALUE">' +
+      '      <block type="math_number">' +
+      '        <title name="NUM">100</title>' +
+      '      </block>' +
+      '    </value>' +
+      '  </block>' +
+      '</xml>';
+  BlocklyApps.loadBlocks(defaultXml);
 
   Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
   Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');
