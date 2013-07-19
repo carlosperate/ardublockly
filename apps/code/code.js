@@ -22,8 +22,7 @@
  * @author fraser@google.com (Neil Fraser)
  */
 
-document.write(codepage.start({}, null,
-    {MSG: MSG, frameSrc: frameSrc.join('&')}));
+document.write(codepage.start({}, null, {frameSrc: frameSrc.join('&')}));
 
 /**
  * List of tab names.
@@ -47,7 +46,7 @@ function tabClick(id) {
       xmlDom = Blockly.Xml.textToDom(xmlText);
     } catch (e) {
       var q =
-          window.confirm(MSG.badXml.replace('%1', e));
+          window.confirm(BlocklyApps.getMsg('badXml').replace('%1', e));
       if (!q) {
         // Leave the user on the XML tab.
         return;
@@ -144,7 +143,7 @@ function runJS() {
   var timeouts = 0;
   var checkTimeout = function() {
     if (timeouts++ > 1000000) {
-      throw MSG.timeout;
+      throw BlocklyApps.getMsg('timeout');
     }
   };
   var code = Blockly.Generator.workspaceToCode('JavaScript');
@@ -152,7 +151,7 @@ function runJS() {
   try {
     eval(code);
   } catch (e) {
-    alert(MSG.badCode.replace('%1', e));
+    alert(BlocklyApps.getMsg('badCode').replace('%1', e));
   }
 }
 
@@ -162,7 +161,7 @@ function runJS() {
 function discard() {
   var count = Blockly.mainWorkspace.getAllBlocks().length;
   if (count < 2 ||
-      window.confirm(MSG.discard.replace('%1', count))) {
+      window.confirm(BlocklyApps.getMsg('discard').replace('%1', count))) {
     Blockly.mainWorkspace.clear();
     window.location.hash = '';
   }

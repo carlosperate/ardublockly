@@ -1,8 +1,27 @@
 {namespace codepage}
 
 /**
- * This is a Closure Template.  Build with:
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat template.js --srcs template.soy
+ * This is a Closure Template.  Build multilingually:
+ *
+ * # Create en.js.
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
+ *
+ * # Extract messages from template.soy.
+ * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
+ *
+ * # Create en.json, qqq.json.
+ * ../../i18n/xliff_to_json.py extracted_msgs.xlf
+ *
+ * Once translations have been made into <LANG>.json:
+ *
+ * # Create *.xlf.  By default, qqq.json and keys.json are skipped.
+ * ../../i18n/json_to_xliff.py *.json
+ *
+ * # Create .js files by running script recommended by previous command.  It will
+ * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
+ *
+ * # The .xlf files may be deleted.  They should not be checked in.
+ * rm *.xlf
  */
 
 /**
@@ -17,6 +36,18 @@
   // These reference the messages in maze to minimize extra work for
   // translators.
   <div id="COMMON_MSG" style="display: none">
+    // For expediency (but not maintainability), the definition of listVariable
+    // is inlined an additional four times below.
+    <span id="listVariable">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</span>
+    // For expediency (but not maintainability), the definition of textVariable
+    // is inlined an additional three times below.
+    <span id="textVariable">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</span>
+    <span id="badXml">{msg meaning="Code.badXml" desc="TODO"}Error parsing XML:\n%1\n\nAbandon changes?{/msg}</span>
+    <span id="badCode">{msg meaning="Code.badCode" desc="TODO"}Program error:\n%1{/msg}</span>
+    <span id="timeout">{msg meaning="Code.timeout" desc="TODO"}Maximum execution iterations exceeded.{/msg}</span>
+    <span id="discard">{msg meaning="Code.discard" desc="TODO"}Delete all %1 blocks?{/msg}</span>
+    <span id="title">{msg meaning="Code.title" desc="TODO"}Code{/msg}</span>
+
     // Suffix "Message" distinguishes id from other uses of "Blockly".
     <span id="blocklyMessage">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</span>
     <span id="httpRequestError">{{msg meaning="Apps.httpRequestError" desc="alert - The URL is invalid or a server error occurred.  This message will be followed by technical information useful to engineers trying to understand the problem.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.httpRequestError{rb}{rb}"}}There was a problem with the request.{{/msg}}</span>
@@ -28,14 +59,14 @@
   <table width="100%" height="100%">
     <tr>
       <td>
-        <h1><a href="../index.html">Blockly</a> : {$ij.MSG.title}</h1>
+        <h1><a href="../index.html">Blockly</a> : Code</h1>
       </td>
     </tr>
     <tr>
       <td>
         <table>
           <tr id="tabRow" height="1em">
-            <td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">{$ij.MSG.blocks}</td>
+            <td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">{msg meaning="Code.blocks" desc="TODO"}Blocks{/msg}</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_javascript" class="taboff" onclick="tabClick(this.id)">JavaScript</td>
             <td class="tabmin">&nbsp;</td>
@@ -43,13 +74,13 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
             <td class="tabmax">
-              <button title="{$ij.MSG.trashTooltip}" onclick="discard(); renderContent();">
+              <button title="{msg meaning="Code.trashTooltip" desc="TODO"}Discard all blocks.{/msg}" onclick="discard(); renderContent();">
                 <img src='../../media/1x1.gif' class="trash icon21">
               </button>{sp}
-              <button id="linkButton" title="{$ij.MSG.linkTooltip}" onclick="BlocklyStorage.link()">
+              <button id="linkButton" title="{msg meaning="Code.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link()">
                 <img src='../../media/1x1.gif' class="link icon21">
               </button>{sp}
-              <button title="{$ij.MSG.runTooltip}" class="launch" onclick="runJS()">
+              <button title="{msg meaning="Code.runTooltip" desc="TODO"}Run program.{/msg}" class="launch" onclick="runJS()">
                 <img src='../../media/1x1.gif' class="run icon21">
               </button>
             </td>
@@ -76,7 +107,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{$ij.MSG.catControl}">
+    <category name="{msg meaning="Code.catControl" desc="TODO"}Control{/msg}">
       <block type="controls_if"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
@@ -106,7 +137,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="{$ij.MSG.catLogic}">
+    <category name="{msg meaning="Code.catLogic" desc="TODO"}Logic{/msg}">
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
@@ -114,7 +145,7 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="{$ij.MSG.catMath}">
+    <category name="{msg meaning="Code.catMath" desc="TODO"}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -157,7 +188,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{$ij.MSG.catText}">
+    <category name="{msg meaning="Code.catText" desc="TODO"}Text{/msg}">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -170,21 +201,21 @@
       <block type="text_indexOf">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{$ij.MSG.textVariable}</title>
+            <title name="VAR">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</title>
           </block>
         </value>
       </block>
       <block type="text_charAt">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{$ij.MSG.textVariable}</title>
+            <title name="VAR">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</title>
           </block>
         </value>
       </block>
       <block type="text_getSubstring">
         <value name="STRING">
           <block type="variables_get">
-            <title name="VAR">{$ij.MSG.textVariable}</title>
+            <title name="VAR">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</title>
           </block>
         </value>
       </block>
@@ -193,7 +224,7 @@
       <block type="text_print"></block>
       <block type="text_prompt"></block>
     </category>
-    <category name="{$ij.MSG.catLists}">
+    <category name="{msg meaning="Code.catLists" desc="TODO"}Lists{/msg}">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
       <block type="lists_repeat">
@@ -208,39 +239,39 @@
       <block type="lists_indexOf">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{$ij.MSG.listVariable}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getIndex">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{$ij.MSG.listVariable}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_setIndex">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{$ij.MSG.listVariable}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getSublist">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{$ij.MSG.listVariable}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
           </block>
         </value>
       </block>
     </category>
-    <category name="{$ij.MSG.catColour}">
+    <category name="{msg meaning="Code.catColour" desc="TODO"}Colour{/msg}">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb"></block>
       <block type="colour_blend"></block>
     </category>
-    <category name="{$ij.MSG.catVariables}" custom="VARIABLE"></category>
-    <category name="{$ij.MSG.catProcedures}" custom="PROCEDURE"></category>
+    <category name="{msg meaning="Code.catVariables" desc="TODO"}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Code.catProcedures" desc="TODO"}Procedures{/msg}" custom="PROCEDURE"></category>
   </xml>
 {/template}

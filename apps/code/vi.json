@@ -1,0 +1,22 @@
+{
+    "Code.badXml": "Lỗi khi đọc XML:\n%1\n\nNên hủy các mảnh đã tạo?",
+    "Code.badCode": "'Lỗi chương trình:\n%1",
+    "Code.timeout": "Đã vượt quá số lần lặp cho phép.",
+    "Code.discard": "Xóa hết %1 mảnh?",
+    "Apps.httpRequestError": "Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.",
+    "Apps.linkAlert": "Dùng liên kết này để chia sẽ chương trình của bạn:\n\n%1",
+    "Apps.hashError": "Không tìm thấy chương trình được lưu ở '%1'.",
+    "Apps.xmlError": "Không mở được chương trình của bạn.  Có thể nó nằm trong một phiên bản khác của Blockly?",
+    "Code.blocks": "Các mảnh",
+    "Code.trashTooltip": "Xóa tất cả mọi mảnh.",
+    "Code.linkTooltip": "Lưu và lấy địa chỉ liên kết.",
+    "Code.runTooltip": "Chạy chương trình.",
+    "Code.catControl": "Điều khiển",
+    "Code.catLogic": "Lôgit",
+    "Code.catMath": "Toán",
+    "Code.catText": "Văn bản",
+    "Code.catLists": "Danh sách",
+    "Code.catColour": "Màu",
+    "Code.catVariables": "Biến",
+    "Code.catProcedures": "Thủ tục"
+}

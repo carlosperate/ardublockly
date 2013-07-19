@@ -5,41 +5,9 @@
   <title>Lập Trình với Blockly</title>
   <link href="style.css" rel="stylesheet" type="text/css">
   <script type="text/javascript" src="../_soy/soyutils.js"></script>
-  <script type="text/javascript" src="template.js"></script>
+  <script type="text/javascript" src="vi.js"></script>
   <script type="text/javascript" src="../common.js"></script>
   <script>
-    var MSG = {
-      // Tooltips.
-      trashTooltip: 'Xóa tất cả mọi mảnh.',
-      linkTooltip: 'Lưu và lấy địa chỉ liên kết.',
-      runTooltip: 'Chạy chương trình.',
-      // Toolbox categories.
-      catControl: 'Điều khiển',
-      catLogic: 'Lôgit',
-      catMath: 'Toán',
-      catText: 'Văn bản',
-      catLists: 'Danh sách',
-      catColour: 'Màu',
-      catVariables: 'Biến',
-      catProcedures: 'Thủ tục',
-      // Initial variable names.
-      listVariable: 'list',
-      textVariable: 'text',
-      // Misc text.
-      blocks: 'Các mảnh',
-      badXml: 'Lỗi khi đọc XML:\n%1\n\nNên hủy các mảnh đã tạo?',
-      badCode: 'Lỗi chương trình:\n%1',
-      timeout: 'Đã vượt quá số lần lặp cho phép.',
-      discard: 'Xóa hết "%1" mảnh?',
-      title: 'Code'
-    };
-    if ('BlocklyStorage' in window) {
-      BlocklyStorage.HTTPREQUEST_ERROR = 'Hoạt động bị trục trặc, không thực hiện được yêu cầu của bạn.\n';
-      BlocklyStorage.LINK_ALERT = 'Dùng liên kết này để chia sẽ chương trình của bạn:\n\n';
-      BlocklyStorage.HASH_ERROR = 'Không tìm thấy chương trình được lưu ở "%1".';
-      BlocklyStorage.XML_ERROR = 'Không mở được chương trình của bạn.\n'+
-          'Có thể nó nằm trong một phiên bản khác của Blockly?\nXML là: ';
-    }
     var frameSrc = ['vi_compressed.js'];
   </script>
 </head>
