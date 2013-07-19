@@ -36,20 +36,11 @@
   // These reference the messages in maze to minimize extra work for
   // translators.
   <div id="COMMON_MSG" style="display: none">
-    // For expediency (but not maintainability), the definition of listVariable
-    // is inlined an additional four times below.
-    <span id="listVariable">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</span>
-    // For expediency (but not maintainability), the definition of textVariable
-    // is inlined an additional three times below.
-    <span id="textVariable">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</span>
     <span id="badXml">{msg meaning="Code.badXml" desc="TODO"}Error parsing XML:\n%1\n\nAbandon changes?{/msg}</span>
     <span id="badCode">{msg meaning="Code.badCode" desc="TODO"}Program error:\n%1{/msg}</span>
     <span id="timeout">{msg meaning="Code.timeout" desc="TODO"}Maximum execution iterations exceeded.{/msg}</span>
     <span id="discard">{msg meaning="Code.discard" desc="TODO"}Delete all %1 blocks?{/msg}</span>
-    <span id="title">{msg meaning="Code.title" desc="TODO"}Code{/msg}</span>
 
-    // Suffix "Message" distinguishes id from other uses of "Blockly".
-    <span id="blocklyMessage">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</span>
     <span id="httpRequestError">{{msg meaning="Apps.httpRequestError" desc="alert - The URL is invalid or a server error occurred.  This message will be followed by technical information useful to engineers trying to understand the problem.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.httpRequestError{rb}{rb}"}}There was a problem with the request.{{/msg}}</span>
     <span id="linkAlert">{{msg meaning="Apps.linkAlert" desc="alert - After the user has pressed a button to save his/her program, this provides the URL (%1) to retrieve the program.  The characters '\n\n' indicate that a blank line will be displayed before the URL (in English).  Leave those in unless you move %1 to the beginning or middle of the text, in which case you should use your judgment about where blank lines would be most useful.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.linkAlert{rb}{rb}."}}Share your blocks with this link:\n\n%1{{/msg}}</span>
     <span id="hashError">{{msg meaning="Apps.hashError" desc="alert - A request to retrieve a stored program does not have a valid URL. %1 is the invalid portion of the URL. 'Blockly' is the name of the system.  It should be left untranslated or it should be transliterated.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.hashError{rb}{rb}."}}Sorry, '%1' doesn't correspond with any saved Blockly file.{{/msg}}</span>
@@ -59,7 +50,18 @@
   <table width="100%" height="100%">
     <tr>
       <td>
-        <h1><a href="../index.html">Blockly</a> : Code</h1>
+        <div style="display: none;">
+          <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
+        </div>
+        <h1>
+          <span id="title">
+            <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
+            {sp}:{sp}
+            {msg meaning="Code.title" desc="TODO"}
+              Code
+            {/msg}
+          </span>
+        </h1>
       </td>
     </tr>
     <tr>
@@ -91,7 +93,7 @@
     <tr>
       <td height="99%">
         {call .toolbox /}
-        <iframe id="content_blocks" src="frame.html?{$ij.frameSrc}"></iframe>
+        <iframe id="content_blocks" src="frame.html?{$ij.langSrc}"></iframe>
         <pre id="content_javascript"></pre>
         <pre id="content_python"></pre>
         <div id="content_xml">

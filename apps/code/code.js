@@ -22,7 +22,18 @@
  * @author fraser@google.com (Neil Fraser)
  */
 
-document.write(codepage.start({}, null, {frameSrc: frameSrc.join('&')}));
+// Supported languages.
+BlocklyApps.LANGUAGES = {
+  // Format: ['Language name', 'direction', 'XX_compressed.js']
+  en: ['English', 'ltr', 'en_compressed.js'],
+  de: ['Deutsch', 'ltr', 'de_compressed.js'],
+  hu: ['Magyar', 'ltr', 'en_compressed.js'],
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
+  'zh-tw': ['中國的', 'ltr', 'zh_tw_compressed.js']};
+BlocklyApps.LANG = BlocklyApps.getLang();
+
+document.write('<script type="text/javascript" src="' +
+               BlocklyApps.LANG + '.js"></script>\n');
 
 /**
  * List of tab names.
@@ -102,6 +113,7 @@ function renderContent() {
  */
 function init(blockly) {
   window.Blockly = blockly;
+  BlocklyApps.init();
 
   // Add to reserved word list: Local variables in execution evironment (runJS)
   // and the infinite loop detection function.
@@ -116,19 +128,11 @@ function init(blockly) {
       }
   }, 1);
 
+  BlocklyApps.loadBlocks('');
+
   if ('BlocklyStorage' in window) {
-    // An href with #key trigers an AJAX call to retrieve saved blocks.
-    if (window.location.hash.length > 1) {
-      BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-    } else {
-      // Restore saved blocks in a separate thread so that subsequent
-      // initialization is not affected from a failed load.
-      window.setTimeout(BlocklyStorage.restoreBlocks, 0);
-    }
     // Hook a save function onto unload.
     BlocklyStorage.backupOnUnload();
-  } else {
-    document.getElementById('linkButton').className = 'disabled';
   }
 
   tabClick('tab_' + selected);

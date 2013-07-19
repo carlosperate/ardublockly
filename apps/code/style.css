@@ -25,7 +25,7 @@ html, body {
   height: 100%;
 }
 body {
-  background-color: white;
+  background-color: #fff;
   font-family: sans-serif;
   margin: 0;
   overflow: hidden
@@ -66,8 +66,12 @@ td.tabmax {
   border-left-style: none !important;
   border-right-style: none !important;
   width: 99%;
-  text-align: right;
+  padding-left: 10px;
   padding-right: 10px;
+  text-align: right;
+}
+html[dir=rtl] td.tabmax {
+  text-align: left;
 }
 
 table {
@@ -102,6 +106,12 @@ iframe {
   border: 1px solid #ccc;
   border-top: 0;
 }
+#languageMenu {
+  vertical-align: top;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
 button {
   padding: 1px 10px;
   margin: 1px 5px;
