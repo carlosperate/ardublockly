@@ -1,24 +1,36 @@
 body {
-  background-color: #fff;
+  background-color: #F2F2F2;
   font-family: sans-serif;
 }
 h1 {
   font-weight: normal;
   font-size: 140%;
 }
-
 a:hover {
   color: #f00;
 }
 .tab {
-  padding: 6px 12px;
+  font-weight: bold;
+  padding: 14px 15px;
+  margin: 12px;
   text-decoration: none;
   color: #000;
 }
-#selected {
-  font-weight: bold;
-  background-color: #ddd;
-  border-radius: 20px;
+.previous {
+  color: #0DA38A;
+}
+.selected {
+  color: white;
+  border-radius: 28px;
+  border: 0;
+  background: #0DA38A;
+}
+.doubleDigit {
+  padding: 14px 15px;
+}
+.singleDigit {
+  padding: 14px 22px;
+  margin: 5px;
 }
 #hintBubble {
   position: absolute;
@@ -33,13 +45,6 @@ a:hover {
   padding: 5px 1em;
   font-size: large;
 }
-#capacityBubble {
-  position: absolute;
-  margin-top: -0.5em;
-  left: 10px;
-  top: 425px;
-  width: 380px;
-}
 #capacity {
   display: none;
   color: #fff;
@@ -48,12 +53,85 @@ a:hover {
   background-color: rgba(64,64,64,0.7);
   font-size: large;
 }
-html[dir=rtl] #capacity {
-  float: left;
+#capacityBubble {
+  display: none;
+  position: absolute;
+  margin-top: -0.5em;
+  left: 10px;
+  top: 425px;
+  width: 380px;
 }
 #capacityNumber {
   font-weight: bold;
 }
+#hintBubble {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  border-radius: 15px;
+  background-color: rgba(64,64,64,0.7);
+  width: 380px;
+}
+#levelFeedback {
+  display: none;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  min-width: 380px;
+  position: absolute;
+  left: 2.5em;
+  top: 5em;
+  z-index: 1;
+  border-radius: 8px;
+  -box-shado-mozw: 5px 5px 5px #888;
+  -webkit-box-shadow: 5px 5px 5px #888;
+  box-shadow: 5px 5px 5px #888;
+  padding: 10px;
+}
+#pegman_bubble {
+  position: relative;
+  top: -1px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+#reinfbubble {
+  width: 385px;
+  padding: 7px;
+  border: 1px solid #CCB;
+  border-radius: 15px;
+  background-color: #ff7;
+}
+#reinfmsg {
+  font-weight: bold;
+}
+#reinfDone {
+  display: none;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  min-width: 380px;
+  position: absolute;
+  left: 2.5em;
+  top: 5em;
+  z-index: 1;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #888;
+  padding: 10px;
+}
+#shadow {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 120%;
+  width: 100%;
+  background-color: #000;
+  opacity: 0.3;
+}
+html[dir=rtl] #capacity {
+  float: left;
+}
+
 
 /* 'Look' icon */
 #look>path {
@@ -74,7 +152,7 @@ button {
   border: 1px solid #ddd;
   background-color: #eee;
   font-size: 10%;
-  color: black;
+  color: #000;
 }
 button.launch {
   border: 1px solid #d43;
@@ -102,6 +180,9 @@ button>img {
 }
 button.disabled {
   visibility: hidden;
+}
+input[type="radio"] {
+  margin-left: 40px;
 }
 #blockly {
   position: fixed;
