@@ -1,5 +1,5 @@
 /**
- * Visual Blocks Editor
+ * Blockly Apps: Code
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview JavaScript for Blockly code demo (language-neutral).
+ * @fileoverview JavaScript for Blockly's Code application.
  * @author fraser@google.com (Neil Fraser)
  */
 

@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-07-19 14:06:00.171128",
+        "lastupdated": "2013-07-19 14:37:43.753784",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -50,6 +50,7 @@
     "Turtle.catLogic": "Logic",
     "Turtle.catMath": "Math",
     "Turtle.catLists": "Lists",
+    "Turtle.listVariable": "list",
     "Turtle.catVariables": "Variables",
     "Turtle.catProcedures": "Functions"
 }

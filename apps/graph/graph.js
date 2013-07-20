@@ -1,5 +1,5 @@
 /**
- * Visual Blocks Language
+ * Blockly Apps: Graphing Calculator
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Blocks for graphing calculator app.
+ * @fileoverview JavaScript for Blockly's Graphing Calculator application.
  * @author q.neutron@gmail.com (Quynh Neutron)
  */
 'use strict';

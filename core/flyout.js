@@ -332,8 +332,9 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   for (var i = 0, block; block = blocks[i]; i++) {
     var allBlocks = block.getDescendants();
     for (var j = 0, child; child = allBlocks[j]; j++) {
-      // Mark blocks as being inside a flyout.  This is used to detect and prevent
-      // the closure of the flyout if the user right-clicks on such a block.
+      // Mark blocks as being inside a flyout.  This is used to detect and
+      // prevent the closure of the flyout if the user right-clicks on such a
+      // block.
       child.isInFlyout = true;
       // There is no good way to handle comment bubbles inside the flyout.
       // Blocks shouldn't come with predefined comments, but someone will
@@ -383,6 +384,21 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 };
 
 /**
+ * Filter the blocks on the flyout to disable the ones that are above the
+ * capacity limit.
+ * @private
+ */
+Blockly.Flyout.prototype.filterForCapacity_ = function() {
+  var remainingCapacity = this.targetWorkspace_.remainingCapacity();
+  var blocks = this.workspace_.getTopBlocks(false);
+  for (var i = 0, block; block = blocks[i]; i++) {
+    var allBlocks = block.getDescendants();
+    var disabled = allBlocks.length > remainingCapacity;
+    block.setDisabled(disabled);
+  }
+};
+
+/**
  * Create a copy of this block on the workspace.
  * @param {!Blockly.Flyout} flyout Instance of the flyout.
  * @param {!Blockly.Block} originBlock The flyout block to copy.
@@ -419,18 +435,4 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
     // Start a dragging operation on the new block.
     block.onMouseDown_(e);
   };
-};
-
-/**
- * Filter the blocks on the flyout to disable the ones that are above the
- * capacity limit.
- */
-Blockly.Flyout.prototype.filterForCapacity_ = function() {
-  var remainingCapacity = this.targetWorkspace_.remainingCapacity();
-  var blocks = this.workspace_.getTopBlocks(false);
-  for (var i = 0, block; block = blocks[i]; i++) {
-    var allBlocks = block.getDescendants();
-    var disabled = allBlocks.length > remainingCapacity;
-    block.setDisabled(disabled);
-  }
 };

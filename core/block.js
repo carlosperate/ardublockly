@@ -28,10 +28,10 @@ goog.provide('Blockly.Block');
 goog.require('Blockly.BlockSvg');
 goog.require('Blockly.Comment');
 goog.require('Blockly.Connection');
+goog.require('Blockly.ContextMenu');
 goog.require('Blockly.Input');
 goog.require('Blockly.Language');
 goog.require('Blockly.Mutator');
-goog.require('Blockly.ContextMenu');
 goog.require('Blockly.Warning');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
@@ -203,7 +203,7 @@ Blockly.Block.terminateDrag_ = function() {
  */
 Blockly.Block.prototype.select = function() {
   if (!this.svg_) {
-    throw 'Block is not rendered.'
+    throw 'Block is not rendered.';
   }
   if (Blockly.selected) {
     // Unselect any previously selected block.
@@ -219,7 +219,7 @@ Blockly.Block.prototype.select = function() {
  */
 Blockly.Block.prototype.unselect = function() {
   if (!this.svg_) {
-    throw 'Block is not rendered.'
+    throw 'Block is not rendered.';
   }
   Blockly.selected = null;
   this.svg_.removeSelect();

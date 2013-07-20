@@ -26,6 +26,22 @@
 // Top level object for Blockly.
 goog.provide('Blockly');
 
+// Blockly core dependencies.
+goog.require('Blockly.Block');
+goog.require('Blockly.Connection');
+goog.require('Blockly.FieldCheckbox');
+goog.require('Blockly.FieldColour');
+goog.require('Blockly.FieldDropdown');
+goog.require('Blockly.FieldImage');
+goog.require('Blockly.FieldTextInput');
+goog.require('Blockly.FieldVariable');
+goog.require('Blockly.Generator');
+goog.require('Blockly.Procedures');
+goog.require('Blockly.Toolbox');
+goog.require('Blockly.Workspace');
+goog.require('Blockly.inject');
+goog.require('Blockly.utils');
+
 // Closure dependencies.
 goog.require('goog.dom');
 goog.require('goog.color');
@@ -34,22 +50,6 @@ goog.require('goog.string');
 goog.require('goog.ui.ColorPicker');
 goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.userAgent');
-
-// Blockly core dependencies.
-goog.require('Blockly.Block');
-goog.require('Blockly.Connection');
-goog.require('Blockly.Generator');
-goog.require('Blockly.inject');
-goog.require('Blockly.FieldCheckbox');
-goog.require('Blockly.FieldColour');
-goog.require('Blockly.FieldDropdown');
-goog.require('Blockly.FieldImage');
-goog.require('Blockly.FieldTextInput');
-goog.require('Blockly.FieldVariable');
-goog.require('Blockly.Procedures');
-goog.require('Blockly.Toolbox');
-goog.require('Blockly.utils');
-goog.require('Blockly.Workspace');
 
 
 /**
@@ -523,11 +523,12 @@ Blockly.playAudio = function(name, opt_volume) {
   var sound = Blockly.SOUNDS_[name];
   if (sound) {
     var mySound;
-    var ie9 = goog.userAgent.DOCUMENT_MODE && goog.userAgent.DOCUMENT_MODE === 9;
-    if (ie9 || goog.userAgent.IPAD || goog.userAgent.ANDROID) { 
+    var ie9 = goog.userAgent.DOCUMENT_MODE &&
+              goog.userAgent.DOCUMENT_MODE === 9;
+    if (ie9 || goog.userAgent.IPAD || goog.userAgent.ANDROID) {
       // Creating a new audio node causes lag in IE9, Android and iPad. Android
-      // and IE9 refetch the file from the server, iPad uses a singleton audio node
-      // which must be deleted and recreated for each new audio tag.
+      // and IE9 refetch the file from the server, iPad uses a singleton audio
+      // node which must be deleted and recreated for each new audio tag.
       mySound = sound;
     } else {
       mySound = sound.cloneNode();

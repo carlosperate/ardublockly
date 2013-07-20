@@ -301,6 +301,7 @@ Blockly.Toolbox.TreeNode.prototype.onMouseDown = function(e) {
  * Supress the inherited double-click behaviour.
  * @param {!goog.events.BrowserEvent} e The browser event.
  * @override
+ * @private
  */
 Blockly.Toolbox.TreeNode.prototype.onDoubleClick_ = function(e) {
   // NOP.

@@ -1,5 +1,5 @@
 /**
- * Blockly Demo: Puzzle
+ * Blockly Apps: Puzzle Blocks
  *
  * Copyright 2013 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Demonstration of Blockly: Turtle Graphics.
+ * @fileoverview Blocks for Blockly's Puzzle application.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';

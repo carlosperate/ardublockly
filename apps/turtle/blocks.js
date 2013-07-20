@@ -1,5 +1,5 @@
 /**
- * Blockly Demo: Turtle Graphics
+ * Blockly Apps: Turtle Graphics Blocks
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Demonstration of Blockly: Turtle Graphics.
+ * @fileoverview Blocks for Blockly's Turtle Graphics application.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';

@@ -32,7 +32,7 @@ goog.require('goog.cssom');
  * file since:
  * a) It loads synchronously and doesn't force a redraw later.
  * b) It speeds up loading by not blocking on a separate HTTP transfer.
- * c) The CSS cantent may be made dynamic depending on init options.
+ * c) The CSS content may be made dynamic depending on init options.
  */
 Blockly.Css.inject = function() {
   var text = Blockly.Css.CONTENT.join('\n');
@@ -42,7 +42,9 @@ Blockly.Css.inject = function() {
   goog.cssom.addCssText(text);
 };
 
-
+/**
+ * Array making up the CSS content for Blockly.
+ */
 Blockly.Css.CONTENT = [
   '.blocklySvg {',
   '  background-color: #fff;',
@@ -339,8 +341,8 @@ Blockly.Css.CONTENT = [
   '/* Author: pupius@google.com (Daniel Pupius) */',
   '',
   '/*',
-  '  Styles to make the colorpicker look like the old gmail color picker',
-  '  NOTE: without CSS scoping this will override styles defined in palette.css',
+  ' Styles to make the colorpicker look like the old gmail color picker',
+  ' NOTE: without CSS scoping this will override styles defined in palette.css',
   '*/',
   '.goog-palette {',
   '  outline: none;',

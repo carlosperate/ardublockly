@@ -208,6 +208,7 @@ Blockly.ContextMenu.hide = function() {
  *   then places the new block next to the original.
  * @param {!Blockly.Block} block Original block.
  * @param {!Element} xml XML representation of new block.
+ * @return {!Function} Function that creates a block.
  */
 Blockly.ContextMenu.callbackFactory = function(block, xml) {
   return function() {

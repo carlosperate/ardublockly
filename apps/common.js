@@ -1,5 +1,5 @@
 /**
- * Visual Blocks Editor
+ * Blockly Apps: Common code
  *
  * Copyright 2013 Google Inc.
  * http://blockly.googlecode.com/
@@ -21,7 +21,6 @@
  * @fileoverview Common support code for Blockly apps.
  * @author fraser@google.com (Neil Fraser)
  */
-
 'use strict';
 
 var BlocklyApps = {};

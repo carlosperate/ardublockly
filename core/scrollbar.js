@@ -235,7 +235,8 @@ Blockly.ScrollbarInterface.prototype.set = function(value, fireEvents) {};
  * @param {Function} setMetrics A function that sets scrolling metrics.
  * @param {?boolean} horizontal True if horizontal, false if vertical.
  *     Null is used to create a test scrollbar to measure thickness.
- * @param {boolean=} opt_pair True if the scrollbar is part of a horiz/vert pair.
+ * @param {boolean=} opt_pair True if the scrollbar is part of a
+ *     horizontal/vertical pair.
  * @constructor
  * @implements {Blockly.ScrollbarInterface}
  */

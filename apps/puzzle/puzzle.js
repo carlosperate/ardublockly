@@ -1,5 +1,5 @@
 /**
- * Blockly Demo: Puzzle
+ * Blockly Apps: Puzzle
  *
  * Copyright 2013 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Demonstration of Blockly: Puzzle.
+ * @fileoverview JavaScript for Blockly's Puzzle application.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
@@ -246,4 +246,3 @@ Puzzle.keyDown = function(e) {
     Puzzle.hideHelp();
   }
 };
-

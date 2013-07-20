@@ -1,5 +1,5 @@
 /**
- * Visual Blocks Language
+ * Blockly Apps: Plane Seat Calculator Blocks
  *
  * Copyright 2013 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Blocks for plane app.
+ * @fileoverview Blocks for Blockly's Plane Seat Calculator application.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';

@@ -1,5 +1,5 @@
 /**
- * Blockly Demo: SVG Slider
+ * Blockly Apps: SVG Slider
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/

@@ -254,7 +254,7 @@ Blockly.createDom_ = function(container) {
             }
           }
         }
-      }
+      };
       Blockly.bindEvent_(Blockly.mainWorkspace.getCanvas(),
           'blocklyWorkspaceChange', Blockly.mainWorkspace, workspaceChanged);
     }
@@ -324,7 +324,7 @@ Blockly.init_ = function() {
       Blockly.bindEvent_(window, 'orientationchange', document, function() {
         Blockly.fireUiEvent(window, 'resize');
       }, false);
-    };
+    }
     Blockly.documentEventsBound_ = true;
   }
 

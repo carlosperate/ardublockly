@@ -1,5 +1,5 @@
 /**
- * Visual Blocks Language
+ * Blockly Apps: Block Factory
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Factory for building blocks.
+ * @fileoverview JavaScript for Blockly's Block Factory application.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
