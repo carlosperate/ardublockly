@@ -1,5 +1,5 @@
 /**
- * Blockly Demo: Maze
+ * Blockly Apps: Maze Blocks
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/
@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Demonstration of Blockly: Solving a maze.
+ * @fileoverview Blocks for Blockly's Maze application.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
