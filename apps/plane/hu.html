@@ -2,6 +2,12 @@
 <html>
   <head>
     <!-- Page became language-agnostic on 20 Jul 2013 -->
-    <script>location = location.href.replace(/\/[-\w]+\.html/, '/plane.html')</script>
+    <script>
+      if (location.search) {
+        location = location.href.replace('/hu.html?', '/plane.html?lang=hu&');
+      } else {
+        location = location.href.replace('/hu.html', '/plane.html?lang=hu');
+      }
+    </script>
   </head>
 </html>
