@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Campmaster",
             "Metalhead64"
         ]
     },
@@ -24,7 +25,7 @@
     "Puzzle.country4City1": "Rio de Janeiro",
     "Puzzle.country4City2": "S\u00e3o Paulo",
     "Puzzle.country4HelpUrl": "http://de.wikipedia.org/wiki/Brasilien",
-    "Puzzle.flag": "Flagge",
+    "Puzzle.flag": "Flagge:",
     "Puzzle.language": "Sprache:",
     "Puzzle.languageChoose": "w\u00e4hle \u2026",
     "Puzzle.cities": "St\u00e4dte:",
@@ -32,6 +33,7 @@
     "Puzzle.error1": "Fast! Ein Baustein ist falsch.",
     "Puzzle.error2": "%1 Bausteine sind falsch.",
     "Puzzle.tryAgain": "Der hervorgehobene Baustein ist falsch. Versuche es noch einmal.",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Puzzle",
     "Puzzle.help": "Hilfe",
     "Puzzle.checkAnswers": "Antworten \u00fcberpr\u00fcfen",

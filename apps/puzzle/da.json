@@ -1,0 +1,40 @@
+{
+    "@metadata": {
+        "authors": [
+            "Peter Alberti"
+        ]
+    },
+    "Puzzle.country1": "Australien",
+    "Puzzle.country1Language": "Engelsk",
+    "Puzzle.country1City1": "Melbourne",
+    "Puzzle.country1City2": "Sydney",
+    "Puzzle.country1HelpUrl": "http://da.wikipedia.org/wiki/Australien",
+    "Puzzle.country2": "Tyskland",
+    "Puzzle.country2Language": "Tysk",
+    "Puzzle.country2City1": "Berlin",
+    "Puzzle.country2City2": "M\u00fcnchen",
+    "Puzzle.country2HelpUrl": "http://da.wikipedia.org/wiki/Tyskland",
+    "Puzzle.country3": "Kina",
+    "Puzzle.country3Language": "Kinesisk",
+    "Puzzle.country3City1": "Beijing",
+    "Puzzle.country3City2": "Shanghai",
+    "Puzzle.country3HelpUrl": "http://da.wikipedia.org/wiki/Kina",
+    "Puzzle.country4": "Brasilien",
+    "Puzzle.country4Language": "Portugisisk",
+    "Puzzle.country4City1": "Rio de Janeiro",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4HelpUrl": "http://da.wikipedia.org/wiki/Brasilien",
+    "Puzzle.flag": "flag",
+    "Puzzle.language": "sprog:",
+    "Puzzle.languageChoose": "v\u00e6lg...",
+    "Puzzle.cities": "byer:",
+    "Puzzle.error0": "Perfekt!\nAlle %1 blokke er rigtige.",
+    "Puzzle.error1": "N\u00e6sten! En blok er forkert.",
+    "Puzzle.error2": "%1 blokke er forkerte.",
+    "Puzzle.tryAgain": "Den fremh\u00e6vede blok er ikke rigtig.\nBliv ved med at pr\u00f8ve.",
+    "Puzzle.title": "Puslespil",
+    "Puzzle.help": "Hj\u00e6lp",
+    "Puzzle.checkAnswers": "Kontroller svar",
+    "Puzzle.helpText": "For hvert land (gr\u00f8n), tilknyt dets flag, v\u00e6lg dets sprog og lav en stabel med dets byer.",
+    "Puzzle.helpOk": "OK"
+}
