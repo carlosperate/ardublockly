@@ -34,7 +34,8 @@ BlocklyApps.LANGUAGES = {
   en: ['English', 'ltr', 'en_compressed.js'],
   de: ['Deutsch', 'ltr', 'de_compressed.js'],
   hu: ['Magyar', 'ltr', 'en_compressed.js'],
-  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js']};
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js']
+};
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="' +

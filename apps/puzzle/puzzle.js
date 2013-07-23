@@ -32,33 +32,36 @@ var Puzzle = {};
 BlocklyApps.LANGUAGES = {
   // Format: ['Language name', 'direction', 'XX_compressed.js']
   af: ['Afrikaans', 'ltr', 'en_compressed.js'],
-  ms: ['Bahasa Melayu', 'ltr', 'en_compressed.js'],
   cs: ['Česky', 'ltr', 'en_compressed.js'],
   de: ['Deutsch', 'ltr', 'de_compressed.js'],
-  en: ['English', 'ltr', 'en_compressed.js'],
-  gl: ['Galego', 'ltr', 'en_compressed.js'],
   el: ['Ελληνικά', 'ltr', 'en_compressed.js'],
+  en: ['English', 'ltr', 'en_compressed.js'],
+  fr: ['Français', 'ltr', 'en_compressed.js'],
+  gl: ['Galego', 'ltr', 'en_compressed.js'],
+  hak: ['客家話', 'ltr', 'en_compressed.js'],
   he: ['עברית', 'rtl', 'en_compressed.js'],
   hu: ['Magyar', 'ltr', 'en_compressed.js'],
   ia: ['Interlingua', 'ltr', 'en_compressed.js'],
   it: ['Italiano', 'ltr', 'en_compressed.js'],
-  sw: ['Kishwahili', 'ltr', 'en_compressed.js'],
+  ja: ['日本語', 'ltr', 'en_compressed.js'],
+  ko: ['한국어', 'ltr', 'en_compressed.js'],
+  ksh: ['Ripoarėsch', 'ltr', 'en_compressed.js'],
   la: ['Latine', 'ltr', 'en_compressed.js'],
-  lv: ['Latviešu', 'ltr', 'en_compressed.js'],
   lb: ['Lëtzebuergesch', 'ltr', 'en_compressed.js'],
+  lv: ['Latviešu', 'ltr', 'en_compressed.js'],
   mk: ['Македонски', 'ltr', 'en_compressed.js'],
+  ms: ['Bahasa Melayu', 'ltr', 'en_compressed.js'],
   nl: ['Nederlands, Vlaams', 'ltr', 'en_compressed.js'],
   pl: ['Polski', 'ltr', 'en_compressed.js'],
+  ps: ['پښتو', 'rtl', 'en_compressed.js'],
   'pt-br': ['Português', 'ltr', 'en_compressed.js'],
   ru: ['Русский', 'ltr', 'en_compressed.js'],
-  ksh: ['Ripoarėsch', 'ltr', 'en_compressed.js'],
   sv: ['Svenska', 'ltr', 'en_compressed.js'],
-  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
+  sw: ['Kishwahili', 'ltr', 'en_compressed.js'],
   tr: ['Türkçe', 'ltr', 'en_compressed.js'],
-  'zh-hans': ['简体字', 'ltr', 'zh_tw_compressed.js'],
-  hak: ['客家話', 'ltr', 'en_compressed.js'],
-  ja: ['日本語', 'ltr', 'en_compressed.js'],
-  ko: ['한국어', 'ltr', 'en_compressed.js']};
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
+  'zh-hans': ['简体字', 'ltr', 'zh_tw_compressed.js']
+};
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="' +
@@ -156,7 +159,28 @@ Puzzle.init = function() {
   }
 };
 
-window.addEventListener('load', Puzzle.init);
+
+/**
+ * Initialize Blockly for the help.  Called on page load.
+ */
+Puzzle.initHelp = function() {
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       readOnly: true,
+       rtl: rtl,
+       trashcan: false});
+
+  // Add the blocks.
+  var xml = document.getElementById('blocks');
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+};
+
+if (window.location.pathname.match(/help.html$/)) {
+  window.addEventListener('load', Puzzle.initHelp);
+} else {
+  window.addEventListener('load', Puzzle.init);
+}
 
 /**
  * Comparison function for shuffling an array.

@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-07-18 15:29:11.233289",
+        "lastupdated": "2013-07-23 15:51:01.454935",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -38,6 +38,5 @@
     "Puzzle.help": "Help",
     "Puzzle.checkAnswers": "Check Answers",
     "Puzzle.helpText": "For each country (green), attach its flag, choose its language, and make a stack of its cities.",
-    "Puzzle.helpImage": "help_en.png",
     "Puzzle.helpOk": "OK"
 }

@@ -25,9 +25,9 @@
  */
 
 /**
- * Web page structure.
+ * Transladted messages.
  */
-{template .start}
+{template .messages}
   <div id="MSG" style="display: none">
     <span id="country1">{{msg meaning="Puzzle.country1" desc="The name of the country Australia\n{lb}{lb}Identical|Australia{rb}{rb}"}}Australia{{/msg}}</span>
     <span id="country1Flag">flag_au.png</span>
@@ -188,7 +188,13 @@
        {/msg}
     </span>
   </div>
+{/template}
 
+/**
+ * Web page structure.
+ */
+{template .start}
+  {call .messages /}
   <table id="header" width="100%">
     <tr>
       <td valign="bottom">
@@ -236,12 +242,7 @@
         For each country (green), attach its flag, choose its language, and make a stack of its cities.
       {/msg}
     </div>
-    <div>
-      <img src="help/{msg meaning="Puzzle.helpImage"
-                     desc="URL of helpful image; this should only be changed by Blockly developers, not translators. (Later, create instructors for translators.)"}
-                  help_en.png
-                {/msg}">
-    </div>
+    <iframe src="help.html?lang={$ij.lang}" style="height: 200px; width: 100%; border: none;"></iframe>
     <div class="farSide" style="padding: 1ex 3ex 0">
       <button id="okButton" onclick="Puzzle.hideHelp()">
         {{msg meaning="Puzzle.helpOk"
@@ -251,4 +252,17 @@
       </button>
     </div>
   </div>
+{/template}
+
+/**
+ * Help iframe structure.
+ */
+{template .help}
+  {call .messages /}
+
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../{$ij.langSrc}"></script>
+  <script type="text/javascript" src="blocks.js"></script>
+  <div id="blockly"></div>
+  <div id="notouch"></div>
 {/template}
