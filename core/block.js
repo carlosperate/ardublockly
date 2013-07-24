@@ -723,13 +723,12 @@ Blockly.Block.prototype.setDragging_ = function(adding) {
  * @private
  */
 Blockly.Block.prototype.onMouseMove_ = function(e) {
-  if (e.type == 'mousemove' && e.x == 1 && e.y == 0 && e.button == 0) {
+  if (e.type == 'mousemove' && e.x <= 1 && e.y == 0 && e.button == 0) {
     /* HACK:
-     The current versions of Chrome for Android (18.0) has a bug where finger-
-     swipes trigger a rogue 'mousemove' event with invalid x/y coordinates.
-     Ignore events with this signature.  This may result in a one-pixel blind
-     spot in other browsers, but this shouldn't be noticable.
-    */
+     Safari Mobile 6.0 and Chrome for Android 18.0 fire rogue mousemove events
+     on certain touch actions. Ignore events with these signatures.
+     This may result in a one-pixel blind spot in other browsers,
+     but this shouldn't be noticable. */
     e.stopPropagation();
     return;
   }
