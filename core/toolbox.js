@@ -26,6 +26,7 @@
 goog.provide('Blockly.Toolbox');
 
 goog.require('Blockly.Flyout');
+goog.require('goog.events.BrowserFeature');
 goog.require('goog.style');
 goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.ui.tree.TreeNode');
@@ -205,8 +206,27 @@ Blockly.Toolbox.clearSelection = function() {
  */
 Blockly.Toolbox.TreeControl = function(html, opt_config, opt_domHelper) {
   goog.ui.tree.TreeControl.call(this, html, opt_config, opt_domHelper);
+
+  // Add touch handler.
+  if (goog.events.BrowserFeature.TOUCH_ENABLED) {
+    var el = this.getElement();
+    Blockly.bindEvent_(el, goog.events.EventType.TOUCHSTART,
+        this.handleTouchEvent_);
+  }
 };
 goog.inherits(Blockly.Toolbox.TreeControl, goog.ui.tree.TreeControl);
+
+/**
+ * Handles touch events.
+ * @param {!goog.events.BrowserEvent} e The browser event.
+ * @private
+ */
+Blockly.Toolbox.TreeControl.prototype.handleTouchEvent_ = function(e) {
+  var node = this.getNodeFromEvent_(e);
+  if (node && e.type === goog.events.EventType.TOUCHSTART) {
+    node.onMouseDown(e);  // Same behavior for click and touch.
+  }
+};
 
 /**
  * Creates a new tree node using a custom tree node.
