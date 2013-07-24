@@ -1,0 +1,19 @@
+// This file was automatically generated from template.soy.
+// Please don't edit this file by hand.
+
+if (typeof puzzlepage == 'undefined') { var puzzlepage = {}; }
+
+
+puzzlepage.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="country1">Австралія</span><span id="country1Flag">flag_au.png</span><span id="country1FlagHeight">50</span><span id="country1FlagWidth">100</span><span id="country1Language">Англійська</span><span id="country1City1">Мельбурн</span><span id="country1City2">Сідней</span><span id="country1HelpUrl">http://uk.wikipedia.org/wiki/Австралія</span><span id="country2">Німеччина</span><span id="country2Flag">flag_de.png</span><span id="country2FlagHeight">60</span><span id="country2FlagWidth">100</span><span id="country2Language">Німецька</span><span id="country2City1">Берлін</span><span id="country2City2">Мюнхен</span><span id="country2HelpUrl">http://uk.wikipedia.org/wiki/Німеччина</span><span id="country3">Китай</span><span id="country3Flag">flag_cn.png</span><span id="country3FlagHeight">66</span><span id="country3FlagWidth">100</span><span id="country3Language">Китайська</span><span id="country3City1">Пекін</span><span id="country3City2">Шанхай</span><span id="country3HelpUrl">http://uk.wikipedia.org/wiki/Китайська_Народна_Республіка</span><span id="country4">Бразилія</span><span id="country4Flag">flag_br.png</span><span id="country4FlagHeight">70</span><span id="country4FlagWidth">100</span><span id="country4Language">Португальська</span><span id="country4City1">Ріо-де-Жанейро</span><span id="country4City2">Сан-Паулу</span><span id="country4HelpUrl">http://uk.wikipedia.org/wiki/Бразилія</span><span id="flag">прапор:</span><span id="language">мова:</span><span id="languageChoose">виберіть...</span><span id="cities">міста:</span><span id="error0">Відмінно!\n\nВсі блоки (%1) розміщені правильно!</span><span id="error1">Майже! Один блок розміщений неправильно.</span><span id="error2">Декілька блоків (%1) розміщено неправильно.</span><span id="tryAgain">Виділений блок розміщений неправильно.\nСпробуйте ще.</span></div>';
+};
+
+
+puzzlepage.start = function(opt_data, opt_ignored, opt_ijData) {
+  return puzzlepage.messages(null, null, opt_ijData) + '<table id="header" width="100%"><tr><td valign="bottom"><h1><span id="title"><a href="../index.html">Blockly</a> : Головоломка</span></h1></td><td><select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>&nbsp; &nbsp;<button id="helpButton" onclick="Puzzle.showHelp();">Допомога</button>&nbsp; &nbsp;<button id="checkButton" class="launch" onclick="Puzzle.checkAnswers();">Перевірити відповіді</button></td></tr></table><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script><div id="blockly"></div><div id="shadow"></div><div id="help"><div style="padding-bottom: 0.7ex">До кожної країни (зелений колір) прикріпіть прапор, виберіть державну мову та вкажіть міста, розташовані в цій країні.</div><iframe src="help.html?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '" style="height: 200px; width: 100%; border: none;"></iframe><div class="farSide" style="padding: 1ex 3ex 0"><button id="okButton" onclick="Puzzle.hideHelp()">OK</button></div></div>';
+};
+
+
+puzzlepage.help = function(opt_data, opt_ignored, opt_ijData) {
+  return puzzlepage.messages(null, null, opt_ijData) + '<script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script><div id="blockly"></div><div id="notouch"></div>';
+};
