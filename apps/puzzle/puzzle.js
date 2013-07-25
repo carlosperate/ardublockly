@@ -249,6 +249,15 @@ Puzzle.showHelp = function() {
   document.getElementById('shadow').style.display = 'block';
   Puzzle.keyDownHandler_ =
       Blockly.bindEvent_(document, 'keydown', null, Puzzle.keyDown);
+  try {
+    // Firefox sizes the blocks wrong when Blockly is initialized in a
+    // hidden state.  Kick the renderer to fix the layout.
+    var frame = document.querySelector('#help iframe');
+    frame.contentWindow.Blockly.mainWorkspace.render();
+  } catch (e) {
+    // Cannot access help frame.  Chrome can't do inter-frame communication
+    // on file:// URLs.  Fortunately Chrome doesn't need to fix its layout.
+  }
 };
 
 /**

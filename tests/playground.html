@@ -276,8 +276,8 @@ h1 {
 
   <h1>Blockly Playground</h1>
 
-  <p><a href="javascript:void(document.getElementById('svg').style.display = 'block')">Show</a>
-   - <a href="javascript:void(document.getElementById('svg').style.display = 'none')">Hide</a></p>
+  <p><a href="javascript:void([document.getElementById('blocklyDiv').style.display = 'block', Blockly.mainWorkspace.render()])">Show</a>
+   - <a href="javascript:void(document.getElementById('blocklyDiv').style.display = 'none')">Hide</a></p>
 
   <script type="text/javascript">
     if (rtl) {
