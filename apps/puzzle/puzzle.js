@@ -32,11 +32,22 @@ var Puzzle = {};
 BlocklyApps.LANGUAGES = {
   // Format: ['Language name', 'direction', 'XX_compressed.js']
   af: ['Afrikaans', 'ltr', 'en_compressed.js'],
+  ar: ['العربية', 'rtl', 'en_compressed.js'],
   cs: ['Česky', 'ltr', 'en_compressed.js'],
+  'be-tarask': ['Taraškievica', 'ltr', 'en_compressed.js'],
+  br: ['Brezhoneg', 'ltr', 'en_compressed.js'],
+  ca: ['Català', 'ltr', 'en_compressed.js'],
+  cdo: ['閩東語', 'ltr', 'zh_tw_compressed.js'],
+  da: ['Dansk', 'ltr', 'en_compressed.js'],
   de: ['Deutsch', 'ltr', 'de_compressed.js'],
   el: ['Ελληνικά', 'ltr', 'en_compressed.js'],
   en: ['English', 'ltr', 'en_compressed.js'],
+  eu: ['Euskara', 'ltr', 'en_compressed.js'],
+  fa: ['یسراف', 'rtl', 'en_compressed.js'],
+  fi: ['Suomi', 'ltr', 'en_compressed.js'],
+  fo: ['Føroyskt', 'ltr', 'en_compressed.js'],
   fr: ['Français', 'ltr', 'en_compressed.js'],
+  frr: ['Frasch', 'ltr',  'de_compressed.js'],
   gl: ['Galego', 'ltr', 'en_compressed.js'],
   hak: ['客家話', 'ltr', 'en_compressed.js'],
   he: ['עברית', 'rtl', 'en_compressed.js'],
@@ -44,27 +55,40 @@ BlocklyApps.LANGUAGES = {
   ia: ['Interlingua', 'ltr', 'en_compressed.js'],
   it: ['Italiano', 'ltr', 'en_compressed.js'],
   ja: ['日本語', 'ltr', 'en_compressed.js'],
+  ka: ['ქართული', 'ltr', 'en_compressed.js'],
+  km: ['ភាសាខ្មែរ', 'ltr', 'en_compressed.js'],
   ko: ['한국어', 'ltr', 'en_compressed.js'],
-  ksh: ['Ripoarėsch', 'ltr', 'en_compressed.js'],
+  ksh: ['Ripoarėsch', 'ltr', 'de_compressed.js'],
+  ky: ['Кыргызча', 'ltr', 'en_compressed.js'],
   la: ['Latine', 'ltr', 'en_compressed.js'],
-  lb: ['Lëtzebuergesch', 'ltr', 'en_compressed.js'],
+  lb: ['Lëtzebuergesch', 'ltr', 'de_compressed.js'],
+  lt: ['Lietuvių', 'ltr', 'en_compressed.js'],
   lv: ['Latviešu', 'ltr', 'en_compressed.js'],
+  ml: ['മലയാളം', 'ltr', 'en_compressed.js'],
   mk: ['Македонски', 'ltr', 'en_compressed.js'],
   ms: ['Bahasa Melayu', 'ltr', 'en_compressed.js'],
+  mzn: ['مازِرونی', 'ltr', 'en_compressed.js'],
+  nb: ['Norsk Bokmål', 'ltr', 'en_compressed.js'],
   nl: ['Nederlands, Vlaams', 'ltr', 'en_compressed.js'],
+  oc: ['Lenga d\'òc', 'ltr', 'en_compressed.js'],
+  pa: ['पंजाबी', 'ltr', 'en_compressed.js'],
   pl: ['Polski', 'ltr', 'en_compressed.js'],
+  pms: ['Piemontèis', 'ltr', 'en_compressed.js'],
   ps: ['پښتو', 'rtl', 'en_compressed.js'],
   'pt-br': ['Português', 'ltr', 'en_compressed.js'],
   ru: ['Русский', 'ltr', 'en_compressed.js'],
+  sk: ['Slovenčina', 'ltr', 'en_compressed.js'],
   sv: ['Svenska', 'ltr', 'en_compressed.js'],
   sw: ['Kishwahili', 'ltr', 'en_compressed.js'],
   tr: ['Türkçe', 'ltr', 'en_compressed.js'],
+  uk: ['Українська', 'ltr', 'en_compressed.js'],
   vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
-  'zh-hans': ['简体字', 'ltr', 'zh_tw_compressed.js']
+  'zh-hans': ['简体字', 'ltr', 'zh_tw_compressed.js'],
+  'zh-hant': ['>中文/a>', 'ltr', 'zh_tw_compressed.js']
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
 
-document.write('<script type="text/javascript" src="' +
+document.write('<script type="text/javascript" src="generated/' +
                BlocklyApps.LANG + '.js"></script>\n');
 
 /**
