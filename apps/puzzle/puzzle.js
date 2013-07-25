@@ -77,6 +77,7 @@ Puzzle.init = function() {
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
        rtl: rtl,
+       scrollbars: false,
        trashcan: false});
 
   var blocklyDiv = document.getElementById('blockly');
@@ -169,7 +170,7 @@ Puzzle.initHelp = function() {
       {path: '../../',
        readOnly: true,
        rtl: rtl,
-       trashcan: false});
+       scrollbars: false});
 
   // Add the blocks.
   var xml = document.getElementById('blocks');

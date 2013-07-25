@@ -56,18 +56,23 @@ Blockly.inject = function(container, opt_options) {
 Blockly.parseOptions_ = function(options) {
   var editable = !options['readOnly'];
   if (editable) {
-    var tree = options['toolbox'] || '<xml />';
-    if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
-      // In this case the tree will not have been properly built by the
-      // browser. The HTML will be contained in the element, but it will
-      // not have the proper DOM structure since the browser doesn't support
-      // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
-      tree = tree.outerHTML;
+    var tree = options['toolbox'];
+    if (tree) {
+      if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
+        // In this case the tree will not have been properly built by the
+        // browser. The HTML will be contained in the element, but it will
+        // not have the proper DOM structure since the browser doesn't support
+        // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
+        tree = tree.outerHTML;
+      }
+      if (typeof tree == 'string') {
+        tree = Blockly.Xml.textToDom(tree);
+      }
+      var hasCategories = !!tree.getElementsByTagName('category').length;
+    } else {
+      tree = null;
+      var hasCategories = false;
     }
-    if (typeof tree == 'string') {
-      tree = Blockly.Xml.textToDom(tree);
-    }
-    var hasCategories = !!tree.getElementsByTagName('category').length;
     var hasTrashcan = options['trashcan'];
     if (hasTrashcan === undefined) {
       hasTrashcan = hasCategories;
@@ -82,6 +87,15 @@ Blockly.parseOptions_ = function(options) {
     var hasCollapse = false;
     var tree = null;
   }
+  if (tree && !hasCategories) {
+    // Scrollbars are not compatible with a non-flyout toolbox.
+    var hasScrollbars = false;
+  } else {
+    var hasScrollbars = options['scrollbars'];
+    if (hasScrollbars === undefined) {
+      hasScrollbars = true;
+    }
+  }
   return {
     RTL: !!options['rtl'],
     collapse: hasCollapse,
@@ -89,6 +103,7 @@ Blockly.parseOptions_ = function(options) {
     maxBlocks: options['maxBlocks'] || Infinity,
     pathToBlockly: options['path'] || './',
     hasCategories: hasCategories,
+    hasScrollbars: hasScrollbars,
     hasTrashcan: hasTrashcan,
     languageTree: tree
   };
@@ -328,7 +343,6 @@ Blockly.init_ = function() {
     Blockly.documentEventsBound_ = true;
   }
 
-  var addScrollbars = true;
   if (Blockly.languageTree) {
     if (Blockly.hasCategories) {
       Blockly.Toolbox.init();
@@ -343,10 +357,9 @@ Blockly.init_ = function() {
       Blockly.mainWorkspace.getCanvas().setAttribute('transform', translation);
       Blockly.mainWorkspace.getBubbleCanvas().setAttribute('transform',
                                                            translation);
-      addScrollbars = false;
     }
   }
-  if (addScrollbars) {
+  if (Blockly.hasScrollbars) {
     Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
         Blockly.mainWorkspace.getBubbleCanvas(),
         Blockly.getMainWorkspaceMetrics, Blockly.setMainWorkspaceMetrics);
