@@ -67,7 +67,7 @@ BlocklyApps.LANGUAGES = {
   ml: ['മലയാളം', 'ltr', 'en_compressed.js'],
   mk: ['Македонски', 'ltr', 'en_compressed.js'],
   ms: ['Bahasa Melayu', 'ltr', 'en_compressed.js'],
-  mzn: ['مازِرونی', 'ltr', 'en_compressed.js'],
+  mzn: ['مازِرونی', 'rtl', 'en_compressed.js'],
   nb: ['Norsk Bokmål', 'ltr', 'en_compressed.js'],
   nl: ['Nederlands, Vlaams', 'ltr', 'en_compressed.js'],
   oc: ['Lenga d\'òc', 'ltr', 'en_compressed.js'],
@@ -88,7 +88,7 @@ BlocklyApps.LANGUAGES = {
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
 
-document.write('<script type="text/javascript" src="generated/' +
+document.write('<script type="text/javascript" src="' +
                BlocklyApps.LANG + '.js"></script>\n');
 
 /**
