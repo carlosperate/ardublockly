@@ -206,25 +206,37 @@ Blockly.Toolbox.clearSelection = function() {
  */
 Blockly.Toolbox.TreeControl = function(html, opt_config, opt_domHelper) {
   goog.ui.tree.TreeControl.call(this, html, opt_config, opt_domHelper);
+};
+goog.inherits(Blockly.Toolbox.TreeControl, goog.ui.tree.TreeControl);
+
+/**
+ * Adds touch handling to TreeControl.
+ * @override
+ */
+Blockly.Toolbox.TreeControl.prototype.enterDocument = function() {
+  Blockly.Toolbox.TreeControl.superClass_.enterDocument.call(this);
 
   // Add touch handler.
   if (goog.events.BrowserFeature.TOUCH_ENABLED) {
     var el = this.getElement();
-    Blockly.bindEvent_(el, goog.events.EventType.TOUCHSTART,
+    Blockly.bindEvent_(el, goog.events.EventType.TOUCHSTART, this,
         this.handleTouchEvent_);
   }
 };
-goog.inherits(Blockly.Toolbox.TreeControl, goog.ui.tree.TreeControl);
-
 /**
  * Handles touch events.
  * @param {!goog.events.BrowserEvent} e The browser event.
  * @private
  */
 Blockly.Toolbox.TreeControl.prototype.handleTouchEvent_ = function(e) {
+  e.preventDefault();
   var node = this.getNodeFromEvent_(e);
   if (node && e.type === goog.events.EventType.TOUCHSTART) {
-    node.onMouseDown(e);  // Same behavior for click and touch.
+    // Fire asynchronously since onMouseDown takes long enough that the browser
+    // would fire the default mouse event before this method returns.
+    window.setTimeout(function() {
+      node.onMouseDown(e);  // Same behavior for click and touch.
+    }, 1);
   }
 };
 
