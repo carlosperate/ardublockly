@@ -41,7 +41,7 @@ BlocklyApps.LANGUAGES = {
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
 
-document.write('<script type="text/javascript" src="' +
+document.write('<script type="text/javascript" src="generated/' +
                BlocklyApps.LANG + '.js"></script>\n');
 
 /**

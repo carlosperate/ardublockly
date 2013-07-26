@@ -18,10 +18,11 @@
 # limitations under the License.
 
 import argparse
-import codecs  # for codecs.open(..., 'utf-8')
-import json    # for json.load()
-import os      # for os.path()
-import sys     # for sys.argv
+import codecs      # for codecs.open(..., 'utf-8')
+import json        # for json.load()
+import os          # for os.path()
+import subprocess  # for subprocess.check_call()
+import sys         # for sys.argv
 from common import InputError
 
 # Store parsed command-line arguments in global variable.
@@ -100,7 +101,6 @@ def _create_xlf(target_lang):
     """
     filename = os.path.join(os.curdir, args.output_dir, target_lang + '.xlf')
     out_file = codecs.open(filename, 'w', 'utf-8')
-    print 'Created file: ' + filename
     out_file.write("""<?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file original="SoyMsgBundle"
@@ -177,7 +177,7 @@ def main():
     parser = argparse.ArgumentParser(description='Convert JSON files to XLF.')
     parser.add_argument('--source_lang', default='en',
                         help='ISO 639-1 source language code')
-    parser.add_argument('--output_dir', default='.',
+    parser.add_argument('--output_dir', default='generated/',
                         help='relative directory for output files')
     parser.add_argument('--key_file', default='keys.json',
                         help='relative path to input keys file')
@@ -191,6 +191,10 @@ def main():
     global args
     args = parser.parse_args()
 
+    # Make sure output_dir ends with slash.
+    if (not args.output_dir.endswith('/')):
+      args.output_dir = args.output_dir + '/'
+
     # Read in keys.json, mapping descriptions (e.g., Maze.turnLeft) to
     # Closure keys (long hash numbers).
     key_file = open(args.key_file)
@@ -198,6 +202,7 @@ def main():
     key_file.close()
 
     # Process each input file.
+    print('Creating .xlf files...')
     processed_langs = []
     for filename in args.files:
       if not filename.endswith('.json'):
@@ -209,13 +214,24 @@ def main():
 
     # Output command line for Closure compiler.
     if processed_langs:
+      print('Creating .js files...')
       path_to_jar = os.path.normpath(os.path.join(
           os.path.dirname(sys.argv[0]), '../apps/_soy'))
-      print('You will likely want to run:')
-      print('java -jar ' + path_to_jar + '/SoyToJsSrcCompiler.jar --locales '
-            + ','.join(processed_langs) +
-            ' --messageFilePathFormat {LOCALE}.xlf ' +
-            '--outputPathFormat {LOCALE}.js --srcs template.soy')
+      processed_lang_list = ','.join(processed_langs)
+      subprocess.check_call([
+          'java',
+          '-jar', path_to_jar + '/SoyToJsSrcCompiler.jar',
+          '--locales', processed_lang_list,
+          '--messageFilePathFormat', args.output_dir + '{LOCALE}.xlf',
+          '--outputPathFormat', args.output_dir + '{LOCALE}.js',
+          '--srcs', 'template.soy'])
+      print('Created {' + processed_lang_list + '}.js in ' + args.output_dir)
+      command = ['rm']
+      command.extend(map(lambda s: args.output_dir + s + '.xlf',
+                         processed_langs))
+      subprocess.check_call(command)
+      print('Removed .xlf files.')
+
 
 if __name__ == '__main__':
     main()
