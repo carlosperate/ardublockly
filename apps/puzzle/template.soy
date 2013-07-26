@@ -211,7 +211,7 @@
       <td>
         <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
         &nbsp; &nbsp;
-        <button id="helpButton" onclick="Puzzle.showHelp();">
+        <button id="helpButton" onclick="Puzzle.showHelp(true);">
           {{msg meaning="Puzzle.help"
                desc="The label on a button the user can press for help.\n{lb}{lb}Identical|Help{rb}{rb}"}}
             Help
@@ -234,7 +234,7 @@
   <div id="blockly"></div>
 
   <div id="shadow"></div>
-
+  <div id="helpBorder"></div>
   <div id="help">
     <div style="padding-bottom: 0.7ex">
       {msg meaning="Puzzle.helpText"
@@ -244,7 +244,7 @@
     </div>
     <iframe src="help.html?lang={$ij.lang}" style="height: 200px; width: 100%; border: none;"></iframe>
     <div class="farSide" style="padding: 1ex 3ex 0">
-      <button id="okButton" onclick="Puzzle.hideHelp()">
+      <button id="okButton" onclick="Puzzle.hideHelp(true)">
         {{msg meaning="Puzzle.helpOk"
              desc="Label on button for user to press when done reading help information.\n{lb}{lb}Identical|OK{rb}{rb}"}}
           OK

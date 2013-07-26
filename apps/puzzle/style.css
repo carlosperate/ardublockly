@@ -38,30 +38,39 @@ button:hover {
   position: fixed;
 }
 #help {
-  display: none;
+  visibility: hidden;
   background-color: #fff;
   color: #000;
-  border: 1px solid black;
+  border: 1px solid #000;
   width: 50%;
   position: absolute;
   left: 25%;
   top: 5em;
   z-index: 1;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
   border-radius: 8px;
-  -moz-box-shadow: 5px 5px 5px #888;
-  -webkit-box-shadow: 5px 5px 5px #888;
   box-shadow: 5px 5px 5px #888;
   padding: 10px;
 }
+#helpBorder {
+  visibility: hidden;
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #888;
+  transition-property: width height left top opacity;
+  transition-duration: 0.2s;
+}
 #shadow {
-  display: none;
+  visibility: hidden;
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: black;
-  opacity: 0.3;
+  background-color: #000;
+  transition-property: opacity;
+  transition-duration: 0.2s;
+  opacity: 0.3
 }

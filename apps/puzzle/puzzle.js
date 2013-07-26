@@ -120,6 +120,7 @@ Puzzle.init = function() {
     delete window.sessionStorage.loadOnceBlocks;
     var xml = Blockly.Xml.textToDom(text);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+    Puzzle.hideHelp(false);
   } else {
     // Create one of every block.
     var blocksCountries = [];
@@ -180,7 +181,7 @@ Puzzle.init = function() {
       block.moveBy(dx, dy);
       countedArea += block.cached_area_;
     }
-    Puzzle.showHelp();
+    Puzzle.showHelp(false);
   }
 };
 
@@ -268,31 +269,75 @@ Puzzle.keyDownHandler_ = null;
 
 /**
  * Show the help pop-up.
+ * @param {boolean} animate Animate the pop-up opening.
  */
-Puzzle.showHelp = function() {
-  document.getElementById('help').style.display = 'block';
-  document.getElementById('shadow').style.display = 'block';
+Puzzle.showHelp = function(animate) {
+  var help = document.getElementById('help');
+  var shadow = document.getElementById('shadow');
+  shadow.style.visibility = 'visible';
+  shadow.style.opacity = 0.3;
+  var border = document.getElementById('helpBorder');
+  function endResult() {
+    help.style.visibility = 'visible';
+    border.style.visibility = 'hidden';
+  }
+  if (animate) {
+    border.style.visibility = 'visible';
+    // In 100ms show the help and hide the animated border.
+    window.setTimeout(endResult, 100);
+  } else {
+    // No animation.  Just set the final state.
+    endResult();
+  }
+  // Match the animated border to the help window's size and location.
+  border.style.width = help.offsetWidth + 'px';
+  border.style.height = help.offsetHeight + 'px';
+  border.style.left = help.offsetLeft + 'px';
+  border.style.top = help.offsetTop + 'px';
+  border.style.opacity = 0.8;
   Puzzle.keyDownHandler_ =
       Blockly.bindEvent_(document, 'keydown', null, Puzzle.keyDown);
-  try {
-    // Firefox sizes the blocks wrong when Blockly is initialized in a
-    // hidden state.  Kick the renderer to fix the layout.
-    var frame = document.querySelector('#help iframe');
-    frame.contentWindow.Blockly.mainWorkspace.render();
-  } catch (e) {
-    // Cannot access help frame.  Chrome can't do inter-frame communication
-    // on file:// URLs.  Fortunately Chrome doesn't need to fix its layout.
-  }
 };
 
 /**
  * Hide the help pop-up.
+ * @param {boolean} animate Animate the pop-up closing.
  */
-Puzzle.hideHelp = function () {
-  document.getElementById('help').style.display = 'none';
-  document.getElementById('shadow').style.display = 'none';
-  Blockly.unbindEvent_(Puzzle.keyDownHandler_);
-  Puzzle.keyDownHandler_ = null;
+Puzzle.hideHelp = function(animate) {
+  var shadow = document.getElementById('shadow');
+  shadow.style.opacity = 0;
+  var border = document.getElementById('helpBorder');
+  // Match the animated border to the help button's size and width.
+  var button = document.getElementById('helpButton');
+  border.style.width = (button.offsetWidth - 2) + 'px';
+  border.style.height = (button.offsetHeight - 2) + 'px';
+  var left = 0;
+  var top = 0;
+  do {
+    left += button.offsetLeft;
+    top += button.offsetTop;
+    button = button.offsetParent;
+  } while (button)
+  border.style.left = left + 'px';
+  border.style.top = top + 'px';
+  border.style.opacity = 0.2;
+  function endResult() {
+    shadow.style.visibility = 'hidden';
+    border.style.visibility = 'hidden';
+  }
+  if (animate) {
+    // In 100ms hide both the shadow and the animated border.
+    border.style.visibility = 'visible';
+    window.setTimeout(endResult, 100);
+  } else {
+    // No animation.  Just set the final state.
+    endResult();
+  }
+  document.getElementById('help').style.visibility = 'hidden';
+  if (Puzzle.keyDownHandler_) {
+    Blockly.unbindEvent_(Puzzle.keyDownHandler_);
+    Puzzle.keyDownHandler_ = null;
+  }
 };
 
 /**
@@ -301,6 +346,6 @@ Puzzle.hideHelp = function () {
  */
 Puzzle.keyDown = function(e) {
   if (e.keyCode == 13 || e.keyCode == 27 || e.keyCode == 32) {
-    Puzzle.hideHelp();
+    Puzzle.hideHelp(true);
   }
 };
