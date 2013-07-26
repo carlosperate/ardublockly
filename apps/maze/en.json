@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-07-19 21:13:31.140426",
+        "lastupdated": "2013-07-23 18:14:52.399153",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -43,6 +43,8 @@
     "Maze.instructions10": "Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!",
     "Maze.codeTooltip": "See generated JavaScript code.",
     "Maze.linkTooltip": "Save and link to blocks.",
+    "Maze.runTooltip": "Makes the character do what the blocks say.",
     "Maze.runProgram": "Run Program",
+    "Maze.resetTooltip": "Put the character back at the start of the maze.",
     "Maze.resetProgram": "Reset"
 }

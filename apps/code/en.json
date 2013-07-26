@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-07-19 14:13:53.146550",
+        "lastupdated": "2013-07-23 18:18:07.380540",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -18,7 +18,7 @@
     "Code.blocks": "Blocks",
     "Code.trashTooltip": "Discard all blocks.",
     "Code.linkTooltip": "Save and link to blocks.",
-    "Code.runTooltip": "Run program.",
+    "Code.runTooltip": "Run the program defined by the blocks in the workspace.",
     "Code.catControl": "Control",
     "Code.catLogic": "Logic",
     "Code.catMath": "Math",

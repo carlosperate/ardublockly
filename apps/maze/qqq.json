@@ -37,6 +37,8 @@
     "Maze.instructions10": "instructions - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated.",
     "Maze.codeTooltip": "tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user.",
     "Maze.linkTooltip": "tooltip (pop-up help) for button; pressing the button causes the user's program to be saved and for a URL to be provided for retrieving it.  The word 'blocks' is as in children's toy blocks.",
+    "Maze.runTooltip": "tooltip - Pressing this button runs the computer program the user has written to move the character through the maze.",
     "Maze.runProgram": "button label - Pressing the button runs the computer program the user has written.",
+    "Maze.resetTooltip": "tooltip - Pressing this button restores the character to the start position and enables the user's program to be run again.",
     "Maze.resetProgram": "button label - Pressing the button causes Pegman return to the start of the maze (but does not delete the user's program.)"
 }
