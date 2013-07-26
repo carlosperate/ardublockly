@@ -14,14 +14,8 @@
  *
  * Once translations have been made into <LANG>.json:
  *
- * # Create *.xlf.  By default, qqq.json and keys.json are skipped.
- * ../../i18n/json_to_xliff.py *.json
- *
- * # Create .js files by running script recommended by previous command.  It will
- * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
- *
- * # The .xlf files may be deleted.  They should not be checked in.
- * rm *.xlf
+ * # Create *.js for each *.json file.  By default, qqq.json and keys.json are skipped.
+ * ../../i18n/json_to_js.py *.json
  */
 
 /**
@@ -152,10 +146,10 @@
               </button>
             </td>
             <td>
-              <button id="runButton" class="launch" onclick="Maze.runButtonClick();">
+              <button id="runButton" class="launch" onclick="Maze.runButtonClick();" title="{msg meaning="Maze.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the character through the maze."}Makes the character do what the blocks say.{/msg}">
                 <img src="../../media/1x1.gif" class="run icon21"> {msg meaning="Maze.runProgram" desc="button label - Pressing the button runs the computer program the user has written."}Run Program{/msg}
               </button>
-              <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none">
+              <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none" title={msg meaning="Maze.resetTooltip" desc="tooltip - Pressing this button restores the character to the start position and enables the user's program to be run again."}Put the character back at the start of the maze.{/msg}>
                 <img src="../../media/1x1.gif" class="stop icon21"> {msg meaning="Maze.resetProgram" desc="button label - Pressing the button causes Pegman return to the start of the maze (but does not delete the user's program.)"}Reset{/msg}
               </button>
             </td>

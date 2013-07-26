@@ -14,14 +14,8 @@
  *
  * Once translations have been made into <LANG>.json:
  *
- * # Create *.xlf.  By default, qqq.json and keys.json are skipped.
- * ../../i18n/json_to_xliff.py *.json
- *
- * # Create .js files by running script recommended by previous command.  It will
- * # start with "java -jar ../../apps/_soy/SoyToJsSrcCompiler.jar".
- *
- * # The .xlf files may be deleted.  They should not be checked in.
- * rm *.xlf
+ * # Create *.js for each *.json file.  By default, qqq.json and keys.json are skipped.
+ * ../../i18n/json_to_js.py *.json
  */
 
 /**
@@ -36,10 +30,10 @@
   // These reference the messages in maze to minimize extra work for
   // translators.
   <div id="COMMON_MSG" style="display: none">
-    <span id="badXml">{msg meaning="Code.badXml" desc="TODO"}Error parsing XML:\n%1\n\nAbandon changes?{/msg}</span>
-    <span id="badCode">{msg meaning="Code.badCode" desc="TODO"}Program error:\n%1{/msg}</span>
-    <span id="timeout">{msg meaning="Code.timeout" desc="TODO"}Maximum execution iterations exceeded.{/msg}</span>
-    <span id="discard">{msg meaning="Code.discard" desc="TODO"}Delete all %1 blocks?{/msg}</span>
+    <span id="badXml">{msg meaning="Code.badXml" desc="alert - Message shown when the user tries switching from the XML tab after entering XML text that could not be parsed.  This asks whether they wish to abandon the XML they added.  If they select 'OK' (or the translated equivalent), the XML is cleared, and the other tab is shown.  If they select 'Cancel', they remain on the XML tab with the bad XML."}Error parsing XML:\n%1\n\nAbandon changes?{/msg}</span>
+    <span id="badCode">{msg meaning="Code.badCode" desc="alert - Message shown if an error occurs while interpreting the user program.  The error description follows."}Program error:\n%1{/msg}</span>
+    <span id="timeout">{msg meaning="Code.timeout" desc="alert - Message shown if the program has run for more than the permitted number of steps.  This exists so that programs with infinite loops do not run forever."}Maximum execution iterations exceeded.{/msg}</span>
+    <span id="discard">{msg meaning="Code.discard" desc="alert - Message shown after the user clicks on the 'discard all' icon.  Selecting 'OK' (or the translated equivalent) causes all of the blocks to be discarded.  Selecting 'Cancel' prevents blocks from being deleted."}Delete all %1 blocks?{/msg}"</span>
 
     <span id="httpRequestError">{{msg meaning="Apps.httpRequestError" desc="alert - The URL is invalid or a server error occurred.  This message will be followed by technical information useful to engineers trying to understand the problem.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.httpRequestError{rb}{rb}"}}There was a problem with the request.{{/msg}}</span>
     <span id="linkAlert">{{msg meaning="Apps.linkAlert" desc="alert - After the user has pressed a button to save his/her program, this provides the URL (%1) to retrieve the program.  The characters '\n\n' indicate that a blank line will be displayed before the URL (in English).  Leave those in unless you move %1 to the beginning or middle of the text, in which case you should use your judgment about where blank lines would be most useful.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.linkAlert{rb}{rb}."}}Share your blocks with this link:\n\n%1{{/msg}}</span>
@@ -57,7 +51,7 @@
           <span id="title">
             <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
             {sp}:{sp}
-            {msg meaning="Code.title" desc="TODO"}
+            {msg meaning="Code.title" desc="page text - Title of this application, indicating that it is for writing arbitrary programs."}
               Code
             {/msg}
           </span>
@@ -68,7 +62,7 @@
       <td>
         <table>
           <tr id="tabRow" height="1em">
-            <td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">{msg meaning="Code.blocks" desc="TODO"}Blocks{/msg}</td>
+            <td id="tab_blocks" class="tabon" onclick="tabClick(this.id)">{msg meaning="Code.blocks" desc="tab text - Displays and allows editing of the user's program as blocks."}Blocks{/msg}</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_javascript" class="taboff" onclick="tabClick(this.id)">JavaScript</td>
             <td class="tabmin">&nbsp;</td>
@@ -76,13 +70,13 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="tabClick(this.id)">XML</td>
             <td class="tabmax">
-              <button title="{msg meaning="Code.trashTooltip" desc="TODO"}Discard all blocks.{/msg}" onclick="discard(); renderContent();">
+              <button title="{msg meaning="Code.trashTooltip" desc="tooltip - Clicking on this causes the user program to be discarded."}Discard all blocks.{/msg}" onclick="discard(); renderContent();">
                 <img src='../../media/1x1.gif' class="trash icon21">
               </button>{sp}
-              <button id="linkButton" title="{msg meaning="Code.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link()">
+              <button id="linkButton" title="{{msg meaning="Code.linkTooltip" desc="See and reuse {lb}{lb}msg-Blockly|Maze-Maze.linkButton{rb}{rb}."}}Save and link to blocks.{{/msg}}" onclick="BlocklyStorage.link()">
                 <img src='../../media/1x1.gif' class="link icon21">
               </button>{sp}
-              <button title="{msg meaning="Code.runTooltip" desc="TODO"}Run program.{/msg}" class="launch" onclick="runJS()">
+              <button title="{msg meaning="Code.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written."}Run the program defined by the blocks in the workspace.{/msg}" class="launch" onclick="runJS()">
                 <img src='../../media/1x1.gif' class="run icon21">
               </button>
             </td>
@@ -109,7 +103,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{msg meaning="Code.catControl" desc="TODO"}Control{/msg}">
+    <category name="{msg meaning="Code.catControl" desc="category - blocks related to [http://en.wikipedia.org/wiki/Control_flow control flow]."}Control{/msg}">
       <block type="controls_if"></block>
       <block type="controls_repeat_ext">
         <value name="TIMES">
@@ -139,7 +133,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="{msg meaning="Code.catLogic" desc="TODO"}Logic{/msg}">
+    <category name="{msg meaning="Code.catLogic" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Logic logic]"}Logic{/msg}">
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>
@@ -147,7 +141,7 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="{msg meaning="Code.catMath" desc="TODO"}Math{/msg}">
+    <category name="{msg meaning="Code.catMath" desc="category - blocks related to mathematics."}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -190,7 +184,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{msg meaning="Code.catText" desc="TODO"}Text{/msg}">
+    <category name="{msg meaning="Code.catText" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Text text processing]."}Text{/msg}">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -204,21 +198,21 @@
         <value name="VALUE">
           <block type="variables_get">
             // Warning: Message Code.textVariable is repeated three times.  Please keep them in sync.
-            <title name="VAR">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</title>
+            <title name="VAR">{msg meaning="Code.textVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short."}text{/msg}</title>
           </block>
         </value>
       </block>
       <block type="text_charAt">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</title>
+            <title name="VAR">{msg meaning="Code.textVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short."}text{/msg}</title>
           </block>
         </value>
       </block>
       <block type="text_getSubstring">
         <value name="STRING">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.textVariable" desc="TODO"}text{/msg}</title>
+            <title name="VAR">{msg meaning="Code.textVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short."}text{/msg}</title>
           </block>
         </value>
       </block>
@@ -227,7 +221,7 @@
       <block type="text_print"></block>
       <block type="text_prompt"></block>
     </category>
-    <category name="{msg meaning="Code.catLists" desc="TODO"}Lists{/msg}">
+    <category name="{msg meaning="Code.catLists" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Lists lists]."}Lists{/msg}">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
       <block type="lists_repeat">
@@ -243,39 +237,39 @@
         <value name="VALUE">
           <block type="variables_get">
             // Warning: Message Code.listVariable is repeated four times.  Please keep them in sync.
-            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getIndex">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_setIndex">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getSublist">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
     </category>
-    <category name="{msg meaning="Code.catColour" desc="TODO"}Colour{/msg}">
+    <category name="{msg meaning="Code.catColour" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Colour colour]."}Colour{/msg}">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb"></block>
       <block type="colour_blend"></block>
     </category>
-    <category name="{msg meaning="Code.catVariables" desc="TODO"}Variables{/msg}" custom="VARIABLE"></category>
-    <category name="{msg meaning="Code.catProcedures" desc="TODO"}Procedures{/msg}" custom="PROCEDURE"></category>
+    <category name="{msg meaning="Code.catVariables" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Variables variables]."}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Code.catProcedures" desc="category - blocks related to [http://en.wikipedia.org/wiki/Subroutine defining or using procedures/functions]."}Procedures{/msg}" custom="PROCEDURE"></category>
   </xml>
 {/template}
