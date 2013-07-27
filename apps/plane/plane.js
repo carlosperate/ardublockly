@@ -98,7 +98,6 @@ Plane.init = function() {
        rtl: rtl,
        toolbox: toolbox});
 
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   var defaultXml =
       '<xml>' +
       '  <block type="plane_set_seats" deletable="false" x="70" y="70">' +

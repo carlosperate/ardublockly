@@ -84,7 +84,7 @@ BlocklyApps.LANGUAGES = {
   uk: ['Українська', 'ltr', 'en_compressed.js'],
   vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
   'zh-hans': ['简体字', 'ltr', 'zh_tw_compressed.js'],
-  'zh-hant': ['>中文/a>', 'ltr', 'zh_tw_compressed.js']
+  'zh-hant': ['中文', 'ltr', 'zh_tw_compressed.js']
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
 
@@ -279,6 +279,7 @@ Puzzle.showHelp = function(animate) {
   var border = document.getElementById('helpBorder');
   function endResult() {
     help.style.visibility = 'visible';
+    help.style.zIndex = 1;
     border.style.visibility = 'hidden';
   }
   if (animate) {
@@ -304,6 +305,7 @@ Puzzle.showHelp = function(animate) {
  * @param {boolean} animate Animate the pop-up closing.
  */
 Puzzle.hideHelp = function(animate) {
+  var help = document.getElementById('help');
   var shadow = document.getElementById('shadow');
   shadow.style.opacity = 0;
   var border = document.getElementById('helpBorder');
@@ -317,7 +319,7 @@ Puzzle.hideHelp = function(animate) {
     left += button.offsetLeft;
     top += button.offsetTop;
     button = button.offsetParent;
-  } while (button)
+  } while (button);
   border.style.left = left + 'px';
   border.style.top = top + 'px';
   border.style.opacity = 0.2;
@@ -333,7 +335,8 @@ Puzzle.hideHelp = function(animate) {
     // No animation.  Just set the final state.
     endResult();
   }
-  document.getElementById('help').style.visibility = 'hidden';
+  help.style.visibility = 'hidden';
+  help.style.zIndex = -1;
   if (Puzzle.keyDownHandler_) {
     Blockly.unbindEvent_(Puzzle.keyDownHandler_);
     Puzzle.keyDownHandler_ = null;

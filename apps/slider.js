@@ -129,7 +129,7 @@ Slider.mouseOver_ = function(e) {
     if (node == Slider.activeSlider_.SVG_) {
       return;
     }
-  } while (node = node.parentNode)
+  } while (node = node.parentNode);
   Slider.knobMouseUp_(e);
 };
 
