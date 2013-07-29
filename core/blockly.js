@@ -245,6 +245,10 @@ Blockly.svgResize = function() {
     svg.cachedTop_ += div.offsetTop;
     div = div.offsetParent;
   }
+  // Update the scrollbars (if they exist).
+  if (Blockly.mainWorkspace.scrollbar) {
+    Blockly.mainWorkspace.scrollbar.resize();
+  }
 };
 
 /**

@@ -261,6 +261,11 @@ Blockly.Flyout.prototype.position_ = function() {
 
   // Record the height for Blockly.Flyout.getMetrics.
   this.height_ = metrics.viewHeight;
+
+  // Update the scrollbar (if one exists).
+  if (this.scrollbar_) {
+    this.scrollbar_.resize();
+  }
 };
 
 /**

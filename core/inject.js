@@ -363,6 +363,7 @@ Blockly.init_ = function() {
     Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
         Blockly.mainWorkspace.getBubbleCanvas(),
         Blockly.getMainWorkspaceMetrics, Blockly.setMainWorkspaceMetrics);
+    Blockly.mainWorkspace.scrollbar.resize();
   }
 
   Blockly.mainWorkspace.addTrashcan(Blockly.getMainWorkspaceMetrics);

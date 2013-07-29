@@ -46,12 +46,6 @@ Blockly.ScrollbarPair = function(element, getMetrics, setMetrics) {
   this.vScroll = new Blockly.Scrollbar(element, getMetrics, setMetrics,
                                        false, true);
   this.corner_ = this.addCorner_(element);
-  this.resize();
-
-  // If the document resizes, reposition the scrollbars.
-  var pair = this;
-  this.onResizeWrapper_ = Blockly.bindEvent_(window, 'resize', pair,
-      function() {pair.resize();});
 };
 
 /**
@@ -279,13 +273,6 @@ Blockly.ScrollbarNative = function(element, getMetrics, setMetrics,
   this.onScrollWrapper_ = Blockly.bindEvent_(this.outerDiv_, 'scroll',
       scrollbar, function() {scrollbar.onScroll_();});
   Blockly.bindEvent_(this.foreignObject_, 'mousedown', null, Blockly.noEvent);
-  if (!this.pair_) {
-    // If this scrollbar is part of a pair, then the ScrollbarPair will handle
-    // resizing and event registration.
-    this.resize();
-    this.onResizeWrapper_ = Blockly.bindEvent_(window, 'resize', scrollbar,
-                       function() {scrollbar.resize();});
-  }
 };
 
 /**
@@ -574,13 +561,6 @@ Blockly.ScrollbarSvg = function(element, getMetrics, setMetrics,
     this.svgKnob_.setAttribute('x', 3);
   }
   var scrollbar = this;
-  if (!this.pair_) {
-    // If this scrollbar is part of a pair, then the ScrollbarPair will handle
-    // resizing and event registration.
-    this.resize();
-    this.onResizeWrapper_ = Blockly.bindEvent_(window, 'resize', scrollbar,
-        function() {scrollbar.resize();});
-  }
   this.onMouseDownBarWrapper_ = Blockly.bindEvent_(this.svgBackground_,
       'mousedown', scrollbar, scrollbar.onMouseDownBar_);
   this.onMouseDownKnobWrapper_ = Blockly.bindEvent_(this.svgKnob_,
