@@ -27,7 +27,7 @@ Blockly.Language.lists_create_empty = {
   // Create an empty list.
   helpUrl: Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.setOutput(true, 'Array');
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_LISTS_CREATE_EMPTY_TITLE);
@@ -39,7 +39,7 @@ Blockly.Language.lists_create_with = {
   // Create a list with any number of elements of any type.
   helpUrl: '',
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.appendValueInput('ADD0')
         .appendTitle(Blockly.LANG_LISTS_CREATE_WITH_INPUT_WITH);
     this.appendValueInput('ADD1');
@@ -130,7 +130,7 @@ Blockly.Language.lists_create_with = {
 Blockly.Language.lists_create_with_container = {
   // Container.
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_LISTS_CREATE_WITH_CONTAINER_TITLE_ADD);
     this.appendStatementInput('STACK');
@@ -142,7 +142,7 @@ Blockly.Language.lists_create_with_container = {
 Blockly.Language.lists_create_with_item = {
   // Add items.
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_LISTS_CREATE_WITH_ITEM_TITLE);
     this.setPreviousStatement(true);
@@ -156,7 +156,7 @@ Blockly.Language.lists_repeat = {
   // Create a list with one element repeated.
   helpUrl: Blockly.LANG_LISTS_REPEAT_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.setOutput(true, 'Array');
     this.appendValueInput('ITEM')
         .appendTitle(Blockly.LANG_LISTS_REPEAT_INPUT_WITH);
@@ -174,7 +174,7 @@ Blockly.Language.lists_length = {
   // List length.
   helpUrl: Blockly.LANG_LISTS_LENGTH_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.appendValueInput('VALUE')
         .setCheck(['Array', 'String'])
         .appendTitle(Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH);
@@ -187,7 +187,7 @@ Blockly.Language.lists_isEmpty = {
   // Is the list empty?
   helpUrl: Blockly.LANG_LISTS_IS_EMPTY_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.appendValueInput('VALUE')
         .setCheck(['Array', 'String']);
     this.appendDummyInput()
@@ -202,7 +202,7 @@ Blockly.Language.lists_indexOf = {
   // Find an item in the list.
   helpUrl: Blockly.LANG_LISTS_INDEX_OF_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.setOutput(true, 'Number');
     this.appendValueInput('VALUE')
         .setCheck('Array')
@@ -222,7 +222,7 @@ Blockly.Language.lists_getIndex = {
   // Get element at index.
   helpUrl: Blockly.LANG_LISTS_GET_INDEX_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     var modeMenu = new Blockly.FieldDropdown(this.MODE, function(value) {
       var isStatement = (value == 'REMOVE');
       this.sourceBlock_.updateStatement(isStatement);
@@ -322,7 +322,7 @@ Blockly.Language.lists_setIndex = {
   // Set element at index.
   helpUrl: Blockly.LANG_LISTS_SET_INDEX_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.appendValueInput('LIST')
         .setCheck('Array')
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST);
@@ -396,7 +396,7 @@ Blockly.Language.lists_getSublist = {
   // Get sublist.
   helpUrl: Blockly.LANG_LISTS_GET_SUBLIST_HELPURL,
   init: function() {
-    this.setColour(210);
+    this.setColour(260);
     this.appendValueInput('LIST')
         .setCheck('Array')
         .appendTitle(Blockly.LANG_LISTS_GET_SUBLIST_INPUT_IN_LIST);
