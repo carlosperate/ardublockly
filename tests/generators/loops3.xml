@@ -1,80 +1,11 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="unittest_main" x="18" y="-18">
+  <block type="unittest_main" x="19" y="106">
     <statement name="DO">
       <block type="procedures_callnoreturn">
-        <mutation name="test foreach"></mutation>
+        <mutation name="test break"></mutation>
         <next>
           <block type="procedures_callnoreturn">
-            <mutation name="test break"></mutation>
-            <next>
-              <block type="procedures_callnoreturn">
-                <mutation name="test continue"></mutation>
-              </block>
-            </next>
-          </block>
-        </next>
-      </block>
-    </statement>
-  </block>
-  <block type="procedures_defnoreturn" x="293" y="-14">
-    <mutation></mutation>
-    <title name="NAME">test foreach</title>
-    <statement name="STACK">
-      <block type="variables_set" inline="false">
-        <title name="VAR">log</title>
-        <value name="VALUE">
-          <block type="text">
-            <title name="TEXT"></title>
-          </block>
-        </value>
-        <next>
-          <block type="controls_forEach" inline="false">
-            <title name="VAR">x</title>
-            <value name="LIST">
-              <block type="lists_create_with" inline="false">
-                <mutation items="3"></mutation>
-                <value name="ADD0">
-                  <block type="text">
-                    <title name="TEXT">a</title>
-                  </block>
-                </value>
-                <value name="ADD1">
-                  <block type="text">
-                    <title name="TEXT">b</title>
-                  </block>
-                </value>
-                <value name="ADD2">
-                  <block type="text">
-                    <title name="TEXT">c</title>
-                  </block>
-                </value>
-              </block>
-            </value>
-            <statement name="DO">
-              <block type="text_append" inline="false">
-                <title name="VAR">log</title>
-                <value name="TEXT">
-                  <block type="variables_get">
-                    <title name="VAR">x</title>
-                  </block>
-                </value>
-              </block>
-            </statement>
-            <next>
-              <block type="unittest_assertequals" inline="false">
-                <title name="MESSAGE">for loop</title>
-                <value name="ACTUAL">
-                  <block type="variables_get">
-                    <title name="VAR">log</title>
-                  </block>
-                </value>
-                <value name="EXPECTED">
-                  <block type="text">
-                    <title name="TEXT">abc</title>
-                  </block>
-                </value>
-              </block>
-            </next>
+            <mutation name="test continue"></mutation>
           </block>
         </next>
       </block>
@@ -771,19 +702,3 @@
     </statement>
   </block>
 </xml>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

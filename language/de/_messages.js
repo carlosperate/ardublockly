@@ -74,30 +74,7 @@ Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'mit Farbe 2';
 Blockly.LANG_COLOUR_BLEND_RATIO = 'im Verhältniss';
 Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Vermische 2 Farbe mit konfigurierbaren Farbverhältniss (0.0 - 1.0).';
 
-// Control Blocks.
-Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'Wenn eine Bedingung wahr (true) ist, dann führe eine Anweisung aus.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Wenn eine Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
-    'Ansonsten führe die zweite Anweisung aus.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
-    'Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
-    'Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.\n' +
-    'Falls keine der beiden Bedingungen wahr (true) ist, dann führe die dritte Anweisung aus.';
-Blockly.LANG_CONTROLS_IF_MSG_IF = 'wenn';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'oder wenn';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'oder';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = 'mache';
-
-Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'wenn';
-Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Hinzufügen, entfernen oder sortieren von Sektionen';
-
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'oder wenn';
-Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Eine weitere Bedingung hinzufügen.';
-
-Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'oder';
-Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Eine oder Bedingung hinzufügen, führt eine Anweisung aus falls keine Bedingung zutrifft.';
-
+// Loop Blocks.
 Blockly.LANG_CONTROLS_REPEAT_HELPURL = 'http://de.wikipedia.org/wiki/For-Schleife';
 Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT = 'wiederhole';
 Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES = 'mal';
@@ -145,6 +122,26 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warnung:\n' +
     'verwendet werden.';
 
 // Logic Blocks.
+Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'Wenn eine Bedingung wahr (true) ist, dann führe eine Anweisung aus.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Wenn eine Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
+    'Ansonsten führe die zweite Anweisung aus.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
+    'Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
+    'Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.\n' +
+    'Falls keine der beiden Bedingungen wahr (true) ist, dann führe die dritte Anweisung aus.';
+Blockly.LANG_CONTROLS_IF_MSG_IF = 'wenn';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'oder wenn';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'oder';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = 'mache';
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'wenn';
+Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Hinzufügen, entfernen oder sortieren von Sektionen';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'oder wenn';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Eine weitere Bedingung hinzufügen.';
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'oder';
+Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Eine oder Bedingung hinzufügen, führt eine Anweisung aus falls keine Bedingung zutrifft.';
+
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://de.wikipedia.org/wiki/Vergleich_%28Zahlen%29';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Ist wahr (true) wenn beide Werte identisch sind.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Ist wahr (true) wenn beide Werte unterschiedlich sind.';
@@ -454,14 +451,16 @@ Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portio
 
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://de.wikipedia.org/wiki/Variable_%28Programmierung%29';
-Blockly.LANG_VARIABLES_GET_TITLE = 'Lese';
+Blockly.LANG_VARIABLES_GET_TITLE = null;
 Blockly.LANG_VARIABLES_GET_ITEM = 'Variable';
+Blockly.LANG_VARIABLES_GET_TAIL = null;
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Gibt den Wert der Variable zurück.';
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Erzeuge "Schreibe %1"';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://de.wikipedia.org/wiki/Variable_%28Programmierung%29';
 Blockly.LANG_VARIABLES_SET_TITLE = 'Schreibe';
 Blockly.LANG_VARIABLES_SET_ITEM = 'Variable';
+Blockly.LANG_VARIABLES_SET_TAIL = null;
 Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Setzt den Wert einer Variable.';
 Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Erzeuge "Lese %1"';
 

@@ -25,6 +25,26 @@
 
 Blockly.JavaScript.logic = {};
 
+Blockly.JavaScript.controls_if = function() {
+  // If/elseif/else condition.
+  var n = 0;
+  var argument = Blockly.JavaScript.valueToCode(this, 'IF' + n,
+      Blockly.JavaScript.ORDER_NONE) || 'false';
+  var branch = Blockly.JavaScript.statementToCode(this, 'DO' + n);
+  var code = 'if (' + argument + ') {\n' + branch + '}';
+  for (n = 1; n <= this.elseifCount_; n++) {
+    argument = Blockly.JavaScript.valueToCode(this, 'IF' + n,
+        Blockly.JavaScript.ORDER_NONE) || 'false';
+    branch = Blockly.JavaScript.statementToCode(this, 'DO' + n);
+    code += ' else if (' + argument + ') {\n' + branch + '}\n';
+  }
+  if (this.elseCount_) {
+    branch = Blockly.JavaScript.statementToCode(this, 'ELSE');
+    code += ' else {\n' + branch + '}\n';
+  }
+  return code + '\n';
+};
+
 Blockly.JavaScript.logic_compare = function() {
   // Comparison operator.
   var mode = this.getTitleValue('OP');

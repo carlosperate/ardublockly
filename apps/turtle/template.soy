@@ -159,7 +159,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{msg meaning="Turtle.catTurtle" desc="TODO"}Turtle{/msg}">
+    <category name="{msg meaning="Turtle.catTurtle" desc="category - blocks related to Turtle commands."}Turtle{/msg}">
       <block type="draw_move">
         <value name="VALUE">
           <block type="math_number">
@@ -190,7 +190,7 @@
       </block>
       <block type="draw_font"></block>
     </category>
-    <category name="{msg meaning="Turtle.catColour" desc="TODO"}Colour{/msg}">
+    <category name="{msg meaning="Turtle.catColour" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Colour colour]."}Colour{/msg}">
       <block type="draw_colour">
         <value name="COLOUR">
           <block type="colour_picker"></block>
@@ -201,8 +201,15 @@
       <block type="colour_rgb"></block>
       <block type="colour_blend"></block>
     </category>
-    <category name="{msg meaning="Turtle.catControl" desc="TODO"}Control{/msg}">
+    <category name="{msg meaning="Turtle.catLogic" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Logic logic]."}Logic{/msg}">
       <block type="controls_if"></block>
+      <block type="logic_compare"></block>
+      <block type="logic_operation"></block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean"></block>
+      <block type="logic_ternary"></block>
+    </category>
+    <category name="{msg meaning="Turtle.catLoops" desc="category - blocks related to [http://en.wikipedia.org/wiki/Control_flow#Loops loops]."}Loops{/msg}">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -231,14 +238,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="{msg meaning="Turtle.catLogic" desc="TODO"}Logic{/msg}">
-      <block type="logic_compare"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-      <block type="logic_ternary"></block>
-    </category>
-    <category name="{msg meaning="Turtle.catMath" desc="TODO"}Math{/msg}">
+    <category name="{msg meaning="Turtle.catMath" desc="category - blocks related to mathematics."}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -281,7 +281,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{msg meaning="Turtle.catLists" desc="TODO"}Lists{/msg}">
+    <category name="{msg meaning="Turtle.catLists" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Lists lists]."}Lists{/msg}">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
       <block type="lists_repeat">
@@ -297,33 +297,33 @@
         <value name="VALUE">
           <block type="variables_get">
             // Warning: Message Turtle.listVariable is repeated four times.  Please keep them in sync.
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getIndex">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_setIndex">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getSublist">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="TODO"}list{/msg}</title>
+            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
           </block>
         </value>
       </block>
     </category>
-    <category name="{msg meaning="Turtle.catVariables" desc="TODO"}Variables{/msg}" custom="VARIABLE"></category>
-    <category name="{msg meaning="Turtle.catProcedures" desc="TODO"}Functions{/msg}" custom="PROCEDURE"></category>
+    <category name="{msg meaning="Turtle.catVariables" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Variables variables]."}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Turtle.catProcedures" desc="category - blocks related to [http://en.wikipedia.org/wiki/Subroutine defining or using procedures/functions]."}Procedures{/msg}" custom="PROCEDURE"></category>
   </xml>
 {/template}

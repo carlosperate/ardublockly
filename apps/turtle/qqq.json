@@ -38,13 +38,13 @@
     "Turtle.linkTooltip": "TODO",
     "Turtle.captureTooltip": "TODO",
     "Turtle.imgFilename": "TODO",
-    "Turtle.catTurtle": "TODO",
-    "Turtle.catColour": "TODO",
-    "Turtle.catControl": "TODO",
-    "Turtle.catLogic": "TODO",
-    "Turtle.catMath": "TODO",
-    "Turtle.catLists": "TODO",
-    "Turtle.listVariable": "TODO",
-    "Turtle.catVariables": "TODO",
-    "Turtle.catProcedures": "TODO"
+    "Turtle.catTurtle": "category - blocks related to Turtle commands.",
+    "Turtle.catColour": "category - blocks related to [https://code.google.com/p/blockly/wiki/Colour colour].",
+    "Turtle.catLogic": "category - blocks related to [https://code.google.com/p/blockly/wiki/Logic logic].",
+    "Turtle.catLoops": "category - blocks related to [http://en.wikipedia.org/wiki/Control_flow#Loops loops].",
+    "Turtle.catMath": "category - blocks related to mathematics.",
+    "Turtle.catLists": "category - blocks related to [https://code.google.com/p/blockly/wiki/Lists lists].",
+    "Turtle.listVariable": "variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short.",
+    "Turtle.catVariables": "category - blocks related to [https://code.google.com/p/blockly/wiki/Variables variables].",
+    "Turtle.catProcedures": "category - blocks related to [http://en.wikipedia.org/wiki/Subroutine defining or using procedures/functions]."
 }

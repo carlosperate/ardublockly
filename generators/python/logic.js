@@ -25,6 +25,26 @@
 
 Blockly.Python.logic = {};
 
+Blockly.Python.controls_if = function() {
+  // If/elseif/else condition.
+  var n = 0;
+  var argument = Blockly.Python.valueToCode(this, 'IF' + n,
+      Blockly.Python.ORDER_NONE) || 'False';
+  var branch = Blockly.Python.statementToCode(this, 'DO' + n) || '  pass\n';
+  var code = 'if ' + argument + ':\n' + branch;
+  for (n = 1; n <= this.elseifCount_; n++) {
+    argument = Blockly.Python.valueToCode(this, 'IF' + n,
+        Blockly.Python.ORDER_NONE) || 'False';
+    branch = Blockly.Python.statementToCode(this, 'DO' + n) || '  pass\n';
+    code += 'elif ' + argument + ':\n' + branch;
+  }
+  if (this.elseCount_) {
+    branch = Blockly.Python.statementToCode(this, 'ELSE') || '  pass\n';
+    code += 'else:\n' + branch;
+  }
+  return code;
+};
+
 Blockly.Python.logic_compare = function() {
   // Comparison operator.
   var mode = this.getTitleValue('OP');

@@ -75,31 +75,7 @@ Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'màu 2';
 Blockly.LANG_COLOUR_BLEND_RATIO = 'tỉ lệ';
 Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Pha hai màu với nhau theo tỉ lệ (0 - 100).';
 
-// Control Blocks.
-Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'Nếu điều kiện đúng, thực hiện các lệnh.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
-    'Nếu sai, thực hiện các lệnh sau.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
-    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
-    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.\n' +
-    'Nếu không điều kiện nào đúng, thực hiện các lệnh cuối cùng.';
-Blockly.LANG_CONTROLS_IF_MSG_IF = 'nếu';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'nếu không nếu';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'nếu không';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = 'thực hiện';
-
-Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'nếu';
-Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Thêm, bỏ, hoặc đổi thứ tự các mảnh con\n' +
-    'để tạo cấu trúc mới cho mảnh nếu.';
-
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'nếu không nếu';
-Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Thêm một điều kiện vào mảnh nếu.';
-
-Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'nếu không';
-Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Cuối cùng, khi không điều kiện nào đúng.';
-
+// Loop Blocks.
 Blockly.LANG_CONTROLS_REPEAT_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT = 'lặp lại';
 Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES = 'lần';
@@ -147,6 +123,27 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING ='Cẩn thận:\n' +
     'trong các vòng lặp.';
 
 // Logic Blocks.
+Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'Nếu điều kiện đúng, thực hiện các lệnh.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
+    'Nếu sai, thực hiện các lệnh sau.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
+    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
+    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.\n' +
+    'Nếu không điều kiện nào đúng, thực hiện các lệnh cuối cùng.';
+Blockly.LANG_CONTROLS_IF_MSG_IF = 'nếu';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'nếu không nếu';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'nếu không';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = 'thực hiện';
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'nếu';
+Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Thêm, bỏ, hoặc đổi thứ tự các mảnh con\n' +
+    'để tạo cấu trúc mới cho mảnh nếu.';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'nếu không nếu';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Thêm một điều kiện vào mảnh nếu.';
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'nếu không';
+Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Cuối cùng, khi không điều kiện nào đúng.';
+
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Hoàn trả giá trị "đúng" (true) nếu giá trị hai đầu vào bằng nhau.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Hoàn trả giá trị "đúng" (true) nếu giá trị hai đầu vào không bằng nhau.';
@@ -459,14 +456,16 @@ Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Lấy một mảng của danh sách n�
 
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_GET_TITLE = 'lấy';
+Blockly.LANG_VARIABLES_GET_TITLE = null;
 Blockly.LANG_VARIABLES_GET_ITEM = 'vật';
+Blockly.LANG_VARIABLES_GET_TAIL = null;
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Hoàn trả giá trị của.';
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Tạo mảnh "đặt vào %1"';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_SET_TITLE = 'đặt vào';
 Blockly.LANG_VARIABLES_SET_ITEM = 'vật';
+Blockly.LANG_VARIABLES_SET_TAIL = null;
 Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Đặt giá trị của biến này thành...';
 Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Tạo mảnh "lấy %1"';
 

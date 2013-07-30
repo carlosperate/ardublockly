@@ -74,31 +74,7 @@ Blockly.LANG_COLOUR_BLEND_COLOUR2 = 'colour 2';
 Blockly.LANG_COLOUR_BLEND_RATIO = 'ratio';
 Blockly.LANG_COLOUR_BLEND_TOOLTIP = 'Blends two colours together with a given ratio (0.0 - 1.0).';
 
-// Control Blocks.
-Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
-    'Otherwise, do the second block of statements.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the first block of statements.\n' +
-    'Otherwise, if the second value is true, do the second block of statements.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
-    'Otherwise, if the second value is true, do the second block of statements.\n' +
-    'If none of the values are true, do the last block of statements.';
-Blockly.LANG_CONTROLS_IF_MSG_IF = 'if';
-Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'else if';
-Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'else';
-Blockly.LANG_CONTROLS_IF_MSG_THEN = 'do';
-
-Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'if';
-Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Add, remove, or reorder sections\n' +
-    'to reconfigure this if block.';
-
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'else if';
-Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Add a condition to the if block.';
-
-Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'else';
-Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Add a final, catch-all condition to the if block.';
-
+// Loop Blocks.
 Blockly.LANG_CONTROLS_REPEAT_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT = 'repeat';
 Blockly.LANG_CONTROLS_REPEAT_TITLE_TIMES = 'times';
@@ -144,6 +120,27 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warning:\n' +
     'be used within a loop.';
 
 // Logic Blocks.
+Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'If a value is true, then do some statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'If a value is true, then do the first block of statements.\n' +
+    'Otherwise, do the second block of statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'If the first value is true, then do the first block of statements.\n' +
+    'Otherwise, if the second value is true, do the second block of statements.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'If the first value is true, then do the first block of statements.\n' +
+    'Otherwise, if the second value is true, do the second block of statements.\n' +
+    'If none of the values are true, do the last block of statements.';
+Blockly.LANG_CONTROLS_IF_MSG_IF = 'if';
+Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'else if';
+Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'else';
+Blockly.LANG_CONTROLS_IF_MSG_THEN = 'do';
+Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'if';
+Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Add, remove, or reorder sections\n' +
+    'to reconfigure this if block.';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'else if';
+Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Add a condition to the if block.';
+Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'else';
+Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Add a final, catch-all condition to the if block.';
+
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
@@ -456,14 +453,16 @@ Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portio
 
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_GET_TITLE = 'get';
+Blockly.LANG_VARIABLES_GET_TITLE = null;
 Blockly.LANG_VARIABLES_GET_ITEM = 'item';
+Blockly.LANG_VARIABLES_GET_TAIL = null;
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Returns the value of this variable.';
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Create "set %1"';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
 Blockly.LANG_VARIABLES_SET_TITLE = 'set';
 Blockly.LANG_VARIABLES_SET_ITEM = 'item';
+Blockly.LANG_VARIABLES_SET_TAIL = 'to';
 Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Sets this variable to be equal to the input.';
 Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Create "get %1"';
 

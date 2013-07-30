@@ -18,32 +18,12 @@
  */
 
 /**
- * @fileoverview Generating JavaScript for control blocks.
+ * @fileoverview Generating JavaScript for loop blocks.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
 
 Blockly.JavaScript.control = {};
-
-Blockly.JavaScript.controls_if = function() {
-  // If/elseif/else condition.
-  var n = 0;
-  var argument = Blockly.JavaScript.valueToCode(this, 'IF' + n,
-      Blockly.JavaScript.ORDER_NONE) || 'false';
-  var branch = Blockly.JavaScript.statementToCode(this, 'DO' + n);
-  var code = 'if (' + argument + ') {\n' + branch + '}';
-  for (n = 1; n <= this.elseifCount_; n++) {
-    argument = Blockly.JavaScript.valueToCode(this, 'IF' + n,
-        Blockly.JavaScript.ORDER_NONE) || 'false';
-    branch = Blockly.JavaScript.statementToCode(this, 'DO' + n);
-    code += ' else if (' + argument + ') {\n' + branch + '}\n';
-  }
-  if (this.elseCount_) {
-    branch = Blockly.JavaScript.statementToCode(this, 'ELSE');
-    code += ' else {\n' + branch + '}\n';
-  }
-  return code + '\n';
-};
 
 Blockly.JavaScript.controls_repeat = function() {
   // Repeat n times (internal number).

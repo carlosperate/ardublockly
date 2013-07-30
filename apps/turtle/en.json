@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-07-24 09:34:29.382040",
+        "lastupdated": "2013-07-29 17:56:12.783643",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -46,11 +46,11 @@
     "Turtle.imgFilename": "drawing.png",
     "Turtle.catTurtle": "Turtle",
     "Turtle.catColour": "Colour",
-    "Turtle.catControl": "Control",
     "Turtle.catLogic": "Logic",
+    "Turtle.catLoops": "Loops",
     "Turtle.catMath": "Math",
     "Turtle.catLists": "Lists",
     "Turtle.listVariable": "list",
     "Turtle.catVariables": "Variables",
-    "Turtle.catProcedures": "Functions"
+    "Turtle.catProcedures": "Procedures"
 }
