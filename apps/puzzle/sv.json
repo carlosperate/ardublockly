@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Jopparn",
             "WikiPhoenix"
         ]
     },
@@ -24,7 +25,7 @@
     "Puzzle.country4City1": "Rio de Janeiro",
     "Puzzle.country4City2": "S\u00e3o Paulo",
     "Puzzle.country4HelpUrl": "http://sv.wikipedia.org/wiki/Brasilien",
-    "Puzzle.flag": "flagga",
+    "Puzzle.flag": "flagga:",
     "Puzzle.language": "spr\u00e5k:",
     "Puzzle.languageChoose": "v\u00e4lj...",
     "Puzzle.cities": "st\u00e4der:",
@@ -32,6 +33,7 @@
     "Puzzle.error1": "N\u00e4stan! Ett block \u00e4r fel.",
     "Puzzle.error2": "%1 block \u00e4r fel.",
     "Puzzle.tryAgain": "Det markerade blocket \u00e4r inte r\u00e4tt.\nForts\u00e4tt att prova.",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Pussel",
     "Puzzle.help": "Hj\u00e4lp",
     "Puzzle.checkAnswers": "Kontrollera svar",

@@ -1,8 +1,10 @@
 {
     "@metadata": {
         "authors": {
-            "0": "Qneutron",
-            "2": "Tuankiet65"
+            "0": "Baonguyen21022003",
+            "1": "Espertus",
+            "2": "Qneutron",
+            "4": "Tuankiet65"
         }
     },
     "Puzzle.country1": "\u00dac",
@@ -33,6 +35,7 @@
     "Puzzle.error1": "G\u1ea7n \u0111\u00fang r\u1ed3i! M\u1ed9t m\u1ea3nh c\u00f2n ch\u01b0a ch\u00ednh x\u00e1c.",
     "Puzzle.error2": "%1 m\u1ea3nh c\u00f2n ch\u01b0a ch\u00ednh x\u00e1c.",
     "Puzzle.tryAgain": "C\u00e1c m\u1ea3nh \u0111\u01b0\u1ee3c \u0111\u00e1nh d\u1ea5u l\u00e0 kh\u00f4ng \u0111\u00fang.\nC\u1ed1 l\u00ean!",
+    "Apps.blocklyMessage": "Kho\u00e1",
     "Puzzle.title": "\u0110\u1ed1 vui",
     "Puzzle.help": "Tr\u1ee3 gi\u00fap",
     "Puzzle.checkAnswers": "Ki\u1ec3m tra \u0111\u00e1p \u00e1n",

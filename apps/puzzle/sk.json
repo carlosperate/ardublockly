@@ -1,7 +1,9 @@
 {
     "@metadata": {
         "authors": [
-            "Marian.stano"
+            "Espertus",
+            "Marian.stano",
+            "Teslaton"
         ]
     },
     "Puzzle.country1": "Austr\u00e1lia",
@@ -32,6 +34,7 @@
     "Puzzle.error1": "Skoro! Jeden blok je nespr\u00e1vne.",
     "Puzzle.error2": "%1 blokov je nespr\u00e1vne.",
     "Puzzle.tryAgain": "Zv\u00fdraznen\u00fd blok je nespr\u00e1vne.\nSk\u00fa\u0161aj \u010falej.",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Sklada\u010dka",
     "Puzzle.help": "Pomoc",
     "Puzzle.checkAnswers": "Skontrolova\u0165",

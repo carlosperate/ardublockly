@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Espertus",
             "Gorizon"
         ]
     },
@@ -24,7 +25,7 @@
     "Puzzle.country4City1": "Rio de Ceneryo",
     "Puzzle.country4City2": "Sao Paulo",
     "Puzzle.country4HelpUrl": "http://en.wikipedia.org/wiki/Brazil",
-    "Puzzle.flag": "desmal",
+    "Puzzle.flag": "desmal:",
     "Puzzle.language": "Z\u0131wan:",
     "Puzzle.languageChoose": "we\u00e7ine...",
     "Puzzle.cities": "suki:",

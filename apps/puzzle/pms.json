@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Borich\u00e8t"
+            "Borich\u00e8t",
+            "Espertus"
         ]
     },
     "Puzzle.country1": "Australia",
@@ -32,6 +33,7 @@
     "Puzzle.error1": "Scasi! Un bl\u00f2ch a va nen bin.",
     "Puzzle.error2": "%1 bl\u00f2ch a van nen bin.",
     "Puzzle.tryAgain": "\u00cbl bl\u00f2ch evidensi\u00e0 a va nen bin. Preuva torna.",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "S-ciapatesta",
     "Puzzle.help": "Giut\u00e9",
     "Puzzle.checkAnswers": "Contr\u00f2la le risp\u00f2ste",

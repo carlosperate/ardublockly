@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Espertus",
             "\uc544\ub77c"
         ]
     },
@@ -32,6 +33,7 @@
     "Puzzle.error1": "\uac70\uc758 \ub410\uc2b5\ub2c8\ub2e4! \ube14\ub85d \ud55c \uac1c\uac00 \uc798\ubabb\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
     "Puzzle.error2": "\ube14\ub85d %1\uac1c\uac00 \uc798\ubabb\ub418\uc5c8\uc2b5\ub2c8\ub2e4.",
     "Puzzle.tryAgain": "\uac15\uc870\ud55c \ube14\ub85d\uc740 \uc62c\ubc14\ub974\uc9c0 \uc54a\uc2b5\ub2c8\ub2e4.\n\uacc4\uc18d \ud574\ubcf4\uc138\uc694.",
+    "Apps.blocklyMessage": "\ube14\ub85d\ub9ac",
     "Puzzle.title": "\ud37c\uc990",
     "Puzzle.help": "\ub3c4\uc6c0\ub9d0",
     "Puzzle.checkAnswers": "\uc815\ub2f5 \ud655\uc778",

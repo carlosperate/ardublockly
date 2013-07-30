@@ -1,7 +1,9 @@
 {
     "@metadata": {
         "authors": [
-            "Rezonansowy"
+            "Espertus",
+            "Rezonansowy",
+            "Woytecr"
         ]
     },
     "Puzzle.country1": "Australia",
@@ -32,6 +34,7 @@
     "Puzzle.error1": "Prawie! Jeden blok jest niepoprawny.",
     "Puzzle.error2": "%1 blok\u00f3w jest nieprawid\u0142owych.",
     "Puzzle.tryAgain": "Zaznaczony blok nie jest poprawny.\nSpr\u00f3buj jeszcze raz.",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Puzzle",
     "Puzzle.help": "Pomoc",
     "Puzzle.checkAnswers": "Sprawd\u017a Odpowiedzi",

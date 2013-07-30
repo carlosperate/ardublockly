@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Espertus",
             "Murma174"
         ]
     },
@@ -24,7 +25,7 @@
     "Puzzle.country4City1": "Rio de Janeiro",
     "Puzzle.country4City2": "S\u00e3o Paulo",
     "Puzzle.country4HelpUrl": "http://frr.wikipedia.org/wiki/Brasiilien",
-    "Puzzle.flag": "Flag",
+    "Puzzle.flag": "Flag:",
     "Puzzle.language": "Spriak:",
     "Puzzle.languageChoose": "Sch\u00fck \u00fctj ...",
     "Puzzle.cities": "St\u00e4\u00e4den:",

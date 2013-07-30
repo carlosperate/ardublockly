@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Espertus",
             "Mormegil",
             "Reaperman"
         ]
@@ -33,6 +34,7 @@
     "Puzzle.error1": "Skoro! Jeden blok je nespr\u00e1vn\u011b.",
     "Puzzle.error2": "%1 bloky jsou chybn\u011b.",
     "Puzzle.tryAgain": "Zv\u00fdrazn\u011bn\u00fd blok nen\u00ed spr\u00e1vn\u011b.\nZkou\u0161ej to d\u00e1l.",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Skl\u00e1da\u010dka",
     "Puzzle.help": "Pomoc",
     "Puzzle.checkAnswers": "Zkontrolovat odpov\u011bdi",

@@ -1,4 +1,10 @@
 {
+    "@metadata": {
+        "authors": [
+            "Shirayuki",
+            "Siebrand"
+        ]
+    },
     "Puzzle.country1": "The name of the country Australia\n{{Identical|Australia}}",
     "Puzzle.country1Language": "The English language.{{Identical|English}}",
     "Puzzle.country1City1": "The city Melbourne in Australia.",
@@ -24,10 +30,10 @@
     "Puzzle.languageChoose": "Initial text displayed in a dropdown menu from which the user should choose the language spoken in the indicated country.",
     "Puzzle.cities": "A label preceding a list of cities.\n{{Identical|City}}",
     "Puzzle.error0": "A congratulatory message displayed if the user placed all %1 blocks correctly, where %1 is an integer greater than 1.\n\nThe use of a new line character is optional.",
-    "Puzzle.error1": "an encouraging error message displayed if the user placed all blocks except 1 correctly.\n\nIf the number of incorrect blocks is 2 or more, Puzzle.error2 is used instead.",
-    "Puzzle.error2": "an error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one.\n\nIf the number of incorrect blocks is 1, Puzzle.error1 is used.",
+    "Puzzle.error1": "an encouraging error message displayed if the user placed all blocks except 1 correctly.\n\nIf the number of incorrect blocks is 2 or more, {{msg-blockly|Puzzle-Puzzle.error2}} is used instead.",
+    "Puzzle.error2": "an error message displayed if the user misplaced %1 blocks, where %1 is an integer greater than one.\n\nIf the number of incorrect blocks is 1, {{msg-blockly|Puzzle-Puzzle.error1}} is used.",
     "Puzzle.tryAgain": "A message indicating that a visually distinguished block is incorrect and that the user should try to fix it.\n\nThe use of a new line character is optional.",
-    "Apps.blocklyMessage": "The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (\u0411\u043bo\u043a\u043b\u0438)'.",
+    "Apps.blocklyMessage": "{{Identical|Blockly}}The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged. Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (\u0411\u043bo\u043a\u043b\u0438)'. This should be identical to {{msg-blockly|Maze-Apps.blocklyMessage}}.",
     "Puzzle.title": "A brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle.",
     "Puzzle.help": "The label on a button the user can press for help.\n{{Identical|Help}}",
     "Puzzle.checkAnswers": "A label on a button the user can press to check his/her answers.",

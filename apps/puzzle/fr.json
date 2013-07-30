@@ -3,7 +3,11 @@
         "author": "Ellen Spertus \u003Cellen.spertus@gmail.com\u003E",
         "lastupdated": "2013-04-26 10:44:50.223305",
         "locale": "fr",
-        "messagedocumentation": "qqq"
+        "messagedocumentation": "qqq",
+        "authors": [
+            "Gomoko",
+            "Od1n"
+        ]
     },
     "Puzzle.country1": "Australie",
     "Puzzle.country1Language": "Anglais",
@@ -26,16 +30,17 @@
     "Puzzle.country4City2": "S\u00e3o Paulo",
     "Puzzle.country4HelpUrl": "http://fr.wikipedia.org/wiki/Br%C3%A9sil",
     "Puzzle.flag": "drapeau:",
-    "Puzzle.language": "langue:",
+    "Puzzle.language": "langue :",
     "Puzzle.languageChoose": "choisis...",
-    "Puzzle.cities": "villes:",
-    "Puzzle.error0": "Parfait!  Tous les %1 blocs sont corrects.",
-    "Puzzle.error1": "Presque!  Un block est incorrect.",
-    "Puzzle.error2": "%1 blocks sont incorrects.",
-    "Puzzle.tryAgain": "Le bloc en surbrillance est incorrect.  Ressaie.",
+    "Puzzle.cities": "villes :",
+    "Puzzle.error0": "Parfait !\nLes %1 blocs sont tous corrects.",
+    "Puzzle.error1": "Presque ! Un bloc est incorrect.",
+    "Puzzle.error2": "%1 blocs sont incorrects.",
+    "Puzzle.tryAgain": "Le bloc en surbrillance est incorrect.\nEssaie encore.",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Puzzle",
-    "Puzzle.help": "Aider",
-    "Puzzle.checkAnswers": "V\u00e9rifiez les r\u00e9ponses",
+    "Puzzle.help": "Aide",
+    "Puzzle.checkAnswers": "V\u00e9rifier les r\u00e9ponses",
     "Puzzle.helpText": "Pour chaque pays (en vert), attache son drapeau, choisis sa langue, et fais un empilage de ses villes.",
     "Puzzle.helpOk": "OK"
 }

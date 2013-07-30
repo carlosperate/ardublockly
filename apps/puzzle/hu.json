@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Dj",
             "Grin",
             "Tak\u00e1cs Viktor L\u00e1szl\u00f3"
         ]
@@ -25,7 +26,7 @@
     "Puzzle.country4City1": "Rio de Janeiro",
     "Puzzle.country4City2": "S\u00e3o Paulo",
     "Puzzle.country4HelpUrl": "http://hu.wikipedia.org/wiki/Braz\u00edlia",
-    "Puzzle.flag": "z\u00e1szl\u00f3",
+    "Puzzle.flag": "z\u00e1szl\u00f3:",
     "Puzzle.language": "nyelv:",
     "Puzzle.languageChoose": "v\u00e1lassz\u2026",
     "Puzzle.cities": "v\u00e1rosok:",
@@ -33,6 +34,7 @@
     "Puzzle.error1": "Majdnem siker\u00fclt! 1 blokk rossz helyre ker\u00fclt.",
     "Puzzle.error2": "\u03251 blokk rossz helyre ker\u00fclt.",
     "Puzzle.tryAgain": "A kiemelt blokk nincs a hely\u00e9n.\nPr\u00f3b\u00e1ld \u00fajra",
+    "Apps.blocklyMessage": "Blockly",
     "Puzzle.title": "Kirak\u00f3s",
     "Puzzle.help": "Sug\u00f3",
     "Puzzle.checkAnswers": "V\u00e1laszok ellen\u0151rz\u00e9se",
