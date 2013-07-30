@@ -153,6 +153,13 @@ BlocklyApps.init = function() {
   if (linkButton && !('BlocklyStorage' in window)) {
     linkButton.className = 'disabled';
   }
+
+  // Fixes viewport for small screens.
+  var viewport = document.querySelector('meta[name="viewport"]');
+  if (viewport && screen.availWidth < 725) {
+    viewport.setAttribute('content',
+        'width=725, initial-scale=.35, user-scalable=no');
+  }
 };
 
 /**
