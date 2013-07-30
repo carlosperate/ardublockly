@@ -120,9 +120,9 @@ Maze.SquareType = {
 // The maze square constants defined above are inlined here
 // for ease of reading and writing the static mazes.
 Maze.map = [
- // Level 0.
+// Level 0.
  undefined,
- // Level 1.
+// Level 1.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -131,7 +131,7 @@ Maze.map = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 2.
+// Level 2.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -140,7 +140,7 @@ Maze.map = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 3.
+// Level 3.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -149,7 +149,7 @@ Maze.map = [
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 4.
+// Level 4.
 /**
  * Note, the path continues past the start and the goal in both directions.
  * This is intentionally done so kids see the maze is about getting from
@@ -164,7 +164,7 @@ Maze.map = [
   [0, 0, 1, 1, 0, 0, 0, 0],
   [0, 2, 1, 0, 0, 0, 0, 0],
   [1, 1, 0, 0, 0, 0, 0, 0]],
- // Level 5.
+// Level 5.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 3, 0, 0],
   [0, 0, 0, 0, 0, 1, 0, 0],
@@ -173,7 +173,7 @@ Maze.map = [
   [0, 0, 0, 0, 0, 1, 0, 0],
   [0, 0, 0, 2, 1, 1, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 6.
+// Level 6.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 1, 1, 1, 1, 0, 0],
@@ -182,7 +182,7 @@ Maze.map = [
   [0, 0, 0, 0, 0, 1, 0, 0],
   [0, 2, 1, 1, 1, 1, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 7.
+// Level 7.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 1, 1, 0],
   [0, 2, 1, 1, 1, 1, 0, 0],
@@ -191,7 +191,7 @@ Maze.map = [
   [0, 1, 0, 1, 0, 1, 0, 0],
   [0, 1, 1, 1, 1, 1, 1, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 8.
+// Level 8.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 1, 1, 1, 0, 0, 0],
@@ -200,7 +200,7 @@ Maze.map = [
   [0, 0, 0, 1, 0, 1, 0, 0],
   [0, 2, 1, 1, 0, 3, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 9.
+// Level 9.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 1, 1, 1, 1, 0, 0],
   [0, 0, 1, 0, 0, 0, 0, 0],
@@ -209,7 +209,7 @@ Maze.map = [
   [1, 1, 1, 1, 1, 0, 1, 0],
   [0, 1, 0, 1, 0, 2, 1, 0],
   [0, 0, 0, 0, 0, 0, 0, 0]],
- // Level 10.
+// Level 10.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 1, 1, 0, 3, 0, 1, 0],
   [0, 1, 1, 0, 1, 1, 1, 0],
@@ -476,12 +476,19 @@ Maze.init = function() {
   Maze.drawMap();
 
   var blocklyDiv = document.getElementById('blockly');
+  var visualization = document.getElementById('visualization');
   var onresize = function(e) {
-    blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
-        'px';
-    blocklyDiv.style.height = (window.innerHeight - blocklyDiv.offsetTop - 18) +
-        'px';
+    var top = visualization.offsetTop;
+    blocklyDiv.style.top = top + 'px';
+    blocklyDiv.style.left = rtl ? '10px' : '420px';
+    blocklyDiv.style.width = (window.innerWidth - 440) + 'px';
+    blocklyDiv.style.height =
+        (window.innerHeight - top - 20 + window.scrollY) + 'px';
   };
+  window.addEventListener('scroll', function() {
+      onresize();
+      Blockly.fireUiEvent(window, 'resize');
+    });
   window.addEventListener('resize', onresize);
   onresize();
 

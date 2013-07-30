@@ -148,13 +148,6 @@ BlocklyApps.init = function() {
     languageMenu.options.add(option);
   }
 
-  // Move the language menu div (which may include other elements) to the far
-  // side of the screen.
-  // HACK: Firefox v21 does not allow the setting of style.float.
-  // Use setAttribute instead.
-  languageMenu.parentElement.setAttribute('style',
-      'display: block; float: ' + (rtl ? 'left' : 'right') + ';');
-
   // Disable the link button if page isn't backed by App Engine storage.
   var linkButton = document.getElementById('linkButton');
   if (linkButton && !('BlocklyStorage' in window)) {

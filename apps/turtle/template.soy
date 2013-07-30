@@ -4,7 +4,7 @@
  * This is a Closure Template.  Build multilingually:
  *
  * # Create en.js.
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs template.soy
  *
  * # Extract messages from template.soy.
  * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
@@ -71,12 +71,9 @@
     <span id="xmlError">{{msg meaning="Apps.xmlError" desc="alert - There was a problem loading a file previously saved by the user.  The most likely reason for the problem is that it was created with an earlier, incompatible version of Blockly.  This message will be folllowed by technical information useful to engineers trying to understand the problem.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.xmlError{rb}{rb}."}}Could not load your saved file.  Perhaps it was created with a different version of Blockly?{/msg}</span>
   </div>
 
-  <table width="100%" height="100%">
-    <tr height="50">
-      <td colspan=3>
-        <div style="display: none;">
-          <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
-        </div>
+  <table width="100%">
+    <tr>
+      <td>
         <h1>
           <span id="title">
             <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
@@ -87,79 +84,74 @@
           </span>
         </h1>
       </td>
-    </tr>
-    <tr>
-      <td width="410" valign="top">
-        <div>
-          <canvas id="scratch" width="400" height="400" style="display: none"></canvas>
-          <canvas id="display" width="400" height="400"></canvas>
-        </div>
-        <table style="padding-top: 1em;">
-          <tr>
-            <td style="width: 190px; text-align: center; vertical-align: top;">
-              <script type="text/javascript" src="../slider.js"></script>
-              <svg
-                 id="slider"
-                 xmlns="http://www.w3.org/2000/svg"
-                 xmlns:svg="http://www.w3.org/2000/svg"
-                 xmlns:xlink="http://www.w3.org/1999/xlink"
-                 version="1.1"
-                 width="150"
-                 height="50">
-                <!-- Slow icon. -->
-                <clipPath id="slowClipPath">
-                  <rect width=26 height=12 x=5 y=14 />
-                </clipPath>
-                <image xlink:href="icons.png" height=42 width=84 x=-21 y=-10
-                    clip-path="url(#slowClipPath)" />
-                <!-- Fast icon. -->
-                <clipPath id="fastClipPath">
-                  <rect width=26 height=16 x=120 y=10 />
-                </clipPath>
-                <image xlink:href="icons.png" height=42 width=84 x=120 y=-11
-                    clip-path="url(#fastClipPath)" />
-              </svg>
-            </td>
-            <td style="width: 15px;">
-              <img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15>
-            </td>
-            <td style="width: 190px; text-align: center">
-              <button id="runButton" class="launch" onclick="Turtle.runButtonClick();">
-                <img src="../../media/1x1.gif" class="run icon21">{msg meaning="Turtle.runProgram" desc="TODO"}Run Program{/msg}
-              </button>
-              <button id="resetButton" class="launch" onclick="Turtle.resetButtonClick();" style="display: none">
-                <img src="../../media/1x1.gif" class="stop icon21">{msg meaning="Turtle.resetProgram" desc="TODO"}Reset{/msg}
-              </button>
-            </td>
-          </tr>
-        </table>
-
-        <div id="toolbarDiv">
-          <button title="{msg meaning="Turtle.codeTooltip" desc="TODO"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode();">
-            <img src='../../media/1x1.gif' class="code icon21">
-          </button>
-          <button id="linkButton" title="{msg meaning="Turtle.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
-            <img src='../../media/1x1.gif' class="link icon21">
-          </button>
-          <button id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="TODO"}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">
-            <img src='../../media/1x1.gif' class="img icon21">
-          </button>
-          <a id="downloadImageLink" download="{msg meaning="Turtle.imgFilename" desc="TODO"}drawing.png{/msg}"></a>
-        </div>
-      </td>
-
-      <td width=5></td>
-
-      <td valign="top">
-        <script type="text/javascript" src="../../blockly_compressed.js"></script>
-        <script type="text/javascript" src="../../javascript_compressed.js"></script>
-        <script type="text/javascript" src="../../{$ij.langSrc}"></script>
-        <script type="text/javascript" src="blocks.js"></script>
-        {call .toolbox /}
-        <div id="blockly"></div>
+      <td class="farSide">
+        <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
       </td>
     </tr>
   </table>
+  <div id="visualization">
+    <canvas id="scratch" width="400" height="400" style="display: none"></canvas>
+    <canvas id="display" width="400" height="400"></canvas>
+  </div>
+  <table style="padding-top: 1em;">
+    <tr>
+      <td style="width: 190px; text-align: center; vertical-align: top;">
+        <script type="text/javascript" src="../slider.js"></script>
+        <svg
+           id="slider"
+           xmlns="http://www.w3.org/2000/svg"
+           xmlns:svg="http://www.w3.org/2000/svg"
+           xmlns:xlink="http://www.w3.org/1999/xlink"
+           version="1.1"
+           width="150"
+           height="50">
+          <!-- Slow icon. -->
+          <clipPath id="slowClipPath">
+            <rect width=26 height=12 x=5 y=14 />
+          </clipPath>
+          <image xlink:href="icons.png" height=42 width=84 x=-21 y=-10
+              clip-path="url(#slowClipPath)" />
+          <!-- Fast icon. -->
+          <clipPath id="fastClipPath">
+            <rect width=26 height=16 x=120 y=10 />
+          </clipPath>
+          <image xlink:href="icons.png" height=42 width=84 x=120 y=-11
+              clip-path="url(#fastClipPath)" />
+        </svg>
+      </td>
+      <td style="width: 15px;">
+        <img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15>
+      </td>
+      <td style="width: 190px; text-align: center">
+        <button id="runButton" class="launch" onclick="Turtle.runButtonClick();">
+          <img src="../../media/1x1.gif" class="run icon21">{msg meaning="Turtle.runProgram" desc="TODO"}Run Program{/msg}
+        </button>
+        <button id="resetButton" class="launch" onclick="Turtle.resetButtonClick();" style="display: none">
+          <img src="../../media/1x1.gif" class="stop icon21">{msg meaning="Turtle.resetProgram" desc="TODO"}Reset{/msg}
+        </button>
+      </td>
+    </tr>
+  </table>
+
+  <div id="toolbarDiv">
+    <button title="{msg meaning="Turtle.codeTooltip" desc="TODO"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode();">
+      <img src='../../media/1x1.gif' class="code icon21">
+    </button>
+    <button id="linkButton" title="{msg meaning="Turtle.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
+      <img src='../../media/1x1.gif' class="link icon21">
+    </button>
+    <button id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="TODO"}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">
+      <img src='../../media/1x1.gif' class="img icon21">
+    </button>
+    <a id="downloadImageLink" download="{msg meaning="Turtle.imgFilename" desc="TODO"}drawing.png{/msg}"></a>
+  </div>
+
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../javascript_compressed.js"></script>
+  <script type="text/javascript" src="../../{$ij.langSrc}"></script>
+  <script type="text/javascript" src="blocks.js"></script>
+  {call .toolbox /}
+  <div id="blockly"></div>
 {/template}
 
 /**

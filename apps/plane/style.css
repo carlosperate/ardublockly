@@ -6,10 +6,10 @@ h1 {
   font-weight: normal;
   font-size: 140%;
 }
-
 a:hover {
   color: #f00;
 }
+
 .tab {
   padding: 6px 12px;
   text-decoration: none;

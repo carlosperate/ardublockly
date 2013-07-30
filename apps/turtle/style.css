@@ -1,37 +1,20 @@
 body {
   background-color: #fff;
   font-family: sans-serif;
+  margin-top: 0;
 }
 h1 {
   font-weight: normal;
   font-size: 140%;
 }
-.tab {
-  padding: 4px 10px 1px;
-  text-decoration: none;
+a:hover {
+  color: #f00;
 }
-.levelLine {
-  border-bottom: solid 1px #ddd;
+.farSide {
+  text-align: right;
 }
-#selected {
-  font-weight: bold;
-  background-color: #eee;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-#hint,
-#capacity {
-  font-style: italic;
-}
-#capacityNumber {
-  font-weight: bold;
-}
-#bubble {
-  width: 385px;
-  padding: 7px;
-  border: 1px solid #CCB;
-  border-radius: 15px;
-  background-color: #ff7;
+html[dir="RTL"] .farSide {
+  text-align: left;
 }
 
 /* Buttons. */
@@ -81,10 +64,11 @@ button.disabled {
 }
 #toolbarDiv {
   text-align: center;
+  width: 400px;
   padding-top: 1em;
 }
 #blockly {
-  position: fixed;
+  position: absolute;
 }
 #display {
   border: 1px solid #ccc;

@@ -63,12 +63,19 @@ Graph.init = function() {
        toolbox: toolbox});
 
   var blocklyDiv = document.getElementById('blockly');
+  var visualization = document.getElementById('visualization');
   var onresize = function(e) {
-    blocklyDiv.style.width = (window.innerWidth - blocklyDiv.offsetLeft - 18) +
-        'px';
-    blocklyDiv.style.height = (window.innerHeight - blocklyDiv.offsetTop - 18) +
-        'px';
+    var top = visualization.offsetTop;
+    blocklyDiv.style.top = top + 'px';
+    blocklyDiv.style.left = rtl ? '10px' : '420px';
+    blocklyDiv.style.width = (window.innerWidth - 440) + 'px';
+    blocklyDiv.style.height =
+        (window.innerHeight - top - 20 + window.scrollY) + 'px';
   };
+  window.addEventListener('scroll', function() {
+      onresize();
+      Blockly.fireUiEvent(window, 'resize');
+    });
   window.addEventListener('resize', onresize);
   onresize();
 

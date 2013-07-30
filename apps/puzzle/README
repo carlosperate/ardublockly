@@ -1,7 +1,7 @@
 After changing template.soy:
 
-# Create en.js (like we used to create template.js).
-java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat en.js --srcs template.soy
+# Create generated/en.js (like we used to create template.js).
+java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs template.soy
 
 # Extract messages from template.soy.
 java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy

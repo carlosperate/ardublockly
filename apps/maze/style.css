@@ -1,15 +1,22 @@
 body {
   background-color: #fff;
   font-family: sans-serif;
+  margin-top: 0;
 }
 h1 {
   font-weight: normal;
   font-size: 140%;
 }
-
 a:hover {
   color: #f00;
 }
+.farSide {
+  text-align: right;
+}
+html[dir="RTL"] .farSide {
+  text-align: left;
+}
+
 .tab {
   padding: 6px 12px;
   text-decoration: none;
@@ -20,6 +27,12 @@ a:hover {
   background-color: #ddd;
   border-radius: 20px;
 }
+#blockly {
+  position: absolute;
+}
+#visualization {
+  position: relative;
+}
 #hintBubble {
   position: absolute;
   left: 10px;
@@ -27,6 +40,10 @@ a:hover {
   border-radius: 15px;
   background-color: rgba(64,64,64,0.7);
   width: 380px;
+}
+html[dir=rtl] #hintBubble {
+  left: auto;
+  right: 10px;
 }
 #hint {
   color: #fff;
@@ -40,6 +57,10 @@ a:hover {
   top: 425px;
   width: 380px;
 }
+html[dir=rtl] #capacityBubble {
+  left: auto;
+  right: 10px;
+}
 #capacity {
   display: none;
   color: #fff;
@@ -47,9 +68,6 @@ a:hover {
   border-radius: 15px;
   background-color: rgba(64,64,64,0.7);
   font-size: large;
-}
-html[dir=rtl] #capacity {
-  float: left;
 }
 #capacityNumber {
   font-weight: bold;
@@ -102,9 +120,6 @@ button>img {
 }
 button.disabled {
   visibility: hidden;
-}
-#blockly {
-  position: fixed;
 }
 #languageMenu {
   vertical-align: top;

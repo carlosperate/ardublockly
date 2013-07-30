@@ -13,6 +13,9 @@ h1 {
   margin-left: 5px;
   margin-right: 5px;
 }
+a:hover {
+  color: #f00;
+}
 td, button {
   vertical-align: top;
 }
