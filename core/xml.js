@@ -35,12 +35,13 @@ goog.provide('Blockly.Xml');
  * @return {!Element} XML document.
  */
 Blockly.Xml.workspaceToDom = function(workspace) {
+  var width = Blockly.svgSize().width;
   var xml = goog.dom.createDom('xml');
   var blocks = workspace.getTopBlocks(true);
   for (var i = 0, block; block = blocks[i]; i++) {
     var element = Blockly.Xml.blockToDom_(block);
     var xy = block.getRelativeToSurfaceXY();
-    element.setAttribute('x', Blockly.RTL ? -xy.x : xy.x);
+    element.setAttribute('x', Blockly.RTL ? width - xy.x : xy.x);
     element.setAttribute('y', xy.y);
     xml.appendChild(element);
   }
@@ -205,13 +206,14 @@ Blockly.Xml.textToDom = function(text) {
  * @param {!Element} xml XML DOM.
  */
 Blockly.Xml.domToWorkspace = function(workspace, xml) {
+  var width = Blockly.svgSize().width;
   for (var x = 0, xmlChild; xmlChild = xml.childNodes[x]; x++) {
     if (xmlChild.nodeName.toLowerCase() == 'block') {
       var block = Blockly.Xml.domToBlock_(workspace, xmlChild);
       var blockX = parseInt(xmlChild.getAttribute('x'), 10);
       var blockY = parseInt(xmlChild.getAttribute('y'), 10);
       if (!isNaN(blockX) && !isNaN(blockY)) {
-        block.moveBy(Blockly.RTL ? -blockX : blockX, blockY);
+        block.moveBy(Blockly.RTL ? width - blockX : blockX, blockY);
       }
     }
   }
