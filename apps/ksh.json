@@ -1,0 +1,40 @@
+{
+    "@metadata": {
+        "authors": [
+            "Purodha"
+        ]
+    },
+    "Puzzle.country1": "Au\u00dftraalije",
+    "Puzzle.country1Language": "\u00c4nglesch",
+    "Puzzle.country1City1": "M\u00e4lb\u00f6rn",
+    "Puzzle.country1City2": "Sydney",
+    "Puzzle.country1HelpUrl": "http://ksh.wikipedia.org/wiki/Au\u00dftraalijje_(Schtaat)",
+    "Puzzle.country2": "Deutschland",
+    "Puzzle.country2Language": "Deutsch",
+    "Puzzle.country2City1": "B\u00e4lliin",
+    "Puzzle.country2City2": "M\u00f6nnsche",
+    "Puzzle.country2HelpUrl": "http://ksh.wikipedia.org/wiki/Deutschland",
+    "Puzzle.country3": "Schiina",
+    "Puzzle.country3Language": "Schineesesch",
+    "Puzzle.country3City1": "Peeking",
+    "Puzzle.country3City2": "Schanghai",
+    "Puzzle.country3HelpUrl": "http://ksh.wikipedia.org/wiki/Schiina",
+    "Puzzle.country4": "Brasiilije",
+    "Puzzle.country4Language": "Pochtojeesesch",
+    "Puzzle.country4City1": "Rio_de_Schaneero",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4HelpUrl": "http://ksh.wikipedia.org/wiki/Brasiilije",
+    "Puzzle.flag": "Fahn:",
+    "Puzzle.language": "Schprooch:",
+    "Puzzle.languageChoose": "S\u00f6hk j\u00e4d u\u00df...",
+    "Puzzle.cities": "Scht\u00e4dt:",
+    "Puzzle.error0": "Supper!\nAlle %1 Kl\u00f6zje sin reschtesch.",
+    "Puzzle.error1": "Beinah! Ei Kl\u00f6zje es verkeeht.",
+    "Puzzle.error2": "%1 Kl\u00f6zje sin verkeeht.",
+    "Puzzle.tryAgain": "Dat eine Kl\u00f6zje es verkeht.\nVers\u00f6hg et norr_ens.",
+    "Puzzle.title": "Possel",
+    "Puzzle.help": "H\u00f6lp",
+    "Puzzle.checkAnswers": "Pr\u00f6\u00f6ve!",
+    "Puzzle.helpText": "F\u00f6r jedes Land, en Jr\u00f6hn, donn d\u00e4m sing Fahn draan, s\u00f6hk sing Schprooch u\u00df, un donn d\u00e4m sing Scht\u00e4dt ople\u00dfte.",
+    "Puzzle.helpOk": "Jebongt!"
+}

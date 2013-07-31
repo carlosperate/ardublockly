@@ -1,27 +1,26 @@
 {namespace turtlepage}
 
 /**
- * This is a Closure Template.  Build multilingually:
+ * This is a Closure Template.
  *
- * # Create en.js.
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs template.soy
+ * To regenerate just en.js, run this command:
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs ../template.soy,template.soy
  *
- * # Extract messages from template.soy.
- * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
- *
- * # Create en.json, qqq.json.
- * ../../i18n/xliff_to_json.py extracted_msgs.xlf
- *
- * Once translations have been made into <LANG>.json:
- *
- * # Create *.js for each *.json file.  By default, qqq.json and keys.json are skipped.
- * ../../i18n/json_to_js.py *.json
+ * To regenerate all files, see: trunk/apps/template.soy.
  */
 
 /**
  * Web page structure.
  */
 {template .start}
+  <div id="COMMON_MSG" style="display: none">
+    // Common messages.  So is Apps.blocklyMessage, which appears later.
+    <span id="httpRequestError">{msg meaning="Apps.httpRequestError" desc="IBID"}There was a problem with the request.{/msg}</span>
+    <span id="linkAlert">{msg meaning="Apps.linkAlert" desc="IBID"}Share your blocks with this link:\n\n%1{/msg}</span>
+    <span id="hashError">{msg meaning="Apps.hashError" desc="IBID"}Sorry, '%1' doesn't correspond with any saved program.{/msg}</span>
+    <span id="xmlError">{msg meaning="Apps.xmlError" desc="IBID"}Could not load your saved file.  Perhaps it was created with a different version of Blockly?{/msg}</span>
+  </div>
+
   <div id="MSG" style="display: none">
     // Block text.
     <span id="moveForward">{msg meaning="Turtle.moveForward" desc="TODO"}move forward by{/msg}</span>
@@ -57,26 +56,12 @@
     <span id="unloadWarning">{msg meaning="Turtle.unloadWarning" desc="TODO"}Leaving this page will result in the loss of your work.{/msg}</span>
   </div>
 
-  // Common messages follow.  They are inlined here and in the other
-  // apps/*/template.soy files instead of being shared in the parent directory
-  // in order to avoid:
-  // - loading an additional file over the network.
-  // - keeping track of which languages have translated common messages.
-  // These reference the messages in maze to minimize extra work for
-  // translators.
-  <div id="COMMON_MSG" style="display: none">
-    <span id="httpRequestError">{{msg meaning="Apps.httpRequestError" desc="alert - The URL is invalid or a server error occurred.  This message will be followed by technical information useful to engineers trying to understand the problem.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.httpRequestError{rb}{rb}"}}There was a problem with the request.{{/msg}}</span>
-    <span id="linkAlert">{{msg meaning="Apps.linkAlert" desc="alert - After the user has pressed a button to save his/her program, this provides the URL (%1) to retrieve the program.  The characters '\n\n' indicate that a blank line will be displayed before the URL (in English).  Leave those in unless you move %1 to the beginning or middle of the text, in which case you should use your judgment about where blank lines would be most useful.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.linkAlert{rb}{rb}."}}Share your blocks with this link:\n\n%1{{/msg}}</span>
-    <span id="hashError">{{msg meaning="Apps.hashError" desc="alert - A request to retrieve a stored program does not have a valid URL. %1 is the invalid portion of the URL. 'Blockly' is the name of the system.  It should be left untranslated or it should be transliterated.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.hashError{rb}{rb}."}}Sorry, '%1' doesn't correspond with any saved Blockly file.{{/msg}}</span>
-    <span id="xmlError">{{msg meaning="Apps.xmlError" desc="alert - There was a problem loading a file previously saved by the user.  The most likely reason for the problem is that it was created with an earlier, incompatible version of Blockly.  This message will be folllowed by technical information useful to engineers trying to understand the problem.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.xmlError{rb}{rb}."}}Could not load your saved file.  Perhaps it was created with a different version of Blockly?{/msg}</span>
-  </div>
-
   <table width="100%">
     <tr>
       <td>
         <h1>
           <span id="title">
-            <a href="../index.html">{{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.  This should be identical to {lb}{lb}msg-blockly|Maze-Apps.blocklyMessage{rb}{rb}."}}Blockly{{/msg}}</a>
+            <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
             {sp}:{sp}
             {msg meaning="Turtle.title" desc="TODO"}
               Turtle Graphics

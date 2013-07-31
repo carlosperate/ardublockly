@@ -153,6 +153,7 @@ def _process_file(target_lang, key_dict):
         j = json.load(in_file)
         in_file.close()
     except ValueError, e:
+        print('Error reading ' + filename)
         raise InputError(file, str(e))
     out_file = _create_xlf(target_lang)
     for key in j:
@@ -181,6 +182,7 @@ def main():
                         help='relative directory for output files')
     parser.add_argument('--key_file', default='keys.json',
                         help='relative path to input keys file')
+    parser.add_argument('--template', default='template.soy')
     parser.add_argument('--min_length', default=30,
                         help='minimum line length (not counting last line)')
     parser.add_argument('--max_length', default=50,
@@ -224,7 +226,7 @@ def main():
           '--locales', processed_lang_list,
           '--messageFilePathFormat', args.output_dir + '{LOCALE}.xlf',
           '--outputPathFormat', args.output_dir + '{LOCALE}.js',
-          '--srcs', 'template.soy'])
+          '--srcs', args.template])
       print('Created {' + processed_lang_list + '}.js in ' + args.output_dir)
       command = ['rm']
       command.extend(map(lambda s: args.output_dir + s + '.xlf',

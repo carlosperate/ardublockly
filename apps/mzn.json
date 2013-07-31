@@ -1,0 +1,40 @@
+{
+    "@metadata": {
+        "authors": [
+            "\u0645\u062d\u06a9"
+        ]
+    },
+    "Puzzle.country1": "\u0627\u0633\u062a\u0631\u0627\u0644\u06cc\u0627",
+    "Puzzle.country1Language": "\u0627\u06cc\u0646\u06af\u0644\u06cc\u0633\u06cc",
+    "Puzzle.country1City1": "\u0645\u0644\u0628\u0648\u0631\u0646",
+    "Puzzle.country1City2": "\u0633\u06cc\u062f\u0646\u06cc",
+    "Puzzle.country1HelpUrl": "http://mzn.wikipedia.org/wiki/\u0627\u0633\u062a\u0631\u0627\u0644\u06cc\u0627",
+    "Puzzle.country2": "\u0622\u0644\u0645\u0627\u0646",
+    "Puzzle.country2Language": "\u0622\u0644\u0645\u0627\u0646\u06cc",
+    "Puzzle.country2City1": "\u0628\u0631\u0644\u06cc\u0646",
+    "Puzzle.country2City2": "\u0645\u0648\u0646\u06cc\u062e",
+    "Puzzle.country2HelpUrl": "http://en.wikipedia.org/wiki/Germany",
+    "Puzzle.country3": "\u0686\u06cc\u0646",
+    "Puzzle.country3Language": "\u0686\u06cc\u0646\u06cc",
+    "Puzzle.country3City1": "\u067e\u06a9\u0646",
+    "Puzzle.country3City2": "\u0634\u0627\u0646\u06af\u0647\u0627\u06cc",
+    "Puzzle.country3HelpUrl": "http://en.wikipedia.org/wiki/China",
+    "Puzzle.country4": "\u0628\u0631\u0632\u06cc\u0644",
+    "Puzzle.country4Language": "\u067e\u0631\u062a\u063a\u0627\u0644",
+    "Puzzle.country4City1": "\u0631\u06cc\u0648 \u062f\u0648\u0698\u0627\u0646\u06cc\u0631\u0648",
+    "Puzzle.country4City2": "\u0633\u0627\u0626\u0648\u067e\u0627\u0626\u0648\u0644\u0648",
+    "Puzzle.country4HelpUrl": "http://mzn.wikipedia.org/wiki/\u0628\u0631\u0632\u06cc\u0644",
+    "Puzzle.flag": "\u067e\u0631\u0686\u0645:",
+    "Puzzle.language": "\u0632\u0648\u0648\u0646:",
+    "Puzzle.languageChoose": "\u0686\u06cc\u0646\u0647...",
+    "Puzzle.cities": "\u0634\u0647\u0631:",
+    "Puzzle.error0": "\u062e\u0627\u0631\u0647!\n\u062a\u0645\u0648\u0645  %1 \u0628\u0644\u0648\u06a9\u200c\u0647\u0627 \u062f\u0631\u0633\u062a \u0647\u0633\u062a\u0647.",
+    "Puzzle.error1": "\u062a\u0642\u0631\u06cc\u0628\u0627\u064b! \u0627\u062a\u0627 \u0628\u0644\u0648\u06a9 \u063a\u0644\u0637\u0647.",
+    "Puzzle.error2": " %1 \u0628\u0644\u0648\u06a9\u200c\u0647\u0627 \u063a\u0644\u0637 \u0647\u0633\u062a\u0646\u0647.",
+    "Puzzle.tryAgain": "\u067e\u0631\u0631\u0646\u06af \u0628\u0644\u0648\u06a9 \u063a\u0644\u0637\u0647.\n\u0627\u064e\u06cc \u062f\u0650\u0628\u0627\u0631\u0647 \u062a\u0650\u0644\u0627\u0634 \u0647\u0627\u06a9\u0646.",
+    "Puzzle.title": "\u067e\u0627\u0632\u0644",
+    "Puzzle.help": "\u06a9\u0648\u0645\u06a9",
+    "Puzzle.checkAnswers": "\u062c\u0648\u0627\u0628\u0650 \u0628\u0631\u0631\u0633\u06cc",
+    "Puzzle.helpText": "\u0647\u0631 \u06a9\u0634\u0648\u0631 \u0648\u0633\u0651\u0647 (\u0633\u064e\u0648\u0632)\u060c \u0648\u0634\u0648\u0646\u0650 \u067e\u0631\u0686\u0645 \u067e\u064e\u0644\u06cc\u060c \u0632\u0648\u0648\u0646 \u0631\u0647 \u0686\u06cc\u0646\u0647 \u0647\u0627\u06a9\u0646 \u0648 \u0648\u0646\u0647 \u0634\u0647\u0631\u0648\u0646 \u0641\u0647\u0631\u0633\u062a \u0631\u0647 \u0628\u0633\u0627\u0632",
+    "Puzzle.helpOk": "\u062e\u0627"
+}

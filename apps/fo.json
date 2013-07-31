@@ -1,0 +1,40 @@
+{
+    "@metadata": {
+        "authors": [
+            "EileenSanda"
+        ]
+    },
+    "Puzzle.country1": "Avstralia",
+    "Puzzle.country1Language": "Enskt",
+    "Puzzle.country1City1": "Melbourne",
+    "Puzzle.country1City2": "Sydney",
+    "Puzzle.country1HelpUrl": "http://fo.wikipedia.org/wiki/Avstralia",
+    "Puzzle.country2": "T\u00fdskland",
+    "Puzzle.country2Language": "T\u00fdskt",
+    "Puzzle.country2City1": "Berlin",
+    "Puzzle.country2City2": "M\u00fcnchen",
+    "Puzzle.country2HelpUrl": "http://fo.wikipedia.org/wiki/T\u00fdskland",
+    "Puzzle.country3": "Kina",
+    "Puzzle.country3Language": "Kinesiskt",
+    "Puzzle.country3City1": "Beijing",
+    "Puzzle.country3City2": "Shanghai",
+    "Puzzle.country3HelpUrl": "http://fo.wikipedia.org/wiki/Kina",
+    "Puzzle.country4": "Brasil",
+    "Puzzle.country4Language": "Portugisiskt",
+    "Puzzle.country4City1": "Rio de Janeiro",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4HelpUrl": "http://fo.wikipedia.org/wiki/Brasil",
+    "Puzzle.flag": "flagg:",
+    "Puzzle.language": "m\u00e1l:",
+    "Puzzle.languageChoose": "vel...",
+    "Puzzle.cities": "b\u00fdir:",
+    "Puzzle.error0": "Einastandandi!\nAllir %1 blokkar eru r\u00e6ttir.",
+    "Puzzle.error1": "N\u00e6stan! Ein blokkur er ikki r\u00e6ttur.",
+    "Puzzle.error2": "%1 blokkar eru ikki r\u00e6ttir.",
+    "Puzzle.tryAgain": "Tann uppl\u00fdsti blokkurin er ikki r\u00e6ttur.\nRoyn aftur.",
+    "Puzzle.title": "Putlisp\u00e6l",
+    "Puzzle.help": "Hj\u00e1lp",
+    "Puzzle.checkAnswers": "Hygg eftir svarunum",
+    "Puzzle.helpText": "Fyri hv\u00f8rt land (gr\u00f8nt), skal t\u00fa seta ta\u00f0 flaggi\u00f0 i\u00f0 hoyrir til, vel m\u00e1l hj\u00e1 landinum, og b\u00f3lka b\u00fdirnir til ta\u00f0 land, i\u00f0 teir hoyra til.",
+    "Puzzle.helpOk": "OK"
+}

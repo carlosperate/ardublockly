@@ -165,7 +165,8 @@ def _process_file(filename):
         A list of dictionaries produced by parse_trans_unit().
     """
     try:
-        results = []
+        results = []  # list of dictionaries (return value)
+        names = []    # list of names of encountered keys (local variable)
         try:
             parsed_xml = minidom.parse(filename)
         except IOError:
@@ -182,7 +183,13 @@ def _process_file(filename):
                 if not key in unit or not unit[key]:
                     raise InputError(filename + ':' + unit['key'],
                                      key + ' not found')
-            results.append(unit)
+            # Exclude entries whose description is elsewhere ('ibid').
+            if not unit['description'].lower() == 'ibid':
+              if unit['meaning'] in names:
+                raise InputError(filename,
+                                 'Second definition of: ' + unit['meaning'])
+              names.append(unit['meaning'])
+              results.append(unit)
 
         return results
     except IOError, e:
@@ -190,31 +197,31 @@ def _process_file(filename):
         sys.exit(1)
 
 
-def sort_units(units, template):
+def sort_units(units, templates):
     """Sorts the translation units by their definition order in the template.
 
     Args:
         units: A list of dictionaries produced by parse_trans_unit()
             that have a non-empty value for the key 'meaning'.
-        template: A string containing a Soy template in which each of
+        templates: A string containing the Soy templates in which each of
             the units' meanings is defined.
 
     Returns:
         A new list of translation units, sorted by the order in which
-        their meaning is defined in the template.
+        their meaning is defined in the templates.
 
     Raises:
         InputError: If a meaning definition cannot be found in the
-            template.
+            templates.
     """
     def key_function(unit):
         match = re.search(
             '\\smeaning\\s*=\\s*"{0}"\\s'.format(unit['meaning']),
-            template)
+            templates)
         if match:
             return match.start()
         else:
-            raise InputError(args.template,
+            raise InputError(args.templates,
                              'msg definition for meaning not found: ' +
                              unit['meaning'])
     return sorted(units, key=key_function)
@@ -278,18 +285,20 @@ def main():
                         help='ISO 639-1 source language code')
     parser.add_argument('--output_dir', default='.',
                         help='relative directory for output files')
-    parser.add_argument('--template', default='template.soy',
-                        help='relative path to Soy template '
+    parser.add_argument('--xlf', help='file containing xlf definitions')
+    parser.add_argument('--templates', default=['template.soy'], nargs='+',
+                        help='relative path to Soy templates '
                         '(used for ordering messages)')
-    parser.add_argument('file', nargs='*', help='input file')
     global args
     args = parser.parse_args()
 
     # Process the input file, and sort the entries.
-    units = _process_file(args.file[0])
-    with open(args.template) as myfile:
-        template = ' '.join(line.strip() for line in myfile)
-    sorted_units = sort_units(units, template)
+    units = _process_file(args.xlf)
+    files = []
+    for filename in args.templates:
+      with open(filename) as myfile:
+        files.append(' '.join(line.strip() for line in myfile))
+    sorted_units = sort_units(units, ' '.join(files))
 
     # Write the output files.
     _write_files(sorted_units)

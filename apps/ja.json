@@ -1,0 +1,40 @@
+{
+    "@metadata": {
+        "authors": [
+            "Shirayuki"
+        ]
+    },
+    "Puzzle.country1": "\u30aa\u30fc\u30b9\u30c8\u30e9\u30ea\u30a2",
+    "Puzzle.country1Language": "\u82f1\u8a9e",
+    "Puzzle.country1City1": "\u30e1\u30eb\u30dc\u30eb\u30f3",
+    "Puzzle.country1City2": "\u30b7\u30c9\u30cb\u30fc",
+    "Puzzle.country1HelpUrl": "http://ja.wikipedia.org/wiki/\u30aa\u30fc\u30b9\u30c8\u30e9\u30ea\u30a2",
+    "Puzzle.country2": "\u30c9\u30a4\u30c4",
+    "Puzzle.country2Language": "\u30c9\u30a4\u30c4\u8a9e",
+    "Puzzle.country2City1": "\u30d9\u30eb\u30ea\u30f3",
+    "Puzzle.country2City2": "\u30df\u30e5\u30f3\u30d8\u30f3",
+    "Puzzle.country2HelpUrl": "http://ja.wikipedia.org/wiki/\u30c9\u30a4\u30c4",
+    "Puzzle.country3": "\u4e2d\u56fd",
+    "Puzzle.country3Language": "\u4e2d\u56fd\u8a9e",
+    "Puzzle.country3City1": "\u5317\u4eac",
+    "Puzzle.country3City2": "\u4e0a\u6d77",
+    "Puzzle.country3HelpUrl": "http://ja.wikipedia.org/wiki/\u4e2d\u83ef\u4eba\u6c11\u5171\u548c\u56fd",
+    "Puzzle.country4": "\u30d6\u30e9\u30b8\u30eb",
+    "Puzzle.country4Language": "\u30dd\u30eb\u30c8\u30ac\u30eb\u8a9e",
+    "Puzzle.country4City1": "\u30ea\u30aa\u30c7\u30b8\u30e3\u30cd\u30a4\u30ed",
+    "Puzzle.country4City2": "\u30b5\u30f3\u30d1\u30a6\u30ed",
+    "Puzzle.country4HelpUrl": "http://ja.wikipedia.org/wiki/\u30d6\u30e9\u30b8\u30eb",
+    "Puzzle.flag": "\u56fd\u65d7:",
+    "Puzzle.language": "\u8a00\u8a9e:",
+    "Puzzle.languageChoose": "\u9078\u3093\u3067\u304f\u3060\u3055\u3044...",
+    "Puzzle.cities": "\u90fd\u5e02:",
+    "Puzzle.error0": "\u5b8c\u307a\u304d\u3067\u3059!\n%1 \u500b\u306e\u30d6\u30ed\u30c3\u30af\u304c\u5168\u554f\u6b63\u89e3\u3067\u3059\u3002",
+    "Puzzle.error1": "\u60dc\u3057\u3044! 1 \u500b\u306e\u30d6\u30ed\u30c3\u30af\u304c\u9593\u9055\u3063\u3066\u3044\u307e\u3059\u3002",
+    "Puzzle.error2": "%1 \u500b\u306e\u30d6\u30ed\u30c3\u30af\u304c\u9593\u9055\u3063\u3066\u3044\u307e\u3059\u3002",
+    "Puzzle.tryAgain": "\u5f37\u8abf\u3055\u308c\u3066\u3044\u308b\u30d6\u30ed\u30c3\u30af\u304c\u6b63\u3057\u304f\u3042\u308a\u307e\u305b\u3093\u3002\n\u304c\u3093\u3070\u3063\u3066\u304f\u3060\u3055\u3044\u3002",
+    "Puzzle.title": "\u30d1\u30ba\u30eb",
+    "Puzzle.help": "\u30d8\u30eb\u30d7",
+    "Puzzle.checkAnswers": "\u7b54\u3048\u5408\u308f\u305b",
+    "Puzzle.helpText": "\u305d\u308c\u305e\u308c\u306e\u56fd (\u7dd1) \u306b\u3064\u3044\u3066\u3001\u56fd\u65d7\u3092\u3064\u306a\u3052\u3066\u3001\u8a00\u8a9e\u3092\u9078\u3093\u3067\u3001\u90fd\u5e02\u3092\u4e26\u3079\u3066\u304f\u3060\u3055\u3044\u3002",
+    "Puzzle.helpOk": "OK"
+}

@@ -1,0 +1,41 @@
+{
+    "@metadata": {
+        "authors": {
+            "0": "Jetlag",
+            "2": "Zllangty"
+        }
+    },
+    "Puzzle.country1": "\u6fb3\u5927\u5229\u4e9a",
+    "Puzzle.country1Language": "\u82f1\u8bed",
+    "Puzzle.country1City1": "\u58a8\u5c14\u672c",
+    "Puzzle.country1City2": "\u6089\u5c3c",
+    "Puzzle.country1HelpUrl": "http://en.wikipedia.org/wiki/Australia",
+    "Puzzle.country2": "\u5fb7\u56fd",
+    "Puzzle.country2Language": "\u5fb7\u8bed",
+    "Puzzle.country2City1": "\u67cf\u6797",
+    "Puzzle.country2City2": "\u6155\u5c3c\u9ed1",
+    "Puzzle.country2HelpUrl": "http://en.wikipedia.org/wiki/Germany",
+    "Puzzle.country3": "\u4e2d\u56fd",
+    "Puzzle.country3Language": "\u6c49\u8bed",
+    "Puzzle.country3City1": "\u5317\u4eac",
+    "Puzzle.country3City2": "\u4e0a\u6d77",
+    "Puzzle.country3HelpUrl": "http://en.wikipedia.org/wiki/China",
+    "Puzzle.country4": "\u5df4\u897f",
+    "Puzzle.country4Language": "\u8461\u8404\u7259\u8bed",
+    "Puzzle.country4City1": "\u91cc\u7ea6\u70ed\u5185\u5362",
+    "Puzzle.country4City2": "\u5723\u4fdd\u7f57",
+    "Puzzle.country4HelpUrl": "http://en.wikipedia.org/wiki/Brazil",
+    "Puzzle.flag": "\u56fd\u65d7",
+    "Puzzle.language": "\u8bed\u8a00\uff1a",
+    "Puzzle.languageChoose": "\u8bf7\u9009\u62e9...",
+    "Puzzle.cities": "\u57ce\u5e02",
+    "Puzzle.error0": "\u5b8c\u7f8e!\n%1 \u7684\u6240\u6709\u5757\u90fd\u6b63\u786e\u3002",
+    "Puzzle.error1": "\u5dee\u4e0d\u591a\u4e86 \uff01\u8fd8\u6709\u4e00\u4e2a\u5757\u662f\u4e0d\u6b63\u786e\u7684\u3002",
+    "Puzzle.error2": "%1 \u5757\u4e0d\u6b63\u786e",
+    "Puzzle.tryAgain": "\u9ad8\u4eae\u5757\u4e0d\u6b63\u786e\uff0c\u8bf7\u91cd\u8bd5\u3002",
+    "Puzzle.title": "Puzzle",
+    "Puzzle.help": "\u5e2e\u52a9",
+    "Puzzle.checkAnswers": "\u8d26\u6237\u6838\u67e5",
+    "Puzzle.helpText": "\u4e3a\u6bcf\u4e2a\u56fd\u5bb6 \uff08\u7eff\u8272\uff09\u6dfb\u52a0\u56fd\u65d7\u3001 \u9009\u62e9\u8bed\u8a00\uff0c\u548c\u521b\u5efa\u57ce\u5e02\u5217\u8868\u3002",
+    "Puzzle.helpOk": "\u786e\u8ba4"
+}

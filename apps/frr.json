@@ -1,0 +1,40 @@
+{
+    "@metadata": {
+        "authors": [
+            "Murma174"
+        ]
+    },
+    "Puzzle.country1": "Austraalien",
+    "Puzzle.country1Language": "Ingelsk",
+    "Puzzle.country1City1": "Melbourne",
+    "Puzzle.country1City2": "Sydney",
+    "Puzzle.country1HelpUrl": "http://frr.wikipedia.org/wiki/Austraalien",
+    "Puzzle.country2": "Sjiisklun",
+    "Puzzle.country2Language": "Sjiisk",
+    "Puzzle.country2City1": "Berlin",
+    "Puzzle.country2City2": "M\u00fcnchen",
+    "Puzzle.country2HelpUrl": "http://frr.wikipedia.org/wiki/Sjiisklun",
+    "Puzzle.country3": "Sjiina",
+    "Puzzle.country3Language": "Sjineesk",
+    "Puzzle.country3City1": "Peking",
+    "Puzzle.country3City2": "Schanghai",
+    "Puzzle.country3HelpUrl": "http://frr.wikipedia.org/wiki/Sjiina",
+    "Puzzle.country4": "Brasiilien",
+    "Puzzle.country4Language": "Portugiisk",
+    "Puzzle.country4City1": "Rio de Janeiro",
+    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4HelpUrl": "http://frr.wikipedia.org/wiki/Brasiilien",
+    "Puzzle.flag": "Flag",
+    "Puzzle.language": "Spriak:",
+    "Puzzle.languageChoose": "Sch\u00fck \u00fctj ...",
+    "Puzzle.cities": "St\u00e4\u00e4den:",
+    "Puzzle.error0": "Klaar! Aal a %1 baustianer san rocht.",
+    "Puzzle.error1": "Binai! Ian baustian as ferkiard.",
+    "Puzzle.error2": "%1 baustianer san ferkiard.",
+    "Puzzle.tryAgain": "Di k\u00e4\u00e4ntiakent baustian as ferkiard. Fersch\u00fck det noch ans.",
+    "Puzzle.title": "Puzzle",
+    "Puzzle.help": "Halep",
+    "Puzzle.checkAnswers": "Oonswaaren efterluke",
+    "Puzzle.helpText": "Hinge f\u00f6r arke lun (green) sin flag bi, sch\u00fck det spriak \u00fctj an maage en staapel m\u00e4 st\u00e4\u00e4den.",
+    "Puzzle.helpOk": "OK"
+}

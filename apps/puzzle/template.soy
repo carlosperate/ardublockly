@@ -1,25 +1,16 @@
 {namespace puzzlepage}
 
 /**
- * This is a Closure Template.  Build multilingually:
+ * This is a Closure Template.
  *
- * # Create en.js.
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs template.soy
+ * To regenerate just en.js, run this command:
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs ../template.soy,template.soy
  *
- * # Extract messages from template.soy.
- * java -jar ../_soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf template.soy
- *
- * # Create en.json, qqq.json.
- * ../../i18n/xliff_to_json.py extracted_msgs.xlf
- *
- * Once translations have been made into <LANG>.json:
- *
- * # Create *.js for each *.json file.  By default, qqq.json and keys.json are skipped.
- * ../../i18n/json_to_js.py *.json
+ * To regenerate all files, see: trunk/apps/template.soy.
  */
 
 /**
- * Transladted messages.
+ * Translated messages.
  */
 {template .messages}
   <div id="MSG" style="display: none">
@@ -194,7 +185,7 @@
       <td valign="bottom">
         <h1>
           <span id="title">
-            <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (\u0411\u043bo\u043a\u043b\u0438)'."}Blockly{/msg}</a>
+            <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
             {sp}:{sp}
             {msg meaning="Puzzle.title" desc="A brief title for page, not including the word for Blockly.  Use the word for a jigsaw puzzle."}
               Puzzle
