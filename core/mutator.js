@@ -126,7 +126,7 @@ Blockly.Mutator.prototype.createIcon = function() {
       {'class': 'blocklyIconMark',
        'd': Blockly.Mutator.plusPath_}, this.iconGroup_);
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
-  if (!this.block_.isInFlyout) {
+  if (this.block_.editable && !this.block_.isInFlyout) {
     Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
   }
 };

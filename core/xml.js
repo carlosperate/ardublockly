@@ -126,6 +126,9 @@ Blockly.Xml.blockToDom_ = function(block) {
   if (!block.movable) {
     element.setAttribute('movable', false);
   }
+  if (!block.editable) {
+    element.setAttribute('movable', false);
+  }
 
   if (block.nextConnection) {
     var nextBlock = block.nextConnection.targetBlock();
@@ -315,25 +318,25 @@ Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
   if (inline) {
     block.setInputsInline(inline == 'true');
   }
-
   var collapsed = xmlBlock.getAttribute('collapsed');
   if (collapsed) {
     block.setCollapsed(collapsed == 'true');
   }
-
   var disabled = xmlBlock.getAttribute('disabled');
   if (disabled) {
     block.setDisabled(disabled == 'true');
   }
-
   var deletable = xmlBlock.getAttribute('deletable');
   if (deletable) {
     block.deletable = (deletable == 'true');
   }
-
   var movable = xmlBlock.getAttribute('movable');
   if (movable) {
     block.movable = (movable == 'true');
+  }
+  var editable = xmlBlock.getAttribute('editable');
+  if (editable) {
+    block.editable = (editable == 'true');
   }
 
   if (!blockChild) {

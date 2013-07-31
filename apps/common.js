@@ -93,7 +93,7 @@ BlocklyApps.getLang = function() {
     return lang;
   }
   // Sixth choice: Die.
-  throw 'No languages available.'
+  throw 'No languages available.';
 };
 
 /**
@@ -203,9 +203,9 @@ BlocklyApps.changeLanguage = function() {
   if (search.length <= 1) {
     search = '?lang=' + newLang;
   } else if (search.match(/[?&]lang=[^&]*/)) {
-    search = search.replace(/([?&]lang=)[^&]*/, '$1' + newLang)
+    search = search.replace(/([?&]lang=)[^&]*/, '$1' + newLang);
   } else {
-    search = search.replace(/\?/, '?lang=' + newLang + '&')
+    search = search.replace(/\?/, '?lang=' + newLang + '&');
   }
 
   window.location = window.location.protocol + '//' +
@@ -241,7 +241,7 @@ BlocklyApps.updateCapacity = function() {
  */
 BlocklyApps.highlight = function(id) {
   if (id) {
-    var m = id.match(/^block_id_(\d+)$/)
+    var m = id.match(/^block_id_(\d+)$/);
     if (m) {
       id = m[1];
     }
@@ -295,7 +295,7 @@ BlocklyApps.showCode = function() {
  */
 BlocklyApps.getMsg = function(key) {
   var msg = BlocklyApps.getMsgOrNull(key)
-  return msg === null ? '[Unknown message: ' +  key + ']' : msg;
+  return msg === null ? '[Unknown message: ' + key + ']' : msg;
 };
 
 /**

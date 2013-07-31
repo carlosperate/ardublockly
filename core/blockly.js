@@ -156,12 +156,11 @@ Blockly.SOUNDS_ = {};
 Blockly.selected = null;
 
 /**
- * In the future we might want to have display-only block views.
- * Until then, all blocks are considered editable.
+ * Is Blockly in a read-only, non-editable mode?
  * Note that this property may only be set before init is called.
  * It can't be used to dynamically toggle editability on and off.
  */
-Blockly.editable = true;
+Blockly.readOnly = false;
 
 /**
  * Currently highlighted connection (during a drag).
@@ -261,7 +260,7 @@ Blockly.onMouseDown_ = function(e) {
   Blockly.hideChaff();
   var isTargetSvg = e.target && e.target.nodeName &&
       e.target.nodeName.toLowerCase() == 'svg';
-  if (Blockly.selected && isTargetSvg) {
+  if (!Blockly.readOnly && Blockly.selected && isTargetSvg) {
     // Clicking on the document clears the selection.
     Blockly.selected.unselect();
   }
@@ -270,7 +269,7 @@ Blockly.onMouseDown_ = function(e) {
     if (Blockly.ContextMenu) {
       Blockly.showContextMenu_(e.clientX, e.clientY);
     }
-  } else if ((!Blockly.editable || isTargetSvg) &&
+  } else if ((Blockly.readOnly || isTargetSvg) &&
              Blockly.mainWorkspace.scrollbar) {
     // If the workspace is editable, only allow dragging when gripping empty
     // space.  Otherwise, allow dragging when gripping anywhere.
@@ -387,6 +386,9 @@ Blockly.copy_ = function(block) {
  * @private
  */
 Blockly.showContextMenu_ = function(x, y) {
+  if (Blockly.readOnly) {
+    return;
+  }
   var options = [];
 
   if (Blockly.collapse) {
@@ -548,7 +550,7 @@ Blockly.playAudio = function(name, opt_volume) {
  * @private
  */
 Blockly.setCursorHand_ = function(closed) {
-  if (!Blockly.editable) {
+  if (Blockly.readOnly) {
     return;
   }
   /* Hotspot coordinates are baked into the CUR file, but they are still

@@ -272,7 +272,7 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
   var reverse = false;
   if (!rootBlock.movable) {
     // Can't bump an uneditable block away.
-    // Check to see if the other block is editable.
+    // Check to see if the other block is movable.
     rootBlock = staticConnection.sourceBlock_.getRootBlock();
     if (!rootBlock.movable) {
       return;

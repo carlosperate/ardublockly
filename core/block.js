@@ -61,8 +61,9 @@ Blockly.Block = function(workspace, prototypeName) {
   this.rendered = false;
   this.collapsed = false;
   this.disabled = false;
-  this.movable = Blockly.editable;
-  this.deletable = Blockly.editable;
+  this.deletable = !Blockly.readOnly;
+  this.movable = !Blockly.readOnly;
+  this.editable = !Blockly.readOnly;
   this.tooltip = '';
   this.contextMenu = true;
 
@@ -125,8 +126,10 @@ Blockly.Block.prototype.warning = null;
 Blockly.Block.prototype.initSvg = function() {
   this.svg_ = new Blockly.BlockSvg(this);
   this.svg_.init();
-  Blockly.bindEvent_(this.svg_.getRootElement(), 'mousedown', this,
-                     this.onMouseDown_);
+  if (!Blockly.readOnly) {
+    Blockly.bindEvent_(this.svg_.getRootElement(), 'mousedown', this,
+                       this.onMouseDown_);
+  }
   this.workspace.getCanvas().appendChild(this.svg_.getRootElement());
 };
 
@@ -516,7 +519,7 @@ Blockly.Block.prototype.duplicate_ = function() {
  * @private
  */
 Blockly.Block.prototype.showContextMenu_ = function(x, y) {
-  if (!this.contextMenu) {
+  if (Blockly.readOnly || !this.contextMenu) {
     return;
   }
   // Save the current block in a variable for use in closures.

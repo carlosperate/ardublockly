@@ -94,7 +94,9 @@ Blockly.Warning.prototype.createIcon_ = function() {
        'y': 2 * Blockly.Warning.ICON_RADIUS - 3}, this.iconGroup_);
   this.iconMark_.appendChild(document.createTextNode('!'));
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
-  Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  if (this.block_.editable && !this.block_.isInFlyout) {
+    Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  }
 };
 
 /**

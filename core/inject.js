@@ -54,8 +54,13 @@ Blockly.inject = function(container, opt_options) {
  * @private
  */
 Blockly.parseOptions_ = function(options) {
-  var editable = !options['readOnly'];
-  if (editable) {
+  var readOnly = !!options['readOnly'];
+  if (readOnly) {
+    var hasCategories = false;
+    var hasTrashcan = false;
+    var hasCollapse = false;
+    var tree = null;
+  } else {
     var tree = options['toolbox'];
     if (tree) {
       if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
@@ -81,11 +86,6 @@ Blockly.parseOptions_ = function(options) {
     if (hasCollapse === undefined) {
       hasCollapse = hasCategories;
     }
-  } else {
-    var hasCategories = false;
-    var hasTrashcan = false;
-    var hasCollapse = false;
-    var tree = null;
   }
   if (tree && !hasCategories) {
     // Scrollbars are not compatible with a non-flyout toolbox.
@@ -99,7 +99,7 @@ Blockly.parseOptions_ = function(options) {
   return {
     RTL: !!options['rtl'],
     collapse: hasCollapse,
-    editable: editable,
+    readOnly: readOnly,
     maxBlocks: options['maxBlocks'] || Infinity,
     pathToBlockly: options['path'] || './',
     hasCategories: hasCategories,
@@ -224,7 +224,7 @@ Blockly.createDom_ = function(container) {
   svg.appendChild(Blockly.mainWorkspace.createDom());
   Blockly.mainWorkspace.maxBlocks = Blockly.maxBlocks;
 
-  if (Blockly.editable) {
+  if (!Blockly.readOnly) {
     // Determine if there needs to be a category tree, or a simple list of
     // blocks.  This cannot be changed later, since the UI is very different.
     if (Blockly.hasCategories) {
@@ -276,7 +276,7 @@ Blockly.createDom_ = function(container) {
   }
 
   Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
-  if (Blockly.editable && Blockly.FieldDropdown) {
+  if (!Blockly.readOnly && Blockly.FieldDropdown) {
     svg.appendChild(Blockly.FieldDropdown.createDom());
   }
 
