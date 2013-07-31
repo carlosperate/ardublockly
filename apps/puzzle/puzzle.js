@@ -143,10 +143,13 @@ Puzzle.init = function() {
       }
       i++;
     }
-    blocksCountries.sort(Puzzle.shuffleComp);
-    blocksFlags.sort(Puzzle.shuffleComp);
-    blocksCities.sort(Puzzle.shuffleComp);
+    Puzzle.shuffle(blocksCountries);
+    Puzzle.shuffle(blocksFlags);
+    Puzzle.shuffle(blocksCities);
     var blocks = [].concat(blocksCountries, blocksFlags, blocksCities);
+    if (rtl) {
+      blocks.reverse();
+    }
     // Initialize all the blocks.
     for (var i = 0, block; block = blocks[i]; i++) {
       block.deletable = false;
@@ -166,16 +169,21 @@ Puzzle.init = function() {
     var MARGIN = 50;
     Blockly.svgResize();
     var workspaceBox = Blockly.svgSize();
-    workspaceBox.width -= 2 * MARGIN;
+    workspaceBox.width -= MARGIN;
     workspaceBox.height -= MARGIN;
     var countedArea = 0;
     for (var i = 0, block; block = blocks[i]; i++) {
       var blockBox = block.svg_.getRootElement().getBBox();
       // Spread the blocks horizontally, grouped by type.
       // Spacing is proportional to block's area.
-      var dx = Math.round((countedArea / totalArea) *
-                          (workspaceBox.width - blockBox.width) +
-                          Math.random() * MARGIN);
+      if (rtl) {
+        var dx = blockBox.width +
+                 (countedArea / totalArea) * workspaceBox.width;
+      } else {
+        var dx = (countedArea / totalArea) *
+                 (workspaceBox.width - blockBox.width);
+      }
+      dx = Math.round(dx + Math.random() * MARGIN);
       var dy = Math.round(Math.random() *
                           (workspaceBox.height - blockBox.height));
       block.moveBy(dx, dy);
@@ -184,7 +192,6 @@ Puzzle.init = function() {
     Puzzle.showHelp(false);
   }
 };
-
 
 /**
  * Initialize Blockly for the help.  Called on page load.
@@ -209,14 +216,20 @@ if (window.location.pathname.match(/help.html$/)) {
 }
 
 /**
- * Comparison function for shuffling an array.
- * Warning: This is not a true shuffle, do not use for non-trivial purposes.
- * @param {Object} a First object.
- * @param {Object} b Second object.
- * @return {number} Ordering result.
+ * Shuffles the values in the specified array using the Fisher-Yates in-place
+ * shuffle (also known as the Knuth Shuffle).
+ * Runtime: O(n)
+ * Based on Closure's goog.array.shuffle.
+ * @param {!Array} arr The array to be shuffled.
  */
-Puzzle.shuffleComp = function(a, b) {
-  return Math.random() - 0.5;
+Puzzle.shuffle = function(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    // Choose a random array index in [0, i] (inclusive with i).
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
 };
 
 /**
