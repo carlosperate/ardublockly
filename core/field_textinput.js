@@ -30,7 +30,6 @@ goog.require('goog.asserts');
 goog.require('goog.userAgent');
 
 
-
 /**
  * Class for an editable text field.
  * @param {string} text The initial content of the field.
@@ -48,6 +47,18 @@ Blockly.FieldTextInput = function(text, opt_changeHandler) {
 };
 goog.inherits(Blockly.FieldTextInput, Blockly.Field);
 
+/**
+ * Mouse cursor style when over the hotspot that initiates the editor.
+ */
+Blockly.FieldTextInput.prototype.CURSOR = 'text';
+
+/**
+ * Dispose of all DOM objects belonging to this editable field.
+ */
+Blockly.FieldTextInput.prototype.dispose = function() {
+  Blockly.widgetDiv.hideIfField(this);
+  Blockly.FieldTextInput.superClass_.dispose.call(this);
+};
 
 /**
  * Set the text in this field.
@@ -71,45 +82,6 @@ Blockly.FieldTextInput.prototype.setText = function(text) {
 };
 
 /**
- * Create and inject the editable text field's elements into the workspace.
- * @param {!Element} workspaceSvg The canvas for the relevant workspace.
- * @private
- */
-Blockly.FieldTextInput.injectDom_ = function(workspaceSvg) {
-  /*
-  <foreignObject height="22">
-    <body xmlns="http://www.w3.org/1999/xhtml" class="blocklyMinimalBody">
-      <input class="blocklyHtmlInput" xmlns="http://www.w3.org/1999/xhtml"/>
-    </body>
-  </foreignObject>
-  */
-  var foreignObject = Blockly.createSvgElement('foreignObject',
-      {'height': 22}, workspaceSvg);
-  Blockly.FieldTextInput.svgForeignObject_ = foreignObject;
-  // Can't use 'Blockly.createSvgElement' since this is not in the SVG NS.
-  var body = goog.dom.createDom('body', 'blocklyMinimalBody');
-  var input = goog.dom.createDom('input', 'blocklyHtmlInput');
-  Blockly.FieldTextInput.htmlInput_ = input;
-  body.appendChild(input);
-  foreignObject.appendChild(body);
-};
-
-/**
- * Dispose of the editable text field's elements.
- * @private
- */
-Blockly.FieldTextInput.disposeDom_ = function() {
-  goog.dom.removeNode(Blockly.FieldTextInput.svgForeignObject_);
-  Blockly.FieldTextInput.svgForeignObject_ = null;
-  Blockly.FieldTextInput.htmlInput_ = null;
-};
-
-/**
- * Mouse cursor style when over the hotspot that initiates the editor.
- */
-Blockly.FieldTextInput.prototype.CURSOR = 'text';
-
-/**
  * Show the inline free-text editor on top of the text.
  * @private
  */
@@ -128,26 +100,21 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
     }
     return;
   }
-  var workspaceSvg = this.sourceBlock_.workspace.getCanvas();
-  Blockly.FieldTextInput.injectDom_(workspaceSvg);
-  var htmlInput = Blockly.FieldTextInput.htmlInput_;
+
+  Blockly.widgetDiv.show(this, Blockly.FieldTextInput.dispose_);
+  var div = Blockly.widgetDiv.DIV;
+  // Create the input.
+  var htmlInput = goog.dom.createDom('input', 'blocklyHtmlInput');
+  Blockly.FieldTextInput.htmlInput_ = htmlInput;
+  div.appendChild(htmlInput);
+
   htmlInput.value = htmlInput.defaultValue = this.text_;
   htmlInput.oldValue_ = null;
-  var htmlInputFrame = Blockly.FieldTextInput.svgForeignObject_;
-  var xy = Blockly.getSvgXY_(/** @type {!Element} */ (this.borderRect_));
-  var baseXy = Blockly.getSvgXY_(workspaceSvg);
-  xy.x -= baseXy.x;
-  xy.y -= baseXy.y;
-  if (!Blockly.RTL) {
-    htmlInputFrame.setAttribute('x', xy.x + 1);
-  }
-  if (goog.userAgent.GECKO) {
-    htmlInputFrame.setAttribute('y', xy.y - 1);
-  } else {
-    htmlInputFrame.setAttribute('y', xy.y - 3);
-  }
+  this.validate_();
+  this.resizeEditor_();
   htmlInput.focus();
   htmlInput.select();
+
   // Bind to blur -- close the editor on loss of focus.
   htmlInput.onBlurWrapper_ =
       Blockly.bindEvent_(htmlInput, 'blur', this, this.onHtmlInputBlur_);
@@ -157,11 +124,10 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
   // Bind to keyPress -- repeatedly resize when holding down a key.
   htmlInput.onKeyPressWrapper_ =
       Blockly.bindEvent_(htmlInput, 'keypress', this, this.onHtmlInputChange_);
+  var workspaceSvg = this.sourceBlock_.workspace.getCanvas();
   htmlInput.onWorkspaceChangeWrapper_ =
       Blockly.bindEvent_(workspaceSvg, 'blocklyWorkspaceChange', this,
       this.resizeEditor_);
-  this.validate_();
-  this.resizeEditor_();
 };
 
 /**
@@ -225,18 +191,24 @@ Blockly.FieldTextInput.prototype.validate_ = function() {
  * @private
  */
 Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
-  var htmlInput = Blockly.FieldTextInput.htmlInput_;
+  var div = Blockly.widgetDiv.DIV;
   var bBox = this.group_.getBBox();
-  var htmlInputFrame = Blockly.FieldTextInput.svgForeignObject_;
-  htmlInputFrame.setAttribute('width', bBox.width);
-  htmlInput.style.width = (bBox.width - 2) + 'px';
+  div.style.width = bBox.width + 'px';
+  var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
   // In RTL mode block titles and LTR input titles the left edge moves,
   // whereas the right edge is fixed.  Reposition the editor.
-  var xy = Blockly.getSvgXY_(this.group_);
-  var workspaceSvg = this.sourceBlock_.workspace.getCanvas();
-  var baseXy = Blockly.getSvgXY_(workspaceSvg);
-  xy.x -= baseXy.x;
-  htmlInputFrame.setAttribute('x', xy.x - 4);
+  if (Blockly.RTL) {
+    var borderBBox = this.borderRect_.getBBox();
+    xy.x += borderBBox.width;
+    xy.x -= div.offsetWidth;
+  }
+  // Shift by a few pixels to line up exactly.
+  xy.y += 1;
+  if (goog.userAgent.WEBKIT) {
+    xy.y -= 3;
+  }
+  div.style.left = xy.x + 'px';
+  div.style.top = xy.y + 'px';
 };
 
 /**
@@ -246,11 +218,6 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
  */
 Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
   var htmlInput = Blockly.FieldTextInput.htmlInput_;
-  Blockly.unbindEvent_(htmlInput.onBlurWrapper_);
-  Blockly.unbindEvent_(htmlInput.onKeyUpWrapper_);
-  Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
-  Blockly.unbindEvent_(htmlInput.onWorkspaceChangeWrapper_);
-
   var text;
   if (save) {
     // Save the edit (if it validates).
@@ -267,7 +234,7 @@ Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
     text = htmlInput.defaultValue;
   }
   this.setText(text);
-  Blockly.FieldTextInput.disposeDom_();
+  Blockly.widgetDiv.hide();
   this.sourceBlock_.render();
 };
 
@@ -297,4 +264,17 @@ Blockly.FieldTextInput.nonnegativeIntegerValidator = function(text) {
     n = String(Math.max(0, Math.floor(n)));
   }
   return n;
+};
+
+/**
+ * Dispose of the editable text field's elements.
+ * @private
+ */
+Blockly.FieldTextInput.dispose_ = function() {
+  var htmlInput = Blockly.FieldTextInput.htmlInput_;
+  Blockly.unbindEvent_(htmlInput.onBlurWrapper_);
+  Blockly.unbindEvent_(htmlInput.onKeyUpWrapper_);
+  Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
+  Blockly.unbindEvent_(htmlInput.onWorkspaceChangeWrapper_);
+  Blockly.FieldTextInput.htmlInput_ = null;
 };

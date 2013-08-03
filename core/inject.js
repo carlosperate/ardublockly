@@ -290,9 +290,9 @@ Blockly.createDom_ = function(container) {
   Blockly.svgResize();
 
   // Create an HTML container for popup overlays (e.g. editor widgets).
-  Blockly.widgetDiv = goog.dom.createDom('div', {
-      'class': 'blocklyWidgetDiv'});
-  document.body.appendChild(Blockly.widgetDiv);
+  Blockly.widgetDiv.DIV = goog.dom.createDom('div',
+      {'class': 'blocklyWidgetDiv'});
+  document.body.appendChild(Blockly.widgetDiv.DIV);
 };
 
 
@@ -373,4 +373,59 @@ Blockly.init_ = function() {
       ['media/click.mp3', 'media/click.wav', 'media/click.ogg'], 'click');
   Blockly.loadAudio_(
       ['media/delete.mp3', 'media/delete.ogg', 'media/delete.wav'], 'delete');
+};
+
+
+// Create an HTML container for popup overlays (e.g. editor widgets).
+Blockly.widgetDiv = {};
+
+/**
+ * The field currently using this container.
+ * @private
+ * @type Blockly.Field
+ */
+Blockly.widgetDiv.field_ = null;
+
+/**
+ * Optional cleanup function set by whichever field uses the widget.
+ * @private
+ * @type Function
+ */
+Blockly.widgetDiv.dispose_ = null;
+
+/**
+ * Initialize and display the widget div.  Close the old one if needed.
+ * @param {!Blockly.Field} newField The field that will be using this container.
+ * @param {Function} dispose Optional cleanup function to be run when the widget
+ *   is closed.
+ */
+Blockly.widgetDiv.show = function(newField, dispose) {
+  Blockly.widgetDiv.hide();
+  Blockly.widgetDiv.field_ = newField;
+  Blockly.widgetDiv.dispose_ = dispose;
+  Blockly.widgetDiv.DIV.style.display = 'block';
+};
+
+/**
+ * Destroy the widget and hide the div.
+ */
+Blockly.widgetDiv.hide = function() {
+  if (Blockly.widgetDiv.field_) {
+    Blockly.widgetDiv.DIV.style.display = 'none';
+    Blockly.widgetDiv.dispose_ && Blockly.widgetDiv.dispose_();
+    Blockly.widgetDiv.field_ = null;
+    Blockly.widgetDiv.dispose_ = null;
+    goog.dom.removeChildren(Blockly.widgetDiv.DIV);
+  }
+};
+
+/**
+ * Destroy the widget and hide the div if it is being used by the specified
+ *   field.
+ * @param {!Blockly.Field} oldField The field that was using this container.
+ */
+Blockly.widgetDiv.hideIfField = function(oldField) {
+  if (Blockly.widgetDiv.field_ == oldField) {
+    Blockly.widgetDiv.hide();
+  }
 };

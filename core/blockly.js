@@ -453,7 +453,7 @@ Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.Tooltip && Blockly.Tooltip.hide();
   Blockly.ContextMenu && Blockly.ContextMenu.hide();
   Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
-  Blockly.FieldColour && Blockly.FieldColour.hide();
+  Blockly.widgetDiv.hide();
   if (!opt_allowToolbox &&
       Blockly.Toolbox.flyout_ && Blockly.Toolbox.flyout_.autoClose) {
     Blockly.Toolbox.clearSelection();

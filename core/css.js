@@ -201,6 +201,7 @@ Blockly.Css.CONTENT = [
   '  font-size: 11pt;',
   '  border: none;',
   '  outline: none;',
+  '  width: 100%',
   '}',
   '.blocklyContextMenuBackground,',
   '.blocklyMutatorBackground {',

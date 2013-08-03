@@ -79,7 +79,7 @@ function initEditor(blockly) {
  */
 function onchange() {
   var name = rootBlock.getTitleValue('NAME');
-  blockType = name.replace(/\W/g, '_').replace(/^(d)/, '_\\1').toLowerCase();
+  blockType = name.replace(/\W/g, '_').replace(/^(\d)/, '_\\1').toLowerCase();
   updateLanguage();
   updateGenerator();
   updatePreview();
