@@ -105,7 +105,7 @@ var dir = window.BLOCKLY_DIR.match(/[^\\/]+$/)[0];
 
     provides = []
     for dep in calcdeps.BuildDependenciesFromFiles(self.search_paths):
-      if not dep.filename.startswith('../'):
+      if not dep.filename.startswith(os.pardir + os.sep):  # '../'
         provides.extend(dep.provides)
     provides.sort()
     f.write('\n')
@@ -161,10 +161,10 @@ class Gen_compressed(threading.Thread):
 
     # Read in all the source files.
     filenames = calcdeps.CalculateDependencies(self.search_paths,
-        ['core/blockly.js'])
+        [os.path.join('core', 'blockly.js')])
     for filename in filenames:
       # Filter out the Closure files (the compiler will add them).
-      if filename.startswith('../'):
+      if filename.startswith(os.pardir + os.sep):  # '../'
         continue
       f = open(filename)
       params.append(('js_code', ''.join(f.readlines())))
@@ -185,8 +185,9 @@ class Gen_compressed(threading.Thread):
       ]
 
     # Read in all the source files.
-    filenames = glob.glob('./generators/%s/*.js' % language)
-    filenames.insert(0, './generators/%s.js' % language)
+    filenames = glob.glob(
+        os.path.join('generators', language, '*.js'))
+    filenames.insert(0, os.path.join('generators', language + '.js'))
     for filename in filenames:
       f = open(filename)
       params.append(('js_code', ''.join(f.readlines())))
@@ -207,10 +208,10 @@ class Gen_compressed(threading.Thread):
       ]
 
     # Read in all the source files.
-    filenames = glob.glob('./language/common/*.js')
-    filenames += glob.glob('./language/%s/*.js' % language)
-    filenames.remove('./language/%s/_messages.js' % language)
-    filenames.insert(0, './language/%s/_messages.js' % language)
+    filenames = glob.glob(os.path.join('language', 'common', '*.js'))
+    filenames += glob.glob(os.path.join('language', language, '*.js'))
+    filenames.remove(os.path.join('language', language, '_messages.js'))
+    filenames.insert(0, os.path.join('language', language, '_messages.js'))
     for filename in filenames:
       f = open(filename)
       params.append(('js_code', ''.join(f.readlines())))
@@ -289,14 +290,14 @@ class Gen_compressed(threading.Thread):
 
 if __name__ == '__main__':
   try:
-    calcdeps = import_path(
-          '../closure-library-read-only/closure/bin/calcdeps.py')
+    calcdeps = import_path(os.path.join(os.path.pardir,
+          'closure-library-read-only', 'closure', 'bin', 'calcdeps.py'))
   except ImportError:
     print("""Error: Closure not found.  Read this:
 http://code.google.com/p/blockly/wiki/Closure""")
     sys.exit(1)
   search_paths = calcdeps.ExpandDirectories(
-      ['core/', '../closure-library-read-only/'])
+      ['core', os.path.join(os.path.pardir, 'closure-library-read-only')])
 
   # Run both tasks in parallel threads.
   # Uncompressed is limited by processor speed.
