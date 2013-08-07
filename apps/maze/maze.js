@@ -365,6 +365,7 @@ Maze.drawMap = function() {
       // Draw the tile.
       if (!Maze.tile_SHAPES[tile]) {
         // Empty square.  Use null0 for large areas, with null1-4 for borders.
+        // Add some randomness to avoid large empty spaces.
         if (tile == '00000' && Math.random() > 0.3) {
           tile = 'null0';
         } else {
@@ -389,6 +390,7 @@ Maze.drawMap = function() {
       var tile = document.createElementNS(Blockly.SVG_NS, 'image');
       tile.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
           Maze.SKIN.tiles);
+      // Position the tile sprite relative to the clipRect.
       tile.setAttribute('height', Maze.SQUARE_SIZE * 4);
       tile.setAttribute('width', Maze.SQUARE_SIZE * 5);
       tile.setAttribute('clip-path', 'url(#tileClipPath' + tileId + ')');
@@ -468,7 +470,7 @@ Maze.init = function() {
        trashcan: true});
   Blockly.loadAudio_(['apps/maze/win.mp3', 'apps/maze/win.ogg'], 'win');
   Blockly.loadAudio_(['apps/maze/whack.mp3', 'apps/maze/whack.ogg'], 'whack');
-  if (Maze.LEVEL == 1) {
+  if (Maze.LEVEL == 1) {  // Make connecting blocks easier for beginners.
     Blockly.SNAP_RADIUS *= 2;
   }
 
