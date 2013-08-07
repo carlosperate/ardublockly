@@ -237,6 +237,8 @@ Blockly.Block.prototype.unselect = function() {
  * @param {boolean} animate If true, show a disposal animation and sound.
  */
 Blockly.Block.prototype.dispose = function(healStack, animate) {
+  // Switch off rerendering.
+  this.rendered = false;
   this.unplug(healStack);
 
   if (animate && this.svg_) {
@@ -251,9 +253,6 @@ Blockly.Block.prototype.dispose = function(healStack, animate) {
   // Just deleting this block from the DOM would result in a memory leak as
   // well as corruption of the connection database.  Therefore we must
   // methodically step through the blocks and carefully disassemble them.
-
-  // Switch off rerendering.
-  this.rendered = false;
 
   if (Blockly.selected == this) {
     Blockly.selected = null;

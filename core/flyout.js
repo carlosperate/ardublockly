@@ -431,7 +431,6 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
     var xyOld = Blockly.getSvgXY_(svgRoot);
     var xyNew = Blockly.getSvgXY_(flyout.targetWorkspace_.getCanvas());
     block.moveBy(xyOld.x - xyNew.x, xyOld.y - xyNew.y);
-    block.render();
     if (flyout.autoClose) {
       flyout.hide();
     } else {

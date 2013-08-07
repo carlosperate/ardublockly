@@ -176,14 +176,15 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   // Demote the inferior block so that one is a child of the superior one.
   childBlock.setParent(parentBlock);
 
-  // Rendering the child node will trigger a rendering of its parent.
   // Rendering the parent node will move its connected children into position.
   if (parentBlock.rendered) {
     parentBlock.svg_.updateDisabled();
   }
   if (childBlock.rendered) {
     childBlock.svg_.updateDisabled();
-    childBlock.render();
+  }
+  if (parentBlock.rendered && childBlock.rendered) {
+    parentBlock.render();
   }
 };
 
