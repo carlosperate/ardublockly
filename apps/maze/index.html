@@ -2,54 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Blockly : Maze</title>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-    li {
-      padding-bottom: 1ex;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="../common.js"></script>
+  <script type="text/javascript" src="maze.js"></script>
+  <script type="text/javascript" src="/storage.js"></script>
 </head>
 <body>
-  <h1><a href="../index.html">Blockly</a> : Maze</h1>
-
-  <p>
-    <img src="title.png" height=152 width=314 style="padding: 1em; background-color: #f0f0f0;">
-  </p>
-
-  <p>Choose a language to get started:</p>
-
-  <ul>
-    <li><a href="maze.html?lang=en">English</a> -- <a href="https://docs.google.com/document/d/1q8Tqyi9DTRIGsrqQEVMdLNEEKBX-LYVl6I9n5cgZe-8/edit?usp=sharing">Instructions</a></li>
-    <li><a href="maze.html?lang=eu">Euskara (Basque)</a></li>
-    <li><a href="maze.html?lang=ca">Català (Catalan)</a></li>
-    <li><a href="maze.html?lang=cs">Čeština (Czech)</a></li>
-    <li><a href="maze.html?lang=da">Dansk (Danish)</a></li>
-    <li><a href="maze.html?lang=nl">Nederlands (Dutch/Flemish)</a></li>
-    <li><a href="maze.html?lang=fr">Français (French)</a></li>
-    <li><a href="maze.html?lang=de">Deutsch (German)</a></li>
-    <li><a href="maze.html?lang=el">Eλληνικά (Greek)</a></li>
-    <li><a href="maze.html?lang=hu">Magyar (Hungarian)</a></li>
-    <li><a href="maze.html?lang=it">Italiano (Italian)</a></li>
-    <li><a href="maze.html?lang=lv">Latviešu (Latvian)</a></li>
-    <li><a href="maze.html?lang=pl">Polski (Polish)</a></li>
-    <li><a href="maze.html?lang=pt">Português (Portuguese)</a></li>
-    <li><a href="maze.html?lang=ru">Русский (Russian)</a></li>
-    <li><a href="maze.html?lang=sr">Српски (Serbian)</a> </li>
-    <li><a href="maze.html?lang=es">Español (Spanish)</a> </li>
-    <li><a href="maze.html?lang=sw">Kishwahili (Swahili)</a> </li>
-    <li><a href="maze.html?lang=th">ภาษาไทย (Thai)</a> </li>
-    <li><a href="maze.html?lang=tr">Türkçe (Turkish)</a> </li>
-    <li><a href="maze.html?lang=vi">Tiếng Việt (Vietnamese)</a> -- <a href="https://docs.google.com/document/d/180EI0uCsbh3l0D6ge3veEfPcjyE_9SB_QtuiOM4kqw8/edit?usp=sharing">Instructions</a></li>
-  </ul>
-
-  <p><small><a href="https://code.google.com/p/blockly/wiki/Translation">Help translate</a> Blockly into your language.</small></p>
+  <script type="text/javascript">
+    document.write(mazepage.start({}, null,
+        {lang: BlocklyApps.LANG,
+         level: Maze.LEVEL,
+         skin: Maze.SKIN_ID,
+         langSrc: BlocklyApps.LANGUAGES[BlocklyApps.LANG][2]}));
+  </script>
 </body>
 </html>

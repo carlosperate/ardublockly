@@ -3,31 +3,16 @@
 <head>
   <meta charset="utf-8">
   <title>Blockly : Code</title>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-    li {
-      padding-bottom: 1ex;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="../common.js"></script>
+  <script type="text/javascript" src="code.js"></script>
+  <script type="text/javascript" src="/storage.js"></script>
 </head>
 <body>
-  <h1><a href="../index.html">Blockly</a> : Code</h1>
-
-  <p>Choose a language to get started:</p>
-
-  <ul>
-    <li><a href="code.html?lang=en">English</a></li>
-    <li><a href="code.html?lang=zh-tw">中國的 (Chinese)</a></li>
-    <li><a href="code.html?lang=de">Deutsch (German)</a></li>
-    <li><a href="code.html?lang=hu">Magyar (Hungarian)</a></li>
-    <li><a href="code.html?lang=vi">Tiếng Việt (Vietnamese)</a></li>
-  </ul>
+  <script type="text/javascript">
+    document.write(codepage.start({}, null,
+        {langSrc: BlocklyApps.LANGUAGES[BlocklyApps.LANG][2]}));
+  </script>
 </body>
 </html>

@@ -2,36 +2,18 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Blockly : Turtle Graphics</title>
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-    li {
-      padding-bottom: 1ex;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script type="text/javascript" src="../_soy/soyutils.js"></script>
+  <script type="text/javascript" src="../common.js"></script>
+  <script type="text/javascript" src="turtle.js"></script>
+  <script type="text/javascript" src="/storage.js"></script>
 </head>
 <body>
-  <h1><a href="../index.html">Blockly</a> : Turtle Graphics</h1>
-
-  <p>
-    <img src="title.png" height=83 width=407 style="padding: 1em; background-color: #f0f0f0;">
-  </p>
-
-  <p>Choose a language to get started:</p>
-
-  <ul>
-    <li><a href="turtle.html?lang=en">English</a></li>
-    <li><a href="turtle.html?lang=de">Deutsch (German)</a></li>
-    <li><a href="turtle.html?lang=hu">Magyar (Hungarian)</a></li>
-    <li><a href="turtle.html?lang=vi">Tiếng Việt (Vietnamese)</a></li>
-  </ul>
-
+  <script type="text/javascript">
+    document.write(turtlepage.start({}, null,
+        {langSrc: BlocklyApps.LANGUAGES[BlocklyApps.LANG][2]}));
+  </script>
 </body>
 </html>
