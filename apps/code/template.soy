@@ -33,7 +33,7 @@
           <span id="title">
             <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
             {sp}:{sp}
-            {msg meaning="Code.title" desc="page text - Title of this application, indicating that it is for writing arbitrary programs."}
+            {msg meaning="Code.title" desc="title - Title of this application, indicating that it is for writing arbitrary programs."}
               Code
             {/msg}
           </span>
@@ -58,10 +58,10 @@
               <button title="{msg meaning="Code.trashTooltip" desc="tooltip - Clicking on this causes the user program to be discarded."}Discard all blocks.{/msg}" onclick="discard(); renderContent();">
                 <img src='../../media/1x1.gif' class="trash icon21">
               </button>{sp}
-              <button id="linkButton" title="{{msg meaning="Code.linkTooltip" desc="See and reuse {lb}{lb}msg-Blockly|Maze-Maze.linkButton{rb}{rb}."}}Save and link to blocks.{{/msg}}" onclick="BlocklyStorage.link()">
+              <button id="linkButton" title="{msg meaning="Apps.linkTooltip" desc="IBID."}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link()">
                 <img src='../../media/1x1.gif' class="link icon21">
               </button>{sp}
-              <button title="{msg meaning="Code.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written."}Run the program defined by the blocks in the workspace.{/msg}" class="launch" onclick="runJS()">
+              <button title="{msg meaning="Apps.runTooltip" desc="IBID"}Run the program defined by the blocks in the workspace.{/msg}" class="launch" onclick="runJS()">
                 <img src='../../media/1x1.gif' class="run icon21">
               </button>
             </td>
@@ -88,7 +88,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{msg meaning="Code.catLogic" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Logic logic]."}Logic{/msg}">
+    <category name="{msg meaning="Apps.catLogic" desc="IBID"}Logic{/msg}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -97,7 +97,7 @@
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="{msg meaning="Code.catLoops" desc="category - blocks related to [http://en.wikipedia.org/wiki/Control_flow#Loops loops]."}Loops{/msg}">
+    <category name="{msg meaning="Apps.catLoops" desc="IBID"}Loops{/msg}">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -126,7 +126,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="{msg meaning="Code.catMath" desc="category - blocks related to mathematics."}Math{/msg}">
+    <category name="{msg meaning="Apps.catMath" desc="IBID"}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -169,7 +169,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{msg meaning="Code.catText" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Text text processing]."}Text{/msg}">
+    <category name="{msg meaning="Apps.catText" desc="IBID"}Text{/msg}">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -182,22 +182,21 @@
       <block type="text_indexOf">
         <value name="VALUE">
           <block type="variables_get">
-            // Warning: Message Code.textVariable is repeated three times.  Please keep them in sync.
-            <title name="VAR">{msg meaning="Code.textVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short."}text{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.textVariable" desc="IBID"}text{/msg}</title>
           </block>
         </value>
       </block>
       <block type="text_charAt">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.textVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short."}text{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.textVariable" desc="IBID"}text{/msg}</title>
           </block>
         </value>
       </block>
       <block type="text_getSubstring">
         <value name="STRING">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.textVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short."}text{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.textVariable" desc="IBID"}text{/msg}</title>
           </block>
         </value>
       </block>
@@ -206,7 +205,7 @@
       <block type="text_print"></block>
       <block type="text_prompt"></block>
     </category>
-    <category name="{msg meaning="Code.catLists" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Lists lists]."}Lists{/msg}">
+    <category name="{msg meaning="Apps.catLists" desc="IBID"}Lists{/msg}">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
       <block type="lists_repeat">
@@ -221,40 +220,39 @@
       <block type="lists_indexOf">
         <value name="VALUE">
           <block type="variables_get">
-            // Warning: Message Code.listVariable is repeated four times.  Please keep them in sync.
-            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getIndex">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_setIndex">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getSublist">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Code.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
     </category>
-    <category name="{msg meaning="Code.catColour" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Colour colour]."}Colour{/msg}">
+    <category name="{msg meaning="Apps.catColour" desc="IBID"}Colour{/msg}">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb"></block>
       <block type="colour_blend"></block>
     </category>
-    <category name="{msg meaning="Code.catVariables" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Variables variables]."}Variables{/msg}" custom="VARIABLE"></category>
-    <category name="{msg meaning="Code.catProcedures" desc="category - blocks related to [http://en.wikipedia.org/wiki/Subroutine defining or using procedures/functions]."}Procedures{/msg}" custom="PROCEDURE"></category>
+    <category name="{msg meaning="Apps.catVariables" desc="IBID"}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Apps.catProcedures" desc="IBID"}Procedures{/msg}" custom="PROCEDURE"></category>
   </xml>
 {/template}

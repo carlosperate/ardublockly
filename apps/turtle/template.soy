@@ -22,38 +22,44 @@
   </div>
 
   <div id="MSG" style="display: none">
-    // Block text.
-    <span id="moveForward">{msg meaning="Turtle.moveForward" desc="TODO"}move forward by{/msg}</span>
-    <span id="moveBackward">{msg meaning="Turtle.moveBackward" desc="TODO"}move backward by{/msg}</span>
-    <span id="turnRight">{msg meaning="Turtle.turnRight" desc="TODO"}turn right by{/msg}</span>
-    <span id="turnLeft">{msg meaning="Turtle.turnLeft" desc="TODO"}turn left by{/msg}</span>
-    <span id="setWidth">{msg meaning="Turtle.setWidth" desc="TODO"}set width{/msg}</span>
-    <span id="setColour">{msg meaning="Turtle.setColour" desc="TODO"}set colour{/msg}</span>
-    <span id="penUp">{msg meaning="Turtle.penUp" desc="TODO"}pen up{/msg}</span>
-    <span id="penDown">{msg meaning="Turtle.penDown" desc="TODO"}pen down{/msg}</span>
-    <span id="hideTurtle">{msg meaning="Turtle.hideTurtle" desc="TODO"}hide turtle{/msg}</span>
-    <span id="showTurtle">{msg meaning="Turtle.showTurtle" desc="TODO"}show turtle{/msg}</span>
-    <span id="print">{msg meaning="Turtle.print" desc="TODO"}print{/msg}</span>
-    <span id="font">{msg meaning="Turtle.font" desc="TODO"}font{/msg}</span>
-    <span id="fontSize">{msg meaning="Turtle.fontSize" desc="TODO"}size{/msg}</span>
-    <span id="fontNormal">{msg meaning="Turtle.fontNormal" desc="TODO"}normal{/msg}</span>
-    <span id="fontBold">{msg meaning="Turtle.fontBold" desc="TODO"}bold{/msg}</span>
-    <span id="fontItalic">{msg meaning="Turtle.fontItalic" desc="TODO"}italic{/msg}</span>
-    // Tooltips for general blocks.
-    <span id="moveTooltip">{msg meaning="Turtle.moveTooltip" desc="TODO"}Moves the turtle forward or backward by the specified amount.{/msg}</span>
-    <span id="turnTooltip">{msg meaning="Turtle.turnTooltip" desc="TODO"}Turns the turtle left or right by the specified number of degrees.{/msg}</span>
-    <span id="widthTooltip">{msg meaning="Turtle.widthTooltip" desc="TODO"}Changes the width of the pen.{/msg}</span>
-    <span id="penTooltip">{msg meaning="Turtle.penTooltip" desc="TODO"}Lifts or lowers the pen, to start or stop drawing.{/msg}</span>
-    <span id="colourTooltip">{msg meaning="Turtle.colourTooltip" desc="TODO"}Changes the colour of the pen.{/msg}</span>
-    <span id="turtleVisibilityTooltip">{msg meaning="Turtle.turtleVisibilityTooltip" desc="TODO"}Makes the turtle (green circle and arrow) visible or invisible.{/msg}</span>
-    <span id="printTooltip">{msg meaning="Turtle.printTooltip" desc="TODO"}Draws text in the turtle's direction at its location.{/msg}</span>
-    <span id="fontTooltip">{msg meaning="Turtle.fontTooltip" desc="TODO"}Sets the font used by the print block.{/msg}</span>
-    <span id="codeTooltip">{msg meaning="Turtle.codeTooltip" desc="TODO"}See generated JavaScript code.{/msg}</span>
-    // HelpUrl links.
-    <span id="printHelpUrl">{msg meaning="Turtle.printHelpUrl" desc="TODO"}http://en.wikipedia.org/wiki/Printing{/msg}</span>
-    <span id="fontHelpUrl">{msg meaning="Turtle.fontHelpUrl" desc="TODO"}http://en.wikipedia.org/wiki/Font{/msg}</span>
+    // Block text and their associated tooltips and URLs (interleaved to
+    // assist with translation).
+    <span id="moveTooltip">{msg meaning="Turtle.moveTooltip" desc="tooltip - In this and subsequent messages, 'turtle' refers to a stylized turtle on the screen to represent a position and direction.  This imaginary turtle is carrying a pen in its tail, so moving the turtle draws a line (or curve, etc.).  You are encouraged to play with the [https://blockly-demo.appspot.com/static/apps/turtle/index.html Turtle application] before doing this translation."}Moves the turtle forward or backward by the specified amount.{/msg}</span>
+    <span id="moveForward">{msg meaning="Turtle.moveForward" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of a verb telling a turtle to move (walk) in the direction he/she is facing.  This is followed by a number indicating how far (how many pixels) to go.  Prefer a translation that has text in common with the translation of 'move backward'.  See [[Translating:Blockly#Drop-Down_Menus]]."}move forward by{/msg}</span>
+    <span id="moveBackward">{msg meaning="Turtle.moveBackward" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of a verb telling a turtle to move (walk) in the direction opposite to where he/she is facing.  This is followed by a number indicating how far (how many pixels) to go.  Prefer a translation that has text in common with the translation of 'move forward'."}move backward by{/msg}</span>
+
+    <span id="turnTooltip">{msg meaning="Turtle.turnTooltip" desc="'Left' means counter-clockwise/anti-clockwise, and 'right' means clockwise."}Turns the turtle left or right by the specified number of degrees.{/msg}</span>
+    <span id="turnRight">{msg meaning="Turtle.turnRight" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of verb telling a turtle to rotate clockwise.  This is followed by a number indicating how far (how many degrees) to turn.  Prefer a translation that has text in common with the translation of 'turn left by'."}turn right by{/msg}</span>
+    <span id="turnLeft">{msg meaning="Turtle.turnLeft" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of verb telling a turtle to rotate counter-clockwise (anti-clockwise).  This is followed by a number indicating how far (how many degrees) to turn.  Prefer a translation that has text in common with the translation of 'turn right by'."}turn left by{/msg}</span>
+
+    <span id="widthTooltip">{msg meaning="Turtle.widthTooltip" desc="tooltip"}Changes the width of the pen.{/msg}</span>
+    <span id="setWidth">{msg meaning="Turtle.setWidth" desc="block text - Infinitive or imperative of a verb to set the width of the lines that should be drawn in the future by an imaginary pen.  This is followed by a number indicating the width in pixels (1 or greater)."}set width to{/msg}</span>
+
+    <span id="colourTooltip">{msg meaning="Turtle.colourTooltip" desc="tooltip - Changes the colour of ink in the pen carried by the turtle."}Changes the colour of the pen.{/msg}</span>
+    <span id="setColour">{msg meaning="Turtle.setColour" desc="block text - Infinitive or imperative of a verb to specify the colour of the lines that should be drawn in the future by an imaginary pen.  This is followed by a block showing the colour"}set colour to{/msg}</span>
+
+    <span id="penTooltip">{msg meaning="Turtle.penTooltip" desc="tooltip - Lifting the pen off the writing surface prevents anything from being drawn.  Lowering it (after it has been lifted) enables it to draw again."}Lifts or lowers the pen, to stop or start drawing.{/msg}</span>
+    <span id="penUp">{msg meaning="Turtle.penUp" desc="block text - Infinitive or imperative of a verb to lift up a pen so that moving it leaves no mark on the writing surface."}pen up{/msg}</span>
+    <span id="penDown">{msg meaning="Turtle.penDown" desc="block text - Infinitive or imperative of a verb to lower a raised pen so that moving it leaves a mark on the writing surface."}pen down{/msg}</span>
+
+    <span id="turtleVisibilityTooltip">{msg meaning="Turtle.turtleVisibilityTooltip" desc="tooltip"}Makes the turtle (green circle and arrow) visible or invisible.{/msg}</span>
+    <span id="hideTurtle">{msg meaning="Turtle.hideTurtle" desc="block text - Infinitive or imperative of a verb telling a turtle to hide itself (become invisible)."}hide turtle{/msg}</span>
+    <span id="showTurtle">{msg meaning="Turtle.showTurtle" desc="block text - Infinitive or imperative of a verb telling a turtle to show itself (become visible after having been invisible)."}show turtle{/msg}</span>
+
+    <span id="printHelpUrl">{msg meaning="Turtle.printHelpUrl" desc="URL - Information about printing or typography."}http://en.wikipedia.org/wiki/Printing{/msg}</span>
+    <span id="printTooltip">{msg meaning="Turtle.printTooltip" desc="tooltip - Note that 'print' refers to displaying text on the screen, not on an external printer."}Draws text in the turtle's direction at its location.{/msg}</span>
+    <span id="print">{msg meaning="Turtle.print" desc="block text - Infinitive or imperative of a verb telling a turtle to display text on the screen.  This is always followed by a block indicating what should be printed."}print{/msg}</span>
+
+    <span id="fontHelpUrl">{msg meaning="Turtle.fontHelpUrl" desc="URL - Information about typographic fonts."}http://en.wikipedia.org/wiki/Font{/msg}</span>
+    <span id="fontTooltip">{msg meaning="Turtle.fontTooltip" desc="tooltip - This is shown on the block that lets the user specify the font [family], size, and style that should be used for subsequent displays of text."}Sets the font used by the print block.{/msg}</span>
+    <span id="font">{msg meaning="Turtle.font" desc="block text - This precedes a dropdown menu specifying the typographic font [family] that should be used when displaying text."}font{/msg}</span>
+    <span id="fontSize">{msg meaning="Turtle.fontSize" desc="block text - This precedes a number specifying the size of the typographic font that should be used when displaying text.  This appears in the same block as 'font', so that word should not be repeated."}font size{/msg}</span>
+    <span id="fontNormal">{msg meaning="Turtle.fontNormal" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be normal (neither in italics or bold)."}normal{/msg}</span>
+    <span id="fontBold">{msg meaning="Turtle.fontBold" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be [http://en.wikipedia.org/wiki/Emphasis_(typography) bold]."}bold{/msg}</span>
+    <span id="fontItalic">{msg meaning="Turtle.fontItalic" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be [http://en.wikipedia.org/wiki/Italics italic]."}italic{/msg}</span>
+
     // Misc text.
-    <span id="unloadWarning">{msg meaning="Turtle.unloadWarning" desc="TODO"}Leaving this page will result in the loss of your work.{/msg}</span>
+    <span id="unloadWarning">{msg meaning="Turtle.unloadWarning" desc="alert - This is shown if the user attempts to close the browser tab containing the page or navigate to a different page to prevent them from accidentally losing their program in progress."}Leaving this page will result in the loss of your work.{/msg}</span>
   </div>
 
   <table width="100%">
@@ -63,7 +69,7 @@
           <span id="title">
             <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
             {sp}:{sp}
-            {msg meaning="Turtle.title" desc="TODO"}
+            {msg meaning="Turtle.title" desc="title - Specifies that this is Blockly's '''Turtle Graphics''' application.  Should you wish to, you can read more about [http://en.wikipedia.org/wiki/Turtle_graphics turtle graphics]."}
               Turtle Graphics
             {/msg}
           </span>
@@ -108,27 +114,27 @@
         <img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15>
       </td>
       <td style="width: 190px; text-align: center">
-        <button id="runButton" class="launch" onclick="Turtle.runButtonClick();">
-          <img src="../../media/1x1.gif" class="run icon21">{msg meaning="Turtle.runProgram" desc="TODO"}Run Program{/msg}
+        <button id="runButton" class="launch" onclick="Turtle.runButtonClick();" title="{msg meaning="Turtle.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the turtle on the canvas."}Makes the turtle do what the blocks say.{/msg}">
+          <img src="../../media/1x1.gif" class="run icon21">{msg meaning="Apps.runProgram" desc="TODO"}Run Program{/msg}
         </button>
         <button id="resetButton" class="launch" onclick="Turtle.resetButtonClick();" style="display: none">
-          <img src="../../media/1x1.gif" class="stop icon21">{msg meaning="Turtle.resetProgram" desc="TODO"}Reset{/msg}
+          <img src="../../media/1x1.gif" class="stop icon21"> {msg meaning="Apps.resetProgram" desc="IBID"}Reset{/msg}
         </button>
       </td>
     </tr>
   </table>
 
   <div id="toolbarDiv">
-    <button title="{msg meaning="Turtle.codeTooltip" desc="TODO"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode();">
+    <button title="{msg meaning="Apps.codeTooltip" desc="IBID"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode();">
       <img src='../../media/1x1.gif' class="code icon21">
     </button>
-    <button id="linkButton" title="{msg meaning="Turtle.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
+    <button id="linkButton" title="{msg meaning="Apps.linkTooltip" desc="IBID"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
       <img src='../../media/1x1.gif' class="link icon21">
     </button>
-    <button id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="TODO"}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">
+    <button id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="tooltip - Pressing this button causes the drawing created by the user's program to be saved as an image on the user's computer.  The button icon looks like a camera."}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">
       <img src='../../media/1x1.gif' class="img icon21">
     </button>
-    <a id="downloadImageLink" download="{msg meaning="Turtle.imgFilename" desc="TODO"}drawing.png{/msg}"></a>
+    <a id="downloadImageLink" download="{msg meaning="Turtle.imgFilename" desc="filename - The name of the image file containing the user's drawing.  It must end with '.png'."}drawing.png{/msg}"></a>
   </div>
 
   <script type="text/javascript" src="../../blockly_compressed.js"></script>
@@ -144,7 +150,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{msg meaning="Turtle.catTurtle" desc="category - blocks related to Turtle commands."}Turtle{/msg}">
+    <category name="{msg meaning="Turtle.catTurtle" desc="category - Blocks related to Turtle commands."}Turtle{/msg}">
       <block type="draw_move">
         <value name="VALUE">
           <block type="math_number">
@@ -175,7 +181,7 @@
       </block>
       <block type="draw_font"></block>
     </category>
-    <category name="{msg meaning="Turtle.catColour" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Colour colour]."}Colour{/msg}">
+    <category name="{msg meaning="Apps.catColour" desc="IBID"}Colour{/msg}">
       <block type="draw_colour">
         <value name="COLOUR">
           <block type="colour_picker"></block>
@@ -186,7 +192,7 @@
       <block type="colour_rgb"></block>
       <block type="colour_blend"></block>
     </category>
-    <category name="{msg meaning="Turtle.catLogic" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Logic logic]."}Logic{/msg}">
+    <category name="{msg meaning="Apps.catLogic" desc="IBID"}Logic{/msg}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -194,7 +200,7 @@
       <block type="logic_boolean"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="{msg meaning="Turtle.catLoops" desc="category - blocks related to [http://en.wikipedia.org/wiki/Control_flow#Loops loops]."}Loops{/msg}">
+    <category name="{msg meaning="Apps.catLoops" desc="IBID"}Loops{/msg}">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <block type="math_number">
@@ -223,7 +229,7 @@
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="{msg meaning="Turtle.catMath" desc="category - blocks related to mathematics."}Math{/msg}">
+    <category name="{msg meaning="Apps.catMath" desc="IBID"}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -266,7 +272,7 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{msg meaning="Turtle.catLists" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Lists lists]."}Lists{/msg}">
+    <category name="{msg meaning="Apps.catLists" desc="IBID"}Lists{/msg}">
       <block type="lists_create_empty"></block>
       <block type="lists_create_with"></block>
       <block type="lists_repeat">
@@ -281,34 +287,33 @@
       <block type="lists_indexOf">
         <value name="VALUE">
           <block type="variables_get">
-            // Warning: Message Turtle.listVariable is repeated four times.  Please keep them in sync.
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getIndex">
         <value name="VALUE">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_setIndex">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
       <block type="lists_getSublist">
         <value name="LIST">
           <block type="variables_get">
-            <title name="VAR">{msg meaning="Turtle.listVariable" desc="variable name - default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</title>
+            <title name="VAR">{msg meaning="Apps.listVariable" desc="IBID"}list{/msg}</title>
           </block>
         </value>
       </block>
     </category>
-    <category name="{msg meaning="Turtle.catVariables" desc="category - blocks related to [https://code.google.com/p/blockly/wiki/Variables variables]."}Variables{/msg}" custom="VARIABLE"></category>
-    <category name="{msg meaning="Turtle.catProcedures" desc="category - blocks related to [http://en.wikipedia.org/wiki/Subroutine defining or using procedures/functions]."}Procedures{/msg}" custom="PROCEDURE"></category>
+    <category name="{msg meaning="Apps.catVariables" desc="IBID"}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Apps.catProcedures" desc="IBID"}Procedures{/msg}" custom="PROCEDURE"></category>
   </xml>
 {/template}

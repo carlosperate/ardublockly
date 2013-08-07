@@ -1,11 +1,11 @@
 {
     "Code.title": "正體中文版",
     "Code.blocks": "積木",
-    "Code.catLogic": "邏輯",
-    "Code.catMath": "算數",
-    "Code.catText": "字串",
-    "Code.catLists": "列表",
-    "Code.catColour": "Colour",
-    "Code.catVariables": "變量",
-    "Code.catProcedures": "流程"
+    "Apps.catLogic": "邏輯",
+    "Apps.catMath": "算數",
+    "Apps.catText": "字串",
+    "Apps.catLists": "列表",
+    "Apps.catColour": "Colour",
+    "Apps.catVariables": "變量",
+    "Apps.catProcedures": "流程"
 }

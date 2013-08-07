@@ -27,7 +27,7 @@
           <span id="title">
             <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
             {sp}:{sp}
-            {msg meaning="Graph.title" desc="TODO"}
+            {msg meaning="Graph.title" desc="title - Brief title for this graphic calculator application."}
               Graphing Calculator
             {/msg}
           </span>
@@ -36,7 +36,7 @@
       <td class="farSide">
         <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
         &nbsp; &nbsp;
-        <button id="linkButton" title="{msg meaning="Graph.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
+        <button id="linkButton" title="{msg meaning="Apps.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
             <img src='link.png' height=21 width=21>
         </button>
       </div>
@@ -62,7 +62,7 @@
  */
 {template .toolbox}
   <xml id="toolbox" style="display: none">
-    <category name="{msg meaning="Graph.catMath" desc="TODO"}Math{/msg}">
+    <category name="{msg meaning="Apps.catMath" desc="IBID"}Math{/msg}">
       <block type="math_number"></block>
       <block type="math_arithmetic"></block>
       <block type="math_single"></block>
@@ -97,10 +97,10 @@
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="{msg meaning="Graph.catVariables" desc="TODO"}Variables{/msg}">
+    <category name="{msg meaning="Apps.catVariables" desc="IBID"}Variables{/msg}">
       <block type="graph_get_x"></block>
     </category>
-    <category name="{msg meaning="Graph.catLogic" desc="TODO"}Logic{/msg}">
+    <category name="{msg meaning="Apps.catLogic" desc="IBID"}Logic{/msg}">
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
       <block type="logic_negate"></block>

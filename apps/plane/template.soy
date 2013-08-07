@@ -14,14 +14,15 @@
  */
 {template .start}
   <div id="MSG" style="display: none">
-    <span id="rows">{msg meaning="Plane.rows" desc="Total number of rows of seats on a plane.  %1 is an integer greater or equal to zero."}Rows: %1{/msg}</span>
-    <span id="getRows">{msg meaning="Plane.getRows" desc="Last term of mathematical equation.  E.g. seats = 4 * rows (5).  %1 is an integer greater or equal to zero."}rows (%1){/msg}</span>
-    <span id="rows1">{msg meaning="Plane.rows1" desc="Total number of rows of first class seats on a plane.  %1 is an integer greater or equal to zero."}1st class rows: %1{/msg}</span>
-    <span id="getRows1">{msg meaning="Plane.getRows1" desc="Last term of mathematical equation.  E.g. seats = 4 * 1st class rows (5).  %1 is an integer greater or equal to zero."}1st class rows (%1){/msg}</span>
-    <span id="rows2">{msg meaning="Plane.rows2" desc="Total number of rows of second class seats on a plane.  %1 is an integer greater or equal to zero.."}2nd class rows: %1{/msg}</span>
-    <span id="getRows2">{msg meaning="Plane.getRows2" desc="Last term of mathematical equation.  E.g. seats = 4 * 2nd class rows (5).  %1 is an integer greater or equal to zero."}2nd class rows (%1){/msg}</span>
-    <span id="seats">{msg meaning="Plane.seats" desc="Total number of seats on a plane.  %1 is an integer greater or equal to zero."}Seats: %1{/msg}</span>
-    <span id="setSeats">{msg meaning="Plane.setSeats" desc="First half of mathematical equation.  E.g. seats = 4 * rows"}seats ={/msg}</span>
+    <span id="rows">{msg meaning="Plane.rows" desc="page text - Total number of rows of seats on an airplane.  %1 is an integer greater than or equal to zero."}Rows: %1{/msg}</span>
+    <span id="getRows">{msg meaning="Plane.getRows" desc="block text - The number of rows on the airplane, to be used in a mathematical equation, such as: &quot;seats = 4 x '''rows (5)'''&quot;.  %1 is an integer greater than or equal to zero."}rows (%1){/msg}</span>
+    <span id="rows1">{msg meaning="Plane.rows1" desc="page text - The number of rows of first-class seats on the airplane.  %1 is an integer greater than or equal to zero.  You can see the block at [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}1st class rows: %1{/msg}</span>
+    <span id="getRows1">{msg meaning="Plane.getRows1" desc="block text - The number of rows of first-class seats on the, to be used in a mathematical equation.  %1 is an integer greater or equal to zero.  See [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}1st class rows (%1){/msg}</span>
+    <span id="rows2">{msg meaning="Plane.rows2" desc="page text - The number of rows of second-class seats on the airplane.  %1 is an integer greater or equal to zero.  See [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}2nd class rows: %1{/msg}</span>
+    <span id="getRows2">{msg meaning="Plane.getRows2" desc="block text - The number of rows of second-class (also called 'economy class') seats on the airplane, to be used in a mathematical expression.  %1 is an integer greater or equal to zero."}2nd class rows (%1){/msg}</span>
+    <span id="seats">{msg meaning="Plane.seats" desc="page text - The total number of seats on the airplane.  %1 is an integer greater or equal to zero, or it is the next message."}Seats: %1{/msg}</span>
+    <span id="placeholder">{msg meaning="Plane.placeholder" desc="page text - A word or symbol indicating that this numeric value has not yet been determined."}?{/msg}</span>
+    <span id="setSeats">{msg meaning="Plane.setSeats" desc="block text - The first half of a mathematical equation determining the number of seats in an airplane, such as: &quot;'''seats =''' 4 x rows&quot;."}seats ={/msg}</span>
   </div>
 
   <div style="display: none;"><select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select></div>
@@ -29,7 +30,7 @@
     <span id="title">
       <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
       {sp}:{sp}
-      {msg meaning="Plane.plane" desc="brief title - Specifies that this is Blockly's '''Plane''' tutorial."}
+      {msg meaning="Plane.plane" desc="title - Specifies that this is Blockly's '''Plane''' (airplane) tutorial.  The word &quot;plane&quot; was chosen over &quot;airplane&quot; in English because it is shorter and less formal."}
         Plane
       {/msg}
     </span>
@@ -151,15 +152,15 @@
   <p>
     {switch $ij.level}
       {case 1}
-        {msg meaning="Plane.description1" desc="description - There is only one type of seat on this plane."}An airplane has a number of rows of passenger seats.  Each row contains four seats.{/msg}
+        {msg meaning="Plane.description1" desc="instructions - Note that in [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=1 this level], there is only one type of seat on the plane."}An airplane has a number of rows of passenger seats.  Each row contains four seats.{/msg}
       {case 2}
-        {msg meaning="Plane.description2" desc="description - There are two types of seats on this plane."}An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of passenger seats.  Each row contains four seats.{/msg}
+        {msg meaning="Plane.description2" desc="instructions - Note that in [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=2 tis level], there are two types of seats on this plane."}An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of passenger seats.  Each row contains four seats.{/msg}
       {case 3}
-        {msg meaning="Plane.description3" desc="description - There are three types of seats on this plane."}An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of 1st class and 2nd class passenger seats.  Each 1st class row contains four seats. Each 2nd class row contains five seats.{/msg}
+        {msg meaning="Plane.description3" desc="instructions - Note that in [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3 this level], there are three types of seats on this plane.  Be sure to use the same terms for &quot;1st class&quot; and &quot;2nd class&quot; as you did for the earlier messages."}An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of 1st class and 2nd class passenger seats.  Each 1st class row contains four seats. Each 2nd class row contains five seats.{/msg}
     {/switch}
   </p>
   <p>
-    {msg meaning="Plane.instructions" desc="instructions - The formula is located below this text and he airplane graphic is located above this text.  The number of rows an the graphic may be changed by the user with a slider."}Build a formula (below) that calculates the total number of seats on the airplane as the rows are changed (above).{/msg}
+    {msg meaning="Plane.instructions" desc="page text - This text appears below the airplane graphic and above the space for the user to create the formula.  The number of rows an the graphic may be changed by the user with a slider.  See [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=1] for a picture."}Build a formula (below) that calculates the total number of seats on the airplane as the rows are changed (above).{/msg}
   </p>
 
   <script type="text/javascript" src="../../blockly_compressed.js"></script>
