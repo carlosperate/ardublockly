@@ -424,12 +424,16 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
     var xml = Blockly.Xml.blockToDom_(originBlock);
     var block = Blockly.Xml.domToBlock_(flyout.targetWorkspace_, xml);
     // Place it in the same spot as the flyout copy.
-    var svgRoot = originBlock.getSvgRoot();
-    if (!svgRoot) {
+    var svgRootOld = originBlock.getSvgRoot();
+    if (!svgRootOld) {
       throw 'originBlock is not rendered.';
     }
-    var xyOld = Blockly.getSvgXY_(svgRoot);
-    var xyNew = Blockly.getSvgXY_(flyout.targetWorkspace_.getCanvas());
+    var xyOld = Blockly.getSvgXY_(svgRootOld);
+    var svgRootNew = block.getSvgRoot();
+    if (!svgRootNew) {
+      throw 'block is not rendered.';
+    }
+    var xyNew = Blockly.getSvgXY_(svgRootNew);
     block.moveBy(xyOld.x - xyNew.x, xyOld.y - xyNew.y);
     if (flyout.autoClose) {
       flyout.hide();
