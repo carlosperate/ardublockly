@@ -422,35 +422,35 @@ goog.i18n.BidiFormatter.prototype.unicodeWrap = function(str, placeholder) {
 };
 
 
-goog.string = {
+if (!goog.string) {
+  goog.string = {
+    /**
+     * Converts \r\n, \r, and \n to <br>s
+     * @param {*} str The string in which to convert newlines.
+     * @param {boolean=} opt_xml Whether to use XML compatible tags.
+     * @return {string} A copy of {@code str} with converted newlines.
+     */
+    newLineToBr: function(str, opt_xml) {
 
-  /**
-   * Converts \r\n, \r, and \n to <br>s
-   * @param {*} str The string in which to convert newlines.
-   * @param {boolean=} opt_xml Whether to use XML compatible tags.
-   * @return {string} A copy of {@code str} with converted newlines.
-   */
-  newLineToBr: function(str, opt_xml) {
+      str = String(str);
 
-    str = String(str);
+      // This quick test helps in the case when there are no chars to replace,
+      // in the worst case this makes barely a difference to the time taken.
+      if (!goog.string.NEWLINE_TO_BR_RE_.test(str)) {
+        return str;
+      }
 
-    // This quick test helps in the case when there are no chars to replace,
-    // in the worst case this makes barely a difference to the time taken.
-    if (!goog.string.NEWLINE_TO_BR_RE_.test(str)) {
-      return str;
-    }
-
-    return str.replace(/(\r\n|\r|\n)/g, opt_xml ? '<br />' : '<br>');
-  },
-  urlEncode: encodeURIComponent,
-  /**
-   * Regular expression used within newlineToBr().
-   * @type {RegExp}
-   * @private
-   */
-  NEWLINE_TO_BR_RE_: /[\r\n]/
-};
-
+      return str.replace(/(\r\n|\r|\n)/g, opt_xml ? '<br />' : '<br>');
+    },
+    urlEncode: encodeURIComponent,
+    /**
+     * Regular expression used within newlineToBr().
+     * @type {RegExp}
+     * @private
+     */
+    NEWLINE_TO_BR_RE_: /[\r\n]/
+  };
+}
 
 /**
  * Utility class to facilitate much faster string concatenation in IE,
