@@ -51,7 +51,7 @@ var selected = 'blocks';
 function tabClick(id) {
   // If the XML tab was open, save and render the content.
   if (document.getElementById('tab_xml').className == 'tabon') {
-    var xmlTextarea = document.getElementById('textarea_xml');
+    var xmlTextarea = document.getElementById('content_xml');
     var xmlText = xmlTextarea.value;
     var xmlDom = null;
     try {
@@ -96,15 +96,23 @@ function renderContent() {
     // an incomplete rendering due to Blockly being invisible.  Rerender.
     Blockly.mainWorkspace.render();
   } else if (content.id == 'content_xml') {
-    var xmlTextarea = document.getElementById('textarea_xml');
+    var xmlTextarea = document.getElementById('content_xml');
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     xmlTextarea.value = xmlText;
     xmlTextarea.focus();
   } else if (content.id == 'content_javascript') {
-    content.innerHTML = Blockly.Generator.workspaceToCode('JavaScript');
+    var code = Blockly.Generator.workspaceToCode('JavaScript');
+    if (typeof prettyPrintOne == 'function') {
+      code = prettyPrintOne(code, 'js');
+    }
+    content.innerHTML = code;
   } else if (content.id == 'content_python') {
-    content.innerHTML = Blockly.Generator.workspaceToCode('Python');
+    code = Blockly.Generator.workspaceToCode('Python');
+    if (typeof prettyPrintOne == 'function') {
+      code = prettyPrintOne(code, 'py');
+    }
+    content.innerHTML = code;
   }
 }
 
@@ -137,6 +145,9 @@ function init(blockly) {
   }
 
   tabClick('tab_' + selected);
+
+  // Lazy-load the syntax-highlighting.
+  window.setTimeout(BlocklyApps.importPrettify, 1);
 }
 
 /**

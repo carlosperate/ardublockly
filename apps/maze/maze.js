@@ -513,6 +513,9 @@ Maze.init = function() {
 
   Maze.reset(true);
   Blockly.addChangeListener(function() {BlocklyApps.updateCapacity()});
+
+  // Lazy-load the syntax-highlighting.
+  window.setTimeout(BlocklyApps.importPrettify, 1);
 };
 
 window.addEventListener('load', Maze.init);

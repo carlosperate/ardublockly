@@ -67,4 +67,19 @@
   {call planepage.start /}
   {call puzzlepage.start /}
   {call turtlepage.start /}
+  {call ok /}
+{/template}
+
+/**
+ * OK button for dialogs.
+ */
+{template .ok}
+  <div class="farSide" style="padding: 1ex 3ex 0">
+    <button onclick="BlocklyApps.hideDialog(true)">
+      {{msg meaning="Apps.dialogOk"
+           desc="Label on button for user to press when done reading help information.\n{lb}{lb}Identical|OK{rb}{rb}"}}
+        OK
+      {{/msg}}
+    </button>
+  </div>
 {/template}

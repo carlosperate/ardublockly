@@ -265,6 +265,160 @@ BlocklyApps.checkTimeout = function(opt_id) {
 };
 
 /**
+ * Is the dialog currently onscreen?
+ */
+BlocklyApps.isDialogVisible_ = false;
+
+/**
+ * A closing dialog should animate towards this element.
+ * @type Element
+ */
+BlocklyApps.dialogOrigin_ = null;
+
+/**
+ * A function to call when a dialog closes.
+ * @type Function
+ */
+BlocklyApps.dialogDispose_ = null;
+
+/**
+ * Show the dialog pop-up.
+ * @param {!Element} content DOM element to display in the dialog.
+ * @param {Element} origin Animate the dialog opening/closing from/to this
+ *     DOM element.  If null, don't show any animations for opening or closing.
+ * @param {boolean} animate Animate the dialog opening (if origin not null).
+ * @param {boolean} modal If true, grey out background and prevent interaction.
+ * @param {!Object} style A dictionary of style rules for the dialog.
+ * @param {Function} disposeFunc An optional function to call when the dialog
+ *     closes.  Normally used for unhooking events.
+ */
+BlocklyApps.showDialog = function(content, origin, animate, modal, style,
+                                  disposeFunc) {
+  if (BlocklyApps.isDialogVisible_) {
+    BlocklyApps.hideDialog(false);
+  }
+  BlocklyApps.isDialogVisible_ = true;
+  BlocklyApps.dialogOrigin_ = origin;
+  BlocklyApps.dialogDispose_ = disposeFunc;
+  var dialog = document.getElementById('dialog');
+  var shadow = document.getElementById('dialogShadow');
+  var border = document.getElementById('dialogBorder');
+
+  // Copy all the specified styles to the dialog.
+  for (var name in style) {
+    dialog.style[name] = style[name];
+  }
+  dialog.appendChild(content);
+  content.style.position = 'static';
+  content.style.top = 'auto';
+  content.style.left = 'auto';
+  content.style.zIndex = 'auto';
+  content.style.visibility = 'visible';
+
+  if (modal) {
+    shadow.style.visibility = 'visible';
+    shadow.style.opacity = 0.3;
+  }
+  function endResult() {
+    dialog.style.visibility = 'visible';
+    dialog.style.zIndex = 1;
+    border.style.visibility = 'hidden';
+  }
+  if (animate && origin) {
+    BlocklyApps.matchBorder_(origin, false, 0.2);
+    BlocklyApps.matchBorder_(dialog, true, 0.8);
+    // In 150ms show the dialog and hide the animated border.
+    window.setTimeout(endResult, 150);
+  } else {
+    // No animation.  Just set the final state.
+    endResult();
+  }
+};
+
+/**
+ * Hide the dialog pop-up.
+ * @param {boolean} animate Animate the dialog closing.
+ *     Requires that origin was not null when dialog was opened.
+ */
+BlocklyApps.hideDialog = function(animate) {
+  if (!BlocklyApps.isDialogVisible_) {
+    return;
+  }
+  BlocklyApps.isDialogVisible_ = false;
+  BlocklyApps.dialogDispose_ && BlocklyApps.dialogDispose_();
+  BlocklyApps.dialogDispose_ = null;
+  var origin = animate ? BlocklyApps.dialogOrigin_ : null;
+  var dialog = document.getElementById('dialog');
+  var shadow = document.getElementById('dialogShadow');
+  var border = document.getElementById('dialogBorder');
+
+  shadow.style.opacity = 0;
+
+  function endResult() {
+    shadow.style.visibility = 'hidden';
+    border.style.visibility = 'hidden';
+  }
+  if (origin) {
+    BlocklyApps.matchBorder_(dialog, false, 0.8);
+    BlocklyApps.matchBorder_(origin, true, 0.2);
+    // In 150ms hide both the shadow and the animated border.
+    window.setTimeout(endResult, 150);
+  } else {
+    // No animation.  Just set the final state.
+    endResult();
+  }
+  dialog.style.visibility = 'hidden';
+  dialog.style.zIndex = -1;
+  while (dialog.firstChild) {
+    var content = dialog.firstChild;
+    content.style.visibility = 'hidden';
+    content.style.position = 'absolute';
+    content.style.top = 0;
+    content.style.left = 0;
+    content.style.zIndex = -1;
+    document.body.appendChild(content);
+  }
+};
+
+/**
+ * Match the animated border to the a element's size and location.
+ * @param {!Element} element Element to match.
+ * @param {boolean} animate Animate to the new location.
+ * @param {number} opacity Opacity of border.
+ * @private
+ */
+BlocklyApps.matchBorder_ = function(element, animate, opacity) {
+  if (!element) {
+    return;
+  }
+  var border = document.getElementById('dialogBorder');
+  var width = element.offsetWidth - 2;
+  var height = element.offsetHeight - 2;
+  var left = 1;
+  var top = 1;
+  do {
+    left += element.offsetLeft;
+    top += element.offsetTop;
+    element = element.offsetParent;
+  } while (element);
+  function change() {
+    border.style.width = width + 'px';
+    border.style.height = height + 'px';
+    border.style.left = left + 'px';
+    border.style.top = top + 'px';
+    border.style.opacity = opacity;
+  }
+  if (animate) {
+    border.className = 'dialogAnimate';
+    window.setTimeout(change, 1);
+  } else {
+    border.className = '';
+    change();
+  }
+  border.style.visibility = 'visible';
+};
+
+/**
  * Convert the user's code to raw JavaScript.
  * @param {string} code Generated code.
  * @return {string} The code without serial numbers and timeout checks.
@@ -274,17 +428,50 @@ BlocklyApps.stripCode = function(code) {
   code = code.replace(/(,\s*)?'block_id_\d+'\)/g, ')');
   // Remove timeouts.
   var regex = new RegExp(Blockly.JavaScript.INFINITE_LOOP_TRAP
-      .replace('(%1)', '\\(\\)'), 'g');
+      .replace('(%1)', '\\((\'\\d+\')?\\)'), 'g');
   return code.replace(regex, '');
 };
 
 /**
  * Show the user's code in raw JavaScript.
  */
-BlocklyApps.showCode = function() {
+BlocklyApps.showCode = function(origin) {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   code = BlocklyApps.stripCode(code);
-  window.alert(code);
+  if (typeof prettyPrintOne == 'function') {
+    code = prettyPrintOne(code, 'js');
+  }
+  var container = document.getElementById('containerCode');
+  containerCode.innerHTML = code;
+
+  var content = document.getElementById('dialogCode');
+  var style = {
+    width: '40%',
+    left: '30%',
+    top: '5em'
+  };
+  BlocklyApps.showDialog(content, origin, true, true, style,
+      function() {
+        document.body.removeEventListener('keydown',
+            BlocklyApps.dialogKeyDown, true)});
+  document.body.addEventListener('keydown', BlocklyApps.dialogKeyDown, true);
+};
+
+/**
+ * If the user preses enter, escape, or space, hide the dialog.
+ * @param {!Event} e Keyboard event.
+ */
+BlocklyApps.dialogKeyDown = function(e) {
+  if (BlocklyApps.isDialogVisible_) {
+    console.log(e);
+    if (e.keyCode == 13 ||
+        e.keyCode == 27 ||
+        e.keyCode == 32) {
+      BlocklyApps.hideDialog(true);
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  }
 };
 
 /**
@@ -337,3 +524,20 @@ BlocklyApps.addTouchEvents = function() {
 
 // Add events for touch devices when the window is done loading.
 window.addEventListener('load', BlocklyApps.addTouchEvents, false);
+
+/**
+ * Load the Prettify CSS and JavaScript.
+ */
+BlocklyApps.importPrettify = function() {
+  //<link rel="stylesheet" type="text/css" href="../prettify.css">
+  //<script type="text/javascript" src="../prettify.js"></script>
+  var link = document.createElement('link');
+  link.setAttribute('rel', 'stylesheet');
+  link.setAttribute('type', 'text/css');
+  link.setAttribute('href', '../prettify.css');
+  document.head.appendChild(link);
+  var script = document.createElement('script');
+  script.setAttribute('type', 'text/javascript');
+  script.setAttribute('src', '../prettify.js');
+  document.head.appendChild(script);
+};

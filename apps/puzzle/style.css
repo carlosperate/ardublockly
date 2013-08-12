@@ -17,6 +17,25 @@ html[dir="RTL"] .farSide {
   text-align: left;
 }
 
+#graph {
+  position: absolute;
+  bottom: 25px;
+  height: 15px;
+  width: 100px;
+  border: 1px solid #ddd;
+}
+#graphValue {
+  height: 15px;
+  width: 0;
+  background-color: #0d0;
+  transition-property: width;
+  transition-duration: 1s;
+}
+
+#blockly {
+  position: fixed;
+}
+
 /* Buttons */
 button {
   margin: 5px 0;
@@ -38,24 +57,19 @@ button:active {
 button:hover {
   box-shadow: 2px 2px 5px #888;
 }
-#blockly {
-  position: fixed;
-}
-#help {
+
+/* Dialog */
+#dialog {
   visibility: hidden;
   background-color: #fff;
   color: #000;
   border: 1px solid #000;
-  width: 50%;
   position: absolute;
-  left: 25%;
-  top: 5em;
-  z-index: 1;
   border-radius: 8px;
   box-shadow: 5px 5px 5px #888;
   padding: 10px;
 }
-#helpBorder {
+#dialogBorder {
   visibility: hidden;
   position: absolute;
   background-color: #fff;
@@ -63,10 +77,8 @@ button:hover {
   border: 1px solid #000;
   border-radius: 8px;
   box-shadow: 5px 5px 5px #888;
-  transition-property: width height left top opacity;
-  transition-duration: 0.2s;
 }
-#shadow {
+#dialogShadow {
   visibility: hidden;
   position: absolute;
   top: 0;
@@ -74,7 +86,9 @@ button:hover {
   height: 100%;
   width: 100%;
   background-color: #000;
-  transition-property: opacity;
-  transition-duration: 0.2s;
   opacity: 0.3
+}
+.dialogAnimate {
+  transition-property: width height left top opacity;
+  transition-duration: 0.2s;
 }

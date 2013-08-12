@@ -96,13 +96,26 @@ Graph.init = function() {
 window.addEventListener('load', Graph.init);
 
 /**
+ * Cached copy of the function string.
+ * @type !string
+ */
+Graph.oldFormula_ = null;
+
+/**
  * Visualize the graph of y = f(x) using Google Chart Tools.
  * For more documentation on Google Chart Tools, see this linechart example:
  * google-developers.appspot.com/chart/interactive/docs/gallery/linechart
  */
 Graph.drawVisualization = function() {
+  var formula = Graph.getFunction();
+  if (formula === Graph.oldFormula_) {
+    // No change in the formula, don't recompute.
+    return;
+  }
+  Graph.oldFormula_ = formula;
+
   // Create and populate the data table.
-  var data = google.visualization.arrayToDataTable(Graph.plot());
+  var data = google.visualization.arrayToDataTable(Graph.plot(formula));
 
   var options = { //curveType: "function",
                   width: 400, height: 400,
@@ -123,13 +136,11 @@ Graph.drawVisualization = function() {
  * Plot points on the function y = f(x).
  * @return {!Array.<!Array>} 2D Array of points on the graph.
  */
-Graph.plot = function() {
-  // Get JavaScript code for f(x).
-  var formula = Graph.getFunction();
+Graph.plot = function(formula) {
   // Initialize a table with two column headings.
   var table = [];
   var y;
-  // TODO: Improve range and scale of graph
+  // TODO: Improve range and scale of graph.
   for (var x = -10; x <= 10; x = Math.round((x + 0.1) * 10) / 10) {
     try {
       y = eval(formula);
@@ -144,11 +155,11 @@ Graph.plot = function() {
     }
   }
   // Add column heading to table.
-  if (table.length == 0) {
-  // If there is no value row in table, add a [0, 0] row to prevent graph error.
-    table.unshift(['x', 'y'], [0, 0]);
-  } else {
+  if (table.length) {
     table.unshift(['x', 'y']);
+  } else {
+    // If the table is empty, add a [0, 0] row to prevent graph error.
+    table.unshift(['x', 'y'], [0, 0]);
   }
   return table;
 };

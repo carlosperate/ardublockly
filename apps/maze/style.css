@@ -72,6 +72,11 @@ html[dir=rtl] #capacityBubble {
 #capacityNumber {
   font-weight: bold;
 }
+pre {
+  font-size: large;
+  overflow: auto;
+  max-height: 400px;
+}
 
 /* 'Look' icon */
 #look>path {
@@ -91,14 +96,13 @@ button {
   border-radius: 5px;
   border: 1px solid #ddd;
   background-color: #eee;
-  font-size: 10%;
+  font-size: large;
   color: black;
 }
 button.launch {
   border: 1px solid #d43;
   background-color: #d43;
   color: #fff;
-  font-size: large;
   /* Can't use "text-align: start" due to IE. */
   text-align: left;
 }
@@ -124,6 +128,9 @@ button.disabled {
 #languageMenu {
   vertical-align: top;
   margin-top: 12px;
+}
+.notext {
+  font-size: 10%;
 }
 
 /* Sprited icons. */
@@ -191,4 +198,39 @@ html[dir="RTL"] #pegmanButton>span {
   height: 38px;
   width: 49px;
   background-position: -980px 0px;
-};
+}
+
+/* Dialog */
+#dialog {
+  visibility: hidden;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #888;
+  padding: 10px;
+}
+#dialogBorder {
+  visibility: hidden;
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #888;
+}
+#dialogShadow {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  opacity: 0.3
+}
+.dialogAnimate {
+  transition-property: width height left top opacity;
+  transition-duration: 0.2s;
+}

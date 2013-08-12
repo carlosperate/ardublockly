@@ -10,18 +10,16 @@
  */
 
 /**
- * Web page structure.
+ * Translated messages for use in JavaScript.
  */
-{template .start}
-  <div id="COMMON_MSG" style="display: none">
+{template .messages}
+  <div style="display: none">
     // Common messages.  So is Apps.blocklyMessage, which appears later.
     <span id="httpRequestError">{msg meaning="Apps.httpRequestError" desc="IBID"}There was a problem with the request.{/msg}</span>
     <span id="linkAlert">{msg meaning="Apps.linkAlert" desc="IBID"}Share your blocks with this link:\n\n%1{/msg}</span>
     <span id="hashError">{msg meaning="Apps.hashError" desc="IBID"}Sorry, '%1' doesn't correspond with any saved program.{/msg}</span>
     <span id="xmlError">{msg meaning="Apps.xmlError" desc="IBID"}Could not load your saved file.  Perhaps it was created with a different version of Blockly?{/msg}</span>
-  </div>
 
-  <div id="MSG" style="display: none">
     // Block text and their associated tooltips and URLs (interleaved to
     // assist with translation).
     <span id="moveTooltip">{msg meaning="Turtle.moveTooltip" desc="tooltip - In this and subsequent messages, 'turtle' refers to a stylized turtle on the screen to represent a position and direction.  This imaginary turtle is carrying a pen in its tail, so moving the turtle draws a line (or curve, etc.).  You are encouraged to play with the [https://blockly-demo.appspot.com/static/apps/turtle/index.html Turtle application] before doing this translation."}Moves the turtle forward or backward by the specified amount.{/msg}</span>
@@ -61,7 +59,13 @@
     // Misc text.
     <span id="unloadWarning">{msg meaning="Turtle.unloadWarning" desc="alert - This is shown if the user attempts to close the browser tab containing the page or navigate to a different page to prevent them from accidentally losing their program in progress."}Leaving this page will result in the loss of your work.{/msg}</span>
   </div>
+{/template}
 
+/**
+ * Web page structure.
+ */
+{template .start}
+  {call .messages /}
   <table width="100%">
     <tr>
       <td>
@@ -125,13 +129,13 @@
   </table>
 
   <div id="toolbarDiv">
-    <button title="{msg meaning="Apps.codeTooltip" desc="IBID"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode();">
+    <button class="notext" title="{msg meaning="Apps.codeTooltip" desc="IBID"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode();">
       <img src='../../media/1x1.gif' class="code icon21">
     </button>
-    <button id="linkButton" title="{msg meaning="Apps.linkTooltip" desc="IBID"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
+    <button class="notext" id="linkButton" title="{msg meaning="Apps.linkTooltip" desc="IBID"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
       <img src='../../media/1x1.gif' class="link icon21">
     </button>
-    <button id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="tooltip - Pressing this button causes the drawing created by the user's program to be saved as an image on the user's computer.  The button icon looks like a camera."}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">
+    <button class="notext" id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="tooltip - Pressing this button causes the drawing created by the user's program to be saved as an image on the user's computer.  The button icon looks like a camera."}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">
       <img src='../../media/1x1.gif' class="img icon21">
     </button>
     <a id="downloadImageLink" download="{msg meaning="Turtle.imgFilename" desc="filename - The name of the image file containing the user's drawing.  It must end with '.png'."}drawing.png{/msg}"></a>
@@ -143,6 +147,15 @@
   <script type="text/javascript" src="blocks.js"></script>
   {call .toolbox /}
   <div id="blockly"></div>
+
+  <div id="dialogCode" style="visibility: hidden">
+    <pre id="containerCode"></pre>
+    {call apps.ok /}
+  </div>
+
+  <div id="dialogShadow" class="dialogAnimate"></div>
+  <div id="dialogBorder"></div>
+  <div id="dialog"></div>
 {/template}
 
 /**

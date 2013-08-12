@@ -124,6 +124,9 @@ Turtle.init = function() {
   Turtle.ctxDisplay = document.getElementById('display').getContext('2d');
   Turtle.ctxScratch = document.getElementById('scratch').getContext('2d');
   Turtle.reset();
+
+  // Lazy-load the syntax-highlighting.
+  window.setTimeout(BlocklyApps.importPrettify, 1);
 };
 
 window.addEventListener('load', Turtle.init);

@@ -26,75 +26,78 @@
     a:hover {
       color: #f00;
     }
+    table {
+      height: 100%;
+      width: 100%;
+    }
+    td {
+      vertical-align: top;
+    }
     iframe {
       border-style: solid;
       border-color: #ddd;
       border-width: 0 1px 1px 0;
     }
-    td {
-      vertical-align: top;
-    }
-    iframe, textarea, table {
+    #blocklyFrame {
       height: 100%;
       width: 100%;
-      resize: none;
     }
-    textarea {
+    #previewFrame {
+      position: absolute;
+    }
+    pre {
+      margin-top: 0;
+      position: absolute;
       border: #ddd 1px solid;
+      overflow: scroll;
     }
   </style>
+  <link rel="stylesheet" type="text/css" href="../prettify.css">
+  <script type="text/javascript" src="../prettify.js"></script>
 </head>
 <body>
   <table>
     <tr>
-      <td colspan=2>
+      <td colspan=2 height="1%">
         <h1><a href="../index.html">Blockly</a> : Block Factory</h1>
       </td>
     </tr>
     <tr>
-      <td height="99%">
-        <iframe src="frame.html"></iframe>
+      <td width="50%" height="99%" rowspan=6>
+        <iframe id="blocklyFrame" src="frame.html"></iframe>
       </td>
+      <td height="1%">
+        <h3>Preview:</h3>
+      </td>
+    </tr>
+    <tr>
       <td>
-        <table>
-          <tr>
-            <td height="1%">
-              <h3>Preview:</h3>
-            </td>
-          </tr>
-          <tr>
-            <td height="33%">
-              <iframe src="preview.html"></iframe>
-            </td>
-          </tr>
-          <tr>
-            <td height="1%">
-              <h3>Language code:</h3>
-            </td>
-          </tr>
-          <tr>
-            <td height="32%">
-              <textarea id="languageTextarea" readonly="readonly" wrap="off"
-              onfocus="this.select()"></textarea>
-            </td>
-          </tr>
-          <tr>
-            <td height="1%">
-              <h3>Generator stub:
-                <select id="language" onchange="updateGenerator()">
-                  <option value="JavaScript">JavaScript</option>
-                  <option value="Python">Python</option>
-                </select>
-              </h3>
-            </td>
-          </tr>
-          <tr>
-            <td height="32%">
-              <textarea id="generatorTextarea" readonly="readonly" wrap="off"
-              onfocus="this.select()"></textarea>
-            </td>
-          </tr>
-        </table>
+        <iframe id="previewFrame" src="preview.html"></iframe>
+      </td>
+    </tr>
+    <tr>
+      <td height="1%">
+        <h3>Language code:</h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre id="languagePre"></pre>
+      </td>
+    </tr>
+    <tr>
+      <td height="1%">
+        <h3>Generator stub:
+          <select id="language" onchange="updateGenerator()">
+            <option value="JavaScript">JavaScript</option>
+            <option value="Python">Python</option>
+          </select>
+        </h3>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre id="generatorPre"></pre>
       </td>
     </tr>
   </table>

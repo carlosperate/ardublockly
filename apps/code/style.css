@@ -5,7 +5,7 @@ body {
   background-color: #fff;
   font-family: sans-serif;
   margin: 0;
-  overflow: hidden
+  overflow: hidden;
 }
 h1 {
   font-weight: normal;
@@ -21,9 +21,6 @@ a:hover {
 }
 html[dir="RTL"] .farSide {
   text-align: left;
-}
-td, button {
-  vertical-align: top;
 }
 
 /* Tabs */
@@ -68,29 +65,22 @@ table {
 }
 td {
   padding: 0;
+  vertical-align: top;
 }
-pre,
-#content_xml {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ccc;
-  border-top-style: none;
-  overflow: hidden;
+.content {
   display: none;
-}
-#textarea_xml {
   width: 100%;
   height: 100%;
-  border: none;
-  resize: none;
-}
-iframe {
-  width: 100%;
-  height: 100%;
+  margin: 0;
+  padding: 1ex;
   border: 1px solid #ccc;
-  border-top: 0;
+  border-top: none;
+}
+#content_blocks {
+  padding: 0;
+}
+#content_xml {
+  resize: none;
 }
 #languageMenu {
   vertical-align: top;

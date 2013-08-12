@@ -10,10 +10,10 @@
  */
 
 /**
- * Translated messages.
+ * Translated messages for use in JavaScript.
  */
 {template .messages}
-  <div id="MSG" style="display: none">
+  <div style="display: none">
     <span id="country1">{{msg meaning="Puzzle.country1" desc="The name of the country Australia\n{lb}{lb}Identical|Australia{rb}{rb}"}}Australia{{/msg}}</span>
     <span id="country1Flag">flag_au.png</span>
     <span id="country1FlagHeight">50</span>
@@ -218,9 +218,7 @@
   <script type="text/javascript" src="blocks.js"></script>
   <div id="blockly"></div>
 
-  <div id="shadow"></div>
-  <div id="helpBorder"></div>
-  <div id="help">
+  <div id="help" style="visibility: hidden">
     <div style="padding-bottom: 0.7ex">
       {msg meaning="Puzzle.helpText"
            desc="Instructions for the puzzle.  For context, see [http://blockly-demo.appspot.com/static/apps/puzzle/index.html Blockly Puzzle]."}
@@ -228,15 +226,18 @@
       {/msg}
     </div>
     <iframe src="help.html?lang={$ij.lang}" style="height: 200px; width: 100%; border: none;"></iframe>
-    <div class="farSide" style="padding: 1ex 3ex 0">
-      <button id="okButton" onclick="Puzzle.hideHelp(true)">
-        {{msg meaning="Puzzle.helpOk"
-             desc="Label on button for user to press when done reading help information.\n{lb}{lb}Identical|OK{rb}{rb}"}}
-          OK
-        {{/msg}}
-      </button>
-    </div>
+    {call apps.ok /}
   </div>
+  <div id="answers" style="visibility: hidden">
+    <div id="answerMessage">
+    </div>
+    <div id="graph"><div id="graphValue"></div></div>
+    {call apps.ok /}
+  </div>
+
+  <div id="dialogShadow" class="dialogAnimate"></div>
+  <div id="dialogBorder"></div>
+  <div id="dialog"></div>
 {/template}
 
 /**

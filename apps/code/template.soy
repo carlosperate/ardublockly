@@ -10,10 +10,10 @@
  */
 
 /**
- * Web page structure.
+ * Translated messages for use in JavaScript.
  */
-{template .start}
-  <div id="MSG" style="display: none">
+{template .messages}
+  <div style="display: none">
     // Common messages.  So is Apps.blocklyMessage, which appears later.
     <span id="httpRequestError">{msg meaning="Apps.httpRequestError" desc="IBID"}There was a problem with the request.{/msg}</span>
     <span id="linkAlert">{msg meaning="Apps.linkAlert" desc="IBID"}Share your blocks with this link:\n\n%1{/msg}</span>
@@ -25,7 +25,13 @@
     <span id="timeout">{msg meaning="Code.timeout" desc="alert - Message shown if the program has run for more than the permitted number of steps.  This exists so that programs with infinite loops do not run forever."}Maximum execution iterations exceeded.{/msg}</span>
     <span id="discard">{msg meaning="Code.discard" desc="alert - Message shown after the user clicks on the 'discard all' icon.  Selecting 'OK' (or the translated equivalent) causes all of the blocks to be discarded.  Selecting 'Cancel' prevents blocks from being deleted."}Delete all %1 blocks?{/msg}</span>
   </div>
+{/template}
 
+/**
+ * Web page structure.
+ */
+{template .start}
+  {call .messages /}
   <table width="100%" height="100%">
     <tr>
       <td>
@@ -72,12 +78,10 @@
     <tr>
       <td height="99%" colspan=2>
         {call .toolbox /}
-        <iframe id="content_blocks" src="frame.html?{$ij.langSrc}"></iframe>
-        <pre id="content_javascript"></pre>
-        <pre id="content_python"></pre>
-        <div id="content_xml">
-          <textarea id="textarea_xml"></textarea>
-        </div>
+        <iframe id="content_blocks" class="content" src="frame.html?{$ij.langSrc}"></iframe>
+        <pre id="content_javascript" class="content"></pre>
+        <pre id="content_python" class="content"></pre>
+        <textarea id="content_xml" class="content"></textarea>
       </td>
     </tr>
   </table>

@@ -16,6 +16,11 @@ a:hover {
 html[dir="RTL"] .farSide {
   text-align: left;
 }
+pre {
+  font-size: large;
+  overflow: auto;
+  max-height: 400px;
+}
 
 /* Buttons. */
 button {
@@ -23,7 +28,7 @@ button {
   margin-right: 12px;
   margin-left: 0;
   padding: 10px;
-  font-size: 10%;
+  font-size: large;
   border-radius: 5px;
   border: 1px solid #ddd;
   background-color: #eee;
@@ -33,7 +38,6 @@ button.launch {
   border: 1px solid #d43;
   background-color: #d43;
   color: #fff;
-  font-size: large;
   /* Can't use "text-align: start" due to IE. */
   text-align: left;
 }
@@ -80,6 +84,10 @@ button.disabled {
   vertical-align: top;
   margin-top: 12px;
 }
+.notext {
+  font-size: 10%;
+}
+
 /* Slider. */
 .sliderTrack {
   stroke: #aaa;
@@ -116,4 +124,39 @@ button.disabled {
 }
 .stop {
   background-position: -63px 0px;
+}
+
+/* Dialog */
+#dialog {
+  visibility: hidden;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  position: absolute;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #888;
+  padding: 10px;
+}
+#dialogBorder {
+  visibility: hidden;
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 8px;
+  box-shadow: 5px 5px 5px #888;
+}
+#dialogShadow {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  opacity: 0.3
+}
+.dialogAnimate {
+  transition-property: width height left top opacity;
+  transition-duration: 0.2s;
 }

@@ -155,8 +155,8 @@ function updateLanguage() {
   code.push('  }');
   code.push('};');
 
-  var ta = document.getElementById('languageTextarea');
-  ta.value = code.join('\n');
+  code = prettyPrintOne(code.join('\n'), 'js');
+  document.getElementById('languagePre').innerHTML = code;
 }
 
 /**
@@ -374,8 +374,8 @@ function updateGenerator() {
   }
   code.push('};');
 
-  var ta = document.getElementById('generatorTextarea');
-  ta.value = code.join('\n');
+  code = prettyPrintOne(code.join('\n'), 'js');
+  document.getElementById('generatorPre').innerHTML = code;
 }
 
 /**
@@ -390,7 +390,7 @@ function updatePreview() {
     previewBlock.dispose();
   }
   var type = blockType;
-  var code = document.getElementById('languageTextarea').value;
+  var code = document.getElementById('languagePre').textContent;
   eval(code);
   // Create the preview block.
   previewBlock = new Blockly.Block(Blockly.mainWorkspace, type);
@@ -399,3 +399,23 @@ function updatePreview() {
   previewBlock.movable = false;
   previewBlock.deletable = false;
 }
+
+/**
+ * Initialize layout.  Called on page load.
+ */
+function init() {
+  var expandList = [
+    document.getElementById('previewFrame'),
+    document.getElementById('languagePre'),
+    document.getElementById('generatorPre')
+  ];
+  var onresize = function(e) {
+    for (var i = 0, expand; expand = expandList[i]; i++) {
+      expand.style.width = (expand.parentNode.offsetWidth - 2) + 'px';
+      expand.style.height = (expand.parentNode.offsetHeight - 2) + 'px';
+    }
+  };
+  onresize();
+  window.addEventListener('resize', onresize);
+}
+window.addEventListener('load', init);
