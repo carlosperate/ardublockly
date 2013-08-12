@@ -183,8 +183,18 @@ def _process_file(filename):
                 if not key in unit or not unit[key]:
                     raise InputError(filename + ':' + unit['key'],
                                      key + ' not found')
-            # Exclude entries whose description is elsewhere ('ibid').
-            if not unit['description'].lower() == 'ibid':
+            if unit['description'].lower() == 'ibid':
+              if unit['meaning'] not in names:
+                # If the term has not already been described, the use of 'ibid'
+                # is an error.
+                raise InputError(filename,
+                                 'First definition of: ' + unit['meaning']
+                                 + ' has definition: ' + unit['description'])
+              else:
+                # If term has already been described, 'ibid' was used correctly,
+                # and we output nothing.
+                pass
+            else:
               if unit['meaning'] in names:
                 raise InputError(filename,
                                  'Second definition of: ' + unit['meaning'])

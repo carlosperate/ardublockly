@@ -144,8 +144,7 @@ def _process_file(target_lang, key_dict):
 
     Raises:
         IOError: An I/O error occurred with an input or output file.
-        ValueError: Input JSON could not be parsed.
-        InputError: Input JSON lacked required fields.
+        InputError: Input JSON could not be parsed.
     """
     filename = target_lang + '.json'
     in_file = open(filename)
