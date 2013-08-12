@@ -148,14 +148,11 @@
   {call .toolbox /}
   <div id="blockly"></div>
 
-  <div id="dialogCode" style="visibility: hidden">
+  {call apps.dialog /}
+  <div id="dialogCode" class="dialogHiddenContent">
     <pre id="containerCode"></pre>
     {call apps.ok /}
   </div>
-
-  <div id="dialogShadow" class="dialogAnimate"></div>
-  <div id="dialogBorder"></div>
-  <div id="dialog"></div>
 {/template}
 
 /**

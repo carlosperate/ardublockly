@@ -623,7 +623,16 @@ Maze.reset = function(first) {
 Maze.runButtonClick = function() {
   // Only allow a single top block on levels 1 and 2.
   if (Maze.LEVEL <= 2 && Blockly.mainWorkspace.getTopBlocks().length > 1) {
-    window.alert(BlocklyApps.getMsg('oneTopBlock'));
+    var origin = document.getElementById('runButton');
+    var content = document.getElementById('dialogOneTopBlock');
+    var style = {
+      width: '40%',
+      left: '30%',
+      top: '5em'
+    };
+    BlocklyApps.showDialog(content, origin, true, true, style,
+        BlocklyApps.stopDialogKeyDown);
+    BlocklyApps.startDialogKeyDown();
     return;
   }
   var runButton = document.getElementById('runButton');

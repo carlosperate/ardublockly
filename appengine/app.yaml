@@ -36,6 +36,11 @@ handlers:
   static_files: favicon.ico
   upload: favicon\.ico
 
+# robot.txt
+- url: /robots\.txt
+  static_files: robots.txt
+  upload: robots\.txt
+
 # Remote API for backing up data.
 - url: /remote_api
   script: $PYTHON_LIB/google/appengine/ext/remote_api/handler.py

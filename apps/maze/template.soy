@@ -40,7 +40,6 @@
     <span id="capacity2">{msg meaning="Maze.capacity2" desc="warning - Only %1 more blocks may be used, where %1 is an integer greater than 1.  Do not alter the portions between pointy brackets (< and >), although you may move them within the phrase."}You have <span id='capacityNumber'>%1</span> blocks left.{/msg}</span>
     <span id="nextLevel">{msg meaning="Maze.nextLevel" desc="alert - This is displayed when the user solves the maze, inviting them to precede to the next level of difficulty.  %1 is an integer greater than 1."}Congratulations! Are you ready to proceed to level %1?{/msg}</span>
     <span id="finalLevel">{msg meaning="Maze.finalLevel" desc="alert - This is displayed when the user solves the most difficult level."}Congratulations! You have solved the final level.{/msg}</span>
-    <span id="oneTopBlock">{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</span>
   </div>
 {/template}
 
@@ -155,14 +154,15 @@
 
   <div id="pegmanMenu"></div>
 
-  <div id="dialogCode" style="visibility: hidden">
+  {call apps.dialog /}
+  <div id="dialogCode" class="dialogHiddenContent">
     <pre id="containerCode"></pre>
     {call apps.ok /}
   </div>
-
-  <div id="dialogShadow" class="dialogAnimate"></div>
-  <div id="dialogBorder"></div>
-  <div id="dialog"></div>
+  <div id="dialogOneTopBlock" class="dialogHiddenContent">
+    <div>{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</div>
+    {call apps.ok /}
+  </div>
 {/template}
 
 /**

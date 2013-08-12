@@ -190,7 +190,6 @@ Puzzle.init = function() {
     }
     Puzzle.showHelp(false);
   }
-  document.body.addEventListener('keydown', BlocklyApps.dialogKeyDown, true);
 };
 
 /**
@@ -292,7 +291,9 @@ Puzzle.checkAnswers = function() {
     left: Puzzle.RTL ? '5%' : '70%',
     top: '5em'
   };
-  BlocklyApps.showDialog(content, button, true, true, style, null);
+  BlocklyApps.showDialog(content, button, true, true, style,
+      BlocklyApps.stopDialogKeyDown);
+  BlocklyApps.startDialogKeyDown();
 };
 
 /**
@@ -307,5 +308,7 @@ Puzzle.showHelp = function(animate) {
     left: '25%',
     top: '5em'
   };
-  BlocklyApps.showDialog(help, button, animate, true, style, null);
+  BlocklyApps.showDialog(help, button, animate, true, style,
+      BlocklyApps.stopDialogKeyDown);
+  BlocklyApps.startDialogKeyDown();
 };

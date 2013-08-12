@@ -309,11 +309,7 @@ BlocklyApps.showDialog = function(content, origin, animate, modal, style,
     dialog.style[name] = style[name];
   }
   dialog.appendChild(content);
-  content.style.position = 'static';
-  content.style.top = 'auto';
-  content.style.left = 'auto';
-  content.style.zIndex = 'auto';
-  content.style.visibility = 'visible';
+  content.className = content.className.replace('dialogHiddenContent', '');
 
   if (modal) {
     shadow.style.visibility = 'visible';
@@ -371,11 +367,7 @@ BlocklyApps.hideDialog = function(animate) {
   dialog.style.zIndex = -1;
   while (dialog.firstChild) {
     var content = dialog.firstChild;
-    content.style.visibility = 'hidden';
-    content.style.position = 'absolute';
-    content.style.top = 0;
-    content.style.left = 0;
-    content.style.zIndex = -1;
+    content.className += ' dialogHiddenContent';
     document.body.appendChild(content);
   }
 };
@@ -451,19 +443,17 @@ BlocklyApps.showCode = function(origin) {
     top: '5em'
   };
   BlocklyApps.showDialog(content, origin, true, true, style,
-      function() {
-        document.body.removeEventListener('keydown',
-            BlocklyApps.dialogKeyDown, true)});
-  document.body.addEventListener('keydown', BlocklyApps.dialogKeyDown, true);
+      BlocklyApps.stopDialogKeyDown);
+  BlocklyApps.startDialogKeyDown();
 };
 
 /**
  * If the user preses enter, escape, or space, hide the dialog.
  * @param {!Event} e Keyboard event.
+ * @private
  */
-BlocklyApps.dialogKeyDown = function(e) {
+BlocklyApps.dialogKeyDown_ = function(e) {
   if (BlocklyApps.isDialogVisible_) {
-    console.log(e);
     if (e.keyCode == 13 ||
         e.keyCode == 27 ||
         e.keyCode == 32) {
@@ -472,6 +462,22 @@ BlocklyApps.dialogKeyDown = function(e) {
       e.preventDefault();
     }
   }
+};
+
+/**
+ * Start listening for BlocklyApps.dialogKeyDown_.
+ */
+BlocklyApps.startDialogKeyDown = function() {
+  document.body.addEventListener('keydown',
+      BlocklyApps.dialogKeyDown_, true);
+};
+
+/**
+ * Stop listening for BlocklyApps.dialogKeyDown_.
+ */
+BlocklyApps.stopDialogKeyDown = function() {
+  document.body.removeEventListener('keydown',
+      BlocklyApps.dialogKeyDown_, true);
 };
 
 /**

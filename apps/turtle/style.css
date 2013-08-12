@@ -125,38 +125,3 @@ button.disabled {
 .stop {
   background-position: -63px 0px;
 }
-
-/* Dialog */
-#dialog {
-  visibility: hidden;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
-  position: absolute;
-  border-radius: 8px;
-  box-shadow: 5px 5px 5px #888;
-  padding: 10px;
-}
-#dialogBorder {
-  visibility: hidden;
-  position: absolute;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 8px;
-  box-shadow: 5px 5px 5px #888;
-}
-#dialogShadow {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  opacity: 0.3
-}
-.dialogAnimate {
-  transition-property: width height left top opacity;
-  transition-duration: 0.2s;
-}
