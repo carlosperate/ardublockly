@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-08-13 11:41:07.534915",
+        "lastupdated": "2013-08-13 14:21:30.871067",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -54,6 +54,7 @@
     "Maze.capacity2": "You have <x id='START_SPAN'/>%1<x id='END_SPAN'/> blocks left.",
     "Maze.nextLevel": "Congratulations! Are you ready to proceed to level %1?",
     "Maze.finalLevel": "Congratulations! You have solved the final level.",
+    "Maze.oneTopBlock": "On this level, you need to stack together all of the blocks in the white workspace.",
     "Maze.maze": "Maze",
     "Maze.instructions1": "A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
     "Maze.instructions2": "What is the sequence of steps to follow this path?",
@@ -67,7 +68,6 @@
     "Maze.instructions10": "Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!",
     "Maze.runTooltip": "Makes the character do what the blocks say.",
     "Maze.resetTooltip": "Put the character back at the start of the maze.",
-    "Maze.oneTopBlock": "On this level, you need to stack together all of the blocks in the white workspace.",
     "Plane.rows": "Rows: %1",
     "Plane.getRows": "rows (%1)",
     "Plane.rows1": "1st class rows: %1",

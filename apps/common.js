@@ -232,29 +232,6 @@ BlocklyApps.changeLanguage = function() {
 };
 
 /**
- * Updates the document's 'capacity' element's innerHTML with a message
- * indicating how many more blocks are permitted.  The capacity
- * is retrieved from Blockly.mainWorkspace.remainingCapacity().
- */
-BlocklyApps.updateCapacity = function() {
-  var cap = Blockly.mainWorkspace.remainingCapacity();
-  var p = document.getElementById('capacity');
-  if (cap == Infinity) {
-    p.style.display = 'none';
-  } else {
-    p.style.display = 'inline';
-    if (cap == 0) {
-      p.innerHTML = BlocklyApps.getMsg('capacity0');
-    } else if (cap == 1) {
-      p.innerHTML = BlocklyApps.getMsg('capacity1');
-    } else {
-      cap = Number(cap);
-      p.innerHTML = BlocklyApps.getMsg('capacity2').replace('%1', cap);
-    }
-  }
-};
-
-/**
  * Highlight the block (or clear highlighting).
  * @param {?string} id ID of block that triggered this action.
  */

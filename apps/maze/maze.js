@@ -512,7 +512,7 @@ Maze.init = function() {
   }
 
   Maze.reset(true);
-  Blockly.addChangeListener(function() {BlocklyApps.updateCapacity()});
+  Blockly.addChangeListener(function() {Maze.updateCapacity()});
 
   // Lazy-load the syntax-highlighting.
   window.setTimeout(BlocklyApps.importPrettify, 1);
@@ -683,6 +683,29 @@ Maze.showOneTopBlock = function() {
   BlocklyApps.showDialog(content, origin, true, true, style,
       BlocklyApps.stopDialogKeyDown);
   BlocklyApps.startDialogKeyDown();
+};
+
+/**
+ * Updates the document's 'capacity' element's innerHTML with a message
+ * indicating how many more blocks are permitted.  The capacity
+ * is retrieved from Blockly.mainWorkspace.remainingCapacity().
+ */
+Maze.updateCapacity = function() {
+  var cap = Blockly.mainWorkspace.remainingCapacity();
+  var p = document.getElementById('capacity');
+  if (cap == Infinity) {
+    p.style.display = 'none';
+  } else {
+    p.style.display = 'inline';
+    if (cap == 0) {
+      p.innerHTML = BlocklyApps.getMsg('Maze_capacity0');
+    } else if (cap == 1) {
+      p.innerHTML = BlocklyApps.getMsg('Maze_capacity1');
+    } else {
+      cap = Number(cap);
+      p.innerHTML = BlocklyApps.getMsg('Maze_capacity2').replace('%1', cap);
+    }
+  }
 };
 
 /**

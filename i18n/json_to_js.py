@@ -233,7 +233,7 @@ def main():
           '--messageFilePathFormat', args.output_dir + '{LOCALE}.xlf',
           '--outputPathFormat', args.output_dir + '{LOCALE}.js',
           '--srcs', args.template])
-      if len(processed_langs.length) == 1:
+      if len(processed_langs) == 1:
         print('Created ' + processed_lang_list + '.js in ' + args.output_dir)
       else:
         print('Created {' + processed_lang_list + '}.js in ' + args.output_dir)
