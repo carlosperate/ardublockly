@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-08-13 09:16:56.109713",
+        "lastupdated": "2013-08-13 10:38:54.013832",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -100,7 +100,7 @@
     "Puzzle.country4": "Brazil",
     "Puzzle.country4Language": "Portuguese",
     "Puzzle.country4City1": "Rio de Janeiro",
-    "Puzzle.country4City2": "S\u00e3o Paulo",
+    "Puzzle.country4City2": "São Paulo",
     "Puzzle.country4HelpUrl": "http://en.wikipedia.org/wiki/Brazil",
     "Puzzle.flag": "flag:",
     "Puzzle.language": "language:",
