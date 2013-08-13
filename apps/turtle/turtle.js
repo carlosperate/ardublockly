@@ -168,12 +168,15 @@ Turtle.display = function() {
   Turtle.ctxDisplay.globalCompositeOperation = 'source-over';
   // Draw the turtle.
   if (Turtle.visible) {
+    // Make the turtle the colour of the pen.
+    Turtle.ctxDisplay.strokeStyle = Turtle.ctxScratch.strokeStyle;
+    Turtle.ctxDisplay.fillStyle = Turtle.ctxScratch.fillStyle;
+
     // Draw the turtle body.
     var radius = Turtle.ctxScratch.lineWidth / 2 + 10;
     Turtle.ctxDisplay.beginPath();
     Turtle.ctxDisplay.arc(Turtle.x, Turtle.y, radius, 0, 2 * Math.PI, false);
     Turtle.ctxDisplay.lineWidth = 3;
-    Turtle.ctxDisplay.strokeStyle = '#339933';
     Turtle.ctxDisplay.stroke();
 
     // Draw the turtle head.
@@ -197,7 +200,6 @@ Turtle.display = function() {
     var rightX = Turtle.x + (radius + ARROW_TIP) * Math.sin(radians);
     var rightY = Turtle.y - (radius + ARROW_TIP) * Math.cos(radians);
     Turtle.ctxDisplay.beginPath();
-    Turtle.ctxDisplay.fillStyle = '#339933';
     Turtle.ctxDisplay.moveTo(tipX, tipY);
     Turtle.ctxDisplay.lineTo(leftX, leftY);
     Turtle.ctxDisplay.bezierCurveTo(leftControlX, leftControlY,
