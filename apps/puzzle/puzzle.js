@@ -192,23 +192,8 @@ Puzzle.init = function() {
   }
 };
 
-/**
- * Initialize Blockly for the help.  Called on page load.
- */
-Puzzle.initHelp = function() {
-  Blockly.inject(document.getElementById('blockly'),
-      {path: '../../',
-       readOnly: true,
-       rtl: Puzzle.RTL,
-       scrollbars: false});
-
-  // Add the blocks.
-  var xml = document.getElementById('blocks');
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-};
-
-if (window.location.pathname.match(/help.html$/)) {
-  window.addEventListener('load', Puzzle.initHelp);
+if (window.location.pathname.match(/readonly.html$/)) {
+  window.addEventListener('load', BlocklyApps.initReadonly);
 } else {
   window.addEventListener('load', Puzzle.init);
 }

@@ -518,7 +518,11 @@ Maze.init = function() {
   window.setTimeout(BlocklyApps.importPrettify, 1);
 };
 
-window.addEventListener('load', Maze.init);
+if (window.location.pathname.match(/readonly.html$/)) {
+  window.addEventListener('load', BlocklyApps.initReadonly);
+} else {
+  window.addEventListener('load', Maze.init);
+}
 
 /**
  * Reload with a different Pegman skin.
@@ -623,16 +627,7 @@ Maze.reset = function(first) {
 Maze.runButtonClick = function() {
   // Only allow a single top block on levels 1 and 2.
   if (Maze.LEVEL <= 2 && Blockly.mainWorkspace.getTopBlocks().length > 1) {
-    var origin = document.getElementById('runButton');
-    var content = document.getElementById('dialogOneTopBlock');
-    var style = {
-      width: '40%',
-      left: '30%',
-      top: '5em'
-    };
-    BlocklyApps.showDialog(content, origin, true, true, style,
-        BlocklyApps.stopDialogKeyDown);
-    BlocklyApps.startDialogKeyDown();
+    Maze.showOneTopBlock();
     return;
   }
   var runButton = document.getElementById('runButton');
@@ -646,6 +641,48 @@ Maze.runButtonClick = function() {
   Blockly.mainWorkspace.traceOn(true);
   Maze.reset(false);
   Maze.execute();
+};
+
+/**
+ * Show a dialog requiring that the user connect their blocks.
+ */
+Maze.showOneTopBlock = function() {
+  // Assemble the user's blocks in the likely intended order.
+  // Note: this code only works for simple statements.  Do not use on more
+  // complicated blocks such as 'while'.
+  var groups = Blockly.mainWorkspace.getTopBlocks(true);
+  for (var i = 0; i < groups.length; i++) {
+    groups[i] = Blockly.Xml.blockToDom_(groups[i]);
+  }
+  var xml = groups[0];
+  var cursor;
+  for (var i = 0; i < groups.length - 1; i++) {
+    var blocks = xml.getElementsByTagName('BLOCK');
+    if (blocks.length) {
+      cursor = blocks[blocks.length - 1];
+    } else {
+      cursor = xml;
+    }
+    var next = goog.dom.createDom('next', null, groups[i + 1]);
+    cursor.appendChild(next);
+  }
+  xml.setAttribute('x', 10);
+  xml.setAttribute('y', 10);
+  xml = Blockly.Xml.domToText(xml);
+
+  var iframe = document.getElementById('iframeOneTopBlock');
+  iframe.src = 'readonly.html?lang=' + encodeURIComponent(BlocklyApps.LANG) +
+      '&xml=' + encodeURIComponent(xml);
+  var origin = document.getElementById('runButton');
+  var content = document.getElementById('dialogOneTopBlock');
+  var style = {
+    width: '40%',
+    left: '30%',
+    top: '5em'
+  };
+  BlocklyApps.showDialog(content, origin, true, true, style,
+      BlocklyApps.stopDialogKeyDown);
+  BlocklyApps.startDialogKeyDown();
 };
 
 /**

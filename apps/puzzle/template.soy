@@ -226,7 +226,7 @@
         For each country (green), attach its flag, choose its language, and make a stack of its cities.
       {/msg}
     </div>
-    <iframe src="help.html?lang={$ij.lang}" style="height: 200px; width: 100%; border: none;"></iframe>
+    <iframe style="height: 200px; width: 100%; border: none;" src="readonly.html?lang={$ij.lang}&xml=%3Cblock+type%3D%22country%22+x%3D%225%22+y%3D%225%22%3E%3Cmutation+country%3D%221%22%3E%3C%2Fmutation%3E%3Ctitle+name%3D%22LANG%22%3E1%3C%2Ftitle%3E%3Cvalue+name%3D%22FLAG%22%3E%3Cblock+type%3D%22flag%22%3E%3Cmutation+country%3D%221%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cstatement+name%3D%22CITIES%22%3E%3Cblock+type%3D%22city%22%3E%3Cmutation+country%3D%221%22+city%3D%222%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock+type%3D%22city%22%3E%3Cmutation+country%3D%221%22+city%3D%221%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E"></iframe>
     {call apps.ok /}
   </div>
   <div id="answers" class="dialogHiddenContent">
@@ -238,9 +238,9 @@
 {/template}
 
 /**
- * Help iframe structure.
+ * Readonly Blockly in an iframe.
  */
-{template .help}
+{template .readonly}
   {call .messages /}
 
   <script type="text/javascript" src="../../blockly_compressed.js"></script>

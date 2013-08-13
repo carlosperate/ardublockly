@@ -77,6 +77,12 @@ pre {
   overflow: auto;
   max-height: 400px;
 }
+#iframeOneTopBlock {
+  height: 150px;
+  width: 100%;
+  border: none;
+  margin-bottom: -6ex;
+}
 
 /* 'Look' icon */
 #look>path {

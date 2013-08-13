@@ -161,6 +161,7 @@
   </div>
   <div id="dialogOneTopBlock" class="dialogHiddenContent">
     <div>{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</div>
+    <iframe id="iframeOneTopBlock" src=""></iframe>
     {call apps.ok /}
   </div>
 {/template}
@@ -185,4 +186,16 @@
       {/if}
     {/if}
   </xml>
+{/template}
+
+/**
+ * Readonly Blockly in an iframe.
+ */
+{template .readonly}
+  {call .messages /}
+
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../{$ij.langSrc}"></script>
+  <script type="text/javascript" src="blocks.js"></script>
+  <div id="blockly"></div>
 {/template}

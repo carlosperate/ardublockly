@@ -163,6 +163,25 @@ BlocklyApps.init = function() {
 };
 
 /**
+ * Initialize Blockly for a readonly iframe.  Called on page load.
+ * XML argument may be generated from the console with:
+ * encodeURIComponent(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)).slice(5, -6))
+ */
+BlocklyApps.initReadonly = function() {
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       readOnly: true,
+       rtl: rtl,
+       scrollbars: false});
+
+  // Add the blocks.
+  var xml = BlocklyApps.getStringParamFromUrl('xml', '');
+  xml = Blockly.Xml.textToDom('<xml>' + xml + '</xml>');
+  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+};
+
+/**
  * Load blocks saved on App Engine Storage or in session/local storage.
  * @param {string} defaultXml Text representation of default blocks.
  */
