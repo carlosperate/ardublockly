@@ -13,17 +13,12 @@
  * Translated messages for use in JavaScript.
  */
 {template .messages}
+  {call apps.messages /}
   <div style="display: none">
-    // Common messages.  So is Apps.blocklyMessage, which appears later.
-    <span id="httpRequestError">{msg meaning="Apps.httpRequestError" desc="IBID"}There was a problem with the request.{/msg}</span>
-    <span id="linkAlert">{msg meaning="Apps.linkAlert" desc="IBID"}Share your blocks with this link:\n\n%1{/msg}</span>
-    <span id="hashError">{msg meaning="Apps.hashError" desc="IBID"}Sorry, '%1' doesn't correspond with any saved program.{/msg}</span>
-    <span id="xmlError">{msg meaning="Apps.xmlError" desc="IBID"}Could not load your saved file.  Perhaps it was created with a different version of Blockly?{/msg}</span>
-
-    <span id="badXml">{msg meaning="Code.badXml" desc="alert - Message shown when the user tries switching from the XML tab after entering XML text that could not be parsed.  This asks whether they wish to abandon the XML they added.  If they select 'OK' (or the translated equivalent), the XML is cleared, and the other tab is shown.  If they select 'Cancel', they remain on the XML tab with the bad XML."}Error parsing XML:\n%1\n\nAbandon changes?{/msg}</span>
-    <span id="badCode">{msg meaning="Code.badCode" desc="alert - Message shown if an error occurs while interpreting the user program.  The error description follows."}Program error:\n%1{/msg}</span>
-    <span id="timeout">{msg meaning="Code.timeout" desc="alert - Message shown if the program has run for more than the permitted number of steps.  This exists so that programs with infinite loops do not run forever."}Maximum execution iterations exceeded.{/msg}</span>
-    <span id="discard">{msg meaning="Code.discard" desc="alert - Message shown after the user clicks on the 'discard all' icon.  Selecting 'OK' (or the translated equivalent) causes all of the blocks to be discarded.  Selecting 'Cancel' prevents blocks from being deleted."}Delete all %1 blocks?{/msg}</span>
+    <span id="Code_badXml">{msg meaning="Code.badXml" desc="alert - Message shown when the user tries switching from the XML tab after entering XML text that could not be parsed.  This asks whether they wish to abandon the XML they added.  If they select 'OK' (or the translated equivalent), the XML is cleared, and the other tab is shown.  If they select 'Cancel', they remain on the XML tab with the bad XML."}Error parsing XML:\n%1\n\nAbandon changes?{/msg}</span>
+    <span id="Code_badCode">{msg meaning="Code.badCode" desc="alert - Message shown if an error occurs while interpreting the user program.  The error description follows."}Program error:\n%1{/msg}</span>
+    <span id="Code_timeout">{msg meaning="Code.timeout" desc="alert - Message shown if the program has run for more than the permitted number of steps.  This exists so that programs with infinite loops do not run forever."}Maximum execution iterations exceeded.{/msg}</span>
+    <span id="Code_discard">{msg meaning="Code.discard" desc="alert - Message shown after the user clicks on the 'discard all' icon.  Selecting 'OK' (or the translated equivalent) causes all of the blocks to be discarded.  Selecting 'Cancel' prevents blocks from being deleted."}Delete all %1 blocks?{/msg}</span>
   </div>
 {/template}
 

@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">a visual programming environment</span><span id="linkButton">Gem og link til blokke.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Kør Program</span><span id="resetProgram">Nulstil</span><span id="codeTooltip">Se den genererede JavaScript kode.</span><span id="linkButton">Gem og link til blokke.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Der var et problem med forespørgslen.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Del dine blokke med dette link:\n\n%1</span><span id="hashError">Beklager, \'%1\' passer ikke med nogen gemt Blockly fil.</span><span id="xmlError">Kunne ikke hente din gemte fil.  Måske er den lavet med en anden udgave af Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">a visual programming environment</span><span id="linkButton">Gem og link til blokke.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Kør Program</span><span id="resetProgram">Nulstil</span><span id="codeTooltip">Se den genererede JavaScript kode.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Der var et problem med forespørgslen.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Del dine blokke med dette link:\n\n%1</span><span id="hashError">Beklager, \'%1\' passer ikke med nogen gemt Blockly fil.</span><span id="xmlError">Kunne ikke hente din gemte fil.  Måske er den lavet med en anden udgave af Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -26,7 +26,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Der var et problem med forespørgslen.</span><span id="linkAlert">Del dine blokke med dette link:\n\n%1</span><span id="hashError">Beklager, \'%1\' passer ikke med nogen gemt Blockly fil.</span><span id="xmlError">Kunne ikke hente din gemte fil.  Måske er den lavet med en anden udgave af Blockly?</span><span id="badXml">Error parsing XML:\\n%1\\n\\nAbandon changes?</span><span id="badCode">Program error:\\n%1</span><span id="timeout">Maximum execution iterations exceeded.</span><span id="discard">Delete all %1 blocks?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Error parsing XML:\\n%1\\n\\nAbandon changes?</span><span id="Code_badCode">Program error:\\n%1</span><span id="Code_timeout">Maximum execution iterations exceeded.</span><span id="Code_discard">Delete all %1 blocks?</span></div>';
 };
 
 

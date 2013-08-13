@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">een visuele programmeeromgeving</span><span id="linkButton">Bewaar en verwijs naar blokken.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Test programma</span><span id="resetProgram">Opnieuw</span><span id="codeTooltip">Bekijk de gegenereerde JavaScript code.</span><span id="linkButton">Bewaar en verwijs naar blokken.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Er was een probleem met de aanvraag.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Deel je oplossing via deze link:\n\n%1</span><span id="hashError">Sorry, \'%1\' Komt niet overeen met opgeslagen instructies.</span><span id="xmlError">Kon je bewaarde instructies niet opladen.  Misschien waren ze gemaakt met een andere versie van Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">een visuele programmeeromgeving</span><span id="linkButton">Bewaar en verwijs naar blokken.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Test programma</span><span id="resetProgram">Opnieuw</span><span id="codeTooltip">Bekijk de gegenereerde JavaScript code.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Er was een probleem met de aanvraag.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Deel je oplossing via deze link:\n\n%1</span><span id="hashError">Sorry, \'%1\' Komt niet overeen met opgeslagen instructies.</span><span id="xmlError">Kon je bewaarde instructies niet opladen.  Misschien waren ze gemaakt met een andere versie van Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -26,7 +26,7 @@ if (typeof graphpage == 'undefined') { var graphpage = {}; }
 
 
 graphpage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Er was een probleem met de aanvraag.</span><span id="linkAlert">Deel je oplossing via deze link:\n\n%1</span><span id="hashError">Sorry, \'%1\' Komt niet overeen met opgeslagen instructies.</span><span id="xmlError">Kon je bewaarde instructies niet opladen.  Misschien waren ze gemaakt met een andere versie van Blockly?</span></div>';
+  return apps.messages(null, null, opt_ijData);
 };
 
 

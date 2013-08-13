@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">visuelle programmierumgebung</span><span id="linkButton">Blöcke abspeichern und Link erzeugen.</span><span id="runTooltip">Programm ausführen.</span><span id="runProgram">Programm ausführen</span><span id="resetProgram">Zurücksetzen</span><span id="codeTooltip">Erzeugten JavaScript Code anzeigen.</span><span id="linkButton">Blöcke abspeichern und Link erzeugen.</span><span id="catLogic">Logik</span><span id="catLoops">Loops</span><span id="catMath">Mathe</span><span id="catText">Text</span><span id="catLists">Listen</span><span id="catColour">Farben</span><span id="catVariables">Variablen</span><span id="catProcedures">Funktionen</span><span id="httpRequestError">Es gab ein Problem während der HTTP Anfrage.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Blöcke mit diesem Link teilen:\n\n%1</span><span id="hashError">Entschuldigung, konnte die gespeicherten Blöcke für \'%1\' nicht finden.</span><span id="xmlError">Kann Sicherungsdatei nicht laden.  Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?</span><span id="listVariable">liste</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">visuelle programmierumgebung</span><span id="linkButton">Blöcke abspeichern und Link erzeugen.</span><span id="runTooltip">Programm ausführen.</span><span id="runProgram">Programm ausführen</span><span id="resetProgram">Zurücksetzen</span><span id="codeTooltip">Erzeugten JavaScript Code anzeigen.</span><span id="catLogic">Logik</span><span id="catLoops">Loops</span><span id="catMath">Mathe</span><span id="catText">Text</span><span id="catLists">Listen</span><span id="catColour">Farben</span><span id="catVariables">Variablen</span><span id="catProcedures">Funktionen</span><span id="httpRequestError">Es gab ein Problem während der HTTP Anfrage.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Blöcke mit diesem Link teilen:\n\n%1</span><span id="hashError">Entschuldigung, konnte die gespeicherten Blöcke für \'%1\' nicht finden.</span><span id="xmlError">Kann Sicherungsdatei nicht laden.  Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?</span><span id="listVariable">liste</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -15,7 +15,7 @@ apps.dialog = function(opt_data, opt_ignored, opt_ijData) {
 
 
 apps.ok = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">OK</button></div>';
+  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">Okay</button></div>';
 };
 
 ;
@@ -26,7 +26,7 @@ if (typeof graphpage == 'undefined') { var graphpage = {}; }
 
 
 graphpage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Es gab ein Problem während der HTTP Anfrage.</span><span id="linkAlert">Blöcke mit diesem Link teilen:\n\n%1</span><span id="hashError">Entschuldigung, konnte die gespeicherten Blöcke für \'%1\' nicht finden.</span><span id="xmlError">Kann Sicherungsdatei nicht laden.  Diese wurde vermutlich mit einer veralteten Version von Blockly erstellt?</span></div>';
+  return apps.messages(null, null, opt_ijData);
 };
 
 

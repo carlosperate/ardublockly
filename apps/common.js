@@ -266,18 +266,21 @@ BlocklyApps.checkTimeout = function(opt_id) {
 
 /**
  * Is the dialog currently onscreen?
+ * @private
  */
 BlocklyApps.isDialogVisible_ = false;
 
 /**
  * A closing dialog should animate towards this element.
  * @type Element
+ * @private
  */
 BlocklyApps.dialogOrigin_ = null;
 
 /**
  * A function to call when a dialog closes.
  * @type Function
+ * @private
  */
 BlocklyApps.dialogDispose_ = null;
 
@@ -426,6 +429,8 @@ BlocklyApps.stripCode = function(code) {
 
 /**
  * Show the user's code in raw JavaScript.
+ * @param {Element} origin Animate the dialog opening/closing from/to this
+ *     DOM element.  If null, don't show any animations for opening or closing.
  */
 BlocklyApps.showCode = function(origin) {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
@@ -487,7 +492,7 @@ BlocklyApps.stopDialogKeyDown = function() {
  *     or an error message if the element was not found.
  */
 BlocklyApps.getMsg = function(key) {
-  var msg = BlocklyApps.getMsgOrNull(key)
+  var msg = BlocklyApps.getMsgOrNull(key);
   return msg === null ? '[Unknown message: ' + key + ']' : msg;
 };
 

@@ -13,7 +13,7 @@
 	"Puzzle.country3Language": "Κινεζικά",
 	"Puzzle.checkAnswers": "Έλεγξε τις απαντήσεις",
 	"Apps.linkAlert": "Μοιράσου τα blocks σου με αυτό το σύνδεσμο:\n\n%1",
-	"Puzzle.helpOk": "ΟΚ",
+	"Apps.dialogOk": "ΟΚ",
 	"Puzzle.title": "Παζλ",
 	"Maze.doCode": "κάνε",
 	"Maze.oneTopBlock": "Σε αυτό το επίπεδο, πρέπει να στοιβάξεις όλα τα blocks στο λευκό χώρο εργασίας.",

@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">vizuāla programmēšanas vide</span><span id="linkButton">Saglamāt un piesaistīt blokiem.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Izpildīt programmu</span><span id="resetProgram">Sākt no sākuma</span><span id="codeTooltip">Apskatīt ģenerēto JavaScript pirmkodu.</span><span id="linkButton">Saglamāt un piesaistīt blokiem.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Pieprasījuma kļūda.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Dalies ar saviem blokiem ar šo saiti:\n\n%1</span><span id="hashError">Atvaino, bet \'%1\' neatbilst nevienam saglabātajam bloku failam.</span><span id="xmlError">Nevaru ielādēt tavu saglabāto failu.  Iespējams, tas tika izveidots ar citu Blockly versiju?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">vizuāla programmēšanas vide</span><span id="linkButton">Saglamāt un piesaistīt blokiem.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Izpildīt programmu</span><span id="resetProgram">Sākt no sākuma</span><span id="codeTooltip">Apskatīt ģenerēto JavaScript pirmkodu.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Pieprasījuma kļūda.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Dalies ar saviem blokiem ar šo saiti:\n\n%1</span><span id="hashError">Atvaino, bet \'%1\' neatbilst nevienam saglabātajam bloku failam.</span><span id="xmlError">Nevaru ielādēt tavu saglabāto failu.  Iespējams, tas tika izveidots ar citu Blockly versiju?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -15,7 +15,7 @@ apps.dialog = function(opt_data, opt_ignored, opt_ijData) {
 
 
 apps.ok = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">OK</button></div>';
+  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">Labi</button></div>';
 };
 
 ;
@@ -26,7 +26,7 @@ if (typeof graphpage == 'undefined') { var graphpage = {}; }
 
 
 graphpage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Pieprasījuma kļūda.</span><span id="linkAlert">Dalies ar saviem blokiem ar šo saiti:\n\n%1</span><span id="hashError">Atvaino, bet \'%1\' neatbilst nevienam saglabātajam bloku failam.</span><span id="xmlError">Nevaru ielādēt tavu saglabāto failu.  Iespējams, tas tika izveidots ar citu Blockly versiju?</span></div>';
+  return apps.messages(null, null, opt_ijData);
 };
 
 

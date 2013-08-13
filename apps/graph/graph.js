@@ -98,6 +98,7 @@ window.addEventListener('load', Graph.init);
 /**
  * Cached copy of the function string.
  * @type !string
+ * @private
  */
 Graph.oldFormula_ = null;
 

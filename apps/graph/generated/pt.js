@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">a visual programming environment</span><span id="linkButton">Salva conexão com o blockly.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Executar programa</span><span id="resetProgram">Reiniciar</span><span id="codeTooltip">Veja o código JavaScript gerado.</span><span id="linkButton">Salva conexão com o blockly.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Houve um problema com a solicitação.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Compartilhe os seus blocos com este link:\n\n%1</span><span id="hashError">Desculpe, \'%1\' não corresponde a um blockly salvo.</span><span id="xmlError">Não foi possível ler o seu arquivo salvo.  Talvez ele tenha sido gerado por uma versão antiga do Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">a visual programming environment</span><span id="linkButton">Salva conexão com o blockly.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Executar programa</span><span id="resetProgram">Reiniciar</span><span id="codeTooltip">Veja o código JavaScript gerado.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Houve um problema com a solicitação.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Compartilhe os seus blocos com este link:\n\n%1</span><span id="hashError">Desculpe, \'%1\' não corresponde a um blockly salvo.</span><span id="xmlError">Não foi possível ler o seu arquivo salvo.  Talvez ele tenha sido gerado por uma versão antiga do Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -26,7 +26,7 @@ if (typeof graphpage == 'undefined') { var graphpage = {}; }
 
 
 graphpage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Houve um problema com a solicitação.</span><span id="linkAlert">Compartilhe os seus blocos com este link:\n\n%1</span><span id="hashError">Desculpe, \'%1\' não corresponde a um blockly salvo.</span><span id="xmlError">Não foi possível ler o seu arquivo salvo.  Talvez ele tenha sido gerado por uma versão antiga do Blockly?</span></div>';
+  return apps.messages(null, null, opt_ijData);
 };
 
 

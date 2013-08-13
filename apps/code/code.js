@@ -58,7 +58,7 @@ function tabClick(id) {
       xmlDom = Blockly.Xml.textToDom(xmlText);
     } catch (e) {
       var q =
-          window.confirm(BlocklyApps.getMsg('badXml').replace('%1', e));
+          window.confirm(BlocklyApps.getMsg('Code_badXml').replace('%1', e));
       if (!q) {
         // Leave the user on the XML tab.
         return;
@@ -159,7 +159,7 @@ function runJS() {
   var timeouts = 0;
   var checkTimeout = function() {
     if (timeouts++ > 1000000) {
-      throw BlocklyApps.getMsg('timeout');
+      throw BlocklyApps.getMsg('Code_timeout');
     }
   };
   var code = Blockly.Generator.workspaceToCode('JavaScript');
@@ -167,7 +167,7 @@ function runJS() {
   try {
     eval(code);
   } catch (e) {
-    alert(BlocklyApps.getMsg('badCode').replace('%1', e));
+    alert(BlocklyApps.getMsg('Code_badCode').replace('%1', e));
   }
 }
 
@@ -177,7 +177,7 @@ function runJS() {
 function discard() {
   var count = Blockly.mainWorkspace.getAllBlocks().length;
   if (count < 2 ||
-      window.confirm(BlocklyApps.getMsg('discard').replace('%1', count))) {
+      window.confirm(BlocklyApps.getMsg('Code_discard').replace('%1', count))) {
     Blockly.mainWorkspace.clear();
     window.location.hash = '';
   }

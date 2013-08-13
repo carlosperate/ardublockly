@@ -13,51 +13,46 @@
  * Translated messages for use in JavaScript.
  */
 {template .messages}
+  {call apps.messages /}
   <div style="display: none">
-    // Common messages.  So is Apps.blocklyMessage, which appears later.
-    <span id="httpRequestError">{msg meaning="Apps.httpRequestError" desc="IBID"}There was a problem with the request.{/msg}</span>
-    <span id="linkAlert">{msg meaning="Apps.linkAlert" desc="IBID"}Share your blocks with this link:\n\n%1{/msg}</span>
-    <span id="hashError">{msg meaning="Apps.hashError" desc="IBID"}Sorry, '%1' doesn't correspond with any saved program.{/msg}</span>
-    <span id="xmlError">{msg meaning="Apps.xmlError" desc="IBID"}Could not load your saved file.  Perhaps it was created with a different version of Blockly?{/msg}</span>
-
     // Block text and their associated tooltips and URLs (interleaved to
     // assist with translation).
-    <span id="moveTooltip">{msg meaning="Turtle.moveTooltip" desc="tooltip - In this and subsequent messages, 'turtle' refers to a stylized turtle on the screen to represent a position and direction.  This imaginary turtle is carrying a pen in its tail, so moving the turtle draws a line (or curve, etc.).  You are encouraged to play with the [https://blockly-demo.appspot.com/static/apps/turtle/index.html Turtle application] before doing this translation."}Moves the turtle forward or backward by the specified amount.{/msg}</span>
-    <span id="moveForward">{msg meaning="Turtle.moveForward" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of a verb telling a turtle to move (walk) in the direction he/she is facing.  This is followed by a number indicating how far (how many pixels) to go.  Prefer a translation that has text in common with the translation of 'move backward'.  See [[Translating:Blockly#Drop-Down_Menus]]."}move forward by{/msg}</span>
-    <span id="moveBackward">{msg meaning="Turtle.moveBackward" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of a verb telling a turtle to move (walk) in the direction opposite to where he/she is facing.  This is followed by a number indicating how far (how many pixels) to go.  Prefer a translation that has text in common with the translation of 'move forward'."}move backward by{/msg}</span>
+    <span id="Turtle_moveTooltip">{msg meaning="Turtle.moveTooltip" desc="tooltip - In this and subsequent messages, 'turtle' refers to a stylized turtle on the screen to represent a position and direction.  This imaginary turtle is carrying a pen in its tail, so moving the turtle draws a line (or curve, etc.).  You are encouraged to play with the [https://blockly-demo.appspot.com/static/apps/turtle/index.html Turtle application] before doing this translation."}Moves the turtle forward or backward by the specified amount.{/msg}</span>
+    <span id="Turtle_moveForward">{msg meaning="Turtle.moveForward" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of a verb telling a turtle to move (walk) in the direction he/she is facing.  This is followed by a number indicating how far (how many pixels) to go.  Prefer a translation that has text in common with the translation of 'move backward'.  See [[Translating:Blockly#Drop-Down_Menus]]."}move forward by{/msg}</span>
+    <span id="Turtle_moveBackward">{msg meaning="Turtle.moveBackward" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of a verb telling a turtle to move (walk) in the direction opposite to where he/she is facing.  This is followed by a number indicating how far (how many pixels) to go.  Prefer a translation that has text in common with the translation of 'move forward'."}move backward by{/msg}</span>
 
-    <span id="turnTooltip">{msg meaning="Turtle.turnTooltip" desc="'Left' means counter-clockwise/anti-clockwise, and 'right' means clockwise."}Turns the turtle left or right by the specified number of degrees.{/msg}</span>
-    <span id="turnRight">{msg meaning="Turtle.turnRight" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of verb telling a turtle to rotate clockwise.  This is followed by a number indicating how far (how many degrees) to turn.  Prefer a translation that has text in common with the translation of 'turn left by'."}turn right by{/msg}</span>
-    <span id="turnLeft">{msg meaning="Turtle.turnLeft" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of verb telling a turtle to rotate counter-clockwise (anti-clockwise).  This is followed by a number indicating how far (how many degrees) to turn.  Prefer a translation that has text in common with the translation of 'turn right by'."}turn left by{/msg}</span>
+    <span id="Turtle_turnTooltip">{msg meaning="Turtle.turnTooltip" desc="'Left' means counter-clockwise/anti-clockwise, and 'right' means clockwise."}Turns the turtle left or right by the specified number of degrees.{/msg}</span>
+    <span id="Turtle_turnRight">{msg meaning="Turtle.turnRight" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of verb telling a turtle to rotate clockwise.  This is followed by a number indicating how far (how many degrees) to turn.  Prefer a translation that has text in common with the translation of 'turn left by'."}turn right by{/msg}</span>
+    <span id="Turtle_turnLeft">{msg meaning="Turtle.turnLeft" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Infinitive or imperative of verb telling a turtle to rotate counter-clockwise (anti-clockwise).  This is followed by a number indicating how far (how many degrees) to turn.  Prefer a translation that has text in common with the translation of 'turn right by'."}turn left by{/msg}</span>
 
-    <span id="widthTooltip">{msg meaning="Turtle.widthTooltip" desc="tooltip"}Changes the width of the pen.{/msg}</span>
-    <span id="setWidth">{msg meaning="Turtle.setWidth" desc="block text - Infinitive or imperative of a verb to set the width of the lines that should be drawn in the future by an imaginary pen.  This is followed by a number indicating the width in pixels (1 or greater)."}set width to{/msg}</span>
+    <span id="Turtle_widthTooltip">{msg meaning="Turtle.widthTooltip" desc="tooltip"}Changes the width of the pen.{/msg}</span>
+    <span id="Turtle_setWidth">{msg meaning="Turtle.setWidth" desc="block text - Infinitive or imperative of a verb to set the width of the lines that should be drawn in the future by an imaginary pen.  This is followed by a number indicating the width in pixels (1 or greater)."}set width to{/msg}</span>
 
-    <span id="colourTooltip">{msg meaning="Turtle.colourTooltip" desc="tooltip - Changes the colour of ink in the pen carried by the turtle."}Changes the colour of the pen.{/msg}</span>
-    <span id="setColour">{msg meaning="Turtle.setColour" desc="block text - Infinitive or imperative of a verb to specify the colour of the lines that should be drawn in the future by an imaginary pen.  This is followed by a block showing the colour"}set colour to{/msg}</span>
+    <span id="Turtle_colourTooltip">{msg meaning="Turtle.colourTooltip" desc="tooltip - Changes the colour of ink in the pen carried by the turtle."}Changes the colour of the pen.{/msg}</span>
+    <span id="Turtle_setColour">{msg meaning="Turtle.setColour" desc="block text - Infinitive or imperative of a verb to specify the colour of the lines that should be drawn in the future by an imaginary pen.  This is followed by a block showing the colour"}set colour to{/msg}</span>
 
-    <span id="penTooltip">{msg meaning="Turtle.penTooltip" desc="tooltip - Lifting the pen off the writing surface prevents anything from being drawn.  Lowering it (after it has been lifted) enables it to draw again."}Lifts or lowers the pen, to stop or start drawing.{/msg}</span>
-    <span id="penUp">{msg meaning="Turtle.penUp" desc="block text - Infinitive or imperative of a verb to lift up a pen so that moving it leaves no mark on the writing surface."}pen up{/msg}</span>
-    <span id="penDown">{msg meaning="Turtle.penDown" desc="block text - Infinitive or imperative of a verb to lower a raised pen so that moving it leaves a mark on the writing surface."}pen down{/msg}</span>
+    <span id="Turtle_penTooltip">{msg meaning="Turtle.penTooltip" desc="tooltip - Lifting the pen off the writing surface prevents anything from being drawn.  Lowering it (after it has been lifted) enables it to draw again."}Lifts or lowers the pen, to stop or start drawing.{/msg}</span>
+    <span id="Turtle_penUp">{msg meaning="Turtle.penUp" desc="block text - Infinitive or imperative of a verb to lift up a pen so that moving it leaves no mark on the writing surface."}pen up{/msg}</span>
+    <span id="Turtle_penDown">{msg meaning="Turtle.penDown" desc="block text - Infinitive or imperative of a verb to lower a raised pen so that moving it leaves a mark on the writing surface."}pen down{/msg}</span>
 
-    <span id="turtleVisibilityTooltip">{msg meaning="Turtle.turtleVisibilityTooltip" desc="tooltip"}Makes the turtle (green circle and arrow) visible or invisible.{/msg}</span>
-    <span id="hideTurtle">{msg meaning="Turtle.hideTurtle" desc="block text - Infinitive or imperative of a verb telling a turtle to hide itself (become invisible)."}hide turtle{/msg}</span>
-    <span id="showTurtle">{msg meaning="Turtle.showTurtle" desc="block text - Infinitive or imperative of a verb telling a turtle to show itself (become visible after having been invisible)."}show turtle{/msg}</span>
+    <span id="Turtle_turtleVisibilityTooltip">{msg meaning="Turtle.turtleVisibilityTooltip" desc="tooltip"}Makes the turtle (green circle and arrow) visible or invisible.{/msg}</span>
+    <span id="Turtle_hideTurtle">{msg meaning="Turtle.hideTurtle" desc="block text - Infinitive or imperative of a verb telling a turtle to hide itself (become invisible)."}hide turtle{/msg}</span>
+    <span id="Turtle_showTurtle">{msg meaning="Turtle.showTurtle" desc="block text - Infinitive or imperative of a verb telling a turtle to show itself (become visible after having been invisible)."}show turtle{/msg}</span>
 
-    <span id="printHelpUrl">{msg meaning="Turtle.printHelpUrl" desc="URL - Information about printing or typography."}http://en.wikipedia.org/wiki/Printing{/msg}</span>
-    <span id="printTooltip">{msg meaning="Turtle.printTooltip" desc="tooltip - Note that 'print' refers to displaying text on the screen, not on an external printer."}Draws text in the turtle's direction at its location.{/msg}</span>
-    <span id="print">{msg meaning="Turtle.print" desc="block text - Infinitive or imperative of a verb telling a turtle to display text on the screen.  This is always followed by a block indicating what should be printed."}print{/msg}</span>
+    <span id="Turtle_printHelpUrl">{msg meaning="Turtle.printHelpUrl" desc="URL - Information about printing or typography."}http://en.wikipedia.org/wiki/Printing{/msg}</span>
+    <span id="Turtle_printTooltip">{msg meaning="Turtle.printTooltip" desc="tooltip - Note that 'print' refers to displaying text on the screen, not on an external printer."}Draws text in the turtle's direction at its location.{/msg}</span>
+    <span id="Turtle_print">{msg meaning="Turtle.print" desc="block text - Infinitive or imperative of a verb telling a turtle to display text on the screen.  This is always followed by a block indicating what should be printed."}print{/msg}</span>
 
-    <span id="fontHelpUrl">{msg meaning="Turtle.fontHelpUrl" desc="URL - Information about typographic fonts."}http://en.wikipedia.org/wiki/Font{/msg}</span>
-    <span id="fontTooltip">{msg meaning="Turtle.fontTooltip" desc="tooltip - This is shown on the block that lets the user specify the font [family], size, and style that should be used for subsequent displays of text."}Sets the font used by the print block.{/msg}</span>
-    <span id="font">{msg meaning="Turtle.font" desc="block text - This precedes a dropdown menu specifying the typographic font [family] that should be used when displaying text."}font{/msg}</span>
-    <span id="fontSize">{msg meaning="Turtle.fontSize" desc="block text - This precedes a number specifying the size of the typographic font that should be used when displaying text.  This appears in the same block as 'font', so that word should not be repeated."}font size{/msg}</span>
-    <span id="fontNormal">{msg meaning="Turtle.fontNormal" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be normal (neither in italics or bold)."}normal{/msg}</span>
-    <span id="fontBold">{msg meaning="Turtle.fontBold" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be [http://en.wikipedia.org/wiki/Emphasis_(typography) bold]."}bold{/msg}</span>
-    <span id="fontItalic">{msg meaning="Turtle.fontItalic" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be [http://en.wikipedia.org/wiki/Italics italic]."}italic{/msg}</span>
+    <span id="Turtle_fontHelpUrl">{msg meaning="Turtle.fontHelpUrl" desc="URL - Information about typographic fonts."}http://en.wikipedia.org/wiki/Font{/msg}</span>
+    <span id="Turtle_fontTooltip">{msg meaning="Turtle.fontTooltip" desc="tooltip - This is shown on the block that lets the user specify the font [family], size, and style that should be used for subsequent displays of text."}Sets the font used by the print block.{/msg}</span>
+    <span id="Turtle_font">{msg meaning="Turtle.font" desc="block text - This precedes a dropdown menu specifying the typographic font [family] that should be used when displaying text."}font{/msg}</span>
+    <span id="Turtle_fontSize">{msg meaning="Turtle.fontSize" desc="block text - This precedes a number specifying the size of the typographic font that should be used when displaying text.  This appears in the same block as 'font', so that word should not be repeated."}font size{/msg}</span>
+    <span id="Turtle_fontNormal">{msg meaning="Turtle.fontNormal" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be normal (neither in italics or bold)."}normal{/msg}</span>
+    <span id="Turtle_fontBold">{msg meaning="Turtle.fontBold" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be [http://en.wikipedia.org/wiki/Emphasis_(typography) bold]."}bold{/msg}</span>
+    <span id="Turtle_fontItalic">{msg meaning="Turtle.fontItalic" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Specifies that a typographic font should be [http://en.wikipedia.org/wiki/Italics italic]."}italic{/msg}</span>
 
     // Misc text.
-    <span id="unloadWarning">{msg meaning="Turtle.unloadWarning" desc="alert - This is shown if the user attempts to close the browser tab containing the page or navigate to a different page to prevent them from accidentally losing their program in progress."}Leaving this page will result in the loss of your work.{/msg}</span>
+    <span id="Turtle_unloadWarning">{msg meaning="Turtle.unloadWarning" desc="alert - This is shown if the user attempts to close the browser tab containing the page or navigate to a different page to prevent them from accidentally losing their program in progress."}Leaving this page will result in the loss of your work.{/msg}</span>
   </div>
 {/template}
 

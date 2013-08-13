@@ -47,7 +47,7 @@ BlocklyApps.LANGUAGES = {
   fi: ['Suomi', 'ltr', 'en_compressed.js'],
   fo: ['Føroyskt', 'ltr', 'en_compressed.js'],
   fr: ['Français', 'ltr', 'en_compressed.js'],
-  frr: ['Frasch', 'ltr',  'de_compressed.js'],
+  frr: ['Frasch', 'ltr', 'de_compressed.js'],
   gl: ['Galego', 'ltr', 'en_compressed.js'],
   hak: ['客家話', 'ltr', 'en_compressed.js'],
   he: ['עברית', 'rtl', 'en_compressed.js'],
@@ -126,7 +126,7 @@ Puzzle.init = function() {
     var blocksFlags = [];
     var blocksCities = [];
     var i = 1;
-    while (BlocklyApps.getMsgOrNull('country' + i)) {
+    while (BlocklyApps.getMsgOrNull('Puzzle_country' + i)) {
       var block = new Blockly.Block(Blockly.mainWorkspace, 'country');
       block.populate(i);
       blocksCountries.push(block);
@@ -134,7 +134,7 @@ Puzzle.init = function() {
       block.populate(i);
       blocksFlags.push(block);
       var j = 1;
-      while (BlocklyApps.getMsgOrNull('country' + i + 'City' + j)) {
+      while (BlocklyApps.getMsgOrNull('Puzzle_country' + i + 'City' + j)) {
         var block = new Blockly.Block(Blockly.mainWorkspace, 'city');
         block.populate(i, j);
         blocksCities.push(block);
@@ -236,10 +236,10 @@ Puzzle.shuffle = function(arr) {
  *   language-neutral tuples.
  */
 Puzzle.languages = function() {
-  var list = [[BlocklyApps.getMsg('languageChoose'), '0']];
+  var list = [[BlocklyApps.getMsg('Puzzle_languageChoose'), '0']];
   var i = 1;
   var lang;
-  while (lang = BlocklyApps.getMsgOrNull('country' + i + 'Language')) {
+  while (lang = BlocklyApps.getMsgOrNull('Puzzle_country' + i + 'Language')) {
     list[i] = [lang, String(i)];
     i++;
   }
@@ -268,13 +268,14 @@ Puzzle.checkAnswers = function() {
 
   var messages;
   if (errors == 1) {
-    messages = [BlocklyApps.getMsg('error1'),
-                BlocklyApps.getMsg('tryAgain')];
+    messages = [BlocklyApps.getMsg('Puzzle_error1'),
+                BlocklyApps.getMsg('Puzzle_tryAgain')];
   } else if (errors) {
-    messages = [BlocklyApps.getMsg('error2').replace('%1', errors),
-                BlocklyApps.getMsg('tryAgain')];
+    messages = [BlocklyApps.getMsg('Puzzle_error2').replace('%1', errors),
+                BlocklyApps.getMsg('Puzzle_tryAgain')];
   } else {
-    messages = [BlocklyApps.getMsg('error0').replace('%1', blocks.length)];
+    messages = [BlocklyApps.getMsg('Puzzle_error0').replace(
+        '%1', blocks.length)];
   }
   var textDiv = document.getElementById('answerMessage');
   textDiv.innerHTML = '';

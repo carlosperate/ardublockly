@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">mazingira ya programu ya kuona</span><span id="linkButton">Hifadhi na kiungo cha vishiku. </span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Endesha Programu</span><span id="resetProgram">Seti upya</span><span id="codeTooltip">Tazama mwandiko wa JavaScript inayotokana.</span><span id="linkButton">Hifadhi na kiungo cha vishiku. </span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Kuna shida na amri.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Sambaza vishiku vyako na kiungo hiki: \n\n%1</span><span id="hashError">Samahani, \'%1\' haiendani na faili yoyote ya Blockly.</span><span id="xmlError">Upakiaji wa faili yako iliyohifadhiwa haiwezekani.  Labda iliundwa na toleo tofauti ya Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">mazingira ya programu ya kuona</span><span id="linkButton">Hifadhi na kiungo cha vishiku. </span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Endesha Programu</span><span id="resetProgram">Seti upya</span><span id="codeTooltip">Tazama mwandiko wa JavaScript inayotokana.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Kuna shida na amri.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Sambaza vishiku vyako na kiungo hiki: \n\n%1</span><span id="hashError">Samahani, \'%1\' haiendani na faili yoyote ya Blockly.</span><span id="xmlError">Upakiaji wa faili yako iliyohifadhiwa haiwezekani.  Labda iliundwa na toleo tofauti ya Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -15,7 +15,7 @@ apps.dialog = function(opt_data, opt_ignored, opt_ijData) {
 
 
 apps.ok = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">OK</button></div>';
+  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">Sawa</button></div>';
 };
 
 ;
@@ -26,7 +26,7 @@ if (typeof graphpage == 'undefined') { var graphpage = {}; }
 
 
 graphpage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Kuna shida na amri.</span><span id="linkAlert">Sambaza vishiku vyako na kiungo hiki: \n\n%1</span><span id="hashError">Samahani, \'%1\' haiendani na faili yoyote ya Blockly.</span><span id="xmlError">Upakiaji wa faili yako iliyohifadhiwa haiwezekani.  Labda iliundwa na toleo tofauti ya Blockly?</span></div>';
+  return apps.messages(null, null, opt_ijData);
 };
 
 

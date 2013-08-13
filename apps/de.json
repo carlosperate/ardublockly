@@ -34,7 +34,7 @@
 	"Apps.hashError": "Entschuldigung, konnte die gespeicherten Blöcke für '%1' nicht finden.",
 	"Puzzle.country3Language": "Chinesisch",
 	"Puzzle.checkAnswers": "Antworten überprüfen",
-	"Puzzle.helpOk": "Okay",
+	"Apps.dialogOk": "Okay",
 	"Turtle.print": "print",
 	"Code.trashTooltip": "Alle Blöcke löschen.",
 	"Turtle.setColour": "ändere die Farbe in",

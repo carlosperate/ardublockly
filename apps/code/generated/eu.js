@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">a visual programming environment</span><span id="linkButton">Gorde eta lotura sortu.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Programa exekutatu</span><span id="resetProgram">Berriz hasi</span><span id="codeTooltip">Ikusi sorturiko JavaScript kodea.</span><span id="linkButton">Gorde eta lotura sortu.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Eskaerarekin arazo bat egon da.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Elkarbanatu blokeak lotura honekin:\n\n%1</span><span id="hashError">Barkatu, \'%1\' barcinak Blocky fitxategi hau lapurtu du ere.</span><span id="xmlError">Ezin izan da zure fitxategia kargatu.  Agian Blockly-ren beste bertsio batekin sortua izan zen?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">a visual programming environment</span><span id="linkButton">Gorde eta lotura sortu.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Programa exekutatu</span><span id="resetProgram">Berriz hasi</span><span id="codeTooltip">Ikusi sorturiko JavaScript kodea.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Eskaerarekin arazo bat egon da.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Elkarbanatu blokeak lotura honekin:\n\n%1</span><span id="hashError">Barkatu, \'%1\' barcinak Blocky fitxategi hau lapurtu du ere.</span><span id="xmlError">Ezin izan da zure fitxategia kargatu.  Agian Blockly-ren beste bertsio batekin sortua izan zen?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -15,7 +15,7 @@ apps.dialog = function(opt_data, opt_ignored, opt_ijData) {
 
 
 apps.ok = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">OK</button></div>';
+  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">Ados</button></div>';
 };
 
 ;
@@ -26,7 +26,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Eskaerarekin arazo bat egon da.</span><span id="linkAlert">Elkarbanatu blokeak lotura honekin:\n\n%1</span><span id="hashError">Barkatu, \'%1\' barcinak Blocky fitxategi hau lapurtu du ere.</span><span id="xmlError">Ezin izan da zure fitxategia kargatu.  Agian Blockly-ren beste bertsio batekin sortua izan zen?</span><span id="badXml">Error parsing XML:\\n%1\\n\\nAbandon changes?</span><span id="badCode">Program error:\\n%1</span><span id="timeout">Maximum execution iterations exceeded.</span><span id="discard">Delete all %1 blocks?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Error parsing XML:\\n%1\\n\\nAbandon changes?</span><span id="Code_badCode">Program error:\\n%1</span><span id="Code_timeout">Maximum execution iterations exceeded.</span><span id="Code_discard">Delete all %1 blocks?</span></div>';
 };
 
 

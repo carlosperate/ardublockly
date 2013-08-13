@@ -76,8 +76,8 @@ Turtle.init = function() {
 
   window.addEventListener('beforeunload', function(e) {
     if (Blockly.mainWorkspace.getAllBlocks().length > 2) {
-      e.returnValue = BlocklyApps.getMsg('unloadWarning');  // Gecko.
-      return BlocklyApps.getMsg('unloadWarning');  // Webkit.
+      e.returnValue = BlocklyApps.getMsg('Turtle_unloadWarning');  // Gecko.
+      return BlocklyApps.getMsg('Turtle_unloadWarning');  // Webkit.
     }
     return null;
   });

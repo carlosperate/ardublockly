@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-08-06 18:33:13.426750",
+        "lastupdated": "2013-08-13 09:16:56.109713",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -26,6 +26,7 @@
     "Apps.xmlError": "Could not load your saved file.  Perhaps it was created with a different version of Blockly?",
     "Apps.listVariable": "list",
     "Apps.textVariable": "text",
+    "Apps.dialogOk": "OK",
     "Code.badXml": "Error parsing XML:\n%1\n\nAbandon changes?",
     "Code.badCode": "Program error:\n%1",
     "Code.timeout": "Maximum execution iterations exceeded.",
@@ -53,7 +54,6 @@
     "Maze.capacity2": "You have <x id='START_SPAN'/>%1<x id='END_SPAN'/> blocks left.",
     "Maze.nextLevel": "Congratulations! Are you ready to proceed to level %1?",
     "Maze.finalLevel": "Congratulations! You have solved the final level.",
-    "Maze.oneTopBlock": "On this level, you need to stack together all of the blocks in the white workspace.",
     "Maze.maze": "Maze",
     "Maze.instructions1": "A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.",
     "Maze.instructions2": "What is the sequence of steps to follow this path?",
@@ -67,6 +67,7 @@
     "Maze.instructions10": "Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!",
     "Maze.runTooltip": "Makes the character do what the blocks say.",
     "Maze.resetTooltip": "Put the character back at the start of the maze.",
+    "Maze.oneTopBlock": "On this level, you need to stack together all of the blocks in the white workspace.",
     "Plane.rows": "Rows: %1",
     "Plane.getRows": "rows (%1)",
     "Plane.rows1": "1st class rows: %1",
@@ -113,7 +114,6 @@
     "Puzzle.help": "Help",
     "Puzzle.checkAnswers": "Check Answers",
     "Puzzle.helpText": "For each country (green), attach its flag, choose its language, and make a stack of its cities.",
-    "Puzzle.helpOk": "OK",
     "Turtle.moveTooltip": "Moves the turtle forward or backward by the specified amount.",
     "Turtle.moveForward": "move forward by",
     "Turtle.moveBackward": "move backward by",

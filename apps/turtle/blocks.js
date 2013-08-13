@@ -38,13 +38,13 @@ Blockly.Language.draw_move = {
             Blockly.Language.draw_move.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(BlocklyApps.getMsg('moveTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_moveTooltip'));
   }
 };
 
 Blockly.Language.draw_move.DIRECTIONS =
-    [[BlocklyApps.getMsg('moveForward'), 'moveForward'],
-     [BlocklyApps.getMsg('moveBackward'), 'moveBackward']];
+    [[BlocklyApps.getMsg('Turtle_moveForward'), 'moveForward'],
+     [BlocklyApps.getMsg('Turtle_moveBackward'), 'moveBackward']];
 
 Blockly.JavaScript.draw_move = function() {
   // Generate JavaScript for moving forward or backwards.
@@ -66,13 +66,13 @@ Blockly.Language.draw_turn = {
             Blockly.Language.draw_turn.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(BlocklyApps.getMsg('turnTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_turnTooltip'));
   }
 };
 
 Blockly.Language.draw_turn.DIRECTIONS =
-    [[BlocklyApps.getMsg('turnRight'), 'turnRight'],
-     [BlocklyApps.getMsg('turnLeft'), 'turnLeft']];
+    [[BlocklyApps.getMsg('Turtle_turnRight'), 'turnRight'],
+     [BlocklyApps.getMsg('Turtle_turnLeft'), 'turnLeft']];
 
 Blockly.JavaScript.draw_turn = function() {
   // Generate JavaScript for turning left or right.
@@ -89,10 +89,10 @@ Blockly.Language.draw_width = {
     this.setColour(160);
     this.appendValueInput('WIDTH')
         .setCheck('Number')
-        .appendTitle(BlocklyApps.getMsg('setWidth'));
+        .appendTitle(BlocklyApps.getMsg('Turtle_setWidth'));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(BlocklyApps.getMsg('widthTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_widthTooltip'));
   }
 };
 
@@ -112,12 +112,13 @@ Blockly.Language.draw_pen = {
         .appendTitle(new Blockly.FieldDropdown(this.STATE), 'PEN');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(BlocklyApps.getMsg('penTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_penTooltip'));
   }
 };
 
-Blockly.Language.draw_pen.STATE = [[BlocklyApps.getMsg('penUp'), 'penUp'],
-                                   [BlocklyApps.getMsg('penDown'), 'penDown']];
+Blockly.Language.draw_pen.STATE =
+    [[BlocklyApps.getMsg('Turtle_penUp'), 'penUp'],
+     [BlocklyApps.getMsg('Turtle_penDown'), 'penDown']];
 
 Blockly.JavaScript.draw_pen = function() {
   // Generate JavaScript for pen up/down.
@@ -132,10 +133,10 @@ Blockly.Language.draw_colour = {
     this.setColour(20);
     this.appendValueInput('COLOUR')
         .setCheck('Colour')
-        .appendTitle(BlocklyApps.getMsg('setColour'));
+        .appendTitle(BlocklyApps.getMsg('Turtle_setColour'));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(BlocklyApps.getMsg('colourTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_colourTooltip'));
   }
 };
 
@@ -156,13 +157,13 @@ Blockly.Language.turtle_visibility = {
     this.setNextStatement(true, null);
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldDropdown(this.STATE), 'VISIBILITY');
-    this.setTooltip(BlocklyApps.getMsg('turtleVisibilityTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_turtleVisibilityTooltip'));
   }
 };
 
 Blockly.Language.turtle_visibility.STATE =
-    [[BlocklyApps.getMsg('hideTurtle'), 'hideTurtle'],
-     [BlocklyApps.getMsg('showTurtle'), 'showTurtle']];
+    [[BlocklyApps.getMsg('Turtle_hideTurtle'), 'hideTurtle'],
+     [BlocklyApps.getMsg('Turtle_showTurtle'), 'showTurtle']];
 
 Blockly.JavaScript.turtle_visibility = function() {
   // Generate JavaScript for changing turtle visibility.
@@ -172,14 +173,14 @@ Blockly.JavaScript.turtle_visibility = function() {
 
 Blockly.Language.draw_print = {
   // Block for printing text.
-  helpUrl: BlocklyApps.getMsg('printHelpUrl'),
+  helpUrl: BlocklyApps.getMsg('Turtle_printHelpUrl'),
   init: function() {
     this.setColour(160);
     this.appendValueInput('TEXT')
-        .appendTitle(BlocklyApps.getMsg('print'));
+        .appendTitle(BlocklyApps.getMsg('Turtle_print'));
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(BlocklyApps.getMsg('printTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_printTooltip'));
   }
 };
 
@@ -193,14 +194,14 @@ Blockly.JavaScript.draw_print = function() {
 
 Blockly.Language.draw_font = {
   // Block for setting the font.
-  helpUrl: BlocklyApps.getMsg('fontHelpUrl'),
+  helpUrl: BlocklyApps.getMsg('Turtle_fontHelpUrl'),
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
-        .appendTitle(BlocklyApps.getMsg('font'))
+        .appendTitle(BlocklyApps.getMsg('Turtle_font'))
         .appendTitle(new Blockly.FieldDropdown(this.FONTLIST), 'FONT');
     this.appendDummyInput()
-        .appendTitle(BlocklyApps.getMsg('fontSize'))
+        .appendTitle(BlocklyApps.getMsg('Turtle_fontSize'))
         .appendTitle(new Blockly.FieldTextInput('18',
                      Blockly.FieldTextInput.nonnegativeIntegerValidator),
                      'FONTSIZE');
@@ -208,7 +209,7 @@ Blockly.Language.draw_font = {
         .appendTitle(new Blockly.FieldDropdown(this.STYLE), 'FONTSTYLE');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(BlocklyApps.getMsg('fontTooltip'));
+    this.setTooltip(BlocklyApps.getMsg('Turtle_fontTooltip'));
   }
 };
 
@@ -219,9 +220,9 @@ Blockly.Language.draw_font.FONTLIST =
      ['Trebuchet MS', 'Trebuchet MS'], ['Verdana', 'Verdana']];
 
 Blockly.Language.draw_font.STYLE =
-    [[BlocklyApps.getMsg('fontNormal'), 'normal'],
-     [BlocklyApps.getMsg('fontItalic'), 'italic'],
-     [BlocklyApps.getMsg('fontBold'), 'bold']];
+    [[BlocklyApps.getMsg('Turtle_fontNormal'), 'normal'],
+     [BlocklyApps.getMsg('Turtle_fontItalic'), 'italic'],
+     [BlocklyApps.getMsg('Turtle_fontBold'), 'bold']];
 
 Blockly.JavaScript.draw_font = function() {
   // Generate JavaScript for setting the font.

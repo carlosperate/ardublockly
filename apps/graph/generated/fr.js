@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">un environnement de programmation visuel</span><span id="linkButton">Sauvegarde et lies aux blocs.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Execute le programme</span><span id="resetProgram">Reset</span><span id="codeTooltip">Voir le code JavaScript généré\'.</span><span id="linkButton">Sauvegarde et lies aux blocs.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Il y a eu un problème avec la demande.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Partagez vos blocs grâce à ce lien:\n\n%1</span><span id="hashError">Désolé, \'%1\' ne correspond pas à un fichier Blockly sauvegarde.</span><span id="xmlError">Impossible de charger le fichier de sauvegarde.  Peut être a t-il ete créé avec une autre version de Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">un environnement de programmation visuel</span><span id="linkButton">Sauvegarde et lies aux blocs.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Execute le programme</span><span id="resetProgram">Reset</span><span id="codeTooltip">Voir le code JavaScript généré\'.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Il y a eu un problème avec la demande.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Partagez vos blocs grâce à ce lien:\n\n%1</span><span id="hashError">Désolé, \'%1\' ne correspond pas à un fichier Blockly sauvegarde.</span><span id="xmlError">Impossible de charger le fichier de sauvegarde.  Peut être a t-il ete créé avec une autre version de Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -26,7 +26,7 @@ if (typeof graphpage == 'undefined') { var graphpage = {}; }
 
 
 graphpage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Il y a eu un problème avec la demande.</span><span id="linkAlert">Partagez vos blocs grâce à ce lien:\n\n%1</span><span id="hashError">Désolé, \'%1\' ne correspond pas à un fichier Blockly sauvegarde.</span><span id="xmlError">Impossible de charger le fichier de sauvegarde.  Peut être a t-il ete créé avec une autre version de Blockly?</span></div>';
+  return apps.messages(null, null, opt_ijData);
 };
 
 

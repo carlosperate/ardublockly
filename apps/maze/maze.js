@@ -522,7 +522,7 @@ window.addEventListener('load', Maze.init);
 
 /**
  * Reload with a different Pegman skin.
- * @param {number} skin ID of new skin.
+ * @param {number} newSkin ID of new skin.
  */
 Maze.changePegman = function(newSkin) {
   Maze.saveToStorage();
@@ -790,7 +790,7 @@ Maze.animate = function() {
  */
 Maze.congratulations = function() {
   if (Maze.LEVEL < Maze.MAX_LEVEL) {
-    var proceed = window.confirm(BlocklyApps.getMsg('nextLevel')
+    var proceed = window.confirm(BlocklyApps.getMsg('Maze_nextLevel')
         .replace('%1', Maze.LEVEL + 1));
     if (proceed) {
       window.location = window.location.protocol + '//' +
@@ -799,7 +799,7 @@ Maze.congratulations = function() {
           '&skin=' + Maze.SKIN_ID;
     }
   } else {
-    window.alert(BlocklyApps.getMsg('finalLevel'));
+    window.alert(BlocklyApps.getMsg('Maze_finalLevel'));
   }
 };
 

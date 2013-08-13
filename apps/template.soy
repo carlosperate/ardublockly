@@ -18,13 +18,13 @@
 /**
  * All messages to be translated.
  */
-{template .start}
+{template .messages}
   <div id="MSG" style="display: none">
     // Only used externally.
     <span id="subtitle">{msg meaning="Apps.subtitle" desc="A short description of Blockly."}a visual programming environment{/msg}</span>
 
     // Common messages used in multiple applications are defined here.
-    // The applications' template.soy file must also contain msg statements
+    // The applications' template.soy file may also contain msg statements
     // with the same "meaning" value.  The "desc" value must be set to "IBID"
     // (case-insensitive) or identical to the one in this file (not
     // recommended), or an error will be raised during generation of qqq.json.
@@ -36,7 +36,6 @@
     <span id="runProgram">{msg meaning="Apps.runProgram" desc="button label - Pressing the button runs the computer program the user has written."}Run Program{/msg}</span>
     <span id="resetProgram">{msg meaning="Apps.resetProgram" desc="button label - Pressing the button causes the output of the program to be erased but does not delete the user's program)."}Reset{/msg}</span>
     <span id="codeTooltip">{msg meaning="Apps.codeTooltip" desc="tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user."}See generated JavaScript code.{/msg}</span>
-    <span id="linkButton">{msg meaning="Apps.linkTooltip" desc="tooltip (pop-up help) for button; pressing the button causes the user's program to be saved and for a URL to be provided for retrieving it.  The word 'blocks' is as in children's toy blocks."}Save and link to blocks.{/msg}</span>
 
     // Categories.  Apps can use these names or their own.
     <span id="catLogic">{msg meaning="Apps.catLogic" desc="category - Blocks related to [https://code.google.com/p/blockly/wiki/Logic logic]."}Logic{/msg}</span>
@@ -59,15 +58,6 @@
     <span id="listVariable">{msg meaning="Apps.listVariable" desc="variable name - Default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short."}list{/msg}</span>
     <span id="textVariable">{msg meaning="Apps.textVariable" desc="variable name - Default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short."}text{/msg}</span>
   </div>
-
-  // Get messages from applications.
-  {call codepage.start /}
-  {call graphpage.start /}
-  {call mazepage.start /}
-  {call planepage.start /}
-  {call puzzlepage.start /}
-  {call turtlepage.start /}
-  {call ok /}
 {/template}
 
 /**

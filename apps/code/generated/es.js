@@ -4,8 +4,8 @@
 if (typeof apps == 'undefined') { var apps = {}; }
 
 
-apps.start = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div id="MSG" style="display: none"><span id="subtitle">un entorno de programación visual</span><span id="linkButton">Guarda conexión a los bloques. </span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Ejecuta el programa.</span><span id="resetProgram">Reinicializar</span><span id="codeTooltip">Mira el código JavaScript generado.</span><span id="linkButton">Guarda conexión a los bloques. </span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Hubo un problema con la petición.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Comparte tus bloques con esta conexión:\n\n%1</span><span id="hashError">Lo siento, \'%1\' no corresponde con ningún archivo Blockly guardado.</span><span id="xmlError">No se pudo cargar el archivo guardado.  ¿Quizá fue creado con otra versión de Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>' + codepage.start(null, null, opt_ijData) + graphpage.start(null, null, opt_ijData) + mazepage.start(null, null, opt_ijData) + planepage.start(null, null, opt_ijData) + puzzlepage.start(null, null, opt_ijData) + turtlepage.start(null, null, opt_ijData) + ok(null, null, opt_ijData);
+apps.messages = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="MSG" style="display: none"><span id="subtitle">un entorno de programación visual</span><span id="linkButton">Guarda conexión a los bloques. </span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Ejecuta el programa.</span><span id="resetProgram">Reinicializar</span><span id="codeTooltip">Mira el código JavaScript generado.</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Hubo un problema con la petición.</span><span id="blocklyMessage">Blockly</span><span id="linkAlert">Comparte tus bloques con esta conexión:\n\n%1</span><span id="hashError">Lo siento, \'%1\' no corresponde con ningún archivo Blockly guardado.</span><span id="xmlError">No se pudo cargar el archivo guardado.  ¿Quizá fue creado con otra versión de Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -15,7 +15,7 @@ apps.dialog = function(opt_data, opt_ignored, opt_ijData) {
 
 
 apps.ok = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">OK</button></div>';
+  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">Aceptar</button></div>';
 };
 
 ;
@@ -26,7 +26,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="httpRequestError">Hubo un problema con la petición.</span><span id="linkAlert">Comparte tus bloques con esta conexión:\n\n%1</span><span id="hashError">Lo siento, \'%1\' no corresponde con ningún archivo Blockly guardado.</span><span id="xmlError">No se pudo cargar el archivo guardado.  ¿Quizá fue creado con otra versión de Blockly?</span><span id="badXml">Error parsing XML:\\n%1\\n\\nAbandon changes?</span><span id="badCode">Program error:\\n%1</span><span id="timeout">Maximum execution iterations exceeded.</span><span id="discard">Delete all %1 blocks?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Error parsing XML:\\n%1\\n\\nAbandon changes?</span><span id="Code_badCode">Program error:\\n%1</span><span id="Code_timeout">Maximum execution iterations exceeded.</span><span id="Code_discard">Delete all %1 blocks?</span></div>';
 };
 
 

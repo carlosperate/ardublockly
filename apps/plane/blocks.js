@@ -29,7 +29,7 @@ Blockly.Language.plane_set_seats = {
   init: function() {
     this.setColour(330);
     this.appendValueInput('VALUE')
-        .appendTitle(BlocklyApps.getMsg('setSeats'));
+        .appendTitle(BlocklyApps.getMsg('Plane_setSeats'));
     this.setTooltip(Blockly.LANG_VARIABLES_SET_TOOLTIP);
   }
 };
@@ -47,12 +47,13 @@ Blockly.Language.plane_get_rows = {
   init: function() {
     this.setColour(330);
     this.appendDummyInput()
-        .appendTitle(BlocklyApps.getMsg('getRows'), 'title');
+        .appendTitle(BlocklyApps.getMsg('Plane_getRows'), 'title');
     this.setOutput(true, 'Number');
   },
   customUpdate: function() {
     this.setTitleValue(
-        BlocklyApps.getMsg('getRows').replace('%1', Plane.rows1st), 'title');
+        BlocklyApps.getMsg('Plane_getRows').replace('%1', Plane.rows1st),
+        'title');
   }
 };
 
@@ -67,12 +68,13 @@ Blockly.Language.plane_get_rows1st = {
   init: function() {
     this.setColour(330);
     this.appendDummyInput()
-        .appendTitle(BlocklyApps.getMsg('getRows1'), 'title');
+        .appendTitle(BlocklyApps.getMsg('Plane_getRows1'), 'title');
     this.setOutput(true, 'Number');
   },
   customUpdate: function() {
     this.setTitleValue(
-        BlocklyApps.getMsg('getRows1').replace('%1', Plane.rows1st), 'title');
+        BlocklyApps.getMsg('Plane_getRows1').replace('%1', Plane.rows1st),
+        'title');
   }
 };
 
@@ -87,12 +89,13 @@ Blockly.Language.plane_get_rows2nd = {
   init: function() {
     this.setColour(330);
     this.appendDummyInput()
-        .appendTitle(BlocklyApps.getMsg('getRows2'), 'title');
+        .appendTitle(BlocklyApps.getMsg('Plane_getRows2'), 'title');
     this.setOutput(true, 'Number');
   },
   customUpdate: function() {
     this.setTitleValue(
-        BlocklyApps.getMsg('getRows2').replace('%1', Plane.rows2nd), 'title');
+        BlocklyApps.getMsg('Plane_getRows2').replace('%1', Plane.rows2nd),
+        'title');
   }
 };
 

@@ -13,7 +13,7 @@
 	"Puzzle.country3Language": "Chinois",
 	"Puzzle.checkAnswers": "Vérifiez les réponses",
 	"Apps.linkAlert": "Partagez vos blocs grâce à ce lien:\n\n%1",
-	"Puzzle.helpOk": "OK",
+	"Apps.dialogOk": "OK",
 	"Puzzle.title": "Puzzle",
 	"Maze.doCode": "faire",
 	"Maze.oneTopBlock": "Dans ce niveau, tu as besoin d'empiler les blocs les uns au dessus des autres dans la zone de travail blanche.",

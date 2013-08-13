@@ -13,16 +13,17 @@
  * Translated messages for use in JavaScript.
  */
 {template .messages}
+  {call apps.messages /}
   <div style="display: none">
-    <span id="rows">{msg meaning="Plane.rows" desc="page text - Total number of rows of seats on an airplane.  %1 is an integer greater than or equal to zero."}Rows: %1{/msg}</span>
-    <span id="getRows">{msg meaning="Plane.getRows" desc="block text - The number of rows on the airplane, to be used in a mathematical equation, such as: &quot;seats = 4 x '''rows (5)'''&quot;.  %1 is an integer greater than or equal to zero."}rows (%1){/msg}</span>
-    <span id="rows1">{msg meaning="Plane.rows1" desc="page text - The number of rows of first-class seats on the airplane.  %1 is an integer greater than or equal to zero.  You can see the block at [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}1st class rows: %1{/msg}</span>
-    <span id="getRows1">{msg meaning="Plane.getRows1" desc="block text - The number of rows of first-class seats on the, to be used in a mathematical equation.  %1 is an integer greater or equal to zero.  See [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}1st class rows (%1){/msg}</span>
-    <span id="rows2">{msg meaning="Plane.rows2" desc="page text - The number of rows of second-class seats on the airplane.  %1 is an integer greater or equal to zero.  See [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}2nd class rows: %1{/msg}</span>
-    <span id="getRows2">{msg meaning="Plane.getRows2" desc="block text - The number of rows of second-class (also called 'economy class') seats on the airplane, to be used in a mathematical expression.  %1 is an integer greater or equal to zero."}2nd class rows (%1){/msg}</span>
-    <span id="seats">{msg meaning="Plane.seats" desc="page text - The total number of seats on the airplane.  %1 is an integer greater or equal to zero, or it is the next message."}Seats: %1{/msg}</span>
-    <span id="placeholder">{msg meaning="Plane.placeholder" desc="page text - A word or symbol indicating that this numeric value has not yet been determined."}?{/msg}</span>
-    <span id="setSeats">{msg meaning="Plane.setSeats" desc="block text - The first half of a mathematical equation determining the number of seats in an airplane, such as: &quot;'''seats =''' 4 x rows&quot;."}seats ={/msg}</span>
+    <span id="Plane_rows">{msg meaning="Plane.rows" desc="page text - Total number of rows of seats on an airplane.  %1 is an integer greater than or equal to zero."}Rows: %1{/msg}</span>
+    <span id="Plane_getRows">{msg meaning="Plane.getRows" desc="block text - The number of rows on the airplane, to be used in a mathematical equation, such as: &quot;seats = 4 x '''rows (5)'''&quot;.  %1 is an integer greater than or equal to zero."}rows (%1){/msg}</span>
+    <span id="Plane_rows1">{msg meaning="Plane.rows1" desc="page text - The number of rows of first-class seats on the airplane.  %1 is an integer greater than or equal to zero.  You can see the block at [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}1st class rows: %1{/msg}</span>
+    <span id="Plane_getRows1">{msg meaning="Plane.getRows1" desc="block text - The number of rows of first-class seats on the, to be used in a mathematical equation.  %1 is an integer greater or equal to zero.  See [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}1st class rows (%1){/msg}</span>
+    <span id="Plane_rows2">{msg meaning="Plane.rows2" desc="page text - The number of rows of second-class seats on the airplane.  %1 is an integer greater or equal to zero.  See [http://blockly-share.appspot.com/static/apps/plane/plane.html?lang=en&level=3]."}2nd class rows: %1{/msg}</span>
+    <span id="Plane_getRows2">{msg meaning="Plane.getRows2" desc="block text - The number of rows of second-class (also called 'economy class') seats on the airplane, to be used in a mathematical expression.  %1 is an integer greater or equal to zero."}2nd class rows (%1){/msg}</span>
+    <span id="Plane_seats">{msg meaning="Plane.seats" desc="page text - The total number of seats on the airplane.  %1 is an integer greater or equal to zero, or it is the next message."}Seats: %1{/msg}</span>
+    <span id="Plane_placeholder">{msg meaning="Plane.placeholder" desc="page text - A word or symbol indicating that this numeric value has not yet been determined."}?{/msg}</span>
+    <span id="Plane_setSeats">{msg meaning="Plane.setSeats" desc="block text - The first half of a mathematical equation determining the number of seats in an airplane, such as: &quot;'''seats =''' 4 x rows&quot;."}seats ={/msg}</span>
   </div>
 {/template}
 

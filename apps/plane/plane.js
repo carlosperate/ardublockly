@@ -145,7 +145,8 @@ Plane.recalculate = function() {
     // Allow seats to remain NaN.
   }
   Plane.setText('seatText',
-      BlocklyApps.getMsg('seats').replace('%1', isNaN(seats) ? '?' : seats));
+      BlocklyApps.getMsg('Plane_seats').replace(
+          '%1', isNaN(seats) ? '?' : seats));
   Plane.setCorrect(isNaN(seats) ? null : (Plane.answer() == seats));
 
   // Update blocks to show values.
@@ -220,12 +221,12 @@ Plane.redraw = function(newRows) {
 
     if (Plane.LEVEL < 3) {
       Plane.setText('row1stText',
-          BlocklyApps.getMsg('rows').replace('%1', rows1st));
+          BlocklyApps.getMsg('Plane_rows').replace('%1', rows1st));
     } else {
       Plane.setText('row1stText',
-          BlocklyApps.getMsg('rows1').replace('%1', rows1st));
+          BlocklyApps.getMsg('Plane_rows1').replace('%1', rows1st));
       Plane.setText('row2ndText',
-          BlocklyApps.getMsg('rows2').replace('%1', rows2nd));
+          BlocklyApps.getMsg('Plane_rows2').replace('%1', rows2nd));
     }
 
     Plane.rows1st = rows1st;

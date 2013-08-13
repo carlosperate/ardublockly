@@ -13,7 +13,7 @@
 	"Puzzle.country3Language": "Chino",
 	"Puzzle.checkAnswers": "Comprobar las respuestas",
 	"Apps.linkAlert": "Comparte tus bloques con esta conexión:\n\n%1",
-	"Puzzle.helpOk": "Aceptar",
+	"Apps.dialogOk": "Aceptar",
 	"Puzzle.title": "Puzle",
 	"Maze.doCode": "haz esto",
 	"Maze.oneTopBlock": "En este nivel, necesitas apilar los bloques en el espacio en blanco.",
