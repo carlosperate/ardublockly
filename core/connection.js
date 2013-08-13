@@ -176,7 +176,6 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   // Demote the inferior block so that one is a child of the superior one.
   childBlock.setParent(parentBlock);
 
-  // Rendering the parent node will move its connected children into position.
   if (parentBlock.rendered) {
     parentBlock.svg_.updateDisabled();
   }
@@ -184,7 +183,16 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
     childBlock.svg_.updateDisabled();
   }
   if (parentBlock.rendered && childBlock.rendered) {
-    parentBlock.render();
+    if (this.type == Blockly.NEXT_STATEMENT ||
+        this.type == Blockly.PREVIOUS_STATEMENT) {
+      // Child block may need to square off its corners if it is in a stack.
+      // Rendering a child will render its parent.
+      childBlock.render();
+    } else {
+      // Child block does not change shape.  Rendering the parent node will
+      // move its connected children into position.
+      parentBlock.render();
+    }
   }
 };
 
