@@ -35,7 +35,7 @@ var BlocklyApps = {};
 BlocklyApps.getStringParamFromUrl = function(name, defaultValue) {
   var val =
       window.location.search.match(new RegExp('[?&]' + name + '=([^&]+)'));
-  return val ? decodeURIComponent(val[1]) : defaultValue;
+  return val ? decodeURIComponent(val[1].replace(/\+/g, '%20')) : defaultValue;
 };
 
 /**
@@ -322,8 +322,8 @@ BlocklyApps.showDialog = function(content, origin, animate, modal, style,
   if (animate && origin) {
     BlocklyApps.matchBorder_(origin, false, 0.2);
     BlocklyApps.matchBorder_(dialog, true, 0.8);
-    // In 150ms show the dialog and hide the animated border.
-    window.setTimeout(endResult, 150);
+    // In 175ms show the dialog and hide the animated border.
+    window.setTimeout(endResult, 175);
   } else {
     // No animation.  Just set the final state.
     endResult();
@@ -356,8 +356,8 @@ BlocklyApps.hideDialog = function(animate) {
   if (origin) {
     BlocklyApps.matchBorder_(dialog, false, 0.8);
     BlocklyApps.matchBorder_(origin, true, 0.2);
-    // In 150ms hide both the shadow and the animated border.
-    window.setTimeout(endResult, 150);
+    // In 175ms hide both the shadow and the animated border.
+    window.setTimeout(endResult, 175);
   } else {
     // No animation.  Just set the final state.
     endResult();
@@ -383,20 +383,12 @@ BlocklyApps.matchBorder_ = function(element, animate, opacity) {
     return;
   }
   var border = document.getElementById('dialogBorder');
-  var width = element.offsetWidth - 2;
-  var height = element.offsetHeight - 2;
-  var left = 1;
-  var top = 1;
-  do {
-    left += element.offsetLeft;
-    top += element.offsetTop;
-    element = element.offsetParent;
-  } while (element);
+  var bBox = BlocklyApps.getBBox_(element);
   function change() {
-    border.style.width = width + 'px';
-    border.style.height = height + 'px';
-    border.style.left = left + 'px';
-    border.style.top = top + 'px';
+    border.style.width = bBox.width + 'px';
+    border.style.height = bBox.height + 'px';
+    border.style.left = bBox.x + 'px';
+    border.style.top = bBox.y + 'px';
     border.style.opacity = opacity;
   }
   if (animate) {
@@ -407,6 +399,41 @@ BlocklyApps.matchBorder_ = function(element, animate, opacity) {
     change();
   }
   border.style.visibility = 'visible';
+};
+
+/**
+ * Compute the absolute coordinates and dimensions of an HTML or SVG element.
+ * @param {!Element} element Element to match.
+ * @return {!Object} Contains height, width, x, and y properties.
+ * @private
+ */
+BlocklyApps.getBBox_ = function(element) {
+  if (element.getBBox) {
+    // SVG element.
+    var bBox = element.getBBox();
+    var height = bBox.height;
+    var width = bBox.width;
+    var xy = Blockly.getAbsoluteXY_(element);
+    var x = xy.x;
+    var y = xy.y;
+  } else {
+    // HTML element.
+    var height = element.offsetHeight;
+    var width = element.offsetWidth;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+  }
+  return {
+    height: height,
+    width: width,
+    x: x,
+    y: y
+  };
 };
 
 /**

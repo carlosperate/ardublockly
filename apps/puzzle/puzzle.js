@@ -189,6 +189,19 @@ Puzzle.init = function() {
       countedArea += block.cached_area_;
     }
     Puzzle.showHelp(false);
+    /**
+     * HACK:
+     * Chrome (v28) displays a broken image tag on any image that is also
+     * shown in the help dialog.  Selecting the block fixes the problem.
+     * If Chrome stops corrupting the Australian flag, delete this entire hack.
+     */
+    if (goog.userAgent.WEBKIT) {
+      var blocks = Blockly.mainWorkspace.getAllBlocks();
+      for (var i = 0, block; block = blocks[i]; i++) {
+        block.select();
+      }
+      Blockly.selected.unselect();
+    }
   }
 };
 

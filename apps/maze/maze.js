@@ -650,20 +650,21 @@ Maze.showOneTopBlock = function() {
   // Assemble the user's blocks in the likely intended order.
   // Note: this code only works for simple statements.  Do not use on more
   // complicated blocks such as 'while'.
-  var groups = Blockly.mainWorkspace.getTopBlocks(true);
-  for (var i = 0; i < groups.length; i++) {
-    groups[i] = Blockly.Xml.blockToDom_(groups[i]);
+  var blockGroups = Blockly.mainWorkspace.getTopBlocks(true);
+  var xmlGroups =  [];
+  for (var i = 0; i < blockGroups.length; i++) {
+    xmlGroups[i] = Blockly.Xml.blockToDom_(blockGroups[i]);
   }
-  var xml = groups[0];
+  var xml = xmlGroups[0];
   var cursor;
-  for (var i = 0; i < groups.length - 1; i++) {
+  for (var i = 0; i < xmlGroups.length - 1; i++) {
     var blocks = xml.getElementsByTagName('BLOCK');
     if (blocks.length) {
       cursor = blocks[blocks.length - 1];
     } else {
       cursor = xml;
     }
-    var next = goog.dom.createDom('next', null, groups[i + 1]);
+    var next = goog.dom.createDom('next', null, xmlGroups[i + 1]);
     cursor.appendChild(next);
   }
   xml.setAttribute('x', 10);
@@ -673,7 +674,7 @@ Maze.showOneTopBlock = function() {
   var iframe = document.getElementById('iframeOneTopBlock');
   iframe.src = 'readonly.html?lang=' + encodeURIComponent(BlocklyApps.LANG) +
       '&xml=' + encodeURIComponent(xml);
-  var origin = document.getElementById('runButton');
+  var origin = blockGroups[0].getSvgRoot();
   var content = document.getElementById('dialogOneTopBlock');
   var style = {
     width: '40%',
