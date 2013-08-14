@@ -97,6 +97,7 @@ Turtle.init = function() {
     });
   window.addEventListener('resize', onresize);
   onresize();
+  Blockly.fireUiEvent(window, 'resize');
 
   // Hide download button if browser lacks support
   // (http://caniuse.com/#feat=download).

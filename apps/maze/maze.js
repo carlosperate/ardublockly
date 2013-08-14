@@ -493,6 +493,7 @@ Maze.init = function() {
     });
   window.addEventListener('resize', onresize);
   onresize();
+  Blockly.fireUiEvent(window, 'resize');
 
   var defaultXml =
       '<xml>' +

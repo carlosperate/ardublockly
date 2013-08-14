@@ -40,9 +40,9 @@ html[dir="RTL"] .farSide {
 button {
   margin: 5px 0;
   padding: 10px;
-  font-size: large;
   border-radius: 5px;
   border: 1px solid #ddd;
+  font-size: large;
   background-color: #eee;
   color: black;
 }
@@ -57,4 +57,3 @@ button:active {
 button:hover {
   box-shadow: 2px 2px 5px #888;
 }
-

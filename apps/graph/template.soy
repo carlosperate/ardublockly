@@ -37,7 +37,7 @@
       <td class="farSide">
         <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
         &nbsp; &nbsp;
-        <button id="linkButton" title="{msg meaning="Apps.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
+        <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="TODO"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
             <img src='link.png' height=21 width=21>
         </button>
       </div>
@@ -56,6 +56,7 @@
   <script type="text/javascript" src="blocks.js"></script>
   {call .toolbox /}
   <div id="blockly"></div>
+  {call apps.dialog /}
 {/template}
 
 /**

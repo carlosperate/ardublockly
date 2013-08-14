@@ -150,7 +150,14 @@ BlocklyApps.init = function() {
 
   // Disable the link button if page isn't backed by App Engine storage.
   var linkButton = document.getElementById('linkButton');
-  if (linkButton && !('BlocklyStorage' in window)) {
+  if ('BlocklyStorage' in window) {
+    BlocklyStorage.HTTPREQUEST_ERROR = BlocklyApps.getMsg('httpRequestError');
+    BlocklyStorage.LINK_ALERT = BlocklyApps.getMsg('linkAlert');
+    BlocklyStorage.HASH_ERROR = BlocklyApps.getMsg('hashError');
+    BlocklyStorage.XML_ERROR = BlocklyApps.getMsg('xmlError');
+    // Swap out the BlocklyStorage's alert() for a nicer dialog.
+    BlocklyStorage.alert = BlocklyApps.storageAlert;
+  } else if (linkButton) {
     linkButton.className = 'disabled';
   }
 
@@ -434,6 +441,35 @@ BlocklyApps.getBBox_ = function(element) {
     x: x,
     y: y
   };
+};
+
+/**
+ * Display a storage-related modal dialog.
+ * @param {string} message Text to alert.
+ */
+BlocklyApps.storageAlert = function(message) {
+  var content = document.createElement('div');
+  var lines = message.split('\n');
+  for (var i = 0; i < lines.length; i++) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(lines[i]));
+    content.appendChild(div);
+  }
+  // Add OK button.
+  content.innerHTML += apps.ok();
+
+  var origin = document.getElementById('linkButton');
+  var style = {
+    width: '40%',
+    left: '30%',
+    top: '5em'
+  };
+  function disposeFunc() {
+    content.parentNode.removeChild(content);
+    BlocklyApps.stopDialogKeyDown();
+  }
+  BlocklyApps.showDialog(content, origin, true, true, style, disposeFunc);
+  BlocklyApps.startDialogKeyDown();
 };
 
 /**

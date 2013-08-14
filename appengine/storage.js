@@ -111,16 +111,17 @@ BlocklyStorage.makeRequest_ = function(url, name, content) {
 BlocklyStorage.handleRequest_ = function() {
   if (BlocklyStorage.httpRequest_.readyState == 4) {
     if (BlocklyStorage.httpRequest_.status != 200) {
-      window.alert(BlocklyApps.getMsg('httpRequestError') +
-          '  httpRequest_.status: ' + BlocklyStorage.httpRequest_.status);
+      BlocklyStorage.alert(BlocklyStorage.HTTPREQUEST_ERROR + '\n' +
+          'httpRequest_.status: ' + BlocklyStorage.httpRequest_.status);
     } else {
       var data = BlocklyStorage.httpRequest_.responseText.trim();
       if (BlocklyStorage.httpRequest_.name == 'xml') {
         window.location.hash = data;
-        window.alert(BlocklyApps.getMsg('linkAlert').replace('%1', window.location.href));
+        BlocklyStorage.alert(BlocklyStorage.LINK_ALERT.replace('%1',
+            window.location.href));
       } else if (BlocklyStorage.httpRequest_.name == 'key') {
         if (!data.length) {
-          window.alert(BlocklyApps.getMsg('hashError').replace('%1',
+          BlocklyStorage.alert(BlocklyStorage.HASH_ERROR.replace('%1',
               window.location.hash));
         } else {
           BlocklyStorage.loadXml_(data);
@@ -162,10 +163,19 @@ BlocklyStorage.loadXml_ = function(xml) {
   try {
     xml = Blockly.Xml.textToDom(xml);
   } catch (e) {
-    window.alert(BlocklyApps.getMsg(xmlError) + '\nxml: ' + xml);
+    BlocklyStorage.alert(BlocklyStorage.XML_ERROR + '\nXML: ' + xml);
     return;
   }
   // Clear the workspace to avoid merge.
   Blockly.mainWorkspace.clear();
   Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+};
+
+/**
+ * Present a text message to the user.
+ * Designed to be overridden if an app has custom dialogs, or a butter bar.
+ * @param {string} message Text to alert.
+ */
+BlocklyStorage.alert = function(message) {
+  window.alert(message);
 };

@@ -101,8 +101,8 @@ button {
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
-  background-color: #eee;
   font-size: large;
+  background-color: #eee;
   color: black;
 }
 button.launch {

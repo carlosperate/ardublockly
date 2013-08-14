@@ -88,26 +88,28 @@ td {
   margin-right: 15px;
 }
 
+/* Buttons */
 button {
   padding: 1px 10px;
   margin: 1px 5px;
-  font-size: 10%;
   border-radius: 4px;
   border: 1px solid #ddd;
+  font-size: large;
   background-color: #eee;
   color: black;
+}
+button.launch {
+  border: 1px solid #d43;
+  background-color: #d43;
+  color: #fff;
+}
+button.launch>img {
+  opacity: 1;
 }
 button>img {
   opacity: 0.6;
 }
 button:hover>img {
-  opacity: 1;
-}
-button.launch {
-  border: 1px solid #d43;
-  background-color: #d43;
-}
-button.launch>img {
   opacity: 1;
 }
 button:active {
@@ -121,6 +123,9 @@ button.disabled:hover>img {
 }
 button.disabled {
   display: none;
+}
+.notext {
+  font-size: 10%;
 }
 
 /* Sprited icons. */

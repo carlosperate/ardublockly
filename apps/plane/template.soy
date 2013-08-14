@@ -32,29 +32,37 @@
  */
 {template .start}
   {call .messages /}
-  <div style="display: none;"><select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select></div>
-  <h1>
-    <span id="title">
-      <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
-      {sp}:{sp}
-      {msg meaning="Plane.plane" desc="title - Specifies that this is Blockly's '''Plane''' (airplane) tutorial.  The word &quot;plane&quot; was chosen over &quot;airplane&quot; in English because it is shorter and less formal."}
-        Plane
-      {/msg}
-    </span>
-    {sp}&nbsp;{sp}
-    {for $i in range(1, 4)}
-      {sp}
-      {if $i == $ij.level}
-        <span class="tab" id="selected">{$i}</span>
-      {else}
-        {if $i < $ij.level}
-          <a class="tab previous" href="?lang={$ij.lang}&level={$i}">{$i}</a>
-        {else}
-          <a class="tab" href="?lang={$ij.lang}&level={$i}">{$i}</a>
-        {/if}
-      {/if}
-    {/for}
-  </h1>
+  <table width="100%">
+    <tr>
+      <td>
+        <h1>
+          <span id="title">
+            <a href="../index.html">{msg meaning="Apps.blocklyMessage" desc="IBID"}Blockly{/msg}</a>
+            {sp}:{sp}
+            {msg meaning="Plane.plane" desc="title - Specifies that this is Blockly's '''Plane''' (airplane) tutorial.  The word &quot;plane&quot; was chosen over &quot;airplane&quot; in English because it is shorter and less formal."}
+              Plane
+            {/msg}
+          </span>
+          {sp}&nbsp;{sp}
+          {for $i in range(1, 4)}
+            {sp}
+            {if $i == $ij.level}
+              <span class="tab" id="selected">{$i}</span>
+            {else}
+              {if $i < $ij.level}
+                <a class="tab previous" href="?lang={$ij.lang}&level={$i}">{$i}</a>
+              {else}
+                <a class="tab" href="?lang={$ij.lang}&level={$i}">{$i}</a>
+              {/if}
+            {/if}
+          {/for}
+        </h1>
+      </td>
+      <td class="farSide">
+        <select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select>
+      </td>
+    </tr>
+  </table>
 
   <script type="text/javascript" src="../slider.js"></script>
   <svg
