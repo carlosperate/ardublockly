@@ -37,6 +37,8 @@
     <span id="runTooltip">{msg meaning="Apps.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written."}Run the program defined by the blocks in the workspace.{/msg}</span>
     <span id="runProgram">{msg meaning="Apps.runProgram" desc="button label - Pressing the button runs the computer program the user has written."}Run Program{/msg}</span>
     <span id="resetProgram">{msg meaning="Apps.resetProgram" desc="button label - Pressing the button causes the output of the program to be erased but does not delete the user's program)."}Reset{/msg}</span>
+    <span id="dialogOk">{{msg meaning="Apps.dialogOk" desc="Label on button for user to press when done reading help information.\n{lb}{lb}Identical|OK{rb}{rb}"}}OK{{/msg}}</span>
+    <span id="dialogCancel">{{msg meaning="Apps.dialogCancel" desc="Label on button for user to press when not wanting to proceed.\n{lb}{lb}Identical|Cancel{rb}{rb}"}}Cancel{{/msg}}</span>
 
     // Categories.  Apps can use these names or their own.
     <span id="catLogic">{msg meaning="Apps.catLogic" desc="category - Blocks related to [https://code.google.com/p/blockly/wiki/Logic logic]."}Logic{/msg}</span>
@@ -106,6 +108,9 @@
       left: 0;
       z-index: -1;
     {rb}
+    #dialog button {lb}
+      min-width: 4em;
+    {rb}
   </style>
   <div id="dialogShadow" class="dialogAnimate"></div>
   <div id="dialogBorder"></div>
@@ -118,10 +123,7 @@
 {template .ok private="true"}
   <div class="farSide" style="padding: 1ex 3ex 0">
     <button onclick="BlocklyApps.hideDialog(true)">
-      {{msg meaning="Apps.dialogOk"
-           desc="Label on button for user to press when done reading help information.\n{lb}{lb}Identical|OK{rb}{rb}"}}
-        OK
-      {{/msg}}
+      {{msg meaning="Apps.dialogOk" desc="IBID"}}OK{{/msg}}
     </button>
   </div>
 {/template}

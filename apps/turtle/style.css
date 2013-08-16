@@ -16,7 +16,8 @@ a:hover {
 html[dir="RTL"] .farSide {
   text-align: left;
 }
-pre {
+#containerCode {
+  direction: ltr;
   font-size: large;
   overflow: auto;
   max-height: 400px;

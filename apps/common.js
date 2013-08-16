@@ -339,17 +339,17 @@ BlocklyApps.showDialog = function(content, origin, animate, modal, style,
 
 /**
  * Hide the dialog pop-up.
- * @param {boolean} animate Animate the dialog closing.
+ * @param {boolean} opt_animate Animate the dialog closing.  Defaults to true.
  *     Requires that origin was not null when dialog was opened.
  */
-BlocklyApps.hideDialog = function(animate) {
+BlocklyApps.hideDialog = function(opt_animate) {
   if (!BlocklyApps.isDialogVisible_) {
     return;
   }
   BlocklyApps.isDialogVisible_ = false;
   BlocklyApps.dialogDispose_ && BlocklyApps.dialogDispose_();
   BlocklyApps.dialogDispose_ = null;
-  var origin = animate ? BlocklyApps.dialogOrigin_ : null;
+  var origin = (opt_animate === false) ? null : BlocklyApps.dialogOrigin_;
   var dialog = document.getElementById('dialog');
   var shadow = document.getElementById('dialogShadow');
   var border = document.getElementById('dialogBorder');
@@ -460,8 +460,8 @@ BlocklyApps.storageAlert = function(message) {
 
   var origin = document.getElementById('linkButton');
   var style = {
-    width: '40%',
-    left: '30%',
+    width: '50%',
+    left: '25%',
     top: '5em'
   };
   function disposeFunc() {
