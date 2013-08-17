@@ -46,7 +46,7 @@
 	"Maze.instructions5": "La pedina dovrà girare a sinistra quando non può procedere diritto.",
 	"Maze.instructions6": "Con 'se' l'azione verrà eseguita solo se la condizione è soddisfatta. Prova a girare a sinistra se c'è una strada a sinistra.",
 	"Maze.instructions7": "Questo labirinto sembra più difficile del precedente, ma non lo è.",
-	"Maze.instructions1": "Un programma è una sequenza di istruzioni. Impila un paio di blocchi 'avanza diritto' per aiutarmi a raggiungere l'arrivo.",
+	"Maze.instructions1": "Impila un paio di blocchi 'avanza diritto' per aiutarmi a raggiungere l'arrivo.",
 	"Maze.instructions2": "Che passi sono necessari per seguire questa strada?",
 	"Maze.instructions3": "I computer hanno una memoria limitata. Raggiungi l'arrivo usando solo due blocchi. Scegli 'ripeti' per eseguire un blocco più di una volta.",
 	"Apps.runProgram": "Esegui il programma",

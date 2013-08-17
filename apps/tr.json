@@ -46,7 +46,7 @@
 	"Maze.instructions5": "Pegman ileri gidemediğinden sola dönmeli.",
 	"Maze.instructions6": "Bir 'eğer' koşulu ancak belirtilen koşul doğru oluyorsa birşeyler yapar. Eğer solda yol varsa sola dönmeyi dene.",
 	"Maze.instructions7": "Bu labirent öncekine göre daha karmaşık gözüküyor, ama aslında öyle değil.",
-	"Maze.instructions1": "Program demek, bir ifadeler sıralaması demektir. Bir kaç 'ileri git' bloğunu bir araya getirerek beni hedefe ulaştır.",
+	"Maze.instructions1": "Bir kaç 'ileri git' bloğunu bir araya getirerek beni hedefe ulaştır.",
 	"Maze.instructions2": "Bu yolu izlemek için hangi adımları izlemeli?",
 	"Maze.instructions3": "Bilgisayarların sınırlı hafızaları vardır. Bu yüzden sende hedefe sadece iki blok kullanarak ulaşmalısın. 'tekrar' bloğunu kullanarak aynı bloğu birden fazla kullanabilirsin.",
 	"Apps.runProgram": "Programı Çalıştır",

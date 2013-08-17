@@ -41,7 +41,7 @@
 	"Maze.instructions5": "Pegman haurà de girar a l'esquerra quan no pugui continuar endavant.",
 	"Maze.instructions6": "Una condició 'si' farà fer alguna cosa només si la condició és certa. Prova de girar a l'esquerra si hi ha un camí a l'esquerra.",
 	"Maze.instructions7": "Aquest laberint sembla més complicat que l'anterior, però no ho és!.",
-	"Maze.instructions1": "Un programa és una seqüència de declaracions. Apila un parell de blocs 'mou endavant' junts per ajudar-me a arribar a la meta.",
+	"Maze.instructions1": "Apila un parell de blocs 'mou endavant' junts per ajudar-me a arribar a la meta.",
 	"Maze.instructions2": "Quina és la seqüència de passos per a seguir aquest camí?",
 	"Maze.instructions3": "Els ordinadors tenen una memòria limitada. Arriba al final d'aquest camí utilitzant només dos blocs. Utilitza 'repeteix' per a executar un bloc més d'una vegada.",
 	"Apps.xmlError": "No s'ha pogut carregar el teu fitxer desat.  Potser va ser creat amb una versió diferent de Blockly?",

@@ -108,7 +108,7 @@ Puzzle.init = function() {
   var onresize = function(e) {
     blocklyDiv.style.width = (window.innerWidth - 20) + 'px';
     blocklyDiv.style.height =
-        (window.innerHeight - blocklyDiv.offsetTop - 22) + 'px';
+        (window.innerHeight - blocklyDiv.offsetTop - 15) + 'px';
   };
   onresize();
   window.addEventListener('resize', onresize);

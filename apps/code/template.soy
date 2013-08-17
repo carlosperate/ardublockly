@@ -4,7 +4,7 @@
  * This is a Closure Template.
  *
  * To regenerate just en.js, run this command:
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs ../template.soy,template.soy
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs ../common.soy,template.soy
  *
  * To regenerate all files, see: trunk/apps/template.soy.
  */
@@ -62,7 +62,7 @@
               <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="IBID."}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link()">
                 <img src='../../media/1x1.gif' class="link icon21">
               </button>{sp}
-              <button class="notext launch" title="{msg meaning="Apps.runTooltip" desc="IBID"}Run the program defined by the blocks in the workspace.{/msg}" onclick="runJS()">
+              <button class="notext primary" title="{msg meaning="Apps.runTooltip" desc="IBID"}Run the program defined by the blocks in the workspace.{/msg}" onclick="runJS()">
                 <img src='../../media/1x1.gif' class="run icon21">
               </button>
             </td>

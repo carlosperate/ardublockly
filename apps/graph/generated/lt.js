@@ -1,4 +1,4 @@
-// This file was automatically generated from template.soy.
+// This file was automatically generated from common.soy.
 // Please don't edit this file by hand.
 
 if (typeof apps == 'undefined') { var apps = {}; }
@@ -10,12 +10,12 @@ apps.messages = function(opt_data, opt_ignored, opt_ijData) {
 
 
 apps.dialog = function(opt_data, opt_ignored, opt_ijData) {
-  return '<style type="text/css">#dialog {visibility: hidden; background-color: #fff; color: #000; border: 1px solid #000; position: absolute; border-radius: 8px; box-shadow: 5px 5px 5px #888; padding: 10px;}#dialogBorder {visibility: hidden; position: absolute; background-color: #fff; color: #000; border: 1px solid #000; border-radius: 8px; box-shadow: 5px 5px 5px #888;}#dialogShadow {visibility: hidden; position: fixed; top: 0; left: 0; height: 100%; width: 100%; background-color: #000; opacity: 0.3}.dialogAnimate {transition-property: width height left top opacity; transition-duration: 0.2s; transition-timing-function: linear;}.dialogHiddenContent {visibility: hidden; position: absolute; top: 0; left: 0; z-index: -1;}#dialog button {min-width: 4em;}</style><div id="dialogShadow" class="dialogAnimate"></div><div id="dialogBorder"></div><div id="dialog"></div>';
+  return '<div id="dialogShadow" class="dialogAnimate"></div><div id="dialogBorder"></div><div id="dialog"></div>';
 };
 
 
 apps.ok = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div class="farSide" style="padding: 1ex 3ex 0"><button onclick="BlocklyApps.hideDialog(true)">Gerai</button></div>';
+  return '<div class="farSide" style="padding: 1ex 3ex 0"><button class="secondary" onclick="BlocklyApps.hideDialog(true)">Gerai</button></div>';
 };
 
 ;

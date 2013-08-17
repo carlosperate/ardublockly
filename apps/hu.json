@@ -119,7 +119,7 @@
 	"Maze.instructions5": "Pegmannak balra kellene fordulnia, ha nem tud előre menni az úton.",
 	"Maze.instructions6": "Egy 'Ha' esetén az utasítások csak akkor kerülnek végrehajtásra, ha a feltétel igaz. Próbáld Pegmant balra fordítani, ha van út balra.",
 	"Maze.instructions7": "Ez a labirintus bonyolultabbank tűnik az előzőnél, de ez csak a látszat.",
-	"Maze.instructions1": "Egy program utasítások sorozatából áll. Segíts eljutatni Pegmant a célig, kapcsolj össze néhány 'Menj előre' blokkot!",
+	"Maze.instructions1": "Segíts eljutatni Pegmant a célig, kapcsolj össze néhány 'Menj előre' blokkot!",
 	"Maze.instructions2": "Milyen lépések sorozata kell, hogy eljuttasd Pegmant a célig?",
 	"Maze.instructions3": "A számítógépeknek véges a memóriájuk. Juttasd el Pegmant a célig mindössze 2 blokk felhasználásával. Használd az 'Ismételd a célbaérésig' blokkot egy másik blokk ismételt végrehajtásához.",
 	"Maze.instructions8": "Egynél több 'Ha' feltételt is használhatsz.",

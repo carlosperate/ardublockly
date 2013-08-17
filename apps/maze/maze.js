@@ -874,6 +874,7 @@ Maze.congratulations = function() {
     buttonDiv.appendChild(cancel);
 
     var ok = document.createElement('button');
+    ok.className = 'secondary';
     ok.appendChild(document.createTextNode(BlocklyApps.getMsg('dialogOk')));
     ok.addEventListener('click', Maze.nextLevel, true);
     buttonDiv.appendChild(ok);
@@ -889,6 +890,7 @@ Maze.congratulations = function() {
   } else {
     var text = BlocklyApps.getMsg('Maze_finalLevel');
     var ok = document.createElement('button');
+    ok.className = 'secondary';
     ok.addEventListener('click', BlocklyApps.hideDialog, true);
     ok.appendChild(document.createTextNode(BlocklyApps.getMsg('dialogOk')));
     buttonDiv.appendChild(ok);

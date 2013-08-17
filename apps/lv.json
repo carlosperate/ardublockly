@@ -46,7 +46,7 @@
 	"Maze.instructions5": "Cilvēciņam jāpagriežas pa kreisi tad, kad viņš vairs nevarēs iet taisni.",
 	"Maze.instructions6": "Pārbaudes komanda 'ja' dara kaut ko tikai tad, ja pārbaude ir patiesa. Pamēģini pagriezties pa kreisi, ja pa kreisi ir brīvs ceļš.",
 	"Maze.instructions7": "Šis labirints izskatās sarežģītāks ne kā iepriekšējais, bet patiesībā tā nav.",
-	"Maze.instructions1": "Programma ir vairākas secīgas darbības. Saliec kopā dažus 'ej uz priekšu' blokus lai mēs varētu sasniegt mērķi.",
+	"Maze.instructions1": "Saliec kopā dažus 'ej uz priekšu' blokus lai mēs varētu sasniegt mērķi.",
 	"Maze.instructions2": "Kāda ir darbību kārtība, lai varētu sekot šim ceļam?",
 	"Maze.instructions3": "Datoriem ir ierobežota atmiņa. Sasniedz ceļa mērķi lietojot tikai divus blokus. Lieto atkārtošanas bloku lai varētu izpildīt darbību vairāk kā vienu reizi.",
 	"Apps.runProgram": "Izpildīt programmu",

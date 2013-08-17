@@ -45,7 +45,7 @@
 	"Maze.instructions5": "Pegman se bude muset otočit vlevo, pokud nebude moci jít rovně.",
 	"Maze.instructions6": "Podmínka 'pokud' udělá něco pouze v případě, že je splněna její podmínka. Zkus se otočit vlevo, pokud je nalevo cesta.",
 	"Maze.instructions7": "Toto bludiště na první pohled vypadá komplikovaněji než to předchozí, ale není.",
-	"Maze.instructions1": "Program je posloupnost příkazů. Poskládej několik pohybů vpřed dohromady a pomoc mi dosáhnout cíle.",
+	"Maze.instructions1": "Poskládej několik pohybů vpřed dohromady a pomoc mi dosáhnout cíle.",
 	"Maze.instructions2": "Jaká je posloupnost kroků pro následování této cesty?",
 	"Maze.instructions3": "Počítače mají omezenou paměť. Dosáhni cíle s použitím pouze dvou bloků. Použij příkaz 'opakuj' pro zopakování příkazu.",
 	"Apps.runProgram": "Spusť program",

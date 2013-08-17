@@ -1,20 +1,5 @@
 body {
-  background-color: #fff;
-  font-family: sans-serif;
   overflow: hidden;
-}
-h1 {
-  font-weight: normal;
-  font-size: 140%;
-}
-a:hover {
-  color: #f00;
-}
-.farSide {
-  text-align: right;
-}
-html[dir="RTL"] .farSide {
-  text-align: left;
 }
 
 #graph {
@@ -34,26 +19,4 @@ html[dir="RTL"] .farSide {
 
 #blockly {
   position: fixed;
-}
-
-/* Buttons */
-button {
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: large;
-  background-color: #eee;
-  color: black;
-}
-button.launch {
-  border: 1px solid #d43;
-  background-color: #d43;
-  color: #fff;
-}
-button:active {
-  border: 1px solid blue !important;
-}
-button:hover {
-  box-shadow: 2px 2px 5px #888;
 }

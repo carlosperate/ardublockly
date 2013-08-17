@@ -46,7 +46,7 @@
 	"Maze.instructions5": "Pindeman er nødt til at dreje til venstre når han ikke kan gå lige ud.",
 	"Maze.instructions6": "En 'hvis' sætning vil kun gøre noget hvis betingelsen er sand. Prøv at dreje til venstre hvis der er en sti til venstre.",
 	"Maze.instructions7": "Denne labyring ser mere kompliceret ud en den forrige, men det er den ikke.",
-	"Maze.instructions1": "Et program er en sekvens af erklæringer. Sæt et par 'flyt fremad' blokke sammen for at hjælpe mig til at nå målet,",
+	"Maze.instructions1": "Sæt et par 'flyt fremad' blokke sammen for at hjælpe mig til at nå målet,",
 	"Maze.instructions2": "Hvad er sekvensen af handlinger for at følge denne sti?",
 	"Maze.instructions3": "Computere har begrænset hukommelse. Prøv at nå enden af denne sti ved kun at bruge to blokke. Brug 'gentag' til at køre en blok mere end én gang.",
 	"Apps.runProgram": "Kør Program",

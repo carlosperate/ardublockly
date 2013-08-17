@@ -6,13 +6,13 @@
  *
  * # Run the following command after changing the messages in any of the
  * # included apps subdirectories.
- * java -jar _soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf --srcs template.soy,code/template.soy,graph/template.soy,maze/template.soy,plane/template.soy,puzzle/template.soy,turtle/template.soy
+ * java -jar _soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf --srcs common.soy,code/template.soy,graph/template.soy,maze/template.soy,plane/template.soy,puzzle/template.soy,turtle/template.soy
  *
  * # Create en.json, qqq.json.
- * ../i18n/xliff_to_json.py --xlf extracted_msgs.xlf --templates template.soy {code,graph,maze,plane,puzzle,turtle}/template.soy
+ * ../i18n/xliff_to_json.py --xlf extracted_msgs.xlf --templates common.soy {code,graph,maze,plane,puzzle,turtle}/template.soy
  *
  * # Generate .js files for each project:
- * for i in code graph maze plane puzzle turtle; do ../i18n/json_to_js.py --output_dir=$i/generated --template template.soy,$i/template.soy *.json; done
+ * for i in code graph maze plane puzzle turtle; do ../i18n/json_to_js.py --output_dir=$i/generated --template common.soy,$i/template.soy *.json; done
  */
 
 /**
@@ -66,52 +66,6 @@
  * Dialogs.
  */
 {template .dialog private="true"}
-  <style type="text/css">
-    #dialog {lb}
-      visibility: hidden;
-      background-color: #fff;
-      color: #000;
-      border: 1px solid #000;
-      position: absolute;
-      border-radius: 8px;
-      box-shadow: 5px 5px 5px #888;
-      padding: 10px;
-    {rb}
-    #dialogBorder {lb}
-      visibility: hidden;
-      position: absolute;
-      background-color: #fff;
-      color: #000;
-      border: 1px solid #000;
-      border-radius: 8px;
-      box-shadow: 5px 5px 5px #888;
-    {rb}
-    #dialogShadow {lb}
-      visibility: hidden;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background-color: #000;
-      opacity: 0.3
-    {rb}
-    .dialogAnimate {lb}
-      transition-property: width height left top opacity;
-      transition-duration: 0.2s;
-      transition-timing-function: linear;
-    {rb}
-    .dialogHiddenContent {lb}
-      visibility: hidden;
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    {rb}
-    #dialog button {lb}
-      min-width: 4em;
-    {rb}
-  </style>
   <div id="dialogShadow" class="dialogAnimate"></div>
   <div id="dialogBorder"></div>
   <div id="dialog"></div>
@@ -122,7 +76,7 @@
  */
 {template .ok private="true"}
   <div class="farSide" style="padding: 1ex 3ex 0">
-    <button onclick="BlocklyApps.hideDialog(true)">
+    <button class="secondary" onclick="BlocklyApps.hideDialog(true)">
       {{msg meaning="Apps.dialogOk" desc="IBID"}}OK{{/msg}}
     </button>
   </div>

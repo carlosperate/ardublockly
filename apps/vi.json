@@ -115,7 +115,7 @@
 	"Maze.instructions5": "Pegman will have to turn left when he cannot go straight.",
 	"Maze.instructions6": "Mảnh 'nếu [điều kiện]' nhìn vào điều kiện rồi chỉ thực hiện lệnh nếu có điều kiện ấy. Hãy thử rẽ trái nếu có đường bên trái.",
 	"Maze.instructions7": "Ma trận này nhìn rắc rối hơn cái trước, nhưng thực sự chúng cũng khá giống nhau.",
-	"Maze.instructions1": "Một chương trình là một chuỗi các lệnh. Chồng hai mảnh 'đi tới' lên nhau để giúp tớ đến đích.",
+	"Maze.instructions1": "Chồng hai mảnh 'đi tới' lên nhau để giúp tớ đến đích.",
 	"Maze.instructions2": "Chuỗi lệnh gì sẽ giải ma trận này?",
 	"Maze.instructions3": "Bộ nhớ của máy vi tính có hạn. Ở vòng này bạn chỉ được dùng hai mảnh để đến đích. Mảnh 'lặp lại' sẽ chạy một lệnh nhiều lần.",
 	"Maze.instructions8": "Bạn có thể dùng hơn một mảnh 'nếu...', để xử lý nhiều điều kiện khác nhau.",

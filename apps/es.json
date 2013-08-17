@@ -46,7 +46,7 @@
 	"Maze.instructions5": "Pegman tiene que girar a la izquierda cuando no pueda ir recto.",
 	"Maze.instructions6": "Una condición 'si' va hacer algo solamente si la condición es verdadera. Intenta girar a la izquierda si hay camino a la izquierda.",
 	"Maze.instructions7": "Este laberinto parece más complicado que el anterior, pero no lo es.",
-	"Maze.instructions1": "Un programa es una secuencia de declaraciones. Une un par de bloques de ‘avanza’ para ayudarme a llegar a la meta.",
+	"Maze.instructions1": "Une un par de bloques de ‘avanza’ para ayudarme a llegar a la meta.",
 	"Maze.instructions2": "¿Cuál es la secuencia de pasos para seguir este camino?",
 	"Maze.instructions3": "Las computadoras tienen memoria limitada. Llega al final de este camino usando tan sólo dos bloques. Utiliza 'repetir' para ejecutar un bloque más de una vez.",
 	"Apps.runProgram": "Ejecuta el programa.",

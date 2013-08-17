@@ -45,7 +45,7 @@
 	"Apps.resetProgram": "Opnieuw",
 	"Maze.instructions6": "Een 'als' instructie zal enkel iets doen als de voorwaarde 'waar' is. Probeer naar links te draaien als er een weg naar links is.",
 	"Maze.instructions7": "Dit doolhof ziet er ingewikkelder uit dan het vorige, maar dit is niet zo.",
-	"Maze.instructions1": "Een programma is een lijst van instructies. Stop een paar 'ga vooruit' instructies samen en help me op mijn doel te bereiken.",
+	"Maze.instructions1": "Stop een paar 'ga vooruit' instructies samen en help me op mijn doel te bereiken.",
 	"Maze.instructions2": "Wat is de volgorde van instructies om de weg te volgen?",
 	"Maze.instructions3": "Computers hebben een beperkt geheugen. Bereik het einde van de weg met enkel 2 instructies. Gebruik 'herhaal' om een instructie meerdere keren uit te voeren.",
 	"Apps.runProgram": "Test programma",

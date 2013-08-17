@@ -1,57 +1,5 @@
-body {
-  background-color: #fff;
-  font-family: sans-serif;
-  margin-top: 0;
-}
-h1 {
-  font-weight: normal;
-  font-size: 140%;
-}
-a:hover {
-  color: #f00;
-}
-.farSide {
-  text-align: right;
-}
-html[dir="RTL"] .farSide {
-  text-align: left;
-}
-
-/* Buttons */
-button {
-  margin: 5px;
-  margin-right: 12px;
-  margin-left: 0;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid #ddd;
-  font-size: large;
-  background-color: #eee;
-  color: black;
-}
 #linkButton {
-  float:right;
-}
-button:active {
-  border: 1px solid blue !important;
-}
-button:hover {
-  box-shadow: 2px 2px 5px #888;
-}
-button>img {
-  opacity: 0.6;
-}
-button:hover>img {
-  opacity: 1;
-}
-button.disabled:hover>img {
-  opacity: 0.6;
-}
-button.disabled {
-  display: none;
-}
-.notext {
-  font-size: 10%;
+  padding: 5px 10px;
 }
 
 #funcText {

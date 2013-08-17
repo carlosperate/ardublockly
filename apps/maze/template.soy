@@ -4,7 +4,7 @@
  * This is a Closure Template.
  *
  * To regenerate just en.js, run this command:
- * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs ../template.soy,template.soy
+ * java -jar ../_soy/SoyToJsSrcCompiler.jar --outputPathFormat generated/en.js --srcs ../common.soy,template.soy
  *
  * To regenerate all files, see: trunk/apps/template.soy.
  */
@@ -84,7 +84,7 @@
       <div id="hint">
       {switch $ij.level}
         {case 1}
-          {msg meaning="Maze.instructions1" desc="instructions - The word 'program' refers to a computer program, and the words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}A program is a sequence of blocks.  Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
+          {msg meaning="Maze.instructions1" desc="instructions - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
         {case 2}
           {msg meaning="Maze.instructions2" desc="instructions - The word 'steps' refers to instructions in a computer program; 'path' refers to the path through a maze."}What is the sequence of steps to follow this path?{/msg}
         {case 3}
@@ -92,7 +92,7 @@
         {case 4}
           {msg meaning="Maze.instructions4" desc="instructions - The goal is reaching the end point in a maze; 'block' refers to a child's building block."}Reach the goal using only five blocks.{/msg}
         {case 5}
-          {msg meaning="Maze.instructions5" desc="instructions - 'turn left' refers to rotating in place a quarter circle counter-clockwise."}Pegman will have to turn left when he cannot go straight.{/msg}
+          {msg meaning="Maze.instructions5" desc="instructions - 'turn left' refers to rotating in place a quarter circle counter-clockwise."}Breaking a problem into two pieces can make things easier.{/msg}
         {case 6}
           {msg meaning="Maze.instructions6" desc="instructions - An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true.  Try turning left if there is a path to the left.{/msg}
         {case 7}
@@ -129,10 +129,10 @@
         </button>
       </td>
       <td>
-        <button id="runButton" class="launch" onclick="Maze.runButtonClick();" title="{msg meaning="Maze.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the character through the maze."}Makes the character do what the blocks say.{/msg}">
+        <button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="{msg meaning="Maze.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the player through the maze."}Makes the player do what the blocks say.{/msg}">
           <img src="../../media/1x1.gif" class="run icon21"> {msg meaning="Apps.runProgram" desc="IBID"}Run Program{/msg}
         </button>
-        <button id="resetButton" class="launch" onclick="Maze.resetButtonClick();" style="display: none" title="{msg meaning="Maze.resetTooltip" desc="tooltip - Pressing this button restores the character to the start position and enables the user's program to be run again."}Put the character back at the start of the maze.{/msg}">
+        <button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="{msg meaning="Maze.resetTooltip" desc="tooltip - Pressing this button restores the player to the start position and enables the user's program to be run again."}Put the player back at the start of the maze.{/msg}">
           <img src="../../media/1x1.gif" class="stop icon21"> {msg meaning="Apps.resetProgram" desc="IBID"}Reset{/msg}
         </button>
       </td>
@@ -150,7 +150,7 @@
 
   {call apps.dialog /}
   <div id="dialogDone" class="dialogHiddenContent">
-    <div id="dialogDoneText" style="font-size: large"></div>
+    <div id="dialogDoneText" style="font-size: large; margin: 1em;"></div>
     <img src="../../media/1x1.gif" id="pegSpin">
     <div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div>
   </div>

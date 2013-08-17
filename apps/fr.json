@@ -46,7 +46,7 @@
 	"Maze.instructions5": "Monsieur Pegman devra tourner à gauche quand il ne pourra plus avancer tout droit.",
 	"Maze.instructions6": "Un bloc 'si' va exécuter ce qu'il y a dedans seulement si la condition est vraie. Essaie de tourner à gauche si il y a un chemin sur la gauche.",
 	"Maze.instructions7": "Ce labyrinthe a l'air plus compliqué que le précédent, mais il ne l'est pas.",
-	"Maze.instructions1": "Un programme est une séquence d'instructions. Empile des blocs d'instructions 'avance' pour m'aider à atteindre mon but.",
+	"Maze.instructions1": "Empile des blocs d'instructions 'avance' pour m'aider à atteindre mon but.",
 	"Maze.instructions2": "Qu'elle est la séquence de blocs à exécuter pour suivre ce chemin ?",
 	"Maze.instructions3": "Les ordinateurs n'ont pas beaucoup de mémoire. Utilise seulement deux blocs pour atteindre le but. Utilise le bloc 'repète' pour exécuter un bloc plus d'une fois.",
 	"Apps.runProgram": "Execute le programme",
