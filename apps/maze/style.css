@@ -9,7 +9,8 @@
   border-radius: 20px;
 }
 #blockly {
-  position: absolute;
+  position: fixed;
+  bottom: 10px;
 }
 #visualization {
   position: relative;

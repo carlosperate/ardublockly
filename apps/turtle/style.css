@@ -19,7 +19,8 @@ html[dir="RTL"] button.primary {
   padding-top: 1em;
 }
 #blockly {
-  position: absolute;
+  position: fixed;
+  bottom: 10px;
 }
 #display {
   border: 1px solid #ccc;

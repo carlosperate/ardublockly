@@ -66,11 +66,9 @@ Graph.init = function() {
   var visualization = document.getElementById('visualization');
   var onresize = function(e) {
     var top = visualization.offsetTop;
-    blocklyDiv.style.top = top + 'px';
+    blocklyDiv.style.top = Math.max(10, top - window.scrollY) + 'px';
     blocklyDiv.style.left = rtl ? '10px' : '420px';
     blocklyDiv.style.width = (window.innerWidth - 440) + 'px';
-    blocklyDiv.style.height =
-        (window.innerHeight - top - 20 + window.scrollY) + 'px';
   };
   window.addEventListener('scroll', function() {
       onresize();

@@ -152,7 +152,7 @@ Maze.map = [
 // Level 4.
 /**
  * Note, the path continues past the start and the goal in both directions.
- * This is intentionally done so kids see the maze is about getting from
+ * This is intentionally done so users see the maze is about getting from
  * the start to the goal and not necessarily about moving over every part of
  * the maze, 'mowing the lawn' as Neil calls it.
  */
@@ -291,6 +291,9 @@ Maze.tile_SHAPES = {
   'null4': [1, 3]
 };
 
+/**
+ * Create and layout all the nodes for the path, scenery, Pegman, and goal.
+ */
 Maze.drawMap = function() {
   var svg = document.getElementById('svgMaze');
 
@@ -420,7 +423,7 @@ Maze.drawMap = function() {
   pegmanClip.appendChild(clipRect);
   svg.appendChild(pegmanClip);
 
-  // Add pegman.
+  // Add Pegman.
   var pegmanIcon = document.createElementNS(Blockly.SVG_NS, 'image');
   pegmanIcon.setAttribute('id', 'pegman');
   pegmanIcon.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
@@ -481,11 +484,9 @@ Maze.init = function() {
   var visualization = document.getElementById('visualization');
   var onresize = function(e) {
     var top = visualization.offsetTop;
-    blocklyDiv.style.top = top + 'px';
+    blocklyDiv.style.top = Math.max(10, top - window.scrollY) + 'px';
     blocklyDiv.style.left = rtl ? '10px' : '420px';
     blocklyDiv.style.width = (window.innerWidth - 440) + 'px';
-    blocklyDiv.style.height =
-        (window.innerHeight - top - 20 + window.scrollY) + 'px';
   };
   window.addEventListener('scroll', function() {
       onresize();

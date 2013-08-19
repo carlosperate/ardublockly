@@ -287,6 +287,10 @@ Blockly.isRightButton = function(e) {
  * @return {!Object} Object with x and y properties in output coordinates.
  */
 Blockly.convertCoordinates = function(x, y, toSvg) {
+  if (toSvg) {
+    x -= window.scrollX;
+    y -= window.scrollY;
+  }
   var svgPoint = Blockly.svg.createSVGPoint();
   svgPoint.x = x;
   svgPoint.y = y;
@@ -294,7 +298,12 @@ Blockly.convertCoordinates = function(x, y, toSvg) {
   if (toSvg) {
     matrix = matrix.inverse();
   }
-  return svgPoint.matrixTransform(matrix);
+  var xy = svgPoint.matrixTransform(matrix);
+  if (!toSvg) {
+    xy.x += window.scrollX;
+    xy.y += window.scrollY;
+  }
+  return xy;
 };
 
 /**

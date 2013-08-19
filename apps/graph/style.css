@@ -18,7 +18,8 @@
   background-color: #36c;
 }
 #blockly {
-  position: absolute;
+  position: fixed;
+  bottom: 10px;
 }
 #languageMenu {
   vertical-align: top;
