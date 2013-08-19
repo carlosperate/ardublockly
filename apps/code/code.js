@@ -73,16 +73,16 @@ function tabClick(id) {
   // Deselect all tabs and hide all panes.
   for (var x in TABS_) {
     document.getElementById('tab_' + TABS_[x]).className = 'taboff';
-    document.getElementById('content_' + TABS_[x]).style.display = 'none';
+    document.getElementById('content_' + TABS_[x]).style.visibility = 'hidden';
   }
 
   // Select the active tab.
   selected = id.replace('tab_', '');
   document.getElementById(id).className = 'tabon';
   // Show the selected pane.
-  var content = document.getElementById('content_' + selected);
-  content.style.display = 'block';
+  document.getElementById('content_' + selected).style.visibility = 'visible';
   renderContent();
+  Blockly.fireUiEvent(window, 'resize');
 }
 
 /**
@@ -91,11 +91,7 @@ function tabClick(id) {
 function renderContent() {
   var content = document.getElementById('content_' + selected);
   // Initialize the pane.
-  if (content.id == 'content_blocks') {
-    // If the workspace was changed by the XML tab, Firefox will have performed
-    // an incomplete rendering due to Blockly being invisible.  Rerender.
-    Blockly.mainWorkspace.render();
-  } else if (content.id == 'content_xml') {
+  if (content.id == 'content_xml') {
     var xmlTextarea = document.getElementById('content_xml');
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
@@ -118,24 +114,36 @@ function renderContent() {
 
 /**
  * Initialize Blockly.  Called on page load.
- * @param {!Blockly} blockly Instance of Blockly from iframe.
  */
-function init(blockly) {
-  window.Blockly = blockly;
+function init() {
   BlocklyApps.init();
+
+  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('content_blocks'),
+      {path: '../../',
+       rtl: rtl,
+       toolbox: toolbox});
 
   // Add to reserved word list: Local variables in execution evironment (runJS)
   // and the infinite loop detection function.
   Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
 
-  // Make the 'Blocks' tab line up with the toolbox.
-  window.setTimeout(function() {
-      if (Blockly.Toolbox.width) {
-        document.getElementById('tab_blocks').style.minWidth =
-            (Blockly.Toolbox.width - 38) + 'px';
-            // Account for the 19 pixel margin and on each side.
-      }
-  }, 1);
+  var container = document.getElementById('content_area');
+  var onresize = function(e) {
+    var top = BlocklyApps.getBBox_(container).y + 'px';
+    // Deselect all tabs and hide all panes.
+    for (var x in TABS_) {
+      document.getElementById('content_' + TABS_[x]).style.top = top;
+    }
+    // Make the 'Blocks' tab line up with the toolbox.
+    if (Blockly.Toolbox.width) {
+      document.getElementById('tab_blocks').style.minWidth =
+          (Blockly.Toolbox.width - 38) + 'px';
+          // Account for the 19 pixel margin and on each side.
+    }
+  };
+  window.addEventListener('resize', onresize, false);
 
   BlocklyApps.loadBlocks('');
 
@@ -145,10 +153,13 @@ function init(blockly) {
   }
 
   tabClick('tab_' + selected);
+  Blockly.fireUiEvent(window, 'resize');
 
   // Lazy-load the syntax-highlighting.
   window.setTimeout(BlocklyApps.importPrettify, 1);
 }
+
+window.addEventListener('load', init);
 
 /**
  * Execute the user's code.

@@ -27,6 +27,10 @@
  */
 {template .start}
   {call .messages /}
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../javascript_compressed.js"></script>
+  <script type="text/javascript" src="../../python_compressed.js"></script>
+  <script type="text/javascript" src="../../{$ij.langSrc}"></script>
   <table width="100%" height="100%">
     <tr>
       <td>
@@ -71,15 +75,15 @@
       </td>
     </tr>
     <tr>
-      <td height="99%" colspan=2>
+      <td height="99%" colspan=2 id="content_area">
         {call .toolbox /}
-        <iframe id="content_blocks" class="content" src="frame.html?{$ij.langSrc}"></iframe>
-        <pre id="content_javascript" class="content"></pre>
-        <pre id="content_python" class="content"></pre>
-        <textarea id="content_xml" class="content"></textarea>
       </td>
     </tr>
   </table>
+  <div id="content_blocks" class="content"></div>
+  <pre id="content_javascript" class="content"></pre>
+  <pre id="content_python" class="content"></pre>
+  <textarea id="content_xml" class="content"></textarea>
   {call apps.dialog /}
 {/template}
 
