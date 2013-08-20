@@ -27,15 +27,17 @@
 goog.provide('Blockly.Mutator');
 
 goog.require('Blockly.Bubble');
+goog.require('Blockly.Icon');
 
 
 /**
  * Class for a mutator dialog.
  * @param {!Array.<string>} quarkNames List of names of sub-blocks for flyout.
+ * @extends {Blockly.Icon}
  * @constructor
  */
 Blockly.Mutator = function(quarkNames) {
-  this.block_ = null;
+  Blockly.Mutator.superClass_.constructor.call(this, null);
   this.quarkXml_ = [];
   // Convert the list of names into a list of XML objects for the flyout.
   for (var x = 0; x < quarkNames.length; x++) {
@@ -44,30 +46,7 @@ Blockly.Mutator = function(quarkNames) {
     this.quarkXml_[x] = element;
   }
 };
-
-/**
- * Height and width of the mutator icon.
- */
-Blockly.Mutator.ICON_SIZE = 16;
-
-/**
- * Bubble UI (if visible).
- * @type {Blockly.Bubble}
- * @private
- */
-Blockly.Mutator.prototype.bubble_ = null;
-
-/**
- * Absolute X coordinate of icon's center.
- * @private
- */
-Blockly.Mutator.prototype.iconX_ = 0;
-
-/**
- * Absolute Y coordinate of icon's centre.
- * @private
- */
-Blockly.Mutator.prototype.iconY_ = 0;
+goog.inherits(Blockly.Mutator, Blockly.Icon);
 
 /**
  * Width of workspace.
@@ -85,14 +64,12 @@ Blockly.Mutator.prototype.workspaceHeight_ = 0;
  * Create the icon on the block.
  */
 Blockly.Mutator.prototype.createIcon = function() {
+  Blockly.Icon.prototype.createIcon_.call(this);
   /* Here's the markup that will be generated:
-  <g class="blocklyIconGroup">
-    <rect class="blocklyIconShield" width="16" height="16"/>
-    <path class="blocklyMutatorMark" d="..."></path>
-  </g>
+  <rect class="blocklyIconShield" width="16" height="16"/>
+  <path class="blocklyMutatorMark" d="..."></path>
   */
-  this.iconGroup_ = Blockly.createSvgElement('g', {}, null);
-  var quantum = Blockly.Mutator.ICON_SIZE / 8;
+  var quantum = Blockly.Icon.RADIUS / 4;
   var iconShield = Blockly.createSvgElement('rect',
       {'class': 'blocklyIconShield',
        'width': 8 * quantum,
@@ -122,22 +99,6 @@ Blockly.Mutator.prototype.createIcon = function() {
   this.iconMark_ = Blockly.createSvgElement('path',
       {'class': 'blocklyIconMark',
        'd': Blockly.Mutator.plusPath_}, this.iconGroup_);
-  this.block_.getSvgRoot().appendChild(this.iconGroup_);
-  Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
-  this.updateEditable();
-};
-
-/**
- * Add or remove the UI indicating if this mutator may be opened/closed or not.
- */
-Blockly.Mutator.prototype.updateEditable = function() {
-  if (this.block_.isEditable() && !this.block_.isInFlyout) {
-    Blockly.addClass_(/** @type {!Element} */ (this.iconGroup_),
-                      'blocklyIconGroup');
-  } else {
-    Blockly.removeClass_(/** @type {!Element} */ (this.iconGroup_),
-                         'blocklyIconGroup');
-  }
 };
 
 /**
@@ -204,14 +165,6 @@ Blockly.Mutator.prototype.resizeBubble_ = function() {
     var translation = 'translate(' + this.workspaceWidth_ + ',0)';
     this.workspace_.getCanvas().setAttribute('transform', translation);
   }
-};
-
-/**
- * Is the mutator bubble visible?
- * @return {boolean} True if the bubble is visible.
- */
-Blockly.Mutator.prototype.isVisible = function() {
-  return !!this.bubble_;
 };
 
 /**
@@ -347,99 +300,9 @@ Blockly.Mutator.prototype.getFlyoutMetrics_ = function() {
 };
 
 /**
- * Clicking on the icon toggles if the bubble is visible.
- * @param {!Event} e Mouse click event.
- * @private
- */
-Blockly.Mutator.prototype.iconClick_ = function(e) {
-  if (this.block_.isEditable() && !this.block_.isInFlyout) {
-    this.setVisible(!this.isVisible());
-  }
-};
-
-/**
- * Change the colour of a mutator to match its block.
- */
-Blockly.Mutator.prototype.updateColour = function() {
-  if (this.isVisible()) {
-    var hexColour = Blockly.makeColour(this.block_.getColour());
-    this.bubble_.setColour(hexColour);
-  }
-};
-
-/**
  * Dispose of this mutator.
  */
 Blockly.Mutator.prototype.dispose = function() {
-  // Dispose of and unlink the icon.
-  goog.dom.removeNode(this.iconGroup_);
-  this.iconGroup_ = null;
-  // Dispose of and unlink the bubble.
-  this.setVisible(false);
-  // Disconnect links between the block and the mutator.
   this.block_.mutator = null;
-  this.block_ = null;
-};
-
-/**
- * Render the icon for this mutator.
- * @param {number} cursorX Horizontal offset at which to position the icon.
- * @return {number} Horizontal offset for next item to draw.
- */
-Blockly.Mutator.prototype.renderIcon = function(cursorX) {
-  if (this.block_.collapsed) {
-    this.iconGroup_.setAttribute('display', 'none');
-    return cursorX;
-  }
-  this.iconGroup_.setAttribute('display', 'block');
-
-  var TOP_MARGIN = 5;
-  if (Blockly.RTL) {
-    cursorX -= Blockly.Mutator.ICON_SIZE;
-  }
-  this.iconGroup_.setAttribute('transform',
-      'translate(' + cursorX + ', ' + TOP_MARGIN + ')');
-  this.computeIconLocation();
-  if (Blockly.RTL) {
-    cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
-  } else {
-    cursorX += Blockly.Mutator.ICON_SIZE + Blockly.BlockSvg.SEP_SPACE_X;
-  }
-  return cursorX;
-};
-
-/**
- * Notification that the icon has moved.  Update the arrow accordingly.
- * @param {number} x Absolute horizontal location.
- * @param {number} y Absolute vertical location.
- */
-Blockly.Mutator.prototype.setIconLocation = function(x, y) {
-  this.iconX_ = x;
-  this.iconY_ = y;
-  if (this.isVisible()) {
-    this.bubble_.setAnchorLocation(x, y);
-  }
-};
-
-/**
- * Notification that the icon has moved, but we don't really know where.
- * Recompute the icon's location from scratch.
- */
-Blockly.Mutator.prototype.computeIconLocation = function() {
-  // Find coordinates for the centre of the icon and update the arrow.
-  var blockXY = this.block_.getRelativeToSurfaceXY();
-  var iconXY = Blockly.getRelativeXY_(this.iconGroup_);
-  var newX = blockXY.x + iconXY.x + Blockly.Mutator.ICON_SIZE / 2;
-  var newY = blockXY.y + iconXY.y + Blockly.Mutator.ICON_SIZE / 2;
-  if (newX !== this.iconX_ || newY !== this.iconY_) {
-    this.setIconLocation(newX, newY);
-  }
-};
-
-/**
- * Returns the center of the block's icon relative to the surface.
- * @return {!Object} Object with x and y properties.
- */
-Blockly.Mutator.prototype.getIconLocation = function() {
-  return {x: this.iconX_, y: this.iconY_};
+  Blockly.Icon.prototype.dispose.call(this);
 };
