@@ -92,9 +92,6 @@ Blockly.Mutator.prototype.createIcon = function() {
   </g>
   */
   this.iconGroup_ = Blockly.createSvgElement('g', {}, null);
-  if (!this.block_.isInFlyout) {
-    this.iconGroup_.setAttribute('class', 'blocklyIconGroup');
-  }
   var quantum = Blockly.Mutator.ICON_SIZE / 8;
   var iconShield = Blockly.createSvgElement('rect',
       {'class': 'blocklyIconShield',
@@ -126,8 +123,20 @@ Blockly.Mutator.prototype.createIcon = function() {
       {'class': 'blocklyIconMark',
        'd': Blockly.Mutator.plusPath_}, this.iconGroup_);
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
-  if (this.block_.editable && !this.block_.isInFlyout) {
-    Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  this.updateEditable();
+};
+
+/**
+ * Add or remove the UI indicating if this mutator may be opened/closed or not.
+ */
+Blockly.Mutator.prototype.updateEditable = function() {
+  if (this.block_.isEditable() && !this.block_.isInFlyout) {
+    Blockly.addClass_(/** @type {!Element} */ (this.iconGroup_),
+                      'blocklyIconGroup');
+  } else {
+    Blockly.removeClass_(/** @type {!Element} */ (this.iconGroup_),
+                         'blocklyIconGroup');
   }
 };
 
@@ -231,8 +240,8 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
       child.render();
     }
     // The root block should not be dragable or deletable.
-    this.rootBlock_.movable = false;
-    this.rootBlock_.deletable = false;
+    this.rootBlock_.setMovable(false);
+    this.rootBlock_.setDeletable(false);
     var margin = this.flyout_.CORNER_RADIUS * 2;
     var x = this.flyout_.width_ + margin;
     if (Blockly.RTL) {
@@ -343,7 +352,9 @@ Blockly.Mutator.prototype.getFlyoutMetrics_ = function() {
  * @private
  */
 Blockly.Mutator.prototype.iconClick_ = function(e) {
-  this.setVisible(!this.isVisible());
+  if (this.block_.isEditable() && !this.block_.isInFlyout) {
+    this.setVisible(!this.isVisible());
+  }
 };
 
 /**

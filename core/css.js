@@ -27,6 +27,7 @@ goog.provide('Blockly.Css');
 
 goog.require('goog.cssom');
 
+
 /**
  * Inject the CSS into the DOM.  This is preferable over using a regular CSS
  * file since:

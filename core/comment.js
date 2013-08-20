@@ -25,6 +25,8 @@
 
 goog.provide('Blockly.Comment');
 
+goog.require('Blockly.Bubble');
+
 
 /**
  * Class for a comment.
@@ -90,9 +92,6 @@ Blockly.Comment.prototype.createIcon_ = function() {
   </g>
   */
   this.iconGroup_ = Blockly.createSvgElement('g', {}, null);
-  if (!this.block_.isInFlyout) {
-    this.iconGroup_.setAttribute('class', 'blocklyIconGroup');
-  }
   var iconShield = Blockly.createSvgElement('circle',
       {'class': 'blocklyIconShield',
        'r': Blockly.Comment.ICON_RADIUS,
@@ -104,8 +103,20 @@ Blockly.Comment.prototype.createIcon_ = function() {
        'y': 2 * Blockly.Comment.ICON_RADIUS - 3}, this.iconGroup_);
   this.iconMark_.appendChild(document.createTextNode('?'));
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
-  if (this.block_.editable && !this.block_.isInFlyout) {
-    Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  this.updateEditable();
+};
+
+/**
+ * Add or remove the UI indicating if this comment may be opened/closed or not.
+ */
+Blockly.Comment.prototype.updateEditable = function() {
+  if (this.block_.isEditable() && !this.block_.isInFlyout) {
+    Blockly.addClass_(/** @type {!Element} */ (this.iconGroup_),
+                      'blocklyIconGroup');
+  } else {
+    Blockly.removeClass_(/** @type {!Element} */ (this.iconGroup_),
+                         'blocklyIconGroup');
   }
 };
 
@@ -201,7 +212,9 @@ Blockly.Comment.prototype.setVisible = function(visible) {
  * @private
  */
 Blockly.Comment.prototype.iconClick_ = function(e) {
-  this.setVisible(!this.isVisible());
+  if (this.block_.isEditable() && !this.block_.isInFlyout) {
+    this.setVisible(!this.isVisible());
+  }
 };
 
 

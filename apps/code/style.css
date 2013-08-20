@@ -58,8 +58,6 @@ td {
   visibility: hidden;
   margin: 0;
   padding: 1ex;
-  border: 1px solid #ccc;
-  border-top: none;
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -73,6 +71,8 @@ td {
 #content_xml {
   resize: none;
   outline: none;
+  border: none;
+  font-family: monospace;
 }
 #languageMenu {
   vertical-align: top;

@@ -120,14 +120,14 @@ Blockly.Xml.blockToDom_ = function(block) {
   if (block.disabled) {
     element.setAttribute('disabled', true);
   }
-  if (!block.deletable) {
+  if (!block.isDeletable()) {
     element.setAttribute('deletable', false);
   }
-  if (!block.movable) {
+  if (!block.isMovable()) {
     element.setAttribute('movable', false);
   }
-  if (!block.editable) {
-    element.setAttribute('movable', false);
+  if (!block.isEditable()) {
+    element.setAttribute('editable', false);
   }
 
   if (block.nextConnection) {
@@ -249,15 +249,15 @@ Blockly.Xml.domToBlock_ = function(workspace, xmlBlock) {
   }
   var deletable = xmlBlock.getAttribute('deletable');
   if (deletable) {
-    block.deletable = (deletable == 'true');
+    block.setDeletable(deletable == 'true');
   }
   var movable = xmlBlock.getAttribute('movable');
   if (movable) {
-    block.movable = (movable == 'true');
+    block.setMovable(movable == 'true');
   }
   var editable = xmlBlock.getAttribute('editable');
   if (editable) {
-    block.editable = (editable == 'true');
+    block.setEditable(editable == 'true');
   }
 
   var blockChild = null;

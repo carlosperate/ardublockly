@@ -25,6 +25,8 @@
 
 goog.provide('Blockly.Warning');
 
+goog.require('Blockly.Bubble');
+
 
 /**
  * Class for a warning.
@@ -80,9 +82,6 @@ Blockly.Warning.prototype.createIcon_ = function() {
   </g>
   */
   this.iconGroup_ = Blockly.createSvgElement('g', {}, null);
-  if (!this.block_.isInFlyout) {
-    this.iconGroup_.setAttribute('class', 'blocklyIconGroup');
-  }
   var iconShield = Blockly.createSvgElement('path',
       {'class': 'blocklyIconShield',
        'd': 'M 2,15 Q -1,15 0.5,12 L 6.5,1.7 Q 8,-1 9.5,1.7 L 15.5,12 ' +
@@ -94,8 +93,20 @@ Blockly.Warning.prototype.createIcon_ = function() {
        'y': 2 * Blockly.Warning.ICON_RADIUS - 3}, this.iconGroup_);
   this.iconMark_.appendChild(document.createTextNode('!'));
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
-  if (this.block_.editable && !this.block_.isInFlyout) {
-    Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
+  this.updateEditable();
+};
+
+/**
+ * Add or remove the UI indicating if this warning may be opened/closed or not.
+ */
+Blockly.Warning.prototype.updateEditable = function() {
+  if (this.block_.isEditable() && !this.block_.isInFlyout) {
+    Blockly.addClass_(/** @type {!Element} */ (this.iconGroup_),
+                      'blocklyIconGroup');
+  } else {
+    Blockly.removeClass_(/** @type {!Element} */ (this.iconGroup_),
+                         'blocklyIconGroup');
   }
 };
 
@@ -172,7 +183,9 @@ Blockly.Warning.prototype.setVisible = function(visible) {
  * @private
  */
 Blockly.Warning.prototype.iconClick_ = function(e) {
-  this.setVisible(!this.isVisible());
+  if (this.block_.isEditable() && !this.block_.isInFlyout) {
+    this.setVisible(!this.isVisible());
+  }
 };
 
 /**

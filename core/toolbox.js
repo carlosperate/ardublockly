@@ -31,6 +31,7 @@ goog.require('goog.style');
 goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.ui.tree.TreeNode');
 
+
 /**
  * Width of the toolbox.
  * @type {number}

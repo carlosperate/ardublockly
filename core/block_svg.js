@@ -27,6 +27,7 @@ goog.provide('Blockly.BlockSvg');
 
 goog.require('goog.userAgent');
 
+
 /**
  * Class for a block's SVG representation.
  * @param {!Blockly.Block} block The underlying block object.
@@ -45,10 +46,7 @@ Blockly.BlockSvg = function(block) {
       {'class': 'blocklyPathLight'}, this.svgGroup_);
   this.svgPath_.tooltip = this.block_;
   Blockly.Tooltip && Blockly.Tooltip.bindMouseEvents(this.svgPath_);
-  if (block.movable) {
-    Blockly.addClass_(/** @type {!Element} */ (this.svgGroup_),
-                      'blocklyDraggable');
-  }
+  this.updateMovable();
 };
 
 /**
@@ -70,6 +68,19 @@ Blockly.BlockSvg.prototype.init = function() {
   }
   if (block.mutator) {
     block.mutator.createIcon();
+  }
+};
+
+/**
+ * Add or remove the UI indicating if this block is movable or not.
+ */
+Blockly.BlockSvg.prototype.updateMovable = function() {
+  if (this.block_.isMovable()) {
+    Blockly.addClass_(/** @type {!Element} */ (this.svgGroup_),
+                      'blocklyDraggable');
+  } else {
+    Blockly.removeClass_(/** @type {!Element} */ (this.svgGroup_),
+                         'blocklyDraggable');
   }
 };
 
@@ -453,14 +464,9 @@ Blockly.BlockSvg.prototype.render = function() {
     cursorX = -cursorX;
   }
   // Move the icons into position.
-  if (this.block_.mutator) {
-    cursorX = this.block_.mutator.renderIcon(cursorX);
-  }
-  if (this.block_.comment) {
-    cursorX = this.block_.comment.renderIcon(cursorX);
-  }
-  if (this.block_.warning) {
-    cursorX = this.block_.warning.renderIcon(cursorX);
+  var icons = this.block_.getIcons();
+  for (var x = 0; x < icons.length; x++) {
+    cursorX = icons[x].renderIcon(cursorX);
   }
   cursorX += Blockly.RTL ?
       Blockly.BlockSvg.SEP_SPACE_X : -Blockly.BlockSvg.SEP_SPACE_X;

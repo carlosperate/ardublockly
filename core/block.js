@@ -61,14 +61,14 @@ Blockly.Block = function(workspace, prototypeName) {
   this.rendered = false;
   this.collapsed = false;
   this.disabled = false;
-  this.deletable = !Blockly.readOnly;
-  this.movable = !Blockly.readOnly;
-  this.editable = !Blockly.readOnly;
   this.tooltip = '';
   this.contextMenu = true;
 
   this.parentBlock_ = null;
   this.childBlocks_ = [];
+  this.deletable_ = true;
+  this.movable_ = true;
+  this.editable_ = true;
 
   this.workspace = workspace;
   this.isInFlyout = workspace.isFlyout;
@@ -119,6 +119,24 @@ Blockly.Block.prototype.comment = null;
  * @type {Blockly.Warning}
  */
 Blockly.Block.prototype.warning = null;
+
+/**
+ * Returns a list of mutator, comment, and warning icons.
+ * @return {!Array} List of icons.
+ */
+Blockly.Block.prototype.getIcons = function() {
+  var icons = [];
+  if (this.mutator) {
+    icons.push(this.mutator);
+  }
+  if (this.comment) {
+    icons.push(this.comment);
+  }
+  if (this.warning) {
+    icons.push(this.warning);
+  }
+  return icons;
+};
 
 /**
  * Create and initialize the SVG representation of the block.
@@ -265,14 +283,9 @@ Blockly.Block.prototype.dispose = function(healStack, animate) {
     this.childBlocks_[x].dispose(false);
   }
   // Then dispose of myself.
-  if (this.mutator) {
-    this.mutator.dispose();
-  }
-  if (this.comment) {
-    this.comment.dispose();
-  }
-  if (this.warning) {
-    this.warning.dispose();
+  var icons = this.getIcons();
+  for (var x = 0; x < icons.length; x++) {
+    icons[x].dispose();
   }
   // Dispose of all inputs and their titles.
   for (var x = 0, input; input = this.inputList[x]; x++) {
@@ -389,7 +402,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
     if (Blockly.ContextMenu) {
       this.showContextMenu_(e.clientX, e.clientY);
     }
-  } else if (!this.movable) {
+  } else if (!this.isMovable()) {
     // Allow unmovable blocks to be selected and context menued, but not
     // dragged.  Let this event bubble up to document, so the workspace may be
     // dragged instead.
@@ -410,23 +423,14 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
         'mouseup', this, this.onMouseUp_);
     Blockly.Block.onMouseMoveWrapper_ = Blockly.bindEvent_(document,
         'mousemove', this, this.onMouseMove_);
-    // Build a list of comments that need to be moved and where they started.
+    // Build a list of bubbles that need to be moved and where they started.
     this.draggedBubbles_ = [];
     var descendants = this.getDescendants();
     for (var x = 0, descendant; descendant = descendants[x]; x++) {
-      if (descendant.mutator) {
-        var data = descendant.mutator.getIconLocation();
-        data.bubble = descendant.mutator;
-        this.draggedBubbles_.push(data);
-      }
-      if (descendant.comment) {
-        var data = descendant.comment.getIconLocation();
-        data.bubble = descendant.comment;
-        this.draggedBubbles_.push(data);
-      }
-      if (descendant.warning) {
-        var data = descendant.warning.getIconLocation();
-        data.bubble = descendant.warning;
+      var icons = descendant.getIcons();
+      for (var y = 0; y < icons.length; y++) {
+        var data = icons[y].getIconLocation();
+        data.bubble = icons[y];
         this.draggedBubbles_.push(data);
       }
     }
@@ -525,7 +529,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
   var block = this;
   var options = [];
 
-  if (this.deletable) {
+  if (this.isDeletable()) {
     // Option to duplicate this block.
     var duplicateOption = {
       text: Blockly.MSG_DUPLICATE_BLOCK,
@@ -686,14 +690,9 @@ Blockly.Block.prototype.moveConnections_ = function(dx, dy) {
   for (var x = 0; x < myConnections.length; x++) {
     myConnections[x].moveBy(dx, dy);
   }
-  if (this.mutator) {
-    this.mutator.computeIconLocation();
-  }
-  if (this.comment) {
-    this.comment.computeIconLocation();
-  }
-  if (this.warning) {
-    this.warning.computeIconLocation();
+  var icons = this.getIcons();
+  for (var x = 0; x < icons.length; x++) {
+    icons[x].computeIconLocation();
   }
 
   // Recurse through all blocks attached under this one.
@@ -792,7 +791,7 @@ Blockly.Block.prototype.onMouseMove_ = function(e) {
       Blockly.localConnection_ = localConnection;
     }
     // Flip the trash can lid if needed.
-    if (this.workspace.trashcan && this.deletable) {
+    if (this.workspace.trashcan && this.isDeletable()) {
       this.workspace.trashcan.onMouseMove(e);
     }
   }
@@ -965,6 +964,65 @@ Blockly.Block.prototype.getDescendants = function() {
 };
 
 /**
+ * Get whether this block is deletable or not.
+ * @return {boolean} True if deletable.
+ */
+Blockly.Block.prototype.isDeletable = function() {
+  return this.deletable_ && !Blockly.readOnly;
+};
+
+/**
+ * Set whether this block is deletable or not.
+ * @param {boolean} deletable True if deletable.
+ */
+Blockly.Block.prototype.setDeletable = function(deletable) {
+  this.deletable_ = deletable;
+  this.svg_ && this.svg_.updateMovable();
+};
+
+/**
+ * Get whether this block is movable or not.
+ * @return {boolean} True if movable.
+ */
+Blockly.Block.prototype.isMovable = function() {
+  return this.movable_ && !Blockly.readOnly;
+};
+
+/**
+ * Set whether this block is movable or not.
+ * @param {boolean} movable True if movable.
+ */
+Blockly.Block.prototype.setMovable = function(movable) {
+  this.movable_ = movable;
+};
+
+/**
+ * Get whether this block is editable or not.
+ * @return {boolean} True if editable.
+ */
+Blockly.Block.prototype.isEditable = function() {
+  return this.editable_ && !Blockly.readOnly;
+};
+
+/**
+ * Set whether this block is editable or not.
+ * @param {boolean} editable True if editable.
+ */
+Blockly.Block.prototype.setEditable = function(editable) {
+  this.editable_ = editable;
+  for (var x = 0, input; input = this.inputList[x]; x++) {
+    for (var y = 0, title; title = input.titleRow[y]; y++) {
+      title.updateEditable();
+    }
+  }
+  var icons = this.getIcons();
+  for (var x = 0; x < icons.length; x++) {
+    icons[x].updateEditable();
+  }
+};
+
+
+/**
  * Get the colour of a block.
  * @return {number} HSV hue value.
  */
@@ -981,14 +1039,9 @@ Blockly.Block.prototype.setColour = function(colourHue) {
   if (this.svg_) {
     this.svg_.updateColour();
   }
-  if (this.mutator) {
-    this.mutator.updateColour();
-  }
-  if (this.comment) {
-    this.comment.updateColour();
-  }
-  if (this.warning) {
-    this.warning.updateColour();
+  var icons = this.getIcons();
+  for (var x = 0; x < icons.length; x++) {
+    icons[x].updateColour();
   }
   if (this.rendered) {
     // Bump every dropdown to change its colour.
@@ -1225,14 +1278,9 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
   }
 
   if (collapsed) {
-    if (this.mutator) {
-      this.mutator.setVisible(false);
-    }
-    if (this.comment) {
-      this.comment.setVisible(false);
-    }
-    if (this.warning) {
-      this.warning.setVisible(false);
+    var icons = this.getIcons();
+    for (var x = 0; x < icons.length; x++) {
+      icons[x].setVisible(false);
     }
   }
 

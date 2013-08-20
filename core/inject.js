@@ -249,7 +249,7 @@ Blockly.createDom_ = function(container) {
           var MARGIN = 20;
           var blocks = Blockly.mainWorkspace.getTopBlocks(false);
           for (var b = 0, block; block = blocks[b]; b++) {
-            if (!block.deletable) {
+            if (!block.isDeletable()) {
               continue;
             }
             var xy = block.getRelativeToSurfaceXY();
