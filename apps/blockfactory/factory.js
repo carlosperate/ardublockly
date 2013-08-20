@@ -155,8 +155,7 @@ function updateLanguage() {
   code.push('  }');
   code.push('};');
 
-  code = prettyPrintOne(code.join('\n'), 'js');
-  document.getElementById('languagePre').innerHTML = code;
+  injectCode(code, 'languagePre');
 }
 
 /**
@@ -374,8 +373,7 @@ function updateGenerator() {
   }
   code.push('};');
 
-  code = prettyPrintOne(code.join('\n'), 'js');
-  document.getElementById('generatorPre').innerHTML = code;
+  injectCode(code, 'generatorPre');
 }
 
 /**
@@ -398,6 +396,22 @@ function updatePreview() {
   previewBlock.render();
   previewBlock.movable = false;
   previewBlock.deletable = false;
+}
+
+/**
+ * Inject code into a pre tag, with syntax highlighting.
+ * Safe from HTML/script injection.
+ * @param {!Array.<string>} code Array of lines of code.
+ * @param {string} id ID of <pre> element to inject into.
+ */
+function injectCode(code, id) {
+  var pre = document.getElementById(id);
+  pre.innerHTML = '';
+  // Inject the code as a textNode, then extract with innerHTML, thus escaping.
+  pre.appendChild(document.createTextNode(code.join('\n')));
+  code = pre.innerHTML;
+  code = prettyPrintOne(code, 'js');
+  pre.innerHTML = code;
 }
 
 /**

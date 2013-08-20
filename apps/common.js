@@ -494,11 +494,15 @@ BlocklyApps.stripCode = function(code) {
 BlocklyApps.showCode = function(origin) {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   code = BlocklyApps.stripCode(code);
+  var pre = document.getElementById('containerCode');
+  pre.innerHTML = '';
+  // Inject the code as a textNode, then extract with innerHTML, thus escaping.
+  pre.appendChild(document.createTextNode(code));
   if (typeof prettyPrintOne == 'function') {
+    code = pre.innerHTML;
     code = prettyPrintOne(code, 'js');
+    pre.innerHTML = code;
   }
-  var container = document.getElementById('containerCode');
-  containerCode.innerHTML = code;
 
   var content = document.getElementById('dialogCode');
   var style = {
