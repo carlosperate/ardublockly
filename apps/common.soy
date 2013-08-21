@@ -72,6 +72,26 @@
 {/template}
 
 /**
+ * Code dialog.
+ */
+{template .codeDialog private="true"}
+  <div id="dialogCode" class="dialogHiddenContent">
+    <pre id="containerCode"></pre>
+    {call apps.ok /}
+  </div>
+{/template}
+
+/**
+ * Storage dialog.
+ */
+{template .storageDialog private="true"}
+  <div id="dialogStorage" class="dialogHiddenContent">
+    <div id="containerStorage"></div>
+    {call apps.ok /}
+  </div>
+{/template}
+
+/**
  * OK button for dialogs.
  */
 {template .ok private="true"}

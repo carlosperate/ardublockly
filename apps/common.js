@@ -97,7 +97,7 @@ BlocklyApps.getLang = function() {
 };
 
 /**
- * User's language.
+ * User's language.  E.g. 'en'
  * @type {?string}
  */
 BlocklyApps.LANG = undefined;
@@ -448,16 +448,16 @@ BlocklyApps.getBBox_ = function(element) {
  * @param {string} message Text to alert.
  */
 BlocklyApps.storageAlert = function(message) {
-  var content = document.createElement('div');
+  var container = document.getElementById('containerStorage');
+  container.innerHTML = '';
   var lines = message.split('\n');
   for (var i = 0; i < lines.length; i++) {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(lines[i]));
-    content.appendChild(div);
+    var p = document.createElement('p');
+    p.appendChild(document.createTextNode(lines[i]));
+    container.appendChild(p);
   }
-  // Add OK button.
-  content.innerHTML += apps.ok();
 
+  var content = document.getElementById('dialogStorage');
   var origin = document.getElementById('linkButton');
   var style = {
     width: '50%',

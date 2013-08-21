@@ -149,14 +149,12 @@
   <div id="pegmanMenu"></div>
 
   {call apps.dialog /}
+  {call apps.codeDialog /}
+  {call apps.storageDialog /}
   <div id="dialogDone" class="dialogHiddenContent">
     <div id="dialogDoneText" style="font-size: large; margin: 1em;"></div>
     <img src="../../media/1x1.gif" id="pegSpin">
     <div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div>
-  </div>
-  <div id="dialogCode" class="dialogHiddenContent">
-    <pre id="containerCode"></pre>
-    {call apps.ok /}
   </div>
   <div id="dialogOneTopBlock" class="dialogHiddenContent">
     <div>{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</div>
