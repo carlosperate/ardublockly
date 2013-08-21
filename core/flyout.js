@@ -67,6 +67,13 @@ Blockly.Flyout = function() {
    * @private
    */
   this.buttons_ = [];
+
+  /**
+   * List of event listeners.
+   * @type {!Array.<!Array>}
+   * @private
+   */
+  this.listeners_ = [];
 };
 
 /**
@@ -113,6 +120,7 @@ Blockly.Flyout.prototype.createDom = function() {
  * Unlink from all DOM elements to prevent memory leaks.
  */
 Blockly.Flyout.prototype.dispose = function() {
+  this.hide();
   if (this.onResizeWrapper_) {
     Blockly.unbindEvent_(this.onResizeWrapper_);
     this.onResizeWrapper_ = null;
@@ -134,7 +142,6 @@ Blockly.Flyout.prototype.dispose = function() {
   this.svgOptions_ = null;
   this.targetWorkspace_ = null;
   this.targetWorkspaceMetrics_ = null;
-  this.buttons_.splice(0);
 };
 
 /**
@@ -284,6 +291,11 @@ Blockly.Flyout.prototype.hide = function() {
     return;
   }
   this.svgGroup_.style.display = 'none';
+  // Delete all the event listeners.
+  for (var x = 0, listen; listen = this.listeners_[x]; x++) {
+    Blockly.unbindEvent_(listen);
+  }
+  this.listeners_.splice(0);
   // Delete all the blocks.
   var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
@@ -293,7 +305,6 @@ Blockly.Flyout.prototype.hide = function() {
   }
   // Delete all the background buttons.
   for (var x = 0, rect; rect = this.buttons_[x]; x++) {
-    Blockly.unbindEvent_(rect.wrapper_);
     goog.dom.removeNode(rect);
   }
   this.buttons_.splice(0);
@@ -347,14 +358,19 @@ Blockly.Flyout.prototype.show = function(xmlList) {
       Blockly.Comment && child.setCommentText(null);
     }
     block.render();
-    var bBox = block.getSvgRoot().getBBox();
+    var root = block.getSvgRoot();
+    var bBox = root.getBBox();
     var x = Blockly.RTL ? 0 : margin + Blockly.BlockSvg.TAB_WIDTH;
     block.moveBy(x, cursorY);
     flyoutWidth = Math.max(flyoutWidth, bBox.width);
     cursorY += bBox.height + gaps[i];
     if (!block.disabled) {
-      Blockly.bindEvent_(block.getSvgRoot(), 'mousedown', null,
-                         Blockly.Flyout.createBlockFunc_(this, block));
+      this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
+          Blockly.Flyout.createBlockFunc_(this, block)));
+      this.listeners_.push(Blockly.bindEvent_(root, 'mouseover', block.svg_,
+          block.svg_.addSelect));
+      this.listeners_.push(Blockly.bindEvent_(root, 'mouseout', block.svg_,
+          block.svg_.removeSelect));
     }
   }
   flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
@@ -375,8 +391,12 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         'fill-opacity': 0}, null);
     // Add the rectangles under the blocks, so that the blocks' tooltips work.
     this.svgOptions_.insertBefore(rect, this.svgOptions_.firstChild);
-    rect.wrapper_ = Blockly.bindEvent_(rect, 'mousedown', null,
-        Blockly.Flyout.createBlockFunc_(this, block));
+    this.listeners_.push(Blockly.bindEvent_(rect, 'mousedown', null,
+        Blockly.Flyout.createBlockFunc_(this, block)));
+    this.listeners_.push(Blockly.bindEvent_(rect, 'mouseover', block.svg_,
+        block.svg_.addSelect));
+    this.listeners_.push(Blockly.bindEvent_(rect, 'mouseout', block.svg_,
+        block.svg_.removeSelect));
     this.buttons_[i] = rect;
   }
   // Record the width for .getMetrics and .position_.
