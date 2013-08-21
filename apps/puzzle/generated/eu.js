@@ -14,6 +14,16 @@ apps.dialog = function(opt_data, opt_ignored, opt_ijData) {
 };
 
 
+apps.codeDialog = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="dialogCode" class="dialogHiddenContent"><pre id="containerCode"></pre>' + apps.ok(null, null, opt_ijData) + '</div>';
+};
+
+
+apps.storageDialog = function(opt_data, opt_ignored, opt_ijData) {
+  return '<div id="dialogStorage" class="dialogHiddenContent"><div id="containerStorage"></div>' + apps.ok(null, null, opt_ijData) + '</div>';
+};
+
+
 apps.ok = function(opt_data, opt_ignored, opt_ijData) {
   return '<div class="farSide" style="padding: 1ex 3ex 0"><button class="secondary" onclick="BlocklyApps.hideDialog(true)">Ados</button></div>';
 };
