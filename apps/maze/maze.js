@@ -516,8 +516,7 @@ Maze.init = function() {
   Maze.reset(true);
   Blockly.addChangeListener(function() {Maze.updateCapacity()});
 
-  document.body.addEventListener('mousemove',
-      Maze.updatePegSpin_, true);
+  document.body.addEventListener('mousemove', Maze.updatePegSpin_, true);
 
   // Lazy-load the syntax-highlighting.
   window.setTimeout(BlocklyApps.importPrettify, 1);
@@ -951,8 +950,8 @@ Maze.updatePegSpin_ = function(e) {
   var bBox = BlocklyApps.getBBox_(pegSpin);
   var x = bBox.x + bBox.width / 2 - window.scrollX;
   var y = bBox.y + bBox.height / 2 - window.scrollY;
-  var dx = e.x - x;
-  var dy = e.y - y;
+  var dx = e.clientX - x;
+  var dy = e.clientY - y;
   var angle = Math.atan(dy / dx);
   // Convert from radians to degrees because I suck at math.
   angle = angle / Math.PI * 180;

@@ -30,7 +30,7 @@
 	"Maze.moveForwardTooltip": "Packman läuft 1 Feld vor.",
 	"Turtle.fontHelpUrl": "http://en.wikipedia.org/wiki/Font",
 	"Turtle.fontBold": "bold",
-	"Turtle.turtleVisibilityTooltip": "Makes the turtle (green circle and arrow) visible or invisible.",
+	"Turtle.turtleVisibilityTooltip": "Makes the turtle (circle and arrow) visible or invisible.",
 	"Apps.hashError": "Entschuldigung, konnte die gespeicherten Blöcke für '%1' nicht finden.",
 	"Puzzle.country3Language": "Chinesisch",
 	"Puzzle.checkAnswers": "Antworten überprüfen",

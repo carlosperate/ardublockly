@@ -35,7 +35,7 @@
 	"Turtle.fontHelpUrl": "http://en.wikipedia.org/wiki/Font",
 	"Turtle.moveTooltip": "A teknőcöt mozgatja előre, vagy hátra a pixelben megadott értékkel.",
 	"Turtle.fontBold": "bold",
-	"Turtle.turtleVisibilityTooltip": "a teknőc (zöld kör és nyíl) láthatóvá tétele, vagy elrejtése.",
+	"Turtle.turtleVisibilityTooltip": "a teknőc (kör és nyíl) láthatóvá tétele, vagy elrejtése.",
 	"Plane.description1": "Egy repülőgépnek az utasok több sorban ülnek az utastérben.  Az utastér minden sorában négy szék van.",
 	"Apps.hashError": "Elnézést, a '%1' hivatkozásnem tartozik egyetlen programhoz sem.",
 	"Plane.description3": "Egy repülőgépnek 2 ülése van a pilótafülkében (a pliótának és a másodpilótának), az utasok 1. és 2. osztályon utazhatnak. Az 1. osztályon négy szék van egy sorban. A 2. osztályon öt szék van egy sorban.",

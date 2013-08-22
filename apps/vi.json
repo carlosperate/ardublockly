@@ -33,7 +33,7 @@
 	"Maze.moveForwardTooltip": "Di chuyển Pegman tới một bước.",
 	"Turtle.fontHelpUrl": "http://en.wikipedia.org/wiki/Font",
 	"Turtle.fontBold": "bold",
-	"Turtle.turtleVisibilityTooltip": "Makes the turtle (green circle and arrow) visible or invisible.",
+	"Turtle.turtleVisibilityTooltip": "Makes the turtle (circle and arrow) visible or invisible.",
 	"Plane.description1": "An airplane has a number of rows of passenger seats.  Each row contains four seats.",
 	"Apps.hashError": "Không tìm thấy chương trình được lưu ở '%1'.",
 	"Plane.description3": "An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of 1st class and 2nd class passenger seats.  Each 1st class row contains four seats. Each 2nd class row contains five seats.",

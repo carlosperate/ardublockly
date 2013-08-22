@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-08-16 15:34:58.436833",
+        "lastupdated": "2013-08-21 16:49:59.838592",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -128,7 +128,7 @@
     "Turtle.penTooltip": "Lifts or lowers the pen, to stop or start drawing.",
     "Turtle.penUp": "pen up",
     "Turtle.penDown": "pen down",
-    "Turtle.turtleVisibilityTooltip": "Makes the turtle (green circle and arrow) visible or invisible.",
+    "Turtle.turtleVisibilityTooltip": "Makes the turtle (circle and arrow) visible or invisible.",
     "Turtle.hideTurtle": "hide turtle",
     "Turtle.showTurtle": "show turtle",
     "Turtle.printHelpUrl": "http://en.wikipedia.org/wiki/Printing",

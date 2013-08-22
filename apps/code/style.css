@@ -59,8 +59,9 @@ td {
   margin: 0;
   padding: 1ex;
   position: absolute;
-  width: 100%;
-  bottom: 0;
+}
+pre.content {
+  overflow: scroll;
 }
 #content_blocks {
   padding: 0;
@@ -73,6 +74,7 @@ td {
   outline: none;
   border: none;
   font-family: monospace;
+  overflow: scroll;
 }
 #languageMenu {
   vertical-align: top;

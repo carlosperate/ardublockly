@@ -144,10 +144,17 @@ Code.init = function() {
 
   var container = document.getElementById('content_area');
   var onresize = function(e) {
-    var top = BlocklyApps.getBBox_(container).y + 'px';
-    // Deselect all tabs and hide all panes.
+    var bBox = BlocklyApps.getBBox_(container);
     for (var x in Code.TABS_) {
-      document.getElementById('content_' + Code.TABS_[x]).style.top = top;
+      var el = document.getElementById('content_' + Code.TABS_[x]);
+      el.style.top = bBox.y + 'px';
+      el.style.left = bBox.x + 'px';
+      // Height and width need to be set, read back, then set again to
+      // compensate for scrollbars.
+      el.style.height = bBox.height + 'px';
+      el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
+      el.style.width = bBox.width + 'px';
+      el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
     }
     // Make the 'Blocks' tab line up with the toolbox.
     if (Blockly.Toolbox.width) {
