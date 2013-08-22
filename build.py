@@ -145,6 +145,7 @@ class Gen_compressed(threading.Thread):
     self.gen_generator('python')
     self.gen_language('de')
     self.gen_language('en')
+    self.gen_language('en_us')
     self.gen_language('pt_br')
     self.gen_language('vi')
     self.gen_language('zh_tw')
