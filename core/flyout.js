@@ -296,6 +296,10 @@ Blockly.Flyout.prototype.hide = function() {
     Blockly.unbindEvent_(listen);
   }
   this.listeners_.splice(0);
+  if (this.reflowWrapper_) {
+    Blockly.unbindEvent_(this.reflowWrapper_);
+    this.reflowWrapper_ = null;
+  }
   // Delete all the blocks.
   var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
@@ -365,8 +369,13 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     flyoutWidth = Math.max(flyoutWidth, bBox.width);
     cursorY += bBox.height + gaps[i];
     if (!block.disabled) {
-      this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
-          Blockly.Flyout.createBlockFunc_(this, block)));
+      if (this.autoClose) {
+        this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
+            this.createBlockFunc_(block)));
+      } else {
+        this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
+            this.blockMouseDown_(block)));
+      }
       this.listeners_.push(Blockly.bindEvent_(root, 'mouseover', block.svg_,
           block.svg_.addSelect));
       this.listeners_.push(Blockly.bindEvent_(root, 'mouseout', block.svg_,
@@ -392,7 +401,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     // Add the rectangles under the blocks, so that the blocks' tooltips work.
     this.svgOptions_.insertBefore(rect, this.svgOptions_.firstChild);
     this.listeners_.push(Blockly.bindEvent_(rect, 'mousedown', null,
-        Blockly.Flyout.createBlockFunc_(this, block)));
+        this.createBlockFunc_(block)));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mouseover', block.svg_,
         block.svg_.addSelect));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mouseout', block.svg_,
@@ -406,31 +415,119 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 
   // Fire a resize event to update the flyout's scrollbar.
   Blockly.fireUiEvent(window, 'resize');
+  this.reflowWrapper_ = Blockly.bindEvent_(this.workspace_.getCanvas(),
+      'blocklyWorkspaceChange', this, this.reflow);
+  this.workspace_.fireChangeEvent();
 };
 
 /**
- * Filter the blocks on the flyout to disable the ones that are above the
- * capacity limit.
+ * Compute width of flyout.
+ * For RTL: lay out the blocks right-aligned.
+ */
+Blockly.Flyout.prototype.reflow = function() {
+  // TODO: Factor this functionality out of Flyout.show and call reflow instead.
+  var flyoutWidth = 0;
+  var margin = this.CORNER_RADIUS;
+  var blocks = this.workspace_.getTopBlocks(false);
+  for (var x = 0, block; block = blocks[x]; x++) {
+    var root = block.getSvgRoot();
+    var bBox = root.getBBox();
+    flyoutWidth = Math.max(flyoutWidth, bBox.width);
+  }
+  flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
+                 Blockly.Scrollbar.scrollbarThickness;
+  // TODO: Handle RTL.
+  if (this.width_ != flyoutWidth) {
+    // Record the width for .getMetrics and .position_.
+    this.width_ = flyoutWidth;
+    // Fire a resize event to update the flyout's scrollbar.
+    Blockly.fireUiEvent(window, 'resize');
+  }
+};
+
+/**
+ * Move a block to a specific location on the drawing surface.
+ * @param {number} dx Horizontal location.
+ * @param {number} dy Vertical location.
+ */
+Blockly.Block.prototype.moveTo = function(x, y) {
+  var oldXY = this.getRelativeToSurfaceXY();
+  this.svg_.getRootElement().setAttribute('transform',
+      'translate(' + x + ', ' + y + ')');
+  this.moveConnections_(x - oldXY.x, y - oldXY.y);
+};
+
+/**
+ * Handle a mouse-down on an SVG block in a non-closing flyout.
+ * @param {!Blockly.Block} originBlock The flyout block to copy.
+ * @return {!Function} Function to call when block is clicked.
  * @private
  */
-Blockly.Flyout.prototype.filterForCapacity_ = function() {
-  var remainingCapacity = this.targetWorkspace_.remainingCapacity();
-  var blocks = this.workspace_.getTopBlocks(false);
-  for (var i = 0, block; block = blocks[i]; i++) {
-    var allBlocks = block.getDescendants();
-    var disabled = allBlocks.length > remainingCapacity;
-    block.setDisabled(disabled);
+Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
+  var flyout = this;
+  return function(e) {
+    Blockly.terminateDrag_();
+    Blockly.hideChaff();
+    if (Blockly.isRightButton(e)) {
+      // Right-click.
+      if (Blockly.ContextMenu) {
+        block.showContextMenu_(e.clientX, e.clientY);
+      }
+    } else {
+      // Left-click (or middle click)
+      Blockly.removeAllRanges();
+      Blockly.setCursorHand_(true);
+      // Record the current mouse position.
+      Blockly.Flyout.startDragMouseX_ = e.clientX;
+      Blockly.Flyout.startDragMouseY_ = e.clientY;
+      Blockly.Flyout.startBlock_ = block;
+      Blockly.Flyout.startFlyout_ = flyout;
+      Blockly.Flyout.onMouseUpWrapper_ = Blockly.bindEvent_(document,
+          'mouseup', this, Blockly.terminateDrag_);
+      Blockly.Flyout.onMouseMoveWrapper_ = Blockly.bindEvent_(document,
+          'mousemove', this, flyout.onMouseMove_);
+    }
+    // This event has been handled.  No need to bubble up to the document.
+    e.stopPropagation();
+  };
+};
+
+/**
+ * Mouse button is down on a block in a non-closing flyout.  Create the block
+ * if the mouse moves beyond a small radius.  This allows one to play with
+ * fields without instantiating blocks that instantly self-destruct.
+ * @param {!Event} e Mouse move event.
+ * @private
+ */
+Blockly.Flyout.prototype.onMouseMove_ = function(e) {
+  if (e.type == 'mousemove' && e.x <= 1 && e.y == 0 && e.button == 0) {
+    /* HACK:
+     Safari Mobile 6.0 and Chrome for Android 18.0 fire rogue mousemove events
+     on certain touch actions. Ignore events with these signatures.
+     This may result in a one-pixel blind spot in other browsers,
+     but this shouldn't be noticable. */
+    e.stopPropagation();
+    return;
+  }
+  Blockly.removeAllRanges();
+  var dx = e.clientX - Blockly.Flyout.startDragMouseX_;
+  var dy = e.clientY - Blockly.Flyout.startDragMouseY_;
+  // Still dragging within the sticky DRAG_RADIUS.
+  var dr = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+  if (dr > Blockly.DRAG_RADIUS) {
+    // Create the block.
+    Blockly.Flyout.startFlyout_.createBlockFunc_(Blockly.Flyout.startBlock_)(e);
   }
 };
 
 /**
  * Create a copy of this block on the workspace.
- * @param {!Blockly.Flyout} flyout Instance of the flyout.
  * @param {!Blockly.Block} originBlock The flyout block to copy.
  * @return {!Function} Function to call when block is clicked.
  * @private
  */
-Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
+Blockly.Flyout.prototype.createBlockFunc_ = function(originBlock) {
+  var flyout = this;
   return function(e) {
     if (Blockly.isRightButton(e)) {
       // Right-click.  Don't create a block, let the context menu show.
@@ -463,4 +560,38 @@ Blockly.Flyout.createBlockFunc_ = function(flyout, originBlock) {
     // Start a dragging operation on the new block.
     block.onMouseDown_(e);
   };
+};
+
+/**
+ * Filter the blocks on the flyout to disable the ones that are above the
+ * capacity limit.
+ * @private
+ */
+Blockly.Flyout.prototype.filterForCapacity_ = function() {
+  var remainingCapacity = this.targetWorkspace_.remainingCapacity();
+  var blocks = this.workspace_.getTopBlocks(false);
+  for (var i = 0, block; block = blocks[i]; i++) {
+    var allBlocks = block.getDescendants();
+    var disabled = allBlocks.length > remainingCapacity;
+    block.setDisabled(disabled);
+  }
+};
+
+/**
+ * Stop binding to the global mouseup and mousemove events.
+ * @private
+ */
+Blockly.Flyout.terminateDrag_ = function() {
+  if (Blockly.Flyout.onMouseUpWrapper_) {
+    Blockly.unbindEvent_(Blockly.Flyout.onMouseUpWrapper_);
+    Blockly.Flyout.onMouseUpWrapper_ = null;
+  }
+  if (Blockly.Flyout.onMouseMoveWrapper_) {
+    Blockly.unbindEvent_(Blockly.Flyout.onMouseMoveWrapper_);
+    Blockly.Flyout.onMouseMoveWrapper_ = null;
+  }
+  Blockly.Flyout.startDragMouseX_ = 0;
+  Blockly.Flyout.startDragMouseY_ = 0;
+  Blockly.Flyout.startBlock_ = null;
+  Blockly.Flyout.startFlyout_ = null;
 };

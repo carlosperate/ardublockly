@@ -275,7 +275,7 @@ Blockly.Block.prototype.dispose = function(healStack, animate) {
   if (Blockly.selected == this) {
     Blockly.selected = null;
     // If there's a drag in-progress, unlink the mouse events.
-    Blockly.Block.terminateDrag_();
+    Blockly.terminateDrag_();
   }
 
   // First, dispose of all my children.
@@ -394,7 +394,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   }
   // Update Blockly's knowledge of its own location.
   Blockly.svgResize();
-  Blockly.Block.terminateDrag_();
+  Blockly.terminateDrag_();
   this.select();
   Blockly.hideChaff();
   if (Blockly.isRightButton(e)) {
@@ -447,7 +447,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
  * @private
  */
 Blockly.Block.prototype.onMouseUp_ = function(e) {
-  Blockly.Block.terminateDrag_();
+  Blockly.terminateDrag_();
   if (Blockly.selected && Blockly.highlightedConnection_) {
     // Connect two blocks together.
     Blockly.localConnection_.connect(Blockly.highlightedConnection_);
@@ -529,7 +529,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
   var block = this;
   var options = [];
 
-  if (this.isDeletable()) {
+  if (this.isDeletable() && !block.isInFlyout) {
     // Option to duplicate this block.
     var duplicateOption = {
       text: Blockly.MSG_DUPLICATE_BLOCK,
@@ -636,7 +636,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
   options.push(helpOption);
 
   // Allow the block to add or modify options.
-  if (this.customContextMenu) {
+  if (this.customContextMenu && !block.isInFlyout) {
     this.customContextMenu(options);
   }
 
@@ -810,6 +810,10 @@ Blockly.Block.prototype.bumpNeighbours_ = function() {
     return;
   }
   var rootBlock = this.getRootBlock();
+  if (rootBlock.isInFlyout) {
+    // Don't move blocks around in a flyout.
+    return;
+  }
   // Loop though every connection on this block.
   var myConnections = this.getConnections_(false);
   for (var x = 0; x < myConnections.length; x++) {

@@ -278,6 +278,10 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
   }
   // Move the root block.
   var rootBlock = this.sourceBlock_.getRootBlock();
+  if (rootBlock.isInFlyout) {
+    // Don't move blocks around in a flyout.
+    return;
+  }
   var reverse = false;
   if (!rootBlock.isMovable()) {
     // Can't bump an uneditable block away.

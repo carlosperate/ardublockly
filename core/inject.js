@@ -270,8 +270,7 @@ Blockly.createDom_ = function(container) {
           }
         }
       };
-      Blockly.bindEvent_(Blockly.mainWorkspace.getCanvas(),
-          'blocklyWorkspaceChange', Blockly.mainWorkspace, workspaceChanged);
+      Blockly.addChangeListener(workspaceChanged);
     }
   }
 
