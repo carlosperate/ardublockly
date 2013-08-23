@@ -36,13 +36,13 @@ Blockly.MSG_EXTERNAL_INPUTS = 'Chỗ Gắn Bên Ngoài';
 Blockly.MSG_INLINE_INPUTS = 'Chỗ Gắn Cùng Dòng';
 Blockly.MSG_DELETE_BLOCK = 'Xóa Mảnh Này';
 Blockly.MSG_DELETE_X_BLOCKS = 'Xóa %1 Mảnh';
-Blockly.MSG_COLLAPSE_BLOCK = 'Thu Gọn';
-Blockly.MSG_EXPAND_BLOCK = 'Mở Lớn';
+Blockly.MSG_COLLAPSE_BLOCK = 'Thu Nhỏ Mảnh';
+Blockly.MSG_EXPAND_BLOCK = 'Mở Lớn Mảnh';
 Blockly.MSG_DISABLE_BLOCK = 'Ngưng Tác Dụng';
 Blockly.MSG_ENABLE_BLOCK = 'Phục Hồi Tác Dụng';
 Blockly.MSG_HELP = 'Trợ Giúp';
-Blockly.MSG_COLLAPSE_ALL = 'Collapse Blocks';
-Blockly.MSG_EXPAND_ALL = 'Expand Blocks';
+Blockly.MSG_COLLAPSE_ALL = 'Thu Nhỏ Mọi Mảnh';
+Blockly.MSG_EXPAND_ALL = 'Mở Lớn Mọi Mảnh';
 
 // Variable renaming.
 Blockly.MSG_CHANGE_VALUE_TITLE = 'Thay giá trị thành:';
@@ -56,8 +56,8 @@ Blockly.LANG_COLOUR_PICKER_HELPURL = 'http://en.wikipedia.org/wiki/Color';
 Blockly.LANG_COLOUR_PICKER_TOOLTIP = 'Chọn một màu từ bảng màu.';
 
 Blockly.LANG_COLOUR_RANDOM_HELPURL = 'http://randomcolour.com';
-Blockly.LANG_COLOUR_RANDOM_TITLE = 'random colour';
-Blockly.LANG_COLOUR_RANDOM_TOOLTIP = 'Choose a colour at random.';
+Blockly.LANG_COLOUR_RANDOM_TITLE = 'màu bất kỳ';
+Blockly.LANG_COLOUR_RANDOM_TOOLTIP = 'chọn một màu bất kỳ.';
 
 Blockly.LANG_COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html';
 Blockly.LANG_COLOUR_RGB_TITLE = 'Tạo màu từ';
@@ -118,7 +118,7 @@ Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'sang lần lặp ti�
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Thoát khỏi vòng lặp hiện tại.';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Bỏ qua phần còn lại trong vòng lặp này,\n' +
     'và sang lần lặp tiếp theo.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING ='Cẩn thận:\n' +
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING ='Chú ý:\n' +
     'Mảnh này chỉ có thế dùng\n' +
     'trong các vòng lặp.';
 
@@ -173,8 +173,8 @@ Blockly.LANG_LOGIC_BOOLEAN_FALSE = 'sai';
 Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP = 'Hoàn trả "đúng" hoặc "sai".';
 
 Blockly.LANG_LOGIC_NULL_HELPURL = 'http://en.wikipedia.org/wiki/Nullable_type';
-Blockly.LANG_LOGIC_NULL = 'null';
-Blockly.LANG_LOGIC_NULL_TOOLTIP = 'Returns null.';
+Blockly.LANG_LOGIC_NULL = 'trống không';
+Blockly.LANG_LOGIC_NULL_TOOLTIP = 'Hoàn trả trống không.';
 
 Blockly.LANG_LOGIC_TERNARY_HELPURL = 'http://en.wikipedia.org/wiki/%3F:';
 Blockly.LANG_LOGIC_TERNARY_CONDITION = 'kiểm tra';
@@ -217,7 +217,7 @@ Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Hoàn trả Arctang của một góc (the
 
 Blockly.LANG_MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
 Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Hoàn trả các đẳng số thường gặp: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026),\n' +
-    'sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026), or \u221e (infinity).';
+    'sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026), or \u221e (vô cực).';
 
 Blockly.LANG_MATH_IS_EVEN = 'chẵn';
 Blockly.LANG_MATH_IS_ODD = 'lẻ';
@@ -463,9 +463,9 @@ Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Hoàn trả giá trị của.';
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Tạo mảnh "đặt vào %1"';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_SET_TITLE = 'đặt vào';
+Blockly.LANG_VARIABLES_SET_TITLE = 'cho';
 Blockly.LANG_VARIABLES_SET_ITEM = 'vật';
-Blockly.LANG_VARIABLES_SET_TAIL = null;
+Blockly.LANG_VARIABLES_SET_TAIL = 'bằng';
 Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Đặt giá trị của biến này thành...';
 Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Tạo mảnh "lấy %1"';
 
@@ -473,7 +473,7 @@ Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Tạo mảnh "lấy %1"';
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_DEFNORETURN_TITLE = '';
 Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = 'thủ tục';
-Blockly.LANG_PROCEDURES_BEFORE_PARAMS = 'with:';
+Blockly.LANG_PROCEDURES_BEFORE_PARAMS = 'với:';
 Blockly.LANG_PROCEDURES_DEFNORETURN_DO = '';
 Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP = 'Một thủ tục không có giá trị hoàn trả.';
 
@@ -483,7 +483,7 @@ Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETUR
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'hoàn trả';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Một thủ tục có giá trị hoàn trả.';
-Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Cẩn thận:\n' +
+Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Chú ý:\n' +
     'Thủ tục này có lặp lại\n' +
     'tên các tham số.';
 
@@ -502,6 +502,6 @@ Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Làm nổi bật thủ tục';
 Blockly.LANG_PROCEDURES_CREATE_DO = 'Tạo mảnh "thực hiện %1"';
 
 Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'Khi điều kiện đúng thì hoàn trả một giá trị.';
-Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Warning:\n' +
+Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Chú ý:\n' +
     'Mảnh này chỉ có thể dùng\n' +
     'trong một thủ tục.';
