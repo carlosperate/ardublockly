@@ -164,10 +164,7 @@ Blockly.Python.math_number_property = function() {
   // Check if a number is even, odd, prime, whole, positive, or negative
   // or if it is divisible by certain number. Returns true or false.
   var number_to_check = Blockly.Python.valueToCode(this, 'NUMBER_TO_CHECK',
-      Blockly.Python.ORDER_MULTIPLICATIVE);
-  if (!number_to_check) {
-    return ['False', Blockly.Python.ORDER_ATOMIC];
-  }
+      Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
   var dropdown_property = this.getTitleValue('PROPERTY');
   var code;
   if (dropdown_property == 'PRIME') {

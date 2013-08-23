@@ -160,7 +160,7 @@ Blockly.JavaScript.math_number_property = function() {
   // Check if a number is even, odd, prime, whole, positive, or negative
   // or if it is divisible by certain number. Returns true or false.
   var number_to_check = Blockly.JavaScript.valueToCode(this, 'NUMBER_TO_CHECK',
-      Blockly.JavaScript.ORDER_MODULUS) || 'NaN';
+      Blockly.JavaScript.ORDER_MODULUS) || '0';
   var dropdown_property = this.getTitleValue('PROPERTY');
   var code;
   if (dropdown_property == 'PRIME') {
@@ -212,7 +212,7 @@ Blockly.JavaScript.math_number_property = function() {
       break;
     case 'DIVISIBLE_BY':
       var divisor = Blockly.JavaScript.valueToCode(this, 'DIVISOR',
-          Blockly.JavaScript.ORDER_MODULUS) || 'NaN';
+          Blockly.JavaScript.ORDER_MODULUS) || '0';
       code = number_to_check + ' % ' + divisor + ' == 0';
       break;
   }
