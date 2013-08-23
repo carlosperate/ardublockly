@@ -280,7 +280,7 @@ Turtle.animate = function() {
   Turtle.display();
 
   // Scale the speed non-linearly, to give better precision at the fast end.
-  var stepSpeed = 1000 * Math.pow(Turtle.speedSlider.getValue(), 2);
+  var stepSpeed = 1000 * Math.pow(1 - Turtle.speedSlider.getValue(), 2);
   Turtle.pid = window.setTimeout(Turtle.animate, stepSpeed);
 };
 

@@ -149,7 +149,7 @@ Slider.knobMouseMove_ = function(e) {
   thisSlider.knob_.setAttribute('transform',
       'translate(' + x + ',' + thisSlider.KNOB_Y_ + ')');
 
-  thisSlider.value_ = 1 - (x - thisSlider.KNOB_MIN_X_) /
+  thisSlider.value_ = (x - thisSlider.KNOB_MIN_X_) /
       (thisSlider.KNOB_MAX_X_ - thisSlider.KNOB_MIN_X_);
   thisSlider.changeFunc_ && thisSlider.changeFunc_(thisSlider.value_);
 };

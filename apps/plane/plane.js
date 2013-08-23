@@ -52,7 +52,7 @@ Plane.rows2nd = 0;
  * @param {number} value New slider position.
  */
 Plane.sliderChange = function(value) {
-  var newRows = Math.round((1 - value) * 410 / 20);
+  var newRows = Math.round(value * 410 / 20);
   Plane.redraw(newRows);
 };
 

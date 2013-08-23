@@ -151,7 +151,7 @@ Puzzle.init = function() {
     }
     // Initialize all the blocks.
     for (var i = 0, block; block = blocks[i]; i++) {
-      block.deletable = false;
+      block.setDeletable(false);
       block.initSvg();
       block.render();
     }
