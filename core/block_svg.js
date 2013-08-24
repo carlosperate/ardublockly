@@ -581,26 +581,8 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     // Expand input size if there is a connection.
     if (input.connection && input.connection.targetConnection) {
       var linkedBlock = input.connection.targetBlock();
-      try {
-        var bBox = linkedBlock.getSvgRoot().getBBox();
-      } catch (e) {
-        // Firefox has trouble with hidden elements (Bug 528969).
-        var bBox = {height: 0, width: 0};
-      }
-      if (Blockly.BROKEN_CONTROL_POINTS) {
-        /* HACK:
-         WebKit bug 67298 causes control points to be included in the reported
-         bounding box.  The render functions (below) add two 5px spacer control
-         points that we need to subtract.
-        */
-        bBox.height -= 10;
-        if (linkedBlock.nextConnection) {
-          // Bottom control point partially masked by lower tab.
-          bBox.height += 4;
-        }
-      }
-      // Subtract one from the height due to the shadow.
-      input.renderHeight = Math.max(input.renderHeight, bBox.height - 1);
+      var bBox = linkedBlock.getHeightWidth();
+      input.renderHeight = Math.max(input.renderHeight, bBox.height);
       input.renderWidth = Math.max(input.renderWidth, bBox.width);
     }
 

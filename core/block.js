@@ -384,6 +384,34 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
 };
 
 /**
+ * Returns a bounding box describing the dimensions of this block.
+ * @return {!Object} Object with height and width properties.
+ */
+Blockly.Block.prototype.getHeightWidth = function() {
+  try {
+    var bBox = this.getSvgRoot().getBBox();
+  } catch (e) {
+    // Firefox has trouble with hidden elements (Bug 528969).
+    return {height: 0, width: 0};
+  }
+  if (Blockly.BROKEN_CONTROL_POINTS) {
+    /* HACK:
+     WebKit bug 67298 causes control points to be included in the reported
+     bounding box.  The render functions (below) add two 5px spacer control
+     points that we need to subtract.
+    */
+    bBox.height -= 10;
+    if (this.nextConnection) {
+      // Bottom control point partially masked by lower tab.
+      bBox.height += 4;
+    }
+  }
+  // Subtract one from the height due to the shadow.
+  bBox.height -= 1;
+  return bBox;
+};
+
+/**
  * Handle a mouse-down on an SVG block.
  * @param {!Event} e Mouse down event.
  * @private

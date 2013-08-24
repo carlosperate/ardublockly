@@ -237,23 +237,24 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
 
 /**
  * Update the source block when the mutator's blocks are changed.
- * Delete any block that's out of bounds.
+ * Delete or bump any block that's out of bounds.
  * Fired whenever a change is made to the mutator's workspace.
  * @private
  */
 Blockly.Mutator.prototype.workspaceChanged_ = function() {
-  // Delete any block that's sitting on top of the flyout, or above the window.
   if (Blockly.Block.dragMode_ == 0) {
     var blocks = this.workspace_.getTopBlocks(false);
-    var MARGIN = 10;
+    var MARGIN = 20;
     for (var b = 0, block; block = blocks[b]; b++) {
       var xy = block.getRelativeToSurfaceXY();
-      var bBox = block.getSvgRoot().getBBox();
-      if ((xy.y < MARGIN - bBox.height) ||  // Off the top.
-          (Blockly.RTL ? xy.x > -this.flyout_.width_ + MARGIN :
-           xy.x < this.flyout_.width_ - MARGIN)  // Over the flyout.
-          ) {
-        block.dispose(false, false);
+      var bBox = block.getHeightWidth();
+      if (Blockly.RTL ? xy.x > -this.flyout_.width_ + MARGIN :
+           xy.x < this.flyout_.width_ - MARGIN) {
+        // Delete any block that's sitting on top of the flyout.
+        block.dispose(false, true);
+      } else if (xy.y + bBox.height < MARGIN) {
+        // Bump any block that's above the top back inside.
+        block.moveBy(0, MARGIN - bBox.height - xy.y);
       }
     }
   }

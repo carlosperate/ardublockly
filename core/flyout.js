@@ -341,7 +341,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         var block = Blockly.Xml.domToBlock_(
             /** @type {!Blockly.Workspace} */ (this.workspace_), xml);
         blocks.push(block);
-        gaps.push(margin * 2);
+        gaps.push(margin * 3);
       }
     }
   }
@@ -363,7 +363,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     }
     block.render();
     var root = block.getSvgRoot();
-    var bBox = root.getBBox();
+    var bBox = block.getHeightWidth();
     var x = Blockly.RTL ? 0 : margin + Blockly.BlockSvg.TAB_WIDTH;
     block.moveBy(x, cursorY);
     flyoutWidth = Math.max(flyoutWidth, bBox.width);
@@ -392,11 +392,11 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     }
     // Create an invisible rectangle over the block to act as a button.  Just
     // using the block as a button is poor, since blocks have holes in them.
-    var bBox = block.getSvgRoot().getBBox();
+    var bBox = block.getHeightWidth();
     var xy = block.getRelativeToSurfaceXY();
     var rect = Blockly.createSvgElement('rect',
         {'width': bBox.width, 'height': bBox.height,
-        'x': xy.x + bBox.x, 'y': xy.y + bBox.y,
+        'x': Blockly.RTL ? xy.x - bBox.width : xy.x, 'y': xy.y,
         'fill-opacity': 0}, null);
     // Add the rectangles under the blocks, so that the blocks' tooltips work.
     this.svgOptions_.insertBefore(rect, this.svgOptions_.firstChild);
@@ -431,7 +431,7 @@ Blockly.Flyout.prototype.reflow = function() {
   var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
     var root = block.getSvgRoot();
-    var bBox = root.getBBox();
+    var bBox = block.getHeightWidth();
     flyoutWidth = Math.max(flyoutWidth, bBox.width);
   }
   flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
