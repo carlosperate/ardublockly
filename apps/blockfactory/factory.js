@@ -68,8 +68,8 @@ function initEditor(blockly) {
                                       'factory_base');
   rootBlock.initSvg();
   rootBlock.render();
-  rootBlock.movable = false;
-  rootBlock.deletable = false;
+  rootBlock.setMovable(false);
+  rootBlock.setDeletable(false);
 
   EditorBlockly.addChangeListener(onchange);
 }
@@ -190,6 +190,12 @@ function getTitles(block) {
         // Result: new Blockly.FieldTextInput('Hello'), 'GREET'
         titles.push('new Blockly.FieldTextInput(' +
             escapeString(block.getTitleValue('TEXT')) + '), ' +
+            escapeString(block.getTitleValue('TITLENAME')));
+        break;
+      case 'title_angle':
+        // Result: new Blockly.FieldAngle(90), 'ANGLE'
+        titles.push('new Blockly.FieldAngle(' +
+            escapeString(block.getTitleValue('ANGLE')) + '), ' +
             escapeString(block.getTitleValue('TITLENAME')));
         break;
       case 'title_checkbox':
@@ -327,6 +333,11 @@ function updateGenerator() {
         code.push(makeVar('text', name) +
                   ' = this.getTitleValue(\'' + name + '\');');
         break;
+      case 'title_angle':
+        var name = block.getTitleValue('TITLENAME');
+        code.push(makeVar('angle', name) +
+                  ' = this.getTitleValue(\'' + name + '\');');
+        break;
       case 'title_dropdown':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('dropdown', name) +
@@ -376,6 +387,8 @@ function updateGenerator() {
   injectCode(code, 'generatorPre');
 }
 
+var oldDir = 'ltr';
+
 /**
  * Update the preview display.
  */
@@ -383,6 +396,11 @@ function updatePreview() {
   if (!Blockly) {
     // If the preview frame hasn't loaded yet, don't try to update.
     return;
+  }
+  var newDir = document.getElementById('direction').value;
+  if (oldDir != newDir) {
+    document.getElementById('previewFrame').src = 'preview.html?' + newDir;
+    oldDir = newDir;
   }
   if (previewBlock) {
     previewBlock.dispose();
@@ -394,8 +412,8 @@ function updatePreview() {
   previewBlock = new Blockly.Block(Blockly.mainWorkspace, type);
   previewBlock.initSvg();
   previewBlock.render();
-  previewBlock.movable = false;
-  previewBlock.deletable = false;
+  previewBlock.setMovable(false);
+  previewBlock.setDeletable(false);
 }
 
 /**

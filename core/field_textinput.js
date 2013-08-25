@@ -18,7 +18,7 @@
  */
 
 /**
- * @fileoverview Text input field.  Used for editable titles and variables.
+ * @fileoverview Text input field.
  * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
@@ -56,7 +56,7 @@ Blockly.FieldTextInput.prototype.CURSOR = 'text';
  * Dispose of all DOM objects belonging to this editable field.
  */
 Blockly.FieldTextInput.prototype.dispose = function() {
-  Blockly.widgetDiv.hideIfField(this);
+  Blockly.WidgetDiv.hideIfField(this);
   Blockly.FieldTextInput.superClass_.dispose.call(this);
 };
 
@@ -101,8 +101,8 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
     return;
   }
 
-  Blockly.widgetDiv.show(this, Blockly.FieldTextInput.dispose_);
-  var div = Blockly.widgetDiv.DIV;
+  Blockly.WidgetDiv.show(this, this.dispose_());
+  var div = Blockly.WidgetDiv.DIV;
   // Create the input.
   var htmlInput = goog.dom.createDom('input', 'blocklyHtmlInput');
   Blockly.FieldTextInput.htmlInput_ = htmlInput;
@@ -115,9 +115,6 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
   htmlInput.focus();
   htmlInput.select();
 
-  // Bind to blur -- close the editor on loss of focus.
-  htmlInput.onBlurWrapper_ =
-      Blockly.bindEvent_(htmlInput, 'blur', this, this.onHtmlInputBlur_);
   // Bind to keyup -- trap Enter and Esc; resize after every keystroke.
   htmlInput.onKeyUpWrapper_ =
       Blockly.bindEvent_(htmlInput, 'keyup', this, this.onHtmlInputChange_);
@@ -131,29 +128,21 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
 };
 
 /**
- * Handle a blur event on an editor.
- * @param {!Event} e Blur event.
- * @private
- */
-Blockly.FieldTextInput.prototype.onHtmlInputBlur_ = function(e) {
-  this.closeEditor_(true);
-};
-
-/**
  * Handle a change to the editor.
  * @param {!Event} e Keyboard event.
  * @private
  */
 Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
+  var htmlInput = Blockly.FieldTextInput.htmlInput_;
   if (e.keyCode == 13) {
     // Enter
-    this.closeEditor_(true);
+    Blockly.WidgetDiv.hide();
   } else if (e.keyCode == 27) {
     // Esc
-    this.closeEditor_(false);
+    this.setText(htmlInput.defaultValue);
+    Blockly.WidgetDiv.hide();
   } else {
     // Update source block.
-    var htmlInput = Blockly.FieldTextInput.htmlInput_;
     var text = htmlInput.value;
     if (text !== htmlInput.oldValue_) {
       htmlInput.oldValue_ = text;
@@ -191,7 +180,7 @@ Blockly.FieldTextInput.prototype.validate_ = function() {
  * @private
  */
 Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
-  var div = Blockly.widgetDiv.DIV;
+  var div = Blockly.WidgetDiv.DIV;
   var bBox = this.fieldGroup_.getBBox();
   div.style.width = bBox.width + 'px';
   var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
@@ -212,30 +201,32 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
 };
 
 /**
- * Close the editor and optionally save the results.
- * @param {boolean} save True if the result should be saved.
+ * Close the editor, save the results,
+ * dispose of the editable text field's elements.
+ * @return {!Function} Closure to call on destruction of the WidgetDiv.
  * @private
  */
-Blockly.FieldTextInput.prototype.closeEditor_ = function(save) {
-  var htmlInput = Blockly.FieldTextInput.htmlInput_;
-  var text;
-  if (save) {
+Blockly.FieldTextInput.prototype.dispose_ = function() {
+  var thisField = this;
+  return function() {
+    var htmlInput = Blockly.FieldTextInput.htmlInput_;
+    var text;
     // Save the edit (if it validates).
     text = htmlInput.value;
-    if (this.changeHandler_) {
-      text = this.changeHandler_(text);
+    if (thisField.changeHandler_) {
+      text = thisField.changeHandler_(text);
       if (text === null) {
         // Invalid edit.
         text = htmlInput.defaultValue;
       }
     }
-  } else {
-    // Canceling edit.
-    text = htmlInput.defaultValue;
-  }
-  this.setText(text);
-  Blockly.widgetDiv.hide();
-  this.sourceBlock_.render();
+    thisField.setText(text);
+    thisField.sourceBlock_.render();
+    Blockly.unbindEvent_(htmlInput.onKeyUpWrapper_);
+    Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
+    Blockly.unbindEvent_(htmlInput.onWorkspaceChangeWrapper_);
+    Blockly.FieldTextInput.htmlInput_ = null;
+  };
 };
 
 /**
@@ -264,17 +255,4 @@ Blockly.FieldTextInput.nonnegativeIntegerValidator = function(text) {
     n = String(Math.max(0, Math.floor(n)));
   }
   return n;
-};
-
-/**
- * Dispose of the editable text field's elements.
- * @private
- */
-Blockly.FieldTextInput.dispose_ = function() {
-  var htmlInput = Blockly.FieldTextInput.htmlInput_;
-  Blockly.unbindEvent_(htmlInput.onBlurWrapper_);
-  Blockly.unbindEvent_(htmlInput.onKeyUpWrapper_);
-  Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
-  Blockly.unbindEvent_(htmlInput.onWorkspaceChangeWrapper_);
-  Blockly.FieldTextInput.htmlInput_ = null;
 };

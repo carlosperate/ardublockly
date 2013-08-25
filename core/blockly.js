@@ -29,6 +29,7 @@ goog.provide('Blockly');
 // Blockly core dependencies.
 goog.require('Blockly.Block');
 goog.require('Blockly.Connection');
+goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldColour');
 goog.require('Blockly.FieldDropdown');
@@ -38,6 +39,7 @@ goog.require('Blockly.FieldVariable');
 goog.require('Blockly.Generator');
 goog.require('Blockly.Procedures');
 goog.require('Blockly.Toolbox');
+goog.require('Blockly.WidgetDiv');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.inject');
 goog.require('Blockly.utils');
@@ -451,7 +453,7 @@ Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.Tooltip && Blockly.Tooltip.hide();
   Blockly.ContextMenu && Blockly.ContextMenu.hide();
   Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
-  Blockly.widgetDiv.hide();
+  Blockly.WidgetDiv.hide();
   if (!opt_allowToolbox &&
       Blockly.Toolbox.flyout_ && Blockly.Toolbox.flyout_.autoClose) {
     Blockly.Toolbox.clearSelection();

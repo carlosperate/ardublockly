@@ -56,7 +56,7 @@ Blockly.FieldColour.prototype.CURSOR = 'default';
  * Dispose of all DOM objects belonging to this editable field.
  */
 Blockly.FieldColour.prototype.dispose = function() {
-  Blockly.widgetDiv.hideIfField(this);
+  Blockly.WidgetDiv.hideIfField(this);
   Blockly.FieldColour.superClass_.dispose.call(this);
 };
 
@@ -98,8 +98,8 @@ Blockly.FieldColour.COLUMNS = 7;
  * @private
  */
 Blockly.FieldColour.prototype.showEditor_ = function() {
-  Blockly.widgetDiv.show(this, Blockly.FieldColour.dispose_);
-  var div = Blockly.widgetDiv.DIV;
+  Blockly.WidgetDiv.show(this, Blockly.FieldColour.dispose_);
+  var div = Blockly.WidgetDiv.DIV;
   // Create the palette using Closure.
   var picker = new goog.ui.ColorPicker();
   picker.setSize(Blockly.FieldColour.COLUMNS);
@@ -126,7 +126,7 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
       goog.ui.ColorPicker.EventType.CHANGE,
       function(event) {
         var colour = event.target.getSelectedColor() || '#000000';
-        Blockly.widgetDiv.hide();
+        Blockly.WidgetDiv.hide();
         if (thisObj.changeHandler_) {
           // Call any change handler, and allow it to override.
           var override = thisObj.changeHandler_(colour);

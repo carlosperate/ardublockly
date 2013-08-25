@@ -21,7 +21,8 @@
   </style>
   <script>
     function init() {
-      Blockly.inject(document.body, {path: '../../', readOnly: true});
+      var rtl = (document.location.search == '?rtl');
+      Blockly.inject(document.body, {path: '../../', rtl: rtl});
 
       if (window.parent.initPreview) {
         // Let the top-level application know that Blockly is ready.

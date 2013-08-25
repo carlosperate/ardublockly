@@ -63,12 +63,17 @@
         <h1><a href="../index.html">Blockly</a> : Block Factory</h1>
       </td>
       <td width="50%" height="5%" style="vertical-align: bottom;">
-        <h3>Preview:</h3>
+        <h3>Preview:
+          <select id="direction" onchange="updatePreview()">
+            <option value="ltr">LTR</option>
+            <option value="rtl">RTL</option>
+          </select>
+        </h3>
       </td>
     </tr>
     <tr>
       <td width="50%" height="95%" style="padding: 2px;">
-        <iframe id="blocklyFrame" src="frame.html"></iframe>
+        <iframe id="blocklyFrame" src="frame.html?ltr"></iframe>
       </td>
       <td width="50%" height="95%">
         <table>
