@@ -30,48 +30,17 @@
 var rootBlock = null;
 
 /**
- * The uneditable preview block.
- * @type {Blockly.Block}
- */
-var previewBlock = null;
-
-/**
  * The type of the generated block.
  */
 var blockType = '';
 
 /**
  * Initialize Blockly.  Called on page load.
- * @param {!Blockly} blockly Instance of Blockly from iframe.
+ * @param {!Function} updateFunc Function to update the preview.
  */
-function initPreview(blockly) {
-  window.Blockly = blockly;
-  if (window.EditorBlockly) {
-    // If the main editor has already loaded, update the preview.
-    updatePreview();
-  }
-}
-
-/**
- * Initialize Blockly.  Called on page load.
- * @param {!Blockly} blockly Instance of Blockly from iframe.
- */
-function initEditor(blockly) {
-  //window.onbeforeunload = function() {
-  //  return 'Leaving this page will result in the loss of your work.';
-  //};
-
-  window.EditorBlockly = blockly;
-
-  // Create the root block.
-  rootBlock = new EditorBlockly.Block(EditorBlockly.mainWorkspace,
-                                      'factory_base');
-  rootBlock.initSvg();
-  rootBlock.render();
-  rootBlock.setMovable(false);
-  rootBlock.setDeletable(false);
-
-  EditorBlockly.addChangeListener(onchange);
+function initPreview(updateFunc) {
+  updatePreview.updateFunc = updateFunc;
+  updatePreview();
 }
 
 /**
@@ -393,27 +362,14 @@ var oldDir = 'ltr';
  * Update the preview display.
  */
 function updatePreview() {
-  if (!Blockly) {
-    // If the preview frame hasn't loaded yet, don't try to update.
-    return;
-  }
   var newDir = document.getElementById('direction').value;
   if (oldDir != newDir) {
     document.getElementById('previewFrame').src = 'preview.html?' + newDir;
     oldDir = newDir;
+  } else if (updatePreview.updateFunc) {
+    var code = document.getElementById('languagePre').textContent;
+    updatePreview.updateFunc(blockType, code);
   }
-  if (previewBlock) {
-    previewBlock.dispose();
-  }
-  var type = blockType;
-  var code = document.getElementById('languagePre').textContent;
-  eval(code);
-  // Create the preview block.
-  previewBlock = new Blockly.Block(Blockly.mainWorkspace, type);
-  previewBlock.initSvg();
-  previewBlock.render();
-  previewBlock.setMovable(false);
-  previewBlock.setDeletable(false);
 }
 
 /**
@@ -433,10 +389,11 @@ function injectCode(code, id) {
 }
 
 /**
- * Initialize layout.  Called on page load.
+ * Initialize Blockly and layout.  Called on page load.
  */
 function init() {
   var expandList = [
+    document.getElementById('blockly'),
     document.getElementById('previewFrame'),
     document.getElementById('languagePre'),
     document.getElementById('generatorPre')
@@ -449,5 +406,18 @@ function init() {
   };
   onresize();
   window.addEventListener('resize', onresize);
+
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('blockly'),
+                 {path: '../../', toolbox: toolbox});
+
+  // Create the root block.
+  rootBlock = new Blockly.Block(Blockly.mainWorkspace, 'factory_base');
+  rootBlock.initSvg();
+  rootBlock.render();
+  rootBlock.setMovable(false);
+  rootBlock.setDeletable(false);
+
+  Blockly.addChangeListener(onchange);
 }
 window.addEventListener('load', init);

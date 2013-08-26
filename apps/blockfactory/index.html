@@ -5,6 +5,9 @@
   <meta name="viewport" content="target-densitydpi=device-dpi, height=660, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Blockly : Block Factory</title>
   <script type="text/javascript" src="factory.js"></script>
+  <script type="text/javascript" src="../../blockly_compressed.js"></script>
+  <script type="text/javascript" src="../../language/en/_messages.js"></script>
+  <script type="text/javascript" src="blocks.js"></script>
   <style>
     html, body {
       height: 100%;
@@ -34,16 +37,13 @@
       vertical-align: top;
       padding: 0;
     }
-    iframe {
+    #blockly {
+      position: fixed;
+    }
+    #previewFrame {
       border-style: solid;
       border-color: #ddd;
       border-width: 0 1px 1px 0;
-    }
-    #blocklyFrame {
-      height: 100%;
-      width: 100%;
-    }
-    #previewFrame {
       position: absolute;
     }
     pre {
@@ -73,13 +73,13 @@
     </tr>
     <tr>
       <td width="50%" height="95%" style="padding: 2px;">
-        <iframe id="blocklyFrame" src="frame.html?ltr"></iframe>
+        <div id="blockly"></div>
       </td>
       <td width="50%" height="95%">
         <table>
           <tr>
             <td height="30%">
-              <iframe id="previewFrame" src="preview.html"></iframe>
+              <iframe id="previewFrame" src="preview.html?ltr"></iframe>
             </td>
           </tr>
           <tr>
@@ -111,5 +111,40 @@
       </td>
     </tr>
   </table>
+  <xml id="toolbox" style="display: none">
+    <category name="Input">
+      <block type="input_value"></block>
+      <block type="input_statement"></block>
+      <block type="input_dummy"></block>
+    </category>
+    <category name="Title">
+      <block type="title_static"></block>
+      <block type="title_input"></block>
+      <block type="title_angle"></block>
+      <block type="title_dropdown"></block>
+      <block type="title_checkbox"></block>
+      <block type="title_colour"></block>
+      <block type="title_variable"></block>
+      <block type="title_image"></block>
+    </category>
+    <category name="Type">
+      <block type="type_group"></block>
+      <block type="type_null"></block>
+      <block type="type_boolean"></block>
+      <block type="type_number"></block>
+      <block type="type_string"></block>
+      <block type="type_list"></block>
+      <block type="type_other"></block>
+    </category>
+    <category name="Colour" id="colourCategory">
+      <block type="colour_hue"><title name="HUE">65</title></block>
+      <block type="colour_hue"><title name="HUE">120</title></block>
+      <block type="colour_hue"><title name="HUE">160</title></block>
+      <block type="colour_hue"><title name="HUE">210</title></block>
+      <block type="colour_hue"><title name="HUE">230</title></block>
+      <block type="colour_hue"><title name="HUE">290</title></block>
+      <block type="colour_hue"><title name="HUE">330</title></block>
+    </category>
+  </xml>
 </body>
 </html>

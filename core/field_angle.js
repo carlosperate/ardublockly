@@ -45,10 +45,9 @@ Blockly.FieldAngle = function(text, opt_changeHandler) {
     var thisObj = this;
     changeHandler = function(value) {
       value = Blockly.FieldAngle.angleValidator.call(thisObj, value);
-      if (value === null) {
-        value = thisObj.getValue();  // Abort, no change.
+      if (value !== null) {
+        opt_changeHandler.call(thisObj, value);
       }
-      opt_changeHandler.call(thisObj, value);
       return value;
     };
   } else {
@@ -69,6 +68,7 @@ goog.inherits(Blockly.FieldAngle, Blockly.FieldTextInput);
  * @param {?string} text New text.
  */
 Blockly.FieldAngle.prototype.setText = function(text) {
+  Blockly.FieldAngle.superClass_.setText.call(this, text);
   // Insert degree symbol.
   if (Blockly.RTL) {
     this.textElement_.insertBefore(this.symbol_, this.textElement_.firstChild);
@@ -77,8 +77,6 @@ Blockly.FieldAngle.prototype.setText = function(text) {
   }
   // Cached width is obsolete.  Clear it.
   this.size_.width = 0;
-
-  Blockly.FieldAngle.superClass_.setText.call(this, text);
 };
 
 /**

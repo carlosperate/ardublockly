@@ -201,8 +201,8 @@ Blockly.FieldTextInput.prototype.resizeEditor_ = function() {
 };
 
 /**
- * Close the editor, save the results,
- * dispose of the editable text field's elements.
+ * Close the editor, save the results, and dispose of the editable
+ * text field's elements.
  * @return {!Function} Closure to call on destruction of the WidgetDiv.
  * @private
  */
