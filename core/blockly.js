@@ -258,7 +258,7 @@ Blockly.onMouseDown_ = function(e) {
   if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
-      Blockly.showContextMenu_(e.clientX, e.clientY);
+      Blockly.showContextMenu_(Blockly.mouseToSvg(e));
     }
   } else if ((Blockly.readOnly || isTargetSvg) &&
              Blockly.mainWorkspace.scrollbar) {
@@ -381,11 +381,10 @@ Blockly.copy_ = function(block) {
 
 /**
  * Show the context menu for the workspace.
- * @param {number} x X-coordinate of mouse click.
- * @param {number} y Y-coordinate of mouse click.
+ * @param {!Object} xy Coordinates of mouse click, contains x and y properties.
  * @private
  */
-Blockly.showContextMenu_ = function(x, y) {
+Blockly.showContextMenu_ = function(xy) {
   if (Blockly.readOnly) {
     return;
   }
@@ -430,7 +429,7 @@ Blockly.showContextMenu_ = function(x, y) {
   helpOption.callback = function() {};
   options.push(helpOption);
 
-  Blockly.ContextMenu.show(x, y, options);
+  Blockly.ContextMenu.show(xy, options);
 };
 
 /**

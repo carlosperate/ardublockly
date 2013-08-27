@@ -279,7 +279,7 @@ Blockly.isRightButton = function(e) {
 };
 
 /**
- * Convert between mouse/HTML coordinates and SVG coordinates.
+ * Convert between HTML coordinates and SVG coordinates.
  * @param {number} x X input coordinate.
  * @param {number} y Y input coordinate.
  * @param {boolean} toSvg True to convert to SVG coordinates.
@@ -304,6 +304,17 @@ Blockly.convertCoordinates = function(x, y, toSvg) {
     xy.y += window.scrollY;
   }
   return xy;
+};
+
+/**
+ * Return the converted coordinates of the given mouse event.
+ * The origin (0,0) is the top-left corner of the Blockly svg.
+ * @param {!Event} e Mouse event.
+ * @return {!Object} Object with .x and .y properties.
+ */
+Blockly.mouseToSvg = function(e) {
+  return Blockly.convertCoordinates(e.clientX + window.scrollX,
+      e.clientY + window.scrollY, true);
 };
 
 /**

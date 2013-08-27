@@ -428,7 +428,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   if (Blockly.isRightButton(e)) {
     // Right-click.
     if (Blockly.ContextMenu) {
-      this.showContextMenu_(e.clientX, e.clientY);
+      this.showContextMenu_(Blockly.mouseToSvg(e));
     }
   } else if (!this.isMovable()) {
     // Allow unmovable blocks to be selected and context menued, but not
@@ -545,11 +545,10 @@ Blockly.Block.prototype.duplicate_ = function() {
 
 /**
  * Show the context menu for this block.
- * @param {number} x X-coordinate of mouse click.
- * @param {number} y Y-coordinate of mouse click.
+ * @param {!Object} xy Coordinates of mouse click, contains x and y properties.
  * @private
  */
-Blockly.Block.prototype.showContextMenu_ = function(x, y) {
+Blockly.Block.prototype.showContextMenu_ = function(xy) {
   if (Blockly.readOnly || !this.contextMenu) {
     return;
   }
@@ -668,7 +667,7 @@ Blockly.Block.prototype.showContextMenu_ = function(x, y) {
     this.customContextMenu(options);
   }
 
-  Blockly.ContextMenu.show(x, y, options);
+  Blockly.ContextMenu.show(xy, options);
 };
 
 /**
@@ -752,7 +751,8 @@ Blockly.Block.prototype.setDragging_ = function(adding) {
  * @private
  */
 Blockly.Block.prototype.onMouseMove_ = function(e) {
-  if (e.type == 'mousemove' && e.x <= 1 && e.y == 0 && e.button == 0) {
+  if (e.type == 'mousemove' && e.clientX <= 1 && e.clientY == 0 &&
+      e.button == 0) {
     /* HACK:
      Safari Mobile 6.0 and Chrome for Android 18.0 fire rogue mousemove events
      on certain touch actions. Ignore events with these signatures.

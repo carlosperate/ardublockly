@@ -752,7 +752,7 @@ Blockly.ScrollbarSvg.prototype.onMouseDownBar_ = function(e) {
     e.stopPropagation();
     return;
   }
-  var mouseXY = Blockly.convertCoordinates(e.x, e.y, true);
+  var mouseXY = Blockly.mouseToSvg(e);
   var mouseLocation = this.horizontal_ ? mouseXY.x : mouseXY.y;
 
   var knobXY = Blockly.getSvgXY_(this.svgKnob_);
