@@ -216,11 +216,30 @@ Blockly.Language.logic_compare = {
   // Comparison operator.
   helpUrl: Blockly.LANG_LOGIC_COMPARE_HELPURL,
   init: function() {
+    if (Blockly.RTL) {
+      var OPERATORS = [
+        ['=', 'EQ'],
+        ['\u2260', 'NEQ'],
+        ['>', 'LT'],
+        ['\u2265', 'LTE'],
+        ['<', 'GT'],
+        ['\u2264', 'GTE']
+      ];
+    } else {
+      var OPERATORS = [
+        ['=', 'EQ'],
+        ['\u2260', 'NEQ'],
+        ['<', 'LT'],
+        ['\u2264', 'LTE'],
+        ['>', 'GT'],
+        ['\u2265', 'GTE']
+      ];
+    }
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('A');
     this.appendValueInput('B')
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+        .appendTitle(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
@@ -230,14 +249,6 @@ Blockly.Language.logic_compare = {
     });
   }
 };
-
-Blockly.Language.logic_compare.OPERATORS =
-    [['=', 'EQ'],
-     ['\u2260', 'NEQ'],
-     ['<', 'LT'],
-     ['\u2264', 'LTE'],
-     ['>', 'GT'],
-     ['\u2265', 'GTE']];
 
 Blockly.Language.logic_compare.TOOLTIPS = {
   EQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ,
