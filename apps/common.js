@@ -97,7 +97,7 @@ BlocklyApps.getLang = function() {
 };
 
 /**
- * User's language.  E.g. 'en'
+ * User's language (e.g. "en").
  * @type {?string}
  */
 BlocklyApps.LANG = undefined;
