@@ -22,6 +22,7 @@ import codecs
 from datetime import datetime
 import os
 import re
+import subprocess
 import sys
 from xml.dom import minidom
 from common import InputError
@@ -312,6 +313,11 @@ def main():
 
     # Write the output files.
     _write_files(sorted_units)
+
+    # Delete the input .xlf file.
+    command = ['rm', args.xlf]
+    subprocess.check_call(command)
+    print('Removed ' + args.xlf)
 
 
 if __name__ == '__main__':
