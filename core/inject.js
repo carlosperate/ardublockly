@@ -220,7 +220,8 @@ Blockly.createDom_ = function(container) {
       {'width': 10, 'height': 10, 'fill': '#aaa'}, pattern);
   Blockly.createSvgElement('path',
       {'d': 'M 0 0 L 10 10 M 10 0 L 0 10', 'stroke': '#cc0'}, pattern);
-  Blockly.mainWorkspace = new Blockly.Workspace();
+  Blockly.mainWorkspace = new Blockly.Workspace(Blockly.getMainWorkspaceMetrics,
+      Blockly.setMainWorkspaceMetrics);
   svg.appendChild(Blockly.mainWorkspace.createDom());
   Blockly.mainWorkspace.maxBlocks = Blockly.maxBlocks;
 
@@ -365,8 +366,7 @@ Blockly.init_ = function() {
   }
   if (Blockly.hasScrollbars) {
     Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
-        Blockly.mainWorkspace.getBubbleCanvas(),
-        Blockly.getMainWorkspaceMetrics, Blockly.setMainWorkspaceMetrics);
+        Blockly.mainWorkspace);
     Blockly.mainWorkspace.scrollbar.resize();
   }
 

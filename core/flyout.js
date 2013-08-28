@@ -38,7 +38,10 @@ Blockly.Flyout = function() {
    * @type {!Blockly.Workspace}
    * @private
    */
-  this.workspace_ = new Blockly.Workspace();
+  var flyout = this;
+  this.workspace_ = new Blockly.Workspace(
+      function() {return flyout.getMetrics();},
+      function(ratio) {return flyout.setMetrics(ratio);});
   this.workspace_.isFlyout = true;
 
   /**
@@ -110,8 +113,7 @@ Blockly.Flyout.prototype.createDom = function() {
   this.svgGroup_ = Blockly.createSvgElement('g', {}, null);
   this.svgBackground_ = Blockly.createSvgElement('path',
       {'class': 'blocklyFlyoutBackground'}, this.svgGroup_);
-  this.svgOptions_ = Blockly.createSvgElement('g', {}, this.svgGroup_);
-  this.svgOptions_.appendChild(this.workspace_.createDom());
+  this.svgGroup_.appendChild(this.workspace_.createDom());
   return this.svgGroup_;
 };
 
@@ -139,7 +141,6 @@ Blockly.Flyout.prototype.dispose = function() {
     this.svgGroup_ = null;
   }
   this.svgBackground_ = null;
-  this.svgOptions_ = null;
   this.targetWorkspace_ = null;
   this.targetWorkspaceMetrics_ = null;
 };
@@ -164,7 +165,7 @@ Blockly.Flyout.prototype.getMetrics = function() {
   var viewHeight = this.height_ - 2 * this.CORNER_RADIUS;
   var viewWidth = this.width_;
   try {
-    var optionBox = this.svgOptions_.getBBox();
+    var optionBox = this.workspace_.getCanvas().getBBox();
   } catch (e) {
     // Firefox has trouble with hidden elements (Bug 528969).
     var optionBox = {height: 0, y: 0};
@@ -173,7 +174,7 @@ Blockly.Flyout.prototype.getMetrics = function() {
     viewHeight: viewHeight,
     viewWidth: viewWidth,
     contentHeight: optionBox.height + optionBox.y,
-    viewTop: -this.svgOptions_.scrollY,
+    viewTop: -this.workspace_.scrollY,
     contentTop: 0,
     absoluteTop: this.CORNER_RADIUS,
     absoluteLeft: 0
@@ -188,11 +189,12 @@ Blockly.Flyout.prototype.getMetrics = function() {
 Blockly.Flyout.prototype.setMetrics = function(yRatio) {
   var metrics = this.getMetrics();
   if (goog.isNumber(yRatio.y)) {
-    this.svgOptions_.scrollY =
+    this.workspace_.scrollY =
         -metrics.contentHeight * yRatio.y - metrics.contentTop;
   }
-  var y = this.svgOptions_.scrollY + metrics.absoluteTop;
-  this.svgOptions_.setAttribute('transform', 'translate(0,' + y + ')');
+  var y = this.workspace_.scrollY + metrics.absoluteTop;
+  this.workspace_.getCanvas().setAttribute('transform',
+                                           'translate(0,' + y + ')');
 };
 
 /**
@@ -210,10 +212,7 @@ Blockly.Flyout.prototype.init =
   // Add scrollbars.
   var flyout = this;
   if (withScrollbar) {
-    this.scrollbar_ = new Blockly.Scrollbar(this.svgOptions_,
-        function() {return flyout.getMetrics();},
-        function(ratio) {return flyout.setMetrics(ratio);},
-        false, false);
+    this.scrollbar_ = new Blockly.Scrollbar(flyout.workspace_, false, false);
   }
 
   this.hide();
@@ -399,7 +398,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         'x': Blockly.RTL ? xy.x - bBox.width : xy.x, 'y': xy.y,
         'fill-opacity': 0}, null);
     // Add the rectangles under the blocks, so that the blocks' tooltips work.
-    this.svgOptions_.insertBefore(rect, this.svgOptions_.firstChild);
+    this.workspace_.getCanvas().insertBefore(rect, block.getSvgRoot());
     this.listeners_.push(Blockly.bindEvent_(rect, 'mousedown', null,
         this.createBlockFunc_(block)));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mouseover', block.svg_,

@@ -121,7 +121,7 @@ Blockly.Mutator.prototype.createEditor_ = function() {
       {'class': 'blocklyMutatorBackground',
        'height': '100%', 'width': '100%'}, this.svgDialog_);
 
-  this.workspace_ = new Blockly.Workspace();
+  this.workspace_ = new Blockly.Workspace(null, null);
   this.flyout_ = new Blockly.Flyout();
   this.flyout_.autoClose = false;
   this.svgDialog_.appendChild(this.flyout_.createDom());

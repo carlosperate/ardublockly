@@ -34,9 +34,14 @@ goog.require('Blockly.Xml');
 
 /**
  * Class for a workspace.
+ * @param {Function} getMetrics A function that returns size/scrolling metrics.
+ * @param {Function} setMetrics A function that sets size/scrolling metrics.
  * @constructor
  */
-Blockly.Workspace = function() {
+Blockly.Workspace = function(getMetrics, setMetrics) {
+  this.getMetrics = getMetrics;
+  this.setMetrics = setMetrics;
+
   /** @type {boolean} */
   this.isFlyout = false;
   /**

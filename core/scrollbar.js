@@ -31,21 +31,19 @@ goog.require('goog.userAgent');
 
 /**
  * Class for a pair of scrollbars.  Horizontal and vertical.
- * @param {!Element} element The SVG element to bind the scrollbars to.
- * @param {!Function} getMetrics A function that returns scrolling metrics.
- * @param {!Function} setMetrics A function that sets scrolling metrics.
+ * @param {!Blockly.Workspace} workspace Workspace to bind the scrollbars to.
  * @constructor
  */
-Blockly.ScrollbarPair = function(element, getMetrics, setMetrics) {
-  this.element_ = element;
-  this.getMetrics_ = getMetrics;
-  this.setMetrics_ = setMetrics;
+Blockly.ScrollbarPair = function(workspace) {
+  this.workspace_ = workspace;
   this.oldHostMetrics_ = null;
-  this.hScroll = new Blockly.Scrollbar(element, getMetrics, setMetrics,
-                                       true, true);
-  this.vScroll = new Blockly.Scrollbar(element, getMetrics, setMetrics,
-                                       false, true);
-  this.corner_ = this.addCorner_(element);
+  this.hScroll = new Blockly.Scrollbar(workspace, true, true);
+  this.vScroll = new Blockly.Scrollbar(workspace, false, true);
+  this.corner_ = Blockly.createSvgElement('rect',
+      {'height': Blockly.Scrollbar.scrollbarThickness,
+      'width': Blockly.Scrollbar.scrollbarThickness,
+      'style': 'fill: #fff'}, null);
+  Blockly.Scrollbar.insertAfter_(this.corner_, workspace.getBubbleCanvas());
 };
 
 /**
@@ -57,9 +55,7 @@ Blockly.ScrollbarPair.prototype.dispose = function() {
   this.onResizeWrapper_ = null;
   goog.dom.removeNode(this.corner_);
   this.corner_ = null;
-  this.element_ = null;
-  this.getMetrics_ = null;
-  this.setMetrics_ = null;
+  this.workspace_ = null;
   this.oldHostMetrics_ = null;
   this.hScroll.dispose();
   this.hScroll = null;
@@ -68,30 +64,12 @@ Blockly.ScrollbarPair.prototype.dispose = function() {
 };
 
 /**
- * Creates a corner element and adds it to the DOM.
- * 'resize' must be called to position it properly.
- * The corner element is a small square at the bottom-right between the two
- * scrollbars.  It prevents content from being visible in that location.
- * @param {!Element} element The SVG element to bind the scrollbars to.
- * @return {!Element} The corner element.
- * @private
- */
-Blockly.ScrollbarPair.prototype.addCorner_ = function(element) {
-  var corner = Blockly.createSvgElement('rect',
-      {'height': Blockly.Scrollbar.scrollbarThickness,
-      'width': Blockly.Scrollbar.scrollbarThickness,
-      'style': 'fill: #fff'}, null);
-  Blockly.Scrollbar.insertAfter_(corner, element);
-  return corner;
-};
-
-/**
  * Recalculate both of the scrollbars' locations and lengths.
  * Also reposition the corner rectangle.
  */
 Blockly.ScrollbarPair.prototype.resize = function() {
   // Look up the host metrics once, and use for both scrollbars.
-  var hostMetrics = this.getMetrics_();
+  var hostMetrics = this.workspace_.getMetrics();
   if (!hostMetrics) {
     // Host element is likely not visible.
     return;
@@ -175,7 +153,7 @@ Blockly.ScrollbarPair.prototype.set = function(x, y) {
                  this.hScroll.innerImg_.offsetWidth) || 0;
     xyRatio.y = (this.vScroll.outerDiv_.scrollTop /
                  this.vScroll.innerImg_.offsetHeight) || 0;
-    this.setMetrics_(xyRatio);
+    this.workspace_.setMetrics(xyRatio);
   } else {
     // SVG scrollbars.
     // Set both scrollbars and allow each to call a separate onScroll execution.
@@ -224,9 +202,7 @@ Blockly.ScrollbarInterface.prototype.set = function(value, fireEvents) {};
  * Class for a native widget scrollbar nested in a foreignObject element.
  * This technique offers a scrollbar that looks and behaves like the system's
  * scrollbars.  However it isn't well supported at the moment.
- * @param {!Element} element The SVG element to bind the scrollbars to.
- * @param {Function} getMetrics A function that returns scrolling metrics.
- * @param {Function} setMetrics A function that sets scrolling metrics.
+ * @param {!Blockly.Workspace} workspace Workspace to bind the scrollbar to.
  * @param {?boolean} horizontal True if horizontal, false if vertical.
  *     Null is used to create a test scrollbar to measure thickness.
  * @param {boolean=} opt_pair True if the scrollbar is part of a
@@ -234,22 +210,19 @@ Blockly.ScrollbarInterface.prototype.set = function(value, fireEvents) {};
  * @constructor
  * @implements {Blockly.ScrollbarInterface}
  */
-Blockly.ScrollbarNative = function(element, getMetrics, setMetrics,
-                                   horizontal, opt_pair) {
-  this.element_ = element;
-  this.getMetrics_ = getMetrics;
-  this.setMetrics_ = setMetrics;
+Blockly.ScrollbarNative = function(workspace, horizontal, opt_pair) {
+  this.workspace_ = workspace;
   this.pair_ = opt_pair || false;
   this.horizontal_ = horizontal;
 
-  this.createDom_(element);
+  this.createDom_();
   if (horizontal === null) {
     // Just return a bare-bones scrollbar DOM for thickness testing.
     return;
   }
   if (!Blockly.Scrollbar.scrollbarThickness) {
     // The first time a scrollbar is created, we need to measure the thickness.
-    Blockly.ScrollbarNative.measureScrollbarThickness_(element);
+    Blockly.ScrollbarNative.measureScrollbarThickness_(workspace);
   }
 
   if (horizontal) {
@@ -286,9 +259,7 @@ Blockly.ScrollbarNative.prototype.dispose = function() {
   this.onScrollWrapper_ = null;
   goog.dom.removeNode(this.foreignObject_);
   this.foreignObject_ = null;
-  this.element_ = null;
-  this.getMetrics_ = null;
-  this.setMetrics_ = null;
+  this.workspace_ = null;
   this.outerDiv_ = null;
   this.innerImg_ = null;
 };
@@ -303,7 +274,7 @@ Blockly.ScrollbarNative.prototype.resize = function(opt_metrics) {
   // Determine the location, height and width of the host element.
   var hostMetrics = opt_metrics;
   if (!hostMetrics) {
-    hostMetrics = this.getMetrics_();
+    hostMetrics = this.workspace_.getMetrics();
     if (!hostMetrics) {
       // Host element is likely not visible.
       return;
@@ -330,7 +301,7 @@ Blockly.ScrollbarNative.prototype.resize = function(opt_metrics) {
       // Only show the scrollbar if needed.
       // Ideally this would also apply to scrollbar pairs, but that's a bigger
       // headache (due to interactions with the corner square).
-      this.setVisible(outerLength < hostMetrics.contentHeight);
+      this.setVisible(outerLength < hostMetrics.contentWidth);
     }
     this.ratio_ = outerLength / hostMetrics.viewWidth;
     var innerLength = this.ratio_ * hostMetrics.contentWidth;
@@ -379,10 +350,9 @@ Blockly.ScrollbarNative.prototype.resize = function(opt_metrics) {
 /**
  * Create all the DOM elements required for a scrollbar.
  * The resulting widget is not sized.
- * @param {!Element} element The SVG element to bind the scrollbars to.
  * @private
  */
-Blockly.ScrollbarNative.prototype.createDom_ = function(element) {
+Blockly.ScrollbarNative.prototype.createDom_ = function() {
   /* Create the following DOM:
   <foreignObject xmlns="http://www.w3.org/2000/svg">
     <body xmlns="http://www.w3.org/1999/xhtml" class="blocklyMinimalBody">
@@ -405,7 +375,8 @@ Blockly.ScrollbarNative.prototype.createDom_ = function(element) {
   outer.appendChild(inner);
   body.appendChild(outer);
   this.foreignObject_.appendChild(body);
-  Blockly.Scrollbar.insertAfter_(this.foreignObject_, element);
+  Blockly.Scrollbar.insertAfter_(this.foreignObject_,
+                                 this.workspace_.getBubbleCanvas());
 };
 
 /**
@@ -439,10 +410,10 @@ Blockly.ScrollbarNative.prototype.setVisible = function(visible) {
     calculating these metrics has no side effects.  Failure to do so
     results in a scrollbar that's crushed to 0 in an off-scale range.
     */
-    this.getMetrics_();
+    this.workspace_.getMetrics();
   } else {
     // Hide the scrollbar.
-    this.setMetrics_({x: 0, y: 0});
+    this.workspace_.setMetrics({x: 0, y: 0});
     this.foreignObject_.style.display = 'none';
   }
 };
@@ -458,7 +429,7 @@ Blockly.ScrollbarNative.prototype.onScroll_ = function() {
   } else {
     xyRatio.y = (this.outerDiv_.scrollTop / this.innerImg_.offsetHeight) || 0;
   }
-  this.setMetrics_(xyRatio);
+  this.workspace_.setMetrics(xyRatio);
 };
 
 /**
@@ -489,11 +460,11 @@ Blockly.ScrollbarNative.prototype.set = function(value, fireEvents) {
 
 /**
  * Mutilate this scrollbar to measure the thickness of an HTML scrollbar.
- * @param {!Element} element The SVG element to bind the scrollbars to.
+ * @param {!Blockly.Workspace} workspace Workspace to bind the scrollbar to.
  * @private
  */
-Blockly.ScrollbarNative.measureScrollbarThickness_ = function(element) {
-  var testBar = new Blockly.ScrollbarNative(element, null, null, null, false);
+Blockly.ScrollbarNative.measureScrollbarThickness_ = function(workspace) {
+  var testBar = new Blockly.ScrollbarNative(workspace, null, false);
 
   testBar.outerDiv_.style.width = '100px';
   testBar.outerDiv_.style.height = '100px';
@@ -529,23 +500,18 @@ Blockly.ScrollbarNative.measureScrollbarThickness_ = function(element) {
  * Class for a pure SVG scrollbar.
  * This technique offers a scrollbar that is guaranteed to work, but may not
  * look or behave like the system's scrollbars.
- * @param {!Element} element The SVG element to bind the scrollbars to.
- * @param {!Function} getMetrics A function that returns scrolling metrics.
- * @param {!Function} setMetrics A function that sets scrolling metrics.
+ * @param {!Blockly.Workspace} workspace Workspace to bind the scrollbar to.
  * @param {boolean} horizontal True if horizontal, false if vertical.
  * @param {boolean} opt_pair True if the scrollbar is part of a horiz/vert pair.
  * @constructor
  * @implements {Blockly.ScrollbarInterface}
  */
-Blockly.ScrollbarSvg = function(element, getMetrics, setMetrics,
-                                horizontal, opt_pair) {
-  this.element_ = element;
-  this.getMetrics_ = getMetrics;
-  this.setMetrics_ = setMetrics;
+Blockly.ScrollbarSvg = function(workspace, horizontal, opt_pair) {
+  this.workspace_ = workspace;
   this.pair_ = opt_pair || false;
   this.horizontal_ = horizontal;
 
-  this.createDom_(element);
+  this.createDom_();
 
   if (horizontal) {
     this.svgBackground_.setAttribute('height',
@@ -586,9 +552,7 @@ Blockly.ScrollbarSvg.prototype.dispose = function() {
   this.svgGroup_ = null;
   this.svgBackground_ = null;
   this.svgKnob_ = null;
-  this.element_ = null;
-  this.getMetrics_ = null;
-  this.setMetrics_ = null;
+  this.workspace_ = null;
 };
 
 /**
@@ -601,7 +565,7 @@ Blockly.ScrollbarSvg.prototype.resize = function(opt_metrics) {
   // Determine the location, height and width of the host element.
   var hostMetrics = opt_metrics;
   if (!hostMetrics) {
-    hostMetrics = this.getMetrics_();
+    hostMetrics = this.workspace_.getMetrics();
     if (!hostMetrics) {
       // Host element is likely not visible.
       return;
@@ -686,10 +650,9 @@ Blockly.ScrollbarSvg.prototype.resize = function(opt_metrics) {
 /**
  * Create all the DOM elements required for a scrollbar.
  * The resulting widget is not sized.
- * @param {!Element} element The SVG element to bind the scrollbars to.
  * @private
  */
-Blockly.ScrollbarSvg.prototype.createDom_ = function(element) {
+Blockly.ScrollbarSvg.prototype.createDom_ = function() {
   /* Create the following DOM:
   <g>
     <rect class="blocklyScrollbarBackground" />
@@ -703,7 +666,8 @@ Blockly.ScrollbarSvg.prototype.createDom_ = function(element) {
   this.svgKnob_ = Blockly.createSvgElement('rect',
       {'class': 'blocklyScrollbarKnob', 'rx': radius, 'ry': radius},
       this.svgGroup_);
-  Blockly.Scrollbar.insertAfter_(this.svgGroup_, element);
+  Blockly.Scrollbar.insertAfter_(this.svgGroup_,
+                                 this.workspace_.getBubbleCanvas());
 };
 
 /**
@@ -733,7 +697,7 @@ Blockly.ScrollbarSvg.prototype.setVisible = function(visible) {
     this.svgGroup_.setAttribute('display', 'block');
   } else {
     // Hide the scrollbar.
-    this.setMetrics_({x: 0, y: 0});
+    this.workspace_.setMetrics({x: 0, y: 0});
     this.svgGroup_.setAttribute('display', 'none');
   }
 };
@@ -871,7 +835,7 @@ Blockly.ScrollbarSvg.prototype.onScroll_ = function() {
   } else {
     xyRatio.y = ratio;
   }
-  this.setMetrics_(xyRatio);
+  this.workspace_.setMetrics(xyRatio);
 };
 
 /**

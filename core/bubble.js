@@ -383,7 +383,7 @@ Blockly.Bubble.prototype.layoutBubble_ = function() {
   // Prevent the bubble from being offscreen.
   if (this.workspace_.scrollbar) {
     // Fetch the workspace's metrics, if they exist.
-    var metrics = this.workspace_.scrollbar.getMetrics_();
+    var metrics = this.workspace_.getMetrics();
     if (this.anchorX_ + relativeLeft <
         Blockly.BlockSvg.SEP_SPACE_X + metrics.viewLeft) {
       // Slide the bubble right until it is onscreen.
