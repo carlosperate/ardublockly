@@ -269,7 +269,7 @@ Blockly.onMouseDown_ = function(e) {
     Blockly.mainWorkspace.startDragMouseX = e.clientX;
     Blockly.mainWorkspace.startDragMouseY = e.clientY;
     Blockly.mainWorkspace.startDragMetrics =
-        Blockly.getMainWorkspaceMetrics();
+        Blockly.mainWorkspace.getMetrics();
     Blockly.mainWorkspace.startScrollX = Blockly.mainWorkspace.scrollX;
     Blockly.mainWorkspace.startScrollY = Blockly.mainWorkspace.scrollY;
   }

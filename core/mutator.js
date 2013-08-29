@@ -247,15 +247,15 @@ Blockly.Mutator.prototype.workspaceChanged_ = function() {
     var blocks = this.workspace_.getTopBlocks(false);
     var MARGIN = 20;
     for (var b = 0, block; block = blocks[b]; b++) {
-      var xy = block.getRelativeToSurfaceXY();
-      var bBox = block.getHeightWidth();
-      if (Blockly.RTL ? xy.x > -this.flyout_.width_ + MARGIN :
-           xy.x < this.flyout_.width_ - MARGIN) {
+      var blockXY = block.getRelativeToSurfaceXY();
+      var blockHW = block.getHeightWidth();
+      if (Blockly.RTL ? blockXY.x > -this.flyout_.width_ + MARGIN :
+           blockXY.x < this.flyout_.width_ - MARGIN) {
         // Delete any block that's sitting on top of the flyout.
         block.dispose(false, true);
-      } else if (xy.y + bBox.height < MARGIN) {
+      } else if (blockXY.y + blockHW.height < MARGIN) {
         // Bump any block that's above the top back inside.
-        block.moveBy(0, MARGIN - bBox.height - xy.y);
+        block.moveBy(0, MARGIN - blockHW.height - blockXY.y);
       }
     }
   }

@@ -344,7 +344,6 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   }
 
   // Lay out the blocks vertically.
-  var flyoutWidth = 0;
   var cursorY = margin;
   for (var i = 0, block; block = blocks[i]; i++) {
     var allBlocks = block.getDescendants();
@@ -360,53 +359,39 @@ Blockly.Flyout.prototype.show = function(xmlList) {
     }
     block.render();
     var root = block.getSvgRoot();
-    var bBox = block.getHeightWidth();
+    var blockHW = block.getHeightWidth();
     var x = Blockly.RTL ? 0 : margin + Blockly.BlockSvg.TAB_WIDTH;
     block.moveBy(x, cursorY);
-    flyoutWidth = Math.max(flyoutWidth, bBox.width);
-    cursorY += bBox.height + gaps[i];
-    if (!block.disabled) {
-      if (this.autoClose) {
-        this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
-            this.createBlockFunc_(block)));
-      } else {
-        this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
-            this.blockMouseDown_(block)));
-      }
-      this.listeners_.push(Blockly.bindEvent_(root, 'mouseover', block.svg_,
-          block.svg_.addSelect));
-      this.listeners_.push(Blockly.bindEvent_(root, 'mouseout', block.svg_,
-          block.svg_.removeSelect));
-    }
-  }
-  flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
-                 Blockly.Scrollbar.scrollbarThickness;
+    cursorY += blockHW.height + gaps[i];
 
-  for (var i = 0, block; block = blocks[i]; i++) {
-    if (Blockly.RTL) {
-      // With the flyoutWidth known, reposition the blocks to the right-aligned.
-      block.moveBy(flyoutWidth - margin - Blockly.BlockSvg.TAB_WIDTH, 0);
-    }
-    // Create an invisible rectangle over the block to act as a button.  Just
+    // Create an invisible rectangle under the block to act as a button.  Just
     // using the block as a button is poor, since blocks have holes in them.
-    var bBox = block.getHeightWidth();
-    var xy = block.getRelativeToSurfaceXY();
-    var rect = Blockly.createSvgElement('rect',
-        {'width': bBox.width, 'height': bBox.height,
-        'x': Blockly.RTL ? xy.x - bBox.width : xy.x, 'y': xy.y,
-        'fill-opacity': 0}, null);
+    var rect = Blockly.createSvgElement('rect', {'fill-opacity': 0}, null);
     // Add the rectangles under the blocks, so that the blocks' tooltips work.
     this.workspace_.getCanvas().insertBefore(rect, block.getSvgRoot());
+    block.flyoutRect_ = rect;
+    this.buttons_[i] = rect;
+
+    if (this.autoClose) {
+      this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
+          this.createBlockFunc_(block)));
+    } else {
+      this.listeners_.push(Blockly.bindEvent_(root, 'mousedown', null,
+          this.blockMouseDown_(block)));
+    }
+    this.listeners_.push(Blockly.bindEvent_(root, 'mouseover', block.svg_,
+        block.svg_.addSelect));
+    this.listeners_.push(Blockly.bindEvent_(root, 'mouseout', block.svg_,
+        block.svg_.removeSelect));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mousedown', null,
         this.createBlockFunc_(block)));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mouseover', block.svg_,
         block.svg_.addSelect));
     this.listeners_.push(Blockly.bindEvent_(rect, 'mouseout', block.svg_,
         block.svg_.removeSelect));
-    this.buttons_[i] = rect;
   }
-  // Record the width for .getMetrics_ and .position_.
-  this.width_ = flyoutWidth;
+  this.width_ = 0;
+  this.reflow();
 
   this.filterForCapacity_();
 
@@ -418,23 +403,38 @@ Blockly.Flyout.prototype.show = function(xmlList) {
 };
 
 /**
- * Compute width of flyout.
- * For RTL: lay out the blocks right-aligned.
+ * Compute width of flyout.  Position button under each block.
+ * For RTL: Lay out the blocks right-aligned.
  */
 Blockly.Flyout.prototype.reflow = function() {
-  // TODO: Factor this functionality out of Flyout.show and call reflow instead.
   var flyoutWidth = 0;
   var margin = this.CORNER_RADIUS;
   var blocks = this.workspace_.getTopBlocks(false);
   for (var x = 0, block; block = blocks[x]; x++) {
     var root = block.getSvgRoot();
-    var bBox = block.getHeightWidth();
-    flyoutWidth = Math.max(flyoutWidth, bBox.width);
+    var blockHW = block.getHeightWidth();
+    flyoutWidth = Math.max(flyoutWidth, blockHW.width);
   }
   flyoutWidth += margin + Blockly.BlockSvg.TAB_WIDTH + margin / 2 +
                  Blockly.Scrollbar.scrollbarThickness;
-  // TODO: Handle RTL.
   if (this.width_ != flyoutWidth) {
+    for (var x = 0, block; block = blocks[x]; x++) {
+      var blockHW = block.getHeightWidth();
+      var blockXY = block.getRelativeToSurfaceXY();
+      if (Blockly.RTL) {
+        // With the flyoutWidth known, right-align the blocks.
+        var dx = flyoutWidth - margin - Blockly.BlockSvg.TAB_WIDTH - blockXY.x;
+        block.moveBy(dx, 0);
+        blockXY.x += dx;
+      }
+      if (block.flyoutRect_) {
+        block.flyoutRect_.setAttribute('width', blockHW.width);
+        block.flyoutRect_.setAttribute('height', blockHW.height);
+        block.flyoutRect_.setAttribute('x',
+            Blockly.RTL ? blockXY.x - blockHW.width : blockXY.x);
+        block.flyoutRect_.setAttribute('y', blockXY.y);
+      }
+    }
     // Record the width for .getMetrics_ and .position_.
     this.width_ = flyoutWidth;
     // Fire a resize event to update the flyout's scrollbar.

@@ -369,8 +369,7 @@ Blockly.init_ = function() {
       Blockly.Toolbox.init();
     } else {
       // Build a fixed flyout with the root blocks.
-      Blockly.mainWorkspace.flyout_.init(Blockly.mainWorkspace,
-          Blockly.getMainWorkspaceMetrics, true);
+      Blockly.mainWorkspace.flyout_.init(Blockly.mainWorkspace, true);
       Blockly.mainWorkspace.flyout_.show(Blockly.languageTree.childNodes);
       // Translate the workspace sideways to avoid the fixed flyout.
       Blockly.mainWorkspace.scrollX = Blockly.mainWorkspace.flyout_.width_;
@@ -386,7 +385,7 @@ Blockly.init_ = function() {
     Blockly.mainWorkspace.scrollbar.resize();
   }
 
-  Blockly.mainWorkspace.addTrashcan(Blockly.getMainWorkspaceMetrics);
+  Blockly.mainWorkspace.addTrashcan();
 
   // Load the sounds.
   Blockly.loadAudio_(
