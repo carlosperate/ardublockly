@@ -291,7 +291,6 @@ Blockly.Tooltip.show_ = function() {
     }
   }
   // Move the tooltip to just below the cursor.
-  console.log(Blockly.Tooltip.lastXY_);
   var anchorX = Blockly.Tooltip.lastXY_.x;
   if (Blockly.RTL) {
     anchorX -= Blockly.Tooltip.OFFSET_X + width;

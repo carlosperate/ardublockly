@@ -40,8 +40,8 @@ Blockly.Flyout = function() {
    */
   var flyout = this;
   this.workspace_ = new Blockly.Workspace(
-      function() {return flyout.getMetrics();},
-      function(ratio) {return flyout.setMetrics(ratio);});
+      function() {return flyout.getMetrics_();},
+      function(ratio) {return flyout.setMetrics_(ratio);});
   this.workspace_.isFlyout = true;
 
   /**
@@ -142,7 +142,6 @@ Blockly.Flyout.prototype.dispose = function() {
   }
   this.svgBackground_ = null;
   this.targetWorkspace_ = null;
-  this.targetWorkspaceMetrics_ = null;
 };
 
 /**
@@ -156,8 +155,9 @@ Blockly.Flyout.prototype.dispose = function() {
  * .absoluteTop: Top-edge of view.
  * .absoluteLeft: Left-edge of view.
  * @return {Object} Contains size and position metrics of the flyout.
+ * @private
  */
-Blockly.Flyout.prototype.getMetrics = function() {
+Blockly.Flyout.prototype.getMetrics_ = function() {
   if (!this.isVisible()) {
     // Flyout is hidden.
     return null;
@@ -185,9 +185,10 @@ Blockly.Flyout.prototype.getMetrics = function() {
  * Sets the Y translation of the flyout to match the scrollbars.
  * @param {!Object} yRatio Contains a y property which is a float
  *     between 0 and 1 specifying the degree of scrolling.
+ * @private
  */
-Blockly.Flyout.prototype.setMetrics = function(yRatio) {
-  var metrics = this.getMetrics();
+Blockly.Flyout.prototype.setMetrics_ = function(yRatio) {
+  var metrics = this.getMetrics_();
   if (goog.isNumber(yRatio.y)) {
     this.workspace_.scrollY =
         -metrics.contentHeight * yRatio.y - metrics.contentTop;
@@ -201,14 +202,11 @@ Blockly.Flyout.prototype.setMetrics = function(yRatio) {
  * Initializes the flyout.
  * @param {!Blockly.Workspace} workspace The workspace in which to create new
  *     blocks.
- * @param {!Function} workspaceMetrics Function which returns size information
- *     regarding the flyout's target workspace.
  * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  */
 Blockly.Flyout.prototype.init =
-    function(workspace, workspaceMetrics, withScrollbar) {
+    function(workspace, withScrollbar) {
   this.targetWorkspace_ = workspace;
-  this.targetWorkspaceMetrics_ = workspaceMetrics;
   // Add scrollbars.
   var flyout = this;
   if (withScrollbar) {
@@ -233,7 +231,7 @@ Blockly.Flyout.prototype.position_ = function() {
   if (!this.isVisible()) {
     return;
   }
-  var metrics = this.targetWorkspaceMetrics_();
+  var metrics = this.targetWorkspace_.getMetrics();
   if (!metrics) {
     // Hidden components will return null.
     return;
@@ -265,7 +263,7 @@ Blockly.Flyout.prototype.position_ = function() {
   this.svgGroup_.setAttribute('transform',
       'translate(' + x + ',' + metrics.absoluteTop + ')');
 
-  // Record the height for Blockly.Flyout.getMetrics.
+  // Record the height for Blockly.Flyout.getMetrics_.
   this.height_ = metrics.viewHeight;
 
   // Update the scrollbar (if one exists).
@@ -407,7 +405,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
         block.svg_.removeSelect));
     this.buttons_[i] = rect;
   }
-  // Record the width for .getMetrics and .position_.
+  // Record the width for .getMetrics_ and .position_.
   this.width_ = flyoutWidth;
 
   this.filterForCapacity_();
@@ -437,7 +435,7 @@ Blockly.Flyout.prototype.reflow = function() {
                  Blockly.Scrollbar.scrollbarThickness;
   // TODO: Handle RTL.
   if (this.width_ != flyoutWidth) {
-    // Record the width for .getMetrics and .position_.
+    // Record the width for .getMetrics_ and .position_.
     this.width_ = flyoutWidth;
     // Fire a resize event to update the flyout's scrollbar.
     Blockly.fireUiEvent(window, 'resize');

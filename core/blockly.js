@@ -581,8 +581,9 @@ Blockly.setCursorHand_ = function(closed) {
  * .absoluteTop: Top-edge of view.
  * .absoluteLeft: Left-edge of view.
  * @return {Object} Contains size and position metrics of main workspace.
+ * @private
  */
-Blockly.getMainWorkspaceMetrics = function() {
+Blockly.getMainWorkspaceMetrics_ = function() {
   var svgSize = Blockly.svgSize();
   svgSize.width -= Blockly.Toolbox.width;  // Zero if no Toolbox.
   var viewWidth = svgSize.width - Blockly.Scrollbar.scrollbarThickness;
@@ -593,15 +594,22 @@ Blockly.getMainWorkspaceMetrics = function() {
     // Firefox has trouble with hidden elements (Bug 528969).
     return null;
   }
-  // Add a border around the content that is at least half a screenful wide.
-  var leftEdge = Math.min(blockBox.x - viewWidth / 2,
-                          blockBox.x + blockBox.width - viewWidth);
-  var rightEdge = Math.max(blockBox.x + blockBox.width + viewWidth / 2,
-                           blockBox.x + viewWidth);
-  var topEdge = Math.min(blockBox.y - viewHeight / 2,
-                         blockBox.y + blockBox.height - viewHeight);
-  var bottomEdge = Math.max(blockBox.y + blockBox.height + viewHeight / 2,
-                            blockBox.y + viewHeight);
+  if (Blockly.mainWorkspace.scrollbar) {
+    // Add a border around the content that is at least half a screenful wide.
+    var leftEdge = Math.min(blockBox.x - viewWidth / 2,
+                            blockBox.x + blockBox.width - viewWidth);
+    var rightEdge = Math.max(blockBox.x + blockBox.width + viewWidth / 2,
+                             blockBox.x + viewWidth);
+    var topEdge = Math.min(blockBox.y - viewHeight / 2,
+                           blockBox.y + blockBox.height - viewHeight);
+    var bottomEdge = Math.max(blockBox.y + blockBox.height + viewHeight / 2,
+                              blockBox.y + viewHeight);
+  } else {
+    var leftEdge = blockBox.x;
+    var rightEdge = leftEdge + blockBox.width;
+    var topEdge = blockBox.y;
+    var bottomEdge = topEdge + blockBox.height;
+  }
   var absoluteLeft = Blockly.RTL ? 0 : Blockly.Toolbox.width;
   return {
     viewHeight: svgSize.height,
@@ -621,9 +629,13 @@ Blockly.getMainWorkspaceMetrics = function() {
  * Sets the X/Y translations of the main workspace to match the scrollbars.
  * @param {!Object} xyRatio Contains an x and/or y property which is a float
  *     between 0 and 1 specifying the degree of scrolling.
+ * @private
  */
-Blockly.setMainWorkspaceMetrics = function(xyRatio) {
-  var metrics = Blockly.getMainWorkspaceMetrics();
+Blockly.setMainWorkspaceMetrics_ = function(xyRatio) {
+  if (!Blockly.mainWorkspace.scrollbar) {
+    throw 'Attempt to set main workspace scroll without scrollbars.';
+  }
+  var metrics = Blockly.getMainWorkspaceMetrics_();
   if (goog.isNumber(xyRatio.x)) {
     Blockly.mainWorkspace.scrollX = -metrics.contentWidth * xyRatio.x -
         metrics.contentLeft;

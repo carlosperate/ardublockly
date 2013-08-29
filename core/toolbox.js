@@ -112,8 +112,7 @@ Blockly.Toolbox.init = function() {
   tree.setSelectedItem(null);
 
   Blockly.Toolbox.HtmlDiv.style.display = 'block';
-  Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace,
-      Blockly.getMainWorkspaceMetrics, true);
+  Blockly.Toolbox.flyout_.init(Blockly.mainWorkspace, true);
   Blockly.Toolbox.populate_();
   tree.render(Blockly.Toolbox.HtmlDiv);
 

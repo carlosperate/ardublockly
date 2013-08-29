@@ -220,8 +220,9 @@ Blockly.createDom_ = function(container) {
       {'width': 10, 'height': 10, 'fill': '#aaa'}, pattern);
   Blockly.createSvgElement('path',
       {'d': 'M 0 0 L 10 10 M 10 0 L 0 10', 'stroke': '#cc0'}, pattern);
-  Blockly.mainWorkspace = new Blockly.Workspace(Blockly.getMainWorkspaceMetrics,
-      Blockly.setMainWorkspaceMetrics);
+  Blockly.mainWorkspace = new Blockly.Workspace(
+      Blockly.getMainWorkspaceMetrics_,
+      Blockly.setMainWorkspaceMetrics_);
   svg.appendChild(Blockly.mainWorkspace.createDom());
   Blockly.mainWorkspace.maxBlocks = Blockly.maxBlocks;
 
@@ -238,40 +239,55 @@ Blockly.createDom_ = function(container) {
       Blockly.mainWorkspace.flyout_ = new Blockly.Flyout();
       var flyout = Blockly.mainWorkspace.flyout_;
       var flyoutSvg = flyout.createDom();
-      flyout.init(Blockly.mainWorkspace,
-          Blockly.getMainWorkspaceMetrics, true);
+      flyout.init(Blockly.mainWorkspace, true);
       flyout.autoClose = false;
       // Insert the flyout behind the workspace so that blocks appear on top.
       goog.dom.insertSiblingBefore(flyoutSvg, Blockly.mainWorkspace.svgGroup_);
       var workspaceChanged = function() {
         if (Blockly.Block.dragMode_ == 0) {
-          var svgSize = Blockly.svgSize();
-          var MARGIN = 25;
-          var blocks = Blockly.mainWorkspace.getTopBlocks(false);
-          for (var b = 0, block; block = blocks[b]; b++) {
-            var xy = block.getRelativeToSurfaceXY();
-            var bBox = block.getHeightWidth();
-            if (xy.y + bBox.height < MARGIN) {
+          var metrics = Blockly.mainWorkspace.getMetrics();
+          if (metrics.contentTop < 0 ||
+              metrics.contentTop + metrics.contentHeight >
+              metrics.viewHeight + metrics.viewTop ||
+              metrics.contentLeft < (Blockly.RTL ? metrics.viewLeft : 0) ||
+              metrics.contentLeft + metrics.contentWidth >
+              metrics.viewWidth + (Blockly.RTL ? 2 : 1) * metrics.viewLeft) {
+            // One or more blocks is out of bounds.  Bump them back in.
+            var MARGIN = 25;
+            var blocks = Blockly.mainWorkspace.getTopBlocks(false);
+            for (var b = 0, block; block = blocks[b]; b++) {
+              var blockXY = block.getRelativeToSurfaceXY();
+              var blockHW = block.getHeightWidth();
               // Bump any block that's above the top back inside.
-              block.moveBy(0, MARGIN - bBox.height - xy.y);
-            } else if (xy.y > svgSize.height - MARGIN) {
+              var overflow = metrics.viewTop + MARGIN - blockHW.height -
+                  blockXY.y;
+              if (overflow > 0) {
+                block.moveBy(0, overflow);
+              }
               // Bump any block that's below the bottom back inside.
-              block.moveBy(0, svgSize.height - MARGIN - xy.y);
-            }
-            if (xy.x + bBox.width < MARGIN) {
+              var overflow = metrics.viewTop + metrics.viewHeight - MARGIN -
+                  blockXY.y;
+              if (overflow < 0) {
+                block.moveBy(0, overflow);
+              }
               // Bump any block that's off the left back inside.
-              block.moveBy(MARGIN - bBox.width - xy.x, 0);
-            } else if (xy.x > svgSize.width - MARGIN) {
+              var overflow = MARGIN + metrics.viewLeft - blockXY.x -
+                  (Blockly.RTL ? 0 : blockHW.width);
+              if (overflow > 0) {
+                block.moveBy(overflow, 0);
+              }
               // Bump any block that's off the right back inside.
-              block.moveBy(svgSize.width - MARGIN - xy.x, 0);
-            }
-            if (block.isDeletable() && (Blockly.RTL ?
-                xy.x > svgSize.width - flyout.width_ + MARGIN * 2 -
-                Blockly.mainWorkspace.scrollX :
-                xy.x < flyout.width_ - MARGIN * 2 -
-                Blockly.mainWorkspace.scrollX)) {
+              var overflow = metrics.viewLeft + metrics.viewWidth - MARGIN -
+                  blockXY.x + (Blockly.RTL ? blockHW.width : 0);
+              if (overflow < 0) {
+                block.moveBy(overflow, 0);
+              }
               // Delete any block that's sitting on top of the flyout.
-              block.dispose(false, true);
+              if (block.isDeletable() && (Blockly.RTL ?
+                  blockXY.x - 2 * metrics.viewLeft - metrics.viewWidth :
+                  -blockXY.x) > MARGIN * 2) {
+                block.dispose(false, true);
+              }
             }
           }
         }
