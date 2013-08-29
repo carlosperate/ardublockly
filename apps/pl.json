@@ -123,5 +123,8 @@
     "Turtle.title": "Grafiki \u017b\u00f3\u0142wia",
     "Turtle.captureTooltip": "Zapisz rysunek.",
     "Turtle.imgFilename": "drawing.png",
-    "Turtle.catTurtle": "\u017b\u00f3\u0142w"
+    "Turtle.catTurtle": "\u017b\u00f3\u0142w",
+        "Maze.instructions10": "Czy dasz radę przejść ten trudny labirynt? Wypróbnuj metodę trzymania się lewą ręką ściany. Tylko dla zaawansowanych programistów!",
+        "Puzzle.helpText": "Dla każdego kraju (zielony), załącz jego flagę, wybierz język urzędowy, i określ miasta, znajdujących się w tym kraju."
+
 }
