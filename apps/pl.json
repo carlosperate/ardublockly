@@ -64,6 +64,7 @@
     "Maze.instructions7": "Ten labirynt wygl\u0105da na bardziej skomplikowany ni\u017c poprzedni, ale wcale tak nie jest.",
     "Maze.instructions8": "Mo\u017cesz u\u017cy\u0107 wi\u0119cej ni\u017c jednego bloku \"if\".",
     "Maze.instructions9": "Bloki \"if-else (je\u017celi-lub)\" bed\u0105 wykonywa\u0107 jedn\u0105 czynno\u015b\u0107 lub inn\u0105 czynno\u015b\u0107.",
+    "Maze.instructions10": "Czy dasz rad\u0119 przej\u015b\u0107 ten trudny labirynt? Wypr\u00f3bnuj metod\u0119 trzymania si\u0119 lew\u0105 r\u0119k\u0105 \u015bciany. Tylko dla zaawansowanych programist\u00f3w!",
     "Maze.oneTopBlock": "Na tym poziomie, musisz u\u0142o\u017cy\u0107 razem wszystkie bloki w bia\u0142ym obszarze roboczym.",
     "Plane.rows": "Wiersze: %1",
     "Plane.getRows": "wiersze (%1)",
@@ -102,6 +103,7 @@
     "Puzzle.title": "Puzzle",
     "Puzzle.help": "Pomoc",
     "Puzzle.checkAnswers": "Sprawd\u017a Odpowiedzi",
+    "Puzzle.helpText": "Dla ka\u017cdego kraju (zielony), za\u0142\u0105cz jego flag\u0119, wybierz j\u0119zyk urz\u0119dowy, i okre\u015bl miasta, znajduj\u0105cych si\u0119 w tym kraju.",
     "Turtle.turnTooltip": "Obr\u00f3\u0107 \u017c\u00f3\u0142wia w lewo lub w prawo o okre\u015blon\u0105 liczb\u0119 stopni.",
     "Turtle.turnRight": "skr\u0119ci\u0107 w prawo przez",
     "Turtle.turnLeft": "skr\u0119ci\u0107 w lewo przez",
@@ -123,8 +125,5 @@
     "Turtle.title": "Grafiki \u017b\u00f3\u0142wia",
     "Turtle.captureTooltip": "Zapisz rysunek.",
     "Turtle.imgFilename": "drawing.png",
-    "Turtle.catTurtle": "\u017b\u00f3\u0142w",
-        "Maze.instructions10": "Czy dasz radę przejść ten trudny labirynt? Wypróbnuj metodę trzymania się lewą ręką ściany. Tylko dla zaawansowanych programistów!",
-        "Puzzle.helpText": "Dla każdego kraju (zielony), załącz jego flagę, wybierz język urzędowy, i określ miasta, znajdujących się w tym kraju."
-
+    "Turtle.catTurtle": "\u017b\u00f3\u0142w"
 }
