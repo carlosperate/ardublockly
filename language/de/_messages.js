@@ -64,8 +64,7 @@ Blockly.LANG_COLOUR_RGB_TITLE = 'Farbe mit';
 Blockly.LANG_COLOUR_RGB_RED = 'rot';
 Blockly.LANG_COLOUR_RGB_GREEN = 'grün';
 Blockly.LANG_COLOUR_RGB_BLUE = 'blau';
-Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Kreiere eine Farbe mit selbst definierten rot, grün\n' +
-    'und blau Werten. Alle Werte müssen zwischen 0 und 100 liegen.';
+Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Kreiere eine Farbe mit selbst definierten rot, grün und blau Werten. Alle Werte müssen zwischen 0 und 100 liegen.';
 
 Blockly.LANG_COLOUR_BLEND_HELPURL = 'http://meyerweb.com/eric/tools/color-blend/';
 Blockly.LANG_COLOUR_BLEND_TITLE = 'mische';
@@ -96,9 +95,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'bis';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'mache';
 Blockly.LANG_CONTROLS_FOR_INPUT_BY = 'by';
 Blockly.LANG_CONTROLS_FOR_TAIL = '';
-Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Zähle die Variable "%1" von einem Startwert\n' +
-    'bis zu einem Zielwert und führe für jeden Wert\n' +
-    'eine Anweisung aus.';
+Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Zähle die Variable "%1" von einem Startwert bis zu einem Zielwert und führe für jeden Wert eine Anweisung aus.';
 
 Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://de.wikipedia.org/wiki/For-Schleif';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'Für Wert';
@@ -106,31 +103,21 @@ Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'aus der Liste';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST_TAIL = '';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'mache';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'Führe eine Anweisung für jeden Wert in der Liste aus\n' +
-    'und setzte dabei die Variable "%1" \n' +
-    'auf den aktuellen Listen Wert.';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'Führe eine Anweisung für jeden Wert in der Liste aus und setzte dabei die Variable "%1" auf den aktuellen Listen Wert.';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://de.wikipedia.org/wiki/Kontrollstruktur';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'ausbrechen aus der Schleife';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'mit der nächsten Iteration fortfahren aus der Schleife';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Die umgebene Schleife beenden.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Diese Anweisung abbrechen\n' +
-    'und mit der nächsten Schleifeniteration fortfahren.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warnung:\n' +
-    'Diese block sollte\n' +
-    'nur in einer Schleife\n'+
-    'verwendet werden.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Diese Anweisung abbrechen und mit der nächsten Schleifeniteration fortfahren.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING = 'Warnung: Diese block sollte nur in einer Schleife verwendet werden.';
 
 // Logic Blocks.
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'Wenn eine Bedingung wahr (true) ist, dann führe eine Anweisung aus.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Wenn eine Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
-    'Ansonsten führe die zweite Anweisung aus.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
-    'Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.\n' +
-    'Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.\n' +
-    'Falls keine der beiden Bedingungen wahr (true) ist, dann führe die dritte Anweisung aus.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Wenn eine Bedingung wahr (true) ist, dann führe die erste Anweisung aus.  Ansonsten führe die zweite Anweisung aus.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.  Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Wenn der erste Bedingung wahr (true) ist, dann führe die erste Anweisung aus.  Oder wenn die zweite Bedingung wahr (true) ist, dann führe die zweite Anweisung aus.  Falls keine der beiden Bedingungen wahr (true) ist, dann führe die dritte Anweisung aus.';
 Blockly.LANG_CONTROLS_IF_MSG_IF = 'wenn';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'oder wenn';
 Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'oder';
@@ -145,14 +132,10 @@ Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Eine oder Bedingung hinzufügen, führt
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://de.wikipedia.org/wiki/Vergleich_%28Zahlen%29';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Ist wahr (true) wenn beide Werte identisch sind.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Ist wahr (true) wenn beide Werte unterschiedlich sind.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = 'Ist wahr (true) wenn der erste Wert kleiner als\n' +
-    'der zweite Wert ist.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = 'Ist wahr (true) wenn der erste Wert kleiner als\n' +
-    'oder gleich gross wie zweite Wert ist.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = 'Ist wahr (true) wenn der erste Wert grösser als\n' +
-    'der zweite Wert ist.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = 'Ist wahr (true) wenn der erste Wert grösser als\n' +
-    'oder gleich gross wie zweite Wert ist.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = 'Ist wahr (true) wenn der erste Wert kleiner als der zweite Wert ist.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = 'Ist wahr (true) wenn der erste Wert kleiner als oder gleich gross wie zweite Wert ist.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = 'Ist wahr (true) wenn der erste Wert grösser als der zweite Wert ist.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = 'Ist wahr (true) wenn der erste Wert grösser als oder gleich gross wie zweite Wert ist.';
 
 Blockly.LANG_LOGIC_OPERATION_HELPURL = 'http://code.google.com/p/blockly/wiki/And_Or';
 Blockly.LANG_LOGIC_OPERATION_AND = 'und';
@@ -162,8 +145,7 @@ Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = 'Ist wahr (true) wenn einer der beiden
 
 Blockly.LANG_LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
 Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'nicht';
-Blockly.LANG_LOGIC_NEGATE_TOOLTIP = 'Ist wahr (true) wenn der Eingabewert falsch (false) ist.\n' +
-    'Ist falsch (false) wenn der Eingabewert wahr (true) ist.';
+Blockly.LANG_LOGIC_NEGATE_TOOLTIP = 'Ist wahr (true) wenn der Eingabewert falsch (false) ist.  Ist falsch (false) wenn der Eingabewert wahr (true) ist.';
 
 Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
 Blockly.LANG_LOGIC_BOOLEAN_TRUE = 'wahr';
@@ -178,8 +160,7 @@ Blockly.LANG_LOGIC_TERNARY_HELPURL = 'http://de.wikipedia.org/wiki/%3F:#Auswahlo
 Blockly.LANG_LOGIC_TERNARY_CONDITION = 'test';
 Blockly.LANG_LOGIC_TERNARY_IF_TRUE = 'wenn wahr';
 Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'wenn falsch';
-Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Überprüft eine Bedingung "test". Wenn die Bedingung wahr ist\n' +
-    'wird der "wenn wahr" Wert zurückgegeben, andernfalls der "wenn falsch" Wert';
+Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Überprüft eine Bedingung "test". Wenn die Bedingung wahr ist wird der "wenn wahr" Wert zurückgegeben, andernfalls der "wenn falsch" Wert';
 
 // Math Blocks.
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://de.wikipedia.org/wiki/Zahl';
@@ -190,8 +171,7 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = 'Ist die Summe zweier Werte.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = 'Ist die Differenz zweier Werte.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Ist das Produkt zweier Werte.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Ist der Quotient zweier Werte.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Ist der erste Wert potenziert mit\n' +
-    'dem zweiten Wert.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Ist der erste Wert potenziert mit dem zweiten Wert.';
 
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://de.wikipedia.org/wiki/Quadratwurzel';
 Blockly.LANG_MATH_SINGLE_OP_ROOT = 'Quadratwurzel';
@@ -213,8 +193,7 @@ Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Ist der Arcuscosinus des Eingabewertes.';
 Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Ist der Arcustangens des Eingabewertes.';
 
 Blockly.LANG_MATH_CONSTANT_HELPURL = 'http://de.wikipedia.org/wiki/Mathematische_Konstante';
-Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Mathematische Konstanten wie: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026),\n' +
-    'sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026) oder \u221e (unendlich).';
+Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Mathematische Konstanten wie: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026), sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026) oder \u221e (unendlich).';
 
 Blockly.LANG_MATH_IS_EVEN = 'ist gerade';
 Blockly.LANG_MATH_IS_ODD = 'ist ungerade';
@@ -223,9 +202,7 @@ Blockly.LANG_MATH_IS_WHOLE = 'ganze Zahl';
 Blockly.LANG_MATH_IS_POSITIVE = 'ist positiv';
 Blockly.LANG_MATH_IS_NEGATIVE = 'ist negativ';
 Blockly.LANG_MATH_IS_DIVISIBLE_BY = 'ist teilbar durch';
-Blockly.LANG_MATH_IS_TOOLTIP = 'Überprüft ob eine Zahl gerade, ungerade, eine Primenzahl, ganzzahlig,\n' +
-    'positiv, negativ oder durch eine zweite Zahl teilbar ist.\n' +
-    'Gibt wahr (true) oder falsch (false) zurück.';
+Blockly.LANG_MATH_IS_TOOLTIP = 'Überprüft ob eine Zahl gerade, ungerade, eine Primenzahl, ganzzahlig, positiv, negativ oder durch eine zweite Zahl teilbar ist.  Gibt wahr (true) oder falsch (false) zurück.';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://de.wikipedia.org/wiki/Inkrement_und_Dekrement';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'erhöhe';
@@ -253,9 +230,7 @@ Blockly.LANG_MATH_ONLIST_TOOLTIP_MIN = 'Ist der kleinste Wert in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MAX = 'Ist der grösste Wert in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_AVERAGE = 'Ist der Durchschnittswert aller Werte in einer Liste.';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_MEDIAN = 'Ist der Zentralwert aller Werte in einer Liste.';
-Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Findet den am häufigsten vorkommenden Wert in einer Liste.\n' +
-    'Falls kein Wert öfter vorkomme als alle anderen,\n' +
-    'wird die originale Liste zurückgegen';
+Blockly.LANG_MATH_ONLIST_TOOLTIP_MODE = 'Findet den am häufigsten vorkommenden Wert in einer Liste.  Falls kein Wert öfter vorkomme als alle anderen, wird die originale Liste zurückgegen';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_STD_DEV = 'Ist die standartiesierte Standartabweichung aller Werte in der Liste';
 Blockly.LANG_MATH_ONLIST_TOOLTIP_RANDOM = 'Gebe einen Zufallswert aus der Liste zurück.';
 
@@ -272,13 +247,11 @@ Blockly.LANG_MATH_CONSTRAIN_TOOLTIP = 'Begrenzt den Wertebereich mittels von / b
 Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://de.wikipedia.org/wiki/Zufallszahlen';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'ganzahliger Zufallswerte zwischen';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'und';
-Blockly.LANG_MATH_RANDOM_INT_TOOLTIP = 'Erzeuge eine ganzahligen Zufallswert zwischen\n' +
-    'zwei Werten (inklusiv).';
+Blockly.LANG_MATH_RANDOM_INT_TOOLTIP = 'Erzeuge eine ganzahligen Zufallswert zwischen zwei Werten (inklusiv).';
 
 Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://de.wikipedia.org/wiki/Zufallszahlen';
 Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'Zufallszahl (0.0 -1.0)';
-Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP = 'Erzeuge eine Zufallszahl\n' +
-    'zwischen 0.0 (inklusiv) und 1.0 (exklusiv).';
+Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP = 'Erzeuge eine Zufallszahl zwischen 0.0 (inklusiv) und 1.0 (exklusiv).';
 
 // Text Blocks.
 Blockly.LANG_TEXT_TEXT_HELPURL = 'http://de.wikipedia.org/wiki/Zeichenkette';
@@ -286,8 +259,7 @@ Blockly.LANG_TEXT_TEXT_TOOLTIP = 'Ein Buchstabe, Text oder Satz.';
 
 Blockly.LANG_TEXT_JOIN_HELPURL = '';
 Blockly.LANG_TEXT_JOIN_TITLE_CREATEWITH = 'Erstelle Text aus';
-Blockly.LANG_TEXT_JOIN_TOOLTIP = 'Erstellt einen Text durch das verbinden\n' +
-    'von mehreren Textelementen.';
+Blockly.LANG_TEXT_JOIN_TOOLTIP = 'Erstellt einen Text durch das verbinden von mehreren Textelementen.';
 
 Blockly.LANG_TEXT_CREATE_JOIN_TITLE_JOIN = 'verbinden';
 Blockly.LANG_TEXT_CREATE_JOIN_TOOLTIP = 'Hinzufügen, entfernen und sortieren von Elementen.';
@@ -313,9 +285,7 @@ Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/ln
 Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = 'im Text';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = 'Suche erstes Vorkommniss des Begriff';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = 'Suche letztes Vorkommniss des Begriff';
-Blockly.LANG_TEXT_INDEXOF_TOOLTIP = 'Findest das erste / letzte Vorkommniss\n' +
-    'eines cuchbegriffes in einem Text.\n' +
-    'Gibt die Position des Begriffes oder 0 zurück.';
+Blockly.LANG_TEXT_INDEXOF_TOOLTIP = 'Findest das erste / letzte Vorkommniss eines cuchbegriffes in einem Text.  Gibt die Position des Begriffes oder 0 zurück.';
 
 Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'vom Text';
@@ -340,16 +310,13 @@ Blockly.LANG_TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/H
 Blockly.LANG_TEXT_CHANGECASE_OPERATOR_UPPERCASE = 'umwandeln in GROSSBUCHSTABEN';
 Blockly.LANG_TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'umwandeln in kleinbuchstaben';
 Blockly.LANG_TEXT_CHANGECASE_OPERATOR_TITLECASE = 'umwandeln in Wörter';
-Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Wandelt Schreibweise von Texten um,\n' +
-    'in Grossbuchstaben, Kleinbuchstaben oder\n' +
-    'den ersten Buchstaben jedes Wortes gross und die anderen klein.';
+Blockly.LANG_TEXT_CHANGECASE_TOOLTIP = 'Wandelt Schreibweise von Texten um, in Grossbuchstaben, Kleinbuchstaben oder den ersten Buchstaben jedes Wortes gross und die anderen klein.';
 
 Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'entferne Leerzeichen von Anfang und Ende Seiten';
 Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'entferne Leerzeichen von Anfang Seite';
 Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'entferne Leerzeichen von Ende Seite';
-Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Entfernt Leerzeichen vom Anfang und / oder Ende\n' +
-    'eines Textes.';
+Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Entfernt Leerzeichen vom Anfang und / oder Ende eines Textes.';
 
 Blockly.LANG_TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_PRINT_TITLE_PRINT = 'Ausgabe';
@@ -379,8 +346,7 @@ Blockly.LANG_LISTS_REPEAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/ln
 Blockly.LANG_LISTS_REPEAT_INPUT_WITH = 'Erzeuge Liste mit Element';
 Blockly.LANG_LISTS_REPEAT_INPUT_REPEATED = 'wiederhole es';
 Blockly.LANG_LISTS_REPEAT_INPUT_TIMES = 'mal';
-Blockly.LANG_LISTS_REPEAT_TOOLTIP = 'Erzeugt eine Liste mit einer variablen\n' +
-    'Anzahl von Elementen';
+Blockly.LANG_LISTS_REPEAT_TOOLTIP = 'Erzeugt eine Liste mit einer variablen Anzahl von Elementen';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'länge';
@@ -394,8 +360,7 @@ Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/
 Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = 'in der Liste';
 Blockly.LANG_LISTS_INDEX_OF_FIRST = 'Suche erstes Vorkommniss';
 Blockly.LANG_LISTS_INDEX_OF_LAST = 'Suche letztes Vorkommniss';
-Blockly.LANG_LISTS_INDEX_OF_TOOLTIP = 'Sucht die Position (index) eines Elementes in der Liste\n' +
-    'Gibt 0 zurück wenn nichts gefunden wurde.';
+Blockly.LANG_LISTS_INDEX_OF_TOOLTIP = 'Sucht die Position (index) eines Elementes in der Liste Gibt 0 zurück wenn nichts gefunden wurde.';
 
 Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_GET_INDEX_GET = 'Nehme';
@@ -428,17 +393,13 @@ Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
 Blockly.LANG_LISTS_SET_INDEX_SET = 'set';
 Blockly.LANG_LISTS_SET_INDEX_INSERT = 'insert';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'auf';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Sets the item at the specified position in a list.\n' +
-    '#1 is the first item.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Sets the item at the specified position in a list.\n' +
-    '#1 is the last item.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Sets the item at the specified position in a list.  #1 is the first item.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Sets the item at the specified position in a list.  #1 is the last item.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FIRST = 'Sets the first item in a list.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_LAST = 'Sets the last item in a list.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_RANDOM = 'Sets a random item in a list.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Inserts the item at the specified position in a list.\n' +
-    '#1 is the first item.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Inserts the item at the specified position in a list.\n' +
-    '#1 is the last item.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Inserts the item at the specified position in a list.  #1 is the first item.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Inserts the item at the specified position in a list.  #1 is the last item.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST = 'Inserts the item at the start of a list.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_LAST = 'Append the item to the end of a list.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM = 'Inserts the item randomly in a list.';
@@ -479,9 +440,7 @@ Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'gebe zurück';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Ein Funktionsblock mit Rückgabewert.';
 
-Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warnung:\n' +
-    'dieser Funktionsblock\n' +
-    'hat doppelte Parameter.';
+Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warnung: dieser Funktionsblock hat doppelte Parameter.';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://de.wikipedia.org/wiki/Prozedur_%28Programmierung%29';
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = '';
@@ -497,9 +456,5 @@ Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'Variable:';
 Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Markiere Funktionsblock';
 Blockly.LANG_PROCEDURES_CREATE_DO = 'Erzeuge "Aufruf %1"';
 
-Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'Wenn der erste Wert wahr (true) ist,\n' +
-    'Gebe den zweiten Wert zurück.';
-Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Warnung:\n' +
-    'Dieser Block darf nur\n' +
-    'innerhalb eines Funktionsblock\n' +
-    'genutzt werden.';
+Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'Wenn der erste Wert wahr (true) ist, Gebe den zweiten Wert zurück.';
+Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Warnung: Dieser Block darf nur innerhalb eines Funktionsblock genutzt werden.';

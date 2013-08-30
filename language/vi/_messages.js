@@ -64,9 +64,7 @@ Blockly.LANG_COLOUR_RGB_TITLE = 'Tạo màu từ';
 Blockly.LANG_COLOUR_RGB_RED = 'màu đỏ';
 Blockly.LANG_COLOUR_RGB_GREEN = 'màu xanh lá cây';
 Blockly.LANG_COLOUR_RGB_BLUE = 'màu xanh dương';
-Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Tạo màu từ ba màu: đỏ, xanh lá cây,\n' +
-    'xanh dương với số lượng cụ thể.\n' +
-    'Mỗi số phải có giá trị từ 0 đến 100.';
+Blockly.LANG_COLOUR_RGB_TOOLTIP = 'Tạo màu từ ba màu: đỏ, xanh lá cây, xanh dương với số lượng cụ thể.  Mỗi số phải có giá trị từ 0 đến 100.';
 
 Blockly.LANG_COLOUR_BLEND_HELPURL = 'http://meyerweb.com/eric/tools/color-blend/';
 Blockly.LANG_COLOUR_BLEND_TITLE = 'pha';
@@ -87,8 +85,7 @@ Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE = 'lặp lại trong\u00A0khi';
 Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = 'lặp lại cho đến\u00A0khi';
 Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO = 'thực hiện';
 Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = 'Miễn là điều kiện còn đúng, thì thực hiện các lệnh.';
-Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'Miễn là điều kiện còn sai, thì thực hiện các lệnh\n' +
-    'Khi điều kiện đúng thì ngưng.';
+Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'Miễn là điều kiện còn sai, thì thực hiện các lệnh.  Khi điều kiện đúng thì ngưng.';
 
 Blockly.LANG_CONTROLS_FOR_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_FOR_INPUT_WITH = 'đếm theo';
@@ -98,9 +95,7 @@ Blockly.LANG_CONTROLS_FOR_INPUT_TO = 'đến';
 Blockly.LANG_CONTROLS_FOR_INPUT_BY = 'mỗi lần thêm';
 Blockly.LANG_CONTROLS_FOR_INPUT_DO = 'thực hiện';
 Blockly.LANG_CONTROLS_FOR_TAIL = '';
-Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Đếm từ số đầu đến số cuối.\n' +
-    'Khi đến mỗi số, gán số vào biến "%1"\n' +
-    'rồi thực hiện các lệnh.';
+Blockly.LANG_CONTROLS_FOR_TOOLTIP = 'Đếm từ số đầu đến số cuối. Khi đến mỗi số, gán số vào biến "%1" rồi thực hiện các lệnh.';
 
 Blockly.LANG_CONTROLS_FOREACH_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_ITEM = 'với mỗi thành phần';
@@ -108,37 +103,28 @@ Blockly.LANG_CONTROLS_FOREACH_INPUT_VAR = 'x';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST = 'trong danh sách';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_INLIST_TAIL = '';
 Blockly.LANG_CONTROLS_FOREACH_INPUT_DO = 'thực hiện';
-Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'Trong một danh sách, lấy từng thành phần, gán vào\n' +
-    'biến "%1", rồi thực hiện một số lệnh.';
+Blockly.LANG_CONTROLS_FOREACH_TOOLTIP = 'Trong một danh sách, lấy từng thành phần, gán vào biến "%1", rồi thực hiện một số lệnh.';
 
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL = 'http://en.wikipedia.org/wiki/Control_flow';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP = 'vòng lặp';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = 'thoát';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = 'sang lần lặp tiếp theo';
 Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = 'Thoát khỏi vòng lặp hiện tại.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Bỏ qua phần còn lại trong vòng lặp này,\n' +
-    'và sang lần lặp tiếp theo.';
-Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING ='Chú ý:\n' +
-    'Mảnh này chỉ có thế dùng\n' +
-    'trong các vòng lặp.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = 'Bỏ qua phần còn lại trong vòng lặp này, và sang lần lặp tiếp theo.';
+Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING ='Chú ý: Mảnh này chỉ có thế dùng trong các vòng lặp.';
 
 // Logic Blocks.
 Blockly.LANG_CONTROLS_IF_HELPURL = 'http://code.google.com/p/blockly/wiki/If_Then';
 Blockly.LANG_CONTROLS_IF_TOOLTIP_1 = 'Nếu điều kiện đúng, thực hiện các lệnh.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
-    'Nếu sai, thực hiện các lệnh sau.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
-    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.';
-Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.\n' +
-    'Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.\n' +
-    'Nếu không điều kiện nào đúng, thực hiện các lệnh cuối cùng.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_2 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.  Nếu sai, thực hiện các lệnh sau.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_3 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.  Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.';
+Blockly.LANG_CONTROLS_IF_TOOLTIP_4 = 'Nếu điều kiện đúng, thực hiện các lệnh đầu.  Nếu không, nếu điều kiện thứ hai đúng, thực hiện các lệnh thứ hai.  Nếu không điều kiện nào đúng, thực hiện các lệnh cuối cùng.';
 Blockly.LANG_CONTROLS_IF_MSG_IF = 'nếu';
 Blockly.LANG_CONTROLS_IF_MSG_ELSEIF = 'nếu không nếu';
 Blockly.LANG_CONTROLS_IF_MSG_ELSE = 'nếu không';
 Blockly.LANG_CONTROLS_IF_MSG_THEN = 'thực hiện';
 Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = 'nếu';
-Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Thêm, bỏ, hoặc đổi thứ tự các mảnh con\n' +
-    'để tạo cấu trúc mới cho mảnh nếu.';
+Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Thêm, bỏ, hoặc đổi thứ tự các mảnh con để tạo cấu trúc mới cho mảnh nếu.';
 Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = 'nếu không nếu';
 Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Thêm một điều kiện vào mảnh nếu.';
 Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = 'nếu không';
@@ -147,14 +133,10 @@ Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP = 'Cuối cùng, khi không điều kiện
 Blockly.LANG_LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ = 'Hoàn trả giá trị "đúng" (true) nếu giá trị hai đầu vào bằng nhau.';
 Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ = 'Hoàn trả giá trị "đúng" (true) nếu giá trị hai đầu vào không bằng nhau.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = 'Hoàn trả giá trị "đúng" (true)\n' +
-    'nếu đầu vào thứ nhất nhỏ hơn đầu vào thứ hai.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = 'Hoàn trả giá trị "đúng" (true)\n' +
-    'nếu đầu vào thứ nhất nhỏ hơn hoặc bằng đầu vào thứ hai.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = 'Hoàn trả giá trị "đúng" (true)\n' +
-    'nếu đầu vào thứ nhất lớn hơn đầu vào thứ hai.';
-Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = 'Hoàn trả giá trị "đúng" (true)\n' +
-    'nếu đầu vào thứ nhất lớn hơn hoặc bằng đầu vào thứ hai.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT = 'Hoàn trả giá trị "đúng" (true) nếu đầu vào thứ nhất nhỏ hơn đầu vào thứ hai.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE = 'Hoàn trả giá trị "đúng" (true) nếu đầu vào thứ nhất nhỏ hơn hoặc bằng đầu vào thứ hai.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT = 'Hoàn trả giá trị "đúng" (true) nếu đầu vào thứ nhất lớn hơn đầu vào thứ hai.';
+Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE = 'Hoàn trả giá trị "đúng" (true) nếu đầu vào thứ nhất lớn hơn hoặc bằng đầu vào thứ hai.';
 
 Blockly.LANG_LOGIC_OPERATION_HELPURL = 'http://code.google.com/p/blockly/wiki/And_Or';
 Blockly.LANG_LOGIC_OPERATION_AND = 'và';
@@ -164,8 +146,7 @@ Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR = 'Hoàn trả "đúng" (true) nếu ít
 
 Blockly.LANG_LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
 Blockly.LANG_LOGIC_NEGATE_INPUT_NOT = 'không';
-Blockly.LANG_LOGIC_NEGATE_TOOLTIP = 'Hoàn trả "đúng" (true) nếu đầu vào sai.\n' +
-    'Hoàn trả "sai" (false) nếu đầu vào đúng.';
+Blockly.LANG_LOGIC_NEGATE_TOOLTIP = 'Hoàn trả "đúng" (true) nếu đầu vào sai.  Hoàn trả "sai" (false) nếu đầu vào đúng.';
 
 Blockly.LANG_LOGIC_BOOLEAN_HELPURL = 'http://code.google.com/p/blockly/wiki/True_False';
 Blockly.LANG_LOGIC_BOOLEAN_TRUE = 'đúng';
@@ -180,8 +161,7 @@ Blockly.LANG_LOGIC_TERNARY_HELPURL = 'http://en.wikipedia.org/wiki/%3F:';
 Blockly.LANG_LOGIC_TERNARY_CONDITION = 'kiểm tra';
 Blockly.LANG_LOGIC_TERNARY_IF_TRUE = 'nếu đúng';
 Blockly.LANG_LOGIC_TERNARY_IF_FALSE = 'nếu sai';
-Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Kiểm tra điều kiện. Nếu điều kiện đúng, hoàn trả giá trị từ mệnh đề "nếu đúng"\n' +
-    'nếu không đúng, hoàn trả giá trị từ mệnh đề "nếu sai".';
+Blockly.LANG_LOGIC_TERNARY_TOOLTIP = 'Kiểm tra điều kiện. Nếu điều kiện đúng, hoàn trả giá trị từ mệnh đề "nếu đúng" nếu không đúng, hoàn trả giá trị từ mệnh đề "nếu sai".';
 
 // Math Blocks.
 Blockly.LANG_MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
@@ -192,8 +172,7 @@ Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_ADD = 'Hoàn trả tổng của hai con s�
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MINUS = 'Hoàn trả hiệu của hai con số.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_MULTIPLY = 'Hoàn trả tích của hai con số.';
 Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_DIVIDE = 'Hoàn trả thương của hai con số.';
-Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Hoàn trả số lũy thừa với số thứ nhất là cơ số\n' +
-    'và số thứ hai là số mũ.';
+Blockly.LANG_MATH_ARITHMETIC_TOOLTIP_POWER = 'Hoàn trả số lũy thừa với số thứ nhất là cơ số và số thứ hai là số mũ.';
 
 Blockly.LANG_MATH_SINGLE_HELPURL = 'http://en.wikipedia.org/wiki/Square_root';
 Blockly.LANG_MATH_SINGLE_OP_ROOT = 'căn bật hai';
@@ -216,8 +195,7 @@ Blockly.LANG_MATH_TRIG_TOOLTIP_ACOS = 'Hoàn trả Arccos của một góc (theo
 Blockly.LANG_MATH_TRIG_TOOLTIP_ATAN = 'Hoàn trả Arctang của một góc (theo độ).';
 
 Blockly.LANG_MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
-Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Hoàn trả các đẳng số thường gặp: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026),\n' +
-    'sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026), or \u221e (vô cực).';
+Blockly.LANG_MATH_CONSTANT_TOOLTIP = 'Hoàn trả các đẳng số thường gặp: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026), sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026), or \u221e (vô cực).';
 
 Blockly.LANG_MATH_IS_EVEN = 'chẵn';
 Blockly.LANG_MATH_IS_ODD = 'lẻ';
@@ -226,8 +204,7 @@ Blockly.LANG_MATH_IS_WHOLE = 'là số nguyên';
 Blockly.LANG_MATH_IS_POSITIVE = 'là số dương';
 Blockly.LANG_MATH_IS_NEGATIVE = 'là số âm';
 Blockly.LANG_MATH_IS_DIVISIBLE_BY = 'chia hết cho';
-Blockly.LANG_MATH_IS_TOOLTIP = 'Kiểm tra con số xem nó có phải là số chẵn, lẻ, nguyên tố, nguyên, dương, âm, \n' +
-    'hay xem nó có chia hết cho số đầu vào hay không.  Hoàn trả đúng hay sai.';
+Blockly.LANG_MATH_IS_TOOLTIP = 'Kiểm tra con số xem nó có phải là số chẵn, lẻ, nguyên tố, nguyên, dương, âm,  hay xem nó có chia hết cho số đầu vào hay không.  Hoàn trả đúng hay sai.';
 
 Blockly.LANG_MATH_CHANGE_HELPURL = 'http://en.wikipedia.org/wiki/Programming_idiom#Incrementing_a_counter';
 Blockly.LANG_MATH_CHANGE_TITLE_CHANGE = 'cộng vào';
@@ -272,13 +249,11 @@ Blockly.LANG_MATH_CONSTRAIN_TOOLTIP = 'Giới hạn số đầu vào để khôn
 Blockly.LANG_MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_FROM = 'Một số nguyên bất kỳ từ';
 Blockly.LANG_MATH_RANDOM_INT_INPUT_TO = 'đến';
-Blockly.LANG_MATH_RANDOM_INT_TOOLTIP = 'Hoàn trả một số nguyên bất kỳ\n' +
-    'lớn hơn hoặc bằng số đầu và nhỏ hơn hoặc bằng số sau.';
+Blockly.LANG_MATH_RANDOM_INT_TOOLTIP = 'Hoàn trả một số nguyên bất kỳ lớn hơn hoặc bằng số đầu và nhỏ hơn hoặc bằng số sau.';
 
 Blockly.LANG_MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 Blockly.LANG_MATH_RANDOM_FLOAT_TITLE_RANDOM = 'phân số bất kỳ';
-Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP = 'Hoàn trả một phân số bất kỳ\n' +
-    'không nhỏ hơn 0.0 và không lớn hơn 1.0.';
+Blockly.LANG_MATH_RANDOM_FLOAT_TOOLTIP = 'Hoàn trả một phân số bất kỳ không nhỏ hơn 0.0 và không lớn hơn 1.0.';
 
 // Text Blocks.
 Blockly.LANG_TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_science)';
@@ -302,8 +277,7 @@ Blockly.LANG_TEXT_APPEND_TOOLTIP = 'Thêm một mảng văn bản vào biến "%
 
 Blockly.LANG_TEXT_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_LENGTH_INPUT_LENGTH = 'độ dài của';
-Blockly.LANG_TEXT_LENGTH_TOOLTIP = 'Hoàn trả số lượng ký tự (kể cả khoảng trắng)\n' +
-    'trong văn bản đầu vào.';
+Blockly.LANG_TEXT_LENGTH_TOOLTIP = 'Hoàn trả số lượng ký tự (kể cả khoảng trắng) trong văn bản đầu vào.';
 
 Blockly.LANG_TEXT_ISEMPTY_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_ISEMPTY_INPUT_ISEMPTY = 'trống không';
@@ -313,9 +287,7 @@ Blockly.LANG_TEXT_INDEXOF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/ln
 Blockly.LANG_TEXT_INDEXOF_INPUT_INTEXT = 'trong văn bản';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_FIRST = 'tìm sự có mặt đầu tiên của';
 Blockly.LANG_TEXT_INDEXOF_OPERATOR_LAST = 'tìm sự có mặt cuối cùng của';
-Blockly.LANG_TEXT_INDEXOF_TOOLTIP = 'Hoàn trả vị trí xuất hiện đầu/cuối\n' +
-    'của văn bản thứ nhất trong văn bản thứ hai.\n' +
-    'Nếu không tìm thấy thì hoàn trả số 0.';
+Blockly.LANG_TEXT_INDEXOF_TOOLTIP = 'Hoàn trả vị trí xuất hiện đầu/cuối của văn bản thứ nhất trong văn bản thứ hai.  Nếu không tìm thấy thì hoàn trả số 0.';
 
 Blockly.LANG_TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_TEXT_CHARAT_INPUT_INTEXT = 'trong văn bản';
@@ -346,8 +318,7 @@ Blockly.LANG_TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90
 Blockly.LANG_TEXT_TRIM_OPERATOR_BOTH = 'xóa khoảng trắng từ bên trái và phải';
 Blockly.LANG_TEXT_TRIM_OPERATOR_LEFT = 'xóa khoảng trắng từ bên trái';
 Blockly.LANG_TEXT_TRIM_OPERATOR_RIGHT = 'xóa khoảng trắng từ bên phải';
-Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Hoàn trả bản sao của văn bản sau khi\n' +
-    'xóa khoảng trắng từ một hoặc hai bên.';
+Blockly.LANG_TEXT_TRIM_TOOLTIP = 'Hoàn trả bản sao của văn bản sau khi xóa khoảng trắng từ một hoặc hai bên.';
 
 Blockly.LANG_TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_TEXT_PRINT_TITLE_PRINT = 'in lên màng hình';
@@ -377,8 +348,7 @@ Blockly.LANG_LISTS_REPEAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/ln
 Blockly.LANG_LISTS_REPEAT_INPUT_WITH = 'tạo danh sách gồm một vật';
 Blockly.LANG_LISTS_REPEAT_INPUT_REPEATED = 'lặp lại';
 Blockly.LANG_LISTS_REPEAT_INPUT_TIMES = 'lần';
-Blockly.LANG_LISTS_REPEAT_TOOLTIP = 'Tạo danh sách gồm một số lượng vật nhất định\n' +
-    'với mỗi vật đều giống nhau.';
+Blockly.LANG_LISTS_REPEAT_TOOLTIP = 'Tạo danh sách gồm một số lượng vật nhất định với mỗi vật đều giống nhau.';
 
 Blockly.LANG_LISTS_LENGTH_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 Blockly.LANG_LISTS_LENGTH_INPUT_LENGTH = 'độ dài của';
@@ -392,9 +362,7 @@ Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'http://publib.boulder.ibm.com/infocenter/
 Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = 'trong danh sách';
 Blockly.LANG_LISTS_INDEX_OF_FIRST = 'tìm sự có mặt đầu tiên của vật';
 Blockly.LANG_LISTS_INDEX_OF_LAST = 'tìm sự có mặt cuối cùng của vật';
-Blockly.LANG_LISTS_INDEX_OF_TOOLTIP = 'Hoàn trả vị trí xuất hiện đầu/cuối\n' +
-    'của vật trong danh sách.\n' +
-    'Nếu không tìm thấy thì hoàn trả số 0.';
+Blockly.LANG_LISTS_INDEX_OF_TOOLTIP = 'Hoàn trả vị trí xuất hiện đầu/cuối của vật trong danh sách.  Nếu không tìm thấy thì hoàn trả số 0.';
 
 Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 Blockly.LANG_LISTS_GET_INDEX_GET = 'lấy thành tố';
@@ -406,24 +374,18 @@ Blockly.LANG_LISTS_GET_INDEX_FIRST = 'đầu tiên';
 Blockly.LANG_LISTS_GET_INDEX_LAST = 'cuối cùng';
 Blockly.LANG_LISTS_GET_INDEX_RANDOM = 'bất kỳ';
 Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = 'trong danh sách';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = 'Hoàn trả thành tố trong danh sách ở vị trí ấn định.\n' +
-    'Số 1 là thành tố đầu tiên.';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_END = 'Hoàn trả thành tố trong danh sách ở vị trí ấn định.\n' +
-    'Số 1 là thành tố cuối cùng.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = 'Hoàn trả thành tố trong danh sách ở vị trí ấn định.  Số 1 là thành tố đầu tiên.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_END = 'Hoàn trả thành tố trong danh sách ở vị trí ấn định.  Số 1 là thành tố cuối cùng.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FIRST = 'Hoàn trả thành tố đầu tiên trong danh sách.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_LAST = 'Hoàn trả thành tố cuối cùng trong danh sách.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_RANDOM = 'Hoàn trả một thành tố bất kỳ trong danh sách.';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_START = 'Hoàn trả và xóa thành tố trong danh sách ở vị trí ấn định.\n' +
-    'Số 1 là thành tố đầu tiên.';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_END = 'Hoàn trả và xóa thành tố trong danh sách ở vị trí ấn định.\n' +
-    'Số 1 là thành tố cuối cùng.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_START = 'Hoàn trả và xóa thành tố trong danh sách ở vị trí ấn định.  Số 1 là thành tố đầu tiên.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_END = 'Hoàn trả và xóa thành tố trong danh sách ở vị trí ấn định.  Số 1 là thành tố cuối cùng.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST = 'Hoàn trả và xóa thành tố đầu tiên trong danh sách.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST = 'Hoàn trả và xóa thành tố cuối cùng trong danh sách.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM = 'Hoàn trả và xóa mộtthành tố bất kỳ trong danh sách.';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_START = 'Xóa thành tố trong danh sách ở vị trí ấn định.\n' +
-    'Số 1 là thành tố đầu tiên.';
-Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_END = 'Xóa thành tố trong danh sách ở vị trí ấn định.\n' +
-    'Số 1 là thành tố cuối cùng.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_START = 'Xóa thành tố trong danh sách ở vị trí ấn định.  Số 1 là thành tố đầu tiên.';
+Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_END = 'Xóa thành tố trong danh sách ở vị trí ấn định.  Số 1 là thành tố cuối cùng.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST = 'Xóa thành tố đầu tiên trong danh sách.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST = 'Xóa thành tố cuối cùng trong danh sách.';
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM = 'Xóa thành tố bất kỳ trong danh sách.';
@@ -433,17 +395,13 @@ Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'trong danh sách';
 Blockly.LANG_LISTS_SET_INDEX_SET = 'đặt thành tố';
 Blockly.LANG_LISTS_SET_INDEX_INSERT = 'gắn chèn vào vị trí';
 Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'giá trị';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Đặt giá trị của thành tố ở vị trí ấn định trong một danh sách.\n' +
-    '#1 là thành tố đầu tiên.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Đặt giá trị của thành tố trong một danh sách ở vị trí ấn định từ phía cuối.\n' +
-    '#1 là thành tố cuối cùng.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Đặt giá trị của thành tố ở vị trí ấn định trong một danh sách.  #1 là thành tố đầu tiên.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Đặt giá trị của thành tố trong một danh sách ở vị trí ấn định từ phía cuối.  #1 là thành tố cuối cùng.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FIRST = 'Đặt giá trị của thành tố đầu tiên trong danh sách.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_LAST = 'Đặt giá trị của thành tố cuối cùng trong danh sách.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_RANDOM = 'Đặt giá trị của thành tố ngẫu nhiên trong danh sách.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Gắn chèn vật vào danh sách theo vị trí ấn định.\n' +
-    '#1 là thành tố đầu tiên.';
-Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Gắn chèn vật vào danh sách theo vị trí ấn định từ phía cuối.\n' +
-    '#1 là thành tố cuối cùng.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Gắn chèn vật vào danh sách theo vị trí ấn định.  #1 là thành tố đầu tiên.';
+Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Gắn chèn vật vào danh sách theo vị trí ấn định từ phía cuối.  #1 là thành tố cuối cùng.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST = 'Gắn chèn vật vào đầu danh sách.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_LAST = 'Gắn thêm vật vào cuối danh sách.';
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM = 'Gắn chèn vật vào danh sách ở vị trí ngẫu nhiên.';
@@ -483,9 +441,7 @@ Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETUR
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'hoàn trả';
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Một thủ tục có giá trị hoàn trả.';
-Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Chú ý:\n' +
-    'Thủ tục này có lặp lại\n' +
-    'tên các tham số.';
+Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Chú ý: Thủ tục này có lặp lại tên các tham số.';
 
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = 'thực hiện';
@@ -502,6 +458,4 @@ Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Làm nổi bật thủ tục';
 Blockly.LANG_PROCEDURES_CREATE_DO = 'Tạo mảnh "thực hiện %1"';
 
 Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'Khi điều kiện đúng thì hoàn trả một giá trị.';
-Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Chú ý:\n' +
-    'Mảnh này chỉ có thể dùng\n' +
-    'trong một thủ tục.';
+Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Chú ý: Mảnh này chỉ có thể dùng trong một thủ tục.';
