@@ -5,7 +5,7 @@ if (typeof apps == 'undefined') { var apps = {}; }
 
 
 apps.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="subtitle">graficzne środowisko programistyczne</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Zobacz utworzony kod JavaScript.</span><span id="linkTooltip">Podziel się swoim programem.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Uruchom program</span><span id="resetProgram">Wyczyść</span><span id="dialogOk">OK</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">Wystąpił problem z przesłaniem żądania.</span><span id="linkAlert">Udostępnij link ze swoimi poleceniami:\n\n%1</span><span id="hashError">Przepraszamy, \'%1\' jest nieodpowiedni do zapisanych plików Blockly.</span><span id="xmlError">Nie można wgrać pliku.  Może plik został zapisany w innej wersji Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
+  return '<div style="display: none"><span id="subtitle">graficzne środowisko programistyczne</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Zobacz wygenerowany kod JavaScript.</span><span id="linkTooltip">Zapisz i podlinkuj do bloków</span><span id="runTooltip">Uruchom program zdefinowany przez bloki w \\nobszarze roboczym </span><span id="runProgram">Uruchom Program</span><span id="resetProgram">Zresetuj</span><span id="dialogOk">OK</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logika</span><span id="catLoops">Pętle</span><span id="catMath">Matematyka</span><span id="catText">Tekst</span><span id="catLists">Listy</span><span id="catColour">Kolor</span><span id="catVariables">Zmienne</span><span id="catProcedures">Procedury</span><span id="httpRequestError">Wystąpił problem z zażądaniem.</span><span id="linkAlert">Udpostępnij swoje bloki korzystając z poniższego linku : \n\n\n%1</span><span id="hashError">Przepraszamy, \'%1\' nie odpowiada z jakimkolwiek zapisanym programem.</span><span id="xmlError">Nie można załadować zapisanego pliku. Być może został utworzony za pomocą innej wersji Blockly?</span><span id="listVariable">lista</span><span id="textVariable">tekst</span></div>';
 };
 
 
@@ -36,7 +36,7 @@ if (typeof mazepage == 'undefined') { var mazepage = {}; }
 
 
 mazepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Maze_moveForward">idź naprzód</span><span id="Maze_turnLeft">skręć w lewo</span><span id="Maze_turnRight">skręć w prawo</span><span id="Maze_doCode">wykonaj</span><span id="Maze_elseCode">albo</span><span id="Maze_pathAhead">jeśli droga prowadzi prosto</span><span id="Maze_pathLeft">jeśli droga skręca w lewo</span><span id="Maze_pathRight">jeśli droga skręca w prawo</span><span id="Maze_repeatUntil">powtarzaj dopóki nie</span><span id="Maze_moveForwardTooltip">Przesuwa Pegman-a prosto o jedno pole.</span><span id="Maze_turnTooltip">Obraca Pegman-a w lewo lub prawo o 90 stopni.</span><span id="Maze_ifTooltip">Jeśli droga prowadzi we wskazanym kierunku, \\nwykonaj polecenia. </span><span id="Maze_ifelseTooltip">Jeśli droga prowadzi we wskazanym kierunku, \\nwykonaj pierwszy zestaw poleceń. \\nW przeciwnym razie, wykonaj drugi zestaw \\npoleceń. </span><span id="Maze_whileTooltip">Wykonuj zestaw poleceń dopóki nie osiągniesz \\npunktu końcowego. </span><span id="Maze_capacity0">Pozostało 0 poleceń.</span><span id="Maze_capacity1">Wykorzystano 1 polecenie.</span><span id="Maze_capacity2">Wykorzystano %1 poleceń.</span><span id="Maze_nextLevel">Gratulacje! Czy chcesz przejść na poziom %1?</span><span id="Maze_finalLevel">Gratulacje! Ostatni poziom został rozwiązany.</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Maze_moveForward">idź naprzód</span><span id="Maze_turnLeft">skręć w lewo</span><span id="Maze_turnRight">skręć w prawo</span><span id="Maze_doCode">Wykonaj</span><span id="Maze_elseCode">W innym wypadku</span><span id="Maze_pathAhead">jeśli droga prowadzi prosto</span><span id="Maze_pathLeft">Jeśli ścieżka w lewo</span><span id="Maze_pathRight">Jeśli ścieżka w prawo</span><span id="Maze_repeatUntil">Powtórz</span><span id="Maze_moveForwardTooltip">Porusza gracza do przodu o jedną przestrzeń.</span><span id="Maze_turnTooltip">Obraca gracza w lewo lub prawo o 90 stopni.</span><span id="Maze_ifTooltip">Jeśli istnieje ścieżka jest w określonym \\nkierunku, wykonaj jakieś akcje </span><span id="Maze_ifelseTooltip">Jeśli istnieje ścieżka jest w określonym \\nkierunku, wykonaj pierwszy blok akcji. \\nW innym wypadku wykonaj drugi blok akcji </span><span id="Maze_whileTooltip">Powtarzać załączone kroki, dopóki punkt nie \\nzostanie osiągnięty. </span><span id="Maze_capacity0">Masz <span id=\'capacityNumber\'>0</span> pozostałych bloków.</span><span id="Maze_capacity1">Masz <span id=\'capacityNumber\'>1</span> pozostały blok.</span><span id="Maze_capacity2">Masz <span id=\'capacityNumber\'>%1</span> pozostałe(ych) bloki(ów).</span><span id="Maze_nextLevel">Gratulacje! Czy jesteś gotowy, aby przejść do poziomu %1?</span><span id="Maze_finalLevel">Gratulacje! Rozwiązałeś końcowy poziom.</span></div>';
 };
 
 
@@ -51,34 +51,34 @@ mazepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Ustaw kilka poleceń \'idź naprzód\' jedno po drugi abym doszedł do celu.';
       break;
     case 2:
-      output += 'Jaki jest ciąg poleceń abym przeszedł tą drogą?';
+      output += 'Jaka jest sekwencja kroków, aby iść tą drogą ?';
       break;
     case 3:
-      output += 'Komputery mają ograniczoną pamięć. Dojdź do końca drogi używając 2 poleceń. Użyj \'powtarzaj dopóki nie skończysz\' aby wykonać polecenie więcej niż raz.';
+      output += 'Komputery mają ograniczoną pamięć. Dotrzyj do końca tej ścieżki za pomocą tylko dwóch bloków. Użyj "powtórz" aby uruchomić blok więcej niż raz.';
       break;
     case 4:
-      output += 'Dojdź do końca używając tylko 5 poleceń.';
+      output += 'Osiągnij cel używając tylko pięciu bloków.';
       break;
     case 5:
-      output += 'Pegman powinien skręcić w lewo jeśli nie może iść naprzód.';
+      output += 'Pegman musi skręcić w lewo, kiedy nie może iść prosto.';
       break;
     case 6:
-      output += 'Warunek \'jeśli\' wykona polecenia jeśli jest prawdziwy. Spróbuj skręcić w lewo jeśli droga skręca w lewo.';
+      output += 'Blok "if (jeżeli)" wykona określoną czynność tylko kiedy wyrażenie warunkowe jest prawdziwe. Spróbuj pójść w lewo jeśli ścieżka jest w lewo.';
       break;
     case 7:
-      output += 'Ten labirynt wydaje się bardziej skomplikowany niż poprzedni, ale nie jest.';
+      output += 'Ten labirynt wygląda na bardziej skomplikowany niż poprzedni, ale wcale tak nie jest.';
       break;
     case 8:
-      output += 'Możesz użyć więcej razy warunek \'jeśli\'.';
+      output += 'Możesz użyć więcej niż jednego bloku "if".';
       break;
     case 9:
-      output += 'Warunek jeśli-albo służy do wykonania jednego zestawu poleceń albo drugiego.';
+      output += 'Bloki "if-else (jeżeli-lub)" bedą wykonywać jedną czynność lub inną czynność.';
       break;
     case 10:
       output += 'Czy dasz radę przejść ten trudny labirynt? Wypróbnuj metodę trzymania się lewą ręką ściany. Tylko dla zaawansowanych programistów!';
       break;
   }
-  output += '</div></div><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px"><g id="look"><path d="M 0,-15 a 15 15 0 0 1 15 15" /><path d="M 0,-35 a 35 35 0 0 1 35 35" /><path d="M 0,-55 a 55 55 0 0 1 55 55" /></g></svg><div id="capacityBubble"><div id="capacity"></div></div></div><table width="400"><tr><td style="width: 190px; text-align: center; vertical-align: top;"><button class="notext" title="Zobacz utworzony kod JavaScript." onclick="BlocklyApps.showCode(this);"><img src="../../media/1x1.gif" class="code icon21"></button><button id="linkButton" class="notext" title="Podziel się swoim programem." onclick="BlocklyStorage.link();"><img src="../../media/1x1.gif" class="link icon21"></button></td><td><button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="Makes the player do what the blocks say."><img src="../../media/1x1.gif" class="run icon21"> Uruchom program</button><button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="Put the player back at the start of the maze."><img src="../../media/1x1.gif" class="stop icon21"> Wyczyść</button></td></tr></table><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + mazepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div><div id="pegmanMenu"></div>' + apps.dialog(null, null, opt_ijData) + apps.codeDialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData) + '<div id="dialogDone" class="dialogHiddenContent"><div id="dialogDoneText" style="font-size: large; margin: 1em;"></div><img src="../../media/1x1.gif" id="pegSpin"><div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div></div><div id="dialogOneTopBlock" class="dialogHiddenContent"><div>Na tym poziomie, ustaw wszystkie polecania na białym polu.</div><iframe id="iframeOneTopBlock" src=""></iframe>' + apps.ok(null, null, opt_ijData) + '</div>';
+  output += '</div></div><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px"><g id="look"><path d="M 0,-15 a 15 15 0 0 1 15 15" /><path d="M 0,-35 a 35 35 0 0 1 35 35" /><path d="M 0,-55 a 55 55 0 0 1 55 55" /></g></svg><div id="capacityBubble"><div id="capacity"></div></div></div><table width="400"><tr><td style="width: 190px; text-align: center; vertical-align: top;"><button class="notext" title="Zobacz wygenerowany kod JavaScript." onclick="BlocklyApps.showCode(this);"><img src="../../media/1x1.gif" class="code icon21"></button><button id="linkButton" class="notext" title="Zapisz i podlinkuj do bloków" onclick="BlocklyStorage.link();"><img src="../../media/1x1.gif" class="link icon21"></button></td><td><button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="Makes the player do what the blocks say."><img src="../../media/1x1.gif" class="run icon21"> Uruchom Program</button><button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="Put the player back at the start of the maze."><img src="../../media/1x1.gif" class="stop icon21"> Zresetuj</button></td></tr></table><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + mazepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div><div id="pegmanMenu"></div>' + apps.dialog(null, null, opt_ijData) + apps.codeDialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData) + '<div id="dialogDone" class="dialogHiddenContent"><div id="dialogDoneText" style="font-size: large; margin: 1em;"></div><img src="../../media/1x1.gif" id="pegSpin"><div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div></div><div id="dialogOneTopBlock" class="dialogHiddenContent"><div>Na tym poziomie, musisz ułożyć razem wszystkie bloki w białym obszarze roboczym.</div><iframe id="iframeOneTopBlock" src=""></iframe>' + apps.ok(null, null, opt_ijData) + '</div>';
   return output;
 };
 

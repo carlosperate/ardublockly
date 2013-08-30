@@ -5,7 +5,7 @@ if (typeof apps == 'undefined') { var apps = {}; }
 
 
 apps.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="subtitle">a visual programming environment</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">See generated JavaScript code.</span><span id="linkTooltip">Save and link to blocks.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Run Program</span><span id="resetProgram">Reset</span><span id="dialogOk">확인</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">There was a problem with the request.</span><span id="linkAlert">Share your blocks with this link:\\n\\n%1</span><span id="hashError">Sorry, \'%1\' doesn\'t correspond with any saved program.</span><span id="xmlError">Could not load your saved file.  Perhaps it was created with a different version of Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
+  return '<div style="display: none"><span id="subtitle">시각 프로그래밍 환경</span><span id="blocklyMessage">블록리</span><span id="codeTooltip">생성된 자바스크립트 코드를 봅니다.</span><span id="linkTooltip">블록을 저장하고 링크를 가져옵니다.</span><span id="runTooltip">작업 공간에서 블록으로 정의된 프로그램을 실행합니다.</span><span id="runProgram">프로그램 실행</span><span id="resetProgram">초기화</span><span id="dialogOk">확인</span><span id="dialogCancel">Cancel</span><span id="catLogic">논리</span><span id="catLoops">반복</span><span id="catMath">수학</span><span id="catText">텍스트</span><span id="catLists">목록</span><span id="catColour">색</span><span id="catVariables">변수</span><span id="catProcedures">절차</span><span id="httpRequestError">요청에 문제가 있습니다.</span><span id="linkAlert">다음 링크로 블록을 공유하세요:\n\n%1</span><span id="hashError">죄송하지만 \'%1\'은 어떤 저장된 프로그램으로 일치하지 않습니다.</span><span id="xmlError">저장된 파일을 불러올 수 없습니다. 혹시 블록리의 다른 버전으로 만들었습니까?</span><span id="listVariable">목록</span><span id="textVariable">텍스트</span></div>';
 };
 
 
@@ -36,49 +36,49 @@ if (typeof mazepage == 'undefined') { var mazepage = {}; }
 
 
 mazepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Maze_moveForward">move forward</span><span id="Maze_turnLeft">turn left</span><span id="Maze_turnRight">turn right</span><span id="Maze_doCode">do</span><span id="Maze_elseCode">else</span><span id="Maze_pathAhead">if path ahead</span><span id="Maze_pathLeft">if path to the left</span><span id="Maze_pathRight">if path to the right</span><span id="Maze_repeatUntil">repeat until</span><span id="Maze_moveForwardTooltip">Moves the player forward one space.</span><span id="Maze_turnTooltip">Turns the player left or right by 90 degrees.</span><span id="Maze_ifTooltip">If there is a path in the specified direction, then do some actions.</span><span id="Maze_ifelseTooltip">If there is a path in the specified direction, then do the first block of actions.  Otherwise, do the second block of actions.</span><span id="Maze_whileTooltip">Repeat the enclosed actions until finish point is reached.</span><span id="Maze_capacity0">You have <span id=\'capacityNumber\'>0</span> blocks left.</span><span id="Maze_capacity1">You have <span id=\'capacityNumber\'>1</span> block left.</span><span id="Maze_capacity2">You have <span id=\'capacityNumber\'>%1</span> blocks left.</span><span id="Maze_nextLevel">Congratulations! Are you ready to proceed to level %1?</span><span id="Maze_finalLevel">Congratulations! You have solved the final level.</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Maze_moveForward">앞으로 가기</span><span id="Maze_turnLeft">왼쪽으로 돌기</span><span id="Maze_turnRight">오른쪽으로 돌기</span><span id="Maze_doCode">하기</span><span id="Maze_elseCode">그렇지 않으면</span><span id="Maze_pathAhead">만약 앞으로 가면</span><span id="Maze_pathLeft">만약 왼쪽으로 가면</span><span id="Maze_pathRight">만약 오른쪽으로 가면</span><span id="Maze_repeatUntil">다음까지 반복</span><span id="Maze_moveForwardTooltip">플레이어가 한 칸 앞으로 이동합니다.</span><span id="Maze_turnTooltip">플레이어가 90도로 왼쪽이나 오른쪽으로 돕니다.</span><span id="Maze_ifTooltip">만약 지정된 방향으로 하고 있으면, 몇 가지 행동을 합니다.</span><span id="Maze_ifelseTooltip">만약 지정된 방향으로 하고 있으면, 첫 번째 블록을 행동을 합니다. \\n그렇지 않으면, 두 번째 블록을 행동을 합니다. </span><span id="Maze_whileTooltip">도착점에 도달할 때까지 내부 행동을 반복합니다.</span><span id="Maze_capacity0">나머지 블록 <span id=\'capacityNumber\'>0</span>개가 있습니다.</span><span id="Maze_capacity1">나머지 블록 <span id=\'capacityNumber\'>1</span>개가 있습니다.</span><span id="Maze_capacity2">나머지 블록 <span id=\'capacityNumber\'>%1</span>개가 있습니다.</span><span id="Maze_nextLevel">축하합니다! %1단계를 진행할 준비가 되었습니까?</span><span id="Maze_finalLevel">축하합니다! 최종 단계를 해결했습니다.</span></div>';
 };
 
 
 mazepage.start = function(opt_data, opt_ignored, opt_ijData) {
-  var output = mazepage.messages(null, null, opt_ijData) + '<table width="100%"><tr><td><h1><span id="title"><a href="../index.html">Blockly</a> : Maze</span> &nbsp; ';
+  var output = mazepage.messages(null, null, opt_ijData) + '<table width="100%"><tr><td><h1><span id="title"><a href="../index.html">블록리</a> : 미로</span> &nbsp; ';
   for (var i194 = 1; i194 < 11; i194++) {
     output += ' ' + ((i194 == opt_ijData.level) ? '<span class="tab" id="selected">' + soy.$$escapeHtml(i194) + '</span>' : (i194 < opt_ijData.level) ? '<a class="tab previous" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i194) + '&skin=' + soy.$$escapeHtml(opt_ijData.skin) + '">' + soy.$$escapeHtml(i194) + '</a>' : '<a class="tab" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i194) + '&skin=' + soy.$$escapeHtml(opt_ijData.skin) + '">' + soy.$$escapeHtml(i194) + '</a>');
   }
   output += '</h1></td><td class="farSide"><select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select> &nbsp; <button id="pegmanButton" onmousedown="Maze.showPegmanMenu();"><img src="../../media/1x1.gif"><span>&#x25BE;</span></button></td></tr></table><div id="visualization"><div id="hintBubble"><div id="hint">';
   switch (opt_ijData.level) {
     case 1:
-      output += 'Stack a couple of \'move forward\' blocks together to help me reach the goal.';
+      output += '프로그램은 블록의 순서입니다. 목표에 도달할 수 있도록 함께 \'앞으로 가기\' 블록을 세로로 쌓으세요.';
       break;
     case 2:
-      output += 'What is the sequence of steps to follow this path?';
+      output += '이 길을 따라 가기 위한 단계의 순서는 무엇입니까?';
       break;
     case 3:
-      output += 'Computers have limited memory.  Reach the end of this path using only two blocks.  Use \'repeat\' to run a block more than once.';
+      output += '컴퓨터는 제한된 메모리가 있습니다. 블록 두 개만 사용해 이 길의 끝에 도달하세요. 한 번 이상 블록을 실행하려면 \'반복\'을 사용하세요.';
       break;
     case 4:
-      output += 'Reach the goal using only five blocks.';
+      output += '블록 다섯 개만 사용해서 목표에 도달하세요.';
       break;
     case 5:
-      output += 'Breaking a problem into two pieces can make things easier.';
+      output += '페그맨은 직진할 수 없을 때 왼쪽으로 돌아야 합니다.';
       break;
     case 6:
-      output += 'An \'if\' block will do something only if the condition is true.  Try turning left if there is a path to the left.';
+      output += '\'만약\' 블록은 조건이 참이면 무언가를 합니다. 왼쪽에 길이 있으면 왼쪽으로 돌도록 하세요.';
       break;
     case 7:
-      output += 'This maze looks more complicated than the previous one, but it is not.';
+      output += '이 미로는 이전 미로보다 더 복잡해 보이지만, 그렇지 않습니다.';
       break;
     case 8:
-      output += 'You can use more than one \'if\' block.';
+      output += '하나 이상의 \'만약\' 블록을 사용할 수 있습니다.';
       break;
     case 9:
-      output += 'If-else blocks will do one thing or the other.';
+      output += '만약-그렇지 않으면 블록은 한 가지 또는 다른 행동을 합니다.';
       break;
     case 10:
-      output += 'Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!';
+      output += '복잡한 미로를 풀 수 있습니까? 다음 왼쪽 벽을 하세요. 고급 프로그래머만!';
       break;
   }
-  output += '</div></div><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px"><g id="look"><path d="M 0,-15 a 15 15 0 0 1 15 15" /><path d="M 0,-35 a 35 35 0 0 1 35 35" /><path d="M 0,-55 a 55 55 0 0 1 55 55" /></g></svg><div id="capacityBubble"><div id="capacity"></div></div></div><table width="400"><tr><td style="width: 190px; text-align: center; vertical-align: top;"><button class="notext" title="See generated JavaScript code." onclick="BlocklyApps.showCode(this);"><img src="../../media/1x1.gif" class="code icon21"></button><button id="linkButton" class="notext" title="Save and link to blocks." onclick="BlocklyStorage.link();"><img src="../../media/1x1.gif" class="link icon21"></button></td><td><button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="Makes the player do what the blocks say."><img src="../../media/1x1.gif" class="run icon21"> Run Program</button><button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="Put the player back at the start of the maze."><img src="../../media/1x1.gif" class="stop icon21"> Reset</button></td></tr></table><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + mazepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div><div id="pegmanMenu"></div>' + apps.dialog(null, null, opt_ijData) + apps.codeDialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData) + '<div id="dialogDone" class="dialogHiddenContent"><div id="dialogDoneText" style="font-size: large; margin: 1em;"></div><img src="../../media/1x1.gif" id="pegSpin"><div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div></div><div id="dialogOneTopBlock" class="dialogHiddenContent"><div>On this level, you need to stack together all of the blocks in the white workspace.</div><iframe id="iframeOneTopBlock" src=""></iframe>' + apps.ok(null, null, opt_ijData) + '</div>';
+  output += '</div></div><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px"><g id="look"><path d="M 0,-15 a 15 15 0 0 1 15 15" /><path d="M 0,-35 a 35 35 0 0 1 35 35" /><path d="M 0,-55 a 55 55 0 0 1 55 55" /></g></svg><div id="capacityBubble"><div id="capacity"></div></div></div><table width="400"><tr><td style="width: 190px; text-align: center; vertical-align: top;"><button class="notext" title="생성된 자바스크립트 코드를 봅니다." onclick="BlocklyApps.showCode(this);"><img src="../../media/1x1.gif" class="code icon21"></button><button id="linkButton" class="notext" title="블록을 저장하고 링크를 가져옵니다." onclick="BlocklyStorage.link();"><img src="../../media/1x1.gif" class="link icon21"></button></td><td><button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="블록이 말하는 행동을 캐릭터가 합니다."><img src="../../media/1x1.gif" class="run icon21"> 프로그램 실행</button><button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="미로의 시작에서 캐릭터를 다시 넣습니다."><img src="../../media/1x1.gif" class="stop icon21"> 초기화</button></td></tr></table><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + mazepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div><div id="pegmanMenu"></div>' + apps.dialog(null, null, opt_ijData) + apps.codeDialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData) + '<div id="dialogDone" class="dialogHiddenContent"><div id="dialogDoneText" style="font-size: large; margin: 1em;"></div><img src="../../media/1x1.gif" id="pegSpin"><div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div></div><div id="dialogOneTopBlock" class="dialogHiddenContent"><div>이 단계에서, 하얀 작업 공간에서 모든 블록을 함께 쌓을 필요가 있습니다.</div><iframe id="iframeOneTopBlock" src=""></iframe>' + apps.ok(null, null, opt_ijData) + '</div>';
   return output;
 };
 

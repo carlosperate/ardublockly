@@ -5,7 +5,7 @@ if (typeof apps == 'undefined') { var apps = {}; }
 
 
 apps.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="subtitle">a visual programming environment</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">See generated JavaScript code.</span><span id="linkTooltip">Save and link to blocks.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Run Program</span><span id="resetProgram">Reset</span><span id="dialogOk">D\'acòrdi</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Colour</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">There was a problem with the request.</span><span id="linkAlert">Share your blocks with this link:\\n\\n%1</span><span id="hashError">Sorry, \'%1\' doesn\'t correspond with any saved program.</span><span id="xmlError">Could not load your saved file.  Perhaps it was created with a different version of Blockly?</span><span id="listVariable">list</span><span id="textVariable">text</span></div>';
+  return '<div style="display: none"><span id="subtitle">un environament de programacion visual</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Veire lo còde JavaScript generat.</span><span id="linkTooltip">Salva e liga als blòts.</span><span id="runTooltip">Aviar lo programa definit pels blòts dins \\nl’espaci de trabalh. </span><span id="runProgram">Executa lo programa</span><span id="resetProgram">Reïnicializar</span><span id="dialogOk">D\'acòrdi</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logic</span><span id="catLoops">Boclas</span><span id="catMath">Math</span><span id="catText">Tèxte</span><span id="catLists">Listas</span><span id="catColour">Color</span><span id="catVariables">Variablas</span><span id="catProcedures">Proceduras</span><span id="httpRequestError">I a agut un problèma amb la demanda.</span><span id="linkAlert">Partejatz vòstres blòts gràcia a aqueste ligam :\n\n%1</span><span id="hashError">O planhèm, \'%1\' correspond pas a un fichièr Blockly salvament.</span><span id="xmlError">Impossible de cargar lo fichièr de salvament.  Benlèu qu\'es estat creat amb una autra version de Blockly ?</span><span id="listVariable">lista</span><span id="textVariable">tèxte</span></div>';
 };
 
 
@@ -36,12 +36,12 @@ if (typeof planepage == 'undefined') { var planepage = {}; }
 
 
 planepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Plane_rows">Rows: %1</span><span id="Plane_getRows">rows (%1)</span><span id="Plane_rows1">1st class rows: %1</span><span id="Plane_getRows1">1st class rows (%1)</span><span id="Plane_rows2">2nd class rows: %1</span><span id="Plane_getRows2">2nd class rows (%1)</span><span id="Plane_seats">Seats: %1</span><span id="Plane_placeholder">?</span><span id="Plane_setSeats">seats =</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Plane_rows">Linhas : %1</span><span id="Plane_getRows">linhas (%1)</span><span id="Plane_rows1">linhas de primièra classa : %1</span><span id="Plane_getRows1">linhas de primièra classa (%1)</span><span id="Plane_rows2">linhas de segonda classa : %1</span><span id="Plane_getRows2">linhas de segonda classa (%1)</span><span id="Plane_seats">Sètis : %1</span><span id="Plane_placeholder">?</span><span id="Plane_setSeats">sètis =</span></div>';
 };
 
 
 planepage.start = function(opt_data, opt_ignored, opt_ijData) {
-  var output = planepage.messages(null, null, opt_ijData) + '<table width="100%"><tr><td><h1><span id="title"><a href="../index.html">Blockly</a> : Plane</span> &nbsp; ';
+  var output = planepage.messages(null, null, opt_ijData) + '<table width="100%"><tr><td><h1><span id="title"><a href="../index.html">Blockly</a> : Avion</span> \\u0026nbsp; ';
   for (var i128 = 1; i128 < 4; i128++) {
     output += ' ' + ((i128 == opt_ijData.level) ? '<span class="tab" id="selected">' + soy.$$escapeHtml(i128) + '</span>' : (i128 < opt_ijData.level) ? '<a class="tab previous" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i128) + '">' + soy.$$escapeHtml(i128) + '</a>' : '<a class="tab" href="?lang=' + soy.$$escapeHtml(opt_ijData.lang) + '&level=' + soy.$$escapeHtml(i128) + '">' + soy.$$escapeHtml(i128) + '</a>');
   }
