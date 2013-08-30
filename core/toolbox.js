@@ -71,8 +71,7 @@ Blockly.Toolbox.CONFIG_ = {
  */
 Blockly.Toolbox.createDom = function(svg, container) {
   // Create an HTML container for the Toolbox menu.
-  Blockly.Toolbox.HtmlDiv = goog.dom.createDom('div',
-      {'class': 'blocklyToolboxDiv'});
+  Blockly.Toolbox.HtmlDiv = goog.dom.createDom('div', 'blocklyToolboxDiv');
   Blockly.Toolbox.HtmlDiv.setAttribute('dir', Blockly.RTL ? 'RTL' : 'LTR');
   container.appendChild(Blockly.Toolbox.HtmlDiv);
 

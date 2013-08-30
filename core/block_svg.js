@@ -389,6 +389,10 @@ Blockly.BlockSvg.connectionUiStep_ = function(ripple) {
  * Change the colour of a block.
  */
 Blockly.BlockSvg.prototype.updateColour = function() {
+  if (this.block_.disabled) {
+    // Disabled blocks don't have colour.
+    return;
+  }
   var hexColour = Blockly.makeColour(this.block_.getColour());
   var rgb = goog.color.hexToRgb(hexColour);
   var rgbLight = goog.color.lighten(rgb, 0.3);
