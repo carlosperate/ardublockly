@@ -41,17 +41,25 @@ BlocklyApps.LANGUAGES = {
   eu: ['Euskara', 'ltr', 'en_compressed.js'],
   fr: ['Français', 'ltr', 'en_compressed.js'],
   hu: ['Magyar', 'ltr', 'en_compressed.js'],
+  ia: ['Interlingua', 'ltr', 'en_compressed.js'],
   it: ['Italiano', 'ltr', 'en_compressed.js'],
+  ko: ['한국어', 'ltr', 'en_compressed.js'],
   lv: ['Latviešu', 'ltr', 'en_compressed.js'],
+  mk: ['Македонски', 'ltr', 'en_compressed.js'],
   nl: ['Nederlands', 'ltr', 'en_compressed.js'],
   pl: ['Polski', 'ltr', 'en_compressed.js'],
+  pms: ['Piemontèis', 'ltr', 'en_compressed.js'],
   pt: ['Português', 'ltr', 'pt_br_compressed.js'],
   ru: ['Русский', 'ltr', 'en_compressed.js'],
   sr: ['Српски', 'ltr', 'en_compressed.js'],
+  sv: ['Svenska', 'ltr', 'en_compressed.js'],
   sw: ['Kishwahili', 'ltr', 'en_compressed.js'],
   th: ['ภาษาไทย', 'ltr', 'en_compressed.js'],
   tr: ['Türkçe', 'ltr', 'en_compressed.js'],
-  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js']
+  uk: ['Українська', 'ltr', 'en_compressed.js'],
+  vi: ['Tiếng Việt', 'ltr', 'vi_compressed.js'],
+  'zh-hans': ['简体字', 'ltr', 'zh_tw_compressed.js'],
+  'zh-hant': ['中文', 'ltr', 'zh_tw_compressed.js']
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
 

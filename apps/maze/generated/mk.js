@@ -5,7 +5,7 @@ if (typeof apps == 'undefined') { var apps = {}; }
 
 
 apps.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="subtitle">визуелна околина за програмирање</span><span id="blocklyMessage">Блокли</span><span id="codeTooltip">See generated JavaScript code.</span><span id="linkTooltip">Save and link to blocks.</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Run Program</span><span id="resetProgram">Одново</span><span id="dialogOk">ОК</span><span id="dialogCancel">Cancel</span><span id="catLogic">Логика</span><span id="catLoops">Јамки</span><span id="catMath">Математика</span><span id="catText">Текст</span><span id="catLists">Списоци</span><span id="catColour">Боја</span><span id="catVariables">Променливи</span><span id="catProcedures">Процедури</span><span id="httpRequestError">Се појави проблем во барањето.</span><span id="linkAlert">Споделете ги вашите блокчиња со оваа врска:\n\n%1</span><span id="hashError">„%1“ не одговара на ниеден зачуван програм.</span><span id="xmlError">Could not load your saved file.  Perhaps it was created with a different version of Blockly?</span><span id="listVariable">список</span><span id="textVariable">текст</span></div>';
+  return '<div style="display: none"><span id="subtitle">визуелна околина за програмирање</span><span id="blocklyMessage">Блокли</span><span id="codeTooltip">Погл. создадениот JavaScript-код. </span><span id="linkTooltip">Зачувај и стави врска до блокчињата.</span><span id="runTooltip">Пушти го програмот определен од блокчињата во \\nработниот простор. </span><span id="runProgram">Пушти го програмот</span><span id="resetProgram">Одново</span><span id="dialogOk">ОК</span><span id="dialogCancel">Откажи</span><span id="catLogic">Логика</span><span id="catLoops">Јамки</span><span id="catMath">Математика</span><span id="catText">Текст</span><span id="catLists">Списоци</span><span id="catColour">Боја</span><span id="catVariables">Променливи</span><span id="catProcedures">Процедури</span><span id="httpRequestError">Се појави проблем во барањето.</span><span id="linkAlert">Споделете ги вашите блокчиња со оваа врска:\n\n%1</span><span id="hashError">„%1“ не одговара на ниеден зачуван програм.</span><span id="xmlError">Не можев да ја вчитам зачуваната податотека. Да не сте ја создале со друга верзија на Blockly?</span><span id="listVariable">список</span><span id="textVariable">текст</span></div>';
 };
 
 
@@ -36,7 +36,7 @@ if (typeof mazepage == 'undefined') { var mazepage = {}; }
 
 
 mazepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Maze_moveForward">мрдни напред</span><span id="Maze_turnLeft">сврти лево</span><span id="Maze_turnRight">сврти десно</span><span id="Maze_doCode">изведи</span><span id="Maze_elseCode">инаку</span><span id="Maze_pathAhead">ако има пат напред</span><span id="Maze_pathLeft">ако има пат лево</span><span id="Maze_pathRight">ако има пат десно</span><span id="Maze_repeatUntil">repeat until</span><span id="Maze_moveForwardTooltip">Moves the player forward one space.</span><span id="Maze_turnTooltip">Turns the player left or right by 90 degrees.</span><span id="Maze_ifTooltip">If there is a path in the specified direction, then do some actions.</span><span id="Maze_ifelseTooltip">If there is a path in the specified direction, then do the first block of actions.  Otherwise, do the second block of actions.</span><span id="Maze_whileTooltip">Repeat the enclosed actions until finish point is reached.</span><span id="Maze_capacity0">You have <span id=\'capacityNumber\'>0</span> blocks left.</span><span id="Maze_capacity1">You have <span id=\'capacityNumber\'>1</span> block left.</span><span id="Maze_capacity2">You have <span id=\'capacityNumber\'>%1</span> blocks left.</span><span id="Maze_nextLevel">Congratulations! Are you ready to proceed to level %1?</span><span id="Maze_finalLevel">Congratulations! You have solved the final level.</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Maze_moveForward">мрдни напред</span><span id="Maze_turnLeft">сврти лево</span><span id="Maze_turnRight">сврти десно</span><span id="Maze_doCode">изведи</span><span id="Maze_elseCode">инаку</span><span id="Maze_pathAhead">ако има пат напред</span><span id="Maze_pathLeft">ако има пат лево</span><span id="Maze_pathRight">ако има пат десно</span><span id="Maze_repeatUntil">повторувај сè до</span><span id="Maze_moveForwardTooltip">Го мрднува играчот напред за едно место.</span><span id="Maze_turnTooltip">Го свртува играчот на лево или на десно за 90 \\nстепени. </span><span id="Maze_ifTooltip">Ако постои патека во зададената насока, \\nтогаш изврши некои дејства. </span><span id="Maze_ifelseTooltip">Ако постои патека во зададената насока, \\nтогаш изврши го првиот блок дејства. \\nВо спротивно, изврши го вториот. </span><span id="Maze_whileTooltip">Повторувај ги зададените дејства додека дојдеш \\nдо целта (крајот). </span><span id="Maze_capacity0">Ви преостануваат <span id=\'capacityNumber\'>0</span> блокчиња.</span><span id="Maze_capacity1">Ви преостанува <span id=\'capacityNumber\'>1</span> блокче.</span><span id="Maze_capacity2">Имате уште <span id=\'capacityNumber\'>%1</span> блокчиња.</span><span id="Maze_nextLevel">Честитаме! Дали сте да преминете на Ниво %1?</span><span id="Maze_finalLevel">Честитаме! Го решивте последното ниво.</span></div>';
 };
 
 
@@ -48,37 +48,37 @@ mazepage.start = function(opt_data, opt_ignored, opt_ijData) {
   output += '</h1></td><td class="farSide"><select id="languageMenu" onchange="BlocklyApps.changeLanguage();"></select> &nbsp; <button id="pegmanButton" onmousedown="Maze.showPegmanMenu();"><img src="../../media/1x1.gif"><span>&#x25BE;</span></button></td></tr></table><div id="visualization"><div id="hintBubble"><div id="hint">';
   switch (opt_ijData.level) {
     case 1:
-      output += 'Stack a couple of \'move forward\' blocks together to help me reach the goal.';
+      output += 'Наредете две блокчиња „оди напред“ за да ми помогнете да дојдам до целта.';
       break;
     case 2:
-      output += 'What is the sequence of steps to follow this path?';
+      output += 'Со која низа чекори можеме да ја проследиме патекава?';
       break;
     case 3:
-      output += 'Computers have limited memory.  Reach the end of this path using only two blocks.  Use \'repeat\' to run a block more than once.';
+      output += 'Сметачите имаат ограничена меморија. Дојдете до крајот на со помош на само два блока. Послужете се со „повтори“ за да пуштите едно блокче повеќе пати.';
       break;
     case 4:
-      output += 'Reach the goal using only five blocks.';
+      output += 'Стигнете до целта со само пет блокчиња.';
       break;
     case 5:
-      output += 'Breaking a problem into two pieces can make things easier.';
+      output += 'Ќе ви биде полесно ако го поделите проблемот на два дела.';
       break;
     case 6:
-      output += 'An \'if\' block will do something only if the condition is true.  Try turning left if there is a path to the left.';
+      output += 'Блокчето „ако“ ќе изврши нешто само ако условот е точен. На пример, свртете лево ако има патека натаму.';
       break;
     case 7:
-      output += 'This maze looks more complicated than the previous one, but it is not.';
+      output += 'Овој лавиринт изгледа посложен од претходниот, но не е.';
       break;
     case 8:
-      output += 'You can use more than one \'if\' block.';
+      output += 'Можете да употребите повеќе од едно блокче „ако“.';
       break;
     case 9:
-      output += 'If-else blocks will do one thing or the other.';
+      output += 'Блокчињата „ако-тогаш“ ќе извршат или едно нешто или друго.';
       break;
     case 10:
-      output += 'Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!';
+      output += 'Дали можете да го решите овој сложен лавиринт? Обидете се со следниов ѕид на лево. Само за напредни програмери!';
       break;
   }
-  output += '</div></div><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px"><g id="look"><path d="M 0,-15 a 15 15 0 0 1 15 15" /><path d="M 0,-35 a 35 35 0 0 1 35 35" /><path d="M 0,-55 a 55 55 0 0 1 55 55" /></g></svg><div id="capacityBubble"><div id="capacity"></div></div></div><table width="400"><tr><td style="width: 190px; text-align: center; vertical-align: top;"><button class="notext" title="See generated JavaScript code." onclick="BlocklyApps.showCode(this);"><img src="../../media/1x1.gif" class="code icon21"></button><button id="linkButton" class="notext" title="Save and link to blocks." onclick="BlocklyStorage.link();"><img src="../../media/1x1.gif" class="link icon21"></button></td><td><button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="Makes the player do what the blocks say."><img src="../../media/1x1.gif" class="run icon21"> Run Program</button><button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="Put the player back at the start of the maze."><img src="../../media/1x1.gif" class="stop icon21"> Одново</button></td></tr></table><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + mazepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div><div id="pegmanMenu"></div>' + apps.dialog(null, null, opt_ijData) + apps.codeDialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData) + '<div id="dialogDone" class="dialogHiddenContent"><div id="dialogDoneText" style="font-size: large; margin: 1em;"></div><img src="../../media/1x1.gif" id="pegSpin"><div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div></div><div id="dialogOneTopBlock" class="dialogHiddenContent"><div>On this level, you need to stack together all of the blocks in the white workspace.</div><iframe id="iframeOneTopBlock" src=""></iframe>' + apps.ok(null, null, opt_ijData) + '</div>';
+  output += '</div></div><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px"><g id="look"><path d="M 0,-15 a 15 15 0 0 1 15 15" /><path d="M 0,-35 a 35 35 0 0 1 35 35" /><path d="M 0,-55 a 55 55 0 0 1 55 55" /></g></svg><div id="capacityBubble"><div id="capacity"></div></div></div><table width="400"><tr><td style="width: 190px; text-align: center; vertical-align: top;"><button class="notext" title="Погл. создадениот JavaScript-код. " onclick="BlocklyApps.showCode(this);"><img src="../../media/1x1.gif" class="code icon21"></button><button id="linkButton" class="notext" title="Зачувај и стави врска до блокчињата." onclick="BlocklyStorage.link();"><img src="../../media/1x1.gif" class="link icon21"></button></td><td><button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="Му кажува на играчот да прави како што велат \\nблокчињата. "><img src="../../media/1x1.gif" class="run icon21"> Пушти го програмот</button><button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="Врати го играчот на почетокот од лавиринтот."><img src="../../media/1x1.gif" class="stop icon21"> Одново</button></td></tr></table><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + mazepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div><div id="pegmanMenu"></div>' + apps.dialog(null, null, opt_ijData) + apps.codeDialog(null, null, opt_ijData) + apps.storageDialog(null, null, opt_ijData) + '<div id="dialogDone" class="dialogHiddenContent"><div id="dialogDoneText" style="font-size: large; margin: 1em;"></div><img src="../../media/1x1.gif" id="pegSpin"><div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div></div><div id="dialogOneTopBlock" class="dialogHiddenContent"><div>На ова ниво ќе треба да ги наредите сите блокчиња во белиот работен простор.</div><iframe id="iframeOneTopBlock" src=""></iframe>' + apps.ok(null, null, opt_ijData) + '</div>';
   return output;
 };
 
