@@ -27,7 +27,7 @@
     "Maze.ifTooltip": "Iwapo mwelekeo uliobainishwa una njia, kisha fanya matendo fulani.",
     "Maze.ifelseTooltip": "Iwapo mwelekeo uliobainishwa una njia, kisha fanya seti ya kwanza ya matendo. Vingenevyo, fanya seti ya pili ya matendo.",
     "Maze.whileTooltip": "Rudia matendo yalioambatanishwa mpaka mwisho.",
-    "Maze.capacity0": "Unavyo bado vishiku vi0.",
+    "Maze.capacity0": "Unavyo bado vishiku vi%0.",
     "Maze.capacity1": "Unacho bado kishiku kimoja.",
     "Maze.capacity2": "Unavyo bado vishiku vi%1.",
     "Maze.nextLevel": "Hongera! Uko tayari kuendelea na sehemu ya %1?",

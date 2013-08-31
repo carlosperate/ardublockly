@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-08-26 22:29:49.718469",
+        "lastupdated": "2013-08-30 21:15:50.650297",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -50,9 +50,9 @@
     "Maze.ifTooltip": "If there is a path in the specified direction, then do some actions.",
     "Maze.ifelseTooltip": "If there is a path in the specified direction, then do the first block of actions.  Otherwise, do the second block of actions.",
     "Maze.whileTooltip": "Repeat the enclosed actions until finish point is reached.",
-    "Maze.capacity0": "You have <x id='START_SPAN'/>0<x id='END_SPAN'/> blocks left.",
-    "Maze.capacity1": "You have <x id='START_SPAN'/>1<x id='END_SPAN'/> block left.",
-    "Maze.capacity2": "You have <x id='START_SPAN'/>%1<x id='END_SPAN'/> blocks left.",
+    "Maze.capacity0": "You have %0 blocks left.",
+    "Maze.capacity1": "You have %1 block left.",
+    "Maze.capacity2": "You have %2 blocks left.",
     "Maze.nextLevel": "Congratulations! Are you ready to proceed to level %1?",
     "Maze.finalLevel": "Congratulations! You have solved the final level.",
     "Maze.maze": "Maze",

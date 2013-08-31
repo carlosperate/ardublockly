@@ -699,7 +699,7 @@ Maze.showOneTopBlock = function() {
 };
 
 /**
- * Updates the document's 'capacity' element's innerHTML with a message
+ * Updates the document's 'capacity' element with a message
  * indicating how many more blocks are permitted.  The capacity
  * is retrieved from Blockly.mainWorkspace.remainingCapacity().
  */
@@ -710,13 +710,24 @@ Maze.updateCapacity = function() {
     p.style.display = 'none';
   } else {
     p.style.display = 'inline';
+    p.innerHTML = '';
+    cap = Number(cap);
+    var capSpan = document.createElement('span');
+    capSpan.className = 'capacityNumber';
+    capSpan.appendChild(document.createTextNode(cap));
     if (cap == 0) {
-      p.innerHTML = BlocklyApps.getMsg('Maze_capacity0');
+      var msg = BlocklyApps.getMsg('Maze_capacity0');
     } else if (cap == 1) {
-      p.innerHTML = BlocklyApps.getMsg('Maze_capacity1');
+      var msg = BlocklyApps.getMsg('Maze_capacity1');
     } else {
-      cap = Number(cap);
-      p.innerHTML = BlocklyApps.getMsg('Maze_capacity2').replace('%1', cap);
+      var msg = BlocklyApps.getMsg('Maze_capacity2');
+    }
+    var parts = msg.split(/%\d/);
+    for (var i = 0; i < parts.length; i++) {
+      p.appendChild(document.createTextNode(parts[i]));
+      if (i != parts.length - 1) {
+        p.appendChild(capSpan.cloneNode(true));
+      }
     }
   }
 };
