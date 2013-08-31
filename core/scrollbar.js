@@ -245,7 +245,8 @@ Blockly.ScrollbarNative = function(workspace, horizontal, opt_pair) {
   var scrollbar = this;
   this.onScrollWrapper_ = Blockly.bindEvent_(this.outerDiv_, 'scroll',
       scrollbar, function() {scrollbar.onScroll_();});
-  Blockly.bindEvent_(this.foreignObject_, 'mousedown', null, Blockly.noEvent);
+  Blockly.bindEvent_(this.foreignObject_, 'mousedown', null,
+      function(e) {Blockly.hideChaff(true); Blockly.noEvent(e);});
 };
 
 /**
