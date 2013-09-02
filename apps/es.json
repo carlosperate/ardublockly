@@ -2,6 +2,7 @@
     "@metadata": {
         "authors": [
             "EDGI",
+            "Fitoschido",
             "McDutchie"
         ]
     },
@@ -10,10 +11,11 @@
     "Apps.codeTooltip": "Mira el c\u00f3digo JavaScript generado.",
     "Apps.linkTooltip": "Guarda conexi\u00f3n a los bloques.",
     "Apps.runTooltip": "Ejecute el programa definido por los bloques en el \u00e1rea de trabajo.",
-    "Apps.runProgram": "Ejecuta el programa.",
-    "Apps.resetProgram": "Reinicializar",
+    "Apps.runProgram": "Ejecutar el programa",
+    "Apps.resetProgram": "Restablecer",
     "Apps.dialogOk": "Aceptar",
-    "Apps.catLogic": "Logico",
+    "Apps.dialogCancel": "Cancelar",
+    "Apps.catLogic": "L\u00f3gica",
     "Apps.catLoops": "Secuencias",
     "Apps.catMath": "Matem\u00e1ticas",
     "Apps.catText": "Texto",
@@ -34,7 +36,7 @@
     "Code.title": "Codigo",
     "Code.blocks": "Bloques",
     "Code.trashTooltip": "Descartar todos los bloques.",
-    "Graph.title": "Calculadora Gr\u00e1fica",
+    "Graph.title": "Calculadora gr\u00e1fica",
     "Maze.moveForward": "Mover hacia delante",
     "Maze.turnLeft": "gira izquierda",
     "Maze.turnRight": "gira derecha",

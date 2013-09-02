@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Chrumps",
             "Faren",
             "Ty221"
         ]
@@ -13,6 +14,7 @@
     "Apps.runProgram": "Uruchom Program",
     "Apps.resetProgram": "Zresetuj",
     "Apps.dialogOk": "OK",
+    "Apps.dialogCancel": "Anuluj",
     "Apps.catLogic": "Logika",
     "Apps.catLoops": "P\u0119tle",
     "Apps.catMath": "Matematyka",
