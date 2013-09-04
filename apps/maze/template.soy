@@ -80,33 +80,7 @@
   </table>
 
   <div id="visualization">
-    <div id="hintBubble">
-      <div id="hint">
-      {switch $ij.level}
-        {case 1}
-          {msg meaning="Maze.instructions1" desc="instructions - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
-        {case 2}
-          {msg meaning="Maze.instructions2" desc="instructions - The word 'steps' refers to instructions in a computer program; 'path' refers to the path through a maze."}What is the sequence of steps to follow this path?{/msg}
-        {case 3}
-          {msg meaning="Maze.instructions3" desc="instructions - 'path' refers to a path through a maze, and 'block' refers to a child's building block."}Computers have limited memory.  Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.{/msg}
-        {case 4}
-          {msg meaning="Maze.instructions4" desc="instructions - The goal is reaching the end point in a maze; 'block' refers to a child's building block."}Reach the goal using only five blocks.{/msg}
-        {case 5}
-          {msg meaning="Maze.instructions5" desc="instructions - 'turn left' refers to rotating in place a quarter circle counter-clockwise."}Breaking a problem into two pieces can make things easier.{/msg}
-        {case 6}
-          {msg meaning="Maze.instructions6" desc="instructions - An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true.  Try turning left if there is a path to the left.{/msg}
-        {case 7}
-          {msg meaning="Maze.instructions7" desc="instructions"}This maze looks more complicated than the previous one, but it is not.{/msg}
-        {case 8}
-          {msg meaning="Maze.instructions8" desc="instructions - 'block' refers to a child's building block."}You can use more than one 'if' block.{/msg}
-        {case 9}
-          {msg meaning="Maze.instructions9" desc="instructions - 'block' refers to a child's building block.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}
-        {case 10}
-          {msg meaning="Maze.instructions10" desc="instructions - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!{/msg}
-      {/switch}
-      </div>
-    </div>
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="450px">
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="svgMaze" width="400px" height="400px">
       <g id="look">
         <path d="M 0,-15 a 15 15 0 0 1 15 15" />
         <path d="M 0,-35 a 35 35 0 0 1 35 35" />
@@ -145,6 +119,10 @@
   <script type="text/javascript" src="blocks.js"></script>
   {call .toolbox /}
   <div id="blockly"></div>
+  <svg version="1.1" height="1px" width="1px">
+    <text id="arrowTest" style="font-family: sans-serif; font-size: 11pt;">⟲⟳</text>
+  </svg>
+
 
   <div id="pegmanMenu"></div>
 
@@ -156,10 +134,100 @@
     <img src="../../media/1x1.gif" id="pegSpin">
     <div id="dialogDoneButtons" class="farSide" style="padding: 1ex 3ex 0"></div>
   </div>
-  <div id="dialogOneTopBlock" class="dialogHiddenContent">
-    <div>{msg meaning="Maze.oneTopBlock" desc="alert - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}</div>
-    <iframe id="iframeOneTopBlock" src=""></iframe>
-    {call apps.ok /}
+  <div id="dialogHelpStack" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help.png">
+    </td><td>&nbsp;</td><td>
+      {msg meaning="Maze.helpStack" desc="instructions - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
+    </td><td valign="top">
+      <img src="help_stack.png" class="mirrorImg" height=63 width=136>
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpOneTopBlock" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help.png">
+    </td><td>&nbsp;</td><td>
+      {msg meaning="Maze.helpOneTopBlock" desc="instructions - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}
+      <iframe id="iframeOneTopBlock" src=""></iframe>
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpRun" class="dialogHiddenContent">
+    <table><tr><td>
+      {msg meaning="Maze.helpRun" desc="instructions"}Run your program to see what happens.{/msg}
+    </td><td rowspan=2>
+      <img src="help.png">
+    </td></tr><tr><td>
+      <div><img src="help_run.png" class="mirrorImg" height=27 width=141></div>
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpReset" class="dialogHiddenContent">
+    <table><tr><td>
+      {msg meaning="Maze.helpReset" desc="instructions"}Your program didn't solve the maze.  Press 'Reset' and try again.{/msg}
+    </td><td rowspan=2>
+      <img src="help.png">
+    </td></tr><tr><td>
+      <div><img src="help_run.png" class="mirrorImg" height=27 width=141></div>
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpRepeat" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help_up.png">
+    </td><td>
+      {msg meaning="Maze.helpRepeat" desc="instructions - 'path' refers to a path through a maze, and 'block' refers to a child's building block."}Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.{/msg}
+    </td><td>
+      <img src="help.png">
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpCapacity" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help.png">
+    </td><td>&nbsp;</td><td>
+      {msg meaning="Maze.helpCapacity" desc="instructions"}You have used up all the blocks for this level.  To create a new block, you first need to delete an existing block.{/msg}
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpRepeatMany" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help_up.png">
+    </td><td>
+      {msg meaning="Maze.helpRepeatMany" desc="instructions - 'block' refers to a child's building block."}You can fit more than one block inside a 'repeat' block.{/msg}
+    </td><td>
+      <img src="help.png">
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpIf" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help_up.png">
+    </td><td>
+      {msg meaning="Maze.helpIf" desc="instructions - An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true.  Try turning left if there is a path to the left.{/msg}
+    </td><td>
+      <img src="help.png">
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpMenu" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help_up.png">
+    </td><td id="helpMenuText">
+      {msg meaning="Maze.helpMenu" desc="instructions - %1 will be replaced with an image of the dropdown menu that the user needs to click."}Click on %1 in the 'if' block to change its condition.{/msg}
+    </td><td>
+      <img src="help.png">
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpIfElse" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help_down.png">
+    </td><td>
+      {msg meaning="Maze.helpIfElse" desc="instructions - 'block' refers to a child's building block.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}
+    </td><td>
+      <img src="help.png">
+    </td></tr></table>
+  </div>
+  <div id="dialogHelpWallFollow" class="dialogHiddenContent">
+    <table><tr><td>
+      <img src="help.png">
+    </td><td>&nbsp;</td><td>
+      {msg meaning="Maze.helpWallFollow" desc="instructions - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!{/msg}
+      {call apps.ok /}
+    </td></tr></table>
   </div>
 {/template}
 

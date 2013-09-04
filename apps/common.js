@@ -449,7 +449,7 @@ BlocklyApps.getBBox_ = function(element) {
  */
 BlocklyApps.storageAlert = function(message) {
   var container = document.getElementById('containerStorage');
-  container.innerHTML = '';
+  container.textContent = '';
   var lines = message.split('\n');
   for (var i = 0; i < lines.length; i++) {
     var p = document.createElement('p');
@@ -495,9 +495,7 @@ BlocklyApps.showCode = function(origin) {
   var code = Blockly.Generator.workspaceToCode('JavaScript');
   code = BlocklyApps.stripCode(code);
   var pre = document.getElementById('containerCode');
-  pre.innerHTML = '';
-  // Inject the code as a textNode, then extract with innerHTML, thus escaping.
-  pre.appendChild(document.createTextNode(code));
+  pre.textContent = code;
   if (typeof prettyPrintOne == 'function') {
     code = pre.innerHTML;
     code = prettyPrintOne(code, 'js');
@@ -551,7 +549,7 @@ BlocklyApps.stopDialogKeyDown = function() {
 /**
  * Gets the message with the given key from the document.
  * @param {string} key The key of the document element.
- * @return {string} The innerHTML of the specified element,
+ * @return {string} The textContent of the specified element,
  *     or an error message if the element was not found.
  */
 BlocklyApps.getMsg = function(key) {
@@ -562,13 +560,13 @@ BlocklyApps.getMsg = function(key) {
 /**
  * Gets the message with the given key from the document.
  * @param {string} key The key of the document element.
- * @return {string} The innerHTML of the specified element,
+ * @return {string} The textContent of the specified element,
  *     or null if the element was not found.
  */
 BlocklyApps.getMsgOrNull = function(key) {
   var element = document.getElementById(key);
   if (element) {
-    var text = element.innerHTML;
+    var text = element.textContent;
     // Convert newline sequences.
     text = text.replace(/\\n/g, '\n');
     return text;

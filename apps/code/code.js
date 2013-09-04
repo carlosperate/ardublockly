@@ -106,8 +106,7 @@ Code.renderContent = function() {
     xmlTextarea.focus();
   } else if (content.id == 'content_javascript') {
     var code = Blockly.Generator.workspaceToCode('JavaScript');
-    content.innerHTML = '';
-    content.appendChild(document.createTextNode(code));
+    content.textContent = code;
     if (typeof prettyPrintOne == 'function') {
       code = content.innerHTML;
       code = prettyPrintOne(code, 'js');
@@ -115,8 +114,7 @@ Code.renderContent = function() {
     }
   } else if (content.id == 'content_python') {
     code = Blockly.Generator.workspaceToCode('Python');
-    content.innerHTML = '';
-    content.appendChild(document.createTextNode(code));
+    content.textContent = code;
     if (typeof prettyPrintOne == 'function') {
       code = content.innerHTML;
       code = prettyPrintOne(code, 'py');

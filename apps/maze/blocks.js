@@ -59,36 +59,13 @@ Blockly.Language.maze_turn = {
 };
 
 Blockly.Language.maze_turn.DIRECTIONS =
-    [[BlocklyApps.getMsg('Maze_turnLeft') + ' \u27F2', 'turnLeft'],
-     [BlocklyApps.getMsg('Maze_turnRight') + ' \u27F3', 'turnRight']];
+    [[BlocklyApps.getMsg('Maze_turnLeft'), 'turnLeft'],
+     [BlocklyApps.getMsg('Maze_turnRight'), 'turnRight']];
 
 Blockly.JavaScript.maze_turn = function() {
   // Generate JavaScript for turning left or right.
   var dir = this.getTitleValue('DIR');
   return 'Maze.' + dir + '(\'block_id_' + this.id + '\');\n';
-};
-
-Blockly.Language.maze_isPath = {
-  // Block for checking if there a path.
-  helpUrl: '',
-  init: function() {
-    this.setColour(210);
-    this.setOutput(true, 'Boolean');
-    this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
-    this.setTooltip(BlocklyApps.getMsg('Maze_isPathTooltip'));
-  }
-};
-
-Blockly.Language.maze_isPath.DIRECTIONS =
-    [[BlocklyApps.getMsg('Maze_pathAhead'), 'isPathForward'],
-     [BlocklyApps.getMsg('Maze_pathLeft') + ' \u27F2', 'isPathLeft'],
-     [BlocklyApps.getMsg('Maze_pathRight') + ' \u27F3', 'isPathRight']];
-
-Blockly.JavaScript.maze_isPath = function() {
-  // Generate JavaScript for checking if there is a path.
-  var code = 'Maze.' + this.getTitleValue('DIR') + '()';
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
 Blockly.Language.maze_if = {
@@ -107,7 +84,9 @@ Blockly.Language.maze_if = {
 };
 
 Blockly.Language.maze_if.DIRECTIONS =
-    Blockly.Language.maze_isPath.DIRECTIONS;
+    [[BlocklyApps.getMsg('Maze_pathAhead'), 'isPathForward'],
+     [BlocklyApps.getMsg('Maze_pathLeft'), 'isPathLeft'],
+     [BlocklyApps.getMsg('Maze_pathRight'), 'isPathRight']];
 
 Blockly.JavaScript.maze_if = function() {
   // Generate JavaScript for 'if' conditional if there is a path.
@@ -135,8 +114,7 @@ Blockly.Language.maze_ifElse = {
   }
 };
 
-Blockly.Language.maze_ifElse.DIRECTIONS =
-    Blockly.Language.maze_isPath.DIRECTIONS;
+Blockly.Language.maze_ifElse.DIRECTIONS = Blockly.Language.maze_if.DIRECTIONS;
 
 Blockly.JavaScript.maze_ifElse = function() {
   // Generate JavaScript for 'if/else' conditional if there is a path.

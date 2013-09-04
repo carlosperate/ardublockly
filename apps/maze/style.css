@@ -15,31 +15,14 @@
 #visualization {
   position: relative;
 }
-#hintBubble {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  border-radius: 15px;
-  background-color: rgba(64,64,64,0.7);
-  width: 380px;
-}
-html[dir=rtl] #hintBubble {
-  left: auto;
-  right: 10px;
-}
-#hint {
-  color: #fff;
-  padding: 5px 1em;
-  font-size: large;
-}
 #capacityBubble {
   position: absolute;
   margin-top: -0.5em;
   left: 10px;
-  top: 425px;
+  top: 375px;
   width: 380px;
 }
-html[dir=rtl] #capacityBubble {
+html[dir="RTL"] #capacityBubble {
   left: auto;
   right: 10px;
 }
@@ -61,10 +44,9 @@ html[dir=rtl] #capacityBubble {
   max-height: 400px;
 }
 #iframeOneTopBlock {
-  height: 150px;
+  height: 100px;
   width: 100%;
   border: none;
-  margin-bottom: -6ex;
 }
 #pegSpin {
   height: 50px;
@@ -73,8 +55,37 @@ html[dir=rtl] #capacityBubble {
   margin-top: 10px;
   position: absolute;
 }
-html[dir=rtl] #pegSpin {
+html[dir="RTL"] #pegSpin {
   background-position: -441px 0px;
+}
+
+img[src$="help.png"] {
+  height: 64px;
+  width: 64px;
+}
+html[dir="RTL"] .mirrorImg {
+  transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -ms-transform: scaleX(-1);
+}
+.helpMenuFake {
+  border-radius: 4px;
+  background-color: #bfcdde;
+  color: #000;
+  padding: 0 1ex;
+  cursor: default;
+}
+img[src$="help_up.png"] {
+  margin: -20px 10px 0;
+  height: 64px;
+  width: 23px;
+}
+img[src$="help_down.png"] {
+  margin: 0 10px -20px;
+  height: 64px;
+  width: 23px;
 }
 
 /* 'Look' icon */

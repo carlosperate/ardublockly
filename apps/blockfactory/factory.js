@@ -380,9 +380,7 @@ function updatePreview() {
  */
 function injectCode(code, id) {
   var pre = document.getElementById(id);
-  pre.innerHTML = '';
-  // Inject the code as a textNode, then extract with innerHTML, thus escaping.
-  pre.appendChild(document.createTextNode(code.join('\n')));
+  pre.textContent = code.join('\n');
   code = pre.innerHTML;
   code = prettyPrintOne(code, 'js');
   pre.innerHTML = code;

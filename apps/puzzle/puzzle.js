@@ -276,7 +276,7 @@ Puzzle.checkAnswers = function() {
         '%1', blocks.length)];
   }
   var textDiv = document.getElementById('answerMessage');
-  textDiv.innerHTML = '';
+  textDiv.textContent = '';
   for (var i = 0; i < messages.length; i++) {
     var line = document.createElement('div');
     line.appendChild(document.createTextNode(messages[i]));
