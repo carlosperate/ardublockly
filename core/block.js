@@ -334,7 +334,6 @@ Blockly.Block.prototype.unplug = function(healStack, bump) {
       // Disconnect the next statement.
       var nextTarget = this.nextConnection.targetConnection;
       var nextBlock = this.nextConnection.targetBlock();
-      this.nextConnection.disconnect();
       nextBlock.setParent(null);
       if (previousTarget) {
         // Attach the next statement to the previous statement.

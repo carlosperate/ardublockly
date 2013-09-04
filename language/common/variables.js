@@ -25,7 +25,6 @@
 
 Blockly.Language.variables_get = {
   // Variable getter.
-  category: null,  // Variables are handled specially.
   helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
     this.setColour(330);
@@ -62,7 +61,6 @@ Blockly.Language.variables_get = {
 
 Blockly.Language.variables_set = {
   // Variable setter.
-  category: null,  // Variables are handled specially.
   helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   init: function() {
     this.setColour(330);

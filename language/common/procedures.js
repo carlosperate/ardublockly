@@ -25,7 +25,6 @@
 
 Blockly.Language.procedures_defnoreturn = {
   // Define a procedure with no return value.
-  category: null,  // Procedures are handled specially.
   helpUrl: Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL,
   init: function() {
     this.setColour(290);
@@ -191,7 +190,6 @@ Blockly.Language.procedures_defnoreturn = {
 
 Blockly.Language.procedures_defreturn = {
   // Define a procedure with a return value.
-  category: null,  // Procedures are handled specially.
   helpUrl: Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL,
   init: function() {
     this.setColour(290);
@@ -264,7 +262,6 @@ Blockly.Language.procedures_mutatorarg.validator = function(newVar) {
 
 Blockly.Language.procedures_callnoreturn = {
   // Call a procedure with no return value.
-  category: null,  // Procedures are handled specially.
   helpUrl: Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL,
   init: function() {
     this.setColour(290);
@@ -424,7 +421,6 @@ Blockly.Language.procedures_callnoreturn = {
 
 Blockly.Language.procedures_callreturn = {
   // Call a procedure with a return value.
-  category: null,  // Procedures are handled specially.
   helpUrl: Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL,
   init: function() {
     this.setColour(290);

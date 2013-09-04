@@ -453,9 +453,9 @@ Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portio
 
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_GET_TITLE = null;
+Blockly.LANG_VARIABLES_GET_TITLE = '';
 Blockly.LANG_VARIABLES_GET_ITEM = 'item';
-Blockly.LANG_VARIABLES_GET_TAIL = null;
+Blockly.LANG_VARIABLES_GET_TAIL = '';
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Returns the value of this variable.';
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Create "set %1"';
 

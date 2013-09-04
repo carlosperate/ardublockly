@@ -412,16 +412,16 @@ Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portio
 
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://de.wikipedia.org/wiki/Variable_%28Programmierung%29';
-Blockly.LANG_VARIABLES_GET_TITLE = null;
+Blockly.LANG_VARIABLES_GET_TITLE = '';
 Blockly.LANG_VARIABLES_GET_ITEM = 'Variable';
-Blockly.LANG_VARIABLES_GET_TAIL = null;
+Blockly.LANG_VARIABLES_GET_TAIL = '';
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Gibt den Wert der Variable zurück.';
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Erzeuge "Schreibe %1"';
 
 Blockly.LANG_VARIABLES_SET_HELPURL = 'http://de.wikipedia.org/wiki/Variable_%28Programmierung%29';
 Blockly.LANG_VARIABLES_SET_TITLE = 'Schreibe';
 Blockly.LANG_VARIABLES_SET_ITEM = 'Variable';
-Blockly.LANG_VARIABLES_SET_TAIL = null;
+Blockly.LANG_VARIABLES_SET_TAIL = '';
 Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Setzt den Wert einer Variable.';
 Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Erzeuge "Lese %1"';
 

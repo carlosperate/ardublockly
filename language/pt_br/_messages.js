@@ -412,9 +412,9 @@ Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Cria uma cópia da porção especifica
 
 // Variables Blocks.
 Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
-Blockly.LANG_VARIABLES_GET_TITLE = null;
+Blockly.LANG_VARIABLES_GET_TITLE = '';
 Blockly.LANG_VARIABLES_GET_ITEM = 'item';
-Blockly.LANG_VARIABLES_GET_TAIL = null;
+Blockly.LANG_VARIABLES_GET_TAIL = '';
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Retorna o valor desta variável.';
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Criar "definir %1"';
 

@@ -327,12 +327,17 @@ Blockly.onKeyDown_ = function(e) {
     Blockly.hideChaff();
   } else if (e.keyCode == 8 || e.keyCode == 46) {
     // Delete or backspace.
-    if (Blockly.selected && Blockly.selected.isDeletable()) {
-      Blockly.hideChaff();
-      Blockly.selected.dispose(true, true);
+    try {
+      if (Blockly.selected && Blockly.selected.isDeletable()) {
+        Blockly.hideChaff();
+        Blockly.selected.dispose(true, true);
+      }
+    } finally {
+      // Stop the browser from going back to the previous page.
+      // Use a finally so that any error in delete code above doesn't disappear
+      // from the console when the page rolls back.
+      e.preventDefault();
     }
-    // Stop the browser from going back to the previous page.
-    e.preventDefault();
   } else if (e.altKey || e.ctrlKey || e.metaKey) {
     if (Blockly.selected && Blockly.selected.isDeletable() &&
         Blockly.selected.workspace == Blockly.mainWorkspace) {
