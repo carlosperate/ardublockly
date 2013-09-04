@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-09-03 17:28:17.147662",
+        "lastupdated": "2013-09-04 15:14:24.222448",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -28,7 +28,7 @@
     "Apps.xmlError": "Could not load your saved file.  Perhaps it was created with a different version of Blockly?",
     "Apps.listVariable": "list",
     "Apps.textVariable": "text",
-    "Code.badXml": "Error parsing XML:\n%1\n\nAbandon changes?",
+    "Code.badXml": "Error parsing XML:\n%1\n\nSelect 'OK' to abandon your changes or 'Cancel' to further edit the XML.",
     "Code.badCode": "Program error:\n%1",
     "Code.timeout": "Maximum execution iterations exceeded.",
     "Code.discard": "Delete all %1 blocks?",

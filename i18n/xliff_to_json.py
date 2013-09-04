@@ -18,127 +18,65 @@
 # limitations under the License.
 
 import argparse
-import codecs
-from datetime import datetime
-import os
 import re
 import subprocess
 import sys
 from xml.dom import minidom
 from common import InputError
-from common import parse_trans_unit
+from common import write_files
 
 # Global variables
 args = None      # parsed command-line arguments
 
 
-def _create_qqq_file():
-    """Creates a qqq.json file with message documentation for translatewiki.net.
+def _parse_trans_unit(trans_unit):
+    """Converts a trans-unit XML node into a more convenient dictionary format.
 
-    The file consists of key-value pairs, where the keys are message ids and
-    the values are descriptions for the translators of the messages.
-    What documentation exists for the format can be found at:
-    http://translatewiki.net/wiki/Translating:Localisation_for_developers#Message_documentation
-
-    The file should be closed by _close_qqq_file().
+    Args:
+        trans_unit: An XML representation of a .xlf translation unit.
 
     Returns:
-        A pointer to a file to which a left brace and newline have been written.
+        A dictionary with useful information about the translation unit.
+        The returned dictionary is guaranteed to have an entry for 'key' and
+        may have entries for 'source', 'target', 'description', and 'meaning'
+        if present in the argument.
 
     Raises:
-        IOError: An error occurred while opening or writing the file.
+        InputError: A required field was not present.
     """
-    qqq_file_name = os.path.join(os.curdir, args.output_dir, 'qqq.json')
-    qqq_file = codecs.open(qqq_file_name, 'w', 'utf-8')
-    print 'Created file: ' + qqq_file_name
-    qqq_file.write('{\n')
-    return qqq_file
 
+    def get_value(tag_name):
+        elts = trans_unit.getElementsByTagName(tag_name)
+        if not elts:
+            return None
+        elif len(elts) == 1:
+            return ''.join([child.toxml() for child in elts[0].childNodes])
+        else:
+            raise InputError('', 'Unable to extract ' + tag_name)
 
-def _close_qqq_file(qqq_file):
-    """Closes a qqq.json file created and opened by _create_qqq_file().
+    result = {}
+    key = trans_unit.getAttribute('id')
+    if not key:
+        raise InputError('', 'id attribute not found')
+    result['key'] = key
 
-    This writes the final newlines and right brace.
+    # Get source and target, if present.
+    try:
+        result['source'] = get_value('source')
+        result['target'] = get_value('target')
+    except InputError, e:
+        raise InputError(key, e.msg)
 
-    Args:
-        qqq_file: A file created by _create_qqq_file().
+    # Get notes, using the from value as key and the data as value.
+    notes = trans_unit.getElementsByTagName('note')
+    for note in notes:
+        from_value = note.getAttribute('from')
+        if from_value and len(note.childNodes) == 1:
+            result[from_value] = note.childNodes[0].data
+        else:
+            raise InputError(key, 'Unable to extract ' + from_value)
 
-    Raises:
-        IOError: An error occurred while writing to or closing the file.
-    """
-    qqq_file.write('\n}\n')
-    qqq_file.close()
-
-
-def _create_key_file():
-    """Creates a keys.json file mapping Closure keys to Blockly keys.
-
-    Raises:
-        IOError: An error occurred while creating the file.
-    """
-    key_file_name = os.path.join(os.curdir, args.output_dir, 'keys.json')
-    key_file = open(key_file_name, 'w')
-    key_file.write('{\n')
-    print 'Created file: ' + key_file_name
-    return key_file
-
-
-def _close_key_file(key_file):
-    """Closes a key file created and opened with _create_key_file().
-
-    Args:
-        key_file: A file created by _create_key_file().
-
-    Raises:
-        IOError: An error occurred while writing to or closing the file.
-    """
-    key_file.write('\n}\n')
-    key_file.close()
-
-
-def _create_lang_file():
-    """Creates a <lang>.json file for translatewiki.net.
-
-    The file consists of metadata, followed by key-value pairs, where the keys
-    are message ids and the values are the messages in the language specified
-    by the corresponding command-line argument.  The file should be closed by
-    _close_lang_file().
-
-    Returns:
-        A pointer to a file to which the metadata has been written.
-
-    Raises:
-        IOError: An error occurred while opening or writing the file.
-    """
-    lang_file_name = os.path.join(
-        os.curdir, args.output_dir, args.lang + '.json')
-    lang_file = codecs.open(lang_file_name, 'w', 'utf-8')
-    print 'Created file: ' + lang_file_name
-    # string.format doesn't like printing braces, so break up our writes.
-    lang_file.write('{\n    "@metadata": {')
-    lang_file.write("""
-        "author": "{0}",
-        "lastupdated": "{1}",
-        "locale": "{2}",
-        "messagedocumentation" : "qqq"
-""".format(args.author, str(datetime.now()), args.lang))
-    lang_file.write('    },\n')
-    return lang_file
-
-
-def _close_lang_file(lang_file):
-    """Closes a <lang>.json file created with _create_lang_file().
-
-    This also writes the terminating left brace and newline.
-
-    Args:
-        lang_file: A file opened with _create_lang_file().
-
-    Raises:
-        IOError: An error occurred while writing to or closing the file.
-    """
-    lang_file.write('\n}\n')
-    lang_file.close()
+    return result
 
 
 def _process_file(filename):
@@ -179,7 +117,7 @@ def _process_file(filename):
 
         # Make sure needed fields are present and non-empty.
         for trans_unit in parsed_xml.getElementsByTagName('trans-unit'):
-            unit = parse_trans_unit(trans_unit)
+            unit = _parse_trans_unit(trans_unit)
             for key in ['description', 'meaning', 'source']:
                 if not key in unit or not unit[key]:
                     raise InputError(filename + ':' + unit['key'],
@@ -238,47 +176,6 @@ def sort_units(units, templates):
     return sorted(units, key=key_function)
 
 
-def _write_files(units):
-    """Writes the output files for the given units.
-
-    There are three output files:
-    * lang_file: JSON file mapping meanings (e.g., Maze.turnLeft) to the
-      English text.  The base name of the language file is specified by the
-      "lang" command-line argument.
-    * key_file: JSON file mapping meanings to Closure-generated keys (long hash
-      codes).
-    * qqq_file: JSON file mapping meanings to descriptions.
-
-    Args:
-        units: A list of dictionaries produced by parse_trans_unit(),
-            in the order desired in the output files.
-
-    Raises:
-        IOError: An error occurs opening, writing to, or closing a file.
-    """
-    lang_file = _create_lang_file()
-    qqq_file = _create_qqq_file()
-    key_file = _create_key_file()
-    first_entry = True
-    for unit in units:
-        if not first_entry:
-            lang_file.write(',\n')
-            key_file.write(',\n')
-            qqq_file.write(',\n')
-        lang_file.write(u'    "{0}": "{1}"'.format(
-            unit['meaning'],
-            unit['source'].replace('"', "'")))
-        key_file.write('"{0}": "{1}"'.format(unit['meaning'], unit['key']))
-        qqq_file.write(u'    "{0}": "{1}"'.format(
-            unit['meaning'],
-            unit['description'].replace('"', "'").replace(
-                '{lb}', '{').replace('{rb}', '}')));
-        first_entry = False
-    _close_lang_file(lang_file)
-    _close_key_file(key_file)
-    _close_qqq_file(qqq_file)
-
-
 def main():
     """Parses arguments and processes the specified file.
 
@@ -312,7 +209,7 @@ def main():
     sorted_units = sort_units(units, ' '.join(files))
 
     # Write the output files.
-    _write_files(sorted_units)
+    write_files(args.author, args.lang, args.output_dir, sorted_units, True)
 
     # Delete the input .xlf file.
     command = ['rm', args.xlf]
