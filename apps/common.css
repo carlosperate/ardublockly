@@ -69,7 +69,7 @@ button.notext {
   visibility: hidden;
   background-color: #fff;
   color: #000;
-  border: 1px solid #000;
+  border: 1px solid #ccc;
   position: absolute;
   border-radius: 8px;
   box-shadow: 5px 5px 5px #888;
@@ -105,6 +105,14 @@ button.notext {
   top: 0;
   left: 0;
   z-index: -1;
+}
+#dialogHeader {
+  height: 25px;
+  margin: -10px -10px 15px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  background-color: #ddd;
+  cursor: move;
 }
 #dialog button {
   min-width: 4em;

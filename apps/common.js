@@ -314,13 +314,19 @@ BlocklyApps.showDialog = function(content, origin, animate, modal, style,
   for (var name in style) {
     dialog.style[name] = style[name];
   }
-  dialog.appendChild(content);
-  content.className = content.className.replace('dialogHiddenContent', '');
-
   if (modal) {
     shadow.style.visibility = 'visible';
     shadow.style.opacity = 0.3;
+    var header = document.createElement('div');
+    header.id = 'dialogHeader';
+    dialog.appendChild(header);
+    BlocklyApps.dialogMouseDownWrapper_ =
+        Blockly.bindEvent_(header, 'mousedown', this,
+                           BlocklyApps.dialogMouseDown_);
   }
+  dialog.appendChild(content);
+  content.className = content.className.replace('dialogHiddenContent', '');
+
   function endResult() {
     dialog.style.visibility = 'visible';
     dialog.style.zIndex = 1;
@@ -338,6 +344,73 @@ BlocklyApps.showDialog = function(content, origin, animate, modal, style,
 };
 
 /**
+ * Horizontal start coordinate of dialog drag.
+ */
+BlocklyApps.dialogStartX_ = 0;
+
+/**
+ * Vertical start coordinate of dialog drag.
+ */
+BlocklyApps.dialogStartY_ = 0;
+
+/**
+ * Handle start of drag of dialog.
+ * @param {!Event} e Mouse down event.
+ * @private
+ */
+BlocklyApps.dialogMouseDown_ = function(e) {
+  BlocklyApps.dialogUnbindDragEvents_();
+  if (Blockly.isRightButton(e)) {
+    // Right-click.
+    return;
+  }
+  // Left click (or middle click).
+  // Record the starting offset between the current location and the mouse.
+  var dialog = document.getElementById('dialog');
+  BlocklyApps.dialogStartX_ = dialog.offsetLeft - e.clientX;
+  BlocklyApps.dialogStartY_ = dialog.offsetTop - e.clientY;
+
+  BlocklyApps.dialogMouseUpWrapper_ = Blockly.bindEvent_(document,
+      'mouseup', this, BlocklyApps.dialogUnbindDragEvents_);
+  BlocklyApps.dialogMouseMoveWrapper_ = Blockly.bindEvent_(document,
+      'mousemove', this, BlocklyApps.dialogMouseMove_);
+  // This event has been handled.  No need to bubble up to the document.
+  e.stopPropagation();
+};
+
+/**
+ * Drag the dialog to follow the mouse.
+ * @param {!Event} e Mouse move event.
+ * @private
+ */
+BlocklyApps.dialogMouseMove_ = function(e) {
+  var dialog = document.getElementById('dialog');
+  var dialogLeft = this.dialogStartX_ + e.clientX;
+  var dialogTop = this.dialogStartY_ + e.clientY;
+  dialogTop = Math.max(dialogTop, 0);
+  dialogTop = Math.min(dialogTop, window.innerHeight - dialog.offsetHeight);
+  dialogLeft = Math.max(dialogLeft, 0);
+  dialogLeft = Math.min(dialogLeft, window.innerWidth - dialog.offsetWidth);
+  dialog.style.left = dialogLeft + 'px';
+  dialog.style.top = dialogTop + 'px';
+};
+
+/**
+ * Stop binding to the global mouseup and mousemove events.
+ * @private
+ */
+BlocklyApps.dialogUnbindDragEvents_ = function() {
+  if (BlocklyApps.dialogMouseUpWrapper_) {
+    Blockly.unbindEvent_(BlocklyApps.dialogMouseUpWrapper_);
+    BlocklyApps.dialogMouseUpWrapper_ = null;
+  }
+  if (BlocklyApps.dialogMouseMoveWrapper_) {
+    Blockly.unbindEvent_(BlocklyApps.dialogMouseMoveWrapper_);
+    BlocklyApps.dialogMouseMoveWrapper_ = null;
+  }
+};
+
+/**
  * Hide the dialog pop-up.
  * @param {boolean} opt_animate Animate the dialog closing.  Defaults to true.
  *     Requires that origin was not null when dialog was opened.
@@ -346,6 +419,12 @@ BlocklyApps.hideDialog = function(opt_animate) {
   if (!BlocklyApps.isDialogVisible_) {
     return;
   }
+  BlocklyApps.dialogUnbindDragEvents_();
+  if (BlocklyApps.dialogMouseDownWrapper_) {
+    Blockly.unbindEvent_(BlocklyApps.dialogMouseDownWrapper_);
+    BlocklyApps.dialogMouseDownWrapper_ = null;
+  }
+
   BlocklyApps.isDialogVisible_ = false;
   BlocklyApps.dialogDispose_ && BlocklyApps.dialogDispose_();
   BlocklyApps.dialogDispose_ = null;
@@ -371,6 +450,10 @@ BlocklyApps.hideDialog = function(opt_animate) {
   }
   dialog.style.visibility = 'hidden';
   dialog.style.zIndex = -1;
+  var header = document.getElementById('dialogHeader');
+  if (header) {
+    header.parentNode.removeChild(header);
+  }
   while (dialog.firstChild) {
     var content = dialog.firstChild;
     content.className += ' dialogHiddenContent';
