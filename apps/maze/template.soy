@@ -20,6 +20,9 @@
     <span id="Maze_turnRight">{msg meaning="Maze.turnRight" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Imperative or infinitive of a verb for a person turning his head and body one quarter rotation clockwise.  Prefer a translation that has text in common with the translation of 'turn left'.  See [[Translating:Blockly#Drop-Down_Menus]]."}turn right{/msg}</span>
     <span id="Maze_doCode">{msg meaning="Maze.doCode" desc="block text - Imperative or infinitive of a verb preceding one or more commands to a person.  This is part of [https://code.google.com/p/blockly/wiki/Loops#repeat repeat] and [https://code.google.com/p/blockly/wiki/IfElse#If_blocks if] blocks."}do{/msg}</span>
     <span id="Maze_elseCode">{msg meaning="Maze.elseCode" desc="block text - Conjunction meaning 'otherwise', introducing commands to be performed if a previous condition was not true, as in 'if x\u003E3, do this, else do that'.  See [https://code.google.com/p/blockly/wiki/IfElse#If-Else_blocks]."}else{/msg}</span>
+    // This definition was copied up here ahead of when it is needed so that it is adjacent
+    // to the previous definition.
+    <span id="Maze_helpIfElse">{msg meaning="Maze.helpIfElse" desc="callout - This is shown when the 'if-else' block is introduced.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}</span>
     <span id="Maze_pathAhead">{msg meaning="Maze.pathAhead" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path ahead', as in: 'if path ahead, go forward'.  Prefer translation that has text in common with 'if path to the left' and 'if path to the right'."}if path ahead{/msg}</span>
     <span id="Maze_pathLeft">{msg meaning="Maze.pathLeft" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the left', as in: 'if path to the left, turn left'."}if path to the left{/msg}</span>
     <span id="Maze_pathRight">{msg meaning="Maze.pathRight" desc="[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the right', as in: 'if path to the right, turn right'."}if path to the right{/msg}</span>
@@ -138,7 +141,7 @@
     <table><tr><td>
       <img src="help.png">
     </td><td>&nbsp;</td><td>
-      {msg meaning="Maze.helpStack" desc="instructions - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
+      {msg meaning="Maze.helpStack" desc="callout - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above."}Stack a couple of 'move forward' blocks together to help me reach the goal.{/msg}
     </td><td valign="top">
       <img src="help_stack.png" class="mirrorImg" height=63 width=136>
     </td></tr></table>
@@ -147,13 +150,13 @@
     <table><tr><td>
       <img src="help.png">
     </td><td>&nbsp;</td><td>
-      {msg meaning="Maze.helpOneTopBlock" desc="instructions - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}
+      {msg meaning="Maze.helpOneTopBlock" desc="callout - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack."}On this level, you need to stack together all of the blocks in the white workspace.{/msg}
       <iframe id="iframeOneTopBlock" src=""></iframe>
     </td></tr></table>
   </div>
   <div id="dialogHelpRun" class="dialogHiddenContent">
     <table><tr><td>
-      {msg meaning="Maze.helpRun" desc="instructions"}Run your program to see what happens.{/msg}
+      {msg meaning="Maze.helpRun" desc="callout - This is shown after the user has created a program on the first level."}Run your program to see what happens.{/msg}
     </td><td rowspan=2>
       <img src="help.png">
     </td></tr><tr><td>
@@ -162,7 +165,7 @@
   </div>
   <div id="dialogHelpReset" class="dialogHiddenContent">
     <table><tr><td>
-      {msg meaning="Maze.helpReset" desc="instructions"}Your program didn't solve the maze.  Press 'Reset' and try again.{/msg}
+      {msg meaning="Maze.helpReset" desc="callout - This is shown after the user has run a program that does not solve the maze."}Your program didn't solve the maze.  Press 'Reset' and try again.{/msg}
     </td><td rowspan=2>
       <img src="help.png">
     </td></tr><tr><td>
@@ -173,7 +176,7 @@
     <table><tr><td>
       <img src="help_up.png">
     </td><td>
-      {msg meaning="Maze.helpRepeat" desc="instructions - 'path' refers to a path through a maze, and 'block' refers to a child's building block."}Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.{/msg}
+      {msg meaning="Maze.helpRepeat" desc="callout - This is shown when the 'repeat' block is introduced.  The word 'path' refers to a path through a maze, and 'block' refers to a child's building block."}Reach the end of this path using only two blocks.  Use 'repeat' to run a block more than once.{/msg}
     </td><td>
       <img src="help.png">
     </td></tr></table>
@@ -182,14 +185,14 @@
     <table><tr><td>
       <img src="help.png">
     </td><td>&nbsp;</td><td>
-      {msg meaning="Maze.helpCapacity" desc="instructions"}You have used up all the blocks for this level.  To create a new block, you first need to delete an existing block.{/msg}
+      {msg meaning="Maze.helpCapacity" desc="callout - This is shown after the user has used all the blocks permitted on this level."}You have used up all the blocks for this level.  To create a new block, you first need to delete an existing block.{/msg}
     </td></tr></table>
   </div>
   <div id="dialogHelpRepeatMany" class="dialogHiddenContent">
     <table><tr><td>
       <img src="help_up.png">
     </td><td>
-      {msg meaning="Maze.helpRepeatMany" desc="instructions - 'block' refers to a child's building block."}You can fit more than one block inside a 'repeat' block.{/msg}
+      {msg meaning="Maze.helpRepeatMany" desc="callout - This is a hint that the user should place a second block inside of a a 'repeat' block."}You can fit more than one block inside a 'repeat' block.{/msg}
     </td><td>
       <img src="help.png">
     </td></tr></table>
@@ -198,7 +201,7 @@
     <table><tr><td>
       <img src="help_up.png">
     </td><td>
-      {msg meaning="Maze.helpIf" desc="instructions - An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true.  Try turning left if there is a path to the left.{/msg}
+      {msg meaning="Maze.helpIf" desc="callout - This is shown when the 'if' block is introduced.  An example of an 'if' block is: 'if there is a path to the left, turn left'."}An 'if' block will do something only if the condition is true.  Try turning left if there is a path to the left.{/msg}
     </td><td>
       <img src="help.png">
     </td></tr></table>
@@ -207,7 +210,7 @@
     <table><tr><td>
       <img src="help_up.png">
     </td><td id="helpMenuText">
-      {msg meaning="Maze.helpMenu" desc="instructions - %1 will be replaced with an image of the dropdown menu that the user needs to click."}Click on %1 in the 'if' block to change its condition.{/msg}
+      {msg meaning="Maze.helpMenu" desc="callout - %1 will be replaced with an image of the dropdown menu that the user needs to click."}Click on %1 in the 'if' block to change its condition.{/msg}
     </td><td>
       <img src="help.png">
     </td></tr></table>
@@ -216,7 +219,7 @@
     <table><tr><td>
       <img src="help_down.png">
     </td><td>
-      {msg meaning="Maze.helpIfElse" desc="instructions - 'block' refers to a child's building block.  For 'if-else' concatenate the words for 'if' and 'else/otherwise'."}If-else blocks will do one thing or the other.{/msg}
+      {msg meaning="Maze.helpIfElse" desc="IBID"}If-else blocks will do one thing or the other.{/msg}
     </td><td>
       <img src="help.png">
     </td></tr></table>
@@ -225,7 +228,7 @@
     <table><tr><td>
       <img src="help.png">
     </td><td>&nbsp;</td><td>
-      {msg meaning="Maze.helpWallFollow" desc="instructions - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!{/msg}
+      {msg meaning="Maze.helpWallFollow" desc="callout - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated."}Can you solve this complicated maze?  Try following the left-hand wall.  Advanced programmers only!{/msg}
       {call apps.ok /}
     </td></tr></table>
   </div>
