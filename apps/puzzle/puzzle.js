@@ -42,6 +42,7 @@ BlocklyApps.LANGUAGES = {
   de: ['Deutsch', 'ltr', 'de_compressed.js'],
   el: ['Ελληνικά', 'ltr', 'en_compressed.js'],
   en: ['English', 'ltr', 'en_compressed.js'],
+  es: ['Español', 'ltr', 'en_compressed.js'],
   eu: ['Euskara', 'ltr', 'en_compressed.js'],
   fa: ['یسراف', 'rtl', 'en_compressed.js'],
   fi: ['Suomi', 'ltr', 'en_compressed.js'],
