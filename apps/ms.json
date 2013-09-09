@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Anakmalaysia"
+            "Anakmalaysia",
+            "Aurora"
         ]
     },
     "Apps.subtitle": "persekitaran pengaturcaraan visual",
@@ -50,13 +51,13 @@
     "Maze.whileTooltip": "Ulangi tindakan-tindakan yang dilampirkan sehingga titik penamat dicapai.",
     "Maze.capacity0": "Tinggal %0 blok.",
     "Maze.capacity1": "Tinggal %1 blok.",
-    "Maze.capacity2": "Tinggal %1 blok.",
+    "Maze.capacity2": "Tinggal %2 blok.",
     "Maze.nextLevel": "Tahniah! Adakah anda sedia untuk meningkat ke peringkat %1?",
     "Maze.finalLevel": "Tahniah! Anda telah menyelesaikan peringkat terakhir.",
     "Maze.helpStack": "Program merupakan turutan blok. Susunkan beberapa blok 'maju' untuk menolong saya mencapai tempat tujuan.",
+    "Maze.helpOneTopBlock": "Di tingkat ini, anda perlu menyusun semua blok secara bertingkat-tingkat ini di dalam ruang kerja putih.",
     "Maze.helpRepeat": "Komputer mempunyai memori yang terhad. Capai hujung jalan dengan menggunakan dua blok sahaja. Gunakan 'ulang' untuk menjalankan satu blok lebih daripada sekali.",
     "Maze.helpRepeatMany": "Capai tempat tujuan dengan menggunakan lima blok sahaja.",
-    "Maze.helpOneTopBlock": "Di tingkat ini, anda perlu menyusun semua blok secara bertingkat-tingkat ini di dalam ruang kerja putih.",
     "Puzzle.country1": "Australia",
     "Puzzle.country1Language": "Inggeris",
     "Puzzle.country1City1": "Melbourne",

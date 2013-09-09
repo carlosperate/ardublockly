@@ -1,4 +1,10 @@
 {
+    "@metadata": {
+        "authors": [
+            "McDutchie",
+            "Shirayuki"
+        ]
+    },
     "Apps.subtitle": "A short description of Blockly.",
     "Apps.blocklyMessage": "The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (\u0411\u043bo\u043a\u043b\u0438)'.",
     "Apps.codeTooltip": "tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user.",
@@ -46,8 +52,8 @@
     "Maze.ifelseTooltip": "tooltip - 'path' refers to a path through a maze.",
     "Maze.whileTooltip": "tooltip - Repeat the enclosed commands until the maze has been successfully completed (the end point reached).",
     "Maze.capacity0": "warning - No more blocks may be added until some are removed.  Please include '%0' in the translated string.  It will be replaced with '0' and made bold.",
-    "Maze.capacity1": "warning - Only one more block may be added.  Please include '%1' in the translated string. It will be replaced with '1' and made bold.",
-    "Maze.capacity2": "warning - Only %2 more blocks may be used, where %2 is an integer greater than 1.",
+    "Maze.capacity1": "warning - Only one more block may be added.  Please include '%1' in the translated string. It will be replaced with '1' and made bold.\n\nSee also:\n* {{msg-blockly|Maze.capacity2}}",
+    "Maze.capacity2": "warning - Only %2 more blocks may be used, where %2 is an integer greater than 1.\n\nSee also:\n* {{msg-blockly|Maze.capacity1}}",
     "Maze.nextLevel": "alert - This is displayed when the user solves the maze, inviting them to precede to the next level of difficulty.\n\nParameters:\n* %1 - the number of the next level, which is always an integer greater than 1.",
     "Maze.finalLevel": "alert - This is displayed when the user solves the most difficult level.",
     "Maze.maze": "title - Specifies that this is Blockly's '''Maze''' tutorial.",
