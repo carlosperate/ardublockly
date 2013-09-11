@@ -65,39 +65,21 @@ Blockly.Mutator.prototype.workspaceHeight_ = 0;
 Blockly.Mutator.prototype.createIcon = function() {
   Blockly.Icon.prototype.createIcon_.call(this);
   /* Here's the markup that will be generated:
-  <rect class="blocklyIconShield" width="16" height="16"/>
-  <path class="blocklyMutatorMark" d="..."></path>
+  <rect class="blocklyIconShield" width="16" height="16" rx="4" ry="4"/>
+  <text class="blocklyIconMark" x="8" y="12">★</text>
   */
-  var quantum = Blockly.Icon.RADIUS / 4;
+  var quantum = Blockly.Icon.RADIUS / 2;
   var iconShield = Blockly.createSvgElement('rect',
       {'class': 'blocklyIconShield',
-       'width': 8 * quantum,
-       'height': 8 * quantum,
-       'rx': 2 * quantum,
-       'ry': 2 * quantum}, this.iconGroup_);
-  if (!Blockly.Mutator.plusPath_) {
-    // Draw the plus sign once, and save it for future use.
-    var path = [];
-    path.push('M', (3.5 * quantum) + ',' + (3.5 * quantum));
-    path.push('v', -2 * quantum, 'h', quantum);
-    path.push('v', 2 * quantum, 'h', 2 * quantum);
-    path.push('v', quantum, 'h', -2 * quantum);
-    path.push('v', 2 * quantum, 'h', -quantum);
-    path.push('v', -2 * quantum, 'h', -2 * quantum);
-    path.push('v', -quantum, 'z');
-    Blockly.Mutator.plusPath_ = path.join(' ');
-  }
-  if (!Blockly.Mutator.minusPath_) {
-    // Draw the minus sign once, and save it for future use.
-    var path = [];
-    path.push('M', (1.5 * quantum) + ',' + (3.5 * quantum));
-    path.push('h', 5 * quantum, 'v', quantum);
-    path.push('h', -5 * quantum, 'z');
-    Blockly.Mutator.minusPath_ = path.join(' ');
-  }
-  this.iconMark_ = Blockly.createSvgElement('path',
+       'width': 4 * quantum,
+       'height': 4 * quantum,
+       'rx': quantum,
+       'ry': quantum}, this.iconGroup_);
+  this.iconMark_ = Blockly.createSvgElement('text',
       {'class': 'blocklyIconMark',
-       'd': Blockly.Mutator.plusPath_}, this.iconGroup_);
+       'x': Blockly.Icon.RADIUS,
+       'y': 2 * Blockly.Icon.RADIUS - 4}, this.iconGroup_);
+  this.iconMark_.appendChild(document.createTextNode('\u2605'));
 };
 
 /**
@@ -178,7 +160,6 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     return;
   }
   if (visible) {
-    this.iconMark_.setAttribute('d', Blockly.Mutator.minusPath_);
     // Create the bubble.
     this.bubble_ = new Blockly.Bubble(this.block_.workspace,
         this.createEditor_(), this.block_.svg_.svgGroup_,
@@ -215,7 +196,6 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
         this.block_, function() {thisObj.workspaceChanged_();});
     this.updateColour();
   } else {
-    this.iconMark_.setAttribute('d', Blockly.Mutator.plusPath_);
     // Dispose of the bubble.
     this.svgDialog_ = null;
     this.svgBackground_ = null;
