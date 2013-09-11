@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.variables');
+
+goog.require('Blockly.Language');
+
+
 Blockly.Language.variables_get = {
   // Variable getter.
   helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,

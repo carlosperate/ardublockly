@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.JavaScript.math = {};
+goog.provide('Blockly.JavaScript.math');
+
+goog.require('Blockly.JavaScript');
+
 
 Blockly.JavaScript.math_number = function() {
   // Numeric value.

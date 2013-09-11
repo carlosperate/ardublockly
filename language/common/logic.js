@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.logic');
+
+goog.require('Blockly.Language');
+
+
 Blockly.Language.controls_if = {
   // If/elseif/else condition.
   helpUrl: Blockly.LANG_CONTROLS_IF_HELPURL,

@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.JavaScript');
+
+goog.require('Blockly.Generator');
+
+
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 /**

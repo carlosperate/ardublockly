@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.JavaScript.logic = {};
+goog.provide('Blockly.JavaScript.logic');
+
+goog.require('Blockly.JavaScript');
+
 
 Blockly.JavaScript.controls_if = function() {
   // If/elseif/else condition.

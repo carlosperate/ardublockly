@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.JavaScript.control = {};
+goog.provide('Blockly.JavaScript.loops');
+
+goog.require('Blockly.JavaScript');
+
 
 Blockly.JavaScript.controls_repeat = function() {
   // Repeat n times (internal number).

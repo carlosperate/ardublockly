@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.Language.loops');
+
+goog.require('Blockly.Language');
+
+
 Blockly.Language.controls_repeat = {
   // Repeat n times (internal number).
   helpUrl: Blockly.LANG_CONTROLS_REPEAT_HELPURL,

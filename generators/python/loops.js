@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.Python.control = {};
+goog.provide('Blockly.Python.loops');
+
+goog.require('Blockly.Python');
+
 
 Blockly.Python.controls_repeat = function() {
   // Repeat n times (internal number).

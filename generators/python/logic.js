@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.Python.logic = {};
+goog.provide('Blockly.Python.logic');
+
+goog.require('Blockly.Python');
+
 
 Blockly.Python.controls_if = function() {
   // If/elseif/else condition.

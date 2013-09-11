@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.Python.variables = {};
+goog.provide('Blockly.Python.variables');
+
+goog.require('Blockly.Python');
+
 
 Blockly.Python.variables_get = function() {
   // Variable getter.

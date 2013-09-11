@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.Python.procedures = {};
+goog.provide('Blockly.Python.procedures');
+
+goog.require('Blockly.Python');
+
 
 Blockly.Python.procedures_defreturn = function() {
   // Define a procedure with a return value.

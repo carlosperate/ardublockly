@@ -23,6 +23,11 @@
  */
 'use strict';
 
+goog.provide('Blockly.Python');
+
+goog.require('Blockly.Generator');
+
+
 Blockly.Python = Blockly.Generator.get('Python');
 
 /**

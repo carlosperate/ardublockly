@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.JavaScript.colour = {};
+goog.provide('Blockly.JavaScript.colour');
+
+goog.require('Blockly.JavaScript');
+
 
 Blockly.JavaScript.colour_picker = function() {
   // Colour picker.

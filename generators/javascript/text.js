@@ -23,7 +23,10 @@
  */
 'use strict';
 
-Blockly.JavaScript.text = {};
+goog.provide('Blockly.JavaScript.text');
+
+goog.require('Blockly.JavaScript');
+
 
 Blockly.JavaScript.text = function() {
   // Text value.
