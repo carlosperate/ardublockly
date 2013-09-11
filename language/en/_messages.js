@@ -200,7 +200,7 @@ Blockly.LANG_CONTROLS_IF_MSG_THEN = Blockly.LANG_CONTROLS_REPEAT_INPUT_DO;
 Blockly.LANG_CONTROLS_IF_IF_TITLE_IF = Blockly.LANG_CONTROLS_IF_MSG_IF;
 ///tooltip - Describes [https://code.google.com/p/blockly/wiki/IfElse#Block_Modification if block modification].
 Blockly.LANG_CONTROLS_IF_IF_TOOLTIP = 'Add, remove, or reorder sections to reconfigure this if block.';
-Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = LANG_CONTROLS_IF_MSG_ELSEIF;
+Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF = Blockly.LANG_CONTROLS_IF_MSG_ELSEIF;
 ///tooltip - Describes the 'else if' subblock during [https://code.google.com/p/blockly/wiki/IfElse#Block_Modification if block modification].
 Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP = 'Add a condition to the if block.';
 Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE = Blockly.LANG_CONTROLS_IF_MSG_ELSE;
