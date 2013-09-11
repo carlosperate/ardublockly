@@ -46,7 +46,7 @@ import sys
 from common import write_files
 
 
-_INPUT_PATTERN = re.compile("""Blockly.([A-Z_]*)\s*=\s*['"]([^'"]*)['"]""")
+_INPUT_PATTERN = re.compile("""Blockly.(\w*)\s*=\s*['"]([^'"]*)['"]""")
 
 
 def main():
@@ -60,18 +60,20 @@ def main():
                       help='ISO 639-1 source language code')
   parser.add_argument('--output_dir', default='.',
                       help='relative directory for output files')
+  parser.add_argument('--input_file', default='_messages.js',
+                      help='input file')
   args = parser.parse_args()
 
   # Read and parse input file.
   results = []
   description = ''
-  for line in sys.stdin:
-    line = line.strip()
+  file = open(args.input_file)
+  for line in file:
     if line.startswith('///'):
       if description:
-        description = description + ' ' + line[3:]
+        description = description + ' ' + line[3:].strip()
       else:
-        description = line[3:]
+        description = line[3:].strip()
     else:
       match = _INPUT_PATTERN.match(line)
       if match:
@@ -83,6 +85,7 @@ def main():
         result['description'] = description
         description = ''
         results.append(result)
+  file.close()
 
   # Create output files.
   write_files(args.author, args.lang, args.output_dir, results, False)
