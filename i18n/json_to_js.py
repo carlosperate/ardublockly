@@ -131,13 +131,14 @@ def _close_xlf(xlf_file):
     xlf_file.close()
 
 
-def _process_file(target_lang, key_dict):
+def _process_file(path_to_json, target_lang, key_dict):
     """Creates an .xlf file corresponding to the specified .json input file.
 
     The name of the input file must be target_lang followed by '.json'.
     The name of the output file will be target_lang followed by '.js'.
 
     Args:
+        path_to_json: Path to the directory of xx.json files.
         target_lang: A IETF language code (RFC 4646), such as 'es' or 'pt-br'.
         key_dict: Dictionary mapping Blockly keys (e.g., Maze.turnLeft) to
             Closure keys (hash numbers).
@@ -147,7 +148,7 @@ def _process_file(target_lang, key_dict):
         InputError: Input JSON could not be parsed.
         KeyError: Key found in input file but not in key file.
     """
-    filename = target_lang + '.json'
+    filename = os.path.join(path_to_json, target_lang + '.json')
     in_file = open(filename)
     try:
         j = json.load(in_file)
@@ -161,8 +162,8 @@ def _process_file(target_lang, key_dict):
             try:
                 identifier = key_dict[key]
             except KeyError, e:
-                print('Key "' + key + '" is in ' + filename + ' but not in ' +
-                      args.key_file)
+                print('Key "%s" is in %s but not in %s' %
+                      (key, keyfile, args.key_file))
                 raise e
             target = j.get(key)
             # Only insert line breaks for tooltips.
@@ -214,13 +215,14 @@ def main():
     # Process each input file.
     print('Creating .xlf files...')
     processed_langs = []
-    for filename in args.files:
+    for arg_file in args.files:
+      (path_to_json, filename) = os.path.split(arg_file)
       if not filename.endswith('.json'):
         raise InputError(filename, 'filenames must end with ".json"')
       target_lang = filename[:filename.index('.')]
       if not target_lang in ('qqq', 'keys'):
         processed_langs.append(target_lang)
-        _process_file(target_lang, key_dict)
+        _process_file(path_to_json, target_lang, key_dict)
 
     # Output command line for Closure compiler.
     if processed_langs:

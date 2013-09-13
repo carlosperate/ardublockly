@@ -5,7 +5,7 @@ if (typeof apps == 'undefined') { var apps = {}; }
 
 
 apps.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="subtitle">a visual programming environment</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Zobraz generovaný JavaScriptový kód.</span><span id="linkTooltip">Ulož a spoj bloky..</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Spusť program</span><span id="resetProgram">Reset</span><span id="dialogOk">OK</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logic</span><span id="catLoops">Loops</span><span id="catMath">Math</span><span id="catText">Text</span><span id="catLists">Lists</span><span id="catColour">Barva</span><span id="catVariables">Variables</span><span id="catProcedures">Procedures</span><span id="httpRequestError">There was a problem with the request.</span><span id="linkAlert">Sdílej bloky tímto odkazem: %1</span><span id="hashError">Omlouváme se, \'%1\' nesouhlasí s žádným z uložených souborů.</span><span id="xmlError">Nepodařilo se uložit vás soubor.  Pravděpodobně byl vytvořen jinou verzí Blockly?</span><span id="listVariable">seznam</span><span id="textVariable">text</span></div>';
+  return '<div style="display: none"><span id="subtitle">a visual programming environment</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Zobraz generovaný JavaScriptový kód.</span><span id="linkTooltip">Ulož a spoj bloky..</span><span id="runTooltip">Run the program defined by the blocks in the workspace.</span><span id="runProgram">Spusť program</span><span id="resetProgram">Reset</span><span id="dialogOk">OK</span><span id="dialogCancel">Zrušit</span><span id="catLogic">Logika</span><span id="catLoops">Smyčky</span><span id="catMath">Matematika</span><span id="catText">Text</span><span id="catLists">Seznamy</span><span id="catColour">Barva</span><span id="catVariables">Proměnné</span><span id="catProcedures">Procedury</span><span id="httpRequestError">Došlo k potížím s požadavkem.</span><span id="linkAlert">Sdílej bloky tímto odkazem: %1</span><span id="hashError">Omlouváme se, \'%1\' nesouhlasí s žádným z uložených souborů.</span><span id="xmlError">Nepodařilo se uložit vás soubor.  Pravděpodobně byl vytvořen jinou verzí Blockly?</span><span id="listVariable">seznam</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -36,7 +36,7 @@ if (typeof planepage == 'undefined') { var planepage = {}; }
 
 
 planepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Plane_rows">Rows: %1</span><span id="Plane_getRows">řádky (% 1)</span><span id="Plane_rows1">1st class rows: %1</span><span id="Plane_getRows1">1st class rows (%1)</span><span id="Plane_rows2">2nd class rows: %1</span><span id="Plane_getRows2">2nd class rows (%1)</span><span id="Plane_seats">Seats: %1</span><span id="Plane_placeholder">?</span><span id="Plane_setSeats">seats =</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Plane_rows">Řádků: %1</span><span id="Plane_getRows">řádky (% 1)</span><span id="Plane_rows1">1. třída řádků: %1</span><span id="Plane_getRows1">1. třída řádků (%1)</span><span id="Plane_rows2">2. třída řádků: %1</span><span id="Plane_getRows2">2. třída řádků (%1)</span><span id="Plane_seats">Sedadla: %1</span><span id="Plane_placeholder">?</span><span id="Plane_setSeats">sedadla =</span></div>';
 };
 
 

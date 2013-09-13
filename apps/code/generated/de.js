@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fehler beim Parsen von XML:\n%1\n\nÄnderungen verwerfen?</span><span id="Code_badCode">Programmfehler:\n%1</span><span id="Code_timeout">Die maximalen Ausführungswiederholungen wurden überschritten.</span><span id="Code_discard">Alle %1 Bausteine löschen?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fehler beim Parsen von XML:\n%1\n\nWähle \'OK\' zum Verwerfen deiner Änderungen oder \'Abbrechen\' zum weiteren Bearbeiten des XML.</span><span id="Code_badCode">Programmfehler:\n%1</span><span id="Code_timeout">Die maximalen Ausführungswiederholungen wurden überschritten.</span><span id="Code_discard">Alle %1 Bausteine löschen?</span></div>';
 };
 
 

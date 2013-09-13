@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fout tijdens het verwerken van de XML:\n%1\n\nWijzigingen negeren?</span><span id="Code_badCode">Programmafout:\n%1</span><span id="Code_timeout">Het maximale aantal iteraties is overschreden.</span><span id="Code_discard">Alle %1 blokken verwijderen?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fout tijdens het verwerken van de XML:\n%1\n\nSelecteer "OK" om uw wijzigingen te negeren of "Annuleren" om de XML verder te bewerken.</span><span id="Code_badCode">Programmafout:\n%1</span><span id="Code_timeout">Het maximale aantal iteraties is overschreden.</span><span id="Code_discard">Alle %1 blokken verwijderen?</span></div>';
 };
 
 
