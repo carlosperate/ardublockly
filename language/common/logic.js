@@ -30,8 +30,8 @@ goog.require('Blockly.Language');
 
 Blockly.Language.controls_if = {
   // If/elseif/else condition.
-  helpUrl: Blockly.LANG_CONTROLS_IF_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_CONTROLS_IF_HELPURL);
     this.setColour(210);
     this.appendValueInput('IF0')
         .setCheck('Boolean')
@@ -219,7 +219,6 @@ Blockly.Language.controls_if_else = {
 
 Blockly.Language.logic_compare = {
   // Comparison operator.
-  helpUrl: Blockly.LANG_LOGIC_COMPARE_HELPURL,
   init: function() {
     if (Blockly.RTL) {
       var OPERATORS = [
@@ -240,6 +239,7 @@ Blockly.Language.logic_compare = {
         ['\u2265', 'GTE']
       ];
     }
+    this.setHelpUrl(Blockly.LANG_LOGIC_COMPARE_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('A');
@@ -250,54 +250,52 @@ Blockly.Language.logic_compare = {
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('OP');
-      return thisBlock.TOOLTIPS[op];
+      var TOOLTIPS = {
+        EQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ,
+        NEQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ,
+        LT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT,
+        LTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE,
+        GT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT,
+        GTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE
+      };
+      return TOOLTIPS[op];
     });
   }
 };
 
-Blockly.Language.logic_compare.TOOLTIPS = {
-  EQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ,
-  NEQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ,
-  LT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT,
-  LTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE,
-  GT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT,
-  GTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE
-};
-
 Blockly.Language.logic_operation = {
   // Logical operations: 'and', 'or'.
-  helpUrl: Blockly.LANG_LOGIC_OPERATION_HELPURL,
   init: function() {
+    var OPERATORS =
+        [[Blockly.LANG_LOGIC_OPERATION_AND, 'AND'],
+         [Blockly.LANG_LOGIC_OPERATION_OR, 'OR']];
+    this.setHelpUrl(Blockly.LANG_LOGIC_OPERATION_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('A')
         .setCheck('Boolean');
     this.appendValueInput('B')
         .setCheck('Boolean')
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'OP');
+        .appendTitle(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('OP');
+      var TOOLTIPS = {
+        AND: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND,
+        OR: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR
+      };
       return thisBlock.TOOLTIPS[op];
     });
   }
 };
 
-Blockly.Language.logic_operation.OPERATORS =
-    [[Blockly.LANG_LOGIC_OPERATION_AND, 'AND'],
-     [Blockly.LANG_LOGIC_OPERATION_OR, 'OR']];
-
-Blockly.Language.logic_operation.TOOLTIPS = {
-  AND: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND,
-  OR: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR
-};
 
 Blockly.Language.logic_negate = {
   // Negation.
-  helpUrl: Blockly.LANG_LOGIC_NEGATE_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_LOGIC_NEGATE_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('BOOL')
@@ -309,24 +307,23 @@ Blockly.Language.logic_negate = {
 
 Blockly.Language.logic_boolean = {
   // Boolean data type: true and false.
-  helpUrl: Blockly.LANG_LOGIC_BOOLEAN_HELPURL,
   init: function() {
+    var BOOLEANS =
+        [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'],
+         [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
+    this.setHelpUrl(Blockly.LANG_LOGIC_BOOLEAN_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown(this.BOOLEANS), 'BOOL');
+        .appendTitle(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
     this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP);
   }
 };
 
-Blockly.Language.logic_boolean.BOOLEANS =
-    [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'],
-     [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
-
 Blockly.Language.logic_null = {
   // Null data type.
-  helpUrl: Blockly.LANG_LOGIC_NULL_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_LOGIC_NULL_HELPURL);
     this.setColour(210);
     this.setOutput(true);
     this.appendDummyInput()
@@ -337,8 +334,8 @@ Blockly.Language.logic_null = {
 
 Blockly.Language.logic_ternary = {
   // Ternary operator.
-  helpUrl: Blockly.LANG_LOGIC_TERNARY_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_LOGIC_TERNARY_HELPURL);
     this.setColour(210);
     this.appendValueInput('IF')
         .setCheck('Boolean')

@@ -30,8 +30,8 @@ goog.require('Blockly.Language');
 
 Blockly.Language.variables_get = {
   // Variable getter.
-  helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_VARIABLES_GET_TITLE)
@@ -66,8 +66,8 @@ Blockly.Language.variables_get = {
 
 Blockly.Language.variables_set = {
   // Variable setter.
-  helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_SET_HELPURL);
     this.setColour(330);
     this.appendValueInput('VALUE')
         .appendTitle(Blockly.LANG_VARIABLES_SET_TITLE)

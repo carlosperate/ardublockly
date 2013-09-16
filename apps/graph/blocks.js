@@ -25,8 +25,8 @@
 
 Blockly.Language.graph_get_x = {
   // x variable getter.
-  helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle('x');
@@ -44,8 +44,8 @@ Blockly.JavaScript.graph_get_x = function() {
 
 Blockly.Language.graph_set_y = {
   // y variable setter.
-  helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_SET_HELPURL);
     this.setColour(330);
     this.appendValueInput('VALUE')
         .appendTitle('y =');

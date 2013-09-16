@@ -30,8 +30,8 @@ goog.require('Blockly.Language');
 
 Blockly.Language.procedures_defnoreturn = {
   // Define a procedure with no return value.
-  helpUrl: Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL);
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName(
         Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE, this);
@@ -195,8 +195,8 @@ Blockly.Language.procedures_defnoreturn = {
 
 Blockly.Language.procedures_defreturn = {
   // Define a procedure with a return value.
-  helpUrl: Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL);
     this.setColour(290);
     var name = Blockly.Procedures.findLegalName(
         Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE, this);
@@ -267,8 +267,8 @@ Blockly.Language.procedures_mutatorarg.validator = function(newVar) {
 
 Blockly.Language.procedures_callnoreturn = {
   // Call a procedure with no return value.
-  helpUrl: Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL);
     this.setColour(290);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_PROCEDURES_CALLNORETURN_CALL)
@@ -426,8 +426,8 @@ Blockly.Language.procedures_callnoreturn = {
 
 Blockly.Language.procedures_callreturn = {
   // Call a procedure with a return value.
-  helpUrl: Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL);
     this.setColour(290);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_PROCEDURES_CALLRETURN_CALL)
@@ -450,8 +450,8 @@ Blockly.Language.procedures_callreturn = {
 
 Blockly.Language.procedures_ifreturn = {
   // Conditionally return value from a procedure.
-  helpUrl: 'http://c2.com/cgi/wiki?GuardClause',
   init: function() {
+    this.setHelpUrl('http://c2.com/cgi/wiki?GuardClause');
     this.setColour(290);
     this.appendValueInput('CONDITION')
         .setCheck('Boolean')

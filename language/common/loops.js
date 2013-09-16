@@ -30,8 +30,8 @@ goog.require('Blockly.Language');
 
 Blockly.Language.controls_repeat = {
   // Repeat n times (internal number).
-  helpUrl: Blockly.LANG_CONTROLS_REPEAT_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_CONTROLS_REPEAT_HELPURL);
     this.setColour(120);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_CONTROLS_REPEAT_TITLE_REPEAT)
@@ -48,8 +48,8 @@ Blockly.Language.controls_repeat = {
 
 Blockly.Language.controls_repeat_ext = {
   // Repeat n times (external number).
-  helpUrl: Blockly.LANG_CONTROLS_REPEAT_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_CONTROLS_REPEAT_HELPURL);
     this.setColour(120);
     this.appendValueInput('TIMES')
         .setCheck('Number')
@@ -69,12 +69,15 @@ Blockly.Language.controls_repeat_ext = {
 
 Blockly.Language.controls_whileUntil = {
   // Do while/until loop.
-  helpUrl: Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL,
   init: function() {
+    var OPERATORS =
+        [[Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
+         [Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
+    this.setHelpUrl(Blockly.LANG_CONTROLS_WHILEUNTIL_HELPURL);
     this.setColour(120);
     this.appendValueInput('BOOL')
         .setCheck('Boolean')
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'MODE');
+        .appendTitle(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.appendStatementInput('DO')
         .appendTitle(Blockly.LANG_CONTROLS_WHILEUNTIL_INPUT_DO);
     this.setPreviousStatement(true);
@@ -83,24 +86,19 @@ Blockly.Language.controls_whileUntil = {
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('MODE');
-      return thisBlock.TOOLTIPS[op];
+      var TOOLTIPS = {
+        WHILE: Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE,
+        UNTIL: Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL
+      };
+      return TOOLTIPS[op];
     });
   }
 };
 
-Blockly.Language.controls_whileUntil.OPERATORS =
-    [[Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_WHILE, 'WHILE'],
-     [Blockly.LANG_CONTROLS_WHILEUNTIL_OPERATOR_UNTIL, 'UNTIL']];
-
-Blockly.Language.controls_whileUntil.TOOLTIPS = {
-  WHILE: Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_WHILE,
-  UNTIL: Blockly.LANG_CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL
-};
-
 Blockly.Language.controls_for = {
   // For loop.
-  helpUrl: Blockly.LANG_CONTROLS_FOR_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_CONTROLS_FOR_HELPURL);
     this.setColour(120);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_CONTROLS_FOR_INPUT_WITH)
@@ -156,8 +154,8 @@ Blockly.Language.controls_for = {
 
 Blockly.Language.controls_forEach = {
   // For each loop.
-  helpUrl: Blockly.LANG_CONTROLS_FOREACH_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_CONTROLS_FOREACH_HELPURL);
     this.setColour(120);
     this.appendValueInput('LIST')
         .setCheck('Array')
@@ -193,16 +191,23 @@ Blockly.Language.controls_forEach = {
 
 Blockly.Language.controls_flow_statements = {
   // Flow statements: continue, break.
-  helpUrl: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL,
   init: function() {
+    var OPERATORS =
+        [[Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
+         [Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
+    this.setHelpUrl(Blockly.LANG_CONTROLS_FLOW_STATEMENTS_HELPURL);
     this.setColour(120);
     this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'FLOW');
+        .appendTitle(new Blockly.FieldDropdown(OPERATORS), 'FLOW');
     this.setPreviousStatement(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('FLOW');
+      var TOOLTIPS = {
+        BREAK: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
+        CONTINUE: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE
+      };
       return thisBlock.TOOLTIPS[op];
     });
   },
@@ -230,13 +235,4 @@ Blockly.Language.controls_flow_statements = {
       this.setWarningText(Blockly.LANG_CONTROLS_FLOW_STATEMENTS_WARNING);
     }
   }
-};
-
-Blockly.Language.controls_flow_statements.OPERATORS =
-    [[Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK, 'BREAK'],
-     [Blockly.LANG_CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE, 'CONTINUE']];
-
-Blockly.Language.controls_flow_statements.TOOLTIPS = {
-  BREAK: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
-  CONTINUE: Blockly.LANG_CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE
 };

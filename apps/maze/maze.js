@@ -465,13 +465,7 @@ Maze.init = function() {
   // TODO: Detect if arrow is printed, or Unicode square is printed.
   var textElement = document.getElementById('arrowTest');
   var height = textElement.getBBox().height;
-  if (height < Blockly.BlockSvg.MIN_BLOCK_Y) {
-    // Append arrows to direction messages.
-    Blockly.Language.maze_turn.DIRECTIONS[0][0] += ' \u27F2';
-    Blockly.Language.maze_turn.DIRECTIONS[1][0] += ' \u27F3';
-    Blockly.Language.maze_if.DIRECTIONS[1][0] += ' \u27F2';
-    Blockly.Language.maze_if.DIRECTIONS[2][0] += ' \u27F3';
-  }
+  Maze.addArrows = height < Blockly.BlockSvg.MIN_BLOCK_Y;
   var svg = textElement.ownerSVGElement
   svg.parentNode.removeChild(svg);
 

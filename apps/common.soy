@@ -1,17 +1,16 @@
 {namespace apps}
 
 /**
- * This is a Closure Template.  It exists to encapsulate the translation
- * of messages used by the apps.
+ * This is a Closure Template.
  *
- * # Run the following command after changing the messages in any of the
- * # included apps subdirectories.
+ * Run the following command after changing the messages in any of the
+ * included apps subdirectories.
  * java -jar _soy/SoyMsgExtractor.jar --outputFile extracted_msgs.xlf --srcs common.soy,code/template.soy,graph/template.soy,maze/template.soy,plane/template.soy,puzzle/template.soy,turtle/template.soy
  *
- * # Create en.json, keys.json, and qqq.json.
+ * Create en.json, keys.json, and qqq.json.
  * ../i18n/xliff_to_json.py --xlf extracted_msgs.xlf --templates common.soy {code,graph,maze,plane,puzzle,turtle}/template.soy
  *
- * # Generate .js files for each project:
+ * Generate .js files for each project:
  * for i in code graph maze plane puzzle turtle; do ../i18n/json_to_js.py --output_dir=$i/generated --template common.soy,$i/template.soy *.json; done
  */
 

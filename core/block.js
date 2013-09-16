@@ -1052,6 +1052,14 @@ Blockly.Block.prototype.setEditable = function(editable) {
   }
 };
 
+/**
+ * Set the URL of this block's help page.
+ * @param {string|Function} url URL string for block help, or function that
+ *     returns a URL.  Null for no help.
+ */
+Blockly.Block.prototype.setHelpUrl = function(url) {
+  this.helpUrl = url;
+};
 
 /**
  * Get the colour of a block.

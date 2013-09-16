@@ -30,8 +30,8 @@ goog.require('Blockly.Language');
 
 Blockly.Language.lists_create_empty = {
   // Create an empty list.
-  helpUrl: Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_LISTS_CREATE_EMPTY_HELPURL);
     this.setColour(260);
     this.setOutput(true, 'Array');
     this.appendDummyInput()
@@ -42,7 +42,6 @@ Blockly.Language.lists_create_empty = {
 
 Blockly.Language.lists_create_with = {
   // Create a list with any number of elements of any type.
-  helpUrl: '',
   init: function() {
     this.setColour(260);
     this.appendValueInput('ADD0')
@@ -159,8 +158,8 @@ Blockly.Language.lists_create_with_item = {
 
 Blockly.Language.lists_repeat = {
   // Create a list with one element repeated.
-  helpUrl: Blockly.LANG_LISTS_REPEAT_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_LISTS_REPEAT_HELPURL);
     this.setColour(260);
     this.setOutput(true, 'Array');
     this.appendValueInput('ITEM')
@@ -177,8 +176,8 @@ Blockly.Language.lists_repeat = {
 
 Blockly.Language.lists_length = {
   // List length.
-  helpUrl: Blockly.LANG_LISTS_LENGTH_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_LISTS_LENGTH_HELPURL);
     this.setColour(260);
     this.appendValueInput('VALUE')
         .setCheck(['Array', 'String'])
@@ -190,8 +189,8 @@ Blockly.Language.lists_length = {
 
 Blockly.Language.lists_isEmpty = {
   // Is the list empty?
-  helpUrl: Blockly.LANG_LISTS_IS_EMPTY_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_LISTS_IS_EMPTY_HELPURL);
     this.setColour(260);
     this.appendValueInput('VALUE')
         .setCheck(['Array', 'String']);
@@ -205,30 +204,39 @@ Blockly.Language.lists_isEmpty = {
 
 Blockly.Language.lists_indexOf = {
   // Find an item in the list.
-  helpUrl: Blockly.LANG_LISTS_INDEX_OF_HELPURL,
   init: function() {
+    var OPERATORS =
+        [[Blockly.LANG_LISTS_INDEX_OF_FIRST, 'FIRST'],
+         [Blockly.LANG_LISTS_INDEX_OF_LAST, 'LAST']];
+    this.setHelpUrl(Blockly.LANG_LISTS_INDEX_OF_HELPURL);
     this.setColour(260);
     this.setOutput(true, 'Number');
     this.appendValueInput('VALUE')
         .setCheck('Array')
         .appendTitle(Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST);
     this.appendValueInput('FIND')
-        .appendTitle(new Blockly.FieldDropdown(this.OPERATORS), 'END');
+        .appendTitle(new Blockly.FieldDropdown(OPERATORS), 'END');
     this.setInputsInline(true);
     this.setTooltip(Blockly.LANG_LISTS_INDEX_OF_TOOLTIP);
   }
 };
 
-Blockly.Language.lists_indexOf.OPERATORS =
-    [[Blockly.LANG_LISTS_INDEX_OF_FIRST, 'FIRST'],
-     [Blockly.LANG_LISTS_INDEX_OF_LAST, 'LAST']];
-
 Blockly.Language.lists_getIndex = {
   // Get element at index.
-  helpUrl: Blockly.LANG_LISTS_GET_INDEX_HELPURL,
   init: function() {
+    var MODE =
+        [[Blockly.LANG_LISTS_GET_INDEX_GET, 'GET'],
+         [Blockly.LANG_LISTS_GET_INDEX_GET_REMOVE, 'GET_REMOVE'],
+         [Blockly.LANG_LISTS_GET_INDEX_REMOVE, 'REMOVE']];
+    this.WHERE_OPTIONS =
+        [[Blockly.LANG_LISTS_GET_INDEX_FROM_START, 'FROM_START'],
+         [Blockly.LANG_LISTS_GET_INDEX_FROM_END, 'FROM_END'],
+         [Blockly.LANG_LISTS_GET_INDEX_FIRST, 'FIRST'],
+         [Blockly.LANG_LISTS_GET_INDEX_LAST, 'LAST'],
+         [Blockly.LANG_LISTS_GET_INDEX_RANDOM, 'RANDOM']];
+    this.setHelpUrl(Blockly.LANG_LISTS_GET_INDEX_HELPURL);
     this.setColour(260);
-    var modeMenu = new Blockly.FieldDropdown(this.MODE, function(value) {
+    var modeMenu = new Blockly.FieldDropdown(MODE, function(value) {
       var isStatement = (value == 'REMOVE');
       this.sourceBlock_.updateStatement(isStatement);
     });
@@ -237,7 +245,7 @@ Blockly.Language.lists_getIndex = {
         .appendTitle(Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST);
     this.appendDummyInput()
         .appendTitle(modeMenu, 'MODE')
-        .appendTitle('');
+        .appendTitle('', 'SPACE');
     this.appendDummyInput('AT');
     this.setInputsInline(true);
     this.setOutput(true, 'Number');
@@ -295,7 +303,7 @@ Blockly.Language.lists_getIndex = {
     } else {
       this.appendDummyInput('AT');
     }
-    var menu = new Blockly.FieldDropdown(this.WHERE, function(value) {
+    var menu = new Blockly.FieldDropdown(this.WHERE_OPTIONS, function(value) {
       var newAt = (value == 'FROM_START') || (value == 'FROM_END');
       // The 'isAt' variable is available due to this function being a closure.
       if (newAt != isAt) {
@@ -311,29 +319,26 @@ Blockly.Language.lists_getIndex = {
   }
 };
 
-Blockly.Language.lists_getIndex.MODE =
-    [[Blockly.LANG_LISTS_GET_INDEX_GET, 'GET'],
-     [Blockly.LANG_LISTS_GET_INDEX_GET_REMOVE, 'GET_REMOVE'],
-     [Blockly.LANG_LISTS_GET_INDEX_REMOVE, 'REMOVE']];
-
-Blockly.Language.lists_getIndex.WHERE =
-    [[Blockly.LANG_LISTS_GET_INDEX_FROM_START, 'FROM_START'],
-     [Blockly.LANG_LISTS_GET_INDEX_FROM_END, 'FROM_END'],
-     [Blockly.LANG_LISTS_GET_INDEX_FIRST, 'FIRST'],
-     [Blockly.LANG_LISTS_GET_INDEX_LAST, 'LAST'],
-     [Blockly.LANG_LISTS_GET_INDEX_RANDOM, 'RANDOM']];
-
 Blockly.Language.lists_setIndex = {
   // Set element at index.
-  helpUrl: Blockly.LANG_LISTS_SET_INDEX_HELPURL,
   init: function() {
+    var MODE =
+        [[Blockly.LANG_LISTS_SET_INDEX_SET, 'SET'],
+         [Blockly.LANG_LISTS_SET_INDEX_INSERT, 'INSERT']];
+    this.WHERE_OPTIONS =
+        [[Blockly.LANG_LISTS_GET_INDEX_FROM_START, 'FROM_START'],
+         [Blockly.LANG_LISTS_GET_INDEX_FROM_END, 'FROM_END'],
+         [Blockly.LANG_LISTS_GET_INDEX_FIRST, 'FIRST'],
+         [Blockly.LANG_LISTS_GET_INDEX_LAST, 'LAST'],
+         [Blockly.LANG_LISTS_GET_INDEX_RANDOM, 'RANDOM']];
+    this.setHelpUrl(Blockly.LANG_LISTS_SET_INDEX_HELPURL);
     this.setColour(260);
     this.appendValueInput('LIST')
         .setCheck('Array')
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST);
     this.appendDummyInput()
-        .appendTitle(new Blockly.FieldDropdown(this.MODE), 'MODE')
-        .appendTitle('');
+        .appendTitle(new Blockly.FieldDropdown(MODE), 'MODE')
+        .appendTitle('', 'SPACE');
     this.appendDummyInput('AT');
     this.appendValueInput('TO')
         .appendTitle(Blockly.LANG_LISTS_SET_INDEX_INPUT_TO);
@@ -374,7 +379,7 @@ Blockly.Language.lists_setIndex = {
     } else {
       this.appendDummyInput('AT');
     }
-    var menu = new Blockly.FieldDropdown(this.WHERE, function(value) {
+    var menu = new Blockly.FieldDropdown(this.WHERE_OPTIONS, function(value) {
       var newAt = (value == 'FROM_START') || (value == 'FROM_END');
       // The 'isAt' variable is available due to this function being a closure.
       if (newAt != isAt) {
@@ -391,16 +396,18 @@ Blockly.Language.lists_setIndex = {
   }
 };
 
-Blockly.Language.lists_setIndex.MODE =
-    [[Blockly.LANG_LISTS_SET_INDEX_SET, 'SET'],
-     [Blockly.LANG_LISTS_SET_INDEX_INSERT, 'INSERT']];
-
-Blockly.Language.lists_setIndex.WHERE = Blockly.Language.lists_getIndex.WHERE;
-
 Blockly.Language.lists_getSublist = {
   // Get sublist.
-  helpUrl: Blockly.LANG_LISTS_GET_SUBLIST_HELPURL,
   init: function() {
+    this.WHERE_OPTIONS_1 =
+        [[Blockly.LANG_LISTS_GET_INDEX_FROM_START, 'FROM_START'],
+         [Blockly.LANG_LISTS_GET_INDEX_FROM_END, 'FROM_END'],
+         [Blockly.LANG_LISTS_GET_INDEX_FIRST, 'FIRST']];
+    this.WHERE_OPTIONS_2 =
+        [[Blockly.LANG_LISTS_GET_INDEX_FROM_START, 'FROM_START'],
+         [Blockly.LANG_LISTS_GET_INDEX_FROM_END, 'FROM_END'],
+         [Blockly.LANG_LISTS_GET_INDEX_LAST, 'LAST']];
+    this.setHelpUrl(Blockly.LANG_LISTS_GET_SUBLIST_HELPURL);
     this.setColour(260);
     this.appendValueInput('LIST')
         .setCheck('Array')
@@ -439,7 +446,8 @@ Blockly.Language.lists_getSublist = {
     } else {
       this.appendDummyInput('AT' + n);
     }
-    var menu = new Blockly.FieldDropdown(this['WHERE' + n], function(value) {
+    var menu = new Blockly.FieldDropdown(this['WHERE_OPTIONS_' + n],
+        function(value) {
       var newAt = (value == 'FROM_START') || (value == 'FROM_END');
       // The 'isAt' variable is available due to this function being a closure.
       if (newAt != isAt) {
@@ -459,10 +467,3 @@ Blockly.Language.lists_getSublist = {
     }
   }
 };
-
-Blockly.Language.lists_getSublist.WHERE1 = Blockly.Language.lists_getIndex.WHERE
-    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
-            tuple[1] == 'FROM_END' || tuple[1] == 'FIRST';});
-Blockly.Language.lists_getSublist.WHERE2 = Blockly.Language.lists_getIndex.WHERE
-    .filter(function(tuple) {return tuple[1] == 'FROM_START' ||
-            tuple[1] == 'FROM_END' || tuple[1] == 'LAST';});

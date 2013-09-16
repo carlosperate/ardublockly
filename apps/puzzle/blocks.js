@@ -25,7 +25,6 @@
 
 
 Blockly.Language.country = {
-  helpUrl: '',
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
@@ -63,7 +62,6 @@ Blockly.Language.country = {
 };
 
 Blockly.Language.flag = {
-  helpUrl: '',
   init: function() {
     this.setColour(30);
     this.appendDummyInput('IMG');
@@ -89,7 +87,6 @@ Blockly.Language.flag = {
 };
 
 Blockly.Language.city = {
-  helpUrl: '',
   init: function() {
     this.setColour(290);
     this.appendDummyInput().appendTitle('', 'NAME');

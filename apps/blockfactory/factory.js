@@ -61,8 +61,8 @@ function updateLanguage() {
   // Generate name.
   var code = [];
   code.push('Blockly.Language.' + blockType + ' = {');
-  code.push('  helpUrl: \'http://www.example.com/\',');
   code.push('  init: function() {');
+  code.push('    this.setHelpUrl(\'http://www.example.com/\');');
   // Generate colour.
   var colourBlock = rootBlock.getInputTargetBlock('COLOUR');
   if (colourBlock) {

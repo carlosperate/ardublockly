@@ -25,8 +25,8 @@
 
 Blockly.Language.plane_set_seats = {
   // Block seat variable setter.
-  helpUrl: Blockly.LANG_VARIABLES_SET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_SET_HELPURL);
     this.setColour(330);
     this.appendValueInput('VALUE')
         .appendTitle(BlocklyApps.getMsg('Plane_setSeats'));
@@ -43,8 +43,8 @@ Blockly.JavaScript.plane_set_seats = function() {
 
 Blockly.Language.plane_get_rows = {
   // Block for row variable getter.
-  helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('Plane_getRows'), 'title');
@@ -64,8 +64,8 @@ Blockly.JavaScript.plane_get_rows = function() {
 
 Blockly.Language.plane_get_rows1st = {
   // Block for first class row variable getter.
-  helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('Plane_getRows1'), 'title');
@@ -85,8 +85,8 @@ Blockly.JavaScript.plane_get_rows1st = function() {
 
 Blockly.Language.plane_get_rows2nd = {
   // Block for second class row variable getter.
-  helpUrl: Blockly.LANG_VARIABLES_GET_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('Plane_getRows2'), 'title');

@@ -29,13 +29,11 @@ Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
 Blockly.Language.draw_move = {
   // Block for moving forward or backwards.
-  helpUrl: '',
   init: function() {
     this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck('Number')
-        .appendTitle(new Blockly.FieldDropdown(
-            Blockly.Language.draw_move.DIRECTIONS), 'DIR');
+        .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(BlocklyApps.getMsg('Turtle_moveTooltip'));
@@ -57,13 +55,11 @@ Blockly.JavaScript.draw_move = function() {
 
 Blockly.Language.draw_turn = {
   // Block for turning left or right.
-  helpUrl: '',
   init: function() {
     this.setColour(160);
     this.appendValueInput('VALUE')
         .setCheck('Number')
-        .appendTitle(new Blockly.FieldDropdown(
-            Blockly.Language.draw_turn.DIRECTIONS), 'DIR');
+        .appendTitle(new Blockly.FieldDropdown(this.DIRECTIONS), 'DIR');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(BlocklyApps.getMsg('Turtle_turnTooltip'));
@@ -84,7 +80,6 @@ Blockly.JavaScript.draw_turn = function() {
 
 Blockly.Language.draw_width = {
   // Block for setting the width.
-  helpUrl: '',
   init: function() {
     this.setColour(160);
     this.appendValueInput('WIDTH')
@@ -105,7 +100,6 @@ Blockly.JavaScript.draw_width = function() {
 
 Blockly.Language.draw_pen = {
   // Block for pen up/down.
-  helpUrl: '',
   init: function() {
     this.setColour(160);
     this.appendDummyInput()
@@ -128,7 +122,6 @@ Blockly.JavaScript.draw_pen = function() {
 
 Blockly.Language.draw_colour = {
   // Block for setting the colour.
-  helpUrl: '',
   init: function() {
     this.setColour(20);
     this.appendValueInput('COLOUR')
@@ -150,7 +143,6 @@ Blockly.JavaScript.draw_colour = function() {
 
 Blockly.Language.turtle_visibility = {
   // Block for changing turtle visiblity.
-  helpUrl: '',
   init: function() {
     this.setColour(160);
     this.setPreviousStatement(true, null);
@@ -173,8 +165,8 @@ Blockly.JavaScript.turtle_visibility = function() {
 
 Blockly.Language.draw_print = {
   // Block for printing text.
-  helpUrl: BlocklyApps.getMsg('Turtle_printHelpUrl'),
   init: function() {
+    this.setHelpUrl(BlocklyApps.getMsg('Turtle_printHelpUrl'));
     this.setColour(160);
     this.appendValueInput('TEXT')
         .appendTitle(BlocklyApps.getMsg('Turtle_print'));
@@ -194,8 +186,8 @@ Blockly.JavaScript.draw_print = function() {
 
 Blockly.Language.draw_font = {
   // Block for setting the font.
-  helpUrl: BlocklyApps.getMsg('Turtle_fontHelpUrl'),
   init: function() {
+    this.setHelpUrl(BlocklyApps.getMsg('Turtle_fontHelpUrl'));
     this.setColour(160);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('Turtle_font'))

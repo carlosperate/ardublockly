@@ -30,8 +30,8 @@ goog.require('Blockly.Language');
 
 Blockly.Language.colour_picker = {
   // Colour picker.
-  helpUrl: Blockly.LANG_COLOUR_PICKER_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_COLOUR_PICKER_HELPURL);
     this.setColour(20);
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldColour('#ff0000'), 'COLOUR');
@@ -42,8 +42,8 @@ Blockly.Language.colour_picker = {
 
 Blockly.Language.colour_random = {
   // Random colour.
-  helpUrl: Blockly.LANG_COLOUR_RANDOM_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_COLOUR_RANDOM_HELPURL);
     this.setColour(20);
     this.appendDummyInput()
         .appendTitle(Blockly.LANG_COLOUR_RANDOM_TITLE);
@@ -54,8 +54,8 @@ Blockly.Language.colour_random = {
 
 Blockly.Language.colour_rgb = {
   // Compose a colour from RGB components.
-  helpUrl: Blockly.LANG_COLOUR_RGB_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_COLOUR_RGB_HELPURL);
     this.setColour(20);
     this.appendValueInput('RED')
         .setCheck('Number')
@@ -77,8 +77,8 @@ Blockly.Language.colour_rgb = {
 
 Blockly.Language.colour_blend = {
   // Blend two colours together.
-  helpUrl: Blockly.LANG_COLOUR_BLEND_HELPURL,
   init: function() {
+    this.setHelpUrl(Blockly.LANG_COLOUR_BLEND_HELPURL);
     this.setColour(20);
     this.appendValueInput('COLOUR1')
         .setCheck('Colour')
