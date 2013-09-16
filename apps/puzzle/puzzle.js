@@ -67,6 +67,7 @@ BlocklyApps.LANGUAGES = {
   lv: ['Latviešu', 'ltr', 'en_compressed.js'],
   ml: ['മലയാളം', 'ltr', 'en_compressed.js'],
   mk: ['Македонски', 'ltr', 'en_compressed.js'],
+  mr: ['मराठी', 'ltr', 'en_compressed.js'],
   ms: ['Bahasa Melayu', 'ltr', 'en_compressed.js'],
   mzn: ['مازِرونی', 'rtl', 'en_compressed.js'],
   nb: ['Norsk Bokmål', 'ltr', 'en_compressed.js'],
