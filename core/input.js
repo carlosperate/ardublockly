@@ -47,6 +47,8 @@ Blockly.Input = function(type, name, block, connection) {
   this.connection = connection;
   this.titleRow = [];
   this.align = Blockly.ALIGN_LEFT;
+
+  this.visible_ = true;
 };
 
 /**
@@ -87,6 +89,48 @@ Blockly.Input.prototype.appendTitle = function(title, opt_name) {
     this.sourceBlock_.bumpNeighbours_();
   }
   return this;
+};
+
+/**
+ * Gets whether this input is visible or not.
+ * @return {boolean} True if visible.
+ */
+Blockly.Input.prototype.isVisible = function() {
+  return this.visible_;
+};
+
+/**
+ * Sets whether this input is visible or not.
+ * @param {boolean} visible True if visible.
+ * @return {!Array.<!Blockly.Block>} List of blocks to render.
+ */
+Blockly.Input.prototype.setVisible = function(visible) {
+  var renderList = [];
+  if (this.visible_ == visible) {
+    return renderList;
+  }
+  this.visible_ = visible;
+
+  var display = visible ? 'block' : 'none';
+  for (var y = 0, title; title = this.titleRow[y]; y++) {
+    title.setVisible(visible);
+  }
+  if (this.connection) {
+    // Has a connection.
+    if (visible) {
+      renderList = this.connection.unhideAll();
+    } else {
+      renderList = this.connection.hideAll();
+    }
+    var child = this.connection.targetBlock();
+    if (child) {
+      child.svg_.getRootElement().style.display = display;
+      if (!visible) {
+        child.rendered = false;
+      }
+    }
+  }
+  return renderList;
 };
 
 /**

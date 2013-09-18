@@ -34,6 +34,7 @@
     function updateFunc(type, code) {
       if (previewBlock) {
         previewBlock.dispose();
+        previewBlock = null;
       }
       eval(code);
       // Create the preview block.

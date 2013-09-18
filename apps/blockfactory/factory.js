@@ -49,6 +49,9 @@ function initPreview(updateFunc) {
 function onchange() {
   var name = rootBlock.getTitleValue('NAME');
   blockType = name.replace(/\W/g, '_').replace(/^(\d)/, '_\\1').toLowerCase();
+  if (!blockType) {
+    blockType = 'unnamed';
+  }
   updateLanguage();
   updateGenerator();
   updatePreview();
@@ -344,7 +347,7 @@ function updateGenerator() {
     }
   }
   code.push('  // TODO: Assemble ' + language + ' into code variable.');
-  code.push('  var code = \'...\'');
+  code.push('  var code = \'...\';');
   if (rootBlock.getTitleValue('CONNECTIONS') == 'LEFT') {
     code.push('  // TODO: Change ORDER_NONE to the correct strength.');
     code.push('  return [code, Blockly.' + language + '.ORDER_NONE];');

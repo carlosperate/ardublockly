@@ -51,6 +51,7 @@ Blockly.Field = function(text) {
       {'class': 'blocklyText'}, this.fieldGroup_);
   this.size_ = {height: 25, width: 0};
   this.setText(text);
+  this.visible_ = true;
 };
 
 /**
@@ -118,10 +119,19 @@ Blockly.Field.prototype.updateEditable = function() {
 };
 
 /**
+ * Gets whether this editable field is visible or not.
+ * @return {boolean} True if visible.
+ */
+Blockly.Field.prototype.isVisible = function() {
+  return this.visible_;
+};
+
+/**
  * Sets whether this editable field is visible or not.
  * @param {boolean} visible True if visible.
  */
 Blockly.Field.prototype.setVisible = function(visible) {
+  this.visible_ = visible;
   this.getRootElement().style.display = visible ? 'block' : 'none';
 };
 

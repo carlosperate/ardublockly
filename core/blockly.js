@@ -197,6 +197,12 @@ Blockly.SNAP_RADIUS = 15;
 Blockly.BUMP_DELAY = 250;
 
 /**
+ * Number of characters to truncate a collapsed block to.
+ * @const
+ */
+Blockly.COLLAPSE_CHARS = 30;
+
+/**
  * The main workspace (defined by inject.js).
  * @type {Blockly.Workspace}
  */
@@ -400,7 +406,7 @@ Blockly.showContextMenu_ = function(xy) {
     var hasExpandedBlocks = false;
     var topBlocks = Blockly.mainWorkspace.getTopBlocks(false);
     for (var i = 0; i < topBlocks.length; i++) {
-      if (topBlocks[i].collapsed) {
+      if (topBlocks[i].isCollapsed()) {
         hasCollapsedBlocks = true;
       } else {
         hasExpandedBlocks = true;

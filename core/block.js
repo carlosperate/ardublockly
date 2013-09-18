@@ -35,6 +35,7 @@ goog.require('Blockly.Mutator');
 goog.require('Blockly.Warning');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
+goog.require('goog.string');
 goog.require('goog.Timer');
 
 
@@ -59,7 +60,6 @@ Blockly.Block = function(workspace, prototypeName) {
   this.inputList = [];
   this.inputsInline = false;
   this.rendered = false;
-  this.collapsed = false;
   this.disabled = false;
   this.tooltip = '';
   this.contextMenu = true;
@@ -69,6 +69,7 @@ Blockly.Block = function(workspace, prototypeName) {
   this.deletable_ = true;
   this.movable_ = true;
   this.editable_ = true;
+  this.collapsed_ = false;
 
   this.workspace = workspace;
   this.isInFlyout = workspace.isFlyout;
@@ -569,7 +570,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
     }
     options.push(duplicateOption);
 
-    if (Blockly.Comment && !this.collapsed) {
+    if (Blockly.Comment && !this.collapsed_) {
       // Option to add/remove a comment.
       var commentOption = {enabled: true};
       if (this.comment) {
@@ -587,7 +588,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
     }
 
     // Option to make block inline.
-    if (!this.collapsed) {
+    if (!this.collapsed_) {
       for (var i = 0; i < this.inputList.length; i++) {
         if (this.inputList[i].type == Blockly.INPUT_VALUE) {
           // Only display this option if there is a value input on the block.
@@ -605,7 +606,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
 
     if (Blockly.collapse) {
       // Option to collapse/expand block.
-      if (this.collapsed) {
+      if (this.collapsed_) {
         var expandOption = {enabled: true};
         expandOption.text = Blockly.MSG_EXPAND_BLOCK;
         expandOption.callback = function() {
@@ -688,7 +689,7 @@ Blockly.Block.prototype.getConnections_ = function(all) {
     if (this.previousConnection) {
       myConnections.push(this.previousConnection);
     }
-    if (all || !this.collapsed) {
+    if (all || !this.collapsed_) {
       for (var x = 0, input; input = this.inputList[x]; x++) {
         if (input.connection) {
           myConnections.push(input.connection);
@@ -1282,48 +1283,41 @@ Blockly.Block.prototype.getInheritedDisabled = function() {
 };
 
 /**
+ * Get whether the block is collapsed or not.
+ * @return {boolean} True if collapsed.
+ */
+Blockly.Block.prototype.isCollapsed = function() {
+  return this.collapsed_;
+};
+
+/**
  * Set whether the block is collapsed or not.
  * @param {boolean} collapsed True if collapsed.
  */
 Blockly.Block.prototype.setCollapsed = function(collapsed) {
-  if (this.collapsed == collapsed) {
+  if (this.collapsed_ == collapsed) {
     return;
   }
-  this.collapsed = collapsed;
-  // Show/hide the inputs.
-  var display = collapsed ? 'none' : 'block';
+  this.collapsed_ = collapsed;
   var renderList = [];
+  // Show/hide the inputs.
   for (var x = 0, input; input = this.inputList[x]; x++) {
-    for (var y = 0, title; title = input.titleRow[y]; y++) {
-      var titleElement = title.getRootElement ?
-          title.getRootElement() : title;
-      titleElement.style.display = display;
-    }
-    if (input.connection) {
-      // This is a connection.
-      if (collapsed) {
-        input.connection.hideAll();
-      } else {
-        renderList = renderList.concat(input.connection.unhideAll());
-      }
-      var child = input.connection.targetBlock();
-      if (child) {
-        child.svg_.getRootElement().style.display = display;
-        if (collapsed) {
-          child.rendered = false;
-        }
-      }
-    }
+    renderList = renderList.concat(input.setVisible(!collapsed));
   }
 
+  var COLLAPSED_INPUT_NAME = '_TEMP_COLLAPSED_INPUT';
   if (collapsed) {
     var icons = this.getIcons();
     for (var x = 0; x < icons.length; x++) {
       icons[x].setVisible(false);
     }
+    var text = this.toString(Blockly.COLLAPSE_CHARS);
+    this.appendDummyInput(COLLAPSED_INPUT_NAME).appendTitle(text);
+  } else {
+    this.removeInput(COLLAPSED_INPUT_NAME)
   }
 
-  if (renderList.length == 0) {
+  if (!renderList.length) {
     // No child blocks, just render this block.
     renderList[0] = this;
   }
@@ -1334,6 +1328,35 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
     this.bumpNeighbours_();
   }
 };
+
+/**
+ * Create a human-readable text representation of this block and any children.
+ * @param {?number} opt_maxLength Truncate the string to this length.
+ * @return {string} Text of block.
+ */
+Blockly.Block.prototype.toString = function(opt_maxLength) {
+  var text = [];
+  for (var x = 0, input; input = this.inputList[x]; x++) {
+    for (var y = 0, title; title = input.titleRow[y]; y++) {
+      text.push(title.getText());
+    }
+    if (input.connection) {
+      var child = input.connection.targetBlock();
+      if (child) {
+        text.push(child.toString());
+      } else {
+        text.push('?');
+      }
+    }
+  }
+  text = goog.string.trim(text.join(' ')) || '???';
+  if (opt_maxLength) {
+    // TODO: Improve truncation so that text from this block is given priority.
+    // TODO: Handle FieldImage better.
+    text = goog.string.truncate(text, opt_maxLength);
+  }
+  return text;
+}
 
 /**
  * Shortcut for appending a value input row.

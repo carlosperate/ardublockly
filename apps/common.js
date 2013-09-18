@@ -385,8 +385,8 @@ BlocklyApps.dialogMouseDown_ = function(e) {
  */
 BlocklyApps.dialogMouseMove_ = function(e) {
   var dialog = document.getElementById('dialog');
-  var dialogLeft = this.dialogStartX_ + e.clientX;
-  var dialogTop = this.dialogStartY_ + e.clientY;
+  var dialogLeft = BlocklyApps.dialogStartX_ + e.clientX;
+  var dialogTop = BlocklyApps.dialogStartY_ + e.clientY;
   dialogTop = Math.max(dialogTop, 0);
   dialogTop = Math.min(dialogTop, window.innerHeight - dialog.offsetHeight);
   dialogLeft = Math.max(dialogLeft, 0);

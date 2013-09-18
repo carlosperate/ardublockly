@@ -638,7 +638,7 @@ Blockly.Connection.prototype.hideAll = function() {
  * Unhide this connection, as well as all down-stream connections on any block
  * attached to this connection.  This happens when a block is expanded.
  * Also unhides down-stream comments.
- * @return {!Array.<Blockly.Block>} List of blocks to render.
+ * @return {!Array.<!Blockly.Block>} List of blocks to render.
  */
 Blockly.Connection.prototype.unhideAll = function() {
   if (!this.inDB_) {
@@ -656,7 +656,7 @@ Blockly.Connection.prototype.unhideAll = function() {
   var block = this.targetBlock();
   if (block) {
     var connections;
-    if (block.collapsed) {
+    if (block.isCollapsed()) {
       // This block should only be partially revealed since it is collapsed.
       connections = [];
       block.outputConnection && connections.push(block.outputConnection);

@@ -174,6 +174,11 @@ Blockly.BlockSvg.NOTCH_PATH_RIGHT = 'l -6,4 -3,0 -6,-4';
  */
 Blockly.BlockSvg.JAGGED_TEETH = 'l 8,0 0,4 8,4 -16,8 8,4';
 /**
+ * SVG path for drawing jagged teeth at the end of collapsed blocks.
+ * @const
+ */
+Blockly.BlockSvg.JAGGED_TEETH_HEIGHT = 20;
+/**
  * SVG path for drawing a horizontal puzzle tab from top to bottom.
  * @const
  */
@@ -541,27 +546,25 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     inputRows.rightEdge = Math.max(inputRows.rightEdge,
         Blockly.BlockSvg.NOTCH_WIDTH + Blockly.BlockSvg.SEP_SPACE_X);
   }
-  if (this.block_.collapsed) {
-    // Collapsed blocks have no visible inputs.
-    return inputRows;
-  }
   var titleValueWidth = 0;  // Width of longest external value title.
   var titleStatementWidth = 0;  // Width of longest statement title.
   var hasValue = false;
   var hasStatement = false;
   var hasDummy = false;
   var lastType = undefined;
+  var isInline = this.block_.inputsInline && !this.block_.isCollapsed();
   for (var i = 0, input; input = inputList[i]; i++) {
+    if (!input.isVisible()) {
+      continue;
+    }
     var row;
-    if (!this.block_.inputsInline ||
-        !lastType ||
+    if (!isInline || !lastType ||
         lastType == Blockly.NEXT_STATEMENT ||
         input.type == Blockly.NEXT_STATEMENT) {
       // Create new row.
       lastType = input.type;
       row = [];
-      if (this.block_.inputsInline &&
-          input.type != Blockly.NEXT_STATEMENT) {
+      if (isInline && input.type != Blockly.NEXT_STATEMENT) {
         row.type = Blockly.BlockSvg.INLINE;
       } else {
         row.type = input.type;
@@ -576,7 +579,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     // Compute minimum input size.
     input.renderHeight = Blockly.BlockSvg.MIN_BLOCK_Y;
     // The width is currently only needed for inline value inputs.
-    if (this.block_.inputsInline && input.type == Blockly.INPUT_VALUE) {
+    if (isInline && input.type == Blockly.INPUT_VALUE) {
       input.renderWidth = Blockly.BlockSvg.TAB_WIDTH +
           Blockly.BlockSvg.SEP_SPACE_X;
     } else {
@@ -624,7 +627,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
   // Make inline rows a bit thicker in order to enclose the values.
   for (var y = 0, row; row = inputRows[y]; y++) {
     row.thicker = false;
-    if (this.block_.inputsInline && row.type == Blockly.BlockSvg.INLINE) {
+    if (row.type == Blockly.BlockSvg.INLINE) {
       for (var z = 0, input; input = row[z]; z++) {
         if (input.type == Blockly.INPUT_VALUE) {
           row.height += 2 * Blockly.BlockSvg.INLINE_PADDING_Y;
@@ -800,8 +803,25 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       cursorX += Blockly.RTL ? -iconWidth : iconWidth;
     }
     highlightSteps.push('M', (inputRows.rightEdge - 1) + ',' + (cursorY + 1));
-    if (row.type == Blockly.BlockSvg.INLINE) {
-      // Inline inputs and/or dummy inputs.
+    if (this.block_.isCollapsed()) {
+      // Jagged right edge.
+      var input = row[0];
+      var titleX = cursorX;
+      var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
+      this.renderTitles_(input.titleRow, titleX, titleY);
+      steps.push(Blockly.BlockSvg.JAGGED_TEETH);
+      if (Blockly.RTL) {
+        highlightSteps.push('l 8,0 0,3.8 7,3.2 m -14.5,9 l 8,4');
+      } else {
+        highlightSteps.push('h 8');
+      }
+      var remainder = row.height - Blockly.BlockSvg.JAGGED_TEETH_HEIGHT;
+      steps.push('v', remainder);
+      if (Blockly.RTL) {
+        highlightSteps.push('v', remainder - 2);
+      }
+    } else if (row.type == Blockly.BlockSvg.INLINE) {
+      // Inline inputs.
       for (var x = 0, input; input = row[x]; x++) {
         var titleX = cursorX;
         var titleY = cursorY + Blockly.BlockSvg.TITLE_HEIGHT;
@@ -1005,14 +1025,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
     cursorY += row.height;
   }
   if (!inputRows.length) {
-    if (this.block_.collapsed) {
-      steps.push(Blockly.BlockSvg.JAGGED_TEETH);
-      if (Blockly.RTL) {
-        highlightSteps.push('l 8,0 0,3.8 7,3.2 m -14.5,9 l 8,4');
-      } else {
-        highlightSteps.push('h 8');
-      }
-    }
     cursorY = Blockly.BlockSvg.MIN_BLOCK_Y;
     steps.push('V', cursorY);
     if (Blockly.RTL) {

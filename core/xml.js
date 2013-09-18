@@ -114,7 +114,7 @@ Blockly.Xml.blockToDom_ = function(block) {
   if (hasValues) {
     element.setAttribute('inline', block.inputsInline);
   }
-  if (block.collapsed) {
+  if (block.isCollapsed()) {
     element.setAttribute('collapsed', true);
   }
   if (block.disabled) {
