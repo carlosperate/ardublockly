@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'विमानास, विमानन कक्षात दोन आसने असतात(वैमानिक व सह-वैमानिकासाठी) व प्रथम श्रेणी व द्वितीय श्रेणी आसनांच्या अनेक रांगा असतात.प्रत्येक प्रथम श्रेणीच्या रांगेत चार आसने असतात.प्रत्येक द्वितीय श्रेणीच्या रांगेत पाच आसने असतात.';
       break;
   }
-  output += '</p><p>Build a formula (below) that calculates the total number of seats on the airplane as the rows are changed (above).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Build a formula (below) that calculates the total number of seats on the airplane as the rows are changed (above).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

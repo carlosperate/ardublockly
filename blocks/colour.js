@@ -1,5 +1,5 @@
 /**
- * Visual Blocks Language
+ * Visual Blocks Editor
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/
@@ -23,77 +23,77 @@
  */
 'use strict';
 
-goog.provide('Blockly.Language.colour');
+goog.provide('Blockly.Blocks.colour');
 
-goog.require('Blockly.Language');
+goog.require('Blockly.Blocks');
 
 
-Blockly.Language.colour_picker = {
+Blockly.Blocks.colour_picker = {
   // Colour picker.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_COLOUR_PICKER_HELPURL);
+    this.setHelpUrl(Blockly.Msg.COLOUR_PICKER_HELPURL);
     this.setColour(20);
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldColour('#ff0000'), 'COLOUR');
     this.setOutput(true, 'Colour');
-    this.setTooltip(Blockly.LANG_COLOUR_PICKER_TOOLTIP);
+    this.setTooltip(Blockly.Msg.COLOUR_PICKER_TOOLTIP);
   }
 };
 
-Blockly.Language.colour_random = {
+Blockly.Blocks.colour_random = {
   // Random colour.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_COLOUR_RANDOM_HELPURL);
+    this.setHelpUrl(Blockly.Msg.COLOUR_RANDOM_HELPURL);
     this.setColour(20);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_COLOUR_RANDOM_TITLE);
+        .appendTitle(Blockly.Msg.COLOUR_RANDOM_TITLE);
     this.setOutput(true, 'Colour');
-    this.setTooltip(Blockly.LANG_COLOUR_RANDOM_TOOLTIP);
+    this.setTooltip(Blockly.Msg.COLOUR_RANDOM_TOOLTIP);
   }
 };
 
-Blockly.Language.colour_rgb = {
+Blockly.Blocks.colour_rgb = {
   // Compose a colour from RGB components.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_COLOUR_RGB_HELPURL);
+    this.setHelpUrl(Blockly.Msg.COLOUR_RGB_HELPURL);
     this.setColour(20);
     this.appendValueInput('RED')
         .setCheck('Number')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.LANG_COLOUR_RGB_TITLE)
-        .appendTitle(Blockly.LANG_COLOUR_RGB_RED);
+        .appendTitle(Blockly.Msg.COLOUR_RGB_TITLE)
+        .appendTitle(Blockly.Msg.COLOUR_RGB_RED);
     this.appendValueInput('GREEN')
         .setCheck('Number')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.LANG_COLOUR_RGB_GREEN);
+        .appendTitle(Blockly.Msg.COLOUR_RGB_GREEN);
     this.appendValueInput('BLUE')
         .setCheck('Number')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.LANG_COLOUR_RGB_BLUE);
+        .appendTitle(Blockly.Msg.COLOUR_RGB_BLUE);
     this.setOutput(true, 'Colour');
-    this.setTooltip(Blockly.LANG_COLOUR_RGB_TOOLTIP);
+    this.setTooltip(Blockly.Msg.COLOUR_RGB_TOOLTIP);
   }
 };
 
-Blockly.Language.colour_blend = {
+Blockly.Blocks.colour_blend = {
   // Blend two colours together.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_COLOUR_BLEND_HELPURL);
+    this.setHelpUrl(Blockly.Msg.COLOUR_BLEND_HELPURL);
     this.setColour(20);
     this.appendValueInput('COLOUR1')
         .setCheck('Colour')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.LANG_COLOUR_BLEND_TITLE)
-        .appendTitle(Blockly.LANG_COLOUR_BLEND_COLOUR1);
+        .appendTitle(Blockly.Msg.COLOUR_BLEND_TITLE)
+        .appendTitle(Blockly.Msg.COLOUR_BLEND_COLOUR1);
     this.appendValueInput('COLOUR2')
         .setCheck('Colour')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.LANG_COLOUR_BLEND_COLOUR2);
+        .appendTitle(Blockly.Msg.COLOUR_BLEND_COLOUR2);
     this.appendValueInput('RATIO')
         .setCheck('Number')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.LANG_COLOUR_BLEND_RATIO);
+        .appendTitle(Blockly.Msg.COLOUR_BLEND_RATIO);
     this.setOutput(true, 'Colour');
-    this.setTooltip(Blockly.LANG_COLOUR_BLEND_TOOLTIP);
+    this.setTooltip(Blockly.Msg.COLOUR_BLEND_TOOLTIP);
   }
 };

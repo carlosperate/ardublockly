@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'В самолёте 2 места для пилота и его помощника, несколько рядов с пассажирскими местами первого класса, а также несколько рядов с пассажирскими местами второго класса. В каждом ряду первого класса 4 места. В каждом ряду второго класса 5 мест.';
       break;
   }
-  output += '</p><p>Постройте формулу в области ниже, которая поможет рассчитать общее количество мест в самолёте (как на рисунке выше).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Постройте формулу в области ниже, которая поможет рассчитать общее количество мест в самолёте (как на рисунке выше).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

@@ -19,12 +19,12 @@
 
 /**
  * @fileoverview Core JavaScript library for Blockly.
- * @author scr@google.com (Sheridan Rawlins)
+ * @author fraser@google.com (Neil Fraser)
  */
 'use strict';
 
 /**
- * Name space for the Language singleton.
- * Language gets populated in the language files.
+ * Name space for the Blocks singleton.
+ * Blocks gets populated in the blocks files.
  */
-goog.provide('Blockly.Language');
+goog.provide('Blockly.Blocks');

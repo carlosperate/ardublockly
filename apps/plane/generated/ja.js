@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += '飛行機には、操縦室の 2 つの座席 (操縦士と副操縦士) と、ファーストクラスとセカンドクラスの乗客の座席の列があります。それぞれの列に、ファーストクラスでは 4 つの座席、セカンドクラスでは 5 つの座席があります。';
       break;
   }
-  output += '</p><p>飛行機の座席の数を計算する式を、上で列の数を変更しても正しくなるように、下に入力してください。</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>飛行機の座席の数を計算する式を、上で列の数を変更しても正しくなるように、下に入力してください。</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

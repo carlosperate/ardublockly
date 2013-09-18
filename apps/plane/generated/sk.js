@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Lietadlo má dve sedadlá v kabíne pilota (pre kapitána a kopilota), a veľa radov sedadiel pre cestujúcich v 1. a 2. triede. Každý rad 1. triedy má štyri sedadlá. Každý rad 2. triedy má päť sedadiel.';
       break;
   }
-  output += '</p><p>Napíš vzorec (dole), ktorý vypočíta celkový počet sedadiel v lietadle po zmene radov (hore).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Napíš vzorec (dole), ktorý vypočíta celkový počet sedadiel v lietadle po zmene radov (hore).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

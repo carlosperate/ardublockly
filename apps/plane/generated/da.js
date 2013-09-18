@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Et fly har to pladser i cockpittet (til pilot og med-pilot), og et antal rækker af 1. klasses og 2. klasses passagersæder. Hver 1. klasses række indeholder fire sæder. Hver 2. klasses række indeholder fem sæder.';
       break;
   }
-  output += '</p><p>Opbyg en formel (nedenfor), der beregner det samlede antal pladser på flyet, hvis antal rækker ændres (ovenfor).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Opbyg en formel (nedenfor), der beregner det samlede antal pladser på flyet, hvis antal rækker ændres (ovenfor).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

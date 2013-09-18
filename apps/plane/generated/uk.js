@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Літак має два місця в кабіні екіпажу (пілот і другий пілот), і кілька рядів 1-го класу 2-го класу пасажирських місць. Кожний ряд 1-го класу містить чотири місця. Кожен ряд 2-го класу містить п\'ять місць.';
       break;
   }
-  output += '</p><p>Побудувати формулу (нижче), яка обчислює кількість місць на літаку при зміні рядків (див. вище).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Побудувати формулу (нижче), яка обчислює кількість місць на літаку при зміні рядків (див. вище).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

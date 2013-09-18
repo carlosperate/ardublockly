@@ -1,5 +1,5 @@
 /**
- * Visual Blocks Language
+ * Visual Blocks Editor
  *
  * Copyright 2012 Google Inc.
  * http://blockly.googlecode.com/
@@ -23,21 +23,21 @@
  */
 'use strict';
 
-goog.provide('Blockly.Language.logic');
+goog.provide('Blockly.Blocks.logic');
 
-goog.require('Blockly.Language');
+goog.require('Blockly.Blocks');
 
 
-Blockly.Language.controls_if = {
+Blockly.Blocks.controls_if = {
   // If/elseif/else condition.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_CONTROLS_IF_HELPURL);
+    this.setHelpUrl(Blockly.Msg.CONTROLS_IF_HELPURL);
     this.setColour(210);
     this.appendValueInput('IF0')
         .setCheck('Boolean')
-        .appendTitle(Blockly.LANG_CONTROLS_IF_MSG_IF);
+        .appendTitle(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendStatementInput('DO0')
-        .appendTitle(Blockly.LANG_CONTROLS_IF_MSG_THEN);
+        .appendTitle(Blockly.Msg.CONTROLS_IF_MSG_THEN);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setMutator(new Blockly.Mutator(['controls_if_elseif',
@@ -46,13 +46,13 @@ Blockly.Language.controls_if = {
     var thisBlock = this;
     this.setTooltip(function() {
       if (!thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-        return Blockly.LANG_CONTROLS_IF_TOOLTIP_1;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_1;
       } else if (!thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return Blockly.LANG_CONTROLS_IF_TOOLTIP_2;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_2;
       } else if (thisBlock.elseifCount_ && !thisBlock.elseCount_) {
-        return Blockly.LANG_CONTROLS_IF_TOOLTIP_3;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_3;
       } else if (thisBlock.elseifCount_ && thisBlock.elseCount_) {
-        return Blockly.LANG_CONTROLS_IF_TOOLTIP_4;
+        return Blockly.Msg.CONTROLS_IF_TOOLTIP_4;
       }
       return '';
     });
@@ -78,13 +78,13 @@ Blockly.Language.controls_if = {
     for (var x = 1; x <= this.elseifCount_; x++) {
       this.appendValueInput('IF' + x)
           .setCheck('Boolean')
-          .appendTitle(Blockly.LANG_CONTROLS_IF_MSG_ELSEIF);
+          .appendTitle(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF);
       this.appendStatementInput('DO' + x)
-          .appendTitle(Blockly.LANG_CONTROLS_IF_MSG_THEN);
+          .appendTitle(Blockly.Msg.CONTROLS_IF_MSG_THEN);
     }
     if (this.elseCount_) {
       this.appendStatementInput('ELSE')
-          .appendTitle(Blockly.LANG_CONTROLS_IF_MSG_ELSE);
+          .appendTitle(Blockly.Msg.CONTROLS_IF_MSG_ELSE);
     }
   },
   decompose: function(workspace) {
@@ -124,9 +124,9 @@ Blockly.Language.controls_if = {
           this.elseifCount_++;
           var ifInput = this.appendValueInput('IF' + this.elseifCount_)
               .setCheck('Boolean')
-              .appendTitle(Blockly.LANG_CONTROLS_IF_MSG_ELSEIF);
+              .appendTitle(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF);
           var doInput = this.appendStatementInput('DO' + this.elseifCount_);
-          doInput.appendTitle(Blockly.LANG_CONTROLS_IF_MSG_THEN);
+          doInput.appendTitle(Blockly.Msg.CONTROLS_IF_MSG_THEN);
           // Reconnect any child blocks.
           if (clauseBlock.valueConnection_) {
             ifInput.connection.connect(clauseBlock.valueConnection_);
@@ -138,7 +138,7 @@ Blockly.Language.controls_if = {
         case 'controls_if_else':
           this.elseCount_++;
           var elseInput = this.appendStatementInput('ELSE');
-          elseInput.appendTitle(Blockly.LANG_CONTROLS_IF_MSG_ELSE);
+          elseInput.appendTitle(Blockly.Msg.CONTROLS_IF_MSG_ELSE);
           // Reconnect any child blocks.
           if (clauseBlock.statementConnection_) {
             elseInput.connection.connect(clauseBlock.statementConnection_);
@@ -180,44 +180,44 @@ Blockly.Language.controls_if = {
   }
 };
 
-Blockly.Language.controls_if_if = {
+Blockly.Blocks.controls_if_if = {
   // If condition.
   init: function() {
     this.setColour(210);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_CONTROLS_IF_IF_TITLE_IF);
+        .appendTitle(Blockly.Msg.CONTROLS_IF_IF_TITLE_IF);
     this.appendStatementInput('STACK');
-    this.setTooltip(Blockly.LANG_CONTROLS_IF_IF_TOOLTIP);
+    this.setTooltip(Blockly.Msg.CONTROLS_IF_IF_TOOLTIP);
     this.contextMenu = false;
   }
 };
 
-Blockly.Language.controls_if_elseif = {
+Blockly.Blocks.controls_if_elseif = {
   // Else-If condition.
   init: function() {
     this.setColour(210);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_CONTROLS_IF_ELSEIF_TITLE_ELSEIF);
+        .appendTitle(Blockly.Msg.CONTROLS_IF_ELSEIF_TITLE_ELSEIF);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.LANG_CONTROLS_IF_ELSEIF_TOOLTIP);
+    this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP);
     this.contextMenu = false;
   }
 };
 
-Blockly.Language.controls_if_else = {
+Blockly.Blocks.controls_if_else = {
   // Else condition.
   init: function() {
     this.setColour(210);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_CONTROLS_IF_ELSE_TITLE_ELSE);
+        .appendTitle(Blockly.Msg.CONTROLS_IF_ELSE_TITLE_ELSE);
     this.setPreviousStatement(true);
-    this.setTooltip(Blockly.LANG_CONTROLS_IF_ELSE_TOOLTIP);
+    this.setTooltip(Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP);
     this.contextMenu = false;
   }
 };
 
-Blockly.Language.logic_compare = {
+Blockly.Blocks.logic_compare = {
   // Comparison operator.
   init: function() {
     if (Blockly.RTL) {
@@ -239,7 +239,7 @@ Blockly.Language.logic_compare = {
         ['\u2265', 'GTE']
       ];
     }
-    this.setHelpUrl(Blockly.LANG_LOGIC_COMPARE_HELPURL);
+    this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('A');
@@ -251,25 +251,25 @@ Blockly.Language.logic_compare = {
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('OP');
       var TOOLTIPS = {
-        EQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_EQ,
-        NEQ: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_NEQ,
-        LT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LT,
-        LTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_LTE,
-        GT: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GT,
-        GTE: Blockly.LANG_LOGIC_COMPARE_TOOLTIP_GTE
+        EQ: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_EQ,
+        NEQ: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_NEQ,
+        LT: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LT,
+        LTE: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LTE,
+        GT: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GT,
+        GTE: Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GTE
       };
       return TOOLTIPS[op];
     });
   }
 };
 
-Blockly.Language.logic_operation = {
+Blockly.Blocks.logic_operation = {
   // Logical operations: 'and', 'or'.
   init: function() {
     var OPERATORS =
-        [[Blockly.LANG_LOGIC_OPERATION_AND, 'AND'],
-         [Blockly.LANG_LOGIC_OPERATION_OR, 'OR']];
-    this.setHelpUrl(Blockly.LANG_LOGIC_OPERATION_HELPURL);
+        [[Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
+         [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']];
+    this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('A')
@@ -283,8 +283,8 @@ Blockly.Language.logic_operation = {
     this.setTooltip(function() {
       var op = thisBlock.getTitleValue('OP');
       var TOOLTIPS = {
-        AND: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_AND,
-        OR: Blockly.LANG_LOGIC_OPERATION_TOOLTIP_OR
+        AND: Blockly.Msg.LOGIC_OPERATION_TOOLTIP_AND,
+        OR: Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR
       };
       return thisBlock.TOOLTIPS[op];
     });
@@ -292,59 +292,59 @@ Blockly.Language.logic_operation = {
 };
 
 
-Blockly.Language.logic_negate = {
+Blockly.Blocks.logic_negate = {
   // Negation.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_LOGIC_NEGATE_HELPURL);
+    this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendValueInput('BOOL')
         .setCheck('Boolean')
-        .appendTitle(Blockly.LANG_LOGIC_NEGATE_INPUT_NOT);
-    this.setTooltip(Blockly.LANG_LOGIC_NEGATE_TOOLTIP);
+        .appendTitle(Blockly.Msg.LOGIC_NEGATE_INPUT_NOT);
+    this.setTooltip(Blockly.Msg.LOGIC_NEGATE_TOOLTIP);
   }
 };
 
-Blockly.Language.logic_boolean = {
+Blockly.Blocks.logic_boolean = {
   // Boolean data type: true and false.
   init: function() {
     var BOOLEANS =
-        [[Blockly.LANG_LOGIC_BOOLEAN_TRUE, 'TRUE'],
-         [Blockly.LANG_LOGIC_BOOLEAN_FALSE, 'FALSE']];
-    this.setHelpUrl(Blockly.LANG_LOGIC_BOOLEAN_HELPURL);
+        [[Blockly.Msg.LOGIC_BOOLEAN_TRUE, 'TRUE'],
+         [Blockly.Msg.LOGIC_BOOLEAN_FALSE, 'FALSE']];
+    this.setHelpUrl(Blockly.Msg.LOGIC_BOOLEAN_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
     this.appendDummyInput()
         .appendTitle(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
-    this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP);
+    this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
   }
 };
 
-Blockly.Language.logic_null = {
+Blockly.Blocks.logic_null = {
   // Null data type.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_LOGIC_NULL_HELPURL);
+    this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL);
     this.setColour(210);
     this.setOutput(true);
     this.appendDummyInput()
-        .appendTitle(Blockly.LANG_LOGIC_NULL);
-    this.setTooltip(Blockly.LANG_LOGIC_NULL_TOOLTIP);
+        .appendTitle(Blockly.Msg.LOGIC_NULL);
+    this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP);
   }
 };
 
-Blockly.Language.logic_ternary = {
+Blockly.Blocks.logic_ternary = {
   // Ternary operator.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_LOGIC_TERNARY_HELPURL);
+    this.setHelpUrl(Blockly.Msg.LOGIC_TERNARY_HELPURL);
     this.setColour(210);
     this.appendValueInput('IF')
         .setCheck('Boolean')
-        .appendTitle(Blockly.LANG_LOGIC_TERNARY_CONDITION);
+        .appendTitle(Blockly.Msg.LOGIC_TERNARY_CONDITION);
     this.appendValueInput('THEN')
-        .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_TRUE);
+        .appendTitle(Blockly.Msg.LOGIC_TERNARY_IF_TRUE);
     this.appendValueInput('ELSE')
-        .appendTitle(Blockly.LANG_LOGIC_TERNARY_IF_FALSE);
+        .appendTitle(Blockly.Msg.LOGIC_TERNARY_IF_FALSE);
     this.setOutput(true);
-    this.setTooltip(Blockly.LANG_LOGIC_TERNARY_TOOLTIP);
+    this.setTooltip(Blockly.Msg.LOGIC_TERNARY_TOOLTIP);
   }
 };

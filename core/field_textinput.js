@@ -26,6 +26,7 @@
 goog.provide('Blockly.FieldTextInput');
 
 goog.require('Blockly.Field');
+goog.require('Blockly.Msg');
 goog.require('goog.asserts');
 goog.require('goog.userAgent');
 
@@ -88,7 +89,7 @@ Blockly.FieldTextInput.prototype.setText = function(text) {
 Blockly.FieldTextInput.prototype.showEditor_ = function() {
   if (goog.userAgent.MOBILE) {
     // Mobile browsers have issues with in-line textareas (focus & keyboards).
-    var newValue = window.prompt(Blockly.MSG_CHANGE_VALUE_TITLE, this.text_);
+    var newValue = window.prompt(Blockly.Msg.CHANGE_VALUE_TITLE, this.text_);
     if (this.changeHandler_) {
       var override = this.changeHandler_(newValue);
       if (override !== undefined) {

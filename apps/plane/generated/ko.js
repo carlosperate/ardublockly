@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += '비행기는 비행 갑판(조종사와 부조종사용)에서 좌석 두 개가 있고, 1등석과 2등석 승객 좌석의 행 수가 있습니다. 각 1등석 행에는 시트 네 개가 포함되어 있습니다. 각 2등석 행에는 시트 다섯 개가 포함되어 있습니다.';
       break;
   }
-  output += '</p><p>행이 바뀐(위) 비행기에 좌석의 총 수를 계산하는 공식(아래)을 구축하세요.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>행이 바뀐(위) 비행기에 좌석의 총 수를 계산하는 공식(아래)을 구축하세요.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

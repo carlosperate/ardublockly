@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'N\'avion a l\'ha doi sedij ant la cabin-a ëd pilotage (për ël pilòta e ël cò-pilòta) e un chèich nùmer ëd file ëd sedij pr\'ij passagé ëd prima e sconda classa. Minca fila ëd prima classa a conten quatr sedij. Minca fila ëd seconda classa a conten sinch sedij.';
       break;
   }
-  output += '</p><p>Fabriché na fórmola (sì-sota) ch\'a fa \'l cont dël nùmer total ëd sedij ant l\'avion cand che ël nùmer dle file a cangia (sì-dzora).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Fabriché na fórmola (sì-sota) ch\'a fa \'l cont dël nùmer total ëd sedij ant l\'avion cand che ël nùmer dle file a cangia (sì-dzora).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

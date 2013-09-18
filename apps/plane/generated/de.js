@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Ein Flugzeug hat zwei Sitze im Pilotenstand (für den Piloten und Co-Piloten) und eine Anzahl an Reihen mit Passagiersitzen der 1. und 2. Klasse. Jede 1.-Klasse-Reihe enthält vier Sitze. Jede 2.-Klasse-Reihe enthält fünf Sitze.';
       break;
   }
-  output += '</p><p>Erstelle eine Formel (unten), die die gesamte Anzahl an Sitzen im Flugzeug berechnet, wenn die Reihen (oben) geändert werden.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Erstelle eine Formel (unten), die die gesamte Anzahl an Sitzen im Flugzeug berechnet, wenn die Reihen (oben) geändert werden.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

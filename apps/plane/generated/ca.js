@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Un avió té dos seients en la cabina de vol (pel pilot i copilot) i un nombre de files per seients de passatgers de primera classe i de segona classe. Cada fila de primera classe conté quatre seients. Cada fila de segona classe conté cinc seients.';
       break;
   }
-  output += '</p><p>Construïu una fórmula (a sota) que calculi el nombre total de seients de l\'avió a mida que canviïn les files (a dalt).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Construïu una fórmula (a sota) que calculi el nombre total de seients de l\'avió a mida que canviïn les files (a dalt).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

@@ -27,7 +27,7 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.Language.maze_moveForward = {
+Blockly.Blocks.maze_moveForward = {
   // Block for moving forward.
   init: function() {
     this.setHelpUrl('http://code.google.com/p/blockly/wiki/Move');
@@ -45,7 +45,7 @@ Blockly.JavaScript.maze_moveForward = function() {
   return 'Maze.moveForward(\'block_id_' + this.id + '\');\n';
 };
 
-Blockly.Language.maze_turn = {
+Blockly.Blocks.maze_turn = {
   // Block for turning left or right.
   init: function() {
     var DIRECTIONS =
@@ -72,7 +72,7 @@ Blockly.JavaScript.maze_turn = function() {
   return 'Maze.' + dir + '(\'block_id_' + this.id + '\');\n';
 };
 
-Blockly.Language.maze_if = {
+Blockly.Blocks.maze_if = {
   // Block for 'if' conditional if there is a path.
   init: function() {
     var DIRECTIONS =
@@ -105,7 +105,7 @@ Blockly.JavaScript.maze_if = function() {
   return code;
 };
 
-Blockly.Language.maze_ifElse = {
+Blockly.Blocks.maze_ifElse = {
   // Block for 'if/else' conditional if there is a path.
   init: function() {
     var DIRECTIONS =
@@ -141,7 +141,7 @@ Blockly.JavaScript.maze_ifElse = function() {
   return code;
 };
 
-Blockly.Language.maze_forever = {
+Blockly.Blocks.maze_forever = {
   // Do forever loop.
   init: function() {
     this.setHelpUrl('http://code.google.com/p/blockly/wiki/Repeat');

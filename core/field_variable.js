@@ -26,6 +26,7 @@
 goog.provide('Blockly.FieldVariable');
 
 goog.require('Blockly.FieldDropdown');
+goog.require('Blockly.Msg');
 goog.require('Blockly.Variables');
 
 
@@ -104,8 +105,8 @@ Blockly.FieldVariable.dropdownCreate = function() {
     variableList.push(name);
   }
   variableList.sort(goog.string.caseInsensitiveCompare);
-  variableList.push(Blockly.MSG_RENAME_VARIABLE);
-  variableList.push(Blockly.MSG_NEW_VARIABLE);
+  variableList.push(Blockly.Msg.RENAME_VARIABLE);
+  variableList.push(Blockly.Msg.NEW_VARIABLE);
   // Variables are not language-specific, use the name as both the user-facing
   // text and the internal representation.
   var options = [];
@@ -133,16 +134,16 @@ Blockly.FieldVariable.dropdownChange = function(text) {
     // Beyond this, all names are legal.
     return newVar && newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
   }
-  if (text == Blockly.MSG_RENAME_VARIABLE) {
+  if (text == Blockly.Msg.RENAME_VARIABLE) {
     var oldVar = this.getText();
-    text = promptName(Blockly.MSG_RENAME_VARIABLE_TITLE.replace('%1', oldVar),
+    text = promptName(Blockly.Msg.RENAME_VARIABLE_TITLE.replace('%1', oldVar),
                       oldVar);
     if (text) {
       Blockly.Variables.renameVariable(oldVar, text);
     }
     return null;
-  } else if (text == Blockly.MSG_NEW_VARIABLE) {
-    text = promptName(Blockly.MSG_NEW_VARIABLE_TITLE, '');
+  } else if (text == Blockly.Msg.NEW_VARIABLE) {
+    text = promptName(Blockly.Msg.NEW_VARIABLE_TITLE, '');
     // Since variables are case-insensitive, ensure that if the new variable
     // matches with an existing variable, the new case prevails throughout.
     if (text) {

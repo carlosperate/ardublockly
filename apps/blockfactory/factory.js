@@ -63,7 +63,7 @@ function onchange() {
 function updateLanguage() {
   // Generate name.
   var code = [];
-  code.push('Blockly.Language.' + blockType + ' = {');
+  code.push('Blockly.Blocks.' + blockType + ' = {');
   code.push('  init: function() {');
   code.push('    this.setHelpUrl(\'http://www.example.com/\');');
   // Generate colour.

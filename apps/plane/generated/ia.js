@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Un avion ha duo sedes in le cabina (pro le pilota e le copilota) e un numero de filas de sedes pro passageros del prime classe e del secunde classes. Cata fila del prime classe contine quatro sedes. Cata fila del secunde classe contine cinque sedes.';
       break;
   }
-  output += '</p><p>Construe un formula (ci infra) que calcula le numero total de sedes in le avion quando le numero de filas es cambiate (ci supra).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Construe un formula (ci infra) que calcula le numero total de sedes in le avion quando le numero de filas es cambiate (ci supra).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

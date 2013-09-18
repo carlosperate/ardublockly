@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Een vliegtuig heeft twee stoelen in de cockpit (voor de piloot en de copiloot) en een aantal rijen voor 1e klasse en 2e klasse passagiers. Iedere rij in de 1e klasse heeft vier stoelen. Iedere rij in de 2e klasse heeft vijf stoelen.';
       break;
   }
-  output += '</p><p>Maak hieronder een formule die het totale aantal stoelen in het vliegtuig berekent als het aantal rijen hierboven wordt aangepast.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Maak hieronder een formule die het totale aantal stoelen in het vliegtuig berekent als het aantal rijen hierboven wordt aangepast.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

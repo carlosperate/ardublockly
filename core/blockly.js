@@ -37,6 +37,7 @@ goog.require('Blockly.FieldImage');
 goog.require('Blockly.FieldTextInput');
 goog.require('Blockly.FieldVariable');
 goog.require('Blockly.Generator');
+goog.require('Blockly.Msg');
 goog.require('Blockly.Procedures');
 goog.require('Blockly.Toolbox');
 goog.require('Blockly.WidgetDiv');
@@ -415,7 +416,7 @@ Blockly.showContextMenu_ = function(xy) {
 
     // Option to collapse top blocks.
     var collapseOption = {enabled: hasExpandedBlocks};
-    collapseOption.text = Blockly.MSG_COLLAPSE_ALL;
+    collapseOption.text = Blockly.Msg.COLLAPSE_ALL;
     collapseOption.callback = function() {
       for (var i = 0; i < topBlocks.length; i++) {
         topBlocks[i].setCollapsed(true);
@@ -425,7 +426,7 @@ Blockly.showContextMenu_ = function(xy) {
 
     // Option to expand top blocks.
     var expandOption = {enabled: hasCollapsedBlocks};
-    expandOption.text = Blockly.MSG_EXPAND_ALL;
+    expandOption.text = Blockly.Msg.EXPAND_ALL;
     expandOption.callback = function() {
       for (var i = 0; i < topBlocks.length; i++) {
         topBlocks[i].setCollapsed(false);
@@ -436,7 +437,7 @@ Blockly.showContextMenu_ = function(xy) {
 
   // Option to get help.
   var helpOption = {enabled: false};
-  helpOption.text = Blockly.MSG_HELP;
+  helpOption.text = Blockly.Msg.HELP;
   helpOption.callback = function() {};
   options.push(helpOption);
 

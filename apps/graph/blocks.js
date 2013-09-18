@@ -23,15 +23,15 @@
  */
 'use strict';
 
-Blockly.Language.graph_get_x = {
+Blockly.Blocks.graph_get_x = {
   // x variable getter.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
+    this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle('x');
     this.setOutput(true, 'Number');
-    this.setTooltip(Blockly.LANG_VARIABLES_GET_TOOLTIP);
+    this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);
   }
 };
 
@@ -42,14 +42,14 @@ Blockly.JavaScript.graph_get_x = function() {
   return ['x', Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.Language.graph_set_y = {
+Blockly.Blocks.graph_set_y = {
   // y variable setter.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_VARIABLES_SET_HELPURL);
+    this.setHelpUrl(Blockly.Msg.VARIABLES_SET_HELPURL);
     this.setColour(330);
     this.appendValueInput('VALUE')
         .appendTitle('y =');
-    this.setTooltip(Blockly.LANG_VARIABLES_SET_TOOLTIP);
+    this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);
   }
 };
 

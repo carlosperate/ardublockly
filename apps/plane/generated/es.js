@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Un avión tiene dos asientos en la cabina de vuelo (para el piloto y co-piloto), y un número de filas de asientos para pasajeros de primera y segunda clase. Cada fila de la primera clase contiene cuatro asientos. Cada fila de la segunda clase contiene cinco asientos.';
       break;
   }
-  output += '</p><p>Construir una fórmula (abajo) que calcule el número total de asientos en el avión cuando las filas sean cambiadas (arriba).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Construir una fórmula (abajo) que calcule el número total de asientos en el avión cuando las filas sean cambiadas (arriba).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

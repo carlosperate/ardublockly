@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Un avion a deux sièges dans la cabine de pilotage (pour le pilote et le copilote), et un certain nombre de rangées de sièges passager de première et seconde classes. Chaque rangée de première classe contient quatre sièges. Chaque rangée de seconde classe contient cinq sièges.';
       break;
   }
-  output += '</p><p>Construire une formule (ci-dessous) qui calcule le nombre total de sièges dans l’avion quand le nombre de rangées est modifié (ci-dessus).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Construire une formule (ci-dessous) qui calcule le nombre total de sièges dans l’avion quand le nombre de rangées est modifié (ci-dessus).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

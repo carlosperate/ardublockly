@@ -23,14 +23,14 @@
  */
 'use strict';
 
-Blockly.Language.plane_set_seats = {
+Blockly.Blocks.plane_set_seats = {
   // Block seat variable setter.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_VARIABLES_SET_HELPURL);
+    this.setHelpUrl(Blockly.Msg.VARIABLES_SET_HELPURL);
     this.setColour(330);
     this.appendValueInput('VALUE')
         .appendTitle(BlocklyApps.getMsg('Plane_setSeats'));
-    this.setTooltip(Blockly.LANG_VARIABLES_SET_TOOLTIP);
+    this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);
   }
 };
 
@@ -41,10 +41,10 @@ Blockly.JavaScript.plane_set_seats = function() {
   return argument0 + ';';
 };
 
-Blockly.Language.plane_get_rows = {
+Blockly.Blocks.plane_get_rows = {
   // Block for row variable getter.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
+    this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('Plane_getRows'), 'title');
@@ -62,10 +62,10 @@ Blockly.JavaScript.plane_get_rows = function() {
   return ['Plane.rows1st', Blockly.JavaScript.ORDER_MEMBER];
 };
 
-Blockly.Language.plane_get_rows1st = {
+Blockly.Blocks.plane_get_rows1st = {
   // Block for first class row variable getter.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
+    this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('Plane_getRows1'), 'title');
@@ -83,10 +83,10 @@ Blockly.JavaScript.plane_get_rows1st = function() {
   return ['Plane.rows1st', Blockly.JavaScript.ORDER_MEMBER];
 };
 
-Blockly.Language.plane_get_rows2nd = {
+Blockly.Blocks.plane_get_rows2nd = {
   // Block for second class row variable getter.
   init: function() {
-    this.setHelpUrl(Blockly.LANG_VARIABLES_GET_HELPURL);
+    this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
     this.setColour(330);
     this.appendDummyInput()
         .appendTitle(BlocklyApps.getMsg('Plane_getRows2'), 'title');

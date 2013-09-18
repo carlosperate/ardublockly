@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Egy repülőgépnek 2 ülése van a pilótafülkében (a pliótának és a másodpilótának), az utasok 1. és 2. osztályon utazhatnak. Az 1. osztályon négy szék van egy sorban. A 2. osztályon öt szék van egy sorban.';
       break;
   }
-  output += '</p><p>Készítsd el a képletet (lent) amivel kiszámolható, hogy hány ülés van összesen a repülőgépen annak függvényében, ahogy (fent) állítod a sorok számát.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Készítsd el a képletet (lent) amivel kiszámolható, hogy hány ülés van összesen a repülőgépen annak függvényében, ahogy (fent) állítod a sorok számát.</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

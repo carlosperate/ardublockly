@@ -26,11 +26,12 @@
 goog.provide('Blockly.Block');
 
 goog.require('Blockly.BlockSvg');
+goog.require('Blockly.Blocks');
 goog.require('Blockly.Comment');
 goog.require('Blockly.Connection');
 goog.require('Blockly.ContextMenu');
 goog.require('Blockly.Input');
-goog.require('Blockly.Language');
+goog.require('Blockly.Msg');
 goog.require('Blockly.Mutator');
 goog.require('Blockly.Warning');
 goog.require('Blockly.Workspace');
@@ -79,7 +80,7 @@ Blockly.Block = function(workspace, prototypeName) {
   // Copy the type-specific functions and data from the prototype.
   if (prototypeName) {
     this.type = prototypeName;
-    var prototype = Blockly.Language[prototypeName];
+    var prototype = Blockly.Blocks[prototypeName];
     if (!prototype) {
       throw 'Error: "' + prototypeName + '" is an unknown language block.';
     }
@@ -559,7 +560,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
   if (this.isDeletable() && !block.isInFlyout) {
     // Option to duplicate this block.
     var duplicateOption = {
-      text: Blockly.MSG_DUPLICATE_BLOCK,
+      text: Blockly.Msg.DUPLICATE_BLOCK,
       enabled: true,
       callback: function() {
         block.duplicate_();
@@ -574,12 +575,12 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
       // Option to add/remove a comment.
       var commentOption = {enabled: true};
       if (this.comment) {
-        commentOption.text = Blockly.MSG_REMOVE_COMMENT;
+        commentOption.text = Blockly.Msg.REMOVE_COMMENT;
         commentOption.callback = function() {
           block.setCommentText(null);
         };
       } else {
-        commentOption.text = Blockly.MSG_ADD_COMMENT;
+        commentOption.text = Blockly.Msg.ADD_COMMENT;
         commentOption.callback = function() {
           block.setCommentText('');
         };
@@ -593,8 +594,8 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
         if (this.inputList[i].type == Blockly.INPUT_VALUE) {
           // Only display this option if there is a value input on the block.
           var inlineOption = {enabled: true};
-          inlineOption.text = this.inputsInline ? Blockly.MSG_EXTERNAL_INPUTS :
-                                                  Blockly.MSG_INLINE_INPUTS;
+          inlineOption.text = this.inputsInline ? Blockly.Msg.EXTERNAL_INPUTS :
+                                                  Blockly.Msg.INLINE_INPUTS;
           inlineOption.callback = function() {
             block.setInputsInline(!block.inputsInline);
           };
@@ -608,14 +609,14 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
       // Option to collapse/expand block.
       if (this.collapsed_) {
         var expandOption = {enabled: true};
-        expandOption.text = Blockly.MSG_EXPAND_BLOCK;
+        expandOption.text = Blockly.Msg.EXPAND_BLOCK;
         expandOption.callback = function() {
           block.setCollapsed(false);
         };
         options.push(expandOption);
       } else {
         var collapseOption = {enabled: true};
-        collapseOption.text = Blockly.MSG_COLLAPSE_BLOCK;
+        collapseOption.text = Blockly.Msg.COLLAPSE_BLOCK;
         collapseOption.callback = function() {
           block.setCollapsed(true);
         };
@@ -626,7 +627,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
     // Option to disable/enable block.
     var disableOption = {
       text: this.disabled ?
-          Blockly.MSG_ENABLE_BLOCK : Blockly.MSG_DISABLE_BLOCK,
+          Blockly.Msg.ENABLE_BLOCK : Blockly.Msg.DISABLE_BLOCK,
       enabled: !this.getInheritedDisabled(),
       callback: function() {
         block.setDisabled(!block.disabled);
@@ -643,8 +644,8 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
           getDescendants().length;
     }
     var deleteOption = {
-      text: descendantCount == 1 ? Blockly.MSG_DELETE_BLOCK :
-          Blockly.MSG_DELETE_X_BLOCKS.replace('%1', descendantCount),
+      text: descendantCount == 1 ? Blockly.Msg.DELETE_BLOCK :
+          Blockly.Msg.DELETE_X_BLOCKS.replace('%1', descendantCount),
       enabled: true,
       callback: function() {
         block.dispose(true, true);
@@ -656,7 +657,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
   // Option to get help.
   var url = goog.isFunction(this.helpUrl) ? this.helpUrl() : this.helpUrl;
   var helpOption = {enabled: !!url};
-  helpOption.text = Blockly.MSG_HELP;
+  helpOption.text = Blockly.Msg.HELP;
   helpOption.callback = function() {
     block.showHelp_();
   };

@@ -24,7 +24,7 @@
 'use strict';
 
 
-Blockly.Language.country = {
+Blockly.Blocks.country = {
   init: function() {
     this.setColour(120);
     this.appendDummyInput()
@@ -61,15 +61,15 @@ Blockly.Language.country = {
   }
 };
 
-Blockly.Language.flag = {
+Blockly.Blocks.flag = {
   init: function() {
     this.setColour(30);
     this.appendDummyInput('IMG');
     this.setOutput(true);
     this.setTooltip('');
   },
-  mutationToDom: Blockly.Language.country.mutationToDom,
-  domToMutation: Blockly.Language.country.domToMutation,
+  mutationToDom: Blockly.Blocks.country.mutationToDom,
+  domToMutation: Blockly.Blocks.country.domToMutation,
   country: 0,
   populate: function(n) {
     this.country = n;
@@ -86,7 +86,7 @@ Blockly.Language.flag = {
   }
 };
 
-Blockly.Language.city = {
+Blockly.Blocks.city = {
   init: function() {
     this.setColour(290);
     this.appendDummyInput().appendTitle('', 'NAME');

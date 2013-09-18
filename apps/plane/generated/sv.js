@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Ett flygplan har två säten i cockpiten (för piloten och andrepiloten) och ett antal rader med första och andra klassens passagerarsäten. Varje rad i första klass innehåller fyra säten. Varje rad i andra klass innehåller fem säten.';
       break;
   }
-  output += '</p><p>Bygg en formel (nedan) som beräknar det totala antalet säten på flygplanet när raderna ändras (ovan).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Bygg en formel (nedan) som beräknar det totala antalet säten på flygplanet när raderna ändras (ovan).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

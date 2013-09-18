@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'En ur c\'harr-nij ez eus div azezenn er post leviañ(evit al levier hag ar c\'henlevier), hag un toullad renkennoù azezennoù tremenidi kentañ hag eil klas. Peder azezenn zo e pep renkennad kentañ klas. Pemp azezenn zo pemp renkennad eil klas.';
       break;
   }
-  output += '</p><p>Sevel ur formulenn (amañ dindan) evit jediñ an niver a azezennoù en holl er c\'harr-nij pa vez kemmet an niver a renkennadoù (amañ a-us).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Sevel ur formulenn (amañ dindan) evit jediñ an niver a azezennoù en holl er c\'harr-nij pa vez kemmet an niver a renkennadoù (amañ a-us).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

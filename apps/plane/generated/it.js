@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Un aereo ha due posti nella cabina di pilotaggio (per il pilota e il co-pilota), e un numero di file in prima e seconda classe, con i posti a sedere dei passeggeri. Ogni fila della prima classe contiene quattro posti. Quelle invece della seconda classe, ne contengono cinque.';
       break;
   }
-  output += '</p><p>Costruisci una formula (sotto) che calcola il numero totale di posti a sedere su un aeroplano, così come cambiano le file di posti (sopra).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Costruisci una formula (sotto) che calcola il numero totale di posti a sedere su un aeroplano, così come cambiano le file di posti (sopra).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 

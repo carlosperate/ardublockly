@@ -57,7 +57,7 @@ planepage.start = function(opt_data, opt_ignored, opt_ijData) {
       output += 'Ένα αεροπλάνο έχει δύο καθίσματα στο θάλαμο διακυβέρνησης (για τον κυβερνήτη και τον συγκυβερνήτη), καθώς και ένα αριθμό σειρών καθισμάτων για την 1η και 2η θέση. Κάθε σειρά της 1ης θέσης έχει τέσσερα καθίσματα και κάθε σειρά της 2ης θέσης έχει πέντε καθίσματα.';
       break;
   }
-  output += '</p><p>Κατασκευάστε μια εξίσωση (κάτω) που θα υπολογίζει το συνολικό αριθμό καθισμάτων του αεροπλάνου καθώς αλλάζουν οι σειρές (πάνω).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
+  output += '</p><p>Κατασκευάστε μια εξίσωση (κάτω) που θα υπολογίζει το συνολικό αριθμό καθισμάτων του αεροπλάνου καθώς αλλάζουν οι σειρές (πάνω).</p><script type="text/javascript" src="../../blockly_compressed.js"><\/script><script type="text/javascript" src="../../blocks_compressed.js"><\/script><script type="text/javascript" src="../../javascript_compressed.js"><\/script><script type="text/javascript" src="../../' + soy.$$escapeHtml(opt_ijData.langSrc) + '"><\/script><script type="text/javascript" src="blocks.js"><\/script>' + planepage.toolbox(null, null, opt_ijData) + '<div id="blockly"></div>';
   return output;
 };
 
