@@ -614,106 +614,187 @@ Blockly.LANG_LISTS_INPUT_IS_EMPTY = 'is empty';
 ///block tooltip - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
 Blockly.LANG_LISTS_TOOLTIP = 'Returns true if the list is empty.';
 
+///block text - Title of blocks operated on [https://code.google.com/p/blockly/wiki/Lists lists].
+Blockly.LANG_LISTS_INLIST = 'in list';
+
 ///url - See [https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List].
 Blockly.LANG_LISTS_INDEX_OF_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List';
-Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = 'in list';
+Blockly.LANG_LISTS_INDEX_OF_INPUT_IN_LIST = Blockly.LANG_LISTS_INLIST;
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List Lists#Finding_Items_in_a_List].
 Blockly.LANG_LISTS_INDEX_OF_FIRST = 'find first occurrence of item';
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List Lists#Finding_Items_in_a_List].
 Blockly.LANG_LISTS_INDEX_OF_LAST = 'find last occurrence of item';
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List Lists#Finding_Items_in_a_List].
 Blockly.LANG_LISTS_INDEX_OF_TOOLTIP = 'Returns the index of the first/last occurrence of the item in the list.  Returns 0 if text is not found.';
 
-Blockly.LANG_LISTS_GET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.LANG_LISTS_GET_INDEX_HELPURL = Blockly.LANG_LISTS_GET_INDEX_HELPURL;
+/// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get an item from a list] without removing it from the list.
 Blockly.LANG_LISTS_GET_INDEX_GET = 'get';
+/// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get and remove an item from a list], as opposed to merely getting it without modifying the list.
 Blockly.LANG_LISTS_GET_INDEX_GET_REMOVE = 'get and remove';
+/// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Removing_an_item remove an item from a list].
 Blockly.LANG_LISTS_GET_INDEX_REMOVE = 'remove';
+/// dropdown - Indicates that an index relative to the front of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item retrieve an item from a list].
 Blockly.LANG_LISTS_GET_INDEX_FROM_START = '#';
+/// dropdown - Indicates that an index relative to the end of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item access an item in a list].
 Blockly.LANG_LISTS_GET_INDEX_FROM_END = '# from end';
+/// dropdown - Indicates that the '''first''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
 Blockly.LANG_LISTS_GET_INDEX_FIRST = 'first';
+/// dropdown - Indicates that the '''last''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
 Blockly.LANG_LISTS_GET_INDEX_LAST = 'last';
+/// dropdown - Indicates that a '''random''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
 Blockly.LANG_LISTS_GET_INDEX_RANDOM = 'random';
-Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = 'in list';
+/// block text - Title of blocks used for [https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List getting, removing], [https://code.google.com/p/blockly/wiki/Lists#Adding_Items_to_a_List setting, or inserting] elements of a list.
+Blockly.LANG_LISTS_GET_INDEX_INPUT_IN_LIST = Blockly.LANG_LISTS_INLIST;
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = 'Returns the item at the specified position in a list.  #1 is the first item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FROM_END = 'Returns the item at the specified position in a list.  #1 is the last item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_FIRST = 'Returns the first item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_LAST = 'Returns the last item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_RANDOM = 'Returns a random item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and  [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from start'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_START = 'Removes and returns the item at the specified position in a list.  #1 is the first item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from end'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_END = 'Removes and returns the item at the specified position in a list.  #1 is the last item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'first'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST = 'Removes and returns the first item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'last'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST = 'Removes and returns the last item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'random'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM = 'Removes and returns a random item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from start'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_START = 'Removes the item at the specified position in a list.  #1 is the first item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from end'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_END = 'Removes the item at the specified position in a list.  #1 is the last item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'first'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST = 'Removes the first item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'last'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST = 'Removes the last item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'random'.
 Blockly.LANG_LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM = 'Removes a random item in a list.';
-
-Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = 'in list';
+/// url
+Blockly.LANG_LISTS_SET_INDEX_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#in_list_..._set';
+Blockly.LANG_LISTS_SET_INDEX_INPUT_IN_LIST = Blockly.LANG_LISTS_INLIST;
+/// block text - As in: In list [words] '''set''' first as "a" (which replaces the first element in the list with the piece of text "a").  See also [https://code.google.com/p/blockly/wiki/Lists#in_list_..._set https://code.google.com/p/blockly/wiki/Lists#in_list_..._set].
 Blockly.LANG_LISTS_SET_INDEX_SET = 'set';
+/// block text - As in: In list [words] '''insert at''' first as "a" (which inserts the text "a" before the first element in the list).  See also [https://code.google.com/p/blockly/wiki/Lists#in_list_..._insert_at https://code.google.com/p/blockly/wiki/Lists#in_list_..._insert_at].
 Blockly.LANG_LISTS_SET_INDEX_INSERT = 'insert at';
+/// block text - The word preceding the item to be added to a list, as in: In list [words] insert at first '''as''' "a" (which inserts the piece of text "a" as the new first element of the list).
 Blockly.LANG_LISTS_SET_INDEX_INPUT_TO = 'as';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Sets the item at the specified position in a list.  #1 is the first item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = 'Sets the item at the specified position in a list.  #1 is the last item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_FIRST = 'Sets the first item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_LAST = 'Sets the last item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_SET_RANDOM = 'Sets a random item in a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Inserts the item at the specified position in a list.  #1 is the first item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Inserts the item at the specified position in a list.  #1 is the last item.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST = 'Inserts the item at the start of a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_LAST = 'Append the item to the end of a list.';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.LANG_LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM = 'Inserts the item randomly in a list.';
 
-Blockly.LANG_LISTS_GET_SUBLIST_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-Blockly.LANG_LISTS_GET_SUBLIST_INPUT_IN_LIST = 'in list';
+/// url
+Blockly.LANG_LISTS_GET_SUBLIST_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist';
+Blockly.LANG_LISTS_GET_SUBLIST_INPUT_IN_LIST = Blockly.LANG_LISTS_INLIST;
+/// block text - Indicates that a [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist sublist (portion of an entire list) should be retrieved]  This is followed by information where the sublist should start, as in: '''Get sub-list from''' first to #5.
 Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT1 = 'get sub-list from';
+/// block text - Appears between the start and end of a [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist sub-list (portion of an entire list) that should be retrieved], as in: Get sub-list from first '''to''' #5.
 Blockly.LANG_LISTS_GET_SUBLIST_INPUT_AT2 = 'to';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist].
 Blockly.LANG_LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portion of a list.';
 
+/// default name - A simple, general default name for a variable, preferably short.
+Blockly.LANG_VARIABLES_DEFAULT_NAME = 'item';
+
 // Variables Blocks.
-Blockly.LANG_VARIABLES_GET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
+/// url - Information about ''variables'' in computer programming.  Consider using your language's translation of [http://en.wikipedia.org/wiki/Variable_(computer_science) http://en.wikipedia.org/wiki/Variable_(computer_science)], if it exists.
+Blockly.LANG_VARIABLES_GET_HELPURL = 'http://code.google.com/p/blockly/wiki/Variables#Get';
+/// block text - This precedes the name of a variable when getting its values.  In most (all?) languages, it should be the empty string.  If unsure, ask yourself if any word should go before "x" in the expression "x + 1".
 Blockly.LANG_VARIABLES_GET_TITLE = '';
-Blockly.LANG_VARIABLES_GET_ITEM = 'item';
+Blockly.LANG_VARIABLES_GET_ITEM = Blockly.LANG_VARIABLES_DEFAULT_NAME;
+/// block text - This follows the name of a variable.  In most (all?) languages, it should be the empty string.  If unsure, ask yourself if any word should go after "x" in the expression "x + 1".
 Blockly.LANG_VARIABLES_GET_TAIL = '';
+/// tooltip - This gets the value of the named variable without modifying it.
 Blockly.LANG_VARIABLES_GET_TOOLTIP = 'Returns the value of this variable.';
+/// context menu - Selecting this causes the creation of a block to set (change) the value of this variable.\n\nParameters:\n* %1 - the name of the variable.
 Blockly.LANG_VARIABLES_GET_CREATE_SET = 'Create "set %1"';
 
-Blockly.LANG_VARIABLES_SET_HELPURL = 'http://en.wikipedia.org/wiki/Variable_(computer_science)';
+/// url - Information about ''variables'' in computer programming.  Consider using your language's translation of [http://en.wikipedia.org/wiki/Variable_(computer_science) http://en.wikipedia.org/wiki/Variable_(computer_science)], if it exists.
+Blockly.LANG_VARIABLES_SET_HELPURL = 'http://code.google.com/p/blockly/wiki/Variables#Set';
+/// block text - The imperative or infinitive form of the verb "set", as in: '''set''' [the value of] x to 7.
 Blockly.LANG_VARIABLES_SET_TITLE = 'set';
-Blockly.LANG_VARIABLES_SET_ITEM = 'item';
+Blockly.LANG_VARIABLES_SET_ITEM = Blockly.LANG_VARIABLES_DEFAULT_NAME;
+/// block text - The word that goes after the name of the variable and its new value in: set [the value of] x '''to''' 7.
 Blockly.LANG_VARIABLES_SET_TAIL = 'to';
+/// tooltip - This initializes or changes the value of the named variable.
 Blockly.LANG_VARIABLES_SET_TOOLTIP = 'Sets this variable to be equal to the input.';
+/// context menu - Selecting this causes the creation of a block to get (change) the value of this variable.\n\nParameters:\n* %1 - the name of the variable.
 Blockly.LANG_VARIABLES_SET_CREATE_GET = 'Create "get %1"';
 
 // Procedures Blocks.
+/// url - Information about defining [http://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not have return values.
 Blockly.LANG_PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+/// block text - This precedes the name of the proccedure when defining it.  See [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E example function definition].
 Blockly.LANG_PROCEDURES_DEFNORETURN_TITLE = 'to';
+/// default name - This acts as a placeholder for the name of a function on a function definition block, as shown on [http://blockly-share.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E this block].  The user will replace it with the function's name.
 Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE = 'do something';
+/// block text - This precedes the list of parameters to a function.  See [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_defreturn%22%20inline%3D%22false%22%3E%3Cmutation%3E%3Carg%20name%3D%22x%22%3E%3C%2Farg%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Edouble%20a%20number%3C%2Ftitle%3E%3Cvalue%20name%3D%22RETURN%22%3E%3Cblock%20type%3D%22math_arithmetic%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3EADD%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E sample function].
 Blockly.LANG_PROCEDURES_BEFORE_PARAMS = 'with:';
+/// block text - This appears next to the function's "body", the blocks that should be run when the function is called, as shown in [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this example function definition].
 Blockly.LANG_PROCEDURES_DEFNORETURN_DO = '';
+/// tooltip
 Blockly.LANG_PROCEDURES_DEFNORETURN_TOOLTIP = 'Creates a function with no output.';
 
+/// url - Information about defining [http://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that have return values.
 Blockly.LANG_PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_DEFRETURN_TITLE = Blockly.LANG_PROCEDURES_DEFNORETURN_TITLE;
 Blockly.LANG_PROCEDURES_DEFRETURN_PROCEDURE = Blockly.LANG_PROCEDURES_DEFNORETURN_PROCEDURE;
 Blockly.LANG_PROCEDURES_DEFRETURN_DO = Blockly.LANG_PROCEDURES_DEFNORETURN_DO;
+/// block text - This imperative or infinite verb precedes the value that is used as the return value (output) of this function.  See [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_defreturn%22%20inline%3D%22false%22%3E%3Cmutation%3E%3Carg%20name%3D%22x%22%3E%3C%2Farg%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Edouble%20a%20number%3C%2Ftitle%3E%3Cvalue%20name%3D%22RETURN%22%3E%3Cblock%20type%3D%22math_arithmetic%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3EADD%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E sample function that returns a numeric value twice as large as its input].
 Blockly.LANG_PROCEDURES_DEFRETURN_RETURN = 'return';
+/// tooltip
 Blockly.LANG_PROCEDURES_DEFRETURN_TOOLTIP = 'Creates a function with an output.';
 
+/// alert - The user has created a function with two parameters that have the same name.  Every parameter must have a different name.
 Blockly.LANG_PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning: This function has duplicate parameters.';
 
+/// url - Information about calling [http://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not return values.
 Blockly.LANG_PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
+/// block text - In most (if not all) languages, this will be the empty string.  It precedes the name of the function that should be run.  See, for example, the "eat food" block in [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this function definition].
 Blockly.LANG_PROCEDURES_CALLNORETURN_CALL = '';
+/// tooltip - This block causes the body (blocks inside) of the named function definition to be run.
 Blockly.LANG_PROCEDURES_CALLNORETURN_TOOLTIP = 'Run the user-defined function "%1".';
 
+/// url - Information about calling [http://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that return values.
 Blockly.LANG_PROCEDURES_CALLRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.LANG_PROCEDURES_CALLRETURN_CALL = Blockly.LANG_PROCEDURES_CALLNORETURN_CALL;
+/// tooltip - This block causes the body (blocks inside) of the named function definition to be run.\n\nParameters:\n* %1 - the name of the function.
 Blockly.LANG_PROCEDURES_CALLRETURN_TOOLTIP = 'Run the user-defined function "%1" and use its output.';
 
+/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-share.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It refers to the set of parameters (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
 Blockly.LANG_PROCEDURES_MUTATORCONTAINER_TITLE = 'inputs';
+/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-share.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It appears on the block for adding an individual parameter (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
 Blockly.LANG_PROCEDURES_MUTATORARG_TITLE = 'input name:';
 
-Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight procedure definition';
+/// context menu - This appears on the context menu for function calls.  Selecting it causes the corresponding function definition to be highlighted.
+Blockly.LANG_PROCEDURES_HIGHLIGHT_DEF = 'Highlight function definition';
+/// context menu - This appears on the context menu for function definitions.  Selecting it creates a block to call the function.  \n\nParameters:\n* %1 - the name of the function.
 Blockly.LANG_PROCEDURES_CREATE_DO = 'Create "%1"';
 
-Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a value.';
+/// tooltip - If the first value is true, [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] causes the second value to be returned immediately from the function.
+Blockly.LANG_PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a second value.';
+/// warning - This appears if the user tries to use [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] outside of a function definition.
 Blockly.LANG_PROCEDURES_IFRETURN_WARNING = 'Warning: This block may be used only within a function definition.';
