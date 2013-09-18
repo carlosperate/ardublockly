@@ -177,7 +177,11 @@ Code.init = function() {
   window.setTimeout(BlocklyApps.importPrettify, 1);
 };
 
-window.addEventListener('load', Code.init);
+if (window.location.pathname.match(/readonly.html$/)) {
+  window.addEventListener('load', BlocklyApps.initReadonly);
+} else {
+  window.addEventListener('load', Code.init);
+}
 
 /**
  * Execute the user's code.
