@@ -131,14 +131,13 @@ Maze.map = [
 // Level 0.
  undefined,
 // Level 1.
- [[0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 2, 1, 3, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0]],
+ [[0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 2, 1, 3, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0],
+  [0, 0, 0, 0, 0, 0, 0]],
 // Level 2.
  [[0, 0, 0, 0, 0, 0, 0, 0],
   [0, 0, 0, 0, 0, 0, 0, 0],
@@ -282,11 +281,6 @@ Maze.startDirection = Maze.DirectionType.EAST;
  */
 Maze.pidList = [];
 
-/**
- * Pseudo-random identifier used for tracking user progress within a level.
- */
-Maze.LEVEL_ID = Math.random();
-
 // Map each possible shape to a sprite.
 // Input: Binary string representing Centre/North/West/South/East squares.
 // Output: [x, y] coordinates of each tile's sprite in tiles.png.
@@ -318,6 +312,8 @@ Maze.tile_SHAPES = {
  */
 Maze.drawMap = function() {
   var svg = document.getElementById('svgMaze');
+  var scale = Math.max(Maze.ROWS, Maze.COLS) * Maze.SQUARE_SIZE;
+  svg.setAttribute('viewBox', '0 0 ' + scale + ' ' + scale);
 
   // Draw the outer square.
   var square = document.createElementNS(Blockly.SVG_NS, 'rect');
@@ -1028,10 +1024,10 @@ Maze.congratulations = function() {
     BlocklyApps.showDialog(content, null, false, true, style,
         function() {
           document.body.removeEventListener('keydown',
-              BlocklyApps.congratulationsKeyDown_, true);
+              Maze.congratulationsKeyDown_, true);
           });
     document.body.addEventListener('keydown',
-        BlocklyApps.congratulationsKeyDown_, true);
+        Maze.congratulationsKeyDown_, true);
 
   } else {
     var text = BlocklyApps.getMsg('Maze_finalLevel');
@@ -1057,7 +1053,7 @@ Maze.congratulations = function() {
  * @param {!Event} e Keyboard event.
  * @private
  */
-BlocklyApps.congratulationsKeyDown_ = function(e) {
+Maze.congratulationsKeyDown_ = function(e) {
   if (e.keyCode == 13 ||
       e.keyCode == 27 ||
       e.keyCode == 32) {
