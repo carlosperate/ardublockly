@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.text');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.text = {
+Blockly.Blocks['text'] = {
   // Text value.
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_TEXT_HELPURL);
@@ -44,7 +44,7 @@ Blockly.Blocks.text = {
   }
 };
 
-Blockly.Blocks.text_join = {
+Blockly.Blocks['text_join'] = {
   // Create a string made up of any number of elements of any type.
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_JOIN_HELPURL);
@@ -141,7 +141,7 @@ Blockly.Blocks.text_join = {
   }
 };
 
-Blockly.Blocks.text_create_join_container = {
+Blockly.Blocks['text_create_join_container'] = {
   // Container.
   init: function() {
     this.setColour(160);
@@ -153,7 +153,7 @@ Blockly.Blocks.text_create_join_container = {
   }
 };
 
-Blockly.Blocks.text_create_join_item = {
+Blockly.Blocks['text_create_join_item'] = {
   // Add items.
   init: function() {
     this.setColour(160);
@@ -166,7 +166,7 @@ Blockly.Blocks.text_create_join_item = {
   }
 };
 
-Blockly.Blocks.text_append = {
+Blockly.Blocks['text_append'] = {
   // Append to a variable in place.
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_APPEND_HELPURL);
@@ -195,7 +195,7 @@ Blockly.Blocks.text_append = {
   }
 };
 
-Blockly.Blocks.text_length = {
+Blockly.Blocks['text_length'] = {
   // String length.
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_LENGTH_HELPURL);
@@ -208,7 +208,7 @@ Blockly.Blocks.text_length = {
   }
 };
 
-Blockly.Blocks.text_isEmpty = {
+Blockly.Blocks['text_isEmpty'] = {
   // Is the string null?
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_ISEMPTY_HELPURL);
@@ -223,7 +223,7 @@ Blockly.Blocks.text_isEmpty = {
   }
 };
 
-Blockly.Blocks.text_indexOf = {
+Blockly.Blocks['text_indexOf'] = {
   // Find a substring in the text.
   init: function() {
     var OPERATORS =
@@ -243,7 +243,7 @@ Blockly.Blocks.text_indexOf = {
   }
 };
 
-Blockly.Blocks.text_charAt = {
+Blockly.Blocks['text_charAt'] = {
   // Get a character from the string.
   init: function() {
     this.WHERE_OPTIONS =
@@ -303,7 +303,7 @@ Blockly.Blocks.text_charAt = {
   }
 };
 
-Blockly.Blocks.text_getSubstring = {
+Blockly.Blocks['text_getSubstring'] = {
   // Get substring.
   init: function() {
     this.WHERE_OPTIONS_1 =
@@ -375,7 +375,7 @@ Blockly.Blocks.text_getSubstring = {
   }
 };
 
-Blockly.Blocks.text_changeCase = {
+Blockly.Blocks['text_changeCase'] = {
   // Change capitalization.
   init: function() {
     var OPERATORS =
@@ -392,7 +392,7 @@ Blockly.Blocks.text_changeCase = {
   }
 };
 
-Blockly.Blocks.text_trim = {
+Blockly.Blocks['text_trim'] = {
   // Trim spaces.
   init: function() {
     var OPERATORS =
@@ -409,7 +409,7 @@ Blockly.Blocks.text_trim = {
   }
 };
 
-Blockly.Blocks.text_print = {
+Blockly.Blocks['text_print'] = {
   // Print statement.
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_PRINT_HELPURL);
@@ -422,7 +422,7 @@ Blockly.Blocks.text_print = {
   }
 };
 
-Blockly.Blocks.text_prompt = {
+Blockly.Blocks['text_prompt'] = {
   // Prompt function.
   init: function() {
     var TYPES =

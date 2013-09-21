@@ -23,7 +23,7 @@
  */
 'use strict';
 
-Blockly.Blocks.unittest_main = {
+Blockly.Blocks['unittest_main'] = {
   // Container for unit tests.
   init: function() {
     this.setColour(65);
@@ -38,7 +38,7 @@ Blockly.Blocks.unittest_main = {
   }
 };
 
-Blockly.Blocks.unittest_assertequals = {
+Blockly.Blocks['unittest_assertequals'] = {
   // Asserts that a value equals another value.
   init: function() {
     this.setColour(65);
@@ -57,7 +57,7 @@ Blockly.Blocks.unittest_assertequals = {
   }
 };
 
-Blockly.Blocks.unittest_assertvalue = {
+Blockly.Blocks['unittest_assertvalue'] = {
   // Asserts that a value is true, false, or null.
   init: function() {
     this.setColour(65);
@@ -76,7 +76,7 @@ Blockly.Blocks.unittest_assertvalue = {
   }
 };
 
-Blockly.Blocks.unittest_fail = {
+Blockly.Blocks['unittest_fail'] = {
   // Always assert an error.
   init: function() {
     this.setColour(65);

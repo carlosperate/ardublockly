@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.variables');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.variables_get = {
+Blockly.Blocks['variables_get'] = {
   // Variable getter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
@@ -64,7 +64,7 @@ Blockly.Blocks.variables_get = {
   }
 };
 
-Blockly.Blocks.variables_set = {
+Blockly.Blocks['variables_set'] = {
   // Variable setter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_SET_HELPURL);
@@ -88,5 +88,5 @@ Blockly.Blocks.variables_set = {
   },
   contextMenuMsg_: Blockly.Msg.VARIABLES_SET_CREATE_GET,
   contextMenuType_: 'variables_get',
-  customContextMenu: Blockly.Blocks.variables_get.customContextMenu
+  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
 };

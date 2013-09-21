@@ -25,10 +25,10 @@
 // Supported languages.
 BlocklyApps.LANGUAGES = {
   // Format: ['Language name', 'direction', 'XX_compressed.js']
-  en: ['English', 'ltr', 'msg/js/en.js'],
-  de: ['Deutsch', 'ltr', 'msg/js/de.js'],
-  hu: ['Magyar', 'ltr', 'msg/js/en.js'],
-  vi: ['Tiếng Việt', 'ltr', 'msg/js/vi.js'],
+  'en': ['English', 'ltr', 'msg/js/en.js'],
+  'de': ['Deutsch', 'ltr', 'msg/js/de.js'],
+  'hu': ['Magyar', 'ltr', 'msg/js/en.js'],
+  'vi': ['Tiếng Việt', 'ltr', 'msg/js/vi.js'],
   'zh-tw': ['中國的', 'ltr', 'msg/js/zh_tw.js']
 };
 BlocklyApps.LANG = BlocklyApps.getLang();

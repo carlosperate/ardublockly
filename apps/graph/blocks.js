@@ -23,7 +23,7 @@
  */
 'use strict';
 
-Blockly.Blocks.graph_get_x = {
+Blockly.Blocks['graph_get_x'] = {
   // x variable getter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
@@ -37,12 +37,12 @@ Blockly.Blocks.graph_get_x = {
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.graph_get_x = function() {
+Blockly.JavaScript['graph_get_x'] = function() {
   // x variable getter.
   return ['x', Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.Blocks.graph_set_y = {
+Blockly.Blocks['graph_set_y'] = {
   // y variable setter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_SET_HELPURL);
@@ -53,7 +53,7 @@ Blockly.Blocks.graph_set_y = {
   }
 };
 
-Blockly.JavaScript.graph_set_y = function() {
+Blockly.JavaScript['graph_set_y'] = function() {
   // y variable setter.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '';

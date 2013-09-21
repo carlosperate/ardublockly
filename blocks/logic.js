@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.logic');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.controls_if = {
+Blockly.Blocks['controls_if'] = {
   // If/elseif/else condition.
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_IF_HELPURL);
@@ -180,7 +180,7 @@ Blockly.Blocks.controls_if = {
   }
 };
 
-Blockly.Blocks.controls_if_if = {
+Blockly.Blocks['controls_if_if'] = {
   // If condition.
   init: function() {
     this.setColour(210);
@@ -192,7 +192,7 @@ Blockly.Blocks.controls_if_if = {
   }
 };
 
-Blockly.Blocks.controls_if_elseif = {
+Blockly.Blocks['controls_if_elseif'] = {
   // Else-If condition.
   init: function() {
     this.setColour(210);
@@ -205,7 +205,7 @@ Blockly.Blocks.controls_if_elseif = {
   }
 };
 
-Blockly.Blocks.controls_if_else = {
+Blockly.Blocks['controls_if_else'] = {
   // Else condition.
   init: function() {
     this.setColour(210);
@@ -217,7 +217,7 @@ Blockly.Blocks.controls_if_else = {
   }
 };
 
-Blockly.Blocks.logic_compare = {
+Blockly.Blocks['logic_compare'] = {
   // Comparison operator.
   init: function() {
     if (Blockly.RTL) {
@@ -263,7 +263,7 @@ Blockly.Blocks.logic_compare = {
   }
 };
 
-Blockly.Blocks.logic_operation = {
+Blockly.Blocks['logic_operation'] = {
   // Logical operations: 'and', 'or'.
   init: function() {
     var OPERATORS =
@@ -292,7 +292,7 @@ Blockly.Blocks.logic_operation = {
 };
 
 
-Blockly.Blocks.logic_negate = {
+Blockly.Blocks['logic_negate'] = {
   // Negation.
   init: function() {
     this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
@@ -305,7 +305,7 @@ Blockly.Blocks.logic_negate = {
   }
 };
 
-Blockly.Blocks.logic_boolean = {
+Blockly.Blocks['logic_boolean'] = {
   // Boolean data type: true and false.
   init: function() {
     var BOOLEANS =
@@ -320,7 +320,7 @@ Blockly.Blocks.logic_boolean = {
   }
 };
 
-Blockly.Blocks.logic_null = {
+Blockly.Blocks['logic_null'] = {
   // Null data type.
   init: function() {
     this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL);
@@ -332,7 +332,7 @@ Blockly.Blocks.logic_null = {
   }
 };
 
-Blockly.Blocks.logic_ternary = {
+Blockly.Blocks['logic_ternary'] = {
   // Ternary operator.
   init: function() {
     this.setHelpUrl(Blockly.Msg.LOGIC_TERNARY_HELPURL);

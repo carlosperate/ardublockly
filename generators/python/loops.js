@@ -28,7 +28,7 @@ goog.provide('Blockly.Python.loops');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.controls_repeat = function() {
+Blockly.Python['controls_repeat'] = function() {
   // Repeat n times (internal number).
   var repeats = parseInt(this.getTitleValue('TIMES'), 10);
   var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
@@ -42,7 +42,7 @@ Blockly.Python.controls_repeat = function() {
   return code;
 };
 
-Blockly.Python.controls_repeat_ext = function() {
+Blockly.Python['controls_repeat_ext'] = function() {
   // Repeat n times (external number).
   var repeats = Blockly.Python.valueToCode(this, 'TIMES',
       Blockly.Python.ORDER_NONE) || '0';
@@ -62,7 +62,7 @@ Blockly.Python.controls_repeat_ext = function() {
   return code;
 };
 
-Blockly.Python.controls_whileUntil = function() {
+Blockly.Python['controls_whileUntil'] = function() {
   // Do while/until loop.
   var until = this.getTitleValue('MODE') == 'UNTIL';
   var argument0 = Blockly.Python.valueToCode(this, 'BOOL',
@@ -82,7 +82,7 @@ Blockly.Python.controls_whileUntil = function() {
   return 'while ' + argument0 + ':\n' + branch;
 };
 
-Blockly.Python.controls_for = function() {
+Blockly.Python['controls_for'] = function() {
   // For loop.
   var variable0 = Blockly.Python.variableDB_.getName(
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -200,7 +200,7 @@ Blockly.Python.controls_for = function() {
   return code;
 };
 
-Blockly.Python.controls_forEach = function() {
+Blockly.Python['controls_forEach'] = function() {
   // For each loop.
   var variable0 = Blockly.Python.variableDB_.getName(
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -215,7 +215,7 @@ Blockly.Python.controls_forEach = function() {
   return code;
 };
 
-Blockly.Python.controls_flow_statements = function() {
+Blockly.Python['controls_flow_statements'] = function() {
   // Flow statements: continue, break.
   switch (this.getTitleValue('FLOW')) {
     case 'BREAK':

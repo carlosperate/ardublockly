@@ -28,7 +28,7 @@ goog.provide('Blockly.Python.logic');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.controls_if = function() {
+Blockly.Python['controls_if'] = function() {
   // If/elseif/else condition.
   var n = 0;
   var argument = Blockly.Python.valueToCode(this, 'IF' + n,
@@ -48,7 +48,7 @@ Blockly.Python.controls_if = function() {
   return code;
 };
 
-Blockly.Python.logic_compare = function() {
+Blockly.Python['logic_compare'] = function() {
   // Comparison operator.
   var mode = this.getTitleValue('OP');
   var operator = Blockly.Python.logic_compare.OPERATORS[mode];
@@ -68,7 +68,7 @@ Blockly.Python.logic_compare.OPERATORS = {
   GTE: '>='
 };
 
-Blockly.Python.logic_operation = function() {
+Blockly.Python['logic_operation'] = function() {
   // Operations 'and', 'or'.
   var operator = (this.getTitleValue('OP') == 'AND') ? 'and' : 'or';
   var order = (operator == 'and') ? Blockly.Python.ORDER_LOGICAL_AND :
@@ -79,7 +79,7 @@ Blockly.Python.logic_operation = function() {
   return [code, order];
 };
 
-Blockly.Python.logic_negate = function() {
+Blockly.Python['logic_negate'] = function() {
   // Negation.
   var argument0 = Blockly.Python.valueToCode(this, 'BOOL',
       Blockly.Python.ORDER_LOGICAL_NOT) || 'False';
@@ -87,18 +87,18 @@ Blockly.Python.logic_negate = function() {
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
 };
 
-Blockly.Python.logic_boolean = function() {
+Blockly.Python['logic_boolean'] = function() {
   // Boolean values true and false.
   var code = (this.getTitleValue('BOOL') == 'TRUE') ? 'True' : 'False';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.logic_null = function() {
+Blockly.Python['logic_null'] = function() {
   // Null data type.
   return ['None', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.logic_ternary = function() {
+Blockly.Python['logic_ternary'] = function() {
   // Ternary operator.
   var value_if = Blockly.Python.valueToCode(this, 'IF',
       Blockly.Python.ORDER_CONDITIONAL) || 'False';

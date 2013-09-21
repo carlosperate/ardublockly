@@ -28,7 +28,7 @@ goog.provide('Blockly.JavaScript.logic');
 goog.require('Blockly.JavaScript');
 
 
-Blockly.JavaScript.controls_if = function() {
+Blockly.JavaScript['controls_if'] = function() {
   // If/elseif/else condition.
   var n = 0;
   var argument = Blockly.JavaScript.valueToCode(this, 'IF' + n,
@@ -48,7 +48,7 @@ Blockly.JavaScript.controls_if = function() {
   return code + '\n';
 };
 
-Blockly.JavaScript.logic_compare = function() {
+Blockly.JavaScript['logic_compare'] = function() {
   // Comparison operator.
   var mode = this.getTitleValue('OP');
   var operator = Blockly.JavaScript.logic_compare.OPERATORS[mode];
@@ -69,7 +69,7 @@ Blockly.JavaScript.logic_compare.OPERATORS = {
   GTE: '>='
 };
 
-Blockly.JavaScript.logic_operation = function() {
+Blockly.JavaScript['logic_operation'] = function() {
   // Operations 'and', 'or'.
   var operator = (this.getTitleValue('OP') == 'AND') ? '&&' : '||';
   var order = (operator == '&&') ? Blockly.JavaScript.ORDER_LOGICAL_AND :
@@ -80,7 +80,7 @@ Blockly.JavaScript.logic_operation = function() {
   return [code, order];
 };
 
-Blockly.JavaScript.logic_negate = function() {
+Blockly.JavaScript['logic_negate'] = function() {
   // Negation.
   var order = Blockly.JavaScript.ORDER_LOGICAL_NOT;
   var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL', order) ||
@@ -89,18 +89,18 @@ Blockly.JavaScript.logic_negate = function() {
   return [code, order];
 };
 
-Blockly.JavaScript.logic_boolean = function() {
+Blockly.JavaScript['logic_boolean'] = function() {
   // Boolean values true and false.
   var code = (this.getTitleValue('BOOL') == 'TRUE') ? 'true' : 'false';
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.logic_null = function() {
+Blockly.JavaScript['logic_null'] = function() {
   // Null data type.
   return ['null', Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.logic_ternary = function() {
+Blockly.JavaScript['logic_ternary'] = function() {
   // Ternary operator.
   var value_if = Blockly.JavaScript.valueToCode(this, 'IF',
       Blockly.JavaScript.ORDER_CONDITIONAL) || 'false';

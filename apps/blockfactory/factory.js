@@ -63,9 +63,9 @@ function onchange() {
 function updateLanguage() {
   // Generate name.
   var code = [];
-  code.push('Blockly.Blocks.' + blockType + ' = {');
-  code.push('  init: function() {');
-  code.push('    this.setHelpUrl(\'http://www.example.com/\');');
+  code.push("Blockly.Blocks['" + blockType + "'] = {");
+  code.push("  init: function() {");
+  code.push("    this.setHelpUrl('http://www.example.com/');");
   // Generate colour.
   var colourBlock = rootBlock.getInputTargetBlock('COLOUR');
   if (colourBlock) {
@@ -123,9 +123,9 @@ function updateLanguage() {
       code.push(connectionLine_('setNextStatement', 'BOTTOMTYPE'));
       break;
   }
-  code.push('    this.setTooltip(\'\');');
-  code.push('  }');
-  code.push('};');
+  code.push("    this.setTooltip('');");
+  code.push("  }");
+  code.push("};");
 
   injectCode(code, 'languagePre');
 }
@@ -295,7 +295,7 @@ function updateGenerator() {
   }
   var language = document.getElementById('language').value;
   var code = [];
-  code.push('Blockly.' + language + '.' + blockType + ' = function() {');
+  code.push("Blockly." + language + "['" + blockType + "'] = function() {");
   // Loop through every block, and generate getters for any fields or inputs.
   var blocks = rootBlock.getDescendants();
   for (var x = 0, block; block = blocks[x]; x++) {
@@ -303,58 +303,58 @@ function updateGenerator() {
       case 'title_input':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('text', name) +
-                  ' = this.getTitleValue(\'' + name + '\');');
+                  " = this.getTitleValue('" + name + "');");
         break;
       case 'title_angle':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('angle', name) +
-                  ' = this.getTitleValue(\'' + name + '\');');
+                  " = this.getTitleValue('" + name + "');");
         break;
       case 'title_dropdown':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('dropdown', name) +
-                  ' = this.getTitleValue(\'' + name + '\');');
+                  " = this.getTitleValue('" + name + "');");
         break;
       case 'title_checkbox':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('checkbox', name) +
-                  ' = this.getTitleValue(\'' + name + '\') == \'TRUE\';');
+                  " = this.getTitleValue('" + name + "') == 'TRUE';");
         break;
       case 'title_colour':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('colour', name) +
-                  ' = this.getTitleValue(\'' + name + '\');');
+                  " = this.getTitleValue('" + name + "');");
         break;
       case 'title_variable':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('variable', name) +
-                  ' = Blockly.' + language +
-                  '.variableDB_.getName(this.getTitleValue(\'' + name +
-                  '\'), Blockly.Variables.NAME_TYPE);');
+                  " = Blockly." + language +
+                  ".variableDB_.getName(this.getTitleValue('" + name +
+                  "'), Blockly.Variables.NAME_TYPE);");
         break;
       case 'input_value':
         var name = block.getTitleValue('INPUTNAME');
         code.push(makeVar('value', name) +
-                  ' = Blockly.' + language + '.valueToCode(this, \'' + name +
-                  '\', Blockly.' + language + '.ORDER_ATOMIC);');
+                  " = Blockly." + language + ".valueToCode(this, '" + name +
+                  "', Blockly." + language + ".ORDER_ATOMIC);");
         break;
       case 'input_statement':
         var name = block.getTitleValue('INPUTNAME');
         code.push(makeVar('statements', name) +
-                  ' = Blockly.' + language + '.statementToCode(this, \'' +
-                  name + '\');');
+                  " = Blockly.' + language + '.statementToCode(this, '" +
+                  name + "');");
         break;
     }
   }
-  code.push('  // TODO: Assemble ' + language + ' into code variable.');
-  code.push('  var code = \'...\';');
+  code.push("  // TODO: Assemble ' + language + ' into code variable.");
+  code.push("  var code = \'...\';");
   if (rootBlock.getTitleValue('CONNECTIONS') == 'LEFT') {
-    code.push('  // TODO: Change ORDER_NONE to the correct strength.');
-    code.push('  return [code, Blockly.' + language + '.ORDER_NONE];');
+    code.push("  // TODO: Change ORDER_NONE to the correct strength.");
+    code.push("  return [code, Blockly.' + language + '.ORDER_NONE];");
   } else {
-    code.push('  return code;');
+    code.push("  return code;");
   }
-  code.push('};');
+  code.push("};");
 
   injectCode(code, 'generatorPre');
 }

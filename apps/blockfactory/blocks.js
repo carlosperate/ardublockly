@@ -23,7 +23,7 @@
  */
 'use strict';
 
-Blockly.Blocks.factory_base = {
+Blockly.Blocks['factory_base'] = {
   // Base of new block.
   init: function() {
     this.setColour(120);
@@ -101,7 +101,7 @@ Blockly.Blocks.factory_base = {
 var ALIGNMENT_OPTIONS =
     [['left', 'LEFT'], ['right', 'RIGHT'], ['centre', 'CENTRE']];
 
-Blockly.Blocks.input_value = {
+Blockly.Blocks['input_value'] = {
   // Value input.
   init: function() {
     this.setColour(210);
@@ -129,7 +129,7 @@ Blockly.Blocks.input_value = {
   }
 };
 
-Blockly.Blocks.input_statement = {
+Blockly.Blocks['input_statement'] = {
   // Statement input.
   init: function() {
     this.setColour(210);
@@ -157,7 +157,7 @@ Blockly.Blocks.input_statement = {
   }
 };
 
-Blockly.Blocks.input_dummy = {
+Blockly.Blocks['input_dummy'] = {
   // Dummy input.
   init: function() {
     this.setColour(210);
@@ -176,7 +176,7 @@ Blockly.Blocks.input_dummy = {
   }
 };
 
-Blockly.Blocks.title_static = {
+Blockly.Blocks['title_static'] = {
   // Text value.
   init: function() {
     this.setColour(160);
@@ -189,7 +189,7 @@ Blockly.Blocks.title_static = {
   }
 };
 
-Blockly.Blocks.title_input = {
+Blockly.Blocks['title_input'] = {
   // Text input.
   init: function() {
     this.setColour(160);
@@ -211,7 +211,7 @@ Blockly.Blocks.title_input = {
   }
 };
 
-Blockly.Blocks.title_angle = {
+Blockly.Blocks['title_angle'] = {
   // Angle input.
   init: function() {
     this.setColour(160);
@@ -233,7 +233,7 @@ Blockly.Blocks.title_angle = {
   }
 };
 
-Blockly.Blocks.title_dropdown = {
+Blockly.Blocks['title_dropdown'] = {
   // Dropdown menu.
   init: function() {
     this.setColour(160);
@@ -333,7 +333,7 @@ Blockly.Blocks.title_dropdown = {
   }
 };
 
-Blockly.Blocks.title_dropdown_container = {
+Blockly.Blocks['title_dropdown_container'] = {
   // Container.
   init: function() {
     this.setColour(160);
@@ -346,7 +346,7 @@ Blockly.Blocks.title_dropdown_container = {
   }
 };
 
-Blockly.Blocks.title_dropdown_option = {
+Blockly.Blocks['title_dropdown_option'] = {
   // Add option.
   init: function() {
     this.setColour(160);
@@ -359,7 +359,7 @@ Blockly.Blocks.title_dropdown_option = {
   }
 };
 
-Blockly.Blocks.title_checkbox = {
+Blockly.Blocks['title_checkbox'] = {
   // Checkbox.
   init: function() {
     this.setColour(160);
@@ -381,7 +381,7 @@ Blockly.Blocks.title_checkbox = {
   }
 };
 
-Blockly.Blocks.title_colour = {
+Blockly.Blocks['title_colour'] = {
   // Colour input.
   init: function() {
     this.setColour(160);
@@ -403,7 +403,7 @@ Blockly.Blocks.title_colour = {
   }
 };
 
-Blockly.Blocks.title_variable = {
+Blockly.Blocks['title_variable'] = {
   // Dropdown for variables.
   init: function() {
     this.setColour(160);
@@ -425,7 +425,7 @@ Blockly.Blocks.title_variable = {
   }
 };
 
-Blockly.Blocks.title_image = {
+Blockly.Blocks['title_image'] = {
   // Image.
   init: function() {
     this.setColour(160);
@@ -445,7 +445,7 @@ Blockly.Blocks.title_image = {
   }
 };
 
-Blockly.Blocks.type_group = {
+Blockly.Blocks['type_group'] = {
   // Group of types.
   init: function() {
     this.setColour(230);
@@ -527,7 +527,7 @@ Blockly.Blocks.type_group = {
   }
 };
 
-Blockly.Blocks.type_group_container = {
+Blockly.Blocks['type_group_container'] = {
   // Container.
   init: function() {
     this.setColour(230);
@@ -539,7 +539,7 @@ Blockly.Blocks.type_group_container = {
   }
 };
 
-Blockly.Blocks.type_group_item = {
+Blockly.Blocks['type_group_item'] = {
   // Add type.
   init: function() {
     this.setColour(230);
@@ -552,7 +552,7 @@ Blockly.Blocks.type_group_item = {
   }
 };
 
-Blockly.Blocks.type_null = {
+Blockly.Blocks['type_null'] = {
   // Null type.
   valueType: 'null',
   init: function() {
@@ -564,7 +564,7 @@ Blockly.Blocks.type_null = {
   }
 };
 
-Blockly.Blocks.type_boolean = {
+Blockly.Blocks['type_boolean'] = {
   // Boolean type.
   valueType: 'Boolean',
   init: function() {
@@ -576,7 +576,7 @@ Blockly.Blocks.type_boolean = {
   }
 };
 
-Blockly.Blocks.type_number = {
+Blockly.Blocks['type_number'] = {
   // Number type.
   valueType: 'Number',
   init: function() {
@@ -588,7 +588,7 @@ Blockly.Blocks.type_number = {
   }
 };
 
-Blockly.Blocks.type_string = {
+Blockly.Blocks['type_string'] = {
   // String type.
   valueType: 'String',
   init: function() {
@@ -600,7 +600,7 @@ Blockly.Blocks.type_string = {
   }
 };
 
-Blockly.Blocks.type_list = {
+Blockly.Blocks['type_list'] = {
   // List type.
   valueType: 'Array',
   init: function() {
@@ -612,7 +612,7 @@ Blockly.Blocks.type_list = {
   }
 };
 
-Blockly.Blocks.type_other = {
+Blockly.Blocks['type_other'] = {
   // Other type.
   init: function() {
     this.setColour(230);
@@ -624,7 +624,7 @@ Blockly.Blocks.type_other = {
   }
 };
 
-Blockly.Blocks.colour_hue = {
+Blockly.Blocks['colour_hue'] = {
   // Set the colour of the block.
   init: function() {
     this.appendDummyInput()

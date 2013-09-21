@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.colour');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.colour_picker = {
+Blockly.Blocks['colour_picker'] = {
   // Colour picker.
   init: function() {
     this.setHelpUrl(Blockly.Msg.COLOUR_PICKER_HELPURL);
@@ -40,7 +40,7 @@ Blockly.Blocks.colour_picker = {
   }
 };
 
-Blockly.Blocks.colour_random = {
+Blockly.Blocks['colour_random'] = {
   // Random colour.
   init: function() {
     this.setHelpUrl(Blockly.Msg.COLOUR_RANDOM_HELPURL);
@@ -52,7 +52,7 @@ Blockly.Blocks.colour_random = {
   }
 };
 
-Blockly.Blocks.colour_rgb = {
+Blockly.Blocks['colour_rgb'] = {
   // Compose a colour from RGB components.
   init: function() {
     this.setHelpUrl(Blockly.Msg.COLOUR_RGB_HELPURL);
@@ -75,7 +75,7 @@ Blockly.Blocks.colour_rgb = {
   }
 };
 
-Blockly.Blocks.colour_blend = {
+Blockly.Blocks['colour_blend'] = {
   // Blend two colours together.
   init: function() {
     this.setHelpUrl(Blockly.Msg.COLOUR_BLEND_HELPURL);

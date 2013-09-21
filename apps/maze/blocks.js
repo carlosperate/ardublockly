@@ -27,7 +27,7 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.Blocks.maze_moveForward = {
+Blockly.Blocks['maze_moveForward'] = {
   // Block for moving forward.
   init: function() {
     this.setHelpUrl('http://code.google.com/p/blockly/wiki/Move');
@@ -40,12 +40,12 @@ Blockly.Blocks.maze_moveForward = {
   }
 };
 
-Blockly.JavaScript.maze_moveForward = function() {
+Blockly.JavaScript['maze_moveForward'] = function() {
   // Generate JavaScript for moving forward.
   return 'Maze.moveForward(\'block_id_' + this.id + '\');\n';
 };
 
-Blockly.Blocks.maze_turn = {
+Blockly.Blocks['maze_turn'] = {
   // Block for turning left or right.
   init: function() {
     var DIRECTIONS =
@@ -66,13 +66,13 @@ Blockly.Blocks.maze_turn = {
   }
 };
 
-Blockly.JavaScript.maze_turn = function() {
+Blockly.JavaScript['maze_turn'] = function() {
   // Generate JavaScript for turning left or right.
   var dir = this.getTitleValue('DIR');
   return 'Maze.' + dir + '(\'block_id_' + this.id + '\');\n';
 };
 
-Blockly.Blocks.maze_if = {
+Blockly.Blocks['maze_if'] = {
   // Block for 'if' conditional if there is a path.
   init: function() {
     var DIRECTIONS =
@@ -96,7 +96,7 @@ Blockly.Blocks.maze_if = {
 };
 
 
-Blockly.JavaScript.maze_if = function() {
+Blockly.JavaScript['maze_if'] = function() {
   // Generate JavaScript for 'if' conditional if there is a path.
   var argument = 'Maze.' + this.getTitleValue('DIR') +
       '(\'block_id_' + this.id + '\')';
@@ -105,7 +105,7 @@ Blockly.JavaScript.maze_if = function() {
   return code;
 };
 
-Blockly.Blocks.maze_ifElse = {
+Blockly.Blocks['maze_ifElse'] = {
   // Block for 'if/else' conditional if there is a path.
   init: function() {
     var DIRECTIONS =
@@ -130,7 +130,7 @@ Blockly.Blocks.maze_ifElse = {
   }
 };
 
-Blockly.JavaScript.maze_ifElse = function() {
+Blockly.JavaScript['maze_ifElse'] = function() {
   // Generate JavaScript for 'if/else' conditional if there is a path.
   var argument = 'Maze.' + this.getTitleValue('DIR') +
       '(\'block_id_' + this.id + '\')';
@@ -141,7 +141,7 @@ Blockly.JavaScript.maze_ifElse = function() {
   return code;
 };
 
-Blockly.Blocks.maze_forever = {
+Blockly.Blocks['maze_forever'] = {
   // Do forever loop.
   init: function() {
     this.setHelpUrl('http://code.google.com/p/blockly/wiki/Repeat');
@@ -156,7 +156,7 @@ Blockly.Blocks.maze_forever = {
   }
 };
 
-Blockly.JavaScript.maze_forever = function() {
+Blockly.JavaScript['maze_forever'] = function() {
   // Generate JavaScript for do forever loop.
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
   if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {

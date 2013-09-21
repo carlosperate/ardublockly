@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.lists');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.lists_create_empty = {
+Blockly.Blocks['lists_create_empty'] = {
   // Create an empty list.
   init: function() {
     this.setHelpUrl(Blockly.Msg.LISTS_CREATE_EMPTY_HELPURL);
@@ -40,7 +40,7 @@ Blockly.Blocks.lists_create_empty = {
   }
 };
 
-Blockly.Blocks.lists_create_with = {
+Blockly.Blocks['lists_create_with'] = {
   // Create a list with any number of elements of any type.
   init: function() {
     this.setColour(260);
@@ -131,7 +131,7 @@ Blockly.Blocks.lists_create_with = {
   }
 };
 
-Blockly.Blocks.lists_create_with_container = {
+Blockly.Blocks['lists_create_with_container'] = {
   // Container.
   init: function() {
     this.setColour(260);
@@ -143,7 +143,7 @@ Blockly.Blocks.lists_create_with_container = {
   }
 };
 
-Blockly.Blocks.lists_create_with_item = {
+Blockly.Blocks['lists_create_with_item'] = {
   // Add items.
   init: function() {
     this.setColour(260);
@@ -156,7 +156,7 @@ Blockly.Blocks.lists_create_with_item = {
   }
 };
 
-Blockly.Blocks.lists_repeat = {
+Blockly.Blocks['lists_repeat'] = {
   // Create a list with one element repeated.
   init: function() {
     this.setHelpUrl(Blockly.Msg.LISTS_REPEAT_HELPURL);
@@ -174,7 +174,7 @@ Blockly.Blocks.lists_repeat = {
   }
 };
 
-Blockly.Blocks.lists_length = {
+Blockly.Blocks['lists_length'] = {
   // List length.
   init: function() {
     this.setHelpUrl(Blockly.Msg.LISTS_LENGTH_HELPURL);
@@ -187,7 +187,7 @@ Blockly.Blocks.lists_length = {
   }
 };
 
-Blockly.Blocks.lists_isEmpty = {
+Blockly.Blocks['lists_isEmpty'] = {
   // Is the list empty?
   init: function() {
     this.setHelpUrl(Blockly.Msg.LISTS_IS_EMPTY_HELPURL);
@@ -202,7 +202,7 @@ Blockly.Blocks.lists_isEmpty = {
   }
 };
 
-Blockly.Blocks.lists_indexOf = {
+Blockly.Blocks['lists_indexOf'] = {
   // Find an item in the list.
   init: function() {
     var OPERATORS =
@@ -221,7 +221,7 @@ Blockly.Blocks.lists_indexOf = {
   }
 };
 
-Blockly.Blocks.lists_getIndex = {
+Blockly.Blocks['lists_getIndex'] = {
   // Get element at index.
   init: function() {
     var MODE =
@@ -319,7 +319,7 @@ Blockly.Blocks.lists_getIndex = {
   }
 };
 
-Blockly.Blocks.lists_setIndex = {
+Blockly.Blocks['lists_setIndex'] = {
   // Set element at index.
   init: function() {
     var MODE =
@@ -396,7 +396,7 @@ Blockly.Blocks.lists_setIndex = {
   }
 };
 
-Blockly.Blocks.lists_getSublist = {
+Blockly.Blocks['lists_getSublist'] = {
   // Get sublist.
   init: function() {
     this.WHERE_OPTIONS_1 =

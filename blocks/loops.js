@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.loops');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.controls_repeat = {
+Blockly.Blocks['controls_repeat'] = {
   // Repeat n times (internal number).
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_REPEAT_HELPURL);
@@ -46,7 +46,7 @@ Blockly.Blocks.controls_repeat = {
   }
 };
 
-Blockly.Blocks.controls_repeat_ext = {
+Blockly.Blocks['controls_repeat_ext'] = {
   // Repeat n times (external number).
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_REPEAT_HELPURL);
@@ -67,7 +67,7 @@ Blockly.Blocks.controls_repeat_ext = {
   }
 };
 
-Blockly.Blocks.controls_whileUntil = {
+Blockly.Blocks['controls_whileUntil'] = {
   // Do while/until loop.
   init: function() {
     var OPERATORS =
@@ -95,7 +95,7 @@ Blockly.Blocks.controls_whileUntil = {
   }
 };
 
-Blockly.Blocks.controls_for = {
+Blockly.Blocks['controls_for'] = {
   // For loop.
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_FOR_HELPURL);
@@ -152,7 +152,7 @@ Blockly.Blocks.controls_for = {
   }
 };
 
-Blockly.Blocks.controls_forEach = {
+Blockly.Blocks['controls_forEach'] = {
   // For each loop.
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_FOREACH_HELPURL);
@@ -186,10 +186,10 @@ Blockly.Blocks.controls_forEach = {
       this.setTitleValue(newName, 'VAR');
     }
   },
-  customContextMenu: Blockly.Blocks.controls_for.customContextMenu
+  customContextMenu: Blockly.Blocks['controls_for'].customContextMenu
 };
 
-Blockly.Blocks.controls_flow_statements = {
+Blockly.Blocks['controls_flow_statements'] = {
   // Flow statements: continue, break.
   init: function() {
     var OPERATORS =

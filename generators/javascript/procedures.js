@@ -28,7 +28,7 @@ goog.provide('Blockly.JavaScript.procedures');
 goog.require('Blockly.JavaScript');
 
 
-Blockly.JavaScript.procedures_defreturn = function() {
+Blockly.JavaScript['procedures_defreturn'] = function() {
   // Define a procedure with a return value.
   var funcName = Blockly.JavaScript.variableDB_.getName(
       this.getTitleValue('NAME'), Blockly.Procedures.NAME_TYPE);
@@ -59,7 +59,7 @@ Blockly.JavaScript.procedures_defreturn = function() {
 Blockly.JavaScript.procedures_defnoreturn =
     Blockly.JavaScript.procedures_defreturn;
 
-Blockly.JavaScript.procedures_callreturn = function() {
+Blockly.JavaScript['procedures_callreturn'] = function() {
   // Call a procedure with a return value.
   var funcName = Blockly.JavaScript.variableDB_.getName(
       this.getTitleValue('NAME'), Blockly.Procedures.NAME_TYPE);
@@ -72,7 +72,7 @@ Blockly.JavaScript.procedures_callreturn = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript.procedures_callnoreturn = function() {
+Blockly.JavaScript['procedures_callnoreturn'] = function() {
   // Call a procedure with no return value.
   var funcName = Blockly.JavaScript.variableDB_.getName(
       this.getTitleValue('NAME'), Blockly.Procedures.NAME_TYPE);
@@ -85,7 +85,7 @@ Blockly.JavaScript.procedures_callnoreturn = function() {
   return code;
 };
 
-Blockly.JavaScript.procedures_ifreturn = function() {
+Blockly.JavaScript['procedures_ifreturn'] = function() {
   // Conditionally return value from a procedure.
   var condition = Blockly.JavaScript.valueToCode(this, 'CONDITION',
       Blockly.JavaScript.ORDER_NONE) || 'false';

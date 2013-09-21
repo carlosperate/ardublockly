@@ -321,7 +321,7 @@ BlocklyApps.showDialog = function(content, origin, animate, modal, style,
     header.id = 'dialogHeader';
     dialog.appendChild(header);
     BlocklyApps.dialogMouseDownWrapper_ =
-        Blockly.bindEvent_(header, 'mousedown', this,
+        Blockly.bindEvent_(header, 'mousedown', null,
                            BlocklyApps.dialogMouseDown_);
   }
   dialog.appendChild(content);
@@ -371,9 +371,9 @@ BlocklyApps.dialogMouseDown_ = function(e) {
   BlocklyApps.dialogStartY_ = dialog.offsetTop - e.clientY;
 
   BlocklyApps.dialogMouseUpWrapper_ = Blockly.bindEvent_(document,
-      'mouseup', this, BlocklyApps.dialogUnbindDragEvents_);
+      'mouseup', null, BlocklyApps.dialogUnbindDragEvents_);
   BlocklyApps.dialogMouseMoveWrapper_ = Blockly.bindEvent_(document,
-      'mousemove', this, BlocklyApps.dialogMouseMove_);
+      'mousemove', null, BlocklyApps.dialogMouseMove_);
   // This event has been handled.  No need to bubble up to the document.
   e.stopPropagation();
 };

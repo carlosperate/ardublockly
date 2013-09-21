@@ -28,20 +28,20 @@ goog.provide('Blockly.Python.colour');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.colour_picker = function() {
+Blockly.Python['colour_picker'] = function() {
   // Colour picker.
   var code = '\'' + this.getTitleValue('COLOUR') + '\'';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.colour_random = function() {
+Blockly.Python['colour_random'] = function() {
   // Generate a random colour.
   Blockly.Python.definitions_['import_random'] = 'import random';
   var code = '\'#%06x\' % random.randint(0, 2**24 - 1)';
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Python.colour_rgb = function() {
+Blockly.Python['colour_rgb'] = function() {
   // Compose a colour from RGB components.
   var functionName = Blockly.Python.provideFunction_(
       'colour_rgb',
@@ -60,7 +60,7 @@ Blockly.Python.colour_rgb = function() {
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Python.colour_blend = function() {
+Blockly.Python['colour_blend'] = function() {
   // Blend two colours together.
   var functionName = Blockly.Python.provideFunction_(
       'colour_blend',

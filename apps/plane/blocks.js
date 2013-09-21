@@ -23,7 +23,7 @@
  */
 'use strict';
 
-Blockly.Blocks.plane_set_seats = {
+Blockly.Blocks['plane_set_seats'] = {
   // Block seat variable setter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_SET_HELPURL);
@@ -34,14 +34,14 @@ Blockly.Blocks.plane_set_seats = {
   }
 };
 
-Blockly.JavaScript.plane_set_seats = function() {
+Blockly.JavaScript['plane_set_seats'] = function() {
   // Generate JavaScript for seat variable setter.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || 'NaN';
   return argument0 + ';';
 };
 
-Blockly.Blocks.plane_get_rows = {
+Blockly.Blocks['plane_get_rows'] = {
   // Block for row variable getter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
@@ -57,12 +57,12 @@ Blockly.Blocks.plane_get_rows = {
   }
 };
 
-Blockly.JavaScript.plane_get_rows = function() {
+Blockly.JavaScript['plane_get_rows'] = function() {
   // Generate JavaScript for row variable getter.
   return ['Plane.rows1st', Blockly.JavaScript.ORDER_MEMBER];
 };
 
-Blockly.Blocks.plane_get_rows1st = {
+Blockly.Blocks['plane_get_rows1st'] = {
   // Block for first class row variable getter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
@@ -78,12 +78,12 @@ Blockly.Blocks.plane_get_rows1st = {
   }
 };
 
-Blockly.JavaScript.plane_get_rows1st = function() {
+Blockly.JavaScript['plane_get_rows1st'] = function() {
   // Generate JavaScript for first class row variable getter.
   return ['Plane.rows1st', Blockly.JavaScript.ORDER_MEMBER];
 };
 
-Blockly.Blocks.plane_get_rows2nd = {
+Blockly.Blocks['plane_get_rows2nd'] = {
   // Block for second class row variable getter.
   init: function() {
     this.setHelpUrl(Blockly.Msg.VARIABLES_GET_HELPURL);
@@ -99,7 +99,7 @@ Blockly.Blocks.plane_get_rows2nd = {
   }
 };
 
-Blockly.JavaScript.plane_get_rows2nd = function() {
+Blockly.JavaScript['plane_get_rows2nd'] = function() {
   // Generate JavaScript for second class row variable getter.
   return ['Plane.rows2nd', Blockly.JavaScript.ORDER_MEMBER];
 };

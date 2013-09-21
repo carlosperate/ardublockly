@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.math');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.math_number = {
+Blockly.Blocks['math_number'] = {
   // Numeric value.
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
@@ -41,7 +41,7 @@ Blockly.Blocks.math_number = {
   }
 };
 
-Blockly.Blocks.math_arithmetic = {
+Blockly.Blocks['math_arithmetic'] = {
   // Basic arithmetic operator.
   init: function() {
     var OPERATORS =
@@ -75,7 +75,7 @@ Blockly.Blocks.math_arithmetic = {
   }
 };
 
-Blockly.Blocks.math_single = {
+Blockly.Blocks['math_single'] = {
   // Advanced math operators with single operand.
   init: function() {
     var OPERATORS =
@@ -110,7 +110,7 @@ Blockly.Blocks.math_single = {
   }
 };
 
-Blockly.Blocks.math_trig = {
+Blockly.Blocks['math_trig'] = {
   // Trigonometry operators.
   init: function() {
     var OPERATORS =
@@ -143,7 +143,7 @@ Blockly.Blocks.math_trig = {
   }
 };
 
-Blockly.Blocks.math_constant = {
+Blockly.Blocks['math_constant'] = {
   // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
   init: function() {
     var CONSTANTS =
@@ -162,7 +162,7 @@ Blockly.Blocks.math_constant = {
   }
 };
 
-Blockly.Blocks.math_number_property = {
+Blockly.Blocks['math_number_property'] = {
   // Check if a number is even, odd, prime, whole, positive, or negative
   // or if it is divisible by certain number. Returns true or false.
   init: function() {
@@ -213,7 +213,7 @@ Blockly.Blocks.math_number_property = {
   }
 };
 
-Blockly.Blocks.math_change = {
+Blockly.Blocks['math_change'] = {
   // Add to a variable in place.
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_CHANGE_HELPURL);
@@ -243,7 +243,7 @@ Blockly.Blocks.math_change = {
   }
 };
 
-Blockly.Blocks.math_round = {
+Blockly.Blocks['math_round'] = {
   // Rounding functions.
   init: function() {
     var OPERATORS =
@@ -260,7 +260,7 @@ Blockly.Blocks.math_round = {
   }
 };
 
-Blockly.Blocks.math_on_list = {
+Blockly.Blocks['math_on_list'] = {
   // Evaluate a list of numbers to return sum, average, min, max, etc.
   // Some functions also work on text (min, max, mode, median).
   init: function() {
@@ -305,7 +305,7 @@ Blockly.Blocks.math_on_list = {
   }
 };
 
-Blockly.Blocks.math_modulo = {
+Blockly.Blocks['math_modulo'] = {
   // Remainder of a division.
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_MODULO_HELPURL);
@@ -323,7 +323,7 @@ Blockly.Blocks.math_modulo = {
   }
 };
 
-Blockly.Blocks.math_constrain = {
+Blockly.Blocks['math_constrain'] = {
   // Constrain a number between two limits.
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_CONSTRAIN_HELPURL);
@@ -343,7 +343,7 @@ Blockly.Blocks.math_constrain = {
   }
 };
 
-Blockly.Blocks.math_random_int = {
+Blockly.Blocks['math_random_int'] = {
   // Random integer between [X] and [Y].
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_RANDOM_INT_HELPURL);
@@ -361,7 +361,7 @@ Blockly.Blocks.math_random_int = {
   }
 };
 
-Blockly.Blocks.math_random_float = {
+Blockly.Blocks['math_random_float'] = {
   // Random fraction between 0 and 1.
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_RANDOM_FLOAT_HELPURL);

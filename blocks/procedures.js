@@ -28,7 +28,7 @@ goog.provide('Blockly.Blocks.procedures');
 goog.require('Blockly.Blocks');
 
 
-Blockly.Blocks.procedures_defnoreturn = {
+Blockly.Blocks['procedures_defnoreturn'] = {
   // Define a procedure with no return value.
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL);
@@ -193,7 +193,7 @@ Blockly.Blocks.procedures_defnoreturn = {
   callType_: 'procedures_callnoreturn'
 };
 
-Blockly.Blocks.procedures_defreturn = {
+Blockly.Blocks['procedures_defreturn'] = {
   // Define a procedure with a return value.
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL);
@@ -214,25 +214,25 @@ Blockly.Blocks.procedures_defreturn = {
     this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP);
     this.arguments_ = [];
   },
-  updateParams_: Blockly.Blocks.procedures_defnoreturn.updateParams_,
-  mutationToDom: Blockly.Blocks.procedures_defnoreturn.mutationToDom,
-  domToMutation: Blockly.Blocks.procedures_defnoreturn.domToMutation,
-  decompose: Blockly.Blocks.procedures_defnoreturn.decompose,
-  compose: Blockly.Blocks.procedures_defnoreturn.compose,
-  dispose: Blockly.Blocks.procedures_defnoreturn.dispose,
+  updateParams_: Blockly.Blocks['procedures_defnoreturn'].updateParams_,
+  mutationToDom: Blockly.Blocks['procedures_defnoreturn'].mutationToDom,
+  domToMutation: Blockly.Blocks['procedures_defnoreturn'].domToMutation,
+  decompose: Blockly.Blocks['procedures_defnoreturn'].decompose,
+  compose: Blockly.Blocks['procedures_defnoreturn'].compose,
+  dispose: Blockly.Blocks['procedures_defnoreturn'].dispose,
   getProcedureDef: function() {
     // Return the name of the defined procedure,
     // a list of all its arguments,
     // and that it DOES have a return value.
     return [this.getTitleValue('NAME'), this.arguments_, true];
   },
-  getVars: Blockly.Blocks.procedures_defnoreturn.getVars,
-  renameVar: Blockly.Blocks.procedures_defnoreturn.renameVar,
-  customContextMenu: Blockly.Blocks.procedures_defnoreturn.customContextMenu,
+  getVars: Blockly.Blocks['procedures_defnoreturn'].getVars,
+  renameVar: Blockly.Blocks['procedures_defnoreturn'].renameVar,
+  customContextMenu: Blockly.Blocks['procedures_defnoreturn'].customContextMenu,
   callType_: 'procedures_callreturn'
 };
 
-Blockly.Blocks.procedures_mutatorcontainer = {
+Blockly.Blocks['procedures_mutatorcontainer'] = {
   // Procedure container (for mutator dialog).
   init: function() {
     this.setColour(290);
@@ -244,7 +244,7 @@ Blockly.Blocks.procedures_mutatorcontainer = {
   }
 };
 
-Blockly.Blocks.procedures_mutatorarg = {
+Blockly.Blocks['procedures_mutatorarg'] = {
   // Procedure argument (for mutator dialog).
   init: function() {
     this.setColour(290);
@@ -255,17 +255,16 @@ Blockly.Blocks.procedures_mutatorarg = {
     this.setNextStatement(true);
     this.setTooltip('');
     this.contextMenu = false;
+  },
+  validator: function(newVar) {
+    // Merge runs of whitespace.  Strip leading and trailing whitespace.
+    // Beyond this, all names are legal.
+    newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
+    return newVar || null;
   }
 };
 
-Blockly.Blocks.procedures_mutatorarg.validator = function(newVar) {
-  // Merge runs of whitespace.  Strip leading and trailing whitespace.
-  // Beyond this, all names are legal.
-  newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
-  return newVar || null;
-};
-
-Blockly.Blocks.procedures_callnoreturn = {
+Blockly.Blocks['procedures_callnoreturn'] = {
   // Call a procedure with no return value.
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL);
@@ -424,7 +423,7 @@ Blockly.Blocks.procedures_callnoreturn = {
   }
 };
 
-Blockly.Blocks.procedures_callreturn = {
+Blockly.Blocks['procedures_callreturn'] = {
   // Call a procedure with a return value.
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL);
@@ -438,17 +437,17 @@ Blockly.Blocks.procedures_callreturn = {
     this.quarkConnections_ = null;
     this.quarkArguments_ = null;
   },
-  getProcedureCall: Blockly.Blocks.procedures_callnoreturn.getProcedureCall,
-  renameProcedure: Blockly.Blocks.procedures_callnoreturn.renameProcedure,
+  getProcedureCall: Blockly.Blocks['procedures_callnoreturn'].getProcedureCall,
+  renameProcedure: Blockly.Blocks['procedures_callnoreturn'].renameProcedure,
   setProcedureParameters:
-      Blockly.Blocks.procedures_callnoreturn.setProcedureParameters,
-  mutationToDom: Blockly.Blocks.procedures_callnoreturn.mutationToDom,
-  domToMutation: Blockly.Blocks.procedures_callnoreturn.domToMutation,
-  renameVar: Blockly.Blocks.procedures_callnoreturn.renameVar,
-  customContextMenu: Blockly.Blocks.procedures_callnoreturn.customContextMenu
+      Blockly.Blocks['procedures_callnoreturn'].setProcedureParameters,
+  mutationToDom: Blockly.Blocks['procedures_callnoreturn'].mutationToDom,
+  domToMutation: Blockly.Blocks['procedures_callnoreturn'].domToMutation,
+  renameVar: Blockly.Blocks['procedures_callnoreturn'].renameVar,
+  customContextMenu: Blockly.Blocks['procedures_callnoreturn'].customContextMenu
 };
 
-Blockly.Blocks.procedures_ifreturn = {
+Blockly.Blocks['procedures_ifreturn'] = {
   // Conditionally return value from a procedure.
   init: function() {
     this.setHelpUrl('http://c2.com/cgi/wiki?GuardClause');

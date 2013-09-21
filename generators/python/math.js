@@ -31,7 +31,7 @@ goog.require('Blockly.Python');
 // If any new block imports any library, add that library name here.
 Blockly.Python.addReservedWords('math,random');
 
-Blockly.Python.math_number = function() {
+Blockly.Python['math_number'] = function() {
   // Numeric value.
   var code = window.parseFloat(this.getTitleValue('NUM'));
   var order = code < 0 ? Blockly.Python.ORDER_UNARY_SIGN :
@@ -39,7 +39,7 @@ Blockly.Python.math_number = function() {
   return [code, order];
 };
 
-Blockly.Python.math_arithmetic = function() {
+Blockly.Python['math_arithmetic'] = function() {
   // Basic arithmetic operators, and power.
   var mode = this.getTitleValue('OP');
   var tuple = Blockly.Python.math_arithmetic.OPERATORS[mode];
@@ -65,7 +65,7 @@ Blockly.Python.math_arithmetic.OPERATORS = {
   POWER: [' ** ', Blockly.Python.ORDER_EXPONENTIATION]
 };
 
-Blockly.Python.math_single = function() {
+Blockly.Python['math_single'] = function() {
   // Math operators with single operand.
   var operator = this.getTitleValue('OP');
   var code;
@@ -145,7 +145,7 @@ Blockly.Python.math_single = function() {
   return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
 };
 
-Blockly.Python.math_constant = function() {
+Blockly.Python['math_constant'] = function() {
   // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
   var constant = this.getTitleValue('CONSTANT');
   if (constant != 'INFINITY') {
@@ -163,7 +163,7 @@ Blockly.Python.math_constant.CONSTANTS = {
   INFINITY: ['float(\'inf\')', Blockly.Python.ORDER_ATOMIC]
 };
 
-Blockly.Python.math_number_property = function() {
+Blockly.Python['math_number_property'] = function() {
   // Check if a number is even, odd, prime, whole, positive, or negative
   // or if it is divisible by certain number. Returns true or false.
   var number_to_check = Blockly.Python.valueToCode(this, 'NUMBER_TO_CHECK',
@@ -225,7 +225,7 @@ Blockly.Python.math_number_property = function() {
   return [code, Blockly.Python.ORDER_RELATIONAL];
 };
 
-Blockly.Python.math_change = function() {
+Blockly.Python['math_change'] = function() {
   // Add to a variable in place.
   var argument0 = Blockly.Python.valueToCode(this, 'DELTA',
       Blockly.Python.ORDER_ADDITIVE) || '0';
@@ -240,7 +240,7 @@ Blockly.Python.math_round = Blockly.Python.math_single;
 // Trigonometry functions have a single operand.
 Blockly.Python.math_trig = Blockly.Python.math_single;
 
-Blockly.Python.math_on_list = function() {
+Blockly.Python['math_on_list'] = function() {
   // Math functions for lists.
   var func = this.getTitleValue('OP');
   var list = Blockly.Python.valueToCode(this, 'LIST',
@@ -333,7 +333,7 @@ Blockly.Python.math_on_list = function() {
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Python.math_modulo = function() {
+Blockly.Python['math_modulo'] = function() {
   // Remainder computation.
   var argument0 = Blockly.Python.valueToCode(this, 'DIVIDEND',
       Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
@@ -343,7 +343,7 @@ Blockly.Python.math_modulo = function() {
   return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
 };
 
-Blockly.Python.math_constrain = function() {
+Blockly.Python['math_constrain'] = function() {
   // Constrain a number between two limits.
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_NONE) || '0';
@@ -356,7 +356,7 @@ Blockly.Python.math_constrain = function() {
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Python.math_random_int = function() {
+Blockly.Python['math_random_int'] = function() {
   // Random integer between [X] and [Y].
   Blockly.Python.definitions_['import_random'] = 'import random';
   var argument0 = Blockly.Python.valueToCode(this, 'FROM',
@@ -367,7 +367,7 @@ Blockly.Python.math_random_int = function() {
   return [code, Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Python.math_random_float = function() {
+Blockly.Python['math_random_float'] = function() {
   // Random fraction between 0 and 1.
   Blockly.Python.definitions_['import_random'] = 'import random';
   return ['random.random()', Blockly.Python.ORDER_FUNCTION_CALL];

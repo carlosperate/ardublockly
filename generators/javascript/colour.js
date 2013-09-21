@@ -28,13 +28,13 @@ goog.provide('Blockly.JavaScript.colour');
 goog.require('Blockly.JavaScript');
 
 
-Blockly.JavaScript.colour_picker = function() {
+Blockly.JavaScript['colour_picker'] = function() {
   // Colour picker.
   var code = '\'' + this.getTitleValue('COLOUR') + '\'';
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.colour_random = function() {
+Blockly.JavaScript['colour_random'] = function() {
   // Generate a random colour.
   if (!Blockly.JavaScript.definitions_['colour_random']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
@@ -51,7 +51,7 @@ Blockly.JavaScript.colour_random = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript.colour_rgb = function() {
+Blockly.JavaScript['colour_rgb'] = function() {
   // Compose a colour from RGB components expressed as percentages.
   var red = Blockly.JavaScript.valueToCode(this, 'RED',
       Blockly.JavaScript.ORDER_COMMA) || 0;
@@ -66,12 +66,12 @@ Blockly.JavaScript.colour_rgb = function() {
     Blockly.JavaScript.colour_rgb.functionName = functionName;
     var func = [];
     func.push('function ' + functionName + '(r, g, b) {');
-    func.push('  r = Math.round(Math.max(Math.min(Number(r), 100), 0) * 2.55);');
-    func.push('  g = Math.round(Math.max(Math.min(Number(g), 100), 0) * 2.55);');
-    func.push('  b = Math.round(Math.max(Math.min(Number(b), 100), 0) * 2.55);');
-    func.push('  r = (\'0\' + (r || 0).toString(16)).slice(-2);');
-    func.push('  g = (\'0\' + (g || 0).toString(16)).slice(-2);');
-    func.push('  b = (\'0\' + (b || 0).toString(16)).slice(-2);');
+    func.push('  r = Math.max(Math.min(Number(r), 100), 0) * 2.55;');
+    func.push('  g = Math.max(Math.min(Number(g), 100), 0) * 2.55;');
+    func.push('  b = Math.max(Math.min(Number(b), 100), 0) * 2.55;');
+    func.push('  r = (\'0\' + (Math.round(r) || 0).toString(16)).slice(-2);');
+    func.push('  g = (\'0\' + (Math.round(g) || 0).toString(16)).slice(-2);');
+    func.push('  b = (\'0\' + (Math.round(b) || 0).toString(16)).slice(-2);');
     func.push('  return \'#\' + r + g + b;');
     func.push('}');
     Blockly.JavaScript.definitions_['colour_rgb'] = func.join('\n');
@@ -81,7 +81,7 @@ Blockly.JavaScript.colour_rgb = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript.colour_blend = function() {
+Blockly.JavaScript['colour_blend'] = function() {
   // Blend two colours together.
   var c1 = Blockly.JavaScript.valueToCode(this, 'COLOUR1',
       Blockly.JavaScript.ORDER_COMMA) || '\'#000000\'';

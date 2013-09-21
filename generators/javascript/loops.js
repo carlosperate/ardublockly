@@ -28,7 +28,7 @@ goog.provide('Blockly.JavaScript.loops');
 goog.require('Blockly.JavaScript');
 
 
-Blockly.JavaScript.controls_repeat = function() {
+Blockly.JavaScript['controls_repeat'] = function() {
   // Repeat n times (internal number).
   var repeats = Number(this.getTitleValue('TIMES'));
   var branch = Blockly.JavaScript.statementToCode(this, 'DO');
@@ -45,7 +45,7 @@ Blockly.JavaScript.controls_repeat = function() {
   return code;
 };
 
-Blockly.JavaScript.controls_repeat_ext = function() {
+Blockly.JavaScript['controls_repeat_ext'] = function() {
   // Repeat n times (external number).
   var repeats = Blockly.JavaScript.valueToCode(this, 'TIMES',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';
@@ -70,7 +70,7 @@ Blockly.JavaScript.controls_repeat_ext = function() {
   return code;
 };
 
-Blockly.JavaScript.controls_whileUntil = function() {
+Blockly.JavaScript['controls_whileUntil'] = function() {
   // Do while/until loop.
   var until = this.getTitleValue('MODE') == 'UNTIL';
   var argument0 = Blockly.JavaScript.valueToCode(this, 'BOOL',
@@ -87,7 +87,7 @@ Blockly.JavaScript.controls_whileUntil = function() {
   return 'while (' + argument0 + ') {\n' + branch + '}\n';
 };
 
-Blockly.JavaScript.controls_for = function() {
+Blockly.JavaScript['controls_for'] = function() {
   // For loop.
   var variable0 = Blockly.JavaScript.variableDB_.getName(
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -155,7 +155,7 @@ Blockly.JavaScript.controls_for = function() {
   return code;
 };
 
-Blockly.JavaScript.controls_forEach = function() {
+Blockly.JavaScript['controls_forEach'] = function() {
   // For each loop.
   var variable0 = Blockly.JavaScript.variableDB_.getName(
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -188,7 +188,7 @@ Blockly.JavaScript.controls_forEach = function() {
   return code;
 };
 
-Blockly.JavaScript.controls_flow_statements = function() {
+Blockly.JavaScript['controls_flow_statements'] = function() {
   // Flow statements: continue, break.
   switch (this.getTitleValue('FLOW')) {
     case 'BREAK':

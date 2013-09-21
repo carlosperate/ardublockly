@@ -28,14 +28,14 @@ goog.provide('Blockly.JavaScript.variables');
 goog.require('Blockly.JavaScript');
 
 
-Blockly.JavaScript.variables_get = function() {
+Blockly.JavaScript['variables_get'] = function() {
   // Variable getter.
   var code = Blockly.JavaScript.variableDB_.getName(this.getTitleValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.variables_set = function() {
+Blockly.JavaScript['variables_set'] = function() {
   // Variable setter.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '0';

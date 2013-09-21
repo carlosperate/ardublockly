@@ -25,7 +25,7 @@
 
 Blockly.JavaScript = Blockly.Generator.get('JavaScript');
 
-Blockly.JavaScript.unittest_main = function() {
+Blockly.JavaScript['unittest_main'] = function() {
   // Container for unit tests.
   var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
@@ -137,7 +137,7 @@ Blockly.JavaScript.unittest_main.defineAssert_ = function() {
   return Blockly.JavaScript.unittest_main.assert_;
 };
 
-Blockly.JavaScript.unittest_assertequals = function() {
+Blockly.JavaScript['unittest_assertequals'] = function() {
   // Asserts that a value equals another value.
   var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
@@ -150,7 +150,7 @@ Blockly.JavaScript.unittest_assertequals = function() {
       '(' + actual + ', ' + expected + ', ' + message + ');\n';
 };
 
-Blockly.JavaScript.unittest_assertvalue = function() {
+Blockly.JavaScript['unittest_assertvalue'] = function() {
   // Asserts that a value is true, false, or null.
   var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
@@ -169,7 +169,7 @@ Blockly.JavaScript.unittest_assertvalue = function() {
       '(' + actual + ', ' + expected + ', ' + message + ');\n';
 };
 
-Blockly.JavaScript.unittest_fail = function() {
+Blockly.JavaScript['unittest_fail'] = function() {
   // Always assert an error.
   var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);

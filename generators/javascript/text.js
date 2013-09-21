@@ -28,13 +28,13 @@ goog.provide('Blockly.JavaScript.text');
 goog.require('Blockly.JavaScript');
 
 
-Blockly.JavaScript.text = function() {
+Blockly.JavaScript['text'] = function() {
   // Text value.
   var code = Blockly.JavaScript.quote_(this.getTitleValue('TEXT'));
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript.text_join = function() {
+Blockly.JavaScript['text_join'] = function() {
   // Create a string made up of any number of elements of any type.
   var code;
   if (this.itemCount_ == 0) {
@@ -62,7 +62,7 @@ Blockly.JavaScript.text_join = function() {
   }
 };
 
-Blockly.JavaScript.text_append = function() {
+Blockly.JavaScript['text_append'] = function() {
   // Append to a variable in place.
   var varName = Blockly.JavaScript.variableDB_.getName(
       this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -71,21 +71,21 @@ Blockly.JavaScript.text_append = function() {
   return varName + ' = String(' + varName + ') + String(' + argument0 + ');\n';
 };
 
-Blockly.JavaScript.text_length = function() {
+Blockly.JavaScript['text_length'] = function() {
   // String length.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_FUNCTION_CALL) || '\'\'';
   return [argument0 + '.length', Blockly.JavaScript.ORDER_MEMBER];
 };
 
-Blockly.JavaScript.text_isEmpty = function() {
+Blockly.JavaScript['text_isEmpty'] = function() {
   // Is the string null?
   var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
       Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
   return ['!' + argument0, Blockly.JavaScript.ORDER_LOGICAL_NOT];
 };
 
-Blockly.JavaScript.text_indexOf = function() {
+Blockly.JavaScript['text_indexOf'] = function() {
   // Search the text for a substring.
   var operator = this.getTitleValue('END') == 'FIRST' ?
       'indexOf' : 'lastIndexOf';
@@ -97,7 +97,7 @@ Blockly.JavaScript.text_indexOf = function() {
   return [code, Blockly.JavaScript.ORDER_MEMBER];
 };
 
-Blockly.JavaScript.text_charAt = function() {
+Blockly.JavaScript['text_charAt'] = function() {
   // Get letter at index.
   // Note: Until January 2013 this block did not have the WHERE input.
   var where = this.getTitleValue('WHERE') || 'FROM_START';
@@ -145,7 +145,7 @@ Blockly.JavaScript.text_charAt = function() {
   throw 'Unhandled option (text_charAt).';
 };
 
-Blockly.JavaScript.text_getSubstring = function() {
+Blockly.JavaScript['text_getSubstring'] = function() {
   // Get substring.
   var text = Blockly.JavaScript.valueToCode(this, 'STRING',
       Blockly.JavaScript.ORDER_MEMBER) || '[]';
@@ -192,7 +192,7 @@ Blockly.JavaScript.text_getSubstring = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript.text_changeCase = function() {
+Blockly.JavaScript['text_changeCase'] = function() {
   // Change capitalization.
   var mode = this.getTitleValue('CASE');
   var operator = Blockly.JavaScript.text_changeCase.OPERATORS[mode];
@@ -230,7 +230,7 @@ Blockly.JavaScript.text_changeCase.OPERATORS = {
   TITLECASE: null
 };
 
-Blockly.JavaScript.text_trim = function() {
+Blockly.JavaScript['text_trim'] = function() {
   // Trim spaces.
   var mode = this.getTitleValue('MODE');
   var operator = Blockly.JavaScript.text_trim.OPERATORS[mode];
@@ -245,14 +245,14 @@ Blockly.JavaScript.text_trim.OPERATORS = {
   BOTH: '.trim()'
 };
 
-Blockly.JavaScript.text_print = function() {
+Blockly.JavaScript['text_print'] = function() {
   // Print statement.
   var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'';
   return 'window.alert(' + argument0 + ');\n';
 };
 
-Blockly.JavaScript.text_prompt = function() {
+Blockly.JavaScript['text_prompt'] = function() {
   // Prompt function.
   var msg = Blockly.JavaScript.quote_(this.getTitleValue('TEXT'));
   var code = 'window.prompt(' + msg + ')';

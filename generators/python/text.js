@@ -28,13 +28,13 @@ goog.provide('Blockly.Python.text');
 goog.require('Blockly.Python');
 
 
-Blockly.Python.text = function() {
+Blockly.Python['text'] = function() {
   // Text value.
   var code = Blockly.Python.quote_(this.getTitleValue('TEXT'));
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python.text_join = function() {
+Blockly.Python['text_join'] = function() {
   // Create a string made up of any number of elements of any type.
   //Should we allow joining by '-' or ',' or any other characters?
   var code;
@@ -66,7 +66,7 @@ Blockly.Python.text_join = function() {
   }
 };
 
-Blockly.Python.text_append = function() {
+Blockly.Python['text_append'] = function() {
   // Append to a variable in place.
   var varName = Blockly.Python.variableDB_.getName(this.getTitleValue('VAR'),
       Blockly.Variables.NAME_TYPE);
@@ -75,14 +75,14 @@ Blockly.Python.text_append = function() {
   return varName + ' = str(' + varName + ') + str(' + argument0 + ')\n';
 };
 
-Blockly.Python.text_length = function() {
+Blockly.Python['text_length'] = function() {
   // String length.
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_NONE) || '\'\'';
   return ['len(' + argument0 + ')', Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Python.text_isEmpty = function() {
+Blockly.Python['text_isEmpty'] = function() {
   // Is the string null?
   var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
       Blockly.Python.ORDER_NONE) || '\'\'';
@@ -90,7 +90,7 @@ Blockly.Python.text_isEmpty = function() {
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
 };
 
-Blockly.Python.text_indexOf = function() {
+Blockly.Python['text_indexOf'] = function() {
   // Search the text for a substring.
   // Should we allow for non-case sensitive???
   var operator = this.getTitleValue('END') == 'FIRST' ? 'find' : 'rfind';
@@ -102,7 +102,7 @@ Blockly.Python.text_indexOf = function() {
   return [code, Blockly.Python.ORDER_MEMBER];
 };
 
-Blockly.Python.text_charAt = function() {
+Blockly.Python['text_charAt'] = function() {
   // Get letter at index.
   // Note: Until January 2013 this block did not have the WHERE input.
   var where = this.getTitleValue('WHERE') || 'FROM_START';
@@ -144,7 +144,7 @@ Blockly.Python.text_charAt = function() {
   throw 'Unhandled option (text_charAt).';
 };
 
-Blockly.Python.text_getSubstring = function() {
+Blockly.Python['text_getSubstring'] = function() {
   // Get substring.
   var text = Blockly.Python.valueToCode(this, 'STRING',
       Blockly.Python.ORDER_MEMBER) || '\'\'';
@@ -198,7 +198,7 @@ Blockly.Python.text_getSubstring = function() {
   return [code, Blockly.Python.ORDER_MEMBER];
 };
 
-Blockly.Python.text_changeCase = function() {
+Blockly.Python['text_changeCase'] = function() {
   // Change capitalization.
   var mode = this.getTitleValue('CASE');
   var operator = Blockly.Python.text_changeCase.OPERATORS[mode];
@@ -214,7 +214,7 @@ Blockly.Python.text_changeCase.OPERATORS = {
   TITLECASE: '.title()'
 };
 
-Blockly.Python.text_trim = function() {
+Blockly.Python['text_trim'] = function() {
   // Trim spaces.
   var mode = this.getTitleValue('MODE');
   var operator = Blockly.Python.text_trim.OPERATORS[mode];
@@ -230,14 +230,14 @@ Blockly.Python.text_trim.OPERATORS = {
   BOTH: '.strip()'
 };
 
-Blockly.Python.text_print = function() {
+Blockly.Python['text_print'] = function() {
   // Print statement.
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT',
       Blockly.Python.ORDER_NONE) || '\'\'';
   return 'print(' + argument0 + ')\n';
 };
 
-Blockly.Python.text_prompt = function() {
+Blockly.Python['text_prompt'] = function() {
   // Prompt function.
   var functionName = Blockly.Python.provideFunction_(
       'text_prompt',
