@@ -221,6 +221,7 @@ Blockly.Blocks['controls_flow_statements'] = {
     var block = this;
     do {
       if (block.type == 'controls_repeat' ||
+          block.type == 'controls_repeat_ext' ||
           block.type == 'controls_forEach' ||
           block.type == 'controls_for' ||
           block.type == 'controls_whileUntil') {
