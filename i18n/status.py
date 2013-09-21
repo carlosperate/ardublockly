@@ -23,7 +23,7 @@
 """
 
 import argparse
-import json
+from common import read_json_file
 
 # Bogus language name representing all messages defined.
 TOTAL = 'qqq'
@@ -44,22 +44,6 @@ def get_prefix(s):
       string if it does not contain a period.
   """
   return s.split('.')[0]
-
-
-def get_json(filename):
-  """Reads in a JSON file.
-
-  Args:
-      filename: The name of a JSON file.
-
-  Returns:
-      A dictionary mapping each JSON key to its value.
-  """
-  try:
-    f = open(filename)
-    return json.load(f)
-  finally:
-    f.close()
 
 
 def get_prefix_count(prefix, arr):
@@ -203,12 +187,12 @@ def main():
 
   # Read in JSON files.
   messages = {}  # A dictionary of dictionaries.
-  messages[TOTAL] = get_json(args.key_file)
+  messages[TOTAL] = read_json_file(args.key_file)
   for lang_file in args.lang_files:
     prefix = get_prefix(lang_file)
     # Skip non-language files.
     if prefix not in ['qqq', 'keys']:
-      messages[prefix] = get_json(lang_file)
+      messages[prefix] = read_json_file(lang_file)
 
   # Output results.
   if args.output == 'text':

@@ -18,7 +18,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import json_to_xliff
+import common
 import re
 import unittest
 
@@ -36,7 +36,7 @@ class TestSequenceFunctions(unittest.TestCase):
                  u'the first block of actions. Otherwise, do the second ' +
                  u'block of actions.']
     for sentence in sentences:
-      output = json_to_xliff._insert_breaks(sentence, 30, 50)
+      output = common.insert_breaks(sentence, 30, 50)
       self.assert_(contains_all_chars(sentence, output),
                    u'Mismatch between:\n{0}\n{1}'.format(
                        re.sub(spaces, '', sentence),

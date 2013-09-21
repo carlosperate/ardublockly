@@ -18,6 +18,7 @@
 # limitations under the License.
 
 import codecs
+import json
 import os
 from datetime import datetime
 
@@ -34,6 +35,31 @@ class InputError(Exception):
         Exception.__init__(self, '{0}: {1}'.format(location, msg))
         self.location = location
         self.msg = msg
+
+
+def read_json_file(filename):
+  """Read a JSON file as UTF-8 into a dictionary.
+
+  Args:
+    filename: The filename, which must end ".json".
+
+  Returns:
+    The dictionary.
+
+  Raises:
+    InputError: The filename did not end with ".json" or an error occurred
+        while opening or reading the file.
+  """
+  if not filename.endswith('.json'):
+    raise InputError(filename, 'filenames must end with ".json"')
+  try:
+    # Read in file.
+    with codecs.open(filename, 'r', 'utf-8') as infile:
+      defs = json.load(infile)
+    return defs
+  except ValueError, e:
+    print('Error reading ' + filename)
+    raise InputError(file, str(e))
 
 
 def _create_qqq_file(output_dir):
@@ -204,3 +230,60 @@ def write_files(author, lang, output_dir, units, write_key_file):
     if write_key_file:
       _close_key_file(key_file)
     _close_qqq_file(qqq_file)
+
+
+def insert_breaks(s, min_length, max_length):
+  """Inserts line breaks to try to get line lengths within the given range.
+
+  This tries to minimize raggedness and to break lines at punctuation
+  (periods and commas).  It never splits words or numbers.  Multiple spaces
+  may be converted into single spaces.
+
+  Args:
+      s: The string to split.
+      min_length: The requested minimum number of characters per line.
+      max_length: The requested minimum number of characters per line.
+
+  Returns:
+      A copy of the original string with zero or more line breaks inserted.
+  """
+  newline = '\\n'
+  if len(s) < min_length:
+      return s
+  # Try splitting by sentences.  This assumes sentences end with periods.
+  sentences = s.split('.')
+  # Remove empty sentences.
+  sentences = [sen for sen in sentences if sen]
+
+  # If all sentences are at least min_length and at most max_length,
+  # then return one per line.
+  if not [sen for sen in sentences if
+          len(sen) > max_length or len(sen) < min_length]:
+      return newline.join([sen.strip() + '.' for sen in sentences])
+
+  # Otherwise, divide into words, and use a greedy algorithm for the first
+  # line, and try to get later lines as close as possible in length.
+  words = [word for word in s.split(' ') if word]
+  line1 = ''
+  while (len(line1) + 1 + len(words[0]) < max_length and
+         # Preferentially split on periods and commas.
+         (not ((line1.endswith('. ') or line1.endswith(', ')) and
+               len(line1) > min_length))):
+    line1 += words.pop(0) + ' '
+    # If it all fits on one line, return that line.
+    if not words:
+      return line1
+  ideal_length = len(line1)
+  output = line1
+  line = ''
+  while words:
+    line += words.pop(0) + ' '
+    if words:
+      potential_len = len(line) + len(words[0])
+      if (potential_len > max_length or
+          potential_len - ideal_length > ideal_length - len(line) or
+          (line.endswith('. ') and len(line) > min_length)):
+        output += newline + line
+        line = ''
+  output += newline + line
+  return output
