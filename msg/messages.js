@@ -614,7 +614,7 @@ Blockly.Msg.LISTS_INPUT_IS_EMPTY = 'is empty';
 ///block tooltip - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
 Blockly.Msg.LISTS_TOOLTIP = 'Returns true if the list is empty.';
 
-///block text - Title of blocks operated on [https://code.google.com/p/blockly/wiki/Lists lists].
+///block text - Title of blocks operating on [https://code.google.com/p/blockly/wiki/Lists lists].
 Blockly.Msg.LISTS_INLIST = 'in list';
 
 ///url - See [https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List].
@@ -627,7 +627,7 @@ Blockly.Msg.LISTS_INDEX_OF_LAST = 'find last occurrence of item';
 /// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List Lists#Finding_Items_in_a_List].
 Blockly.Msg.LISTS_INDEX_OF_TOOLTIP = 'Returns the index of the first/last occurrence of the item in the list.  Returns 0 if text is not found.';
 
-Blockly.Msg.LISTS_GET_INDEX_HELPURL = Blockly.Msg.LISTS_GET_INDEX_HELPURL;
+Blockly.Msg.LISTS_GET_INDEX_HELPURL = Blockly.Msg.LISTS_INDEX_OF_HELPURL;
 /// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get an item from a list] without removing it from the list.
 Blockly.Msg.LISTS_GET_INDEX_GET = 'get';
 /// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get and remove an item from a list], as opposed to merely getting it without modifying the list.
@@ -644,7 +644,6 @@ Blockly.Msg.LISTS_GET_INDEX_FIRST = 'first';
 Blockly.Msg.LISTS_GET_INDEX_LAST = 'last';
 /// dropdown - Indicates that a '''random''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
 Blockly.Msg.LISTS_GET_INDEX_RANDOM = 'random';
-/// block text - Title of blocks used for [https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List getting, removing], [https://code.google.com/p/blockly/wiki/Lists#Adding_Items_to_a_List setting, or inserting] elements of a list.
 Blockly.Msg.LISTS_GET_INDEX_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = 'Returns the item at the specified position in a list.  #1 is the first item.';

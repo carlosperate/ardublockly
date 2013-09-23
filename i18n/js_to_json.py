@@ -95,6 +95,7 @@ def main():
           if description:
             print('Warning: Description preceding definition of synonym {0}.'.
                   format(match.group(1)))
+            description = ''
           synonyms[match.group(1)] = match.group(2)
   infile.close()
 
