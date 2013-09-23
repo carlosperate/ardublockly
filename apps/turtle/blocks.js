@@ -25,8 +25,6 @@
 
 // Extensions to Blockly's language and JavaScript generator.
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
-
 Blockly.Blocks['draw_move'] = {
   // Block for moving forward or backwards.
   init: function() {

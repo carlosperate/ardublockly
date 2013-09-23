@@ -105,7 +105,7 @@ Code.renderContent = function() {
     xmlTextarea.value = xmlText;
     xmlTextarea.focus();
   } else if (content.id == 'content_javascript') {
-    var code = Blockly.Generator.workspaceToCode('JavaScript');
+    var code = Blockly.JavaScript.workspaceToCode();
     content.textContent = code;
     if (typeof prettyPrintOne == 'function') {
       code = content.innerHTML;
@@ -113,7 +113,7 @@ Code.renderContent = function() {
       content.innerHTML = code;
     }
   } else if (content.id == 'content_python') {
-    code = Blockly.Generator.workspaceToCode('Python');
+    code = Blockly.Python.workspaceToCode();
     content.textContent = code;
     if (typeof prettyPrintOne == 'function') {
       code = content.innerHTML;
@@ -195,7 +195,7 @@ Code.runJS = function() {
       throw BlocklyApps.getMsg('Code_timeout');
     }
   };
-  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  var code = Blockly.JavaScript.workspaceToCode();
   Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
   try {
     eval(code);

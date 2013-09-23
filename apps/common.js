@@ -575,7 +575,7 @@ BlocklyApps.stripCode = function(code) {
  *     DOM element.  If null, don't show any animations for opening or closing.
  */
 BlocklyApps.showCode = function(origin) {
-  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  var code = Blockly.JavaScript.workspaceToCode();
   code = BlocklyApps.stripCode(code);
   var pre = document.getElementById('containerCode');
   pre.textContent = code;

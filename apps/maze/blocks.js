@@ -25,8 +25,6 @@
 
 // Extensions to Blockly's language and JavaScript generator.
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
-
 Blockly.Blocks['maze_moveForward'] = {
   // Block for moving forward.
   init: function() {

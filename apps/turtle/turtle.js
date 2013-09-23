@@ -244,7 +244,7 @@ Turtle.execute = function() {
   BlocklyApps.log = [];
   BlocklyApps.ticks = 1000000;
 
-  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  var code = Blockly.JavaScript.workspaceToCode();
   try {
     eval(code);
   } catch (e) {

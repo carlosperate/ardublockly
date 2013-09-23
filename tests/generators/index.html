@@ -106,12 +106,12 @@ function toXml() {
 
 function toJavaScript() {
   var code = '\'use strict\';\n\n'
-  code += Blockly.Generator.workspaceToCode('JavaScript');
+  code += Blockly.JavaScript.workspaceToCode();
   setOutput(code);
 }
 
 function toPython() {
-  var code = Blockly.Generator.workspaceToCode('Python');
+  var code = Blockly.Python.workspaceToCode();
   setOutput(code);
 }
 </script>

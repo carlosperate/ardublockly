@@ -23,8 +23,6 @@
  */
 'use strict';
 
-Blockly.Python = Blockly.Generator.get('Python');
-
 Blockly.Python['unittest_main'] = function() {
   // Container for unit tests.
   var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',

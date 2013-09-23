@@ -136,9 +136,8 @@ Plane.recalculate = function() {
     }
   }
   var seats = NaN;
-  var generator = Blockly.Generator.get('JavaScript');
-  generator.init();
-  var code = generator.blockToCode(rootBlock);
+  Blockly.JavaScript.init();
+  var code = Blockly.JavaScript.blockToCode(rootBlock);
   try {
     seats = eval(code);
   } catch (e) {

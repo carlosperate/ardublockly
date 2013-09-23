@@ -23,8 +23,6 @@
  */
 'use strict';
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
-
 Blockly.JavaScript['unittest_main'] = function() {
   // Container for unit tests.
   var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',

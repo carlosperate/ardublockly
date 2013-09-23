@@ -35,8 +35,6 @@ Blockly.Blocks['graph_get_x'] = {
   }
 };
 
-Blockly.JavaScript = Blockly.Generator.get('JavaScript');
-
 Blockly.JavaScript['graph_get_x'] = function() {
   // x variable getter.
   return ['x', Blockly.JavaScript.ORDER_ATOMIC];

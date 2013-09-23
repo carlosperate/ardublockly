@@ -18,16 +18,10 @@
  */
 'use strict';
 
-function test_get() {
-  var language1 = Blockly.Generator.get('INTERCAL');
-  var language2 = Blockly.Generator.get('INTERCAL');
-  assertTrue('Creating a language.', language1 && (typeof language1 == 'object'));
-  assertTrue('Language is singleton.', language1 === language2);
-}
-
 function test_prefix() {
-  assertEquals('Prefix nothing.', '', Blockly.Generator.prefixLines('', ''));
-  assertEquals('Prefix a word.', '@Hello', Blockly.Generator.prefixLines('Hello', '@'));
-  assertEquals('Prefix one line.', '12Hello\n', Blockly.Generator.prefixLines('Hello\n', '12'));
-  assertEquals('Prefix two lines.', '***Hello\n***World\n', Blockly.Generator.prefixLines('Hello\nWorld\n', '***'));
+  var generator = new Blockly.Generator('INTERCAL');
+  assertEquals('Prefix nothing.', '', generator.prefixLines('', ''));
+  assertEquals('Prefix a word.', '@Hello', generator.prefixLines('Hello', '@'));
+  assertEquals('Prefix one line.', '12Hello\n', generator.prefixLines('Hello\n', '12'));
+  assertEquals('Prefix two lines.', '***Hello\n***World\n', generator.prefixLines('Hello\nWorld\n', '***'));
 }

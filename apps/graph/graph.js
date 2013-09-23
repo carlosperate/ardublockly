@@ -180,9 +180,8 @@ Graph.getFunction = function() {
   if (!yBlock) {
     return NaN;
   }
-  var generator = Blockly.Generator.get('JavaScript');
-  generator.init();
-  var code = generator.blockToCode(yBlock);
+  Blockly.JavaScript.init();
+  var code = Blockly.JavaScript.blockToCode(yBlock);
   // Remove the ";" generally ending the JavaScript statement y = {code};.
   return code.replace(/;$/, '');
 };

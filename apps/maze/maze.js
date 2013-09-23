@@ -882,7 +882,7 @@ Maze.resetButtonClick = function() {
 Maze.execute = function() {
   BlocklyApps.log = [];
   BlocklyApps.ticks = 1000;
-  var code = Blockly.Generator.workspaceToCode('JavaScript');
+  var code = Blockly.JavaScript.workspaceToCode();
   Maze.result = Maze.ResultType.UNSET;
 
   // Try running the user's code.  There are four possible outcomes:
