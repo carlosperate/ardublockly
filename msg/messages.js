@@ -423,7 +423,7 @@ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = 'Constrain a number to be between the speci
 Blockly.Msg.MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 ///block text - The title of the block that generates a random integer (whole number) in the specified range.  For example, if the range is from 5 to 7, this returns 5, 6, or 7 with equal likelihood
 Blockly.Msg.MATH_RANDOM_INT_INPUT_FROM = 'random integer from';
-Blockly.Msg.MATH_RANDOM_INT_INPUT_TO = Blockly.Msg.CONTROLS_FOR_INPUT_TO = 'to';
+Blockly.Msg.MATH_RANDOM_INT_INPUT_TO = Blockly.Msg.CONTROLS_FOR_INPUT_TO;
 ///tooltip - Return a random integer between two values specified as inputs.  For example, if one input was 7 and another 9, any of the numbers 7, 8, or 9 could be output.
 Blockly.Msg.MATH_RANDOM_INT_TOOLTIP = 'Return a random integer between the two specified limits, inclusive.';
 

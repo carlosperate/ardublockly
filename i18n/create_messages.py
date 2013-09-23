@@ -53,6 +53,8 @@ def main():
   # Read in source language .json file, which provides any values missing
   # in target languages' .json files.
   source_defs = read_json_file(os.path.join(os.curdir, args.source_lang_file))
+  if '@metadata' in source_defs:
+    del source_defs['@metadata']
 
   # Read in synonyms file, which must be output in every language.
   synonym_defs = read_json_file(os.path.join(
@@ -60,40 +62,54 @@ def main():
   synonym_text = '\n'.join(['Blockly.Msg.{0} = Blockly.Msg.{1};'.format(
       key, synonym_defs[key]) for key in synonym_defs])
 
+  # Create each output file.
   for arg_file in args.files:
     (_, filename) = os.path.split(arg_file)
     target_lang = filename[:filename.index('.')]
     if target_lang not in ('qqq', 'keys'):
       target_defs = read_json_file(os.path.join(os.curdir, arg_file))
 
-      # Combine definitions.  Start with source languages' definitions,
-      # then provide the new values for any keys present in the target language.
-      defs = source_defs.copy()
-      for key in target_defs:
-        if key not in defs:
-          raise InputError('Unexpected key "{0}" in {1}.'.format(key, arg_file))
-        defs[key] = target_defs
-
       # Output file.
       outname = os.path.join(os.curdir, args.output_dir, target_lang + '.js')
       with codecs.open(outname, 'w', 'utf-8') as outfile:
         outfile.write(
             """// This file was automatically generated.  Do not modify.
-// Translated definitions: {0}
-// Untranslated definitions: {1}
 
 'use strict';
 
-goog.provide('Blockly.Msg.{2}');
+goog.provide('Blockly.Msg.{0}');
 
 goog.require('Blockly.Msg');
 
-""".format(len(target_defs), len(source_defs) - len(target_defs), target_lang))
-        for key in target_defs:
-          if key != '@metadata':
-            value = target_defs[key].replace('"', '\\"')
-            outfile.write(u'Blockly.Msg.{0} = "{1}";\n'.format(key, value))
+""".format(target_lang))
+        # For each key in the source language file, output the target value
+        # if present; otherwise, output the source language value with a
+        # warning comment.
+        for key in source_defs:
+          if key in target_defs:
+            value = target_defs[key]
+            comment = ''
+            del target_defs[key]
+          else:
+            value = source_defs[key]
+            comment = '  // untranslated'
+          value = value.replace('"', '\\"')
+          outfile.write(u'Blockly.Msg.{0} = "{1}";{2}\n'.format(
+              key, value, comment))
+
+        # Announce any keys defined only for target language.
+        if target_defs:
+          extra_keys = [key for key in target_defs if key not in synonyms]
+          synonym_keys = [key for key in target_defs if key in synonyms]
+          if extra_keys:
+            print('These extra keys appeared in {0}: {1}'.format(
+                filename, ', '.join(extra_keys)))
+          if synonym_keys:
+            print('These synonym keys appeared in {0}: {1}'.format(
+                filename, ', '.join(synonym_keys)))
+
         outfile.write(synonym_text)
+
       print('Created {0}.'.format(outname))
 
 
