@@ -99,8 +99,8 @@ goog.require('Blockly.Msg');
 
         # Announce any keys defined only for target language.
         if target_defs:
-          extra_keys = [key for key in target_defs if key not in synonyms]
-          synonym_keys = [key for key in target_defs if key in synonyms]
+          extra_keys = [key for key in target_defs if key not in synonym_defs]
+          synonym_keys = [key for key in target_defs if key in synonym_defs]
           if extra_keys:
             print('These extra keys appeared in {0}: {1}'.format(
                 filename, ', '.join(extra_keys)))
