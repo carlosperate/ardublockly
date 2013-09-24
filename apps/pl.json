@@ -29,7 +29,7 @@
     "Apps.xmlError": "Nie mo\u017cna za\u0142adowa\u0107 zapisanego pliku. By\u0107 mo\u017ce zosta\u0142 utworzony za pomoc\u0105 innej wersji Blockly?",
     "Apps.listVariable": "lista",
     "Apps.textVariable": "tekst",
-    "Code.badXml": "B\u0142\u0105d parsowania XML : \n%1",
+    "Code.badXml": "B\u0142\u0105d parsowania XML : \n%1\n\nZaznacz 'OK' aby odrzuci\u0107 twoje zmiany lub 'Cancel', \u017ceby w przysz\u0142o\u015bci edytowa\u0107 XML.",
     "Code.badCode": "B\u0142\u0105d programu:\n%1",
     "Code.timeout": "Maksymalna liczba iteracji wykonywa\u0144 przekroczona",
     "Code.discard": "Usun\u0105\u0107 wszystkie %1 bloki?",

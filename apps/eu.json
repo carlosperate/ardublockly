@@ -1,7 +1,9 @@
 {
-    "@metadata": [
-
-    ],
+    "@metadata": {
+        "authors": [
+            "Xabier Armendaritz"
+        ]
+    },
     "Apps.blocklyMessage": "Blockly",
     "Apps.codeTooltip": "Ikusi sorturiko JavaScript kodea.",
     "Apps.linkTooltip": "Gorde eta lotura sortu.",
@@ -10,8 +12,8 @@
     "Apps.dialogOk": "Ados",
     "Apps.httpRequestError": "Eskaerarekin arazo bat egon da.",
     "Apps.linkAlert": "Elkarbanatu blokeak lotura honekin:\n\n%1",
-    "Apps.hashError": "Barkatu, '%1' barcinak Blocky fitxategi hau lapurtu du ere.",
-    "Apps.xmlError": "Ezin izan da zure fitxategia kargatu.  Agian Blockly-ren beste bertsio batekin sortua izan zen?",
+    "Apps.hashError": "Barkatu, \u00ab%1\u00bb ez dator bat gordetako ezein programarekin.",
+    "Apps.xmlError": "Ezin izan da zure fitxategia kargatu. Agian Blockly-ren beste bertsio batekin sortua izan zen?",
     "Maze.moveForward": "mugi aurrera",
     "Maze.turnLeft": "biratu ezker",
     "Maze.turnRight": "biratu eskuin",

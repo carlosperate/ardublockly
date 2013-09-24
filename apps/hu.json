@@ -1,7 +1,9 @@
 {
-    "@metadata": [
-
-    ],
+    "@metadata": {
+        "authors": [
+            "\uc544\ub77c"
+        ]
+    },
     "Apps.subtitle": "vizu\u00e1lis programoz\u00e1si k\u00f6rnyezet",
     "Apps.blocklyMessage": "Blockly",
     "Apps.codeTooltip": "A JavaScript forr\u00e1sk\u00f3d megtekint\u00e9se.",
