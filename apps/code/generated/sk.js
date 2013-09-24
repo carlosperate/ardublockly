@@ -5,7 +5,7 @@ if (typeof apps == 'undefined') { var apps = {}; }
 
 
 apps.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="subtitle">vizuálne programovacie prostredie</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Prezrieť vygenerovaný javascriptový kód.</span><span id="linkTooltip">Uložiť a zdieľať odkaz na tento program.</span><span id="runTooltip">Spustiť program, zložený z dielcov na pracovnej \\nploche. </span><span id="runProgram">Spustiť program</span><span id="resetProgram">Odznova</span><span id="dialogOk">OK</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logika</span><span id="catLoops">Cykly</span><span id="catMath">Matematické</span><span id="catText">Text</span><span id="catLists">Zoznamy</span><span id="catColour">Farby</span><span id="catVariables">Premenné</span><span id="catProcedures">Procedúry</span><span id="httpRequestError">Problém so spracovaním požiadavky.</span><span id="linkAlert">Zdieľať tento program skopírovaním odkazu\n\n%1</span><span id="hashError">Prepáč, \'%1\' nie je meno žiadnemu uloženému programu.</span><span id="xmlError">Nebolo možné načítať uložený súbor. Možno bol vytvorený v inej verzii Blocky.</span><span id="listVariable">zoznam</span><span id="textVariable">text</span></div>';
+  return '<div style="display: none"><span id="subtitle">vizuálne programovacie prostredie</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Prezrieť vygenerovaný javascriptový kód.</span><span id="linkTooltip">Uložiť a zdieľať odkaz na tento program.</span><span id="runTooltip">Spustiť program, zložený z dielcov na pracovnej \\nploche. </span><span id="runProgram">Spustiť program</span><span id="resetProgram">Odznova</span><span id="dialogOk">OK</span><span id="dialogCancel">Zrušiť</span><span id="catLogic">Logika</span><span id="catLoops">Cykly</span><span id="catMath">Matematické</span><span id="catText">Text</span><span id="catLists">Zoznamy</span><span id="catColour">Farby</span><span id="catVariables">Premenné</span><span id="catProcedures">Procedúry</span><span id="httpRequestError">Problém so spracovaním požiadavky.</span><span id="linkAlert">Zdieľať tento program skopírovaním odkazu\n\n%1</span><span id="hashError">Prepáč, \'%1\' nie je meno žiadnemu uloženému programu.</span><span id="xmlError">Nebolo možné načítať uložený súbor. Možno bol vytvorený v inej verzii Blocky.</span><span id="listVariable">zoznam</span><span id="textVariable">text</span></div>';
 };
 
 
@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Chyba pri parsovaní XML:\n%1</span><span id="Code_badCode">Chyba v programe:\n%1</span><span id="Code_timeout">Bol prekročený maximálny počet opakovaní.</span><span id="Code_discard">Zmazať všetkých %1 dielcov?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Chyba pri parsovaní XML:\n%1\n\nStlačte \'OK\' ak chcete zrušiť zmeny alebo \'Zrušiť\' pre pokračovanie v úpravách XML.</span><span id="Code_badCode">Chyba v programe:\n%1</span><span id="Code_timeout">Bol prekročený maximálny počet opakovaní.</span><span id="Code_discard">Zmazať všetkých %1 dielcov?</span></div>';
 };
 
 

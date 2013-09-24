@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fel vid parsning av XML:\n%1\n\nÖverge ändringarna?</span><span id="Code_badCode">Programfel:\n%1</span><span id="Code_timeout">Maximala antalet utförda loopar överskred.</span><span id="Code_discard">Radera alla %1 block?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fel vid parsning av XML:\n%1\n\nKlicka på \'OK\' för att överge dina ändringar eller \'Avbryt\' för att fortsätta redigera XML-koden.</span><span id="Code_badCode">Programfel:\n%1</span><span id="Code_timeout">Maximala antalet utförda loopar överskred.</span><span id="Code_discard">Radera alla %1 block?</span></div>';
 };
 
 

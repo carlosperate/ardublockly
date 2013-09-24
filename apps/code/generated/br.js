@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fazi dielfennañ XML : %1 Dilezel ar c\'hemmoù ?</span><span id="Code_badCode">Fazi programm :\n%1</span><span id="Code_timeout">Niver a iteradurioù seveniñ d\'ar muiañ aet hebiou.</span><span id="Code_discard">Diverkañ an holl vloc\'hoù %1 ?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fazi dielfennañ XML :\n%1\n\nDibabit "Mat eo" evit dilezel ar c\'hemmoù-se pe "Nullañ" evit kemmañ c\'hoazh an XML.</span><span id="Code_badCode">Fazi programm :\n%1</span><span id="Code_timeout">Niver a iteradurioù seveniñ d\'ar muiañ aet hebiou.</span><span id="Code_discard">Diverkañ an holl vloc\'hoù %1 ?</span></div>';
 };
 
 

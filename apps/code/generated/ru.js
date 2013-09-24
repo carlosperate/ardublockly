@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Ошибка синтаксического анализа XML:\n%1\n\nСбросить изменения?</span><span id="Code_badCode">Ошибка программы:\n%1</span><span id="Code_timeout">Превышено максимальное количество итераций.</span><span id="Code_discard">Удалить все блоки (%1)?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Ошибка синтаксического анализа XML:\n%1\n\nВыберите \'ОК\', чтобы отказаться от изменений или \'Cancel\' для дальнейшего редактирования XML.</span><span id="Code_badCode">Ошибка программы:\n%1</span><span id="Code_timeout">Превышено максимальное количество итераций.</span><span id="Code_discard">Удалить все блоки (%1)?</span></div>';
 };
 
 

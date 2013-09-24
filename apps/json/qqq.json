@@ -1,10 +1,4 @@
 {
-    "@metadata": {
-        "authors": [
-            "McDutchie",
-            "Shirayuki"
-        ]
-    },
     "Apps.subtitle": "A short description of Blockly.",
     "Apps.blocklyMessage": "The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (\u0411\u043bo\u043a\u043b\u0438)'.",
     "Apps.codeTooltip": "tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user.",
@@ -28,7 +22,7 @@
     "Apps.xmlError": "alert - There was a problem loading a file previously saved by the user.  The most likely reason for the problem is that it was created with an earlier, incompatible version of Blockly.  This message will be followed by technical information useful to engineers trying to understand the problem.",
     "Apps.listVariable": "variable name - Default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short.",
     "Apps.textVariable": "variable name - Default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short.",
-    "Code.badXml": "alert - Message shown when the user tries switching from the XML tab after entering XML text that could not be parsed.  This asks whether they wish to abandon the XML they added.  If they select 'OK' (or the translated equivalent), the XML is cleared, and the other tab is shown.  If they select 'Cancel', they remain on the XML tab with the bad XML.\n\nUsed in JavaScript \u003Ccode\u003Ewindow.confirm()\u003C/code\u003E.",
+    "Code.badXml": "alert - Message shown when the user tries switching from the XML tab after entering XML text that could not be parsed.  This asks whether they wish to abandon the XML they added.  If they select 'OK' (or the translated equivalent), the XML is cleared, and the other tab is shown.  If they select 'Cancel', they remain on the XML tab with the bad XML.",
     "Code.badCode": "alert - Message shown if an error occurs while interpreting the user program.  The error description follows.",
     "Code.timeout": "alert - Message shown if the program has run for more than the permitted number of steps.  This exists so that programs with infinite loops do not run forever.",
     "Code.discard": "alert - Message shown after the user clicks on the 'discard all' icon.  Selecting 'OK' (or the translated equivalent) causes all of the blocks to be discarded.  Selecting 'Cancel' prevents blocks from being deleted.\n\nParameters:\n* %1 - number of blocks to be deleted. It is always an integer greater than or equal to 2.",
@@ -45,7 +39,7 @@
     "Maze.pathAhead": "[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path ahead', as in: 'if path ahead, go forward'.  Prefer translation that has text in common with 'if path to the left' and 'if path to the right'.",
     "Maze.pathLeft": "[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the left', as in: 'if path to the left, turn left'.",
     "Maze.pathRight": "[[Translating:Blockly#Drop-Down_Menus dropdown]] - Condensed form of 'if there is a path to the right', as in: 'if path to the right, turn right'.",
-    "Maze.repeatUntil": "block text - Imperative or infinitive of a verb to repeat the following commands.  The phrase is followed by the symbol denoting the end of the maze.\n\nSee also:\n* {{msg-blockly|Maze.helpRepeatMany}}",
+    "Maze.repeatUntil": "block text - Imperative or infinitive of a verb to repeat the following commands.  The phrase is followed by the symbol denoting the end of the maze.",
     "Maze.moveForwardTooltip": "tooltip - Moves the icon on the screen representing the player forward one square on the maze board.",
     "Maze.turnTooltip": "tooltip - Turns the icon on the screen representing the player 90 degrees counter-clockwise (left) or clockwise (right).",
     "Maze.ifTooltip": "tooltip - 'path' refers to a path through a maze.",
@@ -59,13 +53,13 @@
     "Maze.maze": "title - Specifies that this is Blockly's '''Maze''' tutorial.",
     "Maze.runTooltip": "tooltip - Pressing this button runs the computer program the user has written to move the player through the maze.",
     "Maze.resetTooltip": "tooltip - Pressing this button restores the player to the start position and enables the user's program to be run again.",
-    "Maze.helpStack": "callout - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above.\n\n\"move forward\" refers to {{msg-blockly|Maze.moveForward}}.",
+    "Maze.helpStack": "callout - The word words for 'stack' and 'blocks' should be the same as for stacking children's blocks. Use the imperative verb form appropriate for speaking to a child, gender unspecified.  If no gender-neutral singular/familiar form exists but a gender-neutral plural/formal form exists, use that instead.  Be sure to use the same translation of 'move forward' as above.",
     "Maze.helpOneTopBlock": "callout - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack.",
     "Maze.helpRun": "callout - This is shown after the user has created a program on the first level.",
-    "Maze.helpReset": "callout - This is shown after the user has run a program that does not solve the maze.\n\n\"Reset\" refers to {{msg-blockly|Apps.resetProgram}}.",
+    "Maze.helpReset": "callout - This is shown after the user has run a program that does not solve the maze.",
     "Maze.helpRepeat": "callout - This is shown when the 'repeat' block is introduced.  The word 'path' refers to a path through a maze, and 'block' refers to a child's building block.",
     "Maze.helpCapacity": "callout - This is shown after the user has used all the blocks permitted on this level.",
-    "Maze.helpRepeatMany": "callout - This is a hint that the user should place a second block inside of a \"repeat\" block.\n\n\"repeat\" should be consistent with  {{msg-blockly|Maze.repeatUntil}}.",
+    "Maze.helpRepeatMany": "callout - This is a hint that the user should place a second block inside of a a 'repeat' block.",
     "Maze.helpIf": "callout - This is shown when the 'if' block is introduced.  An example of an 'if' block is: 'if there is a path to the left, turn left'.",
     "Maze.helpMenu": "callout - %1 will be replaced with an image of the dropdown menu that the user needs to click.",
     "Maze.helpWallFollow": "callout - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated.",

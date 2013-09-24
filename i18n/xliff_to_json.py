@@ -18,6 +18,7 @@
 # limitations under the License.
 
 import argparse
+import os
 import re
 import subprocess
 import sys
@@ -191,7 +192,7 @@ def main():
         help='name and email address of contact for translators')
     parser.add_argument('--lang', default='en',
                         help='ISO 639-1 source language code')
-    parser.add_argument('--output_dir', default='.',
+    parser.add_argument('--output_dir', default='json',
                         help='relative directory for output files')
     parser.add_argument('--xlf', help='file containing xlf definitions')
     parser.add_argument('--templates', default=['template.soy'], nargs='+',
@@ -199,6 +200,10 @@ def main():
                         '(used for ordering messages)')
     global args
     args = parser.parse_args()
+
+    # Make sure output_dir ends with slash.
+    if (not args.output_dir.endswith(os.path.sep)):
+      args.output_dir += os.path.sep
 
     # Process the input file, and sort the entries.
     units = _process_file(args.xlf)

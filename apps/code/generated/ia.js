@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Error de analyse del XML:\n%1\n\nAbandonar modificationes?</span><span id="Code_badCode">Error del programma:\n%1</span><span id="Code_timeout">Le numero de iterationes executate ha excedite le maximo.</span><span id="Code_discard">Deler tote le %1 blocos?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Error de analyse del XML:\n%1\n\nSelige \'OK\' pro abandonar le modificationes o \'Cancellar\' pro continuar a modificar le codice XML.</span><span id="Code_badCode">Error del programma:\n%1</span><span id="Code_timeout">Le numero de iterationes executate ha excedite le maximo.</span><span id="Code_discard">Deler tote le %1 blocos?</span></div>';
 };
 
 

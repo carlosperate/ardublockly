@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Błąd parsowania XML : \n%1</span><span id="Code_badCode">Błąd programu:\n%1</span><span id="Code_timeout">Maksymalna liczba iteracji wykonywań przekroczona</span><span id="Code_discard">Usunąć wszystkie %1 bloki?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Błąd parsowania XML : \n%1\n\nZaznacz \'OK\' aby odrzucić twoje zmiany lub \'Cancel\', żeby w przyszłości edytować XML.</span><span id="Code_badCode">Błąd programu:\n%1</span><span id="Code_timeout">Maksymalna liczba iteracji wykonywań przekroczona</span><span id="Code_discard">Usunąć wszystkie %1 bloki?</span></div>';
 };
 
 

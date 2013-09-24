@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Eror d\'anàlisi dl\'XML:\n%1\n\nLassé perde le modìfiche?</span><span id="Code_badCode">Eror dël programa:\n%1</span><span id="Code_timeout">Nùmer màssim d\'arpetission d\'esecussion sorpassà.</span><span id="Code_discard">Scancelé tuti ij %1 blòch?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Eror d\'anàlisi dl\'XML:\n%1\n\nSelessioné \'Va bin\' për lassé perde toe modìfiche o \'Anulé\' për modifiché ancora l\'XML.</span><span id="Code_badCode">Eror dël programa:\n%1</span><span id="Code_timeout">Nùmer màssim d\'arpetission d\'esecussion sorpassà.</span><span id="Code_discard">Scancelé tuti ij %1 blòch?</span></div>';
 };
 
 

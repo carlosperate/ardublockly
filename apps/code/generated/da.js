@@ -5,7 +5,7 @@ if (typeof apps == 'undefined') { var apps = {}; }
 
 
 apps.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return '<div style="display: none"><span id="subtitle">et visuelt programmeringsmiljø</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Se den genererede JavaScript kode.</span><span id="linkTooltip">Gem og link til blokke.</span><span id="runTooltip">Kør programmet, der er defineret af blokkene i \\narbejdsområdet. </span><span id="runProgram">Kør Program</span><span id="resetProgram">Nulstil</span><span id="dialogOk">OK</span><span id="dialogCancel">Cancel</span><span id="catLogic">Logik</span><span id="catLoops">Løkker</span><span id="catMath">Matematik</span><span id="catText">Tekst</span><span id="catLists">Lister</span><span id="catColour">Farve</span><span id="catVariables">Variabler</span><span id="catProcedures">Procedurer</span><span id="httpRequestError">Der var et problem med forespørgslen.</span><span id="linkAlert">Del dine blokke med dette link:\n\n%1</span><span id="hashError">Beklager, \'%1\' passer ikke med nogen gemt Blockly fil.</span><span id="xmlError">Kunne ikke hente din gemte fil.  Måske er den lavet med en anden udgave af Blockly?</span><span id="listVariable">liste</span><span id="textVariable">tekst</span></div>';
+  return '<div style="display: none"><span id="subtitle">et visuelt programmeringsmiljø</span><span id="blocklyMessage">Blockly</span><span id="codeTooltip">Se den genererede JavaScript kode.</span><span id="linkTooltip">Gem og link til blokke.</span><span id="runTooltip">Kør programmet, der er defineret af blokkene i \\narbejdsområdet. </span><span id="runProgram">Kør program</span><span id="resetProgram">Nulstil</span><span id="dialogOk">OK</span><span id="dialogCancel">Afbryd</span><span id="catLogic">Logik</span><span id="catLoops">Løkker</span><span id="catMath">Matematik</span><span id="catText">Tekst</span><span id="catLists">Lister</span><span id="catColour">Farve</span><span id="catVariables">Variabler</span><span id="catProcedures">Procedurer</span><span id="httpRequestError">Der var et problem med forespørgslen.</span><span id="linkAlert">Del dine blokke med dette link:\n\n%1</span><span id="hashError">Beklager, \'%1\' passer ikke med nogen gemt Blockly fil.</span><span id="xmlError">Kunne ikke hente din gemte fil.  Måske er den lavet med en anden udgave af Blockly?</span><span id="listVariable">liste</span><span id="textVariable">tekst</span></div>';
 };
 
 
@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fejl ved tolkning af XML:\n%1\n\nFortryd ændringer?</span><span id="Code_badCode">Programfejl:\n%1</span><span id="Code_timeout">Maksimale antal udførelsesgentagelser overskredet.</span><span id="Code_discard">Slet alle %1 blokke?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Fejl under fortolkningen af XML:\n%1\n\nVælg \'OK\' for at opgive dine ændringer eller \'Afbryd\' for at redigere XML-filen yderligere.</span><span id="Code_badCode">Programfejl:\n%1</span><span id="Code_timeout">Maksimale antal udførelsesgentagelser overskredet.</span><span id="Code_discard">Slet alle %1 blokke?</span></div>';
 };
 
 

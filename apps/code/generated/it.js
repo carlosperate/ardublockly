@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Errore durante l\'analisi XML:\n%1\n\nAbbandonare le modifiche?</span><span id="Code_badCode">Errore programma:\n%1</span><span id="Code_timeout">È stato superato il numero massimo consentito di interazioni eseguite.</span><span id="Code_discard">Cancellare tutti i %1 blocchi?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Errore durante l\'analisi XML:\n%1\n\nSeleziona \'OK\' per abbandonare le modifiche o \'Annulla\' per continuare a modificare l\'XML.</span><span id="Code_badCode">Errore programma:\n%1</span><span id="Code_timeout">È stato superato il numero massimo consentito di interazioni eseguite.</span><span id="Code_discard">Cancellare tutti i %1 blocchi?</span></div>';
 };
 
 

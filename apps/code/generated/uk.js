@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Помилка  аналізу XML:\n%1\n\nВідмовитися від змін?</span><span id="Code_badCode">Помилка програми:\n%1</span><span id="Code_timeout">Максимальне виконання ітерацій перевищено.</span><span id="Code_discard">Вилучити всі блоки %1?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Помилка синтаксичного аналізу XML:\n%1\n\nВиберіть "Гаразд", щоб відмовитися від змін або \'Скасувати\' для подальшого редагування XML.</span><span id="Code_badCode">Помилка програми:\n%1</span><span id="Code_timeout">Максимальне виконання ітерацій перевищено.</span><span id="Code_discard">Вилучити всі блоки %1?</span></div>';
 };
 
 
