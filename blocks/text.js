@@ -66,7 +66,7 @@ Blockly.Blocks['text_join'] = {
     for (var x = 0; x < this.itemCount_; x++) {
       this.removeInput('ADD' + x);
     }
-    this.itemCount_ = window.parseInt(xmlElement.getAttribute('items'), 10);
+    this.itemCount_ = parseInt(xmlElement.getAttribute('items'), 10);
     for (var x = 0; x < this.itemCount_; x++) {
       var input = this.appendValueInput('ADD' + x);
       if (x == 0) {

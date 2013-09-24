@@ -33,7 +33,7 @@ Blockly.Python.addReservedWords('math,random');
 
 Blockly.Python['math_number'] = function() {
   // Numeric value.
-  var code = window.parseFloat(this.getTitleValue('NUM'));
+  var code = parseFloat(this.getTitleValue('NUM'));
   var order = code < 0 ? Blockly.Python.ORDER_UNARY_SIGN :
               Blockly.Python.ORDER_ATOMIC;
   return [code, order];

@@ -267,7 +267,7 @@ Blockly.Blocks['title_dropdown'] = {
     for (var x = 0; x < this.optionCount_; x++) {
       this.removeInput('OPTION' + x);
     }
-    this.optionCount_ = window.parseInt(container.getAttribute('options'), 10);
+    this.optionCount_ = parseInt(container.getAttribute('options'), 10);
     for (var x = 0; x < this.optionCount_; x++) {
       var input = this.appendDummyInput('OPTION' + x);
       input.appendTitle(new Blockly.FieldTextInput('option'), 'USER' + x);
@@ -468,7 +468,7 @@ Blockly.Blocks['type_group'] = {
     for (var x = 0; x < this.typeCount_; x++) {
       this.removeInput('TYPE' + x);
     }
-    this.typeCount_ = window.parseInt(container.getAttribute('types'), 10);
+    this.typeCount_ = parseInt(container.getAttribute('types'), 10);
     for (var x = 0; x < this.typeCount_; x++) {
       var input = this.appendValueInput('TYPE' + x)
                       .setCheck('Type');

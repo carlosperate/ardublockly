@@ -73,8 +73,8 @@ Blockly.Blocks['controls_if'] = {
     return container;
   },
   domToMutation: function(xmlElement) {
-    this.elseifCount_ = window.parseInt(xmlElement.getAttribute('elseif'), 10);
-    this.elseCount_ = window.parseInt(xmlElement.getAttribute('else'), 10);
+    this.elseifCount_ = parseInt(xmlElement.getAttribute('elseif'), 10);
+    this.elseCount_ = parseInt(xmlElement.getAttribute('else'), 10);
     for (var x = 1; x <= this.elseifCount_; x++) {
       this.appendValueInput('IF' + x)
           .setCheck('Boolean')

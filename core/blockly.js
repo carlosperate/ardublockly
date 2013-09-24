@@ -682,3 +682,9 @@ Blockly.addChangeListener = function(func) {
 Blockly.removeChangeListener = function(bindData) {
   Blockly.unbindEvent_(bindData);
 };
+
+// Export symbols that would otherwise be renamed by Closure compiler.
+window['Blockly'] = Blockly;
+Blockly['mainWorkspace'] = Blockly.mainWorkspace;
+Blockly['addChangeListener'] = Blockly.addChangeListener;
+Blockly['removeChangeListener'] = Blockly.removeChangeListener;
