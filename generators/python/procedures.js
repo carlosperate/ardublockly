@@ -72,8 +72,8 @@ Blockly.Python['procedures_defreturn'] = function() {
 
 // Defining a procedure without a return value uses the same generator as
 // a procedure with a return value.
-Blockly.Python.procedures_defnoreturn =
-    Blockly.Python.procedures_defreturn;
+Blockly.Python['procedures_defnoreturn'] =
+    Blockly.Python['procedures_defreturn'];
 
 Blockly.Python['procedures_callreturn'] = function() {
   // Call a procedure with a return value.

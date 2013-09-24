@@ -200,34 +200,30 @@ Blockly.Python['text_getSubstring'] = function() {
 
 Blockly.Python['text_changeCase'] = function() {
   // Change capitalization.
-  var mode = this.getTitleValue('CASE');
-  var operator = Blockly.Python.text_changeCase.OPERATORS[mode];
+  var OPERATORS = {
+    UPPERCASE: '.upper()',
+    LOWERCASE: '.lower()',
+    TITLECASE: '.title()'
+  };
+  var operator = OPERATORS[this.getTitleValue('CASE')];
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT',
       Blockly.Python.ORDER_MEMBER) || '\'\'';
   var code = argument0 + operator;
   return [code, Blockly.Python.ORDER_MEMBER];
-};
-
-Blockly.Python.text_changeCase.OPERATORS = {
-  UPPERCASE: '.upper()',
-  LOWERCASE: '.lower()',
-  TITLECASE: '.title()'
 };
 
 Blockly.Python['text_trim'] = function() {
   // Trim spaces.
-  var mode = this.getTitleValue('MODE');
-  var operator = Blockly.Python.text_trim.OPERATORS[mode];
+  var OPERATORS = {
+    LEFT: '.lstrip()',
+    RIGHT: '.rstrip()',
+    BOTH: '.strip()'
+  };
+  var operator = OPERATORS[this.getTitleValue('MODE')];
   var argument0 = Blockly.Python.valueToCode(this, 'TEXT',
       Blockly.Python.ORDER_MEMBER) || '\'\'';
   var code = argument0 + operator;
   return [code, Blockly.Python.ORDER_MEMBER];
-};
-
-Blockly.Python.text_trim.OPERATORS = {
-  LEFT: '.lstrip()',
-  RIGHT: '.rstrip()',
-  BOTH: '.strip()'
 };
 
 Blockly.Python['text_print'] = function() {

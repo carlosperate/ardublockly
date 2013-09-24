@@ -41,8 +41,14 @@ Blockly.Python['math_number'] = function() {
 
 Blockly.Python['math_arithmetic'] = function() {
   // Basic arithmetic operators, and power.
-  var mode = this.getTitleValue('OP');
-  var tuple = Blockly.Python.math_arithmetic.OPERATORS[mode];
+  var OPERATORS = {
+    ADD: [' + ', Blockly.Python.ORDER_ADDITIVE],
+    MINUS: [' - ', Blockly.Python.ORDER_ADDITIVE],
+    MULTIPLY: [' * ', Blockly.Python.ORDER_MULTIPLICATIVE],
+    DIVIDE: [' / ', Blockly.Python.ORDER_MULTIPLICATIVE],
+    POWER: [' ** ', Blockly.Python.ORDER_EXPONENTIATION]
+  };
+  var tuple = OPERATORS[this.getTitleValue('OP')];
   var operator = tuple[0];
   var order = tuple[1];
   var argument0 = Blockly.Python.valueToCode(this, 'A', order) || '0';
@@ -55,14 +61,6 @@ Blockly.Python['math_arithmetic'] = function() {
   // require every operator to be wrapped in a function call.  This would kill
   // legibility of the generated code.  See:
   // http://code.google.com/p/blockly/wiki/Language
-};
-
-Blockly.Python.math_arithmetic.OPERATORS = {
-  ADD: [' + ', Blockly.Python.ORDER_ADDITIVE],
-  MINUS: [' - ', Blockly.Python.ORDER_ADDITIVE],
-  MULTIPLY: [' * ', Blockly.Python.ORDER_MULTIPLICATIVE],
-  DIVIDE: [' / ', Blockly.Python.ORDER_MULTIPLICATIVE],
-  POWER: [' ** ', Blockly.Python.ORDER_EXPONENTIATION]
 };
 
 Blockly.Python['math_single'] = function() {
@@ -147,20 +145,19 @@ Blockly.Python['math_single'] = function() {
 
 Blockly.Python['math_constant'] = function() {
   // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+  var CONSTANTS = {
+    PI: ['math.pi', Blockly.Python.ORDER_MEMBER],
+    E: ['math.e', Blockly.Python.ORDER_MEMBER],
+    GOLDEN_RATIO: ['(1 + math.sqrt(5)) / 2', Blockly.Python.ORDER_MULTIPLICATIVE],
+    SQRT2: ['math.sqrt(2)', Blockly.Python.ORDER_MEMBER],
+    SQRT1_2: ['math.sqrt(1.0 / 2)', Blockly.Python.ORDER_MEMBER],
+    INFINITY: ['float(\'inf\')', Blockly.Python.ORDER_ATOMIC]
+  };
   var constant = this.getTitleValue('CONSTANT');
   if (constant != 'INFINITY') {
     Blockly.Python.definitions_['import_math'] = 'import math';
   }
-  return Blockly.Python.math_constant.CONSTANTS[constant];
-};
-
-Blockly.Python.math_constant.CONSTANTS = {
-  PI: ['math.pi', Blockly.Python.ORDER_MEMBER],
-  E: ['math.e', Blockly.Python.ORDER_MEMBER],
-  GOLDEN_RATIO: ['(1 + math.sqrt(5)) / 2', Blockly.Python.ORDER_MULTIPLICATIVE],
-  SQRT2: ['math.sqrt(2)', Blockly.Python.ORDER_MEMBER],
-  SQRT1_2: ['math.sqrt(1.0 / 2)', Blockly.Python.ORDER_MEMBER],
-  INFINITY: ['float(\'inf\')', Blockly.Python.ORDER_ATOMIC]
+  return CONSTANTS[constant];
 };
 
 Blockly.Python['math_number_property'] = function() {
@@ -236,9 +233,9 @@ Blockly.Python['math_change'] = function() {
 };
 
 // Rounding functions have a single operand.
-Blockly.Python.math_round = Blockly.Python.math_single;
+Blockly.Python['math_round'] = Blockly.Python['math_single'];
 // Trigonometry functions have a single operand.
-Blockly.Python.math_trig = Blockly.Python.math_single;
+Blockly.Python['math_trig'] = Blockly.Python['math_single'];
 
 Blockly.Python['math_on_list'] = function() {
   // Math functions for lists.

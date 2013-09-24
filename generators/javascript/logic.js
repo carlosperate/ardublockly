@@ -50,23 +50,21 @@ Blockly.JavaScript['controls_if'] = function() {
 
 Blockly.JavaScript['logic_compare'] = function() {
   // Comparison operator.
-  var mode = this.getTitleValue('OP');
-  var operator = Blockly.JavaScript.logic_compare.OPERATORS[mode];
+  var OPERATORS = {
+    EQ: '==',
+    NEQ: '!=',
+    LT: '<',
+    LTE: '<=',
+    GT: '>',
+    GTE: '>='
+  };
+  var operator = OPERATORS[this.getTitleValue('OP')];
   var order = (operator == '==' || operator == '!=') ?
       Blockly.JavaScript.ORDER_EQUALITY : Blockly.JavaScript.ORDER_RELATIONAL;
   var argument0 = Blockly.JavaScript.valueToCode(this, 'A', order) || '0';
   var argument1 = Blockly.JavaScript.valueToCode(this, 'B', order) || '0';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   return [code, order];
-};
-
-Blockly.JavaScript.logic_compare.OPERATORS = {
-  EQ: '==',
-  NEQ: '!=',
-  LT: '<',
-  LTE: '<=',
-  GT: '>',
-  GTE: '>='
 };
 
 Blockly.JavaScript['logic_operation'] = function() {

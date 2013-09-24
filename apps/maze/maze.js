@@ -1325,22 +1325,6 @@ Maze.turnRight = function(id) {
   Maze.turn(1, id);
 };
 
-Maze.isPathForward = function(id) {
-  return Maze.isPath(0, id);
-};
-
-Maze.isPathRight = function(id) {
-  return Maze.isPath(1, id);
-};
-
-Maze.isPathBackward = function(id) {
-  return Maze.isPath(2, id);
-};
-
-Maze.isPathLeft = function(id) {
-  return Maze.isPath(3, id);
-};
-
 // Core functions.
 
 /**

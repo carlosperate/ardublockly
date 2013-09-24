@@ -36,8 +36,14 @@ Blockly.JavaScript['math_number'] = function() {
 
 Blockly.JavaScript['math_arithmetic'] = function() {
   // Basic arithmetic operators, and power.
-  var mode = this.getTitleValue('OP');
-  var tuple = Blockly.JavaScript.math_arithmetic.OPERATORS[mode];
+  var OPERATORS = {
+    ADD: [' + ', Blockly.JavaScript.ORDER_ADDITION],
+    MINUS: [' - ', Blockly.JavaScript.ORDER_SUBTRACTION],
+    MULTIPLY: [' * ', Blockly.JavaScript.ORDER_MULTIPLICATION],
+    DIVIDE: [' / ', Blockly.JavaScript.ORDER_DIVISION],
+    POWER: [null, Blockly.JavaScript.ORDER_COMMA]  // Handle power separately.
+  };
+  var tuple = OPERATORS[this.getTitleValue('OP')];
   var operator = tuple[0];
   var order = tuple[1];
   var argument0 = Blockly.JavaScript.valueToCode(this, 'A', order) || '0';
@@ -50,14 +56,6 @@ Blockly.JavaScript['math_arithmetic'] = function() {
   }
   code = argument0 + operator + argument1;
   return [code, order];
-};
-
-Blockly.JavaScript.math_arithmetic.OPERATORS = {
-  ADD: [' + ', Blockly.JavaScript.ORDER_ADDITION],
-  MINUS: [' - ', Blockly.JavaScript.ORDER_SUBTRACTION],
-  MULTIPLY: [' * ', Blockly.JavaScript.ORDER_MULTIPLICATION],
-  DIVIDE: [' / ', Blockly.JavaScript.ORDER_DIVISION],
-  POWER: [null, Blockly.JavaScript.ORDER_COMMA]  // Handle power separately.
 };
 
 Blockly.JavaScript['math_single'] = function() {
@@ -146,17 +144,15 @@ Blockly.JavaScript['math_single'] = function() {
 
 Blockly.JavaScript['math_constant'] = function() {
   // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
-  var constant = this.getTitleValue('CONSTANT');
-  return Blockly.JavaScript.math_constant.CONSTANTS[constant];
-};
-
-Blockly.JavaScript.math_constant.CONSTANTS = {
-  PI: ['Math.PI', Blockly.JavaScript.ORDER_MEMBER],
-  E: ['Math.E', Blockly.JavaScript.ORDER_MEMBER],
-  GOLDEN_RATIO: ['(1 + Math.sqrt(5)) / 2', Blockly.JavaScript.ORDER_DIVISION],
-  SQRT2: ['Math.SQRT2', Blockly.JavaScript.ORDER_MEMBER],
-  SQRT1_2: ['Math.SQRT1_2', Blockly.JavaScript.ORDER_MEMBER],
-  INFINITY: ['Infinity', Blockly.JavaScript.ORDER_ATOMIC]
+  var CONSTANTS = {
+    PI: ['Math.PI', Blockly.JavaScript.ORDER_MEMBER],
+    E: ['Math.E', Blockly.JavaScript.ORDER_MEMBER],
+    GOLDEN_RATIO: ['(1 + Math.sqrt(5)) / 2', Blockly.JavaScript.ORDER_DIVISION],
+    SQRT2: ['Math.SQRT2', Blockly.JavaScript.ORDER_MEMBER],
+    SQRT1_2: ['Math.SQRT1_2', Blockly.JavaScript.ORDER_MEMBER],
+    INFINITY: ['Infinity', Blockly.JavaScript.ORDER_ATOMIC]
+  };
+  return CONSTANTS[this.getTitleValue('CONSTANT')];
 };
 
 Blockly.JavaScript['math_number_property'] = function() {
@@ -233,9 +229,9 @@ Blockly.JavaScript['math_change'] = function() {
 };
 
 // Rounding functions have a single operand.
-Blockly.JavaScript.math_round = Blockly.JavaScript.math_single;
+Blockly.JavaScript['math_round'] = Blockly.JavaScript['math_single'];
 // Trigonometry functions have a single operand.
-Blockly.JavaScript.math_trig = Blockly.JavaScript.math_single;
+Blockly.JavaScript['math_trig'] = Blockly.JavaScript['math_single'];
 
 Blockly.JavaScript['math_on_list'] = function() {
   // Math functions for lists.

@@ -218,6 +218,7 @@ class Gen_compressed(threading.Thread):
       f = open(filename)
       params.append(('js_code', ''.join(f.readlines())))
       f.close()
+    filenames.insert(0, '[goog.provide]')
 
     # Remove Blockly.Generator to be compatible with Blockly.
     remove = "var Blockly={Generator:{}};"

@@ -194,8 +194,12 @@ Blockly.JavaScript['text_getSubstring'] = function() {
 
 Blockly.JavaScript['text_changeCase'] = function() {
   // Change capitalization.
-  var mode = this.getTitleValue('CASE');
-  var operator = Blockly.JavaScript.text_changeCase.OPERATORS[mode];
+  var OPERATORS = {
+    UPPERCASE: '.toUpperCase()',
+    LOWERCASE: '.toLowerCase()',
+    TITLECASE: null
+  };
+  var operator = OPERATORS[this.getTitleValue('CASE')];
   var code;
   if (operator) {
     // Upper and lower case are functions built into JavaScript.
@@ -224,25 +228,17 @@ Blockly.JavaScript['text_changeCase'] = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript.text_changeCase.OPERATORS = {
-  UPPERCASE: '.toUpperCase()',
-  LOWERCASE: '.toLowerCase()',
-  TITLECASE: null
-};
-
 Blockly.JavaScript['text_trim'] = function() {
   // Trim spaces.
-  var mode = this.getTitleValue('MODE');
-  var operator = Blockly.JavaScript.text_trim.OPERATORS[mode];
+  var OPERATORS = {
+    LEFT: '.trimLeft()',
+    RIGHT: '.trimRight()',
+    BOTH: '.trim()'
+  };
+  var operator = OPERATORS[this.getTitleValue('MODE')];
   var argument0 = Blockly.JavaScript.valueToCode(this, 'TEXT',
       Blockly.JavaScript.ORDER_MEMBER) || '\'\'';
   return [argument0 + operator, Blockly.JavaScript.ORDER_FUNCTION_CALL];
-};
-
-Blockly.JavaScript.text_trim.OPERATORS = {
-  LEFT: '.trimLeft()',
-  RIGHT: '.trimRight()',
-  BOTH: '.trim()'
 };
 
 Blockly.JavaScript['text_print'] = function() {
