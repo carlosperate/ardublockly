@@ -28,55 +28,55 @@ goog.provide('Blockly.Python.lists');
 goog.require('Blockly.Python');
 
 
-Blockly.Python['lists_create_empty'] = function() {
+Blockly.Python['lists_create_empty'] = function(block) {
   // Create an empty list.
   return ['[]', Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['lists_create_with'] = function() {
+Blockly.Python['lists_create_with'] = function(block) {
   // Create a list with any number of elements of any type.
-  var code = new Array(this.itemCount_);
-  for (var n = 0; n < this.itemCount_; n++) {
-    code[n] = Blockly.Python.valueToCode(this, 'ADD' + n,
+  var code = new Array(block.itemCount_);
+  for (var n = 0; n < block.itemCount_; n++) {
+    code[n] = Blockly.Python.valueToCode(block, 'ADD' + n,
         Blockly.Python.ORDER_NONE) || 'None';
   }
   code = '[' + code.join(', ') + ']';
   return [code, Blockly.Python.ORDER_ATOMIC];
 };
 
-Blockly.Python['lists_repeat'] = function() {
+Blockly.Python['lists_repeat'] = function(block) {
   // Create a list with one element repeated.
-  var argument0 = Blockly.Python.valueToCode(this, 'ITEM',
+  var argument0 = Blockly.Python.valueToCode(block, 'ITEM',
       Blockly.Python.ORDER_NONE) || 'None';
-  var argument1 = Blockly.Python.valueToCode(this, 'NUM',
+  var argument1 = Blockly.Python.valueToCode(block, 'NUM',
       Blockly.Python.ORDER_MULTIPLICATIVE) || '0';
   var code = '[' + argument0 + '] * ' + argument1;
   return [code, Blockly.Python.ORDER_MULTIPLICATIVE];
 };
 
-Blockly.Python['lists_length'] = function() {
+Blockly.Python['lists_length'] = function(block) {
   // List length.
-  var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
+  var argument0 = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_NONE) || '[]';
   return ['len(' + argument0 + ')', Blockly.Python.ORDER_FUNCTION_CALL];
 };
 
-Blockly.Python['lists_isEmpty'] = function() {
+Blockly.Python['lists_isEmpty'] = function(block) {
   // Is the list empty?
-  var argument0 = Blockly.Python.valueToCode(this, 'VALUE',
+  var argument0 = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_NONE) || '[]';
   var code = 'not len(' + argument0 + ')';
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
 };
 
-Blockly.Python['lists_indexOf'] = function() {
+Blockly.Python['lists_indexOf'] = function(block) {
   // Find an item in the list.
-  var argument0 = Blockly.Python.valueToCode(this, 'FIND',
+  var argument0 = Blockly.Python.valueToCode(block, 'FIND',
       Blockly.Python.ORDER_NONE) || '[]';
-  var argument1 = Blockly.Python.valueToCode(this, 'VALUE',
+  var argument1 = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_MEMBER) || '\'\'';
   var code;
-  if (this.getTitleValue('END') == 'FIRST') {
+  if (block.getTitleValue('END') == 'FIRST') {
     var functionName = Blockly.Python.provideFunction_(
         'first_index',
         ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList, elem):',
@@ -97,14 +97,14 @@ Blockly.Python['lists_indexOf'] = function() {
   }
 };
 
-Blockly.Python['lists_getIndex'] = function() {
+Blockly.Python['lists_getIndex'] = function(block) {
   // Get element at index.
   // Note: Until January 2013 this block did not have MODE or WHERE inputs.
-  var mode = this.getTitleValue('MODE') || 'GET';
-  var where = this.getTitleValue('WHERE') || 'FROM_START';
-  var at = Blockly.Python.valueToCode(this, 'AT',
+  var mode = block.getTitleValue('MODE') || 'GET';
+  var where = block.getTitleValue('WHERE') || 'FROM_START';
+  var at = Blockly.Python.valueToCode(block, 'AT',
       Blockly.Python.ORDER_UNARY_SIGN) || '1';
-  var list = Blockly.Python.valueToCode(this, 'VALUE',
+  var list = Blockly.Python.valueToCode(block, 'VALUE',
       Blockly.Python.ORDER_MEMBER) || '[]';
 
   if (where == 'FIRST') {
@@ -185,16 +185,16 @@ Blockly.Python['lists_getIndex'] = function() {
   throw 'Unhandled combination (lists_getIndex).';
 };
 
-Blockly.Python['lists_setIndex'] = function() {
+Blockly.Python['lists_setIndex'] = function(block) {
   // Set element at index.
   // Note: Until February 2013 this block did not have MODE or WHERE inputs.
-  var list = Blockly.Python.valueToCode(this, 'LIST',
+  var list = Blockly.Python.valueToCode(block, 'LIST',
       Blockly.Python.ORDER_MEMBER) || '[]';
-  var mode = this.getTitleValue('MODE') || 'GET';
-  var where = this.getTitleValue('WHERE') || 'FROM_START';
-  var at = Blockly.Python.valueToCode(this, 'AT',
+  var mode = block.getTitleValue('MODE') || 'GET';
+  var where = block.getTitleValue('WHERE') || 'FROM_START';
+  var at = Blockly.Python.valueToCode(block, 'AT',
       Blockly.Python.ORDER_NONE) || '1';
-  var value = Blockly.Python.valueToCode(this, 'TO',
+  var value = Blockly.Python.valueToCode(block, 'TO',
       Blockly.Python.ORDER_NONE) || 'None';
   // Cache non-trivial values to variables to prevent repeated look-ups.
   // Closure, which accesses and modifies 'list'.
@@ -257,15 +257,15 @@ Blockly.Python['lists_setIndex'] = function() {
   throw 'Unhandled combination (lists_setIndex).';
 };
 
-Blockly.Python['lists_getSublist'] = function() {
+Blockly.Python['lists_getSublist'] = function(block) {
   // Get sublist.
-  var list = Blockly.Python.valueToCode(this, 'LIST',
+  var list = Blockly.Python.valueToCode(block, 'LIST',
       Blockly.Python.ORDER_MEMBER) || '[]';
-  var where1 = this.getTitleValue('WHERE1');
-  var where2 = this.getTitleValue('WHERE2');
-  var at1 = Blockly.Python.valueToCode(this, 'AT1',
+  var where1 = block.getTitleValue('WHERE1');
+  var where2 = block.getTitleValue('WHERE2');
+  var at1 = Blockly.Python.valueToCode(block, 'AT1',
       Blockly.Python.ORDER_ADDITIVE) || '1';
-  var at2 = Blockly.Python.valueToCode(this, 'AT2',
+  var at2 = Blockly.Python.valueToCode(block, 'AT2',
       Blockly.Python.ORDER_ADDITIVE) || '1';
   if (where1 == 'FIRST' || (where1 == 'FROM_START' && at1 == '1')) {
     at1 = '';

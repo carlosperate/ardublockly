@@ -23,7 +23,7 @@
  */
 'use strict';
 
-Blockly.Python['unittest_main'] = function() {
+Blockly.Python['unittest_main'] = function(block) {
   // Container for unit tests.
   var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
@@ -62,7 +62,7 @@ Blockly.Python['unittest_main'] = function() {
   // Setup global to hold test results.
   var code = resultsVar + ' = []\n';
   // Run tests (unindented).
-  code += Blockly.Python.statementToCode(this, 'DO')
+  code += Blockly.Python.statementToCode(block, 'DO')
       .replace(/^  /, '').replace(/\n  /g, '\n');
   var reportVar = Blockly.Python.variableDB_.getDistinctName(
       'report', Blockly.Variables.NAME_TYPE);
@@ -74,7 +74,7 @@ Blockly.Python['unittest_main'] = function() {
   return code;
 };
 
-Blockly.Python.unittest_main.defineAssert_ = function() {
+Blockly.Python.unittest_main.defineAssert_ = function(block) {
   if (!Blockly.Python.definitions_['unittest_assertequals']) {
     var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',
         Blockly.Variables.NAME_TYPE);
@@ -97,29 +97,29 @@ Blockly.Python.unittest_main.defineAssert_ = function() {
   return Blockly.Python.unittest_main.assert_;
 };
 
-Blockly.Python['unittest_assertequals'] = function() {
+Blockly.Python['unittest_assertequals'] = function(block) {
   // Asserts that a value equals another value.
   var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
   // Asserts that a value equals another value.
-  var message = Blockly.Python.quote_(this.getTitleValue('MESSAGE'));
-  var actual = Blockly.Python.valueToCode(this, 'ACTUAL',
+  var message = Blockly.Python.quote_(block.getTitleValue('MESSAGE'));
+  var actual = Blockly.Python.valueToCode(block, 'ACTUAL',
       Blockly.Python.ORDER_NONE) || 'None';
-  var expected = Blockly.Python.valueToCode(this, 'EXPECTED',
+  var expected = Blockly.Python.valueToCode(block, 'EXPECTED',
       Blockly.Python.ORDER_NONE) || 'None';
   return Blockly.Python.unittest_main.defineAssert_() +
       '(' + actual + ', ' + expected + ', ' + message + ')\n';
 };
 
-Blockly.Python['unittest_assertvalue'] = function() {
+Blockly.Python['unittest_assertvalue'] = function(block) {
   // Asserts that a value is true, false, or null.
   var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
   // Asserts that a value is true.
-  var message = Blockly.Python.quote_(this.getTitleValue('MESSAGE'));
-  var actual = Blockly.Python.valueToCode(this, 'ACTUAL',
+  var message = Blockly.Python.quote_(block.getTitleValue('MESSAGE'));
+  var actual = Blockly.Python.valueToCode(block, 'ACTUAL',
       Blockly.Python.ORDER_NONE) || 'None';
-  var expected = this.getTitleValue('EXPECTED');
+  var expected = block.getTitleValue('EXPECTED');
   if (expected == 'TRUE') {
     expected = 'True';
   } else if (expected == 'FALSE') {
@@ -131,11 +131,11 @@ Blockly.Python['unittest_assertvalue'] = function() {
       '(' + actual + ', ' + expected + ', ' + message + ')\n';
 };
 
-Blockly.Python['unittest_fail'] = function() {
+Blockly.Python['unittest_fail'] = function(block) {
   // Always assert an error.
   var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
-  var message = Blockly.Python.quote_(this.getTitleValue('MESSAGE'));
+  var message = Blockly.Python.quote_(block.getTitleValue('MESSAGE'));
   if (!Blockly.Python.definitions_['unittest_fail']) {
     var functionName = Blockly.Python.variableDB_.getDistinctName(
         'fail', Blockly.Generator.NAME_TYPE);

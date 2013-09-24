@@ -133,7 +133,11 @@ Blockly.Generator.prototype.blockToCode = function(block) {
     throw 'Language "' + this.name_ + '" does not know how to generate code ' +
         'for block type "' + block.type + '".';
   }
-  var code = func.call(block);
+  // First argument to func.call is the value of 'this' in the generator.
+  // Prior to 24 September 2013 'this' was the only way to access the block.
+  // The current prefered method of accessing the block is through the second
+  // argument to func.call, which becomes the first parameter to the generator.
+  var code = func.call(block, block);
   if (code instanceof Array) {
     // Value blocks return tuples of code and operator order.
     return [this.scrub_(block, code[0]), code[1]];

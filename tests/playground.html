@@ -59,7 +59,7 @@ function fromXml() {
 
 function toCode(lang) {
   var output = document.getElementById('importExport');
-  output.value = Blockly.Generator.workspaceToCode(lang);
+  output.value = Blockly[lang].workspaceToCode();
 }
 
 function airstrike(n) {

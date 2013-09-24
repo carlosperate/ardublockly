@@ -28,13 +28,13 @@ goog.provide('Blockly.Python.loops');
 goog.require('Blockly.Python');
 
 
-Blockly.Python['controls_repeat'] = function() {
+Blockly.Python['controls_repeat'] = function(block) {
   // Repeat n times (internal number).
-  var repeats = parseInt(this.getTitleValue('TIMES'), 10);
-  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  var repeats = parseInt(block.getTitleValue('TIMES'), 10);
+  var branch = Blockly.Python.statementToCode(block, 'DO') || '  pass\n';
   if (Blockly.Python.INFINITE_LOOP_TRAP) {
     branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
-        '\'' + this.id + '\'') + branch;
+        '\'' + block.id + '\'') + branch;
   }
   var loopVar = Blockly.Python.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
@@ -42,19 +42,19 @@ Blockly.Python['controls_repeat'] = function() {
   return code;
 };
 
-Blockly.Python['controls_repeat_ext'] = function() {
+Blockly.Python['controls_repeat_ext'] = function(block) {
   // Repeat n times (external number).
-  var repeats = Blockly.Python.valueToCode(this, 'TIMES',
+  var repeats = Blockly.Python.valueToCode(block, 'TIMES',
       Blockly.Python.ORDER_NONE) || '0';
   if (Blockly.isNumber(repeats)) {
     repeats = parseInt(repeats, 10);
   } else {
     repeats = 'int(' + repeats + ')';
   }
-  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  var branch = Blockly.Python.statementToCode(block, 'DO') || '  pass\n';
   if (Blockly.Python.INFINITE_LOOP_TRAP) {
     branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
-        '\'' + this.id + '\'') + branch;
+        '\'' + block.id + '\'') + branch;
   }
   var loopVar = Blockly.Python.variableDB_.getDistinctName(
       'count', Blockly.Variables.NAME_TYPE);
@@ -62,18 +62,18 @@ Blockly.Python['controls_repeat_ext'] = function() {
   return code;
 };
 
-Blockly.Python['controls_whileUntil'] = function() {
+Blockly.Python['controls_whileUntil'] = function(block) {
   // Do while/until loop.
-  var until = this.getTitleValue('MODE') == 'UNTIL';
-  var argument0 = Blockly.Python.valueToCode(this, 'BOOL',
+  var until = block.getTitleValue('MODE') == 'UNTIL';
+  var argument0 = Blockly.Python.valueToCode(block, 'BOOL',
       until ? Blockly.Python.ORDER_LOGICAL_NOT :
       Blockly.Python.ORDER_NONE) || 'False';
-  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  var branch = Blockly.Python.statementToCode(block, 'DO') || '  pass\n';
   if (Blockly.Python.INFINITE_LOOP_TRAP) {
     branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
-        '"' + this.id + '"') + branch;
+        '"' + block.id + '"') + branch;
   }
-  if (this.getTitleValue('MODE') == 'UNTIL') {
+  if (block.getTitleValue('MODE') == 'UNTIL') {
     if (!argument0.match(/^\w+$/)) {
       argument0 = '(' + argument0 + ')';
     }
@@ -82,20 +82,20 @@ Blockly.Python['controls_whileUntil'] = function() {
   return 'while ' + argument0 + ':\n' + branch;
 };
 
-Blockly.Python['controls_for'] = function() {
+Blockly.Python['controls_for'] = function(block) {
   // For loop.
   var variable0 = Blockly.Python.variableDB_.getName(
-      this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.Python.valueToCode(this, 'FROM',
+      block.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var argument0 = Blockly.Python.valueToCode(block, 'FROM',
       Blockly.Python.ORDER_NONE) || '0';
-  var argument1 = Blockly.Python.valueToCode(this, 'TO',
+  var argument1 = Blockly.Python.valueToCode(block, 'TO',
       Blockly.Python.ORDER_NONE) || '0';
-  var increment = Blockly.Python.valueToCode(this, 'BY',
+  var increment = Blockly.Python.valueToCode(block, 'BY',
       Blockly.Python.ORDER_NONE) || '1';
-  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  var branch = Blockly.Python.statementToCode(block, 'DO') || '  pass\n';
   if (Blockly.Python.INFINITE_LOOP_TRAP) {
     branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
-        '"' + this.id + '"') + branch;
+        '"' + block.id + '"') + branch;
   }
 
   var code = '';
@@ -200,24 +200,24 @@ Blockly.Python['controls_for'] = function() {
   return code;
 };
 
-Blockly.Python['controls_forEach'] = function() {
+Blockly.Python['controls_forEach'] = function(block) {
   // For each loop.
   var variable0 = Blockly.Python.variableDB_.getName(
-      this.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
-  var argument0 = Blockly.Python.valueToCode(this, 'LIST',
+      block.getTitleValue('VAR'), Blockly.Variables.NAME_TYPE);
+  var argument0 = Blockly.Python.valueToCode(block, 'LIST',
       Blockly.Python.ORDER_RELATIONAL) || '[]';
-  var branch = Blockly.Python.statementToCode(this, 'DO') || '  pass\n';
+  var branch = Blockly.Python.statementToCode(block, 'DO') || '  pass\n';
   if (Blockly.Python.INFINITE_LOOP_TRAP) {
     branch = Blockly.Python.INFINITE_LOOP_TRAP.replace(/%1/g,
-        '"' + this.id + '"') + branch;
+        '"' + block.id + '"') + branch;
   }
   var code = 'for ' + variable0 + ' in ' + argument0 + ':\n' + branch;
   return code;
 };
 
-Blockly.Python['controls_flow_statements'] = function() {
+Blockly.Python['controls_flow_statements'] = function(block) {
   // Flow statements: continue, break.
-  switch (this.getTitleValue('FLOW')) {
+  switch (block.getTitleValue('FLOW')) {
     case 'BREAK':
       return 'break\n';
     case 'CONTINUE':

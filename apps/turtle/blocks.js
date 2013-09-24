@@ -41,12 +41,12 @@ Blockly.Blocks['draw_move'] = {
   }
 };
 
-Blockly.JavaScript['draw_move'] = function() {
+Blockly.JavaScript['draw_move'] = function(block) {
   // Generate JavaScript for moving forward or backwards.
-  var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
+  var value = Blockly.JavaScript.valueToCode(block, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
-  return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', \'block_id_' + this.id + '\');\n';
+  return 'Turtle.' + block.getTitleValue('DIR') +
+      '(' + value + ', \'block_id_' + block.id + '\');\n';
 };
 
 
@@ -66,12 +66,12 @@ Blockly.Blocks['draw_turn'] = {
   }
 };
 
-Blockly.JavaScript['draw_turn'] = function() {
+Blockly.JavaScript['draw_turn'] = function(block) {
   // Generate JavaScript for turning left or right.
-  var value = Blockly.JavaScript.valueToCode(this, 'VALUE',
+  var value = Blockly.JavaScript.valueToCode(block, 'VALUE',
       Blockly.JavaScript.ORDER_NONE) || '0';
-  return 'Turtle.' + this.getTitleValue('DIR') +
-      '(' + value + ', \'block_id_' + this.id + '\');\n';
+  return 'Turtle.' + block.getTitleValue('DIR') +
+      '(' + value + ', \'block_id_' + block.id + '\');\n';
 };
 
 Blockly.Blocks['draw_width'] = {
@@ -87,11 +87,11 @@ Blockly.Blocks['draw_width'] = {
   }
 };
 
-Blockly.JavaScript['draw_width'] = function() {
+Blockly.JavaScript['draw_width'] = function(block) {
   // Generate JavaScript for setting the width.
-  var width = Blockly.JavaScript.valueToCode(this, 'WIDTH',
+  var width = Blockly.JavaScript.valueToCode(block, 'WIDTH',
       Blockly.JavaScript.ORDER_NONE) || '1';
-  return 'Turtle.penWidth(' + width + ', \'block_id_' + this.id + '\');\n';
+  return 'Turtle.penWidth(' + width + ', \'block_id_' + block.id + '\');\n';
 };
 
 Blockly.Blocks['draw_pen'] = {
@@ -109,10 +109,10 @@ Blockly.Blocks['draw_pen'] = {
   }
 };
 
-Blockly.JavaScript['draw_pen'] = function() {
+Blockly.JavaScript['draw_pen'] = function(block) {
   // Generate JavaScript for pen up/down.
-  return 'Turtle.' + this.getTitleValue('PEN') +
-      '(\'block_id_' + this.id + '\');\n';
+  return 'Turtle.' + block.getTitleValue('PEN') +
+      '(\'block_id_' + block.id + '\');\n';
 };
 
 Blockly.Blocks['draw_colour'] = {
@@ -128,12 +128,12 @@ Blockly.Blocks['draw_colour'] = {
   }
 };
 
-Blockly.JavaScript['draw_colour'] = function() {
+Blockly.JavaScript['draw_colour'] = function(block) {
   // Generate JavaScript for setting the colour.
-  var colour = Blockly.JavaScript.valueToCode(this, 'COLOUR',
+  var colour = Blockly.JavaScript.valueToCode(block, 'COLOUR',
       Blockly.JavaScript.ORDER_NONE) || '\'#000000\'';
   return 'Turtle.penColour(' + colour + ', \'block_id_' +
-      this.id + '\');\n';
+      block.id + '\');\n';
 };
 
 Blockly.Blocks['turtle_visibility'] = {
@@ -151,10 +151,10 @@ Blockly.Blocks['turtle_visibility'] = {
   }
 };
 
-Blockly.JavaScript['turtle_visibility'] = function() {
+Blockly.JavaScript['turtle_visibility'] = function(block) {
   // Generate JavaScript for changing turtle visibility.
-  return 'Turtle.' + this.getTitleValue('VISIBILITY') +
-      '(\'block_id_' + this.id + '\');\n';
+  return 'Turtle.' + block.getTitleValue('VISIBILITY') +
+      '(\'block_id_' + block.id + '\');\n';
 };
 
 Blockly.Blocks['draw_print'] = {
@@ -170,12 +170,12 @@ Blockly.Blocks['draw_print'] = {
   }
 };
 
-Blockly.JavaScript['draw_print'] = function() {
+Blockly.JavaScript['draw_print'] = function(block) {
   // Generate JavaScript for printing text.
-  var argument0 = String(Blockly.JavaScript.valueToCode(this, 'TEXT',
+  var argument0 = String(Blockly.JavaScript.valueToCode(block, 'TEXT',
       Blockly.JavaScript.ORDER_NONE) || '\'\'');
   return 'Turtle.drawPrint(' + argument0 + ', \'block_id_' +
-      this.id + '\');\n';
+      block.id + '\');\n';
 };
 
 Blockly.Blocks['draw_font'] = {
@@ -207,10 +207,10 @@ Blockly.Blocks['draw_font'] = {
   }
 };
 
-Blockly.JavaScript['draw_font'] = function() {
+Blockly.JavaScript['draw_font'] = function(block) {
   // Generate JavaScript for setting the font.
-  return 'Turtle.drawFont(\'' + this.getTitleValue('FONT') + '\',' +
-      Number(this.getTitleValue('FONTSIZE')) + ',\'' +
-      this.getTitleValue('FONTSTYLE') + '\', \'block_id_' +
-      this.id + '\');\n';
+  return 'Turtle.drawFont(\'' + block.getTitleValue('FONT') + '\',' +
+      Number(block.getTitleValue('FONTSIZE')) + ',\'' +
+      block.getTitleValue('FONTSTYLE') + '\', \'block_id_' +
+      block.id + '\');\n';
 };

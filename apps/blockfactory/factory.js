@@ -295,7 +295,7 @@ function updateGenerator() {
   }
   var language = document.getElementById('language').value;
   var code = [];
-  code.push("Blockly." + language + "['" + blockType + "'] = function() {");
+  code.push("Blockly." + language + "['" + blockType + "'] = function(block) {");
   // Loop through every block, and generate getters for any fields or inputs.
   var blocks = rootBlock.getDescendants();
   for (var x = 0, block; block = blocks[x]; x++) {
@@ -303,45 +303,45 @@ function updateGenerator() {
       case 'title_input':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('text', name) +
-                  " = this.getTitleValue('" + name + "');");
+                  " = block.getTitleValue('" + name + "');");
         break;
       case 'title_angle':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('angle', name) +
-                  " = this.getTitleValue('" + name + "');");
+                  " = block.getTitleValue('" + name + "');");
         break;
       case 'title_dropdown':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('dropdown', name) +
-                  " = this.getTitleValue('" + name + "');");
+                  " = block.getTitleValue('" + name + "');");
         break;
       case 'title_checkbox':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('checkbox', name) +
-                  " = this.getTitleValue('" + name + "') == 'TRUE';");
+                  " = block.getTitleValue('" + name + "') == 'TRUE';");
         break;
       case 'title_colour':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('colour', name) +
-                  " = this.getTitleValue('" + name + "');");
+                  " = block.getTitleValue('" + name + "');");
         break;
       case 'title_variable':
         var name = block.getTitleValue('TITLENAME');
         code.push(makeVar('variable', name) +
                   " = Blockly." + language +
-                  ".variableDB_.getName(this.getTitleValue('" + name +
+                  ".variableDB_.getName(block.getTitleValue('" + name +
                   "'), Blockly.Variables.NAME_TYPE);");
         break;
       case 'input_value':
         var name = block.getTitleValue('INPUTNAME');
         code.push(makeVar('value', name) +
-                  " = Blockly." + language + ".valueToCode(this, '" + name +
+                  " = Blockly." + language + ".valueToCode(block, '" + name +
                   "', Blockly." + language + ".ORDER_ATOMIC);");
         break;
       case 'input_statement':
         var name = block.getTitleValue('INPUTNAME');
         code.push(makeVar('statements', name) +
-                  " = Blockly.' + language + '.statementToCode(this, '" +
+                  " = Blockly.' + language + '.statementToCode(block, '" +
                   name + "');");
         break;
     }

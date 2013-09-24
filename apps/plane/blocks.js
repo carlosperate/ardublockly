@@ -34,9 +34,9 @@ Blockly.Blocks['plane_set_seats'] = {
   }
 };
 
-Blockly.JavaScript['plane_set_seats'] = function() {
+Blockly.JavaScript['plane_set_seats'] = function(block) {
   // Generate JavaScript for seat variable setter.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+  var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || 'NaN';
   return argument0 + ';';
 };
@@ -57,7 +57,7 @@ Blockly.Blocks['plane_get_rows'] = {
   }
 };
 
-Blockly.JavaScript['plane_get_rows'] = function() {
+Blockly.JavaScript['plane_get_rows'] = function(block) {
   // Generate JavaScript for row variable getter.
   return ['Plane.rows1st', Blockly.JavaScript.ORDER_MEMBER];
 };
@@ -78,7 +78,7 @@ Blockly.Blocks['plane_get_rows1st'] = {
   }
 };
 
-Blockly.JavaScript['plane_get_rows1st'] = function() {
+Blockly.JavaScript['plane_get_rows1st'] = function(block) {
   // Generate JavaScript for first class row variable getter.
   return ['Plane.rows1st', Blockly.JavaScript.ORDER_MEMBER];
 };
@@ -99,7 +99,7 @@ Blockly.Blocks['plane_get_rows2nd'] = {
   }
 };
 
-Blockly.JavaScript['plane_get_rows2nd'] = function() {
+Blockly.JavaScript['plane_get_rows2nd'] = function(block) {
   // Generate JavaScript for second class row variable getter.
   return ['Plane.rows2nd', Blockly.JavaScript.ORDER_MEMBER];
 };

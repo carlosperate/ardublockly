@@ -35,7 +35,7 @@ Blockly.Blocks['graph_get_x'] = {
   }
 };
 
-Blockly.JavaScript['graph_get_x'] = function() {
+Blockly.JavaScript['graph_get_x'] = function(block) {
   // x variable getter.
   return ['x', Blockly.JavaScript.ORDER_ATOMIC];
 };
@@ -51,9 +51,9 @@ Blockly.Blocks['graph_set_y'] = {
   }
 };
 
-Blockly.JavaScript['graph_set_y'] = function() {
+Blockly.JavaScript['graph_set_y'] = function(block) {
   // y variable setter.
-  var argument0 = Blockly.JavaScript.valueToCode(this, 'VALUE',
+  var argument0 = Blockly.JavaScript.valueToCode(block, 'VALUE',
       Blockly.JavaScript.ORDER_ASSIGNMENT) || '';
   return argument0 + ';';
 };

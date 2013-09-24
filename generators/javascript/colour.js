@@ -28,13 +28,13 @@ goog.provide('Blockly.JavaScript.colour');
 goog.require('Blockly.JavaScript');
 
 
-Blockly.JavaScript['colour_picker'] = function() {
+Blockly.JavaScript['colour_picker'] = function(block) {
   // Colour picker.
-  var code = '\'' + this.getTitleValue('COLOUR') + '\'';
+  var code = '\'' + block.getTitleValue('COLOUR') + '\'';
   return [code, Blockly.JavaScript.ORDER_ATOMIC];
 };
 
-Blockly.JavaScript['colour_random'] = function() {
+Blockly.JavaScript['colour_random'] = function(block) {
   // Generate a random colour.
   if (!Blockly.JavaScript.definitions_['colour_random']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
@@ -51,13 +51,13 @@ Blockly.JavaScript['colour_random'] = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript['colour_rgb'] = function() {
+Blockly.JavaScript['colour_rgb'] = function(block) {
   // Compose a colour from RGB components expressed as percentages.
-  var red = Blockly.JavaScript.valueToCode(this, 'RED',
+  var red = Blockly.JavaScript.valueToCode(block, 'RED',
       Blockly.JavaScript.ORDER_COMMA) || 0;
-  var green = Blockly.JavaScript.valueToCode(this, 'GREEN',
+  var green = Blockly.JavaScript.valueToCode(block, 'GREEN',
       Blockly.JavaScript.ORDER_COMMA) || 0;
-  var blue = Blockly.JavaScript.valueToCode(this, 'BLUE',
+  var blue = Blockly.JavaScript.valueToCode(block, 'BLUE',
       Blockly.JavaScript.ORDER_COMMA) || 0;
 
   if (!Blockly.JavaScript.definitions_['colour_rgb']) {
@@ -81,13 +81,13 @@ Blockly.JavaScript['colour_rgb'] = function() {
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-Blockly.JavaScript['colour_blend'] = function() {
+Blockly.JavaScript['colour_blend'] = function(block) {
   // Blend two colours together.
-  var c1 = Blockly.JavaScript.valueToCode(this, 'COLOUR1',
+  var c1 = Blockly.JavaScript.valueToCode(block, 'COLOUR1',
       Blockly.JavaScript.ORDER_COMMA) || '\'#000000\'';
-  var c2 = Blockly.JavaScript.valueToCode(this, 'COLOUR2',
+  var c2 = Blockly.JavaScript.valueToCode(block, 'COLOUR2',
       Blockly.JavaScript.ORDER_COMMA) || '\'#000000\'';
-  var ratio = Blockly.JavaScript.valueToCode(this, 'RATIO',
+  var ratio = Blockly.JavaScript.valueToCode(block, 'RATIO',
       Blockly.JavaScript.ORDER_COMMA) || 0.5;
 
   if (!Blockly.JavaScript.definitions_['colour_blend']) {

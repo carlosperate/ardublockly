@@ -38,9 +38,9 @@ Blockly.Blocks['maze_moveForward'] = {
   }
 };
 
-Blockly.JavaScript['maze_moveForward'] = function() {
+Blockly.JavaScript['maze_moveForward'] = function(block) {
   // Generate JavaScript for moving forward.
-  return 'Maze.moveForward(\'block_id_' + this.id + '\');\n';
+  return 'Maze.moveForward(\'block_id_' + block.id + '\');\n';
 };
 
 Blockly.Blocks['maze_turn'] = {
@@ -64,10 +64,10 @@ Blockly.Blocks['maze_turn'] = {
   }
 };
 
-Blockly.JavaScript['maze_turn'] = function() {
+Blockly.JavaScript['maze_turn'] = function(block) {
   // Generate JavaScript for turning left or right.
-  var dir = this.getTitleValue('DIR');
-  return 'Maze.' + dir + '(\'block_id_' + this.id + '\');\n';
+  var dir = block.getTitleValue('DIR');
+  return 'Maze.' + dir + '(\'block_id_' + block.id + '\');\n';
 };
 
 Blockly.Blocks['maze_if'] = {
@@ -94,11 +94,11 @@ Blockly.Blocks['maze_if'] = {
 };
 
 
-Blockly.JavaScript['maze_if'] = function() {
+Blockly.JavaScript['maze_if'] = function(block) {
   // Generate JavaScript for 'if' conditional if there is a path.
-  var argument = 'Maze.' + this.getTitleValue('DIR') +
-      '(\'block_id_' + this.id + '\')';
-  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
+  var argument = 'Maze.' + block.getTitleValue('DIR') +
+      '(\'block_id_' + block.id + '\')';
+  var branch = Blockly.JavaScript.statementToCode(block, 'DO');
   var code = 'if (' + argument + ') {\n' + branch + '}\n';
   return code;
 };
@@ -128,12 +128,12 @@ Blockly.Blocks['maze_ifElse'] = {
   }
 };
 
-Blockly.JavaScript['maze_ifElse'] = function() {
+Blockly.JavaScript['maze_ifElse'] = function(block) {
   // Generate JavaScript for 'if/else' conditional if there is a path.
-  var argument = 'Maze.' + this.getTitleValue('DIR') +
-      '(\'block_id_' + this.id + '\')';
-  var branch0 = Blockly.JavaScript.statementToCode(this, 'DO');
-  var branch1 = Blockly.JavaScript.statementToCode(this, 'ELSE');
+  var argument = 'Maze.' + block.getTitleValue('DIR') +
+      '(\'block_id_' + block.id + '\')';
+  var branch0 = Blockly.JavaScript.statementToCode(block, 'DO');
+  var branch1 = Blockly.JavaScript.statementToCode(block, 'ELSE');
   var code = 'if (' + argument + ') {\n' + branch0 +
              '} else {\n' + branch1 + '}\n';
   return code;
@@ -154,12 +154,12 @@ Blockly.Blocks['maze_forever'] = {
   }
 };
 
-Blockly.JavaScript['maze_forever'] = function() {
+Blockly.JavaScript['maze_forever'] = function(block) {
   // Generate JavaScript for do forever loop.
-  var branch = Blockly.JavaScript.statementToCode(this, 'DO');
+  var branch = Blockly.JavaScript.statementToCode(block, 'DO');
   if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
     branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,
-        '\'block_id_' + this.id + '\'') + branch;
+        '\'block_id_' + block.id + '\'') + branch;
   }
   return 'while (true) {\n' + branch + '}\n';
 };
