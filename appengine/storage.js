@@ -32,7 +32,7 @@ var BlocklyStorage = {};
  */
 BlocklyStorage.backupBlocks_ = function() {
   if ('localStorage' in window) {
-    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
     // Gets the current URL, not including the hash.
     var url = window.location.href.split('#')[0];
     window.localStorage.setItem(url, Blockly.Xml.domToText(xml));
@@ -53,7 +53,7 @@ BlocklyStorage.restoreBlocks = function() {
   var url = window.location.href.split('#')[0];
   if ('localStorage' in window && window.localStorage[url]) {
     var xml = Blockly.Xml.textToDom(window.localStorage[url]);
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+    Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
   }
 };
 
@@ -61,7 +61,7 @@ BlocklyStorage.restoreBlocks = function() {
  * Save blocks to database and return a link containing key to XML.
  */
 BlocklyStorage.link = function() {
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
   var data = Blockly.Xml.domToText(xml);
   BlocklyStorage.makeRequest_('/storage', 'xml', data);
 };
@@ -71,7 +71,7 @@ BlocklyStorage.link = function() {
  * @param {string} key Key to XML, obtained from href.
  */
 BlocklyStorage.retrieveXml = function(key) {
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var xml = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
   BlocklyStorage.makeRequest_('/storage', 'key', key);
 };
 
@@ -140,10 +140,10 @@ BlocklyStorage.handleRequest_ = function() {
  * @private
  */
 BlocklyStorage.monitorChanges_ = function() {
-  var startXmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var startXmlDom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
   var startXmlText = Blockly.Xml.domToText(startXmlDom);
   function change() {
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.getMainWorkspace());
     var xmlText = Blockly.Xml.domToText(xmlDom);
     if (startXmlText != xmlText) {
       window.location.hash = '';
@@ -166,8 +166,8 @@ BlocklyStorage.loadXml_ = function(xml) {
     return;
   }
   // Clear the workspace to avoid merge.
-  Blockly.mainWorkspace.clear();
-  Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  Blockly.getMainWorkspace().clear();
+  Blockly.Xml.domToWorkspace(Blockly.getMainWorkspace(), xml);
 };
 
 /**

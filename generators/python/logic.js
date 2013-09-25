@@ -71,8 +71,22 @@ Blockly.Python['logic_operation'] = function(block) {
   var operator = (block.getTitleValue('OP') == 'AND') ? 'and' : 'or';
   var order = (operator == 'and') ? Blockly.Python.ORDER_LOGICAL_AND :
       Blockly.Python.ORDER_LOGICAL_OR;
-  var argument0 = Blockly.Python.valueToCode(block, 'A', order) || 'False';
-  var argument1 = Blockly.Python.valueToCode(block, 'B', order) || 'False';
+  var argument0 = Blockly.Python.valueToCode(block, 'A', order);
+  var argument1 = Blockly.Python.valueToCode(block, 'B', order);
+  if (!argument0 && !argument1) {
+    // If there are no arguments, then the return value is false.
+    argument0 = 'False';
+    argument1 = 'False';
+  } else {
+    // Single missing arguments have no effect on the return value.
+    var defaultArgument = (operator == 'and') ? 'True' : 'False';
+    if (!argument0) {
+      argument0 = defaultArgument;
+    }
+    if (!argument1) {
+      argument1 = defaultArgument;
+    }
+  }
   var code = argument0 + ' ' + operator + ' ' + argument1;
   return [code, order];
 };
@@ -80,7 +94,7 @@ Blockly.Python['logic_operation'] = function(block) {
 Blockly.Python['logic_negate'] = function(block) {
   // Negation.
   var argument0 = Blockly.Python.valueToCode(block, 'BOOL',
-      Blockly.Python.ORDER_LOGICAL_NOT) || 'False';
+      Blockly.Python.ORDER_LOGICAL_NOT) || 'True';
   var code = 'not ' + argument0;
   return [code, Blockly.Python.ORDER_LOGICAL_NOT];
 };

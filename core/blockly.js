@@ -683,8 +683,16 @@ Blockly.removeChangeListener = function(bindData) {
   Blockly.unbindEvent_(bindData);
 };
 
+/**
+ * Returns the main workspace.
+ * @return {!Blockly.Workspace} The main workspace.
+ */
+Blockly.getMainWorkspace = function() {
+  return Blockly.mainWorkspace;
+};
+
 // Export symbols that would otherwise be renamed by Closure compiler.
 window['Blockly'] = Blockly;
-Blockly['mainWorkspace'] = Blockly.mainWorkspace;
+Blockly['getMainWorkspace'] = Blockly.getMainWorkspace;
 Blockly['addChangeListener'] = Blockly.addChangeListener;
 Blockly['removeChangeListener'] = Blockly.removeChangeListener;

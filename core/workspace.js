@@ -381,3 +381,6 @@ Blockly.Workspace.prototype.remainingCapacity = function() {
   }
   return this.maxBlocks - this.getAllBlocks().length;
 };
+
+// Export symbols that would otherwise be renamed by Closure compiler.
+Blockly.Workspace.prototype['clear'] = Blockly.Workspace.prototype.clear;
