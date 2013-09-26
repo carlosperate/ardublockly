@@ -31,6 +31,7 @@ var Maze = {};
 // Supported languages.
 BlocklyApps.LANGUAGES = {
   // Format: ['Language name', 'direction', 'XX_compressed.js']
+  'br': ['Brezhoneg', 'ltr', 'msg/js/en.js'],
   'ca': ['Català', 'ltr', 'msg/js/en.js'],
   'cs': ['Čeština', 'ltr', 'msg/js/en.js'],
   'da': ['Dansk', 'ltr', 'msg/js/en.js'],
@@ -40,17 +41,20 @@ BlocklyApps.LANGUAGES = {
   'es': ['Español', 'ltr', 'msg/js/en.js'],
   'eu': ['Euskara', 'ltr', 'msg/js/en.js'],
   'fr': ['Français', 'ltr', 'msg/js/en.js'],
+  'gl': ['Galego', 'ltr', 'msg/js/en.js'],
   'hu': ['Magyar', 'ltr', 'msg/js/en.js'],
   'ia': ['Interlingua', 'ltr', 'msg/js/en.js'],
   'it': ['Italiano', 'ltr', 'msg/js/en.js'],
   'ko': ['한국어', 'ltr', 'msg/js/en.js'],
   'lv': ['Latviešu', 'ltr', 'msg/js/en.js'],
   'mk': ['Македонски', 'ltr', 'msg/js/en.js'],
+  'ms': ['Bahasa Melayu', 'ltr', 'msg/js/en.js'],
   'nl': ['Nederlands', 'ltr', 'msg/js/en.js'],
   'pl': ['Polski', 'ltr', 'msg/js/en.js'],
   'pms': ['Piemontèis', 'ltr', 'msg/js/en.js'],
   'pt': ['Português', 'ltr', 'msg/js/pt_br.js'],
   'ru': ['Русский', 'ltr', 'msg/js/en.js'],
+  'sk': ['Slovenčina', 'ltr', 'msg/js/en.js'],
   'sr': ['Српски', 'ltr', 'msg/js/en.js'],
   'sv': ['Svenska', 'ltr', 'msg/js/en.js'],
   'sw': ['Kishwahili', 'ltr', 'msg/js/en.js'],
