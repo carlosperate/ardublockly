@@ -24,12 +24,12 @@
 
 // Supported languages.
 BlocklyApps.LANGUAGES = {
-  // Format: ['Language name', 'direction', 'XX_compressed.js']
-  'en': ['English', 'ltr', 'msg/js/en.js'],
-  'de': ['Deutsch', 'ltr', 'msg/js/de.js'],
-  'hu': ['Magyar', 'ltr', 'msg/js/en.js'],
-  'vi': ['Tiếng Việt', 'ltr', 'msg/js/vi.js'],
-  'zh-tw': ['中國的', 'ltr', 'msg/js/zh_tw.js']
+  // Format: ['Language name', 'msg/js/XX.js']
+  'en': ['English', 'msg/js/en.js'],
+  'de': ['Deutsch', 'msg/js/de.js'],
+  'hu': ['Magyar', 'msg/js/en.js'],
+  'vi': ['Tiếng Việt', 'msg/js/vi.js'],
+  'zh-tw': ['中國的', 'msg/js/zh_tw.js']
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
 
@@ -129,7 +129,7 @@ Code.renderContent = function() {
 Code.init = function() {
   BlocklyApps.init();
 
-  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  var rtl = BlocklyApps.isRtl();
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('content_blocks'),
       {path: '../../',
@@ -172,6 +172,10 @@ Code.init = function() {
 
   Code.tabClick('tab_' + Code.selected);
   Blockly.fireUiEvent(window, 'resize');
+
+  BlocklyApps.bindClick('trashButton',
+      function() {Code.discard(); Code.renderContent();});
+  BlocklyApps.bindClick('runButton', Code.runJS);
 
   // Lazy-load the syntax-highlighting.
   window.setTimeout(BlocklyApps.importPrettify, 1);

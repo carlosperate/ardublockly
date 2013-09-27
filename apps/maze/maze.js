@@ -494,7 +494,7 @@ Maze.init = function() {
   }
   Blockly.bindEvent_(window, 'resize', null, Maze.hidePegmanMenu);
 
-  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  var rtl = BlocklyApps.isRtl();
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
@@ -545,6 +545,9 @@ Maze.init = function() {
   Blockly.addChangeListener(function() {Maze.updateCapacity()});
 
   document.body.addEventListener('mousemove', Maze.updatePegSpin_, true);
+
+  BlocklyApps.bindClick('runButton', Maze.runButtonClick);
+  BlocklyApps.bindClick('resetButton', Maze.resetButtonClick);
 
   if (Maze.LEVEL == 1) {
     // Make connecting blocks easier for beginners.
@@ -647,9 +650,26 @@ Maze.levelHelp = function() {
       }
     }
   } else if (Maze.LEVEL == 4) {
-    if (userBlocks.indexOf('maze_forever') == -1 ||
-        Blockly.mainWorkspace.getAllBlocks().length < 3 ||
-        Blockly.mainWorkspace.getTopBlocks(false).length != 1) {
+    var showHelp = true;
+    // Only show help if there is not a loop with two nested blocks.
+    var blocks = Blockly.mainWorkspace.getAllBlocks();
+    for (var i = 0; i < blocks.length; i++) {
+      var block = blocks[i];
+      if (block.type != 'maze_forever') {
+        continue;
+      }
+      var j = 0;
+      while (block) {
+        var kids = block.getChildren();
+        block = kids.length ? kids[0] : null;
+        j++;
+      }
+      if (j > 2) {
+        showHelp = false;
+        break;
+      }
+    }
+    if (showHelp) {
       content = document.getElementById('dialogHelpRepeatMany');
       style = {width: '360px', top: '320px'};
       style[Blockly.RTL ? 'right' : 'left'] = '425px';

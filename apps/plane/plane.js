@@ -30,10 +30,10 @@ var Plane = {};
 
 // Supported languages.
 BlocklyApps.LANGUAGES = {
-  // Format: ['Language name', 'direction', 'XX_compressed.js']
-  'en': ['English', 'ltr', 'msg/js/en.js'],
-  'hu': ['Magyar', 'ltr', 'msg/js/en.js'],
-  'vi': ['Tiếng Việt', 'ltr', 'msg/js/vi.js']
+  // Format: ['Language name', 'msg/js/XX.js']
+  'en': ['English', 'msg/js/en.js'],
+  'hu': ['Magyar', 'msg/js/en.js'],
+  'vi': ['Tiếng Việt', 'msg/js/vi.js']
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
 
@@ -91,7 +91,7 @@ Plane.setCorrect = function(ok) {
 Plane.init = function() {
   BlocklyApps.init();
 
-  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
+  var rtl = BlocklyApps.isRtl();
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',

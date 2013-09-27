@@ -113,10 +113,10 @@
         <img id="spinner" style="visibility: hidden;" src="loading.gif" height=15 width=15>
       </td>
       <td style="width: 190px; text-align: center">
-        <button id="runButton" class="primary" onclick="Turtle.runButtonClick();" title="{msg meaning="Turtle.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the turtle on the canvas."}Makes the turtle do what the blocks say.{/msg}">
+        <button id="runButton" class="primary" title="{msg meaning="Turtle.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the turtle on the canvas."}Makes the turtle do what the blocks say.{/msg}">
           <img src="../../media/1x1.gif" class="run icon21">{msg meaning="Apps.runProgram" desc="TODO"}Run Program{/msg}
         </button>
-        <button id="resetButton" class="primary" onclick="Turtle.resetButtonClick();" style="display: none">
+        <button id="resetButton" class="primary" style="display: none">
           <img src="../../media/1x1.gif" class="stop icon21"> {msg meaning="Apps.resetProgram" desc="IBID"}Reset{/msg}
         </button>
       </td>
@@ -124,10 +124,10 @@
   </table>
 
   <div id="toolbarDiv">
-    <button class="notext" title="{msg meaning="Apps.codeTooltip" desc="IBID"}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode(this);">
+    <button id="codeButton" class="notext" title="{msg meaning="Apps.codeTooltip" desc="IBID"}See generated JavaScript code.{/msg}">
       <img src='../../media/1x1.gif' class="code icon21">
     </button>
-    <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="IBID"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
+    <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="IBID"}Save and link to blocks.{/msg}">
       <img src='../../media/1x1.gif' class="link icon21">
     </button>
     <button class="notext" id="captureButton" title="{msg meaning="Turtle.captureTooltip" desc="tooltip - Pressing this button causes the drawing created by the user's program to be saved as an image on the user's computer.  The button icon looks like a camera."}Save the drawing.{/msg}" onclick="Turtle.createImageLink();">

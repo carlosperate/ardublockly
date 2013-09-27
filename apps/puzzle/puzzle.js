@@ -30,66 +30,65 @@ var Puzzle = {};
 
 // Supported languages.
 BlocklyApps.LANGUAGES = {
-  // Format: ['Language name', 'direction', 'XX_compressed.js']
-  'af': ['Afrikaans', 'ltr', 'msg/js/en.js'],
-  'ar': ['العربية', 'rtl', 'msg/js/en.js'],
-  'cs': ['Česky', 'ltr', 'msg/js/en.js'],
-  'be-tarask': ['Taraškievica', 'ltr', 'msg/js/en.js'],
-  'br': ['Brezhoneg', 'ltr', 'msg/js/en.js'],
-  'ca': ['Català', 'ltr', 'msg/js/en.js'],
-  'cdo': ['閩東語', 'ltr', 'msg/js/zh_tw.js'],
-  'da': ['Dansk', 'ltr', 'msg/js/en.js'],
-  'de': ['Deutsch', 'ltr', 'msg/js/de.js'],
-  'el': ['Ελληνικά', 'ltr', 'msg/js/en.js'],
-  'en': ['English', 'ltr', 'msg/js/en.js'],
-  'es': ['Español', 'ltr', 'msg/js/en.js'],
-  'eu': ['Euskara', 'ltr', 'msg/js/en.js'],
-  'fa': ['یسراف', 'rtl', 'msg/js/en.js'],
-  'fi': ['Suomi', 'ltr', 'msg/js/en.js'],
-  'fo': ['Føroyskt', 'ltr', 'msg/js/en.js'],
-  'fr': ['Français', 'ltr', 'msg/js/en.js'],
-  'frr': ['Frasch', 'ltr', 'msg/js/de.js'],
-  'gl': ['Galego', 'ltr', 'msg/js/en.js'],
-  'hak': ['客家話', 'ltr', 'msg/js/en.js'],
-  'he': ['עברית', 'rtl', 'msg/js/en.js'],
-  'hu': ['Magyar', 'ltr', 'msg/js/en.js'],
-  'ia': ['Interlingua', 'ltr', 'msg/js/en.js'],
-  'it': ['Italiano', 'ltr', 'msg/js/en.js'],
-  'ja': ['日本語', 'ltr', 'msg/js/en.js'],
-  'ka': ['ქართული', 'ltr', 'msg/js/en.js'],
-  'km': ['ភាសាខ្មែរ', 'ltr', 'msg/js/en.js'],
-  'ko': ['한국어', 'ltr', 'msg/js/en.js'],
-  'ksh': ['Ripoarėsch', 'ltr', 'msg/js/de.js'],
-  'ky': ['Кыргызча', 'ltr', 'msg/js/en.js'],
-  'la': ['Latine', 'ltr', 'msg/js/en.js'],
-  'lb': ['Lëtzebuergesch', 'ltr', 'msg/js/de.js'],
-  'lt': ['Lietuvių', 'ltr', 'msg/js/en.js'],
-  'lv': ['Latviešu', 'ltr', 'msg/js/en.js'],
-  'ml': ['മലയാളം', 'ltr', 'msg/js/en.js'],
-  'mk': ['Македонски', 'ltr', 'msg/js/en.js'],
-  'mr': ['मराठी', 'ltr', 'msg/js/en.js'],
-  'ms': ['Bahasa Melayu', 'ltr', 'msg/js/en.js'],
-  'mzn': ['مازِرونی', 'rtl', 'msg/js/en.js'],
-  'nb': ['Norsk Bokmål', 'ltr', 'msg/js/en.js'],
-  'nl': ['Nederlands, Vlaams', 'ltr', 'msg/js/en.js'],
-  'oc': ['Lenga d\'òc', 'ltr', 'msg/js/en.js'],
-  'pa': ['पंजाबी', 'ltr', 'msg/js/en.js'],
-  'pl': ['Polski', 'ltr', 'msg/js/en.js'],
-  'pms': ['Piemontèis', 'ltr', 'msg/js/en.js'],
-  'ps': ['پښتو', 'rtl', 'msg/js/en.js'],
-  'pt-br': ['Português', 'ltr', 'msg/js/pt_br.js'],
-  'ru': ['Русский', 'ltr', 'msg/js/en.js'],
-  'sk': ['Slovenčina', 'ltr', 'msg/js/en.js'],
-  'sv': ['Svenska', 'ltr', 'msg/js/en.js'],
-  'sw': ['Kishwahili', 'ltr', 'msg/js/en.js'],
-  'tr': ['Türkçe', 'ltr', 'msg/js/en.js'],
-  'uk': ['Українська', 'ltr', 'msg/js/en.js'],
-  'vi': ['Tiếng Việt', 'ltr', 'msg/js/vi.js'],
-  'zh-hans': ['简体字', 'ltr', 'msg/js/zh_tw.js'],
-  'zh-hant': ['中文', 'ltr', 'msg/js/zh_tw.js']
+  // Format: ['Language name', 'msg/js/XX.js']
+  'af': ['Afrikaans', 'msg/js/en.js'],
+  'ar': ['العربية', 'msg/js/en.js'],
+  'cs': ['Česky', 'msg/js/en.js'],
+  'be-tarask': ['Taraškievica', 'msg/js/en.js'],
+  'br': ['Brezhoneg', 'msg/js/en.js'],
+  'ca': ['Català', 'msg/js/en.js'],
+  'cdo': ['閩東語', 'msg/js/zh_tw.js'],
+  'da': ['Dansk', 'msg/js/en.js'],
+  'de': ['Deutsch', 'msg/js/de.js'],
+  'el': ['Ελληνικά', 'msg/js/en.js'],
+  'en': ['English', 'msg/js/en.js'],
+  'es': ['Español', 'msg/js/en.js'],
+  'eu': ['Euskara', 'msg/js/en.js'],
+  'fa': ['یسراف', 'msg/js/en.js'],
+  'fi': ['Suomi', 'msg/js/en.js'],
+  'fo': ['Føroyskt', 'msg/js/en.js'],
+  'fr': ['Français', 'msg/js/en.js'],
+  'frr': ['Frasch', 'msg/js/de.js'],
+  'gl': ['Galego', 'msg/js/en.js'],
+  'hak': ['客家話', 'msg/js/en.js'],
+  'he': ['עברית', 'msg/js/en.js'],
+  'hu': ['Magyar', 'msg/js/en.js'],
+  'ia': ['Interlingua', 'msg/js/en.js'],
+  'it': ['Italiano', 'msg/js/en.js'],
+  'ja': ['日本語', 'msg/js/en.js'],
+  'ka': ['ქართული', 'msg/js/en.js'],
+  'km': ['ភាសាខ្មែរ', 'msg/js/en.js'],
+  'ko': ['한국어', 'msg/js/en.js'],
+  'ksh': ['Ripoarėsch', 'msg/js/de.js'],
+  'ky': ['Кыргызча', 'msg/js/en.js'],
+  'la': ['Latine', 'msg/js/en.js'],
+  'lb': ['Lëtzebuergesch', 'msg/js/de.js'],
+  'lt': ['Lietuvių', 'msg/js/en.js'],
+  'lv': ['Latviešu', 'msg/js/en.js'],
+  'ml': ['മലയാളം', 'msg/js/en.js'],
+  'mk': ['Македонски', 'msg/js/en.js'],
+  'mr': ['मराठी', 'msg/js/en.js'],
+  'ms': ['Bahasa Melayu', 'msg/js/en.js'],
+  'mzn': ['مازِرونی', 'msg/js/en.js'],
+  'nb': ['Norsk Bokmål', 'msg/js/en.js'],
+  'nl': ['Nederlands, Vlaams', 'msg/js/en.js'],
+  'oc': ['Lenga d\'òc', 'msg/js/en.js'],
+  'pa': ['पंजाबी', 'msg/js/en.js'],
+  'pl': ['Polski', 'msg/js/en.js'],
+  'pms': ['Piemontèis', 'msg/js/en.js'],
+  'ps': ['پښتو', 'msg/js/en.js'],
+  'pt-br': ['Português', 'msg/js/pt_br.js'],
+  'ru': ['Русский', 'msg/js/en.js'],
+  'sk': ['Slovenčina', 'msg/js/en.js'],
+  'sv': ['Svenska', 'msg/js/en.js'],
+  'sw': ['Kishwahili', 'msg/js/en.js'],
+  'tr': ['Türkçe', 'msg/js/en.js'],
+  'uk': ['Українська', 'msg/js/en.js'],
+  'vi': ['Tiếng Việt', 'msg/js/vi.js'],
+  'zh-hans': ['简体字', 'msg/js/zh_tw.js'],
+  'zh-hant': ['中文', 'msg/js/zh_tw.js']
 };
 BlocklyApps.LANG = BlocklyApps.getLang();
-Puzzle.RTL = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
 
 document.write('<script type="text/javascript" src="generated/' +
                BlocklyApps.LANG + '.js"></script>\n');
@@ -100,9 +99,10 @@ document.write('<script type="text/javascript" src="generated/' +
 Puzzle.init = function() {
   BlocklyApps.init();
 
+  var rtl = BlocklyApps.isRtl();
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
-       rtl: Puzzle.RTL,
+       rtl: rtl,
        scrollbars: false,
        trashcan: false});
 
@@ -148,7 +148,7 @@ Puzzle.init = function() {
     Puzzle.shuffle(blocksFlags);
     Puzzle.shuffle(blocksCities);
     var blocks = [].concat(blocksCountries, blocksFlags, blocksCities);
-    if (Puzzle.RTL) {
+    if (rtl) {
       blocks.reverse();
     }
     // Initialize all the blocks.
@@ -177,7 +177,7 @@ Puzzle.init = function() {
       var blockBox = block.svg_.getRootElement().getBBox();
       // Spread the blocks horizontally, grouped by type.
       // Spacing is proportional to block's area.
-      if (Puzzle.RTL) {
+      if (rtl) {
         var dx = blockBox.width +
                  (countedArea / totalArea) * workspaceBox.width;
       } else {
@@ -190,6 +190,10 @@ Puzzle.init = function() {
       block.moveBy(dx, dy);
       countedArea += block.cached_area_;
     }
+
+    BlocklyApps.bindClick('checkButton', Puzzle.checkAnswers);
+    BlocklyApps.bindClick('helpButton', function(){Puzzle.showHelp(true);});
+
     Puzzle.showHelp(false);
     /**
      * HACK:
@@ -287,9 +291,10 @@ Puzzle.checkAnswers = function() {
 
   var content = document.getElementById('answers');
   var button = document.getElementById('checkButton');
+  var rtl = BlocklyApps.isRtl();
   var style = {
     width: '25%',
-    left: Puzzle.RTL ? '5%' : '70%',
+    left: rtl ? '5%' : '70%',
     top: '5em'
   };
   BlocklyApps.showDialog(content, button, true, true, style,

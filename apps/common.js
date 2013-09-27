@@ -26,6 +26,11 @@
 var BlocklyApps = {};
 
 /**
+ * List of RTL languages.
+ */
+BlocklyApps.LANGUAGE_RTL = ['ar', 'fa', 'he', 'mzn', 'ps'];
+
+/**
  * Extracts a parameter from the URL.
  * If the parameter is absent default_value is returned.
  * @param {string} name The name of the parameter.
@@ -109,6 +114,14 @@ BlocklyApps.LANG = undefined;
 BlocklyApps.LANGUAGES = undefined;
 
 /**
+ * Is the current language (BlocklyApps.LANG) an RTL language?
+ * @return {boolean} True if RTL, false if LTR.
+ */
+BlocklyApps.isRtl = function() {
+  return BlocklyApps.LANGUAGE_RTL.indexOf(BlocklyApps.LANG) != -1;
+};
+
+/**
  * Common startup tasks for all apps.
  */
 BlocklyApps.init = function() {
@@ -118,9 +131,8 @@ BlocklyApps.init = function() {
   // Set the HTML's language and direction.
   // document.dir fails in Mozilla, use document.body.parentNode.dir instead.
   // https://bugzilla.mozilla.org/show_bug.cgi?id=151407
-  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
-  document.head.parentElement.setAttribute('dir',
-      BlocklyApps.LANGUAGES[BlocklyApps.LANG][1]);
+  var rtl = BlocklyApps.isRtl();
+  document.head.parentElement.setAttribute('dir', rtl ? 'rtl' : 'ltr');
   document.head.parentElement.setAttribute('lang', BlocklyApps.LANG);
 
   // Sort languages alphabetically.
@@ -157,8 +169,13 @@ BlocklyApps.init = function() {
     BlocklyStorage.XML_ERROR = BlocklyApps.getMsg('xmlError');
     // Swap out the BlocklyStorage's alert() for a nicer dialog.
     BlocklyStorage.alert = BlocklyApps.storageAlert;
+    BlocklyApps.bindClick('linkButton', BlocklyStorage.link);
   } else if (linkButton) {
     linkButton.className = 'disabled';
+  }
+
+  if (document.getElementById('codeButton')) {
+    BlocklyApps.bindClick('codeButton', BlocklyApps.showCode);
   }
 
   // Fixes viewport for small screens.
@@ -175,11 +192,10 @@ BlocklyApps.init = function() {
  * encodeURIComponent(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)).slice(5, -6))
  */
 BlocklyApps.initReadonly = function() {
-  var rtl = BlocklyApps.LANGUAGES[BlocklyApps.LANG][1] == 'rtl';
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
        readOnly: true,
-       rtl: rtl,
+       rtl: BlocklyApps.isRtl(),
        scrollbars: false});
 
   // Add the blocks.
@@ -193,14 +209,20 @@ BlocklyApps.initReadonly = function() {
  * @param {string} defaultXml Text representation of default blocks.
  */
 BlocklyApps.loadBlocks = function(defaultXml) {
+  try {
+    var loadOnce = window.sessionStorage.loadOnceBlocks;
+  } catch(e) {
+    // Firefox sometimes throws a SecurityError when accessing sessionStorage.
+    // Restarting Firefox fixes this, so it looks like a bug.
+    var loadOnce = null;
+  }
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
     // An href with #key trigers an AJAX call to retrieve saved blocks.
     BlocklyStorage.retrieveXml(window.location.hash.substring(1));
-  } else if (window.sessionStorage.loadOnceBlocks) {
+  } else if (loadOnce) {
     // Language switching stores the blocks during the reload.
-    var text = window.sessionStorage.loadOnceBlocks;
     delete window.sessionStorage.loadOnceBlocks;
-    var xml = Blockly.Xml.textToDom(text);
+    var xml = Blockly.Xml.textToDom(loadOnce);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   } else if (defaultXml) {
     // Load the editor with default starting blocks.
@@ -571,10 +593,10 @@ BlocklyApps.stripCode = function(code) {
 
 /**
  * Show the user's code in raw JavaScript.
- * @param {Element} origin Animate the dialog opening/closing from/to this
- *     DOM element.  If null, don't show any animations for opening or closing.
+ * @param {!Event} e Mouse or touch event.
  */
-BlocklyApps.showCode = function(origin) {
+BlocklyApps.showCode = function(e) {
+  var origin = e.target;
   var code = Blockly.JavaScript.workspaceToCode();
   code = BlocklyApps.stripCode(code);
   var pre = document.getElementById('containerCode');
@@ -679,6 +701,18 @@ BlocklyApps.addTouchEvents = function() {
 
 // Add events for touch devices when the window is done loading.
 window.addEventListener('load', BlocklyApps.addTouchEvents, false);
+
+/**
+ * Bind a function to a button's click event.
+ * On touch enabled browsers, ontouchend is treated as equivalent to onclick.
+ * @param {string} id ID of button element.
+ * @param {!Function} func Event handler to bind.
+ */
+BlocklyApps.bindClick = function(id, func) {
+  var el = document.getElementById(id);
+  el.addEventListener('click', func, true);
+  el.addEventListener('touchend', func, true);
+};
 
 /**
  * Load the Prettify CSS and JavaScript.

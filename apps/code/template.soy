@@ -61,13 +61,13 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff" onclick="Code.tabClick(this.id)">XML</td>
             <td class="tabmax">
-              <button class="notext" title="{msg meaning="Code.trashTooltip" desc="tooltip - Clicking on this causes the user program to be discarded."}Discard all blocks.{/msg}" onclick="Code.discard(); Code.renderContent();">
+              <button id="trashButton" class="notext" title="{msg meaning="Code.trashTooltip" desc="tooltip - Clicking on this causes the user program to be discarded."}Discard all blocks.{/msg}">
                 <img src='../../media/1x1.gif' class="trash icon21">
               </button>{sp}
-              <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="IBID."}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link()">
+              <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="IBID."}Save and link to blocks.{/msg}">
                 <img src='../../media/1x1.gif' class="link icon21">
               </button>{sp}
-              <button class="notext primary" title="{msg meaning="Apps.runTooltip" desc="IBID"}Run the program defined by the blocks in the workspace.{/msg}" onclick="Code.runJS()">
+              <button id="runButton" class="notext primary" title="{msg meaning="Apps.runTooltip" desc="IBID"}Run the program defined by the blocks in the workspace.{/msg}">
                 <img src='../../media/1x1.gif' class="run icon21">
               </button>
             </td>

@@ -98,18 +98,18 @@
   <table width="400">
     <tr>
       <td style="width: 190px; text-align: center; vertical-align: top;">
-        <button class="notext" title="{msg meaning="Apps.codeTooltip" desc="tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user."}See generated JavaScript code.{/msg}" onclick="BlocklyApps.showCode(this);">
+        <button id="codeButton" class="notext" title="{msg meaning="Apps.codeTooltip" desc="tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user."}See generated JavaScript code.{/msg}">
           <img src="../../media/1x1.gif" class="code icon21">
         </button>
-        <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="IBID"}Save and link to blocks.{/msg}" onclick="BlocklyStorage.link();">
+        <button id="linkButton" class="notext" title="{msg meaning="Apps.linkTooltip" desc="IBID"}Save and link to blocks.{/msg}">
           <img src="../../media/1x1.gif" class="link icon21">
         </button>
       </td>
       <td>
-        <button id="runButton" class="primary" onclick="Maze.runButtonClick();" title="{msg meaning="Maze.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the player through the maze."}Makes the player do what the blocks say.{/msg}">
+        <button id="runButton" class="primary" title="{msg meaning="Maze.runTooltip" desc="tooltip - Pressing this button runs the computer program the user has written to move the player through the maze."}Makes the player do what the blocks say.{/msg}">
           <img src="../../media/1x1.gif" class="run icon21"> {msg meaning="Apps.runProgram" desc="IBID"}Run Program{/msg}
         </button>
-        <button id="resetButton" class="primary" onclick="Maze.resetButtonClick();" style="display: none" title="{msg meaning="Maze.resetTooltip" desc="tooltip - Pressing this button restores the player to the start position and enables the user's program to be run again."}Put the player back at the start of the maze.{/msg}">
+        <button id="resetButton" class="primary" style="display: none" title="{msg meaning="Maze.resetTooltip" desc="tooltip - Pressing this button restores the player to the start position and enables the user's program to be run again."}Put the player back at the start of the maze.{/msg}">
           <img src="../../media/1x1.gif" class="stop icon21"> {msg meaning="Apps.resetProgram" desc="IBID"}Reset{/msg}
         </button>
       </td>
