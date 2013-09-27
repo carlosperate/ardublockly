@@ -32,13 +32,7 @@ if (typeof google == 'object') {
 }
 
 // Supported languages.
-BlocklyApps.LANGUAGES = {
-  // Format: ['Language name', 'msg/js/XX.js']
-  'en': ['English', 'msg/js/en.js'],
-  'de': ['Deutsch', 'msg/js/de.js'],
-  'hu': ['Magyar', 'msg/js/en.js'],
-  'vi': ['Tiếng Việt', 'msg/js/vi.js']
-};
+BlocklyApps.LANGUAGES = ['en', 'de', 'hu', 'vi'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="generated/' +

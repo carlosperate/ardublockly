@@ -29,12 +29,7 @@
 var Plane = {};
 
 // Supported languages.
-BlocklyApps.LANGUAGES = {
-  // Format: ['Language name', 'msg/js/XX.js']
-  'en': ['English', 'msg/js/en.js'],
-  'hu': ['Magyar', 'msg/js/en.js'],
-  'vi': ['Tiếng Việt', 'msg/js/vi.js']
-};
+BlocklyApps.LANGUAGES = ['en', 'hu', 'vi'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="generated/' +
