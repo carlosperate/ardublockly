@@ -54,10 +54,11 @@ Turtle.visible = true;
 Turtle.init = function() {
   BlocklyApps.init();
 
+  var rtl = BlocklyApps.isRtl();
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
-       rtl: BlocklyApps.isRtl(),
+       rtl: rtl,
        toolbox: toolbox,
        trashcan: true});
 

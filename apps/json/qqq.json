@@ -60,6 +60,7 @@
     "Maze.helpRepeat": "callout - This is shown when the &quot;repeat&quot; block is introduced.  The word &quot;path&quot; refers to a path through a maze, and &quot;block&quot; refers to a child&quot;s building block.",
     "Maze.helpCapacity": "callout - This is shown after the user has used all the blocks permitted on this level.",
     "Maze.helpRepeatMany": "callout - This is a hint that the user should place a second block inside of a &quot;repeat&quot; block.\n\n&quot;repeat&quot; should be consistent with {{msg-blockly|Maze.repeatUntil}}.",
+    "Maze.helpSkins": "callout - This is a hint that the user can change the appearance of the player that moves within the maze.",
     "Maze.helpIf": "callout - This is shown when the 'if' block is introduced.  An example of an 'if' block is: 'if there is a path to the left, turn left'.",
     "Maze.helpMenu": "callout - %1 will be replaced with an image of the dropdown menu that the user needs to click.",
     "Maze.helpWallFollow": "callout - This advises the user to solve a maze by keeping his/her left hand in contact with the wall while proceding through it.  The final sentence is a warning that only advanced programmers should attempt this problem, as beginners tend to get frustrated.",

@@ -209,7 +209,7 @@ BlocklyApps.isRtl = function() {
  * @return {string} URL to langugae pack (e.g. 'msg/js/en.js').
  */
 BlocklyApps.languagePack = function() {
-  var pack = BlocklyApps.LANGUAGE_PACK[BlocklyApps.LANG] ||
+  return BlocklyApps.LANGUAGE_PACK[BlocklyApps.LANG] ||
     BlocklyApps.LANGUAGE_PACK['default'];
 };
 
