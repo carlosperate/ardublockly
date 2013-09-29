@@ -103,22 +103,11 @@ Blockly.Blocks['controls_for'] = {
     this.appendDummyInput()
         .appendTitle(Blockly.Msg.CONTROLS_FOR_INPUT_WITH)
         .appendTitle(new Blockly.FieldVariable(null), 'VAR');
-    this.appendValueInput('FROM')
-        .setCheck('Number')
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.Msg.CONTROLS_FOR_INPUT_FROM);
-    this.appendValueInput('TO')
-        .setCheck('Number')
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.Msg.CONTROLS_FOR_INPUT_TO);
-    this.appendValueInput('BY')
-        .setCheck('Number')
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.Msg.CONTROLS_FOR_INPUT_BY);
-    if (Blockly.Msg.CONTROLS_FOR_TAIL) {
-      this.appendDummyInput()
-          .appendTitle(Blockly.Msg.CONTROLS_FOR_TAIL);
-    }
+    this.interpolateMsg(Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY,
+                        ['FROM', 'Number', Blockly.ALIGN_RIGHT],
+                        ['TO', 'Number', Blockly.ALIGN_RIGHT],
+                        ['BY', 'Number', Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.appendStatementInput('DO')
         .appendTitle(Blockly.Msg.CONTROLS_FOR_INPUT_DO);
     this.setPreviousStatement(true);

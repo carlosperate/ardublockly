@@ -349,13 +349,10 @@ Blockly.Blocks['math_random_int'] = {
     this.setHelpUrl(Blockly.Msg.MATH_RANDOM_INT_HELPURL);
     this.setColour(230);
     this.setOutput(true, 'Number');
-    this.appendValueInput('FROM')
-        .setCheck('Number')
-        .appendTitle(Blockly.Msg.MATH_RANDOM_INT_INPUT_FROM);
-    this.appendValueInput('TO')
-        .setCheck('Number')
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle(Blockly.Msg.MATH_RANDOM_INT_INPUT_TO);
+    this.interpolateMsg(Blockly.Msg.MATH_RANDOM_INT_TITLE,
+                        ['FROM', 'Number', Blockly.ALIGN_RIGHT],
+                        ['TO', 'Number', Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.MATH_RANDOM_INT_TOOLTIP);
   }

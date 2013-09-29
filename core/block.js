@@ -36,6 +36,7 @@ goog.require('Blockly.Mutator');
 goog.require('Blockly.Warning');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
+goog.require('goog.asserts');
 goog.require('goog.string');
 goog.require('goog.Timer');
 
@@ -81,9 +82,8 @@ Blockly.Block = function(workspace, prototypeName) {
   if (prototypeName) {
     this.type = prototypeName;
     var prototype = Blockly.Blocks[prototypeName];
-    if (!prototype) {
-      throw 'Error: "' + prototypeName + '" is an unknown language block.';
-    }
+    goog.asserts.assertObject(prototype,
+        'Error: "%s" is an unknown language block.', prototypeName);
     goog.mixin(this, prototype);
   }
   // Call an initialization function, if it exists.
@@ -225,9 +225,7 @@ Blockly.Block.terminateDrag_ = function() {
  * Select this block.  Highlight it visually.
  */
 Blockly.Block.prototype.select = function() {
-  if (!this.svg_) {
-    throw 'Block is not rendered.';
-  }
+  goog.asserts.assertObject(this.svg_, 'Block is not rendered.');
   if (Blockly.selected) {
     // Unselect any previously selected block.
     Blockly.selected.unselect();
@@ -241,9 +239,7 @@ Blockly.Block.prototype.select = function() {
  * Unselect this block.  Remove its highlighting.
  */
 Blockly.Block.prototype.unselect = function() {
-  if (!this.svg_) {
-    throw 'Block is not rendered.';
-  }
+  goog.asserts.assertObject(this.svg_, 'Block is not rendered.');
   Blockly.selected = null;
   this.svg_.removeSelect();
   Blockly.fireUiEvent(this.workspace.getCanvas(), 'blocklySelectChange');
@@ -1098,7 +1094,7 @@ Blockly.Block.prototype.setColour = function(colourHue) {
 /**
  * Returns the named title from a block.
  * @param {string} name The name of the title.
- * @return {*} Named title, or null if title does not exist.
+ * @return {Blockly.Field} Named title, or null if title does not exist.
  * @private
  */
 Blockly.Block.prototype.getTitle_ = function(name) {
@@ -1132,11 +1128,8 @@ Blockly.Block.prototype.getTitleValue = function(name) {
  */
 Blockly.Block.prototype.setTitleValue = function(newValue, name) {
   var title = this.getTitle_(name);
-  if (title) {
-    title.setValue(newValue);
-  } else {
-    throw 'Title "' + name + '" not found.';
-  }
+  goog.asserts.assertObject(title, 'Title "%s" not found.', name);
+  title.setValue(newValue);
 };
 
 /**
@@ -1156,16 +1149,14 @@ Blockly.Block.prototype.setTooltip = function(newTip) {
  */
 Blockly.Block.prototype.setPreviousStatement = function(newBoolean, opt_check) {
   if (this.previousConnection) {
-    if (this.previousConnection.targetConnection) {
-      throw 'Must disconnect previous statement before removing connection.';
-    }
+    goog.asserts.assert(!this.previousConnection.targetConnection,
+        'Must disconnect previous statement before removing connection.');
     this.previousConnection.dispose();
     this.previousConnection = null;
   }
   if (newBoolean) {
-    if (this.outputConnection) {
-      throw 'Remove output connection prior to adding previous connection.';
-    }
+    goog.asserts.assert(!this.outputConnection,
+        'Remove output connection prior to adding previous connection.');
     if (opt_check === undefined) {
       opt_check = null;
     }
@@ -1187,9 +1178,8 @@ Blockly.Block.prototype.setPreviousStatement = function(newBoolean, opt_check) {
  */
 Blockly.Block.prototype.setNextStatement = function(newBoolean, opt_check) {
   if (this.nextConnection) {
-    if (this.nextConnection.targetConnection) {
-      throw 'Must disconnect next statement before removing connection.';
-    }
+    goog.asserts.assert(!this.nextConnection.targetConnection,
+        'Must disconnect next statement before removing connection.');
     this.nextConnection.dispose();
     this.nextConnection = null;
   }
@@ -1216,16 +1206,14 @@ Blockly.Block.prototype.setNextStatement = function(newBoolean, opt_check) {
  */
 Blockly.Block.prototype.setOutput = function(newBoolean, opt_check) {
   if (this.outputConnection) {
-    if (this.outputConnection.targetConnection) {
-      throw 'Must disconnect output value before removing connection.';
-    }
+    goog.asserts.assert(!this.outputConnection.targetConnection,
+        'Must disconnect output value before removing connection.');
     this.outputConnection.dispose();
     this.outputConnection = null;
   }
   if (newBoolean) {
-    if (this.previousConnection) {
-      throw 'Remove previous connection prior to adding output connection.';
-    }
+    goog.asserts.assert(!this.previousConnection,
+        'Remove previous connection prior to adding output connection.');
     if (opt_check === undefined) {
       opt_check = null;
     }
@@ -1390,6 +1378,52 @@ Blockly.Block.prototype.appendDummyInput = function(opt_name) {
 };
 
 /**
+ * Interpolate a message string, creating titles and inputs.
+ * @param {string} msg The message string to parse.  %1, %2, etc. are symbols
+ *     for value inputs.
+ * @param {!Array.<string|number>|number} var_args A series of tuples that
+ *     each specify the value inputs to create.  Each tuple has three values:
+ *     the input name, its check type, and its title's alignment.  The last
+ *     parameter is not a tuple, but just an alignment for any trailing dummy
+ *     input.  This last parameter is mandatory, there may be any number of
+ *     tuples (though the number of tuples must match the symbols in msg).
+ */
+Blockly.Block.prototype.interpolateMsg = function(msg, var_args) {
+  // Remove the msg from the start and the dummy alignment from the end of args.
+  goog.asserts.assertString(msg);
+  var dummyAlign = arguments.length - 1;
+  goog.asserts.assertNumber(dummyAlign);
+
+  var tokens = msg.split(/(%\d)/);
+  for (var i = 0; i < tokens.length; i += 2) {
+    var text = goog.string.trim(tokens[i]);
+    var symbol = tokens[i + 1];
+    if (symbol) {
+      // Value input.
+      var digit = parseInt(symbol.charAt(1), 10);
+      var tuple = arguments[digit];
+      goog.asserts.assertArray(tuple,
+          'Message symbol "%s" is out of range.', symbol);
+      this.appendValueInput(tuple[0])
+          .setCheck(tuple[1])
+          .setAlign(tuple[2])
+          .appendTitle(text);
+      arguments[digit] = null;  // Inputs may not be reused.
+    } else {
+      // Trailing dummy input.
+      this.appendDummyInput()
+          .setAlign(dummyAlign)
+          .appendTitle(text);
+    }
+  }
+  // Verify that all inputs were used.
+  for (var i = 1; i < arguments.length - 1; i++) {
+    goog.asserts.assert(arguments[i] === null,
+        'Input "%%s" not used in message: "%s"', i, msg);
+  }
+};
+
+/**
  * Add a value input, statement input or local variable to this block.
  * @param {number} type Either Blockly.INPUT_VALUE or Blockly.NEXT_STATEMENT or
  *     Blockly.DUMMY_INPUT.
@@ -1420,9 +1454,7 @@ Blockly.Block.prototype.appendInput_ = function(type, name) {
  * @param {string} refName Name of input that should be after the moved input.
  */
 Blockly.Block.prototype.moveInputBefore = function(name, refName) {
-  if (name == refName) {
-    throw 'Can\'t move "' + name + '" to itself.';
-  }
+  goog.asserts.assert(name != refName, 'Can\'t move "%s" to itself.', name);
   // Find both inputs.
   var inputIndex = -1;
   var refIndex = -1;
@@ -1439,12 +1471,9 @@ Blockly.Block.prototype.moveInputBefore = function(name, refName) {
       }
     }
   }
-  if (inputIndex == -1) {
-    throw 'Named input "' + name + '" not found.';
-  }
-  if (refIndex == -1) {
-    throw 'Reference input "' + name + '" not found.';
-  }
+  goog.asserts.assert(inputIndex != -1, 'Named input "%s" not found.', name);
+  goog.asserts.assert(refIndex != -1, 'Reference input "%s" not found.',
+                      refName);
   // Remove input.
   this.inputList.splice(inputIndex, 1);
   if (inputIndex < refIndex) {
@@ -1480,7 +1509,7 @@ Blockly.Block.prototype.removeInput = function(name) {
       return;
     }
   }
-  throw 'Input "' + name + '" not found.';
+  goog.asserts.fail('Input "%s" not found.', name);
 };
 
 /**
@@ -1544,9 +1573,6 @@ Blockly.Block.prototype.getCommentText = function() {
  * @param {?string} text The text, or null to delete.
  */
 Blockly.Block.prototype.setCommentText = function(text) {
-  if (!Blockly.Comment) {
-    throw 'Comments not supported.';
-  }
   var changedState = false;
   if (goog.isString(text)) {
     if (!this.comment) {
@@ -1574,9 +1600,6 @@ Blockly.Block.prototype.setCommentText = function(text) {
  * @param {?string} text The text, or null to delete.
  */
 Blockly.Block.prototype.setWarningText = function(text) {
-  if (!Blockly.Warning) {
-    throw 'Warnings not supported.';
-  }
   if (this.isInFlyout) {
     text = null;
   }
@@ -1605,8 +1628,7 @@ Blockly.Block.prototype.setWarningText = function(text) {
  * Lays out and reflows a block based on its contents and settings.
  */
 Blockly.Block.prototype.render = function() {
-  if (!this.svg_) {
-    throw 'Uninitialized block cannot be rendered.  Call block.initSvg()';
-  }
+  goog.asserts.assertObject(this.svg_,
+      'Uninitialized block cannot be rendered.  Call block.initSvg()');
   this.svg_.render();
 };

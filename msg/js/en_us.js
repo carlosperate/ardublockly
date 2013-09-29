@@ -96,9 +96,7 @@ Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = 'While a value is false, then do
 Blockly.Msg.CONTROLS_FOR_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
 Blockly.Msg.CONTROLS_FOR_INPUT_WITH = 'count with';
 Blockly.Msg.CONTROLS_FOR_INPUT_VAR = 'x';
-Blockly.Msg.CONTROLS_FOR_INPUT_FROM = 'from';
-Blockly.Msg.CONTROLS_FOR_INPUT_TO = 'to';
-Blockly.Msg.CONTROLS_FOR_INPUT_BY = 'by';
+Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY = 'from %1 to %2 y %3';
 Blockly.Msg.CONTROLS_FOR_INPUT_DO = 'do';
 Blockly.Msg.CONTROLS_FOR_TAIL = '';
 Blockly.Msg.CONTROLS_FOR_TOOLTIP = 'Count from a start number to an end number by the specified interval.\n' +
@@ -271,8 +269,7 @@ Blockly.Msg.MATH_CONSTRAIN_INPUT_HIGH = 'high';
 Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = 'Constrain a number to be between the specified limits (inclusive).';
 
 Blockly.Msg.MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
-Blockly.Msg.MATH_RANDOM_INT_INPUT_FROM = 'random integer from';
-Blockly.Msg.MATH_RANDOM_INT_INPUT_TO = 'to';
+Blockly.Msg.MATH_RANDOM_INT_TITLE = 'random integer from %1 to %2';
 Blockly.Msg.MATH_RANDOM_INT_TOOLTIP = 'Return a random integer between the two\n' +
     'specified limits, inclusive.';
 

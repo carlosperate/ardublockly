@@ -142,12 +142,8 @@ Blockly.Msg.CONTROLS_FOR_TOOLTIP = 'Have the variable %1 take on the values from
 Blockly.Msg.CONTROLS_FOR_INPUT_WITH = 'count with';
 ///variable name - The default name for a [https://code.google.com/p/blockly/wiki/Loops#count_with count with] loop variable.  You can use a word or symbol in algebra for an unknown value or a word meaning 'counter'.
 Blockly.Msg.CONTROLS_FOR_INPUT_VAR = 'x';
-///block input text - Text preceding the first (and usually lower) number in a range, as in [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].
-Blockly.Msg.CONTROLS_FOR_INPUT_FROM = 'from';
-///block input text - Text preceding the second (and usually higher) number in a range, as in [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].
-Blockly.Msg.CONTROLS_FOR_INPUT_TO = 'to';
-///block input text - Text preceding the increment amount in a range, as in [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].
-Blockly.Msg.CONTROLS_FOR_INPUT_BY = 'by';
+///block input text - Starting with a (usually lower) number in a range (%1), ending with a (usually higher) number in a range (%2), and counting the iterations by a number of steps (%3).  As in [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].
+Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY = 'from %1 to %2 by %3';
 Blockly.Msg.CONTROLS_FOR_INPUT_DO = Blockly.Msg.CONTROLS_REPEAT_INPUT_DO;
 ///block text - Text following the increment amount of the range.  This is the empty string in most languages.
 Blockly.Msg.CONTROLS_FOR_TAIL = '';
@@ -421,9 +417,8 @@ Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = 'Constrain a number to be between the speci
 
 ///url - Information about how computers generate random numbers.
 Blockly.Msg.MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
-///block text - The title of the block that generates a random integer (whole number) in the specified range.  For example, if the range is from 5 to 7, this returns 5, 6, or 7 with equal likelihood
-Blockly.Msg.MATH_RANDOM_INT_INPUT_FROM = 'random integer from';
-Blockly.Msg.MATH_RANDOM_INT_INPUT_TO = Blockly.Msg.CONTROLS_FOR_INPUT_TO;
+///block text - The title of the block that generates a random integer (whole number) in the specified range.  For example, if the range is from 5 to 7, this returns 5, 6, or 7 with equal likelihood. %1 is a placeholder for the lower number, %2 is the placeholder for the larger number.
+Blockly.Msg.MATH_RANDOM_INT_TITLE = 'random integer from %1 to %2';
 ///tooltip - Return a random integer between two values specified as inputs.  For example, if one input was 7 and another 9, any of the numbers 7, 8, or 9 could be output.
 Blockly.Msg.MATH_RANDOM_INT_TOOLTIP = 'Return a random integer between the two specified limits, inclusive.';
 
