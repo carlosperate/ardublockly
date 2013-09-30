@@ -46,7 +46,6 @@
 "CONTROLS_FOREACH_INPUT_INLIST": "trong danh sách",
 "CONTROLS_FOREACH_INPUT_INLIST_TAIL": "",
 "CONTROLS_FOREACH_TOOLTIP": "Trong một danh sách, lấy từng thành phần, gán vào biến \"%1\", rồi thực hiện một số lệnh.",
-"CONTROLS_FLOW_STATEMENTS_INPUT_OFLOOP": "vòng lặp",
 "CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK": "thoát",
 "CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE": "sang lần lặp tiếp theo",
 "CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK": "Thoát khỏi vòng lặp hiện tại.",

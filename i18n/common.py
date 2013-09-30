@@ -38,7 +38,7 @@ class InputError(Exception):
 
 
 def read_json_file(filename):
-  """Read a JSON file as UTF-8 into a dictionary.
+  """Read a JSON file as UTF-8 into a dictionary, discarding @metadata.
 
   Args:
     filename: The filename, which must end ".json".
@@ -56,6 +56,8 @@ def read_json_file(filename):
     # Read in file.
     with codecs.open(filename, 'r', 'utf-8') as infile:
       defs = json.load(infile)
+    if '@metadata' in defs:
+      del defs['@metadata']
     return defs
   except ValueError, e:
     print('Error reading ' + filename)

@@ -20,6 +20,13 @@
 /**
  * @fileoverview English strings.
  * @author fraser@google.com (Neil Fraser)
+ *
+ * After modifying this file, run (from this directory):
+ * ../i18n/js_to_json.py
+ * to regenerate json/{en,qqq,synonyms}.json.
+ *
+ * To convert all of the json files to .js files, run:
+ * ../i18n/create_messages.py json/*.json
  */
 'use strict';
 
@@ -145,8 +152,6 @@ Blockly.Msg.CONTROLS_FOR_INPUT_VAR = 'x';
 ///block input text - Starting with a (usually lower) number in a range (%1), ending with a (usually higher) number in a range (%2), and counting the iterations by a number of steps (%3).  As in [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].
 Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY = 'from %1 to %2 by %3';
 Blockly.Msg.CONTROLS_FOR_INPUT_DO = Blockly.Msg.CONTROLS_REPEAT_INPUT_DO;
-///block text - Text following the increment amount of the range.  This is the empty string in most languages.
-Blockly.Msg.CONTROLS_FOR_TAIL = '';
 
 ///url - Describes 'for-each loops' in computer programs.  Consider using your language's translation of [http://en.wikipedia.org/wiki/Foreach http://en.wikipedia.org/wiki/Foreach] if present.
 Blockly.Msg.CONTROLS_FOREACH_HELPURL = 'https://code.google.com/p/blockly/wiki/Loops#for_each for each block';

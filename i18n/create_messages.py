@@ -53,8 +53,8 @@ def main():
   # Read in source language .json file, which provides any values missing
   # in target languages' .json files.
   source_defs = read_json_file(os.path.join(os.curdir, args.source_lang_file))
-  if '@metadata' in source_defs:
-    del source_defs['@metadata']
+  sorted_keys = source_defs.keys()
+  sorted_keys.sort()
 
   # Read in synonyms file, which must be output in every language.
   synonym_defs = read_json_file(os.path.join(
@@ -85,7 +85,7 @@ goog.require('Blockly.Msg');
         # For each key in the source language file, output the target value
         # if present; otherwise, output the source language value with a
         # warning comment.
-        for key in source_defs:
+        for key in sorted_keys:
           if key in target_defs:
             value = target_defs[key]
             comment = ''
