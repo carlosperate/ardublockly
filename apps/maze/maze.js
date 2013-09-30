@@ -1437,3 +1437,19 @@ Maze.isPath = function(direction, id) {
   }
   return square !== Maze.SquareType.WALL && square !== undefined;
 };
+
+Maze.isPathForward = function(id) {
+  return Maze.isPath(0, id);
+};
+
+Maze.isPathRight = function(id) {
+  return Maze.isPath(1, id);
+};
+
+Maze.isPathBackward = function(id) {
+  return Maze.isPath(2, id);
+};
+
+Maze.isPathLeft = function(id) {
+  return Maze.isPath(3, id);
+};
