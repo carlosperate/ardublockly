@@ -40,7 +40,7 @@ document.write('<script type="text/javascript" src="generated/' +
 
 Maze.MAX_LEVEL = 10;
 Maze.LEVEL = BlocklyApps.getNumberParamFromUrl('level', 1, Maze.MAX_LEVEL);
-var maxBlocks = [undefined, // Level 0.
+Maze.MAX_BLOCKS = [undefined, // Level 0.
     Infinity, Infinity, 2, 5, 5, 5, 5, 10, 7, 10][Maze.LEVEL];
 
 Maze.SKINS = [
@@ -461,12 +461,15 @@ Maze.init = function() {
     Blockly.bindEvent_(div, 'mousedown', null, handlerFactory(i));
   }
   Blockly.bindEvent_(window, 'resize', null, Maze.hidePegmanMenu);
+  var pegmanButton = document.getElementById('pegmanButton');
+  pegmanButton.addEventListener('mousedown', Maze.showPegmanMenu, true);
+  pegmanButton.addEventListener('touchstart', Maze.showPegmanMenu, true);
 
   var rtl = BlocklyApps.isRtl();
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blockly'),
       {path: '../../',
-       maxBlocks: maxBlocks,
+       maxBlocks: Maze.MAX_BLOCKS,
        rtl: rtl,
        toolbox: toolbox,
        trashcan: true});
@@ -1339,6 +1342,22 @@ Maze.turnRight = function(id) {
   Maze.turn(1, id);
 };
 
+Maze.isPathForward = function(id) {
+  return Maze.isPath(0, id);
+};
+
+Maze.isPathRight = function(id) {
+  return Maze.isPath(1, id);
+};
+
+Maze.isPathBackward = function(id) {
+  return Maze.isPath(2, id);
+};
+
+Maze.isPathLeft = function(id) {
+  return Maze.isPath(3, id);
+};
+
 // Core functions.
 
 /**
@@ -1436,20 +1455,4 @@ Maze.isPath = function(direction, id) {
     BlocklyApps.log.push([command, id]);
   }
   return square !== Maze.SquareType.WALL && square !== undefined;
-};
-
-Maze.isPathForward = function(id) {
-  return Maze.isPath(0, id);
-};
-
-Maze.isPathRight = function(id) {
-  return Maze.isPath(1, id);
-};
-
-Maze.isPathBackward = function(id) {
-  return Maze.isPath(2, id);
-};
-
-Maze.isPathLeft = function(id) {
-  return Maze.isPath(3, id);
 };

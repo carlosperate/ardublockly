@@ -387,6 +387,7 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
 Blockly.Block.prototype.getHeightWidth = function() {
   try {
     var bBox = this.getSvgRoot().getBBox();
+    var height = bBox.height;
   } catch (e) {
     // Firefox has trouble with hidden elements (Bug 528969).
     return {height: 0, width: 0};
@@ -397,15 +398,15 @@ Blockly.Block.prototype.getHeightWidth = function() {
      bounding box.  The render functions (below) add two 5px spacer control
      points that we need to subtract.
     */
-    bBox.height -= 10;
+    height -= 10;
     if (this.nextConnection) {
       // Bottom control point partially masked by lower tab.
-      bBox.height += 4;
+      height += 4;
     }
   }
   // Subtract one from the height due to the shadow.
-  bBox.height -= 1;
-  return bBox;
+  height -= 1;
+  return {height: height, width: bBox.width};
 };
 
 /**

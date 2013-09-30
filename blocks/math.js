@@ -300,7 +300,7 @@ Blockly.Blocks['math_on_list'] = {
         STD_DEV: Blockly.Msg.MATH_ONLIST_TOOLTIP_STD_DEV,
         RANDOM: Blockly.Msg.MATH_ONLIST_TOOLTIP_RANDOM
       };
-      return thisBlock.TOOLTIPS[mode];
+      return TOOLTIPS[mode];
     });
   }
 };
