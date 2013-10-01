@@ -41,6 +41,7 @@ Commas would of course be omitted for the final entry of each value.
 """
 
 import argparse
+import codecs
 import json
 import os
 import re
@@ -71,7 +72,7 @@ def main():
   results = []
   synonyms = {}
   description = ''
-  infile = open(args.input_file)
+  infile = codecs.open(args.input_file, 'r', 'utf-8')
   for line in infile:
     if line.startswith('///'):
       if description:

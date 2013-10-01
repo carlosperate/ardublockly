@@ -200,9 +200,9 @@ Blockly.Blocks['text_length'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_LENGTH_HELPURL);
     this.setColour(160);
-    this.appendValueInput('VALUE')
-        .setCheck(['String', 'Array'])
-        .appendTitle(Blockly.Msg.TEXT_LENGTH_INPUT_LENGTH);
+    this.interpolateMsg(Blockly.Msg.TEXT_LENGTH_TITLE,
+                        ['VALUE', ['String', 'Array'], Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.TEXT_LENGTH_TOOLTIP);
   }
@@ -213,11 +213,9 @@ Blockly.Blocks['text_isEmpty'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_ISEMPTY_HELPURL);
     this.setColour(160);
-    this.appendValueInput('VALUE')
-        .setCheck(['String', 'Array']);
-    this.appendDummyInput()
-        .appendTitle(Blockly.Msg.TEXT_ISEMPTY_INPUT_ISEMPTY);
-    this.setInputsInline(true);
+    this.interpolateMsg(Blockly.Msg.TEXT_ISEMPTY_TITLE,
+                        ['VALUE', ['String', 'Array'], Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.TEXT_ISEMPTY_TOOLTIP);
   }
@@ -414,8 +412,9 @@ Blockly.Blocks['text_print'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.TEXT_PRINT_HELPURL);
     this.setColour(160);
-    this.appendValueInput('TEXT')
-        .appendTitle(Blockly.Msg.TEXT_PRINT_TITLE_PRINT);
+    this.interpolateMsg(Blockly.Msg.TEXT_PRINT_TITLE,
+                        ['TEXT', null, Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);

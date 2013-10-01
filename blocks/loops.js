@@ -51,13 +51,9 @@ Blockly.Blocks['controls_repeat_ext'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.CONTROLS_REPEAT_HELPURL);
     this.setColour(120);
-    this.appendValueInput('TIMES')
-        .setCheck('Number')
-        .appendTitle(Blockly.Msg.CONTROLS_REPEAT_TITLE_REPEAT)
-    if (Blockly.Msg.CONTROLS_REPEAT_TITLE_TIMES) {
-      this.appendDummyInput()
-          .appendTitle(Blockly.Msg.CONTROLS_REPEAT_TITLE_TIMES);
-    }
+    this.interpolateMsg(Blockly.Msg.CONTROLS_REPEAT_TITLE,
+                        ['TIMES', 'Number', Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.appendStatementInput('DO')
         .appendTitle(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
     this.setPreviousStatement(true);

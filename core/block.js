@@ -1386,7 +1386,7 @@ Blockly.Block.prototype.appendDummyInput = function(opt_name) {
  *     each specify the value inputs to create.  Each tuple has three values:
  *     the input name, its check type, and its title's alignment.  The last
  *     parameter is not a tuple, but just an alignment for any trailing dummy
- *     input.  This last parameter is mandatory, there may be any number of
+ *     input.  This last parameter is mandatory; there may be any number of
  *     tuples (though the number of tuples must match the symbols in msg).
  */
 Blockly.Block.prototype.interpolateMsg = function(msg, var_args) {
@@ -1410,7 +1410,7 @@ Blockly.Block.prototype.interpolateMsg = function(msg, var_args) {
           .setAlign(tuple[2])
           .appendTitle(text);
       arguments[digit] = null;  // Inputs may not be reused.
-    } else {
+    } else if (text) {
       // Trailing dummy input.
       this.appendDummyInput()
           .setAlign(dummyAlign)
@@ -1422,6 +1422,9 @@ Blockly.Block.prototype.interpolateMsg = function(msg, var_args) {
     goog.asserts.assert(arguments[i] === null,
         'Input "%%s" not used in message: "%s"', i, msg);
   }
+  // Make the inputs inline unless there is only one input and
+  // no text follows it.
+  this.setInputsInline(!msg.match(/%1\s*$/))
 };
 
 /**

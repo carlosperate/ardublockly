@@ -40,6 +40,12 @@ goog.require('Blockly.Msg');
  * to message files.
  */
 
+/**
+ * Tip: Generate URLs for read-only blocks by creating the blocks in the Code app,
+ * then evaluating this in the console:
+ * 'http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=' + encodeURIComponent(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)).slice(5, -6))
+ */
+
 // Context menus.
 /// context menu - Remove the descriptive comment from the selected block.
 Blockly.Msg.DUPLICATE_BLOCK = 'Duplicate';
@@ -121,9 +127,13 @@ Blockly.Msg.COLOUR_BLEND_TOOLTIP = 'Blends two colours together with a given rat
 // Loop Blocks.
 ///url - Describes 'repeat loops' in computer programs; consider using the translation of the page [http://en.wikipedia.org/wiki/Control_flow http://en.wikipedia.org/wiki/Control_flow].
 Blockly.Msg.CONTROLS_REPEAT_HELPURL = 'http://en.wikipedia.org/wiki/For_loop';
-///block text - Title of [https://code.google.com/p/blockly/wiki/Loops#repeat repeat block].
+///block input text - Title of [https://code.google.com/p/blockly/wiki/Loops#repeat repeat block].\n\nParameters:\n* %1 - the number of times the body of the loop should be repeated.
+Blockly.Msg.CONTROLS_REPEAT_TITLE = 'repeat %1 times';
+///block text - Text preceding the number of repetitions in a [https://code.google.com/p/blockly/wiki/Loops#repeat repeat block].
+///(This is redundant with the previous message but is needed to support older code.)
 Blockly.Msg.CONTROLS_REPEAT_TITLE_REPEAT = 'repeat';
 ///block text - Text following the number of times a [https://code.google.com/p/blockly/wiki/Loops#repeat repeat loop] should be repeated.
+///(This is redundant but is needed to support older code.)
 Blockly.Msg.CONTROLS_REPEAT_TITLE_TIMES = 'times';
 ///block text - Preceding the blocks in the body of the loop.  See [https://code.google.com/p/blockly/wiki/Loops https://code.google.com/p/blockly/wiki/Loops].
 Blockly.Msg.CONTROLS_REPEAT_INPUT_DO = 'do';
@@ -236,8 +246,9 @@ Blockly.Msg.LOGIC_OPERATION_OR = 'or';
 
 ///url - Information about logical negation.  The translation of [http://en.wikipedia.org/wiki/Logical_negation http://en.wikipedia.org/wiki/Logical_negation] is recommended if it exists in the target language.
 Blockly.Msg.LOGIC_NEGATE_HELPURL = 'http://code.google.com/p/blockly/wiki/Not';
-///block text - word for logical  "not" - this is a unary operator that returns ''false'' when the input is ''true'', and ''true'' when the input is ''false''.
-Blockly.Msg.LOGIC_NEGATE_INPUT_NOT = 'not';
+///block text - This is a unary operator that returns ''false'' when the input is ''true'', and ''true'' when the input is ''false''.
+///\n\nParameters:\n* %1 - the input (which should be either the value "true" or "false")
+Blockly.Msg.LOGIC_NEGATE_TITLE = 'not %1';
 ///tooltip - See [http://en.wikipedia.org/wiki/Logical_negation http://en.wikipedia.org/wiki/Logical_negation].
 Blockly.Msg.LOGIC_NEGATE_TOOLTIP = 'Returns true if the input is false.  Returns false if the input is true.';
 
@@ -404,19 +415,17 @@ Blockly.Msg.MATH_ONLIST_TOOLTIP_RANDOM = 'Return a random element from the list.
 
 ///url - information about the modulo (remainder) operation.
 Blockly.Msg.MATH_MODULO_HELPURL = 'http://en.wikipedia.org/wiki/Modulo_operation';
-///block text - This provides the remainder when dividing the first numerical input by the second.  For example, the remainder of 10 divided by 3 is 1.
-Blockly.Msg.MATH_MODULO_INPUT_DIVIDEND = 'remainder of';
+///block text - Title of block providing the remainder when dividing the first numerical input by the second.  For example, the remainder of 10 divided by 3 is 1.\n\nParameters:\n* %1 - the dividend (10, in our example)\n* %2 - the divisor (3 in our example).
+Blockly.Msg.MATH_MODULO_TITLE = 'remainder of %1 ÷ %2';
 ///tooltip - For example, the remainder of 10 divided by 3 is 1.
 Blockly.Msg.MATH_MODULO_TOOLTIP = 'Return the remainder from dividing the two numbers.';
 
 ///url - Information about constraining a numeric value to be in a specific range.  (The English URL is not ideal.  Recall that translating URLs is the lowest priority.)
 Blockly.Msg.MATH_CONSTRAIN_HELPURL = 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29';
-///block text - The title of the block that '''constrain'''s (forces) a number to be in a given range.  For example, if the number 150 is constrained to be between 5 and 100, the result will be 100.
-Blockly.Msg.MATH_CONSTRAIN_INPUT_CONSTRAIN = 'constrain';
-/// block input text - The text before the number at the bottom of the range in which a number should be constrained, for example, if the number 150 is constrained to be between 5 and 100, the result will be 100, and 5 would be the ''low'' input.
-Blockly.Msg.MATH_CONSTRAIN_INPUT_LOW = 'low';
-/// block input text - The text before the number at the top of the range in which a number should be constrained, for example, if the number 2 is constrained to be between 5 and 100, the result will be 5, and 100 would be the ''high'' input.
-Blockly.Msg.MATH_CONSTRAIN_INPUT_HIGH = 'high';
+///block text - The title of the block that '''constrain'''s (forces) a number to be in a given range.
+//For example, if the number 150 is constrained to be between 5 and 100, the result will be 100.
+//\n\nParameters:\n* %1 - the value to constrain (e.g., 150)\n* %2 - the minimum value (e.g., 5)\n* %3 - the maximum value (e.g., 100).
+Blockly.Msg.MATH_CONSTRAIN_TITLE = 'constrain %1 low %2 high %3';
 ///tooltip - This compares a number x to a low value L and a high value H.  If x is less then L, the result is L.  If x is greater than H, the result is H.  Otherwise, the result is x.
 Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = 'Constrain a number to be between the specified limits (inclusive).';
 
@@ -465,20 +474,22 @@ Blockly.Msg.TEXT_APPEND_TO = 'to';
 Blockly.Msg.TEXT_APPEND_APPENDTEXT = 'append text';
 ///block text - Placeholder for the name of a variable to which text should be appended.  See [https://code.google.com/p/blockly/wiki/Text#Text_modification https://code.google.com/p/blockly/wiki/Text#Text_modification].
 Blockly.Msg.TEXT_APPEND_VARIABLE = 'item';
-///tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_modification https://code.google.com/p/blockly/wiki/Text#Text_modification].\n\nParameters:\n* %1 - the name of the variable to which text should be appended.
+///tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_modification https://code.google.com/p/blockly/wiki/Text#Text_modification].\n\nParameters:\n* %1 - the name of the variable to which text should be appended
 Blockly.Msg.TEXT_APPEND_TOOLTIP = 'Append some text to variable "%1".';
 
 ///url - Information about text on computers (usually referred to as 'strings').
 Blockly.Msg.TEXT_LENGTH_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Text_modification';
 ///block text - See [https://code.google.com/p/blockly/wiki/Text#Text_length https://code.google.com/p/blockly/wiki/Text#Text_length].
-Blockly.Msg.TEXT_LENGTH_INPUT_LENGTH = 'length of';
+///\n\nParameters:\n* %1 - the piece of text to take the length of
+Blockly.Msg.TEXT_LENGTH_TITLE = 'length of %1';
 ///tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_length https://code.google.com/p/blockly/wiki/Text#Text_length].
 Blockly.Msg.TEXT_LENGTH_TOOLTIP = 'Returns number of letters (including spaces) in the provided text.';
 
 ///url - Information about empty pieces of text on computers (usually referred to as 'empty strings').
 Blockly.Msg.TEXT_ISEMPTY_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Checking_for_empty_text';
 ///block text - See [https://code.google.com/p/blockly/wiki/Text#Checking_for_empty_text https://code.google.com/p/blockly/wiki/Text#Checking_for_empty_text].
-Blockly.Msg.TEXT_ISEMPTY_INPUT_ISEMPTY = 'is empty';
+///\n\nParameters:\n* %1 - the piece of text to test for emptiness
+Blockly.Msg.TEXT_ISEMPTY_TITLE = '%1 is empty';
 ///tooltip - See [https://code.google.com/p/blockly/wiki/Text#Checking_for_empty_text https://code.google.com/p/blockly/wiki/Text#Checking_for_empty_text].
 Blockly.Msg.TEXT_ISEMPTY_TOOLTIP = 'Returns true if the provided text is empty.';
 
@@ -554,7 +565,8 @@ Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = 'trim spaces from right side';
 ///url - Information about displaying text on computers.
 Blockly.Msg.TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
 ///block text - Display the input on the screen.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
-Blockly.Msg.TEXT_PRINT_TITLE_PRINT = 'print';
+///\n\nParameters:\n* %1 - the value to print
+Blockly.Msg.TEXT_PRINT_TITLE = 'print %1';
 ///tooltip - See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
 Blockly.Msg.TEXT_PRINT_TOOLTIP = 'Print the specified text, number or other value.';
 ///url - Information about getting text from users.
@@ -594,23 +606,22 @@ Blockly.Msg.LISTS_REPEAT_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists
 ///url - See [https://code.google.com/p/blockly/wiki/Lists#create_list_with creating a list with multiple copies of a single item].
 Blockly.Msg.LISTS_REPEAT_TOOLTIP = 'Creates a list consisting of the given value repeated the specified number of times.';
 ///block text - See [https://code.google.com/p/blockly/wiki/Lists#create_list_with https://code.google.com/p/blockly/wiki/Lists#create_list_with].
-Blockly.Msg.LISTS_REPEAT_INPUT_WITH = 'create list with item';
-///block text - Text in between the input text [provided by the user] and the number of times it should be repeated.  See [https://code.google.com/p/blockly/wiki/Lists#create_list_with https://code.google.com/p/blockly/wiki/Lists#create_list_with].
-Blockly.Msg.LISTS_REPEAT_INPUT_REPEATED = 'repeated';
-///block text - Text after and the user-supplied count of the number of repetitions.  See [https://code.google.com/p/blockly/wiki/Lists#create_list_with https://code.google.com/p/blockly/wiki/Lists#create_list_with].
-Blockly.Msg.LISTS_REPEAT_INPUT_TIMES = 'times';
+//\n\nParameters:\n* %1 - the item (text) to be repeated\n* %2 - the number of times to repeat it
+Blockly.Msg.LISTS_REPEAT_TITLE = 'create list with item %1 repeated %2 times';
 
 ///url - Information about how the length of a list is computed (i.e., by the total number of elements, not the number of different elements).
 Blockly.Msg.LISTS_LENGTH_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#length_of';
 ///block text - See [https://code.google.com/p/blockly/wiki/Lists#length_of https://code.google.com/p/blockly/wiki/Lists#length_of].
-Blockly.Msg.LISTS_LENGTH_INPUT_LENGTH = 'length of';
+///\n\nParameters:\n* %1 - the list whose length is desired
+Blockly.Msg.LISTS_LENGTH_TITLE = 'length of %1';
 ///tooltip - See [https://code.google.com/p/blockly/wiki/Lists#length_of https://code.google.com/p/blockly/wiki/Lists#length_of Blockly:Lists:length of].
 Blockly.Msg.LISTS_LENGTH_TOOLTIP = 'Returns the length of a list.';
 
 ///url - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
 Blockly.Msg.LISTS_IS_EMPTY_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#is_empty';
 ///block text - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
-Blockly.Msg.LISTS_INPUT_IS_EMPTY = 'is empty';
+///\n\nParameters:\n* %1 - the list to test
+Blockly.Msg.LISTS_IS_EMPTY_TITLE = '%1 is empty';
 ///block tooltip - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
 Blockly.Msg.LISTS_TOOLTIP = 'Returns true if the list is empty.';
 

@@ -311,13 +311,10 @@ Blockly.Blocks['math_modulo'] = {
     this.setHelpUrl(Blockly.Msg.MATH_MODULO_HELPURL);
     this.setColour(230);
     this.setOutput(true, 'Number');
-    this.appendValueInput('DIVIDEND')
-        .setCheck('Number')
-        .appendTitle(Blockly.Msg.MATH_MODULO_INPUT_DIVIDEND);
-    this.appendValueInput('DIVISOR')
-        .setCheck('Number')
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle('\u00F7');
+    this.interpolateMsg(Blockly.Msg.MATH_MODULO_TITLE,
+                        ['DIVIDEND', 'Number', Blockly.ALIGN_RIGHT],
+                        ['DIVISOR', 'Number', Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.MATH_MODULO_TOOLTIP);
   }
@@ -329,15 +326,11 @@ Blockly.Blocks['math_constrain'] = {
     this.setHelpUrl(Blockly.Msg.MATH_CONSTRAIN_HELPURL);
     this.setColour(230);
     this.setOutput(true, 'Number');
-    this.appendValueInput('VALUE')
-        .setCheck('Number')
-        .appendTitle(Blockly.Msg.MATH_CONSTRAIN_INPUT_CONSTRAIN);
-    this.appendValueInput('LOW')
-        .setCheck('Number')
-        .appendTitle(Blockly.Msg.MATH_CONSTRAIN_INPUT_LOW);
-    this.appendValueInput('HIGH')
-        .setCheck('Number')
-        .appendTitle(Blockly.Msg.MATH_CONSTRAIN_INPUT_HIGH);
+    this.interpolateMsg(Blockly.Msg.MATH_CONSTRAIN_TITLE,
+                        ['VALUE', 'Number', Blockly.ALIGN_RIGHT],
+                        ['LOW', 'Number', Blockly.ALIGN_RIGHT],
+                        ['HIGH', 'Number', Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT)
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.MATH_CONSTRAIN_TOOLTIP);
   }

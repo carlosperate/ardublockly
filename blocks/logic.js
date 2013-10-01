@@ -298,9 +298,9 @@ Blockly.Blocks['logic_negate'] = {
     this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
     this.setColour(210);
     this.setOutput(true, 'Boolean');
-    this.appendValueInput('BOOL')
-        .setCheck('Boolean')
-        .appendTitle(Blockly.Msg.LOGIC_NEGATE_INPUT_NOT);
+    this.interpolateMsg(Blockly.Msg.LOGIC_NEGATE_TITLE,
+                        ['BOOL', 'Boolean', Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT)
     this.setTooltip(Blockly.Msg.LOGIC_NEGATE_TOOLTIP);
   }
 };

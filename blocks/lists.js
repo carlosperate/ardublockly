@@ -162,14 +162,10 @@ Blockly.Blocks['lists_repeat'] = {
     this.setHelpUrl(Blockly.Msg.LISTS_REPEAT_HELPURL);
     this.setColour(260);
     this.setOutput(true, 'Array');
-    this.appendValueInput('ITEM')
-        .appendTitle(Blockly.Msg.LISTS_REPEAT_INPUT_WITH);
-    this.appendValueInput('NUM')
-        .setCheck('Number')
-        .appendTitle(Blockly.Msg.LISTS_REPEAT_INPUT_REPEATED);
-    this.appendDummyInput()
-        .appendTitle(Blockly.Msg.LISTS_REPEAT_INPUT_TIMES);
-    this.setInputsInline(true);
+    this.interpolateMsg(Blockly.Msg.LISTS_REPEAT_TITLE,
+                        ['ITEM', null, Blockly.ALIGN_RIGHT],
+                        ['NUM', 'Number', Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.Msg.LISTS_REPEAT_TOOLTIP);
   }
 };
@@ -179,9 +175,9 @@ Blockly.Blocks['lists_length'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.LISTS_LENGTH_HELPURL);
     this.setColour(260);
-    this.appendValueInput('VALUE')
-        .setCheck(['Array', 'String'])
-        .appendTitle(Blockly.Msg.LISTS_LENGTH_INPUT_LENGTH);
+    this.interpolateMsg(Blockly.Msg.LISTS_LENGTH_TITLE,
+                        ['VALUE', ['Array', 'String'], Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT);
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.LISTS_LENGTH_TOOLTIP);
   }
@@ -192,10 +188,9 @@ Blockly.Blocks['lists_isEmpty'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.LISTS_IS_EMPTY_HELPURL);
     this.setColour(260);
-    this.appendValueInput('VALUE')
-        .setCheck(['Array', 'String']);
-    this.appendDummyInput()
-        .appendTitle(Blockly.Msg.LISTS_INPUT_IS_EMPTY);
+    this.interpolateMsg(Blockly.Msg.LISTS_IS_EMPTY_TITLE,
+                        ['VALUE', ['Array', 'String'], Blockly.ALIGN_RIGHT],
+                        Blockly.ALIGN_RIGHT)
     this.setInputsInline(true);
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.LISTS_TOOLTIP);
