@@ -507,25 +507,25 @@ Blockly.isTargetInput_ = function(e) {
  * @private
  */
 Blockly.loadAudio_ = function(filenames, name) {
-  if (!window.Audio || !filenames.length) {
+  if (!window['Audio'] || !filenames.length) {
     // No browser support for Audio.
     return;
   }
   var sound;
-  var audioTest = new window.Audio();
+  var audioTest = new window['Audio']();
   for (var i = 0; i < filenames.length; i++) {
     var filename = filenames[i];
     var ext = filename.match(/\.(\w+)$/);
     if (ext && audioTest.canPlayType('audio/' + ext[1])) {
       // Found an audio format we can play.
-      sound = new window.Audio(Blockly.pathToBlockly + filename);
+      sound = new window['Audio'](Blockly.pathToBlockly + filename);
       break;
     }
   }
   // To force the browser to load the sound, play it, but at nearly zero volume.
   if (sound && sound.play) {
-    sound.play();
     sound.volume = 0.01;
+    sound.play();
     Blockly.SOUNDS_[name] = sound;
   }
 };

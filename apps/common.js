@@ -446,9 +446,12 @@ BlocklyApps.showDialog = function(content, origin, animate, modal, style,
   content.className = content.className.replace('dialogHiddenContent', '');
 
   function endResult() {
-    dialog.style.visibility = 'visible';
-    dialog.style.zIndex = 1;
-    border.style.visibility = 'hidden';
+    // Check that the dialog wasn't closed during opening.
+    if (BlocklyApps.isDialogVisible_) {
+      dialog.style.visibility = 'visible';
+      dialog.style.zIndex = 1;
+      border.style.visibility = 'hidden';
+    }
   }
   if (animate && origin) {
     BlocklyApps.matchBorder_(origin, false, 0.2);
