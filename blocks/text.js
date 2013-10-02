@@ -309,8 +309,8 @@ Blockly.Blocks['text_getSubstring'] = {
          [Blockly.Msg.TEXT_SUBSTRING_FROM_END, 'FROM_END'],
          [Blockly.Msg.TEXT_SUBSTRING_FIRST, 'FIRST']];
     this.WHERE_OPTIONS_2 =
-        [[Blockly.Msg.TEXT_SUBSTRING_FROM_START, 'FROM_START'],
-         [Blockly.Msg.TEXT_SUBSTRING_FROM_END, 'FROM_END'],
+        [[Blockly.Msg.TEXT_SUBSTRING_TO_START, 'FROM_START'],
+         [Blockly.Msg.TEXT_SUBSTRING_TO_END, 'FROM_END'],
          [Blockly.Msg.TEXT_SUBSTRING_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.TEXT_SUBSTRING_HELPURL);
     this.setColour(160);

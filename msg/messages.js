@@ -157,8 +157,6 @@ Blockly.Msg.CONTROLS_FOR_HELPURL = 'https://code.google.com/p/blockly/wiki/Loops
 Blockly.Msg.CONTROLS_FOR_TOOLTIP = 'Have the variable %1 take on the values from the start number to the end number, counting by the specified interval, and do the specified blocks.';
 ///block title - Title of [https://code.google.com/p/blockly/wiki/Loops#count_with count with] blocks.
 Blockly.Msg.CONTROLS_FOR_INPUT_WITH = 'count with';
-///variable name - The default name for a [https://code.google.com/p/blockly/wiki/Loops#count_with count with] loop variable.  You can use a word or symbol in algebra for an unknown value or a word meaning 'counter'.
-Blockly.Msg.CONTROLS_FOR_INPUT_VAR = 'x';
 ///block input text - Starting with a (usually lower) number in a range (%1), ending with a (usually higher) number in a range (%2), and counting the iterations by a number of steps (%3).  As in [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].
 Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY = 'from %1 to %2 by %3';
 Blockly.Msg.CONTROLS_FOR_INPUT_DO = Blockly.Msg.CONTROLS_REPEAT_INPUT_DO;
@@ -167,7 +165,6 @@ Blockly.Msg.CONTROLS_FOR_INPUT_DO = Blockly.Msg.CONTROLS_REPEAT_INPUT_DO;
 Blockly.Msg.CONTROLS_FOREACH_HELPURL = 'https://code.google.com/p/blockly/wiki/Loops#for_each for each block';
 ///block text - Title of [https://code.google.com/p/blockly/wiki/Loops#for_each for each block].
 Blockly.Msg.CONTROLS_FOREACH_INPUT_ITEM = 'for each item';
-Blockly.Msg.CONTROLS_FOREACH_INPUT_VAR = Blockly.Msg.CONTROLS_FOR_INPUT_VAR;
 ///block text - Preceding the list that should be iterated over in a [https://code.google.com/p/blockly/wiki/Loops#for_each for each loop].
 Blockly.Msg.CONTROLS_FOREACH_INPUT_INLIST = 'in list';
 ///block text - Following the list that should be iterated over in a [https://code.google.com/p/blockly/wiki/Loops#for_each for each loop].  This is empty in most, but not all, languages.
@@ -527,18 +524,18 @@ Blockly.Msg.TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
 Blockly.Msg.TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 ///block text - Precedes a piece of text from which a portion should be extracted.
 Blockly.Msg.TEXT_SUBSTRING_INPUT_IN_TEXT = 'in text';
-///block text - This text between the input specifying the string and the input specifying the part to extract.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
-Blockly.Msg.TEXT_SUBSTRING_INPUT_AT1 = 'get substring from';
-///block text - Comes between the two inputs specifying the start and end of a range, as in 'from 3 '''to''' 8'.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
-Blockly.Msg.TEXT_SUBSTRING_INPUT_AT2 = 'to';
-///dropdown - Indicates that the letter (or number, punctuation character, etc.) with the specified index should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
-Blockly.Msg.TEXT_SUBSTRING_FROM_START = 'letter #';
-///block text - Indicates that the letter (or number, punctuation character, etc.) with the specified index from the end of a given piece of text should be obtained.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
-Blockly.Msg.TEXT_SUBSTRING_FROM_END = 'letter # from end';
+///dropdown - Indicates that the following number specifies the position (relative to the start position) of the beginning of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+Blockly.Msg.TEXT_SUBSTRING_FROM_START = 'get substring from letter #';
+///dropdown - Indicates that the following number specifies the position (relative to the end position) of the beginning of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+Blockly.Msg.TEXT_SUBSTRING_FROM_END = 'get substring from letter # from end';
+///dropdown - Indicates that the following number specifies the position (relative to the start position) of the end of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+Blockly.Msg.TEXT_SUBSTRING_TO_START = 'to letter #';
+///dropdown - Indicates that the following number specifies the position (relative to the end position) of the end of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].  In most languages, this will be the same as {{msg-blockly|TEXT_SUBSTRING_FROM_START1}}.
+Blockly.Msg.TEXT_SUBSTRING_TO_END = 'to letter # from end';
 ///block text - Indicates that a region starting with the first letter of the preceding piece of text should be extracted.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
-Blockly.Msg.TEXT_SUBSTRING_FIRST = 'first letter';
-///block text - Indicates that a region ending with the first letter of the preceding piece of text should be extracted.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
-Blockly.Msg.TEXT_SUBSTRING_LAST = 'last letter';
+Blockly.Msg.TEXT_SUBSTRING_FIRST = 'get substring from first letter';
+///block text - Indicates that a region ending with the last letter of the preceding piece of text should be extracted.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+Blockly.Msg.TEXT_SUBSTRING_LAST = 'to last letter';
 
 ///url - Information about the case of letters (upper-case and lower-case).
 Blockly.Msg.TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
