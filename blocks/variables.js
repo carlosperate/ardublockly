@@ -40,6 +40,8 @@ Blockly.Blocks['variables_get'] = {
         .appendTitle(Blockly.Msg.VARIABLES_GET_TAIL);
     this.setOutput(true);
     this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_GET_CREATE_SET;
+    this.contextMenuType_ = 'variables_set';
   },
   getVars: function() {
     return [this.getTitleValue('VAR')];
@@ -49,8 +51,6 @@ Blockly.Blocks['variables_get'] = {
       this.setTitleValue(newName, 'VAR');
     }
   },
-  contextMenuMsg_: Blockly.Msg.VARIABLES_GET_CREATE_SET,
-  contextMenuType_: 'variables_set',
   customContextMenu: function(options) {
     var option = {enabled: true};
     var name = this.getTitleValue('VAR');
@@ -77,6 +77,8 @@ Blockly.Blocks['variables_set'] = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET;
+    this.contextMenuType_ = 'variables_get';
   },
   getVars: function() {
     return [this.getTitleValue('VAR')];
@@ -86,7 +88,5 @@ Blockly.Blocks['variables_set'] = {
       this.setTitleValue(newName, 'VAR');
     }
   },
-  contextMenuMsg_: Blockly.Msg.VARIABLES_SET_CREATE_GET,
-  contextMenuType_: 'variables_get',
   customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
 };
