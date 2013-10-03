@@ -66,7 +66,7 @@ def main():
   for arg_file in args.files:
     (_, filename) = os.path.split(arg_file)
     target_lang = filename[:filename.index('.')]
-    if target_lang not in ('qqq', 'keys'):
+    if target_lang not in ('qqq', 'keys', 'synonyms'):
       target_defs = read_json_file(os.path.join(os.curdir, arg_file))
 
       # Output file.

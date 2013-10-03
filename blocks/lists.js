@@ -290,11 +290,16 @@ Blockly.Blocks['lists_getIndex'] = {
   },
   updateAt: function(isAt) {
     // Create or delete an input for the numeric index.
-    // Destroy old 'AT' input.
+    // Destroy old 'AT' and 'ORDINAL' inputs.
     this.removeInput('AT');
+    this.removeInput('ORDINAL', true);
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT').setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL')
+            .appendTitle(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
     } else {
       this.appendDummyInput('AT');
     }
@@ -366,11 +371,16 @@ Blockly.Blocks['lists_setIndex'] = {
   },
   updateAt: function(isAt) {
     // Create or delete an input for the numeric index.
-    // Destroy old 'AT' input.
+    // Destroy old 'AT' and 'ORDINAL' input.
     this.removeInput('AT');
+    this.removeInput('ORDINAL', true);
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT').setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL')
+            .appendTitle(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
     } else {
       this.appendDummyInput('AT');
     }
@@ -395,13 +405,13 @@ Blockly.Blocks['lists_getSublist'] = {
   // Get sublist.
   init: function() {
     this.WHERE_OPTIONS_1 =
-        [[Blockly.Msg.LISTS_GET_INDEX_FROM_START, 'FROM_START'],
-         [Blockly.Msg.LISTS_GET_INDEX_FROM_END, 'FROM_END'],
-         [Blockly.Msg.LISTS_GET_INDEX_FIRST, 'FIRST']];
+        [[Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_START, 'FROM_START'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_END, 'FROM_END'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_START_FIRST, 'FIRST']];
     this.WHERE_OPTIONS_2 =
-        [[Blockly.Msg.LISTS_GET_INDEX_FROM_START, 'FROM_START'],
-         [Blockly.Msg.LISTS_GET_INDEX_FROM_END, 'FROM_END'],
-         [Blockly.Msg.LISTS_GET_INDEX_LAST, 'LAST']];
+        [[Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_START, 'FROM_START'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END, 'FROM_END'],
+         [Blockly.Msg.LISTS_GET_SUBLIST_END_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.LISTS_GET_SUBLIST_HELPURL);
     this.setColour(260);
     this.appendValueInput('LIST')
@@ -427,17 +437,22 @@ Blockly.Blocks['lists_getSublist'] = {
   domToMutation: function(xmlElement) {
     // Restore the block shape.
     var isAt1 = (xmlElement.getAttribute('at1') == 'true');
-    var isAt2 = (xmlElement.getAttribute('at1') == 'true');
+    var isAt2 = (xmlElement.getAttribute('at2') == 'true');
     this.updateAt(1, isAt1);
     this.updateAt(2, isAt2);
   },
   updateAt: function(n, isAt) {
     // Create or delete an input for the numeric index.
-    // Destroy old 'AT' input.
+    // Destroy old 'AT' and 'ORDINAL' inputs.
     this.removeInput('AT' + n);
+    this.removeInput('ORDINAL' + n, true);
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT' + n).setCheck('Number');
+      if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
+        this.appendDummyInput('ORDINAL' + n)
+            .appendTitle(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
+      }
     } else {
       this.appendDummyInput('AT' + n);
     }
@@ -455,7 +470,6 @@ Blockly.Blocks['lists_getSublist'] = {
       return undefined;
     });
     this.getInput('AT' + n)
-        .appendTitle(Blockly.Msg['LISTS_GET_SUBLIST_INPUT_AT' + n])
         .appendTitle(menu, 'WHERE' + n);
     if (n == 1) {
       this.moveInputBefore('AT1', 'AT2');
