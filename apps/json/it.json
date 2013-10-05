@@ -65,7 +65,7 @@
     "Maze.helpReset": "Il programma non ha risolto il labirinto. Premi 'Reset' e prova di nuovo.",
     "Maze.helpRepeat": "I computer hanno una memoria limitata. Raggiungi l'arrivo usando solo due blocchi. Scegli 'ripeti' per eseguire un blocco pi\u00f9 di una volta.",
     "Maze.helpCapacity": "Hai utilizzato tutti i blocchi per questo livello. Per creare un nuovo blocco, \u00e8 necessario prima eliminare un blocco esistente.",
-    "Maze.helpRepeatMany": "Raggiungi l'obiettivo usando solo cinque blocchi.",
+    "Maze.helpRepeatMany": "\u00c8 possibile inserire pi\u00f9 di un blocco all'interno di un blocco 'Ripeti'.",
     "Maze.helpIf": "Con 'se' l'azione verr\u00e0 eseguita solo se la condizione \u00e8 soddisfatta. Prova a girare a sinistra se c'\u00e8 una strada a sinistra.",
     "Maze.helpMenu": "Fai clic su %1 nel blocco 'se' per cambiare la sua condizione.",
     "Maze.helpWallFollow": "Sai risolvere questo labirinto intricato? Prova a seguire il muro di sinistra. Solo per programmatori avanzati!",

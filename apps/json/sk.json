@@ -2,7 +2,8 @@
     "@metadata": {
         "authors": [
             "Kusavica",
-            "Marian.stano"
+            "Marian.stano",
+            "Rudko"
         ]
     },
     "Apps.subtitle": "vizu\u00e1lne programovacie prostredie",
@@ -65,8 +66,9 @@
     "Maze.helpReset": "V\u00e1\u0161 program nepre\u0161iel cez bludisko. Stla\u010dte tla\u010didlo \"Obnovi\u0165\" a sk\u00faste to znova.",
     "Maze.helpRepeat": "Pam\u00e4te v po\u010d\u00edta\u010doch nikdy nie je dos\u0165. Dosiahni cie\u013e len pou\u017e\u00edt\u00edm dvoch blokov. Na zopakovanie pr\u00edkazu pou\u017ei pr\u00edkaz 'opakuj'.",
     "Maze.helpCapacity": "Pou\u017eili ste v\u0161etky bloky dostupn\u00e9 pre t\u00fato \u00farove\u0148. Ak chcete vytvori\u0165 nov\u00fd blok, mus\u00edte najprv odstr\u00e1ni\u0165 existuj\u00faci.",
-    "Maze.helpRepeatMany": "Dosiahni cie\u013e len pou\u017eit\u00edm piatich dielcov.",
+    "Maze.helpRepeatMany": "Mo\u017ete upravi\u0165 viac ako jeden blok v r\u00e1mci 'repeat' bloku.",
     "Maze.helpIf": "Dielec 'ak' urob\u00ed nie\u010do len vtedy, ak je splnen\u00e1 podmienka. Sk\u00fas oto\u010denie v\u013eavo, ak je cesta na\u013eavo.",
+    "Maze.helpMenu": "Klikni na %1 v 'ak' bloku pre zmenu jeho stavu.",
     "Maze.helpWallFollow": "A zvl\u00e1dne\u0161 aj toto komplikovan\u00e9 bludisko? Sk\u00fas \u00eds\u0165 popri \u013eavej stene. Len pre pokro\u010dil\u00fdch program\u00e1torov!",
     "Plane.rows": "Rady: %1",
     "Plane.getRows": "rady (%1)",

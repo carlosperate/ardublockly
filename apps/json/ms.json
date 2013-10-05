@@ -131,6 +131,7 @@
     "Turtle.turtleVisibilityTooltip": "Memperlihatkan atau menghalimunankan kekura (bulatan dan anak panah).",
     "Turtle.hideTurtle": "halimunankan kekura",
     "Turtle.showTurtle": "perlihatkan kekura",
+    "Turtle.printHelpUrl": "http://ms.wikipedia.org/wiki/Pencetakan",
     "Turtle.printTooltip": "Melukis teks di arah kekura pada kedudukannya.",
     "Turtle.print": "cetak",
     "Turtle.fontTooltip": "Menetapkan fon (rupa huruf) yang digunakan oleh blok cetak.",

@@ -64,7 +64,7 @@
     "Maze.helpReset": "Votre programme n\u2019a pas r\u00e9solu le labyrinthe. Appuyez sur 'R\u00e9initialiser' et r\u00e9essayez.",
     "Maze.helpRepeat": "Les ordinateurs n'ont pas beaucoup de m\u00e9moire. Utilise seulement deux blocs pour atteindre le but. Utilise le bloc 'rep\u00e8te' pour ex\u00e9cuter un bloc plus d'une fois.",
     "Maze.helpCapacity": "Vous avez utilis\u00e9 tous les blocs pour ce niveau. Pour cr\u00e9er un nouveau bloc, vous devez d\u2019abord supprimer un bloc existant.",
-    "Maze.helpRepeatMany": "Atteint le but en utilisant seulement cinq blocs.",
+    "Maze.helpRepeatMany": "Vous pouvez mettre plus d\u2019un bloc dans un bloc \u00ab\u202fr\u00e9p\u00e9ter\u202f\u00bb.",
     "Maze.helpIf": "Un bloc 'si' va ex\u00e9cuter ce qu'il y a dedans seulement si la condition est vraie. Essaie de tourner \u00e0 gauche si il y a un chemin sur la gauche.",
     "Maze.helpMenu": "Cliquez sur %1 dans le bloc 'si' pour modifier sa condition.",
     "Maze.helpWallFollow": "Peux tu r\u00e9soudre ce labyrinthe plus difficile? Essaie de suivre le mur du c\u00f4t\u00e9 de ta main gauche.",

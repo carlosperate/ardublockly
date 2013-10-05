@@ -64,7 +64,7 @@
     "Maze.helpReset": "T\u00f2 programa a l'ha nen arzolv\u00f9 \u00ebl labirint. Sgnaca 'But\u00e9 torna coma al prinsipi' e preuva torna.",
     "Maze.helpRepeat": "J'ordinator a l'han na mem\u00f2ria limit\u00e0. Riva a la fin \u00ebd sa stra dovrand mach doi bl\u00f2ch. Deuvra 'arpet' p\u00ebr esegu\u00ec un bl\u00f2ch pi 'd na vira.",
     "Maze.helpCapacity": "It l'has consum\u00e0 tuti ij bl\u00f2ch p\u00ebr cost livel. P\u00ebr cre\u00e9 un bl\u00f2ch neuv, tl'has prima damanca d\u00eb scancel\u00e9 un bl\u00f2ch esistent.",
-    "Maze.helpRepeatMany": "Argionz \u00ebl but an dovrand mach sinch bl\u00f2ch.",
+    "Maze.helpRepeatMany": "A peul but\u00e9 pi d'un bl\u00f2ch andrinta a 'n bl\u00f2ch \u00abarpete\u00bb.",
     "Maze.helpIf": "Un bl\u00f2ch 'si' a far\u00e0 cheic\u00f2s mach si la condission a l'\u00e9 vera. Preuva a svolt\u00e9 a snistra s'a-i \u00e9 na stra a snistra.",
     "Maze.helpMenu": "Sgnaca su %1 ant \u00ebl bl\u00f2ch 'si' p\u00ebr cang\u00e9 soa condission.",
     "Maze.helpWallFollow": "Peul\u00ebs-to arz\u00f2lve cost labirint complic\u00e0? S\u00ebrca d'andeje dapress a la muraja a snistra. Mach p\u00ebr programator coj barbis!",

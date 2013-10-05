@@ -1,4 +1,10 @@
 {
+    "@metadata": {
+        "authors": [
+            "McDutchie",
+            "Shirayuki"
+        ]
+    },
     "Apps.subtitle": "A short description of Blockly.",
     "Apps.blocklyMessage": "The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (\u0411\u043bo\u043a\u043b\u0438)'.",
     "Apps.codeTooltip": "tooltip (pop-up help) for button; pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user.",
@@ -57,9 +63,9 @@
     "Maze.helpOneTopBlock": "callout - This is displayed if a user attempts to run a program composed of multiple stacks of blocks, letting them know they need to create a single stack.",
     "Maze.helpRun": "callout - This is shown after the user has created a program on the first level.",
     "Maze.helpReset": "callout - This is shown after the user has run a program that does not solve the maze.\n\n'Reset' refers to {{msg-blockly|Apps.resetProgram}}.",
-    "Maze.helpRepeat": "callout - This is shown when the &quot;repeat&quot; block is introduced.  The word &quot;path&quot; refers to a path through a maze, and &quot;block&quot; refers to a child&quot;s building block.",
+    "Maze.helpRepeat": "callout - This is shown when the \u0026quot;repeat\u0026quot; block is introduced.  The word \u0026quot;path\u0026quot; refers to a path through a maze, and \u0026quot;block\u0026quot; refers to a child\u0026quot;s building block.",
     "Maze.helpCapacity": "callout - This is shown after the user has used all the blocks permitted on this level.",
-    "Maze.helpRepeatMany": "callout - This is a hint that the user should place a second block inside of a &quot;repeat&quot; block.\n\n&quot;repeat&quot; should be consistent with {{msg-blockly|Maze.repeatUntil}}.",
+    "Maze.helpRepeatMany": "callout - This is a hint that the user should place a second block inside of a \u0026quot;repeat\u0026quot; block.\n\n\u0026quot;repeat\u0026quot; should be consistent with {{msg-blockly|Maze.repeatUntil}}.",
     "Maze.helpSkins": "callout - This is a hint that the user can change the appearance of the player that moves within the maze.",
     "Maze.helpIf": "callout - This is shown when the 'if' block is introduced.  An example of an 'if' block is: 'if there is a path to the left, turn left'.",
     "Maze.helpMenu": "callout - %1 will be replaced with an image of the dropdown menu that the user needs to click.",

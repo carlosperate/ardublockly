@@ -64,7 +64,7 @@
     "Maze.helpReset": "Uw programma heeft het doolhof niet opgelost. Klik op \"Opnieuw instellen\" en probeert het opnieuw.",
     "Maze.helpRepeat": "Computers hebben een beperkt geheugen. Ga naar het einde van dit pad door maximaal twee blokken te gebruiken. Gebruik \"herhalen\" om een blok meerdere keren uit te voeren.",
     "Maze.helpCapacity": "U hebt alle blokken voor dit niveau gebruikt. Om een nieuw blok te maken, moet u eerst een bestaand blok.",
-    "Maze.helpRepeatMany": "Bereik het einde met maximaal vijf blokken.",
+    "Maze.helpRepeatMany": "U kunt meer dan \u00e9\u00e9n blok toevoegen binnen een \"herhalen\"-blok",
     "Maze.helpIf": "Het blok \"als\" doet alleen iets als de voorwaarde waar is. Probeer naar link te draaien als er een pad naar links is.",
     "Maze.helpMenu": "Klik op %1 in het blok \"als\" om de voorwaarde te wijzigen.",
     "Maze.helpWallFollow": "Kunt u dit ingewikkelde doolhof oplossen? Probeer de linkermuur te volgen. Dit is een opdracht voor gevorderde programmeurs!",
