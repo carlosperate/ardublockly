@@ -65,6 +65,7 @@
     "Maze.helpRepeat": "Chega ao final deste cami\u00f1o usando s\u00f3 dous bloques. Utiliza \"repetir\" para executar un bloque m\u00e1is dunha vez.",
     "Maze.helpCapacity": "Xa usaches todos os bloques dispo\u00f1ibles para este nivel. Para crear un novo bloque, primeiro debes borrar un dos existentes.",
     "Maze.helpRepeatMany": "Podes apilar m\u00e1is dun bloque dentro dos bloques \"repetir\".",
+    "Maze.helpSkins": "Escolle o teu xogador favorito neste men\u00fa.",
     "Maze.helpIf": "Un bloque \"se\" far\u00e1 algo unicamente se a condici\u00f3n \u00e9 certa. Intenta xirar \u00e1 esquerda se hai cami\u00f1o \u00e1 esquerda.",
     "Maze.helpMenu": "Preme en %1 no bloque \"se\" para cambiar a s\u00faa condici\u00f3n.",
     "Maze.helpWallFollow": "Podes resolver este labirinto m\u00e1is complicado? Intenta seguir a parede da esquerda. S\u00f3 para programadores avanzados!",

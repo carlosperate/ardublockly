@@ -65,6 +65,7 @@
     "Maze.helpRepeat": "Computer haben begrenzten Speicher. Erreiche das Ende dieses Pfads mit nur zwei Bausteinen. Benutze \u201eWiederholen\u201c, um einen Baustein mehr als einmal auszuf\u00fchren.",
     "Maze.helpCapacity": "Du hast f\u00fcr dieses Level alle Bausteine aufgebraucht. Um einen neuen Baustein zu erstellen, musst du zuerst einen vorhandenen Baustein l\u00f6schen.",
     "Maze.helpRepeatMany": "Sie k\u00f6nnen mehrere Bl\u00f6cke innerhalb eines Blocks 'repeat' passen.",
+    "Maze.helpSkins": "W\u00e4hle deinen Lieblingsspieler vom Men\u00fc aus.",
     "Maze.helpIf": "Ein \u201eWenn\u201c-Baustein macht etwas, falls die Bedingung wahr ist. Versuche links abzubiegen, falls es einen Pfad nach links gibt.",
     "Maze.helpMenu": "Klicke auf %1 im 'Wenn'-Baustein um die Bedingung zu \u00e4ndern.",
     "Maze.helpWallFollow": "Kannst du dieses komplizierte Labyrinth l\u00f6sen? Folge der linken Wand. Nur f\u00fcr fortgeschrittene Programmierer!",
