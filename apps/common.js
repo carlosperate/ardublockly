@@ -668,11 +668,8 @@ BlocklyApps.storageAlert = function(message) {
     left: '25%',
     top: '5em'
   };
-  function disposeFunc() {
-    content.parentNode.removeChild(content);
-    BlocklyApps.stopDialogKeyDown();
-  }
-  BlocklyApps.showDialog(content, origin, true, true, style, disposeFunc);
+  BlocklyApps.showDialog(content, origin, true, true, style,
+      BlocklyApps.stopDialogKeyDown());
   BlocklyApps.startDialogKeyDown();
 };
 
