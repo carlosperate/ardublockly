@@ -243,7 +243,7 @@ Blockly.Blocks['lists_getIndex'] = {
         .appendTitle('', 'SPACE');
     this.appendDummyInput('AT');
     this.setInputsInline(true);
-    this.setOutput(true, 'Number');
+    this.setOutput(true);
     this.updateAt(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
