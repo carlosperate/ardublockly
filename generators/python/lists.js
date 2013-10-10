@@ -84,7 +84,7 @@ Blockly.Python['lists_indexOf'] = function(block) {
          '  except: theIndex = 0',
          '  return theIndex']);
     code = functionName + '(' + argument1 + ', ' + argument0 + ')';
-    return [code, Blockly.Python.ORDER_MEMBER];
+    return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   } else {
     var functionName = Blockly.Python.provideFunction_(
         'last_index',
@@ -93,7 +93,7 @@ Blockly.Python['lists_indexOf'] = function(block) {
          '  except: theIndex = 0',
          '  return theIndex']);
     code = functionName + '(' + argument1 + ', ' + argument0 + ')';
-    return [code, Blockly.Python.ORDER_MEMBER];
+    return [code, Blockly.Python.ORDER_FUNCTION_CALL];
   }
 };
 
@@ -175,7 +175,7 @@ Blockly.Python['lists_getIndex'] = function(block) {
            '  x = int(random.random() * len(myList))',
            '  return myList.pop(x)']);
       code = functionName + '(' + list + ')';
-      if (mode == 'GET' || mode == 'GET_REMOVE') {
+      if (mode == 'GET_REMOVE') {
         return [code, Blockly.Python.ORDER_FUNCTION_CALL];
       } else if (mode == 'REMOVE') {
         return code + '\n';
