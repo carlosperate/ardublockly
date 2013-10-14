@@ -65,6 +65,7 @@
     "Maze.helpRepeat": "Le memoria de computatores es limitate. Attinge le fin de iste cammino con solmente duo blocos. Usa 'repeter' pro executar un bloco plus de un vice.",
     "Maze.helpCapacity": "Tu ha usate tote le blocos pro iste nivello. Pro crear un nove bloco, tu debe primo deler un bloco existente.",
     "Maze.helpRepeatMany": "Tu pote mitter plus de un bloco intra un bloco 'repeter'.",
+    "Maze.helpSkins": "Selige tu jocator favorite de iste menu.",
     "Maze.helpIf": "Un bloco 'si' face qualcosa solmente si le condition es satisfacite. Essaya girar a sinistra si existe un cammino a sinistra.",
     "Maze.helpMenu": "Clicca sur %1 in le bloco 'si' pro cambiar su condition.",
     "Maze.helpWallFollow": "Pote tu solver iste labyrintho complexe? Essaya a sequer le muro sinistre. Programmatores experte solmente!",

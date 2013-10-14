@@ -68,6 +68,7 @@
     "Maze.helpRepeat": "Pr\u00f8v at n\u00e5 enden af denne sti ved kun at bruge to blokke. Brug 'gentag indtil' til at k\u00f8re en blok mere end \u00e9n gang.",
     "Maze.helpCapacity": "Du har opbrugt alle blokkene for dette niveau. Hvis du vil oprette en ny blok, skal du f\u00f8rst slette en eksisterende blok.",
     "Maze.helpRepeatMany": "Der er plads til mere end \u00e9n blok inde i en 'gentag indtil' blok.",
+    "Maze.helpSkins": "V\u00e6lg din favoritspiller fra denne menu.",
     "Maze.helpIf": "En 'hvis'-blok vil kun g\u00f8re noget hvis betingelsen er sand. Pr\u00f8v at dreje til venstre hvis der er en sti til venstre.",
     "Maze.helpMenu": "Klik p\u00e5 %1 i 'hvis' blokken for at \u00e6ndre dens tilstand.",
     "Maze.helpWallFollow": "Kan du l\u00f8se denne komplicerede labyrint? Pr\u00f8v at f\u00f8lge v\u00e6ggen p\u00e5 venstre h\u00e5nd. Kun for avancerede programm\u00f8rer!",
