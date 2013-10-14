@@ -31,11 +31,11 @@ var BlocklyApps = {};
 BlocklyApps.LANGUAGE_NAME = {
   'af': 'Afrikaans',
   'ar': 'العربية',
-  'cs': 'Česky',
   'be-tarask': 'Taraškievica',
   'br': 'Brezhoneg',
   'ca': 'Català',
   'cdo': '閩東語',
+  'cs': 'Česky',
   'da': 'Dansk',
   'de': 'Deutsch',
   'el': 'Ελληνικά',
