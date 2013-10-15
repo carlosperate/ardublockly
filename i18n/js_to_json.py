@@ -62,11 +62,15 @@ def main():
       help='name and email address of contact for translators')
   parser.add_argument('--lang', default='en',
                       help='ISO 639-1 source language code')
-  parser.add_argument('--output_dir', default='json/',
+  parser.add_argument('--output_dir', default='json',
                       help='relative directory for output files')
   parser.add_argument('--input_file', default='messages.js',
                       help='input file')
+  parser.add_argument('--quiet', action='store_true', default=False,
+                      help='only display warnings, not routine info')
   args = parser.parse_args()
+  if (not args.output_dir.endswith(os.path.sep)):
+    args.output_dir += os.path.sep
 
   # Read and parse input file.
   results = []
@@ -107,8 +111,9 @@ def main():
   synonym_file_name = os.path.join(os.curdir, args.output_dir, 'synonyms.json')
   with open(synonym_file_name, 'w') as outfile:
     json.dump(synonyms, outfile)
-  print("Wrote {0} synonym pairs to {1}.".format(
-      len(synonyms), synonym_file_name))
+  if not args.quiet:
+    print("Wrote {0} synonym pairs to {1}.".format(
+        len(synonyms), synonym_file_name))
 
 
 if __name__ == '__main__':

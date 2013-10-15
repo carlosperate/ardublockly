@@ -45,6 +45,8 @@ def main():
                       help='minimum line length (not counting last line)')
   parser.add_argument('--max_length', default=50,
                       help='maximum line length (not guaranteed)')
+  parser.add_argument('--quiet', action='store_true', default=False,
+                      help='do not write anything to standard output')
   parser.add_argument('files', nargs='+', help='input files')
   args = parser.parse_args()
   if not args.output_dir.endswith(os.path.sep):
@@ -101,16 +103,18 @@ goog.require('Blockly.Msg');
         if target_defs:
           extra_keys = [key for key in target_defs if key not in synonym_defs]
           synonym_keys = [key for key in target_defs if key in synonym_defs]
-          if extra_keys:
-            print('These extra keys appeared in {0}: {1}'.format(
-                filename, ', '.join(extra_keys)))
-          if synonym_keys:
-            print('These synonym keys appeared in {0}: {1}'.format(
-                filename, ', '.join(synonym_keys)))
+          if not args.quiet:
+            if extra_keys:
+              print('These extra keys appeared in {0}: {1}'.format(
+                  filename, ', '.join(extra_keys)))
+            if synonym_keys:
+              print('These synonym keys appeared in {0}: {1}'.format(
+                  filename, ', '.join(synonym_keys)))
 
         outfile.write(synonym_text)
 
-      print('Created {0}.'.format(outname))
+      if not args.quiet:
+        print('Created {0}.'.format(outname))
 
 
 if __name__ == '__main__':
