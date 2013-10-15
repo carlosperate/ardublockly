@@ -44,9 +44,9 @@ Code.selected = 'blocks';
 
 /**
  * Switch the visible pane when a tab is clicked.
- * @param {string} id ID of tab clicked.
+ * @param {string} clickedName Name of tab clicked.
  */
-Code.tabClick = function(id) {
+Code.tabClick = function(clickedName) {
   // If the XML tab was open, save and render the content.
   if (document.getElementById('tab_xml').className == 'tabon') {
     var xmlTextarea = document.getElementById('content_xml');
@@ -69,17 +69,17 @@ Code.tabClick = function(id) {
   }
 
   // Deselect all tabs and hide all panes.
-  for (var x in Code.TABS_) {
-    var name = Code.TABS_[x];
+  for (var i = 0; i < Code.TABS_.length; i++) {
+    var name = Code.TABS_[i];
     document.getElementById('tab_' + name).className = 'taboff';
     document.getElementById('content_' + name).style.visibility = 'hidden';
   }
 
   // Select the active tab.
-  Code.selected = id.replace('tab_', '');
-  document.getElementById(id).className = 'tabon';
+  Code.selected = clickedName;
+  document.getElementById('tab_' + clickedName).className = 'tabon';
   // Show the selected pane.
-  document.getElementById('content_' + Code.selected).style.visibility =
+  document.getElementById('content_' + clickedName).style.visibility =
       'visible';
   Code.renderContent();
   Blockly.fireUiEvent(window, 'resize');
@@ -136,8 +136,8 @@ Code.init = function() {
   var container = document.getElementById('content_area');
   var onresize = function(e) {
     var bBox = BlocklyApps.getBBox_(container);
-    for (var x in Code.TABS_) {
-      var el = document.getElementById('content_' + Code.TABS_[x]);
+    for (var i = 0; i < Code.TABS_.length; i++) {
+      var el = document.getElementById('content_' + Code.TABS_[i]);
       el.style.top = bBox.y + 'px';
       el.style.left = bBox.x + 'px';
       // Height and width need to be set, read back, then set again to
@@ -163,12 +163,18 @@ Code.init = function() {
     BlocklyStorage.backupOnUnload();
   }
 
-  Code.tabClick('tab_' + Code.selected);
+  Code.tabClick(Code.selected);
   Blockly.fireUiEvent(window, 'resize');
 
   BlocklyApps.bindClick('trashButton',
       function() {Code.discard(); Code.renderContent();});
   BlocklyApps.bindClick('runButton', Code.runJS);
+
+  for (var i = 0; i < Code.TABS_.length; i++) {
+    var name = Code.TABS_[i];
+    BlocklyApps.bindClick('tab_' + name,
+        function(name_) {return function() {Code.tabClick(name_);};}(name));
+  }
 
   // Lazy-load the syntax-highlighting.
   window.setTimeout(BlocklyApps.importPrettify, 1);

@@ -96,6 +96,8 @@ Turtle.init = function() {
   if (!(goog.userAgent.GECKO ||
        (goog.userAgent.WEBKIT && !goog.userAgent.SAFARI))) {
     document.getElementById('captureButton').className = 'disabled';
+  } else {
+    BlocklyApps.bindClick('captureButton', Turtle.createImageLink);
   }
 
   // Initialize the slider.

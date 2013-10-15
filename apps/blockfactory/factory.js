@@ -420,5 +420,9 @@ function init() {
   rootBlock.setDeletable(false);
 
   Blockly.addChangeListener(onchange);
+  document.getElementById('direction')
+      .addEventListener('change', updatePreview);
+  document.getElementById('language')
+      .addEventListener('change', updateGenerator);
 }
 window.addEventListener('load', init);
