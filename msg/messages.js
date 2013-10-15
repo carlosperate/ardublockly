@@ -43,7 +43,7 @@ goog.require('Blockly.Msg');
 /**
  * Tip: Generate URLs for read-only blocks by creating the blocks in the Code app,
  * then evaluating this in the console:
- * 'http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=' + encodeURIComponent(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)).slice(5, -6))
+ * 'http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en&xml=' + encodeURIComponent(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)).slice(5, -6))
  */
 
 // Context menus.
@@ -518,15 +518,20 @@ Blockly.Msg.TEXT_CHARAT_FIRST = 'get first letter';
 Blockly.Msg.TEXT_CHARAT_LAST = 'get last letter';
 ///block text - Indicates that any letter (or number, punctuation mark, etc.) in the following piece of text should be randomly selected.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
 Blockly.Msg.TEXT_CHARAT_RANDOM = 'get random letter';
+///block text - Text that goes after the rightmost block/dropdown on [
+///this block].  For most languages, this will be blank.
+Blockly.Msg.TEXT_CHARAT_TAIL = '';
+
 ///tooltip - See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
 Blockly.Msg.TEXT_CHARAT_TOOLTIP = 'Returns the letter at the specified position.';
 
+
 ///See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
-Blockly.Msg.TEXT_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
+Blockly.Msg.TEXT_GET_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
 ///url - Information about extracting characters from text.  Reminder: urls are the lowest priority translations.  Feel free to leave blank.
-Blockly.Msg.TEXT_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
+Blockly.Msg.TEXT_GET_SUBSTRING_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
 ///block text - Precedes a piece of text from which a portion should be extracted.
-Blockly.Msg.TEXT_SUBSTRING_INPUT_IN_TEXT = 'in text';
+Blockly.Msg.TEXT_GET_SUBSTRING_INPUT_IN_TEXT = 'in text';
 ///dropdown - Indicates that the following number specifies the position (relative to the start position) of the beginning of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
 Blockly.Msg.TEXT_GET_SUBSTRING_START_FROM_START = 'get substring from letter #';
 ///dropdown - Indicates that the following number specifies the position (relative to the end position) of the beginning of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
@@ -539,6 +544,10 @@ Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_START = 'to letter #';
 Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_END = 'to letter # from end';
 ///block text - Indicates that a region ending with the last letter of the preceding piece of text should be extracted.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
 Blockly.Msg.TEXT_GET_SUBSTRING_END_LAST = 'to last letter';
+///block text - Text that should go after the rightmost block/dropdown when
+///[https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+///extracting a region of text].  In most languages, this will be the empty string.
+Blockly.Msg.TEXT_GET_SUBSTRING_TAIL = '';
 
 ///url - Information about the case of letters (upper-case and lower-case).
 Blockly.Msg.TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
@@ -658,6 +667,8 @@ Blockly.Msg.LISTS_GET_INDEX_FIRST = 'first';
 Blockly.Msg.LISTS_GET_INDEX_LAST = 'last';
 /// dropdown - Indicates that a '''random''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
 Blockly.Msg.LISTS_GET_INDEX_RANDOM = 'random';
+///todo
+Blockly.Msg.LISTS_GET_INDEX_TAIL = '';
 Blockly.Msg.LISTS_GET_INDEX_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = 'Returns the item at the specified position in a list.  #1 is the first item.';
@@ -732,22 +743,25 @@ Blockly.Msg.LISTS_GET_SUBLIST_START_FIRST = 'get sub-list from first';
 Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_START = 'to #';
 /// dropdown - Indicates that an index relative to the end of the list should be used to specify the end of the range from which to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
 Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END = 'to # from end';
-/// dropdown - Indicates that the '''last''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
+/// dropdown - Indicates that the '''last''' item in the given list should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist the end of the selected sublist].
 Blockly.Msg.LISTS_GET_SUBLIST_END_LAST = 'to last';
-/// dropdown - Indicates that a '''random''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
-
+/// block text - This appears in the rightmost position ("tail") of the
+/// sublist block, as described at
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist].
+/// In English and most other languages, this is the empty string.
+Blockly.Msg.LISTS_GET_SUBLIST_TAIL = '';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist].
 Blockly.Msg.LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portion of a list.';
 
-/// default name - A simple, general default name for a variable, preferably short.
+/// default name - A simple, general default name for a variable, preferably
+/// short.
 Blockly.Msg.VARIABLES_DEFAULT_NAME = 'item';
 
 /// grammar - Text that follows an ordinal number (a number that indicates
 /// position relative to other numbers).  In most languages, such text appears
 /// before the number, so this should be blank.  An exception is Hungarian.
-/// See [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22lists_getIndex%22%20inline%3D%22true%22%20x%3D%2227%22%20y%3D%2232%22%3E%3Cmutation%20statement%3D%22false%22%20at%3D%22true%22%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22MODE%22%3EGET%3C%2Ftitle%3E%3Ctitle%20name%3D%22WHERE%22%3EFROM_START%3C%2Ftitle%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Elist%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22AT%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E5%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this example],
-/// where English uses the prefix "#" before the number instead of having anything
-/// follow it.
+/// See [[Translating:Blockly#Ordinal_numbers]] for more information.
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = '';
 
 // Variables Blocks.
@@ -778,13 +792,17 @@ Blockly.Msg.VARIABLES_SET_CREATE_GET = 'Create "get %1"';
 // Procedures Blocks.
 /// url - Information about defining [http://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not have return values.
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-/// block text - This precedes the name of the proccedure when defining it.  See [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E example function definition].
+/// block text - This precedes the name of the procedure when defining it.  See
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample
+/// procedure definition].
 Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE = 'to';
-/// default name - This acts as a placeholder for the name of a function on a function definition block, as shown on [http://blockly-share.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E this block].  The user will replace it with the function's name.
+/// default name - This acts as a placeholder for the name of a function on a function definition block, as shown on [http://blockly-demo.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E this block].  The user will replace it with the function's name.
 Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE = 'do something';
-/// block text - This precedes the list of parameters to a function.  See [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_defreturn%22%20inline%3D%22false%22%3E%3Cmutation%3E%3Carg%20name%3D%22x%22%3E%3C%2Farg%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Edouble%20a%20number%3C%2Ftitle%3E%3Cvalue%20name%3D%22RETURN%22%3E%3Cblock%20type%3D%22math_arithmetic%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3EADD%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E sample function].
+/// block text - This precedes the list of parameters to a function.  See
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#6ot5y5 this sample
+/// function with parameters].
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = 'with:';
-/// block text - This appears next to the function's "body", the blocks that should be run when the function is called, as shown in [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this example function definition].
+/// block text - This appears next to the function's "body", the blocks that should be run when the function is called, as shown in [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this example function definition].
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = '';
 /// tooltip
 Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP = 'Creates a function with no output.';
@@ -794,7 +812,11 @@ Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedu
 Blockly.Msg.PROCEDURES_DEFRETURN_TITLE = Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE;
 Blockly.Msg.PROCEDURES_DEFRETURN_PROCEDURE = Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE;
 Blockly.Msg.PROCEDURES_DEFRETURN_DO = Blockly.Msg.PROCEDURES_DEFNORETURN_DO;
-/// block text - This imperative or infinite verb precedes the value that is used as the return value (output) of this function.  See [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_defreturn%22%20inline%3D%22false%22%3E%3Cmutation%3E%3Carg%20name%3D%22x%22%3E%3C%2Farg%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Edouble%20a%20number%3C%2Ftitle%3E%3Cvalue%20name%3D%22RETURN%22%3E%3Cblock%20type%3D%22math_arithmetic%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3EADD%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E sample function that returns a numeric value twice as large as its input].
+/// block text - This imperative or infinite verb precedes the value that is used as the return value
+/// (output) of this function.  See
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#6ot5y5 this sample
+/// function that returns a value].
+
 Blockly.Msg.PROCEDURES_DEFRETURN_RETURN = 'return';
 /// tooltip
 Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP = 'Creates a function with an output.';
@@ -804,7 +826,7 @@ Blockly.Msg.PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning: This function has dupli
 
 /// url - Information about calling [http://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not return values.
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-/// block text - In most (if not all) languages, this will be the empty string.  It precedes the name of the function that should be run.  See, for example, the "eat food" block in [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this function definition].
+/// block text - In most (if not all) languages, this will be the empty string.  It precedes the name of the function that should be run.  See, for example, the "eat food" block in [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this function definition].
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = '';
 /// tooltip - This block causes the body (blocks inside) of the named function definition to be run.
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = 'Run the user-defined function "%1".';
@@ -815,9 +837,9 @@ Blockly.Msg.PROCEDURES_CALLRETURN_CALL = Blockly.Msg.PROCEDURES_CALLNORETURN_CAL
 /// tooltip - This block causes the body (blocks inside) of the named function definition to be run.\n\nParameters:\n* %1 - the name of the function.
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = 'Run the user-defined function "%1" and use its output.';
 
-/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-share.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It refers to the set of parameters (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
+/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-demo.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It refers to the set of parameters (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = 'inputs';
-/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-share.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It appears on the block for adding an individual parameter (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
+/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-demo.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It appears on the block for adding an individual parameter (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = 'input name:';
 
 /// context menu - This appears on the context menu for function calls.  Selecting it causes the corresponding function definition to be highlighted.
@@ -825,7 +847,7 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = 'Highlight function definition';
 /// context menu - This appears on the context menu for function definitions.  Selecting it creates a block to call the function.  \n\nParameters:\n* %1 - the name of the function.
 Blockly.Msg.PROCEDURES_CREATE_DO = 'Create "%1"';
 
-/// tooltip - If the first value is true, [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] causes the second value to be returned immediately from the function.
+/// tooltip - If the first value is true, [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] causes the second value to be returned immediately from the function.
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a second value.';
-/// warning - This appears if the user tries to use [http://blockly-share.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] outside of a function definition.
+/// warning - This appears if the user tries to use [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] outside of a function definition.
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = 'Warning: This block may be used only within a function definition.';

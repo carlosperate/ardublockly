@@ -293,6 +293,11 @@ Blockly.Blocks['text_charAt'] = {
     } else {
       this.appendDummyInput('AT');
     }
+    if (Blockly.Msg.TEXT_CHARAT_TAIL) {
+      this.removeInput('TAIL', true);
+      this.appendDummyInput('TAIL')
+          .appendTitle(Blockly.Msg.TEXT_CHARAT_TAIL);
+    }
     var menu = new Blockly.FieldDropdown(this.WHERE_OPTIONS, function(value) {
       var newAt = (value == 'FROM_START') || (value == 'FROM_END');
       // The 'isAt' variable is available due to this function being a closure.
@@ -320,18 +325,22 @@ Blockly.Blocks['text_getSubstring'] = {
         [[Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_START, 'FROM_START'],
          [Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_END, 'FROM_END'],
          [Blockly.Msg.TEXT_GET_SUBSTRING_END_LAST, 'LAST']];
-    this.setHelpUrl(Blockly.Msg.TEXT_SUBSTRING_HELPURL);
+    this.setHelpUrl(Blockly.Msg.TEXT_GET_SUBSTRING_HELPURL);
     this.setColour(160);
     this.appendValueInput('STRING')
         .setCheck('String')
-        .appendTitle(Blockly.Msg.TEXT_SUBSTRING_INPUT_IN_TEXT);
+        .appendTitle(Blockly.Msg.TEXT_GET_SUBSTRING_INPUT_IN_TEXT);
     this.appendDummyInput('AT1');
     this.appendDummyInput('AT2');
+    if (Blockly.Msg.TEXT_GET_SUBSTRING_TAIL) {
+      this.appendDummyInput('TAIL')
+          .appendTitle(Blockly.Msg.TEXT_GET_SUBSTRING_TAIL);
+    }
     this.setInputsInline(true);
     this.setOutput(true, 'String');
     this.updateAt(1, true);
     this.updateAt(2, true);
-    this.setTooltip(Blockly.Msg.TEXT_SUBSTRING_TOOLTIP);
+    this.setTooltip(Blockly.Msg.TEXT_GET_SUBSTRING_TOOLTIP);
   },
   mutationToDom: function() {
     // Save whether there are 'AT' inputs.
@@ -364,6 +373,12 @@ Blockly.Blocks['text_getSubstring'] = {
     } else {
       this.appendDummyInput('AT' + n);
     }
+    // Move tail, if present, to end of block.
+    if (n == 2 && Blockly.Msg.TEXT_GET_SUBSTRING_TAIL) {
+      this.removeInput('TAIL', true);
+      this.appendDummyInput('TAIL')
+          .appendTitle(Blockly.Msg.TEXT_GET_SUBSTRING_TAIL);
+    }
     var menu = new Blockly.FieldDropdown(this['WHERE_OPTIONS_' + n],
         function(value) {
       var newAt = (value == 'FROM_START') || (value == 'FROM_END');
@@ -378,7 +393,6 @@ Blockly.Blocks['text_getSubstring'] = {
       return undefined;
     });
     this.getInput('AT' + n)
-        .appendTitle(Blockly.Msg['TEXT_SUBSTRING_INPUT_AT' + n])
         .appendTitle(menu, 'WHERE' + n);
     if (n == 1) {
       this.moveInputBefore('AT1', 'AT2');

@@ -242,6 +242,10 @@ Blockly.Blocks['lists_getIndex'] = {
         .appendTitle(modeMenu, 'MODE')
         .appendTitle('', 'SPACE');
     this.appendDummyInput('AT');
+    if (Blockly.Msg.LISTS_GET_INDEX_TAIL) {
+      this.appendDummyInput('TAIL')
+          .appendTitle(Blockly.Msg.LISTS_GET_INDEX_TAIL);
+    }
     this.setInputsInline(true);
     this.setOutput(true);
     this.updateAt(true);
@@ -316,6 +320,9 @@ Blockly.Blocks['lists_getIndex'] = {
       return undefined;
     });
     this.getInput('AT').appendTitle(menu, 'WHERE');
+    if (Blockly.Msg.LISTS_GET_INDEX_TAIL) {
+      this.moveInputBefore('TAIL', null);
+    }
   }
 };
 
@@ -397,6 +404,10 @@ Blockly.Blocks['lists_setIndex'] = {
       return undefined;
     });
     this.moveInputBefore('AT', 'TO');
+    if (this.getInput('ORDINAL')) {
+      this.moveInputBefore('ORDINAL', 'TO');
+    }
+
     this.getInput('AT').appendTitle(menu, 'WHERE');
   }
 };
@@ -419,6 +430,10 @@ Blockly.Blocks['lists_getSublist'] = {
         .appendTitle(Blockly.Msg.LISTS_GET_SUBLIST_INPUT_IN_LIST);
     this.appendDummyInput('AT1');
     this.appendDummyInput('AT2');
+    if (Blockly.Msg.LISTS_GET_SUBLIST_TAIL) {
+      this.appendDummyInput('TAIL')
+          .appendTitle(Blockly.Msg.LISTS_GET_SUBLIST_TAIL);
+    }
     this.setInputsInline(true);
     this.setOutput(true, 'Array');
     this.updateAt(1, true);
@@ -473,6 +488,12 @@ Blockly.Blocks['lists_getSublist'] = {
         .appendTitle(menu, 'WHERE' + n);
     if (n == 1) {
       this.moveInputBefore('AT1', 'AT2');
+      if (this.getInput('ORDINAL1')) {
+        this.moveInputBefore('ORDINAL1', 'AT2');
+      }
+    }
+    if (Blockly.Msg.LISTS_GET_SUBLIST_TAIL) {
+      this.moveInputBefore('TAIL', null);
     }
   }
 };

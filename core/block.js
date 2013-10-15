@@ -1455,20 +1455,21 @@ Blockly.Block.prototype.appendInput_ = function(type, name) {
 /**
  * Move an input to a different location on this block.
  * @param {string} name The name of the input to move.
- * @param {string} refName Name of input that should be after the moved input.
+ * @param {string} refName Name of input that should be after the moved input,
+ *   or null to be the input at the end.
  */
 Blockly.Block.prototype.moveInputBefore = function(name, refName) {
   goog.asserts.assert(name != refName, 'Can\'t move "%s" to itself.', name);
   // Find both inputs.
   var inputIndex = -1;
-  var refIndex = -1;
+  var refIndex = refName ? -1 : this.inputList.length;
   for (var x = 0, input; input = this.inputList[x]; x++) {
     if (input.name == name) {
       inputIndex = x;
       if (refIndex != -1) {
         break;
       }
-    } else if (input.name == refName) {
+    } else if (refName && input.name == refName) {
       refIndex = x;
       if (inputIndex != -1) {
         break;
@@ -1476,8 +1477,8 @@ Blockly.Block.prototype.moveInputBefore = function(name, refName) {
     }
   }
   goog.asserts.assert(inputIndex != -1, 'Named input "%s" not found.', name);
-  goog.asserts.assert(refIndex != -1, 'Reference input "%s" not found.',
-                      refName);
+  goog.asserts.assert(refIndex && refIndex != -1,
+                      'Reference input "%s" not found.', refName);
   // Remove input.
   this.inputList.splice(inputIndex, 1);
   if (inputIndex < refIndex) {

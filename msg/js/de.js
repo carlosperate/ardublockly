@@ -91,6 +91,7 @@ Blockly.Msg.LISTS_GET_INDEX_GET_REMOVE = "Nehme und entferne";
 Blockly.Msg.LISTS_GET_INDEX_LAST = "letzte";
 Blockly.Msg.LISTS_GET_INDEX_RANDOM = "zufälliges";
 Blockly.Msg.LISTS_GET_INDEX_REMOVE = "Entferne";
+Blockly.Msg.LISTS_GET_INDEX_TAIL = "";  // untranslated
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FIRST = "Extrahiere das erste Element von der Liste.";
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM_END = "Extrahiere das #1te Element vom Ende der Liste.";
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = "Extrahiere das #1te Element von der Liste.";
@@ -113,6 +114,7 @@ Blockly.Msg.LISTS_GET_SUBLIST_HELPURL = "http://publib.boulder.ibm.com/infocente
 Blockly.Msg.LISTS_GET_SUBLIST_START_FIRST = "get sub-list from first";  // untranslated
 Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_END = "get sub-list from # from end";  // untranslated
 Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_START = "get sub-list from #";  // untranslated
+Blockly.Msg.LISTS_GET_SUBLIST_TAIL = "";  // untranslated
 Blockly.Msg.LISTS_GET_SUBLIST_TOOLTIP = "Creates a copy of the specified portion of a list.";
 Blockly.Msg.LISTS_INDEX_OF_FIRST = "Suche erstes Vorkommniss";
 Blockly.Msg.LISTS_INDEX_OF_HELPURL = "http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm";
@@ -287,6 +289,7 @@ Blockly.Msg.TEXT_CHARAT_HELPURL = "http://publib.boulder.ibm.com/infocenter/lnxp
 Blockly.Msg.TEXT_CHARAT_INPUT_INTEXT = "vom Text";
 Blockly.Msg.TEXT_CHARAT_LAST = "Nehme letzten Buchstabe";
 Blockly.Msg.TEXT_CHARAT_RANDOM = "Nehme zufälligen Buchstabe";
+Blockly.Msg.TEXT_CHARAT_TAIL = "";
 Blockly.Msg.TEXT_CHARAT_TOOLTIP = "Extrahiere einen Buchstaben von einer spezifizierten Position.";
 Blockly.Msg.TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = "Element";
 Blockly.Msg.TEXT_CREATE_JOIN_ITEM_TOOLTIP = "Ein Element zum Text hinzufügen.";
@@ -295,9 +298,13 @@ Blockly.Msg.TEXT_CREATE_JOIN_TOOLTIP = "Hinzufügen, entfernen und sortieren von
 Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_END = "bis #te Buchstabe von hinten";
 Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_START = "bis Buchstabe #ten";
 Blockly.Msg.TEXT_GET_SUBSTRING_END_LAST = "bis letzten Buchstabe";
+Blockly.Msg.TEXT_GET_SUBSTRING_HELPURL = "http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm";
+Blockly.Msg.TEXT_GET_SUBSTRING_INPUT_IN_TEXT = "in text";  // untranslated
 Blockly.Msg.TEXT_GET_SUBSTRING_START_FIRST = "ersten Buchstabe";
 Blockly.Msg.TEXT_GET_SUBSTRING_START_FROM_END = "#te Buchstabe von hinten";
 Blockly.Msg.TEXT_GET_SUBSTRING_START_FROM_START = "Buchstabe #ten";
+Blockly.Msg.TEXT_GET_SUBSTRING_TAIL = "";
+Blockly.Msg.TEXT_GET_SUBSTRING_TOOLTIP = "Returns a specified portion of the text.";
 Blockly.Msg.TEXT_INDEXOF_HELPURL = "http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm";
 Blockly.Msg.TEXT_INDEXOF_INPUT_INTEXT = "im Text";
 Blockly.Msg.TEXT_INDEXOF_OPERATOR_FIRST = "Suche erstes Vorkommniss des Begriff";
@@ -321,9 +328,6 @@ Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER = "Fragt den Benutzer nach ein Zahl.";
 Blockly.Msg.TEXT_PROMPT_TOOLTIP_TEXT = "Fragt den Benutzer nach einem Text.";
 Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER = "Fragt nach Zahl mit Hinweis";
 Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = "Fragt nach Text mit Hinweis";
-Blockly.Msg.TEXT_SUBSTRING_HELPURL = "http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm";
-Blockly.Msg.TEXT_SUBSTRING_INPUT_IN_TEXT = "in text";  // untranslated
-Blockly.Msg.TEXT_SUBSTRING_TOOLTIP = "Returns a specified portion of the text.";
 Blockly.Msg.TEXT_TEXT_HELPURL = "http://de.wikipedia.org/wiki/Zeichenkette";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "Ein Buchstabe, Text oder Satz.";
 Blockly.Msg.TEXT_TRIM_HELPURL = "http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html";
