@@ -103,6 +103,7 @@ BlocklyApps.LANGUAGE_PACK = {
   'cdo': 'msg/js/zh_tw.js',
   'de': 'msg/js/de.js',
   'frr': 'msg/js/de.js',
+  'hu': 'msg/js/hu.js',
   'ksh': 'msg/js/de.js',
   'lb': 'msg/js/de.js',
   'pt': 'msg/js/pt_br.js',
