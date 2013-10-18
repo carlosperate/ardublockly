@@ -21,7 +21,8 @@
  * @fileoverview English strings.
  * @author fraser@google.com (Neil Fraser)
  *
- * After modifying this file, run (from this directory):
+ * After modifying this file, either run "build.py" from the parent directory,
+ * or run (from this directory):
  * ../i18n/js_to_json.py
  * to regenerate json/{en,qqq,synonyms}.json.
  *
@@ -48,19 +49,19 @@ goog.require('Blockly.Msg');
 
 /// default name - A simple, general default name for a variable, preferably short.
 /// For more context, see
-/// [Translating:Blockly#infrequent_message_types Translating:Blockly#infrequent_message_types].
+/// [[Translating:Blockly#infrequent_message_types]].
 Blockly.Msg.VARIABLES_DEFAULT_NAME = 'item';
 
 // Context menus.
-/// context menu - Remove the descriptive comment from the selected block.
+/// context menu - Make a copy of the selected block (and any blocks it contains).
 Blockly.Msg.DUPLICATE_BLOCK = 'Duplicate';
-/// context menu - Change from 'inline' to 'external' mode for displaying blocks used as inputs to the selected block.
-Blockly.Msg.REMOVE_COMMENT = 'Remove Comment';
 /// context menu - Add a descriptive comment to the selected block.
 Blockly.Msg.ADD_COMMENT = 'Add Comment';
-/// context menu - Change from 'external' to 'inline' mode for displaying blocks used as inputs to the selected block.
+/// context menu - Remove the descriptive comment from the selected block.
+Blockly.Msg.REMOVE_COMMENT = 'Remove Comment';
+/// context menu - Change from 'external' to 'inline' mode for displaying blocks used as inputs to the selected block.  See [[Translating:Blockly#context_menus]].
 Blockly.Msg.EXTERNAL_INPUTS = 'External Inputs';
-/// context menu - Permanently delete the selected block.
+/// context menu - Change from 'internal' to 'external' mode for displaying blocks used as inputs to the selected block.  See [[Translating:Blockly#context_menus]].
 Blockly.Msg.INLINE_INPUTS = 'Inline Inputs';
 /// context menu - Permanently delete the selected block.
 Blockly.Msg.DELETE_BLOCK = 'Delete Block';
@@ -161,8 +162,14 @@ Blockly.Msg.CONTROLS_FOR_HELPURL = 'https://code.google.com/p/blockly/wiki/Loops
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].\n\nParameters:\n* %1 - the name of the loop variable.
 Blockly.Msg.CONTROLS_FOR_TOOLTIP = 'Have the variable %1 take on the values from the start number to the end number, counting by the specified interval, and do the specified blocks.';
 /// block title - Title of [https://code.google.com/p/blockly/wiki/Loops#count_with count with] blocks.
+/// [[File:Blockly-count-with.png]]
 Blockly.Msg.CONTROLS_FOR_INPUT_WITH = 'count with';
-/// block input text - Starting with a (usually lower) number in a range (%1), ending with a (usually higher) number in a range (%2), and counting the iterations by a number of steps (%3).  As in [https://code.google.com/p/blockly/wiki/Loops#count_with https://code.google.com/p/blockly/wiki/Loops#count_with].
+/// block text - Starting with a (usually lower) number in a range (%1),
+/// ending with a (usually higher) number in a range (%2), and counting the
+/// iterations by a number of steps (%3).  As in
+/// [https://code.google.com/p/blockly/wiki/Loops#count_with
+/// https://code.google.com/p/blockly/wiki/Loops#count_with].
+/// [[File:Blockly-count-with.png]]
 Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY = 'from %1 to %2 by %3';
 Blockly.Msg.CONTROLS_FOR_INPUT_DO = Blockly.Msg.CONTROLS_REPEAT_INPUT_DO;
 
@@ -324,34 +331,34 @@ Blockly.Msg.MATH_SINGLE_TOOLTIP_POW10 = 'Return 10 to the power of a number.';
 
 /// url - Information about the trigonometric functions sine, cosine, tangent, and their inverses (ideally using degrees, not radians).
 Blockly.Msg.MATH_TRIG_HELPURL = 'http://en.wikipedia.org/wiki/Trigonometric_functions';
-/// tooltip - For more information, see [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent http://en.wikipedia.org/wiki/Trigonometric_functions] and [http://en.wikipedia.org/wiki/Degree_(angle) http://en.wikipedia.org/wiki/Degree_(angle)].
+/// tooltip - Return the [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent sine] of an [http://en.wikipedia.org/wiki/Degree_(angle) angle in degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree (not radian).';
-/// tooltip - For more information, see [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent] and [http://en.wikipedia.org/wiki/Degree_(angle) http://en.wikipedia.org/wiki/Degree_(angle)].
+/// tooltip - Return the [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent cosine] of an [http://en.wikipedia.org/wiki/Degree_(angle) angle in degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = 'Return the cosine of a degree (not radian).';
-/// tooltip - For more information, see [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent]  and [http://en.wikipedia.org/wiki/Degree_(angle) http://en.wikipedia.org/wiki/Degree_(angle)].
+/// tooltip - Return the [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent tangent] of an [http://en.wikipedia.org/wiki/Degree_(angle) angle in degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = 'Return the tangent of a degree (not radian).';
-/// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent cotangent function, using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
+/// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent cotangent function], using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_ASIN = 'Return the arcsine of a number.';
 /// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent cosine] function, using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
-/// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent tangent] function, using [http://en.wikipedia.org/wiki/Degree_(angle)|degrees], not radians.
+/// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent tangent] function, using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
 
-/// url - Information about the mathematical constants &pi;, e, the golden ratio (&phi;), &radic; 2, &radic 1/2, and infinity (&infin;).
+/// url - Information about the mathematical constants &pi;, e, the golden ratio (&phi;), &radic; 2, &radic; 1/2, and infinity (&infin;).
 Blockly.Msg.MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
 /// tooltip - Provides the specified [http://en.wikipedia.org/wiki/Mathematical_constant mathematical constant].
 Blockly.Msg.MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026), sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026), or \u221e (infinity).';
-/// dropdown - A number is even if it is a multiple of 2.  For example, 4 is even (yielding true), but 3 is not (false).
+/// dropdown - A number is '''even''' if it is a multiple of 2.  For example, 4 is even (yielding true), but 3 is not (false).
 Blockly.Msg.MATH_IS_EVEN = 'is even';
-/// dropdown - A number is odd if it is not a multiple of 2.  For example, 3 is odd (yielding true), but 4 is not (false).  The opposite of ''''odd'''' is ''''even''''.
+/// dropdown - A number is '''odd''' if it is not a multiple of 2.  For example, 3 is odd (yielding true), but 4 is not (false).  The opposite of "odd" is "even".
 Blockly.Msg.MATH_IS_ODD = 'is odd';
-/// dropdown - A number is prime if it cannot be evenly divided by any positive integers except for 1 and itself.  For example, 5 is prime, but 6 is not because 2 &times; 3 = 6.
+/// dropdown - A number is [http://en.wikipedia.org/wiki/Prime prime] if it cannot be evenly divided by any positive integers except for 1 and itself.  For example, 5 is prime, but 6 is not because 2 &times; 3 = 6.
 Blockly.Msg.MATH_IS_PRIME = 'is prime';
-/// dropdown - A number is whole if it is an integer.  For example, 5 is whole, but 5.1 is not.
+/// dropdown - A number is '''whole''' if it is an [http://en.wikipedia.org/wiki/Integer integer].  For example, 5 is whole, but 5.1 is not.
 Blockly.Msg.MATH_IS_WHOLE = 'is whole';
-/// dropdown - A number is positive if it is greater than 0.  (0 is neither negative nor positive.)
+/// dropdown - A number is '''positive''' if it is greater than 0.  (0 is neither negative nor positive.)
 Blockly.Msg.MATH_IS_POSITIVE = 'is positive';
-/// dropdown - A number is negative if it is less than 0.  (0 is neither negative nor positive.)
+/// dropdown - A number is '''negative''' if it is less than 0.  (0 is neither negative nor positive.)
 Blockly.Msg.MATH_IS_NEGATIVE = 'is negative';
 /// dropdown - A number x is divisible by y if y goes into x evenly.  For example, 10 is divisible by 5, but 10 is not divisible by 3.
 Blockly.Msg.MATH_IS_DIVISIBLE_BY = 'is divisible by';
@@ -374,7 +381,7 @@ Blockly.Msg.MATH_ROUND_HELPURL = 'http://en.wikipedia.org/wiki/Rounding';
 Blockly.Msg.MATH_ROUND_TOOLTIP = 'Round a number up or down.';
 /// dropdown - This rounds its input to the nearest whole number.  For example, 3.4 is rounded to 3.
 Blockly.Msg.MATH_ROUND_OPERATOR_ROUND = 'round';
-/// dropdown - This rounds its input down to the nearest whole number.  For example, if the input was 2.2, the result would be 3.
+/// dropdown - This rounds its input up to the nearest whole number.  For example, if the input was 2.2, the result would be 3.
 Blockly.Msg.MATH_ROUND_OPERATOR_ROUNDUP = 'round up';
 /// dropdown - This rounds its input down to the nearest whole number.  For example, if the input was 3.8, the result would be 3.
 Blockly.Msg.MATH_ROUND_OPERATOR_ROUNDDOWN = 'round down';
@@ -391,23 +398,23 @@ Blockly.Msg.MATH_ONLIST_OPERATOR_MIN = 'min of list';
 Blockly.Msg.MATH_ONLIST_TOOLTIP_MIN = 'Return the smallest number in the list.';
 /// dropdown - This finds the largest (maximum) number in a list.  For example, the largest number in the list [-5, 0, 3] is 3.
 Blockly.Msg.MATH_ONLIST_OPERATOR_MAX = 'max of list';
-/// tooltip -
+/// tooltip
 Blockly.Msg.MATH_ONLIST_TOOLTIP_MAX = 'Return the largest number in the list.';
 /// dropdown - This adds up all of the numbers in a list and divides the sum by the number of elements in the list.  For example, the [http://en.wikipedia.org/wiki/Arithmetic_mean average] of the list [1, 2, 3, 4] is 2.5 (10/4).
 Blockly.Msg.MATH_ONLIST_OPERATOR_AVERAGE = 'average of list';
-/// tooltip - See [http://en.wikipedia.org/wiki/Arithmetic_mean].
+/// tooltip - See [http://en.wikipedia.org/wiki/Arithmetic_mean http://en.wikipedia.org/wiki/Arithmetic_mean] for more informatin.
 Blockly.Msg.MATH_ONLIST_TOOLTIP_AVERAGE = 'Return the average (arithmetic mean) of the numeric values in the list.';
 /// dropdown - This finds the [http://en.wikipedia.org/wiki/Median median] of the numeric values in a list.  For example, the median of the list {1, 2, 7, 12, 13} is 7.
 Blockly.Msg.MATH_ONLIST_OPERATOR_MEDIAN = 'median of list';
-/// tooltip - See [http://en.wikipedia.org/wiki/Median median].
+/// tooltip - See [http://en.wikipedia.org/wiki/Median median http://en.wikipedia.org/wiki/Median median] for more information.
 Blockly.Msg.MATH_ONLIST_TOOLTIP_MEDIAN = 'Return the median number in the list.';
-/// dropdown - This finds the most common numbers ([http://en.wikipedia.org/wiki/Mode_(statistics) modes]) in a list.  For example, the modes of the list {1, 3, 9, 3, 9}  are {1, 9}.
+/// dropdown - This finds the most common numbers ([http://en.wikipedia.org/wiki/Mode_(statistics) modes]) in a list.  For example, the modes of the list {1, 3, 9, 3, 9}  are {3, 9}.
 Blockly.Msg.MATH_ONLIST_OPERATOR_MODE = 'modes of list';
-/// tooltip - See [http://en.wikipedia.org/wiki/Mode_(statistics) http://en.wikipedia.org/wiki/Mode_(statistics)].
+/// tooltip - See [http://en.wikipedia.org/wiki/Mode_(statistics) http://en.wikipedia.org/wiki/Mode_(statistics)] for more information.
 Blockly.Msg.MATH_ONLIST_TOOLTIP_MODE = 'Return a list of the most common item(s) in the list.';
 /// dropdown - This finds the [http://en.wikipedia.org/wiki/Standard_deviation standard deviation] of the numeric values in a list.
 Blockly.Msg.MATH_ONLIST_OPERATOR_STD_DEV = 'standard deviation of list';
-/// tooltip - See [http://en.wikipedia.org/wiki/Standard_deviation].
+/// tooltip - See [http://en.wikipedia.org/wiki/Standard_deviation http://en.wikipedia.org/wiki/Standard_deviation] for more information.
 Blockly.Msg.MATH_ONLIST_TOOLTIP_STD_DEV = 'Return the standard deviation of the list.';
 /// dropdown - This choose an element at random from a list.  Each element is chosen with equal probability.
 Blockly.Msg.MATH_ONLIST_OPERATOR_RANDOM = 'random item of list';
@@ -424,24 +431,24 @@ Blockly.Msg.MATH_MODULO_TOOLTIP = 'Return the remainder from dividing the two nu
 /// url - Information about constraining a numeric value to be in a specific range.  (The English URL is not ideal.  Recall that translating URLs is the lowest priority.)
 Blockly.Msg.MATH_CONSTRAIN_HELPURL = 'http://en.wikipedia.org/wiki/Clamping_%28graphics%29';
 /// block text - The title of the block that '''constrain'''s (forces) a number to be in a given range.
-//For example, if the number 150 is constrained to be between 5 and 100, the result will be 100.
-//\n\nParameters:\n* %1 - the value to constrain (e.g., 150)\n* %2 - the minimum value (e.g., 5)\n* %3 - the maximum value (e.g., 100).
+///For example, if the number 150 is constrained to be between 5 and 100, the result will be 100.
+///\n\nParameters:\n* %1 - the value to constrain (e.g., 150)\n* %2 - the minimum value (e.g., 5)\n* %3 - the maximum value (e.g., 100).
 Blockly.Msg.MATH_CONSTRAIN_TITLE = 'constrain %1 low %2 high %3';
-/// tooltip - This compares a number x to a low value L and a high value H.  If x is less then L, the result is L.  If x is greater than H, the result is H.  Otherwise, the result is x.
+/// tooltip - This compares a number ''x'' to a low value ''L'' and a high value ''H''.  If ''x'' is less then ''L'', the result is ''L''.  If ''x'' is greater than ''H'', the result is ''H''.  Otherwise, the result is ''x''.
 Blockly.Msg.MATH_CONSTRAIN_TOOLTIP = 'Constrain a number to be between the specified limits (inclusive).';
 
 /// url - Information about how computers generate random numbers.
 Blockly.Msg.MATH_RANDOM_INT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 /// block text - The title of the block that generates a random integer (whole number) in the specified range.  For example, if the range is from 5 to 7, this returns 5, 6, or 7 with equal likelihood. %1 is a placeholder for the lower number, %2 is the placeholder for the larger number.
 Blockly.Msg.MATH_RANDOM_INT_TITLE = 'random integer from %1 to %2';
-/// tooltip - Return a random integer between two values specified as inputs.  For example, if one input was 7 and another 9, any of the numbers 7, 8, or 9 could be output.
+/// tooltip - Return a random integer between two values specified as inputs.  For example, if one input was 7 and another 9, any of the numbers 7, 8, or 9 could be produced.
 Blockly.Msg.MATH_RANDOM_INT_TOOLTIP = 'Return a random integer between the two specified limits, inclusive.';
 
 /// url - Information about how computers generate random numbers (specifically, numbers in the range from 0 to just below 1).
 Blockly.Msg.MATH_RANDOM_FLOAT_HELPURL = 'http://en.wikipedia.org/wiki/Random_number_generation';
 /// block text - The title of the block that generates a random number greater than or equal to 0 and less than 1.
 Blockly.Msg.MATH_RANDOM_FLOAT_TITLE_RANDOM = 'random fraction';
-/// tooltip - Return a random integer between two values specified as inputs.  For example, if one input was 7 and another 9, any of the numbers 7, 8, or 9 could be output.
+/// tooltip - Return a random fraction between 0 and 1.  The value may be equal to 0 but must be less than 1.
 Blockly.Msg.MATH_RANDOM_FLOAT_TOOLTIP = 'Return a random fraction between 0.0 (inclusive) and 1.0 (exclusive).';
 
 // Text Blocks.
@@ -451,13 +458,13 @@ Blockly.Msg.TEXT_TEXT_HELPURL = 'http://en.wikipedia.org/wiki/String_(computer_s
 Blockly.Msg.TEXT_TEXT_TOOLTIP = 'A letter, word, or line of text.';
 
 /// url - Information on concatenating/appending pieces of text.
-Blockly.Msg.TEXT_JOIN_HELPURL = '';
+Blockly.Msg.TEXT_JOIN_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Text_creation';
 /// block text - See [https://code.google.com/p/blockly/wiki/Text#Text_creation https://code.google.com/p/blockly/wiki/Text#Text_creation].
 Blockly.Msg.TEXT_JOIN_TITLE_CREATEWITH = 'create text with';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_creation create text with].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_creation create text with] for more information.
 Blockly.Msg.TEXT_JOIN_TOOLTIP = 'Create a piece of text by joining together any number of items.';
 
-/// block text - See [https://code.google.com/p/blockly/wiki/Text#Text_creation https://code.google.com/p/blockly/wiki/Text#Text_creation], specifically the last picture in the 'Text creation' section.
+/// block text - This is shown when the programmer wants to change the number of pieces of text being joined together.  See [https://code.google.com/p/blockly/wiki/Text#Text_creation https://code.google.com/p/blockly/wiki/Text#Text_creation], specifically the last picture in the 'Text creation' section.
 Blockly.Msg.TEXT_CREATE_JOIN_TITLE_JOIN = 'join';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_creation https://code.google.com/p/blockly/wiki/Text#Text_creation], specifically the last picture in the 'Text creation' section.
 Blockly.Msg.TEXT_CREATE_JOIN_TOOLTIP = 'Add, remove, or reorder sections to reconfigure this text block.';
@@ -465,14 +472,17 @@ Blockly.Msg.TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = Blockly.Msg.VARIABLES_DEFAULT_NAM
 /// block text - See [https://code.google.com/p/blockly/wiki/Text#Text_creation https://code.google.com/p/blockly/wiki/Text#Text_creation], specifically the last picture in the 'Text creation' section.
 Blockly.Msg.TEXT_CREATE_JOIN_ITEM_TOOLTIP = 'Add an item to the text.';
 
-/// url - This and the other text-related URLs are going to be hard to translate.  It is okay to (1) leave in the English-language URL, (2) leave blank, or (3) use a general URL about how computers represent text (such as the translation of [http://en.wikipedia.org/wiki/String_(computer_science) this Wikipedia page]) for all of these URLs.
-Blockly.Msg.TEXT_APPEND_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-/// block input text - Text preceding the name of a variable to which text should be appended, as in: Append text 'hello' '''to''' mystring'.  See [https://code.google.com/p/blockly/wiki/Text#Text_modification https://code.google.com/p/blockly/wiki/Text#Text_modification].
+/// url - This and the other text-related URLs are going to be hard to translate.  As always, it is okay to leave untranslated or paste in the English-language URL.  For these URLs, you might also consider a general URL about how computers represent text (such as the translation of [http://en.wikipedia.org/wiki/String_(computer_science) this Wikipedia page]).
+Blockly.Msg.TEXT_APPEND_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Text_modification';
+/// block input text - Message preceding the name of a variable to which text should be appended.
+/// [[File:blockly-append-text.png]]
 Blockly.Msg.TEXT_APPEND_TO = 'to';
-/// block input text - Indication that the following piece of text should be appended [to a variable specified earlier] (see [https://code.google.com/p/blockly/wiki/Text#Text_modification Text modification]).
+/// block input text - Message following the variable and preceding the piece of text that should
+/// be appended, as shown below.
+/// [[File:blockly-append-text.png]]
 Blockly.Msg.TEXT_APPEND_APPENDTEXT = 'append text';
 Blockly.Msg.TEXT_APPEND_VARIABLE = Blockly.Msg.VARIABLES_DEFAULT_NAME;
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_modification https://code.google.com/p/blockly/wiki/Text#Text_modification].\n\nParameters:\n* %1 - the name of the variable to which text should be appended
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_modification https://code.google.com/p/blockly/wiki/Text#Text_modification] for more information.\n\nParameters:\n* %1 - the name of the variable to which text should be appended
 Blockly.Msg.TEXT_APPEND_TOOLTIP = 'Append some text to variable "%1".';
 
 /// url - Information about text on computers (usually referred to as 'strings').
@@ -481,7 +491,7 @@ Blockly.Msg.TEXT_LENGTH_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#T
 /// \n\nParameters:\n* %1 - the piece of text to take the length of
 Blockly.Msg.TEXT_LENGTH_TITLE = 'length of %1';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Text_length https://code.google.com/p/blockly/wiki/Text#Text_length].
-Blockly.Msg.TEXT_LENGTH_TOOLTIP = 'Returns number of letters (including spaces) in the provided text.';
+Blockly.Msg.TEXT_LENGTH_TOOLTIP = 'Returns the number of letters (including spaces) in the provided text.';
 
 /// url - Information about empty pieces of text on computers (usually referred to as 'empty strings').
 Blockly.Msg.TEXT_ISEMPTY_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Checking_for_empty_text';
@@ -495,67 +505,145 @@ Blockly.Msg.TEXT_ISEMPTY_TOOLTIP = 'Returns true if the provided text is empty.'
 Blockly.Msg.TEXT_INDEXOF_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Finding_text';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Finding_text https://code.google.com/p/blockly/wiki/Text#Finding_text].
 Blockly.Msg.TEXT_INDEXOF_TOOLTIP = 'Returns the index of the first/last occurrence of first text in the second text.  Returns 0 if text is not found.';
-/// block text - Title of blocks allowing users to find text.  See [https://code.google.com/p/blockly/wiki/Text#Finding_text https://code.google.com/p/blockly/wiki/Text#Finding_text].
+/// block text - Title of blocks allowing users to find text.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Finding_text
+/// https://code.google.com/p/blockly/wiki/Text#Finding_text].
+/// [[File:Blockly-find-text.png]].
 Blockly.Msg.TEXT_INDEXOF_INPUT_INTEXT = 'in text';
-/// dropdown - See [https://code.google.com/p/blockly/wiki/Text#Finding_text https://code.google.com/p/blockly/wiki/Text#Finding_text].
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Text#Finding_text
+/// https://code.google.com/p/blockly/wiki/Text#Finding_text].
+/// [[File:Blockly-find-text.png]].
 Blockly.Msg.TEXT_INDEXOF_OPERATOR_FIRST = 'find first occurrence of text';
-/// dropdown - See [https://code.google.com/p/blockly/wiki/Text#Finding_text https://code.google.com/p/blockly/wiki/Text#Finding_text].
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Text#Finding_text
+/// https://code.google.com/p/blockly/wiki/Text#Finding_text].  This would
+/// replace "find first occurrence of text" below.  (For more information on
+/// how common text is factored out of dropdown menus, see
+/// [http://translatewiki.net/wiki/Translating:Blockly#Drop-Down_Menus
+/// http://translatewiki.net/wiki/Translating:Blockly#Drop-Down_Menus)].)
+/// [[File:Blockly-find-text.png]].
 Blockly.Msg.TEXT_INDEXOF_OPERATOR_LAST = 'find last occurrence of text';
-/// block text - Optional text to follow the rightmost block in a [https://code.google.com/p/blockly/wiki/Text#Finding_text https://code.google.com/p/blockly/wiki/Text#Finding_text in text ... find block].
-/// This will be the empty string in most languages.
+/// block text - Optional text to follow the rightmost block in a
+/// [https://code.google.com/p/blockly/wiki/Text#Finding_text
+/// https://code.google.com/p/blockly/wiki/Text#Finding_text in text ... find block]
+/// (after the "a" in the below picture).  This will be the empty string in most languages.
+/// [[File:Blockly-find-text.png]].
 Blockly.Msg.TEXT_INDEXOF_TAIL = '';
 
 /// url - Information about extracting characters (letters, number, symbols, etc.) from text.
-Blockly.Msg.TEXT_CHARAT_HELPURL = 'http://publib.boulder.ibm.com/infocenter/lnxpcomp/v8v101/index.jsp?topic=%2Fcom.ibm.xlcpp8l.doc%2Flanguage%2Fref%2Farsubex.htm';
-/// block text - Appears before the piece of text from which a letter (or number, punctuation character, etc.) should be extracted, as in: get first letter '''in text''' 'hello'.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+Blockly.Msg.TEXT_CHARAT_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Extracting_text';
+/// block text - Appears before the piece of text from which a letter (or number,
+/// punctuation character, etc.) should be extracted, as shown below.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_INPUT_INTEXT = 'in text';
-/// dropdown - Indicates that the letter (or number, punctuation character, etc.) with the specified index should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// dropdown - Indicates that the letter (or number, punctuation character, etc.) with the
+/// specified index should be obtained from the preceding piece of text.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_FROM_START = 'get letter #';
-/// block text - Indicates that the letter (or number, punctuation character, etc.) with the specified index from the end of a given piece of text should be obtained. See [https://code.google.com/p/blockly/wiki/Text#Extracting_text https://code.google.com/p/blockly/wiki/Text#Extracting_text].
+/// block text - Indicates that the letter (or number, punctuation character, etc.) with the
+/// specified index from the end of a given piece of text should be obtained. See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_FROM_END = 'get letter # from end';
-/// block text - Indicates that the first letter of the following piece of text should be retrieved (see [indicates that the first letter of the following piece of text should be retrieved.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// block text - Indicates that the first letter of the following piece of text should be
+/// retrieved.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_FIRST = 'get first letter';
-/// block text - Indicates that the last letter (or number, punctuation mark, etc.) of the following piece of text should be retrieved.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// block text - Indicates that the last letter (or number, punctuation mark, etc.) of the
+/// following piece of text should be retrieved.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_LAST = 'get last letter';
-/// block text - Indicates that any letter (or number, punctuation mark, etc.) in the following piece of text should be randomly selected.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// block text - Indicates that any letter (or number, punctuation mark, etc.) in the
+/// following piece of text should be randomly selected.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_RANDOM = 'get random letter';
 /// block text - Text that goes after the rightmost block/dropdown when getting a single letter from
 /// a piece of text, as in [http://blockly-demo.appspot.com/static/apps/code/index.html#3m23km these
-/// blocks].  For most languages, this will be blank.
+/// blocks] or shown below.  For most languages, this will be blank.
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_TAIL = '';
-
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_single_character].
+/// [[File:Blockly-text-get.png]]
 Blockly.Msg.TEXT_CHARAT_TOOLTIP = 'Returns the letter at the specified position.';
 
-
-/// See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
 Blockly.Msg.TEXT_GET_SUBSTRING_TOOLTIP = 'Returns a specified portion of the text.';
-/// url - Information about extracting characters from text.  Reminder: urls are the lowest priority translations.  Feel free to skip.
+/// url - Information about extracting characters from text.  Reminder: urls are the
+/// lowest priority translations.  Feel free to skip.
 Blockly.Msg.TEXT_GET_SUBSTRING_HELPURL = 'http://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text';
 /// block text - Precedes a piece of text from which a portion should be extracted.
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_INPUT_IN_TEXT = 'in text';
-/// dropdown - Indicates that the following number specifies the position (relative to the start position) of the beginning of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// dropdown - Indicates that the following number specifies the position (relative to the start
+/// position) of the beginning of the region of text that should be obtained from the preceding
+/// piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_START_FROM_START = 'get substring from letter #';
-/// dropdown - Indicates that the following number specifies the position (relative to the end position) of the beginning of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// dropdown - Indicates that the following number specifies the position (relative to the end
+/// position) of the beginning of the region of text that should be obtained from the preceding
+/// piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// Note: If {{msg-Blockly|ORDINAL_NUMBER_SUFFIX}} is defined, it will
+/// automatically appear ''after'' this and any other
+/// [http://translatewiki.net/wiki/Translating:Blockly#Ordinal_numbers ordinal numbers]
+/// on this block.
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_START_FROM_END = 'get substring from letter # from end';
-/// block text - Indicates that a region starting with the first letter of the preceding piece of text should be extracted.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// block text - Indicates that a region starting with the first letter of the preceding piece
+/// of text should be extracted.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_START_FIRST = 'get substring from first letter';
-/// dropdown - Indicates that the following number specifies the position (relative to the start position) of the end of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// dropdown - Indicates that the following number specifies the position (relative to
+/// the start position) of the end of the region of text that should be obtained from the
+/// preceding piece of text.  See [
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_START = 'to letter #';
-/// dropdown - Indicates that the following number specifies the position (relative to the end position) of the end of the region of text that should be obtained from the preceding piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].  In most languages, this will be the same as {{msg-blockly|TEXT_GET_SUBLIST_START_FROM_START1}}.
+/// dropdown - Indicates that the following number specifies the position (relative to the
+/// end position) of the end of the region of text that should be obtained from the preceding
+/// piece of text.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_END_FROM_END = 'to letter # from end';
-/// block text - Indicates that a region ending with the last letter of the preceding piece of text should be extracted.  See [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// block text - Indicates that a region ending with the last letter of the preceding piece
+/// of text should be extracted.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
+/// https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text].
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_END_LAST = 'to last letter';
 /// block text - Text that should go after the rightmost block/dropdown when
 /// [https://code.google.com/p/blockly/wiki/Text#Extracting_a_region_of_text
 /// extracting a region of text].  In most languages, this will be the empty string.
+/// [[File:Blockly-get-substring.png]]
 Blockly.Msg.TEXT_GET_SUBSTRING_TAIL = '';
 
 /// url - Information about the case of letters (upper-case and lower-case).
-Blockly.Msg.TEXT_CHANGECASE_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-/// tooltip - Describes a block to adjust the case of letters.  For more information on this block, see [https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case].
+Blockly.Msg.TEXT_CHANGECASE_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case'
+/// tooltip - Describes a block to adjust the case of letters.  For more information on this block,
+/// see [https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case
+/// https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case].
 Blockly.Msg.TEXT_CHANGECASE_TOOLTIP = 'Return a copy of the text in a different case.';
-/// block text - Indicates that all of the letters in the following piece of text should be capitalized.  If your language does not use case, you may indicate that this is not applicable to your language.  For more information on this block, see [https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case].
+/// block text - Indicates that all of the letters in the following piece of text should be
+/// capitalized.  If your language does not use case, you may indicate that this is not
+/// applicable to your language.  For more information on this block, see
+/// [https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case
+/// https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case].
 Blockly.Msg.TEXT_CHANGECASE_OPERATOR_UPPERCASE = 'to UPPER CASE';
 /// block text - Indicates that all of the letters in the following piece of text should be converted to lower-case.  If your language does not use case, you may indicate that this is not applicable to your language.  For more information on this block, see [https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case https://code.google.com/p/blockly/wiki/Text#Adjusting_text_case].
 Blockly.Msg.TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'to lower case';
@@ -563,32 +651,54 @@ Blockly.Msg.TEXT_CHANGECASE_OPERATOR_LOWERCASE = 'to lower case';
 Blockly.Msg.TEXT_CHANGECASE_OPERATOR_TITLECASE = 'to Title Case';
 
 /// url - Information about trimming (removing) text off the beginning and ends of pieces of text.
-Blockly.Msg.TEXT_TRIM_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].
+Blockly.Msg.TEXT_TRIM_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces';
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces
+/// https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].
 Blockly.Msg.TEXT_TRIM_TOOLTIP = 'Return a copy of the text with spaces removed from one or both ends.';
-/// dropdown - Removes spaces from the beginning and end of a piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].
+/// dropdown - Removes spaces from the beginning and end of a piece of text.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces
+/// https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].  Note that neither
+/// this nor the other options modify the original piece of text (that appears to the right);
+/// the block just returns a version of the text without the specified spaces.
 Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = 'trim spaces from both sides';
-/// dropdown - Removes spaces from the beginning of a piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].
+/// dropdown - Removes spaces from the beginning of a piece of text.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces
+/// https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].
+/// Note that in right-to-left scripts, this will remove spaces from the right side.
 Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = 'trim spaces from left side';
-/// dropdown - Removes spaces from the end of a piece of text.  See [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].
+/// dropdown - Removes spaces from the end of a piece of text.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces
+/// https://code.google.com/p/blockly/wiki/Text#Trimming_(removing)_spaces].
+/// Note that in right-to-left scripts, this will remove spaces from the left side.
 Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = 'trim spaces from right side';
 
 /// url - Information about displaying text on computers.
-Blockly.Msg.TEXT_PRINT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html';
-/// block text - Display the input on the screen.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
+Blockly.Msg.TEXT_PRINT_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Printing_text';
+/// block text - Display the input on the screen.  See
+/// [https://code.google.com/p/blockly/wiki/Text#Printing_text
+/// https://code.google.com/p/blockly/wiki/Text#Printing_text].
 /// \n\nParameters:\n* %1 - the value to print
 Blockly.Msg.TEXT_PRINT_TITLE = 'print %1';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Text#Printing_text
+/// https://code.google.com/p/blockly/wiki/Text#Printing_text].
 Blockly.Msg.TEXT_PRINT_TOOLTIP = 'Print the specified text, number or other value.';
 /// url - Information about getting text from users.
-Blockly.Msg.TEXT_PROMPT_HELPURL = 'http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode92.html';
-/// dropdown - Specifies that a piece of text should be requested from the user with the following message.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
+Blockly.Msg.TEXT_PROMPT_HELPURL = 'https://code.google.com/p/blockly/wiki/Text#Getting_input_from_the_user';
+/// dropdown - Specifies that a piece of text should be requested from the user with
+/// the following message.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text
+/// https://code.google.com/p/blockly/wiki/Text#Printing_text].
 Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = 'prompt for text with message';
-/// dropdown - Specifies that a number should be requested from the user with the following message.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
+/// dropdown - Specifies that a number should be requested from the user with the
+/// following message.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text
+/// https://code.google.com/p/blockly/wiki/Text#Printing_text].
 Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER = 'prompt for number with message';
-/// dropdown - Precedes the message with which the user should be prompted for a number.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
+/// dropdown - Precedes the message with which the user should be prompted for
+/// a number.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text
+/// https://code.google.com/p/blockly/wiki/Text#Printing_text].
 Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER = 'Prompt for user for a number.';
-/// dropdown - Precedes the message with which the user should be prompted for some text.  See [https://code.google.com/p/blockly/wiki/Text#Printing_text https://code.google.com/p/blockly/wiki/Text#Printing_text].
+/// dropdown - Precedes the message with which the user should be prompted for some text.
+/// See [https://code.google.com/p/blockly/wiki/Text#Printing_text
+/// https://code.google.com/p/blockly/wiki/Text#Printing_text].
 Blockly.Msg.TEXT_PROMPT_TOOLTIP_TEXT = 'Prompt for user for some text.';
 
 // Lists Blocks.
@@ -615,8 +725,9 @@ Blockly.Msg.LISTS_CREATE_WITH_ITEM_TOOLTIP = 'Add an item to the list.';
 Blockly.Msg.LISTS_REPEAT_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#create_list_with';
 /// url - See [https://code.google.com/p/blockly/wiki/Lists#create_list_with creating a list with multiple copies of a single item].
 Blockly.Msg.LISTS_REPEAT_TOOLTIP = 'Creates a list consisting of the given value repeated the specified number of times.';
-/// block text - See [https://code.google.com/p/blockly/wiki/Lists#create_list_with https://code.google.com/p/blockly/wiki/Lists#create_list_with].
-//\n\nParameters:\n* %1 - the item (text) to be repeated\n* %2 - the number of times to repeat it
+/// block text - See [https://code.google.com/p/blockly/wiki/Lists#create_list_with
+/// https://code.google.com/p/blockly/wiki/Lists#create_list_with].
+///\n\nParameters:\n* %1 - the item (text) to be repeated\n* %2 - the number of times to repeat it
 Blockly.Msg.LISTS_REPEAT_TITLE = 'create list with item %1 repeated %2 times';
 
 /// url - Information about how the length of a list is computed (i.e., by the total number of elements, not the number of different elements).
@@ -629,71 +740,105 @@ Blockly.Msg.LISTS_LENGTH_TOOLTIP = 'Returns the length of a list.';
 
 /// url - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
 Blockly.Msg.LISTS_IS_EMPTY_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#is_empty';
-/// block text - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
-/// Note: If your language (such as Hungarian) puts a suffix after lists
-/// [{{msg-blockly|LIST_SUFFIX}}], you must explicitly include it here.
-/// If you don't understand this detail, don't worry about it.
+/// block text - See [https://code.google.com/p/blockly/wiki/Lists#is_empty
+/// https://code.google.com/p/blockly/wiki/Lists#is_empty].
 /// \n\nParameters:\n* %1 - the list to test
 Blockly.Msg.LISTS_IS_EMPTY_TITLE = '%1 is empty';
-/// block tooltip - See [https://code.google.com/p/blockly/wiki/Lists#is_empty https://code.google.com/p/blockly/wiki/Lists#is_empty].
+/// block tooltip - See [https://code.google.com/p/blockly/wiki/Lists#is_empty
+/// https://code.google.com/p/blockly/wiki/Lists#is_empty].
 Blockly.Msg.LISTS_TOOLTIP = 'Returns true if the list is empty.';
 
 /// block text - Title of blocks operating on [https://code.google.com/p/blockly/wiki/Lists lists].
 Blockly.Msg.LISTS_INLIST = 'in list';
 
-/// url - See [https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List].
+/// url - See [https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List].
 Blockly.Msg.LISTS_INDEX_OF_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#Getting_Items_from_a_List';
 Blockly.Msg.LISTS_INDEX_OF_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
-/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List Lists#Finding_Items_in_a_List].
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List
+/// Lists#Finding_Items_in_a_List].
+/// [[File:Blockly-list-find.png]]
 Blockly.Msg.LISTS_INDEX_OF_FIRST = 'find first occurrence of item';
-/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List Lists#Finding_Items_in_a_List].
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List
+/// https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List].
+/// [[File:Blockly-list-find.png]]
 Blockly.Msg.LISTS_INDEX_OF_LAST = 'find last occurrence of item';
-/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List Lists#Finding_Items_in_a_List].
+/// dropdown - See [https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List
+/// https://code.google.com/p/blockly/wiki/Lists#Finding_Items_in_a_List].
+/// [[File:Blockly-list-find.png]]
 Blockly.Msg.LISTS_INDEX_OF_TOOLTIP = 'Returns the index of the first/last occurrence of the item in the list.  Returns 0 if text is not found.';
 
 Blockly.Msg.LISTS_GET_INDEX_HELPURL = Blockly.Msg.LISTS_INDEX_OF_HELPURL;
-/// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get an item from a list] without removing it from the list.
+/// dropdown - Indicates that the user wishes to
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
+/// get an item from a list] without removing it from the list.
 Blockly.Msg.LISTS_GET_INDEX_GET = 'get';
-/// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get and remove an item from a list], as opposed to merely getting it without modifying the list.
+/// dropdown - Indicates that the user wishes to
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
+/// get and remove an item from a list], as opposed to merely getting
+/// it without modifying the list.
 Blockly.Msg.LISTS_GET_INDEX_GET_REMOVE = 'get and remove';
-/// dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Removing_an_item remove an item from a list].
+/// dropdown - Indicates that the user wishes to
+/// [https://code.google.com/p/blockly/wiki/Lists#Removing_an_item
+/// remove an item from a list].
 Blockly.Msg.LISTS_GET_INDEX_REMOVE = 'remove';
-/// dropdown - Indicates that an index relative to the front of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item retrieve an item from a list].
+/// dropdown - Indicates that an index relative to the front of the list should be used to
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get and/or remove
+/// an item from a list].  Note: If {{msg-Blockly|ORDINAL_NUMBER_SUFFIX}} is defined, it will
+/// automatically appear ''after'' this number (and any other ordinal numbers on this block).
+/// See [[Translating:Blockly#Ordinal_numbers]] for more information on ordinal numbers in Blockly.
+/// [[File:Blockly-list-get-item.png]]
 Blockly.Msg.LISTS_GET_INDEX_FROM_START = '#';
-/// dropdown - Indicates that an index relative to the end of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item access an item in a list].
+/// dropdown - Indicates that an index relative to the end of the list should be used
+/// to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item access an item in a list].
+/// [[File:Blockly-list-get-item.png]]
 Blockly.Msg.LISTS_GET_INDEX_FROM_END = '# from end';
-/// dropdown - Indicates that the '''first''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
+/// dropdown - Indicates that the '''first''' item should be
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
+/// [[File:Blockly-list-get-item.png]]
 Blockly.Msg.LISTS_GET_INDEX_FIRST = 'first';
-/// dropdown - Indicates that the '''last''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
+/// dropdown - Indicates that the '''last''' item should be
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
+/// [[File:Blockly-list-get-item.png]]
 Blockly.Msg.LISTS_GET_INDEX_LAST = 'last';
-/// dropdown - Indicates that a '''random''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
+/// dropdown - Indicates that a '''random''' item should be
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].
+/// [[File:Blockly-list-get-item.png]]
 Blockly.Msg.LISTS_GET_INDEX_RANDOM = 'random';
 /// block text - Text that should go after the rightmost block/dropdown when
 /// [http://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
-/// getting an item from a list].  In most languages, this will be the empty string.
+/// accessing an item from a list].  In most languages, this will be the empty string.
+/// [[File:Blockly-list-get-item.png]]
 Blockly.Msg.LISTS_GET_INDEX_TAIL = '';
 Blockly.Msg.LISTS_GET_INDEX_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for more information.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM_START = 'Returns the item at the specified position in a list.  #1 is the first item.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for more information.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FROM_END = 'Returns the item at the specified position in a list.  #1 is the last item.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for more information.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_FIRST = 'Returns the first item in a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for more information.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_LAST = 'Returns the last item in a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for more information.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_RANDOM = 'Returns a random item in a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and  [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from start'.
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item]
+/// (for remove and return) and
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from start'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_START = 'Removes and returns the item at the specified position in a list.  #1 is the first item.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from end'.
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from end'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FROM_END = 'Removes and returns the item at the specified position in a list.  #1 is the last item.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'first'.
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'first'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_FIRST = 'Removes and returns the first item in a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'last'.
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'last'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_LAST = 'Removes and returns the last item in a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'random'.
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'random'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_GET_REMOVE_RANDOM = 'Removes and returns a random item in a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for get/remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from start'.
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from start'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_START = 'Removes the item at the specified position in a list.  #1 is the first item.';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for '# from end'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FROM_END = 'Removes the item at the specified position in a list.  #1 is the last item.';
@@ -703,14 +848,19 @@ Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_FIRST = 'Removes the first item in a 
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_LAST = 'Removes the last item in a list.';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_and_removing_an_item] (for remove and return) and [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item] for 'random'.
 Blockly.Msg.LISTS_GET_INDEX_TOOLTIP_REMOVE_RANDOM = 'Removes a random item in a list.';
-/// url
+/// url - Information about putting items in lists.
 Blockly.Msg.LISTS_SET_INDEX_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#in_list_..._set';
 Blockly.Msg.LISTS_SET_INDEX_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
-/// block text - As in: In list [words] '''set''' first as "a" (which replaces the first element in the list with the piece of text "a").  See also [https://code.google.com/p/blockly/wiki/Lists#in_list_..._set https://code.google.com/p/blockly/wiki/Lists#in_list_..._set].
+/// block text - [https://code.google.com/p/blockly/wiki/Lists#in_list_..._set
+/// Replaces an item in a list].
+/// [[File:Blockly-in-list-set-insert.png]]
 Blockly.Msg.LISTS_SET_INDEX_SET = 'set';
-/// block text - As in: In list [words] '''insert at''' first as "a" (which inserts the text "a" before the first element in the list).  See also [https://code.google.com/p/blockly/wiki/Lists#in_list_..._insert_at https://code.google.com/p/blockly/wiki/Lists#in_list_..._insert_at].
+/// block text - [https://code.google.com/p/blockly/wiki/Lists#in_list_..._insert_at
+/// Inserts an item into a list].
+/// [[File:Blockly-in-list-set-insert.png]]
 Blockly.Msg.LISTS_SET_INDEX_INSERT = 'insert at';
-/// block text - The word preceding the item to be added to a list, as in: In list [words] insert at first '''as''' "a" (which inserts the piece of text "a" as the new first element of the list).
+/// block text - The word(s) after the position in the list and before the item to be set/inserted.
+/// [[File:Blockly-in-list-set-insert.png]]
 Blockly.Msg.LISTS_SET_INDEX_INPUT_TO = 'as';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = 'Sets the item at the specified position in a list.  #1 is the first item.';
@@ -722,39 +872,61 @@ Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_FIRST = 'Sets the first item in a list.'
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_LAST = 'Sets the last item in a list.';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_RANDOM = 'Sets a random item in a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "insert" block).
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_START = 'Inserts the item at the specified position in a list.  #1 is the first item.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "insert" block).
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_INSERT_FROM_END = 'Inserts the item at the specified position in a list.  #1 is the last item.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "insert" block).
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_INSERT_FIRST = 'Inserts the item at the start of a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "insert" block).
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_INSERT_LAST = 'Append the item to the end of a list.';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "set" block).
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item} (even though the page describes the "get" block, the idea is the same for the "insert" block).
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_INSERT_RANDOM = 'Inserts the item randomly in a list.';
 
-/// url
+/// url - Information describing extracting a sublist from an existing list.
 Blockly.Msg.LISTS_GET_SUBLIST_HELPURL = 'https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist';
 Blockly.Msg.LISTS_GET_SUBLIST_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
-/// dropdown - Indicates that an index relative to the front of the list should be used to specify the beginning of the range from which to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
+/// dropdown - Indicates that an index relative to the front of the list should be used
+/// to specify the beginning of the range from which to
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
+/// [[File:Blockly-get-sublist.png]]
+/// Note: If {{msg-Blockly|ORDINAL_NUMBER_SUFFIX}} is defined, it will
+/// automatically appear ''after'' this number (and any other ordinal numbers on this block).
+/// See [[Translating:Blockly#Ordinal_numbers]] for more information on ordinal numbers in Blockly.
 Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_START = 'get sub-list from #';
-/// dropdown - Indicates that an index relative to the end of the list should be used to specify the beginning of the range from which to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
+/// dropdown - Indicates that an index relative to the end of the list should be used
+/// to specify the beginning of the range from which to
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
 Blockly.Msg.LISTS_GET_SUBLIST_START_FROM_END = 'get sub-list from # from end';
-/// dropdown - Indicates that the [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist sublist to extract] should begin with the list's first item.
+/// dropdown - Indicates that the
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist sublist to extract]
+/// should begin with the list's first item.
 Blockly.Msg.LISTS_GET_SUBLIST_START_FIRST = 'get sub-list from first';
-/// dropdown - Indicates that an index relative to the front of the list should be used to specify the end of the range from which to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
+/// dropdown - Indicates that an index relative to the front of the list should be
+/// used to specify the end of the range from which to
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
+/// [[File:Blockly-get-sublist.png]]
 Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_START = 'to #';
-/// dropdown - Indicates that an index relative to the end of the list should be used to specify the end of the range from which to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
+/// dropdown - Indicates that an index relative to the end of the list should be
+/// used to specify the end of the range from which to
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist get a sublist].
+/// [[File:Blockly-get-sublist.png]]
 Blockly.Msg.LISTS_GET_SUBLIST_END_FROM_END = 'to # from end';
-/// dropdown - Indicates that the '''last''' item in the given list should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist the end of the selected sublist].
+/// dropdown - Indicates that the '''last''' item in the given list should be
+/// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist the end
+/// of the selected sublist].
+/// [[File:Blockly-get-sublist.png]]
 Blockly.Msg.LISTS_GET_SUBLIST_END_LAST = 'to last';
 /// block text - This appears in the rightmost position ("tail") of the
 /// sublist block, as described at
 /// [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist
 /// https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist].
 /// In English and most other languages, this is the empty string.
+/// [[File:Blockly-get-sublist.png]]
 Blockly.Msg.LISTS_GET_SUBLIST_TAIL = '';
-/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist].
+/// tooltip - See [https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist
+/// https://code.google.com/p/blockly/wiki/Lists#Getting_a_sublist] for more information.
+/// [[File:Blockly-get-sublist.png]]
 Blockly.Msg.LISTS_GET_SUBLIST_TOOLTIP = 'Creates a copy of the specified portion of a list.';
 
 /// grammar - Text that follows an ordinal number (a number that indicates
@@ -773,7 +945,8 @@ Blockly.Msg.VARIABLES_GET_ITEM = Blockly.Msg.VARIABLES_DEFAULT_NAME;
 Blockly.Msg.VARIABLES_GET_TAIL = '';
 /// tooltip - This gets the value of the named variable without modifying it.
 Blockly.Msg.VARIABLES_GET_TOOLTIP = 'Returns the value of this variable.';
-/// context menu - Selecting this causes the creation of a block to set (change) the value of this variable.\n\nParameters:\n* %1 - the name of the variable.
+/// context menu - Selecting this creates a block to set (change) the value of this variable.
+/// \n\nParameters:\n* %1 - the name of the variable.
 Blockly.Msg.VARIABLES_GET_CREATE_SET = 'Create "set %1"';
 
 /// url - Information about ''variables'' in computer programming.  Consider using your language's translation of [http://en.wikipedia.org/wiki/Variable_(computer_science) http://en.wikipedia.org/wiki/Variable_(computer_science)], if it exists.
@@ -781,11 +954,13 @@ Blockly.Msg.VARIABLES_SET_HELPURL = 'http://code.google.com/p/blockly/wiki/Varia
 /// block text - The imperative or infinitive form of the verb "set", as in: '''set''' [the value of] x to 7.
 Blockly.Msg.VARIABLES_SET_TITLE = 'set';
 Blockly.Msg.VARIABLES_SET_ITEM = Blockly.Msg.VARIABLES_DEFAULT_NAME;
-/// block text - The word that goes after the name of the variable and its new value in: set [the value of] x '''to''' 7.
+/// block text - The word that goes after the name of the variable and before its new
+/// value in: set [the value of] x '''to''' 7.
 Blockly.Msg.VARIABLES_SET_TAIL = 'to';
 /// tooltip - This initializes or changes the value of the named variable.
 Blockly.Msg.VARIABLES_SET_TOOLTIP = 'Sets this variable to be equal to the input.';
-/// context menu - Selecting this causes the creation of a block to get (change) the value of this variable.\n\nParameters:\n* %1 - the name of the variable.
+/// context menu - Selecting this creates a block to get (change) the value of
+/// this variable.\n\nParameters:\n* %1 - the name of the variable.
 Blockly.Msg.VARIABLES_SET_CREATE_GET = 'Create "get %1"';
 
 // Procedures Blocks.
@@ -795,13 +970,20 @@ Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Proce
 /// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample
 /// procedure definition].
 Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE = 'to';
-/// default name - This acts as a placeholder for the name of a function on a function definition block, as shown on [http://blockly-demo.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E this block].  The user will replace it with the function's name.
+/// default name - This acts as a placeholder for the name of a function on a
+/// function definition block, as shown on
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#w7cfju this block].
+/// The user will replace it with the function's name.
 Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE = 'do something';
 /// block text - This precedes the list of parameters to a function.  See
 /// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#6ot5y5 this sample
 /// function with parameters].
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = 'with:';
-/// block text - This appears next to the function's "body", the blocks that should be run when the function is called, as shown in [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this example function definition].
+/// block text - This appears next to the function's "body", the blocks that should be
+/// run when the function is called, as shown in
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample
+/// procedure definition].
+
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = '';
 /// tooltip
 Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP = 'Creates a function with no output.';
@@ -825,7 +1007,9 @@ Blockly.Msg.PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning: This function has dupli
 
 /// url - Information about calling [http://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not return values.
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = 'http://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-/// block text - In most (if not all) languages, this will be the empty string.  It precedes the name of the function that should be run.  See, for example, the "eat food" block in [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en_us&xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%20x%3D%22-10%22%20y%3D%2213%22%3E%3Cmutation%3E%3C%2Fmutation%3E%3Ctitle%20name%3D%22NAME%22%3Ehave%20dinner%3C%2Ftitle%3E%3Cstatement%20name%3D%22STACK%22%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22wash%20hands%22%3E%3C%2Fmutation%3E%3Cnext%3E%3Cblock%20type%3D%22procedures_callnoreturn%22%3E%3Cmutation%20name%3D%22eat%20food%22%3E%3C%2Fmutation%3E%3C%2Fblock%3E%3C%2Fnext%3E%3C%2Fblock%3E%3C%2Fstatement%3E%3C%2Fblock%3E this function definition].
+/// block text - In most (if not all) languages, this will be the empty string.
+/// It precedes the name of the function that should be run.  See, for example,
+/// the "draw square" block in [https://blockly-demo.appspot.com/static/apps/turtle/index.html#ztz96g].
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = '';
 /// tooltip - This block causes the body (blocks inside) of the named function definition to be run.
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = 'Run the user-defined function "%1".';
@@ -836,17 +1020,27 @@ Blockly.Msg.PROCEDURES_CALLRETURN_CALL = Blockly.Msg.PROCEDURES_CALLNORETURN_CAL
 /// tooltip - This block causes the body (blocks inside) of the named function definition to be run.\n\nParameters:\n* %1 - the name of the function.
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = 'Run the user-defined function "%1" and use its output.';
 
-/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-demo.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It refers to the set of parameters (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
+/// block text - This text appears on a block in a window that appears when the user clicks
+/// on the plus sign or star on a function definition block.  It refers to the set of parameters
+/// (referred to by the simpler term "inputs") to the function.  See
+/// [[Translating:Blockly#function_definitions]].
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = 'inputs';
-/// block text - This text appears on a block in a window that appears when the user clicks on the plus sign or star on [http://blockly-demo.appspot.com/static/apps/code/readonly.html?xml=%3Cblock%20type%3D%22procedures_defnoreturn%22%3E%3C/block%3E a function definition block].  It appears on the block for adding an individual parameter (referred to by the simpler term "inputs") to the function.  See [http://translatewiki.net/wiki/Translating:Blockly#function_definitions this discussion].
+/// block text - This text appears on a block in a window that appears when the user clicks
+/// on the plus sign or star on a function definition block].  It appears on the block for
+/// adding an individual parameter (referred to by the simpler term "inputs") to the function.
+/// See [[Translating:Blockly#function_definitions]].
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = 'input name:';
 
-/// context menu - This appears on the context menu for function calls.  Selecting it causes the corresponding function definition to be highlighted.
+/// context menu - This appears on the context menu for function calls.  Selecting
+/// it causes the corresponding function definition to be highlighted (as shown at
+/// [[Translating:Blockly#context_menus]].
 Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = 'Highlight function definition';
-/// context menu - This appears on the context menu for function definitions.  Selecting it creates a block to call the function.  \n\nParameters:\n* %1 - the name of the function.
+/// context menu - This appears on the context menu for function definitions.
+/// Selecting it creates a block to call the function.  \n\nParameters:\n* %1 - the name of the function.
 Blockly.Msg.PROCEDURES_CREATE_DO = 'Create "%1"';
 
-/// tooltip - If the first value is true, [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] causes the second value to be returned immediately from the function.
+/// tooltip - If the first value is true, this causes the second value to be returned
+/// immediately from the enclosing function.
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a second value.';
-/// warning - This appears if the user tries to use [http://blockly-demo.appspot.com/static/apps/code/readonly.html?lang=en&xml=%3Cblock%20type%3D%22procedures_ifreturn%22%20inline%3D%22true%22%20x%3D%2278%22%20y%3D%22119%22%3E%3Cmutation%20value%3D%221%22%3E%3C%2Fmutation%3E%3Cvalue%20name%3D%22CONDITION%22%3E%3Cblock%20type%3D%22logic_compare%22%20inline%3D%22true%22%3E%3Ctitle%20name%3D%22OP%22%3ELT%3C%2Ftitle%3E%3Cvalue%20name%3D%22A%22%3E%3Cblock%20type%3D%22variables_get%22%3E%3Ctitle%20name%3D%22VAR%22%3Ex%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22B%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3Cvalue%20name%3D%22VALUE%22%3E%3Cblock%20type%3D%22math_number%22%3E%3Ctitle%20name%3D%22NUM%22%3E0%3C%2Ftitle%3E%3C%2Fblock%3E%3C%2Fvalue%3E%3C%2Fblock%3E this block] outside of a function definition.
+/// warning - This appears if the user tries to use this block outside of a function definition.
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = 'Warning: This block may be used only within a function definition.';
