@@ -1,11 +1,14 @@
 {
     "@metadata": {
         "authors": [
-            "Eitvys200"
+            "Eitvys200",
+            "Vilius2001"
         ]
     },
     "Apps.blocklyMessage": "Blockly",
     "Apps.dialogOk": "Gerai",
+    "Apps.dialogCancel": "At\u0161aukti",
+    "Apps.catLogic": "Logika",
     "Apps.catMath": "Matematika",
     "Apps.catText": "Tekstas",
     "Apps.catLists": "S\u0105ra\u0161ai",
