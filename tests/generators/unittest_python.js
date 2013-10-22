@@ -34,14 +34,14 @@ Blockly.Python['unittest_main'] = function(block) {
        '  report = []',
        '  summary = []',
        '  fails = 0',
-       '  for (success, title, log) in ' + resultsVar + ':',
+       '  for (success, log, message) in ' + resultsVar + ':',
        '    if success:',
        '      summary.append(".")',
        '    else:',
        '      summary.append("F")',
        '      fails += 1',
        '      report.append("")',
-       '      report.append("FAIL: " + title)',
+       '      report.append("FAIL: " + message)',
        '      report.append(log)',
        '  report.insert(0, "".join(summary))',
        '  report.append("")',
@@ -99,9 +99,6 @@ Blockly.Python['unittest_assertequals'] = function(block) {
 
 Blockly.Python['unittest_assertvalue'] = function(block) {
   // Asserts that a value is true, false, or null.
-  var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',
-      Blockly.Variables.NAME_TYPE);
-  // Asserts that a value is true.
   var message = Blockly.Python.quote_(block.getTitleValue('MESSAGE'));
   var actual = Blockly.Python.valueToCode(block, 'ACTUAL',
       Blockly.Python.ORDER_NONE) || 'None';
