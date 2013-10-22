@@ -30,7 +30,7 @@ Blockly.JavaScript['unittest_main'] = function(block) {
   if (!Blockly.JavaScript.definitions_['unittest_report']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
         'testReport', Blockly.Generator.NAME_TYPE);
-    Blockly.JavaScript.unittest_main.report = functionName;
+    Blockly.JavaScript['unittest_main'].report = functionName;
     var func = [];
     func.push('function ' + functionName + '() {');
     func.push('  // Create test report.');
@@ -71,7 +71,7 @@ Blockly.JavaScript['unittest_main'] = function(block) {
   var reportVar = Blockly.JavaScript.variableDB_.getDistinctName(
       'report', Blockly.Variables.NAME_TYPE);
   code += 'var ' + reportVar + ' = ' +
-      Blockly.JavaScript.unittest_main.report + '();\n';
+      Blockly.JavaScript['unittest_main'].report + '();\n';
   // Destroy results.
   code += resultsVar + ' = null;\n';
   // Send the report to the console (that's where errors will go anyway).
@@ -107,13 +107,13 @@ Array.prototype.equals = function(array) {
   return true;
 };
 
-Blockly.JavaScript.unittest_main.defineAssert_ = function(block) {
+Blockly.JavaScript['unittest_main'].defineAssert_ = function(block) {
   if (!Blockly.JavaScript.definitions_['unittest_assertequals']) {
     var resultsVar = Blockly.JavaScript.variableDB_.getName('unittestResults',
         Blockly.Variables.NAME_TYPE);
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
         'assertEquals', Blockly.Generator.NAME_TYPE);
-    Blockly.JavaScript.unittest_main.assert_ = functionName;
+    Blockly.JavaScript['unittest_main'].assert_ = functionName;
     var func = [];
     func.push('function ' + functionName + '(actual, expected, message) {');
     func.push('  // Asserts that a value equals another value.');
@@ -132,7 +132,7 @@ Blockly.JavaScript.unittest_main.defineAssert_ = function(block) {
     func.push('');
     Blockly.JavaScript.definitions_['unittest_assertequals'] = func.join('\n');
   }
-  return Blockly.JavaScript.unittest_main.assert_;
+  return Blockly.JavaScript['unittest_main'].assert_;
 };
 
 Blockly.JavaScript['unittest_assertequals'] = function(block) {
@@ -144,7 +144,7 @@ Blockly.JavaScript['unittest_assertequals'] = function(block) {
       Blockly.JavaScript.ORDER_COMMA) || 'null';
   var expected = Blockly.JavaScript.valueToCode(block, 'EXPECTED',
       Blockly.JavaScript.ORDER_COMMA) || 'null';
-  return Blockly.JavaScript.unittest_main.defineAssert_() +
+  return Blockly.JavaScript['unittest_main'].defineAssert_() +
       '(' + actual + ', ' + expected + ', ' + message + ');\n';
 };
 
@@ -163,7 +163,7 @@ Blockly.JavaScript['unittest_assertvalue'] = function(block) {
   } else if (expected == 'NULL') {
     expected = 'null';
   }
-  return Blockly.JavaScript.unittest_main.defineAssert_() +
+  return Blockly.JavaScript['unittest_main'].defineAssert_() +
       '(' + actual + ', ' + expected + ', ' + message + ');\n';
 };
 
@@ -175,7 +175,7 @@ Blockly.JavaScript['unittest_fail'] = function(block) {
   if (!Blockly.JavaScript.definitions_['unittest_fail']) {
     var functionName = Blockly.JavaScript.variableDB_.getDistinctName(
         'fail', Blockly.Generator.NAME_TYPE);
-    Blockly.JavaScript.unittest_fail.assert = functionName;
+    Blockly.JavaScript['unittest_fail'].assert = functionName;
     var func = [];
     func.push('function ' + functionName + '(message) {');
     func.push('  // Always assert an error.');
@@ -187,5 +187,5 @@ Blockly.JavaScript['unittest_fail'] = function(block) {
     func.push('');
     Blockly.JavaScript.definitions_['unittest_fail'] = func.join('\n');
   }
-  return Blockly.JavaScript.unittest_fail.assert + '(' + message + ');\n';
+  return Blockly.JavaScript['unittest_fail'].assert + '(' + message + ');\n';
 };

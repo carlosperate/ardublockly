@@ -68,7 +68,7 @@ Blockly.Python['unittest_main'] = function(block) {
   return code;
 };
 
-Blockly.Python.unittest_main.defineAssert_ = function(block) {
+Blockly.Python['unittest_main'].defineAssert_ = function() {
   var resultsVar = Blockly.Python.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
   var functionName = Blockly.Python.provideFunction_(
@@ -93,7 +93,7 @@ Blockly.Python['unittest_assertequals'] = function(block) {
       Blockly.Python.ORDER_NONE) || 'None';
   var expected = Blockly.Python.valueToCode(block, 'EXPECTED',
       Blockly.Python.ORDER_NONE) || 'None';
-  return Blockly.Python.unittest_main.defineAssert_() +
+  return Blockly.Python['unittest_main'].defineAssert_() +
       '(' + actual + ', ' + expected + ', ' + message + ')\n';
 };
 
@@ -110,7 +110,7 @@ Blockly.Python['unittest_assertvalue'] = function(block) {
   } else if (expected == 'NULL') {
     expected = 'None';
   }
-  return Blockly.Python.unittest_main.defineAssert_() +
+  return Blockly.Python['unittest_main'].defineAssert_() +
       '(' + actual + ', ' + expected + ', ' + message + ')\n';
 };
 
