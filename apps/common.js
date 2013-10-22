@@ -108,6 +108,7 @@ BlocklyApps.LANGUAGE_PACK = {
   'lb': 'msg/js/de.js',
   'pt': 'msg/js/pt_br.js',
   'pt-br': 'msg/js/pt_br.js',
+  'uk': 'msg/js/uk.js',
   'vi': 'msg/js/vi.js',
   'zh-hans': 'msg/js/zh_tw.js',
   'zh-hant': 'msg/js/zh_tw.js',

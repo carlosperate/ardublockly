@@ -29,7 +29,7 @@
 var Plane = {};
 
 // Supported languages.
-BlocklyApps.LANGUAGES = ['en', 'hu', 'vi'];
+BlocklyApps.LANGUAGES = ['en', 'de', 'hu', 'uk', 'vi'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="generated/' +

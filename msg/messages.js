@@ -79,7 +79,7 @@ Blockly.Msg.EXPAND_ALL = 'Expand Blocks';
 Blockly.Msg.DISABLE_BLOCK = 'Disable Block';
 /// context menu - Make the selected block have effect (after having been disabled earlier).
 Blockly.Msg.ENABLE_BLOCK = 'Enable Block';
-/// context menu - Provide helpful information about the selected block.
+/// context menu - Provide helpful information about the selected block.\n{{Identical|Help}}
 Blockly.Msg.HELP = 'Help';
 
 // Variable renaming.
@@ -109,11 +109,11 @@ Blockly.Msg.COLOUR_RANDOM_TOOLTIP = 'Choose a colour at random.';
 Blockly.Msg.COLOUR_RGB_HELPURL = 'http://www.december.com/html/spec/colorper.html';
 /// block text - Title of block for [https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components].
 Blockly.Msg.COLOUR_RGB_TITLE = 'colour with';
-/// block input text - The amount of red (from 0 to 100) to use when [https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components].
+/// block input text - The amount of red (from 0 to 100) to use when [https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components].\n{{Identical|Red}}
 Blockly.Msg.COLOUR_RGB_RED = 'red';
 /// block input text - The amount of green (from 0 to 100) to use when [https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components].
 Blockly.Msg.COLOUR_RGB_GREEN = 'green';
-/// block input text - The amount of blue (from 0 to 100) to use when [https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components].
+/// block input text - The amount of blue (from 0 to 100) to use when [https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components].\n{{Identical|Blue}}
 Blockly.Msg.COLOUR_RGB_BLUE = 'blue';
 /// tooltip - See [https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components https://code.google.com/p/blockly/wiki/Colour#Creating_a_colour_from_red,_green,_and_blue_components].
 Blockly.Msg.COLOUR_RGB_TOOLTIP = 'Create a colour with the specified amount of red, green, and blue.  All values must be between 0 and 100.';
@@ -231,15 +231,15 @@ Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP = 'Add a final, catch-all condition to the 
 Blockly.Msg.LOGIC_COMPARE_HELPURL = 'http://en.wikipedia.org/wiki/Inequality_(mathematics)';
 /// tooltip - Describes the equals (=) block.
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_EQ = 'Return true if both inputs equal each other.';
-/// tooltip - Describes the equals (&ne;) block.
+/// tooltip - Describes the equals (\u0026ne;) block.
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_NEQ = 'Return true if both inputs are not equal to each other.';
-/// tooltip - Describes the equals (&lt;) block.
+/// tooltip - Describes the equals (\u0026lt;) block.
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LT = 'Return true if the first input is smaller than the second input.';
-/// tooltip - Describes the equals (&le;) block.
+/// tooltip - Describes the equals (\u0026le;) block.
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LTE = 'Return true if the first input is smaller than or equal to the second input.';
-/// tooltip - Describes the equals (&gt;) block.
+/// tooltip - Describes the equals (\u0026gt;) block.
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GT = 'Return true if the first input is greater than the second input.';
-/// tooltip - Describes the equals (&ge;) block.
+/// tooltip - Describes the equals (\u0026ge;) block.
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GTE = 'Return true if the first input is greater than or equal to the second input.';
 
 /// url - Information about the Boolean conjunction ("and") and disjunction ("or") operators.  Consider using the translation of [http://en.wikipedia.org/wiki/Boolean_logic http://en.wikipedia.org/wiki/Boolean_logic], if it exists in your language.
@@ -344,7 +344,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';
 /// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent tangent] function, using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = 'Return the arctangent of a number.';
 
-/// url - Information about the mathematical constants &pi;, e, the golden ratio (&phi;), &radic; 2, &radic; 1/2, and infinity (&infin;).
+/// url - Information about the mathematical constants \u0026pi;, e, the golden ratio (\u0026phi;), \u0026radic; 2, \u0026radic; 1/2, and infinity (\u0026infin;).
 Blockly.Msg.MATH_CONSTANT_HELPURL = 'http://en.wikipedia.org/wiki/Mathematical_constant';
 /// tooltip - Provides the specified [http://en.wikipedia.org/wiki/Mathematical_constant mathematical constant].
 Blockly.Msg.MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0 (3.141\u2026), e (2.718\u2026), \u03c6 (1.618\u2026), sqrt(2) (1.414\u2026), sqrt(\u00bd) (0.707\u2026), or \u221e (infinity).';
@@ -352,7 +352,7 @@ Blockly.Msg.MATH_CONSTANT_TOOLTIP = 'Return one of the common constants: \u03c0 
 Blockly.Msg.MATH_IS_EVEN = 'is even';
 /// dropdown - A number is '''odd''' if it is not a multiple of 2.  For example, 3 is odd (yielding true), but 4 is not (false).  The opposite of "odd" is "even".
 Blockly.Msg.MATH_IS_ODD = 'is odd';
-/// dropdown - A number is [http://en.wikipedia.org/wiki/Prime prime] if it cannot be evenly divided by any positive integers except for 1 and itself.  For example, 5 is prime, but 6 is not because 2 &times; 3 = 6.
+/// dropdown - A number is [http://en.wikipedia.org/wiki/Prime prime] if it cannot be evenly divided by any positive integers except for 1 and itself.  For example, 5 is prime, but 6 is not because 2 \u0026times; 3 = 6.
 Blockly.Msg.MATH_IS_PRIME = 'is prime';
 /// dropdown - A number is '''whole''' if it is an [http://en.wikipedia.org/wiki/Integer integer].  For example, 5 is whole, but 5.1 is not.
 Blockly.Msg.MATH_IS_WHOLE = 'is whole';
