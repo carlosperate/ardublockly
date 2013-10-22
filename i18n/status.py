@@ -23,6 +23,7 @@
 """
 
 import argparse
+import os
 from common import read_json_file
 
 # Bogus language name representing all messages defined.
@@ -174,13 +175,14 @@ def main():
   # Argument parsing.
   parser = argparse.ArgumentParser(
       description='Display translation status by app and language.')
-  parser.add_argument('--key_file', default='keys.json',
+  parser.add_argument('--key_file', default='json' + os.path.sep + 'keys.json',
                       help='file with complete list of keys.')
   parser.add_argument('--output', default='text', choices=['text', 'html'],
                       help='output format')
-  parser.add_argument('--verbose', action='store_true', default=False)
+  parser.add_argument('--verbose', action='store_true', default=False,
+                      help='whether to indicate which messages were translated')
   parser.add_argument('--app', default=None, choices=APPS,
-                      help='If set, only consider the specified app (prefix).')
+                      help='if set, only consider the specified app (prefix).')
   parser.add_argument('lang_files', nargs='+',
                       help='names of JSON files to examine')
   args = parser.parse_args()
@@ -189,7 +191,7 @@ def main():
   messages = {}  # A dictionary of dictionaries.
   messages[TOTAL] = read_json_file(args.key_file)
   for lang_file in args.lang_files:
-    prefix = get_prefix(lang_file)
+    prefix = get_prefix(os.path.split(lang_file)[1])
     # Skip non-language files.
     if prefix not in ['qqq', 'keys']:
       messages[prefix] = read_json_file(lang_file)
