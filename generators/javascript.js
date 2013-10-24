@@ -111,7 +111,7 @@ Blockly.JavaScript.INFINITE_LOOP_TRAP = null;
  */
 Blockly.JavaScript.init = function() {
   // Create a dictionary of definitions to be printed before the code.
-  Blockly.JavaScript.definitions_ = {};
+  Blockly.JavaScript.definitions_ = Object.create(null);
 
   if (Blockly.Variables) {
     if (!Blockly.JavaScript.variableDB_) {

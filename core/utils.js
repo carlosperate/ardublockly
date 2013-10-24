@@ -123,8 +123,6 @@ if ('ontouchstart' in document.documentElement) {
     mousemove: 'touchmove',
     mouseup: 'touchend'
   };
-} else {
-  Blockly.bindEvent_.TOUCH_MAP = {};
 }
 
 /**

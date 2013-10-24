@@ -150,7 +150,7 @@ Blockly.OPPOSITE_TYPE[Blockly.PREVIOUS_STATEMENT] = Blockly.NEXT_STATEMENT;
  * @private
  * @const
  */
-Blockly.SOUNDS_ = {};
+Blockly.SOUNDS_ = Object.create(null);
 
 /**
  * Currently selected block.

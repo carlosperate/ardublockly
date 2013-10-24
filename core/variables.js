@@ -50,7 +50,7 @@ Blockly.Variables.allVariables = function(opt_block) {
   } else {
     blocks = Blockly.mainWorkspace.getAllBlocks();
   }
-  var variableHash = {};
+  var variableHash = Object.create(null);
   // Iterate through every block and add each variable to the hash.
   for (var x = 0; x < blocks.length; x++) {
     var func = blocks[x].getVars;
@@ -60,8 +60,7 @@ Blockly.Variables.allVariables = function(opt_block) {
         var varName = blockVariables[y];
         // Variable name may be null if the block is only half-built.
         if (varName) {
-          variableHash[Blockly.Names.PREFIX_ +
-              varName.toLowerCase()] = varName;
+          variableHash[varName.toLowerCase()] = varName;
         }
       }
     }

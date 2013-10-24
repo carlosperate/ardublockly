@@ -271,13 +271,12 @@ function getTypesFrom_(block, name) {
       types = types.concat(getTypesFrom_(typeBlock, 'TYPE' + n));
     }
     // Remove duplicates.
-    var hash = {};
+    var hash = Object.create(null);
     for (var n = types.length - 1; n >= 0; n--) {
-      if (hash['X_' + types[n]]) {
+      if (hash[types[n]]) {
         types.splice(n, 1);
-        continue;
       }
-      hash['X_' + types[n]] = true;
+      hash[types[n]] = true;
     }
   } else {
     types = [escapeString(typeBlock.valueType)];

@@ -97,10 +97,10 @@ Blockly.Python.FUNCTION_NAME_PLACEHOLDER_REGEXP_ =
  */
 Blockly.Python.init = function() {
   // Create a dictionary of definitions to be printed before the code.
-  Blockly.Python.definitions_ = {};
+  Blockly.Python.definitions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
   // to actual function names (to avoid collisions with user functions).
-  Blockly.Python.functionNames_ = {};
+  Blockly.Python.functionNames_ = Object.create(null);
 
   if (Blockly.Variables) {
     if (!Blockly.Python.variableDB_) {
