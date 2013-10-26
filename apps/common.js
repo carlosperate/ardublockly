@@ -42,7 +42,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'en': 'English',
   'es': 'Español',
   'eu': 'Euskara',
-  'fa': 'یسراف',
+  'fa': 'فارسی',
   'fi': 'Suomi',
   'fo': 'Føroyskt',
   'fr': 'Français',
