@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Bahadir"
+            "Bahadir",
+            "Trockya"
         ]
     },
     "Apps.subtitle": "g\u00f6rsel bir programlama ortam\u0131",
@@ -62,6 +63,8 @@
     "Maze.helpOneTopBlock": "Bu b\u00f6l\u00fcmde beyaz \u00e7al\u0131\u015fma alan\u0131ndaki b\u00fct\u00fcn bloklar\u0131 bir araya getirmelisin.",
     "Maze.helpRun": "Ne olaca\u011f\u0131n\u0131 g\u00f6rmek i\u00e7in program\u0131n\u0131z\u0131 \u00e7al\u0131\u015ft\u0131r\u0131n.",
     "Maze.helpReset": "Program\u0131n\u0131z labirenti \u00e7\u00f6zemedi. 'Tekrar' butonuna bas\u0131n ve yeniden deneyin.",
+    "Plane.setSeats": "koltuklar =",
+    "Plane.plane": "U\u00e7ak",
     "Puzzle.country1": "Avustralya",
     "Puzzle.country1Language": "\u0130ngilizce",
     "Puzzle.country1City1": "Melbourne",

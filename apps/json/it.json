@@ -2,7 +2,8 @@
     "@metadata": {
         "authors": [
             "Beta16",
-            "Isiond"
+            "Isiond",
+            "Nerimic"
         ]
     },
     "Apps.subtitle": "un ambiente di programmazione grafico",
@@ -23,8 +24,8 @@
     "Apps.catVariables": "Variabili",
     "Apps.catProcedures": "Procedure",
     "Apps.httpRequestError": "La richiesta non \u00e8 stata soddisfatta.",
-    "Apps.linkAlert": "Condividi i tuoi blocchi con questo indirizzo:\n\n%1",
-    "Apps.hashError": "Mi spiace, '%1' non corrisponde con alcun programma salvato.",
+    "Apps.linkAlert": "Condividi i tuoi blocchi con questo collegamento:\n\n%1",
+    "Apps.hashError": "Mi spiace, '%1' non corrisponde ad alcun programma salvato.",
     "Apps.xmlError": "Non \u00e8 stato possibile caricare il documento.  Forse \u00e8 stato creato con una versione diversa di Blockly?",
     "Apps.listVariable": "elenco",
     "Apps.textVariable": "testo",
