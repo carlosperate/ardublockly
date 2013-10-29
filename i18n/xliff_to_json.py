@@ -127,9 +127,13 @@ def _process_file(filename):
               if unit['meaning'] not in names:
                 # If the term has not already been described, the use of 'ibid'
                 # is an error.
-                raise InputError(filename,
-                                 'First definition of: ' + unit['meaning']
-                                 + ' has definition: ' + unit['description'])
+                raise InputError(
+                    filename,
+                    'First encountered definition of: ' + unit['meaning']
+                    + ' has definition: ' + unit['description']
+                    + '.  This error can occur if the definition was not'
+                    + ' provided on the first appearance of the message'
+                    + ' or if the source (English-language) messages differ.')
               else:
                 # If term has already been described, 'ibid' was used correctly,
                 # and we output nothing.
