@@ -203,11 +203,13 @@ Puzzle.languages = function() {
 Puzzle.checkAnswers = function() {
   var blocks = Blockly.mainWorkspace.getAllBlocks();
   var errors = 0;
+  var badBlocks = [];
   for (var b = 0, block; block = blocks[b]; b++) {
     if (!block.isCorrect()) {
       errors++;
-      // Bring the offending block to the front.
+      // Bring the offending blocks to the front.
       block.select();
+      badBlocks.push(block);
     }
   }
 
@@ -247,6 +249,20 @@ Puzzle.checkAnswers = function() {
   BlocklyApps.showDialog(content, button, true, true, style,
       BlocklyApps.stopDialogKeyDown);
   BlocklyApps.startDialogKeyDown();
+
+  // Pick a random bad block and blink it until the dialog closes.
+  if (badBlocks.length) {
+    Puzzle.shuffle(badBlocks);
+    var badBlock = badBlocks[0];
+    var blink = function() {
+      badBlock.select();
+      if (BlocklyApps.isDialogVisible_) {
+        window.setTimeout(function() {badBlock.unselect();}, 150);
+        window.setTimeout(blink, 300);
+      }
+    };
+    blink();
+  }
 };
 
 /**
