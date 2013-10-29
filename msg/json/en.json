@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-10-17 18:41:27.114298",
+        "lastupdated": "2013-10-29 15:38:17.903692",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -108,6 +108,17 @@
     "LOGIC_TERNARY_TOOLTIP": "Check the condition in 'test'. If the condition is true, returns the 'if true' value; otherwise returns the 'if false' value.",
     "MATH_NUMBER_HELPURL": "http://en.wikipedia.org/wiki/Number",
     "MATH_NUMBER_TOOLTIP": "A number.",
+    "MATH_ADDITION_SYMBOL": "+",
+    "MATH_SUBTRACTION_SYMBOL": "-",
+    "MATH_DIVISION_SYMBOL": "\u00F7",
+    "MATH_MULTIPLICATION_SYMBOL": "\u00D7",
+    "MATH_POWER_SYMBOL": "^",
+    "MATH_TRIG_SIN": "sin",
+    "MATH_TRIG_COS": "cos",
+    "MATH_TRIG_TAN": "tan",
+    "MATH_TRIG_ASIN": "asin",
+    "MATH_TRIG_ACOS": "acos",
+    "MATH_TRIG_ATAN": "atan",
     "MATH_ARITHMETIC_HELPURL": "http://en.wikipedia.org/wiki/Arithmetic",
     "MATH_ARITHMETIC_TOOLTIP_ADD": "Return the sum of the two numbers.",
     "MATH_ARITHMETIC_TOOLTIP_MINUS": "Return the difference of the two numbers.",

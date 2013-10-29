@@ -294,6 +294,40 @@ Blockly.Msg.MATH_NUMBER_HELPURL = 'http://en.wikipedia.org/wiki/Number';
 /// tooltip - Any positive or negative number, not necessarily an integer.
 Blockly.Msg.MATH_NUMBER_TOOLTIP = 'A number.';
 
+/// math - The symbol for the binary operation addition.
+Blockly.Msg.MATH_ADDITION_SYMBOL = '+';
+/// math - The symbol for the binary operation indicating that the right operand should be
+/// subtracted from the left operand.
+Blockly.Msg.MATH_SUBTRACTION_SYMBOL = '-';
+/// math - The binary operation indicating that the left operand should be divided by
+/// the right operand.
+Blockly.Msg.MATH_DIVISION_SYMBOL = '\u00F7';
+/// math - The symbol for the binary operation multiplication.
+Blockly.Msg.MATH_MULTIPLICATION_SYMBOL = '\u00D7';
+/// math - The symbol for the binary operation exponentiation.  Specifically, if the
+/// value of the left operand is L and the value of the right operand (the exponent) is
+/// R, multiply L by itself R times.  (Fractional and negative exponents are also legal.)
+Blockly.Msg.MATH_POWER_SYMBOL = '^';
+
+/// math - The short name of the trigonometric function
+/// [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent sine].
+Blockly.Msg.MATH_TRIG_SIN = 'sin';
+/// math - The short name of the trigonometric function
+/// [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent cosine].
+Blockly.Msg.MATH_TRIG_COS = 'cos';
+/// math - The short name of the trigonometric function
+/// [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent tangent].
+Blockly.Msg.MATH_TRIG_TAN = 'tan';
+/// math - The short name of the ''inverse of'' the trigonometric function
+/// [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent sine].
+Blockly.Msg.MATH_TRIG_ASIN = 'asin';
+/// math - The short name of the ''inverse of'' the trigonometric function
+/// [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent cosine].
+Blockly.Msg.MATH_TRIG_ACOS = 'acos';
+/// math - The short name of the ''inverse of'' the trigonometric function
+/// [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent tangent].
+Blockly.Msg.MATH_TRIG_ATAN = 'atan';
+
 /// url - Information about addition, subtraction, multiplication, division, and exponentiation.
 Blockly.Msg.MATH_ARITHMETIC_HELPURL = 'http://en.wikipedia.org/wiki/Arithmetic';
 /// tooltip - See [http://en.wikipedia.org/wiki/Addition http://en.wikipedia.org/wiki/Addition].
@@ -337,7 +371,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = 'Return the sine of a degree (not radian).';
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = 'Return the cosine of a degree (not radian).';
 /// tooltip - Return the [http://en.wikipedia.org/wiki/Trigonometric_functions#Sine.2C_cosine_and_tangent tangent] of an [http://en.wikipedia.org/wiki/Degree_(angle) angle in degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = 'Return the tangent of a degree (not radian).';
-/// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent cotangent function], using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
+/// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent sine function], using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_ASIN = 'Return the arcsine of a number.';
 /// tooltip - The [http://en.wikipedia.org/wiki/Inverse_trigonometric_functions inverse] of the [http://en.wikipedia.org/wiki/Cosine#Sine.2C_cosine_and_tangent cosine] function, using [http://en.wikipedia.org/wiki/Degree_(angle) degrees], not radians.
 Blockly.Msg.MATH_TRIG_TOOLTIP_ACOS = 'Return the arccosine of a number.';

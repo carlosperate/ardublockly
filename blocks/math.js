@@ -45,11 +45,11 @@ Blockly.Blocks['math_arithmetic'] = {
   // Basic arithmetic operator.
   init: function() {
     var OPERATORS =
-        [['+', 'ADD'],
-         ['-', 'MINUS'],
-         ['\u00D7', 'MULTIPLY'],
-         ['\u00F7', 'DIVIDE'],
-         ['^', 'POWER']];
+        [[Blockly.Msg.MATH_ADDITION_SYMBOL, 'ADD'],
+         [Blockly.Msg.MATH_SUBTRACTION_SYMBOL, 'MINUS'],
+         [Blockly.Msg.MATH_MULTIPLICATION_SYMBOL, 'MULTIPLY'],
+         [Blockly.Msg.MATH_DIVISION_SYMBOL, 'DIVIDE'],
+         [Blockly.Msg.MATH_POWER_SYMBOL, 'POWER']];
     this.setHelpUrl(Blockly.Msg.MATH_ARITHMETIC_HELPURL);
     this.setColour(230);
     this.setOutput(true, 'Number');
@@ -114,12 +114,12 @@ Blockly.Blocks['math_trig'] = {
   // Trigonometry operators.
   init: function() {
     var OPERATORS =
-        [['sin', 'SIN'],
-         ['cos', 'COS'],
-         ['tan', 'TAN'],
-         ['asin', 'ASIN'],
-         ['acos', 'ACOS'],
-         ['atan', 'ATAN']];
+        [[Blockly.Msg.MATH_TRIG_SIN, 'SIN'],
+         [Blockly.Msg.MATH_TRIG_COS, 'COS'],
+         [Blockly.Msg.MATH_TRIG_TAN, 'TAN'],
+         [Blockly.Msg.MATH_TRIG_ASIN, 'ASIN'],
+         [Blockly.Msg.MATH_TRIG_ACOS, 'ACOS'],
+         [Blockly.Msg.MATH_TRIG_ATAN, 'ATAN']];
     this.setHelpUrl(Blockly.Msg.MATH_TRIG_HELPURL);
     this.setColour(230);
     this.setOutput(true, 'Number');
