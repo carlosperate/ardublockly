@@ -101,7 +101,9 @@ Graph.oldFormula_ = null;
  * google-developers.appspot.com/chart/interactive/docs/gallery/linechart
  */
 Graph.drawVisualization = function() {
-  var formula = Graph.getFunction();
+  var tuple = Graph.getFunction();
+  var defs = tuple[0];
+  var formula = tuple[1];
   if (formula === Graph.oldFormula_) {
     // No change in the formula, don't recompute.
     return;
@@ -109,7 +111,7 @@ Graph.drawVisualization = function() {
   Graph.oldFormula_ = formula;
 
   // Create and populate the data table.
-  var data = google.visualization.arrayToDataTable(Graph.plot(formula));
+  var data = google.visualization.arrayToDataTable(Graph.plot(defs + formula));
 
   var options = { //curveType: "function",
                   width: 400, height: 400,
@@ -123,21 +125,24 @@ Graph.drawVisualization = function() {
   if (funcText.lastChild) {
     funcText.removeChild(funcText.lastChild);
   }
-  funcText.appendChild(document.createTextNode('y = ' + Graph.getFunction()));
+  // Remove the ";" generally ending the JavaScript statement y = {code};.
+  formula = formula.replace(/;$/, '');
+  funcText.appendChild(document.createTextNode('y = ' + formula));
 };
 
 /**
  * Plot points on the function y = f(x).
+ * @param {string} code JavaScript code.
  * @return {!Array.<!Array>} 2D Array of points on the graph.
  */
-Graph.plot = function(formula) {
+Graph.plot = function(code) {
   // Initialize a table with two column headings.
   var table = [];
   var y;
   // TODO: Improve range and scale of graph.
   for (var x = -10; x <= 10; x = Math.round((x + 0.1) * 10) / 10) {
     try {
-      y = eval(formula);
+      y = eval(code);
     } catch (e) {
       y = NaN;
     }
@@ -160,7 +165,8 @@ Graph.plot = function(formula) {
 
 /**
  * Get from blocks the right hand side content of the function y = f(x).
- * @return {String} Formula in JavaScipt for f(x).
+ * @return {!Array.<string>} Tuple of any function definitions and the formula
+ *     in JavaScipt for f(x).
  */
 Graph.getFunction = function() {
   var topBlocks = Blockly.mainWorkspace.getTopBlocks(false);
@@ -176,6 +182,6 @@ Graph.getFunction = function() {
   }
   Blockly.JavaScript.init();
   var code = Blockly.JavaScript.blockToCode(yBlock);
-  // Remove the ";" generally ending the JavaScript statement y = {code};.
-  return code.replace(/;$/, '');
+  var defs = Blockly.JavaScript.finish('');
+  return [defs, code];
 };
