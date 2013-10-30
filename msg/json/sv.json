@@ -57,6 +57,8 @@
     "CONTROLS_FOREACH_INPUT_ITEM": "f\u00f6r varje f\u00f6rem\u00e5l",
     "CONTROLS_FOREACH_INPUT_INLIST": "i listan",
     "CONTROLS_FOREACH_TOOLTIP": "F\u00f6r varje objekt i en lista, ange variabeln '%1' till objektet, och utf\u00f6r sedan n\u00e5gra kommandon.",
+    "CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK": "bryt ut ur upprepning",
+    "CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK": "Bryta ut ur den inneh\u00e5llande upprepningen.",
     "CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE": "Hoppa \u00f6ver resten av denna upprepning och forts\u00e4tt med n\u00e4sta upprepning.",
     "CONTROLS_FLOW_STATEMENTS_WARNING": "Varning: Detta block kan endast anv\u00e4ndas i en upprepning.",
     "CONTROLS_IF_TOOLTIP_1": "Om ett v\u00e4rde \u00e4r sant, utf\u00f6r n\u00e5gra kommandon.",

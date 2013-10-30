@@ -67,7 +67,7 @@
     "Maze.helpReset": "Tu programa no resolvi\u00f3 el laberinto. Presiona \"reiniciar\" e intenta otra vez.",
     "Maze.helpRepeat": "Las computadoras tienen memoria limitada. Llega al final de este camino usando tan s\u00f3lo dos bloques. Utiliza 'repetir' para ejecutar un bloque m\u00e1s de una vez.",
     "Maze.helpCapacity": "Has usado todos los bloques para este nivel. Para crear un bloque nuevo, primero debes eliminar un bloque existente.",
-    "Maze.helpRepeatMany": "Llega a la meta con tan s\u00f3lo cinco bloques.",
+    "Maze.helpRepeatMany": "Puede encajar m\u00e1s de un bloque dentro de un bloque 'repetir'.",
     "Maze.helpSkins": "Elige a tu jugador favorito en este men\u00fa.",
     "Maze.helpIf": "Una condici\u00f3n 'si' va hacer algo solamente si la condici\u00f3n es verdadera. Intenta girar a la izquierda si hay camino a la izquierda.",
     "Maze.helpMenu": "Haz clic en %1 en el bloque \"if\" para cambiar su condici\u00f3n.",
