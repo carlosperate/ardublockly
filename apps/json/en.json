@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2013-10-30 16:49:50.822880",
+        "lastupdated": "2013-11-01 18:56:08.586769",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -79,7 +79,7 @@
     "Plane.seats": "Seats: %1",
     "Plane.placeholder": "?",
     "Plane.setSeats": "seats =",
-    "Plane.plane": "Plane",
+    "Plane.plane": "Plane Seat Calculator",
     "Plane.description1": "An airplane has a number of rows of passenger seats.  Each row contains four seats.",
     "Plane.description2": "An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of passenger seats.  Each row contains four seats.",
     "Plane.description3": "An airplane has two seats in the flight deck (for the pilot and co-pilot), and a number of rows of 1st class and 2nd class passenger seats.  Each 1st class row contains four seats. Each 2nd class row contains five seats.",
@@ -147,5 +147,16 @@
     "Turtle.runTooltip": "Makes the turtle do what the blocks say.",
     "Turtle.captureTooltip": "Save the drawing.",
     "Turtle.imgFilename": "drawing.png",
-    "Turtle.catTurtle": "Turtle"
+    "Turtle.catTurtle": "Turtle",
+    "Apps.indexTitle": "Blockly Apps",
+    "Apps.indexFooter": "Blockly is free and open source.  To contribute code or translations to Blockly, or to use Blockly in your own app, visit %1.",
+    "Apps.choiceIntro": "Blockly is a graphical programming environment.  Below are some sample applications that use Blockly.",
+    "Apps.puzzleSubtitle": "Learn to use Blockly's interface.",
+    "Apps.mazeSubtitle": "Use Blockly to solve a maze.",
+    "Apps.turtleSubtitle": "Use Blockly to draw.",
+    "Apps.graphSubtitle": "Plot functions with Blockly.",
+    "Apps.codeSubtitle": "Export a Blockly program into JavaScript, Python or XML.",
+    "Apps.planeSubtitle": "Solve a math problem with one or two variables.",
+    "Apps.blockFactory": "Block Factory",
+    "Apps.blockfactorySubtitle": "Build custom blocks using Blockly."
 }

@@ -73,7 +73,7 @@
 "Plane.seats": "6636919311618748816",
 "Plane.placeholder": "1649099567159388799",
 "Plane.setSeats": "990695256953568910",
-"Plane.plane": "5107849227960116393",
+"Plane.plane": "6646116297668869388",
 "Plane.description1": "7784699858027886282",
 "Plane.description2": "4755413400587385256",
 "Plane.description3": "1327005465775917626",
@@ -141,5 +141,16 @@
 "Turtle.runTooltip": "327067666833971381",
 "Turtle.captureTooltip": "793577727112679597",
 "Turtle.imgFilename": "7221035465778066902",
-"Turtle.catTurtle": "5180825245477618167"
+"Turtle.catTurtle": "5180825245477618167",
+"Apps.indexTitle": "7974005368401638032",
+"Apps.indexFooter": "6787275955604631342",
+"Apps.choiceIntro": "5293485729310732301",
+"Apps.puzzleSubtitle": "4989466653686700554",
+"Apps.mazeSubtitle": "6518880171303137514",
+"Apps.turtleSubtitle": "7043905265543168717",
+"Apps.graphSubtitle": "7527162652570717706",
+"Apps.codeSubtitle": "2541861051687223347",
+"Apps.planeSubtitle": "6523129415371026229",
+"Apps.blockFactory": "5356379656768291040",
+"Apps.blockfactorySubtitle": "8411464713145270471"
 }

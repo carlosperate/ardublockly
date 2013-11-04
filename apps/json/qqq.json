@@ -148,5 +148,16 @@
     "Turtle.runTooltip": "tooltip - Pressing this button runs the computer program the user has written to move the turtle on the canvas.",
     "Turtle.captureTooltip": "tooltip - Pressing this button causes the drawing created by the user's program to be saved as an image on the user's computer.  The button icon looks like a camera.",
     "Turtle.imgFilename": "filename - The name of the image file containing the user's drawing.  It must end with '.png'.",
-    "Turtle.catTurtle": "category - Blocks related to Turtle commands."
+    "Turtle.catTurtle": "category - Blocks related to Turtle commands.",
+    "Apps.indexTitle": "page text - The word &quot;Apps&quot; is short for &quot;Applications&quot;.  We chose it because it is more informal.  This and the following messages currently appear at [http://blockly-demo.appspot.com/static/apps/index.html].",
+    "Apps.indexFooter": "page text - Text appearing at the end of the page.  %1 will be replaced with the Blockly URL.",
+    "Apps.choiceIntro": "page text - This appears before a list of Blockly apps.  Please surround the name of Blockly with brackets so we can make it a hyperlink.  Please use the same term for &quot;Blockly&quot; as in {{msg-blockly|Apps.blocklyMessage}}.",
+    "Apps.puzzleSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/puzzle/index.html Puzzle application].",
+    "Apps.mazeSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/maze/index.html Maze application].",
+    "Apps.turtleSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/turtle/index.html Turtle application].",
+    "Apps.graphSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/graph/index.html Graph application].",
+    "Apps.codeSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/code/index.html Code application].",
+    "Apps.planeSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/plane/index.html Plane application].",
+    "Apps.blockFactory": "title - The name of a factory or toolthat produces blocks.",
+    "Apps.blockfactorySubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/blockfactory/index.html Block Factory application]."
 }
