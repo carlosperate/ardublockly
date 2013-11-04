@@ -1,6 +1,7 @@
 {
     "@metadata": {
         "authors": [
+            "Tak\u00e1cs Viktor L\u00e1szl\u00f3",
             "\uc544\ub77c"
         ]
     },
@@ -21,9 +22,9 @@
     "Apps.catProcedures": "Elj\u00e1r\u00e1sok",
     "Apps.httpRequestError": "A k\u00e9r\u00e9ssel kapcsolatban probl\u00e9ma mer\u00fclt fel.",
     "Apps.linkAlert": "Ezzel a hivatkoz\u00e1ssal tudod megosztani a programodat:\n\n%1",
-    "Apps.hashError": "Eln\u00e9z\u00e9st, a '%1' hivatkoz\u00e1snem tartozik egyetlen programhoz sem.",
+    "Apps.hashError": "Sajnos a '%1' hivatkoz\u00e1s nem tartozik egyetlen programhoz sem.",
     "Apps.xmlError": "A programodat nem lehet bet\u00f6lteni.  Elk\u00e9pzelhet\u0151, hogy a Blockly egy m\u00e1sik verzi\u00f3j\u00e1ban k\u00e9sz\u00fclt?",
-    "Apps.listVariable": "list",
+    "Apps.listVariable": "lista",
     "Code.badXml": "Hiba az XML feldolgoz\u00e1sakor:\n%1\n\nV\u00e1ltoz\u00e1sok elvet\u00e9se?",
     "Code.badCode": "Program hiba:\n%1",
     "Code.timeout": "A program el\u00e9rte a maxim\u00e1lis v\u00e9grehajt\u00e1si id\u0151t.",
@@ -35,13 +36,13 @@
     "Maze.moveForward": "Menj el\u0151re",
     "Maze.turnLeft": "Fordulj balra",
     "Maze.turnRight": "Fordulj jobbra",
-    "Maze.doCode": "akkor",
+    "Maze.doCode": "v\u00e9grehajt",
     "Maze.elseCode": "egy\u00e9bk\u00e9nt",
     "Maze.helpIfElse": "A Ha-egy\u00e9bk\u00e9nt felt\u00e9tel eset\u00e9n vagy az egyik, vagy a m\u00e1sik utas\u00edt\u00e1s-csoport ker\u00fcl v\u00e9grehajt\u00e1sra.",
     "Maze.pathAhead": "Ha szabad az \u00fat el\u0151tted",
     "Maze.pathLeft": "Ha szabad az \u00fat balra",
     "Maze.pathRight": "Ha szabad az \u00fat jobbra",
-    "Maze.repeatUntil": "Ism\u00e9teld a",
+    "Maze.repeatUntil": "Ism\u00e9teld am\u00edg eljut\u02d0",
     "Maze.moveForwardTooltip": "Pegman el\u0151re l\u00e9p egy mez\u0151t.",
     "Maze.turnTooltip": "Pegman 90 fokot fordul balra, vagy jobbra.",
     "Maze.ifTooltip": "Ha szabad az \u00fat a megadott ir\u00e1nyban, akkor v\u00e9grehajtja az utas\u00edt\u00e1sokat.",
@@ -56,7 +57,7 @@
     "Maze.helpStack": "Seg\u00edts eljutatni Pegmant a c\u00e9lig, kapcsolj \u00f6ssze n\u00e9h\u00e1ny 'Menj el\u0151re' blokkot!",
     "Maze.helpOneTopBlock": "Ezen a szinten \u00f6ssze kell kapcsolnod minden blokkot a munkater\u00fcleten.",
     "Maze.helpRepeat": "A sz\u00e1m\u00edt\u00f3g\u00e9peknek v\u00e9ges a mem\u00f3ri\u00e1juk. Juttasd el Pegmant a c\u00e9lig mind\u00f6ssze 2 blokk felhaszn\u00e1l\u00e1s\u00e1val. Haszn\u00e1ld az 'Ism\u00e9teld a c\u00e9lba\u00e9r\u00e9sig' blokkot egy m\u00e1sik blokk ism\u00e9telt v\u00e9grehajt\u00e1s\u00e1hoz.",
-    "Maze.helpRepeatMany": "Juttasd el Pegmant a c\u00e9lig mind\u00f6ssze 5 blokk felhaszn\u00e1l\u00e1s\u00e1val.",
+    "Maze.helpRepeatMany": "T\u00f6bb blokkot is haszn\u00e1lhatsz az Ism\u00e9tl\u00e9sen bel\u00fcl.",
     "Maze.helpIf": "Egy 'Ha' eset\u00e9n az utas\u00edt\u00e1sok csak akkor ker\u00fclnek v\u00e9grehajt\u00e1sra, ha a felt\u00e9tel igaz. Pr\u00f3b\u00e1ld Pegmant balra ford\u00edtani, ha van \u00fat balra.",
     "Maze.helpWallFollow": "V\u00e9gig tudod vezetni Pegmant ezen a bonyolult labirintuson? Pr\u00f3b\u00e1ld a bal oldali falat k\u00f6vetni. Halad\u00f3 programoz\u00f3knak!",
     "Plane.rows": "Sorok sz\u00e1ma: %1",
@@ -99,7 +100,7 @@
     "Puzzle.error0": "T\u00f6k\u00e9letes!\nMind a %1 blokk a hely\u00e9n van.",
     "Puzzle.error1": "Majdnem siker\u00fclt! 1 blokk rossz helyre ker\u00fclt.",
     "Puzzle.error2": "\u03251 blokk rossz helyre ker\u00fclt.",
-    "Puzzle.tryAgain": "A kiemelt blokk nincs a hely\u00e9n.\nPr\u00f3b\u00e1ld \u00fajra",
+    "Puzzle.tryAgain": "A kiemelt blokk nincs a hely\u00e9n.\nPr\u00f3b\u00e1ld \u00fajra\u01c3",
     "Puzzle.title": "Kirak\u00f3s",
     "Puzzle.help": "Sug\u00f3",
     "Puzzle.checkAnswers": "V\u00e1laszok ellen\u0151rz\u00e9se",
