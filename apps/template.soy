@@ -26,9 +26,13 @@ span>
  */
 {template .start}
   {call .messages /}
-  <h1>{msg meaning="Apps.indexTitle" desc="IBID"}Blockly Apps{/msg}</h1>
-
-  <p>{{msg meaning="Apps.choiceIntro" desc="page text - This appears before a list of Blockly apps.  Please surround the name of Blockly with brackets so we can make it a hyperlink.  Please use the same term for &quot;Blockly&quot; as in {lb}{lb}msg-blockly|Apps.blocklyMessage{rb}{rb}."}}Blockly is a graphical programming environment.  Below are some sample applications that use Blockly.{{/msg}}
+<table><tr><td>
+  <h1><span id="title">{msg meaning="Apps.indexTitle" desc="IBID"}Blockly Apps{/msg}</span></h1>
+</td><td class="farSide">
+        <select id="languageMenu"></select></td></tr>
+<tr><td>
+  {{msg meaning="Apps.choiceIntro" desc="page text - This appears before a list of Blockly apps.  Please surround the name of Blockly with brackets so we can make it a hyperlink.  Please use the same term for &quot;Blockly&quot; as in {lb}{lb}msg-blockly|Apps.blocklyMessage{rb}{rb}."}}Blockly is a graphical programming environment.  Below are some sample applications that use Blockly.{{/msg}}</td></tr>
+</table>
 
   <table>
     <tr>

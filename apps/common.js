@@ -344,9 +344,13 @@ BlocklyApps.loadBlocks = function(defaultXml) {
  */
 BlocklyApps.changeLanguage = function() {
   // Store the blocks for the duration of the reload.
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var text = Blockly.Xml.domToText(xml);
-  window.sessionStorage.loadOnceBlocks = text;
+  // This should be skipped for the index page, which has no blocks and does
+  // not load Blockly.
+  if (typeof Blockly != 'undefined') {
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var text = Blockly.Xml.domToText(xml);
+    window.sessionStorage.loadOnceBlocks = text;
+  }
 
   var languageMenu = document.getElementById('languageMenu');
   var newLang = encodeURIComponent(

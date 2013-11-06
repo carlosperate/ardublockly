@@ -26,8 +26,10 @@
 var BlocklyAppsIndex = {};
 
 // Supported languages.
-BlocklyApps.LANGUAGES = ['en'];
+BlocklyApps.LANGUAGES = ['en', 'ru'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="generated/' +
                BlocklyApps.LANG + '.js"></script>\n');
+
+window.addEventListener('load', BlocklyApps.init);

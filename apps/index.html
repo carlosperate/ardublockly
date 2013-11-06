@@ -19,7 +19,7 @@
 <body>
   <script type="text/javascript">
     document.write(appsIndex.start({}, null,
-        {langSrc: BlocklyApps.languagePack()}));
+        {lang: BlocklyApps.LANG, langSrc: BlocklyApps.languagePack()}));
     document.title = BlocklyApps.getMsg('indexTitle');
     var match = /(.*)%1(.*)/.exec(BlocklyApps.getMsg('indexFooter'));
     if (match && match.length == 3) {
