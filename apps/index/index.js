@@ -29,7 +29,8 @@ var BlocklyAppsIndex = {};
 BlocklyApps.LANGUAGES = ['en', 'ru'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
-document.write('<script type="text/javascript" src="generated/' +
+// Relative directory "index/" needed because index.html is in parent directory.
+document.write('<script type="text/javascript" src="index/generated/' +
                BlocklyApps.LANG + '.js"></script>\n');
 
 window.addEventListener('load', BlocklyApps.init);

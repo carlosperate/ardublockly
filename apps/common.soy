@@ -12,11 +12,8 @@
  * Create en.json, keys.json, and qqq.json.
  * ../i18n/xliff_to_json.py --xlf extracted_msgs.xlf --templates common.soy {code,graph,maze,plane,puzzle,turtle}/template.soy template.soy
  *
- * Generate .js files for each project:
- * for i in code graph maze plane puzzle turtle; do ../i18n/json_to_js.py --output_dir=$i/generated --template common.soy,$i/template.soy json/*.json; done
- *
- * Generate .js for the index:
- * ../i18n/json_to_js.py --output_dir=generated --template common.soy,template.soy json/*.json
+ * Generate .js files for each project and the index:
+ * for i in code graph index maze plane puzzle turtle; do ../i18n/json_to_js.py --output_dir=$i/generated --template common.soy,$i/template.soy json/*.json; done
  */
 
 /**
