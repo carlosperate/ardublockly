@@ -1,4 +1,11 @@
 {
+    "@metadata": {
+        "authors": [
+            "Espertus",
+            "McDutchie",
+            "Shirayuki"
+        ]
+    },
     "Apps.subtitle": "A short description of Blockly.",
     "Apps.blocklyMessage": "The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (\u0411\u043bo\u043a\u043b\u0438)'.",
     "Apps.codeTooltip": "tooltip - Pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user.",
@@ -11,7 +18,7 @@
     "Apps.catLogic": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Logic logic].",
     "Apps.catLoops": "category - Blocks related to [http://en.wikipedia.org/wiki/Control_flow#Loops loops].",
     "Apps.catMath": "category - Blocks related to mathematics.",
-    "Apps.catText": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Text text processing].",
+    "Apps.catText": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Text text processing].\n{{Identical|Text}}",
     "Apps.catLists": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Lists lists].",
     "Apps.catColour": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Colour colour].",
     "Apps.catVariables": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Variables variables].",
@@ -21,12 +28,12 @@
     "Apps.hashError": "alert - A request to retrieve a stored program does not have a valid URL. %1 is the invalid portion of the URL.",
     "Apps.xmlError": "alert - There was a problem loading a file previously saved by the user.  The most likely reason for the problem is that it was created with an earlier, incompatible version of Blockly.  This message will be followed by technical information useful to engineers trying to understand the problem.",
     "Apps.listVariable": "variable name - Default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Lists list].  This should be a single word, preferably short.",
-    "Apps.textVariable": "variable name - Default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short.",
+    "Apps.textVariable": "variable name - Default [https://code.google.com/p/blockly/wiki/Variables variable] representing a [https://code.google.com/p/blockly/wiki/Text piece of text].  This should be a single word, preferably short.\n{{Identical|Text}}",
     "Code.badXml": "alert - Message shown when the user tries switching from the XML tab after entering XML text that could not be parsed.  This asks whether they wish to abandon the XML they added.  If they select 'OK' (or the translated equivalent), the XML is cleared, and the other tab is shown.  If they select 'Cancel', they remain on the XML tab with the bad XML.\n\nUsed in JavaScript \u003Ccode\u003Ewindow.confirm()\u003C/code\u003E.",
     "Code.badCode": "alert - Message shown if an error occurs while interpreting the user program.  The error description follows.",
     "Code.timeout": "alert - Message shown if the program has run for more than the permitted number of steps.  This exists so that programs with infinite loops do not run forever.",
     "Code.discard": "alert - Message shown after the user clicks on the 'discard all' icon.  Selecting 'OK' (or the translated equivalent) causes all of the blocks to be discarded.  Selecting 'Cancel' prevents blocks from being deleted.\n\nParameters:\n* %1 - number of blocks to be deleted. It is always an integer greater than or equal to 2.",
-    "Code.title": "title - Title of this application, indicating that it is for writing arbitrary programs.",
+    "Code.title": "title - Title of this application, indicating that it is for writing arbitrary programs.\n{{Identical|Code}}",
     "Code.blocks": "tab text - Displays and allows editing of the user's program as blocks.",
     "Code.trashTooltip": "tooltip - Clicking on this causes the user program to be discarded.",
     "Graph.title": "title - Brief title for this graphic calculator application.",
@@ -142,9 +149,9 @@
     "Turtle.captureTooltip": "tooltip - Pressing this button causes the drawing created by the user's program to be saved as an image on the user's computer.  The button icon looks like a camera.",
     "Turtle.imgFilename": "filename - The name of the image file containing the user's drawing.  It must end with '.png'.",
     "Turtle.catTurtle": "category - Blocks related to Turtle commands.",
-    "Apps.indexTitle": "page text - The word &quot;Apps&quot; is short for &quot;Applications&quot;.  We chose it because it is more informal.  This and the following messages currently appear at [http://blockly-demo.appspot.com/static/apps/index.html].",
+    "Apps.indexTitle": "page text - The word \u0026quot;Apps\u0026quot; is short for \u0026quot;Applications\u0026quot;.  We chose it because it is more informal.  This and the following messages currently appear at [http://blockly-demo.appspot.com/static/apps/index.html].",
     "Apps.indexFooter": "page text - Text appearing at the end of the page.  %1 will be replaced with the Blockly URL.",
-    "Apps.choiceIntro": "page text - This appears before a list of Blockly apps.  Please surround the name of Blockly with brackets so we can make it a hyperlink.  Please use the same term for &quot;Blockly&quot; as in {{msg-blockly|Apps.blocklyMessage}}.",
+    "Apps.choiceIntro": "page text - This appears before a list of Blockly apps.  Please surround the name of Blockly with brackets so we can make it a hyperlink.  Please use the same term for \u0026quot;Blockly\u0026quot; as in {{msg-blockly|Apps.blocklyMessage}}.",
     "Apps.puzzleSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/puzzle/index.html Puzzle application].",
     "Apps.mazeSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/maze/index.html Maze application].",
     "Apps.turtleSubtitle": "page text - A subtitle describing Blockly's [https://blockly-demo.appspot.com/static/apps/turtle/index.html Turtle application].",
