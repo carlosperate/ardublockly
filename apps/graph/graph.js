@@ -33,7 +33,7 @@ if (typeof google == 'object') {
 
 // Supported languages.
 BlocklyApps.LANGUAGES = ['en', 'de', 'es', 'fa', 'fr', 'hu', 'it',
-                         'pt-br', 'ru', 'uk', 'vi', 'zh-hans'];
+                         'pt-br', 'ro', 'ru', 'uk', 'vi', 'zh-hans'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="generated/' +

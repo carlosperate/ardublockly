@@ -52,6 +52,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'he': 'עברית',
   'hu': 'Magyar',
   'ia': 'Interlingua',
+  'id': 'Bahasa Indonesia',
   'it': 'Italiano',
   'ja': '日本語',
   'ka': 'ქართული',
@@ -101,6 +102,7 @@ BlocklyApps.LANGUAGE_RTL = ['ar', 'fa', 'he', 'mzn', 'ps'];
  * Lookup for Blockly core block language pack.
  */
 BlocklyApps.LANGUAGE_PACK = {
+  'ar': 'msg/js/ar.js',
   'cdo': 'msg/js/zh_tw.js',
   'de': 'msg/js/de.js',
   'es': 'msg/js/es.js',
@@ -108,11 +110,13 @@ BlocklyApps.LANGUAGE_PACK = {
   'fr': 'msg/js/fr.js',
   'frr': 'msg/js/de.js',
   'hu': 'msg/js/hu.js',
+  'id': 'msg/js/id.js',
   'it': 'msg/js/it.js',
   'ksh': 'msg/js/de.js',
   'lb': 'msg/js/de.js',
   'pt': 'msg/js/pt_br.js',
   'pt-br': 'msg/js/pt_br.js',
+  'ro': 'msg/js/ro.js',
   'ru': 'msg/js/ru.js',
   'uk': 'msg/js/uk.js',
   'vi': 'msg/js/vi.js',
