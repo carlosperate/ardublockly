@@ -2,7 +2,7 @@
 
 'use strict';
 
-goog.provide('Blockly.Msg.zh_tw');
+goog.provide('Blockly.Msg.zh-hant');
 
 goog.require('Blockly.Msg');
 
@@ -30,9 +30,9 @@ Blockly.Msg.COLOUR_RGB_TOOLTIP = "Create a colour with the specified amount of r
 Blockly.Msg.CONTROLS_FLOW_STATEMENTS_HELPURL = "https://code.google.com/p/blockly/wiki/Loops#Loop_Termination_Blocks";  // untranslated
 Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK = "停止 迴圈";
 Blockly.Msg.CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE = "繼續下一個 迴圈";
-Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = "Break out of the containing loop.";  // untranslated
-Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = "Skip the rest of this loop, and continue with the next iteration.";  // untranslated
-Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING = "Warning: This block may only be used within a loop.";  // untranslated
+Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK = "離開包含的回圈";
+Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE = "跳過這個迴圈的其餘步驟，並繼續下一次的迴圈運算。";
+Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING = "警告： 此積木僅可用於迴圈內。";
 Blockly.Msg.CONTROLS_FOREACH_HELPURL = "https://code.google.com/p/blockly/wiki/Loops#for_each for each block";  // untranslated
 Blockly.Msg.CONTROLS_FOREACH_INPUT_INLIST = "自列表";
 Blockly.Msg.CONTROLS_FOREACH_INPUT_INLIST_TAIL = "";
@@ -42,28 +42,28 @@ Blockly.Msg.CONTROLS_FOR_HELPURL = "https://code.google.com/p/blockly/wiki/Loops
 Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY = "從範圍 %1 到 %2 每隔 %3";
 Blockly.Msg.CONTROLS_FOR_INPUT_WITH = "使用";
 Blockly.Msg.CONTROLS_FOR_TOOLTIP = "Have the variable %1 take on the values from the start number to the end number, counting by the specified interval, and do the specified blocks.";  // untranslated
-Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP = "Add a condition to the if block.";  // untranslated
-Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP = "Add a final, catch-all condition to the if block.";  // untranslated
+Blockly.Msg.CONTROLS_IF_ELSEIF_TOOLTIP = "將條件添加到'如果'積木。";
+Blockly.Msg.CONTROLS_IF_ELSE_TOOLTIP = "加入一個最終，所有條件下都都執行的區塊到'如果'積木中";
 Blockly.Msg.CONTROLS_IF_HELPURL = "http://code.google.com/p/blockly/wiki/If_Then";  // untranslated
-Blockly.Msg.CONTROLS_IF_IF_TOOLTIP = "Add, remove, or reorder sections to reconfigure this if block.";  // untranslated
+Blockly.Msg.CONTROLS_IF_IF_TOOLTIP = "添加、 刪除或重新排列各區塊來此重新配置這個'如果'積木。";
 Blockly.Msg.CONTROLS_IF_MSG_ELSE = "否則";
 Blockly.Msg.CONTROLS_IF_MSG_ELSEIF = "否則如果";
 Blockly.Msg.CONTROLS_IF_MSG_IF = "如果";
-Blockly.Msg.CONTROLS_IF_TOOLTIP_1 = "If a value is true, then do some statements.";  // untranslated
-Blockly.Msg.CONTROLS_IF_TOOLTIP_2 = "If a value is true, then do the first block of statements.  Otherwise, do the second block of statements.";  // untranslated
-Blockly.Msg.CONTROLS_IF_TOOLTIP_3 = "If the first value is true, then do the first block of statements.  Otherwise, if the second value is true, do the second block of statements.";  // untranslated
-Blockly.Msg.CONTROLS_IF_TOOLTIP_4 = "If the first value is true, then do the first block of statements.  Otherwise, if the second value is true, do the second block of statements.  If none of the values are true, do the last block of statements.";  // untranslated
+Blockly.Msg.CONTROLS_IF_TOOLTIP_1 = "當值為真時，執行一些語句";
+Blockly.Msg.CONTROLS_IF_TOOLTIP_2 = "當值為真時，執行第一個語句，否則則執行第二個語句";
+Blockly.Msg.CONTROLS_IF_TOOLTIP_3 = "如果第一個值為真，則執行第一個語句。否則當第二個值為真時，則執行第二個語句";
+Blockly.Msg.CONTROLS_IF_TOOLTIP_4 = "如果第一個值為真，則執行第一個語句。否則當第二個值為真時，則執行第二個語句。如果前幾個敘述都不為真，則執行最後一個語句";
 Blockly.Msg.CONTROLS_REPEAT_HELPURL = "http://en.wikipedia.org/wiki/For_loop";  // untranslated
 Blockly.Msg.CONTROLS_REPEAT_INPUT_DO = "執行";
 Blockly.Msg.CONTROLS_REPEAT_TITLE = "重複 %1 次數";
 Blockly.Msg.CONTROLS_REPEAT_TITLE_REPEAT = "重複";
 Blockly.Msg.CONTROLS_REPEAT_TITLE_TIMES = "次數";
-Blockly.Msg.CONTROLS_REPEAT_TOOLTIP = "Do some statements several times.";  // untranslated
+Blockly.Msg.CONTROLS_REPEAT_TOOLTIP = "多次執行一些語句";
 Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL = "http://code.google.com/p/blockly/wiki/Repeat";  // untranslated
 Blockly.Msg.CONTROLS_WHILEUNTIL_OPERATOR_UNTIL = "重複 直到";
 Blockly.Msg.CONTROLS_WHILEUNTIL_OPERATOR_WHILE = "重複 當";
-Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = "While a value is false, then do some statements.";  // untranslated
-Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = "While a value is true, then do some statements.";  // untranslated
+Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL = "當值為否時，執行一些語句";
+Blockly.Msg.CONTROLS_WHILEUNTIL_TOOLTIP_WHILE = "當值為真時，執行一些語句";
 Blockly.Msg.DELETE_BLOCK = "刪除積木";
 Blockly.Msg.DELETE_X_BLOCKS = "刪除 %1 塊積木";
 Blockly.Msg.DISABLE_BLOCK = "停用積木";
@@ -148,12 +148,12 @@ Blockly.Msg.LOGIC_BOOLEAN_HELPURL = "http://code.google.com/p/blockly/wiki/True_
 Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP = "Returns either true or false.";  // untranslated
 Blockly.Msg.LOGIC_BOOLEAN_TRUE = "是";
 Blockly.Msg.LOGIC_COMPARE_HELPURL = "http://en.wikipedia.org/wiki/Inequality_(mathematics)";  // untranslated
-Blockly.Msg.LOGIC_COMPARE_TOOLTIP_EQ = "Return true if both inputs equal each other.";  // untranslated
+Blockly.Msg.LOGIC_COMPARE_TOOLTIP_EQ = "如果這兩個輸入區塊內容相等，返回 真。";
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GT = "Return true if the first input is greater than the second input.";  // untranslated
 Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GTE = "Return true if the first input is greater than or equal to the second input.";  // untranslated
-Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LT = "Return true if the first input is smaller than the second input.";  // untranslated
-Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LTE = "Return true if the first input is smaller than or equal to the second input.";  // untranslated
-Blockly.Msg.LOGIC_COMPARE_TOOLTIP_NEQ = "Return true if both inputs are not equal to each other.";  // untranslated
+Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LT = "如果第一個輸入小於第二個輸入，返回 真。";
+Blockly.Msg.LOGIC_COMPARE_TOOLTIP_LTE = "如果第一個輸入是小於或等於第二個輸入，返回 真。";
+Blockly.Msg.LOGIC_COMPARE_TOOLTIP_NEQ = "如果這兩個輸入區塊內容不相等，返回 真。";
 Blockly.Msg.LOGIC_NEGATE_HELPURL = "http://code.google.com/p/blockly/wiki/Not";  // untranslated
 Blockly.Msg.LOGIC_NEGATE_TITLE = "非 %1";
 Blockly.Msg.LOGIC_NEGATE_TOOLTIP = "Returns true if the input is false.  Returns false if the input is true.";  // untranslated
