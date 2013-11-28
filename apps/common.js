@@ -89,8 +89,8 @@ BlocklyApps.LANGUAGE_NAME = {
   'tr': 'Türkçe',
   'uk': 'Українська',
   'vi': 'Tiếng Việt',
-  'zh-hans': '简体字',
-  'zh-hant': '中文',
+  'zh-hans': '中文',
+  'zh-hant': '简体字',
   'zh-tw': '國語'
 };
 
