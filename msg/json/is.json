@@ -280,7 +280,7 @@
     "PROCEDURES_DEFNORETURN_TOOLTIP": "Býr til fall sem skilar engu.",
     "PROCEDURES_DEFRETURN_RETURN": "skila",
     "PROCEDURES_DEFRETURN_TOOLTIP": "Býr til fall sem skilar úttaki.",
-    "PROCEDURES_DEF_DUPLICATE_WARNING": "Aðvörun: Þetta fall er með tvíteknar færibreytur.",
+    "PROCEDURES_DEF_DUPLICATE_WARNING": "Aðvörun: Þetta fall er með tvítekna stika.",
     "PROCEDURES_CALLNORETURN_HELPURL": "http://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
     "PROCEDURES_CALLNORETURN_TOOLTIP": "Keyra heimatilbúna fallið '%1'.",
     "PROCEDURES_CALLRETURN_HELPURL": "http://en.wikipedia.org/wiki/Procedure_%28computer_science%29",

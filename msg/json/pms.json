@@ -109,5 +109,8 @@
     "MATH_SINGLE_TOOLTIP_LOG10": "A smon ël logaritm an base 10 d'un nùmer.",
     "MATH_SINGLE_TOOLTIP_EXP": "A smon e a la potensa d'un nùmer.",
     "MATH_SINGLE_TOOLTIP_POW10": "A smon 10 a la potensa d'un nùmer.",
-    "MATH_TRIG_HELPURL": "http://en.wikipedia.org/wiki/Trigonometric_functions"
+    "MATH_TRIG_HELPURL": "http://en.wikipedia.org/wiki/Trigonometric_functions",
+    "MATH_TRIG_TOOLTIP_SIN": "A smon ël sen ëd n'àngol an gré (pa an radiant).",
+    "MATH_TRIG_TOOLTIP_COS": "A smon ël cosen ëd n'àngol an gré (pa an radiant).",
+    "MATH_TRIG_TOOLTIP_TAN": "A smon la tangenta ëd n'àngol an gré (pa an radiant)."
 }
