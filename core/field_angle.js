@@ -64,6 +64,15 @@ Blockly.FieldAngle = function(text, opt_changeHandler) {
 goog.inherits(Blockly.FieldAngle, Blockly.FieldTextInput);
 
 /**
+ * Clone this FieldAngle.
+ * @return {!Blockly.FieldAngle} The result of calling the constructor again
+ *   with the current values of the arguments used during construction.
+ */
+Blockly.FieldAngle.prototype.clone = function() {
+  return new Blockly.FieldAngle(this.getText(), this.changeHandler_);
+};
+
+/**
  * Round angles to the nearest 15 degrees when using mouse.
  * Set to 0 to disable rounding.
  */

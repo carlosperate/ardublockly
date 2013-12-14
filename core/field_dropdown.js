@@ -57,6 +57,15 @@ Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
 goog.inherits(Blockly.FieldDropdown, Blockly.Field);
 
 /**
+ * Clone this FieldDropdown.
+ * @return {!Blockly.FieldDropdown} The result of calling the constructor again
+ *   with the current values of the arguments used during construction.
+ */
+Blockly.FieldDropdown.prototype.clone = function() {
+  return new Blockly.FieldDropdown(this.menuGenerator_, this.changeHandler_);
+};
+
+/**
  * Create the dropdown field's elements.  Only needs to be called once.
  * @return {!Element} The field's SVG group.
  */

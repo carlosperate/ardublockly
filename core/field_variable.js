@@ -72,6 +72,14 @@ Blockly.FieldVariable = function(varname, opt_changeHandler) {
 };
 goog.inherits(Blockly.FieldVariable, Blockly.FieldDropdown);
 
+/**
+ * Clone this FieldVariable.
+ * @return {!Blockly.FieldVariable} The result of calling the constructor again
+ *   with the current values of the arguments used during construction.
+ */
+Blockly.FieldVariable.prototype.clone = function() {
+  return new Blockly.FieldVariable(this.getValue(), this.changeHandler_);
+};
 
 /**
  * Get the variable's name (use a variableDB to convert into a real name).
