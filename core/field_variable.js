@@ -35,7 +35,8 @@ goog.require('Blockly.Variables');
  * @param {!string} varname The default name for the variable.  If null,
  *     a unique variable name will be generated.
  * @param {Function} opt_changeHandler A function that is executed when a new
- *     option is selected.
+ *     option is selected.  Its sole argument is the new option value.  Its
+ *     return value is ignored.
  * @extends {Blockly.FieldDropdown}
  * @constructor
  */
