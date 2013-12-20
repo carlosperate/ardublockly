@@ -30,8 +30,8 @@ var Turtle = {};
 
 // Supported languages.
 BlocklyApps.LANGUAGES =
-    ['ar', 'ca', 'da', 'de', 'el', 'en', 'es', 'fa', 'fr', 'hu', 'is', 'it',
-     'ko', 'nl', 'pt-br', 'ro', 'ru', 'sv', 'tr', 'uk', 'vi',
+    ['ar', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'fa', 'fr', 'hu', 'is',
+     'it', 'ko', 'ms', 'nl', 'pt-br', 'ro', 'ru', 'sv', 'tr', 'uk', 'vi',
      'zh-hans', 'zh-hant'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
