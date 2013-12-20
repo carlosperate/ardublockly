@@ -112,7 +112,7 @@ Turtle.init = function() {
       '  <block type="draw_move" x="70" y="70">' +
       '    <value name="VALUE">' +
       '      <block type="math_number">' +
-      '        <title name="NUM">100</title>' +
+      '        <field name="NUM">100</field>' +
       '      </block>' +
       '    </value>' +
       '  </block>' +
