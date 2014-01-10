@@ -568,7 +568,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
     }
     options.push(duplicateOption);
 
-    if (Blockly.Comment && !this.collapsed_) {
+    if (this.isEditable() && !this.collapsed_) {
       // Option to add/remove a comment.
       var commentOption = {enabled: true};
       if (this.comment) {
