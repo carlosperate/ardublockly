@@ -7,8 +7,9 @@ goog.provide('Blockly.Msg.tr');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Yorum Ekle";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Değeri değiştir:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Bu kutuya yazarak iş birlikçin ile sohbet et!";
 Blockly.Msg.COLLAPSE_ALL = "Blokları Daralt";
 Blockly.Msg.COLLAPSE_BLOCK = "Blok'u Daralt";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "renk 1";
@@ -339,9 +340,9 @@ Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = "Kullanıcıdan yazım al , istek mesajıyla
 Blockly.Msg.TEXT_TEXT_HELPURL = "https://en.wikipedia.org/wiki/String_(computer_science)";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "Metnin bir harfi,kelimesi veya satırı.";
 Blockly.Msg.TEXT_TRIM_HELPURL = "https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces";
-Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "İki tarafdan da boşlukları düzenle";
-Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "Soldan boşlukları düzenle";
-Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "Sağdan boşlukları düzenle";
+Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "iki tarafından da boşlukları temizle";
+Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "solundan boşlukları temizle";
+Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "sağından boşlukları temizle";
 Blockly.Msg.TEXT_TRIM_TOOLTIP = "Metnin bir veya her iki sondan da boşlukları silinmiş şekilde kopyasını verir.";
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "öge";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "'set %1' oluştur";

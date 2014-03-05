@@ -7,8 +7,9 @@ goog.provide('Blockly.Msg.es');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Añadir comentario";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Cambiar el valor:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "¡Chatea con tu colaborador escribiendo en este cuadro!";
 Blockly.Msg.COLLAPSE_ALL = "Contraer bloques";
 Blockly.Msg.COLLAPSE_BLOCK = "Contraer bloque";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "color 1";

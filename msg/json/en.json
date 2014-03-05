@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2014-01-31 15:37:04.971275",
+        "lastupdated": "2014-03-05 12:30:21.390260",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -21,6 +21,7 @@
     "ENABLE_BLOCK": "Enable Block",
     "HELP": "Help",
     "CHAT": "Chat with your collaborator by typing in this box!",
+    "AUTH": "Please authorize this app to enable your work to be saved and to allow it to be shared by you.",
     "CHANGE_VALUE_TITLE": "Change value:",
     "NEW_VARIABLE": "New variable...",
     "NEW_VARIABLE_TITLE": "New variable name:",

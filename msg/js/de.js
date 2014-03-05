@@ -7,6 +7,7 @@ goog.provide('Blockly.Msg.de');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Kommentar hinzufügen";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Wert ändern:";
 Blockly.Msg.CHAT = "Chatte mit unserem Mitarbeiter durch Eingeben von Text in diesen Kasten!";
 Blockly.Msg.COLLAPSE_ALL = "Collapse Blocks";

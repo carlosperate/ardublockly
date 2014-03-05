@@ -7,6 +7,7 @@ goog.provide('Blockly.Msg.sq');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Vendos nje Koment";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Ndrysho Vlerat:";
 Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
 Blockly.Msg.COLLAPSE_ALL = "Mbyll blloqet";

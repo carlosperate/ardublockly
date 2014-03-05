@@ -7,8 +7,9 @@ goog.provide('Blockly.Msg.pl');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Dodaj komentarz";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Zmień wartość:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Rozmawiaj z swoim współpracownikiem, pisząc w tym polu!";
 Blockly.Msg.COLLAPSE_ALL = "Zwiń bloki";
 Blockly.Msg.COLLAPSE_BLOCK = "Zwiń blok";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "kolor 1";
@@ -339,9 +340,9 @@ Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = "poproś o tekst z tą wiadomością";
 Blockly.Msg.TEXT_TEXT_HELPURL = "https://en.wikipedia.org/wiki/String_(computer_science)";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "Litera, wyraz lub linia tekstu.";
 Blockly.Msg.TEXT_TRIM_HELPURL = "https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces";
-Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "usuń spacje po obu stronach tekstu";
-Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "usuń spacje z lewej strony tekstu";
-Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "usuń spacje z prawej strony tekstu";
+Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "usuń spacje po obu stronach";
+Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "usuń spacje z lewej strony";
+Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "usuń spacje z prawej strony";
 Blockly.Msg.TEXT_TRIM_TOOLTIP = "Zwróć kopię tekstu z usuniętymi spacjami z jednego lub z obu końców tekstu.";
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "element";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "Utwórz blok 'ustaw %1'";

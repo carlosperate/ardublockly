@@ -7,8 +7,9 @@ goog.provide('Blockly.Msg.sv');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Lägg till kommentar";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Ändra värde:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Chatta med din medarbetare genom att skriva i detta fält.";
 Blockly.Msg.COLLAPSE_ALL = "Fäll ihop block";
 Blockly.Msg.COLLAPSE_BLOCK = "Fäll ihop block";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "färg 1";

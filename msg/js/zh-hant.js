@@ -7,6 +7,7 @@ goog.provide('Blockly.Msg.zh-hant');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "加入註解";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "修改值:";
 Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
 Blockly.Msg.COLLAPSE_ALL = "收合積木";

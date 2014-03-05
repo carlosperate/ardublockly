@@ -7,8 +7,9 @@ goog.provide('Blockly.Msg.ms');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Berikan Komen";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Ubah nilai:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Bersembang dengan rakan kerjasama anda dengan menaip di dalam petak ini!";
 Blockly.Msg.COLLAPSE_ALL = "Lipat Blok²";
 Blockly.Msg.COLLAPSE_BLOCK = "Lipat Blok";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "warna 1";

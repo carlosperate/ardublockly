@@ -7,8 +7,9 @@ goog.provide('Blockly.Msg.uk');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Додати коментар";
+Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Змінити значення:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Спілкуйтеся з вашими співавторами, набираючи у цьому полі!";
 Blockly.Msg.COLLAPSE_ALL = "Згорнути блоки";
 Blockly.Msg.COLLAPSE_BLOCK = "Згорнути блок";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "колір 1";
@@ -339,7 +340,7 @@ Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = "запит на текст з повідо�
 Blockly.Msg.TEXT_TEXT_HELPURL = "https://uk.wikipedia.org/wiki/Рядок_(програмування)";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "Символ, слово або рядок тексту.";
 Blockly.Msg.TEXT_TRIM_HELPURL = "http://www.liv.ac.uk/HPC/HTMLF90Course/HTMLF90CourseNotesnode91.html";
-Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "викидати крайні пробіли з обох сторін";
+Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "викидайте крайні пробіли з обох сторін";
 Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "вилучати пробіли з лівого боку";
 Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "вилучати пробіли з правого боку";
 Blockly.Msg.TEXT_TRIM_TOOLTIP = "Повертає копію тексту з пробілами вилученими від одного або обох кінців.";
