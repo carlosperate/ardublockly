@@ -49,6 +49,13 @@ rtclient.INSTALL_SCOPE = 'https://www.googleapis.com/auth/drive.install';
 rtclient.FILE_SCOPE = 'https://www.googleapis.com/auth/drive.file';
 
 /**
+ * OAuth 2.0 scope for accessing the appdata folder, a hidden folder private
+ * to this app.
+ * @const
+ */
+rtclient.APPDATA_SCOPE = 'https://www.googleapis.com/auth/drive.appdata';
+
+/**
  * OAuth 2.0 scope for accessing the user's ID.
  * @const
  */
@@ -59,6 +66,13 @@ rtclient.OPENID_SCOPE = 'openid';
  * @const
  */
 rtclient.REALTIME_MIMETYPE = 'application/vnd.google-apps.drive-sdk';
+
+/**
+ * Key used to store the folder id of the Drive folder in which we will store
+ * Realtime files.
+ * @type {string}
+ */
+rtclient.FOLDER_KEY = 'folderId';
 
 /**
  * Parses the hash parameters to this page and returns them as an object.
@@ -165,7 +179,8 @@ rtclient.Authorizer.prototype.authorize = function(onAuthComplete) {
       'scope': [
         rtclient.INSTALL_SCOPE,
         rtclient.FILE_SCOPE,
-        rtclient.OPENID_SCOPE
+        rtclient.OPENID_SCOPE,
+        rtclient.APPDATA_SCOPE
       ],
       'user_id': userId,
       'immediate': false
@@ -177,7 +192,8 @@ rtclient.Authorizer.prototype.authorize = function(onAuthComplete) {
     'scope': [
       rtclient.INSTALL_SCOPE,
       rtclient.FILE_SCOPE,
-      rtclient.OPENID_SCOPE
+      rtclient.OPENID_SCOPE,
+      rtclient.APPDATA_SCOPE
     ],
     'user_id': userId,
     'immediate': true
@@ -207,16 +223,79 @@ rtclient.Authorizer.prototype.fetchUserId = function(callback) {
  * Creates a new Realtime file.
  * @param {string} title Title of the newly created file.
  * @param {string} mimeType The MIME type of the new file.
+ * @param {string} folderTitle Title of the folder to place the file in.
  * @param {Function} callback The callback to call after creation.
  */
-rtclient.createRealtimeFile = function(title, mimeType, callback) {
-  gapi.client.load('drive', 'v2', function() {
+rtclient.createRealtimeFile = function(title, mimeType, folderTitle, callback) {
+
+  function insertFile(folderId) {
     gapi.client.drive.files.insert({
       'resource': {
         'mimeType': mimeType,
-        'title': title
+        'title': title,
+        'parents': [{'id': folderId}]
       }
     }).execute(callback);
+  }
+
+  function getOrCreateFolder() {
+
+    function storeInAppdataProperty(folderId) {
+      // Store folder id in a custom property of the appdata folder.  The
+      // 'appdata' folder is a special Google Drive folder that is only
+      // accessible by a specific app (i.e. identified by the client id).
+      gapi.client.drive.properties.insert({
+        'fileId': 'appdata',
+        'resource': { 'key': rtclient.FOLDER_KEY, 'value': folderId }
+      }).execute(function(resp) {
+        insertFile(folderId);
+      });
+    };
+
+    function createFolder() {
+      gapi.client.drive.files.insert({
+        'resource': {
+          'mimeType': 'application/vnd.google-apps.folder',
+          'title': folderTitle
+        }
+      }).execute(function(folder) {
+        storeInAppdataProperty(folder.id);
+      });
+    }
+
+    // Get the folder id from the appdata properties.
+    gapi.client.drive.properties.get({
+      'fileId': 'appdata',
+      'propertyKey': rtclient.FOLDER_KEY
+    }).execute(function(resp) {
+       if (resp.error) {
+        // There's no folder id stored yet so we create a new folder if a
+        // folderTitle has been supplied.
+        if (folderTitle) {
+          createFolder();
+        } else {
+          // There's no folder specified, so we just store the file in the
+          // user's root folder.
+          storeInAppdataProperty('root');
+        }
+      } else {
+         var folderId = resp.result.value;
+         gapi.client.drive.files.get({
+           'fileId': folderId
+         }).execute(function(resp) {
+           if (resp.error || resp.labels.trashed) {
+             // Folder doesn't exist or was deleted, so create a new one.
+             createFolder();
+           } else {
+             insertFile(folderId);
+           }
+         });
+      }
+    });
+  }
+
+  gapi.client.load('drive', 'v2', function() {
+    getOrCreateFolder();
   });
 };
 
@@ -265,9 +344,11 @@ rtclient.parseState = function(stateParam) {
  *    2. "initializeModel", the callback to call when the file is loaded.
  *    3. "onFileLoaded", the callback to call when the model is first created.
  *
- * and one key is optional:
+ * and two keys are optional:
  *
  *    1. "defaultTitle", the title of newly created Realtime files.
+ *    2. "defaultFolderTitle", the folder to place in which to place newly
+ *       created Realtime files.
  */
 rtclient.RealtimeLoader = function(options) {
   // Initialize configuration variables.
@@ -282,6 +363,8 @@ rtclient.RealtimeLoader = function(options) {
   this.autoCreate = rtclient.getOption(options, 'autoCreate', false);
   this.defaultTitle = rtclient.getOption(options, 'defaultTitle',
       'New Realtime File');
+  this.defaultFolderTitle = rtclient.getOption(options, 'defaultFolderTitle',
+      '');
   this.afterCreate = rtclient.getOption(options, 'afterCreate', function() {});
   this.authorizer = new rtclient.Authorizer(options);
 };
@@ -399,6 +482,7 @@ rtclient.RealtimeLoader.prototype.createNewFileAndRedirect = function() {
   // redirect to it.
   var _this = this;
   rtclient.createRealtimeFile(this.defaultTitle, this.newFileMimeType,
+      this.defaultFolderTitle,
       function(file) {
         if (file.id) {
           if (_this.afterCreate) {

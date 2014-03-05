@@ -468,9 +468,7 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
   this.svg_.getRootElement().setAttribute('transform',
       'translate(' + (xy.x + dx) + ', ' + (xy.y + dy) + ')');
   this.moveConnections_(dx, dy);
-  if (Blockly.Realtime.isEnabled() && !Blockly.Realtime.withinSync) {
-    Blockly.Realtime.blockChanged(this);
-  }
+  Blockly.Realtime.blockChanged(this);
 };
 
 /**
@@ -1864,7 +1862,5 @@ Blockly.Block.prototype.render = function() {
   goog.asserts.assertObject(this.svg_,
       'Uninitialized block cannot be rendered.  Call block.initSvg()');
   this.svg_.render();
-  if (Blockly.Realtime.isEnabled() && !Blockly.Realtime.withinSync) {
-    Blockly.Realtime.blockChanged(this);
-  }
+  Blockly.Realtime.blockChanged(this);
 };

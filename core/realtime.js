@@ -211,29 +211,28 @@ Blockly.Realtime.getBlockById = function(id) {
  * @param {gapi.drive.realtime.BaseModelEvent} evt The event that occurred.
  * @private
  */
-Blockly.Realtime.logEvent_ = function (evt) {
-  console.log("Object event:");
-  console.log("  id: " + evt.target.id);
-  console.log("  type: " + evt.type);
+Blockly.Realtime.logEvent_ = function(evt) {
+  console.log('Object event:');
+  console.log('  id: ' + evt.target.id);
+  console.log('  type: ' + evt.type);
   var events = evt.events;
   if (events) {
     var eventCount = events.length;
     for (var i = 0; i < eventCount; i++) {
       var event = events[i];
-      console.log("  child event:");
-      console.log("    id: " + event.target.id);
-      console.log("    type: " + event.type);
+      console.log('  child event:');
+      console.log('    id: ' + event.target.id);
+      console.log('    type: ' + event.type);
     }
   }
 };
 
 /**
  * Event handler to call when a block is changed.
- * @param {gapi.drive.realtime.ObjectChangedEvent} evt The event that occurred.
+ * @param {!gapi.drive.realtime.ObjectChangedEvent} evt The event that occurred.
  * @private
  */
 Blockly.Realtime.onObjectChange_ = function(evt) {
-  Blockly.Realtime.logEvent_(evt);
   var events = evt.events;
   var eventCount = evt.events.length;
   for (var i = 0; i < eventCount; i++) {
@@ -269,9 +268,6 @@ Blockly.Realtime.onObjectChange_ = function(evt) {
  * @private
  */
 Blockly.Realtime.onBlocksMapChange_ = function(evt) {
-  Blockly.Realtime.logEvent_(evt);
-//  console.log('Blocks Map event:');
-//  console.log('  id: ' + evt.property);
   if (!evt.isLocal || Blockly.Realtime.withinUndo_) {
     var block = evt.newValue;
     if (block) {
@@ -378,7 +374,9 @@ Blockly.Realtime.loadBlocks_ = function() {
  * @param {!Blockly.Block} block The block that changed.
  */
 Blockly.Realtime.blockChanged = function(block) {
-  if (block.workspace == Blockly.mainWorkspace) {
+  if (block.workspace == Blockly.mainWorkspace &&
+      Blockly.Realtime.isEnabled() &&
+      !Blockly.Realtime.withinSync) {
     var rootBlock = block.getRootBlock();
     var xy = rootBlock.getRelativeToSurfaceXY();
     var changed = false;
@@ -600,59 +598,64 @@ Blockly.Realtime.rtclientOptions_ = {
    * Client ID from the console.
    * This will be set from the options passed into Blockly.Realtime.start()
    */
-  clientId: null,
+  'clientId': null,
 
   /**
    * The ID of the button to click to authorize. Must be a DOM element ID.
    */
-  authButtonElementId: 'authorizeButton',
+  'authButtonElementId': 'authorizeButton',
 
   /**
    * The ID of the container of the authorize button.
    */
-  authDivElementId: 'authButtonDiv',
+  'authDivElementId': 'authButtonDiv',
 
   /**
    * Function to be called when a Realtime model is first created.
    */
-  initializeModel: Blockly.Realtime.initializeModel_,
+  'initializeModel': Blockly.Realtime.initializeModel_,
 
   /**
    * Autocreate files right after auth automatically.
    */
-  autoCreate: true,
+  'autoCreate': true,
 
   /**
    * The name of newly created Drive files.
    */
-  defaultTitle: 'New Realtime Blockly File',
+  'defaultTitle': 'Realtime Blockly File',
+
+  /**
+   * The name of the folder to place newly created Drive files in.
+   */
+  'defaultFolderTitle': 'Realtime Blockly Folder',
 
   /**
    * The MIME type of newly created Drive Files. By default the application
    * specific MIME type will be used:
    *     application/vnd.google-apps.drive-sdk.
    */
-  newFileMimeType: null, // Using default.
+  'newFileMimeType': null, // Using default.
 
   /**
    * Function to be called every time a Realtime file is loaded.
    */
-  onFileLoaded: Blockly.Realtime.onFileLoaded_,
+  'onFileLoaded': Blockly.Realtime.onFileLoaded_,
 
   /**
    * Function to be called to initialize custom Collaborative Objects types.
    */
-  registerTypes: Blockly.Realtime.registerTypes_,
+  'registerTypes': Blockly.Realtime.registerTypes_,
 
   /**
    * Function to be called after authorization and before loading files.
    */
-  afterAuth: Blockly.Realtime.afterAuth_,
+  'afterAuth': Blockly.Realtime.afterAuth_,
 
   /**
    * Function to be called after file creation, if autoCreate is true.
    */
-  afterCreate: Blockly.Realtime.afterCreate_
+  'afterCreate': Blockly.Realtime.afterCreate_
 };
 
 /**
