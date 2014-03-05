@@ -41,6 +41,7 @@ goog.require('goog.array');
 goog.require('goog.style');
 goog.require('rtclient');
 
+
 /**
  * Is realtime collaboration enabled?
  * @type {boolean}
@@ -143,8 +144,7 @@ Blockly.Realtime.redoElementId_ = null;
  * This function is called the first time that the Realtime model is created
  * for a file. This function should be used to initialize any values of the
  * model.
- * @param {gapi.drive.realtime.Model} model The Realtime root model
- *     object.
+ * @param {!gapi.drive.realtime.Model} model The Realtime root model object.
  * @private
  */
 Blockly.Realtime.initializeModel_ = function(model) {
@@ -188,7 +188,7 @@ Blockly.Realtime.removeTopBlock = function(block) {
 /**
  * Obtain a newly created block known by the Realtime API.
  * @param {!Blockly.Workspace} workspace The workspace to put the block in.
- * @param {string} prototypeName The name of the prototype for the block
+ * @param {string} prototypeName The name of the prototype for the block.
  * @return {!Blockly.Block}
  */
 Blockly.Realtime.obtainBlock = function(workspace, prototypeName) {
@@ -265,7 +265,7 @@ Blockly.Realtime.onObjectChange_ = function(evt) {
 
 /**
  * Event handler to call when there is a change to the realtime blocks map.
- * @param {gapi.drive.realtime.ValueChangedEvent} evt The event that occurred.
+ * @param {!gapi.drive.realtime.ValueChangedEvent} evt The event that occurred.
  * @private
  */
 Blockly.Realtime.onBlocksMapChange_ = function(evt) {
@@ -335,8 +335,8 @@ Blockly.Realtime.placeBlockOnWorkspace_ = function(block, addToTop) {
 };
 
 /**
- * Move a block
- * @param {Blockly.Block} block The block to move.
+ * Move a block.
+ * @param {!Blockly.Block} block The block to move.
  * @private
  */
 Blockly.Realtime.moveBlock_ = function(block) {
@@ -484,6 +484,7 @@ Blockly.Realtime.getSessionId_ = function(doc) {
       return collaborator.sessionId;
     }
   }
+  return undefined;
 };
 
 /**
@@ -656,7 +657,7 @@ Blockly.Realtime.rtclientOptions_ = {
 
 /**
  * Parse options to startRealtime().
- * @param {Object} options object containing the options.
+ * @param {!Object} options Object containing the options.
  * @private
  */
 Blockly.Realtime.parseOptions_ = function(options) {
@@ -679,9 +680,9 @@ Blockly.Realtime.parseOptions_ = function(options) {
 /**
  * Setup the Blockly container for realtime authorization and start the
  * Realtime loader.
- * @param {function()} uiInitialize function to initialize the Blockly UI.
- * @param {Element} uiContainer container element for the Blockly UI.
- * @param {Object} options the realtime options.
+ * @param {function()} uiInitialize Function to initialize the Blockly UI.
+ * @param {!Element} uiContainer Container element for the Blockly UI.
+ * @param {!Object} options The realtime options.
  */
 Blockly.Realtime.startRealtime = function(uiInitialize, uiContainer, options) {
   Blockly.Realtime.parseOptions_(options);
@@ -707,8 +708,8 @@ Blockly.Realtime.startRealtime = function(uiInitialize, uiContainer, options) {
 
 /**
  * Setup the Blockly container for realtime authorization.
- * @param {Element} uiContainer a DOM container element for the Blockly UI.
- * @return {Element} the DOM element for the authorization UI.
+ * @param {!Element} uiContainer A DOM container element for the Blockly UI.
+ * @return {!Element} The DOM element for the authorization UI.
  * @private
  */
 Blockly.Realtime.addAuthUi_ = function(uiContainer) {
@@ -784,7 +785,6 @@ Blockly.Realtime.genUid = function(extra) {
      used before and I'm paranoid.  It's not enough to just check that the
      random uid hasn't been previously used because other concurrent sessions
      might generate the same uid at the same time.  Like I said, I'm paranoid.
-
    */
   var potentialUid = Blockly.Realtime.sessionId_ + '-' + extra;
   if (!Blockly.Realtime.blocksMap_.has(potentialUid)) {

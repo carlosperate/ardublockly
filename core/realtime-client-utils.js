@@ -1,12 +1,15 @@
 /**
  * @license
- * Copyright 2013 Google Inc. All Rights Reserved.
+ * Visual Blocks Editor
+ *
+ * Copyright 2013 Google Inc.
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,7 +17,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
 
 /**
  * @fileoverview Common utility functionality for Google Drive Realtime API,
@@ -26,12 +28,13 @@
  * part of the Google Drive Realtime Playground code at
  * https://github.com/googledrive/realtime-playground/blob/master/js/realtime-client-utils.js
  */
+'use strict';
 
 /**
  * Realtime client utilities namespace.
  */
-// var rtclient = rtclient || {};
 goog.provide('rtclient');
+
 
 /**
  * OAuth 2.0 scope for installing Drive Apps.
@@ -63,26 +66,23 @@ rtclient.REALTIME_MIMETYPE = 'application/vnd.google-apps.drive-sdk';
  */
 rtclient.getParams = function() {
   var params = {};
-  var hashFragment = window.location.hash;
-  if (hashFragment) {
-    // split up the query string and store in an object
-    var paramStrs = hashFragment.slice(1).split('&');
+  function parseParams(fragment) {
+    // Split up the query string and store in an object.
+    var paramStrs = fragment.slice(1).split('&');
     for (var i = 0; i < paramStrs.length; i++) {
       var paramStr = paramStrs[i].split('=');
-      params[paramStr[0]] = unescape(paramStr[1]);
+      params[decodeURIComponent(paramStr[0])] = decodeURIComponent(paramStr[1]);
     }
   }
-  // Opening from Drive will encode the state in a query search parameter
+  var hashFragment = window.location.hash;
+  if (hashFragment) {
+    parseParams(hashFragment);
+  }
+  // Opening from Drive will encode the state in a query search parameter.
   var searchFragment = window.location.search;
   if (searchFragment) {
-    // split up the query string and store in an object
-    var paramStrs2 = searchFragment.slice(1).split('&');
-    for (var j = 0; j < paramStrs2.length; j++) {
-      var paramStr2 = paramStrs2[j].split('=');
-      params[paramStr2[0]] = unescape(paramStr2[1]);
-    }
+    parseParams(searchFragment);
   }
-  console.log(params);
   return params;
 };
 
@@ -161,26 +161,26 @@ rtclient.Authorizer.prototype.authorize = function(onAuthComplete) {
   };
   var authorizeWithPopup = function() {
     gapi.auth.authorize({
-      client_id: clientId,
-      scope: [
+      'client_id': clientId,
+      'scope': [
         rtclient.INSTALL_SCOPE,
         rtclient.FILE_SCOPE,
         rtclient.OPENID_SCOPE
       ],
-      user_id: userId,
-      immediate: false
+      'user_id': userId,
+      'immediate': false
     }, handleAuthResult);
   };
   // Try with no popups first.
   gapi.auth.authorize({
-    client_id: clientId,
-    scope: [
+    'client_id': clientId,
+    'scope': [
       rtclient.INSTALL_SCOPE,
       rtclient.FILE_SCOPE,
       rtclient.OPENID_SCOPE
     ],
-    user_id: userId,
-    immediate: true
+    'user_id': userId,
+    'immediate': true
   }, handleAuthResult);
 };
 
@@ -213,8 +213,8 @@ rtclient.createRealtimeFile = function(title, mimeType, callback) {
   gapi.client.load('drive', 'v2', function() {
     gapi.client.drive.files.insert({
       'resource': {
-        mimeType: mimeType,
-        title: title
+        'mimeType': mimeType,
+        'title': title
       }
     }).execute(callback);
   });
@@ -233,7 +233,7 @@ rtclient.createRealtimeFile = function(title, mimeType, callback) {
 rtclient.getFileMetadata = function(fileId, callback) {
   gapi.client.load('drive', 'v2', function() {
     gapi.client.drive.files.get({
-      'fileId' : fileId
+      'fileId': fileId
     }).execute(callback);
   });
 };
