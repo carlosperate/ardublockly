@@ -462,8 +462,15 @@ Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
     }
     // Offering to connect the top of a statement block to an already connected
     // connection is ok, we'll just insert it into the stack.
+
     // Offering to connect the left (male) of a value block to an already
     // connected value pair is ok, we'll splice it in.
+    // However, don't offer to splice into an unmovable block.
+    if (connection.type == Blockly.INPUT_VALUE &&
+        connection.targetConnection &&
+        !connection.targetBlock().isMovable()) {
+      return true;
+    }
 
     // Do type checking.
     if (!thisConnection.checkType_(connection)) {

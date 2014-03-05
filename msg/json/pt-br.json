@@ -41,7 +41,7 @@
     "COLOUR_BLEND_RATIO": "proporção",
     "COLOUR_BLEND_TOOLTIP": "Mistura duas cores dada uma proporção (0.0 - 1.0).",
     "CONTROLS_REPEAT_HELPURL": "https://pt.wikipedia.org/wiki/Estrutura_de_repeti%C3%A7%C3%A3o#Repeti.C3.A7.C3.A3o_com_vari.C3.A1vel_de_controle",
-    "CONTROLS_REPEAT_TITLE": "Repita %1 vezes",
+    "CONTROLS_REPEAT_TITLE": "repita %1 vezes",
     "CONTROLS_REPEAT_TITLE_REPEAT": "repita",
     "CONTROLS_REPEAT_TITLE_TIMES": "vezes",
     "CONTROLS_REPEAT_INPUT_DO": "faça",
