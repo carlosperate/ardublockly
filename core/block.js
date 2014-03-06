@@ -632,6 +632,7 @@ Blockly.Block.prototype.duplicate_ = function() {
   }
   xy.y += Blockly.SNAP_RADIUS * 2;
   newBlock.moveBy(xy.x, xy.y);
+  newBlock.select();
   return newBlock;
 };
 
