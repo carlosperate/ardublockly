@@ -530,7 +530,7 @@ Blockly.Connection.prototype.checkType_ = function(otherConnection) {
 Blockly.Connection.prototype.setCheck = function(check) {
   if (check) {
     // Ensure that check is in an array.
-    if (!(check instanceof Array)) {
+    if (!goog.isArray(check)) {
       check = [check];
     }
     this.check_ = check;

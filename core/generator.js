@@ -55,7 +55,7 @@ Blockly.Generator.prototype.workspaceToCode = function() {
   var blocks = Blockly.mainWorkspace.getTopBlocks(true);
   for (var x = 0, block; block = blocks[x]; x++) {
     var line = this.blockToCode(block);
-    if (line instanceof Array) {
+    if (goog.isArray(line)) {
       // Value blocks return tuples of code and operator order.
       // Top-level blocks don't care about operator order.
       line = line[0];
@@ -139,7 +139,7 @@ Blockly.Generator.prototype.blockToCode = function(block) {
   // The current prefered method of accessing the block is through the second
   // argument to func.call, which becomes the first parameter to the generator.
   var code = func.call(block, block);
-  if (code instanceof Array) {
+  if (goog.isArray(code)) {
     // Value blocks return tuples of code and operator order.
     return [this.scrub_(block, code[0]), code[1]];
   } else {
@@ -169,7 +169,7 @@ Blockly.Generator.prototype.valueToCode = function(block, name, order) {
     // Disabled block.
     return '';
   }
-  if (!(tuple instanceof Array)) {
+  if (!goog.isArray(tuple)) {
     // Value blocks must return code and order of operations info.
     // Statement blocks must only return code.
     throw 'Expecting tuple from value block "' + targetBlock.type + '".';

@@ -1558,7 +1558,7 @@ Blockly.Block.prototype.interpolateMsg = function(msg, var_args) {
     if (field instanceof Blockly.Field) {
       this.appendField(field);
     } else {
-      goog.asserts.assert(field instanceof Array);
+      goog.asserts.assert(goog.isArray(field));
       this.appendField(field[1], field[0]);
     }
   }
