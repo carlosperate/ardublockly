@@ -64,10 +64,16 @@ Puzzle.init = function() {
   Blockly.fireUiEvent(window, 'resize');
 
   // Add the blocks.
-  if (window.sessionStorage.loadOnceBlocks) {
-    var text = window.sessionStorage.loadOnceBlocks;
+  try {
+    var loadOnce = window.sessionStorage.loadOnceBlocks;
+  } catch (e) {
+    // Firefox sometimes throws a SecurityError when accessing sessionStorage.
+    // Restarting Firefox fixes this, so it looks like a bug.
+    var loadOnce = null;
+  }
+  if (loadOnce) {
     delete window.sessionStorage.loadOnceBlocks;
-    var xml = Blockly.Xml.textToDom(text);
+    var xml = Blockly.Xml.textToDom(loadOnce);
     Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
   } else {
     // Create one of every block.
