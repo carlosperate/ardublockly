@@ -73,24 +73,19 @@ Blockly.removeClass_ = function(element, className) {
 
 /**
  * Bind an event to a function call.
- * @param {!Element} element Element upon which to listen.
+ * @param {!Node} node Node upon which to listen.
  * @param {string} name Event name to listen to (e.g. 'mousedown').
  * @param {Object} thisObject The value of 'this' in the function.
  * @param {!Function} func Function to call when event is triggered.
  * @return {!Array.<!Array>} Opaque data that can be passed to unbindEvent_.
  * @private
  */
-Blockly.bindEvent_ = function(element, name, thisObject, func) {
-  var bindData = [];
-  var wrapFunc;
-  if (!element.addEventListener) {
-    throw 'Element is not a DOM node with addEventListener.';
-  }
-  wrapFunc = function(e) {
+Blockly.bindEvent_ = function(node, name, thisObject, func) {
+  var wrapFunc = function(e) {
     func.apply(thisObject, arguments);
   };
-  element.addEventListener(name, wrapFunc, false);
-  bindData.push([element, name, wrapFunc]);
+  node.addEventListener(name, wrapFunc, false);
+  var bindData = [[node, name, wrapFunc]];
   // Add equivalent touch event.
   if (name in Blockly.bindEvent_.TOUCH_MAP) {
     wrapFunc = function(e) {
@@ -105,9 +100,9 @@ Blockly.bindEvent_ = function(element, name, thisObject, func) {
       // Stop the browser from scrolling/zooming the page
       e.preventDefault();
     };
-    element.addEventListener(Blockly.bindEvent_.TOUCH_MAP[name],
+    node.addEventListener(Blockly.bindEvent_.TOUCH_MAP[name],
                              wrapFunc, false);
-    bindData.push([element, Blockly.bindEvent_.TOUCH_MAP[name], wrapFunc]);
+    bindData.push([node, Blockly.bindEvent_.TOUCH_MAP[name], wrapFunc]);
   }
   return bindData;
 };
@@ -136,30 +131,30 @@ if ('ontouchstart' in document.documentElement) {
 Blockly.unbindEvent_ = function(bindData) {
   while (bindData.length) {
     var bindDatum = bindData.pop();
-    var element = bindDatum[0];
+    var node = bindDatum[0];
     var name = bindDatum[1];
     var func = bindDatum[2];
-    element.removeEventListener(name, func, false);
+    node.removeEventListener(name, func, false);
   }
   return func;
 };
 
 /**
  * Fire a synthetic event.
- * @param {!Element} element The event's target element.
+ * @param {!Node} node The event's target node.
  * @param {string} eventName Name of event (e.g. 'click').
  */
-Blockly.fireUiEvent = function(element, eventName) {
+Blockly.fireUiEvent = function(node, eventName) {
   var doc = document;
   if (doc.createEvent) {
     // W3
     var evt = doc.createEvent('UIEvents');
     evt.initEvent(eventName, true, true);  // event type, bubbling, cancelable
-    element.dispatchEvent(evt);
+    node.dispatchEvent(evt);
   } else if (doc.createEventObject) {
     // MSIE
     var evt = doc.createEventObject();
-    element.fireEvent('on' + eventName, evt);
+    node.fireEvent('on' + eventName, evt);
   } else {
     throw 'FireEvent: No event creation mechanism.';
   }

@@ -516,9 +516,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   Blockly.hideChaff();
   if (Blockly.isRightButton(e)) {
     // Right-click.
-    if (Blockly.ContextMenu) {
-      this.showContextMenu_(Blockly.mouseToSvg(e));
-    }
+    this.showContextMenu_(Blockly.mouseToSvg(e));
   } else if (!this.isMovable()) {
     // Allow unmovable blocks to be selected and context menued, but not
     // dragged.  Let this event bubble up to document, so the workspace may be

@@ -267,9 +267,7 @@ Blockly.onMouseDown_ = function(e) {
   }
   if (Blockly.isRightButton(e)) {
     // Right-click.
-    if (Blockly.ContextMenu) {
-      Blockly.showContextMenu_(Blockly.mouseToSvg(e));
-    }
+    Blockly.showContextMenu_(Blockly.mouseToSvg(e));
   } else if ((Blockly.readOnly || isTargetSvg) &&
              Blockly.mainWorkspace.scrollbar) {
     // If the workspace is editable, only allow dragging when gripping empty
@@ -453,7 +451,7 @@ Blockly.showContextMenu_ = function(xy) {
  * @private
  */
 Blockly.onContextMenu_ = function(e) {
-  if (!Blockly.isTargetInput_(e) && Blockly.ContextMenu) {
+  if (!Blockly.isTargetInput_(e)) {
     // When focused on an HTML text input widget, don't cancel the context menu.
     e.preventDefault();
   }
@@ -464,9 +462,9 @@ Blockly.onContextMenu_ = function(e) {
  * @param {boolean=} opt_allowToolbox If true, don't close the toolbox.
  */
 Blockly.hideChaff = function(opt_allowToolbox) {
-  Blockly.Tooltip && Blockly.Tooltip.hide();
-  Blockly.ContextMenu && Blockly.ContextMenu.hide();
-  Blockly.FieldDropdown && Blockly.FieldDropdown.hide();
+  Blockly.Tooltip.hide();
+  Blockly.ContextMenu.hide();
+  Blockly.FieldDropdown.hide();
   Blockly.WidgetDiv.hide();
   if (!opt_allowToolbox &&
       Blockly.Toolbox.flyout_ && Blockly.Toolbox.flyout_.autoClose) {

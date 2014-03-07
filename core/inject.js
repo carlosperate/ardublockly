@@ -317,9 +317,7 @@ Blockly.createDom_ = function(container) {
     svg.appendChild(Blockly.FieldDropdown.createDom());
   }
 
-  if (Blockly.ContextMenu && Blockly.ContextMenu) {
-    svg.appendChild(Blockly.ContextMenu.createDom());
-  }
+  svg.appendChild(Blockly.ContextMenu.createDom());
 
   // The SVG is now fully assembled.  Add it to the container.
   container.appendChild(svg);

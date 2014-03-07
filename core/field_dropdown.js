@@ -61,6 +61,16 @@ Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
 goog.inherits(Blockly.FieldDropdown, Blockly.Field);
 
 /**
+ * Horizontal padding on either side of each option.
+ */
+Blockly.FieldDropdown.X_PADDING = 20;
+
+/**
+ * Vertical height of each option.
+ */
+Blockly.FieldDropdown.Y_HEIGHT = 20;
+
+/**
  * Clone this FieldDropdown.
  * @return {!Blockly.FieldDropdown} The result of calling the constructor again
  *   with the current values of the arguments used during construction.
@@ -164,7 +174,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   for (var x = 0; x < options.length; x++) {
     var text = options[x][0];  // Human-readable text.
     var value = options[x][1]; // Language-neutral value.
-    var gElement = Blockly.ContextMenu.optionToDom(text);
+    var gElement = Blockly.FieldDropdown.optionToDom_(text);
     var rectElement = /** @type {SVGRectElement} */ (gElement.firstChild);
     var textElement = /** @type {SVGTextElement} */ (gElement.lastChild);
     svgOptions.appendChild(gElement);
@@ -179,7 +189,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     }
 
     gElement.setAttribute('transform',
-        'translate(0, ' + (x * Blockly.ContextMenu.Y_HEIGHT) + ')');
+        'translate(0, ' + (x * Blockly.FieldDropdown.Y_HEIGHT) + ')');
     resizeList.push(rectElement);
     Blockly.bindEvent_(gElement, 'mousedown', null, Blockly.noEvent);
     Blockly.bindEvent_(gElement, 'mouseup', this, callbackFactory(value));
@@ -189,7 +199,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     maxWidth = Math.max(maxWidth, textElement.getComputedTextLength());
   }
   // Run a second pass to resize all options to the required width.
-  maxWidth += Blockly.ContextMenu.X_PADDING * 2;
+  maxWidth += Blockly.FieldDropdown.X_PADDING * 2;
   for (var x = 0; x < resizeList.length; x++) {
     resizeList[x].setAttribute('width', maxWidth);
   }
@@ -198,7 +208,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     for (var x = 0, gElement; gElement = svgOptions.childNodes[x]; x++) {
       var textElement = gElement.lastChild;
       textElement.setAttribute('text-anchor', 'end');
-      textElement.setAttribute('x', maxWidth - Blockly.ContextMenu.X_PADDING);
+      textElement.setAttribute('x', maxWidth - Blockly.FieldDropdown.X_PADDING);
     }
   }
   if (checkElement) {
@@ -213,7 +223,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     }
   }
   var width = maxWidth + Blockly.FieldDropdown.CORNER_RADIUS * 2;
-  var height = options.length * Blockly.ContextMenu.Y_HEIGHT +
+  var height = options.length * Blockly.FieldDropdown.Y_HEIGHT +
                Blockly.FieldDropdown.CORNER_RADIUS + 1;
   svgShadow.setAttribute('width', width);
   svgShadow.setAttribute('height', height);
@@ -226,10 +236,11 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   var borderBBox = this.borderRect_.getBBox();
   var x;
   if (Blockly.RTL) {
-    x = xy.x - maxWidth + Blockly.ContextMenu.X_PADDING + borderBBox.width -
+    x = xy.x - maxWidth + Blockly.FieldDropdown.X_PADDING + borderBBox.width -
         Blockly.BlockSvg.SEP_SPACE_X / 2;
   } else {
-    x = xy.x - Blockly.ContextMenu.X_PADDING + Blockly.BlockSvg.SEP_SPACE_X / 2;
+    x = xy.x - Blockly.FieldDropdown.X_PADDING +
+        Blockly.BlockSvg.SEP_SPACE_X / 2;
   }
   svgGroup.setAttribute('transform',
       'translate(' + x + ', ' + (xy.y + borderBBox.height) + ')');
@@ -356,6 +367,32 @@ Blockly.FieldDropdown.prototype.setText = function(text) {
     this.sourceBlock_.bumpNeighbours_();
     this.sourceBlock_.workspace.fireChangeEvent();
   }
+};
+
+/**
+ * Create the DOM nodes for a menu option.
+ * @param {string} text The option's text.
+ * @return {!Element} <g> node containing the menu option.
+ * @private
+ */
+Blockly.FieldDropdown.optionToDom_ = function(text) {
+  /* Here's the SVG we create:
+    <g class="blocklyMenuDiv">
+      <rect height="20"/>
+      <text class="blocklyMenuText" x="20" y="15">Make It So</text>
+    </g>
+  */
+  var gElement = Blockly.createSvgElement('g', {'class': 'blocklyMenuDiv'},
+                                          null);
+  var rectElement = Blockly.createSvgElement('rect',
+      {'height': Blockly.FieldDropdown.Y_HEIGHT}, gElement);
+  var textElement = Blockly.createSvgElement('text',
+      {'class': 'blocklyMenuText',
+      'x': Blockly.FieldDropdown.X_PADDING,
+      'y': 15}, gElement);
+  var textNode = document.createTextNode(text);
+  textElement.appendChild(textNode);
+  return gElement;
 };
 
 /**

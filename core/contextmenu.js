@@ -99,7 +99,7 @@ Blockly.ContextMenu.show = function(xy, options) {
   var resizeList = [Blockly.ContextMenu.svgBackground,
                     Blockly.ContextMenu.svgShadow];
   for (var x = 0, option; option = options[x]; x++) {
-    var gElement = Blockly.ContextMenu.optionToDom(option.text);
+    var gElement = Blockly.ContextMenu.optionToDom_(option.text);
     var rectElement = /** @type {SVGRectElement} */ (gElement.firstChild);
     var textElement = /** @type {SVGTextElement} */ (gElement.lastChild);
     Blockly.ContextMenu.svgOptions.appendChild(gElement);
@@ -175,8 +175,9 @@ Blockly.ContextMenu.show = function(xy, options) {
  * Create the DOM nodes for a menu option.
  * @param {string} text The option's text.
  * @return {!Element} <g> node containing the menu option.
+ * @private
  */
-Blockly.ContextMenu.optionToDom = function(text) {
+Blockly.ContextMenu.optionToDom_ = function(text) {
   /* Here's the SVG we create:
     <g class="blocklyMenuDiv">
       <rect height="20"/>
