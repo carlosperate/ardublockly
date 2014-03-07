@@ -140,7 +140,7 @@ Blockly.JavaScript['maze_ifElse'] = function(block) {
 };
 
 Blockly.Blocks['maze_forever'] = {
-  // Do forever loop.
+  // Block for forever loop.
   init: function() {
     this.setHelpUrl('http://code.google.com/p/blockly/wiki/Repeat');
     this.setColour(120);
@@ -155,7 +155,7 @@ Blockly.Blocks['maze_forever'] = {
 };
 
 Blockly.JavaScript['maze_forever'] = function(block) {
-  // Generate JavaScript for do forever loop.
+  // Generate JavaScript for forever loop.
   var branch = Blockly.JavaScript.statementToCode(block, 'DO');
   if (Blockly.JavaScript.INFINITE_LOOP_TRAP) {
     branch = Blockly.JavaScript.INFINITE_LOOP_TRAP.replace(/%1/g,

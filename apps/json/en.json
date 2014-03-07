@@ -1,7 +1,7 @@
 {
     "@metadata": {
         "author": "Ellen Spertus <ellen.spertus@gmail.com>",
-        "lastupdated": "2014-03-05 12:36:39.955839",
+        "lastupdated": "2014-03-06 23:48:50.612343",
         "locale": "en",
         "messagedocumentation" : "qqq"
     },
@@ -21,7 +21,7 @@
     "Apps.catLists": "Lists",
     "Apps.catColour": "Colour",
     "Apps.catVariables": "Variables",
-    "Apps.catProcedures": "Procedures",
+    "Apps.catProcedures": "Functions",
     "Apps.httpRequestError": "There was a problem with the request.",
     "Apps.linkAlert": "Share your blocks with this link:\n\n%1",
     "Apps.hashError": "Sorry, '%1' doesn't correspond with any saved program.",

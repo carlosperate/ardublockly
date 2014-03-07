@@ -30,7 +30,10 @@ goog.require('Blockly.Blocks');
 
 
 Blockly.Blocks['procedures_defnoreturn'] = {
-  // Define a procedure with no return value.
+  /**
+   * Block for defining a procedure with no return value.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL);
     this.setColour(290);
@@ -47,6 +50,12 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);
     this.arguments_ = [];
   },
+  /**
+   * Update the display of parameters for this procedure definition block.
+   * Display a warning if there are duplicately named parameters.
+   * @private
+   * @this Blockly.Block
+   */
   updateParams_: function() {
     // Check for duplicated arguments.
     var badArg = false;
@@ -71,6 +80,11 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     }
     this.setFieldValue(paramString, 'PARAMS');
   },
+  /**
+   * Create XML to represent the argument inputs.
+   * @return {Element} XML storage element.
+   * @this Blockly.Block
+   */
   mutationToDom: function() {
     var container = document.createElement('mutation');
     for (var x = 0; x < this.arguments_.length; x++) {
@@ -80,6 +94,11 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     }
     return container;
   },
+  /**
+   * Parse XML to restore the argument inputs.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
   domToMutation: function(xmlElement) {
     this.arguments_ = [];
     for (var x = 0, childNode; childNode = xmlElement.childNodes[x]; x++) {
@@ -89,6 +108,12 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     }
     this.updateParams_();
   },
+  /**
+   * Populate the mutator's dialog with this block's components.
+   * @param {!Blockly.Workspace} workspace Mutator's workspace.
+   * @return {!Blockly.Block} Root block in mutator.
+   * @this Blockly.Block
+   */
   decompose: function(workspace) {
     var containerBlock = Blockly.Block.obtain(workspace,
                                            'procedures_mutatorcontainer');
@@ -108,6 +133,11 @@ Blockly.Blocks['procedures_defnoreturn'] = {
                                      this.workspace, this.arguments_, null);
     return containerBlock;
   },
+  /**
+   * Reconfigure this block based on the mutator dialog's components.
+   * @param {!Blockly.Block} containerBlock Root block in mutator.
+   * @this Blockly.Block
+   */
   compose: function(containerBlock) {
     this.arguments_ = [];
     this.paramIds_ = [];
@@ -122,22 +152,42 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     Blockly.Procedures.mutateCallers(this.getFieldValue('NAME'),
         this.workspace, this.arguments_, this.paramIds_);
   },
+  /**
+   * Dispose of any callers.
+   * @this Blockly.Block
+   */
   dispose: function() {
-    // Dispose of any callers.
     var name = this.getFieldValue('NAME');
     Blockly.Procedures.disposeCallers(name, this.workspace);
     // Call parent's destructor.
     Blockly.Block.prototype.dispose.apply(this, arguments);
   },
+  /**
+   * Return the signature of this procedure definition.
+   * @return {!Array} Tuple containing three elements:
+   *     - the name of the defined procedure,
+   *     - a list of all its arguments,
+   *     - that it DOES NOT have a return value.
+   * @this Blockly.Block
+   */
   getProcedureDef: function() {
-    // Return the name of the defined procedure,
-    // a list of all its arguments,
-    // and that it DOES NOT have a return value.
     return [this.getFieldValue('NAME'), this.arguments_, false];
   },
+  /**
+   * Return all variables referenced by this block.
+   * @return {!Array.<string>} List of variable names.
+   * @this Blockly.Block
+   */
   getVars: function() {
     return this.arguments_;
   },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
   renameVar: function(oldName, newName) {
     var change = false;
     for (var x = 0; x < this.arguments_.length; x++) {
@@ -160,6 +210,11 @@ Blockly.Blocks['procedures_defnoreturn'] = {
       }
     }
   },
+  /**
+   * Add custom menu options to this block's context menu.
+   * @param {!Array} options List of menu options to add to.
+   * @this Blockly.Block
+   */
   customContextMenu: function(options) {
     // Add option to create caller.
     var option = {enabled: true};
@@ -195,7 +250,10 @@ Blockly.Blocks['procedures_defnoreturn'] = {
 };
 
 Blockly.Blocks['procedures_defreturn'] = {
-  // Define a procedure with a return value.
+  /**
+   * Block for defining a procedure with a return value.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL);
     this.setColour(290);
@@ -221,10 +279,15 @@ Blockly.Blocks['procedures_defreturn'] = {
   decompose: Blockly.Blocks['procedures_defnoreturn'].decompose,
   compose: Blockly.Blocks['procedures_defnoreturn'].compose,
   dispose: Blockly.Blocks['procedures_defnoreturn'].dispose,
+  /**
+   * Return the signature of this procedure definition.
+   * @return {!Array} Tuple containing three elements:
+   *     - the name of the defined procedure,
+   *     - a list of all its arguments,
+   *     - that it DOES have a return value.
+   * @this Blockly.Block
+   */
   getProcedureDef: function() {
-    // Return the name of the defined procedure,
-    // a list of all its arguments,
-    // and that it DOES have a return value.
     return [this.getFieldValue('NAME'), this.arguments_, true];
   },
   getVars: Blockly.Blocks['procedures_defnoreturn'].getVars,
@@ -234,39 +297,55 @@ Blockly.Blocks['procedures_defreturn'] = {
 };
 
 Blockly.Blocks['procedures_mutatorcontainer'] = {
-  // Procedure container (for mutator dialog).
+  /**
+   * Mutator block for procedure container.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setColour(290);
     this.appendDummyInput()
         .appendField(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE);
     this.appendStatementInput('STACK');
-    this.setTooltip('');
+    this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP);
     this.contextMenu = false;
   }
 };
 
 Blockly.Blocks['procedures_mutatorarg'] = {
-  // Procedure argument (for mutator dialog).
+  /**
+   * Mutator block for procedure argument.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setColour(290);
     this.appendDummyInput()
         .appendField(Blockly.Msg.PROCEDURES_MUTATORARG_TITLE)
-        .appendField(new Blockly.FieldTextInput('x', this.validator), 'NAME');
+        .appendField(new Blockly.FieldTextInput('x', this.validator_), 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('');
+    this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP);
     this.contextMenu = false;
   },
-  validator: function(newVar) {
-    // Merge runs of whitespace.  Strip leading and trailing whitespace.
-    // Beyond this, all names are legal.
+  /**
+   * Obtain a valid name for the procedure.
+   * Merge runs of whitespace.  Strip leading and trailing whitespace.
+   * Beyond this, all names are legal.
+   * @param {string} newVar User-supplied name.
+   * @return {?string} Valid name, or null if a name was not specified.
+   * @private
+   * @this Blockly.Block
+   */
+  validator_: function(newVar) {
     newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
     return newVar || null;
   }
 };
 
 Blockly.Blocks['procedures_callnoreturn'] = {
-  // Call a procedure with no return value.
+  /**
+   * Block for calling a procedure with no return value.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL);
     this.setColour(290);
@@ -275,16 +354,28 @@ Blockly.Blocks['procedures_callnoreturn'] = {
         .appendField('', 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP);
+    // Tooltip is set in domToMutation.
     this.arguments_ = [];
     this.quarkConnections_ = null;
     this.quarkArguments_ = null;
   },
+  /**
+   * Returns the name of the procedure this block calls.
+   * @return {string} Procedure name.
+   * @this Blockly.Block
+   */
   getProcedureCall: function() {
     return this.getFieldValue('NAME');
   },
+  /**
+   * Notification that a procedure is renaming.
+   * If the name matches this block's procedure, rename it.
+   * @param {string} oldName Previous name of procedure.
+   * @param {string} newName Renamed procedure.
+   * @this Blockly.Block
+   */
   renameProcedure: function(oldName, newName) {
-    if (Blockly.Names.equals(oldName, this.getFieldValue('NAME'))) {
+    if (Blockly.Names.equals(oldName, this.getProcedureCall())) {
       this.setFieldValue(newName, 'NAME');
       this.setTooltip(
           (this.outputConnection ? Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP
@@ -292,15 +383,18 @@ Blockly.Blocks['procedures_callnoreturn'] = {
           .replace('%1', newName));
     }
   },
+  /**
+   * Notification that the procedure's parameters have changed.
+   * @param {!Array.<string>} paramNames New param names, e.g. ['x', 'y', 'z'].
+   * @param {!Array.<string>} paramIds IDs of params (consistent for each
+   *     parameter through the life of a mutator, regardless of param renaming),
+   *     e.g. ['piua', 'f8b_', 'oi.o'].
+   * @this Blockly.Block
+   */
   setProcedureParameters: function(paramNames, paramIds) {
-    // Data structures for parameters on each call block:
+    // Data structures:
     // this.arguments = ['x', 'y']
     //     Existing param names.
-    // paramNames = ['x', 'y', 'z']
-    //     New param names.
-    // paramIds = ['piua', 'f8b_', 'oi.o']
-    //     IDs of params (consistent for each parameter through the life of a
-    //     mutator, regardless of param renaming).
     // this.quarkConnections_ {piua: null, f8b_: Blockly.Connection}
     //     Look-up of paramIds to connections plugged into the call block.
     // this.quarkArguments_ = ['piua', 'f8b_']
@@ -368,10 +462,14 @@ Blockly.Blocks['procedures_callnoreturn'] = {
       this.render();
     }
   },
+  /**
+   * Create XML to represent the (non-editable) name and arguments.
+   * @return {Element} XML storage element.
+   * @this Blockly.Block
+   */
   mutationToDom: function() {
-    // Save the name and arguments (none of which are editable).
     var container = document.createElement('mutation');
-    container.setAttribute('name', this.getFieldValue('NAME'));
+    container.setAttribute('name', this.getProcedureCall());
     for (var x = 0; x < this.arguments_.length; x++) {
       var parameter = document.createElement('arg');
       parameter.setAttribute('name', this.arguments_[x]);
@@ -379,8 +477,12 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     }
     return container;
   },
+  /**
+   * Parse XML to restore the (non-editable) name and parameters.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
   domToMutation: function(xmlElement) {
-    // Restore the name and parameters.
     var name = xmlElement.getAttribute('name');
     this.setFieldValue(name, 'NAME');
     this.setTooltip(
@@ -402,6 +504,13 @@ Blockly.Blocks['procedures_callnoreturn'] = {
       this.setProcedureParameters(this.arguments_, this.arguments_);
     }
   },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
   renameVar: function(oldName, newName) {
     for (var x = 0; x < this.arguments_.length; x++) {
       if (Blockly.Names.equals(oldName, this.arguments_[x])) {
@@ -410,11 +519,15 @@ Blockly.Blocks['procedures_callnoreturn'] = {
       }
     }
   },
+  /**
+   * Add menu option to find the definition block for this call.
+   * @param {!Array} options List of menu options to add to.
+   * @this Blockly.Block
+   */
   customContextMenu: function(options) {
-    // Add option to find caller.
     var option = {enabled: true};
     option.text = Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF;
-    var name = this.getFieldValue('NAME');
+    var name = this.getProcedureCall();
     var workspace = this.workspace;
     option.callback = function() {
       var def = Blockly.Procedures.getDefinition(name, workspace);
@@ -425,7 +538,10 @@ Blockly.Blocks['procedures_callnoreturn'] = {
 };
 
 Blockly.Blocks['procedures_callreturn'] = {
-  // Call a procedure with a return value.
+  /**
+   * Block for calling a procedure with a return value.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL);
     this.setColour(290);
@@ -433,7 +549,7 @@ Blockly.Blocks['procedures_callreturn'] = {
         .appendField(Blockly.Msg.PROCEDURES_CALLRETURN_CALL)
         .appendField('', 'NAME');
     this.setOutput(true);
-    this.setTooltip(Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP);
+    // Tooltip is set in domToMutation.
     this.arguments_ = [];
     this.quarkConnections_ = null;
     this.quarkArguments_ = null;
@@ -449,7 +565,10 @@ Blockly.Blocks['procedures_callreturn'] = {
 };
 
 Blockly.Blocks['procedures_ifreturn'] = {
-  // Conditionally return value from a procedure.
+  /**
+   * Block for conditionally returning a value from a procedure.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl('http://c2.com/cgi/wiki?GuardClause');
     this.setColour(290);
@@ -464,14 +583,22 @@ Blockly.Blocks['procedures_ifreturn'] = {
     this.setTooltip(Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP);
     this.hasReturnValue_ = true;
   },
+  /**
+   * Create XML to represent whether this block has a return value.
+   * @return {Element} XML storage element.
+   * @this Blockly.Block
+   */
   mutationToDom: function() {
-    // Save whether this block has a return value.
     var container = document.createElement('mutation');
     container.setAttribute('value', Number(this.hasReturnValue_));
     return container;
   },
+  /**
+   * Parse XML to restore whether this block has a return value.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
   domToMutation: function(xmlElement) {
-    // Restore whether this block has a return value.
     var value = xmlElement.getAttribute('value');
     this.hasReturnValue_ = (value == 1);
     if (!this.hasReturnValue_) {
@@ -480,6 +607,11 @@ Blockly.Blocks['procedures_ifreturn'] = {
         .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);
     }
   },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if this flow block is not nested inside a loop.
+   * @this Blockly.Block
+   */
   onchange: function() {
     if (!this.workspace) {
       // Block has been deleted.

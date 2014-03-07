@@ -30,7 +30,10 @@ goog.require('Blockly.Blocks');
 
 
 Blockly.Blocks['math_number'] = {
-  // Numeric value.
+  /**
+   * Block for numeric value.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
     this.setColour(230);
@@ -43,7 +46,10 @@ Blockly.Blocks['math_number'] = {
 };
 
 Blockly.Blocks['math_arithmetic'] = {
-  // Basic arithmetic operator.
+  /**
+   * Block for basic arithmetic operator.
+   * @this Blockly.Block
+   */
   init: function() {
     var OPERATORS =
         [[Blockly.Msg.MATH_ADDITION_SYMBOL, 'ADD'],
@@ -77,7 +83,10 @@ Blockly.Blocks['math_arithmetic'] = {
 };
 
 Blockly.Blocks['math_single'] = {
-  // Advanced math operators with single operand.
+  /**
+   * Block for advanced math operators with single operand.
+   * @this Blockly.Block
+   */
   init: function() {
     var OPERATORS =
         [[Blockly.Msg.MATH_SINGLE_OP_ROOT, 'ROOT'],
@@ -113,7 +122,10 @@ Blockly.Blocks['math_single'] = {
 };
 
 Blockly.Blocks['math_trig'] = {
-  // Trigonometry operators.
+  /**
+   * Block for trigonometry operators.
+   * @this Blockly.Block
+   */
   init: function() {
     var OPERATORS =
         [[Blockly.Msg.MATH_TRIG_SIN, 'SIN'],
@@ -146,7 +158,10 @@ Blockly.Blocks['math_trig'] = {
 };
 
 Blockly.Blocks['math_constant'] = {
-  // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+  /**
+   * Block for constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+   * @this Blockly.Block
+   */
   init: function() {
     var CONSTANTS =
         [['\u03c0', 'PI'],
@@ -165,8 +180,11 @@ Blockly.Blocks['math_constant'] = {
 };
 
 Blockly.Blocks['math_number_property'] = {
-  // Check if a number is even, odd, prime, whole, positive, or negative
-  // or if it is divisible by certain number. Returns true or false.
+  /**
+   * Block for checking if a number is even, odd, prime, whole, positive,
+   * negative or if it is divisible by certain number.
+   * @this Blockly.Block
+   */
   init: function() {
     var PROPERTIES =
         [[Blockly.Msg.MATH_IS_EVEN, 'EVEN'],
@@ -181,7 +199,7 @@ Blockly.Blocks['math_number_property'] = {
         .setCheck('Number');
     var dropdown = new Blockly.FieldDropdown(PROPERTIES, function(option) {
       var divisorInput = (option == 'DIVISIBLE_BY');
-      this.sourceBlock_.updateShape(divisorInput);
+      this.sourceBlock_.updateShape_(divisorInput);
     });
     this.appendDummyInput()
         .appendField(dropdown, 'PROPERTY');
@@ -189,25 +207,39 @@ Blockly.Blocks['math_number_property'] = {
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.MATH_IS_TOOLTIP);
   },
+  /**
+   * Create XML to represent whether the 'divisorInput' should be present.
+   * @return {Element} XML storage element.
+   * @this Blockly.Block
+   */
   mutationToDom: function() {
-    // Save whether the 'divisorInput' should be true of false (present or not).
     var container = document.createElement('mutation');
     var divisorInput = (this.getFieldValue('PROPERTY') == 'DIVISIBLE_BY');
     container.setAttribute('divisor_input', divisorInput);
     return container;
   },
+  /**
+   * Parse XML to restore the 'divisorInput'.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
   domToMutation: function(xmlElement) {
-    // Restore the 'divisorInput'.
     var divisorInput = (xmlElement.getAttribute('divisor_input') == 'true');
-    this.updateShape(divisorInput);
+    this.updateShape_(divisorInput);
   },
-  updateShape: function(divisorInput) {
+  /**
+   * Modify this block to have (or not have) an input for 'is divisible by'.
+   * @param {boolean} divisorInput True if this block has a divisor input.
+   * @private
+   * @this Blockly.Block
+   */
+  updateShape_: function(divisorInput) {
     // Add or remove a Value Input.
     var inputExists = this.getInput('DIVISOR');
     if (divisorInput) {
       if (!inputExists) {
         this.appendValueInput('DIVISOR')
-                 .setCheck('Number');
+            .setCheck('Number');
       }
     } else if (inputExists) {
       this.removeInput('DIVISOR');
@@ -216,7 +248,10 @@ Blockly.Blocks['math_number_property'] = {
 };
 
 Blockly.Blocks['math_change'] = {
-  // Add to a variable in place.
+  /**
+   * Block for adding to a variable in place.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_CHANGE_HELPURL);
     this.setColour(230);
@@ -236,9 +271,21 @@ Blockly.Blocks['math_change'] = {
           thisBlock.getFieldValue('VAR'));
     });
   },
+  /**
+   * Return all variables referenced by this block.
+   * @return {!Array.<string>} List of variable names.
+   * @this Blockly.Block
+   */
   getVars: function() {
     return [this.getFieldValue('VAR')];
   },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
   renameVar: function(oldName, newName) {
     if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
       this.setFieldValue(newName, 'VAR');
@@ -247,7 +294,10 @@ Blockly.Blocks['math_change'] = {
 };
 
 Blockly.Blocks['math_round'] = {
-  // Rounding functions.
+  /**
+   * Block for rounding functions.
+   * @this Blockly.Block
+   */
   init: function() {
     var OPERATORS =
         [[Blockly.Msg.MATH_ROUND_OPERATOR_ROUND, 'ROUND'],
@@ -264,8 +314,11 @@ Blockly.Blocks['math_round'] = {
 };
 
 Blockly.Blocks['math_on_list'] = {
-  // Evaluate a list of numbers to return sum, average, min, max, etc.
-  // Some functions also work on text (min, max, mode, median).
+  /**
+   * Block for evaluating a list of numbers to return sum, average, min, max,
+   * etc.  Some functions also work on text (min, max, mode, median).
+   * @this Blockly.Block
+   */
   init: function() {
     var OPERATORS =
         [[Blockly.Msg.MATH_ONLIST_OPERATOR_SUM, 'SUM'],
@@ -309,7 +362,10 @@ Blockly.Blocks['math_on_list'] = {
 };
 
 Blockly.Blocks['math_modulo'] = {
-  // Remainder of a division.
+  /**
+   * Block for remainder of a division.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_MODULO_HELPURL);
     this.setColour(230);
@@ -324,7 +380,10 @@ Blockly.Blocks['math_modulo'] = {
 };
 
 Blockly.Blocks['math_constrain'] = {
-  // Constrain a number between two limits.
+  /**
+   * Block for constraining a number between two limits.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_CONSTRAIN_HELPURL);
     this.setColour(230);
@@ -340,7 +399,10 @@ Blockly.Blocks['math_constrain'] = {
 };
 
 Blockly.Blocks['math_random_int'] = {
-  // Random integer between [X] and [Y].
+  /**
+   * Block for random integer between [X] and [Y].
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_RANDOM_INT_HELPURL);
     this.setColour(230);
@@ -355,7 +417,10 @@ Blockly.Blocks['math_random_int'] = {
 };
 
 Blockly.Blocks['math_random_float'] = {
-  // Random fraction between 0 and 1.
+  /**
+   * Block for random fraction between 0 and 1.
+   * @this Blockly.Block
+   */
   init: function() {
     this.setHelpUrl(Blockly.Msg.MATH_RANDOM_FLOAT_HELPURL);
     this.setColour(230);

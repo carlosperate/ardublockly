@@ -1068,11 +1068,15 @@ Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = 'Run the user-defined function "%1" 
 /// (referred to by the simpler term "inputs") to the function.  See
 /// [[Translating:Blockly#function_definitions]].
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = 'inputs';
+/// tooltip
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = 'Add, remove, or reorder inputs to this function.';
 /// block text - This text appears on a block in a window that appears when the user clicks
 /// on the plus sign or star on a function definition block].  It appears on the block for
 /// adding an individual parameter (referred to by the simpler term "inputs") to the function.
 /// See [[Translating:Blockly#function_definitions]].
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = 'input name:';
+/// tooltip
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = 'Add an input to the function.';
 
 /// context menu - This appears on the context menu for function calls.  Selecting
 /// it causes the corresponding function definition to be highlighted (as shown at
