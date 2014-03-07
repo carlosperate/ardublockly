@@ -365,7 +365,8 @@ Blockly.Blocks['procedures_callnoreturn'] = {
    * @this Blockly.Block
    */
   getProcedureCall: function() {
-    return this.getFieldValue('NAME');
+    // The NAME field is guaranteed to exist, null will never be returned.
+    return /** @type {string} */ (this.getFieldValue('NAME'));
   },
   /**
    * Notification that a procedure is renaming.

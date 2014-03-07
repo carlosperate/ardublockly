@@ -374,7 +374,7 @@ Blockly.init_ = function() {
     if (goog.userAgent.IPAD) {
       Blockly.bindEvent_(window, 'orientationchange', document, function() {
         Blockly.fireUiEvent(window, 'resize');
-      }, false);
+      });
     }
     Blockly.documentEventsBound_ = true;
   }

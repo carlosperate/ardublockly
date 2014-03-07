@@ -19,8 +19,8 @@
  */
 
 /**
- * @fileoverview Core JavaScript library for Blockly.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Flexible templating system for defining blocks.
+ * @author spertus@google.com (Ellen Spertus)
  */
 'use strict';
 goog.require('goog.asserts');

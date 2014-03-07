@@ -737,7 +737,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
     }
     var deleteOption = {
       text: descendantCount == 1 ? Blockly.Msg.DELETE_BLOCK :
-          Blockly.Msg.DELETE_X_BLOCKS.replace('%1', descendantCount),
+          Blockly.Msg.DELETE_X_BLOCKS.replace('%1', String(descendantCount)),
       enabled: true,
       callback: function() {
         block.dispose(true, true);
@@ -1259,8 +1259,8 @@ Blockly.Block.prototype.setTitleValue = function(newValue, name) {
 
 /**
  * Change the tooltip text for a block.
- * @param {string|!Element} newTip Text for tooltip or a parent element to
- *     link to for its tooltip.
+ * @param {string|!Function} newTip Text for tooltip or a parent element to
+ *     link to for its tooltip.  May be a function that returns a string.
  */
 Blockly.Block.prototype.setTooltip = function(newTip) {
   this.tooltip = newTip;
@@ -1550,7 +1550,7 @@ Blockly.Block.prototype.appendDummyInput = function(opt_name) {
 Blockly.Block.prototype.interpolateMsg = function(msg, var_args) {
   /**
    * Add a field to this input.
-   * @this !Blockly.input
+   * @this !Blockly.Input
    * @param {Blockly.Field|Array.<string|Blockly.Field>} field
    *     This is either a Field or a tuple of a name and a Field.
    */

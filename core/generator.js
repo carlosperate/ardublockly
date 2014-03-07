@@ -247,7 +247,7 @@ Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_REGEXP_ =
  * The code gets output when Blockly.Generator.finish() is called.
  *
  * @param {string} desiredName The desired name of the function (e.g., isPrime).
- * @param {string} code A list of Python statements.
+ * @param {!Array.<string>} code A list of Python statements.
  * @return {string} The actual name of the new function.  This may differ
  *     from desiredName if the former has already been taken by the user.
  * @private

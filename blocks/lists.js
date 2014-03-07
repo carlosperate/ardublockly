@@ -286,7 +286,7 @@ Blockly.Blocks['lists_getIndex'] = {
     this.setColour(260);
     var modeMenu = new Blockly.FieldDropdown(MODE, function(value) {
       var isStatement = (value == 'REMOVE');
-      this.sourceBlock_.updateStatement(isStatement);
+      this.sourceBlock_.updateStatement_(isStatement);
     });
     this.appendValueInput('VALUE')
         .setCheck('Array')
@@ -333,12 +333,18 @@ Blockly.Blocks['lists_getIndex'] = {
     // Note: Until January 2013 this block did not have mutations,
     // so 'statement' defaults to false and 'at' defaults to true.
     var isStatement = (xmlElement.getAttribute('statement') == 'true');
-    this.updateStatement(isStatement);
+    this.updateStatement_(isStatement);
     var isAt = (xmlElement.getAttribute('at') != 'false');
     this.updateAt_(isAt);
   },
-  updateStatement: function(newStatement) {
-    // Switch between a value block and a statement block.
+  /**
+   * Switch between a value block and a statement block.
+   * @param {boolean} newStatement True if the block should be a statement.
+   *     False if the block should be a value.
+   * @private
+   * @this Blockly.Block
+   */
+  updateStatement_: function(newStatement) {
     var oldStatement = !this.outputConnection;
     if (newStatement != oldStatement) {
       this.unplug(true, true);
