@@ -413,7 +413,7 @@ function init() {
                  {path: '../../', toolbox: toolbox});
 
   // Create the root block.
-  rootBlock = new Blockly.Block(Blockly.mainWorkspace, 'factory_base');
+  rootBlock = Blockly.Block.obtain(Blockly.mainWorkspace, 'factory_base');
   rootBlock.initSvg();
   rootBlock.render();
   rootBlock.setMovable(false);

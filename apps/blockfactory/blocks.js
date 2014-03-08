@@ -276,12 +276,13 @@ Blockly.Blocks['field_dropdown'] = {
     }
   },
   decompose: function(workspace) {
-    var containerBlock = new Blockly.Block(workspace,
-                                           'field_dropdown_container');
+    var containerBlock =
+        Blockly.Block.obtain(workspace, 'field_dropdown_container');
     containerBlock.initSvg();
     var connection = containerBlock.getInput('STACK').connection;
     for (var x = 0; x < this.optionCount_; x++) {
-      var optionBlock = new Blockly.Block(workspace, 'field_dropdown_option');
+      var optionBlock =
+          Blockly.Block.obtain(workspace, 'field_dropdown_option');
       optionBlock.initSvg();
       connection.connect(optionBlock.previousConnection);
       connection = optionBlock.nextConnection;
@@ -483,12 +484,12 @@ Blockly.Blocks['type_group'] = {
     }
   },
   decompose: function(workspace) {
-    var containerBlock = new Blockly.Block(workspace,
-                                           'type_group_container');
+    var containerBlock =
+        Blockly.Block.obtain(workspace, 'type_group_container');
     containerBlock.initSvg();
     var connection = containerBlock.getInput('STACK').connection;
     for (var x = 0; x < this.typeCount_; x++) {
-      var typeBlock = new Blockly.Block(workspace, 'type_group_item');
+      var typeBlock = Blockly.Block.obtain(workspace, 'type_group_item');
       typeBlock.initSvg();
       connection.connect(typeBlock.previousConnection);
       connection = typeBlock.nextConnection;
