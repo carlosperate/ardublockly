@@ -41,6 +41,12 @@ goog.require('goog.array');
 goog.require('goog.style');
 goog.require('rtclient');
 
+/**
+ * URL for progress indicator.
+ * @type {string}
+ * @private
+ */
+Blockly.Realtime.PROGRESS_URL_ = 'media/progress.gif';
 
 /**
  * Is realtime collaboration enabled?
@@ -139,6 +145,13 @@ Blockly.Realtime.undoElementId_ = null;
  * @private
  */
 Blockly.Realtime.redoElementId_ = null;
+
+/**
+ * URL of the animated progress indicator.
+ * @type {string}
+ * @private
+ */
+Blockly.Realtime.PROGRESS_URL_ = 'media/progress.gif';
 
 /**
  * This function is called the first time that the Realtime model is created
@@ -716,9 +729,13 @@ Blockly.Realtime.startRealtime = function(uiInitialize, uiContainer, options) {
  * @private
  */
 Blockly.Realtime.addAuthUi_ = function(uiContainer) {
+  // Add progess indicator to the UI container.
+  uiContainer.style.background = 'url(' + Blockly.pathToBlockly +
+      Blockly.Realtime.PROGRESS_URL_ + ') no-repeat center center';
+  // Setup authorization button
   var blocklyDivBounds = goog.style.getBounds(uiContainer);
   var authButtonDiv = goog.dom.createDom('div');
-  authButtonDiv.id = 'authButtonDiv';
+  authButtonDiv.id = Blockly.Realtime.rtclientOptions_['authDivElementId'];
   var authText = goog.dom.createDom('p', null, Blockly.Msg.AUTH);
   authButtonDiv.appendChild(authText);
   var authButton = goog.dom.createDom('button', null, 'Authorize');
