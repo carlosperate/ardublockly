@@ -2,7 +2,10 @@
     "@metadata": {
         "authors": [
             "Espertus",
-            "Takács Viktor László"
+            "Takács Viktor László",
+            "Dj",
+            "Grin",
+            "ViDam"
         ]
     },
     "VARIABLES_DEFAULT_NAME": "változó",
@@ -19,7 +22,8 @@
     "EXPAND_ALL": "Kinyit",
     "DISABLE_BLOCK": "Letilt",
     "ENABLE_BLOCK": "Engedélyez",
-    "HELP": "Sugó",
+    "HELP": "Súgó",
+    "CHAT": "Ebben a mezőben tudsz a közreműködőkkel beszélgetni!",
     "CHANGE_VALUE_TITLE": "Érték módosítása:",
     "NEW_VARIABLE": "Új...",
     "NEW_VARIABLE_TITLE": "Az új változó neve:",
@@ -45,8 +49,8 @@
     "CONTROLS_REPEAT_TITLE_TIMES": "alkalommal",
     "CONTROLS_REPEAT_INPUT_DO": "",
     "CONTROLS_REPEAT_TOOLTIP": "Megadott kódrészlet ismételt végrehajtása.",
-    "CONTROLS_WHILEUNTIL_OPERATOR_WHILE": "ismételd amíg igazː",
-    "CONTROLS_WHILEUNTIL_OPERATOR_UNTIL": "amíg nem",
+    "CONTROLS_WHILEUNTIL_OPERATOR_WHILE": "ismételd amíg",
+    "CONTROLS_WHILEUNTIL_OPERATOR_UNTIL": "ismételd amíg nem",
     "CONTROLS_WHILEUNTIL_TOOLTIP_WHILE": "Amíg a feltétel igaz, végrehajtja az utasításokat.",
     "CONTROLS_WHILEUNTIL_TOOLTIP_UNTIL": "Amíg a feltétel hamis, végrehajtja az utasításokat.",
     "CONTROLS_FOR_TOOLTIP": "Véges lépésszámú ciklus.  A \"%1\" változó értékét számolja ki a kezdőérték és a végérték között.  Minden lépésben végrehajtódnak az utasítások.",
@@ -206,9 +210,9 @@
     "TEXT_CHANGECASE_OPERATOR_LOWERCASE": "kisbetűs",
     "TEXT_CHANGECASE_OPERATOR_TITLECASE": "Címként Formázott",
     "TEXT_TRIM_TOOLTIP": "Levágja a megadott szöveg végeiről a szóközöket.",
-    "TEXT_TRIM_OPERATOR_BOTH": "a végekről",
-    "TEXT_TRIM_OPERATOR_LEFT": "az elejéről",
-    "TEXT_TRIM_OPERATOR_RIGHT": "a végéről",
+    "TEXT_TRIM_OPERATOR_BOTH": "szóközök levágása mindkét végéről",
+    "TEXT_TRIM_OPERATOR_LEFT": "szóközök levágása az elejéről",
+    "TEXT_TRIM_OPERATOR_RIGHT": "szóközök levágása a végéről",
     "TEXT_PRINT_TITLE": "Üzenet %1",
     "TEXT_PRINT_TOOLTIP": "Megejelníti a megadott kaakterláncot üzenetként a képernyőn.",
     "TEXT_PROMPT_TYPE_TEXT": "Kérj be szöveget",

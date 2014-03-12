@@ -329,7 +329,7 @@
     "PROCEDURES_BEFORE_PARAMS": "με:",
     "PROCEDURES_DEFNORETURN_TOOLTIP": "Δημιουργεί μια συνάρτηση χωρίς έξοδο.",
     "PROCEDURES_DEFRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
-    "PROCEDURES_DEFRETURN_RETURN": "επιστροφή",
+    "PROCEDURES_DEFRETURN_RETURN": "επέστρεψε",
     "PROCEDURES_DEFRETURN_TOOLTIP": "Δημιουργεί μια συνάρτηση με μια έξοδο.",
     "PROCEDURES_DEF_DUPLICATE_WARNING": "Προειδοποίηση: Αυτή η συνάρτηση έχει διπλότυπες παραμέτρους.",
     "PROCEDURES_CALLNORETURN_HELPURL": "https://el.wikipedia.org/wiki/Διαδικασία_(υπολογιστές)",

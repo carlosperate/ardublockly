@@ -1,5 +1,9 @@
 {
-    "@metadata": [],
+    "@metadata": {
+        "authors": [
+            "Minisarm"
+        ]
+    },
     "VARIABLES_DEFAULT_NAME": "element",
     "DUPLICATE_BLOCK": "Duplicati",
     "ADD_COMMENT": "Adaugă un comentariu",
@@ -15,6 +19,7 @@
     "DISABLE_BLOCK": "Dezactivaţi bloc",
     "ENABLE_BLOCK": "Permite bloc",
     "HELP": "Ajutor",
+    "CHAT": "Discută cu colaboratorul tău tastând în cadrul acestei zone!",
     "CHANGE_VALUE_TITLE": "Schimbaţi valoarea:",
     "NEW_VARIABLE": "Variabilă nouă...",
     "NEW_VARIABLE_TITLE": "Noul nume de variabilă:",

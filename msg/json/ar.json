@@ -1,5 +1,9 @@
 {
-    "@metadata": [],
+    "@metadata": {
+        "authors": [
+            "Meno25"
+        ]
+    },
     "VARIABLES_DEFAULT_NAME": "البند",
     "DUPLICATE_BLOCK": "ادمج",
     "ADD_COMMENT": "اضافة تعليق",
@@ -15,6 +19,7 @@
     "DISABLE_BLOCK": "عطّل القطعة",
     "ENABLE_BLOCK": "أعد تفعيل القطعة",
     "HELP": "مساعدة",
+    "CHAT": "دردش مع زملائك بالكتابة في هذا الصندوق!",
     "CHANGE_VALUE_TITLE": "تغيير قيمة:",
     "NEW_VARIABLE": "متغير جديد...",
     "NEW_VARIABLE_TITLE": "اسم المتغير الجديد:",
@@ -229,9 +234,9 @@
     "TEXT_CHANGECASE_OPERATOR_TITLECASE": "الى حروف العنوان",
     "TEXT_TRIM_HELPURL": "https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces",
     "TEXT_TRIM_TOOLTIP": "يرجع نسخة من النص مع حذف من أحد أو كلا الفراغات من أطرافه.",
-    "TEXT_TRIM_OPERATOR_BOTH": "ازالة الفراغات من كلا الجانبين",
-    "TEXT_TRIM_OPERATOR_LEFT": "ازالة الفراغات من الجانب الأيسر",
-    "TEXT_TRIM_OPERATOR_RIGHT": "ازالة الفراغات من الجانب الأيمن",
+    "TEXT_TRIM_OPERATOR_BOTH": "إزالة الفراغات من كلا الجانبين",
+    "TEXT_TRIM_OPERATOR_LEFT": "إزالة الفراغات من الجانب الأيسر من",
+    "TEXT_TRIM_OPERATOR_RIGHT": "إزالة الفراغات من الجانب الأيمن من",
     "TEXT_PRINT_HELPURL": "https://code.google.com/p/blockly/wiki/Text#Printing_text",
     "TEXT_PRINT_TITLE": "اطبع %1",
     "TEXT_PRINT_TOOLTIP": "اطبع النص المحدد أو العدد أو قيمة أخرى.",

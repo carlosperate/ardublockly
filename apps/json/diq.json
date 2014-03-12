@@ -2,14 +2,15 @@
     "@metadata": {
         "authors": [
             "Gorizon",
-            "Marmase"
+            "Marmase",
+            "Mirzali"
         ]
     },
     "Apps.blocklyMessage": "Blockly",
     "Apps.runProgram": "Programi Akar fi",
     "Apps.resetProgram": "Reset kerê",
     "Apps.dialogOk": "TEMAM",
-    "Apps.dialogCancel": "Bıterkne",
+    "Apps.dialogCancel": "Bıtexelne",
     "Apps.catLogic": "Mantığ",
     "Apps.catLoops": "Dingeki",
     "Apps.catMath": "Matematik",
@@ -22,6 +23,7 @@
     "Apps.linkAlert": "Blokan na linkera bıhesrne\n\n%1",
     "Apps.listVariable": "liste",
     "Apps.textVariable": "nuşte",
+    "Code.badCode": "Xeta programi:%1",
     "Code.title": "Kod",
     "Code.blocks": "Bloki",
     "Code.trashTooltip": "Blokan hemın çek",

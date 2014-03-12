@@ -2,7 +2,8 @@
     "@metadata": {
         "authors": [
             "Hym411",
-            "아라"
+            "아라",
+            "Priviet"
         ]
     },
     "Apps.subtitle": "시각 프로그래밍 환경",
@@ -46,7 +47,7 @@
     "Turtle.title": "터틀 그래픽",
     "Apps.turtleSubtitle": "Blockly를 이용하여 그림을 그립니다.",
     "Apps.graphSubtitle": "Blockly를 이용하여 함수를 배열합니다.",
-    "Apps.codeSubtitle": "Bloxkly 프로그램을 자바스크립트, 파이썬, 혹은 XML 파일로 내보냅니다.",
+    "Apps.codeSubtitle": "Blockly 프로그램을 자바스크립트, 파이썬, 다트 혹은 XML 파일로 내보냅니다.",
     "Plane.plane": "비행기 좌석 계산기",
     "Apps.planeSubtitle": "하나 또는 두개의 변수를 가진 수학 문제를 풉니다.",
     "Apps.blockFactory": "블록 공장",
