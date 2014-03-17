@@ -31,7 +31,7 @@ goog.addDependency("../../../" + dir + "/core/blocks.js", ['Blockly.Blocks'], ['
 goog.addDependency("../../../" + dir + "/core/bubble.js", ['Blockly.Bubble'], ['Blockly.Workspace']);
 goog.addDependency("../../../" + dir + "/core/comment.js", ['Blockly.Comment'], ['Blockly.Bubble', 'Blockly.Icon']);
 goog.addDependency("../../../" + dir + "/core/connection.js", ['Blockly.Connection', 'Blockly.ConnectionDB'], ['Blockly.Workspace']);
-goog.addDependency("../../../" + dir + "/core/contextmenu.js", ['Blockly.ContextMenu'], []);
+goog.addDependency("../../../" + dir + "/core/contextmenu.js", ['Blockly.ContextMenu'], ['goog.dom', 'goog.style', 'goog.ui.Menu', 'goog.ui.MenuItem']);
 goog.addDependency("../../../" + dir + "/core/css.js", ['Blockly.Css'], ['goog.cssom']);
 goog.addDependency("../../../" + dir + "/core/field.js", ['Blockly.Field'], ['Blockly.BlockSvg', 'goog.asserts']);
 goog.addDependency("../../../" + dir + "/core/field_angle.js", ['Blockly.FieldAngle'], ['Blockly.FieldTextInput']);
