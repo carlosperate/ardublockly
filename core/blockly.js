@@ -267,7 +267,7 @@ Blockly.onMouseDown_ = function(e) {
   }
   if (Blockly.isRightButton(e)) {
     // Right-click.
-    Blockly.showContextMenu_(Blockly.mouseToSvg(e));
+    Blockly.showContextMenu_(e);
   } else if ((Blockly.readOnly || isTargetSvg) &&
              Blockly.mainWorkspace.scrollbar) {
     // If the workspace is editable, only allow dragging when gripping empty
@@ -394,10 +394,10 @@ Blockly.copy_ = function(block) {
 
 /**
  * Show the context menu for the workspace.
- * @param {!Object} xy Coordinates of mouse click, contains x and y properties.
+ * @param {!Event} e Mouse event.
  * @private
  */
-Blockly.showContextMenu_ = function(xy) {
+Blockly.showContextMenu_ = function(e) {
   if (Blockly.readOnly) {
     return;
   }
@@ -442,7 +442,7 @@ Blockly.showContextMenu_ = function(xy) {
   helpOption.callback = function() {};
   options.push(helpOption);
 
-  Blockly.ContextMenu.show(xy, options);
+  Blockly.ContextMenu.show(e, options);
 };
 
 /**
@@ -463,7 +463,6 @@ Blockly.onContextMenu_ = function(e) {
  */
 Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.Tooltip.hide();
-  Blockly.ContextMenu.hide();
   Blockly.FieldDropdown.hide();
   Blockly.WidgetDiv.hide();
   if (!opt_allowToolbox &&

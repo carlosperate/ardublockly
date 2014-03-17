@@ -69,7 +69,7 @@ Blockly.FieldColour.prototype.CURSOR = 'default';
  * Dispose of all DOM objects belonging to this editable field.
  */
 Blockly.FieldColour.prototype.dispose = function() {
-  Blockly.WidgetDiv.hideIfField(this);
+  Blockly.WidgetDiv.hideIfOwner(this);
   Blockly.FieldColour.superClass_.dispose.call(this);
 };
 

@@ -208,8 +208,8 @@ Blockly.Tooltip.onMouseMove_ = function(e) {
   if (!Blockly.Tooltip.element_ || !Blockly.Tooltip.element_.tooltip) {
     // No tooltip here to show.
     return;
-  } else if (Blockly.ContextMenu.visible || Blockly.Block.dragMode_ != 0) {
-    // Don't display a tooltip when a context menu is active, or during a drag.
+  } else if (Blockly.Block.dragMode_ != 0) {
+    // Don't display a tooltip during a drag.
     return;
   }
   if (Blockly.Tooltip.visible) {

@@ -67,7 +67,7 @@ Blockly.FieldTextInput.prototype.CURSOR = 'text';
  * Dispose of all DOM objects belonging to this editable field.
  */
 Blockly.FieldTextInput.prototype.dispose = function() {
-  Blockly.WidgetDiv.hideIfField(this);
+  Blockly.WidgetDiv.hideIfOwner(this);
   Blockly.FieldTextInput.superClass_.dispose.call(this);
 };
 
@@ -237,6 +237,8 @@ Blockly.FieldTextInput.prototype.dispose_ = function() {
     Blockly.unbindEvent_(htmlInput.onKeyPressWrapper_);
     Blockly.unbindEvent_(htmlInput.onWorkspaceChangeWrapper_);
     Blockly.FieldTextInput.htmlInput_ = null;
+    // Delete the width property.
+    Blockly.WidgetDiv.DIV.style.width = 'auto';
   };
 };
 

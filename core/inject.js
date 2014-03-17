@@ -317,8 +317,6 @@ Blockly.createDom_ = function(container) {
     svg.appendChild(Blockly.FieldDropdown.createDom());
   }
 
-  svg.appendChild(Blockly.ContextMenu.createDom());
-
   // The SVG is now fully assembled.  Add it to the container.
   container.appendChild(svg);
   Blockly.svg = svg;
@@ -326,6 +324,7 @@ Blockly.createDom_ = function(container) {
 
   // Create an HTML container for popup overlays (e.g. editor widgets).
   Blockly.WidgetDiv.DIV = goog.dom.createDom('div', 'blocklyWidgetDiv');
+  Blockly.WidgetDiv.DIV.style.direction = Blockly.RTL ? 'rtl' : 'ltr';
   document.body.appendChild(Blockly.WidgetDiv.DIV);
 };
 
@@ -361,6 +360,8 @@ Blockly.init_ = function() {
   Blockly.bindEvent_(Blockly.svg, 'mousedown', null, Blockly.onMouseDown_);
   Blockly.bindEvent_(Blockly.svg, 'mousemove', null, Blockly.onMouseMove_);
   Blockly.bindEvent_(Blockly.svg, 'contextmenu', null, Blockly.onContextMenu_);
+  Blockly.bindEvent_(Blockly.WidgetDiv.DIV, 'contextmenu', null,
+                     Blockly.onContextMenu_);
 
   if (!Blockly.documentEventsBound_) {
     // Only bind the window/document events once.

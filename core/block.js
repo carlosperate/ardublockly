@@ -516,7 +516,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   Blockly.hideChaff();
   if (Blockly.isRightButton(e)) {
     // Right-click.
-    this.showContextMenu_(Blockly.mouseToSvg(e));
+    this.showContextMenu_(e);
   } else if (!this.isMovable()) {
     // Allow unmovable blocks to be selected and context menued, but not
     // dragged.  Let this event bubble up to document, so the workspace may be
@@ -636,10 +636,10 @@ Blockly.Block.prototype.duplicate_ = function() {
 
 /**
  * Show the context menu for this block.
- * @param {!Object} xy Coordinates of mouse click, contains x and y properties.
+ * @param {!Event} e Mouse event.
  * @private
  */
-Blockly.Block.prototype.showContextMenu_ = function(xy) {
+Blockly.Block.prototype.showContextMenu_ = function(e) {
   if (Blockly.readOnly || !this.contextMenu) {
     return;
   }
@@ -758,7 +758,7 @@ Blockly.Block.prototype.showContextMenu_ = function(xy) {
     this.customContextMenu(options);
   }
 
-  Blockly.ContextMenu.show(xy, options);
+  Blockly.ContextMenu.show(e, options);
 };
 
 /**
