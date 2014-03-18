@@ -51,9 +51,11 @@ Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
   this.value_ = firstTuple[1];
 
   // Add dropdown arrow: "option ▾" (LTR) or "▾ אופציה" (RTL)
+  // Android can't (in 2014) display "▾", so use "▼" instead.
+  var arrowChar = goog.userAgent.ANDROID ? '\u25BC' : '\u25BE';
   this.arrow_ = Blockly.createSvgElement('tspan', {}, null);
   this.arrow_.appendChild(document.createTextNode(
-      Blockly.RTL ? '\u25BE ' : ' \u25BE'));
+      Blockly.RTL ? arrowChar + ' ' : ' ' + arrowChar));
 
   // Call parent's constructor.
   Blockly.FieldDropdown.superClass_.constructor.call(this, firstTuple[0]);
