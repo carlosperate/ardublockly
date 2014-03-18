@@ -22,7 +22,7 @@
     "Apps.catLists": "목록",
     "Apps.catColour": "색",
     "Apps.catVariables": "변수",
-    "Apps.catProcedures": "절차",
+    "Apps.catProcedures": "기능",
     "Apps.httpRequestError": "요청에 문제가 있습니다.",
     "Apps.linkAlert": "다음 링크로 블록을 공유하세요:\n\n%1",
     "Apps.hashError": "죄송하지만 '%1'은 어떤 저장된 프로그램으로 일치하지 않습니다.",

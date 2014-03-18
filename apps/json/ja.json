@@ -21,7 +21,7 @@
     "Apps.catLists": "リスト",
     "Apps.catColour": "色",
     "Apps.catVariables": "変数",
-    "Apps.catProcedures": "手続き",
+    "Apps.catProcedures": "関数",
     "Apps.httpRequestError": "ネットワーク接続のエラーです。",
     "Apps.linkAlert": "ブロックの状態をこのリンクで共有できます:\n\n%1",
     "Apps.hashError": "すみません。「%1」という名前のプログラムは保存されていません。",

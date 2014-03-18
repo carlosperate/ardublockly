@@ -6,12 +6,14 @@
             "Mushviq Abdulla"
         ]
     },
+    "Apps.dialogOk": "TAMAM",
     "Apps.dialogCancel": "Ləğv et",
     "Apps.catText": "Mətn",
     "Apps.catLists": "Siyahılar",
     "Apps.catColour": "Rəng",
     "Apps.catVariables": "Dəyişənlər",
     "Apps.catProcedures": "Prosedurları",
+    "Apps.httpRequestError": "Sorğu ilə əlaqəli problem var.",
     "Apps.listVariable": "siyahı",
     "Apps.textVariable": "mətn",
     "Code.badCode": "Proqram xətası:\n%1",

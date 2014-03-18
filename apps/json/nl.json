@@ -21,7 +21,7 @@
     "Apps.catLists": "Lijsten",
     "Apps.catColour": "Kleur",
     "Apps.catVariables": "Variabelen",
-    "Apps.catProcedures": "Procedures",
+    "Apps.catProcedures": "Functies",
     "Apps.httpRequestError": "Er is een probleem opgetreden tijdens het verwerken van het verzoek.",
     "Apps.linkAlert": "Deel uw blokken via deze koppeling:\n\n%1",
     "Apps.hashError": "\"%1\" komt helaas niet overeen met een opgeslagen bestand.",

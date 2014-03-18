@@ -2,7 +2,8 @@
     "@metadata": {
         "authors": [
             "Eitvys200",
-            "Vilius2001"
+            "Vilius2001",
+            "Garas"
         ]
     },
     "Apps.blocklyMessage": "Blockly",
@@ -16,7 +17,7 @@
     "Apps.catLists": "Sąrašai",
     "Apps.catColour": "Spalva",
     "Apps.catVariables": "Kintamieji",
-    "Apps.catProcedures": "Procedūros",
+    "Apps.catProcedures": "Funkcijos",
     "Apps.httpRequestError": "Iškilo problema su prašymu.",
     "Apps.listVariable": "sąrašas",
     "Apps.textVariable": "tekstas",

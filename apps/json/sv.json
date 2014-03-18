@@ -21,7 +21,7 @@
     "Apps.catLists": "Listor",
     "Apps.catColour": "Färg",
     "Apps.catVariables": "Variabler",
-    "Apps.catProcedures": "Procedurer",
+    "Apps.catProcedures": "Funktioner",
     "Apps.httpRequestError": "Det uppstod ett problem med begäran.",
     "Apps.linkAlert": "Dela dina block med denna länk: \n\n%1",
     "Apps.hashError": "Tyvärr, '%1' överensstämmer inte med något sparat program.",

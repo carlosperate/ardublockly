@@ -4,6 +4,7 @@
             "Robby"
         ]
     },
+    "Apps.blocklyMessage": "Blockly",
     "Apps.codeTooltip": "Generéierte JavaScript Code kucken.",
     "Apps.linkTooltip": "Späicheren a mat de Bléck verlinken",
     "Apps.runProgram": "Programm ausféieren",
@@ -15,7 +16,7 @@
     "Apps.catLists": "Lëschten",
     "Apps.catColour": "Faarf",
     "Apps.catVariables": "Variabelen",
-    "Apps.catProcedures": "Prozeduren",
+    "Apps.catProcedures": "Funktiounen",
     "Apps.httpRequestError": "Et gouf e Problem mat der Ufro.",
     "Apps.hashError": "Pardon, '%1' entsprécht kengem vun de gespäicherte Programmer.",
     "Apps.listVariable": "Lëscht",

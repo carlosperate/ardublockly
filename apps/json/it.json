@@ -22,7 +22,7 @@
     "Apps.catLists": "Elenchi",
     "Apps.catColour": "Colore",
     "Apps.catVariables": "Variabili",
-    "Apps.catProcedures": "Procedure",
+    "Apps.catProcedures": "Funzioni",
     "Apps.httpRequestError": "La richiesta non è stata soddisfatta.",
     "Apps.linkAlert": "Condividi i tuoi blocchi con questo collegamento:\n\n%1",
     "Apps.hashError": "Mi spiace, '%1' non corrisponde ad alcun programma salvato.",

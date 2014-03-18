@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Ebraminio"
+            "Ebraminio",
+            "Reza1615"
         ]
     },
     "Apps.subtitle": "یک محیط برنامه‌نویسی بصری",
@@ -20,7 +21,7 @@
     "Apps.catLists": "فهرست‌ها",
     "Apps.catColour": "رنگ",
     "Apps.catVariables": "متغییرها",
-    "Apps.catProcedures": "روندها",
+    "Apps.catProcedures": "توابع",
     "Apps.httpRequestError": "مشکلی با درخواست وجود داشت.",
     "Apps.linkAlert": "اشتراک‌گذاری بلاک‌هایتان با این پیوند:\n\n%1",
     "Apps.hashError": "شرمنده، «%1» با هیچ برنامهٔ ذخیره‌شده‌ای تطبیق پیدا نکرد.",
@@ -45,7 +46,7 @@
     "Turtle.title": "گرافیک لاک‌پشت",
     "Apps.turtleSubtitle": "استفاده از بلوکلی برای کشیدن.",
     "Apps.graphSubtitle": "توابع کشیدن با بلوکلی.",
-    "Apps.codeSubtitle": "خارج‌سازی یک برنامه بلوکلی به جاوااسکریپت، پایتون و اکس‌ام‌ال.",
+    "Apps.codeSubtitle": "خارج‌سازی یک برنامه بلوکلی به جاوااسکریپت، پایتون، دارت و اکس‌ام‌ال.",
     "Plane.plane": "محاسبه‌گر صندلی‌های هواپیما",
     "Apps.planeSubtitle": "حل یک مسألهٔ ریاضی با یک یا دو متغییر.",
     "Apps.blockFactory": "کارخانهٔ بلوکلی",

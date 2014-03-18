@@ -20,7 +20,7 @@
     "Apps.catLists": "Списки",
     "Apps.catColour": "Колір",
     "Apps.catVariables": "Змінні",
-    "Apps.catProcedures": "Процедури",
+    "Apps.catProcedures": "Функції",
     "Apps.httpRequestError": "Виникла проблема із запитом.",
     "Apps.linkAlert": "Поділитися вашим блоками через посилання:\n\n%1",
     "Apps.hashError": "На жаль, \"%1\" не відповідає жодній збереженій програмі.",

@@ -20,7 +20,7 @@
     "Apps.catLists": "Listes",
     "Apps.catColour": "Couleur",
     "Apps.catVariables": "Variables",
-    "Apps.catProcedures": "Procédures",
+    "Apps.catProcedures": "Fonctions",
     "Apps.httpRequestError": "Il y a eu un problème avec la demande.",
     "Apps.linkAlert": "Partagez vos blocs grâce à ce lien:\n\n%1",
     "Apps.hashError": "Désolé, '%1' ne correspond pas à un fichier Blockly sauvegarde.",
