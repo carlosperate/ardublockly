@@ -88,3 +88,46 @@ Blockly.WidgetDiv.hideIfOwner = function(oldOwner) {
     Blockly.WidgetDiv.hide();
   }
 };
+
+/**
+ * Position the widget at a given location.  Flip anchor point as needed to
+ * prevent the widget from going offscreen.
+ * @param {number} anchorX Horizontal location.
+ * @param {number} anchorY Vertical location.
+ * @param {!goog.math.Size} widgetSize Height/width of widget.
+ * @param {!goog.math.Size} widowSize Height/width of window.
+ * @param {!goog.math.Coordinate} scrollOffset X/y of window scrollbars.
+ */
+Blockly.WidgetDiv.position = function(anchorX, anchorY, widgetSize, windowSize,
+                                      scrollOffset) {
+  var x = anchorX + scrollOffset.x;
+  var y = anchorY + scrollOffset.y;
+  // Flip widget vertically if off the bottom.
+  if (anchorY + widgetSize.height >= windowSize.height) {
+    y -= widgetSize.height;
+    // Don't let the widget go above the top edge of the window.
+    if (y < scrollOffset.y) {
+      y = scrollOffset.y;
+    }
+  }
+  // Flip widget horizontally if off the edge.
+  if (Blockly.RTL) {
+    if (widgetSize.width >= anchorX) {
+      x += widgetSize.width;
+      // Don't let the menu go right of the right edge of the window.
+      if (anchorX >= windowSize.width - widgetSize.width) {
+        x = windowSize.width + scrollOffset.x;
+      }
+    }
+  } else {
+    if (anchorX + widgetSize.width >= windowSize.width) {
+      x -= widgetSize.width;
+      // Don't let the widget go left of the left edge of the window.
+      if (x < scrollOffset.x) {
+        x = scrollOffset.x;
+      }
+    }
+  }
+  Blockly.WidgetDiv.DIV.style.left = x + 'px';
+  Blockly.WidgetDiv.DIV.style.top = y + 'px';
+};

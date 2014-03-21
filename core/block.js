@@ -362,6 +362,11 @@ Blockly.Block.prototype.dispose = function(healStack, animate,
     Blockly.terminateDrag_();
   }
 
+  // If this block has a context menu open, close it.
+  if (Blockly.ContextMenu.currentBlock == this) {
+    Blockly.ContextMenu.hide();
+  }
+
   // First, dispose of all my children.
   for (var x = this.childBlocks_.length - 1; x >= 0; x--) {
     this.childBlocks_[x].dispose(false);
@@ -759,6 +764,7 @@ Blockly.Block.prototype.showContextMenu_ = function(e) {
   }
 
   Blockly.ContextMenu.show(e, options);
+  Blockly.ContextMenu.currentBlock = this;
 };
 
 /**

@@ -33,6 +33,12 @@ goog.require('goog.ui.MenuItem');
 
 
 /**
+ * Which block is the context menu attached to?
+ * @type {Blockly.Block}
+ */
+Blockly.ContextMenu.currentBlock = null;
+
+/**
  * Construct the menu based on the list of options and show the menu.
  * @param {!Event} e Mouse event.
  * @param {!Array.<!Object>} options Array of menu options.
@@ -49,8 +55,6 @@ Blockly.ContextMenu.show = function(e, options) {
      callback: Blockly.MakeItSo}
   */
   var menu = new goog.ui.Menu();
-  menu.setAllowAutoFocus(true);
-
   for (var x = 0, option; option = options[x]; x++) {
     var menuItem = new goog.ui.MenuItem(option.text);
     menu.addItem(menuItem);
@@ -64,39 +68,26 @@ Blockly.ContextMenu.show = function(e, options) {
     }
   }
   goog.events.listen(menu, goog.ui.Component.EventType.ACTION,
-                     Blockly.ContextMenu.hide_);
-  var div = Blockly.WidgetDiv.DIV;
-  menu.render(div);
-
-  var menuSize = goog.style.getSize(div.firstChild);
+                     Blockly.ContextMenu.hide);
+  // Record windowSize and scrollOffset before adding menu.
   var windowSize = goog.dom.getViewportSize();
   var scrollOffset = goog.style.getViewportPageOffset(document);
-  var x = e.clientX + scrollOffset.x;
-  var y = e.clientY + scrollOffset.y;
-  // Flip menu vertically if off the bottom.
-  if (y + menuSize.height >= windowSize.height) {
-    y -= menuSize.height;
-  }
-  // Flip menu horizontally if off the edge.
-  if (Blockly.RTL) {
-    if (x - menuSize.width <= 0) {
-      x += menuSize.width;
-    }
-  } else {
-    if (x + menuSize.width >= windowSize.width) {
-      x -= menuSize.width;
-    }
-  }
-  div.style.left = x + 'px';
-  div.style.top = y + 'px';
+  var div = Blockly.WidgetDiv.DIV;
+  menu.render(div);
+  menu.setAllowAutoFocus(true);
+  // Record menuSize after adding menu.
+  var menuSize = goog.style.getSize(div.firstChild);
+  Blockly.WidgetDiv.position(e.clientX, e.clientY, menuSize, windowSize,
+                             scrollOffset);
+  Blockly.ContextMenu.currentBlock = null;  // May be set by Blockly.Block.
 };
 
 /**
  * Hide the context menu.
- * @private
  */
-Blockly.ContextMenu.hide_ = function() {
+Blockly.ContextMenu.hide = function() {
   Blockly.WidgetDiv.hideIfOwner(Blockly.ContextMenu);
+  Blockly.ContextMenu.currentBlock = null;
 };
 
 /**
