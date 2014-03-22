@@ -243,37 +243,6 @@ Blockly.Css.CONTENT = [
   '  stroke: #ddd;',
   '}',
 
-  '.blocklyDropdownMenuOptions>.blocklyMenuDiv {',
-  '  fill: #fff;',
-  '}',
-
-  '.blocklyDropdownMenuOptions>.blocklyMenuDiv:hover>rect {',
-  '  fill: #57e;',
-  '}',
-
-  '.blocklyMenuSelected>rect {',
-  '  fill: #57e;',
-  '}',
-
-  '.blocklyMenuText {',
-  '  cursor: default !important;',
-  '  font-family: sans-serif;',
-  '  font-size: 15px;', /* All context menu sizes are based on pixels. */
-  '  fill: #000;',
-  '}',
-
-  '.blocklyDropdownMenuOptions>.blocklyMenuDiv:hover>.blocklyMenuText {',
-  '  fill: #fff;',
-  '}',
-
-  '.blocklyMenuSelected>.blocklyMenuText {',
-  '  fill: #fff;',
-  '}',
-
-  '.blocklyMenuDivDisabled>.blocklyMenuText {',
-  '  fill: #ccc;',
-  '}',
-
   '.blocklyFlyoutBackground {',
   '  fill: #ddd;',
   '  fill-opacity: .8;',
@@ -325,8 +294,18 @@ Blockly.Css.CONTENT = [
   '  stroke-linecap: round;',
   '}',
 
-  '.goog-menu {',
+  '.blocklyContextMenu {',
   '  border-radius: 4px;',
+  '}',
+
+  '.blocklyDropdownMenu {',
+  '  padding: 0 !important;',
+  '}',
+
+  /* Override the default Closure URL. */
+  '.goog-option-selected .goog-menuitem-checkbox,',
+  '.goog-option-selected .goog-menuitem-icon {',
+  '  background: url(<<<PATH>>>/media/sprites.png) no-repeat 0 0 !important;',
   '}',
 
   /* Category tree in Toolbox. */

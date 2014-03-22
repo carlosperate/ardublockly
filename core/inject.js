@@ -312,10 +312,7 @@ Blockly.createDom_ = function(container) {
     }
   }
 
-  Blockly.Tooltip && svg.appendChild(Blockly.Tooltip.createDom());
-  if (!Blockly.readOnly && Blockly.FieldDropdown) {
-    svg.appendChild(Blockly.FieldDropdown.createDom());
-  }
+  svg.appendChild(Blockly.Tooltip.createDom());
 
   // The SVG is now fully assembled.  Add it to the container.
   container.appendChild(svg);

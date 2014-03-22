@@ -94,21 +94,24 @@ Blockly.WidgetDiv.hideIfOwner = function(oldOwner) {
  * prevent the widget from going offscreen.
  * @param {number} anchorX Horizontal location.
  * @param {number} anchorY Vertical location.
+ * @param {number} anchorHeight Height of anchor object.
  * @param {!goog.math.Size} widgetSize Height/width of widget.
  * @param {!goog.math.Size} widowSize Height/width of window.
  * @param {!goog.math.Coordinate} scrollOffset X/y of window scrollbars.
  */
-Blockly.WidgetDiv.position = function(anchorX, anchorY, widgetSize, windowSize,
-                                      scrollOffset) {
+Blockly.WidgetDiv.position = function(anchorX, anchorY, anchorHeight,
+    widgetSize, windowSize, scrollOffset) {
   var x = anchorX + scrollOffset.x;
   var y = anchorY + scrollOffset.y;
   // Flip widget vertically if off the bottom.
-  if (anchorY + widgetSize.height >= windowSize.height) {
+  if (anchorY + widgetSize.height + anchorHeight >= windowSize.height) {
     y -= widgetSize.height;
     // Don't let the widget go above the top edge of the window.
     if (y < scrollOffset.y) {
       y = scrollOffset.y;
     }
+  } else {
+    y += anchorHeight;
   }
   // Flip widget horizontally if off the edge.
   if (Blockly.RTL) {

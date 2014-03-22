@@ -75,9 +75,11 @@ Blockly.ContextMenu.show = function(e, options) {
   var div = Blockly.WidgetDiv.DIV;
   menu.render(div);
   menu.setAllowAutoFocus(true);
+  var menuDom = menu.getElement();
+  Blockly.addClass_(menuDom, 'blocklyContextMenu');
   // Record menuSize after adding menu.
-  var menuSize = goog.style.getSize(div.firstChild);
-  Blockly.WidgetDiv.position(e.clientX, e.clientY, menuSize, windowSize,
+  var menuSize = goog.style.getSize(menuDom);
+  Blockly.WidgetDiv.position(e.clientX, e.clientY, 0, menuSize, windowSize,
                              scrollOffset);
   Blockly.ContextMenu.currentBlock = null;  // May be set by Blockly.Block.
 };

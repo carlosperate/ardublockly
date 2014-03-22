@@ -46,7 +46,7 @@ Blockly.BlockSvg = function(block) {
   this.svgPathLight_ = Blockly.createSvgElement('path',
       {'class': 'blocklyPathLight'}, this.svgGroup_);
   this.svgPath_.tooltip = this.block_;
-  Blockly.Tooltip && Blockly.Tooltip.bindMouseEvents(this.svgPath_);
+  Blockly.Tooltip.bindMouseEvents(this.svgPath_);
   this.updateMovable();
 };
 

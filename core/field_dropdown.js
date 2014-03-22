@@ -29,6 +29,10 @@
 goog.provide('Blockly.FieldDropdown');
 
 goog.require('Blockly.Field');
+goog.require('goog.dom');
+goog.require('goog.style');
+goog.require('goog.ui.Menu');
+goog.require('goog.ui.MenuItem');
 
 
 /**
@@ -63,60 +67,12 @@ Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
 goog.inherits(Blockly.FieldDropdown, Blockly.Field);
 
 /**
- * Horizontal padding on either side of each option.
- */
-Blockly.FieldDropdown.X_PADDING = 20;
-
-/**
- * Vertical height of each option.
- */
-Blockly.FieldDropdown.Y_HEIGHT = 20;
-
-/**
  * Clone this FieldDropdown.
  * @return {!Blockly.FieldDropdown} The result of calling the constructor again
  *   with the current values of the arguments used during construction.
  */
 Blockly.FieldDropdown.prototype.clone = function() {
   return new Blockly.FieldDropdown(this.menuGenerator_, this.changeHandler_);
-};
-
-/**
- * Create the dropdown field's elements.  Only needs to be called once.
- * @return {!Element} The field's SVG group.
- */
-Blockly.FieldDropdown.createDom = function() {
-  /*
-  <g class="blocklyHidden blocklyFieldDropdown">
-    <rect class="blocklyDropdownMenuShadow" x="0" y="1" rx="2" ry="2"/>
-    <rect x="-2" y="-1" rx="2" ry="2"/>
-    <g class="blocklyDropdownMenuOptions">
-    </g>
-  </g>
-  */
-  var svgGroup = Blockly.createSvgElement('g',
-      {'class': 'blocklyHidden blocklyFieldDropdown'}, null);
-  Blockly.FieldDropdown.svgGroup_ = svgGroup;
-  Blockly.FieldDropdown.svgShadow_ = Blockly.createSvgElement('rect',
-      {'class': 'blocklyDropdownMenuShadow',
-      'x': 0, 'y': 1, 'rx': 2, 'ry': 2}, svgGroup);
-  Blockly.FieldDropdown.svgBackground_ = Blockly.createSvgElement('rect',
-      {'x': -2, 'y': -1, 'rx': 2, 'ry': 2,
-      'filter': 'url(#blocklyEmboss)'}, svgGroup);
-  Blockly.FieldDropdown.svgOptions_ = Blockly.createSvgElement('g',
-      {'class': 'blocklyDropdownMenuOptions'}, svgGroup);
-  return svgGroup;
-};
-
-/**
- * Close the dropdown and dispose of all UI.
- */
-Blockly.FieldDropdown.prototype.dispose = function() {
-  if (Blockly.FieldDropdown.openDropdown_ == this) {
-    Blockly.FieldDropdown.hide();
-  }
-  // Call parent's destructor.
-  Blockly.Field.prototype.dispose.call(this);
 };
 
 /**
@@ -132,120 +88,63 @@ Blockly.FieldDropdown.prototype.CURSOR = 'default';
 /**
  * Which block is the dropdown attached to?
  * @type {Blockly.FieldDropdown}
- * @private
  */
-Blockly.FieldDropdown.openDropdown_ = null;
+Blockly.FieldDropdown.currentBlock = null;
 
 /**
  * Create a dropdown menu under the text.
  * @private
  */
 Blockly.FieldDropdown.prototype.showEditor_ = function() {
-  var svgGroup = Blockly.FieldDropdown.svgGroup_;
-  var svgOptions = Blockly.FieldDropdown.svgOptions_;
-  var svgBackground = Blockly.FieldDropdown.svgBackground_;
-  var svgShadow = Blockly.FieldDropdown.svgShadow_;
-  // Erase all existing options.
-  goog.dom.removeChildren(svgOptions);
-  // The menu must be made visible early since otherwise BBox and
-  // getComputedTextLength will return 0.
-  Blockly.removeClass_(svgGroup, 'blocklyHidden');
-  Blockly.FieldDropdown.openDropdown_ = this;
+  Blockly.WidgetDiv.show(Blockly.FieldDropdown, null);
+  var thisField = this;
 
-  function callbackFactory(value) {
-    return function(e) {
-      if (this.changeHandler_) {
+  function callback(e) {
+    var menuItem = e.target;
+    if (menuItem) {
+      var value = menuItem.getValue();
+      if (thisField.changeHandler_) {
         // Call any change handler, and allow it to override.
-        var override = this.changeHandler_(value);
+        var override = thisField.changeHandler_(value);
         if (override !== undefined) {
           value = override;
         }
       }
       if (value !== null) {
-        this.setValue(value);
+        thisField.setValue(value);
       }
-      // This mouse click has been handled, don't bubble up to document.
-      e.stopPropagation();
-    };
+    }
+    Blockly.FieldDropdown.hide();
   }
 
-  var maxWidth = 0;
-  var resizeList = [];
-  var checkElement = null;
+  var menu = new goog.ui.Menu();
   var options = this.getOptions_();
   for (var x = 0; x < options.length; x++) {
     var text = options[x][0];  // Human-readable text.
     var value = options[x][1]; // Language-neutral value.
-    var gElement = Blockly.FieldDropdown.optionToDom_(text);
-    var rectElement = /** @type {SVGRectElement} */ (gElement.firstChild);
-    var textElement = /** @type {SVGTextElement} */ (gElement.lastChild);
-    svgOptions.appendChild(gElement);
-    // Add a checkmark next to the current item.
-    if (!checkElement && value == this.value_) {
-      checkElement = Blockly.createSvgElement('text',
-          {'class': 'blocklyMenuText', 'y': 15}, null);
-      // Insert the checkmark between the rect and text, thus preserving the
-      // ability to reference them as firstChild and lastChild respectively.
-      gElement.insertBefore(checkElement, textElement);
-      checkElement.appendChild(document.createTextNode('\u2713'));
-    }
-
-    gElement.setAttribute('transform',
-        'translate(0, ' + (x * Blockly.FieldDropdown.Y_HEIGHT) + ')');
-    resizeList.push(rectElement);
-    Blockly.bindEvent_(gElement, 'mousedown', null, Blockly.noEvent);
-    Blockly.bindEvent_(gElement, 'mouseup', this, callbackFactory(value));
-    Blockly.bindEvent_(gElement, 'mouseup', null,
-                       Blockly.FieldDropdown.hide);
-    // Compute the length of the longest text length.
-    maxWidth = Math.max(maxWidth, textElement.getComputedTextLength());
+    var menuItem = new goog.ui.MenuItem(text);
+    menuItem.setValue(value);
+    menuItem.setCheckable(true);
+    menu.addItem(menuItem);
+    menuItem.setChecked(value == this.value_);
   }
-  // Run a second pass to resize all options to the required width.
-  maxWidth += Blockly.FieldDropdown.X_PADDING * 2;
-  for (var x = 0; x < resizeList.length; x++) {
-    resizeList[x].setAttribute('width', maxWidth);
-  }
-  if (Blockly.RTL) {
-    // Right-align the text.
-    for (var x = 0, gElement; gElement = svgOptions.childNodes[x]; x++) {
-      var textElement = gElement.lastChild;
-      textElement.setAttribute('text-anchor', 'end');
-      textElement.setAttribute('x', maxWidth - Blockly.FieldDropdown.X_PADDING);
-    }
-  }
-  if (checkElement) {
-    if (Blockly.RTL) {
-      // Research indicates that RTL checkmarks are supposed to be drawn the
-      // same in the same direction as LTR checkmarks.  It's only the alignment
-      // that needs to change.
-      checkElement.setAttribute('text-anchor', 'end');
-      checkElement.setAttribute('x', maxWidth - 5);
-    } else {
-      checkElement.setAttribute('x', 5);
-    }
-  }
-  var width = maxWidth + Blockly.FieldDropdown.CORNER_RADIUS * 2;
-  var height = options.length * Blockly.FieldDropdown.Y_HEIGHT +
-               Blockly.FieldDropdown.CORNER_RADIUS + 1;
-  svgShadow.setAttribute('width', width);
-  svgShadow.setAttribute('height', height);
-  svgBackground.setAttribute('width', width);
-  svgBackground.setAttribute('height', height);
-  var hexColour = Blockly.makeColour(this.sourceBlock_.getColour());
-  svgBackground.setAttribute('fill', hexColour);
-  // Position the dropdown to line up with the field.
-  var xy = Blockly.getSvgXY_(/** @type {!Element} */ (this.borderRect_));
+  goog.events.listen(menu, goog.ui.Component.EventType.ACTION, callback);
+  // Record windowSize and scrollOffset before adding menu.
+  var windowSize = goog.dom.getViewportSize();
+  var scrollOffset = goog.style.getViewportPageOffset(document);
+  var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
   var borderBBox = this.borderRect_.getBBox();
-  var x;
-  if (Blockly.RTL) {
-    x = xy.x - maxWidth + Blockly.FieldDropdown.X_PADDING + borderBBox.width -
-        Blockly.BlockSvg.SEP_SPACE_X / 2;
-  } else {
-    x = xy.x - Blockly.FieldDropdown.X_PADDING +
-        Blockly.BlockSvg.SEP_SPACE_X / 2;
-  }
-  svgGroup.setAttribute('transform',
-      'translate(' + x + ', ' + (xy.y + borderBBox.height) + ')');
+  var div = Blockly.WidgetDiv.DIV;
+  menu.render(div);
+  menu.setAllowAutoFocus(true);
+  var menuDom = menu.getElement();
+  Blockly.addClass_(menuDom, 'blocklyDropdownMenu');
+  // Record menuSize after adding menu.
+  var menuSize = goog.style.getSize(menuDom);
+  Blockly.WidgetDiv.position(xy.x, xy.y, borderBBox.height,
+                             menuSize, windowSize, scrollOffset);
+
+  Blockly.FieldDropdown.currentBlock = this;
 };
 
 /**
@@ -372,38 +271,9 @@ Blockly.FieldDropdown.prototype.setText = function(text) {
 };
 
 /**
- * Create the DOM nodes for a menu option.
- * @param {string} text The option's text.
- * @return {!Element} <g> node containing the menu option.
- * @private
- */
-Blockly.FieldDropdown.optionToDom_ = function(text) {
-  /* Here's the SVG we create:
-    <g class="blocklyMenuDiv">
-      <rect height="20"/>
-      <text class="blocklyMenuText" x="20" y="15">Make It So</text>
-    </g>
-  */
-  var gElement = Blockly.createSvgElement('g', {'class': 'blocklyMenuDiv'},
-                                          null);
-  var rectElement = Blockly.createSvgElement('rect',
-      {'height': Blockly.FieldDropdown.Y_HEIGHT}, gElement);
-  var textElement = Blockly.createSvgElement('text',
-      {'class': 'blocklyMenuText',
-      'x': Blockly.FieldDropdown.X_PADDING,
-      'y': 15}, gElement);
-  var textNode = document.createTextNode(text);
-  textElement.appendChild(textNode);
-  return gElement;
-};
-
-/**
  * Hide the dropdown menu.
  */
 Blockly.FieldDropdown.hide = function() {
-  var svgGroup = Blockly.FieldDropdown.svgGroup_;
-  if (svgGroup) {
-    Blockly.addClass_(svgGroup, 'blocklyHidden');
-  }
-  Blockly.FieldDropdown.openDropdown_ = null;
+  Blockly.WidgetDiv.hideIfOwner(Blockly.FieldDropdown);
+  Blockly.FieldDropdown.currentBlock = null;
 };

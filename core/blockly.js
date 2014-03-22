@@ -463,7 +463,6 @@ Blockly.onContextMenu_ = function(e) {
  */
 Blockly.hideChaff = function(opt_allowToolbox) {
   Blockly.Tooltip.hide();
-  Blockly.FieldDropdown.hide();
   Blockly.WidgetDiv.hide();
   if (!opt_allowToolbox &&
       Blockly.Toolbox.flyout_ && Blockly.Toolbox.flyout_.autoClose) {
