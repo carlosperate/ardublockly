@@ -211,6 +211,9 @@ Blockly.Tooltip.onMouseMove_ = function(e) {
   } else if (Blockly.Block.dragMode_ != 0) {
     // Don't display a tooltip during a drag.
     return;
+  } else if (Blockly.WidgetDiv.isVisible()) {
+    // Don't display a tooltip if a widget is open (tooltip would be under it).
+    return;
   }
   if (Blockly.Tooltip.visible) {
     // Compute the distance between the mouse position when the tooltip was

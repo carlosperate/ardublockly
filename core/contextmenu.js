@@ -79,8 +79,26 @@ Blockly.ContextMenu.show = function(e, options) {
   Blockly.addClass_(menuDom, 'blocklyContextMenu');
   // Record menuSize after adding menu.
   var menuSize = goog.style.getSize(menuDom);
-  Blockly.WidgetDiv.position(e.clientX, e.clientY, 0, menuSize, windowSize,
-                             scrollOffset);
+
+  // Position the menu.
+  var x = e.clientX + scrollOffset.x;
+  var y = e.clientY + scrollOffset.y;
+  // Flip menu vertically if off the bottom.
+  if (e.clientY + menuSize.height >= windowSize.height) {
+    y -= menuSize.height;
+  }
+  // Flip menu horizontally if off the edge.
+  if (Blockly.RTL) {
+    if (menuSize.width >= e.clientX) {
+      x += menuSize.width;
+    }
+  } else {
+    if (e.clientX + menuSize.width >= windowSize.width) {
+      x -= menuSize.width;
+    }
+  }
+  Blockly.WidgetDiv.position(x, y, windowSize, scrollOffset);
+
   Blockly.ContextMenu.currentBlock = null;  // May be set by Blockly.Block.
 };
 

@@ -67,6 +67,11 @@ Blockly.FieldDropdown = function(menuGenerator, opt_changeHandler) {
 goog.inherits(Blockly.FieldDropdown, Blockly.Field);
 
 /**
+ * Horizontal distance that a checkmark ovehangs the dropdown.
+ */
+Blockly.FieldDropdown.CHECKMARK_OVERHANG = 25;
+
+/**
  * Clone this FieldDropdown.
  * @return {!Blockly.FieldDropdown} The result of calling the constructor again
  *   with the current values of the arguments used during construction.
@@ -76,27 +81,16 @@ Blockly.FieldDropdown.prototype.clone = function() {
 };
 
 /**
- * Corner radius of the dropdown background.
- */
-Blockly.FieldDropdown.CORNER_RADIUS = 2;
-
-/**
  * Mouse cursor style when over the hotspot that initiates the editor.
  */
 Blockly.FieldDropdown.prototype.CURSOR = 'default';
-
-/**
- * Which block is the dropdown attached to?
- * @type {Blockly.FieldDropdown}
- */
-Blockly.FieldDropdown.currentBlock = null;
 
 /**
  * Create a dropdown menu under the text.
  * @private
  */
 Blockly.FieldDropdown.prototype.showEditor_ = function() {
-  Blockly.WidgetDiv.show(Blockly.FieldDropdown, null);
+  Blockly.WidgetDiv.show(this, null);
   var thisField = this;
 
   function callback(e) {
@@ -114,7 +108,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
         thisField.setValue(value);
       }
     }
-    Blockly.FieldDropdown.hide();
+    Blockly.WidgetDiv.hideIfOwner(thisField);
   }
 
   var menu = new goog.ui.Menu();
@@ -141,10 +135,30 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   Blockly.addClass_(menuDom, 'blocklyDropdownMenu');
   // Record menuSize after adding menu.
   var menuSize = goog.style.getSize(menuDom);
-  Blockly.WidgetDiv.position(xy.x, xy.y, borderBBox.height,
-                             menuSize, windowSize, scrollOffset);
 
-  Blockly.FieldDropdown.currentBlock = this;
+  // Position the menu.
+  // Flip menu vertically if off the bottom.
+  if (xy.y + menuSize.height + borderBBox.height >=
+      windowSize.height + scrollOffset.y) {
+    xy.y -= menuSize.height;
+  } else {
+    xy.y += borderBBox.height;
+  }
+  if (Blockly.RTL) {
+    xy.x += borderBBox.width;
+    xy.x += Blockly.FieldDropdown.CHECKMARK_OVERHANG;  // Width of checkmark.
+    // Don't go offscreen left.
+    if (xy.x < scrollOffset.x + menuSize.width) {
+      xy.x = scrollOffset.x + menuSize.width;
+    }
+  } else {
+    xy.x -= Blockly.FieldDropdown.CHECKMARK_OVERHANG;  // Width of checkmark.
+    // Don't go offscreen right.
+    if (xy.x > windowSize.width + scrollOffset.x - menuSize.width) {
+      xy.x = windowSize.width + scrollOffset.x - menuSize.width;
+    }
+  }
+  Blockly.WidgetDiv.position(xy.x, xy.y, windowSize, scrollOffset);
 };
 
 /**
@@ -271,9 +285,9 @@ Blockly.FieldDropdown.prototype.setText = function(text) {
 };
 
 /**
- * Hide the dropdown menu.
+ * Close the dropdown menu if this input is being deleted.
  */
-Blockly.FieldDropdown.hide = function() {
-  Blockly.WidgetDiv.hideIfOwner(Blockly.FieldDropdown);
-  Blockly.FieldDropdown.currentBlock = null;
+Blockly.FieldDropdown.prototype.dispose = function() {
+  Blockly.WidgetDiv.hideIfOwner(this);
+  Blockly.FieldDropdown.superClass_.dispose.call(this);
 };

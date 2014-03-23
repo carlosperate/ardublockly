@@ -66,7 +66,7 @@ Blockly.FieldColour.prototype.clone = function() {
 Blockly.FieldColour.prototype.CURSOR = 'default';
 
 /**
- * Dispose of all DOM objects belonging to this editable field.
+ * Close the colour picker if this input is being deleted.
  */
 Blockly.FieldColour.prototype.dispose = function() {
   Blockly.WidgetDiv.hideIfOwner(this);
@@ -114,7 +114,7 @@ Blockly.FieldColour.COLUMNS = 7;
  * @private
  */
 Blockly.FieldColour.prototype.showEditor_ = function() {
-  Blockly.WidgetDiv.show(this, Blockly.FieldColour.dispose_);
+  Blockly.WidgetDiv.show(this, Blockly.FieldColour.widgetDispose_);
   var div = Blockly.WidgetDiv.DIV;
   // Create the palette using Closure.
   var picker = new goog.ui.ColorPicker();
@@ -160,7 +160,7 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
  * Hide the colour palette.
  * @private
  */
-Blockly.FieldColour.dispose_ = function() {
+Blockly.FieldColour.widgetDispose_ = function() {
   if (Blockly.FieldColour.changeEventKey_) {
     goog.events.unlistenByKey(Blockly.FieldColour.changeEventKey_);
   }
