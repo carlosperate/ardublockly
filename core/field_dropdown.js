@@ -146,13 +146,13 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   }
   if (Blockly.RTL) {
     xy.x += borderBBox.width;
-    xy.x += Blockly.FieldDropdown.CHECKMARK_OVERHANG;  // Width of checkmark.
+    xy.x += Blockly.FieldDropdown.CHECKMARK_OVERHANG;
     // Don't go offscreen left.
     if (xy.x < scrollOffset.x + menuSize.width) {
       xy.x = scrollOffset.x + menuSize.width;
     }
   } else {
-    xy.x -= Blockly.FieldDropdown.CHECKMARK_OVERHANG;  // Width of checkmark.
+    xy.x -= Blockly.FieldDropdown.CHECKMARK_OVERHANG;
     // Don't go offscreen right.
     if (xy.x > windowSize.width + scrollOffset.x - menuSize.width) {
       xy.x = windowSize.width + scrollOffset.x - menuSize.width;
