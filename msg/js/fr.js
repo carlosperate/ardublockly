@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.fr');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Ajouter un commentaire";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Veuillez autoriser cette application à permettre la sauvegarde de votre travail et à l’autoriser de le partager avec vous.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Modifier la valeur :";
 Blockly.Msg.CHAT = "Discuter avec votre collaborateur en tapant dans cette zone !";
 Blockly.Msg.COLLAPSE_ALL = "Réduire les blocs";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Surligner la définition de la fonction"
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Si une valeur est vraie, alors renvoyer une seconde valeur.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Attention : Ce bloc pourrait n’être utilisé que dans une définition de fonction.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "nom de l’entrée :";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Ajouter une entrée à la fonction.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "entrées";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Ajouter, supprimer, ou réarranger les entrées de cette fonction.";
 Blockly.Msg.REMOVE_COMMENT = "Supprimer un commentaire";
 Blockly.Msg.RENAME_VARIABLE = "Renommer la variable…";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Renommer toutes les variables '%1' en :";

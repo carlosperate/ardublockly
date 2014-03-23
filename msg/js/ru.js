@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.ru');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Добавить комментарий";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Пожалуйста, авторизуйте это приложение, чтоб можно было сохранять вашу работу и чтобы дать возможность вам делиться ей.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Измените значение:";
 Blockly.Msg.CHAT = "Общайтесь со своим коллегой, печатая в этом поле!";
 Blockly.Msg.COLLAPSE_ALL = "Свернуть блоки";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Выделить определение 
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Если первое значение истинно, возвращает второе значение.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Предупреждение: Этот блок может использоваться только внутри определения функции.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "имя параметра:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Добавить входные параметры в функцию.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "параметры";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Добавить, удалить или изменить порядок входных параметров для этой функции.";
 Blockly.Msg.REMOVE_COMMENT = "Удалить комментарий";
 Blockly.Msg.RENAME_VARIABLE = "Переименовать переменную…";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Переименовать все переменные '%1' в:";

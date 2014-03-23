@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.el');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Πρόσθεσε Σχόλιο";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Παρακαλώ κάνε έγκριση της εφαρμογής για να επιτρέπεται αποθήκευση και κοινοποίηση της εργασίας σου.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Άλλαξε την τιμή:";
 Blockly.Msg.CHAT = "Μπορείς να μιλήσεις με τον συνεργάτη σου πληκτρολογώντας σ'αυτό το πλαίσιο!";
 Blockly.Msg.COLLAPSE_ALL = "Σύμπτυξτε Όλα Τα Μπλοκ";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Επισημάνετε τον ορισμ
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Αν μια τιμή είναι αληθής, τότε επιστρέφει τη δεύτερη τιμή.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Προειδοποίηση: Αυτό το μπλοκ μπορεί να χρησιμοποιηθεί μόνο στον ορισμό μιας συνάρτησης.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "όνομα εισόδου:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Πρόσθεσε μια είσοδος στη συνάρτηση";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "είσοδοι";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Προσθέτει, αφαιρεί ή αναδιατάσσει εισόδους σε αυτήν τη λειτουργία";
 Blockly.Msg.REMOVE_COMMENT = "Αφαίρεσε Το Σχόλιο";
 Blockly.Msg.RENAME_VARIABLE = "Μετονόμασε τη μεταβλητή...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Μετονόμασε όλες τις μεταβλητές «%1» σε:";

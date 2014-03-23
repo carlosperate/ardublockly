@@ -7,9 +7,9 @@ goog.provide('Blockly.Msg.nl');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Reactie toevoegen";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Sta deze app toe om uw werk op te slaan het uw werk te delen.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Waarde wijzigen:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Chat met iemand die ook aan het werk is via dit venster!";
 Blockly.Msg.COLLAPSE_ALL = "Blokken inklappen";
 Blockly.Msg.COLLAPSE_BLOCK = "Blok inklappen";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "kleur 1";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Accentueer functiedefinitie";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Als de eerste waarde \"waar\" is, geef dan de tweede waarde terug.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Waarschuwing: dit blok mag alleen gebruikt worden binnen de definitie van een functie.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "invoernaam:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Een invoer aan de functie toevoegen.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "ingangen";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Invoer van deze functie toevoegen, verwijderen of herordenen.";
 Blockly.Msg.REMOVE_COMMENT = "Opmerking verwijderen";
 Blockly.Msg.RENAME_VARIABLE = "Variabele hernoemen...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Alle variabelen \"%1\" hernoemen naar:";
@@ -342,9 +342,9 @@ Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = "vraagt om invoer met bericht";
 Blockly.Msg.TEXT_TEXT_HELPURL = "https://nl.wikipedia.org/wiki/String_%28informatica%29";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "Een letter, woord of een regel tekst.";
 Blockly.Msg.TEXT_TRIM_HELPURL = "https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces";
-Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "spaties van beide kanten afhalen";
-Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "spaties van de linkerkant verwijderen";
-Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "spaties van de rechterkant verwijderen";
+Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "spaties van beide kanten afhalen van";
+Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "spaties van de linkerkant verwijderen van";
+Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "spaties van de rechterkant verwijderen van";
 Blockly.Msg.TEXT_TRIM_TOOLTIP = "Geeft een kopie van de tekst met verwijderde spaties van één of beide kanten.";
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "item";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "Maak \"verander %1\"";

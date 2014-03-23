@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.uk');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Додати коментар";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Будь ласка, авторизуйте цю програму, аби можна було зберігати вашу роботу і для надання можливості вам поширювати її.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Змінити значення:";
 Blockly.Msg.CHAT = "Спілкуйтеся з вашими співавторами, набираючи у цьому полі!";
 Blockly.Msg.COLLAPSE_ALL = "Згорнути блоки";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Визначення функції пі
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Якщо значення true, то повернути друге значення.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Попередження: Цей блок може використовуватися лише в межах визначення функції.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "ім'я входу:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Додати вхідні параметри в функцію.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "вхід";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Додати, видалити або змінити порядок вхідних параметрів для цієї функції.";
 Blockly.Msg.REMOVE_COMMENT = "Видалити коментар";
 Blockly.Msg.RENAME_VARIABLE = "Перейменувати змінну...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Перейменувати усі змінні \"%1\" до:";

@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.sv');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Lägg till kommentar";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Var god godkänn denna app för att aktivera att ditt arbete sparas och för att låta den delas av dig.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Ändra värde:";
 Blockly.Msg.CHAT = "Chatta med din medarbetare genom att skriva i detta fält.";
 Blockly.Msg.COLLAPSE_ALL = "Fäll ihop block";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Markera funktionsdefinition";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Om ett värde är sant returneras ett andra värde.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Varning: Detta block får användas endast i en funktionsdefinition.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "inmatningsnamn:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Lägg till en inmatning till funktionen.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "inmatningar";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Lägg till, ta bort och ändra ordningen för inmatningar till denna funktion.";
 Blockly.Msg.REMOVE_COMMENT = "Radera kommentar";
 Blockly.Msg.RENAME_VARIABLE = "Byt namn på variabel...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Byt namn på alla variablerna '%1' till:";

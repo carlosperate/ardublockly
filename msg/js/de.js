@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.de');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Kommentar hinzufügen";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Bitte autorisiere diese App zum Aktivieren der Speicherung deiner Arbeit und zum Teilen.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Wert ändern:";
 Blockly.Msg.CHAT = "Chatte mit unserem Mitarbeiter durch Eingeben von Text in diesen Kasten!";
 Blockly.Msg.COLLAPSE_ALL = "Collapse Blocks";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Markiere Funktionsblock";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Wenn der erste Wert wahr (true) ist, Gebe den zweiten Wert zurück.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Warnung: Dieser Block darf nur innerhalb eines Funktionsblock genutzt werden.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "Variable:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Eine Eingabe zur Funktion hinzufügen.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "Parameter";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Die Eingaben zu dieser Funktion hinzufügen, entfernen oder neu anordnen.";
 Blockly.Msg.REMOVE_COMMENT = "Kommentar entfernen";
 Blockly.Msg.RENAME_VARIABLE = "Variable umbenennen...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Alle \"%1\" Variablen umbenennen in:";

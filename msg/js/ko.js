@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.ko');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "덧글 추가";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "당신의 작업을 저장하고 다른 사람과 공유할 수 있도록 이 애플리케이션을 인증해 주십시오.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "값 변경:";
 Blockly.Msg.CHAT = "이 상자에 입력하여 당신의 동료와 채탱하세요!";
 Blockly.Msg.COLLAPSE_ALL = "블록 축소";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "함수 정의 찾기";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "값이 참이라면, 두번째 값을 반환합니다.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "경고: 이 블럭은, 함수 정의 블럭 안에서만 사용할 수 있습니다.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "매개 변수:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "함수에 값을 더합니다.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "매개 변수들";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "이 함수를 추가, 삭제, 혹은 재정렬합니다.";
 Blockly.Msg.REMOVE_COMMENT = "내용 제거";
 Blockly.Msg.RENAME_VARIABLE = "변수 이름 바꾸기:";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "'%1' 변수 이름을 바꾸기:";

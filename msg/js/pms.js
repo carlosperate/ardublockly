@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.pms');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Gionté un coment";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Për piasì, ch'a autorisa costa aplicassion a përmëtte ëd salvé sò travaj e a autoriselo a esse partagià da chiel.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Modifiché ël valor:";
 Blockly.Msg.CHAT = "Ch'a ciaciara con sò colaborator an scrivend an costa casela!";
 Blockly.Msg.COLLAPSE_ALL = "Arduve ij blòch";
@@ -279,9 +279,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Sot-ligné la definission dla fonsion";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Se un valor a l'é ver, antlora smon-e un second valor.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Atension: Ës blòch a podria esse dovrà mach an na definission ëd fonsion.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "nòm ëd l'imission:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Gionté n'imission a la fonsion.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "imission";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Gionté, gavé o riordiné j'imission ëd sa fonsion.";
 Blockly.Msg.REMOVE_COMMENT = "Scancelé un coment";
 Blockly.Msg.RENAME_VARIABLE = "Arnomé la variàbil...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Arnomé tute le variàbij '%1' 'me:";

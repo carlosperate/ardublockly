@@ -36,7 +36,7 @@ if (typeof codepage == 'undefined') { var codepage = {}; }
 
 
 codepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Грешка при парсирањето на XML:\n%1\n\nСтиснете на „ОК“ за да ги напуштите промените или на „Откажи“ ако сакате уште да ја уредувате XML-податотеката.</span><span id="Code_badCode">Грешка во програмот:\n%1</span><span id="Code_timeout">Го надминавте допуштениот број на повторувања во извршувањето.</span><span id="Code_discard">Да ги избришам сите %1 блокчиња?</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Code_badXml">Грешка при расчленувањето на XML:\n%1\n\nСтиснете на „ОК“ за да ги напуштите промените или на „Откажи“ ако сакате уште да ја уредувате XML-податотеката.</span><span id="Code_badCode">Грешка во програмот:\n%1</span><span id="Code_timeout">Го надминавте допуштениот број на повторувања во извршувањето.</span><span id="Code_discard">Да ги избришам сите %1 блокчиња?</span></div>';
 };
 
 
