@@ -121,7 +121,7 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   picker.setColors(Blockly.FieldColour.COLOURS);
 
   // Position the palette to line up with the field.
-  // Record windowSize and scrollOffset before adding menu.
+  // Record windowSize and scrollOffset before adding the palette.
   var windowSize = goog.dom.getViewportSize();
   var scrollOffset = goog.style.getViewportPageOffset(document);
   var xy = Blockly.getAbsoluteXY_(/** @type {!Element} */ (this.borderRect_));
@@ -129,7 +129,7 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   var div = Blockly.WidgetDiv.DIV;
   picker.render(div);
   picker.setSelectedColor(this.getValue());
-  // Record paletteSize after adding menu.
+  // Record paletteSize after adding the palette.
   var paletteSize = goog.style.getSize(picker.getElement());
 
   // Flip the palette vertically if off the bottom.
@@ -141,9 +141,10 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   }
   if (Blockly.RTL) {
     xy.x += borderBBox.width;
+    xy.x -= paletteSize.width;
     // Don't go offscreen left.
-    if (xy.x < scrollOffset.x + paletteSize.width) {
-      xy.x = scrollOffset.x + paletteSize.width;
+    if (xy.x < scrollOffset.x) {
+      xy.x = scrollOffset.x;
     }
   } else {
     // Don't go offscreen right.

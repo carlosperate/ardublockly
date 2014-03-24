@@ -656,10 +656,9 @@ function fieldNameCheck(referenceBlock) {
   var blocks = referenceBlock.workspace.getAllBlocks();
   for (var x = 0, block; block = blocks[x]; x++) {
     var otherName = block.getFieldValue('FIELDNAME');
-    if (otherName) {
-      if (otherName.toLowerCase() == name) {
-        count++;
-      }
+    if (!block.disabled && !block.getInheritedDisabled() &&
+        otherName && otherName.toLowerCase() == name) {
+      count++;
     }
   }
   var msg = (count > 1) ?
@@ -678,10 +677,9 @@ function inputNameCheck(referenceBlock) {
   var blocks = referenceBlock.workspace.getAllBlocks();
   for (var x = 0, block; block = blocks[x]; x++) {
     var otherName = block.getFieldValue('INPUTNAME');
-    if (otherName) {
-      if (otherName.toLowerCase() == name) {
-        count++;
-      }
+    if (!block.disabled && !block.getInheritedDisabled() &&
+        otherName && otherName.toLowerCase() == name) {
+      count++;
     }
   }
   var msg = (count > 1) ?
