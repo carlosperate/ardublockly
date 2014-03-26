@@ -481,7 +481,11 @@ Blockly.removeAllRanges = function() {
     if (sel && sel.removeAllRanges) {
       sel.removeAllRanges();
       window.setTimeout(function() {
-          window.getSelection().removeAllRanges();
+          try {
+            window.getSelection().removeAllRanges();
+          } catch (e) {
+            // MSIE throws 'error 800a025e' here.
+          }
         }, 0);
     }
   }
