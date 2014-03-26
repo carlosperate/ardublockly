@@ -358,6 +358,7 @@ class Gen_langfiles(threading.Thread):
                       ['en.json', 'qqq.json', 'synonyms.json']]):
       try:
         subprocess.check_call([
+            'python',
             os.path.join('i18n', 'js_to_json.py'),
             '--input_file', 'msg/messages.js',
             '--output_dir', 'msg/json/',
@@ -374,6 +375,7 @@ class Gen_langfiles(threading.Thread):
     try:
       # Use create_messages.py to create .js files from .json files.
       cmd = [
+          'python',
           os.path.join('i18n', 'create_messages.py'),
           '--source_lang_file', os.path.join('msg', 'json', 'en.json'),
           '--source_synonym_file', os.path.join('msg', 'json', 'synonyms.json'),

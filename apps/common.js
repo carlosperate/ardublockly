@@ -31,7 +31,7 @@ var BlocklyApps = {};
 BlocklyApps.LANGUAGE_NAME = {
   'af': 'Afrikaans',
   'ar': 'العربية',
-  'az-latn': 'Azərbaycanca',
+  'az': 'Azərbaycanca',
   'be-tarask': 'Taraškievica',
   'br': 'Brezhoneg',
   'ca': 'Català',
@@ -87,6 +87,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'sv': 'Svenska',
   'sw': 'Kishwahili',
   'th': 'ภาษาไทย',
+  'tl': 'Tagalog',
   'tr': 'Türkçe',
   'uk': 'Українська',
   'vi': 'Tiếng Việt',

@@ -224,8 +224,7 @@ def main():
     write_files(args.author, args.lang, args.output_dir, sorted_units, True)
 
     # Delete the input .xlf file.
-    command = ['rm', args.xlf]
-    subprocess.check_call(command)
+    os.remove(args.xlf)
     print('Removed ' + args.xlf)
 
 
