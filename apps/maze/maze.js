@@ -446,15 +446,6 @@ Maze.drawMap = function() {
  * Initialize Blockly and the maze.  Called on page load.
  */
 Maze.init = function() {
-  // Measure the height of arrow characters.
-  // Firefox on Vista creates enormously high arrows (80px) for no reason.
-  // TODO: Detect if arrow is printed, or Unicode square is printed.
-  var textElement = document.getElementById('arrowTest');
-  var height = textElement.getBBox().height;
-  Maze.addArrows = height < Blockly.BlockSvg.MIN_BLOCK_Y;
-  var svg = textElement.ownerSVGElement
-  svg.parentNode.removeChild(svg);
-
   BlocklyApps.init();
 
   // Setup the Pegman menu.
@@ -501,7 +492,7 @@ Maze.init = function() {
   var visualization = document.getElementById('visualization');
   var onresize = function(e) {
     var top = visualization.offsetTop;
-    blocklyDiv.style.top = Math.max(10, top - window.scrollY) + 'px';
+    blocklyDiv.style.top = Math.max(10, top - window.pageYOffset) + 'px';
     blocklyDiv.style.left = rtl ? '10px' : '420px';
     blocklyDiv.style.width = (window.innerWidth - 440) + 'px';
   };
@@ -756,9 +747,12 @@ Maze.changePegman = function(newSkin) {
  * Save the blocks for a one-time reload.
  */
 Maze.saveToStorage = function() {
-  var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
-  var text = Blockly.Xml.domToText(xml);
-  window.sessionStorage.loadOnceBlocks = text;
+  // MSIE 11 does not support sessionStorage on file:// URLs.
+  if (window.sessionStorage) {
+    var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var text = Blockly.Xml.domToText(xml);
+    window.sessionStorage.loadOnceBlocks = text;
+  }
 };
 
 /**
@@ -1121,8 +1115,8 @@ Maze.updatePegSpin_ = function(e) {
   }
   var pegSpin = document.getElementById('pegSpin');
   var bBox = BlocklyApps.getBBox_(pegSpin);
-  var x = bBox.x + bBox.width / 2 - window.scrollX;
-  var y = bBox.y + bBox.height / 2 - window.scrollY;
+  var x = bBox.x + bBox.width / 2 - window.pageXOffset;
+  var y = bBox.y + bBox.height / 2 - window.pageYOffset;
   var dx = e.clientX - x;
   var dy = e.clientY - y;
   var angle = Math.atan(dy / dx);

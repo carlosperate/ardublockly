@@ -54,7 +54,7 @@
     "Apps.planeSubtitle": "Resuelve un problema matemático con una o dos variables.",
     "Apps.blockFactory": "Fábrica de bloques",
     "Apps.blockfactorySubtitle": "Construye bloques personalizados usando Blockly.",
-    "Maze.moveForward": "Mover hacia delante",
+    "Maze.moveForward": "mover hacia delante",
     "Maze.turnLeft": "gira a la izquierda",
     "Maze.turnRight": "gira a la derecha",
     "Maze.doCode": "haz esto",

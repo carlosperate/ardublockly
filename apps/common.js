@@ -379,7 +379,8 @@ BlocklyApps.changeLanguage = function() {
   // Store the blocks for the duration of the reload.
   // This should be skipped for the index page, which has no blocks and does
   // not load Blockly.
-  if (typeof Blockly != 'undefined') {
+  // MSIE 11 does not support sessionStorage on file:// URLs.
+  if (typeof Blockly != 'undefined' && window.sessionStorage) {
     var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
     var text = Blockly.Xml.domToText(xml);
     window.sessionStorage.loadOnceBlocks = text;
