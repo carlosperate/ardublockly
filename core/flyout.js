@@ -399,7 +399,6 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   // IE 11 is an incompetant browser that fails to fire mouseout events.
   // When the mouse is over the background, deselect all blocks.
   var deselectAll = function(e) {
-    console.log(this);
     var blocks = this.workspace_.getTopBlocks(false);
     for (var i = 0, block; block = blocks[i]; i++) {
       block.svg_.removeSelect();

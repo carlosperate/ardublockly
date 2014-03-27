@@ -51,6 +51,7 @@ Blockly.Css.CONTENT = [
   '.blocklySvg {',
   '  background-color: #fff;',
   '  border: 1px solid #ddd;',
+  '  overflow: hidden;',  /* IE overflows by default. */
   '}',
 
   '.blocklyWidgetDiv {',
