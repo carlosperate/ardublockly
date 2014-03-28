@@ -284,7 +284,7 @@ Blockly.onMouseDown_ = function(e) {
 };
 
 /**
- * Handle a mouse-up on SVG drawing surface.
+ * Handle a mouse-up anywhere on the page.
  * @param {!Event} e Mouse up event.
  * @private
  */

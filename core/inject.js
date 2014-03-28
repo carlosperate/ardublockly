@@ -364,8 +364,11 @@ Blockly.init_ = function() {
     // Only bind the window/document events once.
     // Destroying and reinjecting Blockly should not bind again.
     Blockly.bindEvent_(window, 'resize', document, Blockly.svgResize);
-    Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_);
     Blockly.bindEvent_(document, 'keydown', null, Blockly.onKeyDown_);
+    // Don't use bindEvent_ for document's mouseup isce that would create a
+    // corresponding touch handler that would squeltch the ability to interact
+    // with non-Blockly elements.
+    document.addEventListener('mouseup', Blockly.onMouseUp_, false);
     // Some iPad versions don't fire resize after portrait to landscape change.
     if (goog.userAgent.IPAD) {
       Blockly.bindEvent_(window, 'orientationchange', document, function() {

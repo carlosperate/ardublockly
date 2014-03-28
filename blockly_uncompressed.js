@@ -25,9 +25,9 @@ if (!window.goog) {
 // Build map of all dependencies (used and unused).
 var dir = window.BLOCKLY_DIR.match(/[^\/]+$/)[0];
 goog.addDependency("../../../" + dir + "/core/block.js", ['Blockly.Block'], ['Blockly.BlockSvg', 'Blockly.Blocks', 'Blockly.Comment', 'Blockly.Connection', 'Blockly.ContextMenu', 'Blockly.Input', 'Blockly.Msg', 'Blockly.Mutator', 'Blockly.Warning', 'Blockly.Workspace', 'Blockly.Xml', 'goog.Timer', 'goog.array', 'goog.asserts', 'goog.string']);
+goog.addDependency("../../../" + dir + "/core/block_svg.js", ['Blockly.BlockSvg'], ['goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/blockly.js", ['Blockly'], ['Blockly.Block', 'Blockly.Connection', 'Blockly.FieldAngle', 'Blockly.FieldCheckbox', 'Blockly.FieldColour', 'Blockly.FieldDropdown', 'Blockly.FieldImage', 'Blockly.FieldTextInput', 'Blockly.FieldVariable', 'Blockly.Generator', 'Blockly.Msg', 'Blockly.Procedures', 'Blockly.Realtime', 'Blockly.Toolbox', 'Blockly.WidgetDiv', 'Blockly.Workspace', 'Blockly.inject', 'Blockly.utils', 'goog.color', 'goog.dom', 'goog.events', 'goog.string', 'goog.ui.ColorPicker', 'goog.ui.tree.TreeControl', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/blocks.js", ['Blockly.Blocks'], ['goog.asserts']);
-goog.addDependency("../../../" + dir + "/core/block_svg.js", ['Blockly.BlockSvg'], ['goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/bubble.js", ['Blockly.Bubble'], ['Blockly.Workspace']);
 goog.addDependency("../../../" + dir + "/core/comment.js", ['Blockly.Comment'], ['Blockly.Bubble', 'Blockly.Icon']);
 goog.addDependency("../../../" + dir + "/core/connection.js", ['Blockly.Connection', 'Blockly.ConnectionDB'], ['Blockly.Workspace']);
@@ -550,8 +550,8 @@ goog.addDependency("pubsub/pubsub.js", ['goog.pubsub.PubSub'], ['goog.Disposable
 goog.addDependency("reflect/reflect.js", ['goog.reflect'], []);
 goog.addDependency("result/deferredadaptor.js", ['goog.result.DeferredAdaptor'], ['goog.async.Deferred', 'goog.result', 'goog.result.Result']);
 goog.addDependency("result/dependentresult.js", ['goog.result.DependentResult'], ['goog.result.Result']);
-goog.addDependency("result/resultutil.js", ['goog.result'], ['goog.array', 'goog.result.DependentResult', 'goog.result.Result', 'goog.result.SimpleResult']);
 goog.addDependency("result/result_interface.js", ['goog.result.Result'], ['goog.debug.Error']);
+goog.addDependency("result/resultutil.js", ['goog.result'], ['goog.array', 'goog.result.DependentResult', 'goog.result.Result', 'goog.result.SimpleResult']);
 goog.addDependency("result/simpleresult.js", ['goog.result.SimpleResult', 'goog.result.SimpleResult.StateError'], ['goog.debug.Error', 'goog.result.Result']);
 goog.addDependency("soy/data.js", ['goog.soy.data', 'goog.soy.data.SanitizedContent', 'goog.soy.data.SanitizedContentKind'], []);
 goog.addDependency("soy/renderer.js", ['goog.soy.InjectedDataSupplier', 'goog.soy.Renderer'], ['goog.asserts', 'goog.dom', 'goog.soy', 'goog.soy.data.SanitizedContent', 'goog.soy.data.SanitizedContentKind']);
@@ -586,10 +586,10 @@ goog.addDependency("string/newlines_test.js", ['goog.string.newlinesTest'], ['go
 goog.addDependency("string/parser.js", ['goog.string.Parser'], []);
 goog.addDependency("string/path.js", ['goog.string.path'], ['goog.array', 'goog.string']);
 goog.addDependency("string/string.js", ['goog.string', 'goog.string.Unicode'], []);
+goog.addDependency("string/string_test.js", ['goog.stringTest'], ['goog.functions', 'goog.object', 'goog.string', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit']);
 goog.addDependency("string/stringbuffer.js", ['goog.string.StringBuffer'], []);
 goog.addDependency("string/stringformat.js", ['goog.string.format'], ['goog.string']);
 goog.addDependency("string/stringifier.js", ['goog.string.Stringifier'], []);
-goog.addDependency("string/string_test.js", ['goog.stringTest'], ['goog.functions', 'goog.object', 'goog.string', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit']);
 goog.addDependency("structs/avltree.js", ['goog.structs.AvlTree', 'goog.structs.AvlTree.Node'], ['goog.structs', 'goog.structs.Collection']);
 goog.addDependency("structs/circularbuffer.js", ['goog.structs.CircularBuffer'], []);
 goog.addDependency("structs/collection.js", ['goog.structs.Collection'], []);
@@ -612,8 +612,8 @@ goog.addDependency("structs/trie.js", ['goog.structs.Trie'], ['goog.object', 'go
 goog.addDependency("style/bidi.js", ['goog.style.bidi'], ['goog.dom', 'goog.style', 'goog.userAgent']);
 goog.addDependency("style/cursor.js", ['goog.style.cursor'], ['goog.userAgent']);
 goog.addDependency("style/style.js", ['goog.style'], ['goog.array', 'goog.dom', 'goog.dom.vendor', 'goog.math.Box', 'goog.math.Coordinate', 'goog.math.Rect', 'goog.math.Size', 'goog.object', 'goog.string', 'goog.userAgent']);
-goog.addDependency("style/stylescrollbartester.js", ['goog.styleScrollbarTester'], ['goog.dom', 'goog.style', 'goog.testing.asserts']);
 goog.addDependency("style/style_test.js", ['goog.style_test'], ['goog.color', 'goog.dom', 'goog.events.BrowserEvent', 'goog.math.Coordinate', 'goog.math.Size', 'goog.style', 'goog.styleScrollbarTester', 'goog.testing.ExpectedFailures', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit', 'goog.userAgent', 'goog.userAgent.product', 'goog.userAgent.product.isVersion', 'goog.testing.asserts']);
+goog.addDependency("style/stylescrollbartester.js", ['goog.styleScrollbarTester'], ['goog.dom', 'goog.style', 'goog.testing.asserts']);
 goog.addDependency("style/transition.js", ['goog.style.transition', 'goog.style.transition.Css3Property'], ['goog.array', 'goog.asserts', 'goog.dom.vendor', 'goog.style', 'goog.userAgent']);
 goog.addDependency("testing/asserts.js", ['goog.testing.JsUnitException', 'goog.testing.asserts'], ['goog.testing.stacktrace']);
 goog.addDependency("testing/asynctestcase.js", ['goog.testing.AsyncTestCase', 'goog.testing.AsyncTestCase.ControlBreakingException'], ['goog.testing.TestCase', 'goog.testing.TestCase.Test', 'goog.testing.asserts']);
