@@ -16,6 +16,13 @@
       font-weight: normal;
       font-size: 140%;
     }
+    #collaborators > img {
+      margin-right: 5px;
+      height: 30px;
+      padding-bottom: 5px;
+      width: 30px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -28,6 +35,7 @@
     <a href="http://code.google.com/p/blockly/wiki/RealtimeCollaboration">
       realtime collaboration in Blockly</a>...</p>
 
+  <div id="collaborators"></div>
   <div id="blocklyDiv"
        style="height: 480px; width: 600px;">
   </div>
@@ -62,7 +70,8 @@
           realtime: true,
           realtimeOptions:
           {clientId: 'YOUR CLIENT ID HERE',
-            chatbox: {elementId: 'chatbox'}}});
+            chatbox: {elementId: 'chatbox'},
+            collabElementId: 'collaborators'}});
   </script>
 
 </body>

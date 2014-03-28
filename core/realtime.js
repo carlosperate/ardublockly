@@ -38,6 +38,7 @@
 goog.provide('Blockly.Realtime');
 
 goog.require('goog.array');
+goog.require('goog.dom');
 goog.require('goog.style');
 goog.require('rtclient');
 
@@ -152,6 +153,13 @@ Blockly.Realtime.redoElementId_ = null;
  * @private
  */
 Blockly.Realtime.PROGRESS_URL_ = 'media/progress.gif';
+
+/**
+ * URL of the anonymous user image.
+ * @type {string}
+ * @private
+ */
+Blockly.Realtime.ANONYMOUS_URL_ = 'media/anon.jpeg';
 
 /**
  * This function is called the first time that the Realtime model is created
@@ -440,6 +448,13 @@ Blockly.Realtime.onFileLoaded_ = function(doc) {
 
   Blockly.Realtime.initUi_();
 
+  //Adding Listeners for Collaborator events.
+  doc.addEventListener(gapi.drive.realtime.EventType.COLLABORATOR_JOINED,
+      Blockly.Realtime.onCollaboratorJoined_);
+  doc.addEventListener(gapi.drive.realtime.EventType.COLLABORATOR_LEFT,
+      Blockly.Realtime.onCollaboratorLeft_);
+  Blockly.Realtime.updateCollabUi_();
+
   Blockly.Realtime.loadBlocks_();
 
   // Add logic for undo button.
@@ -684,8 +699,10 @@ Blockly.Realtime.parseOptions_ = function(options) {
     Blockly.Realtime.chatBoxInitialText_ =
         rtclient.getOption(chatBoxOptions, 'initText', Blockly.Msg.CHAT);
   }
-    Blockly.Realtime.rtclientOptions_.clientId =
-        rtclient.getOption(options, 'clientId');
+  Blockly.Realtime.rtclientOptions_.clientId =
+      rtclient.getOption(options, 'clientId');
+  Blockly.Realtime.collabElementId =
+      rtclient.getOption(options, 'collabElementId');
   // TODO: Uncomment this when undo/redo are fixed.
 //  Blockly.Realtime.undoElementId_ =
 //      rtclient.getOption(options, 'undoElementId', 'undoButton');
@@ -759,6 +776,50 @@ Blockly.Realtime.addAuthUi_ = function(uiContainer) {
   authButtonDiv.style.top =
       (blocklyDivBounds.height - authButtonDivBounds.height) / 4 + 'px';
   return authButtonDiv;
+};
+
+/**
+ * Update the collaborators UI to include the latest set of users.
+ * @private
+ */
+Blockly.Realtime.updateCollabUi_ = function() {
+  if (!Blockly.Realtime.collabElementId) {
+    return;
+  }
+  var collabElement = goog.dom.getElement(Blockly.Realtime.collabElementId);
+  goog.dom.removeChildren(collabElement);
+  var collaboratorsList = Blockly.Realtime.document_.getCollaborators();
+  for (var i = 0; i < collaboratorsList.length; i++) {
+    var collaborator = collaboratorsList[i];
+    var imgSrc = collaborator.photoUrl ||
+        Blockly.pathToBlockly + Blockly.Realtime.ANONYMOUS_URL_;
+    var img = goog.dom.createDom('img',
+        {
+          'src': imgSrc,
+          'alt': collaborator.displayName,
+          'title': collaborator.displayName +
+              (collaborator.isMe ? ' (' + Blockly.Msg.ME + ')' : '')});
+    img.style.backgroundColor = collaborator.color;
+    goog.dom.appendChild(collabElement, img);
+  }
+};
+
+/**
+ * Event handler for when collaborators join.
+ * @param {gapi.drive.realtime.CollaboratorJoinedEvent} event The event.
+ * @private
+ */
+Blockly.Realtime.onCollaboratorJoined_ = function(event) {
+  Blockly.Realtime.updateCollabUi_();
+};
+
+/**
+ * Event handler for when collaborators leave.
+ * @param {gapi.drive.realtime.CollaboratorLeftEvent} event The event.
+ * @private
+ */
+Blockly.Realtime.onCollaboratorLeft_ = function(event) {
+  Blockly.Realtime.updateCollabUi_();
 };
 
 /**
