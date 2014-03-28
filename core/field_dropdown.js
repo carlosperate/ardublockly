@@ -130,7 +130,6 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   var borderBBox = this.borderRect_.getBBox();
   var div = Blockly.WidgetDiv.DIV;
   menu.render(div);
-  menu.setAllowAutoFocus(true);
   var menuDom = menu.getElement();
   Blockly.addClass_(menuDom, 'blocklyDropdownMenu');
   // Record menuSize after adding menu.
@@ -159,6 +158,8 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     }
   }
   Blockly.WidgetDiv.position(xy.x, xy.y, windowSize, scrollOffset);
+  menu.setAllowAutoFocus(true);
+  menuDom.focus();
 };
 
 /**

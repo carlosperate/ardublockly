@@ -74,7 +74,6 @@ Blockly.ContextMenu.show = function(e, options) {
   var scrollOffset = goog.style.getViewportPageOffset(document);
   var div = Blockly.WidgetDiv.DIV;
   menu.render(div);
-  menu.setAllowAutoFocus(true);
   var menuDom = menu.getElement();
   Blockly.addClass_(menuDom, 'blocklyContextMenu');
   // Record menuSize after adding menu.
@@ -99,6 +98,10 @@ Blockly.ContextMenu.show = function(e, options) {
   }
   Blockly.WidgetDiv.position(x, y, windowSize, scrollOffset);
 
+  menu.setAllowAutoFocus(true);
+  // 1ms delay is required for focusing on context menus because some other
+  // mouse event is still waiting in the queue and clears focus.
+  setTimeout(function() {menuDom.focus();}, 1);
   Blockly.ContextMenu.currentBlock = null;  // May be set by Blockly.Block.
 };
 
