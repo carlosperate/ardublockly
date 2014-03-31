@@ -23,7 +23,7 @@
     "Apps.catLists": "Lister",
     "Apps.catColour": "Farve",
     "Apps.catVariables": "Variabler",
-    "Apps.catProcedures": "Procedurer",
+    "Apps.catProcedures": "Funktioner",
     "Apps.httpRequestError": "Der var et problem med forespørgslen.",
     "Apps.linkAlert": "Del dine blokke med dette link:\n\n%1",
     "Apps.hashError": "Beklager, '%1' passer ikke med nogen gemt Blockly fil.",

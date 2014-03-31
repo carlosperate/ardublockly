@@ -6,7 +6,8 @@
             "Rezonansowy",
             "Ty221",
             "Jchwastowska",
-            "Stocki"
+            "Stocki",
+            "Pio387"
         ]
     },
     "Apps.subtitle": "graficzne środowisko programistyczne",
@@ -25,7 +26,7 @@
     "Apps.catLists": "Listy",
     "Apps.catColour": "Kolor",
     "Apps.catVariables": "Zmienne",
-    "Apps.catProcedures": "Procedury",
+    "Apps.catProcedures": "Funkcje",
     "Apps.httpRequestError": "Wystąpił problem z żądaniem.",
     "Apps.linkAlert": "Udpostępnij swoje bloki korzystając z poniższego linku : \n\n\n%1",
     "Apps.hashError": "Przepraszamy, \"%1\" nie odpowiada żadnemu zapisanemu programowi.",
@@ -50,7 +51,7 @@
     "Turtle.title": "Grafiki Żółwia",
     "Apps.turtleSubtitle": "Użyj Blockly, żeby rysować.",
     "Apps.graphSubtitle": "Rysuj wykresy funkcji z Blockly.",
-    "Apps.codeSubtitle": "Exportuj program napisany w Blockly do JavaScriptu, Pythona lub XMLa.",
+    "Apps.codeSubtitle": "Exportuj program napisany w Blockly do JavaScriptu, Pythona, Darta lub XMLa.",
     "Plane.plane": "Kalkulator miejsc w samolocie.",
     "Apps.planeSubtitle": "Rozwiąż zadanie matematyczne z jedną lub dwiema zmiennymi.",
     "Apps.blockFactory": "Fabryka bloków",

@@ -3,7 +3,8 @@
         "authors": [
             "Cekli829",
             "Khan27",
-            "Mushviq Abdulla"
+            "Mushviq Abdulla",
+            "Wertuose"
         ]
     },
     "Apps.dialogOk": "TAMAM",
@@ -12,7 +13,7 @@
     "Apps.catLists": "Siyahılar",
     "Apps.catColour": "Rəng",
     "Apps.catVariables": "Dəyişənlər",
-    "Apps.catProcedures": "Prosedurları",
+    "Apps.catProcedures": "Funksiyalar",
     "Apps.httpRequestError": "Sorğu ilə əlaqəli problem var.",
     "Apps.listVariable": "siyahı",
     "Apps.textVariable": "mətn",

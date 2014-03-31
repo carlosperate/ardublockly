@@ -151,7 +151,7 @@
     "MATH_ROUND_OPERATOR_ROUND": "runden",
     "MATH_ROUND_OPERATOR_ROUNDUP": "auf runden",
     "MATH_ROUND_OPERATOR_ROUNDDOWN": "ab runden",
-    "MATH_ONLIST_HELPURL": "http://www.sysplus.ch/einstieg.php?links=menu\u0026seite=4125\u0026grad=Crash\u0026prog=Excel",
+    "MATH_ONLIST_HELPURL": "http://www.sysplus.ch/einstieg.php?links=menu&seite=4125&grad=Crash&prog=Excel",
     "MATH_ONLIST_OPERATOR_SUM": "Summme einer Liste",
     "MATH_ONLIST_TOOLTIP_SUM": "Ist die Summe aller Werte in einer Liste.",
     "MATH_ONLIST_OPERATOR_MIN": "Minimalwert einer Liste",

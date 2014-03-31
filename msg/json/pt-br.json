@@ -3,7 +3,9 @@
         "authors": [
             "Espertus",
             "Prilopes",
-            "Mordecaista"
+            "Mordecaista",
+            "Amgauna",
+            "TheGabrielZaum"
         ]
     },
     "VARIABLES_DEFAULT_NAME": "item",
@@ -21,6 +23,8 @@
     "DISABLE_BLOCK": "Desabilitar Bloco",
     "ENABLE_BLOCK": "Habilitar Bloco",
     "HELP": "Ajuda",
+    "CHAT": "Converse com o seu colaborador digitando nesta caixa!",
+    "AUTH": "Por favor autorize este aplicativo para ativar o seu trabalho, para ser gravado, e autorize que ele seja compartilhado com você.",
     "CHANGE_VALUE_TITLE": "Mudar valor:",
     "NEW_VARIABLE": "Nova variável...",
     "NEW_VARIABLE_TITLE": "Nome da nova variável:",
@@ -289,7 +293,9 @@
     "PROCEDURES_CALLRETURN_HELPURL": "https://pt.wikipedia.org/wiki/Sub-rotina",
     "PROCEDURES_CALLRETURN_TOOLTIP": "Executa a função definida pelo usuário \"%1\" e usa seu retorno.",
     "PROCEDURES_MUTATORCONTAINER_TITLE": "entradas",
+    "PROCEDURES_MUTATORCONTAINER_TOOLTIP": "Adicione, remova, ou reordene as entradas para esta função.",
     "PROCEDURES_MUTATORARG_TITLE": "nome da entrada:",
+    "PROCEDURES_MUTATORARG_TOOLTIP": "Adicione uma entrada para esta função",
     "PROCEDURES_HIGHLIGHT_DEF": "Destacar definição da função",
     "PROCEDURES_CREATE_DO": "Criar \"%1\"",
     "PROCEDURES_IFRETURN_TOOLTIP": "Se um valor é verdadeiro, então retorna um valor.",

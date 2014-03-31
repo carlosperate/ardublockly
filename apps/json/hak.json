@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "EagerLin"
+            "EagerLin",
+            "Jetlag"
         ]
     },
     "Apps.dialogOk": "確定",
@@ -11,7 +12,7 @@
     "Apps.catLists": "列表",
     "Apps.catColour": "顏色",
     "Apps.catVariables": "變量",
-    "Apps.catProcedures": "流程",
+    "Apps.catProcedures": "函數",
     "Apps.httpRequestError": "命令出現錯誤。",
     "Apps.xmlError": "沒存到你保存个檔案。可能它係從其他版本个Blockly創建麼？",
     "Apps.listVariable": "列表",

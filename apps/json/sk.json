@@ -22,7 +22,7 @@
     "Apps.catLists": "Zoznamy",
     "Apps.catColour": "Farby",
     "Apps.catVariables": "Premenné",
-    "Apps.catProcedures": "Procedúry",
+    "Apps.catProcedures": "Funkcie",
     "Apps.httpRequestError": "Problém so spracovaním požiadavky.",
     "Apps.linkAlert": "Zdieľať tento program skopírovaním odkazu\n\n%1",
     "Apps.hashError": "Prepáč, '%1' nie je meno žiadnemu uloženému programu.",

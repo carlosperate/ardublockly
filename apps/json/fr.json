@@ -1,7 +1,8 @@
 {
     "@metadata": {
         "authors": [
-            "Gomoko"
+            "Gomoko",
+            "Immortal"
         ]
     },
     "Apps.subtitle": "un environnement de programmation visuel",
@@ -9,7 +10,7 @@
     "Apps.codeTooltip": "Voir le code JavaScript généré'.",
     "Apps.linkTooltip": "Sauvegarde et lies aux blocs.",
     "Apps.runTooltip": "Lancer le programme défini par les blocs dans l’espace de travail.",
-    "Apps.runProgram": "Execute le programme",
+    "Apps.runProgram": "Exécuter le programme",
     "Apps.resetProgram": "Reset",
     "Apps.dialogOk": "OK",
     "Apps.dialogCancel": "Annuler",

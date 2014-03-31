@@ -25,7 +25,7 @@
     "Apps.catLists": "列表",
     "Apps.catColour": "颜色",
     "Apps.catVariables": "变量",
-    "Apps.catProcedures": "程序",
+    "Apps.catProcedures": "函数",
     "Apps.httpRequestError": "请求存在问题。",
     "Apps.linkAlert": "通过这个链接分享您的模块：\n\n%1",
     "Apps.hashError": "对不起，没有任何已保存的程序对应'%1' 。",
