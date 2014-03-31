@@ -45,10 +45,6 @@ def main():
                       help='relative directory for output files')
   parser.add_argument('--key_file', default='keys.json',
                       help='relative path to input keys file')
-  parser.add_argument('--min_length', default=30,
-                      help='minimum line length (not counting last line)')
-  parser.add_argument('--max_length', default=50,
-                      help='maximum line length (not guaranteed)')
   parser.add_argument('--quiet', action='store_true', default=False,
                       help='do not write anything to standard output')
   parser.add_argument('files', nargs='+', help='input files')

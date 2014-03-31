@@ -81,7 +81,7 @@
     "LOGIC_OPERATION_TOOLTIP_OR": "คืนค่าเป็น \"จริง\" ถ้ามีอย่างน้อยหนึ่งค่าที่เป็นจริง",
     "LOGIC_OPERATION_OR": "หรือ",
     "LOGIC_NEGATE_TITLE": "ไม่ %1",
-    "LOGIC_NEGATE_TOOLTIP": "คืนค่าเป็น \"จริง\" ถ้าค่าที่ใส่เป็นเท็จ\nคืนค่าเป็น \"เท็จ\" ถ้าค่าที่ใส่เป็นจริง",
+    "LOGIC_NEGATE_TOOLTIP": "คืนค่าเป็น \"จริง\" ถ้าค่าที่ใส่เป็นเท็จ คืนค่าเป็น \"เท็จ\" ถ้าค่าที่ใส่เป็นจริง",
     "LOGIC_BOOLEAN_TRUE": "จริง",
     "LOGIC_BOOLEAN_FALSE": "เท็จ",
     "LOGIC_BOOLEAN_TOOLTIP": "คืนค่าเป็นจริงหรือเท็จ",

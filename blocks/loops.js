@@ -241,7 +241,7 @@ Blockly.Blocks['controls_flow_statements'] = {
         BREAK: Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_BREAK,
         CONTINUE: Blockly.Msg.CONTROLS_FLOW_STATEMENTS_TOOLTIP_CONTINUE
       };
-      return thisBlock.TOOLTIPS[op];
+      return TOOLTIPS[op];
     });
   },
   /**
