@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Renvoie l’arctangente d’un nombre.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Renvoie le cosinus d’un angle en degrés (pas en radians).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Renvoie le sinus d’un angle en degrés (pas en radians).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Renvoie la tangente d’un angle en degrés (pas en radians).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Nouvelle variable…";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nom de la nouvelle variable :";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Bir sayının ters tanjantını döndür .
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Bir açının kosinüsünü döndür(radyan olarak değil).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Bir açının sinüsünü döndür(radyan olarak değil).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Bir açının tanjantını döndür(radyan olarak değil).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Yeni değişken...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Yeni değişken ismi :";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";

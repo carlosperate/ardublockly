@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Returnează arctangenta unui număr.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Întoarce cosinusul unui grad (nu radianul).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Întoarce cosinusul unui grad (nu radianul).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Întoarce tangenta unui grad (nu radianul).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Variabilă nouă...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Noul nume de variabilă:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

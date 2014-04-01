@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Zwróć arcus tangens danej liczby.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Zwraca wartość cosinusa o stopniu (nie radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Zwraca wartość sinusa o stopniu (nie radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Zwróć tangens o stopniu (nie radian).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Nowa zmienna...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nowa nazwa zmiennej:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";

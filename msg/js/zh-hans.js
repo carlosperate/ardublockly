@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.zh-hans');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "添加注释";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "请授权这个应用程序以保存您的作品并共享。";
 Blockly.Msg.CHANGE_VALUE_TITLE = "更改值：";
 Blockly.Msg.CHAT = "通过在此框输入与您的合作者沟通！";
 Blockly.Msg.COLLAPSE_ALL = "折叠块";
@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "返回指定角度的反正切值。";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "返回指定角度的余弦值(非弧度）。";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "返回指定角度的正弦值(非弧度）。";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "返回指定角度的正切值(非弧度）。";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "新变量...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "新变量的名称：";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "空白";
@@ -279,9 +280,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "突出显示函数定义";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "如果值为真，则返回第二个值。";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "警告: 仅在定义函数内可使用此块。";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "输入名称：";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "添加函数输入。";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "參數";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "添加、删除或重新排此函数的输入。";
 Blockly.Msg.REMOVE_COMMENT = "删除注释";
 Blockly.Msg.RENAME_VARIABLE = "重命名变量...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "将所有“%1”变量重命名为:";

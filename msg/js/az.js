@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Ədədin arctanqensini qaytarır.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Dərəcənin kosinusunu qaytarır (radianın yox).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Dərəcənin sinusunu qaytar (radianın yox).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Dərəcənin tangensini qaytar (radianın yox).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Yeni dəyişən...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Yeni dəyişənin adı:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

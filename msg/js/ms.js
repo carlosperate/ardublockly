@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.ms');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Berikan Komen";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Sila benarkan aplikasi ini untuk membolehkan hasil kerja anda disimpan, malah dikongsikan oleh anda.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Ubah nilai:";
 Blockly.Msg.CHAT = "Bersembang dengan rakan kerjasama anda dengan menaip di dalam petak ini!";
 Blockly.Msg.COLLAPSE_ALL = "Lipat Blok²";
@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Kembalikan beberapa nombor arctangent.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Kembalikan darjah kosinus (bukan radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Kembalikan darjah sine (bukan radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Kembalikan darjah tangen (bukan radian).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Pembolehubah baru...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nama pembolehubah baru:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
@@ -279,9 +280,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Serlahkan definisi fungsi";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "If a value is true, then return a second value.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Amaran: Blok ini hanya boleh digunakan dalam fungsi definisi.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "Nama input:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Tambah satu input pada fungsi.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "Input-input";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Tambah, alih keluar atau susun semula input pada fungsi ini.";
 Blockly.Msg.REMOVE_COMMENT = "Padamkan Komen";
 Blockly.Msg.RENAME_VARIABLE = "Tukar nama pembolehubah...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Tukar nama semua pembolehubah '%1' kepada:";

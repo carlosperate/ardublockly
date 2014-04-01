@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Vrátí arctangens čísla.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Vrátí kosinus úhlu ve stupních.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Vrátí sinus úhlu ve stupních.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Vrátí tangens úhlu ve stupních.";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Nová proměnná...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nový název proměnné:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

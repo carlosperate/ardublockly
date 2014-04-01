@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.da');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Tilføj kommentar";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Tillad venligst at denne app muliggør at du kan gemme dit arbejde og at du kan dele det.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Ændr værdi:";
 Blockly.Msg.CHAT = "Chat med din samarbejdspartner ved at skrive i denne boks!";
 Blockly.Msg.COLLAPSE_ALL = "Fold blokkene sammen";
@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Returnere arcus tangens af et tal.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Returnere cosinus af en vinkel (i grader).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Returnere sinus af en vinkel (i grader).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Returnere tangens af en vinkel (i grader).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Ny variabel...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Navn til den nye variabel:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
@@ -279,9 +280,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Markér funktionsdefinitionen";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Hvis en værdi er sand, så returnér en anden værdi.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Advarsel: Denne blok kan kun anvendes inden for en funktionsdefinition.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "parameternavn:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Tilføj et input til funktionen.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "inputs";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Tilføje, fjerne eller ændre rækkefølgen af input til denne funktion.";
 Blockly.Msg.REMOVE_COMMENT = "Fjern kommentar";
 Blockly.Msg.RENAME_VARIABLE = "Omdøb variabel...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Omdøb alle '%1' variabler til:";

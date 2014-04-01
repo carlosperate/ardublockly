@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Ger tillbaka arcus tangens (arctan) av ett
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Ger tillbaka cosinus för en grad (inte radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Ger tillbaka sinus för en grad (inte radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Ger tillbaka tangens för en grad (inte radian).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Ny variabel...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nytt variabelnamn:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

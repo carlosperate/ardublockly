@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "A fokban megadott szög arkusz tangens ér
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "A fokban megadott szög koszinusz értéke.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "A fokban megadott szög szinusz értéke.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "A fokban megadott szög tangens értéke.";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Új...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Az új változó neve:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = ".";

@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Return the arctangent of a number.";  // u
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Return the cosine of a degree (not radian).";  // untranslated
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Return the sine of a degree (not radian).";  // untranslated
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Return the tangent of a degree (not radian).";  // untranslated
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "New variable...";  // untranslated
 Blockly.Msg.NEW_VARIABLE_TITLE = "New variable name:";  // untranslated
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

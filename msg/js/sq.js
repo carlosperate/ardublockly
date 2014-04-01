@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Kthe tg-1 e nje numeri.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Kthe kosinusin e nje grade (jo ne radiant).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Kthe kosinusin e nje kendi (jo ne radiant).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Kthe tangentin e nje kendi (jo radiant).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Identifikatorë i ri...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Emri i identifikatorit të ri:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

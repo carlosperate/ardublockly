@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Palauttaa luvun arkustangentin.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Palauttaa asteluvun (ei radiaanin) kosinin.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Palauttaa asteluvun (ei radiaanin) sinin.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Palauttaa asteluvun (ei radiaanin) tangentin.";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Uusi muuttuja...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Uuden muuttujan nimi:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

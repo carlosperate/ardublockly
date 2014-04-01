@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Skilar arkartangensi tölu.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Skila kósínusi horns gefnu í gráðum.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Skila sínusi horns gefnu í gráðum.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Skila tangensi horns gefnu í gráðum.";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Ný breyta...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Heiti nýrrar breytu:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Kembalikan atan dari angka.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Kembalikan cos dari derajat (bukan radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Kembalikan sinus dari derajat (bukan radian).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Kembalikan tangen dari derajat (tidak radian).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Pembolehubah baru...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nama pembolehubah baru:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

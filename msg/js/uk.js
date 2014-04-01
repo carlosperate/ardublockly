@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Повертає арктангенс чи
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Повертає косинус кута у градусах (не у радіанах).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Повертає синус кута у градусах (не у радіанах).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Повертає тангенс кута у градусах (не у радіанах).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Нова змінна...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Нове ім'я змінної:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "-ий.";

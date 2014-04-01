@@ -36,7 +36,7 @@ if (typeof planepage == 'undefined') { var planepage = {}; }
 
 
 planepage.messages = function(opt_data, opt_ignored, opt_ijData) {
-  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Plane_rows">Rows: %1</span><span id="Plane_getRows">rows (%1)</span><span id="Plane_rows1">1st class rows: %1</span><span id="Plane_getRows1">1st class rows (%1)</span><span id="Plane_rows2">2nd class rows: %1</span><span id="Plane_getRows2">2nd class rows (%1)</span><span id="Plane_seats">Seats: %1</span><span id="Plane_placeholder">?</span><span id="Plane_setSeats">iskemey =</span></div>';
+  return apps.messages(null, null, opt_ijData) + '<div style="display: none"><span id="Plane_rows">Rêzi: %1</span><span id="Plane_getRows">rêzi(%1)</span><span id="Plane_rows1">Rêzê sınıfa verêne: %1</span><span id="Plane_getRows1">Rêzê sınıfa verêne (%1)</span><span id="Plane_rows2">Rêzê sınıfa dıyıne: %1</span><span id="Plane_getRows2">Rêzê sınıfa dıyıne (%1)</span><span id="Plane_seats">Seats: %1</span><span id="Plane_placeholder">?</span><span id="Plane_setSeats">iskemey =</span></div>';
 };
 
 

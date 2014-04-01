@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Devolver el arcotangente de un número.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Devolver el coseno de un grado (no radián).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Devolver el seno de un grado (no radián).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Devolver la tangente de un grado (no radián).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Variable nueva…";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nombre de variable nueva:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

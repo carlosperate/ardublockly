@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Hoàn trả Arctang của một góc (theo
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Hoàn trả Cos của một góc (theo độ).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Hoàn trả Sin của một góc (theo độ).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Hoàn trả Tang của một góc (theo độ).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Biến mới...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Tên của biến mới:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

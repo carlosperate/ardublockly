@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "คืนค่า arctangent ของต
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "คืนค่า cosine ขององศา (ไม่ใช่เรเดียน)";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "คืนค่า sine ขององศา (ไม่ใช่เรเดียน)";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "คืนค่า tangent ขององศา (ไม่ใช่เรเดียน)";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "สร้างตัวแปรใหม่";
 Blockly.Msg.NEW_VARIABLE_TITLE = "ชื่อตัวแปร:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

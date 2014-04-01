@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Враћа аркус тангенс бр�
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Враћа косинус степена (не радијан).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Враћа синус степена (не радијан).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Враћа тангенс степена (не радијан).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Нова променљива…";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Име нове променљиве:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";

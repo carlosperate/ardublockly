@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Geeft de arctangens van een getal.";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Geeft de cosinus van een graad (geen radialen).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Geeft de sinus van een graad (geen radialen).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Geeft de tangens van een graad (geen radialen).";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Nieuwe variabele...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nieuwe variabelenaam:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

@@ -256,6 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "番号のarctangent を返すます";
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "番号のcosineの次数を返す";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "番号のsineの次数を返す";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "番号のtangentの次数を返す";
+Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "新しい変数";
 Blockly.Msg.NEW_VARIABLE_TITLE = "新しい変数の、名前";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";
