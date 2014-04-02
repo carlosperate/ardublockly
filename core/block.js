@@ -482,7 +482,7 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
  */
 Blockly.Block.prototype.getHeightWidth = function() {
   try {
-    var bBox = this.getSvgRoot().getBBox();
+    var bBox = this.svg_.svgPath_.getBBox();
     var height = bBox.height;
   } catch (e) {
     // Firefox has trouble with hidden elements (Bug 528969).
@@ -500,8 +500,6 @@ Blockly.Block.prototype.getHeightWidth = function() {
       height += 4;
     }
   }
-  // Subtract one from the height due to the shadow.
-  height -= 1;
   return {height: height, width: bBox.width};
 };
 
