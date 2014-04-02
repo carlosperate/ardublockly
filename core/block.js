@@ -477,13 +477,15 @@ Blockly.Block.prototype.moveBy = function(dx, dy) {
 };
 
 /**
- * Returns a bounding box describing the dimensions of this block.
+ * Returns a bounding box describing the dimensions of this block
+ * and any blocks stacked below it.
  * @return {!Object} Object with height and width properties.
  */
 Blockly.Block.prototype.getHeightWidth = function() {
   try {
     var bBox = this.svg_.svgPath_.getBBox();
     var height = bBox.height;
+    var width = bBox.width;
   } catch (e) {
     // Firefox has trouble with hidden elements (Bug 528969).
     return {height: 0, width: 0};
@@ -500,7 +502,14 @@ Blockly.Block.prototype.getHeightWidth = function() {
       height += 4;
     }
   }
-  return {height: height, width: bBox.width};
+  // Recursively add size of subsequent blocks.
+  var nextBlock = this.nextConnection.targetBlock();
+  if (nextBlock) {
+    var nextHeightWidth = nextBlock.getHeightWidth();
+    height += nextHeightWidth.height - 3;
+    width = Math.max(width, nextHeightWidth.width);
+  }
+  return {height: height, width: width};
 };
 
 /**

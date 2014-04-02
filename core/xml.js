@@ -370,6 +370,10 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
     }
   }
 
+  var collapsed = xmlBlock.getAttribute('collapsed');
+  if (collapsed) {
+    block.setCollapsed(collapsed == 'true');
+  }
   var next = block.nextConnection && block.nextConnection.targetBlock();
   if (next) {
     // Next block in a stack needs to square off its corners.
@@ -377,10 +381,6 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
     next.render();
   } else {
     block.render();
-  }
-  var collapsed = xmlBlock.getAttribute('collapsed');
-  if (collapsed) {
-    block.setCollapsed(collapsed == 'true');
   }
   return block;
 };
