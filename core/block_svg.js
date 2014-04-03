@@ -51,6 +51,15 @@ Blockly.BlockSvg = function(block) {
 };
 
 /**
+ * Height of this block, not including any statement blocks above or below.
+ */
+Blockly.BlockSvg.prototype.height = 0;
+/**
+ * Width of this block, including any connected value blocks.
+ */
+Blockly.BlockSvg.prototype.width = 0;
+
+/**
  * Constant for identifying rows that are to be rendered inline.
  * Don't collide with Blockly.INPUT_VALUE and friends.
  * @const
@@ -175,10 +184,15 @@ Blockly.BlockSvg.NOTCH_PATH_RIGHT = 'l -6,4 -3,0 -6,-4';
  */
 Blockly.BlockSvg.JAGGED_TEETH = 'l 8,0 0,4 8,4 -16,8 8,4';
 /**
- * SVG path for drawing jagged teeth at the end of collapsed blocks.
+ * Height of SVG path for jagged teeth at the end of collapsed blocks.
  * @const
  */
 Blockly.BlockSvg.JAGGED_TEETH_HEIGHT = 20;
+/**
+ * Width of SVG path for jagged teeth at the end of collapsed blocks.
+ * @const
+ */
+Blockly.BlockSvg.JAGGED_TEETH_WIDTH = 15;
 /**
  * SVG path for drawing a horizontal puzzle tab from top to bottom.
  * @const
@@ -582,7 +596,7 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     // The width is currently only needed for inline value inputs.
     if (isInline && input.type == Blockly.INPUT_VALUE) {
       input.renderWidth = Blockly.BlockSvg.TAB_WIDTH +
-          Blockly.BlockSvg.SEP_SPACE_X;
+          Blockly.BlockSvg.SEP_SPACE_X * 1.5;
     } else {
       input.renderWidth = 0;
     }
@@ -594,6 +608,10 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
       input.renderWidth = Math.max(input.renderWidth, bBox.width);
     }
 
+    if (i == inputList.length - 1) {
+      // Last element should overhang slightly due to shadow.
+      input.renderHeight--;
+    }
     row.height = Math.max(row.height, input.renderHeight);
     input.fieldWidth = 0;
     if (inputRows.length == 1) {
@@ -755,13 +773,6 @@ Blockly.BlockSvg.prototype.renderDrawTop_ =
     steps.push(Blockly.BlockSvg.TOP_LEFT_CORNER);
     highlightSteps.push(Blockly.BlockSvg.TOP_LEFT_CORNER_HIGHLIGHT);
   }
-  if (Blockly.BROKEN_CONTROL_POINTS) {
-    /* HACK:
-     WebKit bug 67298 causes control points to be included in the reported
-     bounding box.  Add 5px control point to the top of the path.
-    */
-    steps.push('c 0,5 0,-5 0,0');
-  }
 
   // Top edge.
   if (this.block_.previousConnection) {
@@ -778,6 +789,7 @@ Blockly.BlockSvg.prototype.renderDrawTop_ =
   }
   steps.push('H', rightEdge);
   highlightSteps.push('H', rightEdge + (Blockly.RTL ? -1 : 0));
+  this.width = rightEdge;
 };
 
 /**
@@ -821,6 +833,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       if (Blockly.RTL) {
         highlightSteps.push('v', remainder - 2);
       }
+      this.width += Blockly.BlockSvg.JAGGED_TEETH_WIDTH;
     } else if (row.type == Blockly.BlockSvg.INLINE) {
       // Inline inputs.
       for (var x = 0, input; input = row[x]; x++) {
@@ -836,33 +849,35 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
         }
         if (input.type == Blockly.INPUT_VALUE) {
-          inlineSteps.push('M', (cursorX - Blockly.BlockSvg.SEP_SPACE_X) +
+          inlineSteps.push('M', (cursorX - Blockly.BlockSvg.SEP_SPACE_X + 3) +
                            ',' + (cursorY + Blockly.BlockSvg.INLINE_PADDING_Y));
-          inlineSteps.push('h', Blockly.BlockSvg.TAB_WIDTH - input.renderWidth);
+          inlineSteps.push('h', Blockly.BlockSvg.TAB_WIDTH - 2 -
+                           input.renderWidth);
           inlineSteps.push(Blockly.BlockSvg.TAB_PATH_DOWN);
-          inlineSteps.push('v', input.renderHeight -
+          inlineSteps.push('v', input.renderHeight + 1 -
                                 Blockly.BlockSvg.TAB_HEIGHT);
-          inlineSteps.push('h', input.renderWidth - Blockly.BlockSvg.TAB_WIDTH);
+          inlineSteps.push('h', input.renderWidth + 2 -
+                           Blockly.BlockSvg.TAB_WIDTH);
           inlineSteps.push('z');
           if (Blockly.RTL) {
             // Highlight right edge, around back of tab, and bottom.
             highlightInlineSteps.push('M',
                 (cursorX - Blockly.BlockSvg.SEP_SPACE_X +
-                 Blockly.BlockSvg.TAB_WIDTH - input.renderWidth - 1) + ',' +
+                 Blockly.BlockSvg.TAB_WIDTH - input.renderWidth) + ',' +
                 (cursorY + Blockly.BlockSvg.INLINE_PADDING_Y + 1));
             highlightInlineSteps.push(
                 Blockly.BlockSvg.TAB_PATH_DOWN_HIGHLIGHT_RTL);
             highlightInlineSteps.push('v',
-                input.renderHeight - Blockly.BlockSvg.TAB_HEIGHT + 2);
+                input.renderHeight - Blockly.BlockSvg.TAB_HEIGHT + 3);
             highlightInlineSteps.push('h',
-                input.renderWidth - Blockly.BlockSvg.TAB_WIDTH);
+                input.renderWidth - Blockly.BlockSvg.TAB_WIDTH + 1);
           } else {
             // Highlight right edge, bottom, and glint at bottom of tab.
             highlightInlineSteps.push('M',
-                (cursorX - Blockly.BlockSvg.SEP_SPACE_X + 1) + ',' +
+                (cursorX - Blockly.BlockSvg.SEP_SPACE_X + 4) + ',' +
                 (cursorY + Blockly.BlockSvg.INLINE_PADDING_Y + 1));
-            highlightInlineSteps.push('v', input.renderHeight);
-            highlightInlineSteps.push('h', Blockly.BlockSvg.TAB_WIDTH -
+            highlightInlineSteps.push('v', input.renderHeight + 1);
+            highlightInlineSteps.push('h', Blockly.BlockSvg.TAB_WIDTH - 2 -
                                            input.renderWidth);
             highlightInlineSteps.push('M',
                 (cursorX - input.renderWidth - Blockly.BlockSvg.SEP_SPACE_X +
@@ -875,14 +890,14 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
           if (Blockly.RTL) {
             connectionX = connectionsXY.x - cursorX -
                 Blockly.BlockSvg.TAB_WIDTH + Blockly.BlockSvg.SEP_SPACE_X +
-                input.renderWidth - 1;
+                input.renderWidth - 2;
           } else {
             connectionX = connectionsXY.x + cursorX +
                 Blockly.BlockSvg.TAB_WIDTH - Blockly.BlockSvg.SEP_SPACE_X -
-                input.renderWidth + 1;
+                input.renderWidth + 2;
           }
           connectionY = connectionsXY.y + cursorY +
-              Blockly.BlockSvg.INLINE_PADDING_Y;
+              Blockly.BlockSvg.INLINE_PADDING_Y + 1;
           input.connection.moveTo(connectionX, connectionY);
           if (input.connection.targetConnection) {
             input.connection.tighten_();
@@ -891,6 +906,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       }
 
       cursorX = Math.max(cursorX, inputRows.rightEdge);
+      this.width = Math.max(this.width, cursorX);
       steps.push('H', cursorX);
       highlightSteps.push('H', cursorX + (Blockly.RTL ? -1 : 0));
       steps.push('v', row.height);
@@ -913,11 +929,12 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       }
       this.renderFields_(input.fieldRow, fieldX, fieldY);
       steps.push(Blockly.BlockSvg.TAB_PATH_DOWN);
-      steps.push('v', row.height - Blockly.BlockSvg.TAB_HEIGHT);
+      var v = row.height - Blockly.BlockSvg.TAB_HEIGHT
+      steps.push('v', v);
       if (Blockly.RTL) {
         // Highlight around back of tab.
         highlightSteps.push(Blockly.BlockSvg.TAB_PATH_DOWN_HIGHLIGHT_RTL);
-        highlightSteps.push('v', row.height - Blockly.BlockSvg.TAB_HEIGHT);
+        highlightSteps.push('v', v);
       } else {
         // Short highlight glint at bottom of tab.
         highlightSteps.push('M', (inputRows.rightEdge - 4.2) + ',' +
@@ -932,6 +949,9 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       input.connection.moveTo(connectionX, connectionY);
       if (input.connection.targetConnection) {
         input.connection.tighten_();
+        this.width = Math.max(this.width, inputRows.rightEdge +
+            input.connection.targetBlock().getHeightWidth().width -
+            Blockly.BlockSvg.TAB_WIDTH + 1);
       }
     } else if (row.type == Blockly.DUMMY_INPUT) {
       // External naked field.
@@ -1011,6 +1031,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       input.connection.moveTo(connectionX, connectionY);
       if (input.connection.targetConnection) {
         input.connection.tighten_();
+        this.width = Math.max(this.width, inputRows.statementEdge +
+            input.connection.targetBlock().getHeightWidth().width);
       }
       if (y == inputRows.length - 1 ||
           inputRows[y + 1].type == Blockly.NEXT_STATEMENT) {
@@ -1045,6 +1067,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
  */
 Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
                                                      connectionsXY, cursorY) {
+  this.height = cursorY + 1;  // Add one for the shadow.
   if (this.block_.nextConnection) {
     steps.push('H', Blockly.BlockSvg.NOTCH_WIDTH + ' ' +
         Blockly.BlockSvg.NOTCH_PATH_RIGHT);
@@ -1060,15 +1083,9 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
     if (this.block_.nextConnection.targetConnection) {
       this.block_.nextConnection.tighten_();
     }
+    this.height += 4;  // Height of tab.
   }
 
-  if (Blockly.BROKEN_CONTROL_POINTS) {
-    /* HACK:
-     WebKit bug 67298 causes control points to be included in the reported
-     bounding box.  Add 5px control point to the bottom of the path.
-    */
-    steps.push('c 0,5 0,-5 0,0');
-  }
   // Should the bottom-left corner be rounded or square?
   if (this.squareBottomLeftCorner_) {
     steps.push('H 0');
@@ -1120,6 +1137,7 @@ Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, highlightSteps,
       highlightSteps.push('m', (Blockly.BlockSvg.TAB_WIDTH * 0.92) +
                           ',1 V 1 H 2');
     }
+    this.width += Blockly.BlockSvg.TAB_WIDTH;
   } else if (!Blockly.RTL) {
     if (this.squareTopLeftCorner_) {
       highlightSteps.push('V', 1);

@@ -298,7 +298,7 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
   // Raise it to the top for extra visibility.
   rootBlock.getSvgRoot().parentNode.appendChild(rootBlock.getSvgRoot());
   var dx = (staticConnection.x_ + Blockly.SNAP_RADIUS) - this.x_;
-  var dy = (staticConnection.y_ + Blockly.SNAP_RADIUS * 2) - this.y_;
+  var dy = (staticConnection.y_ + Blockly.SNAP_RADIUS) - this.y_;
   if (reverse) {
     // When reversing a bump due to an uneditable block, bump up.
     dy = -dy;
