@@ -436,12 +436,6 @@ Blockly.showContextMenu_ = function(e) {
     options.push(expandOption);
   }
 
-  // Option to get help.
-  var helpOption = {enabled: false};
-  helpOption.text = Blockly.Msg.HELP;
-  helpOption.callback = function() {};
-  options.push(helpOption);
-
   Blockly.ContextMenu.show(e, options);
 };
 
