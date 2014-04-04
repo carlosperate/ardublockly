@@ -406,15 +406,6 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   };
   this.listeners_.push(Blockly.bindEvent_(this.svgBackground_, 'mouseover',
       this, deselectAll));
-  var mouseDown = function(e) {
-    if (Blockly.isRightButton(e)) {
-      // No context menu for flyout.
-      Blockly.hideChaff()
-      e.stopPropagation();
-    }
-  };
-  this.listeners_.push(Blockly.bindEvent_(this.svgBackground_, 'mousedown',
-      this, mouseDown));
 
   this.width_ = 0;
   this.reflow();
