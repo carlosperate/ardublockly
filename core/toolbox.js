@@ -150,6 +150,7 @@ Blockly.Toolbox.position_ = function() {
  */
 Blockly.Toolbox.populate_ = function() {
   var rootOut = Blockly.Toolbox.tree_;
+  rootOut.removeChildren();  // Delete any existing content.
   rootOut.blocks = [];
   function syncTrees(treeIn, treeOut) {
     for (var i = 0, childIn; childIn = treeIn.childNodes[i]; i++) {

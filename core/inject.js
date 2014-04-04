@@ -60,6 +60,30 @@ Blockly.inject = function(container, opt_options) {
 };
 
 /**
+ * Parse the provided toolbox tree into a consistent DOM format.
+ * @param {Node|string} tree DOM tree of blocks, or text representation of same.
+ * @return {Node} DOM tree of blocks or null.
+ * @private
+ */
+Blockly.parseToolboxTree_ = function(tree) {
+  if (tree) {
+    if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
+      // In this case the tree will not have been properly built by the
+      // browser. The HTML will be contained in the element, but it will
+      // not have the proper DOM structure since the browser doesn't support
+      // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
+      tree = tree.outerHTML;
+    }
+    if (typeof tree == 'string') {
+      tree = Blockly.Xml.textToDom(tree);
+    }
+  } else {
+    tree = null;
+  }
+  return tree;
+};
+
+/**
  * Configure Blockly to behave according to a set of options.
  * @param {!Object} options Dictionary of options.
  * @return {Object} Parsed options.
@@ -73,23 +97,9 @@ Blockly.parseOptions_ = function(options) {
     var hasCollapse = false;
     var tree = null;
   } else {
-    var tree = options['toolbox'];
-    if (tree) {
-      if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
-        // In this case the tree will not have been properly built by the
-        // browser. The HTML will be contained in the element, but it will
-        // not have the proper DOM structure since the browser doesn't support
-        // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
-        tree = tree.outerHTML;
-      }
-      if (typeof tree == 'string') {
-        tree = Blockly.Xml.textToDom(tree);
-      }
-      var hasCategories = !!tree.getElementsByTagName('category').length;
-    } else {
-      tree = null;
-      var hasCategories = false;
-    }
+    var tree = Blockly.parseToolboxTree_(options['toolbox']);
+    var hasCategories = Boolean(tree &&
+        tree.getElementsByTagName('category').length);
     var hasTrashcan = options['trashcan'];
     if (hasTrashcan === undefined) {
       hasTrashcan = hasCategories;
@@ -348,7 +358,7 @@ Blockly.init_ = function() {
     // Destroying and reinjecting Blockly should not bind again.
     Blockly.bindEvent_(window, 'resize', document, Blockly.svgResize);
     Blockly.bindEvent_(document, 'keydown', null, Blockly.onKeyDown_);
-    // Don't use bindEvent_ for document's mouseup isce that would create a
+    // Don't use bindEvent_ for document's mouseup since that would create a
     // corresponding touch handler that would squeltch the ability to interact
     // with non-Blockly elements.
     document.addEventListener('mouseup', Blockly.onMouseUp_, false);
@@ -377,8 +387,8 @@ Blockly.init_ = function() {
     }
   }
   if (Blockly.hasScrollbars) {
-    Blockly.mainWorkspace.scrollbar = new Blockly.ScrollbarPair(
-        Blockly.mainWorkspace);
+    Blockly.mainWorkspace.scrollbar =
+        new Blockly.ScrollbarPair(Blockly.mainWorkspace);
     Blockly.mainWorkspace.scrollbar.resize();
   }
 
@@ -389,4 +399,36 @@ Blockly.init_ = function() {
       ['media/click.mp3', 'media/click.wav', 'media/click.ogg'], 'click');
   Blockly.loadAudio_(
       ['media/delete.mp3', 'media/delete.ogg', 'media/delete.wav'], 'delete');
+};
+
+/**
+ * Modify the block tree on the existing toolbox.
+ * @param {Node|string} tree DOM tree of blocks, or text representation of same.
+ */
+Blockly.updateToolbox = function(tree) {
+  tree = Blockly.parseToolboxTree_(tree);
+  if (!tree) {
+    if (Blockly.languageTree) {
+      throw 'Can\'t nullify an existing toolbox.';
+    }
+    // No change (null to null).
+    return;
+  }
+  if (!Blockly.languageTree) {
+    throw 'Existing toolbox is null.  Can\'t create new toolbox.';
+  }
+  var hasCategories = !!tree.getElementsByTagName('category').length;
+  if (hasCategories) {
+    if (!Blockly.hasCategories) {
+      throw 'Existing toolbox has no categories.  Can\'t change mode.';
+    }
+    Blockly.languageTree = tree;
+    Blockly.Toolbox.populate_();
+  } else {
+    if (Blockly.hasCategories) {
+      throw 'Existing toolbox has categories.  Can\'t change mode.';
+    }
+    Blockly.languageTree = tree;
+    Blockly.mainWorkspace.flyout_.show(Blockly.languageTree.childNodes);
+  }
 };
