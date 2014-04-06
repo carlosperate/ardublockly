@@ -475,19 +475,6 @@ Maze.init = function() {
   pegmanButton.addEventListener('touchstart', Maze.showPegmanMenu, true);
 
   var rtl = BlocklyApps.isRtl();
-  var toolbox = document.getElementById('toolbox');
-  Blockly.inject(document.getElementById('blockly'),
-      {path: '../../',
-       maxBlocks: Maze.MAX_BLOCKS,
-       rtl: rtl,
-       toolbox: toolbox,
-       trashcan: true});
-  Blockly.loadAudio_(Maze.SKIN.winSound, 'win');
-  Blockly.loadAudio_(Maze.SKIN.crashSound, 'fail');
-
-  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  BlocklyApps.checkTimeout(%1);\n';
-  Maze.drawMap();
-
   var blocklyDiv = document.getElementById('blockly');
   var visualization = document.getElementById('visualization');
   var onresize = function(e) {
@@ -502,7 +489,19 @@ Maze.init = function() {
     });
   window.addEventListener('resize', onresize);
   onresize();
-  Blockly.fireUiEvent(window, 'resize');
+
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       maxBlocks: Maze.MAX_BLOCKS,
+       rtl: rtl,
+       toolbox: toolbox,
+       trashcan: true});
+  Blockly.loadAudio_(Maze.SKIN.winSound, 'win');
+  Blockly.loadAudio_(Maze.SKIN.crashSound, 'fail');
+
+  Blockly.JavaScript.INFINITE_LOOP_TRAP = '  BlocklyApps.checkTimeout(%1);\n';
+  Maze.drawMap();
 
   var defaultXml =
       '<xml>' +

@@ -47,12 +47,6 @@ Puzzle.init = function() {
   BlocklyApps.init();
 
   var rtl = BlocklyApps.isRtl();
-  Blockly.inject(document.getElementById('blockly'),
-      {path: '../../',
-       rtl: rtl,
-       scrollbars: false,
-       trashcan: false});
-
   var blocklyDiv = document.getElementById('blockly');
   var onresize = function(e) {
     blocklyDiv.style.width = (window.innerWidth - 20) + 'px';
@@ -61,7 +55,12 @@ Puzzle.init = function() {
   };
   onresize();
   window.addEventListener('resize', onresize);
-  Blockly.fireUiEvent(window, 'resize');
+
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       rtl: rtl,
+       scrollbars: false,
+       trashcan: false});
 
   // Add the blocks.
   try {

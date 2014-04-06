@@ -134,16 +134,6 @@ Code.init = function() {
   BlocklyApps.init();
 
   var rtl = BlocklyApps.isRtl();
-  var toolbox = document.getElementById('toolbox');
-  Blockly.inject(document.getElementById('content_blocks'),
-      {path: '../../',
-       rtl: rtl,
-       toolbox: toolbox});
-
-  // Add to reserved word list: Local variables in execution evironment (runJS)
-  // and the infinite loop detection function.
-  Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
-
   var container = document.getElementById('content_area');
   var onresize = function(e) {
     var bBox = BlocklyApps.getBBox_(container);
@@ -166,6 +156,16 @@ Code.init = function() {
     }
   };
   window.addEventListener('resize', onresize, false);
+
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('content_blocks'),
+      {path: '../../',
+       rtl: rtl,
+       toolbox: toolbox});
+
+  // Add to reserved word list: Local variables in execution evironment (runJS)
+  // and the infinite loop detection function.
+  Blockly.JavaScript.addReservedWords('code,timeouts,checkTimeout');
 
   BlocklyApps.loadBlocks('');
 

@@ -53,12 +53,6 @@ Graph.init = function() {
   BlocklyApps.init();
 
   var rtl = BlocklyApps.isRtl();
-  var toolbox = document.getElementById('toolbox');
-  Blockly.inject(document.getElementById('blockly'),
-      {path: '../../',
-       rtl: rtl,
-       toolbox: toolbox});
-
   var blocklyDiv = document.getElementById('blockly');
   var visualization = document.getElementById('visualization');
   var onresize = function(e) {
@@ -73,7 +67,12 @@ Graph.init = function() {
     });
   window.addEventListener('resize', onresize);
   onresize();
-  Blockly.fireUiEvent(window, 'resize');
+
+  var toolbox = document.getElementById('toolbox');
+  Blockly.inject(document.getElementById('blockly'),
+      {path: '../../',
+       rtl: rtl,
+       toolbox: toolbox});
 
   var defaultXml =
       '<xml>' +
