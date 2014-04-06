@@ -1,5 +1,9 @@
 {
-    "@metadata": [],
+    "@metadata": {
+        "authors": [
+            "Cocu"
+        ]
+    },
     "VARIABLES_DEFAULT_NAME": "element",
     "DUPLICATE_BLOCK": "duplikat",
     "ADD_COMMENT": "Legg til kommentar",
@@ -15,6 +19,8 @@
     "DISABLE_BLOCK": "Deaktiver blokk",
     "ENABLE_BLOCK": "Aktiver blokk",
     "HELP": "Hjelp",
+    "CHAT": "Chat med din medarbeider ved å skrive i dette feltet!",
+    "AUTH": "Vennligst godkjenn at denne appen gjør det mulig for deg å lagre arbeidet slik at du kan dele det.",
     "CHANGE_VALUE_TITLE": "Bytt verdi:",
     "NEW_VARIABLE": "Ny variabel...",
     "NEW_VARIABLE_TITLE": "Nytt variabelnavn:",
@@ -234,9 +240,9 @@
     "TEXT_CHANGECASE_OPERATOR_TITLECASE": "til store forbokstaver",
     "TEXT_TRIM_HELPURL": "https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces",
     "TEXT_TRIM_TOOLTIP": "Returner en kopi av teksten med mellomrom fjernet fra en eller begge sidene.",
-    "TEXT_TRIM_OPERATOR_BOTH": "fjern mellomrom fra begge sider",
-    "TEXT_TRIM_OPERATOR_LEFT": "fjern mellomrom fra venstre side",
-    "TEXT_TRIM_OPERATOR_RIGHT": "fjern mellomrom fra høyre side",
+    "TEXT_TRIM_OPERATOR_BOTH": "fjern mellomrom fra begge sider av",
+    "TEXT_TRIM_OPERATOR_LEFT": "fjern mellomrom fra venstre side av",
+    "TEXT_TRIM_OPERATOR_RIGHT": "fjern mellomrom fra høyre side av",
     "TEXT_PRINT_HELPURL": "https://code.google.com/p/blockly/wiki/Text#Printing_text",
     "TEXT_PRINT_TITLE": "skriv ut %1",
     "TEXT_PRINT_TOOLTIP": "Skriv ut angitt tekst, tall eller annet innhold.",
@@ -341,7 +347,9 @@
     "PROCEDURES_CALLRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
     "PROCEDURES_CALLRETURN_TOOLTIP": "Kjør den brukerdefinerte funksjonen'%1' og bruk resultatet av den.",
     "PROCEDURES_MUTATORCONTAINER_TITLE": "parametere",
+    "PROCEDURES_MUTATORCONTAINER_TOOLTIP": "Legg til, fjern eller endre rekkefølgen på input til denne funksjonen.",
     "PROCEDURES_MUTATORARG_TITLE": "Navn på parameter:",
+    "PROCEDURES_MUTATORARG_TOOLTIP": "Legg til en input til funksjonen.",
     "PROCEDURES_HIGHLIGHT_DEF": "Marker funksjonsdefinisjonen",
     "PROCEDURES_CREATE_DO": "Opprett '%1'",
     "PROCEDURES_IFRETURN_TOOLTIP": "Hvis en verdi er sann, returner da en annen verdi.",

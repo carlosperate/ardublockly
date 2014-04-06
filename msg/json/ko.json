@@ -330,7 +330,7 @@
     "VARIABLES_GET_CREATE_SET": "'집합 %1' 생성",
     "VARIABLES_SET_HELPURL": "http://code.google.com/p/blockly/wiki/Variables#Set",
     "VARIABLES_SET_TITLE": "바꾸기",
-    "VARIABLES_SET_TAIL": "를 다음 값으로 변경",
+    "VARIABLES_SET_TAIL": "를 다음 값으로 바꾸기",
     "VARIABLES_SET_TOOLTIP": "변수의 값을 입력한 값으로 변경해 줍니다.",
     "VARIABLES_SET_CREATE_GET": "'%1 값 읽기' 블럭 생성",
     "PROCEDURES_DEFNORETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",

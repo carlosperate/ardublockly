@@ -21,7 +21,7 @@
     "Apps.catLists": "Списоци",
     "Apps.catColour": "Боја",
     "Apps.catVariables": "Променливи",
-    "Apps.catProcedures": "Процедури",
+    "Apps.catProcedures": "Функции",
     "Apps.httpRequestError": "Се појави проблем во барањето.",
     "Apps.linkAlert": "Споделете ги вашите блокчиња со оваа врска:\n\n%1",
     "Apps.hashError": "„%1“ не одговара на ниеден зачуван програм.",

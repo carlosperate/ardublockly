@@ -24,7 +24,7 @@
     "Apps.catLists": "Listeler",
     "Apps.catColour": "Renk",
     "Apps.catVariables": "Değişkenler",
-    "Apps.catProcedures": "Prosedürler",
+    "Apps.catProcedures": "İşlevler",
     "Apps.httpRequestError": "İstek ile ilgili bir problem var.",
     "Apps.linkAlert": "Bloklarını bu bağlantı ile paylaş:\n\n%1",
     "Apps.hashError": "Üzgünüz, '%1' hiç bir kaydedilmiş program ile uyuşmuyor.",
