@@ -27,7 +27,7 @@ from common import InputError
 from common import write_files
 
 # Global variables
-args = None      # parsed command-line arguments
+args = None  # Parsed command-line arguments.
 
 
 def _parse_trans_unit(trans_unit):

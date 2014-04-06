@@ -29,11 +29,11 @@
 var Maze = {};
 
 // Supported languages.
-BlocklyApps.LANGUAGES = ['ar', 'br', 'ca', 'cs', 'da', 'de', 'el', 'en',
-                         'es', 'eu', 'fa', 'fr', 'gl', 'hu', 'ia', 'is', 'it',
-                         'ja', 'ko', 'lv', 'mk', 'ms', 'nl', 'pl', 'pms',
-                         'pt-br', 'ro', 'ru', 'sk', 'sr', 'sv', 'sw', 'th',
-                         'tr', 'uk', 'vi', 'zh-hans', 'zh-hant'];
+BlocklyApps.LANGUAGES =
+    ['ar', 'br', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'eu', 'fa', 'fr',
+     'gl', 'hu', 'hrx', 'ia', 'is', 'it', 'ja', 'ko', 'lv', 'mk', 'ms', 'nl',
+     'pl', 'pms', 'pt-br', 'ro', 'ru', 'sco', 'sk', 'si', 'sr', 'sv', 'sw',
+     'th', 'tr', 'uk', 'vi', 'zh-hans', 'zh-hant'];
 BlocklyApps.LANG = BlocklyApps.getLang();
 
 document.write('<script type="text/javascript" src="generated/' +

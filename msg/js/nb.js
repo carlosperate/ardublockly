@@ -7,9 +7,9 @@ goog.provide('Blockly.Msg.nb');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Legg til kommentar";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Vennligst godkjenn at denne appen gjør det mulig for deg å lagre arbeidet slik at du kan dele det.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Bytt verdi:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Chat med din medarbeider ved å skrive i dette feltet!";
 Blockly.Msg.COLLAPSE_ALL = "Skjul blokker";
 Blockly.Msg.COLLAPSE_BLOCK = "Skjul blokk";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "farge 1";
@@ -280,9 +280,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Marker funksjonsdefinisjonen";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Hvis en verdi er sann, returner da en annen verdi.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Advarsel: Denne blokken kan bare benyttes innenfor en funksjonsdefinisjon.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "Navn på parameter:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Legg til en input til funksjonen.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "parametere";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Legg til, fjern eller endre rekkefølgen på input til denne funksjonen.";
 Blockly.Msg.REMOVE_COMMENT = "Fjern kommentar";
 Blockly.Msg.RENAME_VARIABLE = "Gi nytt navn til variabel...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Endre navnet til alle '%1' variabler til:";
@@ -343,9 +343,9 @@ Blockly.Msg.TEXT_PROMPT_TYPE_TEXT = "spør om tekst med en melding";
 Blockly.Msg.TEXT_TEXT_HELPURL = "https://en.wikipedia.org/wiki/String_(computer_science)";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "En bokstav, ett ord eller en linje med tekst.";
 Blockly.Msg.TEXT_TRIM_HELPURL = "https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces";
-Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "fjern mellomrom fra begge sider";
-Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "fjern mellomrom fra venstre side";
-Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "fjern mellomrom fra høyre side";
+Blockly.Msg.TEXT_TRIM_OPERATOR_BOTH = "fjern mellomrom fra begge sider av";
+Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "fjern mellomrom fra venstre side av";
+Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "fjern mellomrom fra høyre side av";
 Blockly.Msg.TEXT_TRIM_TOOLTIP = "Returner en kopi av teksten med mellomrom fjernet fra en eller begge sidene.";
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "element";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "Opprett 'sett %1'";

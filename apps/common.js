@@ -29,6 +29,7 @@ var BlocklyApps = {};
  * Lookup for names of languages.  Keys should be in ISO 639 format.
  */
 BlocklyApps.LANGUAGE_NAME = {
+  'ace': 'بهسا اچيه',
   'af': 'Afrikaans',
   'ar': 'العربية',
   'az': 'Azərbaycanca',
@@ -51,6 +52,8 @@ BlocklyApps.LANGUAGE_NAME = {
   'gl': 'Galego',
   'hak': '客家話',
   'he': 'עברית',
+  'hi': 'हिन्दी',
+  'hrx': 'Hunsriqueano Riograndense',
   'hu': 'Magyar',
   'ia': 'Interlingua',
   'id': 'Bahasa Indonesia',
@@ -66,6 +69,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'lb': 'Lëtzebuergesch',
   'lt': 'Lietuvių',
   'lv': 'Latviešu',
+  'mg': 'Malagasy',
   'ml': 'മലയാളം',
   'mk': 'Македонски',
   'mr': 'मराठी',
@@ -82,6 +86,8 @@ BlocklyApps.LANGUAGE_NAME = {
   'ro': 'Română',
   'pt-br': 'Português Brasileiro',
   'ru': 'Русский',
+  'sco': 'Scots',
+  'si': 'සිංහල',
   'sk': 'Slovenčina',
   'sr': 'Српски',
   'sv': 'Svenska',
@@ -100,13 +106,14 @@ BlocklyApps.LANGUAGE_NAME = {
 /**
  * List of RTL languages.
  */
-BlocklyApps.LANGUAGE_RTL = ['ar', 'fa', 'he', 'mzn', 'ps'];
+BlocklyApps.LANGUAGE_RTL = ['ace', 'ar', 'fa', 'he', 'mzn', 'ps'];
 
 /**
  * Lookup for Blockly core block language pack.
  */
 BlocklyApps.LANGUAGE_PACK = {
   'ar': 'msg/js/ar.js',
+  'az-latn': 'msg/js/az-latn.js',
   'az': 'msg/js/az.js',
   'ca': 'msg/js/ca.js',
   'cdo': 'msg/js/zh_hant.js',
@@ -114,13 +121,16 @@ BlocklyApps.LANGUAGE_PACK = {
   'da': 'msg/js/da.js',
   'de': 'msg/js/de.js',
   'el': 'msg/js/el.js',
+  'en': 'msg/js/en.js',
+  'en_us': 'msg/js/en_us.js',
   'es': 'msg/js/es.js',
   'fa': 'msg/js/fa.js',
+  'fi': 'msg/js/fi.js',
   'fr': 'msg/js/fr.js',
   'frr': 'msg/js/de.js',
   'he': 'msg/js/he.js',
+  'hrx': 'msg/js/hrx.js',
   'hu': 'msg/js/hu.js',
-  'ia': 'msg/js/ia.js',
   'id': 'msg/js/id.js',
   'is': 'msg/js/is.js',
   'it': 'msg/js/it.js',
@@ -129,6 +139,7 @@ BlocklyApps.LANGUAGE_PACK = {
   'ksh': 'msg/js/de.js',
   'lb': 'msg/js/de.js',
   'ms': 'msg/js/ms.js',
+  'nb': 'msg/js/nb.js',
   'nl': 'msg/js/nl.js',
   'no': 'msg/js/no.js',
   'pl': 'msg/js/pl.js',

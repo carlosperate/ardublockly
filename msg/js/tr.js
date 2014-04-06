@@ -7,7 +7,7 @@ goog.provide('Blockly.Msg.tr');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Yorum Ekle";
-Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
+Blockly.Msg.AUTH = "Çalışmanızın kaydedilmesi ve sizinle paylaşılmasına izin verilmesi için lütfen bu uygulamaya yetki verin.";
 Blockly.Msg.CHANGE_VALUE_TITLE = "Değeri değiştir:";
 Blockly.Msg.CHAT = "Bu kutuya yazarak iş birlikçin ile sohbet et!";
 Blockly.Msg.COLLAPSE_ALL = "Blokları Daralt";
@@ -280,9 +280,9 @@ Blockly.Msg.PROCEDURES_HIGHLIGHT_DEF = "Fonksiyon tanımı vurgulamak";
 Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = "Eğer değer doğruysa, ikinci değere geri dön.";
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = "Uyarı: Bu blok yalnızca bir fonksiyon tanımı içinde kullanılır.";
 Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "girdi adı:";
-Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "İşleve bir girdi ekleyin.";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "girdiler";
-Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Bu işlevin girdilerini ekleyin, çıkarın, ya da yeniden sıralayın.";
 Blockly.Msg.REMOVE_COMMENT = "Yorumları sil";
 Blockly.Msg.RENAME_VARIABLE = "Değişkeni yeniden adlandır...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "Tüm '%1' değişkenlerini yeniden isimlendir:";
