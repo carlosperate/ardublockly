@@ -35,11 +35,11 @@ goog.require('Blockly.Comment');
  * @constructor
  */
 Blockly.Flyout = function() {
+  var flyout = this;
   /**
    * @type {!Blockly.Workspace}
    * @private
    */
-  var flyout = this;
   this.workspace_ = new Blockly.Workspace(
       function() {return flyout.getMetrics_();},
       function(ratio) {return flyout.setMetrics_(ratio);});

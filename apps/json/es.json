@@ -34,7 +34,7 @@
     "Code.badXml": "Error de análisis XML:\n%1\n\nSelecciona OK para abandonar tus cambios o Cancelar para seguir editando el XML.",
     "Code.badCode": "Error del programa:\n%1",
     "Code.timeout": "Se excedio el máximo de iteraciones ejecutadas permitidas.",
-    "Code.discard": "¿Eliminar todos los bloques 1%?",
+    "Code.discard": "¿Eliminar todos los bloques %1?",
     "Code.title": "Código",
     "Code.blocks": "Bloques",
     "Code.trashTooltip": "Descartar todos los bloques.",

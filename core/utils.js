@@ -141,7 +141,7 @@ Blockly.unbindEvent_ = function(bindData) {
 
 /**
  * Fire a synthetic event.
- * @param {!Node} node The event's target node.
+ * @param {!EventTarget} node The event's target node.
  * @param {string} eventName Name of event (e.g. 'click').
  */
 Blockly.fireUiEvent = function(node, eventName) {

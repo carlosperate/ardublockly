@@ -235,19 +235,19 @@ Blockly.Toolbox.TreeControl.prototype.handleTouchEvent_ = function(e) {
     // Fire asynchronously since onMouseDown takes long enough that the browser
     // would fire the default mouse event before this method returns.
     window.setTimeout(function() {
-      node.onMouseDown(e);  // Same behavior for click and touch.
+      node.onMouseDown(e);  // Same behaviour for click and touch.
     }, 1);
   }
 };
 
 /**
  * Creates a new tree node using a custom tree node.
- * @param {string} html The html content of the node label.
- * @return {goog.ui.tree.TreeNode} The new item.
+ * @param {string=} html The HTML content of the node label.
+ * @return {!goog.ui.tree.TreeNode} The new item.
  * @override
  */
-Blockly.Toolbox.TreeControl.prototype.createNode = function(html) {
-  return new Blockly.Toolbox.TreeNode(html || '', this.getConfig(),
+Blockly.Toolbox.TreeControl.prototype.createNode = function(opt_html) {
+  return new Blockly.Toolbox.TreeNode(opt_html || '', this.getConfig(),
       this.getDomHelper());
 };
 

@@ -102,7 +102,7 @@ Blockly.WidgetDiv.hideIfOwner = function(oldOwner) {
  * offscreen top or left (right in RTL).
  * @param {number} anchorX Horizontal location (window coorditates, not body).
  * @param {number} anchorY Vertical location (window coorditates, not body).
- * @param {!goog.math.Size} widowSize Height/width of window.
+ * @param {!goog.math.Size} windowSize Height/width of window.
  * @param {!goog.math.Coordinate} scrollOffset X/y of window scrollbars.
  */
 Blockly.WidgetDiv.position = function(anchorX, anchorY, windowSize,
