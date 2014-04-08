@@ -252,21 +252,12 @@ Blockly.FieldDropdown.prototype.setText = function(text) {
     // Update arrow's colour.
     this.arrow_.style.fill = Blockly.makeColour(this.sourceBlock_.getColour());
   }
-  if (text === null) {
+  if (text === null || text === this.text_) {
     // No change if null.
     return;
   }
   this.text_ = text;
-  // Empty the text element.
-  goog.dom.removeChildren(/** @type {!Element} */ (this.textElement_));
-  // Replace whitespace with non-breaking spaces so the text doesn't collapse.
-  text = text.replace(/\s/g, Blockly.Field.NBSP);
-  if (!text) {
-    // Prevent the field from disappearing if empty.
-    text = Blockly.Field.NBSP;
-  }
-  var textNode = document.createTextNode(text);
-  this.textElement_.appendChild(textNode);
+  this.updateTextNode_();
 
   // Insert dropdown arrow.
   if (Blockly.RTL) {
@@ -274,9 +265,6 @@ Blockly.FieldDropdown.prototype.setText = function(text) {
   } else {
     this.textElement_.appendChild(this.arrow_);
   }
-
-  // Cached width is obsolete.  Clear it.
-  this.size_.width = 0;
 
   if (this.sourceBlock_ && this.sourceBlock_.rendered) {
     this.sourceBlock_.render();

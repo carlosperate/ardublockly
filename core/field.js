@@ -200,10 +200,29 @@ Blockly.Field.prototype.setText = function(text) {
     return;
   }
   this.text_ = text;
+  this.updateTextNode_();
+
+  if (this.sourceBlock_ && this.sourceBlock_.rendered) {
+    this.sourceBlock_.render();
+    this.sourceBlock_.bumpNeighbours_();
+    this.sourceBlock_.workspace.fireChangeEvent();
+  }
+};
+
+/**
+ * Update the text node of this field to display the current text.
+ * @private
+ */
+Blockly.Field.prototype.updateTextNode_ = function() {
+  var text = this.text_;
   // Empty the text element.
   goog.dom.removeChildren(/** @type {!Element} */ (this.textElement_));
   // Replace whitespace with non-breaking spaces so the text doesn't collapse.
   text = text.replace(/\s/g, Blockly.Field.NBSP);
+  if (Blockly.RTL && text) {
+    // The SVG is LTR, force text to be RTL.
+    text = '\u200F' + text + '\u200F';
+  }
   if (!text) {
     // Prevent the field from disappearing if empty.
     text = Blockly.Field.NBSP;
@@ -213,12 +232,6 @@ Blockly.Field.prototype.setText = function(text) {
 
   // Cached width is obsolete.  Clear it.
   this.size_.width = 0;
-
-  if (this.sourceBlock_ && this.sourceBlock_.rendered) {
-    this.sourceBlock_.render();
-    this.sourceBlock_.bumpNeighbours_();
-    this.sourceBlock_.workspace.fireChangeEvent();
-  }
 };
 
 /**
