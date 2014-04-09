@@ -228,8 +228,8 @@ Blockly.svgSize = function() {
 };
 
 /**
- * Size the SVG image to completely fill its container.  Record both
- * the height/width and the absolute position of the SVG image.
+ * Size the SVG image to completely fill its container.
+ * Record the height/width of the SVG image.
  */
 Blockly.svgResize = function() {
   var svg = Blockly.svg;

@@ -484,7 +484,7 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
     Blockly.hideChaff();
     if (Blockly.isRightButton(e)) {
       // Right-click.
-      block.showContextMenu_(Blockly.mouseToSvg(e));
+      block.showContextMenu_(e);
     } else {
       // Left-click (or middle click)
       Blockly.removeAllRanges();
