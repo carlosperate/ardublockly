@@ -385,22 +385,31 @@ Blockly.Bubble.prototype.layoutBubble_ = function() {
   if (this.workspace_.scrollbar) {
     // Fetch the workspace's metrics, if they exist.
     var metrics = this.workspace_.getMetrics();
-    if (this.anchorX_ + relativeLeft <
-        Blockly.BlockSvg.SEP_SPACE_X + metrics.viewLeft) {
-      // Slide the bubble right until it is onscreen.
-      relativeLeft = Blockly.BlockSvg.SEP_SPACE_X + metrics.viewLeft -
-          this.anchorX_;
-    } else if (metrics.viewLeft + metrics.viewWidth <
-        this.anchorX_ + relativeLeft + this.width_ +
-        Blockly.BlockSvg.SEP_SPACE_X +
-        Blockly.Scrollbar.scrollbarThickness) {
-      // Slide the bubble left until it is onscreen.
-      relativeLeft = metrics.viewLeft + metrics.viewWidth - this.anchorX_ -
-          this.width_ - Blockly.BlockSvg.SEP_SPACE_X -
+    if (Blockly.RTL) {
+      if (this.anchorX_ - metrics.viewLeft - relativeLeft - this.width_ <
+          Blockly.Scrollbar.scrollbarThickness) {
+        // Slide the bubble right until it is onscreen.
+        relativeLeft = this.anchorX_ - metrics.viewLeft - this.width_ -
           Blockly.Scrollbar.scrollbarThickness;
+      } else if (this.anchorX_ - metrics.viewLeft - relativeLeft >
+                 metrics.viewWidth) {
+        // Slide the bubble left until it is onscreen.
+        relativeLeft = this.anchorX_ - metrics.viewLeft - metrics.viewWidth;
+      }
+    } else {
+      if (this.anchorX_ + relativeLeft < metrics.viewLeft) {
+        // Slide the bubble right until it is onscreen.
+        relativeLeft = metrics.viewLeft - this.anchorX_;
+      } else if (metrics.viewLeft + metrics.viewWidth <
+          this.anchorX_ + relativeLeft + this.width_ +
+          Blockly.BlockSvg.SEP_SPACE_X +
+          Blockly.Scrollbar.scrollbarThickness) {
+        // Slide the bubble left until it is onscreen.
+        relativeLeft = metrics.viewLeft + metrics.viewWidth - this.anchorX_ -
+            this.width_ - Blockly.Scrollbar.scrollbarThickness;
+      }
     }
-    if (this.anchorY_ + relativeTop <
-        Blockly.BlockSvg.SEP_SPACE_Y + metrics.viewTop) {
+    if (this.anchorY_ + relativeTop < metrics.viewTop) {
       // Slide the bubble below the block.
       var bBox = /** @type {SVGLocatable} */ (this.shape_).getBBox();
       relativeTop = bBox.height;
