@@ -36,7 +36,10 @@ goog.provide('Blockly.Xml');
  * @return {!Element} XML document.
  */
 Blockly.Xml.workspaceToDom = function(workspace) {
-  var width = Blockly.svgSize().width;
+  var width;
+  if (Blockly.RTL) {
+    width = workspace.getMetrics().viewWidth;
+  }
   var xml = goog.dom.createDom('xml');
   var blocks = workspace.getTopBlocks(true);
   for (var i = 0, block; block = blocks[i]; i++) {
@@ -211,7 +214,10 @@ Blockly.Xml.textToDom = function(text) {
  * @param {!Element} xml XML DOM.
  */
 Blockly.Xml.domToWorkspace = function(workspace, xml) {
-  var width = Blockly.svgSize().width;
+  var width
+  if (Blockly.RTL) {
+    width = workspace.getMetrics().viewWidth;
+  }
   for (var x = 0, xmlChild; xmlChild = xml.childNodes[x]; x++) {
     if (xmlChild.nodeName.toLowerCase() == 'block') {
       var block = Blockly.Xml.domToBlock(workspace, xmlChild);

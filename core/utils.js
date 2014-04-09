@@ -140,11 +140,11 @@ Blockly.unbindEvent_ = function(bindData) {
 };
 
 /**
- * Fire a synthetic event.
+ * Fire a synthetic event synchronously.
  * @param {!EventTarget} node The event's target node.
  * @param {string} eventName Name of event (e.g. 'click').
  */
-Blockly.fireUiEvent = function(node, eventName) {
+Blockly.fireUiEventNow = function(node, eventName) {
   var doc = document;
   if (doc.createEvent) {
     // W3
@@ -158,6 +158,18 @@ Blockly.fireUiEvent = function(node, eventName) {
   } else {
     throw 'FireEvent: No event creation mechanism.';
   }
+};
+
+/**
+ * Fire a synthetic event asynchronously.
+ * @param {!EventTarget} node The event's target node.
+ * @param {string} eventName Name of event (e.g. 'click').
+ */
+Blockly.fireUiEvent = function(node, eventName) {
+  var fire = function() {
+    Blockly.fireUiEventNow(node, eventName);
+  }
+  setTimeout(fire, 0);
 };
 
 /**

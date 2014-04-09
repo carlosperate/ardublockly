@@ -413,7 +413,7 @@ Blockly.Flyout.prototype.show = function(xmlList) {
   this.filterForCapacity_();
 
   // Fire a resize event to update the flyout's scrollbar.
-  Blockly.fireUiEvent(window, 'resize');
+  Blockly.fireUiEventNow(window, 'resize');
   this.reflowWrapper_ = Blockly.bindEvent_(this.workspace_.getCanvas(),
       'blocklyWorkspaceChange', this, this.reflow);
   this.workspace_.fireChangeEvent();
