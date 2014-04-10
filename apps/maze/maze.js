@@ -28,6 +28,10 @@
  */
 var Maze = {};
 
+// Temporary hack to fix bug #349701 in Chrome 34.
+// Harmless for other browsers.
+var CHROME34 = navigator.userAgent.indexOf('Chrome/34') != -1;
+
 // Supported languages.
 BlocklyApps.LANGUAGES =
     ['ar', 'br', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'eu', 'fa', 'fr',
@@ -396,7 +400,14 @@ Maze.drawMap = function() {
       clipRect.setAttribute('y', y * Maze.SQUARE_SIZE);
 
       tileClip.appendChild(clipRect);
-      svg.appendChild(tileClip);
+      if (CHROME34) {
+        var wrapSvg = Blockly.createSvgElement('svg',
+            {'xmlns': 'http://www.w3.org/2000/svg', 'version': '1.1'}, null);
+        wrapSvg.appendChild(tileClip);
+        svg.appendChild(wrapSvg);
+      } else {
+        svg.appendChild(tileClip);
+      }
       // Tile sprite.
       var tile = document.createElementNS(Blockly.SVG_NS, 'image');
       tile.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href',
@@ -407,7 +418,11 @@ Maze.drawMap = function() {
       tile.setAttribute('clip-path', 'url(#tileClipPath' + tileId + ')');
       tile.setAttribute('x', (x - left) * Maze.SQUARE_SIZE);
       tile.setAttribute('y', (y - top) * Maze.SQUARE_SIZE);
-      svg.appendChild(tile);
+      if (CHROME34) {
+        wrapSvg.appendChild(tile);
+      } else {
+        svg.appendChild(tile);
+      }
       tileId++;
     }
   }
@@ -429,7 +444,14 @@ Maze.drawMap = function() {
   clipRect.setAttribute('width', Maze.PEGMAN_WIDTH);
   clipRect.setAttribute('height', Maze.PEGMAN_HEIGHT);
   pegmanClip.appendChild(clipRect);
-  svg.appendChild(pegmanClip);
+  if (CHROME34) {
+    var wrapSvg = Blockly.createSvgElement('svg',
+        {'xmlns': 'http://www.w3.org/2000/svg', 'version': '1.1'}, null);
+    wrapSvg.appendChild(pegmanClip);
+    svg.appendChild(wrapSvg);
+  } else {
+    svg.appendChild(pegmanClip);
+  }
 
   // Add Pegman.
   var pegmanIcon = document.createElementNS(Blockly.SVG_NS, 'image');
@@ -439,7 +461,11 @@ Maze.drawMap = function() {
   pegmanIcon.setAttribute('height', Maze.PEGMAN_HEIGHT);
   pegmanIcon.setAttribute('width', Maze.PEGMAN_WIDTH * 21); // 49 * 21 = 1029
   pegmanIcon.setAttribute('clip-path', 'url(#pegmanClipPath)');
-  svg.appendChild(pegmanIcon);
+  if (CHROME34) {
+    wrapSvg.appendChild(pegmanIcon);
+  } else {
+    svg.appendChild(pegmanIcon);
+  }
 };
 
 /**
