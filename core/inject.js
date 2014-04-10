@@ -276,8 +276,9 @@ Blockly.createDom_ = function(container) {
               metrics.contentTop + metrics.contentHeight >
               metrics.viewHeight + metrics.viewTop ||
               metrics.contentLeft < (Blockly.RTL ? metrics.viewLeft : 0) ||
-              metrics.contentLeft + metrics.contentWidth >
-              metrics.viewWidth + (Blockly.RTL ? 2 : 1) * metrics.viewLeft) {
+              metrics.contentLeft + metrics.contentWidth > (Blockly.RTL ?
+                  metrics.viewWidth :
+                  metrics.viewWidth + metrics.viewLeft)) {
             // One or more blocks is out of bounds.  Bump them back in.
             var MARGIN = 25;
             var blocks = Blockly.mainWorkspace.getTopBlocks(false);
@@ -309,8 +310,9 @@ Blockly.createDom_ = function(container) {
                 block.moveBy(overflow, 0);
               }
               // Delete any block that's sitting on top of the flyout.
+              console.log(metrics);
               if (block.isDeletable() && (Blockly.RTL ?
-                  blockXY.x - 2 * metrics.viewLeft - metrics.viewWidth :
+                  blockXY.x - metrics.viewWidth :
                   -blockXY.x) > MARGIN * 2) {
                 block.dispose(false, true);
               }
@@ -380,6 +382,9 @@ Blockly.init_ = function() {
       Blockly.mainWorkspace.flyout_.show(Blockly.languageTree.childNodes);
       // Translate the workspace sideways to avoid the fixed flyout.
       Blockly.mainWorkspace.scrollX = Blockly.mainWorkspace.flyout_.width_;
+      if (Blockly.RTL) {
+        Blockly.mainWorkspace.scrollX *= -1;
+      }
       var translation = 'translate(' + Blockly.mainWorkspace.scrollX + ', 0)';
       Blockly.mainWorkspace.getCanvas().setAttribute('transform', translation);
       Blockly.mainWorkspace.getBubbleCanvas().setAttribute('transform',
