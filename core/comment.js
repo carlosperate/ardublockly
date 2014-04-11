@@ -161,7 +161,7 @@ Blockly.Comment.prototype.setVisible = function(visible) {
     // Create the bubble.
     this.bubble_ = new Blockly.Bubble(
         /** @type {!Blockly.Workspace} */ (this.block_.workspace),
-        this.createEditor_(), this.block_.svg_.svgGroup_,
+        this.createEditor_(), this.block_.svg_.svgPath_,
         this.iconX_, this.iconY_,
         this.width_, this.height_);
     this.bubble_.registerResizeEvent(this, this.resizeBubble_);

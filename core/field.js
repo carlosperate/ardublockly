@@ -221,7 +221,7 @@ Blockly.Field.prototype.updateTextNode_ = function() {
   text = text.replace(/\s/g, Blockly.Field.NBSP);
   if (Blockly.RTL && text) {
     // The SVG is LTR, force text to be RTL.
-    text = '\u200F' + text + '\u200F';
+    text += '\u200F';
   }
   if (!text) {
     // Prevent the field from disappearing if empty.
