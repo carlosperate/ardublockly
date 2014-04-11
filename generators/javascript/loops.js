@@ -144,7 +144,7 @@ Blockly.JavaScript['controls_for'] = function(block) {
       code += 'Math.abs(' + increment + ');\n';
     }
     code += 'if (' + startVar + ' > ' + endVar + ') {\n';
-    code += '  ' + incVar + ' = -' + incVar +';\n';
+    code += Blockly.JavaScript.INDENT + incVar + ' = -' + incVar +';\n';
     code += '}\n';
     code += 'for (' + variable0 + ' = ' + startVar + ';\n' +
         '     '  + incVar + ' >= 0 ? ' +
@@ -169,7 +169,7 @@ Blockly.JavaScript['controls_forEach'] = function(block) {
   }
   var indexVar = Blockly.JavaScript.variableDB_.getDistinctName(
       variable0 + '_index', Blockly.Variables.NAME_TYPE);
-  branch = '  ' + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' +
+  branch = Blockly.JavaScript.INDENT + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' +
       branch;
   var code = 'for (var ' + indexVar + ' in  ' + argument0 + ') {\n' +
       branch + '}\n';

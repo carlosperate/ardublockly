@@ -111,8 +111,9 @@ Blockly.Dart.init = function() {
  */
 Blockly.Dart.finish = function(code) {
   // Indent every line.
-  code = '  ' + code.replace(/\n/g, '\n  ');
-  code = code.replace(/\n\s+$/, '\n');
+  if (code) {
+    code = this.prefixLines(code, Blockly.Dart.INDENT);
+  }
   code = 'main() {\n' + code + '}';
 
   // Convert the definitions dictionary into a list.

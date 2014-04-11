@@ -144,7 +144,7 @@ Blockly.Dart['controls_for'] = function(block) {
       code += '(' + increment + ').abs();\n';
     }
     code += 'if (' + startVar + ' > ' + endVar + ') {\n';
-    code += '  ' + incVar + ' = -' + incVar +';\n';
+    code += Blockly.Dart.INDENT + incVar + ' = -' + incVar +';\n';
     code += '}\n';
     code += 'for (' + variable0 + ' = ' + startVar + ';\n' +
         '     '  + incVar + ' >= 0 ? ' +

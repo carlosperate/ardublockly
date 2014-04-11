@@ -211,10 +211,16 @@ Blockly.Generator.prototype.statementToCode = function(block, name) {
     throw 'Expecting code from statement block "' + targetBlock.type + '".';
   }
   if (code) {
-    code = this.prefixLines(/** @type {string} */ (code), '  ');
+    code = this.prefixLines(/** @type {string} */ (code), this.INDENT);
   }
   return code;
 };
+
+/**
+ * The method of indenting.  Defaults to two spaces, but language generators
+ * may override this to increase indent or change to tabs.
+ */
+Blockly.Generator.prototype.INDENT = '  ';
 
 /**
  * Add one or more words to the list of reserved words for this language.
