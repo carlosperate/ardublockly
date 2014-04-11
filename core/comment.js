@@ -28,6 +28,7 @@ goog.provide('Blockly.Comment');
 
 goog.require('Blockly.Bubble');
 goog.require('Blockly.Icon');
+goog.require('goog.userAgent');
 
 
 /**
@@ -41,6 +42,7 @@ Blockly.Comment = function(block) {
   this.createIcon_();
 };
 goog.inherits(Blockly.Comment, Blockly.Icon);
+
 
 /**
  * Comment text (if bubble is not visible).
@@ -106,7 +108,6 @@ Blockly.Comment.prototype.createEditor_ = function() {
   this.textarea_ = document.createElementNS(Blockly.HTML_NS, 'textarea');
   this.textarea_.className = 'blocklyCommentTextarea';
   this.textarea_.setAttribute('dir', Blockly.RTL ? 'RTL' : 'LTR');
-  this.updateEditable();
   body.appendChild(this.textarea_);
   this.foreignObject_.appendChild(body);
   Blockly.bindEvent_(this.textarea_, 'mouseup', this, this.textareaFocus_);
@@ -114,18 +115,14 @@ Blockly.Comment.prototype.createEditor_ = function() {
 };
 
 /**
- * Add or remove editability of the textarea.
+ * Add or remove editability of the comment.
  * @override
  */
 Blockly.Comment.prototype.updateEditable = function() {
-  if (this.textarea_) {
-    if (!this.block_.isEditable()) {
-      this.textarea_.setAttribute('disabled', 'disabled');
-      this.textarea_.setAttribute('readonly', 'readonly');
-    } else {
-      this.textarea_.removeAttribute('disabled');
-      this.textarea_.removeAttribute('readonly');
-    }
+  if (this.isVisible()) {
+    // Toggling visibility will force a rerendering.
+    this.setVisible(false);
+    this.setVisible(true);
   }
   // Allow the icon to update.
   Blockly.Icon.prototype.updateEditable.call(this);
@@ -152,6 +149,14 @@ Blockly.Comment.prototype.resizeBubble_ = function() {
 Blockly.Comment.prototype.setVisible = function(visible) {
   if (visible == this.isVisible()) {
     // No change.
+    return;
+  }
+  if ((!this.block_.isEditable() && !this.textarea_) || goog.userAgent.IE) {
+    // Steal the code from warnings to make an uneditable text bubble.
+    // MSIE does not support foreignobject; textareas are impossible.
+    // http://msdn.microsoft.com/en-us/library/hh834675%28v=vs.85%29.aspx
+    // Always treat comments in IE as uneditable.
+    Blockly.Warning.prototype.setVisible.call(this, visible);
     return;
   }
   // Save the bubble stats before the visibility switch.
@@ -212,7 +217,7 @@ Blockly.Comment.prototype.getBubbleSize = function() {
  * @param {number} height Height of the bubble.
  */
 Blockly.Comment.prototype.setBubbleSize = function(width, height) {
-  if (this.isVisible()) {
+  if (this.textarea_) {
     this.bubble_.setBubbleSize(width, height);
   } else {
     this.width_ = width;
@@ -225,7 +230,7 @@ Blockly.Comment.prototype.setBubbleSize = function(width, height) {
  * @return {string} Comment text.
  */
 Blockly.Comment.prototype.getText = function() {
-  return this.isVisible() ? this.textarea_.value : this.text_;
+  return this.textarea_ ? this.textarea_.value : this.text_;
 };
 
 /**
@@ -233,7 +238,7 @@ Blockly.Comment.prototype.getText = function() {
  * @param {string} text Comment text.
  */
 Blockly.Comment.prototype.setText = function(text) {
-  if (this.isVisible()) {
+  if (this.textarea_) {
     this.textarea_.value = text;
   } else {
     this.text_ = text;
