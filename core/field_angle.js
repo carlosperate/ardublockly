@@ -117,7 +117,10 @@ Blockly.FieldAngle.prototype.dispose_ = function() {
  * @private
  */
 Blockly.FieldAngle.prototype.showEditor_ = function() {
-  Blockly.FieldAngle.superClass_.showEditor_.call(this);
+  var noFocus =
+      goog.userAgent.MOBILE || goog.userAgent.ANDROID || goog.userAgent.IPAD;
+  // Mobile browsers have issues with in-line textareas (focus & keyboards).
+  Blockly.FieldAngle.superClass_.showEditor_.call(this, noFocus);
   var div = Blockly.WidgetDiv.DIV;
   if (!div.firstChild) {
     // Mobile interface uses window.prompt.

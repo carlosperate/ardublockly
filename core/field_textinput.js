@@ -94,10 +94,14 @@ Blockly.FieldTextInput.prototype.setText = function(text) {
 
 /**
  * Show the inline free-text editor on top of the text.
+ * @param {boolean=} opt_quietInput True if editor should be created without
+ *     focus.  Defaults to false.
  * @private
  */
-Blockly.FieldTextInput.prototype.showEditor_ = function() {
-  if (goog.userAgent.MOBILE || goog.userAgent.ANDROID || goog.userAgent.IPAD) {
+Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
+  var quietInput = opt_quietInput || false;
+  if (!quietInput && (goog.userAgent.MOBILE || goog.userAgent.ANDROID ||
+                      goog.userAgent.IPAD)) {
     // Mobile browsers have issues with in-line textareas (focus & keyboards).
     var newValue = window.prompt(Blockly.Msg.CHANGE_VALUE_TITLE, this.text_);
     if (this.changeHandler_) {
@@ -123,8 +127,10 @@ Blockly.FieldTextInput.prototype.showEditor_ = function() {
   htmlInput.oldValue_ = null;
   this.validate_();
   this.resizeEditor_();
-  htmlInput.focus();
-  htmlInput.select();
+  if (!quietInput) {
+    htmlInput.focus();
+    htmlInput.select();
+  }
 
   // Bind to keyup -- trap Enter and Esc; resize after every keystroke.
   htmlInput.onKeyUpWrapper_ =
