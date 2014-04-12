@@ -115,9 +115,9 @@ Blockly.bindEvent_ = function(node, name, thisObject, func) {
 Blockly.bindEvent_.TOUCH_MAP = {};
 if ('ontouchstart' in document.documentElement) {
   Blockly.bindEvent_.TOUCH_MAP = {
-    mousedown: 'touchstart',
-    mousemove: 'touchmove',
-    mouseup: 'touchend'
+    'mousedown': 'touchstart',
+    'mousemove': 'touchmove',
+    'mouseup': 'touchend'
   };
 }
 
