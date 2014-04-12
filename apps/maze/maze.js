@@ -497,8 +497,7 @@ Maze.init = function() {
   }
   Blockly.bindEvent_(window, 'resize', null, Maze.hidePegmanMenu);
   var pegmanButton = document.getElementById('pegmanButton');
-  pegmanButton.addEventListener('mousedown', Maze.showPegmanMenu, true);
-  pegmanButton.addEventListener('touchstart', Maze.showPegmanMenu, true);
+  Blockly.bindEvent_(pegmanButton, 'mousedown', null, Maze.showPegmanMenu);
 
   var rtl = BlocklyApps.isRtl();
   var blocklyDiv = document.getElementById('blockly');
@@ -796,7 +795,8 @@ Maze.showPegmanMenu = function() {
   window.setTimeout(function() {
       Maze.pegmanMenuMouse_ = Blockly.bindEvent_(document.body, 'mousedown',
                                                  null, Maze.hidePegmanMenu);
-      }, 0);
+      }, BlocklyApps.DOUBLE_CLICK_TIME);
+
   // Close the skin-changing hint if open.
   if (document.getElementById('dialogHelpSkins').className !=
       'dialogHiddenContent') {
@@ -880,6 +880,11 @@ Maze.runButtonClick = function() {
   }
   runButton.style.display = 'none';
   resetButton.style.display = 'inline';
+  // Prevent double-clicks or double-taps.
+  resetButton.disabled = true;
+  setTimeout(function() {resetButton.disabled = false;},
+             BlocklyApps.DOUBLE_CLICK_TIME);
+
   Blockly.mainWorkspace.traceOn(true);
   Maze.reset(false);
   Maze.execute();
@@ -923,8 +928,14 @@ Maze.updateCapacity = function() {
  * Click the reset button.  Reset the maze.
  */
 Maze.resetButtonClick = function() {
-  document.getElementById('runButton').style.display = 'inline';
+  var runButton = document.getElementById('runButton');
+  runButton.style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
+  // Prevent double-clicks or double-taps.
+  runButton.disabled = true;
+  setTimeout(function() {runButton.disabled = false;},
+             BlocklyApps.DOUBLE_CLICK_TIME);
+
   Blockly.mainWorkspace.traceOn(false);
   Maze.reset(false);
   Maze.levelHelp();

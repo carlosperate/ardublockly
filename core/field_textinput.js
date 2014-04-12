@@ -97,7 +97,7 @@ Blockly.FieldTextInput.prototype.setText = function(text) {
  * @private
  */
 Blockly.FieldTextInput.prototype.showEditor_ = function() {
-  if (goog.userAgent.MOBILE) {
+  if (goog.userAgent.MOBILE || goog.userAgent.ANDROID || goog.userAgent.IPAD) {
     // Mobile browsers have issues with in-line textareas (focus & keyboards).
     var newValue = window.prompt(Blockly.Msg.CHANGE_VALUE_TITLE, this.text_);
     if (this.changeHandler_) {

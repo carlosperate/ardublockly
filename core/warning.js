@@ -51,8 +51,9 @@ goog.inherits(Blockly.Warning, Blockly.Icon);
  */
 Blockly.Warning.textToDom_ = function(text) {
   var paragraph = /** @type {!SVGTextElement} */ (
-      Blockly.createSvgElement(
-          'text', {'class': 'blocklyText', 'y': Blockly.Bubble.BORDER_WIDTH},
+      Blockly.createSvgElement('text',
+          {'class': 'blocklyText blocklyBubbleText',
+           'y': Blockly.Bubble.BORDER_WIDTH},
           null));
   var lines = text.split('\n');
   for (var i = 0; i < lines.length; i++) {
@@ -143,6 +144,9 @@ Blockly.Warning.prototype.bodyFocus_ = function(e) {
  * @param {string} text Warning text.
  */
 Blockly.Warning.prototype.setText = function(text) {
+  if (this.text_ == text) {
+    return;
+  }
   this.text_ = text;
   if (this.isVisible()) {
     this.setVisible(false);

@@ -181,6 +181,12 @@ BlocklyApps.LANG = undefined;
 BlocklyApps.LANGUAGES = undefined;
 
 /**
+ * Length of time to supress clicks to avoid a double-click.
+ * @type number
+ */
+BlocklyApps.DOUBLE_CLICK_TIME = 400;
+
+/**
  * Extracts a parameter from the URL.
  * If the parameter is absent default_value is returned.
  * @param {string} name The name of the parameter.
@@ -319,7 +325,7 @@ BlocklyApps.init = function() {
     BlocklyStorage['XML_ERROR'] = BlocklyApps.getMsg('xmlError');
     // Swap out the BlocklyStorage's alert() for a nicer dialog.
     BlocklyStorage.alert = BlocklyApps.storageAlert;
-    BlocklyApps.bindClick('linkButton', BlocklyStorage.link);
+    BlocklyApps.bindClick(linkButton, BlocklyStorage.link);
   } else if (linkButton) {
     linkButton.className = 'disabled';
   }
@@ -836,35 +842,15 @@ BlocklyApps.getMsgOrNull = function(key) {
 };
 
 /**
- * On touch enabled browsers, add touch-friendly variants of event handlers
- * for elements such as buttons whose event handlers are specified in the
- * markup. For example, ontouchend is treated as equivalent to onclick.
- */
-BlocklyApps.addTouchEvents = function() {
-  // Do nothing if the browser doesn't support touch.
-  if (!('ontouchstart' in document.documentElement)) {
-    return;
-  }
-  // Treat ontouchend as equivalent to onclick for buttons.
-  var buttons = document.getElementsByTagName('button');
-  for (var i = 0, button; button = buttons[i]; i++) {
-    if (!button.ontouchend) {
-      button.ontouchend = button.onclick;
-    }
-  }
-};
-
-// Add events for touch devices when the window is done loading.
-window.addEventListener('load', BlocklyApps.addTouchEvents, false);
-
-/**
  * Bind a function to a button's click event.
  * On touch enabled browsers, ontouchend is treated as equivalent to onclick.
- * @param {string} id ID of button element.
+ * @param {!Element|string} el Button element or ID thereof.
  * @param {!Function} func Event handler to bind.
  */
-BlocklyApps.bindClick = function(id, func) {
-  var el = document.getElementById(id);
+BlocklyApps.bindClick = function(el, func) {
+  if (typeof el == 'string') {
+    el = document.getElementById(el);
+  }
   el.addEventListener('click', func, true);
   el.addEventListener('touchend', func, true);
 };

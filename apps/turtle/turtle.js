@@ -222,6 +222,11 @@ Turtle.runButtonClick = function() {
   }
   runButton.style.display = 'none';
   resetButton.style.display = 'inline';
+  // Prevent double-clicks or double-taps.
+  resetButton.disabled = true;
+  setTimeout(function() {resetButton.disabled = false;},
+             BlocklyApps.DOUBLE_CLICK_TIME);
+
   document.getElementById('spinner').style.visibility = 'visible';
   Blockly.mainWorkspace.traceOn(true);
   Turtle.execute();
@@ -231,8 +236,14 @@ Turtle.runButtonClick = function() {
  * Click the reset button.  Reset the Turtle.
  */
 Turtle.resetButtonClick = function() {
-  document.getElementById('runButton').style.display = 'inline';
+  var runButton = document.getElementById('runButton');
+  runButton.style.display = 'inline';
   document.getElementById('resetButton').style.display = 'none';
+  // Prevent double-clicks or double-taps.
+  runButton.disabled = true;
+  setTimeout(function() {runButton.disabled = false;},
+             BlocklyApps.DOUBLE_CLICK_TIME);
+
   document.getElementById('spinner').style.visibility = 'hidden';
   Blockly.mainWorkspace.traceOn(false);
   Turtle.reset();

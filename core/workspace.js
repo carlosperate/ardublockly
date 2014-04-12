@@ -314,8 +314,9 @@ Blockly.Workspace.prototype.highlightBlock = function(id) {
   } else if (Blockly.selected) {
     Blockly.selected.unselect();
   }
-  // Restore the monitor for user activity.
-  this.traceOn(true);
+  // Restore the monitor for user activity after the selection event has fired.
+  var thisWorkspace = this;
+  setTimeout(function() {thisWorkspace.traceOn(true);}, 1);
 };
 
 /**

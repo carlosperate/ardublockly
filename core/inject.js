@@ -310,7 +310,6 @@ Blockly.createDom_ = function(container) {
                 block.moveBy(overflow, 0);
               }
               // Delete any block that's sitting on top of the flyout.
-              console.log(metrics);
               if (block.isDeletable() && (Blockly.RTL ?
                   blockXY.x - metrics.viewWidth :
                   -blockXY.x) > MARGIN * 2) {
