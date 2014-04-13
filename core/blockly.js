@@ -519,11 +519,21 @@ Blockly.loadAudio_ = function(filenames, name) {
       break;
     }
   }
-  // To force the browser to load the sound, play it, but at nearly zero volume.
   if (sound && sound.play) {
-    sound.volume = 0.01;
-    sound.play();
     Blockly.SOUNDS_[name] = sound;
+  }
+};
+
+/**
+ * Preload all the audio files so that they play quickly when asked for.
+ * @private
+ */
+Blockly.preloadAudio_ = function() {
+  for (var name in Blockly.SOUNDS_) {
+    var sound = Blockly.SOUNDS_[name];
+    sound.volume = .01;
+    sound.play();
+    sound.pause();
   }
 };
 

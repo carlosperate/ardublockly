@@ -342,6 +342,18 @@ Blockly.createDom_ = function(container) {
  * @private
  */
 Blockly.init_ = function() {
+  // Bind temporary hooks that preload the sounds.
+  var soundBinds = [];
+  var unbindSounds = function() {
+    while (soundBinds.length) {
+      Blockly.unbindEvent_(soundBinds.pop());
+    }
+    Blockly.preloadAudio_();
+  };
+  // Android ignores any sound not loaded as a result of a user action.
+  soundBinds.push(Blockly.bindEvent_(document, 'mousemove', null, unbindSounds));
+  soundBinds.push(Blockly.bindEvent_(document, 'touchstart', null, unbindSounds));
+
   // Bind events for scrolling the workspace.
   // Most of these events should be bound to the SVG's surface.
   // However, 'mouseup' has to be on the whole document so that a block dragged
