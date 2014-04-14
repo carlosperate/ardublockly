@@ -675,7 +675,7 @@ Blockly.Connection.prototype.unhideAll = function() {
       connections = block.getConnections_(true);
     }
     for (var c = 0; c < connections.length; c++) {
-      renderList = renderList.concat(connections[c].unhideAll());
+      renderList.push.apply(connections[c].unhideAll());
     }
     if (renderList.length == 0) {
       // Leaf block.
