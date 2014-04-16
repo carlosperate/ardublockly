@@ -36,7 +36,7 @@ goog.provide('Blockly.Xml');
  * @return {!Element} XML document.
  */
 Blockly.Xml.workspaceToDom = function(workspace) {
-  var width;
+  var width;  // Not used in LTR.
   if (Blockly.RTL) {
     width = workspace.getMetrics().viewWidth;
   }

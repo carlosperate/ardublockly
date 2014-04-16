@@ -1083,7 +1083,7 @@ Blockly.Block.prototype.setParent = function(newParent) {
 Blockly.Block.prototype.getDescendants = function() {
   var blocks = [this];
   for (var child, x = 0; child = this.childBlocks_[x]; x++) {
-    blocks.push.apply(child.getDescendants());
+    blocks.push.apply(blocks, child.getDescendants());
   }
   return blocks;
 };
@@ -1423,7 +1423,7 @@ Blockly.Block.prototype.setCollapsed = function(collapsed) {
   var renderList = [];
   // Show/hide the inputs.
   for (var x = 0, input; input = this.inputList[x]; x++) {
-    renderList.push.apply(input.setVisible(!collapsed));
+    renderList.push.apply(renderList, input.setVisible(!collapsed));
   }
 
   var COLLAPSED_INPUT_NAME = '_TEMP_COLLAPSED_INPUT';
