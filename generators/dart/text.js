@@ -188,9 +188,9 @@ Blockly.Dart['text_getSubstring'] = function(block) {
 Blockly.Dart['text_changeCase'] = function(block) {
   // Change capitalization.
   var OPERATORS = {
-    UPPERCASE: '.toUpperCase()',
-    LOWERCASE: '.toLowerCase()',
-    TITLECASE: null
+    'UPPERCASE': '.toUpperCase()',
+    'LOWERCASE': '.toLowerCase()',
+    'TITLECASE': null
   };
   var operator = OPERATORS[block.getFieldValue('CASE')];
   var code;
@@ -228,9 +228,9 @@ Blockly.Dart['text_changeCase'] = function(block) {
 Blockly.Dart['text_trim'] = function(block) {
   // Trim spaces.
   var OPERATORS = {
-    LEFT: '.replaceFirst(new RegExp(r\'^\\s+\'), \'\')',
-    RIGHT: '.replaceFirst(new RegExp(r\'\\s+$\'), \'\')',
-    BOTH: '.trim()'
+    'LEFT': '.replaceFirst(new RegExp(r\'^\\s+\'), \'\')',
+    'RIGHT': '.replaceFirst(new RegExp(r\'\\s+$\'), \'\')',
+    'BOTH': '.trim()'
   };
   var operator = OPERATORS[block.getFieldValue('MODE')];
   var argument0 = Blockly.Dart.valueToCode(block, 'TEXT',

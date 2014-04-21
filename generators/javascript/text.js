@@ -185,9 +185,9 @@ Blockly.JavaScript['text_getSubstring'] = function(block) {
 Blockly.JavaScript['text_changeCase'] = function(block) {
   // Change capitalization.
   var OPERATORS = {
-    UPPERCASE: '.toUpperCase()',
-    LOWERCASE: '.toLowerCase()',
-    TITLECASE: null
+    'UPPERCASE': '.toUpperCase()',
+    'LOWERCASE': '.toLowerCase()',
+    'TITLECASE': null
   };
   var operator = OPERATORS[block.getFieldValue('CASE')];
   var code;
@@ -215,9 +215,9 @@ Blockly.JavaScript['text_changeCase'] = function(block) {
 Blockly.JavaScript['text_trim'] = function(block) {
   // Trim spaces.
   var OPERATORS = {
-    LEFT: '.trimLeft()',
-    RIGHT: '.trimRight()',
-    BOTH: '.trim()'
+    'LEFT': '.trimLeft()',
+    'RIGHT': '.trimRight()',
+    'BOTH': '.trim()'
   };
   var operator = OPERATORS[block.getFieldValue('MODE')];
   var argument0 = Blockly.JavaScript.valueToCode(block, 'TEXT',
