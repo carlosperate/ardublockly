@@ -9,7 +9,7 @@ goog.require('Blockly.Msg');
 Blockly.Msg.ADD_COMMENT = "Thêm Chú Giải";
 Blockly.Msg.AUTH = "Please authorize this app to enable your work to be saved and to allow it to be shared by you.";  // untranslated
 Blockly.Msg.CHANGE_VALUE_TITLE = "Thay giá trị thành:";
-Blockly.Msg.CHAT = "Chat with your collaborator by typing in this box!";  // untranslated
+Blockly.Msg.CHAT = "Trò chuyện với cộng tác viên của bạn bằng cách gõ vào hộp này!";
 Blockly.Msg.COLLAPSE_ALL = "Thu Nhỏ Mọi Mảnh";
 Blockly.Msg.COLLAPSE_BLOCK = "Thu Nhỏ Mảnh";
 Blockly.Msg.COLOUR_BLEND_COLOUR1 = "màu 1";
@@ -256,7 +256,7 @@ Blockly.Msg.MATH_TRIG_TOOLTIP_ATAN = "Hoàn trả Arctang của một góc (theo
 Blockly.Msg.MATH_TRIG_TOOLTIP_COS = "Hoàn trả Cos của một góc (theo độ).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_SIN = "Hoàn trả Sin của một góc (theo độ).";
 Blockly.Msg.MATH_TRIG_TOOLTIP_TAN = "Hoàn trả Tang của một góc (theo độ).";
-Blockly.Msg.ME = "Me";  // untranslated
+Blockly.Msg.ME = "Tôi";
 Blockly.Msg.NEW_VARIABLE = "Biến mới...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Tên của biến mới:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated

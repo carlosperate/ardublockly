@@ -143,23 +143,23 @@ Puzzle.init = function() {
       block.moveBy(dx, dy);
       countedArea += block.cached_area_;
     }
+  }
 
-    BlocklyApps.bindClick('checkButton', Puzzle.checkAnswers);
-    BlocklyApps.bindClick('helpButton', function(){Puzzle.showHelp(true);});
+  BlocklyApps.bindClick('checkButton', Puzzle.checkAnswers);
+  BlocklyApps.bindClick('helpButton', function(){Puzzle.showHelp(true);});
 
-    Puzzle.showHelp(false);
-    /**
-     * HACK:
-     * Chrome (v34) displays a broken image tag on any image that is also
-     * shown in the help dialog.  Resetting the image fixes the problem.
-     * If Chrome stops corrupting the Australian flag, delete this entire hack.
-     */
-    if (goog.userAgent.WEBKIT) {
-      for (var i = 0, block; block = blocksFlags[i]; i++) {
-        var img = block.getInput('IMG').fieldRow[0];
-        var src = img.getValue();
-        img.setValue(src);
-      }
+  Puzzle.showHelp(false);
+  /**
+   * HACK:
+   * Chrome (v34) displays a broken image tag on any image that is also
+   * shown in the help dialog.  Resetting the image fixes the problem.
+   * If Chrome stops corrupting the Australian flag, delete this entire hack.
+   */
+  if (goog.userAgent.WEBKIT) {
+    for (var i = 0, block; block = blocksFlags[i]; i++) {
+      var img = block.getInput('IMG').fieldRow[0];
+      var src = img.getValue();
+      img.setValue(src);
     }
   }
 };
