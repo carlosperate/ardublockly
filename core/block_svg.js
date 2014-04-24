@@ -518,28 +518,25 @@ Blockly.BlockSvg.prototype.render = function() {
  * @return {number} X-coordinate of the end of the field row (plus a gap).
  * @private
  */
-Blockly.BlockSvg.prototype.renderFields_ = function(fieldList,
-                                                    cursorX, cursorY) {
+Blockly.BlockSvg.prototype.renderFields_ =
+    function(fieldList, cursorX, cursorY) {
   if (Blockly.RTL) {
     cursorX = -cursorX;
   }
   for (var t = 0, field; field = fieldList[t]; t++) {
-    // Get the dimensions of the field.
-    var fieldSize = field.getSize();
-    var fieldWidth = fieldSize.width;
-
     if (Blockly.RTL) {
-      cursorX -= fieldWidth;
+      cursorX -= field.renderSep + field.renderWidth;
       field.getRootElement().setAttribute('transform',
           'translate(' + cursorX + ', ' + cursorY + ')');
-      if (fieldWidth) {
+      if (field.renderWidth) {
         cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
       }
     } else {
       field.getRootElement().setAttribute('transform',
-          'translate(' + cursorX + ', ' + cursorY + ')');
-      if (fieldWidth) {
-        cursorX += fieldWidth + Blockly.BlockSvg.SEP_SPACE_X;
+          'translate(' + (cursorX + field.renderSep) + ', ' + cursorY + ')');
+      if (field.renderWidth) {
+        cursorX += field.renderSep + field.renderWidth +
+            Blockly.BlockSvg.SEP_SPACE_X;
       }
     }
   }
@@ -618,14 +615,19 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
       // The first row gets shifted to accommodate any icons.
       input.fieldWidth += Blockly.RTL ? -iconWidth : iconWidth;
     }
+    var previousFieldEditable = false;
     for (var j = 0, field; field = input.fieldRow[j]; j++) {
       if (j != 0) {
         input.fieldWidth += Blockly.BlockSvg.SEP_SPACE_X;
       }
       // Get the dimensions of the field.
       var fieldSize = field.getSize();
-      input.fieldWidth += fieldSize.width;
+      field.renderWidth = fieldSize.width;
+      field.renderSep = (previousFieldEditable && field.EDITABLE) ?
+          Blockly.BlockSvg.SEP_SPACE_X : 0;
+      input.fieldWidth += field.renderWidth + field.renderSep;
       row.height = Math.max(row.height, fieldSize.height);
+      previousFieldEditable = field.EDITABLE;
     }
 
     if (row.type != Blockly.BlockSvg.INLINE) {
