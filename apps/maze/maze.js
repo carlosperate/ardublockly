@@ -732,8 +732,9 @@ Maze.levelHelp = function() {
       }
       Maze.levelHelp.initialized7_ = true;
     }
-    if (userBlocks.indexOf('maze_if') == -1 ||
-        userBlocks.indexOf('isPathForward') != -1) {
+    // The hint says to change from 'ahead', but keep the hint visible
+    // until the user chooses 'right'.
+    if (userBlocks.indexOf('isPathRight') == -1) {
       content = document.getElementById('dialogHelpMenu');
       style = {width: '360px', top: '400px'};
       style[Blockly.RTL ? 'right' : 'left'] = '425px';
