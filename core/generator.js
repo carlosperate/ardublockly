@@ -125,8 +125,7 @@ Blockly.Generator.prototype.blockToCode = function(block) {
   }
   if (block.disabled) {
     // Skip past this block if it is disabled.
-    var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-    return this.blockToCode(nextBlock);
+    return this.blockToCode(block.getNextBlock());
   }
 
   var func = this[block.type];

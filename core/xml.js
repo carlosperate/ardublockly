@@ -135,13 +135,11 @@ Blockly.Xml.blockToDom_ = function(block) {
     element.setAttribute('editable', false);
   }
 
-  if (block.nextConnection) {
-    var nextBlock = block.nextConnection.targetBlock();
-    if (nextBlock) {
-      var container = goog.dom.createDom('next', null,
-          Blockly.Xml.blockToDom_(nextBlock));
-      element.appendChild(container);
-    }
+  var nextBlock = block.getNextBlock();
+  if (nextBlock) {
+    var container = goog.dom.createDom('next', null,
+        Blockly.Xml.blockToDom_(nextBlock));
+    element.appendChild(container);
   }
 
   return element;
@@ -384,7 +382,7 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
   if (collapsed) {
     block.setCollapsed(collapsed == 'true');
   }
-  var next = block.nextConnection && block.nextConnection.targetBlock();
+  var next = block.getNextBlock();
   if (next) {
     // Next block in a stack needs to square off its corners.
     // Rendering a child will render its parent.

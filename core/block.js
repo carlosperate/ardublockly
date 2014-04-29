@@ -422,11 +422,10 @@ Blockly.Block.prototype.unplug = function(healStack, bump) {
       // Detach this block from the parent's tree.
       this.setParent(null);
     }
-    if (healStack && this.nextConnection &&
-        this.nextConnection.targetConnection) {
+    var nextBlock = this.getNextBlock();
+    if (healStack && nextBlock) {
       // Disconnect the next statement.
       var nextTarget = this.nextConnection.targetConnection;
-      var nextBlock = this.nextConnection.targetBlock();
       nextBlock.setParent(null);
       if (previousTarget) {
         // Attach the next statement to the previous statement.
@@ -485,7 +484,7 @@ Blockly.Block.prototype.getHeightWidth = function() {
   var height = this.svg_.height;
   var width = this.svg_.width;
   // Recursively add size of subsequent blocks.
-  var nextBlock = this.nextConnection && this.nextConnection.targetBlock();
+  var nextBlock = this.getNextBlock();
   if (nextBlock) {
     var nextHeightWidth = nextBlock.getHeightWidth();
     height += nextHeightWidth.height - 4;  // Height of tab.
@@ -722,10 +721,10 @@ Blockly.Block.prototype.showContextMenu_ = function(e) {
     // Option to delete this block.
     // Count the number of blocks that are nested in this block.
     var descendantCount = this.getDescendants().length;
-    if (block.nextConnection && block.nextConnection.targetConnection) {
+    var nextBlock = this.getNextBlock();
+    if (nextBlock) {
       // Blocks in the current stack would survive this block's deletion.
-      descendantCount -= this.nextConnection.targetBlock().
-          getDescendants().length;
+      descendantCount -= nextBlock.getDescendants().length;
     }
     var deleteOption = {
       text: descendantCount == 1 ? Blockly.Msg.DELETE_BLOCK :
@@ -985,11 +984,18 @@ Blockly.Block.prototype.getSurroundParent = function() {
         // Ran off the top.
         return null;
       }
-    } while (block.nextConnection &&
-             block.nextConnection.targetBlock() == prevBlock);
+    } while (block.getNextBlock() == prevBlock);
     // This block is an enclosing parent, not just a statement in a stack.
     return block;
   }
+};
+
+/**
+ * Return the next statement block directly connected to this block.
+ * @return {Blockly.Block} The next statement block or null.
+ */
+Blockly.Block.prototype.getNextBlock = function() {
+  return this.nextConnection && this.nextConnection.targetBlock();
 };
 
 /**

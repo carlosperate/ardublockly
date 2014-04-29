@@ -703,19 +703,13 @@ Blockly.BlockSvg.prototype.renderDraw_ = function(iconWidth, inputRows) {
     // If this block is in the middle of a stack, square the corners.
     if (this.block_.previousConnection) {
       var prevBlock = this.block_.previousConnection.targetBlock();
-      if (prevBlock && prevBlock.nextConnection &&
-          prevBlock.nextConnection.targetConnection ==
-          this.block_.previousConnection) {
+      if (prevBlock && prevBlock.getNextBlock() == this.block_) {
         this.squareTopLeftCorner_ = true;
        }
     }
-    if (this.block_.nextConnection) {
-      var nextBlock = this.block_.nextConnection.targetBlock();
-      if (nextBlock && nextBlock.previousConnection &&
-          nextBlock.previousConnection.targetConnection ==
-          this.block_.nextConnection) {
-        this.squareBottomLeftCorner_ = true;
-      }
+    var nextBlock = this.block_.getNextBlock();
+    if (nextBlock) {
+      this.squareBottomLeftCorner_ = true;
     }
   }
 
