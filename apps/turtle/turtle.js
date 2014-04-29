@@ -284,7 +284,7 @@ Turtle.animate = function() {
   var tuple = BlocklyApps.log.shift();
   if (!tuple) {
     document.getElementById('spinner').style.visibility = 'hidden';
-    Blockly.mainWorkspace.highlightBlock(null);
+    BlocklyApps.highlight(null);
     return;
   }
   var command = tuple.shift();
