@@ -6,7 +6,11 @@
 			"Mirzali"
 		]
 	},
+	"Apps.subtitle": "yew grafikê programkerdışê dormey",
 	"Apps.blocklyMessage": "Blockly",
+	"Apps.codeTooltip": "Kodê JavaScriptê vıraştey bımocne.",
+	"Apps.linkTooltip": "Qeyd ke û be blokan ra gıre de.",
+	"Apps.runTooltip": "Cayê kari de programo ke terefê blokan ra name biyo, ey bıgurene.",
 	"Apps.runProgram": "Programi Akar fi",
 	"Apps.resetProgram": "Reset kerê",
 	"Apps.dialogOk": "TEMAM",
@@ -21,6 +25,7 @@
 	"Apps.catProcedures": "Fonksiyoni",
 	"Apps.httpRequestError": "waştışi deyne zew problem esto",
 	"Apps.linkAlert": "Blokan na linkera bıhesrne\n\n%1",
+	"Apps.hashError": "Melûlime, '%1' be qet yew programi ra yewbini nêgêno.",
 	"Apps.listVariable": "liste",
 	"Apps.textVariable": "nuşte",
 	"Code.badCode": "Xeta programi:%1",
@@ -46,7 +51,7 @@
 	"Plane.placeholder": "?",
 	"Plane.setSeats": "iskemey =",
 	"Puzzle.country1": "Awıstralya",
-	"Puzzle.country1Language": "Ingiliz",
+	"Puzzle.country1Language": "Ingiltere",
 	"Puzzle.country1City1": "Melbourne",
 	"Puzzle.country1City2": "Sidney",
 	"Puzzle.country1HelpUrl": "https://en.wikipedia.org/wiki/Australia",

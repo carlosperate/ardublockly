@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Flow",
-			"Metalhead64"
+			"Metalhead64",
+			"Das Schäfchen"
 		]
 	},
 	"Apps.subtitle": "Visuelle Programmierumgebung",
@@ -73,7 +74,7 @@
 	"Maze.finalLevel": "Gratulation! Du hast das Spiel beendet.",
 	"Maze.runTooltip": "Der Spieler macht das, was die Bausteine sagen.",
 	"Maze.resetTooltip": "Setzt den Spieler an den Start des Labyrinths zurück.",
-	"Maze.helpStack": "Verbinde einige 'laufe vorwärts' Blöcke, um mir zu helfen um das Ziel zu erreichen.",
+	"Maze.helpStack": "Verbinde einige 'laufe vorwärts' Blöcke, um mir zu helfen, das Ziel zu erreichen.",
 	"Maze.helpOneTopBlock": "In diesem Level musst du die ganzen Bausteine in dem weißen Arbeitsbereich zusammenstapeln.",
 	"Maze.helpRun": "Führe dein Programm aus, um zu sehen, was passiert.",
 	"Maze.helpReset": "Dein Programm löst das Labyrinth nicht. Drücke 'Zurücksetzen' und versuche es erneut.",

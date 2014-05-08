@@ -1,4 +1,10 @@
 {
+	"@metadata": {
+		"authors": [
+			"Espertus",
+			"Shirayuki"
+		]
+	},
 	"VARIABLES_DEFAULT_NAME": "default name - A simple, general default name for a variable, preferably short. For more context, see [[Translating:Blockly#infrequent_message_types]].",
 	"DUPLICATE_BLOCK": "context menu - Make a copy of the selected block (and any blocks it contains).",
 	"ADD_COMMENT": "context menu - Add a descriptive comment to the selected block.",
@@ -275,7 +281,7 @@
 	"LISTS_GET_INDEX_REMOVE": "dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Removing_an_item remove an item from a list].",
 	"LISTS_GET_INDEX_FROM_START": "dropdown - Indicates that an index relative to the front of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get and/or remove an item from a list].  Note: If {{msg-Blockly|ORDINAL_NUMBER_SUFFIX}} is defined, it will automatically appear ''after'' this number (and any other ordinal numbers on this block). See [[Translating:Blockly#Ordinal_numbers]] for more information on ordinal numbers in Blockly. [[File:Blockly-list-get-item.png]]",
 	"LISTS_GET_INDEX_FROM_END": "dropdown - Indicates that an index relative to the end of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item access an item in a list]. [[File:Blockly-list-get-item.png]]",
-	"LISTS_GET_INDEX_FIRST": "dropdown - Indicates that the '''first''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list]. [[File:Blockly-list-get-item.png]]",
+	"LISTS_GET_INDEX_FIRST": "dropdown - Indicates that the '''first''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].\n----\n[[File:Blockly-list-get-item.png]]\n{{Identical|First}}",
 	"LISTS_GET_INDEX_LAST": "dropdown - Indicates that the '''last''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list]. [[File:Blockly-list-get-item.png]]",
 	"LISTS_GET_INDEX_RANDOM": "dropdown - Indicates that a '''random''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list]. [[File:Blockly-list-get-item.png]]",
 	"LISTS_GET_INDEX_TAIL": "block text - Text that should go after the rightmost block/dropdown when [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessing an item from a list].  In most languages, this will be the empty string. [[File:Blockly-list-get-item.png]]",

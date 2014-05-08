@@ -1,4 +1,12 @@
 {
+	"@metadata": {
+		"authors": [
+			"Beta16",
+			"Espertus",
+			"McDutchie",
+			"Shirayuki"
+		]
+	},
 	"Apps.subtitle": "A short description of Blockly.",
 	"Apps.blocklyMessage": "The project name.  If readers of your language would know approximately how to pronounce 'Blockly', leave unchanged.  Otherwise, include a transliteration in parentheses, such as the Russian: 'Blockly (Блoкли)'.",
 	"Apps.codeTooltip": "tooltip - Pressing the button causes a program in the JavaScript computer language to be displayed, based on the program created by the user.",
@@ -13,7 +21,7 @@
 	"Apps.catMath": "category - Blocks related to mathematics.",
 	"Apps.catText": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Text text processing].\n{{Identical|Text}}",
 	"Apps.catLists": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Lists lists].",
-	"Apps.catColour": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Colour colour].",
+	"Apps.catColour": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Colour colour].\n{{Identical|Color}}",
 	"Apps.catVariables": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Variables variables].",
 	"Apps.catProcedures": "category - Blocks related to [https://en.wikipedia.org/wiki/Subroutine defining or using procedures/functions].",
 	"Apps.httpRequestError": "alert - The URL is invalid or a server error occurred.  This message will be followed by technical information useful to engineers trying to understand the problem.",
