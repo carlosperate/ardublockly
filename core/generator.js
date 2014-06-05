@@ -46,6 +46,22 @@ Blockly.Generator = function(name) {
 Blockly.Generator.NAME_TYPE = 'generated_function';
 
 /**
+ * Arbitrary code to inject into locations that risk causing infinite loops.
+ * Any instances of '%1' will be replaced by the block ID that failed.
+ * E.g. '  checkTimeout(%1);\n'
+ * @type ?string
+ */
+Blockly.Generator.prototype.INFINITE_LOOP_TRAP = null;
+
+/**
+ * Arbitrary code to inject before every statement.
+ * Any instances of '%1' will be replaced by the block ID of the statement.
+ * E.g. 'highlight(%1);\n'
+ * @type ?string
+ */
+Blockly.Generator.prototype.STATEMENT_PREFIX = null;
+
+/**
  * Generate code for all blocks in the workspace to the specified language.
  * @return {string} Generated code.
  */
@@ -142,6 +158,10 @@ Blockly.Generator.prototype.blockToCode = function(block) {
     // Value blocks return tuples of code and operator order.
     return [this.scrub_(block, code[0]), code[1]];
   } else {
+    if (this.STATEMENT_PREFIX) {
+      code = this.STATEMENT_PREFIX.replace(/%1/g, '\'' + block.id + '\'') +
+          code;
+    }
     return this.scrub_(block, code);
   }
 };
