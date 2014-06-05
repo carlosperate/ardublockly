@@ -348,7 +348,7 @@ function updateGenerator() {
       case 'input_statement':
         var name = block.getFieldValue('INPUTNAME');
         code.push(makeVar('statements', name) +
-                  " = Blockly.' + language + '.statementToCode(block, '" +
+                  " = Blockly." + language + ".statementToCode(block, '" +
                   name + "');");
         break;
     }
