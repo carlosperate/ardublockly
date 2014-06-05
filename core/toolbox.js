@@ -53,16 +53,16 @@ Blockly.Toolbox.selectedOption_ = null;
  * @private
  */
 Blockly.Toolbox.CONFIG_ = {
-  indentWidth: 19,
-  cssRoot: 'blocklyTreeRoot',
-  cssHideRoot: 'blocklyHidden',
-  cssItem: '',
-  cssTreeRow: 'blocklyTreeRow',
-  cssItemLabel: 'blocklyTreeLabel',
-  cssTreeIcon: 'blocklyTreeIcon',
-  cssExpandedFolderIcon: 'blocklyTreeIconOpen',
-  cssFileIcon: 'blocklyTreeIconNone',
-  cssSelectedRow: 'blocklyTreeSelected'
+  'indentWidth': 19,
+  'cssRoot': 'blocklyTreeRoot',
+  'cssHideRoot': 'blocklyHidden',
+  'cssItem': '',
+  'cssTreeRow': 'blocklyTreeRow',
+  'cssItemLabel': 'blocklyTreeLabel',
+  'cssTreeIcon': 'blocklyTreeIcon',
+  'cssExpandedFolderIcon': 'blocklyTreeIconOpen',
+  'cssFileIcon': 'blocklyTreeIconNone',
+  'cssSelectedRow': 'blocklyTreeSelected'
 };
 
 /**
@@ -293,22 +293,12 @@ Blockly.Toolbox.TreeNode = function(html, opt_config, opt_domHelper) {
 goog.inherits(Blockly.Toolbox.TreeNode, goog.ui.tree.TreeNode);
 
 /**
- * Do not show the +/- icon.
- * @return {string} The source for the icon.
- * @override
- */
-Blockly.Toolbox.TreeNode.prototype.getExpandIconHtml = function() {
-  return '<span></span>';
-};
-
-/**
  * Supress population of the +/- icon.
- * @return {null} Null.
+ * @return {!goog.html.SafeHtml} The source for the icon.
  * @protected
- * @override
  */
-Blockly.Toolbox.TreeNode.prototype.getExpandIconElement = function() {
-  return null;
+goog.ui.tree.BaseNode.prototype.getExpandIconSafeHtml = function() {
+  return goog.html.SafeHtml.create('span', {});
 };
 
 /**
