@@ -62,6 +62,8 @@
       <block type="text_length"></block>
       <block type="text_print"></block>
     </category>
+    <category name="Variables" custom="VARIABLE"></category>
+    <category name="Functions" custom="PROCEDURE"></category>
   </xml>
 
   <script>
@@ -97,7 +99,6 @@
 
     function parseCode() {
       // Generate JavaScript code and parse it.
-      Blockly.JavaScript.INFINITE_LOOP_TRAP = '  highlightBlock(%1);\n';
       Blockly.JavaScript.STATEMENT_PREFIX = 'highlightBlock(%1);\n';
       Blockly.JavaScript.addReservedWords('highlightBlock');
       var code = Blockly.JavaScript.workspaceToCode();

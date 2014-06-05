@@ -157,12 +157,17 @@ Blockly.Generator.prototype.blockToCode = function(block) {
   if (goog.isArray(code)) {
     // Value blocks return tuples of code and operator order.
     return [this.scrub_(block, code[0]), code[1]];
-  } else {
+  } else if (goog.isString(code)) {
     if (this.STATEMENT_PREFIX) {
       code = this.STATEMENT_PREFIX.replace(/%1/g, '\'' + block.id + '\'') +
           code;
     }
     return this.scrub_(block, code);
+  } else if (code === null) {
+    // Block has handled code generation itself.
+    return '';
+  } else {
+    throw 'Invalid code generated: ' + code;
   }
 };
 
@@ -233,6 +238,24 @@ Blockly.Generator.prototype.statementToCode = function(block, name) {
     code = this.prefixLines(/** @type {string} */ (code), this.INDENT);
   }
   return code;
+};
+
+/**
+ * Add an infinite loop trap to the contents of a loop.
+ * If loop is empty, add a statment prefix for the loop block.
+ * @param {string} branch Code for loop contents.
+ * @param {string} id ID of enclosing block.
+ * @return {string} Loop contents, with infinite loop trap added.
+ */
+Blockly.Generator.prototype.addLoopTrap = function(branch, id) {
+  if (this.INFINITE_LOOP_TRAP) {
+    branch = this.INFINITE_LOOP_TRAP.replace(/%1/g, '\'' + id + '\'') + branch;
+  }
+  if (this.STATEMENT_PREFIX) {
+    branch += this.prefixLines(this.STATEMENT_PREFIX.replace(/%1/g,
+        '\'' + id + '\''), this.INDENT);
+  }
+  return branch;
 };
 
 /**

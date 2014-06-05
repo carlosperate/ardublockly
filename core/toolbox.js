@@ -295,10 +295,10 @@ goog.inherits(Blockly.Toolbox.TreeNode, goog.ui.tree.TreeNode);
 /**
  * Supress population of the +/- icon.
  * @return {!goog.html.SafeHtml} The source for the icon.
- * @protected
+ * @override
  */
 goog.ui.tree.BaseNode.prototype.getExpandIconSafeHtml = function() {
-  return goog.html.SafeHtml.create('span', {});
+  return goog.html.SafeHtml.create('span');
 };
 
 /**
