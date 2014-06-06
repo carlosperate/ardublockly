@@ -61,6 +61,7 @@
       <block type="text"></block>
       <block type="text_length"></block>
       <block type="text_print"></block>
+      <block type="text_prompt"></block>
     </category>
     <category name="Variables" custom="VARIABLE"></category>
     <category name="Functions" custom="PROCEDURE"></category>
@@ -81,6 +82,14 @@
       interpreter.setProperty(scope, 'alert',
           interpreter.createNativeFunction(wrapper));
 
+      // Add an API function for the prompt() block.
+      var wrapper = function(text) {
+        text = text ? text.toString() : '';
+        return interpreter.createPrimitive(prompt(text));
+      };
+      interpreter.setProperty(scope, 'prompt',
+          interpreter.createNativeFunction(wrapper));
+
       // Add an API function for highlighting blocks.
       var wrapper = function(id) {
         id = id ? id.toString() : '';
@@ -88,7 +97,7 @@
       };
       interpreter.setProperty(scope, 'highlightBlock',
           interpreter.createNativeFunction(wrapper));
-    };
+    }
 
     var highlightPause = false;
 
