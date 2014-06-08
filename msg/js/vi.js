@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Chạy một thủ tục không có giá trị hoàn trả.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://en.wikipedia.org/wiki/procedure _ %28computer_science% 29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Chạy một thủ tục có giá trị hoàn trả.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "với:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Tạo mảnh \"thực hiện %1\"";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

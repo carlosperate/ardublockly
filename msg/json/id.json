@@ -319,6 +319,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "untuk",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "buat sesuatu",
 	"PROCEDURES_BEFORE_PARAMS": "dengan:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "dengan:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Menciptakan sebuah fungsi dengan tiada output.",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
 	"PROCEDURES_DEFRETURN_RETURN": "kembali",

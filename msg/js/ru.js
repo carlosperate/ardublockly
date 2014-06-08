@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://ru.wikipedia.org/wiki/Ф�
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Исполняет определённую пользователем процедуру '%1'.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://ru.wikipedia.org/wiki/Функция_%28программирование%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Исполняет определённую пользователем процедуру '%1' и возвращает вычисленное  значение.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "с:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Создать вызов '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

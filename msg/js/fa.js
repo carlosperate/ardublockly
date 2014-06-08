@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://fa.wikipedia.org/wiki/%D8
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "اجرای تابع تعریف‌شده توسط کاربر «%1».";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://fa.wikipedia.org/wiki/%D8%B1%D9%88%DB%8C%D9%87_%28%D8%B9%D9%84%D9%88%D9%85_%D8%B1%D8%A7%DB%8C%D8%A7%D9%86%D9%87%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "اجرای تابع تعریف‌شده توسط کاربر «%1» و استفاده از خروجی آن.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "با:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "ساختن «%1»";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

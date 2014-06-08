@@ -293,6 +293,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "à",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "faire quelque chose",
 	"PROCEDURES_BEFORE_PARAMS": "avec :",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "avec :",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Crée une fonction sans sortie.",
 	"PROCEDURES_DEFRETURN_RETURN": "retour",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Crée une fonction avec une sortie.",

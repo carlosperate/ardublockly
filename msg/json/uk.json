@@ -325,6 +325,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "до",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "щось зробити",
 	"PROCEDURES_BEFORE_PARAMS": "з:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "з:",
 	"PROCEDURES_DEFNORETURN_DO": "блок тексту",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Створює функцію без виводу.",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://uk.wikipedia.org/wiki/Підпрограма",

@@ -1,10 +1,4 @@
 {
-	"@metadata": {
-		"authors": [
-			"Espertus",
-			"Shirayuki"
-		]
-	},
 	"VARIABLES_DEFAULT_NAME": "default name - A simple, general default name for a variable, preferably short. For more context, see [[Translating:Blockly#infrequent_message_types]].",
 	"DUPLICATE_BLOCK": "context menu - Make a copy of the selected block (and any blocks it contains).",
 	"ADD_COMMENT": "context menu - Add a descriptive comment to the selected block.",
@@ -281,7 +275,7 @@
 	"LISTS_GET_INDEX_REMOVE": "dropdown - Indicates that the user wishes to [https://code.google.com/p/blockly/wiki/Lists#Removing_an_item remove an item from a list].",
 	"LISTS_GET_INDEX_FROM_START": "dropdown - Indicates that an index relative to the front of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item get and/or remove an item from a list].  Note: If {{msg-Blockly|ORDINAL_NUMBER_SUFFIX}} is defined, it will automatically appear ''after'' this number (and any other ordinal numbers on this block). See [[Translating:Blockly#Ordinal_numbers]] for more information on ordinal numbers in Blockly. [[File:Blockly-list-get-item.png]]",
 	"LISTS_GET_INDEX_FROM_END": "dropdown - Indicates that an index relative to the end of the list should be used to [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item access an item in a list]. [[File:Blockly-list-get-item.png]]",
-	"LISTS_GET_INDEX_FIRST": "dropdown - Indicates that the '''first''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list].\n----\n[[File:Blockly-list-get-item.png]]\n{{Identical|First}}",
+	"LISTS_GET_INDEX_FIRST": "dropdown - Indicates that the '''first''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list]. [[File:Blockly-list-get-item.png]]",
 	"LISTS_GET_INDEX_LAST": "dropdown - Indicates that the '''last''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list]. [[File:Blockly-list-get-item.png]]",
 	"LISTS_GET_INDEX_RANDOM": "dropdown - Indicates that a '''random''' item should be [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessed in a list]. [[File:Blockly-list-get-item.png]]",
 	"LISTS_GET_INDEX_TAIL": "block text - Text that should go after the rightmost block/dropdown when [https://code.google.com/p/blockly/wiki/Lists#Getting_a_single_item accessing an item from a list].  In most languages, this will be the empty string. [[File:Blockly-list-get-item.png]]",
@@ -335,10 +329,11 @@
 	"VARIABLES_SET_TOOLTIP": "tooltip - This initializes or changes the value of the named variable.",
 	"VARIABLES_SET_CREATE_GET": "context menu - Selecting this creates a block to get (change) the value of this variable.\n\nParameters:\n* %1 - the name of the variable.",
 	"PROCEDURES_DEFNORETURN_HELPURL": "url - Information about defining [https://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not have return values.",
-	"PROCEDURES_DEFNORETURN_TITLE": "block text - This precedes the name of the procedure when defining it.  See [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample procedure definition].",
+	"PROCEDURES_DEFNORETURN_TITLE": "block text - This precedes the name of the function when defining it.  See [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample function definition].",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "default name - This acts as a placeholder for the name of a function on a function definition block, as shown on [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#w7cfju this block]. The user will replace it with the function's name.",
-	"PROCEDURES_BEFORE_PARAMS": "block text - This precedes the list of parameters to a function.  See [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#6ot5y5 this sample function with parameters].",
-	"PROCEDURES_DEFNORETURN_DO": "block text - This appears next to the function's 'body', the blocks that should be run when the function is called, as shown in [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample procedure definition].",
+	"PROCEDURES_BEFORE_PARAMS": "block text - This precedes the list of parameters on a function's defiition block.  See [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#voztpd this sample function with parameters].",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "block text - This precedes the list of parameters on a function's caller block.  See [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#voztpd this sample function with parameters].",
+	"PROCEDURES_DEFNORETURN_DO": "block text - This appears next to the function's 'body', the blocks that should be run when the function is called, as shown in [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#voztpd this sample function definition].",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "tooltip",
 	"PROCEDURES_DEFRETURN_HELPURL": "url - Information about defining [https://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that have return values.",
 	"PROCEDURES_DEFRETURN_RETURN": "block text - This imperative or infinite verb precedes the value that is used as the return value (output) of this function.  See [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#6ot5y5 this sample function that returns a value].",

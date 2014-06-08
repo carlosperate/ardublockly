@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://nl.wikipedia.org/wiki/Sub
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Voer de door de gebruiker gedefinieerde functie \"%1\" uit.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://nl.wikipedia.org/wiki/Subprogramma";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Voer de door de gebruiker gedefinieerde functie \"%1\" uit en gebruik de uitvoer.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "met:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Maak \"%1\"";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://nl.wikipedia.org/wiki/Subprogramma";

@@ -324,6 +324,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "para",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "faz algo",
 	"PROCEDURES_BEFORE_PARAMS": "com:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "com:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Cria uma função que não tem retorno.",
 	"PROCEDURES_DEFRETURN_HELPURL": "http://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
 	"PROCEDURES_DEFRETURN_RETURN": "retorna",

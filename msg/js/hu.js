@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://hu.wikipedia.org/wiki/F%C
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Végrehajtja az eljárást.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://hu.wikipedia.org/wiki/F%C3%BCggv%C3%A9ny_(programoz%C3%A1s)";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Meghívja a függvényt.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "paraméterlistaː";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Create \"do %1\"";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

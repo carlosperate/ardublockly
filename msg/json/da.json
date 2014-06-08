@@ -281,6 +281,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "for at",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "gøre noget",
 	"PROCEDURES_BEFORE_PARAMS": "med:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "med:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Opretter en funktion der ikke har output.",
 	"PROCEDURES_DEFRETURN_RETURN": "returnér",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Opretter en funktion der har output.",

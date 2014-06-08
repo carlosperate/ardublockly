@@ -304,6 +304,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "icra et:",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "hansısa əməliyyat",
 	"PROCEDURES_BEFORE_PARAMS": "ilə:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "ilə:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Nəticəsi olmayan funksiya yaradır.",
 	"PROCEDURES_DEFRETURN_RETURN": "qaytar",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Nəticəsi olan funksiya yaradır.",

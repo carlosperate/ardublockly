@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Executați funcția '%1 'definită de utilizator.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Executați funcția '%1 'definită de utilizator şi folosiţi producţia sa.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "cu:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Creaţi '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

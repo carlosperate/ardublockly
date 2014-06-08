@@ -338,6 +338,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "e",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "birşey yap",
 	"PROCEDURES_BEFORE_PARAMS": "ile :",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "ile :",
 	"PROCEDURES_DEFNORETURN_DO": "",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Çıktı vermeyen bir fonksiyon yaratır .",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",

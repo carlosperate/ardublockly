@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "تشغيل الدالة المعرفة من قبل المستخدم '%1'.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "تشغيل الدالة المعرفة من قبل المستخدم %1 واستخدام  مخرجاتها.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "مع:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "إنشئ '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

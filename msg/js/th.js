@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "เรียกใช้ฟังก์ชันที่สร้างโดยผู้ใช้ \"%1\"";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_(computer_science)";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "เรียกใช้ฟังก์ชันที่สร้างโดยผู้ใช้ \"%1\" และใช้ผลลัพธ์ของมัน";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "ด้วย:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "สร้าง \"%1\"";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

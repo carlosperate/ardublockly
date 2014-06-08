@@ -324,6 +324,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "إلى",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "القيام بشيء ما",
 	"PROCEDURES_BEFORE_PARAMS": "مع:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "مع:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "انشئ دالة بدون مخرجات .",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
 	"PROCEDURES_DEFRETURN_RETURN": "يرجع",

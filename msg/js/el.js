@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://el.wikipedia.org/wiki/Δ�
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Εκτελεί την ορισμένη από τον χρήστη συνάρτηση «%1».";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://el.wikipedia.org/wiki/Διαδικασία_(υπολογιστές)";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Εκτελεί την ορισμένη από τον χρήστη συνάρτηση «%1» και χρησιμοποίησε την έξοδό της.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "με:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Δημιούργησε «%1»";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

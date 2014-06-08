@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://ja.wikipedia.org/wiki/サ
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "ユーザー定義関数 '%1' を実行します。";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://ja.wikipedia.org/wiki/サブルーチン";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "ユーザー定義関数 '%1' を実行し、その出力を使用します。";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "で。";
 Blockly.Msg.PROCEDURES_CREATE_DO = "%1をつくる";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://ja.wikipedia.org/wiki/サブルーチン";

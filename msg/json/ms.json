@@ -292,6 +292,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "Untuk",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "Buat sesuatu",
 	"PROCEDURES_BEFORE_PARAMS": "dengan:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "dengan:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Menghasilkan suatu fungsi tanpa output.",
 	"PROCEDURES_DEFRETURN_RETURN": "kembali",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Mencipta satu fungsi dengan pengeluaran.",

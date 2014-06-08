@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Kullanıcı tanımlı fonksiyonu çalıştır '%1' .";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Kullanıcı tanımlı fonksiyonu çalıştır '%1' ve çıktısını kullan .";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "ile :";
 Blockly.Msg.PROCEDURES_CREATE_DO = "'%1' oluştur";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

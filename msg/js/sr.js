@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://sr.wikipedia.org/wiki/Ф�
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Покрените прилагођену функцију „%1“.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://sr.wikipedia.org/wiki/Функција_(програмирање)";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Покрените прилагођену функцију „%1“ и користи њен излаз.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "са:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Направи „%1“";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

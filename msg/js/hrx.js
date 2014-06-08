@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://hrx.wikipedia.org/wiki/Pr
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Ruf en Funktionsblock ohne Rückgäweart uff.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://hrx.wikipedia.org/wiki/Prozedur_%28Programmierung%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Ruf en Funktionsblock mit Rückgäbweart uff.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "mit:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Generier/erzeich \"Uffruf %1\"";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

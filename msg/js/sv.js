@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://sv.wikipedia.org/wiki/Fun
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Kör den användardefinierade funktionen \"%1\".";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://sv.wikipedia.org/wiki/Funktion_%28programmering%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Kör den användardefinierade funktionen \"%1\" och använd resultatet av den.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "med:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Skapa '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://sv.wikipedia.org/wiki/Funktion_%28programmering%29";

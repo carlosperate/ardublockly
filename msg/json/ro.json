@@ -325,6 +325,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "la",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "fă ceva",
 	"PROCEDURES_BEFORE_PARAMS": "cu:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "cu:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Crează o funcţie cu nici o ieşire.",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
 	"PROCEDURES_DEFRETURN_RETURN": "returnează",

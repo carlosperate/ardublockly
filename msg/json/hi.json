@@ -229,6 +229,7 @@
 	"VARIABLES_SET_TOOLTIP": "इस चर को इनपुट के बराबर सेट करता है।",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "कुछ करें",
 	"PROCEDURES_BEFORE_PARAMS": ": के साथ",
+	"PROCEDURES_CALL_BEFORE_PARAMS": ": के साथ",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "बिना आउटपुट वाला एक फ़ंक्शन बनाता है।",
 	"PROCEDURES_DEFRETURN_RETURN": "रिटर्न",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "आउटपुट वाला एक फ़ंक्शन बनाता है।",

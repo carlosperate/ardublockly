@@ -1011,24 +1011,27 @@ Blockly.Msg.VARIABLES_SET_CREATE_GET = 'Create "get %1"';
 // Procedures Blocks.
 /// url - Information about defining [https://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not have return values.
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = 'https://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
-/// block text - This precedes the name of the procedure when defining it.  See
+/// block text - This precedes the name of the function when defining it.  See
 /// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample
-/// procedure definition].
+/// function definition].
 Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE = 'to';
 /// default name - This acts as a placeholder for the name of a function on a
 /// function definition block, as shown on
 /// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#w7cfju this block].
 /// The user will replace it with the function's name.
 Blockly.Msg.PROCEDURES_DEFNORETURN_PROCEDURE = 'do something';
-/// block text - This precedes the list of parameters to a function.  See
-/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#6ot5y5 this sample
+/// block text - This precedes the list of parameters on a function's defiition block.  See
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#voztpd this sample
 /// function with parameters].
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = 'with:';
+/// block text - This precedes the list of parameters on a function's caller block.  See
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#voztpd this sample
+/// function with parameters].
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = 'with:';
 /// block text - This appears next to the function's "body", the blocks that should be
 /// run when the function is called, as shown in
-/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#c84aoc this sample
-/// procedure definition].
-
+/// [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#voztpd this sample
+/// function definition].
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = '';
 /// tooltip
 Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP = 'Creates a function with no output.';

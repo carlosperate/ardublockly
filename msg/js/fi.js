@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://fi.wikipedia.org/wiki/Ali
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Suorittaa käyttäjän määrittelemä funktio '%1'.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://fi.wikipedia.org/wiki/Aliohjelma";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Suorittaa käyttäjän määrittelemän funktion '%1' ja käyttää sen tuotosta.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "parametrit:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Luo '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

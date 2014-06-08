@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://zh.wikipedia.org/wiki/子
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "运行用户定义的函数“%1”。";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://zh.wikipedia.org/wiki/子程序";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "运行用户定义的函数“%1”，并使用它的输出值。";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "与：";
 Blockly.Msg.PROCEDURES_CREATE_DO = "创建“%1”";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "空白";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://zh.wikipedia.org/wiki/子程序";

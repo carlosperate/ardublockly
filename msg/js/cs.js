@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://cs.wikipedia.org/wiki/Fun
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Spustí uživatelem definovanou funkci '%1'.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://cs.wikipedia.org/wiki/Funkce_(programov%C3%A1n%C3%AD)";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Spustí uživatelem definovanou funkci '%1' a použije její výstup.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "s:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Vytvořit '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

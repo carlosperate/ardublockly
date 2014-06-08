@@ -107,6 +107,7 @@
 	"VARIABLES_SET_TAIL": "سی",
 	"PROCEDURES_DEFNORETURN_TITLE": "سی",
 	"PROCEDURES_BEFORE_PARAMS": "وا:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "وا:",
 	"PROCEDURES_DEFRETURN_RETURN": "ورگنیئن",
 	"PROCEDURES_CALLNORETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
 	"PROCEDURES_CALLRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",

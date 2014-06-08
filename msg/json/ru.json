@@ -284,6 +284,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "чтобы",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "выполнить что-то",
 	"PROCEDURES_BEFORE_PARAMS": "с:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "с:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Создаёт процедуру, не возвращающую значение.",
 	"PROCEDURES_DEFRETURN_RETURN": "вернуть",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Создаёт процедуру, возвращающую значение.",

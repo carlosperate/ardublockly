@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://es.wikipedia.org/wiki/Sub
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Ejecuta la función definida por el usuario '%1'.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://es.wikipedia.org/wiki/Subrutina";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Ejecuta la función definida por el usuario '%1' y usar su salida.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "con:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Crear '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

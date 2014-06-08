@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "http://en.wikipedia.org/wiki/Proc
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Lësho funksionin e definuar nga përdoruesi '%1'.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "http://en.wikipedia.org/wiki/Procedure_%28computer_science%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Lëho funksionin e definuar nga përdoruesi '%1' dhe përdor daljen e tij.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "me:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Krijo '%1'";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "http://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

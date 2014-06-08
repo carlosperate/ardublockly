@@ -338,6 +338,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "함수",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "함수 이름",
 	"PROCEDURES_BEFORE_PARAMS": "사용:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "사용:",
 	"PROCEDURES_DEFNORETURN_DO": "",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "실행 후, 결과 값을 돌려주지 않는 함수를 만듭니다.",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",

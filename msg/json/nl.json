@@ -326,6 +326,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "om",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "doe iets",
 	"PROCEDURES_BEFORE_PARAMS": "met:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "met:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Maakt een functie zonder uitvoer.",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://nl.wikipedia.org/wiki/Subprogramma",
 	"PROCEDURES_DEFRETURN_RETURN": "uitvoeren",

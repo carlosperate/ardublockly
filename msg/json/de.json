@@ -326,6 +326,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "to",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "Funktionsblock",
 	"PROCEDURES_BEFORE_PARAMS": "mit:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "mit:",
 	"PROCEDURES_DEFNORETURN_DO": "",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Ein Funktionsblock ohne Rückgabewert.",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://de.wikipedia.org/wiki/Prozedur_%28Programmierung%29",

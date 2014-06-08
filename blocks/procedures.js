@@ -352,7 +352,8 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     this.setColour(290);
     this.appendDummyInput()
         .appendField(Blockly.Msg.PROCEDURES_CALLNORETURN_CALL)
-        .appendField('', 'NAME');
+        .appendField('', 'NAME')
+        .appendField(Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS, 'WITH');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     // Tooltip is set in domToMutation.
@@ -458,6 +459,8 @@ Blockly.Blocks['procedures_callnoreturn'] = {
         }
       }
     }
+    // Add 'with:' if there are parameters.
+    this.getField_('WITH').setVisible(!!this.arguments_.length);
     // Restore rendering and show the changes.
     this.rendered = savedRendered;
     if (this.rendered) {

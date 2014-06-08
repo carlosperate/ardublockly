@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "미리 정의해 둔 '%1' 함수를 실행합니다.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "미리 정의해 둔 '%1' 함수를 실행하고, 함수를 실행한 결과 값을 돌려줍니다.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "사용:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "'%1' 생성";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

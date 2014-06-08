@@ -286,6 +286,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "para",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "faça algo",
 	"PROCEDURES_BEFORE_PARAMS": "com:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "com:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Cria uma função que não tem retorno.",
 	"PROCEDURES_DEFRETURN_RETURN": "retorna",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Cria uma função que possui um valor de retorno.",

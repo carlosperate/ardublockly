@@ -294,6 +294,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "tehdäksesi",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "tee jotain",
 	"PROCEDURES_BEFORE_PARAMS": "parametrit:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "parametrit:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Luo funktio, jolla ei ole tuotosta.",
 	"PROCEDURES_DEFRETURN_RETURN": "palauta",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Luo funktio, jolla ei ole tuotosta.",

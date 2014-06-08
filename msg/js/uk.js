@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Запустити користувацьку функцію \"%1\".";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://uk.wikipedia.org/wiki/Підпрограма";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Запустити користувацьку функцію \"%1\" і використовувати її вивід.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "з:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Створити \"%1\"";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "блок тексту";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://uk.wikipedia.org/wiki/Підпрограма";

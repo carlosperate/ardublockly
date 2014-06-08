@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Yaradılmış '%1' funksiyasını çalışdır.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Yaradılmış '%1' funksiyasını çalışdır və nəticəni istifadə et.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "ilə:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "'%1' yarat";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";  // untranslated
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";  // untranslated

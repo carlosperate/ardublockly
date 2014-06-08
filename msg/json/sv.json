@@ -327,6 +327,7 @@
 	"PROCEDURES_DEFNORETURN_TITLE": "för att",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "göra något",
 	"PROCEDURES_BEFORE_PARAMS": "med:",
+	"PROCEDURES_CALL_BEFORE_PARAMS": "med:",
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Skapar en funktion utan output.",
 	"PROCEDURES_DEFRETURN_HELPURL": "https://sv.wikipedia.org/wiki/Funktion_%28programmering%29",
 	"PROCEDURES_DEFRETURN_RETURN": "returnera",

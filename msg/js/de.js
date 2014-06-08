@@ -266,6 +266,7 @@ Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://de.wikipedia.org/wiki/Pro
 Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP = "Rufe einen Funktionsblock ohne Rückgabewert auf.";
 Blockly.Msg.PROCEDURES_CALLRETURN_HELPURL = "https://de.wikipedia.org/wiki/Prozedur_%28Programmierung%29";
 Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP = "Rufe einen Funktionsblock mit Rückgabewert auf.";
+Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = "mit:";
 Blockly.Msg.PROCEDURES_CREATE_DO = "Erzeuge \"Aufruf %1\"";
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = "";
 Blockly.Msg.PROCEDURES_DEFNORETURN_HELPURL = "https://de.wikipedia.org/wiki/Prozedur_%28Programmierung%29";
