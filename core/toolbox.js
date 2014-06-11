@@ -28,6 +28,7 @@ goog.provide('Blockly.Toolbox');
 
 goog.require('Blockly.Flyout');
 goog.require('goog.events.BrowserFeature');
+goog.require('goog.html.SafeHtml');
 goog.require('goog.style');
 goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.ui.tree.TreeNode');
@@ -53,16 +54,16 @@ Blockly.Toolbox.selectedOption_ = null;
  * @private
  */
 Blockly.Toolbox.CONFIG_ = {
-  'indentWidth': 19,
-  'cssRoot': 'blocklyTreeRoot',
-  'cssHideRoot': 'blocklyHidden',
-  'cssItem': '',
-  'cssTreeRow': 'blocklyTreeRow',
-  'cssItemLabel': 'blocklyTreeLabel',
-  'cssTreeIcon': 'blocklyTreeIcon',
-  'cssExpandedFolderIcon': 'blocklyTreeIconOpen',
-  'cssFileIcon': 'blocklyTreeIconNone',
-  'cssSelectedRow': 'blocklyTreeSelected'
+  indentWidth: 19,
+  cssRoot: 'blocklyTreeRoot',
+  cssHideRoot: 'blocklyHidden',
+  cssItem: '',
+  cssTreeRow: 'blocklyTreeRow',
+  cssItemLabel: 'blocklyTreeLabel',
+  cssTreeIcon: 'blocklyTreeIcon',
+  cssExpandedFolderIcon: 'blocklyTreeIconOpen',
+  cssFileIcon: 'blocklyTreeIconNone',
+  cssSelectedRow: 'blocklyTreeSelected'
 };
 
 /**
@@ -104,7 +105,8 @@ Blockly.Toolbox.init = function() {
       Blockly.pathToBlockly + 'media/1x1.gif';
   Blockly.Toolbox.CONFIG_['cssCollapsedFolderIcon'] =
       'blocklyTreeIconClosed' + (Blockly.RTL ? 'Rtl' : 'Ltr');
-  var tree = new Blockly.Toolbox.TreeControl('root', Blockly.Toolbox.CONFIG_);
+  var tree = new Blockly.Toolbox.TreeControl(goog.html.SafeHtml.EMPTY,
+                                             Blockly.Toolbox.CONFIG_);
   Blockly.Toolbox.tree_ = tree;
   tree.setShowRootNode(false);
   tree.setShowLines(false);
@@ -196,7 +198,7 @@ Blockly.Toolbox.clearSelection = function() {
 
 /**
  * Extention of a TreeControl object that uses a custom tree node.
- * @param {string} html The HTML content of the node label.
+ * @param {!goog.html.SafeHtml} html The HTML content of the node label.
  * @param {Object=} opt_config The configuration for the tree. See
  *    goog.ui.tree.TreeControl.DefaultConfig. If not specified, a default config
  *    will be used.
@@ -247,8 +249,9 @@ Blockly.Toolbox.TreeControl.prototype.handleTouchEvent_ = function(e) {
  * @override
  */
 Blockly.Toolbox.TreeControl.prototype.createNode = function(opt_html) {
-  return new Blockly.Toolbox.TreeNode(opt_html || '', this.getConfig(),
-      this.getDomHelper());
+  return new Blockly.Toolbox.TreeNode(opt_html ?
+      goog.html.SafeHtml.htmlEscape(opt_html) : goog.html.SafeHtml.EMPTY,
+      this.getConfig(), this.getDomHelper());
 };
 
 /**
@@ -271,7 +274,7 @@ Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
 
 /**
  * An single node in the tree, customized for Blockly's UI.
- * @param {string} html The html content of the node label.
+ * @param {!goog.html.SafeHtml} html The HTML content of the node label.
  * @param {Object=} opt_config The configuration for the tree. See
  *    goog.ui.tree.TreeControl.DefaultConfig. If not specified, a default config
  *    will be used.

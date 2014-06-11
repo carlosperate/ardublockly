@@ -119,7 +119,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
     var menuItem = new goog.ui.MenuItem(text);
     menuItem.setValue(value);
     menuItem.setCheckable(true);
-    menu.addItem(menuItem);
+    menu.addChild(menuItem, true);
     menuItem.setChecked(value == this.value_);
   }
   goog.events.listen(menu, goog.ui.Component.EventType.ACTION, callback);
