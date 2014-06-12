@@ -552,7 +552,8 @@ Blockly.Blocks['procedures_callreturn'] = {
     this.setColour(290);
     this.appendDummyInput()
         .appendField(Blockly.Msg.PROCEDURES_CALLRETURN_CALL)
-        .appendField('', 'NAME');
+        .appendField('', 'NAME')
+        .appendField(Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS, 'WITH');
     this.setOutput(true);
     // Tooltip is set in domToMutation.
     this.arguments_ = [];
