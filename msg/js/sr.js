@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Нова променљива…";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Име нове променљиве:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "са:";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://sr.wikipedia.org/wiki/Функција_(програмирање)";

@@ -260,6 +260,7 @@ Blockly.Msg.ME = "من";
 Blockly.Msg.NEW_VARIABLE = "متغیر جدید...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "نام متغیر جدید:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "با:";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";  // untranslated
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://fa.wikipedia.org/wiki/%D8%B1%D9%88%DB%8C%D9%87_%28%D8%B9%D9%84%D9%88%D9%85_%D8%B1%D8%A7%DB%8C%D8%A7%D9%86%D9%87%29";

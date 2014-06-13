@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "Új...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Az új változó neve:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = ".";
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "paraméterlistaː";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://hu.wikipedia.org/wiki/F%C3%BCggv%C3%A9ny_(programoz%C3%A1s)";

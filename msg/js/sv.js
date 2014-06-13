@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Jag";
 Blockly.Msg.NEW_VARIABLE = "Ny variabel...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nytt variabelnamn:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "med:";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";  // untranslated
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://sv.wikipedia.org/wiki/Funktion_%28programmering%29";

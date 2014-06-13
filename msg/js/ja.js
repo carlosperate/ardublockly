@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Me";  // untranslated
 Blockly.Msg.NEW_VARIABLE = "新しい変数";
 Blockly.Msg.NEW_VARIABLE_TITLE = "新しい変数の、名前";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "で。";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://ja.wikipedia.org/wiki/サブルーチン";

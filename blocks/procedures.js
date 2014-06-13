@@ -49,6 +49,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP);
     this.arguments_ = [];
+    this.statementConnection_ = null;
   },
   /**
    * Update the display of parameters for this procedure definition block.
@@ -92,6 +93,11 @@ Blockly.Blocks['procedures_defnoreturn'] = {
       parameter.setAttribute('name', this.arguments_[x]);
       container.appendChild(parameter);
     }
+
+    // Save whether the statement input is visible.
+    if (!this.getInput('STACK').isVisible()) {
+      container.setAttribute('statements', 'false');
+    }
     return container;
   },
   /**
@@ -107,6 +113,10 @@ Blockly.Blocks['procedures_defnoreturn'] = {
       }
     }
     this.updateParams_();
+
+    // Show or hide the statement input.
+    var hasStatements = xmlElement.getAttribute('statements') !== 'false';
+    this.getInput('STACK').setVisible(hasStatements);
   },
   /**
    * Populate the mutator's dialog with this block's components.
@@ -116,8 +126,19 @@ Blockly.Blocks['procedures_defnoreturn'] = {
    */
   decompose: function(workspace) {
     var containerBlock = Blockly.Block.obtain(workspace,
-                                           'procedures_mutatorcontainer');
+                                              'procedures_mutatorcontainer');
     containerBlock.initSvg();
+
+    // Check/uncheck the allow statement box.
+    if (this.getInput('RETURN')) {
+      var hasStatements = this.getInput('STACK').isVisible();
+      containerBlock.setFieldValue(hasStatements ? 'TRUE' : 'FALSE',
+                                   'STATEMENTS');
+    } else {
+      containerBlock.getInput('STATEMENT_INPUT').setVisible(false);
+    }
+
+    // Parameter list.
     var connection = containerBlock.getInput('STACK').connection;
     for (var x = 0; x < this.arguments_.length; x++) {
       var paramBlock = Blockly.Block.obtain(workspace, 'procedures_mutatorarg');
@@ -139,6 +160,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
    * @this Blockly.Block
    */
   compose: function(containerBlock) {
+    // Parameter list.
     this.arguments_ = [];
     this.paramIds_ = [];
     var paramBlock = containerBlock.getInputTargetBlock('STACK');
@@ -151,6 +173,37 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     this.updateParams_();
     Blockly.Procedures.mutateCallers(this.getFieldValue('NAME'),
         this.workspace, this.arguments_, this.paramIds_);
+
+    // Show/hide the statement input.
+    var hasStatements = containerBlock.getFieldValue('STATEMENTS');
+    if (hasStatements !== null) {
+      hasStatements = hasStatements == 'TRUE';
+      var stackInput = this.getInput('STACK');
+      if (stackInput.isVisible() != hasStatements) {
+        if (hasStatements) {
+          // Restore the stack, if one was saved.
+          if (stackInput.connection.targetConnection ||
+              !this.statementConnection_ ||
+              this.statementConnection_.targetConnection ||
+              this.statementConnection_.sourceBlock_.workspace !=
+              this.workspace) {
+            // Block no longer exists or has been attached elsewhere.
+            this.statementConnection_ = null;
+          } else {
+            stackInput.connection.connect(this.statementConnection_);
+          }
+        } else {
+          // Save the stack, then disconnect it.
+          this.statementConnection_ = stackInput.connection.targetConnection;
+          if (this.statementConnection_) {
+            var stackBlock = stackInput.connection.targetBlock();
+            stackBlock.setParent(null);
+            stackBlock.bumpNeighbours_();
+          }
+        }
+        stackInput.setVisible(hasStatements);
+      }
+    }
   },
   /**
    * Dispose of any callers.
@@ -273,6 +326,7 @@ Blockly.Blocks['procedures_defreturn'] = {
     this.setMutator(new Blockly.Mutator(['procedures_mutatorarg']));
     this.setTooltip(Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP);
     this.arguments_ = [];
+    this.statementConnection_ = null;
   },
   updateParams_: Blockly.Blocks['procedures_defnoreturn'].updateParams_,
   mutationToDom: Blockly.Blocks['procedures_defnoreturn'].mutationToDom,
@@ -307,6 +361,9 @@ Blockly.Blocks['procedures_mutatorcontainer'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE);
     this.appendStatementInput('STACK');
+    this.appendDummyInput('STATEMENT_INPUT')
+        .appendField(Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS)
+        .appendField(new Blockly.FieldCheckbox('TRUE'), 'STATEMENTS');
     this.setTooltip(Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP);
     this.contextMenu = false;
   }

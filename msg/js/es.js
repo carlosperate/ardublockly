@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Yo";
 Blockly.Msg.NEW_VARIABLE = "Variable nueva…";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nombre de variable nueva:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "con:";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";  // untranslated
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://es.wikipedia.org/wiki/Subrutina";

@@ -338,6 +338,7 @@
 	"PROCEDURES_DEFRETURN_HELPURL": "url - Information about defining [https://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that have return values.",
 	"PROCEDURES_DEFRETURN_RETURN": "block text - This imperative or infinite verb precedes the value that is used as the return value (output) of this function.  See [https://blockly-demo.appspot.com/static/apps/code/index.html?lang=en#6ot5y5 this sample function that returns a value].",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "tooltip",
+	"PROCEDURES_ALLOW_STATEMENTS": "Label for a checkbox that controls if statements are allowed in a function.",
 	"PROCEDURES_DEF_DUPLICATE_WARNING": "alert - The user has created a function with two parameters that have the same name.  Every parameter must have a different name.",
 	"PROCEDURES_CALLNORETURN_HELPURL": "url - Information about calling [https://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that do not return values.",
 	"PROCEDURES_CALLNORETURN_CALL": "block text - In most (if not all) languages, this will be the empty string. It precedes the name of the function that should be run.  See, for example, the 'draw square' block in [https://blockly-demo.appspot.com/static/apps/turtle/index.html#ztz96g].",

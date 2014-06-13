@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Me";
 Blockly.Msg.NEW_VARIABLE = "Nuova variabile...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Nome della nuova variabile:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "conː";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";  // untranslated
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://it.wikipedia.org/wiki/Funzione_(informatica)";

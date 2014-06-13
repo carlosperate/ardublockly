@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Me";
 Blockly.Msg.NEW_VARIABLE = "New variable...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "New variable name:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "with:";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29";

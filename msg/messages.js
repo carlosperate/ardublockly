@@ -1035,7 +1035,6 @@ Blockly.Msg.PROCEDURES_CALL_BEFORE_PARAMS = 'with:';
 Blockly.Msg.PROCEDURES_DEFNORETURN_DO = '';
 /// tooltip
 Blockly.Msg.PROCEDURES_DEFNORETURN_TOOLTIP = 'Creates a function with no output.';
-
 /// url - Information about defining [https://en.wikipedia.org/wiki/Procedure_(computer_science) functions] that have return values.
 Blockly.Msg.PROCEDURES_DEFRETURN_HELPURL = 'https://en.wikipedia.org/wiki/Procedure_%28computer_science%29';
 Blockly.Msg.PROCEDURES_DEFRETURN_TITLE = Blockly.Msg.PROCEDURES_DEFNORETURN_TITLE;
@@ -1049,6 +1048,8 @@ Blockly.Msg.PROCEDURES_DEFRETURN_DO = Blockly.Msg.PROCEDURES_DEFNORETURN_DO;
 Blockly.Msg.PROCEDURES_DEFRETURN_RETURN = 'return';
 /// tooltip
 Blockly.Msg.PROCEDURES_DEFRETURN_TOOLTIP = 'Creates a function with an output.';
+/// Label for a checkbox that controls if statements are allowed in a function.
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = 'allow statements';
 
 /// alert - The user has created a function with two parameters that have the same name.  Every parameter must have a different name.
 Blockly.Msg.PROCEDURES_DEF_DUPLICATE_WARNING = 'Warning: This function has duplicate parameters.';

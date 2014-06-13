@@ -260,6 +260,7 @@ Blockly.Msg.ME = "我";
 Blockly.Msg.NEW_VARIABLE = "新变量...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "新变量的名称：";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "空白";
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "与：";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "空白";
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://zh.wikipedia.org/wiki/子程序";

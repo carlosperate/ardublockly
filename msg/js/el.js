@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Εγώ";
 Blockly.Msg.NEW_VARIABLE = "Νέα μεταβλητή...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Νέο όνομα μεταβλητής:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "με:";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";  // untranslated
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://el.wikipedia.org/wiki/Διαδικασία_(υπολογιστές)";

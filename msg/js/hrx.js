@@ -260,6 +260,7 @@ Blockly.Msg.ME = "Ich";
 Blockly.Msg.NEW_VARIABLE = "Neie Variable...";
 Blockly.Msg.NEW_VARIABLE_TITLE = "Die neie Variable sei Noome:";
 Blockly.Msg.ORDINAL_NUMBER_SUFFIX = "";  // untranslated
+Blockly.Msg.PROCEDURES_ALLOW_STATEMENTS = "allow statements";  // untranslated
 Blockly.Msg.PROCEDURES_BEFORE_PARAMS = "mit:";
 Blockly.Msg.PROCEDURES_CALLNORETURN_CALL = "";  // untranslated
 Blockly.Msg.PROCEDURES_CALLNORETURN_HELPURL = "https://hrx.wikipedia.org/wiki/Prozedur_%28Programmierung%29";
