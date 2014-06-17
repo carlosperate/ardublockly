@@ -1,7 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"Cotidianis"
+			"Cotidianis",
+			"Faren",
+			"Vengir"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "element",
@@ -20,6 +22,8 @@
 	"ENABLE_BLOCK": "Włącz blok",
 	"HELP": "Pomoc",
 	"CHAT": "Rozmawiaj z swoim współpracownikiem, pisząc w tym polu!",
+	"AUTH": "Proszę autoryzować ten program, aby można było zapisać swoją pracę i umożliwić dzielenie się nią przez ciebie.",
+	"ME": "Ja",
 	"CHANGE_VALUE_TITLE": "Zmień wartość:",
 	"NEW_VARIABLE": "Nowa zmienna...",
 	"NEW_VARIABLE_TITLE": "Nowa nazwa zmiennej:",
@@ -75,9 +79,9 @@
 	"CONTROLS_IF_MSG_IF": "jeśli",
 	"CONTROLS_IF_MSG_ELSEIF": "w przeciwnym razie jeśli",
 	"CONTROLS_IF_MSG_ELSE": "w przeciwnym razie",
-	"CONTROLS_IF_IF_TOOLTIP": "Dodać, usunąć lub zmienić kolejność sekcji żeby zrekonfigurować blok if.",
-	"CONTROLS_IF_ELSEIF_TOOLTIP": "Dodać warunek do bloku if.",
-	"CONTROLS_IF_ELSE_TOOLTIP": "Dodać warunek końcowy, warunek złap wszystkie do bloku if.",
+	"CONTROLS_IF_IF_TOOLTIP": "Dodaj, usuń lub zmień kolejność bloków, żeby zmodyfikować blok „jeśli”.",
+	"CONTROLS_IF_ELSEIF_TOOLTIP": "Dodaj warunek do bloku „jeśli”.",
+	"CONTROLS_IF_ELSE_TOOLTIP": "Dodaj ostatni warunek do bloku „jeśli”, gdy żaden wcześniejszy nie był spełniony.",
 	"LOGIC_COMPARE_HELPURL": "https://en.wikipedia.org/wiki/Inequality_(mathematics)",
 	"LOGIC_COMPARE_TOOLTIP_EQ": "Zwraca \"prawda\", jeśli obie dane wejściowe są sobie równe.",
 	"LOGIC_COMPARE_TOOLTIP_NEQ": "Zwraca \"prawda\", jeśli obie dane wejściowe nie są sobie równe.",
@@ -104,7 +108,7 @@
 	"LOGIC_TERNARY_CONDITION": "test",
 	"LOGIC_TERNARY_IF_TRUE": "jeśli prawda",
 	"LOGIC_TERNARY_IF_FALSE": "jeśli fałsz",
-	"LOGIC_TERNARY_TOOLTIP": "Sprawdz warunek w 'test'. Jesli warunek jest prawdziwy, to zwroci 'if true'; jesli nie jest prawdziwy to zwroci 'if false'.",
+	"LOGIC_TERNARY_TOOLTIP": "Sprawdź warunek w „test”. Jeśli warunek jest prawdziwy, to zwróci „jeśli prawda”; jeśli nie jest prawdziwy to zwróci „jeśli fałsz”.",
 	"MATH_NUMBER_HELPURL": "https://en.wikipedia.org/wiki/Number",
 	"MATH_NUMBER_TOOLTIP": "Liczba.",
 	"MATH_ADDITION_SYMBOL": "+",
@@ -347,7 +351,9 @@
 	"PROCEDURES_CALLRETURN_HELPURL": "https://en.wikipedia.org/wiki/Procedure_%28computer_science%29",
 	"PROCEDURES_CALLRETURN_TOOLTIP": "Uruchom funkcję zdefiniowaną przez użytkownika '%1' i skorzystaj z jej wyniku.",
 	"PROCEDURES_MUTATORCONTAINER_TITLE": "wejścia",
+	"PROCEDURES_MUTATORCONTAINER_TOOLTIP": "Dodaj, usuń lub zmień kolejność danych wejściowych dla tej funkcji.",
 	"PROCEDURES_MUTATORARG_TITLE": "nazwa wejścia:",
+	"PROCEDURES_MUTATORARG_TOOLTIP": "Dodaj dane wejściowe do funkcji.",
 	"PROCEDURES_HIGHLIGHT_DEF": "Podświetl definicję funkcji",
 	"PROCEDURES_CREATE_DO": "Stwórz '%1'",
 	"PROCEDURES_IFRETURN_TOOLTIP": "Jeśli wartość jest prawdziwa, zwróć drugą wartość.",

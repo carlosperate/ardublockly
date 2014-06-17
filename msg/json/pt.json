@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Imperadeiro98"
+			"Imperadeiro98",
+			"Waldir"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "item",
@@ -235,7 +236,7 @@
 	"TEXT_TRIM_HELPURL": "https://code.google.com/p/blockly/wiki/Text#Trimming_%28removing%29_spaces",
 	"TEXT_TRIM_TOOLTIP": "Retorna uma cópia do texto com os espaços removidos de uma ou ambas as extremidades.",
 	"TEXT_TRIM_OPERATOR_BOTH": "remover espaços de ambos os lados",
-	"TEXT_TRIM_OPERATOR_LEFT": "remover espaços à esquerda",
+	"TEXT_TRIM_OPERATOR_LEFT": "remover espaços à esquerda de",
 	"TEXT_TRIM_OPERATOR_RIGHT": "remover espaços à direita",
 	"TEXT_PRINT_HELPURL": "https://code.google.com/p/blockly/wiki/Text#Printing_text",
 	"TEXT_PRINT_TITLE": "imprime %1",

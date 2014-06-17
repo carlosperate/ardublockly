@@ -5,7 +5,8 @@
 			"Takács Viktor László",
 			"Dj",
 			"Grin",
-			"ViDam"
+			"ViDam",
+			"Csega"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "változó",
@@ -24,6 +25,8 @@
 	"ENABLE_BLOCK": "Engedélyez",
 	"HELP": "Súgó",
 	"CHAT": "Ebben a mezőben tudsz a közreműködőkkel beszélgetni!",
+	"AUTH": "Kérjük, engedélyezd az alkalmazásnak munkád elmentését és megosztását.",
+	"ME": "Én",
 	"CHANGE_VALUE_TITLE": "Érték módosítása:",
 	"NEW_VARIABLE": "Új...",
 	"NEW_VARIABLE_TITLE": "Az új változó neve:",
@@ -305,7 +308,9 @@
 	"PROCEDURES_CALLRETURN_HELPURL": "https://hu.wikipedia.org/wiki/F%C3%BCggv%C3%A9ny_(programoz%C3%A1s)",
 	"PROCEDURES_CALLRETURN_TOOLTIP": "Meghívja a függvényt.",
 	"PROCEDURES_MUTATORCONTAINER_TITLE": "paraméterek",
+	"PROCEDURES_MUTATORCONTAINER_TOOLTIP": "Bemenetek hozzáadása, eltávolítása vagy átrendezése ehhez a függvényhez.",
 	"PROCEDURES_MUTATORARG_TITLE": "változó:",
+	"PROCEDURES_MUTATORARG_TOOLTIP": "Bemenet hozzáadása a függvényhez.",
 	"PROCEDURES_HIGHLIGHT_DEF": "Eljárás kiemelése",
 	"PROCEDURES_CREATE_DO": "Create \"do %1\"",
 	"PROCEDURES_IFRETURN_TOOLTIP": "Ha az érték igaz, akkor visszatér a függvény értékével.",

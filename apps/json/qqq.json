@@ -35,7 +35,7 @@
 	"Code.timeout": "alert - Message shown if the program has run for more than the permitted number of steps.  This exists so that programs with infinite loops do not run forever.",
 	"Code.discard": "alert - Message shown after the user clicks on the 'discard all' icon.  Selecting 'OK' (or the translated equivalent) causes all of the blocks to be discarded.  Selecting 'Cancel' prevents blocks from being deleted.\n\nParameters:\n* %1 - number of blocks to be deleted. It is always an integer greater than or equal to 2.",
 	"Code.title": "title - Title of this application, indicating that it is for writing arbitrary programs.\n{{Identical|Code}}",
-	"Code.blocks": "tab text - Displays and allows editing of the user's program as blocks.",
+	"Code.blocks": "tab text - Displays and allows editing of the user's program as blocks.\n{{Identical|Block}}",
 	"Code.trashTooltip": "tooltip - Clicking on this causes the user program to be discarded.",
 	"Graph.title": "title - Brief title for this graphic calculator application.",
 	"Apps.indexTitle": "page text - The word 'Apps' is short for 'Applications'.  We chose it because it is more informal.  This and the following messages currently appear at [http://blockly-demo.appspot.com/static/apps/index.html].",

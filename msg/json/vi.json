@@ -4,7 +4,8 @@
 			"Baonguyen21022003",
 			"Espertus",
 			"Qneutron",
-			"Withoutaname"
+			"Withoutaname",
+			"Dstream"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "vật",
@@ -23,6 +24,7 @@
 	"ENABLE_BLOCK": "Phục Hồi Tác Dụng",
 	"HELP": "Trợ Giúp",
 	"CHAT": "Trò chuyện với cộng tác viên của bạn bằng cách gõ vào hộp này!",
+	"AUTH": "Vui lòng cho phép ứng dụng được lưu dữ liệu của bạn và tự động chia sẻ bằng tên của bạn",
 	"ME": "Tôi",
 	"CHANGE_VALUE_TITLE": "Thay giá trị thành:",
 	"NEW_VARIABLE": "Biến mới...",
@@ -302,7 +304,9 @@
 	"PROCEDURES_CALLRETURN_HELPURL": "https://en.wikipedia.org/wiki/procedure _ %28computer_science% 29",
 	"PROCEDURES_CALLRETURN_TOOLTIP": "Chạy một thủ tục có giá trị hoàn trả.",
 	"PROCEDURES_MUTATORCONTAINER_TITLE": "các tham số",
+	"PROCEDURES_MUTATORCONTAINER_TOOLTIP": "Thêm, xóa hoặc sắp xếp lại các đầu vào cho hàm này.",
 	"PROCEDURES_MUTATORARG_TITLE": "biến:",
+	"PROCEDURES_MUTATORARG_TOOLTIP": "Thêm một đầu vào cho hàm.",
 	"PROCEDURES_HIGHLIGHT_DEF": "Làm nổi bật thủ tục",
 	"PROCEDURES_CREATE_DO": "Tạo mảnh \"thực hiện %1\"",
 	"PROCEDURES_IFRETURN_TOOLTIP": "Khi điều kiện đúng thì hoàn trả một giá trị.",

@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Siebrand"
+			"Siebrand",
+			"McDutchie"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "item",
@@ -184,7 +185,7 @@
 	"MATH_CONSTRAIN_TITLE": "beperk %1 van minimaal %2 tot maximaal %3",
 	"MATH_CONSTRAIN_TOOLTIP": "Beperk een getal tussen de twee opgegeven limieten (inclusief).",
 	"MATH_RANDOM_INT_HELPURL": "https://nl.wikipedia.org/wiki/Toevalsgenerator",
-	"MATH_RANDOM_INT_TITLE": "willekeurig getal van %1 tot %2",
+	"MATH_RANDOM_INT_TITLE": "willekeurig geheel getal van %1 tot %2",
 	"MATH_RANDOM_INT_TOOLTIP": "Geeft een willekeurig getal tussen de 2 opgegeven limieten in, inclusief.",
 	"MATH_RANDOM_FLOAT_HELPURL": "https://nl.wikipedia.org/wiki/Toevalsgenerator",
 	"MATH_RANDOM_FLOAT_TITLE_RANDOM": "willekeurige fractie",

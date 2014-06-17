@@ -4,13 +4,17 @@
 			"Mogoeilor"
 		]
 	},
+	"VARIABLES_DEFAULT_NAME": "قلم",
 	"DUPLICATE_BLOCK": "کپی کردن",
 	"ADD_COMMENT": "نظرتونه اضاف بکید",
 	"REMOVE_COMMENT": "نظر جا وه جا کو",
 	"EXTERNAL_INPUTS": "داده یا وه دری",
 	"INLINE_INPUTS": "داده یا مئنجا",
+	"DELETE_BLOCK": "پاکسا کردن برشت",
 	"HELP": "هومياری",
+	"ME": "مه",
 	"CHANGE_VALUE_TITLE": "ارزشت آلشت کو:",
+	"NEW_VARIABLE": "آلشتگر تازه...",
 	"COLOUR_PICKER_HELPURL": "https://en.wikipedia.org/wiki/Color",
 	"COLOUR_PICKER_TOOLTIP": "یه رن د رنگ دو انتخاو بکید",
 	"COLOUR_RANDOM_TITLE": "رن بختکی",

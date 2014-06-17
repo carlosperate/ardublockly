@@ -6,7 +6,8 @@
 			"Mordecaista",
 			"Amgauna",
 			"TheGabrielZaum",
-			"Cainamarques"
+			"Cainamarques",
+			"Tuliouel"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "item",
@@ -296,9 +297,9 @@
 	"PROCEDURES_CALLRETURN_HELPURL": "https://pt.wikipedia.org/wiki/Sub-rotina",
 	"PROCEDURES_CALLRETURN_TOOLTIP": "Executa a função definida pelo usuário \"%1\" e usa seu retorno.",
 	"PROCEDURES_MUTATORCONTAINER_TITLE": "entradas",
-	"PROCEDURES_MUTATORCONTAINER_TOOLTIP": "Adicione, remova, ou reordene as entradas para esta função.",
+	"PROCEDURES_MUTATORCONTAINER_TOOLTIP": "Adiciona, remove, ou reordena as entradas para esta função.",
 	"PROCEDURES_MUTATORARG_TITLE": "nome da entrada:",
-	"PROCEDURES_MUTATORARG_TOOLTIP": "Adicione uma entrada para esta função",
+	"PROCEDURES_MUTATORARG_TOOLTIP": "Adiciona uma entrada para esta função",
 	"PROCEDURES_HIGHLIGHT_DEF": "Destacar definição da função",
 	"PROCEDURES_CREATE_DO": "Criar \"%1\"",
 	"PROCEDURES_IFRETURN_TOOLTIP": "Se um valor é verdadeiro, então retorna um valor.",
