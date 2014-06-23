@@ -286,6 +286,7 @@
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Crea una funzione senza output.",
 	"PROCEDURES_DEFRETURN_RETURN": "ritorna",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Crea una funzione con un output.",
+	"PROCEDURES_ALLOW_STATEMENTS": "consenti dichiarazioni",
 	"PROCEDURES_DEF_DUPLICATE_WARNING": "Attenzioneː Questa funzione ha parametri duplicati.",
 	"PROCEDURES_CALLNORETURN_HELPURL": "https://it.wikipedia.org/wiki/Funzione_(informatica)",
 	"PROCEDURES_CALLNORETURN_TOOLTIP": "Esegue la funzione definita dall'utente '%1'.",

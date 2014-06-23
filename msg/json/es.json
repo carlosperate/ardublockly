@@ -286,6 +286,7 @@
 	"PROCEDURES_DEFNORETURN_TOOLTIP": "Crea una función sin salida.",
 	"PROCEDURES_DEFRETURN_RETURN": "devuelve",
 	"PROCEDURES_DEFRETURN_TOOLTIP": "Crea una función con una salida.",
+	"PROCEDURES_ALLOW_STATEMENTS": "permitir declaraciones",
 	"PROCEDURES_DEF_DUPLICATE_WARNING": "Advertencia: Esta función tiene parámetros duplicados.",
 	"PROCEDURES_CALLNORETURN_HELPURL": "https://es.wikipedia.org/wiki/Subrutina",
 	"PROCEDURES_CALLNORETURN_TOOLTIP": "Ejecuta la función definida por el usuario '%1'.",
