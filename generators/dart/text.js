@@ -246,10 +246,26 @@ Blockly.Dart['text_print'] = function(block) {
 };
 
 Blockly.Dart['text_prompt'] = function(block) {
-  // Prompt function.
+  // Prompt function (internal message).
   Blockly.Dart.definitions_['import_dart_html'] =
       'import \'dart:html\' as Html;';
   var msg = Blockly.Dart.quote_(block.getFieldValue('TEXT'));
+  var code = 'Html.window.prompt(' + msg + ', \'\')';
+  var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
+  if (toNumber) {
+    Blockly.Dart.definitions_['import_dart_math'] =
+        'import \'dart:math\' as Math;';
+    code = 'Math.parseDouble(' + code + ')';
+  }
+  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+};
+
+Blockly.Dart['text_prompt_ext'] = function(block) {
+  // Prompt function (external message).
+  Blockly.Dart.definitions_['import_dart_html'] =
+      'import \'dart:html\' as Html;';
+  var msg = Blockly.Dart.valueToCode(block, 'TEXT',
+      Blockly.Dart.ORDER_NONE) || '\'\'';
   var code = 'Html.window.prompt(' + msg + ', \'\')';
   var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
   if (toNumber) {

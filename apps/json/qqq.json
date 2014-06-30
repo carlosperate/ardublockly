@@ -12,7 +12,7 @@
 	"Apps.catLoops": "category - Blocks related to [https://en.wikipedia.org/wiki/Control_flow#Loops loops].",
 	"Apps.catMath": "category - Blocks related to mathematics.",
 	"Apps.catText": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Text text processing].\n{{Identical|Text}}",
-	"Apps.catLists": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Lists lists].\n{{Identical|Colour}}",
+	"Apps.catLists": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Lists lists].\n{{Identical|Lists}}",
 	"Apps.catColour": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Colour colour].\n{{Identical|Colour}}",
 	"Apps.catVariables": "category - Blocks related to [https://code.google.com/p/blockly/wiki/Variables variables].",
 	"Apps.catProcedures": "category - Blocks related to [https://en.wikipedia.org/wiki/Subroutine defining or using procedures/functions].",

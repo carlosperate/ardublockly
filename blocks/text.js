@@ -569,7 +569,7 @@ Blockly.Blocks['text_print'] = {
 
 Blockly.Blocks['text_prompt'] = {
   /**
-   * Block for prompt function.
+   * Block for prompt function (internal message).
    * @this Blockly.Block
    */
   init: function() {
@@ -602,4 +602,37 @@ Blockly.Blocks['text_prompt'] = {
     });
   },
   newQuote_: Blockly.Blocks['text'].newQuote_
+};
+
+Blockly.Blocks['text_prompt_ext'] = {
+  /**
+   * Block for prompt function (external message).
+   * @this Blockly.Block
+   */
+  init: function() {
+    var TYPES =
+        [[Blockly.Msg.TEXT_PROMPT_TYPE_TEXT, 'TEXT'],
+         [Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER, 'NUMBER']];
+    // Assign 'this' to a variable for use in the closure below.
+    var thisBlock = this;
+    this.setHelpUrl(Blockly.Msg.TEXT_PROMPT_HELPURL);
+    this.setColour(160);
+    var dropdown = new Blockly.FieldDropdown(TYPES, function(newOp) {
+      if (newOp == 'NUMBER') {
+        thisBlock.changeOutput('Number');
+      } else {
+        thisBlock.changeOutput('String');
+      }
+    });
+    this.appendValueInput('TEXT')
+        .appendField(dropdown, 'TYPE');
+    this.setOutput(true, 'String');
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      return (thisBlock.getFieldValue('TYPE') == 'TEXT') ?
+          Blockly.Msg.TEXT_PROMPT_TOOLTIP_TEXT :
+          Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER;
+    });
+  }
 };

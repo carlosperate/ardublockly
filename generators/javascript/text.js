@@ -233,8 +233,20 @@ Blockly.JavaScript['text_print'] = function(block) {
 };
 
 Blockly.JavaScript['text_prompt'] = function(block) {
-  // Prompt function.
+  // Prompt function (internal message).
   var msg = Blockly.JavaScript.quote_(block.getFieldValue('TEXT'));
+  var code = 'window.prompt(' + msg + ')';
+  var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
+  if (toNumber) {
+    code = 'parseFloat(' + code + ')';
+  }
+  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+};
+
+Blockly.JavaScript['text_prompt_ext'] = function(block) {
+  // Prompt function (external message).
+  var msg = Blockly.JavaScript.valueToCode(block, 'TEXT',
+      Blockly.JavaScript.ORDER_NONE) || '\'\'';
   var code = 'window.prompt(' + msg + ')';
   var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
   if (toNumber) {
