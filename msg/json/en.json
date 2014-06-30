@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2014-06-12 20:21:58.850541",
+		"lastupdated": "2014-06-30 14:33:15.750510",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -51,7 +51,7 @@
 	"CONTROLS_REPEAT_TITLE_TIMES": "times",
 	"CONTROLS_REPEAT_INPUT_DO": "do",
 	"CONTROLS_REPEAT_TOOLTIP": "Do some statements several times.",
-	"CONTROLS_WHILEUNTIL_HELPURL": "https://code.google.com/p/blockly/wiki/Repeat",
+	"CONTROLS_WHILEUNTIL_HELPURL": "https://code.google.com/p/blockly/wiki/Loops#repeat",
 	"CONTROLS_WHILEUNTIL_OPERATOR_WHILE": "repeat while",
 	"CONTROLS_WHILEUNTIL_OPERATOR_UNTIL": "repeat until",
 	"CONTROLS_WHILEUNTIL_TOOLTIP_WHILE": "While a value is true, then do some statements.",
@@ -94,7 +94,7 @@
 	"LOGIC_OPERATION_AND": "and",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Return true if at least one of the inputs is true.",
 	"LOGIC_OPERATION_OR": "or",
-	"LOGIC_NEGATE_HELPURL": "https://code.google.com/p/blockly/wiki/Not",
+	"LOGIC_NEGATE_HELPURL": "https://en.wikipedia.org/wiki/Negation",
 	"LOGIC_NEGATE_TITLE": "not %1",
 	"LOGIC_NEGATE_TOOLTIP": "Returns true if the input is false.  Returns false if the input is true.",
 	"LOGIC_BOOLEAN_HELPURL": "https://code.google.com/p/blockly/wiki/True_False",

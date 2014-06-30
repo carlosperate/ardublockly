@@ -28,7 +28,6 @@
 Blockly.Blocks['maze_moveForward'] = {
   // Block for moving forward.
   init: function() {
-    this.setHelpUrl('http://code.google.com/p/blockly/wiki/Move');
     this.setColour(290);
     this.appendDummyInput()
         .appendField(BlocklyApps.getMsg('Maze_moveForward'));
@@ -52,7 +51,6 @@ Blockly.Blocks['maze_turn'] = {
     // Append arrows to direction messages.
     DIRECTIONS[0][0] += ' \u21BA';
     DIRECTIONS[1][0] += ' \u21BB';
-    this.setHelpUrl('http://code.google.com/p/blockly/wiki/Turn');
     this.setColour(290);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(DIRECTIONS), 'DIR');
@@ -136,7 +134,6 @@ Blockly.JavaScript['maze_ifElse'] = function(block) {
 Blockly.Blocks['maze_forever'] = {
   // Block for forever loop.
   init: function() {
-    this.setHelpUrl('http://code.google.com/p/blockly/wiki/Repeat');
     this.setColour(120);
     this.appendDummyInput()
         .appendField(BlocklyApps.getMsg('Maze_repeatUntil'))
