@@ -141,7 +141,7 @@ function updateLanguage() {
  * @private
  */
 function connectionLine_(functionName, typeName) {
-  var type = getOptTypesFrom(rootBlock, typeName);
+  var type = getOptTypesFrom(getRootBlock(), typeName);
   if (type) {
     type = ', ' + type;
   }
