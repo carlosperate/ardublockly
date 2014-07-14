@@ -530,7 +530,8 @@ Maze.init = function() {
 
   var defaultXml =
       '<xml>' +
-      '  <block type="maze_moveForward" x="70" y="70"></block>' +
+      '  <block movable="' + (Maze.LEVEL != 1) + '" type="maze_moveForward" ' +
+      'x="70" y="70"></block>' +
       '</xml>';
   BlocklyApps.loadBlocks(defaultXml);
 
