@@ -35,16 +35,13 @@ Blockly.Arduino = new Blockly.Generator('Arduino');
  * This is not intended to be a security feature.  Blockly is 100% client-side,
  * so bypassing this list is trivial.  This is intended to prevent users from
  * accidentally clobbering a built-in object or function.
+ * Arduino specific keywords defined in: http://arduino.cc/en/Reference/HomePage
  * @private
  */
-if (!Blockly.Arduino.RESERVED_WORDS_) {
-  Blockly.Arduino.RESERVED_WORDS_ = '';
-}
+Blockly.Arduino.addReservedWords(
+    'Blockly,' +  // In case JS is evaled in the current window.
+    'setup,loop,if,else,for,switch,case,while,do,break,continue,return,goto,define,include,HIGH,LOW,INPUT,OUTPUT,INPUT_PULLUP,true,false,interger, constants,floating,point,void,bookean,char,unsigned,byte,int,word,long,float,double,string,String,array,static, volatile,const,sizeof,pinMode,digitalWrite,digitalRead,analogReference,analogRead,analogWrite,tone,noTone,shiftOut,shitIn,pulseIn,millis,micros,delay,delayMicroseconds,min,max,abs,constrain,map,pow,sqrt,sin,cos,tan,randomSeed,random,lowByte,highByte,bitRead,bitWrite,bitSet,bitClear,bit,attachInterrupt,detachInterrupt,interrupts,noInterrupts');
 
-Blockly.Arduino.RESERVED_WORDS_ +=
-    // http://arduino.cc/en/Reference/HomePage
-'setup,loop,if,else,for,switch,case,while,do,break,continue,return,goto,define,include,HIGH,LOW,INPUT,OUTPUT,INPUT_PULLUP,true,false,interger, constants,floating,point,void,bookean,char,unsigned,byte,int,word,long,float,double,string,String,array,static, volatile,const,sizeof,pinMode,digitalWrite,digitalRead,analogReference,analogRead,analogWrite,tone,noTone,shiftOut,shitIn,pulseIn,millis,micros,delay,delayMicroseconds,min,max,abs,constrain,map,pow,sqrt,sin,cos,tan,randomSeed,random,lowByte,highByte,bitRead,bitWrite,bitSet,bitClear,bit,attachInterrupt,detachInterrupt,interrupts,noInterrupts'
-;
 
 /**
  * Order of operation ENUMs.
@@ -135,10 +132,11 @@ Blockly.Arduino.finish = function(code) {
   // Indent every line.
   code = '  ' + code.replace(/\n/g, '\n  ');
   code = code.replace(/\n\s+$/, '\n');
-  code = 'void loop() \n{\n' + code + '\n}';
+  code = 'void loop() {\n' + code + '}';
 
   // Convert the definitions dictionary into a list.
-  var imports = ["#include <BehindTheWire.h>\n"];
+  var imports = [];
+  //var imports = ["#include <BehindTheWire.h>\n"];
   var definitions = [];
   for (var name in Blockly.Arduino.definitions_) {
     var def = Blockly.Arduino.definitions_[name];
@@ -155,7 +153,7 @@ Blockly.Arduino.finish = function(code) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
   
-  var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n') + '\nvoid setup() \n{\n  '+setups.join('\n  ') + '\n}'+ '\n\n';
+  var allDefs = imports.join('\n') + definitions.join('\n') + '\nvoid setup() {\n  '+setups.join('\n  ') + '\n}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
@@ -205,7 +203,7 @@ Blockly.Arduino.scrub_ = function(block, code) {
     // Collect comment for this block.
     var comment = block.getCommentText();
     if (comment) {
-      commentCode += Blockly.Generator.prefixLines(comment, '// ') + '\n';
+      commentCode += this.prefixLines(comment, '// ') + '\n';
     }
     // Collect comments for all value arguments.
     // Don't collect comments for nested statements.
@@ -213,9 +211,9 @@ Blockly.Arduino.scrub_ = function(block, code) {
       if (block.inputList[x].type == Blockly.INPUT_VALUE) {
         var childBlock = block.inputList[x].connection.targetBlock();
         if (childBlock) {
-          var comment = Blockly.Generator.allNestedComments(childBlock);
+          var comment = this.allNestedComments(childBlock);
           if (comment) {
-            commentCode += Blockly.Generator.prefixLines(comment, '// ');
+            commentCode += this.prefixLines(comment, '// ');
           }
         }
       }
