@@ -203,7 +203,7 @@ Blockly.Arduino.scrub_ = function(block, code) {
     // Collect comment for this block.
     var comment = block.getCommentText();
     if (comment) {
-      commentCode += this.prefixLines(comment, '// ') + '\n';
+      commentCode += Blockly.Generator.prefixLines(comment, '// ') + '\n';
     }
     // Collect comments for all value arguments.
     // Don't collect comments for nested statements.
@@ -211,9 +211,9 @@ Blockly.Arduino.scrub_ = function(block, code) {
       if (block.inputList[x].type == Blockly.INPUT_VALUE) {
         var childBlock = block.inputList[x].connection.targetBlock();
         if (childBlock) {
-          var comment = this.allNestedComments(childBlock);
+          var comment = Blockly.Generator.allNestedComments(childBlock);
           if (comment) {
-            commentCode += this.prefixLines(comment, '// ');
+            commentCode += Blockly.Generator.prefixLines(comment, '// ');
           }
         }
       }
