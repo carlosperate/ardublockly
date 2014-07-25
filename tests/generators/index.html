@@ -14,6 +14,16 @@
 <script type="text/javascript" src="../../generators/javascript/colour.js"></script>
 <script type="text/javascript" src="../../generators/javascript/variables.js"></script>
 <script type="text/javascript" src="../../generators/javascript/procedures.js"></script>
+<script type="text/javascript" src="../../generators/arduino.js"></script>
+<!--script type="text/javascript" src="unittest_arduino.js"></script-->
+<script type="text/javascript" src="../../generators/arduino/logic.js"></script>
+<script type="text/javascript" src="../../generators/arduino/loops.js"></script>
+<script type="text/javascript" src="../../generators/arduino/math.js"></script>
+<script type="text/javascript" src="../../generators/arduino/text.js"></script>
+<script type="text/javascript" src="../../generators/arduino/lists.js"></script>
+<script type="text/javascript" src="../../generators/arduino/colour.js"></script>
+<script type="text/javascript" src="../../generators/arduino/variables.js"></script>
+<script type="text/javascript" src="../../generators/arduino/procedures.js"></script>
 <script type="text/javascript" src="../../generators/python.js"></script>
 <script type="text/javascript" src="unittest_python.js"></script>
 <script type="text/javascript" src="../../generators/python/logic.js"></script>
@@ -112,6 +122,12 @@ function toXml() {
   var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
   setOutput(xmlText);
+}
+
+function toArduino() {
+  var code = '\'use strict\';\n\n'
+  code += Blockly.Arduino.workspaceToCode();
+  setOutput(code);
 }
 
 function toJavaScript() {
@@ -366,6 +382,7 @@ h1 {
     <p>
       Generate:
       <input type="button" value="XML" onclick="toXml()">
+      <input type="button" value="Arduino" onclick="toArduino()">
       <input type="button" value="JavaScript" onclick="toJavaScript()">
       <input type="button" value="Python" onclick="toPython()">
       <input type="button" value="Dart" onclick="toDart()">
