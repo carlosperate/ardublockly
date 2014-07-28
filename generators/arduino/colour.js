@@ -1,8 +1,9 @@
 /**
+ * @license
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://blockly.googlecode.com/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,36 +19,47 @@
  */
 
 /**
- * @fileoverview Generating Dart for colour blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Generating Arduino for colour blocks.
  */
 'use strict';
 
-Blockly.Dart = Blockly.Generator.get('Dart');
+goog.provide('Blockly.JavaScript.colour');
 
-Blockly.Dart.addReservedWords('Math');
+goog.require('Blockly.JavaScript');
 
-Blockly.Dart.colour_picker = function() {
+Blockly.Arduino.colour_picker = function() {
   // Colour picker.
-  var code = '\'' + this.getTitleValue('COLOUR') + '\'';
-  return [code, Blockly.Dart.ORDER_ATOMIC];
+  var code = '\'' + block.getFieldValue('COLOUR') + '\'';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Dart.colour_rgb = function() {
-  // Compose a colour from RGB components.
-  var red = Blockly.Dart.valueToCode(this, 'RED',
-      Blockly.Dart.ORDER_NONE) || 0;
-  var green = Blockly.Dart.valueToCode(this, 'GREEN',
-      Blockly.Dart.ORDER_NONE) || 0;
-  var blue = Blockly.Dart.valueToCode(this, 'BLUE',
-      Blockly.Dart.ORDER_NONE) || 0;
+Blockly.Arduino['colour_random'] = function(block) {
+  // Generate a random colour.
+  var functionName = Blockly.Arduino.provideFunction_(
+      'colour_random',
+      [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '() {',
+        '  var num = Math.floor(Math.random() * Math.pow(2, 24));',
+        '  return \'#\' + (\'00000\' + num.toString(16)).substr(-6);',
+        '}']);
+  var code = functionName + '()';
+  return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+};
 
-  if (!Blockly.Dart.definitions_['colour_rgb']) {
-    Blockly.Dart.definitions_['import_dart_math'] =
-        'import \'dart:math\' as Math;';
-    var functionName = Blockly.Dart.variableDB_.getDistinctName(
+Blockly.Arduino['colour_rgb'] = function(block) {
+  // Compose a colour from RGB components.
+  var red = Blockly.Arduino.valueToCode(block, 'RED',
+      Blockly.Arduino.ORDER_NONE) || 0;
+  var green = Blockly.Arduino.valueToCode(block, 'GREEN',
+      Blockly.Arduino.ORDER_NONE) || 0;
+  var blue = Blockly.Arduino.valueToCode(block, 'BLUE',
+      Blockly.Arduino.ORDER_NONE) || 0;
+
+  if (!Blockly.Arduino.definitions_['colour_rgb']) {
+    Blockly.Arduino.definitions_['import_arduino_math'] =
+        'import \'arduino:math\' as Math;';
+    var functionName = Blockly.Arduino.variableDB_.getDistinctName(
         'colour_rgb', Blockly.Generator.NAME_TYPE);
-    Blockly.Dart.colour_rgb.functionName = functionName;
+    Blockly.Arduino.colour_rgb.functionName = functionName;
     var func = [];
     func.push('String ' + functionName + '(r, g, b) {');
     func.push('  String rs = (Math.max(Math.min(r, 1), 0) * 255).round()' +
@@ -64,37 +76,37 @@ Blockly.Dart.colour_rgb = function() {
     func.push('  bs = bs.substring(bs.length - 2);');
     func.push('  return \'#$rs$gs$bs\';');
     func.push('}');
-    Blockly.Dart.definitions_['colour_rgb'] = func.join('\n');
+    Blockly.Arduino.definitions_['colour_rgb'] = func.join('\n');
   }
-  var code = Blockly.Dart.colour_rgb.functionName +
+  var code = Blockly.Arduino.colour_rgb.functionName +
       '(' + red + ', ' + green + ', ' + blue + ')';
-  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Dart.colour_blend = function() {
+Blockly.Arduino['colour_blend'] = function(block) {
   // Blend two colours together.
-  var c1 = Blockly.Dart.valueToCode(this, 'COLOUR1',
-      Blockly.Dart.ORDER_NONE) || '\'#000000\'';
-  var c2 = Blockly.Dart.valueToCode(this, 'COLOUR2',
-      Blockly.Dart.ORDER_NONE) || '\'#000000\'';
-  var ratio = Blockly.Dart.valueToCode(this, 'RATIO',
-      Blockly.Dart.ORDER_NONE) || 0.5;
+  var c1 = Blockly.Arduino.valueToCode(block, 'COLOUR1',
+      Blockly.Arduino.ORDER_NONE) || '\'#000000\'';
+  var c2 = Blockly.Arduino.valueToCode(block, 'COLOUR2',
+      Blockly.Arduino.ORDER_NONE) || '\'#000000\'';
+  var ratio = Blockly.Arduino.valueToCode(block, 'RATIO',
+      Blockly.Arduino.ORDER_NONE) || 0.5;
 
-  if (!Blockly.Dart.definitions_['colour_blend']) {
-    Blockly.Dart.definitions_['import_dart_math'] =
-        'import \'dart:math\' as Math;';
-    var functionName = Blockly.Dart.variableDB_.getDistinctName(
+  if (!Blockly.Arduino.definitions_['colour_blend']) {
+    Blockly.Arduino.definitions_['import_arduino_math'] =
+        'import \'arduino:math\' as Math;';
+    var functionName = Blockly.Arduino.variableDB_.getDistinctName(
         'colour_blend', Blockly.Generator.NAME_TYPE);
-    Blockly.Dart.colour_blend.functionName = functionName;
+    Blockly.Arduino.colour_blend.functionName = functionName;
     var func = [];
     func.push('String ' + functionName + '(c1, c2, ratio) {');
     func.push('  ratio = Math.max(Math.min(ratio, 1), 0);');
-    func.push('  int r1 = int.parse(\'0x${c1.substring(1, 3)}\');');
-    func.push('  int g1 = int.parse(\'0x${c1.substring(3, 5)}\');');
-    func.push('  int b1 = int.parse(\'0x${c1.substring(5, 7)}\');');
-    func.push('  int r2 = int.parse(\'0x${c2.substring(1, 3)}\');');
-    func.push('  int g2 = int.parse(\'0x${c2.substring(3, 5)}\');');
-    func.push('  int b2 = int.parse(\'0x${c2.substring(5, 7)}\');');
+    func.push('  int r1 = parseInt(\'0x${c1.substring(1, 3)}\');');
+    func.push('  int g1 = parseInt(\'0x${c1.substring(3, 5)}\');');
+    func.push('  int b1 = parseInt(\'0x${c1.substring(5, 7)}\');');
+    func.push('  int r2 = parseInt(\'0x${c2.substring(1, 3)}\');');
+    func.push('  int g2 = parseInt(\'0x${c2.substring(3, 5)}\');');
+    func.push('  int b2 = parseInt(\'0x${c2.substring(5, 7)}\');');
     func.push('  String rs = (r1 * (1 - ratio) + r2 * ratio).round()' +
               '.toRadixString(16);');
     func.push('  String gs = (g1 * (1 - ratio) + g2 * ratio).round()' +
@@ -109,9 +121,9 @@ Blockly.Dart.colour_blend = function() {
     func.push('  bs = bs.substring(bs.length - 2);');
     func.push('  return \'#$rs$gs$bs\';');
     func.push('}');
-    Blockly.Dart.definitions_['colour_blend'] = func.join('\n');
+    Blockly.Arduino.definitions_['colour_blend'] = func.join('\n');
   }
-  var code = Blockly.Dart.colour_blend.functionName +
+  var code = Blockly.Arduino.colour_blend.functionName +
       '(' + c1 + ', ' + c2 + ', ' + ratio + ')';
-  return [code, Blockly.Dart.ORDER_UNARY_POSTFIX];
+  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
