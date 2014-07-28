@@ -1,8 +1,9 @@
 /**
+ * @license
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://blockly.googlecode.com/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,32 +20,38 @@
 
 /**
  * @fileoverview Generating Arduino for math blocks.
- * @author gasolin@gmail.com  (Fred Lin)
  */
 'use strict';
 
-Blockly.Arduino = Blockly.Generator.get('Arduino');
+goog.provide('Blockly.Arduino.math');
+
+goog.require('Blockly.Arduino');
 
 
-Blockly.Arduino.math_number = function() {
+Blockly.Arduino['math_number'] = function(block) {
   // Numeric value.
-  var code = window.parseFloat(this.getTitleValue('NUM'));
-  // -4.abs() returns -4 in Dart due to strange order of operation choices.
-  // -4 is actually an operator and a number.  Reflect this in the order.
-  var order = code < 0 ?
-      Blockly.Arduino.ORDER_UNARY_PREFIX : Blockly.Arduino.ORDER_ATOMIC;
-  return [code, order];
+  var code = parseFloat(block.getFieldValue('NUM'));
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.math_arithmetic = function() {
+Blockly.Arduino['math_arithmetic'] = function(block) {
   // Basic arithmetic operators, and power.
-  var mode = this.getTitleValue('OP');
-  var tuple = Blockly.Arduino.math_arithmetic.OPERATORS[mode];
+  //TODO: determine if the next line is needed
+  //var mode = this.getTitleValue('OP');
+  var OPERATORS = {
+    ADD: [' + ', Blockly.Arduino.ORDER_ADDITIVE],
+    MINUS: [' - ', Blockly.Arduino.ORDER_ADDITIVE],
+    MULTIPLY: [' * ', Blockly.Arduino.ORDER_MULTIPLICATIVE],
+    DIVIDE: [' / ', Blockly.Arduino.ORDER_MULTIPLICATIVE],
+    POWER: [null, Blockly.Arduino.ORDER_NONE]  // Handle power separately.
+  };
+  var tuple = OPERATORS[block.getFieldValue('OP')];
   var operator = tuple[0];
   var order = tuple[1];
-  var argument0 = Blockly.Arduino.valueToCode(this, 'A', order) || '0';
-  var argument1 = Blockly.Arduino.valueToCode(this, 'B', order) || '0';
+  var argument0 = Blockly.Arduino.valueToCode(block, 'A', order) || '0';
+  var argument1 = Blockly.Arduino.valueToCode(block, 'B', order) || '0';
   var code;
+  // Power in C++ requires a special case since it has no operator.
   if (!operator) {
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
     return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
@@ -53,84 +60,66 @@ Blockly.Arduino.math_arithmetic = function() {
   return [code, order];
 };
 
-Blockly.Arduino.math_arithmetic.OPERATORS = {
-  ADD: [' + ', Blockly.Arduino.ORDER_ADDITIVE],
-  MINUS: [' - ', Blockly.Arduino.ORDER_ADDITIVE],
-  MULTIPLY: [' * ', Blockly.Arduino.ORDER_MULTIPLICATIVE],
-  DIVIDE: [' / ', Blockly.Arduino.ORDER_MULTIPLICATIVE],
-  POWER: [null, Blockly.Arduino.ORDER_NONE]  // Handle power separately.
-};
-
-Blockly.Arduino.math_change = function() {
-  // Add to a variable in place.
-  var argument0 = Blockly.Arduino.valueToCode(this, 'DELTA',
-      Blockly.Arduino.ORDER_ADDITIVE) || '0';
-  var varName = Blockly.Arduino.variableDB_.getName(this.getTitleValue('VAR'),
-      Blockly.Variables.NAME_TYPE);
-  return varName + ' = (' + varName + ' is num ? ' + varName + ' : 0) + ' +
-      argument0 + ';\n';
-};
-
-Blockly.Arduino.math_single = function() {
+Blockly.Arduino['math_single'] = function(block) {
   // Math operators with single operand.
-  var operator = this.getTitleValue('OP');
+  var operator = block.getFieldValue('OP');
   var code;
   var arg;
   if (operator == 'NEG') {
     // Negation is a special case given its different operator precedents.
-    arg = Blockly.Arduino.valueToCode(this, 'NUM',
+    arg = Blockly.Arduino.valueToCode(block, 'NUM',
         Blockly.Arduino.ORDER_UNARY_PREFIX) || '0';
     if (arg[0] == '-') {
-      // --3 is not legal in Dart.
+      // --3 is not legal in C++ in this context.
       arg = ' ' + arg;
     }
     code = '-' + arg;
     return [code, Blockly.Arduino.ORDER_UNARY_PREFIX];
   }
   if (operator == 'ABS' || operator.substring(0, 5) == 'ROUND') {
-    arg = Blockly.Arduino.valueToCode(this, 'NUM',
+    arg = Blockly.Arduino.valueToCode(block, 'NUM',
         Blockly.Arduino.ORDER_UNARY_POSTFIX) || '0';
   } else if (operator == 'SIN' || operator == 'COS' || operator == 'TAN') {
-    arg = Blockly.Arduino.valueToCode(this, 'NUM',
+    arg = Blockly.Arduino.valueToCode(block, 'NUM',
         Blockly.Arduino.ORDER_MULTIPLICATIVE) || '0';
   } else {
-    arg = Blockly.Arduino.valueToCode(this, 'NUM',
+    arg = Blockly.Arduino.valueToCode(block, 'NUM',
         Blockly.Arduino.ORDER_NONE) || '0';
   }
   // First, handle cases which generate values that don't need parentheses.
   switch (operator) {
     case 'ABS':
-      code = arg + '.abs()';
+      code = 'abs(' + arg + ')';
       break;
     case 'ROOT':
-      code = 'Math.sqrt(' + arg + ')';
+      code = 'sqrt(' + arg + ')';
       break;
     case 'LN':
-      code = 'Math.log(' + arg + ')';
+      code = 'log(' + arg + ')';
       break;
     case 'EXP':
-      code = 'Math.exp(' + arg + ')';
+      code = 'exp(' + arg + ')';
       break;
     case 'POW10':
-      code = 'Math.pow(10,' + arg + ')';
+      code = 'pow(10,' + arg + ')';
       break;
     case 'ROUND':
-      code = arg + '.round()';
+      code = 'round(' + arg + ')';
       break;
     case 'ROUNDUP':
-      code = arg + '.ceil()';
+      code = 'ceil(' + arg + ')';
       break;
     case 'ROUNDDOWN':
-      code = arg + '.floor()';
+      code = 'floor(' + arg + ')';
       break;
     case 'SIN':
-      code = 'Math.sin(' + arg + ' / 180 * Math.PI)';
+      code = 'sin(' + arg + ' / 180 * Math.PI)';
       break;
     case 'COS':
-      code = 'Math.cos(' + arg + ' / 180 * Math.PI)';
+      code = 'cos(' + arg + ' / 180 * Math.PI)';
       break;
     case 'TAN':
-      code = 'Math.tan(' + arg + ' / 180 * Math.PI)';
+      code = 'tan(' + arg + ' / 180 * Math.PI)';
       break;
   }
   if (code) {
@@ -139,16 +128,16 @@ Blockly.Arduino.math_single = function() {
   // Second, handle cases which generate values that may need parentheses.
   switch (operator) {
     case 'LOG10':
-      code = 'Math.log(' + arg + ') / Math.log(10)';
+      code = 'log(' + arg + ') / log(10)';
       break;
     case 'ASIN':
-      code = 'Math.asin(' + arg + ') / Math.PI * 180';
+      code = 'asin(' + arg + ') / M_PI * 180';
       break;
     case 'ACOS':
-      code = 'Math.acos(' + arg + ') / Math.PI * 180';
+      code = 'acos(' + arg + ') / M_PI * 180';
       break;
     case 'ATAN':
-      code = 'Math.atan(' + arg + ') / Math.PI * 180';
+      code = 'atan(' + arg + ') / M_PI * 180';
       break;
     default:
       throw 'Unknown math operator: ' + operator;
@@ -156,15 +145,101 @@ Blockly.Arduino.math_single = function() {
   return [code, Blockly.Arduino.ORDER_MULTIPLICATIVE];
 };
 
-// Rounding functions have a single operand.
-Blockly.Arduino.math_round = Blockly.Arduino.math_single;
-// Trigonometry functions have a single operand.
-Blockly.Arduino.math_trig = Blockly.Arduino.math_single;
+Blockly.Arduino['math_constant'] = function(block) {
+  //TODO: Might need to include "#define _USE_MATH_DEFINES"
+  //      The arduino header file already includes math.h
+  // Constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.
+  var CONSTANTS = {
+    'PI': ['M_PI', Blockly.Arduino.ORDER_UNARY_POSTFIX],
+    'E': ['M_E', Blockly.Arduino.ORDER_UNARY_POSTFIX],
+    'GOLDEN_RATIO': ['(1 + sqrt(5)) / 2', Blockly.Arduino.ORDER_MULTIPLICATIVE],
+    'SQRT2': ['M_SQRT2', Blockly.Arduino.ORDER_UNARY_POSTFIX],
+    'SQRT1_2': ['M_SQRT1_2', Blockly.Arduino.ORDER_UNARY_POSTFIX],
+    'INFINITY': ['INFINITY', Blockly.Arduino.ORDER_ATOMIC]
+  };
+  return CONSTANTS[block.getFieldValue('CONSTANT')];
+};
 
-Blockly.Arduino.math_on_list = function() {
+Blockly.Arduino['math_number_property'] = function(block) {
+  // Check if a number is even, odd, prime, whole, positive, or negative
+  // or if it is divisible by certain number. Returns true or false.
+  var number_to_check = Blockly.Arduino.valueToCode(block, 'NUMBER_TO_CHECK',
+      Blockly.Arduino.ORDER_MULTIPLICATIVE) || '0';
+  var dropdown_property = block.getFieldValue('PROPERTY');
+  var code;
+  if (dropdown_property == 'PRIME') {
+    //FIXME: this doesn't work yet
+    // Prime is a special case as it is not a one-liner test.
+    var functionName = Blockly.Arduino.provideFunction_(
+        'math_isPrime',
+        [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '(n) {',
+          '  // https://en.wikipedia.org/wiki/Primality_test#Naive_methods',
+          '  if (n == 2 || n == 3) {',
+          '    return true;',
+          '  }',
+          '  // False if n is NaN, negative, is 1, or not whole.',
+          '  // And false if n is divisible by 2 or 3.',
+          '  if (isNaN(n) || n <= 1 || n % 1 != 0 || n % 2 == 0 ||' +
+            ' n % 3 == 0) {',
+          '    return false;',
+          '  }',
+          '  // Check all the numbers of form 6k +/- 1, up to sqrt(n).',
+          '  for (int x = 6; x <= sqrt(n) + 1; x += 6) {',
+          '    if (n % (x - 1) == 0 || n % (x + 1) == 0) {',
+          '      return false;',
+          '    }',
+          '  }',
+          '  return true;',
+          '}']);
+    code = functionName + '(' + number_to_check + ')';
+    return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+  }
+  switch (dropdown_property) {
+    case 'EVEN':
+      code = number_to_check + ' % 2 == 0';
+      break;
+    case 'ODD':
+      code = number_to_check + ' % 2 == 1';
+      break;
+    case 'WHOLE':
+      code = number_to_check + ' % 1 == 0';
+      break;
+    case 'POSITIVE':
+      code = number_to_check + ' > 0';
+      break;
+    case 'NEGATIVE':
+      code = number_to_check + ' < 0';
+      break;
+    case 'DIVISIBLE_BY':
+      var divisor = Blockly.Arduino.valueToCode(block, 'DIVISOR',
+          Blockly.Arduino.ORDER_MULTIPLICATIVE) || '0';
+      code = number_to_check + ' % ' + divisor + ' == 0';
+      break;
+  }
+  return [code, Blockly.Arduino.ORDER_EQUALITY];
+};
+
+Blockly.Arduino['math_change'] = function(block) {
+  //TODO: update this
+  // Add to a variable in place.
+  var argument0 = Blockly.Arduino.valueToCode(block, 'DELTA',
+      Blockly.Arduino.ORDER_ADDITIVE) || '0';
+  var varName = Blockly.Arduino.variableDB_.getName(
+      block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
+  return varName + ' = (' + varName + ' is num ? ' + varName + 
+      ' : 0) + ' + argument0 + ';\n';
+};
+
+// Rounding functions have a single operand.
+Blockly.Arduino['math_round'] = Blockly.Arduino['math_single'];
+// Trigonometry functions have a single operand.
+Blockly.Arduino['math_trig'] = Blockly.Arduino['math_single'];
+
+Blockly.Arduino['math_on_list'] = function(block) {
+  //TODO: update this
   // Math functions for lists.
-  var func = this.getTitleValue('OP');
-  var list = Blockly.Arduino.valueToCode(this, 'LIST',
+  var func = block.getFieldValue('OP');
+  var list = Blockly.Arduino.valueToCode(block, 'LIST',
       Blockly.Arduino.ORDER_NONE) || '[]';
   var code;
   switch (func) {
@@ -347,34 +422,35 @@ Blockly.Arduino.math_on_list = function() {
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Arduino.math_constrain = function() {
-  // Constrain a number between two limits.
-  var argument0 = Blockly.Arduino.valueToCode(this, 'VALUE',
-      Blockly.Arduino.ORDER_NONE) || '0';
-  var argument1 = Blockly.Arduino.valueToCode(this, 'LOW',
-      Blockly.Arduino.ORDER_NONE) || '0';
-  var argument2 = Blockly.Arduino.valueToCode(this, 'HIGH',
-      Blockly.Arduino.ORDER_NONE) || '0';
-  var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' +
-	    argument2 + ')';
-  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
-};
-
-Blockly.Arduino.math_modulo = function() {
+Blockly.Arduino['math_modulo'] = function(block) {
   // Remainder computation.
-  var argument0 = Blockly.Arduino.valueToCode(this, 'DIVIDEND',
+  var argument0 = Blockly.Arduino.valueToCode(block, 'DIVIDEND',
       Blockly.Arduino.ORDER_MULTIPLICATIVE) || '0';
-  var argument1 = Blockly.Arduino.valueToCode(this, 'DIVISOR',
+  var argument1 = Blockly.Arduino.valueToCode(block, 'DIVISOR',
       Blockly.Arduino.ORDER_MULTIPLICATIVE) || '0';
   var code = argument0 + ' % ' + argument1;
   return [code, Blockly.Arduino.ORDER_MULTIPLICATIVE];
 };
 
-Blockly.Arduino.math_random_int = function() {
-  // Random integer between [X] and [Y].
-  var argument0 = Blockly.Arduino.valueToCode(this, 'FROM',
+Blockly.Arduino['math_constrain'] = function(block) {
+  // Constrain a number between two limits.
+  var argument0 = Blockly.Arduino.valueToCode(block, 'VALUE',
       Blockly.Arduino.ORDER_NONE) || '0';
-  var argument1 = Blockly.Arduino.valueToCode(this, 'TO',
+  var argument1 = Blockly.Arduino.valueToCode(block, 'LOW',
+      Blockly.Arduino.ORDER_NONE) || '0';
+  var argument2 = Blockly.Arduino.valueToCode(block, 'HIGH',
+      Blockly.Arduino.ORDER_NONE) || '0';
+  var code = 'Math.min(Math.max(' + argument0 + ', ' + argument1 + '), ' +
+      argument2 + ')';
+  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+};
+
+Blockly.Arduino['math_random_int'] = function(block) {
+  //TODO: update this
+  // Random integer between [X] and [Y].
+  var argument0 = Blockly.Arduino.valueToCode(block, 'FROM',
+      Blockly.Arduino.ORDER_NONE) || '0';
+  var argument1 = Blockly.Arduino.valueToCode(block, 'TO',
       Blockly.Arduino.ORDER_NONE) || '0';
   if (!Blockly.Arduino.definitions_['math_random_int']) {
     var functionName = Blockly.Arduino.variableDB_.getDistinctName(
@@ -397,7 +473,7 @@ Blockly.Arduino.math_random_int = function() {
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Arduino.math_random_float = function() {
+Blockly.Arduino['math_random_float'] = function(block) {
   // Random fraction between 0 and 1.
-  return ['Math.random()', Blockly.Arduino.ORDER_UNARY_POSTFIX];
+  return ['(rand() / RAND_MAX)', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
