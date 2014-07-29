@@ -20,7 +20,6 @@
 
 /**
  * @fileoverview Generating Arduino for loop blocks.
- * @author gasolin@gmail.com  (Fred Lin)
  */
 'use strict';
 
@@ -128,7 +127,7 @@ Blockly.Arduino['controls_for'] = function(block) {
     // changes during loop execution.
     var incVar = Blockly.Arduino.variableDB_.getDistinctName(
         variable0 + '_inc', Blockly.Variables.NAME_TYPE);
-    code += 'var ' + incVar + ' = ';
+    code += 'int ' + incVar + ' = ';
     if (Blockly.isNumber(increment)) {
       code += Math.abs(increment) + ';\n';
     } else {

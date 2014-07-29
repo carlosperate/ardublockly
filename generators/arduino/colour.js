@@ -23,9 +23,9 @@
  */
 'use strict';
 
-goog.provide('Blockly.JavaScript.colour');
+goog.provide('Blockly.Arduino.colour');
 
-goog.require('Blockly.JavaScript');
+goog.require('Blockly.Arduino');
 
 Blockly.Arduino.colour_picker = function() {
   // Colour picker.
