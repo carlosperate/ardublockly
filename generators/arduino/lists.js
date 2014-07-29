@@ -1,8 +1,9 @@
 /**
+ * @license
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * http://blockly.googlecode.com/
+ * https://blockly.googlecode.com/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,29 +20,31 @@
 
 /**
  * @fileoverview Generating Arduino for list blocks.
- * @author gasolin@gmail.com  (Fred Lin)
  */
 'use strict';
 
-Blockly.Arduino = Blockly.Generator.get('Arduino');
+goog.provide('Blockly.Arduino.lists');
 
-Blockly.Arduino.lists_create_empty = function() {
+goog.require('Blockly.Arduino');
+
+
+Blockly.Arduino['lists_create_empty'] = function(block) {
   // Create an empty list.
   return ['[]', Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.lists_create_with = function() {
+Blockly.Arduino['lists_create_with'] = function(block) {
   // Create a list with any number of elements of any type.
-  var code = new Array(this.itemCount_);
-  for (var n = 0; n < this.itemCount_; n++) {
-    code[n] = Blockly.Arduino.valueToCode(this, 'ADD' + n,
+  var code = new Array(block.itemCount_);
+  for (var n = 0; n < block.itemCount_; n++) {
+    code[n] = Blockly.Arduino.valueToCode(block, 'ADD' + n,
         Blockly.Arduino.ORDER_NONE) || 'null';
   }
-  var code = '[' + code.join(', ') + ']';
+  code = '[' + code.join(', ') + ']';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.lists_repeat = function() {
+Blockly.Arduino['lists_repeat'] = function(block) {
   // Create a list with one element repeated.
   if (!Blockly.Arduino.definitions_['lists_repeat']) {
     // Function adapted from Closure's goog.array.repeat.
@@ -58,48 +61,49 @@ Blockly.Arduino.lists_repeat = function() {
     func.push('}');
     Blockly.Arduino.definitions_['lists_repeat'] = func.join('\n');
   }
-  var argument0 = Blockly.Arduino.valueToCode(this, 'ITEM', true) || 'null';
-  var argument1 = Blockly.Arduino.valueToCode(this, 'NUM') || '0';
+  var argument0 = Blockly.Arduino.valueToCode(block, 'ITEM', true) || 'null';
+  var argument1 = Blockly.Arduino.valueToCode(block, 'NUM') || '0';
   var code = Blockly.Arduino.lists_repeat.repeat +
       '(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
-Blockly.Arduino.lists_length = function() {
+Blockly.Arduino['lists_length'] = function(block) {
   // Testing the length of a list is the same as for a string.
-  return Blockly.Arduino.text_length.call(this);
+  return Blockly.Arduino.text_length.call(block);
 };
 
-Blockly.Arduino.lists_isEmpty = function() {
+Blockly.Arduino['lists_isEmpty'] = function(block) {
   // Testing a list for being empty is the same as for a string.
-  return Blockly.Arduino.text_isEmpty.call(this);
+  return Blockly.Arduino.text_isEmpty.call(block);
 };
 
-Blockly.Arduino.lists_indexOf = function() {
+Blockly.Arduino['lists_indexOf'] = function(block) {
   // Searching a list for a value is the same as search for a substring.
-  return Blockly.Arduino.text_indexOf.call(this);
+  return Blockly.Arduino.text_indexOf.call(block);
 };
 
-Blockly.Arduino.lists_getIndex = function() {
+Blockly.Arduino['lists_getIndex'] = function(block) {
   // Indexing into a list is the same as indexing into a string.
-  return Blockly.Arduino.text_charAt.call(this);
+  return Blockly.Arduino.text_charAt.call(block);
 };
 
-Blockly.Arduino.lists_setIndex = function() {
+Blockly.Arduino['lists_setIndex'] = function(block) {
   // Set element at index.
-  var argument0 = Blockly.Arduino.valueToCode(this, 'AT',
+  //TODO: Need to add MODE and WHERE inputs.
+  var at = Blockly.Arduino.valueToCode(block, 'AT',
       Blockly.Arduino.ORDER_ADDITIVE) || '1';
-  var argument1 = Blockly.Arduino.valueToCode(this, 'LIST',
+  var list = Blockly.Arduino.valueToCode(block, 'LIST',
       Blockly.Arduino.ORDER_UNARY_POSTFIX) || '[]';
-  var argument2 = Blockly.Arduino.valueToCode(this, 'TO',
+  var value = Blockly.Arduino.valueToCode(block, 'TO',
       Blockly.Arduino.ORDER_ASSIGNMENT) || 'null';
   // Blockly uses one-based indicies.
-  if (argument0.match(/^\d+$/)) {
+  if (at.match(/^\d+$/)) {
     // If the index is a naked number, decrement it right now.
-    argument0 = parseInt(argument0, 10) - 1;
+    at = parseInt(at, 10) - 1;
   } else {
     // If the index is dynamic, decrement it in code.
-    argument0 += ' - 1';
+    at += ' - 1';
   }
-  return argument1 + '[' + argument0 + '] = ' + argument2 + ';\n';
+  return list + '[' + at + '] = ' + value + ';\n';
 };
