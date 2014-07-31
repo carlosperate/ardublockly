@@ -83,12 +83,9 @@ var profile = {
   //Behind the Wire Arduino profile
   arduino_btw: {
     description: "Arduino Behind The Wire",
-    digital : [["RedLight","RedLight"],["GreenLight","GreenLight"],["WhiteLight","WhiteLight"],["UpButton","UpButton"],["DownButton","DownButton"],["OnButton","OnButton"],["OffButton","OffButton"],["LeftButton","LeftButton"],["RightButton","RightButton"]],
-    analog : [["EngineLeft","EngineLeft"],["EngineRight","EngineRight"],["Throttle","Throttle"]],
-    nav_lights : [["Red (Left Wing)","RedLight"],["Green (Right Wing)","GreenLight"],["White (Tail)","WhiteLight"]],
-    buttons : [["Left","LeftButton"],["Right","RightButton"]],
-    rudder_angle: [["-45","-45"],["-30","-30"],["-15","-15"],["0","0"],["15","15"],["30","30"],["45","45"]],
-    engines : [["Engine Left","EngineLeft"],["Engine Right","EngineRight"]]
+    digital : [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
+    analog : [["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
+        serial : 9600
   }
 }
 //set default profile to arduino standard-compatible board
