@@ -22,17 +22,12 @@
  * @fileoverview Helper functions for generating Arduino blocks.
  * Originally developed by the author below and modified for Ardublockly
  * @author gasolin@gmail.com (Fred Lin)
+ * The Arduino built in functions syntax can be found in http://arduino.cc/en/Reference/HomePage
  */
 'use strict';
 
-//To support syntax defined in http://arduino.cc/en/Reference/HomePage
 
-goog.provide('Blockly.Arduino.loops');
-
-goog.require('Blockly.Arduino');
-
-
-Blockly.Language.base_map = {
+Blockly.Blocks['base_map'] = {
   category: 'Math',
   helpUrl: 'http://arduino.cc/en/Reference/map',
   init: function() {
@@ -44,60 +39,24 @@ Blockly.Language.base_map = {
         .appendTitle("value to [0-")
         .setCheck(Number);
     this.appendDummyInput("")
-	      .appendTitle("]");
+        .appendTitle("]");
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('Re-maps a number from [0-1024] to another.');
   }
 };
 
-
-//servo block
-//http://www.seeedstudio.com/depot/emax-9g-es08a-high-sensitive-mini-servo-p-760.html?cPath=170_171
-Blockly.Language.servo_move = {
-  category: 'Servo',
-  helpUrl: 'http://www.arduino.cc/playground/ComponentLib/servo',
-  init: function() {
-    this.setColour(190);
-    this.appendDummyInput("")
-        .appendTitle("Servo")
-        .appendTitle(new Blockly.FieldImage("http://www.seeedstudio.com/depot/images/product/a991.jpg", 64, 64))
-        .appendTitle("PIN#")
-        .appendTitle(new Blockly.FieldDropdown(profile.default.digital), "PIN")
-    this.appendValueInput("DEGREE", Number)
-        .setCheck(Number)
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle("Degree (0~180)");
-    this.appendValueInput("DELAY_TIME", Number)
-        .setCheck(Number)
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle("Delay");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setTooltip('move between 0~180 degree');
-  }
+Blockly.Arduino['base_map'] = function(block) {
+  var value_num = Blockly.Arduino.valueToCode(block, 'NUM', Blockly.Arduino.ORDER_NONE);
+  var value_dmax = Blockly.Arduino.valueToCode(block, 'DMAX', Blockly.Arduino.ORDER_ATOMIC);
+  var code = 'map('+value_num+', 0, 1024, 0, '+value_dmax+')';
+  return [code, Blockly.Arduino.ORDER_NONE];
 };
 
-Blockly.Language.servo_read_degrees = {
-  category: 'Servo',
-  helpUrl: 'http://www.arduino.cc/playground/ComponentLib/servo',
-  init: function() {
-    this.setColour(190);
-    this.appendDummyInput("")
-        .appendTitle("Servo")
-        .appendTitle(new Blockly.FieldImage("http://www.seeedstudio.com/depot/images/product/a991.jpg", 64, 64))
-        .appendTitle("PIN#")
-        .appendTitle(new Blockly.FieldDropdown(profile.default.digital), "PIN");
-    this.appendDummyInput("")
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendTitle("Read Degrees")
-    this.setOutput(true, Number);
-    this.setTooltip('return that degree with the last servo move.');
-  }
-};
 
-Blockly.Language.serial_print = {
-  category: 'In/Out',
+
+Blockly.Blocks['serial_print'] = {
+  category: 'Serial',
   helpUrl: 'http://www.arduino.cc/en/Serial/Print',
   init: function() {
     this.setColour(230);
@@ -109,64 +68,8 @@ Blockly.Language.serial_print = {
   }
 };
 
-
-// define generators
-Blockly.Arduino = Blockly.Generator.get('Arduino');
-
-Blockly.Arduino.base_map = function() {
-  var value_num = Blockly.Arduino.valueToCode(this, 'NUM', Blockly.Arduino.ORDER_NONE);
-  var value_dmax = Blockly.Arduino.valueToCode(this, 'DMAX', Blockly.Arduino.ORDER_ATOMIC);
-  var code = 'map('+value_num+', 0, 1024, 0, '+value_dmax+')';
-  return [code, Blockly.Arduino.ORDER_NONE];
-};
-
-/*
-//servo
-#include <Servo.h>
-
-Servo servo_11;
-
-void setup() { 
-  servo_11.attach(11);
-}
-
-void loop() { 
-servo_11.write(0);
-delay(2000);
-
-servo_11.write(150); //0~180
-delay(2000);
-}
-*/
-Blockly.Arduino.servo_move = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  var value_degree = Blockly.Arduino.valueToCode(this, 'DEGREE', Blockly.Arduino.ORDER_ATOMIC);
-  //value_degree = value_degree.replace('(','').replace(')','')
-  var delay_time = Blockly.Arduino.valueToCode(this, 'DELAY_TIME', Blockly.Arduino.ORDER_ATOMIC) || '1000'
-  //delay_time = delay_time.replace('(','').replace(')','');
-  
-  Blockly.Arduino.definitions_['define_servo'] = '#include <Servo.h>\n';
-  Blockly.Arduino.definitions_['var_servo'+dropdown_pin] = 'Servo servo_'+dropdown_pin+';\n';
-  Blockly.Arduino.setups_['setup_servo_'+dropdown_pin] = 'servo_'+dropdown_pin+'.attach('+dropdown_pin+');\n';
-  
-  var code = 'servo_'+dropdown_pin+'.write('+value_degree+');\n'+'delay(' + delay_time + ');\n';
-  return code;
-};
-
-Blockly.Arduino.servo_read_degrees = function() {
-  var dropdown_pin = this.getTitleValue('PIN');
-  
-  Blockly.Arduino.definitions_['define_servo'] = '#include &lt;Servo.h&gt;\n';
-  Blockly.Arduino.definitions_['var_servo'+dropdown_pin] = 'Servo servo_'+dropdown_pin+';\n';
-  Blockly.Arduino.setups_['setup_servo_'+dropdown_pin] = 'servo_'+dropdown_pin+'.attach('+dropdown_pin+');\n';
-  
-  var code = 'servo_'+dropdown_pin+'.read()';
-  return code;
-};
-
-Blockly.Arduino.serial_print = function() {
-  var content = Blockly.Arduino.valueToCode(this, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0'
-  //content = content.replace('(','').replace(')','');
+Blockly.Arduino['serial_print'] = function(block) {
+  var content = Blockly.Arduino.valueToCode(block, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0'
   
   Blockly.Arduino.setups_['setup_serial_'+profile.default.serial] = 'Serial.begin('+profile.default.serial+');\n';
   

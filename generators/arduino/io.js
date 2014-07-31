@@ -9,15 +9,14 @@
  * Description
  */
 Blockly.Blocks['io_digitalwrite'] = {
-  category: 'Input/Output',
   helpUrl: 'http://arduino.cc/en/Reference/DigitalWrite',
   init: function() {
     this.setColour(230);
     this.appendDummyInput("")
-        .appendTitle("DigitalWrite PIN#")
-        .appendTitle(new Blockly.FieldDropdown(profile.default.digital), "PIN")
-        .appendTitle("Stat")
-        .appendTitle(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), "STAT");
+        .appendField("DigitalWrite PIN#")
+        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN")
+        .appendField("Stat")
+        .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), "STAT");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Write digital value to a specific Port');
@@ -36,13 +35,12 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_digitalread'] = {
-  category: 'Input/Output',
   helpUrl: 'http://arduino.cc/en/Reference/DigitalRead',
   init: function() {
     this.setColour(230);
     this.appendDummyInput("")
-        .appendTitle("DigitalRead PIN#")
-        .appendTitle(new Blockly.FieldDropdown(profile.default.digital), "PIN");
+        .appendField("DigitalRead PIN#")
+        .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
     this.setOutput(true, Boolean);
     this.setTooltip('');
   }
@@ -60,13 +58,12 @@ Blockly.Arduino['io_digitalread'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_builtin_led'] = {
-  category: 'Input/Output',
   helpUrl: 'http://arduino.cc/en/Reference/DigitalWrite',
   init: function() {
     this.setColour(190);
     this.appendDummyInput("")
-        .appendTitle("Build-in LED Stat")
-        .appendTitle(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), "STAT");
+        .appendField("Build-in LED Stat")
+        .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), "STAT");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Turn on or off the built in LED');
@@ -84,15 +81,14 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_analogwrite'] = {
-  category: 'Input/Output',
   helpUrl: 'http://arduino.cc/en/Reference/AnalogWrite',
   init: function() {
     this.setColour(230);
     this.appendDummyInput("")
-        .appendTitle("AnalogWrite PIN#")
-        .appendTitle(new Blockly.FieldDropdown(profile.default.analog), "PIN");
+        .appendField("AnalogWrite PIN#")
+        .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN");
     this.appendValueInput("NUM", Number)
-        .appendTitle("value")
+        .appendField("value")
         .setCheck(Number);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -114,13 +110,12 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_analogread'] = {
-  category: 'Input/Output',
   helpUrl: 'http://arduino.cc/en/Reference/AnalogRead',
   init: function() {
     this.setColour(230);
     this.appendDummyInput("")
-        .appendTitle("AnalogRead PIN#")
-        .appendTitle(new Blockly.FieldDropdown(profile.default.analog), "PIN");
+        .appendField("AnalogRead PIN#")
+        .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN");
     this.setOutput(true, Number);
     this.setTooltip('Return value between 0 and 1024');
   }
@@ -137,14 +132,13 @@ Blockly.Arduino['io_analogread'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_highlow'] = {
-  category: 'Input/Output',
   helpUrl: 'http://arduino.cc/en/Reference/Constants',
   init: function() {
     this.setColour(230);
     this.appendDummyInput("")
-        .appendTitle(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), 'BOOL')
+        .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), 'BOOL')
     this.setOutput(true, Boolean);
-    this.setTooltip(Blockly.LANG_LOGIC_BOOLEAN_TOOLTIP_1);
+    this.setTooltip("Set a pin state logic High or Low");
   }
 };
 
