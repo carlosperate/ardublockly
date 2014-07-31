@@ -20,6 +20,7 @@
 
 /**
  * @fileoverview Generating Arduino for text blocks.
+ * Implements the Serial interface in Arduino: http://arduino.cc/en/Reference/Serial
  */
 'use strict';
 
@@ -294,6 +295,7 @@ Blockly.Arduino['text_prompt'] = function(block) {
   }
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
+
 Blockly.Arduino['text_prompt_ext'] = function(block) {
   // Prompt function (external message).
   var func = [];
