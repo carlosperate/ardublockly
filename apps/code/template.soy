@@ -29,6 +29,15 @@
   {call .messages /}
   <script type="text/javascript" src="../../blockly_compressed.js"></script>
   <script type="text/javascript" src="../../blocks_compressed.js"></script>
+  <script type="text/javascript" src="../../generators/arduino.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/colour.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/lists.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/logic.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/loops.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/math.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/procedures.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/text.js"></script>
+  <script type="text/javascript" src="../../generators/arduino/variables.js"></script>
   <script type="text/javascript" src="../../javascript_compressed.js"></script>
   <script type="text/javascript" src="../../python_compressed.js"></script>
   <script type="text/javascript" src="../../dart_compressed.js"></script>
@@ -55,6 +64,8 @@
         <table width="100%">
           <tr id="tabRow" height="1em">
             <td id="tab_blocks" class="tabon">{{msg meaning="Code.blocks" desc="tab text - Displays and allows editing of the user's program as blocks.\n{lb}{lb}Identical|Blocks{rb}{rb}"}}Blocks{{/msg}}</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_arduino" class="taboff">Arduino</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_javascript" class="taboff">JavaScript</td>
             <td class="tabmin">&nbsp;</td>
@@ -85,6 +96,7 @@
     </tr>
   </table>
   <div id="content_blocks" class="content"></div>
+  <pre id="content_arduino" class="content"></pre>
   <pre id="content_javascript" class="content"></pre>
   <pre id="content_python" class="content"></pre>
   <pre id="content_dart" class="content"></pre>
