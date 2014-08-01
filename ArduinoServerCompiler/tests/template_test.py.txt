@@ -1,0 +1,22 @@
+from __future__ import unicode_literals, absolute_import
+import unittest
+import ParentDirToSysPath
+from BlocklyServerCompiler.XXXX import XXXX
+
+
+class XXXXTestCase(unittest.TestCase):
+    """
+    Tests for XXXX
+    """
+    
+    #
+    # Test category
+    #
+    def test_XXX(self):
+        """ Tests description if not obvious """
+        self.assertEqual(a, b)
+        self.assertNotEqual(a, b)
+
+
+if __name__ == '__main__':
+    unittest.main()
