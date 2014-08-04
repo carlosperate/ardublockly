@@ -12,9 +12,9 @@ Blockly.Blocks['time_delay'] = {
   helpUrl: 'http://arduino.cc/en/Reference/Delay',
   init: function() {
     this.setColour(120);
-    this.appendValueInput("DELAY_TIME", Number)
+    this.appendValueInput("DELAY_TIME", 'Number')
         .appendField("Delay")
-        .setCheck(Number)
+        .setCheck('Number')
         .appendField("Milliseconds");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -40,9 +40,9 @@ Blockly.Blocks['time_delaymicros'] = {
   helpUrl: 'http://arduino.cc/en/Reference/DelayMicroseconds',
   init: function() {
     this.setColour(120);
-    this.appendValueInput("DELAY_TIME_MS", Number)
+    this.appendValueInput("DELAY_TIME_MS", 'Number')
         .appendField("Delay")
-        .setCheck(Number)
+        .setCheck('Number')
         .appendField("Microseconds");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -69,7 +69,7 @@ Blockly.Blocks['time_millis'] = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendField("Elapsed Time (Milli)");
-    this.setOutput(true, Number);
+    this.setOutput(true, 'Number');
     this.setTooltip('Returns the number of milliseconds since the Arduino board began running the current program.');
   }
 };
@@ -92,7 +92,7 @@ Blockly.Blocks['time_micros'] = {
     this.setColour(120);
     this.appendDummyInput("")
         .appendField("Elapsed Time (Micro)");
-    this.setOutput(true, Number);
+    this.setOutput(true, 'Number');
     this.setTooltip('Returns the number of microseconds since the Arduino board began running the current program.');
   }
 };

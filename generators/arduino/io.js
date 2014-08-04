@@ -41,7 +41,7 @@ Blockly.Blocks['io_digitalread'] = {
     this.appendDummyInput("")
         .appendField("DigitalRead PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.digital), "PIN");
-    this.setOutput(true, Boolean);
+    this.setOutput(true, 'Boolean');
     this.setTooltip('');
   }
 };
@@ -87,9 +87,9 @@ Blockly.Blocks['io_analogwrite'] = {
     this.appendDummyInput("")
         .appendField("AnalogWrite PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN");
-    this.appendValueInput("NUM", Number)
+    this.appendValueInput("NUM", 'Number')
         .appendField("value")
-        .setCheck(Number);
+        .setCheck('Number');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -116,7 +116,7 @@ Blockly.Blocks['io_analogread'] = {
     this.appendDummyInput("")
         .appendField("AnalogRead PIN#")
         .appendField(new Blockly.FieldDropdown(profile.default.analog), "PIN");
-    this.setOutput(true, Number);
+    this.setOutput(true, 'Number');
     this.setTooltip('Return value between 0 and 1024');
   }
 };
@@ -137,7 +137,7 @@ Blockly.Blocks['io_highlow'] = {
     this.setColour(230);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), 'BOOL')
-    this.setOutput(true, Boolean);
+    this.setOutput(true, 'Boolean');
     this.setTooltip("Set a pin state logic High or Low");
   }
 };
