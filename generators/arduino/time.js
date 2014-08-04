@@ -9,8 +9,8 @@
  * Delay block definition
  */
 Blockly.Blocks['time_delay'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/Delay',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/Delay');
     this.setColour(120);
     this.appendValueInput("DELAY_TIME", 'Number')
         .appendField("Delay")
@@ -37,8 +37,8 @@ Blockly.Blocks['time_delay'] = {
  * delayMicroseconds block definition
  */
 Blockly.Blocks['time_delaymicros'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/DelayMicroseconds',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/DelayMicroseconds');
     this.setColour(120);
     this.appendValueInput("DELAY_TIME_MS", 'Number')
         .appendField("Delay")
@@ -64,8 +64,8 @@ Blockly.Blocks['time_delaymicros'] = {
  * millis block definition
  */
 Blockly.Blocks['time_millis'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/Millis',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/Millis');
     this.setColour(120);
     this.appendDummyInput("")
         .appendField("Elapsed Time (Milli)");
@@ -87,8 +87,8 @@ Blockly.Blocks['time_millis'] = {
  * micros block definition
  */
 Blockly.Blocks['time_micros'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/Micros',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/Micros');
     this.setColour(120);
     this.appendDummyInput("")
         .appendField("Elapsed Time (Micro)");

@@ -28,9 +28,8 @@
 
 
 Blockly.Blocks['base_map'] = {
-  category: 'Math',
-  helpUrl: 'http://arduino.cc/en/Reference/map',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/map');
     this.setColour(230);
     this.appendValueInput("NUM", 'Number')
         .appendTitle("Map ")
@@ -56,9 +55,8 @@ Blockly.Arduino['base_map'] = function(block) {
 
 
 Blockly.Blocks['serial_print'] = {
-  category: 'Serial',
-  helpUrl: 'http://www.arduino.cc/en/Serial/Print',
   init: function() {
+    this.setHelpUrl('http://www.arduino.cc/en/Serial/Print');
     this.setColour(230);
     this.appendValueInput("CONTENT", 'String')
         .appendTitle("Serial Print");
@@ -70,9 +68,7 @@ Blockly.Blocks['serial_print'] = {
 
 Blockly.Arduino['serial_print'] = function(block) {
   var content = Blockly.Arduino.valueToCode(block, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0'
-  
   Blockly.Arduino.setups_['setup_serial_'+profile.default.serial] = 'Serial.begin('+profile.default.serial+');\n';
-  
-  var code = 'Serial.print('+content+');\nSerial.print(\'\\t\');\n';
+  var code = 'Serial.print('+content+');\n';
   return code;
 };
