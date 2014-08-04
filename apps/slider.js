@@ -23,6 +23,7 @@
  */
 'use strict';
 
+
 /**
  * Object representing a horizontal slider widget.
  * @param {number} x The horizontal offset of the slider.
@@ -37,7 +38,7 @@ var Slider = function(x, y, width, svgParent, opt_changeFunc) {
   this.KNOB_Y_ = y - 12;
   this.KNOB_MIN_X_ = x + 8;
   this.KNOB_MAX_X_ = x + width - 8;
-  this.TARGET_OVERHANG = 20;
+  this.TARGET_OVERHANG_ = 20;
   this.value_ = 0.5;
   this.changeFunc_ = opt_changeFunc;
   this.animationTasks_ = [];
@@ -45,10 +46,11 @@ var Slider = function(x, y, width, svgParent, opt_changeFunc) {
   // Draw the slider.
   /*
   <line class="sliderTrack" x1="10" y1="35" x2="140" y2="35" />
-  <rect style="fill: none" x="5" y="25" width="150" height="20" />
+  <rect style="opacity: 0" x="5" y="25" width="150" height="20" />
   <path id="knob"
       transform="translate(67, 23)"
       d="m 8,0 l -8,8 v 12 h 16 v -12 z" />
+  <circle style="opacity: 0" r="20" cy="35" cx="75"></circle>
   */
   var track = document.createElementNS(Slider.SVG_NS_, 'line');
   track.setAttribute('class', 'sliderTrack');
@@ -60,12 +62,12 @@ var Slider = function(x, y, width, svgParent, opt_changeFunc) {
   this.track_ = track;
   var rect = document.createElementNS(Slider.SVG_NS_, 'rect');
   rect.setAttribute('style', 'opacity: 0');
-  rect.setAttribute('x', x - this.TARGET_OVERHANG);
-  rect.setAttribute('y', y - this.TARGET_OVERHANG);
-  rect.setAttribute('width',  width + 2 * this.TARGET_OVERHANG);
-  rect.setAttribute('height', 2 * this.TARGET_OVERHANG);
-  rect.setAttribute('rx', this.TARGET_OVERHANG);
-  rect.setAttribute('ry', this.TARGET_OVERHANG);
+  rect.setAttribute('x', x - this.TARGET_OVERHANG_);
+  rect.setAttribute('y', y - this.TARGET_OVERHANG_);
+  rect.setAttribute('width',  width + 2 * this.TARGET_OVERHANG_);
+  rect.setAttribute('height', 2 * this.TARGET_OVERHANG_);
+  rect.setAttribute('rx', this.TARGET_OVERHANG_);
+  rect.setAttribute('ry', this.TARGET_OVERHANG_);
   svgParent.appendChild(rect);
   this.trackTarget_ = rect;
   var knob = document.createElementNS(Slider.SVG_NS_, 'path');
@@ -75,7 +77,7 @@ var Slider = function(x, y, width, svgParent, opt_changeFunc) {
   this.knob_ = knob;
   var circle = document.createElementNS(Slider.SVG_NS_, 'circle');
   circle.setAttribute('style', 'opacity: 0');
-  circle.setAttribute('r', this.TARGET_OVERHANG);
+  circle.setAttribute('r', this.TARGET_OVERHANG_);
   circle.setAttribute('cy', y);
   svgParent.appendChild(circle);
   this.knobTarget_ = circle;
