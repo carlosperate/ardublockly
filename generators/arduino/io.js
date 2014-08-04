@@ -9,8 +9,8 @@
  * Description
  */
 Blockly.Blocks['io_digitalwrite'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/DigitalWrite',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
     this.setColour(230);
     this.appendDummyInput("")
         .appendField("DigitalWrite PIN#")
@@ -35,8 +35,8 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_digitalread'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/DigitalRead',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalRead');
     this.setColour(230);
     this.appendDummyInput("")
         .appendField("DigitalRead PIN#")
@@ -58,8 +58,8 @@ Blockly.Arduino['io_digitalread'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_builtin_led'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/DigitalWrite',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
     this.setColour(190);
     this.appendDummyInput("")
         .appendField("Build-in LED Stat")
@@ -81,8 +81,8 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_analogwrite'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/AnalogWrite',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/AnalogWrite');
     this.setColour(230);
     this.appendDummyInput("")
         .appendField("AnalogWrite PIN#")
@@ -110,8 +110,8 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_analogread'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/AnalogRead',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/AnalogRead');
     this.setColour(230);
     this.appendDummyInput("")
         .appendField("AnalogRead PIN#")
@@ -132,8 +132,8 @@ Blockly.Arduino['io_analogread'] = function(block) {
  * Description
  */
 Blockly.Blocks['io_highlow'] = {
-  helpUrl: 'http://arduino.cc/en/Reference/Constants',
   init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/Constants');
     this.setColour(230);
     this.appendDummyInput("")
         .appendField(new Blockly.FieldDropdown([["HIGH", "HIGH"], ["LOW", "LOW"]]), 'BOOL')
