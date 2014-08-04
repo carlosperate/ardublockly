@@ -32,12 +32,12 @@ Blockly.Blocks['base_map'] = {
   helpUrl: 'http://arduino.cc/en/Reference/map',
   init: function() {
     this.setColour(230);
-    this.appendValueInput("NUM", Number)
+    this.appendValueInput("NUM", 'Number')
         .appendTitle("Map ")
-        .setCheck(Number);
-    this.appendValueInput("DMAX", Number)
+        .setCheck('Number');
+    this.appendValueInput("DMAX", 'Number')
         .appendTitle("value to [0-")
-        .setCheck(Number);
+        .setCheck('Number');
     this.appendDummyInput("")
         .appendTitle("]");
     this.setInputsInline(true);
@@ -60,7 +60,7 @@ Blockly.Blocks['serial_print'] = {
   helpUrl: 'http://www.arduino.cc/en/Serial/Print',
   init: function() {
     this.setColour(230);
-    this.appendValueInput("CONTENT", String)
+    this.appendValueInput("CONTENT", 'String')
         .appendTitle("Serial Print");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
