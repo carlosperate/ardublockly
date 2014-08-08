@@ -302,18 +302,8 @@ Blockly.Flyout.prototype.hide = function() {
     Blockly.unbindEvent_(this.reflowWrapper_);
     this.reflowWrapper_ = null;
   }
-  // Delete all the blocks.
-  var blocks = this.workspace_.getTopBlocks(false);
-  for (var x = 0, block; block = blocks[x]; x++) {
-    if (block.workspace == this.workspace_) {
-      block.dispose(false, false);
-    }
-  }
-  // Delete all the background buttons.
-  for (var x = 0, rect; rect = this.buttons_[x]; x++) {
-    goog.dom.removeNode(rect);
-  }
-  this.buttons_.splice(0);
+  // Do NOT delete the blocks here.  Wait until Flyout.show.
+  // https://neil.fraser.name/news/2014/08/09/
 };
 
 /**
@@ -323,6 +313,19 @@ Blockly.Flyout.prototype.hide = function() {
  */
 Blockly.Flyout.prototype.show = function(xmlList) {
   this.hide();
+  // Delete any blocks from a previous showing.
+  var blocks = this.workspace_.getTopBlocks(false);
+  for (var x = 0, block; block = blocks[x]; x++) {
+    if (block.workspace == this.workspace_) {
+      block.dispose(false, false);
+    }
+  }
+  // Delete any background buttons from a previous showing.
+  for (var x = 0, rect; rect = this.buttons_[x]; x++) {
+    goog.dom.removeNode(rect);
+  }
+  this.buttons_.splice(0);
+
   var margin = this.CORNER_RADIUS;
   this.svgGroup_.style.display = 'block';
 
