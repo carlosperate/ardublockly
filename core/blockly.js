@@ -219,6 +219,13 @@ Blockly.mainWorkspace = null;
 Blockly.clipboard_ = null;
 
 /**
+ * Wrapper function called when a touch mouseUp occurs during a drag operation.
+ * @type {Array.<!Array>}
+ * @private
+ */
+Blockly.onTouchUpWrapper_ = null;
+
+/**
  * Returns the dimensions of the current SVG image.
  * @return {!Object} Contains width and height properties.
  */
@@ -257,7 +264,7 @@ Blockly.svgResize = function() {
  */
 Blockly.onMouseDown_ = function(e) {
   Blockly.svgResize();
-  Blockly.terminateDrag_(); // In case mouse-up event was lost.
+  Blockly.terminateDrag_();  // In case mouse-up event was lost.
   Blockly.hideChaff();
   var isTargetSvg = e.target && e.target.nodeName &&
       e.target.nodeName.toLowerCase() == 'svg';
@@ -280,6 +287,15 @@ Blockly.onMouseDown_ = function(e) {
         Blockly.mainWorkspace.getMetrics();
     Blockly.mainWorkspace.startScrollX = Blockly.mainWorkspace.scrollX;
     Blockly.mainWorkspace.startScrollY = Blockly.mainWorkspace.scrollY;
+
+    // If is a touch event bind to the mouse up so workspace drag mode is
+    // turned off and double move events are not performed on a block.
+    // See comment in inject.js Blockly.init_ as to why mouseup events are
+    // not bound to the document.
+    if ('mouseup' in Blockly.bindEvent_.TOUCH_MAP) {
+      Blockly.onTouchUpWrapper_ =
+          Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_);
+    }
   }
 };
 
@@ -291,6 +307,12 @@ Blockly.onMouseDown_ = function(e) {
 Blockly.onMouseUp_ = function(e) {
   Blockly.setCursorHand_(false);
   Blockly.mainWorkspace.dragMode = false;
+
+  // Unbind the touch event if it exists.
+  if (Blockly.onTouchUpWrapper_) {
+    Blockly.unbindEvent_(Blockly.onTouchUpWrapper_);
+    Blockly.onTouchUpWrapper_ = null;
+  }
 };
 
 /**
@@ -316,6 +338,7 @@ Blockly.onMouseMove_ = function(e) {
     // Move the scrollbars and the page will scroll automatically.
     Blockly.mainWorkspace.scrollbar.set(-x - metrics.contentLeft,
                                         -y - metrics.contentTop);
+    e.stopPropagation();
   }
 };
 
