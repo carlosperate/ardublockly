@@ -310,7 +310,7 @@ Blockly.Css.CONTENT = [
   /* Override the default Closure URL. */
   '.blocklyWidgetDiv .goog-option-selected .goog-menuitem-checkbox,',
   '.blocklyWidgetDiv .goog-option-selected .goog-menuitem-icon {',
-  '  background: url(<<<PATH>>>/media/sprites.png) no-repeat 0 0 !important;',
+  '  background: url(<<<PATH>>>/media/sprites.png) no-repeat -48px -16px !important;',
   '}',
 
   /* Category tree in Toolbox. */
@@ -350,7 +350,7 @@ Blockly.Css.CONTENT = [
   '  height: 16px;',
   '  width: 16px;',
   '  vertical-align: middle;',
-  '  background-image: url(<<<PATH>>>/media/tree.png);',
+  '  background-image: url(<<<PATH>>>/media/sprites.png);',
   '}',
 
   '.blocklyTreeIconClosedLtr {',
@@ -365,10 +365,6 @@ Blockly.Css.CONTENT = [
   '  background-position: -16px -1px;',
   '}',
 
-  '.blocklyTreeIconNone {',
-  '  background-position: -48px -1px;',
-  '}',
-
   '.blocklyTreeSelected>.blocklyTreeIconClosedLtr {',
   '  background-position: -32px -17px;',
   '}',
@@ -381,8 +377,9 @@ Blockly.Css.CONTENT = [
   '  background-position: -16px -17px;',
   '}',
 
+  '.blocklyTreeIconNone,',
   '.blocklyTreeSelected>.blocklyTreeIconNone {',
-  '  background-position: -48px -17px;',
+  '  background-position: -48px -1px;',
   '}',
 
   '.blocklyTreeLabel {',
