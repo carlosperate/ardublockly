@@ -86,6 +86,15 @@ Blockly.HSV_SATURATION = 0.45;
 Blockly.HSV_VALUE = 0.65;
 
 /**
+ * Sprited icons and images.
+ */
+Blockly.SPRITE = {
+  width: 64,
+  height: 92,
+  url: 'media/sprites.png'
+};
+
+/**
  * Convert a hue (HSV model) into an RGB hex triplet.
  * @param {number} hue Hue on a colour wheel (0-360).
  * @return {string} RGB code, e.g. '#5ba65b'.
