@@ -2,7 +2,7 @@
 
 'use strict';
 
-goog.provide('Blockly.Msg.zh-hant');
+goog.provide('Blockly.Msg.zh.hant');
 
 goog.require('Blockly.Msg');
 
