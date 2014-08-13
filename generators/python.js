@@ -165,7 +165,7 @@ Blockly.Python.scrub_ = function(block, code) {
     // Collect comment for this block.
     var comment = block.getCommentText();
     if (comment) {
-      commentCode += this.prefixLines(comment, '# ') + '\n';
+      commentCode += Blockly.Python.prefixLines(comment, '# ') + '\n';
     }
     // Collect comments for all value arguments.
     // Don't collect comments for nested statements.
@@ -173,15 +173,15 @@ Blockly.Python.scrub_ = function(block, code) {
       if (block.inputList[x].type == Blockly.INPUT_VALUE) {
         var childBlock = block.inputList[x].connection.targetBlock();
         if (childBlock) {
-          var comment = this.allNestedComments(childBlock);
+          var comment = Blockly.Python.allNestedComments(childBlock);
           if (comment) {
-            commentCode += this.prefixLines(comment, '# ');
+            commentCode += Blockly.Python.prefixLines(comment, '# ');
           }
         }
       }
     }
   }
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  var nextCode = this.blockToCode(nextBlock);
+  var nextCode = Blockly.Python.blockToCode(nextBlock);
   return commentCode + code + nextCode;
 };

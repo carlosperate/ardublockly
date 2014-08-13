@@ -261,9 +261,6 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
     block.parent_ = parentBlock;
   } else {
     block = Blockly.Block.obtain(workspace, prototypeName);
-//    if (id) {
-//      block.id = parseInt(id, 10);
-//    }
   }
   if (!block.svg_) {
     block.initSvg();
@@ -407,7 +404,7 @@ Blockly.Xml.deleteNext = function(xmlBlock) {
 };
 
 // Export symbols that would otherwise be renamed by Closure compiler.
-Blockly['Xml'] = Blockly.Xml;
+Blockly['Xml'] = Blockly.Xml || {};
 Blockly.Xml['domToText'] = Blockly.Xml.domToText;
 Blockly.Xml['domToWorkspace'] = Blockly.Xml.domToWorkspace;
 Blockly.Xml['textToDom'] = Blockly.Xml.textToDom;
