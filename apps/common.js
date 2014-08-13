@@ -86,6 +86,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'ro': 'Română',
   'pt-br': 'Português Brasileiro',
   'ru': 'Русский',
+  'sc': 'Sardu',
   'sco': 'Scots',
   'si': 'සිංහල',
   'sk': 'Slovenčina',
@@ -99,8 +100,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'uk': 'Українська',
   'vi': 'Tiếng Việt',
   'zh-hans': '簡體中文',
-  'zh-hant': '正體中文',
-  'zh-tw': '國語'
+  'zh-hant': '正體中文'
 };
 
 /**
@@ -116,7 +116,7 @@ BlocklyApps.LANGUAGE_PACK = {
   'az-latn': 'msg/js/az-latn.js',
   'az': 'msg/js/az.js',
   'ca': 'msg/js/ca.js',
-  'cdo': 'msg/js/zh_hant.js',
+  'cdo': 'msg/js/zh-hant.js',
   'cs': 'msg/js/cs.js',
   'da': 'msg/js/da.js',
   'de': 'msg/js/de.js',
