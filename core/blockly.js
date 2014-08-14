@@ -767,7 +767,9 @@ Blockly.getMainWorkspace = function() {
 };
 
 // Export symbols that would otherwise be renamed by Closure compiler.
-window['Blockly'] = Blockly;
-Blockly['getMainWorkspace'] = Blockly.getMainWorkspace;
-Blockly['addChangeListener'] = Blockly.addChangeListener;
-Blockly['removeChangeListener'] = Blockly.removeChangeListener;
+if (!window['Blockly']) {
+  window['Blockly'] = {};
+}
+window['Blockly']['getMainWorkspace'] = Blockly.getMainWorkspace;
+window['Blockly']['addChangeListener'] = Blockly.addChangeListener;
+window['Blockly']['removeChangeListener'] = Blockly.removeChangeListener;
