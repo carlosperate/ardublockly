@@ -53,7 +53,7 @@ BlocklyApps.LANGUAGE_NAME = {
   'hak': '客家話',
   'he': 'עברית',
   'hi': 'हिन्दी',
-  'hrx': 'Hunsriqueano Riograndense',
+  'hrx': 'Hunsrik',
   'hu': 'Magyar',
   'ia': 'Interlingua',
   'id': 'Bahasa Indonesia',

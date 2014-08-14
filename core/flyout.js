@@ -298,7 +298,7 @@ Blockly.Flyout.prototype.wheel_ = function(e) {
  * @return {boolean} True if visible.
  */
 Blockly.Flyout.prototype.isVisible = function() {
-  return this.svgGroup_.style.display == 'block';
+  return this.svgGroup_ && this.svgGroup_.style.display == 'block';
 };
 
 /**

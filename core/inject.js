@@ -41,8 +41,7 @@ Blockly.inject = function(container, opt_options) {
     throw 'Error: container is not in current document.';
   }
   if (opt_options) {
-    // TODO(scr): don't mix this in to global variables.
-    goog.mixin(Blockly, Blockly.parseOptions_(opt_options));
+    Blockly.parseOptions_(opt_options);
   }
   var startUi = function() {
     Blockly.createDom_(container);
@@ -86,7 +85,6 @@ Blockly.parseToolboxTree_ = function(tree) {
 /**
  * Configure Blockly to behave according to a set of options.
  * @param {!Object} options Dictionary of options.
- * @return {Object} Parsed options.
  * @private
  */
 Blockly.parseOptions_ = function(options) {
@@ -120,19 +118,18 @@ Blockly.parseOptions_ = function(options) {
   }
   var enableRealtime = !!options['realtime'];
   var realtimeOptions = enableRealtime ? options['realtimeOptions'] : undefined;
-  return {
-    RTL: !!options['rtl'],
-    collapse: hasCollapse,
-    readOnly: readOnly,
-    maxBlocks: options['maxBlocks'] || Infinity,
-    pathToBlockly: options['path'] || './',
-    hasCategories: hasCategories,
-    hasScrollbars: hasScrollbars,
-    hasTrashcan: hasTrashcan,
-    languageTree: tree,
-    enableRealtime: enableRealtime,
-    realtimeOptions: realtimeOptions
-  };
+
+  Blockly.RTL = !!options['rtl'];
+  Blockly.collapse = hasCollapse;
+  Blockly.readOnly = readOnly;
+  Blockly.maxBlocks = options['maxBlocks'] || Infinity;
+  Blockly.pathToBlockly = options['path'] || './';
+  Blockly.hasCategories = hasCategories;
+  Blockly.hasScrollbars = hasScrollbars;
+  Blockly.hasTrashcan = hasTrashcan;
+  Blockly.languageTree = tree;
+  Blockly.enableRealtime = enableRealtime;
+  Blockly.realtimeOptions = realtimeOptions;
 };
 
 /**
