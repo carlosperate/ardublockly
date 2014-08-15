@@ -192,25 +192,21 @@ Blockly.localConnection_ = null;
 
 /**
  * Number of pixels the mouse must move before a drag starts.
- * @const
  */
 Blockly.DRAG_RADIUS = 5;
 
 /**
  * Maximum misalignment between connections for them to snap together.
- * @const
  */
 Blockly.SNAP_RADIUS = 20;
 
 /**
  * Delay in ms between trigger and bumping unconnected block out of alignment.
- * @const
  */
 Blockly.BUMP_DELAY = 250;
 
 /**
  * Number of characters to truncate a collapsed block to.
- * @const
  */
 Blockly.COLLAPSE_CHARS = 30;
 

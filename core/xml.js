@@ -404,6 +404,9 @@ Blockly.Xml.deleteNext = function(xmlBlock) {
 };
 
 // Export symbols that would otherwise be renamed by Closure compiler.
+if (!window['Blockly']) {
+  window['Blockly'] = {};
+}
 if (!window['Blockly']['Xml']) {
   window['Blockly']['Xml'] = {};
 }
