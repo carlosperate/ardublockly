@@ -56,7 +56,13 @@ function enableRealtimeSpecificUi() {
 function start() {
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('blocklyDiv'),
-          {rtl: rtl, path: '../', toolbox: toolbox, realtime: false,
+          {rtl: rtl,
+           path: '../',
+           toolbox: toolbox,
+           comments: true,
+           disable: true,
+           collapse: true,
+           realtime: false,
            realtimeOptions:
              {clientId: 'YOUR CLIENT ID GOES HERE',
               chatbox: {elementId: 'chatbox'},

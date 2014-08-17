@@ -654,7 +654,7 @@ Blockly.Block.prototype.showContextMenu_ = function(e) {
     }
     options.push(duplicateOption);
 
-    if (this.isEditable() && !this.collapsed_) {
+    if (this.isEditable() && !this.collapsed_ && Blockly.comments) {
       // Option to add/remove a comment.
       var commentOption = {enabled: true};
       if (this.comment) {
@@ -707,16 +707,18 @@ Blockly.Block.prototype.showContextMenu_ = function(e) {
       }
     }
 
-    // Option to disable/enable block.
-    var disableOption = {
-      text: this.disabled ?
-          Blockly.Msg.ENABLE_BLOCK : Blockly.Msg.DISABLE_BLOCK,
-      enabled: !this.getInheritedDisabled(),
-      callback: function() {
-        block.setDisabled(!block.disabled);
-      }
-    };
-    options.push(disableOption);
+    if (Blockly.disable) {
+      // Option to disable/enable block.
+      var disableOption = {
+        text: this.disabled ?
+            Blockly.Msg.ENABLE_BLOCK : Blockly.Msg.DISABLE_BLOCK,
+        enabled: !this.getInheritedDisabled(),
+        callback: function() {
+          block.setDisabled(!block.disabled);
+        }
+      };
+      options.push(disableOption);
+    }
 
     // Option to delete this block.
     // Count the number of blocks that are nested in this block.
