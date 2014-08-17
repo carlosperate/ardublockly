@@ -185,7 +185,7 @@ Blockly.Realtime.initializeModel_ = function(model) {
  * @param {!Blockly.Block} block The block to remove.
  */
 Blockly.Realtime.removeBlock = function(block) {
-  Blockly.Realtime.blocksMap_.delete(block.id.toString());
+  Blockly.Realtime.blocksMap_['delete'](block.id.toString());
 };
 
 /**
