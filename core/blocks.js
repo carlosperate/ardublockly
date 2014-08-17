@@ -107,8 +107,11 @@ Blockly.Blocks.addTemplate = function(details) {
         'details.nextStatement must not be true.');
   }
 
-  // Build up template.
   var block = {};
+  /**
+   * Build up template.
+   * @this Blockly.Block
+   */
   block.init = function() {
     var thisBlock = this;
     // Set basic properties of block.
