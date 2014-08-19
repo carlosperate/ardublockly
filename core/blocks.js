@@ -162,11 +162,14 @@ Blockly.Blocks.addTemplate = function(details) {
     Blockly.Block.prototype.interpolateMsg.apply(this, interpArgs);
   };
 
-  // Create mutationToDom if needed.
   if (details.switchable) {
+    /**
+     * Create mutationToDom if needed.
+     * @this Blockly.Block
+     */
     block.mutationToDom = function() {
-      var container = details.mutationToDomFunc ? details.mutatationToDomFunc()
-          : document.createElement('mutation');
+      var container = details.mutationToDomFunc ?
+          details.mutatationToDomFunc() : document.createElement('mutation');
       container.setAttribute('is_statement', this['isStatement'] || false);
       return container;
     };
