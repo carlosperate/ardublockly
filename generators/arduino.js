@@ -70,27 +70,30 @@ Blockly.Arduino.ORDER_NONE = 99;          // (...)
  */
 var profile = {
   arduino: {
-    description: "Arduino standard-compatible board",
+    description: "Arduino Uno standard-compatible board",
     digital : [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
-    analog : [["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
-    serial : 9600
+    analog : [["A0", "A0"], ["A1", "A1"]],
+    interrupt: [["Int_1", "1"], ["Int_2", "2"], ["Int_3", "3"], ["Int_4", "4"], ["Int_5", "5"]],
+    serial : [["300", "300"], ["600", "600"], ["1200", "1200"], ["2400", "2400"], ["4800", "4800"],["9600", "9600"], ["14400", "14400"], ["19200", "19200"], ["28800", "28800"], ["31250", "31250"], ["38400", "38400"],["57600", "57600"], ["115200", "115200"]],
   },
   arduino_mega:{
-  description: "Arduino Mega-compatible board"
+    description: "Arduino Mega-compatible board"
     //53 digital
     //15 analog
+    //6 interrupts
+    //same serial
   },
-  //Behind the Wire Arduino profile
-  arduino_btw: {
-    description: "Arduino Behind The Wire",
-    digital : [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
-    analog : [["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
-        serial : 9600
+  arduino_leonardo:{
+    description: "Arduino Leonardo-compatible board"
+    //18 digital
+    //6 analog
+    //5 interrupts
+    //same serial
   }
 }
+
 //set default profile to arduino standard-compatible board
-profile["default"] = profile["arduino_btw"];
-//alert(profile.default.digital[0]);
+profile["default"] = profile["arduino"];
 
 /**
  * Initialise the database of variable names.
@@ -100,7 +103,7 @@ Blockly.Arduino.init = function() {
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of setups to be printed before the code.
   Blockly.Arduino.setups_ = Object.create(null);
-  
+
   if (Blockly.Variables) {
     if (!Blockly.Arduino.variableDB_) {
       Blockly.Arduino.variableDB_ =
@@ -113,8 +116,8 @@ Blockly.Arduino.init = function() {
     var variables = Blockly.Variables.allVariables();
     for (var x = 0; x < variables.length; x++) {
       defvars[x] = 'int ' +
-          Blockly.Arduino.variableDB_.getDistinctName(variables[x],
-          Blockly.Variables.NAME_TYPE) + ';\n';
+          Blockly.Arduino.variableDB_.getName(variables[x],
+          Blockly.Variables.NAME_TYPE);
     }
     Blockly.Arduino.definitions_['variables'] = defvars.join('\n');
   }
@@ -133,7 +136,6 @@ Blockly.Arduino.finish = function(code) {
 
   // Convert the definitions dictionary into a list.
   var imports = [];
-  //var imports = ["#include <BehindTheWire.h>\n"];
   var definitions = [];
   for (var name in Blockly.Arduino.definitions_) {
     var def = Blockly.Arduino.definitions_[name];
@@ -143,13 +145,13 @@ Blockly.Arduino.finish = function(code) {
       definitions.push(def);
     }
   }
-  
+
   // Convert the setups dictionary into a list.
   var setups = [];
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
-  
+
   var allDefs = imports.join('\n') + definitions.join('\n') + '\nvoid setup() {\n  '+setups.join('\n  ') + '\n}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
