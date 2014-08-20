@@ -33,7 +33,7 @@ goog.addDependency("../../../" + dir + "/core/comment.js", ['Blockly.Comment'], 
 goog.addDependency("../../../" + dir + "/core/connection.js", ['Blockly.Connection', 'Blockly.ConnectionDB'], ['Blockly.Workspace']);
 goog.addDependency("../../../" + dir + "/core/contextmenu.js", ['Blockly.ContextMenu'], ['goog.dom', 'goog.style', 'goog.ui.Menu', 'goog.ui.MenuItem']);
 goog.addDependency("../../../" + dir + "/core/css.js", ['Blockly.Css'], ['goog.cssom']);
-goog.addDependency("../../../" + dir + "/core/field.js", ['Blockly.Field'], ['Blockly.BlockSvg', 'goog.asserts']);
+goog.addDependency("../../../" + dir + "/core/field.js", ['Blockly.Field'], ['Blockly.BlockSvg', 'goog.asserts', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/field_angle.js", ['Blockly.FieldAngle'], ['Blockly.FieldTextInput']);
 goog.addDependency("../../../" + dir + "/core/field_checkbox.js", ['Blockly.FieldCheckbox'], ['Blockly.Field']);
 goog.addDependency("../../../" + dir + "/core/field_colour.js", ['Blockly.FieldColour'], ['Blockly.Field', 'goog.ui.ColorPicker']);
