@@ -104,7 +104,7 @@ Blockly.Dart.init = function() {
 Blockly.Dart.finish = function(code) {
   // Indent every line.
   if (code) {
-    code = this.prefixLines(code, Blockly.Dart.INDENT);
+    code = Blockly.Dart.prefixLines(code, Blockly.Dart.INDENT);
   }
   code = 'main() {\n' + code + '}';
 

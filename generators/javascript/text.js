@@ -200,7 +200,8 @@ Blockly.JavaScript['text_changeCase'] = function(block) {
     // Title case is not a native JavaScript function.  Define one.
     var functionName = Blockly.JavaScript.provideFunction_(
         'text_toTitleCase',
-        [ 'function ' + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + '(str) {',
+        [ 'function ' +
+            Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + '(str) {',
           '  return str.replace(/\\S+/g,',
           '      function(txt) {return txt[0].toUpperCase() + ' +
               'txt.substring(1).toLowerCase();});',

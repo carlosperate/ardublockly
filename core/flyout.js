@@ -196,15 +196,11 @@ Blockly.Flyout.prototype.setMetrics_ = function(yRatio) {
  * Initializes the flyout.
  * @param {!Blockly.Workspace} workspace The workspace in which to create new
  *     blocks.
- * @param {boolean} withScrollbar True if a scrollbar should be displayed.
  */
-Blockly.Flyout.prototype.init = function(workspace, withScrollbar) {
+Blockly.Flyout.prototype.init = function(workspace) {
   this.targetWorkspace_ = workspace;
-  // Add scrollbars.
-  var flyout = this;
-  if (withScrollbar) {
-    this.scrollbar_ = new Blockly.Scrollbar(flyout.workspace_, false, false);
-  }
+  // Add scrollbar.
+  this.scrollbar_ = new Blockly.Scrollbar(this.workspace_, false, false);
 
   this.hide();
 
@@ -274,6 +270,7 @@ Blockly.Flyout.prototype.position_ = function() {
 /**
  * Scroll the flyout up or down.
  * @param {!Event} e Mouse wheel scroll event.
+ * @private
  */
 Blockly.Flyout.prototype.wheel_ = function(e) {
   // Safari uses wheelDeltaY, everyone else uses deltaY.
@@ -547,8 +544,8 @@ Blockly.Flyout.prototype.onMouseMove_ = function(e) {
   var dr = Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
   if (dr > Blockly.DRAG_RADIUS) {
     // Create the block.
-    Blockly.Flyout.startFlyout_.createBlockFunc_(Blockly.Flyout.startBlock_)
-        (Blockly.Flyout.startDownEvent_);
+    Blockly.Flyout.startFlyout_.createBlockFunc_(Blockly.Flyout.startBlock_)(
+        Blockly.Flyout.startDownEvent_);
   }
 };
 

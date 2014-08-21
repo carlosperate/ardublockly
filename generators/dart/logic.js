@@ -120,6 +120,6 @@ Blockly.Dart['logic_ternary'] = function(block) {
       Blockly.Dart.ORDER_CONDITIONAL) || 'null';
   var value_else = Blockly.Dart.valueToCode(block, 'ELSE',
       Blockly.Dart.ORDER_CONDITIONAL) || 'null';
-  var code = value_if + ' ? ' + value_then + ' : ' + value_else
+  var code = value_if + ' ? ' + value_then + ' : ' + value_else;
   return [code, Blockly.Dart.ORDER_CONDITIONAL];
 };

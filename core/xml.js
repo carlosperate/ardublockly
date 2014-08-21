@@ -212,9 +212,8 @@ Blockly.Xml.textToDom = function(text) {
  * @param {!Element} xml XML DOM.
  */
 Blockly.Xml.domToWorkspace = function(workspace, xml) {
-  var width
   if (Blockly.RTL) {
-    width = workspace.getMetrics().viewWidth;
+    var width = workspace.getMetrics().viewWidth;
   }
   for (var x = 0, xmlChild; xmlChild = xml.childNodes[x]; x++) {
     if (xmlChild.nodeName.toLowerCase() == 'block') {
@@ -236,7 +235,6 @@ Blockly.Xml.domToWorkspace = function(workspace, xml) {
  * @param {boolean=} opt_reuseBlock Optional arg indicating whether to
  *     reinitialize an existing block.
  * @return {!Blockly.Block} The root block created.
- * @private
  */
 Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
   var block = null;

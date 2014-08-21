@@ -374,14 +374,14 @@ Blockly.Bubble.prototype.setAnchorLocation = function(x, y) {
 };
 
 /**
- * Position the bubble so that it does not fall offscreen.
+ * Position the bubble so that it does not fall off-screen.
  * @private
  */
 Blockly.Bubble.prototype.layoutBubble_ = function() {
   // Compute the preferred bubble location.
   var relativeLeft = -this.width_ / 4;
   var relativeTop = -this.height_ - Blockly.BlockSvg.MIN_BLOCK_Y;
-  // Prevent the bubble from being offscreen.
+  // Prevent the bubble from being off-screen.
   var metrics = this.workspace_.getMetrics();
   if (Blockly.RTL) {
     if (this.anchorX_ - metrics.viewLeft - relativeLeft - this.width_ <

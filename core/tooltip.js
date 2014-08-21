@@ -332,6 +332,7 @@ Blockly.Tooltip.show_ = function() {
  * Wrap text to the specified width.
  * @param {string} text Text to wrap.
  * @param {number} limit Width to wrap each line.
+ * @return {string} Wrapped text.
  * @private
  */
 Blockly.Tooltip.wrap_ = function(text, limit) {
@@ -373,7 +374,7 @@ Blockly.Tooltip.wrap_ = function(text, limit) {
     score = Blockly.Tooltip.wrapScore_(words, wordBreaks, limit);
     text = Blockly.Tooltip.wrapToText_(words, wordBreaks);
     lineCount++;
-  } while (score > lastScore)
+  } while (score > lastScore);
   return lastText;
 };
 

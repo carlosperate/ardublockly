@@ -925,7 +925,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
       }
       this.renderFields_(input.fieldRow, fieldX, fieldY);
       steps.push(Blockly.BlockSvg.TAB_PATH_DOWN);
-      var v = row.height - Blockly.BlockSvg.TAB_HEIGHT
+      var v = row.height - Blockly.BlockSvg.TAB_HEIGHT;
       steps.push('v', v);
       if (Blockly.RTL) {
         // Highlight around back of tab.
@@ -1061,8 +1061,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps, highlightSteps,
  * @param {number} cursorY Height of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
-                                                     connectionsXY, cursorY) {
+Blockly.BlockSvg.prototype.renderDrawBottom_ =
+    function(steps, highlightSteps, connectionsXY, cursorY) {
   this.height = cursorY + 1;  // Add one for the shadow.
   if (this.block_.nextConnection) {
     steps.push('H', Blockly.BlockSvg.NOTCH_WIDTH + ' ' +
@@ -1112,8 +1112,8 @@ Blockly.BlockSvg.prototype.renderDrawBottom_ = function(steps, highlightSteps,
  * @param {number} cursorY Height of block.
  * @private
  */
-Blockly.BlockSvg.prototype.renderDrawLeft_ = function(steps, highlightSteps,
-                                                      connectionsXY, cursorY) {
+Blockly.BlockSvg.prototype.renderDrawLeft_ =
+    function(steps, highlightSteps, connectionsXY, cursorY) {
   if (this.block_.outputConnection) {
     // Create output connection.
     this.block_.outputConnection.moveTo(connectionsXY.x, connectionsXY.y);

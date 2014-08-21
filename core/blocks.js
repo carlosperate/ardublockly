@@ -145,8 +145,8 @@ Blockly.Blocks.addTemplate = function(details) {
         if (arg.type == 'undefined' || arg.type == Blockly.INPUT_VALUE) {
           interpArgs.push([arg.name,
                            arg.check,
-                           typeof arg.align == 'undefined' ? Blockly.ALIGN_RIGHT
-                               : arg.align]);
+                           typeof arg.align == 'undefined' ?
+                               Blockly.ALIGN_RIGHT : arg.align]);
         } else {
           // TODO: Write code for other input types.
           goog.asserts.fail('addTemplate() can only handle value inputs.');

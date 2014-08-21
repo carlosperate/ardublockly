@@ -38,6 +38,8 @@ goog.require('Blockly.Block');
 Blockly.Generator = function(name) {
   this.name_ = name;
   this.RESERVED_WORDS_ = '';
+  this.FUNCTION_NAME_PLACEHOLDER_REGEXP_ =
+      new RegExp(this.FUNCTION_NAME_PLACEHOLDER_, 'g');
 };
 
 /**
@@ -278,10 +280,9 @@ Blockly.Generator.prototype.addReservedWords = function(words) {
  * Blockly.Generator.provideFunction_.  It must not be legal code that could
  * legitimately appear in a function definition (or comment), and it must
  * not confuse the regular expression parser.
+ * @private
  */
 Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_ = '{leCUI8hutHZI4480Dc}';
-Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_REGEXP_ =
-    new RegExp(Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_, 'g');
 
 /**
  * Define a function to be included in the generated code.

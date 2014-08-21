@@ -149,7 +149,8 @@ Blockly.Python['math_constant'] = function(block) {
   var CONSTANTS = {
     'PI': ['math.pi', Blockly.Python.ORDER_MEMBER],
     'E': ['math.e', Blockly.Python.ORDER_MEMBER],
-    'GOLDEN_RATIO': ['(1 + math.sqrt(5)) / 2', Blockly.Python.ORDER_MULTIPLICATIVE],
+    'GOLDEN_RATIO': ['(1 + math.sqrt(5)) / 2',
+                     Blockly.Python.ORDER_MULTIPLICATIVE],
     'SQRT2': ['math.sqrt(2)', Blockly.Python.ORDER_MEMBER],
     'SQRT1_2': ['math.sqrt(1.0 / 2)', Blockly.Python.ORDER_MEMBER],
     'INFINITY': ['float(\'inf\')', Blockly.Python.ORDER_ATOMIC]
@@ -257,7 +258,7 @@ Blockly.Python['math_on_list'] = function(block) {
     case 'AVERAGE':
       var functionName = Blockly.Python.provideFunction_(
           'math_mean',
-          // This operation excludes null and values that are not int or float:',
+          // This operation excludes null and values that aren't int or float:',
           // math_mean([null, null, "aString", 1, 9]) == 5.0.',
           ['def ' + Blockly.Python.FUNCTION_NAME_PLACEHOLDER_ + '(myList):',
            '  localList = [e for e in myList if type(e) in (int, float, long)]',

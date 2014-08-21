@@ -152,7 +152,7 @@ Blockly.Python['controls_for'] = function(block) {
       } else {
         range = defineDownRange();
       }
-      range += '(' + argument0 + ', ' +  argument1 + ', ' + increment + ')';
+      range += '(' + argument0 + ', ' + argument1 + ', ' + increment + ')';
     }
   } else {
     // Cache non-trivial values to variables to prevent repeated look-ups.
