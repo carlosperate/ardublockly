@@ -30,9 +30,14 @@ goog.require('Blockly.Arduino');
 
 Blockly.Arduino['procedures_defreturn'] = function(block) {
   // Define a procedure with a return value.
-  var funcName = Blockly.Arduino.variableDB_.getName(block.getTitleValue('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+  var funcName = Blockly.Arduino.variableDB_.getName(
+      block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Arduino.statementToCode(block, 'STACK');
+  if (Blockly.Arduino.STATEMENT_PREFIX) {
+    branch = Blockly.Arduino.prefixLines(
+        Blockly.Arduino.STATEMENT_PREFIX.replace(/%1/g,
+        '\'' + block.id + '\''), Blockly.Arduino.INDENT) + branch;
+  }
   if (Blockly.Arduino.INFINITE_LOOP_TRAP) {
     branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g,
         '\'' + block.id + '\'') + branch;
@@ -61,8 +66,8 @@ Blockly.Arduino['procedures_defnoreturn'] = Blockly.Arduino['procedures_defretur
 
 Blockly.Arduino['procedures_callreturn'] = function(block) {
   // Call a procedure with a return value.
-  var funcName = Blockly.Arduino.variableDB_.getName(block.getTitleValue('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+  var funcName = Blockly.Arduino.variableDB_.getName(
+      block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
   var args = [];
   for (var x = 0; x < block.arguments_.length; x++) {
     args[x] = Blockly.Arduino.valueToCode(block, 'ARG' + x,
@@ -74,8 +79,8 @@ Blockly.Arduino['procedures_callreturn'] = function(block) {
 
 Blockly.Arduino['procedures_callnoreturn'] = function(block) {
   // Call a procedure with no return value.
-  var funcName = Blockly.Arduino.variableDB_.getName(block.getTitleValue('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+  var funcName = Blockly.Arduino.variableDB_.getName(
+      block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
   var args = [];
   for (var x = 0; x < block.arguments_.length; x++) {
     args[x] = Blockly.Arduino.valueToCode(block, 'ARG' + x,
@@ -85,7 +90,7 @@ Blockly.Arduino['procedures_callnoreturn'] = function(block) {
   return code;
 };
 
-Blockly.Arduino.procedures_ifreturn = function() {
+Blockly.Arduino['procedures_ifreturn'] = function(block) {
   // Conditionally return value from a procedure.
   var condition = Blockly.Arduino.valueToCode(block, 'CONDITION',
       Blockly.Arduino.ORDER_NONE) || 'false';
