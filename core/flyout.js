@@ -216,6 +216,9 @@ Blockly.Flyout.prototype.init = function(workspace) {
   this.eventWrappers_.concat(
       Blockly.bindEvent_(this.targetWorkspace_.getCanvas(),
       'blocklyWorkspaceChange', this, this.filterForCapacity_));
+  // Dragging the flyout up and down.
+  this.eventWrappers_.concat(Blockly.bindEvent_(this.svgGroup_,
+      'mousedown', this, this.onMouseDown_));
 };
 
 /**
@@ -282,8 +285,8 @@ Blockly.Flyout.prototype.wheel_ = function(e) {
     }
     var metrics = this.getMetrics_();
     var y = metrics.viewTop + delta;
-    y = Math.max(y, 0);
     y = Math.min(y, metrics.contentHeight - metrics.viewHeight);
+    y = Math.max(y, 0);
     this.scrollbar_.set(y);
     // Don't scroll the page.
     e.preventDefault();
@@ -511,12 +514,48 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
       Blockly.Flyout.startFlyout_ = flyout;
       Blockly.Flyout.onMouseUpWrapper_ = Blockly.bindEvent_(document,
           'mouseup', this, Blockly.terminateDrag_);
-      Blockly.Flyout.onMouseMoveWrapper_ = Blockly.bindEvent_(document,
-          'mousemove', this, flyout.onMouseMove_);
+      Blockly.Flyout.onMouseMoveBlockWrapper_ = Blockly.bindEvent_(document,
+          'mousemove', this, flyout.onMouseMoveBlock_);
     }
     // This event has been handled.  No need to bubble up to the document.
     e.stopPropagation();
   };
+};
+
+/**
+ * Mouse down on the flyout background.  Start a vertical scroll drag.
+ * @param {!Event} e Mouse down event.
+ * @private
+ */
+Blockly.Flyout.prototype.onMouseDown_ = function(e) {
+  if (Blockly.isRightButton(e)) {
+    return;
+  }
+  Blockly.hideChaff(true);
+  Blockly.Flyout.terminateDrag_();
+  this.startDragMouseY_ = e.clientY;
+  Blockly.Flyout.onMouseMoveWrapper_ = Blockly.bindEvent_(document, 'mousemove',
+      this, this.onMouseMove_);
+  Blockly.Flyout.onMouseUpWrapper_ = Blockly.bindEvent_(document, 'mouseup',
+      this, Blockly.Flyout.terminateDrag_);
+  // This event has been handled.  No need to bubble up to the document.
+  e.preventDefault();
+  e.stopPropagation();
+};
+
+/**
+ * Handle a mouse-move to vertically drag the flyout.
+ * @param {!Event} e Mouse move event.
+ * @private
+ */
+Blockly.Flyout.prototype.onMouseMove_ = function(e) {
+  var dy = e.clientY - this.startDragMouseY_;
+  this.startDragMouseY_ = e.clientY;
+  var metrics = this.getMetrics_();
+  var y = metrics.viewTop - dy;
+  y = Math.min(y, metrics.contentHeight - metrics.viewHeight);
+  y = Math.max(y, 0);
+  this.scrollbar_.set(y);
 };
 
 /**
@@ -526,7 +565,7 @@ Blockly.Flyout.prototype.blockMouseDown_ = function(block) {
  * @param {!Event} e Mouse move event.
  * @private
  */
-Blockly.Flyout.prototype.onMouseMove_ = function(e) {
+Blockly.Flyout.prototype.onMouseMoveBlock_ = function(e) {
   if (e.type == 'mousemove' && e.clientX <= 1 && e.clientY == 0 &&
       e.button == 0) {
     /* HACK:
@@ -615,9 +654,17 @@ Blockly.Flyout.terminateDrag_ = function() {
     Blockly.unbindEvent_(Blockly.Flyout.onMouseUpWrapper_);
     Blockly.Flyout.onMouseUpWrapper_ = null;
   }
+  if (Blockly.Flyout.onMouseMoveBlockWrapper_) {
+    Blockly.unbindEvent_(Blockly.Flyout.onMouseMoveBlockWrapper_);
+    Blockly.Flyout.onMouseMoveBlockWrapper_ = null;
+  }
   if (Blockly.Flyout.onMouseMoveWrapper_) {
     Blockly.unbindEvent_(Blockly.Flyout.onMouseMoveWrapper_);
     Blockly.Flyout.onMouseMoveWrapper_ = null;
+  }
+  if (Blockly.Flyout.onMouseUpWrapper_) {
+    Blockly.unbindEvent_(Blockly.Flyout.onMouseUpWrapper_);
+    Blockly.Flyout.onMouseUpWrapper_ = null;
   }
   Blockly.Flyout.startDownEvent_ = null;
   Blockly.Flyout.startBlock_ = null;

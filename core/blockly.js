@@ -301,6 +301,8 @@ Blockly.onMouseDown_ = function(e) {
       Blockly.onTouchUpWrapper_ =
           Blockly.bindEvent_(document, 'mouseup', null, Blockly.onMouseUp_);
     }
+    Blockly.onMouseMoveWrapper_ =
+        Blockly.bindEvent_(document, 'mousemove', null, Blockly.onMouseMove_);
   }
 };
 
@@ -317,6 +319,10 @@ Blockly.onMouseUp_ = function(e) {
   if (Blockly.onTouchUpWrapper_) {
     Blockly.unbindEvent_(Blockly.onTouchUpWrapper_);
     Blockly.onTouchUpWrapper_ = null;
+  }
+  if (Blockly.onMouseMoveWrapper_) {
+    Blockly.unbindEvent_(Blockly.onMouseMoveWrapper_);
+    Blockly.onMouseMoveWrapper_ = null;
   }
 };
 
