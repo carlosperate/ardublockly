@@ -64,9 +64,8 @@ Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
 Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
 
-/*
+/**
  * Arduino Board profiles
- *
  */
 var profile = {
   arduino: {
@@ -92,7 +91,7 @@ var profile = {
   }
 }
 
-//set default profile to arduino standard-compatible board
+// Set default profile to arduino standard-compatible board
 profile["default"] = profile["arduino"];
 
 /**
@@ -106,22 +105,77 @@ Blockly.Arduino.init = function() {
 
   if (Blockly.Variables) {
     if (!Blockly.Arduino.variableDB_) {
-      Blockly.Arduino.variableDB_ =
-          new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
+      Blockly.Arduino.variableDB_ = new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
     } else {
       Blockly.Arduino.variableDB_.reset();
     }
 
-    var defvars = [];
-    var variables = Blockly.Variables.allVariables();
-    for (var x = 0; x < variables.length; x++) {
-      defvars[x] = 'int ' +
-          Blockly.Arduino.variableDB_.getName(variables[x],
-          Blockly.Variables.NAME_TYPE);
+    // Iterate through the blocks to capture variables with first value
+    var variableWithType = Object.create(null);
+    var blocks = Blockly.mainWorkspace.getAllBlocks();
+    for (var x = 0; x < blocks.length; x++) {
+      var func = blocks[x].getVars;
+      if (func) {
+        var blockVariables = func.call(blocks[x]);
+        for (var y = 0; y < blockVariables.length; y++) {
+          // Check if it's the first instance of the new variable name
+          var unique = true;
+          for (var name in variableWithType) {
+            if (name == blockVariables[y]) {
+              unique = false;
+              break;
+            }
+          }
+          // If it is the first instance log the variable type
+          if (unique == true) {
+            variableWithType[blockVariables[y]] = Blockly.Arduino.evaluateType(
+            Blockly.Arduino.valueToCode(blocks[x], 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT));
+          }
+        }
+      }
     }
-    Blockly.Arduino.definitions_['variables'] = defvars.join('\n');
+
+    // Set variable declarations
+    var variableDeclarations = [];  
+    for (var name in variableWithType) {
+      variableDeclarations.push(variableWithType[name] + ' ' + name + ';');
+    }
+    Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n') + '\n';
   }
 };
+
+/**
+ * Evaluates the type of the data contained in the input string and returns
+ * a string containing the C++ type.
+ * @param {string} inputString string containing the input value to evaluate
+ * @return {string} A String containing the C++ type
+ */
+Blockly.Arduino.regExpInt = new RegExp(/^\d+$/);
+Blockly.Arduino.regExpFloat = new RegExp(/^[0-9]*[.][0-9]+$/);
+Blockly.Arduino.evaluateType = function(inputString) {
+  var firstCharacter = inputString.charAt(0);
+  if (firstCharacter == '"') {
+    return 'String';
+  }
+  else if (firstCharacter == "'") {
+    return 'char';
+  }
+  else if (!inputString || !inputString.length) {
+    return 'defineme';
+  }
+  else if (Blockly.Arduino.regExpInt.test(firstCharacter)) {
+    if( Blockly.Arduino.regExpInt.test(inputString)) {
+      return 'int';
+    } else if ( Blockly.Arduino.regExpFloat.test(inputString)) {
+      return 'float';
+    }
+    return 'dontknowInt';
+  }
+
+  // For now the default is integer, will have to figure out how to 
+  // evaluate other blocks as inputs
+  return 'integer';
+}
 
 /**
  * Prepend the generated code with the variable definitions.
@@ -132,7 +186,7 @@ Blockly.Arduino.finish = function(code) {
   // Indent every line.
   code = '  ' + code.replace(/\n/g, '\n  ');
   code = code.replace(/\n\s+$/, '\n');
-  code = 'void loop() {\n' + code + '}';
+  code = 'void loop() {\n' + code + '\n}';
 
   // Convert the definitions dictionary into a list.
   var imports = [];
@@ -152,7 +206,8 @@ Blockly.Arduino.finish = function(code) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
 
-  var allDefs = imports.join('\n') + definitions.join('\n') + '\nvoid setup() {\n  '+setups.join('\n  ') + '\n}';
+  var allDefs = imports.join('\n') + definitions.join('\n') +
+      '\nvoid setup() {\n  '+ setups.join('\n  ') + '\n}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
