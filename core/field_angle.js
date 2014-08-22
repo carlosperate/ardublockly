@@ -36,7 +36,7 @@ goog.require('Blockly.FieldTextInput');
  *     to validate any constraints on what the user entered.  Takes the new
  *     text as an argument and returns the accepted text or null to abort
  *     the change.
- * @extends {Blockly.Field}
+ * @extends {Blockly.FieldTextInput}
  * @constructor
  */
 Blockly.FieldAngle = function(text, opt_changeHandler) {

@@ -392,7 +392,7 @@ Blockly.Blocks['math_constrain'] = {
                         ['VALUE', 'Number', Blockly.ALIGN_RIGHT],
                         ['LOW', 'Number', Blockly.ALIGN_RIGHT],
                         ['HIGH', 'Number', Blockly.ALIGN_RIGHT],
-                        Blockly.ALIGN_RIGHT)
+                        Blockly.ALIGN_RIGHT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.MATH_CONSTRAIN_TOOLTIP);
   }

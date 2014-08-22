@@ -29,6 +29,10 @@ goog.provide('Blockly.Python');
 goog.require('Blockly.Generator');
 
 
+/**
+ * Python code generator.
+ * @type !Blockly.Generator
+ */
 Blockly.Python = new Blockly.Generator('Python');
 
 /**

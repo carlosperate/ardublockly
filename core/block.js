@@ -332,14 +332,14 @@ Blockly.Block.prototype.unselect = function() {
  *     the next statement with the previous statement.  Otherwise, dispose of
  *     all children of this block.
  * @param {boolean} animate If true, show a disposal animation and sound.
- * @param {boolean} dontRemoveFromWorkspace If true, don't remove this block
- *     from the workspace's list of top blocks.
+ * @param {boolean} opt_dontRemoveFromWorkspace If true, don't remove this
+ *     block from the workspace's list of top blocks.
  */
 Blockly.Block.prototype.dispose = function(healStack, animate,
-                                           dontRemoveFromWorkspace) {
+                                           opt_dontRemoveFromWorkspace) {
   // Switch off rerendering.
   this.rendered = false;
-  this.unplug(healStack);
+  this.unplug(healStack, false);
 
   if (animate && this.svg_) {
     this.svg_.disposeUiEffect();
@@ -347,7 +347,7 @@ Blockly.Block.prototype.dispose = function(healStack, animate,
 
   // This block is now at the top of the workspace.
   // Remove this block from the workspace's list of top-most blocks.
-  if (this.workspace && !dontRemoveFromWorkspace) {
+  if (this.workspace && !opt_dontRemoveFromWorkspace) {
     this.workspace.removeTopBlock(this);
     this.workspace = null;
   }

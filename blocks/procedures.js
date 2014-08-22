@@ -457,8 +457,8 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     if (Blockly.Names.equals(oldName, this.getProcedureCall())) {
       this.setFieldValue(newName, 'NAME');
       this.setTooltip(
-          (this.outputConnection ? Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP
-           : Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP)
+          (this.outputConnection ? Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP :
+           Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP)
           .replace('%1', newName));
     }
   },
@@ -567,8 +567,8 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     var name = xmlElement.getAttribute('name');
     this.setFieldValue(name, 'NAME');
     this.setTooltip(
-        (this.outputConnection ? Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP
-         : Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP).replace('%1', name));
+        (this.outputConnection ? Blockly.Msg.PROCEDURES_CALLRETURN_TOOLTIP :
+         Blockly.Msg.PROCEDURES_CALLNORETURN_TOOLTIP).replace('%1', name));
     var def = Blockly.Procedures.getDefinition(name, this.workspace);
     if (def && def.mutator.isVisible()) {
       // Initialize caller with the mutator's IDs.

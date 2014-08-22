@@ -237,7 +237,7 @@ Blockly.Blocks['lists_isEmpty'] = {
     this.setColour(260);
     this.interpolateMsg(Blockly.Msg.LISTS_IS_EMPTY_TITLE,
                         ['VALUE', ['Array', 'String'], Blockly.ALIGN_RIGHT],
-                        Blockly.ALIGN_RIGHT)
+                        Blockly.ALIGN_RIGHT);
     this.setInputsInline(true);
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.LISTS_TOOLTIP);
