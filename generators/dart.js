@@ -81,23 +81,21 @@ Blockly.Dart.init = function() {
   // to actual function names (to avoid collisions with user functions).
   Blockly.Dart.functionNames_ = Object.create(null);
 
-  if (Blockly.Variables) {
-    if (!Blockly.Dart.variableDB_) {
-      Blockly.Dart.variableDB_ =
-          new Blockly.Names(Blockly.Dart.RESERVED_WORDS_);
-    } else {
-      Blockly.Dart.variableDB_.reset();
-    }
-
-    var defvars = [];
-    var variables = Blockly.Variables.allVariables();
-    for (var x = 0; x < variables.length; x++) {
-      defvars[x] = 'var ' +
-          Blockly.Dart.variableDB_.getName(variables[x],
-          Blockly.Variables.NAME_TYPE) + ';';
-    }
-    Blockly.Dart.definitions_['variables'] = defvars.join('\n');
+  if (!Blockly.Dart.variableDB_) {
+    Blockly.Dart.variableDB_ =
+        new Blockly.Names(Blockly.Dart.RESERVED_WORDS_);
+  } else {
+    Blockly.Dart.variableDB_.reset();
   }
+
+  var defvars = [];
+  var variables = Blockly.Variables.allVariables();
+  for (var x = 0; x < variables.length; x++) {
+    defvars[x] = 'var ' +
+        Blockly.Dart.variableDB_.getName(variables[x],
+        Blockly.Variables.NAME_TYPE) + ';';
+  }
+  Blockly.Dart.definitions_['variables'] = defvars.join('\n');
 };
 
 /**

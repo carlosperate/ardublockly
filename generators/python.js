@@ -89,22 +89,20 @@ Blockly.Python.init = function() {
   // to actual function names (to avoid collisions with user functions).
   Blockly.Python.functionNames_ = Object.create(null);
 
-  if (Blockly.Variables) {
-    if (!Blockly.Python.variableDB_) {
-      Blockly.Python.variableDB_ =
-          new Blockly.Names(Blockly.Python.RESERVED_WORDS_);
-    } else {
-      Blockly.Python.variableDB_.reset();
-    }
-
-    var defvars = [];
-    var variables = Blockly.Variables.allVariables();
-    for (var x = 0; x < variables.length; x++) {
-      defvars[x] = Blockly.Python.variableDB_.getName(variables[x],
-          Blockly.Variables.NAME_TYPE) + ' = None';
-    }
-    Blockly.Python.definitions_['variables'] = defvars.join('\n');
+  if (!Blockly.Python.variableDB_) {
+    Blockly.Python.variableDB_ =
+        new Blockly.Names(Blockly.Python.RESERVED_WORDS_);
+  } else {
+    Blockly.Python.variableDB_.reset();
   }
+
+  var defvars = [];
+  var variables = Blockly.Variables.allVariables();
+  for (var x = 0; x < variables.length; x++) {
+    defvars[x] = Blockly.Python.variableDB_.getName(variables[x],
+        Blockly.Variables.NAME_TYPE) + ' = None';
+  }
+  Blockly.Python.definitions_['variables'] = defvars.join('\n');
 };
 
 /**
