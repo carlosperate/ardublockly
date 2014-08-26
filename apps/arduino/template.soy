@@ -263,7 +263,11 @@
         </value>
       </block>
     </category>
-    <category name="{msg meaning="Apps.catVariables" desc="IBID"}Variables{/msg}" custom="VARIABLE"></category>
+    <category name="{msg meaning="Apps.catVariables" desc="IBID"}Variables{/msg}">
+      <block type="variables_get"></block>
+      <block type="variables_set"></block>
+      <block type="variables_set_type"></block>
+    </category>
     <category name="{msg meaning="Apps.catProcedures" desc="IBID"}Functions{/msg}" custom="PROCEDURE"></category>
     <category name="{msg meaning="Apps.catIO" desc="IBID"}Input/Output{/msg}">
       <block type="io_digitalwrite"></block>
@@ -273,7 +277,7 @@
       <block type="io_analogread"></block>
       <block type="io_highlow"></block>
     </category>
-    <category name="{msg meaning="Apps.catIO" desc="IBID"}Time{/msg}">
+    <category name="{msg meaning="Apps.catTime" desc="IBID"}Time{/msg}">
       <block type="time_delay"></block>
       <block type="time_delaymicros"></block>
       <block type="time_millis"></block>
