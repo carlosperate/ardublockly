@@ -26,6 +26,9 @@
  */
 'use strict';
 
+goog.provide('Blockly.Arduino.base');
+
+goog.require('Blockly.Arduino');
 
 Blockly.Blocks['base_map'] = {
   init: function() {

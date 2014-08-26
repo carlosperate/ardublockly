@@ -44,3 +44,28 @@ Blockly.Arduino['variables_set'] = function(block) {
       block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   return varName + ' = ' + argument0 + ';\n';
 };
+
+
+Blockly.Blocks['variables_set_type'] = {
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/HomePage');
+    this.setColour(330);
+    this.appendValueInput("VARIABLE_SETTYPE_INPUT", '')
+        .appendField("set");
+    this.appendDummyInput("")
+        .appendField("as")
+        .appendField(new Blockly.FieldDropdown(profile.default.types), "VARIABLE_SETTYPE_TYPE");
+    this.setInputsInline(true);
+    this.setOutput(true);
+    this.setTooltip('Sets a value to a specific type');
+  }
+};
+
+Blockly.Arduino['variables_set_type'] = function(block) {
+  // Variable set type.
+  var argument0 = Blockly.Arduino.valueToCode(block, 'VARIABLE_SETTYPE_INPUT',
+      Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
+  var varType = block.getFieldValue('VARIABLE_SETTYPE_TYPE');
+  var code =  '(' + varType + ')' + argument0;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
