@@ -71,9 +71,12 @@ var profile = {
   arduino: {
     description: "Arduino Uno standard-compatible board",
     digital : [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
-    analog : [["A0", "A0"], ["A1", "A1"]],
+    analog : [["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
+    pwm : [["3", "3"], ["5", "5"], ["6", "6"], ["9", "9"], ["10", "10"], ["11", "11"]],
     interrupt: [["Int_1", "1"], ["Int_2", "2"], ["Int_3", "3"], ["Int_4", "4"], ["Int_5", "5"]],
     serial : [["300", "300"], ["600", "600"], ["1200", "1200"], ["2400", "2400"], ["4800", "4800"], ["9600", "9600"], ["14400", "14400"], ["19200", "19200"], ["28800", "28800"], ["31250", "31250"], ["38400", "38400"],["57600", "57600"], ["115200", "115200"]],
+    builtin_led: [["BUILTIN_1", "13"]],
+    pin_types: { INPUT: "INPUT", OUTPUT: "OUTPUT", PWM: "PWM" },
     types : [["void", "void"], ["Boolean", "boolean"], ["Character", "char"], ["Unsigned Character", "unsigned char"], ["Byte", "byte"], ["Integer", "int"], ["Unsigned Integer", "unsigned int"], ["Word", "word"], ["Long", "long"], ["Unsigned Long", "unsigned long"], ["Short", "short"], ["Float", "float"], ["Double", "double"], ["String", "String"], ["Char Array", "string"], ["Array", "array"]]
   },
   arduino_mega:{
@@ -105,6 +108,8 @@ Blockly.Arduino.init = function() {
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of setups to be printed before the code.
   Blockly.Arduino.setups_ = Object.create(null);
+  // Create a dictionary of pins to check if their use conflict
+  Blockly.Arduino.pins_ = Object.create(null);
 
   if (Blockly.Variables) {
     if (!Blockly.Arduino.variableDB_) {
