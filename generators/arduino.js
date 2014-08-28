@@ -110,46 +110,45 @@ Blockly.Arduino.init = function() {
   Blockly.Arduino.setups_ = Object.create(null);
   // Create a dictionary of pins to check if their use conflict
   Blockly.Arduino.pins_ = Object.create(null);
+  
+  if (!Blockly.Arduino.variableDB_) {
+    Blockly.Arduino.variableDB_ = new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
+  } else {
+    Blockly.Arduino.variableDB_.reset();
+  }
 
-  if (Blockly.Variables) {
-    if (!Blockly.Arduino.variableDB_) {
-      Blockly.Arduino.variableDB_ = new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
-    } else {
-      Blockly.Arduino.variableDB_.reset();
-    }
-
-    // Iterate through the blocks to capture variables with first value
-    var variableWithType = Object.create(null);
-    var blocks = Blockly.mainWorkspace.getAllBlocks();
-    for (var x = 0; x < blocks.length; x++) {
-      var func = blocks[x].getVars;
-      if (func) {
-        var blockVariables = func.call(blocks[x]);
-        for (var y = 0; y < blockVariables.length; y++) {
-          // Check if it's the first instance of the new variable name
-          var unique = true;
-          for (var name in variableWithType) {
-            if (name == blockVariables[y]) {
-              unique = false;
-              break;
-            }
+  // Iterate through the blocks to capture variables with first value
+  var variableWithType = Object.create(null);
+  var blocks = Blockly.mainWorkspace.getAllBlocks();
+  for (var x = 0; x < blocks.length; x++) {
+    var func = blocks[x].getVars;
+    if (func) {
+      var blockVariables = func.call(blocks[x]);
+      for (var y = 0; y < blockVariables.length; y++) {
+        // Check if it's the first instance of the new variable name
+        var unique = true;
+        for (var name in variableWithType) {
+          if (name == blockVariables[y]) {
+            unique = false;
+            break;
           }
-          // If it is the first instance log the variable type
-          if (unique == true) {
-            variableWithType[blockVariables[y]] = Blockly.Arduino.evaluateType(
-            Blockly.Arduino.valueToCode(blocks[x], 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT));
-          }
+        }
+        // If it is the first instance log the variable type
+        if (unique == true) {
+          variableWithType[blockVariables[y]] = Blockly.Arduino.evaluateType(
+          Blockly.Arduino.valueToCode(blocks[x], 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT));
         }
       }
     }
-
-    // Set variable declarations
-    var variableDeclarations = [];  
-    for (var name in variableWithType) {
-      variableDeclarations.push(variableWithType[name] + ' ' + name + ';');
-    }
-    Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n') + '\n';
   }
+
+  // Set variable declarations
+  var variableDeclarations = [];  
+  for (var name in variableWithType) {
+    variableDeclarations.push(variableWithType[name] + ' ' + name + ';');
+  }
+  Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n') + '\n';
+
 };
 
 /**
