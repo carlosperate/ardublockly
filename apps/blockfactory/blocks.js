@@ -40,10 +40,10 @@ Blockly.Blocks['factory_base'] = {
         .appendField(dropdown, 'INLINE');
     dropdown = new Blockly.FieldDropdown([
         ['no connections', 'NONE'],
-        ['left output', 'LEFT'],
-        ['top+bottom connections', 'BOTH'],
-        ['top connection', 'TOP'],
-        ['bottom connection', 'BOTTOM']],
+        ['← left output', 'LEFT'],
+        ['↕ top+bottom connections', 'BOTH'],
+        ['↑ top connection', 'TOP'],
+        ['↓ bottom connection', 'BOTTOM']],
         function(option) {
           var block = this.sourceBlock_;
           var outputExists = block.getInput('OUTPUTTYPE');

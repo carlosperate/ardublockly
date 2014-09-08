@@ -126,6 +126,10 @@ Blockly.parseOptions_ = function(options) {
       hasScrollbars = true;
     }
   }
+  var hasSounds = options['sounds'];
+  if (hasSounds === undefined) {
+    hasSounds = true;
+  }
   var enableRealtime = !!options['realtime'];
   var realtimeOptions = enableRealtime ? options['realtimeOptions'] : undefined;
 
@@ -139,6 +143,7 @@ Blockly.parseOptions_ = function(options) {
   Blockly.hasCategories = hasCategories;
   Blockly.hasScrollbars = hasScrollbars;
   Blockly.hasTrashcan = hasTrashcan;
+  Blockly.hasSounds = hasSounds;
   Blockly.languageTree = tree;
   Blockly.enableRealtime = enableRealtime;
   Blockly.realtimeOptions = realtimeOptions;
@@ -349,20 +354,6 @@ Blockly.createDom_ = function(container) {
  * @private
  */
 Blockly.init_ = function() {
-  // Bind temporary hooks that preload the sounds.
-  var soundBinds = [];
-  var unbindSounds = function() {
-    while (soundBinds.length) {
-      Blockly.unbindEvent_(soundBinds.pop());
-    }
-    Blockly.preloadAudio_();
-  };
-  // Android ignores any sound not loaded as a result of a user action.
-  soundBinds.push(
-      Blockly.bindEvent_(document, 'mousemove', null, unbindSounds));
-  soundBinds.push(
-      Blockly.bindEvent_(document, 'touchstart', null, unbindSounds));
-
   // Bind events for scrolling the workspace.
   // Most of these events should be bound to the SVG's surface.
   // However, 'mouseup' has to be on the whole document so that a block dragged
@@ -419,10 +410,26 @@ Blockly.init_ = function() {
   Blockly.mainWorkspace.addTrashcan();
 
   // Load the sounds.
-  Blockly.loadAudio_(
-      ['media/click.mp3', 'media/click.wav', 'media/click.ogg'], 'click');
-  Blockly.loadAudio_(
-      ['media/delete.mp3', 'media/delete.ogg', 'media/delete.wav'], 'delete');
+  if (Blockly.hasSounds) {
+    Blockly.loadAudio_(
+        ['media/click.mp3', 'media/click.wav', 'media/click.ogg'], 'click');
+    Blockly.loadAudio_(
+        ['media/delete.mp3', 'media/delete.ogg', 'media/delete.wav'], 'delete');
+
+    // Bind temporary hooks that preload the sounds.
+    var soundBinds = [];
+    var unbindSounds = function() {
+      while (soundBinds.length) {
+        Blockly.unbindEvent_(soundBinds.pop());
+      }
+      Blockly.preloadAudio_();
+    };
+    // Android ignores any sound not loaded as a result of a user action.
+    soundBinds.push(
+        Blockly.bindEvent_(document, 'mousemove', null, unbindSounds));
+    soundBinds.push(
+        Blockly.bindEvent_(document, 'touchstart', null, unbindSounds));
+  }
 };
 
 /**
