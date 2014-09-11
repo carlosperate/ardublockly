@@ -69,15 +69,42 @@ Blockly.Arduino.ORDER_NONE = 99;          // (...)
  */
 var profile = {
   arduino: {
+    name: "Arduino Uno",
     description: "Arduino Uno standard-compatible board",
-    digital : [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"], ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"], ["11", "11"], ["12", "12"], ["13", "13"], ["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
-    analog : [["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"], ["A5", "A5"]],
-    pwm : [["3", "3"], ["5", "5"], ["6", "6"], ["9", "9"], ["10", "10"], ["11", "11"]],
-    interrupt: [["Int_1", "1"], ["Int_2", "2"], ["Int_3", "3"], ["Int_4", "4"], ["Int_5", "5"]],
-    serial : [["300", "300"], ["600", "600"], ["1200", "1200"], ["2400", "2400"], ["4800", "4800"], ["9600", "9600"], ["14400", "14400"], ["19200", "19200"], ["28800", "28800"], ["31250", "31250"], ["38400", "38400"],["57600", "57600"], ["115200", "115200"]],
+    digital : [["1", "1"], ["2", "2"], ["3", "3"], ["4", "4"], ["5", "5"],
+               ["6", "6"], ["7", "7"], ["8", "8"], ["9", "9"], ["10", "10"],
+               ["11", "11"], ["12", "12"], ["13", "13"], ["A0", "A0"],
+               ["A1", "A1"], ["A2", "A2"], ["A3", "A3"], ["A4", "A4"],
+               ["A5", "A5"]],
+    analog : [["A0", "A0"], ["A1", "A1"], ["A2", "A2"], ["A3", "A3"],
+              ["A4", "A4"], ["A5", "A5"]],
+    pwm : [["3", "3"], ["5", "5"], ["6", "6"], ["9", "9"], ["10", "10"],
+           ["11", "11"]],
+    interrupt: [["Int_1", "1"], ["Int_2", "2"], ["Int_3", "3"], ["Int_4", "4"],
+                ["Int_5", "5"]],
+    serial : [["300", "300"], ["600", "600"], ["1200", "1200"],
+              ["2400", "2400"], ["4800", "4800"], ["9600", "9600"],
+              ["14400", "14400"], ["19200", "19200"], ["28800", "28800"],
+              ["31250", "31250"], ["38400", "38400"],["57600", "57600"],
+              ["115200", "115200"]],
     builtin_led: [["BUILTIN_1", "13"]],
-    pin_types: { INPUT: "INPUT", OUTPUT: "OUTPUT", PWM: "PWM", SERVO: "SERVO" , STEPPER: "STEPPER" },
-    types : [["void", "void"], ["Boolean", "boolean"], ["Character", "char"], ["Unsigned Character", "unsigned char"], ["Byte", "byte"], ["Integer", "int"], ["Unsigned Integer", "unsigned int"], ["Word", "word"], ["Long", "long"], ["Unsigned Long", "unsigned long"], ["Short", "short"], ["Float", "float"], ["Double", "double"], ["String", "String"], ["Char Array", "string"], ["Array", "array"]]
+    pin_types: { INPUT: "INPUT", OUTPUT: "OUTPUT", PWM: "PWM", SERVO: "SERVO",
+                 STEPPER: "STEPPER", SPI: "SPI" },
+    types : [["void", "void"], ["Boolean", "boolean"], ["Character", "char"],
+             ["Unsigned Character", "unsigned char"], ["Byte", "byte"],
+             ["Integer", "int"], ["Unsigned Integer", "unsigned int"],
+             ["Word", "word"], ["Long", "long"],
+             ["Unsigned Long", "unsigned long"], ["Short", "short"],
+             ["Float", "float"], ["Double", "double"], ["String", "String"],
+             ["Char Array", "string"], ["Array", "array"]],
+    spi_clock_divide: [['2 (8MHz)', 'SPI_CLOCK_DIV2'],
+                       ['4 (4MHz)', 'SPI_CLOCK_DIV4'],
+                       ['8 (2MHz)', 'SPI_CLOCK_DIV8'],
+                       ['16 (1MHz)', 'SPI_CLOCK_DIV16'],
+                       ['32 (500KHz)', 'SPI_CLOCK_DIV32'],
+                       ['64 (250KHz)', 'SPI_CLOCK_DIV64'],
+                       ['128 (125KHz)', 'SPI_CLOCK_DIV128']],
+    spi_pins: [["MOSI", "11"], ["MISO", "12"], ["SCK", "13"]]
   },
   arduino_mega:{
     description: "Arduino Mega-compatible board"
@@ -112,7 +139,8 @@ Blockly.Arduino.init = function() {
   Blockly.Arduino.pins_ = Object.create(null);
   
   if (!Blockly.Arduino.variableDB_) {
-    Blockly.Arduino.variableDB_ = new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
+    Blockly.Arduino.variableDB_ =
+        new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
   } else {
     Blockly.Arduino.variableDB_.reset();
   }
@@ -136,7 +164,8 @@ Blockly.Arduino.init = function() {
         // If it is the first instance log the variable type
         if (unique == true) {
           variableWithType[blockVariables[y]] = Blockly.Arduino.evaluateType(
-          Blockly.Arduino.valueToCode(blocks[x], 'VALUE', Blockly.Arduino.ORDER_ASSIGNMENT));
+              Blockly.Arduino.valueToCode(blocks[x], 'VALUE',
+              Blockly.Arduino.ORDER_ASSIGNMENT));
         }
       }
     }
@@ -147,7 +176,8 @@ Blockly.Arduino.init = function() {
   for (var name in variableWithType) {
     variableDeclarations.push(variableWithType[name] + ' ' + name + ';');
   }
-  Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n') + '\n';
+  Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n') +
+      '\n';
 
 };
 
