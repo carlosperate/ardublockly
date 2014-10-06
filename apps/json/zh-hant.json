@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Gasolin",
-			"Justincheng12345"
+			"Justincheng12345",
+			"LNDDYL"
 		]
 	},
 	"Apps.subtitle": "視覺化程式設計環境",
@@ -148,9 +149,9 @@
 	"Turtle.printTooltip": "在烏龜的方向及位置繪製文字。",
 	"Turtle.print": "印出",
 	"Turtle.fontHelpUrl": "https://zh.wikipedia.org/wiki/字體",
-	"Turtle.fontTooltip": "設置列印模組使用的字型。",
+	"Turtle.fontTooltip": "設定列印模組使用的字型。",
 	"Turtle.font": "字型",
-	"Turtle.fontSize": "字體大小",
+	"Turtle.fontSize": "字型大小",
 	"Turtle.fontNormal": "一般",
 	"Turtle.fontBold": "粗體",
 	"Turtle.fontItalic": "斜體",

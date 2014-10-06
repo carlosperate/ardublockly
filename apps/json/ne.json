@@ -57,6 +57,7 @@
 	"Puzzle.error0": "उत्तम !\nसबै  %1 ब्लकहरू सहि छन्",
 	"Puzzle.help": "सहायता",
 	"Turtle.print": "छाप्नुहोस्",
+	"Turtle.font": "फन्ट",
 	"Turtle.fontSize": "फन्ट आकार",
 	"Turtle.fontNormal": "सामान्य",
 	"Turtle.fontBold": "मोटो",

@@ -3,7 +3,8 @@
 		"authors": [
 			"Beta16",
 			"Isiond",
-			"Nerimic"
+			"Nerimic",
+			"Alessandro.bogliolo"
 		]
 	},
 	"Apps.subtitle": "un ambiente di programmazione grafico",
@@ -88,7 +89,7 @@
 	"Plane.rows": "File: %1",
 	"Plane.getRows": "file (%1)",
 	"Plane.rows1": "File 1ª classe: %1",
-	"Plane.getRows1": "file 1ª classe (%1)",
+	"Plane.getRows1": "File 1ª classe (%1)",
 	"Plane.rows2": "File 2ª classe: %1",
 	"Plane.getRows2": "File 2ª classe (%1)",
 	"Plane.seats": "Sedili: %1",

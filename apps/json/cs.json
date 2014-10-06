@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Chmee2",
-			"Michaelbrabec"
+			"Michaelbrabec",
+			"Kusavica"
 		]
 	},
 	"Apps.subtitle": "grafické programovací prostředí",
@@ -20,7 +21,7 @@
 	"Apps.catLists": "Seznamy",
 	"Apps.catColour": "Barva",
 	"Apps.catVariables": "Proměnné",
-	"Apps.catProcedures": "Procedury",
+	"Apps.catProcedures": "Funkce",
 	"Apps.httpRequestError": "Došlo k potížím s požadavkem.",
 	"Apps.linkAlert": "Sdílej bloky tímto odkazem: \n\n%1",
 	"Apps.hashError": "Omlouváme se, '%1' nesouhlasí s žádným z uložených souborů.",

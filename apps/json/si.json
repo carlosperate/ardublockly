@@ -1,9 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Sahan.ssw"
+			"Sahan.ssw",
+			"හරිත"
 		]
 	},
+	"Apps.subtitle": "දෘශ්‍ය ක්‍රමලේඛන පරිස්ථිතියක්",
+	"Apps.blocklyMessage": "රූපතහඩුමය",
+	"Apps.codeTooltip": "ජනිත ජාවාපිටපත් කේතය බලන්න.",
+	"Apps.linkTooltip": "රූපතහඩු වලට සුරැක සබඳින්න.",
 	"Apps.runProgram": "මෘදුකාංගය ක්‍රියාත්මක කරන්න",
 	"Apps.resetProgram": "නැවත සකසන්න",
 	"Apps.dialogOk": "හරි",
@@ -18,7 +23,14 @@
 	"Apps.httpRequestError": "ඉල්ලීමෙහි දෝෂයක් තිබුනි.",
 	"Apps.listVariable": "ලැයිස්තුව",
 	"Apps.textVariable": "පෙළ",
+	"Code.title": "කේතය",
+	"Code.blocks": "රූපතහඩු",
 	"Graph.title": "ප්‍රස්තාරික ගණක යන්ත්‍රය",
+	"Apps.indexTitle": "රූපතහඩුමය වැඩසටහන්",
+	"Puzzle.title": "ප්‍රහේලිකාව",
+	"Apps.puzzleSubtitle": "බ්ලොක්ලිහි අතුරුමුහුණත භාවිතය ඉගෙනගන්න.",
+	"Maze.maze": "අවුල් ජාලය",
+	"Apps.mazeSubtitle": "පැටලිල්ල ලිහා ගැනීමට බ්ලොක්ලි භාවිත කරන්න.",
 	"Apps.planeSubtitle": "විචල්‍යයන් එකක් හෝ දෙකක් සමඟ ගණිත ගැටලුවක් විසඳන්න.",
 	"Maze.moveForward": "ඉදිරියට යන්න",
 	"Maze.turnLeft": "වමට හැරෙන්න",

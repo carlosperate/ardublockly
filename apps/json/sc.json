@@ -1,7 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Via maxima"
+			"Via maxima",
+			"L2212",
+			"Taxandru",
+			"Uharteko"
 		]
 	},
 	"Apps.subtitle": "un'ambienti gràficu po programai",
@@ -12,19 +15,19 @@
 	"Apps.runProgram": "Arròllia su Programa",
 	"Apps.resetProgram": "Reset",
 	"Apps.dialogOk": "OK",
-	"Apps.dialogCancel": "Anudda",
+	"Apps.dialogCancel": "Annulla",
 	"Apps.catLogic": "Lògica",
 	"Apps.catLoops": "Lòrigas",
 	"Apps.catMath": "Matemàtica",
 	"Apps.catText": "Testu",
 	"Apps.catLists": "Lista",
-	"Apps.catColour": "Colori",
-	"Apps.catVariables": "Variabilis",
-	"Apps.catProcedures": "Funtzionis",
-	"Apps.httpRequestError": "Ddui fut unu problema cun sa pregunta",
-	"Apps.linkAlert": "Poni is brocus tuus in custu acàpiu:\n\n%1",
-	"Apps.hashError": "Mi dispraxit, '%1' non torrat a pari cun nimancu unu de is programas sarvaus.",
-	"Apps.xmlError": "Non potzu carrigai su file sarvau. Fortzis est stètiu fatu cun d-una versioni diferenti de Blockly?",
+	"Apps.catColour": "Colore",
+	"Apps.catVariables": "Variàbiles",
+	"Apps.catProcedures": "Funtziones",
+	"Apps.httpRequestError": "Bi fiat unu problema cun sa pregonta",
+	"Apps.linkAlert": "Pone sos arreamentos tuos in custu ligòngiu:\n\n%1",
+	"Apps.hashError": "Mi dispraxit, '%1' non torrat a pari cun nimancu unu de is programas allogaus.",
+	"Apps.xmlError": "Non potzu carrigai su file allogau. Fortzis est stètiu fatu cun d-una versioni diferenti de Blockly?",
 	"Apps.listVariable": "lista",
 	"Apps.textVariable": "testu",
 	"Code.badXml": "Errori in s'anàlisi XML:\n%1\n\nCraca 'OK' po perdi is mudàntzias 'Anudda' po sighì a scriri su XML.",
@@ -39,7 +42,7 @@
 	"Apps.indexFooter": "Blockly est free e open source.  Po agiudai in sa codifica o in sa furriadura de Blockly, o po imperai Blockly in sa app cosa tua, bisita %1.",
 	"Apps.choiceIntro": "Blockly est un'ambienti gràficu po programai.  Asuta agatas pariga de programas cuncordaus cun Blockly.",
 	"Puzzle.title": "Puzzle",
-	"Apps.puzzleSubtitle": "Impara a manigiai s'interfacia de Blockly.",
+	"Apps.puzzleSubtitle": "Impara a manigiai s'interfaci de Blockly.",
 	"Maze.maze": "Labirintu",
 	"Apps.mazeSubtitle": "Impera Blockly po arresòlvi unu labirintu.",
 	"Turtle.title": "Tostoinu Gràficu",
@@ -142,7 +145,7 @@
 	"Turtle.penDown": "pinna calada",
 	"Turtle.turtleVisibilityTooltip": "Fait su tostoinu (circu cun sa frícia), visibili o invisìbili.",
 	"Turtle.hideTurtle": "cua su tostoinu",
-	"Turtle.showTurtle": "amosta su tostoinu",
+	"Turtle.showTurtle": "ammustra su tostoine",
 	"Turtle.printHelpUrl": "https://en.wikipedia.org/wiki/Printing",
 	"Turtle.printTooltip": "Poni su testu anca est postu e anca est tirendi su tostoinu.",
 	"Turtle.print": "imprenta",
@@ -155,7 +158,7 @@
 	"Turtle.fontItalic": "italic",
 	"Turtle.unloadWarning": "Serrendi custa pàgina as a perdi totu su traballu.",
 	"Turtle.runTooltip": "Poni su giogadori a fai su chi nant is brocus.",
-	"Turtle.captureTooltip": "Sarva su disinnu.",
+	"Turtle.captureTooltip": "Sarba su disinnu.",
 	"Turtle.imgFilename": "drawing.png",
 	"Turtle.catTurtle": "Tostoinu"
 }

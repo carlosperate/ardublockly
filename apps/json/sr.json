@@ -20,7 +20,7 @@
 	"Apps.catLists": "Спискови",
 	"Apps.catColour": "Боја",
 	"Apps.catVariables": "Променљиве",
-	"Apps.catProcedures": "Процедуре",
+	"Apps.catProcedures": "Функције",
 	"Apps.httpRequestError": "Дошло је до проблема у захтеву.",
 	"Apps.linkAlert": "Делите своје блокове овом везом:\n\n%1",
 	"Apps.hashError": "„%1“ не одговара ниједном сачуваном програму.",
