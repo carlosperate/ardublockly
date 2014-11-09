@@ -3,7 +3,7 @@
  * Visual Blocks Editor
  *
  * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
+ * https://developers.google.com/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -165,7 +165,13 @@ Blockly.Field.prototype.getRootElement = function() {
  * @private
  */
 Blockly.Field.prototype.render_ = function() {
-  var width = this.textElement_.getComputedTextLength();
+  try {
+    var width = this.textElement_.getComputedTextLength();
+  } catch(e) {
+    // MSIE 11 is known to throw "Unexpected call to method or property access."
+    // if Blockly is hidden.
+    var width = this.textElement_.childNodes[0].length * 8;
+  }
   if (this.borderRect_) {
     this.borderRect_.setAttribute('width',
         width + Blockly.BlockSvg.SEP_SPACE_X);

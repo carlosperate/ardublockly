@@ -12,6 +12,11 @@ Thumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
+########
+# IDEs #
+########
+*.komodoproject
+
 ##########
 # Python #
 ##########

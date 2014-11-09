@@ -2,7 +2,7 @@
 # Compresses the core Blockly files into a single JavaScript file.
 #
 # Copyright 2012 Google Inc.
-# https://blockly.googlecode.com/
+# https://developers.google.com/blockly/
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ window.BLOCKLY_BOOT = function() {
 // Execute after Closure has loaded.
 if (!window.goog) {
   alert('Error: Closure not found.  Read this:\\n' +
-        'https://code.google.com/p/blockly/wiki/Closure\\n');
+        'developers.google.com/blockly/hacking/closure');
 }
 
 // Build map of all dependencies (used and unused).
@@ -129,7 +129,7 @@ delete window.BLOCKLY_BOOT;
 document.write('<script type="text/javascript">var goog = undefined;</script>');
 // Load fresh Closure Library.
 document.write('<script type="text/javascript" src="' + window.BLOCKLY_DIR +
-    '/../closure-library-read-only/closure/goog/base.js"></script>');
+    '/../closure-library/closure/goog/base.js"></script>');
 document.write('<script type="text/javascript">window.BLOCKLY_BOOT()</script>');
 """)
     f.close()
@@ -290,7 +290,7 @@ class Gen_compressed(threading.Thread):
  [\w ]+
 
  (Copyright \\d+ Google Inc.)
- https://blockly.googlecode.com/
+ https://developers.google.com/blockly/
 
  Licensed under the Apache License, Version 2.0 \(the "License"\);
  you may not use this file except in compliance with the License.
@@ -404,13 +404,19 @@ class Gen_langfiles(threading.Thread):
 if __name__ == '__main__':
   try:
     calcdeps = import_path(os.path.join(os.path.pardir,
-          'closure-library-read-only', 'closure', 'bin', 'calcdeps.py'))
+          'closure-library', 'closure', 'bin', 'calcdeps.py'))
   except ImportError:
-    print("""Error: Closure not found.  Read this:
-http://code.google.com/p/blockly/wiki/Closure""")
+    if os.path.isdir(os.path.join(os.path.pardir, 'closure-library-read-only')):
+      # Dir got renamed when Closure moved from Google Code to GitHub in 2014.
+      print("Error: Closure directory needs to be renamed from"
+            "'closure-library-read-only' to 'closure-library'.\n"
+            "Please rename this directory.")
+    else:
+      print("""Error: Closure not found.  Read this:
+https://developers.google.com/blockly/hacking/closure""")
     sys.exit(1)
   search_paths = calcdeps.ExpandDirectories(
-      ['core', os.path.join(os.path.pardir, 'closure-library-read-only')])
+      ['core', os.path.join(os.path.pardir, 'closure-library')])
 
   # Run both tasks in parallel threads.
   # Uncompressed is limited by processor speed.

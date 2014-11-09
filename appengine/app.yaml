@@ -50,12 +50,8 @@ handlers:
 - url: /static/apps/plane/(1_|2_)?(en|hu|vi|vn)\.html
   static_files: redirect.html
   upload: redirect.html
-# Puzzle moved to index.html on 30 Jul 2013.
-- url: /static/apps/puzzle/puzzle\.html
-  static_files: redirect.html
-  upload: redirect.html
-# Puzzle became language-agnostic on 20 Jul 2013.
-- url: /static/apps/puzzle/(af|cs|de|el|en|gl|hak|he|hu|ia|it|ja|ko|ksh|la|lb|lv|mk|ms|nl|pl|pt-br|ru|sv|sw|tzm|vi|zh-hans)\.html
+# Puzzle moved to Blockly Games on 15 Oct 2014.
+- url: /static/apps/puzzle/.*
   static_files: redirect.html
   upload: redirect.html
 # Turtle moved to index.html on 7 Aug 2013.
@@ -64,6 +60,10 @@ handlers:
   upload: redirect.html
 # Turtle became language-agnostic on 20 Jul 2013.
 - url: /static/apps/turtle/(de|en|hu|vi)\.html
+  static_files: redirect.html
+  upload: redirect.html
+# Block Factory moved from apps to demos on 16 Oct 2014.
+- url: /static/apps/blockfactory/.*
   static_files: redirect.html
   upload: redirect.html
 
@@ -83,8 +83,8 @@ handlers:
   secure: always
 
 # Closure library for uncompiled Blockly.
-- url: /closure-library-read-only
-  static_dir: closure-library-read-only
+- url: /closure-library
+  static_dir: closure-library
   secure: always
 
 # Redirect for root directory.

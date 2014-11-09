@@ -2,7 +2,7 @@
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
+ * https://developers.google.com/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,6 +85,9 @@ Blockly.JavaScript['unittest_main'].defineAssert_ = function(block) {
         '  }',
         '  function equals(a, b) {',
         '    if (a === b) {',
+        '      return true;',
+        '    } else if ((typeof a == "number") && (typeof b == "number") &&',
+        '        (a.toPrecision(15) == b.toPrecision(15))) {',
         '      return true;',
         '    } else if (a instanceof Array && b instanceof Array) {',
         '      if (a.length != b.length) {',
