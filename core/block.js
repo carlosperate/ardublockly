@@ -427,7 +427,7 @@ Blockly.Block.prototype.unplug = function(healStack, bump) {
       // Disconnect the next statement.
       var nextTarget = this.nextConnection.targetConnection;
       nextBlock.setParent(null);
-      if (previousTarget) {
+      if (previousTarget && previousTarget.checkType_(nextTarget)) {
         // Attach the next statement to the previous statement.
         previousTarget.connect(nextTarget);
       }
@@ -518,7 +518,7 @@ Blockly.Block.prototype.onMouseDown_ = function(e) {
   } else {
     // Left-click (or middle click)
     Blockly.removeAllRanges();
-    Blockly.setCursorHand_(true);
+    Blockly.Css.setCursor(Blockly.Css.Cursor.CLOSED);
     // Look up the current translation and record it.
     var xy = this.getRelativeToSurfaceXY();
     this.startDragX = xy.x;

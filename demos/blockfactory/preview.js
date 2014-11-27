@@ -1,5 +1,5 @@
 /**
- * Blockly Apps: Block Factory
+ * Blockly Demos: Block Factory
  *
  * Copyright 2013 Google Inc.
  * https://developers.google.com/blockly/
@@ -53,7 +53,7 @@ function updateFunc(type, code) {
  */
 function init() {
   var rtl = (document.location.search == '?rtl');
-  Blockly.inject(document.body, {path: '../../', rtl: rtl});
+  Blockly.inject(document.body, {rtl: rtl});
 
   try {
     // Let the top-level application know that Blockly is ready.

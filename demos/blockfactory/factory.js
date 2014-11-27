@@ -1,5 +1,5 @@
 /**
- * Blockly Apps: Block Factory
+ * Blockly Demos: Block Factory
  *
  * Copyright 2012 Google Inc.
  * https://developers.google.com/blockly/
@@ -454,8 +454,7 @@ function init() {
   window.addEventListener('resize', onresize);
 
   var toolbox = document.getElementById('toolbox');
-  Blockly.inject(document.getElementById('blockly'),
-                 {path: '../../', toolbox: toolbox});
+  Blockly.inject(document.getElementById('blockly'), {toolbox: toolbox});
 
   // Create the root block.
   if ('BlocklyStorage' in window && window.location.hash.length > 1) {
