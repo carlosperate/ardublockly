@@ -102,7 +102,7 @@ Blockly.Toolbox.createDom = function(svg, container) {
  */
 Blockly.Toolbox.init = function() {
   Blockly.Toolbox.CONFIG_['cleardotPath'] =
-      Blockly.pathToBlockly + 'media/1x1.gif';
+      Blockly.pathToMedia + '1x1.gif';
   Blockly.Toolbox.CONFIG_['cssCollapsedFolderIcon'] =
       'blocklyTreeIconClosed' + (Blockly.RTL ? 'Rtl' : 'Ltr');
   var tree = new Blockly.Toolbox.TreeControl(goog.html.SafeHtml.EMPTY,
@@ -172,6 +172,8 @@ Blockly.Toolbox.populate_ = function() {
         } else {
           syncTrees(childIn, childOut);
         }
+      } else if (name == 'HR') {
+        treeOut.add(new Blockly.Toolbox.TreeSeparator());
       } else if (name == 'BLOCK') {
         treeOut.blocks.push(childIn);
       }
@@ -273,7 +275,7 @@ Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
 };
 
 /**
- * An single node in the tree, customized for Blockly's UI.
+ * A single node in the tree, customized for Blockly's UI.
  * @param {!goog.html.SafeHtml} html The HTML content of the node label.
  * @param {Object=} opt_config The configuration for the tree. See
  *    goog.ui.tree.TreeControl.DefaultConfig. If not specified, a default config
@@ -330,4 +332,25 @@ Blockly.Toolbox.TreeNode.prototype.onMouseDown = function(e) {
  */
 Blockly.Toolbox.TreeNode.prototype.onDoubleClick_ = function(e) {
   // NOP.
+};
+
+/**
+ * A blank separator node in the tree.
+ * @constructor
+ * @extends {Blockly.Toolbox.TreeNode}
+ */
+Blockly.Toolbox.TreeSeparator = function() {
+  Blockly.Toolbox.TreeNode.call(this, '',
+      Blockly.Toolbox.TreeSeparator.CONFIG_);
+};
+goog.inherits(Blockly.Toolbox.TreeSeparator, Blockly.Toolbox.TreeNode);
+
+/**
+ * Configuration constants for tree separator.
+ * @type {Object.<string,*>}
+ * @const
+ * @private
+ */
+Blockly.Toolbox.TreeSeparator.CONFIG_ = {
+  cssTreeRow: 'blocklyTreeSeparator'
 };

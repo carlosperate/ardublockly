@@ -139,7 +139,12 @@ Blockly.parseOptions_ = function(options) {
   Blockly.disable = hasDisable;
   Blockly.readOnly = readOnly;
   Blockly.maxBlocks = options['maxBlocks'] || Infinity;
-  Blockly.pathToBlockly = options['path'] || './';
+  if (options['media']) {
+    Blockly.pathToMedia = options['media'];
+  } else if (options['path']) {
+    // 'path' is a deprecated option which has been replaced by 'media'.
+    Blockly.pathToMedia = options['path'] + 'media/';
+  }
   Blockly.hasCategories = hasCategories;
   Blockly.hasScrollbars = hasScrollbars;
   Blockly.hasTrashcan = hasTrashcan;
@@ -412,9 +417,13 @@ Blockly.init_ = function() {
   // Load the sounds.
   if (Blockly.hasSounds) {
     Blockly.loadAudio_(
-        ['media/click.mp3', 'media/click.wav', 'media/click.ogg'], 'click');
+        [Blockly.pathToMedia + 'click.mp3',
+         Blockly.pathToMedia + 'click.wav',
+         Blockly.pathToMedia + 'click.ogg'], 'click');
     Blockly.loadAudio_(
-        ['media/delete.mp3', 'media/delete.ogg', 'media/delete.wav'], 'delete');
+        [Blockly.pathToMedia + 'delete.mp3',
+         Blockly.pathToMedia + 'delete.ogg',
+         Blockly.pathToMedia + 'delete.wav'], 'delete');
 
     // Bind temporary hooks that preload the sounds.
     var soundBinds = [];
