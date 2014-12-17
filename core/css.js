@@ -28,6 +28,7 @@ goog.provide('Blockly.Css');
 
 goog.require('goog.cssom');
 
+
 /**
  * List of cursors.
  * @enum {string}
@@ -37,6 +38,12 @@ Blockly.Css.Cursor = {
   CLOSED: 'handclosed',
   DELETE: 'handdelete'
 };
+
+/**
+ * Current cursor (cached value).
+ * @type string
+ */
+Blockly.Css.currentCursor_ = '';
 
 /**
  * Large stylesheet added by Blockly.Css.inject.
@@ -64,10 +71,8 @@ Blockly.Css.inject = function() {
   // Strip off any trailing slash (either Unix or Windows).
   Blockly.Css.mediaPath_ = Blockly.pathToMedia.replace(/[\\\/]$/, '');
   text = text.replace(/<<<PATH>>>/g, Blockly.Css.mediaPath_);
-  goog.cssom.addCssText(text);
-  var sheets = goog.cssom.getAllCssStyleSheets();
-  Blockly.Css.styleSheet_ = sheets[sheets.length - 1];
-  Blockly.Css.setCursor('handopen');
+  Blockly.Css.styleSheet_ = goog.cssom.addCssText(text).sheet;
+  Blockly.Css.setCursor(Blockly.Css.Cursor.OPEN);
 };
 
 /**
@@ -75,9 +80,10 @@ Blockly.Css.inject = function() {
  * @param {Blockly.Cursor} cursor Enum.
  */
 Blockly.Css.setCursor = function(cursor) {
-  if (Blockly.readOnly) {
+  if (Blockly.readOnly || Blockly.Css.currentCursor_ == cursor) {
     return;
   }
+  Blockly.Css.currentCursor_ = cursor;
   /*
     Hotspot coordinates are baked into the CUR file, but they are still
     required in the CSS due to a Chrome bug.
@@ -88,10 +94,30 @@ Blockly.Css.setCursor = function(cursor) {
   } else {
     var xy = '7 3';
   }
-  var rule = '.blocklyDraggable {\n' +
-      '  cursor: url(' + Blockly.Css.mediaPath_ + '/' + cursor + '.cur)' +
-      ' ' + xy + ', auto;\n}\n';
+  var url = 'url(' + Blockly.Css.mediaPath_ + '/' + cursor +
+      '.cur) ' + xy + ', auto';
+  // There are potentially hundreds of draggable objects.  Changing their style
+  // properties individually is too slow, so change the CSS rule instead.
+  var rule = '.blocklyDraggable {\n  cursor: ' + url + ';\n}\n';
   goog.cssom.replaceCssRule('', rule, Blockly.Css.styleSheet_, 0);
+  // There is probably only one toolbox, so just change its style property.
+  var toolboxen = document.getElementsByClassName('blocklyToolboxDiv');
+  for (var i = 0, toolbox; toolbox = toolboxen[i]; i++) {
+    if (cursor == Blockly.Css.Cursor.OPEN) {
+      toolbox.style.cursor = '';
+    } else {
+      toolbox.style.cursor = url;
+    }
+  }
+  // Set cursor on the SVG surface as well, so that rapid movements
+  // don't result in cursor changing to an arrow momentarily.
+  if (Blockly.svg) {
+    if (cursor == Blockly.Css.Cursor.OPEN) {
+      Blockly.svg.style.cursor = '';
+    } else {
+      Blockly.svg.style.cursor = url;
+    }
+  }
 };
 
 /**
