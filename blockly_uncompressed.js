@@ -30,7 +30,7 @@ goog.addDependency("../../../" + dir + "/core/blockly.js", ['Blockly'], ['Blockl
 goog.addDependency("../../../" + dir + "/core/blocks.js", ['Blockly.Blocks'], ['goog.asserts']);
 goog.addDependency("../../../" + dir + "/core/bubble.js", ['Blockly.Bubble'], ['Blockly.Workspace', 'goog.math']);
 goog.addDependency("../../../" + dir + "/core/comment.js", ['Blockly.Comment'], ['Blockly.Bubble', 'Blockly.Icon', 'goog.userAgent']);
-goog.addDependency("../../../" + dir + "/core/connection.js", ['Blockly.Connection', 'Blockly.ConnectionDB'], ['Blockly.Workspace']);
+goog.addDependency("../../../" + dir + "/core/connection.js", ['Blockly.Connection', 'Blockly.ConnectionDB'], ['Blockly.Workspace', 'Blockly.BlockSvg']);
 goog.addDependency("../../../" + dir + "/core/contextmenu.js", ['Blockly.ContextMenu'], ['goog.dom', 'goog.style', 'goog.ui.Menu', 'goog.ui.MenuItem']);
 goog.addDependency("../../../" + dir + "/core/css.js", ['Blockly.Css'], ['goog.cssom']);
 goog.addDependency("../../../" + dir + "/core/field.js", ['Blockly.Field'], ['Blockly.BlockSvg', 'goog.asserts', 'goog.userAgent']);
@@ -42,7 +42,7 @@ goog.addDependency("../../../" + dir + "/core/field_image.js", ['Blockly.FieldIm
 goog.addDependency("../../../" + dir + "/core/field_label.js", ['Blockly.FieldLabel'], ['Blockly.Field', 'Blockly.Tooltip']);
 goog.addDependency("../../../" + dir + "/core/field_textinput.js", ['Blockly.FieldTextInput'], ['Blockly.Field', 'Blockly.Msg', 'goog.asserts', 'goog.userAgent']);
 goog.addDependency("../../../" + dir + "/core/field_variable.js", ['Blockly.FieldVariable'], ['Blockly.FieldDropdown', 'Blockly.Msg', 'Blockly.Variables']);
-goog.addDependency("../../../" + dir + "/core/flyout.js", ['Blockly.Flyout'], ['Blockly.Block', 'Blockly.Comment', 'goog.userAgent']);
+goog.addDependency("../../../" + dir + "/core/flyout.js", ['Blockly.Flyout'], ['Blockly.Block', 'Blockly.Comment', 'goog.userAgent', 'goog.math.Rect']);
 goog.addDependency("../../../" + dir + "/core/generator.js", ['Blockly.Generator'], ['Blockly.Block']);
 goog.addDependency("../../../" + dir + "/core/icon.js", ['Blockly.Icon'], []);
 goog.addDependency("../../../" + dir + "/core/inject.js", ['Blockly.inject'], ['Blockly.Css', 'goog.dom']);
@@ -54,14 +54,14 @@ goog.addDependency("../../../" + dir + "/core/procedures.js", ['Blockly.Procedur
 goog.addDependency("../../../" + dir + "/core/realtime-client-utils.js", ['rtclient'], []);
 goog.addDependency("../../../" + dir + "/core/realtime.js", ['Blockly.Realtime'], ['goog.array', 'goog.dom', 'goog.style', 'rtclient']);
 goog.addDependency("../../../" + dir + "/core/scrollbar.js", ['Blockly.Scrollbar', 'Blockly.ScrollbarPair'], ['goog.userAgent']);
-goog.addDependency("../../../" + dir + "/core/toolbox.js", ['Blockly.Toolbox'], ['Blockly.Flyout', 'goog.events.BrowserFeature', 'goog.html.SafeHtml', 'goog.style', 'goog.ui.tree.TreeControl', 'goog.ui.tree.TreeNode']);
+goog.addDependency("../../../" + dir + "/core/toolbox.js", ['Blockly.Toolbox'], ['Blockly.Flyout', 'goog.events.BrowserFeature', 'goog.html.SafeHtml', 'goog.style', 'goog.ui.tree.TreeControl', 'goog.ui.tree.TreeNode', 'goog.math.Rect']);
 goog.addDependency("../../../" + dir + "/core/tooltip.js", ['Blockly.Tooltip'], []);
-goog.addDependency("../../../" + dir + "/core/trashcan.js", ['Blockly.Trashcan'], ['goog.math', 'goog.Timer']);
+goog.addDependency("../../../" + dir + "/core/trashcan.js", ['Blockly.Trashcan'], ['goog.math', 'goog.math.Rect', 'goog.Timer']);
 goog.addDependency("../../../" + dir + "/core/utils.js", ['Blockly.utils'], []);
-goog.addDependency("../../../" + dir + "/core/variables.js", ['Blockly.Variables'], ['Blockly.Toolbox', 'Blockly.Workspace']);
+goog.addDependency("../../../" + dir + "/core/variables.js", ['Blockly.Variables'], ['Blockly.Workspace']);
 goog.addDependency("../../../" + dir + "/core/warning.js", ['Blockly.Warning'], ['Blockly.Bubble', 'Blockly.Icon']);
 goog.addDependency("../../../" + dir + "/core/widgetdiv.js", ['Blockly.WidgetDiv'], ['Blockly.Css', 'goog.dom']);
-goog.addDependency("../../../" + dir + "/core/workspace.js", ['Blockly.Workspace'], ['Blockly.ScrollbarPair', 'Blockly.Trashcan', 'Blockly.Xml', 'goog.math']);
+goog.addDependency("../../../" + dir + "/core/workspace.js", ['Blockly.Workspace'], ['Blockly.ScrollbarPair', 'Blockly.Trashcan', 'Blockly.Xml', 'goog.math', 'goog.math.Coordinate']);
 goog.addDependency("../../../" + dir + "/core/xml.js", ['Blockly.Xml'], []);
 goog.addDependency("../../alltests.js", [], []);
 goog.addDependency("base.js", [], []);
@@ -528,6 +528,8 @@ goog.addDependency("history/history.js", ['goog.History', 'goog.History.Event', 
 goog.addDependency("history/history_test.js", ['goog.HistoryTest'], ['goog.History', 'goog.dispose', 'goog.dom', 'goog.testing.jsunit', 'goog.userAgent']);
 goog.addDependency("history/html5history.js", ['goog.history.Html5History', 'goog.history.Html5History.TokenTransformer'], ['goog.asserts', 'goog.events', 'goog.events.EventTarget', 'goog.events.EventType', 'goog.history.Event']);
 goog.addDependency("history/html5history_test.js", ['goog.history.Html5HistoryTest'], ['goog.history.Html5History', 'goog.testing.MockControl', 'goog.testing.jsunit', 'goog.testing.mockmatchers']);
+goog.addDependency("html/flash.js", ['goog.html.flash'], ['goog.asserts', 'goog.html.SafeHtml']);
+goog.addDependency("html/flash_test.js", ['goog.html.flashTest'], ['goog.html.SafeHtml', 'goog.html.TrustedResourceUrl', 'goog.html.flash', 'goog.string.Const', 'goog.testing.jsunit']);
 goog.addDependency("html/legacyconversions.js", ['goog.html.legacyconversions'], ['goog.html.SafeHtml', 'goog.html.SafeUrl', 'goog.html.TrustedResourceUrl']);
 goog.addDependency("html/legacyconversions_test.js", ['goog.html.legacyconversionsTest'], ['goog.html.SafeHtml', 'goog.html.SafeUrl', 'goog.html.TrustedResourceUrl', 'goog.html.legacyconversions', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit']);
 goog.addDependency("html/safehtml.js", ['goog.html.SafeHtml'], ['goog.array', 'goog.asserts', 'goog.dom.tags', 'goog.html.SafeStyle', 'goog.html.SafeUrl', 'goog.html.TrustedResourceUrl', 'goog.i18n.bidi.Dir', 'goog.i18n.bidi.DirectionalString', 'goog.object', 'goog.string', 'goog.string.Const', 'goog.string.TypedString']);
@@ -1091,8 +1093,8 @@ goog.addDependency("testing/stacktrace.js", ['goog.testing.stacktrace', 'goog.te
 goog.addDependency("testing/stacktrace_test.js", ['goog.testing.stacktraceTest'], ['goog.functions', 'goog.string', 'goog.testing.ExpectedFailures', 'goog.testing.PropertyReplacer', 'goog.testing.StrictMock', 'goog.testing.asserts', 'goog.testing.jsunit', 'goog.testing.stacktrace', 'goog.testing.stacktrace.Frame', 'goog.userAgent']);
 goog.addDependency("testing/strictmock.js", ['goog.testing.StrictMock'], ['goog.array', 'goog.testing.Mock']);
 goog.addDependency("testing/strictmock_test.js", ['goog.testing.StrictMockTest'], ['goog.testing.StrictMock', 'goog.testing.jsunit']);
-goog.addDependency("testing/testcase.js", ['goog.testing.TestCase', 'goog.testing.TestCase.Error', 'goog.testing.TestCase.Order', 'goog.testing.TestCase.Result', 'goog.testing.TestCase.Test'], ['goog.object', 'goog.testing.asserts', 'goog.testing.stacktrace']);
-goog.addDependency("testing/testcase_test.js", ['goog.testing.TestCaseTest'], ['goog.testing.TestCase', 'goog.testing.jsunit']);
+goog.addDependency("testing/testcase.js", ['goog.testing.TestCase', 'goog.testing.TestCase.Error', 'goog.testing.TestCase.Order', 'goog.testing.TestCase.Result', 'goog.testing.TestCase.Test'], ['goog.Promise', 'goog.Thenable', 'goog.object', 'goog.testing.asserts', 'goog.testing.stacktrace']);
+goog.addDependency("testing/testcase_test.js", ['goog.testing.TestCaseTest'], ['goog.Promise', 'goog.testing.TestCase', 'goog.testing.jsunit']);
 goog.addDependency("testing/testqueue.js", ['goog.testing.TestQueue'], []);
 goog.addDependency("testing/testrunner.js", ['goog.testing.TestRunner'], ['goog.testing.TestCase']);
 goog.addDependency("testing/watchers.js", ['goog.testing.watchers'], []);
@@ -1475,7 +1477,7 @@ goog.addDependency("useragent/product_isversion.js", ['goog.userAgent.product.is
 goog.addDependency("useragent/product_test.js", ['goog.userAgent.productTest'], ['goog.array', 'goog.labs.userAgent.util', 'goog.testing.MockUserAgent', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit', 'goog.userAgent', 'goog.userAgent.product', 'goog.userAgent.product.isVersion', 'goog.userAgentTestUtil']);
 goog.addDependency("useragent/useragent.js", ['goog.userAgent'], ['goog.labs.userAgent.browser', 'goog.labs.userAgent.engine', 'goog.labs.userAgent.platform', 'goog.labs.userAgent.util', 'goog.string']);
 goog.addDependency("useragent/useragent_quirks_test.js", ['goog.userAgentQuirksTest'], ['goog.testing.jsunit', 'goog.userAgent']);
-goog.addDependency("useragent/useragent_test.js", ['goog.userAgentTest'], ['goog.array', 'goog.labs.userAgent.testAgents', 'goog.labs.userAgent.util', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit', 'goog.userAgent', 'goog.userAgentTestUtil']);
+goog.addDependency("useragent/useragent_test.js", ['goog.userAgentTest'], ['goog.array', 'goog.labs.userAgent.platform', 'goog.labs.userAgent.testAgents', 'goog.labs.userAgent.util', 'goog.testing.PropertyReplacer', 'goog.testing.jsunit', 'goog.userAgent', 'goog.userAgentTestUtil']);
 goog.addDependency("useragent/useragenttestutil.js", ['goog.userAgentTestUtil', 'goog.userAgentTestUtil.UserAgents'], ['goog.labs.userAgent.browser', 'goog.labs.userAgent.engine', 'goog.labs.userAgent.platform', 'goog.userAgent', 'goog.userAgent.keyboard', 'goog.userAgent.platform', 'goog.userAgent.product', 'goog.userAgent.product.isVersion']);
 goog.addDependency("vec/float32array.js", ['goog.vec.Float32Array'], []);
 goog.addDependency("vec/float64array.js", ['goog.vec.Float64Array'], []);
@@ -1563,8 +1565,8 @@ delete window.BLOCKLY_BOOT;
 };
 
 // Delete any existing Closure (e.g. Soy's nogoog_shim).
-document.write('<script type="text/javascript">var goog = undefined;</script>');
+document.write('<script>var goog = undefined;</script>');
 // Load fresh Closure Library.
-document.write('<script type="text/javascript" src="' + window.BLOCKLY_DIR +
+document.write('<script src="' + window.BLOCKLY_DIR +
     '/../closure-library/closure/goog/base.js"></script>');
-document.write('<script type="text/javascript">window.BLOCKLY_BOOT()</script>');
+document.write('<script>window.BLOCKLY_BOOT()</script>');
