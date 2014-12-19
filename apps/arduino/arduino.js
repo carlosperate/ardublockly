@@ -3,16 +3,17 @@
  *
  * Based on the "Code" app developed by: fraser@google.com (Neil Fraser)
  *
- * @fileoverview JavaScript for Blockly's Code application.
+ * @fileoverview JavaScript for Blockly's Arduino Code application.
  */
 
-// Supported languages.
-BlocklyApps.LANGUAGES =
-    ['en'];
-BlocklyApps.LANG = BlocklyApps.getLang();
+'use strict';
 
-document.write('<script type="text/javascript" src="generated/' +
-               BlocklyApps.LANG + '.js"></script>\n');
+// Supported languages.
+//BlocklyApps.LANGUAGES =
+//    ['en'];
+//BlocklyApps.LANG = BlocklyApps.getLang();
+
+//document.write('<script src="generated/' + BlocklyApps.LANG + '.js"></script>\n');
 
 /**
  * Create a namespace for the application.
@@ -87,7 +88,7 @@ Arduino.renderContent = function() {
     content.textContent = code;
     if (typeof prettyPrintOne == 'function') {
       code = content.innerHTML;
-      code = prettyPrintOne(code, 'js');
+      code = prettyPrintOne(code, 'cpp');
       content.innerHTML = code;
     }
   }
@@ -97,7 +98,7 @@ Arduino.renderContent = function() {
  * Initialize Blockly.  Called on page load.
  */
 Arduino.init = function() {
-  BlocklyApps.init();
+  //BlocklyApps.init();
 
   var rtl = BlocklyApps.isRtl();
   var container = document.getElementById('content_area');
@@ -129,12 +130,12 @@ Arduino.init = function() {
        rtl: rtl,
        toolbox: toolbox});
 
-  BlocklyApps.loadBlocks('');
+  //BlocklyApps.loadBlocks('');
 
-  if ('BlocklyStorage' in window) {
-    // Hook a save function onto unload.
-    BlocklyStorage.backupOnUnload();
-  }
+  //if ('BlocklyStorage' in window) {
+  //  // Hook a save function onto unload.
+  //  BlocklyStorage.backupOnUnload();
+  //}
 
   Arduino.tabClick(Arduino.selected);
   Blockly.fireUiEvent(window, 'resize');
@@ -153,15 +154,12 @@ Arduino.init = function() {
   window.setTimeout(BlocklyApps.importPrettify, 1);
 };
 
-if (window.location.pathname.match(/readonly.html$/)) {
-  window.addEventListener('load', BlocklyApps.initReadonly);
-} else {
+
   window.addEventListener('load', Arduino.init);
-}
+
 
 /**
  * Execute the user's code.
- * Just a quick and dirty eval.  Catch infinite loops.
  */
 Arduino.loadToArduino = function() {
   // TODO
