@@ -3,17 +3,10 @@
  *
  * Based on the "Code" app developed by: fraser@google.com (Neil Fraser)
  *
- * @fileoverview JavaScript for Blockly's Arduino Code application.
+ * @fileoverview JavaScript for ArduBlockly's Arduino Code application.
  */
 
 'use strict';
-
-// Supported languages.
-//BlocklyApps.LANGUAGES =
-//    ['en'];
-//BlocklyApps.LANG = BlocklyApps.getLang();
-
-//document.write('<script src="generated/' + BlocklyApps.LANG + '.js"></script>\n');
 
 /**
  * Create a namespace for the application.
@@ -54,19 +47,20 @@ Arduino.tabClick = function(clickedName) {
     }
   }
 
+  // Deselect the button, and ensure side pannel is hidden
+  Arduino.peekCode(false);
+
   // Deselect all tabs and hide all panes.
   for (var i = 0; i < Arduino.TABS_.length; i++) {
     var name = Arduino.TABS_[i];
     document.getElementById('tab_' + name).className = 'taboff';
-    document.getElementById('content_' + name).style.visibility = 'hidden';
+    document.getElementById('content_' + name).style.display = 'none';
   }
 
-  // Select the active tab.
+  // Select the active tab and panel
   Arduino.selected = clickedName;
   document.getElementById('tab_' + clickedName).className = 'tabon';
-  // Show the selected pane.
-  document.getElementById('content_' + clickedName).style.visibility =
-      'visible';
+  document.getElementById('content_' + clickedName).style.display = 'block';
   Arduino.renderContent();
   Blockly.fireUiEvent(window, 'resize');
 };
@@ -98,9 +92,8 @@ Arduino.renderContent = function() {
  * Initialize Blockly.  Called on page load.
  */
 Arduino.init = function() {
-  //BlocklyApps.init();
+  Arduino.adjustViewport();
 
-  var rtl = BlocklyApps.isRtl();
   var container = document.getElementById('content_area');
   var onresize = function(e) {
     var bBox = BlocklyApps.getBBox_(container);
@@ -116,9 +109,9 @@ Arduino.init = function() {
       el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
     }
     // Make the 'Blocks' tab line up with the toolbox.
-    if (Blockly.Toolbox.width) {
+    if (Blockly.mainWorkspace.toolbox_.width) {
       document.getElementById('tab_blocks').style.minWidth =
-          (Blockly.Toolbox.width - 38) + 'px';
+          (Blockly.mainWorkspace.toolbox_.width - 38) + 'px';
           // Account for the 19 pixel margin and on each side.
     }
   };
@@ -127,7 +120,7 @@ Arduino.init = function() {
   var toolbox = document.getElementById('toolbox');
   Blockly.inject(document.getElementById('content_blocks'),
       {path: '../../',
-       rtl: rtl,
+       rtl: false,
        toolbox: toolbox});
 
   //BlocklyApps.loadBlocks('');
@@ -140,26 +133,33 @@ Arduino.init = function() {
   Arduino.tabClick(Arduino.selected);
   Blockly.fireUiEvent(window, 'resize');
 
-  BlocklyApps.bindClick('trashButton',
-      function() {Arduino.discard(); Arduino.renderContent();});
+  // Binding buttons
+  BlocklyApps.bindClick('trashButton', Arduino.discard);
   BlocklyApps.bindClick('runButton', Arduino.loadToArduino);
+  BlocklyApps.bindClick('peekCode',Arduino.peekCode);
 
+  // Binding tabs
   for (var i = 0; i < Arduino.TABS_.length; i++) {
     var name = Arduino.TABS_[i];
     BlocklyApps.bindClick('tab_' + name,
         function(name_) {return function() {Arduino.tabClick(name_);};}(name));
   }
-
-  // Lazy-load the syntax-highlighting.
-  window.setTimeout(BlocklyApps.importPrettify, 1);
 };
-
-
-  window.addEventListener('load', Arduino.init);
-
+window.addEventListener('load', Arduino.init);
 
 /**
- * Execute the user's code.
+ * Fixes viewport for small screens.
+ */
+Arduino.adjustViewport = function() {
+  var viewport = document.querySelector('meta[name="viewport"]');
+  if (viewport && screen.availWidth < 725) {
+    viewport.setAttribute('content',
+        'width=725, initial-scale=.35, user-scalable=no');
+  }
+}
+
+/**
+ * Load and execute the user's code to the Arduino.
  */
 Arduino.loadToArduino = function() {
   // TODO
@@ -175,4 +175,84 @@ Arduino.discard = function() {
     Blockly.mainWorkspace.clear();
     window.location.hash = '';
   }
+  Arduino.renderContent();
 };
+
+/**
+ * Loads/unloads the side div with a code peek
+ */
+Arduino.peek_code = false;
+Arduino.peekCode = function(visible) {
+  var peek_code_button = document.getElementById('peekCode');
+  var code_peek_content = document.getElementById('arduino_code_peek');
+  
+  if(visible == true) {
+    Arduino.peek_code = false;
+  } else if(visible == false) {
+    Arduino.peek_code = true;
+  }
+  
+  if(Arduino.peek_code == false) {
+    Arduino.peek_code = true;
+    peek_code_button.className = "notext secondary";
+    Arduino.sideContent(true);
+    code_peek_content.style.display = 'inline-block';
+    // Regenerate arduino code and ensure every click does as well
+    Arduino.renderArduinoPeak();
+    Blockly.addChangeListener(Arduino.renderArduinoPeak);
+  } else {
+    Arduino.peek_code = false;
+    peek_code_button.className = "notext";
+    code_peek_content.style.display = 'none';
+    Arduino.sideContent(false);
+    // Remove action listeners. TODO: track listener so that first time does not
+    // crashes
+    //Blockly.removeChangeListener(renderArduinoPeak);
+  }
+};
+
+/**
+ * Configure the Block panel to display content on the right
+ * @param {string} content_name Name of the content div
+ * @param {boolean} visible Indicated if the content should be shown or hidden
+ */
+Arduino.sideContent = function(visible) {
+  var side_content = document.getElementById('side_content');
+  var block_content = document.getElementById('content_blocks');
+
+  // Deselect all tabs and hide all panes.
+  for (var i = 0; i < Arduino.TABS_.length; i++) {
+    var name = Arduino.TABS_[i];
+    document.getElementById('tab_' + name).className = 'taboff';
+    document.getElementById('content_' + name).style.display = 'none';
+  }
+  
+  if(visible == true) {
+    // Rearrange panels for blocks and side contents
+    block_content.style.display = 'inline-block';
+    document.getElementById('tab_blocks').className = 'tabon';
+    block_content.className = 'content content_blocks_side';
+    side_content.style.display = 'inline-block';
+  } else {
+    // Restore to original state
+    side_content.style.display = 'none';
+    block_content.className = 'content content_blocks';
+    // Select the active tab and panel
+    document.getElementById('tab_' + Arduino.selected).className = 'tabon';
+    document.getElementById('content_' + Arduino.selected).style.display = 'block';
+  }
+
+  Blockly.fireUiEvent(window, 'resize');  
+  Arduino.renderContent();
+}
+
+/**
+ * Updates the arduino code in the pre area based on the blocks
+ */
+Arduino.renderArduinoPeak = function() {
+  var code_peak_pre = document.getElementById('arduino_pre');
+  code_peak_pre.textContent = Blockly.Arduino.workspaceToCode();
+  if (typeof prettyPrintOne == 'function') {
+    code_peak_pre.innerHTML = prettyPrintOne(code_peak_pre.innerHTML, 'cpp');
+  }
+}

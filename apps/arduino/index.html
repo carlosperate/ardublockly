@@ -4,15 +4,16 @@
   <meta charset="utf-8">
   <meta name="google" value="notranslate">
   <title>Blockly : Arduino Code</title>
-  <link rel="stylesheet" type="text/css" href="../common.css">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <!--script type="text/javascript" src="../_soy/soyutils.js"></script-->
+  <!--link rel="stylesheet" type="text/css" href="../common.css"-->
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../demos/prettify.css">
+  <script src="../../demos/prettify.js"></script>
   <script src="../common.js"></script>
   <script src="arduino.js"></script>
+
   <!--script src="../../blockly_compressed.js"></script-->
   <script src="../../blockly_uncompressed.js"></script>
   <!--script src="../../blocks_compressed.js"></script-->
-
   <script src="../../blocks/logic.js"></script>
   <script src="../../blocks/loops.js"></script>
   <script src="../../blocks/math.js"></script>
@@ -65,19 +66,6 @@
 
   <table width="100%" height="100%">
     <tr>
-      <td>
-        <h1>
-          <span id="title">
-            <a href="https://developers.google.com/blockly/">Blockly</a> &gt;
-            <span id="title">Arduino</span>
-          </span>
-        </h1>
-      </td>
-      <td class="farSide">
-        <select id="languageMenu"></select>
-      </td>
-    </tr>
-    <tr>
       <td colspan=2>
         <table width="100%">
           <tr id="tabRow" height="1em">
@@ -87,14 +75,25 @@
             <td class="tabmin">&nbsp;</td>
             <td id="tab_xml" class="taboff">XML</td>
             <td class="tabmax">
-              <button id="trashButton" class="notext" title="Discard all blocks">
-                <img src='../../media/1x1.gif' class="trash icon21">
+              <button id="peekCode" class="notext" title="Toggle the code view on the side">
+                <div class="button_text">
+                  <span>Code Peek</span>
+                </div>
               </button>
-              <button id="linkButton" class="notext" title="Save and link to blocks">
-                <img src='../../media/1x1.gif' class="link icon21">
+              <button id="" class="notext" title="Load blocks">
+                <img src='../../media/1x1.gif' class="icon21 load ">
+              </button>
+              <button id="" class="notext" title="Save blocks">
+                <img src='../../media/1x1.gif' class="icon21 save">
+              </button>
+              <button id="" class="notext" title="Open the Settings">
+                <img src='../../media/1x1.gif' class="icon21 settings">
+              </button>
+              <button id="trashButton" class="notext" title="Discard all blocks">
+                <img src='../../media/1x1.gif' class="icon21 trash">
               </button>
               <button id="runButton" class="notext primary" title="Run the program defined by the blocks in the workspace">
-                <img src='../../media/1x1.gif' class="run icon21">
+                <img src='../../media/1x1.gif' class="icon21 run">
               </button>
             </td>
           </tr>
@@ -102,7 +101,19 @@
       </td>
     </tr>
     <tr>
-      <td height="99%" colspan=2 id="content_area">
+      <td colspan="2" height="99%"  style="position:relative;">
+        <div id="content_area" class="content_area">
+          <div id="content_blocks" class="content content_blocks"></div>
+          <div id="side_content" class="side_content">
+            <div id="arduino_code_peek">
+              <pre id="arduino_pre">
+                <!--code id="arduino_code" class="language-arduino">code goes here</code-->
+              </pre>
+            </div>
+          </div>
+          <pre id="content_arduino" class="content content_arduino"></pre>
+          <textarea id="content_xml" class="content content_xml" wrap="off"></textarea>
+        </div>
       </td>
     </tr>
   </table>
@@ -304,10 +315,6 @@
       <block type="spi_transfer"></block>
     </category>
   </xml>
-
-  <div id="content_blocks" class="content"></div>
-  <pre id="content_arduino" class="content"></pre>
-  <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <div id="dialogShadow" class="dialogAnimate"></div>
   <div id="dialogBorder"></div>
