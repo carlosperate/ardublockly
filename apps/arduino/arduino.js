@@ -35,7 +35,7 @@ Arduino.tabClick = function(clickedName) {
       xmlDom = Blockly.Xml.textToDom(xmlText);
     } catch (e) {
       var q =
-          window.confirm(BlocklyApps.getMsg('Code_badXml').replace('%1', e));
+          window.confirm(Arduino.getMsg('Code_badXml').replace('%1', e));
       if (!q) {
         // Leave the user on the XML tab.
         return;
@@ -96,7 +96,7 @@ Arduino.init = function() {
 
   var container = document.getElementById('content_area');
   var onresize = function(e) {
-    var bBox = BlocklyApps.getBBox_(container);
+    var bBox = Arduino.getBBox_(container);
     for (var i = 0; i < Arduino.TABS_.length; i++) {
       var el = document.getElementById('content_' + Arduino.TABS_[i]);
       el.style.top = bBox.y + 'px';
@@ -123,7 +123,7 @@ Arduino.init = function() {
        rtl: false,
        toolbox: toolbox});
 
-  //BlocklyApps.loadBlocks('');
+  //Arduino.loadBlocks('');
 
   //if ('BlocklyStorage' in window) {
   //  // Hook a save function onto unload.
@@ -134,14 +134,14 @@ Arduino.init = function() {
   Blockly.fireUiEvent(window, 'resize');
 
   // Binding buttons
-  BlocklyApps.bindClick('trashButton', Arduino.discard);
-  BlocklyApps.bindClick('runButton', Arduino.loadToArduino);
-  BlocklyApps.bindClick('peekCode',Arduino.peekCode);
+  Arduino.bindClick('trashButton', Arduino.discard);
+  Arduino.bindClick('runButton', Arduino.loadToArduino);
+  Arduino.bindClick('peekCode',Arduino.peekCode);
 
   // Binding tabs
   for (var i = 0; i < Arduino.TABS_.length; i++) {
     var name = Arduino.TABS_[i];
-    BlocklyApps.bindClick('tab_' + name,
+    Arduino.bindClick('tab_' + name,
         function(name_) {return function() {Arduino.tabClick(name_);};}(name));
   }
 };
@@ -156,13 +156,13 @@ Arduino.adjustViewport = function() {
     viewport.setAttribute('content',
         'width=725, initial-scale=.35, user-scalable=no');
   }
-}
+};
 
 /**
  * Load and execute the user's code to the Arduino.
  */
 Arduino.loadToArduino = function() {
-  // TODO
+  //TODO: Add ajax function call to send string with code to Python server
 };
 
 /**
@@ -171,7 +171,7 @@ Arduino.loadToArduino = function() {
 Arduino.discard = function() {
   var count = Blockly.mainWorkspace.getAllBlocks().length;
   if (count < 2 ||
-      window.confirm(BlocklyApps.getMsg('Code_discard').replace('%1', count))) {
+      window.confirm(Arduino.getMsg('Code_discard').replace('%1', count))) {
     Blockly.mainWorkspace.clear();
     window.location.hash = '';
   }
@@ -198,8 +198,8 @@ Arduino.peekCode = function(visible) {
     Arduino.sideContent(true);
     code_peek_content.style.display = 'inline-block';
     // Regenerate arduino code and ensure every click does as well
-    Arduino.renderArduinoPeak();
-    Blockly.addChangeListener(Arduino.renderArduinoPeak);
+    Arduino.renderArduinoPeekCode();
+    Blockly.addChangeListener(Arduino.renderArduinoPeekCode);
   } else {
     Arduino.peek_code = false;
     peek_code_button.className = "notext";
@@ -207,7 +207,7 @@ Arduino.peekCode = function(visible) {
     Arduino.sideContent(false);
     // Remove action listeners. TODO: track listener so that first time does not
     // crashes
-    //Blockly.removeChangeListener(renderArduinoPeak);
+    //Blockly.removeChangeListener(renderArduinoPeekCode);
   }
 };
 
@@ -244,15 +244,107 @@ Arduino.sideContent = function(visible) {
 
   Blockly.fireUiEvent(window, 'resize');  
   Arduino.renderContent();
-}
+};
 
 /**
  * Updates the arduino code in the pre area based on the blocks
  */
-Arduino.renderArduinoPeak = function() {
+Arduino.renderArduinoPeekCode = function() {
   var code_peak_pre = document.getElementById('arduino_pre');
   code_peak_pre.textContent = Blockly.Arduino.workspaceToCode();
   if (typeof prettyPrintOne == 'function') {
     code_peak_pre.innerHTML = prettyPrintOne(code_peak_pre.innerHTML, 'cpp');
   }
-}
+};
+
+
+/**
+ * Gets the message with the given key from the document.
+ * @param {string} key The key of the document element.
+ * @return {string} The textContent of the specified element,
+ *     or an error message if the element was not found.
+ */
+Arduino.getMsg = function(key) {
+  var element = document.getElementById(key);
+  if (element) {
+    var text = element.textContent;
+    // Convert newline sequences.
+    text = text.replace(/\\n/g, '\n');
+    return text;
+  } else {
+    return '[Unknown message: ' + key + ']';
+  }
+};
+
+/**
+ * Bind a function to a button's click event.
+ * On touch enabled browsers, ontouchend is treated as equivalent to onclick.
+ * @param {!Element|string} el Button element or ID thereof.
+ * @param {!Function} func Event handler to bind.
+ */
+Arduino.bindClick = function(el, func) {
+  if (typeof el == 'string') {
+    el = document.getElementById(el);
+  }
+  el.addEventListener('click', func, true);
+  el.addEventListener('touchend', func, true);
+};
+
+/**
+ * Compute the absolute coordinates and dimensions of an HTML or SVG element.
+ * @param {!Element} element Element to match.
+ * @return {!Object} Contains height, width, x, and y properties.
+ * @private
+ */
+Arduino.getBBox_ = function(element) {
+  if (element.getBBox) {
+    // SVG element.
+    var bBox = element.getBBox();
+    var height = bBox.height;
+    var width = bBox.width;
+    var xy = Blockly.getAbsoluteXY_(element);
+    var x = xy.x;
+    var y = xy.y;
+  } else {
+    // HTML element.
+    var height = element.offsetHeight;
+    var width = element.offsetWidth;
+    var x = 0;
+    var y = 0;
+    do {
+      x += element.offsetLeft;
+      y += element.offsetTop;
+      element = element.offsetParent;
+    } while (element);
+  }
+  return {
+    height: height,
+    width: width,
+    x: x,
+    y: y
+  };
+};
+
+/**
+ * Load blocks saved in session/local storage.
+ * @param {string} defaultXml Text representation of default blocks.
+ */
+Arduino.loadBlocks = function(defaultXml) {
+  try {
+    var loadOnce = window.sessionStorage.loadOnceBlocks;
+  } catch(e) {
+    // Firefox sometimes throws a SecurityError when accessing sessionStorage.
+    // Restarting Firefox fixes this, so it looks like a bug.
+    var loadOnce = null;
+  }
+  if (loadOnce) {
+    // Language switching stores the blocks during the reload.
+    delete window.sessionStorage.loadOnceBlocks;
+    var xml = Blockly.Xml.textToDom(loadOnce);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  } else if (defaultXml) {
+    // Load the editor with default starting blocks.
+    var xml = Blockly.Xml.textToDom(defaultXml);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+  }
+};
