@@ -28,10 +28,8 @@
 
 goog.provide('Blockly.Field');
 
-// TODO(scr): Fix circular dependencies
-// goog.require('Blockly.Block');
-goog.require('Blockly.BlockSvg');
 goog.require('goog.asserts');
+goog.require('goog.math.Size');
 goog.require('goog.userAgent');
 
 
@@ -41,21 +39,21 @@ goog.require('goog.userAgent');
  * @constructor
  */
 Blockly.Field = function(text) {
-  this.sourceBlock_ = null;
-  // Build the DOM.
-  this.fieldGroup_ = Blockly.createSvgElement('g', {}, null);
-  this.borderRect_ = Blockly.createSvgElement('rect',
-      {'rx': 4,
-       'ry': 4,
-       'x': -Blockly.BlockSvg.SEP_SPACE_X / 2,
-       'y': -12,
-       'height': 16}, this.fieldGroup_);
-  this.textElement_ = Blockly.createSvgElement('text',
-      {'class': 'blocklyText'}, this.fieldGroup_);
-  this.size_ = {height: 25, width: 0};
+  this.size_ = new goog.math.Size(0, 25);
   this.setText(text);
-  this.visible_ = true;
 };
+
+/**
+ * Block this field is attached to.  Starts as null, then in set in init.
+ * @private
+ */
+Blockly.Field.prototype.sourceBlock_ = null;
+
+/**
+ * Is the field visible, or hidden due to the block being collapsed?
+ * @private
+ */
+Blockly.Field.prototype.visible_ = true;
 
 /**
  * Clone this Field.  This must be implemented by all classes derived from
@@ -84,15 +82,27 @@ Blockly.Field.prototype.EDITABLE = true;
  */
 Blockly.Field.prototype.init = function(block) {
   if (this.sourceBlock_) {
-    throw 'Field has already been initialized once.';
+    // Field has already been initialized once.
+    return;
   }
   this.sourceBlock_ = block;
+  // Build the DOM.
+  this.fieldGroup_ = Blockly.createSvgElement('g', {}, null);
+  this.borderRect_ = Blockly.createSvgElement('rect',
+      {'rx': 4,
+       'ry': 4,
+       'x': -Blockly.BlockSvg.SEP_SPACE_X / 2,
+       'y': -12,
+       'height': 16}, this.fieldGroup_);
+  this.textElement_ = Blockly.createSvgElement('text',
+      {'class': 'blocklyText'}, this.fieldGroup_);
+
   this.updateEditable();
   block.getSvgRoot().appendChild(this.fieldGroup_);
   this.mouseUpWrapper_ =
       Blockly.bindEvent_(this.fieldGroup_, 'mouseup', this, this.onMouseUp_);
-  // Bump to set the colours for dropdown arrows.
-  this.setText(null);
+  // Force a render.
+  this.updateTextNode_();
 };
 
 /**
@@ -145,9 +155,15 @@ Blockly.Field.prototype.isVisible = function() {
  * @param {boolean} visible True if visible.
  */
 Blockly.Field.prototype.setVisible = function(visible) {
+  if (this.visible_ == visible) {
+    return;
+  }
   this.visible_ = visible;
-  this.getRootElement().style.display = visible ? 'block' : 'none';
-  this.render_();
+  var root = this.getSvgRoot();
+  if (root) {
+    root.style.display = visible ? 'block' : 'none';
+    this.render_();
+  }
 };
 
 /**
@@ -155,7 +171,7 @@ Blockly.Field.prototype.setVisible = function(visible) {
  * Used for measuring the size and for positioning.
  * @return {!Element} The group element.
  */
-Blockly.Field.prototype.getRootElement = function() {
+Blockly.Field.prototype.getSvgRoot = function() {
   return /** @type {!Element} */ (this.fieldGroup_);
 };
 
@@ -165,23 +181,27 @@ Blockly.Field.prototype.getRootElement = function() {
  * @private
  */
 Blockly.Field.prototype.render_ = function() {
-  try {
-    var width = this.textElement_.getComputedTextLength();
-  } catch(e) {
-    // MSIE 11 is known to throw "Unexpected call to method or property access."
-    // if Blockly is hidden.
-    var width = this.textElement_.childNodes[0].length * 8;
-  }
-  if (this.borderRect_) {
-    this.borderRect_.setAttribute('width',
-        width + Blockly.BlockSvg.SEP_SPACE_X);
+  if (this.visible_) {
+    try {
+      var width = this.textElement_.getComputedTextLength();
+    } catch(e) {
+      // MSIE 11 is known to throw "Unexpected call to method or property
+      // access." if Blockly is hidden.
+      var width = this.textElement_.textContent.length * 8;
+    }
+    if (this.borderRect_) {
+      this.borderRect_.setAttribute('width',
+          width + Blockly.BlockSvg.SEP_SPACE_X);
+    }
+  } else {
+    var width = 0;
   }
   this.size_.width = width;
 };
 
 /**
  * Returns the height and width of the field.
- * @return {!Object} Height and width.
+ * @return {!goog.math.Size} Height and width.
  */
 Blockly.Field.prototype.getSize = function() {
   if (!this.size_.width) {
@@ -222,6 +242,10 @@ Blockly.Field.prototype.setText = function(text) {
  * @private
  */
 Blockly.Field.prototype.updateTextNode_ = function() {
+  if (!this.textElement_) {
+    // Not rendered yet.
+    return;
+  }
   var text = this.text_;
   // Empty the text element.
   goog.dom.removeChildren(/** @type {!Element} */ (this.textElement_));
@@ -274,7 +298,7 @@ Blockly.Field.prototype.onMouseUp_ = function(e) {
   } else if (Blockly.isRightButton(e)) {
     // Right-click.
     return;
-  } else if (Blockly.Block.dragMode_ == 2) {
+  } else if (Blockly.dragMode_ == 2) {
     // Drag operation is concluding.  Don't open the editor.
     return;
   } else if (this.sourceBlock_.isEditable()) {

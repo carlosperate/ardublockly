@@ -27,9 +27,6 @@
 goog.provide('Blockly.Connection');
 goog.provide('Blockly.ConnectionDB');
 
-goog.require('Blockly.Workspace');
-goog.require('Blockly.BlockSvg');
-
 
 /**
  * Class for a connection between blocks.
@@ -118,7 +115,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       }
       if (orphanBlock) {
         // Unable to reattach orphan.  Bump it off to the side.
-        window.setTimeout(function() {
+        setTimeout(function() {
               orphanBlock.outputConnection.bumpAwayFrom_(otherConnection);
             }, Blockly.BUMP_DELAY);
       }
@@ -154,7 +151,7 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
       }
       if (orphanBlock) {
         // Unable to reattach orphan.  Bump it off to the side.
-        window.setTimeout(function() {
+        setTimeout(function() {
               orphanBlock.previousConnection.bumpAwayFrom_(otherConnection);
             }, Blockly.BUMP_DELAY);
       }
@@ -181,10 +178,10 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
   childBlock.setParent(parentBlock);
 
   if (parentBlock.rendered) {
-    parentBlock.svg_.updateDisabled();
+    parentBlock.updateDisabled();
   }
   if (childBlock.rendered) {
-    childBlock.svg_.updateDisabled();
+    childBlock.updateDisabled();
   }
   if (parentBlock.rendered && childBlock.rendered) {
     if (this.type == Blockly.NEXT_STATEMENT ||
@@ -252,7 +249,7 @@ Blockly.Connection.prototype.disconnect = function() {
     parentBlock.render();
   }
   if (childBlock.rendered) {
-    childBlock.svg_.updateDisabled();
+    childBlock.updateDisabled();
     childBlock.render();
   }
 };
@@ -276,7 +273,7 @@ Blockly.Connection.prototype.targetBlock = function() {
  * @private
  */
 Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
-  if (Blockly.Block.dragMode_ != 0) {
+  if (Blockly.dragMode_ != 0) {
     // Don't move blocks around while the user is doing the same.
     return;
   }
