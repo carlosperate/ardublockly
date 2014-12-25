@@ -45,11 +45,20 @@ Blockly.FieldColour = function(colour, opt_changeHandler) {
   Blockly.FieldColour.superClass_.constructor.call(this, '\u00A0\u00A0\u00A0');
 
   this.changeHandler_ = opt_changeHandler;
-  this.borderRect_.style['fillOpacity'] = 1;
   // Set the initial state.
   this.setValue(colour);
 };
 goog.inherits(Blockly.FieldColour, Blockly.Field);
+
+/**
+ * Install this field on a block.
+ * @param {!Blockly.Block} block The block containing this field.
+ */
+Blockly.FieldColour.prototype.init = function(block) {
+  Blockly.FieldColour.superClass_.init.call(this, block);
+  this.borderRect_.style['fillOpacity'] = 1;
+  this.setValue(this.getValue());
+};
 
 /**
  * Clone this FieldColour.
@@ -87,13 +96,28 @@ Blockly.FieldColour.prototype.getValue = function() {
  */
 Blockly.FieldColour.prototype.setValue = function(colour) {
   this.colour_ = colour;
-  this.borderRect_.style.fill = colour;
+  if (this.borderRect_) {
+    this.borderRect_.style.fill = colour;
+  }
   if (this.sourceBlock_ && this.sourceBlock_.rendered) {
     // Since we're not re-rendering we need to explicitly call
     // Blockly.Realtime.blockChanged()
     Blockly.Realtime.blockChanged(this.sourceBlock_);
     this.sourceBlock_.workspace.fireChangeEvent();
   }
+};
+
+/**
+ * Get the text from this field.  Used when the block is collapsed.
+ * @return {string} Current text.
+ */
+Blockly.FieldColour.prototype.getText = function() {
+  var colour = this.colour_;
+  var m = colour.match(/^#(.)\1(.)\2(.)\3$/);
+  if (m) {
+    colour = '#' + m[1] + m[2] + m[3];
+  }
+  return colour;
 };
 
 /**
@@ -155,21 +179,21 @@ Blockly.FieldColour.prototype.showEditor_ = function() {
   Blockly.WidgetDiv.position(xy.x, xy.y, windowSize, scrollOffset);
 
   // Configure event handler.
-  var thisObj = this;
+  var thisField = this;
   Blockly.FieldColour.changeEventKey_ = goog.events.listen(picker,
       goog.ui.ColorPicker.EventType.CHANGE,
       function(event) {
         var colour = event.target.getSelectedColor() || '#000000';
         Blockly.WidgetDiv.hide();
-        if (thisObj.changeHandler_) {
+        if (thisField.sourceBlock_ && thisField.changeHandler_) {
           // Call any change handler, and allow it to override.
-          var override = thisObj.changeHandler_(colour);
+          var override = thisField.changeHandler_(colour);
           if (override !== undefined) {
             colour = override;
           }
         }
         if (colour !== null) {
-          thisObj.setValue(colour);
+          thisField.setValue(colour);
         }
       });
 };
