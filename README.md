@@ -1,5 +1,5 @@
 ## Ardublockly
-"Ardublockly" is a fork of [Blockly](https://developers.google.com/blockly/), a web-based graphical programming editor, that has been updated to work with [Arduino](http://www.arduino.cc/) code.
+"Ardublockly" is a fork of [Blockly](https://developers.google.com/blockly/), a web-based graphical programming editor, that has been updated to generate [Arduino](http://www.arduino.cc/) code.
 
 This project is influeced by BlocklyDuino, also based on an older version of [Blockly](https://developers.google.com/blockly/).
 
@@ -17,20 +17,12 @@ TBD
 
 ### Running Ardublockly
 
-TBD
+To run the application execute the "launch_arduino.py".
 
 #### Required Software
 * [Python 2.7.x](https://www.python.org/download), currently development is maintaining compatibility with  3.x
 * [Arduino IDE version 1.5 or higher](http://arduino.cc/en/main/software)
 * Browser of your choice (currently supports Firefox, Chrome, IE8+, Opera and Safary)
-
-#### Usage 
-
-TBD
-
-#### Development 
-
-TBD
 
 ### Original Authors
 
@@ -38,9 +30,10 @@ Original source is Copyright of Google Inc. [https://developers.google.com/block
 
 
 #### Significant changes
-Added Arduino code generator.
-All changes to the original source code can be review [here](https://github.com/carlosperate/ardublockly/compare/master...blockly-original).
+Added Arduino code generator and Arduino app.
+All changes to the original source code can be review [here](https://github.com/carlosperate/ardublockly/compare/blockly-original...master).
 
 ### License
 
 Licensed under the Apache License, Version 2.0 (the "License"). The full document can be found in the [COPYING](https://github.com/carlosperate/ardublockly/blob/master/COPYING) file.
+
