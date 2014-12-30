@@ -1,0 +1,8 @@
+[submodule "closure-library"]
+	path = closure-library
+	url = https://github.com/google/closure-library.git
+	branch = master
+[submodule "ardublockly"]
+	path = ardublockly
+	url = https://github.com/carlosperate/ardublockly.git
+	branch = master
