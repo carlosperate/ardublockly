@@ -71,6 +71,7 @@ Blockly.BlockSvg.INLINE = -1;
 
 /**
  * Create and initialize the SVG representation of the block.
+ * May be called more than once.
  */
 Blockly.BlockSvg.prototype.initSvg = function() {
   goog.asserts.assert(this.workspace.rendered, 'Workspace is headless.');
@@ -81,16 +82,19 @@ Blockly.BlockSvg.prototype.initSvg = function() {
     this.mutator.createIcon();
   }
   this.updateColour();
-  if (!Blockly.readOnly) {
+  if (!Blockly.readOnly && !this.eventsInit_) {
     Blockly.bindEvent_(this.getSvgRoot(), 'mousedown', this,
                        this.onMouseDown_);
   }
-  this.workspace.getCanvas().appendChild(this.getSvgRoot());
-
   // Bind an onchange function, if it exists.
-  if (goog.isFunction(this.onchange)) {
+  if (goog.isFunction(this.onchange) && !this.eventsInit_) {
     Blockly.bindEvent_(this.workspace.getCanvas(), 'blocklyWorkspaceChange',
         this, this.onchange);
+  }
+  this.eventsInit_ = true;
+
+  if (!this.getSvgRoot().parentNode) {
+    this.workspace.getCanvas().appendChild(this.getSvgRoot());
   }
 };
 
@@ -1275,15 +1279,19 @@ Blockly.BlockSvg.prototype.renderFields_ =
     cursorX = -cursorX;
   }
   for (var t = 0, field; field = fieldList[t]; t++) {
+    var root = field.getSvgRoot();
+    if (!root) {
+      continue;
+    }
     if (Blockly.RTL) {
       cursorX -= field.renderSep + field.renderWidth;
-      field.getSvgRoot().setAttribute('transform',
+      root.setAttribute('transform',
           'translate(' + cursorX + ', ' + cursorY + ')');
       if (field.renderWidth) {
         cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
       }
     } else {
-      field.getSvgRoot().setAttribute('transform',
+      root.setAttribute('transform',
           'translate(' + (cursorX + field.renderSep) + ', ' + cursorY + ')');
       if (field.renderWidth) {
         cursorX += field.renderSep + field.renderWidth +

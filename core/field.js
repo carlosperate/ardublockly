@@ -88,6 +88,9 @@ Blockly.Field.prototype.init = function(block) {
   this.sourceBlock_ = block;
   // Build the DOM.
   this.fieldGroup_ = Blockly.createSvgElement('g', {}, null);
+  if (!this.visible_) {
+    this.fieldGroup_.style.display = 'none';
+  }
   this.borderRect_ = Blockly.createSvgElement('rect',
       {'rx': 4,
        'ry': 4,
@@ -181,7 +184,7 @@ Blockly.Field.prototype.getSvgRoot = function() {
  * @private
  */
 Blockly.Field.prototype.render_ = function() {
-  if (this.visible_) {
+  if (this.visible_ && this.textElement_) {
     try {
       var width = this.textElement_.getComputedTextLength();
     } catch(e) {
