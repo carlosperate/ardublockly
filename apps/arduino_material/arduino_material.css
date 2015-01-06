@@ -1,0 +1,102 @@
+body{
+  padding-top: 100px;
+}
+
+.farSide {
+  text-align: right;
+}
+
+.content {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+pre.content {
+  overflow: scroll;
+  margin: 0;
+  padding: 0;
+}
+#blocks_panel {
+  padding: 0 !important;
+}
+#content_blocks {
+  padding: 0;
+  height: 500px;
+}
+.blocklySvg {
+  border: none !important;
+}
+#content_xml {
+  resize: none;
+  outline: none;
+  border: none;
+  font-family: monospace;
+  overflow: scroll;
+  font-style: 0.2em !important;
+  height: 410px;
+}
+#content_arduino {
+  resize: none;
+  outline: none;
+  border: none;
+  font-family: monospace;
+  overflow: scroll;
+  font-style: 0.2em !important;
+  height: 410px;
+}
+
+#button_run {
+  position: absolute;
+  right: 25px;
+  top: -20px;
+}
+
+
+/*****************************/
+/*  Overwriting Blockly CSS  */
+/*****************************/
+
+/* Blockly text for the following components:  */
+.blocklyTreeLabel,           /* Toolbox        */
+.blocklyText,                /* Block          */
+.goog-menuitem-content {     /* Drop down menu */
+  font-family: "Roboto", sans-serif!important;
+}
+
+
+/*********************************/
+/*  Overwriting Materialize CSS  */
+/*********************************/
+
+/* Keep content at larger width in all resolutions */
+@media only screen and (min-width : 993px) {
+  .container {
+    width: 85% !important;
+  }
+}
+
+/* Fix the navigation bar to stay allways on screen */
+.nav-fixed {
+  position: fixed ;
+  right: 0;
+  left: 0;
+  top: 0;
+  z-index: 999;
+}
+@media (min-width: 768px) {
+  .nav-fixed {
+    border-radius: 0;
+}
+
+/* Button needs to be at a higher z index than */
+/* card when floating and lower when clicked.  */
+#button_run:hover {
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#button_run:active {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+}

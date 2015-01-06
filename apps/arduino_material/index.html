@@ -1,0 +1,91 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>Starter Template - Materialize</title>
+  <!--Materialize & jQuery -->
+  <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection" />
+  <script src="jQuery/jquery-2.1.3.min.js"></script>
+  <script src="materialize/materialize.js"></script>
+  <!-- Prettify  -->
+  <link rel="stylesheet" href="../../demos/prettify.css">
+  <script src="../../demos/prettify.js"></script>
+  <!-- arduino_material app -->
+  <link href="arduino_material.css" rel="stylesheet" media="screen,projection" />
+  <script src="arduino_material_design.js"></script>
+  <script src="arduino_material_ardublockly.js"></script>
+  <script src="arduino_material.js"></script>
+  <!-- Ardublockly -->
+  <!--script src="../../blockly_compressed.js"></script-->
+  <script src="../../blockly_uncompressed.js"></script>
+  <!--script src="../../blocks_compressed.js"></script-->
+  <script src="../../blocks/logic.js"></script>
+  <script src="../../blocks/loops.js"></script>
+  <script src="../../blocks/math.js"></script>
+  <script src="../../blocks/text.js"></script>
+  <script src="../../blocks/lists.js"></script>
+  <script src="../../blocks/colour.js"></script>
+  <script src="../../blocks/variables.js"></script>
+  <script src="../../blocks/procedures.js"></script>
+  <script src="../../generators/arduino.js"></script>
+  <script src="../../generators/arduino/base.js"></script>
+  <script src="../../generators/arduino/io.js"></script>
+  <script src="../../generators/arduino/lists.js"></script>
+  <script src="../../generators/arduino/logic.js"></script>
+  <script src="../../generators/arduino/loops.js"></script>
+  <script src="../../generators/arduino/math.js"></script>
+  <script src="../../generators/arduino/procedures.js"></script>
+  <script src="../../generators/arduino/servo.js"></script>
+  <script src="../../generators/arduino/spi.js"></script>
+  <script src="../../generators/arduino/stepper.js"></script>
+  <script src="../../generators/arduino/text.js"></script>
+  <script src="../../generators/arduino/time.js"></script>
+  <script src="../../generators/arduino/variables.js"></script>
+  <script src="../../msg/js/en.js"></script>
+</head>
+    
+<body>
+  <nav class="blue lighten-1 nav-fixed">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a id="logo-container" href="#" class="brand-logo">Ardublockly</a>
+        <ul id="nav-mobile" class="right side-nav">
+          <li><a href="#" id="button_load">Load<i class="mdi-file-file-upload left"></i></a></li>
+          <li><a href="#" id="button_save">Save<i class="mdi-content-save left"></i></a></li>
+          <li><a href="#" id="button_delete_all">Delete All<i class="mdi-action-delete left"></i></a></li>
+          <li><a href="#" id="button_settings">Settings<i class="mdi-action-settings left"></i></a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col s12 m12 l8" style="position:relative">
+        <a class="btn-floating btn-large waves-effect waves-light red z-depth-1-half" id="button_run"><i class="mdi-av-play-arrow"></i></a>
+        <div class="card-panel white z-depth-1" id="blocks_panel">
+          <div id="content_blocks" class="content"></div>
+        </div>
+      </div>
+      <div class="col s12 m12 l4">
+        <ul class="collapsible z-depth-1">
+          <li>
+            <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>Source Code</div>
+            <div class="collapsible-body">
+              <pre id="content_arduino" class="content"></pre>
+            </div>
+          </li>
+          <li>
+            <div class="collapsible-header"><i class="mdi-maps-place"></i>XML</div>
+            <div class="collapsible-body">
+              <textarea id="content_xml" class="content" wrap="off"></textarea>
+            </div>
+          </li>
+        </ul>
+      </div>
+     <br><br>
+    </div>
+  </div>
+  </body>
+</html>
