@@ -7,27 +7,24 @@ The "ArduBlocklyServerCompiler" component initialises a local server with Python
 
 ### Features
 
-* TBD
+Ardublockly is still under development and a lot of the main features are not yet implemented.
 
-![WebApp screenshot](https://raw.githubusercontent.com/carlosperate/BlocklyDuino-BtW/20c0cf5048f18556c606adf8f1c0e92210de5f5a/images/screenshot_1.png)
+![WebApp screenshot](http://carlosperate.github.io/ardublockly/images/screenshot_1.png)
 
 ### Demo
 
-TBD
+A demo of the current state of Ardublockly can be found in the following two links:
+* [Ardublockly](http://carlosperate.github.io/ardublockly/ardublockly/apps/arduino/index.html)
+* [Ardublockly with material design](http://carlosperate.github.io/ardublockly/ardublockly/apps/arduino_material/index.html)
 
-### Running Ardublockly
+To load the code into an Arduino requires Ardublockly to be executed locally.
 
-To run the application execute the "launch_arduino.py".
-
-#### Required Software
-* [Python 2.7.x](https://www.python.org/download), currently development is maintaining compatibility with  3.x
-* [Arduino IDE version 1.5 or higher](http://arduino.cc/en/main/software)
-* Browser of your choice (currently supports Firefox, Chrome, IE8+, Opera and Safary)
+### Documentation
+The documentation, including installation instructions, can be found in [this github repository wiki]()
 
 ### Original Authors
 
-Original source is Copyright of Google Inc. [https://developers.google.com/blockly/](https://developers.google.com/blockly/)
-
+Original source code from Blockly is Copyright of Google Inc. [https://developers.google.com/blockly/](https://developers.google.com/blockly/)
 
 #### Significant changes
 Added Arduino code generator and Arduino app.
