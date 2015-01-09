@@ -2,7 +2,7 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview JavaScript for Arduino app with material design
+ * @fileoverview General javaScript for Arduino app with material design
  */
 'use strict';
 
@@ -12,18 +12,13 @@
 var ArduinoMaterial = ArduinoMaterial || {};
 
 /**
- * Initialize Blockly for Ardublockly. Called on page load.
+ * Initialize function for Ardublockly on page load.
  */
-ArduinoMaterial.init = function() {
-  // Inject Ardublockly
-  var toolbox = ArduinoMaterial.readToolbox('arduino_toolbox.xml');
-  Blockly.inject(document.getElementById('content_blocks'),
-      {media: '../../media/',
-       rtl: false,
-       scrollbars: true,
-       toolbox: toolbox});
+window.addEventListener('load', function() {
+  // Inject Ardublockly into content_blocks
+  ArduinoMaterial.injectBlockly(document.getElementById('content_blocks'));
 
-  // Add event listeners
+  // Add event listeners  
   ArduinoMaterial.bindDesignEventListeners();
   ArduinoMaterial.bindBlocklyEventListeners();
 
@@ -33,8 +28,21 @@ ArduinoMaterial.init = function() {
 
   // Ensure the blockly element is the correct size
   Blockly.fireUiEvent(window, 'resize');
-};
-window.addEventListener('load', ArduinoMaterial.init);
+});
+
+/**
+ * Binds the event listeners relevant to the page design
+ */
+ArduinoMaterial.bindDesignEventListeners = function() {
+  window.addEventListener('resize', ArduinoMaterial.resizeBlocks, false);
+}
+
+/**
+ * Binds the event listeners relevant to Blockly
+ */
+ArduinoMaterial.bindBlocklyEventListeners = function() {
+  Blockly.addChangeListener(ArduinoMaterial.renderContent);
+}
 
 /**
  * Binds functions to each of the buttons and nav links
@@ -42,6 +50,7 @@ window.addEventListener('load', ArduinoMaterial.init);
 ArduinoMaterial.bindActionFunctions = function() {
   ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.discard);
   ArduinoMaterial.bindClick('button_run', ArduinoMaterial.runCode);
+  ArduinoMaterial.bindClick('button_load_xml', ArduinoMaterial.runCode);
 };
 
 /**
@@ -56,4 +65,12 @@ ArduinoMaterial.bindClick = function(el, func) {
   }
   el.addEventListener('click', func, true);
   el.addEventListener('touchend', func, true);
+};
+
+/**
+ * Populate the currently selected panel with content generated from the blocks.
+ */
+ArduinoMaterial.renderContent = function() {
+  ArduinoMaterial.generateXml(document.getElementById('content_xml'));
+  ArduinoMaterial.generateArduino(document.getElementById('content_arduino'));
 };

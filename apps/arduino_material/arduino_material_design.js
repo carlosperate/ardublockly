@@ -2,7 +2,8 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview JavaScript for Arduino app with material design
+ * @fileoverview JavaScript to configure front end design for the Arduino app
+ *               with material design
  */
 'use strict';
 
@@ -26,28 +27,24 @@ ArduinoMaterial.materializeJsInit = function() {
 /**
  * 
  */
-ArduinoMaterial.bindDesignEventListeners = function() {
-  window.addEventListener('resize', ArduinoMaterial.resizeBlocks, false);
-}
-
-/**
- * 
- */
 ArduinoMaterial.resizeBlocks = function(e) {
-  // Using a set time out due to differences in stacked events in browsers
-  setTimeout(function() {
-    var el = document.getElementById('content_blocks');
-    var bBox = ArduinoMaterial.getBBox_(document.getElementById('blocks_panel'));
-    el.style.top = bBox.y + 'px';
-    el.style.left = bBox.x + 'px';
-    // Height and width need to be set, read back, then set again to
-    // compensate for scrollbars.
-    el.style.height = bBox.height + 'px';
-    el.style.height = (2 * bBox.height - el.offsetHeight) + 'px';
-    el.style.width = bBox.width + 'px';
-    el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
-   //alert("resized " + bBox.height + " " + bBox.width);
-  }, 1000);
+  var content_blocks = document.getElementById('content_blocks');
+  var wrapper_panel_size =
+      ArduinoMaterial.getBBox_(document.getElementById('blocks_panel'));
+  content_blocks.style.top = wrapper_panel_size.y + 'px';
+  content_blocks.style.left = wrapper_panel_size.x + 'px';
+  // Height and width need to be set, read back, then set again to
+  // compensate for scrollbars.
+  content_blocks.style.height = wrapper_panel_size.height + 'px';
+  content_blocks.style.height =
+      (2 * wrapper_panel_size.height - content_blocks.offsetHeight) + 'px';
+  content_blocks.style.width = wrapper_panel_size.width + 'px';
+  content_blocks.style.width =
+      (2 * wrapper_panel_size.width - content_blocks.offsetWidth) + 'px';
+  //Blockly.MsvgResize();
+   Blockly.mainWorkspace.render();
+  //alert(
+  //  "resized " + wrapper_panel_size.width + " " + content_blocks.style.width);
 };
 
 /**

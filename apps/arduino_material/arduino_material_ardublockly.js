@@ -12,36 +12,81 @@
 var ArduinoMaterial = ArduinoMaterial || {};
 
 /**
- * 
+ * Injects Blockly into a given text area
  */
-ArduinoMaterial.bindBlocklyEventListeners = function() {
-  Blockly.addChangeListener(ArduinoMaterial.renderContent);
-}
+ArduinoMaterial.injectBlockly = function(el) {
+  var toolbox = ArduinoMaterial.readToolbox('arduino_toolbox.xml');
+  Blockly.inject(el,
+      { media: '../../media/',
+        rtl: false,
+        scrollbars: true,
+        toolbox: toolbox });
+};
 
 /**
- * Populate the currently selected pane with content generated from the blocks.
+ * Open the XML containing the toolbox data
+ * @param {!String} xml_path String containing the xml file path.
+ * @return {!String} Contains the text in a single string.
  */
-ArduinoMaterial.renderContent = function() {
+ArduinoMaterial.readToolbox = function(xml_path) {
+  var request = new XMLHttpRequest();
+  request.open("GET", xml_path, false);
+  request.send(null);
+  return request.responseText;
+};
+
+/**
+ * Renders the XML code into a given textarea
+ * @param el Textarea element to save the code into.
+ */
+ArduinoMaterial.generateXml = function(el) {
   var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-  document.getElementById('content_xml').value = xmlText;
-  //xmlTextarea.focus();
-  var content = document.getElementById('content_arduino');
+  el.value = xmlText;
+};
+
+/**
+ * Renders the Arduino color highlighted code code into an element
+ * @param el Pre element to save the code into.
+ */
+ArduinoMaterial.generateArduino = function(el) {
   var code = Blockly.Arduino.workspaceToCode();
-  content.textContent = code;
+  el.textContent = code;
   if (typeof prettyPrintOne == 'function') {
-    code = content.innerHTML;
+    code = el.innerHTML;
     code = prettyPrintOne(code, 'cpp');
-    content.innerHTML = code;
+    el.innerHTML = code;
   }
 };
 
 /**
  * Execute the user's code.
- * Just a quick and dirty eval.  Catch infinite loops.
  */
 ArduinoMaterial.runCode = function() {
-  alert('Function not yet implemented');
+  alert("function not yet implemented");
+}
+
+/**
+ * Togglets the toolbar On and Off from the Blockly workspace
+ */
+ArduinoMaterial.toolbar_showing = true;
+ArduinoMaterial.toogleToolbox = function() {
+  
+  var myElements = document.querySelectorAll(".blocklyToolboxDiv");
+  
+  if ( ArduinoMaterial.toolbar_showing == true ) {
+    for (var i = 0; i < myElements.length; i++) {
+      myElements[i].style.display = 'none';
+    }
+    ArduinoMaterial.toolbar_showing = false;
+  } else {
+   for (var i = 0; i < myElements.length; i++) {
+      myElements[i].style.display = 'inline';
+      //myElements[i].style.position = 'absolute';
+    }
+    ArduinoMaterial.toolbar_showing = true;
+  }
+  ArduinoMaterial.resizeBlocks();
 };
 
 /**
@@ -58,13 +103,9 @@ ArduinoMaterial.discard = function() {
 };
 
 /**
- * Open the XML containing the toolbox data
+ * Loads the blocks XML onto the blockly SVG area
  * @param {!String} xml_path String containing the xml file path.
- * @return {!String} Contains the text in a single string.
  */
-ArduinoMaterial.readToolbox = function(xml_path) {
-  var request = new XMLHttpRequest();
-  request.open("GET", xml_path, false);
-  request.send(null);
-  return request.responseText;
+ArduinoMaterial.loadXMLblocks = function(xmlCode) {
+  alert('Function not yet implemented');
 };

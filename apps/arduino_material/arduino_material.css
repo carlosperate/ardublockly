@@ -1,30 +1,49 @@
-body{
-  padding-top: 100px;
+body {
+  background-color: #eeeeee;
 }
 
-.farSide {
-  text-align: right;
+/* Fix the navigation bar to stay on screen at larger resolutions */
+.nav-fixed {
+  border-radius: 0;
+  position: inherit;
+  margin-bottom: 30px;
+}
+@media only screen and (min-width : 993px) {
+  body {
+    padding-top: 100px;
+  }
+  .nav-fixed {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    margin-bottom: 0px;
+    z-index: 999;
+  }
 }
 
 .content {
   margin: 0;
   padding: 0;
   width: 100%;
-}
-pre.content {
-  overflow: scroll;
-  margin: 0;
-  padding: 0;
+  background-color: #ffffff;
 }
 #blocks_panel {
-  padding: 0 !important;
+  padding: 0px;
+  position: relative!important;
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  border-radius: 4px !important;
 }
 #content_blocks {
+  margin: 0;
   padding: 0;
-  height: 500px;
-}
-.blocklySvg {
-  border: none !important;
+  min-height: 500px;
+  background: none; 
+  height: -moz-calc(100hv - 100px);     /* Firefox  */
+  height: -webkit-calc(100hv - 100px);  /* WebKit   */
+  height: -o-calc(100hv - 100px);       /* Opera    */
+  height: calc(100hv - 100px);          /* Standard */
 }
 #content_xml {
   resize: none;
@@ -33,7 +52,11 @@ pre.content {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  height: 410px;
+  min-height: 410px;
+  height: -moz-calc(100hv - 100px);     /* Firefox  */
+  height: -webkit-calc(100hv - 100px);  /* WebKit   */
+  height: -o-calc(100hv - 100px);       /* Opera    */
+  height: calc(100hv - 100px);          /* Standard */
 }
 #content_arduino {
   resize: none;
@@ -42,13 +65,22 @@ pre.content {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  height: 410px;
+  min-height: 410px;
+  height: -moz-calc(100hv - 100px);     /* Firefox  */
+  height: -webkit-calc(100hv - 100px);  /* WebKit   */
+  height: -o-calc(100hv - 100px);       /* Opera    */
+  height: calc(100hv - 100px);          /* Standard */
 }
 
 #button_run {
   position: absolute;
   right: 25px;
   top: -20px;
+}
+#button_load_xml {
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
 }
 
 
@@ -63,29 +95,87 @@ pre.content {
   font-family: "Roboto", sans-serif!important;
 }
 
+/* Entire Blockly area, Toolbox dranw on top */
+.blocklySvg {
+  border-width: none !important;
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  border-radius: 4px !important;
+}
+
+/* Toolbox */
+.blocklyToolboxDiv {
+  border-color: #e0e0e0 !important;
+  border-width: 0px 1px 0px 0px !important;
+  -webkit-border-radius: 4px 0px 0px 4px !important;
+  -moz-border-radius: 4px 0px 0px 4px !important;
+  border-radius: 4px 0px 0px 4px !important;
+  border: none !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  background: rgba(13, 71, 161, 0.1) !important;  /* Blue 900 */
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
+}
+.blocklyTreeRoot {
+  background: none !important;
+  border: none !important;
+  margin: 0px 0px !important;
+  padding: 5px 1px !important;
+  /*position: relative;
+  top: 50%;
+  transform: translateY(-50%);*/
+}
+.blocklyTreeRow {
+  background: none !important;
+  border: none !important;
+  margin: 0px 0px !important;
+  padding: 8px 15px 8px 0px !important;
+  box-sizing: content-box !important;
+  /* line-height: 0.5rem !important;
+  vertical-align: middle !important;*/
+}
+.blocklyTreeSelected {
+  background-color: #2196f3 !important;  /* Blue 500 */
+}
+.blocklyTreeRow:not(.blocklyTreeSelected):hover {
+  background-color: #bbdefb !important;  /* Blue 100 */
+}
+.blocklyTreeLabel {
+}
+.blocklyTreeSeparator{
+  padding: 0px !important;
+  margin: 0px !important;
+}
+/* Toolbox second column with blocks*/
+.blocklyFlyoutBackground {
+  fill: #0d47a1 !important;  /* Blue 900 */
+  fill-opacity: 0.15 !important;
+  -webkit-border-radius: 0px 4px 4px 0px !important;
+  -moz-border-radius: 0px 4px 4px 0px !important;
+  border-radius: 0px 4px 4px 0px !important;
+}
+
 
 /*********************************/
 /*  Overwriting Materialize CSS  */
 /*********************************/
 
-/* Keep content at larger width in all resolutions */
-@media only screen and (min-width : 993px) {
+/* Modify container to have a larger width */
+.container {
+  max-width: 1650px !important;
+  width: 100% !important;
+}
+@media only screen and (min-width : 601px) {
   .container {
-    width: 85% !important;
+    width: 95% !important;
   }
 }
-
-/* Fix the navigation bar to stay allways on screen */
-.nav-fixed {
-  position: fixed ;
-  right: 0;
-  left: 0;
-  top: 0;
-  z-index: 999;
-}
-@media (min-width: 768px) {
-  .nav-fixed {
-    border-radius: 0;
+@media only screen and (min-width : 993px) {
+  .container {
+    width: 90% !important;
+  }
 }
 
 /* Button needs to be at a higher z index than */
@@ -98,5 +188,5 @@ pre.content {
 #button_run:active {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); }
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }

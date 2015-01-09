@@ -1611,10 +1611,13 @@
 /*** Collapsible ***/
 /*** Forms ***/
 /*** Global ***/
+/*** Navbar ***/
 /*** SideNav ***/
+/*** Tables ***/
 /*** Toasts ***/
 /*** Typography ***/
 /*** Collections ***/
+/* Progress Bar */
 /*! normalize.css v3.0.1 | MIT License | git.io/normalize */
 /**
  * 1. Set default font family to sans-serif.
@@ -2095,12 +2098,8 @@ table, th, td {
 table {
   width: 100%;
   display: table; }
-  @media only screen and (max-width : 600px) {
-    table thead tr th, table tbody tr td {
-      text-align: center; }
- }
   table.bordered tr {
-    border-bottom: 1px solid #e0e0e0; }
+    border-bottom: 1px solid #d0d0d0; }
   table.striped tbody tr:nth-child(odd) {
     background-color: #f2f2f2; }
   table.hoverable tbody tr {
@@ -2115,7 +2114,7 @@ table {
     text-align: center; }
 
 thead {
-  border-bottom: 1px solid #878787; }
+  border-bottom: 1px solid #d0d0d0; }
 
 td, th {
   padding: 15px 5px;
@@ -2123,6 +2122,59 @@ td, th {
   text-align: left;
   vertical-align: middle;
   border-radius: 2px; }
+
+@media only screen and (max-width : 992px) {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    position: relative;
+    /* sort out borders */ }
+    table th, table td {
+      margin: 0;
+      vertical-align: top; }
+    table th {
+      text-align: left; }
+    table thead {
+      display: block;
+      float: left; }
+      table thead tr {
+        display: block;
+        padding: 0 10px 0 0; }
+    table tbody {
+      display: block;
+      width: auto;
+      position: relative;
+      overflow-x: auto;
+      white-space: nowrap; }
+      table tbody tr {
+        display: inline-block;
+        vertical-align: top; }
+    table th {
+      display: block;
+      text-align: right; }
+    table td {
+      display: block;
+      min-height: 1.25em;
+      text-align: left; }
+    table tr {
+      padding: 0 10px; }
+    table thead {
+      border: 0;
+      border-right: 1px solid #d0d0d0; }
+    table.bordered th {
+      border-bottom: 0;
+      border-left: 0; }
+    table.bordered td {
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0; }
+    table.bordered tr {
+      border: 0; }
+    table.bordered tbody tr {
+      border-right: 1px solid #d0d0d0; }
+ }
 
 .collection {
   background-color: #fff;
@@ -2136,6 +2188,9 @@ td, th {
     border-bottom: 1px solid #e0e0e0; }
     .collection .collection-item:last-child {
       border-bottom: none; }
+    .collection .collection-item.active {
+      background-color: #42A5F5;
+      color: #BBDEFB; }
   .collection a.collection-item {
     display: block;
     -webkit-transition: 0.25s;
@@ -2150,9 +2205,6 @@ td, th {
     padding: 10px 20px; }
   .collection.with-header .collection-item {
     padding-left: 30px; }
-  .collection .active {
-    background-color: #42A5F5;
-    color: #BBDEFB; }
   .collection .secondary-content {
     float: right; }
   .collection.pagination {
@@ -2211,6 +2263,125 @@ span.badge {
     width: 100%;
     height: 100%; }
 
+.progress {
+  position: relative;
+  height: 4px;
+  display: block;
+  width: 100%;
+  background-color: #c5ecfe;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  background-clip: padding-box;
+  overflow: hidden; }
+  .progress .indeterminate {
+    background-color: #03a9f4; }
+    .progress .indeterminate:before {
+      content: '';
+      background-color: inherit;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      -webkit-animation: indeterminate 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite;
+      -moz-animation: indeterminate 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite;
+      -ms-animation: indeterminate 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite;
+      -o-animation: indeterminate 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite;
+      animation: indeterminate 2s cubic-bezier(0.55, 0.085, 0.68, 0.53) infinite; }
+    .progress .indeterminate:after {
+      content: '';
+      position: absolute;
+      background-color: inherit;
+      top: 0;
+      bottom: 0;
+      -webkit-animation: indeterminate-short 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+      -moz-animation: indeterminate-short 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+      -ms-animation: indeterminate-short 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+      -o-animation: indeterminate-short 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+      animation: indeterminate-short 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+      -webkit-animation-delay: 1.05s;
+      -moz-animation-delay: 1.05s;
+      -ms-animation-delay: 1.05s;
+      -o-animation-delay: 1.05s;
+      animation-delay: 1.05s; }
+
+@-webkit-keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%; }
+
+  60% {
+    left: 100%;
+    right: -80%; }
+
+  100% {
+    left: 100%;
+    right: -80%; } }
+
+@-moz-keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%; }
+
+  60% {
+    left: 100%;
+    right: -80%; }
+
+  100% {
+    left: 100%;
+    right: -80%; } }
+
+@keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%; }
+
+  60% {
+    left: 100%;
+    right: -80%; }
+
+  100% {
+    left: 100%;
+    right: -80%; } }
+
+@-webkit-keyframes indeterminate-short {
+  0% {
+    left: -80%;
+    right: 100%; }
+
+  50% {
+    left: 103%;
+    right: -6%; }
+
+  100% {
+    left: 103%;
+    right: -6%; } }
+
+@-moz-keyframes indeterminate-short {
+  0% {
+    left: -80%;
+    right: 100%; }
+
+  50% {
+    left: 103%;
+    right: -6%; }
+
+  100% {
+    left: 103%;
+    right: -6%; } }
+
+@keyframes indeterminate-short {
+  0% {
+    left: -80%;
+    right: 100%; }
+
+  50% {
+    left: 103%;
+    right: -6%; }
+
+  100% {
+    left: 103%;
+    right: -6%; } }
+
 /*******************
   Utility Classes
 *******************/
@@ -2224,10 +2395,10 @@ span.badge {
   text-align: center; }
 
 .left {
-  float: left; }
+  float: left !important; }
 
 .right {
-  float: right; }
+  float: right !important; }
 
 .no-select, input[type=range], input[type=range] + .thumb {
   -webkit-touch-callout: none;
@@ -4856,6 +5027,13 @@ nav {
       -o-transform: translateY(0);
       transform: translateY(0); }
 
+.navbar-fixed {
+  position: relative;
+  height: 56px;
+  z-index: 998; }
+  .navbar-fixed nav {
+    position: fixed; }
+
 @media only screen and (min-width : 601px) {
   nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
     height: 64px;
@@ -4863,6 +5041,9 @@ nav {
 
   nav .nav-wrapper i {
     font-size: 2rem; }
+
+  .navbar-fixed {
+    height: 64px; }
  }
 
 @font-face {
@@ -5091,12 +5272,14 @@ small {
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
-  background-clip: padding-box; }
+  background-clip: padding-box;
+  background-color: #fff; }
 
 .card {
   position: relative;
   overflow: hidden;
   margin: 0.5rem 0 1rem 0;
+  background-color: #fff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -5148,8 +5331,7 @@ small {
       right: 0;
       top: 0;
       bottom: 0;
-      width: 100%;
-      z-index: -1; }
+      width: 100%; }
     .card .card-image .card-title {
       position: absolute;
       bottom: 0;
@@ -5243,14 +5425,14 @@ small {
     .toast {
       float: right; } }
 
-ul.tabs {
+.tabs {
   position: relative;
   height: 48px;
   background-color: #FFF;
   margin: 0 auto;
   width: 100%;
   white-space: nowrap; }
-  ul.tabs li.tab {
+  .tabs li.tab {
     display: block;
     float: left;
     text-align: center;
@@ -5262,10 +5444,7 @@ ul.tabs {
     text-transform: uppercase;
     letter-spacing: 0.8px;
     width: 15%; }
-    @media only screen and (min-width : 993px) {
-      ul.tabs li.tab {
-        max-width: 25%; } }
-    ul.tabs li.tab a {
+    .tabs li.tab a {
       color: #ee6e73;
       display: block;
       width: 100%;
@@ -5275,9 +5454,9 @@ ul.tabs {
       -o-transition: color 0.28s ease;
       -ms-transition: color 0.28s ease;
       transition: color 0.28s ease; }
-      ul.tabs li.tab a:hover {
+      .tabs li.tab a:hover {
         color: #f8c1c3; }
-  ul.tabs .indicator {
+  .tabs .indicator {
     position: absolute;
     bottom: 0;
     height: 2px;
@@ -5421,8 +5600,9 @@ ul.tabs li.tab {
   margin: 0px;
   min-width: 100px;
   z-index: 1000;
-  max-height: 50%;
+  max-height: 70%;
   opacity: 0;
+  overflow-y: hidden;
   will-change: width, height; }
   .dropdown-content li {
     cursor: pointer;
@@ -5773,10 +5953,12 @@ label {
     transition: color 0.2s; }
     .input-field .prefix.active {
       color: #03a9f4; }
-  .input-field .prefix ~ input {
+  .input-field .prefix ~ input, .input-field .prefix ~ textarea {
     margin-left: 3rem;
     width: 92%;
     width: calc(100% - 3rem); }
+  .input-field .prefix ~ textarea {
+    padding-top: 0.8rem; }
   .input-field .prefix ~ label {
     margin-left: 3rem; }
   @media only screen and (max-width : 992px) {
@@ -6334,7 +6516,7 @@ ul.side-nav.fixed {
   top: 0px;
   left: 0px;
   right: 0px;
-  bottom: 0px;
+  height: 120vh;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 998;
   will-change: opacity; }
@@ -7132,6 +7314,7 @@ ul.side-nav.fixed {
   font-weight: 500; }
 
 .picker__day--outfocus {
+  padding: 0.75rem 0;
   color: #fff; }
 
 .picker__day--outfocus:hover {
@@ -7166,7 +7349,10 @@ ul.side-nav.fixed {
  * The footer containing the "today", "clear", and "close" buttons.
  */
 .picker__footer {
-  text-align: center; }
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
 
 .picker__button--today, .picker__button--clear, .picker__button--close {
   border: 1px solid #ffffff;
@@ -7294,6 +7480,8 @@ ul.side-nav.fixed {
   transform: scale(0.9);
   background-color: #009688;
   color: #ffffff; }
+  .picker--focused .picker__day--selected.picker__day--outfocus {
+    background-color: #b2dfdb; }
 
 .picker__footer {
   text-align: right;
@@ -7301,6 +7489,7 @@ ul.side-nav.fixed {
 
 .picker__close, .picker__today {
   font-size: 1.1rem;
+  padding: 0 1rem;
   color: #26a69a; }
 
 .picker__nav--prev:before, .picker__nav--next:before {

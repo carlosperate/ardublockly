@@ -8,6 +8,7 @@
     <block type="logic_null"></block>
     <block type="logic_ternary"></block>
   </category>
+  <hr />
   <category name="Loops">
     <block type="controls_repeat_ext">
       <value name="TIMES">
@@ -37,6 +38,7 @@
     <block type="controls_forEach"></block>
     <block type="controls_flow_statements"></block>
   </category>
+  <hr />
   <category name="Math">
     <block type="math_number"></block>
     <block type="math_arithmetic"></block>
@@ -81,6 +83,7 @@
     <block type="math_random_float"></block>
     <block type="base_map"></block>
   </category>
+  <hr />
   <category name="Text">
     <block type="text"></block>
     <block type="text_join"></block>
@@ -121,6 +124,7 @@
       </value>
     </block>
   </category>
+  <hr />
   <category name="Lists">
     <block type="lists_create_empty"></block>
     <block type="lists_create_with"></block>
@@ -162,12 +166,15 @@
       </value>
     </block>
   </category>
+  <hr />
   <category name="Variables">
     <block type="variables_get"></block>
     <block type="variables_set"></block>
     <block type="variables_set_type"></block>
   </category>
+  <hr />
   <category name="Functions" custom="PROCEDURE"></category>
+  <hr />
   <category name="Input/Output">
     <block type="io_digitalwrite"></block>
     <block type="io_digitalread"></block>
@@ -176,20 +183,24 @@
     <block type="io_analogread"></block>
     <block type="io_highlow"></block>
   </category>
+  <hr />
   <category name="Time">
     <block type="time_delay"></block>
     <block type="time_delaymicros"></block>
     <block type="time_millis"></block>
     <block type="time_micros"></block>
   </category>
+  <hr />
   <category name="Servo">
     <block type="servo_write"></block>
     <block type="servo_read"></block>
   </category>
+  <hr />
   <category name="Stepper">
     <block type="stepper_config"></block>
     <block type="stepper_step"></block>
   </category>
+  <hr />
   <category name="Comms">
     <block type="spi_config"></block>
     <block type="spi_transfer"></block>
