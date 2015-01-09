@@ -63,9 +63,6 @@ td.tabmax {
   padding-right: 10px;
   text-align: right;
 }
-html[dir=rtl] td.tabmax {
-  text-align: left;
-}
 
 /* Table */
 table {
@@ -165,9 +162,8 @@ code.arduino_code_peek  {
 button {
   padding: 5px;
   margin: 5px 5px 5px 0px;
-  border-radius: 30px;
+  border-radius: 20px;
   border: 3px solid rgb(221, 221, 221);
-  font-size: large;
   background-color: #eee;
   color: #000;
   outline: none;
@@ -205,9 +201,6 @@ button.disabled:hover>img {
 button.disabled {
   display: none;
 }
-button.notext {
-  font-size: 10%;
-}
 
 /* Sprited icons. */
 .icon21 {
@@ -233,15 +226,12 @@ img.save {
 img.load{
   background-position: -105px 0px;
 }
-div.button_text {
-  height: 21px;
-  max-height: 21px;
-  font-size: small;
-  overflow: hidden;
-  text-align: center;
+.button_text {
+  font-size: large;
 }
-div.button_text>span {
-  line-height: 21px;
+.button_text>img {
+  height: 21px;
+  width: 1px;
 }
 
 /* Dialogs */

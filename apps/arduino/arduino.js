@@ -194,7 +194,7 @@ Arduino.peekCode = function(visible) {
   
   if(Arduino.peek_code == false) {
     Arduino.peek_code = true;
-    peek_code_button.className = "notext secondary";
+    peek_code_button.className = "button_text secondary";
     Arduino.sideContent(true);
     code_peek_content.style.display = 'inline-block';
     // Regenerate arduino code and ensure every click does as well
@@ -202,7 +202,7 @@ Arduino.peekCode = function(visible) {
     Blockly.addChangeListener(Arduino.renderArduinoPeekCode);
   } else {
     Arduino.peek_code = false;
-    peek_code_button.className = "notext";
+    peek_code_button.className = "button_text";
     code_peek_content.style.display = 'none';
     Arduino.sideContent(false);
     // Remove action listeners. TODO: track listener so that first time does not
