@@ -45,6 +45,7 @@
 </head>
     
 <body>
+
   <nav class="blue lighten-1 nav-fixed">
     <div class="container">
       <div class="nav-wrapper">
@@ -54,6 +55,18 @@
           <li><a href="#" id="button_save">Save<i class="mdi-content-save left"></i></a></li>
           <li><a href="#" id="button_delete_all">Delete All<i class="mdi-action-delete left"></i></a></li>
           <li><a href="#" id="button_settings">Settings<i class="mdi-action-settings left"></i></a></li>
+          <!-- Drop down menu -->
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="#!">one</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">two</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">three</a></li>
+            <li class="divider"></li>
+            <li><a href="#!">four</a></li>
+          </ul>
+          <!-- Drop down Trigger -->
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Examples<i class="mdi-action-extension left"></i><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
       </div>
@@ -63,7 +76,8 @@
   <div class="container">
     <div class="row">
       <div class="col s12 m12 l8" style="position:relative">
-        <a class="btn-floating btn-large waves-effect waves-light red z-depth-1-half" id="button_run"><i class="mdi-av-play-arrow"></i></a>
+        <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
+        <a id="button_run" class="btn-floating btn-large waves-effect waves-light red z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
         <div class="card-panel white z-depth-1" id="blocks_panel">
             <div id="content_blocks" class="content"></div>
         </div>
@@ -71,14 +85,14 @@
       <div class="col s12 m12 l4">
         <ul class="collapsible z-depth-1">
           <li>
-            <div class="collapsible-header"><i class="mdi-image-filter-drama"></i>Source Code</div>
+            <div class="collapsible-header"><b class="collapsible_logo">{ }</b>Source Code</div>
             <div class="collapsible-body">
               <pre id="content_arduino" class="content"></pre>
             </div>
           </li>
           <li>
-            <div class="collapsible-header"><i class="mdi-maps-place"></i>XML</div>
-            <div class="collapsible-body"  style="position:relative">
+            <div class="collapsible-header" id="xml_collapsible_header"><b class="collapsible_logo">&#60 &#62</b>XML</div>
+            <div class="collapsible-body"  style="position:relative" id="xml_collapsible_body">
               <a class="btn-floating btn-large waves-effect waves-light blue z-depth-1-half" id="button_load_xml"><i class="mdi-action-extension"></i></a>
               <textarea id="content_xml" class="content" wrap="off"></textarea>
             </div>
@@ -86,6 +100,20 @@
         </ul>
       </div>
      <br><br>
+    </div>
+  </div>
+
+  <!-- General Alert: This div content is loaded by Javascript to display alerts -->
+  <div id="gen_alert" class="modal modal_small">
+    <h5 id="gen_alert_title">Alert Title</h4>
+    <p><span id="gen_alert_body">Alert text</span></p>
+    <div style="width:100%; text-align:center">
+      <div style="padding:0; margin:0; border: none; width:50%; float:right; text-align:center">
+        <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
+      </div>
+      <div id="gen_alert_cancel_div" style="padding:0; margin:0; border: none; width:49%; float:right; text-align:center">
+        <a id="gen_alert_cancel_link" href="#" class="waves-effect btn-flat modal-close">Cancel</a>
+      </div>
     </div>
   </div>
   </body>

@@ -3,7 +3,7 @@
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
  * @fileoverview JavaScript to configure front end design for the Arduino app
- *               with material design
+ *               with material design.
  */
 'use strict';
 
@@ -13,7 +13,7 @@
 var ArduinoMaterial = ArduinoMaterial || {};
 
 /**
- * Initialises the js/jQuery required for the materialize framework
+ * Initialises the js/jQuery required for the materialize framework.
  */
 ArduinoMaterial.materializeJsInit = function() {
   $(document).ready(function() {
@@ -21,16 +21,63 @@ ArduinoMaterial.materializeJsInit = function() {
     $('.collapsible').collapsible();
     // Nav bar
     $('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70});
+    // Drop down menu
+    $(".dropdown-button").dropdown({hover: false});
+    // Pop up messages
+    $('.modal-trigger').leanModal({
+      dismissible: true,
+      opacity: .5,
+      in_duration: 300,
+      out_duration: 200
+     });
   });
 };
 
 /**
- * 
+ * Displays or hides the 'load textarea xml' button.
  */
-ArduinoMaterial.resizeBlocks = function(e) {
+ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
+  var xml_button = document.getElementById('button_load_xml');
+  var xml_button_body = document.getElementById('xml_collapsible_body');
+  // Waiting to check status due to the animation delay
+  setTimeout(function() {
+    if(xml_button_body.style.display == 'none') {
+      $('#button_load_xml').hide();
+    } else {
+      $('#button_load_xml').fadeIn('slow');
+    } 
+  }, 500); 
+};
+
+/**
+ * Sets the class and content of the toolbox On and Off button
+ * @param {!boolean} toolbox_visible Indicates if the toolbox visibility
+ */
+ArduinoMaterial.viewToolboxButtonState = function(toolbox_visible) {
+  var toolbox_button = document.getElementById('button_toggle_toolbox');
+  var toolbox_button_icon = document.getElementById('button_toggle_toolbox_icon');
+  // Element conatins several classes, use replace to maintain the rest
+  if (toolbox_visible == true) {
+    toolbox_button.className = toolbox_button.className.replace(
+      "button_toggle_toolbox_on", "button_toggle_toolbox_off"); 
+    toolbox_button_icon.className = toolbox_button_icon.className.replace(
+     'mdi-action-visibility', 'mdi-action-visibility-off');
+  } else {
+    toolbox_button.className = toolbox_button.className.replace(
+      "button_toggle_toolbox_off", "button_toggle_toolbox_on"); 
+    toolbox_button_icon.className = toolbox_button_icon.className.replace(
+     'mdi-action-visibility-off', 'mdi-action-visibility');
+  }
+};
+
+/**
+ * Resizes the container for Blockly and forces a re-render of the SVG. 
+ */
+ArduinoMaterial.resizeBlocklyWorkspace = function() {
   var content_blocks = document.getElementById('content_blocks');
   var wrapper_panel_size =
       ArduinoMaterial.getBBox_(document.getElementById('blocks_panel'));
+
   content_blocks.style.top = wrapper_panel_size.y + 'px';
   content_blocks.style.left = wrapper_panel_size.x + 'px';
   // Height and width need to be set, read back, then set again to
@@ -41,10 +88,44 @@ ArduinoMaterial.resizeBlocks = function(e) {
   content_blocks.style.width = wrapper_panel_size.width + 'px';
   content_blocks.style.width =
       (2 * wrapper_panel_size.width - content_blocks.offsetWidth) + 'px';
+
   //Blockly.MsvgResize();
-   Blockly.mainWorkspace.render();
+  //Blockly.mainWorkspace.render();
   //alert(
   //  "resized " + wrapper_panel_size.width + " " + content_blocks.style.width);
+
+  // Sets the toolbox toggle button width to that of the toolbox
+  if ( ArduinoMaterial.isToolboxVisible() &&
+       Blockly.mainWorkspace.toolbox_.width ) {
+    // For some reason normal set style and getElementById didn't work
+    $('#button_toggle_toolbox').width(Blockly.mainWorkspace.toolbox_.width);
+  }
+};
+
+/**
+ * Compute the absolute coordinates and dimensions of an HTML element.
+ * @param {!string} title HTML to include in title.
+ * @param {!string} body HTML to include in body.
+ * @param {boolean=} confirm Indicates if the user is shown and option to just
+ *                            'Ok' or 'Ok and cancel'.
+ * @param {string=|function=} callback If confirm option is selected this would
+ *                                     be the function called when clicked 'OK'.
+ */
+ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
+  $("#gen_alert_title").text(title);
+  $("#gen_alert_body").text(body);
+  if (confirm == true) {
+    $("#gen_alert_cancel_div").css({'display': 'block'});
+    if (callback) {
+      $("#gen_alert_ok_link").bind('click', callback);
+    } 
+  } else {
+    $("#gen_alert_cancel_div").css({'display': 'none'});
+    $("#gen_alert_ok_link").unbind('click');
+  }
+
+  $('#gen_alert').openModal();
+  window.location.hash = '';
 };
 
 /**

@@ -2,7 +2,7 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview JavaScript for Arduino app with material design
+ * @fileoverview JavaScript for Arduino app with material design.
  */
 'use strict';
 
@@ -13,11 +13,12 @@ var ArduinoMaterial = ArduinoMaterial || {};
 
 /**
  * Injects Blockly into a given text area
+ * @param {!Element} el Element to inject Blockly into
  */
 ArduinoMaterial.injectBlockly = function(el) {
   var toolbox = ArduinoMaterial.readToolbox('arduino_toolbox.xml');
-  Blockly.inject(el,
-      { media: '../../media/',
+  Blockly.inject(el, {
+        media: '../../media/',
         rtl: false,
         scrollbars: true,
         toolbox: toolbox });
@@ -25,8 +26,8 @@ ArduinoMaterial.injectBlockly = function(el) {
 
 /**
  * Open the XML containing the toolbox data
- * @param {!String} xml_path String containing the xml file path.
- * @return {!String} Contains the text in a single string.
+ * @param {!string} xml_path String containing the XML file path.
+ * @return {!string} Contains the text in a single string.
  */
 ArduinoMaterial.readToolbox = function(xml_path) {
   var request = new XMLHttpRequest();
@@ -37,7 +38,9 @@ ArduinoMaterial.readToolbox = function(xml_path) {
 
 /**
  * Renders the XML code into a given textarea
- * @param el Textarea element to save the code into.
+ * TODO: This file should not contain "elements", needs to be refactored to
+ *       return as string to be added into the design somewhere else.
+ * @param {!Element} el Textarea element to save the code into.
  */
 ArduinoMaterial.generateXml = function(el) {
   var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -47,7 +50,9 @@ ArduinoMaterial.generateXml = function(el) {
 
 /**
  * Renders the Arduino color highlighted code code into an element
- * @param el Pre element to save the code into.
+ * TODO: This file should not contain "elements", needs to be refactored to
+ *       return as string to be added into the design somewhere else.
+ * @param {!Element} el Pre element to save the code into.
  */
 ArduinoMaterial.generateArduino = function(el) {
   var code = Blockly.Arduino.workspaceToCode();
@@ -63,47 +68,49 @@ ArduinoMaterial.generateArduino = function(el) {
  * Execute the user's code.
  */
 ArduinoMaterial.runCode = function() {
-  alert("function not yet implemented");
-}
+  ArduinoMaterial.materialAlert(
+      'Under development',
+      'Function not yet implemented. Code is:\n' +
+      Blockly.Arduino.workspaceToCode());
+};
 
 /**
- * Togglets the toolbar On and Off from the Blockly workspace
+ * Execute the user's code.
+ * @param {!string} blocks_xml String of XML code for the blocks
  */
-ArduinoMaterial.toolbar_showing = true;
-ArduinoMaterial.toogleToolbox = function() {
-  
-  var myElements = document.querySelectorAll(".blocklyToolboxDiv");
-  
-  if ( ArduinoMaterial.toolbar_showing == true ) {
-    for (var i = 0; i < myElements.length; i++) {
-      myElements[i].style.display = 'none';
-    }
-    ArduinoMaterial.toolbar_showing = false;
+ArduinoMaterial.loadBlocksfromXml = function(blocks_xml) {
+  ArduinoMaterial.materialAlert(
+      'Under development',
+      'Function not yet implemented. XML is:\n' + blocks_xml);
+};
+
+/**
+ * Scrolls In or Out the toolbox from the Blockly workspace.
+ * As the jQuery animation takes some time a callback is used to continue
+ * operation.
+ * @param {!boolean} show Indicates to show or hide the toolbox
+ * @param {function=} callback Function to be called once the animation is
+ *                             finished
+ */
+ArduinoMaterial.viewToolbox = function(show, callback) {
+  var toolbox = $( ".blocklyToolboxDiv" );
+  if (show == false) {
+    toolbox.slideUp('slow', callback);
   } else {
-   for (var i = 0; i < myElements.length; i++) {
-      myElements[i].style.display = 'inline';
-      //myElements[i].style.position = 'absolute';
-    }
-    ArduinoMaterial.toolbar_showing = true;
+    toolbox.slideDown('slow', callback);
   }
-  ArduinoMaterial.resizeBlocks();
+  ArduinoMaterial.resizeBlocklyWorkspace();
 };
 
 /**
  * Discard all blocks from the workspace.
  */
 ArduinoMaterial.discard = function() {
-  var count = Blockly.mainWorkspace.getAllBlocks().length;
-  if (count < 2 ||
-      window.confirm(MSG['discard'].replace('%1', count))) {
-    Blockly.mainWorkspace.clear();
-    window.location.hash = '';
-  }
-  ArduinoMaterial.renderContent();
+
 };
 
 /**
- * Loads the blocks XML onto the blockly SVG area
+ * Loads the blocks XML onto the Blockly SVG area
  * @param {!String} xml_path String containing the xml file path.
  */
 ArduinoMaterial.loadXMLblocks = function(xmlCode) {

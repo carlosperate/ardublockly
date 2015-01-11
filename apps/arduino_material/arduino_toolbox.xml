@@ -1,4 +1,5 @@
 <xml>
+  <hr />
   <category name="Logic">
     <block type="controls_if"></block>
     <block type="logic_compare"></block>
@@ -191,12 +192,9 @@
     <block type="time_micros"></block>
   </category>
   <hr />
-  <category name="Servo">
+  <category name="Motors">
     <block type="servo_write"></block>
     <block type="servo_read"></block>
-  </category>
-  <hr />
-  <category name="Stepper">
     <block type="stepper_config"></block>
     <block type="stepper_step"></block>
   </category>

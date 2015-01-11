@@ -2,7 +2,7 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview General javaScript for Arduino app with material design
+ * @fileoverview General javaScript for Arduino app with material design.
  */
 'use strict';
 
@@ -15,49 +15,103 @@ var ArduinoMaterial = ArduinoMaterial || {};
  * Initialize function for Ardublockly on page load.
  */
 window.addEventListener('load', function() {
-  // Inject Ardublockly into content_blocks
+  // Inject Blockly into content_blocks
   ArduinoMaterial.injectBlockly(document.getElementById('content_blocks'));
 
-  // Add event listeners  
-  ArduinoMaterial.bindDesignEventListeners();
-  ArduinoMaterial.bindBlocklyEventListeners();
-
-  // Bind functions to buttons and links
-  ArduinoMaterial.bindActionFunctions();
+  ArduinoMaterial.bindDesignEventListeners_();
+  ArduinoMaterial.bindBlocklyEventListeners_();
+  ArduinoMaterial.bindActionFunctions_();
   ArduinoMaterial.materializeJsInit();
 
-  // Ensure the blockly element is the correct size
+  // Ensure the Blockly element is the correct size
   Blockly.fireUiEvent(window, 'resize');
 });
 
 /**
  * Binds the event listeners relevant to the page design
+ * @private
  */
-ArduinoMaterial.bindDesignEventListeners = function() {
-  window.addEventListener('resize', ArduinoMaterial.resizeBlocks, false);
-}
+ArduinoMaterial.bindDesignEventListeners_ = function() {
+  window.addEventListener('resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
+  document.getElementById('xml_collapsible_header').addEventListener(
+    'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
+};
 
 /**
  * Binds the event listeners relevant to Blockly
+ * @private
  */
-ArduinoMaterial.bindBlocklyEventListeners = function() {
+ArduinoMaterial.bindBlocklyEventListeners_ = function() {
+  // Renders the code and XML for every Blockly workspace event
   Blockly.addChangeListener(ArduinoMaterial.renderContent);
-}
+};
 
 /**
  * Binds functions to each of the buttons and nav links
+ * @private
  */
-ArduinoMaterial.bindActionFunctions = function() {
-  ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.discard);
+ArduinoMaterial.bindActionFunctions_ = function() {
+  ArduinoMaterial.bindClick('button_load', ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick('button_save', ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick('button_settings', ArduinoMaterial.functionNotImplemented);
   ArduinoMaterial.bindClick('button_run', ArduinoMaterial.runCode);
-  ArduinoMaterial.bindClick('button_load_xml', ArduinoMaterial.runCode);
+  ArduinoMaterial.bindClick('button_load_xml', ArduinoMaterial.loadBlocksfromXml);
+  ArduinoMaterial.bindClick(
+      'button_toggle_toolbox', ArduinoMaterial.toogleToolbox);
+};
+
+/**
+ * Populate the currently selected panel with content generated from the blocks.
+ */
+ArduinoMaterial.functionNotImplemented = function() {
+  toast('Function not yet implemented', 4000);
+};
+
+
+/**
+ * Populate the currently selected panel with content generated from the blocks.
+ */
+ArduinoMaterial.renderContent = function() {
+  ArduinoMaterial.generateXml(document.getElementById('content_xml'));
+  ArduinoMaterial.generateArduino(document.getElementById('content_arduino'));
+};
+
+/**
+ * Private variable to indicate if the toolbox is meant to be shown
+ * @type {!boolean}
+ * @private
+ */
+ArduinoMaterial.toolbar_showing_ = true;
+
+/**
+ * Toggles the toolbox and respective button On and Off
+ */
+ArduinoMaterial.toogleToolbox = function() {
+  if (ArduinoMaterial.toolbar_showing_ == true ) {
+    /* viewToolbox() takes a callback function as its second argument */
+    ArduinoMaterial.viewToolbox(false, 
+        function() { ArduinoMaterial.viewToolboxButtonState(false); });
+  } else {
+     ArduinoMaterial.viewToolboxButtonState(true);
+    ArduinoMaterial.viewToolbox(true);
+  }
+  ArduinoMaterial.toolbar_showing_ = !ArduinoMaterial.toolbar_showing_;
+};
+
+/**
+ * Returns a boolean indicating if the toolbox is currently visible
+ * @return {boolean} Indicates if the toolbox is currently visible
+ */
+ArduinoMaterial.isToolboxVisible = function() {
+  return ArduinoMaterial.toolbar_showing_;
 };
 
 /**
  * Bind a function to a button's click event.
  * On touch enabled browsers, ontouchend is treated as equivalent to onclick.
  * @param {!Element|string} el Button element or ID thereof.
- * @param {!Function} func Event handler to bind.
+ * @param {!function} func Event handler to bind.
  */
 ArduinoMaterial.bindClick = function(el, func) {
   if (typeof el == 'string') {
@@ -67,10 +121,5 @@ ArduinoMaterial.bindClick = function(el, func) {
   el.addEventListener('touchend', func, true);
 };
 
-/**
- * Populate the currently selected panel with content generated from the blocks.
- */
-ArduinoMaterial.renderContent = function() {
-  ArduinoMaterial.generateXml(document.getElementById('content_xml'));
-  ArduinoMaterial.generateArduino(document.getElementById('content_arduino'));
-};
+
+
