@@ -61,7 +61,7 @@ body {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  min-height: 470px;
+  min-height: 469px;
   height: -moz-calc(100hv - 100px);     /* Firefox  */
   height: -webkit-calc(100hv - 100px);  /* WebKit   */
   height: -o-calc(100hv - 100px);       /* Opera    */
@@ -77,7 +77,7 @@ body {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  min-height: 470px;
+  min-height: 469px;
   height: -moz-calc(100hv - 100px);     /* Firefox  */
   height: -webkit-calc(100hv - 100px);  /* WebKit   */
   height: -o-calc(100hv - 100px);       /* Opera    */

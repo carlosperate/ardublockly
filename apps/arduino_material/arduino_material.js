@@ -28,7 +28,7 @@ window.addEventListener('load', function() {
 });
 
 /**
- * Binds the event listeners relevant to the page design
+ * Binds the event listeners relevant to the page design.
  * @private
  */
 ArduinoMaterial.bindDesignEventListeners_ = function() {
@@ -38,7 +38,7 @@ ArduinoMaterial.bindDesignEventListeners_ = function() {
 };
 
 /**
- * Binds the event listeners relevant to Blockly
+ * Binds the event listeners relevant to Blockly.
  * @private
  */
 ArduinoMaterial.bindBlocklyEventListeners_ = function() {
@@ -47,16 +47,16 @@ ArduinoMaterial.bindBlocklyEventListeners_ = function() {
 };
 
 /**
- * Binds functions to each of the buttons and nav links
+ * Binds functions to each of the buttons and nav links.
  * @private
  */
 ArduinoMaterial.bindActionFunctions_ = function() {
   ArduinoMaterial.bindClick('button_load', ArduinoMaterial.functionNotImplemented);
   ArduinoMaterial.bindClick('button_save', ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.discard);
   ArduinoMaterial.bindClick('button_settings', ArduinoMaterial.functionNotImplemented);
   ArduinoMaterial.bindClick('button_run', ArduinoMaterial.runCode);
-  ArduinoMaterial.bindClick('button_load_xml', ArduinoMaterial.loadBlocksfromXml);
+  ArduinoMaterial.bindClick('button_load_xml', ArduinoMaterial.XmlTextareaToBlocks);
   ArduinoMaterial.bindClick(
       'button_toggle_toolbox', ArduinoMaterial.toogleToolbox);
 };
@@ -68,7 +68,6 @@ ArduinoMaterial.functionNotImplemented = function() {
   toast('Function not yet implemented', 4000);
 };
 
-
 /**
  * Populate the currently selected panel with content generated from the blocks.
  */
@@ -78,7 +77,24 @@ ArduinoMaterial.renderContent = function() {
 };
 
 /**
- * Private variable to indicate if the toolbox is meant to be shown
+ * Populate the currently selected panel with content generated from the blocks.
+ */
+ArduinoMaterial.XmlTextareaToBlocks = function() {
+  var success = ArduinoMaterial.replaceBlocksfromXml(
+      document.getElementById('content_xml').value);
+  if(success) {
+    ArduinoMaterial.renderContent();
+  } else {
+    ArduinoMaterial.materialAlert(
+        'Invalid XML',
+        'The XML inputted into the text area was not successfully parsed into \
+        blocks. Please review the XML code and try again.',
+        false);
+  }
+};
+
+/**
+ * Private variable to indicate if the toolbox is meant to be shown.
  * @type {!boolean}
  * @private
  */
@@ -89,7 +105,7 @@ ArduinoMaterial.toolbar_showing_ = true;
  */
 ArduinoMaterial.toogleToolbox = function() {
   if (ArduinoMaterial.toolbar_showing_ == true ) {
-    /* viewToolbox() takes a callback function as its second argument */
+    // viewToolbox() takes a callback function as its second argument
     ArduinoMaterial.viewToolbox(false, 
         function() { ArduinoMaterial.viewToolboxButtonState(false); });
   } else {
@@ -100,8 +116,8 @@ ArduinoMaterial.toogleToolbox = function() {
 };
 
 /**
- * Returns a boolean indicating if the toolbox is currently visible
- * @return {boolean} Indicates if the toolbox is currently visible
+ * Returns a boolean indicating if the toolbox is currently visible.
+ * @return {boolean} Indicates if the toolbox is currently visible.
  */
 ArduinoMaterial.isToolboxVisible = function() {
   return ArduinoMaterial.toolbar_showing_;
