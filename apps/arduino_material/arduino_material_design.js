@@ -50,10 +50,10 @@ ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
 };
 
 /**
- * Sets the class and content of the toolbox On and Off button
- * @param {!boolean} toolbox_visible Indicates if the toolbox visibility
+ * Sets the class and content of the toolbox On and Off button.
+ * @param {!boolean} toolbox_visible Indicates if the toolbox visibility.
  */
-ArduinoMaterial.viewToolboxButtonState = function(toolbox_visible) {
+ArduinoMaterial.showToolboxButtonState = function(toolbox_visible) {
   var toolbox_button = document.getElementById('button_toggle_toolbox');
   var toolbox_button_icon = document.getElementById('button_toggle_toolbox_icon');
   // Element conatins several classes, use replace to maintain the rest

@@ -51,8 +51,8 @@ ArduinoMaterial.bindBlocklyEventListeners_ = function() {
  * @private
  */
 ArduinoMaterial.bindActionFunctions_ = function() {
-  ArduinoMaterial.bindClick('button_load', ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick('button_save', ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick('button_load', ArduinoMaterial.loadXmlFile);
+  ArduinoMaterial.bindClick('button_save', ArduinoMaterial.saveXmlFile);
   ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.discard);
   ArduinoMaterial.bindClick('button_settings', ArduinoMaterial.functionNotImplemented);
   ArduinoMaterial.bindClick('button_run', ArduinoMaterial.runCode);
@@ -62,18 +62,68 @@ ArduinoMaterial.bindActionFunctions_ = function() {
 };
 
 /**
- * Populate the currently selected panel with content generated from the blocks.
+ * Loads an XML file from the users file system and adds the blocks into the
+ * Blockly workspace.
  */
-ArduinoMaterial.functionNotImplemented = function() {
-  toast('Function not yet implemented', 4000);
+ArduinoMaterial.loadXmlFile = function() {
+  // Create event listener function
+  var parseInputXMLfile = function(e) {
+    var files = e.target.files;
+    var reader = new FileReader();
+    reader.onload = function() {
+      var success = ArduinoMaterial.replaceBlocksfromXml(reader.result);
+      if(success) {
+        ArduinoMaterial.renderContent();
+      } else {
+        ArduinoMaterial.materialAlert(
+            'Invalid XML',
+            'The XML file was not successfully parsed into blocks.\
+            Please review the XML code and try again.',
+            false);
+      }
+    };
+    reader.readAsText(files[0]);
+  }
+
+  // Create once invisible browse button with event listener, and click it
+  var select_file = document.getElementById("select_file");
+  if (select_file == null) {
+    var select_file_dom = document.createElement('INPUT');
+    select_file_dom.type = 'file';
+    select_file_dom.id = 'select_file';
+    select_file_dom.style = 'display: none';
+    document.body.appendChild(select_file_dom);
+    select_file = document.getElementById("select_file");
+    select_file.addEventListener('change', parseInputXMLfile, false);
+  }
+  select_file.click();
+};
+
+/**
+ * Creates an XML file containing the blocks from the Blockly workspace and
+ * prompts the users to save it into their local file system.
+ */
+ArduinoMaterial.saveXmlFile = function() {
+  var blob = new Blob(
+      [ArduinoMaterial.generateXml()],
+      {type: "text/plain;charset=utf-8"});
+  saveAs(blob, "ardublockly.xml");
 };
 
 /**
  * Populate the currently selected panel with content generated from the blocks.
  */
 ArduinoMaterial.renderContent = function() {
-  ArduinoMaterial.generateXml(document.getElementById('content_xml'));
-  ArduinoMaterial.generateArduino(document.getElementById('content_arduino'));
+  // Render Arduino Code syntax highlighted into element
+  var arduino_content = document.getElementById('content_arduino');
+  arduino_content.textContent = ArduinoMaterial.generateArduino();;
+  if (typeof prettyPrintOne == 'function') {
+    var code_html = prettyPrintOne(arduino_content.innerHTML, 'cpp');
+    arduino_content.innerHTML = code_html;
+  }
+  // Generate plain XML into element
+  var xml_content = document.getElementById('content_xml');
+  xml_content.value = ArduinoMaterial.generateXml();
 };
 
 /**
@@ -105,12 +155,12 @@ ArduinoMaterial.toolbar_showing_ = true;
  */
 ArduinoMaterial.toogleToolbox = function() {
   if (ArduinoMaterial.toolbar_showing_ == true ) {
-    // viewToolbox() takes a callback function as its second argument
-    ArduinoMaterial.viewToolbox(false, 
-        function() { ArduinoMaterial.viewToolboxButtonState(false); });
+    // showToolbox() takes a callback function as its second argument
+    ArduinoMaterial.showToolbox(false, 
+        function() { ArduinoMaterial.showToolboxButtonState(false); });
   } else {
-     ArduinoMaterial.viewToolboxButtonState(true);
-    ArduinoMaterial.viewToolbox(true);
+     ArduinoMaterial.showToolboxButtonState(true);
+    ArduinoMaterial.showToolbox(true);
   }
   ArduinoMaterial.toolbar_showing_ = !ArduinoMaterial.toolbar_showing_;
 };
@@ -137,5 +187,9 @@ ArduinoMaterial.bindClick = function(el, func) {
   el.addEventListener('touchend', func, true);
 };
 
-
-
+/**
+ * Populate the currently selected panel with content generated from the blocks.
+ */
+ArduinoMaterial.functionNotImplemented = function() {
+  toast('Function not yet implemented', 4000);
+};
