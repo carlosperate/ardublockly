@@ -1,5 +1,5 @@
 #!/usr/bin/env python2
-# ##############################################################################
+# #############################################################################
 # The comment above works if the Python Launcher for Windows path included
 # in Python>3.3 does not conflict with the py.exe file added to "C:\Windows"
 # Currently this application should work in Python >2.6 and 3.x, although 
@@ -36,7 +36,7 @@ def main():
     ArduinoServerCompiler.ServerCompilerSettings.ServerCompilerSettings()
     current_dir = os.getcwd()
     app_index = os.path.basename(os.path.normpath(current_dir))
-    app_index = os.path.join(app_index, 'apps', 'arduino')
+    app_index = os.path.join(app_index, 'apps', 'arduino_material')
     open_browser(app_index)
     print("\n======= Starting Server =======")
     #parent directory as working directory due to closure requirements

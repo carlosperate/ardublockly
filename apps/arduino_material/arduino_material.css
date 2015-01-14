@@ -21,7 +21,7 @@ body {
     left: 0;
     top: 0;
     margin-bottom: 0px;
-    z-index: 999;
+    z-index: 998;
   }
 }
 
@@ -49,10 +49,10 @@ body {
   padding: 0;
   min-height: 560px;
   background: none; 
-  height: -moz-calc(100hv - 100px);     /* Firefox  */
-  height: -webkit-calc(100hv - 100px);  /* WebKit   */
-  height: -o-calc(100hv - 100px);       /* Opera    */
-  height: calc(100hv - 100px);          /* Standard */
+  height: -moz-calc(100hv - 200px);     /* Firefox  */
+  height: -webkit-calc(100hv - 200px);  /* WebKit   */
+  height: -o-calc(100hv - 200px);       /* Opera    */
+  height: calc(100hv - 200px);          /* Standard */
 }
 
 #content_xml {
@@ -139,16 +139,26 @@ body {
 }
 
 
-/***************************/
-/*  Settings modal dialog  */
-/***************************/
-.settings_div {
-  margin: 24px 0px;
-  width: 100%;
+/***********************************/
+/*  Small modal responsive design  */
+/***********************************/
+/* Additional CSS to reduce size of Materialize Modal */
+@media only screen and (min-width: 0) {
+  .modal_small {
+    max-width: 75% !important;
+  }
 }
-.return_container {
-  padding: 32px 24px 32px 24px !important;
+@media only screen and (min-width: 601px) {
+  .modal_small {
+    max-width: 55% !important;
+  }
 }
+@media only screen and (min-width: 993px) {
+  .modal_small {
+    max-width: 35% !important;
+  }
+}
+
 
 /*******************************/
 /*  Clean 50:50 same row divs  */
@@ -177,9 +187,13 @@ body {
 /************/
 /*  Others  */
 /************/
-/* Additional CSS to reduce size of Materialize Modal */
-.modal_small {
-  max-width: 30% !important;
+/*  Settings modal dialog  */
+.settings_div {
+  margin: 24px 0px;
+  width: 100%;
+}
+.return_container {
+  padding: 32px 24px 32px 24px !important;
 }
 
 /* Edit logo for code and xml collapsibles*/
@@ -271,7 +285,7 @@ body {
 /*********************************/
 /*  Overwriting Materialize CSS  */
 /*********************************/
-/* Modify container to have a larger width */
+/* Modify container to have a larger width in all resolutions */
 .container {
   max-width: 1650px !important;
   width: 100% !important;
@@ -287,8 +301,39 @@ body {
   }
 }
 
+/* Maximize horizontal space for mobile */
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+  body {
+    padding-top: 0px;
+  }
+  /* Expand to all visible horizontal space */
+  .container {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  nav {
+    margin: 0 !important;
+    padding: 0px 12px !important;
+  }
+  /* remove space between cards and navigation bar */
+  .col {
+    margin-top: -8px;
+  }
+  /* Increase the text size of the side menu */
+  ul.side-nav i {
+    font-size: 1.8rem !important;
+  }
+}
+
 /* Need larger icons in buttons */
 .mdi-action-visibility {
+  font-size: 2rem !important;
+}
+#button_run .mdi-av-play-arrow {
+  font-size: 2.5rem !important;
+}
+#button_load_xml .mdi-action-extension {
   font-size: 2rem !important;
 }
 

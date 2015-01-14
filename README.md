@@ -7,9 +7,12 @@ The "ArduBlocklyServerCompiler" component initialises a local server with Python
 
 ### Features
 
-Ardublockly is still under development and a lot of the main features are not yet implemented.
+Ardublockly is still under development and a few of the main features are not yet implemented.
 
-![WebApp screenshot](http://carlosperate.github.io/ardublockly/images/screenshot_1.png)
+![WebApp screenshot with material design](http://carlosperate.github.io/ardublockly/images/screenshot_material_all_small.jpg "Ardublockly with material design")
+
+![WebApp screenshot](http://carlosperate.github.io/ardublockly/images/screenshot_1.png "Ardublockly")
+
 
 ### Demo
 
@@ -20,7 +23,7 @@ A demo of the current state of Ardublockly can be found in the following two lin
 To load the code into an Arduino requires Ardublockly to be executed locally.
 
 ### Documentation
-The documentation, including installation instructions, can be found in [this github repository wiki]()
+The documentation, including installation instructions, can be found in [this github repository wiki](https://github.com/carlosperate/ardublockly/wiki)
 
 ### Original Authors
 
