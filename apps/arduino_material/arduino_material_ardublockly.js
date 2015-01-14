@@ -30,22 +30,10 @@ ArduinoMaterial.injectBlockly = function(el) {
  * @return {!string} Contains the text in a single string.
  */
 ArduinoMaterial.readToolbox = function(xml_path) {
-//  var request = new XMLHttpRequest();
-//  request.open("GET", xml_path, false);
-//  request.send(null);
-//  return request.responseText;
-  var xml_code = 'test';
-  function getdata(data) {
-    xml_code = data;
-  }
-  $.ajax( {
-      url: xml_path,
-      success: getdata,
-      dataType: 'text',
-      async: false
-  });
-  //alert(xml_code);
-  return xml_code;
+  var request = new XMLHttpRequest();
+  request.open("GET", xml_path, false);
+  request.send(null);
+  return request.responseText;
 };
 
 /**

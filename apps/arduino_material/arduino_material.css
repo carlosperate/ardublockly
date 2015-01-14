@@ -2,6 +2,7 @@ body {
   background-color: #eeeeee;
 }
 
+
 /********************/
 /*  Navigation bar  */
 /********************/
@@ -84,6 +85,7 @@ body {
   height: calc(100hv - 100px);          /* Standard */
 }
 
+
 /*************/
 /*  Buttons  */
 /*************/
@@ -91,6 +93,14 @@ body {
   position: absolute;
   right: 25px;
   top: -20px;
+}
+.run_loader {
+  position: absolute !important;
+  right: 24px !important;
+  top: -20px !important;
+  width: 56px !important;
+  height: 56px !important; 
+  z-index: 5;
 }
 
 #button_load_xml {
@@ -128,7 +138,52 @@ body {
   z-index: 5;
 }
 
-.collapsible_logo{
+
+/***************************/
+/*  Settings modal dialog  */
+/***************************/
+.settings_div {
+  margin: 24px 0px;
+  width: 100%;
+}
+.return_container {
+  padding: 32px 24px 32px 24px !important;
+}
+
+/*******************************/
+/*  Clean 50:50 same row divs  */
+/*******************************/
+.two_halves_container {
+  width: 100%; 
+  padding: 0;
+  margin: 0;
+}
+.two_halves_left {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 49%;
+  float: right;
+}
+.two_halves_right {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 50%;
+  float: right;
+}
+
+
+/************/
+/*  Others  */
+/************/
+/* Additional CSS to reduce size of Materialize Modal */
+.modal_small {
+  max-width: 30% !important;
+}
+
+/* Edit logo for code and xml collapsibles*/
+.collapsible_logo {
   width: 3rem;
   font-size: 1.6rem;
   line-height: 3rem;
@@ -138,15 +193,10 @@ body {
   margin-right: 1rem; 
 }
 
-/* Additional CSS to reduce size of Materialize Modal*/
-.modal_small {
-  max-width: 30% !important;
-}
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
 /*****************************/
-
 /* Blockly text for the following components:  */
 .blocklyTreeLabel,           /* Toolbox        */
 .blocklyText,                /* Block          */
@@ -221,7 +271,6 @@ body {
 /*********************************/
 /*  Overwriting Materialize CSS  */
 /*********************************/
-
 /* Modify container to have a larger width */
 .container {
   max-width: 1650px !important;

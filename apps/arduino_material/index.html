@@ -13,11 +13,6 @@
   <!-- Prettify  -->
   <link rel="stylesheet" href="../../demos/prettify.css">
   <script src="../../demos/prettify.js"></script>
-  <!-- arduino_material app -->
-  <link href="arduino_material.css" rel="stylesheet" media="screen,projection" />
-  <script src="arduino_material_design.js"></script>
-  <script src="arduino_material_ardublockly.js"></script>
-  <script src="arduino_material.js"></script>
   <!-- Ardublockly -->
   <!--script src="../../blockly_compressed.js"></script-->
   <script src="../../blockly_uncompressed.js"></script>
@@ -45,10 +40,18 @@
   <script src="../../generators/arduino/time.js"></script>
   <script src="../../generators/arduino/variables.js"></script>
   <script src="../../msg/js/en.js"></script>
+  <!-- Arduino Server Compiler -->
+  <!--script src="../../ArduinoServerCompiler/js/ArduServerCompiler.js"></script-->
+  <!-- Arduino Material design app -->
+  <link href="arduino_material.css" rel="stylesheet" media="screen,projection" />
+  <script src="arduino_material_design.js"></script>
+  <script src="arduino_material_ardublockly.js"></script>
+  <script src="arduino_material.js"></script>
 </head>
-    
+
 <body>
 
+  <!-- Navigation bar -->
   <nav class="blue lighten-1 nav-fixed">
     <div class="container">
       <div class="nav-wrapper">
@@ -57,9 +60,9 @@
           <li><a href="#" id="button_load">Load<i class="mdi-file-file-upload left"></i></a></li>
           <li><a href="#" id="button_save">Save<i class="mdi-content-save left"></i></a></li>
           <li><a href="#" id="button_delete_all">Delete All<i class="mdi-action-delete left"></i></a></li>
-          <li><a href="#" id="button_settings">Settings<i class="mdi-action-settings left"></i></a></li>
+          <li><a href="#settings_dialog" class="modal-trigger" id="button_settings">Settings<i class="mdi-action-settings left"></i></a></li>
           <!-- Drop down menu -->
-          <ul id="dropdown1" class="dropdown-content">
+          <ul id="dropdown_examples" class="dropdown-content">
             <li><a href="#!">one</a></li>
             <li class="divider"></li>
             <li><a href="#!">two</a></li>
@@ -69,18 +72,59 @@
             <li><a href="#!">four</a></li>
           </ul>
           <!-- Drop down Trigger -->
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Examples<i class="mdi-action-extension left"></i><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown_examples">Examples<i class="mdi-action-extension left"></i><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
         </ul>
         <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
       </div>
     </div>
   </nav>
 
+  <!-- Content -->
   <div class="container">
     <div class="row">
       <div class="col s12 m12 l8" style="position:relative">
         <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
-        <a id="button_run" class="btn-floating btn-large waves-effect waves-light red z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
+        <a id="button_run" class="btn-floating btn-large waves-effect waves-light red z-depth-1-half"><i class=" large mdi-av-play-arrow"></i></a>
+        <!-- Begging of loader circle -->
+        <div class="preloader-wrapper active run_loader" style="display:none">
+          <div class="spinner-layer spinner-blue">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-red">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-yellow">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+          <div class="spinner-layer spinner-green">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
+        <!-- End of loader circle -->
         <div class="card-panel white z-depth-1" id="blocks_panel">
             <div id="content_blocks" class="content"></div>
         </div>
@@ -106,18 +150,64 @@
     </div>
   </div>
 
-  <!-- General Alert: This div content is loaded by Javascript to display alerts -->
+  <!-- Settings: Displayed as a "Materialize Modal" (dialog) -->
+  <div id="settings_dialog" class="modal">
+    <h4 class="tooltipped" data-position="bottom" data-tooltip="This function has not yet been implemented">Settings</h4>
+    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+      <label>Compiler:</label>
+      <input type="text" id="compilerLocationTextField" readonly="readonly" class="settings_remaining_width" />
+    </div>
+    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+      <label>Sketch Folder:</label>
+      <input type="text" id="sketchLocationTextField" readonly="readonly" class="settings_remaining_width" />
+    </div>
+    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+      <label>Arduino Board:</label>
+      <select name="board">
+        <option value="uno">Uno</option>
+        <option value="leonardo">Leonardo</option>
+        <option value="mega">Mega</option>
+        <option value="duemilanove">Duemilanove ATmega328p</option>
+        <option value="duemilanove168">Duemilanove ATmega168</option>
+      </select>
+    </div>
+    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+      <label>COM Port:</label>
+      <select name="com_port">
+        <option value="COM1">COM 1</option>
+        <option value="COM2">COM 2</option>
+        <option value="COM3">COM 3</option>
+      </select>
+    </div>
+    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+      <label>IDE:</label> <br>
+      <select name="com_port">
+        <option value="ide_upload">Compile and Upload sketch</option>
+        <option value="ide_only">Load sketch in IDE only</option>
+      </select>
+    </div>
+    <div class="two_halves_container return_container">
+      <div id="" class="two_halves_right" style="text-align:right">
+        <a id="" href="#" class="waves-effect btn-flat modal-close">Return</a>
+      </div>
+      <div id="" class="two_halves_left" style="text-align:center"></div>
+    </div>
+
+  </div>
+
+  <!-- General Alert: Content is loaded using Javascript to display alerts -->
   <div id="gen_alert" class="modal modal_small">
-    <h5 id="gen_alert_title">Alert Title</h4>
+    <h4 id="gen_alert_title">Alert Title</h4>
     <p><span id="gen_alert_body">Alert text</span></p>
-    <div style="width:100%; text-align:center">
-      <div style="padding:0; margin:0; border: none; width:50%; float:right; text-align:center">
+    <div class="two_halves_container">
+      <div id="gen_alert_ok_div" class="two_halves_right" style="text-align:center">
         <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
       </div>
-      <div id="gen_alert_cancel_div" style="padding:0; margin:0; border: none; width:49%; float:right; text-align:center">
+      <div id="gen_alert_cancel_div" class="two_halves_left" style="text-align:center">
         <a id="gen_alert_cancel_link" href="#" class="waves-effect btn-flat modal-close">Cancel</a>
       </div>
     </div>
   </div>
-  </body>
+
+</body>
 </html>

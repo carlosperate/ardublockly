@@ -30,6 +30,10 @@ ArduinoMaterial.materializeJsInit = function() {
       in_duration: 300,
       out_duration: 200
      });
+    // Select menus
+    $('select').material_select();
+    // Pop-up tooltip
+    $('.tooltipped').tooltip({"delay": 50});
   });
 };
 

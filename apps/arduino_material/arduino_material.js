@@ -54,7 +54,7 @@ ArduinoMaterial.bindActionFunctions_ = function() {
   ArduinoMaterial.bindClick('button_load', ArduinoMaterial.loadXmlFile);
   ArduinoMaterial.bindClick('button_save', ArduinoMaterial.saveXmlFile);
   ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.discard);
-  ArduinoMaterial.bindClick('button_settings', ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick('button_settings', ArduinoMaterial.openSettings);
   ArduinoMaterial.bindClick('button_run', ArduinoMaterial.runCode);
   ArduinoMaterial.bindClick('button_load_xml', ArduinoMaterial.XmlTextareaToBlocks);
   ArduinoMaterial.bindClick(
@@ -109,6 +109,17 @@ ArduinoMaterial.saveXmlFile = function() {
       {type: "text/plain;charset=utf-8"});
   saveAs(blob, "ardublockly.xml");
 };
+
+/**
+ * Opens the Settings dialog (Materialize Modal) and loads the data from the 
+ * server.
+ */
+ArduinoMaterial.openSettings = function() {
+  //get_ide_only();
+  //get_compiler_location();
+  //get_sketch_location();
+  toast('The settings functionality is not complete', 4000);
+}
 
 /**
  * Populate the currently selected panel with content generated from the blocks.
