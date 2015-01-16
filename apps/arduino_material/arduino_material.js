@@ -32,7 +32,8 @@ window.addEventListener('load', function() {
  * @private
  */
 ArduinoMaterial.bindDesignEventListeners_ = function() {
-  window.addEventListener('resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
+  window.addEventListener(
+      'resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
   document.getElementById('xml_collapsible_header').addEventListener(
     'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
 };
@@ -47,18 +48,36 @@ ArduinoMaterial.bindBlocklyEventListeners_ = function() {
 };
 
 /**
- * Binds functions to each of the buttons and nav links.
+ * Binds functions to each of the buttons, nav links, and related.
  * @private
  */
 ArduinoMaterial.bindActionFunctions_ = function() {
+  // Navigation buttons
   ArduinoMaterial.bindClick('button_load', ArduinoMaterial.loadXmlFile);
   ArduinoMaterial.bindClick('button_save', ArduinoMaterial.saveXmlFile);
   ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.discard);
-  ArduinoMaterial.bindClick('button_settings', ArduinoMaterial.openSettings);
-  ArduinoMaterial.bindClick('button_run', ArduinoMaterial.runCode);
-  ArduinoMaterial.bindClick('button_load_xml', ArduinoMaterial.XmlTextareaToBlocks);
+  ArduinoMaterial.bindClick('button_settings',
+      ArduinoMaterial.populateSettings);
+  ArduinoMaterial.bindClick('dropdown_examples',
+      ArduinoMaterial.functionNotImplemented);
+
+  // Floating buttons
+  ArduinoMaterial.bindClick('button_run', ArduinoMaterial.sendCode);
+  ArduinoMaterial.bindClick('button_load_xml',
+      ArduinoMaterial.XmlTextareaToBlocks);
   ArduinoMaterial.bindClick(
       'button_toggle_toolbox', ArduinoMaterial.toogleToolbox);
+
+  // Settings fields
+  ArduinoMaterial.bindClick('settings_compiler_location', function() {
+    ArduServerCompiler.requestNewCompilerLocation(
+        ArduinoMaterial.setCompilerLocationHtml);
+  });
+  ArduinoMaterial.bindClick('settings_sketch_location', function() {
+    ArduServerCompiler.requestNewSketchLocation(
+        ArduinoMaterial.setSketchLocationHtml);
+  });
+  //TODO: IDE settings javascript is bind in html, move it here
 };
 
 /**
@@ -72,7 +91,7 @@ ArduinoMaterial.loadXmlFile = function() {
     var reader = new FileReader();
     reader.onload = function() {
       var success = ArduinoMaterial.replaceBlocksfromXml(reader.result);
-      if(success) {
+      if (success) {
         ArduinoMaterial.renderContent();
       } else {
         ArduinoMaterial.materialAlert(
@@ -84,7 +103,6 @@ ArduinoMaterial.loadXmlFile = function() {
     };
     reader.readAsText(files[0]);
   }
-
   // Create once invisible browse button with event listener, and click it
   var select_file = document.getElementById("select_file");
   if (select_file == null) {
@@ -111,15 +129,105 @@ ArduinoMaterial.saveXmlFile = function() {
 };
 
 /**
- * Opens the Settings dialog (Materialize Modal) and loads the data from the 
- * server.
+ * Retrieves the Settings from ArduServerCompiler and populates the form data
+ * for the Settings modal dialog.
  */
-ArduinoMaterial.openSettings = function() {
-  //get_ide_only();
-  //get_compiler_location();
-  //get_sketch_location();
-  toast('The settings functionality is not complete', 4000);
-}
+ArduinoMaterial.populateSettings = function() {
+  ArduServerCompiler.requestCompilerLocation(
+      ArduinoMaterial.setCompilerLocationHtml);
+  ArduServerCompiler.requestSketchLocation(
+      ArduinoMaterial.setSketchLocationHtml);
+  ArduServerCompiler.requestIdeOnly(ArduinoMaterial.setIdeHtml);
+};
+
+/**
+ * Sets the compiler location form data with the input string.
+ * @param {!string} location Text to be inputted in the 'text input' element.
+ */
+ArduinoMaterial.setCompilerLocationHtml = function(location) {
+   document.getElementById('settings_compiler_location').value = location;
+};
+
+/**
+ * Sets the sketch location form data with the input string.
+ * @param {!string} location Text to be inputted in the 'text input' element.
+ */
+ArduinoMaterial.setSketchLocationHtml = function(location) {
+   document.getElementById('settings_sketch_location').value = location;
+};
+
+/**
+ * Sets the IDE load or compile form data with given input.
+ * @param {!boolean} ide_only True indicates only load sketch in IDE
+ *                            False indicates compile and upload sketch 
+ */
+ArduinoMaterial.setIdeHtml = function(ide_only) {
+  var new_value;
+  if (ide_only == 'True') {
+    new_value = 'ide_only';
+  } else {
+    new_value = 'ide_upload';
+  }
+  document.getElementById('ide_settings').value = new_value;
+};
+
+/**
+ * Sets the IDE settings data with the input boolean.
+ * @param {!boolean} ide_only Indicates if it only loads the sketch in the IDE
+ *                            or compiles and upload.
+ */
+ArduinoMaterial.setIdeSettings = function(ide_value) {
+  //var el = document.getElementById("ide_settings");
+  //var ide_value = el.options[e.selectedIndex].value;
+  var new_value;
+  if (ide_value == 'ide_only') {
+    new_value = true;
+  } else if (ide_value == 'ide_upload') {
+    new_value = false;
+  }
+  //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
+  ArduServerCompiler.setIdeOnly(new_value, ArduinoMaterial.setIdeHtml);
+};
+
+/**
+ * Send the Arduino Code to the ArduServerCompiler to process.
+ * Shows a loader around the button, blocking it (unblocked upon received
+ * message from server).
+ */
+ArduinoMaterial.sendCode = function() {
+  toast('"Run code" functionality still incomplete', 4000);
+  ArduServerCompiler.sendSketchToServer(
+      ArduinoMaterial.generateArduino(), ArduinoMaterial.sendCodeReturn);
+  document.getElementById('button_run_spinner').style.display = 'block';
+};
+
+/**
+ * Send the Arduino Code to the ArduServerCompiler to process
+ */
+ArduinoMaterial.sendCodeReturn = function(data_back) {
+  document.getElementById('button_run_spinner').style.display = 'none';
+  ArduinoMaterial.materialAlert(
+      'Compilation ended',
+      'Message back from the compiler: \n' +
+      data_back);
+};
+
+/**
+ * Populate the currently selected panel with content generated from the blocks.
+ */
+ArduinoMaterial.XmlTextareaToBlocks = function() {
+  var success = ArduinoMaterial.replaceBlocksfromXml(
+      document.getElementById('content_xml').value);
+  if (success) {
+    ArduinoMaterial.renderContent();
+  } else {
+    ArduinoMaterial.materialAlert(
+        'Invalid XML',
+        'The XML inputted into the text area was not successfully parsed into \
+        blocks. Please review the XML code and try again.',
+        false);
+  }
+};
 
 /**
  * Populate the currently selected panel with content generated from the blocks.
@@ -135,23 +243,6 @@ ArduinoMaterial.renderContent = function() {
   // Generate plain XML into element
   var xml_content = document.getElementById('content_xml');
   xml_content.value = ArduinoMaterial.generateXml();
-};
-
-/**
- * Populate the currently selected panel with content generated from the blocks.
- */
-ArduinoMaterial.XmlTextareaToBlocks = function() {
-  var success = ArduinoMaterial.replaceBlocksfromXml(
-      document.getElementById('content_xml').value);
-  if(success) {
-    ArduinoMaterial.renderContent();
-  } else {
-    ArduinoMaterial.materialAlert(
-        'Invalid XML',
-        'The XML inputted into the text area was not successfully parsed into \
-        blocks. Please review the XML code and try again.',
-        false);
-  }
 };
 
 /**

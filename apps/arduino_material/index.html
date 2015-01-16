@@ -1,12 +1,12 @@
 <html>
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <title>Ardublockly</title>
   <!-- jQuery -->
   <script src="js_libs/jquery-2.1.3.min.js"></script>
   <!--Materialize -->
-  <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection" />
+  <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection">
   <script src="materialize/materialize.js"></script>
   <!-- FileSaver  -->
   <script src="js_libs/FileSaver.min.js"></script>
@@ -41,12 +41,11 @@
   <script src="../../generators/arduino/variables.js"></script>
   <script src="../../msg/js/en.js"></script>
   <!-- Arduino Server Compiler -->
-  <!--script src="../../ArduinoServerCompiler/js/ArduServerCompiler.js"></script-->
+  <script src="../../ArduinoServerCompiler/js/ArduServerCompiler.js"></script>
   <!-- Arduino Material design app -->
-  <link href="arduino_material.css" rel="stylesheet" media="screen,projection" />
+  <link href="arduino_material.css" rel="stylesheet" media="screen,projection">
   <script src="arduino_material_design.js"></script>
-  <script src="arduino_material_ardublockly.js"></script>
-  <script src="arduino_material.js"></script>
+  <script src="arduino_material_ardublockly.js"></script>  <script src="arduino_material.js"></script>
 </head>
 
 <body>
@@ -86,7 +85,7 @@
         <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
         <a id="button_run" class="btn-floating btn-large waves-effect waves-light red z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
         <!-- Begging of loader circle -->
-        <div class="preloader-wrapper active run_loader" style="display:none">
+        <div id="button_run_spinner" class="preloader-wrapper active run_loader" style="display:none">
           <div class="spinner-layer spinner-blue">
             <div class="circle-clipper left">
               <div class="circle"></div>
@@ -96,7 +95,7 @@
               <div class="circle"></div>
             </div>
           </div>
-          <div class="spinner-layer spinner-red">
+          <div class="spinner-layer spinner-purple">
             <div class="circle-clipper left">
               <div class="circle"></div>
             </div><div class="gap-patch">
@@ -152,14 +151,14 @@
 
   <!-- Settings: Displayed as a "Materialize Modal" (dialog) -->
   <div id="settings_dialog" class="modal">
-    <h4 class="tooltipped" data-position="bottom" data-tooltip="This function has not yet been implemented">Settings</h4>
-    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
-      <label>Compiler:</label>
-      <input type="text" id="compilerLocationTextField" readonly="readonly" class="settings_remaining_width" />
+    <h4>Settings</h4>
+    <div class="settings_div">
+      <label>Compiler Location:</label>
+      <input type="text" id="settings_compiler_location" readonly="readonly">
     </div>
-    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+    <div class="settings_div">
       <label>Sketch Folder:</label>
-      <input type="text" id="sketchLocationTextField" readonly="readonly" class="settings_remaining_width" />
+      <input type="text" id="settings_sketch_location" readonly="readonly">
     </div>
     <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
       <label>Arduino Board:</label>
@@ -173,15 +172,15 @@
     </div>
     <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
       <label>COM Port:</label>
-      <select name="com_port">
+      <select name="com_port" id="com_port">
         <option value="COM1">COM 1</option>
         <option value="COM2">COM 2</option>
         <option value="COM3">COM 3</option>
       </select>
     </div>
-    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+    <div class="settings_div">
       <label>IDE:</label> <br>
-      <select name="com_port">
+      <select name="ide_settings" id="ide_settings" onchange="ArduinoMaterial.setIdeSettings(this.value)">
         <option value="ide_upload">Compile and Upload sketch</option>
         <option value="ide_only">Load sketch in IDE only</option>
       </select>

@@ -90,16 +90,6 @@ ArduinoMaterial.loadBlocksfromXmlDom = function(blocks_xml_dom) {
 };
 
 /**
- * Execute the user's code.
- */
-ArduinoMaterial.runCode = function() {
-  ArduinoMaterial.materialAlert(
-      'Under development',
-      'Function not yet implemented. Code is:\n' +
-      Blockly.Arduino.workspaceToCode());
-};
-
-/**
  * Scrolls In or Out the toolbox from the Blockly workspace.
  * As the jQuery animation takes some time a callback is used to continue
  * operation.

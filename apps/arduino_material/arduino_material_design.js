@@ -45,7 +45,7 @@ ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
   var xml_button_body = document.getElementById('xml_collapsible_body');
   // Waiting to check status due to the animation delay
   setTimeout(function() {
-    if(xml_button_body.style.display == 'none') {
+    if (xml_button_body.style.display == 'none') {
       $('#button_load_xml').hide();
     } else {
       $('#button_load_xml').fadeIn('slow');
