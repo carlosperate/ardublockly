@@ -272,7 +272,7 @@ Blockly.createDom_ = function(container) {
     // blocks.  This cannot be changed later, since the UI is very different.
     if (Blockly.hasCategories) {
       Blockly.mainWorkspace.toolbox_ = new Blockly.Toolbox(svg, container);
-    } else {
+    } else if (Blockly.languageTree) {
       /**
        * @type {!Blockly.Flyout}
        * @private
@@ -383,7 +383,7 @@ Blockly.init_ = function() {
 
   if (Blockly.languageTree) {
     if (Blockly.mainWorkspace.toolbox_) {
-      Blockly.mainWorkspace.toolbox_.init();
+      Blockly.mainWorkspace.toolbox_.init(Blockly.mainWorkspace);
     } else if (Blockly.mainWorkspace.flyout_) {
       // Build a fixed flyout with the root blocks.
       Blockly.mainWorkspace.flyout_.init(Blockly.mainWorkspace);
