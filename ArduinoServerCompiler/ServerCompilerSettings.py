@@ -1,8 +1,6 @@
 from __future__ import unicode_literals, absolute_import
 import os
 import re
-import types
-import sys
 
 try:
     # 2.x name
@@ -17,6 +15,13 @@ class ServerCompilerSettings(object):
     Retrieves and saves the settings for the server side compilation.
     No compiler is part of the Python code, instead settings that 
     point to the local Arduino IDE and sketch are stored here.
+    The public settings to set and get are:
+        compiler_dir
+        sketch_name
+        sketch_dir
+        arduino_board
+        serial_port
+        launch_IDE_option
     """
 
     # Designed to be class static variables
@@ -29,13 +34,24 @@ class ServerCompilerSettings(object):
                          'Leonardo': 'arduino:avr:leonardo',
                          'Mega': 'arduino:avr:mega',
                          'Duemilanove_328p': 'arduino:avr:diecimila',
-                         'Duemilanove_168p': 'arduino:avr:diecimila:cpu=atmega168'}
+                         'Duemilanove_168p':
+                                 'arduino:avr:diecimila:cpu=atmega168'}
+
+    # This is a dynamic dictionary containing the PC COM ports
+    __serial_ports__ = {'port1': 'COM1',
+                        'port2': 'COM2',
+                        'port3': 'COM3'}
+
+    # This is a static dictionary to define IDE launch options
+    __IDE_launch_options__ = {'open': 'Open sketch in IDE ',
+                              'verify': 'Verify sketch',
+                              'upload': 'Compile and Upload sketch'}
 
     #
     # Singleton creator and destructor
     #
     def __new__(cls, *args, **kwargs):
-        """ Creating or returning the singleton instance """
+        """ Creating or returning the singleton instance. """
         if not cls.__singleton_instance__:
             # Create the singleton instance
             cls.__singleton_instance__ =\
@@ -46,18 +62,21 @@ class ServerCompilerSettings(object):
 
     def __initialise(self):
         # Create variables to be used with accessors
-        self.__launch_IDE_only__ = False
+        self.__launch_IDE_option__ = False
         self.__compiler_dir__ = None
         self.__sketch_dir__ = None
         self.__sketch_name__ = None
         self.__arduino_board_key__ = None
         self.__arduino_board_value__ = None
-        self.__com_port__ = None
+        self.__serial_port_key__ = None
+        self.__serial_port_value__ = None
         # Load settings from file
         self.read_settings()
+        # Scan available serial port
+        #TODO: implement serial port scan
 
     def _drop(self):
-        """ Drop the instance """
+        """ Drop the instance. """
         self.__singleton_instance__ = None
 
     #
@@ -67,12 +86,13 @@ class ServerCompilerSettings(object):
         return self.__compiler_dir__
 
     def set_compiler_dir(self, new_compiler_dir):
-        """ The compiler dir must be full path to an .exe file """
+        """ The compiler dir must be full path to an .exe file. """
         # FIXME: this is a windows only check (.exe), needs to be
         #        updated to be compatible with linux and MacOS
         if os.path.exists(new_compiler_dir) and\
                 new_compiler_dir.endswith('.exe'):
             self.__compiler_dir__ = new_compiler_dir
+            self.save_settings()
         else:
             print('\nThe provided compiler path is not valid !!!')
             print('\t' + new_compiler_dir)
@@ -86,43 +106,7 @@ class ServerCompilerSettings(object):
     compiler_dir = property(get_compiler_dir, set_compiler_dir)
 
     def set_compiler_dir_default(self):
-        self.__compiler_dir__ = 'C:\\IDEs\\arduino-1.5.6-r2\\arduino.exe'
-
-    #
-    # Arduino Board and board lists accessors
-    #
-    def get_arduino_board(self):
-        return self.__arduino_board_key__
-
-    def set_arduino_board(self, new_board):
-        if new_board in self.__arduino_types__:
-            self.__arduino_board_value__ = self.__arduino_types__[new_board]
-            self.__arduino_board_key__ = new_board
-        else:
-            print('\nProvided Arduino Board does not exist: !!!')
-            print('\t' + new_board)
-            if self.__arduino_board_key__ and self.__arduino_board_value__:
-                print('Previous Arduino board type maintained:')
-            else:
-                print('Default Arduino board type set:')
-                self.set_arduino_board_default()
-            print('\t' + self.__arduino_board_key__)
-
-    arduino_board = property(get_arduino_board, set_arduino_board)
-
-    def set_arduino_board_default(self):
-        self.__arduino_board_key__ = 'Uno'
-        self.__arduino_board_value__ = \
-            self.__arduino_types__[self.__arduino_board_key__]
-
-    def get_arduino_board_flag(self):
-        return self.__arduino_board_value__
-
-    def get_arduino_board_types(self):
-        board_list = []
-        for key in self.__arduino_types__:
-            board_list.append(key)
-        return board_list
+        self.__compiler_dir__ = 'C:\\IDEs\\arduino-1.6\\arduino.exe'
 
     #
     # Sketch name accessors
@@ -131,9 +115,10 @@ class ServerCompilerSettings(object):
         return self.__sketch_name__
 
     def set_sketch_name(self, new_sketch_name):
-        """ Only accept letters, numbers, underscores and dashes """
+        """ Only accept letters, numbers, underscores and dashes. """
         if re.match("^[\w\d_-]*$", new_sketch_name):
             self.__sketch_name__ = new_sketch_name
+            self.save_settings()
         else:
             print('\nProvided Sketch name is not valid: !!!')
             print('\t' + new_sketch_name)
@@ -159,6 +144,7 @@ class ServerCompilerSettings(object):
         """ The sketch directory must be a folder """
         if os.path.isdir(new_sketch_dir):
             self.__sketch_dir__ = new_sketch_dir
+            self.save_settings()
         else:
             print('\nThe provided sketch directory is not valid !!!')
             print('\t' + new_sketch_dir)
@@ -172,56 +158,122 @@ class ServerCompilerSettings(object):
     sketch_dir = property(get_sketch_dir, set_sketch_dir)
 
     def set_sketch_dir_default(self):
+        """ Sketch default location is the current working directory. """
         self.__sketch_dir__ = os.getcwd()
+
+    #
+    # Arduino Board and board lists accessors
+    #
+    def get_arduino_board(self):
+        return self.__arduino_board_key__
+
+    def set_arduino_board(self, new_board):
+        if new_board in self.__arduino_types__:
+            self.__arduino_board_value__ = self.__arduino_types__[new_board]
+            self.__arduino_board_key__ = new_board
+            self.save_settings()
+        else:
+            print('\nProvided Arduino Board does not exist: !!!')
+            print('\t' + new_board)
+            if self.__arduino_board_key__ and self.__arduino_board_value__:
+                print('Previous Arduino board type maintained:')
+            else:
+                print('Default Arduino board type set:')
+                self.set_arduino_board_default()
+            print('\t' + self.__arduino_board_key__)
+
+    arduino_board = property(get_arduino_board, set_arduino_board)
+
+    def set_arduino_board_default(self):
+        self.__arduino_board_key__ = sorted(self.__arduino_types__.keys())[0]
+        self.__arduino_board_value__ = \
+            self.__arduino_types__[self.__arduino_board_key__]
+
+    def get_arduino_board_flag(self):
+        return self.__arduino_board_value__
+
+    def get_arduino_board_types(self):
+        board_list = []
+        for key in self.__arduino_types__:
+            board_list.append(key)
+        return board_list
+
+    #
+    # Serial Port and lists accessors
+    #
+    def get_serial_port(self):
+        return self.__serial_port_key__
+
+    def set_serial_port(self, new_port):
+        if new_port in self.__serial_ports__:
+            self.__serial_port_value__ = self.__arduino_types__[new_port]
+            self.__serial_port_key__ = new_port
+            self.save_settings()
+        else:
+            print('\nProvided Serial Port does not exist: !!!')
+            print('\t' + new_port)
+            if self.__serial_port_key__ and self.__serial_port_value__:
+                print('Previous Serial Port maintained:')
+            else:
+                print('Default Serial Port set:')
+                self.set_serial_port_default()
+            print('\t' + self.__serial_port_key__)
+
+    serial_port = property(get_serial_port, set_serial_port)
+
+    def set_serial_port_default(self):
+        #TODO: Check for empty dictionary
+        self.__serial_port_key__ = sorted(self.__serial_ports__.keys())[0]
+        self.__serial_port_value__ = \
+            self.__serial_ports__[self.__serial_port_key__]
+
+    def get_serial_port_flag(self):
+        return self.__serial_port_value__
+
+    def get_serial_port_list(self):
+        port_list = []
+        for key in self.__serial_ports__:
+            port_list.append(key)
+        return port_list
 
     #
     # Launch the IDE only  accessors
     #
-    def get_launch_ide_only(self):
-        return self.__launch_IDE_only__
+    def get_launch_ide(self):
+        return self.__launch_IDE_option__
 
-    def set_launch_ide_only(self, new_launch_ide_only):
-        if isinstance(new_launch_ide_only, types.BooleanType):
-            self.__launch_IDE_only__ = new_launch_ide_only
+    def set_launch_ide(self, new_launch_option):
+        if new_launch_option in self.__IDE_launch_options__:
+            self.__launch_IDE_option__ = new_launch_option
+            self.save_settings()
         else:
-            print('\nThe provided "Launch IDE only" boolean is not valid !!!')
-            print('\t' + new_launch_ide_only)
-            if self.__launch_IDE_only__:
-                print('Previous "Launch IDE only" boolean maintained:')
+            print('\nThe provided "Launch IDE option" is not valid !!!')
+            print('\t' + new_launch_option)
+            if self.__launch_IDE_option__:
+                print('Previous "Launch IDE option" maintained:')
             else:
-                print('Default "Launch IDE only" boolean set:')
-                self.set_launch_ide_only_default()
-            print('\t' + self.__launch_IDE_only__)
+                print('Default "Launch IDE option" set:')
+                self.set_launch_ide_default()
+            print('\t' + self.__launch_IDE_option__)
 
-    launch_IDE_only = property(get_launch_ide_only, set_launch_ide_only)
+    launch_IDE_option = property(get_launch_ide, set_launch_ide)
 
-    def set_launch_ide_only_default(self):
-        self.__launch_IDE_only__ = False
+    def set_launch_ide_default(self):
+        self.__launch_IDE_option__ = \
+            sorted(self.__IDE_launch_options__.keys())[0]
 
-    #
-    # Communications Port accessors
-    #
-    # TODO: COM port accessors properly
-    def get_com_port(self):
-        return self.__com_port__
-
-    def set_com_port(self, new_com_port):
-        self.__com_port__ = new_com_port
-
-    com_port = property(get_com_port, set_com_port)
-
-    def set_com_port_default(self):
-        self.__com_port__ = 'COM1'
+    def get_launch_ide_options(self):
+        return self.__IDE_launch_options__
 
     #
     # Sets all the settings to default values
     #
     def set_default_settings(self):
-        self.set_launch_ide_only_default()
+        self.set_launch_ide_default()
         self.set_compiler_dir_default()
         self.set_sketch_dir_default()
         self.set_sketch_name_default()
-        self.set_com_port_default()
+        self.set_serial_port_default()
         self.set_arduino_board_default()
 
     #
@@ -237,7 +289,7 @@ class ServerCompilerSettings(object):
         settings_parser.set(
             'Arduino_IDE', 'arduino_board', self.arduino_board)
         settings_parser.set(
-            'Arduino_IDE', 'arduino_com_port', self.com_port)
+            'Arduino_IDE', 'arduino_serial_port', self.serial_port)
         # Sketch section
         settings_parser.add_section('Arduino_Sketch')
         settings_parser.set(
@@ -266,7 +318,7 @@ class ServerCompilerSettings(object):
         if settings_dict:
             self.compiler_dir = settings_dict['arduino_exec_path']
             self.arduino_board = settings_dict['arduino_board']
-            self.com_port = settings_dict['arduino_com_port']
+            self.serial_port = settings_dict['arduino_serial_port']
             self.sketch_name = settings_dict['sketch_name']
             self.sketch_dir = settings_dict['sketch_directory']
         else:
@@ -279,10 +331,11 @@ class ServerCompilerSettings(object):
         print('\tCompiler directory: ' + self.__compiler_dir__)
         print('\tArduino Board Key: ' + self.__arduino_board_key__)
         print('\tArduino Board Value: ' + self.__arduino_board_value__)
-        print('\tCOM Port: ' + self.__com_port__)
+        print('\tSerial Port Key: ' + self.__serial_port_key__)
+        print('\tSerial Port Value: ' + self.__serial_port_value__)
         print('\tSketch Name: ' + self.__sketch_name__)
         print('\tSketch Directory: ' + self.__sketch_dir__)
-        print('\tLaunch IDE only: ' + str(self.__launch_IDE_only__))
+        print('\tLaunch IDE option: ' + str(self.__launch_IDE_option__))
 
     def read_settings_file(self):
         """

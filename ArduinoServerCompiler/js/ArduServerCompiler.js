@@ -44,11 +44,17 @@ ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
   request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
   request.setRequestHeader("Content-length", params.length);
   request.setRequestHeader("Connection", "close");
+
+  // The data received is JSON, so it needs to be converted into the right
+  // format to be displayed in the page.
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
-       callback(request.responseText);
+      var el = ArduServerCompiler.createElementFromJson(request.responseText);
+      callback(el);
     }
   }
+
+  // Send the data
   request.send(params);
 };
 
@@ -85,13 +91,53 @@ ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
   request.setRequestHeader("Content-type","text/plain");
   request.setRequestHeader("Content-length", data.length);
   request.setRequestHeader("Connection", "close");
+
+  // The data received is JSON, so it needs to be converted into the right
+  // format to be displayed in the page.
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
-       callback(request.responseText);
+      callback(request.responseText);
     }
   }
+
+  // Send the data
   request.send(data);
-}
+};
+
+/**
+ * Creates an HTML element based on the JSON data received from the server.
+ * @param {!string} json_data A string containing the JSON data to be parsed.
+ * @return {!element} Description
+ */
+ArduServerCompiler.createElementFromJson = function(json_data) {
+  var parsed_json = JSON.parse(json_data);
+  var element;
+
+  if (parsed_json.element == "text_input") {
+    // Simple text input
+    element = document.createElement("input");
+    element.setAttribute('type', 'text');
+    element.setAttribute('value', parsed_json.display_text);
+  } else if (parsed_json.element == "dropdown") {
+    // Drop down list of unknown length with a selected item
+    element = document.createElement("select");
+    element.name = parsed_json.setting_type;
+    for (var i=0; i<parsed_json.options.length; i++) {
+      var option = document.createElement("option"); 
+      option.value = parsed_json.options[i].value;
+      option.text = parsed_json.options[i].display_text;
+      // Check selected option and mark it
+      if (parsed_json.options[i].value == parsed_json.selected) {
+        option.selected = true;
+      }
+      element.appendChild(option);
+    }
+  } else {
+    //TODO: Not recognised 
+  }
+
+  return element;
+};
 
 /**
  * Gets the current Compiler location from the ArduServerCompiler settings.
@@ -140,8 +186,8 @@ ArduServerCompiler.requestSketchLocation = function(callback) {
  * location. Done by the Python server because a 'file browse' triggered by
  * the browser with js will obscure the user information for security reasons.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new location as a
- *                             string.
+ *                             have one argument to receive the new location as
+ *                             a string.
  */
 ArduServerCompiler.requestNewSketchLocation = function(callback) {
   ArduServerCompiler.ajaxPostForm(
@@ -153,33 +199,32 @@ ArduServerCompiler.requestNewSketchLocation = function(callback) {
 /**
  * Gets the current IDE setting from the ArduServerCompiler settings.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new setting as a
- *                             boolean.
+ *                             have one argument to receive the new setting as
+ *                             a boolean.
  */
 ArduServerCompiler.requestIdeOnly = function(callback) {
   ArduServerCompiler.ajaxPostForm(
       "ArduServerCompilerSettings.html",
-      "ideOnly=get",
+      "ideLaunch=get",
       callback)
-}
+};
 
 /**
  * Sends the Arduino code to the ArduServerCompiler to be processed as defined
  * by the settings.
+ * @param {!boolean} ide_only Indicates if it only loads the sketch in the IDE
+ *                            or compiles and uploads.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new setting as a
- *                             boolean.
+ *                             have one argument to receive the new setting as
+ *                             a boolean.
  */
-ArduServerCompiler.setIdeOnly = function(ide_only, callback) {
-  var new_value = "False";
-  if (ide_only == true) {
-    new_value = "True";
-  }
+ArduServerCompiler.setIdeOnly = function(ide_option, callback) {
   ArduServerCompiler.ajaxPostForm(
       "ArduServerCompilerSettings.html",
-      "ideOnly=set&value=" + new_value,
+      "ideLaunch=set&value=" + ide_option,
       callback)
-}
+};
+
 
 /**
  * Sends the Arduino code to the ArduServerCompiler to be processed as defined

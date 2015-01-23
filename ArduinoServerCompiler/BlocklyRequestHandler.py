@@ -1,6 +1,8 @@
 from __future__ import unicode_literals, absolute_import
-import os
+import subprocess
+import json
 import cgi
+import re
 
 try:
     # 2.x name
@@ -38,16 +40,6 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if content_type == 'application/x-www-form-urlencoded':
             parameters = urlparse.parse_qs(
                 self.rfile.read(content_length), keep_blank_values=False)
-            #print(parameters)
-            #for key in parameters:
-            #    print(str(key) + ": " + str(parameters[key]))
-            #parameters = cgi.FieldStorage(
-            #    fp=self.rfile,
-            #    headers=self.headers,
-            #    environ={'REQUEST_METHOD':'POST',
-            #             'CONTENT_TYPE':self.headers['Content-Type'], })
-            #for item in parameters.list:
-            #    print(item)
         elif content_type == 'text/plain':
             data_string = self.rfile.read(content_length)
             try:
@@ -57,7 +49,7 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 print('\nThere was an error manipulating the plain text data!!!')
         else:
             print('\nError, content type not recognised: ' + str(content_type))
-            self.send_response(404, "Upps, not found!")
+            self.send_response(404, "Ups, not found!")
             self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write('Error: invalid content type')
@@ -70,7 +62,7 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             message_back = handle_settings(parameters)
 
         self.send_response(200)
-        self.send_header('Content-type', 'text/plain')
+        self.send_header('Content-type', 'application/json')
         self.end_headers()
         self.wfile.write(message_back)
 
@@ -109,17 +101,15 @@ def handle_settings(parameters):
                 message_back = set_sketch_path()
         # TODO: Arduino Board
         # TODO: COM Port
-        # Load Only IDE
-        elif str(key) == 'ideOnly':
+        # Launch Only Options
+        elif str(key) == 'ideLaunch':
             if str(parameters[key]) == "['get']":
                 message_back = get_load_ide_only()
-                print('ideO: ' + message_back)
             elif str(parameters[key]) == "['set']":
                 value = _get_value(parameters)
-                if value == "['True']":
-                    message_back = set_load_ide_only(True)
-                else:
-                    message_back = set_load_ide_only(False)
+                value = re.sub(r'^\[\'', '', value)
+                value = re.sub(r'\'\]', '', value)
+                message_back = set_load_ide_only(value)
         # The Value parameter is only used in some cases
         elif str(key) == 'value':
             pass
@@ -127,7 +117,6 @@ def handle_settings(parameters):
         else:
             print('The "' + str(key) + '" = ' + str(parameters[key]) +
                   ' parameter is not recognised!')
-
     return message_back
 
 
@@ -145,16 +134,28 @@ def load_sketch(sketch_path=None):
         sketch_path = create_sketch_default()
 
     # Concatenates the command string
-    command_line_command = ServerCompilerSettings().compiler_dir + ' '
-    if not ServerCompilerSettings().launch_IDE_only:
-        command_line_command += '--upload '
-        command_line_command += '--port ' + \
-            ServerCompilerSettings().com_port + ' '
-        command_line_command += '--board ' + \
-            ServerCompilerSettings().get_arduino_board_flag() + ' '
-    command_line_command += '"' + sketch_path + '"'
-    print('Command line command:\n\t' + command_line_command)
-    os.system(command_line_command)
+    cli_command = [ServerCompilerSettings().compiler_dir]
+    if ServerCompilerSettings().launch_IDE_option == 'upload':
+        cli_command.append('--upload')
+        cli_command.append('--port')
+        cli_command.append(ServerCompilerSettings().get_serial_port_flag())
+        cli_command.append('--board')
+        cli_command.append(ServerCompilerSettings().get_arduino_board_flag())
+    elif ServerCompilerSettings().launch_IDE_option == 'verify':
+        cli_command.append('--verify')
+    cli_command.append(sketch_path)
+    #cli_command = ' '.join(cli_command)
+    print('CLI command:\n\t')
+    print(cli_command)
+    process = subprocess.Popen(
+        cli_command,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        shell=False)
+    (out, error) = process.communicate()
+    print('program output:\n' + out)
+    print('Error output:\n' + error)
+    print('Exit code: ' + str(process.returncode))
 
 
 def create_sketch_default():
@@ -228,11 +229,20 @@ def set_compiler_path():
         if old_path != new_path:
             ServerCompilerSettings().save_settings()
 
-    return new_path
+    return get_compiler_path()
 
 
 def get_compiler_path():
-    return ServerCompilerSettings().compiler_dir
+    """
+    Create a JSON string to return to the page with the following format:
+    {"setting_type" : "compiler",
+     "element" : "text_input",
+     "display_text" : "Compiler Directory"}
+    """
+    json_data = {"setting_type": "compiler",
+                 "element": "text_input",
+                 "display_text": ServerCompilerSettings().compiler_dir}
+    return json.dumps(json_data)
 
 
 ###################
@@ -256,19 +266,46 @@ def set_sketch_path():
 
 
 def get_sketch_path():
-    return ServerCompilerSettings().sketch_dir
+    """
+    Create a JSON string to return to the page with the following format:
+    {"setting_type" : "sketch",
+     "element" : "text_input",
+     "display_text" : "Sketch Directory"}
+    """
+    json_data = {"setting_type": "compiler",
+                 "element": "text_input",
+                 "display_text": ServerCompilerSettings().sketch_dir}
+    return json.dumps(json_data)
 
 
-############################
-# Launch IDE only settings #
-############################
+#######################
+# Launch IDE settings #
+#######################
 def set_load_ide_only(new_value):
-    ServerCompilerSettings().launch_IDE_only = new_value
+    ServerCompilerSettings().launch_IDE_option = new_value
     return get_load_ide_only()
 
 
 def get_load_ide_only():
-    return str(ServerCompilerSettings().launch_IDE_only)
+    """
+    Create a JSON string to return to the page with the following format:
+    {"setting_type" : "ide",
+     "element" : "dropdown",
+     "options" : [
+         {"value" : "XXX", "text" : "XXX"},
+         ...]
+     "selected": "selected key"}
+    """
+    json_data = \
+        {"setting_type": "ide",
+         "element": "dropdown",
+         "options": []}
+    ide_options = ServerCompilerSettings().get_launch_ide_options()
+    for key in ide_options:
+        json_data["options"].append(
+            {"value": key, "display_text": ide_options[key]})
+    json_data.update({"selected": ServerCompilerSettings().launch_IDE_option})
+    return json.dumps(json_data)
 
 
 ########

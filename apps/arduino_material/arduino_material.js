@@ -141,52 +141,54 @@ ArduinoMaterial.populateSettings = function() {
 };
 
 /**
- * Sets the compiler location form data with the input string.
- * @param {!string} location Text to be inputted in the 'text input' element.
+ * Sets the compiler location form data retrieve from an updated element.
+ * @param {!boolean} new_el New HTML element to replace the one in the current
+ *                          DOM. Should contain a complete input text element.
  */
-ArduinoMaterial.setCompilerLocationHtml = function(location) {
-   document.getElementById('settings_compiler_location').value = location;
-};
-
-/**
- * Sets the sketch location form data with the input string.
- * @param {!string} location Text to be inputted in the 'text input' element.
- */
-ArduinoMaterial.setSketchLocationHtml = function(location) {
-   document.getElementById('settings_sketch_location').value = location;
-};
-
-/**
- * Sets the IDE load or compile form data with given input.
- * @param {!boolean} ide_only True indicates only load sketch in IDE
- *                            False indicates compile and upload sketch 
- */
-ArduinoMaterial.setIdeHtml = function(ide_only) {
-  var new_value;
-  if (ide_only == 'True') {
-    new_value = 'ide_only';
-  } else {
-    new_value = 'ide_upload';
+ArduinoMaterial.setCompilerLocationHtml = function(new_el) {
+  var comp_loc_ip = document.getElementById('settings_compiler_location')
+  if (comp_loc_ip != null) {
+    comp_loc_ip.value = new_el.value;
   }
-  document.getElementById('ide_settings').value = new_value;
 };
 
 /**
- * Sets the IDE settings data with the input boolean.
- * @param {!boolean} ide_only Indicates if it only loads the sketch in the IDE
- *                            or compiles and upload.
+ * Sets the sketch location form data retrieve from an updated element.
+ * @param {!boolean} new_el New HTML element to replace the one in the current
+ *                          DOM. Should contain a complete input text element.
  */
-ArduinoMaterial.setIdeSettings = function(ide_value) {
-  //var el = document.getElementById("ide_settings");
-  //var ide_value = el.options[e.selectedIndex].value;
-  var new_value;
-  if (ide_value == 'ide_only') {
-    new_value = true;
-  } else if (ide_value == 'ide_upload') {
-    new_value = false;
+ArduinoMaterial.setSketchLocationHtml = function(new_el) {
+  var sketch_loc_ip = document.getElementById('settings_sketch_location')
+  if (sketch_loc_ip != null) {
+    sketch_loc_ip.value = new_el.value;
   }
+};
+
+/**
+ * Replaces IDE load or compile form data with a new HTMl element.
+ * @param {!boolean} new_el New HTML element to replace the one in the current
+ *                          DOM. Should contain a complete select element.
+ */
+ArduinoMaterial.setIdeHtml = function(new_el) {
+  var ide_dropdown = document.getElementById('ide_settings')
+  if (ide_dropdown != null) {
+    new_el.id = 'ide_settings';
+    new_el.onchange = ArduinoMaterial.setIdeSettings;
+    ide_dropdown.parentNode.replaceChild(new_el, ide_dropdown);
+  }
+  // Refresh the materialize select menus
+  // TODO: Currently a reported bug from Materialize
+   $('select').material_select();
+};
+
+/**
+ * Sets the IDE settings data with the selected user input from the drop down.
+ */
+ArduinoMaterial.setIdeSettings = function() {
+  var el = document.getElementById("ide_settings");
+  var ide_value = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
-  ArduServerCompiler.setIdeOnly(new_value, ArduinoMaterial.setIdeHtml);
+  ArduServerCompiler.setIdeOnly(ide_value, ArduinoMaterial.setIdeHtml);
 };
 
 /**
