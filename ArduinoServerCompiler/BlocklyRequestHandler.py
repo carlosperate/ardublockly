@@ -99,18 +99,26 @@ def handle_settings(parameters):
                 message_back = get_sketch_path()
             elif str(parameters[key]) == "['set']":
                 message_back = set_sketch_path()
-        # TODO: Arduino Board
-        # Serial port
-        elif str(key) == 'serialPort':
+        # Arduino Board
+        elif str(key) == 'board':
             if str(parameters[key]) == "['get']":
-                message_back = get_serial_port()
+                message_back = get_arduino_boards()
+            elif str(parameters[key]) == "['set']":
+                value = _get_value(parameters)
+                value = re.sub(r'^\[\'', '', value)
+                value = re.sub(r'\'\]', '', value)
+                message_back = set_arduino_board(value)
+        # Serial port
+        elif str(key) == 'serial':
+            if str(parameters[key]) == "['get']":
+                message_back = get_serial_ports()
             elif str(parameters[key]) == "['set']":
                 value = _get_value(parameters)
                 value = re.sub(r'^\[\'', '', value)
                 value = re.sub(r'\'\]', '', value)
                 message_back = set_serial_port(value)
         # Launch Only Options
-        elif str(key) == 'ideLaunch':
+        elif str(key) == 'ide':
             if str(parameters[key]) == "['get']":
                 message_back = get_load_ide_only()
             elif str(parameters[key]) == "['set']":
@@ -287,15 +295,45 @@ def get_sketch_path():
     return json.dumps(json_data)
 
 
+##########################
+# Arduino Board settings #
+##########################
+def set_arduino_board(new_value):
+    ServerCompilerSettings().arduino_board = new_value
+    return get_arduino_boards()
+
+
+def get_arduino_boards():
+    """
+    Create a JSON string to return to the page with the following format:
+    {"setting_type" : "board",
+     "element" : "dropdown",
+     "options" : [
+         {"value" : "XXX", "text" : "XXX"},
+         ...]
+     "selected": "selected key"}
+    """
+    json_data = \
+        {"setting_type": "ide",
+         "element": "dropdown",
+         "options": []}
+    boards = ServerCompilerSettings().get_arduino_board_types()
+    for item in boards:
+        json_data["options"].append(
+            {"value": item, "display_text": item})
+    json_data.update({"selected": ServerCompilerSettings().arduino_board})
+    return json.dumps(json_data)
+
+
 ########################
 # Serial Port settings #
 ########################
 def set_serial_port(new_value):
     ServerCompilerSettings().serial_port = new_value
-    return get_serial_port()
+    return get_serial_ports()
 
 
-def get_serial_port():
+def get_serial_ports():
     """
     Create a JSON string to return to the page with the following format:
     {"setting_type" : "serial",

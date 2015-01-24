@@ -137,8 +137,9 @@ ArduinoMaterial.populateSettings = function() {
       ArduinoMaterial.setCompilerLocationHtml);
   ArduServerCompiler.requestSketchLocation(
       ArduinoMaterial.setSketchLocationHtml);
-  ArduServerCompiler.requestSerialPorts(ArduinoMaterial.setSerialPortHtml)
-  ArduServerCompiler.requestIdeOnly(ArduinoMaterial.setIdeHtml);
+  ArduServerCompiler.requestArduinoBoards(ArduinoMaterial.setArduinoBoardsHtml);
+  ArduServerCompiler.requestSerialPorts(ArduinoMaterial.setSerialPortsHtml);
+  ArduServerCompiler.requestIdeOptions(ArduinoMaterial.setIdeHtml);
 };
 
 /**
@@ -166,12 +167,41 @@ ArduinoMaterial.setSketchLocationHtml = function(new_el) {
 };
 
 /**
- * Replaces the serial port form data with a new HTMl element.
+ * Replaces the Arduino Boards form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
  * @param {!element} new_el New HTML element to replace the one in the current
  *                          DOM. Should contain a complete select element.
  */
-ArduinoMaterial.setSerialPortHtml = function(new_el) {
+ArduinoMaterial.setArduinoBoardsHtml = function(new_el) {
+  var board_dropdown = document.getElementById('board')
+  if (board_dropdown != null) {
+    new_el.id = 'board';
+    new_el.onchange = ArduinoMaterial.setBoard;
+    board_dropdown.parentNode.replaceChild(new_el, board_dropdown);
+  }
+  // Refresh the materialize select menus
+  // TODO: Currently a reported bug from Materialize
+   $('select').material_select();
+};
+
+/**
+ * Sets the Arduino Board type with the selected user input from the drop down.
+ */
+ArduinoMaterial.setBoard = function() {
+  var el = document.getElementById("board");
+  var board_value = el.options[el.selectedIndex].value;
+  //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
+  ArduServerCompiler.setArduinoBoard(
+      board_value, ArduinoMaterial.setArduinoBoardsHtml);
+};
+
+/**
+ * Replaces the Serial Port form data with a new HTMl element.
+ * Ensures there is a change listener to call 'setSerialPort' function
+ * @param {!element} new_el New HTML element to replace the one in the current
+ *                          DOM. Should contain a complete select element.
+ */
+ArduinoMaterial.setSerialPortsHtml = function(new_el) {
   var serial_dropdown = document.getElementById('serial_port')
   if (serial_dropdown != null) {
     new_el.id = 'serial_port';
@@ -184,14 +214,14 @@ ArduinoMaterial.setSerialPortHtml = function(new_el) {
 };
 
 /**
- * Sets the serial port with the selected user input from the drop down.
+ * Sets the Serial Port with the selected user input from the drop down.
  */
 ArduinoMaterial.setSerial = function() {
   var el = document.getElementById("serial_port");
   var serial_value = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
   ArduServerCompiler.setSerialPort(
-      serial_value, ArduinoMaterial.setSerialPortHtml);
+      serial_value, ArduinoMaterial.setSerialPortsHtml);
 };
 
 /**
@@ -219,7 +249,7 @@ ArduinoMaterial.setIdeSettings = function() {
   var el = document.getElementById("ide_settings");
   var ide_value = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
-  ArduServerCompiler.setIdeOnly(ide_value, ArduinoMaterial.setIdeHtml);
+  ArduServerCompiler.setIdeOptions(ide_value, ArduinoMaterial.setIdeHtml);
 };
 
 /**

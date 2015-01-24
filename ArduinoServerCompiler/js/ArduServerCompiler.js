@@ -107,7 +107,8 @@ ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
 /**
  * Creates an HTML element based on the JSON data received from the server.
  * @param {!string} json_data A string containing the JSON data to be parsed.
- * @return {!element} Description
+ * @return {!element} An HTML element, which type depends on the JSON 'element'
+ *                    key (currently only text input or drop down)
  */
 ArduServerCompiler.createElementFromJson = function(json_data) {
   var parsed_json = JSON.parse(json_data);
@@ -133,7 +134,7 @@ ArduServerCompiler.createElementFromJson = function(json_data) {
       element.appendChild(option);
     }
   } else {
-    //TODO: Not recognised 
+    //TODO: Not recognised alert the user/developer somehow
   }
 
   return element;
@@ -142,8 +143,8 @@ ArduServerCompiler.createElementFromJson = function(json_data) {
 /**
  * Gets the current Compiler location from the ArduServerCompiler settings.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new location as a
- *                             string.
+ *                             one argument to receive the new location within
+ *                             an HTML element of type input text.
  */
 ArduServerCompiler.requestCompilerLocation = function(callback) {
    ArduServerCompiler.ajaxPostForm(
@@ -155,10 +156,10 @@ ArduServerCompiler.requestCompilerLocation = function(callback) {
 /**
  * Request to the ArduServerCompiler to prompt the user for a new compiler
  * location. Done by the Python server because a 'file browse' triggered by
- * the browser with js will obscure the user information for security reasons.
+ * the browser with JS will obscure the user information for security reasons.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new location as a
- *                             string.
+ *                             one argument to receive the new location within
+ *                             an HTML element of type input text.
  */
 ArduServerCompiler.requestNewCompilerLocation = function(callback) {
   //TODO: Remove the something=else, its there for testing purposes
@@ -171,8 +172,8 @@ ArduServerCompiler.requestNewCompilerLocation = function(callback) {
 /**
  * Gets the current Sketch location from the ArduServerCompiler settings.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new location as a
- *                             string.
+ *                             one argument to receive the new location within
+ *                             an HTML element of type input text.
  */
 ArduServerCompiler.requestSketchLocation = function(callback) {
    ArduServerCompiler.ajaxPostForm(
@@ -184,10 +185,10 @@ ArduServerCompiler.requestSketchLocation = function(callback) {
 /**
  * Request to the ArduServerCompiler to prompt the user for a new sketch
  * location. Done by the Python server because a 'file browse' triggered by
- * the browser with js will obscure the user information for security reasons.
+ * the browser with JS will obscure the user information for security reasons.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new location as
- *                             a string.
+ *                             have one argument to receive the new location 
+ *                             within an HTML element of type input text.
  */
 ArduServerCompiler.requestNewSketchLocation = function(callback) {
   ArduServerCompiler.ajaxPostForm(
@@ -198,17 +199,49 @@ ArduServerCompiler.requestNewSketchLocation = function(callback) {
 
 /**
  * Request to the ArduServerCompiler to return JSON data containing all
+ * available target Arduino Boards, and the selected one in the settings.
+ * The data is then processed into an HTML element and sent to the callback
+ * function as an argument.
+ * @param {!function} callback Callback function for the server request, must
+ *                             have one argument to receive the new setting as
+ *                             an HTML select element.
+ */
+ArduServerCompiler.requestArduinoBoards = function(callback) {
+  ArduServerCompiler.ajaxPostForm(
+      "ArduServerCompilerSettings.html",
+      "board=get",
+      callback)
+};
+
+/**
+ * Sends the inputted Arduino Board type to the ArduServerCompiler Settings.
+ * The new settings menu for the Board type is then processed into an HTML
+ * element and sent to the callback function as an argument.
+ * @param {!string} new_board Indicates which board has been selected.
+ * @param {!function} callback Callback function for the server request, must
+ *                             have one argument to receive the new setting as
+ *                             an HTML select element.
+ */
+ArduServerCompiler.setArduinoBoard = function(new_board, callback) {
+  ArduServerCompiler.ajaxPostForm(
+      "ArduServerCompilerSettings.html",
+      "board=set&value=" + new_board,
+      callback)
+};
+
+/**
+ * Request to the ArduServerCompiler to return JSON data containing all
  * available serial ports in the computer, and the selected one in the
- * settings. The data is then processed into an HTML element and send to the
+ * settings. The data is then processed into an HTML element and sent to the
  * callback function as an argument.
  * @param {!function} callback Callback function for the server request, must
  *                             have one argument to receive the new setting as
- *                             a string.
+ *                             an HTML select element.
  */
 ArduServerCompiler.requestSerialPorts = function(callback) {
   ArduServerCompiler.ajaxPostForm(
       "ArduServerCompilerSettings.html",
-      "serialPort=get",
+      "serial=get",
       callback)
 };
 
@@ -216,15 +249,15 @@ ArduServerCompiler.requestSerialPorts = function(callback) {
  * Sends the inputted Serial Port to the ArduServerCompiler Settings. The new
  * settings menu for the Serial Port is then processed into an HTML element
  * and sent to the callback function as an argument.
- * @param {!string} new_port Indicates which port is selected.
+ * @param {!string} new_port Indicates which port has been selected.
  * @param {!function} callback Callback function for the server request, must
  *                             have one argument to receive the new setting as
- *                             a string.
+ *                             an HTML select element.
  */
 ArduServerCompiler.setSerialPort = function(new_port, callback) {
   ArduServerCompiler.ajaxPostForm(
       "ArduServerCompilerSettings.html",
-      "serialPort=set&value=" + new_port,
+      "serial=set&value=" + new_port,
       callback)
 };
 
@@ -234,12 +267,12 @@ ArduServerCompiler.setSerialPort = function(new_port, callback) {
  * and sent to the callback function as an argument.
  * @param {!function} callback Callback function for the server request, must
  *                             have one argument to receive the new setting as
- *                             a boolean.
+ *                             an HTML select element.
  */
-ArduServerCompiler.requestIdeOnly = function(callback) {
+ArduServerCompiler.requestIdeOptions = function(callback) {
   ArduServerCompiler.ajaxPostForm(
       "ArduServerCompilerSettings.html",
-      "ideLaunch=get",
+      "ide=get",
       callback)
 };
 
@@ -247,15 +280,15 @@ ArduServerCompiler.requestIdeOnly = function(callback) {
  * Sends the inputted IDE option to the ArduServerCompiler Settings. The new
  * settings menu for the IDE options is then processed into an HTML element
  * and sent to the callback function as an argument.
- * @param {!string} ide_option Indicates which option is selected.
+ * @param {!string} ide_option Indicates which option has been selected.
  * @param {!function} callback Callback function for the server request, must
  *                             have one argument to receive the new setting as
- *                             an HTML element.
+ *                             an HTML select element.
  */
-ArduServerCompiler.setIdeOnly = function(ide_option, callback) {
+ArduServerCompiler.setIdeOptions = function(ide_option, callback) {
   ArduServerCompiler.ajaxPostForm(
       "ArduServerCompilerSettings.html",
-      "ideLaunch=set&value=" + ide_option,
+      "ide=set&value=" + ide_option,
       callback)
 };
 
