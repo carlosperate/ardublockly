@@ -100,7 +100,15 @@ def handle_settings(parameters):
             elif str(parameters[key]) == "['set']":
                 message_back = set_sketch_path()
         # TODO: Arduino Board
-        # TODO: COM Port
+        # Serial port
+        elif str(key) == 'serialPort':
+            if str(parameters[key]) == "['get']":
+                message_back = get_serial_port()
+            elif str(parameters[key]) == "['set']":
+                value = _get_value(parameters)
+                value = re.sub(r'^\[\'', '', value)
+                value = re.sub(r'\'\]', '', value)
+                message_back = set_serial_port(value)
         # Launch Only Options
         elif str(key) == 'ideLaunch':
             if str(parameters[key]) == "['get']":
@@ -145,8 +153,9 @@ def load_sketch(sketch_path=None):
         cli_command.append('--verify')
     cli_command.append(sketch_path)
     #cli_command = ' '.join(cli_command)
-    print('CLI command:\n\t')
+    print('CLI command:')
     print(cli_command)
+    #TODO: catch errors
     process = subprocess.Popen(
         cli_command,
         stdout=subprocess.PIPE,
@@ -275,6 +284,36 @@ def get_sketch_path():
     json_data = {"setting_type": "compiler",
                  "element": "text_input",
                  "display_text": ServerCompilerSettings().sketch_dir}
+    return json.dumps(json_data)
+
+
+########################
+# Serial Port settings #
+########################
+def set_serial_port(new_value):
+    ServerCompilerSettings().serial_port = new_value
+    return get_serial_port()
+
+
+def get_serial_port():
+    """
+    Create a JSON string to return to the page with the following format:
+    {"setting_type" : "serial",
+     "element" : "dropdown",
+     "options" : [
+         {"value" : "XXX", "text" : "XXX"},
+         ...]
+     "selected": "selected key"}
+    """
+    json_data = \
+        {"setting_type": "ide",
+         "element": "dropdown",
+         "options": []}
+    ports = ServerCompilerSettings().get_serial_ports()
+    for key in ports:
+        json_data["options"].append(
+            {"value": key, "display_text": ports[key]})
+    json_data.update({"selected": ServerCompilerSettings().serial_port})
     return json.dumps(json_data)
 
 

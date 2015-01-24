@@ -197,7 +197,41 @@ ArduServerCompiler.requestNewSketchLocation = function(callback) {
 };
 
 /**
- * Gets the current IDE setting from the ArduServerCompiler settings.
+ * Request to the ArduServerCompiler to return JSON data containing all
+ * available serial ports in the computer, and the selected one in the
+ * settings. The data is then processed into an HTML element and send to the
+ * callback function as an argument.
+ * @param {!function} callback Callback function for the server request, must
+ *                             have one argument to receive the new setting as
+ *                             a string.
+ */
+ArduServerCompiler.requestSerialPorts = function(callback) {
+  ArduServerCompiler.ajaxPostForm(
+      "ArduServerCompilerSettings.html",
+      "serialPort=get",
+      callback)
+};
+
+/**
+ * Sends the inputted Serial Port to the ArduServerCompiler Settings. The new
+ * settings menu for the Serial Port is then processed into an HTML element
+ * and sent to the callback function as an argument.
+ * @param {!string} new_port Indicates which port is selected.
+ * @param {!function} callback Callback function for the server request, must
+ *                             have one argument to receive the new setting as
+ *                             a string.
+ */
+ArduServerCompiler.setSerialPort = function(new_port, callback) {
+  ArduServerCompiler.ajaxPostForm(
+      "ArduServerCompilerSettings.html",
+      "serialPort=set&value=" + new_port,
+      callback)
+};
+
+/**
+ * Gets the current IDE setting from the ArduServerCompiler settings. The new
+ * settings menu for the IDE options is then processed into an HTML element
+ * and sent to the callback function as an argument.
  * @param {!function} callback Callback function for the server request, must
  *                             have one argument to receive the new setting as
  *                             a boolean.
@@ -210,13 +244,13 @@ ArduServerCompiler.requestIdeOnly = function(callback) {
 };
 
 /**
- * Sends the Arduino code to the ArduServerCompiler to be processed as defined
- * by the settings.
- * @param {!boolean} ide_only Indicates if it only loads the sketch in the IDE
- *                            or compiles and uploads.
+ * Sends the inputted IDE option to the ArduServerCompiler Settings. The new
+ * settings menu for the IDE options is then processed into an HTML element
+ * and sent to the callback function as an argument.
+ * @param {!string} ide_option Indicates which option is selected.
  * @param {!function} callback Callback function for the server request, must
  *                             have one argument to receive the new setting as
- *                             a boolean.
+ *                             an HTML element.
  */
 ArduServerCompiler.setIdeOnly = function(ide_option, callback) {
   ArduServerCompiler.ajaxPostForm(

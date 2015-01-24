@@ -206,7 +206,7 @@ class ServerCompilerSettings(object):
 
     def set_serial_port(self, new_port):
         if new_port in self.__serial_ports__:
-            self.__serial_port_value__ = self.__arduino_types__[new_port]
+            self.__serial_port_value__ = self.__serial_ports__[new_port]
             self.__serial_port_key__ = new_port
             self.save_settings()
         else:
@@ -235,6 +235,9 @@ class ServerCompilerSettings(object):
         for key in self.__serial_ports__:
             port_list.append(key)
         return port_list
+
+    def get_serial_ports(self):
+        return self.__serial_ports__
 
     #
     # Launch the IDE only  accessors
