@@ -16,6 +16,7 @@ $RECYCLE.BIN/
 # IDEs #
 ########
 *.komodoproject
+.idea/
 
 ##########
 # Python #

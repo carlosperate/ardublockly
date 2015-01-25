@@ -9,6 +9,8 @@ except ImportError:
     # 3.x name
     import configparser as ConfigParser
 
+import ArduinoServerCompiler.SerialPort
+
 
 class ServerCompilerSettings(object):
     """
@@ -200,17 +202,55 @@ class ServerCompilerSettings(object):
 
     #
     # Serial Port and lists accessors
+    # Extra checks of the available Serial Ports are required due to volatility
     #
     def get_serial_port(self):
+        """
+        Checks available Serial Ports and populates the serial port dictionary.
+        Returns currently selected Serial Port key if available.
+        Returns None if selected Serial Port is not available anymore.
+        :return: Serial Port dictionary key
+        """
+        self.populate_serial_port_list()
+        if not self.__serial_ports__:
+            print('\nThere are no available Serial Ports !!!')
+            self.__serial_port_key__ = None
+            self.__serial_port_value__ = None
+        elif self.__serial_port_value__ not in self.__serial_ports__.values():
+            print('\nThe selected Serial Port is no longer available !!!')
+            self.__serial_port_key__ = None
+            self.__serial_port_value__ = None
+        elif self.__serial_ports__[self.__serial_port_key__] != \
+                self.__serial_port_value__:
+            # At this point the dictionary is not empty and the value is
+            # present, but not with the right key. So correct the key.
+            for key, value in self.__serial_ports__.items():
+                if self.__serial_port_value__ == value:
+                    self.__serial_port_key__ = key
+        self.save_settings()
         return self.__serial_port_key__
 
     def set_serial_port(self, new_port):
+        """
+        Checks available Serial Ports and populates the serial port dictionary.
+        If the new serial port is not in the dictionary or the dictionary is
+        empty it issues an error.
+        :param new_port: the new port to set
+        """
+        #TODO: If the ports change since the last time the port list was sent
+        #      and there is the same number of available ports, this will
+        #      select the wrong port based on an old ID (dictionary key)
+        self.populate_serial_port_list()
         if new_port in self.__serial_ports__:
             self.__serial_port_value__ = self.__serial_ports__[new_port]
             self.__serial_port_key__ = new_port
             self.save_settings()
+        elif not self.__serial_ports__:
+            print('\nThere are no available Serial Ports: !!!')
+            self.__serial_port_key__ = None
+            self.__serial_port_value__ = None
         else:
-            print('\nProvided Serial Port does not exist: !!!')
+            print('\nProvided Serial Port is not valid: !!!')
             print('\t' + new_port)
             if self.__serial_port_key__ and self.__serial_port_value__:
                 print('Previous Serial Port maintained:')
@@ -218,26 +258,69 @@ class ServerCompilerSettings(object):
                 print('Default Serial Port set:')
                 self.set_serial_port_default()
             print('\t' + self.__serial_port_key__)
+        self.save_settings()
 
     serial_port = property(get_serial_port, set_serial_port)
 
     def set_serial_port_default(self):
-        #TODO: Check for empty dictionary
-        self.__serial_port_key__ = sorted(self.__serial_ports__.keys())[0]
-        self.__serial_port_value__ = \
-            self.__serial_ports__[self.__serial_port_key__]
+        """
+        Checks available Serial Ports and populates the serial port dictionary.
+        If there are no available serial ports is resets the variables.
+        """
+        self.populate_serial_port_list()
+        if not self.__serial_ports__:
+            self.__serial_port_key__ = None
+            self.__serial_port_value__ = None
+        else:
+            self.__serial_port_key__ = sorted(self.__serial_ports__.keys())[0]
+            self.__serial_port_value__ = \
+                self.__serial_ports__[self.__serial_port_key__]
 
     def get_serial_port_flag(self):
+        """
+        Checks available Serial Ports and populates the serial port dictionary.
+        Returns currently selected Serial Port value if available.
+        Returns None if selected Serial Port is not available anymore.
+        :return: Serial Port dictionary value
+        """
+        self.populate_serial_port_list()
+        if not self.__serial_ports__:
+            print('\nThere are no available Serial Ports !!!')
+            self.__serial_port_key__ = None
+            self.__serial_port_value__ = None
+        elif self.__serial_port_value__ not in self.__serial_ports__.values():
+            print('\nThe selected Serial Port is no longer available !!!')
+            self.__serial_port_key__ = None
+            self.__serial_port_value__ = None
+        elif self.__serial_ports__[self.__serial_port_key__] != \
+                self.__serial_port_value__:
+            # At this point the dictionary is not empty and the flag
+            # (dictionary value) is present, but not with the right key.
+            # So correct the key.
+            for key, value in self.__serial_ports__.items():
+                if self.__serial_port_value__ == value:
+                    self.__serial_port_key__ = key
+        self.save_settings()
         return self.__serial_port_value__
 
-    def get_serial_port_list(self):
-        port_list = []
-        for key in self.__serial_ports__:
-            port_list.append(key)
-        return port_list
-
     def get_serial_ports(self):
+        self.populate_serial_port_list()
         return self.__serial_ports__
+
+    def populate_serial_port_list(self):
+        """
+        Populates the __serial_ports__ dictionary with the Serial Ports
+        available.
+        """
+        port_list = ArduinoServerCompiler.SerialPort.get_port_list()
+        self.__serial_ports__ = {}
+        if port_list:
+            port_id = 0
+            for item in port_list:
+                id_string = 'port' + str(port_id)
+                self.__serial_ports__.update({id_string: item})
+                port_id += 1
+
 
     #
     # Launch the IDE only  accessors
@@ -334,8 +417,12 @@ class ServerCompilerSettings(object):
         print('\tCompiler directory: ' + self.__compiler_dir__)
         print('\tArduino Board Key: ' + self.__arduino_board_key__)
         print('\tArduino Board Value: ' + self.__arduino_board_value__)
-        print('\tSerial Port Key: ' + self.__serial_port_key__)
-        print('\tSerial Port Value: ' + self.__serial_port_value__)
+        if not self.__serial_port_key__:
+            print('\tSerial Port Key: No port available')
+            print('\tSerial Port Value: No port available')
+        else:
+            print('\tSerial Port Key: ' + self.__serial_port_key__)
+            print('\tSerial Port Value: ' + self.__serial_port_value__)
         print('\tSketch Name: ' + self.__sketch_name__)
         print('\tSketch Directory: ' + self.__sketch_dir__)
         print('\tLaunch IDE option: ' + str(self.__launch_IDE_option__))

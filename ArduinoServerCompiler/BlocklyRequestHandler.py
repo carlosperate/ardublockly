@@ -256,9 +256,9 @@ def get_compiler_path():
      "element" : "text_input",
      "display_text" : "Compiler Directory"}
     """
-    json_data = {"setting_type": "compiler",
-                 "element": "text_input",
-                 "display_text": ServerCompilerSettings().compiler_dir}
+    json_data = {'setting_type': 'compiler',
+                 'element': 'text_input',
+                 'display_text': ServerCompilerSettings().compiler_dir}
     return json.dumps(json_data)
 
 
@@ -289,9 +289,9 @@ def get_sketch_path():
      "element" : "text_input",
      "display_text" : "Sketch Directory"}
     """
-    json_data = {"setting_type": "compiler",
-                 "element": "text_input",
-                 "display_text": ServerCompilerSettings().sketch_dir}
+    json_data = {'setting_type': 'compiler',
+                 'element': 'text_input',
+                 'display_text': ServerCompilerSettings().sketch_dir}
     return json.dumps(json_data)
 
 
@@ -314,14 +314,14 @@ def get_arduino_boards():
      "selected": "selected key"}
     """
     json_data = \
-        {"setting_type": "ide",
-         "element": "dropdown",
-         "options": []}
+        {'setting_type': 'ide',
+         'element': 'dropdown',
+         'options': []}
     boards = ServerCompilerSettings().get_arduino_board_types()
     for item in boards:
-        json_data["options"].append(
-            {"value": item, "display_text": item})
-    json_data.update({"selected": ServerCompilerSettings().arduino_board})
+        json_data['options'].append(
+            {'value': item, 'display_text': item})
+    json_data.update({'selected': ServerCompilerSettings().arduino_board})
     return json.dumps(json_data)
 
 
@@ -344,14 +344,20 @@ def get_serial_ports():
      "selected": "selected key"}
     """
     json_data = \
-        {"setting_type": "ide",
-         "element": "dropdown",
-         "options": []}
+        {'setting_type': 'ide',
+         'element': 'dropdown',
+         'options': []}
     ports = ServerCompilerSettings().get_serial_ports()
-    for key in ports:
-        json_data["options"].append(
-            {"value": key, "display_text": ports[key]})
-    json_data.update({"selected": ServerCompilerSettings().serial_port})
+    if not ports:
+        json_data['options'].append({
+            'value': 'no_ports',
+            'display_text': 'There are no available Serial Ports'})
+        json_data.update({'selected': 'no_ports'})
+    else:
+        for key in ports:
+            json_data['options'].append(
+                {'value': key, 'display_text': ports[key]})
+        json_data.update({'selected': ServerCompilerSettings().serial_port})
     return json.dumps(json_data)
 
 
@@ -374,14 +380,14 @@ def get_load_ide_only():
      "selected": "selected key"}
     """
     json_data = \
-        {"setting_type": "ide",
-         "element": "dropdown",
-         "options": []}
+        {'setting_type': 'ide',
+         'element': 'dropdown',
+         'options': []}
     ide_options = ServerCompilerSettings().get_launch_ide_options()
     for key in ide_options:
-        json_data["options"].append(
-            {"value": key, "display_text": ide_options[key]})
-    json_data.update({"selected": ServerCompilerSettings().launch_IDE_option})
+        json_data['options'].append(
+            {'value': key, 'display_text': ide_options[key]})
+    json_data.update({'selected': ServerCompilerSettings().launch_IDE_option})
     return json.dumps(json_data)
 
 
