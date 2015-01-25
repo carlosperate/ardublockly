@@ -12,28 +12,50 @@
 var ArduinoMaterial = ArduinoMaterial || {};
 
 /**
- * Injects Blockly into a given text area.
- * @param {!Element} el Element to inject Blockly into.
+ * Public variable that indicates if Blockly has been injected.
+ * @type {!boolean}
  */
-ArduinoMaterial.injectBlockly = function(el) {
-  var toolbox = ArduinoMaterial.readToolbox('arduino_toolbox.xml');
-  Blockly.inject(el, {
-        media: '../../media/',
-        rtl: false,
-        scrollbars: true,
-        toolbox: toolbox });
-};
+ArduinoMaterial.BLOCKLY_INJECTED = false;
 
 /**
- * Open the XML containing the toolbox data.
- * @param {!string} xml_path String containing the XML file path.
- * @return {!string} Contains the text in a single string.
+ * Injects Blockly into a given text area. Reads the toolbox from an XMl file.
+ * @param {!Element} el Element to inject Blockly into.
+ * @param {!string} toolbox_path String containing the toolbox XML file path.
  */
-ArduinoMaterial.readToolbox = function(xml_path) {
-  var request = new XMLHttpRequest();
-  request.open("GET", xml_path, false);
+ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
+  // Create a an XML HTTP request
+  var request;
+  try {   // Firefox, Chrome, IE7+, Opera, Safari
+    request = new XMLHttpRequest();
+  }
+  catch (e) {
+    try {   // IE6 and earlier
+      request = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e) {
+      try {
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      catch (e) {
+        throw 'Your browser does not support AJAX. Cannot load toolbox';
+      }
+    }
+  }
+  request.open("GET", toolbox_path, true);
+
+  // Once file is open, inject blockly into element with the toolbox string
+  request.onreadystatechange = function() {
+    if ( (request.readyState == 4) && (request.status == 200) ) {
+      Blockly.inject(blockly_el, {
+            media: '../../media/',
+            rtl: false,
+            scrollbars: true,
+            toolbox: request.responseText });
+      ArduinoMaterial.BLOCKLY_INJECTED = true;
+    }
+  }
+
   request.send(null);
-  return request.responseText;
 };
 
 /**

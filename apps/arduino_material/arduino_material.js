@@ -16,36 +16,14 @@ var ArduinoMaterial = ArduinoMaterial || {};
  */
 window.addEventListener('load', function() {
   // Inject Blockly into content_blocks
-  ArduinoMaterial.injectBlockly(document.getElementById('content_blocks'));
+  ArduinoMaterial.injectBlockly(
+    document.getElementById('content_blocks'), 'arduino_toolbox.xml');
 
+  ArduinoMaterial.materializeJsInit();
+  ArduinoMaterial.bindActionFunctions_();
   ArduinoMaterial.bindDesignEventListeners_();
   ArduinoMaterial.bindBlocklyEventListeners_();
-  ArduinoMaterial.bindActionFunctions_();
-  ArduinoMaterial.materializeJsInit();
-
-  // Ensure the Blockly element is the correct size
-  Blockly.fireUiEvent(window, 'resize');
 });
-
-/**
- * Binds the event listeners relevant to the page design.
- * @private
- */
-ArduinoMaterial.bindDesignEventListeners_ = function() {
-  window.addEventListener(
-      'resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
-  document.getElementById('xml_collapsible_header').addEventListener(
-    'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
-};
-
-/**
- * Binds the event listeners relevant to Blockly.
- * @private
- */
-ArduinoMaterial.bindBlocklyEventListeners_ = function() {
-  // Renders the code and XML for every Blockly workspace event
-  Blockly.addChangeListener(ArduinoMaterial.renderContent);
-};
 
 /**
  * Binds functions to each of the buttons, nav links, and related.
@@ -77,7 +55,31 @@ ArduinoMaterial.bindActionFunctions_ = function() {
     ArduServerCompiler.requestNewSketchLocation(
         ArduinoMaterial.setSketchLocationHtml);
   });
-  //TODO: IDE settings javascript is bind in html, move it here
+};
+
+/**
+ * Binds the event listeners relevant to the page design.
+ * @private
+ */
+ArduinoMaterial.bindDesignEventListeners_ = function() {
+  window.addEventListener(
+      'resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
+  document.getElementById('xml_collapsible_header').addEventListener(
+    'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
+};
+
+/**
+ * Binds the event listeners relevant to Blockly.
+ * @private
+ */
+ArduinoMaterial.bindBlocklyEventListeners_ = function() {
+  // Renders the code and XML for every Blockly workspace event
+  // Unfortunately as the toolbox inject is asynchronous we need to wait
+  if(ArduinoMaterial.BLOCKLY_INJECTED == false) {
+    setTimeout(ArduinoMaterial.bindBlocklyEventListeners_, 50);
+  } else {
+    Blockly.addChangeListener(ArduinoMaterial.renderContent);
+  }
 };
 
 /**
