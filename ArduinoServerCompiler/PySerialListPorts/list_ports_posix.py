@@ -9,7 +9,7 @@
 # port enumeration feature
 #
 # (C) 2011-2013 Chris Liechti <cliechti@gmx.net>
-# this is distributed under a free software license, see license.txt
+# this is distributed under a free software license, see REAME.md
 
 """\
 The ``comports`` function is expected to return an iterable that yields tuples
@@ -98,4 +98,4 @@ this module running...
 # test
 if __name__ == '__main__':
     for port, desc, hwid in sorted(comports()):
-        print "%s: %s [%s]" % (port, desc, hwid)
+        print("%s: %s [%s]" % (port, desc, hwid))

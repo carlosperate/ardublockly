@@ -5,7 +5,7 @@
 # port enumeration feature
 #
 # (C) 2011-2013 Chris Liechti <cliechti@gmx.net>
-# this is distributed under a free software license, see license.txt
+# this is distributed under a free software license, see REAME.md
 
 """\
 This module will provide a function called comports that returns an
@@ -15,7 +15,7 @@ on some systems non-existent ports may be listed.
 Additionally a grep function is supplied that can be used to search for ports
 based on their descriptions or hardware ID.
 """
-
+from __future__ import absolute_import
 import sys, os, re
 
 # chose an implementation, depending on os
@@ -24,9 +24,9 @@ import sys, os, re
 import os
 # chose an implementation, depending on os
 if os.name == 'nt': #sys.platform == 'win32':
-    from list_ports_windows import *
+    from ArduinoServerCompiler.PySerialListPorts.list_ports_windows import *
 elif os.name == 'posix':
-    from list_ports_posix import *
+    from ArduinoServerCompiler.PySerialListPorts.list_ports_posix import *
 #~ elif os.name == 'java':
 else:
     raise ImportError("Sorry: no implementation for your platform ('%s') available" % (os.name,))
@@ -80,7 +80,7 @@ def main():
     if args:
         if len(args) > 1:
             parser.error('more than one regexp not supported')
-        print "Filtered list with regexp: %r" % (args[0],)
+        print("Filtered list with regexp: %r" % (args[0],))
         iterator = sorted(grep(args[0]))
     else:
         iterator = sorted(comports())

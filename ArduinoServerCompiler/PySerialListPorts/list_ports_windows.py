@@ -1,3 +1,4 @@
+from __future__ import unicode_literals, absolute_import
 import ctypes
 import re
 
@@ -7,8 +8,8 @@ def ValidHandle(value, func, arguments):
     return value
 
 #import serial
-from serial_to_bytes import to_bytes
-from win32 import ULONG_PTR, is_64bit
+from ArduinoServerCompiler.PySerialListPorts.serial_to_bytes import to_bytes
+from ArduinoServerCompiler.PySerialListPorts.win32 import ULONG_PTR, is_64bit
 from ctypes.wintypes import HANDLE
 from ctypes.wintypes import BOOL
 from ctypes.wintypes import HWND

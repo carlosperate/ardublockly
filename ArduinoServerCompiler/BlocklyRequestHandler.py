@@ -3,7 +3,6 @@ import subprocess
 import json
 import cgi
 import re
-
 try:
     # 2.x name
     import Tkinter
@@ -16,7 +15,6 @@ except ImportError:
     import urllib.parse as urlparse
     import tkinter.filedialog as tkFileDialog
     import http.server as SimpleHTTPServer
-
 from ArduinoServerCompiler.Py23Compatibility import Py23Compatibility
 from ArduinoServerCompiler.ServerCompilerSettings import ServerCompilerSettings
 from ArduinoServerCompiler.SketchCreator import SketchCreator
@@ -31,15 +29,16 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         """
         Serves the POST request, using form-like data
         """
-        message_back = ''
-        parameters = None
+        message_back = None
         content_type, parameters_dict = cgi.parse_header(
-            self.headers.getheader('content-type'))
-        content_length = int(self.headers.getheader('content-length'))
+            self.headers.get("Content-type"))
+        content_length = int(self.headers.get('content-length'))
 
         if content_type == 'application/x-www-form-urlencoded':
             parameters = urlparse.parse_qs(
-                self.rfile.read(content_length), keep_blank_values=False)
+                Py23Compatibility.b_unicode(self.rfile.read(content_length)),
+                keep_blank_values=False)
+            message_back = handle_settings(parameters)
         elif content_type == 'text/plain':
             data_string = self.rfile.read(content_length)
             try:
@@ -47,6 +46,7 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             except Exception as e:
                 print(e)
                 print('\nThere was an error manipulating the plain text data!!!')
+            handle_sketch(message_back)
         else:
             print('\nError, content type not recognised: ' + str(content_type))
             self.send_response(404, "Ups, not found!")
@@ -55,16 +55,12 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.wfile.write('Error: invalid content type')
             return
 
-        if message_back != '':
-            handle_sketch(message_back)
-
-        if parameters:
-            message_back = handle_settings(parameters)
-
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        self.wfile.write(message_back)
+        # Responding
+        if message_back:
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(message_back.encode("utf-8"))
 
 
 #################

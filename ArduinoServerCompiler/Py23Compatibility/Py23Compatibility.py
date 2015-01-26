@@ -14,3 +14,11 @@ else:
     string_type_compare = basestring
     integer_type_compare = (int, long)
     class_type_compare = (type, types.ClassType)
+
+# Ensure unicode string from byte array
+if sys.version_info[0] == 3:
+    def b_unicode(x):
+        return x.decode('utf-8')
+else:
+    def b_unicode(x):
+        return str(x).encode('utf-8')

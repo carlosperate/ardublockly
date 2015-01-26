@@ -30,3 +30,4 @@ LICENSE AGREEMENT
 ## List of Changes:
 * Modified to work within a different directory structure
 * serial_to_bytes function imported from a difference source within pyserial
+* Minor changes to make it compatible with python 3

@@ -8,7 +8,7 @@
 # with contributions from cibomahto, dgs3, FarMcKon, tedbrandston
 # and modifications by cliechti
 #
-# this is distributed under a free software license, see license.txt
+# this is distributed under a free software license, see REAME.md
 
 
 
@@ -204,5 +204,5 @@ def comports():
 # test
 if __name__ == '__main__':
     for port, desc, hwid in sorted(comports()):
-        print "%s: %s [%s]" % (port, desc, hwid)
+        print("%s: %s [%s]" % (port, desc, hwid))
 
