@@ -237,15 +237,9 @@ def set_compiler_path():
     ServerCompilerSettings and if the filepath is different to that stored
     already it triggers the new data to be saved into the settings file.
     """
-    old_path = get_compiler_path()
     new_path = browse_file()
-
     if new_path != '':
         ServerCompilerSettings().compiler_dir = new_path
-        new_path = get_compiler_path()
-        if old_path != new_path:
-            ServerCompilerSettings().save_settings()
-
     return get_compiler_path()
 
 
@@ -256,9 +250,12 @@ def get_compiler_path():
      "element" : "text_input",
      "display_text" : "Compiler Directory"}
     """
+    compiler_directory = ServerCompilerSettings().compiler_dir
+    if not compiler_directory:
+        compiler_directory = 'Please select a valid Arduino compiler directory.'
     json_data = {'setting_type': 'compiler',
                  'element': 'text_input',
-                 'display_text': ServerCompilerSettings().compiler_dir}
+                 'display_text': compiler_directory}
     return json.dumps(json_data)
 
 
@@ -271,14 +268,9 @@ def set_sketch_path():
     ServerCompilerSettings and if the directory is different to that stored
     already it triggers the new data to be saved into the settings file.
     """
-    old_directory = get_sketch_path()
     new_directory = browse_dir()
     if new_directory != '':
         ServerCompilerSettings().sketch_dir = new_directory
-        new_directory = get_sketch_path()
-        if old_directory != new_directory:
-            ServerCompilerSettings().save_settings()
-
     return new_directory
 
 

@@ -64,7 +64,7 @@ class ServerCompilerSettings(object):
 
     def __initialise(self):
         # Create variables to be used with accessors
-        self.__launch_IDE_option__ = False
+        self.__launch_IDE_option__ = None
         self.__compiler_dir__ = None
         self.__sketch_dir__ = None
         self.__sketch_name__ = None
@@ -72,6 +72,8 @@ class ServerCompilerSettings(object):
         self.__arduino_board_value__ = None
         self.__serial_port_key__ = None
         self.__serial_port_value__ = None
+        # Since this value is not saved in the settings file initialise here
+        self.set_launch_ide_default()
         # Load settings from file
         self.read_settings()
 
@@ -92,22 +94,38 @@ class ServerCompilerSettings(object):
         if os.path.exists(new_compiler_dir) and\
                 new_compiler_dir.endswith('.exe'):
             self.__compiler_dir__ = new_compiler_dir
-            print('\nCompiler directory set to: %s' % self.__compiler_dir__)
+            print('\nCompiler directory set to:\n\t%s' % self.__compiler_dir__)
             self.save_settings()
         else:
             print('\nThe provided compiler path is not valid !!!')
             print('\t' + new_compiler_dir)
             if self.__compiler_dir__:
-                print('Previous compiler path maintained:')
+                print('Previous compiler path maintained:\n\t%s' %
+                      self.__compiler_dir__)
             else:
-                print('Default compiler path set:')
                 self.set_compiler_dir_default()
-            print('\t' + self.__compiler_dir__)
+                print('Default compiler path set:\n\t%s' %
+                      self.__compiler_dir__)
+                self.save_settings()
 
     compiler_dir = property(get_compiler_dir, set_compiler_dir)
 
     def set_compiler_dir_default(self):
-        self.__compiler_dir__ = 'C:\\IDEs\\arduino-1.6\\arduino.exe'
+        self.__compiler_dir__ = None
+
+    def set_compiler_dir_from_file(self, new_compiler_dir):
+        """ The compiler dir must be full path to an .exe file. """
+        # FIXME: this is a windows only check (.exe), needs to be
+        #        updated to be compatible with linux and MacOS
+        if os.path.exists(new_compiler_dir) and\
+                new_compiler_dir.endswith('.exe'):
+            self.__compiler_dir__ = new_compiler_dir
+        else:
+            print('\nThe provided compiler path in the settings file is not ' +
+                  'valid !!!')
+            print('\t%s' % new_compiler_dir)
+            self.set_compiler_dir_default()
+            print('Default compiler path set:\n\t%s' % self.__compiler_dir__)
 
     #
     # Sketch name accessors
@@ -119,22 +137,34 @@ class ServerCompilerSettings(object):
         """ Only accept letters, numbers, underscores and dashes. """
         if re.match("^[\w\d_-]*$", new_sketch_name):
             self.__sketch_name__ = new_sketch_name
-            print('\nSketch name set to: %s' % self.__sketch_name__)
+            print('\nSketch name set to:\n\t%s' % self.__sketch_name__)
             self.save_settings()
         else:
-            print('\nProvided Sketch name is not valid: !!!')
-            print('\t' + new_sketch_name)
+            print('\nProvided Sketch name contains invalid characters: !!!')
+            print('\t%s' % new_sketch_name)
             if self.__sketch_name__:
-                print('Previous Sketch name maintained:')
+                print('Previous Sketch name maintained:\n\t%s' %
+                      self.__sketch_name__)
             else:
-                print('Default Sketch name set:')
                 self.set_sketch_name_default()
-            print('\t' + self.__sketch_name__)
+                print('Default Sketch name set:\n\t%s' %
+                      self.__sketch_name__)
+                self.save_settings()
 
     sketch_name = property(get_sketch_name, set_sketch_name)
 
     def set_sketch_name_default(self):
          self.__sketch_name__ = 'ArdublocklySketch'
+
+    def set_sketch_name_from_file(self, new_sketch_name):
+        """ Only accept letters, numbers, underscores and dashes. """
+        if re.match("^[\w\d_-]*$", new_sketch_name):
+            self.__sketch_name__ = new_sketch_name
+        else:
+            print('\nSettings file Sketch name contains invalid characters: !!')
+            print('\t%s' % new_sketch_name.decode("utf8"))
+            self.set_sketch_name_default()
+            print('Default Sketch name set:\n\t%s' % self.__sketch_name__)
 
     #
     #  Sketch Directory accessors
@@ -146,23 +176,35 @@ class ServerCompilerSettings(object):
         """ The sketch directory must be a folder """
         if os.path.isdir(new_sketch_dir):
             self.__sketch_dir__ = new_sketch_dir
-            print('\nSketch directory set to: %s' % self.__sketch_dir__)
+            print('\nSketch directory set to:\n\t%s' % self.__sketch_dir__)
             self.save_settings()
         else:
             print('\nThe provided sketch directory is not valid !!!')
-            print('\t' + new_sketch_dir)
+            print('\t%s' % new_sketch_dir)
             if self.__sketch_dir__:
-                print('Previous Sketch directory maintained:')
+                print('Previous Sketch directory maintained:\n\t%s' %
+                      self.__sketch_dir__)
             else:
-                print('Default Sketch directory set:')
                 self.set_sketch_dir_default()
-            print('\t' + self.__sketch_dir__)
+                print('Default Sketch directory set:\n\t%s' %
+                      self.__sketch_dir__)
+                self.save_settings()
 
     sketch_dir = property(get_sketch_dir, set_sketch_dir)
 
     def set_sketch_dir_default(self):
         """ Sketch default location is the current working directory. """
         self.__sketch_dir__ = os.getcwd()
+
+    def set_sketch_dir_from_file(self, new_sketch_dir):
+        """ The sketch directory must be a folder """
+        if os.path.isdir(new_sketch_dir):
+            self.__sketch_dir__ = new_sketch_dir
+        else:
+            print('\nSettings file sketch directory is not valid !!!')
+            print('\t%s' % new_sketch_dir)
+            self.set_sketch_dir_default()
+            print('Default Sketch directory set:\n\t%s' % self.__sketch_dir__)
 
     #
     # Arduino Board and board lists accessors
@@ -174,17 +216,19 @@ class ServerCompilerSettings(object):
         if new_board in self.__arduino_types__:
             self.__arduino_board_value__ = self.__arduino_types__[new_board]
             self.__arduino_board_key__ = new_board
-            print('\nArduino Board set to: %s' % self.__arduino_board_key__)
+            print('\nArduino Board set to:\n\t%s' % self.__arduino_board_key__)
             self.save_settings()
         else:
             print('\nProvided Arduino Board does not exist: !!!')
-            print('\t' + new_board)
+            print('\t%s' % new_board)
             if self.__arduino_board_key__ and self.__arduino_board_value__:
-                print('Previous Arduino board type maintained:')
+                print('Previous Arduino board type maintained:\n\t%s' %
+                      self.__arduino_board_key__)
             else:
-                print('Default Arduino board type set:')
                 self.set_arduino_board_default()
-            print('\t' + self.__arduino_board_key__)
+                print('Default Arduino board type set:\n\t%s' %
+                      self.__arduino_board_key__)
+                self.save_settings()
 
     arduino_board = property(get_arduino_board, set_arduino_board)
 
@@ -192,6 +236,17 @@ class ServerCompilerSettings(object):
         self.__arduino_board_key__ = sorted(self.__arduino_types__.keys())[0]
         self.__arduino_board_value__ = \
             self.__arduino_types__[self.__arduino_board_key__]
+
+    def set_arduino_board_from_file(self, new_board):
+        if new_board in self.__arduino_types__:
+            self.__arduino_board_value__ = self.__arduino_types__[new_board]
+            self.__arduino_board_key__ = new_board
+        else:
+            print('\nSettings file Arduino Board does not exist: !!!')
+            print('\t%s' % new_board)
+            self.set_arduino_board_default()
+            print('Default Arduino board type set:\n\t%s' %
+                  self.__arduino_board_key__)
 
     def get_arduino_board_flag(self):
         return self.__arduino_board_value__
@@ -238,11 +293,9 @@ class ServerCompilerSettings(object):
         """
         Checks available Serial Ports and populates the serial port dictionary.
         If the new serial port is not in the dictionary or the dictionary is
-        empty it prints an error.
+        empty it prints an error in the console.
         :param new_port: the new port to set
         """
-        # In this case first we'll check if the new value was present in the
-        # dictionary, before we populate it again
         if new_port in self.__serial_ports__:
             self.__serial_port_value__ = self.__serial_ports__[new_port]
             self.__serial_port_key__ = new_port
@@ -256,19 +309,19 @@ class ServerCompilerSettings(object):
                 print('\nThe selected Serial Port is no longer available !!!')
                 self.__serial_port_key__ = None
                 self.__serial_port_value__ = None
-            else:
-                print('\nSerial Port set to: %s' % self.__serial_port_value__)
+            print('\nSerial Port set to:\n\t%s' % self.__serial_port_value__)
+            self.save_settings()
         else:
             print('\nProvided Serial Port is not valid: !!!')
-            print('\t' + new_port)
+            print('\n\t%s' % new_port)
             if self.__serial_port_key__ and self.__serial_port_value__:
-                print('Previous Serial Port maintained:')
+                print('Previous Serial Port maintained:\n\t%s' %
+                      self.__serial_port_value__)
             else:
-                print('Default Serial Port set:')
                 self.set_serial_port_default()
-            print('\t%s' % self.__serial_port_value__)
-        # Whatever the result, save to the settings file
-        self.save_settings()
+                print('Default Serial Port set:\n\t%s' %
+                      self.__serial_port_value__)
+                self.save_settings()
 
     serial_port = property(get_serial_port, set_serial_port)
 
@@ -285,6 +338,28 @@ class ServerCompilerSettings(object):
             self.__serial_port_key__ = sorted(self.__serial_ports__.keys())[0]
             self.__serial_port_value__ = \
                 self.__serial_ports__[self.__serial_port_key__]
+
+    def set_serial_port_from_file(self, new_port_value):
+        """
+        Checks available Serial Ports and populates the serial port dictionary.
+        If the new serial port is not in the dictionary or the dictionary is
+        empty it prints an error in the console.
+        :param new_port: the new port to set
+        """
+        # Check if the settings file value is present in available ports list
+        set_default = True
+        self.populate_serial_port_list()
+        if self.__serial_ports__:
+            for key, value in self.__serial_ports__.items():
+                if new_port_value == value:
+                    self.__serial_port_key__ = key
+                    self.__serial_port_value__ = value
+                    set_default = False
+        if set_default:
+            print('\nSettings file Serial Port is not currently available: !!!')
+            print('\t%s' % new_port_value)
+            self.set_serial_port_default()
+            print('Default Serial Port set:\n\t%s' % self.__serial_port_value__)
 
     def get_serial_port_flag(self):
         """
@@ -342,23 +417,36 @@ class ServerCompilerSettings(object):
     def set_launch_ide(self, new_launch_option):
         if new_launch_option in self.__IDE_launch_options__:
             self.__launch_IDE_option__ = new_launch_option
-            print('\nIDE options set to: %s' % self.__launch_IDE_option__)
+            print('\nIDE options set to:\n\t%s' %
+                  self.__IDE_launch_options__[self.__launch_IDE_option__])
             self.save_settings()
         else:
             print('\nThe provided "Launch IDE option" is not valid !!!')
-            print('\t' + new_launch_option)
+            print('\n\t%s' % new_launch_option)
             if self.__launch_IDE_option__:
-                print('Previous "Launch IDE option" maintained:')
+                print('Previous "Launch IDE option" maintained:\n\t%s' %
+                      self.__IDE_launch_options__[self.__launch_IDE_option__])
             else:
-                print('Default "Launch IDE option" set:')
                 self.set_launch_ide_default()
-            print('\t' + self.__launch_IDE_option__)
+                print('Default "Launch IDE option" set:\n\t%s' %
+                      self.__IDE_launch_options__[self.__launch_IDE_option__])
+                self.save_settings()
 
     launch_IDE_option = property(get_launch_ide, set_launch_ide)
 
     def set_launch_ide_default(self):
         self.__launch_IDE_option__ = \
             sorted(self.__IDE_launch_options__.keys())[0]
+
+    def set_launch_ide_from_file(self, new_launch_option):
+        if new_launch_option in self.__IDE_launch_options__:
+            self.__launch_IDE_option__ = new_launch_option
+        else:
+            print('\nSettings file "Launch IDE option" is not valid !!!')
+            print('\n\t%s' % new_launch_option)
+            self.set_launch_ide_default()
+            print('Default "Launch IDE option" set:\n\t%s' %
+                  self.__launch_IDE_option__)
 
     def get_launch_ide_options(self):
         return self.__IDE_launch_options__
@@ -414,16 +502,14 @@ class ServerCompilerSettings(object):
         """
         settings_dict = self.read_settings_file()
         if settings_dict:
-            #try:
-            self.compiler_dir = settings_dict['arduino_exec_path']
-            self.arduino_board = settings_dict['arduino_board']
-            self.serial_port = settings_dict['arduino_serial_port']
-            self.sketch_name = settings_dict['sketch_name']
-            self.sketch_dir = settings_dict['sketch_directory']
+            self.set_compiler_dir_from_file(settings_dict['arduino_exec_path'])
+            self.set_arduino_board_from_file(settings_dict['arduino_board'])
+            self.set_serial_port_from_file(settings_dict['arduino_serial_port'])
+            self.set_sketch_name_from_file(settings_dict['sketch_name'])
+            self.set_sketch_dir_from_file(settings_dict['sketch_directory'])
         else:
             print('\nSettings will be set to the default values.')
             self.set_default_settings()
-            self.save_settings()
 
         # Printing the settings to be able to easily spot issues at load
         print('\nFinal settings loaded:')
@@ -434,6 +520,10 @@ class ServerCompilerSettings(object):
         print('\tSketch Name: %s' % self.__sketch_name__)
         print('\tSketch Directory: %s' % self.__sketch_dir__)
         print('\tLaunch IDE option: %s' % self.__launch_IDE_option__)
+
+        # The read X_from_file() functions do not save new settings and neither
+        # does the set_default_settings() function, so save them either way.
+        self.save_settings()
 
     def read_settings_file(self):
         """
