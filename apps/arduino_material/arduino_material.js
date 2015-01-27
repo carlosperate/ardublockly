@@ -263,6 +263,7 @@ ArduinoMaterial.sendCode = function() {
   toast('Sending sketch to Arduino IDE...', 4000);
   ArduServerCompiler.sendSketchToServer(
       ArduinoMaterial.generateArduino(), ArduinoMaterial.sendCodeReturn);
+
   // Change button colour and add spinner during loading time
   document.getElementById('button_run_spinner').style.display = 'block';
   var button_el = document.getElementById('button_run');
@@ -279,6 +280,7 @@ ArduinoMaterial.sendCodeReturn = function(data_back) {
   var button_el = document.getElementById('button_run');
   var button_class = button_el.className;
   button_el.className = button_class.replace('grey', 'red');
+
   ArduinoMaterial.arduinoIdeModal(data_back);
 };
 

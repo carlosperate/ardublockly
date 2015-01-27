@@ -21,10 +21,7 @@ var ArduServerCompiler = {};
 ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
   var request = ArduServerCompiler.createAjaxRequest();
   request.open("POST", url, true);
-  //TODO: Look for a non-deprecated content-type
   request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-  request.setRequestHeader("Content-length", params.length);
-  request.setRequestHeader("Connection", "close");
 
   // The data received is JSON, so it needs to be converted into the right
   // format to be displayed in the page.
@@ -49,10 +46,7 @@ ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
 ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
   var request = ArduServerCompiler.createAjaxRequest();
   request.open("POST", url, true);
-  //TODO: Look for a non-deprecated content-type
   request.setRequestHeader("Content-type","text/plain");
-  request.setRequestHeader("Content-length", data.length);
-  request.setRequestHeader("Connection", "close");
 
   // The data received is JSON, so it needs to be converted into the right
   // format to be displayed in the page.

@@ -365,7 +365,10 @@ body {
 
 /* Need larger icons in buttons */
 .mdi-action-visibility {
-  font-size: 2rem !important;
+  font-size: 1.5rem !important;
+}
+.mdi-action-visibility-off {
+  font-size: 1.5rem !important;
 }
 #button_run .mdi-av-play-arrow {
   font-size: 2.5rem !important;
