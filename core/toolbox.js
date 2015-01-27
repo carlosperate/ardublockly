@@ -29,10 +29,10 @@ goog.provide('Blockly.Toolbox');
 goog.require('Blockly.Flyout');
 goog.require('goog.events.BrowserFeature');
 goog.require('goog.html.SafeHtml');
+goog.require('goog.math.Rect');
 goog.require('goog.style');
 goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.ui.tree.TreeNode');
-goog.require('goog.math.Rect');
 
 
 /**
@@ -177,6 +177,11 @@ Blockly.Toolbox.prototype.populate_ = function() {
           syncTrees(childIn, childOut);
         }
       } else if (name == 'HR') {
+        // <hr> tag is deprecated, use <sep></sep> instead.
+        // https://github.com/google/blockly/issues/50
+        console.warn('The <hr> separator tag in the toolbox XML needs to be ' +
+                     'changed to <sep></sep> (due to a bug in IE).');
+      } else if (name == 'SEP') {
         treeOut.add(new Blockly.Toolbox.TreeSeparator());
       } else if (name == 'BLOCK') {
         treeOut.blocks.push(childIn);
