@@ -260,21 +260,26 @@ ArduinoMaterial.setIdeSettings = function() {
  * message from server).
  */
 ArduinoMaterial.sendCode = function() {
-  toast('"Run code" functionality still incomplete', 4000);
+  toast('Sending sketch to Arduino IDE...', 4000);
   ArduServerCompiler.sendSketchToServer(
       ArduinoMaterial.generateArduino(), ArduinoMaterial.sendCodeReturn);
+  // Change button colour and add spinner during loading time
   document.getElementById('button_run_spinner').style.display = 'block';
+  var button_el = document.getElementById('button_run');
+  var button_class = button_el.className;
+  button_el.className = button_class.replace('red', 'grey');
 };
 
 /**
  * Send the Arduino Code to the ArduServerCompiler to process
  */
 ArduinoMaterial.sendCodeReturn = function(data_back) {
+  // Change back button colour and remove spinner
   document.getElementById('button_run_spinner').style.display = 'none';
-  ArduinoMaterial.materialAlert(
-      'Compilation ended',
-      'Message back from the compiler: \n' +
-      data_back);
+  var button_el = document.getElementById('button_run');
+  var button_class = button_el.className;
+  button_el.className = button_class.replace('grey', 'red');
+  ArduinoMaterial.arduinoIdeModal(data_back);
 };
 
 /**

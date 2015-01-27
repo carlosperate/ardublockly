@@ -19,11 +19,11 @@ ArduinoMaterial.materializeJsInit = function() {
   $(document).ready(function() {
     // Accordion collapsible
     $('.collapsible').collapsible();
-    // Nav bar
+    // Navigation bar, converts in menu in low res
     $('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70});
-    // Drop down menu
+    // Drop down menus
     $(".dropdown-button").dropdown({hover: false});
-    // Pop up messages
+    // Pop up messages using modals (android dialogs)
     $('.modal-trigger').leanModal({
       dismissible: true,
       opacity: .5,
@@ -32,7 +32,7 @@ ArduinoMaterial.materializeJsInit = function() {
      });
     // Select menus
     $('select').material_select();
-    // Pop-up tooltip
+    // Pop-up tool tips
     $('.tooltipped').tooltip({"delay": 50});
   });
 };
@@ -107,9 +107,10 @@ ArduinoMaterial.resizeBlocklyWorkspace = function() {
 };
 
 /**
- * Compute the absolute coordinates and dimensions of an HTML element.
+ * Sets the text for a "Materialize Modal" (like an android Dialog) to have
+ * alert-like HTML messages.
  * @param {!string} title HTML to include in title.
- * @param {!string} body HTML to include in body.
+ * @param {!element} body HTML to include in body.
  * @param {boolean=} confirm Indicates if the user is shown and option to just
  *                            'Ok' or 'Ok and cancel'.
  * @param {string=|function=} callback If confirm option is selected this would
@@ -117,7 +118,8 @@ ArduinoMaterial.resizeBlocklyWorkspace = function() {
  */
 ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
   $("#gen_alert_title").text(title);
-  $("#gen_alert_body").text(body);
+  $("#gen_alert_body").text('');
+  $("#gen_alert_body").append(body);
   if (confirm == true) {
     $("#gen_alert_cancel_div").css({'display': 'block'});
     if (callback) {
@@ -129,6 +131,17 @@ ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
   }
 
   $('#gen_alert').openModal();
+  window.location.hash = '';
+};
+
+/**
+ * Populates the Arduino output data modal and opens it.
+ * @param {!element} body_el HTML to include into dialog content.
+ */
+ArduinoMaterial.arduinoIdeModal = function(body_el) {
+  $("#arduino_dialog_body").text('');
+  $("#arduino_dialog_body").append(body_el);
+  $('#arduino_dialog').openModal();
   window.location.hash = '';
 };
 

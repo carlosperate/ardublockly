@@ -163,15 +163,15 @@
     </div>
     <div class="settings_div">
       <label>Arduino Board:</label>
-      <select name="board" id="board">
+      <select name="settings_board" id="board">
         <option value="uno">Uno</option>
         <option value="leonardo">Leonardo</option>
         <option value="mega">Mega</option>
       </select>
     </div>
-    <div class="settings_div tooltipped" data-position="top" data-tooltip="This function has not yet been implemented">
+    <div class="settings_div">
       <label>COM Port:</label>
-      <select name="serial_port" id="serial_port">
+      <select name="settings_serial" id="serial_port">
         <option value="COM4">COM 4</option>
         <option value="COM5">COM 5</option>
         <option value="COM6">COM 6</option>
@@ -179,7 +179,7 @@
     </div>
     <div class="settings_div">
       <label>IDE:</label> <br>
-      <select name="ide_settings" id="ide_settings" onchange="ArduinoMaterial.setIdeSettings(this.value)">
+      <select name="settings_ide  " id="ide_settings" onchange="ArduinoMaterial.setIdeSettings(this.value)">
         <option value="ide_upload">Compile and Upload sketchaaa</option>
         <option value="ide_only">Load sketch in IDE onlyaaa</option>
       </select>
@@ -192,9 +192,20 @@
     </div>
   </div>
 
+  <!-- Arduino IDE Modal: Content is loaded using Javascript to display dialog -->
+  <div id="arduino_dialog" class="modal">
+    <div id="arduino_dialog_body">Empty Arduino modal.</div>
+    <div class="two_halves_container return_container">
+      <div class="two_halves_right" style="text-align:right">
+        <a href="#" class="waves-effect btn-flat modal-close">Return</a>
+      </div>
+      <div class="two_halves_left" style="text-align:center"></div>
+    </div>
+  </div>
+
   <!-- General Alert: Content is loaded using Javascript to display alerts -->
   <div id="gen_alert" class="modal modal_small">
-    <h4 id="gen_alert_title">Alert Title</h4>
+    <h4 id="gen_alert_title">Empty Alert</h4>
     <p><span id="gen_alert_body">Alert text</span></p>
     <div class="two_halves_container">
       <div id="gen_alert_ok_div" class="two_halves_right" style="text-align:center">

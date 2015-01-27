@@ -1,14 +1,12 @@
 from __future__ import unicode_literals, absolute_import
 import os
 import re
-
 try:
     # 2.x name
     import ConfigParser
 except ImportError:
     # 3.x name
     import configparser as ConfigParser
-
 import ArduinoServerCompiler.SerialPort
 
 
@@ -122,7 +120,7 @@ class ServerCompilerSettings(object):
             self.__compiler_dir__ = new_compiler_dir
         else:
             print('\nThe provided compiler path in the settings file is not ' +
-                  'valid !!!')
+                  'valid:')
             print('\t%s' % new_compiler_dir)
             self.set_compiler_dir_default()
             print('Default compiler path set:\n\t%s' % self.__compiler_dir__)
@@ -161,7 +159,7 @@ class ServerCompilerSettings(object):
         if re.match("^[\w\d_-]*$", new_sketch_name):
             self.__sketch_name__ = new_sketch_name
         else:
-            print('\nSettings file Sketch name contains invalid characters: !!')
+            print('\nSettings file Sketch name contains invalid characters:')
             print('\t%s' % new_sketch_name.decode("utf8"))
             self.set_sketch_name_default()
             print('Default Sketch name set:\n\t%s' % self.__sketch_name__)
@@ -201,7 +199,7 @@ class ServerCompilerSettings(object):
         if os.path.isdir(new_sketch_dir):
             self.__sketch_dir__ = new_sketch_dir
         else:
-            print('\nSettings file sketch directory is not valid !!!')
+            print('\nSettings file sketch directory is not valid:')
             print('\t%s' % new_sketch_dir)
             self.set_sketch_dir_default()
             print('Default Sketch directory set:\n\t%s' % self.__sketch_dir__)
@@ -242,7 +240,7 @@ class ServerCompilerSettings(object):
             self.__arduino_board_value__ = self.__arduino_types__[new_board]
             self.__arduino_board_key__ = new_board
         else:
-            print('\nSettings file Arduino Board does not exist: !!!')
+            print('\nSettings file Arduino Board does not exist:')
             print('\t%s' % new_board)
             self.set_arduino_board_default()
             print('Default Arduino board type set:\n\t%s' %
@@ -313,7 +311,7 @@ class ServerCompilerSettings(object):
             self.save_settings()
         else:
             print('\nProvided Serial Port is not valid: !!!')
-            print('\n\t%s' % new_port)
+            print('\t%s' % new_port)
             if self.__serial_port_key__ and self.__serial_port_value__:
                 print('Previous Serial Port maintained:\n\t%s' %
                       self.__serial_port_value__)
@@ -356,7 +354,7 @@ class ServerCompilerSettings(object):
                     self.__serial_port_value__ = value
                     set_default = False
         if set_default:
-            print('\nSettings file Serial Port is not currently available: !!!')
+            print('\nSettings file Serial Port is not currently available:')
             print('\t%s' % new_port_value)
             self.set_serial_port_default()
             print('Default Serial Port set:\n\t%s' % self.__serial_port_value__)
@@ -422,7 +420,7 @@ class ServerCompilerSettings(object):
             self.save_settings()
         else:
             print('\nThe provided "Launch IDE option" is not valid !!!')
-            print('\n\t%s' % new_launch_option)
+            print('\t%s' % new_launch_option)
             if self.__launch_IDE_option__:
                 print('Previous "Launch IDE option" maintained:\n\t%s' %
                       self.__IDE_launch_options__[self.__launch_IDE_option__])
@@ -442,8 +440,8 @@ class ServerCompilerSettings(object):
         if new_launch_option in self.__IDE_launch_options__:
             self.__launch_IDE_option__ = new_launch_option
         else:
-            print('\nSettings file "Launch IDE option" is not valid !!!')
-            print('\n\t%s' % new_launch_option)
+            print('\nSettings file "Launch IDE option" is not valid:')
+            print('\t%s' % new_launch_option)
             self.set_launch_ide_default()
             print('Default "Launch IDE option" set:\n\t%s' %
                   self.__launch_IDE_option__)
@@ -471,17 +469,19 @@ class ServerCompilerSettings(object):
         # IDE Section
         settings_parser.add_section('Arduino_IDE')
         settings_parser.set(
-            'Arduino_IDE', 'arduino_exec_path', self.compiler_dir)
+            'Arduino_IDE', 'arduino_exec_path', '%s' % self.compiler_dir)
         settings_parser.set(
-            'Arduino_IDE', 'arduino_board', self.arduino_board)
+            'Arduino_IDE', 'arduino_board', '%s' % self.arduino_board)
         settings_parser.set(
-            'Arduino_IDE', 'arduino_serial_port', self.__serial_port_value__)
+            'Arduino_IDE',
+            'arduino_serial_port',
+            '%s' % self.__serial_port_value__)
         # Sketch section
         settings_parser.add_section('Arduino_Sketch')
         settings_parser.set(
-            'Arduino_Sketch', 'sketch_name', self.sketch_name)
+            'Arduino_Sketch', 'sketch_name', '%s' % self.sketch_name)
         settings_parser.set(
-            'Arduino_Sketch', 'sketch_directory', self.sketch_dir)
+            'Arduino_Sketch', 'sketch_directory', '%s' % self.sketch_dir)
 
         # Set the path and create/overwrite the file
         try:

@@ -146,16 +146,19 @@ body {
 @media only screen and (min-width: 0) {
   .modal_small {
     max-width: 75% !important;
+    width: 75% !important;
   }
 }
 @media only screen and (min-width: 601px) {
   .modal_small {
     max-width: 55% !important;
+    width: 55% !important;
   }
 }
 @media only screen and (min-width: 993px) {
   .modal_small {
     max-width: 35% !important;
+    width: 35% !important;
   }
 }
 
@@ -187,13 +190,30 @@ body {
 /************/
 /*  Others  */
 /************/
-/*  Settings modal dialog  */
+/* Settings modal dialog */
 .settings_div {
   margin: 24px 0px;
   width: 100%;
 }
 .return_container {
   padding: 32px 24px 32px 24px !important;
+}
+
+/* Arduino output modal dialog */
+#arduino_dialog_body {
+  padding-top: 25px;
+}
+.arduino_dialog_out {}
+.arduino_dialog_out_error {
+  color: #c62828;   /* red 800*/
+  padding-top: 25px;
+  display: block;
+}
+.arduino_dialog_success {
+  color: #2e7d32;   /* green 800 */
+}
+.arduino_dialog_failure {
+  color: #c62828;   /* red 800*/
 }
 
 /* Edit logo for code and xml collapsibles*/
@@ -332,6 +352,14 @@ body {
   /* Increase the text size of the side menu */
   ul.side-nav i {
     font-size: 1.8rem !important;
+  }
+}
+
+/* Increase the size of Materialize Modal in small res */
+@media only screen and (max-width : 600px) {
+  .modal {
+    width: 80% !important;
+    max-width: 80% !important;
   }
 }
 

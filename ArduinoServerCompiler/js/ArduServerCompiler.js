@@ -19,26 +19,7 @@ var ArduServerCompiler = {};
  * @return False if an error occurred 
  */
 ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
-  var request = false;
-  try {
-    // Firefox, Chrome, IE7+, Opera, Safari
-    request = new XMLHttpRequest();
-  }
-  catch (e) {
-    // IE6-
-    try {
-      request = new ActiveXObject("Msxml2.XMLHTTP");
-    }
-    catch (e) {
-      try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      catch (e) {
-        alert("Your browser does not support AJAX!");
-        return false;
-      }
-    }
-  }
+  var request = ArduServerCompiler.createAjaxRequest();
   request.open("POST", url, true);
   //TODO: Look for a non-deprecated content-type
   request.setRequestHeader("Content-type","application/x-www-form-urlencoded");
@@ -66,26 +47,7 @@ ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
  * @return False if an error occurred 
  */
 ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
-  var request = false;
-  try {
-    // Firefox, Chrome, IE7+, Opera, Safari
-    request = new XMLHttpRequest();
-  }
-  catch (e) {
-    // IE6-
-    try {
-      request = new ActiveXObject("Msxml2.XMLHTTP");
-    }
-    catch (e) {
-      try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      catch (e) {
-        alert("Your browser does not support AJAX!");
-        return false;
-      }
-    }
-  }
+  var request = ArduServerCompiler.createAjaxRequest();
   request.open("POST", url, true);
   //TODO: Look for a non-deprecated content-type
   request.setRequestHeader("Content-type","text/plain");
@@ -96,13 +58,43 @@ ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
   // format to be displayed in the page.
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
-      callback(request.responseText);
+      var el = ArduServerCompiler.createElementFromJson(request.responseText);
+      callback(el);
     }
   }
 
   // Send the data
   request.send(data);
 };
+
+/**
+ * Creates an AJAX request 
+ * @return An XML HTTP Request
+ */
+ArduServerCompiler.createAjaxRequest = function() {
+  var request = false;
+  try {
+    // Firefox, Chrome, IE7+, Opera, Safari
+    request = new XMLHttpRequest();
+  }
+  catch (e) {
+    // IE6 and earlier
+    try {
+      request = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e) {
+      try {
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      catch (e) {
+        throw 'Your browser does not support AJAX. You will not be able to' +
+              'Upload a sketch';
+        request = null;
+      }
+    }
+  }
+  return request;
+}
 
 /**
  * Creates an HTML element based on the JSON data received from the server.
@@ -114,15 +106,15 @@ ArduServerCompiler.createElementFromJson = function(json_data) {
   var parsed_json = JSON.parse(json_data);
   var element;
 
-  if (parsed_json.element == "text_input") {
+  if (parsed_json.element == 'text_input') {
     // Simple text input
-    element = document.createElement("input");
+    element = document.createElement('input');
     element.setAttribute('type', 'text');
     element.setAttribute('value', parsed_json.display_text);
-  } else if (parsed_json.element == "dropdown") {
+  }else if (parsed_json.element == 'dropdown') {
     // Drop down list of unknown length with a selected item
-    element = document.createElement("select");
-    element.name = parsed_json.setting_type;
+    element = document.createElement('select');
+    element.name = parsed_json.response_type;
     for (var i=0; i<parsed_json.options.length; i++) {
       var option = document.createElement("option"); 
       option.value = parsed_json.options[i].value;
@@ -133,6 +125,31 @@ ArduServerCompiler.createElementFromJson = function(json_data) {
       }
       element.appendChild(option);
     }
+  } else if (parsed_json.element == 'div_ide_output') {
+    // Formatted text for the Arduino IDE CLI output
+    var el_title = document.createElement('h4');
+    el_title.innerHTML = parsed_json.conclusion;
+    if (parsed_json.success == true) {
+      el_title.className = 'arduino_dialog_success';
+    } else {
+      el_title.className = 'arduino_dialog_failure';
+    }
+
+    var el_out = document.createElement('span');
+    el_out.className = 'arduino_dialog_out';
+    el_out.innerHTML = parsed_json.output.split('\n').join('<br />');
+
+    element = document.createElement("div");
+    element.appendChild(el_title);
+    element.appendChild(el_out);
+
+    // Only ouput error message if it was not successful
+    if (parsed_json.success == false) {
+      var el_err = document.createElement('span');
+      el_err.className = 'arduino_dialog_out_error'
+      el_err.innerHTML = parsed_json.error_output.split('\n').join('<br />');
+      element.appendChild(el_err);
+    } 
   } else {
     //TODO: Not recognised alert the user/developer somehow
   }
@@ -300,7 +317,7 @@ ArduServerCompiler.setIdeOptions = function(ide_option, callback) {
  */
 ArduServerCompiler.sendSketchToServer = function(code, callback) {
   ArduServerCompiler.ajaxPostPlain(
-      "ArduServerCompiler.html",
+      "SendSketch.html",
       code,
       callback);
 };
