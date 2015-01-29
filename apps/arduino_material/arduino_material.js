@@ -268,7 +268,7 @@ ArduinoMaterial.sendCode = function() {
   document.getElementById('button_run_spinner').style.display = 'block';
   var button_el = document.getElementById('button_run');
   var button_class = button_el.className;
-  button_el.className = button_class.replace('red', 'grey');
+  button_el.className = button_class.replace('arduino_orange', 'grey');
 };
 
 /**
@@ -279,7 +279,7 @@ ArduinoMaterial.sendCodeReturn = function(data_back) {
   document.getElementById('button_run_spinner').style.display = 'none';
   var button_el = document.getElementById('button_run');
   var button_class = button_el.className;
-  button_el.className = button_class.replace('grey', 'red');
+  button_el.className = button_class.replace('grey', 'arduino_orange');
 
   ArduinoMaterial.arduinoIdeModal(data_back);
 };
