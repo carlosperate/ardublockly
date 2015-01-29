@@ -3,7 +3,7 @@
  * Visual Blocks Language
  *
  * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
+ * https://developers.google.com/blockly/
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,10 @@ goog.provide('Blockly.Arduino');
 
 goog.require('Blockly.Generator');
 
+/**
+ * Arduino code generator.
+ * @type !Blockly.Generator
+ */
 Blockly.Arduino = new Blockly.Generator('Arduino');
 
 /**
@@ -82,11 +86,12 @@ var profile = {
            ["11", "11"]],
     interrupt: [["Int_1", "1"], ["Int_2", "2"], ["Int_3", "3"], ["Int_4", "4"],
                 ["Int_5", "5"]],
-    serial : [["300", "300"], ["600", "600"], ["1200", "1200"],
-              ["2400", "2400"], ["4800", "4800"], ["9600", "9600"],
-              ["14400", "14400"], ["19200", "19200"], ["28800", "28800"],
-              ["31250", "31250"], ["38400", "38400"],["57600", "57600"],
-              ["115200", "115200"]],
+    serial : [["serial", "Serial"]],
+    serial_speed : [["300", "300"], ["600", "600"], ["1200", "1200"],
+                    ["2400", "2400"], ["4800", "4800"], ["9600", "9600"],
+                    ["14400", "14400"], ["19200", "19200"], ["28800", "28800"],
+                    ["31250", "31250"], ["38400", "38400"],["57600", "57600"],
+                    ["115200", "115200"]],
     builtin_led: [["BUILTIN_1", "13"]],
     pin_types: { INPUT: "INPUT", OUTPUT: "OUTPUT", PWM: "PWM", SERVO: "SERVO",
                  STEPPER: "STEPPER", SPI: "SPI" },
@@ -111,7 +116,8 @@ var profile = {
     //53 digital
     //15 analog
     //6 interrupts
-    //same serial
+    //4 serials
+    //same serial_types
     //same types
   },
   arduino_leonardo:{
@@ -129,8 +135,10 @@ profile["default"] = profile["arduino"];
 
 /**
  * Initialise the database of variable names.
+ * @param {Blockly.Workspace=} opt_workspace Workspace to generate code from.
+ *     Defaults to main workspace.
  */
-Blockly.Arduino.init = function() {
+Blockly.Arduino.init = function(opt_workspace) {
   // Create a dictionary of definitions to be printed before setups.
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of setups to be printed before the code.

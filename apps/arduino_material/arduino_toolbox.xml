@@ -208,6 +208,8 @@
   </category>
   <sep></sep>
   <category name="Comms">
+    <block type="serial_print"></block>
+    <block type="serial_speed"></block>
     <block type="spi_config"></block>
     <block type="spi_transfer"></block>
   </category>

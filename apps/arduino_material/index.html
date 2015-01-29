@@ -20,6 +20,8 @@
   <!--script src="../../blocks_compressed.js"></script-->
   <script src="../../generators/arduino.js"></script>
   <script src="../../blocks/arduino/io.js"></script>
+  <script src="../../blocks/arduino/map.js"></script>
+  <script src="../../blocks/arduino/serial.js"></script>
   <script src="../../blocks/logic.js"></script>
   <script src="../../blocks/loops.js"></script>
   <script src="../../blocks/math.js"></script>
@@ -28,13 +30,14 @@
   <script src="../../blocks/colour.js"></script>
   <script src="../../blocks/variables.js"></script>
   <script src="../../blocks/procedures.js"></script>
-  <script src="../../generators/arduino/base.js"></script>
   <script src="../../generators/arduino/io.js"></script>
   <script src="../../generators/arduino/lists.js"></script>
   <script src="../../generators/arduino/logic.js"></script>
   <script src="../../generators/arduino/loops.js"></script>
+  <script src="../../generators/arduino/map.js"></script>
   <script src="../../generators/arduino/math.js"></script>
   <script src="../../generators/arduino/procedures.js"></script>
+  <script src="../../generators/arduino/serial.js"></script>
   <script src="../../generators/arduino/servo.js"></script>
   <script src="../../generators/arduino/spi.js"></script>
   <script src="../../generators/arduino/stepper.js"></script>
@@ -53,7 +56,7 @@
 <body>
 
   <!-- Navigation bar -->
-  <nav class="blue lighten-1 nav-fixed">
+  <nav class="nav-fixed arduino_teal">
     <div class="container">
       <div class="nav-wrapper">
         <a id="logo-container" href="#" class="brand-logo">Ardublockly</a>
@@ -68,8 +71,8 @@
           <li><a href="#!">four</a></li>
         </ul>
         <ul id="nav-mobile" class="right side-nav">
-          <li><a href="#" id="button_load">Load<i class="mdi-file-file-upload left"></i></a></li>
-          <li><a href="#" id="button_save">Save<i class="mdi-content-save left"></i></a></li>
+          <li><a href="#" id="button_load">Open<i class="mdi-file-file-upload left"></i></a></li>
+          <li><a href="#" id="button_save">Save<i class="mdi-file-file-download left"></i></a></li>
           <li><a href="#" id="button_delete_all">Delete All<i class="mdi-action-delete left"></i></a></li>
           <li><a href="#settings_dialog" class="modal-trigger" id="button_settings">Settings<i class="mdi-action-settings left"></i></a></li>
           <!-- Drop down Trigger -->
@@ -85,7 +88,7 @@
     <div class="row">
       <div class="col s12 m12 l8" style="position:relative">
         <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
-        <a id="button_run" class="waves-effect waves-circle waves-light btn-floating btn-large red z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
+        <a id="button_run" class="waves-effect waves-light waves-circle btn-floating btn-large arduino_orange z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
         <!-- Begging of loader circle -->
         <div id="button_run_spinner" class="preloader-wrapper active run_loader" style="display:none">
           <div class="spinner-layer spinner-blue">
@@ -141,7 +144,7 @@
           <li>
             <div class="collapsible-header" id="xml_collapsible_header"><b class="collapsible_logo">&#60; &#62;</b>XML</div>
             <div class="collapsible-body"  style="position:relative" id="xml_collapsible_body">
-              <a class="btn-floating btn-large waves-effect waves-light blue z-depth-1-half" id="button_load_xml"><i class="mdi-action-extension"></i></a>
+              <a class="btn-floating btn-large waves-effect waves-light arduino_teal z-depth-1-half" id="button_load_xml"><i class="mdi-action-extension"></i></a>
               <textarea id="content_xml" class="content" wrap="soft"></textarea>
             </div>
           </li>
