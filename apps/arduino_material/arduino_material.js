@@ -322,6 +322,7 @@ ArduinoMaterial.toogleToolbox = function() {
     // showToolbox() takes a callback function as its second argument
     ArduinoMaterial.showToolbox(false, 
         function() { ArduinoMaterial.showToolboxButtonState(false); });
+    Blockly.mainWorkspace.toolbox_.flyout_.hide();
   } else {
      ArduinoMaterial.showToolboxButtonState(true);
     ArduinoMaterial.showToolbox(true);
