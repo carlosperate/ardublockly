@@ -31,27 +31,27 @@ window.addEventListener('load', function() {
  */
 ArduinoMaterial.bindActionFunctions_ = function() {
   // Navigation buttons
-  ArduinoMaterial.bindClick('button_load', ArduinoMaterial.loadXmlFile);
-  ArduinoMaterial.bindClick('button_save', ArduinoMaterial.saveXmlFile);
-  ArduinoMaterial.bindClick('button_delete_all', ArduinoMaterial.discard);
-  ArduinoMaterial.bindClick('button_settings',
+  ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadXmlFile);
+  ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFile);
+  ArduinoMaterial.bindClick_('button_delete_all', ArduinoMaterial.discard);
+  ArduinoMaterial.bindClick_('button_settings',
       ArduinoMaterial.populateSettings);
-  ArduinoMaterial.bindClick('dropdown_examples',
+  ArduinoMaterial.bindClick_('dropdown_examples',
       ArduinoMaterial.functionNotImplemented);
 
   // Floating buttons
-  ArduinoMaterial.bindClick('button_run', ArduinoMaterial.sendCode);
-  ArduinoMaterial.bindClick('button_load_xml',
+  ArduinoMaterial.bindClick_('button_run', ArduinoMaterial.sendCode);
+  ArduinoMaterial.bindClick_('button_load_xml',
       ArduinoMaterial.XmlTextareaToBlocks);
-  ArduinoMaterial.bindClick(
+  ArduinoMaterial.bindClick_(
       'button_toggle_toolbox', ArduinoMaterial.toogleToolbox);
 
   // Settings fields
-  ArduinoMaterial.bindClick('settings_compiler_location', function() {
+  ArduinoMaterial.bindClick_('settings_compiler_location', function() {
     ArduServerCompiler.requestNewCompilerLocation(
         ArduinoMaterial.setCompilerLocationHtml);
   });
-  ArduinoMaterial.bindClick('settings_sketch_location', function() {
+  ArduinoMaterial.bindClick_('settings_sketch_location', function() {
     ArduServerCompiler.requestNewSketchLocation(
         ArduinoMaterial.setSketchLocationHtml);
   });
@@ -74,8 +74,8 @@ ArduinoMaterial.bindDesignEventListeners_ = function() {
  */
 ArduinoMaterial.bindBlocklyEventListeners_ = function() {
   // Renders the code and XML for every Blockly workspace event
-  // Unfortunately as the toolbox inject is asynchronous we need to wait
-  if(ArduinoMaterial.BLOCKLY_INJECTED == false) {
+  // As the toolbox inject is asynchronous we need to wait
+  if (ArduinoMaterial.BLOCKLY_INJECTED == false) {
     setTimeout(ArduinoMaterial.bindBlocklyEventListeners_, 50);
   } else {
     Blockly.addChangeListener(ArduinoMaterial.renderContent);
@@ -263,24 +263,14 @@ ArduinoMaterial.sendCode = function() {
   toast('Sending sketch to Arduino IDE...', 4000);
   ArduServerCompiler.sendSketchToServer(
       ArduinoMaterial.generateArduino(), ArduinoMaterial.sendCodeReturn);
-
-  // Change button colour and add spinner during loading time
-  document.getElementById('button_run_spinner').style.display = 'block';
-  var button_el = document.getElementById('button_run');
-  var button_class = button_el.className;
-  button_el.className = button_class.replace('arduino_orange', 'grey');
+  ArduinoMaterial.runButtonSpinner(true);
 };
 
 /**
  * Send the Arduino Code to the ArduServerCompiler to process
  */
 ArduinoMaterial.sendCodeReturn = function(data_back) {
-  // Change back button colour and remove spinner
-  document.getElementById('button_run_spinner').style.display = 'none';
-  var button_el = document.getElementById('button_run');
-  var button_class = button_el.className;
-  button_el.className = button_class.replace('grey', 'arduino_orange');
-
+  ArduinoMaterial.runButtonSpinner(false);
   ArduinoMaterial.arduinoIdeModal(data_back);
 };
 
@@ -352,13 +342,20 @@ ArduinoMaterial.isToolboxVisible = function() {
  * On touch enabled browsers, ontouchend is treated as equivalent to onclick.
  * @param {!Element|string} el Button element or ID thereof.
  * @param {!function} func Event handler to bind.
+ * @private
  */
-ArduinoMaterial.bindClick = function(el, func) {
+ArduinoMaterial.bindClick_ = function(el, func) {
   if (typeof el == 'string') {
     el = document.getElementById(el);
   }
-  el.addEventListener('click', func, true);
-  el.addEventListener('touchend', func, true);
+  // Need to ensure both, touch and click, events don't fire for the same thing
+  var propagateOnce = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    func();
+  };
+  el.addEventListener('ontouchend', propagateOnce);
+  el.addEventListener('click', propagateOnce);
 };
 
 /**

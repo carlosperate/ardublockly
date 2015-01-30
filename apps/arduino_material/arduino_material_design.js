@@ -38,6 +38,22 @@ ArduinoMaterial.materializeJsInit = function() {
 };
 
 /**
+ * Resizes the container for Blockly and forces a re-render of the SVG. 
+ */
+ArduinoMaterial.runButtonSpinner = function(active) {
+  var spinner = document.getElementById('button_run_spinner');
+  var button_el = document.getElementById('button_run');
+  var button_class = button_el.className;
+  if (active) {
+    spinner.style.display = 'block';
+    button_el.className = button_class.replace('arduino_orange', 'grey');
+  } else  {
+    spinner.style.display = 'none';
+    button_el.className = button_class.replace('grey', 'arduino_orange');
+ }
+};
+
+/**
  * Displays or hides the 'load textarea xml' button.
  */
 ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
