@@ -126,48 +126,6 @@
     </block>
   </category>
   <sep></sep>
-  <category name="Lists">
-    <block type="lists_create_empty"></block>
-    <block type="lists_create_with"></block>
-    <block type="lists_repeat">
-      <value name="NUM">
-        <block type="math_number">
-          <field name="NUM">5</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_length"></block>
-    <block type="lists_isEmpty"></block>
-    <block type="lists_indexOf">
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" class="listVar">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_getIndex">
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" class="listVar">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_setIndex">
-      <value name="LIST">
-        <block type="variables_get">
-          <field name="VAR" class="listVar">list</field>
-        </block>
-      </value>
-    </block>
-    <block type="lists_getSublist">
-      <value name="LIST">
-        <block type="variables_get">
-          <field name="VAR" class="listVar">list</field>
-        </block>
-      </value>
-    </block>
-  </category>
-  <sep></sep>
   <category name="Variables">
     <block type="variables_get"></block>
     <block type="variables_set"></block>
