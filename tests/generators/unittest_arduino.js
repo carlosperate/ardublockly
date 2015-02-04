@@ -1,25 +1,12 @@
 /**
- * Visual Blocks Language
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
+ * @fileoverview Generating Arduino code for unit test blocks.
+ *               Based on the Dart unite test code.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * @fileoverview Generating Arduino for unit test blocks.
- * @author fraser@google.com (Neil Fraser)
+ * TODO: Everything. For now it at least parses the code into (invalid) code
+ *       text.
  */
 'use strict';
 
@@ -29,31 +16,30 @@ Blockly.Arduino['unittest_main'] = function(block) {
       Blockly.Variables.NAME_TYPE);
   var functionName = Blockly.Arduino.provideFunction_(
       'unittest_report',
-      [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '() {',
+      [ 'String ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '() {',
         '  // Create test report.',
-        '  var report = [];',
-        '  var summary = [];',
-        '  var fails = 0;',
-        '  for (var x = 0; x < ' + resultsVar + '.length; x++) {',
+        '  List report = [];',
+        '  String summary = new String();',
+        '  int fails = 0;',
+        '  for (int x = 0; x < ' + resultsVar + '.length; x++) {',
         '    if (' + resultsVar + '[x][0]) {',
-        '      summary.push(".");',
+        '      summary += ".";',
         '    } else {',
-        '      summary.push("F");',
+        '      summary += "F";',
         '      fails++;',
-        '      report.push("");',
-        '      report.push("FAIL: " + ' + resultsVar + '[x][2]);',
-        '      report.push(' + resultsVar + '[x][1]);',
+        '      report.add("");',
+        '      report.add("FAIL: ${' + resultsVar + '[x][2]}");',
+        '      report.add(' + resultsVar + '[x][1]);',
         '    }',
         '  }',
-        '  report.unshift(summary.join(""));',
-        '  report.push("");',
-        '  report.push("Number of tests run: " + ' + resultsVar +
-              '.length);',
-        '  report.push("");',
-        '  if (fails) {',
-        '    report.push("FAILED (failures=" + fails + ")");',
+        '  report.insert(0, summary);',
+        '  report.add("");',
+        '  report.add("Ran ${' + resultsVar + '.length} tests.");',
+        '  report.add("");',
+        '  if (fails != 0) {',
+        '    report.add("FAILED (failures=$fails)");',
         '  } else {',
-        '    report.push("OK");',
+        '    report.add("OK");',
         '  }',
         '  return report.join("\\n");',
         '}']);
@@ -64,33 +50,33 @@ Blockly.Arduino['unittest_main'] = function(block) {
       .replace(/^  /, '').replace(/\n  /g, '\n');
   var reportVar = Blockly.Arduino.variableDB_.getDistinctName(
       'report', Blockly.Variables.NAME_TYPE);
-  code += 'var ' + reportVar + ' = ' + functionName + '();\n';
+  code += 'String ' + reportVar + ' = ' + functionName + '();\n';
   // Destroy results.
   code += resultsVar + ' = null;\n';
-  // Send the report to the console (that's where errors will go anyway).
-  code += 'console.log(' + reportVar + ');\n';
+  // Print the report to the console (that's where errors will go anyway).
+  code += 'print(' + reportVar + ');\n';
   return code;
 };
 
-Blockly.Arduino['unittest_main'].defineAssert_ = function(block) {
+Blockly.Arduino['unittest_main'].defineAssert_ = function() {
   var resultsVar = Blockly.Arduino.variableDB_.getName('unittestResults',
       Blockly.Variables.NAME_TYPE);
   var functionName = Blockly.Arduino.provideFunction_(
-      'assertEquals',
-      [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
-          '(actual, expected, message) {',
+      'unittest_assertequals',
+      [ 'void ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
+          '(dynamic actual, dynamic expected, String message) {',
         '  // Asserts that a value equals another value.',
-        '  if (!' + resultsVar + ') {',
-        '    throw "Orphaned assert: " + message;',
+        '  if (' + resultsVar + ' == null) {',
+        '    throw "Orphaned assert: ${message}";',
         '  }',
-        '  function equals(a, b) {',
-        '    if (a === b) {',
+        '  bool equals(a, b) {',
+        '    if (a == b) {',
         '      return true;',
-        '    } else if (a instanceof Array && b instanceof Array) {',
+        '    } else if (a is List && b is List) {',
         '      if (a.length != b.length) {',
         '        return false;',
         '      }',
-        '      for (var i = 0; i < a.length; i++) {',
+        '      for (num i = 0; i < a.length; i++) {',
         '        if (!equals(a[i], b[i])) {',
         '          return false;',
         '        }',
@@ -100,12 +86,12 @@ Blockly.Arduino['unittest_main'].defineAssert_ = function(block) {
         '    return false;',
         '  }',
         '  if (equals(actual, expected)) {',
-        '    ' + resultsVar + '.push([true, "OK", message]);',
+        '    ' + resultsVar + '.add([true, "OK", message]);',
         '  } else {',
-        '    ' + resultsVar + '.push([false, ' +
-          '"Expected: " + expected + "\\nActual: " + actual, message]);',
+        '    ' + resultsVar + '.add([false, ' +
+          '"Expected: $expected\\nActual: $actual", message]);',
         '  }',
-        '}']);
+        '}\n']);
   return functionName;
 };
 
@@ -113,9 +99,9 @@ Blockly.Arduino['unittest_assertequals'] = function(block) {
   // Asserts that a value equals another value.
   var message = Blockly.Arduino.quote_(block.getFieldValue('MESSAGE'));
   var actual = Blockly.Arduino.valueToCode(block, 'ACTUAL',
-      Blockly.Arduino.ORDER_COMMA) || 'null';
+      Blockly.Arduino.ORDER_NONE) || 'null';
   var expected = Blockly.Arduino.valueToCode(block, 'EXPECTED',
-      Blockly.Arduino.ORDER_COMMA) || 'null';
+      Blockly.Arduino.ORDER_NONE) || 'null';
   return Blockly.Arduino['unittest_main'].defineAssert_() +
       '(' + actual + ', ' + expected + ', ' + message + ');\n';
 };
@@ -124,7 +110,7 @@ Blockly.Arduino['unittest_assertvalue'] = function(block) {
   // Asserts that a value is true, false, or null.
   var message = Blockly.Arduino.quote_(block.getFieldValue('MESSAGE'));
   var actual = Blockly.Arduino.valueToCode(block, 'ACTUAL',
-      Blockly.Arduino.ORDER_COMMA) || 'null';
+      Blockly.Arduino.ORDER_NONE) || 'null';
   var expected = block.getFieldValue('EXPECTED');
   if (expected == 'TRUE') {
     expected = 'true';
@@ -144,13 +130,13 @@ Blockly.Arduino['unittest_fail'] = function(block) {
   var message = Blockly.Arduino.quote_(block.getFieldValue('MESSAGE'));
   var functionName = Blockly.Arduino.provideFunction_(
       'unittest_fail',
-      [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
-          '(message) {',
+      [ 'void ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
+          '(String message) {',
         '  // Always assert an error.',
-        '  if (!' + resultsVar + ') {',
-        '    throw "Orphaned assert fail: " + message;',
+        '  if (' + resultsVar + ' == null) {',
+        '    throw "Orphaned assert fail: ${message}";',
         '  }',
-        '  ' + resultsVar + '.push([false, "Fail.", message]);',
-        '}']);
+        '  ' + resultsVar + '.add([false, "Fail.", message]);',
+        '}\n']);
   return functionName + '(' + message + ');\n';
 };
