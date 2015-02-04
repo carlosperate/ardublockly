@@ -1,32 +1,18 @@
 /**
- * @license
- * Visual Blocks Language
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * Copyright 2012 Google Inc.
- * https://developers.google.com/blockly/
+ * Based on work of Fred Lin (gasolin@gmail.com) for Blocklyduino.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
  * @fileoverview Helper functions for generating Arduino for blocks.
- * @author gasolin@gmail.com (Fred Lin)
+ *
  */
 'use strict';
 
 goog.provide('Blockly.Arduino');
 
 goog.require('Blockly.Generator');
+
 
 /**
  * Arduino code generator.
@@ -145,6 +131,9 @@ Blockly.Arduino.init = function(opt_workspace) {
   Blockly.Arduino.setups_ = Object.create(null);
   // Create a dictionary of pins to check if their use conflict
   Blockly.Arduino.pins_ = Object.create(null);
+  // Create a dictionary mapping desired function names in definitions_
+  // to actual function names (to avoid collisions with user functions).
+  Blockly.Arduino.functionNames_ = Object.create(null);
   
   if (!Blockly.Arduino.variableDB_) {
     Blockly.Arduino.variableDB_ =

@@ -1,25 +1,10 @@
 /**
- * @license
- * Visual Blocks Language
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
+ * @fileoverview Generating Arduino code for the loop blocks.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * @fileoverview Generating Arduino for loop blocks.
+ * TODO: For each block needs to have lists implemented.
  */
 'use strict';
 
@@ -27,9 +12,12 @@ goog.provide('Blockly.Arduino.loops');
 
 goog.require('Blockly.Arduino');
 
-
+/**
+ * Generator for the repeat block (number in a drop down) using a For loop
+ * statement.
+ * Arduino code: loop { for (int count = 0; count < X; count++) { Y } }
+ */
 Blockly.Arduino['controls_repeat'] = function(block) {
-  // Repeat n times (internal number).
   var repeats = Number(block.getFieldValue('TIMES'));
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
@@ -42,8 +30,12 @@ Blockly.Arduino['controls_repeat'] = function(block) {
   return code;
 };
 
+/**
+ * Generator for the repeat block (using external number block) using a
+ * For loop statement.
+ * Arduino code: loop { for (int count = 0; count < X; count++) { Y } }
+ */
 Blockly.Arduino['controls_repeat_ext'] = function(block) {
-  // Repeat n times (external number).
   var repeats = Blockly.Arduino.valueToCode(block, 'TIMES',
       Blockly.Arduino.ORDER_ADDITIVE) || '0';
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
@@ -64,6 +56,10 @@ Blockly.Arduino['controls_repeat_ext'] = function(block) {
   return code;
 };
 
+/**
+ * Generator for the repeat while block using a While statement
+ * Arduino code: loop { while (X) { Y } }
+ */
 Blockly.Arduino['controls_whileUntil'] = function(block) {
   // Do while/until loop.
   var until = block.getFieldValue('MODE') == 'UNTIL';
@@ -81,8 +77,11 @@ Blockly.Arduino['controls_whileUntil'] = function(block) {
   return 'while (' + argument0 + ') {\n' + branch + '}\n';
 };
 
+/**
+ * Generator for the For loop statements
+ * Arduino code: loop { for (i = X; i <= Y; i+=Z) { } }
+ */
 Blockly.Arduino['controls_for'] = function(block) {
-  // For loop.
   var variable0 = Blockly.Arduino.variableDB_.getName(
       block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Arduino.valueToCode(block, 'FROM',
@@ -90,7 +89,7 @@ Blockly.Arduino['controls_for'] = function(block) {
   var argument1 = Blockly.Arduino.valueToCode(block, 'TO',
       Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
   var increment = Blockly.Arduino.valueToCode(block, 'BY',
-      Blockly.JavaScript.ORDER_ASSIGNMENT) || '1';
+      Blockly.Arduino.ORDER_ASSIGNMENT) || '1';
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
   var code;
@@ -146,9 +145,14 @@ Blockly.Arduino['controls_for'] = function(block) {
   return code;
 };
 
+/**
+ * Function for 'set pin' to a state.
+ * Arduino code: ???
+ * TODO: Removed for now from toolbox as lists are not yet implemented.
+ *       List will most likely be implemented as arrays in the future.
+ *       For each does not exists in C++ version used in Arduino.
+ */
 Blockly.Arduino['controls_forEach'] = function(block) {
-  //TODO: for each does not exists in C++, need to implement this properly
-  // For each loop.
   var variable0 = Blockly.Arduino.variableDB_.getName(
       block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
   var argument0 = Blockly.Arduino.valueToCode(block, 'LIST',
@@ -157,15 +161,18 @@ Blockly.Arduino['controls_forEach'] = function(block) {
   branch = Blockly.Arduino.addLoopTrap(branch, block.id);
   var indexVar = Blockly.Arduino.variableDB_.getDistinctName(
       variable0 + '_index', Blockly.Variables.NAME_TYPE);
-  branch = Blockly.Arduino.INDENT + variable0 + ' = ' + argument0 + '[' + indexVar + '];\n' +
-      branch;
+  branch = Blockly.Arduino.INDENT + variable0 + ' = ' + argument0 + 
+      '[' + indexVar + '];\n' + branch;
   var code = 'for (int ' + indexVar + ' in  ' + argument0 + ') {\n' +
       branch + '}\n';
   return code;
 };
 
+/**
+ * Generator for the loop flow control statements
+ * Arduino code: loop { break;/continue; }
+ */
 Blockly.Arduino['controls_flow_statements'] = function(block) {
-  // Flow statements: continue, break.
   switch (block.getFieldValue('FLOW')) {
     case 'BREAK':
       return 'break;\n';
