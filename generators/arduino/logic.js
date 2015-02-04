@@ -1,25 +1,8 @@
 /**
- * @license
- * Visual Blocks Language
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * @fileoverview Generating Arduino for logic blocks.
+ * @fileoverview Generating Arduino code for the logic blocks.
  */
 'use strict';
 
@@ -27,9 +10,11 @@ goog.provide('Blockly.Arduino.logic');
 
 goog.require('Blockly.Arduino');
 
-
+/**
+ * Code generator to create if/if else/else statement.
+ * Arduino code: loop  { if (X)/else if ()/else { X } }
+ */
 Blockly.Arduino['controls_if'] = function(block) {
-  // If/elseif/else condition.
   var n = 0;
   var argument = Blockly.Arduino.valueToCode(block, 'IF' + n,
       Blockly.Arduino.ORDER_NONE) || 'false';
@@ -48,8 +33,11 @@ Blockly.Arduino['controls_if'] = function(block) {
   return code + '\n';
 };
 
+/**
+ * Code generator for the comparison operator block
+ * Arduino code: loop  { X operator Y }
+ */
 Blockly.Arduino['logic_compare'] = function(block) {
-  // Comparison operator.
   var OPERATORS = {
     'EQ': '==',
     'NEQ': '!=',
@@ -67,8 +55,11 @@ Blockly.Arduino['logic_compare'] = function(block) {
   return [code, order];
 };
 
+/**
+ * Code generator for the logic operator block
+ * Arduino code: loop  { X operator Y }
+ */
 Blockly.Arduino['logic_operation'] = function(block) {
-  // Operations 'and', 'or'.
   var operator = (block.getFieldValue('OP') == 'AND') ? '&&' : '||';
   var order = (operator == '&&') ? Blockly.Arduino.ORDER_LOGICAL_AND :
       Blockly.Arduino.ORDER_LOGICAL_OR;
@@ -92,27 +83,40 @@ Blockly.Arduino['logic_operation'] = function(block) {
   return [code, order];
 };
 
+/**
+ * Code generator for the logic negate operator
+ * Arduino code: loop  { !X }
+ */
 Blockly.Arduino['logic_negate'] = function(block) {
-  // Negation.
   var order = Blockly.Arduino.ORDER_UNARY_PREFIX;
   var argument0 = Blockly.Arduino.valueToCode(block, 'BOOL', order) || 'false';
   var code = '!' + argument0;
   return [code, order];
 };
 
+/**
+ * Code generator for the boolean values true and false.
+ * Arduino code: loop  { true/false }
+ */
 Blockly.Arduino['logic_boolean'] = function(block) {
-  // Boolean values true and false.
   var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
+/**
+ * Code generator for the null value.
+ * Arduino code: loop  { X ? Y : Z }
+ */
 Blockly.Arduino['logic_null'] = function(block) {
   var code = 'NULL';
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
 
+/**
+ * Code generator for the ternary operator
+ * Arduino code: loop  { NULL }
+ */
 Blockly.Arduino['logic_ternary'] = function(block) {
-  // Ternary operator.
   var value_if = Blockly.Arduino.valueToCode(block, 'IF',
       Blockly.Arduino.ORDER_CONDITIONAL) || 'false';
   var value_then = Blockly.Arduino.valueToCode(block, 'THEN',

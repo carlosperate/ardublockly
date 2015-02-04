@@ -14,9 +14,9 @@ goog.require('Blockly.Arduino');
 
 
 /**
- * Function for 'set pin' to a state. Arduino code:
- * setup { pinMode(X, OUTPUT) }
- * loop  { digitalWrite(X, Y) }
+ * Function for 'set pin' to a state.
+ * Arduino code: setup { pinMode(X, OUTPUT); }
+ *               loop  { digitalWrite(X, Y); }
  */
 Blockly.Arduino['io_digitalwrite'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
@@ -46,9 +46,9 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
 };
 
 /**
- * Function for reading a digital pin. Arduino code:
- * setup { pinMode(X, INPUT) }
- * loop  { digitalRead(X)    }
+ * Function for reading a digital pin.
+ * Arduino code: setup { pinMode(X, INPUT); }
+ *               loop  { digitalRead(X)     }
  */
 Blockly.Arduino['io_digitalread'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
@@ -76,9 +76,9 @@ Blockly.Arduino['io_digitalread'] = function(block) {
 };
 
 /**
- * Function for setting the state of a built-in LED. Arduino code:
- * setup { pinMode(X, OUTPUT) }
- * loop  { digitalWrite(X, Y) }
+ * Function for setting the state of a built-in LED.
+ * Arduino code: setup { pinMode(X, OUTPUT); }
+ *               loop  { digitalWrite(X, Y); }
  */
 Blockly.Arduino['io_builtin_led'] = function(block) {
   var pinKey = block.getFieldValue('BUILT_IN_LED');
@@ -109,9 +109,9 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
 };
 
 /**
- * Function for setting the state of an analogue output. Arduino code:
- * setup { pinMode(X, OUTPUT) }
- * loop  { analogWrite(X, Y) }
+ * Function for setting the state of an analogue output.
+ * Arduino code: setup { pinMode(X, OUTPUT); }
+ *               loop  { analogWrite(X, Y);  }
  */
 Blockly.Arduino['io_analogwrite'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
@@ -141,9 +141,9 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
 };
 
 /**
- * Function for reading an analogue pin value. Arduino code:
- * setup { pinMode(X, INPUT) }
- * loop  { analogRead(X)     }
+ * Function for reading an analogue pin value.
+ * Arduino code: setup { pinMode(X, INPUT); }
+ *               loop  { analogRead(X)      }
  */
 Blockly.Arduino['io_analogread'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
@@ -172,7 +172,8 @@ Blockly.Arduino['io_analogread'] = function(block) {
 
 
 /**
- * Value for defining a digital pin state. Arduino code: HIGH / LOW
+ * Value for defining a digital pin state.
+ * Arduino code: loop { HIGH / LOW }
  */
 Blockly.Arduino['io_highlow'] = function(block) {
   // Boolean values HIGH and LOW.
