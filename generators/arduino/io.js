@@ -52,7 +52,7 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
  */
 Blockly.Arduino['io_digitalread'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
-  var pinType = profile.default.pinTypes.INPUT;
+  var pinType = profile.default.pin_types.INPUT;
   var setUpKey = 'setup_io_' + pinKey;
   var pinMode = 'pinMode(' + pinKey + ', INPUT);';
   var code = 'digitalRead(' + pinKey + ')';
