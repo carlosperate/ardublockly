@@ -157,7 +157,13 @@
   </category>
   <sep></sep>
   <category name="Motors">
-    <block type="servo_write"></block>
+    <block type="servo_write">
+      <value name="SERVO_ANGLE">
+        <block type="math_number">
+          <field name="NUM">90</field>
+        </block>
+      </value>
+    </block>
     <block type="servo_read"></block>
     <block type="stepper_config"></block>
     <block type="stepper_step"></block>
