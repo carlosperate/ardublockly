@@ -1,25 +1,12 @@
 /**
- * @license
- * Visual Blocks Language
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * Copyright 2012 Google Inc.
- * https://blockly.googlecode.com/
+ * @fileoverview Generating Arduino code for procedure (function) blocks.
+ *               Based on the code generator for Dart
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-/**
- * @fileoverview Generating Arduino for procedure blocks.
+ * TODO: For now all variables will stay at "int". Once type is implemented
+ *       it needs to be captured on the functions with return.
  */
 'use strict';
 
@@ -28,8 +15,11 @@ goog.provide('Blockly.Arduino.procedures');
 goog.require('Blockly.Arduino');
 
 
+/**
+ * Code generator to create a function with a return value.
+ * Arduino code: void functionname { return X }
+ */
 Blockly.Arduino['procedures_defreturn'] = function(block) {
-  // Define a procedure with a return value.
   var funcName = Blockly.Arduino.variableDB_.getName(
       block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
   var branch = Blockly.Arduino.statementToCode(block, 'STACK');
@@ -47,7 +37,8 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
   if (returnValue) {
     returnValue = '  return ' + returnValue + ';\n';
   }
-  var returnType = returnValue ? 'Dynamic' : 'void';
+  //TODO: This is where we need to capture return type.
+  var returnType = returnValue ? 'int' : 'void';
   var args = [];
   for (var x = 0; x < block.arguments_.length; x++) {
     args[x] = Blockly.Arduino.variableDB_.getName(block.arguments_[x],
@@ -60,12 +51,20 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
   return null;
 };
 
-// Defining a procedure without a return value uses the same generator as
-// a procedure with a return value.
-Blockly.Arduino['procedures_defnoreturn'] = Blockly.Arduino['procedures_defreturn'];
+/**
+ * Code generator to create a function without a return value.
+ * It uses the same code as with return value, as it will maintain the void
+ * type.
+ * Arduino code: void functionname { }
+ */
+Blockly.Arduino['procedures_defnoreturn'] = 
+    Blockly.Arduino['procedures_defreturn'];
 
+/**
+ * Code generator to create a function call with a return value.
+ * Arduino code: loop  { functionname() }
+ */
 Blockly.Arduino['procedures_callreturn'] = function(block) {
-  // Call a procedure with a return value.
   var funcName = Blockly.Arduino.variableDB_.getName(
       block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
   var args = [];
@@ -77,8 +76,11 @@ Blockly.Arduino['procedures_callreturn'] = function(block) {
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
+/**
+ * Code generator to create a function call without a return value.
+ * Arduino code: functionname()
+ */
 Blockly.Arduino['procedures_callnoreturn'] = function(block) {
-  // Call a procedure with no return value.
   var funcName = Blockly.Arduino.variableDB_.getName(
       block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
   var args = [];
@@ -90,8 +92,11 @@ Blockly.Arduino['procedures_callnoreturn'] = function(block) {
   return code;
 };
 
+/**
+ * Code generator to create a conditional return value for a function.
+ * Arduino code: if (X) { return Y; }
+ */
 Blockly.Arduino['procedures_ifreturn'] = function(block) {
-  // Conditionally return value from a procedure.
   var condition = Blockly.Arduino.valueToCode(block, 'CONDITION',
       Blockly.Arduino.ORDER_NONE) || 'false';
   var code = 'if (' + condition + ') {\n';
