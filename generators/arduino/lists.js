@@ -3,6 +3,7 @@
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
  * @fileoverview Generating Arduino code for list blocks.
+ *               Based on the Dart list code generator.
  *
  * TODO: A lot of this can be converted to arrays code by creating functions to
  *       replicate this kind of behavior.

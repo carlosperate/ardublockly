@@ -16,6 +16,8 @@ goog.require('Blockly.Arduino');
 /**
  * Code generator for the map block.
  * Arduino code: loop { map(x, 0, 1024, 0, y) }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['base_map'] = function(block) {
   var valueNum = Blockly.Arduino.valueToCode(

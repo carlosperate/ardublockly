@@ -21,12 +21,15 @@ goog.require('Blockly.Arduino');
  *               Servo myServo_X;
  *               setup { myServo_X.attach(X); }
  *               loop  { myServo_X.write(Y);  } 
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['servo_write'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
   var pinType = profile.default.pin_types.SERVO;
-  var servoName = 'myServo_' + pinKey;
   var servoAngle = Blockly.Arduino.valueToCode(block, 'SERVO_ANGLE', Blockly.Arduino.ORDER_ATOMIC) || '90';
+
+  var servoName = 'myServo_' + pinKey;
   var code = servoName + '.write(' + servoAngle + ');\n';
 
   // Maintain the setup regardless of pin conflict, warning should be enough
@@ -55,11 +58,14 @@ Blockly.Arduino['servo_write'] = function(block) {
  * Arduino code: #include <Servo.h>
  *               Servo myServo_X;
  *               setup { myServo_X.attach(X); }
- *               loop  { myServo_X.read();    } 
+ *               loop  { myServo_X.read();    }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['servo_read'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
   var pinType = profile.default.pin_types.SERVO;
+
   var servoName = 'myServo_' + pinKey;
   var code = servoName + '.read()';
 

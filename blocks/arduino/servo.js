@@ -10,20 +10,21 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.servo');
+goog.provide('Blockly.Blocks.Arduino.servo');
 
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.servo.HUE = 50;
+Blockly.Blocks.Arduino.servo.HUE = 50;
 
 Blockly.Blocks['servo_write'] = {
   /**
-   * Block for writing an angle value into a servo PWM pin
+   * Block for writing an angle value into a servo PWM pin.
+   * @this Blockly.Block
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoWrite');
-    this.setColour(Blockly.Blocks.servo.HUE);
+    this.setColour(Blockly.Blocks.Arduino.servo.HUE);
     this.appendDummyInput('')
         .appendField('Set SERVO from Pin')
         .appendField(new Blockly.FieldDropdown(profile.default.pwm), 'SERVO_PIN');
@@ -42,11 +43,12 @@ Blockly.Blocks['servo_write'] = {
 
 Blockly.Blocks['servo_read'] = {
   /**
-   * Block for reading an angle value of a servo PWM pin
+   * Block for reading an angle value of a servo PWM pin.
+   * @this Blockly.Block
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoRead');
-    this.setColour(Blockly.Blocks.servo.HUE);
+    this.setColour(Blockly.Blocks.Arduino.servo.HUE);
     this.appendDummyInput('')
         .appendField('Read SERVO from PIN#')
         .appendField(new Blockly.FieldDropdown(profile.default.pwm), 'SERVO_PIN');

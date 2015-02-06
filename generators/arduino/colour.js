@@ -3,6 +3,7 @@
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
  * @fileoverview Generating Arduino code for colour blocks.
+ *               Based on the javascript generator
  *
  * TODO: These blocks do not really serve a purpose for Arduino code.
  */

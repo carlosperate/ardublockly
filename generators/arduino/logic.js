@@ -10,9 +10,12 @@ goog.provide('Blockly.Arduino.logic');
 
 goog.require('Blockly.Arduino');
 
+
 /**
  * Code generator to create if/if else/else statement.
- * Arduino code: loop  { if (X)/else if ()/else { X } }
+ * Arduino code: loop { if (X)/else if ()/else { X } }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['controls_if'] = function(block) {
   var n = 0;
@@ -34,8 +37,10 @@ Blockly.Arduino['controls_if'] = function(block) {
 };
 
 /**
- * Code generator for the comparison operator block
- * Arduino code: loop  { X operator Y }
+ * Code generator for the comparison operator block.
+ * Arduino code: loop { X operator Y }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['logic_compare'] = function(block) {
   var OPERATORS = {
@@ -56,8 +61,10 @@ Blockly.Arduino['logic_compare'] = function(block) {
 };
 
 /**
- * Code generator for the logic operator block
- * Arduino code: loop  { X operator Y }
+ * Code generator for the logic operator block.
+ * Arduino code: loop { X operator Y }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['logic_operation'] = function(block) {
   var operator = (block.getFieldValue('OP') == 'AND') ? '&&' : '||';
@@ -84,8 +91,10 @@ Blockly.Arduino['logic_operation'] = function(block) {
 };
 
 /**
- * Code generator for the logic negate operator
- * Arduino code: loop  { !X }
+ * Code generator for the logic negate operator.
+ * Arduino code: loop { !X }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['logic_negate'] = function(block) {
   var order = Blockly.Arduino.ORDER_UNARY_PREFIX;
@@ -96,7 +105,9 @@ Blockly.Arduino['logic_negate'] = function(block) {
 
 /**
  * Code generator for the boolean values true and false.
- * Arduino code: loop  { true/false }
+ * Arduino code: loop { true/false }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['logic_boolean'] = function(block) {
   var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
@@ -105,7 +116,9 @@ Blockly.Arduino['logic_boolean'] = function(block) {
 
 /**
  * Code generator for the null value.
- * Arduino code: loop  { X ? Y : Z }
+ * Arduino code: loop { X ? Y : Z }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['logic_null'] = function(block) {
   var code = 'NULL';
@@ -113,16 +126,18 @@ Blockly.Arduino['logic_null'] = function(block) {
 };
 
 /**
- * Code generator for the ternary operator
- * Arduino code: loop  { NULL }
+ * Code generator for the ternary operator.
+ * Arduino code: loop { NULL }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['logic_ternary'] = function(block) {
-  var value_if = Blockly.Arduino.valueToCode(block, 'IF',
+  var valueIf = Blockly.Arduino.valueToCode(block, 'IF',
       Blockly.Arduino.ORDER_CONDITIONAL) || 'false';
-  var value_then = Blockly.Arduino.valueToCode(block, 'THEN',
+  var valueThen = Blockly.Arduino.valueToCode(block, 'THEN',
       Blockly.Arduino.ORDER_CONDITIONAL) || 'null';
-  var value_else = Blockly.Arduino.valueToCode(block, 'ELSE',
+  var valueElse = Blockly.Arduino.valueToCode(block, 'ELSE',
       Blockly.Arduino.ORDER_CONDITIONAL) || 'null';
-  var code = value_if + ' ? ' + value_then + ' : ' + value_else
+  var code = valueIf + ' ? ' + valueThen + ' : ' + valueElse
   return [code, Blockly.Arduino.ORDER_CONDITIONAL];
 };

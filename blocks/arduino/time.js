@@ -8,12 +8,12 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.time');
+goog.provide('Blockly.Blocks.Arduino.time');
 
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.time.HUE = 120;
+Blockly.Blocks.Arduino.time.HUE = 120;
 
 Blockly.Blocks['time_delay'] = {
   /**
@@ -22,7 +22,7 @@ Blockly.Blocks['time_delay'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Delay');
-    this.setColour(Blockly.Blocks.time.HUE);
+    this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendValueInput("DELAY_TIME_MILI", 'Number')
         .setCheck('Number')
         .appendField("wait");
@@ -42,7 +42,7 @@ Blockly.Blocks['time_delaymicros'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/DelayMicroseconds');
-    this.setColour(Blockly.Blocks.time.HUE);
+    this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendValueInput("DELAY_TIME_MICRO", 'Number')
         .setCheck('Number')
         .appendField("wait");
@@ -62,7 +62,7 @@ Blockly.Blocks['time_millis'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Millis');
-    this.setColour(Blockly.Blocks.time.HUE);
+    this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendDummyInput("")
         .appendField("elapsed Time (milliseconds)");
     this.setOutput(true, 'Number');
@@ -78,7 +78,7 @@ Blockly.Blocks['time_micros'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Micros');
-    this.setColour(Blockly.Blocks.time.HUE);
+    this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendDummyInput("")
         .appendField("elapsed Time (microseconds)");
     this.setOutput(true, 'Number');

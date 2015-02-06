@@ -3,6 +3,9 @@
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
  * @fileoverview Generating Arduino code for the math blocks.
+ *
+ * TODO: Math on list needs lists to be implemented.
+ *       math_constant and math_change needs to be tested in compiler.
  */
 'use strict';
 
@@ -12,8 +15,10 @@ goog.require('Blockly.Arduino');
 
 
 /**
- * Generator for a numeric value
+ * Generator for a numeric value (X).
  * Arduino code: loop { X }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_number'] = function(block) {
   // Numeric value.
@@ -22,8 +27,11 @@ Blockly.Arduino['math_number'] = function(block) {
 };
 
 /**
- * Generator for a basic arithmetic operators and power function.
+ * Generator for a basic arithmetic operators (X and Y) and power function
+ * (X ^ Y).
  * Arduino code: loop { X operator Y }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_arithmetic'] = function(block) {
   var OPERATORS = {
@@ -49,8 +57,10 @@ Blockly.Arduino['math_arithmetic'] = function(block) {
 };
 
 /**
- * Generator for math operators that contain a single operand.
+ * Generator for math operators that contain a single operand (X).
  * Arduino code: loop { operator(X) }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_single'] = function(block) {
   var operator = block.getFieldValue('OP');
@@ -138,10 +148,12 @@ Blockly.Arduino['math_single'] = function(block) {
 
 /**
  * Generator for math constants (PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2),
- * INFINITY)
+ * INFINITY).
  * Arduino code: loop { constant }
  * TODO: Might need to include "#define _USE_MATH_DEFINES"
  *       The arduino header file already includes math.h
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['math_constant'] = function(block) {
   var CONSTANTS = {
@@ -159,6 +171,8 @@ Blockly.Arduino['math_constant'] = function(block) {
  * Generator for math checks: if a number is even, odd, prime, whole, positive,
  * negative, or if it is divisible by certain number. Returns true or false.
  * Arduino code: complex code, can create external functions.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_number_property'] = function(block) {
   // 
@@ -219,10 +233,12 @@ Blockly.Arduino['math_number_property'] = function(block) {
 };
 
 /**
- * Generator to add to a variable.
- * Arduino code: loop { xX += Y; }
+ * Generator to add (Y) to a variable (X).
+ * Arduino code: loop { X += Y; }
  * TODO: Might need to include "#define _USE_MATH_DEFINES"
  *       The arduino header file already includes math.h
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_change'] = function(block) {
   var argument0 = Blockly.Arduino.valueToCode(block, 'DELTA',
@@ -243,9 +259,11 @@ Blockly.Arduino['math_round'] = Blockly.Arduino['math_single'];
 Blockly.Arduino['math_trig'] = Blockly.Arduino['math_single'];
 
 /**
- * Generator for the math function to a list
+ * Generator for the math function to a list.
  * Arduino code: ???
  * TODO: List have to be implemented first. Removed from toolbox for now.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_on_list'] = function(block) {
   var func = block.getFieldValue('OP');
@@ -433,8 +451,10 @@ Blockly.Arduino['math_on_list'] = function(block) {
 };
 
 /**
- * Generator for the math modulo function (calculates remainder).
+ * Generator for the math modulo function (calculates remainder of X/Y).
  * Arduino code: loop { X % Y }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_modulo'] = function(block) {
   var argument0 = Blockly.Arduino.valueToCode(block, 'DIVIDEND',
@@ -448,6 +468,8 @@ Blockly.Arduino['math_modulo'] = function(block) {
 /**
  * Generator for clipping a number(X) between two limits (Y and Z).
  * Arduino code: loop { (X < Y ? Y : ( X > Z ? Z : X)) }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_constrain'] = function(block) {
   // Constrain a number between two limits.
@@ -467,10 +489,10 @@ Blockly.Arduino['math_constrain'] = function(block) {
  * Generator for a random integer between two numbers (X and Y).
  * Arduino code: loop { math_random_int(X, Y); }
  *               and an aditional math_random_int function
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_random_int'] = function(block) {
-  //TODO: update this
-  // Random integer between [X] and [Y].
   var argument0 = Blockly.Arduino.valueToCode(block, 'FROM',
       Blockly.Arduino.ORDER_NONE) || '0';
   var argument1 = Blockly.Arduino.valueToCode(block, 'TO',
@@ -499,6 +521,8 @@ Blockly.Arduino['math_random_int'] = function(block) {
 /**
  * Generator for a random float from 0 to 1.
  * Arduino code: loop { (rand() / RAND_MAX) }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['math_random_float'] = function(block) {
   return ['(rand() / RAND_MAX)', Blockly.Arduino.ORDER_UNARY_POSTFIX];

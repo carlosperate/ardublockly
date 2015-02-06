@@ -5,15 +5,17 @@
  * @fileoverview Block for the Arduino map functionality.
  *               The Arduino built in functions syntax can be found at:
  *               http://arduino.cc/en/Reference/HomePage
+ *
+ * TODO: This block can be improved to set the new range properly.
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.map');
+goog.provide('Blockly.Blocks.Arduino.map');
 
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.map.HUE = 230;
+Blockly.Blocks.Arduino.map.HUE = 230;
 
 Blockly.Blocks['base_map'] = {
   /**
@@ -22,7 +24,7 @@ Blockly.Blocks['base_map'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/map');
-    this.setColour(Blockly.Blocks.map.HUE);
+    this.setColour(Blockly.Blocks.Arduino.map.HUE);
     this.appendValueInput("NUM", 'Number')
         .appendField("Map ")
         .setCheck('Number');
@@ -33,6 +35,6 @@ Blockly.Blocks['base_map'] = {
         .appendField("]");
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setTooltip('Re-maps a number from [0-1024] to another.');
+    this.setTooltip('Re-maps a number from [0-1024] to another range.');
   }
 };

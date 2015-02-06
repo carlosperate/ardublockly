@@ -19,17 +19,23 @@ goog.require('Blockly.Arduino');
 /**
  * Code generator of block for writing to the serial com.
  * Arduino code: loop { Serial.print(X); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['serial_print'] = function(block) {
+  var serialId = block.getFieldValue('SERIAL_ID');
   var content = Blockly.Arduino.valueToCode(
       block, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var code = 'Serial.print(' + content + ');\n';
+
+  var code = serialId + '.print(' + content + ');\n';
   return code;
 };
 
 /**
  * Code generator for block for setting the serial com speed.
  * Arduino code: setup{ Serial.begin(X); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code.
  */
 Blockly.Arduino['serial_speed'] = function(block) {
   var serialId = block.getFieldValue('SERIAL_ID');

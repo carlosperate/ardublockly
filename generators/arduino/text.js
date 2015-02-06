@@ -231,7 +231,7 @@ Blockly.Arduino['text_prompt_ext'] = function(block) {
       serialId + '.begin(9600);';
   
   var msg = Blockly.Arduino.valueToCode(block, 'TEXT',
-      Blockly.Arduino.ORDER_NONE) || '\'\'';
+      Blockly.Arduino.ORDER_NONE) || '""';
   var code = 'getUserInputPrompt(' + msg + ')';
 
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
@@ -251,7 +251,7 @@ Blockly.Arduino['text_endString'] = function(block) {
     var argument0 = Blockly.Arduino.valueToCode(block, 'NUM',
         Blockly.Arduino.ORDER_NONE) || '1';
     var argument1 = Blockly.Arduino.valueToCode(block, 'TEXT',
-        Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';
+        Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
     code = argument1 + '.substring(0, ' + argument0 + ')';
   } else {
     if (!Blockly.Arduino.definitions_['text_tailString']) {
@@ -268,7 +268,7 @@ Blockly.Arduino['text_endString'] = function(block) {
     var argument0 = Blockly.Arduino.valueToCode(block, 'NUM',
         Blockly.Arduino.ORDER_NONE) || '1';
     var argument1 = Blockly.Arduino.valueToCode(block, 'TEXT',
-        Blockly.Arduino.ORDER_NONE) || '\'\'';
+        Blockly.Arduino.ORDER_NONE) || '""';
     code = Blockly.Arduino.text_endString.text_tailString +
         '(' + argument0 + ', ' + argument1 + ')';
   }
@@ -280,9 +280,9 @@ Blockly.Arduino['text_indexOf'] = function(block) {
   var operator = block.getFieldValue('END') == 'FIRST' ?
       'indexOf' : 'lastIndexOf';
   var argument0 = Blockly.Arduino.valueToCode(block, 'FIND',
-      Blockly.Arduino.ORDER_NONE) || '\'\'';
+      Blockly.Arduino.ORDER_NONE) || '""';
   var argument1 = Blockly.Arduino.valueToCode(block, 'VALUE',
-      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';
+      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
   var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
@@ -293,7 +293,7 @@ Blockly.Arduino['text_charAt'] = function(block) {
   var at = Blockly.Arduino.valueToCode(block, 'AT',
       Blockly.Arduino.ORDER_NONE) || '1';
   var text = Blockly.Arduino.valueToCode(block, 'VALUE',
-      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';
+      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
   switch (where) {
     case 'FIRST':
       var code = text + '.charAt(0)';
@@ -332,7 +332,7 @@ Blockly.Arduino['text_charAt'] = function(block) {
 Blockly.Arduino['text_getSubstring'] = function(block) {
   // Get substring.
   var text = Blockly.Arduino.valueToCode(block, 'STRING',
-      Blockly.Arduino.ORDER_MEMBER) || '\'\'';
+      Blockly.Arduino.ORDER_MEMBER) || '""';
   var where1 = block.getFieldValue('WHERE1');
   var where2 = block.getFieldValue('WHERE2');
   var at1 = Blockly.Arduino.valueToCode(block, 'AT1',
@@ -383,7 +383,7 @@ Blockly.Arduino['text_changeCase'] = function(block) {
   if (operator) {
     // Upper and lower case are functions built into Arduino.
     var argument0 = Blockly.Arduino.valueToCode(this, 'TEXT',
-        Blockly.Arduino.ORDER_UNARY_POSTFIX) || '\'\'';
+        Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
     code = argument0 + operator;
   } else {
     if (!Blockly.Arduino.definitions_['toTitleCase']) {
@@ -409,7 +409,7 @@ Blockly.Arduino['text_changeCase'] = function(block) {
       Blockly.Arduino.definitions_['toTitleCase'] = func.join('\n');
     }
     var argument0 = Blockly.Arduino.valueToCode(block, 'TEXT',
-        Blockly.Arduino.ORDER_NONE) || '\'\'';
+        Blockly.Arduino.ORDER_NONE) || '""';
     code = Blockly.Arduino.text_changeCase.toTitleCase + '(' + argument0 + ')';
   }
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];

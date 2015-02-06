@@ -16,8 +16,10 @@ goog.require('Blockly.Arduino');
 
 
 /**
- * Code generator to create a function with a return value.
+ * Code generator to create a function with a return value (X).
  * Arduino code: void functionname { return X }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {null} There is no code added to loop
  */
 Blockly.Arduino['procedures_defreturn'] = function(block) {
   var funcName = Blockly.Arduino.variableDB_.getName(
@@ -62,7 +64,9 @@ Blockly.Arduino['procedures_defnoreturn'] =
 
 /**
  * Code generator to create a function call with a return value.
- * Arduino code: loop  { functionname() }
+ * Arduino code: loop { functionname() }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['procedures_callreturn'] = function(block) {
   var funcName = Blockly.Arduino.variableDB_.getName(
@@ -78,7 +82,9 @@ Blockly.Arduino['procedures_callreturn'] = function(block) {
 
 /**
  * Code generator to create a function call without a return value.
- * Arduino code: functionname()
+ * Arduino code: loop { functionname() }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['procedures_callnoreturn'] = function(block) {
   var funcName = Blockly.Arduino.variableDB_.getName(
@@ -93,8 +99,10 @@ Blockly.Arduino['procedures_callnoreturn'] = function(block) {
 };
 
 /**
- * Code generator to create a conditional return value for a function.
+ * Code generator to create a conditional (X) return value (Y) for a function.
  * Arduino code: if (X) { return Y; }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['procedures_ifreturn'] = function(block) {
   var condition = Blockly.Arduino.valueToCode(block, 'CONDITION',

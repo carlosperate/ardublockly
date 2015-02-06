@@ -11,12 +11,12 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.serial');
+goog.provide('Blockly.Blocks.Arduino.serial');
 
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.serial.HUE = 160;
+Blockly.Blocks.Arduino.serial.HUE = 160;
 
 Blockly.Blocks['serial_print'] = {
   /**
@@ -25,7 +25,7 @@ Blockly.Blocks['serial_print'] = {
    */
   init: function() {
     this.setHelpUrl('http://www.arduino.cc/en/Serial/Print');
-    this.setColour(Blockly.Blocks.serial.HUE);
+    this.setColour(Blockly.Blocks.Arduino.serial.HUE);
     this.appendDummyInput()
         .appendField(
             new Blockly.FieldDropdown(profile.default.serial), "SERIAL_ID")
@@ -82,7 +82,7 @@ Blockly.Blocks['serial_speed'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Serial/Begin');
-    this.setColour(Blockly.Blocks.serial.HUE);
+    this.setColour(Blockly.Blocks.Arduino.serial.HUE);
     this.appendDummyInput()
         .appendField("setup: ")
         .appendField(

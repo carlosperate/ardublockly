@@ -2,18 +2,18 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview Blocks extension for Arduino SPI library.
+ * @fileoverview Blocks for Arduino SPI library.
  *               The Arduino SPI functions syntax can be found in:
  *               http://arduino.cc/en/Reference/SPI
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.spi');
+goog.provide('Blockly.Blocks.Arduino.spi');
 
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.spi.HUE = 255;
+Blockly.Blocks.Arduino.spi.HUE = 255;
 
 Blockly.Blocks['spi_config'] = {
   /**
@@ -22,7 +22,7 @@ Blockly.Blocks['spi_config'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/SPI');
-    this.setColour(Blockly.Blocks.spi.HUE);
+    this.setColour(Blockly.Blocks.Arduino.spi.HUE);
     this.appendDummyInput()
         .appendField('SPI Configuration:');
     this.appendDummyInput()
@@ -45,7 +45,7 @@ Blockly.Blocks['spi_config'] = {
                  ['2 (High - Falling)', 'SPI_MODE2'],
                  ['3 (High - Rising)', 'SPI_MODE3']]),
             'SPI_MODE');
-    this.setTooltip('');
+    this.setTooltip('Configures the SPI peripheral');
   }
 };
 
@@ -62,7 +62,7 @@ Blockly.Blocks['spi_transfer'] = {
     }
 
     this.setHelpUrl('http://arduino.cc/en/Reference/SPITransfer');
-    this.setColour(Blockly.Blocks.spi.HUE);
+    this.setColour(Blockly.Blocks.Arduino.spi.HUE);
     this.appendDummyInput()
         .appendField('To SPI Slave pin')
         .appendField(

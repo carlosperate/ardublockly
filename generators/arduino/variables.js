@@ -12,7 +12,8 @@ goog.require('Blockly.Arduino');
 
 
 /**
- * Code generator for variable getter.
+ * Code generator for variable (X) getter.
+ * Arduino code: loop { X }
  * @param {Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
@@ -23,7 +24,9 @@ Blockly.Arduino['variables_get'] = function(block) {
 };
 
 /**
- * Code generator for variable setter.
+ * Code generator for variable (X) setter (Y).
+ * Arduino code: type X;
+ *               loop { X = Y; }
  * @param {Blockly.Block} block Block to generate the code from.
  * @return {string} Completed code.
  */
@@ -36,7 +39,8 @@ Blockly.Arduino['variables_set'] = function(block) {
 };
 
 /**
- * Code generator for variable casting.
+ * Code generator for variable (X) casting (Y).
+ * Arduino code: loop { (Y)X }
  * @param {Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */

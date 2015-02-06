@@ -12,10 +12,13 @@ goog.provide('Blockly.Arduino.loops');
 
 goog.require('Blockly.Arduino');
 
+
 /**
  * Generator for the repeat block (number in a drop down) using a For loop
  * statement.
  * Arduino code: loop { for (int count = 0; count < X; count++) { Y } }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['controls_repeat'] = function(block) {
   var repeats = Number(block.getFieldValue('TIMES'));
@@ -34,6 +37,8 @@ Blockly.Arduino['controls_repeat'] = function(block) {
  * Generator for the repeat block (using external number block) using a
  * For loop statement.
  * Arduino code: loop { for (int count = 0; count < X; count++) { Y } }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['controls_repeat_ext'] = function(block) {
   var repeats = Blockly.Arduino.valueToCode(block, 'TIMES',
@@ -57,8 +62,10 @@ Blockly.Arduino['controls_repeat_ext'] = function(block) {
 };
 
 /**
- * Generator for the repeat while block using a While statement
+ * Generator for the repeat while block using a While statement.
  * Arduino code: loop { while (X) { Y } }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['controls_whileUntil'] = function(block) {
   // Do while/until loop.
@@ -78,8 +85,10 @@ Blockly.Arduino['controls_whileUntil'] = function(block) {
 };
 
 /**
- * Generator for the For loop statements
+ * Generator for the For loop statements.
  * Arduino code: loop { for (i = X; i <= Y; i+=Z) { } }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['controls_for'] = function(block) {
   var variable0 = Blockly.Arduino.variableDB_.getName(
@@ -151,6 +160,8 @@ Blockly.Arduino['controls_for'] = function(block) {
  * TODO: Removed for now from toolbox as lists are not yet implemented.
  *       List will most likely be implemented as arrays in the future.
  *       For each does not exists in C++ version used in Arduino.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['controls_forEach'] = function(block) {
   var variable0 = Blockly.Arduino.variableDB_.getName(
@@ -169,8 +180,10 @@ Blockly.Arduino['controls_forEach'] = function(block) {
 };
 
 /**
- * Generator for the loop flow control statements
+ * Generator for the loop flow control statements.
  * Arduino code: loop { break;/continue; }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
  */
 Blockly.Arduino['controls_flow_statements'] = function(block) {
   switch (block.getFieldValue('FLOW')) {
