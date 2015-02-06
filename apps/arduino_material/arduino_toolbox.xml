@@ -128,8 +128,20 @@
   </category>
   <sep></sep>
   <category name="Time">
-    <block type="time_delay"></block>
-    <block type="time_delaymicros"></block>
+    <block type="time_delay">
+      <value name="DELAY_TIME_MILI">
+        <block type="math_number">
+          <field name="NUM">1000</field>
+        </block>
+      </value>
+    </block>
+    <block type="time_delaymicros">
+      <value name="DELAY_TIME_MICRO">
+        <block type="math_number">
+          <field name="NUM">100</field>
+        </block>
+      </value>
+    </block>
     <block type="time_millis"></block>
     <block type="time_micros"></block>
   </category>
