@@ -93,28 +93,6 @@
     </block>
     <block type="text_length"></block>
     <block type="text_isEmpty"></block>
-    <block type="text_indexOf">
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" class="textVar">text</field>
-        </block>
-      </value>
-    </block>
-    <block type="text_charAt">
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" class="textVar">text</field>
-        </block>
-      </value>
-    </block>
-    <block type="text_getSubstring">
-      <value name="STRING">
-        <block type="variables_get">
-          <field name="VAR" class="textVar">text</field>
-        </block>
-      </value>
-    </block>
-    <block type="text_changeCase"></block>
     <block type="text_trim"></block>
     <block type="text_print"></block>
     <block type="text_prompt_ext">
