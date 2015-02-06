@@ -1,7 +1,10 @@
 /**
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
  * @fileoverview Blocks extension for Arduino SPI library.
- * The Arduino SPI functions syntax can be found in the following URL
- * http://arduino.cc/en/Reference/SPI
+ *               The Arduino SPI functions syntax can be found in:
+ *               http://arduino.cc/en/Reference/SPI
  */
 'use strict';
 
@@ -9,42 +12,15 @@ goog.provide('Blockly.Arduino.spi');
 
 goog.require('Blockly.Arduino');
 
-/**
- * Block for the spi configuration. Info in the setHelpUrl link.
- * @this Blockly.Block
- */
-Blockly.Blocks['spi_config'] = {
-  init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/SPI');
-    this.setColour(255);
-    this.appendDummyInput()
-        .appendField('SPI Configuration:');
-    this.appendDummyInput()
-        .appendField('Data Shift')
-        .appendField(
-            new Blockly.FieldDropdown([['MSBFIRST', 'MSBFIRST'], ['LSBFIRST', 'LSBFIRST']]),
-            'SPI_SHIFT_ORDER');
-    this.appendDummyInput()
-        .appendField('Clock Divide')
-        .appendField(
-            new Blockly.FieldDropdown(profile.default.spi_clock_divide),
-            'SPI_CLOCK_DIVIDE');
-    this.appendDummyInput()
-        .appendField('SPI Mode (Idle - Edge)')
-        .appendField(
-            new Blockly.FieldDropdown(
-                [['0 (Low - Falling)', 'SPI_MODE0'], 
-                 ['1 (Low - Rising)', 'SPI_MODE1'],
-                 ['2 (High - Falling)', 'SPI_MODE2'],
-                 ['3 (High - Rising)', 'SPI_MODE3']]),
-            'SPI_MODE');
-    this.setTooltip('');
-  }
-};
 
 /**
- * Code generator for the spi configuration block. It does not add any LoC to 
+ * Code generator for the SPI configuration block. It does not add any LoC to 
  * the loop(), but it generates code for the setup() function.
+ * Arduino code: #include <SPI.h>
+ *               setup() { SPI.setBitOrder(X);
+ *                         SPI.setDataMode(Y);
+ *                         SPI.setClockDivider(Z);
+ *                         SPI.begin(); }
  */
 Blockly.Arduino['spi_config'] = function(block) {
   var spi_shift = block.getFieldValue('SPI_SHIFT_ORDER');
@@ -65,39 +41,15 @@ Blockly.Arduino['spi_config'] = function(block) {
   return code;
 };
 
-
 /**
- * Block for for the spi transfer. Info in the setHelpUrl link.
- * @this Blockly.Block
- */
-Blockly.Blocks['spi_transfer'] = {
-  init: function() {
-    // Drop down list to contains all digital pins plus an option for 'none'
-    var pin_dropdown_extended = [['none', 'none']];
-    for(var i=0; i<profile.default.digital.length; i++) {
-        pin_dropdown_extended.push(profile.default.digital[i]);
-    }
-
-    this.setHelpUrl('http://arduino.cc/en/Reference/SPITransfer');
-    this.setColour(255);
-    this.appendDummyInput()
-        .appendField('To SPI Slave pin')
-        .appendField(
-            new Blockly.FieldDropdown(pin_dropdown_extended), 'SPI_SS');
-    this.appendDummyInput('')
-        .appendField('transfer');
-    this.appendValueInput('SPI_DATA', '');
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setTooltip('Send SPI message to an specified slave device');
-  }
-};
-
-/**
- * Code generator for the spi transfer block. 
+ * Code generator for the SPI transfer block. 
  * SPI bus can have several slaves, which are selected using a digital output 
- * as a SS pin. This digital pin will be configured as a normal output (io.js)
+ * as a SS pin. This digital pin will be configured as a normal output.
+ * Arduino code: #include <SPI.h>
+ *               setup { pinMode(X, OUTPUT); }
+ *               loop  { digitalWrite(X, HIGH);
+ *                       SPI.transfer(0);
+ *                       digitalWrite(X, LOW); }
  */
 Blockly.Arduino['spi_transfer'] = function(block) {
   var spi_ss = block.getFieldValue('SPI_SS');
@@ -108,7 +60,7 @@ Blockly.Arduino['spi_transfer'] = function(block) {
   Blockly.Arduino.definitions_['define_spi'] = '#include <SPI.h>';
   Blockly.Arduino.setups_['setup_spi_begin'] = 'SPI.begin();';
 
-  // Configure the SPI pins as used, or warn if already in use
+  // Configure SPI pins (MOSI, MISO, SCK) as used, or warn if already in use
   var warning_text = '';
   var pin_type = profile.default.pin_types.SPI;
   for(var i=0; i<profile.default.spi_pins.length; i++) {
@@ -116,7 +68,10 @@ Blockly.Arduino['spi_transfer'] = function(block) {
     if (pin_number in Blockly.Arduino.pins_) {
       if (Blockly.Arduino.pins_[pin_number] != pin_type) {
         warning_text = warning_text +
-            'Pin alredy used as ' + Blockly.Arduino.pins_[pin_number] + '\n';
+            'SPI needs pin ' + profile.default.spi_pins[i][1] +
+            ' as ' + profile.default.spi_pins[i][0] + '\n' +
+            'Pin ' + pin_number + ' already used as ' +
+            Blockly.Arduino.pins_[pin_number] + '\n';
       }
     } else {
       // First time this IO pin is used, so configure it
