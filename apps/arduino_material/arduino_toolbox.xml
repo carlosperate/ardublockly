@@ -165,8 +165,32 @@
       </value>
     </block>
     <block type="servo_read"></block>
-    <block type="stepper_config"></block>
-    <block type="stepper_step"></block>
+    <block type="stepper_config">
+      <field name="STEPPER_PIN1">1</field>
+      <field name="STEPPER_PIN2">2</field>
+      <value name="STEPPER_STEPS">
+        <block type="math_number">
+          <field name="NUM">100</field>
+        </block>
+      </value>
+      <value name="STEPPER_SPEED">
+        <block type="math_number">
+          <field name="NUM">10</field>
+        </block>
+      </value>
+      <value name="STEPPER_NAME">
+        <block type="text">
+          <field name="TEXT">MyStepper</field>
+        </block>
+      </value>
+    </block>
+    <block type="stepper_step">
+      <value name="STEPPER_STEPS">
+        <block type="math_number">
+          <field name="NUM">10</field>
+        </block>
+      </value>
+    </block>
   </category>
   <sep></sep>
   <category name="Comms">
