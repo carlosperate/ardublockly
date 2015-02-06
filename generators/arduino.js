@@ -195,7 +195,7 @@ Blockly.Arduino.evaluateType = function(inputString) {
     return 'char';
   }
   else if (!inputString || !inputString.length) {
-    return 'defineme';
+    return 'int';
   }
   else if (Blockly.Arduino.regExpInt.test(firstCharacter)) {
     if( Blockly.Arduino.regExpInt.test(inputString)) {
@@ -203,12 +203,12 @@ Blockly.Arduino.evaluateType = function(inputString) {
     } else if ( Blockly.Arduino.regExpFloat.test(inputString)) {
       return 'float';
     }
-    return 'dontknowInt';
+    return 'int';
   }
 
   // For now the default is integer, will have to figure out how to 
   // evaluate other blocks as inputs
-  return 'integer';
+  return 'int';
 }
 
 /**
