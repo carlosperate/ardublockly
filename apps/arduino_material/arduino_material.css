@@ -33,6 +33,7 @@ body {
   border-radius: 0;
   position: inherit;
   margin-bottom: 30px;
+  z-index: 997 !important;
 }
 @media only screen and (min-width : 993px) {
   body {
@@ -44,10 +45,22 @@ body {
     left: 0;
     top: 0;
     margin-bottom: 0px;
-    z-index: 998;
+    z-index: 997;
   }
 }
 
+/* Side nav Logo */
+ul.side-nav li.logo {
+  text-align: center;
+  margin: 0px !important;
+  padding: 0px 0px !important;
+  border: none !important;
+  height: 112px;
+  background-color: #eeeeee;
+}
+ul.side-nav li.logo:hover {
+  background-color: #eeeeee;
+}
 
 /************************************/
 /*  Blocks, arduino, and xml areas  */
@@ -71,25 +84,28 @@ body {
   margin: 0;
   padding: 0;
   min-height: 560px;
+  max-height: 560px;
   background: none; 
-  height: -moz-calc(100hv - 200px);     /* Firefox  */
-  height: -webkit-calc(100hv - 200px);  /* WebKit   */
-  height: -o-calc(100hv - 200px);       /* Opera    */
-  height: calc(100hv - 200px);          /* Standard */
+  /*height: -moz-calc(100hv - 200px);     /* Firefox  */
+  /*height: -webkit-calc(100hv - 200px);  /* WebKit   */
+  /*height: -o-calc(100hv - 200px);       /* Opera    */
+  /*height: calc(100hv - 200px);          /* Standard */
 }
 
 #content_xml {
   resize: none;
   outline: none;
   border: none;
+  padding: 0px 5px;
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  min-height: 469px;
-  height: -moz-calc(100hv - 100px);     /* Firefox  */
-  height: -webkit-calc(100hv - 100px);  /* WebKit   */
-  height: -o-calc(100hv - 100px);       /* Opera    */
-  height: calc(100hv - 100px);          /* Standard */
+  min-height: 468px;
+  max-height: 468px;
+  /*height: -moz-calc(100hv - 100px);     /* Firefox  */
+  /*height: -webkit-calc(100hv - 100px);  /* WebKit   */
+  /*height: -o-calc(100hv - 100px);       /* Opera    */
+  /*height: calc(100hv - 100px);          /* Standard */
 }
 
 /* The materialize framework changes height of the div to show or hide */
@@ -98,14 +114,16 @@ body {
   resize: none;
   outline: none;
   border: none;
+  padding: 0px 5px;
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  min-height: 469px;
-  height: -moz-calc(100hv - 100px);     /* Firefox  */
-  height: -webkit-calc(100hv - 100px);  /* WebKit   */
-  height: -o-calc(100hv - 100px);       /* Opera    */
-  height: calc(100hv - 100px);          /* Standard */
+  min-height: 468px;
+  max-height: 468px;
+  /*height: -moz-calc(100hv - 100px);     /* Firefox  */
+  /*height: -webkit-calc(100hv - 100px);  /* WebKit   */
+  /*height: -o-calc(100hv - 100px);       /* Opera    */
+  /*height: calc(100hv - 100px);          /* Standard */
 }
 
 
@@ -116,6 +134,9 @@ body {
   position: absolute;
   right: 25px;
   top: -20px;
+}
+#button_run:hover {
+  background-color: #E5AD24;
 }
 .run_loader {
   position: absolute !important;
@@ -146,7 +167,7 @@ body {
   -webkit-border-radius: 4px 4px 4px 4px !important;
   -moz-border-radius: 4px 4px 4px 4px !important;
   border-radius: 4px 4px 4px 4px !important;
-  background: rgba(13, 71, 161, 0.1) !important;  /* Blue 900 */
+  background: rgba(98, 174, 178, .2) !important;  /* Arduino Light Teal */
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
@@ -162,10 +183,42 @@ body {
 }
 
 
-/***********************************/
-/*  Small modal responsive design  */
-/***********************************/
-/* Additional CSS to reduce size of Materialize Modal */
+/************************/
+/*  Modals and content  */
+/************************/
+/* Sehttp://192.168.0.7:8000/ardublockly/apps/arduino_material/#ttings modal dialog */
+.settings_div {
+  margin: 24px 0px;
+  width: 100%;
+}
+
+/* Arduino output modal dialog */
+#arduino_dialog_body {
+  padding-top: 25px;
+}
+.arduino_dialog_out {}
+.arduino_dialog_out_error {
+  color: #E47128;   /* arduino orange */
+  padding-top: 25px;
+  display: block;
+}
+.arduino_dialog_success {
+  color: #00979C;   /* arduino light teal */
+}
+.arduino_dialog_failure {
+  color: #E47128;   /* arduino orange */
+}
+
+/* Footer buttons padding */
+.modal_right_button {
+  margin: 0px 0px 0px 48px !important;
+}
+
+/* Small modal responsive design */
+.modal_small {
+  height: 30% !important;
+  min-height: 200px;
+}
 @media only screen and (min-width: 0) {
   .modal_small {
     max-width: 75% !important;
@@ -210,55 +263,70 @@ body {
 }
 
 
-/************/
-/*  Others  */
-/************/
-/* Settings modal dialog */
-.settings_div {
-  margin: 24px 0px;
-  width: 100%;
+/*************************/
+/*  New spinner colours  */
+/*************************/
+.spinner-orange {
+  border-color: #E47128;
 }
-.return_container {
-  padding: 32px 24px 32px 24px !important;
-}
-
-/* Arduino output modal dialog */
-#arduino_dialog_body {
-  padding-top: 25px;
-}
-.arduino_dialog_out {}
-.arduino_dialog_out_error {
-  color: #c62828;   /* red 800*/
-  padding-top: 25px;
-  display: block;
-}
-.arduino_dialog_success {
-  color: #2e7d32;   /* green 800 */
-}
-.arduino_dialog_failure {
-  color: #c62828;   /* red 800*/
+.active .spinner-layer.spinner-orange {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
 
-/* Edit logo for code and xml collapsibles*/
-.collapsible_logo {
-  width: 3rem;
-  font-size: 1.6rem;
-  line-height: 3rem;
-  display: block;
-  float: left;
-  text-align: center;
-  margin-right: 1rem; 
+.spinner-dark-teal {
+  border-color: #00878F;
+}
+.active .spinner-layer.spinner-dark-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
 
-/* Additional spinner colour to replace red */
+.spinner-yellow {
+  border-color: #E5AD24;
+}
+.active .spinner-layer.spinner-yellow {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-light-teal {
+  border-color: #62AEB2;
+}
+.active .spinner-layer.spinner-light-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
 .spinner-purple {
   border-color: #8e24aa;
 }
 .active .spinner-layer.spinner-purple {
   /* durations: 4 * ARCTIME */
   -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both; }
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
+
+
+/************/
+/*  Others  */
+/************/
+/* Edit logo for code and xml collapsibles*/
+.collapsible_logo {
+  width: 3rem;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: bold;
+  display: block;
+  float: left;
+  text-align: center;
+  margin-right: 1rem;
+}
+
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
@@ -291,14 +359,15 @@ body {
   background: rgba(98, 174, 178, .2) !important;  /* Arduino Light Teal */
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 .blocklyTreeRoot {
   background: none !important;
   border: none !important;
   margin: 33px 0px 0px 0px !important;
   padding: 5px 1px !important;
-  /*position: relative;
+  /* Vertical centre
+  position: relative;
   top: 50%;
   transform: translateY(-50%);*/
 }
@@ -312,10 +381,10 @@ body {
   vertical-align: middle !important;*/
 }
 .blocklyTreeSelected {
-  background-color: #2196f3 !important;  /* Blue 500 */
+  background-color: #E47128 !important;  /* arduino orange */
 }
 .blocklyTreeRow:not(.blocklyTreeSelected):hover {
-  background-color: #bbdefb !important;  /* Blue 100 */
+  background-color: #E5AD24 !important;  /* arduino yellow */
 }
 .blocklyTreeLabel {
 }
@@ -378,10 +447,38 @@ body {
   .col {
     margin-top: -8px;
   }
-  /* Increase the text size of the side menu */
-  ul.side-nav i {
-    font-size: 1.8rem !important;
-  }
+}
+
+/* Increase the text size of the side menu */
+ul.side-nav {
+  padding: 0px !important;
+  line-height: 64px !important;
+}
+ul.side-nav i {
+  font-size: 1.8rem !important;
+}
+ul.side-nav .collapsible {
+  margin: 0 !important;
+}
+/* Set the background effect in the side menu */
+ul.side-nav {
+  background-color: #eeeeee;
+}
+ul.side-nav li ul{
+  background-color: #eeeeee;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-right: 3px solid #dddddd;
+  border-left: 3px solid #ffffff;
+}
+ul.side-nav li ul li{
+  cursor: pointer;
+}
+
+/* Add extra margin to the side menu button*/
+.button-collapse {
+  margin-right: 16px;
 }
 
 /* Increase the size of Materialize Modal in small res */

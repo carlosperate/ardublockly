@@ -56,33 +56,49 @@
 
 <body>
 
-  <!-- Navigation bar -->
+  <!-- Horizonal Navigation bar -->
   <nav class="nav-fixed arduino_teal">
     <div class="container">
       <div class="nav-wrapper">
+        <a class="button-collapse show-on-large" href="#" data-activates="slide-out"><i class="mdi-navigation-menu"></i></a>
         <a id="logo-container" href="#" class="brand-logo">Ardublockly</a>
-        <!-- Drop down menu -->
-        <ul id="dropdown_examples" class="dropdown-content">
-          <li><a href="#!">one</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">two</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">three</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">four</a></li>
-        </ul>
-        <ul id="nav-mobile" class="right side-nav">
+        <!-- Horizontal Navbar links only shown on large resolutions -->
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="#" id="button_load">Open<i class="mdi-file-file-upload left"></i></a></li>
           <li><a href="#" id="button_save">Save<i class="mdi-file-file-download left"></i></a></li>
-          <li><a href="#" id="button_delete_all">Delete All<i class="mdi-action-delete left"></i></a></li>
-          <li><a href="#settings_dialog" class="modal-trigger" id="button_settings">Settings<i class="mdi-action-settings left"></i></a></li>
-          <!-- Drop down Trigger -->
-          <li><a class="dropdown-button" href="#!" data-activates="dropdown_examples">Examples<i class="mdi-action-assignment left"></i><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+          <li><a href="#" id="button_delete">Delete All<i class="mdi-action-delete left"></i></a></li>
         </ul>
-        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
       </div>
     </div>
   </nav>
+
+  <!-- Sidebar navigation -->
+  <ul id="slide-out" class="side-nav">
+    <li class="logo"><img src="img/sidenav_header.png"/></li>
+    <li class="no-padding">
+      <ul>
+        <li id="menu_load"><a href="#">Open<i class="mdi-file-file-upload left"></i></a></li>
+        <li id="menu_save"><a href="#" id="button_save">Save<i class="mdi-file-file-download left"></i></a></li>
+        <li id="menu_delete"><a href="#">Delete All<i class="mdi-action-delete left"></i></a></li>
+        <li id="menu_settings"><a href="#">Settings<i class="mdi-action-settings left"></i></a></li>
+      </ul>
+    <li class="no-padding">
+      <ul class="collapsible collapsible-accordion">
+        <li>
+          <div class="collapsible-header">Examples<i class="mdi-navigation-arrow-drop-down"></i></div>
+          <div class="collapsible-body">
+            <ul>
+              <li id="menu_example_1"><a href="#!">Example 1</a></li>
+              <li id="menu_example_2"><a href="#!">Example 2</a></li>
+              <li id="menu_example_3"><a href="#!">Example 3</a></li>
+              <li id="menu_example_4"><a href="#!">Example 4</a></li>
+              <li id="menu_example_5"><a href="#!">Example 5</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
   <!-- Content -->
   <div class="container">
@@ -92,7 +108,7 @@
         <a id="button_run" class="waves-effect waves-light waves-circle btn-floating btn-large arduino_orange z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
         <!-- Begging of loader circle -->
         <div id="button_run_spinner" class="preloader-wrapper active run_loader" style="display:none">
-          <div class="spinner-layer spinner-blue">
+          <div class="spinner-layer spinner-orange">
             <div class="circle-clipper left">
               <div class="circle"></div>
             </div><div class="gap-patch">
@@ -101,7 +117,7 @@
               <div class="circle"></div>
             </div>
           </div>
-          <div class="spinner-layer spinner-purple">
+          <div class="spinner-layer spinner-dark-teal">
             <div class="circle-clipper left">
               <div class="circle"></div>
             </div><div class="gap-patch">
@@ -119,7 +135,7 @@
               <div class="circle"></div>
             </div>
           </div>
-          <div class="spinner-layer spinner-green">
+          <div class="spinner-layer spinner-light-teal">
             <div class="circle-clipper left">
               <div class="circle"></div>
             </div><div class="gap-patch">
@@ -137,13 +153,13 @@
       <div class="col s12 m12 l4">
         <ul class="collapsible z-depth-1">
           <li>
-            <div class="collapsible-header"><b class="collapsible_logo">{ }</b>Source Code</div>
+            <div class="collapsible-header"><span class="collapsible_logo">{ }</span>Source Code</div>
             <div class="collapsible-body">
               <pre id="content_arduino" class="content"></pre>
             </div>
           </li>
           <li>
-            <div class="collapsible-header" id="xml_collapsible_header"><b class="collapsible_logo">&#60; &#62;</b>XML</div>
+            <div class="collapsible-header" id="xml_collapsible_header"><span class="collapsible_logo">&#60; &#62;</span>XML</div>
             <div class="collapsible-body"  style="position:relative" id="xml_collapsible_body">
               <a class="btn-floating btn-large waves-effect waves-light arduino_teal z-depth-1-half" id="button_load_xml"><i class="mdi-action-extension"></i></a>
               <textarea id="content_xml" class="content" wrap="soft"></textarea>
@@ -156,69 +172,65 @@
   </div>
 
   <!-- Settings: Displayed as a "Materialize Modal" (dialog) -->
-  <div id="settings_dialog" class="modal">
-    <h4>Settings</h4>
-    <div class="settings_div">
-      <label>Compiler Location:</label>
-      <input type="text" id="settings_compiler_location" readonly>
-    </div>
-    <div class="settings_div">
-      <label>Sketch Folder:</label>
-      <input type="text" id="settings_sketch_location" readonly>
-    </div>
-    <div class="settings_div">
-      <label>Arduino Board:</label>
-      <select name="settings_board" id="board">
-        <option value="uno">Uno</option>
-        <option value="leonardo">Leonardo</option>
-        <option value="mega">Mega</option>
-      </select>
-    </div>
-    <div class="settings_div">
-      <label>COM Port:</label>
-      <select name="settings_serial" id="serial_port">
-        <option value="COM4">COM 4</option>
-        <option value="COM5">COM 5</option>
-        <option value="COM6">COM 6</option>
-      </select>
-    </div>
-    <div class="settings_div">
-      <label>IDE:</label> <br>
-      <select name="settings_ide  " id="ide_settings" onchange="ArduinoMaterial.setIdeSettings(this.value)">
-        <option value="ide_upload">Compile and Upload sketchaaa</option>
-        <option value="ide_only">Load sketch in IDE onlyaaa</option>
-      </select>
-    </div>
-    <div class="two_halves_container return_container">
-      <div class="two_halves_right" style="text-align:right">
-        <a href="#" class="waves-effect btn-flat modal-close">Return</a>
+  <div id="settings_dialog" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Settings</h4>
+      <div class="settings_div">
+        <label>Compiler Location:</label>
+        <input type="text" id="settings_compiler_location" readonly>
       </div>
-      <div class="two_halves_left" style="text-align:center"></div>
+      <div class="settings_div">
+        <label>Sketch Folder:</label>
+        <input type="text" id="settings_sketch_location" readonly>
+      </div>
+      <div class="settings_div">
+        <label>Arduino Board:</label>
+        <select name="settings_board" id="board">
+          <option value="uno">Uno</option>
+          <option value="leonardo">Leonardo</option>
+          <option value="mega">Mega</option>
+        </select>
+      </div>
+      <div class="settings_div">
+        <label>COM Port:</label>
+        <select name="settings_serial" id="serial_port">
+          <option value="COM4">COM 4</option>
+          <option value="COM5">COM 5</option>
+          <option value="COM6">COM 6</option>
+        </select>
+      </div>
+      <div class="settings_div">
+        <label>IDE:</label> <br>
+        <select name="settings_ide  " id="ide_settings" onchange="ArduinoMaterial.setIdeSettings(this.value)">
+          <option value="ide_upload">Compile and Upload sketchaaa</option>
+          <option value="ide_only">Load sketch in IDE onlyaaa</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="waves-effect btn-flat modal-close">Return</a>
     </div>
   </div>
 
   <!-- Arduino IDE Modal: Content is loaded using Javascript to display dialog -->
-  <div id="arduino_dialog" class="modal">
-    <div id="arduino_dialog_body">Empty Arduino modal.</div>
-    <div class="two_halves_container return_container">
-      <div class="two_halves_right" style="text-align:right">
-        <a href="#" class="waves-effect btn-flat modal-close">Return</a>
-      </div>
-      <div class="two_halves_left" style="text-align:center"></div>
+  <div id="arduino_dialog" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div id="arduino_dialog_body">Empty Arduino modal.</div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="waves-effect btn-flat modal-close">Return</a>
     </div>
   </div>
 
   <!-- General Alert: Content is loaded using Javascript to display alerts -->
-  <div id="gen_alert" class="modal modal_small">
-    <h4 id="gen_alert_title">Empty Alert</h4>
-    <p><span id="gen_alert_body">Alert text</span></p>
-    <div class="two_halves_container">
-      <div id="gen_alert_ok_div" class="two_halves_right" style="text-align:center">
-        <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
-      </div>
-      <div id="gen_alert_cancel_div" class="two_halves_left" style="text-align:center">
-        <a id="gen_alert_cancel_link" href="#" class="waves-effect btn-flat modal-close">Cancel</a>
-      </div>
+  <div id="gen_alert" class="modal modal_small modal-fixed-footer">
+    <div class="modal-content">
+      <h4 id="gen_alert_title">Empty Alert</h4>
+      <p><span id="gen_alert_body">Alert text</span></p>
+    </div>
+    <div class="modal-footer">
+      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
+      <a id="gen_alert_cancel_link" href="#" class="waves-effect btn-flat modal-close">Cancel</a>
     </div>
   </div>
 

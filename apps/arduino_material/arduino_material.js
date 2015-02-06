@@ -33,10 +33,30 @@ ArduinoMaterial.bindActionFunctions_ = function() {
   // Navigation buttons
   ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadXmlFile);
   ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFile);
-  ArduinoMaterial.bindClick_('button_delete_all', ArduinoMaterial.discard);
-  ArduinoMaterial.bindClick_('button_settings',
-      ArduinoMaterial.populateSettings);
-  ArduinoMaterial.bindClick_('dropdown_examples',
+  ArduinoMaterial.bindClick_('button_delete', ArduinoMaterial.discard);
+
+  // Side menu buttons, they also close the side menu
+  ArduinoMaterial.bindClick_('menu_load', function() {
+      ArduinoMaterial.loadXmlFile();
+      $('.button-collapse').sideNav('hide'); });
+  ArduinoMaterial.bindClick_('menu_save',  function() {
+      ArduinoMaterial.saveXmlFile();
+      $('.button-collapse').sideNav('hide'); });
+  ArduinoMaterial.bindClick_('menu_delete',  function() {
+      ArduinoMaterial.discard();
+      $('.button-collapse').sideNav('hide'); });
+  ArduinoMaterial.bindClick_('menu_settings', function() {
+      ArduinoMaterial.openSettings();
+      $('.button-collapse').sideNav('hide'); });
+  ArduinoMaterial.bindClick_('menu_example_1',
+      ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick_('menu_example_2',
+      ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick_('menu_example_3',
+      ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick_('menu_example_4',
+      ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick_('menu_example_5',
       ArduinoMaterial.functionNotImplemented);
 
   // Floating buttons
@@ -129,6 +149,14 @@ ArduinoMaterial.saveXmlFile = function() {
       {type: "text/plain;charset=utf-8"});
   saveAs(blob, "ardublockly.xml");
 };
+
+/**
+ * Prepares and opens the settings modal.
+ */
+ArduinoMaterial.openSettings = function() {
+  ArduinoMaterial.populateSettings();
+  $('#settings_dialog').openModal();
+}
 
 /**
  * Retrieves the Settings from ArduServerCompiler and populates the form data

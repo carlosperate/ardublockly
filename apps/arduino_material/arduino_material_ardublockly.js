@@ -47,10 +47,14 @@ ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
       Blockly.inject(blockly_el, {
+            collapse: true,
+            comments: true,
+            disable: true,
             media: '../../media/',
             rtl: false,
             scrollbars: true,
-            toolbox: request.responseText });
+            toolbox: request.responseText,
+            trashcan: true });
       ArduinoMaterial.BLOCKLY_INJECTED = true;
     }
   }

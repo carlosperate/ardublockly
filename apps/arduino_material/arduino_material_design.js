@@ -17,23 +17,26 @@ var ArduinoMaterial = ArduinoMaterial || {};
  */
 ArduinoMaterial.materializeJsInit = function() {
   $(document).ready(function() {
+    // Navigation bar
+    $('.button-collapse').sideNav({
+      menuWidth: 240,
+      activationWidth: 70,
+      edge: 'left'});
     // Accordion collapsible
     $('.collapsible').collapsible();
-    // Navigation bar, converts in menu in low res
-    $('.button-collapse').sideNav({menuWidth: 240, activationWidth: 70});
     // Drop down menus
     $(".dropdown-button").dropdown({hover: false});
-    // Pop up messages using modals (android dialogs)
+    // Overlay content panels using modals (android dialogs)
     $('.modal-trigger').leanModal({
       dismissible: true,
       opacity: .5,
       in_duration: 300,
       out_duration: 200
      });
-    // Select menus
-    $('select').material_select();
     // Pop-up tool tips
     $('.tooltipped').tooltip({"delay": 50});
+    // Select menus
+    $('select').material_select();
   });
 };
 
@@ -137,15 +140,14 @@ ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
   $("#gen_alert_body").text('');
   $("#gen_alert_body").append(body);
   if (confirm == true) {
-    $("#gen_alert_cancel_div").css({'display': 'block'});
+    $("#gen_alert_cancel_link").css({'display': 'block'});
     if (callback) {
       $("#gen_alert_ok_link").bind('click', callback);
     } 
   } else {
-    $("#gen_alert_cancel_div").css({'display': 'none'});
+    $("#gen_alert_cancel_link").css({'display': 'none'});
     $("#gen_alert_ok_link").unbind('click');
   }
-
   $('#gen_alert').openModal();
   window.location.hash = '';
 };

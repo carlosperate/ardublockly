@@ -4,4 +4,4 @@ This folder contains the CSS and Javascript for the Materialize CSS framework.
 
 https://github.com/Dogfalo/materialize
 
-Current version used: > 0.95 [@d818c4c631 commit](https://github.com/Dogfalo/materialize/commit/d818c4c63186c390a147198cb8c090d08bdc7039)
+Current version used: >0.95.1 [@9b793030d78f41500fae18e4fb3f8bc70580eada commit](https://github.com/Dogfalo/materialize/commit/9b793030d78f41500fae18e4fb3f8bc70580eada)
