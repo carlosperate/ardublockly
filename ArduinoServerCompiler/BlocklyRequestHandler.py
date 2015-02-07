@@ -354,7 +354,7 @@ def set_sketch_path():
     new_directory = browse_dir()
     if new_directory != '':
         ServerCompilerSettings().sketch_dir = new_directory
-    return new_directory
+    return get_sketch_path()
 
 
 def get_sketch_path():
