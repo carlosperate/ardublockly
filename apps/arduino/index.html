@@ -42,11 +42,13 @@
   <script src="../../generators/arduino/variables.js"></script>
   <!-- Load Blockly's language strings -->
   <script src="../../msg/js/en.js"></script>
+  <!-- Arduino Server Compiler -->
+  <script src="../../ArduinoServerCompiler/js/ArduServerCompiler.js"></script>
   <!-- Prettify -->
   <link rel="stylesheet" href="../../demos/prettify.css">
   <script src="../../demos/prettify.js"></script>
-  <!-- Webapp js -->
-  <script src="arduino.js"></script>
+  <!-- FileSaver from arduino materia app -->
+  <script src="../arduino_material/js_libs/FileSaver.min.js"></script>
 </head>
 
 <body>
@@ -65,17 +67,17 @@
                 <button id="peekCode" class="button_text" title="Toggle the code view on the side">
                   Code peek <img src="../../media/1x1.gif">
                 </button>
-                <button id="" title="Load blocks">
+                <button id="openButton" title="Load blocks">
                   <img src="../../media/1x1.gif" class="icon21 load">
                 </button>
-                <button id="" title="Save blocks">
+                <button id="saveButton" title="Save blocks">
                   <img src="../../media/1x1.gif" class="icon21 save">
-                </button>
-                <button id="" title="Open the Settings">
-                  <img src="../../media/1x1.gif" class="icon21 settings">
                 </button>
                 <button id="trashButton" title="Discard all blocks">
                   <img src="../../media/1x1.gif" class="icon21 trash">
+                </button>
+                <button id="settingsButton" title="Open the Settings">
+                  <img src="../../media/1x1.gif" class="icon21 settings">
                 </button>
                 <button id="runButton" class="primary" title="Run the program defined by the blocks in the workspace">
                   <img src='../../media/1x1.gif' class="icon21 run">
@@ -103,5 +105,19 @@
       </tr>
     </table>
   </div>
+
+  <!-- Modal -->
+  <input type="checkbox" id="modal_toggle" />
+  <div class="modal">
+    <div id="modal_content"></div>
+    <p>
+      <button onclick="document.getElementById('modal_toggle').checked=false" class="primary">
+        Okay
+      </button>
+    <p>
+  </div>
+
+  <!-- Webapp js -->
+  <script src="arduino.js"></script>
 </body>
 </html>

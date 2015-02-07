@@ -261,3 +261,55 @@ img.load{
   height: 21px;
   width: 1px;
 }
+
+/* Modal */
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  margin: auto;
+  padding: 20px;
+  min-width: 350px;
+  max-width: 800px;
+  width: 50%;
+  min-height: 150px;
+  max-height: 800px;
+  height: 50%;
+  background: rgba(235,235,235,0.9);
+  -webkit-box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -ms-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  overflow: scroll;
+  word-wrap: break-word;
+  overflow-x: hidden;
+}
+.modal h4 {
+  margin: 5px 0px;
+  color: #232323;
+  text-transform: uppercase;
+  font: 25px/1.5 Helvetica, Verdana, sans-serif;
+}
+.modal p {
+  color: #444;
+  text-align: left;
+  font: 13px/1.8 Georgia, Times, sans-serif;
+}
+input#modal_toggle {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+input#modal_toggle:checked + .modal {
+  opacity: 1;
+  z-index: 1;
+}

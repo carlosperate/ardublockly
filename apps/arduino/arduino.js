@@ -30,22 +30,7 @@ Arduino.tabClick = function(clickedName) {
   if (document.getElementById('tab_xml').className == 'tabon') {
     var xmlTextarea = document.getElementById('content_xml');
     var xmlText = xmlTextarea.value;
-    var xmlDom = null;
-    try {
-      xmlDom = Blockly.Xml.textToDom(xmlText);
-    } catch (e) {
-      var message = 'Error parsing XML:\\n' + e + '\\n\\nSelect \'OK\' to ' +
-      'abandon your changes or \'Cancel\' to further edit the XML.';
-      var q = window.confirm(message);
-      if (!q) {
-        // Leave the user on the XML tab.
-        return;
-      }
-    }
-    if (xmlDom) {
-      Blockly.mainWorkspace.clear();
-      Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
-    }
+    Arduino.replaceBlocksfromXml(xmlText);
   }
 
   // Deselect the button, and ensure side panel is hidden
@@ -135,9 +120,14 @@ Arduino.init = function() {
   Arduino.tabClick(Arduino.selected);
 
   // Binding buttons
-  Arduino.bindClick('trashButton', Arduino.discard);
-  Arduino.bindClick('runButton', Arduino.loadToArduino);
   Arduino.bindClick('peekCode', Arduino.peekCode);
+  Arduino.bindClick('openButton', Arduino.loadXmlFile);
+  Arduino.bindClick('saveButton',   Arduino.saveXmlFile);
+  Arduino.bindClick('trashButton', Arduino.discard);
+  Arduino.bindClick('settingsButton', function() {
+      alert('Function not yet implemented.\n' +
+            'Try the Arduino Material webapp instead.')});
+  Arduino.bindClick('runButton', Arduino.loadToArduino);
 
   // Binding tabs
   for (var i = 0; i < Arduino.TABS_.length; i++) {
@@ -160,10 +150,24 @@ Arduino.adjustViewport = function() {
 };
 
 /**
- * Load and execute the user's code to the Arduino.
+ * Send the Arduino Code to the ArduServerCompiler to process.
  */
 Arduino.loadToArduino = function() {
-  //TODO: Add ajax function call to send string with code to Python server
+  ArduServerCompiler.sendSketchToServer(
+      Blockly.Arduino.workspaceToCode(),
+      Arduino.loadToArduinoReturn);
+};
+
+/**
+ * Send the Arduino Code to the ArduServerCompiler to process
+ */
+Arduino.loadToArduinoReturn = function(data_back_el) {
+  // edit modal with new content
+  var modal = document.getElementById('modal_content');
+  modal.innerHTML = '';
+  modal.appendChild(data_back_el);
+  // display modal
+  document.getElementById('modal_toggle').checked = true;
 };
 
 /**
@@ -314,6 +318,84 @@ Arduino.injectBlockly = function(blockly_el, toolbox_path) {
   }
 
   request.send(null);
+};
+
+/**
+ * Loads an XML file from the users file system and adds the blocks into the
+ * Blockly workspace.
+ */
+Arduino.loadXmlFile = function() {
+  // Create event listener function
+  var parseInputXMLfile = function(e) {
+    var files = e.target.files;
+    var reader = new FileReader();
+    reader.onload = function() {
+      var success = Arduino.replaceBlocksfromXml(reader.result);
+      if (success) {
+        Arduino.renderContent();
+      } else {
+        alert('Invalid XML!\nThe XML file was not successfully parsed into ' +
+              'blocks. Please review the XML code and try again.');
+      }
+    };
+    reader.readAsText(files[0]);
+  }
+  // Create once invisible browse button with event listener, and click it
+  var select_file = document.getElementById("select_file");
+  if (select_file == null) {
+    var select_file_dom = document.createElement('INPUT');
+    select_file_dom.type = 'file';
+    select_file_dom.id = 'select_file';
+    select_file_dom.style = 'display: none';
+    document.body.appendChild(select_file_dom);
+    select_file = document.getElementById("select_file");
+    select_file.addEventListener('change', parseInputXMLfile, false);
+  }
+  select_file.click();
+};
+
+/**
+ * Parses the XML from its input to generate and replace the blocks in the
+ * Blockly workspace.
+ * @param {!string} blocks_xml String of XML code for the blocks.
+ * @return {!boolean} Indicates if the XML into blocks parse was successful.
+ */
+Arduino.replaceBlocksfromXml = function(blocks_xml) {
+  var xmlDom = null;
+  var success = true;
+  try {
+    xmlDom = Blockly.Xml.textToDom(blocks_xml);
+  } catch (e) {
+    success = false;
+    var message = 'Error parsing XML:\n' + e + '\n\nSelect \'OK\' to ' +
+    'abandon your changes or \'Cancel\' to further edit the XML.';
+    var errorAlert = window.confirm(message);
+    if (!errorAlert) {
+      // Leave the user on the current state
+      return success;
+    }
+  }
+  if (xmlDom) {
+    Blockly.mainWorkspace.clear();
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+  }
+  return success;
+};
+
+/**
+ * Creates an XML file containing the blocks from the Blockly workspace and
+ * prompts the users to save it into their local file system.
+ */
+Arduino.saveXmlFile = function() {
+  // Generate XML
+  var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
+  // Create blob
+  var blob = new Blob(
+      [xmlText],
+      {type: "text/plain;charset=utf-8"});
+  // Prompt user to save as a file
+  saveAs(blob, "ardublockly.xml");
 };
 
 /**
