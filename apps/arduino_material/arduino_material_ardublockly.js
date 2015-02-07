@@ -18,7 +18,8 @@ var ArduinoMaterial = ArduinoMaterial || {};
 ArduinoMaterial.BLOCKLY_INJECTED = false;
 
 /**
- * Injects Blockly into a given text area. Reads the toolbox from an XMl file.
+ * Injects Blockly into a given HTML element. Reads the toolbox from an XMl
+ * file.
  * @param {!Element} el Element to inject Blockly into.
  * @param {!string} toolbox_path String containing the toolbox XML file path.
  */

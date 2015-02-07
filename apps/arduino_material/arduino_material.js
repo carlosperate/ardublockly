@@ -167,7 +167,8 @@ ArduinoMaterial.populateSettings = function() {
       ArduinoMaterial.setCompilerLocationHtml);
   ArduServerCompiler.requestSketchLocation(
       ArduinoMaterial.setSketchLocationHtml);
-  ArduServerCompiler.requestArduinoBoards(ArduinoMaterial.setArduinoBoardsHtml);
+  ArduServerCompiler.requestArduinoBoards(
+      ArduinoMaterial.setArduinoBoardsHtml);
   ArduServerCompiler.requestSerialPorts(ArduinoMaterial.setSerialPortsHtml);
   ArduServerCompiler.requestIdeOptions(ArduinoMaterial.setIdeHtml);
 };
@@ -220,7 +221,7 @@ ArduinoMaterial.setArduinoBoardsHtml = function(new_el) {
 ArduinoMaterial.setBoard = function() {
   var el = document.getElementById("board");
   var board_value = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
+  //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setArduinoBoard(
       board_value, ArduinoMaterial.setArduinoBoardsHtml);
 };
@@ -249,7 +250,7 @@ ArduinoMaterial.setSerialPortsHtml = function(new_el) {
 ArduinoMaterial.setSerial = function() {
   var el = document.getElementById("serial_port");
   var serial_value = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
+  //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setSerialPort(
       serial_value, ArduinoMaterial.setSerialPortsHtml);
 };
@@ -295,7 +296,9 @@ ArduinoMaterial.sendCode = function() {
 };
 
 /**
- * Send the Arduino Code to the ArduServerCompiler to process
+ * Receives the IDE data back to be displayed and stops spinner.
+ * @param {!element} new_el New HTML element to replace the one in the current
+ *                          DOM. Should contain a complete select element.
  */
 ArduinoMaterial.sendCodeReturn = function(data_back) {
   ArduinoMaterial.runButtonSpinner(false);

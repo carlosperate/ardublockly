@@ -15,6 +15,7 @@ var ArduinoSettings = {};
  * Initialize the settings form data on page load.
  */
 window.addEventListener('load', function() {
+  // Populate the form data
   ArduServerCompiler.requestCompilerLocation(
       ArduinoSettings.setCompilerLocationHtml);
   ArduServerCompiler.requestSketchLocation(
@@ -23,6 +24,16 @@ window.addEventListener('load', function() {
       ArduinoSettings.setArduinoBoardsHtml);
   ArduServerCompiler.requestSerialPorts(ArduinoSettings.setSerialPortsHtml);
   ArduServerCompiler.requestIdeOptions(ArduinoSettings.setIdeHtml);
+
+  // Binding clicks to the form items
+  ArduinoSettings.bindClick_('settings_compiler_location', function() {
+    ArduServerCompiler.requestNewCompilerLocation(
+        ArduinoSettings.setCompilerLocationHtml);
+  });
+  ArduinoSettings.bindClick_('settings_sketch_location', function() {
+    ArduServerCompiler.requestNewSketchLocation(
+        ArduinoSettings.setSketchLocationHtml);
+  });
 });
 
 /**
@@ -62,9 +73,6 @@ ArduinoSettings.setArduinoBoardsHtml = function(new_el) {
     new_el.onchange = ArduinoSettings.setBoard;
     board_dropdown.parentNode.replaceChild(new_el, board_dropdown);
   }
-  // Refresh the materialize select menus
-  // TODO: Currently a reported bug from Materialize
-   $('select').material_select();
 };
 
 /**
@@ -91,9 +99,6 @@ ArduinoSettings.setSerialPortsHtml = function(new_el) {
     new_el.onchange = ArduinoSettings.setSerial;
     serial_dropdown.parentNode.replaceChild(new_el, serial_dropdown);
   }
-  // Refresh the materialize select menus
-  // TODO: Currently a reported bug from Materialize
-   $('select').material_select();
 };
 
 /**
@@ -120,9 +125,6 @@ ArduinoSettings.setIdeHtml = function(new_el) {
     new_el.onchange = ArduinoSettings.setIdeSettings;
     ide_dropdown.parentNode.replaceChild(new_el, ide_dropdown);
   }
-  // Refresh the materialize select menus
-  // TODO: Currently a reported bug from Materialize
-   $('select').material_select();
 };
 
 /**
@@ -133,4 +135,25 @@ ArduinoSettings.setIdeSettings = function() {
   var ide_value = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setIdeOptions(ide_value, ArduinoSettings.setIdeHtml);
+};
+
+/**
+ * Bind a function to a button's click event.
+ * On touch enabled browsers, ontouchend is treated as equivalent to onclick.
+ * @param {!Element|string} el Button element or ID thereof.
+ * @param {!function} func Event handler to bind.
+ * @private
+ */
+ArduinoSettings.bindClick_ = function(el, func) {
+  if (typeof el == 'string') {
+    el = document.getElementById(el);
+  }
+  // Need to ensure both, touch and click, events don't fire for the same thing
+  var propagateOnce = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    func();
+  };
+  el.addEventListener('ontouchend', propagateOnce);
+  el.addEventListener('click', propagateOnce);
 };

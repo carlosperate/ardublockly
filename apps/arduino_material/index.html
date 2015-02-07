@@ -198,16 +198,14 @@
       <div class="settings_div">
         <label>COM Port:</label>
         <select name="settings_serial" id="serial_port">
-          <option value="COM4">COM 4</option>
-          <option value="COM5">COM 5</option>
-          <option value="COM6">COM 6</option>
+          <option value="COM4">COM unknown</option>
         </select>
       </div>
       <div class="settings_div">
         <label>IDE:</label> <br>
-        <select name="settings_ide  " id="ide_settings" onchange="ArduinoMaterial.setIdeSettings(this.value)">
-          <option value="ide_upload">Compile and Upload sketchaaa</option>
-          <option value="ide_only">Load sketch in IDE onlyaaa</option>
+        <select name="settings_ide" id="ide_settings">
+          <option value="ide_upload">Compile</option>
+          <option value="ide_only">Load</option>
         </select>
       </div>
     </div>
