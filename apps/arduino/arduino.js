@@ -124,9 +124,7 @@ Arduino.init = function() {
   Arduino.bindClick('openButton', Arduino.loadXmlFile);
   Arduino.bindClick('saveButton',   Arduino.saveXmlFile);
   Arduino.bindClick('trashButton', Arduino.discard);
-  Arduino.bindClick('settingsButton', function() {
-      alert('Function not yet implemented.\n' +
-            'Try the Arduino Material webapp instead.')});
+  Arduino.bindClick('settingsButton', Arduino.openSettings);
   Arduino.bindClick('runButton', Arduino.loadToArduino);
 
   // Binding tabs
@@ -148,6 +146,20 @@ Arduino.adjustViewport = function() {
         'width=725, initial-scale=.35, user-scalable=no');
   }
 };
+
+/**
+ * Open a centered pop up with the server compiler settings.
+ */
+Arduino.openSettings = function() {
+  var width = 500;
+  var height = 400;
+  var left = (screen.width / 2) - (width / 2);
+  var top = (screen.height / 2) - (height / 2);
+  window.open('settings.html', '_blank',
+      'directories=no, titlebar=no, toolbar=no, location=no, status=no, ' + 
+      'menubar=no, scrollbars=yes, resizable=yes, top=' + top + ', ' +
+      'left=' + left + ', width=' + width + ', height=' + height + '');
+}
 
 /**
  * Send the Arduino Code to the ArduServerCompiler to process.
