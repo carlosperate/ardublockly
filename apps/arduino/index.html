@@ -4,14 +4,20 @@
   <meta charset="utf-8">
   <meta name="google" value="notranslate">
   <title>Ardublockly: Arduino Code</title>
-  <!--link rel="stylesheet" type="text/css" href="../common.css"-->
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="../../demos/prettify.css">
-  <script src="../../demos/prettify.js"></script>
-  <script src="arduino.js"></script>
+  <!-- Ardublockly - For now uncompressed files -->
   <!--script src="../../blockly_compressed.js"></script-->
   <script src="../../blockly_uncompressed.js"></script>
   <!--script src="../../blocks_compressed.js"></script-->
+  <script src="../../generators/arduino.js"></script>
+  <script src="../../blocks/arduino/io.js"></script>
+  <script src="../../blocks/arduino/map.js"></script>
+  <script src="../../blocks/arduino/serial.js"></script>
+  <script src="../../blocks/arduino/servo.js"></script>
+  <script src="../../blocks/arduino/spi.js"></script>
+  <script src="../../blocks/arduino/stepper.js"></script>
+  <script src="../../blocks/arduino/time.js"></script>
+  <script src="../../blocks/arduino/variables.js"></script>
   <script src="../../blocks/logic.js"></script>
   <script src="../../blocks/loops.js"></script>
   <script src="../../blocks/math.js"></script>
@@ -20,306 +26,82 @@
   <script src="../../blocks/colour.js"></script>
   <script src="../../blocks/variables.js"></script>
   <script src="../../blocks/procedures.js"></script>
-  <script src="../../generators/arduino.js"></script>
-  <script src="../../generators/arduino/base.js"></script>
   <script src="../../generators/arduino/io.js"></script>
   <script src="../../generators/arduino/lists.js"></script>
   <script src="../../generators/arduino/logic.js"></script>
   <script src="../../generators/arduino/loops.js"></script>
+  <script src="../../generators/arduino/map.js"></script>
   <script src="../../generators/arduino/math.js"></script>
   <script src="../../generators/arduino/procedures.js"></script>
+  <script src="../../generators/arduino/serial.js"></script>
   <script src="../../generators/arduino/servo.js"></script>
   <script src="../../generators/arduino/spi.js"></script>
   <script src="../../generators/arduino/stepper.js"></script>
   <script src="../../generators/arduino/text.js"></script>
   <script src="../../generators/arduino/time.js"></script>
   <script src="../../generators/arduino/variables.js"></script>
+  <!-- Load Blockly's language strings -->
   <script src="../../msg/js/en.js"></script>
+  <!-- Prettify -->
+  <link rel="stylesheet" href="../../demos/prettify.css">
+  <script src="../../demos/prettify.js"></script>
+  <!-- Webapp js -->
+  <script src="arduino.js"></script>
 </head>
 
 <body>
-
-  <div style="display: none">
-    <span id="blocklyMessage">Ardublockly</span>
-
-    <!-- Buttons and tooltips. -->
-    <span id="codeTooltip">See generated JavaScript code.</span>
-    <span id="linkTooltip">Save and link to blocks.</span>
-    <span id="runTooltip">Run the program defined by the blocks in the workspace.</span>
-    <span id="runProgram">Run Program</span>
-    <span id="resetProgram">Reset</span>
-    <span id="dialogOk">OK</span>
-    <span id="dialogCancel">Cancel</span>
-
-    <!--  Default variable names. -->
-    <span id="listVariable">list</span>
-    <span id="textVariable">text</span>
-
-    <span id="Code_badXml">Error parsing XML:\n%1\n\nSelect 'OK' to abandon your changes or 'Cancel' to further edit the XML.</span>
-    <span id="Code_badCode">Program error:\n%1</span>
-    <span id="Code_timeout">Maximum execution iterations exceeded.</span>
-    <span id="Code_discard">Delete all %1 blocks?</span>
-  </div>
-
-  <table width="100%" height="100%">
-    <tr>
-      <td colspan=2>
-        <table width="100%">
-          <tr id="tabRow" height="1em">
-            <td id="tab_blocks" class="tabon">Blocks</td>
-            <td class="tabmin">&nbsp;</td>
-            <td id="tab_arduino" class="taboff">Arduino</td>
-            <td class="tabmin">&nbsp;</td>
-            <td id="tab_xml" class="taboff">XML</td>
-            <td class="tabmax">
-              <button id="peekCode" class="button_text" title="Toggle the code view on the side">
-                Code peek <img src="../../media/1x1.gif">
-              </button>
-              <button id="" title="Load blocks">
-                <img src="../../media/1x1.gif" class="icon21 load">
-              </button>
-              <button id="" title="Save blocks">
-                <img src="../../media/1x1.gif" class="icon21 save">
-              </button>
-              <button id="" title="Open the Settings">
-                <img src="../../media/1x1.gif" class="icon21 settings">
-              </button>
-              <button id="trashButton" title="Discard all blocks">
-                <img src="../../media/1x1.gif" class="icon21 trash">
-              </button>
-              <button id="runButton" class="primary" title="Run the program defined by the blocks in the workspace">
-                <img src='../../media/1x1.gif' class="icon21 run">
-              </button>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2" height="99%"  style="position:relative;">
-        <div id="content_area" class="content_area">
-          <div id="content_blocks" class="content content_blocks"></div>
-          <div id="side_content" class="side_content">
-            <div id="arduino_code_peek">
-              <pre id="arduino_pre">
-                <!--code id="arduino_code" class="language-arduino">code goes here</code-->
-              </pre>
+  <div class="table_wrapper">
+    <table>
+      <tr>
+        <td colspan=2>
+          <table width="100%">
+            <tr id="tabRow" height="1em">
+              <td id="tab_blocks" class="tabon">Blocks</td>
+              <td class="tabmin">&nbsp;</td>
+              <td id="tab_arduino" class="taboff">Arduino</td>
+              <td class="tabmin">&nbsp;</td>
+              <td id="tab_xml" class="taboff">XML</td>
+              <td class="tabmax">
+                <button id="peekCode" class="button_text" title="Toggle the code view on the side">
+                  Code peek <img src="../../media/1x1.gif">
+                </button>
+                <button id="" title="Load blocks">
+                  <img src="../../media/1x1.gif" class="icon21 load">
+                </button>
+                <button id="" title="Save blocks">
+                  <img src="../../media/1x1.gif" class="icon21 save">
+                </button>
+                <button id="" title="Open the Settings">
+                  <img src="../../media/1x1.gif" class="icon21 settings">
+                </button>
+                <button id="trashButton" title="Discard all blocks">
+                  <img src="../../media/1x1.gif" class="icon21 trash">
+                </button>
+                <button id="runButton" class="primary" title="Run the program defined by the blocks in the workspace">
+                  <img src='../../media/1x1.gif' class="icon21 run">
+                </button>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="td_wrapper">
+          <div id="content_wrapper" class="content_wrapper">
+            <div id="content_blocks" class="content content_blocks"></div>
+            <div id="side_content" class="side_content">
+              <div id="arduino_code_peek" class="arduino_code_peek">
+                <pre id="arduino_pre" class="arduino_pre">
+                  <!--code id="arduino_code" class="language-arduino">code goes here</code-->
+                </pre>
+              </div>
             </div>
+            <pre id="content_arduino" class="content content_arduino"></pre>
+            <textarea id="content_xml" class="content content_xml" wrap="off"></textarea>
           </div>
-          <pre id="content_arduino" class="content content_arduino"></pre>
-          <textarea id="content_xml" class="content content_xml" wrap="off"></textarea>
-        </div>
-      </td>
-    </tr>
-  </table>
-
-  <xml id="toolbox" style="display: none">
-    <category name="Logic">
-      <block type="controls_if"></block>
-      <block type="logic_compare"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-      <block type="logic_null"></block>
-      <block type="logic_ternary"></block>
-    </category>
-    <category name="Loops">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <block type="math_number">
-            <field name="NUM">10</field>
-          </block>
-        </value>
-      </block>
-      <block type="controls_whileUntil"></block>
-      <block type="controls_for">
-        <value name="FROM">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-        <value name="TO">
-          <block type="math_number">
-            <field name="NUM">10</field>
-          </block>
-        </value>
-        <value name="BY">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-      </block>
-      <block type="controls_forEach"></block>
-      <block type="controls_flow_statements"></block>
-    </category>
-    <category name="Math">
-      <block type="math_number"></block>
-      <block type="math_arithmetic"></block>
-      <block type="math_single"></block>
-      <block type="math_trig"></block>
-      <block type="math_constant"></block>
-      <block type="math_number_property"></block>
-      <block type="math_change">
-        <value name="DELTA">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-      </block>
-      <block type="math_round"></block>
-      <block type="math_on_list"></block>
-      <block type="math_modulo"></block>
-      <block type="math_constrain">
-        <value name="LOW">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-        <value name="HIGH">
-          <block type="math_number">
-            <field name="NUM">100</field>
-          </block>
-        </value>
-      </block>
-      <block type="math_random_int">
-        <value name="FROM">
-          <block type="math_number">
-            <field name="NUM">1</field>
-          </block>
-        </value>
-        <value name="TO">
-          <block type="math_number">
-            <field name="NUM">100</field>
-          </block>
-        </value>
-      </block>
-      <block type="math_random_float"></block>
-      <block type="base_map"></block>
-    </category>
-    <category name="Text">
-      <block type="text"></block>
-      <block type="text_join"></block>
-      <block type="text_append">
-        <value name="TEXT">
-          <block type="text"></block>
-        </value>
-      </block>
-      <block type="text_length"></block>
-      <block type="text_isEmpty"></block>
-      <block type="text_indexOf">
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" class="textVar">text</field>
-          </block>
-        </value>
-      </block>
-      <block type="text_charAt">
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" class="textVar">text</field>
-          </block>
-        </value>
-      </block>
-      <block type="text_getSubstring">
-        <value name="STRING">
-          <block type="variables_get">
-            <field name="VAR" class="textVar">text</field>
-          </block>
-        </value>
-      </block>
-      <block type="text_changeCase"></block>
-      <block type="text_trim"></block>
-      <block type="text_print"></block>
-      <block type="text_prompt_ext">
-        <value name="TEXT">
-          <block type="text"></block>
-        </value>
-      </block>
-    </category>
-    <category name="Lists">
-      <block type="lists_create_empty"></block>
-      <block type="lists_create_with"></block>
-      <block type="lists_repeat">
-        <value name="NUM">
-          <block type="math_number">
-            <field name="NUM">5</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_length"></block>
-      <block type="lists_isEmpty"></block>
-      <block type="lists_indexOf">
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" class="listVar">list</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_getIndex">
-        <value name="VALUE">
-          <block type="variables_get">
-            <field name="VAR" class="listVar">list</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_setIndex">
-        <value name="LIST">
-          <block type="variables_get">
-            <field name="VAR" class="listVar">list</field>
-          </block>
-        </value>
-      </block>
-      <block type="lists_getSublist">
-        <value name="LIST">
-          <block type="variables_get">
-            <field name="VAR" class="listVar">list</field>
-          </block>
-        </value>
-      </block>
-    </category>
-    <category name="Variables">
-      <block type="variables_get"></block>
-      <block type="variables_set"></block>
-      <block type="variables_set_type"></block>
-    </category>
-    <category name="Functions" custom="PROCEDURE"></category>
-    <category name="Input/Output">
-      <block type="io_digitalwrite"></block>
-      <block type="io_digitalread"></block>
-      <block type="io_builtin_led"></block>
-      <block type="io_analogwrite"></block>
-      <block type="io_analogread"></block>
-      <block type="io_highlow"></block>
-    </category>
-    <category name="Time">
-      <block type="time_delay"></block>
-      <block type="time_delaymicros"></block>
-      <block type="time_millis"></block>
-      <block type="time_micros"></block>
-    </category>
-    <category name="Servo">
-      <block type="servo_write"></block>
-      <block type="servo_read"></block>
-    </category>
-    <category name="Stepper">
-      <block type="stepper_config"></block>
-      <block type="stepper_step"></block>
-    </category>
-    <category name="Comms">
-      <block type="spi_config"></block>
-      <block type="spi_transfer"></block>
-    </category>
-  </xml>
-
-  <div id="dialogShadow" class="dialogAnimate"></div>
-  <div id="dialogBorder"></div>
-  <div id="dialog"></div>
-
-  <div id="dialogStorage" class="dialogHiddenContent">
-    <div id="containerStorage"></div>
-    <div class="farSide" style="padding: 1ex 3ex 0">
-      <button class="secondary" onclick="BlocklyApps.hideDialog(true)">OK</button>
-    </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </body>
 </html>

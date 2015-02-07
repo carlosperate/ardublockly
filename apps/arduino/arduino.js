@@ -1,11 +1,11 @@
 /**
- * Blockly Apps: Arduino Code
- *
- * Based on the "Code" app developed by: fraser@google.com (Neil Fraser)
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
  *
  * @fileoverview JavaScript for ArduBlockly's Arduino Code application.
+ *               Based on the "Code" app developed by:
+ *               fraser@google.com (Neil Fraser)
  */
-
 'use strict';
 
 /**
@@ -34,8 +34,9 @@ Arduino.tabClick = function(clickedName) {
     try {
       xmlDom = Blockly.Xml.textToDom(xmlText);
     } catch (e) {
-      var q =
-          window.confirm(Arduino.getMsg('Code_badXml').replace('%1', e));
+      var message = 'Error parsing XML:\\n' + e + '\\n\\nSelect \'OK\' to ' +
+      'abandon your changes or \'Cancel\' to further edit the XML.';
+      var q = window.confirm(message);
       if (!q) {
         // Leave the user on the XML tab.
         return;
@@ -47,7 +48,7 @@ Arduino.tabClick = function(clickedName) {
     }
   }
 
-  // Deselect the button, and ensure side pannel is hidden
+  // Deselect the button, and ensure side panel is hidden
   Arduino.peekCode(false);
 
   // Deselect all tabs and hide all panes.
@@ -66,11 +67,11 @@ Arduino.tabClick = function(clickedName) {
 };
 
 /**
- * Populate the currently selected pane with content generated from the blocks.
+ * Populate the currently selected panel with content generated from the blocks.
  */
 Arduino.renderContent = function() {
   var content = document.getElementById('content_' + Arduino.selected);
-  // Initialize the pane.
+  // Initialize the panel
   if (content.id == 'content_xml') {
     var xmlTextarea = document.getElementById('content_xml');
     var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
@@ -94,9 +95,13 @@ Arduino.renderContent = function() {
 Arduino.init = function() {
   Arduino.adjustViewport();
 
-  var container = document.getElementById('content_area');
+  // Inject Blockly asynchronously into content_blocks
+  Arduino.injectBlockly(
+      document.getElementById('content_blocks'), 'arduino_toolbox.xml');
+
+  // Create function to resize blockly if page layout changes
   var onresize = function(e) {
-    var bBox = Arduino.getBBox_(container);
+    var bBox = Arduino.getBBox_(document.getElementById('content_wrapper'));
     for (var i = 0; i < Arduino.TABS_.length; i++) {
       var el = document.getElementById('content_' + Arduino.TABS_[i]);
       el.style.top = bBox.y + 'px';
@@ -115,28 +120,24 @@ Arduino.init = function() {
           // Account for the 19 pixel margin and on each side.
     }
   };
-  window.addEventListener('resize', onresize, false);
 
-  var toolbox = document.getElementById('toolbox');
-  Blockly.inject(document.getElementById('content_blocks'),
-      {path: '../../',
-       rtl: false,
-       toolbox: toolbox});
-
-  //Arduino.loadBlocks('');
-
-  //if ('BlocklyStorage' in window) {
-  //  // Hook a save function onto unload.
-  //  BlocklyStorage.backupOnUnload();
-  //}
+  // As Blockly is injected in parallel the binding only happens when done
+  var bindBlocklyEventListener = function() {
+    if (Arduino.BLOCKLY_INJECTED == false) {
+      setTimeout(bindBlocklyEventListener, 50);
+    } else {
+      window.addEventListener('resize', onresize, false);
+      Blockly.fireUiEvent(window, 'resize');
+    }
+  };
+  bindBlocklyEventListener();
 
   Arduino.tabClick(Arduino.selected);
-  Blockly.fireUiEvent(window, 'resize');
 
   // Binding buttons
   Arduino.bindClick('trashButton', Arduino.discard);
   Arduino.bindClick('runButton', Arduino.loadToArduino);
-  Arduino.bindClick('peekCode',Arduino.peekCode);
+  Arduino.bindClick('peekCode', Arduino.peekCode);
 
   // Binding tabs
   for (var i = 0; i < Arduino.TABS_.length; i++) {
@@ -170,8 +171,8 @@ Arduino.loadToArduino = function() {
  */
 Arduino.discard = function() {
   var count = Blockly.mainWorkspace.getAllBlocks().length;
-  if (count < 2 ||
-      window.confirm(Arduino.getMsg('Code_discard').replace('%1', count))) {
+  var message = 'Delete all ' + count + ' blocks?';
+  if (count < 2 || window.confirm(message)) {
     Blockly.mainWorkspace.clear();
     window.location.hash = '';
   }
@@ -179,21 +180,28 @@ Arduino.discard = function() {
 };
 
 /**
- * Loads/unloads the side div with a code peek
+ * Store the state the code sidebar visibility
+ * @private
  */
-Arduino.peek_code = false;
+Arduino.peek_code_ = false;
+
+/**
+ * Loads/unloads the side div with a code peek
+ * @param {boolean?} visible Optional argument, indicates the new visibility of
+ *                           the code preview.
+ */
 Arduino.peekCode = function(visible) {
   var peek_code_button = document.getElementById('peekCode');
   var code_peek_content = document.getElementById('arduino_code_peek');
   
-  if(visible == true) {
-    Arduino.peek_code = false;
-  } else if(visible == false) {
-    Arduino.peek_code = true;
+  if (visible == true) {
+    Arduino.peek_code_ = false;
+  } else if (visible == false) {
+    Arduino.peek_code_ = true;
   }
   
-  if(Arduino.peek_code == false) {
-    Arduino.peek_code = true;
+  if (Arduino.peek_code_ == false) {
+    Arduino.peek_code_ = true;
     peek_code_button.className = "button_text secondary";
     Arduino.sideContent(true);
     code_peek_content.style.display = 'inline-block';
@@ -201,7 +209,7 @@ Arduino.peekCode = function(visible) {
     Arduino.renderArduinoPeekCode();
     Blockly.addChangeListener(Arduino.renderArduinoPeekCode);
   } else {
-    Arduino.peek_code = false;
+    Arduino.peek_code_ = false;
     peek_code_button.className = "button_text";
     code_peek_content.style.display = 'none';
     Arduino.sideContent(false);
@@ -257,23 +265,55 @@ Arduino.renderArduinoPeekCode = function() {
   }
 };
 
+/**
+ * Public variable that indicates if Blockly has been injected.
+ * @type {!boolean}
+ */
+Arduino.BLOCKLY_INJECTED = false;
 
 /**
- * Gets the message with the given key from the document.
- * @param {string} key The key of the document element.
- * @return {string} The textContent of the specified element,
- *     or an error message if the element was not found.
+ * Injects Blockly into a given text area. Reads the toolbox from an XMl file.
+ * @param {!Element} el Element to inject Blockly into.
+ * @param {!string} toolbox_path String containing the toolbox XML file path.
  */
-Arduino.getMsg = function(key) {
-  var element = document.getElementById(key);
-  if (element) {
-    var text = element.textContent;
-    // Convert newline sequences.
-    text = text.replace(/\\n/g, '\n');
-    return text;
-  } else {
-    return '[Unknown message: ' + key + ']';
+Arduino.injectBlockly = function(blockly_el, toolbox_path) {
+  // Create a an XML HTTP request
+  var request;
+  try {   // Firefox, Chrome, IE7+, Opera, Safari
+    request = new XMLHttpRequest();
   }
+  catch (e) {
+    try {   // IE6 and earlier
+      request = new ActiveXObject("Msxml2.XMLHTTP");
+    }
+    catch (e) {
+      try {
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      catch (e) {
+        throw 'Your browser does not support AJAX. Cannot load toolbox';
+      }
+    }
+  }
+  request.open("GET", toolbox_path, true);
+
+  // Once file is open, inject blockly into element with the toolbox string
+  request.onreadystatechange = function() {
+    if ( (request.readyState == 4) && (request.status == 200) ) {
+      Blockly.inject(blockly_el, {
+            collapse: true,
+            comments: true,
+            disable: true,
+            media: '../../media/',
+            rtl: false,
+            scrollbars: true,
+            toolbox: request.responseText,
+            trashcan: true });
+      Arduino.BLOCKLY_INJECTED = true;
+    }
+  }
+
+  request.send(null);
 };
 
 /**
@@ -286,65 +326,36 @@ Arduino.bindClick = function(el, func) {
   if (typeof el == 'string') {
     el = document.getElementById(el);
   }
-  el.addEventListener('click', func, true);
-  el.addEventListener('touchend', func, true);
+  // Need to ensure both, touch and click, events don't fire for the same thing
+  var propagateOnce = function(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    func();
+  };
+  el.addEventListener('ontouchend', propagateOnce);
+  el.addEventListener('click', propagateOnce);
 };
 
 /**
- * Compute the absolute coordinates and dimensions of an HTML or SVG element.
+ * Compute the absolute coordinates and dimensions of an HTML element.
  * @param {!Element} element Element to match.
  * @return {!Object} Contains height, width, x, and y properties.
  * @private
  */
 Arduino.getBBox_ = function(element) {
-  if (element.getBBox) {
-    // SVG element.
-    var bBox = element.getBBox();
-    var height = bBox.height;
-    var width = bBox.width;
-    var xy = Blockly.getAbsoluteXY_(element);
-    var x = xy.x;
-    var y = xy.y;
-  } else {
-    // HTML element.
-    var height = element.offsetHeight;
-    var width = element.offsetWidth;
-    var x = 0;
-    var y = 0;
-    do {
-      x += element.offsetLeft;
-      y += element.offsetTop;
-      element = element.offsetParent;
-    } while (element);
-  }
+  var height = element.offsetHeight;
+  var width = element.offsetWidth;
+  var x = 0;
+  var y = 0;
+  do {
+    x += element.offsetLeft;
+    y += element.offsetTop;
+    element = element.offsetParent;
+  } while (element);
   return {
     height: height,
     width: width,
     x: x,
     y: y
   };
-};
-
-/**
- * Load blocks saved in session/local storage.
- * @param {string} defaultXml Text representation of default blocks.
- */
-Arduino.loadBlocks = function(defaultXml) {
-  try {
-    var loadOnce = window.sessionStorage.loadOnceBlocks;
-  } catch(e) {
-    // Firefox sometimes throws a SecurityError when accessing sessionStorage.
-    // Restarting Firefox fixes this, so it looks like a bug.
-    var loadOnce = null;
-  }
-  if (loadOnce) {
-    // Language switching stores the blocks during the reload.
-    delete window.sessionStorage.loadOnceBlocks;
-    var xml = Blockly.Xml.textToDom(loadOnce);
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-  } else if (defaultXml) {
-    // Load the editor with default starting blocks.
-    var xml = Blockly.Xml.textToDom(defaultXml);
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
-  }
 };

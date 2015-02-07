@@ -1,22 +1,16 @@
 /* General HTML */
-html, body {
+html {
   height: 100%;
+  overflow: hidden;
 }
 body {
   background-color: #fff;
   font-family: sans-serif;
   margin: 0;
+  padding: 0;
   border: 0;
+  height: 100%;
   overflow: hidden;
-  padding: 20px;
-  /* Firefox */
-  height: -moz-calc(100% - 40px);
-  /* WebKit */
-  height: -webkit-calc(100% - 40px);
-  /* Opera */
-  height: -o-calc(100% - 40px);
-  /* Standard */
-  height: calc(100% - 40px);
 }
 h1 {
   font-weight: normal;
@@ -27,13 +21,61 @@ h1 {
 a:hover {
   color: #f00;
 }
-html[dir="RTL"] .farSide {
-  text-align: left;
+
+/* Table */
+.table_wrapper {
+  height: -moz-calc(100%);
+  width: -moz-calc(100%);
+  /* WebKit */
+  height: -webkit-calc(100%);
+  width: -webkit-calc(100%);
+  /* Opera */
+  height: -o-calc(100%);
+  width: -o-calc(100%);
+  /* Standard */
+  height: calc(100%);
+  width: calc(100%);
+  padding: 20px;
+}
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: relative;
+  /* Firefox */
+  height: -moz-calc(100% - 40px);
+  width: -moz-calc(100% - 40px);
+  /* WebKit */
+  height: -webkit-calc(100% - 40px);
+  width: -webkit-calc(100% - 40px);
+  /* Opera */
+  height: -o-calc(100% - 40px);
+  width: -o-calc(100% - 40px);
+  /* Standard */
+  height: calc(100% - 40px);
+  width: calc(100% - 40px);
+}
+table table {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+td {
+  padding: 0;
+  vertical-align: top;
+}
+td.td_wrapper {
+  border: none;
+  height: 100%;
 }
 
 /* Tabs */
 #tabRow>td {
-  border: 1px solid #ccc;
+  border-width: 1px 1px 0px 1px;
+  border-color: #ccc;
+  border-style: solid;
 }
 td.tabon {
   border-bottom-color: #ddd !important;
@@ -64,69 +106,59 @@ td.tabmax {
   text-align: right;
 }
 
-/* Table */
-table {
-  border-collapse: collapse;
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-td {
-  padding: 0;
-  vertical-align: top;
-}
-
 /* Content blocks */
+.content_wrapper {
+  /* Firefox */
+  height: -moz-calc(100% - 50px);
+  /* WebKit */
+  height: -webkit-calc(100% - 50px);
+  /* Opera */
+  height: -o-calc(100% - 50px);
+  /* Standard */
+  height: calc(100% - 50px);
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-color: #ddd;
+  background-color: #eee;
+  position: absolute;
+  overflow: hidden;
+  display: block;
+}
 .content {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
-  border: 0px solid #ccc;
+  border: none;
   direction: ltr;
   display: none;
 }
-.content_area {
-  /* Firefox */
-  width: -moz-calc(100%)!important;
-  /* WebKit */
-  width: -webkit-calc(100%)!important;
-  /* Opera */
-  width: -o-calc(100%)!important;
-  /* Standard */
-  width: calc(100%)!important;
-  height: 100%!important;
-  padding: 0;
-  margin: 0;
-  border-width: 0px 1px 1px 1px;
-  border-style: solid;
-  border-color: #ccc;
-  background-color: #eee;
-  position: absolute;
-  overflow: hidden;
+.content_arduino,
+.content_xml {
+  resize: none;
+  outline: none;
+  border: none;
+  font-family: monospace;
+  overflow: scroll;
 }
 .content_blocks{
-  width: 100%!important;
-  height: 100%!important;
+  width: 100% !important;
   overflow: hidden;
 }
 .content_blocks_side {
   /* Firefox */
-  width: -moz-calc(100% - 350px)!important;
+  width: -moz-calc(100% - 350px) !important;
   /* WebKit */
-  width: -webkit-calc(100% - 350px)!important;
+  width: -webkit-calc(100% - 350px) !important;
   /* Opera */
-  width: -o-calc(100% - 350px)!important;
+  width: -o-calc(100% - 350px) !important;
   /* Standard */
-  width: calc(100% - 350px)!important;
+  width: calc(100% - 350px) !important;
   overflow: hidden;
   float: left;
-}
-pre.content {
-  overflow: scroll;
-}
-.blocklySvg {
-  border-top: none !important;
 }
 .side_content {
   width: 350px;
@@ -138,24 +170,20 @@ pre.content {
   margin: 0;
   border: 0;
   background-color: #eee;
-  overflow: scroll!important;
+  overflow: scroll !important;
   display: none;
 }
 .arduino_code_peek {
   height: 100%;
 }
-pre.arduino_code_peek ,
-code.arduino_code_peek  {
-  border: 0!important;
+.arduino_pre {
+  border: 0;
+  padding: 0px 5px;
   overflow: visible;
-  white-space: pre!important;
+  white-space: pre !important;
 }
-.content_xml {
-  resize: none;
-  outline: none;
-  border: none;
-  font-family: monospace;
-  overflow: scroll;
+.blocklySvg {
+  border-top: none !important;
 }
 
 /* Buttons */
@@ -232,58 +260,4 @@ img.load{
 .button_text>img {
   height: 21px;
   width: 1px;
-}
-
-/* Dialogs */
-#dialog {
-  visibility: hidden;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #ccc;
-  position: absolute;
-  border-radius: 8px;
-  box-shadow: 5px 5px 5px #888;
-  padding: 10px;
-}
-#dialogBorder {
-  visibility: hidden;
-  position: absolute;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
-  border-radius: 6px;
-  box-shadow: 5px 5px 5px #888;
-}
-#dialogShadow {
-  visibility: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  opacity: 0.3
-}
-.dialogAnimate {
-  transition-property: width height left top opacity;
-  transition-duration: 0.2s;
-  transition-timing-function: linear;
-}
-.dialogHiddenContent {
-  visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-#dialogHeader {
-  height: 25px;
-  margin: -10px -10px 15px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  background-color: #ddd;
-  cursor: move;
-}
-#dialog button {
-  min-width: 4em;
 }
