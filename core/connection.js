@@ -27,6 +27,8 @@
 goog.provide('Blockly.Connection');
 goog.provide('Blockly.ConnectionDB');
 
+goog.require('goog.dom');
+
 
 /**
  * Class for a connection between blocks.
@@ -666,9 +668,8 @@ Blockly.Connection.prototype.hideAll = function() {
  * @return {!Array.<!Blockly.Block>} List of blocks to render.
  */
 Blockly.Connection.prototype.unhideAll = function() {
-  if (!this.hidden_) {
-    this.dbList_[this.type].addConnection_(this);
-  }
+  this.dbList_[this.type].addConnection_(this);
+  this.hidden_ = false;
   // All blocks that need unhiding must be unhidden before any rendering takes
   // place, since rendering requires knowing the dimensions of lower blocks.
   // Also, since rendering a block renders all its parents, we only need to
@@ -727,6 +728,10 @@ Blockly.ConnectionDB.constructor = Blockly.ConnectionDB;
 Blockly.ConnectionDB.prototype.addConnection_ = function(connection) {
   if (connection.inDB_) {
     throw 'Connection already in database.';
+  }
+  if (connection.sourceBlock_.isInFlyout) {
+    // Don't bother maintaining a database of connections in a flyout.
+    return;
   }
   // Insert connection using binary search.
   var pointerMin = 0;

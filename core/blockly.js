@@ -29,10 +29,10 @@ goog.provide('Blockly');
 
 // Blockly core dependencies.
 goog.require('Blockly.BlockSvg');
-goog.require('Blockly.Connection');
 goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldColour');
+goog.require('Blockly.FieldDate');
 goog.require('Blockly.FieldDropdown');
 goog.require('Blockly.FieldImage');
 goog.require('Blockly.FieldTextInput');
@@ -49,11 +49,6 @@ goog.require('Blockly.utils');
 
 // Closure dependencies.
 goog.require('goog.color');
-goog.require('goog.dom');
-goog.require('goog.events');
-goog.require('goog.string');
-goog.require('goog.ui.ColorPicker');
-goog.require('goog.ui.tree.TreeControl');
 goog.require('goog.userAgent');
 
 
@@ -105,22 +100,22 @@ Blockly.makeColour = function(hue) {
 };
 
 /**
- * ENUM for a right-facing value input.  E.g. 'test' or 'return'.
+ * ENUM for a right-facing value input.  E.g. 'set item to' or 'return'.
  * @const
  */
 Blockly.INPUT_VALUE = 1;
 /**
- * ENUM for a left-facing value output.  E.g. 'call random'.
+ * ENUM for a left-facing value output.  E.g. 'random fraction'.
  * @const
  */
 Blockly.OUTPUT_VALUE = 2;
 /**
- * ENUM for a down-facing block stack.  E.g. 'then-do' or 'else-do'.
+ * ENUM for a down-facing block stack.  E.g. 'if-do' or 'else'.
  * @const
  */
 Blockly.NEXT_STATEMENT = 3;
 /**
- * ENUM for an up-facing block stack.  E.g. 'close screen'.
+ * ENUM for an up-facing block stack.  E.g. 'break out of loop'.
  * @const
  */
 Blockly.PREVIOUS_STATEMENT = 4;

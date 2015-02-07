@@ -32,7 +32,7 @@ goog.require('Blockly.ScrollbarPair');
 goog.require('Blockly.Trashcan');
 goog.require('Blockly.Workspace');
 goog.require('Blockly.Xml');
-goog.require('goog.math');
+goog.require('goog.dom');
 goog.require('goog.math.Coordinate');
 
 
@@ -88,14 +88,6 @@ Blockly.WorkspaceSvg.prototype.scrollY = 0;
  * @type {Blockly.Trashcan}
  */
 Blockly.WorkspaceSvg.prototype.trashcan = null;
-
-/**
- * PID of upcoming firing of a change event.  Used to fire only one event
- * after multiple changes.
- * @type {?number}
- * @private
- */
-Blockly.WorkspaceSvg.prototype.fireChangeEventPid_ = null;
 
 /**
  * This workspace's scrollbars, if they exist.
@@ -284,17 +276,8 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
  * 'blocklyWorkspaceChange' on Blockly.mainWorkspace.getCanvas().
  */
 Blockly.WorkspaceSvg.prototype.fireChangeEvent = function() {
-  if (!this.rendered) {
-    return;
-  }
-  if (this.fireChangeEventPid_) {
-    clearTimeout(this.fireChangeEventPid_);
-  }
-  var canvas = this.svgBlockCanvas_;
-  if (canvas) {
-    this.fireChangeEventPid_ = setTimeout(function() {
-        Blockly.fireUiEvent(canvas, 'blocklyWorkspaceChange');
-      }, 0);
+  if (this.rendered && this.svgBlockCanvas_) {
+    Blockly.fireUiEvent(this.svgBlockCanvas_, 'blocklyWorkspaceChange');
   }
 };
 
