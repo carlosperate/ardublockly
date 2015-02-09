@@ -122,7 +122,7 @@ Arduino.init = function() {
   // Binding buttons
   Arduino.bindClick('peekCode', Arduino.peekCode);
   Arduino.bindClick('openButton', Arduino.loadXmlFile);
-  Arduino.bindClick('saveButton',   Arduino.saveXmlFile);
+  Arduino.bindClick('saveButton', Arduino.saveXmlFile);
   Arduino.bindClick('trashButton', Arduino.discard);
   Arduino.bindClick('settingsButton', Arduino.openSettings);
   Arduino.bindClick('runButton', Arduino.loadToArduino);

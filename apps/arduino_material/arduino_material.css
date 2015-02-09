@@ -407,6 +407,9 @@ ul.side-nav li.logo:hover {
   fill: #00878F !important;
   fill-opacity: 0.7 !important;
 }
+.blocklyScrollbarBackground {
+  stroke-width: 0px !important;
+}
 
 
 /*********************************/

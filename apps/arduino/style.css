@@ -269,7 +269,6 @@ img.load{
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 0;
   margin: auto;
   padding: 20px;
   min-width: 350px;
@@ -278,6 +277,9 @@ img.load{
   min-height: 150px;
   max-height: 800px;
   height: 50%;
+  overflow: scroll;
+  word-wrap: break-word;
+  overflow-x: hidden;
   background: rgba(235,235,235,0.9);
   -webkit-box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
   box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
@@ -289,9 +291,8 @@ img.load{
   -ms-transition: opacity 1s ease;
   -o-transition: opacity 1s ease;
   transition: opacity 1s ease;
-  overflow: scroll;
-  word-wrap: break-word;
-  overflow-x: hidden;
+  z-index: 0;
+  display: none;
 }
 .modal h4 {
   margin: 5px 0px;
@@ -312,4 +313,5 @@ input#modal_toggle {
 input#modal_toggle:checked + .modal {
   opacity: 1;
   z-index: 1;
+  display: inline;
 }
