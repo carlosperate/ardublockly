@@ -94,22 +94,26 @@ def main(argv):
     # with the parent folder of where this script is executed, done to be able
     # to find the closure lib directory on the same level as the project folder
     print("\n======= Starting Server =======")
-    this_file_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
+    this_file_parent_dir =\
+        os.path.dirname(os.path.dirname(os.path.realpath(sys.argv[0])))
     try:
         server_root
     except NameError:
-        server_root = os.path.dirname(this_file_dir)
+        server_root = this_file_parent_dir
     # Opening the browser to the web-app
-    paths = [server_root, this_file_dir]
+    paths = [server_root, this_file_parent_dir]
     common_path = os.path.commonprefix(paths)
     if not common_path:
         print('The server working directory and Ardublockly project need to ' +
-              'be in the same root directory!')
+              'be in the same root directory.!' +
+              'The server root also needs to be at least one directory up ' +
+              'from the Ardublockly folder!')
         sys.exit(1)
-    relative_path = [os.path.relpath(this_file_dir, common_path)]
-    app_index = os.path.join(relative_path[0], 'apps', 'arduino_material')
-    #print('Root & this file: %s\nCommon & relative path: %s; %s\nIndex: %s' %
-    #      (paths, common_path, relative_path, app_index))
+    relative_path = [os.path.relpath(this_file_parent_dir, common_path)]
+    app_index =  os.path.normpath(os.path.join(
+        relative_path[0], 'ardublockly', 'apps', 'arduino_material'))
+    print('Root & script parent: %s\nCommon & relative path: %s; %s\nIndex: %s'
+          % (paths, common_path, relative_path, app_index))
     open_browser(app_index)
     ArduinoServerCompiler.BlocklyHTTPServer.start_server(server_root)
 

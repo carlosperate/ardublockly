@@ -565,8 +565,9 @@ class ServerCompilerSettings(object):
         :return: path to the settings file
         """
         if not self.__settings_path__:
-            self.__settings_path__ = os.path.join(
-                os.path.dirname(__file__), self.__settings_filename__)
+            this_package_dir = os.path.dirname(os.path.realpath(__file__))
+            self.__settings_path__ = os.path.normpath(
+                os.path.join(this_package_dir, self.__settings_filename__))
         return self.__settings_path__
 
     def get_board_value_from_key(self, string_key):
