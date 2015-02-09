@@ -1,4 +1,5 @@
 from __future__ import unicode_literals, absolute_import
+import sys
 import os
 import re
 try:
@@ -488,7 +489,8 @@ class ServerCompilerSettings(object):
             settings_file = open(self.get_settings_file_path(), 'w')
             settings_parser.write(settings_file)
             settings_file.close()
-            print('\nSettings file saved to:')
+            print('Settings file saved to:')
+            sys.stdout.flush()
         except Exception as e:
             print(e)
             print('\nUnable to write the settings file to:')
@@ -519,7 +521,7 @@ class ServerCompilerSettings(object):
         print('\tSerial Port Value: %s' % self.__serial_port_value__)
         print('\tSketch Name: %s' % self.__sketch_name__)
         print('\tSketch Directory: %s' % self.__sketch_dir__)
-        print('\tLaunch IDE option: %s' % self.__launch_IDE_option__)
+        print('\tLaunch IDE option: %s\n' % self.__launch_IDE_option__)
 
         # The read X_from_file() functions do not save new settings and neither
         # does the set_default_settings() function, so save them either way.

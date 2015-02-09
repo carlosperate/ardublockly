@@ -67,6 +67,20 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(message_back.encode("utf-8"))
 
+    def log_request(self, code='-', size='-'):
+        """
+        Log an accepted request.
+        This is called by send_response(), and printed to the stderr by
+        log_message. No need to fill the command line with successful responses,
+        so only print any non 200.
+        :param code:
+        :param size:
+        :return:
+        """
+        if code != 200:
+            self.log_message('"%s" %s %s',
+                             self.requestline, str(code), str(size))
+
 
 #################
 # Main Handlers #
