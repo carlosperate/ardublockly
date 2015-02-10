@@ -55,7 +55,8 @@
   <!-- Arduino Material design app -->
   <link href="arduino_material.css" rel="stylesheet" media="screen,projection">
   <script src="arduino_material_design.js"></script>
-  <script src="arduino_material_ardublockly.js"></script>  <script src="arduino_material.js"></script>
+  <script src="arduino_material_ardublockly.js"></script>
+  <script src="arduino_material.js"></script>
 </head>
 
 <body>
@@ -78,11 +79,11 @@
 
   <!-- Sidebar navigation -->
   <ul id="slide-out" class="side-nav">
-    <li class="logo"><img src="img/sidenav_header.png"/></li>
+    <li class="logo"><img src="img/sidenav_header.png" alt="Ardublockly block image"></li>
     <li class="no-padding">
       <ul>
         <li id="menu_load"><a href="#">Open<i class="mdi-file-file-upload left"></i></a></li>
-        <li id="menu_save"><a href="#" id="button_save">Save<i class="mdi-file-file-download left"></i></a></li>
+        <li id="menu_save"><a href="#">Save<i class="mdi-file-file-download left"></i></a></li>
         <li id="menu_delete"><a href="#">Delete All<i class="mdi-action-delete left"></i></a></li>
         <li id="menu_settings"><a href="#">Settings<i class="mdi-action-settings left"></i></a></li>
       </ul>
@@ -233,6 +234,25 @@
     <div class="modal-footer">
       <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
       <a id="gen_alert_cancel_link" href="#" class="waves-effect btn-flat modal-close">Cancel</a>
+    </div>
+  </div>
+
+  <!-- General Alert: Content is loaded using Javascript to display alerts -->
+  <div id="not_running_dialog" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4 id="gen_alert_title">Ardublockly not running locally</h4>
+      <p>For Ardublockly to work correctly, the Ardublockly server must be
+      running locally on your computer.</p>
+      <p>If you are using an online version you will not be able to configure
+      the settings nor load the blocks code into an Arduino.</p>
+      <p>Installation instruction can be found in the
+      <a href="https://github.com/carlosperate/ardublockly">Ardublockly
+      repository</a>.</p>
+      <p>If you have Ardublockly already installed, make sure the "<i>setup.py</i> or
+      the "<i>ardublockly_win.bat</i>" program is running.</p>
+    </div>
+    <div class="modal-footer">
+      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
     </div>
   </div>
 

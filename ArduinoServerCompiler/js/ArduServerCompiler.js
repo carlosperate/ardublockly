@@ -26,14 +26,25 @@ ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
   // The data received is JSON, so it needs to be converted into the right
   // format to be displayed in the page.
   request.onreadystatechange = function() {
-    if ( (request.readyState == 4) && (request.status == 200) ) {
-      var el = ArduServerCompiler.createElementFromJson(request.responseText);
-      callback(el);
+    if (request.readyState == 4) {
+      if (request.status == 200) {
+        var el = ArduServerCompiler.createElementFromJson(request.responseText);
+        callback(el);
+      } else if (request.status == 405) {
+        // return a null element which will be dealt with in the front end
+        callback(null);
+      }
     }
   }
 
   // Send the data
-  request.send(params);
+  try {
+    request.send(params);
+  } catch(e) {
+    // The request will fail if opening the html directly on a browser, so
+    // let's just send the callback nullified and the front end will deal.
+    callback(null);
+  }
 };
 
 /**
@@ -51,14 +62,25 @@ ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
   // The data received is JSON, so it needs to be converted into the right
   // format to be displayed in the page.
   request.onreadystatechange = function() {
-    if ( (request.readyState == 4) && (request.status == 200) ) {
-      var el = ArduServerCompiler.createElementFromJson(request.responseText);
-      callback(el);
+    if (request.readyState == 4) {
+      if (request.status == 200)  {
+        var el = ArduServerCompiler.createElementFromJson(request.responseText);
+        callback(el);
+      } else if (request.status == 405) {
+        // return a null element which will be dealt with in the front end
+        callback(null);
+      }
     }
   }
 
   // Send the data
-  request.send(data);
+  try {
+    request.send(params);
+  } catch(e) {
+    // The request will fail if opening the html directly on a browser, so
+    // let's just send the callback nullified and the front end will deal.
+    callback(null);
+  }
 };
 
 /**
@@ -98,7 +120,7 @@ ArduServerCompiler.createAjaxRequest = function() {
  */
 ArduServerCompiler.createElementFromJson = function(json_data) {
   var parsed_json = JSON.parse(json_data);
-  var element;
+  var element = null;
 
   if (parsed_json.element == 'text_input') {
     // Simple text input

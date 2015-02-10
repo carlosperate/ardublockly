@@ -42,7 +42,12 @@ ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
       }
     }
   }
-  request.open("GET", toolbox_path, true);
+  // If file run locally Internet explorer fails here
+  try {
+    request.open("GET", toolbox_path, true);
+  } catch(e) {
+    $('#not_running_dialog').openModal();
+  }
 
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
@@ -60,7 +65,12 @@ ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
     }
   }
 
-  request.send(null);
+  // If file run locally Chrome will fail here
+  try {
+    request.send(null);
+  } catch(e) {
+    $('#not_running_dialog').openModal();
+  }
 };
 
 /**

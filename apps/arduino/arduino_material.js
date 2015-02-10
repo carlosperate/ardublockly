@@ -23,6 +23,12 @@ window.addEventListener('load', function() {
   ArduinoMaterial.bindActionFunctions_();
   ArduinoMaterial.bindDesignEventListeners_();
   ArduinoMaterial.bindBlocklyEventListeners_();
+
+  // Check if not running locally (including developer's local network IP)
+  if (document.location.hostname != "localhost" &&
+      document.location.hostname != "192.168.0.7") {
+    $('#not_running_dialog').openModal();
+  }
 });
 
 /**
@@ -175,44 +181,59 @@ ArduinoMaterial.populateSettings = function() {
 
 /**
  * Sets the compiler location form data retrieve from an updated element.
- * @param {!boolean} new_el New HTML element to replace the one in the current
- *                          DOM. Should contain a complete input text element.
+ * @param {element} new_el New HTML element to replace the one in the current
+ *                         DOM. Should contain a complete input text element.
  */
 ArduinoMaterial.setCompilerLocationHtml = function(new_el) {
-  var comp_loc_ip = document.getElementById('settings_compiler_location')
-  if (comp_loc_ip != null) {
-    comp_loc_ip.value = new_el.value;
+  if (new_el != null) {
+    var comp_loc_ip = document.getElementById('settings_compiler_location')
+    if (comp_loc_ip != null) {
+      comp_loc_ip.value = new_el.value;
+    }
+  } else {
+    // If the element is Null, then Ardublockly server is not running 
+    $('#not_running_dialog').openModal();
   }
 };
 
 /**
  * Sets the sketch location form data retrieve from an updated element.
- * @param {!boolean} new_el New HTML element to replace the one in the current
- *                          DOM. Should contain a complete input text element.
+ * @param {element} new_el New HTML element to replace the one in the current
+ *                         DOM. Should contain a complete input text element.
  */
 ArduinoMaterial.setSketchLocationHtml = function(new_el) {
-  var sketch_loc_ip = document.getElementById('settings_sketch_location')
-  if (sketch_loc_ip != null) {
-    sketch_loc_ip.value = new_el.value;
+  if (new_el != null) {
+    var sketch_loc_ip = document.getElementById('settings_sketch_location');
+    if (sketch_loc_ip != null) {
+      sketch_loc_ip.value = new_el.value;
+    }
+  } else {
+    // If the element is Null, then Ardublockly server is not running 
+    $('#not_running_dialog').openModal();
   }
 };
 
 /**
  * Replaces the Arduino Boards form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
- * @param {!element} new_el New HTML element to replace the one in the current
- *                          DOM. Should contain a complete select element.
+ * @param {element} new_el New HTML element to replace the one in the current
+ *                         DOM. Should contain a complete select element.
  */
 ArduinoMaterial.setArduinoBoardsHtml = function(new_el) {
-  var board_dropdown = document.getElementById('board')
-  if (board_dropdown != null) {
-    new_el.id = 'board';
-    new_el.onchange = ArduinoMaterial.setBoard;
-    board_dropdown.parentNode.replaceChild(new_el, board_dropdown);
+  if (new_el != null) {
+    var board_dropdown = document.getElementById('board');
+    if (board_dropdown != null) {
+      new_el.id = 'board';
+      new_el.onchange = ArduinoMaterial.setBoard;
+      board_dropdown.parentNode.replaceChild(new_el, board_dropdown);
+      // Refresh the materialize select menus
+      // TODO: Currently a reported bug from Materialize
+      $('select').material_select();
+    }
+  } else {
+    // If the element is Null, then Ardublockly server is not running 
+    $('#not_running_dialog').openModal();
   }
-  // Refresh the materialize select menus
-  // TODO: Currently a reported bug from Materialize
-   $('select').material_select();
 };
 
 /**
@@ -229,19 +250,24 @@ ArduinoMaterial.setBoard = function() {
 /**
  * Replaces the Serial Port form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
- * @param {!element} new_el New HTML element to replace the one in the current
- *                          DOM. Should contain a complete select element.
+ * @param {element} new_el New HTML element to replace the one in the current
+ *                         DOM. Should contain a complete select element.
  */
 ArduinoMaterial.setSerialPortsHtml = function(new_el) {
-  var serial_dropdown = document.getElementById('serial_port')
-  if (serial_dropdown != null) {
-    new_el.id = 'serial_port';
-    new_el.onchange = ArduinoMaterial.setSerial;
-    serial_dropdown.parentNode.replaceChild(new_el, serial_dropdown);
+  if (new_el != null) {
+    var serial_dropdown = document.getElementById('serial_port');
+    if (serial_dropdown != null) {
+      new_el.id = 'serial_port';
+      new_el.onchange = ArduinoMaterial.setSerial;
+      serial_dropdown.parentNode.replaceChild(new_el, serial_dropdown);
+      // Refresh the materialize select menus
+      // TODO: Currently a reported bug from Materialize
+      $('select').material_select();
+    }
+  } else {
+    // If the element is Null, then Ardublockly server is not running 
+    $('#not_running_dialog').openModal();
   }
-  // Refresh the materialize select menus
-  // TODO: Currently a reported bug from Materialize
-   $('select').material_select();
 };
 
 /**
@@ -258,19 +284,24 @@ ArduinoMaterial.setSerial = function() {
 /**
  * Replaces IDE options form data with a new HTMl element.
  * Ensures there is a change listener to call 'setIdeSettings' function
- * @param {!element} new_el New HTML element to replace the one in the current
- *                          DOM. Should contain a complete select element.
+ * @param {element} new_el New HTML element to replace the one in the current
+ *                         DOM. Should contain a complete select element.
  */
 ArduinoMaterial.setIdeHtml = function(new_el) {
-  var ide_dropdown = document.getElementById('ide_settings')
-  if (ide_dropdown != null) {
-    new_el.id = 'ide_settings';
-    new_el.onchange = ArduinoMaterial.setIdeSettings;
-    ide_dropdown.parentNode.replaceChild(new_el, ide_dropdown);
+  if (new_el != null) {
+    var ide_dropdown = document.getElementById('ide_settings');
+    if (ide_dropdown != null) {
+      new_el.id = 'ide_settings';
+      new_el.onchange = ArduinoMaterial.setIdeSettings;
+      ide_dropdown.parentNode.replaceChild(new_el, ide_dropdown);
+      // Refresh the materialize select menus
+      // TODO: Currently a reported bug from Materialize
+      $('select').material_select();
+    }
+  } else {
+    // If the element is Null, then Ardublockly server is not running 
+    $('#not_running_dialog').openModal();
   }
-  // Refresh the materialize select menus
-  // TODO: Currently a reported bug from Materialize
-   $('select').material_select();
 };
 
 /**
@@ -297,12 +328,17 @@ ArduinoMaterial.sendCode = function() {
 
 /**
  * Receives the IDE data back to be displayed and stops spinner.
- * @param {!element} new_el New HTML element to replace the one in the current
- *                          DOM. Should contain a complete select element.
+ * @param {element} new_el New HTML element to replace the one in the current
+ *                         DOM. Should contain a complete select element.
  */
 ArduinoMaterial.sendCodeReturn = function(data_back) {
   ArduinoMaterial.runButtonSpinner(false);
-  ArduinoMaterial.arduinoIdeModal(data_back);
+  if (data_back != null) {
+    ArduinoMaterial.arduinoIdeModal(data_back);
+  } else {
+    // If the element is Null, then Ardublockly server is not running 
+    $('#not_running_dialog').openModal();
+  }
 };
 
 /**
