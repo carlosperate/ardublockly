@@ -17,6 +17,7 @@ $RECYCLE.BIN/
 ########
 *.komodoproject
 .idea/
+npp.session
 
 ##########
 # Python #

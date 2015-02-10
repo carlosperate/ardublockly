@@ -111,7 +111,7 @@ def main(argv):
         sys.exit(1)
     relative_path = [os.path.relpath(this_file_parent_dir, common_path)]
     app_index =  os.path.normpath(os.path.join(
-        relative_path[0], 'ardublockly', 'apps', 'arduino_material'))
+        relative_path[0], 'ardublockly', 'apps', 'arduino'))
     print('Root & script parent: %s\nCommon & relative path: %s; %s\nIndex: %s'
           % (paths, common_path, relative_path, app_index))
     open_browser(app_index)
