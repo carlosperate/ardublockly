@@ -34,6 +34,14 @@ window.addEventListener('load', function() {
     ArduServerCompiler.requestNewSketchLocation(
         ArduinoSettings.setSketchLocationHtml);
   });
+
+  // Check if not running locally (including developer's local network IP)
+  if (document.location.hostname != "localhost" &&
+      document.location.hostname != "192.168.0.7") {
+    alert('Ardublockly not running locally\n\n' +
+          'For Ardublockly to work correctly, the Ardublockly server must be' +
+          ' running locally on your computer');
+  }
 });
 
 /**
@@ -42,9 +50,11 @@ window.addEventListener('load', function() {
  *                          DOM. Should contain a complete input text element.
  */
 ArduinoSettings.setCompilerLocationHtml = function(new_el) {
-  var comp_loc_ip = document.getElementById('settings_compiler_location')
-  if (comp_loc_ip != null) {
-    comp_loc_ip.value = new_el.value;
+  if (new_el != null) {
+    var comp_loc_ip = document.getElementById('settings_compiler_location')
+    if (comp_loc_ip != null) {
+      comp_loc_ip.value = new_el.value;
+    }
   }
 };
 
@@ -54,9 +64,11 @@ ArduinoSettings.setCompilerLocationHtml = function(new_el) {
  *                          DOM. Should contain a complete input text element.
  */
 ArduinoSettings.setSketchLocationHtml = function(new_el) {
-  var sketch_loc_ip = document.getElementById('settings_sketch_location')
-  if (sketch_loc_ip != null) {
-    sketch_loc_ip.value = new_el.value;
+  if (new_el != null) {
+    var sketch_loc_ip = document.getElementById('settings_sketch_location')
+    if (sketch_loc_ip != null) {
+      sketch_loc_ip.value = new_el.value;
+    }
   }
 };
 
@@ -67,11 +79,13 @@ ArduinoSettings.setSketchLocationHtml = function(new_el) {
  *                          DOM. Should contain a complete select element.
  */
 ArduinoSettings.setArduinoBoardsHtml = function(new_el) {
-  var board_dropdown = document.getElementById('board')
-  if (board_dropdown != null) {
-    new_el.id = 'board';
-    new_el.onchange = ArduinoSettings.setBoard;
-    board_dropdown.parentNode.replaceChild(new_el, board_dropdown);
+  if (new_el != null) {
+    var board_dropdown = document.getElementById('board')
+    if (board_dropdown != null) {
+      new_el.id = 'board';
+      new_el.onchange = ArduinoSettings.setBoard;
+      board_dropdown.parentNode.replaceChild(new_el, board_dropdown);
+    }
   }
 };
 
@@ -93,11 +107,13 @@ ArduinoSettings.setBoard = function() {
  *                          DOM. Should contain a complete select element.
  */
 ArduinoSettings.setSerialPortsHtml = function(new_el) {
-  var serial_dropdown = document.getElementById('serial_port')
-  if (serial_dropdown != null) {
-    new_el.id = 'serial_port';
-    new_el.onchange = ArduinoSettings.setSerial;
-    serial_dropdown.parentNode.replaceChild(new_el, serial_dropdown);
+  if (new_el != null) {
+    var serial_dropdown = document.getElementById('serial_port')
+    if (serial_dropdown != null) {
+      new_el.id = 'serial_port';
+      new_el.onchange = ArduinoSettings.setSerial;
+      serial_dropdown.parentNode.replaceChild(new_el, serial_dropdown);
+    }
   }
 };
 
@@ -119,11 +135,13 @@ ArduinoSettings.setSerial = function() {
  *                          DOM. Should contain a complete select element.
  */
 ArduinoSettings.setIdeHtml = function(new_el) {
-  var ide_dropdown = document.getElementById('ide_settings')
-  if (ide_dropdown != null) {
-    new_el.id = 'ide_settings';
-    new_el.onchange = ArduinoSettings.setIdeSettings;
-    ide_dropdown.parentNode.replaceChild(new_el, ide_dropdown);
+  if (new_el != null) {
+    var ide_dropdown = document.getElementById('ide_settings')
+    if (ide_dropdown != null) {
+      new_el.id = 'ide_settings';
+      new_el.onchange = ArduinoSettings.setIdeSettings;
+      ide_dropdown.parentNode.replaceChild(new_el, ide_dropdown);
+    }
   }
 };
 

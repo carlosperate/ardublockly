@@ -11,51 +11,51 @@
 /**
  * Create a namespace for the application.
  */
-var Arduino = {};
+var ArduinoClassic = {};
 
 /**
  * List of tab names.
  * @private
  */
-Arduino.TABS_ = ['blocks', 'arduino', 'xml'];
+ArduinoClassic.TABS_ = ['blocks', 'arduino', 'xml'];
 
-Arduino.selected = 'blocks';
+ArduinoClassic.selected = 'blocks';
 
 /**
  * Switch the visible pane when a tab is clicked.
  * @param {string} clickedName Name of tab clicked.
  */
-Arduino.tabClick = function(clickedName) {
+ArduinoClassic.tabClick = function(clickedName) {
   // If the XML tab was open, save and render the content.
   if (document.getElementById('tab_xml').className == 'tabon') {
     var xmlTextarea = document.getElementById('content_xml');
     var xmlText = xmlTextarea.value;
-    Arduino.replaceBlocksfromXml(xmlText);
+    ArduinoClassic.replaceBlocksfromXml(xmlText);
   }
 
   // Deselect the button, and ensure side panel is hidden
-  Arduino.peekCode(false);
+  ArduinoClassic.peekCode(false);
 
   // Deselect all tabs and hide all panes.
-  for (var i = 0; i < Arduino.TABS_.length; i++) {
-    var name = Arduino.TABS_[i];
+  for (var i = 0; i < ArduinoClassic.TABS_.length; i++) {
+    var name = ArduinoClassic.TABS_[i];
     document.getElementById('tab_' + name).className = 'taboff';
     document.getElementById('content_' + name).style.display = 'none';
   }
 
   // Select the active tab and panel
-  Arduino.selected = clickedName;
+  ArduinoClassic.selected = clickedName;
   document.getElementById('tab_' + clickedName).className = 'tabon';
   document.getElementById('content_' + clickedName).style.display = 'block';
-  Arduino.renderContent();
+  ArduinoClassic.renderContent();
   Blockly.fireUiEvent(window, 'resize');
 };
 
 /**
  * Populate the currently selected panel with content generated from the blocks.
  */
-Arduino.renderContent = function() {
-  var content = document.getElementById('content_' + Arduino.selected);
+ArduinoClassic.renderContent = function() {
+  var content = document.getElementById('content_' + ArduinoClassic.selected);
   // Initialize the panel
   if (content.id == 'content_xml') {
     var xmlTextarea = document.getElementById('content_xml');
@@ -77,18 +77,18 @@ Arduino.renderContent = function() {
 /**
  * Initialize Blockly.  Called on page load.
  */
-Arduino.init = function() {
-  Arduino.adjustViewport();
+ArduinoClassic.init = function() {
+  ArduinoClassic.adjustViewport();
 
   // Inject Blockly asynchronously into content_blocks
-  Arduino.injectBlockly(
+  ArduinoClassic.injectBlockly(
       document.getElementById('content_blocks'), 'arduino_toolbox.xml');
 
   // Create function to resize blockly if page layout changes
   var onresize = function(e) {
-    var bBox = Arduino.getBBox_(document.getElementById('content_wrapper'));
-    for (var i = 0; i < Arduino.TABS_.length; i++) {
-      var el = document.getElementById('content_' + Arduino.TABS_[i]);
+    var bBox = ArduinoClassic.getBBox_(document.getElementById('content_wrapper'));
+    for (var i = 0; i < ArduinoClassic.TABS_.length; i++) {
+      var el = document.getElementById('content_' + ArduinoClassic.TABS_[i]);
       el.style.top = bBox.y + 'px';
       el.style.left = bBox.x + 'px';
       // Height and width need to be set, read back, then set again to
@@ -108,7 +108,7 @@ Arduino.init = function() {
 
   // As Blockly is injected in parallel the binding only happens when done
   var bindBlocklyEventListener = function() {
-    if (Arduino.BLOCKLY_INJECTED == false) {
+    if (ArduinoClassic.BLOCKLY_INJECTED == false) {
       setTimeout(bindBlocklyEventListener, 50);
     } else {
       window.addEventListener('resize', onresize, false);
@@ -117,29 +117,37 @@ Arduino.init = function() {
   };
   bindBlocklyEventListener();
 
-  Arduino.tabClick(Arduino.selected);
+  ArduinoClassic.tabClick(ArduinoClassic.selected);
 
   // Binding buttons
-  Arduino.bindClick('peekCode', Arduino.peekCode);
-  Arduino.bindClick('openButton', Arduino.loadXmlFile);
-  Arduino.bindClick('saveButton', Arduino.saveXmlFile);
-  Arduino.bindClick('trashButton', Arduino.discard);
-  Arduino.bindClick('settingsButton', Arduino.openSettings);
-  Arduino.bindClick('runButton', Arduino.loadToArduino);
+  ArduinoClassic.bindClick('peekCode', ArduinoClassic.peekCode);
+  ArduinoClassic.bindClick('openButton', ArduinoClassic.loadXmlFile);
+  ArduinoClassic.bindClick('saveButton', ArduinoClassic.saveXmlFile);
+  ArduinoClassic.bindClick('trashButton', ArduinoClassic.discard);
+  ArduinoClassic.bindClick('settingsButton', ArduinoClassic.openSettings);
+  ArduinoClassic.bindClick('runButton', ArduinoClassic.loadToArduino);
 
   // Binding tabs
-  for (var i = 0; i < Arduino.TABS_.length; i++) {
-    var name = Arduino.TABS_[i];
-    Arduino.bindClick('tab_' + name,
-        function(name_) {return function() {Arduino.tabClick(name_);};}(name));
+  for (var i = 0; i < ArduinoClassic.TABS_.length; i++) {
+    var name = ArduinoClassic.TABS_[i];
+    ArduinoClassic.bindClick('tab_' + name,
+        function(name_) {return function() {ArduinoClassic.tabClick(name_);};}(name));
+  }
+
+  // Check if not running locally (including developer's local network IP)
+  if (document.location.hostname != "localhost" &&
+      document.location.hostname != "192.168.0.7") {
+    alert('Ardublockly not running locally\n\n' +
+          'For Ardublockly to work correctly, the Ardublockly server must be' +
+          ' running locally on your computer');
   }
 };
-window.addEventListener('load', Arduino.init);
+window.addEventListener('load', ArduinoClassic.init);
 
 /**
  * Fixes viewport for small screens.
  */
-Arduino.adjustViewport = function() {
+ArduinoClassic.adjustViewport = function() {
   var viewport = document.querySelector('meta[name="viewport"]');
   if (viewport && screen.availWidth < 725) {
     viewport.setAttribute('content',
@@ -150,7 +158,7 @@ Arduino.adjustViewport = function() {
 /**
  * Open a centered pop up with the server compiler settings.
  */
-Arduino.openSettings = function() {
+ArduinoClassic.openSettings = function() {
   var width = 500;
   var height = 400;
   var left = (screen.width / 2) - (width / 2);
@@ -164,16 +172,16 @@ Arduino.openSettings = function() {
 /**
  * Send the Arduino Code to the ArduServerCompiler to process.
  */
-Arduino.loadToArduino = function() {
+ArduinoClassic.loadToArduino = function() {
   ArduServerCompiler.sendSketchToServer(
       Blockly.Arduino.workspaceToCode(),
-      Arduino.loadToArduinoReturn);
+      ArduinoClassic.loadToArduinoReturn);
 };
 
 /**
  * Send the Arduino Code to the ArduServerCompiler to process
  */
-Arduino.loadToArduinoReturn = function(data_back_el) {
+ArduinoClassic.loadToArduinoReturn = function(data_back_el) {
   // edit modal with new content
   var modal = document.getElementById('modal_content');
   modal.innerHTML = '';
@@ -185,50 +193,50 @@ Arduino.loadToArduinoReturn = function(data_back_el) {
 /**
  * Discard all blocks from the workspace.
  */
-Arduino.discard = function() {
+ArduinoClassic.discard = function() {
   var count = Blockly.mainWorkspace.getAllBlocks().length;
   var message = 'Delete all ' + count + ' blocks?';
   if (count < 2 || window.confirm(message)) {
     Blockly.mainWorkspace.clear();
     window.location.hash = '';
   }
-  Arduino.renderContent();
+  ArduinoClassic.renderContent();
 };
 
 /**
  * Store the state the code sidebar visibility
  * @private
  */
-Arduino.peek_code_ = false;
+ArduinoClassic.peek_code_ = false;
 
 /**
  * Loads/unloads the side div with a code peek
  * @param {boolean?} visible Optional argument, indicates the new visibility of
  *                           the code preview.
  */
-Arduino.peekCode = function(visible) {
+ArduinoClassic.peekCode = function(visible) {
   var peek_code_button = document.getElementById('peekCode');
   var code_peek_content = document.getElementById('arduino_code_peek');
   
   if (visible == true) {
-    Arduino.peek_code_ = false;
+    ArduinoClassic.peek_code_ = false;
   } else if (visible == false) {
-    Arduino.peek_code_ = true;
+    ArduinoClassic.peek_code_ = true;
   }
   
-  if (Arduino.peek_code_ == false) {
-    Arduino.peek_code_ = true;
+  if (ArduinoClassic.peek_code_ == false) {
+    ArduinoClassic.peek_code_ = true;
     peek_code_button.className = "button_text secondary";
-    Arduino.sideContent(true);
+    ArduinoClassic.sideContent(true);
     code_peek_content.style.display = 'inline-block';
     // Regenerate arduino code and ensure every click does as well
-    Arduino.renderArduinoPeekCode();
-    Blockly.addChangeListener(Arduino.renderArduinoPeekCode);
+    ArduinoClassic.renderArduinoPeekCode();
+    Blockly.addChangeListener(ArduinoClassic.renderArduinoPeekCode);
   } else {
-    Arduino.peek_code_ = false;
+    ArduinoClassic.peek_code_ = false;
     peek_code_button.className = "button_text";
     code_peek_content.style.display = 'none';
-    Arduino.sideContent(false);
+    ArduinoClassic.sideContent(false);
     // Remove action listeners. TODO: track listener so that first time does not
     // crashes
     //Blockly.removeChangeListener(renderArduinoPeekCode);
@@ -240,13 +248,13 @@ Arduino.peekCode = function(visible) {
  * @param {string} content_name Name of the content div
  * @param {boolean} visible Indicated if the content should be shown or hidden
  */
-Arduino.sideContent = function(visible) {
+ArduinoClassic.sideContent = function(visible) {
   var side_content = document.getElementById('side_content');
   var block_content = document.getElementById('content_blocks');
 
   // Deselect all tabs and hide all panes.
-  for (var i = 0; i < Arduino.TABS_.length; i++) {
-    var name = Arduino.TABS_[i];
+  for (var i = 0; i < ArduinoClassic.TABS_.length; i++) {
+    var name = ArduinoClassic.TABS_[i];
     document.getElementById('tab_' + name).className = 'taboff';
     document.getElementById('content_' + name).style.display = 'none';
   }
@@ -262,18 +270,18 @@ Arduino.sideContent = function(visible) {
     side_content.style.display = 'none';
     block_content.className = 'content content_blocks';
     // Select the active tab and panel
-    document.getElementById('tab_' + Arduino.selected).className = 'tabon';
-    document.getElementById('content_' + Arduino.selected).style.display = 'block';
+    document.getElementById('tab_' + ArduinoClassic.selected).className = 'tabon';
+    document.getElementById('content_' + ArduinoClassic.selected).style.display = 'block';
   }
 
   Blockly.fireUiEvent(window, 'resize');  
-  Arduino.renderContent();
+  ArduinoClassic.renderContent();
 };
 
 /**
  * Updates the arduino code in the pre area based on the blocks
  */
-Arduino.renderArduinoPeekCode = function() {
+ArduinoClassic.renderArduinoPeekCode = function() {
   var code_peak_pre = document.getElementById('arduino_pre');
   code_peak_pre.textContent = Blockly.Arduino.workspaceToCode();
   if (typeof prettyPrintOne == 'function') {
@@ -285,14 +293,14 @@ Arduino.renderArduinoPeekCode = function() {
  * Public variable that indicates if Blockly has been injected.
  * @type {!boolean}
  */
-Arduino.BLOCKLY_INJECTED = false;
+ArduinoClassic.BLOCKLY_INJECTED = false;
 
 /**
  * Injects Blockly into a given text area. Reads the toolbox from an XMl file.
  * @param {!Element} el Element to inject Blockly into.
  * @param {!string} toolbox_path String containing the toolbox XML file path.
  */
-Arduino.injectBlockly = function(blockly_el, toolbox_path) {
+ArduinoClassic.injectBlockly = function(blockly_el, toolbox_path) {
   // Create a an XML HTTP request
   var request;
   try {   // Firefox, Chrome, IE7+, Opera, Safari
@@ -325,7 +333,7 @@ Arduino.injectBlockly = function(blockly_el, toolbox_path) {
             scrollbars: true,
             toolbox: request.responseText,
             trashcan: true });
-      Arduino.BLOCKLY_INJECTED = true;
+      ArduinoClassic.BLOCKLY_INJECTED = true;
     }
   }
 
@@ -336,15 +344,15 @@ Arduino.injectBlockly = function(blockly_el, toolbox_path) {
  * Loads an XML file from the users file system and adds the blocks into the
  * Blockly workspace.
  */
-Arduino.loadXmlFile = function() {
+ArduinoClassic.loadXmlFile = function() {
   // Create event listener function
   var parseInputXMLfile = function(e) {
     var files = e.target.files;
     var reader = new FileReader();
     reader.onload = function() {
-      var success = Arduino.replaceBlocksfromXml(reader.result);
+      var success = ArduinoClassic.replaceBlocksfromXml(reader.result);
       if (success) {
-        Arduino.renderContent();
+        ArduinoClassic.renderContent();
       } else {
         alert('Invalid XML!\nThe XML file was not successfully parsed into ' +
               'blocks. Please review the XML code and try again.');
@@ -372,7 +380,7 @@ Arduino.loadXmlFile = function() {
  * @param {!string} blocks_xml String of XML code for the blocks.
  * @return {!boolean} Indicates if the XML into blocks parse was successful.
  */
-Arduino.replaceBlocksfromXml = function(blocks_xml) {
+ArduinoClassic.replaceBlocksfromXml = function(blocks_xml) {
   var xmlDom = null;
   var success = true;
   try {
@@ -398,7 +406,7 @@ Arduino.replaceBlocksfromXml = function(blocks_xml) {
  * Creates an XML file containing the blocks from the Blockly workspace and
  * prompts the users to save it into their local file system.
  */
-Arduino.saveXmlFile = function() {
+ArduinoClassic.saveXmlFile = function() {
   // Generate XML
   var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
@@ -416,7 +424,7 @@ Arduino.saveXmlFile = function() {
  * @param {!Element|string} el Button element or ID thereof.
  * @param {!Function} func Event handler to bind.
  */
-Arduino.bindClick = function(el, func) {
+ArduinoClassic.bindClick = function(el, func) {
   if (typeof el == 'string') {
     el = document.getElementById(el);
   }
@@ -436,7 +444,7 @@ Arduino.bindClick = function(el, func) {
  * @return {!Object} Contains height, width, x, and y properties.
  * @private
  */
-Arduino.getBBox_ = function(element) {
+ArduinoClassic.getBBox_ = function(element) {
   var height = element.offsetHeight;
   var width = element.offsetWidth;
   var x = 0;
