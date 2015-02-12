@@ -42,6 +42,7 @@ ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
       }
     }
   }
+
   // If file run locally Internet explorer fails here
   try {
     request.open("GET", toolbox_path, true);

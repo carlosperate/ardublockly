@@ -321,9 +321,9 @@ ArduinoMaterial.setIdeSettings = function() {
  */
 ArduinoMaterial.sendCode = function() {
   toast('Sending sketch to Arduino IDE...', 4000);
+  ArduinoMaterial.runButtonSpinner(true);
   ArduServerCompiler.sendSketchToServer(
       ArduinoMaterial.generateArduino(), ArduinoMaterial.sendCodeReturn);
-  ArduinoMaterial.runButtonSpinner(true);
 };
 
 /**

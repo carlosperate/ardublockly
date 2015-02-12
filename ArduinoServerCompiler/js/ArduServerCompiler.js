@@ -50,7 +50,7 @@ ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
 /**
  * Sends plain data to the ArduBlocklyServer using Ajax
  * @param {!string} url Requester URL
- * @param {!string} params Form parameters in the "var=x&var2=y" format
+ * @param {!string} data Plain text currently used to send Arduino code only.
  * @param {!function} callback Request callback function.
  * @return False if an error occurred 
  */
@@ -75,7 +75,7 @@ ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
 
   // Send the data
   try {
-    request.send(params);
+    request.send(data);
   } catch(e) {
     // The request will fail if opening the html directly on a browser, so
     // let's just send the callback nullified and the front end will deal.
@@ -110,7 +110,7 @@ ArduServerCompiler.createAjaxRequest = function() {
     }
   }
   return request;
-}
+};
 
 /**
  * Creates an HTML element based on the JSON data received from the server.

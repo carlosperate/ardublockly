@@ -139,7 +139,7 @@ ArduinoClassic.init = function() {
       document.location.hostname != "192.168.0.7") {
     alert('Ardublockly not running locally\n\n' +
           'For Ardublockly to work correctly, the Ardublockly server must be' +
-          ' running locally on your computer');
+          ' running locally on your computer.');
   }
 };
 window.addEventListener('load', ArduinoClassic.init);
@@ -182,12 +182,18 @@ ArduinoClassic.loadToArduino = function() {
  * Send the Arduino Code to the ArduServerCompiler to process
  */
 ArduinoClassic.loadToArduinoReturn = function(data_back_el) {
-  // edit modal with new content
-  var modal = document.getElementById('modal_content');
-  modal.innerHTML = '';
-  modal.appendChild(data_back_el);
-  // display modal
-  document.getElementById('modal_toggle').checked = true;
+  if (data_back_el != null) {
+    // edit modal with new content
+    var modal = document.getElementById('modal_content');
+    modal.innerHTML = '';
+    modal.appendChild(data_back_el);
+    // display modal
+    document.getElementById('modal_toggle').checked = true;
+  } else {
+    alert('Ardublockly not running locally\n\n' +
+          'To load the blocks code into an Arduino the For Ardublockly ' +
+          'server must be running locally on your computer.');
+  }
 };
 
 /**
