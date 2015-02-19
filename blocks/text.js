@@ -61,7 +61,7 @@ Blockly.Blocks['text'] = {
     return new Blockly.FieldImage(Blockly.pathToMedia + file, 12, 12, '"');
   },
   /**
-   *
+   * Assigns a type to the block, it always returns a string.
    * @this Blockly.Block
    */
   getType: function() {
@@ -193,6 +193,13 @@ Blockly.Blocks['text_join'] = {
         }
       }
     }
+  },
+  /**
+   * Assigns a type to the block, it always returns a string.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return 'String';
   }
 };
 
@@ -268,6 +275,13 @@ Blockly.Blocks['text_append'] = {
     if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
       this.setFieldValue(newName, 'VAR');
     }
+  },
+  /**
+   * Assigns a type to the block, append always returns a string.
+   * @this Blockly.Blocks
+   */
+  getVarType: function() {
+    return 'String';
   }
 };
 
@@ -284,6 +298,13 @@ Blockly.Blocks['text_length'] = {
                         Blockly.ALIGN_RIGHT);
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.TEXT_LENGTH_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, length always returns an integer number.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return 'int';
   }
 };
 
@@ -300,6 +321,13 @@ Blockly.Blocks['text_isEmpty'] = {
                         Blockly.ALIGN_RIGHT);
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.TEXT_ISEMPTY_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, empty check always returns a boolean.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return 'boolean';
   }
 };
 
@@ -557,6 +585,13 @@ Blockly.Blocks['text_trim'] = {
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.setOutput(true, 'String');
     this.setTooltip(Blockly.Msg.TEXT_TRIM_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, trim always takes and returns a string.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return 'String';
   }
 };
 
@@ -611,7 +646,14 @@ Blockly.Blocks['text_prompt'] = {
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER;
     });
   },
-  newQuote_: Blockly.Blocks['text'].newQuote_
+  newQuote_: Blockly.Blocks['text'].newQuote_,
+  /**
+   * Assigns a type to the block, prompt always returns a string.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return 'String';
+  }
 };
 
 Blockly.Blocks['text_prompt_ext'] = {
@@ -644,5 +686,12 @@ Blockly.Blocks['text_prompt_ext'] = {
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_TEXT :
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER;
     });
+  },
+  /**
+   * Assigns a type to the block, prompt always returns a string.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return 'String';
   }
 };
