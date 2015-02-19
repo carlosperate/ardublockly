@@ -146,9 +146,9 @@ Blockly.Arduino.init = function(opt_workspace) {
   var variableWithType = Object.create(null);
   var blocks = Blockly.mainWorkspace.getAllBlocks();
   for (var x = 0; x < blocks.length; x++) {
-    var func = blocks[x].getVars;
-    if (func) {
-      var blockVariables = func.call(blocks[x]);
+    var getVars = blocks[x].getVars;
+    if (getVars) {
+      var blockVariables = getVars.call(blocks[x]);
       for (var y = 0; y < blockVariables.length; y++) {
         // Check if it's the first instance of the new variable name
         var unique = true;
@@ -160,56 +160,26 @@ Blockly.Arduino.init = function(opt_workspace) {
         }
         // If it is the first instance log the variable type
         if (unique == true) {
-          variableWithType[blockVariables[y]] = Blockly.Arduino.evaluateType(
-              Blockly.Arduino.valueToCode(blocks[x], 'VALUE',
-              Blockly.Arduino.ORDER_ASSIGNMENT));
+          var getType = blocks[x].getVarType;
+          if (getType) {
+            variableWithType[blockVariables[y]] = blocks[x].getVarType();
+          } else {
+            variableWithType[blockVariables[y]] = 'notdefined';
+          }
+          
         }
       }
     }
   }
 
   // Set variable declarations
-  var variableDeclarations = [];  
+  var variableDeclarations = [];
   for (var name in variableWithType) {
     variableDeclarations.push(variableWithType[name] + ' ' + name + ';');
   }
-  Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n') +
-      '\n';
-
+  Blockly.Arduino.definitions_['variables'] =
+      variableDeclarations.join('\n') + '\n';
 };
-
-/**
- * Evaluates the type of the data contained in the input string and returns
- * a string containing the C++ type.
- * @param {string} inputString string containing the input value to evaluate
- * @return {string} A String containing the C++ type
- */
-Blockly.Arduino.regExpInt = new RegExp(/^\d+$/);
-Blockly.Arduino.regExpFloat = new RegExp(/^[0-9]*[.][0-9]+$/);
-Blockly.Arduino.evaluateType = function(inputString) {
-  var firstCharacter = inputString.charAt(0);
-  if (firstCharacter == '"') {
-    return 'String';
-  }
-  else if (firstCharacter == "'") {
-    return 'char';
-  }
-  else if (!inputString || !inputString.length) {
-    return 'int';
-  }
-  else if (Blockly.Arduino.regExpInt.test(firstCharacter)) {
-    if( Blockly.Arduino.regExpInt.test(inputString)) {
-      return 'int';
-    } else if ( Blockly.Arduino.regExpFloat.test(inputString)) {
-      return 'float';
-    }
-    return 'int';
-  }
-
-  // For now the default is integer, will have to figure out how to 
-  // evaluate other blocks as inputs
-  return 'int';
-}
 
 /**
  * Prepend the generated code with the variable definitions.

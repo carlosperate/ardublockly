@@ -128,5 +128,26 @@ Blockly.Blocks['variables_set'] = {
       this.setFieldValue(newName, 'VAR');
     }
   },
-  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
+  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu,
+  /**
+   * Searches through the nested blocks to find a variable type.
+   * @this Blockly.Blocks
+   */
+  getVarType: function() {
+    var myType = 'nonono';
+    var nextBlock = [this];
+    while ((nextBlock[0].getType == null) &&
+           (nextBlock[0].getChildren().length > 0)) {
+      nextBlock = nextBlock[0].getChildren();
+    }
+    if (nextBlock[0] === this) {
+      myType = 'defineme';
+    } else {
+      var func = nextBlock[0].getType;
+      if (func) {
+        myType = nextBlock[0].getType();
+      }
+    }
+    return myType;
+  }
 };
