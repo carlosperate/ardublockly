@@ -168,7 +168,6 @@ def handle_sketch(sketch_code):
          'output': out,
          'error_output': error,
          'exit_code': exit_code}
-    print(json.dumps(json_data))
     return json.dumps(json_data)
 
 
