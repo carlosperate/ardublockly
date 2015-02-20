@@ -36,5 +36,13 @@ Blockly.Blocks['base_map'] = {
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('Re-maps a number from [0-1024] to another range.');
+  },
+  /**
+   * Assigns a type to the block, the current map implementation for Arduino
+   * takes the inputs a longs and returns a long, so automatic cast to int.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return 'int';
   }
 };
