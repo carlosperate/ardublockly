@@ -113,11 +113,10 @@ class ServerCompilerSettings(object):
         self.__compiler_dir__ = None
 
     def set_compiler_dir_from_file(self, new_compiler_dir):
-        """ The compiler dir must be full path to an .exe file. """
+        """ The compiler dir must be full path to an existing file. """
         # FIXME: this is a windows only check (.exe), needs to be
         #        updated to be compatible with linux and MacOS
-        if os.path.exists(new_compiler_dir) and\
-                new_compiler_dir.endswith('.exe'):
+        if os.path.exists(new_compiler_dir):
             self.__compiler_dir__ = new_compiler_dir
         else:
             print('\nThe provided compiler path in the settings file is not ' +
