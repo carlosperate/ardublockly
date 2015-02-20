@@ -287,8 +287,6 @@ def browse_file():
     Opens a file browser and selects executable files
     :return: Full path to selected file
     """
-    #TODO: Filter has been manually set for .exe files, still need to make it
-    #      compatible with other OSes
     root = Tkinter.Tk()
     # Make window almost invisible to focus it and ensure directory browser
     # doesn't end up loading in the background behind main window.
@@ -298,7 +296,7 @@ def browse_file():
     root.deiconify()
     root.lift()
     root.focus_force()
-    types = [('Executable', '.exe'), ('All Files', '*')]
+    types = [('All Files', '*')]
     file_path = tkFileDialog.askopenfilename(filetypes=types)
     root.destroy()
     return file_path
@@ -348,7 +346,7 @@ def get_compiler_path():
     """
     compiler_directory = ServerCompilerSettings().compiler_dir
     if not compiler_directory:
-        compiler_directory = 'Please select a valid Arduino compiler directory.'
+        compiler_directory = 'Please select a valid Arduino compiler directory'
     json_data = {'setting_type': 'compiler',
                  'element': 'text_input',
                  'display_text': compiler_directory}
