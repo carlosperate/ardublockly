@@ -86,8 +86,7 @@ var profile = {
              ["Integer", "int"], ["Unsigned Integer", "unsigned int"],
              ["Word", "word"], ["Long", "long"],
              ["Unsigned Long", "unsigned long"], ["Short", "short"],
-             ["Float", "float"], ["Double", "double"], ["String", "String"],
-             ["Char Array", "string"], ["Array", "array"]],
+             ["Float", "float"], ["Double", "double"], ["String", "String"]],
     spi_clock_divide: [['2 (8MHz)', 'SPI_CLOCK_DIV2'],
                        ['4 (4MHz)', 'SPI_CLOCK_DIV4'],
                        ['8 (2MHz)', 'SPI_CLOCK_DIV8'],
@@ -114,7 +113,7 @@ var profile = {
     //same serial
     //same types
   }
-}
+};
 
 // Set default profile to arduino standard-compatible board
 profile["default"] = profile["arduino"];
@@ -142,31 +141,26 @@ Blockly.Arduino.init = function(opt_workspace) {
     Blockly.Arduino.variableDB_.reset();
   }
 
-  // Iterate through the blocks to capture variables with first value
-  var variableWithType = Object.create(null);
+  // Iterate through the blocks to capture variables with first instance type
+  var variableTypes = Object.create(null);
   var blocks = Blockly.mainWorkspace.getAllBlocks();
   for (var x = 0; x < blocks.length; x++) {
     var getVars = blocks[x].getVars;
     if (getVars) {
+      // Iterate through the variables used in this block
       var blockVariables = getVars.call(blocks[x]);
       for (var y = 0; y < blockVariables.length; y++) {
-        // Check if it's the first instance of the new variable name
-        var unique = true;
-        for (var name in variableWithType) {
-          if (name == blockVariables[y]) {
-            unique = false;
-            break;
+        // Send variable list to getVarType, returns type if first encounter or
+        // null if already defined.
+        var getVarType = blocks[x].getVarType;
+        if (getVarType) {
+          var varType = getVarType.call(blocks[x], variableTypes);
+          if (varType != null) {
+            variableTypes[blockVariables[y]] = varType;
           }
-        }
-        // If it is the first instance log the variable type
-        if (unique == true) {
-          var getType = blocks[x].getVarType;
-          if (getType) {
-            variableWithType[blockVariables[y]] = blocks[x].getVarType();
-          } else {
-            variableWithType[blockVariables[y]] = 'notdefined';
-          }
-          
+        } else {
+          //TODO: Once all static typing is done this will default to 'int'.
+          variableTypes[blockVariables[y]] = 'getVarTypeNotDef';
         }
       }
     }
@@ -174,8 +168,8 @@ Blockly.Arduino.init = function(opt_workspace) {
 
   // Set variable declarations
   var variableDeclarations = [];
-  for (var name in variableWithType) {
-    variableDeclarations.push(variableWithType[name] + ' ' + name + ';');
+  for (var name in variableTypes) {
+    variableDeclarations.push(variableTypes[name] + ' ' + name + ';');
   }
   Blockly.Arduino.definitions_['variables'] =
       variableDeclarations.join('\n') + '\n';

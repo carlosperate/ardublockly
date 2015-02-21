@@ -84,6 +84,48 @@ Blockly.Blocks['variables_get'] = {
     xmlBlock.setAttribute('type', this.contextMenuType_);
     option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
     options.push(option);
+  },
+  /**
+   * Assigns a type to the variable. In this case we need to find the original
+   * variable set block for the selected variable and set that type.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars List of variables already defined.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
+   */
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+    var varType = null;
+
+    // Check if variable has been defined already add if it has been.
+    for (var name in existingVars) {
+      if (name === varName) {
+        varType = existingVars[varName];
+        this.varType = varType;
+        break;
+      }
+    }
+
+    // This block needs the variable to be define before use, so warn user.
+    if (varType == null) {
+      this.setWarningText('This variable needs to be set to something before' +
+                          ' it can be used!');
+    } else {
+      this.setWarningText(null);
+    }
+
+    return varType;
+  },
+  /**
+   * Contains the type of the variable selected from the first set block.
+   */
+  varType: 'nonono',
+  /**
+   * Retrieves the type of the selected variable, defined at getVarType.
+   * @this Blockly.Block
+   */
+  getType: function(existingVars) {
+    return this.varType;
   }
 };
 
@@ -131,23 +173,54 @@ Blockly.Blocks['variables_set'] = {
   customContextMenu: Blockly.Blocks['variables_get'].customContextMenu,
   /**
    * Searches through the nested blocks to find a variable type.
-   * @this Blockly.Blocks
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars List of variables already defined.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
    */
-  getVarType: function() {
-    var myType = 'nonono';
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+    var varType = null;
+
+    // Check what this block type should be
     var nextBlock = [this];
     while ((nextBlock[0].getType == null) &&
            (nextBlock[0].getChildren().length > 0)) {
       nextBlock = nextBlock[0].getChildren();
     }
     if (nextBlock[0] === this) {
-      myType = 'defineme';
+      // Set variable block is empty
+      varType = 'defineme';
     } else {
       var func = nextBlock[0].getType;
       if (func) {
-        myType = nextBlock[0].getType();
+        varType = nextBlock[0].getType();
+      } else {
+        varType = 'innerBlockNoType';
       }
     }
-    return myType;
+
+    // Check if variable has been defined already
+    var unique = true;
+    for (var name in existingVars) {
+      if (name == varName) {
+        unique = false;
+        break;
+      }
+    }
+
+    // Only set the type if the variable has not been defined before
+    if (unique) {
+      this.setWarningText(null);
+      return varType;
+    } else if ((existingVars[varName] != varType) && (nextBlock[0] != this)) {
+      this.setWarningText('This block is using a different type than what ' +
+          'was set on the first use of this variable.\nFirst use type: ' +
+          existingVars[varName] + '\nThis block type: ' + varType);
+      return null;
+    } else {
+      this.setWarningText(null);
+      return null;
+    }
   }
 };
