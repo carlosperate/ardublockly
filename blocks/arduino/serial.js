@@ -32,6 +32,9 @@ Blockly.Blocks['serial_print'] = {
         .appendField("print");
     this.appendValueInput("CONTENT", 'String')
         .setCheck("String");
+    this.appendDummyInput()
+        .appendField("with new line")
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "NEW_LINE");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

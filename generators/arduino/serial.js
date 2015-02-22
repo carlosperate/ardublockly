@@ -26,8 +26,14 @@ Blockly.Arduino['serial_print'] = function(block) {
   var serialId = block.getFieldValue('SERIAL_ID');
   var content = Blockly.Arduino.valueToCode(
       block, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var checkbox_name = (block.getFieldValue('NEW_LINE') == 'TRUE');
 
-  var code = serialId + '.print(' + content + ');\n';
+  if (checkbox_name) {
+    var code = serialId + '.println(' + content + ');\n';
+  } else {
+    var code = serialId + '.print(' + content + ');\n';
+  }
+
   return code;
 };
 
