@@ -136,6 +136,7 @@
     </block>
     <block type="time_millis"></block>
     <block type="time_micros"></block>
+    <block type="infinite_loop"></block>
   </category>
   <category name="Motors">
     <block type="servo_write">
