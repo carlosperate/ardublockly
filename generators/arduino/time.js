@@ -60,3 +60,13 @@ goog.require('Blockly.Arduino');
   var code = 'micros()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+/**
+ * Code generator for the wait forever (end of program) block
+ * Arduino code: loop { while(true); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+ Blockly.Arduino['infinite_loop'] = function(block) {
+  return 'while(true);';
+};
