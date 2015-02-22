@@ -9,12 +9,13 @@ This project has been influenced by BlocklyDuino.
 ## Features
 * Generate Arduino code with visual drag-and-drop blocks
 * Load the code to an Arduino Board
+* Useful "code block warnings"
 * Compatible with a wide range of official Arduino Boards
-* Compatible with Windows / Linux / Mac OS X
+* Runs on Windows / Linux / Mac OS X
 
-Ardublockly is still under development and a few features are not yet implemented.
+Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the [TODO.md file](https://github.com/carlosperate/ardublockly/blob/master/TODO.md).
 
-Currently tested under Windows, but developed for portability. Will soon be tested on the other platforms.
+Currently tested under Windows and Linux with python 2, but developed for portability. Will soon be tested on all platforms.
 
 
 ## Demo
@@ -31,10 +32,7 @@ A demo of the current state of Ardublockly can be found in the following two lin
 ## Installing
 Installation instructions can be found in [this Github repository Wiki](https://github.com/carlosperate/ardublockly/wiki/Installing-Ardublockly).
 
-Alternatively, there is a packaged version for Windows that runs as a stand-alone executable and can be downloaded using the following git command:
-```
-git clone --recursive https://github.com/carlosperate/ardublockly-package.git
-```
+Alternatively, there is a packaged version for Windows that runs as a stand-alone executable and can be downloaded from the [Ardublockly-package repository](https://github.com/carlosperate/ardublockly-package) or directly as a zip file [clicking here](https://github.com/carlosperate/ardublockly-package/archive/master.zip).
 
 It also needs the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/software).
 
@@ -43,7 +41,7 @@ It also needs the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/
 1. Install Ardublockly or [Ardublockly-package](https://github.com/carlosperate/ardublockly-package)
 2. Install the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/software).
 3. Run the `start.py` python script (for Ardublockly) or `ardublockly_win.bat` package file (for Ardublockly-package)
-3. Configure Ardublockly to find the Arduino IDE [following these instructions](https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly)
+3. Configure Ardublockly to locate the Arduino IDE [following these instructions](https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly)
 
 
 ## Documentation
