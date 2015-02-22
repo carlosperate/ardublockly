@@ -50,6 +50,12 @@ Blockly.Blocks['io_digitalread'] = {
                      'PIN');
     this.setOutput(true, 'Boolean');
     this.setTooltip('Reads the digital value of a pin.');
+  },
+  /**
+   * Retrieves the type of return value for the block, in this case an integer.
+   */
+  getType: function(existingVars) {
+    return 'int';
   }
 };
 
@@ -72,6 +78,12 @@ Blockly.Blocks['io_builtin_led'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Turn on or off the built in LED.');
+  },
+  /**
+   * Retrieves the type of return value for the block, in this case an integer.
+   */
+  getType: function(existingVars) {
+    return 'int';
   }
 };
 
@@ -109,6 +121,12 @@ Blockly.Blocks['io_analogread'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.analog), 'PIN');
     this.setOutput(true, 'Number');
     this.setTooltip('Return value between 0 and 1024.');
+  },
+  /**
+   * Retrieves the type of return value for the block, in this case an integer.
+   */
+  getType: function(existingVars) {
+    return 'int';
   }
 };
 
@@ -126,5 +144,11 @@ Blockly.Blocks['io_highlow'] = {
            'STATE')
     this.setOutput(true, 'Boolean');
     this.setTooltip("Set a pin state logic High or Low.");
+  },
+  /**
+   * Retrieves the type of return value for the block, in this case a boolean.
+   */
+  getType: function(existingVars) {
+    return 'int';
   }
 };
