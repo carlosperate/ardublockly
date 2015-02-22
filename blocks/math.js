@@ -339,11 +339,50 @@ Blockly.Blocks['math_change'] = {
     }
   },
   /**
-   * Assigns a type to the block, all these operations are floats.
+   * Finds the type of the variable selected in the drop down. Sets it to an
+   * an integer if it has not been defined before.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars List of variables already defined.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
+   */
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+    var varType = null;
+
+    // Check if variable has been defined already, add type if it has been.
+    for (var name in existingVars) {
+      if (name === varName) {
+        varType = existingVars[varName];
+        this.varType = varType;
+        break;
+      }
+    }
+
+    if (varType == null) {
+      // not defined, so set it to an int
+      varType = 'int';
+      this.varType = 'int';
+      this.setWarningText(null);
+    } else if ((varType != 'int') && (varType != 'float')) {
+      this.setWarningText('This variable type has been previously set to a ' +
+          existingVars[varName] + ' and it needs to be a number!');
+    } else {
+      this.setWarningText(null);
+    }
+
+    return varType;
+  },
+  /**
+   * Contains the type of the variable selected from the drop down.
+   */
+  varType: 'nonono',
+  /**
+   * Retrieves the type of the selected variable, defined at getVarType.
    * @this Blockly.Block
    */
-  getType: function() {
-    return 'boolean';
+  getType: function(existingVars) {
+    return this.varType;
   }
 };
 

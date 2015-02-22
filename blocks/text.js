@@ -277,11 +277,39 @@ Blockly.Blocks['text_append'] = {
     }
   },
   /**
-   * Assigns a type to the block, append always returns a string.
-   * @this Blockly.Blocks
+   * Finds the type of the variable selected in the drop down. Sets it to an
+   * a string if it has not been defined before.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars List of variables already defined.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
    */
-  getVarType: function() {
-    return 'String';
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+    var varType = null;
+
+    // Check if variable has been defined already, add type if it has been.
+    for (var name in existingVars) {
+      if (name === varName) {
+        varType = existingVars[varName];
+        this.varType = varType;
+        break;
+      }
+    }
+
+    if (varType == null) {
+      // not defined, so set it to an int
+      varType = 'String';
+      this.varType = 'String';
+      this.setWarningText(null);
+    } else if (varType != 'String') {
+      this.setWarningText('This variable type has been previously set to a ' +
+          existingVars[varName] + ' and it needs to be a String!');
+    } else {
+      this.setWarningText(null);
+    }
+
+    return varType;
   }
 };
 
