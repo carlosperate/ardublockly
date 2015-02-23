@@ -15,7 +15,7 @@
 Can't convert 'bytes' object to str implicitly
 There was an error manipulating the sketch data!!
 ```
-- [ ] 
+
 
 ## Server
 - [ ] Serial port test code
@@ -46,7 +46,8 @@ There was an error manipulating the sketch data!!
 
 ## Arduino web-app
 - [ ] Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden.
-- [ ] Add examples 
+- [x] Add examples
+- [ ] Change js variables naming convention from current 'snake_case' to 'lower camel case' to comply with Google's js coding style.
 
-## Future features
+# Future features
 - [ ] Serial console in web app for comms with Arduino

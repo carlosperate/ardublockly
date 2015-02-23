@@ -93,11 +93,10 @@
           <div class="collapsible-header">Examples<i class="mdi-navigation-arrow-drop-down"></i></div>
           <div class="collapsible-body">
             <ul>
-              <li id="menu_example_1"><a href="#!">Example 1</a></li>
-              <li id="menu_example_2"><a href="#!">Example 2</a></li>
-              <li id="menu_example_3"><a href="#!">Example 3</a></li>
-              <li id="menu_example_4"><a href="#!">Example 4</a></li>
-              <li id="menu_example_5"><a href="#!">Example 5</a></li>
+              <li id="menu_example_1"><a href="#!">Blink</a></li>
+              <li id="menu_example_2"><a href="#!">Serial print</a></li>
+              <li id="menu_example_3"><a href="#!">Servo knob</a></li>
+              <li id="menu_example_4"><a href="#!">Stepper knob</a></li>
             </ul>
           </div>
         </li>
@@ -237,8 +236,8 @@
     </div>
   </div>
 
-  <!-- General Alert: Content is loaded using Javascript to display alerts -->
-  <div id="not_running_dialog" class="modal modal-fixed-footer" style="height:50%!important">
+  <!-- Local Server Alert: Content is loaded using Javascript to display alerts -->
+  <div id="not_running_dialog" class="modal">
     <div class="modal-content">
       <h4 id="gen_alert_title">Ardublockly not running locally</h4>
       <p>For Ardublockly to work correctly, the Ardublockly server must be
@@ -251,8 +250,8 @@
       <p>If you have Ardublockly already installed, make sure the "<i>setup.py</i> or
       the "<i>ardublockly_win.bat</i>" program is running.</p>
     </div>
-    <div class="modal-footer">
-      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
+    <div>
+      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close" style="float:right;margin-right:48px">Okay</a>
     </div>
   </div>
 

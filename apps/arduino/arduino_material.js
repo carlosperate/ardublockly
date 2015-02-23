@@ -54,16 +54,14 @@ ArduinoMaterial.bindActionFunctions_ = function() {
   ArduinoMaterial.bindClick_('menu_settings', function() {
       ArduinoMaterial.openSettings();
       $('.button-collapse').sideNav('hide'); });
-  ArduinoMaterial.bindClick_('menu_example_1',
-      ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick_('menu_example_2',
-      ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick_('menu_example_3',
-      ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick_('menu_example_4',
-      ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick_('menu_example_5',
-      ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick_('menu_example_1', function() {
+      ArduinoMaterial.loadServerXmlFile('examples/blink.xml')});
+  ArduinoMaterial.bindClick_('menu_example_2', function() {
+      ArduinoMaterial.loadServerXmlFile('examples/serial_print_ascii_.xml')});
+  ArduinoMaterial.bindClick_('menu_example_3', function() {
+      ArduinoMaterial.loadServerXmlFile('examples/servo_knob.xml')});
+  ArduinoMaterial.bindClick_('menu_example_4', function() {
+      ArduinoMaterial.loadServerXmlFile('examples/stepper_knob.xml')});
 
   // Floating buttons
   ArduinoMaterial.bindClick_('button_run', ArduinoMaterial.sendCode);
@@ -106,6 +104,32 @@ ArduinoMaterial.bindBlocklyEventListeners_ = function() {
   } else {
     Blockly.addChangeListener(ArduinoMaterial.renderContent);
   }
+};
+
+/**
+ * Loads an XML file from the server and adds the blocks into the Blockly
+ * workspace.
+ */
+ArduinoMaterial.loadServerXmlFile = function(xmlFile) {
+  // The loadXmlBlockFile loads the file asynchronously and needs a callback
+  var loadXmlCallback = function(sucess) {
+    if (sucess) {
+      ArduinoMaterial.renderContent();
+    } else {
+      ArduinoMaterial.materialAlert(
+          'Invalid XML',
+          'The XML file was not successfully parsed into blocks.\
+          Please review the XML code and try again.',
+          false);
+    }
+  };
+
+  var callbackConnectionError = function() {
+    $('#not_running_dialog').openModal();
+  };
+
+  ArduinoMaterial.loadXmlBlockFile(
+      xmlFile, loadXmlCallback, callbackConnectionError);
 };
 
 /**

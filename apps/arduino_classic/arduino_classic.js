@@ -121,7 +121,7 @@ ArduinoClassic.init = function() {
 
   // Binding buttons
   ArduinoClassic.bindClick('peekCode', ArduinoClassic.peekCode);
-  ArduinoClassic.bindClick('openButton', ArduinoClassic.loadXmlFile);
+  ArduinoClassic.bindClick('openButton', ArduinoClassic.loadUserXmlFile);
   ArduinoClassic.bindClick('saveButton', ArduinoClassic.saveXmlFile);
   ArduinoClassic.bindClick('trashButton', ArduinoClassic.discard);
   ArduinoClassic.bindClick('settingsButton', ArduinoClassic.openSettings);
@@ -350,7 +350,7 @@ ArduinoClassic.injectBlockly = function(blockly_el, toolbox_path) {
  * Loads an XML file from the users file system and adds the blocks into the
  * Blockly workspace.
  */
-ArduinoClassic.loadXmlFile = function() {
+ArduinoClassic.loadUserXmlFile = function() {
   // Create event listener function
   var parseInputXMLfile = function(e) {
     var files = e.target.files;
