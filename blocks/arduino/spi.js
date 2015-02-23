@@ -74,5 +74,13 @@ Blockly.Blocks['spi_transfer'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Send SPI message to an specified slave device');
+  },
+  /**
+   * Retrieves the type of the selected variable, Arduino code returns a byte,
+   * for now set it to integer..
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return "int";
   }
 };

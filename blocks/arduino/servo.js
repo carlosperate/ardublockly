@@ -54,5 +54,11 @@ Blockly.Blocks['servo_read'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.pwm), 'SERVO_PIN');
     this.setOutput(true, 'Number');
     this.setTooltip('Read a Servo angle');
+  },
+  /**
+   * Retrieves the type of the block, in this case an integer.
+   */
+  getType: function() {
+    return 'int';
   }
 };
