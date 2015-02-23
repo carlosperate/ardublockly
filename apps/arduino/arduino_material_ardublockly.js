@@ -25,23 +25,7 @@ ArduinoMaterial.BLOCKLY_INJECTED = false;
  */
 ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
   // Create a an XML HTTP request
-  var request;
-  try {   // Firefox, Chrome, IE7+, Opera, Safari
-    request = new XMLHttpRequest();
-  }
-  catch (e) {
-    try {   // IE6 and earlier
-      request = new ActiveXObject("Msxml2.XMLHTTP");
-    }
-    catch (e) {
-      try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      catch (e) {
-        throw 'Your browser does not support AJAX. Cannot load toolbox';
-      }
-    }
-  }
+  var request = ArduinoMaterial.ajaxRequest();
 
   // If file run locally Internet explorer fails here
   try {
@@ -71,6 +55,38 @@ ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
     request.send(null);
   } catch(e) {
     $('#not_running_dialog').openModal();
+  }
+};
+
+/**
+ * Loads an XML file from the server and adds the blocks into the Blockly
+ * workspace.
+ */
+ArduinoMaterial.loadXmlBlockFile =
+    function(xmlFile, callbackFileLoaded, callbackConectonError) {
+  // Create a an XML HTTP request
+  var request = ArduinoMaterial.ajaxRequest();
+
+  // If file run locally Internet explorer fails here
+  try {
+    request.open("GET", xmlFile, true);
+  } catch(e) {
+    callbackConectonError();
+  }
+
+  // Once file is open, parse the XML into the workspace
+  request.onreadystatechange = function() {
+    if ( (request.readyState == 4) && (request.status == 200) ) {
+      var success = ArduinoMaterial.replaceBlocksfromXml(request.responseText);
+      callbackFileLoaded(success);
+    }
+  }
+
+  // If file run locally Chrome will fail here
+  try {
+    request.send(null);
+  } catch(e) {
+    callbackConectonError();
   }
 };
 
@@ -164,4 +180,29 @@ ArduinoMaterial.discard = function() {
           ArduinoMaterial.renderContent();
         });
   }
+};
+
+/**
+ * Creates an AJAX request 
+ * @return An XML HTTP Request
+ */
+ArduinoMaterial.ajaxRequest = function() {
+  var request;
+  try {
+    // Firefox, Chrome, IE7+, Opera, Safari
+    request = new XMLHttpRequest();
+  } catch (e) {
+    try {
+      // IE6 and earlier
+      request = new ActiveXObject("Msxml2.XMLHTTP");
+    } catch (e) {
+      try {
+        request = new ActiveXObject("Microsoft.XMLHTTP");
+      } catch (e) {
+        throw 'Your browser does not support AJAX. Cannot load toolbox';
+        request = null;
+      }
+    }
+  }
+  return request;
 };
