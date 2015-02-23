@@ -234,9 +234,9 @@ Blockly.Arduino['math_number_property'] = function(block) {
 
 /**
  * Generator to add (Y) to a variable (X).
+ * If variable X has not been declared before this block it will be declared as
+ * a (not initialised) global int, however globals are 0 initialised in C/C++.
  * Arduino code: loop { X += Y; }
- * TODO: Might need to include "#define _USE_MATH_DEFINES"
- *       The arduino header file already includes math.h
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */

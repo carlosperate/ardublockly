@@ -54,7 +54,7 @@ Blockly.Blocks['io_digitalread'] = {
   /**
    * Retrieves the type of return value for the block, in this case an integer.
    */
-  getType: function(existingVars) {
+  getType: function() {
     return 'int';
   }
 };
@@ -82,7 +82,7 @@ Blockly.Blocks['io_builtin_led'] = {
   /**
    * Retrieves the type of return value for the block, in this case an integer.
    */
-  getType: function(existingVars) {
+  getType: function() {
     return 'int';
   }
 };
@@ -125,7 +125,7 @@ Blockly.Blocks['io_analogread'] = {
   /**
    * Retrieves the type of return value for the block, in this case an integer.
    */
-  getType: function(existingVars) {
+  getType: function() {
     return 'int';
   }
 };
@@ -148,7 +148,7 @@ Blockly.Blocks['io_highlow'] = {
   /**
    * Retrieves the type of return value for the block, in this case a boolean.
    */
-  getType: function(existingVars) {
+  getType: function() {
     return 'int';
   }
 };

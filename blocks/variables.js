@@ -86,8 +86,8 @@ Blockly.Blocks['variables_get'] = {
     options.push(option);
   },
   /**
-   * Assigns a type to the variable. In this case we need to find the original
-   * variable set block for the selected variable and set that type.
+   * Finds the type of the selected variable. Need to find the original
+   * variable set block to save the type into the varType block variable.
    * @this Blockly.Block
    * @param {Array<string>} existingVars List of variables already defined.
    * @return {string} String to indicate the type if it has not been defined
@@ -124,7 +124,7 @@ Blockly.Blocks['variables_get'] = {
    * Retrieves the type of the selected variable, defined at getVarType.
    * @this Blockly.Block
    */
-  getType: function(existingVars) {
+  getType: function() {
     return this.varType;
   }
 };

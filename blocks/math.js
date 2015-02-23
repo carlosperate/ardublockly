@@ -140,7 +140,6 @@ Blockly.Blocks['math_single'] = {
   },
   /**
    * Assigns a type to the block, all these operations are floats.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'float';
@@ -183,7 +182,6 @@ Blockly.Blocks['math_trig'] = {
   },
   /**
    * Assigns a type to the block, all these operations are floats.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'float';
@@ -212,7 +210,6 @@ Blockly.Blocks['math_constant'] = {
   },
   /**
    * Assigns a type to the block, all these operations are floats.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'float';
@@ -287,7 +284,6 @@ Blockly.Blocks['math_number_property'] = {
   },
   /**
    * Assigns a type to the block, all these operations return booleans.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'boolean';
@@ -381,7 +377,7 @@ Blockly.Blocks['math_change'] = {
    * Retrieves the type of the selected variable, defined at getVarType.
    * @this Blockly.Block
    */
-  getType: function(existingVars) {
+  getType: function() {
     return this.varType;
   }
 };
@@ -406,7 +402,6 @@ Blockly.Blocks['math_round'] = {
   },
   /**
    * Assigns a type to the block, round always returns a float.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'float';
@@ -480,7 +475,6 @@ Blockly.Blocks['math_modulo'] = {
   },
   /**
    * Assigns a type to the block, modulus only works on integers.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'int';
@@ -525,7 +519,6 @@ Blockly.Blocks['math_random_int'] = {
   },
   /**
    * Assigns a type to the block, always an int.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'int';
@@ -547,7 +540,6 @@ Blockly.Blocks['math_random_float'] = {
   },
   /**
    * Assigns a type to the block, always a float.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'float';

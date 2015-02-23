@@ -212,7 +212,7 @@ Blockly.Blocks['controls_for'] = {
    * Retrieves the type of the selected variable, defined at getVarType.
    * @this Blockly.Block
    */
-  getType: function(existingVars) {
+  getType: function() {
     return this.varType;
   }
 };

@@ -330,7 +330,6 @@ Blockly.Blocks['logic_compare'] = {
   },
   /**
    * Assigns a type to the block, comparison operations result in booleans.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'boolean';
@@ -368,7 +367,6 @@ Blockly.Blocks['logic_operation'] = {
   },
   /**
    * Assigns a type to the block, logic comparison operations result in bools.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'boolean';
@@ -392,7 +390,6 @@ Blockly.Blocks['logic_negate'] = {
   /**
    * Assigns a type to the block, not input is meant to be a booleans, so it
    * should return the same.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'boolean';
@@ -417,7 +414,6 @@ Blockly.Blocks['logic_boolean'] = {
   },
   /**
    * Assigns a type to the boolean block.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'boolean';

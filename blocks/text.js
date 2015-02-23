@@ -62,7 +62,6 @@ Blockly.Blocks['text'] = {
   },
   /**
    * Assigns a type to the block, it always returns a string.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'String';
@@ -196,7 +195,6 @@ Blockly.Blocks['text_join'] = {
   },
   /**
    * Assigns a type to the block, it always returns a string.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'String';
@@ -329,7 +327,6 @@ Blockly.Blocks['text_length'] = {
   },
   /**
    * Assigns a type to the block, length always returns an integer number.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'int';
@@ -352,7 +349,6 @@ Blockly.Blocks['text_isEmpty'] = {
   },
   /**
    * Assigns a type to the block, empty check always returns a boolean.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'boolean';
@@ -616,7 +612,6 @@ Blockly.Blocks['text_trim'] = {
   },
   /**
    * Assigns a type to the block, trim always takes and returns a string.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'String';
@@ -677,7 +672,6 @@ Blockly.Blocks['text_prompt'] = {
   newQuote_: Blockly.Blocks['text'].newQuote_,
   /**
    * Assigns a type to the block, prompt always returns a string.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'String';
@@ -717,7 +711,6 @@ Blockly.Blocks['text_prompt_ext'] = {
   },
   /**
    * Assigns a type to the block, prompt always returns a string.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'String';

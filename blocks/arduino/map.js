@@ -40,7 +40,6 @@ Blockly.Blocks['base_map'] = {
   /**
    * Assigns a type to the block, the current map implementation for Arduino
    * takes the inputs a longs and returns a long, so automatic cast to int.
-   * @this Blockly.Block
    */
   getType: function() {
     return 'int';
