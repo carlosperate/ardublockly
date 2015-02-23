@@ -68,6 +68,13 @@ Blockly.Blocks['time_millis'] = {
     this.setOutput(true, 'Number');
     this.setTooltip('Returns the number of milliseconds since the Arduino ' +
                     'board began running the current program.');
+  },
+  /**
+   * Retrieves the type of the block, should be a long (32bit), but  for for
+   * now an int.
+   */
+  getType: function() {
+    return 'int';
   }
 };
 
@@ -84,5 +91,12 @@ Blockly.Blocks['time_micros'] = {
     this.setOutput(true, 'Number');
     this.setTooltip('Returns the number of microseconds since the Arduino ' +
                     'board began running the current program.');
+  },
+  /**
+   * Retrieves the type of the block, should be a long (32bit), but  for for
+   * now an int.
+   */
+  getType: function() {
+    return 'int';
   }
 };
