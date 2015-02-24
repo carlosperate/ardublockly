@@ -296,8 +296,8 @@ def browse_file():
     root.deiconify()
     root.lift()
     root.focus_force()
-    types = [('All Files', '*')]
-    file_path = tkFileDialog.askopenfilename(filetypes=types)
+    root.update()
+    file_path = tkFileDialog.askopenfilename()
     root.destroy()
     return file_path
 
