@@ -87,8 +87,14 @@ class ServerCompilerSettings(object):
         return self.__compiler_dir__
 
     def set_compiler_dir(self, new_compiler_dir):
-        """ The compiler dir must be full path to an .exe file. """
-        if os.path.isfile(new_compiler_dir):
+        """ The compiler dir must a valid file or directory """
+        # Mac only check, as apps are packaged directories
+        if sys.platform == 'darwin':
+            new_compiler_dir += '/Contents/MacOS/JavaApplicationStub'
+            print('\nCompiler file in Mac OS located within the app ' +
+                  'directory: /Contents/MacOS/JavaApplicationStub')
+        # Check directory
+        if os.path.exists(new_compiler_dir):
             self.__compiler_dir__ = new_compiler_dir
             print('\nCompiler directory set to:\n\t%s' % self.__compiler_dir__)
             self.save_settings()
@@ -111,7 +117,7 @@ class ServerCompilerSettings(object):
 
     def set_compiler_dir_from_file(self, new_compiler_dir):
         """ The compiler dir must be full path to an existing file. """
-        if os.path.isfile(new_compiler_dir):
+        if os.path.exists(new_compiler_dir):
             self.__compiler_dir__ = new_compiler_dir
         else:
             print('\nThe provided compiler path in the settings file is not ' +
