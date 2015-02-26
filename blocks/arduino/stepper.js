@@ -8,9 +8,9 @@
  *               Additional functions apart from the normal generators have 
  *               been added to be able to generate the 'set' drop down menu 
  *               with all current instaces of the Stepper class:
- *               Blockly.Blocks.Arduino.stepper.allInstances
+ *               Blockly.Blocks.Arduino.stepper.stepperInstances
  *               Blockly.Blocks.Arduino.stepper.FieldStepperInstance
- *               Blockly.Blocks.Arduino.stepper.FieldStepperInstance.dropdownCreate
+ *               Blockly.Blocks.Arduino.stepper.stepperDropdownList
  *
  * TODO: Still need to had some kind of handler to refresh the "set" drop down
  *       menu values if an instance in a 'configure' block is renamed.
@@ -29,80 +29,62 @@ Blockly.Blocks.Arduino.stepper.HUE = 75;
 /**
  * Strings for easy reference
  */
-Blockly.Blocks.Arduino.stepper.no_instance = 'No_Instances';
-Blockly.Blocks.Arduino.stepper.no_name = 'Empty_input_name';
+Blockly.Blocks.Arduino.stepper.noInstance = 'No_Instances';
+Blockly.Blocks.Arduino.stepper.noName = 'Empty_input_name';
 
 /**
  * Finds all user-created instances of the Stepper block config.
- * Based on Blockly.Variables.allVariables
  * @return {!Array.<string>} Array of instance names.
  */
-Blockly.Blocks.Arduino.stepper.allInstances = function() {
+Blockly.Blocks.Arduino.stepper.stepperInstances = function() {
+  var stepperList = [];
   var blocks = Blockly.mainWorkspace.getAllBlocks();
-  var variableHash = Object.create(null);
-
-  // Iterate through every block and add each Stetter config name to the hash.
   for (var x = 0; x < blocks.length; x++) {
-    var func = blocks[x].getStepperInstance;
-    if (func) {
-      var blockVariables = func.call(blocks[x]);
-      for (var y = 0; y < blockVariables.length; y++) {
-        var varName = blockVariables[y];
-        // Variable name may be null if the block is only half-built.
-        if (varName) {
-          variableHash[varName.toLowerCase()] = varName;
+    var getStepperInstance = blocks[x].getStepperInstance;
+    if (getStepperInstance) {
+      var stepperInstance = getStepperInstance.call(blocks[x]);
+        if (stepperInstance) {
+          stepperList.push(stepperInstance);
         }
-      }
     }
   }
-  // Flatten the hash into a list.
-  var variableList = [];
-  for (var name in variableHash) {
-    variableList.push(variableHash[name]);
-  }
+  return stepperList;
+};
 
-  return variableList;
+/**
+ * Return a sorted list of instances names for set dropdown menu.
+ * @return {!Array.<string>} Array of stepper instances names.
+ */
+Blockly.Blocks.Arduino.stepper.stepperDropdownList = function() {
+  var stepperList = Blockly.Blocks.Arduino.stepper.stepperInstances();
+  var options = [];
+  if (stepperList.length > 0) {
+    stepperList.sort(goog.string.caseInsensitiveCompare);
+    // Variables are not language-specific, use the name as both the
+    // user-facing text and the internal representation.
+    for (var x = 0; x < stepperList.length; x++) {
+      options[x] = [stepperList[x], stepperList[x]];
+    }
+  } else {
+    // There are no config blocks in the work area
+    options[0] = [Blockly.Blocks.Arduino.stepper.noInstance, 
+                  Blockly.Blocks.Arduino.stepper.noInstance];
+  }
+  return options;
 };
 
 /**
  * Class for a variable's dropdown field.
- * @param {Function} opt_changeHandler A function that is executed when a new
- *     option is selected.  Its sole argument is the new option value.  Its
- *     return value is ignored.
  * @extends {Blockly.FieldDropdown}
  * @constructor
  */
 Blockly.Blocks.Arduino.stepper.FieldStepperInstance = function() {
   Blockly.Blocks.Arduino.stepper.FieldStepperInstance.superClass_.constructor.call(
-      this,
-      Blockly.Blocks.Arduino.stepper.FieldStepperInstance.dropdownCreate);
+      this, Blockly.Blocks.Arduino.stepper.stepperDropdownList);
 };
 goog.inherits(
     Blockly.Blocks.Arduino.stepper.FieldStepperInstance, Blockly.FieldDropdown);
 
-/**
- * Return a sorted list of instances names for set dropdown menu.
- * @return {!Array.<string>} Array of variable names.
- * @this {!Blockly.Blocks.Arduino.stepper.FieldStepperInstance}
- */
-Blockly.Blocks.Arduino.stepper.FieldStepperInstance.dropdownCreate = function() {
-  var variableList = Blockly.Blocks.Arduino.stepper.allInstances();
-  var options = [];
-  if (variableList.length > 0) {
-    variableList.sort(goog.string.caseInsensitiveCompare);
-    // Variables are not language-specific, use the name as both the
-    // user-facing text and the internal representation.
-    for (var x = 0; x < variableList.length; x++) {
-      options[x] = [variableList[x], variableList[x]];
-    }
-  } else {
-    // There are no config blocks in the work area
-    options[0] = [Blockly.Blocks.Arduino.stepper.no_instance, 
-        Blockly.Blocks.Arduino.stepper.no_instance];
-  }
-  
-  return options;
-};
 
 Blockly.Blocks['stepper_config'] = {
   /**
@@ -140,14 +122,14 @@ Blockly.Blocks['stepper_config'] = {
    * @this Blockly.Block
    */
   getStepperInstance: function() {
-    var InstanceName;
+    var InstanceName = null;
     var instanceNameBlock = this.getInputTargetBlock('STEPPER_NAME');
     if (!instanceNameBlock) {
-      InstanceName = Blockly.Blocks.Arduino.stepper.no_name;
+      InstanceName = Blockly.Blocks.Arduino.stepper.noName;
     } else {
       InstanceName = instanceNameBlock.getFieldValue('TEXT');
     }
-    return [InstanceName];
+    return InstanceName;
   }
 };
 
@@ -181,16 +163,52 @@ Blockly.Blocks['stepper_step'] = {
       // Block has been deleted.
       return;
     }
-    var instances =
-        Blockly.Blocks.Arduino.stepper.FieldStepperInstance.dropdownCreate();
-    if (instances[0][0] === Blockly.Blocks.Arduino.stepper.no_instance) {
-      this.setWarningText('A STEPPER configuration block must be added to' +
+
+    var currentDropdown = this.getFieldValue('STEPPER_NAME');
+    var instances = Blockly.Blocks.Arduino.stepper.stepperDropdownList();
+
+    // Check for configuration block presence
+    if (instances[0][0] === Blockly.Blocks.Arduino.stepper.noInstance) {
+      // Ensure dropdown menu says there is no config block
+      if (currentDropdown !== Blockly.Blocks.Arduino.stepper.noInstance) {
+        this.setFieldValue(
+            Blockly.Blocks.Arduino.stepper.noInstance, 'STEPPER_NAME');
+      }
+      this.setWarningText('A STEPPER configuration block must be added to ' +
           'use this block!');
-    } else if (instances[0][0] === Blockly.Blocks.Arduino.stepper.no_name) {
-      this.setWarningText('A Name input must be added to the Stepper ' +
-          'configuration block!');
     } else {
-      this.setWarningText(null);
+      // Configuration blocks present, check if any selected and contains name
+      var existingConfigSelected = false;
+      for (var x = 0; x < instances.length; x++) {
+        // Check if any of the config blocks does not have a name
+        if (instances[x][0] === Blockly.Blocks.Arduino.stepper.noName) {
+          // If selected config has no name either, set warning and exit func
+          if (currentDropdown === Blockly.Blocks.Arduino.stepper.noName) {
+            this.setWarningText('A Name input must be added to the Stepper ' +
+                                'configuration block!');
+            return;
+          }
+        } else if (instances[x][0] === currentDropdown) {
+          existingConfigSelected = true;
+        }
+      }
+
+      // At this point select config has a name, check if it exist
+      if (existingConfigSelected) {
+        // All good, just remove any warnings and exit the function
+        this.setWarningText(null);
+      } else {
+        if ((currentDropdown === Blockly.Blocks.Arduino.stepper.noName) ||
+            (currentDropdown === Blockly.Blocks.Arduino.stepper.noInstance)) {
+          // Just pick the first config block
+          this.setFieldValue(instances[0][0], 'STEPPER_NAME');
+          this.setWarningText(null);
+        } else {
+          // Al this point just set a waning to select a valid stepper config
+          this.setWarningText('Selected stepper does not exist anymore, ' +
+                              'please select a new one.');
+        }
+      }
     }
   }
 };
