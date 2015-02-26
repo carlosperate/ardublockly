@@ -321,7 +321,42 @@ Blockly.Blocks['procedures_defnoreturn'] = {
       }
     }
   },
-  callType_: 'procedures_callnoreturn'
+  callType_: 'procedures_callnoreturn',
+  /**
+   * Searches through a list of variables with type to assign the type of the
+   * arguments.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars Associative array variable already  
+   *                                     defined, names as key, type as value.
+   */
+  setArgsType: function(existingVars) {
+    var varNames = this.arguments_;
+
+    // Check if variable has been defined already and save type
+    for (var name in existingVars) {
+      for (var i = 0; i < varNames.length; i++) {
+        if (name == varNames[i]) {
+          this.argsTypes[name] = existingVars[name];
+        }
+      }
+    }
+  },
+  /**
+   * Contains the type of the arguments added with mutators.
+   */
+  argsTypes: {},
+  /**
+   * Retrieves the type of the arguments, types defined at setArgsType.
+   * @this Blockly.Block
+   */
+  getArgType: function(varName) {
+    for (var name in this.argsTypes) {
+      if (name == varName) {
+        return this.argsTypes[varName];
+      }
+    }
+    return null;
+  }
 };
 
 Blockly.Blocks['procedures_defreturn'] = {
@@ -369,7 +404,24 @@ Blockly.Blocks['procedures_defreturn'] = {
   getVars: Blockly.Blocks['procedures_defnoreturn'].getVars,
   renameVar: Blockly.Blocks['procedures_defnoreturn'].renameVar,
   customContextMenu: Blockly.Blocks['procedures_defnoreturn'].customContextMenu,
-  callType_: 'procedures_callreturn'
+  callType_: 'procedures_callreturn',
+  setArgsType: Blockly.Blocks['procedures_defnoreturn'].setArgsType,
+  varType: {},
+  getVarType: Blockly.Blocks['procedures_defnoreturn'].getVarType,
+  /**
+   * Searches through the nested blocks in the return input to find a variable
+   * type or return void.
+   * @this Blockly.Block
+   * @return {string} String to indicate the type or void.
+   */
+  getReturnType: function() {
+    var returnType = 'void';
+    var returnBlock = this.getInputTargetBlock('RETURN');
+    if (returnBlock) {
+      returnType = Blockly.StaticTyping.getChildBlockType(returnBlock);
+    }
+    return returnType;
+  }
 };
 
 Blockly.Blocks['procedures_mutatorcontainer'] = {
@@ -594,15 +646,15 @@ Blockly.Blocks['procedures_callnoreturn'] = {
       // Initialize caller with the mutator's IDs.
       this.setProcedureParameters(def.arguments_, def.paramIds_);
     } else {
-      this.arguments_ = [];
+      var args = [];
       for (var i = 0, childNode; childNode = xmlElement.childNodes[i]; i++) {
         if (childNode.nodeName.toLowerCase() == 'arg') {
-          this.arguments_.push(childNode.getAttribute('name'));
+          args.push(childNode.getAttribute('name'));
         }
       }
       // For the second argument (paramIds) use the arguments list as a dummy
       // list.
-      this.setProcedureParameters(this.arguments_, this.arguments_);
+      this.setProcedureParameters(args, args);
     }
   },
   /**

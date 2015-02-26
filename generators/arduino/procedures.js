@@ -39,13 +39,16 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
   if (returnValue) {
     returnValue = '  return ' + returnValue + ';\n';
   }
-  //TODO: This is where we need to capture return type.
-  var returnType = returnValue ? 'int' : 'void';
+
+  // Get arguments with type and return type
   var args = [];
   for (var x = 0; x < block.arguments_.length; x++) {
-    args[x] = Blockly.Arduino.variableDB_.getName(block.arguments_[x],
-        Blockly.Variables.NAME_TYPE);
+    args[x] = block.getArgType(block.arguments_[x]) + ' ' + 
+        Blockly.Arduino.variableDB_.getName(block.arguments_[x],
+            Blockly.Variables.NAME_TYPE);
   }
+  var returnType = this.getReturnType();
+
   var code = returnType + ' ' + funcName + '(' + args.join(', ') + ') {\n' +
       branch + returnValue + '}\n';
   code = Blockly.Arduino.scrub_(block, code);

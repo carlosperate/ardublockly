@@ -159,10 +159,18 @@ Blockly.Arduino.init = function(opt_workspace) {
             variableTypes[blockVariables[y]] = varType;
           }
         } else {
-          //TODO: Once all static typing is done this will default to 'int'.
-          variableTypes[blockVariables[y]] = 'getVarTypeNotDef';
+          //TODO: Once all static typing code is done, default this to 'int'
+          //variableTypes[blockVariables[y]] = 'getVarTypeNotDef';
         }
       }
+    }
+  }
+
+  // The procedure arguments need to have all the variables collected first
+  for (var x = 0; x < blocks.length; x++) {
+    var setArgsType = blocks[x].setArgsType;
+    if (setArgsType) {
+      setArgsType.call(blocks[x], variableTypes);
     }
   }
 
