@@ -22,8 +22,6 @@ ArduinoMaterial.materializeJsInit = function() {
       menuWidth: 240,
       activationWidth: 70,
       edge: 'left'});
-    // Accordion collapsible
-    $('.collapsible').collapsible();
     // Drop down menus
     $(".dropdown-button").dropdown({hover: false});
     // Overlay content panels using modals (android dialogs)
