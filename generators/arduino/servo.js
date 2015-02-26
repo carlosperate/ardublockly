@@ -40,7 +40,7 @@ Blockly.Arduino['servo_write'] = function(block) {
   // If the IO has been configured already set a block warning for the user
   if (pinKey in Blockly.Arduino.pins_) {
      if (Blockly.Arduino.pins_[pinKey] != pinType) {
-       block.setWarningText('Pin alredy used as ' + Blockly.Arduino.pins_[pinKey]);
+       block.setWarningText('Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
      } else {
        block.setWarningText(null);
      }
@@ -77,7 +77,7 @@ Blockly.Arduino['servo_read'] = function(block) {
   // If the IO has been configured already set a block warning for the user
   if (pinKey in Blockly.Arduino.pins_) {
      if (Blockly.Arduino.pins_[pinKey] != pinType) {
-       block.setWarningText('Pin alredy used as ' + Blockly.Arduino.pins_[pinKey]);
+       block.setWarningText('Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
      } else {
        block.setWarningText(null);
      }
