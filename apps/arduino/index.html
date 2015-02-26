@@ -63,17 +63,15 @@
 
   <!-- Horizonal Navigation bar -->
   <nav class="nav-fixed arduino_teal">
-    <div class="container">
-      <div class="nav-wrapper">
-        <a class="button-collapse show-on-large" href="#" data-activates="slide-out"><i class="mdi-navigation-menu"></i></a>
-        <a id="logo-container" href="#" class="brand-logo">Ardublockly</a>
-        <!-- Horizontal Navbar links only shown on large resolutions -->
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li><a href="#" id="button_load">Open<i class="mdi-file-file-upload left"></i></a></li>
-          <li><a href="#" id="button_save">Save<i class="mdi-file-file-download left"></i></a></li>
-          <li><a href="#" id="button_delete">Delete All<i class="mdi-action-delete left"></i></a></li>
-        </ul>
-      </div>
+    <div class="nav-wrapper container">
+      <a class="button-collapse show-on-large" href="#" data-activates="slide-out"><i class="mdi-navigation-menu"></i></a>
+      <a id="logo-container" href="#" class="brand-logo">Ardublockly</a>
+      <!-- Horizontal Navbar links only shown on large resolutions -->
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#" id="button_load">Open<i class="mdi-file-file-upload left"></i></a></li>
+        <li><a href="#" id="button_save">Save<i class="mdi-file-file-download left"></i></a></li>
+        <li><a href="#" id="button_delete">Delete All<i class="mdi-action-delete left"></i></a></li>
+      </ul>
     </div>
   </nav>
 
@@ -155,9 +153,9 @@
         </div>
       </div>
       <div class="col s12 m12 l4">
-        <ul class="collapsible z-depth-1">
+        <ul class="collapsible z-depth-1" data-collapsible="accordion">
           <li>
-            <div class="collapsible-header"><span class="collapsible_logo">{ }</span>Source Code</div>
+            <div class="collapsible-header active"><span class="collapsible_logo">{ }</span>Source Code</div>
             <div class="collapsible-body">
               <pre id="content_arduino" class="content"></pre>
             </div>

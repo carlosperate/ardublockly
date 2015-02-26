@@ -37,13 +37,13 @@ window.addEventListener('load', function() {
  */
 ArduinoMaterial.bindActionFunctions_ = function() {
   // Navigation buttons
-  ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadXmlFile);
+  ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadUserXmlFile);
   ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFile);
   ArduinoMaterial.bindClick_('button_delete', ArduinoMaterial.discard);
 
   // Side menu buttons, they also close the side menu
   ArduinoMaterial.bindClick_('menu_load', function() {
-      ArduinoMaterial.loadXmlFile();
+      ArduinoMaterial.loadUserXmlFile();
       $('.button-collapse').sideNav('hide'); });
   ArduinoMaterial.bindClick_('menu_save',  function() {
       ArduinoMaterial.saveXmlFile();
@@ -136,7 +136,7 @@ ArduinoMaterial.loadServerXmlFile = function(xmlFile) {
  * Loads an XML file from the users file system and adds the blocks into the
  * Blockly workspace.
  */
-ArduinoMaterial.loadXmlFile = function() {
+ArduinoMaterial.loadUserXmlFile = function() {
   // Create event listener function
   var parseInputXMLfile = function(e) {
     var files = e.target.files;
