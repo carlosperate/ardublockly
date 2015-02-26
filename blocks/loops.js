@@ -179,26 +179,21 @@ Blockly.Blocks['controls_for'] = {
    */
   getVarType: function(existingVars) {
     var varName = this.getFieldValue('VAR');
-    var varType = null;
 
-    // Check if variable has been defined already, add type if it has been.
-    for (var name in existingVars) {
-      if (name === varName) {
-        varType = existingVars[varName];
-        this.varType = varType;
-        break;
+    // Check if variable has been defined already
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType != null) {
+      this.varType = varType;
+      if ((varType != 'int') && (varType != 'float')) {
+        this.setWarningText('This variable type has been previously set to a ' +
+          existingVars[varName] + ' and it needs to be a number!')
+      } else {
+        this.setWarningText(null);
       }
-    }
-
-    if (varType == null) {
+    } else {
       // not defined, so set it to an int
       varType = 'int';
       this.varType = 'int';
-      this.setWarningText(null);
-    } else if ((varType != 'int') && (varType != 'float')) {
-      this.setWarningText('This variable type has been previously set to a ' +
-          existingVars[varName] + ' and it needs to be a number!');
-    } else {
       this.setWarningText(null);
     }
 

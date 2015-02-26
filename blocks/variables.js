@@ -95,23 +95,16 @@ Blockly.Blocks['variables_get'] = {
    */
   getVarType: function(existingVars) {
     var varName = this.getFieldValue('VAR');
-    var varType = null;
 
     // Check if variable has been defined already add if it has been.
-    for (var name in existingVars) {
-      if (name === varName) {
-        varType = existingVars[varName];
-        this.varType = varType;
-        break;
-      }
-    }
-
-    // This block needs the variable to be define before use, so warn user.
-    if (varType == null) {
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType != null) {
+      this.varType = varType;
+      this.setWarningText(null);
+    } else {
+      // This block needs the variable to be define before use, so warn user.
       this.setWarningText('This variable needs to be set to something before' +
                           ' it can be used!');
-    } else {
-      this.setWarningText(null);
     }
 
     return varType;
@@ -180,25 +173,9 @@ Blockly.Blocks['variables_set'] = {
    */
   getVarType: function(existingVars) {
     var varName = this.getFieldValue('VAR');
-    var varType = null;
 
     // Check what this block type should be
-    var nextBlock = [this];
-    while ((nextBlock[0].getType == null) &&
-           (nextBlock[0].getChildren().length > 0)) {
-      nextBlock = nextBlock[0].getChildren();
-    }
-    if (nextBlock[0] === this) {
-      // Set variable block is empty
-      varType = 'defineme';
-    } else {
-      var func = nextBlock[0].getType;
-      if (func) {
-        varType = nextBlock[0].getType();
-      } else {
-        varType = 'innerBlockNoType';
-      }
-    }
+    var varType = Blockly.StaticTyping.getChildBlockType(this);
 
     // Check if variable has been defined already
     var unique = true;
@@ -213,7 +190,8 @@ Blockly.Blocks['variables_set'] = {
     if (unique) {
       this.setWarningText(null);
       return varType;
-    } else if ((existingVars[varName] != varType) && (nextBlock[0] != this)) {
+    } else if ( (existingVars[varName] != varType) &&
+                (this.getChildren().length == 0) ) {
       this.setWarningText('This block is using a different type than what ' +
           'was set on the first use of this variable.\nFirst use type: ' +
           existingVars[varName] + '\nThis block type: ' + varType);

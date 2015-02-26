@@ -284,26 +284,19 @@ Blockly.Blocks['text_append'] = {
    */
   getVarType: function(existingVars) {
     var varName = this.getFieldValue('VAR');
-    var varType = null;
 
-    // Check if variable has been defined already, add type if it has been.
-    for (var name in existingVars) {
-      if (name === varName) {
-        varType = existingVars[varName];
-        this.varType = varType;
-        break;
+    // Check if variable has been defined already
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType != null) {
+      if (varType != 'String') {
+        this.setWarningText('This variable type has been previously set to a ' +
+            existingVars[varName] + ' and it needs to be a String!');
+      } else {
+        this.setWarningText(null);
       }
-    }
-
-    if (varType == null) {
-      // not defined, so set it to an int
-      varType = 'String';
-      this.varType = 'String';
-      this.setWarningText(null);
-    } else if (varType != 'String') {
-      this.setWarningText('This variable type has been previously set to a ' +
-          existingVars[varName] + ' and it needs to be a String!');
     } else {
+      // not defined, so set it to a string
+      varType = 'String';
       this.setWarningText(null);
     }
 
