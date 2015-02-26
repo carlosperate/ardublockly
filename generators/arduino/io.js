@@ -171,7 +171,7 @@ Blockly.Arduino['io_analogread'] = function(block) {
   if (pinKey in Blockly.Arduino.pins_) {
     if (Blockly.Arduino.pins_[pinKey] != pinType) {
       block.setWarningText(
-          'Pin alredy used as ' + Blockly.Arduino.pins_[pinKey]);
+          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
     } else {
       block.setWarningText(null);
     }

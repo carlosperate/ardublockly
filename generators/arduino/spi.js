@@ -97,7 +97,7 @@ Blockly.Arduino['spi_transfer'] = function(block) {
     // If the IO has been configured already set a warning for the user
     if (spiSs in Blockly.Arduino.pins_) {
       if (Blockly.Arduino.pins_[spiSs] != pinType) {
-        warningText = warningText + 'Pin alredy used as ' +
+        warningText = warningText + 'Pin already used as ' +
             Blockly.Arduino.pins_[spiSs];
       }
     } else {
