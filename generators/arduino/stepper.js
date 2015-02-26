@@ -46,13 +46,13 @@ Blockly.Arduino['stepper_config'] = function(block) {
   var warningText = '';
   if (pin1 in Blockly.Arduino.pins_) {
     if (Blockly.Arduino.pins_[pin1] != pinType) {
-      warningText = 'Pin ' + pin1 + ' alredy used as ' +
+      warningText = 'Pin ' + pin1 + ' already used as ' +
           Blockly.Arduino.pins_[pin1] + '. ';
     }
   }
   if (pin2 in Blockly.Arduino.pins_) {
     if (Blockly.Arduino.pins_[pin2] != pinType) {
-      warningText = warningText + 'Pin ' + pin2 + ' alredy used as ' +
+      warningText = warningText + 'Pin ' + pin2 + ' already used as ' +
           Blockly.Arduino.pins_[pin2] + '. ';
     }
   }
@@ -81,7 +81,7 @@ Blockly.Arduino['stepper_step'] = function(block) {
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '0';
   var code = '';
-  code = stepperInstance + '.steps(' + stepperSteps + ')';
+  code = stepperInstance + '.steps(' + stepperSteps + ');\n';
   
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+  return code;
 };
