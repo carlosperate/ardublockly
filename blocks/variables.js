@@ -175,28 +175,24 @@ Blockly.Blocks['variables_set'] = {
     var varName = this.getFieldValue('VAR');
 
     // Check what this block type should be
-    var varType = Blockly.StaticTyping.getChildBlockType(this);
+    var thisBlockType = Blockly.StaticTyping.getChildBlockType(this);
 
     // Check if variable has been defined already
-    var unique = true;
-    for (var name in existingVars) {
-      if (name == varName) {
-        unique = false;
-        break;
-      }
-    }
-
-    // Only set the type if the variable has not been defined before
-    if (unique) {
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType === null) {
+      // This block var has not been encountered before, so return type
       this.setWarningText(null);
-      return varType;
-    } else if ( (existingVars[varName] != varType) &&
-                (this.getChildren().length == 0) ) {
+      return thisBlockType;
+    } else if ((existingVars[varName] !== thisBlockType) &&
+               (this.getChildren().length > 0)) {
+      // Variable name defined before, but only set warning if there are child
+      // blocks 
       this.setWarningText('This block is using a different type than what ' +
           'was set on the first use of this variable.\nFirst use type: ' +
-          existingVars[varName] + '\nThis block type: ' + varType);
+          existingVars[varName] + '\nThis block type: ' + thisBlockType);
       return null;
     } else {
+      // Variable defined before, but it is the same type, or block is empty
       this.setWarningText(null);
       return null;
     }
