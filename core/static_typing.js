@@ -14,6 +14,8 @@ goog.provide('Blockly.StaticTyping');
 
 goog.require('Blockly.Block');
 
+goog.require('Blockly.Workspace');
+
 
 /**
  * Navigates through the child blocks to get the block type.
@@ -27,7 +29,7 @@ Blockly.StaticTyping.getChildBlockType = function(block) {
          (nextBlock[0].getChildren().length > 0)) {
     nextBlock = nextBlock[0].getChildren();
   }
-  if (nextBlock[0] === this) {
+  if (nextBlock[0] === block) {
     // Set variable block is empty, so no type yet
     blockType = 'defineme';
     //varType = 'int';
@@ -58,4 +60,46 @@ Blockly.StaticTyping.findListVarType = function(varToFind, existingVars) {
     }
   }
   return null;
+};
+
+
+/**
+ * 
+ * @param {string} varToFind String containing the name of the variable to find.
+ * @param {Blockly.Workspace} workspace workspace to collect variables from.
+ * @return {Array<string>} Associative array with the variable names as the keys
+ *                         and the type as the values.
+ */
+Blockly.StaticTyping.getAllVarsWithTypes = function(workspace) {
+  var blocks;
+  if (workspace.getAllBlocks) {
+    blocks = workspace.getAllBlocks();
+  } else {
+    throw 'Not valid workspace: ' + root;
+  }
+
+  var variableTypes = Object.create(null);
+  for (var x = 0; x < blocks.length; x++) {
+    var getVars = blocks[x].getVars;
+    if (getVars) {
+      // Iterate through the variables used in this block
+      var blockVariables = getVars.call(blocks[x]);
+      for (var y = 0; y < blockVariables.length; y++) {
+        // Send variable list to getVarType, returns type if first encounter or
+        // null if already defined.
+        var getVarType = blocks[x].getVarType;
+        if (getVarType) {
+          var varType = getVarType.call(blocks[x], variableTypes);
+          if (varType !== null) {
+            variableTypes[blockVariables[y]] = varType;
+          }
+        } else {
+          //TODO: Once all static typing code is done, default this to 'int'
+          //variableTypes[blockVariables[y]] = 'getVarTypeNotDef';
+        }
+      }
+    }
+  }
+
+  return variableTypes;
 };

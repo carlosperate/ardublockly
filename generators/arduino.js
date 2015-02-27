@@ -120,10 +120,9 @@ profile["default"] = profile["arduino"];
 
 /**
  * Initialise the database of variable names.
- * @param {Blockly.Workspace=} opt_workspace Workspace to generate code from.
- *     Defaults to main workspace.
+ * @param {Blockly.Workspace} workspace Workspace to generate code from.
  */
-Blockly.Arduino.init = function(opt_workspace) {
+Blockly.Arduino.init = function(workspace) {
   // Create a dictionary of definitions to be printed before setups.
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of setups to be printed before the code.
@@ -142,31 +141,10 @@ Blockly.Arduino.init = function(opt_workspace) {
   }
 
   // Iterate through the blocks to capture variables with first instance type
-  var variableTypes = Object.create(null);
-  var blocks = Blockly.mainWorkspace.getAllBlocks();
-  for (var x = 0; x < blocks.length; x++) {
-    var getVars = blocks[x].getVars;
-    if (getVars) {
-      // Iterate through the variables used in this block
-      var blockVariables = getVars.call(blocks[x]);
-      for (var y = 0; y < blockVariables.length; y++) {
-        // Send variable list to getVarType, returns type if first encounter or
-        // null if already defined.
-        var getVarType = blocks[x].getVarType;
-        if (getVarType) {
-          var varType = getVarType.call(blocks[x], variableTypes);
-          if (varType != null) {
-            variableTypes[blockVariables[y]] = varType;
-          }
-        } else {
-          //TODO: Once all static typing code is done, default this to 'int'
-          //variableTypes[blockVariables[y]] = 'getVarTypeNotDef';
-        }
-      }
-    }
-  }
+  var variableTypes = Blockly.StaticTyping.getAllVarsWithTypes(workspace);
 
   // The procedure arguments need to have all the variables collected first
+  var blocks = workspace.getAllBlocks();
   for (var x = 0; x < blocks.length; x++) {
     var setArgsType = blocks[x].setArgsType;
     if (setArgsType) {
@@ -176,8 +154,8 @@ Blockly.Arduino.init = function(opt_workspace) {
 
   // Set variable declarations
   var variableDeclarations = [];
-  for (var name in variableTypes) {
-    variableDeclarations.push(variableTypes[name] + ' ' + name + ';');
+  for (var varName in variableTypes) {
+    variableDeclarations.push(variableTypes[varName] + ' ' + varName + ';');
   }
   Blockly.Arduino.definitions_['variables'] =
       variableDeclarations.join('\n') + '\n';
