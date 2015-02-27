@@ -61,7 +61,7 @@ Blockly.Blocks['text'] = {
     return new Blockly.FieldImage(Blockly.pathToMedia + file, 12, 12, '"');
   },
   /**
-   * Assigns a type to the block, it always returns a string.
+   * Assigns a type to the block, text block is always a string.
    */
   getType: function() {
     return 'String';
@@ -194,7 +194,7 @@ Blockly.Blocks['text_join'] = {
     }
   },
   /**
-   * Assigns a type to the block, it always returns a string.
+   * Assigns a type to the block, this block always returns a string.
    */
   getType: function() {
     return 'String';
@@ -278,7 +278,9 @@ Blockly.Blocks['text_append'] = {
    * Finds the type of the variable selected in the drop down. Sets it to an
    * a string if it has not been defined before.
    * @this Blockly.Block
-   * @param {Array<string>} existingVars List of variables already defined.
+   * @param {Array<string>} existingVars Associativ array of variables already
+   *                                     defined. Variable name as key, and 
+   *                                     type as value.
    * @return {string} String to indicate the type if it has not been defined
    *                  before.
    */

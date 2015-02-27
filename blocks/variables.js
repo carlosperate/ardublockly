@@ -86,10 +86,11 @@ Blockly.Blocks['variables_get'] = {
     options.push(option);
   },
   /**
-   * Finds the type of the selected variable. Need to find the original
-   * variable set block to save the type into the varType block variable.
+   * Finds the type of the selected variable.
    * @this Blockly.Block
-   * @param {Array<string>} existingVars List of variables already defined.
+   * @param {Array<string>} existingVars Associative array of variables already
+   *                                     defined. Var names as key and type as
+   *                                     value.
    * @return {string} String to indicate the type if it has not been defined
    *                  before.
    */
@@ -167,7 +168,9 @@ Blockly.Blocks['variables_set'] = {
   /**
    * Searches through the nested blocks to find a variable type.
    * @this Blockly.Block
-   * @param {Array<string>} existingVars List of variables already defined.
+   * @param {Array<string>} existingVars Associative array of variables already
+   *                                     defined. Var name as the key, type as
+   *                                     the value.
    * @return {string} String to indicate the type if it has not been defined
    *                  before.
    */

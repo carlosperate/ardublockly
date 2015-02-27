@@ -388,8 +388,8 @@ Blockly.Blocks['logic_negate'] = {
     this.setTooltip(Blockly.Msg.LOGIC_NEGATE_TOOLTIP);
   },
   /**
-   * Assigns a type to the block, not input is meant to be a booleans, so it
-   * should return the same.
+   * Assigns a type to the block, not block input is meant to be a booleans, so
+   * it should return the same.
    */
   getType: function() {
     return 'boolean';
@@ -433,7 +433,7 @@ Blockly.Blocks['logic_null'] = {
         .appendField(Blockly.Msg.LOGIC_NULL);
     this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP);
   }
-  // Null does not have a type, so no getType.
+  // Null does not have a type, so no getType. Might change this in the future.
 };
 
 Blockly.Blocks['logic_ternary'] = {

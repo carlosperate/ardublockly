@@ -173,7 +173,9 @@ Blockly.Blocks['controls_for'] = {
    * Finds the type of the variable selected in the drop down. Sets it to an
    * an integer if it has not been defined before.
    * @this Blockly.Block
-   * @param {Array<string>} existingVars List of variables already defined.
+   * @param {Array<string>} existingVars Associative array of variables already
+   *                                     defined. Variable name as the key,
+   *                                     type as their value.
    * @return {string} String to indicate the type if it has not been defined
    *                  before.
    */
@@ -183,7 +185,6 @@ Blockly.Blocks['controls_for'] = {
     // Check if variable has been defined already
     var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
     if (varType != null) {
-      this.varType = varType;
       if ((varType != 'int') && (varType != 'float')) {
         this.setWarningText('This variable type has been previously set to a ' +
           existingVars[varName] + ' and it needs to be a number!')
@@ -193,22 +194,10 @@ Blockly.Blocks['controls_for'] = {
     } else {
       // not defined, so set it to an int
       varType = 'int';
-      this.varType = 'int';
       this.setWarningText(null);
     }
 
     return varType;
-  },
-  /**
-   * Contains the type of the variable selected from the drop down.
-   */
-  varType: 'nonono',
-  /**
-   * Retrieves the type of the selected variable, defined at getVarType.
-   * @this Blockly.Block
-   */
-  getType: function() {
-    return this.varType;
   }
 };
 
