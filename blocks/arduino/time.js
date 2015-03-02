@@ -116,3 +116,19 @@ Blockly.Blocks['infinite_loop'] = {
     this.setTooltip('Wait indefinitely, stopping the program.');
   }
 };
+
+Blockly.Blocks['infinite_loop'] = {
+  /**
+   * Waits forever, end of program.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('');
+    this.setColour(Blockly.Blocks.Arduino.time.HUE);
+    this.appendDummyInput()
+        .appendField("wait forever (end program)");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setTooltip('Wait indefinitely, stopping the program.');
+  }
+};
