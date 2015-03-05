@@ -156,17 +156,17 @@ ArduinoMaterial.loadUserXmlFile = function() {
     reader.readAsText(files[0]);
   }
   // Create once invisible browse button with event listener, and click it
-  var select_file = document.getElementById("select_file");
-  if (select_file == null) {
-    var select_file_dom = document.createElement('INPUT');
-    select_file_dom.type = 'file';
-    select_file_dom.id = 'select_file';
-    select_file_dom.style = 'display: none';
+  var selectFile = document.getElementById("select_file");
+  if (selectFile == null) {
+    var selectFileDom = document.createElement('INPUT');
+    selectFileDom.type = 'file';
+    selectFileDom.id = 'select_file';
+    selectFileDom.style = 'display: none';
     document.body.appendChild(select_file_dom);
-    select_file = document.getElementById("select_file");
-    select_file.addEventListener('change', parseInputXMLfile, false);
+    selectFile = document.getElementById("select_file");
+    selectFile.addEventListener('change', parseInputXMLfile, false);
   }
-  select_file.click();
+  selectFile.click();
 };
 
 /**
@@ -205,14 +205,14 @@ ArduinoMaterial.populateSettings = function() {
 
 /**
  * Sets the compiler location form data retrieve from an updated element.
- * @param {element} new_el New HTML element to replace the one in the current
- *                         DOM. Should contain a complete input text element.
+ * @param {element} newEl New HTML element to replace the one in the current
+ *                        DOM. Should contain a complete input text element.
  */
-ArduinoMaterial.setCompilerLocationHtml = function(new_el) {
-  if (new_el != null) {
-    var comp_loc_ip = document.getElementById('settings_compiler_location')
-    if (comp_loc_ip != null) {
-      comp_loc_ip.value = new_el.value;
+ArduinoMaterial.setCompilerLocationHtml = function(newEl) {
+  if (newEl != null) {
+    var compLocIp = document.getElementById('settings_compiler_location')
+    if (compLocIp != null) {
+      compLocIp.value = newEl.value;
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
@@ -222,14 +222,14 @@ ArduinoMaterial.setCompilerLocationHtml = function(new_el) {
 
 /**
  * Sets the sketch location form data retrieve from an updated element.
- * @param {element} new_el New HTML element to replace the one in the current
- *                         DOM. Should contain a complete input text element.
+ * @param {element} newEl New HTML element to replace the one in the current
+ *                        DOM. Should contain a complete input text element.
  */
-ArduinoMaterial.setSketchLocationHtml = function(new_el) {
-  if (new_el != null) {
-    var sketch_loc_ip = document.getElementById('settings_sketch_location');
-    if (sketch_loc_ip != null) {
-      sketch_loc_ip.value = new_el.value;
+ArduinoMaterial.setSketchLocationHtml = function(newEl) {
+  if (newEl != null) {
+    var sketchLocIp = document.getElementById('settings_sketch_location');
+    if (sketchLocIp != null) {
+      sketchLocIp.value = newEl.value;
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
@@ -240,16 +240,16 @@ ArduinoMaterial.setSketchLocationHtml = function(new_el) {
 /**
  * Replaces the Arduino Boards form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
- * @param {element} new_el New HTML element to replace the one in the current
- *                         DOM. Should contain a complete select element.
+ * @param {element} newEl New HTML element to replace the one in the current
+ *                        DOM. Should contain a complete select element.
  */
-ArduinoMaterial.setArduinoBoardsHtml = function(new_el) {
-  if (new_el != null) {
-    var board_dropdown = document.getElementById('board');
-    if (board_dropdown != null) {
-      new_el.id = 'board';
-      new_el.onchange = ArduinoMaterial.setBoard;
-      board_dropdown.parentNode.replaceChild(new_el, board_dropdown);
+ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
+  if (newEl != null) {
+    var boardDropdown = document.getElementById('board');
+    if (boardDropdown != null) {
+      newEl.id = 'board';
+      newEl.onchange = ArduinoMaterial.setBoard;
+      boardDropdown.parentNode.replaceChild(newEl, boardDropdown);
       // Refresh the materialize select menus
       // TODO: Currently a reported bug from Materialize
       $('select').material_select();
@@ -265,25 +265,25 @@ ArduinoMaterial.setArduinoBoardsHtml = function(new_el) {
  */
 ArduinoMaterial.setBoard = function() {
   var el = document.getElementById("board");
-  var board_value = el.options[el.selectedIndex].value;
+  var boardValue = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setArduinoBoard(
-      board_value, ArduinoMaterial.setArduinoBoardsHtml);
+      boardValue, ArduinoMaterial.setArduinoBoardsHtml);
 };
 
 /**
  * Replaces the Serial Port form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
- * @param {element} new_el New HTML element to replace the one in the current
- *                         DOM. Should contain a complete select element.
+ * @param {element} newEl New HTML element to replace the one in the current
+ *                        DOM. Should contain a complete select element.
  */
-ArduinoMaterial.setSerialPortsHtml = function(new_el) {
-  if (new_el != null) {
-    var serial_dropdown = document.getElementById('serial_port');
-    if (serial_dropdown != null) {
-      new_el.id = 'serial_port';
-      new_el.onchange = ArduinoMaterial.setSerial;
-      serial_dropdown.parentNode.replaceChild(new_el, serial_dropdown);
+ArduinoMaterial.setSerialPortsHtml = function(newEl) {
+  if (newEl != null) {
+    var serialDropdown = document.getElementById('serial_port');
+    if (serialDropdown != null) {
+      newEl.id = 'serial_port';
+      newEl.onchange = ArduinoMaterial.setSerial;
+      serialDropdown.parentNode.replaceChild(newEl, serialDropdown);
       // Refresh the materialize select menus
       // TODO: Currently a reported bug from Materialize
       $('select').material_select();
@@ -299,25 +299,25 @@ ArduinoMaterial.setSerialPortsHtml = function(new_el) {
  */
 ArduinoMaterial.setSerial = function() {
   var el = document.getElementById("serial_port");
-  var serial_value = el.options[el.selectedIndex].value;
+  var serialValue = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setSerialPort(
-      serial_value, ArduinoMaterial.setSerialPortsHtml);
+      serialValue, ArduinoMaterial.setSerialPortsHtml);
 };
 
 /**
  * Replaces IDE options form data with a new HTMl element.
  * Ensures there is a change listener to call 'setIdeSettings' function
- * @param {element} new_el New HTML element to replace the one in the current
- *                         DOM. Should contain a complete select element.
+ * @param {element} newEl New HTML element to replace the one in the current
+ *                        DOM. Should contain a complete select element.
  */
-ArduinoMaterial.setIdeHtml = function(new_el) {
-  if (new_el != null) {
-    var ide_dropdown = document.getElementById('ide_settings');
-    if (ide_dropdown != null) {
-      new_el.id = 'ide_settings';
-      new_el.onchange = ArduinoMaterial.setIdeSettings;
-      ide_dropdown.parentNode.replaceChild(new_el, ide_dropdown);
+ArduinoMaterial.setIdeHtml = function(newEl) {
+  if (newEl != null) {
+    var ideDropdown = document.getElementById('ide_settings');
+    if (ideDropdown != null) {
+      newEl.id = 'ide_settings';
+      newEl.onchange = ArduinoMaterial.setIdeSettings;
+      ideDropdown.parentNode.replaceChild(newEl, ideDropdown);
       // Refresh the materialize select menus
       // TODO: Currently a reported bug from Materialize
       $('select').material_select();
@@ -333,9 +333,9 @@ ArduinoMaterial.setIdeHtml = function(new_el) {
  */
 ArduinoMaterial.setIdeSettings = function() {
   var el = document.getElementById("ide_settings");
-  var ide_value = el.options[el.selectedIndex].value;
+  var ideValue = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
-  ArduServerCompiler.setIdeOptions(ide_value, ArduinoMaterial.setIdeHtml);
+  ArduServerCompiler.setIdeOptions(ideValue, ArduinoMaterial.setIdeHtml);
 };
 
 /**
@@ -352,13 +352,13 @@ ArduinoMaterial.sendCode = function() {
 
 /**
  * Receives the IDE data back to be displayed and stops spinner.
- * @param {element} new_el New HTML element to replace the one in the current
- *                         DOM. Should contain a complete select element.
+ * @param {element} dataBack New HTML elements to include in the modal to
+ *                           display the data back from the compiler.
  */
-ArduinoMaterial.sendCodeReturn = function(data_back) {
+ArduinoMaterial.sendCodeReturn = function(dataBack) {
   ArduinoMaterial.runButtonSpinner(false);
-  if (data_back != null) {
-    ArduinoMaterial.arduinoIdeModal(data_back);
+  if (dataBack != null) {
+    ArduinoMaterial.arduinoIdeModal(dataBack);
   } else {
     // If the element is Null, then Ardublockly server is not running 
     $('#not_running_dialog').openModal();
@@ -387,15 +387,15 @@ ArduinoMaterial.XmlTextareaToBlocks = function() {
  */
 ArduinoMaterial.renderContent = function() {
   // Render Arduino Code syntax highlighted into element
-  var arduino_content = document.getElementById('content_arduino');
-  arduino_content.textContent = ArduinoMaterial.generateArduino();;
+  var arduinoContent = document.getElementById('content_arduino');
+  arduinoContent.textContent = ArduinoMaterial.generateArduino();;
   if (typeof prettyPrintOne == 'function') {
-    var code_html = prettyPrintOne(arduino_content.innerHTML, 'cpp');
-    arduino_content.innerHTML = code_html;
+    var codeHtml = prettyPrintOne(arduinoContent.innerHTML, 'cpp');
+    arduinoContent.innerHTML = codeHtml;
   }
   // Generate plain XML into element
-  var xml_content = document.getElementById('content_xml');
-  xml_content.value = ArduinoMaterial.generateXml();
+  var xmlContent = document.getElementById('content_xml');
+  xmlContent.value = ArduinoMaterial.generateXml();
 };
 
 /**
@@ -403,13 +403,13 @@ ArduinoMaterial.renderContent = function() {
  * @type {!boolean}
  * @private
  */
-ArduinoMaterial.toolbar_showing_ = true;
+ArduinoMaterial.TOOLBAR_SHOWING_ = true;
 
 /**
  * Toggles the toolbox and respective button On and Off
  */
 ArduinoMaterial.toogleToolbox = function() {
-  if (ArduinoMaterial.toolbar_showing_ == true ) {
+  if (ArduinoMaterial.TOOLBAR_SHOWING_ == true ) {
     // showToolbox() takes a callback function as its second argument
     ArduinoMaterial.showToolbox(false, 
         function() { ArduinoMaterial.showToolboxButtonState(false); });
@@ -418,7 +418,7 @@ ArduinoMaterial.toogleToolbox = function() {
      ArduinoMaterial.showToolboxButtonState(true);
     ArduinoMaterial.showToolbox(true);
   }
-  ArduinoMaterial.toolbar_showing_ = !ArduinoMaterial.toolbar_showing_;
+  ArduinoMaterial.TOOLBAR_SHOWING_ = !ArduinoMaterial.TOOLBAR_SHOWING_;
 };
 
 /**
@@ -426,7 +426,7 @@ ArduinoMaterial.toogleToolbox = function() {
  * @return {boolean} Indicates if the toolbox is currently visible.
  */
 ArduinoMaterial.isToolboxVisible = function() {
-  return ArduinoMaterial.toolbar_showing_;
+  return ArduinoMaterial.TOOLBAR_SHOWING_;
 };
 
 /**

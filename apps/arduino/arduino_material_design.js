@@ -43,14 +43,14 @@ ArduinoMaterial.materializeJsInit = function() {
  */
 ArduinoMaterial.runButtonSpinner = function(active) {
   var spinner = document.getElementById('button_run_spinner');
-  var button_el = document.getElementById('button_run');
-  var button_class = button_el.className;
+  var buttonEl = document.getElementById('button_run');
+  var buttonClass = buttonEl.className;
   if (active) {
     spinner.style.display = 'block';
-    button_el.className = button_class.replace('arduino_orange', 'grey');
+    buttonEl.className = buttonClass.replace('arduino_orange', 'grey');
   } else  {
     spinner.style.display = 'none';
-    button_el.className = button_class.replace('grey', 'arduino_orange');
+    buttonEl.className = buttonClass.replace('grey', 'arduino_orange');
  }
 };
 
@@ -58,11 +58,11 @@ ArduinoMaterial.runButtonSpinner = function(active) {
  * Displays or hides the 'load textarea xml' button.
  */
 ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
-  var xml_button = document.getElementById('button_load_xml');
-  var xml_button_body = document.getElementById('xml_collapsible_body');
+  //var xmlButton = document.getElementById('button_load_xml');
+  var xmlButtonBody = document.getElementById('xml_collapsible_body');
   // Waiting to check status due to the animation delay
   setTimeout(function() {
-    if (xml_button_body.style.display == 'none') {
+    if (xmlButtonBody.style.display == 'none') {
       $('#button_load_xml').hide();
     } else {
       $('#button_load_xml').fadeIn('slow');
@@ -72,21 +72,21 @@ ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
 
 /**
  * Sets the class and content of the toolbox On and Off button.
- * @param {!boolean} toolbox_visible Indicates if the toolbox visibility.
+ * @param {!boolean} toolboxVisible Indicates if the toolbox visibility.
  */
-ArduinoMaterial.showToolboxButtonState = function(toolbox_visible) {
-  var toolbox_button = document.getElementById('button_toggle_toolbox');
-  var toolbox_button_icon = document.getElementById('button_toggle_toolbox_icon');
+ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
+  var toolboxButton = document.getElementById('button_toggle_toolbox');
+  var toolboxButtonIcon = document.getElementById('button_toggle_toolbox_icon');
   // Element conatins several classes, use replace to maintain the rest
-  if (toolbox_visible == true) {
-    toolbox_button.className = toolbox_button.className.replace(
+  if (toolboxVisible == true) {
+    toolboxButton.className = toolboxButton.className.replace(
       "button_toggle_toolbox_on", "button_toggle_toolbox_off"); 
-    toolbox_button_icon.className = toolbox_button_icon.className.replace(
+    toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
      'mdi-action-visibility', 'mdi-action-visibility-off');
   } else {
-    toolbox_button.className = toolbox_button.className.replace(
+    toolboxButton.className = toolboxButton.className.replace(
       "button_toggle_toolbox_off", "button_toggle_toolbox_on"); 
-    toolbox_button_icon.className = toolbox_button_icon.className.replace(
+    toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
      'mdi-action-visibility-off', 'mdi-action-visibility');
   }
 };
@@ -95,25 +95,25 @@ ArduinoMaterial.showToolboxButtonState = function(toolbox_visible) {
  * Resizes the container for Blockly and forces a re-render of the SVG. 
  */
 ArduinoMaterial.resizeBlocklyWorkspace = function() {
-  var content_blocks = document.getElementById('content_blocks');
-  var wrapper_panel_size =
+  var contentBlocks = document.getElementById('content_blocks');
+  var wrapperPanelSize =
       ArduinoMaterial.getBBox_(document.getElementById('blocks_panel'));
 
-  content_blocks.style.top = wrapper_panel_size.y + 'px';
-  content_blocks.style.left = wrapper_panel_size.x + 'px';
+  contentBlocks.style.top = wrapperPanelSize.y + 'px';
+  contentBlocks.style.left = wrapperPanelSize.x + 'px';
   // Height and width need to be set, read back, then set again to
   // compensate for scrollbars.
-  content_blocks.style.height = wrapper_panel_size.height + 'px';
-  content_blocks.style.height =
-      (2 * wrapper_panel_size.height - content_blocks.offsetHeight) + 'px';
-  content_blocks.style.width = wrapper_panel_size.width + 'px';
-  content_blocks.style.width =
-      (2 * wrapper_panel_size.width - content_blocks.offsetWidth) + 'px';
+  contentBlocks.style.height = wrapperPanelSize.height + 'px';
+  contentBlocks.style.height =
+      (2 * wrapperPanelSize.height - contentBlocks.offsetHeight) + 'px';
+  contentBlocks.style.width = wrapperPanelSize.width + 'px';
+  contentBlocks.style.width =
+      (2 * wrapperPanelSize.width - contentBlocks.offsetWidth) + 'px';
 
   //Blockly.MsvgResize();
   //Blockly.mainWorkspace.render();
   //alert(
-  //  "resized " + wrapper_panel_size.width + " " + content_blocks.style.width);
+  //  "resized " + wrapperPanelSize.width + " " + contentBlocks.style.width);
 
   // Sets the toolbox toggle button width to that of the toolbox
   if ( ArduinoMaterial.isToolboxVisible() &&
@@ -152,11 +152,11 @@ ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
 
 /**
  * Populates the Arduino output data modal and opens it.
- * @param {!element} body_el HTML to include into dialog content.
+ * @param {!element} bodyEl HTML to include into dialog content.
  */
-ArduinoMaterial.arduinoIdeModal = function(body_el) {
+ArduinoMaterial.arduinoIdeModal = function(bodyEl) {
   $("#arduino_dialog_body").text('');
-  $("#arduino_dialog_body").append(body_el);
+  $("#arduino_dialog_body").append(bodyEl);
   $('#arduino_dialog').openModal();
   window.location.hash = '';
 };

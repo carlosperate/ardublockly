@@ -20,16 +20,16 @@ ArduinoMaterial.BLOCKLY_INJECTED = false;
 /**
  * Injects Blockly into a given HTML element. Reads the toolbox from an XMl
  * file.
- * @param {!Element} el Element to inject Blockly into.
- * @param {!string} toolbox_path String containing the toolbox XML file path.
+ * @param {!Element} blocklyEl Element to inject Blockly into.
+ * @param {!string} toolboxPath String containing the toolbox XML file path.
  */
-ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
+ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
   // Create a an XML HTTP request
   var request = ArduinoMaterial.ajaxRequest();
 
   // If file run locally Internet explorer fails here
   try {
-    request.open("GET", toolbox_path, true);
+    request.open("GET", toolboxPath, true);
   } catch(e) {
     $('#not_running_dialog').openModal();
   }
@@ -37,7 +37,7 @@ ArduinoMaterial.injectBlockly = function(blockly_el, toolbox_path) {
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
-      Blockly.inject(blockly_el, {
+      Blockly.inject(blocklyEl, {
             collapse: true,
             comments: true,
             disable: true,
@@ -111,13 +111,13 @@ ArduinoMaterial.generateXml = function() {
 /**
  * Parses the XML from its input to generate and replace the blocks in the
  * Blockly workspace.
- * @param {!string} blocks_xml String of XML code for the blocks.
+ * @param {!string} blocksXml String of XML code for the blocks.
  * @return {!boolean} Indicates if the XML into blocks parse was successful.
  */
-ArduinoMaterial.replaceBlocksfromXml = function(blocks_xml) {
+ArduinoMaterial.replaceBlocksfromXml = function(blocksXml) {
   var xmlDom = null;
   try {
-    xmlDom = Blockly.Xml.textToDom(blocks_xml);
+    xmlDom = Blockly.Xml.textToDom(blocksXml);
   } catch (e) {
     return false;
   }
@@ -131,12 +131,12 @@ ArduinoMaterial.replaceBlocksfromXml = function(blocks_xml) {
 
 /**
  * Parses the XML from its input to generate and add blocks to the workspace.
- * @param {!string} blocks_xml_dom String of XML DOM code for the blocks.
+ * @param {!string} blocksXmlDom String of XML DOM code for the blocks.
  * @return {!boolean} Indicates if the XML into blocks parse was successful.
  */
-ArduinoMaterial.loadBlocksfromXmlDom = function(blocks_xml_dom) {
+ArduinoMaterial.loadBlocksfromXmlDom = function(blocksXmlDom) {
   try {
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blocks_xml_dom);
+    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blocksXmlDom);
   } catch (e) {
     return false;
   }
@@ -165,14 +165,14 @@ ArduinoMaterial.showToolbox = function(show, callback) {
  * Discard all blocks from the workspace.
  */
 ArduinoMaterial.discard = function() {
-  var block_count = Blockly.mainWorkspace.getAllBlocks().length;
-  if (block_count == 1) {
+  var blockCount = Blockly.mainWorkspace.getAllBlocks().length;
+  if (blockCount == 1) {
     Blockly.mainWorkspace.clear();
     ArduinoMaterial.renderContent();
-  } else if (block_count > 1) {
+  } else if (blockCount > 1) {
     ArduinoMaterial.materialAlert(
         'Delete blocks?',
-        'There are ' + block_count + ' blocks on the workspace. Are you \
+        'There are ' + blockCount + ' blocks on the workspace. Are you \
         sure you want to delete them?',
         true,
         function() {

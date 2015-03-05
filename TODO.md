@@ -25,13 +25,13 @@ There was an error manipulating the sketch data!!
 - [ ] Combine Arduino boards from code generator with Arduino boards offered for compilation
 
 ## Static typing
-- [x] Warnings for setting variables to a different type than first instance
-- [x] Type finding for the get variable block
-- [ ] math_number block 'errornumber' type
-- [ ] remove getVarType types that are use for debugging 
-- [ ] math_arithmetic getType to check types of given inputs to decide between int or float
-- [ ] math_number getType to use regular expressions more efficiently
 - [ ] logic_ternary block getType to defines type as that of its inputs
+- [ ] logic_null block right now does not return a type, this might change
+- [ ] math_number block 'errornumber' type used for debugging, remove
+- [ ] math_arithmetic getType to check types of given inputs to decide between int or float . Right now first block within sets the type.
+- [ ] math_constrain getType to check types of given inputs to decide between int or float . Right now first block within sets the type.
+- [ ] math_number getType to use regular expressions more efficiently
+- [ ] math_on_list to add static type if lists get implemented
 - [ ] controls_for getVarType function
 - [ ] controls_forEach block uses lists, these are not implemented in the Arduino generator (possible arrays), when implemented this block needs a getVarType, varType, and getType functions.
 - [ ] add getVarType to the procedures blocks
@@ -43,6 +43,7 @@ There was an error manipulating the sketch data!!
 - [ ] Add a way to select different Arduino boards (settings menu should trigger arduino generator board change)
 - [ ] Code generator for lists into arrays.
 - [ ] A lot of blocks go through the entire block tree, which end ups being terribly inefficient. Maybe create a general pass through in the arduino.js file to check everything that needs to be checked in one pass.
+- [ ] SPI spi_transfer also needs returns a byte back
 
 ## Arduino web-app
 - [ ] Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden.
