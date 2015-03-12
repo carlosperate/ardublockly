@@ -484,6 +484,13 @@ ul.side-nav li ul li{
   margin-right: 16px;
 }
 
+/* button-collapse with show-on-large does not work in IE */
+@media only screen and (min-width : 993px) {
+  .button-collapse {
+    display: block !important;
+  }
+}
+
 /* Increase the size of Materialize Modal in small res */
 @media only screen and (max-width : 600px) {
   .modal {
