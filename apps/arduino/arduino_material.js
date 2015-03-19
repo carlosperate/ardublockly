@@ -247,6 +247,7 @@ ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
   if (newEl != null) {
     var boardDropdown = document.getElementById('board');
     if (boardDropdown != null) {
+      newEl.name = 'settings_board';
       newEl.id = 'board';
       newEl.onchange = ArduinoMaterial.setBoard;
       boardDropdown.parentNode.replaceChild(newEl, boardDropdown);
@@ -281,6 +282,7 @@ ArduinoMaterial.setSerialPortsHtml = function(newEl) {
   if (newEl != null) {
     var serialDropdown = document.getElementById('serial_port');
     if (serialDropdown != null) {
+      newEl.name = 'settings_serial';
       newEl.id = 'serial_port';
       newEl.onchange = ArduinoMaterial.setSerial;
       serialDropdown.parentNode.replaceChild(newEl, serialDropdown);
@@ -315,6 +317,7 @@ ArduinoMaterial.setIdeHtml = function(newEl) {
   if (newEl != null) {
     var ideDropdown = document.getElementById('ide_settings');
     if (ideDropdown != null) {
+      newEl.name = 'settings_ide';
       newEl.id = 'ide_settings';
       newEl.onchange = ArduinoMaterial.setIdeSettings;
       ideDropdown.parentNode.replaceChild(newEl, ideDropdown);
@@ -344,7 +347,7 @@ ArduinoMaterial.setIdeSettings = function() {
  * message from server).
  */
 ArduinoMaterial.sendCode = function() {
-  toast('Sending sketch to Arduino IDE...', 4000);
+  Materialize.toast('Sending sketch to Arduino IDE...', 4000);
   ArduinoMaterial.runButtonSpinner(true);
   ArduServerCompiler.sendSketchToServer(
       ArduinoMaterial.generateArduino(), ArduinoMaterial.sendCodeReturn);
@@ -454,5 +457,5 @@ ArduinoMaterial.bindClick_ = function(el, func) {
  * Populate the currently selected panel with content generated from the blocks.
  */
 ArduinoMaterial.functionNotImplemented = function() {
-  toast('Function not yet implemented', 4000);
+  Materialize.toast('Function not yet implemented', 4000);
 };
