@@ -132,6 +132,21 @@ Blockly.parseOptions_ = function(options) {
   if (hasCss === undefined) {
     hasCss = true;
   }
+  var grid = options['grid'] || {};
+  if (!grid['spacing']) {
+    grid['spacing'] = 0;
+  } else {
+    grid['spacing'] = parseFloat(grid['spacing']);
+  }
+  if (!grid['colour']) {
+    grid['colour'] = '#888';
+  }
+  if (!grid['length']) {
+    grid['length'] = 1;
+  } else {
+    grid['length'] = parseFloat(grid['length']);
+  }
+  grid['snap'] = !!grid['snap'];
   var enableRealtime = !!options['realtime'];
   var realtimeOptions = enableRealtime ? options['realtimeOptions'] : undefined;
 
@@ -153,6 +168,7 @@ Blockly.parseOptions_ = function(options) {
   Blockly.hasSounds = hasSounds;
   Blockly.hasCss = hasCss;
   Blockly.languageTree = tree;
+  Blockly.gridOptions = grid;
   Blockly.enableRealtime = enableRealtime;
   Blockly.realtimeOptions = realtimeOptions;
 };
@@ -268,10 +284,45 @@ Blockly.createDom_ = function(container) {
       {'width': 10, 'height': 10, 'fill': '#aaa'}, pattern);
   Blockly.createSvgElement('path',
       {'d': 'M 0 0 L 10 10 M 10 0 L 0 10', 'stroke': '#cc0'}, pattern);
+  /*
+    <pattern id="blocklyGridPattern" patternUnits="userSpaceOnUse"
+             width="10" height="10">
+      <rect width="1" height="1" stroke="#888" />
+      <rect width="1" height="1" stroke="#888" />
+    </pattern>
+  */
+  pattern = Blockly.createSvgElement('pattern',
+      {'id': 'blocklyGridPattern',
+       'patternUnits': 'userSpaceOnUse',
+       'width': Blockly.gridOptions['spacing'],
+       'height': Blockly.gridOptions['spacing']}, defs);
+  if (Blockly.gridOptions['length'] > 0) {
+    var half = Math.floor(Blockly.gridOptions['spacing'] / 2) + .5;
+    var start = half - Blockly.gridOptions['length'] / 2;
+    var end = half + Blockly.gridOptions['length'] / 2;
+    Blockly.createSvgElement('line',
+        {'x1': start,
+         'y1': half,
+         'x2': end,
+         'y2': half,
+         'stroke': Blockly.gridOptions['colour']},
+        pattern);
+    if (Blockly.gridOptions['length'] > 1) {
+      Blockly.createSvgElement('line',
+          {'x1': half,
+           'y1': start,
+           'x2': half,
+           'y2': end,
+           'stroke': Blockly.gridOptions['colour']},
+          pattern);
+    }
+    Blockly.mainWorkspacePattern_ = pattern;
+  }
+
   Blockly.mainWorkspace = new Blockly.WorkspaceSvg(
       Blockly.getMainWorkspaceMetrics_,
       Blockly.setMainWorkspaceMetrics_);
-  svg.appendChild(Blockly.mainWorkspace.createDom());
+  svg.appendChild(Blockly.mainWorkspace.createDom('blocklyMainBackground'));
   Blockly.mainWorkspace.maxBlocks = Blockly.maxBlocks;
 
   if (!Blockly.readOnly) {
@@ -280,16 +331,7 @@ Blockly.createDom_ = function(container) {
     if (Blockly.hasCategories) {
       Blockly.mainWorkspace.toolbox_ = new Blockly.Toolbox(svg, container);
     } else if (Blockly.languageTree) {
-      /**
-       * @type {!Blockly.Flyout}
-       * @private
-       */
-      Blockly.mainWorkspace.flyout_ = new Blockly.Flyout();
-      var flyout = Blockly.mainWorkspace.flyout_;
-      var flyoutSvg = flyout.createDom();
-      flyout.autoClose = false;
-      // Insert the flyout behind the workspace so that blocks appear on top.
-      goog.dom.insertSiblingBefore(flyoutSvg, Blockly.mainWorkspace.svgGroup_);
+      Blockly.mainWorkspace.addFlyout();
     }
     if (!Blockly.hasScrollbars) {
       var workspaceChanged = function() {
@@ -353,7 +395,6 @@ Blockly.createDom_ = function(container) {
   document.body.appendChild(Blockly.WidgetDiv.DIV);
 };
 
-
 /**
  * Initialize Blockly with various handlers.
  * @private
@@ -370,11 +411,16 @@ Blockly.init_ = function() {
   Blockly.bindEvent_(Blockly.WidgetDiv.DIV, 'contextmenu', null,
                      Blockly.onContextMenu_);
 
+  Blockly.bindEvent_(Blockly.svg, 'touchstart', null,
+                     function(e) {Blockly.longStart_(e, null);});
+
   if (!Blockly.documentEventsBound_) {
     // Only bind the window/document events once.
     // Destroying and reinjecting Blockly should not bind again.
     Blockly.bindEvent_(window, 'resize', document, Blockly.svgResize);
     Blockly.bindEvent_(document, 'keydown', null, Blockly.onKeyDown_);
+    Blockly.bindEvent_(document, 'touchend', null, Blockly.longStop_);
+    Blockly.bindEvent_(document, 'touchcancel', null, Blockly.longStop_);
     // Don't use bindEvent_ for document's mouseup since that would create a
     // corresponding touch handler that would squeltch the ability to interact
     // with non-Blockly elements.
