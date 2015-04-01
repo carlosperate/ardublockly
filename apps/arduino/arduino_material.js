@@ -247,12 +247,13 @@ ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
   if (newEl != null) {
     var boardDropdown = document.getElementById('board');
     if (boardDropdown != null) {
+      // Restarting the select elements built by materialize
+      $('select').material_select('destroy');
       newEl.name = 'settings_board';
       newEl.id = 'board';
       newEl.onchange = ArduinoMaterial.setBoard;
       boardDropdown.parentNode.replaceChild(newEl, boardDropdown);
       // Refresh the materialize select menus
-      // TODO: Currently a reported bug from Materialize
       $('select').material_select();
     }
   } else {
@@ -282,12 +283,13 @@ ArduinoMaterial.setSerialPortsHtml = function(newEl) {
   if (newEl != null) {
     var serialDropdown = document.getElementById('serial_port');
     if (serialDropdown != null) {
+      // Restarting the select elements built by materialize
+      $('select').material_select('destroy');
       newEl.name = 'settings_serial';
       newEl.id = 'serial_port';
       newEl.onchange = ArduinoMaterial.setSerial;
       serialDropdown.parentNode.replaceChild(newEl, serialDropdown);
       // Refresh the materialize select menus
-      // TODO: Currently a reported bug from Materialize
       $('select').material_select();
     }
   } else {
@@ -317,12 +319,13 @@ ArduinoMaterial.setIdeHtml = function(newEl) {
   if (newEl != null) {
     var ideDropdown = document.getElementById('ide_settings');
     if (ideDropdown != null) {
+      // Restarting the select elements built by materialize
+      $('select').material_select('destroy');
       newEl.name = 'settings_ide';
       newEl.id = 'ide_settings';
       newEl.onchange = ArduinoMaterial.setIdeSettings;
       ideDropdown.parentNode.replaceChild(newEl, ideDropdown);
       // Refresh the materialize select menus
-      // TODO: Currently a reported bug from Materialize
       $('select').material_select();
     }
   } else {
