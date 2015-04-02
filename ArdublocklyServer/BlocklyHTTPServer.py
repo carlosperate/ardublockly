@@ -6,7 +6,7 @@ try:
 except ImportError:
     # 3.x name
     import http.server as BaseHTTPServer
-import ArduinoServerCompiler.BlocklyRequestHandler
+import ArdublocklyServer.BlocklyRequestHandler
 
 ADDRESS = '0.0.0.0'
 PORT = 8000
@@ -19,7 +19,7 @@ def start_server(document_root):
     server_address = (ADDRESS, PORT)
     server = BaseHTTPServer.HTTPServer(
         server_address,
-        ArduinoServerCompiler.BlocklyRequestHandler.BlocklyRequestHandler)
+        ArdublocklyServer.BlocklyRequestHandler.BlocklyRequestHandler)
     print('Launching the HTTP service...')
     server.serve_forever()
     print('The Server closed unexpectedly!!')

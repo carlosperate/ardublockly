@@ -24,9 +24,9 @@ import sys, os, re
 import os
 # chose an implementation, depending on os
 if os.name == 'nt': #sys.platform == 'win32':
-    from ArduinoServerCompiler.PySerialListPorts.list_ports_windows import *
+    from ArdublocklyServer.PySerialListPorts.list_ports_windows import *
 elif os.name == 'posix':
-    from ArduinoServerCompiler.PySerialListPorts.list_ports_posix import *
+    from ArdublocklyServer.PySerialListPorts.list_ports_posix import *
 #~ elif os.name == 'java':
 else:
     raise ImportError("Sorry: no implementation for your platform ('%s') available" % (os.name,))

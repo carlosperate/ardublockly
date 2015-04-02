@@ -1,7 +1,7 @@
 # Ardublockly
 "Ardublockly" is a fork of [Blockly](https://developers.google.com/blockly/), a web-based graphical programming editor, that has been updated to generate [Arduino](http://www.arduino.cc/) code.
 
-The "ArduinoServerCompiler" component initialises a local server with Python to be able to compile and load the Arduino code using the [Arduino IDE](http://arduino.cc/en/main/software).
+The "ArdublocklyServer" python package initialises a local server to be able to compile and load the Arduino code using the [Arduino IDE](http://arduino.cc/en/main/software).
 
 This project has been influenced by BlocklyDuino.
 
@@ -38,8 +38,8 @@ It also needs the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/
 
 
 ## Running
-1. Install Ardublockly or [Ardublockly-package](https://github.com/carlosperate/ardublockly-package)
-2. Install the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/software).
+1. [Install Ardublockly](https://github.com/carlosperate/ardublockly/wiki/Installing-Ardublockly) or [Ardublockly-package](https://github.com/carlosperate/ardublockly-package)
+2. Install the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/software)
 3. Run the `start.py` python script (for Ardublockly) or `ardublockly_win.bat` package file (for Ardublockly-package)
 3. Configure Ardublockly to locate the Arduino IDE [following these instructions](https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly)
 
@@ -57,7 +57,7 @@ git clone https://github.com/carlosperate/ardublockly.wiki.git
 Blockly original source is Copyright of Google Inc. [https://developers.google.com/blockly/](https://developers.google.com/blockly/)
 
 #### Significant changes
-Added Arduino code generator, Arduino apps, and Python server to utilise the Arduino IDE.
+Added Arduino code generator, Arduino web-apps, and Python server to utilise the Arduino IDE.
 
 All changes to the original source code can be reviewed [here](https://github.com/carlosperate/ardublockly/compare/blockly-original...master).
 

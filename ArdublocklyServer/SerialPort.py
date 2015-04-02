@@ -1,5 +1,5 @@
 from __future__ import unicode_literals, absolute_import
-import ArduinoServerCompiler.PySerialListPorts.list_ports
+import ArdublocklyServer.PySerialListPorts.list_ports
 
 
 def get_port_complete_list():
@@ -9,7 +9,7 @@ def get_port_complete_list():
     :return: List with the Port information. Each list item contains a tuple
              three elements in this order: (port name, descriptor, hw id)
     """
-    port_list = ArduinoServerCompiler.PySerialListPorts.list_ports.comports()
+    port_list = ArdublocklyServer.PySerialListPorts.list_ports.comports()
     return sorted(port_list)
 
 
@@ -33,11 +33,3 @@ def print_ports():
     for port, descriptor, hw_id in iterator:
         print('Port: %s\n\tDescriptor: %s\n\tHardware ID: %s' %
               (port, descriptor, hw_id))
-
-
-def main():
-    print("This is the ComPortFacade main")
-
-
-if __name__ == "__main__":
-    main()

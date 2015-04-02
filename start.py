@@ -13,8 +13,8 @@ import getopt
 import platform
 import threading
 import webbrowser
-import ArduinoServerCompiler.ServerCompilerSettings
-import ArduinoServerCompiler.BlocklyHTTPServer
+import ArdublocklyServer.BlocklyHTTPServer
+import ArdublocklyServer.ServerCompilerSettings
 
 
 def open_browser(open_file):
@@ -22,10 +22,8 @@ def open_browser(open_file):
     Start a browser in a separate thread after waiting for half a second.
     """
     def _open_browser():
-        webbrowser.open('http://%s:%s/%s' %
-                        (ArduinoServerCompiler.BlocklyHTTPServer.ADDRESS,
-                        ArduinoServerCompiler.BlocklyHTTPServer.PORT,
-                        open_file))
+        webbrowser.open('http://localhost:%s/%s' %
+                        (ArdublocklyServer.BlocklyHTTPServer.PORT, open_file))
 
     thread = threading.Timer(0.5, _open_browser)
     thread.start()
@@ -88,7 +86,7 @@ def main(argv):
 
     # Loading the settings
     print("\n======= Loading Settings =======")
-    ArduinoServerCompiler.ServerCompilerSettings.ServerCompilerSettings()
+    ArdublocklyServer.ServerCompilerSettings.ServerCompilerSettings()
 
     # Loading the server with the argument working root directory, or by default
     # with the parent folder of where this script is executed, done to be able
@@ -110,12 +108,12 @@ def main(argv):
               'from the Ardublockly folder!')
         sys.exit(1)
     relative_path = [os.path.relpath(this_file_parent_dir, common_path)]
-    app_index =  os.path.normpath(os.path.join(
+    app_index = os.path.normpath(os.path.join(
         relative_path[0], 'ardublockly', 'apps', 'arduino'))
-    print('Root & script parent: %s\nCommon & relative path: %s; %s\nIndex: %s'
-          % (paths, common_path, relative_path, app_index))
+    #print('Root & script parent: %s\nCommon & relative path: %s; %s\nIndex: %s'
+    #      % (paths, common_path, relative_path, app_index))
     open_browser(app_index)
-    ArduinoServerCompiler.BlocklyHTTPServer.start_server(server_root)
+    ArdublocklyServer.BlocklyHTTPServer.start_server(server_root)
 
 
 if __name__ == "__main__":

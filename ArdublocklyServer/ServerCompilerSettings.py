@@ -8,7 +8,7 @@ try:
 except ImportError:
     # 3.x name
     import configparser as ConfigParser
-import ArduinoServerCompiler.SerialPort
+import ArdublocklyServer.SerialPort
 
 
 class ServerCompilerSettings(object):
@@ -26,40 +26,40 @@ class ServerCompilerSettings(object):
     """
 
     # Designed to be class static variables
-    __singleton_instance__ = None
-    __settings_filename__ = 'ServerCompilerSettings.ini'
-    __settings_path__ = None
+    __singleton_instance = None
+    __settings_filename = 'ServerCompilerSettings.ini'
+    __settings_path = None
 
     # This is a static dictionary to define Arduino board types
-    __arduino_types__ = {'Uno': 'arduino:avr:uno',
-                         'Leonardo': 'arduino:avr:leonardo',
-                         'Mega': 'arduino:avr:mega',
-                         'Duemilanove_328p': 'arduino:avr:diecimila',
-                         'Duemilanove_168p':
-                                 'arduino:avr:diecimila:cpu=atmega168'}
+    __arduino_types = {'Uno': 'arduino:avr:uno',
+                       'Leonardo': 'arduino:avr:leonardo',
+                       'Mega': 'arduino:avr:mega',
+                       'Duemilanove_328p': 'arduino:avr:diecimila',
+                       'Duemilanove_168p':
+                               'arduino:avr:diecimila:cpu=atmega168'}
 
     # This is a dynamic dictionary containing the PC COM ports
-    __serial_ports__ = {'port1': 'COM1',
-                        'port2': 'COM2',
-                        'port3': 'COM3'}
+    __serial_ports = {'port1': 'COM1',
+                      'port2': 'COM2',
+                      'port3': 'COM3'}
 
     # This is a static dictionary to define IDE launch options
-    __IDE_launch_options__ = {'open': 'Open sketch in IDE ',
-                              'verify': 'Verify sketch',
-                              'upload': 'Compile and Upload sketch'}
+    __IDE_launch_options = {'open': 'Open sketch in IDE ',
+                            'verify': 'Verify sketch',
+                            'upload': 'Compile and Upload sketch'}
 
     #
     # Singleton creator and destructor
     #
     def __new__(cls, *args, **kwargs):
         """ Creating or returning the singleton instance. """
-        if not cls.__singleton_instance__:
+        if not cls.__singleton_instance:
             # Create the singleton instance
-            cls.__singleton_instance__ =\
+            cls.__singleton_instance =\
                 super(ServerCompilerSettings, cls).__new__(cls, *args, **kwargs)
             # Initialise the instance, defaults if file not found
-            cls.__singleton_instance__.__initialise()
-        return cls.__singleton_instance__
+            cls.__singleton_instance.__initialise()
+        return cls.__singleton_instance
 
     def __initialise(self):
         # Create variables to be used with accessors
@@ -78,7 +78,7 @@ class ServerCompilerSettings(object):
 
     def _drop(self):
         """ Drop the instance. """
-        self.__singleton_instance__ = None
+        self.__singleton_instance = None
 
     #
     # Compiler Directory accessors
@@ -212,8 +212,8 @@ class ServerCompilerSettings(object):
         return self.__arduino_board_key__
 
     def set_arduino_board(self, new_board):
-        if new_board in self.__arduino_types__:
-            self.__arduino_board_value__ = self.__arduino_types__[new_board]
+        if new_board in self.__arduino_types:
+            self.__arduino_board_value__ = self.__arduino_types[new_board]
             self.__arduino_board_key__ = new_board
             print('\nArduino Board set to:\n\t%s' % self.__arduino_board_key__)
             self.save_settings()
@@ -232,13 +232,13 @@ class ServerCompilerSettings(object):
     arduino_board = property(get_arduino_board, set_arduino_board)
 
     def set_arduino_board_default(self):
-        self.__arduino_board_key__ = sorted(self.__arduino_types__.keys())[0]
+        self.__arduino_board_key__ = sorted(self.__arduino_types.keys())[0]
         self.__arduino_board_value__ = \
-            self.__arduino_types__[self.__arduino_board_key__]
+            self.__arduino_types[self.__arduino_board_key__]
 
     def set_arduino_board_from_file(self, new_board):
-        if new_board in self.__arduino_types__:
-            self.__arduino_board_value__ = self.__arduino_types__[new_board]
+        if new_board in self.__arduino_types:
+            self.__arduino_board_value__ = self.__arduino_types[new_board]
             self.__arduino_board_key__ = new_board
         else:
             print('\nSettings file Arduino Board does not exist:')
@@ -252,7 +252,7 @@ class ServerCompilerSettings(object):
 
     def get_arduino_board_types(self):
         board_list = []
-        for key in self.__arduino_types__:
+        for key in self.__arduino_types:
             board_list.append(key)
         return board_list
 
@@ -268,21 +268,21 @@ class ServerCompilerSettings(object):
         :return: Serial Port dictionary key
         """
         self.populate_serial_port_list()
-        if not self.__serial_ports__:
+        if not self.__serial_ports:
             print('\nThere are no available Serial Ports !!!')
             self.__serial_port_key__ = None
             self.__serial_port_value__ = None
             self.save_settings()
-        elif self.__serial_port_value__ not in self.__serial_ports__.values():
+        elif self.__serial_port_value__ not in self.__serial_ports.values():
             print('\nThe selected Serial Port is no longer available !!!')
             self.__serial_port_key__ = None
             self.__serial_port_value__ = None
             self.save_settings()
-        elif self.__serial_ports__[self.__serial_port_key__] != \
+        elif self.__serial_ports[self.__serial_port_key__] != \
                 self.__serial_port_value__:
             # At this point the dictionary is not empty and the value is
             # present, but not with the right key. So correct the key.
-            for key, value in self.__serial_ports__.items():
+            for key, value in self.__serial_ports.items():
                 if self.__serial_port_value__ == value:
                     self.__serial_port_key__ = key
             # No need to save settings as only value saved and stays the same
@@ -295,16 +295,16 @@ class ServerCompilerSettings(object):
         empty it prints an error in the console.
         :param new_port: the new port to set
         """
-        if new_port in self.__serial_ports__:
-            self.__serial_port_value__ = self.__serial_ports__[new_port]
+        if new_port in self.__serial_ports:
+            self.__serial_port_value__ = self.__serial_ports[new_port]
             self.__serial_port_key__ = new_port
             # Now we check if the Port is still available
             self.populate_serial_port_list()
-            if not self.__serial_ports__:
+            if not self.__serial_ports:
                 print('\nThere are no available Serial Ports !!!')
                 self.__serial_port_key__ = None
                 self.__serial_port_value__ = None
-            elif self.__serial_port_value__ not in self.__serial_ports__.values():
+            elif self.__serial_port_value__ not in self.__serial_ports.values():
                 print('\nThe selected Serial Port is no longer available !!!')
                 self.__serial_port_key__ = None
                 self.__serial_port_value__ = None
@@ -330,13 +330,13 @@ class ServerCompilerSettings(object):
         If there are no available serial ports is resets the variables.
         """
         self.populate_serial_port_list()
-        if not self.__serial_ports__:
+        if not self.__serial_ports:
             self.__serial_port_key__ = None
             self.__serial_port_value__ = None
         else:
-            self.__serial_port_key__ = sorted(self.__serial_ports__.keys())[0]
+            self.__serial_port_key__ = sorted(self.__serial_ports.keys())[0]
             self.__serial_port_value__ = \
-                self.__serial_ports__[self.__serial_port_key__]
+                self.__serial_ports[self.__serial_port_key__]
 
     def set_serial_port_from_file(self, new_port_value):
         """
@@ -348,8 +348,8 @@ class ServerCompilerSettings(object):
         # Check if the settings file value is present in available ports list
         set_default = True
         self.populate_serial_port_list()
-        if self.__serial_ports__:
-            for key, value in self.__serial_ports__.items():
+        if self.__serial_ports:
+            for key, value in self.__serial_ports.items():
                 if new_port_value == value:
                     self.__serial_port_key__ = key
                     self.__serial_port_value__ = value
@@ -368,22 +368,22 @@ class ServerCompilerSettings(object):
         :return: Serial Port dictionary value
         """
         self.populate_serial_port_list()
-        if not self.__serial_ports__:
+        if not self.__serial_ports:
             print('\nThere are no available Serial Ports !!!')
             self.__serial_port_key__ = None
             self.__serial_port_value__ = None
             self.save_settings()
-        elif self.__serial_port_value__ not in self.__serial_ports__.values():
+        elif self.__serial_port_value__ not in self.__serial_ports.values():
             print('\nThe selected Serial Port is no longer available !!!')
             self.__serial_port_key__ = None
             self.__serial_port_value__ = None
             self.save_settings()
-        elif self.__serial_ports__[self.__serial_port_key__] != \
+        elif self.__serial_ports[self.__serial_port_key__] != \
                 self.__serial_port_value__:
             # At this point the dictionary is not empty and the flag
             # (dictionary value) is present, but not with the right key.
             # So correct the key.
-            for key, value in self.__serial_ports__.items():
+            for key, value in self.__serial_ports.items():
                 if self.__serial_port_value__ == value:
                     self.__serial_port_key__ = key
             # No need to save settings as only value saved and stays the same
@@ -391,20 +391,20 @@ class ServerCompilerSettings(object):
 
     def get_serial_ports(self):
         self.populate_serial_port_list()
-        return self.__serial_ports__
+        return self.__serial_ports
 
     def populate_serial_port_list(self):
         """
         Populates the __serial_ports__ dictionary with the Serial Ports
         available.
         """
-        port_list = ArduinoServerCompiler.SerialPort.get_port_list()
-        self.__serial_ports__ = {}
+        port_list = ArdublocklyServer.SerialPort.get_port_list()
+        self.__serial_ports = {}
         if port_list:
             port_id = 0
             for item in port_list:
                 id_string = 'port' + str(port_id)
-                self.__serial_ports__.update({id_string: item})
+                self.__serial_ports.update({id_string: item})
                 port_id += 1
 
     #
@@ -414,31 +414,31 @@ class ServerCompilerSettings(object):
         return self.__launch_IDE_option__
 
     def set_launch_ide(self, new_launch_option):
-        if new_launch_option in self.__IDE_launch_options__:
+        if new_launch_option in self.__IDE_launch_options:
             self.__launch_IDE_option__ = new_launch_option
             print('\nIDE options set to:\n\t%s' %
-                  self.__IDE_launch_options__[self.__launch_IDE_option__])
+                  self.__IDE_launch_options[self.__launch_IDE_option__])
             self.save_settings()
         else:
             print('\nThe provided "Launch IDE option" is not valid !!!')
             print('\t%s' % new_launch_option)
             if self.__launch_IDE_option__:
                 print('Previous "Launch IDE option" maintained:\n\t%s' %
-                      self.__IDE_launch_options__[self.__launch_IDE_option__])
+                      self.__IDE_launch_options[self.__launch_IDE_option__])
             else:
                 self.set_launch_ide_default()
                 print('Default "Launch IDE option" set:\n\t%s' %
-                      self.__IDE_launch_options__[self.__launch_IDE_option__])
+                      self.__IDE_launch_options[self.__launch_IDE_option__])
                 self.save_settings()
 
     launch_IDE_option = property(get_launch_ide, set_launch_ide)
 
     def set_launch_ide_default(self):
         self.__launch_IDE_option__ = \
-            sorted(self.__IDE_launch_options__.keys())[0]
+            sorted(self.__IDE_launch_options.keys())[0]
 
     def set_launch_ide_from_file(self, new_launch_option):
-        if new_launch_option in self.__IDE_launch_options__:
+        if new_launch_option in self.__IDE_launch_options:
             self.__launch_IDE_option__ = new_launch_option
         else:
             print('\nSettings file "Launch IDE option" is not valid:')
@@ -448,7 +448,7 @@ class ServerCompilerSettings(object):
                   self.__launch_IDE_option__)
 
     def get_launch_ide_options(self):
-        return self.__IDE_launch_options__
+        return self.__IDE_launch_options
 
     #
     # Sets all the settings to default values
@@ -564,11 +564,11 @@ class ServerCompilerSettings(object):
         The file is saved in the same directory as this python source code file.
         :return: path to the settings file
         """
-        if not self.__settings_path__:
+        if not self.__settings_path:
             this_package_dir = os.path.dirname(os.path.realpath(__file__))
-            self.__settings_path__ = os.path.normpath(
-                os.path.join(this_package_dir, self.__settings_filename__))
-        return self.__settings_path__
+            self.__settings_path = os.path.normpath(
+                os.path.join(this_package_dir, self.__settings_filename))
+        return self.__settings_path
 
     def get_board_value_from_key(self, string_key):
         """
@@ -580,9 +580,9 @@ class ServerCompilerSettings(object):
                  the key.
         """
         string_value = None
-        for key in self.__arduino_types__:
+        for key in self.__arduino_types:
             if string_key is key:
-                string_value = self.__arduino_types__[key]
+                string_value = self.__arduino_types[key]
         return string_value
 
     def get_board_key_from_value(self, string_value):
@@ -596,16 +596,7 @@ class ServerCompilerSettings(object):
                  the given value.
         """
         string_key = None
-        for key in self.__arduino_types__:
-            if string_value is self.__arduino_types__[key]:
+        for key in self.__arduino_types:
+            if string_value is self.__arduino_types[key]:
                 string_key = key
         return string_key
-
-
-def main():
-    """ This should never be executed """
-    print("This is the ServerCompilerSettings main")
-
-
-if __name__ == '__main__':
-    main()

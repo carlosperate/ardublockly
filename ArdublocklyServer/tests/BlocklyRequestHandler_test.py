@@ -2,8 +2,14 @@ from __future__ import unicode_literals, absolute_import
 import os
 import unittest
 import mock
-import ParentDirToSysPath
-from BlocklyServerCompiler import BlocklyRequestHandler
+try:
+    from ArdublocklyServer import BlocklyRequestHandler
+except ImportError:
+    import sys
+    file_dir = os.path.dirname(os.path.realpath(__file__))
+    package_dir = os.path.dirname(os.path.dirname(file_dir))
+    sys.path.insert(0, package_dir)
+    from ArdublocklyServer import BlocklyRequestHandler
 
 
 class BlocklyRequestHandlerTestCase(unittest.TestCase):
@@ -14,9 +20,11 @@ class BlocklyRequestHandlerTestCase(unittest.TestCase):
     #
     # Command line tests
     #
-    @mock.patch('BlocklyServerCompiler.BlocklyRequestHandler.os')
-    @mock.patch('BlocklyServerCompiler.BlocklyRequestHandler.create_sketch_default')
-    @mock.patch.object(BlocklyRequestHandler.ServerCompilerSettings, 'get_compiler_dir',  autospec=True)
+    @mock.patch('ArdublocklyServer.BlocklyRequestHandler.os')
+    @mock.patch('ArdublocklyServer.BlocklyRequestHandler.create_sketch_default')
+    @mock.patch.object(
+        BlocklyRequestHandler.ServerCompilerSettings, 'get_compiler_dir',
+        autospec=True)
     def test_command_line_launch(self, mock_settings, mock_sketch, mock_os):
         """
         Tests that a compiler path and arduino sketch path can be set
@@ -40,7 +48,7 @@ class BlocklyRequestHandlerTestCase(unittest.TestCase):
     #
     # Tests for checking browsing for paths and files
     #
-    @mock.patch('BlocklyServerCompiler.BlocklyRequestHandler.tkFileDialog')
+    @mock.patch('ArdublocklyServer.BlocklyRequestHandler.tkFileDialog')
     def test_browse_file(self, mock_file_select):
         test_file = 'test_file'
         mock_file_select.askopenfilename.return_value = test_file
@@ -55,7 +63,7 @@ class BlocklyRequestHandlerTestCase(unittest.TestCase):
         function_file = BlocklyRequestHandler.browse_file()
         self.assertEqual(canceled_file, function_file)
 
-    @mock.patch('BlocklyServerCompiler.BlocklyRequestHandler.tkFileDialog')
+    @mock.patch('ArdublocklyServer.BlocklyRequestHandler.tkFileDialog')
     def test_browse_path(self, mock_path_select):
         test_path = 'test_path'
         mock_path_select.askopenfilename.return_value = test_path

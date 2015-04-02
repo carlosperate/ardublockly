@@ -1,32 +1,31 @@
 from __future__ import unicode_literals, absolute_import
 import os
-from ArduinoServerCompiler.Py23Compatibility import Py23Compatibility
-from ArduinoServerCompiler.ServerCompilerSettings import ServerCompilerSettings
+from ArdublocklyServer.Py23Compatibility import Py23Compatibility
+from ArdublocklyServer.ServerCompilerSettings import ServerCompilerSettings
 
 
 class SketchCreator(object):
     """
     Creates an Arduino Sketch
     """
-    
+
     #This is probably not the best way to create this string, will revisit
-    _sketch_default_code = """int led = 13;
-void setup() {
-  pinMode(led, OUTPUT);
-}
-void loop() {
-  digitalWrite(led, HIGH);
-  delay(1000);
-  digitalWrite(led, LOW);
-  delay(1000);
-}"""
-    
+    _sketch_default_code = 'int led = 13;void setup() {\n' \
+                           '  pinMode(led, OUTPUT);\n' \
+                           '}\n' \
+                           'void loop() {\n' \
+                           '  digitalWrite(led, HIGH);\n' \
+                           '  delay(1000);\n' \
+                           '  digitalWrite(led, LOW);\n' \
+                           '  delay(1000);\n' \
+                           '}\n'
+
     #
     # Constructor
     #
     def __init__(self):
         pass
-    
+
     #
     # Creating files
     #
@@ -56,7 +55,7 @@ void loop() {
             print('Arduino sketch could not be created!!!')
 
         return sketch_path
-    
+
     #
     # File and directories settings
     #
@@ -79,14 +78,5 @@ void loop() {
             sketch_path = os.path.join(sketch_path, sketch_name + '.ino')
         else:
             print('The sketch directory in the settings does not exists!')
-        
+
         return sketch_path 
-
-
-def main():
-    # This should never be executed
-    print("This is the SketchCreator main")
-
-
-if __name__ == "__main__":
-    main()

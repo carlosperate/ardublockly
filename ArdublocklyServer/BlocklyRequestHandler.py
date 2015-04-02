@@ -16,9 +16,9 @@ except ImportError:
     import urllib.parse as urlparse
     import tkinter.filedialog as tkFileDialog
     import http.server as SimpleHTTPServer
-from ArduinoServerCompiler.Py23Compatibility import Py23Compatibility
-from ArduinoServerCompiler.ServerCompilerSettings import ServerCompilerSettings
-from ArduinoServerCompiler.SketchCreator import SketchCreator
+from ArdublocklyServer.Py23Compatibility import Py23Compatibility
+from ArdublocklyServer.ServerCompilerSettings import ServerCompilerSettings
+from ArdublocklyServer.SketchCreator import SketchCreator
 
 
 class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -480,14 +480,3 @@ def get_load_ide_only():
             {'value': key, 'display_text': ide_options[key]})
     json_data.update({'selected': ServerCompilerSettings().launch_IDE_option})
     return json.dumps(json_data)
-
-
-########
-# Main #
-########
-def main():
-    print("This is the BlocklyRequestHandler main.")
-
-
-if __name__ == "__main__":
-    main()

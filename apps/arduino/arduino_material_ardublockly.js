@@ -152,13 +152,17 @@ ArduinoMaterial.loadBlocksfromXmlDom = function(blocksXmlDom) {
  *                             finished.
  */
 ArduinoMaterial.showToolbox = function(show, callback) {
-  var toolbox = $( ".blocklyToolboxDiv" );
-  if (show == false) {
-    toolbox.slideUp('slow', callback);
-  } else {
-    toolbox.slideDown('slow', callback);
+  var resizeWorkspaceAndCallback = function() {
+    /* For some reason the workspace only resizes after second call */
+    //Blockly.fireUiEvent(window, 'resize');
+    //Blockly.fireUiEvent(window, 'resize');
+    //callback.call();
   }
-  ArduinoMaterial.resizeBlocklyWorkspace();
+  if (show == false) {
+    $( ".blocklyToolboxDiv" ).slideUp(300, callback);
+  } else {
+    $( ".blocklyToolboxDiv" ).slideDown(300, callback);
+  }
 };
 
 /**

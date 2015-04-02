@@ -2,8 +2,14 @@ from __future__ import unicode_literals, absolute_import
 import os
 import unittest
 import mock
-import ParentDirToSysPath
-from BlocklyServerCompiler.ServerCompilerSettings import ServerCompilerSettings
+try:
+    from ArdublocklyServer.ServerCompilerSettings import ServerCompilerSettings
+except ImportError:
+    import sys
+    file_dir = os.path.dirname(os.path.realpath(__file__))
+    package_dir = os.path.dirname(os.path.dirname(file_dir))
+    sys.path.insert(0, package_dir)
+    from ArdublocklyServer.ServerCompilerSettings import ServerCompilerSettings
 
 
 class ServerCompilerSettingsTestCase(unittest.TestCase):
@@ -24,7 +30,8 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         ServerCompilerSettings()
         instance_1 = ServerCompilerSettings()
         instance_1._drop()
-        self.assertEqual(instance_1.__singleton_instance__, None)
+        self.assertEqual(instance_1._ServerCompilerSettings__singleton_instance,
+                         None)
 
     #
     # Testing the compiler_dir getter and setter
@@ -32,7 +39,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     def test_read_compiler_dir(self):
         self.assertEqual(ServerCompilerSettings().compiler_dir, ServerCompilerSettings().__compiler_dir__)
 
-    @mock.patch('BlocklyServerCompiler.ServerCompilerSettings.os.path.exists')
+    @mock.patch('ArdublocklyServer.ServerCompilerSettings.os.path.exists')
     def test_write_compiler_dir_invalid(self, mock_os_path_exists):
         """
         Tests path doesn't get save if:
@@ -63,7 +70,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         self.assertNotEqual(new_dir, ServerCompilerSettings().compiler_dir)
         self.assertEqual(original_dir, ServerCompilerSettings().compiler_dir)
 
-    @mock.patch('BlocklyServerCompiler.ServerCompilerSettings.os.path.exists')
+    @mock.patch('ArdublocklyServer.ServerCompilerSettings.os.path.exists')
     def test_write_compiler_dir_valid(self, mock_os_path_exists):
         mock_os_path_exists.return_value = True
         new_dir = os.path.join(os.getcwd(), 'arduino.exe')
