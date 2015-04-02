@@ -1,16 +1,14 @@
 from __future__ import unicode_literals, absolute_import
 import os
-
 try:
     # 2.x name
     import BaseHTTPServer
 except ImportError:
     # 3.x name
     import http.server as BaseHTTPServer
-
 import ArduinoServerCompiler.BlocklyRequestHandler
 
-ADDRESS = 'localhost'
+ADDRESS = '0.0.0.0'
 PORT = 8000
 
 

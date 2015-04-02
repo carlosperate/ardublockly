@@ -259,7 +259,7 @@ def load_arduino_cli(sketch_path=None):
             if (process.returncode != 0) and (process.returncode != 256):
                 success = False
                 if exit_code == str(1):
-                    conclusion = 'Build failed or upload failed'
+                    conclusion = 'Build or Upload failed'
                 if exit_code == str(2):
                     conclusion = 'Sketch not found'
                 if exit_code == str(3):
