@@ -84,6 +84,42 @@ Blockly.Blocks['variables_get'] = {
     xmlBlock.setAttribute('type', this.contextMenuType_);
     option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
     options.push(option);
+  },
+  /**
+   * Finds the type of the selected variable.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars Associative array of variables already
+   *                                     defined. Var names as key and type as
+   *                                     value.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
+   */
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+
+    // Check if variable has been defined already add if it has been.
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType != null) {
+      this.varType = varType;
+      this.setWarningText(null);
+    } else {
+      // This block needs the variable to be define before use, so warn user.
+      this.setWarningText('This variable needs to be set to something before' +
+                          ' it can be used!');
+    }
+
+    return varType;
+  },
+  /**
+   * Contains the type of the variable selected from the first set block.
+   */
+  varType: 'nonono',
+  /**
+   * Retrieves the type of the selected variable, defined at getVarType.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    return this.varType;
   }
 };
 
@@ -128,5 +164,40 @@ Blockly.Blocks['variables_set'] = {
       this.setFieldValue(newName, 'VAR');
     }
   },
-  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu
+  customContextMenu: Blockly.Blocks['variables_get'].customContextMenu,
+  /**
+   * Searches through the nested blocks to find a variable type.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars Associative array of variables already
+   *                                     defined. Var name as the key, type as
+   *                                     the value.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
+   */
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+
+    // Check what this block type should be
+    var thisBlockType = Blockly.StaticTyping.getChildBlockType(this);
+
+    // Check if variable has been defined already
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType === null) {
+      // This block var has not been encountered before, so return type
+      this.setWarningText(null);
+      return thisBlockType;
+    } else if ((existingVars[varName] !== thisBlockType) &&
+               (this.getChildren().length > 0)) {
+      // Variable name defined before, but only set warning if there are child
+      // blocks 
+      this.setWarningText('This block is using a different type than what ' +
+          'was set on the first use of this variable.\nFirst use type: ' +
+          existingVars[varName] + '\nThis block type: ' + thisBlockType);
+      return null;
+    } else {
+      // Variable defined before, but it is the same type, or block is empty
+      this.setWarningText(null);
+      return null;
+    }
+  }
 };

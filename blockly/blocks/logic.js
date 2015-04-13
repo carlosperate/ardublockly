@@ -327,6 +327,12 @@ Blockly.Blocks['logic_compare'] = {
     }
     this.prevBlocks_[0] = blockA;
     this.prevBlocks_[1] = blockB;
+  },
+  /**
+   * Assigns a type to the block, comparison operations result in booleans.
+   */
+  getType: function() {
+    return 'boolean';
   }
 };
 
@@ -358,6 +364,12 @@ Blockly.Blocks['logic_operation'] = {
       };
       return TOOLTIPS[op];
     });
+  },
+  /**
+   * Assigns a type to the block, logic comparison operations result in bools.
+   */
+  getType: function() {
+    return 'boolean';
   }
 };
 
@@ -374,6 +386,13 @@ Blockly.Blocks['logic_negate'] = {
                         ['BOOL', 'Boolean', Blockly.ALIGN_RIGHT],
                         Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.Msg.LOGIC_NEGATE_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, not block input is meant to be a booleans, so
+   * it should return the same.
+   */
+  getType: function() {
+    return 'boolean';
   }
 };
 
@@ -392,6 +411,12 @@ Blockly.Blocks['logic_boolean'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
     this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the boolean block.
+   */
+  getType: function() {
+    return 'boolean';
   }
 };
 
@@ -408,6 +433,7 @@ Blockly.Blocks['logic_null'] = {
         .appendField(Blockly.Msg.LOGIC_NULL);
     this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP);
   }
+  // Null does not have a type, so no getType. Might change this in the future.
 };
 
 Blockly.Blocks['logic_ternary'] = {
@@ -459,4 +485,5 @@ Blockly.Blocks['logic_ternary'] = {
     }
     this.prevParentConnection_ = parentConnection;
   }
+  //TODO: getType that uses the type of the given inputs
 };

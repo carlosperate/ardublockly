@@ -44,6 +44,22 @@ Blockly.Blocks['math_number'] = {
         Blockly.FieldTextInput.numberValidator), 'NUM');
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.MATH_NUMBER_TOOLTIP);
+  },
+  /**
+   * Reads the numerical value from the block and assigns a type.
+   * @this Blockly.Block
+   */
+  getType: function() {
+    var numString = this.getFieldValue('NUM');
+    var regExpInt = new RegExp(/^\d+$/);
+    var regExpFloat = new RegExp(/^[0-9]*[.][0-9]+$/);
+    if (regExpInt.test(numString)) {
+      return 'int';
+    } else if (regExpFloat.test(numString)) {
+      return 'float';
+    }
+    //TODO: This is just a temporary value for easy bug catching.
+    return 'errornumber';
   }
 };
 
@@ -82,6 +98,7 @@ Blockly.Blocks['math_arithmetic'] = {
       return TOOLTIPS[mode];
     });
   }
+  //TODO: a setType
 };
 
 Blockly.Blocks['math_single'] = {
@@ -120,6 +137,12 @@ Blockly.Blocks['math_single'] = {
       };
       return TOOLTIPS[mode];
     });
+  },
+  /**
+   * Assigns a type to the block, all these operations are floats.
+   */
+  getType: function() {
+    return 'float';
   }
 };
 
@@ -156,6 +179,12 @@ Blockly.Blocks['math_trig'] = {
       };
       return TOOLTIPS[mode];
     });
+  },
+  /**
+   * Assigns a type to the block, all these operations are floats.
+   */
+  getType: function() {
+    return 'float';
   }
 };
 
@@ -178,6 +207,12 @@ Blockly.Blocks['math_constant'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(CONSTANTS), 'CONSTANT');
     this.setTooltip(Blockly.Msg.MATH_CONSTANT_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, all these operations are floats.
+   */
+  getType: function() {
+    return 'float';
   }
 };
 
@@ -246,6 +281,12 @@ Blockly.Blocks['math_number_property'] = {
     } else if (inputExists) {
       this.removeInput('DIVISOR');
     }
+  },
+  /**
+   * Assigns a type to the block, all these operations return booleans.
+   */
+  getType: function() {
+    return 'boolean';
   }
 };
 
@@ -292,6 +333,34 @@ Blockly.Blocks['math_change'] = {
     if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
       this.setFieldValue(newName, 'VAR');
     }
+  },
+  /**
+   * Finds the type of the variable selected in the drop down. Sets it to an
+   * an integer if it has not been defined before.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars List of variables already defined.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
+   */
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+
+    // Check if variable has been defined already
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType != null) {
+      if ((varType != 'int') && (varType != 'float')) {
+        this.setWarningText('This variable type has been previously set to a ' +
+            existingVars[varName] + ' and it needs to be a number!');
+      } else {
+        this.setWarningText(null);
+      }
+    } else {
+      // not defined, so set it to an int
+      varType = 'int';
+      this.setWarningText(null);
+    }
+
+    return varType;
   }
 };
 
@@ -312,6 +381,12 @@ Blockly.Blocks['math_round'] = {
         .setCheck('Number')
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.setTooltip(Blockly.Msg.MATH_ROUND_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, round always returns a float.
+   */
+  getType: function() {
+    return 'float';
   }
 };
 
@@ -361,6 +436,7 @@ Blockly.Blocks['math_on_list'] = {
       return TOOLTIPS[mode];
     });
   }
+  //TODO: a getType once the list code is finished.
 };
 
 Blockly.Blocks['math_modulo'] = {
@@ -378,6 +454,12 @@ Blockly.Blocks['math_modulo'] = {
                         Blockly.ALIGN_RIGHT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.MATH_MODULO_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, modulus only works on integers.
+   */
+  getType: function() {
+    return 'int';
   }
 };
 
@@ -398,6 +480,7 @@ Blockly.Blocks['math_constrain'] = {
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.MATH_CONSTRAIN_TOOLTIP);
   }
+  //TODO: a getType of the same type as the inputs.
 };
 
 Blockly.Blocks['math_random_int'] = {
@@ -415,6 +498,12 @@ Blockly.Blocks['math_random_int'] = {
                         Blockly.ALIGN_RIGHT);
     this.setInputsInline(true);
     this.setTooltip(Blockly.Msg.MATH_RANDOM_INT_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, always an int.
+   */
+  getType: function() {
+    return 'int';
   }
 };
 
@@ -430,5 +519,11 @@ Blockly.Blocks['math_random_float'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.MATH_RANDOM_FLOAT_TITLE_RANDOM);
     this.setTooltip(Blockly.Msg.MATH_RANDOM_FLOAT_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, always a float.
+   */
+  getType: function() {
+    return 'float';
   }
 };

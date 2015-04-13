@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <title>Blockly Playground</title>
 <script src="../blockly_uncompressed.js"></script>
+<script src="../generators/arduino.js"></script>
+<script src="../generators/arduino/logic.js"></script>
+<script src="../generators/arduino/loops.js"></script>
+<script src="../generators/arduino/math.js"></script>
+<script src="../generators/arduino/text.js"></script>
+<script src="../generators/arduino/lists.js"></script>
+<script src="../generators/arduino/colour.js"></script>
+<script src="../generators/arduino/variables.js"></script>
+<script src="../generators/arduino/procedures.js"></script>
 <script src="../generators/javascript.js"></script>
 <script src="../generators/javascript/logic.js"></script>
 <script src="../generators/javascript/loops.js"></script>
@@ -431,6 +440,8 @@ h1 {
     &nbsp;
     <input type="button" value="Import from XML" onclick="fromXml()">
     <br>
+    <input type="button" value="To Arduino" onclick="toCode('Arduino')">
+    &nbsp;
     <input type="button" value="To JavaScript" onclick="toCode('JavaScript')">
     &nbsp;
     <input type="button" value="To Python" onclick="toCode('Python')">

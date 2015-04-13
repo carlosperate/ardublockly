@@ -168,6 +168,36 @@ Blockly.Blocks['controls_for'] = {
       option.callback = Blockly.ContextMenu.callbackFactory(this, xmlBlock);
       options.push(option);
     }
+  },
+  /**
+   * Finds the type of the variable selected in the drop down. Sets it to an
+   * an integer if it has not been defined before.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars Associative array of variables already
+   *                                     defined. Variable name as the key,
+   *                                     type as their value.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
+   */
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+
+    // Check if variable has been defined already
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType != null) {
+      if ((varType != 'int') && (varType != 'float')) {
+        this.setWarningText('This variable type has been previously set to a ' +
+          existingVars[varName] + ' and it needs to be a number!')
+      } else {
+        this.setWarningText(null);
+      }
+    } else {
+      // not defined, so set it to an int
+      varType = 'int';
+      this.setWarningText(null);
+    }
+
+    return varType;
   }
 };
 

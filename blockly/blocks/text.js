@@ -59,6 +59,12 @@ Blockly.Blocks['text'] = {
       var file = 'quote0.png';
     }
     return new Blockly.FieldImage(Blockly.pathToMedia + file, 12, 12, '"');
+  },
+  /**
+   * Assigns a type to the block, text block is always a string.
+   */
+  getType: function() {
+    return 'String';
   }
 };
 
@@ -186,6 +192,12 @@ Blockly.Blocks['text_join'] = {
         }
       }
     }
+  },
+  /**
+   * Assigns a type to the block, this block always returns a string.
+   */
+  getType: function() {
+    return 'String';
   }
 };
 
@@ -261,6 +273,36 @@ Blockly.Blocks['text_append'] = {
     if (Blockly.Names.equals(oldName, this.getFieldValue('VAR'))) {
       this.setFieldValue(newName, 'VAR');
     }
+  },
+  /**
+   * Finds the type of the variable selected in the drop down. Sets it to an
+   * a string if it has not been defined before.
+   * @this Blockly.Block
+   * @param {Array<string>} existingVars Associativ array of variables already
+   *                                     defined. Variable name as key, and 
+   *                                     type as value.
+   * @return {string} String to indicate the type if it has not been defined
+   *                  before.
+   */
+  getVarType: function(existingVars) {
+    var varName = this.getFieldValue('VAR');
+
+    // Check if variable has been defined already
+    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
+    if (varType != null) {
+      if (varType != 'String') {
+        this.setWarningText('This variable type has been previously set to a ' +
+            existingVars[varName] + ' and it needs to be a String!');
+      } else {
+        this.setWarningText(null);
+      }
+    } else {
+      // not defined, so set it to a string
+      varType = 'String';
+      this.setWarningText(null);
+    }
+
+    return varType;
   }
 };
 
@@ -277,6 +319,12 @@ Blockly.Blocks['text_length'] = {
                         Blockly.ALIGN_RIGHT);
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.TEXT_LENGTH_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, length always returns an integer number.
+   */
+  getType: function() {
+    return 'int';
   }
 };
 
@@ -293,6 +341,12 @@ Blockly.Blocks['text_isEmpty'] = {
                         Blockly.ALIGN_RIGHT);
     this.setOutput(true, 'Boolean');
     this.setTooltip(Blockly.Msg.TEXT_ISEMPTY_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, empty check always returns a boolean.
+   */
+  getType: function() {
+    return 'boolean';
   }
 };
 
@@ -550,6 +604,12 @@ Blockly.Blocks['text_trim'] = {
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.setOutput(true, 'String');
     this.setTooltip(Blockly.Msg.TEXT_TRIM_TOOLTIP);
+  },
+  /**
+   * Assigns a type to the block, trim always takes and returns a string.
+   */
+  getType: function() {
+    return 'String';
   }
 };
 
@@ -604,7 +664,13 @@ Blockly.Blocks['text_prompt'] = {
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER;
     });
   },
-  newQuote_: Blockly.Blocks['text'].newQuote_
+  newQuote_: Blockly.Blocks['text'].newQuote_,
+  /**
+   * Assigns a type to the block, prompt always returns a string.
+   */
+  getType: function() {
+    return 'String';
+  }
 };
 
 Blockly.Blocks['text_prompt_ext'] = {
@@ -637,5 +703,11 @@ Blockly.Blocks['text_prompt_ext'] = {
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_TEXT :
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER;
     });
+  },
+  /**
+   * Assigns a type to the block, prompt always returns a string.
+   */
+  getType: function() {
+    return 'String';
   }
 };
