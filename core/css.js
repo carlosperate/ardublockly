@@ -131,7 +131,6 @@ Blockly.Css.setCursor = function(cursor) {
 Blockly.Css.CONTENT = [
   '.blocklySvg {',
   '  background-color: #fff;',
-  '  border: 1px solid #ddd;',
   '  overflow: hidden;',  /* IE overflows by default. */
   '}',
 
@@ -272,13 +271,9 @@ Blockly.Css.CONTENT = [
   '  stroke-width: 1px;',
   '}',
 
-  '.blocklyIconGroup:hover>.blocklyIconShield {',
-  '  fill: #00f;',
-  '  stroke: #fff;',
-  '}',
-
-  '.blocklyIconGroup:hover>.blocklyIconMark {',
-  '  fill: #fff;',
+  '.blocklyIconGroup:not(:hover),',
+  '.blocklyIconGroupReadonly {',
+  '  opacity: .6;',
   '}',
 
   '.blocklyIconMark {',
@@ -316,6 +311,8 @@ Blockly.Css.CONTENT = [
 
   '.blocklyMainBackground {',
   '  fill: url(#blocklyGridPattern);',
+  '  stroke-width: 1;',
+  '  stroke: #c6c6c6;',  /* Equates to #ddd due to border being off-pixel. */
   '}',
 
   '.blocklyMutatorBackground {',

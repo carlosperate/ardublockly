@@ -491,7 +491,7 @@ Blockly.Blocks['procedures_callnoreturn'] = {
     this.setNextStatement(true);
     // Tooltip is set in domToMutation.
     this.arguments_ = [];
-    this.quarkConnections_ = null;
+    this.quarkConnections_ = {};
     this.quarkArguments_ = null;
   },
   /**
@@ -708,7 +708,7 @@ Blockly.Blocks['procedures_callreturn'] = {
     this.setOutput(true);
     // Tooltip is set in domToMutation.
     this.arguments_ = [];
-    this.quarkConnections_ = null;
+    this.quarkConnections_ = {};
     this.quarkArguments_ = null;
   },
   getProcedureCall: Blockly.Blocks['procedures_callnoreturn'].getProcedureCall,
