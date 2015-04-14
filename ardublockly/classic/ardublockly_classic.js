@@ -82,7 +82,7 @@ ArduinoClassic.init = function() {
 
   // Inject Blockly asynchronously into content_blocks
   ArduinoClassic.injectBlockly(
-      document.getElementById('content_blocks'), 'ardublockly_classic_toolbox.xml');
+      document.getElementById('content_blocks'), '../ardublockly_toolbox.xml');
 
   // Create function to resize blockly if page layout changes
   var onresize = function(e) {
@@ -334,7 +334,7 @@ ArduinoClassic.injectBlockly = function(blockly_el, toolbox_path) {
             collapse: true,
             comments: true,
             disable: true,
-            media: '../blockly/media/',
+            media: '../../blockly/media/',
             rtl: false,
             scrollbars: true,
             toolbox: request.responseText,

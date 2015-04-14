@@ -35,7 +35,7 @@ ArduServerCompiler.ajaxPostForm = function(url, params, callback) {
         callback(null);
       }
     }
-  }
+  };
 
   // Send the data
   try {
@@ -71,7 +71,7 @@ ArduServerCompiler.ajaxPostPlain = function(url, data, callback) {
         callback(null);
       }
     }
-  }
+  };
 
   // Send the data
   try {
