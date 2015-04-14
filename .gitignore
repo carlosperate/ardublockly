@@ -78,3 +78,6 @@ ServerCompilerSettings.ini
 
 # Anything starting with this is created as a unit/module testing temporal file
 TestTemp_*
+
+# Miscellaneous files that should not get revisioned
+/ignore

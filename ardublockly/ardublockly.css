@@ -1,5 +1,10 @@
 body {
   background-color: #eeeeee;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 
@@ -124,6 +129,11 @@ ul.side-nav li.logo:hover {
   /*height: -webkit-calc(100hv - 100px);  /* WebKit   */
   /*height: -o-calc(100hv - 100px);       /* Opera    */
   /*height: calc(100hv - 100px);          /* Standard */
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
 }
 
 

@@ -17,7 +17,7 @@ var ArduinoMaterial = ArduinoMaterial || {};
 window.addEventListener('load', function() {
   // Inject Blockly into content_blocks
   ArduinoMaterial.injectBlockly(
-    document.getElementById('content_blocks'), 'arduino_toolbox.xml');
+    document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
 
   ArduinoMaterial.materializeJsInit();
   ArduinoMaterial.bindActionFunctions_();
@@ -162,7 +162,7 @@ ArduinoMaterial.loadUserXmlFile = function() {
     selectFileDom.type = 'file';
     selectFileDom.id = 'select_file';
     selectFileDom.style = 'display: none';
-    document.body.appendChild(select_file_dom);
+    document.body.appendChild(selectFileDom);
     selectFile = document.getElementById("select_file");
     selectFile.addEventListener('change', parseInputXMLfile, false);
   }

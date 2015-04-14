@@ -41,7 +41,7 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
             collapse: true,
             comments: true,
             disable: true,
-            media: '../../media/',
+            media: '../blockly/media/',
             rtl: false,
             scrollbars: true,
             toolbox: request.responseText,
