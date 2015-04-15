@@ -74,7 +74,7 @@ def main(argv):
     """
     Initialises the Settings singleton and starts the HTTP Server
     """
-    print('Running Python version ' + platform.python_version())
+    print('Running Python version %s' % platform.python_version())
 
     # Checking command line arguments
     if len(argv) > 0:

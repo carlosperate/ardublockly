@@ -61,9 +61,6 @@ coverage.xml
 *.mo
 *.pot
 
-# Django stuff:
-*.log
-
 # Sphinx documentation
 docs/_build/
 
@@ -79,5 +76,13 @@ ServerCompilerSettings.ini
 # Anything starting with this is created as a unit/module testing temporal file
 TestTemp_*
 
+# CEF log files
+cef_error.log
+cef_debug.log
+
 # Miscellaneous files that should not get revisioned
 /ignore
+
+# Packaged python build folders
+/win
+/webcache
