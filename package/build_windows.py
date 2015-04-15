@@ -3,13 +3,13 @@ import os
 import sys
 import shutil
 import fnmatch
+from distutils.core import setup
 from glob import glob
 try:
     from cefpython3 import cefpython
-    from distutils.core import setup
     import py2exe
 except ImportError:
-    print("You need to have cefpython3, distutils, and py2exe installed!")
+    print("You need to have cefpython3, and py2exe installed!")
     sys.exit(1)
 
 # set up directories
@@ -43,15 +43,15 @@ def get_data_files():
     """ Collects the required redistributable dlls. """
     cef_path = os.path.dirname(cefpython.__file__)
     data_files = [
-        ('', ['%s/icudt.dll' % cef_path,
-              '%s/d3dcompiler_43.dll' % cef_path,
-              '%s/devtools_resources.pak' % cef_path,
-              '%s/ffmpegsumo.dll' % cef_path,
-              '%s/libEGL.dll' % cef_path,
-              '%s/libGLESv2.dll' % cef_path,
-              '%s/subprocess.exe' % cef_path]),
-        ('locales', glob(r'%s/locales/*.*' % cef_path)),
-        ("Microsoft.VC90.CRT", glob(r'msvcm90\*.*'))]
+        ("", ["%s/icudt.dll" % cef_path,
+              "%s/d3dcompiler_43.dll" % cef_path,
+              "%s/devtools_resources.pak" % cef_path,
+              "%s/ffmpegsumo.dll" % cef_path,
+              "%s/libEGL.dll" % cef_path,
+              "%s/libGLESv2.dll" % cef_path,
+              "%s/subprocess.exe" % cef_path]),
+        ("locales", glob(r"%s/locales/*.*" % cef_path)),
+        ("Microsoft.VC90.CRT", glob(r"msvcm90\*.*"))]
     return data_files
 
 
@@ -84,6 +84,7 @@ def get_py_files():
 
 
 def build_exe(args):
+    """ Sets up the disutils for py2exe and runs it to build project. """
     setup(data_files=get_data_files(),
           #windows=get_py_files(),
           console=get_py_files(),
@@ -91,13 +92,28 @@ def build_exe(args):
           script_args=args)
 
 
+def create_run_batch_file():
+    """
+    Creates a batch file into the project root to be able to easily launch the
+    Ardublockly software.
+    """
+    root_dir = os.path.realpath(this_file_parent + os.sep + os.sep + os.sep)
+    batch_text = "@echo off\n" + \
+                 ("start %s\win\start_cef.exe %s" % (root_dir, root_dir))
+    try:
+        batch_file = open(("%s/ardublockly_run.bat" % root_dir), 'w')
+        batch_file.write(batch_text)
+        batch_file.close()
+    except Exception as e:
+        print('%s\nArduino sketch could not be created!!!' % e)
+
+
 if __name__ == "__main__":
     remove_build_dir()
     remove_install_dir()
-
     if len(sys.argv) <= 1:
         build_exe(['py2exe'])
     else:
         build_exe()
-
     remove_build_dir()
+    create_run_batch_file()
