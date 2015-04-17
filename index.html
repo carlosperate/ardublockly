@@ -1,80 +1,294 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Ardublockly by carlosperate</title>
-  </head>
+<html lang="en"
+>
+<head>
+    <title>Ardublockly - Embedded Log</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <body>
-    <header>
-      <div class="inner">
-        <h1>Ardublockly</h1>
-        <h2>Visual programming for Arduino</h2>
-        <a href="https://github.com/carlosperate/ardublockly" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <h1><a id="ardublockly" class="anchor" href="#ardublockly" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ardublockly</h1>
-            <p>"Ardublockly" is a fork of <a href="https://developers.google.com/blockly/">Blockly</a>, a web-based graphical programming editor, that has been updated to generate <a href="http://www.arduino.cc/">Arduino</a> code.</p>
-            <p>This project is influeced by BlocklyDuino, also based on an older version of <a href="https://developers.google.com/blockly/">Blockly</a>.</p>
-            <p>The "ArduBlocklyServerCompiler" component initialises a local server with Python to be able to compile and load the Arduino code using the <a href="http://arduino.cc/en/main/software">Arduino IDE</a>.</p>
 
-            <h2><a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
-              <ul>
-              <li>TBD</li>
-              </ul>
-              <p><img src="images/screenshot_1.png" alt="WebApp screenshot"></p>
+<link rel="canonical" href="/ardublockly/index.html">
 
-            <h2><a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
-              <p>TBD</p>
+        <meta name="author" content="Carlos Perate" />
+        <meta name="description" content="Ardublockly is a visual programming editor for Arduino. It is based on Google&#39;s Blockly, which has been forked to generate Arduino code. The &#34;ArdublocklyServer&#34; Python package initialises a local server to be able to compile and load the Arduino code using the Arduino IDE. This is all packaged in a self contained executable: Features Generate Arduino code with visual drag-and-drop blocks Load the code to an Arduino Board Useful &#34;code block warnings&#34; Compatible with a wide range of official Arduino Boards Runs on Windows / Linux / Mac OS X Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the TODO.md file. Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7. Online Demos A demo of the current state of Ardublockly can be found in the following ..." />
 
-            <h2><a id="running-ardublockly" class="anchor" href="#running-ardublockly" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running Ardublockly</h2>
-              <p>To run the application execute the "launch_arduino.py".</p>
+    <meta property="og:site_name" content="Embedded Log" />
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Ardublockly"/>
+    <meta property="og:url" content="/ardublockly/index.html"/>
+    <meta property="og:description" content="Ardublockly is a visual programming editor for Arduino. It is based on Google&#39;s Blockly, which has been forked to generate Arduino code. The &#34;ArdublocklyServer&#34; Python package initialises a local server to be able to compile and load the Arduino code using the Arduino IDE. This is all packaged in a self contained executable: Features Generate Arduino code with visual drag-and-drop blocks Load the code to an Arduino Board Useful &#34;code block warnings&#34; Compatible with a wide range of official Arduino Boards Runs on Windows / Linux / Mac OS X Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the TODO.md file. Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7. Online Demos A demo of the current state of Ardublockly can be found in the following ..." />
 
-              <h3><a id="required-software" class="anchor" href="#required-software" aria-hidden="true"><span class="octicon octicon-link"></span></a>Required Software</h3>
-                <ul>
-                <li><a href="https://www.python.org/download">Python 2.7.x</a>, currently development is maintaining compatibility with  3.x</li>
-                <li><a href="http://arduino.cc/en/main/software">Arduino IDE version 1.5 or higher</a></li>
-                <li>Browser of your choice (currently supports Firefox, Chrome, IE8+, Opera and Safary)</li>
-                </ul>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/carlosperate/ardublockly/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/carlosperate/ardublockly/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
-          <p class="repo-owner"><a href="https://github.com/carlosperate/ardublockly"></a> is maintained by <a href="https://github.com/carlosperate">carlosperate</a>.</p>
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="/theme/css/bootstrap.flatly.min.css" type="text/css"/>
+    <link href="/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="/theme/css/style.css" type="text/css"/>
+
+
+</head>
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">
+Embedded Log            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/category/blog.html">Blog</a></li>
+                    <li><a href="/ardublockly/index.html">Ardublockly</a></li>
+                    <li><a href="/LightUp-Alarm/index.html">LightUp Alarm</a></li>
+                    <li><a href="/PebbleQuickHue/index.html">Pebble QuickHue</a></li>
+                    <li><a href="/about/index.html">About</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
+</div> <!-- /.navbar -->
+<!-- Banner -->
+<style>
+	#banner{
+	    background-image:url("/images/banner.jpg");
+	}
+</style>
 
+<div id="banner">
+	<div class="container">
+		<div class="copy">
+			<h1>Embedded Log</h1>
+				<p class="intro">This is my subtitle</p>
+		</div>
+	</div>
+</div><!-- End Banner -->
+<div class="container container_body">
+    <div class="row">
+        <div class="col-sm-9">
+    <ol class="breadcrumb">
+        <li><a href="" title="Embedded Log"><i class="fa fa-home fa-lg"></i></a></li>
+        <li class="active">Ardublockly</li>
+    </ol>
+
+    <section id="content" class="body">
+        <h1 class="entry-title">Ardublockly</h1>
+        
+        <div class="entry-content">
+            <p>Ardublockly is a visual programming editor for Arduino. It is based on Google's <a href="https://developers.google.com/blockly/">Blockly</a>, which has been forked to generate <a href="http://www.arduino.cc/">Arduino</a> code.</p>
+<p>The "ArdublocklyServer" Python package initialises a local server to be able to compile and load the Arduino code using the <a href="http://arduino.cc/en/main/software/">Arduino IDE</a>.</p>
+<p>This is all packaged in a self contained executable:</p>
+<p><img alt="Ardublockly desktop program screenshot" src="http://carlosperate.github.io/ardublockly/images/screenshot_desktop_1.png" /></p>
+<h2>Features</h2>
+<ul>
+<li>Generate Arduino code with visual drag-and-drop blocks</li>
+<li>Load the code to an Arduino Board</li>
+<li>Useful "code block warnings"</li>
+<li>Compatible with a wide range of official Arduino Boards</li>
+<li>Runs on Windows / Linux / Mac OS X</li>
+</ul>
+<p>Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the <a href="TODO.md">TODO.md</a> file.</p>
+<p>Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7.</p>
+<h2>Online Demos</h2>
+<p>A demo of the current state of Ardublockly can be found in the following two links (to load the code into an Arduino requires Ardublockly to be executed locally):</p>
+<h4><a href="http://carlosperate.github.io/ardublockly/ardublockly/index.html">Ardublockly</a> (with responsive design)</h4>
+<p><img alt="WebApp screenshot responsive design" src="http://carlosperate.github.io/ardublockly/images/screenshot_material_all_small.jpg" /></p>
+<h4><a href="http://carlosperate.github.io/ardublockly/ardublockly/classic/index.html">Ardublockly classic</a></h4>
+<p><img alt="WebApp screenshot" src="http://carlosperate.github.io/ardublockly/images/screenshot_1.png" /></p>
+<h2>Installing</h2>
+<p>There is a packaged version for Windows that runs as a stand-alone executable and can be downloaded from the <a href="https://github.com/carlosperate/ardublockly/releases/">Ardublockly repository releases page</a>.</p>
+<p>Installation instructions for developers can be found in <a href="https://github.com/carlosperate/ardublockly/wiki/Installing-Ardublockly">this Github repository Wiki</a>. This will work on Windows, Linux and MacOS X.</p>
+<p>It also needs the <a href="http://arduino.cc/en/main/software">Arduino IDE version 1.6 or higher</a>.</p>
+<h2>Running</h2>
+<ol>
+<li><a href="https://github.com/carlosperate/ardublockly/wiki/Installing-Ardublockly">Install Ardublockly</a>.</li>
+<li>Install the <a href="http://arduino.cc/en/main/software/">Arduino IDE</a> version 1.6 or higher.</li>
+<li>Run Ardublockly as defined in your installation method.</li>
+<li>Configure Ardublockly to locate the Arduino IDE <a href="https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly">following these instructions</a>.</li>
+</ol>
+<h2>Documentation</h2>
+<p>The documentation, including installation instructions, configuration instructions, and developer information can be found in the <a href="https://github.com/carlosperate/ardublockly/wiki">Ardublockly GitHub repository Wiki</a>.</p>
+<p>To download the documentation you can git clone the wiki data:</p>
+<div class="highlight"><pre>git clone https://github.com/carlosperate/ardublockly.wiki.git
+</pre></div>
+
+
+<h2>Credit</h2>
+<p>This project has been influenced by BlocklyDuino.</p>
+<p>Blockly original source is Copyright of Google Inc. <a href="https://developers.google.com/blockly/">https://developers.google.com/blockly/</a></p>
+<h5>Significant changes to Blockly</h5>
+<p>Added Arduino code generator, static typing and additional code warnings.</p>
+<p>All changes to the original source code can be reviewed <a href="https://github.com/carlosperate/ardublockly/compare/blockly-original...master">here</a>.</p>
+<h2>License</h2>
+<p>Licensed under the Apache License, Version 2.0 (the "License").</p>
+<p>The full document can be found in the <a href="https://github.com/carlosperate/ardublockly/blob/master/LICENSE">LICENSE</a> file.</p>
+        </div>
+    </section>
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+
+<section class="well well-sm">
+    <ul class="list-group list-group-flush">
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+              <ul class="list-group" id="social">
+                <li class="list-group-item"><a href="https://github.com/carlosperate"><i class="fa fa-github-square fa-lg"></i> github</a></li>
+                <li class="list-group-item"><a href="https://twitter.com/carlosperate"><i class="fa fa-twitter-square fa-lg"></i> twitter</a></li>
+                <li class="list-group-item"><a href="https://plus.google.com/109111328639820363664"><i class="fa fa-google-plus-square fa-lg"></i> google+</a></li>
+              </ul>
+            </li>
+
+            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
+                <ul class="list-group" id="recentposts">
+                    <li class="list-group-item">
+                        <a href="/my-test-post-2.html">
+                            My second test title
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a href="/my-test-post.html">
+                            My test title
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
+                <ul class="list-group" id="categories">
+                    <li class="list-group-item">
+                        <a href="/category/blog.html">
+                            <i class="fa fa-folder-open fa-lg"></i> Blog
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="list-group-item"><a href="/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+                <ul class="list-group " id="tags">
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/test.html">
+                            test
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-1">
+                        <a href="/tag/github.html">
+                            github
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+    <li class="list-group-item"><h4><i class="fa fa-github fa-lg"></i><span class="icon-label">GitHub Repos</span></h4>
+        <div id="gh_repos">
+            <p class="list-group-item">Status updating...</p>
+        </div>
+            <a href="https://github.com/carlosperate">@carlosperate</a> on GitHub
+    </li>
+    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
+      <ul class="list-group" id="links">
+        <li class="list-group-item">
+            <a href="http://getpelican.com/" target="_blank">
+                Pelican
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://python.org/" target="_blank">
+                Python.org
+            </a>
+        </li>
+        <li class="list-group-item">
+            <a href="http://jinja.pocoo.org/" target="_blank">
+                Jinja2
+            </a>
+        </li>
+      </ul>
+    </li>
+    </ul>
+</section>
+            </aside>
+        </div>
+    </div>
+</div>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row container_footer">
+         <div class="col-xs-10">&copy; 2015 <a href="https://github.com/carlosperate" target="_blank">Carlos Perate</a>
+            &middot; Powered by 
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a> and 
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="/theme/js/respond.min.js"></script>
+
+    <script src="/theme/js/bodypadding.js"></script>
+    <!-- GitHub JS -->
     <script type="text/javascript">
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        $(document).ready(function () {
+            if (!window.jXHR) {
+                var jxhr = document.createElement('script');
+                jxhr.type = 'text/javascript';
+                jxhr.src = '/theme/js/jXHR.js';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(jxhr, s);
+            }
+
+            github.showRepos({
+                user: 'carlosperate',
+                count: 5,
+                skip_forks: true,
+                target: '#gh_repos'
+            });
+        });
     </script>
+    <script src="/theme/js/github.js" type="text/javascript"></script>
+    <!-- End GitHub JS Code -->
+    <!-- Google Analytics -->
     <script type="text/javascript">
-      try {
-        var pageTracker = _gat._getTracker("UA-58081399-1");
-        pageTracker._trackPageview();
-      } catch(err) {}
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-58081399-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
     </script>
-  </body>
+    <!-- End Google Analytics Code -->
+
+        <script type="text/javascript">
+            /** Changes the background image for that  */
+            window.addEventListener("load", function() {
+                // The banner.html adss the banner as an embedded css style, so this
+                // should not cause any conflicts, but replace the value in the DOM.
+                banner = document.getElementById("banner");
+                banner.style.backgroundImage = "url('/images/ardublockly/ardublockly_banner.png')";
+            });
+        </script>
+</body>
 </html>
