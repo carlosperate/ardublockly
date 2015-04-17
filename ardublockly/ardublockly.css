@@ -1,0 +1,543 @@
+body {
+  background-color: #eeeeee;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+/*********************/
+/*  Arduino Colours  */
+/*********************/
+.arduino_teal {
+  background-color: #00979C;
+}
+.arduino_teal_dark {
+  background-color: #00878F;
+}
+.arduino_teal_light {
+  background-color: #62AEB2;
+}
+.arduino_orange {
+  background-color: #E47128;
+}
+.arduino_yellow {
+  background-color: #E5AD24;
+}
+.arduino_brown {
+  background-color: #8C7965;
+}
+
+
+/********************/
+/*  Navigation bar  */
+/********************/
+.nav-fixed {
+  border-radius: 0;
+  position: inherit;
+  margin-bottom: 30px;
+  z-index: 997 !important;
+}
+@media only screen and (min-width : 993px) {
+  body {
+    padding-top: 100px;
+  }
+  .nav-fixed {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    margin-bottom: 0px;
+    z-index: 997;
+  }
+}
+
+/* Side nav Logo */
+ul.side-nav li.logo {
+  text-align: center;
+  margin: 0px !important;
+  padding: 0px 0px !important;
+  border: none !important;
+  height: 112px;
+  background-color: #eeeeee;
+}
+ul.side-nav li.logo:hover {
+  background-color: #eeeeee;
+}
+
+/************************************/
+/*  Blocks, arduino, and xml areas  */
+/************************************/
+.content {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+#blocks_panel {
+  padding: 0px;
+  position: relative!important;
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  border-radius: 4px !important;
+}
+
+#content_blocks {
+  margin: 0;
+  padding: 0;
+  min-height: 560px;
+  max-height: 560px;
+  background: none; 
+  /*height: -moz-calc(100hv - 200px);     /* Firefox  */
+  /*height: -webkit-calc(100hv - 200px);  /* WebKit   */
+  /*height: -o-calc(100hv - 200px);       /* Opera    */
+  /*height: calc(100hv - 200px);          /* Standard */
+}
+
+#content_xml {
+  resize: none;
+  outline: none;
+  border: none;
+  padding: 0px 5px;
+  font-family: monospace;
+  overflow: scroll;
+  font-style: 0.2em !important;
+  min-height: 468px;
+  max-height: 468px;
+  /*height: -moz-calc(100hv - 100px);     /* Firefox  */
+  /*height: -webkit-calc(100hv - 100px);  /* WebKit   */
+  /*height: -o-calc(100hv - 100px);       /* Opera    */
+  /*height: calc(100hv - 100px);          /* Standard */
+}
+
+/* The materialize framework changes height of the div to show or hide */
+/* the collapsible elements. */
+#content_arduino {
+  resize: none;
+  outline: none;
+  border: none;
+  padding: 0px 5px;
+  font-family: monospace;
+  overflow: scroll;
+  font-style: 0.2em !important;
+  min-height: 468px;
+  max-height: 468px;
+  /*height: -moz-calc(100hv - 100px);     /* Firefox  */
+  /*height: -webkit-calc(100hv - 100px);  /* WebKit   */
+  /*height: -o-calc(100hv - 100px);       /* Opera    */
+  /*height: calc(100hv - 100px);          /* Standard */
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+
+/*************/
+/*  Buttons  */
+/*************/
+#button_run {
+  position: absolute;
+  right: 25px;
+  top: -20px;
+}
+#button_run:hover {
+  background-color: #E5AD24;
+}
+.run_loader {
+  position: absolute !important;
+  right: 25px !important;
+  top: -20px !important;
+  width: 56px !important;
+  height: 56px !important; 
+  z-index: 5;
+}
+
+#button_load_xml {
+  position: absolute;
+  right: 30px;
+  bottom: 20px;
+  display: none;
+}
+
+.button_toggle_toolbox_on {
+  position: absolute;
+  margin: 0 !important;
+  padding: 0px !important;
+  left: 12px;
+  top: 9px;
+  text-align: center;
+  z-index: 5;
+  border-color: #e0e0e0 !important;
+  border-width: 1px !important;
+  -webkit-border-radius: 4px 4px 4px 4px !important;
+  -moz-border-radius: 4px 4px 4px 4px !important;
+  border-radius: 4px 4px 4px 4px !important;
+  background: rgba(98, 174, 178, .2) !important;  /* Arduino Light Teal */
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
+}
+.button_toggle_toolbox_off {
+  position: absolute;
+  margin: 0 !important;
+  padding: 0px !important;
+  left: 12px;
+  top: 9px;
+  text-align: center;
+  z-index: 5;
+}
+
+
+/************************/
+/*  Modals and content  */
+/************************/
+/* Sehttp://192.168.0.7:8000/ardublockly/apps/arduino_material/#ttings modal dialog */
+.settings_div {
+  margin: 24px 0px;
+  width: 100%;
+}
+
+/* Arduino output modal dialog */
+#arduino_dialog_body {
+  padding-top: 25px;
+}
+.arduino_dialog_out {}
+.arduino_dialog_out_error {
+  color: #E47128;   /* arduino orange */
+  padding-top: 25px;
+  display: block;
+}
+.arduino_dialog_success {
+  color: #00979C;   /* arduino light teal */
+}
+.arduino_dialog_failure {
+  color: #E47128;   /* arduino orange */
+}
+
+/* Footer buttons padding */
+.modal_right_button {
+  margin: 0px 0px 0px 48px !important;
+}
+
+/* Small modal responsive design */
+.modal_small {
+  height: 30% !important;
+  min-height: 200px;
+}
+@media only screen and (min-width: 0) {
+  .modal_small {
+    max-width: 75% !important;
+    width: 75% !important;
+  }
+}
+@media only screen and (min-width: 601px) {
+  .modal_small {
+    max-width: 55% !important;
+    width: 55% !important;
+  }
+}
+@media only screen and (min-width: 993px) {
+  .modal_small {
+    max-width: 35% !important;
+    width: 35% !important;
+  }
+}
+
+
+/*******************************/
+/*  Clean 50:50 same row divs  */
+/*******************************/
+.two_halves_container {
+  width: 100%; 
+  padding: 0;
+  margin: 0;
+}
+.two_halves_left {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 49%;
+  float: right;
+}
+.two_halves_right {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 50%;
+  float: right;
+}
+
+
+/*************************/
+/*  New spinner colours  */
+/*************************/
+.spinner-orange {
+  border-color: #E47128;
+}
+.active .spinner-layer.spinner-orange {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-dark-teal {
+  border-color: #00878F;
+}
+.active .spinner-layer.spinner-dark-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-yellow {
+  border-color: #E5AD24;
+}
+.active .spinner-layer.spinner-yellow {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-light-teal {
+  border-color: #62AEB2;
+}
+.active .spinner-layer.spinner-light-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-purple {
+  border-color: #8e24aa;
+}
+.active .spinner-layer.spinner-purple {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+
+/************/
+/*  Others  */
+/************/
+/* Edit logo for code and xml collapsibles*/
+.collapsible_logo {
+  width: 3rem;
+  font-size: 1.6rem;
+  line-height: 3rem;
+  font-weight: bold;
+  display: block;
+  float: left;
+  text-align: center;
+  margin-right: 1rem;
+}
+
+
+/*****************************/
+/*  Overwriting Blockly CSS  */
+/*****************************/
+/* Blockly text for the following components:  */
+.blocklyTreeLabel,           /* Toolbox        */
+.blocklyText,                /* Block          */
+.goog-menuitem-content {     /* Drop down menu */
+  font-family: "Roboto", sans-serif!important;
+}
+
+/* Entire Blockly area, Toolbox dranw on top */
+.blocklySvg {
+  border-width: none !important;
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  border-radius: 4px !important;
+}
+
+/* Toolbox */
+.blocklyToolboxDiv {
+  border-color: #e0e0e0 !important;
+  border-width: 0px 1px 0px 0px !important;
+  -webkit-border-radius: 4px 0px 0px 4px !important;
+  -moz-border-radius: 4px 0px 0px 4px !important;
+  border-radius: 4px 0px 0px 4px !important;
+  border: none !important;
+  margin: 0px !important;
+  padding: 0px 0px 0px 0px !important;
+  background: rgba(98, 174, 178, .2) !important;  /* Arduino Light Teal */
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.blocklyTreeRoot {
+  background: none !important;
+  border: none !important;
+  margin: 33px 0px 0px 0px !important;
+  padding: 5px 1px !important;
+  /* Vertical centre
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);*/
+}
+.blocklyTreeRow {
+  background: none !important;
+  border: none !important;
+  margin: 0px 0px !important;
+  padding: 8px 16px 8px 0px !important;
+  box-sizing: content-box !important;
+  /* line-height: 0.5rem !important;
+  vertical-align: middle !important;*/
+}
+.blocklyTreeSelected {
+  background-color: #E47128 !important;  /* arduino orange */
+}
+.blocklyTreeRow:not(.blocklyTreeSelected):hover {
+  background-color: #E5AD24 !important;  /* arduino yellow */
+}
+.blocklyTreeLabel {
+}
+.blocklyTreeSeparator{
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+/* Toolbox second column with blocks*/
+.blocklyFlyoutBackground {
+  fill: #DEEEEF !important;
+  fill-opacity: 0.7 !important;
+  -webkit-border-radius: 0px 4px 4px 0px !important;
+  -moz-border-radius: 0px 4px 4px 0px !important;
+  border-radius: 0px 4px 4px 0px !important;
+}
+
+/* Blockly scrollbars */
+.blocklyScrollbarKnob {
+  fill: #00878F !important;
+  fill-opacity: 0.7 !important;
+}
+.blocklyScrollbarBackground {
+  stroke-width: 0px !important;
+}
+
+
+/*********************************/
+/*  Overwriting Materialize CSS  */
+/*********************************/
+/* Modify container to have a larger width in all resolutions */
+.container {
+  max-width: 1650px !important;
+  width: 100% !important;
+}
+@media only screen and (min-width : 601px) {
+  .container {
+    width: 95% !important;
+  }
+}
+@media only screen and (min-width : 993px) {
+  .container {
+    width: 90% !important;
+  }
+}
+
+/* Maximize horizontal space for mobile */
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+  body {
+    padding-top: 0px;
+  }
+  /* Expand to all visible horizontal space */
+  .container {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  nav {
+    margin: 0 !important;
+    padding: 0px 12px !important;
+  }
+  /* remove space between cards and navigation bar */
+  .col {
+    margin-top: -8px;
+  }
+}
+
+/* Increase the text size of the side menu */
+ul.side-nav {
+  padding: 0px !important;
+  line-height: 64px !important;
+}
+ul.side-nav i {
+  font-size: 1.8rem !important;
+}
+ul.side-nav .collapsible {
+  margin: 0 !important;
+}
+/* Set the background effect in the side menu */
+ul.side-nav {
+  background-color: #eeeeee;
+}
+ul.side-nav li ul{
+  background-color: #eeeeee;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-right: 3px solid #dddddd;
+  border-left: 3px solid #ffffff;
+}
+ul.side-nav li ul li{
+  cursor: pointer;
+}
+
+/* Add extra margin to the side menu button*/
+.button-collapse {
+  margin-right: 16px;
+}
+
+/* button-collapse with show-on-large does not work in IE */
+@media only screen and (min-width : 993px) {
+  .button-collapse {
+    display: block !important;
+  }
+}
+
+/* Increase the size of Materialize Modal in small res */
+@media only screen and (max-width : 600px) {
+  .modal {
+    width: 80% !important;
+    max-width: 80% !important;
+  }
+}
+
+/* Need larger icons in buttons */
+.mdi-action-visibility {
+  font-size: 1.5rem !important;
+}
+.mdi-action-visibility-off {
+  font-size: 1.5rem !important;
+}
+#button_run .mdi-av-play-arrow {
+  font-size: 2.5rem !important;
+}
+#button_load_xml .mdi-action-extension {
+  font-size: 2rem !important;
+}
+
+/* Button needs to be at a higher z index than */
+/* card when floating and lower when clicked.  */
+#button_run:hover {
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#button_run:active {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Circle clipper (loading animation) thickness */
+.circle-clipper .circle {
+    border-width: 4px !important;
+  }
+}

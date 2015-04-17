@@ -1,0 +1,317 @@
+/* General HTML */
+html {
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100%;
+  overflow: hidden;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+a:hover {
+  color: #f00;
+}
+
+/* Table */
+.table_wrapper {
+  height: -moz-calc(100%);
+  width: -moz-calc(100%);
+  /* WebKit */
+  height: -webkit-calc(100%);
+  width: -webkit-calc(100%);
+  /* Opera */
+  height: -o-calc(100%);
+  width: -o-calc(100%);
+  /* Standard */
+  height: calc(100%);
+  width: calc(100%);
+  padding: 20px;
+}
+table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: relative;
+  /* Firefox */
+  height: -moz-calc(100% - 40px);
+  width: -moz-calc(100% - 40px);
+  /* WebKit */
+  height: -webkit-calc(100% - 40px);
+  width: -webkit-calc(100% - 40px);
+  /* Opera */
+  height: -o-calc(100% - 40px);
+  width: -o-calc(100% - 40px);
+  /* Standard */
+  height: calc(100% - 40px);
+  width: calc(100% - 40px);
+}
+table table {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+td {
+  padding: 0;
+  vertical-align: top;
+}
+td.td_wrapper {
+  border: none;
+  height: 100%;
+}
+
+/* Tabs */
+#tabRow>td {
+  border-width: 1px 1px 0px 1px;
+  border-color: #ccc;
+  border-style: solid;
+}
+td.tabon {
+  border-bottom-color: #ddd !important;
+  background-color: #ddd;
+  padding: 5px 19px;
+  vertical-align: middle;
+}
+td.taboff {
+  cursor: pointer;
+  padding: 5px 19px;
+  vertical-align: middle;
+}
+td.taboff:hover {
+  background-color: #eee;
+}
+td.tabmin {
+  border-top-style: none !important;
+  border-left-style: none !important;
+  border-right-style: none !important;
+}
+td.tabmax {
+  border-top-style: none !important;
+  border-left-style: none !important;
+  border-right-style: none !important;
+  width: 99%;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: right;
+}
+
+/* Content blocks */
+.content_wrapper {
+  /* Firefox */
+  height: -moz-calc(100% - 50px);
+  /* WebKit */
+  height: -webkit-calc(100% - 50px);
+  /* Opera */
+  height: -o-calc(100% - 50px);
+  /* Standard */
+  height: calc(100% - 50px);
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-color: #ddd;
+  background-color: #eee;
+  position: absolute;
+  overflow: hidden;
+  display: block;
+}
+.content {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  direction: ltr;
+  display: none;
+}
+.content_arduino,
+.content_xml {
+  resize: none;
+  outline: none;
+  border: none;
+  font-family: monospace;
+  overflow: scroll;
+}
+.content_blocks{
+  width: 100% !important;
+  overflow: hidden;
+}
+.content_blocks_side {
+  /* Firefox */
+  width: -moz-calc(100% - 350px) !important;
+  /* WebKit */
+  width: -webkit-calc(100% - 350px) !important;
+  /* Opera */
+  width: -o-calc(100% - 350px) !important;
+  /* Standard */
+  width: calc(100% - 350px) !important;
+  overflow: hidden;
+  float: left;
+}
+.side_content {
+  width: 350px;
+  height: 100%;
+  right: 0px;
+  bottom: 0px;
+  float: right;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background-color: #eee;
+  overflow: scroll !important;
+  display: none;
+}
+.arduino_code_peek {
+  height: 100%;
+}
+.arduino_pre {
+  border: 0;
+  padding: 0px 5px;
+  overflow: visible;
+  white-space: pre !important;
+}
+.blocklySvg {
+  border-top: none !important;
+}
+
+/* Buttons */
+button {
+  padding: 5px;
+  margin: 5px 5px 5px 0px;
+  border-radius: 20px;
+  border: 3px solid rgb(221, 221, 221);
+  background-color: #eee;
+  color: #000;
+  outline: none;
+}
+button.primary {
+  border: 3px solid #dd4b39;
+  background-color: #dd4b39;
+  color: #fff;
+}
+button.secondary {
+  border: 3px solid #4d90fe;
+  background-color: #4d90fe;
+  color: #fff;
+}
+button.primary>img,
+button.secondary>img {
+  opacity: 1;
+}
+button>img {
+  opacity: 0.6;
+  vertical-align: text-bottom;
+}
+button:hover>img {
+  opacity: 1;
+}
+button:active {
+  border: 3px solid #888 !important;
+}
+button:hover {
+  box-shadow: 0px 2px 5px #888;
+}
+button.disabled:hover>img {
+  opacity: 0.6;
+}
+button.disabled {
+  display: none;
+}
+
+/* Sprited icons. */
+.icon21 {
+  height: 21px;
+  width: 21px;
+  background-image: url(icons.png);
+}
+img.trash {
+  background-position: 0px 0px;
+}
+img.link {
+  background-position: -21px 0px;
+}
+img.run {
+  background-position: -42px 0px;
+}
+img.settings {
+  background-position: -63px 0px;
+}
+img.save {
+  background-position: -84px 0px;
+}
+img.load{
+  background-position: -105px 0px;
+}
+.button_text {
+  font-size: large;
+}
+.button_text>img {
+  height: 21px;
+  width: 1px;
+}
+
+/* Modal */
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  padding: 20px;
+  min-width: 350px;
+  max-width: 800px;
+  width: 50%;
+  min-height: 150px;
+  max-height: 800px;
+  height: 50%;
+  overflow: scroll;
+  word-wrap: break-word;
+  overflow-x: hidden;
+  background: rgba(235,235,235,0.9);
+  -webkit-box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+  box-shadow: 3px 3px 3px rgba(0,0,0,0.1);
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-transition: opacity 1s ease;
+  -moz-transition: opacity 1s ease;
+  -ms-transition: opacity 1s ease;
+  -o-transition: opacity 1s ease;
+  transition: opacity 1s ease;
+  z-index: 0;
+  display: none;
+}
+.modal h4 {
+  margin: 5px 0px;
+  color: #232323;
+  text-transform: uppercase;
+  font: 25px/1.5 Helvetica, Verdana, sans-serif;
+}
+.modal p {
+  color: #444;
+  text-align: left;
+  font: 13px/1.8 Georgia, Times, sans-serif;
+}
+input#modal_toggle {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+input#modal_toggle:checked + .modal {
+  opacity: 1;
+  z-index: 1;
+  display: inline;
+}

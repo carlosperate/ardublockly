@@ -1,0 +1,38 @@
+<xml>
+  <block type="io_builtin_led" id="131" inline="true" x="6" y="88">
+    <field name="BUILT_IN_LED">13</field>
+    <value name="STATE">
+      <block type="io_highlow" id="132">
+        <field name="STATE">HIGH</field>
+      </block>
+    </value>
+    <next>
+      <block type="time_delay" id="139" inline="true">
+        <value name="DELAY_TIME_MILI">
+          <block type="math_number" id="140">
+            <field name="NUM">1000</field>
+          </block>
+        </value>
+        <next>
+          <block type="io_builtin_led" id="162" inline="true">
+            <field name="BUILT_IN_LED">13</field>
+            <value name="STATE">
+              <block type="io_highlow" id="163">
+                <field name="STATE">HIGH</field>
+              </block>
+            </value>
+            <next>
+              <block type="time_delay" id="160" inline="true">
+                <value name="DELAY_TIME_MILI">
+                  <block type="math_number" id="161">
+                    <field name="NUM">1000</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
