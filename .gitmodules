@@ -1,3 +1,6 @@
 [submodule "closure-library"]
 	path = closure-library
 	url = https://github.com/google/closure-library.git
+[submodule "package/ardublocklydocs/ardublockly.wiki"]
+	path = package/ardublocklydocs/ardublockly.wiki
+	url = https://github.com/carlosperate/ardublockly.wiki.git

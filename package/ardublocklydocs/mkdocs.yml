@@ -1,0 +1,15 @@
+site_name: 'Ardublockly Documentation'
+
+docs_dir: 'ardublockly.wiki'
+
+theme: 'readthedocs'
+
+# It is IMPERATIVE to leave this property to the end without anything after it.
+# This is because the build file will delete everything after this line and
+# replace it with newly generated data. 
+pages:
+- ['Compiler-Settings.md', 'Compiler Settings']
+- ['Configure-Ardublockly.md', 'Configure Ardublockly']
+- ['Git-settings.md', 'Git settings']
+- ['Home.md', 'Home']
+- ['Installing-Ardublockly.md', 'Installing Ardublockly']
