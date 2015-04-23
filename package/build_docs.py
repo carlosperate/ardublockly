@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*- #
 #
-# Builds the GitHub Wiki documentation into static HTML. 
+# Builds the GitHub Wiki documentation into a static HTML site.
 #
 # Copyright (c) 2015 carlosperate https://github.com/carlosperate/
 #
@@ -22,20 +22,21 @@
 #    Edits the MkDocs configuration file to include all the markdown files
 #    Creates an index.html file to have root redirected to a specific page
 #    Builds the static site using MkDocs
+#    REMOVES the root Documentation folder
+#    Copies the generate content into the root Documentation folder
 #
 from __future__ import unicode_literals, absolute_import
 import os
 import sys
-import fileinput
+import shutil
 import subprocess
-from shutil import move
 from tempfile import mkstemp
 
 # mkdocs used only in the command line, imported just to ensure it's installed
 try:
     import mkdocs
 except ImportError:
-    print("You need to have mkdocs installed!")
+    print("You need to have mkdocs installed !")
     sys.exit(1)
 
 
@@ -53,22 +54,49 @@ DEFAULT_INDEX = 'Home'
 
 
 def pull_wiki_repo():
-    """ Pulls latest changes from wiki repo. """
+    """
+    Pulls latest changes from the wiki repo.
+    :return: Boolean indicating if the operation was successful.
+    """
+    # Ensure the submodule is initialised
+    pipe = subprocess.PIPE
+    git_process = subprocess.Popen(
+        ["git", "submodule", "update"], stdout=pipe, stderr=pipe)
+    std_op, std_err_op = git_process.communicate()
+    if std_err_op:
+        print("ERROR: Could not update git submodule !\n%s" + std_err_op)
+        return False
+
     # Set working directory to the wiki repository
     wiki_folder = os.path.join(MKDOCS_DIR, WIKI_NAME)
-    os.chdir(wiki_folder)
-
-    # Ensure the subfolder selected in the correct repo
-    PIPE = subprocess.PIPE
-    git_process = subprocess.Popen(["git", "config", "--get", "remote.origin.url"],
-                                    stdout=PIPE, stderr=PIPE)
-    std_op, std_err_op = git_process.communicate()
-    if not GITHUB_WIKI_REPO_SHORT in std_op:
-        print("Wiki repository:\n\t%s\nnot found in url:\n\t%s" %
-              (GITHUB_WIKI_REPO_SHORT, std_op))
+    if os.path.isdir(wiki_folder):
+        os.chdir(wiki_folder)
     else:
-        subprocess.call(["git", "submodule", "update"])
-        subprocess.call(["git", "pull", "origin", "master"])
+        print("ERROR: Wiki repo directory is not correct: %s" % wiki_folder)
+        return False
+
+    # Ensure the subfolder selected is the correct repository
+    git_process = subprocess.Popen(
+        ["git", "config", "--get", "remote.origin.url"],
+        stdout=pipe, stderr=pipe)
+    std_op, std_err_op = git_process.communicate()
+
+    if std_err_op:
+        print("ERROR: Could not get the remote information from the wiki "
+              "repository !\n%s" + std_err_op)
+        return False
+
+    if not GITHUB_WIKI_REPO_SHORT in std_op:
+        print(("ERROR: Wiki repository:\n\t%s\n" % GITHUB_WIKI_REPO_SHORT) +
+              "not found in directory %s url:\n\t%s\n" % (wiki_folder, std_op))
+        return False
+
+    # Git Fetch prints progress in stderr, so cannot check for erros that way
+    print("\nPull from Wiki repository...")
+    subprocess.call(["git", "pull", "origin", "master"])
+    print("")
+
+    return True
 
 
 def edit_mkdocs_config():
@@ -77,16 +105,27 @@ def edit_mkdocs_config():
     files as part of the documentation.
     These files are created by default with the '.md' extension and it is 
     assumed no other file extensions are to be linked.
+    :return: Boolean indicating the success of the operation.
     """
     path_list = []
     for file in os.listdir(os.path.join(MKDOCS_DIR, WIKI_NAME)):
         if file.endswith(".md"):
-            path_list.append("- ['%s', '%s']" % (file, file[:-3].replace("-", " ")))
+            path_list.append("- ['%s', '%s']" %
+                             (file, file[:-3].replace("-", " ")))
+    if not path_list:
+        print(("ERROR: No markdown files found in %s ! " % MKDOCS_DIR) +
+              "Check if repository has been set up correctly.")
+        return False
+
     pages_str = "pages:\n" + "\n".join(path_list) + "\n"
-    print pages_str
 
     # Replace the pages data, strategically located at the end of the file
     mkdocs_yml = os.path.join(MKDOCS_DIR, "mkdocs.yml")
+    if not os.path.exists(mkdocs_yml):
+        print("ERROR: The MkDocs config file %s does not exist !" % mkdocs_yml)
+        return False
+
+    # Copy config file until the pages line, strategically located at the end
     temp_file_handler, temp_abs_path = mkstemp()
     with open(temp_abs_path, 'w') as temp_file:
         with open(mkdocs_yml) as original_file:
@@ -94,55 +133,142 @@ def edit_mkdocs_config():
                 if not "pages:" in line:
                     temp_file.write(line)
                 else:
+                    print("Replacing 'pages' property found in mkdocs.yml ...")
                     break
+            else:
+                print("Did not find the 'pages' property in mkdocs.yml.\n" +
+                      "Attaching the property at the end of the file.")
             temp_file.write(pages_str)
+            print(pages_str)
 
     # Remove original file and move the new temp to replace it
     os.close(temp_file_handler)
-    os.remove(mkdocs_yml)
-    move(temp_abs_path, mkdocs_yml)
+    try:
+        os.remove(mkdocs_yml)
+    except IOError:
+        print("ERROR: Could not delete original config file %s !" % mkdocs_yml)
+        return False
+    try:
+        shutil.move(temp_abs_path, mkdocs_yml)
+    except shutil.Error:
+        print("ERROR: Could move new config file to %s !" % mkdocs_yml)
+        return False
+
+    return True
 
 
 def create_index():
-    """ Creates an HTML index page to redirect to an MkDocs generated page. """
+    """
+    Creates an HTML index page to redirect to an MkDocs generated page.
+    :return: Boolean indicating the success of the operation.
+    """
     html_code = \
-        "<!DOCTYPE HTML>\n" +\
-        "<html>\n" +\
-        "\t<head>\n" +\
-        "\t\t<meta charset=\"UTF-8\">\n" +\
-        "\t\t<meta http-equiv=\"refresh\" content=\"1;url=%s/index.html\">\n"\
-            % DEFAULT_INDEX  +\
-        "\t\t<script type=\"text/javascript\">\n" +\
+        "<!DOCTYPE HTML>\n " \
+        "<html>\n" \
+        "\t<head>\n" \
+        "\t\t<meta charset=\"UTF-8\">\n" \
+        "\t\t<meta http-equiv=\"refresh\" content=\"1;url=%s/index.html\">\n" \
+        % DEFAULT_INDEX + \
+        "\t\t<script type=\"text/javascript\">\n" \
         "\t\t\twindow.location.href = \"%s/index.html\"\n" % DEFAULT_INDEX +\
-        "\t\t</script>\n" +\
-        "\t</head>\n" +\
-        "\t<body>\n" +\
-        "\t\tIf you are not redirected automatically to the " +\
+        "\t\t</script>\n" \
+        "\t</head>\n" \
+        "\t<body>\n" \
+        "\t\tIf you are not redirected automatically to the " \
         "%s page, follow this <a href=\"%s/index.html\">link</a>\n"\
-            % (DEFAULT_INDEX, DEFAULT_INDEX) +\
-        "\t</body>\n" +\
+        % (DEFAULT_INDEX, DEFAULT_INDEX) + \
+        "\t</body>\n" \
         "</html>\n"
 
-    generated_site_dir = os.path.join(MKDOCS_DIR, "site", "index.html")
-    index_file = open(generated_site_dir, "w")
-    index_file.write(html_code)
-    index_file.close()
+    print("Creating the index.html file...\n")
+    generated_site_dir = os.path.join(MKDOCS_DIR, "site")
+    if not os.path.exists(generated_site_dir):
+        try:
+            os.makedirs(generated_site_dir)
+        except IOError:
+            print("ERROR: Could not create site folder in %s !\n" %
+                  generated_site_dir)
+            return False
+    try:
+        index_file = open(os.path.join(generated_site_dir, "index.html"), "w")
+        index_file.write(html_code)
+        index_file.close()
+        return True
+    except IOError:
+        print("ERROR: Could not create index.html file in %s !\n" %
+              generated_site_dir)
+        return False
 
 
 def build_mkdocs():
-    """ Invokes MkDocs to build the static documentation. """
-    os.chdir(MKDOCS_DIR)
-    subprocess.call(["mkdocs", "build"])
+    """
+    Invokes MkDocs to build the static documentation and moves the folder
+    into the project root folder.
+    :return: Boolean indicating the success of the operation.
+    """
+    # Setting the working directory
+    if os.path.isdir(MKDOCS_DIR):
+        os.chdir(MKDOCS_DIR)
+    else:
+        print("ERROR: MkDocs directory is not correct: %s" % MKDOCS_DIR)
+        return False
+
+    # Building the MkDocs project
+    pipe = subprocess.PIPE
+    mkdocs_process = subprocess.Popen(
+        ["mkdocs", "build"], stdout=pipe, stderr=pipe)
+    std_op, std_err_op = mkdocs_process.communicate()
+
+    if std_err_op:
+        print("ERROR: Could not build MkDocs !\n%s" %
+              std_err_op)
+        return False
+    else:
+        print(std_op)
+
+    # Remove root Documentation folder and copy the new site files into it
+    generated_site_dir = os.path.join(MKDOCS_DIR, "site")
+    root_documentation_dir = os.path.join(
+            os.path.dirname(THIS_FILE_DIR), "documentation")
+    print("Copy folder %s into %s ...\n" %
+          (generated_site_dir, root_documentation_dir))
+
+    if os.path.exists(root_documentation_dir):
+        try:
+            shutil.rmtree(root_documentation_dir)
+        except shutil.Error:
+            print("ERROR: Could not remove root documentation folder !")
+            return False
+    try:
+        shutil.move(generated_site_dir, root_documentation_dir)
+    except shutil.Error:
+        print("ERROR: Could move new documentation files from " +
+              "%s to %s !" % (generated_site_dir, root_documentation_dir))
+        return False
+
+    return True
 
 
 def build_docs():
-    """ Builds the documentation HTML pages from the wiki repository. """
-    pull_wiki_repo()
-    edit_mkdocs_config()
+    """ Builds the documentation HTML pages from the Wiki repository. """
+    success = pull_wiki_repo()
+    if success is False:
+        sys.exit(1)
+
+    success = edit_mkdocs_config()
+    if success is False:
+        sys.exit(1)
+
     # Create index.html before the MkDocs site is created in case the project
     # already contains an index file.
-    create_index()
-    build_mkdocs()
+    success = create_index()
+    if success is False:
+        sys.exit(1)
+
+    success = build_mkdocs()
+    if success is False:
+        sys.exit(1)
+    print("Build process finished!")
 
 
 if __name__ == "__main__":
