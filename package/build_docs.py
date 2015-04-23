@@ -43,8 +43,7 @@ except ImportError:
 # Path data
 GITHUB_USER = "carlosperate"
 WIKI_NAME = "ardublockly.wiki"
-GITHUB_WIKI_REPO_SHORT = "github.com/%s/%s.git" % (GITHUB_USER, WIKI_NAME)
-GITHUB_WIKI_REPO = "https://www." + GITHUB_WIKI_REPO_SHORT
+GITHUB_WIKI_REPO = "github.com/%s/%s.git" % (GITHUB_USER, WIKI_NAME)
 
 MKDOCS_FOLDER = "ardublocklydocs"
 THIS_FILE_DIR = os.path.dirname(os.path.realpath(__file__))
@@ -58,15 +57,6 @@ def pull_wiki_repo():
     Pulls latest changes from the wiki repo.
     :return: Boolean indicating if the operation was successful.
     """
-    # Ensure the submodule is initialised
-    pipe = subprocess.PIPE
-    git_process = subprocess.Popen(
-        ["git", "submodule", "update"], stdout=pipe, stderr=pipe)
-    std_op, std_err_op = git_process.communicate()
-    if std_err_op:
-        print("ERROR: Could not update git submodule !\n%s" + std_err_op)
-        return False
-
     # Set working directory to the wiki repository
     wiki_folder = os.path.join(MKDOCS_DIR, WIKI_NAME)
     if os.path.isdir(wiki_folder):
@@ -75,7 +65,12 @@ def pull_wiki_repo():
         print("ERROR: Wiki repo directory is not correct: %s" % wiki_folder)
         return False
 
+    # Ensure the submodule is initialised, progress is printed to stderr so just
+    # call subprocess with all data sent to console and error check later
+    subprocess.call(["git", "submodule", "update", "--init", "--recursive"])
+
     # Ensure the subfolder selected is the correct repository
+    pipe = subprocess.PIPE
     git_process = subprocess.Popen(
         ["git", "config", "--get", "remote.origin.url"],
         stdout=pipe, stderr=pipe)
@@ -86,8 +81,8 @@ def pull_wiki_repo():
               "repository !\n%s" + std_err_op)
         return False
 
-    if not GITHUB_WIKI_REPO_SHORT in std_op:
-        print(("ERROR: Wiki repository:\n\t%s\n" % GITHUB_WIKI_REPO_SHORT) +
+    if not GITHUB_WIKI_REPO in std_op:
+        print(("ERROR: Wiki repository:\n\t%s\n" % GITHUB_WIKI_REPO) +
               "not found in directory %s url:\n\t%s\n" % (wiki_folder, std_op))
         return False
 
