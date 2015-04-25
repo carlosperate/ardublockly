@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
->
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
 <head>
     <title>Ardublockly - Embedded Log</title>
     <!-- Using the latest rendering mode for IE -->
@@ -12,14 +13,14 @@
 
 <link rel="canonical" href="http://www.embeddedlog.com/ardublockly/index.html">
 
-        <meta name="author" content="Carlos Perate" />
-        <meta name="description" content="Ardublockly is a visual programming editor for Arduino. It is based on Google&#39;s Blockly, which has been forked to generate Arduino code. The &#34;ArdublocklyServer&#34; Python package initialises a local server to be able to compile and load the Arduino code using the Arduino IDE. This is all packaged in a self contained executable: Features Generate Arduino code with visual drag-and-drop blocks Load the code to an Arduino Board Useful &#34;code block warnings&#34; Compatible with a wide range of official Arduino Boards Runs on Windows / Linux / Mac OS X Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the TODO.md file. Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7. Online Demos A demo of the current state of Ardublockly can be found in the following ..." />
+        <meta name="author" content="carlosperate" />
+        <meta name="description" content="Ardublockly is a visual programming editor for Arduino. It is based on Google&#39;s Blockly, which has been forked to generate Arduino code. The &#34;ArdublocklyServer&#34; Python package initialises a local server to be able to compile and load the Arduino code using the Arduino IDE. This is all packaged in ..." />
 
     <meta property="og:site_name" content="Embedded Log" />
     <meta property="og:type" content="article"/>
     <meta property="og:title" content="Ardublockly"/>
     <meta property="og:url" content="http://www.embeddedlog.com/ardublockly/index.html"/>
-    <meta property="og:description" content="Ardublockly is a visual programming editor for Arduino. It is based on Google&#39;s Blockly, which has been forked to generate Arduino code. The &#34;ArdublocklyServer&#34; Python package initialises a local server to be able to compile and load the Arduino code using the Arduino IDE. This is all packaged in a self contained executable: Features Generate Arduino code with visual drag-and-drop blocks Load the code to an Arduino Board Useful &#34;code block warnings&#34; Compatible with a wide range of official Arduino Boards Runs on Windows / Linux / Mac OS X Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the TODO.md file. Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7. Online Demos A demo of the current state of Ardublockly can be found in the following ..." />
+    <meta property="og:description" content="Ardublockly is a visual programming editor for Arduino. It is based on Google&#39;s Blockly, which has been forked to generate Arduino code. The &#34;ArdublocklyServer&#34; Python package initialises a local server to be able to compile and load the Arduino code using the Arduino IDE. This is all packaged in ..." />
 
 
     <!-- Bootstrap -->
@@ -28,13 +29,14 @@
 
     <link href="http://www.embeddedlog.com/theme/css/pygments/native.css" rel="stylesheet">
     <link rel="stylesheet" href="http://www.embeddedlog.com/theme/css/style.css" type="text/css"/>
+        <link href="http://www.embeddedlog.com/theme/css/shariff/shariff.min.css" rel="stylesheet">
 
 
 </head>
 <body>
 
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
+    <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -47,11 +49,22 @@ Embedded Log            </a>
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                    <li><a href="/category/blog.html">Blog</a></li>
-                    <li><a href="/ardublockly/index.html">Ardublockly</a></li>
-                    <li><a href="/LightUp-Alarm/index.html">LightUp Alarm</a></li>
-                    <li><a href="/PebbleQuickHue/index.html">Pebble QuickHue</a></li>
-                    <li><a href="/about/index.html">About</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="active"><a href="http://www.embeddedlog.com/ardublockly/index.html">
+                             Ardublockly
+                            </a></li>
+                            <li><a href="http://www.embeddedlog.com/LightUpPi-Alarm/index.html">
+                             LightUp Alarm
+                            </a></li>
+                            <li><a href="http://www.embeddedlog.com/PebbleQuickHue/index.html">
+                             QuickHue for Pebble
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li><a href="http://www.embeddedlog.com/category/blog.html">Blog</a></li>
+                    <li><a href="http://www.embeddedlog.com/about/index.html">About</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li><a href="http://www.embeddedlog.com/archives.html"><i class="fa fa-th-list"></i><span class="icon-label">Archives</span></a></li>
@@ -62,18 +75,111 @@ Embedded Log            </a>
 </div> <!-- /.navbar -->
 <!-- Banner -->
 <style>
-	#banner{
-	    background-image:url("http://www.embeddedlog.com/images/banner.jpg");
-	}
+    #banner{
+        background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0)
+        ),
+        url("http://www.embeddedlog.com/images/banner.jpg");
+    }
+    .carousel-one{
+        background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0)
+        ),
+        url("http://www.embeddedlog.com/images/banners/ardublockly_banner.png");
+    }
+    .carousel-two{
+        background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0)
+        ),
+        url("http://www.embeddedlog.com/images/banners/default_banner.jpg");
+    }
+    .carousel-three{
+        background-image:
+        linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0)
+        ),
+        url("http://www.embeddedlog.com/images/banners/quickhue_banner.png");
+    }
 </style>
 
 <div id="banner">
-	<div class="container">
-		<div class="copy">
-			<h1>Embedded Log</h1>
-				<p class="intro">This is my subtitle</p>
-		</div>
-	</div>
+    <div id="carousel-projects" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators" id="carousel-indicators">
+            <li data-target="#carousel-projects" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-projects" data-slide-to="1"></li>
+            <li data-target="#carousel-projects" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active carousel-base carousel-one">
+                <div class="carousel-content">
+                    <div class="table_div">
+                        <div class="table_row_text">
+                            <a href="http://www.embeddedlog.com/ardublockly/index.html"><h2>Ardublockly</h2>
+                            Visual Programming for Arduino</a>
+                        </div>
+                        <div class="table_row_buttons">
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/ardublockly/releases"><span class="fa fa-windows"></span>Download for Windows</a>
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/ardublockly"><span class="fa fa-github"></span>View on GitHub</a>
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/ardublockly/archive/master.zip"><span class="fa fa-file-zip-o"></span>Download Source code</a>
+                        </div>
+                        <div class="table_row_text carousel-indicators-placeholder">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+            <div class="item carousel-base carousel-two">
+                <div class="carousel-content">
+                    <div class="table_div">
+                        <div class="table_row_text">
+                            <a href="http://www.embeddedlog.com/LightUp-Alarm/index.html"><h2>LightUp Alarm</h2>
+                            Raspberry Pi Alarm Clock with sunrise light, coffee machine control, physical snooze button, and Android companion app</a>
+                        </div>
+                        <div class="table_row_buttons">
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/LightUpPi-Alarm/archive/master.zip"><span class="fa fa-linux"></span>Raspberry Pi Software</a>
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/LightUpPi-Alarm/releases"><span class="fa fa-android"></span>Android App</a>
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/LightUpPi-Alarm"><span class="fa fa-github"></span>View on GitHub</a>
+                        </div>
+                        <div class="table_row_text carousel-indicators-placeholder">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+            <div class="item carousel-base carousel-three">
+                <div class="carousel-content">
+                    <div class="table_div">
+                        <div class="table_row_text">
+                            <a href="http://www.embeddedlog.com/PebbleQuickHue/index.html"><h2>QuickHue for Pebble</h2>
+                            Hue Lights control from a Pebble smarthphone</a>
+                        </div>
+                        <div class="table_row_buttons">
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/PebbleQuickHue/raw/master/bin/QuickHue.pbw"><span class="fa fa-clock-o"></span>Download for Pebble</a>
+                            <a class="btn btn-primary" href="https://github.com/carlosperate/PebbleQuickHue"><span class="fa fa-github"></span>View on GitHub</a>
+                            <a  class="btn btn-primary" href="https://github.com/carlosperate/PebbleQuickHue/archive/master.zip"><span class="fa fa-file-zip-o"></span>Download Source code</a>
+                        </div>
+                        <div class="table_row_text carousel-indicators-placeholder">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-projects" role="button" data-slide="prev" id="carousel-control-prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-projects" role="button" data-slide="next" id="carousel-control-next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 </div><!-- End Banner -->
 <div class="container container_body">
     <div class="row">
@@ -84,8 +190,10 @@ Embedded Log            </a>
     </ol>
 
     <section id="content" class="body">
+        <header class="page-header">
         <h1 class="entry-title">Ardublockly</h1>
-        
+            
+        </header>
         <div class="entry-content">
             <p>Ardublockly is a visual programming editor for Arduino. It is based on Google's <a href="https://developers.google.com/blockly/">Blockly</a>, which has been forked to generate <a href="http://www.arduino.cc/">Arduino</a> code.</p>
 <p>The "ArdublocklyServer" Python package initialises a local server to be able to compile and load the Arduino code using the <a href="http://arduino.cc/en/main/software/">Arduino IDE</a>.</p>
@@ -142,7 +250,7 @@ Embedded Log            </a>
 
 <section class="well well-sm">
     <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+            <li class="list-group-item"><img src="http://www.embeddedlog.com/images/theming/profile.jpg" class="profile_pic" /><h4><span class="icon-label">Social</span></h4>
               <ul class="list-group" id="social">
                 <li class="list-group-item"><a href="https://github.com/carlosperate"><i class="fa fa-github-square fa-lg"></i> github</a></li>
                 <li class="list-group-item"><a href="https://twitter.com/carlosperate"><i class="fa fa-twitter-square fa-lg"></i> twitter</a></li>
@@ -153,38 +261,29 @@ Embedded Log            </a>
             <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Recent Posts</span></h4>
                 <ul class="list-group" id="recentposts">
                     <li class="list-group-item">
-                        <a href="http://www.embeddedlog.com/my-test-post-2.html">
-                            My second test title
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="http://www.embeddedlog.com/my-test-post.html">
-                            My test title
+                        <a href="http://www.embeddedlog.com/static-docs-from-github-wiki.html">
+                            Build static documentation from a GitHub Wiki
                         </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="list-group-item"><a href="http://www.embeddedlog.com/"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Categories</span></h4></a>
-                <ul class="list-group" id="categories">
-                    <li class="list-group-item">
-                        <a href="http://www.embeddedlog.com/category/blog.html">
-                            <i class="fa fa-folder-open fa-lg"></i> Blog
-                        </a>
-                    </li>
-                </ul>
-            </li>
 
             <li class="list-group-item"><a href="http://www.embeddedlog.com/"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
                 <ul class="list-group " id="tags">
-                    <li class="list-group-item tag-1">
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.embeddedlog.com/tag/documentation.html">
+                            documentation
+                        </a>
+                    </li>
+                    <li class="list-group-item tag-4">
                         <a href="http://www.embeddedlog.com/tag/github.html">
                             github
                         </a>
                     </li>
-                    <li class="list-group-item tag-1">
-                        <a href="http://www.embeddedlog.com/tag/test.html">
-                            test
+                    <li class="list-group-item tag-4">
+                        <a href="http://www.embeddedlog.com/tag/web-tech.html">
+                            web-tech
                         </a>
                     </li>
                 </ul>
@@ -199,18 +298,13 @@ Embedded Log            </a>
     <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
       <ul class="list-group" id="links">
         <li class="list-group-item">
-            <a href="http://getpelican.com/" target="_blank">
-                Pelican
+            <a href="http://www.theamphour.com" target="_blank">
+                The Amp Hour podcast
             </a>
         </li>
         <li class="list-group-item">
-            <a href="http://python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="http://jinja.pocoo.org/" target="_blank">
-                Jinja2
+            <a href="http://embedded.fm" target="_blank">
+                Embedded.fm podcast
             </a>
         </li>
       </ul>
@@ -225,11 +319,21 @@ Embedded Log            </a>
    <div class="container">
       <hr>
       <div class="row container_footer">
-         <div class="col-xs-10">&copy; 2015 <a href="https://github.com/carlosperate" target="_blank">Carlos Perate</a>
-            &middot; Powered by 
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a> and 
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+         <div class="col-xs-9">
+            <p>
+               &copy; 2015 <a href="https://github.com/carlosperate" target="_blank">carlosperate</a>
+               &middot; Powered by 
+               <a href="http://docs.getpelican.com/" target="_blank">Pelican</a> and 
+               <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>
+            </p>
+            <p><small>                     Content
+  licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>, except where indicated otherwise.
+  <!--a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="//i.creativecommons.org/l/by/4.0/80x15.png" /></a-->
+
+               Attribution for all other resources used can be found <a href="http://www.embeddedlog.com/credits/index.html">here.</a>
+            </small></p>
+         </div>
+         <div class="col-xs-3"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
       </div>
    </div>
 </footer>
@@ -281,14 +385,18 @@ Embedded Log            </a>
     </script>
     <!-- End Google Analytics Code -->
 
-        <script type="text/javascript">
-            /** Changes the background image for that  */
-            window.addEventListener("load", function() {
-                // The banner.html adss the banner as an embedded css style, so this
-                // should not cause any conflicts, but replace the value in the DOM.
-                banner = document.getElementById("banner");
-                banner.style.backgroundImage = "url('http://www.embeddedlog.com/images/ardublockly/ardublockly_banner.png')";
-            });
-        </script>
+    <!-- Banner carousel control -->
+    <script type="text/javascript">
+        /** Stops the carousel and sets it to a specific project */
+        window.addEventListener("load", function() {
+            $(".carousel").carousel(0);
+            $(".carousel").carousel('pause');
+            $("#carousel-control-prev").css("visibility", "hidden");
+            $("#carousel-control-next").css("visibility", "hidden");
+            $("#carousel-indicators").css("display", "none");
+            $(".carousel-indicators-placeholder").css("display", "none");
+        });
+    </script>
+    <!-- End Banner carousel control -->
 </body>
 </html>
