@@ -40,15 +40,22 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
     returnValue = '  return ' + returnValue + ';\n';
   }
 
-  // Get arguments with type and return type
+  // Get arguments with type
   var args = [];
   for (var x = 0; x < block.arguments_.length; x++) {
     args[x] = block.getArgType(block.arguments_[x]) + ' ' + 
         Blockly.Arduino.variableDB_.getName(block.arguments_[x],
             Blockly.Variables.NAME_TYPE);
   }
-  var returnType = this.getReturnType();
 
+  // Ger return type
+  var returnType = Blockly.StaticTyping.blocklyType.UNSPECIFIED
+  if (this.getReturnType) {
+    returnType = this.getReturnType();
+  }
+  returnType = Blockly.Arduino.getArduinoType_(returnType);
+
+  // Construct code
   var code = returnType + ' ' + funcName + '(' + args.join(', ') + ') {\n' +
       branch + returnValue + '}\n';
   code = Blockly.Arduino.scrub_(block, code);

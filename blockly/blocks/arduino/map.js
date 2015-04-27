@@ -25,14 +25,14 @@ Blockly.Blocks['base_map'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/map');
     this.setColour(Blockly.Blocks.Arduino.map.HUE);
-    this.appendValueInput("NUM", 'Number')
-        .appendField("Map ")
-        .setCheck('Number');
-    this.appendValueInput("DMAX", 'Number')
-        .appendField("value to [0-")
-        .setCheck('Number');
-    this.appendDummyInput("")
-        .appendField("]");
+    this.appendValueInput('NUM', Blockly.StaticTyping.blocklyType.NUMBER)
+        .appendField('Map ')
+        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER);
+    this.appendValueInput('DMAX', Blockly.StaticTyping.blocklyType.NUMBER)
+        .appendField('value to [0-')
+        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER);
+    this.appendDummyInput('')
+        .appendField(']');
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('Re-maps a number from [0-1024] to another range.');
@@ -42,6 +42,6 @@ Blockly.Blocks['base_map'] = {
    * takes the inputs a longs and returns a long, so automatic cast to int.
    */
   getType: function() {
-    return 'int';
+    return Blockly.StaticTyping.blocklyType.INTEGER;
   }
 };

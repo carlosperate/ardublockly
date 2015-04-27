@@ -140,7 +140,7 @@ Blockly.Blocks['graph_get_x'] = {
     this.setColour(330);
     this.appendDummyInput()
         .appendField('x');
-    this.setOutput(true, 'Number');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
     this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);
   }
 };
@@ -157,7 +157,7 @@ Blockly.Blocks['graph_set_y'] = {
     this.setColour(330);
     this.appendValueInput('VALUE')
         .appendField('y =')
-        .setCheck('Number');
+        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER);
     this.setTooltip(Blockly.Msg.VARIABLES_SET_TOOLTIP);
   }
 };

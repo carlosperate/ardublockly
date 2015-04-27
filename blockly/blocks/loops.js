@@ -61,7 +61,9 @@ Blockly.Blocks['controls_repeat_ext'] = {
     this.setHelpUrl(Blockly.Msg.CONTROLS_REPEAT_HELPURL);
     this.setColour(Blockly.Blocks.loops.HUE);
     this.interpolateMsg(Blockly.Msg.CONTROLS_REPEAT_TITLE,
-                        ['TIMES', 'Number', Blockly.ALIGN_RIGHT],
+                        ['TIMES',
+                         Blockly.StaticTyping.blocklyType.NUMBER,
+                         Blockly.ALIGN_RIGHT],
                         Blockly.ALIGN_RIGHT);
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
@@ -84,7 +86,7 @@ Blockly.Blocks['controls_whileUntil'] = {
     this.setHelpUrl(Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL);
     this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('BOOL')
-        .setCheck('Boolean')
+        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_WHILEUNTIL_INPUT_DO);
@@ -115,9 +117,15 @@ Blockly.Blocks['controls_for'] = {
         .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_WITH)
         .appendField(new Blockly.FieldVariable(null), 'VAR');
     this.interpolateMsg(Blockly.Msg.CONTROLS_FOR_INPUT_FROM_TO_BY,
-                        ['FROM', 'Number', Blockly.ALIGN_RIGHT],
-                        ['TO', 'Number', Blockly.ALIGN_RIGHT],
-                        ['BY', 'Number', Blockly.ALIGN_RIGHT],
+                        ['FROM',
+                         Blockly.StaticTyping.blocklyType.NUMBER,
+                         Blockly.ALIGN_RIGHT],
+                        ['TO',
+                         Blockly.StaticTyping.blocklyType.NUMBER,
+                         Blockly.ALIGN_RIGHT],
+                        ['BY',
+                         Blockly.StaticTyping.blocklyType.NUMBER,
+                         Blockly.ALIGN_RIGHT],
                         Blockly.ALIGN_RIGHT);
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_FOR_INPUT_DO);
@@ -185,15 +193,17 @@ Blockly.Blocks['controls_for'] = {
     // Check if variable has been defined already
     var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
     if (varType != null) {
-      if ((varType != 'int') && (varType != 'float')) {
+      if ((varType != Blockly.StaticTyping.blocklyType.INTEGER) &&
+          (varType != Blockly.StaticTyping.blocklyType.DECIMAL)) {
         this.setWarningText('This variable type has been previously set to a ' +
           existingVars[varName] + ' and it needs to be a number!')
       } else {
         this.setWarningText(null);
       }
     } else {
-      // not defined, so set it to an int
-      varType = 'int';
+      // not defined, so set it to an integer
+      //TODO: The number input could be set to a decirmal, so check input
+      varType = Blockly.StaticTyping.blocklyType.INTEGER;
       this.setWarningText(null);
     }
 

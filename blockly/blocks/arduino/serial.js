@@ -28,13 +28,13 @@ Blockly.Blocks['serial_print'] = {
     this.setColour(Blockly.Blocks.Arduino.serial.HUE);
     this.appendDummyInput()
         .appendField(
-            new Blockly.FieldDropdown(profile.default.serial), "SERIAL_ID")
-        .appendField("print");
-    this.appendValueInput("CONTENT", 'String')
-        .setCheck("String");
+            new Blockly.FieldDropdown(profile.default.serial), 'SERIAL_ID')
+        .appendField('print');
+    this.appendValueInput('CONTENT', Blockly.StaticTyping.blocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.blocklyType.TEXT);
     this.appendDummyInput()
-        .appendField("with new line")
-        .appendField(new Blockly.FieldCheckbox("TRUE"), "NEW_LINE");
+        .appendField('with new line')
+        .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -87,13 +87,13 @@ Blockly.Blocks['serial_speed'] = {
     this.setHelpUrl('http://arduino.cc/en/Serial/Begin');
     this.setColour(Blockly.Blocks.Arduino.serial.HUE);
     this.appendDummyInput()
-        .appendField("setup: ")
+        .appendField('setup: ')
         .appendField(
-            new Blockly.FieldDropdown(profile.default.serial), "SERIAL_ID")
-        .appendField("speed")
+            new Blockly.FieldDropdown(profile.default.serial), 'SERIAL_ID')
+        .appendField('speed')
         .appendField(
-            new Blockly.FieldDropdown(profile.default.serial_speed), "SPEED")
-        .appendField("bps");
+            new Blockly.FieldDropdown(profile.default.serial_speed), 'SPEED')
+        .appendField('bps');
     this.setInputsInline(true);
     this.setTooltip('Selects the speed for a specific Serial peripheral');
   },

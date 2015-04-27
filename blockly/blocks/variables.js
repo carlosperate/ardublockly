@@ -27,6 +27,7 @@
 goog.provide('Blockly.Blocks.variables');
 
 goog.require('Blockly.Blocks');
+goog.require('Blockly.StaticTyping');
 
 
 Blockly.Blocks.variables.HUE = 330;
@@ -113,7 +114,7 @@ Blockly.Blocks['variables_get'] = {
   /**
    * Contains the type of the variable selected from the first set block.
    */
-  varType: 'nonono',
+  varType: Blockly.StaticTyping.blocklyType.UNDEF,
   /**
    * Retrieves the type of the selected variable, defined at getVarType.
    * @this Blockly.Block

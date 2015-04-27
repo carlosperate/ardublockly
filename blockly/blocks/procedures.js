@@ -414,15 +414,20 @@ Blockly.Blocks['procedures_defreturn'] = {
   getVarType: Blockly.Blocks['procedures_defnoreturn'].getVarType,
   /**
    * Searches through the nested blocks in the return input to find a variable
-   * type or return void.
+   * type or return unspecified.
    * @this Blockly.Block
-   * @return {string} String to indicate the type or void.
+   * @return {string} String to indicate the type or unspecified.
    */
   getReturnType: function() {
-    var returnType = 'void';
+    var returnType = Blockly.StaticTyping.blocklyType.UNSPECIFIED;
     var returnBlock = this.getInputTargetBlock('RETURN');
     if (returnBlock) {
-      returnType = Blockly.StaticTyping.getChildBlockType(returnBlock);
+      // First check if the block itself has a type already
+      if (returnBlock.getType) {
+        returnType = returnBlock.getType();
+      } else {
+        returnType = Blockly.StaticTyping.getChildBlockType(returnBlock);
+      }
     }
     return returnType;
   }
@@ -730,7 +735,7 @@ Blockly.Blocks['procedures_ifreturn'] = {
     this.setHelpUrl('http://c2.com/cgi/wiki?GuardClause');
     this.setColour(Blockly.Blocks.procedures.HUE);
     this.appendValueInput('CONDITION')
-        .setCheck('Boolean')
+        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendValueInput('VALUE')
         .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);

@@ -105,13 +105,13 @@ Blockly.Blocks['stepper_config'] = {
         .appendField(new Blockly.FieldDropdown(profile.default.digital),
             'STEPPER_PIN2');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck('Number')
+        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
         .appendField('Steps in one revolution');
     this.appendValueInput('STEPPER_SPEED')
-        .setCheck('Number')
+        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
         .appendField('Set speed to');
     this.appendValueInput('STEPPER_NAME')
-        .setCheck('String')
+        .setCheck(Blockly.StaticTyping.blocklyType.TEXT)
         .appendField('Set name to');
     this.setTooltip('Configures a stepper motor pinout and other settings');
   },
@@ -145,8 +145,10 @@ Blockly.Blocks['stepper_step'] = {
         // TODO: Combine these messages instead of using concatenation.
         'STEPPER' + ' %1 ' +
         'move' + ' %2' + 'steps',
-        ['STEPPER_NAME', new Blockly.Blocks.Arduino.stepper.FieldStepperInstance()],
-        ['STEPPER_STEPS', 'Number', Blockly.ALIGN_RIGHT],
+        ['STEPPER_NAME',
+         new Blockly.Blocks.Arduino.stepper.FieldStepperInstance()],
+        ['STEPPER_STEPS',
+         Blockly.StaticTyping.blocklyType.NUMBER, Blockly.ALIGN_RIGHT],
         Blockly.ALIGN_RIGHT);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
