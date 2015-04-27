@@ -36,8 +36,10 @@ There was an error manipulating the sketch data!!
 - [ ] math_number getType to use regular expressions more efficiently
 - [ ] math_on_list to add static type if lists get implemented
 - [ ] controls_for getVarType function
-- [ ] controls_forEach block uses lists, these are not implemented in the Arduino generator (possible arrays), when implemented this block needs a getVarType, varType, and getType functions.
+- [ ] controls_forEach block uses lists, these are not implemented in the Arduino generator (possible arrays), when implemented this block needs a getVarType, varType, and getType functions
 - [ ] add getVarType to the procedures blocks
+- [ ] the loops count type is set to int, user could input a decimal, so add input checking to determine type
+- [ ] Number blocks automatically trim unnecessary decimal digits "x.0 => x", change this behavior so that "x.0" can be set as a decimal 
 
 
 ## Arduino related code
@@ -46,15 +48,15 @@ There was an error manipulating the sketch data!!
 
 ## Arduino blocks
 - [ ] Add a way to select different Arduino boards (settings menu should trigger arduino generator board change)
-- [ ] Code generator for lists into arrays.
+- [ ] Code generator for lists into arrays
 - [ ] A lot of blocks go through the entire block tree, which end ups being terribly inefficient. Maybe create a general pass through in the arduino.js file to check everything that needs to be checked in one pass.
 - [ ] SPI spi_transfer also needs returns a byte back
 
 
 ## Arduino web-app
-- [ ] Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden.
+- [ ] Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden
 - [x] Add examples
-- [x] Change js variables naming convention from current 'snake_case' to 'lower camel case' to comply with Google's js coding style.
+- [x] Change js variables naming convention from current 'snake_case' to 'lower camel case' to comply with Google's js coding style
 
 
 # Future features
