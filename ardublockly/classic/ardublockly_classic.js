@@ -135,8 +135,8 @@ ArduinoClassic.init = function() {
   }
 
   // Check if not running locally (including developer's local network IP)
-  if (document.location.hostname != "localhost" &&
-      document.location.hostname != "192.168.0.7") {
+  if (document.location.hostname != 'localhost' &&
+      document.location.hostname != '192.168.0.7') {
     alert('Ardublockly not running locally\n\n' +
           'For Ardublockly to work correctly, the Ardublockly server must be' +
           ' running locally on your computer.');
@@ -232,7 +232,7 @@ ArduinoClassic.peekCode = function(visible) {
   
   if (ArduinoClassic.peek_code_ == false) {
     ArduinoClassic.peek_code_ = true;
-    peek_code_button.className = "button_text secondary";
+    peek_code_button.className = 'button_text secondary';
     ArduinoClassic.sideContent(true);
     code_peek_content.style.display = 'inline-block';
     // Regenerate arduino code and ensure every click does as well
@@ -240,7 +240,7 @@ ArduinoClassic.peekCode = function(visible) {
     Blockly.addChangeListener(ArduinoClassic.renderArduinoPeekCode);
   } else {
     ArduinoClassic.peek_code_ = false;
-    peek_code_button.className = "button_text";
+    peek_code_button.className = 'button_text';
     code_peek_content.style.display = 'none';
     ArduinoClassic.sideContent(false);
     // Remove action listeners. TODO: track listener so that first time does not
@@ -314,18 +314,18 @@ ArduinoClassic.injectBlockly = function(blockly_el, toolbox_path) {
   }
   catch (e) {
     try {   // IE6 and earlier
-      request = new ActiveXObject("Msxml2.XMLHTTP");
+      request = new ActiveXObject('Msxml2.XMLHTTP');
     }
     catch (e) {
       try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
+        request = new ActiveXObject('Microsoft.XMLHTTP');
       }
       catch (e) {
         throw 'Your browser does not support AJAX. Cannot load toolbox';
       }
     }
   }
-  request.open("GET", toolbox_path, true);
+  request.open('GET', toolbox_path, true);
 
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
@@ -367,14 +367,14 @@ ArduinoClassic.loadUserXmlFile = function() {
     reader.readAsText(files[0]);
   }
   // Create once invisible browse button with event listener, and click it
-  var select_file = document.getElementById("select_file");
+  var select_file = document.getElementById('select_file');
   if (select_file == null) {
     var select_file_dom = document.createElement('INPUT');
     select_file_dom.type = 'file';
     select_file_dom.id = 'select_file';
     select_file_dom.style = 'display: none';
     document.body.appendChild(select_file_dom);
-    select_file = document.getElementById("select_file");
+    select_file = document.getElementById('select_file');
     select_file.addEventListener('change', parseInputXMLfile, false);
   }
   select_file.click();
@@ -419,9 +419,9 @@ ArduinoClassic.saveXmlFile = function() {
   // Create blob
   var blob = new Blob(
       [xmlText],
-      {type: "text/plain;charset=utf-8"});
+      {type: 'text/plain;charset=utf-8'});
   // Prompt user to save as a file
-  saveAs(blob, "ardublockly.xml");
+  saveAs(blob, 'ardublockly.xml');
 };
 
 /**
