@@ -81,6 +81,6 @@ Blockly.Blocks['spi_transfer'] = {
    * @this Blockly.Block
    */
   getType: function() {
-    return "int";
+    return Blockly.StaticTyping.blocklyType.INTEGER;
   }
 };

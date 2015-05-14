@@ -30,8 +30,8 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         ServerCompilerSettings()
         instance_1 = ServerCompilerSettings()
         instance_1._drop()
-        self.assertEqual(instance_1._ServerCompilerSettings__singleton_instance,
-                         None)
+        self.assertIsNone(
+            instance_1._ServerCompilerSettings__singleton_instance)
 
     #
     # Testing the compiler_dir getter and setter

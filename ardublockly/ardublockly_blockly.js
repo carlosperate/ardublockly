@@ -29,7 +29,7 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
 
   // If file run locally Internet explorer fails here
   try {
-    request.open("GET", toolboxPath, true);
+    request.open('GET', toolboxPath, true);
   } catch(e) {
     $('#not_running_dialog').openModal();
   }
@@ -69,7 +69,7 @@ ArduinoMaterial.loadXmlBlockFile =
 
   // If file run locally Internet explorer fails here
   try {
-    request.open("GET", xmlFile, true);
+    request.open('GET', xmlFile, true);
   } catch(e) {
     callbackConectonError();
   }
@@ -159,9 +159,9 @@ ArduinoMaterial.showToolbox = function(show, callback) {
     //callback.call();
   }
   if (show == false) {
-    $( ".blocklyToolboxDiv" ).slideUp(300, callback);
+    $('.blocklyToolboxDiv').slideUp(300, callback);
   } else {
-    $( ".blocklyToolboxDiv" ).slideDown(300, callback);
+    $('.blocklyToolboxDiv').slideDown(300, callback);
   }
 };
 
@@ -198,10 +198,10 @@ ArduinoMaterial.ajaxRequest = function() {
   } catch (e) {
     try {
       // IE6 and earlier
-      request = new ActiveXObject("Msxml2.XMLHTTP");
+      request = new ActiveXObject('Msxml2.XMLHTTP');
     } catch (e) {
       try {
-        request = new ActiveXObject("Microsoft.XMLHTTP");
+        request = new ActiveXObject('Microsoft.XMLHTTP');
       } catch (e) {
         throw 'Your browser does not support AJAX. Cannot load toolbox';
         request = null;

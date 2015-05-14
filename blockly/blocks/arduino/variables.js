@@ -25,11 +25,11 @@ Blockly.Blocks['variables_set_type'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/HomePage');
     this.setColour(Blockly.Blocks.Arduino.variables.HUE);
-    this.appendValueInput("VARIABLE_SETTYPE_INPUT", '');
-    this.appendDummyInput("")
-        .appendField("as")
+    this.appendValueInput('VARIABLE_SETTYPE_INPUT', '');
+    this.appendDummyInput('')
+        .appendField('as')
         .appendField(new Blockly.FieldDropdown(profile.default.types),
-                     "VARIABLE_SETTYPE_TYPE");
+                     'VARIABLE_SETTYPE_TYPE');
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('Sets a value to a specific type');

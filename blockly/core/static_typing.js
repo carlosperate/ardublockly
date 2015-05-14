@@ -4,8 +4,6 @@
  *
  * @fileoverview 
  *
- * TODO: Create some kind of abstract type list that can be turned into
- *       a language specific keyword in the individual generators.
  *
  */
 'use strict';
@@ -13,13 +11,41 @@
 goog.provide('Blockly.StaticTyping');
 
 goog.require('Blockly.Block');
-
 goog.require('Blockly.Workspace');
 
 
 /**
+ * Class for a code static typing object that blockly types into a language
+ * type.
+ * @param {string} name Language name of this generator.
+ * @constructor
+ */
+Blockly.StaticTyping = function(name) {
+  this.name_ = name;
+};
+
+/** 
+ * "Enum-like type" to create blockly variable types.
+ * The number type is used to set a general number from the number block, the
+ * block itself then analyses the contents and defines if it is an integer or
+ * decimal number.
+ */
+Blockly.StaticTyping.blocklyType = {
+  UNDEF: 'Undefined',
+  UNSPECIFIED: 'Unspecified',
+  NULL: 'Null',
+  TEXT: 'Text',
+  BOOLEAN: 'Boolean',
+  NUMBER: 'Number',
+  INTEGER: 'Integer',
+  DECIMAL: 'Decimal',
+  ERROR: 'Error',
+  CHILD_TYPE_MISSING: 'ChildBlockTypeMissing'
+};
+
+/**
  * Navigates through the child blocks to get the block type.
- * @param {!Blockly.Block} block Block to navigate through childs. 
+ * @param {!Blockly.Block} block Block to navigate through children. 
  * @return {string} Type of the input block.
  */
 Blockly.StaticTyping.getChildBlockType = function(block) {
@@ -31,15 +57,14 @@ Blockly.StaticTyping.getChildBlockType = function(block) {
   }
   if (nextBlock[0] === block) {
     // Set variable block is empty, so no type yet
-    blockType = 'defineme';
-    //varType = 'int';
+    blockType = Blockly.StaticTyping.blocklyType.UNDEF;
   } else {
     var func = nextBlock[0].getType;
     if (func) {
       blockType = nextBlock[0].getType();
     } else {
       //TOOD: this is for debugging, means inner block is missing getType
-      blockType = 'innerBlockNoType';
+      blockType = Blockly.StaticTyping.blocklyType.CHILD_TYPE_MISSING;
     }
   }
   return blockType;
@@ -62,10 +87,10 @@ Blockly.StaticTyping.findListVarType = function(varToFind, existingVars) {
   return null;
 };
 
-
 /**
- * 
- * @param {string} varToFind String containing the name of the variable to find.
+ * Navigates through the blocks collecting all variables and getting their type
+ * into an associative array with the variable names as the keys and the type
+ * as the values.
  * @param {Blockly.Workspace} workspace workspace to collect variables from.
  * @return {Array<string>} Associative array with the variable names as the keys
  *                         and the type as the values.
@@ -94,7 +119,7 @@ Blockly.StaticTyping.getAllVarsWithTypes = function(workspace) {
             variableTypes[blockVariables[y]] = varType;
           }
         } else {
-          //TODO: Once all static typing code is done, default this to 'int'
+          //TODO: Once all static typing code is done, default this to integer
           //variableTypes[blockVariables[y]] = 'getVarTypeNotDef';
         }
       }
@@ -102,4 +127,29 @@ Blockly.StaticTyping.getAllVarsWithTypes = function(workspace) {
   }
 
   return variableTypes;
+};
+
+/**
+ * Regular expression objects to do Number type recognition between an integer
+ * and decimal.
+ * @private
+ */
+Blockly.StaticTyping.regExpInt_ = new RegExp(/^\d+$/);
+Blockly.StaticTyping.regExpFloat_ = new RegExp(/^[0-9]*[.][0-9]+$/);
+
+/**
+ * Navigates through the blocks collecting all variables and getting their type
+ * into an associative array with the variable names as the keys and the type
+ * as the values.
+ * @param {String} String of the number to identify.
+ * @return {!Blockly.StaticTyping.blocklyType} Blockly type.
+ */
+Blockly.StaticTyping.identifyNumber = function(numberString) {
+    if (Blockly.StaticTyping.regExpInt_.test(numberString)) {
+      return Blockly.StaticTyping.blocklyType.INTEGER;
+    } else if (Blockly.StaticTyping.regExpFloat_.test(numberString)) {
+      return Blockly.StaticTyping.blocklyType.DECIMAL;
+    }
+    //TODO: This is just a temporary value for easy bug catching.
+    return Blockly.StaticTyping.blocklyType.ERROR;
 };

@@ -25,8 +25,8 @@ window.addEventListener('load', function() {
   ArduinoMaterial.bindBlocklyEventListeners_();
 
   // Check if not running locally (including developer's local network IP)
-  if (document.location.hostname != "localhost" &&
-      document.location.hostname != "192.168.0.7") {
+  if (document.location.hostname != 'localhost' &&
+      document.location.hostname != '192.168.0.7') {
     $('#not_running_dialog').openModal();
   }
 });
@@ -156,14 +156,14 @@ ArduinoMaterial.loadUserXmlFile = function() {
     reader.readAsText(files[0]);
   }
   // Create once invisible browse button with event listener, and click it
-  var selectFile = document.getElementById("select_file");
+  var selectFile = document.getElementById('select_file');
   if (selectFile == null) {
     var selectFileDom = document.createElement('INPUT');
     selectFileDom.type = 'file';
     selectFileDom.id = 'select_file';
     selectFileDom.style = 'display: none';
     document.body.appendChild(selectFileDom);
-    selectFile = document.getElementById("select_file");
+    selectFile = document.getElementById('select_file');
     selectFile.addEventListener('change', parseInputXMLfile, false);
   }
   selectFile.click();
@@ -176,8 +176,8 @@ ArduinoMaterial.loadUserXmlFile = function() {
 ArduinoMaterial.saveXmlFile = function() {
   var blob = new Blob(
       [ArduinoMaterial.generateXml()],
-      {type: "text/plain;charset=utf-8"});
-  saveAs(blob, "ardublockly.xml");
+      {type: 'text/plain;charset=utf-8'});
+  saveAs(blob, 'ardublockly.xml');
 };
 
 /**
@@ -266,7 +266,7 @@ ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
  * Sets the Arduino Board type with the selected user input from the drop down.
  */
 ArduinoMaterial.setBoard = function() {
-  var el = document.getElementById("board");
+  var el = document.getElementById('board');
   var boardValue = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setArduinoBoard(
@@ -302,7 +302,7 @@ ArduinoMaterial.setSerialPortsHtml = function(newEl) {
  * Sets the Serial Port with the selected user input from the drop down.
  */
 ArduinoMaterial.setSerial = function() {
-  var el = document.getElementById("serial_port");
+  var el = document.getElementById('serial_port');
   var serialValue = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setSerialPort(
@@ -338,7 +338,7 @@ ArduinoMaterial.setIdeHtml = function(newEl) {
  * Sets the IDE settings data with the selected user input from the drop down.
  */
 ArduinoMaterial.setIdeSettings = function() {
-  var el = document.getElementById("ide_settings");
+  var el = document.getElementById('ide_settings');
   var ideValue = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
   ArduServerCompiler.setIdeOptions(ideValue, ArduinoMaterial.setIdeHtml);

@@ -36,8 +36,8 @@ window.addEventListener('load', function() {
   });
 
   // Check if not running locally (including developer's local network IP)
-  if (document.location.hostname != "localhost" &&
-      document.location.hostname != "192.168.0.7") {
+  if (document.location.hostname != 'localhost' &&
+      document.location.hostname != '192.168.0.7') {
     alert('Ardublockly not running locally\n\n' +
           'For Ardublockly to work correctly, the Ardublockly server must be' +
           ' running locally on your computer');
@@ -93,7 +93,7 @@ ArduinoSettings.setArduinoBoardsHtml = function(new_el) {
  * Sets the Arduino Board type with the selected user input from the drop down.
  */
 ArduinoSettings.setBoard = function() {
-  var el = document.getElementById("board");
+  var el = document.getElementById('board');
   var board_value = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
   ArduServerCompiler.setArduinoBoard(
@@ -121,7 +121,7 @@ ArduinoSettings.setSerialPortsHtml = function(new_el) {
  * Sets the Serial Port with the selected user input from the drop down.
  */
 ArduinoSettings.setSerial = function() {
-  var el = document.getElementById("serial_port");
+  var el = document.getElementById('serial_port');
   var serial_value = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setSerialPort(
@@ -149,7 +149,7 @@ ArduinoSettings.setIdeHtml = function(new_el) {
  * Sets the IDE settings data with the selected user input from the drop down.
  */
 ArduinoSettings.setIdeSettings = function() {
-  var el = document.getElementById("ide_settings");
+  var el = document.getElementById('ide_settings');
   var ide_value = el.options[el.selectedIndex].value;
   //TODO: check how ArduServerCompiler deals with invalid data and sanitise
   ArduServerCompiler.setIdeOptions(ide_value, ArduinoSettings.setIdeHtml);

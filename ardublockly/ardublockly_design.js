@@ -23,7 +23,7 @@ ArduinoMaterial.materializeJsInit = function() {
       activationWidth: 70,
       edge: 'left'});
     // Drop down menus
-    $(".dropdown-button").dropdown({hover: false});
+    $('.dropdown-button').dropdown({hover: false});
     // Overlay content panels using modals (android dialogs)
     $('.modal-trigger').leanModal({
       dismissible: true,
@@ -32,7 +32,7 @@ ArduinoMaterial.materializeJsInit = function() {
       out_duration: 200
      });
     // Pop-up tool tips
-    $('.tooltipped').tooltip({"delay": 50});
+    $('.tooltipped').tooltip({'delay': 50});
     // Select menus
     $('select').material_select();
   });
@@ -80,12 +80,12 @@ ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
   // Element conatins several classes, use replace to maintain the rest
   if (toolboxVisible == true) {
     toolboxButton.className = toolboxButton.className.replace(
-      "button_toggle_toolbox_on", "button_toggle_toolbox_off"); 
+      'button_toggle_toolbox_on', 'button_toggle_toolbox_off'); 
     toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
      'mdi-action-visibility', 'mdi-action-visibility-off');
   } else {
     toolboxButton.className = toolboxButton.className.replace(
-      "button_toggle_toolbox_off", "button_toggle_toolbox_on"); 
+      'button_toggle_toolbox_off', 'button_toggle_toolbox_on'); 
     toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
      'mdi-action-visibility-off', 'mdi-action-visibility');
   }
@@ -113,7 +113,7 @@ ArduinoMaterial.resizeBlocklyWorkspace = function() {
   //Blockly.MsvgResize();
   //Blockly.mainWorkspace.render();
   //alert(
-  //  "resized " + wrapperPanelSize.width + " " + contentBlocks.style.width);
+  //  'resized ' + wrapperPanelSize.width + ' ' + contentBlocks.style.width);
 
   // Sets the toolbox toggle button width to that of the toolbox
   if ( ArduinoMaterial.isToolboxVisible() &&
@@ -134,17 +134,17 @@ ArduinoMaterial.resizeBlocklyWorkspace = function() {
  *                                     be the function called when clicked 'OK'.
  */
 ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
-  $("#gen_alert_title").text(title);
-  $("#gen_alert_body").text('');
-  $("#gen_alert_body").append(body);
+  $('#gen_alert_title').text(title);
+  $('#gen_alert_body').text('');
+  $('#gen_alert_body').append(body);
   if (confirm == true) {
-    $("#gen_alert_cancel_link").css({'display': 'block'});
+    $('#gen_alert_cancel_link').css({'display': 'block'});
     if (callback) {
-      $("#gen_alert_ok_link").bind('click', callback);
+      $('#gen_alert_ok_link').bind('click', callback);
     } 
   } else {
-    $("#gen_alert_cancel_link").css({'display': 'none'});
-    $("#gen_alert_ok_link").unbind('click');
+    $('#gen_alert_cancel_link').css({'display': 'none'});
+    $('#gen_alert_ok_link').unbind('click');
   }
   $('#gen_alert').openModal();
   window.location.hash = '';
@@ -155,8 +155,8 @@ ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
  * @param {!element} bodyEl HTML to include into dialog content.
  */
 ArduinoMaterial.arduinoIdeModal = function(bodyEl) {
-  $("#arduino_dialog_body").text('');
-  $("#arduino_dialog_body").append(bodyEl);
+  $('#arduino_dialog_body').text('');
+  $('#arduino_dialog_body').append(bodyEl);
   $('#arduino_dialog').openModal();
   window.location.hash = '';
 };

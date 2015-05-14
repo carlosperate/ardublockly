@@ -76,13 +76,19 @@ ServerCompilerSettings.ini
 # Anything starting with this is created as a unit/module testing temporal file
 TestTemp_*
 
-# CEF log files
+# CEF cacbe and log files
+/webcache
 cef_error.log
 cef_debug.log
 
 # Miscellaneous files that should not get revisioned
 /ignore
 
-# Packaged python build folders
+# Packaged python build folders and files
 /win
-/webcache
+/package/build
+/ardublockly_run.bat
+
+# The documentation is built with the GitHub wiki data
+/Documentation
+package/ardublocklydocs/site

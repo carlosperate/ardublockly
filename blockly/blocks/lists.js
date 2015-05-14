@@ -212,7 +212,9 @@ Blockly.Blocks['lists_repeat'] = {
     this.setOutput(true, 'Array');
     this.interpolateMsg(Blockly.Msg.LISTS_REPEAT_TITLE,
                         ['ITEM', null, Blockly.ALIGN_RIGHT],
-                        ['NUM', 'Number', Blockly.ALIGN_RIGHT],
+                        ['NUM',
+                         Blockly.StaticTyping.blocklyType.NUMBER,
+                         Blockly.ALIGN_RIGHT],
                         Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.Msg.LISTS_REPEAT_TOOLTIP);
   }
@@ -227,9 +229,11 @@ Blockly.Blocks['lists_length'] = {
     this.setHelpUrl(Blockly.Msg.LISTS_LENGTH_HELPURL);
     this.setColour(Blockly.Blocks.lists.HUE);
     this.interpolateMsg(Blockly.Msg.LISTS_LENGTH_TITLE,
-                        ['VALUE', ['Array', 'String'], Blockly.ALIGN_RIGHT],
+                        ['VALUE',
+                         ['Array', Blockly.StaticTyping.blocklyType.TEXT],
+                         Blockly.ALIGN_RIGHT],
                         Blockly.ALIGN_RIGHT);
-    this.setOutput(true, 'Number');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
     this.setTooltip(Blockly.Msg.LISTS_LENGTH_TOOLTIP);
   }
 };
@@ -243,10 +247,12 @@ Blockly.Blocks['lists_isEmpty'] = {
     this.setHelpUrl(Blockly.Msg.LISTS_IS_EMPTY_HELPURL);
     this.setColour(Blockly.Blocks.lists.HUE);
     this.interpolateMsg(Blockly.Msg.LISTS_IS_EMPTY_TITLE,
-                        ['VALUE', ['Array', 'String'], Blockly.ALIGN_RIGHT],
+                        ['VALUE',
+                         ['Array', Blockly.StaticTyping.blocklyType.TEXT],
+                         Blockly.ALIGN_RIGHT],
                         Blockly.ALIGN_RIGHT);
     this.setInputsInline(true);
-    this.setOutput(true, 'Boolean');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
     this.setTooltip(Blockly.Msg.LISTS_TOOLTIP);
   }
 };
@@ -262,7 +268,7 @@ Blockly.Blocks['lists_indexOf'] = {
          [Blockly.Msg.LISTS_INDEX_OF_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.LISTS_INDEX_OF_HELPURL);
     this.setColour(Blockly.Blocks.lists.HUE);
-    this.setOutput(true, 'Number');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
     this.appendValueInput('VALUE')
         .setCheck('Array')
         .appendField(Blockly.Msg.LISTS_INDEX_OF_INPUT_IN_LIST);
@@ -378,7 +384,8 @@ Blockly.Blocks['lists_getIndex'] = {
     this.removeInput('ORDINAL', true);
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
-      this.appendValueInput('AT').setCheck('Number');
+      this.appendValueInput('AT').setCheck(
+          Blockly.StaticTyping.blocklyType.NUMBER);
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL')
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -478,7 +485,8 @@ Blockly.Blocks['lists_setIndex'] = {
     this.removeInput('ORDINAL', true);
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
-      this.appendValueInput('AT').setCheck('Number');
+      this.appendValueInput('AT').setCheck(
+          Blockly.StaticTyping.blocklyType.NUMBER);
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL')
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -577,7 +585,8 @@ Blockly.Blocks['lists_getSublist'] = {
     this.removeInput('ORDINAL' + n, true);
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
-      this.appendValueInput('AT' + n).setCheck('Number');
+      this.appendValueInput('AT' + n).setCheck(
+          Blockly.StaticTyping.blocklyType.NUMBER);
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL' + n)
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -626,19 +635,21 @@ Blockly.Blocks['lists_split'] = {
         function(newOp) {
           if (newOp == 'SPLIT') {
             thisBlock.outputConnection.setCheck('Array');
-            thisBlock.getInput('INPUT').setCheck('String');
+            thisBlock.getInput('INPUT').setCheck(
+                Blockly.StaticTyping.blocklyType.TEXT);
           } else {
-            thisBlock.outputConnection.setCheck('String');
+            thisBlock.outputConnection.setCheck(
+                Blockly.StaticTyping.blocklyType.TEXT);
             thisBlock.getInput('INPUT').setCheck('Array');
           }
         });
     this.setHelpUrl(Blockly.Msg.LISTS_SPLIT_HELPURL);
     this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('INPUT')
-        .setCheck('String')
+        .setCheck(Blockly.StaticTyping.blocklyType.TEXT)
         .appendField(dropdown, 'MODE');
     this.appendValueInput('DELIM')
-        .setCheck('String')
+        .setCheck(Blockly.StaticTyping.blocklyType.TEXT)
         .appendField(Blockly.Msg.LISTS_SPLIT_WITH_DELIMITER);
     this.setInputsInline(true);
     this.setOutput(true, 'Array');

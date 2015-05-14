@@ -1,9 +1,23 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
-# An example of embedding CEF browser in wxPython on Windows.
-# Tested with wxPython 2.8.12.1 and 3.0.2.0.
+#
+# Embedding CEF browser in a wxPython window to launch Ardublockly.
+#
+# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 import os
-import wx
 import re
 import sys
 import time
@@ -13,9 +27,15 @@ import codecs
 import inspect
 import platform
 import traceback
-from cefpython3 import cefpython
-import wx.lib.agw.flatmenu as FM
 from ArdublocklyServer.BlocklyHTTPServer import start_server
+try:
+    import wx
+    import wx.lib.agw.flatmenu as FM
+    from cefpython3 import cefpython
+except ImportError:
+    print("You need to have cefpython3, and wx installed!")
+    sys.exit(1)
+
 
 __file__ = sys.argv[0]
 
@@ -813,7 +833,7 @@ def launch_server(server_root):
     else:
         root_location = os.path.dirname(os.path.realpath(sys.argv[0]))
     thread = threading.Thread(
-        target=start_server, kwargs={"document_root":root_location})
+        target=start_server, kwargs={"document_root": root_location})
     print("\n======= Starting Server =======")
     thread.start()
 

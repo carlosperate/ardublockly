@@ -40,7 +40,7 @@ Blockly.Blocks['controls_if'] = {
     this.setHelpUrl(Blockly.Msg.CONTROLS_IF_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
     this.appendValueInput('IF0')
-        .setCheck('Boolean')
+        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendStatementInput('DO0')
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
@@ -93,7 +93,7 @@ Blockly.Blocks['controls_if'] = {
     this.elseCount_ = parseInt(xmlElement.getAttribute('else'), 10);
     for (var i = 1; i <= this.elseifCount_; i++) {
       this.appendValueInput('IF' + i)
-          .setCheck('Boolean')
+          .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
           .appendField(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF);
       this.appendStatementInput('DO' + i)
           .appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
@@ -150,7 +150,7 @@ Blockly.Blocks['controls_if'] = {
         case 'controls_if_elseif':
           this.elseifCount_++;
           var ifInput = this.appendValueInput('IF' + this.elseifCount_)
-              .setCheck('Boolean')
+              .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
               .appendField(Blockly.Msg.CONTROLS_IF_MSG_ELSEIF);
           var doInput = this.appendStatementInput('DO' + this.elseifCount_);
           doInput.appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
@@ -263,7 +263,7 @@ Blockly.Blocks['logic_compare'] = {
    * @this Blockly.Block
    */
   init: function() {
-    var OPERATORS = Blockly.RTL ? [
+    var OPERATORS = this.RTL ? [
           ['=', 'EQ'],
           ['\u2260', 'NEQ'],
           ['>', 'LT'],
@@ -280,7 +280,7 @@ Blockly.Blocks['logic_compare'] = {
         ];
     this.setHelpUrl(Blockly.Msg.LOGIC_COMPARE_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
-    this.setOutput(true, 'Boolean');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
     this.appendValueInput('A');
     this.appendValueInput('B')
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
@@ -332,7 +332,7 @@ Blockly.Blocks['logic_compare'] = {
    * Assigns a type to the block, comparison operations result in booleans.
    */
   getType: function() {
-    return 'boolean';
+    return Blockly.StaticTyping.blocklyType.BOOLEAN;
   }
 };
 
@@ -347,11 +347,11 @@ Blockly.Blocks['logic_operation'] = {
          [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']];
     this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
-    this.setOutput(true, 'Boolean');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
     this.appendValueInput('A')
-        .setCheck('Boolean');
+        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN);
     this.appendValueInput('B')
-        .setCheck('Boolean')
+        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'OP');
     this.setInputsInline(true);
     // Assign 'this' to a variable for use in the tooltip closure below.
@@ -369,7 +369,7 @@ Blockly.Blocks['logic_operation'] = {
    * Assigns a type to the block, logic comparison operations result in bools.
    */
   getType: function() {
-    return 'boolean';
+    Blockly.StaticTyping.blocklyType.BOOLEAN;
   }
 };
 
@@ -381,9 +381,11 @@ Blockly.Blocks['logic_negate'] = {
   init: function() {
     this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
-    this.setOutput(true, 'Boolean');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
     this.interpolateMsg(Blockly.Msg.LOGIC_NEGATE_TITLE,
-                        ['BOOL', 'Boolean', Blockly.ALIGN_RIGHT],
+                        ['BOOL',
+                         Blockly.StaticTyping.blocklyType.BOOLEAN,
+                         Blockly.ALIGN_RIGHT],
                         Blockly.ALIGN_RIGHT);
     this.setTooltip(Blockly.Msg.LOGIC_NEGATE_TOOLTIP);
   },
@@ -392,7 +394,7 @@ Blockly.Blocks['logic_negate'] = {
    * it should return the same.
    */
   getType: function() {
-    return 'boolean';
+    return Blockly.StaticTyping.blocklyType.BOOLEAN;
   }
 };
 
@@ -407,7 +409,7 @@ Blockly.Blocks['logic_boolean'] = {
          [Blockly.Msg.LOGIC_BOOLEAN_FALSE, 'FALSE']];
     this.setHelpUrl(Blockly.Msg.LOGIC_BOOLEAN_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
-    this.setOutput(true, 'Boolean');
+    this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
     this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
@@ -416,7 +418,7 @@ Blockly.Blocks['logic_boolean'] = {
    * Assigns a type to the boolean block.
    */
   getType: function() {
-    return 'boolean';
+    return Blockly.StaticTyping.blocklyType.BOOLEAN;
   }
 };
 
@@ -445,7 +447,7 @@ Blockly.Blocks['logic_ternary'] = {
     this.setHelpUrl(Blockly.Msg.LOGIC_TERNARY_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
     this.appendValueInput('IF')
-        .setCheck('Boolean')
+        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
         .appendField(Blockly.Msg.LOGIC_TERNARY_CONDITION);
     this.appendValueInput('THEN')
         .appendField(Blockly.Msg.LOGIC_TERNARY_IF_TRUE);
