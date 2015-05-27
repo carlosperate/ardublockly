@@ -1,4 +1,4 @@
-	#!/usr/bin/env python2
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 #
 # Embedding CEF browser in a wxPython window to launch Ardublockly.
@@ -197,7 +197,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.OnClose)
         if USE_EVT_IDLE and not popup:
             # Bind EVT_IDLE only for the main application frame.
-            print("Using EVT_IDLE to execute the CEF message loop work")
+            print(g_ardutag + "Using EVT_IDLE to execute the CEF message loop work")
             self.Bind(wx.EVT_IDLE, self.OnIdle)
 
         self.CreateMenu()
@@ -323,6 +323,8 @@ class JavascriptExternal:
         print(g_ardutag + "TestAllTypes: "+str(args))
 
     def ExecuteFunction(self, *args):
+        if g_platform_os == "linux":
+            self.mainBrowser.GetMainFrame().ExecuteFunction(*args)
         self.mainBrowser.ExecuteFunction(*args)
 
     def TestJSCallback(self, jsCallback):
@@ -375,7 +377,7 @@ class JavascriptExternal:
         self.cookieVisitor = CookieVisitor()
         cookieManager = self.mainBrowser.GetUserData("cookieManager")
         if not cookieManager:
-            print("\n[ardublockly] Cookie manager not yet created! Visit "
+            print(g_ardutag + "Cookie manager not yet created! Visit "
                   "the cookietester website first and create some cookies")
             return
         cookieManager.VisitAllCookies(self.cookieVisitor)
@@ -385,7 +387,7 @@ class JavascriptExternal:
         self.cookieVisitor = CookieVisitor()
         cookieManager = self.mainBrowser.GetUserData("cookieManager")
         if not cookieManager:
-            print("\n[ardublockly] Cookie manager not yet created! Visit "
+            print(g_ardutag + "Cookie manager not yet created! Visit "
                   "the cookietester website first and create some cookies")
             return
         cookieManager.VisitUrlCookies(
@@ -396,7 +398,7 @@ class JavascriptExternal:
     def SetCookie(self):
         cookieManager = self.mainBrowser.GetUserData("cookieManager")
         if not cookieManager:
-            print("\n[ardublockly] Cookie manager not yet created! Visit "
+            print(g_ardutag + "Cookie manager not yet created! Visit "
                   "the cookietester website first and create some cookies")
             return
         cookie = cefpython.Cookie()
@@ -404,25 +406,25 @@ class JavascriptExternal:
         cookie.SetValue("yeah really")
         cookieManager.SetCookie("http://www.html-kit.com/tools/cookietester/",
                 cookie)
-        print("\n[ardublockly] Cookie created! Visit html-kit cookietester to "
+        print(g_ardutag + "Cookie created! Visit html-kit cookietester to "
               "see it")
 
     def DeleteCookies(self):
         cookieManager = self.mainBrowser.GetUserData("cookieManager")
         if not cookieManager:
-            print("\n[ardublockly] Cookie manager not yet created! Visit "
+            print(g_ardutag + "Cookie manager not yet created! Visit "
                   "the cookietester website first and create some cookies")
             return
         cookieManager.DeleteCookies(
             "http://www.html-kit.com/tools/cookietester/",
             "Created_Via_Python")
-        print("\n[ardublockly] Cookie deleted! Visit html-kit cookietester "
+        print(g_ardutag + "Cookie deleted! Visit html-kit cookietester "
               "to see the result")
 
 
 class StringVisitor:
     def Visit(self, string):
-        print("\n[ardublockly] StringVisitor.Visit(): string:")
+        print(g_ardutag + "StringVisitor.Visit(): string:")
         print("--------------------------------")
         print(string)
         print("--------------------------------")
@@ -431,9 +433,9 @@ class StringVisitor:
 class CookieVisitor:
     def Visit(self, cookie, count, total, deleteCookie):
         if count == 0:
-            print("\n[ardublockly] CookieVisitor.Visit(): total cookies: %s" %
+            print(g_ardutag + "CookieVisitor.Visit(): total cookies: %s" %
                   total)
-        print("\n[ardublockly] CookieVisitor.Visit(): cookie:")
+        print(g_ardutag + "CookieVisitor.Visit(): cookie:")
         print("    " + str(cookie.Get()))
         # True to continue visiting cookies
         return True
@@ -477,11 +479,6 @@ class ClientHandler:
     def OnBeforeBrowse(self, browser, frame, request, isRedirect):
         print(g_ardutag + "RequestHandler::OnBeforeBrowse()")
         print("    url = %s" % request.GetUrl()[:100])
-        # Handle "magnet:" links.
-        if request.GetUrl().startswith("magnet:"):
-            print(g_ardutag + "RequestHandler::OnBeforeBrowse(): "
-                    "magnet link clicked, cancelling browse request")
-            return True
         return False
 
     def OnBeforeResourceLoad(self, browser, frame, request):
