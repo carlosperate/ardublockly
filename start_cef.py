@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+	#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 #
 # Embedding CEF browser in a wxPython window to launch Ardublockly.
@@ -45,6 +45,7 @@ __file__ = sys.argv[0]
 g_applicationSettings = None
 g_browserSettings = None
 g_ardutag = "[ardublockly] "
+g_platform_os = None
 
 # Which method to use for message loop processing.
 #   EVT_IDLE - wx application has priority
@@ -123,9 +124,15 @@ class MainFrame(wx.Frame):
 
     def GetHandleForBrowser(self):
         if self.mainPanel:
-            return self.mainPanel.GetHandle()
+            if g_platform_os == "linux":
+                return self.mainPanel.GetGtkWidget()
+            else:
+                return self.mainPanel.GetHandle()
         else:
-            return self.GetHandle()
+            if g_platform_os == "linux":
+                return self.GetGtkWidget()
+            else:
+                return self.GetHandle()
 
     def __init__(self, url=None, popup=False):
         if popup:
@@ -136,8 +143,9 @@ class MainFrame(wx.Frame):
         size = (1250, 768)
 
         # This is an optional code to enable High DPI support.
-        if "auto_zooming" in g_applicationSettings \
-                and g_applicationSettings["auto_zooming"] == "system_dpi":
+        if (g_platform_os == "win") \
+                and ("auto_zooming" in g_applicationSettings) \
+                and (g_applicationSettings["auto_zooming"] == "system_dpi"):
             # This utility function will adjust width/height using
             # OS DPI settings. For 800/600 with Win7 DPI settings
             # being set to "Larger 150%" will return 1200/900.
@@ -254,10 +262,12 @@ class MainFrame(wx.Frame):
         self.menubar.SetBarHeight()
 
     def OnSetFocus(self, event):
-        cefpython.WindowUtils.OnSetFocus(self.GetHandleForBrowser(), 0, 0, 0)
+        if g_platform_os != "linux":
+            cefpython.WindowUtils.OnSetFocus(self.GetHandleForBrowser(), 0, 0, 0)
 
     def OnSize(self, event):
-        cefpython.WindowUtils.OnSize(self.GetHandleForBrowser(), 0, 0, 0)
+        if g_platform_os != "linux":
+            cefpython.WindowUtils.OnSize(self.GetHandleForBrowser(), 0, 0, 0)
 
     def OnClose(self, event):
         # Remove all CEF browser references so that browser is closed
@@ -801,8 +811,9 @@ def cef_init():
     #   Larger 150% = 144 DPI = 2.0 zoom level
     #   Custom 75% = 72 DPI = -1.0 zoom level
     #g_applicationSettings["auto_zooming"] = "system_dpi"
-    print(g_ardutag + "Calling SetProcessDpiAware")
-    cefpython.DpiAware.SetProcessDpiAware()
+    if g_platform_os == "win":
+        print(g_ardutag + "Calling SetProcessDpiAware")
+        cefpython.DpiAware.SetProcessDpiAware()
 
     # Command line switches set programmatically
     # https://code.google.com/p/cefpython/wiki/CommandLineSwitches
@@ -833,12 +844,29 @@ def launch_server(server_root):
     else:
         root_location = os.path.dirname(os.path.realpath(sys.argv[0]))
     thread = threading.Thread(
-        target=start_server, kwargs={"document_root": root_location})
+        target=start_server, kwargs={"document_root":root_location})
     print("\n======= Starting Server =======")
     thread.start()
 
 
+def detect_os():
+    """
+    Detects the Operating System and sets a global variable to target OS
+    specific features to the right platform.
+    Options for g_platform_os are: win, lin, mac
+    """
+    global g_platform_os
+    if os.name == "nt":
+        g_platform_os = "win"
+    elif os.name == "posix":
+        g_platform_os = "linux"
+    elif os.name == "mac":
+        g_platform_os = "mac"
+
+
 def main(argv):
+    detect_os()
+    print(g_ardutag + "OS: %s" % g_platform_os)
     print(g_ardutag + "Python version: %s" % platform.python_version())
     print(g_ardutag + "wx.version: %s" % wx.version())
     print(g_ardutag + "cefpython GetModuleDirectory: %s" % cefpython.GetModuleDirectory())
