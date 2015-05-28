@@ -1,42 +1,47 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 #
-# Embedding CEF browser in a wxPython window to launch Ardublockly.
+# Embedding Chromium Embedded Framework browser in a wxPython window to launch
+# Ardublockly.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Based on an example to from the CEF Python repository.
+#   https://code.google.com/p/cefpython/source/browse/cefpython/cef3/windows/binaries_64bit/wxpython.py
+#   Copyright (c) 2012-2014 The CEF Python authors. All rights reserved.
+#   Website: http://code.google.com/p/cefpython/
+#   New BSD license: 
+#     https://code.google.com/p/cefpython/source/browse/cefpython/LICENSE.txt
+# 
+# Changes are copyright (c) 2015 carlosperate https://github.com/carlosperate/
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
+
+# In Mac cefpython library must be the very first library imported. This is
+# because CEF was compiled with the tcmalloc memory allocator which hooks
+# globally and replaces the default malloc allocator. If memory was allocated
+# using malloc and then freed using tcmalloc then this would result in random
+# segmentation faults in an application. See Issue 155 which is to provide CEF
+# builds on Mac with tcmalloc disabled:
+# https://code.google.com/p/cefpython/issues/detail?id=155
+import sys
+try:
+    from cefpython3 import cefpython
+    import wx
+    import wx.lib.agw.flatmenu as FM
+except ImportError:
+    print("You need to have ce  fpython3, and wx installed!")
+    sys.exit(1)
 import os
 import re
-import sys
 import time
-import uuid
-import struct
+#import uuid
+#import ctypes
+#import struct
 import codecs
 import inspect
 import platform
 import traceback
 from ArdublocklyServer.BlocklyHTTPServer import start_server
-try:
-    import wx
-    import wx.lib.agw.flatmenu as FM
-    from cefpython3 import cefpython
-except ImportError:
-    print("You need to have cefpython3, and wx installed!")
-    sys.exit(1)
 
-
+# Needed for packaging the application on self contained executable
 __file__ = sys.argv[0]
 
 # -----------------------------------------------------------------------------
@@ -44,7 +49,9 @@ __file__ = sys.argv[0]
 
 g_applicationSettings = None
 g_browserSettings = None
+g_countWindows = 0
 g_ardutag = "[ardublockly] "
+g_ardu_link = "http://localhost:8000/ardublockly/index.html"
 g_platform_os = None
 
 # Which method to use for message loop processing.
@@ -143,7 +150,7 @@ class MainFrame(wx.Frame):
         size = (1250, 768)
 
         # This is an optional code to enable High DPI support.
-        if (g_platform_os == "win") \
+        if (g_platform_os == "windows") \
                 and ("auto_zooming" in g_applicationSettings) \
                 and (g_applicationSettings["auto_zooming"] == "system_dpi"):
             # This utility function will adjust width/height using
@@ -153,9 +160,16 @@ class MainFrame(wx.Frame):
 
         self.SetSize(size)
 
-        if not url:
-            url = "http://localhost:8000/ardublockly/index.html"
+        # On mac the cefpython.Shutdown() has to be place in the onClose method.
+        # So, the number of opened windows has to be tracked/
+        if g_platform_os == "mac":
+            global g_countWindows
+            g_countWindows += 1
 
+        if not url:
+            url = g_ardu_link
+
+        # Cannot attach browser to the main frame as the menu won't work.
         # Also have to set wx.WANTS_CHARS style for all parent panels/controls
         self.mainPanel = wx.Panel(self, style=wx.WANTS_CHARS)
 
@@ -169,11 +183,13 @@ class MainFrame(wx.Frame):
                 self.clientHandler._OnAfterCreated)
 
         windowInfo = cefpython.WindowInfo()
-        windowInfo.SetAsChild(self.GetHandleForBrowser())
+        (width, height) = self.mainPanel.GetClientSizeTuple()
+        windowInfo.SetAsChild(self.GetHandleForBrowser(),
+                              [0, 0, width, height])
         self.browser = cefpython.CreateBrowserSync(
-            windowInfo,
-            browserSettings=g_browserSettings,
-            navigateUrl=url)
+                windowInfo,
+                browserSettings=g_browserSettings,
+                navigateUrl=url)
 
         self.clientHandler.mainBrowser = self.browser
         self.browser.SetClientHandler(self.clientHandler)
@@ -197,7 +213,8 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.OnClose)
         if USE_EVT_IDLE and not popup:
             # Bind EVT_IDLE only for the main application frame.
-            print(g_ardutag + "Using EVT_IDLE to execute the CEF message loop work")
+            print(g_ardutag + \
+                  "Using EVT_IDLE to execute the CEF message loop work")
             self.Bind(wx.EVT_IDLE, self.OnIdle)
 
         self.CreateMenu()
@@ -262,11 +279,11 @@ class MainFrame(wx.Frame):
         self.menubar.SetBarHeight()
 
     def OnSetFocus(self, event):
-        if g_platform_os != "linux":
+        if g_platform_os == "windows":
             cefpython.WindowUtils.OnSetFocus(self.GetHandleForBrowser(), 0, 0, 0)
 
     def OnSize(self, event):
-        if g_platform_os != "linux":
+        if g_platform_os == "windows":
             cefpython.WindowUtils.OnSize(self.GetHandleForBrowser(), 0, 0, 0)
 
     def OnClose(self, event):
@@ -288,12 +305,22 @@ class MainFrame(wx.Frame):
         # | self.browser.ParentWindowWillClose()
         # | event.Skip()
 
+        # On Win/Linux the call to cefpython.Shutdown() is after app.MainLoop()
+        # returns, but on Mac it needs to be here.
+        if g_platform_os == "mac":
+            global g_countWindows
+            g_countWindows -= 1
+            if g_countWindows == 0:
+                cefpython.Shutdown()
+                print(g_ardutag + "OnClose: Exiting")
+                wx.GetApp().Exit()
+
     def OnIdle(self, event):
         cefpython.MessageLoopWork()
 
 
 def PyPrint(message):
-    print(g_ardutag + "PyPrint: "+message)
+    print(g_ardutag + "PyPrint: " + message)
 
 
 class JavascriptExternal:
@@ -317,15 +344,16 @@ class JavascriptExternal:
         frame.Show()
 
     def Print(self, message):
-        print(g_ardutag + "Print: "+message)
+        print(g_ardutag + "Print: " + message)
 
     def TestAllTypes(self, *args):
-        print(g_ardutag + "TestAllTypes: "+str(args))
+        print(g_ardutag + "TestAllTypes: " + str(args))
 
     def ExecuteFunction(self, *args):
-        if g_platform_os == "linux":
+        if g_platform_os == "windows":
+            self.mainBrowser.ExecuteFunction(*args)
+        else:
             self.mainBrowser.GetMainFrame().ExecuteFunction(*args)
-        self.mainBrowser.ExecuteFunction(*args)
 
     def TestJSCallback(self, jsCallback):
         print(g_ardutag + "jsCallback.GetFunctionName() = %s" %
@@ -473,6 +501,8 @@ class ClientHandler:
         print("    source = %s" % source)
         print("    line = %s" % line)
 
+    # onKeyEvent removed to avoid users using common browser key commands
+
     # -------------------------------------------------------------------------
     # RequestHandler
     # -------------------------------------------------------------------------
@@ -615,7 +645,7 @@ class ClientHandler:
 
     def _Browser_LoadUrl(self, browser):
         if browser.GetUrl() == "data:text/html,Test#Browser.LoadUrl":
-             browser.LoadUrl("http://localhost:8000/ardublockly/index.html")
+             browser.LoadUrl(g_ardu_link)
 
     def OnLoadError(self, browser, frame, errorCode, errorTextList, failedUrl):
         print(g_ardutag + "LoadHandler::OnLoadError()")
@@ -649,22 +679,20 @@ class ClientHandler:
         # Set WindowInfo object:
         # > windowInfo[0] = cefpython.WindowInfo()
 
-        # On Windows there are keyboard problems in popups, when popup
-        # is created using "window.open" or "target=blank". This issue
-        # occurs only in wxPython. PyGTK or PyQt do not require this fix.
+        # On Windows there are keyboard problems in popups in wxPython, when
+        # popup is created using "window.open" or "target=blank".
         # The solution is to create window explicitly, and not depend
         # on CEF to create window internally. See Issue 80 for details:
         # https://code.google.com/p/cefpython/issues/detail?id=80
-
+        #
         # If you set allowPopups=True then CEF will create popup window.
-        # The wx.Frame cannot be created here, as this callback is
-        # executed on the IO thread. Window should be created on the UI
-        # thread. One solution is to call cefpython.CreateBrowser()
-        # which runs asynchronously and can be called on any thread.
-        # The other solution is to post a task on the UI thread, so
-        # that cefpython.CreateBrowserSync() can be used.
+        # The wx.Frame cannot be created here, as this callback is executed on
+        # the IO thread. Window should be created on the UI thread.
+        # One solution is to call cefpython.CreateBrowser() which runs
+        # asynchronously and can be called on any thread.
+        # The other solution is to post a task on the UI thread, so that
+        # cefpython.CreateBrowserSync() can be used.
         cefpython.PostTask(cefpython.TID_UI, self._CreatePopup, targetUrl)
-
         allowPopups = False
         return not allowPopups
 
@@ -786,16 +814,26 @@ def cef_init():
                          "devtools": True},         # Developer Tools
         "downloads_enabled": True,
         "ignore_certificate_errors": True,
-        "locales_dir_path": cefpython.GetModuleDirectory() + os.sep + "locales",
+
         "debug": True,
         "log_file": GetApplicationPath("cef_debug.log"),
         "log_severity": cefpython.LOGSEVERITY_INFO,
         "release_dcheck_enabled": False,
         "remote_debugging_port": 0,
-        "resources_dir_path": cefpython.GetModuleDirectory(),
+        
         "unique_request_context_per_browser": True,
         "auto_zooming": "system_dpi"
     }
+
+    # "resources_dir_path" must be set on Mac, "locales_dir_path" not.
+    if g_platform_os == "mac":
+        g_applicationSettings["resources_dir_path"] = \
+                cefpython.GetModuleDirectory() + os.sep + "Resources"
+    else:
+        g_applicationSettings["resources_dir_path"] = \
+                cefpython.GetModuleDirectory()
+        g_applicationSettings["locales_dir_path"] = \
+                cefpython.GetModuleDirectory() + os.sep + "locales"
 
     # High DPI support is available only on Windows.
     # Example values for auto_zooming are:
@@ -807,8 +845,8 @@ def cef_init():
     #   Medium 125% = 120 DPI = 1.0 zoom level
     #   Larger 150% = 144 DPI = 2.0 zoom level
     #   Custom 75% = 72 DPI = -1.0 zoom level
-    #g_applicationSettings["auto_zooming"] = "system_dpi"
-    if g_platform_os == "win":
+    if g_platform_os == "windows":
+        #g_applicationSettings["auto_zooming"] = "system_dpi"
         print(g_ardutag + "Calling SetProcessDpiAware")
         cefpython.DpiAware.SetProcessDpiAware()
 
@@ -819,6 +857,11 @@ def cef_init():
         "no-proxy-server": "",
         #"disable-remote-fonts": False,
     }
+    # On Mac it is required to provide path to a specific locale.pak file.
+    # On Win/Linux you only specify the ApplicationSettings.locales_dir_path.
+    if g_platform_os == "mac":
+        g_commandLineSwitches["locale_pak"] = cefpython.GetModuleDirectory() + \
+                "/Resources/en.lproj/locale.pak"
 
     cefpython.Initialize(g_applicationSettings, g_commandLineSwitches)
 
@@ -853,11 +896,12 @@ def detect_os():
     Options for g_platform_os are: win, lin, mac
     """
     global g_platform_os
-    if os.name == "nt":
-        g_platform_os = "win"
-    elif os.name == "posix":
+    os = platform.system()
+    if os == "Windows":
+        g_platform_os = "windows"
+    elif os == "Linux":
         g_platform_os = "linux"
-    elif os.name == "mac":
+    elif os == "Darwin":
         g_platform_os = "mac"
 
 
@@ -907,7 +951,10 @@ def main(argv):
     # This is to ensure reliable CEF shutdown.
     del app
 
-    cefpython.Shutdown()
+    # On Mac cefpython.Shutdown() is called in MainFrame.OnClose,
+    # followed by wx.GetApp.Exit().
+    if g_platform_os != "mac":
+        cefpython.Shutdown()
 
 
 if __name__ == '__main__':
