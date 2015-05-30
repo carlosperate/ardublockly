@@ -54,7 +54,7 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
             trashcan: true });
       ArduinoMaterial.BLOCKLY_INJECTED = true;
     }
-  }
+  };
 
   // If file run locally Chrome will fail here
   try {
@@ -159,15 +159,16 @@ ArduinoMaterial.loadBlocksfromXmlDom = function(blocksXmlDom) {
  */
 ArduinoMaterial.showToolbox = function(show, callback) {
   var resizeWorkspaceAndCallback = function() {
-    /* For some reason the workspace only resizes after second call */
-    //Blockly.fireUiEvent(window, 'resize');
-    //Blockly.fireUiEvent(window, 'resize');
-    //callback.call();
-  }
+    ArduinoMaterial.workspace.render(); 
+    if (callback && ((typeof callback) === (typeof Function))) {
+      callback();
+    }
+  };
+
   if (show == false) {
-    $('.blocklyToolboxDiv').slideUp(300, callback);
+    $('.blocklyToolboxDiv').slideUp(300, resizeWorkspaceAndCallback);
   } else {
-    $('.blocklyToolboxDiv').slideDown(300, callback);
+    $('.blocklyToolboxDiv').slideDown(300, resizeWorkspaceAndCallback);
   }
 };
 
@@ -177,7 +178,7 @@ ArduinoMaterial.showToolbox = function(show, callback) {
 ArduinoMaterial.discard = function() {
   var blockCount = ArduinoMaterial.workspace.getAllBlocks().length;
   if (blockCount == 1) {
-    Blockly.mainWorkspace.clear();
+    ArduinoMaterial.workspace.clear();
     ArduinoMaterial.renderContent();
   } else if (blockCount > 1) {
     ArduinoMaterial.materialAlert(
@@ -186,7 +187,7 @@ ArduinoMaterial.discard = function() {
         sure you want to delete them?',
         true,
         function() {
-          Blockly.mainWorkspace.clear();
+          ArduinoMaterial.workspace.clear();
           ArduinoMaterial.renderContent();
         });
   }

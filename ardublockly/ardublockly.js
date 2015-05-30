@@ -26,6 +26,8 @@ window.addEventListener('load', function load(event) {
   ArduinoMaterial.bindDesignEventListeners_();
   ArduinoMaterial.bindBlocklyEventListeners_();
 
+  ArduinoMaterial.resizeToggleToolboxBotton();
+
   // Check if not running locally (including developer's local network IP)
   if (document.location.hostname != 'localhost' &&
       document.location.hostname != '192.168.0.7') {
@@ -423,7 +425,7 @@ ArduinoMaterial.toogleToolbox = function() {
         function() { ArduinoMaterial.showToolboxButtonState(false); });
     ArduinoMaterial.workspace.toolbox_.flyout_.hide();
   } else {
-     ArduinoMaterial.showToolboxButtonState(true);
+    ArduinoMaterial.showToolboxButtonState(true);
     ArduinoMaterial.showToolbox(true);
   }
   ArduinoMaterial.TOOLBAR_SHOWING_ = !ArduinoMaterial.TOOLBAR_SHOWING_;

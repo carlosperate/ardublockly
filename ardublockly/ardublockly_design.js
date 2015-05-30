@@ -80,14 +80,14 @@ ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
   // Element conatins several classes, use replace to maintain the rest
   if (toolboxVisible == true) {
     toolboxButton.className = toolboxButton.className.replace(
-      'button_toggle_toolbox_on', 'button_toggle_toolbox_off'); 
+        'button_toggle_toolbox_on', 'button_toggle_toolbox_off'); 
     toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
-     'mdi-action-visibility', 'mdi-action-visibility-off');
+       'mdi-action-visibility', 'mdi-action-visibility-off');
   } else {
     toolboxButton.className = toolboxButton.className.replace(
-      'button_toggle_toolbox_off', 'button_toggle_toolbox_on'); 
+        'button_toggle_toolbox_off', 'button_toggle_toolbox_on'); 
     toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
-     'mdi-action-visibility-off', 'mdi-action-visibility');
+        'mdi-action-visibility-off', 'mdi-action-visibility');
   }
 };
 
@@ -109,17 +109,26 @@ ArduinoMaterial.resizeBlocklyWorkspace = function() {
   contentBlocks.style.width = wrapperPanelSize.width + 'px';
   contentBlocks.style.width =
       (2 * wrapperPanelSize.width - contentBlocks.offsetWidth) + 'px';
+};
 
-  //Blockly.MsvgResize();
-  //Blockly.mainWorkspace.render();
-  //alert(
-  //  'resized ' + wrapperPanelSize.width + ' ' + contentBlocks.style.width);
-
-  // Sets the toolbox toggle button width to that of the toolbox
-  if ( ArduinoMaterial.isToolboxVisible() &&
-       ArduinoMaterial.workspace.toolbox_.width ) {
-    // For some reason normal set style and getElementById didn't work
-    $('#button_toggle_toolbox').width(ArduinoMaterial.workspace.toolbox_.width);
+/**
+ * Resizes the toolbox button to toggle its visibility to the width of the
+ * toolbox.
+ * The toolbox width does not change with workspace width, so safe to do once,
+ * but it needs to be done after blockly has been injected.
+ * @private
+ */
+ArduinoMaterial.resizeToggleToolboxBotton = function() {
+  // As the toolbox inject is asynchronous we need to wait
+  if (ArduinoMaterial.BLOCKLY_INJECTED == false) {
+    setTimeout(ArduinoMaterial.resizeToggleToolboxBotton, 50);
+  } else {
+    // Sets the toolbox toggle button width to that of the toolbox
+    if ( ArduinoMaterial.isToolboxVisible() &&
+         ArduinoMaterial.workspace.toolbox_.width ) {
+      // For some reason normal set style and getElementById didn't work
+      $('#button_toggle_toolbox').width(ArduinoMaterial.workspace.toolbox_.width);
+    }
   }
 };
 
