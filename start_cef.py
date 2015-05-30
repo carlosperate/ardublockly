@@ -13,7 +13,7 @@
 # 
 # Changes are copyright (c) 2015 carlosperate https://github.com/carlosperate/
 #
-
+import sys
 # In Mac cefpython library must be the very first library imported. This is
 # because CEF was compiled with the tcmalloc memory allocator which hooks
 # globally and replaces the default malloc allocator. If memory was allocated
@@ -21,7 +21,6 @@
 # segmentation faults in an application. See Issue 155 which is to provide CEF
 # builds on Mac with tcmalloc disabled:
 # https://code.google.com/p/cefpython/issues/detail?id=155
-import sys
 try:
     from cefpython3 import cefpython
     import wx
@@ -32,9 +31,6 @@ except ImportError:
 import os
 import re
 import time
-#import uuid
-#import ctypes
-#import struct
 import codecs
 import inspect
 import platform
@@ -217,13 +213,16 @@ class MainFrame(wx.Frame):
                   "Using EVT_IDLE to execute the CEF message loop work")
             self.Bind(wx.EVT_IDLE, self.OnIdle)
 
-        self.CreateMenu()
-
         main_sizer = wx.BoxSizer(wx.VERTICAL)
-        main_sizer.Add(self.menubar, proportion=0,
-                       flag=wx.ALL|wx.ALIGN_TOP|wx.EXPAND, border=0)
+
+        # Only add the menubar to the main application frame
+        if not popup:
+            self.CreateMenu()
+            main_sizer.Add(self.menubar, proportion=0,
+                           flag=wx.ALL|wx.ALIGN_TOP|wx.EXPAND, border=0)
+
         main_sizer.Add(self.mainPanel, proportion=1,
-                       flag=wx.ALL|wx.ALIGN_TOP|wx.EXPAND, border=0)
+               flag=wx.ALL|wx.ALIGN_TOP|wx.EXPAND, border=0)
         self.SetSizer(main_sizer)
         main_sizer.Layout()
 
@@ -954,6 +953,7 @@ def main(argv):
     # On Mac cefpython.Shutdown() is called in MainFrame.OnClose,
     # followed by wx.GetApp.Exit().
     if g_platform_os != "mac":
+        print(g_ardutag + "End of main: Exiting")
         cefpython.Shutdown()
 
 
