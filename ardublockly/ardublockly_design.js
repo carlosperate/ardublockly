@@ -117,9 +117,9 @@ ArduinoMaterial.resizeBlocklyWorkspace = function() {
 
   // Sets the toolbox toggle button width to that of the toolbox
   if ( ArduinoMaterial.isToolboxVisible() &&
-       Blockly.mainWorkspace.toolbox_.width ) {
+       ArduinoMaterial.workspace.toolbox_.width ) {
     // For some reason normal set style and getElementById didn't work
-    $('#button_toggle_toolbox').width(Blockly.mainWorkspace.toolbox_.width);
+    $('#button_toggle_toolbox').width(ArduinoMaterial.workspace.toolbox_.width);
   }
 };
 

@@ -12,6 +12,12 @@
 var ArduinoMaterial = ArduinoMaterial || {};
 
 /**
+ * Blockly's main workspace.
+ * @type Blockly.WorkspaceSvg
+ */
+ArduinoMaterial.workspace = null;
+
+/**
  * Public variable that indicates if Blockly has been injected.
  * @type {!boolean}
  */
@@ -37,7 +43,7 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
-      Blockly.inject(blocklyEl, {
+      ArduinoMaterial.workspace = Blockly.inject(blocklyEl, {
             collapse: true,
             comments: true,
             disable: true,
@@ -95,7 +101,7 @@ ArduinoMaterial.loadXmlBlockFile =
  * @return {!string} Arduino code string.
  */
 ArduinoMaterial.generateArduino = function() {
-  return Blockly.Arduino.workspaceToCode();
+  return Blockly.Arduino.workspaceToCode(ArduinoMaterial.workspace);
 };
 
 /**
@@ -103,7 +109,7 @@ ArduinoMaterial.generateArduino = function() {
  * @return {!string} XML code string.
  */
 ArduinoMaterial.generateXml = function() {
-  var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var xmlDom = Blockly.Xml.workspaceToDom(ArduinoMaterial.workspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
   return xmlText;
 };
@@ -121,7 +127,7 @@ ArduinoMaterial.replaceBlocksfromXml = function(blocksXml) {
   } catch (e) {
     return false;
   }
-  Blockly.mainWorkspace.clear();
+  ArduinoMaterial.workspace.clear();
   var sucess = false;
   if (xmlDom) {
     sucess = ArduinoMaterial.loadBlocksfromXmlDom(xmlDom);
@@ -136,7 +142,7 @@ ArduinoMaterial.replaceBlocksfromXml = function(blocksXml) {
  */
 ArduinoMaterial.loadBlocksfromXmlDom = function(blocksXmlDom) {
   try {
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blocksXmlDom);
+    Blockly.Xml.domToWorkspace(ArduinoMaterial.workspace, blocksXmlDom);
   } catch (e) {
     return false;
   }
@@ -169,7 +175,7 @@ ArduinoMaterial.showToolbox = function(show, callback) {
  * Discard all blocks from the workspace.
  */
 ArduinoMaterial.discard = function() {
-  var blockCount = Blockly.mainWorkspace.getAllBlocks().length;
+  var blockCount = ArduinoMaterial.workspace.getAllBlocks().length;
   if (blockCount == 1) {
     Blockly.mainWorkspace.clear();
     ArduinoMaterial.renderContent();
@@ -187,7 +193,7 @@ ArduinoMaterial.discard = function() {
 };
 
 /**
- * Creates an AJAX request 
+ * Creates an AJAX request.
  * @return An XML HTTP Request
  */
 ArduinoMaterial.ajaxRequest = function() {

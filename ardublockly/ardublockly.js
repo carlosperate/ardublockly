@@ -11,10 +11,12 @@
  */
 var ArduinoMaterial = ArduinoMaterial || {};
 
+
 /**
  * Initialize function for Ardublockly on page load.
  */
-window.addEventListener('load', function() {
+window.addEventListener('load', function load(event) {
+  window.removeEventListener('load', load, false);
   // Inject Blockly into content_blocks
   ArduinoMaterial.injectBlockly(
     document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
@@ -102,7 +104,7 @@ ArduinoMaterial.bindBlocklyEventListeners_ = function() {
   if (ArduinoMaterial.BLOCKLY_INJECTED == false) {
     setTimeout(ArduinoMaterial.bindBlocklyEventListeners_, 50);
   } else {
-    Blockly.addChangeListener(ArduinoMaterial.renderContent);
+    ArduinoMaterial.workspace.addChangeListener(ArduinoMaterial.renderContent);
   }
 };
 
@@ -161,7 +163,7 @@ ArduinoMaterial.loadUserXmlFile = function() {
     var selectFileDom = document.createElement('INPUT');
     selectFileDom.type = 'file';
     selectFileDom.id = 'select_file';
-    selectFileDom.style = 'display: none';
+    selectFileDom.style.display = 'none';
     document.body.appendChild(selectFileDom);
     selectFile = document.getElementById('select_file');
     selectFile.addEventListener('change', parseInputXMLfile, false);
@@ -419,7 +421,7 @@ ArduinoMaterial.toogleToolbox = function() {
     // showToolbox() takes a callback function as its second argument
     ArduinoMaterial.showToolbox(false, 
         function() { ArduinoMaterial.showToolboxButtonState(false); });
-    Blockly.mainWorkspace.toolbox_.flyout_.hide();
+    ArduinoMaterial.workspace.toolbox_.flyout_.hide();
   } else {
      ArduinoMaterial.showToolboxButtonState(true);
     ArduinoMaterial.showToolbox(true);

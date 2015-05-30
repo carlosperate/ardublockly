@@ -14,6 +14,12 @@
 var ArduinoClassic = {};
 
 /**
+ * Blockly's main workspace.
+ * @type Blockly.WorkspaceSvg
+ */
+ArduinoClassic.workspace = null;
+
+/**
  * List of tab names.
  * @private
  */
@@ -47,7 +53,15 @@ ArduinoClassic.tabClick = function(clickedName) {
   ArduinoClassic.selected = clickedName;
   document.getElementById('tab_' + clickedName).className = 'tabon';
   document.getElementById('content_' + clickedName).style.display = 'block';
+
+  // This is a workaround, something about the html layout causes the blocks to
+  // compress when the block tab is shown after it has been hidden 
+  if (clickedName === 'blocks' && ArduinoClassic.workspace) {
+    ArduinoClassic.workspace.setVisible(false);
+    ArduinoClassic.workspace.setVisible(true);
+  }
   ArduinoClassic.renderContent();
+
   Blockly.fireUiEvent(window, 'resize');
 };
 
@@ -59,12 +73,12 @@ ArduinoClassic.renderContent = function() {
   // Initialize the panel
   if (content.id == 'content_xml') {
     var xmlTextarea = document.getElementById('content_xml');
-    var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+    var xmlDom = Blockly.Xml.workspaceToDom(ArduinoClassic.workspace);
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     xmlTextarea.value = xmlText;
     xmlTextarea.focus();
   } else if (content.id == 'content_arduino') {
-    var code = Blockly.Arduino.workspaceToCode();
+    var code = Blockly.Arduino.workspaceToCode(ArduinoClassic.workspace);
     content.textContent = code;
     if (typeof prettyPrintOne == 'function') {
       code = content.innerHTML;
@@ -99,9 +113,9 @@ ArduinoClassic.init = function() {
       el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
     }
     // Make the 'Blocks' tab line up with the toolbox.
-    if (Blockly.mainWorkspace.toolbox_.width) {
+    if (ArduinoClassic.workspace.toolbox_.width) {
       document.getElementById('tab_blocks').style.minWidth =
-          (Blockly.mainWorkspace.toolbox_.width - 38) + 'px';
+          (ArduinoClassic.workspace.toolbox_.width - 38) + 'px';
           // Account for the 19 pixel margin and on each side.
     }
   };
@@ -167,14 +181,14 @@ ArduinoClassic.openSettings = function() {
       'directories=no, titlebar=no, toolbar=no, location=no, status=no, ' + 
       'menubar=no, scrollbars=yes, resizable=yes, top=' + top + ', ' +
       'left=' + left + ', width=' + width + ', height=' + height + '');
-}
+};
 
 /**
  * Send the Arduino Code to the ArduServerCompiler to process.
  */
 ArduinoClassic.loadToArduino = function() {
   ArduServerCompiler.sendSketchToServer(
-      Blockly.Arduino.workspaceToCode(),
+      Blockly.Arduino.workspaceToCode(ArduinoClassic.workspace),
       ArduinoClassic.loadToArduinoReturn);
 };
 
@@ -200,10 +214,10 @@ ArduinoClassic.loadToArduinoReturn = function(data_back_el) {
  * Discard all blocks from the workspace.
  */
 ArduinoClassic.discard = function() {
-  var count = Blockly.mainWorkspace.getAllBlocks().length;
+  var count = ArduinoClassic.workspace.getAllBlocks().length;
   var message = 'Delete all ' + count + ' blocks?';
   if (count < 2 || window.confirm(message)) {
-    Blockly.mainWorkspace.clear();
+    ArduinoClassic.workspace.clear();
     window.location.hash = '';
   }
   ArduinoClassic.renderContent();
@@ -237,7 +251,8 @@ ArduinoClassic.peekCode = function(visible) {
     code_peek_content.style.display = 'inline-block';
     // Regenerate arduino code and ensure every click does as well
     ArduinoClassic.renderArduinoPeekCode();
-    Blockly.addChangeListener(ArduinoClassic.renderArduinoPeekCode);
+    ArduinoClassic.workspace.addChangeListener(
+        ArduinoClassic.renderArduinoPeekCode);
   } else {
     ArduinoClassic.peek_code_ = false;
     peek_code_button.className = 'button_text';
@@ -289,7 +304,8 @@ ArduinoClassic.sideContent = function(visible) {
  */
 ArduinoClassic.renderArduinoPeekCode = function() {
   var code_peak_pre = document.getElementById('arduino_pre');
-  code_peak_pre.textContent = Blockly.Arduino.workspaceToCode();
+  code_peak_pre.textContent = Blockly.Arduino.workspaceToCode(
+      ArduinoClassic.workspace);
   if (typeof prettyPrintOne == 'function') {
     code_peak_pre.innerHTML = prettyPrintOne(code_peak_pre.innerHTML, 'cpp');
   }
@@ -330,7 +346,7 @@ ArduinoClassic.injectBlockly = function(blockly_el, toolbox_path) {
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
-      Blockly.inject(blockly_el, {
+      ArduinoClassic.workspace = Blockly.inject(blockly_el, {
             collapse: true,
             comments: true,
             disable: true,
@@ -372,7 +388,7 @@ ArduinoClassic.loadUserXmlFile = function() {
     var select_file_dom = document.createElement('INPUT');
     select_file_dom.type = 'file';
     select_file_dom.id = 'select_file';
-    select_file_dom.style = 'display: none';
+    select_file_dom.style.display = 'none';
     document.body.appendChild(select_file_dom);
     select_file = document.getElementById('select_file');
     select_file.addEventListener('change', parseInputXMLfile, false);
@@ -402,8 +418,8 @@ ArduinoClassic.replaceBlocksfromXml = function(blocks_xml) {
     }
   }
   if (xmlDom) {
-    Blockly.mainWorkspace.clear();
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xmlDom);
+    ArduinoClassic.workspace.clear();
+    Blockly.Xml.domToWorkspace(ArduinoClassic.workspace, xmlDom);
   }
   return success;
 };
@@ -414,7 +430,7 @@ ArduinoClassic.replaceBlocksfromXml = function(blocks_xml) {
  */
 ArduinoClassic.saveXmlFile = function() {
   // Generate XML
-  var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var xmlDom = Blockly.Xml.workspaceToDom(ArduinoClassic.workspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
   // Create blob
   var blob = new Blob(
