@@ -4,3 +4,6 @@
 [submodule "package/ardublocklydocs/ardublockly.wiki"]
 	path = package/ardublocklydocs/ardublockly.wiki
 	url = https://github.com/carlosperate/ardublockly.wiki.git
+[submodule "package/pyinstaller"]
+	path = package/pyinstaller
+	url = https://github.com/pyinstaller/pyinstaller.git

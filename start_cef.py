@@ -13,7 +13,7 @@
 # 
 # Changes are copyright (c) 2015 carlosperate https://github.com/carlosperate/
 #
-import sys
+
 # In Mac cefpython library must be the very first library imported. This is
 # because CEF was compiled with the tcmalloc memory allocator which hooks
 # globally and replaces the default malloc allocator. If memory was allocated
@@ -26,10 +26,10 @@ try:
     import wx
     import wx.lib.agw.flatmenu as FM
 except ImportError:
-    print("You need to have ce  fpython3, and wx installed!")
-    sys.exit(1)
+    raise SystemExit("You need to have cefpython3, and wx installed!")
 import os
 import re
+import sys
 import time
 import codecs
 import inspect
@@ -83,7 +83,7 @@ def GetApplicationPath(file=None):
     if not file.startswith("/") and not file.startswith("\\") and (
             not re.search(r"^[\w-]+:", file)):
         path = GetApplicationPath.dir + os.sep + file
-        if platform.system() == "Windows":
+        if g_platform_os == "windows":
             path = re.sub(r"[/\\]+", re.escape(os.sep), path)
         path = re.sub(r"[/\\]+$", "", path)
         return path
