@@ -86,6 +86,7 @@ cef_debug.log
 
 # Packaged python build folders and files
 /win
+/arduexec
 /package/build
 /ardublockly_run.bat
 
