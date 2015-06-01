@@ -62,7 +62,7 @@ USE_EVT_IDLE = False  # If False then Timer will be used
 # -----------------------------------------------------------------------------
 
 
-def GetApplicationPath(file=None):
+def GetApplicationPath(file_=None):
     # On Windows after downloading file and calling Browser.GoForward(),
     # current working directory is set to %UserProfile%.
     # Calling os.path.dirname(os.path.realpath(__file__))
@@ -77,45 +77,45 @@ def GetApplicationPath(file=None):
             dir = os.getcwd()
         GetApplicationPath.dir = dir
     # If file is None return current directory without trailing slash.
-    if file is None:
-        file = ""
+    if file_ is None:
+        file_ = ""
     # Only when relative path.
-    if not file.startswith("/") and not file.startswith("\\") and (
-            not re.search(r"^[\w-]+:", file)):
-        path = GetApplicationPath.dir + os.sep + file
+    if not file_.startswith("/") and not file_.startswith("\\") and (
+            not re.search(r"^[\w-]+:", file_)):
+        path = GetApplicationPath.dir + os.sep + file_
         if g_platform_os == "windows":
             path = re.sub(r"[/\\]+", re.escape(os.sep), path)
         path = re.sub(r"[/\\]+$", "", path)
         return path
-    return str(file)
+    return str(file_)
 
 
 def ExceptHook(excType, excValue, traceObject):
     # This hook does the following: in case of exception write it to
     # the "error.log" file, display it to the console, shutdown CEF
     # and exit application immediately by ignoring "finally" (os._exit()).
-    errorMsg = "\n".join(traceback.format_exception(excType, excValue,
-            traceObject))
-    errorFile = GetApplicationPath("cef_error.log")
+    error_msg = "\n".join(traceback.format_exception(
+        excType, excValue, traceObject))
+    error_file = GetApplicationPath("cef_error.log")
     try:
-        appEncoding = cefpython.g_applicationSettings["string_encoding"]
+        app_encoding = cefpython.g_applicationSettings["string_encoding"]
     except:
-        appEncoding = "utf-8"
-    if type(errorMsg) == bytes:
-        errorMsg = errorMsg.decode(encoding=appEncoding, errors="replace")
+        app_encoding = "utf-8"
+    if type(error_msg) == bytes:
+        error_msg = error_msg.decode(encoding=app_encoding, errors="replace")
     try:
-        with codecs.open(errorFile, mode="a", encoding=appEncoding) as fp:
+        with codecs.open(error_file, mode="a", encoding=app_encoding) as fp:
             fp.write("\n[%s] %s\n" % (
-                    time.strftime("%Y-%m-%d %H:%M:%S"), errorMsg))
+                    time.strftime("%Y-%m-%d %H:%M:%S"), error_msg))
     except:
         print(g_ardutag + "WARNING: failed writing to error file: %s" % (
-                errorFile))
+              error_file))
     # Convert error message to ascii before printing, otherwise
     # you may get error like this:
     # | UnicodeEncodeError: 'charmap' codec can't encode characters
-    errorMsg = errorMsg.encode("ascii", errors="replace")
-    errorMsg = errorMsg.decode("ascii", errors="replace")
-    print("\n"+errorMsg+"\n")
+    error_msg = error_msg.encode("ascii", errors="replace")
+    error_msg = error_msg.decode("ascii", errors="replace")
+    print("\n"+error_msg+"\n")
     cefpython.QuitMessageLoop()
     cefpython.Shutdown()
     os._exit(1)
@@ -172,20 +172,20 @@ class MainFrame(wx.Frame):
         # Global client callbacks must be set before browser is created.
         self.clientHandler = ClientHandler()
         cefpython.SetGlobalClientCallback("OnCertificateError",
-                self.clientHandler._OnCertificateError)
+            self.clientHandler._OnCertificateError)
         cefpython.SetGlobalClientCallback("OnBeforePluginLoad",
-                self.clientHandler._OnBeforePluginLoad)
+            self.clientHandler._OnBeforePluginLoad)
         cefpython.SetGlobalClientCallback("OnAfterCreated",
-                self.clientHandler._OnAfterCreated)
+            self.clientHandler._OnAfterCreated)
 
         windowInfo = cefpython.WindowInfo()
         (width, height) = self.mainPanel.GetClientSizeTuple()
         windowInfo.SetAsChild(self.GetHandleForBrowser(),
                               [0, 0, width, height])
         self.browser = cefpython.CreateBrowserSync(
-                windowInfo,
-                browserSettings=g_browserSettings,
-                navigateUrl=url)
+            windowInfo,
+            browserSettings=g_browserSettings,
+            navigateUrl=url)
 
         self.clientHandler.mainBrowser = self.browser
         self.browser.SetClientHandler(self.clientHandler)
@@ -209,7 +209,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_CLOSE, self.OnClose)
         if USE_EVT_IDLE and not popup:
             # Bind EVT_IDLE only for the main application frame.
-            print(g_ardutag + \
+            print(g_ardutag +
                   "Using EVT_IDLE to execute the CEF message loop work")
             self.Bind(wx.EVT_IDLE, self.OnIdle)
 
@@ -670,8 +670,8 @@ class ClientHandler:
     # ** This callback is executed on the IO thread **
     # Empty place-holders: popupFeatures, client.
     def OnBeforePopup(self, browser, frame, targetUrl, targetFrameName,
-            popupFeatures, windowInfo, client, browserSettings,
-            noJavascriptAccess):
+                      popupFeatures, windowInfo, client, browserSettings,
+                      noJavascriptAccess):
         print(g_ardutag + "LifespanHandler::OnBeforePopup()")
         print("    targetUrl = %s" % targetUrl)
 
@@ -720,8 +720,8 @@ class ClientHandler:
     # JavascriptDialogHandler
     # -------------------------------------------------------------------------
     def OnJavascriptDialog(self, browser, originUrl, acceptLang, dialogType,
-                   messageText, defaultPromptText, callback,
-                   suppressMessage):
+                           messageText, defaultPromptText, callback,
+                           suppressMessage):
         print(g_ardutag + "JavascriptDialogHandler::OnJavascriptDialog()")
         print("    originUrl="+originUrl)
         print("    acceptLang="+acceptLang)
@@ -819,7 +819,7 @@ def cef_init():
         "log_severity": cefpython.LOGSEVERITY_INFO,
         "release_dcheck_enabled": False,
         "remote_debugging_port": 0,
-        
+
         "unique_request_context_per_browser": True,
         "auto_zooming": "system_dpi"
     }
@@ -827,12 +827,12 @@ def cef_init():
     # "resources_dir_path" must be set on Mac, "locales_dir_path" not.
     if g_platform_os == "mac":
         g_applicationSettings["resources_dir_path"] = \
-                cefpython.GetModuleDirectory() + os.sep + "Resources"
+            cefpython.GetModuleDirectory() + os.sep + "Resources"
     else:
         g_applicationSettings["resources_dir_path"] = \
-                cefpython.GetModuleDirectory()
+            cefpython.GetModuleDirectory()
         g_applicationSettings["locales_dir_path"] = \
-                cefpython.GetModuleDirectory() + os.sep + "locales"
+            cefpython.GetModuleDirectory() + os.sep + "locales"
 
     # High DPI support is available only on Windows.
     # Example values for auto_zooming are:
@@ -860,15 +860,15 @@ def cef_init():
     # On Win/Linux you only specify the ApplicationSettings.locales_dir_path.
     if g_platform_os == "mac":
         g_commandLineSwitches["locale_pak"] = cefpython.GetModuleDirectory() + \
-                "/Resources/en.lproj/locale.pak"
+            "/Resources/en.lproj/locale.pak"
 
     cefpython.Initialize(g_applicationSettings, g_commandLineSwitches)
 
 
 def splash_screen():
     import wx.lib.agw.advancedsplash as AS
-    imagePath = "ardublockly/img/ardublockly_splash.png"
-    bitmap = wx.Bitmap(imagePath, wx.BITMAP_TYPE_PNG)
+    image_path = "ardublockly/img/ardublockly_splash.png"
+    bitmap = wx.Bitmap(image_path, wx.BITMAP_TYPE_PNG)
     shadow = wx.WHITE
     splash = AS.AdvancedSplash(
         None, bitmap=bitmap, timeout=5000, shadowcolour=shadow,
@@ -883,7 +883,8 @@ def launch_server(server_root):
     else:
         root_location = os.path.dirname(os.path.realpath(sys.argv[0]))
     thread = threading.Thread(
-        target=start_server, kwargs={"document_root":root_location})
+        target=start_server, kwargs={"document_root": root_location})
+    thread.daemon = True
     print("\n======= Starting Server =======")
     thread.start()
 
