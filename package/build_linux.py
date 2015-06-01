@@ -41,20 +41,35 @@ def remove_pyinstaller_temps():
         shutil.rmtree(build_dir)
 
 
+def pyinstaller_build():
+    """
+    Launches a subprocess running Python PyInstaller with the spec file from the
+    package folder. Captures the output streams and checks for errors.
+    :return: Boolean indicating the success state of the operation.
+    """
+    process_args = ["python",
+                    "package/pyinstaller/pyinstaller.py",
+                    "package/pyinstaller.spec"]
+    print(script_tab + "Command: %s" % process_args)
+
+    pipe = subprocess.PIPE
+    pyinstaller_process = subprocess.Popen(
+        process_args)  # stdout=pipe, stderr=pipe
+    std_op, std_err_op = pyinstaller_process.communicate()
+
+    if pyinstaller_process.returncode != 0:
+        print(script_tab + "ERROR: PyInstaller returned with exit code: %s" %
+              pyinstaller_process.returncode)
+        return False
+
+    return True
+
+
 def remove_executable_folder():
     """ Removes the current ardublockly PyInstaller executable folder. """
-    exec_dir = os.path.join(project_root_dir, "dist", exec_folder_name)
+    exec_dir = os.path.join(project_root_dir, exec_folder_name)
     if os.path.exists(exec_dir):
         shutil.rmtree(exec_dir)
-
-
-def pyinstaller_build():
-    """ . """
-    process = ["python",
-               "package/pyinstaller/pyinstaller.py",
-               "package/pyinstaller.spec"]
-    print(script_tab + "Command: %s" % process)
-    subprocess.call(process)
 
 
 def move_executable_folder():
@@ -68,13 +83,13 @@ def copy_cefpython_data_files():
     """ Copies into the executable folder required cefpython files. """
     cef_path = os.path.dirname(cefpython3.__file__)
     cef_exec_folder = os.path.join(
-            project_root_dir, exec_folder_name, "cefpython3")
+        project_root_dir, exec_folder_name, "cefpython3")
     cef_exec_locales = os.path.join(cef_exec_folder, "locales")
 
     data_files = [
-            "%s/libcef.so" % cef_path,
-            "%s/libffmpegsumo.so" % cef_path,
-            "%s/subprocess" % cef_path]
+        "%s/libcef.so" % cef_path,
+        "%s/libffmpegsumo.so" % cef_path,
+        "%s/subprocess" % cef_path]
 
     locales = glob(r"%s/locales/*.*" % cef_path)
 
@@ -91,20 +106,56 @@ def copy_cefpython_data_files():
         shutil.copy(f, cef_exec_locales)
 
 
+def create_bash_file():
+    """
+    Creates a bash file into the project root to be able to easily launch the
+    Ardublockly application.
+    """
+    bash_text = '#!/bin/bash\n' \
+                'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
+                'echo "[Bash File] Running Ardublockly from: " $DIR\n' \
+                './' + exec_folder_name + '/ardublockly $DIR\n'
+    try:
+        bash_file = open(
+            os.path.join(project_root_dir, "ardublockly_run.sh"), 'w')
+        bash_file.write(bash_text)
+        bash_file.close()
+    except Exception as e:
+        print(script_tab + "%s" % e)
+        print(script_tab + "ERROR: Bash file to launch the Ardublockly "
+                           "application could not be created.")
+
+
 def main():
     print(script_tag + "Building Ardublockly for Linux.")
     print(script_tag + "Project directory is:     %s" % project_root_dir)
     print(script_tag + "Script working directory: %s" % os.getcwd())
+
     print(script_tag + "Removing PyInstaller old temp directories.")
     remove_pyinstaller_temps()
+
     print(script_tag + "Running PyInstaller process:")
-    pyinstaller_build()
+    success = pyinstaller_build()
+    if not success:
+        print(script_tag + "Removing PyInstaller recent temp directories.")
+        remove_pyinstaller_temps()
+        raise SystemExit(script_tag + "Exiting now as there was an error in "
+                                      "the PyInstaller execution.")
+
+    print(script_tag + "Removing old ardublockly executable directory.")
+    remove_executable_folder()
+
     print(script_tag + "Moving executable folder to project root.")
     move_executable_folder()
+
     print(script_tag + "Coping cefpython data files into executable directory.")
     copy_cefpython_data_files()
+
     print(script_tag + "Removing PyInstaller recent temp directories.")
     remove_pyinstaller_temps()
+
+    print(script_tag + "Creating bash file to easily execute Ardublockly.")
+    create_bash_file()
 
 
 if __name__ == "__main__":

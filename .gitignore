@@ -89,6 +89,7 @@ cef_debug.log
 /arduexec
 /package/build
 /ardublockly_run.bat
+/ardublockly_run.sh
 
 # The documentation is built with the GitHub wiki data
 /Documentation
