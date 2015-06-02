@@ -4,6 +4,7 @@ python:
 # Install wxPython and cefpython3
 before_install:
   - sudo apt-get update -qq
+  - sudo apt-get install python-support
   - sudo apt-get install -y python-wxgtk2.8 python-wxtools wx2.8-i18n
   - sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1
   - sudo dpkg -i python-cefpython3_31.2-1_amd64.deb?dl=1
