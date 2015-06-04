@@ -17,9 +17,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# IMPORTANT: This script is designed to be located one directory level under the
+#            project root folder.
+#
 # This script file will create a copy of the project folder in its parent folder
-# So if project folder is located in ~/project/ardublockly it will create a
-# copy in ~/project/ardublockly_zip .
+# So if project folder is located in ~/projects/ardublockly it will create a
+# copy in ~/projects/ardublockly_<tag>.
 # It will then delete unnecessary files for a working version of the self
 # executable application and zip the contents of the folder.
 #

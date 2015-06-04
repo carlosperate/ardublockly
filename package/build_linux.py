@@ -17,6 +17,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# IMPORTANT: This script is designed to be located one directory level under the
+#            project root folder.
+#
 # This script file uses PyInstaller to create a self contained executable
 # build of the Ardublockly application.
 # It will remove the build folders left from PyInstaller and move the folder

@@ -17,6 +17,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+# IMPORTANT: This script is designed to be located one directory level under the
+#            project root folder.
+#
 import os
 import sys
 import shutil
@@ -27,20 +30,22 @@ try:
     from cefpython3 import cefpython
     import py2exe
 except ImportError:
-    print("You need to have cefpython3, and py2exe installed!")
-    sys.exit(1)
+    raise SystemExit("You need to have cefpython3, and py2exe installed!")
 
 # set up directories
-this_file_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
-this_file_parent = os.path.dirname(this_file_dir)
+project_root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 # Enable the ArdublocklyServer package access the sys path for py2exe to find
-sys.path.append(this_file_parent)
+sys.path.append(project_root_dir)
+
+exec_folder_name = "arduexec"
+script_tag = "[Ardublockly build] "
+script_tab = "                    "
 
 
 def get_install_folder():
-    """ Install directory will be folder 'win' on root directory. """
-    return os.path.join(this_file_parent, "win")
+    """ Install directory will be folder a folder on project root directory. """
+    return os.path.join(project_root_dir, exec_folder_name)
 
 
 def remove_install_dir():
@@ -52,13 +57,13 @@ def remove_install_dir():
 
 def remove_build_dir():
     """ Removes the build folder. """
-    build_folder = os.path.join(this_file_dir, "build")
+    build_folder = os.path.join(os.getcwd(), "build")
     if os.path.exists(build_folder):
         shutil.rmtree(build_folder)
 
 
 def get_data_files():
-    """ Collects the required redistributable dlls. """
+    """ Collects the required redistributable dlls and CEF files. """
     cef_path = os.path.dirname(cefpython.__file__)
     data_files = [
         ("", ["%s/icudt.dll" % cef_path,
@@ -96,8 +101,11 @@ def get_options():
 
 
 def get_py_files():
-    """ Returns the scripts to package, only needs the CEF entry point. """
-    start_file = os.path.join(this_file_parent, "start_cef.py")
+    """
+    Returns the scripts to package, Ardublockly only needs the CEF entry
+    point to work, everything else is imported.
+    """
+    start_file = os.path.join(project_root_dir, "start_cef.py")
     return [start_file]
 
 
@@ -113,25 +121,37 @@ def build_exe(args):
 def create_run_batch_file():
     """
     Creates a batch file into the project root to be able to easily launch the
-    Ardublockly software.
+    Ardublockly application.
     """
-    root_dir = os.path.realpath(this_file_parent + os.sep + os.sep + os.sep)
     batch_text = "@echo off\n" + \
-                 ("start %s\win\start_cef.exe %s" % (root_dir, root_dir))
+                 "start %s\start_cef.exe %s" % \
+                 (get_install_folder(), project_root_dir)
     try:
-        batch_file = open(("%s/ardublockly_run.bat" % root_dir), 'w')
+        batch_file = open(("%s/ardublockly_run.bat" % project_root_dir), 'w')
         batch_file.write(batch_text)
         batch_file.close()
     except Exception as e:
-        print('%s\nArduino sketch could not be created!!!' % e)
+        print("%s\n" % e + script_tab +
+              "Batch file to run Ardublockly could not be created !")
 
 
 if __name__ == "__main__":
+    print(script_tag + "Building Ardublockly for Windows.")
+
+    print(script_tag + "Removing old build directory.")
     remove_build_dir()
+
+    print(script_tag + "Removing old executable directory.")
     remove_install_dir()
+
+    print(script_tag + "Building Ardublockly for Linux.")
     if len(sys.argv) <= 1:
         build_exe(['py2exe'])
     else:
         build_exe()
+
+    print(script_tag + "Removing recent build directory.")
     remove_build_dir()
+
+    print(script_tag + "Creating a batch file to launch Ardublockly.")
     create_run_batch_file()
