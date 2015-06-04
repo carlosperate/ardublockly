@@ -85,6 +85,7 @@ cef_debug.log
 /ignore
 
 # Packaged python build folders and files
+/upload
 /win
 /arduexec
 /package/build

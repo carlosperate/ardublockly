@@ -3,7 +3,13 @@ This folder contains the Python scripts required to package Ardublockly into a s
 
 Currently the Windows build is created using py2exe and the Linux and Mac OS X builds are created using PyInstaller (in the future PyInstaller might be updated to also create the Windows builds, for now the original py2exe script is pretty stable). 
 
-__Downloading the packaged Ardublockly__: The binaries will be hosted in GitHub as part of the [repository releases][1].
+
+## Download the packaged Ardublockly
+The stable binaries for Windows, Linux an Mac OS X are hosted in GitHub as part of the [repository releases][1].
+
+Development builds are frequently triggered in a build server and hosted in the following link: [Dev builds][10]
+
+Linux build status: [![Build Status](https://travis-ci.org/carlosperate/ardublockly.svg?branch=master)](https://travis-ci.org/carlosperate/ardublockly)
 
 
 ## Building Ardublockly from source
@@ -115,3 +121,4 @@ This part of the documentation is still under work.
 [7]: https://github.com/carlosperate/ardublockly/wiki
 [8]: http://www.embeddedlog.com/static-docs-from-github-wiki.html
 [9]: https://github.com/pyinstaller/pyinstaller/wiki
+[10]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html

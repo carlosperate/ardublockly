@@ -1,12 +1,38 @@
 language: python
 python:
-  - "2.7"
-# Install wxPython and cefpython3
+- '2.7'
+
+# Install wxPython and cefpython3 (cef from official dropbox link)
 before_install:
-  - sudo apt-get update -qq
-  - sudo apt-get install python-support
-  - sudo apt-get install -y python-wxgtk2.8 python-wxtools wx2.8-i18n
-  - sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1
-  - sudo dpkg -i python-cefpython3_31.2-1_amd64.deb?dl=1
-# command to run tests, e.g. python setup.py test
-install:  python package/build_linux.py
+- sudo apt-get update -qq
+- sudo apt-get install python-support
+- sudo apt-get install -y python-wxgtk2.8 python-wxtools wx2.8-i18n
+- sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1
+- sudo dpkg -i python-cefpython3_31.2-1_amd64.deb?dl=1
+
+# Run the build script
+# Adding cefpython installation dir to travis-ci python paths, listed in:
+# https://code.google.com/p/cefpython/wiki/Download_CEF3_Linux
+install:
+- export PYTHONPATH=$PYTHONPATH:/usr/share/pyshared/
+- export PYTHONPATH=$PYTHONPATH:/usr/lib/pymodules/python2.7/
+- python package/build_linux.py
+- python package/pack_ardublockly.py
+
+# For now only running a known passing test, the others need to be updated
+script:
+- python ArdublocklyServer/tests/SketchCreator_test.py 
+
+# Deploy the build version in an S3 bucket
+deploy:
+  provider: s3
+  access_key_id: AKIAIBDOPX6GSMBDEFPQ
+  secret_access_key:
+    secure: QNNNIgHpcTYJZS1K4w8iPqJWq1Xhx8ICoVJ79QURS5Vi4ppnP0smuW13+XdmjoZyoceSoR4iOcKX7o4HXDozsejy3ft72tXgNntVQoOOKYxnV1zKYHc7Q6ID6L3GlPKV2EQid30CM4bP0mm4P8ntuemUOwhqm4mjRwDxAMpxsEbXgNAHAMifn40g5u2rHuwo64+UUll6m2Ues6mekAlwq6YQKn0numrcHRZX9F3kMLyrSHO671EkyfVsBbZpk7+HIEXmgXgPb4juefcxUlhYQFvnlBPyyTG1ec0BE2un714vZe+Gq0w1UYQbIpsAvM1HDWQKa2S9m2gz1TXC5YXOKAfoenyFsrgvdT00zpxVrTLAGhmIgtxsbAYXVPRg/6g5E+DW/JJ2xBfMJyw3j/82vexkHpvQcut9zZ74CE2H0CtyNXHvwdcwMs+qoja6tLw1dvFD7yrTo2T/jCOxFoGYjneF3Syuh8GpALSGGUJDnyFiK0yD2B0r2567csFj5Sc0CO/ExFwfG9zmiVtkm0Xpfq09VcZFjVnJ4k8QyNvrHmnGB/H7P6CskSA1X9gGIyk36Cu17XyyrtIuM+UUIdnrZhWCI3zA/2UVawkEjA+zhpbKFKsxIe37bPpIpNM+OyMLppZzzpcaRAynh6a/8Hcc+ckh4zMg7qWu7VXyYvjSkl0=
+  bucket: ardublockly-builds
+  skip_cleanup: true
+  local-dir: upload
+  upload-dir: linux
+  acl: public_read
+  on:
+    repo: carlosperate/ardublockly
