@@ -22,7 +22,7 @@
 #
 # This script file will create a copy of the project folder in its parent folder
 # So if project folder is located in ~/projects/ardublockly it will create a
-# copy in ~/projects/ardublockly_<tag>.
+# copy in ~/projects/ardublockly_<timestamp>_<tag>.
 # It will then delete unnecessary files for a working version of the self
 # executable application and zip the contents of the folder.
 #
@@ -140,52 +140,89 @@ def pack_ardublockly(tag):
     zip_ardublockly_copy(tag)
 
 
-def tag_from_travis_env_vars():
+def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
     """
-    Checks if the Travis-CI environmental variables to check for a pull request,
+    Checks if the CI environmental variables to check for a pull request,
     commit id and band commit branch are present.
-    :return: String with the Travis build information, or None if the Travis-CI
+    :return: String with the CI build information, or None if the CI
              environmental variables could not be found.
     """
-    travis_pull_request = os.environ.get("TRAVIS_PULL_REQUEST")
-    travis_branch = os.environ.get("TRAVIS_BRANCH")
-    travis_commit = os.environ.get("TRAVIS_COMMIT")
+    pull_request = os.environ.get(pull_request_var)
+    branch = os.environ.get(branch_var)
+    commit = os.environ.get(commit_var)
 
-    if travis_pull_request:
-        if travis_pull_request != "false":
-            return travis_pull_request
-        elif travis_branch and travis_commit:
-            return "%s_%s" % (travis_branch, travis_commit)
-        else:
-            print(script_tab + "TRAVIS_BRANCH or TRAVIS_COMMIT Travis-CI"
-                               "environmental variables not found.")
-            return None
+    if pull_request and pull_request != "false":
+        try:
+            int(pull_request)
+            print(script_tab + "Pull request valid '%s' variable found: %s" %
+                  (ci_name, pull_request))
+            return "pull_%s" % pull_request
+        except ValueError:
+            print(script_tab + "The pull request environmental variable " +
+                  "'%s' value '%s' from %s is not a valid number." %
+                  (pull_request_var, pull_request, ci_name))
+
+    if branch and commit:
+        print(script_tab + "Branch and commit valid '%s' variables found: %s %s"
+              % (ci_name, branch, commit))
+        # We only return first 10 digits from the commit ID (normal length 40)
+        commit = "%s" % commit
+        return "%s_%s" % (branch, commit[:10])
+
+    print(script_tab + "The environmental variables for %s " % ci_name +
+          "were deemed invalid:\n" +
+          script_tab + "\t%s: %s\n" % (pull_request_var, pull_request) +
+          script_tab + "\t%s: %s\n" % (branch_var, branch) +
+          script_tab + "\t%s: %s" % (commit_var, commit))
+    return None
+
+
+def get_tag():
+    """
+    The tag will always contain the timestamp. If provided as a command line
+    argument it will add an additional string, if not it will check for
+    environmental variables set in build servers to create an identification
+    tag.
+    :return: String with the final tag.
+    """
+    # All tags begging with the current time stamp
+    time_stamp = time.strftime("%Y-%m-%d_%H.%M.%S")
+
+    # Check if a command line argument has been given
+    if len(sys.argv) > 1:
+        # Take the first argument and use it as a tag appendage
+        print(script_tab + "Command line argument '%s' found and will be used "
+                           "for package tag." % sys.argv[1])
+        return "%s_%s" % (time_stamp, sys.argv[1])
     else:
-        print(script_tab + "TRAVIS_PULL_REQUEST Travis-CI environmental "
-                           "variable not found.")
-        return None
+        print(script_tab + "No command line argument found")
+
+    # Check for Travis-CI environmental variables to create tag appendage
+    print(script_tab + "Checking Travis-CI environment variables for tag:")
+    travis_tag = tag_from_ci_env_vars(ci_name="Travis-CI",
+                                      pull_request_var="TRAVIS_PULL_REQUEST",
+                                      branch_var="TRAVIS_BRANCH",
+                                      commit_var="TRAVIS_COMMIT")
+    if travis_tag:
+        return "%s_%s" % (time_stamp, travis_tag)
+
+    # Check for AppVeyor environmental variables to create tag appendage
+    print(script_tab + "Checking AppVeyor environment variables for tag:")
+    appveyor_tag = tag_from_ci_env_vars(
+        ci_name="AppVeyor",
+        pull_request_var="APPVEYOR_PULL_REQUEST_NUMBER",
+        branch_var="APPVEYOR_REPO_BRANCH",
+        commit_var="APPVEYOR_REPO_COMMIT")
+    if appveyor_tag:
+        return "%s_%s" % (time_stamp, appveyor_tag)
+
+    return time_stamp
 
 
 def main():
     print(script_tag + "Pack Ardublockly script started.")
-    print(script_tag + "Checking command line arguments for tag:")
-    # Check if a command line argument has been given
-    if len(sys.argv) > 1:
-        # Take the first argument and use it as a filename tag
-        tag = sys.argv[1]
-        print(script_tab + "Command line argument '%s' found and will be used "
-                           "for package tag." % sys.argv[1])
-    else:
-        print(script_tab + "No command line argument found")
-        print(script_tag + "Checking Travis-CI environment variables for tag:")
-        tag = tag_from_travis_env_vars()
-        if not tag:
-            # If the Travis-CI environmental variables are not present then
-            # use the current time stamp
-            tag = time.strftime("%Y-%m-%d_%H.%M.%S")
-            print(script_tag + "No Travis-CI environment variables found, so "
-                               "using current timestamp for tag: %s" % tag)
-
+    print(script_tag + "Checking for tag to attach to zip file:")
+    tag = get_tag()
     pack_ardublockly(tag)
 
 
