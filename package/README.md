@@ -9,9 +9,10 @@ The stable binaries for Windows, Linux, and Mac OS X are hosted in GitHub as par
 
 Development builds are frequently triggered in build servers and hosted in the following link: [Dev builds][10]
 
-Linux build status: [![Linux Build Status](https://travis-ci.org/carlosperate/ardublockly.svg?branch=master)](https://travis-ci.org/carlosperate/ardublockly)
-
-Windows build status: [![Windows Build status](https://ci.appveyor.com/api/projects/status/t877g920hdiifc2i?svg=true)](https://ci.appveyor.com/project/carlosperate/ardublockly)
+| Linux build         | Windows build       | Mac OS X build       |
+|:-------------------:|:-------------------:|:--------------------:|
+| [![Linux Build Status](https://travis-ci.org/carlosperate/ardublockly.svg?branch=master)](https://travis-ci.org/carlosperate/ardublockly) | [![Windows Build status](https://ci.appveyor.com/api/projects/status/t877g920hdiifc2i?svg=true)](https://ci.appveyor.com/project/carlosperate/ardublockly) | TBD |
+| [Download Link][11] | [Download Link][12] | [Download Link][13]  |
 
 
 ## Ardublockly source code dependencies
@@ -147,3 +148,6 @@ This part of the documentation is still under work.
 [8]: http://www.embeddedlog.com/static-docs-from-github-wiki.html
 [9]: https://github.com/pyinstaller/pyinstaller/wiki
 [10]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html
+[11]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=linux/
+[12]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=windows/
+[13]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=mac/

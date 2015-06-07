@@ -45,18 +45,14 @@ build: off
 test_script:
   - cmd: python ArdublocklyServer\tests\SketchCreator_test.py
 
-# Create artifact for the Ardubockly build 
-artifacts:
-  - path: '*\*.zip'
-    name: ardublockly-zip
-    type: zip
-
-# List artifacts
+# Push artifact to s3 bucket and list all
 before_deploy:
+  - ps: Get-ChildItem .\upload\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName ardublockly-s3-deployment }
   - ps: foreach($artifactName in $artifacts.keys) { $artifacts[$artifactName] }
 
 # Deploy build to Amazon S3 bucket
 deploy:
+  name: ardublockly-s3-deployment
   provider: S3
   access_key_id: AKIAIWAS6AEEZDXQUNTA
   secret_access_key:
@@ -64,4 +60,3 @@ deploy:
   bucket: ardublockly-builds
   set_public: true
   folder: windows
-  artifact: ardublockly-zip
