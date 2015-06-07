@@ -53,7 +53,7 @@ def remove_directory(dir_to_remove):
         print(script_tab + "Directory %s was not found." % dir_to_remove)
 
 
-def get_data_files():
+def get_py2exe_extra_data_files():
     """ Collects the required redistributable dlls and CEF files. """
     cef_path = os.path.dirname(cefpython.__file__)
     data_files = [
@@ -81,13 +81,56 @@ def get_data_files():
     return data_files
 
 
-def get_options():
+def get_py2exe_options():
     """ Prepares and returns the py2exe options dictionary. """
     # We don't really need a few of the pywin32 includes
     excludes = ["pywin", "pywin.debugger", "pywin.debugger.dbgcon",
-                "pywin.dialogs", "pywin.dialogs.list", "win32com.server"]
+                "pywin.dialogs", "pywin.dialogs.list", "win32com.server",
+                'curses', 'email']
 
-    # We don't need this packages either
+    # We don't need these two dlls from the msvcm90
+    dll_excludes = ["msvcp90.dll", "msvcm90.dll"]
+
+    # We can't include this microsoft dlls, which get pulled with build
+    dll_excludes += ['api-ms-win-core-atoms-l1-1-0.dll',
+                     'api-ms-win-core-crt-l1-1-0.dll',
+                     'api-ms-win-core-crt-l2-1-0.dll',
+                     'api-ms-win-core-delayload-l1-1-1.dll',
+                     'api-ms-win-core-errorhandling-l1-1-1.dll',
+                     'api-ms-win-core-file-l1-2-1.dll',
+                     'api-ms-win-core-handle-l1-1-0.dll',
+                     'api-ms-win-core-heap-l1-2-0.dll',
+                     'api-ms-win-core-heap-obsolete-l1-1-0.dll',
+                     'api-ms-win-core-io-l1-1-1.dll',
+                     'api-ms-win-core-kernel32-legacy-l1-1-1.dll',
+                     'api-ms-win-core-libraryloader-l1-2-0.dll',
+                     'api-ms-win-core-localization-l1-2-1.dll',
+                     'api-ms-win-core-memory-l1-1-2.dll',
+                     'api-ms-win-core-processthreads-l1-1-2.dll',
+                     'api-ms-win-core-profile-l1-1-0.dll',
+                     'api-ms-win-core-psapi-obsolete-l1-1-0.dll',
+                     'api-ms-win-core-registry-l1-1-0.dll',
+                     'api-ms-win-core-string-l1-1-0.dll',
+                     'api-ms-win-core-string-l2-1-0.dll',
+                     'api-ms-win-core-string-obsolete-l1-1-0.dll',
+                     'api-ms-win-core-synch-l1-2-0.dll',
+                     'api-ms-win-core-sysinfo-l1-2-1.dll',
+                     'api-ms-win-core-util-l1-1-0.dll',
+                     'api-ms-win-downlevel-advapi32-l1-1-0.dll',
+                     'api-ms-win-downlevel-normaliz-l1-1-0.dll',
+                     'api-ms-win-downlevel-ole32-l1-1-0.dll',
+                     'api-ms-win-downlevel-shlwapi-l1-1-0.dll',
+                     'api-ms-win-downlevel-user32-l1-1-0.dll',
+                     'api-ms-win-downlevel-version-l1-1-0.dll',
+                     'api-ms-win-security-activedirectoryclient-l1-1-0.dll',
+                     'api-ms-win-security-base-l1-2-0.dll',
+                     'api-ms-win-service-management-l1-1-0.dll',
+                     'combase.dll', 'CRYPT32.dll', 'dhcpcsvc.DLL',
+                     'iertutil.dll', 'IPHLPAPI.DLL', 'NSI.dll', 'OLEACC.dll',
+                     'PSAPI.DLL', 'Secur32.dll', 'SETUPAPI.dll', 'urlmon.dll',
+                     'USERENV.dll', 'USP10.dll', 'WININET.dll', 'WTSAPI32.dll']
+
+    # We don't need these python packages either
     excludes.extend(["unittest", "_ssl", "doctest", "pdb", "difflib", "email"])
 
     # Py2exe options: http://www.py2exe.org/index.cgi/ListOfOptions
@@ -98,12 +141,12 @@ def get_options():
                    "skip_archive": True,
                    "optimize": 0,
                    "packages": ["ArdublocklyServer"],
-                   "dll_excludes": ["msvcp90.dll", "msvcm90.dll"],
+                   "dll_excludes": dll_excludes,
                    "excludes": excludes}}
     return py2exe_options
 
 
-def get_py_files():
+def get_python_files_to_compile():
     """
     Returns the scripts to package, Ardublockly only needs the CEF entry
     point to work, everything else is imported.
@@ -114,10 +157,9 @@ def get_py_files():
 
 def build_exe(args):
     """ Sets up the disutils for py2exe and runs it to build project. """
-    setup(data_files=get_data_files(),
-          #windows=get_py_files(),
-          console=get_py_files(),
-          options=get_options(),
+    setup(data_files=get_py2exe_extra_data_files(),
+          console=get_python_files_to_compile(),
+          options=get_py2exe_options(),
           script_args=args)
 
 
@@ -138,7 +180,7 @@ def create_run_batch_file():
               "Batch file to run Ardublockly could not be created !")
 
 
-if __name__ == "__main__":
+def main():
     print(script_tag + "Building Ardublockly for Windows.")
 
     print(script_tag + "Removing old build directory.")
@@ -158,3 +200,7 @@ if __name__ == "__main__":
 
     print(script_tag + "Creating a batch file to launch Ardublockly.")
     create_run_batch_file()
+
+
+if __name__ == "__main__":
+    main()
