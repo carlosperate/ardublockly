@@ -1,27 +1,74 @@
-language: python
-python:
-- '2.7'
+# Setting the language to python creates virtual environments, which affect the
+# current python packages and pyinstaller build, we only test against python
+# 2.7, so don't need them. Skip all of it using language c.
+language: ruby
 
-# Install wxPython and cefpython3 (cef from official dropbox link)
+
 before_install:
-- sudo apt-get update -qq
-- sudo apt-get install python-support
-- sudo apt-get install -y python-wxgtk2.8 python-wxtools wx2.8-i18n
-- sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1
-- sudo dpkg -i python-cefpython3_31.2-1_amd64.deb?dl=1
+  - sudo apt-get update -qq
+
+  # Travis is on 64 bit, so need some 32 bit libs
+  #- dpkg -l ia32-libs
+  #- sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch
+  #- sudo apt-get install -qq --force-yes gcc-multilib
+
+  # Ensuring libstdc is installer
+  - sudo apt-get install -y libstdc++6
+  - dpkg -s libstdc++6
+
+  # libproxy.so is not present, install glib-networking
+  - sudo apt-get install -y glib-networking glib-networking-common glib-networking-services
+  - dpkg -s glib-networking
+  - dpkg -s libstdc++6
+  - dpkg -s libc6
+  - echo $LD_LIBRARY_PATH
+  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/
+  - echo $LD_LIBRARY_PATH
+
+  # Install mlocate to search for files
+  - sudo apt-get install mlocate
+  - sudo updatedb
+  - locate libproxy.so
+  - locate libstdc++.so.6
+
+  # OS extra info
+  - uname -a
+  - ldd --version
+  - python --version
+  - python -c "import struct; print(struct.calcsize('P') * 8)"
+
+  # Install wxPython and tkinker
+  - sudo apt-get install -y python-support
+  - sudo apt-get install python-tk
+  - sudo apt-get install -y python-wxgtk2.8 python-wxtools wx2.8-i18n
+
+  # Install cefpython3 (cef from official dropbox link)
+  - sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1 --directory-prefix=../
+  - sudo dpkg -i ../python-cefpython3_31.2-1_amd64.deb?dl=1
+#  - sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AABsIDcodIk8cgPo9jjygF4Pa/31.2/Linux/cefpython3-31.2-linux64-setup.zip?dl=1 --directory-prefix=../
+#  - cd ..
+#  - unzip cefpython3-31.2-linux64-setup.zip?dl=1
+#  - cd cefpython3-31.2-linux64-setup
+#  - sudo python setup.py install
+#  - cd ../ardublockly
+
 
 # Run the build script
-# Adding cefpython installation dir to travis-ci python paths, listed in:
-# https://code.google.com/p/cefpython/wiki/Download_CEF3_Linux
 install:
-- export PYTHONPATH=$PYTHONPATH:/usr/share/pyshared/
-- export PYTHONPATH=$PYTHONPATH:/usr/lib/pymodules/python2.7/
-- python package/build_linux.py
-- python package/pack_ardublockly.py
+  # Adding cefpython installation dir to travis-ci python paths, listed in:
+  # https://code.google.com/p/cefpython/wiki/Download_CEF3_Linux
+  - export PYTHONPATH=$PYTHONPATH:/usr/share/pyshared/
+  - export PYTHONPATH=$PYTHONPATH:/usr/lib/pymodules/python2.7/
+
+  # Build and pack
+  - python package/build_linux.py
+  - python package/pack_ardublockly.py
+
 
 # For now only running a known passing test, the others need to be updated
 script:
-- python ArdublocklyServer/tests/SketchCreator_test.py 
+  - python ArdublocklyServer/tests/SketchCreator_test.py
+
 
 # Deploy the build version in an S3 bucket
 deploy:
@@ -36,3 +83,4 @@ deploy:
   acl: public_read
   on:
     repo: carlosperate/ardublockly
+    branch: travist-update

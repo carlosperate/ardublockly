@@ -30,6 +30,7 @@ import os
 import sys
 import time
 import shutil
+import struct
 import zipfile
 
 # The project_root_dir depends on the location of this file, so it cannot be
@@ -179,21 +180,23 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
 
 def get_tag():
     """
-    The tag will always contain the timestamp. If provided as a command line
-    argument it will add an additional string, if not it will check for
-    environmental variables set in build servers to create an identification
-    tag.
+    The tag will always contain the timestamp and architecture version.
+    If provided as a command line argument it will add an additional string,
+    if not it will check for environmental variables set in build servers to
+    create an identification tag.
     :return: String with the final tag.
     """
-    # All tags begging with the current time stamp
-    time_stamp = time.strftime("%Y-%m-%d_%H.%M.%S")
+    # All tags begging with architecture type (based on the Python version) and
+    # the current time stamp
+    arch_time_stamp = "%sbit_%s" % ((struct.calcsize('P') * 8),
+                                    time.strftime("%Y-%m-%d_%H.%M.%S"))
 
     # Check if a command line argument has been given
     if len(sys.argv) > 1:
         # Take the first argument and use it as a tag appendage
         print(script_tab + "Command line argument '%s' found and will be used "
                            "for package tag." % sys.argv[1])
-        return "%s_%s" % (time_stamp, sys.argv[1])
+        return "%s_%s" % (arch_time_stamp, sys.argv[1])
     else:
         print(script_tab + "No command line argument found")
 
@@ -204,7 +207,7 @@ def get_tag():
                                       branch_var="TRAVIS_BRANCH",
                                       commit_var="TRAVIS_COMMIT")
     if travis_tag:
-        return "%s_%s" % (time_stamp, travis_tag)
+        return "%s_%s" % (arch_time_stamp, travis_tag)
 
     # Check for AppVeyor environmental variables to create tag appendage
     print(script_tab + "Checking AppVeyor environment variables for tag:")
@@ -214,9 +217,9 @@ def get_tag():
         branch_var="APPVEYOR_REPO_BRANCH",
         commit_var="APPVEYOR_REPO_COMMIT")
     if appveyor_tag:
-        return "%s_%s" % (time_stamp, appveyor_tag)
+        return "%s_%s" % (arch_time_stamp, appveyor_tag)
 
-    return time_stamp
+    return arch_time_stamp
 
 
 def main():
