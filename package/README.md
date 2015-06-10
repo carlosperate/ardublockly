@@ -1,5 +1,5 @@
 # Ardublockly package
-This folder contains the Python scripts required to package Ardublockly into a standalone executable. This way it can be distributed without any dependencies other than having the Arduino IDE.
+The package folder contains the Python scripts required to package Ardublockly into a standalone executable. This way it can be distributed without any dependencies other than having the Arduino IDE.
 
 Currently the Windows build is created using py2exe and the Linux and Mac OS X builds are created using PyInstaller (in the future PyInstaller might be updated to also create the Windows builds, for now the original py2exe script is pretty stable). 
 
