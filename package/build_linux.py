@@ -43,7 +43,7 @@ script_tag = "[Ardublockly build] "
 script_tab = "                    "
 
 
-#verboseprint = print if verbose else lambda *a, **k: None
+# verbose_print = print if verbose else lambda *a, **k: None
 
 
 def remove_pyinstaller_temps():
@@ -76,7 +76,7 @@ def pyinstaller_build():
 
     pipe = subprocess.PIPE
     pyinstaller_process = subprocess.Popen(
-        process_args)  # stdout=pipe, stderr=pipe
+        process_args)
     std_op, std_err_op = pyinstaller_process.communicate()
 
     if pyinstaller_process.returncode != 0:
@@ -142,6 +142,9 @@ def copy_cefpython_data_files():
     for f in locales:
         shutil.copy(f, cef_exec_locales)
 
+    # Copying the libproxy.so
+    #shutil.copy("/usr/lib/x86_64-linux-gnu/libproxy.so.1", cef_exec_folder)
+
 
 def create_bash_file():
     """
@@ -151,8 +154,9 @@ def create_bash_file():
     bash_text = '#!/bin/bash\n' \
                 'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
                 'echo "[Bash File] Running Ardublockly from: " $DIR\n' \
-                './' + exec_folder_name + '/ardublockly $DIR\n'
+                './' + exec_folder_name + '/start_cef $DIR'
     bash_location = os.path.join(project_root_dir, "ardublockly_run.sh")
+
     try:
         print(script_tab + "Creating bash file into %s" % bash_location)
         bash_file = open(bash_location, 'w')

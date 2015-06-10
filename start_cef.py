@@ -25,7 +25,8 @@ try:
     from cefpython3 import cefpython
     import wx
     import wx.lib.agw.flatmenu as FM
-except ImportError:
+except ImportError as e:
+    print(e)
     raise SystemExit("You need to have cefpython3, and wx installed!")
 import os
 import re
@@ -852,9 +853,10 @@ def cef_init():
     # Command line switches set programmatically
     # https://code.google.com/p/cefpython/wiki/CommandLineSwitches
     g_commandLineSwitches = {
-        "enable-media-stream": False,
+        "enable-media-stream": "",
         "no-proxy-server": "",
         #"disable-remote-fonts": False,
+        "disable-gpu" : "",
     }
     # On Mac it is required to provide path to a specific locale.pak file.
     # On Win/Linux you only specify the ApplicationSettings.locales_dir_path.

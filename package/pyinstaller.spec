@@ -4,9 +4,7 @@
 # project root directory, otherwise the start_cef.py file path will have to
 # be updated.
 
-
 block_cipher = None
-
 
 a = Analysis(['start_cef.py'],
              pathex=None,
@@ -21,12 +19,12 @@ pyz = PYZ(a.pure,
 
 exe = EXE(pyz,
           a.scripts,
-          exclude_binaries=False,
-          name='ardublockly',
+          exclude_binaries=True,
+          name='start_cef',
           debug=False,
           strip=None,
           upx=True,
-          console=False)
+          console=True)
 
 coll = COLLECT(exe,
                a.binaries,
