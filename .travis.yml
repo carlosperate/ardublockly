@@ -9,6 +9,7 @@ before_install:
   - python -c "import struct; print(struct.calcsize('P') * 8)"
 
   # Install python
+  - brew update
   - brew install python 
   - brew link --overwrite python
   - pip install --upgrade pip
@@ -33,6 +34,9 @@ before_install:
 
 # Build and Pack ardublockly
 install:
+  #- cd package/pyinstaller/bootloader
+  #- python ./waf configure build install
+  #- cd ../../../
   - python package/build_pyinstaller.py mac
   - python package/pack_ardublockly.py
 

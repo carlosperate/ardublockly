@@ -115,8 +115,7 @@ def pyinstaller_build():
         "%s" % os.path.join("package", "pyinstaller.spec")]
     print(script_tab + "Command: %s" % process_args)
 
-    pyinstaller_process = subprocess.Popen(
-        process_args)
+    pyinstaller_process = subprocess.Popen(process_args)
     std_op, std_err_op = pyinstaller_process.communicate()
 
     if pyinstaller_process.returncode != 0:
@@ -198,37 +197,57 @@ def copy_cefpython_data_files(os_type):
 
     # The Resources is only present in mac, linux uses a locales folder
     if os_type == "mac":
-        cef_exec_resources = os.path.join(cef_exec_folder, "Resources")
+        cef_exec_resources = os.path.join(
+            project_root_dir, exec_folder_name, "Resources")
         print(script_tab + "Copying CEF Resources files from %s/Resources\n" %
               cef_path + script_tab + "into %s" % cef_exec_resources)
-        resources = glob(r"%s/Resources/*.*" % cef_exec_folder)
-        # Ensure the cefpython3/Resources folder is created and copy the files
-        if not os.path.exists(cef_exec_resources):
-            os.makedirs(cef_exec_resources)
-        for f in resources:
-            shutil.copy(f, cef_exec_resources)
+        # Copy the entire Resources folder into the execution directory
+        shutil.copytree(os.path.join(cef_path, "Resources"),
+                        cef_exec_resources)
 
 
-def create_bash_file():
+def create_bash_file(os_type):
     """
-    Creates a bash file into the project root to be able to easily launch the
-    Ardublockly application.
+    Creates a shell script fil into the project root to be able to easily launch
+    the Ardublockly application.
     """
-    bash_text = '#!/bin/bash\n' \
-                'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
-                'echo "[Bash File] Running Ardublockly from: " $DIR\n' \
-                './' + exec_folder_name + '/start_cef $DIR'
-    bash_location = os.path.join(project_root_dir, "ardublockly_run.sh")
+    shell_text = ""
+    shell_location = ""
+
+    # The script depends on platform
+    if os_type == "linux":
+        shell_text = '#!/bin/bash\n' \
+                     'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
+                     'echo "[Shell Launch Script] Executing from: $DIR\n"' \
+                     './%s/start_cef $DIR' % exec_folder_name
+        shell_location = os.path.join(project_root_dir, "ardublockly_run.sh")
+    elif os_type == "mac":
+        shell_text = '#!/bin/bash\n' \
+                     'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
+                     'echo "[Shell Launch Script] Executing from: $DIR"\n' \
+                     '$DIR/%s/start_cef $DIR' % exec_folder_name
+        shell_location = os.path.join(
+            project_root_dir, "ardublockly_run.command")
 
     try:
-        print(script_tab + "Creating bash file into %s" % bash_location)
-        bash_file = open(bash_location, 'w')
-        bash_file.write(bash_text)
+        print(script_tab + "Creating shell file into %s" % shell_location)
+        bash_file = open(shell_location, 'w')
+        bash_file.write(shell_text)
         bash_file.close()
     except Exception as e:
         print(script_tab + "%s" % e)
-        print(script_tab + "ERROR: Bash file to launch the Ardublockly "
+        print(script_tab + "ERROR: Shell file to launch the Ardublockly "
                            "application could not be created.")
+
+    # Make shell script executable by launching a subprocess
+    process_args = ["chmod", "+x", "%s" % shell_location]
+    print(script_tab + "Command to make executable: %s" % process_args)
+    try:
+        pyinstaller_process = subprocess.Popen(process_args)
+        std_op, std_err_op = pyinstaller_process.communicate()
+    except Exception as e:
+        print(script_tab + "%s" % e)
+        print(script_tab + "ERROR: Could not make Shell file executable.")
 
 
 def build_ardublockly():
@@ -268,8 +287,8 @@ def build_ardublockly():
     print(script_tag + "Removing PyInstaller recent temp directories.")
     remove_pyinstaller_temps()
 
-    print(script_tag + "Creating bash file to easily execute Ardublockly.")
-    create_bash_file()
+    print(script_tag + "Creating shell file to easily execute Ardublockly.")
+    create_bash_file(os_type)
 
 
 if __name__ == "__main__":

@@ -11,11 +11,11 @@ a = Analysis(['start_cef.py'],
              hiddenimports=["ArdublocklyServer", "cefpython3", "wx"],
              hookspath=None,
              runtime_hooks=None,
-             excludes=None,
-             cipher=block_cipher)
+             excludes=None)
+             #cipher=block_cipher)
 
-pyz = PYZ(a.pure,
-          cipher=block_cipher)
+pyz = PYZ(a.pure)
+          #cipher=block_cipher)
 
 exe = EXE(pyz,
           a.scripts,
@@ -24,7 +24,7 @@ exe = EXE(pyz,
           debug=False,
           strip=None,
           upx=True,
-          console=True)
+          console=False)
 
 coll = COLLECT(exe,
                a.binaries,
