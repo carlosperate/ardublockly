@@ -30,10 +30,16 @@
 # include a -v flag to select a verbose mode.
 from __future__ import unicode_literals, print_function
 import os
+import sys
 import shutil
+import platform
 import subprocess
-import cefpython3
 from glob import glob
+
+# Importing cef and wx to ensure they are reachable and get their location
+import cefpython3
+import wx
+
 
 # The project_root_dir depends on the location of this file, so it cannot be
 # moved without updating this line
@@ -44,6 +50,40 @@ script_tab = "                    "
 
 
 # verbose_print = print if verbose else lambda *a, **k: None
+
+
+def get_os():
+    """
+    Gets the OS to based on the command line argument of the platform info.
+    Only possibilities are: "windows", "mac", "linux".
+    """
+    valid_os = ["windows", "linux", "mac"]
+
+    print(script_tab + "Checking for command line argument indicated OS:")
+    if len(sys.argv) > 1:
+        if sys.argv[1] in valid_os:
+            # Take the first argument and use it as the os
+            print(script_tab + "Valid command line argument found: %s" %
+                  sys.argv[1])
+            return "%s" % sys.argv[1]
+        else:
+            print(script_tab + "Invalid command line argument found: %s\n" %
+                  sys.argv[1] + script_tab + "Options available: %s" % valid_os)
+
+    print(script_tab + "Valid command line arg not found, checking system.")
+
+    os_found = platform.system()
+    if os_found == "Windows":
+        raise SystemExit(script_tab + "OS found is: %s\n" % valid_os[0] +
+                         "Exit: This script is not design to run on Windows.")
+    elif os_found == "Linux":
+        print(script_tab + "OS found is: %s" % valid_os[1])
+        return valid_os[1]
+    elif os_found == "Darwin":
+        print(script_tab + "OS found is: %s" % valid_os[2])
+        return valid_os[2]
+    else:
+        raise SystemExit("Exit: OS data found is invalid '%s'" % os_found)
 
 
 def remove_pyinstaller_temps():
@@ -69,12 +109,12 @@ def pyinstaller_build():
     package folder. Captures the output streams and checks for errors.
     :return: Boolean indicating the success state of the operation.
     """
-    process_args = ["python",
-                    "package/pyinstaller/pyinstaller.py",
-                    "package/pyinstaller.spec"]
+    process_args = [
+        "python",
+        "%s" % os.path.join("package", "pyinstaller", "pyinstaller.py"),
+        "%s" % os.path.join("package", "pyinstaller.spec")]
     print(script_tab + "Command: %s" % process_args)
 
-    pipe = subprocess.PIPE
     pyinstaller_process = subprocess.Popen(
         process_args)
     std_op, std_err_op = pyinstaller_process.communicate()
@@ -114,36 +154,59 @@ def move_executable_folder():
     return True
 
 
-def copy_cefpython_data_files():
+def copy_cefpython_data_files(os_type):
     """ Copies into the executable folder required cefpython files. """
+    # Get the CEF python folder location and create a directory for exec folder
     cef_path = os.path.dirname(cefpython3.__file__)
     cef_exec_folder = os.path.join(
         project_root_dir, exec_folder_name, "cefpython3")
-    cef_exec_locales = os.path.join(cef_exec_folder, "locales")
 
-    data_files = [
-        "%s/libcef.so" % cef_path,
-        "%s/libffmpegsumo.so" % cef_path,
-        "%s/subprocess" % cef_path]
+    # The data files depend on the operating system
+    data_files = []
+    if os_type == "linux":
+        data_files = [
+            "%s/libcef.so" % cef_path,
+            "%s/libffmpegsumo.so" % cef_path,
+            "%s/subprocess" % cef_path]
+    elif os_type == "mac":
+        data_files = [
+            "%s/cefpython_py27.so" % cef_path,
+            "%s/ffmpegsumo.so" % cef_path,
+            "%s/libcef.dylib" % cef_path,
+            "%s/libplugin_carbon_interpose.dylib" % cef_path,
+            "%s/subprocess" % cef_path]
 
-    locales = glob(r"%s/locales/*.*" % cef_path)
-
-    # Ensure the cefpython3 folders are created
-    if not os.path.exists(cef_exec_folder):
-        os.makedirs(cef_exec_folder)
-    if not os.path.exists(cef_exec_locales):
-        os.makedirs(cef_exec_locales)
-
-    # Copy all the files
     print(script_tab + "Copying CEF files from %s\n" % cef_path +
           script_tab + "into %s" % cef_exec_folder)
+    # Ensure the cefpython3 folder is created and copy the files
+    if not os.path.exists(cef_exec_folder):
+        os.makedirs(cef_exec_folder)
     for f in data_files:
         shutil.copy(f, cef_exec_folder)
-    for f in locales:
-        shutil.copy(f, cef_exec_locales)
 
-    # Copying the libproxy.so
-    #shutil.copy("/usr/lib/x86_64-linux-gnu/libproxy.so.1", cef_exec_folder)
+    # The locales is only present in linux, mac uses a resources folder
+    if os_type == "linux":
+        cef_exec_locales = os.path.join(cef_exec_folder, "locales")
+        print(script_tab + "Copying CEF locales files from %s/locales\n" %
+              cef_path + script_tab + "into %s" % cef_exec_locales)
+        locales = glob(r"%s/locales/*.*" % cef_exec_folder)
+        # Ensure the cefpython3/locales folder is created and copy the files
+        if not os.path.exists(cef_exec_locales):
+            os.makedirs(cef_exec_locales)
+        for f in locales:
+            shutil.copy(f, cef_exec_locales)
+
+    # The Resources is only present in mac, linux uses a locales folder
+    if os_type == "mac":
+        cef_exec_resources = os.path.join(cef_exec_folder, "Resources")
+        print(script_tab + "Copying CEF Resources files from %s/Resources\n" %
+              cef_path + script_tab + "into %s" % cef_exec_resources)
+        resources = glob(r"%s/Resources/*.*" % cef_exec_folder)
+        # Ensure the cefpython3/Resources folder is created and copy the files
+        if not os.path.exists(cef_exec_resources):
+            os.makedirs(cef_exec_resources)
+        for f in resources:
+            shutil.copy(f, cef_exec_resources)
 
 
 def create_bash_file():
@@ -169,14 +232,18 @@ def create_bash_file():
 
 
 def build_ardublockly():
-    print(script_tag + "Building Ardublockly for Linux.")
+    print(script_tag + "Build procedure started.")
+    print(script_tag + "Checking for OS.")
+    os_type = get_os()
+    print(script_tag + "Building Ardublockly for %s." % os_type)
+
     print(script_tag + "Project directory is:     %s" % project_root_dir)
     print(script_tag + "Script working directory: %s" % os.getcwd())
 
     print(script_tag + "Removing PyInstaller old temp directories.")
     remove_pyinstaller_temps()
 
-    print(script_tag + "Running PyInstaller process:")
+    print(script_tag + "Running PyInstaller process.")
     success = pyinstaller_build()
     if not success:
         print(script_tab + "Removing PyInstaller recent temp directories.")
@@ -196,7 +263,7 @@ def build_ardublockly():
                                       "the PyInstaller execution.")
 
     print(script_tag + "Coping cefpython data files into executable directory.")
-    copy_cefpython_data_files()
+    copy_cefpython_data_files(os_type)
 
     print(script_tag + "Removing PyInstaller recent temp directories.")
     remove_pyinstaller_temps()

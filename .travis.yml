@@ -1,67 +1,39 @@
-# Setting the language to python creates virtual environments, which affect the
-# current python packages and pyinstaller build, we only test against python
-# 2.7, so don't need them. Skip all of it using language c.
-language: ruby
+# We are using the iOS build system to create Mac OS X python builds
+language: objective-c
 
 
 before_install:
-  - sudo apt-get update -qq
-
-  # Travis is on 64 bit, so need some 32 bit libs
-  #- dpkg -l ia32-libs
-  #- sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch
-  #- sudo apt-get install -qq --force-yes gcc-multilib
-
-  # Ensuring libstdc is installer
-  - sudo apt-get install -y libstdc++6
-  - dpkg -s libstdc++6
-
-  # libproxy.so is not present, install glib-networking
-  - sudo apt-get install -y glib-networking glib-networking-common glib-networking-services
-  - dpkg -s glib-networking
-  - dpkg -s libstdc++6
-  - dpkg -s libc6
-  - echo $LD_LIBRARY_PATH
-  - export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/x86_64-linux-gnu/
-  - echo $LD_LIBRARY_PATH
-
-  # Install mlocate to search for files
-  - sudo apt-get install mlocate
-  - sudo updatedb
-  - locate libproxy.so
-  - locate libstdc++.so.6
-
   # OS extra info
   - uname -a
-  - ldd --version
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
 
-  # Install wxPython and tkinker
-  - sudo apt-get install -y python-support
-  - sudo apt-get install python-tk
-  - sudo apt-get install -y python-wxgtk2.8 python-wxtools wx2.8-i18n
+  # Install python
+  - brew install python 
+  - brew link --overwrite python
+  - pip install --upgrade pip
+  - PATH=/usr/local/bin:$PATH
+  - echo $PATH
+  - python --version
+  - python -c "import struct; print(struct.calcsize('P') * 8)"
+
+  - brew install libcouchbase
+
+  # Install wxPython
+  - brew install wxpython
+  #- sudo wget https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/mac/wxPython3.0-osx-3.0.2.0-cocoa-py2.7.dmg --directory-prefix=../
+  #- sudo hdiutil attach ../wxPython3.0-osx-3.0.2.0-cocoa-py2.7.dmg
+  #- ls /Volumes
+  #- sudo installer -pkg /Volumes/wxPython3.0-osx-3.0.2.0-cocoa-py2.7/wxPython3.0-osx-cocoa-py2.7.pkg -target /
+  #- sudo hdiutil detach /Volumes/wxPython3.0-osx-3.0.2.0-cocoa-py2.7
 
   # Install cefpython3 (cef from official dropbox link)
-  - sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1 --directory-prefix=../
-  - sudo dpkg -i ../python-cefpython3_31.2-1_amd64.deb?dl=1
-#  - sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AABsIDcodIk8cgPo9jjygF4Pa/31.2/Linux/cefpython3-31.2-linux64-setup.zip?dl=1 --directory-prefix=../
-#  - cd ..
-#  - unzip cefpython3-31.2-linux64-setup.zip?dl=1
-#  - cd cefpython3-31.2-linux64-setup
-#  - sudo python setup.py install
-#  - cd ../ardublockly
+  - sudo pip install cefpython3
 
 
-# Run the build script
+# Build and Pack ardublockly
 install:
-  # Adding cefpython installation dir to travis-ci python paths, listed in:
-  # https://code.google.com/p/cefpython/wiki/Download_CEF3_Linux
-  - export PYTHONPATH=$PYTHONPATH:/usr/share/pyshared/
-  - export PYTHONPATH=$PYTHONPATH:/usr/lib/pymodules/python2.7/
-
-  # Build and pack
-  - python package/build_linux.py
+  - python package/build_pyinstaller.py mac
   - python package/pack_ardublockly.py
 
 
@@ -73,13 +45,13 @@ script:
 # Deploy the build version in an S3 bucket
 deploy:
   provider: s3
-  access_key_id: AKIAJYJV7NN6HVHCX5NQ
+  access_key_id: AKIAIBDOPX6GSMBDEFPQ
   secret_access_key:
-    secure: PlLCQKTcf9IzBXpEnXUxbJifb0usS7qcghnM0VxBTX0IL3C975JPidrYjP39ge7P
+    secure: QNNNIgHpcTYJZS1K4w8iPqJWq1Xhx8ICoVJ79QURS5Vi4ppnP0smuW13+XdmjoZyoceSoR4iOcKX7o4HXDozsejy3ft72tXgNntVQoOOKYxnV1zKYHc7Q6ID6L3GlPKV2EQid30CM4bP0mm4P8ntuemUOwhqm4mjRwDxAMpxsEbXgNAHAMifn40g5u2rHuwo64+UUll6m2Ues6mekAlwq6YQKn0numrcHRZX9F3kMLyrSHO671EkyfVsBbZpk7+HIEXmgXgPb4juefcxUlhYQFvnlBPyyTG1ec0BE2un714vZe+Gq0w1UYQbIpsAvM1HDWQKa2S9m2gz1TXC5YXOKAfoenyFsrgvdT00zpxVrTLAGhmIgtxsbAYXVPRg/6g5E+DW/JJ2xBfMJyw3j/82vexkHpvQcut9zZ74CE2H0CtyNXHvwdcwMs+qoja6tLw1dvFD7yrTo2T/jCOxFoGYjneF3Syuh8GpALSGGUJDnyFiK0yD2B0r2567csFj5Sc0CO/ExFwfG9zmiVtkm0Xpfq09VcZFjVnJ4k8QyNvrHmnGB/H7P6CskSA1X9gGIyk36Cu17XyyrtIuM+UUIdnrZhWCI3zA/2UVawkEjA+zhpbKFKsxIe37bPpIpNM+OyMLppZzzpcaRAynh6a/8Hcc+ckh4zMg7qWu7VXyYvjSkl0=
   bucket: ardublockly-builds
   skip_cleanup: true
   local-dir: upload
-  upload-dir: linux
+  upload-dir: mac
   acl: public_read
   on:
     repo: carlosperate/ardublockly

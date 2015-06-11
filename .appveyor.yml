@@ -54,9 +54,9 @@ before_deploy:
 deploy:
   name: ardublockly-s3-deployment
   provider: S3
-  access_key_id: AKIAIWAS6AEEZDXQUNTA
+  access_key_id: AKIAJYJV7NN6HVHCX5NQ
   secret_access_key:
-    secure: 3Ewa1E9tDLawiGZvbUA3NbuGkK/uKw+zrQXtBPeZwd/pS4EHL0k0bu2n9hf7M9Cs
+    secure: PlLCQKTcf9IzBXpEnXUxbJifb0usS7qcghnM0VxBTX0IL3C975JPidrYjP39ge7P
   bucket: ardublockly-builds
   set_public: true
   folder: windows

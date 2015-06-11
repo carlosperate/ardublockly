@@ -66,8 +66,7 @@ def copy_ardublockly_folder():
     :return: Boolean indicating the success state of the operation.
     """
     ignore_pat = (".git*", ".svn", ".travis*", ".appveyor*", "TestTemp_*",
-                  "package", "python-cefpython3*")
-
+                  "package")
     if not os.path.exists(copied_project_dir):
         print(script_tab + "Copying contents of %s\n" % project_root_dir +
               script_tab + "into                %s" % copied_project_dir)

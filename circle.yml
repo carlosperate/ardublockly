@@ -54,7 +54,7 @@ dependencies:
     - export PYTHONPATH=$PYTHONPATH:/usr/lib/pymodules/python2.7/
 
     # Build and pack
-    - python package/build_linux.py
+    - python package/build_pyinstaller.py linux
     - python package/pack_ardublockly.py
 
     # Get the upload file as a environmenta variable
@@ -70,7 +70,6 @@ dependencies:
 test:
   override:
     - python ArdublocklyServer/tests/SketchCreator_test.py
-    - echo $ardublocklyZipFile
 
 ## Customize deployment commands
 deployment:
