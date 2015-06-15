@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*- #
 #
-# Builds the Ardublockly Python portion of the app for Linux or OS X.
+# Builds the Ardublockly application for Linux.
 #
 # Copyright (c) 2015 carlosperate https://github.com/carlosperate/
 #
@@ -17,17 +17,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# IMPORTANT: This script is designed to be located one directory level under the
-#            project root folder.
+# IMPORTANT: This script is designed to be located two directory levels under
+#            the project root folder.
 #
 # This script file uses PyInstaller to create a self contained executable
 # build of the Ardublockly application.
 # It will remove the build folders left from PyInstaller and move the folder
 # with the executable application into the project root folder.
 #
-# Due to all the debugging steps required to get a CI serve running properly
-# this script ended up being quite verbose. In might be updated in the future
-# to include a -v flag to select a verbose mode.
+# Due to all the debugging required to get a CI serve running properly this
+# script ended up being quite verbose. In might be updated in the future to
+# include a -v flag to select a verbose mode.
 from __future__ import unicode_literals, print_function
 import os
 import sys
@@ -36,32 +36,24 @@ import platform
 import subprocess
 from glob import glob
 
+# Importing cef and wx to ensure they are reachable and get their location
+import cefpython3
+import wx
 
-spec_coll_name = "server"
-if platform.system() == "Darwin":
-    exec_folder_name = os.path.join("arduexec.app", "server")
-else:
-    exec_folder_name = os.path.join("arduexec", "server")
+
+exec_folder_name = "arduexec"
 script_tag = "[Ardublockly build] "
 script_tab = "                    "
 
-# The project_root_dir depends on the location of this file, so it cannot be
-# moved without updating this line
+# The project_root_dir depends on this file location, assumed to be two levels
+# below project root, so it cannot be moved without updating this variable
 project_root_dir = \
-    os.path.dirname(                                  # going up 1 level
-        os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
+    os.path.dirname(                                       # going up 1 level
+        os.path.dirname(                                   # going up 1 level
+            os.path.dirname(os.path.realpath(__file__))))  # folder dir of this
 
 
 # verbose_print = print if verbose else lambda *a, **k: None
-
-
-def remove_directory(dir_to_remove):
-    """ Removes the a given directory. """
-    if os.path.exists(dir_to_remove):
-        print(script_tab + "Removing directory %s" % dir_to_remove)
-        shutil.rmtree(dir_to_remove)
-    else:
-        print(script_tab + "Directory %s was not found." % dir_to_remove)
 
 
 def get_os():
@@ -99,11 +91,20 @@ def get_os():
 
 
 def remove_pyinstaller_temps():
-    """
-    Removes the temporary folders created by PyInstaller (dist and build).
-    """
-    remove_directory(os.path.join(os.getcwd(), "dist"))
-    remove_directory(os.path.join(os.getcwd(), "build"))
+    """ Removes the temporary folders created by PyInstaller. """
+    dist_dir = os.path.join(os.getcwd(), "dist")
+    if os.path.exists(dist_dir):
+        print(script_tab + "Removing %s folder." % dist_dir)
+        shutil.rmtree(dist_dir)
+    else:
+        print(script_tab + "No dist %s found." % dist_dir)
+
+    build_dir = os.path.join(os.getcwd(), "build")
+    if os.path.exists(build_dir):
+        print(script_tab + "Removing %s folder." % build_dir)
+        shutil.rmtree(build_dir)
+    else:
+        print(script_tab + "No %s folder found." % build_dir)
 
 
 def pyinstaller_build():
@@ -115,7 +116,7 @@ def pyinstaller_build():
     process_args = [
         "python",
         "%s" % os.path.join("package", "pyinstaller", "pyinstaller.py"),
-        "%s" % os.path.join("package", "pyinstaller.spec")]
+        "%s" % os.path.join("package", "wxcef_build", "pyinstaller_wxcef.spec")]
     print(script_tab + "Command: %s" % process_args)
 
     pyinstaller_process = subprocess.Popen(process_args)
@@ -129,27 +130,84 @@ def pyinstaller_build():
     return True
 
 
+def remove_executable_folder():
+    """ Removes the current ardublockly PyInstaller executable folder. """
+    exec_dir = os.path.join(project_root_dir, exec_folder_name)
+    if os.path.exists(exec_dir):
+        print(script_tab + "Removing the %s folder." % exec_folder_name)
+        shutil.rmtree(exec_dir)
+    else:
+        print(script_tab + "No %s folder found." % exec_folder_name)
+
+
 def move_executable_folder():
     """
     Moves the PyInstaller executable folder from dist to project root.
     :return: Boolean indicating the success state of the operation.
     """
-    original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
-    final_exec_dir = os.path.join(project_root_dir, exec_folder_name)
+    original_exec_dir = os.path.join(project_root_dir, "dist", exec_folder_name)
     if os.path.exists(original_exec_dir):
-        print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
-              script_tab + "to %s" % final_exec_dir)
-        shutil.move(original_exec_dir, final_exec_dir)
+        print(script_tab + "Moving folder %s \n" % original_exec_dir +
+              script_tab + "to %s" % project_root_dir)
+        shutil.move(original_exec_dir, project_root_dir)
     else:
-        print(script_tab + "ERROR: PyInstaller executable output folder '%s' " %
-              original_exec_dir + "not found!")
+        print(script_tab + "ERROR: PyInstaller executable output folder not "
+                           "found!")
         return False
     return True
 
 
-def copy_data_files(os_type):
-    """ At the moment there are no additional data files required to copy """
-    pass
+def copy_cefpython_data_files(os_type):
+    """ Copies into the executable folder required cefpython files. """
+    # Get the CEF python folder location and create a directory for exec folder
+    cef_path = os.path.dirname(cefpython3.__file__)
+    cef_exec_folder = os.path.join(
+        project_root_dir, exec_folder_name, "cefpython3")
+
+    # The data files depend on the operating system
+    data_files = []
+    if os_type == "linux":
+        data_files = [
+            "%s/libcef.so" % cef_path,
+            "%s/libffmpegsumo.so" % cef_path,
+            "%s/subprocess" % cef_path]
+    elif os_type == "mac":
+        data_files = [
+            "%s/cefpython_py27.so" % cef_path,
+            "%s/ffmpegsumo.so" % cef_path,
+            "%s/libcef.dylib" % cef_path,
+            "%s/libplugin_carbon_interpose.dylib" % cef_path,
+            "%s/subprocess" % cef_path]
+
+    print(script_tab + "Copying CEF files from %s\n" % cef_path +
+          script_tab + "into %s" % cef_exec_folder)
+    # Ensure the cefpython3 folder is created and copy the files
+    if not os.path.exists(cef_exec_folder):
+        os.makedirs(cef_exec_folder)
+    for f in data_files:
+        shutil.copy(f, cef_exec_folder)
+
+    # The locales is only present in linux, mac uses a resources folder
+    if os_type == "linux":
+        cef_exec_locales = os.path.join(cef_exec_folder, "locales")
+        print(script_tab + "Copying CEF locales files from %s/locales\n" %
+              cef_path + script_tab + "into %s" % cef_exec_locales)
+        locales = glob(r"%s/locales/*.*" % cef_exec_folder)
+        # Ensure the cefpython3/locales folder is created and copy the files
+        if not os.path.exists(cef_exec_locales):
+            os.makedirs(cef_exec_locales)
+        for f in locales:
+            shutil.copy(f, cef_exec_locales)
+
+    # The Resources is only present in mac, linux uses a locales folder
+    if os_type == "mac":
+        cef_exec_resources = os.path.join(
+            project_root_dir, exec_folder_name, "Resources")
+        print(script_tab + "Copying CEF Resources files from %s/Resources\n" %
+              cef_path + script_tab + "into %s" % cef_exec_resources)
+        # Copy the entire Resources folder into the execution directory
+        shutil.copytree(os.path.join(cef_path, "Resources"),
+                        cef_exec_resources)
 
 
 def create_bash_file(os_type):
@@ -164,21 +222,20 @@ def create_bash_file(os_type):
     if os_type == "linux":
         shell_text = '#!/bin/bash\n' \
                      'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
-                     'echo "[Shell Launch Script] Executing from: $DIR"\n' \
-                     './%s/start -s "$DIR"' % exec_folder_name
-        shell_location = os.path.join(
-            project_root_dir, "ardublockly_server_run.sh")
+                     'echo "[Shell Launch Script] Executing from: $DIR\n"' \
+                     './%s/start_cef $DIR' % exec_folder_name
+        shell_location = os.path.join(project_root_dir, "ardublockly_run.sh")
     elif os_type == "mac":
         shell_text = '#!/bin/bash\n' \
                      'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
                      'echo "[Shell Launch Script] Executing from: $DIR"\n' \
-                     '"$DIR/%s/start" -s "$DIR"' % exec_folder_name
+                     '$DIR/%s/start_cef $DIR' % exec_folder_name
         shell_location = os.path.join(
-            project_root_dir, "ardublockly_server_run.command")
+            project_root_dir, "ardublockly_run.command")
 
     try:
         print(script_tab + "Creating shell file into %s" % shell_location)
-        bash_file = open(shell_location, "w")
+        bash_file = open(shell_location, 'w')
         bash_file.write(shell_text)
         bash_file.close()
     except Exception as e:
@@ -218,7 +275,7 @@ def build_ardublockly():
                                       "PyInstaller execution.")
 
     print(script_tag + "Removing old ardublockly executable directory.")
-    remove_directory(os.path.join(project_root_dir, exec_folder_name))
+    remove_executable_folder()
 
     print(script_tag + "Moving executable folder to project root.")
     success = move_executable_folder()
@@ -228,8 +285,8 @@ def build_ardublockly():
         raise SystemExit(script_tab + "Exiting now as there was an error in "
                                       "the PyInstaller execution.")
 
-    print(script_tag + "Coping data files into executable directory.")
-    copy_data_files(os_type)
+    print(script_tag + "Coping cefpython data files into executable directory.")
+    copy_cefpython_data_files(os_type)
 
     print(script_tag + "Removing PyInstaller recent temp directories.")
     remove_pyinstaller_temps()

@@ -17,8 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# IMPORTANT: This script is designed to be located one directory level under the
-#            project root folder.
+# IMPORTANT: This script is designed to be located two directory levels under
+#            the project root folder.
 #
 import os
 import sys
@@ -32,12 +32,17 @@ try:
 except ImportError:
     raise SystemExit("You need to have cefpython3, and py2exe installed!")
 
+
 exec_folder_name = "arduexec"
 script_tag = "[Ardublockly build] "
 script_tab = "                    "
 
-# set up directories
-project_root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+# The project_root_dir depends on this file location, assumed to be two levels
+# below project root, so it cannot be moved without updating this variable
+project_root_dir = \
+    os.path.dirname(                                       # going up 1 level
+        os.path.dirname(                                   # going up 1 level
+            os.path.dirname(os.path.realpath(__file__))))  # folder dir of this
 executable_dir = os.path.join(project_root_dir, exec_folder_name)
 
 # Enable the ArdublocklyServer package access the sys path for py2exe to find
@@ -174,7 +179,8 @@ def create_run_batch_file():
         batch_file = open(("%s/ardublockly_run.bat" % project_root_dir), 'w')
         batch_file.write(batch_text)
         batch_file.close()
-        print(script_tab + "Batch file created in %s" % project_root_dir)
+        print(script_tab + "Batch file created in " +
+              "%s/ardublockly_run.bat" % project_root_dir)
     except Exception as e:
         print("%s\n" % e + script_tab +
               "Batch file to run Ardublockly could not be created !")
@@ -182,6 +188,9 @@ def create_run_batch_file():
 
 def main():
     print(script_tag + "Building Ardublockly for Windows.")
+
+    print(script_tag + "Project directory is:     %s" % project_root_dir)
+    print(script_tag + "Script working directory: %s" % os.getcwd())
 
     print(script_tag + "Removing old build directory.")
     remove_directory(os.path.join(os.getcwd(), "build"))

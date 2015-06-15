@@ -1,6 +1,7 @@
 # We are using the iOS build system to create Mac OS X python builds
 language: objective-c
 
+
 before_install:
   # OS extra info
   - uname -a
@@ -19,38 +20,31 @@ before_install:
 
   - brew install libcouchbase
 
-  # Install node.js
-  - brew unlink node
-  - brew install node
-  - node --version
-  - npm --version
+  # Install wxPython
+  - brew install wxpython
+  #- sudo wget https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/mac/wxPython3.0-osx-3.0.2.0-cocoa-py2.7.dmg --directory-prefix=../
+  #- sudo hdiutil attach ../wxPython3.0-osx-3.0.2.0-cocoa-py2.7.dmg
+  #- ls /Volumes
+  #- sudo installer -pkg /Volumes/wxPython3.0-osx-3.0.2.0-cocoa-py2.7/wxPython3.0-osx-cocoa-py2.7.pkg -target /
+  #- sudo hdiutil detach /Volumes/wxPython3.0-osx-3.0.2.0-cocoa-py2.7
+
+  # Install cefpython3 (cef from official dropbox link)
+  - sudo pip install cefpython3
+
 
 # Build and Pack ardublockly
 install:
   #- cd package/pyinstaller/bootloader
   #- python ./waf configure build install
   #- cd ../../../
-  - python package/build_pyinstaller.py mac
-  - cd package/electron
-  - npm install
-  - npm run release
-  - cd ../..
-  # Removing symlinks due to bug https://github.com/atom/electron/issues/1801
-  - ls arduexec.app
-  - ls arduexec.app/Contents/
-  - ls arduexec.app/Contents/Frameworks/
-  - ls "arduexec.app/Contents/Frameworks/Electron Framework.framework/"
-  #- sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Frameworks"
-  - sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Libraries/Libraries"
-  #- sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Versions/Current/Libraries/Libraries"
-  #- sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/Libraries"
+  - python package/wxcef_build/build_pyinstaller_wxcef.py mac
+  - python package/wxcef_build/pack_ardublockly_wxcef.py
 
-  - python package/pack_ardublockly.py
-  - du -sk releases/
 
 # For now only running a known passing test, the others need to be updated
 script:
   - python ArdublocklyServer/tests/SketchCreator_test.py
+
 
 # Deploy the build version in an S3 bucket
 deploy:
@@ -60,9 +54,9 @@ deploy:
     secure: QNNNIgHpcTYJZS1K4w8iPqJWq1Xhx8ICoVJ79QURS5Vi4ppnP0smuW13+XdmjoZyoceSoR4iOcKX7o4HXDozsejy3ft72tXgNntVQoOOKYxnV1zKYHc7Q6ID6L3GlPKV2EQid30CM4bP0mm4P8ntuemUOwhqm4mjRwDxAMpxsEbXgNAHAMifn40g5u2rHuwo64+UUll6m2Ues6mekAlwq6YQKn0numrcHRZX9F3kMLyrSHO671EkyfVsBbZpk7+HIEXmgXgPb4juefcxUlhYQFvnlBPyyTG1ec0BE2un714vZe+Gq0w1UYQbIpsAvM1HDWQKa2S9m2gz1TXC5YXOKAfoenyFsrgvdT00zpxVrTLAGhmIgtxsbAYXVPRg/6g5E+DW/JJ2xBfMJyw3j/82vexkHpvQcut9zZ74CE2H0CtyNXHvwdcwMs+qoja6tLw1dvFD7yrTo2T/jCOxFoGYjneF3Syuh8GpALSGGUJDnyFiK0yD2B0r2567csFj5Sc0CO/ExFwfG9zmiVtkm0Xpfq09VcZFjVnJ4k8QyNvrHmnGB/H7P6CskSA1X9gGIyk36Cu17XyyrtIuM+UUIdnrZhWCI3zA/2UVawkEjA+zhpbKFKsxIe37bPpIpNM+OyMLppZzzpcaRAynh6a/8Hcc+ckh4zMg7qWu7VXyYvjSkl0=
   bucket: ardublockly-builds
   skip_cleanup: true
-  local-dir: releases
+  local-dir: upload
   upload-dir: mac
   acl: public_read
   on:
     repo: carlosperate/ardublockly
-    branch: [travisci, electron]
+    branch: travisci

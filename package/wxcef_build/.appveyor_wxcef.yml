@@ -1,5 +1,4 @@
 environment:
-  nodejs_version: "0.12.4"
   matrix:
     # First group is 32 bit python 2.7
     - PYTHON: "C:\\Python27"
@@ -19,11 +18,6 @@ init:
   - cmd: python --version
   - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
 
-  # Ensure node x86 (appveyor powershell script to switch installed versions)
-  - ps: Install-Product node 0.12.4 x86
-  - cmd: node --version
-  - cmd: npm --version
-
   # Set the relevant pip location to the path 
   - cmd: set PATH=%PYTHON%\scripts;%PATH%
   - cmd: ECHO Path - %PATH%
@@ -34,15 +28,14 @@ install:
 
   # Install python dependencies
   - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.6.10a1-cp27-none-win32.whl
+  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/cefpython3-31.2-cp27-none-win32.whl
+  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/wxPython-3.0.2.0-cp27-none-win32.whl
+  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/wxPython_common-3.0.2.0-py2-none-any.whl
   - cmd: pip install mock
 
   # Build Ardublockly
-  - cmd: python package\build_py2exe.py
-  - cmd: cd package\electron
-  - cmd: npm install
-  - cmd: npm run release
-  - cmd: cd ..\..
-  - cmd: python package\pack_ardublockly.py
+  - cmd: python package\wxcef_build\build_windows_wxcef.py
+  - cmd: python package\wxcef_build\pack_ardublockly_wxcef.py
   - cmd: dir
 
 # Not a project with an msbuild file, build done at install.
@@ -54,7 +47,7 @@ test_script:
 
 # Push artifact to s3 bucket and list all
 before_deploy:
-  - ps: Get-ChildItem .\releases\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName ardublockly-s3-deployment }
+  - ps: Get-ChildItem .\upload\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName ardublockly-s3-deployment }
   - ps: foreach($artifactName in $artifacts.keys) { $artifacts[$artifactName] }
 
 # Deploy build to Amazon S3 bucket

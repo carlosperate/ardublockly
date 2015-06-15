@@ -33,14 +33,20 @@ import shutil
 import struct
 import zipfile
 
-# The project_root_dir depends on the location of this file, so it cannot be
-# moved without updating this line
-project_root_dir = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-copy_dir_name = "ardublockly_packed"
-copied_project_dir = os.path.join(os.path.dirname(project_root_dir),
-                                  copy_dir_name)
+
 script_tag = "[Ardublockly pack] "
 script_tab = "                   "
+
+# The project_root_dir depends on this file location, assumed to be two levels
+# below project root, so it cannot be moved without updating this variable
+project_root_dir = \
+    os.path.dirname(                                  # going up 1 level
+        os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
+
+# This script copies the ardublockly folder with a different name on the same 
+# directory level to easily filter what to included in the packed version
+copy_dir_name = None
+copied_project_dir = None
 
 
 def set_tag(tag):
@@ -56,125 +62,6 @@ def set_tag(tag):
     copy_dir_name = "ardublockly_%s" % tag
     copied_project_dir = os.path.join(os.path.dirname(project_root_dir),
                                       copy_dir_name)
-
-
-def copy_ardublockly_folder():
-    """
-    Copies all the contents of the project root directory into a new folder on
-    the same level.
-    The copy operation ignores a list of directories.
-    :return: Boolean indicating the success state of the operation.
-    """
-    ignore_pat = (".git*", ".svn", ".travis*", ".appveyor*", "TestTemp_*",
-                  "package")
-    if not os.path.exists(copied_project_dir):
-        print(script_tab + "Copying contents of %s\n" % project_root_dir +
-              script_tab + "into                %s" % copied_project_dir)
-        shutil.copytree(project_root_dir,
-                        copied_project_dir,
-                        symlinks=False,
-                        ignore=shutil.ignore_patterns(*ignore_pat))
-    else:
-        print(script_tab + "ERROR: %s directory already exists!" %
-              copied_project_dir)
-        return False
-    return True
-
-
-def remove_directory(dir_to_remove):
-    """ Removes the a given directory. """
-    if os.path.exists(dir_to_remove):
-        print(script_tab + "Removing directory %s" % dir_to_remove)
-        shutil.rmtree(dir_to_remove)
-    else:
-        print(script_tab + "Directory %s was not found." % dir_to_remove)
-
-
-def zip_ardublockly_copy(name_append):
-    """
-    Zips the contents of the copied project folder into a subdirectory of
-    the original project folder.
-    """
-    zip_file_dir = os.path.join(project_root_dir, "upload")
-    zip_file_location = os.path.join(
-        zip_file_dir, "ardublockly_%s.zip" % name_append)
-
-    # First ensure the upload folder exists
-    if not os.path.exists(zip_file_dir):
-        os.makedirs(zip_file_dir)
-
-    os.chdir(os.path.dirname(project_root_dir))
-    print(script_tab + "Working directory changed to %s" % os.getcwd())
-    print(script_tab + "Zipping the contents of %s\n" % copied_project_dir +
-          script_tab + "into                    %s\n" % zip_file_location)
-
-    zip_file = zipfile.ZipFile(zip_file_location, "w", zipfile.ZIP_DEFLATED)
-    for dir_name, sub_dirs, files in os.walk(copy_dir_name):
-        zip_file.write(dir_name)
-        for filename in files:
-            zip_file.write(os.path.join(dir_name, filename))
-    zip_file.close()
-
-
-def pack_ardublockly(tag):
-    # Set the copied folder name to the stamp
-    set_tag(tag)
-
-    print(script_tag + "Copying the project root folder:")
-    success = copy_ardublockly_folder()
-    if not success:
-        raise SystemExit(script_tab + "Exiting due to project root copy error.")
-
-    print(script_tag + "Removing unnecessary Blockly files:")
-    remove_directory(os.path.join(copied_project_dir, "blockly", "demos"))
-    remove_directory(os.path.join(copied_project_dir, "blockly", "appengine"))
-    remove_directory(os.path.join(copied_project_dir, "blockly", "tests"))
-
-    print(script_tag + "Removing an already zipped Ardublockly version:")
-    remove_directory(os.path.join(copied_project_dir, "upload"))
-
-    print(script_tag + "Removing CEF temporary files:")
-    remove_directory(os.path.join(copied_project_dir, "webcache"))
-
-    print(script_tag + "Creating zip file of the new Ardublockly folder:")
-    zip_ardublockly_copy(tag)
-
-
-def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
-    """
-    Checks if the CI environmental variables to check for a pull request,
-    commit id and band commit branch are present.
-    :return: String with the CI build information, or None if the CI
-             environmental variables could not be found.
-    """
-    pull_request = os.environ.get(pull_request_var)
-    branch = os.environ.get(branch_var)
-    commit = os.environ.get(commit_var)
-
-    if pull_request and pull_request != "false":
-        try:
-            int(pull_request)
-            print(script_tab + "Pull request valid '%s' variable found: %s" %
-                  (ci_name, pull_request))
-            return "pull_%s" % pull_request
-        except ValueError:
-            print(script_tab + "The pull request environmental variable " +
-                  "'%s' value '%s' from %s is not a valid number." %
-                  (pull_request_var, pull_request, ci_name))
-
-    if branch and commit:
-        print(script_tab + "Branch and commit valid '%s' variables found: %s %s"
-              % (ci_name, branch, commit))
-        # We only return first 10 digits from the commit ID (normal length 40)
-        commit = "%s" % commit
-        return "%s_%s" % (branch, commit[:10])
-
-    print(script_tab + "The environmental variables for %s " % ci_name +
-          "were deemed invalid:\n" +
-          script_tab + "\t%s: %s\n" % (pull_request_var, pull_request) +
-          script_tab + "\t%s: %s\n" % (branch_var, branch) +
-          script_tab + "\t%s: %s" % (commit_var, commit))
-    return None
 
 
 def get_tag():
@@ -219,6 +106,141 @@ def get_tag():
         return "%s_%s" % (arch_time_stamp, appveyor_tag)
 
     return arch_time_stamp
+
+
+def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
+    """
+    Checks if the CI environmental variables to check for a pull request,
+    commit id and band commit branch are present.
+    :return: String with the CI build information, or None if the CI
+             environmental variables could not be found.
+    """
+    pull_request = os.environ.get(pull_request_var)
+    branch = os.environ.get(branch_var)
+    commit = os.environ.get(commit_var)
+
+    if pull_request and pull_request != "false":
+        try:
+            int(pull_request)
+            print(script_tab + "Pull request valid '%s' variable found: %s" %
+                  (ci_name, pull_request))
+            return "pull_%s" % pull_request
+        except ValueError:
+            print(script_tab + "The pull request environmental variable " +
+                  "'%s' value '%s' from %s is not a valid number." %
+                  (pull_request_var, pull_request, ci_name))
+
+    if branch and commit:
+        print(script_tab + "Branch and commit valid '%s' variables found: %s %s"
+              % (ci_name, branch, commit))
+        # We only return first 10 digits from the commit ID (normal length 40)
+        commit = "%s" % commit
+        return "%s_%s" % (branch, commit[:10])
+
+    print(script_tab + "The environmental variables for %s " % ci_name +
+          "were deemed invalid:\n" +
+          script_tab + "\t%s: %s\n" % (pull_request_var, pull_request) +
+          script_tab + "\t%s: %s\n" % (branch_var, branch) +
+          script_tab + "\t%s: %s" % (commit_var, commit))
+    return None
+
+
+def remove_directory(dir_to_remove):
+    """ Removes the a given directory. """
+    if os.path.exists(dir_to_remove):
+        print(script_tab + "Removing directory %s" % dir_to_remove)
+        shutil.rmtree(dir_to_remove)
+    else:
+        print(script_tab + "Directory %s was not found." % dir_to_remove)
+
+
+def copy_ardublockly_folder():
+    """
+    Copies all the contents of the project root directory into a new folder on
+    the same level.
+    The copy operation ignores a list of directories.
+    :return: Boolean indicating the success state of the operation.
+    """
+    ignore_pat = (".git*", ".svn", ".travis*", ".appveyor*", "circle.yml",
+                  ".ruby-version", "TestTemp_*", "package")
+    test = shutil.ignore_patterns(*ignore_pat)
+    if not os.path.exists(copied_project_dir):
+        print(script_tab + "Copying contents of %s\n" % project_root_dir +
+              script_tab + "into                %s" % copied_project_dir)
+        shutil.copytree(project_root_dir,
+                        copied_project_dir,
+                        symlinks=False,
+                        ignore=test)
+    else:
+        print(script_tab + "ERROR: %s directory already exists!" %
+              copied_project_dir)
+        return False
+    return True
+
+
+def remove_unnecessary_blockly():
+    """ Removes unnecessary files from the blockly library. """
+    # The demos folder contains blockly applications
+    remove_directory(os.path.join(copied_project_dir, "blockly", "demos"))
+    # Only for setting blockly on Google's service
+    remove_directory(os.path.join(copied_project_dir, "blockly", "appengine"))
+    # Unit tests
+    remove_directory(os.path.join(copied_project_dir, "blockly", "tests"))
+
+
+def zip_ardublockly_copy(name_append):
+    """
+    Zips the contents of the copied project folder into a subdirectory of
+    the original project folder.
+    """
+    zip_file_dir = os.path.join(project_root_dir, "releases")
+    zip_file_location = os.path.join(
+        zip_file_dir, "ardublockly_%s.zip" % name_append)
+
+    # First ensure the releases folder exists
+    if not os.path.exists(zip_file_dir):
+        os.makedirs(zip_file_dir)
+
+    os.chdir(os.path.dirname(project_root_dir))
+    print(script_tab + "Working directory changed to %s" % os.getcwd())
+    print(script_tab + "Zipping the contents of %s\n" % copied_project_dir +
+          script_tab + "into                    %s\n" % zip_file_location)
+
+    zip_file = zipfile.ZipFile(zip_file_location, "w", zipfile.ZIP_DEFLATED)
+    for dir_name, sub_dirs, files in os.walk(copy_dir_name):
+        zip_file.write(dir_name)
+        for filename in files:
+            zip_file.write(os.path.join(dir_name, filename))
+    zip_file.close()
+
+
+def pack_ardublockly(tag):
+    """
+    Copies the Ardublockly folder, removes unnecessary files and creates a zipped
+    version of this copied folder into the releases folder of the project
+    directory.
+    :tag: String tag to be attached to the zip file, used to distinguish
+          versions for archiving.
+    """
+    # Set the copied folder name to the stamp
+    set_tag(tag)
+
+    print(script_tag + "Copying the project root folder:")
+    success = copy_ardublockly_folder()
+    if not success:
+        raise SystemExit(script_tab + "Exiting due to project root copy error.")
+
+    print(script_tag + "Removing unnecessary Blockly files:")
+    remove_unnecessary_blockly()
+
+    print(script_tag + "Removing an already zipped Ardublockly version:")
+    remove_directory(os.path.join(copied_project_dir, "releases"))
+
+    print(script_tag + "Removing CEF temporary files:")
+    remove_directory(os.path.join(copied_project_dir, "webcache"))
+
+    print(script_tag + "Creating zip file of the new Ardublockly folder:")
+    zip_ardublockly_copy(tag)
 
 
 def main():

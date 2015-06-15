@@ -6,7 +6,7 @@
 
 block_cipher = None
 
-a = Analysis(['start.py'],
+a = Analysis(['start_cef.py'],
              pathex=None,
              hiddenimports=["ArdublocklyServer", "cefpython3", "wx"],
              hookspath=None,
@@ -20,11 +20,11 @@ pyz = PYZ(a.pure)
 exe = EXE(pyz,
           a.scripts,
           exclude_binaries=True,
-          name='start',
+          name='start_cef',
           debug=False,
           strip=None,
           upx=True,
-          console=True)
+          console=False)
 
 coll = COLLECT(exe,
                a.binaries,
@@ -32,4 +32,4 @@ coll = COLLECT(exe,
                a.datas,
                strip=None,
                upx=True,
-               name='server')
+               name='arduexec')
