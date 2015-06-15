@@ -62,6 +62,9 @@ var finalize = function () {
     // Copy icon
     projectDir.copy('resources/icon.png', readyAppDir.path('icon.png'));
 
+    // Rename executable
+    readyAppDir.rename('electron', manifest.name);
+
     return Q();
 };
 
