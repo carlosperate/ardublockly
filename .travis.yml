@@ -65,4 +65,4 @@ deploy:
   acl: public_read
   on:
     repo: carlosperate/ardublockly
-    branch: [travisci, electron]
+    branch: [master, travisci, electron]
