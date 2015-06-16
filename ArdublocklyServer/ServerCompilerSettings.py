@@ -1,7 +1,16 @@
+# -*- coding: utf-8 -*-
+#
+# Save and retrieve the compiler settings into a text file.
+#
+# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Licensed under the Apache License, Version 2.0 (the "License"):
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
 from __future__ import unicode_literals, absolute_import
-import sys
 import os
 import re
+import codecs
+import sys
 try:
     # 2.x name
     import ConfigParser
@@ -486,14 +495,16 @@ class ServerCompilerSettings(object):
 
         # Set the path and create/overwrite the file
         try:
-            settings_file = open(self.get_settings_file_path(), 'w')
+            settings_file = codecs.open(
+                self.get_settings_file_path(), 'wb+', 'utf8')
             settings_parser.write(settings_file)
-            settings_file.close()
             print('Settings file saved to:')
             sys.stdout.flush()
         except Exception as e:
             print(e)
             print('\nUnable to write the settings file to:')
+        finally:
+            settings_file.close()
         print('\t' + self.get_settings_file_path())
 
     def read_settings(self):
@@ -536,7 +547,8 @@ class ServerCompilerSettings(object):
         settings_dict = {}
         settings_parser = ConfigParser.ConfigParser()
         try:
-            settings_parser.read(self.get_settings_file_path())
+            settings_parser.readfp(
+                codecs.open(self.get_settings_file_path(), 'r', 'utf8'))
             settings_dict['arduino_exec_path'] =\
                 settings_parser.get('Arduino_IDE', 'arduino_exec_path')
             settings_dict['arduino_board'] =\

@@ -1,5 +1,6 @@
 from __future__ import unicode_literals, absolute_import
 import ctypes
+import sys
 import re
 
 def ValidHandle(value, func, arguments):
@@ -43,7 +44,11 @@ def string(buffer):
     for c in buffer:
         if c == 0: break
         s.append(chr(c & 0xff))  # "& 0xff": hack to convert signed to unsigned
-    return ''.join(s)
+
+    if sys.version_info[0] == 3:
+        return ''.join(s)
+    else:
+        return bytearray(s).decode('utf8')
 
 
 class GUID(ctypes.Structure):
