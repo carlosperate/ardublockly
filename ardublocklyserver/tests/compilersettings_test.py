@@ -70,7 +70,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         mock_os_path_exists.return_value = True
         new_dir = os.getcwd()
         ServerCompilerSettings().compiler_dir = new_dir
-        self.assertEqual(new_dir, ServerCompilerSettings().compiler_dir)
+        self.assertTrue(new_dir in ServerCompilerSettings().compiler_dir)
         self.assertNotEqual(original_dir, ServerCompilerSettings().compiler_dir)
 
     @mock.patch('ardublocklyserver.compilersettings.os.path.exists')
@@ -78,7 +78,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         mock_os_path_exists.return_value = True
         new_dir = os.path.join(os.getcwd(), 'arduino.exe')
         ServerCompilerSettings().compiler_dir = new_dir
-        self.assertEqual(new_dir, ServerCompilerSettings().compiler_dir)
+        self.assertTrue(new_dir in ServerCompilerSettings().compiler_dir)
 
     #
     # Testing the settings file
