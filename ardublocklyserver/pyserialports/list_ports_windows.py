@@ -9,8 +9,8 @@ def ValidHandle(value, func, arguments):
     return value
 
 #import serial
-from ArdublocklyServer.PySerialListPorts.serial_to_bytes import to_bytes
-from ArdublocklyServer.PySerialListPorts.win32 import ULONG_PTR, is_64bit
+from ardublocklyserver.pyserialports.serial_to_bytes import to_bytes
+from ardublocklyserver.pyserialports.win32 import ULONG_PTR, is_64bit
 from ctypes.wintypes import HANDLE
 from ctypes.wintypes import BOOL
 from ctypes.wintypes import HWND

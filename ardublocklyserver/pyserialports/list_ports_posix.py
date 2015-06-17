@@ -27,7 +27,7 @@ import os
 plat = sys.platform.lower()
 
 if   plat[:5] == 'linux':    # Linux (confirmed)
-    from ArdublocklyServer.PySerialListPorts.list_ports_linux import comports
+    from ardublocklyserver.pyserialports.list_ports_linux import comports
 
 elif plat == 'cygwin':       # cygwin/win32
     def comports():
@@ -47,7 +47,7 @@ elif plat[:3] == 'bsd' or  \
         return [(d, d, d) for d in devices]
 
 elif plat[:6] == 'darwin':   # OS X (confirmed)
-    from ArdublocklyServer.PySerialListPorts.list_ports_osx import comports
+    from ardublocklyserver.pyserialports.list_ports_osx import comports
 
 elif plat[:6] == 'netbsd':   # NetBSD
     def comports():
