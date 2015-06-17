@@ -19,6 +19,8 @@ before_install:
 
   - brew install libcouchbase
 
+  - pip install mock
+
   # Install node.js
   - brew unlink node
   - brew install node

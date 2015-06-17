@@ -30,9 +30,10 @@ dependencies:
     - python --version
     - python -c "import struct; print(struct.calcsize('P') * 8)"
 
-    # Install tkinker
+    # Install tkinker and mock
     - sudo apt-get install -y python-support
     - sudo apt-get install python-tk
+    - pip install mock
 
     # Install node.js
     - curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -

@@ -11,7 +11,14 @@ import os
 import unittest
 import mock
 
-from ardublocklyserver import requesthandler
+try:
+    from ardublocklyserver import requesthandler
+except ImportError:
+    import sys
+    file_dir = os.path.dirname(os.path.realpath(__file__))
+    package_dir = os.path.dirname(os.path.dirname(file_dir))
+    sys.path.insert(0, package_dir)
+    from ardublocklyserver import requesthandler
 
 
 class BlocklyRequestHandlerTestCase(unittest.TestCase):
