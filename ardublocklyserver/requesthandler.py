@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+#
+# Receives and responds to the HTTP request from the Python server.
+#
+# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Licensed under the Apache License, Version 2.0 (the "License"):
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
 from __future__ import unicode_literals, absolute_import
 import subprocess
 import time
@@ -16,9 +24,10 @@ except ImportError:
     import urllib.parse as urlparse
     import tkinter.filedialog as tkFileDialog
     import http.server as SimpleHTTPServer
-from ArdublocklyServer.Py23Compatibility import Py23Compatibility
-from ArdublocklyServer.ServerCompilerSettings import ServerCompilerSettings
-from ArdublocklyServer.SketchCreator import SketchCreator
+
+from ardublocklyserver.py23 import py23
+from ardublocklyserver.compilersettings import ServerCompilerSettings
+from ardublocklyserver.sketchcreator import SketchCreator
 
 
 class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
@@ -37,7 +46,7 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         if content_type == 'application/x-www-form-urlencoded':
             parameters = urlparse.parse_qs(
-                Py23Compatibility.b_unicode(self.rfile.read(content_length)),
+                py23.b_unicode(self.rfile.read(content_length)),
                 keep_blank_values=False)
             message_back = handle_settings(parameters)
         elif content_type == 'text/plain':
@@ -46,7 +55,8 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 # At this point message back should contain a normal string
                 # with the sketch code
                 message_back =\
-                    '// Ardublockly generated sketch\n\r' + data_string
+                    '// Ardublockly generated sketch\n' + \
+                    data_string.decode('utf-8')
             except Exception as e:
                 print(e)
                 print('\nThere was an error manipulating the sketch data!!!')
@@ -181,7 +191,7 @@ def load_arduino_cli(sketch_path=None):
     :return: A tuple with the following data (output, error output, exit code)
     """
     # Input sanitation and output defaults
-    if not isinstance(sketch_path, Py23Compatibility.string_type_compare) \
+    if not isinstance(sketch_path, py23.string_type_compare) \
             or not sketch_path:
         sketch_path = create_sketch_default()
     success = True
@@ -250,7 +260,7 @@ def load_arduino_cli(sketch_path=None):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 shell=False)
-            (out, error) = process.communicate()
+            out, error = process.communicate()
             exit_code = str(process.returncode)
             print('Arduino output:\n' + out)
             print('Arduino Error output:\n' + error)

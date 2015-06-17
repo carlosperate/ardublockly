@@ -36,7 +36,7 @@ import codecs
 import inspect
 import platform
 import traceback
-from ArdublocklyServer.BlocklyHTTPServer import start_server
+from ardublocklyserver.server import start_server
 
 # Needed for packaging the application on self contained executable
 __file__ = sys.argv[0]

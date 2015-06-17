@@ -8,7 +8,7 @@ block_cipher = None
 
 a = Analysis(['start.py'],
              pathex=None,
-             hiddenimports=["ArdublocklyServer", "cefpython3", "wx"],
+             hiddenimports=["ardublocklyserver", "cefpython3", "wx"],
              hookspath=None,
              runtime_hooks=None,
              excludes=None)

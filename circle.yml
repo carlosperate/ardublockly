@@ -30,9 +30,10 @@ dependencies:
     - python --version
     - python -c "import struct; print(struct.calcsize('P') * 8)"
 
-    # Install tkinker
+    # Install tkinker and mock
     - sudo apt-get install -y python-support
     - sudo apt-get install python-tk
+    - sudo pip install mock
 
     # Install node.js
     - curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
@@ -58,7 +59,8 @@ dependencies:
 # Customize test commands
 test:
   override:
-    - python ArdublocklyServer/tests/SketchCreator_test.py
+    - python ardublocklyserver/tests/sketchcreator_test.py
+    - python ardublocklyserver/tests/compilersettings_test.py
 
 # Customize deployment commands
 deployment:

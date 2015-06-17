@@ -43,7 +43,7 @@ project_root_dir = \
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 executable_dir = os.path.join(project_root_dir, exec_folder_name)
 
-# Enable the ArdublocklyServer package access the sys path for py2exe to find
+# Enable the ardublocklyserver package access the sys path for py2exe to find
 sys.path.append(project_root_dir)
 
 
@@ -122,7 +122,7 @@ def get_py2exe_options():
                    "bundle_files": 3,
                    "skip_archive": True,
                    "optimize": 0,
-                   "packages": ["ArdublocklyServer"],
+                   "packages": ["ardublocklyserver"],
                    "dll_excludes": dll_excludes,
                    "excludes": excludes}}
     return py2exe_options

@@ -1,10 +1,12 @@
 #!/usr/bin/env python2
-# #############################################################################
-# The comment above works if the Python Launcher for Windows path included
-# in Python>3.3 does not conflict with the py.exe file added to "C:\Windows"
-# Currently this application should work in Python >2.6 and 3.x, although 
-# python 2 is preferred, as it is the main development platform.
-###############################################################################
+# -*- coding: utf-8 -*-
+#
+# Entry point for the ArdublocklyServer application.
+#
+# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Licensed under the Apache License, Version 2.0 (the "License"):
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
 from __future__ import unicode_literals, absolute_import
 import os
 import re
@@ -13,8 +15,9 @@ import getopt
 import platform
 import threading
 import webbrowser
-import ArdublocklyServer.BlocklyHTTPServer
-import ArdublocklyServer.ServerCompilerSettings
+
+import ardublocklyserver.server
+import ardublocklyserver.compilersettings
 
 
 def open_browser(open_file):
@@ -23,7 +26,7 @@ def open_browser(open_file):
     """
     def _open_browser():
         webbrowser.open('http://localhost:%s/%s' %
-                        (ArdublocklyServer.BlocklyHTTPServer.PORT, open_file))
+                        (ardublocklyserver.server.PORT, open_file))
 
     thread = threading.Timer(0.5, _open_browser)
     thread.start()
@@ -86,7 +89,7 @@ def main(argv):
 
     # Loading the settings
     print("\n======= Loading Settings =======")
-    ArdublocklyServer.ServerCompilerSettings.ServerCompilerSettings()
+    ardublocklyserver.compilersettings.ServerCompilerSettings()
 
     # Loading the server with the argument working root directory, or by default
     # with the parent folder of where this script is executed, done to be able
@@ -113,7 +116,7 @@ def main(argv):
     #print('Root & script parent: %s\nCommon & relative path: %s; %s\nIndex: %s'
     #      % (paths, common_path, relative_path, app_index))
     open_browser(app_index)
-    ArdublocklyServer.BlocklyHTTPServer.start_server(server_root)
+    ardublocklyserver.server.start_server(server_root)
 
 
 if __name__ == "__main__":

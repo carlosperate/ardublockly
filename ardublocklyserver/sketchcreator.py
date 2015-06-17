@@ -1,45 +1,54 @@
+# -*- coding: utf-8 -*-
+#
+# SketchCreator class creates an Arduino Sketch source code file.
+#
+# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Licensed under the Apache License, Version 2.0 (the "License"):
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
 from __future__ import unicode_literals, absolute_import
 import os
-from ArdublocklyServer.Py23Compatibility import Py23Compatibility
-from ArdublocklyServer.ServerCompilerSettings import ServerCompilerSettings
+
+from ardublocklyserver.py23 import py23
+from ardublocklyserver.compilersettings import ServerCompilerSettings
 
 
 class SketchCreator(object):
     """
-    Creates an Arduino Sketch
+    Creates an Arduino Sketch.
     """
 
-    #This is probably not the best way to create this string, will revisit
-    _sketch_default_code = 'int led = 13;void setup() {\n' \
-                           '  pinMode(led, OUTPUT);\n' \
-                           '}\n' \
-                           'void loop() {\n' \
-                           '  digitalWrite(led, HIGH);\n' \
-                           '  delay(1000);\n' \
-                           '  digitalWrite(led, LOW);\n' \
-                           '  delay(1000);\n' \
-                           '}\n'
-
     #
-    # Constructor
+    # Metaclass methods
     #
     def __init__(self):
-        pass
+        # Default sketch, blink builtin LED
+        self._sketch_default_code = \
+            'int led = 13;\n' \
+            'void setup() {\n' \
+            '  pinMode(led, OUTPUT);\n' \
+            '}\n' \
+            'void loop() {\n' \
+            '  digitalWrite(led, HIGH);\n' \
+            '  delay(1000);\n' \
+            '  digitalWrite(led, LOW);\n' \
+            '  delay(1000);\n' \
+            '}\n'
 
     #
     # Creating files
     #
     def create_sketch(self, sketch_code=None):
         """
-        Creates the Ardunino sketch with either the default blinky
-        code or the code defined in the input parameter
+        Creates the Arduino sketch with either the default blinky
+        code or the code defined in the input parameter.
 
-        :param sketch_code: Unicode string with the code for the sketch
+        :param sketch_code: Unicode string with the code for the sketch.
         :return: Unicode string with full path to the sketch file
-                 Return None indicates an error has occurred
+                 Return None indicates an error has occurred.
         """
         sketch_path = self.build_sketch_path()
-        if isinstance(sketch_code, Py23Compatibility.string_type_compare)\
+        if isinstance(sketch_code, py23.string_type_compare)\
                 and sketch_code:
             code_to_write = sketch_code
         else:

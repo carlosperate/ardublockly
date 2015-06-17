@@ -50,7 +50,8 @@ build: off
 
 # For now a simple test that we know passes
 test_script:
-  - cmd: python ArdublocklyServer\tests\SketchCreator_test.py
+  - cmd: python ardublocklyserver\tests\sketchcreator_test.py
+  - cmd: python ardublocklyserver\tests\compilersettings_test.py
 
 # Push artifact to s3 bucket and list all
 before_deploy:

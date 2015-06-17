@@ -1,5 +1,13 @@
+# -*- coding: utf-8 -*-
+#
+# Functions to retrieve the computer Serial Port list.
+#
+# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Licensed under the Apache License, Version 2.0 (the "License"):
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
 from __future__ import unicode_literals, absolute_import
-import ArdublocklyServer.PySerialListPorts.list_ports
+import ardublocklyserver.pyserialports.list_ports
 
 
 def get_port_complete_list():
@@ -9,7 +17,7 @@ def get_port_complete_list():
     :return: List with the Port information. Each list item contains a tuple
              three elements in this order: (port name, descriptor, hw id)
     """
-    port_list = ArdublocklyServer.PySerialListPorts.list_ports.comports()
+    port_list = ardublocklyserver.pyserialports.list_ports.comports()
     return sorted(port_list)
 
 

@@ -1,6 +1,6 @@
 # Pyserial modules
 
-To be able to run this application without having to install additional packages, we have included these modules with the Ardublockly ArdublocklyServer Python package.
+To be able to run this application without having to install additional packages, we have included these modules with the Ardublockly ardublocklyserver Python package.
 
 These modules have been extracted and modified from the pyserial package
 version 2.7: [https://pypi.python.org/pypi/pyserial](https://pypi.python.org/pypi/pyserial)

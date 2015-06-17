@@ -6,23 +6,32 @@
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
+# The ServerCompilerSettings is a singleton class maintains in memory, and
+# writes the Arduino IDE settings into a file.
+# On first invocation of the singleton it reads the settings from the file.
+#
 from __future__ import unicode_literals, absolute_import
 import os
 import re
-import codecs
 import sys
+import codecs
 try:
     # 2.x name
     import ConfigParser
 except ImportError:
     # 3.x name
     import configparser as ConfigParser
-import ArdublocklyServer.SerialPort
+
+import ardublocklyserver.serialport
 
 
 class ServerCompilerSettings(object):
     """
-    Retrieves and saves the settings for the server side compilation.
+    Singleton class that retrieves and saves the settings for the server side
+    compilation.
+    The class on first invocation tries to read the settings from the file, it
+    keeps them in memory, and every time they are modified the changes are also
+    written into the file.
     No compiler is part of the Python code, instead settings that 
     point to the local Arduino IDE and sketch are stored here.
     The public settings to set and get are:
@@ -34,12 +43,14 @@ class ServerCompilerSettings(object):
         launch_IDE_option
     """
 
-    # Designed to be class static variables
+    # Class variables that after initialisation will not change
     __singleton_instance = None
-    __settings_filename = 'ServerCompilerSettings.ini'
     __settings_path = None
 
-    # This is a static dictionary to define Arduino board types
+    # Class variable to indicate the settings filename, does not change
+    __settings_filename = 'ServerCompilerSettings.ini'
+
+    # Class dictionary to define Arduino board types, does not change
     __arduino_types = {'Uno': 'arduino:avr:uno',
                        'Leonardo': 'arduino:avr:leonardo',
                        'Mega': 'arduino:avr:mega',
@@ -47,12 +58,12 @@ class ServerCompilerSettings(object):
                        'Duemilanove_168p':
                                'arduino:avr:diecimila:cpu=atmega168'}
 
-    # This is a dynamic dictionary containing the PC COM ports
+    # Class dictionary to contain the computer COM ports, changes
     __serial_ports = {'port1': 'COM1',
                       'port2': 'COM2',
                       'port3': 'COM3'}
 
-    # This is a static dictionary to define IDE launch options
+    # Class dictionary to define IDE launch options, value doesn't change
     __IDE_launch_options = {'open': 'Open sketch in IDE ',
                             'verify': 'Verify sketch',
                             'upload': 'Compile and Upload sketch'}
@@ -407,7 +418,7 @@ class ServerCompilerSettings(object):
         Populates the __serial_ports__ dictionary with the Serial Ports
         available.
         """
-        port_list = ArdublocklyServer.SerialPort.get_port_list()
+        port_list = ardublocklyserver.serialport.get_port_list()
         self.__serial_ports = {}
         if port_list:
             port_id = 0
@@ -417,7 +428,7 @@ class ServerCompilerSettings(object):
                 port_id += 1
 
     #
-    # Launch the IDE only  accessors
+    # Launch the IDE only accessors
     #
     def get_launch_ide(self):
         return self.__launch_IDE_option__
