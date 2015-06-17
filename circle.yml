@@ -58,7 +58,8 @@ dependencies:
 # Customize test commands
 test:
   override:
-    - python ArdublocklyServer/tests/SketchCreator_test.py
+    - python ardublocklyserver/tests/sketchcreator_test.py
+    - python ardublocklyserver/tests/compilersettings_test.py
 
 # Customize deployment commands
 deployment:

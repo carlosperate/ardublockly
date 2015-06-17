@@ -50,7 +50,8 @@ install:
 
 # For now only running a known passing test, the others need to be updated
 script:
-  - python ArdublocklyServer/tests/SketchCreator_test.py
+  - python ardublocklyserver/tests/sketchcreator_test.py
+  - python ardublocklyserver/tests/compilersettings_test.py
 
 # Deploy the build version in an S3 bucket
 deploy:
