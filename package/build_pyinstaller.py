@@ -39,9 +39,10 @@ from glob import glob
 
 spec_coll_name = "server"
 if platform.system() == "Darwin":
-    exec_folder_name = os.path.join("arduexec.app", "server")
+    exec_folder = "arduexec.app"
 else:
-    exec_folder_name = os.path.join("arduexec", "server")
+    exec_folder = "arduexec"
+py_exec_folder = os.path.join(exec_folder, "server")
 script_tag = "[Ardublockly build] "
 script_tab = "                    "
 
@@ -135,7 +136,7 @@ def move_executable_folder():
     :return: Boolean indicating the success state of the operation.
     """
     original_exec_dir = os.path.join(project_root_dir, "dist", spec_coll_name)
-    final_exec_dir = os.path.join(project_root_dir, exec_folder_name)
+    final_exec_dir = os.path.join(project_root_dir, py_exec_folder)
     if os.path.exists(original_exec_dir):
         print(script_tab + "Moving exec files from %s \n" % original_exec_dir +
               script_tab + "to %s" % final_exec_dir)
@@ -152,29 +153,31 @@ def copy_data_files(os_type):
     pass
 
 
-def create_bash_file(os_type):
+def create_shell_file(os_type):
     """
     Creates a shell script fil into the project root to be able to easily launch
     the Ardublockly application.
+    The Mac OS X build runs directly from clicking the .app folder, so it no
+    longer needs a shell script.
     """
     shell_text = ""
     shell_location = ""
 
     # The script depends on platform
-    if os_type == "linux":
+    if os_type == "mac":
+        # There is no need for a shell file in Mac OS X
+        print(script_tab + "There is no need to create shell file in Mac OS X.")
+        return
+    elif os_type == "linux":
         shell_text = '#!/bin/bash\n' \
                      'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
                      'echo "[Shell Launch Script] Executing from: $DIR"\n' \
-                     './%s/start -s "$DIR"' % exec_folder_name
+                     './%s' % os.path.join(exec_folder, "ardublockly")
         shell_location = os.path.join(
-            project_root_dir, "ardublockly_server_run.sh")
-    elif os_type == "mac":
-        shell_text = '#!/bin/bash\n' \
-                     'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
-                     'echo "[Shell Launch Script] Executing from: $DIR"\n' \
-                     '"$DIR/%s/start" -s "$DIR"' % exec_folder_name
-        shell_location = os.path.join(
-            project_root_dir, "ardublockly_server_run.command")
+            project_root_dir, "ardublockly_run.sh")
+    else:
+        # No other OS expected, so just return. This should never happen
+        return
 
     try:
         print(script_tab + "Creating shell file into %s" % shell_location)
@@ -218,7 +221,7 @@ def build_ardublockly():
                                       "PyInstaller execution.")
 
     print(script_tag + "Removing old ardublockly executable directory.")
-    remove_directory(os.path.join(project_root_dir, exec_folder_name))
+    remove_directory(os.path.join(project_root_dir, py_exec_folder))
 
     print(script_tag + "Moving executable folder to project root.")
     success = move_executable_folder()
@@ -235,7 +238,7 @@ def build_ardublockly():
     remove_pyinstaller_temps()
 
     print(script_tag + "Creating shell file to easily execute Ardublockly.")
-    create_bash_file(os_type)
+    create_shell_file(os_type)
 
 
 if __name__ == "__main__":

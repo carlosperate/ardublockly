@@ -77,7 +77,7 @@ ServerCompilerSettings.ini
 # Anything starting with this is created as a unit/module testing temporal file
 TestTemp_*
 
-# CEF cacbe and log files
+# CEF cache and log files
 /webcache
 cef_error.log
 cef_debug.log

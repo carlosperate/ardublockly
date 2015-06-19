@@ -23,7 +23,6 @@
 import os
 import sys
 import shutil
-import fnmatch
 from distutils.core import setup
 from glob import glob
 try:
@@ -149,16 +148,18 @@ def create_run_batch_file():
     """
     Creates a batch file into the project root to be able to easily launch the
     Ardublockly application.
+    This batch file launches the entire Ardublockly application, having its
+    entry point built by Electron.
     """
     batch_text = "@echo off\n" + \
-                 "start %s\start.exe -s \"%%cd%%\"" % exec_folder_name
+                 "start %s" % os.path.join(project_root_dir, "arduexec",
+                                           "ardublockly.exe")
+    batch_location = os.path.join(project_root_dir, "ardublockly_run.bat")
     try:
-        batch_file = open("%s/ardublockly_server_run.bat" % project_root_dir,
-                          "w")
+        batch_file = open(batch_location, "w")
         batch_file.write(batch_text)
         batch_file.close()
-        print(script_tab + "Batch file created in " +
-              "%s/ardublockly_run.bat" % project_root_dir)
+        print(script_tab + "Batch file created in  %s" % batch_location)
     except Exception as e:
         print("%s\n" % e + script_tab +
               "Batch file to run Ardublockly could not be created !")

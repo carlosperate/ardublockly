@@ -3,10 +3,9 @@ machine:
   timezone:
     Europe/London
 
-  # Indicating Ruby to bypass virtual environments
-  ruby:
-    version:
-      1.8.7-p358-falcon-perf
+  # Indicating node also offers advantage of bypassing virtual environments
+  node:
+    version: 0.12.4
 
   # Override /etc/hosts
   hosts:

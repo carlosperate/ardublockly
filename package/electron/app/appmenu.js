@@ -1,11 +1,21 @@
+/**
+ * @author    carlosperate
+ * @copyright 2015 carlosperate https://github.com/carlosperate
+ * @license   Licensed under the The MIT License (MIT), a copy can be found in
+ *            the electron project directory LICENSE file.
+ *
+ * @fileoverview Generates the application menu bar.
+ */
 'use strict';
 
 var app = require('app');
 var Menu = require('menu');
-var MenuItem = require('menu-item');
-var BrowserWindow = require('browser-window');
-var dialog = require('dialog');
 var shell = require('shell');
+var dialog = require('dialog');
+var jetpack = require('fs-jetpack');
+var MenuItem = require('menu-item');
+var server = require('./servermgr.js');
+var BrowserWindow = require('browser-window');
 
 module.exports.setArdublocklyMenu = function(devMode) {
     if (typeof(devMode)==='undefined') devMode = false;
@@ -86,22 +96,30 @@ var getDevMenuData = function () {
                     BrowserWindow.getFocusedWindow().toggleDevTools();
                 }
             }, {
-                label: 'Restart server and page',
+                label: 'Stop server',
+                accelerator: 'Shift+CmdOrCtrl+S',
+                click: server.stopServer
+            }, {
+                label: 'Restart server',
                 accelerator: 'Shift+CmdOrCtrl+R',
-                click: function () {
-                    BrowserWindow.getFocusedWindow().toggleDevTools();
-                }
+                click: server.restartServer
+            }, {
+                label: 'Test menu item',
+                click: testFunction
             }
         ]
     };
 };
 
 var functionNotImplemented = function() {
-    console.log("test");
     dialog.showMessageBox({
         type: "info",
         title: "Dialog",
         buttons: ["ok",],
         message: "This functionality has not yet been implemented."
     });
+};
+
+var testFunction = function() {
+    // Here you can place any test code you'd like to test on a menu click
 };

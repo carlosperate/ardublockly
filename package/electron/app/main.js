@@ -1,11 +1,21 @@
+/**
+ * @author    carlosperate
+ * @copyright 2015 carlosperate https://github.com/carlosperate
+ * @license   Licensed under the The MIT License (MIT), a copy can be found in
+ *            the electron project directory LICENSE file.
+ *
+ * @fileoverview Electron entry point continues here. Creates windows and
+ *               handles system events.
+ */
 'use strict';
 
 var app = require('app');
+var shell = require('shell');
+var server = require('./servermgr.js');
 var appMenu = require('./appmenu.js');
 var BrowserWindow = require('browser-window');
 var env = require('./vendor/electron_boilerplate/env_config');
 var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
-
 
 // Global reference of the window object must be maintain, or the window will
 // be closed automatically when the javascript object is garbage collected.
@@ -42,12 +52,14 @@ app.on('ready', function () {
 
     if (env.name === 'development') {
         appMenu.setArdublocklyMenu(true);
-        mainWindow.openDevTools();
+        //mainWindow.openDevTools();
     } else {
         appMenu.setArdublocklyMenu();
     }
 
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
+
+    server.startServer();
 
     mainWindow.on('close', function () {
         mainWindowState.saveState(mainWindow);
@@ -56,6 +68,7 @@ app.on('ready', function () {
 });
 
 app.on('window-all-closed', function () {
+    server.stopServer()
     // Might need to add OS X exception
     // https://github.com/atom/electron/issues/1357 
     app.quit();
