@@ -110,11 +110,25 @@ class ServerCompilerSettings(object):
         """ The compiler dir must a valid file or directory """
         # Mac only check, as apps are packaged directories
         if sys.platform == 'darwin':
-            new_compiler_dir += '/Contents/MacOS/JavaApplicationStub'
-            print('\nCompiler file in Mac OS located within the app ' +
-                  'directory: /Contents/MacOS/JavaApplicationStub')
+            # Arduino version >1.6.0 has changed the binary name, so check both
+            if os.path.isfile(os.path.join(
+                    new_compiler_dir, 'Contents', 'MacOS',
+                    'JavaApplicationStub')):
+                new_compiler_dir = os.path.join(new_compiler_dir, 'Contents',
+                                                'MacOS', 'JavaApplicationStub')
+                print('\nCompiler file in OS X located within the app bundle.')
+            elif os.path.isfile(os.path.join(
+                    new_compiler_dir, 'Contents', 'MacOS', 'Arduino')):
+                new_compiler_dir = os.path.join(
+                    new_compiler_dir, 'Contents', 'MacOS', 'Arduino')
+                print('\nCompiler file in OS X located within the app bundle.')
+            else:
+                print('Could not locate the Arduino executable within the OS X '
+                      'app bundle. These are the available files:\n%s' %
+                      os.listdir('%s/Contents/MacOS/' % new_compiler_dir))
+
         # Check directory
-        if os.path.exists(new_compiler_dir):
+        if os.path.isfile(new_compiler_dir):
             self.__compiler_dir__ = new_compiler_dir
             print('\nCompiler directory set to:\n\t%s' % self.__compiler_dir__)
             self.save_settings()
