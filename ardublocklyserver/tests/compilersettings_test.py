@@ -49,8 +49,8 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         self.assertEqual(ServerCompilerSettings().compiler_dir,
                          ServerCompilerSettings().__compiler_dir__)
 
-    @mock.patch('ardublocklyserver.compilersettings.os.path.exists')
-    def test_write_compiler_dir_invalid(self, mock_os_path_exists):
+    @mock.patch('ardublocklyserver.compilersettings.os.path.isfile')
+    def test_write_compiler_dir_invalid(self, mock_os_path_isfile):
         """
         Tests path doesn't get save if:
              A file that does not exists
@@ -59,7 +59,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         """
         # TODO: a file that 'exists but does not execute' is not done
         # Random file
-        mock_os_path_exists.return_value = False
+        mock_os_path_isfile.return_value = False
         original_dir = ServerCompilerSettings().compiler_dir
         new_dir = os.path.join(os.getcwd(), 'random.exe')
         ServerCompilerSettings().compiler_dir = new_dir
@@ -67,15 +67,15 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         self.assertEqual(original_dir, ServerCompilerSettings().compiler_dir)
 
         # No extension is accepted as a valid compiler directory
-        mock_os_path_exists.return_value = True
+        mock_os_path_isfile.return_value = True
         new_dir = os.getcwd()
         ServerCompilerSettings().compiler_dir = new_dir
         self.assertTrue(new_dir in ServerCompilerSettings().compiler_dir)
         self.assertNotEqual(original_dir, ServerCompilerSettings().compiler_dir)
 
-    @mock.patch('ardublocklyserver.compilersettings.os.path.exists')
-    def test_write_compiler_dir_valid(self, mock_os_path_exists):
-        mock_os_path_exists.return_value = True
+    @mock.patch('ardublocklyserver.compilersettings.os.path.isfile')
+    def test_write_compiler_dir_valid(self, mock_os_path_isfile):
+        mock_os_path_isfile.return_value = True
         new_dir = os.path.join(os.getcwd(), 'arduino.exe')
         ServerCompilerSettings().compiler_dir = new_dir
         self.assertTrue(new_dir in ServerCompilerSettings().compiler_dir)
