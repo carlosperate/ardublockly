@@ -32,8 +32,8 @@ function getServerExecLocation() {
         var ardublocklyRootDir = jetpack.dir(__dirname);
         var oldArdublocklyRootDir = '';
         while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
-            console.log(tag + 'Search for Ardublockly project root dir: ' +
-                        ardublocklyRootDir.cwd());
+            //console.log(tag + 'Search for Ardublockly project root dir: ' +
+            //            ardublocklyRootDir.cwd());
             // Check if file /ardublokly/index.html exists within current path
             if (jetpack.exists(
                     ardublocklyRootDir.path('ardublockly', 'index.html'))) {

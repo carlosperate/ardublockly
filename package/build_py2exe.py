@@ -152,8 +152,7 @@ def create_run_batch_file():
     entry point built by Electron.
     """
     batch_text = "@echo off\n" + \
-                 "start %s" % os.path.join(project_root_dir, "arduexec",
-                                           "ardublockly.exe")
+                 "start %s" % os.path.join("arduexec", "ardublockly.exe")
     batch_location = os.path.join(project_root_dir, "ardublockly_run.bat")
     try:
         batch_file = open(batch_location, "w")

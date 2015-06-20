@@ -28,6 +28,8 @@ var mainWindowState = windowStateKeeper('main', {
 });
 
 app.on('ready', function () {
+    server.startServer();
+
     mainWindow = new BrowserWindow({
         x: mainWindowState.x,
         y: mainWindowState.y,
@@ -52,14 +54,11 @@ app.on('ready', function () {
 
     if (env.name === 'development') {
         appMenu.setArdublocklyMenu(true);
-        //mainWindow.openDevTools();
     } else {
         appMenu.setArdublocklyMenu();
     }
 
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
-
-    server.startServer();
 
     mainWindow.on('close', function () {
         mainWindowState.saveState(mainWindow);
@@ -68,7 +67,7 @@ app.on('ready', function () {
 });
 
 app.on('window-all-closed', function () {
-    server.stopServer()
+    server.stopServer();
     // Might need to add OS X exception
     // https://github.com/atom/electron/issues/1357 
     app.quit();
