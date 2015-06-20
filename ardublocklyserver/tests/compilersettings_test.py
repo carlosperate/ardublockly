@@ -57,8 +57,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
              Just a folder
              A non executable file
         """
-        # TODO: a file that 'exists but does not execute' is not done
-        # Random file
+        # Test for failure, mock that the files does not exists
         mock_os_path_isfile.return_value = False
         original_dir = ServerCompilerSettings().compiler_dir
         new_dir = os.path.join(os.getcwd(), 'random.exe')

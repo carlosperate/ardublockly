@@ -124,8 +124,12 @@ class ServerCompilerSettings(object):
                 print('\nCompiler file in OS X located within the app bundle.')
             else:
                 print('Could not locate the Arduino executable within the OS X '
-                      'app bundle. These are the available files:\n%s' %
-                      os.listdir('%s/Contents/MacOS/' % new_compiler_dir))
+                      'app bundle. These are the available files:')
+                try:
+                    print('%s' % os.listdir(
+                        '%s/Contents/MacOS/' % new_compiler_dir))
+                except OSError as e:
+                    print(e)
 
         # Check directory
         if os.path.isfile(new_compiler_dir):
