@@ -36,7 +36,8 @@ app.on('ready', function () {
         width: mainWindowState.width,
         height: mainWindowState.height,
         title: 'Ardublockly',
-        type: 'desktop',
+        transparent: false,
+        frame: true,
         'node-integration': false,
         'web-preferences': {
             'web-security': true,
@@ -57,6 +58,16 @@ app.on('ready', function () {
     } else {
         appMenu.setArdublocklyMenu();
     }
+
+    mainWindow.webContents.on('did-fail-load',
+        function (event, errorCode, errorDescription) {
+            console.log('Page failed to load (' + errorCode + '). The server ' +
+                'is probably not yet running. Trying again in 100ms.');
+            setTimeout(function() {
+                mainWindow.webContents.reload();
+            }, 100);
+        }
+    );
 
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
 

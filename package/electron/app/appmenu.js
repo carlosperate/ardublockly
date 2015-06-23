@@ -122,4 +122,5 @@ var functionNotImplemented = function() {
 
 var testFunction = function() {
     // Here you can place any test code you'd like to test on a menu click
+    functionNotImplemented();
 };
