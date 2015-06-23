@@ -45,11 +45,20 @@ var finalize = function () {
     projectDir.copy('resources/windows/icon.ico', readyAppDir.path('icon.ico'));
     readyAppDir.rename('electron.exe', manifest.name + '.exe');
 
-    // Replace Electron icon and versions 
+    // Replace Electron icon and versions
+    var copyrightString = 'Copyright (C) ' + new Date().getFullYear() + ' ' +
+                          manifest.author + ' ' + manifest.homepage;
     var rcedit = require('rcedit');
     rcedit(readyAppDir.path(manifest.name + '.exe'), {
         icon: projectDir.path('resources/windows/icon.ico'),
-        "file-version": manifest.version
+        'file-version': manifest.version,
+        'product-version': manifest.version,
+        'version-string': {
+            'ProductName': manifest.productName,
+            'FileDescription': manifest.description,
+            'LegalCopyright': copyrightString,
+            'CompanyName': ' '
+        }
     }, function (err) {
         if (!err) {
             deferred.resolve();
