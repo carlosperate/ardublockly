@@ -1,3 +1,8 @@
+/*!
+ * Materialize v0.97.0 (http://materializecss.com)
+ * Copyright 2014-2015 Materialize
+ * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
+ */
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
 
@@ -2014,6 +2019,10 @@ ul {
 
 .z-depth-5 {
   box-shadow: 0 27px 24px 0 rgba(0, 0, 0, 0.2), 0 40px 77px 0 rgba(0, 0, 0, 0.22); }
+
+.hoverable:hover {
+  transition: box-shadow .25s;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
 
 .divider {
   height: 1px;
@@ -5513,6 +5522,7 @@ small {
       font-size: 1.2rem; } }
 
 .card-panel {
+  transition: box-shadow .25s;
   padding: 20px;
   margin: 0.5rem 0 1rem 0;
   border-radius: 2px;
@@ -5523,6 +5533,7 @@ small {
   overflow: hidden;
   margin: 0.5rem 0 1rem 0;
   background-color: #fff;
+  transition: box-shadow .25s;
   border-radius: 2px; }
   .card .card-title {
     color: #fff;
@@ -6699,13 +6710,13 @@ input[type=checkbox]:not(:disabled) ~ .lever:active:after {
     margin: 0 0 15px 0;
     padding: 0;
     display: block; }
-  .select-wrapper .mdi-navigation-arrow-drop-down {
+  .select-wrapper span.caret {
     color: initial;
     position: absolute;
     right: 0;
-    top: 0;
-    font-size: 23px; }
-    .select-wrapper .mdi-navigation-arrow-drop-down.disabled {
+    top: 16px;
+    font-size: 10px; }
+    .select-wrapper span.caret.disabled {
       color: rgba(0, 0, 0, 0.26); }
   .select-wrapper + label {
     position: absolute;
