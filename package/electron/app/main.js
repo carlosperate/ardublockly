@@ -62,10 +62,10 @@ app.on('ready', function () {
     mainWindow.webContents.on('did-fail-load',
         function (event, errorCode, errorDescription) {
             console.log('Page failed to load (' + errorCode + '). The server ' +
-                'is probably not yet running. Trying again in 100ms.');
+                'is probably not yet running. Trying again in 200 ms.');
             setTimeout(function() {
                 mainWindow.webContents.reload();
-            }, 100);
+            }, 200);
         }
     );
 

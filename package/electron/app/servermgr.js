@@ -28,7 +28,7 @@ function getServerExecLocation() {
         var ardublocklyRootDir = jetpack.dir('../../');
     } else {
         // Cannot use relative paths with Production, so let's try to find the
-        // ardublockly folder a a node from the executable file path tree
+        // ardublockly folder in a node from the executable file path tree
         var ardublocklyRootDir = jetpack.dir(__dirname);
         var oldArdublocklyRootDir = '';
         while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
@@ -67,7 +67,7 @@ function getServerExecLocation() {
     var executableLocation = arduexecDir.path(arduexecFileName);
     console.log(tag + 'Server executable: ' + executableLocation);
     return executableLocation;
-}
+};
 
 function ardublocklyNotFound(working_dir) {
     dialog.showMessageBox({
@@ -109,8 +109,8 @@ module.exports.startServer = function() {
 
 module.exports.stopServer = function() {
     if (serverProcess !== null) {
-        // Server does not do any exit clean up, so safe to send SIGKILL
-        serverProcess.kill('SIGKILL');
+        // Server executable needs to clean up (kill child), so no SIGKILL
+        serverProcess.kill('SIGTERM');
         serverProcess = null;
     }
 };
