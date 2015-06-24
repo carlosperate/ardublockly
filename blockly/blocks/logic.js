@@ -29,6 +29,9 @@ goog.provide('Blockly.Blocks.logic');
 goog.require('Blockly.Blocks');
 
 
+/**
+ * Common HSV hue for all blocks in this category.
+ */
 Blockly.Blocks.logic.HUE = 210;
 
 Blockly.Blocks['controls_if'] = {
@@ -89,8 +92,8 @@ Blockly.Blocks['controls_if'] = {
    * @this Blockly.Block
    */
   domToMutation: function(xmlElement) {
-    this.elseifCount_ = parseInt(xmlElement.getAttribute('elseif'), 10);
-    this.elseCount_ = parseInt(xmlElement.getAttribute('else'), 10);
+    this.elseifCount_ = parseInt(xmlElement.getAttribute('elseif'), 10) || 0;
+    this.elseCount_ = parseInt(xmlElement.getAttribute('else'), 10) || 0;
     for (var i = 1; i <= this.elseifCount_; i++) {
       this.appendValueInput('IF' + i)
           .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
@@ -379,15 +382,20 @@ Blockly.Blocks['logic_negate'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setHelpUrl(Blockly.Msg.LOGIC_NEGATE_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
-    this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
-    this.interpolateMsg(Blockly.Msg.LOGIC_NEGATE_TITLE,
-                        ['BOOL',
-                         Blockly.StaticTyping.blocklyType.BOOLEAN,
-                         Blockly.ALIGN_RIGHT],
-                        Blockly.ALIGN_RIGHT);
-    this.setTooltip(Blockly.Msg.LOGIC_NEGATE_TOOLTIP);
+    this.jsonInit({
+      "message": Blockly.Msg.LOGIC_NEGATE_TITLE,
+      "args": [
+        {
+          "type": "input_value",
+          "name": "BOOL",
+          "check": Blockly.StaticTyping.blocklyType.BOOLEAN
+        }
+      ],
+      "output": Blockly.StaticTyping.blocklyType.BOOLEAN,
+      "colour": Blockly.Blocks.logic.HUE,
+      "tooltip": Blockly.Msg.LOGIC_NEGATE_TOOLTIP,
+      "helpUrl": Blockly.Msg.LOGIC_NEGATE_HELPURL
+    });
   },
   /**
    * Assigns a type to the block, not block input is meant to be a booleans, so

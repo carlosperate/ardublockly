@@ -45,7 +45,7 @@ goog.require('goog.userAgent');
  */
 Blockly.FieldTextInput = function(text, opt_changeHandler) {
   Blockly.FieldTextInput.superClass_.constructor.call(this, text);
-  this.changeHandler_ = opt_changeHandler;
+  this.setChangeHandler(opt_changeHandler);
 };
 goog.inherits(Blockly.FieldTextInput, Blockly.Field);
 
@@ -258,10 +258,13 @@ Blockly.FieldTextInput.prototype.widgetDispose_ = function() {
     // Save the edit (if it validates).
     var text = htmlInput.value;
     if (thisField.sourceBlock_ && thisField.changeHandler_) {
-      text = thisField.changeHandler_(text);
-      if (text === null) {
+      var text1 = thisField.changeHandler_(text);
+      if (text1 === null) {
         // Invalid edit.
         text = htmlInput.defaultValue;
+      } else if (text1 !== undefined) {
+        // Change handler has changed the text.
+        text = text1;
       }
     }
     thisField.setText(text);
@@ -285,6 +288,7 @@ Blockly.FieldTextInput.numberValidator = function(text) {
   if (text === null) {
     return null;
   }
+  text = String(text);
   // TODO: Handle cases like 'ten', '1.203,14', etc.
   // 'O' is sometimes mistaken for '0' by inexperienced users.
   text = text.replace(/O/ig, '0');
