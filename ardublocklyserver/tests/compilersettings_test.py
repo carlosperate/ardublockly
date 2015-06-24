@@ -90,7 +90,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     def test_settings_file_read(self):
         ServerCompilerSettings()
         ServerCompilerSettings().set_default_settings()
-        ServerCompilerSettings().read_settings_file()
+        ServerCompilerSettings().get_settings_file_data()
         ServerCompilerSettings().save_settings()
 
 

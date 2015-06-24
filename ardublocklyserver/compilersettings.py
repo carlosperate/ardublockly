@@ -71,17 +71,22 @@ class ServerCompilerSettings(object):
     #
     # Singleton creator and destructor
     #
-    def __new__(cls, *args, **kwargs):
-        """ Creating or returning the singleton instance. """
+    def __new__(cls, settings_dir=None, *args, **kwargs):
+        """
+        Creating or returning the singleton instance.
+        The argument settings_file_dir is only processed on first
+        initialisation, and any future calls to the constructor will returned
+        the already initialised instance with a set settings_file_dir.
+        """
         if not cls.__singleton_instance:
             # Create the singleton instance
             cls.__singleton_instance =\
                 super(ServerCompilerSettings, cls).__new__(cls, *args, **kwargs)
             # Initialise the instance, defaults if file not found
-            cls.__singleton_instance.__initialise()
+            cls.__singleton_instance.__initialise(settings_dir)
         return cls.__singleton_instance
 
-    def __initialise(self):
+    def __initialise(self, settings_dir=None):
         # Create variables to be used with accessors
         self.__launch_IDE_option__ = None
         self.__compiler_dir__ = None
@@ -91,6 +96,15 @@ class ServerCompilerSettings(object):
         self.__arduino_board_value__ = None
         self.__serial_port_key__ = None
         self.__serial_port_value__ = None
+        if settings_dir:
+            self.__settings_path = os.path.join(
+                settings_dir, self.__settings_filename)
+        else:
+            # If not set, the file path will be same location as the executed
+            # python code that calls this class
+            called_script_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
+            self.__settings_path = os.path.normpath(
+                os.path.join(called_script_dir, self.__settings_filename))
         # Since this value is not saved in the settings file initialise here
         self.set_launch_ide_default()
         # Load settings from file
@@ -524,17 +538,17 @@ class ServerCompilerSettings(object):
 
         # Set the path and create/overwrite the file
         try:
-            settings_file = codecs.open(
-                self.get_settings_file_path(), 'wb+', 'utf8')
-            settings_parser.write(settings_file)
-            print('Settings file saved to:')
-            sys.stdout.flush()
+            settings_file = codecs.open(self.__settings_path, 'wb+', 'utf8')
+            try:
+                settings_parser.write(settings_file)
+                print('Settings file saved to:\n\t%s' % self.__settings_path)
+                sys.stdout.flush()
+            finally:
+                settings_file.close()
         except Exception as e:
             print(e)
-            print('\nUnable to write the settings file to:')
-        finally:
-            settings_file.close()
-        print('\t' + self.get_settings_file_path())
+            print('Unable to write the settings file to:\n\t%s' %
+                  self.__settings_path)
 
     def read_settings(self):
         """
@@ -542,7 +556,7 @@ class ServerCompilerSettings(object):
         member variables. If it cannot read the file it sets the variables
         to the default value.
         """
-        settings_dict = self.read_settings_file()
+        settings_dict = self.get_settings_file_data()
         if settings_dict:
             self.set_compiler_dir_from_file(settings_dict['arduino_exec_path'])
             self.set_arduino_board_from_file(settings_dict['arduino_board'])
@@ -567,7 +581,7 @@ class ServerCompilerSettings(object):
         # does the set_default_settings() function, so save them either way.
         self.save_settings()
 
-    def read_settings_file(self):
+    def get_settings_file_data(self):
         """
         Creates a dictionary from the settings stored in a file.
         :return: A dictionary with all the options and values from the settings
@@ -577,7 +591,7 @@ class ServerCompilerSettings(object):
         settings_parser = ConfigParser.ConfigParser()
         try:
             settings_parser.readfp(
-                codecs.open(self.get_settings_file_path(), 'r', 'utf8'))
+                codecs.open(self.__settings_path, 'r', 'utf8'))
             settings_dict['arduino_exec_path'] =\
                 settings_parser.get('Arduino_IDE', 'arduino_exec_path')
             settings_dict['arduino_board'] =\
@@ -592,24 +606,12 @@ class ServerCompilerSettings(object):
         except Exception as e:
             print('\nSettings file corrupted or not found in:')
             settings_dict = None
-        print('\t' + self.get_settings_file_path())
+        print('\t' + self.__settings_path)
         return settings_dict
 
     def delete_settings_file(self):
-        if os.path.exists(self.get_settings_file_path()):
-            os.remove(self.get_settings_file_path())
-
-    def get_settings_file_path(self):
-        """
-        Returns the settings file path or creates the path if not invoked before.
-        The file is saved in the same directory as this python source code file.
-        :return: path to the settings file
-        """
-        if not self.__settings_path:
-            this_package_dir = os.path.dirname(os.path.realpath(__file__))
-            self.__settings_path = os.path.normpath(
-                os.path.join(this_package_dir, self.__settings_filename))
-        return self.__settings_path
+        if os.path.exists(self.__settings_path):
+            os.remove(self.__settings_path)
 
     def get_board_value_from_key(self, string_key):
         """

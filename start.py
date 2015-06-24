@@ -134,9 +134,6 @@ def main():
     print('\n\n======= Parsing Command line arguments =======\n')
     find_project_root, launch_browser, server_root = parsing_cl_args()
 
-    print('\n\n======= Loading Settings =======')
-    ardublocklyserver.compilersettings.ServerCompilerSettings()
-
     print('\n\n======= Resolving server and project paths =======\n')
     # Based on command line options, set the server root to the ardublockly
     # project root directory, a directory specified in the arguments, or by
@@ -158,6 +155,12 @@ def main():
                   'the server root directory !')
     print("Selected server root: %s" % server_root)
 
+    print('\n\n======= Loading Settings =======')
+    # ServerCompilerSettings is a singleton, no need to save instance
+    ardublocklyserver.compilersettings.ServerCompilerSettings(
+        ardublockly_root_dir)
+
+    print('\n\n======= Starting Server =======\n')
     if launch_browser:
         # Find the relative path from server root to ardublockly html
         ardublockly_html_dir = os.path.join(ardublockly_root_dir, 'ardublockly')
@@ -166,7 +169,6 @@ def main():
               relative_path)
         open_browser(relative_path)
 
-    print('\n\n======= Starting Server =======\n')
     ardublocklyserver.server.start_server(server_root)
 
 
