@@ -43,6 +43,7 @@ var createPropertyListFile = function () {
     var info = projectDir.read('resources/osx/Info.plist');
     info = utils.replace(info, {
         productName: manifest.productName,
+        name: manifest.name,
         identifier: manifest.identifier,
         version: manifest.version
     });
@@ -62,6 +63,10 @@ var createPropertyListFile = function () {
 var finalize = function () {
     // Copy icon
     projectDir.copy('resources/osx/icon.icns', finalAppDir.path('Contents/Resources/icon.icns'));
+
+    // Rename executable
+    var execDir = finalAppDir.dir('Contents/MacOS/');
+    execDir.rename('Electron', manifest.name);
 
     return Q();
 };
