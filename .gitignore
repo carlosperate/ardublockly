@@ -90,6 +90,7 @@ cef_debug.log
 /upload
 /releases
 /arduexec
+/arduexec.app
 ardublockly_server_run.*
 ardublockly_run.*
 

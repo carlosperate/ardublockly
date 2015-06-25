@@ -105,6 +105,16 @@ def get_tag():
     if appveyor_tag:
         return "%s_%s" % (arch_time_stamp, appveyor_tag)
 
+    # Check for Circle CI environmental variables to create tag appendage
+    print(script_tab + "Checking Circleci environment variables for tag:")
+    circleci_tag = tag_from_ci_env_vars(
+        ci_name="Circleci",
+        pull_request_var="CI_PULL_REQUEST",
+        branch_var="CIRCLE_BRANCH",
+        commit_var="CIRCLE_SHA1")
+    if circleci_tag:
+        return "%s_%s" % (arch_time_stamp, circleci_tag)
+
     return arch_time_stamp
 
 
