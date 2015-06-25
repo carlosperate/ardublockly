@@ -40,6 +40,9 @@ dependencies:
     - node --version
     - npm --version
 
+    # Install AWS command line tool
+    - sudo pip install awscli
+
   override:
     # Build and pack
     - python package/build_pyinstaller.py linux
@@ -47,34 +50,14 @@ dependencies:
     - cd package/electron && npm run release
     - python package/pack_ardublockly.py
 
-    # Get the releases files as a environmenta variable
-    - cd releases
-    - for entry in *; do export ardublocklyZipFile="$entry"; done && echo $ardublocklyZipFile
-
-  # Automatically cache and restore many dependencies between builds
-  cache_directories:
-    - "~/installers"
+    # Get the releases files into the AWS S3 bucket
+    - export AWS_DEFAULT_REGION=us-west-2 && cd releases && for entry in *; do aws s3 cp $entry s3://ardublockly-builds/linux/$entry; done
 
 # Customize test commands
 test:
   override:
     - python ardublocklyserver/tests/sketchcreator_test.py
     - python ardublocklyserver/tests/compilersettings_test.py
-
-# Customize deployment commands
-deployment:
-  staging:
-    branch: [master, circleci, electron]
-    codedeploy:
-      appname-1234:
-        application_root: /releases
-        region: us-west-2
-        revision_location:
-          revision_type: S3
-          s3_location:
-            bucket: ardublockly-builds
-            key_pattern: linux/ardublockly_{BUILD_NUM}_64bit_{BRANCH}_{SHORT_COMMIT}.zip
-        deployment_group: my-deployment-group
 
 general:
   artifacts:
