@@ -48,7 +48,7 @@ def string(buffer):
     if sys.version_info[0] == 3:
         return ''.join(s)
     else:
-        return bytearray(s).decode('utf8')
+        return bytearray(s).decode('utf8', errors='replace')
 
 
 class GUID(ctypes.Structure):
