@@ -11,8 +11,9 @@
 
 var app = require('app');
 var shell = require('shell');
-var server = require('./servermgr.js');
+var jetpack = require('fs-jetpack');
 var appMenu = require('./appmenu.js');
+var server = require('./servermgr.js');
 var BrowserWindow = require('browser-window');
 var env = require('./vendor/electron_boilerplate/env_config');
 var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
@@ -28,6 +29,8 @@ var mainWindowState = windowStateKeeper('main', {
 });
 
 app.on('ready', function () {
+    var splashWindow = createSplashWindow();
+
     server.startServer();
 
     mainWindow = new BrowserWindow({
@@ -38,6 +41,7 @@ app.on('ready', function () {
         title: 'Ardublockly',
         transparent: false,
         frame: true,
+        show: false,
         'node-integration': false,
         'web-preferences': {
             'web-security': true,
@@ -69,6 +73,11 @@ app.on('ready', function () {
         }
     );
 
+    mainWindow.webContents.on('did-finish-load', function () {
+        mainWindow.show();
+        splashWindow.close();
+    });
+
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
 
     mainWindow.on('close', function () {
@@ -83,3 +92,23 @@ app.on('window-all-closed', function () {
     // https://github.com/atom/electron/issues/1357 
     app.quit();
 });
+
+function createSplashWindow() {
+    var imagePath = 'file://' + server.getProjectJetpack().path(
+        'ardublockly', 'img', 'ardublockly_splash.png');
+
+    var splashWindow = new BrowserWindow({
+        width: 500,
+        height: 225,
+        frame: false,
+        show: true,
+        transparent: true,
+        images: true,
+        center: true,
+        'use-content-size': true,
+        'always-on-top': true,
+    });
+    splashWindow.loadUrl(imagePath);
+
+    return splashWindow;
+}

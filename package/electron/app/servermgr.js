@@ -17,45 +17,54 @@ var env = require('./vendor/electron_boilerplate/env_config');
 var tag = '[Server mgr] '
 
 var serverProcess = null;
+var ardublocklyRootDir = null;
+
+module.exports.getProjectJetpack = function() {
+    if (ardublocklyRootDir == null) {
+        // First, work out the project root directory
+        if (env.name === 'development') {
+            // In dev mode the file cwd is on the project/package/electron dir
+            ardublocklyRootDir = jetpack.dir('../../');
+        } else {
+            // Cannot use relative paths in build, so let's try to find the
+            // ardublockly folder in a node from the executable file path tree
+            var ardublocklyRootDir = jetpack.dir(__dirname);
+            var oldArdublocklyRootDir = '';
+            while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
+                //console.log(tag + 'Search for Ardublockly project dir: ' +
+                //            ardublocklyRootDir.cwd());
+                // Check if /ardublokly/index.html exists within current path
+                if (jetpack.exists(
+                        ardublocklyRootDir.path('ardublockly', 'index.html'))) {
+                    // Found the right folder, break with this dir loaded
+                    break;
+                }
+                oldArdublocklyRootDir = ardublocklyRootDir.path();
+                ardublocklyRootDir = ardublocklyRootDir.dir('../');
+            }
+
+            if (ardublocklyRootDir.path() == oldArdublocklyRootDir) {
+                ardublocklyRootDir = jetpack.dir('.');
+                ardublocklyNotFound(ardublocklyRootDir.path('.'));
+            }
+        }
+        console.log(tag + 'Ardublockly root dir: ' + ardublocklyRootDir.cwd());
+    }
+
+    return ardublocklyRootDir;
+};
 
 function getServerExecLocation() {
     // Relevant OS could be win32, linux, darwin
     console.log(tag + 'OS detected: ' + process.platform);
 
-    // First, work out the project root directory
-    if (env.name === 'development') {
-        // In dev mode the file cwd is on the project/package/electron dir
-        var ardublocklyRootDir = jetpack.dir('../../');
-    } else {
-        // Cannot use relative paths with Production, so let's try to find the
-        // ardublockly folder in a node from the executable file path tree
-        var ardublocklyRootDir = jetpack.dir(__dirname);
-        var oldArdublocklyRootDir = '';
-        while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
-            //console.log(tag + 'Search for Ardublockly project root dir: ' +
-            //            ardublocklyRootDir.cwd());
-            // Check if file /ardublokly/index.html exists within current path
-            if (jetpack.exists(
-                    ardublocklyRootDir.path('ardublockly', 'index.html'))) {
-                // Found the right folder, break with this dir loaded
-                break;
-            }
-            oldArdublocklyRootDir = ardublocklyRootDir.path();
-            ardublocklyRootDir = ardublocklyRootDir.dir('../');
-        }
-
-        if (ardublocklyRootDir.path() == oldArdublocklyRootDir) {
-            ardublocklyRootDir = jetpack.dir('.');
-            ardublocklyNotFound(jetpack.path('.'));
-        }
-    }
-    console.log(tag + 'Ardublockly root dir: ' + ardublocklyRootDir.cwd());
+    var ardublocklyProjRootDir = module.exports.getProjectJetpack();
 
     // Then, work out the location of the python executable files
     if (process.platform == "darwin") {
-        var arduexecDir = ardublocklyRootDir.dir('arduexec.app/server')
+        var arduexecDir = ardublocklyProjRootDir.dir('arduexec.app/server');
     } else {
-        var arduexecDir = ardublocklyRootDir.dir('arduexec/server')
+        var arduexecDir = ardublocklyProjRootDir.dir('arduexec/server');
     }
 
     // Finally, work out the name of the executable
