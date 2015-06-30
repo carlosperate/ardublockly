@@ -20,10 +20,18 @@ var BrowserWindow = require('browser-window');
 module.exports.setArdublocklyMenu = function(devMode) {
     if (typeof(devMode)==='undefined') devMode = false;
 
-    var ardublocklyMenu = [
-        getFileMenuData(),
-        getHelpMenuData(),
-    ];
+    var ardublocklyMenu = []
+    if (process.platform == "darwin") {
+        ardublocklyMenu.push(getMacMenuData());
+    }
+    ardublocklyMenu.push(getFileMenuData());
+    ardublocklyMenu.push(getEditMenuData());
+    ardublocklyMenu.push(getProgramMenuData());
+    ardublocklyMenu.push(getExamplesMenuData());
+    if (process.platform == "darwin") {
+        ardublocklyMenu.push(getWindowMenuData());
+    }
+    ardublocklyMenu.push(getHelpMenuData());
 
     if (devMode) {
         ardublocklyMenu.push(getDevMenuData());
@@ -32,11 +40,59 @@ module.exports.setArdublocklyMenu = function(devMode) {
     Menu.setApplicationMenu(Menu.buildFromTemplate(ardublocklyMenu));
 };
 
-var getFileMenuData = function() {
+var getMacMenuData = function() {
     return {
+        label: 'Ardublockly',
+        submenu: [
+            {
+                label: 'About',
+                click: functionNotImplemented
+            }, {
+                type: 'separator'
+            }, {
+                label: 'Preferences',
+                //accelerator: 'CmdOrCtrl+comma',
+                click: functionNotImplemented
+            }, {
+                type: 'separator'
+            }, {
+                label: 'Services',
+                submenu: []
+            }, {
+                type: 'separator'
+            }, {
+                label: 'Hide Ardublockly',
+                accelerator: 'Command+H',
+                selector: 'hide:'
+            }, {
+                label: 'Hide Others',
+                accelerator: 'Command+Shift+H',
+                selector: 'hideOtherApplications:'
+            }, {
+                label: 'Show All',
+                selector: 'unhideAllApplications:'
+            }, {
+                type: 'separator'
+            }, {
+                label: 'Quit',
+                accelerator: 'CmdOrCtrl+Q',
+                click: function() {
+                    app.quit();
+                }
+            }
+        ]
+    };
+};
+
+var getFileMenuData = function() {
+    var fileMenu = {
         label: 'File',
         submenu: [
             {
+                label: 'New',
+                accelerator: 'CmdOrCtrl+N',
+                click: functionNotImplemented
+            }, {
                 label: 'Open',
                 accelerator: 'CmdOrCtrl+O',
                 click: functionNotImplemented
@@ -44,12 +100,130 @@ var getFileMenuData = function() {
                 label: 'Save as',
                 accelerator: 'CmdOrCtrl+S',
                 click: functionNotImplemented
+            }
+        ]
+    };
+
+    // On MacOS the Quit option is in the app menu, so only add it if not mac
+    if (process.platform != "darwin") {
+        fileMenu.submenu.push(
+            {
+                type: 'separator'
             }, {
                 label: 'Quit',
                 accelerator: 'CmdOrCtrl+Q',
-                click: function () {
+                click: function() {
                     app.quit();
                 }
+            }
+        );
+    }
+
+    return fileMenu;
+};
+
+var getEditMenuData = function() {
+    var editMenud = {
+        label: 'Edit',
+        submenu: [
+            {
+                label: 'Undo',
+                accelerator: 'CmdOrCtrl+Z',
+                click: functionNotImplemented
+            }, {
+                label: 'Redo',
+                accelerator: 'CmdOrCtrl+Y',
+                click: functionNotImplemented
+            }, {
+                type: 'separator'
+            }, {
+                label: 'Cut',
+                accelerator: 'CmdOrCtrl+X',
+                click: functionNotImplemented
+            }, {
+                label: 'Copy',
+                accelerator: 'CmdOrCtrl+C',
+                click: functionNotImplemented
+            }, {
+                label: 'Paste',
+                accelerator: 'CmdOrCtrl+V',
+                click: functionNotImplemented
+            }
+        ]
+    };
+
+    // On MacOS Preferences is in the app menu, so only add it if not mac
+    if (process.platform != "darwin") {
+        editMenud.submenu.push(
+            {
+                type: 'separator'
+            }, {
+                label: 'Preferences',
+                //accelerator: 'CmdOrCtrl+comma',
+                click: functionNotImplemented
+            }
+        );
+    }
+
+    return editMenud;
+};
+
+var getExamplesMenuData = function() {
+    return {
+        label: 'Examples',
+        submenu: [
+            {
+                label: 'Example 1',
+                click: functionNotImplemented
+            }, {
+                label: 'Example 2',
+                click: functionNotImplemented
+            }, {
+                label: 'Example 3',
+                click: functionNotImplemented
+            }
+        ]
+    };
+};
+
+var getProgramMenuData = function() {
+    return {
+        label: 'Program',
+        submenu: [
+            {
+                label: 'Open sketch in IDE',
+                //accelerator: 'CmdOrCtrl+O',
+                click: functionNotImplemented
+            }, {
+                label: 'Verify',
+                //accelerator: 'CmdOrCtrl+S',
+                click: functionNotImplemented
+            }, {
+                label: 'Upload program',
+                //accelerator: 'CmdOrCtrl+S',
+                click: functionNotImplemented
+            }
+        ]
+    };
+};
+
+var getWindowMenuData = function() {
+    return {
+        label: 'Window',
+        submenu: [
+            {
+                label: 'Minimize',
+                accelerator: 'Command+M',
+                selector: 'performMiniaturize:'
+            }, {
+                label: 'Close',
+                accelerator: 'Command+W',
+                selector: 'performClose:'
+           }, {
+                type: 'separator'
+            }, {
+                label: 'Bring All to Front',
+                selector: 'arrangeInFront:'
             }
         ]
     };
@@ -60,14 +234,29 @@ var getHelpMenuData = function() {
         label: 'Help',
         submenu: [
             {
+                label: 'Quick Start',
+                click:  function() {
+                    shell.openExternal(
+                        'http://localhost:8000/documentation/Quick-Start');
+                }
+            }, {
+                label: 'Manual',
+                click: function() {
+                    shell.openExternal(
+                        'http://localhost:8000/documentation/Quick-Start');
+                }
+            }, {
+                type: 'separator'
+            }, {
                 label: 'Website',
-                click: function () {
+                click: function() {
                     shell.openExternal('http://ardublockly.embeddedlog.com');
                 }
             }, {
                 label: 'Source code',
-                click: function () {
-                    shell.openExternal('https://github.com/carlosperate/ardublockly');
+                click: function() {
+                    shell.openExternal(
+                        'https://github.com/carlosperate/ardublockly');
                 }
             }, {
                 type: 'separator'
@@ -79,20 +268,20 @@ var getHelpMenuData = function() {
     };
 };
 
-var getDevMenuData = function () {
+var getDevMenuData = function() {
     return {
         label: 'Development',
         submenu: [
             {
                 label: 'Reload',
                 accelerator: 'CmdOrCtrl+R',
-                click: function () {
+                click: function() {
                     BrowserWindow.getFocusedWindow().reloadIgnoringCache();
                 }
             }, {
                 label: 'Toggle DevTools',
                 accelerator: 'Alt+CmdOrCtrl+I',
-                click: function () {
+                click: function() {
                     BrowserWindow.getFocusedWindow().toggleDevTools();
                 }
             }, {
