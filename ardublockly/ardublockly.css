@@ -159,8 +159,8 @@ ul.side-nav li.logo:hover {
 
 #button_load_xml {
   position: absolute;
-  right: 30px;
-  bottom: 20px;
+  right: 36px;
+  bottom: 36px;
   display: none;
 }
 
@@ -337,6 +337,24 @@ ul.side-nav li.logo:hover {
   margin-right: 1rem;
 }
 
+/* Sketch name text input */
+.sketch_name_wrapper {
+  display: inline-block;
+  padding-left: 5px;
+}
+.sketch_name {
+  width: auto !important;
+  max-width: 350px;
+  line-height: 64px;
+  height: 3rem !important;
+  font-size: 1.5rem !important;
+  border-bottom: 1px solid #EEE !important;
+}
+.sketch_name_icon {
+  display: inline !important;
+  font-size: 1.2rem !important;
+  float: right;
+}
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
@@ -427,17 +445,19 @@ ul.side-nav li.logo:hover {
 /*********************************/
 /* Modify container to have a larger width in all resolutions */
 .container {
-  max-width: 1650px !important;
-  width: 100% !important;
+  width: 90%;
+  max-width: initial !important;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 @media only screen and (min-width : 601px) {
   .container {
-    width: 95% !important;
+    width: 95%;
   }
 }
 @media only screen and (min-width : 993px) {
   .container {
-    width: 90% !important;
+    width: 90%;
   }
 }
 
@@ -494,12 +514,12 @@ ul.side-nav li ul li{
   margin-right: 16px;
 }
 
-/* button-collapse with show-on-large does not work in IE */
+/* button-collapse with show-on-large does not work in IE
 @media only screen and (min-width : 993px) {
   .button-collapse {
-    display: block !important;
+    display: block;
   }
-}
+} */
 
 /* Increase the size of Materialize Modal in small res */
 @media only screen and (max-width : 600px) {

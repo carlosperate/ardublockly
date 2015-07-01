@@ -5253,9 +5253,9 @@ nav {
     nav .nav-wrapper i {
       display: block;
       font-size: 2rem; }
-  @media only screen and (min-width : 993px) {
+/*  @media only screen and (min-width : 993px) {
     nav a.button-collapse {
-      display: none; } }
+      display: none; } }*/
   nav .button-collapse {
     float: left;
     position: relative;

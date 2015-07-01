@@ -6,16 +6,14 @@
   <link rel="icon" href="img/favicon.ico">
   <meta name="theme-color" content="#00878F">
   <title>Ardublockly</title>
-  <!-- jQuery -->
-  <script src="js_libs/jquery-2.1.3.min.js"></script>
-  <!--Materialize -->
+
+  <!-- Materialize CSS -->
   <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection">
-  <script src="materialize/materialize.js"></script>
-  <!-- FileSaver  -->
-  <script src="js_libs/FileSaver.min.js"></script>
-  <!-- Prettify  -->
+  <!-- Prettify CSS -->
   <link rel="stylesheet" href="../blockly/demos/prettify.css">
-  <script src="../blockly/demos/prettify.js"></script>
+  <!-- Ardublockly CSS -->
+  <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
+
   <!-- Ardublockly - For now uncompressed files -->
   <!--script src="../blockly/blockly_compressed.js"></script-->
   <script src="../blockly/blockly_uncompressed.js"></script>
@@ -52,22 +50,21 @@
   <script src="../blockly/generators/arduino/time.js"></script>
   <script src="../blockly/generators/arduino/variables.js"></script>
   <script src="../blockly/msg/js/en.js"></script>
-  <!-- Arduino Server Compiler -->
-  <script src="../ardublocklyserver/js/ArduServerCompiler.js"></script>
-  <!-- Arduino Material design app -->
-  <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
-  <script src="ardublockly_design.js"></script>
-  <script src="ardublockly_blockly.js"></script>
-  <script src="ardublockly.js"></script>
 </head>
 
 <body>
-
   <!-- Horizonal Navigation bar -->
   <nav class="nav-fixed arduino_teal">
     <div class="nav-wrapper container">
-      <a class="button-collapse" href="#" data-activates="slide-out"><i class="mdi-navigation-menu"></i></a>
-      <a id="logo-container" href="#" class="brand-logo">Ardublockly</a>
+      <a class="button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="mdi-navigation-menu"></i>
+      <a id="logo-container" class="brand-logo">
+        Ardublockly:
+        <!-- Sketch name editable text field -->
+        <span class="sketch_name_wrapper">
+          <i class="mdi-image-edit sketch_name_icon"></i>
+          <input id="sketch_name" class="sketch_name" type="text" value="Sketch Name">
+        </span>
+      </a>
       <!-- Horizontal Navbar links only shown on large resolutions -->
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="#" id="button_load">Open<i class="mdi-file-file-upload left"></i></a></li>
@@ -175,7 +172,7 @@
     </div>
   </div>
 
-  <!-- Settings: Displayed as a "Materialize Modal" (dialog) -->
+  <!-- Settings: Displayed as a Materialize Modal (android dialog) -->
   <div id="settings_dialog" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Settings</h4>
@@ -255,5 +252,19 @@
     </div>
   </div>
 
+  <!-- jQuery and Materialize JS -->
+  <script src="js_libs/jquery-2.1.3.min.js"></script>
+  <script src="materialize/materialize.js"></script>
+  <!-- FileSaver JS -->
+  <script src="js_libs/FileSaver.min.js"></script>
+  <!-- Prettify JS -->
+  <script src="../blockly/demos/prettify.js"></script>
+  <!-- Arduino Server Compiler Ajax JS -->
+  <script src="../ardublocklyserver/js/ArduServerCompiler.js"></script>
+  <!-- Ardublockly app -->
+  <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
+  <script src="ardublockly_design.js"></script>
+  <script src="ardublockly_blockly.js"></script>
+  <script src="ardublockly.js"></script>
 </body>
 </html>

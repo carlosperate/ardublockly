@@ -12,6 +12,16 @@
  */
 var ArduinoMaterial = ArduinoMaterial || {};
 
+
+/**
+ * Initialises all the design related JavaScript.
+ */
+ArduinoMaterial.designJsInit = function() {
+  ArduinoMaterial.materializeJsInit();
+  ArduinoMaterial.resizeToggleToolboxBotton();
+  ArduinoMaterial.sketchNameSizeEffect();
+};
+
 /**
  * Initialises the js/jQuery required for the materialize framework.
  */
@@ -28,8 +38,8 @@ ArduinoMaterial.materializeJsInit = function() {
     $('.modal-trigger').leanModal({
       dismissible: true,
       opacity: .5,
-      in_duration: 300,
-      out_duration: 200
+      in_duration: 200,
+      out_duration: 250
      });
     // Pop-up tool tips
     $('.tooltipped').tooltip({'delay': 50});
@@ -39,7 +49,8 @@ ArduinoMaterial.materializeJsInit = function() {
 };
 
 /**
- * Resizes the container for Blockly and forces a re-render of the SVG. 
+ * Sets the spinner around the play button ON or OFF.
+ * @param {!boolean} active True turns ON the spinner, false OFF.
  */
 ArduinoMaterial.runButtonSpinner = function(active) {
   var spinner = document.getElementById('button_run_spinner');
@@ -55,10 +66,10 @@ ArduinoMaterial.runButtonSpinner = function(active) {
 };
 
 /**
- * Displays or hides the 'load textarea xml' button.
+ * Displays or hides the 'load textarea xml' button based on the state of the
+ * collapsible 'xml_collapsible_body'.
  */
 ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
-  //var xmlButton = document.getElementById('button_load_xml');
   var xmlButtonBody = document.getElementById('xml_collapsible_body');
   // Waiting to check status due to the animation delay
   setTimeout(function() {
@@ -71,13 +82,13 @@ ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
 };
 
 /**
- * Sets the class and content of the toolbox On and Off button.
+ * Sets the class and content of the toolbox View and Hide button.
  * @param {!boolean} toolboxVisible Indicates if the toolbox visibility.
  */
 ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
   var toolboxButton = document.getElementById('button_toggle_toolbox');
   var toolboxButtonIcon = document.getElementById('button_toggle_toolbox_icon');
-  // Element conatins several classes, use replace to maintain the rest
+  // Element contains several classes, use replace to maintain the rest
   if (toolboxVisible == true) {
     toolboxButton.className = toolboxButton.className.replace(
         'button_toggle_toolbox_on', 'button_toggle_toolbox_off'); 
@@ -168,6 +179,35 @@ ArduinoMaterial.arduinoIdeModal = function(bodyEl) {
   $('#arduino_dialog_body').append(bodyEl);
   $('#arduino_dialog').openModal();
   window.location.hash = '';
+};
+
+/**
+ * Hides the side menu button.
+ */
+ArduinoMaterial.hideSideMenuButton = function() {
+  var sideMenuButton = document.getElementById('button-collapse');
+  sideMenuButton.style.display = 'none';
+};
+
+/**
+ * Sets all the elements using the container class to have a width of 100%.
+ */
+ArduinoMaterial.containerFullWidth = function() {
+  var containers = $('.container');
+  for (var i = 0; i < containers.length; i++) {
+    containers[i].style.width = '100%';
+  }
+};
+
+/**
+ * Initialises the sketch name input text javascript to dynamically adjust its
+ * width to the width of its contents. 
+ */
+ArduinoMaterial.sketchNameSizeEffect = function() {
+  var resizeInput = function() {
+    $(this).attr('size', $(this).val().length);
+  };
+  $('#sketch_name').keyup(resizeInput).each(resizeInput);
 };
 
 /**

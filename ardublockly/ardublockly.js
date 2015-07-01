@@ -21,17 +21,23 @@ window.addEventListener('load', function load(event) {
   ArduinoMaterial.injectBlockly(
     document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
 
-  ArduinoMaterial.materializeJsInit();
-  ArduinoMaterial.bindActionFunctions_();
-  ArduinoMaterial.bindDesignEventListeners_();
-  ArduinoMaterial.bindBlocklyEventListeners_();
+  ArduinoMaterial.designJsInit();
 
-  ArduinoMaterial.resizeToggleToolboxBotton();
+  ArduinoMaterial.bindDesignEventListeners_();
+  ArduinoMaterial.bindActionFunctions_();
+  ArduinoMaterial.bindBlocklyEventListeners_();
 
   // Check if not running locally (including developer's local network IP)
   if (document.location.hostname != 'localhost' &&
       document.location.hostname != '192.168.0.7') {
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
+  }
+
+  // Check if running on the Desktop app
+  if (navigator.userAgent.toLowerCase().indexOf('ardublockly') > -1) {
+    // It is, so remove container padding and side menu button
+    ArduinoMaterial.containerFullWidth();
+    ArduinoMaterial.hideSideMenuButton();
   }
 });
 
@@ -129,7 +135,7 @@ ArduinoMaterial.loadServerXmlFile = function(xmlFile) {
   };
 
   var callbackConnectionError = function() {
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   };
 
   ArduinoMaterial.loadXmlBlockFile(
@@ -185,12 +191,29 @@ ArduinoMaterial.saveXmlFile = function() {
 };
 
 /**
+ * Opens the modal that displays the "not connected to server" message.
+ */
+ArduinoMaterial.openNotConnectedModal = function() {
+  $('#not_running_dialog').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
+};
+
+/**
  * Prepares and opens the settings modal.
  */
 ArduinoMaterial.openSettings = function() {
   ArduinoMaterial.populateSettings();
-  $('#settings_dialog').openModal();
-}
+  $('#settings_dialog').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
+};
 
 /**
  * Retrieves the Settings from ArduServerCompiler and populates the form data
@@ -220,7 +243,7 @@ ArduinoMaterial.setCompilerLocationHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -237,7 +260,7 @@ ArduinoMaterial.setSketchLocationHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -262,7 +285,7 @@ ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -298,7 +321,7 @@ ArduinoMaterial.setSerialPortsHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -334,7 +357,7 @@ ArduinoMaterial.setIdeHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -371,7 +394,7 @@ ArduinoMaterial.sendCodeReturn = function(dataBack) {
     ArduinoMaterial.arduinoIdeModal(dataBack);
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
