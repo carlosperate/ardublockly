@@ -36,7 +36,14 @@ import codecs
 import inspect
 import platform
 import traceback
-from ardublocklyserver.server import start_server
+try:
+    from ardublocklyserver.server import start_server
+except ImportError:
+    file_dir = os.path.dirname(os.path.realpath(__file__))
+    package_dir = os.path.dirname(os.path.dirname(file_dir))
+    sys.path.insert(0, package_dir)
+    from ardublocklyserver.server import start_server
+    os.chdir(package_dir)
 
 # Needed for packaging the application on self contained executable
 __file__ = sys.argv[0]

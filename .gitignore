@@ -78,7 +78,7 @@ ServerCompilerSettings.ini
 TestTemp_*
 
 # CEF cache and log files
-/webcache
+webcache
 cef_error.log
 cef_debug.log
 
