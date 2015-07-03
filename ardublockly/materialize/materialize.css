@@ -5253,7 +5253,8 @@ nav {
     nav .nav-wrapper i {
       display: block;
       font-size: 2rem; }
-/*  @media only screen and (min-width : 993px) {
+/* Ardublocly edited out of the framework 
+  @media only screen and (min-width : 993px) {
     nav a.button-collapse {
       display: none; } }*/
   nav .button-collapse {

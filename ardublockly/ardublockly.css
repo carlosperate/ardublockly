@@ -1,3 +1,19 @@
+/**
+ * @license Licensed under the Apache License, Version 2.0 (the "License"):
+ *          http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * @fileoverview CSS file for the Ardublockly application.
+ *
+ * There are a lot of '!important' tags in this file as a lot of the rules set
+ * here go against the css rules from the Materialize framework.
+ */
+html,
+body {
+  height: 100% !important;
+  padding: 0;
+  margin: 0;
+}
+
 body {
   background-color: #eeeeee;
   -moz-user-select: -moz-none;
@@ -83,18 +99,17 @@ ul.side-nav li.logo:hover {
   -webkit-border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   border-radius: 4px !important;
+  min-height: 480px;
+  height: -moz-calc(100vh - 150px);     /* Firefox  */
+  height: -webkit-calc(100vh - 150px);  /* WebKit   */
+  height: -o-calc(100vh - 150px);       /* Opera    */
+  height: calc(100vh - 150px);          /* Standard */
 }
 
 #content_blocks {
   margin: 0;
   padding: 0;
-  min-height: 560px;
-  max-height: 560px;
-  background: none; 
-  /*height: -moz-calc(100hv - 200px);     /* Firefox  */
-  /*height: -webkit-calc(100hv - 200px);  /* WebKit   */
-  /*height: -o-calc(100hv - 200px);       /* Opera    */
-  /*height: calc(100hv - 200px);          /* Standard */
+  min-height: 480px;
 }
 
 #content_xml {
@@ -105,12 +120,11 @@ ul.side-nav li.logo:hover {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  min-height: 468px;
-  max-height: 468px;
-  /*height: -moz-calc(100hv - 100px);     /* Firefox  */
-  /*height: -webkit-calc(100hv - 100px);  /* WebKit   */
-  /*height: -o-calc(100hv - 100px);       /* Opera    */
-  /*height: calc(100hv - 100px);          /* Standard */
+  min-height: 384px;
+  height: -moz-calc(100vh - 247px);     /* Firefox  */
+  height: -webkit-calc(100vh - 247px);  /* WebKit   */
+  height: -o-calc(100vh - 247px);       /* Opera    */
+  height: calc(100vh - 247px);          /* Standard */
 }
 
 /* The materialize framework changes height of the div to show or hide */
@@ -123,12 +137,11 @@ ul.side-nav li.logo:hover {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  min-height: 468px;
-  max-height: 468px;
-  /*height: -moz-calc(100hv - 100px);     /* Firefox  */
-  /*height: -webkit-calc(100hv - 100px);  /* WebKit   */
-  /*height: -o-calc(100hv - 100px);       /* Opera    */
-  /*height: calc(100hv - 100px);          /* Standard */
+  min-height: 388px;
+  height: -moz-calc(100vh - 243px);     /* Firefox  */
+  height: -webkit-calc(100vh - 243px);  /* WebKit   */
+  height: -o-calc(100vh - 243px);       /* Opera    */
+  height: calc(100vh - 243px);          /* Standard */
   -moz-user-select: text;
   -khtml-user-select: text;
   -webkit-user-select: text;
@@ -322,6 +335,52 @@ ul.side-nav li.logo:hover {
 }
 
 
+/*****************/
+/*  Sketch name  */
+/*****************/
+.sketch_name_wrapper {
+  display: inline-block;
+  padding-left: 5px;
+}
+.sketch_name_icon {
+  display: inline !important;
+  font-size: 1.2rem !important;
+  float: right;
+}
+.sketch_name {
+  width: auto !important;
+  max-width: 400px;
+  line-height: 64px;
+  height: 3rem !important;
+  font-size: 1.5rem !important;
+  border-bottom: 0px solid #EEE !important;
+  font-style: italic;
+}
+.sketch_name:focus {
+    border-bottom: 1px solid #EEE !important;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+  .sketch_name {
+    max-width: 200px;
+  }
+  /* Remove the "Ardublockly title only leaving the sketch name */
+  .app_title {
+    display: none;
+  }
+}
+@media only screen and (min-width : 600px) {
+  .sketch_name {
+    max-width: 275px;
+  }
+}
+@media only screen and (min-width : 993px) {
+  .sketch_name {
+    max-width: 350px;
+  }
+}
+
+
 /************/
 /*  Others  */
 /************/
@@ -337,24 +396,6 @@ ul.side-nav li.logo:hover {
   margin-right: 1rem;
 }
 
-/* Sketch name text input */
-.sketch_name_wrapper {
-  display: inline-block;
-  padding-left: 5px;
-}
-.sketch_name {
-  width: auto !important;
-  max-width: 350px;
-  line-height: 64px;
-  height: 3rem !important;
-  font-size: 1.5rem !important;
-  border-bottom: 1px solid #EEE !important;
-}
-.sketch_name_icon {
-  display: inline !important;
-  font-size: 1.2rem !important;
-  float: right;
-}
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
@@ -439,6 +480,15 @@ ul.side-nav li.logo:hover {
   stroke-width: 0px !important;
 }
 
+/* Edit select yellow colour to Arduino yellow
+.blocklyHighlightedConnectionPath {
+  stroke: #E5AD24 !important;
+}
+
+.blocklySelected>.blocklyPath {
+  stroke: #E5AD24 !important;
+}
+ */
 
 /*********************************/
 /*  Overwriting Materialize CSS  */
@@ -456,6 +506,11 @@ ul.side-nav li.logo:hover {
   }
 }
 @media only screen and (min-width : 993px) {
+  .container {
+    width: 100%;
+  }
+}
+@media only screen and (min-width : 1380px) {
   .container {
     width: 90%;
   }
