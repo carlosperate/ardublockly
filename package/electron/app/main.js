@@ -98,15 +98,14 @@ function createSplashWindow() {
         'ardublockly', 'img', 'ardublockly_splash.png');
 
     var splashWindow = new BrowserWindow({
-        width: 500,
-        height: 225,
+        width: 450,
+        height: 300,
         frame: false,
         show: true,
         transparent: true,
         images: true,
         center: true,
-        'use-content-size': true,
-        'always-on-top': true,
+        'use-content-size': true
     });
     splashWindow.loadUrl(imagePath);
 

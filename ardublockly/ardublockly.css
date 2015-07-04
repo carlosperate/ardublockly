@@ -76,11 +76,18 @@ ul.side-nav li.logo {
   margin: 0px !important;
   padding: 0px 0px !important;
   border: none !important;
-  height: 112px;
-  background-color: #eeeeee;
+  height: 145px;
+  background-color: transparent;
 }
 ul.side-nav li.logo:hover {
+  background-color: transparent;
+}
+ul.side-nav li.side-menu-end {
   background-color: #eeeeee;
+  border-radius: 0px 0px 25px 0px;
+  border-right: 4px solid #dddddd;
+  border-bottom: 4px solid #dddddd;
+  line-height: 25px;
 }
 
 /************************************/
@@ -346,6 +353,7 @@ ul.side-nav li.logo:hover {
   display: inline !important;
   font-size: 1.2rem !important;
   float: right;
+  padding-top: 3px;
 }
 .sketch_name {
   width: auto !important;
@@ -550,18 +558,26 @@ ul.side-nav .collapsible {
 }
 /* Set the background effect in the side menu */
 ul.side-nav {
+  background-color: transparent;
+  box-shadow: none !important;
+}
+ul.side-nav li {
   background-color: #eeeeee;
 }
-ul.side-nav li ul{
+ul.side-nav li {
   background-color: #eeeeee;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  border-right: 3px solid #dddddd;
-  border-left: 3px solid #ffffff;
+  border-right: 2px solid #dddddd;
+  border-left: 2px solid #ffffff;
 }
-ul.side-nav li ul li{
+ul.side-nav li ul li ul {
   cursor: pointer;
+  border: none !important;
+}
+ul.side-nav li ul li ul li {
+  border: none !important;
 }
 
 /* Add extra margin to the side menu button*/
