@@ -194,6 +194,42 @@ ArduinoMaterial.discard = function() {
 };
 
 /**
+ * Wraps the blockly 'cut' functionality
+ */
+ArduinoMaterial.blocklyCut = function() {
+  Blockly.copy_(Blockly.selected);
+  Blockly.selected.dispose(true, true);
+};
+
+/**
+ * Wraps the blockly 'copy' functionality
+ */
+ArduinoMaterial.blocklyCopy = function() {
+  Blockly.hideChaff();
+  Blockly.copy_(Blockly.selected);
+};
+
+/**
+ * Wraps the blockly 'paste' functionality
+ */
+ArduinoMaterial.blocklyPaste = function() {
+  if (Blockly.clipboardXml_) {
+    Blockly.hideChaff();
+    Blockly.clipboardSource_.paste(Blockly.clipboardXml_);
+  }
+};
+
+/**
+ * Wraps the blockly 'paste' functionality
+ */
+ArduinoMaterial.blocklyDelete = function() {
+    if (Blockly.selected && Blockly.selected.isDeletable()) {
+      Blockly.hideChaff();
+      Blockly.selected.dispose(true, true);
+    }
+};
+
+/**
  * Creates an AJAX request.
  * @return An XML HTTP Request
  */

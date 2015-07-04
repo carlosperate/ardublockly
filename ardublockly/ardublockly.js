@@ -54,16 +54,20 @@ ArduinoMaterial.bindActionFunctions_ = function() {
   // Side menu buttons, they also close the side menu
   ArduinoMaterial.bindClick_('menu_load', function() {
       ArduinoMaterial.loadUserXmlFile();
-      $('.button-collapse').sideNav('hide'); });
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_save',  function() {
       ArduinoMaterial.saveXmlFile();
-      $('.button-collapse').sideNav('hide'); });
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_delete',  function() {
       ArduinoMaterial.discard();
-      $('.button-collapse').sideNav('hide'); });
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_settings', function() {
       ArduinoMaterial.openSettings();
-      $('.button-collapse').sideNav('hide'); });
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_example_1', function() {
       ArduinoMaterial.loadServerXmlFile('examples/blink.xml')});
   ArduinoMaterial.bindClick_('menu_example_2', function() {
@@ -164,15 +168,20 @@ ArduinoMaterial.loadUserXmlFile = function() {
       }
     };
     reader.readAsText(files[0]);
-  }
+  };
   // Create once invisible browse button with event listener, and click it
   var selectFile = document.getElementById('select_file');
   if (selectFile == null) {
     var selectFileDom = document.createElement('INPUT');
     selectFileDom.type = 'file';
     selectFileDom.id = 'select_file';
-    selectFileDom.style.display = 'none';
-    document.body.appendChild(selectFileDom);
+
+    var selectFileWrapperDom = document.createElement('DIV');
+    selectFileWrapperDom.id = 'select_file_wrapper';
+    selectFileWrapperDom.style.display = 'none';
+    selectFileWrapperDom.appendChild(selectFileDom);
+
+    document.body.appendChild(selectFileWrapperDom);
     selectFile = document.getElementById('select_file');
     selectFile.addEventListener('change', parseInputXMLfile, false);
   }

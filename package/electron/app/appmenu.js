@@ -20,7 +20,7 @@ var BrowserWindow = require('browser-window');
 module.exports.setArdublocklyMenu = function(devMode) {
     if (typeof(devMode)==='undefined') devMode = false;
 
-    var ardublocklyMenu = []
+    var ardublocklyMenu = [];
     if (process.platform == "darwin") {
         ardublocklyMenu.push(getMacMenuData());
     }
@@ -51,8 +51,12 @@ var getMacMenuData = function() {
                 type: 'separator'
             }, {
                 label: 'Preferences',
-                //accelerator: 'CmdOrCtrl+comma',
-                click: functionNotImplemented
+                accelerator: 'CmdOrCtrl+,',
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.openSettings()");
+                }
             }, {
                 type: 'separator'
             }, {
@@ -97,8 +101,16 @@ var getFileMenuData = function() {
                 accelerator: 'CmdOrCtrl+O',
                 click: functionNotImplemented
             }, {
-                label: 'Save as',
+                label: 'Save Blocks as',
                 accelerator: 'CmdOrCtrl+S',
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.saveXmlFile()");
+                }
+            }, {
+                label: 'Save Arduino Sketch as',
+                accelerator: 'Shift+CmdOrCtrl+S',
                 click: functionNotImplemented
             }
         ]
@@ -139,15 +151,43 @@ var getEditMenuData = function() {
             }, {
                 label: 'Cut',
                 accelerator: 'CmdOrCtrl+X',
-                click: functionNotImplemented
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.blocklyCut()");
+                }
             }, {
                 label: 'Copy',
                 accelerator: 'CmdOrCtrl+C',
-                click: functionNotImplemented
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.blocklyCopy()");
+                }
             }, {
                 label: 'Paste',
                 accelerator: 'CmdOrCtrl+V',
-                click: functionNotImplemented
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.blocklyPaste()");
+                }
+            }, {
+                label: 'Delete',
+                accelerator: 'Delete',
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.blocklyDelete()");
+                }
+            }, {
+                label: 'Delete All',
+                accelerator: 'Delete',
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.discard()");
+                }
             }
         ]
     };
@@ -159,8 +199,12 @@ var getEditMenuData = function() {
                 type: 'separator'
             }, {
                 label: 'Preferences',
-                //accelerator: 'CmdOrCtrl+comma',
-                click: functionNotImplemented
+                accelerator: 'CmdOrCtrl+,',
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript("ArduinoMaterial.openSettings()");
+                }
             }
         );
     }
@@ -173,14 +217,41 @@ var getExamplesMenuData = function() {
         label: 'Examples',
         submenu: [
             {
-                label: 'Example 1',
-                click: functionNotImplemented
+                label: 'Blinky',
+                click: function() {
+                     BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            'ArduinoMaterial.loadServerXmlFile("examples/' +
+                            'blink.xml");');
+                }
             }, {
-                label: 'Example 2',
-                click: functionNotImplemented
+                label: 'Print Serial',
+                click: function() {
+                     BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            'ArduinoMaterial.loadServerXmlFile("examples/' +
+                            'serial_print_ascii_.xml");');
+                }
             }, {
-                label: 'Example 3',
-                click: functionNotImplemented
+                label: 'Servo Knob',
+                click: function() {
+                     BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            'ArduinoMaterial.loadServerXmlFile("examples/' +
+                            'servo_knob.xml");');
+                }
+            }, {
+                label: 'Stepper Knob',
+                click: function() {
+                     BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            'ArduinoMaterial.loadServerXmlFile("examples/' +
+                            'stepper_knob.xml");');
+                }
             }
         ]
     };
@@ -196,11 +267,11 @@ var getProgramMenuData = function() {
                 click: functionNotImplemented
             }, {
                 label: 'Verify',
-                //accelerator: 'CmdOrCtrl+S',
+                accelerator: 'CmdOrCtrl+R',
                 click: functionNotImplemented
             }, {
                 label: 'Upload program',
-                //accelerator: 'CmdOrCtrl+S',
+                accelerator: 'CmdOrCtrl+U',
                 click: functionNotImplemented
             }
         ]
@@ -274,7 +345,7 @@ var getDevMenuData = function() {
         submenu: [
             {
                 label: 'Reload',
-                accelerator: 'CmdOrCtrl+R',
+                accelerator: 'CmdOrCtrl+F5',
                 click: function() {
                     BrowserWindow.getFocusedWindow().reloadIgnoringCache();
                 }
@@ -285,6 +356,8 @@ var getDevMenuData = function() {
                     BrowserWindow.getFocusedWindow().toggleDevTools();
                 }
             }, {
+                type: 'separator'
+            }, {
                 label: 'Stop server',
                 accelerator: 'Shift+CmdOrCtrl+S',
                 click: server.stopServer
@@ -293,6 +366,18 @@ var getDevMenuData = function() {
                 accelerator: 'Shift+CmdOrCtrl+R',
                 click: server.restartServer
             }, {
+                type: 'separator'
+            }, {
+                label: 'Open side menu',
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            "$('.button-collapse').sideNav('show')");
+                }
+            }, {
+                type: 'separator'
+            },  {
                 label: 'Test menu item',
                 click: testFunction
             }
