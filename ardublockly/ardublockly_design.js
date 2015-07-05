@@ -200,14 +200,30 @@ ArduinoMaterial.containerFullWidth = function() {
 };
 
 /**
- * Initialises the sketch name input text javascript to dynamically adjust its
+ * Initialises the sketch name input text JavaScript to dynamically adjust its
  * width to the width of its contents. 
  */
 ArduinoMaterial.sketchNameSizeEffect = function() {
   var resizeInput = function() {
-    $(this).attr('size', $(this).val().length);
+    var inputSize = ($(this).val().length > 1) ? ($(this).val().length - 1) : 1;
+    $(this).attr('size', inputSize);
   };
-  $('#sketch_name').keyup(resizeInput).each(resizeInput);
+
+  var correctInput = function() {
+    // If nothing in the input, add default name
+    if ($(this).val() == '') {
+      $(this).val('Sketch_Name');
+      $(this).attr('size', 10);
+    }
+    // Replace all spaces with underscores
+    $(this).val($(this).val().replace(/ /g, '_'));
+  };
+
+  var sketchNameInput = $('#sketch_name');
+  sketchNameInput.val('Sketch_Name');
+  sketchNameInput.attr('size', 10);
+  sketchNameInput.keyup(resizeInput).each(resizeInput);
+  sketchNameInput.blur(correctInput);
 };
 
 /**

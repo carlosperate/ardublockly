@@ -48,7 +48,7 @@ window.addEventListener('load', function load(event) {
 ArduinoMaterial.bindActionFunctions_ = function() {
   // Navigation buttons
   ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadUserXmlFile);
-  ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFile);
+  ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFileAs);
   ArduinoMaterial.bindClick_('button_delete', ArduinoMaterial.discard);
 
   // Side menu buttons, they also close the side menu
@@ -57,7 +57,7 @@ ArduinoMaterial.bindActionFunctions_ = function() {
       $('.button-collapse').sideNav('hide');
     });
   ArduinoMaterial.bindClick_('menu_save',  function() {
-      ArduinoMaterial.saveXmlFile();
+      ArduinoMaterial.saveXmlFileAs();
       $('.button-collapse').sideNav('hide');
     });
   ArduinoMaterial.bindClick_('menu_delete',  function() {
@@ -192,11 +192,25 @@ ArduinoMaterial.loadUserXmlFile = function() {
  * Creates an XML file containing the blocks from the Blockly workspace and
  * prompts the users to save it into their local file system.
  */
-ArduinoMaterial.saveXmlFile = function() {
+ArduinoMaterial.saveXmlFileAs = function() {
+  var xmlName = document.getElementById('sketch_name').value;
   var blob = new Blob(
       [ArduinoMaterial.generateXml()],
       {type: 'text/plain;charset=utf-8'});
-  saveAs(blob, 'ardublockly.xml');
+  saveAs(blob, xmlName + '.xml');
+};
+
+/**
+ * Creates an Arduino Sketch file containing the Arduino code generated from
+ * the Blockly workspace and prompts the users to save it into their local file
+ * system.
+ */
+ArduinoMaterial.saveSketchFileAs = function() {
+  var sketchName = document.getElementById('sketch_name').value;
+  var blob = new Blob(
+      [ArduinoMaterial.generateArduino()],
+      {type: 'text/plain;charset=utf-8'});
+  saveAs(blob, sketchName + '.ino');
 };
 
 /**

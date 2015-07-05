@@ -106,12 +106,17 @@ var getFileMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("ArduinoMaterial.saveXmlFile()");
+                        .executeJavaScript("ArduinoMaterial.saveXmlFileAs()");
                 }
             }, {
                 label: 'Save Arduino Sketch as',
                 accelerator: 'Shift+CmdOrCtrl+S',
-                click: functionNotImplemented
+                click:  function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            "ArduinoMaterial.saveSketchFileAs()");
+                }
             }
         ]
     };
