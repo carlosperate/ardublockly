@@ -1,0 +1,62 @@
+environment:
+  matrix:
+    # First group is 32 bit python 2.7
+    - PYTHON: "C:\\Python27"
+      PYTHON_VERSION: "2.7.9"
+      PYTHON_ARCH: "32"
+
+platform: x86
+
+configuration: Release
+
+init:
+  - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
+  - cmd: wmic OS get OSArchitecture
+
+  # As AppVeyor has multiple python install, verify which one uses by default
+  - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
+  - cmd: python --version
+  - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
+
+  # Set the relevant pip location to the path 
+  - cmd: set PATH=%PYTHON%\scripts;%PATH%
+  - cmd: ECHO Path - %PATH%
+
+install:
+  # Git clone happens between init and install 
+  - cmd: git submodule update --init --recursive
+
+  # Install python dependencies
+  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.6.10a1-cp27-none-win32.whl
+  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/cefpython3-31.2-cp27-none-win32.whl
+  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/wxPython-3.0.2.0-cp27-none-win32.whl
+  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/wxPython_common-3.0.2.0-py2-none-any.whl
+  - cmd: pip install mock
+
+  # Build Ardublockly
+  - cmd: python package\wxcef_build\build_windows_wxcef.py
+  - cmd: python package\wxcef_build\pack_ardublockly_wxcef.py
+  - cmd: dir
+
+# Not a project with an msbuild file, build done at install.
+build: off 
+
+# For now a simple test that we know passes
+test_script:
+  - cmd: python ArdublocklyServer\tests\SketchCreator_test.py
+
+# Push artifact to s3 bucket and list all
+before_deploy:
+  - ps: Get-ChildItem .\upload\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName ardublockly-s3-deployment }
+  - ps: foreach($artifactName in $artifacts.keys) { $artifacts[$artifactName] }
+
+# Deploy build to Amazon S3 bucket
+deploy:
+  name: ardublockly-s3-deployment
+  provider: S3
+  access_key_id: AKIAJYJV7NN6HVHCX5NQ
+  secret_access_key:
+    secure: PlLCQKTcf9IzBXpEnXUxbJifb0usS7qcghnM0VxBTX0IL3C975JPidrYjP39ge7P
+  bucket: ardublockly-builds
+  set_public: true
+  folder: windows

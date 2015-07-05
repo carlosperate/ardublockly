@@ -1,0 +1,23 @@
+{
+  "name": "ardublockly",
+  "productName": "Ardublockly",
+  "identifier": "com.embeddedlog.ardublockly",
+  "description": "Visual programming for Arduino",
+  "version": "0.1.0",
+  "author": "carlosperate",
+  "homepage": "http://ardublockly.embeddedlog.com/",
+  "main": "main.js",
+  "config": {
+    "target": "development"
+  },
+  "dependencies": {
+    "fs-jetpack": "^0.6.5"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/carlosperate/ardublockly.git"
+  },
+  "bugs" : {
+    "url" : "https://github.com/carlosperate/ardublockly/issues"
+  }
+}

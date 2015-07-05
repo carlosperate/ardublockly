@@ -94,7 +94,7 @@ Blockly.Block.prototype.fill = function(workspace, prototypeName) {
   this.nextConnection = null;
   this.previousConnection = null;
   this.inputList = [];
-  this.inputsInline = false;
+  this.inputsInline = undefined;
   this.rendered = false;
   this.disabled = false;
   this.tooltip = '';
@@ -127,6 +127,8 @@ Blockly.Block.prototype.fill = function(workspace, prototypeName) {
   if (goog.isFunction(this.init)) {
     this.init();
   }
+  // Record initial inline state.
+  this.inputsInlineDefault = this.inputsInline;
 };
 
 /**
@@ -763,6 +765,33 @@ Blockly.Block.prototype.setInputsInline = function(newBoolean) {
 };
 
 /**
+ * Get whether value inputs are arranged horizontally or vertically.
+ * @return {boolean} True if inputs are horizontal.
+ */
+Blockly.Block.prototype.getInputsInline = function() {
+  if (this.inputsInline != undefined) {
+    // Set explicitly.
+    return this.inputsInline;
+  }
+  // Not defined explicitly.  Figure out what would look best.
+  for (var i = 1; i < this.inputList.length; i++) {
+    if (this.inputList[i - 1].type == Blockly.DUMMY_INPUT &&
+        this.inputList[i].type == Blockly.DUMMY_INPUT) {
+      // Two dummy inputs in a row.  Don't inline them.
+      return false;
+    }
+  }
+  for (var i = 1; i < this.inputList.length; i++) {
+    if (this.inputList[i - 1].type == Blockly.INPUT_VALUE &&
+        this.inputList[i].type == Blockly.DUMMY_INPUT) {
+      // Dummy input after a value input.  Inline them.
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
  * Set whether the block is disabled or not.
  * @param {boolean} disabled True if disabled.
  */
@@ -868,118 +897,146 @@ Blockly.Block.prototype.appendDummyInput = function(opt_name) {
 };
 
 /**
- * Interpolate a message string, creating fields and inputs.
- * @param {string} msg The message string to parse.  %1, %2, etc. are symbols
- *     for value inputs or for Fields, such as an instance of
- *     Blockly.FieldDropdown, which would be placed as a field in either the
- *     following value input or a dummy input.  The newline character forces
- *     the creation of an unnamed dummy input if any fields need placement.
- *     Note that '%10' would be interpreted as a reference to the tenth
- *     argument.  To show the first argument followed by a zero, use '%1 0'.
- *     (Spaces around tokens are stripped.)  To display a percentage sign
- *     followed by a number (e.g., "%123"), put that text in a
- *     Blockly.FieldLabel (as described below).
- * @param {!Array.<?string|number|Array.<string>|Blockly.Field>|number} var_args
- *     A series of tuples that each specify the value inputs to create.  Each
- *     tuple has at least two elements.  The first is its name; the second is
- *     its type, which can be any of:
- *     - A string (such as 'Number'), denoting the one type allowed in the
- *       corresponding socket.
- *     - An array of strings (such as ['Number', 'List']), denoting the
- *       different types allowed in the corresponding socket.
- *     - null, denoting that any type is allowed in the corresponding socket.
- *     - Blockly.Field, in which case that field instance, such as an
- *       instance of Blockly.FieldDropdown, appears (instead of a socket).
- *     If the type is any of the first three options (which are legal arguments
- *     to setCheck()), there should be a third element in the tuple, giving its
- *     alignment.
- *     The final parameter is not a tuple, but just an alignment for any
- *     trailing dummy inputs.  This last parameter is mandatory; there may be
- *     any number of tuples (though the number of tuples must match the symbols
- *     in msg).
+ * Initialize this block using a cross-platform, internationalization-friendly
+ * JSON description.
+ * @param {!Object} json Structured data describing the block.
  */
-Blockly.Block.prototype.interpolateMsg = function(msg, var_args) {
-  /**
-   * Add a field to this input.
-   * @this !Blockly.Input
-   * @param {Blockly.Field|Array.<string|Blockly.Field>} field
-   *     This is either a Field or a tuple of a name and a Field.
-   */
-  function addFieldToInput(field) {
-    if (field instanceof Blockly.Field) {
-      this.appendField(field);
+Blockly.Block.prototype.jsonInit = function(json) {
+  // Validate inputs.
+  goog.asserts.assertString(json['message'], 'No message.');
+  goog.asserts.assertArray(json['args'], 'No args.');
+  goog.asserts.assert(json['output'] == undefined ||
+      json['previousStatement'] == undefined,
+      'Must not have both an output and a previousStatement.');
+
+  // Set basic properties of block.
+  this.setColour(json['colour']);
+
+  // Parse the message and interpolate the arguments.
+  // Build a list of elements.
+  var tokens = json['message'].split(/(%\d+)/);
+  var indexDup = [];
+  var indexCount = 0;
+  var elements = [];
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i];
+    if (token.match(/^%\d+$/)) {
+      var index = parseInt(token.substring(1), 10);
+      goog.asserts.assert(index > 0 && index <= json['args'].length,
+          'Message index "%s" out of range.', token);
+      goog.asserts.assert(!indexDup[index],
+          'Message index "%s" duplicated.', token);
+      indexDup[index] = true;
+      indexCount++;
+      elements.push(json['args'][index - 1]);
     } else {
-      goog.asserts.assert(goog.isArray(field));
-      this.appendField(field[1], field[0]);
-    }
-  }
-
-  // Validate the msg at the start and the dummy alignment at the end,
-  // and remove the latter.
-  goog.asserts.assertString(msg);
-  var dummyAlign = arguments[arguments.length - 1];
-  goog.asserts.assert(
-      dummyAlign === Blockly.ALIGN_LEFT ||
-      dummyAlign === Blockly.ALIGN_CENTRE ||
-      dummyAlign === Blockly.ALIGN_RIGHT,
-      'Illegal final argument "%d" is not an alignment.', dummyAlign);
-  arguments.length = arguments.length - 1;
-
-  var tokens = msg.split(this.interpolateMsg.SPLIT_REGEX_);
-  var fields = [];
-  for (var i = 0; i < tokens.length; i += 2) {
-    var text = goog.string.trim(tokens[i]);
-    var input = undefined;
-    if (text) {
-      fields.push(new Blockly.FieldLabel(text));
-    }
-    var symbol = tokens[i + 1];
-    if (symbol && symbol.charAt(0) == '%') {
-      // Numeric field.
-      var number = parseInt(symbol.substring(1), 10);
-      var tuple = arguments[number];
-      goog.asserts.assertArray(tuple,
-          'Message symbol "%s" is out of range.', symbol);
-      goog.asserts.assertArray(tuple,
-          'Argument "%s" is not a tuple.', symbol);
-      if (tuple[1] instanceof Blockly.Field) {
-        fields.push([tuple[0], tuple[1]]);
-      } else {
-        input = this.appendValueInput(tuple[0])
-            .setCheck(tuple[1])
-            .setAlign(tuple[2]);
+      token = token.replace(/%%/g, '%').trim();
+      if (token) {
+        elements.push(token);
       }
-      arguments[number] = null;  // Inputs may not be reused.
-    } else if (symbol == '\n' && fields.length) {
-      // Create a dummy input.
-      input = this.appendDummyInput();
-    }
-    // If we just added an input, hang any pending fields on it.
-    if (input && fields.length) {
-      fields.forEach(addFieldToInput, input);
-      fields = [];
     }
   }
-  // If any fields remain, create a trailing dummy input.
-  if (fields.length) {
-    var input = this.appendDummyInput()
-        .setAlign(dummyAlign);
-    fields.forEach(addFieldToInput, input);
+  goog.asserts.assert(indexCount == json['args'].length,
+      'Message does not reference all %s arg(s).', json['args'].length);
+  // Add last dummy input if needed.
+  if (elements.length && (typeof elements[elements.length - 1] == 'string' ||
+      elements[elements.length - 1]['type'].indexOf('field_') == 0)) {
+    var input = {type: 'input_dummy'};
+    if (json['lastDummyAlign']) {
+      input['align'] = json['lastDummyAlign'];
+    }
+    elements.push(input);
+  }
+  // Lookup of alignment constants.
+  var alignmentLookup = {
+    'LEFT': Blockly.ALIGN_LEFT,
+    'RIGHT': Blockly.ALIGN_RIGHT,
+    'CENTRE': Blockly.ALIGN_CENTRE
+  };
+  // Populate block with inputs and fields.
+  var fieldStack = [];
+  for (var i = 0; i < elements.length; i++) {
+    var element = elements[i];
+    if (typeof element == 'string') {
+      fieldStack.push([element, undefined]);
+    } else {
+      var field = null;
+      var input = null;
+      switch (element['type']) {
+        case 'field_label':
+          field = new Blockly.FieldLabel(element['text']);
+          break;
+        case 'field_input':
+          field = new Blockly.FieldTextInput(element['text']);
+          break;
+        case 'field_angle':
+          field = new Blockly.FieldAngle(element['angle']);
+          break;
+        case 'field_checkbox':
+          field = new Blockly.FieldCheckbox(
+              element['checked'] ? 'TRUE' : 'FALSE');
+          break;
+        case 'field_colour':
+          field = new Blockly.FieldColour(element['colour']);
+          break;
+        case 'field_date':
+          field = new Blockly.FieldDate(element['date']);
+          break;
+        case 'field_variable':
+          field = new Blockly.FieldVariable(element['variable']);
+          break;
+        case 'field_dropdown':
+          field = new Blockly.FieldDropdown(element['options']);
+          break;
+        case 'field_image':
+          field = new Blockly.FieldImage(element['src'],
+              element['width'], element['height'], element['alt']);
+          break;
+        case 'input_value':
+          input = this.appendValueInput(element['name']);
+          break;
+        case 'input_statement':
+          input = this.appendStatementInput(element['name']);
+          break;
+        case 'input_dummy':
+          input = this.appendDummyInput(element['name']);
+          break;
+        default:
+          throw 'Unknown element type: ' + element['type'];
+      }
+      if (field) {
+        fieldStack.push([field, element['name']]);
+      } else if (input) {
+        if (element['check']) {
+          input.setCheck(element['check']);
+        }
+        if (element['align']) {
+          input.setAlign(alignmentLookup[element['align']]);
+        }
+        for (var j = 0; j < fieldStack.length; j++) {
+          input.appendField(fieldStack[j][0], fieldStack[j][1]);
+        }
+        fieldStack.length = 0;
+      }
+    }
   }
 
-  // Verify that all inputs were used.
-  for (var i = 1; i < arguments.length - 1; i++) {
-    goog.asserts.assert(arguments[i] === null,
-        'Input "%%s" not used in message: "%s"', i, msg);
+  if (json['inputsInline'] !== undefined) {
+    this.setInputsInline(json['inputsInline']);
   }
-  // Make the inputs inline unless there is only one input and
-  // no text follows it.
-  this.setInputsInline(!msg.match(this.interpolateMsg.INLINE_REGEX_));
+  // Set output and previous/next connections.
+  if (json['output'] !== undefined) {
+    this.setOutput(true, json['output']);
+  }
+  if (json['previousStatement'] !== undefined) {
+    this.setPreviousStatement(true, json['previousStatement']);
+  }
+  if (json['nextStatement'] !== undefined) {
+    this.setNextStatement(true, json['nextStatement']);
+  }
+  this.setTooltip(json['tooltip']);
+  this.setHelpUrl(json['helpUrl']);
 };
-
-Blockly.Block.prototype.interpolateMsg.SPLIT_REGEX_ = /(%\d+|\n)/;
-Blockly.Block.prototype.interpolateMsg.INLINE_REGEX_ = /%1\s*$/;
-
 
 /**
  * Add a value input, statement input or local variable to this block.

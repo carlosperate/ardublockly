@@ -1,0 +1,64 @@
+# Customize the test machine
+machine:
+  timezone:
+    Europe/London
+
+  # Indicating node also offers advantage of bypassing virtual environments
+  node:
+    version: 0.12.4
+
+  # Override /etc/hosts
+  hosts:
+    circlehost: 127.0.0.1
+    dev.mycompany.com: 127.0.0.1
+
+# Customize checkout
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init --recursive
+
+# Customize dependencies
+dependencies:
+  pre:
+    #- sudo apt-get update -qq
+
+    # OS extra info
+    - uname -a
+    - ldd --version
+    - python --version
+    - python -c "import struct; print(struct.calcsize('P') * 8)"
+
+    # Install tkinker and mock
+    - sudo apt-get install -y python-support
+    - sudo apt-get install python-tk
+    - sudo pip install mock
+
+    # Install node.js
+    - curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+    - sudo apt-get install -y nodejs
+    - node --version
+    - npm --version
+
+    # Install AWS command line tool
+    - sudo pip install awscli
+
+  override:
+    # Build and pack
+    - python package/build_pyinstaller.py linux
+    - cd package/electron && npm install
+    - cd package/electron && npm run release
+    - python package/pack_ardublockly.py
+
+    # Get the releases files into the AWS S3 bucket
+    - export AWS_DEFAULT_REGION=us-west-2 && cd releases && for entry in *; do aws s3 cp $entry s3://ardublockly-builds/linux/$entry; done
+
+# Customize test commands
+test:
+  override:
+    - python ardublocklyserver/tests/sketchcreator_test.py
+    - python ardublocklyserver/tests/compilersettings_test.py
+
+general:
+  artifacts:
+    - "releases/*"

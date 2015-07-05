@@ -241,7 +241,8 @@ Blockly.isTargetInput_ = function(e) {
   return e.target.type == 'textarea' || e.target.type == 'text' ||
          e.target.type == 'number' || e.target.type == 'email' ||
          e.target.type == 'password' || e.target.type == 'search' ||
-         e.target.type == 'tel' || e.target.type == 'url';
+         e.target.type == 'tel' || e.target.type == 'url' ||
+         e.target.isContentEditable;
 };
 
 /**
@@ -271,9 +272,9 @@ Blockly.getRelativeXY_ = function(element) {
   var r = transform &&
           transform.match(/translate\(\s*([-\d.]+)([ ,]\s*([-\d.]+)\s*\))?/);
   if (r) {
-    xy.x += parseInt(r[1], 10);
+    xy.x += parseFloat(r[1]);
     if (r[3]) {
-      xy.y += parseInt(r[3], 10);
+      xy.y += parseFloat(r[3]);
     }
   }
   return xy;
@@ -339,35 +340,6 @@ Blockly.isRightButton = function(e) {
 };
 
 /**
- * Convert between HTML coordinates and SVG coordinates.
- * @param {number} x X input coordinate.
- * @param {number} y Y input coordinate.
- * @param {boolean} toSvg True to convert to SVG coordinates.
- *     False to convert to mouse/HTML coordinates.
- * @param {!Element} svg SVG element.
- * @return {!Object} Object with x and y properties in output coordinates.
- */
-Blockly.convertCoordinates = function(x, y, toSvg, svg) {
-  if (toSvg) {
-    x -= window.scrollX || window.pageXOffset;
-    y -= window.scrollY || window.pageYOffset;
-  }
-  var svgPoint = svg.createSVGPoint();
-  svgPoint.x = x;
-  svgPoint.y = y;
-  var matrix = svg.getScreenCTM();
-  if (toSvg) {
-    matrix = matrix.inverse();
-  }
-  var xy = svgPoint.matrixTransform(matrix);
-  if (!toSvg) {
-    xy.x += window.scrollX || window.pageXOffset;
-    xy.y += window.scrollY || window.pageYOffset;
-  }
-  return xy;
-};
-
-/**
  * Return the converted coordinates of the given mouse event.
  * The origin (0,0) is the top-left corner of the Blockly svg.
  * @param {!Event} e Mouse event.
@@ -375,10 +347,12 @@ Blockly.convertCoordinates = function(x, y, toSvg, svg) {
  * @return {!Object} Object with .x and .y properties.
  */
 Blockly.mouseToSvg = function(e, svg) {
-  var scrollX = window.scrollX || window.pageXOffset;
-  var scrollY = window.scrollY || window.pageYOffset;
-  return Blockly.convertCoordinates(e.clientX + scrollX,
-                                    e.clientY + scrollY, true, svg);
+  var svgPoint = svg.createSVGPoint();
+  svgPoint.x = e.clientX;
+  svgPoint.y = e.clientY;
+  var matrix = svg.getScreenCTM();
+  matrix = matrix.inverse();
+  return svgPoint.matrixTransform(matrix);
 };
 
 /**

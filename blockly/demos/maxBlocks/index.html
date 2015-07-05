@@ -79,8 +79,10 @@
   </xml>
 
   <script>
-    var workspace = Blockly.inject(document.getElementById('blocklyDiv'),
-        {maxBlocks: 5, toolbox: document.getElementById('toolbox')});
+    var workspace = Blockly.inject('blocklyDiv',
+        {media: '../../media/',
+         maxBlocks: 5,
+         toolbox: document.getElementById('toolbox')});
 
     function onchange() {
       document.getElementById('capacity').innerHTML = workspace.remainingCapacity();

@@ -29,6 +29,9 @@ goog.provide('Blockly.Blocks.texts');
 goog.require('Blockly.Blocks');
 
 
+/**
+ * Common HSV hue for all blocks in this category.
+ */
 Blockly.Blocks.texts.HUE = 160;
 
 Blockly.Blocks['text'] = {
@@ -55,9 +58,9 @@ Blockly.Blocks['text'] = {
    */
   newQuote_: function(open) {
     if (open == this.RTL) {
-      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAA0UlEQVQY023QP0oDURSF8e8MImhlUIiCjWKhrUUK3YCIVkq6bMAF2LkCa8ENWLoNS1sLEQKprMQ/GBDks3kDM+Oc8nfPfTxuANQTYBeYAvdJLL4FnAFfwF2ST9Rz27kp5YH/kwrYp50LdaXHAU4rYNYzWAdeenx7AbgF5sAhcARsAkkyVQ+ACbAKjIGqta4+l78udXxc/LiJG+qvet0pV+q7+tHE+iJzdbGz8FhmOzVcqj/qq7rcKI7Ut1Leq70C1oCrJMMk343HB8ADMEzyVOMff72l48gwfqkAAAAASUVORK5CYII=';
+      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAqUlEQVQI1z3KvUpCcRiA8ef9E4JNHhI0aFEacm1o0BsI0Slx8wa8gLauoDnoBhq7DcfWhggONDmJJgqCPA7neJ7p934EOOKOnM8Q7PDElo/4x4lFb2DmuUjcUzS3URnGib9qaPNbuXvBO3sGPHJDRG6fGVdMSeWDP2q99FQdFrz26Gu5Tq7dFMzUvbXy8KXeAj57cOklgA+u1B5AoslLtGIHQMaCVnwDnADZIFIrXsoXrgAAAABJRU5ErkJggg==';
     } else {
-      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAYAAACALL/6AAAAvklEQVQY022PoapCQRRF97lBVDRYhBcEQcP1BwS/QLAqr7xitZn0HzRr8Rts+htmQdCqSbQIwmMZPMIw3lVmZu0zG44UAFSBLdBVBDAFZqFo8eYKtANfBC7AE5h8ZNOHd1FrDnh4VgmDO3ADkujDHPgHfkLZ84bfaLjg/hD6RFLq9z6wBDr+rvuZB1bAEDABY76pA2mGHyWSjvqmIemc4WsCLKOp4nssIj8wD8qS/iSVJK3N7OTeJPV9n72ZbV7iDuSc2BaQBQAAAABJRU5ErkJggg==';
+      var file = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAKCAQAAAAqJXdxAAAAn0lEQVQI1z3OMa5BURSF4f/cQhAKjUQhuQmFNwGJEUi0RKN5rU7FHKhpjEH3TEMtkdBSCY1EIv8r7nFX9e29V7EBAOvu7RPjwmWGH/VuF8CyN9/OAdvqIXYLvtRaNjx9mMTDyo+NjAN1HNcl9ZQ5oQMM3dgDUqDo1l8DzvwmtZN7mnD+PkmLa+4mhrxVA9fRowBWmVBhFy5gYEjKMfz9AylsaRRgGzvZAAAAAElFTkSuQmCC';
     }
     return new Blockly.FieldImage(file, 12, 12, '"');
   },
@@ -311,15 +314,20 @@ Blockly.Blocks['text_length'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setHelpUrl(Blockly.Msg.TEXT_LENGTH_HELPURL);
-    this.setColour(Blockly.Blocks.texts.HUE);
-    this.interpolateMsg(Blockly.Msg.TEXT_LENGTH_TITLE,
-                        ['VALUE',
-                         [Blockly.StaticTyping.blocklyType.TEXT, 'Array'],
-                         Blockly.ALIGN_RIGHT],
-                        Blockly.ALIGN_RIGHT);
-    this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
-    this.setTooltip(Blockly.Msg.TEXT_LENGTH_TOOLTIP);
+    this.jsonInit({
+      "message": Blockly.Msg.TEXT_LENGTH_TITLE,
+      "args": [
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "check": [Blockly.StaticTyping.blocklyType.TEXT, 'Array']
+        }
+      ],
+      "output": Blockly.StaticTyping.blocklyType.NUMBER,
+      "colour": Blockly.Blocks.texts.HUE,
+      "tooltip": Blockly.Msg.TEXT_LENGTH_TOOLTIP,
+      "helpUrl": Blockly.Msg.TEXT_LENGTH_HELPURL
+    });
   },
   /**
    * Assigns a type to the block, length always returns an integer number.
@@ -335,15 +343,20 @@ Blockly.Blocks['text_isEmpty'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setHelpUrl(Blockly.Msg.TEXT_ISEMPTY_HELPURL);
-    this.setColour(Blockly.Blocks.texts.HUE);
-    this.interpolateMsg(Blockly.Msg.TEXT_ISEMPTY_TITLE,
-                        ['VALUE',
-                         [Blockly.StaticTyping.blocklyType.TEXT, 'Array'],
-                         Blockly.ALIGN_RIGHT],
-                        Blockly.ALIGN_RIGHT);
-    this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
-    this.setTooltip(Blockly.Msg.TEXT_ISEMPTY_TOOLTIP);
+    this.jsonInit({
+      "message": Blockly.Msg.TEXT_ISEMPTY_TITLE,
+      "args": [
+        {
+          "type": "input_value",
+          "name": "VALUE",
+          "check": [Blockly.StaticTyping.blocklyType.TEXT, 'Array']
+        }
+      ],
+      "output": Blockly.StaticTyping.blocklyType.BOOLEAN,
+      "colour": Blockly.Blocks.texts.HUE,
+      "tooltip": Blockly.Msg.TEXT_ISEMPTY_TOOLTIP,
+      "helpUrl": Blockly.Msg.TEXT_ISEMPTY_HELPURL
+    });
   },
   /**
    * Assigns a type to the block, empty check always returns a boolean.
@@ -623,14 +636,20 @@ Blockly.Blocks['text_print'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setHelpUrl(Blockly.Msg.TEXT_PRINT_HELPURL);
-    this.setColour(Blockly.Blocks.texts.HUE);
-    this.interpolateMsg(Blockly.Msg.TEXT_PRINT_TITLE,
-                        ['TEXT', null, Blockly.ALIGN_RIGHT],
-                        Blockly.ALIGN_RIGHT);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    this.setTooltip(Blockly.Msg.TEXT_PRINT_TOOLTIP);
+    this.jsonInit({
+      "message": Blockly.Msg.TEXT_PRINT_TITLE,
+      "args": [
+        {
+          "type": "input_value",
+          "name": "TEXT"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Blocks.texts.HUE,
+      "tooltip": Blockly.Msg.TEXT_PRINT_TOOLTIP,
+      "helpUrl": Blockly.Msg.TEXT_PRINT_HELPURL
+    });
   }
 };
 

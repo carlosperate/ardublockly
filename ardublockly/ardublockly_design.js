@@ -12,6 +12,16 @@
  */
 var ArduinoMaterial = ArduinoMaterial || {};
 
+
+/**
+ * Initialises all the design related JavaScript.
+ */
+ArduinoMaterial.designJsInit = function() {
+  ArduinoMaterial.materializeJsInit();
+  ArduinoMaterial.resizeToggleToolboxBotton();
+  ArduinoMaterial.sketchNameSizeEffect();
+};
+
 /**
  * Initialises the js/jQuery required for the materialize framework.
  */
@@ -28,8 +38,8 @@ ArduinoMaterial.materializeJsInit = function() {
     $('.modal-trigger').leanModal({
       dismissible: true,
       opacity: .5,
-      in_duration: 300,
-      out_duration: 200
+      in_duration: 200,
+      out_duration: 250
      });
     // Pop-up tool tips
     $('.tooltipped').tooltip({'delay': 50});
@@ -39,7 +49,8 @@ ArduinoMaterial.materializeJsInit = function() {
 };
 
 /**
- * Resizes the container for Blockly and forces a re-render of the SVG. 
+ * Sets the spinner around the play button ON or OFF.
+ * @param {!boolean} active True turns ON the spinner, false OFF.
  */
 ArduinoMaterial.runButtonSpinner = function(active) {
   var spinner = document.getElementById('button_run_spinner');
@@ -55,10 +66,10 @@ ArduinoMaterial.runButtonSpinner = function(active) {
 };
 
 /**
- * Displays or hides the 'load textarea xml' button.
+ * Displays or hides the 'load textarea xml' button based on the state of the
+ * collapsible 'xml_collapsible_body'.
  */
 ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
-  //var xmlButton = document.getElementById('button_load_xml');
   var xmlButtonBody = document.getElementById('xml_collapsible_body');
   // Waiting to check status due to the animation delay
   setTimeout(function() {
@@ -71,23 +82,23 @@ ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
 };
 
 /**
- * Sets the class and content of the toolbox On and Off button.
+ * Sets the class and content of the toolbox View and Hide button.
  * @param {!boolean} toolboxVisible Indicates if the toolbox visibility.
  */
 ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
   var toolboxButton = document.getElementById('button_toggle_toolbox');
   var toolboxButtonIcon = document.getElementById('button_toggle_toolbox_icon');
-  // Element conatins several classes, use replace to maintain the rest
+  // Element contains several classes, use replace to maintain the rest
   if (toolboxVisible == true) {
     toolboxButton.className = toolboxButton.className.replace(
-      'button_toggle_toolbox_on', 'button_toggle_toolbox_off'); 
+        'button_toggle_toolbox_on', 'button_toggle_toolbox_off'); 
     toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
-     'mdi-action-visibility', 'mdi-action-visibility-off');
+       'mdi-action-visibility', 'mdi-action-visibility-off');
   } else {
     toolboxButton.className = toolboxButton.className.replace(
-      'button_toggle_toolbox_off', 'button_toggle_toolbox_on'); 
+        'button_toggle_toolbox_off', 'button_toggle_toolbox_on'); 
     toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
-     'mdi-action-visibility-off', 'mdi-action-visibility');
+        'mdi-action-visibility-off', 'mdi-action-visibility');
   }
 };
 
@@ -109,17 +120,26 @@ ArduinoMaterial.resizeBlocklyWorkspace = function() {
   contentBlocks.style.width = wrapperPanelSize.width + 'px';
   contentBlocks.style.width =
       (2 * wrapperPanelSize.width - contentBlocks.offsetWidth) + 'px';
+};
 
-  //Blockly.MsvgResize();
-  //Blockly.mainWorkspace.render();
-  //alert(
-  //  'resized ' + wrapperPanelSize.width + ' ' + contentBlocks.style.width);
-
-  // Sets the toolbox toggle button width to that of the toolbox
-  if ( ArduinoMaterial.isToolboxVisible() &&
-       Blockly.mainWorkspace.toolbox_.width ) {
-    // For some reason normal set style and getElementById didn't work
-    $('#button_toggle_toolbox').width(Blockly.mainWorkspace.toolbox_.width);
+/**
+ * Resizes the toolbox button to toggle its visibility to the width of the
+ * toolbox.
+ * The toolbox width does not change with workspace width, so safe to do once,
+ * but it needs to be done after blockly has been injected.
+ * @private
+ */
+ArduinoMaterial.resizeToggleToolboxBotton = function() {
+  // As the toolbox inject is asynchronous we need to wait
+  if (ArduinoMaterial.BLOCKLY_INJECTED == false) {
+    setTimeout(ArduinoMaterial.resizeToggleToolboxBotton, 50);
+  } else {
+    // Sets the toolbox toggle button width to that of the toolbox
+    if ( ArduinoMaterial.isToolboxVisible() &&
+         ArduinoMaterial.workspace.toolbox_.width ) {
+      // For some reason normal set style and getElementById didn't work
+      $('#button_toggle_toolbox').width(ArduinoMaterial.workspace.toolbox_.width);
+    }
   }
 };
 
@@ -159,6 +179,51 @@ ArduinoMaterial.arduinoIdeModal = function(bodyEl) {
   $('#arduino_dialog_body').append(bodyEl);
   $('#arduino_dialog').openModal();
   window.location.hash = '';
+};
+
+/**
+ * Hides the side menu button.
+ */
+ArduinoMaterial.hideSideMenuButton = function() {
+  var sideMenuButton = document.getElementById('button-collapse');
+  sideMenuButton.style.display = 'none';
+};
+
+/**
+ * Sets all the elements using the container class to have a width of 100%.
+ */
+ArduinoMaterial.containerFullWidth = function() {
+  var containers = $('.container');
+  for (var i = 0; i < containers.length; i++) {
+    containers[i].style.width = '100%';
+  }
+};
+
+/**
+ * Initialises the sketch name input text JavaScript to dynamically adjust its
+ * width to the width of its contents. 
+ */
+ArduinoMaterial.sketchNameSizeEffect = function() {
+  var resizeInput = function() {
+    var inputSize = ($(this).val().length > 1) ? ($(this).val().length - 1) : 1;
+    $(this).attr('size', inputSize);
+  };
+
+  var correctInput = function() {
+    // If nothing in the input, add default name
+    if ($(this).val() == '') {
+      $(this).val('Sketch_Name');
+      $(this).attr('size', 10);
+    }
+    // Replace all spaces with underscores
+    $(this).val($(this).val().replace(/ /g, '_'));
+  };
+
+  var sketchNameInput = $('#sketch_name');
+  sketchNameInput.val('Sketch_Name');
+  sketchNameInput.attr('size', 10);
+  sketchNameInput.keyup(resizeInput).each(resizeInput);
+  sketchNameInput.blur(correctInput);
 };
 
 /**

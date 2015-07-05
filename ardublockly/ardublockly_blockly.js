@@ -12,6 +12,12 @@
 var ArduinoMaterial = ArduinoMaterial || {};
 
 /**
+ * Blockly's main workspace.
+ * @type Blockly.WorkspaceSvg
+ */
+ArduinoMaterial.workspace = null;
+
+/**
  * Public variable that indicates if Blockly has been injected.
  * @type {!boolean}
  */
@@ -37,7 +43,7 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
     if ( (request.readyState == 4) && (request.status == 200) ) {
-      Blockly.inject(blocklyEl, {
+      ArduinoMaterial.workspace = Blockly.inject(blocklyEl, {
             collapse: true,
             comments: true,
             disable: true,
@@ -48,7 +54,7 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
             trashcan: true });
       ArduinoMaterial.BLOCKLY_INJECTED = true;
     }
-  }
+  };
 
   // If file run locally Chrome will fail here
   try {
@@ -62,8 +68,8 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
  * Loads an XML file from the server and adds the blocks into the Blockly
  * workspace.
  */
-ArduinoMaterial.loadXmlBlockFile =
-    function(xmlFile, callbackFileLoaded, callbackConectonError) {
+ArduinoMaterial.loadXmlBlockFile = function(xmlFile, callbackFileLoaded, 
+    callbackConectonError) {
   // Create a an XML HTTP request
   var request = ArduinoMaterial.ajaxRequest();
 
@@ -95,7 +101,7 @@ ArduinoMaterial.loadXmlBlockFile =
  * @return {!string} Arduino code string.
  */
 ArduinoMaterial.generateArduino = function() {
-  return Blockly.Arduino.workspaceToCode();
+  return Blockly.Arduino.workspaceToCode(ArduinoMaterial.workspace);
 };
 
 /**
@@ -103,7 +109,7 @@ ArduinoMaterial.generateArduino = function() {
  * @return {!string} XML code string.
  */
 ArduinoMaterial.generateXml = function() {
-  var xmlDom = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace);
+  var xmlDom = Blockly.Xml.workspaceToDom(ArduinoMaterial.workspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
   return xmlText;
 };
@@ -121,7 +127,7 @@ ArduinoMaterial.replaceBlocksfromXml = function(blocksXml) {
   } catch (e) {
     return false;
   }
-  Blockly.mainWorkspace.clear();
+  ArduinoMaterial.workspace.clear();
   var sucess = false;
   if (xmlDom) {
     sucess = ArduinoMaterial.loadBlocksfromXmlDom(xmlDom);
@@ -136,7 +142,7 @@ ArduinoMaterial.replaceBlocksfromXml = function(blocksXml) {
  */
 ArduinoMaterial.loadBlocksfromXmlDom = function(blocksXmlDom) {
   try {
-    Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, blocksXmlDom);
+    Blockly.Xml.domToWorkspace(ArduinoMaterial.workspace, blocksXmlDom);
   } catch (e) {
     return false;
   }
@@ -153,15 +159,16 @@ ArduinoMaterial.loadBlocksfromXmlDom = function(blocksXmlDom) {
  */
 ArduinoMaterial.showToolbox = function(show, callback) {
   var resizeWorkspaceAndCallback = function() {
-    /* For some reason the workspace only resizes after second call */
-    //Blockly.fireUiEvent(window, 'resize');
-    //Blockly.fireUiEvent(window, 'resize');
-    //callback.call();
-  }
+    ArduinoMaterial.workspace.render(); 
+    if (callback && ((typeof callback) === (typeof Function))) {
+      callback();
+    }
+  };
+
   if (show == false) {
-    $('.blocklyToolboxDiv').slideUp(300, callback);
+    $('.blocklyToolboxDiv').slideUp(300, resizeWorkspaceAndCallback);
   } else {
-    $('.blocklyToolboxDiv').slideDown(300, callback);
+    $('.blocklyToolboxDiv').slideDown(300, resizeWorkspaceAndCallback);
   }
 };
 
@@ -169,9 +176,9 @@ ArduinoMaterial.showToolbox = function(show, callback) {
  * Discard all blocks from the workspace.
  */
 ArduinoMaterial.discard = function() {
-  var blockCount = Blockly.mainWorkspace.getAllBlocks().length;
+  var blockCount = ArduinoMaterial.workspace.getAllBlocks().length;
   if (blockCount == 1) {
-    Blockly.mainWorkspace.clear();
+    ArduinoMaterial.workspace.clear();
     ArduinoMaterial.renderContent();
   } else if (blockCount > 1) {
     ArduinoMaterial.materialAlert(
@@ -180,15 +187,61 @@ ArduinoMaterial.discard = function() {
         sure you want to delete them?',
         true,
         function() {
-          Blockly.mainWorkspace.clear();
+          ArduinoMaterial.workspace.clear();
           ArduinoMaterial.renderContent();
         });
   }
 };
 
 /**
- * Creates an AJAX request 
- * @return An XML HTTP Request
+ * Checks if Blockly is currently dragging a block.
+ */
+ArduinoMaterial.blocklyIsDragging = function() {
+  if (Blockly.dragMode_ != 0) {
+    return true;
+  }
+  return false;
+};
+
+/**
+ * Wraps the blockly 'cut' functionality.
+ */
+ArduinoMaterial.blocklyCut = function() {
+  Blockly.copy_(Blockly.selected);
+  Blockly.selected.dispose(true, true);
+};
+
+/**
+ * Wraps the blockly 'copy' functionality.
+ */
+ArduinoMaterial.blocklyCopy = function() {
+  Blockly.hideChaff();
+  Blockly.copy_(Blockly.selected);
+};
+
+/**
+ * Wraps the blockly 'paste' functionality.
+ */
+ArduinoMaterial.blocklyPaste = function() {
+  if (Blockly.clipboardXml_) {
+    Blockly.hideChaff();
+    Blockly.clipboardSource_.paste(Blockly.clipboardXml_);
+  }
+};
+
+/**
+ * Wraps the blockly 'paste' functionality.
+ */
+ArduinoMaterial.blocklyDelete = function() {
+    if (Blockly.selected && Blockly.selected.isDeletable()) {
+      Blockly.hideChaff();
+      Blockly.selected.dispose(true, true);
+    }
+};
+
+/**
+ * Creates an AJAX request.
+ * @return An XML HTTP Request.
  */
 ArduinoMaterial.ajaxRequest = function() {
   var request;

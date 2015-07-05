@@ -34,12 +34,15 @@ goog.require('goog.userAgent');
 
 
 /**
- * Inject a Blockly editor into the specified container DIV.
- * @param {!Element} container Containing element.
+ * Inject a Blockly editor into the specified container element (usually a div).
+ * @param {!Element|string} container Containing element or its ID.
  * @param {Object} opt_options Optional dictionary of options.
  * @return {!Blockly.Workspace} Newly created main workspace.
  */
 Blockly.inject = function(container, opt_options) {
+  if (goog.isString(container)) {
+    container = document.getElementById(container);
+  }
   // Verify that the container is in document.
   if (!goog.dom.contains(document, container)) {
     throw 'Error: container is not in current document.';
@@ -153,7 +156,7 @@ Blockly.parseOptions_ = function(options) {
   } else {
     grid['length'] = parseFloat(grid['length']);
   }
-  grid['snap'] = !!grid['snap'];
+  grid['snap'] = grid['spacing'] > 0 && !!grid['snap'];
   var pathToMedia = 'https://blockly-demo.appspot.com/static/media/';
   if (options['media']) {
     pathToMedia = options['media'];
@@ -383,7 +386,7 @@ Blockly.createMainWorkspace_ = function(svg, options) {
   // The SVG is now fully assembled.
   Blockly.svgResize(mainWorkspace);
   Blockly.WidgetDiv.createDom();
-  Blockly.Tooltip.createDom()
+  Blockly.Tooltip.createDom();
   return mainWorkspace;
 };
 
@@ -486,7 +489,7 @@ Blockly.init_ = function(mainWorkspace) {
  * Modify the block tree on the existing toolbox.
  * @param {Node|string} tree DOM tree of blocks, or text representation of same.
  */
-Blockly.updateToolbox = function(tree, workspace) {
+Blockly.updateToolbox = function(tree) {
   console.warn('Deprecated call to Blockly.updateToolbox, ' +
                'use workspace.updateToolbox instead.');
   Blockly.getMainWorkspace().updateToolbox(tree);

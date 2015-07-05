@@ -18,6 +18,7 @@ $RECYCLE.BIN/
 *.komodoproject
 .idea/
 npp.session
+.editorconfig
 
 ##########
 # Python #
@@ -76,8 +77,8 @@ ServerCompilerSettings.ini
 # Anything starting with this is created as a unit/module testing temporal file
 TestTemp_*
 
-# CEF cacbe and log files
-/webcache
+# CEF cache and log files
+webcache
 cef_error.log
 cef_debug.log
 
@@ -85,9 +86,13 @@ cef_debug.log
 /ignore
 
 # Packaged python build folders and files
-/win
-/package/build
-/ardublockly_run.bat
+/build
+/upload
+/releases
+/arduexec
+/arduexec.app
+ardublockly_server_run.*
+ardublockly_run.*
 
 # The documentation is built with the GitHub wiki data
 /Documentation

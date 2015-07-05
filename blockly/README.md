@@ -6,10 +6,12 @@ https://github.com/google/blockly
 It adds the following features:
 
 * Arduino code generation
+* Arduino specific blocks
 * Static Typing
 * Code warnings
 
-This fork frequently pulls updates from upstream to maintain it up to date.
+This fork gets frequent upstream pulls to maintain it up to date.
+
 
 ## Git configuration
 
@@ -17,20 +19,24 @@ This fork is configured as a Git Subtree, this is done to be able to pull all th
 
 
 ### Pulling from upstream
+
 Adding the blockly repository as a remote and fetching latest:
+
 ```
 git remote add -f blockly https://github.com/google/blockly.git
 ```
 
 Pulling from blockly master, from the project root directory:
+
 ```
 git fetch blockly master
 git subtree pull --prefix blockly blockly master
 ```
 
-The pull all the changes into a single commit the flag `---squashed` can be added to the `subtree pull` command.
+To pull all the changes into a single commit the flag `---squashed` can be added to the `subtree pull` command.
 
 Then resolve any conflicts and push to origin.
+
 
 ## Blockly
 

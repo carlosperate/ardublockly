@@ -1,0 +1,91 @@
+## Customize the test machine
+machine:
+  timezone:
+    Europe/London
+
+  # Indicating Ruby to bypass virtual environments
+  ruby:
+    version:
+      1.8.7-p358-falcon-perf
+
+  # Override /etc/hosts
+  hosts:
+    circlehost: 127.0.0.1
+    dev.mycompany.com: 127.0.0.1
+
+## Customize checkout
+checkout:
+  post:
+    - git submodule sync
+    - git submodule update --init --recursive
+
+## Customize dependencies
+dependencies:
+  pre:
+    #- sudo apt-get update -qq
+
+    # OS extra info
+    - uname -a
+    - ldd --version
+    - python --version
+    - python -c "import struct; print(struct.calcsize('P') * 8)"
+
+    # Install wxPython and tkinker
+    - sudo apt-get install -y python-support
+    - sudo apt-get install python-tk
+    - sudo apt-get install -y python-wxgtk2.8 python-wxtools wx2.8-i18n
+    #- sudo apt-get install -y python-wxgtk3.0 python-wxtools wx3.0-i18n
+    #- sudo apt-get install -y dpkg-dev build-essential python2.7-dev
+    #- sudo apt-get install -y libjpeg-dev libtiff-dev
+    #- sudo apt-get install -y libgtk2.0-dev
+    #- sudo apt-get install -y libsdl1.2-dev libgstreamer-plugins-base0.10-dev
+    #- sudo pip install --upgrade --pre -f http://wxpython.org/Phoenix/snapshot-builds/ wxPython_Phoenix 
+
+    # Install cefpython3 (cef from official dropbox link)
+    - sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1 --directory-prefix=../
+    - sudo dpkg -i ../python-cefpython3_31.2-1_amd64.deb?dl=1
+    #- if [ ! -f ~/installers/python-cefpython3_31.2-1_amd64.deb?dl=1 ]; then sudo wget https://www.dropbox.com/sh/zar95p27yznuiv1/AACGmGx08UMq8uEGDFlINFdwa/31.2/Linux/python-cefpython3_31.2-1_amd64.deb?dl=1 --directory-prefix=~/installers/ ; fi
+    #- sudo dpkg -i ~/installers/python-cefpython3_31.2-1_amd64.deb?dl=1
+
+  override:
+    # Adding cefpython installation dir to travis-ci python paths, listed in:
+    # https://code.google.com/p/cefpython/wiki/Download_CEF3_Linux
+    - export PYTHONPATH=$PYTHONPATH:/usr/share/pyshared/
+    - export PYTHONPATH=$PYTHONPATH:/usr/lib/pymodules/python2.7/
+
+    # Build and pack
+    - python package/wxcef_build/build_pyinstaller_wxcef.py linux
+    - python package/wxcef_build/pack_ardublockly_wxcef.py
+
+    # Get the upload file as a environmenta variable
+    - cd upload
+    - for entry in *; do export ardublocklyZipFile="$entry"; done && echo $ardublocklyZipFile
+
+  # Automatically cache and restore many dependencies between builds
+  cache_directories:
+    - "~/installers"
+
+
+## Customize test commands
+test:
+  override:
+    - python ArdublocklyServer/tests/SketchCreator_test.py
+
+## Customize deployment commands
+deployment:
+  staging:
+    branch: [master, circleci]
+    codedeploy:
+      appname-1234:
+        application_root: /upload
+        region: us-west-2
+        revision_location:
+          revision_type: S3
+          s3_location:
+            bucket: ardublockly-builds
+            key_pattern: linux/ardublockly_{BUILD_NUM}_64bit_{BRANCH}_{SHORT_COMMIT}.zip
+        deployment_group: my-deployment-group
+
+general:
+  artifacts:
+    - "upload/*"

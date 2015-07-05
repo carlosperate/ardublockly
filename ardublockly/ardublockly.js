@@ -11,23 +11,33 @@
  */
 var ArduinoMaterial = ArduinoMaterial || {};
 
+
 /**
  * Initialize function for Ardublockly on page load.
  */
-window.addEventListener('load', function() {
+window.addEventListener('load', function load(event) {
+  window.removeEventListener('load', load, false);
   // Inject Blockly into content_blocks
   ArduinoMaterial.injectBlockly(
     document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
 
-  ArduinoMaterial.materializeJsInit();
-  ArduinoMaterial.bindActionFunctions_();
+  ArduinoMaterial.designJsInit();
+
   ArduinoMaterial.bindDesignEventListeners_();
+  ArduinoMaterial.bindActionFunctions_();
   ArduinoMaterial.bindBlocklyEventListeners_();
 
   // Check if not running locally (including developer's local network IP)
   if (document.location.hostname != 'localhost' &&
       document.location.hostname != '192.168.0.7') {
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
+  }
+
+  // Check if running on the Desktop app
+  if (navigator.userAgent.toLowerCase().indexOf('ardublockly') > -1) {
+    // It is, so remove container padding and side menu button
+    ArduinoMaterial.containerFullWidth();
+    ArduinoMaterial.hideSideMenuButton();
   }
 });
 
@@ -38,22 +48,26 @@ window.addEventListener('load', function() {
 ArduinoMaterial.bindActionFunctions_ = function() {
   // Navigation buttons
   ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadUserXmlFile);
-  ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFile);
+  ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFileAs);
   ArduinoMaterial.bindClick_('button_delete', ArduinoMaterial.discard);
 
   // Side menu buttons, they also close the side menu
   ArduinoMaterial.bindClick_('menu_load', function() {
       ArduinoMaterial.loadUserXmlFile();
-      $('.button-collapse').sideNav('hide'); });
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_save',  function() {
-      ArduinoMaterial.saveXmlFile();
-      $('.button-collapse').sideNav('hide'); });
+      ArduinoMaterial.saveXmlFileAs();
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_delete',  function() {
       ArduinoMaterial.discard();
-      $('.button-collapse').sideNav('hide'); });
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_settings', function() {
       ArduinoMaterial.openSettings();
-      $('.button-collapse').sideNav('hide'); });
+      $('.button-collapse').sideNav('hide');
+    });
   ArduinoMaterial.bindClick_('menu_example_1', function() {
       ArduinoMaterial.loadServerXmlFile('examples/blink.xml')});
   ArduinoMaterial.bindClick_('menu_example_2', function() {
@@ -102,7 +116,7 @@ ArduinoMaterial.bindBlocklyEventListeners_ = function() {
   if (ArduinoMaterial.BLOCKLY_INJECTED == false) {
     setTimeout(ArduinoMaterial.bindBlocklyEventListeners_, 50);
   } else {
-    Blockly.addChangeListener(ArduinoMaterial.renderContent);
+    ArduinoMaterial.workspace.addChangeListener(ArduinoMaterial.renderContent);
   }
 };
 
@@ -125,7 +139,7 @@ ArduinoMaterial.loadServerXmlFile = function(xmlFile) {
   };
 
   var callbackConnectionError = function() {
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   };
 
   ArduinoMaterial.loadXmlBlockFile(
@@ -154,15 +168,20 @@ ArduinoMaterial.loadUserXmlFile = function() {
       }
     };
     reader.readAsText(files[0]);
-  }
+  };
   // Create once invisible browse button with event listener, and click it
   var selectFile = document.getElementById('select_file');
   if (selectFile == null) {
     var selectFileDom = document.createElement('INPUT');
     selectFileDom.type = 'file';
     selectFileDom.id = 'select_file';
-    selectFileDom.style = 'display: none';
-    document.body.appendChild(selectFileDom);
+
+    var selectFileWrapperDom = document.createElement('DIV');
+    selectFileWrapperDom.id = 'select_file_wrapper';
+    selectFileWrapperDom.style.display = 'none';
+    selectFileWrapperDom.appendChild(selectFileDom);
+
+    document.body.appendChild(selectFileWrapperDom);
     selectFile = document.getElementById('select_file');
     selectFile.addEventListener('change', parseInputXMLfile, false);
   }
@@ -173,11 +192,37 @@ ArduinoMaterial.loadUserXmlFile = function() {
  * Creates an XML file containing the blocks from the Blockly workspace and
  * prompts the users to save it into their local file system.
  */
-ArduinoMaterial.saveXmlFile = function() {
+ArduinoMaterial.saveXmlFileAs = function() {
+  var xmlName = document.getElementById('sketch_name').value;
   var blob = new Blob(
       [ArduinoMaterial.generateXml()],
       {type: 'text/plain;charset=utf-8'});
-  saveAs(blob, 'ardublockly.xml');
+  saveAs(blob, xmlName + '.xml');
+};
+
+/**
+ * Creates an Arduino Sketch file containing the Arduino code generated from
+ * the Blockly workspace and prompts the users to save it into their local file
+ * system.
+ */
+ArduinoMaterial.saveSketchFileAs = function() {
+  var sketchName = document.getElementById('sketch_name').value;
+  var blob = new Blob(
+      [ArduinoMaterial.generateArduino()],
+      {type: 'text/plain;charset=utf-8'});
+  saveAs(blob, sketchName + '.ino');
+};
+
+/**
+ * Opens the modal that displays the "not connected to server" message.
+ */
+ArduinoMaterial.openNotConnectedModal = function() {
+  $('#not_running_dialog').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
 };
 
 /**
@@ -185,8 +230,13 @@ ArduinoMaterial.saveXmlFile = function() {
  */
 ArduinoMaterial.openSettings = function() {
   ArduinoMaterial.populateSettings();
-  $('#settings_dialog').openModal();
-}
+  $('#settings_dialog').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
+};
 
 /**
  * Retrieves the Settings from ArduServerCompiler and populates the form data
@@ -216,7 +266,7 @@ ArduinoMaterial.setCompilerLocationHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -233,7 +283,7 @@ ArduinoMaterial.setSketchLocationHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -258,7 +308,7 @@ ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -294,7 +344,7 @@ ArduinoMaterial.setSerialPortsHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -330,7 +380,7 @@ ArduinoMaterial.setIdeHtml = function(newEl) {
     }
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -367,7 +417,7 @@ ArduinoMaterial.sendCodeReturn = function(dataBack) {
     ArduinoMaterial.arduinoIdeModal(dataBack);
   } else {
     // If the element is Null, then Ardublockly server is not running 
-    $('#not_running_dialog').openModal();
+    ArduinoMaterial.openNotConnectedModal();
   }
 };
 
@@ -389,16 +439,47 @@ ArduinoMaterial.XmlTextareaToBlocks = function() {
 };
 
 /**
- * Populate the currently selected panel with content generated from the blocks.
+ * Private variable to save the previous version of the Arduino Code.
+ * @type {!String}
+ * @private
+ */
+ArduinoMaterial.PREVIOUS_ARDUINO_CODE_ = 
+    'void setup() {\n\n}\n\n\nvoid loop() {\n\n}';
+
+/**
+ * Populate the Arduino Code and Blocks XML panels with content generated from
+ * the blocks.
  */
 ArduinoMaterial.renderContent = function() {
-  // Render Arduino Code syntax highlighted into element
-  var arduinoContent = document.getElementById('content_arduino');
-  arduinoContent.textContent = ArduinoMaterial.generateArduino();;
-  if (typeof prettyPrintOne == 'function') {
-    var codeHtml = prettyPrintOne(arduinoContent.innerHTML, 'cpp');
-    arduinoContent.innerHTML = codeHtml;
+  // Only regenerate the code if a block is not being dragged
+  if (ArduinoMaterial.blocklyIsDragging()) {
+    return;
   }
+
+  // Render Arduino Code with latest change highlight and syntax highlighting
+  var arduinoCode = ArduinoMaterial.generateArduino();
+  if (arduinoCode !== ArduinoMaterial.PREVIOUS_ARDUINO_CODE_) {
+    var arduinoContent = document.getElementById('content_arduino');
+    if (typeof prettyPrintOne == 'function') {
+      var diff = JsDiff.diffWords(ArduinoMaterial.PREVIOUS_ARDUINO_CODE_,
+                                  arduinoCode);
+      var resultStringArray = [];
+      for (var i=0; i < diff.length; i++) {
+        if (diff[i].added) {
+          resultStringArray.push(
+            '<span class="code_highlight_new">' + diff[i].value + '</span>');
+        } else if (!diff[i].removed) {
+          resultStringArray.push(diff[i].value);
+        }
+      }
+      var codeHtml = prettyPrintOne(resultStringArray.join(''), 'cpp');
+      arduinoContent.innerHTML = codeHtml;
+    } else {
+      arduinoContent.textContent = arduinoCode;
+    }
+    ArduinoMaterial.PREVIOUS_ARDUINO_CODE_ = arduinoCode;
+  }
+
   // Generate plain XML into element
   var xmlContent = document.getElementById('content_xml');
   xmlContent.value = ArduinoMaterial.generateXml();
@@ -419,9 +500,9 @@ ArduinoMaterial.toogleToolbox = function() {
     // showToolbox() takes a callback function as its second argument
     ArduinoMaterial.showToolbox(false, 
         function() { ArduinoMaterial.showToolboxButtonState(false); });
-    Blockly.mainWorkspace.toolbox_.flyout_.hide();
+    ArduinoMaterial.workspace.toolbox_.flyout_.hide();
   } else {
-     ArduinoMaterial.showToolboxButtonState(true);
+    ArduinoMaterial.showToolboxButtonState(true);
     ArduinoMaterial.showToolbox(true);
   }
   ArduinoMaterial.TOOLBAR_SHOWING_ = !ArduinoMaterial.TOOLBAR_SHOWING_;
