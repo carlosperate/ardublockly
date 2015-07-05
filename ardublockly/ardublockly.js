@@ -439,16 +439,47 @@ ArduinoMaterial.XmlTextareaToBlocks = function() {
 };
 
 /**
- * Populate the currently selected panel with content generated from the blocks.
+ * Private variable to save the previous version of the Arduino Code.
+ * @type {!String}
+ * @private
+ */
+ArduinoMaterial.PREVIOUS_ARDUINO_CODE_ = 
+    'void setup() {\n\n}\n\n\nvoid loop() {\n\n}';
+
+/**
+ * Populate the Arduino Code and Blocks XML panels with content generated from
+ * the blocks.
  */
 ArduinoMaterial.renderContent = function() {
-  // Render Arduino Code syntax highlighted into element
-  var arduinoContent = document.getElementById('content_arduino');
-  arduinoContent.textContent = ArduinoMaterial.generateArduino();;
-  if (typeof prettyPrintOne == 'function') {
-    var codeHtml = prettyPrintOne(arduinoContent.innerHTML, 'cpp');
-    arduinoContent.innerHTML = codeHtml;
+  // Only regenerate the code if a block is not being dragged
+  if (ArduinoMaterial.blocklyIsDragging()) {
+    return;
   }
+
+  // Render Arduino Code with latest change highlight and syntax highlighting
+  var arduinoCode = ArduinoMaterial.generateArduino();
+  if (arduinoCode !== ArduinoMaterial.PREVIOUS_ARDUINO_CODE_) {
+    var arduinoContent = document.getElementById('content_arduino');
+    if (typeof prettyPrintOne == 'function') {
+      var diff = JsDiff.diffWords(ArduinoMaterial.PREVIOUS_ARDUINO_CODE_,
+                                  arduinoCode);
+      var resultStringArray = [];
+      for (var i=0; i < diff.length; i++) {
+        if (diff[i].added) {
+          resultStringArray.push(
+            '<span class="code_highlight_new">' + diff[i].value + '</span>');
+        } else if (!diff[i].removed) {
+          resultStringArray.push(diff[i].value);
+        }
+      }
+      var codeHtml = prettyPrintOne(resultStringArray.join(''), 'cpp');
+      arduinoContent.innerHTML = codeHtml;
+    } else {
+      arduinoContent.textContent = arduinoCode;
+    }
+    ArduinoMaterial.PREVIOUS_ARDUINO_CODE_ = arduinoCode;
+  }
+
   // Generate plain XML into element
   var xmlContent = document.getElementById('content_xml');
   xmlContent.value = ArduinoMaterial.generateXml();

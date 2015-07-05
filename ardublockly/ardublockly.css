@@ -40,7 +40,8 @@ body {
   background-color: #E47128;
 }
 .arduino_yellow {
-  background-color: #E5AD24;
+  background-color: rgba(255, 204, 51, 1);
+  /* background-color: #E5AD24; */
 }
 .arduino_brown {
   background-color: #8C7965;
@@ -85,6 +86,8 @@ ul.side-nav li.logo:hover {
 ul.side-nav li.side-menu-end {
   background-color: #eeeeee;
   border-radius: 0px 0px 25px 0px;
+  border-left: 4px solid #ffffff;
+  border-bottom: 4px solid #dddddd;
   border-right: 4px solid #dddddd;
   border-bottom: 4px solid #dddddd;
   line-height: 25px;
@@ -166,7 +169,7 @@ ul.side-nav li.side-menu-end {
   top: -20px;
 }
 #button_run:hover {
-  background-color: #E5AD24;
+  background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
 }
 .run_loader {
   position: absolute !important;
@@ -315,7 +318,7 @@ ul.side-nav li.side-menu-end {
 }
 
 .spinner-yellow {
-  border-color: #E5AD24;
+  border-color: rgba(255, 204, 51, 1);
 }
 .active .spinner-layer.spinner-yellow {
   /* durations: 4 * ARCTIME */
@@ -404,6 +407,12 @@ ul.side-nav li.side-menu-end {
   margin-right: 1rem;
 }
 
+.code_highlight_new {
+  background-color: rgba(255, 204, 51, 0.5); /* Arduino yellow 50% */
+}
+.code_highlight_deleted {
+  background-color: #FDBEBE;
+}
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
@@ -461,7 +470,7 @@ ul.side-nav li.side-menu-end {
   background-color: #E47128 !important;  /* arduino orange */
 }
 .blocklyTreeRow:not(.blocklyTreeSelected):hover {
-  background-color: #E5AD24 !important;  /* arduino yellow */
+  background-color: rgba(255, 204, 51, 1) !important;  /* arduino yellow */
 }
 .blocklyTreeLabel {
 }
@@ -488,13 +497,13 @@ ul.side-nav li.side-menu-end {
   stroke-width: 0px !important;
 }
 
-/* Edit select yellow colour to Arduino yellow
+/* Edit select yellow colour to Arduino yellow, seems to be that colour already
 .blocklyHighlightedConnectionPath {
-  stroke: #E5AD24 !important;
+  stroke: rgba(255, 204, 51, 1) !important;
 }
 
 .blocklySelected>.blocklyPath {
-  stroke: #E5AD24 !important;
+  stroke: rgba(255, 204, 51, 1) !important;
 }
  */
 

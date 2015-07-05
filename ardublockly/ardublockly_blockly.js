@@ -68,8 +68,8 @@ ArduinoMaterial.injectBlockly = function(blocklyEl, toolboxPath) {
  * Loads an XML file from the server and adds the blocks into the Blockly
  * workspace.
  */
-ArduinoMaterial.loadXmlBlockFile =
-    function(xmlFile, callbackFileLoaded, callbackConectonError) {
+ArduinoMaterial.loadXmlBlockFile = function(xmlFile, callbackFileLoaded, 
+    callbackConectonError) {
   // Create a an XML HTTP request
   var request = ArduinoMaterial.ajaxRequest();
 
@@ -194,7 +194,17 @@ ArduinoMaterial.discard = function() {
 };
 
 /**
- * Wraps the blockly 'cut' functionality
+ * Checks if Blockly is currently dragging a block.
+ */
+ArduinoMaterial.blocklyIsDragging = function() {
+  if (Blockly.dragMode_ != 0) {
+    return true;
+  }
+  return false;
+};
+
+/**
+ * Wraps the blockly 'cut' functionality.
  */
 ArduinoMaterial.blocklyCut = function() {
   Blockly.copy_(Blockly.selected);
@@ -202,7 +212,7 @@ ArduinoMaterial.blocklyCut = function() {
 };
 
 /**
- * Wraps the blockly 'copy' functionality
+ * Wraps the blockly 'copy' functionality.
  */
 ArduinoMaterial.blocklyCopy = function() {
   Blockly.hideChaff();
@@ -210,7 +220,7 @@ ArduinoMaterial.blocklyCopy = function() {
 };
 
 /**
- * Wraps the blockly 'paste' functionality
+ * Wraps the blockly 'paste' functionality.
  */
 ArduinoMaterial.blocklyPaste = function() {
   if (Blockly.clipboardXml_) {
@@ -220,7 +230,7 @@ ArduinoMaterial.blocklyPaste = function() {
 };
 
 /**
- * Wraps the blockly 'paste' functionality
+ * Wraps the blockly 'paste' functionality.
  */
 ArduinoMaterial.blocklyDelete = function() {
     if (Blockly.selected && Blockly.selected.isDeletable()) {
@@ -231,7 +241,7 @@ ArduinoMaterial.blocklyDelete = function() {
 
 /**
  * Creates an AJAX request.
- * @return An XML HTTP Request
+ * @return An XML HTTP Request.
  */
 ArduinoMaterial.ajaxRequest = function() {
   var request;
