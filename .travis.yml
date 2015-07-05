@@ -69,3 +69,8 @@ deploy:
   on:
     repo: carlosperate/ardublockly
     branch: [master, travisci, electron]
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
