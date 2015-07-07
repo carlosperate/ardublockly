@@ -19,8 +19,9 @@ var env = require('./vendor/electron_boilerplate/env_config');
 var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
 
 // Global reference of the window object must be maintain, or the window will
-// be closed automatically when the javascript object is garbage collected.
+// be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
+var splashWindow = null;
 
 // Preserver of the window size and position between app launches.
 var mainWindowState = windowStateKeeper('main', {
@@ -29,7 +30,7 @@ var mainWindowState = windowStateKeeper('main', {
 });
 
 app.on('ready', function () {
-    var splashWindow = createSplashWindow();
+    createSplashWindow();
 
     server.startServer();
 
@@ -49,6 +50,9 @@ app.on('ready', function () {
             'text-areas-are-resizable': false,
             'webgl': false,
             'webaudio': true,
+            'subpixel-font-scaling': true,
+            'direct-write': true,
+            //'overlay-scrollbars': true,
             'plugins': false
         }
     });
@@ -75,7 +79,10 @@ app.on('ready', function () {
 
     mainWindow.webContents.on('did-finish-load', function () {
         mainWindow.show();
-        splashWindow.close();
+        if (splashWindow !== null) {
+            splashWindow.close();
+            splashWindow = null;
+        }
     });
 
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
@@ -94,20 +101,20 @@ app.on('window-all-closed', function () {
 });
 
 function createSplashWindow() {
-    var imagePath = 'file://' + server.getProjectJetpack().path(
-        'ardublockly', 'img', 'ardublockly_splash.png');
+    if (splashWindow === null) {
+        var imagePath = 'file://' + server.getProjectJetpack().path(
+            'ardublockly', 'img', 'ardublockly_splash.png');
 
-    var splashWindow = new BrowserWindow({
-        width: 450,
-        height: 300,
-        frame: false,
-        show: true,
-        transparent: true,
-        images: true,
-        center: true,
-        'use-content-size': true
-    });
-    splashWindow.loadUrl(imagePath);
-
-    return splashWindow;
+        splashWindow = new BrowserWindow({
+            width: 450,
+            height: 300,
+            frame: false,
+            show: true,
+            transparent: true,
+            images: true,
+            center: true,
+            'use-content-size': true
+        });
+        splashWindow.loadUrl(imagePath);
+    }
 }

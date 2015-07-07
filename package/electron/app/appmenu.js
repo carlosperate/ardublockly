@@ -191,7 +191,8 @@ var getEditMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("ArduinoMaterial.discard()");
+                        .executeJavaScript(
+                            "ArduinoMaterial.discardAllBlocks()");
                 }
             }
         ]
