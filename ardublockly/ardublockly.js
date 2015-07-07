@@ -78,7 +78,12 @@ ArduinoMaterial.bindActionFunctions_ = function() {
       ArduinoMaterial.loadServerXmlFile('examples/stepper_knob.xml')});
 
   // Floating buttons
-  ArduinoMaterial.bindClick_('button_run', ArduinoMaterial.sendCode);
+  ArduinoMaterial.bindClick_('button_run',
+      ArduinoMaterial.sendCode);
+  ArduinoMaterial.bindClick_('button_verify',
+      ArduinoMaterial.functionNotImplemented);
+  ArduinoMaterial.bindClick_('button_open_ide',
+      ArduinoMaterial.functionNotImplemented);
   ArduinoMaterial.bindClick_('button_load_xml',
       ArduinoMaterial.XmlTextareaToBlocks);
   ArduinoMaterial.bindClick_(

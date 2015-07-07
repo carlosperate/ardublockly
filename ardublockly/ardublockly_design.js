@@ -29,17 +29,17 @@ ArduinoMaterial.materializeJsInit = function() {
   $(document).ready(function() {
     // Navigation bar
     $('.button-collapse').sideNav({
-      menuWidth: 240,
-      activationWidth: 70,
-      edge: 'left'});
+        menuWidth: 240,
+        activationWidth: 70,
+        edge: 'left'});
     // Drop down menus
     $('.dropdown-button').dropdown({hover: false});
     // Overlay content panels using modals (android dialogs)
     $('.modal-trigger').leanModal({
-      dismissible: true,
-      opacity: .5,
-      in_duration: 200,
-      out_duration: 250
+        dismissible: true,
+        opacity: .5,
+        in_duration: 200,
+        out_duration: 250
      });
     // Pop-up tool tips
     $('.tooltipped').tooltip({'delay': 50});
@@ -53,13 +53,23 @@ ArduinoMaterial.materializeJsInit = function() {
  * @private
  */
 ArduinoMaterial.bindDesignEventListeners_ = function() {
+  // Resize blockly workspace on window resize
   window.addEventListener(
       'resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
+  // Display/hide the XML load button when the XML collapsible header is clicked
   document.getElementById('xml_collapsible_header').addEventListener(
-    'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
+      'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
+  // Toggle the content height on click to the IDE output collapsible header
   document.getElementById('ide_output_collapsible_header').addEventListener(
-    'click', function() {
-    ArduinoMaterial.contentHeightToggle();
+      'click', function() {
+        ArduinoMaterial.contentHeightToggle();
+      });
+  // Display/hide the additional IDE buttons when mouse over/out of play button
+  $("#button_run").mouseenter(function () {
+      ArduinoMaterial.showExtraIdeButtons(true);
+  });
+  $("#ide_buttons_wrapper").mouseleave(function () {
+      ArduinoMaterial.showExtraIdeButtons(false); 
   });
 };
 
@@ -97,6 +107,39 @@ ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
 };
 
 /**
+ * Displays or hides the addition Arduino IDE action buttons.
+ * Hide/display effects done with CCS3 transitions on visibility and opacity.
+ * @param {!boolean} show Indicates if the extra buttons are to be shown.
+ */
+ArduinoMaterial.showExtraIdeButtons = function(show) {
+  var openIdeButton = document.getElementById('button_open_ide');
+  var verifyButton = document.getElementById('button_verify');
+  if (show) {
+    // prevent previously set time-out to hide buttons while trying to show them
+    clearTimeout(ArduinoMaterial.outHoldtimeoutHandle);
+    clearTimeout(ArduinoMaterial.hidetimeoutHandle);
+    verifyButton.style.visibility = 'visible';
+    verifyButton.style.opacity = '1';
+    ArduinoMaterial.showtimeoutHandle = setTimeout(function() {
+      openIdeButton.style.visibility = 'visible';
+      openIdeButton.style.opacity = '1';
+    }, 50);
+  } else {
+    // As the mouse out can be accidental, only hide them after a delay 
+    ArduinoMaterial.outHoldtimeoutHandle = setTimeout(function() {
+      // Prevent show time-out to affect the hiding of the buttons 
+      clearTimeout(ArduinoMaterial.showtimeoutHandle);
+      openIdeButton.style.visibility = 'hidden';
+      openIdeButton.style.opacity = '0';
+      ArduinoMaterial.hidetimeoutHandle = setTimeout(function() {
+        verifyButton.style.visibility = 'hidden';
+        verifyButton.style.opacity = '0';
+      }, 50);
+    }, 200);
+  }
+};
+
+/**
  * Sets the class and content of the toolbox View and Hide button.
  * @param {!boolean} toolboxVisible Indicates if the toolbox visibility.
  */
@@ -118,26 +161,6 @@ ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
 };
 
 /**
- * Resizes the container for Blockly. 
- */
-ArduinoMaterial.resizeBlocklyWorkspace = function() {
-  var contentBlocks = document.getElementById('content_blocks');
-  var wrapperPanelSize =
-      ArduinoMaterial.getBBox_(document.getElementById('blocks_panel'));
-
-  contentBlocks.style.top = wrapperPanelSize.y + 'px';
-  contentBlocks.style.left = wrapperPanelSize.x + 'px';
-  // Height and width need to be set, read back, then set again to
-  // compensate for scrollbars.
-  contentBlocks.style.height = wrapperPanelSize.height + 'px';
-  contentBlocks.style.height =
-      (2 * wrapperPanelSize.height - contentBlocks.offsetHeight) + 'px';
-  contentBlocks.style.width = wrapperPanelSize.width + 'px';
-  contentBlocks.style.width =
-      (2 * wrapperPanelSize.width - contentBlocks.offsetWidth) + 'px';
-};
-
-/**
  * Resizes the toolbox button to toggle its visibility to the width of the
  * toolbox.
  * The toolbox width does not change with workspace width, so safe to do once,
@@ -156,6 +179,26 @@ ArduinoMaterial.resizeToggleToolboxBotton = function() {
       $('#button_toggle_toolbox').width(ArduinoMaterial.workspace.toolbox_.width);
     }
   }
+};
+
+/**
+ * Resizes the container for Blockly. 
+ */
+ArduinoMaterial.resizeBlocklyWorkspace = function() {
+  var contentBlocks = document.getElementById('content_blocks');
+  var wrapperPanelSize =
+      ArduinoMaterial.getBBox_(document.getElementById('blocks_panel'));
+
+  contentBlocks.style.top = wrapperPanelSize.y + 'px';
+  contentBlocks.style.left = wrapperPanelSize.x + 'px';
+  // Height and width need to be set, read back, then set again to
+  // compensate for scrollbars.
+  contentBlocks.style.height = wrapperPanelSize.height + 'px';
+  contentBlocks.style.height =
+      (2 * wrapperPanelSize.height - contentBlocks.offsetHeight) + 'px';
+  contentBlocks.style.width = wrapperPanelSize.width + 'px';
+  contentBlocks.style.width =
+      (2 * wrapperPanelSize.width - contentBlocks.offsetWidth) + 'px';
 };
 
 /**
@@ -186,13 +229,15 @@ ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
 };
 
 /**
- * Populates the Arduino output data modal and opens it.
- * @param {!element} bodyEl HTML to include into dialog content.
+ * Populates the Arduino IDE output content area and visually highlights it
+ * to call for the user attention.
+ * @param {!element} bodyEl HTML to include into IDE output content area.
  */
 ArduinoMaterial.arduinoIdeOutput = function(bodyEl) {
-  $('#content_ide_output').text('');
-  $('#content_ide_output').append(bodyEl);
-  ArduinoMaterial.highlightIdeHeader();
+  var ideOuputContent = document.getElementById('content_ide_output');
+  ideOuputContent.innerHTML = '';
+  ideOuputContent.appendChild(bodyEl);
+  ArduinoMaterial.highlightIdeOutputHeader();
 };
 
 /**
@@ -243,7 +288,7 @@ ArduinoMaterial.sketchNameSizeEffect = function() {
 /**
  * Creates a highlight animation to the Arduino IDE output header.
  */
-ArduinoMaterial.highlightIdeHeader = function() {
+ArduinoMaterial.highlightIdeOutputHeader = function() {
   var header = document.getElementById('ide_output_collapsible_header');
   var h = 'ide_output_header_highlight';
   var n = 'ide_output_header_normal';

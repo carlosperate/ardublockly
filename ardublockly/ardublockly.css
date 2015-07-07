@@ -212,21 +212,21 @@ ul.side-nav li.side-menu-end {
   background-color: #006468;
   color: #ffffff;
   -moz-transition: background-color 0.6s ease-in;;
-  -o-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;
   -webkit-transition: background-color 0.6s ease-in;
 }
 .ide_output_header_highlight {
   background-color: #62AEB2;
   color: #ffffff;
   -moz-transition: background-color 0.6s ease-in;;
-  -o-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;
   -webkit-transition: background-color 0.6s ease-in;
 }
 .ide_output_header_error {
   background-color: #E47128;
   color: #ffffff;
   -moz-transition: background-color 0.6s ease-in;;
-  -o-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;
   -webkit-transition: background-color 0.6s ease-in;
 }
 
@@ -294,21 +294,56 @@ ul.side-nav li.side-menu-end {
 /*************/
 /*  Buttons  */
 /*************/
-#button_run {
+#ide_buttons_wrapper {
   position: absolute;
   right: 25px;
   top: -20px;
+  height: 55px;
+  width: 160px;
+  z-index: 12;
+}
+#button_run {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background-color: #E47128;  /* Arduino orange */
 }
 #button_run:hover {
   background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
 }
 .run_loader {
   position: absolute !important;
-  right: 25px !important;
-  top: -20px !important;
+  right: 0px !important;
+  top: 0px !important;
   width: 56px !important;
   height: 56px !important; 
   z-index: 5;
+}
+
+#button_verify {
+  position: absolute;
+  right: 72px;
+  top: 10px;
+  background-color: #00979C;  /* Arduino teal */
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+}
+#button_verify:hover {
+  background-color: #62AEB2;  /* Arduino teal light */
+}
+
+#button_open_ide {
+  position: absolute;
+  right: 126px;
+  top: 10px;
+  background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+}
+#button_open_ide:hover {
+  background-color: rgba(255, 220, 110, 1);  /* Lighter Arduino yellow */
 }
 
 #button_load_xml {
@@ -316,6 +351,25 @@ ul.side-nav li.side-menu-end {
   right: 36px;
   bottom: 36px;
   display: none;
+}
+
+/* These floating buttons needs to be at a higher z index than card when */
+/* floating and lower when clicked.  */
+#button_run:hover,
+#button_open_ide:hover,
+#button_verify:hover,
+#button_load_xml:hover {
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#button_run:active,
+#button_open_ide:active,
+#button_verify:active,
+#button_load_xml:active {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .button_toggle_toolbox_on {
@@ -344,6 +398,54 @@ ul.side-nav li.side-menu-end {
   top: 9px;
   text-align: center;
   z-index: 5;
+}
+
+/*************************/
+/*  New spinner colours  */
+/*************************/
+.spinner-orange {
+  border-color: #E47128;
+}
+.active .spinner-layer.spinner-orange {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-dark-teal {
+  border-color: #00878F;
+}
+.active .spinner-layer.spinner-dark-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-yellow {
+  border-color: rgba(255, 204, 51, 1);
+}
+.active .spinner-layer.spinner-yellow {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-light-teal {
+  border-color: #62AEB2;
+}
+.active .spinner-layer.spinner-light-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+
+.spinner-purple {
+  border-color: #8e24aa;
+}
+.active .spinner-layer.spinner-purple {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
 
 
@@ -400,79 +502,6 @@ ul.side-nav li.side-menu-end {
     max-width: 35% !important;
     width: 35% !important;
   }
-}
-
-
-/*******************************/
-/*  Clean 50:50 same row divs  */
-/*******************************/
-.two_halves_container {
-  width: 100%; 
-  padding: 0;
-  margin: 0;
-}
-.two_halves_left {
-  padding: 0;
-  margin: 0;
-  border: none;
-  width: 49%;
-  float: right;
-}
-.two_halves_right {
-  padding: 0;
-  margin: 0;
-  border: none;
-  width: 50%;
-  float: right;
-}
-
-
-/*************************/
-/*  New spinner colours  */
-/*************************/
-.spinner-orange {
-  border-color: #E47128;
-}
-.active .spinner-layer.spinner-orange {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-dark-teal {
-  border-color: #00878F;
-}
-.active .spinner-layer.spinner-dark-teal {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-yellow {
-  border-color: rgba(255, 204, 51, 1);
-}
-.active .spinner-layer.spinner-yellow {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-light-teal {
-  border-color: #62AEB2;
-}
-.active .spinner-layer.spinner-light-teal {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-purple {
-  border-color: #8e24aa;
-}
-.active .spinner-layer.spinner-purple {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
 
 
@@ -538,12 +567,35 @@ ul.side-nav li.side-menu-end {
   margin-right: 1rem;
 }
 
+/* Colours for the new and deleted code highlighting */
 .code_highlight_new {
   background-color: rgba(255, 204, 51, 0.5); /* Arduino yellow 50% */
 }
 .code_highlight_deleted {
   background-color: #FDBEBE;
 }
+
+/* Clean 50:50 same row divs */
+.two_halves_container {
+  width: 100%; 
+  padding: 0;
+  margin: 0;
+}
+.two_halves_left {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 49%;
+  float: right;
+}
+.two_halves_right {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 50%;
+  float: right;
+}
+
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
@@ -628,11 +680,11 @@ ul.side-nav li.side-menu-end {
   stroke-width: 0px !important;
 }
 
-/* Edit select yellow colour to Arduino yellow, seems to be that colour already
+/* Edit select yellow colour to Arduino yellow. */
+/* Edited out because it seems to be that colour already.
 .blocklyHighlightedConnectionPath {
   stroke: rgba(255, 204, 51, 1) !important;
 }
-
 .blocklySelected>.blocklyPath {
   stroke: rgba(255, 204, 51, 1) !important;
 }
@@ -732,7 +784,7 @@ ul.side-nav li ul li ul li {
   }
 } */
 
-/* Increase the size of Materialize Modal in small res */
+/* Increase the size of Materialize Modal in small resolutions */
 @media only screen and (max-width : 600px) {
   .modal {
     width: 80% !important;
@@ -752,19 +804,6 @@ ul.side-nav li ul li ul li {
 }
 #button_load_xml .mdi-action-extension {
   font-size: 2rem !important;
-}
-
-/* Button needs to be at a higher z index than */
-/* card when floating and lower when clicked.  */
-#button_run:hover {
-  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-#button_run:active {
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 /* Circle clipper (loading animation) thickness */
