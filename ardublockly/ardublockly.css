@@ -31,7 +31,8 @@ body {
   background-color: #00979C;
 }
 .arduino_teal_dark {
-  background-color: #00878F;
+  background-color: #006468;
+  /* background-color: #00878F; from community logo */
 }
 .arduino_teal_light {
   background-color: #62AEB2;
@@ -41,7 +42,8 @@ body {
 }
 .arduino_yellow {
   background-color: rgba(255, 204, 51, 1);
-  /* background-color: #E5AD24; */
+  /* background-color: #FFCC33; */
+  /* background-color: #E5AD24; from community logo */
 }
 .arduino_brown {
   background-color: #8C7965;
@@ -102,20 +104,33 @@ ul.side-nav li.side-menu-end {
   width: 100%;
   background-color: #ffffff;
 }
+.height_transition {
+  transition: height 0.2s ease-out;
+  -ms-transition: height 0.2s ease-out;
+  -moz-transition: height 0.2s ease-out;
+  -webkit-transition: height 0.2s ease-out;
+}
 
 #blocks_panel {
   padding: 0px;
-  position: relative!important;
+  position: relative !important;
   -webkit-border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   border-radius: 4px !important;
   min-height: 480px;
-  height: -moz-calc(100vh - 150px);     /* Firefox  */
-  height: -webkit-calc(100vh - 150px);  /* WebKit   */
-  height: -o-calc(100vh - 150px);       /* Opera    */
-  height: calc(100vh - 150px);          /* Standard */
 }
-
+.blocks_panel_large {
+  height: -moz-calc(100vh - 190px);     /* Firefox  */
+  height: -webkit-calc(100vh - 190px);  /* WebKit   */
+  height: -o-calc(100vh - 190px);       /* Opera    */
+  height: calc(100vh - 190px);          /* Standard */
+}
+.blocks_panel_small {
+  height: -moz-calc(100vh - 390px);     /* Firefox  */
+  height: -webkit-calc(100vh - 390px);  /* WebKit   */
+  height: -o-calc(100vh - 390px);       /* Opera    */
+  height: calc(100vh - 390px);          /* Standard */
+}
 #content_blocks {
   margin: 0;
   padding: 0;
@@ -131,11 +146,20 @@ ul.side-nav li.side-menu-end {
   overflow: scroll;
   font-style: 0.2em !important;
   min-height: 384px;
-  height: -moz-calc(100vh - 247px);     /* Firefox  */
-  height: -webkit-calc(100vh - 247px);  /* WebKit   */
-  height: -o-calc(100vh - 247px);       /* Opera    */
-  height: calc(100vh - 247px);          /* Standard */
 }
+.content_xml_large {
+  height: -moz-calc(100vh - 286px);     /* Firefox  */
+  height: -webkit-calc(100vh - 286px);  /* WebKit   */
+  height: -o-calc(100vh - 286px);       /* Opera    */
+  height: calc(100vh - 286px);          /* Standard */
+}
+.content_xml_small {
+  height: -moz-calc(100vh - 486px);     /* Firefox  */
+  height: -webkit-calc(100vh - 486px);  /* WebKit   */
+  height: -o-calc(100vh - 486px);       /* Opera    */
+  height: calc(100vh - 486px);          /* Standard */
+}
+
 
 /* The materialize framework changes height of the div to show or hide */
 /* the collapsible elements. */
@@ -147,16 +171,123 @@ ul.side-nav li.side-menu-end {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-  min-height: 388px;
-  height: -moz-calc(100vh - 243px);     /* Firefox  */
-  height: -webkit-calc(100vh - 243px);  /* WebKit   */
-  height: -o-calc(100vh - 243px);       /* Opera    */
-  height: calc(100vh - 243px);          /* Standard */
   -moz-user-select: text;
   -khtml-user-select: text;
   -webkit-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  min-height: 388px;
+}
+.content_arduino_large {
+  height: -moz-calc(100vh - 280px);     /* Firefox  */
+  height: -webkit-calc(100vh - 280px);  /* WebKit   */
+  height: -o-calc(100vh - 280px);       /* Opera    */
+  height: calc(100vh - 280px);          /* Standard */
+}
+.content_arduino_small {
+  height: -moz-calc(100vh - 480px);     /* Firefox  */
+  height: -webkit-calc(100vh - 480px);  /* WebKit   */
+  height: -o-calc(100vh - 480px);       /* Opera    */
+  height: calc(100vh - 480px);          /* Standard */
+}
+
+/****************/
+/*  IDE output  */
+/****************/
+.ide_output_wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  bottom: -16px;
+  z-index: 10;
+}
+
+.ide_output_collapsible {
+  box-shadow: 0 0px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-left: 0;
+  border-right: 0;
+}
+.ide_output_header_normal {
+  background-color: #006468;
+  color: #ffffff;
+  -moz-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;;
+  -webkit-transition: background-color 0.6s ease-in;
+}
+.ide_output_header_highlight {
+  background-color: #62AEB2;
+  color: #ffffff;
+  -moz-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;;
+  -webkit-transition: background-color 0.6s ease-in;
+}
+.ide_output_header_error {
+  background-color: #E47128;
+  color: #ffffff;
+  -moz-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;;
+  -webkit-transition: background-color 0.6s ease-in;
+}
+
+#content_ide_output {
+  resize: none;
+  outline: none;
+  border: none;
+  padding: 0px 5px;
+  font-family: monospace;
+  overflow: scroll;
+  font-style: 0.2em !important;
+  min-height: 200px;
+  max-height: 200px;
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  background-color: #303030;
+  color: #ffffff;
+}
+/* IDE output content text formatting */
+#content_ide_output .arduino_dialog_success {
+  color: #00979C;   /* arduino light teal */
+  font-size: 1.2rem;
+  margin: 16px 0px 8px 0px;
+}
+#content_ide_output .arduino_dialog_failure {
+  color: #E47128;   /* arduino orange */
+  font-size: 1.2rem;
+  margin: 16px 0px 8px 0px;
+}
+#content_ide_output .arduino_dialog_out {
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+#content_ide_output .arduino_dialog_out_error {
+  color: #E47128;   /* arduino orange */
+  font-size: 0.9rem;
+  padding-top: 8px;
+  display: block;
+}
+
+/* Spacer is used to not leave any content behind the collapsible header */
+#ide_output_spacer {
+  height: 40px;
+}
+@media only screen and (min-width: 0) {
+  #ide_output_spacer {
+    height: 20px;
+  }
+}
+@media only screen and (min-width: 601px) {
+  #ide_output_spacer {
+    height: 30px;
+  }
+}
+@media only screen and (min-width: 993px) {
+  #ide_output_spacer {
+    height: 40px;
+  }
 }
 
 

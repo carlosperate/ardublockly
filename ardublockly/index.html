@@ -7,11 +7,9 @@
   <link rel="icon" href="img/favicon.ico">
   <title>Ardublockly</title>
 
-  <!-- Materialize CSS -->
+  <!-- Materialize, Prettify, and Ardublockly CSS -->
   <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection">
-  <!-- Prettify CSS -->
   <link rel="stylesheet" href="../blockly/demos/prettify.css">
-  <!-- Ardublockly CSS -->
   <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
 
   <!-- Ardublockly - For now uncompressed files -->
@@ -53,7 +51,7 @@
 </head>
 
 <body>
-  <!-- Horizonal Navigation bar -->
+  <!-- Horizontal Navigation bar -->
   <nav class="nav-fixed arduino_teal">
     <div class="nav-wrapper container">
       <a class="button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="mdi-navigation-menu"></i>
@@ -148,30 +146,50 @@
           </div>
         </div>
         <!-- End of loader circle -->
-        <div class="card-panel white z-depth-1" id="blocks_panel">
-            <div id="content_blocks" class="content"></div>
+        <div class="card-panel white" style="padding: 0">
+          <div id="blocks_panel" class="content blocks_panel_large">
+            <div id="content_blocks" class="content z-depth-1"></div>
+          </div>
         </div>
       </div>
       <div class="col s12 m12 l4">
         <ul class="collapsible z-depth-1" data-collapsible="accordion">
           <li>
-            <div class="collapsible-header active"><span class="collapsible_logo">{ }</span>Arduino Source Code</div>
+            <div class="collapsible-header active">
+              <span class="collapsible_logo">{ }</span>Arduino Source Code
+            </div>
             <div class="collapsible-body">
-              <pre id="content_arduino" class="content"></pre>
+              <pre id="content_arduino" class="content content_height_transition content_arduino_large"></pre>
             </div>
           </li>
           <li>
-            <div class="collapsible-header" id="xml_collapsible_header"><span class="collapsible_logo">&#60; &#62;</span>Blocks XML</div>
-            <div class="collapsible-body"  style="position:relative" id="xml_collapsible_body">
+            <div class="collapsible-header" id="xml_collapsible_header">
+              <span class="collapsible_logo">&#60; &#62;</span>Blocks XML
+            </div>
+            <div class="collapsible-body" style="position:relative" id="xml_collapsible_body">
               <a class="btn-floating btn-large waves-effect waves-light arduino_teal z-depth-1-half" id="button_load_xml"><i class="mdi-action-extension"></i></a>
-              <textarea id="content_xml" class="content" wrap="soft"></textarea>
+              <textarea id="content_xml" class="content content_height_transition content_xml_large" wrap="soft"></textarea>
             </div>
           </li>
         </ul>
       </div>
-     <br><br>
     </div>
   </div>
+
+  <!-- IDE Output content -->
+  <div class="ide_output_wrapper">
+    <ul class="collapsible ide_output_collapsible" data-collapsible="expandable">
+      <li>
+        <div id="ide_output_collapsible_header" class="collapsible-header ide_output_header_normal">
+          <i class="mdi-action-swap-vert Medium" style="font-size: 2.2rem;"></i> Arduino IDE output
+        </div>
+        <div class="collapsible-body">
+          <div id="content_ide_output" class="content"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="ide_output_spacer"></div>
 
   <!-- Settings: Displayed as a Materialize Modal (android dialog) -->
   <div id="settings_dialog" class="modal modal-fixed-footer">
@@ -262,10 +280,8 @@
   <script src="js_libs/diff.js"></script>
   <!-- Prettify JS -->
   <script src="../blockly/demos/prettify.js"></script>
-  <!-- Arduino Server Compiler Ajax JS -->
-  <script src="../ardublocklyserver/js/ArduServerCompiler.js"></script>
   <!-- Ardublockly app -->
-  <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
+  <script src="ardublocklyserver_ajax.js"></script>
   <script src="ardublockly_design.js"></script>
   <script src="ardublockly_blockly.js"></script>
   <script src="ardublockly.js"></script>

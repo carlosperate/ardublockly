@@ -127,7 +127,7 @@ ArduServerCompiler.createElementFromJson = function(json_data) {
     element = document.createElement('input');
     element.setAttribute('type', 'text');
     element.setAttribute('value', parsed_json.display_text);
-  }else if (parsed_json.element == 'dropdown') {
+  } else if (parsed_json.element == 'dropdown') {
     // Drop down list of unknown length with a selected item
     element = document.createElement('select');
     element.name = parsed_json.response_type;

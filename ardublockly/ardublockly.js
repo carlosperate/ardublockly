@@ -84,7 +84,7 @@ ArduinoMaterial.bindActionFunctions_ = function() {
   ArduinoMaterial.bindClick_(
       'button_toggle_toolbox', ArduinoMaterial.toogleToolbox);
 
-  // Settings fields
+  // Settings modal input field listeners
   ArduinoMaterial.bindClick_('settings_compiler_location', function() {
     ArduServerCompiler.requestNewCompilerLocation(
         ArduinoMaterial.setCompilerLocationHtml);
@@ -93,17 +93,6 @@ ArduinoMaterial.bindActionFunctions_ = function() {
     ArduServerCompiler.requestNewSketchLocation(
         ArduinoMaterial.setSketchLocationHtml);
   });
-};
-
-/**
- * Binds the event listeners relevant to the page design.
- * @private
- */
-ArduinoMaterial.bindDesignEventListeners_ = function() {
-  window.addEventListener(
-      'resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
-  document.getElementById('xml_collapsible_header').addEventListener(
-    'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
 };
 
 /**
@@ -414,7 +403,7 @@ ArduinoMaterial.sendCode = function() {
 ArduinoMaterial.sendCodeReturn = function(dataBack) {
   ArduinoMaterial.runButtonSpinner(false);
   if (dataBack != null) {
-    ArduinoMaterial.arduinoIdeModal(dataBack);
+    ArduinoMaterial.arduinoIdeOutput(dataBack);
   } else {
     // If the element is Null, then Ardublockly server is not running 
     ArduinoMaterial.openNotConnectedModal();

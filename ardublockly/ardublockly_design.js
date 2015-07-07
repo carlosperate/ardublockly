@@ -49,6 +49,21 @@ ArduinoMaterial.materializeJsInit = function() {
 };
 
 /**
+ * Binds the event listeners relevant to the page design.
+ * @private
+ */
+ArduinoMaterial.bindDesignEventListeners_ = function() {
+  window.addEventListener(
+      'resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
+  document.getElementById('xml_collapsible_header').addEventListener(
+    'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
+  document.getElementById('ide_output_collapsible_header').addEventListener(
+    'click', function() {
+    ArduinoMaterial.contentHeightToggle();
+  });
+};
+
+/**
  * Sets the spinner around the play button ON or OFF.
  * @param {!boolean} active True turns ON the spinner, false OFF.
  */
@@ -103,7 +118,7 @@ ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
 };
 
 /**
- * Resizes the container for Blockly and forces a re-render of the SVG. 
+ * Resizes the container for Blockly. 
  */
 ArduinoMaterial.resizeBlocklyWorkspace = function() {
   var contentBlocks = document.getElementById('content_blocks');
@@ -174,11 +189,10 @@ ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
  * Populates the Arduino output data modal and opens it.
  * @param {!element} bodyEl HTML to include into dialog content.
  */
-ArduinoMaterial.arduinoIdeModal = function(bodyEl) {
-  $('#arduino_dialog_body').text('');
-  $('#arduino_dialog_body').append(bodyEl);
-  $('#arduino_dialog').openModal();
-  window.location.hash = '';
+ArduinoMaterial.arduinoIdeOutput = function(bodyEl) {
+  $('#content_ide_output').text('');
+  $('#content_ide_output').append(bodyEl);
+  ArduinoMaterial.highlightIdeHeader();
 };
 
 /**
@@ -224,6 +238,68 @@ ArduinoMaterial.sketchNameSizeEffect = function() {
   sketchNameInput.attr('size', 10);
   sketchNameInput.keyup(resizeInput).each(resizeInput);
   sketchNameInput.blur(correctInput);
+};
+
+/**
+ * Creates a highlight animation to the Arduino IDE output header.
+ */
+ArduinoMaterial.highlightIdeHeader = function() {
+  var header = document.getElementById('ide_output_collapsible_header');
+  var h = 'ide_output_header_highlight';
+  var n = 'ide_output_header_normal';
+  header.className = header.className.replace(/ide_output_header_\S+/, h);
+  setTimeout(function() {
+    header.className = header.className.replace(/ide_output_header_\S+/, n);
+    setTimeout(function() { 
+      header.className = header.className.replace(/ide_output_header_\S+/, h);
+      setTimeout(function() { 
+        header.className = header.className.replace(/ide_output_header_\S+/, n);
+      }, 500);
+    }, 500);
+  }, 500);
+};
+
+/**
+ * Controls the height of the block and collapsible content between 2 states 
+ * using CSS classes.
+ * It's state is dependent on the state of the IDE output collapsible. The
+ * collapsible functionality from Materialize framework adds the active class,
+ * so this class is consulted to shrink or expand the content height.
+ * @param {!Boolean} shrinkIt Indicates if the contents should be shrunk.
+ */
+ArduinoMaterial.contentHeightToggle = function() {
+  var outputHeader = document.getElementById('ide_output_collapsible_header');
+  var blocks = document.getElementById('blocks_panel');
+  var arduino = document.getElementById('content_arduino');
+  var xml = document.getElementById('content_xml');
+
+  // Blockly doesn't resize with CSS3 transitions enabled, so do it manually
+  var timerId = setInterval(function () {
+    Blockly.fireUiEvent(window, 'resize');
+  }, 15);
+  setTimeout(function() {
+    clearInterval(timerId);
+  }, 400);
+
+  // Apart from checking if the output is visible, do not bother to shrink in
+  // small screens as the minimum height of the content will kick in and cause
+  // the content to be behind the IDE output data anyway. 
+  if (outputHeader.className.match('active') && $(window).height() > 850) {
+    blocks.className = "content height_transition blocks_panel_small";
+    arduino.className = "content height_transition content_arduino_small";
+    xml.className = "content height_transition content_xml_small";
+  } else {
+    blocks.className = "content height_transition blocks_panel_large";
+    arduino.className = "content height_transition content_arduino_large";
+    xml.className = "content height_transition content_xml_large";
+  }
+
+  // If the height transition CSS is left then blockly does not resize
+  setTimeout(function() {
+    blocks.className = blocks.className.replace('height_transition', '');
+    arduino.className= arduino.className.replace('height_transition', '');
+    xml.className= xml.className.replace('height_transition', '');
+  }, 400);
 };
 
 /**
