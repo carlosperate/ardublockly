@@ -97,3 +97,7 @@ ardublockly_run.*
 # The documentation is built with the GitHub wiki data
 /Documentation
 package/ardublocklydocs/site
+
+# Materialize uncompress source
+/ardublockly/materialize/materialize_uncompressed.css
+/ardublockly/materialize/materialize_uncompressed.js
