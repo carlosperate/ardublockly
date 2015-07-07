@@ -23,9 +23,9 @@ window.addEventListener('load', function load(event) {
 
   ArduinoMaterial.designJsInit();
 
-  ArduinoMaterial.bindDesignEventListeners_();
+  ArduinoMaterial.bindDesignEventListeners();
   ArduinoMaterial.bindActionFunctions_();
-  ArduinoMaterial.bindBlocklyEventListeners_();
+  ArduinoMaterial.bindBlocklyEventListeners();
 
   // Check if not running locally (including developer's local network IP)
   if (document.location.hostname != 'localhost' &&
@@ -49,7 +49,7 @@ ArduinoMaterial.bindActionFunctions_ = function() {
   // Navigation buttons
   ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadUserXmlFile);
   ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFileAs);
-  ArduinoMaterial.bindClick_('button_delete', ArduinoMaterial.discard);
+  ArduinoMaterial.bindClick_('button_delete', ArduinoMaterial.discardAllBlocks);
 
   // Side menu buttons, they also close the side menu
   ArduinoMaterial.bindClick_('menu_load', function() {
@@ -61,7 +61,7 @@ ArduinoMaterial.bindActionFunctions_ = function() {
       $('.button-collapse').sideNav('hide');
     });
   ArduinoMaterial.bindClick_('menu_delete',  function() {
-      ArduinoMaterial.discard();
+      ArduinoMaterial.discardAllBlocks();
       $('.button-collapse').sideNav('hide');
     });
   ArduinoMaterial.bindClick_('menu_settings', function() {
@@ -98,20 +98,6 @@ ArduinoMaterial.bindActionFunctions_ = function() {
     ArduServerCompiler.requestNewSketchLocation(
         ArduinoMaterial.setSketchLocationHtml);
   });
-};
-
-/**
- * Binds the event listeners relevant to Blockly.
- * @private
- */
-ArduinoMaterial.bindBlocklyEventListeners_ = function() {
-  // Renders the code and XML for every Blockly workspace event
-  // As the toolbox inject is asynchronous we need to wait
-  if (ArduinoMaterial.BLOCKLY_INJECTED == false) {
-    setTimeout(ArduinoMaterial.bindBlocklyEventListeners_, 50);
-  } else {
-    ArduinoMaterial.workspace.addChangeListener(ArduinoMaterial.renderContent);
-  }
 };
 
 /**
@@ -487,17 +473,15 @@ ArduinoMaterial.renderContent = function() {
 ArduinoMaterial.TOOLBAR_SHOWING_ = true;
 
 /**
- * Toggles the toolbox and respective button On and Off
+ * Toggles the blockly toolbox and the Ardublockly toolbox button On and Off.
+ * Uses namespace member variable TOOLBAR_SHOWING_ to toggle state.
  */
 ArduinoMaterial.toogleToolbox = function() {
-  if (ArduinoMaterial.TOOLBAR_SHOWING_ == true ) {
-    // showToolbox() takes a callback function as its second argument
-    ArduinoMaterial.showToolbox(false, 
-        function() { ArduinoMaterial.showToolboxButtonState(false); });
-    ArduinoMaterial.workspace.toolbox_.flyout_.hide();
+  if (ArduinoMaterial.TOOLBAR_SHOWING_) {
+    ArduinoMaterial.blocklyCloseToolbox();
+    ArduinoMaterial.displayToolbox(false);
   } else {
-    ArduinoMaterial.showToolboxButtonState(true);
-    ArduinoMaterial.showToolbox(true);
+    ArduinoMaterial.displayToolbox(true);
   }
   ArduinoMaterial.TOOLBAR_SHOWING_ = !ArduinoMaterial.TOOLBAR_SHOWING_;
 };

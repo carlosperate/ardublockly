@@ -2,8 +2,7 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview JavaScript to configure front end design for the Arduino app
- *               with material design.
+ * @fileoverview JavaScript to configure front end design for Ardublockly app.
  */
 'use strict';
 
@@ -23,47 +22,52 @@ ArduinoMaterial.designJsInit = function() {
 };
 
 /**
- * Initialises the js/jQuery required for the materialize framework.
+ * Initialises all required components from materialize framework.
+ * The be executed on document ready.
  */
 ArduinoMaterial.materializeJsInit = function() {
-  $(document).ready(function() {
-    // Navigation bar
-    $('.button-collapse').sideNav({
-        menuWidth: 240,
-        activationWidth: 70,
-        edge: 'left'});
-    // Drop down menus
-    $('.dropdown-button').dropdown({hover: false});
-    // Overlay content panels using modals (android dialogs)
-    $('.modal-trigger').leanModal({
-        dismissible: true,
-        opacity: .5,
-        in_duration: 200,
-        out_duration: 250
-     });
-    // Pop-up tool tips
-    $('.tooltipped').tooltip({'delay': 50});
-    // Select menus
-    $('select').material_select();
-  });
+  // Navigation bar
+  $('.button-collapse').sideNav({
+      menuWidth: 240,
+      activationWidth: 70,
+      edge: 'left'});
+
+  // Drop down menus
+  $('.dropdown-button').dropdown({hover: false});
+
+  // Overlay content panels using modals (android dialogs)
+  $('.modal-trigger').leanModal({
+      dismissible: true,
+      opacity: .5,
+      in_duration: 200,
+      out_duration: 250
+   });
+
+  // Pop-up tool tips
+  $('.tooltipped').tooltip({'delay': 50});
+
+  // Select menus
+  $('select').material_select();
 };
 
 /**
  * Binds the event listeners relevant to the page design.
- * @private
  */
-ArduinoMaterial.bindDesignEventListeners_ = function() {
+ArduinoMaterial.bindDesignEventListeners = function() {
   // Resize blockly workspace on window resize
   window.addEventListener(
       'resize', ArduinoMaterial.resizeBlocklyWorkspace, false);
+
   // Display/hide the XML load button when the XML collapsible header is clicked
   document.getElementById('xml_collapsible_header').addEventListener(
       'click', ArduinoMaterial.buttonLoadXmlCodeDisplay);
+
   // Toggle the content height on click to the IDE output collapsible header
   document.getElementById('ide_output_collapsible_header').addEventListener(
       'click', function() {
         ArduinoMaterial.contentHeightToggle();
       });
+
   // Display/hide the additional IDE buttons when mouse over/out of play button
   $("#button_run").mouseenter(function () {
       ArduinoMaterial.showExtraIdeButtons(true);
@@ -74,7 +78,7 @@ ArduinoMaterial.bindDesignEventListeners_ = function() {
 };
 
 /**
- * Sets the spinner around the play button ON or OFF.
+ * Shows or hides the spinner around the play button.
  * @param {!boolean} active True turns ON the spinner, false OFF.
  */
 ArduinoMaterial.runButtonSpinner = function(active) {
@@ -95,19 +99,19 @@ ArduinoMaterial.runButtonSpinner = function(active) {
  * collapsible 'xml_collapsible_body'.
  */
 ArduinoMaterial.buttonLoadXmlCodeDisplay = function() {
-  var xmlButtonBody = document.getElementById('xml_collapsible_body');
-  // Waiting to check status due to the animation delay
+  var xmlCollapsibleBody = document.getElementById('xml_collapsible_body');
+  // Waiting 400 ms to check status due to the animation delay (300 ms)
   setTimeout(function() {
-    if (xmlButtonBody.style.display == 'none') {
+    if (xmlCollapsibleBody.style.display == 'none') {
       $('#button_load_xml').hide();
     } else {
       $('#button_load_xml').fadeIn('slow');
     } 
-  }, 500); 
+  }, 400);
 };
 
 /**
- * Displays or hides the addition Arduino IDE action buttons.
+ * Displays or hides the additional Arduino IDE action buttons.
  * Hide/display effects done with CCS3 transitions on visibility and opacity.
  * @param {!boolean} show Indicates if the extra buttons are to be shown.
  */
@@ -140,49 +144,80 @@ ArduinoMaterial.showExtraIdeButtons = function(show) {
 };
 
 /**
- * Sets the class and content of the toolbox View and Hide button.
- * @param {!boolean} toolboxVisible Indicates if the toolbox visibility.
+ * Sets the toolbox HTML element to be display or not and change the visibility
+ * button to reflect the new state.
+ * When the toolbox is visible it should display the "visibility-off" icon with
+ * no background, and the opposite when toolbox is hidden.
+ * @param {!boolean} show Indicates if the toolbox should be set visible.
  */
-ArduinoMaterial.showToolboxButtonState = function(toolboxVisible) {
-  var toolboxButton = document.getElementById('button_toggle_toolbox');
-  var toolboxButtonIcon = document.getElementById('button_toggle_toolbox_icon');
-  // Element contains several classes, use replace to maintain the rest
-  if (toolboxVisible == true) {
-    toolboxButton.className = toolboxButton.className.replace(
-        'button_toggle_toolbox_on', 'button_toggle_toolbox_off'); 
-    toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
-       'mdi-action-visibility', 'mdi-action-visibility-off');
+ArduinoMaterial.displayToolbox = function(show) {
+  var toolbox = $('.blocklyToolboxDiv');
+  var button = document.getElementById('button_toggle_toolbox');
+  var buttonIcon = document.getElementById('button_toggle_toolbox_icon');
+
+  // Because firing multiple clicks can confuse the animation, create an overlay
+  // element to stop clicks (due to materialize framework this is better than to
+  // mess with the button event listeners).
+  var elLocation = $('#button_toggle_toolbox').offset();
+  jQuery('<div/>', {
+      id: 'toolboxButtonScreen',
+      css: {
+          position: 'fixed',
+          top: elLocation.top,
+          left: elLocation.left,
+          height: $('#button_toggle_toolbox').height(),
+          width: $('#button_toggle_toolbox').width(),
+          cursor: 'pointer',
+          zIndex: 12
+      },
+  }).appendTo('body');
+
+  var classOn = 'button_toggle_toolbox_on';
+  var classOff = 'button_toggle_toolbox_off';
+  var visOn = 'mdi-action-visibility';
+  var visOff = 'mdi-action-visibility-off';
+  if (show) {
+    toolbox.show();
+    button.className = button.className.replace(classOn, classOff);
+    buttonIcon.className = buttonIcon.className.replace(visOn, visOff);
+    toolbox.animate(
+        {height: document.getElementById('content_blocks').style.height}, 300,
+        function() { $('#toolboxButtonScreen').remove(); });
   } else {
-    toolboxButton.className = toolboxButton.className.replace(
-        'button_toggle_toolbox_off', 'button_toggle_toolbox_on'); 
-    toolboxButtonIcon.className = toolboxButtonIcon.className.replace(
-        'mdi-action-visibility-off', 'mdi-action-visibility');
+    buttonIcon.className = buttonIcon.className.replace(visOff, visOn);
+    toolbox.animate({height: 38}, 300, function() {
+      button.className = button.className.replace(classOff, classOn);
+      toolbox.fadeOut(350, 'linear', function() {
+        $('#toolboxButtonScreen').remove();
+      });
+    });
   }
 };
 
 /**
- * Resizes the toolbox button to toggle its visibility to the width of the
+ * Resizes the button to toggle the toolbox visibility to the width of the
  * toolbox.
  * The toolbox width does not change with workspace width, so safe to do once,
  * but it needs to be done after blockly has been injected.
- * @private
  */
 ArduinoMaterial.resizeToggleToolboxBotton = function() {
   // As the toolbox inject is asynchronous we need to wait
   if (ArduinoMaterial.BLOCKLY_INJECTED == false) {
     setTimeout(ArduinoMaterial.resizeToggleToolboxBotton, 50);
   } else {
+    var button = $('#button_toggle_toolbox');
     // Sets the toolbox toggle button width to that of the toolbox
     if ( ArduinoMaterial.isToolboxVisible() &&
          ArduinoMaterial.workspace.toolbox_.width ) {
       // For some reason normal set style and getElementById didn't work
-      $('#button_toggle_toolbox').width(ArduinoMaterial.workspace.toolbox_.width);
+      button.width(ArduinoMaterial.workspace.toolbox_.width);
+      button[0].style.display = '';
     }
   }
 };
 
 /**
- * Resizes the container for Blockly. 
+ * Resizes the container for Blockly.
  */
 ArduinoMaterial.resizeBlocklyWorkspace = function() {
   var contentBlocks = document.getElementById('content_blocks');
@@ -229,8 +264,8 @@ ArduinoMaterial.materialAlert = function(title, body, confirm, callback) {
 };
 
 /**
- * Populates the Arduino IDE output content area and visually highlights it
- * to call for the user attention.
+ * Populates the Arduino IDE output content area and triggers the visual
+ * highlight to call for the user attention.
  * @param {!element} bodyEl HTML to include into IDE output content area.
  */
 ArduinoMaterial.arduinoIdeOutput = function(bodyEl) {
@@ -264,8 +299,7 @@ ArduinoMaterial.containerFullWidth = function() {
  */
 ArduinoMaterial.sketchNameSizeEffect = function() {
   var resizeInput = function() {
-    var inputSize = ($(this).val().length > 1) ? ($(this).val().length - 1) : 1;
-    $(this).attr('size', inputSize);
+    $(this).attr('size', $(this).val().length);
   };
 
   var correctInput = function() {

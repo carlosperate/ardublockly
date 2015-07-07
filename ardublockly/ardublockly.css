@@ -96,7 +96,7 @@ ul.side-nav li.side-menu-end {
 }
 
 /************************************/
-/*  Blocks, arduino, and xml areas  */
+/*  Blocks, Arduino, and XML areas  */
 /************************************/
 .content {
   margin: 0;
@@ -159,7 +159,6 @@ ul.side-nav li.side-menu-end {
   height: -o-calc(100vh - 486px);       /* Opera    */
   height: calc(100vh - 486px);          /* Standard */
 }
-
 
 /* The materialize framework changes height of the div to show or hide */
 /* the collapsible elements. */
@@ -327,6 +326,9 @@ ul.side-nav li.side-menu-end {
   background-color: #00979C;  /* Arduino teal */
   visibility: hidden;
   opacity: 0;
+  -moz-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -webkit-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -o-transition: visibility 0.3s linear, opacity 0.3s linear;
   transition: visibility 0.3s linear, opacity 0.3s linear;
 }
 #button_verify:hover {
@@ -340,6 +342,9 @@ ul.side-nav li.side-menu-end {
   background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
   visibility: hidden;
   opacity: 0;
+  -moz-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -webkit-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -o-transition: visibility 0.3s linear, opacity 0.3s linear;
   transition: visibility 0.3s linear, opacity 0.3s linear;
 }
 #button_open_ide:hover {
@@ -372,6 +377,7 @@ ul.side-nav li.side-menu-end {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
+/* Toggle the toolbox on and off button */
 .button_toggle_toolbox_on {
   position: absolute;
   margin: 0 !important;
@@ -389,6 +395,10 @@ ul.side-nav li.side-menu-end {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
+  transition: background 0.3s linear, box-shadow 0.3s linear, border-width 0.3s linear;
+  -ms-transition: background 0.3s linear, box-shadow 0.3s linear, border-width 0.3s linear;
+  -moz-transition: background 0.3s linear, -moz-box-shadow 0.3s linear, border-width 0.3s linear;
+  -webkit-transition: background 0.3s linear, -webkit-box-shadow 0.3s linear, border-width 0.3s linear;
 }
 .button_toggle_toolbox_off {
   position: absolute;
@@ -399,6 +409,7 @@ ul.side-nav li.side-menu-end {
   text-align: center;
   z-index: 5;
 }
+
 
 /*************************/
 /*  New spinner colours  */
@@ -629,6 +640,7 @@ ul.side-nav li.side-menu-end {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  overflow: hidden !important;
 }
 .blocklyTreeRoot {
   background: none !important;
