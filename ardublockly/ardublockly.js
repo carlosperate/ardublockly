@@ -18,6 +18,7 @@ window.addEventListener('load', function load(event) {
     document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
 
   Ardublockly.designJsInit();
+  Ardublockly.initialiseIdeButtons();
 
   Ardublockly.bindDesignEventListeners();
   Ardublockly.bindActionFunctions();
@@ -66,21 +67,31 @@ Ardublockly.bindActionFunctions = function() {
   });
   Ardublockly.bindClick_('menu_example_1', function() {
     Ardublockly.loadServerXmlFile('examples/blink.xml');
+    $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_example_2', function() {
     Ardublockly.loadServerXmlFile('examples/serial_print_ascii_.xml');
+    $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_example_3', function() {
     Ardublockly.loadServerXmlFile('examples/servo_knob.xml');
+    $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_example_4', function() {
     Ardublockly.loadServerXmlFile('examples/stepper_knob.xml');
+    $('.button-collapse').sideNav('hide');
   });
 
   // Floating buttons
-  Ardublockly.bindClick_('button_run', Ardublockly.sendCode);
-  Ardublockly.bindClick_('button_verify', Ardublockly.functionNotImplemented);
-  Ardublockly.bindClick_('button_open_ide', Ardublockly.functionNotImplemented);
+  Ardublockly.bindClick_('button_ide_large', function() {
+    Ardublockly.ideButtonLargeAction();
+  });
+  Ardublockly.bindClick_('button_ide_middle', function() {
+      Ardublockly.ideButtonMiddleAction();
+  });
+  Ardublockly.bindClick_('button_ide_left', function() {
+    Ardublockly.ideButtonLeftAction();
+  });
   Ardublockly.bindClick_('button_load_xml', Ardublockly.XmlTextareaToBlocks);
   Ardublockly.bindClick_('button_toggle_toolbox', Ardublockly.toogleToolbox);
 
@@ -93,6 +104,69 @@ Ardublockly.bindActionFunctions = function() {
     ArdublocklyServer.requestNewSketchLocation(
         Ardublockly.setSketchLocationHtml);
   });
+};
+
+/** Sets the Ardublockly server IDE setting to upload and sends the code. */
+Ardublockly.ideSendUpload = function() {
+  Ardublockly.showExtraIdeButtons(false);
+  Ardublockly.setIdeSettings(null, 'upload');
+  Ardublockly.sendCode();
+};
+
+/** Sets the Ardublockly server IDE setting to verify and sends the code. */
+Ardublockly.ideSendVerify = function() {
+  Ardublockly.showExtraIdeButtons(false);
+  Ardublockly.setIdeSettings(null, 'verify');
+  Ardublockly.sendCode();
+};
+
+/** Sets the Ardublockly server IDE setting to open and sends the code. */
+Ardublockly.ideSendOpen = function() {
+  Ardublockly.showExtraIdeButtons(false);
+  Ardublockly.setIdeSettings(null, 'open');
+  Ardublockly.sendCode();
+};
+
+/** Function bind to the left IDE button, to be changed based on settings. */
+Ardublockly.ideButtonLargeAction = Ardublockly.ideSendUpload;
+
+/** Function bind to the middle IDE button, to be changed based on settings. */
+Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendVerify;
+
+/** Function bind to the large IDE button, to be changed based on settings. */
+Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
+
+/** Initialises the IDE buttons with the default option from the server. */
+Ardublockly.initialiseIdeButtons = function() {
+  ArdublocklyServer.requestIdeOptions(function(data) {
+    Ardublockly.setIdeHtml(data);
+    Ardublockly.setIdeSettings();
+  });
+};
+
+/**
+ * Changes the IDE launch buttons based on the option indicated in the argument.
+ * Uses jQuery.
+ * @param {!string} value One of the 3 possible values from the drop down select
+ *                        in the settings modal: 'upload', 'verify', or 'open'.
+ */
+Ardublockly.changeIdeButtons = function(value) {
+  if (value === 'upload') {
+    Ardublockly.changeIdeButtonsDesign(value);
+    Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
+    Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendVerify;
+    Ardublockly.ideButtonLargeAction = Ardublockly.ideSendUpload;
+  } else if (value === 'verify') {
+    Ardublockly.changeIdeButtonsDesign(value);
+    Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
+    Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendUpload;
+    Ardublockly.ideButtonLargeAction = Ardublockly.ideSendVerify;
+  } else if (value === 'open') {
+    Ardublockly.changeIdeButtonsDesign(value);
+    Ardublockly.ideButtonLeftAction = Ardublockly.ideSendVerify;
+    Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendUpload;
+    Ardublockly.ideButtonLargeAction = Ardublockly.ideSendOpen;
+  }
 };
 
 /**
@@ -113,11 +187,9 @@ Ardublockly.loadServerXmlFile = function(xmlFile) {
           false);
     }
   };
-
   var callbackConnectionError = function() {
     Ardublockly.openNotConnectedModal();
   };
-
   Ardublockly.loadXmlBlockFile(
       xmlFile, loadXmlCallback, callbackConnectionError);
 };
@@ -189,9 +261,7 @@ Ardublockly.saveSketchFileAs = function() {
   saveAs(blob, sketchName + '.ino');
 };
 
-/**
- * Opens the modal that displays the "not connected to server" message.
- */
+/** Opens the modal that displays the "not connected to server" message. */
 Ardublockly.openNotConnectedModal = function() {
   $('#not_running_dialog').openModal({
     dismissible: true,
@@ -201,9 +271,7 @@ Ardublockly.openNotConnectedModal = function() {
   });
 };
 
-/**
- * Prepares and opens the settings modal.
- */
+/** Prepares and opens the settings modal. */
 Ardublockly.openSettings = function() {
   Ardublockly.populateSettings();
   $('#settings_dialog').openModal({
@@ -229,11 +297,11 @@ Ardublockly.populateSettings = function() {
 
 /**
  * Sets the compiler location form data retrieve from an updated element.
- * @param {element} newEl New HTML element to replace the one in the current
- *                        DOM. Should contain a complete input text element.
+ * @param {element} jsonResponse JSON data coming back from the server.
  */
-Ardublockly.setCompilerLocationHtml = function(newEl) {
-  if (newEl != null) {
+Ardublockly.setCompilerLocationHtml = function(jsonResponse) {
+  if (jsonResponse != null) {
+    var newEl = ArdublocklyServer.createElementFromJson(jsonResponse);
     var compLocIp = document.getElementById('settings_compiler_location');
     if (compLocIp != null) {
       compLocIp.value = newEl.value;
@@ -246,11 +314,11 @@ Ardublockly.setCompilerLocationHtml = function(newEl) {
 
 /**
  * Sets the sketch location form data retrieve from an updated element.
- * @param {element} newEl New HTML element to replace the one in the current
- *                        DOM. Should contain a complete input text element.
+ * @param {element} jsonResponse JSON data coming back from the server.
  */
-Ardublockly.setSketchLocationHtml = function(newEl) {
-  if (newEl != null) {
+Ardublockly.setSketchLocationHtml = function(jsonResponse) {
+  if (jsonResponse != null) {
+    var newEl = ArdublocklyServer.createElementFromJson(jsonResponse);
     var sketchLocIp = document.getElementById('settings_sketch_location');
     if (sketchLocIp != null) {
       sketchLocIp.value = newEl.value;
@@ -264,11 +332,11 @@ Ardublockly.setSketchLocationHtml = function(newEl) {
 /**
  * Replaces the Arduino Boards form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
- * @param {element} newEl New HTML element to replace the one in the current
- *                        DOM. Should contain a complete select element.
+ * @param {element} jsonResponse JSON data coming back from the server.
  */
-Ardublockly.setArduinoBoardsHtml = function(newEl) {
-  if (newEl != null) {
+Ardublockly.setArduinoBoardsHtml = function(jsonResponse) {
+  if (jsonResponse != null) {
+    var newEl = ArdublocklyServer.createElementFromJson(jsonResponse);
     var boardDropdown = document.getElementById('board');
     if (boardDropdown != null) {
       // Restarting the select elements built by materialize
@@ -300,11 +368,11 @@ Ardublockly.setBoard = function() {
 /**
  * Replaces the Serial Port form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
- * @param {element} newEl New HTML element to replace the one in the current
- *                        DOM. Should contain a complete select element.
+ * @param {element} jsonResponse JSON data coming back from the server.
  */
-Ardublockly.setSerialPortsHtml = function(newEl) {
-  if (newEl != null) {
+Ardublockly.setSerialPortsHtml = function(jsonResponse) {
+  if (jsonResponse != null) {
+    var newEl = ArdublocklyServer.createElementFromJson(jsonResponse);
     var serialDropdown = document.getElementById('serial_port');
     if (serialDropdown != null) {
       // Restarting the select elements built by materialize
@@ -336,11 +404,11 @@ Ardublockly.setSerial = function() {
 /**
  * Replaces IDE options form data with a new HTMl element.
  * Ensures there is a change listener to call 'setIdeSettings' function
- * @param {element} newEl New HTML element to replace the one in the current
- *                        DOM. Should contain a complete select element.
+ * @param {element} jsonResponse JSON data coming back from the server.
  */
-Ardublockly.setIdeHtml = function(newEl) {
-  if (newEl != null) {
+Ardublockly.setIdeHtml = function(jsonResponse) {
+  if (jsonResponse != null) {
+    var newEl = ArdublocklyServer.createElementFromJson(jsonResponse);
     var ideDropdown = document.getElementById('ide_settings');
     if (ideDropdown != null) {
       // Restarting the select elements built by materialize
@@ -360,10 +428,20 @@ Ardublockly.setIdeHtml = function(newEl) {
 
 /**
  * Sets the IDE settings data with the selected user input from the drop down.
+ * @param {Event} e Event that triggered this function call. Required for link
+ *                  it to the listeners, but not used.
+ * @param {string} preset A value to set the IDE settings bypassing the drop
+ *                        down selected value. Valid data: 'upload', 'verify',
+ *                        or 'open'.
  */
-Ardublockly.setIdeSettings = function() {
-  var el = document.getElementById('ide_settings');
-  var ideValue = el.options[el.selectedIndex].value;
+Ardublockly.setIdeSettings = function(e, preset) {
+  if (preset !== undefined) {
+    var ideValue = preset;
+  } else {
+    var el = document.getElementById('ide_settings');
+    var ideValue = el.options[el.selectedIndex].value;
+  }
+  Ardublockly.changeIdeButtons(ideValue);
   //TODO: check how ArdublocklyServer deals with invalid data and sanitise here
   ArdublocklyServer.setIdeOptions(ideValue, Ardublockly.setIdeHtml);
 };
@@ -375,19 +453,19 @@ Ardublockly.setIdeSettings = function() {
  */
 Ardublockly.sendCode = function() {
   Materialize.toast('Sending sketch to Arduino IDE...', 4000);
-  Ardublockly.runButtonSpinner(true);
+  Ardublockly.largeIdeButtonSpinner(true);
   ArdublocklyServer.sendSketchToServer(
       Ardublockly.generateArduino(), Ardublockly.sendCodeReturn);
 };
 
 /**
  * Receives the IDE data back to be displayed and stops spinner.
- * @param {element} dataBack New HTML elements to include in the modal to
- *                           display the data back from the compiler.
+ * @param {element} jsonResponse JSON data coming back from the server.
  */
-Ardublockly.sendCodeReturn = function(dataBack) {
-  Ardublockly.runButtonSpinner(false);
-  if (dataBack != null) {
+Ardublockly.sendCodeReturn = function(jsonResponse) {
+  Ardublockly.largeIdeButtonSpinner(false);
+  if (jsonResponse != null) {
+    var dataBack = ArdublocklyServer.createElementFromJson(jsonResponse);
     Ardublockly.arduinoIdeOutput(dataBack);
   } else {
     // If the element is Null, then Ardublockly server is not running
@@ -395,9 +473,7 @@ Ardublockly.sendCodeReturn = function(dataBack) {
   }
 };
 
-/**
- * Populate the currently selected panel with content generated from the blocks.
- */
+/** Populate the workspace blocks with the XML written in the XML text area. */
 Ardublockly.XmlTextareaToBlocks = function() {
   var success = Ardublockly.replaceBlocksfromXml(
       document.getElementById('content_xml').value);

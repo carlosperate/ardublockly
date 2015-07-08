@@ -108,10 +108,10 @@
         <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off" style="display: none"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
         <!-- Arduino IDE action buttons -->
         <div id="ide_buttons_wrapper">
-          <a id="button_open_ide" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half"><i class="mdi-action-open-in-browser"></i></a>
-          <a id="button_verify" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half"><i class="mdi-navigation-check"></i></a>
-          <a id="button_run" class="waves-effect waves-light waves-circle btn-floating btn-large arduino_orange z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
-          <div id="button_run_spinner" class="preloader-wrapper active run_loader" style="display:none">
+          <a id="button_ide_left" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_yellow"><i id="button_ide_left_icon" class="mdi-action-open-in-browser"></i></a>
+          <a id="button_ide_middle" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_teal"><i id="button_ide_middle_icon" class="mdi-navigation-check"></i></a>
+          <a id="button_ide_large" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange"><i id="button_ide_large_icon" class="mdi-av-play-arrow"></i></a>
+          <div id="button_ide_large_spinner" class="preloader-wrapper active ide_loader" style="display:none">
             <div class="spinner-layer spinner-orange">
               <div class="circle-clipper left">
                 <div class="circle"></div>
@@ -196,7 +196,7 @@
   </div>
   <div id="ide_output_spacer"></div>
 
-  <!-- Settings: Displayed as a Materialize Modal (android dialog) -->
+  <!-- Settings: Displayed as a Materialize Modal -->
   <div id="settings_dialog" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Settings</h4>
@@ -211,9 +211,7 @@
       <div class="settings_div">
         <label>Arduino Board:</label>
         <select name="settings_board" id="board">
-          <option value="uno">Uno</option>
-          <option value="leonardo">Leonardo</option>
-          <option value="mega">Mega</option>
+          <option value="uno">Boards unknown</option>
         </select>
       </div>
       <div class="settings_div">
@@ -223,10 +221,11 @@
         </select>
       </div>
       <div class="settings_div">
-        <label>IDE:</label> <br>
+        <label>Default IDE button:</label> <br>
         <select name="settings_ide" id="ide_settings">
-          <option value="ide_upload">Compile</option>
-          <option value="ide_only">Load</option>
+          <option value="verify">Verify sketch</option>
+          <option value="open">Open sketch in IDE </option>
+          <option value="upload">Compile and Upload sketch</option>
         </select>
       </div>
     </div>

@@ -25,8 +25,7 @@ ArdublocklyServer.ajaxPostForm = function(url, params, callback) {
   request.onreadystatechange = function() {
     if (request.readyState == 4) {
       if (request.status == 200) {
-        var el = ArdublocklyServer.createElementFromJson(request.responseText);
-        callback(el);
+        callback(request.responseText);
       } else if (request.status == 405) {
         // return a null element which will be dealt with in the front end
         callback(null);
@@ -60,8 +59,7 @@ ArdublocklyServer.ajaxPostPlain = function(url, data, callback) {
   request.onreadystatechange = function() {
     if (request.readyState == 4) {
       if (request.status == 200) {
-        var el = ArdublocklyServer.createElementFromJson(request.responseText);
-        callback(el);
+        callback(request.responseText);
       } else if (request.status == 405) {
         // return a null element which will be dealt with in the front end
         callback(null);
