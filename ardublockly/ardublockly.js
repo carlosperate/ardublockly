@@ -6,123 +6,119 @@
  */
 'use strict';
 
-/**
- * Create a namespace for the application.
- */
-var ArduinoMaterial = ArduinoMaterial || {};
+/** Create a namespace for the application. */
+var Ardublockly = Ardublockly || {};
 
 
-/**
- * Initialize function for Ardublockly on page load.
- */
+/** Initialize function for Ardublockly on page load. */
 window.addEventListener('load', function load(event) {
   window.removeEventListener('load', load, false);
   // Inject Blockly into content_blocks
-  ArduinoMaterial.injectBlockly(
+  Ardublockly.injectBlockly(
     document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
 
-  ArduinoMaterial.designJsInit();
+  Ardublockly.designJsInit();
 
-  ArduinoMaterial.bindDesignEventListeners();
-  ArduinoMaterial.bindActionFunctions_();
-  ArduinoMaterial.bindBlocklyEventListeners();
+  Ardublockly.bindDesignEventListeners();
+  Ardublockly.bindActionFunctions();
+  Ardublockly.bindBlocklyEventListeners();
 
   // Check if not running locally (including developer's local network IP)
   if (document.location.hostname != 'localhost' &&
       document.location.hostname != '192.168.0.7') {
-    ArduinoMaterial.openNotConnectedModal();
+    Ardublockly.openNotConnectedModal();
   }
 
   // Check if running on the Desktop app
   if (navigator.userAgent.toLowerCase().indexOf('ardublockly') > -1) {
     // It is, so remove container padding and side menu button
-    ArduinoMaterial.containerFullWidth();
-    ArduinoMaterial.hideSideMenuButton();
+    Ardublockly.containerFullWidth();
+    Ardublockly.hideSideMenuButton();
   }
 });
 
 /**
  * Binds functions to each of the buttons, nav links, and related.
- * @private
+ * Materialize uses jQuery.
  */
-ArduinoMaterial.bindActionFunctions_ = function() {
+Ardublockly.bindActionFunctions = function() {
   // Navigation buttons
-  ArduinoMaterial.bindClick_('button_load', ArduinoMaterial.loadUserXmlFile);
-  ArduinoMaterial.bindClick_('button_save', ArduinoMaterial.saveXmlFileAs);
-  ArduinoMaterial.bindClick_('button_delete', ArduinoMaterial.discardAllBlocks);
+  Ardublockly.bindClick_('button_load', Ardublockly.loadUserXmlFile);
+  Ardublockly.bindClick_('button_save', Ardublockly.saveXmlFileAs);
+  Ardublockly.bindClick_('button_delete', Ardublockly.discardAllBlocks);
 
   // Side menu buttons, they also close the side menu
-  ArduinoMaterial.bindClick_('menu_load', function() {
-      ArduinoMaterial.loadUserXmlFile();
-      $('.button-collapse').sideNav('hide');
-    });
-  ArduinoMaterial.bindClick_('menu_save',  function() {
-      ArduinoMaterial.saveXmlFileAs();
-      $('.button-collapse').sideNav('hide');
-    });
-  ArduinoMaterial.bindClick_('menu_delete',  function() {
-      ArduinoMaterial.discardAllBlocks();
-      $('.button-collapse').sideNav('hide');
-    });
-  ArduinoMaterial.bindClick_('menu_settings', function() {
-      ArduinoMaterial.openSettings();
-      $('.button-collapse').sideNav('hide');
-    });
-  ArduinoMaterial.bindClick_('menu_example_1', function() {
-      ArduinoMaterial.loadServerXmlFile('examples/blink.xml')});
-  ArduinoMaterial.bindClick_('menu_example_2', function() {
-      ArduinoMaterial.loadServerXmlFile('examples/serial_print_ascii_.xml')});
-  ArduinoMaterial.bindClick_('menu_example_3', function() {
-      ArduinoMaterial.loadServerXmlFile('examples/servo_knob.xml')});
-  ArduinoMaterial.bindClick_('menu_example_4', function() {
-      ArduinoMaterial.loadServerXmlFile('examples/stepper_knob.xml')});
+  Ardublockly.bindClick_('menu_load', function() {
+    Ardublockly.loadUserXmlFile();
+    $('.button-collapse').sideNav('hide');
+  });
+  Ardublockly.bindClick_('menu_save', function() {
+    Ardublockly.saveXmlFileAs();
+    $('.button-collapse').sideNav('hide');
+  });
+  Ardublockly.bindClick_('menu_delete', function() {
+    Ardublockly.discardAllBlocks();
+    $('.button-collapse').sideNav('hide');
+  });
+  Ardublockly.bindClick_('menu_settings', function() {
+    Ardublockly.openSettings();
+    $('.button-collapse').sideNav('hide');
+  });
+  Ardublockly.bindClick_('menu_example_1', function() {
+    Ardublockly.loadServerXmlFile('examples/blink.xml');
+  });
+  Ardublockly.bindClick_('menu_example_2', function() {
+    Ardublockly.loadServerXmlFile('examples/serial_print_ascii_.xml');
+  });
+  Ardublockly.bindClick_('menu_example_3', function() {
+    Ardublockly.loadServerXmlFile('examples/servo_knob.xml');
+  });
+  Ardublockly.bindClick_('menu_example_4', function() {
+    Ardublockly.loadServerXmlFile('examples/stepper_knob.xml');
+  });
 
   // Floating buttons
-  ArduinoMaterial.bindClick_('button_run',
-      ArduinoMaterial.sendCode);
-  ArduinoMaterial.bindClick_('button_verify',
-      ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick_('button_open_ide',
-      ArduinoMaterial.functionNotImplemented);
-  ArduinoMaterial.bindClick_('button_load_xml',
-      ArduinoMaterial.XmlTextareaToBlocks);
-  ArduinoMaterial.bindClick_(
-      'button_toggle_toolbox', ArduinoMaterial.toogleToolbox);
+  Ardublockly.bindClick_('button_run', Ardublockly.sendCode);
+  Ardublockly.bindClick_('button_verify', Ardublockly.functionNotImplemented);
+  Ardublockly.bindClick_('button_open_ide', Ardublockly.functionNotImplemented);
+  Ardublockly.bindClick_('button_load_xml', Ardublockly.XmlTextareaToBlocks);
+  Ardublockly.bindClick_('button_toggle_toolbox', Ardublockly.toogleToolbox);
 
   // Settings modal input field listeners
-  ArduinoMaterial.bindClick_('settings_compiler_location', function() {
-    ArduServerCompiler.requestNewCompilerLocation(
-        ArduinoMaterial.setCompilerLocationHtml);
+  Ardublockly.bindClick_('settings_compiler_location', function() {
+    ArdublocklyServer.requestNewCompilerLocation(
+        Ardublockly.setCompilerLocationHtml);
   });
-  ArduinoMaterial.bindClick_('settings_sketch_location', function() {
-    ArduServerCompiler.requestNewSketchLocation(
-        ArduinoMaterial.setSketchLocationHtml);
+  Ardublockly.bindClick_('settings_sketch_location', function() {
+    ArdublocklyServer.requestNewSketchLocation(
+        Ardublockly.setSketchLocationHtml);
   });
 };
 
 /**
  * Loads an XML file from the server and adds the blocks into the Blockly
  * workspace.
+ * @param {!string} xmlFile Server location of the XML file to load.
  */
-ArduinoMaterial.loadServerXmlFile = function(xmlFile) {
+Ardublockly.loadServerXmlFile = function(xmlFile) {
   // The loadXmlBlockFile loads the file asynchronously and needs a callback
   var loadXmlCallback = function(sucess) {
     if (sucess) {
-      ArduinoMaterial.renderContent();
+      Ardublockly.renderContent();
     } else {
-      ArduinoMaterial.materialAlert(
+      Ardublockly.materialAlert(
           'Invalid XML',
-          'The XML file was not successfully parsed into blocks.\
-          Please review the XML code and try again.',
+          'The XML file was not successfully parsed into blocks.' +
+          'Please review the XML code and try again.',
           false);
     }
   };
 
   var callbackConnectionError = function() {
-    ArduinoMaterial.openNotConnectedModal();
+    Ardublockly.openNotConnectedModal();
   };
 
-  ArduinoMaterial.loadXmlBlockFile(
+  Ardublockly.loadXmlBlockFile(
       xmlFile, loadXmlCallback, callbackConnectionError);
 };
 
@@ -130,20 +126,20 @@ ArduinoMaterial.loadServerXmlFile = function(xmlFile) {
  * Loads an XML file from the users file system and adds the blocks into the
  * Blockly workspace.
  */
-ArduinoMaterial.loadUserXmlFile = function() {
+Ardublockly.loadUserXmlFile = function() {
   // Create event listener function
   var parseInputXMLfile = function(e) {
     var files = e.target.files;
     var reader = new FileReader();
     reader.onload = function() {
-      var success = ArduinoMaterial.replaceBlocksfromXml(reader.result);
+      var success = Ardublockly.replaceBlocksfromXml(reader.result);
       if (success) {
-        ArduinoMaterial.renderContent();
+        Ardublockly.renderContent();
       } else {
-        ArduinoMaterial.materialAlert(
+        Ardublockly.materialAlert(
             'Invalid XML',
-            'The XML file was not successfully parsed into blocks.\
-            Please review the XML code and try again.',
+            'The XML file was not successfully parsed into blocks.' +
+            'Please review the XML code and try again.',
             false);
       }
     };
@@ -172,10 +168,10 @@ ArduinoMaterial.loadUserXmlFile = function() {
  * Creates an XML file containing the blocks from the Blockly workspace and
  * prompts the users to save it into their local file system.
  */
-ArduinoMaterial.saveXmlFileAs = function() {
+Ardublockly.saveXmlFileAs = function() {
   var xmlName = document.getElementById('sketch_name').value;
   var blob = new Blob(
-      [ArduinoMaterial.generateXml()],
+      [Ardublockly.generateXml()],
       {type: 'text/plain;charset=utf-8'});
   saveAs(blob, xmlName + '.xml');
 };
@@ -185,10 +181,10 @@ ArduinoMaterial.saveXmlFileAs = function() {
  * the Blockly workspace and prompts the users to save it into their local file
  * system.
  */
-ArduinoMaterial.saveSketchFileAs = function() {
+Ardublockly.saveSketchFileAs = function() {
   var sketchName = document.getElementById('sketch_name').value;
   var blob = new Blob(
-      [ArduinoMaterial.generateArduino()],
+      [Ardublockly.generateArduino()],
       {type: 'text/plain;charset=utf-8'});
   saveAs(blob, sketchName + '.ino');
 };
@@ -196,7 +192,7 @@ ArduinoMaterial.saveSketchFileAs = function() {
 /**
  * Opens the modal that displays the "not connected to server" message.
  */
-ArduinoMaterial.openNotConnectedModal = function() {
+Ardublockly.openNotConnectedModal = function() {
   $('#not_running_dialog').openModal({
     dismissible: true,
     opacity: .5,
@@ -208,8 +204,8 @@ ArduinoMaterial.openNotConnectedModal = function() {
 /**
  * Prepares and opens the settings modal.
  */
-ArduinoMaterial.openSettings = function() {
-  ArduinoMaterial.populateSettings();
+Ardublockly.openSettings = function() {
+  Ardublockly.populateSettings();
   $('#settings_dialog').openModal({
     dismissible: true,
     opacity: .5,
@@ -219,18 +215,16 @@ ArduinoMaterial.openSettings = function() {
 };
 
 /**
- * Retrieves the Settings from ArduServerCompiler and populates the form data
+ * Retrieves the Settings from ArdublocklyServer and populates the form data
  * for the Settings modal dialog.
  */
-ArduinoMaterial.populateSettings = function() {
-  ArduServerCompiler.requestCompilerLocation(
-      ArduinoMaterial.setCompilerLocationHtml);
-  ArduServerCompiler.requestSketchLocation(
-      ArduinoMaterial.setSketchLocationHtml);
-  ArduServerCompiler.requestArduinoBoards(
-      ArduinoMaterial.setArduinoBoardsHtml);
-  ArduServerCompiler.requestSerialPorts(ArduinoMaterial.setSerialPortsHtml);
-  ArduServerCompiler.requestIdeOptions(ArduinoMaterial.setIdeHtml);
+Ardublockly.populateSettings = function() {
+  ArdublocklyServer.requestCompilerLocation(
+      Ardublockly.setCompilerLocationHtml);
+  ArdublocklyServer.requestSketchLocation(Ardublockly.setSketchLocationHtml);
+  ArdublocklyServer.requestArduinoBoards(Ardublockly.setArduinoBoardsHtml);
+  ArdublocklyServer.requestSerialPorts(Ardublockly.setSerialPortsHtml);
+  ArdublocklyServer.requestIdeOptions(Ardublockly.setIdeHtml);
 };
 
 /**
@@ -238,15 +232,15 @@ ArduinoMaterial.populateSettings = function() {
  * @param {element} newEl New HTML element to replace the one in the current
  *                        DOM. Should contain a complete input text element.
  */
-ArduinoMaterial.setCompilerLocationHtml = function(newEl) {
+Ardublockly.setCompilerLocationHtml = function(newEl) {
   if (newEl != null) {
-    var compLocIp = document.getElementById('settings_compiler_location')
+    var compLocIp = document.getElementById('settings_compiler_location');
     if (compLocIp != null) {
       compLocIp.value = newEl.value;
     }
   } else {
-    // If the element is Null, then Ardublockly server is not running 
-    ArduinoMaterial.openNotConnectedModal();
+    // If the element is Null, then Ardublockly server is not running
+    Ardublockly.openNotConnectedModal();
   }
 };
 
@@ -255,15 +249,15 @@ ArduinoMaterial.setCompilerLocationHtml = function(newEl) {
  * @param {element} newEl New HTML element to replace the one in the current
  *                        DOM. Should contain a complete input text element.
  */
-ArduinoMaterial.setSketchLocationHtml = function(newEl) {
+Ardublockly.setSketchLocationHtml = function(newEl) {
   if (newEl != null) {
     var sketchLocIp = document.getElementById('settings_sketch_location');
     if (sketchLocIp != null) {
       sketchLocIp.value = newEl.value;
     }
   } else {
-    // If the element is Null, then Ardublockly server is not running 
-    ArduinoMaterial.openNotConnectedModal();
+    // If the element is Null, then Ardublockly server is not running
+    Ardublockly.openNotConnectedModal();
   }
 };
 
@@ -273,7 +267,7 @@ ArduinoMaterial.setSketchLocationHtml = function(newEl) {
  * @param {element} newEl New HTML element to replace the one in the current
  *                        DOM. Should contain a complete select element.
  */
-ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
+Ardublockly.setArduinoBoardsHtml = function(newEl) {
   if (newEl != null) {
     var boardDropdown = document.getElementById('board');
     if (boardDropdown != null) {
@@ -281,26 +275,26 @@ ArduinoMaterial.setArduinoBoardsHtml = function(newEl) {
       $('select').material_select('destroy');
       newEl.name = 'settings_board';
       newEl.id = 'board';
-      newEl.onchange = ArduinoMaterial.setBoard;
+      newEl.onchange = Ardublockly.setBoard;
       boardDropdown.parentNode.replaceChild(newEl, boardDropdown);
       // Refresh the materialize select menus
       $('select').material_select();
     }
   } else {
-    // If the element is Null, then Ardublockly server is not running 
-    ArduinoMaterial.openNotConnectedModal();
+    // If the element is Null, then Ardublockly server is not running
+    Ardublockly.openNotConnectedModal();
   }
 };
 
 /**
  * Sets the Arduino Board type with the selected user input from the drop down.
  */
-ArduinoMaterial.setBoard = function() {
+Ardublockly.setBoard = function() {
   var el = document.getElementById('board');
   var boardValue = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise
-  ArduServerCompiler.setArduinoBoard(
-      boardValue, ArduinoMaterial.setArduinoBoardsHtml);
+  //TODO: check how ArdublocklyServer deals with invalid data and sanitise
+  ArdublocklyServer.setArduinoBoard(
+      boardValue, Ardublockly.setArduinoBoardsHtml);
 };
 
 /**
@@ -309,7 +303,7 @@ ArduinoMaterial.setBoard = function() {
  * @param {element} newEl New HTML element to replace the one in the current
  *                        DOM. Should contain a complete select element.
  */
-ArduinoMaterial.setSerialPortsHtml = function(newEl) {
+Ardublockly.setSerialPortsHtml = function(newEl) {
   if (newEl != null) {
     var serialDropdown = document.getElementById('serial_port');
     if (serialDropdown != null) {
@@ -317,26 +311,26 @@ ArduinoMaterial.setSerialPortsHtml = function(newEl) {
       $('select').material_select('destroy');
       newEl.name = 'settings_serial';
       newEl.id = 'serial_port';
-      newEl.onchange = ArduinoMaterial.setSerial;
+      newEl.onchange = Ardublockly.setSerial;
       serialDropdown.parentNode.replaceChild(newEl, serialDropdown);
       // Refresh the materialize select menus
       $('select').material_select();
     }
   } else {
-    // If the element is Null, then Ardublockly server is not running 
-    ArduinoMaterial.openNotConnectedModal();
+    // If the element is Null, then Ardublockly server is not running
+    Ardublockly.openNotConnectedModal();
   }
 };
 
 /**
  * Sets the Serial Port with the selected user input from the drop down.
  */
-ArduinoMaterial.setSerial = function() {
+Ardublockly.setSerial = function() {
   var el = document.getElementById('serial_port');
   var serialValue = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise
-  ArduServerCompiler.setSerialPort(
-      serialValue, ArduinoMaterial.setSerialPortsHtml);
+  //TODO: check how ArdublocklyServer deals with invalid data and sanitise
+  ArdublocklyServer.setSerialPort(
+      serialValue, Ardublockly.setSerialPortsHtml);
 };
 
 /**
@@ -345,7 +339,7 @@ ArduinoMaterial.setSerial = function() {
  * @param {element} newEl New HTML element to replace the one in the current
  *                        DOM. Should contain a complete select element.
  */
-ArduinoMaterial.setIdeHtml = function(newEl) {
+Ardublockly.setIdeHtml = function(newEl) {
   if (newEl != null) {
     var ideDropdown = document.getElementById('ide_settings');
     if (ideDropdown != null) {
@@ -353,37 +347,37 @@ ArduinoMaterial.setIdeHtml = function(newEl) {
       $('select').material_select('destroy');
       newEl.name = 'settings_ide';
       newEl.id = 'ide_settings';
-      newEl.onchange = ArduinoMaterial.setIdeSettings;
+      newEl.onchange = Ardublockly.setIdeSettings;
       ideDropdown.parentNode.replaceChild(newEl, ideDropdown);
       // Refresh the materialize select menus
       $('select').material_select();
     }
   } else {
-    // If the element is Null, then Ardublockly server is not running 
-    ArduinoMaterial.openNotConnectedModal();
+    // If the element is Null, then Ardublockly server is not running
+    Ardublockly.openNotConnectedModal();
   }
 };
 
 /**
  * Sets the IDE settings data with the selected user input from the drop down.
  */
-ArduinoMaterial.setIdeSettings = function() {
+Ardublockly.setIdeSettings = function() {
   var el = document.getElementById('ide_settings');
   var ideValue = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
-  ArduServerCompiler.setIdeOptions(ideValue, ArduinoMaterial.setIdeHtml);
+  //TODO: check how ArdublocklyServer deals with invalid data and sanitise here
+  ArdublocklyServer.setIdeOptions(ideValue, Ardublockly.setIdeHtml);
 };
 
 /**
- * Send the Arduino Code to the ArduServerCompiler to process.
+ * Send the Arduino Code to the ArdublocklyServer to process.
  * Shows a loader around the button, blocking it (unblocked upon received
  * message from server).
  */
-ArduinoMaterial.sendCode = function() {
+Ardublockly.sendCode = function() {
   Materialize.toast('Sending sketch to Arduino IDE...', 4000);
-  ArduinoMaterial.runButtonSpinner(true);
-  ArduServerCompiler.sendSketchToServer(
-      ArduinoMaterial.generateArduino(), ArduinoMaterial.sendCodeReturn);
+  Ardublockly.runButtonSpinner(true);
+  ArdublocklyServer.sendSketchToServer(
+      Ardublockly.generateArduino(), Ardublockly.sendCodeReturn);
 };
 
 /**
@@ -391,29 +385,29 @@ ArduinoMaterial.sendCode = function() {
  * @param {element} dataBack New HTML elements to include in the modal to
  *                           display the data back from the compiler.
  */
-ArduinoMaterial.sendCodeReturn = function(dataBack) {
-  ArduinoMaterial.runButtonSpinner(false);
+Ardublockly.sendCodeReturn = function(dataBack) {
+  Ardublockly.runButtonSpinner(false);
   if (dataBack != null) {
-    ArduinoMaterial.arduinoIdeOutput(dataBack);
+    Ardublockly.arduinoIdeOutput(dataBack);
   } else {
-    // If the element is Null, then Ardublockly server is not running 
-    ArduinoMaterial.openNotConnectedModal();
+    // If the element is Null, then Ardublockly server is not running
+    Ardublockly.openNotConnectedModal();
   }
 };
 
 /**
  * Populate the currently selected panel with content generated from the blocks.
  */
-ArduinoMaterial.XmlTextareaToBlocks = function() {
-  var success = ArduinoMaterial.replaceBlocksfromXml(
+Ardublockly.XmlTextareaToBlocks = function() {
+  var success = Ardublockly.replaceBlocksfromXml(
       document.getElementById('content_xml').value);
   if (success) {
-    ArduinoMaterial.renderContent();
+    Ardublockly.renderContent();
   } else {
-    ArduinoMaterial.materialAlert(
+    Ardublockly.materialAlert(
         'Invalid XML',
-        'The XML inputted into the text area was not successfully parsed into \
-        blocks. Please review the XML code and try again.',
+        'The XML inputted into the text area was not successfully parsed into' +
+        'blocks. Please review the XML code and try again.',
         false);
   }
 };
@@ -423,28 +417,28 @@ ArduinoMaterial.XmlTextareaToBlocks = function() {
  * @type {!String}
  * @private
  */
-ArduinoMaterial.PREVIOUS_ARDUINO_CODE_ = 
+Ardublockly.PREVIOUS_ARDUINO_CODE_ =
     'void setup() {\n\n}\n\n\nvoid loop() {\n\n}';
 
 /**
  * Populate the Arduino Code and Blocks XML panels with content generated from
  * the blocks.
  */
-ArduinoMaterial.renderContent = function() {
+Ardublockly.renderContent = function() {
   // Only regenerate the code if a block is not being dragged
-  if (ArduinoMaterial.blocklyIsDragging()) {
+  if (Ardublockly.blocklyIsDragging()) {
     return;
   }
 
   // Render Arduino Code with latest change highlight and syntax highlighting
-  var arduinoCode = ArduinoMaterial.generateArduino();
-  if (arduinoCode !== ArduinoMaterial.PREVIOUS_ARDUINO_CODE_) {
+  var arduinoCode = Ardublockly.generateArduino();
+  if (arduinoCode !== Ardublockly.PREVIOUS_ARDUINO_CODE_) {
     var arduinoContent = document.getElementById('content_arduino');
     if (typeof prettyPrintOne == 'function') {
-      var diff = JsDiff.diffWords(ArduinoMaterial.PREVIOUS_ARDUINO_CODE_,
+      var diff = JsDiff.diffWords(Ardublockly.PREVIOUS_ARDUINO_CODE_,
                                   arduinoCode);
       var resultStringArray = [];
-      for (var i=0; i < diff.length; i++) {
+      for (var i = 0; i < diff.length; i++) {
         if (diff[i].added) {
           resultStringArray.push(
             '<span class="code_highlight_new">' + diff[i].value + '</span>');
@@ -457,12 +451,12 @@ ArduinoMaterial.renderContent = function() {
     } else {
       arduinoContent.textContent = arduinoCode;
     }
-    ArduinoMaterial.PREVIOUS_ARDUINO_CODE_ = arduinoCode;
+    Ardublockly.PREVIOUS_ARDUINO_CODE_ = arduinoCode;
   }
 
   // Generate plain XML into element
   var xmlContent = document.getElementById('content_xml');
-  xmlContent.value = ArduinoMaterial.generateXml();
+  xmlContent.value = Ardublockly.generateXml();
 };
 
 /**
@@ -470,28 +464,28 @@ ArduinoMaterial.renderContent = function() {
  * @type {!boolean}
  * @private
  */
-ArduinoMaterial.TOOLBAR_SHOWING_ = true;
+Ardublockly.TOOLBAR_SHOWING_ = true;
 
 /**
  * Toggles the blockly toolbox and the Ardublockly toolbox button On and Off.
  * Uses namespace member variable TOOLBAR_SHOWING_ to toggle state.
  */
-ArduinoMaterial.toogleToolbox = function() {
-  if (ArduinoMaterial.TOOLBAR_SHOWING_) {
-    ArduinoMaterial.blocklyCloseToolbox();
-    ArduinoMaterial.displayToolbox(false);
+Ardublockly.toogleToolbox = function() {
+  if (Ardublockly.TOOLBAR_SHOWING_) {
+    Ardublockly.blocklyCloseToolbox();
+    Ardublockly.displayToolbox(false);
   } else {
-    ArduinoMaterial.displayToolbox(true);
+    Ardublockly.displayToolbox(true);
   }
-  ArduinoMaterial.TOOLBAR_SHOWING_ = !ArduinoMaterial.TOOLBAR_SHOWING_;
+  Ardublockly.TOOLBAR_SHOWING_ = !Ardublockly.TOOLBAR_SHOWING_;
 };
 
 /**
  * Returns a boolean indicating if the toolbox is currently visible.
  * @return {boolean} Indicates if the toolbox is currently visible.
  */
-ArduinoMaterial.isToolboxVisible = function() {
-  return ArduinoMaterial.TOOLBAR_SHOWING_;
+Ardublockly.isToolboxVisible = function() {
+  return Ardublockly.TOOLBAR_SHOWING_;
 };
 
 /**
@@ -501,7 +495,7 @@ ArduinoMaterial.isToolboxVisible = function() {
  * @param {!function} func Event handler to bind.
  * @private
  */
-ArduinoMaterial.bindClick_ = function(el, func) {
+Ardublockly.bindClick_ = function(el, func) {
   if (typeof el == 'string') {
     el = document.getElementById(el);
   }
@@ -518,6 +512,6 @@ ArduinoMaterial.bindClick_ = function(el, func) {
 /**
  * Populate the currently selected panel with content generated from the blocks.
  */
-ArduinoMaterial.functionNotImplemented = function() {
+Ardublockly.functionNotImplemented = function() {
   Materialize.toast('Function not yet implemented', 4000);
 };

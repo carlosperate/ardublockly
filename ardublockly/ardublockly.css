@@ -620,7 +620,7 @@ ul.side-nav li.side-menu-end {
 
 /* Entire Blockly area, Toolbox dranw on top */
 .blocklySvg {
-  border-width: none !important;
+  border-width: 0 !important;
   -webkit-border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   border-radius: 4px !important;
@@ -820,6 +820,5 @@ ul.side-nav li ul li ul li {
 
 /* Circle clipper (loading animation) thickness */
 .circle-clipper .circle {
-    border-width: 4px !important;
-  }
+  border-width: 4px !important;
 }

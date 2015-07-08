@@ -2,36 +2,32 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview JavaScript for ArduBlockly's Server Compiler settings.
+ * @fileoverview JavaScript for Ardublockly Server Compiler settings.
  */
 'use strict';
 
-/**
- * Create a namespace for the application.
- */
+/** Create a namespace for the application. */
 var ArduinoSettings = {};
 
-/**
- * Initialize the settings form data on page load.
- */
+/** Initialize the settings form data on page load. */
 window.addEventListener('load', function() {
   // Populate the form data
-  ArduServerCompiler.requestCompilerLocation(
+  ArdublocklyServer.requestCompilerLocation(
       ArduinoSettings.setCompilerLocationHtml);
-  ArduServerCompiler.requestSketchLocation(
+  ArdublocklyServer.requestSketchLocation(
       ArduinoSettings.setSketchLocationHtml);
-  ArduServerCompiler.requestArduinoBoards(
+  ArdublocklyServer.requestArduinoBoards(
       ArduinoSettings.setArduinoBoardsHtml);
-  ArduServerCompiler.requestSerialPorts(ArduinoSettings.setSerialPortsHtml);
-  ArduServerCompiler.requestIdeOptions(ArduinoSettings.setIdeHtml);
+  ArdublocklyServer.requestSerialPorts(ArduinoSettings.setSerialPortsHtml);
+  ArdublocklyServer.requestIdeOptions(ArduinoSettings.setIdeHtml);
 
   // Binding clicks to the form items
   ArduinoSettings.bindClick_('settings_compiler_location', function() {
-    ArduServerCompiler.requestNewCompilerLocation(
+    ArdublocklyServer.requestNewCompilerLocation(
         ArduinoSettings.setCompilerLocationHtml);
   });
   ArduinoSettings.bindClick_('settings_sketch_location', function() {
-    ArduServerCompiler.requestNewSketchLocation(
+    ArdublocklyServer.requestNewSketchLocation(
         ArduinoSettings.setSketchLocationHtml);
   });
 
@@ -51,7 +47,7 @@ window.addEventListener('load', function() {
  */
 ArduinoSettings.setCompilerLocationHtml = function(new_el) {
   if (new_el != null) {
-    var comp_loc_ip = document.getElementById('settings_compiler_location')
+    var comp_loc_ip = document.getElementById('settings_compiler_location');
     if (comp_loc_ip != null) {
       comp_loc_ip.value = new_el.value;
     }
@@ -65,7 +61,7 @@ ArduinoSettings.setCompilerLocationHtml = function(new_el) {
  */
 ArduinoSettings.setSketchLocationHtml = function(new_el) {
   if (new_el != null) {
-    var sketch_loc_ip = document.getElementById('settings_sketch_location')
+    var sketch_loc_ip = document.getElementById('settings_sketch_location');
     if (sketch_loc_ip != null) {
       sketch_loc_ip.value = new_el.value;
     }
@@ -80,7 +76,7 @@ ArduinoSettings.setSketchLocationHtml = function(new_el) {
  */
 ArduinoSettings.setArduinoBoardsHtml = function(new_el) {
   if (new_el != null) {
-    var board_dropdown = document.getElementById('board')
+    var board_dropdown = document.getElementById('board');
     if (board_dropdown != null) {
       new_el.id = 'board';
       new_el.onchange = ArduinoSettings.setBoard;
@@ -95,8 +91,8 @@ ArduinoSettings.setArduinoBoardsHtml = function(new_el) {
 ArduinoSettings.setBoard = function() {
   var el = document.getElementById('board');
   var board_value = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise here
-  ArduServerCompiler.setArduinoBoard(
+  //TODO: check how ArdublocklyServer deals with invalid data and sanitise here
+  ArdublocklyServer.setArduinoBoard(
       board_value, ArduinoSettings.setArduinoBoardsHtml);
 };
 
@@ -108,7 +104,7 @@ ArduinoSettings.setBoard = function() {
  */
 ArduinoSettings.setSerialPortsHtml = function(new_el) {
   if (new_el != null) {
-    var serial_dropdown = document.getElementById('serial_port')
+    var serial_dropdown = document.getElementById('serial_port');
     if (serial_dropdown != null) {
       new_el.id = 'serial_port';
       new_el.onchange = ArduinoSettings.setSerial;
@@ -117,14 +113,12 @@ ArduinoSettings.setSerialPortsHtml = function(new_el) {
   }
 };
 
-/**
- * Sets the Serial Port with the selected user input from the drop down.
- */
+/** Sets the Serial Port with the selected user input from the drop down. */
 ArduinoSettings.setSerial = function() {
   var el = document.getElementById('serial_port');
   var serial_value = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise
-  ArduServerCompiler.setSerialPort(
+  //TODO: check how ArdublocklyServer deals with invalid data and sanitise
+  ArdublocklyServer.setSerialPort(
       serial_value, ArduinoSettings.setSerialPortsHtml);
 };
 
@@ -136,7 +130,7 @@ ArduinoSettings.setSerial = function() {
  */
 ArduinoSettings.setIdeHtml = function(new_el) {
   if (new_el != null) {
-    var ide_dropdown = document.getElementById('ide_settings')
+    var ide_dropdown = document.getElementById('ide_settings');
     if (ide_dropdown != null) {
       new_el.id = 'ide_settings';
       new_el.onchange = ArduinoSettings.setIdeSettings;
@@ -151,8 +145,8 @@ ArduinoSettings.setIdeHtml = function(new_el) {
 ArduinoSettings.setIdeSettings = function() {
   var el = document.getElementById('ide_settings');
   var ide_value = el.options[el.selectedIndex].value;
-  //TODO: check how ArduServerCompiler deals with invalid data and sanitise
-  ArduServerCompiler.setIdeOptions(ide_value, ArduinoSettings.setIdeHtml);
+  //TODO: check how ArdublocklyServer deals with invalid data and sanitise
+  ArdublocklyServer.setIdeOptions(ide_value, ArduinoSettings.setIdeHtml);
 };
 
 /**
