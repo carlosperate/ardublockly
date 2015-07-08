@@ -301,29 +301,21 @@ ul.side-nav li.side-menu-end {
   width: 160px;
   z-index: 12;
 }
-#button_run {
+#button_ide_large {
   position: absolute;
   right: 0px;
   top: 0px;
-  background-color: #E47128;  /* Arduino orange */
+  width: 55px;
+  height: 55px;
 }
-#button_run:hover {
-  background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
+#button_ide_large i {
+  font-size: 2.4rem !important;
+  line-height: 55px;
 }
-.run_loader {
-  position: absolute !important;
-  right: 0px !important;
-  top: 0px !important;
-  width: 56px !important;
-  height: 56px !important; 
-  z-index: 5;
-}
-
-#button_verify {
+#button_ide_middle {
   position: absolute;
   right: 72px;
   top: 10px;
-  background-color: #00979C;  /* Arduino teal */
   visibility: hidden;
   opacity: 0;
   -moz-transition: visibility 0.3s linear, opacity 0.3s linear;
@@ -331,15 +323,10 @@ ul.side-nav li.side-menu-end {
   -o-transition: visibility 0.3s linear, opacity 0.3s linear;
   transition: visibility 0.3s linear, opacity 0.3s linear;
 }
-#button_verify:hover {
-  background-color: #62AEB2;  /* Arduino teal light */
-}
-
-#button_open_ide {
+#button_ide_left {
   position: absolute;
   right: 126px;
   top: 10px;
-  background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
   visibility: hidden;
   opacity: 0;
   -moz-transition: visibility 0.3s linear, opacity 0.3s linear;
@@ -347,8 +334,18 @@ ul.side-nav li.side-menu-end {
   -o-transition: visibility 0.3s linear, opacity 0.3s linear;
   transition: visibility 0.3s linear, opacity 0.3s linear;
 }
-#button_open_ide:hover {
-  background-color: rgba(255, 220, 110, 1);  /* Lighter Arduino yellow */
+#button_ide_large:hover:before,
+#button_ide_middle:hover:before,
+#button_ide_left:hover:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255, 0.25);
+  transition: all .3s linear;
 }
 
 #button_load_xml {
@@ -360,17 +357,17 @@ ul.side-nav li.side-menu-end {
 
 /* These floating buttons needs to be at a higher z index than card when */
 /* floating and lower when clicked.  */
-#button_run:hover,
-#button_open_ide:hover,
-#button_verify:hover,
+#button_ide_large:hover,
+#button_ide_middle:hover,
+#button_ide_left:hover,
 #button_load_xml:hover {
   -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-#button_run:active,
-#button_open_ide:active,
-#button_verify:active,
+#button_ide_large:active,
+#button_ide_middle:active,
+#button_ide_left:active,
 #button_load_xml:active {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
@@ -411,9 +408,17 @@ ul.side-nav li.side-menu-end {
 }
 
 
-/*************************/
-/*  New spinner colours  */
-/*************************/
+/*****************************/
+/*  Spinner and new colours  */
+/*****************************/
+.ide_loader {
+  position: absolute !important;
+  right: 0px !important;
+  top: 0px !important;
+  width: 56px !important;
+  height: 56px !important; 
+  z-index: 5;
+}
 .spinner-orange {
   border-color: #E47128;
 }
@@ -422,7 +427,6 @@ ul.side-nav li.side-menu-end {
   -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
-
 .spinner-dark-teal {
   border-color: #00878F;
 }
@@ -431,7 +435,6 @@ ul.side-nav li.side-menu-end {
   -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
-
 .spinner-yellow {
   border-color: rgba(255, 204, 51, 1);
 }
@@ -440,7 +443,6 @@ ul.side-nav li.side-menu-end {
   -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
-
 .spinner-light-teal {
   border-color: #62AEB2;
 }
@@ -449,7 +451,6 @@ ul.side-nav li.side-menu-end {
   -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
   animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
-
 .spinner-purple {
   border-color: #8e24aa;
 }
@@ -811,13 +812,19 @@ ul.side-nav li ul li ul li {
 .mdi-action-visibility-off {
   font-size: 1.5rem !important;
 }
-#button_run .mdi-av-play-arrow {
-  font-size: 2.5rem !important;
+#button_ide_large .mdi-av-play-arrow,
+#button_ide_large .mdi-navigation-check,
+#button_ide_large .mdi-action-open-in-browser {
+
 }
 #button_load_xml .mdi-action-extension {
   font-size: 2rem !important;
 }
 
+/* Why the hell does button large has a predefined background colour !! */
+.btn-large:hover {
+  background-color: inherit;
+}
 /* Circle clipper (loading animation) thickness */
 .circle-clipper .circle {
   border-width: 4px !important;

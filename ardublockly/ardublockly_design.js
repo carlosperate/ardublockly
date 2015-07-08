@@ -67,29 +67,12 @@ Ardublockly.bindDesignEventListeners = function() {
       });
 
   // Display/hide the additional IDE buttons when mouse over/out of play button
-  $('#button_run').mouseenter(function() {
+  $('#button_ide_large').mouseenter(function() {
       Ardublockly.showExtraIdeButtons(true);
   });
   $('#ide_buttons_wrapper').mouseleave(function() {
       Ardublockly.showExtraIdeButtons(false);
   });
-};
-
-/**
- * Shows or hides the spinner around the play button.
- * @param {!boolean} active True turns ON the spinner, false OFF.
- */
-Ardublockly.runButtonSpinner = function(active) {
-  var spinner = document.getElementById('button_run_spinner');
-  var buttonEl = document.getElementById('button_run');
-  var buttonClass = buttonEl.className;
-  if (active) {
-    spinner.style.display = 'block';
-    buttonEl.className = buttonClass.replace('arduino_orange', 'grey');
-  } else {
-    spinner.style.display = 'none';
-    buttonEl.className = buttonClass.replace('grey', 'arduino_orange');
- }
 };
 
 /**
@@ -110,36 +93,100 @@ Ardublockly.buttonLoadXmlCodeDisplay = function() {
 };
 
 /**
+ * Changes the IDE launch buttons based on the option indicated in the argument.
+ * Uses jQuery.
+ * @param {!string} value One of the 3 possible values from the drop down select
+ *                        in the settings modal: 'upload', 'verify', or 'open'.
+ */
+Ardublockly.changeIdeButtonsDesign = function(value) {
+  var buttonLeft = document.getElementById('button_ide_left');
+  var iconLeft = document.getElementById('button_ide_left_icon');
+  var buttonMiddle = document.getElementById('button_ide_middle');
+  var iconMiddle = document.getElementById('button_ide_middle_icon');
+  var buttonLarge = document.getElementById('button_ide_large');
+  var iconLarge = document.getElementById('button_ide_large_icon');
+
+  if (value === 'upload') {
+    buttonLeft.className = 
+        buttonLeft.className.replace(/arduino_\S+/, 'arduino_yellow');
+    iconLeft.className = 'mdi-action-open-in-browser';
+    buttonMiddle.className = 
+        buttonMiddle.className.replace(/arduino_\S+/, 'arduino_teal');
+    iconMiddle.className = 'mdi-navigation-check';
+    buttonLarge.className = 
+        buttonLarge.className.replace(/arduino_\S+/, 'arduino_orange');
+    iconLarge.className = 'mdi-av-play-arrow';
+  } else if (value === 'verify') {
+    buttonLeft.className =
+        buttonLeft.className.replace(/arduino_\S+/, 'arduino_yellow');
+    iconLeft.className = 'mdi-action-open-in-browser';
+    buttonMiddle.className = 
+        buttonMiddle.className.replace(/arduino_\S+/, 'arduino_orange');
+    iconMiddle.className = 'mdi-av-play-arrow';
+    buttonLarge.className = 
+        buttonLarge.className.replace(/arduino_\S+/, 'arduino_teal');
+    iconLarge.className = 'mdi-navigation-check';
+  } else if (value === 'open') {
+    buttonLeft.className = 
+        buttonLeft.className.replace(/arduino_\S+/, 'arduino_teal');
+    iconLeft.className = 'mdi-navigation-check';
+    buttonMiddle.className = 
+        buttonMiddle.className.replace(/arduino_\S+/, 'arduino_orange');
+    iconMiddle.className = 'mdi-av-play-arrow';
+    buttonLarge.className = 
+        buttonLarge.className.replace(/arduino_\S+/, 'arduino_yellow');
+    iconLarge.className = 'mdi-action-open-in-browser';
+  }
+};
+
+/**
  * Displays or hides the additional Arduino IDE action buttons.
  * Hide/display effects done with CCS3 transitions on visibility and opacity.
  * @param {!boolean} show Indicates if the extra buttons are to be shown.
  */
 Ardublockly.showExtraIdeButtons = function(show) {
-  var openIdeButton = document.getElementById('button_open_ide');
-  var verifyButton = document.getElementById('button_verify');
+  var IdeButtonLeft = document.getElementById('button_ide_left');
+  var IdeButtonMiddle = document.getElementById('button_ide_middle');
   if (show) {
     // prevent previously set time-out to hide buttons while trying to show them
     clearTimeout(Ardublockly.outHoldtimeoutHandle);
     clearTimeout(Ardublockly.hidetimeoutHandle);
-    verifyButton.style.visibility = 'visible';
-    verifyButton.style.opacity = '1';
+    IdeButtonMiddle.style.visibility = 'visible';
+    IdeButtonMiddle.style.opacity = '1';
     Ardublockly.showtimeoutHandle = setTimeout(function() {
-      openIdeButton.style.visibility = 'visible';
-      openIdeButton.style.opacity = '1';
+      IdeButtonLeft.style.visibility = 'visible';
+      IdeButtonLeft.style.opacity = '1';
     }, 50);
   } else {
     // As the mouse out can be accidental, only hide them after a delay
     Ardublockly.outHoldtimeoutHandle = setTimeout(function() {
       // Prevent show time-out to affect the hiding of the buttons
       clearTimeout(Ardublockly.showtimeoutHandle);
-      openIdeButton.style.visibility = 'hidden';
-      openIdeButton.style.opacity = '0';
+      IdeButtonLeft.style.visibility = 'hidden';
+      IdeButtonLeft.style.opacity = '0';
       Ardublockly.hidetimeoutHandle = setTimeout(function() {
-        verifyButton.style.visibility = 'hidden';
-        verifyButton.style.opacity = '0';
+        IdeButtonMiddle.style.visibility = 'hidden';
+        IdeButtonMiddle.style.opacity = '0';
       }, 50);
     }, 200);
   }
+};
+
+/**
+ * Shows or hides the spinner around the large IDE button.
+ * @param {!boolean} active True turns ON the spinner, false OFF.
+ */
+Ardublockly.largeIdeButtonSpinner = function(active) {
+  var spinner = document.getElementById('button_ide_large_spinner');
+  var buttonIdeLarge = document.getElementById('button_ide_large');
+  var buttonClass = buttonIdeLarge.className;
+  if (active) {
+    spinner.style.display = 'block';
+    buttonIdeLarge.className = buttonIdeLarge.className + ' grey';
+  } else {
+    spinner.style.display = 'none';
+    buttonIdeLarge.className = buttonClass.replace(' grey', '');
+ }
 };
 
 /**
@@ -182,12 +229,17 @@ Ardublockly.displayToolbox = function(show) {
     buttonIcon.className = buttonIcon.className.replace(visOn, visOff);
     toolbox.animate(
         {height: document.getElementById('content_blocks').style.height}, 300,
-        function() { $('#toolboxButtonScreen').remove(); });
+        function() {
+          Blockly.fireUiEvent(window, 'resize');
+          $('#toolboxButtonScreen').remove();
+        });
   } else {
     buttonIcon.className = buttonIcon.className.replace(visOff, visOn);
     toolbox.animate({height: 38}, 300, function() {
       button.className = button.className.replace(classOff, classOn);
       toolbox.fadeOut(350, 'linear', function() {
+        Blockly.fireUiEvent(window, 'resize');
+        setTimeout(function() { toolbox.height(38); }, 100);
         $('#toolboxButtonScreen').remove();
       });
     });
