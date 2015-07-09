@@ -106,9 +106,10 @@ class ServerCompilerSettings(object):
         # Load settings from file
         self.read_settings()
 
-    def _drop(self):
+    @classmethod
+    def _drop(cls):
         """ Drop the instance. """
-        self.__singleton_instance = None
+        cls.__singleton_instance = None
 
     #
     # Compiler Directory accessors

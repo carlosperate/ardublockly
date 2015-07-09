@@ -37,16 +37,6 @@ install:
   - npm install
   - npm run release
   - cd ../..
-  # Removing symlinks due to bug https://github.com/atom/electron/issues/1801
-  - ls arduexec.app
-  - ls arduexec.app/Contents/
-  - ls arduexec.app/Contents/Frameworks/
-  - ls "arduexec.app/Contents/Frameworks/Electron Framework.framework/"
-  #- sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Frameworks"
-  - sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Libraries/Libraries"
-  #- sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Versions/Current/Libraries/Libraries"
-  #- sudo rm "arduexec.app/Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/Libraries"
-
   - python package/pack_ardublockly.py
   - du -sk releases/
 

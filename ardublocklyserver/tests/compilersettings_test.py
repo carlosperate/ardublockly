@@ -50,6 +50,13 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
             print('Removing settings file from %s' % settings_file)
             os.remove(settings_file)
 
+    def new_ServerCompilerSettings_instance(self):
+        """
+        Drops the current ServerCompilerSettings instance and creates a new one.
+        """
+        ServerCompilerSettings()._drop()
+        return ServerCompilerSettings()
+
     #
     # Testing the class singleton property
     #
@@ -73,21 +80,28 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     def test_compiler_dir_valid_accesor(self, mock_os_path_isfile):
         self.delete_default_settings_file()
         # Creating the instance will create the settings file
-        instance = ServerCompilerSettings()
-        self.assertEqual(
-            instance.compiler_dir,
-            instance._ServerCompilerSettings__compiler_dir)
+        instance = self.new_ServerCompilerSettings_instance()
+        self.assertIsNone(instance.compiler_dir)
+        self.assertIsNone(instance._ServerCompilerSettings__compiler_dir)
 
         # Testing setter with valid input
         mock_os_path_isfile.return_value = True
         old_compiler_dir = instance.compiler_dir
+        self.assertIsNone(old_compiler_dir)
         new_compiler_dir = os.path.join(os.getcwd(), 'random.exe')
         instance.compiler_dir = new_compiler_dir
         self.assertEqual(
             instance.compiler_dir,
             instance._ServerCompilerSettings__compiler_dir)
-        self.assertEqual(instance.compiler_dir, new_compiler_dir)
-        self.assertNotEqual(instance.compiler_dir, old_compiler_dir)
+        # For now we depend on having CI builds on each platform
+        if sys.platform == 'darwin':
+            # Mac has to search for the executable inside the app bundle, so it
+            # will end up being: new_dir/Contents/MacOS/JavaApplicationStub
+            self.assertTrue(new_compiler_dir in instance.compiler_dir)
+            self.assertIsNotNone(instance.compiler_dir)
+        else:
+            self.assertEqual(new_compiler_dir, instance.compiler_dir)
+            self.assertNotEqual(old_compiler_dir, instance.compiler_dir)
 
     @mock.patch('ardublocklyserver.compilersettings.os.path.isfile')
     def test_compiler_dir_invalid_accesor(self, mock_os_path_isfile):
@@ -96,13 +110,23 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
              A file that does not exists
              Just a folder
         """
+        self.delete_default_settings_file()
+
         # Test for failure, mock that the file does not exists
         mock_os_path_isfile.return_value = False
-        original_dir = ServerCompilerSettings().compiler_dir
+        original_dir = self.new_ServerCompilerSettings_instance().compiler_dir
+        self.assertIsNone(original_dir)
         new_dir = os.path.join(os.getcwd(), 'random.exe')
         ServerCompilerSettings().compiler_dir = new_dir
-        self.assertNotEqual(new_dir, ServerCompilerSettings().compiler_dir)
-        self.assertEqual(original_dir, ServerCompilerSettings().compiler_dir)
+        # For now we depend on having CI builds on each platform
+        if sys.platform == 'darwin':
+            # Mac has to search for the executable inside the app bundle, so it
+            # will end up being: new_dir/Contents/MacOS/JavaApplicationStub
+            self.assertIsNone(ServerCompilerSettings().compiler_dir)
+        else:
+            self.assertNotEqual(new_dir, ServerCompilerSettings().compiler_dir)
+            self.assertEqual(original_dir,
+                             ServerCompilerSettings().compiler_dir)
 
         # Test for directory not accepted as a valid compiler file
         mock_os_path_isfile.return_value = True
@@ -144,7 +168,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     def test_ide_valid_accesor(self):
         self.delete_default_settings_file()
         # Creating the instance will create the settings file
-        instance = ServerCompilerSettings()
+        instance = self.new_ServerCompilerSettings_instance()
         self.assertEqual(
             instance.load_ide_option,
             instance._ServerCompilerSettings__load_ide_option)
@@ -163,7 +187,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     def test_ide_invalid_accesor(self):
         # Creating the instance will create the settings file with defaults
         self.delete_default_settings_file()
-        instance = ServerCompilerSettings()
+        instance = self.new_ServerCompilerSettings_instance()
 
         # Testing setter with value instead of key inputs
         ide_dict = instance.get_load_ide_options()
