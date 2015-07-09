@@ -150,9 +150,15 @@ Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
 
 /** Initialises the IDE buttons with the default option from the server. */
 Ardublockly.initialiseIdeButtons = function() {
-  ArdublocklyServer.requestIdeOptions(function(data) {
-    Ardublockly.setIdeHtml(data);
-    Ardublockly.setIdeSettings();
+  ArdublocklyServer.requestIdeOptions(function(jsonResponse) {
+    if (jsonResponse != null) {
+      var parsedJson = JSON.parse(jsonResponse);
+      // "response_type" : "settings_board",
+      //   "element" : "dropdown",
+      //   "options" : [ {"value" : "XXX", "text" : "XXX"}, ...]
+      //   "selected": "selected key"}
+      Ardublockly.changeIdeButtons(parsedJson.selected);
+    } // else Null: Ardublockly server is not running, do nothing
   });
 };
 

@@ -207,12 +207,12 @@ def load_arduino_cli(sketch_path=None):
         error = 'The compiler directory has not been set.\n\r' + \
                 'Please set it in the Settings.'
     else:
-        if not ServerCompilerSettings().launch_IDE_option:
+        if not ServerCompilerSettings().load_ide_option:
             success = False
             conclusion = 'What should we do with the Sketch?'
             error = 'The launch IDE option has not been set.n\r' + \
                     'Please select an IDE option in the Settings.'
-        elif ServerCompilerSettings().launch_IDE_option == 'upload':
+        elif ServerCompilerSettings().load_ide_option == 'upload':
             if not ServerCompilerSettings().get_serial_port_flag():
                 success = False
                 conclusion = 'Serial Port unavailable'
@@ -230,7 +230,7 @@ def load_arduino_cli(sketch_path=None):
     if success:
         # Concatenates the CLI command and execute if the flags are valid
         cli_command = [ServerCompilerSettings().compiler_dir]
-        if ServerCompilerSettings().launch_IDE_option == 'upload':
+        if ServerCompilerSettings().load_ide_option == 'upload':
             conclusion = 'Successfully Uploaded Sketch'
             cli_command.append('--upload')
             cli_command.append('--port')
@@ -238,7 +238,7 @@ def load_arduino_cli(sketch_path=None):
             cli_command.append('--board')
             cli_command.append(
                 ServerCompilerSettings().get_arduino_board_flag())
-        elif ServerCompilerSettings().launch_IDE_option == 'verify':
+        elif ServerCompilerSettings().load_ide_option == 'verify':
             conclusion = 'Successfully Verified Sketch'
             cli_command.append('--verify')
         cli_command.append(sketch_path)
@@ -246,7 +246,7 @@ def load_arduino_cli(sketch_path=None):
         print('\n\rCLI command:')
         print(cli_command)
 
-        if ServerCompilerSettings().launch_IDE_option == 'open':
+        if ServerCompilerSettings().load_ide_option == 'open':
             # Launch Arduino IDE in a subprocess without blocking server
             subprocess.Popen(cli_command, shell=False)
             conclusion = 'Sketch opened in IDE'
@@ -465,7 +465,7 @@ def get_serial_ports():
 # Launch IDE settings #
 #######################
 def set_load_ide_only(new_value):
-    ServerCompilerSettings().launch_IDE_option = new_value
+    ServerCompilerSettings().load_ide_option = new_value
     return get_load_ide_only()
 
 
@@ -484,9 +484,9 @@ def get_load_ide_only():
          'element': 'dropdown',
          'options': []}
     #TODO: Check for None, however won't happen because static dict in settings
-    ide_options = ServerCompilerSettings().get_launch_ide_options()
+    ide_options = ServerCompilerSettings().get_load_ide_options()
     for key in ide_options:
         json_data['options'].append(
             {'value': key, 'display_text': ide_options[key]})
-    json_data.update({'selected': ServerCompilerSettings().launch_IDE_option})
+    json_data.update({'selected': ServerCompilerSettings().load_ide_option})
     return json.dumps(json_data)

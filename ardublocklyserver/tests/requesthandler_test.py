@@ -47,7 +47,7 @@ class BlocklyRequestHandlerTestCase(unittest.TestCase):
 
         test_compiler_dir = os.path.join(os.getcwd(), 'arduino.exe')
         mock_settings = requesthandler.ServerCompilerSettings()
-        mock_settings.__compiler_dir__ = test_compiler_dir
+        mock_settings.__compiler_dir = test_compiler_dir
         requesthandler.ServerCompilerSettings().launch_IDE_only = True
 
         # Build expected string and run test
