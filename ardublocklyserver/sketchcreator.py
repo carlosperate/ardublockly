@@ -9,7 +9,7 @@
 from __future__ import unicode_literals, absolute_import
 import os
 
-from ardublocklyserver.py23 import py23
+from ardublocklyserver.six import six
 from ardublocklyserver.compilersettings import ServerCompilerSettings
 
 
@@ -48,7 +48,7 @@ class SketchCreator(object):
                  Return None indicates an error has occurred.
         """
         sketch_path = self.build_sketch_path()
-        if isinstance(sketch_code, py23.string_type_compare)\
+        if isinstance(sketch_code, six.string_types)\
                 and sketch_code:
             code_to_write = sketch_code
         else:

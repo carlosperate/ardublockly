@@ -11,7 +11,9 @@ import subprocess
 import time
 import json
 import cgi
+import sys
 import re
+import os
 try:
     # 2.x name
     import Tkinter
@@ -25,7 +27,6 @@ except ImportError:
     import tkinter.filedialog as tkFileDialog
     import http.server as SimpleHTTPServer
 
-from ardublocklyserver.py23 import py23
 from ardublocklyserver.compilersettings import ServerCompilerSettings
 from ardublocklyserver.sketchcreator import SketchCreator
 
@@ -46,7 +47,7 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
 
         if content_type == 'application/x-www-form-urlencoded':
             parameters = urlparse.parse_qs(
-                py23.b_unicode(self.rfile.read(content_length)),
+                parse_qs_encoder(self.rfile.read(content_length)),
                 keep_blank_values=False)
             message_back = handle_settings(parameters)
         elif content_type == 'text/plain':
@@ -90,6 +91,19 @@ class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         if code != 200:
             self.log_message('"%s" %s %s',
                              self.requestline, str(code), str(size))
+
+
+def parse_qs_encoder(url_to_encode):
+    """
+    The urlparse.parse_qs function requires an ASCII input in python 3 and a
+    unicode array in Python 2, so this helper function is used to return the
+    right data.
+    :return: Input string encoded in the format required by urlparse.parse_qs.
+    """
+    if sys.version_info[0] == 3:
+        return url_to_encode.decode('utf-8')
+    else:
+        return str(url_to_encode).encode('utf-8')
 
 
 #################
@@ -188,11 +202,11 @@ def load_arduino_cli(sketch_path=None):
     """
     Launches a command line that invokes the Arduino IDE to open, verify or
     upload an sketch, which address is indicated in the input parameter
+    :param sketch_path:
     :return: A tuple with the following data (output, error output, exit code)
     """
     # Input sanitation and output defaults
-    if not isinstance(sketch_path, py23.string_type_compare) \
-            or not sketch_path:
+    if not sketch_path or os.path.isdir(sketch_path):
         sketch_path = create_sketch_default()
     success = True
     conclusion = ''
@@ -241,7 +255,7 @@ def load_arduino_cli(sketch_path=None):
         elif ServerCompilerSettings().load_ide_option == 'verify':
             conclusion = 'Successfully Verified Sketch'
             cli_command.append('--verify')
-        cli_command.append(sketch_path)
+        cli_command.append("%s" % sketch_path)
         #cli_command = ' '.join(cli_command)
         print('\n\rCLI command:')
         print(cli_command)
@@ -337,8 +351,8 @@ def browse_dir():
 #####################
 def set_compiler_path():
     """
-    Opens the file browser to select a file. Saves this filepath into
-    ServerCompilerSettings and if the filepath is different to that stored
+    Opens the file browser to select a file. Saves this file path into
+    ServerCompilerSettings and if the file path is different to that stored
     already it triggers the new data to be saved into the settings file.
     """
     new_path = browse_file()
