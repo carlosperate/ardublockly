@@ -108,22 +108,34 @@ Ardublockly.bindActionFunctions = function() {
 
 /** Sets the Ardublockly server IDE setting to upload and sends the code. */
 Ardublockly.ideSendUpload = function() {
-  Ardublockly.showExtraIdeButtons(false);
-  Ardublockly.setIdeSettings(null, 'upload');
+  // Check if this is the currently selected option before edit sever setting
+  if (Ardublockly.ideButtonLargeAction !== Ardublockly.ideSendUpload) {
+    Ardublockly.showExtraIdeButtons(false);
+    Ardublockly.setIdeSettings(null, 'upload');
+  }
+  Materialize.toast('Opening sketch in the Arduino IDE...', 4000);
   Ardublockly.sendCode();
 };
 
 /** Sets the Ardublockly server IDE setting to verify and sends the code. */
 Ardublockly.ideSendVerify = function() {
-  Ardublockly.showExtraIdeButtons(false);
-  Ardublockly.setIdeSettings(null, 'verify');
+  // Check if this is the currently selected option before edit sever setting
+  if (Ardublockly.ideButtonLargeAction !== Ardublockly.ideSendVerify) {
+    Ardublockly.showExtraIdeButtons(false);
+    Ardublockly.setIdeSettings(null, 'verify');
+  }
+  Materialize.toast('Verifying sketch...', 4000);
   Ardublockly.sendCode();
 };
 
 /** Sets the Ardublockly server IDE setting to open and sends the code. */
 Ardublockly.ideSendOpen = function() {
-  Ardublockly.showExtraIdeButtons(false);
-  Ardublockly.setIdeSettings(null, 'open');
+  // Check if this is the currently selected option before edit sever setting
+  if (Ardublockly.ideButtonLargeAction !== Ardublockly.ideSendOpen) {
+    Ardublockly.showExtraIdeButtons(false);
+    Ardublockly.setIdeSettings(null, 'open');
+  }
+  Materialize.toast('Uploading sketch into Arduino...', 4000);
   Ardublockly.sendCode();
 };
 
@@ -452,7 +464,6 @@ Ardublockly.setIdeSettings = function(e, preset) {
  * message from server).
  */
 Ardublockly.sendCode = function() {
-  Materialize.toast('Sending sketch to Arduino IDE...', 4000);
   Ardublockly.largeIdeButtonSpinner(true);
   ArdublocklyServer.sendSketchToServer(
       Ardublockly.generateArduino(), Ardublockly.sendCodeReturn);
