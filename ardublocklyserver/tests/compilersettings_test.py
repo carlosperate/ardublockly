@@ -163,6 +163,66 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
             self.assertEqual(final_dir, ServerCompilerSettings().compiler_dir)
 
     #
+    # Test the sketch name accessors
+    #
+    def test_sketch_name_valid_accesor(self):
+        #TODO: This test
+        pass
+
+    def test_sketch_name_invalid_accesor(self):
+        #TODO: This test
+        pass
+
+    #
+    # Test the sketch directory accessors
+    #
+    def test_sketch_dir_valid_accesor(self):
+        #TODO: This test
+        pass
+
+    def test_sketch_dir_invalid_accesor(self):
+        #TODO: This test
+        pass
+
+    #
+    # Test the Arduino boards accessors
+    #
+    def test_arduino_board_valid_accesor(self):
+        #TODO: This test
+        pass
+
+    def test_arduino_board_invalid_accesor(self):
+        #TODO: This test
+        pass
+
+    def test_get_arduino_board_flag(self):
+        #TODO: This test
+        pass
+
+    def test_get_arduino_board_types(self):
+        #TODO: This test
+        pass
+
+    #
+    # Test the serial port accessors
+    #
+    def test_serial_port_valid_accesor(self):
+        #TODO: This test
+        pass
+
+    def test_serial_port_invalid_accesor(self):
+        #TODO: This test
+        pass
+
+    def test_get_serial_port_flag(self):
+        #TODO: This test
+        pass
+
+    def test_get_serial_ports(self):
+        #TODO: This test
+        pass
+
+    #
     # Testing the launch_IDE_option accessors
     #
     def test_ide_valid_accesor(self):
@@ -202,7 +262,23 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
             self.assertEqual(instance.load_ide_option, old_load_ide_option)
 
     #
-    # Testing the settings file
+    # Test the default values function
+    #
+    def test_set_default_settings(self):
+        #TODO: This test
+        pass
+
+    def test_new_settings_file_defaults(self):
+        """
+        Tests that a newly created instance without an already existing settings
+        file contains the default settings.
+        :return:
+        """
+        #TODO: This test
+        pass
+
+    #
+    # Testing the save and read settings file functionality
     #
     def test_settings_file_creation(self):
         """
@@ -214,7 +290,16 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         ServerCompilerSettings().save_settings()
         self.assertTrue(os.path.exists(settings_file))
 
-    def test_settings_file_read(self):
+    def test_settings_file_deletion(self):
+        self.delete_default_settings_file()
+        settings_file = self.get_default_settings_file_dir()
+        self.assertFalse(os.path.exists(settings_file))
+        ServerCompilerSettings().save_settings()
+        self.assertTrue(os.path.exists(settings_file))
+        ServerCompilerSettings().delete_settings_file()
+        self.assertFalse(os.path.exists(settings_file))
+
+    def test_settings_file_simple_read(self):
         """
         Simple test that checks for no exceptions happening while creating
         and loading the created file.
@@ -223,6 +308,22 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         ServerCompilerSettings().set_default_settings()
         ServerCompilerSettings().get_settings_file_data()
         ServerCompilerSettings().save_settings()
+
+    def test_settings_file_read(self):
+        """
+        Tests that the settings are saved into a file and read correctly.
+        Checks that all saved settings are retrieved.
+        """
+        #TODO: This test
+        pass
+
+    def test_save_file_unicode(self):
+        #TODO: This test
+        pass
+
+    def test_read_file_unicode(self):
+        #TODO: This test
+        pass
 
 
 if __name__ == '__main__':

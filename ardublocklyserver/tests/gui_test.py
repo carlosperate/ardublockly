@@ -23,7 +23,7 @@ except ImportError:
 
 class GuiTestCase(unittest.TestCase):
     """
-    Tests for gu    i module
+    Tests for gui module
     """
 
     #

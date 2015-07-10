@@ -276,7 +276,7 @@ def get_serial_ports():
 
 
 #
-# Launch IDE settings
+# Load IDE settings
 #
 def set_load_ide_only(new_value):
     ServerCompilerSettings().load_ide_option = new_value

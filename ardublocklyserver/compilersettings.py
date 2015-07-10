@@ -59,10 +59,10 @@ class ServerCompilerSettings(object):
                                'arduino:avr:diecimila:cpu=atmega168'}
 
     # Class dictionary to contain the computer COM ports, dynamic content
-    __serial_ports = {'port1': 'COM1'}
+    __serial_ports = {'port0': 'COM1'}
 
     # Class dictionary to define IDE load options, static content
-    __ide_load_options = {'open': 'Open sketch in IDE ',
+    __ide_load_options = {'open': 'Open sketch in IDE',
                           'verify': 'Verify sketch',
                           'upload': 'Compile and Upload sketch'}
 
@@ -392,7 +392,7 @@ class ServerCompilerSettings(object):
         Checks available Serial Ports and populates the serial port dictionary.
         If the new serial port is not in the dictionary or the dictionary is
         empty it prints an error in the console.
-        :param new_port: the new port to set
+        :param new_port_value: the new port to set
         """
         # Check if the settings file value is present in available ports list
         set_default = True
@@ -457,7 +457,7 @@ class ServerCompilerSettings(object):
                 port_id += 1
 
     #
-    # Load the IDE only accessors
+    # Load the IDE accessors
     #
     def get_load_ide(self):
         return self.__load_ide_option
@@ -617,34 +617,3 @@ class ServerCompilerSettings(object):
     def delete_settings_file(self):
         if os.path.exists(self.__settings_path):
             os.remove(self.__settings_path)
-
-    def get_board_value_from_key(self, string_key):
-        """
-        As the board types are stored in a dictionary, the key and value for
-        the selected board are stored independently in 2 strings. This method
-        gets the dictionary value from a given key.
-        :param string_key: String representing the board_types dictionary key
-        :return: A string representation of board_types dictionary value from
-                 the key.
-        """
-        string_value = None
-        for key in self.__arduino_types:
-            if string_key is key:
-                string_value = self.__arduino_types[key]
-        return string_value
-
-    def get_board_key_from_value(self, string_value):
-        """
-        As the board types are stored in a dictionary, the key and value for
-        the selected board are stored independently in 2 strings. This method
-        gets the dictionary key from a given value.
-        :param string_value: String representing the board_types dictionary
-                             value to be found.
-        :return: A string representation of board_types dictionary key for
-                 the given value.
-        """
-        string_key = None
-        for key in self.__arduino_types:
-            if string_value is self.__arduino_types[key]:
-                string_key = key
-        return string_key
