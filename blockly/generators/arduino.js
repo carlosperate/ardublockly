@@ -4,7 +4,8 @@
  *
  * Based on work of Fred Lin (gasolin@gmail.com) for Blocklyduino.
  *
- * @fileoverview Helper functions for generating Arduino for blocks.
+ * @fileoverview Helper functions for generating Arduino language (C++) for
+ *               blocks.
  *
  */
 'use strict';
@@ -95,12 +96,12 @@ var profile = {
     builtin_led: [['BUILTIN_1', '13']],
     pin_types: { INPUT: 'INPUT', OUTPUT: 'OUTPUT', PWM: 'PWM', SERVO: 'SERVO',
                  STEPPER: 'STEPPER', SPI: 'SPI' },
-    types : [['void', 'void'], ['Boolean', 'boolean'], ['Character', 'char'],
+    /*types : [['void', 'void'], ['Boolean', 'boolean'], ['Character', 'char'],
              ['Unsigned Character', 'unsigned char'], ['Byte', 'byte'],
              ['Integer', 'int'], ['Unsigned Integer', 'unsigned int'],
              ['Word', 'word'], ['Long', 'long'],
              ['Unsigned Long', 'unsigned long'], ['Short', 'short'],
-             ['Float', 'float'], ['Double', 'double'], ['String', 'String']],
+             ['Float', 'float'], ['Double', 'double'], ['String', 'String']],*/
     spi_clock_divide: [['2 (8MHz)', 'SPI_CLOCK_DIV2'],
                        ['4 (4MHz)', 'SPI_CLOCK_DIV4'],
                        ['8 (2MHz)', 'SPI_CLOCK_DIV8'],
@@ -138,14 +139,14 @@ profile['default'] = profile['arduino'];
  * @param {Blockly.Workspace} workspace Workspace to generate code from.
  */
 Blockly.Arduino.init = function(workspace) {
-  // Create a dictionary of definitions to be printed before setups.
+  // Create a dictionary of definitions to be printed before setups
   Blockly.Arduino.definitions_ = Object.create(null);
-  // Create a dictionary of setups to be printed before the code.
+  // Create a dictionary of setups to be printed before the code
   Blockly.Arduino.setups_ = Object.create(null);
   // Create a dictionary of pins to check if their use conflicts
   Blockly.Arduino.pins_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
-  // to actual function names (to avoid collisions with user functions).
+  // to actual function names (to avoid collisions with user functions)
   Blockly.Arduino.functionNames_ = Object.create(null);
   
   if (!Blockly.Arduino.variableDB_) {
@@ -189,7 +190,7 @@ Blockly.Arduino.finish = function(code) {
   code = code.replace(/\n\s+$/, '\n');
   code = 'void loop() {\n' + code + '\n}';
 
-  // Convert the definitions dictionary into a list.
+  // Convert the definitions dictionary into a list
   var imports = [];
   var definitions = [];
   for (var name in Blockly.Arduino.definitions_) {
@@ -201,7 +202,7 @@ Blockly.Arduino.finish = function(code) {
     }
   }
 
-  // Convert the setups dictionary into a list.
+  // Convert the setups dictionary into a list
   var setups = [];
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
@@ -249,19 +250,19 @@ Blockly.Arduino.quote_ = function(string) {
  */
 Blockly.Arduino.scrub_ = function(block, code) {
   if (code === null) {
-    // Block has handled code generation itself.
+    // Block has handled code generation itself
     return '';
   }
   var commentCode = '';
-  // Only collect comments for blocks that aren't inline.
+  // Only collect comments for blocks that aren't inline
   if (!block.outputConnection || !block.outputConnection.targetConnection) {
     // Collect comment for this block.
     var comment = block.getCommentText();
     if (comment) {
       commentCode += this.prefixLines(comment, '// ') + '\n';
     }
-    // Collect comments for all value arguments.
-    // Don't collect comments for nested statements.
+    // Collect comments for all value arguments
+    // Don't collect comments for nested statements
     for (var x = 0; x < block.inputList.length; x++) {
       if (block.inputList[x].type == Blockly.INPUT_VALUE) {
         var childBlock = block.inputList[x].connection.targetBlock();
@@ -294,8 +295,10 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
       return 'undefined';
     case Blockly.StaticTyping.blocklyType.UNSPECIFIED:
       return 'void';
+    case Blockly.StaticTyping.blocklyType.NULL:
+      return 'NULL';
     case Blockly.StaticTyping.blocklyType.NUMBER:
-      return 'number';
+      return 'int';
     case Blockly.StaticTyping.blocklyType.INTEGER:
       return 'int';
     case Blockly.StaticTyping.blocklyType.DECIMAL:

@@ -47,7 +47,9 @@ Blockly.Arduino['variables_set'] = function(block) {
 Blockly.Arduino['variables_set_type'] = function(block) {
   var argument0 = Blockly.Arduino.valueToCode(block, 'VARIABLE_SETTYPE_INPUT',
       Blockly.Arduino.ORDER_ASSIGNMENT) || '0';
-  var varType = block.getFieldValue('VARIABLE_SETTYPE_TYPE');
+  var varType = Blockly.Arduino.getArduinoType_(
+      Blockly.StaticTyping.blocklyType[block.getFieldValue(
+          'VARIABLE_SETTYPE_TYPE')]);
   var code =  '(' + varType + ')(' + argument0 + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

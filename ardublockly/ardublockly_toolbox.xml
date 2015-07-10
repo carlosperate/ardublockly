@@ -107,9 +107,7 @@
     <block type="variables_set"></block>
     <block type="variables_set">
       <value name="VALUE">
-        <block type="variables_set_type">
-          <field name="VARIABLE_SETTYPE_TYPE">int</field>
-        </block>
+        <block type="variables_set_type"></block>
       </value>
     </block>
     <block type="variables_set_type"></block>
