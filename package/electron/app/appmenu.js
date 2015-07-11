@@ -12,7 +12,6 @@ var app = require('app');
 var Menu = require('menu');
 var shell = require('shell');
 var dialog = require('dialog');
-var jetpack = require('fs-jetpack');
 var MenuItem = require('menu-item');
 var server = require('./servermgr.js');
 var BrowserWindow = require('browser-window');
@@ -99,7 +98,17 @@ var getFileMenuData = function() {
             }, {
                 label: 'Open',
                 accelerator: 'CmdOrCtrl+O',
-                click: functionNotImplemented
+                click: function() {
+                    dialog.showMessageBox({
+                        type: "info",
+                        title: "Dialog",
+                        buttons: ["ok",],
+                        message: "This functionality has not yet been "+ 
+                                 "implemented in the window menu.\nYou can " +
+                                 "still open a blocks file using the 'Open' " +
+                                 "button on the main interface."
+                    });
+                }
             }, {
                 label: 'Save Blocks as',
                 accelerator: 'CmdOrCtrl+S',
@@ -368,7 +377,7 @@ var getDevMenuData = function() {
                 }
             }, {
                 label: 'Toggle DevTools',
-                accelerator: 'Alt+CmdOrCtrl+I',
+                accelerator: 'F12',
                 click: function() {
                     BrowserWindow.getFocusedWindow().toggleDevTools();
                 }
