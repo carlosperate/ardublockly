@@ -134,7 +134,7 @@ ArdublocklyClassic.init = function() {
   ArdublocklyClassic.tabClick(ArdublocklyClassic.selected);
 
   // Binding buttons
-  ArdublocklyClassic.bindClick('peekCode', ArdublocklyClassic.peekCode);
+  ArdublocklyClassic.bindClick('peek_code', ArdublocklyClassic.peekCode);
   ArdublocklyClassic.bindClick(
       'openButton', ArdublocklyClassic.loadUserXmlFile);
   ArdublocklyClassic.bindClick('saveButton', ArdublocklyClassic.saveXmlFile);
@@ -193,15 +193,15 @@ ArdublocklyClassic.loadToArduino = function() {
 /**
  * Displays the IDE output into a modal overlay.
  * Ensures there is a change listener to call 'setSerialPort' function.
- * @param {!element} data_back_el New HTML element to display output message
- *                                into the modal.
+ * @param {element} jsonResponse JSON data coming back from the server.
  */
-ArdublocklyClassic.loadToArduinoReturn = function(data_back_el) {
-  if (data_back_el != null) {
+ArdublocklyClassic.loadToArduinoReturn = function(jsonResponse) {
+  if (jsonResponse != null) {
+    var dataBack = ArdublocklyServer.createElementFromJson(jsonResponse);
     // edit modal with new content
     var modal = document.getElementById('modal_content');
     modal.innerHTML = '';
-    modal.appendChild(data_back_el);
+    modal.appendChild(dataBack);
     // display modal
     document.getElementById('modal_toggle').checked = true;
   } else {
@@ -226,7 +226,7 @@ ArdublocklyClassic.discard = function() {
  * Store the state the code sidebar visibility
  * @private
  */
-ArdublocklyClassic.peek_code_ = false;
+ArdublocklyClassic.peekCode_ = false;
 
 /**
  * Loads/unloads the side div with a code peek
@@ -234,28 +234,28 @@ ArdublocklyClassic.peek_code_ = false;
  *                           the code preview.
  */
 ArdublocklyClassic.peekCode = function(visible) {
-  var peek_code_button = document.getElementById('peekCode');
-  var code_peek_content = document.getElementById('arduino_code_peek');
+  var peekCodeButton = document.getElementById('peek_code');
+  var codePeekContent = document.getElementById('arduino_code_peek');
 
   if (visible == true) {
-    ArdublocklyClassic.peek_code_ = false;
+    ArdublocklyClassic.peekCode_ = false;
   } else if (visible == false) {
-    ArdublocklyClassic.peek_code_ = true;
+    ArdublocklyClassic.peekCode_ = true;
   }
 
-  if (ArdublocklyClassic.peek_code_ == false) {
-    ArdublocklyClassic.peek_code_ = true;
-    peek_code_button.className = 'button_text secondary';
+  if (ArdublocklyClassic.peekCode_ == false) {
+    ArdublocklyClassic.peekCode_ = true;
+    peekCodeButton.className = 'button_text secondary';
     ArdublocklyClassic.sideContent(true);
-    code_peek_content.style.display = 'inline-block';
+    codePeekContent.style.display = 'inline-block';
     // Regenerate arduino code and ensure every click does as well
     ArdublocklyClassic.renderArduinoPeekCode();
     ArdublocklyClassic.workspace.addChangeListener(
         ArdublocklyClassic.renderArduinoPeekCode);
   } else {
-    ArdublocklyClassic.peek_code_ = false;
-    peek_code_button.className = 'button_text';
-    code_peek_content.style.display = 'none';
+    ArdublocklyClassic.peekCode_ = false;
+    peekCodeButton.className = 'button_text';
+    codePeekContent.style.display = 'none';
     ArdublocklyClassic.sideContent(false);
     // Remove action listeners. TODO: track listener so that first time does not
     // crashes
@@ -268,8 +268,8 @@ ArdublocklyClassic.peekCode = function(visible) {
  * @param {boolean} visible Indicated if the content should be shown or hidden.
  */
 ArdublocklyClassic.sideContent = function(visible) {
-  var side_content = document.getElementById('side_content');
-  var block_content = document.getElementById('content_blocks');
+  var sideContent = document.getElementById('side_content');
+  var blockContent = document.getElementById('content_blocks');
 
   // Deselect all tabs and hide all panes.
   for (var i = 0; i < ArdublocklyClassic.TABS_.length; i++) {
@@ -280,14 +280,14 @@ ArdublocklyClassic.sideContent = function(visible) {
 
   if (visible === true) {
     // Rearrange panels for blocks and side contents
-    block_content.style.display = 'inline-block';
+    blockContent.style.display = 'inline-block';
     document.getElementById('tab_blocks').className = 'tabon';
-    block_content.className = 'content content_blocks_side';
-    side_content.style.display = 'inline-block';
+    blockContent.className = 'content content_blocks_side';
+    sideContent.style.display = 'inline-block';
   } else {
     // Restore to original state
-    side_content.style.display = 'none';
-    block_content.className = 'content content_blocks';
+    sideContent.style.display = 'none';
+    blockContent.className = 'content content_blocks';
     // Select the active tab and panel
     document.getElementById(
         'tab_' + ArdublocklyClassic.selected).className = 'tabon';
@@ -301,11 +301,11 @@ ArdublocklyClassic.sideContent = function(visible) {
 
 /** Updates the Arduino code in the pre area based on the blocks. */
 ArdublocklyClassic.renderArduinoPeekCode = function() {
-  var code_peak_pre = document.getElementById('arduino_pre');
-  code_peak_pre.textContent = Blockly.Arduino.workspaceToCode(
+  var codePeakPre = document.getElementById('arduino_pre');
+  codePeakPre.textContent = Blockly.Arduino.workspaceToCode(
       ArdublocklyClassic.workspace);
   if (typeof prettyPrintOne == 'function') {
-    code_peak_pre.innerHTML = prettyPrintOne(code_peak_pre.innerHTML, 'cpp');
+    codePeakPre.innerHTML = prettyPrintOne(codePeakPre.innerHTML, 'cpp');
   }
 };
 
@@ -317,10 +317,10 @@ ArdublocklyClassic.BLOCKLY_INJECTED = false;
 
 /**
  * Injects Blockly into a given text area. Reads the toolbox from an XMl file.
- * @param {!Element} blockly_el Element to inject Blockly into.
- * @param {!string} toolbox_path String containing the toolbox XML file path.
+ * @param {!Element} blocklyEl Element to inject Blockly into.
+ * @param {!string} toolboxPath String containing the toolbox XML file path.
  */
-ArdublocklyClassic.injectBlockly = function(blockly_el, toolbox_path) {
+ArdublocklyClassic.injectBlockly = function(blocklyEl, toolboxPath) {
   // Create a an XML HTTP request
   var request;
   try {   // Firefox, Chrome, IE7+, Opera, Safari
@@ -339,12 +339,12 @@ ArdublocklyClassic.injectBlockly = function(blockly_el, toolbox_path) {
       }
     }
   }
-  request.open('GET', toolbox_path, true);
+  request.open('GET', toolboxPath, true);
 
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
     if ((request.readyState == 4) && (request.status == 200)) {
-      ArdublocklyClassic.workspace = Blockly.inject(blockly_el, {
+      ArdublocklyClassic.workspace = Blockly.inject(blocklyEl, {
             collapse: true,
             comments: true,
             disable: true,
@@ -381,30 +381,30 @@ ArdublocklyClassic.loadUserXmlFile = function() {
     reader.readAsText(files[0]);
   };
   // Create once invisible browse button with event listener, and click it
-  var select_file = document.getElementById('select_file');
-  if (select_file == null) {
-    var select_file_dom = document.createElement('INPUT');
-    select_file_dom.type = 'file';
-    select_file_dom.id = 'select_file';
-    select_file_dom.style.display = 'none';
-    document.body.appendChild(select_file_dom);
-    select_file = document.getElementById('select_file');
-    select_file.addEventListener('change', parseInputXMLfile, false);
+  var selectFile = document.getElementById('select_file');
+  if (selectFile == null) {
+    var selectFileDom = document.createElement('INPUT');
+    selectFileDom.type = 'file';
+    selectFileDom.id = 'select_file';
+    selectFileDom.style.display = 'none';
+    document.body.appendChild(selectFileDom);
+    selectFile = document.getElementById('select_file');
+    selectFile.addEventListener('change', parseInputXMLfile, false);
   }
-  select_file.click();
+  selectFile.click();
 };
 
 /**
  * Parses the XML from its input to generate and replace the blocks in the
  * Blockly workspace.
- * @param {!string} blocks_xml String of XML code for the blocks.
+ * @param {!string} blocksXml String of XML code for the blocks.
  * @return {!boolean} Indicates if the XML into blocks parse was successful.
  */
-ArdublocklyClassic.replaceBlocksfromXml = function(blocks_xml) {
+ArdublocklyClassic.replaceBlocksfromXml = function(blocksXml) {
   var xmlDom = null;
   var success = true;
   try {
-    xmlDom = Blockly.Xml.textToDom(blocks_xml);
+    xmlDom = Blockly.Xml.textToDom(blocksXml);
   } catch (e) {
     success = false;
     var message = 'Error parsing XML:\n' + e + '\n\nSelect \'OK\' to ' +
