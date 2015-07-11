@@ -15,13 +15,15 @@ import os
 import re
 import sys
 import codecs
-try:
-    # 2.x name
-    import ConfigParser
-except ImportError:
-    # 3.x name
-    import configparser as ConfigParser
 
+#try:
+#    # 2.x name
+#    import ConfigParser
+#except ImportError:
+#    # 3.x name
+#    import configparser as ConfigParser
+
+from ardublocklyserver import configparser
 import ardublocklyserver.serialport
 
 
@@ -515,7 +517,7 @@ class ServerCompilerSettings(object):
     #
     def save_settings(self):
         """ Saves all the settings into a configuration file """
-        settings_parser = ConfigParser.SafeConfigParser()
+        settings_parser = configparser.ConfigParser()
         # IDE Section
         settings_parser.add_section('Arduino_IDE')
         settings_parser.set(
@@ -591,7 +593,7 @@ class ServerCompilerSettings(object):
                  file (sections are ignored during parsing).
         """
         settings_dict = {}
-        settings_parser = ConfigParser.SafeConfigParser()
+        settings_parser = configparser.ConfigParser()
         try:
             settings_parser.readfp(
                 codecs.open(self.__settings_path, 'r', 'utf8'))
