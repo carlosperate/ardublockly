@@ -241,8 +241,8 @@ class ServerCompilerSettings(object):
     sketch_dir = property(get_sketch_dir, set_sketch_dir)
 
     def set_sketch_dir_default(self):
-        """ Sketch default location is the current working directory. """
-        self.__sketch_dir = os.getcwd()
+        """ Sketch default location the same as the settings file location. """
+        self.__sketch_dir = os.path.dirname(self.__settings_path)
 
     def set_sketch_dir_from_file(self, new_sketch_dir):
         """ The sketch directory must be a folder """

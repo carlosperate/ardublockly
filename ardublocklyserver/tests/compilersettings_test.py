@@ -88,7 +88,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         mock_os_path_isfile.return_value = True
         old_compiler_dir = instance.compiler_dir
         self.assertIsNone(old_compiler_dir)
-        new_compiler_dir = os.path.join(os.getcwd(), 'random.exe')
+        new_compiler_dir = os.path.join(os.getcwd(), 'ろΓαζςÂaé', 'random.exe')
         instance.compiler_dir = new_compiler_dir
         self.assertEqual(
             instance.compiler_dir,
@@ -165,13 +165,27 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     #
     # Test the sketch name accessors
     #
-    def test_sketch_name_valid_accesor(self):
-        #TODO: This test
-        pass
+    @mock.patch('ardublocklyserver.compilersettings.os.path.isdir')
+    def test_sketch_name_valid_accesor(self, mock_isdir):
+        self.delete_default_settings_file()
+        old_sketch_dir = ServerCompilerSettings().sketch_dir
+        mock_isdir.return_value = True
+        test_sketch_dir = os.path.join(os.getcwd(), 'unicode_いろΓαζέεςÂaéquo')
+        ServerCompilerSettings().sketch_dir = test_sketch_dir
+        self.assertEqual(test_sketch_dir, ServerCompilerSettings().sketch_dir)
+        self.assertNotEqual(old_sketch_dir, ServerCompilerSettings().sketch_dir)
 
     def test_sketch_name_invalid_accesor(self):
-        #TODO: This test
-        pass
+        """
+        Tests path doesn't get saved the input is not a valid directory.
+        """
+        self.delete_default_settings_file()
+        old_sketch_dir = ServerCompilerSettings().sketch_dir
+        test_sketch_dir = os.path.join(os.getcwd(), 'random_faKe_dir_ろ')
+        ServerCompilerSettings().sketch_dir = test_sketch_dir
+        self.assertNotEqual(test_sketch_dir,
+                            ServerCompilerSettings().sketch_dir)
+        self.assertEqual(old_sketch_dir, ServerCompilerSettings().sketch_dir)
 
     #
     # Test the sketch directory accessors
