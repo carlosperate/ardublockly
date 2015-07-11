@@ -7,6 +7,18 @@
  * There are a lot of '!important' tags in this file as a lot of the rules set
  * here go against the css rules from the Materialize framework.
  */
+/******************/
+/*  Font sources  */
+/******************/
+@font-face {
+  font-family: "Droid Sans Mono";
+  src: url("font/droid/DroidSansMono.ttf") format("truetype");
+}
+
+
+/**********/
+/*  HTML  */
+/**********/
 html,
 body {
   height: 100% !important;
@@ -167,9 +179,9 @@ ul.side-nav li.side-menu-end {
   outline: none;
   border: none;
   padding: 0px 5px;
-  font-family: monospace;
-  overflow: scroll;
-  font-style: 0.2em !important;
+  font-size: 0.9rem;
+  font-family: "Droid Sans Mono", monospace;
+  overflow: auto;
   -moz-user-select: text;
   -khtml-user-select: text;
   -webkit-user-select: text;
