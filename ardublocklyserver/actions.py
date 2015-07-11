@@ -8,8 +8,10 @@
 #
 from __future__ import unicode_literals, absolute_import
 import subprocess
+import locale
 import time
 import json
+import sys
 import os
 try:
     # 2.x name
@@ -24,6 +26,7 @@ except ImportError:
 
 from ardublocklyserver.compilersettings import ServerCompilerSettings
 from ardublocklyserver.sketchcreator import SketchCreator
+from ardublocklyserver.six.six.moves import range
 import ardublocklyserver.gui as gui
 
 
@@ -104,6 +107,11 @@ def load_arduino_cli(sketch_path=None):
             out = 'The sketch should be loaded in the Arduino IDE.'
         cli_command.append("%s" % sketch_path)
         print('CLI command: %s' % ' '.join(cli_command))
+        # Python 2 needs the input to subprocess.Popen to be in system encoding
+        if sys.version_info[0] < 3:
+            for item in range(len(cli_command)):
+                cli_command[item] = cli_command[item].encode(
+                    locale.getpreferredencoding())
 
         if settings.load_ide_option == 'open':
             # Open IDE in a subprocess without capturing outputs
