@@ -139,11 +139,16 @@ def load_arduino_cli(sketch_path=None):
 
 
 def create_sketch_default():
-    return SketchCreator().create_sketch()
+    settings = ServerCompilerSettings()
+    return SketchCreator().create_sketch(
+        settings.sketch_dir, sketch_name=settings.sketch_name)
 
 
 def create_sketch_from_string(sketch_code):
-    return SketchCreator().create_sketch(sketch_code)
+    settings = ServerCompilerSettings()
+    return SketchCreator().create_sketch(
+        settings.sketch_dir, sketch_name=settings.sketch_name,
+        sketch_code=sketch_code)
 
 
 #
