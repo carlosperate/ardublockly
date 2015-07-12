@@ -305,6 +305,8 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
       return 'float';
     case Blockly.StaticTyping.blocklyType.TEXT:
       return 'String';
+    case Blockly.StaticTyping.blocklyType.CHARACTER:
+      return 'char';
     case Blockly.StaticTyping.blocklyType.BOOLEAN:
       return 'boolean';
     case Blockly.StaticTyping.blocklyType.ERROR:

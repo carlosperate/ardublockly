@@ -2,8 +2,7 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview 
- *
+ * @fileoverview Functions to implement types into blocks.
  *
  */
 'use strict';
@@ -35,6 +34,7 @@ Blockly.StaticTyping.blocklyType = {
   UNSPECIFIED: 'Unspecified',
   NULL: 'Null',
   TEXT: 'Text',
+  CHARACTER: 'Character',
   BOOLEAN: 'Boolean',
   NUMBER: 'Number',
   INTEGER: 'Integer',
