@@ -77,11 +77,9 @@ Blockly.Arduino['stepper_config'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['stepper_step'] = function(block) {
-  var stepperInstance = block.getFieldValue('STEPPER_NAME');
+  var stepperInstanceName = block.getFieldValue('STEPPER_NAME')
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var code = '';
-  code = stepperInstance + '.steps(' + stepperSteps + ');\n';
-  
+  var code = stepperInstanceName + '.steps(' + stepperSteps + ');\n';
   return code;
 };

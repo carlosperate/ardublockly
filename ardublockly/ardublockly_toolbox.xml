@@ -174,11 +174,6 @@
           <field name="NUM">10</field>
         </block>
       </value>
-      <value name="STEPPER_NAME">
-        <block type="text">
-          <field name="TEXT">MyStepper</field>
-        </block>
-      </value>
     </block>
     <block type="stepper_step">
       <value name="STEPPER_STEPS">
