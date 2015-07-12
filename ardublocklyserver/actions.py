@@ -26,7 +26,8 @@ except ImportError:
 
 from ardublocklyserver.compilersettings import ServerCompilerSettings
 from ardublocklyserver.sketchcreator import SketchCreator
-from ardublocklyserver.six.six.moves import range
+import ardublocklyserver.six.six.moves as six_moves
+from ardublocklyserver.six import six
 import ardublocklyserver.gui as gui
 
 
@@ -109,7 +110,7 @@ def load_arduino_cli(sketch_path=None):
         print('CLI command: %s' % ' '.join(cli_command))
         # Python 2 needs the input to subprocess.Popen to be in system encoding
         if sys.version_info[0] < 3:
-            for item in range(len(cli_command)):
+            for item in six_moves.range(len(cli_command)):
                 cli_command[item] = cli_command[item].encode(
                     locale.getpreferredencoding())
 
@@ -117,27 +118,29 @@ def load_arduino_cli(sketch_path=None):
             # Open IDE in a subprocess without capturing outputs
             subprocess.Popen(cli_command, shell=False)
             # Wait a few seconds to allow IDE to open before sending back data
-            time.sleep(3)
+            time.sleep(5)
         else:
             # Launch the Arduino CLI in a subprocess and capture output data
             process = subprocess.Popen(
                 cli_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 shell=False)
             out, error = process.communicate()
-            exit_code = str(process.returncode)
+            out = six.u(out)
+            error = six.u(error)
+            exit_code = process.returncode
             print('Arduino output:\n%s' % out)
             print('Arduino Error output:\n%s' % error)
             print('Arduino Exit code: %s' % exit_code)
             # For some reason Arduino CLI can return 256 on success
             if (process.returncode != 0) and (process.returncode != 256):
                 success = False
-                if exit_code == str(1):
+                if exit_code == 1:
                     conclusion = 'Build or Upload failed'
-                elif exit_code == str(2):
+                elif exit_code == 2:
                     conclusion = 'Sketch not found'
-                elif exit_code == str(3):
+                elif exit_code == 3:
                     conclusion = 'Invalid command line argument'
-                elif exit_code == str(4):
+                elif exit_code == 4:
                     conclusion =\
                         'Preference passed to "get-pref" flag does not exist'
                 else:

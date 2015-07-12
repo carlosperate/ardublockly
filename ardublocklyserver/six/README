@@ -14,3 +14,8 @@ be found there.
 
 For questions about six or porting in general, email the python-porting mailing
 list: http://mail.python.org/mailman/listinfo/python-porting
+
+This version of six has been modified:
+  - The u() function in Python 3 originally just returned the input argument, as
+    it expected a string literal, which is Unicode by default in Python 3.
+    It now ensures the return string is encoded in utf-8.

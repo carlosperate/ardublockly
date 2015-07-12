@@ -596,7 +596,7 @@ if PY3:
     def b(s):
         return s.encode("latin-1")
     def u(s):
-        return s
+        return str(s.decode('unicode_escape'))
     unichr = chr
     if sys.version_info[1] <= 1:
         def int2byte(i):
