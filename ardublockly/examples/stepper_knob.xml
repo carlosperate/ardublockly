@@ -1,5 +1,6 @@
 <xml>
   <block type="stepper_config" id="1" inline="false" x="312" y="38">
+    <field name="STEPPER_NAME">MyStepper</field>
     <field name="STEPPER_PIN1">8</field>
     <field name="STEPPER_PIN2">9</field>
     <value name="STEPPER_STEPS">
@@ -10,11 +11,6 @@
     <value name="STEPPER_SPEED">
       <block type="math_number" id="3">
         <field name="NUM">30</field>
-      </block>
-    </value>
-    <value name="STEPPER_NAME">
-      <block type="text" id="4">
-        <field name="TEXT">MyStepper</field>
       </block>
     </value>
   </block>
