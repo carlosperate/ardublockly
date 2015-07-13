@@ -10,9 +10,11 @@
 - [ ] Test server components in Mac OS X with python 2
 - [ ] Test server components in Mac OS X with python 3
 
+## Windows specific
+
 
 ## Python 3 specific
-- [ ] When a sketch is send to the IDE using python 3 the following error is shown (tested on linux):
+- [x] ~~When a sketch is send to the IDE using python 3 the following error is shown (tested on linux):~~
 ```
 Can't convert 'bytes' object to str implicitly
 There was an error manipulating the sketch data!!
@@ -20,12 +22,14 @@ There was an error manipulating the sketch data!!
 
 
 ## Server
-- [ ] Serial port test code
-- [ ] ServerCompilerSettings test module
-- [ ] BlocklyRequestHandler test module
-- [ ] SketchCreator test module
-- [ ] Combine Arduino boards from code generator with Arduino boards offered for compilation
+- [ ] Complete `compilerserttings` module unite test
+- [ ] Complete `actions` module unit test module
+- [x] ~~Complete `SketchCreator` module unit test~~
+- [x] ~~Combine Arduino boards from code generator with Arduino boards offered for compilation~~
 
+## Blockly general
+- [ ] Expand `setWarning` to be able to buffer and manage several warnings per block (add an ID to a block of text)
+- [ ] Implement the zoom feature from @carloslfu once matured
 
 ## Static typing
 - [ ] logic_ternary block getType to defines type as that of its inputs
@@ -42,22 +46,26 @@ There was an error manipulating the sketch data!!
 - [ ] Number blocks automatically trim unnecessary decimal digits "x.0 => x", change this behavior so that "x.0" can be set as a decimal 
 
 
-## Arduino related code
-- [ ] Add information for other Arduino boards
+## Arduino generator related code
+- [x] ~~Add information for other Arduino boards~~
 
 
 ## Arduino blocks
-- [ ] Add a way to select different Arduino boards (settings menu should trigger arduino generator board change)
+- [x] ~~Add a way to select different Arduino boards (settings menu should trigger arduino generator board change)~~
 - [ ] Code generator for lists into arrays
-- [ ] A lot of blocks go through the entire block tree, which end ups being terribly inefficient. Maybe create a general pass through in the arduino.js file to check everything that needs to be checked in one pass.
-- [ ] SPI spi_transfer also needs returns a byte back
+- [ ] A lot of blocks go through the entire block tree, which end ups being  inefficient. Maybe create a general pass through in the arduino.js file to check everything that needs to be checked in one pass.
+- [ ] SPI pin reservation log needs to be refactored for the new board settings
+- [ ] Create I2C communication blocks
+- [ ] Update the serial print block to specify explicit type (hex, str, int, etc)
+- [ ] 
 
 
-## Arduino web-app
-- [ ] Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden
-- [x] Add examples
-- [x] Change js variables naming convention from current 'snake_case' to 'lower camel case' to comply with Google's js coding style
+## Arduino front end
+- [ ] ~~Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden~~
+- [ ] Remove old IDE output text while waiting for a new verify/open/upload 
 
 
 # Future features
-- [ ] Serial console in web app for comms with Arduino
+- [ ] Serial console for comms with Arduino
+- [ ] Serial data graphing
+- [ ] Auto updating for the desktop app

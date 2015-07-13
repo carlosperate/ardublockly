@@ -1,41 +1,37 @@
 # Ardublockly
-Ardublockly is a visual programming editor for Arduino. It is based on Google's [Blockly][1], which has been forked to generate [Arduino](http://www.arduino.cc/) code.
+Ardublockly is a visual programming editor for Arduino. It is based on Google's [Blockly][1], which has been forked to generate [Arduino][15] code.
 
-The "ArdublocklyServer" Python package initialises a local server to be able to compile and load the Arduino code using the [Arduino IDE][2].
+The `ArdublocklyServer` Python package initialises a local server to be able to compile and load the Arduino code using the [Arduino IDE][2].
 
-This is all packaged in a self contained executable:
+This is all packaged in a self contained executable desktop application for Windows, Mac OS X, and Linux:
 
 ![Ardublockly desktop program screenshot][desktop_screeshot]
 
 ## Features
-* Generate Arduino code with visual drag-and-drop blocks
-* Load the code to an Arduino Board
+* Generates Arduino code with visual drag-and-drop blocks
+* Uploads the code to an Arduino Board
 * Useful "code block warnings"
 * Compatible with a wide range of official Arduino Boards
-* Runs on Windows / Linux / Mac OS X
+* Works on Windows / Linux / Mac OS X
 
 Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the [TODO.md][3] file.
 
 Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7.
 
 
-## Online Demos
-A demo of the current state of Ardublockly can be found in the following two links (to load the code into an Arduino requires Ardublockly to be executed locally):
-
-#### [Ardublockly][10] (with responsive design)
-![WebApp screenshot responsive design][web_screenshot_responsive]
-
-#### [Ardublockly classic][11]
-![WebApp screenshot][web_screenshot_classic]
-
-
-
 ## Installing
-There is a packaged version for Windows that runs as a stand-alone executable and can be downloaded from the [Ardublockly repository releases page][4].
+The desktop application is available for Windows/Mac/Linux and runs as a stand-alone executable that can be downloaded from the [Ardublockly repository releases page][4] (once it is stable enough for a first alpha release).
 
-Installation instructions for developers can be found in [this Github repository Wiki][5]. This will work on Windows, Linux and MacOS X.
+You will also need the [Arduino IDE version 1.6 or higher][2].
 
-It also needs the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/software).
+In the meantime, you can test __UNSTABLE__ development builds automatically generated on these build servers:
+
+| Linux build         | Windows build       | Mac OS X build       |
+|:-------------------:|:-------------------:|:--------------------:|
+| [![Linux Build Status](https://circleci.com/gh/carlosperate/ardublockly/tree/master.svg?style=svg)](https://circleci.com/gh/carlosperate/ardublockly/tree/master) | [![Windows Build status](https://ci.appveyor.com/api/projects/status/t877g920hdiifc2i?svg=true)](https://ci.appveyor.com/project/carlosperate/ardublockly) | [![Mac Build Status](https://travis-ci.org/carlosperate/ardublockly.svg?branch=master)](https://travis-ci.org/carlosperate/ardublockly) |
+| [Download Link][12] | [Download Link][13] | [Download Link][14]  |
+
+If you prefer, the main software can be run with Python and a web browser only. Installation instructions for this "developer version" can be found in [this Github repository Wiki][5]. This will work on Windows, Linux and MacOS X, with Python >2.6 and >3.2.
 
 
 ## Running
@@ -43,6 +39,16 @@ It also needs the [Arduino IDE version 1.6 or higher](http://arduino.cc/en/main/
 2. Install the [Arduino IDE][2] version 1.6 or higher.
 3. Run Ardublockly as defined in your installation method.
 3. Configure Ardublockly to locate the Arduino IDE [following these instructions][6].
+
+
+## Online Demos
+A demo of the current state of Ardublockly main interface can be found in the following two links (to load the code into an Arduino it requires the full Ardublockly application to be downloaded and run on your computer):
+
+#### [Ardublockly][10]
+![WebApp screenshot responsive design][web_screenshot_responsive]
+
+#### [Ardublockly classic][11]
+![WebApp screenshot][web_screenshot_classic]
 
 
 ## Documentation
@@ -55,14 +61,9 @@ git clone https://github.com/carlosperate/ardublockly.wiki.git
 
 
 ## Credit
-This project has been influenced by BlocklyDuino.
+This project has been inspired by BlocklyDuino.
 
 Blockly original source is Copyright of Google Inc. [https://developers.google.com/blockly/][1]
-
-##### Significant changes to Blockly
-Added Arduino code generator, static typing and additional code warnings.
-
-All changes to the original source code can be reviewed [here][8].
 
 
 ## License
@@ -82,6 +83,10 @@ The full document can be found in the [LICENSE][9] file.
 [9]: https://github.com/carlosperate/ardublockly/blob/master/LICENSE
 [10]: http://carlosperate.github.io/ardublockly/ardublockly/index.html
 [11]: http://carlosperate.github.io/ardublockly/ardublockly/classic/index.html
+[12]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=linux/
+[13]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=windows/
+[14]: http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=mac/
+[15]: http://arduino.cc
 
 
 [desktop_screeshot]: http://carlosperate.github.io/ardublockly/images/screenshot_desktop_1.png
