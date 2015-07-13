@@ -28,7 +28,8 @@ Blockly.Blocks['variables_set_type'] = {
     this.appendValueInput('VARIABLE_SETTYPE_INPUT', '');
     this.appendDummyInput('')
         .appendField('as')
-        .appendField(new Blockly.FieldDropdown(profile.default.types),
+        .appendField(new Blockly.FieldDropdown(
+                         Blockly.StaticTyping.blocklySafeTypeArray()),
                      'VARIABLE_SETTYPE_TYPE');
     this.setInputsInline(true);
     this.setOutput(true);
@@ -39,6 +40,7 @@ Blockly.Blocks['variables_set_type'] = {
    * @this Blockly.Block
    */
   getType: function() {
-    return this.getFieldValue('VARIABLE_SETTYPE_TYPE');
+    var blocklyTypeKey = this.getFieldValue('VARIABLE_SETTYPE_TYPE'); 
+    return Blockly.StaticTyping.blocklyType[blocklyTypeKey];
   }
 };

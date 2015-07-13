@@ -34,7 +34,7 @@
             <field name="NEW_LINE">FALSE</field>
             <value name="CONTENT">
               <block type="variables_set_type" id="17" inline="true">
-                <field name="VARIABLE_SETTYPE_TYPE">char</field>
+                <field name="VARIABLE_SETTYPE_TYPE">CHARACTER</field>
                 <value name="VARIABLE_SETTYPE_INPUT">
                   <block type="variables_get" id="18">
                     <field name="VAR">thisByte</field>
@@ -57,7 +57,7 @@
                     <field name="NEW_LINE">TRUE</field>
                     <value name="CONTENT">
                       <block type="variables_set_type" id="22" inline="true">
-                        <field name="VARIABLE_SETTYPE_TYPE">byte</field>
+                        <field name="VARIABLE_SETTYPE_TYPE">INTEGER</field>
                         <value name="VARIABLE_SETTYPE_INPUT">
                           <block type="variables_get" id="23">
                             <field name="VAR">thisByte</field>

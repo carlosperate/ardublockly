@@ -27,8 +27,8 @@ Blockly.Blocks['serial_print'] = {
     this.setHelpUrl('http://www.arduino.cc/en/Serial/Print');
     this.setColour(Blockly.Blocks.Arduino.serial.HUE);
     this.appendDummyInput()
-        .appendField(
-            new Blockly.FieldDropdown(profile.default.serial), 'SERIAL_ID')
+        .appendField(new Blockly.FieldDropdown(
+                Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
         .appendField('print');
     this.appendValueInput('CONTENT', Blockly.StaticTyping.blocklyType.TEXT)
         .setCheck(Blockly.StaticTyping.blocklyType.TEXT);
@@ -75,6 +75,11 @@ Blockly.Blocks['serial_print'] = {
     } else {
       this.setWarningText(null);
     } /* */
+  },
+  /** Updates the content of the the serial related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'SERIAL_ID', 'serial');
   }
 };
 
@@ -89,10 +94,12 @@ Blockly.Blocks['serial_speed'] = {
     this.appendDummyInput()
         .appendField('setup: ')
         .appendField(
-            new Blockly.FieldDropdown(profile.default.serial), 'SERIAL_ID')
+            new Blockly.FieldDropdown(
+                Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
         .appendField('speed')
         .appendField(
-            new Blockly.FieldDropdown(profile.default.serial_speed), 'SPEED')
+            new Blockly.FieldDropdown(
+                Blockly.Arduino.Boards.selected.serialSpeed), 'SPEED')
         .appendField('bps');
     this.setInputsInline(true);
     this.setTooltip('Selects the speed for a specific Serial peripheral');
@@ -106,5 +113,12 @@ Blockly.Blocks['serial_speed'] = {
   getSerialSetupInstance: function() {
     var instanceName = this.getFieldValue('SERIAL_ID');
     return [instanceName];
+  },
+  /** Updates the content of the the serial related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'SERIAL_ID', 'serial');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'SPEED', 'serialSpeed');
   }
 };

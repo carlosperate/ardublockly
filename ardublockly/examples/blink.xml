@@ -18,7 +18,7 @@
             <field name="BUILT_IN_LED">13</field>
             <value name="STATE">
               <block type="io_highlow" id="163">
-                <field name="STATE">HIGH</field>
+                <field name="STATE">LOW</field>
               </block>
             </value>
             <next>

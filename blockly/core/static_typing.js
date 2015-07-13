@@ -2,8 +2,7 @@
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
- * @fileoverview 
- *
+ * @fileoverview Functions to implement types into blocks.
  *
  */
 'use strict';
@@ -35,6 +34,7 @@ Blockly.StaticTyping.blocklyType = {
   UNSPECIFIED: 'Unspecified',
   NULL: 'Null',
   TEXT: 'Text',
+  CHARACTER: 'Character',
   BOOLEAN: 'Boolean',
   NUMBER: 'Number',
   INTEGER: 'Integer',
@@ -152,4 +152,19 @@ Blockly.StaticTyping.identifyNumber = function(numberString) {
     }
     //TODO: This is just a temporary value for easy bug catching.
     return Blockly.StaticTyping.blocklyType.ERROR;
+};
+
+/**
+ * Converts the static types dictionary in to a an array with 2-item arrays.
+ * @return {!array} Blockly types in the format described above.
+ */
+Blockly.StaticTyping.blocklySafeTypeArray = function() {
+  var typesArray = [];
+  for (var key in Blockly.StaticTyping.blocklyType) {
+    if ((key !== 'UNDEF') && (key !== 'UNSPECIFIED') && (key !== 'ERROR') && 
+        (key !== 'NULL') && (key !== 'CHILD_TYPE_MISSING')) {
+      typesArray.push([Blockly.StaticTyping.blocklyType[key], key]);
+    }
+  }
+  return typesArray;
 };

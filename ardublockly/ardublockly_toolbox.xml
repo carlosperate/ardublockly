@@ -107,9 +107,7 @@
     <block type="variables_set"></block>
     <block type="variables_set">
       <value name="VALUE">
-        <block type="variables_set_type">
-          <field name="VARIABLE_SETTYPE_TYPE">int</field>
-        </block>
+        <block type="variables_set_type"></block>
       </value>
     </block>
     <block type="variables_set_type"></block>
@@ -174,11 +172,6 @@
       <value name="STEPPER_SPEED">
         <block type="math_number">
           <field name="NUM">10</field>
-        </block>
-      </value>
-      <value name="STEPPER_NAME">
-        <block type="text">
-          <field name="TEXT">MyStepper</field>
         </block>
       </value>
     </block>

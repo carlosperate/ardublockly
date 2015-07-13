@@ -32,7 +32,7 @@ goog.require('goog.math');
 /**
  * Class for a workspace.  This is a data structure that contains blocks.
  * There is no UI, and can be created headlessly.
- * @param {Object} opt_options Dictionary of options.
+ * @param {Object=} opt_options Dictionary of options.
  * @constructor
  */
 Blockly.Workspace = function(opt_options) {
@@ -184,6 +184,7 @@ Blockly.Workspace.prototype.fireChangeEvent = function() {
   // NOP.
 };
 
+<<<<<<< HEAD
 /**
  * Modify the block tree on the existing toolbox.
  * @param {Node|string} tree DOM tree of blocks, or text representation of same.
@@ -215,5 +216,7 @@ Blockly.Workspace.prototype.updateToolbox = function(tree) {
   }
 };
 
+=======
+>>>>>>> origin
 // Export symbols that would otherwise be renamed by Closure compiler.
 Blockly.Workspace.prototype['clear'] = Blockly.Workspace.prototype.clear;

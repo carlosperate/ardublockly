@@ -7,11 +7,17 @@
   <link rel="icon" href="img/favicon.ico">
   <title>Ardublockly</title>
 
+<<<<<<< HEAD
   <!-- Materialize CSS -->
   <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection">
   <!-- Prettify CSS -->
   <link rel="stylesheet" href="../blockly/demos/prettify.css">
   <!-- Ardublockly CSS -->
+=======
+  <!-- Materialize, Prettify, and Ardublockly CSS -->
+  <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection">
+  <link rel="stylesheet" href="prettify/arduino.css">
+>>>>>>> origin
   <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
 
   <!-- Ardublockly - For now uncompressed files -->
@@ -19,14 +25,7 @@
   <script src="../blockly/blockly_uncompressed.js"></script>
   <!--script src="../blockly/blocks_compressed.js"></script-->
   <script src="../blockly/generators/arduino.js"></script>
-  <script src="../blockly/blocks/arduino/io.js"></script>
-  <script src="../blockly/blocks/arduino/map.js"></script>
-  <script src="../blockly/blocks/arduino/serial.js"></script>
-  <script src="../blockly/blocks/arduino/servo.js"></script>
-  <script src="../blockly/blocks/arduino/spi.js"></script>
-  <script src="../blockly/blocks/arduino/stepper.js"></script>
-  <script src="../blockly/blocks/arduino/time.js"></script>
-  <script src="../blockly/blocks/arduino/variables.js"></script>
+  <script src="../blockly/generators/arduino/boards.js"></script>
   <script src="../blockly/blocks/logic.js"></script>
   <script src="../blockly/blocks/loops.js"></script>
   <script src="../blockly/blocks/math.js"></script>
@@ -35,6 +34,14 @@
   <script src="../blockly/blocks/colour.js"></script>
   <script src="../blockly/blocks/variables.js"></script>
   <script src="../blockly/blocks/procedures.js"></script>
+  <script src="../blockly/blocks/arduino/io.js"></script>
+  <script src="../blockly/blocks/arduino/map.js"></script>
+  <script src="../blockly/blocks/arduino/serial.js"></script>
+  <script src="../blockly/blocks/arduino/servo.js"></script>
+  <script src="../blockly/blocks/arduino/spi.js"></script>
+  <script src="../blockly/blocks/arduino/stepper.js"></script>
+  <script src="../blockly/blocks/arduino/time.js"></script>
+  <script src="../blockly/blocks/arduino/variables.js"></script>
   <script src="../blockly/generators/arduino/io.js"></script>
   <script src="../blockly/generators/arduino/lists.js"></script>
   <script src="../blockly/generators/arduino/logic.js"></script>
@@ -53,7 +60,11 @@
 </head>
 
 <body>
+<<<<<<< HEAD
   <!-- Horizonal Navigation bar -->
+=======
+  <!-- Horizontal Navigation bar -->
+>>>>>>> origin
   <nav class="nav-fixed arduino_teal">
     <div class="nav-wrapper container">
       <a class="button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="mdi-navigation-menu"></i>
@@ -99,81 +110,123 @@
         </li>
       </ul>
     </li>
+<<<<<<< HEAD
   <li class="no-padding side-menu-end">&nbsp;</li>
+=======
+    <li class="no-padding side-menu-end">&nbsp;</li>
+>>>>>>> origin
   </ul>
 
   <!-- Content -->
   <div class="container">
     <div class="row">
       <div class="col s12 m12 l8" style="position:relative">
-        <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
-        <a id="button_run" class="waves-effect waves-light waves-circle btn-floating btn-large arduino_orange z-depth-1-half"><i class="mdi-av-play-arrow"></i></a>
-        <!-- Begging of loader circle -->
-        <div id="button_run_spinner" class="preloader-wrapper active run_loader" style="display:none">
-          <div class="spinner-layer spinner-orange">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
+        <!-- Toolbox visibility button -->
+        <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off" style="display: none"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
+        <!-- Arduino IDE action buttons -->
+        <div id="ide_buttons_wrapper">
+          <a id="button_ide_left" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_yellow"><i id="button_ide_left_icon" class="mdi-action-open-in-browser"></i></a>
+          <a id="button_ide_middle" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_teal"><i id="button_ide_middle_icon" class="mdi-navigation-check"></i></a>
+          <a id="button_ide_large" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange"><i id="button_ide_large_icon" class="mdi-av-play-arrow"></i></a>
+          <div id="button_ide_large_spinner" class="preloader-wrapper active ide_loader" style="display:none">
+            <div class="spinner-layer spinner-orange">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
             </div>
-          </div>
-          <div class="spinner-layer spinner-dark-teal">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
+            <div class="spinner-layer spinner-dark-teal">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
             </div>
-          </div>
-          <div class="spinner-layer spinner-yellow">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
+            <div class="spinner-layer spinner-yellow">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
             </div>
-          </div>
-          <div class="spinner-layer spinner-light-teal">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
+            <div class="spinner-layer spinner-light-teal">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
             </div>
           </div>
         </div>
-        <!-- End of loader circle -->
-        <div class="card-panel white z-depth-1" id="blocks_panel">
-            <div id="content_blocks" class="content"></div>
+        <!-- Blockly Panel -->
+        <div class="card-panel white" style="padding: 0">
+          <div id="blocks_panel" class="content blocks_panel_large">
+            <div id="content_blocks" class="content z-depth-1"></div>
+          </div>
         </div>
       </div>
       <div class="col s12 m12 l4">
         <ul class="collapsible z-depth-1" data-collapsible="accordion">
           <li>
+<<<<<<< HEAD
             <div class="collapsible-header active"><span class="collapsible_logo">{ }</span>Arduino Source Code</div>
+=======
+            <div class="collapsible-header active">
+              <span class="collapsible_logo">{ }</span>Arduino Source Code
+            </div>
+>>>>>>> origin
             <div class="collapsible-body">
-              <pre id="content_arduino" class="content"></pre>
+              <pre id="content_arduino" class="content content_height_transition content_arduino_large"></pre>
             </div>
           </li>
           <li>
+<<<<<<< HEAD
             <div class="collapsible-header" id="xml_collapsible_header"><span class="collapsible_logo">&#60; &#62;</span>Blocks XML</div>
             <div class="collapsible-body"  style="position:relative" id="xml_collapsible_body">
+=======
+            <div class="collapsible-header" id="xml_collapsible_header">
+              <span class="collapsible_logo">&#60; &#62;</span>Blocks XML
+            </div>
+            <div class="collapsible-body" style="position:relative" id="xml_collapsible_body">
+>>>>>>> origin
               <a class="btn-floating btn-large waves-effect waves-light arduino_teal z-depth-1-half" id="button_load_xml"><i class="mdi-action-extension"></i></a>
-              <textarea id="content_xml" class="content" wrap="soft"></textarea>
+              <textarea id="content_xml" class="content content_height_transition content_xml_large" wrap="soft"></textarea>
             </div>
           </li>
         </ul>
       </div>
-     <br><br>
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- Settings: Displayed as a Materialize Modal (android dialog) -->
+=======
+  <!-- IDE Output content -->
+  <div class="ide_output_wrapper">
+    <ul class="collapsible ide_output_collapsible" data-collapsible="expandable">
+      <li>
+        <div id="ide_output_collapsible_header" class="collapsible-header ide_output_header_normal">
+          <i class="mdi-action-swap-vert Medium" style="font-size: 2.2rem;"></i> Arduino IDE output
+        </div>
+        <div class="collapsible-body">
+          <div id="content_ide_output" class="content"></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="ide_output_spacer"></div>
+
+  <!-- Settings: Displayed as a Materialize Modal -->
+>>>>>>> origin
   <div id="settings_dialog" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Settings</h4>
@@ -188,9 +241,7 @@
       <div class="settings_div">
         <label>Arduino Board:</label>
         <select name="settings_board" id="board">
-          <option value="uno">Uno</option>
-          <option value="leonardo">Leonardo</option>
-          <option value="mega">Mega</option>
+          <option value="uno">Boards unknown</option>
         </select>
       </div>
       <div class="settings_div">
@@ -200,10 +251,11 @@
         </select>
       </div>
       <div class="settings_div">
-        <label>IDE:</label> <br>
+        <label>Default IDE button:</label> <br>
         <select name="settings_ide" id="ide_settings">
-          <option value="ide_upload">Compile</option>
-          <option value="ide_only">Load</option>
+          <option value="verify">Verify sketch</option>
+          <option value="open">Open sketch in IDE </option>
+          <option value="upload">Compile and Upload sketch</option>
         </select>
       </div>
     </div>
@@ -261,11 +313,17 @@
   <!-- JS Diff -->
   <script src="js_libs/diff.js"></script>
   <!-- Prettify JS -->
+<<<<<<< HEAD
   <script src="../blockly/demos/prettify.js"></script>
   <!-- Arduino Server Compiler Ajax JS -->
   <script src="../ardublocklyserver/js/ArduServerCompiler.js"></script>
   <!-- Ardublockly app -->
   <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
+=======
+  <script src="prettify/prettify.js"></script>
+  <!-- Ardublockly app -->
+  <script src="ardublocklyserver_ajax.js"></script>
+>>>>>>> origin
   <script src="ardublockly_design.js"></script>
   <script src="ardublockly_blockly.js"></script>
   <script src="ardublockly.js"></script>

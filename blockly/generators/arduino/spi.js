@@ -66,14 +66,14 @@ Blockly.Arduino['spi_transfer'] = function(block) {
 
   // Configure SPI pins (MOSI, MISO, SCK) as used, or warn if already in use
   var warningText = '';
-  var pinType = profile.default.pin_types.SPI;
-  for (var i=0; i<profile.default.spi_pins.length; i++) {
-    var pin_number = profile.default.spi_pins[i][1];
+  var pinType = Blockly.Arduino.Boards.pinTypes.SPI;
+  for (var i = 0; i < Blockly.Arduino.Boards.selected.spiPins.length; i++) {
+    var pin_number = Blockly.Arduino.Boards.selected.spiPins[i][1];
     if (pin_number in Blockly.Arduino.pins_) {
       if (Blockly.Arduino.pins_[pin_number] != pinType) {
         warningText = warningText +
-            'SPI needs pin ' + profile.default.spi_pins[i][1] +
-            ' as ' + profile.default.spi_pins[i][0] + '\n' +
+            'SPI needs pin ' + Blockly.Arduino.Boards.selected.spiPins[i][1] +
+            ' as ' + Blockly.Arduino.Boards.selected.spiPins[i][0] + '\n' +
             'Pin ' + pin_number + ' already used as ' +
             Blockly.Arduino.pins_[pin_number] + '\n';
       }
@@ -90,7 +90,7 @@ Blockly.Arduino['spi_transfer'] = function(block) {
 
   // Configure the Slave Select as a normal output if a pin is used
   if (spiSs != 'none') { 
-    pinType = profile.default.pin_types.OUTPUT;
+    pinType = Blockly.Arduino.Boards.pinTypes.OUTPUT;
     var setUpKey = 'setup_io_' + spiSs;
     Blockly.Arduino.setups_[setUpKey] = 'pinMode(' + spiSs + ', OUTPUT);';
     

@@ -7,6 +7,21 @@
  * There are a lot of '!important' tags in this file as a lot of the rules set
  * here go against the css rules from the Materialize framework.
  */
+<<<<<<< HEAD
+=======
+/******************/
+/*  Font sources  */
+/******************/
+@font-face {
+  font-family: "Droid Sans Mono";
+  src: url("font/droid/DroidSansMono.ttf") format("truetype");
+}
+
+
+/**********/
+/*  HTML  */
+/**********/
+>>>>>>> origin
 html,
 body {
   height: 100% !important;
@@ -31,7 +46,8 @@ body {
   background-color: #00979C;
 }
 .arduino_teal_dark {
-  background-color: #00878F;
+  background-color: #006468;
+  /* background-color: #00878F; from community logo */
 }
 .arduino_teal_light {
   background-color: #62AEB2;
@@ -41,7 +57,12 @@ body {
 }
 .arduino_yellow {
   background-color: rgba(255, 204, 51, 1);
+<<<<<<< HEAD
   /* background-color: #E5AD24; */
+=======
+  /* background-color: #FFCC33; */
+  /* background-color: #E5AD24; from community logo */
+>>>>>>> origin
 }
 .arduino_brown {
   background-color: #8C7965;
@@ -94,7 +115,7 @@ ul.side-nav li.side-menu-end {
 }
 
 /************************************/
-/*  Blocks, arduino, and xml areas  */
+/*  Blocks, Arduino, and XML areas  */
 /************************************/
 .content {
   margin: 0;
@@ -102,20 +123,40 @@ ul.side-nav li.side-menu-end {
   width: 100%;
   background-color: #ffffff;
 }
+.height_transition {
+  transition: height 0.2s ease-out;
+  -ms-transition: height 0.2s ease-out;
+  -moz-transition: height 0.2s ease-out;
+  -webkit-transition: height 0.2s ease-out;
+}
 
 #blocks_panel {
   padding: 0px;
-  position: relative!important;
+  position: relative !important;
   -webkit-border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   border-radius: 4px !important;
   min-height: 480px;
+<<<<<<< HEAD
   height: -moz-calc(100vh - 150px);     /* Firefox  */
   height: -webkit-calc(100vh - 150px);  /* WebKit   */
   height: -o-calc(100vh - 150px);       /* Opera    */
   height: calc(100vh - 150px);          /* Standard */
+=======
 }
-
+.blocks_panel_large {
+  height: -moz-calc(100vh - 190px);     /* Firefox  */
+  height: -webkit-calc(100vh - 190px);  /* WebKit   */
+  height: -o-calc(100vh - 190px);       /* Opera    */
+  height: calc(100vh - 190px);          /* Standard */
+}
+.blocks_panel_small {
+  height: -moz-calc(100vh - 390px);     /* Firefox  */
+  height: -webkit-calc(100vh - 390px);  /* WebKit   */
+  height: -o-calc(100vh - 390px);       /* Opera    */
+  height: calc(100vh - 390px);          /* Standard */
+>>>>>>> origin
+}
 #content_blocks {
   margin: 0;
   padding: 0;
@@ -131,10 +172,25 @@ ul.side-nav li.side-menu-end {
   overflow: scroll;
   font-style: 0.2em !important;
   min-height: 384px;
+<<<<<<< HEAD
   height: -moz-calc(100vh - 247px);     /* Firefox  */
   height: -webkit-calc(100vh - 247px);  /* WebKit   */
   height: -o-calc(100vh - 247px);       /* Opera    */
   height: calc(100vh - 247px);          /* Standard */
+=======
+}
+.content_xml_large {
+  height: -moz-calc(100vh - 286px);     /* Firefox  */
+  height: -webkit-calc(100vh - 286px);  /* WebKit   */
+  height: -o-calc(100vh - 286px);       /* Opera    */
+  height: calc(100vh - 286px);          /* Standard */
+}
+.content_xml_small {
+  height: -moz-calc(100vh - 486px);     /* Firefox  */
+  height: -webkit-calc(100vh - 486px);  /* WebKit   */
+  height: -o-calc(100vh - 486px);       /* Opera    */
+  height: calc(100vh - 486px);          /* Standard */
+>>>>>>> origin
 }
 
 /* The materialize framework changes height of the div to show or hide */
@@ -144,40 +200,198 @@ ul.side-nav li.side-menu-end {
   outline: none;
   border: none;
   padding: 0px 5px;
-  font-family: monospace;
-  overflow: scroll;
-  font-style: 0.2em !important;
-  min-height: 388px;
-  height: -moz-calc(100vh - 243px);     /* Firefox  */
-  height: -webkit-calc(100vh - 243px);  /* WebKit   */
-  height: -o-calc(100vh - 243px);       /* Opera    */
-  height: calc(100vh - 243px);          /* Standard */
+  font-size: 0.9rem;
+  font-family: "Droid Sans Mono", monospace;
+  overflow: auto;
   -moz-user-select: text;
   -khtml-user-select: text;
   -webkit-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  min-height: 388px;
+}
+.content_arduino_large {
+  height: -moz-calc(100vh - 280px);     /* Firefox  */
+  height: -webkit-calc(100vh - 280px);  /* WebKit   */
+  height: -o-calc(100vh - 280px);       /* Opera    */
+  height: calc(100vh - 280px);          /* Standard */
+}
+.content_arduino_small {
+  height: -moz-calc(100vh - 480px);     /* Firefox  */
+  height: -webkit-calc(100vh - 480px);  /* WebKit   */
+  height: -o-calc(100vh - 480px);       /* Opera    */
+  height: calc(100vh - 480px);          /* Standard */
+}
+
+/****************/
+/*  IDE output  */
+/****************/
+.ide_output_wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  bottom: -16px;
+  z-index: 10;
+}
+
+.ide_output_collapsible {
+  box-shadow: 0 0px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-left: 0;
+  border-right: 0;
+}
+.ide_output_header_normal {
+  background-color: #006468;
+  color: #ffffff;
+  -moz-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;
+  -webkit-transition: background-color 0.6s ease-in;
+}
+.ide_output_header_highlight {
+  background-color: #62AEB2;
+  color: #ffffff;
+  -moz-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;
+  -webkit-transition: background-color 0.6s ease-in;
+}
+.ide_output_header_error {
+  background-color: #E47128;
+  color: #ffffff;
+  -moz-transition: background-color 0.6s ease-in;;
+  -o-transition: background-color 0.6s ease-in;
+  -webkit-transition: background-color 0.6s ease-in;
+}
+
+#content_ide_output {
+  resize: none;
+  outline: none;
+  border: none;
+  padding: 0px 5px;
+  font-family: monospace;
+  overflow: scroll;
+  font-style: 0.2em !important;
+<<<<<<< HEAD
+  min-height: 388px;
+  height: -moz-calc(100vh - 243px);     /* Firefox  */
+  height: -webkit-calc(100vh - 243px);  /* WebKit   */
+  height: -o-calc(100vh - 243px);       /* Opera    */
+  height: calc(100vh - 243px);          /* Standard */
+=======
+  min-height: 200px;
+  max-height: 200px;
+>>>>>>> origin
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  background-color: #303030;
+  color: #ffffff;
+}
+/* IDE output content text formatting */
+#content_ide_output .arduino_dialog_success {
+  color: #00979C;   /* arduino light teal */
+  font-size: 1.2rem;
+  margin: 16px 0px 8px 0px;
+}
+#content_ide_output .arduino_dialog_failure {
+  color: #E47128;   /* arduino orange */
+  font-size: 1.2rem;
+  margin: 16px 0px 8px 0px;
+}
+#content_ide_output .arduino_dialog_out {
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+#content_ide_output .arduino_dialog_out_error {
+  color: #E47128;   /* arduino orange */
+  font-size: 0.9rem;
+  padding-top: 8px;
+  display: block;
+}
+
+/* Spacer is used to not leave any content behind the collapsible header */
+#ide_output_spacer {
+  height: 40px;
+}
+@media only screen and (min-width: 0) {
+  #ide_output_spacer {
+    height: 20px;
+  }
+}
+@media only screen and (min-width: 601px) {
+  #ide_output_spacer {
+    height: 30px;
+  }
+}
+@media only screen and (min-width: 993px) {
+  #ide_output_spacer {
+    height: 40px;
+  }
 }
 
 
 /*************/
 /*  Buttons  */
 /*************/
-#button_run {
+#ide_buttons_wrapper {
   position: absolute;
   right: 25px;
   top: -20px;
+  height: 55px;
+  width: 160px;
+  z-index: 12;
 }
+<<<<<<< HEAD
 #button_run:hover {
   background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
+=======
+#button_ide_large {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 55px;
+  height: 55px;
+>>>>>>> origin
 }
-.run_loader {
-  position: absolute !important;
-  right: 25px !important;
-  top: -20px !important;
-  width: 56px !important;
-  height: 56px !important; 
-  z-index: 5;
+#button_ide_large i {
+  font-size: 2.4rem !important;
+  line-height: 55px;
+}
+#button_ide_middle {
+  position: absolute;
+  right: 72px;
+  top: 10px;
+  visibility: hidden;
+  opacity: 0;
+  -moz-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -webkit-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -o-transition: visibility 0.3s linear, opacity 0.3s linear;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+}
+#button_ide_left {
+  position: absolute;
+  right: 126px;
+  top: 10px;
+  visibility: hidden;
+  opacity: 0;
+  -moz-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -webkit-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -o-transition: visibility 0.3s linear, opacity 0.3s linear;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
+}
+#button_ide_large:hover:before,
+#button_ide_middle:hover:before,
+#button_ide_left:hover:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255,255,255, 0.25);
+  transition: all .3s linear;
 }
 
 #button_load_xml {
@@ -187,6 +401,26 @@ ul.side-nav li.side-menu-end {
   display: none;
 }
 
+/* These floating buttons needs to be at a higher z index than card when */
+/* floating and lower when clicked.  */
+#button_ide_large:hover,
+#button_ide_middle:hover,
+#button_ide_left:hover,
+#button_load_xml:hover {
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#button_ide_large:active,
+#button_ide_middle:active,
+#button_ide_left:active,
+#button_load_xml:active {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+/* Toggle the toolbox on and off button */
 .button_toggle_toolbox_on {
   position: absolute;
   margin: 0 !important;
@@ -204,6 +438,10 @@ ul.side-nav li.side-menu-end {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); 
+  transition: background 0.3s linear, box-shadow 0.3s linear, border-width 0.3s linear;
+  -ms-transition: background 0.3s linear, box-shadow 0.3s linear, border-width 0.3s linear;
+  -moz-transition: background 0.3s linear, -moz-box-shadow 0.3s linear, border-width 0.3s linear;
+  -webkit-transition: background 0.3s linear, -webkit-box-shadow 0.3s linear, border-width 0.3s linear;
 }
 .button_toggle_toolbox_off {
   position: absolute;
@@ -213,6 +451,59 @@ ul.side-nav li.side-menu-end {
   top: 9px;
   text-align: center;
   z-index: 5;
+}
+
+
+/*****************************/
+/*  Spinner and new colours  */
+/*****************************/
+.ide_loader {
+  position: absolute !important;
+  right: 0px !important;
+  top: 0px !important;
+  width: 55px !important;
+  height: 55px !important; 
+  z-index: 5;
+}
+.spinner-orange {
+  border-color: #E47128;
+}
+.active .spinner-layer.spinner-orange {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+.spinner-dark-teal {
+  border-color: #00878F;
+}
+.active .spinner-layer.spinner-dark-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+.spinner-yellow {
+  border-color: rgba(255, 204, 51, 1);
+}
+.active .spinner-layer.spinner-yellow {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+.spinner-light-teal {
+  border-color: #62AEB2;
+}
+.active .spinner-layer.spinner-light-teal {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+}
+.spinner-purple {
+  border-color: #8e24aa;
+}
+.active .spinner-layer.spinner-purple {
+  /* durations: 4 * ARCTIME */
+  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
 }
 
 
@@ -272,28 +563,20 @@ ul.side-nav li.side-menu-end {
 }
 
 
-/*******************************/
-/*  Clean 50:50 same row divs  */
-/*******************************/
-.two_halves_container {
-  width: 100%; 
-  padding: 0;
-  margin: 0;
+/*****************/
+/*  Sketch name  */
+/*****************/
+.sketch_name_wrapper {
+  display: inline-block;
+  padding-left: 5px;
 }
-.two_halves_left {
-  padding: 0;
-  margin: 0;
-  border: none;
-  width: 49%;
+.sketch_name_icon {
+  display: inline !important;
+  font-size: 1.2rem !important;
   float: right;
+  padding-top: 3px;
 }
-.two_halves_right {
-  padding: 0;
-  margin: 0;
-  border: none;
-  width: 50%;
-  float: right;
-}
+<<<<<<< HEAD
 
 
 /*************************/
@@ -319,29 +602,39 @@ ul.side-nav li.side-menu-end {
 
 .spinner-yellow {
   border-color: rgba(255, 204, 51, 1);
+=======
+.sketch_name {
+  width: auto !important;
+  max-width: 400px;
+  line-height: 64px;
+  height: 3rem !important;
+  font-size: 1.5rem !important;
+  border-bottom: 0px solid #EEE !important;
+  font-style: italic;
+>>>>>>> origin
 }
-.active .spinner-layer.spinner-yellow {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, yellow-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+.sketch_name:focus {
+    border-bottom: 1px solid #EEE !important;
 }
 
-.spinner-light-teal {
-  border-color: #62AEB2;
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+  .sketch_name {
+    max-width: 200px;
+  }
+  /* Remove the "Ardublockly title only leaving the sketch name */
+  .app_title {
+    display: none;
+  }
 }
-.active .spinner-layer.spinner-light-teal {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, green-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+@media only screen and (min-width : 600px) {
+  .sketch_name {
+    max-width: 275px;
+  }
 }
-
-.spinner-purple {
-  border-color: #8e24aa;
-}
-.active .spinner-layer.spinner-purple {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+@media only screen and (min-width : 993px) {
+  .sketch_name {
+    max-width: 350px;
+  }
 }
 
 
@@ -407,12 +700,41 @@ ul.side-nav li.side-menu-end {
   margin-right: 1rem;
 }
 
+<<<<<<< HEAD
+=======
+/* Colours for the new and deleted code highlighting */
+>>>>>>> origin
 .code_highlight_new {
   background-color: rgba(255, 204, 51, 0.5); /* Arduino yellow 50% */
 }
 .code_highlight_deleted {
   background-color: #FDBEBE;
 }
+<<<<<<< HEAD
+=======
+
+/* Clean 50:50 same row divs */
+.two_halves_container {
+  width: 100%; 
+  padding: 0;
+  margin: 0;
+}
+.two_halves_left {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 49%;
+  float: right;
+}
+.two_halves_right {
+  padding: 0;
+  margin: 0;
+  border: none;
+  width: 50%;
+  float: right;
+}
+
+>>>>>>> origin
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
@@ -426,7 +748,7 @@ ul.side-nav li.side-menu-end {
 
 /* Entire Blockly area, Toolbox dranw on top */
 .blocklySvg {
-  border-width: none !important;
+  border-width: 0 !important;
   -webkit-border-radius: 4px !important;
   -moz-border-radius: 4px !important;
   border-radius: 4px !important;
@@ -446,6 +768,7 @@ ul.side-nav li.side-menu-end {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  overflow: hidden !important;
 }
 .blocklyTreeRoot {
   background: none !important;
@@ -497,11 +820,19 @@ ul.side-nav li.side-menu-end {
   stroke-width: 0px !important;
 }
 
+<<<<<<< HEAD
 /* Edit select yellow colour to Arduino yellow, seems to be that colour already
 .blocklyHighlightedConnectionPath {
   stroke: rgba(255, 204, 51, 1) !important;
 }
 
+=======
+/* Edit select yellow colour to Arduino yellow. */
+/* Edited out because it seems to be that colour already.
+.blocklyHighlightedConnectionPath {
+  stroke: rgba(255, 204, 51, 1) !important;
+}
+>>>>>>> origin
 .blocklySelected>.blocklyPath {
   stroke: rgba(255, 204, 51, 1) !important;
 }
@@ -601,7 +932,7 @@ ul.side-nav li ul li ul li {
   }
 } */
 
-/* Increase the size of Materialize Modal in small res */
+/* Increase the size of Materialize Modal in small resolutions */
 @media only screen and (max-width : 600px) {
   .modal {
     width: 80% !important;
@@ -616,28 +947,20 @@ ul.side-nav li ul li ul li {
 .mdi-action-visibility-off {
   font-size: 1.5rem !important;
 }
-#button_run .mdi-av-play-arrow {
-  font-size: 2.5rem !important;
+#button_ide_large .mdi-av-play-arrow,
+#button_ide_large .mdi-navigation-check,
+#button_ide_large .mdi-action-open-in-browser {
+
 }
 #button_load_xml .mdi-action-extension {
   font-size: 2rem !important;
 }
 
-/* Button needs to be at a higher z index than */
-/* card when floating and lower when clicked.  */
-#button_run:hover {
-  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  -moz-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+/* Why the hell does button large has a predefined background colour !! */
+.btn-large:hover {
+  background-color: inherit;
 }
-#button_run:active {
-  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-}
-
 /* Circle clipper (loading animation) thickness */
 .circle-clipper .circle {
-    border-width: 4px !important;
-  }
+  border-width: 4px !important;
 }

@@ -7,7 +7,7 @@
  *               following URL: http://arduino.cc/en/Reference/Stepper
  *               Additional functions apart from the normal generators have 
  *               been added to be able to generate the 'set' drop down menu 
- *               with all current instaces of the Stepper class:
+ *               with all current instances of the Stepper class:
  *               Blockly.Blocks.Arduino.stepper.stepperInstances
  *               Blockly.Blocks.Arduino.stepper.FieldStepperInstance
  *               Blockly.Blocks.Arduino.stepper.stepperDropdownList
@@ -96,23 +96,23 @@ Blockly.Blocks['stepper_config'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/StepperConstructor');
     this.setColour(Blockly.Blocks.Arduino.stepper.HUE);
     this.appendDummyInput()
-        .appendField('Configure STEPPER:');
+        .appendField("setup stepper")
+        .appendField(new Blockly.FieldTextInput("MyStepper"), 'STEPPER_NAME');
     this.appendDummyInput()
-        .appendField('PIN1#')
-        .appendField(new Blockly.FieldDropdown(profile.default.digital),
-            'STEPPER_PIN1')
-        .appendField('PIN2#')
-        .appendField(new Blockly.FieldDropdown(profile.default.digital),
-            'STEPPER_PIN2');
+        .appendField('pin1#')
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN1')
+        .appendField('pin2#')
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN2');
     this.appendValueInput('STEPPER_STEPS')
         .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
-        .appendField('Steps in one revolution');
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField('steps in one revolution');
     this.appendValueInput('STEPPER_SPEED')
         .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
-        .appendField('Set speed to');
-    this.appendValueInput('STEPPER_NAME')
-        .setCheck(Blockly.StaticTyping.blocklyType.TEXT)
-        .appendField('Set name to');
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField('set speed to');
     this.setTooltip('Configures a stepper motor pinout and other settings');
   },
   /**
@@ -122,14 +122,19 @@ Blockly.Blocks['stepper_config'] = {
    * @this Blockly.Block
    */
   getStepperInstance: function() {
-    var InstanceName = null;
-    var instanceNameBlock = this.getInputTargetBlock('STEPPER_NAME');
-    if (!instanceNameBlock) {
+    var InstanceName = this.getFieldValue('STEPPER_NAME');
+    if (!InstanceName) {
       InstanceName = Blockly.Blocks.Arduino.stepper.noName;
-    } else {
-      InstanceName = instanceNameBlock.getFieldValue('TEXT');
     }
-    return InstanceName;
+    // Replace all spaces with underscores
+    return InstanceName.replace(/ /g, '_');;
+  },
+  /** Updates the content of the the pin related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'STEPPER_PIN1', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'STEPPER_PIN2', 'digitalPins');
   }
 };
 
@@ -141,18 +146,43 @@ Blockly.Blocks['stepper_step'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/StepperStep');
     this.setColour(Blockly.Blocks.Arduino.stepper.HUE);
-    this.interpolateMsg(
-        // TODO: Combine these messages instead of using concatenation.
-        'STEPPER' + ' %1 ' +
-        'move' + ' %2' + 'steps',
-        ['STEPPER_NAME',
-         new Blockly.Blocks.Arduino.stepper.FieldStepperInstance()],
-        ['STEPPER_STEPS',
-         Blockly.StaticTyping.blocklyType.NUMBER, Blockly.ALIGN_RIGHT],
-        Blockly.ALIGN_RIGHT);
+    this.appendDummyInput()
+        .appendField('stepper')
+        .appendField(new Blockly.Blocks.Arduino.stepper.FieldStepperInstance(),
+            'STEPPER_NAME');
+    this.appendValueInput('STEPPER_STEPS')
+        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField('move');
+    this.appendDummyInput()
+        .appendField('steps');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Turns the stepper motor a specific number of steps.');
+
+    /* For now the FieldStepperInstance is required, will need to replicate
+       functionality for JSON implementation.
+    this.jsonInit({
+      "message0": "stepper %1 move %2 steps",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "STEPPER_NAME",
+          "options": Blockly.Blocks.Arduino.stepper.stepperDropdownList()
+        },
+        {
+          "type": "input_value",
+          "name": "STEPPER_STEPS",
+          "align": "RIGHT"
+        }
+      ],
+      "inputsInline": true,
+      "previousStatement": null,
+      "nextStatement": null,
+      "colour": Blockly.Blocks.Arduino.stepper.HUE,
+      "tooltip": "Turns the stepper motor a specific number of steps.",
+      "helpUrl": "http://arduino.cc/en/Reference/StepperStep"
+    });*/
   },
   /**
    * Called whenever anything on the workspace changes.
@@ -176,8 +206,8 @@ Blockly.Blocks['stepper_step'] = {
         this.setFieldValue(
             Blockly.Blocks.Arduino.stepper.noInstance, 'STEPPER_NAME');
       }
-      this.setWarningText('A STEPPER configuration block must be added to ' +
-          'use this block!');
+      this.setWarningText(
+          'A STEPPER configuration block must be added to use this block!');
     } else {
       // Configuration blocks present, check if any selected and contains name
       var existingConfigSelected = false;
@@ -206,8 +236,8 @@ Blockly.Blocks['stepper_step'] = {
           this.setFieldValue(instances[0][0], 'STEPPER_NAME');
           this.setWarningText(null);
         } else {
-          // Al this point just set a waning to select a valid stepper config
-          this.setWarningText('Selected stepper does not exist anymore, ' +
+          // Al this point just set a warning to select a valid stepper config
+          this.setWarningText('Selected stepper does not exist any more, ' +
                               'please select a new one.');
         }
       }

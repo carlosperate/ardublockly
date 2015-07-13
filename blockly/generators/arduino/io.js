@@ -22,7 +22,7 @@ goog.require('Blockly.Arduino');
  */
 Blockly.Arduino['io_digitalwrite'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
-  var pinType = profile.default.pin_types.OUTPUT;
+  var pinType = Blockly.Arduino.Boards.pinTypes.OUTPUT;
   var stateInput = Blockly.Arduino.valueToCode(
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
@@ -57,7 +57,7 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
  */
 Blockly.Arduino['io_digitalread'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
-  var pinType = profile.default.pin_types.INPUT;
+  var pinType = Blockly.Arduino.Boards.pinTypes.INPUT;
 
   var setUpKey = 'setup_io_' + pinKey;
   var pinMode = 'pinMode(' + pinKey + ', INPUT);';
@@ -90,7 +90,7 @@ Blockly.Arduino['io_digitalread'] = function(block) {
  */
 Blockly.Arduino['io_builtin_led'] = function(block) {
   var pinKey = block.getFieldValue('BUILT_IN_LED');
-  var pinType = profile.default.pin_types.OUTPUT;
+  var pinType = Blockly.Arduino.Boards.pinTypes.OUTPUT;
   var stateInput = Blockly.Arduino.valueToCode(
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
@@ -126,7 +126,7 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
  */
 Blockly.Arduino['io_analogwrite'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
-  var pinType = profile.default.pin_types.OUTPUT;
+  var pinType = Blockly.Arduino.Boards.pinTypes.OUTPUT;
   var value_num = Blockly.Arduino.valueToCode(
       block, 'NUM', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
@@ -161,7 +161,7 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
  */
 Blockly.Arduino['io_analogread'] = function(block) {
   var pinKey = block.getFieldValue('PIN');
-  var pinType = profile.default.pin_types.INPUT;
+  var pinType = Blockly.Arduino.Boards.pinTypes.INPUT;
 
   var setUpKey = 'setup_io_' + pinKey;
   var pinMode = 'pinMode(' + pinKey + ', ' + pinType + ');';

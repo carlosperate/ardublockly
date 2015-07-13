@@ -315,8 +315,13 @@ Blockly.Blocks['text_length'] = {
    */
   init: function() {
     this.jsonInit({
+<<<<<<< HEAD
       "message": Blockly.Msg.TEXT_LENGTH_TITLE,
       "args": [
+=======
+      "message0": Blockly.Msg.TEXT_LENGTH_TITLE,
+      "args0": [
+>>>>>>> origin
         {
           "type": "input_value",
           "name": "VALUE",
@@ -344,8 +349,13 @@ Blockly.Blocks['text_isEmpty'] = {
    */
   init: function() {
     this.jsonInit({
+<<<<<<< HEAD
       "message": Blockly.Msg.TEXT_ISEMPTY_TITLE,
       "args": [
+=======
+      "message0": Blockly.Msg.TEXT_ISEMPTY_TITLE,
+      "args0": [
+>>>>>>> origin
         {
           "type": "input_value",
           "name": "VALUE",
@@ -637,8 +647,13 @@ Blockly.Blocks['text_print'] = {
    */
   init: function() {
     this.jsonInit({
+<<<<<<< HEAD
       "message": Blockly.Msg.TEXT_PRINT_TITLE,
       "args": [
+=======
+      "message0": Blockly.Msg.TEXT_PRINT_TITLE,
+      "args0": [
+>>>>>>> origin
         {
           "type": "input_value",
           "name": "TEXT"

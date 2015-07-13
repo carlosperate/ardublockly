@@ -4,7 +4,8 @@
  *
  * Based on work of Fred Lin (gasolin@gmail.com) for Blocklyduino.
  *
- * @fileoverview Helper functions for generating Arduino for blocks.
+ * @fileoverview Helper functions for generating Arduino language (C++) for
+ *               blocks.
  *
  */
 'use strict';
@@ -56,7 +57,7 @@ Blockly.Arduino.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] .
 Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
 Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; // * / % ~/
 Blockly.Arduino.ORDER_ADDITIVE = 4;       // + -
-Blockly.Arduino.ORDER_SHIFT = 5;          // << >>
+Blockly.Arduino.ORDER_SHIFT = 5;          // << >>  
 Blockly.Arduino.ORDER_RELATIONAL = 6;     // is is! >= > <= <
 Blockly.Arduino.ORDER_EQUALITY = 7;       // == != === !==
 Blockly.Arduino.ORDER_BITWISE_AND = 8;    // &
@@ -69,83 +70,19 @@ Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= 
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
 
 /**
- * Arduino Board profiles
- */
-var profile = {
-  arduino: {
-    name: 'Arduino Uno',
-    description: 'Arduino Uno standard-compatible board',
-    digital : [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5'],
-               ['6', '6'], ['7', '7'], ['8', '8'], ['9', '9'], ['10', '10'],
-               ['11', '11'], ['12', '12'], ['13', '13'], ['A0', 'A0'],
-               ['A1', 'A1'], ['A2', 'A2'], ['A3', 'A3'], ['A4', 'A4'],
-               ['A5', 'A5']],
-    analog : [['A0', 'A0'], ['A1', 'A1'], ['A2', 'A2'], ['A3', 'A3'],
-              ['A4', 'A4'], ['A5', 'A5']],
-    pwm : [['3', '3'], ['5', '5'], ['6', '6'], ['9', '9'], ['10', '10'],
-           ['11', '11']],
-    interrupt: [['Int_1', '1'], ['Int_2', '2'], ['Int_3', '3'], ['Int_4', '4'],
-                ['Int_5', '5']],
-    serial : [['serial', 'Serial']],
-    serial_speed : [['300', '300'], ['600', '600'], ['1200', '1200'],
-                    ['2400', '2400'], ['4800', '4800'], ['9600', '9600'],
-                    ['14400', '14400'], ['19200', '19200'], ['28800', '28800'],
-                    ['31250', '31250'], ['38400', '38400'],['57600', '57600'],
-                    ['115200', '115200']],
-    builtin_led: [['BUILTIN_1', '13']],
-    pin_types: { INPUT: 'INPUT', OUTPUT: 'OUTPUT', PWM: 'PWM', SERVO: 'SERVO',
-                 STEPPER: 'STEPPER', SPI: 'SPI' },
-    types : [['void', 'void'], ['Boolean', 'boolean'], ['Character', 'char'],
-             ['Unsigned Character', 'unsigned char'], ['Byte', 'byte'],
-             ['Integer', 'int'], ['Unsigned Integer', 'unsigned int'],
-             ['Word', 'word'], ['Long', 'long'],
-             ['Unsigned Long', 'unsigned long'], ['Short', 'short'],
-             ['Float', 'float'], ['Double', 'double'], ['String', 'String']],
-    spi_clock_divide: [['2 (8MHz)', 'SPI_CLOCK_DIV2'],
-                       ['4 (4MHz)', 'SPI_CLOCK_DIV4'],
-                       ['8 (2MHz)', 'SPI_CLOCK_DIV8'],
-                       ['16 (1MHz)', 'SPI_CLOCK_DIV16'],
-                       ['32 (500KHz)', 'SPI_CLOCK_DIV32'],
-                       ['64 (250KHz)', 'SPI_CLOCK_DIV64'],
-                       ['128 (125KHz)', 'SPI_CLOCK_DIV128']],
-    spi_pins: [['MOSI', '11'], ['MISO', '12'], ['SCK', '13']]
-  },
-  arduino_mega:{
-    description: 'Arduino Mega-compatible board'
-    //53 digital
-    //15 analog
-    //6 interrupts
-    //4 serials
-    //same serial_types
-    //same types
-  },
-  arduino_leonardo:{
-    description: 'Arduino Leonardo-compatible board'
-    //18 digital
-    //6 analog
-    //5 interrupts
-    //same serial
-    //same types
-  }
-};
-
-// Set default profile to arduino standard-compatible board
-profile['default'] = profile['arduino'];
-
-/**
  * Initialises the database of global definitions, the setup function, function
  * names, and variable names.
  * @param {Blockly.Workspace} workspace Workspace to generate code from.
  */
 Blockly.Arduino.init = function(workspace) {
-  // Create a dictionary of definitions to be printed before setups.
+  // Create a dictionary of definitions to be printed before setups
   Blockly.Arduino.definitions_ = Object.create(null);
-  // Create a dictionary of setups to be printed before the code.
+  // Create a dictionary of setups to be printed before the code
   Blockly.Arduino.setups_ = Object.create(null);
   // Create a dictionary of pins to check if their use conflicts
   Blockly.Arduino.pins_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
-  // to actual function names (to avoid collisions with user functions).
+  // to actual function names (to avoid collisions with user functions)
   Blockly.Arduino.functionNames_ = Object.create(null);
   
   if (!Blockly.Arduino.variableDB_) {
@@ -189,7 +126,7 @@ Blockly.Arduino.finish = function(code) {
   code = code.replace(/\n\s+$/, '\n');
   code = 'void loop() {\n' + code + '\n}';
 
-  // Convert the definitions dictionary into a list.
+  // Convert the definitions dictionary into a list
   var imports = [];
   var definitions = [];
   for (var name in Blockly.Arduino.definitions_) {
@@ -201,7 +138,7 @@ Blockly.Arduino.finish = function(code) {
     }
   }
 
-  // Convert the setups dictionary into a list.
+  // Convert the setups dictionary into a list
   var setups = [];
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
@@ -224,8 +161,7 @@ Blockly.Arduino.scrubNakedValue = function(line) {
 
 /**
  * Encode a string as a properly escaped Arduino string, complete with quotes.
- * @param {string} string Text to encode.
- * @return {string} Arduino string.
+ * @return {string} string Arduino string.
  * @private
  */
 Blockly.Arduino.quote_ = function(string) {
@@ -249,19 +185,19 @@ Blockly.Arduino.quote_ = function(string) {
  */
 Blockly.Arduino.scrub_ = function(block, code) {
   if (code === null) {
-    // Block has handled code generation itself.
+    // Block has handled code generation itself
     return '';
   }
   var commentCode = '';
-  // Only collect comments for blocks that aren't inline.
+  // Only collect comments for blocks that aren't inline
   if (!block.outputConnection || !block.outputConnection.targetConnection) {
     // Collect comment for this block.
     var comment = block.getCommentText();
     if (comment) {
       commentCode += this.prefixLines(comment, '// ') + '\n';
     }
-    // Collect comments for all value arguments.
-    // Don't collect comments for nested statements.
+    // Collect comments for all value arguments
+    // Don't collect comments for nested statements
     for (var x = 0; x < block.inputList.length; x++) {
       if (block.inputList[x].type == Blockly.INPUT_VALUE) {
         var childBlock = block.inputList[x].connection.targetBlock();
@@ -294,14 +230,18 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
       return 'undefined';
     case Blockly.StaticTyping.blocklyType.UNSPECIFIED:
       return 'void';
+    case Blockly.StaticTyping.blocklyType.NULL:
+      return 'NULL';
     case Blockly.StaticTyping.blocklyType.NUMBER:
-      return 'number';
+      return 'int';
     case Blockly.StaticTyping.blocklyType.INTEGER:
       return 'int';
     case Blockly.StaticTyping.blocklyType.DECIMAL:
       return 'float';
     case Blockly.StaticTyping.blocklyType.TEXT:
       return 'String';
+    case Blockly.StaticTyping.blocklyType.CHARACTER:
+      return 'char';
     case Blockly.StaticTyping.blocklyType.BOOLEAN:
       return 'boolean';
     case Blockly.StaticTyping.blocklyType.ERROR:

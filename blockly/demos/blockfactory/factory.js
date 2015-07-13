@@ -24,43 +24,79 @@
 'use strict';
 
 /**
- * The type of the generated block.
- */
-var blockType = '';
-
-/**
  * Workspace for user to build block.
- * @type Blockly.Workspace
+ * @type {Blockly.Workspace}
  */
 var mainWorkspace = null;
 
 /**
  * Workspace for preview of block.
- * @type Blockly.Workspace
+ * @type {Blockly.Workspace}
  */
 var previewWorkspace = null;
 
 /**
- * When the workspace changes, update the three other displays.
+ * Name of block if not named.
  */
-function onchange() {
-  var name = '';
+var UNNAMED = 'unnamed';
+
+/**
+ * Change the language code format.
+ */
+function formatChange() {
+  var mask = document.getElementById('blocklyMask');
+  var languagePre = document.getElementById('languagePre');
+  var languageTA = document.getElementById('languageTA');
+  if (document.getElementById('format').value == 'Manual') {
+    mask.style.display = 'block';
+    languagePre.style.display = 'none';
+    languageTA.style.display = 'block';
+    var code = languagePre.textContent.trim();
+    languageTA.value = code;
+    languageTA.focus();
+    updatePreview();
+  } else {
+    mask.style.display = 'none';
+    languageTA.style.display = 'none';
+    languagePre.style.display = 'block';
+    updateLanguage();
+  }
+  disableEnableLink();
+}
+
+/**
+ * Update the language code based on constructs made in Blockly.
+ */
+function updateLanguage() {
   var rootBlock = getRootBlock();
-  if (rootBlock) {
-    name = rootBlock.getFieldValue('NAME');
+  if (!rootBlock) {
+    return;
   }
-  blockType = name.replace(/\W/g, '_').replace(/^(\d)/, '_\\1').toLowerCase();
+  var blockType = rootBlock.getFieldValue('NAME').trim().toLowerCase();
   if (!blockType) {
-    blockType = 'unnamed';
+    blockType = UNNAMED;
   }
-  updateLanguage();
-  updateGenerator();
+  blockType = blockType.replace(/\W/g, '_').replace(/^(\d)/, '_\\1');
+  switch (document.getElementById('format').value) {
+    case 'JSON':
+      var code = formatJson_(blockType, rootBlock);
+      break;
+    case 'JavaScript':
+      var code = formatJavaScript_(blockType, rootBlock);
+      break;
+  }
+  injectCode(code, 'languagePre');
   updatePreview();
 }
 
 /**
- * Update the language code.
+ * Update the language code as JSON.
+ * @param {string} blockType Name of block.
+ * @param {!Blockly.Block} rootBlock Factory_base block.
+ * @return {string} Generanted language code.
+ * @private
  */
+<<<<<<< HEAD
 function updateLanguage() {
   var code = [];
   var rootBlock = getRootBlock();
@@ -81,6 +117,9 @@ function updateLanguage() {
  * Update the language code as JSON.
  */
 function formatJson(code, rootBlock) {
+=======
+function formatJson_(blockType, rootBlock) {
+>>>>>>> origin
   var JS = {};
   // ID is not used by Blockly, but may be used by a loader.
   JS.id = blockType;
@@ -117,6 +156,7 @@ function formatJson(code, rootBlock) {
       args.push(input);
       message.push('%' + args.length);
       lastInput = contentsBlock;
+<<<<<<< HEAD
     }
     contentsBlock = contentsBlock.nextConnection &&
         contentsBlock.nextConnection.targetBlock();
@@ -210,6 +250,106 @@ function formatJavaScript(code, rootBlock) {
     contentsBlock = contentsBlock.nextConnection &&
         contentsBlock.nextConnection.targetBlock();
   }
+=======
+    }
+    contentsBlock = contentsBlock.nextConnection &&
+        contentsBlock.nextConnection.targetBlock();
+  }
+  // Remove last input if dummy and not empty.
+  if (lastInput && lastInput.type == 'input_dummy') {
+    var fields = lastInput.getInputTargetBlock('FIELDS');
+    if (fields && getFieldsJson_(fields).join('').trim() != '') {
+      var align = lastInput.getFieldValue('ALIGN');
+      if (align != 'LEFT') {
+        JS.lastDummyAlign0 = align;
+      }
+      args.pop();
+      message.pop();
+    }
+  }
+  JS.message0 = message.join(' ');
+  JS.args0 = args;
+  // Generate inline/external switch.
+  if (rootBlock.getFieldValue('INLINE') == 'EXT') {
+    JS.inputsInline = false;
+  } else if (rootBlock.getFieldValue('INLINE') == 'INT') {
+    JS.inputsInline = true;
+  }
+  // Generate output, or next/previous connections.
+  switch (rootBlock.getFieldValue('CONNECTIONS')) {
+    case 'LEFT':
+      JS.output =
+          JSON.parse(getOptTypesFrom(rootBlock, 'OUTPUTTYPE') || 'null');
+      break;
+    case 'BOTH':
+      JS.previousStatement =
+          JSON.parse(getOptTypesFrom(rootBlock, 'TOPTYPE') || 'null');
+      JS.nextStatement =
+          JSON.parse(getOptTypesFrom(rootBlock, 'BOTTOMTYPE') || 'null');
+      break;
+    case 'TOP':
+      JS.previousStatement =
+          JSON.parse(getOptTypesFrom(rootBlock, 'TOPTYPE') || 'null');
+      break;
+    case 'BOTTOM':
+      JS.nextStatement =
+          JSON.parse(getOptTypesFrom(rootBlock, 'BOTTOMTYPE') || 'null');
+      break;
+  }
+  // Generate colour.
+  var colourBlock = rootBlock.getInputTargetBlock('COLOUR');
+  if (colourBlock && !colourBlock.disabled) {
+    var hue = parseInt(colourBlock.getFieldValue('HUE'), 10);
+    JS.colour = hue;
+  }
+  JS.tooltip = '';
+  JS.helpUrl = 'http://www.example.com/';
+  return JSON.stringify(JS, null, '  ');
+}
+
+/**
+ * Update the language code as JavaScript.
+ * @param {string} blockType Name of block.
+ * @param {!Blockly.Block} rootBlock Factory_base block.
+ * @return {string} Generanted language code.
+ * @private
+ */
+function formatJavaScript_(blockType, rootBlock) {
+  var code = [];
+  code.push("Blockly.Blocks['" + blockType + "'] = {");
+  code.push("  init: function() {");
+  // Generate inputs.
+  var TYPES = {'input_value': 'appendValueInput',
+               'input_statement': 'appendStatementInput',
+               'input_dummy': 'appendDummyInput'};
+  var contentsBlock = rootBlock.getInputTargetBlock('INPUTS');
+  while (contentsBlock) {
+    if (!contentsBlock.disabled && !contentsBlock.getInheritedDisabled()) {
+      var name = '';
+      // Dummy inputs don't have names.  Other inputs do.
+      if (contentsBlock.type != 'input_dummy') {
+        name = escapeString(contentsBlock.getFieldValue('INPUTNAME'));
+      }
+      code.push('    this.' + TYPES[contentsBlock.type] + '(' + name + ')');
+      var check = getOptTypesFrom(contentsBlock, 'TYPE');
+      if (check) {
+        code.push('        .setCheck(' + check + ')');
+      }
+      var align = contentsBlock.getFieldValue('ALIGN');
+      if (align != 'LEFT') {
+        code.push('        .setAlign(Blockly.ALIGN_' + align + ')');
+      }
+      var fields = getFieldsJs_(contentsBlock.getInputTargetBlock('FIELDS'));
+      for (var i = 0; i < fields.length; i++) {
+        code.push('        .appendField(' + fields[i] + ')');
+      }
+      // Add semicolon to last line to finish the statement.
+      code[code.length - 1] += ';';
+    }
+    contentsBlock = contentsBlock.nextConnection &&
+        contentsBlock.nextConnection.targetBlock();
+  }
+>>>>>>> origin
   // Generate inline/external switch.
   if (rootBlock.getFieldValue('INLINE') == 'EXT') {
     code.push('    this.setInputsInline(false);');
@@ -240,8 +380,14 @@ function formatJavaScript(code, rootBlock) {
   }
   code.push("    this.setTooltip('');");
   code.push("    this.setHelpUrl('http://www.example.com/');");
+<<<<<<< HEAD
   code.push("  }");
   code.push("};");
+=======
+  code.push('  }');
+  code.push('};');
+  return code.join('\n');
+>>>>>>> origin
 }
 
 /**
@@ -493,88 +639,77 @@ function getTypesFrom_(block, name) {
 
 /**
  * Update the generator code.
+ * @param {!Blockly.Block} block Rendered block in preview workspace.
  */
-function updateGenerator() {
+function updateGenerator(block) {
   function makeVar(root, name) {
     name = name.toLowerCase().replace(/\W/g, '_');
     return '  var ' + root + '_' + name;
   }
   var language = document.getElementById('language').value;
   var code = [];
-  code.push("Blockly." + language + "['" + blockType +
+  code.push("Blockly." + language + "['" + block.type +
             "'] = function(block) {");
-  var rootBlock = getRootBlock();
-  if (rootBlock) {
-    // Loop through every block, and generate getters for any fields or inputs.
-    var blocks = rootBlock.getDescendants();
-    for (var x = 0, block; block = blocks[x]; x++) {
-      if (block.disabled || block.getInheritedDisabled()) {
+
+  // Generate getters for any fields or inputs.
+  for (var i = 0, input; input = block.inputList[i]; i++) {
+    for (var j = 0, field; field = input.fieldRow[j]; j++) {
+      var name = field.name;
+      if (!name) {
         continue;
       }
-      switch (block.type) {
-        case 'field_input':
-          var name = block.getFieldValue('FIELDNAME');
-          code.push(makeVar('text', name) +
-                    " = block.getFieldValue('" + name + "');");
-          break;
-        case 'field_angle':
-          var name = block.getFieldValue('FIELDNAME');
-          code.push(makeVar('angle', name) +
-                    " = block.getFieldValue('" + name + "');");
-          break;
-        case 'field_dropdown':
-          var name = block.getFieldValue('FIELDNAME');
-          code.push(makeVar('dropdown', name) +
-                    " = block.getFieldValue('" + name + "');");
-          break;
-        case 'field_checkbox':
-          var name = block.getFieldValue('FIELDNAME');
-          code.push(makeVar('checkbox', name) +
-                    " = block.getFieldValue('" + name + "') == 'TRUE';");
-          break;
-        case 'field_colour':
-          var name = block.getFieldValue('FIELDNAME');
-          code.push(makeVar('colour', name) +
-                    " = block.getFieldValue('" + name + "');");
-          break;
-        case 'field_date':
-          var name = block.getFieldValue('FIELDNAME');
-          code.push(makeVar('date', name) +
-                    " = block.getFieldValue('" + name + "');");
-          break;
-        case 'field_variable':
-          var name = block.getFieldValue('FIELDNAME');
-          code.push(makeVar('variable', name) +
-                    " = Blockly." + language +
-                    ".variableDB_.getName(block.getFieldValue('" + name +
-                    "'), Blockly.Variables.NAME_TYPE);");
-          break;
-        case 'input_value':
-          var name = block.getFieldValue('INPUTNAME');
-          code.push(makeVar('value', name) +
-                    " = Blockly." + language + ".valueToCode(block, '" + name +
-                    "', Blockly." + language + ".ORDER_ATOMIC);");
-          break;
-        case 'input_statement':
-          var name = block.getFieldValue('INPUTNAME');
-          code.push(makeVar('statements', name) +
-                    " = Blockly." + language + ".statementToCode(block, '" +
-                    name + "');");
-          break;
+      if (field instanceof Blockly.FieldVariable) {
+        // Subclass of Blockly.FieldDropdown, must test first.
+        code.push(makeVar('variable', name) +
+                  " = Blockly." + language +
+                  ".variableDB_.getName(block.getFieldValue('" + name +
+                  "'), Blockly.Variables.NAME_TYPE);");
+      } else if (field instanceof Blockly.FieldAngle) {
+        // Subclass of Blockly.FieldTextInput, must test first.
+        code.push(makeVar('angle', name) +
+                  " = block.getFieldValue('" + name + "');");
+      } else if (Blockly.FieldDate && field instanceof Blockly.FieldDate) {
+        // Blockly.FieldDate may not be compiled into Blockly.
+        code.push(makeVar('date', name) +
+                  " = block.getFieldValue('" + name + "');");
+      } else if (field instanceof Blockly.FieldColour) {
+        code.push(makeVar('colour', name) +
+                  " = block.getFieldValue('" + name + "');");
+      } else if (field instanceof Blockly.FieldCheckbox) {
+        code.push(makeVar('checkbox', name) +
+                  " = block.getFieldValue('" + name + "') == 'TRUE';");
+      } else if (field instanceof Blockly.FieldDropdown) {
+        code.push(makeVar('dropdown', name) +
+                  " = block.getFieldValue('" + name + "');");
+      } else if (field instanceof Blockly.FieldTextInput) {
+        code.push(makeVar('text', name) +
+                  " = block.getFieldValue('" + name + "');");
       }
     }
-    code.push("  // TODO: Assemble " + language + " into code variable.");
-    code.push("  var code = \'...\';");
-    if (rootBlock.getFieldValue('CONNECTIONS') == 'LEFT') {
-      code.push("  // TODO: Change ORDER_NONE to the correct strength.");
-      code.push("  return [code, Blockly." + language + ".ORDER_NONE];");
-    } else {
-      code.push("  return code;");
+    var name = input.name;
+    if (name) {
+      if (input.type == Blockly.INPUT_VALUE) {
+        code.push(makeVar('value', name) +
+                  " = Blockly." + language + ".valueToCode(block, '" + name +
+                  "', Blockly." + language + ".ORDER_ATOMIC);");
+      } else if (input.type == Blockly.NEXT_STATEMENT) {
+        code.push(makeVar('statements', name) +
+                  " = Blockly." + language + ".statementToCode(block, '" +
+                  name + "');");
+      }
     }
+  }
+  code.push("  // TODO: Assemble " + language + " into code variable.");
+  code.push("  var code = \'...\';");
+  if (block.outputConnection) {
+    code.push("  // TODO: Change ORDER_NONE to the correct strength.");
+    code.push("  return [code, Blockly." + language + ".ORDER_NONE];");
+  } else {
+    code.push("  return code;");
   }
   code.push("};");
 
-  injectCode(code, 'generatorPre');
+  injectCode(code.join('\n'), 'generatorPre');
 }
 
 /**
@@ -586,6 +721,7 @@ var oldDir = null;
  * Update the preview display.
  */
 function updatePreview() {
+  // Toggle between LTR/RTL if needed (also used in first display).
   var newDir = document.getElementById('direction').value;
   if (oldDir != newDir) {
     if (previewWorkspace) {
@@ -599,6 +735,7 @@ function updatePreview() {
     oldDir = newDir;
   }
   previewWorkspace.clear();
+<<<<<<< HEAD
   if (Blockly.Blocks[blockType]) {
     throw 'Block name collides with existing property: ' + blockType;
   }
@@ -627,17 +764,88 @@ function updatePreview() {
   previewBlock.setMovable(false);
   previewBlock.setDeletable(false);
   previewBlock.moveBy(15, 10);
+=======
+
+  // Fetch the code and determine its format (JSON or JavaScript).
+  var format = document.getElementById('format').value;
+  if (format == 'Manual') {
+    var code = document.getElementById('languageTA').value;
+    // If the code is JSON, it will parse, otherwise treat as JS.
+    try {
+      JSON.parse(code);
+      format = 'JSON';
+    } catch (e) {
+      format = 'JavaScript';
+    }
+  } else {
+    var code = document.getElementById('languagePre').textContent;
+  }
+  if (!code.trim()) {
+    // Nothing to render.  Happens while cloud storage is loading.
+    return;
+  }
+
+  // Backup Blockly.Blocks object so that main workspace and preview don't
+  // collide if user creates a 'factory_base' block, for instance.
+  var backupBlocks = Blockly.Blocks;
+  try {
+    // Make a shallow copy.
+    Blockly.Blocks = {};
+    for (var prop in backupBlocks) {
+      Blockly.Blocks[prop] = backupBlocks[prop];
+    }
+
+    if (format == 'JSON') {
+      var json = JSON.parse(code);
+      Blockly.Blocks[json.id || UNNAMED] = {
+        init: function() {
+          this.jsonInit(json);
+        }
+      };
+    } else if (format == 'JavaScript') {
+      eval(code);
+    } else {
+      throw 'Unknown format: ' + format;
+    }
+
+    // Look for a block on Blockly.Blocks that does not match the backup.
+    var blockType = null;
+    for (var type in Blockly.Blocks) {
+      if (typeof Blockly.Blocks[type].init == 'function' &&
+          Blockly.Blocks[type] != backupBlocks[type]) {
+        blockType = type;
+        break;
+      }
+    }
+    if (!blockType) {
+      return;
+    }
+
+    // Create the preview block.
+    var previewBlock = Blockly.Block.obtain(previewWorkspace, blockType);
+    previewBlock.initSvg();
+    previewBlock.render();
+    previewBlock.setMovable(false);
+    previewBlock.setDeletable(false);
+    previewBlock.moveBy(15, 10);
+
+    updateGenerator(previewBlock);
+  } finally {
+    Blockly.Blocks = backupBlocks;
+  }
+>>>>>>> origin
 }
 
 /**
  * Inject code into a pre tag, with syntax highlighting.
  * Safe from HTML/script injection.
- * @param {!Array.<string>} code Array of lines of code.
+ * @param {string} code Lines of code.
  * @param {string} id ID of <pre> element to inject into.
  */
 function injectCode(code, id) {
+  Blockly.removeAllRanges();
   var pre = document.getElementById(id);
-  pre.textContent = code.join('\n');
+  pre.textContent = code;
   code = pre.innerHTML;
   code = prettyPrintOne(code, 'js');
   pre.innerHTML = code;
@@ -658,6 +866,14 @@ function getRootBlock() {
 }
 
 /**
+ * Disable the link button if the format is 'Manual', enable otherwise.
+ */
+function disableEnableLink() {
+  var linkButton = document.getElementById('linkButton');
+  linkButton.disabled = document.getElementById('format').value == 'Manual';
+}
+
+/**
  * Initialize Blockly and layout.  Called on page load.
  */
 function init() {
@@ -674,17 +890,24 @@ function init() {
     linkButton.style.display = 'inline-block';
     linkButton.addEventListener('click',
         function() {BlocklyStorage.link(mainWorkspace);});
+<<<<<<< HEAD
+=======
+    disableEnableLink();
+>>>>>>> origin
   }
 
-  document.getElementById('helpButton').addEventListener('click', function() {
+  document.getElementById('helpButton').addEventListener('click',
+    function() {
       open('https://developers.google.com/blockly/custom-blocks/block-factory',
            'BlockFactoryHelp');
     });
 
   var expandList = [
     document.getElementById('blockly'),
+    document.getElementById('blocklyMask'),
     document.getElementById('preview'),
     document.getElementById('languagePre'),
+    document.getElementById('languageTA'),
     document.getElementById('generatorPre')
   ];
   var onresize = function(e) {
@@ -712,12 +935,21 @@ function init() {
     rootBlock.setDeletable(false);
   }
 
-  mainWorkspace.addChangeListener(onchange);
+  mainWorkspace.addChangeListener(updateLanguage);
   document.getElementById('direction')
       .addEventListener('change', updatePreview);
+<<<<<<< HEAD
   document.getElementById('format').addEventListener('change',
       function() {updateLanguage(); updatePreview();});
+=======
+  document.getElementById('languageTA')
+      .addEventListener('change', updatePreview);
+  document.getElementById('languageTA')
+      .addEventListener('keyup', updatePreview);
+  document.getElementById('format')
+      .addEventListener('change', formatChange);
+>>>>>>> origin
   document.getElementById('language')
-      .addEventListener('change', updateGenerator);
+      .addEventListener('change', updatePreview);
 }
 window.addEventListener('load', init);

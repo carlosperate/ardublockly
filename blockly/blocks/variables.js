@@ -48,6 +48,10 @@ Blockly.Blocks['variables_get'] = {
         Blockly.Msg.VARIABLES_DEFAULT_NAME), 'VAR');
     this.setOutput(true);
     this.setTooltip(Blockly.Msg.VARIABLES_GET_TOOLTIP);
+<<<<<<< HEAD
+=======
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_GET_CREATE_SET;
+>>>>>>> origin
   },
   /**
    * Return all variables referenced by this block.
@@ -69,7 +73,10 @@ Blockly.Blocks['variables_get'] = {
       this.setFieldValue(newName, 'VAR');
     }
   },
+<<<<<<< HEAD
   contextMenuMsg_: Blockly.Msg.VARIABLES_GET_CREATE_SET,
+=======
+>>>>>>> origin
   contextMenuType_: 'variables_set',
   /**
    * Add menu option to create getter/setter block for this setter/getter.
@@ -132,8 +139,13 @@ Blockly.Blocks['variables_set'] = {
    */
   init: function() {
     this.jsonInit({
+<<<<<<< HEAD
       "message": Blockly.Msg.VARIABLES_SET,
       "args": [
+=======
+      "message0": Blockly.Msg.VARIABLES_SET,
+      "args0": [
+>>>>>>> origin
         {
           "type": "field_variable",
           "name": "VAR",
@@ -150,6 +162,10 @@ Blockly.Blocks['variables_set'] = {
       "tooltip": Blockly.Msg.VARIABLES_SET_TOOLTIP,
       "helpUrl": Blockly.Msg.VARIABLES_SET_HELPURL
     });
+<<<<<<< HEAD
+=======
+    this.contextMenuMsg_ = Blockly.Msg.VARIABLES_SET_CREATE_GET;
+>>>>>>> origin
   },
   /**
    * Return all variables referenced by this block.
@@ -171,7 +187,10 @@ Blockly.Blocks['variables_set'] = {
       this.setFieldValue(newName, 'VAR');
     }
   },
+<<<<<<< HEAD
   contextMenuMsg_: Blockly.Msg.VARIABLES_SET_CREATE_GET,
+=======
+>>>>>>> origin
   contextMenuType_: 'variables_get',
   customContextMenu: Blockly.Blocks['variables_get'].customContextMenu,
   /**

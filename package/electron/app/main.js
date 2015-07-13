@@ -19,8 +19,14 @@ var env = require('./vendor/electron_boilerplate/env_config');
 var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
 
 // Global reference of the window object must be maintain, or the window will
+<<<<<<< HEAD
 // be closed automatically when the javascript object is garbage collected.
 var mainWindow = null;
+=======
+// be closed automatically when the JavaScript object is garbage collected.
+var mainWindow = null;
+var splashWindow = null;
+>>>>>>> origin
 
 // Preserver of the window size and position between app launches.
 var mainWindowState = windowStateKeeper('main', {
@@ -29,7 +35,11 @@ var mainWindowState = windowStateKeeper('main', {
 });
 
 app.on('ready', function () {
+<<<<<<< HEAD
     var splashWindow = createSplashWindow();
+=======
+    createSplashWindow();
+>>>>>>> origin
 
     server.startServer();
 
@@ -49,6 +59,12 @@ app.on('ready', function () {
             'text-areas-are-resizable': false,
             'webgl': false,
             'webaudio': true,
+<<<<<<< HEAD
+=======
+            'subpixel-font-scaling': true,
+            'direct-write': true,
+            //'overlay-scrollbars': true,
+>>>>>>> origin
             'plugins': false
         }
     });
@@ -75,7 +91,14 @@ app.on('ready', function () {
 
     mainWindow.webContents.on('did-finish-load', function () {
         mainWindow.show();
+<<<<<<< HEAD
         splashWindow.close();
+=======
+        if (splashWindow !== null) {
+            splashWindow.close();
+            splashWindow = null;
+        }
+>>>>>>> origin
     });
 
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
@@ -94,6 +117,7 @@ app.on('window-all-closed', function () {
 });
 
 function createSplashWindow() {
+<<<<<<< HEAD
     var imagePath = 'file://' + server.getProjectJetpack().path(
         'ardublockly', 'img', 'ardublockly_splash.png');
 
@@ -110,4 +134,22 @@ function createSplashWindow() {
     splashWindow.loadUrl(imagePath);
 
     return splashWindow;
+=======
+    if (splashWindow === null) {
+        var imagePath = 'file://' + server.getProjectJetpack().path(
+            'ardublockly', 'img', 'ardublockly_splash.png');
+
+        splashWindow = new BrowserWindow({
+            width: 450,
+            height: 300,
+            frame: false,
+            show: true,
+            transparent: true,
+            images: true,
+            center: true,
+            'use-content-size': true
+        });
+        splashWindow.loadUrl(imagePath);
+    }
+>>>>>>> origin
 }

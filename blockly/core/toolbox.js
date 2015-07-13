@@ -161,7 +161,12 @@ Blockly.Toolbox.prototype.position = function() {
   var svgPosition = goog.style.getPageOffset(svg);
   var svgSize = Blockly.svgSize(svg);
   if (this.workspace_.RTL) {
+<<<<<<< HEAD
     treeDiv.style.left = (svgPosition.x + svgSize.width - treeDiv.offsetWidth) + 'px';
+=======
+    treeDiv.style.left =
+        (svgPosition.x + svgSize.width - treeDiv.offsetWidth) + 'px';
+>>>>>>> origin
   } else {
     treeDiv.style.left = svgPosition.x + 'px';
   }
@@ -177,6 +182,7 @@ Blockly.Toolbox.prototype.position = function() {
 
 /**
  * Fill the toolbox with categories and blocks.
+ * @param {Node} newTree DOM tree of blocks, or null.
  * @private
  */
 Blockly.Toolbox.prototype.populate_ = function(newTree) {
@@ -193,9 +199,12 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
         case 'CATEGORY':
           var childOut = rootOut.createNode(childIn.getAttribute('name'));
           childOut.blocks = [];
+<<<<<<< HEAD
           if (childIn.getAttribute('expanded') == 'true') {
             childOut.setExpanded(true);
           }
+=======
+>>>>>>> origin
           treeOut.add(childOut);
           var custom = childIn.getAttribute('custom');
           if (custom) {
@@ -204,6 +213,15 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
           } else {
             syncTrees(childIn, childOut);
           }
+<<<<<<< HEAD
+=======
+          if (childIn.getAttribute('expanded') == 'true') {
+            if (childOut.blocks.length) {
+              rootOut.setSelectedItem(childOut);
+            }
+            childOut.setExpanded(true);
+          }
+>>>>>>> origin
           break;
         case 'SEP':
           treeOut.add(new Blockly.Toolbox.TreeSeparator());
