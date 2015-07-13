@@ -57,7 +57,7 @@ Blockly.Arduino.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] .
 Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
 Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; // * / % ~/
 Blockly.Arduino.ORDER_ADDITIVE = 4;       // + -
-Blockly.Arduino.ORDER_SHIFT = 5;          // << >>
+Blockly.Arduino.ORDER_SHIFT = 5;          // << >>  
 Blockly.Arduino.ORDER_RELATIONAL = 6;     // is is! >= > <= <
 Blockly.Arduino.ORDER_EQUALITY = 7;       // == != === !==
 Blockly.Arduino.ORDER_BITWISE_AND = 8;    // &
@@ -68,70 +68,6 @@ Blockly.Arduino.ORDER_LOGICAL_OR = 12;    // ||
 Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
 Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
-
-/**
- * Arduino Board profiles
- */
-var profile = {
-  arduino: {
-    name: 'Arduino Uno',
-    description: 'Arduino Uno standard-compatible board',
-    digital : [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5'],
-               ['6', '6'], ['7', '7'], ['8', '8'], ['9', '9'], ['10', '10'],
-               ['11', '11'], ['12', '12'], ['13', '13'], ['A0', 'A0'],
-               ['A1', 'A1'], ['A2', 'A2'], ['A3', 'A3'], ['A4', 'A4'],
-               ['A5', 'A5']],
-    analog : [['A0', 'A0'], ['A1', 'A1'], ['A2', 'A2'], ['A3', 'A3'],
-              ['A4', 'A4'], ['A5', 'A5']],
-    pwm : [['3', '3'], ['5', '5'], ['6', '6'], ['9', '9'], ['10', '10'],
-           ['11', '11']],
-    interrupt: [['Int_1', '1'], ['Int_2', '2'], ['Int_3', '3'], ['Int_4', '4'],
-                ['Int_5', '5']],
-    serial : [['serial', 'Serial']],
-    serial_speed : [['300', '300'], ['600', '600'], ['1200', '1200'],
-                    ['2400', '2400'], ['4800', '4800'], ['9600', '9600'],
-                    ['14400', '14400'], ['19200', '19200'], ['28800', '28800'],
-                    ['31250', '31250'], ['38400', '38400'],['57600', '57600'],
-                    ['115200', '115200']],
-    builtin_led: [['BUILTIN_1', '13']],
-    pin_types: { INPUT: 'INPUT', OUTPUT: 'OUTPUT', PWM: 'PWM', SERVO: 'SERVO',
-                 STEPPER: 'STEPPER', SPI: 'SPI' },
-    /*types : [['void', 'void'], ['Boolean', 'boolean'], ['Character', 'char'],
-             ['Unsigned Character', 'unsigned char'], ['Byte', 'byte'],
-             ['Integer', 'int'], ['Unsigned Integer', 'unsigned int'],
-             ['Word', 'word'], ['Long', 'long'],
-             ['Unsigned Long', 'unsigned long'], ['Short', 'short'],
-             ['Float', 'float'], ['Double', 'double'], ['String', 'String']],*/
-    spi_clock_divide: [['2 (8MHz)', 'SPI_CLOCK_DIV2'],
-                       ['4 (4MHz)', 'SPI_CLOCK_DIV4'],
-                       ['8 (2MHz)', 'SPI_CLOCK_DIV8'],
-                       ['16 (1MHz)', 'SPI_CLOCK_DIV16'],
-                       ['32 (500KHz)', 'SPI_CLOCK_DIV32'],
-                       ['64 (250KHz)', 'SPI_CLOCK_DIV64'],
-                       ['128 (125KHz)', 'SPI_CLOCK_DIV128']],
-    spi_pins: [['MOSI', '11'], ['MISO', '12'], ['SCK', '13']]
-  },
-  arduino_mega:{
-    description: 'Arduino Mega-compatible board'
-    //53 digital
-    //15 analog
-    //6 interrupts
-    //4 serials
-    //same serial_types
-    //same types
-  },
-  arduino_leonardo:{
-    description: 'Arduino Leonardo-compatible board'
-    //18 digital
-    //6 analog
-    //5 interrupts
-    //same serial
-    //same types
-  }
-};
-
-// Set default profile to arduino standard-compatible board
-profile['default'] = profile['arduino'];
 
 /**
  * Initialises the database of global definitions, the setup function, function
@@ -225,8 +161,7 @@ Blockly.Arduino.scrubNakedValue = function(line) {
 
 /**
  * Encode a string as a properly escaped Arduino string, complete with quotes.
- * @param {string} string Text to encode.
- * @return {string} Arduino string.
+ * @return {string} string Arduino string.
  * @private
  */
 Blockly.Arduino.quote_ = function(string) {

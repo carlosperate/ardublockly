@@ -26,7 +26,7 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['stepper_config'] = function(block) {
   var pin1 = block.getFieldValue('STEPPER_PIN1');
   var pin2 = block.getFieldValue('STEPPER_PIN2');
-  var pinType = profile.default.pin_types.STEPPER;
+  var pinType = Blockly.Arduino.Boards.pinTypes.STEPPER;
   var stepperName = block.getStepperInstance();
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '360';
@@ -80,6 +80,6 @@ Blockly.Arduino['stepper_step'] = function(block) {
   var stepperInstanceName = block.getFieldValue('STEPPER_NAME')
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '0';
-  var code = stepperInstanceName + '.steps(' + stepperSteps + ');\n';
+  var code = stepperInstanceName + '.step(' + stepperSteps + ');\n';
   return code;
 };

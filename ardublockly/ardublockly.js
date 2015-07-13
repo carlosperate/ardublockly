@@ -38,10 +38,7 @@ window.addEventListener('load', function load(event) {
   }
 });
 
-/**
- * Binds functions to each of the buttons, nav links, and related.
- * Materialize uses jQuery.
- */
+/** Binds functions to each of the buttons, nav links, and related. */
 Ardublockly.bindActionFunctions = function() {
   // Navigation buttons
   Ardublockly.bindClick_('button_load', Ardublockly.loadUserXmlFile);
@@ -139,13 +136,13 @@ Ardublockly.ideSendOpen = function() {
   Ardublockly.sendCode();
 };
 
-/** Function bind to the left IDE button, to be changed based on settings. */
+/** Function bound to the left IDE button, to be changed based on settings. */
 Ardublockly.ideButtonLargeAction = Ardublockly.ideSendUpload;
 
-/** Function bind to the middle IDE button, to be changed based on settings. */
+/** Function bound to the middle IDE button, to be changed based on settings. */
 Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendVerify;
 
-/** Function bind to the large IDE button, to be changed based on settings. */
+/** Function bound to the large IDE button, to be changed based on settings. */
 Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
 
 /** Initialises the IDE buttons with the default option from the server. */
@@ -164,7 +161,6 @@ Ardublockly.initialiseIdeButtons = function() {
 
 /**
  * Changes the IDE launch buttons based on the option indicated in the argument.
- * Uses jQuery.
  * @param {!string} value One of the 3 possible values from the drop down select
  *                        in the settings modal: 'upload', 'verify', or 'open'.
  */
@@ -279,25 +275,10 @@ Ardublockly.saveSketchFileAs = function() {
   saveAs(blob, sketchName + '.ino');
 };
 
-/** Opens the modal that displays the "not connected to server" message. */
-Ardublockly.openNotConnectedModal = function() {
-  $('#not_running_dialog').openModal({
-    dismissible: true,
-    opacity: .5,
-    in_duration: 200,
-    out_duration: 250
-  });
-};
-
 /** Prepares and opens the settings modal. */
 Ardublockly.openSettings = function() {
   Ardublockly.populateSettings();
-  $('#settings_dialog').openModal({
-    dismissible: true,
-    opacity: .5,
-    in_duration: 200,
-    out_duration: 250
-  });
+  Ardublockly.openSettingsModal();
 };
 
 /**
@@ -381,6 +362,7 @@ Ardublockly.setBoard = function() {
   //TODO: check how ArdublocklyServer deals with invalid data and sanitise
   ArdublocklyServer.setArduinoBoard(
       boardValue, Ardublockly.setArduinoBoardsHtml);
+  Ardublockly.changeBlocklyArduinoBoard(boardValue.toLowerCase());
 };
 
 /**

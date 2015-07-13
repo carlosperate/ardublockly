@@ -190,6 +190,16 @@ Ardublockly.discardAllBlocks = function() {
   }
 };
 
+/** 
+ * Changes the Arduino board profile if different from the currently set one.
+ * @param {string} newBoard Name of the new profile to set.
+ */
+Ardublockly.changeBlocklyArduinoBoard = function(newBoard) {
+  if (Blockly.Arduino.Boards.selected !== Blockly.Arduino.Boards[newBoard]) {
+    Blockly.Arduino.Boards.changeBoard(Ardublockly.workspace, newBoard);
+  }
+};
+
 /** Closes the toolbox block container sub-menu. */
 Ardublockly.blocklyCloseToolbox = function() {
   Ardublockly.workspace.toolbox_.flyout_.hide();

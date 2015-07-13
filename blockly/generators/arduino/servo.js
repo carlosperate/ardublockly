@@ -26,7 +26,7 @@ goog.require('Blockly.Arduino');
  */
 Blockly.Arduino['servo_write'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
-  var pinType = profile.default.pin_types.SERVO;
+  var pinType = Blockly.Arduino.Boards.pinTypes.SERVO;
   var servoAngle = Blockly.Arduino.valueToCode(block, 'SERVO_ANGLE', Blockly.Arduino.ORDER_ATOMIC) || '90';
 
   var servoName = 'myServo_' + pinKey;
@@ -64,7 +64,7 @@ Blockly.Arduino['servo_write'] = function(block) {
  */
 Blockly.Arduino['servo_read'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
-  var pinType = profile.default.pin_types.SERVO;
+  var pinType = Blockly.Arduino.Boards.pinTypes.SERVO;
 
   var servoName = 'myServo_' + pinKey;
   var code = servoName + '.read()';

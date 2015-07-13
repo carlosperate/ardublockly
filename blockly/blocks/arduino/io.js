@@ -25,7 +25,8 @@ Blockly.Blocks['io_digitalwrite'] = {
     this.setColour(Blockly.Blocks.Arduino.io.HUE);
     this.appendDummyInput('')
         .appendField('set digital pin#')
-        .appendField(new Blockly.FieldDropdown(profile.default.digital), 'PIN')
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
     this.appendValueInput('STATE', Blockly.StaticTyping.blocklyType.BOOLEAN)
         .appendField('to')
         .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN);
@@ -33,6 +34,15 @@ Blockly.Blocks['io_digitalwrite'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Write digital value to a specific Port.');
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getType: function() {
+    return Blockly.StaticTyping.blocklyType.INTEGER;
+  },
+  /** Updates the content of the the pin related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
   }
 };
 
@@ -46,16 +56,19 @@ Blockly.Blocks['io_digitalread'] = {
     this.setColour(Blockly.Blocks.Arduino.io.HUE);
     this.appendDummyInput('')
         .appendField('read digital pin#')
-        .appendField(new Blockly.FieldDropdown(profile.default.digital),
-                     'PIN');
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
     this.setOutput(true, Blockly.StaticTyping.blocklyType.BOOLEAN);
     this.setTooltip('Reads the digital value of a pin.');
   },
-  /**
-   * Retrieves the type of return value for the block, in this case an integer.
-   */
+  /** Retrieves the type of return value for the block, an integer. */
   getType: function() {
     return Blockly.StaticTyping.blocklyType.INTEGER;
+  },
+  /** Updates the content of the the pin related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
   }
 };
 
@@ -69,8 +82,8 @@ Blockly.Blocks['io_builtin_led'] = {
     this.setColour(Blockly.Blocks.Arduino.io.HUE);
     this.appendDummyInput('')
         .appendField('set LED')
-        .appendField(new Blockly.FieldDropdown(profile.default.builtin_led),
-                     'BUILT_IN_LED')
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.builtinLed), 'BUILT_IN_LED')
     this.appendValueInput('STATE', Blockly.StaticTyping.blocklyType.BOOLEAN)
         .appendField('to')
         .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN);
@@ -84,6 +97,11 @@ Blockly.Blocks['io_builtin_led'] = {
    */
   getType: function() {
     return Blockly.StaticTyping.blocklyType.INTEGER;
+  },
+  /** Updates the content of the the pin related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'BUILT_IN_LED', 'builtinLed');
   }
 };
 
@@ -97,7 +115,8 @@ Blockly.Blocks['io_analogwrite'] = {
     this.setColour(Blockly.Blocks.Arduino.io.HUE);
     this.appendDummyInput('')
         .appendField('set analogue pin#')
-        .appendField(new Blockly.FieldDropdown(profile.default.analog), 'PIN');
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.analogPins), 'PIN');
     this.appendValueInput('NUM', Blockly.StaticTyping.blocklyType.NUMBER)
         .appendField('to')
         .setCheck(Blockly.StaticTyping.blocklyType.NUMBER);
@@ -105,6 +124,10 @@ Blockly.Blocks['io_analogwrite'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip('Write analog value between 0 and 255 to a specific Port.');
+  },
+  /** Updates the content of the the pin related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, 'PIN', 'analogPins');
   }
 };
 
@@ -118,7 +141,8 @@ Blockly.Blocks['io_analogread'] = {
     this.setColour(Blockly.Blocks.Arduino.io.HUE);
     this.appendDummyInput('')
         .appendField('read analogue pin#')
-        .appendField(new Blockly.FieldDropdown(profile.default.analog), 'PIN');
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.analogPins), 'PIN');
     this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
     this.setTooltip('Return value between 0 and 1024.');
   },
@@ -127,6 +151,10 @@ Blockly.Blocks['io_analogread'] = {
    */
   getType: function() {
     return Blockly.StaticTyping.blocklyType.INTEGER;
+  },
+  /** Updates the content of the the pin related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, 'PIN', 'analogPins');
   }
 };
 

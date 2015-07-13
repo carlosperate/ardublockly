@@ -167,7 +167,7 @@ Blockly.Arduino['text_trim'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['text_print'] = function(block) {
-  var serialId = profile.default.serial[0][1];
+  var serialId = Blockly.Arduino.Boards.selected.serial[0][1];
   Blockly.Arduino.setups_['setup_serial_' + serialId] =
       serialId + '.begin(9600);';
   var argument0 = Blockly.Arduino.valueToCode(block, 'TEXT',
@@ -192,7 +192,7 @@ Blockly.Arduino['text_print'] = function(block) {
  */
 Blockly.Arduino['text_prompt_ext'] = function(block) {
   // Get the first Serial peripheral of arduino board
-  var serialId = profile.default.serial[0][1];
+  var serialId = Blockly.Arduino.Boards.selected.serial[0][1];
 
   // The function code changes based on reading a number or string
   var func = [];

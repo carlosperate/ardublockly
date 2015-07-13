@@ -20,7 +20,6 @@ Ardublockly.designJsInit = function() {
 /**
  * Initialises all required components from materialize framework.
  * The be executed on document ready.
- * Materialize uses jQuery.
  */
 Ardublockly.materializeJsInit = function() {
   // Navigation bar
@@ -47,10 +46,7 @@ Ardublockly.materializeJsInit = function() {
   $('select').material_select();
 };
 
-/**
- * Binds the event listeners relevant to the page design.
- * Uses jQuery.
- */
+/** Binds the event listeners relevant to the page design. */
 Ardublockly.bindDesignEventListeners = function() {
   // Resize blockly workspace on window resize
   window.addEventListener(
@@ -78,7 +74,6 @@ Ardublockly.bindDesignEventListeners = function() {
 /**
  * Displays or hides the 'load textarea xml' button based on the state of the
  * collapsible 'xml_collapsible_body'.
- * Uses jQuery.
  */
 Ardublockly.buttonLoadXmlCodeDisplay = function() {
   var xmlCollapsibleBody = document.getElementById('xml_collapsible_body');
@@ -94,7 +89,6 @@ Ardublockly.buttonLoadXmlCodeDisplay = function() {
 
 /**
  * Changes the IDE launch buttons based on the option indicated in the argument.
- * Uses jQuery.
  * @param {!string} value One of the 3 possible values from the drop down select
  *                        in the settings modal: 'upload', 'verify', or 'open'.
  */
@@ -194,7 +188,6 @@ Ardublockly.largeIdeButtonSpinner = function(active) {
  * button to reflect the new state.
  * When the toolbox is visible it should display the "visibility-off" icon with
  * no background, and the opposite when toolbox is hidden.
- * Uses jQuery.
  * @param {!boolean} show Indicates if the toolbox should be set visible.
  */
 Ardublockly.displayToolbox = function(show) {
@@ -251,7 +244,6 @@ Ardublockly.displayToolbox = function(show) {
  * toolbox.
  * The toolbox width does not change with workspace width, so safe to do once,
  * but it needs to be done after blockly has been injected.
- * Uses jQuery.
  */
 Ardublockly.resizeToggleToolboxBotton = function() {
   // As the toolbox inject is asynchronous we need to wait
@@ -290,7 +282,6 @@ Ardublockly.resizeBlocklyWorkspace = function() {
 /**
  * Sets the text for a "Materialize Modal" (like an android Dialog) to have
  * alert-like HTML messages.
- * Uses jQuery.
  * @param {!string} title HTML to include in title.
  * @param {!element} body HTML to include in body.
  * @param {boolean=} confirm Indicates if the user is shown and option to just
@@ -315,6 +306,26 @@ Ardublockly.materialAlert = function(title, body, confirm, callback) {
   window.location.hash = '';
 };
 
+/** Opens the modal that displays the "not connected to server" message. */
+Ardublockly.openNotConnectedModal = function() {
+  $('#not_running_dialog').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
+};
+
+/** Opens the modal that displays the Settings. */
+Ardublockly.openSettingsModal = function() {
+  $('#settings_dialog').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
+};
+
 /**
  * Populates the Arduino IDE output content area and triggers the visual
  * highlight to call for the user attention.
@@ -333,10 +344,7 @@ Ardublockly.hideSideMenuButton = function() {
   sideMenuButton.style.display = 'none';
 };
 
-/**
- * Sets all the elements using the container class to have a width of 100%.
- * Uses jQuery.
- */
+/** Sets all the elements using the container class to have a width of 100%. */
 Ardublockly.containerFullWidth = function() {
   var containers = $('.container');
   for (var i = 0; i < containers.length; i++) {
@@ -347,7 +355,6 @@ Ardublockly.containerFullWidth = function() {
 /**
  * Initialises the sketch name input text JavaScript to dynamically adjust its
  * width to the width of its contents.
- * Uses jQuery.
  */
 Ardublockly.sketchNameSizeEffect = function() {
   var resizeInput = function() {
@@ -396,7 +403,6 @@ Ardublockly.highlightIdeOutputHeader = function() {
  * It's state is dependent on the state of the IDE output collapsible. The
  * collapsible functionality from Materialize framework adds the active class,
  * so this class is consulted to shrink or expand the content height.
- * Uses jQuery.
  */
 Ardublockly.contentHeightToggle = function() {
   var outputHeader = document.getElementById('ide_output_collapsible_header');

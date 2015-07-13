@@ -7,7 +7,7 @@
  *               following URL: http://arduino.cc/en/Reference/Stepper
  *               Additional functions apart from the normal generators have 
  *               been added to be able to generate the 'set' drop down menu 
- *               with all current instaces of the Stepper class:
+ *               with all current instances of the Stepper class:
  *               Blockly.Blocks.Arduino.stepper.stepperInstances
  *               Blockly.Blocks.Arduino.stepper.FieldStepperInstance
  *               Blockly.Blocks.Arduino.stepper.stepperDropdownList
@@ -100,11 +100,11 @@ Blockly.Blocks['stepper_config'] = {
         .appendField(new Blockly.FieldTextInput("MyStepper"), 'STEPPER_NAME');
     this.appendDummyInput()
         .appendField('pin1#')
-        .appendField(new Blockly.FieldDropdown(profile.default.digital),
-            'STEPPER_PIN1')
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN1')
         .appendField('pin2#')
-        .appendField(new Blockly.FieldDropdown(profile.default.digital),
-            'STEPPER_PIN2');
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN2');
     this.appendValueInput('STEPPER_STEPS')
         .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -128,6 +128,13 @@ Blockly.Blocks['stepper_config'] = {
     }
     // Replace all spaces with underscores
     return InstanceName.replace(/ /g, '_');;
+  },
+  /** Updates the content of the the pin related fields. */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'STEPPER_PIN1', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'STEPPER_PIN2', 'digitalPins');
   }
 };
 
@@ -199,8 +206,8 @@ Blockly.Blocks['stepper_step'] = {
         this.setFieldValue(
             Blockly.Blocks.Arduino.stepper.noInstance, 'STEPPER_NAME');
       }
-      this.setWarningText('A STEPPER configuration block must be added to ' +
-          'use this block!');
+      this.setWarningText(
+          'A STEPPER configuration block must be added to use this block!');
     } else {
       // Configuration blocks present, check if any selected and contains name
       var existingConfigSelected = false;
