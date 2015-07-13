@@ -113,7 +113,7 @@ Ardublockly.ideSendUpload = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'upload');
   }
-  Materialize.toast('Opening sketch in the Arduino IDE...', 4000);
+  Materialize.toast('Uploading sketch into Arduino...', 4000);
   Ardublockly.sendCode();
 };
 
@@ -135,7 +135,7 @@ Ardublockly.ideSendOpen = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'open');
   }
-  Materialize.toast('Uploading sketch into Arduino...', 4000);
+  Materialize.toast('Opening sketch in the Arduino IDE...', 4000);
   Ardublockly.sendCode();
 };
 
@@ -527,6 +527,9 @@ Ardublockly.renderContent = function() {
   var arduinoCode = Ardublockly.generateArduino();
   if (arduinoCode !== Ardublockly.PREVIOUS_ARDUINO_CODE_) {
     var arduinoContent = document.getElementById('content_arduino');
+    // Sets content in case of no pretify and serves as a fast way to scape html
+    arduinoContent.textContent = arduinoCode;
+    arduinoCode = arduinoContent.innerHTML;
     if (typeof prettyPrintOne == 'function') {
       var diff = JsDiff.diffWords(Ardublockly.PREVIOUS_ARDUINO_CODE_,
                                   arduinoCode);
@@ -539,10 +542,8 @@ Ardublockly.renderContent = function() {
           resultStringArray.push(diff[i].value);
         }
       }
-      var codeHtml = prettyPrintOne(resultStringArray.join(''), 'cpp');
+      var codeHtml = prettyPrintOne(resultStringArray.join(''), 'cpp', false);
       arduinoContent.innerHTML = codeHtml;
-    } else {
-      arduinoContent.textContent = arduinoCode;
     }
     Ardublockly.PREVIOUS_ARDUINO_CODE_ = arduinoCode;
   }

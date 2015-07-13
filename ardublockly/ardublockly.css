@@ -427,8 +427,8 @@ ul.side-nav li.side-menu-end {
   position: absolute !important;
   right: 0px !important;
   top: 0px !important;
-  width: 56px !important;
-  height: 56px !important; 
+  width: 55px !important;
+  height: 55px !important; 
   z-index: 5;
 }
 .spinner-orange {
