@@ -43,7 +43,7 @@ Blockly.Arduino.Boards.generateAnalogIo = function(pinStart, pinEnd) {
   return analogIo;
 };
 
-/** 
+/**
  * A list of types tasks that the pins can be assigned. This is used to keep
  * track of which pins have been assigned and be able to warn the user if the
  * same pin has been assigned more than one different task
@@ -172,6 +172,9 @@ Blockly.Arduino.Boards.leonardo = {
   interrupt: [['interrupt0', '3'], ['interrupt1', '2'], ['interrupt2', '0'],
               ['interrupt3', '1'], ['interrupt4', '17']]
 };
+
+/** Arduino Yun board profile is identical to Leonardo. */
+Blockly.Arduino.Boards.yun = Blockly.Arduino.Boards.leonardo;
 
 /** Set default profile to Arduino standard-compatible board */
 Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.uno;
