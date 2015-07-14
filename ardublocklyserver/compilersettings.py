@@ -15,15 +15,6 @@ import os
 import re
 import sys
 import codecs
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-try:
-    # 2.x name
-    import ConfigParser
-except ImportError:
-    # 3.x name
-    import configparser as ConfigParser
-
-=======
 
 #try:
 #    # 2.x name
@@ -33,7 +24,6 @@ except ImportError:
 #    import configparser as ConfigParser
 
 from ardublocklyserver import configparser
->>>>>>> origin:ardublocklyserver/compilersettings.py
 import ardublocklyserver.serialport
 
 
@@ -59,17 +49,10 @@ class ServerCompilerSettings(object):
     __singleton_instance = None
     __settings_path = None
 
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-    # Class variable to indicate the settings filename, does not change
-    __settings_filename = 'ServerCompilerSettings.ini'
-
-    # Class dictionary to define Arduino board types, does not change
-=======
     # Class variable to indicate the settings filename, static content
     __settings_filename = 'ServerCompilerSettings.ini'
 
     # Class dictionary to define Arduino board types, static content
->>>>>>> origin:ardublocklyserver/compilersettings.py
     __arduino_types = {'Uno': 'arduino:avr:uno',
                        'Leonardo': 'arduino:avr:leonardo',
                        'Mega': 'arduino:avr:mega',
@@ -77,17 +60,6 @@ class ServerCompilerSettings(object):
                        'Duemilanove_168p':
                                'arduino:avr:diecimila:cpu=atmega168'}
 
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-    # Class dictionary to contain the computer COM ports, changes
-    __serial_ports = {'port1': 'COM1',
-                      'port2': 'COM2',
-                      'port3': 'COM3'}
-
-    # Class dictionary to define IDE launch options, value doesn't change
-    __IDE_launch_options = {'open': 'Open sketch in IDE ',
-                            'verify': 'Verify sketch',
-                            'upload': 'Compile and Upload sketch'}
-=======
     # Class dictionary to contain the computer COM ports, dynamic content
     __serial_ports = {'port0': 'COM1'}
 
@@ -95,7 +67,6 @@ class ServerCompilerSettings(object):
     __ide_load_options = {'open': 'Open sketch in IDE',
                           'verify': 'Verify sketch',
                           'upload': 'Compile and Upload sketch'}
->>>>>>> origin:ardublocklyserver/compilersettings.py
 
     #
     # Singleton creator and destructor
@@ -117,16 +88,6 @@ class ServerCompilerSettings(object):
 
     def __initialise(self, settings_dir=None):
         # Create variables to be used with accessors
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-        self.__launch_IDE_option__ = None
-        self.__compiler_dir__ = None
-        self.__sketch_dir__ = None
-        self.__sketch_name__ = None
-        self.__arduino_board_key__ = None
-        self.__arduino_board_value__ = None
-        self.__serial_port_key__ = None
-        self.__serial_port_value__ = None
-=======
         self.__load_ide_option = None
         self.__compiler_dir = None
         self.__sketch_dir = None
@@ -135,7 +96,6 @@ class ServerCompilerSettings(object):
         self.__arduino_board_value = None
         self.__serial_port_key = None
         self.__serial_port_value = None
->>>>>>> origin:ardublocklyserver/compilersettings.py
         if settings_dir:
             self.__settings_path = os.path.join(
                 settings_dir, self.__settings_filename)
@@ -145,11 +105,6 @@ class ServerCompilerSettings(object):
             called_script_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
             self.__settings_path = os.path.normpath(
                 os.path.join(called_script_dir, self.__settings_filename))
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-        # Since this value is not saved in the settings file initialise here
-        self.set_launch_ide_default()
-=======
->>>>>>> origin:ardublocklyserver/compilersettings.py
         # Load settings from file
         self.read_settings()
 
@@ -191,13 +146,8 @@ class ServerCompilerSettings(object):
 
         # Check directory
         if os.path.isfile(new_compiler_dir):
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-            self.__compiler_dir__ = new_compiler_dir
-            print('\nCompiler directory set to:\n\t%s' % self.__compiler_dir__)
-=======
             self.__compiler_dir = new_compiler_dir
             print('\nCompiler directory set to:\n\t%s' % self.__compiler_dir)
->>>>>>> origin:ardublocklyserver/compilersettings.py
             self.save_settings()
         else:
             print('\nThe provided compiler path is not valid !!!')
@@ -509,11 +459,7 @@ class ServerCompilerSettings(object):
                 port_id += 1
 
     #
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-    # Launch the IDE only accessors
-=======
     # Load the IDE accessors
->>>>>>> origin:ardublocklyserver/compilersettings.py
     #
     def get_load_ide(self):
         return self.__load_ide_option
@@ -595,12 +541,8 @@ class ServerCompilerSettings(object):
 
         # Set the path and create/overwrite the file
         try:
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-            settings_file = codecs.open(self.__settings_path, 'wb+', 'utf8')
-=======
             settings_file = codecs.open(
                 self.__settings_path, 'wb+', encoding='utf-8')
->>>>>>> origin:ardublocklyserver/compilersettings.py
             try:
                 settings_parser.write(settings_file)
                 print('Settings file saved to:\n\t%s' % self.__settings_path)
@@ -671,47 +613,9 @@ class ServerCompilerSettings(object):
         except Exception as e:
             print('\nSettings file corrupted or not found in:')
             settings_dict = None
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-        print('\t' + self.__settings_path)
-=======
         print('\t %s' % self.__settings_path)
->>>>>>> origin:ardublocklyserver/compilersettings.py
         return settings_dict
 
     def delete_settings_file(self):
         if os.path.exists(self.__settings_path):
             os.remove(self.__settings_path)
-<<<<<<< HEAD:ardublocklyserver/compilersettings.py
-
-    def get_board_value_from_key(self, string_key):
-        """
-        As the board types are stored in a dictionary, the key and value for
-        the selected board are stored independently in 2 strings. This method
-        gets the dictionary value from a given key.
-        :param string_key: String representing the board_types dictionary key
-        :return: A string representation of board_types dictionary value from
-                 the key.
-        """
-        string_value = None
-        for key in self.__arduino_types:
-            if string_key is key:
-                string_value = self.__arduino_types[key]
-        return string_value
-
-    def get_board_key_from_value(self, string_value):
-        """
-        As the board types are stored in a dictionary, the key and value for
-        the selected board are stored independently in 2 strings. This method
-        gets the dictionary key from a given value.
-        :param string_value: String representing the board_types dictionary
-                             value to be found.
-        :return: A string representation of board_types dictionary key for
-                 the given value.
-        """
-        string_key = None
-        for key in self.__arduino_types:
-            if string_value is self.__arduino_types[key]:
-                string_key = key
-        return string_key
-=======
->>>>>>> origin:ardublocklyserver/compilersettings.py

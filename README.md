@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Ardublockly Github Page
 
 This is the GitHub project page for the Ardublockly project.
@@ -11,33 +10,21 @@ Ardublockly is a visual programming editor for Arduino. It is based on Google's 
 The `ArdublocklyServer` Python package initialises a local server to be able to compile and load the Arduino code using the [Arduino IDE][2].
 
 This is all packaged in a self contained executable desktop application for Windows, Mac OS X, and Linux:
->>>>>>> origin
 
-The index page is created from pelican project (a static site generator), designed to be hosted in http://www.embeddedlog.com, so it pulls all of its resources from that domain and only the `index.html` page is required here.
+![Ardublockly desktop program screenshot][desktop_screeshot]
 
-<<<<<<< HEAD
-This demos is not capable to load software into an Arduino even if the ArdublocklyServer is running locally, it merely allows you to try the visual programming language. The two versions of the demo can be found in the following links:
-=======
 ## Features
 * Generates Arduino code with visual drag-and-drop blocks
 * Uploads the code to an Arduino Board
 * Useful "code block warnings"
 * Compatible with a wide range of official Arduino Boards
 * Works on Windows / Linux / Mac OS X
->>>>>>> origin
 
-* http://carlosperate.github.io/ardublockly/ardublockly/index.html
-* http://carlosperate.github.io/ardublockly/ardublockly/classic/index.html
+Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the [TODO.md][3] file.
+
+Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7.
 
 
-## To update Ardublockly
-
-<<<<<<< HEAD
-For the project maintainers, the way to synchronise this branch is to simply merge the latest `master` into gh-pages, preferably squashing all the commits.
-
-So from master:
-
-=======
 ## Installing
 The desktop application is available for Windows/Mac/Linux and runs as a stand-alone executable that can be downloaded from the [Ardublockly repository releases page][4] (once it is stable enough for a first alpha release).
 
@@ -74,14 +61,9 @@ A demo of the current state of Ardublockly main interface can be found in the fo
 The documentation, including installation instructions, configuration instructions, and developer information can be found in the [Ardublockly GitHub repository Wiki][7].
 
 To download the documentation you can git clone the wiki data:
->>>>>>> origin
 ```
-git checkout gh-pages
-git merge --squash master
-git commit
+git clone https://github.com/carlosperate/ardublockly.wiki.git
 ```
-<<<<<<< HEAD
-=======
 
 
 ## Credit
@@ -116,4 +98,3 @@ The full document can be found in the [LICENSE][9] file.
 [desktop_screeshot]: http://carlosperate.github.io/ardublockly/images/screenshot_desktop_1.png
 [web_screenshot_responsive]: http://carlosperate.github.io/ardublockly/images/screenshot_material_all_small.jpg
 [web_screenshot_classic]: http://carlosperate.github.io/ardublockly/images/screenshot_1.png
->>>>>>> origin

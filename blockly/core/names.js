@@ -34,15 +34,9 @@ goog.provide('Blockly.Names');
  * @param {string=} opt_variablePrefix Some languages need a '$' or a namespace
  *     before all variable names.
  * @constructor
- * @param namesPrependDollar boolean indicating whether the languages requires dollar signs ($) before a variable
  */
-<<<<<<< HEAD
-Blockly.Names = function(reservedWords, namesPrependDollar) {
-  this.prependDollar = namesPrependDollar || false;
-=======
 Blockly.Names = function(reservedWords, opt_variablePrefix) {
   this.variablePrefix_ = opt_variablePrefix || '';
->>>>>>> origin
   this.reservedDict_ = Object.create(null);
   if (reservedWords) {
     var splitWords = reservedWords.split(',');
@@ -79,14 +73,6 @@ Blockly.Names.prototype.reset = function() {
  */
 Blockly.Names.prototype.getName = function(name, type) {
   var normalized = name.toLowerCase() + '_' + type;
-<<<<<<< HEAD
-  var prepend = type=='VARIABLE' && this.prependDollar ? '$' : '';
-  if (normalized in this.db_) {
-    return prepend + this.db_[normalized];
-  }
-  var safeName = this.getDistinctName(name, type);
-  this.db_[normalized] = type=='VARIABLE' && this.prependDollar ? safeName.substr(1) : safeName;
-=======
   var prefix = (type == Blockly.Variables.NAME_TYPE) ?
       this.variablePrefix_ : '';
   if (normalized in this.db_) {
@@ -94,7 +80,6 @@ Blockly.Names.prototype.getName = function(name, type) {
   }
   var safeName = this.getDistinctName(name, type);
   this.db_[normalized] = safeName.substr(prefix.length);
->>>>>>> origin
   return safeName;
 };
 
@@ -118,14 +103,9 @@ Blockly.Names.prototype.getDistinctName = function(name, type) {
   }
   safeName += i;
   this.dbReverse_[safeName] = true;
-<<<<<<< HEAD
-  var prepend = type=='VARIABLE' && this.prependDollar ? '$' : '';
-  return prepend + safeName;
-=======
   var prefix = (type == Blockly.Variables.NAME_TYPE) ?
       this.variablePrefix_ : '';
   return prefix + safeName;
->>>>>>> origin
 };
 
 /**

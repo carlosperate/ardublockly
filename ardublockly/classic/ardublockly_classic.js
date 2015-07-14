@@ -18,12 +18,6 @@ var ArdublocklyClassic = {};
 ArdublocklyClassic.workspace = null;
 
 /**
- * Blockly's main workspace.
- * @type Blockly.WorkspaceSvg
- */
-ArduinoClassic.workspace = null;
-
-/**
  * List of tab names.
  * @private
  */
@@ -60,21 +54,12 @@ ArdublocklyClassic.tabClick = function(clickedName) {
   document.getElementById('content_' + clickedName).style.display = 'block';
 
   // This is a workaround, something about the html layout causes the blocks to
-<<<<<<< HEAD
-  // compress when the block tab is shown after it has been hidden 
-  if (clickedName === 'blocks' && ArduinoClassic.workspace) {
-    ArduinoClassic.workspace.setVisible(false);
-    ArduinoClassic.workspace.setVisible(true);
-  }
-  ArduinoClassic.renderContent();
-=======
   // compress when the block tab is shown after it has been hidden
   if (clickedName === 'blocks' && ArdublocklyClassic.workspace) {
     ArdublocklyClassic.workspace.setVisible(false);
     ArdublocklyClassic.workspace.setVisible(true);
   }
   ArdublocklyClassic.renderContent();
->>>>>>> origin
 
   Blockly.fireUiEvent(window, 'resize');
 };
@@ -88,20 +73,12 @@ ArdublocklyClassic.renderContent = function() {
   // Initialize the panel
   if (content.id == 'content_xml') {
     var xmlTextarea = document.getElementById('content_xml');
-<<<<<<< HEAD
-    var xmlDom = Blockly.Xml.workspaceToDom(ArduinoClassic.workspace);
-=======
     var xmlDom = Blockly.Xml.workspaceToDom(ArdublocklyClassic.workspace);
->>>>>>> origin
     var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
     xmlTextarea.value = xmlText;
     xmlTextarea.focus();
   } else if (content.id == 'content_arduino') {
-<<<<<<< HEAD
-    var code = Blockly.Arduino.workspaceToCode(ArduinoClassic.workspace);
-=======
     var code = Blockly.Arduino.workspaceToCode(ArdublocklyClassic.workspace);
->>>>>>> origin
     content.textContent = code;
     if (typeof prettyPrintOne == 'function') {
       code = content.innerHTML;
@@ -136,15 +113,9 @@ ArdublocklyClassic.init = function() {
       el.style.width = (2 * bBox.width - el.offsetWidth) + 'px';
     }
     // Make the 'Blocks' tab line up with the toolbox.
-<<<<<<< HEAD
-    if (ArduinoClassic.workspace.toolbox_.width) {
-      document.getElementById('tab_blocks').style.minWidth =
-          (ArduinoClassic.workspace.toolbox_.width - 38) + 'px';
-=======
     if (ArdublocklyClassic.workspace.toolbox_.width) {
       document.getElementById('tab_blocks').style.minWidth =
           (ArdublocklyClassic.workspace.toolbox_.width - 38) + 'px';
->>>>>>> origin
           // Account for the 19 pixel margin and on each side.
     }
   };
@@ -212,21 +183,11 @@ ArdublocklyClassic.openSettings = function() {
       'left=' + left + ', width=' + width + ', height=' + height + '');
 };
 
-<<<<<<< HEAD
-/**
- * Send the Arduino Code to the ArduServerCompiler to process.
- */
-ArduinoClassic.loadToArduino = function() {
-  ArduServerCompiler.sendSketchToServer(
-      Blockly.Arduino.workspaceToCode(ArduinoClassic.workspace),
-      ArduinoClassic.loadToArduinoReturn);
-=======
 /** Send the Arduino Code to the ArdublocklyServer to process. */
 ArdublocklyClassic.loadToArduino = function() {
   ArdublocklyServer.sendSketchToServer(
       Blockly.Arduino.workspaceToCode(ArdublocklyClassic.workspace),
       ArdublocklyClassic.loadToArduinoReturn);
->>>>>>> origin
 };
 
 /**
@@ -250,23 +211,12 @@ ArdublocklyClassic.loadToArduinoReturn = function(jsonResponse) {
   }
 };
 
-<<<<<<< HEAD
-/**
- * Discard all blocks from the workspace.
- */
-ArduinoClassic.discard = function() {
-  var count = ArduinoClassic.workspace.getAllBlocks().length;
-  var message = 'Delete all ' + count + ' blocks?';
-  if (count < 2 || window.confirm(message)) {
-    ArduinoClassic.workspace.clear();
-=======
 /** Discard all blocks from the workspace. */
 ArdublocklyClassic.discard = function() {
   var count = ArdublocklyClassic.workspace.getAllBlocks().length;
   var message = 'Delete all ' + count + ' blocks?';
   if (count < 2 || window.confirm(message)) {
     ArdublocklyClassic.workspace.clear();
->>>>>>> origin
     window.location.hash = '';
   }
   ArdublocklyClassic.renderContent();
@@ -299,15 +249,9 @@ ArdublocklyClassic.peekCode = function(visible) {
     ArdublocklyClassic.sideContent(true);
     codePeekContent.style.display = 'inline-block';
     // Regenerate arduino code and ensure every click does as well
-<<<<<<< HEAD
-    ArduinoClassic.renderArduinoPeekCode();
-    ArduinoClassic.workspace.addChangeListener(
-        ArduinoClassic.renderArduinoPeekCode);
-=======
     ArdublocklyClassic.renderArduinoPeekCode();
     ArdublocklyClassic.workspace.addChangeListener(
         ArdublocklyClassic.renderArduinoPeekCode);
->>>>>>> origin
   } else {
     ArdublocklyClassic.peekCode_ = false;
     peekCodeButton.className = 'button_text';
@@ -355,21 +299,11 @@ ArdublocklyClassic.sideContent = function(visible) {
   ArdublocklyClassic.renderContent();
 };
 
-<<<<<<< HEAD
-/**
- * Updates the arduino code in the pre area based on the blocks
- */
-ArduinoClassic.renderArduinoPeekCode = function() {
-  var code_peak_pre = document.getElementById('arduino_pre');
-  code_peak_pre.textContent = Blockly.Arduino.workspaceToCode(
-      ArduinoClassic.workspace);
-=======
 /** Updates the Arduino code in the pre area based on the blocks. */
 ArdublocklyClassic.renderArduinoPeekCode = function() {
   var codePeakPre = document.getElementById('arduino_pre');
   codePeakPre.textContent = Blockly.Arduino.workspaceToCode(
       ArdublocklyClassic.workspace);
->>>>>>> origin
   if (typeof prettyPrintOne == 'function') {
     codePeakPre.innerHTML = prettyPrintOne(codePeakPre.innerHTML, 'cpp');
   }
@@ -409,13 +343,8 @@ ArdublocklyClassic.injectBlockly = function(blocklyEl, toolboxPath) {
 
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
-<<<<<<< HEAD
-    if ( (request.readyState == 4) && (request.status == 200) ) {
-      ArduinoClassic.workspace = Blockly.inject(blockly_el, {
-=======
     if ((request.readyState == 4) && (request.status == 200)) {
       ArdublocklyClassic.workspace = Blockly.inject(blocklyEl, {
->>>>>>> origin
             collapse: true,
             comments: true,
             disable: true,
@@ -452,17 +381,6 @@ ArdublocklyClassic.loadUserXmlFile = function() {
     reader.readAsText(files[0]);
   };
   // Create once invisible browse button with event listener, and click it
-<<<<<<< HEAD
-  var select_file = document.getElementById('select_file');
-  if (select_file == null) {
-    var select_file_dom = document.createElement('INPUT');
-    select_file_dom.type = 'file';
-    select_file_dom.id = 'select_file';
-    select_file_dom.style.display = 'none';
-    document.body.appendChild(select_file_dom);
-    select_file = document.getElementById('select_file');
-    select_file.addEventListener('change', parseInputXMLfile, false);
-=======
   var selectFile = document.getElementById('select_file');
   if (selectFile == null) {
     var selectFileDom = document.createElement('INPUT');
@@ -472,7 +390,6 @@ ArdublocklyClassic.loadUserXmlFile = function() {
     document.body.appendChild(selectFileDom);
     selectFile = document.getElementById('select_file');
     selectFile.addEventListener('change', parseInputXMLfile, false);
->>>>>>> origin
   }
   selectFile.click();
 };
@@ -499,13 +416,8 @@ ArdublocklyClassic.replaceBlocksfromXml = function(blocksXml) {
     }
   }
   if (xmlDom) {
-<<<<<<< HEAD
-    ArduinoClassic.workspace.clear();
-    Blockly.Xml.domToWorkspace(ArduinoClassic.workspace, xmlDom);
-=======
     ArdublocklyClassic.workspace.clear();
     Blockly.Xml.domToWorkspace(ArdublocklyClassic.workspace, xmlDom);
->>>>>>> origin
   }
   return success;
 };
@@ -516,11 +428,7 @@ ArdublocklyClassic.replaceBlocksfromXml = function(blocksXml) {
  */
 ArdublocklyClassic.saveXmlFile = function() {
   // Generate XML
-<<<<<<< HEAD
-  var xmlDom = Blockly.Xml.workspaceToDom(ArduinoClassic.workspace);
-=======
   var xmlDom = Blockly.Xml.workspaceToDom(ArdublocklyClassic.workspace);
->>>>>>> origin
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
   // Create blob
   var blob = new Blob(

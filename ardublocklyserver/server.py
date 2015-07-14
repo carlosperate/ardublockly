@@ -15,11 +15,7 @@ except ImportError:
     # 3.x name
     import http.server as BaseHTTPServer
 
-<<<<<<< HEAD:ardublocklyserver/server.py
-import ardublocklyserver.requesthandler
-=======
 from ardublocklyserver.requesthandler import BlocklyRequestHandler
->>>>>>> origin:ardublocklyserver/server.py
 
 ADDRESS = '0.0.0.0'
 PORT = 8000
@@ -30,13 +26,7 @@ def start_server(document_root):
     print('Setting HTTP Server Document Root to: \n\t' + document_root + "\n")
     os.chdir(document_root)
     server_address = (ADDRESS, PORT)
-<<<<<<< HEAD:ardublocklyserver/server.py
-    server = BaseHTTPServer.HTTPServer(
-        server_address,
-        ardublocklyserver.requesthandler.BlocklyRequestHandler)
-=======
     server = BaseHTTPServer.HTTPServer(server_address, BlocklyRequestHandler)
->>>>>>> origin:ardublocklyserver/server.py
     print('Launching the HTTP service...')
     server.serve_forever()
     print('The Server closed unexpectedly!!')

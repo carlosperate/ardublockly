@@ -7,8 +7,6 @@
  * There are a lot of '!important' tags in this file as a lot of the rules set
  * here go against the css rules from the Materialize framework.
  */
-<<<<<<< HEAD
-=======
 /******************/
 /*  Font sources  */
 /******************/
@@ -21,7 +19,6 @@
 /**********/
 /*  HTML  */
 /**********/
->>>>>>> origin
 html,
 body {
   height: 100% !important;
@@ -57,12 +54,8 @@ body {
 }
 .arduino_yellow {
   background-color: rgba(255, 204, 51, 1);
-<<<<<<< HEAD
-  /* background-color: #E5AD24; */
-=======
   /* background-color: #FFCC33; */
   /* background-color: #E5AD24; from community logo */
->>>>>>> origin
 }
 .arduino_brown {
   background-color: #8C7965;
@@ -137,12 +130,6 @@ ul.side-nav li.side-menu-end {
   -moz-border-radius: 4px !important;
   border-radius: 4px !important;
   min-height: 480px;
-<<<<<<< HEAD
-  height: -moz-calc(100vh - 150px);     /* Firefox  */
-  height: -webkit-calc(100vh - 150px);  /* WebKit   */
-  height: -o-calc(100vh - 150px);       /* Opera    */
-  height: calc(100vh - 150px);          /* Standard */
-=======
 }
 .blocks_panel_large {
   height: -moz-calc(100vh - 190px);     /* Firefox  */
@@ -155,7 +142,6 @@ ul.side-nav li.side-menu-end {
   height: -webkit-calc(100vh - 390px);  /* WebKit   */
   height: -o-calc(100vh - 390px);       /* Opera    */
   height: calc(100vh - 390px);          /* Standard */
->>>>>>> origin
 }
 #content_blocks {
   margin: 0;
@@ -172,12 +158,6 @@ ul.side-nav li.side-menu-end {
   overflow: scroll;
   font-style: 0.2em !important;
   min-height: 384px;
-<<<<<<< HEAD
-  height: -moz-calc(100vh - 247px);     /* Firefox  */
-  height: -webkit-calc(100vh - 247px);  /* WebKit   */
-  height: -o-calc(100vh - 247px);       /* Opera    */
-  height: calc(100vh - 247px);          /* Standard */
-=======
 }
 .content_xml_large {
   height: -moz-calc(100vh - 286px);     /* Firefox  */
@@ -190,7 +170,6 @@ ul.side-nav li.side-menu-end {
   height: -webkit-calc(100vh - 486px);  /* WebKit   */
   height: -o-calc(100vh - 486px);       /* Opera    */
   height: calc(100vh - 486px);          /* Standard */
->>>>>>> origin
 }
 
 /* The materialize framework changes height of the div to show or hide */
@@ -270,16 +249,8 @@ ul.side-nav li.side-menu-end {
   font-family: monospace;
   overflow: scroll;
   font-style: 0.2em !important;
-<<<<<<< HEAD
-  min-height: 388px;
-  height: -moz-calc(100vh - 243px);     /* Firefox  */
-  height: -webkit-calc(100vh - 243px);  /* WebKit   */
-  height: -o-calc(100vh - 243px);       /* Opera    */
-  height: calc(100vh - 243px);          /* Standard */
-=======
   min-height: 200px;
   max-height: 200px;
->>>>>>> origin
   -moz-user-select: text;
   -khtml-user-select: text;
   -webkit-user-select: text;
@@ -342,17 +313,12 @@ ul.side-nav li.side-menu-end {
   width: 160px;
   z-index: 12;
 }
-<<<<<<< HEAD
-#button_run:hover {
-  background-color: rgba(255, 204, 51, 1);  /* Arduino yellow */
-=======
 #button_ide_large {
   position: absolute;
   right: 0px;
   top: 0px;
   width: 55px;
   height: 55px;
->>>>>>> origin
 }
 #button_ide_large i {
   font-size: 2.4rem !important;
@@ -576,81 +542,6 @@ ul.side-nav li.side-menu-end {
   float: right;
   padding-top: 3px;
 }
-<<<<<<< HEAD
-
-
-/*************************/
-/*  New spinner colours  */
-/*************************/
-.spinner-orange {
-  border-color: #E47128;
-}
-.active .spinner-layer.spinner-orange {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, blue-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-dark-teal {
-  border-color: #00878F;
-}
-.active .spinner-layer.spinner-dark-teal {
-  /* durations: 4 * ARCTIME */
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, red-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-yellow {
-  border-color: rgba(255, 204, 51, 1);
-=======
-.sketch_name {
-  width: auto !important;
-  max-width: 400px;
-  line-height: 64px;
-  height: 3rem !important;
-  font-size: 1.5rem !important;
-  border-bottom: 0px solid #EEE !important;
-  font-style: italic;
->>>>>>> origin
-}
-.sketch_name:focus {
-    border-bottom: 1px solid #EEE !important;
-}
-
-@media only screen and (min-width: 0px) and (max-width: 600px) {
-  .sketch_name {
-    max-width: 200px;
-  }
-  /* Remove the "Ardublockly title only leaving the sketch name */
-  .app_title {
-    display: none;
-  }
-}
-@media only screen and (min-width : 600px) {
-  .sketch_name {
-    max-width: 275px;
-  }
-}
-@media only screen and (min-width : 993px) {
-  .sketch_name {
-    max-width: 350px;
-  }
-}
-
-
-/*****************/
-/*  Sketch name  */
-/*****************/
-.sketch_name_wrapper {
-  display: inline-block;
-  padding-left: 5px;
-}
-.sketch_name_icon {
-  display: inline !important;
-  font-size: 1.2rem !important;
-  float: right;
-  padding-top: 3px;
-}
 .sketch_name {
   width: auto !important;
   max-width: 400px;
@@ -700,18 +591,13 @@ ul.side-nav li.side-menu-end {
   margin-right: 1rem;
 }
 
-<<<<<<< HEAD
-=======
 /* Colours for the new and deleted code highlighting */
->>>>>>> origin
 .code_highlight_new {
   background-color: rgba(255, 204, 51, 0.5); /* Arduino yellow 50% */
 }
 .code_highlight_deleted {
   background-color: #FDBEBE;
 }
-<<<<<<< HEAD
-=======
 
 /* Clean 50:50 same row divs */
 .two_halves_container {
@@ -734,7 +620,6 @@ ul.side-nav li.side-menu-end {
   float: right;
 }
 
->>>>>>> origin
 
 /*****************************/
 /*  Overwriting Blockly CSS  */
@@ -820,19 +705,11 @@ ul.side-nav li.side-menu-end {
   stroke-width: 0px !important;
 }
 
-<<<<<<< HEAD
-/* Edit select yellow colour to Arduino yellow, seems to be that colour already
-.blocklyHighlightedConnectionPath {
-  stroke: rgba(255, 204, 51, 1) !important;
-}
-
-=======
 /* Edit select yellow colour to Arduino yellow. */
 /* Edited out because it seems to be that colour already.
 .blocklyHighlightedConnectionPath {
   stroke: rgba(255, 204, 51, 1) !important;
 }
->>>>>>> origin
 .blocklySelected>.blocklyPath {
   stroke: rgba(255, 204, 51, 1) !important;
 }

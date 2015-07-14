@@ -36,11 +36,7 @@ goog.require('goog.string');
  * Class for a variable's dropdown field.
  * @param {?string} varname The default name for the variable.  If null,
  *     a unique variable name will be generated.
-<<<<<<< HEAD
- * @param {Function} opt_changeHandler A function that is executed when a new
-=======
  * @param {Function=} opt_changeHandler A function that is executed when a new
->>>>>>> origin
  *     option is selected.  Its sole argument is the new option value.
  * @extends {Blockly.FieldDropdown}
  * @constructor
