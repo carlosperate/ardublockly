@@ -27,10 +27,8 @@ Ardublockly.materializeJsInit = function() {
       menuWidth: 240,
       activationWidth: 70,
       edge: 'left'});
-
   // Drop down menus
   $('.dropdown-button').dropdown({hover: false});
-
   // Overlay content panels using modals (android dialogs)
   $('.modal-trigger').leanModal({
       dismissible: true,
@@ -38,10 +36,8 @@ Ardublockly.materializeJsInit = function() {
       in_duration: 200,
       out_duration: 250
    });
-
   // Pop-up tool tips
   $('.tooltipped').tooltip({'delay': 50});
-
   // Select menus
   $('select').material_select();
 };
@@ -51,17 +47,14 @@ Ardublockly.bindDesignEventListeners = function() {
   // Resize blockly workspace on window resize
   window.addEventListener(
       'resize', Ardublockly.resizeBlocklyWorkspace, false);
-
   // Display/hide the XML load button when the XML collapsible header is clicked
   document.getElementById('xml_collapsible_header').addEventListener(
       'click', Ardublockly.buttonLoadXmlCodeDisplay);
-
   // Toggle the content height on click to the IDE output collapsible header
   document.getElementById('ide_output_collapsible_header').addEventListener(
       'click', function() {
         Ardublockly.contentHeightToggle();
       });
-
   // Display/hide the additional IDE buttons when mouse over/out of play button
   $('#button_ide_large').mouseenter(function() {
       Ardublockly.showExtraIdeButtons(true);
@@ -192,6 +185,7 @@ Ardublockly.largeIdeButtonSpinner = function(active) {
  */
 Ardublockly.displayToolbox = function(show) {
   var toolbox = $('.blocklyToolboxDiv');
+  var toolboxTree = $('.blocklyTreeRoot');
   var button = document.getElementById('button_toggle_toolbox');
   var buttonIcon = document.getElementById('button_toggle_toolbox_icon');
 
@@ -202,13 +196,13 @@ Ardublockly.displayToolbox = function(show) {
   jQuery('<div/>', {
       id: 'toolboxButtonScreen',
       css: {
-          position: 'fixed',
-          top: elLocation.top,
-          left: elLocation.left,
-          height: $('#button_toggle_toolbox').height(),
-          width: $('#button_toggle_toolbox').width(),
-          cursor: 'pointer',
-          zIndex: 12
+        position: 'fixed',
+        top: elLocation.top,
+        left: elLocation.left,
+        height: $('#button_toggle_toolbox').height(),
+        width: $('#button_toggle_toolbox').width(),
+        cursor: 'pointer',
+        zIndex: 12
       },
   }).appendTo('body');
 
@@ -223,10 +217,12 @@ Ardublockly.displayToolbox = function(show) {
     toolbox.animate(
         {height: document.getElementById('content_blocks').style.height}, 300,
         function() {
+          toolboxTree.css("overflow-y", "auto");
           Blockly.fireUiEvent(window, 'resize');
           $('#toolboxButtonScreen').remove();
         });
   } else {
+    toolboxTree.css("overflow-y", "hidden");
     buttonIcon.className = buttonIcon.className.replace(visOff, visOn);
     toolbox.animate({height: 38}, 300, function() {
       button.className = button.className.replace(classOff, classOn);
@@ -421,7 +417,7 @@ Ardublockly.contentHeightToggle = function() {
   // Apart from checking if the output is visible, do not bother to shrink in
   // small screens as the minimum height of the content will kick in and cause
   // the content to be behind the IDE output data anyway.
-  if (outputHeader.className.match('active') && $(window).height() > 850) {
+  if (outputHeader.className.match('active') && $(window).height() > 800) {
     blocks.className = 'content height_transition blocks_panel_small';
     arduino.className = 'content height_transition content_arduino_small';
     xml.className = 'content height_transition content_xml_small';
