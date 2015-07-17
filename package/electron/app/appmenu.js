@@ -236,17 +236,26 @@ var getExamplesMenuData = function() {
                      BrowserWindow.getFocusedWindow()
                         .webContents
                         .executeJavaScript(
-                            'Ardublockly.loadServerXmlFile("examples/' +
+                            'Ardublockly.loadServerXmlFile("../examples/' +
                             'blink.xml");');
                 }
             }, {
-                label: 'Print Serial',
+                label: 'Serial Print',
                 click: function() {
                      BrowserWindow.getFocusedWindow()
                         .webContents
                         .executeJavaScript(
-                            'Ardublockly.loadServerXmlFile("examples/' +
+                            'Ardublockly.loadServerXmlFile("../examples/' +
                             'serial_print_ascii_.xml");');
+                }
+            }, {
+                label: 'Serial Repeat Game',
+                click: function() {
+                     BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            'Ardublockly.loadServerXmlFile("../examples/' +
+                            'serial_repeat_game.xml");');
                 }
             }, {
                 label: 'Servo Knob',
@@ -254,7 +263,7 @@ var getExamplesMenuData = function() {
                      BrowserWindow.getFocusedWindow()
                         .webContents
                         .executeJavaScript(
-                            'Ardublockly.loadServerXmlFile("examples/' +
+                            'Ardublockly.loadServerXmlFile("../examples/' +
                             'servo_knob.xml");');
                 }
             }, {
@@ -263,7 +272,7 @@ var getExamplesMenuData = function() {
                      BrowserWindow.getFocusedWindow()
                         .webContents
                         .executeJavaScript(
-                            'Ardublockly.loadServerXmlFile("examples/' +
+                            'Ardublockly.loadServerXmlFile("../examples/' +
                             'stepper_knob.xml");');
                 }
             }
