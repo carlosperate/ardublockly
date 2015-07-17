@@ -29,10 +29,10 @@ class GuiTestCase(unittest.TestCase):
     #
     # Tests for checking browsing for paths and files
     #
-    @mock.patch('ardublocklyserver.gui.tkFileDialog')
+    @mock.patch('ardublocklyserver.gui.tkFileDialog.askopenfilename')
     def test_browse_file(self, mock_file_select):
-        test_file = 'test_file'
-        mock_file_select.askopenfilename.return_value = test_file
+        test_file = os.path.join(os.getcwd(), 'test_file')
+        mock_file_select.return_value = test_file
         new_file = gui.browse_file_dialog()
         self.assertEqual(new_file, test_file)
 
@@ -44,11 +44,11 @@ class GuiTestCase(unittest.TestCase):
         function_file = gui.browse_file_dialog()
         self.assertEqual(canceled_file, function_file)
 
-    @mock.patch('ardublocklyserver.gui.tkFileDialog')
+    @mock.patch('ardublocklyserver.gui.tkFileDialog.askdirectory')
     def test_browse_path(self, mock_path_select):
-        test_path = 'test_path'
-        mock_path_select.askopenfilename.return_value = test_path
-        new_path = gui.browse_file_dialog()
+        test_path = os.path.join(os.getcwd(), 'test_path')
+        mock_path_select.return_value = test_path
+        new_path = gui.browse_dir_dialog()
         self.assertEqual(new_path, test_path)
 
     def test_browse_path_cancel(self):
