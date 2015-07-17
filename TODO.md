@@ -2,13 +2,13 @@
 
 ## Linux specific
 - [ ] Test load to board in Linux with Arduino 1.6 (current test in raspberry pi and ubuntu to load sketches in the IDE) with python 2
-- [ ] Test server components in Linux with python 3
+- [ ] Comprehensive test of server with python 3
 - [ ] Current port list shows all dev/tty, as all Arduinos should be connected by USB this list can be filtered to only show ttyUSBx ports
 
 
 ## Mac OS X specific
-- [ ] Test server components in Mac OS X with python 2
-- [ ] Test server components in Mac OS X with python 3
+- [ ] Comprehensive test of server with python 2
+- [ ] Comprehensive test of server with python 3
 
 ## Windows specific
 
@@ -48,7 +48,7 @@ There was an error manipulating the sketch data!!
 
 ## Arduino generator related code
 - [x] ~~Add information for other Arduino boards~~
-
+- [ ] Text trim does not currently generate Arduino valid code
 
 ## Arduino blocks
 - [x] ~~Add a way to select different Arduino boards (settings menu should trigger arduino generator board change)~~
@@ -57,7 +57,7 @@ There was an error manipulating the sketch data!!
 - [ ] SPI pin reservation log needs to be refactored for the new board settings
 - [ ] Create I2C communication blocks
 - [ ] Update the serial print block to specify explicit type (hex, str, int, etc)
-- [ ] 
+- [ ] Look into all the serial functions and decide what else might fit in
 
 
 ## Arduino front end

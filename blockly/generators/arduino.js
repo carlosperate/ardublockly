@@ -6,7 +6,6 @@
  *
  * @fileoverview Helper functions for generating Arduino language (C++) for
  *               blocks.
- *
  */
 'use strict';
 
@@ -20,14 +19,6 @@ goog.require('Blockly.Generator');
  * @type !Blockly.Generator
  */
 Blockly.Arduino = new Blockly.Generator('Arduino');
-
-/**
- * As this generator uses static typing, it is created as a member of the
- * generator.
- * @type !Blockly.StaticTyping
- */
-//Blockly.Arduino.StaticTyping = new Blockly.Generator('Arduino');
-
 
 /**
  * List of illegal variable names.
@@ -49,15 +40,13 @@ Blockly.Arduino.addReservedWords(
     'lowByte,highByte,bitRead,bitWrite,bitSet,bitClear,bit,attachInterrupt,' +
     'detachInterrupt,interrupts,noInterrupts');
 
-/**
- * Order of operation ENUMs.
- */
+/** Order of operation ENUMs. */
 Blockly.Arduino.ORDER_ATOMIC = 0;         // 0 "" ...
 Blockly.Arduino.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] .
 Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
 Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; // * / % ~/
 Blockly.Arduino.ORDER_ADDITIVE = 4;       // + -
-Blockly.Arduino.ORDER_SHIFT = 5;          // << >>  
+Blockly.Arduino.ORDER_SHIFT = 5;          // << >>
 Blockly.Arduino.ORDER_RELATIONAL = 6;     // is is! >= > <= <
 Blockly.Arduino.ORDER_EQUALITY = 7;       // == != === !==
 Blockly.Arduino.ORDER_BITWISE_AND = 8;    // &
@@ -75,16 +64,22 @@ Blockly.Arduino.ORDER_NONE = 99;          // (...)
  * @param {Blockly.Workspace} workspace Workspace to generate code from.
  */
 Blockly.Arduino.init = function(workspace) {
-  // Create a dictionary of definitions to be printed before setups
+  // Create a dictionary of definitions to be printed at the top of the sketch
+  Blockly.Arduino.includes_ = Object.create(null);
+  // Create a dictionary of definitions to be printed after variable definitions
   Blockly.Arduino.definitions_ = Object.create(null);
-  // Create a dictionary of setups to be printed before the code
-  Blockly.Arduino.setups_ = Object.create(null);
-  // Create a dictionary of pins to check if their use conflicts
-  Blockly.Arduino.pins_ = Object.create(null);
+  // Create a dictionary of functions from the code generator
+  Blockly.Arduino.codefunctions_ = Object.create(null);
+  // Create a dictionary of functions created by the user
+  Blockly.Arduino.userFunctions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
   // to actual function names (to avoid collisions with user functions)
   Blockly.Arduino.functionNames_ = Object.create(null);
-  
+  // Create a dictionary of setups to be printed in the setup() function
+  Blockly.Arduino.setups_ = Object.create(null);
+  // Create a dictionary of pins to check if their use conflicts
+  Blockly.Arduino.pins_ = Object.create(null);
+
   if (!Blockly.Arduino.variableDB_) {
     Blockly.Arduino.variableDB_ =
         new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
@@ -122,11 +117,13 @@ Blockly.Arduino.init = function(workspace) {
  */
 Blockly.Arduino.finish = function(code) {
   // Indent every line.
+  //TODO: revise regexs
   code = '  ' + code.replace(/\n/g, '\n  ');
   code = code.replace(/\n\s+$/, '\n');
   code = 'void loop() {\n' + code + '\n}';
 
   // Convert the definitions dictionary into a list
+  // TODO: remove regex expression once all includes are moved to their own dict
   var imports = [];
   var definitions = [];
   for (var name in Blockly.Arduino.definitions_) {
@@ -138,20 +135,75 @@ Blockly.Arduino.finish = function(code) {
     }
   }
 
-  // Convert the setups dictionary into a list
-  var setups = [];
+  // Convert the includes, functions, and setup dictionaries into lists
+  var includes = [], functions = [], userFunctions = [], setups = [];
+  for (var name in Blockly.Arduino.includes_) {
+    includes.push(Blockly.Arduino.includes_[name]);
+  }
+  for (var name in Blockly.Arduino.codefunctions_) {
+    functions.push(Blockly.Arduino.codefunctions_[name]);
+  }
+  for (var name in Blockly.Arduino.userFunctions_) {
+    userFunctions.push(Blockly.Arduino.userFunctions_[name]);
+  }
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
 
-  var allDefs = imports.join('\n') + definitions.join('\n') +
-      '\n\nvoid setup() {\n  '+ setups.join('\n  ') + '\n}';
+  var allDefs = includes.join('\n') + imports.join('\n') +
+      definitions.join('\n') + functions.join('\n\n') +
+      userFunctions.join('\n\n') + '\n\nvoid setup() {\n  ' +
+      setups.join('\n  ') + '\n}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
 /**
+ * Adds a string of "include" code to be added to the sketch.
+ * Once a include is added it will not get overwritten with new code.
+ * @param {!string} includetag Identifier for this include code.
+ * @param {!string} code Code to be included in the setup() function.
+ */
+Blockly.Arduino.addInclude = function(includetag, code) {
+  if (Blockly.Arduino.includes_[includetag] === undefined) {
+    Blockly.Arduino.includes_[includetag] = code;
+  }
+};
+
+/**
+ * Adds a string of code into the Arduino setup() function. It takes an
+ * identifier to not repeat the same kind of initialisation code from several
+ * blocks. If overwrite function is set to true it will overwrite whatever
+ * value the identifier held before. 
+ * @param {!string} setupTag Identifier for the type of set up code.
+ * @param {!string} code Code to be included in the setup() function.
+ * @param {boolean=} overwrite Flag to ignore previously set value.
+ */
+Blockly.Arduino.addSetup = function(setupTag, code, overwrite) {
+  if (overwrite) {
+    Blockly.Arduino.setups_[setupTag] = code;
+  } else if (Blockly.Arduino.setups_[setupTag] === undefined) {
+    Blockly.Arduino.setups_[setupTag] = code;
+  }
+};
+
+/**
+ * Adds a string of code as a function. It takes an identifier (meant to be the
+ * function name) to only keep a single copy even multiple blocks might request
+ * this function to appear.
+ * Once a function is added it will not get overwritten with new code.
+ * @param {!string} functionName Identifier for the function.
+ * @param {!string} code Code to be included in the setup() function.
+ * @param {boolean=} overwrite Description.
+ */
+Blockly.Arduino.addFunction = function(functionName, code) {
+  if (Blockly.Arduino.codefunctions_[functionName] === undefined) {
+    Blockly.Arduino.codefunctions_[functionName] = code;
+  }
+};
+
+/**
  * Naked values are top-level blocks with outputs that aren't plugged into
- * anything.  A trailing semicolon is needed to make this legal.
+ * anything. A trailing semicolon is needed to make this legal.
  * @param {string} line Line of generated code.
  * @return {string} Legal line of code.
  */
@@ -161,7 +213,8 @@ Blockly.Arduino.scrubNakedValue = function(line) {
 
 /**
  * Encode a string as a properly escaped Arduino string, complete with quotes.
- * @return {string} string Arduino string.
+ * @param {string} string Text to encode.
+ * @return {string} Arduino string.
  * @private
  */
 Blockly.Arduino.quote_ = function(string) {
@@ -218,9 +271,9 @@ Blockly.Arduino.scrub_ = function(block, code) {
 /**
  * Generates Arduino Types from a Blockly Type.
  * @param {!Blockly.StaticTyping.blocklyType} typeBlockly The Blockly type to be
- *                                                        converted.
+ *     converted.
  * @return {string} Arduino type for the respective Blockly input type, in a
- *                  string format.
+ *     string format.
  * @this {Blockly.StaticTyping}
  * @private
  */

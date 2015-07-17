@@ -704,7 +704,8 @@ Blockly.Blocks['text_prompt_ext'] = {
    */
   init: function() {
     var TYPES =
-        [[Blockly.Msg.TEXT_PROMPT_TYPE_TEXT, 'TEXT'],
+        [[Blockly.Msg.TEXT_PROMPT_TYPE_TEXT,
+          Blockly.StaticTyping.blocklyType.TEXT],
          [Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER,
           Blockly.StaticTyping.blocklyType.NUMBER]];
     // Assign 'this' to a variable for use in the closure below.
@@ -733,6 +734,6 @@ Blockly.Blocks['text_prompt_ext'] = {
    * Assigns a type to the block, prompt always returns a string.
    */
   getType: function() {
-    return Blockly.StaticTyping.blocklyType.TEXT;
+    return this.getFieldValue('TYPE');
   }
 };

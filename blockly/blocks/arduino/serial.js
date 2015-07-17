@@ -33,8 +33,8 @@ Blockly.Blocks['serial_print'] = {
     this.appendValueInput('CONTENT', Blockly.StaticTyping.blocklyType.TEXT)
         .setCheck(Blockly.StaticTyping.blocklyType.TEXT);
     this.appendDummyInput()
-        .appendField('with new line')
-        .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE');
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "NEW_LINE")
+        .appendField("add new line");
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -43,17 +43,14 @@ Blockly.Blocks['serial_print'] = {
   },
   /**
    * Called whenever anything on the workspace changes.
-   * It checks the instances of serial_speed and attaches a warning to this
+   * It checks the instances of serial_setup and attaches a warning to this
    * block if not valid data is found.
    * @this Blockly.Block
    */
   onchange: function() {
-    if (!this.workspace) {
-      // Block has been deleted.
-      return;
-    }
+    if (!this.workspace) { return; }  // Block has been deleted.
+
     // Get the Serial instance from this block
-    var InstanceName = null;
     var InstanceName = this.getFieldValue('SERIAL_ID');
 
    // Iterate through blocks to find a setup instance for the same serial id.
@@ -71,10 +68,11 @@ Blockly.Blocks['serial_print'] = {
 
     if (!setupInstancePresent) {
       this.setWarningText('A setup block for '+ InstanceName + ' must be ' +
-                          'added to the workspace to use this block!');
+                          'added to the workspace to use this block!',
+                          'serial_setup');
     } else {
-      this.setWarningText(null);
-    } /* */
+      this.setWarningText(null, 'serial_setup');
+    }
   },
   /** Updates the content of the the serial related fields. */
   updateFields: function() {
@@ -83,7 +81,7 @@ Blockly.Blocks['serial_print'] = {
   }
 };
 
-Blockly.Blocks['serial_speed'] = {
+Blockly.Blocks['serial_setup'] = {
   /**
    * Block for setting the speed of the serial connection.
    * @this Blockly.Block
@@ -105,14 +103,13 @@ Blockly.Blocks['serial_speed'] = {
     this.setTooltip('Selects the speed for a specific Serial peripheral');
   },
   /**
-   * Returns the serial_speed instance name, defined in the 'SERIAL_ID' drop
+   * Returns the serial_setup instance name, defined in the 'SERIAL_ID' drop
    * down of this block.
    * @return {!Array.<string>} List with the instance name.
    * @this Blockly.Block
    */
   getSerialSetupInstance: function() {
-    var instanceName = this.getFieldValue('SERIAL_ID');
-    return [instanceName];
+    return this.getFieldValue('SERIAL_ID');;
   },
   /** Updates the content of the the serial related fields. */
   updateFields: function() {

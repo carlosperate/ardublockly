@@ -7,10 +7,10 @@
  *               http://arduino.cc/en/Reference/Serial
  *
  * TODO: Too many calls to String constructor, which consumes a lot of
- *       resources. Once type identification is implemented this will need an 
+ *       resources. Once type identification is implemented this will need an
  *       update.
- * TODO: Serial peripheral and speed are hard-coded, should require serial
- *       setup block.
+ *
+ * TODO: Trim generator is not correct.
  */
 'use strict';
 
@@ -20,13 +20,12 @@ goog.require('Blockly.Arduino');
 
 
 /**
- * Code generator for a literal String (X). 
+ * Code generator for a literal String (X).
  * Arduino code: loop { "X" }
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['text'] = function(block) {
-  // Text value.
   var code = Blockly.Arduino.quote_(block.getFieldValue('TEXT'));
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -58,7 +57,7 @@ Blockly.Arduino['text_join'] = function(block) {
       if (argument == '') {
         code[n] = '""';
       } else {
-        code[n] = 'String(' + argument +')';
+        code[n] = 'String(' + argument + ')';
       }
     }
     code = code.join(' + ');
@@ -118,7 +117,7 @@ Blockly.Arduino['text_isEmpty'] = function(block) {
   func.push('    return false;');
   func.push('  }');
   func.push('}');
-   Blockly.Arduino.definitions_['is_string_empty'] = func.join('\n');
+  Blockly.Arduino.addFunction('is_string_empty', func.join('\n'));
   var argument0 = Blockly.Arduino.valueToCode(block, 'VALUE',
       Blockly.Arduino.ORDER_UNARY_POSTFIX);
   if (argument0 == '') {
@@ -146,7 +145,7 @@ Blockly.Arduino['text_trim'] = function(block) {
   };
   var mode = block.getFieldValue('MODE');
   var operator = Blockly.Arduino.text_trim.OPERATORS[mode];
-  var argument0 = Blockly.Arduino.valueToCode(this, 'TEXT',
+  var argument0 = Blockly.Arduino.valueToCode(block, 'TEXT',
       Blockly.Arduino.ORDER_UNARY_POSTFIX);
   if (argument0 == '') {
     argument0 = '""';
@@ -157,19 +156,17 @@ Blockly.Arduino['text_trim'] = function(block) {
 };
 
 /**
- * Code generator to trim spaces from a string (X).
+ * Code generator to print to the serial comm.
  * Serial info: http://arduino.cc/en/Reference/Serial
  * Arduino code: setup { Serial.begin(9600);     }
  *               loop  { Serial.print(String(X)) }
- * TODO: The serial peripheral and speed hard-coded into the code.
- *       Need to change to request a serial setup block.
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {string} Completed code.
  */
 Blockly.Arduino['text_print'] = function(block) {
   var serialId = Blockly.Arduino.Boards.selected.serial[0][1];
-  Blockly.Arduino.setups_['setup_serial_' + serialId] =
-      serialId + '.begin(9600);';
+  var setupCode = serialId + '.begin(9600);';
+  Blockly.Arduino.addSetup('serial_' + serialId, setupCode, false);
   var argument0 = Blockly.Arduino.valueToCode(block, 'TEXT',
       Blockly.Arduino.ORDER_NONE);
   if (argument0 == '') {
@@ -185,27 +182,27 @@ Blockly.Arduino['text_print'] = function(block) {
  * Serial info: http://arduino.cc/en/Reference/Serial
  * Arduino code: getUserInputPrompt(...) { ... }
  *               loop { getUserInputPrompt("X")) }
- * TODO: The serial peripheral and speed hard-coded into the code.
- *       Need to change to request a serial setup block.
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['text_prompt_ext'] = function(block) {
   // Get the first Serial peripheral of arduino board
   var serialId = Blockly.Arduino.Boards.selected.serial[0][1];
+  var returnType = block.getFieldValue('TYPE');
+  var funcName = 'getUserInputPrompt' + returnType;
 
   // The function code changes based on reading a number or string
   var func = [];
-  var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
+  var toNumber =  returnType == Blockly.StaticTyping.blocklyType.NUMBER;
   if (toNumber) {
-    func.push('int getUserInputPrompt(String msg) {');
+    func.push('int ' + funcName + '(String msg) {');
   } else {
-    func.push('String getUserInputPrompt(String msg) {');
+    func.push('String ' + funcName + '(String msg) {');
   }
-  func.push('  ' + serialId + '.print(msg+\'\\n\');');
+  func.push('  ' + serialId + '.println(msg);');
   func.push('  boolean stringComplete = false;');
   if (toNumber) {
-    func.push('  int content = ' + serialId + '.parseInt();');
+    func.push('  int content = 0;');// + serialId + '.parseInt();');
   } else {
     func.push('  String content = "";');
   }
@@ -216,32 +213,36 @@ Blockly.Arduino['text_prompt_ext'] = function(block) {
     func.push('      stringComplete = true;');
   } else {
     func.push('      char readChar = (char)' + serialId + '.read();');
-    func.push('      content += readChar;');
     func.push('      if (readChar == \'\\n\' || readChar == \'\\r\') {');
     func.push('        stringComplete = true;');
+    func.push('      } else {');
+    func.push('        content += readChar;');
     func.push('      }');
   }
   func.push('    }');
   func.push('  }');
+  func.push('  // Empty incoming serial buffer');
+  func.push('  while(Serial.available()) { Serial.read(); };');
   func.push('  return content;');
-  func.push('}\n\n');
+  func.push('}');
+  Blockly.Arduino.addFunction(funcName, func.join('\n'));
 
-  Blockly.Arduino.definitions_['define_string_return'] = func.join('\n');
-  Blockly.Arduino.setups_['setup_serial_' + serialId] =
-      serialId + '.begin(9600);';
-  
+  // Only overwrite the serial set up if not present already
+  var setupCode = serialId + '.begin(9600);';
+  Blockly.Arduino.addSetup('serial_' + serialId, setupCode, false);
+
   var msg = Blockly.Arduino.valueToCode(block, 'TEXT',
       Blockly.Arduino.ORDER_NONE) || '""';
-  var code = 'getUserInputPrompt(' + msg + ')';
+  var code = funcName + '(' + msg + ')';
 
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 
-/* ********************************************************************** *
- * The rest of the blocks have been left as it is, as they are be removed *
- * from the toolbox and not used for Arduino code.                        *
- * ********************************************************************** */
+/* ***************************************************************** *
+ * The rest of the blocks have been left as it is, as they have been *
+ * block from the toolbox and not used for Arduino code.             *
+ * ***************************************************************** */
 
 Blockly.Arduino['text_endString'] = function(block) {
   // Return a leading or trailing substring.
@@ -318,11 +319,11 @@ Blockly.Arduino['text_charAt'] = function(block) {
     case 'RANDOM':
       var functionName = Blockly.Arduino.provideFunction_(
           'text_random_letter',
-          [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
-              '(text) {',
-            '  var x = Math.floor(Math.random() * text.length);',
-            '  return text[x];',
-            '}']);
+          ['function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
+               '(text) {',
+           '  var x = Math.floor(Math.random() * text.length);',
+           '  return text[x];',
+           '}']);
       code = functionName + '(' + text + ')';
       return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
   }
@@ -344,26 +345,26 @@ Blockly.Arduino['text_getSubstring'] = function(block) {
   } else {
     var functionName = Blockly.Arduino.provideFunction_(
         'text_get_substring',
-        [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
-            '(text, where1, at1, where2, at2) {',
-          '  function getAt(where, at) {',
-          '    if (where == \'FROM_START\') {',
-          '      at--;',
-          '    } else if (where == \'FROM_END\') {',
-          '      at = text.length - at;',
-          '    } else if (where == \'FIRST\') {',
-          '      at = 0;',
-          '    } else if (where == \'LAST\') {',
-          '      at = text.length - 1;',
-          '    } else {',
-          '      throw \'Unhandled option (text_getSubstring).\';',
-          '    }',
-          '    return at;',
-          '  }',
-          '  at1 = getAt(where1, at1);',
-          '  at2 = getAt(where2, at2) + 1;',
-          '  return text.slice(at1, at2);',
-          '}']);
+        ['function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
+             '(text, where1, at1, where2, at2) {',
+         '  function getAt(where, at) {',
+         '    if (where == \'FROM_START\') {',
+         '      at--;',
+         '    } else if (where == \'FROM_END\') {',
+         '      at = text.length - at;',
+         '    } else if (where == \'FIRST\') {',
+         '      at = 0;',
+         '    } else if (where == \'LAST\') {',
+         '      at = text.length - 1;',
+         '    } else {',
+         '      throw \'Unhandled option (text_getSubstring).\';',
+         '    }',
+         '    return at;',
+         '  }',
+         '  at1 = getAt(where1, at1);',
+         '  at2 = getAt(where2, at2) + 1;',
+         '  return text.slice(at1, at2);',
+         '}']);
     var code = functionName + '(' + text + ', \'' +
         where1 + '\', ' + at1 + ', \'' + where2 + '\', ' + at2 + ')';
   }
