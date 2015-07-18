@@ -58,6 +58,8 @@ Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
 Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
 
+
+
 /**
  * Arduino generator short name for
  * Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_
@@ -158,7 +160,7 @@ Blockly.Arduino.finish = function(code) {
   }
 
   var allDefs = includes.join('\n') + '\n' + imports.join('\n') + '\n' +
-      definitions.join('\n') + '\n' + functions.join('\n\n') +
+      definitions.join('\n') + '\n\n' + functions.join('\n\n') +
       '\n\nvoid setup() {\n  ' + setups.join('\n  ') + '\n}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
@@ -211,6 +213,26 @@ Blockly.Arduino.addFunction = function(preferedName, code) {
     Blockly.Arduino.functionNames_[preferedName] = uniqueName;
   }
   return Blockly.Arduino.functionNames_[preferedName];
+};
+
+/**
+ * Description.
+ * @param {!Blockly.Block} 
+ */
+Blockly.Arduino.reservePin = function(block, pin, pinType, warningTag) {
+  if (Blockly.Arduino.pins_[pin] !== undefined) {
+    if (Blockly.Arduino.pins_[pin] != pinType) {
+      block.setWarningText(
+          'Pin ' + pin + ' is needed for ' + warningTag + ' as pin ' + pinType +
+          '. Already used as ' + Blockly.Arduino.pins_[pin] + ' instead.',
+          warningTag);
+    } else {
+      block.setWarningText(null, warningTag);
+    }
+  } else {
+    Blockly.Arduino.pins_[pin] = pinType;
+    block.setWarningText(null, warningTag);
+  }
 };
 
 /**

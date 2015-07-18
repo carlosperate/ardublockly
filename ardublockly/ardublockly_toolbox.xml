@@ -187,7 +187,8 @@
         <block type="text"></block>
       </value>
     </block>
-    <block type="spi_config"></block>
+    <block type="spi_setup"></block>
     <block type="spi_transfer"></block>
+    <block type="spi_transfer_return"></block>
   </category>
 </xml>
