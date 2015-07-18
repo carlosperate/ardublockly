@@ -283,7 +283,7 @@ Blockly.Blocks['math_number_property'] = {
    * Assigns a type to the block, all these operations return booleans.
    */
   getType: function() {
-    Blockly.StaticTyping.blocklyType.BOOLEAN;
+    return Blockly.StaticTyping.blocklyType.BOOLEAN;
   }
 };
 
