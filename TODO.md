@@ -34,7 +34,7 @@ There was an error manipulating the sketch data!!
 ## Static typing
 - [ ] logic_ternary block getType to defines type as that of its inputs
 - [ ] logic_null block right now does not return a type, this might change
-- [ ] math_number block 'errornumber' type used for debugging, remove
+- [x] math_number block 'errornumber' type used for debugging, remove
 - [ ] math_arithmetic getType to check types of given inputs to decide between int or float . Right now first block within sets the type.
 - [ ] math_constrain getType to check types of given inputs to decide between int or float . Right now first block within sets the type.
 - [ ] math_number getType to use regular expressions more efficiently

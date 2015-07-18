@@ -16,7 +16,7 @@ goog.require('Blockly.Generator');
 
 /**
  * Arduino code generator.
- * @type !Blockly.Generator
+ * @type {!Blockly.Generator}
  */
 Blockly.Arduino = new Blockly.Generator('Arduino');
 
@@ -47,7 +47,7 @@ Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
 Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; // * / % ~/
 Blockly.Arduino.ORDER_ADDITIVE = 4;       // + -
 Blockly.Arduino.ORDER_SHIFT = 5;          // << >>
-Blockly.Arduino.ORDER_RELATIONAL = 6;     // is is! >= > <= <
+Blockly.Arduino.ORDER_RELATIONAL = 6;     // >= > <= <
 Blockly.Arduino.ORDER_EQUALITY = 7;       // == != === !==
 Blockly.Arduino.ORDER_BITWISE_AND = 8;    // &
 Blockly.Arduino.ORDER_BITWISE_XOR = 9;    // ^
@@ -57,6 +57,13 @@ Blockly.Arduino.ORDER_LOGICAL_OR = 12;    // ||
 Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
 Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
+
+/**
+ * Arduino generator short name for
+ * Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_
+ * @type {!string}
+ */
+Blockly.Arduino.DEF_FUNC_NAME = Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_;
 
 /**
  * Initialises the database of global definitions, the setup function, function
@@ -69,7 +76,7 @@ Blockly.Arduino.init = function(workspace) {
   // Create a dictionary of definitions to be printed after variable definitions
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of functions from the code generator
-  Blockly.Arduino.codefunctions_ = Object.create(null);
+  Blockly.Arduino.codeFunctions_ = Object.create(null);
   // Create a dictionary of functions created by the user
   Blockly.Arduino.userFunctions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
@@ -136,24 +143,23 @@ Blockly.Arduino.finish = function(code) {
   }
 
   // Convert the includes, functions, and setup dictionaries into lists
-  var includes = [], functions = [], userFunctions = [], setups = [];
+  var includes = [], functions = [], setups = [];
   for (var name in Blockly.Arduino.includes_) {
     includes.push(Blockly.Arduino.includes_[name]);
   }
-  for (var name in Blockly.Arduino.codefunctions_) {
-    functions.push(Blockly.Arduino.codefunctions_[name]);
+  for (var name in Blockly.Arduino.codeFunctions_) {
+    functions.push(Blockly.Arduino.codeFunctions_[name]);
   }
   for (var name in Blockly.Arduino.userFunctions_) {
-    userFunctions.push(Blockly.Arduino.userFunctions_[name]);
+    functions.push(Blockly.Arduino.userFunctions_[name]);
   }
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
 
-  var allDefs = includes.join('\n') + imports.join('\n') +
-      definitions.join('\n') + functions.join('\n\n') +
-      userFunctions.join('\n\n') + '\n\nvoid setup() {\n  ' +
-      setups.join('\n  ') + '\n}';
+  var allDefs = includes.join('\n') + '\n' + imports.join('\n') + '\n' +
+      definitions.join('\n') + '\n' + functions.join('\n\n') +
+      '\n\nvoid setup() {\n  ' + setups.join('\n  ') + '\n}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
@@ -188,17 +194,23 @@ Blockly.Arduino.addSetup = function(setupTag, code, overwrite) {
 
 /**
  * Adds a string of code as a function. It takes an identifier (meant to be the
- * function name) to only keep a single copy even multiple blocks might request
- * this function to appear.
- * Once a function is added it will not get overwritten with new code.
+ * function name) to only keep a single copy even if multiple blocks might
+ * request this function to be created.
+ * A function (and its code) will only be added on first request.
  * @param {!string} functionName Identifier for the function.
  * @param {!string} code Code to be included in the setup() function.
  * @param {boolean=} overwrite Description.
+ * @return {!string} A unique function name based on input name.
  */
-Blockly.Arduino.addFunction = function(functionName, code) {
-  if (Blockly.Arduino.codefunctions_[functionName] === undefined) {
-    Blockly.Arduino.codefunctions_[functionName] = code;
+Blockly.Arduino.addFunction = function(preferedName, code) {
+  if (Blockly.Arduino.codeFunctions_[preferedName] === undefined) {
+    var uniqueName = Blockly.Arduino.variableDB_.getDistinctName(
+        preferedName, Blockly.Generator.NAME_TYPE);
+    Blockly.Arduino.codeFunctions_[preferedName] =
+        code.replace(Blockly.Arduino.DEF_FUNC_NAME, uniqueName);
+    Blockly.Arduino.functionNames_[preferedName] = uniqueName;
   }
+  return Blockly.Arduino.functionNames_[preferedName];
 };
 
 /**
@@ -237,10 +249,8 @@ Blockly.Arduino.quote_ = function(string) {
  * @private
  */
 Blockly.Arduino.scrub_ = function(block, code) {
-  if (code === null) {
-    // Block has handled code generation itself
-    return '';
-  }
+  if (code === null) { return ''; } // Block has handled code generation itself
+
   var commentCode = '';
   // Only collect comments for blocks that aren't inline
   if (!block.outputConnection || !block.outputConnection.targetConnection) {

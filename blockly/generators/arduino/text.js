@@ -110,14 +110,14 @@ Blockly.Arduino['text_length'] = function(block) {
  */
 Blockly.Arduino['text_isEmpty'] = function(block) {
   var func = [];
-  func.push('boolean isStringEmpty(String msg) {');
+  func.push('boolean ' + Blockly.Arduino.DEF_FUNC_NAME + '(String msg) {');
   func.push('  if (msg.length() == 0) {');
   func.push('    return true;');
   func.push('  } else {');
   func.push('    return false;');
   func.push('  }');
   func.push('}');
-  Blockly.Arduino.addFunction('is_string_empty', func.join('\n'));
+  var funcName = Blockly.Arduino.addFunction('isStringEmpty', func.join('\n'));
   var argument0 = Blockly.Arduino.valueToCode(block, 'VALUE',
       Blockly.Arduino.ORDER_UNARY_POSTFIX);
   if (argument0 == '') {
@@ -125,7 +125,7 @@ Blockly.Arduino['text_isEmpty'] = function(block) {
   } else {
     argument0 = 'String(' + argument0 + ')';
   }
-  var code = 'isStringEmpty(' + argument0 + ')';
+  var code = funcName + '(' + argument0 + ')';
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
@@ -189,15 +189,14 @@ Blockly.Arduino['text_prompt_ext'] = function(block) {
   // Get the first Serial peripheral of arduino board
   var serialId = Blockly.Arduino.Boards.selected.serial[0][1];
   var returnType = block.getFieldValue('TYPE');
-  var funcName = 'getUserInputPrompt' + returnType;
 
   // The function code changes based on reading a number or string
   var func = [];
   var toNumber =  returnType == Blockly.StaticTyping.blocklyType.NUMBER;
   if (toNumber) {
-    func.push('int ' + funcName + '(String msg) {');
+    func.push('int ' + Blockly.Arduino.DEF_FUNC_NAME + '(String msg) {');
   } else {
-    func.push('String ' + funcName + '(String msg) {');
+    func.push('String ' + Blockly.Arduino.DEF_FUNC_NAME + '(String msg) {');
   }
   func.push('  ' + serialId + '.println(msg);');
   func.push('  boolean stringComplete = false;');
@@ -225,7 +224,8 @@ Blockly.Arduino['text_prompt_ext'] = function(block) {
   func.push('  while(Serial.available()) { Serial.read(); };');
   func.push('  return content;');
   func.push('}');
-  Blockly.Arduino.addFunction(funcName, func.join('\n'));
+  var funcName = Blockly.Arduino.addFunction(
+      'getUserInputPrompt' + returnType, func.join('\n'));
 
   // Only overwrite the serial set up if not present already
   var setupCode = serialId + '.begin(9600);';
