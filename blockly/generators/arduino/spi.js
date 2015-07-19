@@ -25,18 +25,20 @@ goog.require('Blockly.Arduino');
  * @return {string} Completed code.
  */
 Blockly.Arduino['spi_setup'] = function(block) {
+  var spiId = block.getFieldValue('SPI_ID');
   var spiShift = block.getFieldValue('SPI_SHIFT_ORDER');
   var spiClockDivide = block.getFieldValue('SPI_CLOCK_DIVIDE');
   var spiMode = block.getFieldValue('SPI_MODE');
 
   Blockly.Arduino.addInclude('spi', '#include <SPI.h>');
   Blockly.Arduino.addSetup('setup_spi_order',
-      'SPI.setBitOrder(' + spiShift + ');', true);
+      spiId + '.setBitOrder(' + spiShift + ');', true);
   Blockly.Arduino.addSetup('setup_spi_mode',
-      'SPI.setDataMode(' + spiMode + ');', true);
+      spiId + '.setDataMode(' + spiMode + ');', true);
   Blockly.Arduino.addSetup('spi_div',
-      'SPI.setClockDivider(' + spiClockDivide + ');', true);
-  Blockly.Arduino.addSetup('spi_begin', 'SPI.begin();', true);
+      spiId + '.setClockDivider(' + spiClockDivide + ');', true);
+  Blockly.Arduino.addSetup('spi_begin',
+      spiId + '.begin();', true);
 
   return '';
 };
@@ -60,7 +62,7 @@ Blockly.Arduino['spi_transfer'] = function(block) {
       block, 'SPI_DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
   Blockly.Arduino.addInclude('spi', '#include <SPI.h>');
-  Blockly.Arduino.addSetup('spi_begin', 'SPI.begin();', false);
+  Blockly.Arduino.addSetup('spi_begin', spiId + '.begin();', false);
 
   // Reserve SPI pins MOSI, MISO, and SCK
   for (var i = 0; i < Blockly.Arduino.Boards.selected.spiPins.length; i++) {
@@ -83,11 +85,10 @@ Blockly.Arduino['spi_transfer'] = function(block) {
   if (spiSs !== 'none') {
     code.push('digitalWrite(' + spiSs + ', HIGH);');
   }
-  code.push('SPI.transfer(' + spiData + ');');
+  code.push(spiId + '.transfer(' + spiData + ');');
   if (spiSs !== 'none') {
     code.push('digitalWrite(' + spiSs + ', LOW);');
   }
-
   return code.join('\n') + '\n';
 };
 
@@ -98,23 +99,26 @@ Blockly.Arduino['spi_transfer'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['spi_transfer_return'] = function(block) {
+  var spiId = block.getFieldValue('SPI_ID');
   var spiSs = block.getFieldValue('SPI_SS');
-  var spiCode = Blockly.Arduino['spi_transfer'](block);
-  var code;
-  if (spiSs === 'none') {
-    var spiData = Blockly.Arduino.valueToCode(
+  var spiData = Blockly.Arduino.valueToCode(
       block, 'SPI_DATA', Blockly.Arduino.ORDER_ATOMIC) || '0';
-    code = 'SPI.transfer(' + spiData + ')';
+  // The spi_transfer block invoked to generate all setup stuff, code discarded
+  var spiTransferOnlyCode = Blockly.Arduino['spi_transfer'](block);
+  if (spiSs === 'none') {
+    var code = spiId + '.transfer(' + spiData + ')';
   } else {
     var func = [
         'int ' + Blockly.Arduino.DEF_FUNC_NAME + '() {',
         '  int spiReturn = 0;',
-        '  ' + spiCode.replace('SPI.transfer', 'spiReturn = SPI.transfer')
-                      .replace(/\n/g, '\n  ') + 'return spiReturn;',
+        '  digitalWrite(' + spiSs + ', HIGH);',
+        '  spiReturn = ' + spiId + '.transfer(' + spiData + ');',
+        '  digitalWrite(' + spiSs + ', LOW);',
+        '  return spiReturn;'
         '}'];
     var functionName = Blockly.Arduino.addFunction(
         'spiReturnSlave' + spiSs, func.join('\n'));
-    code = functionName + '()';
+    var code = functionName + '()';
   }
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };

@@ -13,7 +13,8 @@ goog.provide('Blockly.Blocks.Arduino.spi');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.Arduino.spi.HUE = 180;
+/** Common HSV hue for all blocks in this category. */
+Blockly.Blocks.Arduino.spi.HUE = 170;
 
 Blockly.Blocks['spi_setup'] = {
   /**
@@ -88,6 +89,8 @@ Blockly.Blocks['spi_transfer'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
     this.appendValueInput('SPI_DATA', '')
+        .setCheck([Blockly.StaticTyping.blocklyType.NUMBER,
+                  Blockly.StaticTyping.blocklyType.BOOLEAN])
         .appendField('transfer');
     this.appendDummyInput('')
         .appendField('to slave pin')
