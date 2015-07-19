@@ -3,7 +3,7 @@
  *          http://www.apache.org/licenses/LICENSE-2.0
  *
  * @fileoverview Arduino code generator for the Stepper library blocks.
- *               The Arduino Servo functions syntax can be found in the 
+ *               The Arduino Servo functions syntax can be found in the
  *               following URL: http://arduino.cc/en/Reference/Stepper
  */
 'use strict';
@@ -14,20 +14,20 @@ goog.require('Blockly.Arduino');
 
 
 /**
- * Code generator for the stepper generator configuration. Nothing is added 
+ * Code generator for the stepper generator configuration. Nothing is added
  * to the 'loop()' function. Sets the pins (X and Y), steps per revolution (Z),
  * speed(A) and instance name (B).
  * Arduino code: #include <Stepper.h>
  *               Stepper B(Z, X, Y);
  *               setup() { B.setSpeed(A); }
  * @param {!Blockly.Block} block Block to generate the code from.
- * @return {string} Empty string as no code goes into 'loop()' 
+ * @return {string} Empty string as no code goes into 'loop()'.
  */
 Blockly.Arduino['stepper_config'] = function(block) {
   var pin1 = block.getFieldValue('STEPPER_PIN1');
   var pin2 = block.getFieldValue('STEPPER_PIN2');
   var pinType = Blockly.Arduino.Boards.pinTypes.STEPPER;
-  var stepperName = block.getStepperInstance();
+  var stepperName = block.getStepperSetupInstance();
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '360';
   var stepperSpeed = Blockly.Arduino.valueToCode(block, 'STEPPER_SPEED',
@@ -77,7 +77,7 @@ Blockly.Arduino['stepper_config'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['stepper_step'] = function(block) {
-  var stepperInstanceName = block.getFieldValue('STEPPER_NAME')
+  var stepperInstanceName = block.getFieldValue('STEPPER_NAME');
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '0';
   var code = stepperInstanceName + '.step(' + stepperSteps + ');\n';
