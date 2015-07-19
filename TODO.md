@@ -55,9 +55,10 @@ There was an error manipulating the sketch data!!
 - [ ] Code generator for lists into arrays
 - [ ] A lot of blocks go through the entire block tree, which end ups being  inefficient. Maybe create a general pass through in the arduino.js file to check everything that needs to be checked in one pass.
 - [ ] SPI pin reservation log needs to be refactored for the new board settings
-- [ ] Create I2C communication blocks
+- [ ] Create I2C communication blocks with hue 190
 - [ ] Update the serial print block to specify explicit type (hex, str, int, etc)
 - [ ] Look into all the serial functions and decide what else might fit in
+- [ ] Allow to add return statement to the Arduino setup()/loop() functions
 
 
 ## Arduino front end

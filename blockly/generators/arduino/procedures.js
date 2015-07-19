@@ -19,7 +19,7 @@ goog.require('Blockly.Arduino');
  * Code generator to create a function with a return value (X).
  * Arduino code: void functionname { return X }
  * @param {!Blockly.Block} block Block to generate the code from.
- * @return {null} There is no code added to loop
+ * @return {null} There is no code added to loop.
  */
 Blockly.Arduino['procedures_defreturn'] = function(block) {
   var funcName = Blockly.Arduino.variableDB_.getName(
@@ -43,15 +43,15 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
   // Get arguments with type
   var args = [];
   for (var x = 0; x < block.arguments_.length; x++) {
-    args[x] = block.getArgType(block.arguments_[x]) + ' ' + 
+    args[x] = block.getArgType(block.arguments_[x]) + ' ' +
         Blockly.Arduino.variableDB_.getName(block.arguments_[x],
             Blockly.Variables.NAME_TYPE);
   }
 
-  // Ger return type
-  var returnType = Blockly.StaticTyping.blocklyType.UNSPECIFIED
-  if (this.getReturnType) {
-    returnType = this.getReturnType();
+  // Get return type
+  var returnType = Blockly.StaticTyping.blocklyType.UNSPECIFIED;
+  if (block.getReturnType) {
+    returnType = block.getReturnType();
   }
   returnType = Blockly.Arduino.getArduinoType_(returnType);
 
@@ -59,7 +59,7 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
   var code = returnType + ' ' + funcName + '(' + args.join(', ') + ') {\n' +
       branch + returnValue + '}\n';
   code = Blockly.Arduino.scrub_(block, code);
-  Blockly.Arduino.definitions_[funcName] = code;
+  Blockly.Arduino.userFunctions_[funcName] = code;
   return null;
 };
 
@@ -69,7 +69,7 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
  * type.
  * Arduino code: void functionname { }
  */
-Blockly.Arduino['procedures_defnoreturn'] = 
+Blockly.Arduino['procedures_defnoreturn'] =
     Blockly.Arduino['procedures_defreturn'];
 
 /**
@@ -127,4 +127,32 @@ Blockly.Arduino['procedures_ifreturn'] = function(block) {
   }
   code += '}\n';
   return code;
+};
+
+/**
+ * Code generator to add code into the setup() and loop() functions.
+ * Its use is not mandatory, but necessary to add manual code to setup().
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['arduino_functions'] = function(block) {
+  // Edited version of Blockly.Generator.prototype.statementToCode
+  function statementToCodeNoTab(block, name) {
+    var targetBlock = block.getInputTargetBlock(name);
+    var code = Blockly.Arduino.blockToCode(targetBlock);
+    if (!goog.isString(code)) {
+      throw 'Expecting code from statement block "' + targetBlock.type + '".';
+    }
+    return code;
+  }
+
+  var setupBranch = Blockly.Arduino.statementToCode(block, 'SETUP_FUNC');
+  // Remove first spacers as they will be added again in "addSetup()"
+  setupBranch = setupBranch.substring(2);
+  var setupcode = Blockly.Arduino.scrub_(block, setupBranch);
+  Blockly.Arduino.addSetup('userSetupCode', setupcode, true);
+
+  var loopBranch = statementToCodeNoTab(block, 'LOOP_FUNC');
+  var loopcode = Blockly.Arduino.scrub_(block, loopBranch);
+  return loopcode;
 };

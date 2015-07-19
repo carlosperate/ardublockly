@@ -170,6 +170,21 @@ Blockly.Procedures.rename = function(text) {
  * @param {!Blockly.Workspace} workspace The flyout's workspace.
  */
 Blockly.Procedures.flyoutCategory = function(blocks, gaps, margin, workspace) {
+  if (Blockly.Blocks['arduino_functions']) {
+    var block = Blockly.Block.obtain(workspace, 'arduino_functions');
+    block.initSvg();
+    // If there is a block in the workspace show as disabled 
+    var workspaceBlocks = Blockly.mainWorkspace.getAllBlocks();
+    for (var x = 0, length_ = workspaceBlocks.length; x < length_; x++) {
+      var getArduinoLoopsInstance = workspaceBlocks[x].getArduinoLoopsInstance;
+      if (getArduinoLoopsInstance) {
+        block.setDisabled(getArduinoLoopsInstance.call(workspaceBlocks[x]));
+        block.updateDisabled();
+      }
+    }
+    blocks.push(block);
+    gaps.push(margin * 2);
+  }
   if (Blockly.Blocks['procedures_defnoreturn']) {
     var block = Blockly.Block.obtain(workspace, 'procedures_defnoreturn');
     block.initSvg();

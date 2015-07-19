@@ -643,7 +643,9 @@ Blockly.Flyout.prototype.filterForCapacity_ = function() {
   for (var i = 0, block; block = blocks[i]; i++) {
     var allBlocks = block.getDescendants();
     var disabled = allBlocks.length > remainingCapacity;
-    block.setDisabled(disabled);
+    if (!block.disabled) {
+      block.setDisabled(disabled);
+    }
   }
 };
 
