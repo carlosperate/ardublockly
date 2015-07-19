@@ -14,27 +14,22 @@
 
 
 ## Python 3 specific
-- [x] ~~When a sketch is send to the IDE using python 3 the following error is shown (tested on linux):~~
-```
-Can't convert 'bytes' object to str implicitly
-There was an error manipulating the sketch data!!
-```
 
 
 ## Server
 - [ ] Complete `compilerserttings` module unite test
 - [ ] Complete `actions` module unit test module
-- [x] ~~Complete `SketchCreator` module unit test~~
-- [x] ~~Combine Arduino boards from code generator with Arduino boards offered for compilation~~
 
 ## Blockly general
-- [ ] Expand `setWarning` to be able to buffer and manage several warnings per block (add an ID to a block of text)
-- [ ] Implement the zoom feature from @carloslfu once matured
+- [x] ~~Expand `setWarning` to be able to buffer and manage several warnings per block (add an ID to a block of text)~~
+- [ ] Implement the zoom feature from @carloslfu once properly tested and matured
+- [x] ~~Add setup and loop functions to the custom toolbox flyout and ensure only one instance can be included in workspace~~
+- [ ] Arduino setup and loop block can be copy/pasted using keyboard shorcuts, stop this from happening 
 
 ## Static typing
 - [ ] logic_ternary block getType to defines type as that of its inputs
 - [ ] logic_null block right now does not return a type, this might change
-- [x] math_number block 'errornumber' type used for debugging, remove
+- [ ] math_number block 'errornumber' type used for debugging, remove
 - [ ] math_arithmetic getType to check types of given inputs to decide between int or float . Right now first block within sets the type.
 - [ ] math_constrain getType to check types of given inputs to decide between int or float . Right now first block within sets the type.
 - [ ] math_number getType to use regular expressions more efficiently
@@ -48,6 +43,7 @@ There was an error manipulating the sketch data!!
 
 ## Arduino generator related code
 - [x] ~~Add information for other Arduino boards~~
+- [x] ~~Add a way to switch Arduino boards dynamically~~
 - [ ] Text trim does not currently generate Arduino valid code
 
 ## Arduino blocks
@@ -62,11 +58,13 @@ There was an error manipulating the sketch data!!
 
 
 ## Arduino front end
-- [ ] ~~Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden~~
+- [x] ~~Edit toolbox fade out + visibility button fade in with a CSS animated change in height with overflow hidden~~
 - [ ] Remove old IDE output text while waiting for a new verify/open/upload 
 
 
 # Future features
+- [ ] Block creator app that also used blockly to create the generator code
+- [ ] Server component of the block creator to add files into folder and client side update to read them and include them into the toolbox
 - [ ] Serial console for comms with Arduino
 - [ ] Serial data graphing
 - [ ] Auto updating for the desktop app
