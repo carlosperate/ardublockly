@@ -145,7 +145,7 @@ Blockly.Arduino.finish = function(code) {
   }
 
   // Convert the includes, functions, and setup dictionaries into lists
-  var includes = [], functions = [], setups = [];
+  var includes = [], functions = [], setups = [], userSetupCode= '';
   for (var name in Blockly.Arduino.includes_) {
     includes.push(Blockly.Arduino.includes_[name]);
   }
@@ -155,13 +155,19 @@ Blockly.Arduino.finish = function(code) {
   for (var name in Blockly.Arduino.userFunctions_) {
     functions.push(Blockly.Arduino.userFunctions_[name]);
   }
+  // userSetupCode is added at the end of the setup function
+  if (Blockly.Arduino.setups_['userSetupCode'] !== undefined) {
+    userSetupCode = '\n' + Blockly.Arduino.setups_['userSetupCode'];
+    delete Blockly.Arduino.setups_['userSetupCode'];
+  }
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
 
   var allDefs = includes.join('\n') + '\n' + imports.join('\n') + '\n' +
       definitions.join('\n') + '\n\n' + functions.join('\n\n') +
-      '\n\nvoid setup() {\n  ' + setups.join('\n  ') + '\n}';
+      '\n\nvoid setup() {\n  ' + setups.join('\n  ') + '\n' + userSetupCode +
+      '}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
@@ -181,7 +187,7 @@ Blockly.Arduino.addInclude = function(includetag, code) {
  * Adds a string of code into the Arduino setup() function. It takes an
  * identifier to not repeat the same kind of initialisation code from several
  * blocks. If overwrite function is set to true it will overwrite whatever
- * value the identifier held before. 
+ * value the identifier held before.
  * @param {!string} setupTag Identifier for the type of set up code.
  * @param {!string} code Code to be included in the setup() function.
  * @param {boolean=} overwrite Flag to ignore previously set value.
@@ -199,9 +205,8 @@ Blockly.Arduino.addSetup = function(setupTag, code, overwrite) {
  * function name) to only keep a single copy even if multiple blocks might
  * request this function to be created.
  * A function (and its code) will only be added on first request.
- * @param {!string} functionName Identifier for the function.
+ * @param {!string} preferedName Identifier for the function.
  * @param {!string} code Code to be included in the setup() function.
- * @param {boolean=} overwrite Description.
  * @return {!string} A unique function name based on input name.
  */
 Blockly.Arduino.addFunction = function(preferedName, code) {
@@ -217,15 +222,17 @@ Blockly.Arduino.addFunction = function(preferedName, code) {
 
 /**
  * Description.
- * @param {!Blockly.Block} 
+ * @param {!Blockly.Block} block Description.
+ * @param {!string} pin Description.
+ * @param {!string} pinType Description.
+ * @param {!string} warningTag Description.
  */
 Blockly.Arduino.reservePin = function(block, pin, pinType, warningTag) {
   if (Blockly.Arduino.pins_[pin] !== undefined) {
     if (Blockly.Arduino.pins_[pin] != pinType) {
       block.setWarningText(
           'Pin ' + pin + ' is needed for ' + warningTag + ' as pin ' + pinType +
-          '. Already used as ' + Blockly.Arduino.pins_[pin] + ' instead.',
-          warningTag);
+          '. Already used as ' + Blockly.Arduino.pins_[pin] + '.', warningTag);
     } else {
       block.setWarningText(null, warningTag);
     }

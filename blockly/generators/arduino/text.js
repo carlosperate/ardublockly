@@ -418,7 +418,9 @@ Blockly.Arduino['text_changeCase'] = function(block) {
 
 Blockly.Arduino['text_prompt'] = function(block) {
   // Prompt function.
-  Blockly.Arduino.setups_['serial_begin'] = 'Serial.begin(9600);';
+  var serialId = Blockly.Arduino.Boards.selected.serial[0][1];
+  var setupCode = serialId + '.begin(9600);';
+  Blockly.Arduino.addSetup('serial_' + serialId, setupCode, false);
   var msg = Blockly.Arduino.quote_(block.getFieldValue('TEXT'));
   var code = 'Serial.print(' + msg + ');\n';
   var toNumber = block.getFieldValue('TYPE') == 'NUMBER';

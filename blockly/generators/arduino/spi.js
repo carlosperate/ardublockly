@@ -31,9 +31,9 @@ Blockly.Arduino['spi_setup'] = function(block) {
   var spiMode = block.getFieldValue('SPI_MODE');
 
   Blockly.Arduino.addInclude('spi', '#include <SPI.h>');
-  Blockly.Arduino.addSetup('setup_spi_order',
+  Blockly.Arduino.addSetup('spi_order',
       spiId + '.setBitOrder(' + spiShift + ');', true);
-  Blockly.Arduino.addSetup('setup_spi_mode',
+  Blockly.Arduino.addSetup('spi_mode',
       spiId + '.setDataMode(' + spiMode + ');', true);
   Blockly.Arduino.addSetup('spi_div',
       spiId + '.setClockDivider(' + spiClockDivide + ');', true);
@@ -114,7 +114,7 @@ Blockly.Arduino['spi_transfer_return'] = function(block) {
         '  digitalWrite(' + spiSs + ', HIGH);',
         '  spiReturn = ' + spiId + '.transfer(' + spiData + ');',
         '  digitalWrite(' + spiSs + ', LOW);',
-        '  return spiReturn;'
+        '  return spiReturn;',
         '}'];
     var functionName = Blockly.Arduino.addFunction(
         'spiReturnSlave' + spiSs, func.join('\n'));

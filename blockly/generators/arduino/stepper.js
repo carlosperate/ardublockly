@@ -33,14 +33,14 @@ Blockly.Arduino['stepper_config'] = function(block) {
   var stepperSpeed = Blockly.Arduino.valueToCode(block, 'STEPPER_SPEED',
       Blockly.Arduino.ORDER_ATOMIC) || '90';
 
+  Blockly.Arduino.definitions_['define_stepper'] = '#include <Stepper.h>\n';
+
+  var setupCode = stepperName + '.setSpeed(' + stepperSpeed + ');';
+  Blockly.Arduino.addSetup('stepper_' + stepperName, setupCode, true);
+
   var globalCode = 'Stepper ' + stepperName + '(' + stepperSteps + ', ' +
       pin1 + ', ' + pin2 + ');';
-  var setupCode = stepperName + '.setSpeed(' + stepperSpeed + ');';
-
-  // Maintain the setup regardless of pin conflict, warning should be enough
-  Blockly.Arduino.definitions_['define_stepper'] = '#include <Stepper.h>\n';
   Blockly.Arduino.definitions_['global_stepper_' + stepperName] = globalCode;
-  Blockly.Arduino.setups_['setup_stepper_' + stepperName] = setupCode;
 
   // If the IO has been configured already set a block warning for the user
   var warningText = '';

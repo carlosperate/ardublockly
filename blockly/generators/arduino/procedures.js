@@ -148,9 +148,9 @@ Blockly.Arduino['arduino_functions'] = function(block) {
 
   var setupBranch = Blockly.Arduino.statementToCode(block, 'SETUP_FUNC');
   // Remove first spacers as they will be added again in "addSetup()"
-  setupBranch = setupBranch.substring(2);
-  var setupcode = Blockly.Arduino.scrub_(block, setupBranch);
-  Blockly.Arduino.addSetup('userSetupCode', setupcode, true);
+  //setupBranch = setupBranch.substring(2);
+  var setupCode = Blockly.Arduino.scrub_(block, setupBranch);
+  Blockly.Arduino.addSetup('userSetupCode', setupCode, true);
 
   var loopBranch = statementToCodeNoTab(block, 'LOOP_FUNC');
   var loopcode = Blockly.Arduino.scrub_(block, loopBranch);

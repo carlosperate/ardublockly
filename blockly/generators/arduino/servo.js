@@ -18,29 +18,34 @@ goog.require('Blockly.Arduino');
 /**
  * Code generator to set an angle (Y) value to a servo PWM pin (X).
  * Arduino code: #include <Servo.h>
- *               Servo myServo_X;
- *               setup { myServo_X.attach(X); }
- *               loop  { myServo_X.write(Y);  } 
+ *               Servo myServoX;
+ *               setup { myServoX.attach(X); }
+ *               loop  { myServoX.write(Y);  }
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {string} Completed code.
  */
 Blockly.Arduino['servo_write'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
   var pinType = Blockly.Arduino.Boards.pinTypes.SERVO;
-  var servoAngle = Blockly.Arduino.valueToCode(block, 'SERVO_ANGLE', Blockly.Arduino.ORDER_ATOMIC) || '90';
+  var servoAngle = Blockly.Arduino.valueToCode(
+      block, 'SERVO_ANGLE', Blockly.Arduino.ORDER_ATOMIC) || '90';
 
-  var servoName = 'myServo_' + pinKey;
+  var servoName = 'myServo' + pinKey;
   var code = servoName + '.write(' + servoAngle + ');\n';
 
   // Maintain the setup regardless of pin conflict, warning should be enough
   Blockly.Arduino.definitions_['define_servo'] = '#include <Servo.h>\n';
-  Blockly.Arduino.definitions_['global_servo_' + pinKey] = 'Servo ' + servoName + ';';
-  Blockly.Arduino.setups_['setup_servo_' + pinKey] = servoName + '.attach(' + pinKey + ');';
+  Blockly.Arduino.definitions_['global_servo_' + pinKey] =
+      'Servo ' + servoName + ';';
+
+  var setupCode = servoName + '.attach(' + pinKey + ');'
+  Blockly.Arduino.addSetup('servo_' + pinKey, setupCode, true);
 
   // If the IO has been configured already set a block warning for the user
   if (pinKey in Blockly.Arduino.pins_) {
      if (Blockly.Arduino.pins_[pinKey] != pinType) {
-       block.setWarningText('Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
+       block.setWarningText(
+          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
      } else {
        block.setWarningText(null);
      }
@@ -56,9 +61,9 @@ Blockly.Arduino['servo_write'] = function(block) {
 /**
  * Code generator to read an angle value from a servo PWM pin (X).
  * Arduino code: #include <Servo.h>
- *               Servo myServo_X;
- *               setup { myServo_X.attach(X); }
- *               loop  { myServo_X.read();    }
+ *               Servo myServoX;
+ *               setup { myServoX.attach(X); }
+ *               loop  { myServoX.read();    }
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
@@ -66,18 +71,22 @@ Blockly.Arduino['servo_read'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
   var pinType = Blockly.Arduino.Boards.pinTypes.SERVO;
 
-  var servoName = 'myServo_' + pinKey;
+  var servoName = 'myServo' + pinKey;
   var code = servoName + '.read()';
 
   // Maintain the setup regardless of pin conflict, warning should be enough
   Blockly.Arduino.definitions_['define_servo'] = '#include <Servo.h>\n';
-  Blockly.Arduino.definitions_['global_servo_' + pinKey] = 'Servo ' + servoName + ';';
-  Blockly.Arduino.setups_['setup_servo_' + pinKey] = servoName + '.attach(' + pinKey + ');';
+  Blockly.Arduino.definitions_['global_servo_' + pinKey] =
+      'Servo ' + servoName + ';';
+
+  var setupCode = servoName + '.attach(' + pinKey + ');';
+  Blockly.Arduino.addSetup('servo_' + pinKey, setupCode, true);
 
   // If the IO has been configured already set a block warning for the user
   if (pinKey in Blockly.Arduino.pins_) {
      if (Blockly.Arduino.pins_[pinKey] != pinType) {
-       block.setWarningText('Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
+       block.setWarningText(
+          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
      } else {
        block.setWarningText(null);
      }
