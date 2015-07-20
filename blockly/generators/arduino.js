@@ -128,8 +128,7 @@ Blockly.Arduino.init = function(workspace) {
         Blockly.Arduino.getArduinoType_(variableTypes[varName]) + ' ' +
         varName + ';');
   }
-  Blockly.Arduino.definitions_['variables'] =
-      variableDeclarations.join('\n') + '\n';
+  Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n');
 };
 
 /**
@@ -138,20 +137,19 @@ Blockly.Arduino.init = function(workspace) {
  * @return {string} Completed code.
  */
 Blockly.Arduino.finish = function(code) {
-  // Indent every line.
-  //TODO: revise regexs
-  code = '  ' + code.replace(/\n/g, '\n  ');
-  code = code.replace(/\n\s+$/, '\n');
-  code = 'void loop() {\n' + code + '\n}';
-
-  // Convert the includes, definitions, functions, and setup dicts into lists
-  var includes = [], definitions = [], functions = [], setups = [];
-  var userSetupCode= '';
+  // Convert the includes, definitions, and functions dictionaries into lists
+  var includes = [], definitions = [], functions = [];
   for (var name in Blockly.Arduino.includes_) {
     includes.push(Blockly.Arduino.includes_[name]);
   }
+  if (includes.length) {
+    includes.push('\n');
+  }
   for (var name in Blockly.Arduino.definitions_) {
     definitions.push(Blockly.Arduino.definitions_[name]);
+  }
+  if (definitions.length) {
+    definitions.push('\n');
   }
   for (var name in Blockly.Arduino.codeFunctions_) {
     functions.push(Blockly.Arduino.codeFunctions_[name]);
@@ -159,7 +157,12 @@ Blockly.Arduino.finish = function(code) {
   for (var name in Blockly.Arduino.userFunctions_) {
     functions.push(Blockly.Arduino.userFunctions_[name]);
   }
-  // userSetupCode is added at the end of the setup function
+  if (functions.length) {
+    functions.push('\n');
+  }
+
+  // userSetupCode added at the end of the setup function without leading spaces
+  var setups = [''], userSetupCode= '';
   if (Blockly.Arduino.setups_['userSetupCode'] !== undefined) {
     userSetupCode = '\n' + Blockly.Arduino.setups_['userSetupCode'];
     delete Blockly.Arduino.setups_['userSetupCode'];
@@ -167,11 +170,15 @@ Blockly.Arduino.finish = function(code) {
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
+  if (userSetupCode) {
+    setups.push(userSetupCode);
+  }
 
-  var allDefs = includes.join('\n') + '\n\n' + definitions.join('\n') + '\n\n' +
-                functions.join('\n\n') + '\n\nvoid setup() {\n  ' +
-                setups.join('\n  ') + '\n' + userSetupCode + '}';
-  return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
+  var allDefs = includes.join('\n') + definitions.join('\n') +
+                functions.join('\n\n');
+  var setup = 'void setup() {' + setups.join('\n  ') + '\n}\n\n';
+  var loop = 'void loop() {\n  ' + code.replace(/\n/g, '\n  ') + '\n}';
+  return allDefs + setup + loop;
 };
 
 /**

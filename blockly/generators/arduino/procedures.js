@@ -57,7 +57,7 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
 
   // Construct code
   var code = returnType + ' ' + funcName + '(' + args.join(', ') + ') {\n' +
-      branch + returnValue + '}\n';
+      branch + returnValue + '}';
   code = Blockly.Arduino.scrub_(block, code);
   Blockly.Arduino.userFunctions_[funcName] = code;
   return null;
@@ -147,12 +147,12 @@ Blockly.Arduino['arduino_functions'] = function(block) {
   }
 
   var setupBranch = Blockly.Arduino.statementToCode(block, 'SETUP_FUNC');
-  // Remove first spacers as they will be added again in "addSetup()"
-  //setupBranch = setupBranch.substring(2);
-  var setupCode = Blockly.Arduino.scrub_(block, setupBranch);
-  Blockly.Arduino.addSetup('userSetupCode', setupCode, true);
+  //var setupCode = Blockly.Arduino.scrub_(block, setupBranch); No comment block
+  if (setupBranch) {
+    Blockly.Arduino.addSetup('userSetupCode', setupBranch, true);
+  }
 
   var loopBranch = statementToCodeNoTab(block, 'LOOP_FUNC');
-  var loopcode = Blockly.Arduino.scrub_(block, loopBranch);
-  return loopcode;
+  //var loopcode = Blockly.Arduino.scrub_(block, loopBranch); No comment block
+  return loopBranch;
 };
