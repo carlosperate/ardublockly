@@ -21,30 +21,17 @@ goog.require('Blockly.Arduino');
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_digitalwrite'] = function(block) {
-  var pinKey = block.getFieldValue('PIN');
-  var pinType = Blockly.Arduino.Boards.pinTypes.OUTPUT;
-  var stateInput = Blockly.Arduino.valueToCode(
+  var pin = block.getFieldValue('PIN');
+  var stateOutput = Blockly.Arduino.valueToCode(
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
-  var setUpKey = 'setup_io_' + pinKey;
-  var pinMode = 'pinMode(' + pinKey + ', OUTPUT);';
-  var code = 'digitalWrite(' + pinKey + ',' + stateInput + ');\n'
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.Boards.pinTypes.OUTPUT, 'Digital Write');
 
-  // If the IO has been configured already temporarily change it and restore it
-  if (pinKey in Blockly.Arduino.pins_) {
-    if (Blockly.Arduino.pins_[pinKey] != pinType) {
-      block.setWarningText(
-          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
-    } else {
-      block.setWarningText(null);
-    }
-  } else {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pinKey] = pinType;
-    Blockly.Arduino.setups_[setUpKey] = pinMode;
-    block.setWarningText(null);
-  }
+  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
+  var code = 'digitalWrite(' + pin + ',' + stateOutput + ');\n';
   return code;
 };
 
@@ -56,28 +43,14 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['io_digitalread'] = function(block) {
-  var pinKey = block.getFieldValue('PIN');
-  var pinType = Blockly.Arduino.Boards.pinTypes.INPUT;
+  var pin = block.getFieldValue('PIN');
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.Boards.pinTypes.INPUT, 'Digital Read');
 
-  var setUpKey = 'setup_io_' + pinKey;
-  var pinMode = 'pinMode(' + pinKey + ', INPUT);';
-  var code = 'digitalRead(' + pinKey + ')';
+  var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  // If the IO has been configured already temporarily change it and restore it
-  if (pinKey in Blockly.Arduino.pins_) {
-    if (Blockly.Arduino.pins_[pinKey] != pinType) {
-      block.setWarningText(
-          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
-    } else {
-      block.setWarningText(null);
-    }
-  } else {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pinKey] = pinType;
-    Blockly.Arduino.setups_[setUpKey] = pinMode;
-    block.setWarningText(null);
-  }
-
+  var code = 'digitalRead(' + pin + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -89,31 +62,17 @@ Blockly.Arduino['io_digitalread'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_builtin_led'] = function(block) {
-  var pinKey = block.getFieldValue('BUILT_IN_LED');
-  var pinType = Blockly.Arduino.Boards.pinTypes.OUTPUT;
-  var stateInput = Blockly.Arduino.valueToCode(
+  var pin = block.getFieldValue('BUILT_IN_LED');
+  var stateOutput = Blockly.Arduino.valueToCode(
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
-  var setUpKey = 'setup_io_' + pinKey;
-  var pinMode = 'pinMode(' + pinKey + ', ' + pinType + ');';
-  var code = 'digitalWrite(' + pinKey + ',' + stateInput + ');\n'
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.Boards.pinTypes.OUTPUT, 'Set LED');
 
-  // If the IO has been configured already temporarily change it and restore it
-  if (pinKey in Blockly.Arduino.pins_) {
-    if (Blockly.Arduino.pins_[pinKey] != pinType) {
-      block.setWarningText(
-          'Pin ' + pinKey + ' already used as ' +
-           Blockly.Arduino.pins_[pinKey]);
-    } else {
-      block.setWarningText(null);
-    }
-  } else {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pinKey] = pinType;
-    Blockly.Arduino.setups_[setUpKey] = pinMode;
-    block.setWarningText(null);
-  }
+  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
+  var code = 'digitalWrite(' + pin + ',' + stateOutput + ');\n';
   return code;
 };
 
@@ -125,30 +84,17 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_analogwrite'] = function(block) {
-  var pinKey = block.getFieldValue('PIN');
-  var pinType = Blockly.Arduino.Boards.pinTypes.OUTPUT;
-  var value_num = Blockly.Arduino.valueToCode(
+  var pin = block.getFieldValue('PIN');
+  var stateOutput = Blockly.Arduino.valueToCode(
       block, 'NUM', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
-  var setUpKey = 'setup_io_' + pinKey;
-  var pinMode = 'pinMode(' + pinKey + ', OUTPUT);';
-  var code = 'analogWrite(' + pinKey + ',' + value_num + ');\n'
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.Boards.pinTypes.OUTPUT, 'Analogue Write');
 
-  // If the IO has been configured already temporarily change it and restore it
-  if (pinKey in Blockly.Arduino.pins_) {
-    if (Blockly.Arduino.pins_[pinKey] != pinType) {
-      block.setWarningText(
-          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
-    } else {
-      block.setWarningText(null);
-    }
-  } else {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pinKey] = pinType;
-    Blockly.Arduino.setups_[setUpKey] = pinMode;
-    block.setWarningText(null);
-  }
+  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
+  var code = 'analogWrite(' + pin + ',' + stateOutput + ');\n';
   return code;
 };
 
@@ -160,31 +106,16 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['io_analogread'] = function(block) {
-  var pinKey = block.getFieldValue('PIN');
-  var pinType = Blockly.Arduino.Boards.pinTypes.INPUT;
+  var pin = block.getFieldValue('PIN');
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.Boards.pinTypes.INPUT, 'Analogue Read');
 
-  var setUpKey = 'setup_io_' + pinKey;
-  var pinMode = 'pinMode(' + pinKey + ', ' + pinType + ');';
-  var code = 'analogRead(' + pinKey + ')';
-  
-  // If the IO has been configured already temporarily change it and restore it
-  if (pinKey in Blockly.Arduino.pins_) {
-    if (Blockly.Arduino.pins_[pinKey] != pinType) {
-      block.setWarningText(
-          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
-    } else {
-      block.setWarningText(null);
-    }
-  } else {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pinKey] = pinType;
-    Blockly.Arduino.setups_[setUpKey] = pinMode;
-    block.setWarningText(null);
-  }
+  var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
+  var code = 'analogRead(' + pin + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
-
 
 /**
  * Value for defining a digital pin state.
@@ -193,7 +124,6 @@ Blockly.Arduino['io_analogread'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['io_highlow'] = function(block) {
-  // Boolean values HIGH and LOW.
-  var code = (block.getFieldValue('STATE') == 'HIGH') ? 'HIGH' : 'LOW';
+  var code = block.getFieldValue('STATE');
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
