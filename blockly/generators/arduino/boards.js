@@ -43,23 +43,6 @@ Blockly.Arduino.Boards.generateAnalogIo = function(pinStart, pinEnd) {
   return analogIo;
 };
 
-/**
- * A list of types tasks that the pins can be assigned. This is used to keep
- * track of which pins have been assigned and be able to warn the user if the
- * same pin has been assigned more than one different task
- */
-Blockly.Arduino.Boards.pinTypes = {
-  INPUT: 'INPUT',
-  OUTPUT: 'OUTPUT',
-  PWM: 'PWM',
-  SERVO: 'SERVO',
-  STEPPER: 'STEPPER',
-  SERIAL: 'SERIAL',
-  I2C: 'I2C/TWI',
-  SPI: 'SPI'
-};
-
-
 /** Arduino Uno board profile. */
 Blockly.Arduino.Boards.uno = {
   name: 'Arduino Uno',

@@ -26,7 +26,7 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
   Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.Boards.pinTypes.OUTPUT, 'Digital Write');
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
 
   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
@@ -45,7 +45,7 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
 Blockly.Arduino['io_digitalread'] = function(block) {
   var pin = block.getFieldValue('PIN');
   Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.Boards.pinTypes.INPUT, 'Digital Read');
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
 
   var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
@@ -67,7 +67,7 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
   Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.Boards.pinTypes.OUTPUT, 'Set LED');
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');
 
   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
@@ -89,7 +89,7 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
       block, 'NUM', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
   Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.Boards.pinTypes.OUTPUT, 'Analogue Write');
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Analogue Write');
 
   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
@@ -108,7 +108,7 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
 Blockly.Arduino['io_analogread'] = function(block) {
   var pin = block.getFieldValue('PIN');
   Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.Boards.pinTypes.INPUT, 'Analogue Read');
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Analogue Read');
 
   var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);

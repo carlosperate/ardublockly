@@ -68,14 +68,14 @@ Blockly.Arduino['spi_transfer'] = function(block) {
   for (var i = 0; i < Blockly.Arduino.Boards.selected.spiPins.length; i++) {
     Blockly.Arduino.reservePin(block,
         Blockly.Arduino.Boards.selected.spiPins[i][1],
-        Blockly.Arduino.Boards.pinTypes.SPI,
+        Blockly.Arduino.PinTypes.SPI,
         'SPI ' + Blockly.Arduino.Boards.selected.spiPins[i][0]);
   }
 
   // Configure the Slave Select as a normal output if a pin is used
   if (spiSs !== 'none') {
     Blockly.Arduino.reservePin(
-        block, spiSs, Blockly.Arduino.Boards.pinTypes.OUTPUT, 'SPI Slave pin');
+        block, spiSs, Blockly.Arduino.PinTypes.OUTPUT, 'SPI Slave pin');
     var setupCode = 'pinMode(' + spiSs + ', OUTPUT);';
     Blockly.Arduino.addSetup('io_' + spiSs, setupCode, false);
   } // else means the SS pin is always set for the device

@@ -26,44 +26,24 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['stepper_config'] = function(block) {
   var pin1 = block.getFieldValue('STEPPER_PIN1');
   var pin2 = block.getFieldValue('STEPPER_PIN2');
-  var pinType = Blockly.Arduino.Boards.pinTypes.STEPPER;
+  var pinType = Blockly.Arduino.PinTypes.STEPPER;
   var stepperName = block.getStepperSetupInstance();
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '360';
   var stepperSpeed = Blockly.Arduino.valueToCode(block, 'STEPPER_SPEED',
       Blockly.Arduino.ORDER_ATOMIC) || '90';
 
-  Blockly.Arduino.definitions_['define_stepper'] = '#include <Stepper.h>\n';
+  Blockly.Arduino.reservePin(block, pin1, pinType, 'Stepper');
+  Blockly.Arduino.reservePin(block, pin2, pinType, 'Stepper');
 
-  var setupCode = stepperName + '.setSpeed(' + stepperSpeed + ');';
-  Blockly.Arduino.addSetup('stepper_' + stepperName, setupCode, true);
+  Blockly.Arduino.definitions_['define_stepper'] = '#include <Stepper.h>\n';
 
   var globalCode = 'Stepper ' + stepperName + '(' + stepperSteps + ', ' +
       pin1 + ', ' + pin2 + ');';
   Blockly.Arduino.definitions_['global_stepper_' + stepperName] = globalCode;
 
-  // If the IO has been configured already set a block warning for the user
-  var warningText = '';
-  if (pin1 in Blockly.Arduino.pins_) {
-    if (Blockly.Arduino.pins_[pin1] != pinType) {
-      warningText = 'Pin ' + pin1 + ' already used as ' +
-          Blockly.Arduino.pins_[pin1] + '. ';
-    }
-  }
-  if (pin2 in Blockly.Arduino.pins_) {
-    if (Blockly.Arduino.pins_[pin2] != pinType) {
-      warningText = warningText + 'Pin ' + pin2 + ' already used as ' +
-          Blockly.Arduino.pins_[pin2] + '. ';
-    }
-  }
-  if (warningText === '') {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pin1] = pinType;
-    Blockly.Arduino.pins_[pin2] = pinType;
-    block.setWarningText(null);
-  } else {
-    block.setWarningText(warningText);
-  }
+  var setupCode = stepperName + '.setSpeed(' + stepperSpeed + ');';
+  Blockly.Arduino.addSetup('stepper_' + stepperName, setupCode, true);
 
   return '';
 };

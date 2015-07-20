@@ -26,35 +26,20 @@ goog.require('Blockly.Arduino');
  */
 Blockly.Arduino['servo_write'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
-  var pinType = Blockly.Arduino.Boards.pinTypes.SERVO;
   var servoAngle = Blockly.Arduino.valueToCode(
       block, 'SERVO_ANGLE', Blockly.Arduino.ORDER_ATOMIC) || '90';
-
   var servoName = 'myServo' + pinKey;
-  var code = servoName + '.write(' + servoAngle + ');\n';
 
-  // Maintain the setup regardless of pin conflict, warning should be enough
+  Blockly.Arduino.reservePin(
+      block, pinKey, Blockly.Arduino.PinTypes.SERVO, 'Servo Write');
   Blockly.Arduino.definitions_['define_servo'] = '#include <Servo.h>\n';
   Blockly.Arduino.definitions_['global_servo_' + pinKey] =
       'Servo ' + servoName + ';';
 
-  var setupCode = servoName + '.attach(' + pinKey + ');'
+  var setupCode = servoName + '.attach(' + pinKey + ');';
   Blockly.Arduino.addSetup('servo_' + pinKey, setupCode, true);
 
-  // If the IO has been configured already set a block warning for the user
-  if (pinKey in Blockly.Arduino.pins_) {
-     if (Blockly.Arduino.pins_[pinKey] != pinType) {
-       block.setWarningText(
-          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
-     } else {
-       block.setWarningText(null);
-     }
-  } else {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pinKey] = pinType;
-    block.setWarningText(null);
-  }
-
+  var code = servoName + '.write(' + servoAngle + ');\n';
   return code;
 };
 
@@ -69,12 +54,10 @@ Blockly.Arduino['servo_write'] = function(block) {
  */
 Blockly.Arduino['servo_read'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
-  var pinType = Blockly.Arduino.Boards.pinTypes.SERVO;
-
   var servoName = 'myServo' + pinKey;
-  var code = servoName + '.read()';
 
-  // Maintain the setup regardless of pin conflict, warning should be enough
+  Blockly.Arduino.reservePin(
+      block, pinKey, Blockly.Arduino.PinTypes.SERVO, 'Servo Read');
   Blockly.Arduino.definitions_['define_servo'] = '#include <Servo.h>\n';
   Blockly.Arduino.definitions_['global_servo_' + pinKey] =
       'Servo ' + servoName + ';';
@@ -82,19 +65,6 @@ Blockly.Arduino['servo_read'] = function(block) {
   var setupCode = servoName + '.attach(' + pinKey + ');';
   Blockly.Arduino.addSetup('servo_' + pinKey, setupCode, true);
 
-  // If the IO has been configured already set a block warning for the user
-  if (pinKey in Blockly.Arduino.pins_) {
-     if (Blockly.Arduino.pins_[pinKey] != pinType) {
-       block.setWarningText(
-          'Pin already used as ' + Blockly.Arduino.pins_[pinKey]);
-     } else {
-       block.setWarningText(null);
-     }
-  } else {
-    // First time this IO pin is used, so configure it
-    Blockly.Arduino.pins_[pinKey] = pinType;
-    block.setWarningText(null);
-  }
-
+  var code = servoName + '.read()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

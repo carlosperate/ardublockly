@@ -58,7 +58,20 @@ Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
 Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
 
-
+/**
+ * A list of types tasks that the pins can be assigned. Used to track usage and
+ * warn if the same pin has been assigned to more than one task.
+ */
+Blockly.Arduino.PinTypes = {
+  INPUT: 'INPUT',
+  OUTPUT: 'OUTPUT',
+  PWM: 'PWM',
+  SERVO: 'SERVO',
+  STEPPER: 'STEPPER',
+  SERIAL: 'SERIAL',
+  I2C: 'I2C/TWI',
+  SPI: 'SPI'
+};
 
 /**
  * Arduino generator short name for
@@ -174,12 +187,12 @@ Blockly.Arduino.finish = function(code) {
 /**
  * Adds a string of "include" code to be added to the sketch.
  * Once a include is added it will not get overwritten with new code.
- * @param {!string} includetag Identifier for this include code.
- * @param {!string} code Code to be included in the setup() function.
+ * @param {!string} includeTag Identifier for this include code.
+ * @param {!string} code Code to be included at the very top of the sketch.
  */
-Blockly.Arduino.addInclude = function(includetag, code) {
-  if (Blockly.Arduino.includes_[includetag] === undefined) {
-    Blockly.Arduino.includes_[includetag] = code;
+Blockly.Arduino.addInclude = function(includeTag, code) {
+  if (Blockly.Arduino.includes_[includeTag] === undefined) {
+    Blockly.Arduino.includes_[includeTag] = code;
   }
 };
 
