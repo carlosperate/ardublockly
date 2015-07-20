@@ -144,23 +144,14 @@ Blockly.Arduino.finish = function(code) {
   code = code.replace(/\n\s+$/, '\n');
   code = 'void loop() {\n' + code + '\n}';
 
-  // Convert the definitions dictionary into a list
-  // TODO: remove regex expression once all includes are moved to their own dict
-  var imports = [];
-  var definitions = [];
-  for (var name in Blockly.Arduino.definitions_) {
-    var def = Blockly.Arduino.definitions_[name];
-    if (def.match(/^#include/)) {
-      imports.push(def);
-    } else {
-      definitions.push(def);
-    }
-  }
-
-  // Convert the includes, functions, and setup dictionaries into lists
-  var includes = [], functions = [], setups = [], userSetupCode= '';
+  // Convert the includes, definitions, functions, and setup dicts into lists
+  var includes = [], definitions = [], functions = [], setups = [];
+  var userSetupCode= '';
   for (var name in Blockly.Arduino.includes_) {
     includes.push(Blockly.Arduino.includes_[name]);
+  }
+  for (var name in Blockly.Arduino.definitions_) {
+    definitions.push(Blockly.Arduino.definitions_[name]);
   }
   for (var name in Blockly.Arduino.codeFunctions_) {
     functions.push(Blockly.Arduino.codeFunctions_[name]);
@@ -177,10 +168,9 @@ Blockly.Arduino.finish = function(code) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
 
-  var allDefs = includes.join('\n') + '\n' + imports.join('\n') + '\n' +
-      definitions.join('\n') + '\n\n' + functions.join('\n\n') +
-      '\n\nvoid setup() {\n  ' + setups.join('\n  ') + '\n' + userSetupCode +
-      '}';
+  var allDefs = includes.join('\n') + '\n\n' + definitions.join('\n') + '\n\n' +
+                functions.join('\n\n') + '\n\nvoid setup() {\n  ' +
+                setups.join('\n  ') + '\n' + userSetupCode + '}';
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
 
@@ -193,6 +183,18 @@ Blockly.Arduino.finish = function(code) {
 Blockly.Arduino.addInclude = function(includeTag, code) {
   if (Blockly.Arduino.includes_[includeTag] === undefined) {
     Blockly.Arduino.includes_[includeTag] = code;
+  }
+};
+
+/**
+ * Adds a string of code to be declared globally to the sketch.
+ * Once it is added it will not get overwritten with new code.
+ * @param {!string} declarationTag Identifier for this declaration code.
+ * @param {!string} code Code to be added below the includes.
+ */
+Blockly.Arduino.addDeclaration = function(declarationTag, code) {
+  if (Blockly.Arduino.definitions_[declarationTag] === undefined) {
+    Blockly.Arduino.definitions_[declarationTag] = code;
   }
 };
 

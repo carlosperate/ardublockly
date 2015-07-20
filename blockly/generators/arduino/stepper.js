@@ -36,11 +36,11 @@ Blockly.Arduino['stepper_config'] = function(block) {
   Blockly.Arduino.reservePin(block, pin1, pinType, 'Stepper');
   Blockly.Arduino.reservePin(block, pin2, pinType, 'Stepper');
 
-  Blockly.Arduino.definitions_['define_stepper'] = '#include <Stepper.h>\n';
+  Blockly.Arduino.addInclude('stepper', '#include <Stepper.h>');
 
   var globalCode = 'Stepper ' + stepperName + '(' + stepperSteps + ', ' +
       pin1 + ', ' + pin2 + ');';
-  Blockly.Arduino.definitions_['global_stepper_' + stepperName] = globalCode;
+  Blockly.Arduino.addDeclaration('stepper_' + stepperName, globalCode);
 
   var setupCode = stepperName + '.setSpeed(' + stepperSpeed + ');';
   Blockly.Arduino.addSetup('stepper_' + stepperName, setupCode, true);
