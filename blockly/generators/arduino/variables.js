@@ -50,6 +50,6 @@ Blockly.Arduino['variables_set_type'] = function(block) {
   var varType = Blockly.Arduino.getArduinoType_(
       Blockly.StaticTyping.blocklyType[block.getFieldValue(
           'VARIABLE_SETTYPE_TYPE')]);
-  var code =  '(' + varType + ')(' + argument0 + ')';
+  var code = '(' + varType + ')(' + argument0 + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

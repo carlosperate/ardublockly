@@ -214,7 +214,7 @@ Blockly.Arduino['math_number_property'] = function(block) {
       break;
     case 'WHOLE':
       Blockly.Arduino.addInclude('math', '#include <math.h>');
-      code = '(floor(' + number_to_check + ') == ' + number_to_check +')';
+      code = '(floor(' + number_to_check + ') == ' + number_to_check + ')';
       break;
     case 'POSITIVE':
       code = number_to_check + ' > 0';

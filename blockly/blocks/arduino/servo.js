@@ -15,7 +15,8 @@ goog.provide('Blockly.Blocks.Arduino.servo');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.Arduino.servo.HUE = 50;
+/** Common HSV hue for all blocks in this category. */
+Blockly.Blocks.Arduino.servo.HUE = 60;
 
 Blockly.Blocks['servo_write'] = {
   /**
@@ -41,7 +42,10 @@ Blockly.Blocks['servo_write'] = {
     this.setNextStatement(true, null);
     this.setTooltip('Set a Servo to an specified angle');
   },
-  /** Updates the content of the the pin related fields. */
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
   updateFields: function() {
     Blockly.Arduino.Boards.refreshBlockFieldDropdown(
         this, 'SERVO_PIN', 'pwmPins');
@@ -63,13 +67,14 @@ Blockly.Blocks['servo_read'] = {
     this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
     this.setTooltip('Read a Servo angle');
   },
-  /**
-   * Retrieves the type of the block, in this case an integer.
-   */
+  /** @return {string} The type of return value for the block, an integer. */
   getType: function() {
     return Blockly.StaticTyping.blocklyType.INTEGER;
   },
-  /** Updates the content of the the pin related fields. */
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
   updateFields: function() {
     Blockly.Arduino.Boards.refreshBlockFieldDropdown(
         this, 'SERVO_PIN', 'pwmPins');

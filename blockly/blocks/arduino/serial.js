@@ -46,9 +46,12 @@ Blockly.Blocks['serial_setup'] = {
    * @this Blockly.Block
    */
   getSerialSetupInstance: function() {
-    return this.getFieldValue('SERIAL_ID');;
+    return this.getFieldValue('SERIAL_ID');
   },
-  /** Updates the content of the the serial related fields. */
+  /**
+   * Updates the content of the the serial related fields.
+   * @this Blockly.Block
+   */
   updateFields: function() {
     Blockly.Arduino.Boards.refreshBlockFieldDropdown(
         this, 'SERIAL_ID', 'serial');
@@ -72,8 +75,8 @@ Blockly.Blocks['serial_print'] = {
     this.appendValueInput('CONTENT', Blockly.StaticTyping.blocklyType.TEXT)
         .setCheck(Blockly.StaticTyping.blocklyType.TEXT);
     this.appendDummyInput()
-        .appendField(new Blockly.FieldCheckbox("TRUE"), "NEW_LINE")
-        .appendField("add new line");
+        .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE')
+        .appendField('add new line');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -107,13 +110,16 @@ Blockly.Blocks['serial_print'] = {
 
     if (!setupInstancePresent) {
       this.setWarningText(
-          'A setup block for '+ thisInstanceName + ' must be added to the ' +
+          'A setup block for ' + thisInstanceName + ' must be added to the ' +
           'workspace to use this block!', 'serial_setup');
     } else {
       this.setWarningText(null, 'serial_setup');
     }
   },
-  /** Updates the content of the the serial related fields. */
+  /**
+   * Updates the content of the the serial related fields.
+   * @this Blockly.Block
+   */
   updateFields: function() {
     Blockly.Arduino.Boards.refreshBlockFieldDropdown(
         this, 'SERIAL_ID', 'serial');

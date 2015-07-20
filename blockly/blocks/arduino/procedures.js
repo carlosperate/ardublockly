@@ -25,11 +25,11 @@ Blockly.Blocks['arduino_functions'] = {
    */
   init: function() {
     this.appendDummyInput()
-        .appendField("Arduino run once:");
-    this.appendStatementInput("SETUP_FUNC");
+        .appendField('Arduino run once:');
+    this.appendStatementInput('SETUP_FUNC');
     this.appendDummyInput()
-        .appendField("Arduino loop forever:");
-    this.appendStatementInput("LOOP_FUNC");
+        .appendField('Arduino loop forever:');
+    this.appendStatementInput('LOOP_FUNC');
     this.setInputsInline(false);
     this.setColour(Blockly.Blocks.Arduino.procedures.HUE);
     this.setTooltip('Defines the Arduino setup() and loop() functions.');
@@ -40,7 +40,7 @@ Blockly.Blocks['arduino_functions'] = {
     // Remove all options from the original reference (=[] won't work)
     options.splice(0, options.length);
   },
-  /** @return True if the a block instance is present in the workspace */
+  /** @return {!boolean} True if the block instance is in the workspace. */
   getArduinoLoopsInstance: function() {
     return true;
   }

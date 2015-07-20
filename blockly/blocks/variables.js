@@ -91,14 +91,11 @@ Blockly.Blocks['variables_get'] = {
    * Finds the type of the selected variable.
    * @this Blockly.Block
    * @param {Array<string>} existingVars Associative array of variables already
-   *                                     defined. Var names as key and type as
-   *                                     value.
-   * @return {string} String to indicate the type if it has not been defined
-   *                  before.
+   *     defined. Var names as key and type as value.
+   * @return {string} String to indicate the type if not defined before.
    */
   getVarType: function(existingVars) {
     var varName = this.getFieldValue('VAR');
-
     // Check if variable has been defined already add if it has been.
     var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
     if (varType != null) {
@@ -106,10 +103,9 @@ Blockly.Blocks['variables_get'] = {
       this.setWarningText(null);
     } else {
       // This block needs the variable to be define before use, so warn user.
-      this.setWarningText('This variable needs to be set to something before' +
-                          ' it can be used!');
+      this.setWarningText(
+          'This variable needs to be set to something before it can be used!');
     }
-
     return varType;
   },
   /**

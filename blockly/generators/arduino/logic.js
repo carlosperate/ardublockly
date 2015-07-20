@@ -122,7 +122,7 @@ Blockly.Arduino['logic_boolean'] = function(block) {
  */
 Blockly.Arduino['logic_null'] = function(block) {
   var code = 'NULL';
-  return [code ,Blockly.Arduino.ORDER_ATOMIC];
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 /**
@@ -138,6 +138,6 @@ Blockly.Arduino['logic_ternary'] = function(block) {
       Blockly.Arduino.ORDER_CONDITIONAL) || 'null';
   var valueElse = Blockly.Arduino.valueToCode(block, 'ELSE',
       Blockly.Arduino.ORDER_CONDITIONAL) || 'null';
-  var code = valueIf + ' ? ' + valueThen + ' : ' + valueElse
+  var code = valueIf + ' ? ' + valueThen + ' : ' + valueElse;
   return [code, Blockly.Arduino.ORDER_CONDITIONAL];
 };
