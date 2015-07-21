@@ -13,7 +13,8 @@ goog.provide('Blockly.Blocks.Arduino.time');
 goog.require('Blockly.Arduino');
 
 
-Blockly.Blocks.Arduino.time.HUE = 120;
+/** Common HSV hue for all blocks in this category. */
+Blockly.Blocks.Arduino.time.HUE = 140;
 
 Blockly.Blocks['time_delay'] = {
   /**
@@ -66,15 +67,12 @@ Blockly.Blocks['time_millis'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/Millis');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendDummyInput('')
-        .appendField('elapsed Time (milliseconds)');
+        .appendField('current elapsed Time (milliseconds)');
     this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
     this.setTooltip('Returns the number of milliseconds since the Arduino ' +
                     'board began running the current program.');
   },
-  /**
-   * Retrieves the type of the block, should be a long (32bit), but  for for
-   * now an int.
-   */
+  /** @return {string} The type of return value for the block, an integer. */
   getType: function() {
     return Blockly.StaticTyping.blocklyType.INTEGER;
   }
@@ -89,33 +87,17 @@ Blockly.Blocks['time_micros'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/Micros');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendDummyInput('')
-        .appendField('elapsed Time (microseconds)');
+        .appendField('current elapsed Time (microseconds)');
     this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
     this.setTooltip('Returns the number of microseconds since the Arduino ' +
                     'board began running the current program.');
   },
   /**
-   * Retrieves the type of the block, should be a long (32bit), but  for for
-   * now an int.
+   * Should be a long (32bit), but  for for now an int.
+   * @return {string} The type of return value for the block, an integer.
    */
   getType: function() {
     return Blockly.StaticTyping.blocklyType.INTEGER;
-  }
-};
-
-Blockly.Blocks['infinite_loop'] = {
-  /**
-   * Waits forever, end of program.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.setHelpUrl('');
-    this.setColour(Blockly.Blocks.Arduino.time.HUE);
-    this.appendDummyInput()
-        .appendField('wait forever (end program)');
-    this.setInputsInline(true);
-    this.setPreviousStatement(true);
-    this.setTooltip('Wait indefinitely, stopping the program.');
   }
 };
 
