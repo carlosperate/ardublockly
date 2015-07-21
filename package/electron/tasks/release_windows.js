@@ -96,6 +96,14 @@ var createInstaller = function () {
     ], {
         stdio: 'inherit'
     });
+    nsis.on('error', function (err) {
+        if (err.message === 'spawn makensis ENOENT') {
+            throw "Can't find NSIS. Are you sure you've installed it and"
+                + " added to PATH environment variable?";
+        } else {
+            throw err;
+        }
+    });
     nsis.on('close', function () {
         gulpUtil.log('Installer ready!', releasesDir.path(finalPackageName));
         deferred.resolve();
