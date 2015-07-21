@@ -50,6 +50,8 @@ build: off
 
 # For now a simple test that we know passes
 test_script:
+  - cmd: chcp 65001
+  - cmd: set PYTHONIOENCODING=utf-8
   - cmd: python ardublocklyserver\tests\sketchcreator_test.py
   - cmd: python ardublocklyserver\tests\compilersettings_test.py
 
