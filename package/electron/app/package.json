@@ -11,7 +11,8 @@
     "target": "development"
   },
   "dependencies": {
-    "fs-jetpack": "^0.6.5"
+    "fs-jetpack": "^0.6.5",
+    "winston": "^1.0.1"
   },
   "repository" : {
     "type" : "git",

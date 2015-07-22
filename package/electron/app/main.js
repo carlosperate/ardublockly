@@ -10,8 +10,7 @@
 'use strict';
 
 var app = require('app');
-var shell = require('shell');
-var jetpack = require('fs-jetpack');
+var winston = require('winston');
 var appMenu = require('./appmenu.js');
 var server = require('./servermgr.js');
 var BrowserWindow = require('browser-window');
@@ -22,6 +21,7 @@ var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
 var splashWindow = null;
+var projectJetPath = null;
 
 // Preserver of the window size and position between app launches.
 var mainWindowState = windowStateKeeper('main', {
@@ -30,6 +30,16 @@ var mainWindowState = windowStateKeeper('main', {
 });
 
 app.on('ready', function () {
+    // Finding project path
+    projectJetPath = server.getProjectJetpack();
+
+    // Setting up logging system
+    winston.add(winston.transports.File, {
+        json: false,
+        filename: projectJetPath.path() + '/ardublockly.log',
+        maxsize: 10485760,
+        maxFiles: 2 });
+
     createSplashWindow();
 
     server.startServer();
@@ -69,8 +79,8 @@ app.on('ready', function () {
 
     mainWindow.webContents.on('did-fail-load',
         function (event, errorCode, errorDescription) {
-            console.log('Page failed to load (' + errorCode + '). The server ' +
-                'is probably not yet running. Trying again in 200 ms.');
+            winston.warn('Page failed to load (' + errorCode + '). The ' +
+                'server is probably not yet running. Trying again in 200 ms.');
             setTimeout(function() {
                 mainWindow.webContents.reload();
             }, 200);
@@ -102,7 +112,7 @@ app.on('window-all-closed', function () {
 
 function createSplashWindow() {
     if (splashWindow === null) {
-        var imagePath = 'file://' + server.getProjectJetpack().path(
+        var imagePath = 'file://' + projectJetPath.path(
             'ardublockly', 'img', 'ardublockly_splash.png');
 
         splashWindow = new BrowserWindow({

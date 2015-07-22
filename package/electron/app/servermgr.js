@@ -10,6 +10,7 @@
 
 var os = require('os');
 var dialog = require('dialog');
+var winston = require('winston');
 var jetpack = require('fs-jetpack');
 var childProcess = require('child_process');
 var env = require('./vendor/electron_boilerplate/env_config');
@@ -31,8 +32,8 @@ module.exports.getProjectJetpack = function() {
             var ardublocklyRootDir = jetpack.dir(__dirname);
             var oldArdublocklyRootDir = '';
             while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
-                //console.log(tag + 'Search for Ardublockly project dir: ' +
-                //            ardublocklyRootDir.cwd());
+                //winston.log('info', tag + 'Search for Ardublockly project ' +
+                //            'dir: ' + ardublocklyRootDir.cwd());
                 // Check if /ardublokly/index.html exists within current path
                 if (jetpack.exists(
                         ardublocklyRootDir.path('ardublockly', 'index.html'))) {
@@ -48,7 +49,7 @@ module.exports.getProjectJetpack = function() {
                 ardublocklyNotFound(ardublocklyRootDir.path('.'));
             }
         }
-        console.log(tag + 'Ardublockly root dir: ' + ardublocklyRootDir.cwd());
+        winston.info(tag + 'Ardublockly root dir: ' + ardublocklyRootDir.cwd());
     }
 
     return ardublocklyRootDir;
@@ -56,7 +57,7 @@ module.exports.getProjectJetpack = function() {
 
 function getServerExecLocation() {
     // Relevant OS could be win32, linux, darwin
-    console.log(tag + 'OS detected: ' + process.platform);
+    winston.info(tag + 'OS detected: ' + process.platform);
 
     var ardublocklyProjRootDir = module.exports.getProjectJetpack();
 
@@ -74,7 +75,7 @@ function getServerExecLocation() {
     }
 
     var executableLocation = arduexecDir.path(arduexecFileName);
-    console.log(tag + 'Server executable: ' + executableLocation);
+    winston.info(tag + 'Server executable: ' + executableLocation);
     return executableLocation;
 };
 
@@ -92,24 +93,24 @@ function ardublocklyNotFound(working_dir) {
 module.exports.startServer = function() {
     if (serverProcess === null) {
         var serverExecLocation = getServerExecLocation();
-        console.log(tag + 'Command: ' + serverExecLocation +
-                    ' --findprojectroot --nobrowser');
+        winston.info(tag + 'Command: ' + serverExecLocation +
+                     ' --findprojectroot --nobrowser');
         serverProcess = childProcess.spawn(
                 serverExecLocation, ['--findprojectroot', '--nobrowser']);
 
         // Setting the listeners
         serverProcess.stdout.on('data', function (data) {
-            console.log('[Ardublockly server] ' + data);
+            winston.info('[Ardublockly server] ' + data);
         });
 
         serverProcess.stderr.on('data', function (data) {
-            console.log('[Ardublockly server] ' + data);
+            winston.error('[Ardublockly server] ' + data);
         });
 
         serverProcess.on('close', function (code) {
             if (code !== 0) {
-                console.log('[Ardublockly server] Process exited with code ' +
-                            code);
+                winston.info('[Ardublockly server] Process exited with code ' +
+                             code);
             }
             serverProcess = null;
         });
