@@ -74,6 +74,10 @@ ArdublocklySketch.ino
 # Server App settinsg file generated
 ServerCompilerSettings.ini
 
+# Desktop application log file
+ardublockly.log
+ardublockly2.log
+
 # Anything starting with this is created as a unit/module testing temporal file
 TestTemp_*
 

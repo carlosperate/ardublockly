@@ -190,8 +190,8 @@ Ardublockly.displayToolbox = function(show) {
   var buttonIcon = document.getElementById('button_toggle_toolbox_icon');
 
   // Because firing multiple clicks can confuse the animation, create an overlay
-  // element to stop clicks (due to materialize framework this is better than to
-  // mess with the button event listeners).
+  // element to stop clicks (due to the materialize framework controlling the
+  // event listeners is better to do it this way for easy framework update).
   var elLocation = $('#button_toggle_toolbox').offset();
   jQuery('<div/>', {
       id: 'toolboxButtonScreen',
@@ -257,7 +257,7 @@ Ardublockly.resizeToggleToolboxBotton = function() {
   }
 };
 
-/** Resizes the container for Blockly. */
+/** Resizes the container for the Blockly workspace. */
 Ardublockly.resizeBlocklyWorkspace = function() {
   var contentBlocks = document.getElementById('content_blocks');
   var wrapperPanelSize =
@@ -332,6 +332,13 @@ Ardublockly.arduinoIdeOutput = function(bodyEl) {
   ideOuputContent.innerHTML = '';
   ideOuputContent.appendChild(bodyEl);
   Ardublockly.highlightIdeOutputHeader();
+};
+
+/** Clears the content of the Arduino IDE output element to a default text. */
+Ardublockly.resetIdeOutputContent = function(bodyEl) {
+  var ideOuputContent = document.getElementById('content_ide_output');
+  ideOuputContent.innerHTML = '<span class="arduino_dialog_out">Waiting for ' +
+      'the IDE output...</span>';
 };
 
 /** Hides the side menu button. */

@@ -115,6 +115,7 @@ Ardublockly.ideSendUpload = function() {
     Ardublockly.setIdeSettings(null, 'upload');
   }
   Materialize.toast('Uploading sketch into Arduino...', 4000);
+  Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
 
@@ -126,6 +127,7 @@ Ardublockly.ideSendVerify = function() {
     Ardublockly.setIdeSettings(null, 'verify');
   }
   Materialize.toast('Verifying sketch...', 4000);
+  Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
 
@@ -137,6 +139,7 @@ Ardublockly.ideSendOpen = function() {
     Ardublockly.setIdeSettings(null, 'open');
   }
   Materialize.toast('Opening sketch in the Arduino IDE...', 4000);
+  Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
 
