@@ -27,6 +27,7 @@
 goog.provide('Blockly.Blocks.loops');
 
 goog.require('Blockly.Blocks');
+goog.require('Blockly.StaticTyping');
 
 
 /**
@@ -74,7 +75,7 @@ Blockly.Blocks['controls_repeat_ext'] = {
         {
           "type": "input_value",
           "name": "TIMES",
-          "check": Blockly.StaticTyping.blocklyType.NUMBER
+          "check": Blockly.StaticTyping.BlocklyType.NUMBER
         }
       ],
       "previousStatement": null,
@@ -100,7 +101,7 @@ Blockly.Blocks['controls_whileUntil'] = {
     this.setHelpUrl(Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL);
     this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('BOOL')
-        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
+        .setCheck(Blockly.StaticTyping.BlocklyType.BOOLEAN)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_WHILEUNTIL_INPUT_DO);
@@ -136,19 +137,19 @@ Blockly.Blocks['controls_for'] = {
         {
           "type": "input_value",
           "name": "FROM",
-          "check": Blockly.StaticTyping.blocklyType.NUMBER,
+          "check": Blockly.StaticTyping.BlocklyType.NUMBER,
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "TO",
-          "check": Blockly.StaticTyping.blocklyType.NUMBER,
+          "check": Blockly.StaticTyping.BlocklyType.NUMBER,
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "BY",
-          "check": Blockly.StaticTyping.blocklyType.NUMBER,
+          "check": Blockly.StaticTyping.BlocklyType.NUMBER,
           "align": "RIGHT"
         }
       ],
@@ -206,36 +207,12 @@ Blockly.Blocks['controls_for'] = {
     }
   },
   /**
-   * Finds the type of the variable selected in the drop down. Sets it to an
-   * an integer if it has not been defined before.
-   * @this Blockly.Block
-   * @param {Array<string>} existingVars Associative array of variables already
-   *                                     defined. Variable name as the key,
-   *                                     type as their value.
+   * Defines the type of the variable selected in the drop down, an integer.
    * @return {string} String to indicate the type if it has not been defined
    *                  before.
    */
-  getVarType: function(existingVars) {
-    var varName = this.getFieldValue('VAR');
-
-    // Check if variable has been defined already
-    var varType = Blockly.StaticTyping.findListVarType(varName, existingVars);
-    if (varType != null) {
-      if ((varType != Blockly.StaticTyping.blocklyType.INTEGER) &&
-          (varType != Blockly.StaticTyping.blocklyType.DECIMAL)) {
-        this.setWarningText('This variable type has been previously set to a ' +
-          existingVars[varName] + ' and it needs to be a number!')
-      } else {
-        this.setWarningText(null);
-      }
-    } else {
-      // not defined, so set it to an integer
-      //TODO: The number input could be set to a decirmal, so check input
-      varType = Blockly.StaticTyping.blocklyType.INTEGER;
-      this.setWarningText(null);
-    }
-
-    return varType;
+  getVarType: function(varName) {
+    return Blockly.StaticTyping.BlocklyType.INTEGER;
   }
 };
 
@@ -293,7 +270,11 @@ Blockly.Blocks['controls_forEach'] = {
       this.setFieldValue(newName, 'VAR');
     }
   },
-  customContextMenu: Blockly.Blocks['controls_for'].customContextMenu
+  customContextMenu: Blockly.Blocks['controls_for'].customContextMenu,
+  /** @returns {!string} The type of the variable used in this block */
+  getVarType: function(varName) {
+    return Blockly.StaticTyping.BlocklyType.INTEGER;
+  }
 };
 
 Blockly.Blocks['controls_flow_statements'] = {

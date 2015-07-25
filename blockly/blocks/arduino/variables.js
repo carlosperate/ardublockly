@@ -13,6 +13,7 @@
 goog.provide('Blockly.Blocks.Arduino.variables');
 
 goog.require('Blockly.Arduino');
+goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
@@ -30,7 +31,7 @@ Blockly.Blocks['variables_set_type'] = {
     this.appendDummyInput('')
         .appendField('as')
         .appendField(new Blockly.FieldDropdown(
-                         Blockly.StaticTyping.blocklySafeTypeArray()),
+                         Blockly.StaticTyping.blocklyValidTypeArray()),
                      'VARIABLE_SETTYPE_TYPE');
     this.setInputsInline(true);
     this.setOutput(true);
@@ -41,8 +42,8 @@ Blockly.Blocks['variables_set_type'] = {
    * @return {!string} Blockly type for this block configuration.
    * @this Blockly.Block
    */
-  getType: function() {
+  getBlockType: function() {
     var blocklyTypeKey = this.getFieldValue('VARIABLE_SETTYPE_TYPE');
-    return Blockly.StaticTyping.blocklyType[blocklyTypeKey];
+    return Blockly.StaticTyping.BlocklyType[blocklyTypeKey];
   }
 };

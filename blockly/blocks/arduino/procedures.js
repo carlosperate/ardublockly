@@ -34,11 +34,7 @@ Blockly.Blocks['arduino_functions'] = {
     this.setColour(Blockly.Blocks.Arduino.procedures.HUE);
     this.setTooltip('Defines the Arduino setup() and loop() functions.');
     this.setHelpUrl('https://arduino.cc/en/Reference/Loop');
-  },
-  /** Removes all the option to disable the block context menu */
-  customContextMenu: function(options) {
-    // Remove all options from the original reference (=[] won't work)
-    options.splice(0, options.length);
+    this.contextMenu = false;
   },
   /** @return {!boolean} True if the block instance is in the workspace. */
   getArduinoLoopsInstance: function() {

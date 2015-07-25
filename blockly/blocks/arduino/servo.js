@@ -13,6 +13,7 @@
 goog.provide('Blockly.Blocks.Arduino.servo');
 
 goog.require('Blockly.Arduino');
+goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
@@ -32,8 +33,8 @@ Blockly.Blocks['servo_write'] = {
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
     this.setInputsInline(false);
     this.appendValueInput(
-        'SERVO_ANGLE', Blockly.StaticTyping.blocklyType.NUMBER)
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
+        'SERVO_ANGLE', Blockly.StaticTyping.BlocklyType.NUMBER)
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
         .appendField('to');
     this.appendDummyInput('')
         .appendField('Degrees (0-180)');
@@ -64,12 +65,12 @@ Blockly.Blocks['servo_read'] = {
         .appendField('Read SERVO from PIN#')
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
-    this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
     this.setTooltip('Read a Servo angle');
   },
   /** @return {string} The type of return value for the block, an integer. */
-  getType: function() {
-    return Blockly.StaticTyping.blocklyType.INTEGER;
+  getBlockType: function() {
+    return Blockly.StaticTyping.BlocklyType.INTEGER;
   },
   /**
    * Updates the content of the the pin related fields.

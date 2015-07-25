@@ -11,6 +11,7 @@
 goog.provide('Blockly.Blocks.Arduino.spi');
 
 goog.require('Blockly.Arduino');
+goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
@@ -89,8 +90,8 @@ Blockly.Blocks['spi_transfer'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
     this.appendValueInput('SPI_DATA', '')
-        .setCheck([Blockly.StaticTyping.blocklyType.NUMBER,
-                  Blockly.StaticTyping.blocklyType.BOOLEAN])
+        .setCheck([Blockly.StaticTyping.BlocklyType.NUMBER,
+                  Blockly.StaticTyping.BlocklyType.BOOLEAN])
         .appendField('transfer');
     this.appendDummyInput('')
         .appendField('to slave pin')
@@ -138,10 +139,9 @@ Blockly.Blocks['spi_transfer'] = {
    * Retrieves the type of the selected variable, Arduino code returns a byte,
    * for now set it to integer.
    * @return {!string} Blockly type.
-   * @this Blockly.Block
    */
-  getType: function() {
-    return Blockly.StaticTyping.blocklyType.INTEGER;
+  getBlockType: function() {
+    return Blockly.StaticTyping.BlocklyType.INTEGER;
   },
   /**
    * Updates the content of the board SPI related fields.
@@ -201,7 +201,7 @@ Blockly.Blocks['spi_transfer_return'] = {
   /** Same as spi_transfer block */
   onchange: Blockly.Blocks['spi_transfer'].onchange,
   /** Same as spi_transfer block */
-  getType: Blockly.Blocks['spi_transfer'].getType,
+  getBlockType: Blockly.Blocks['spi_transfer'].getBlockType,
   /** Same as spi_transfer block */
   updateFields: Blockly.Blocks['spi_transfer'].updateFields
 };

@@ -27,6 +27,7 @@
 goog.provide('Blockly.Blocks.procedures');
 
 goog.require('Blockly.Blocks');
+goog.require('Blockly.StaticTyping');
 
 
 /**
@@ -327,32 +328,35 @@ Blockly.Blocks['procedures_defnoreturn'] = {
     }
   },
   callType_: 'procedures_callnoreturn',
+  /** @return {!string} This block does not define type, so 'undefined' */
+  getVarType: function(varName) {
+    return Blockly.StaticTyping.BlocklyType.UNDEF;
+  },
+  /** Contains the type of the arguments added with mutators. */
+  argsTypes: {},
   /**
    * Searches through a list of variables with type to assign the type of the
    * arguments.
    * @this Blockly.Block
-   * @param {Array<string>} existingVars Associative array variable already  
-   *                                     defined, names as key, type as value.
+   * @param {Array<string>} existingVars Associative array variable already
+   *     defined, names as key, type as value.
    */
   setArgsType: function(existingVars) {
     var varNames = this.arguments_;
 
     // Check if variable has been defined already and save type
     for (var name in existingVars) {
-      for (var i = 0; i < varNames.length; i++) {
-        if (name == varNames[i]) {
+      for (var i = 0, length_ = varNames.length; i < length_; i++) {
+        if (name === varNames[i]) {
           this.argsTypes[name] = existingVars[name];
         }
       }
     }
   },
   /**
-   * Contains the type of the arguments added with mutators.
-   */
-  argsTypes: {},
-  /**
    * Retrieves the type of the arguments, types defined at setArgsType.
    * @this Blockly.Block
+   * @return {string} Type of the argument indicated in the input.
    */
   getArgType: function(varName) {
     for (var name in this.argsTypes) {
@@ -412,22 +416,23 @@ Blockly.Blocks['procedures_defreturn'] = {
   renameVar: Blockly.Blocks['procedures_defnoreturn'].renameVar,
   customContextMenu: Blockly.Blocks['procedures_defnoreturn'].customContextMenu,
   callType_: 'procedures_callreturn',
-  setArgsType: Blockly.Blocks['procedures_defnoreturn'].setArgsType,
-  varType: {},
   getVarType: Blockly.Blocks['procedures_defnoreturn'].getVarType,
+  argsTypes: {},
+  setArgsType: Blockly.Blocks['procedures_defnoreturn'].setArgsType,
+  getArgType: Blockly.Blocks['procedures_defnoreturn'].getArgType,
   /**
    * Searches through the nested blocks in the return input to find a variable
-   * type or return unspecified.
+   * type or returns NULL.
    * @this Blockly.Block
-   * @return {string} String to indicate the type or unspecified.
+   * @return {string} String to indicate the type or NULL.
    */
   getReturnType: function() {
-    var returnType = Blockly.StaticTyping.blocklyType.UNSPECIFIED;
+    var returnType = Blockly.StaticTyping.BlocklyType.NULL;
     var returnBlock = this.getInputTargetBlock('RETURN');
     if (returnBlock) {
       // First check if the block itself has a type already
-      if (returnBlock.getType) {
-        returnType = returnBlock.getType();
+      if (returnBlock.getBlockType) {
+        returnType = returnBlock.getBlockType();
       } else {
         returnType = Blockly.StaticTyping.getChildBlockType(returnBlock);
       }
@@ -750,7 +755,7 @@ Blockly.Blocks['procedures_ifreturn'] = {
     this.setHelpUrl('http://c2.com/cgi/wiki?GuardClause');
     this.setColour(Blockly.Blocks.procedures.HUE);
     this.appendValueInput('CONDITION')
-        .setCheck(Blockly.StaticTyping.blocklyType.BOOLEAN)
+        .setCheck(Blockly.StaticTyping.BlocklyType.BOOLEAN)
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendValueInput('VALUE')
         .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);

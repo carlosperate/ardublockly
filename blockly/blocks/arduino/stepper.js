@@ -20,6 +20,7 @@
 goog.provide('Blockly.Blocks.Arduino.stepper');
 
 goog.require('Blockly.Arduino');
+goog.require('Blockly.StaticTyping');
 goog.require('Blockly.FieldDropdown');
 
 
@@ -106,11 +107,11 @@ Blockly.Blocks['stepper_config'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN2');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField('how many steps per revolution');
     this.appendValueInput('STEPPER_SPEED')
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField('set speed (rpm) to');
     this.setTooltip('Configures a stepper motor pinout and other settings.');
@@ -154,7 +155,7 @@ Blockly.Blocks['stepper_step'] = {
         .appendField(new Blockly.Blocks.Arduino.stepper.FieldStepperInstance(),
             'STEPPER_NAME');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER);
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
     this.appendDummyInput()
         .appendField('steps');
     this.setPreviousStatement(true);

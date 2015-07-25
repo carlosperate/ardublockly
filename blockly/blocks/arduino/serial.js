@@ -14,6 +14,7 @@
 goog.provide('Blockly.Blocks.Arduino.serial');
 
 goog.require('Blockly.Arduino');
+goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
@@ -72,8 +73,8 @@ Blockly.Blocks['serial_print'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
         .appendField('print');
-    this.appendValueInput('CONTENT', Blockly.StaticTyping.blocklyType.TEXT)
-        .setCheck(Blockly.StaticTyping.blocklyType.TEXT);
+    this.appendValueInput('CONTENT', Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT);
     this.appendDummyInput()
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE')
         .appendField('add new line');

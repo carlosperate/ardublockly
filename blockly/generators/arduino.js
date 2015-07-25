@@ -109,32 +109,24 @@ Blockly.Arduino.init = function(workspace) {
     Blockly.Arduino.variableDB_.reset();
   }
 
-  // Iterate through the blocks to capture variables with first instance type
-  var variableTypes = Blockly.StaticTyping.getAllVarsWithTypes(workspace);
+  // Iterate through to capture all blocks types and set the function arguments
+  var varsWithTypes = Blockly.StaticTyping.getAllVarsWithTypes(workspace);
+  Blockly.StaticTyping.setProcedureArgs(workspace, varsWithTypes);
 
-  // The procedure arguments need to have all the variables collected first
-  var blocks = workspace.getAllBlocks();
-  for (var x = 0; x < blocks.length; x++) {
-    var setArgsType = blocks[x].setArgsType;
-    if (setArgsType) {
-      setArgsType.call(blocks[x], variableTypes);
-    }
-  }
-
-  // Set variable declarations
+  // Set variable declarations with their Arduino type in the defines dictionary
   var variableDeclarations = [];
-  for (var varName in variableTypes) {
+  for (var varName in varsWithTypes) {
     variableDeclarations.push(
-        Blockly.Arduino.getArduinoType_(variableTypes[varName]) + ' ' +
+        Blockly.Arduino.getArduinoType_(varsWithTypes[varName]) + ' ' +
         varName + ';');
   }
   Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n');
 };
 
 /**
- * Prepend the generated code with the variable definitions.
- * @param {string} code Generated code.
- * @return {string} Completed code.
+ * Prepare all generated code to be placed in the sketch specific locations.
+ * @param {string} code Generated main program (loop function) code.
+ * @return {string} Completed sketch code.
  */
 Blockly.Arduino.finish = function(code) {
   // Convert the includes, definitions, and functions dictionaries into lists
@@ -331,7 +323,7 @@ Blockly.Arduino.scrub_ = function(block, code) {
 
 /**
  * Generates Arduino Types from a Blockly Type.
- * @param {!Blockly.StaticTyping.blocklyType} typeBlockly The Blockly type to be
+ * @param {!Blockly.StaticTyping.BlocklyType} typeBlockly The Blockly type to be
  *     converted.
  * @return {string} Arduino type for the respective Blockly input type, in a
  *     string format.
@@ -340,28 +332,28 @@ Blockly.Arduino.scrub_ = function(block, code) {
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
   switch (typeBlockly) {
-    case Blockly.StaticTyping.blocklyType.UNDEF:
+    case Blockly.StaticTyping.BlocklyType.UNDEF:
       return 'undefined';
-    case Blockly.StaticTyping.blocklyType.UNSPECIFIED:
+    case Blockly.StaticTyping.BlocklyType.UNSPECIFIED:
+      return 'unspecified';
+    case Blockly.StaticTyping.BlocklyType.NULL:
       return 'void';
-    case Blockly.StaticTyping.blocklyType.NULL:
-      return 'NULL';
-    case Blockly.StaticTyping.blocklyType.NUMBER:
+    case Blockly.StaticTyping.BlocklyType.NUMBER:
       return 'int';
-    case Blockly.StaticTyping.blocklyType.INTEGER:
+    case Blockly.StaticTyping.BlocklyType.INTEGER:
       return 'int';
-    case Blockly.StaticTyping.blocklyType.DECIMAL:
+    case Blockly.StaticTyping.BlocklyType.DECIMAL:
       return 'float';
-    case Blockly.StaticTyping.blocklyType.TEXT:
+    case Blockly.StaticTyping.BlocklyType.TEXT:
       return 'String';
-    case Blockly.StaticTyping.blocklyType.CHARACTER:
+    case Blockly.StaticTyping.BlocklyType.CHARACTER:
       return 'char';
-    case Blockly.StaticTyping.blocklyType.BOOLEAN:
+    case Blockly.StaticTyping.BlocklyType.BOOLEAN:
       return 'boolean';
-    case Blockly.StaticTyping.blocklyType.ERROR:
+    case Blockly.StaticTyping.BlocklyType.ERROR:
       return 'ErrorArdu';
-    case Blockly.StaticTyping.blocklyType.CHILD_TYPE_MISSING:
-      return 'ChildBlockTypeMissingArdu';
+    case Blockly.StaticTyping.BlocklyType.CHILD_BLOCK_MISSING:
+      return 'ChildBlockMissing';
     default:
       return 'Invalid Blockly Type';
     }
