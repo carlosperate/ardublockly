@@ -389,12 +389,7 @@ Blockly.Blocks['math_on_list'] = {
     this.setColour(Blockly.Blocks.math.HUE);
     this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
     var dropdown = new Blockly.FieldDropdown(OPERATORS, function(newOp) {
-      if (newOp == 'MODE') {
-        thisBlock.outputConnection.setCheck('Array');
-      } else {
-        thisBlock.outputConnection.setCheck(
-            Blockly.StaticTyping.BlocklyType.NUMBER);
-      }
+      thisBlock.updateType_(newOp);
     });
     this.appendValueInput('LIST')
         .setCheck('Array')
@@ -413,6 +408,37 @@ Blockly.Blocks['math_on_list'] = {
       };
       return TOOLTIPS[mode];
     });
+  },
+  /**
+   * Modify this block to have the correct output type.
+   * @param {string} newOp Either 'MODE' or some op than returns a number.
+   * @private
+   * @this Blockly.Block
+   */
+  updateType_: function(newOp) {
+    if (newOp == 'MODE') {
+      this.outputConnection.setCheck('Array');
+    } else {
+      this.outputConnection.setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
+    }
+  },
+  /**
+   * Create XML to represent the output type.
+   * @return {Element} XML storage element.
+   * @this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    container.setAttribute('op', this.getFieldValue('OP'));
+    return container;
+  },
+  /**
+   * Parse XML to restore the output type.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    this.updateType_(xmlElement.getAttribute('op'));
   }
   //TODO: a getBlockType once the list code is finished.
 };

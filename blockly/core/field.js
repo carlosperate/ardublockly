@@ -46,6 +46,11 @@ Blockly.Field = function(text) {
 };
 
 /**
+ * Maximum length of text to display before adding an ellipsis.
+ */
+Blockly.Field.prototype.maxDisplayLength = 50;
+
+/**
  * Block this field is attached to.  Starts as null, then in set in init.
  * @private
  */
@@ -62,17 +67,6 @@ Blockly.Field.prototype.visible_ = true;
  * @private
  */
 Blockly.Field.prototype.changeHandler_ = null;
-
-/**
- * Clone this Field.  This must be implemented by all classes derived from
- * Field.  Since this class should not be instantiated, calling this method
- * throws an exception.
- * @throws {goog.assert.AssertionError}
- */
-Blockly.Field.prototype.clone = function() {
-  goog.asserts.fail('There should never be an instance of Field, ' +
-      'only its derived classes.');
-};
 
 /**
  * Non-breaking space.
@@ -272,6 +266,10 @@ Blockly.Field.prototype.updateTextNode_ = function() {
     return;
   }
   var text = this.text_;
+  if (text.length > this.maxDisplayLength) {
+    // Truncate displayed string and add an ellipsis ('...').
+    text = text.substring(0, this.maxDisplayLength - 2) + '\u2026';
+  }
   // Empty the text element.
   goog.dom.removeChildren(/** @type {!Element} */ (this.textElement_));
   // Replace whitespace with non-breaking spaces so the text doesn't collapse.
