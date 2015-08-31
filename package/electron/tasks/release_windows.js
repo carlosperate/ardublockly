@@ -29,10 +29,14 @@ var copyRuntime = function () {
     return projectDir.copyAsync('node_modules/electron-prebuilt/dist', readyAppDir.path(), { overwrite: true });
 };
 
+var cleanupRuntime = function () {
+    return readyAppDir.removeAsync('resources/default_app');
+};
+
 var packageBuiltApp = function () {
     var deferred = Q.defer();
 
-    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function() {
+    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function () {
         deferred.resolve();
     });
 
@@ -43,7 +47,6 @@ var finalize = function () {
     var deferred = Q.defer();
 
     projectDir.copy('resources/windows/icon.ico', readyAppDir.path('icon.ico'));
-    readyAppDir.rename('electron.exe', manifest.name + '.exe');
 
     // Replace Electron icon and versions
     var copyrightString = 'Copyright (C) ' + new Date().getFullYear() + ' ' +
@@ -66,6 +69,10 @@ var finalize = function () {
     });
 
     return deferred.promise;
+};
+
+var renameApp = function () {
+    return readyAppDir.renameAsync('electron.exe', manifest.name + '.exe');
 };
 
 var createInstaller = function () {
@@ -124,8 +131,10 @@ var cleanClutter = function () {
 module.exports = function () {
     return init()
     .then(copyRuntime)
+    .then(cleanupRuntime)
     .then(packageBuiltApp)
     .then(finalize)
+    .then(renameApp)
     //.then(createInstaller)
     .then(copyExecFolder)
     .then(cleanClutter);

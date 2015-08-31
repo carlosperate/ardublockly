@@ -1,9 +1,8 @@
 'use strict';
 
 var gulp = require('gulp');
+var babel = require('gulp-babel');
 var less = require('gulp-less');
-var esperanto = require('esperanto');
-var map = require('vinyl-map');
 var jetpack = require('fs-jetpack');
 
 var utils = require('./utils');
@@ -21,13 +20,13 @@ var paths = {
         '!app/bower_components/**',
         '!app/vendor/**'
     ],
-    toCopy: [
-        'app/main.js',
-        'app/*.js',
-        'app/node_modules/**',
-        'app/bower_components/**',
-        'app/vendor/**',
-        'app/**/*.html'
+    copyFromAppDir: [
+        './main.js',
+        './*.js',
+        './node_modules/**',
+        './bower_components/**',
+        './vendor/**',
+        './**/*.html'
     ],
 }
 
@@ -43,7 +42,7 @@ gulp.task('clean', function(callback) {
 var copyTask = function () {
     return projectDir.copyAsync('app', destDir.path(), {
         overwrite: true,
-        matching: paths.toCopy
+        matching: paths.copyFromAppDir
     });
 };
 gulp.task('copy', ['clean'], copyTask);
@@ -52,14 +51,7 @@ gulp.task('copy-watch', copyTask);
 
 var transpileTask = function () {
     return gulp.src(paths.jsCodeToTranspile)
-    .pipe(map(function(code, filename) {
-        try {
-            var transpiled = esperanto.toAmd(code.toString(), { strict: true });
-        } catch (err) {
-            throw new Error(err.message + ' ' + filename);
-        }
-        return transpiled.code;
-    }))
+    .pipe(babel({ modules: 'amd' }))
     .pipe(gulp.dest(destDir.path()));
 };
 gulp.task('transpile', ['clean'], transpileTask);
@@ -94,7 +86,7 @@ gulp.task('finalize', ['clean'], function () {
 
 gulp.task('watch', function () {
     gulp.watch(paths.jsCodeToTranspile, ['transpile-watch']);
-    gulp.watch(paths.toCopy, ['copy-watch']);
+    gulp.watch(paths.copyFromAppDir, { cwd: 'app' }, ['copy-watch']);
     gulp.watch('app/**/*.less', ['less-watch']);
 });
 

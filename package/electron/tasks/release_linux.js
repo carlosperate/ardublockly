@@ -36,7 +36,7 @@ var copyRuntime = function () {
 var packageBuiltApp = function () {
     var deferred = Q.defer();
 
-    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function() {
+    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function () {
         deferred.resolve();
     });
 
@@ -62,10 +62,11 @@ var finalize = function () {
     // Copy icon
     projectDir.copy('resources/icon.png', readyAppDir.path('icon.png'));
 
-    // Rename executable
-    readyAppDir.rename('electron', manifest.name);
-
     return Q();
+};
+
+var renameApp = function () {
+    return readyAppDir.renameAsync("electron", manifest.name);
 };
 
 var packToDebFile = function () {
@@ -121,6 +122,7 @@ module.exports = function () {
     .then(packageBuiltApp)
     //.then(createDesktopFile)
     .then(finalize)
+    .then(renameApp)
     //.then(packToDebFile)
     .then(copyExecFolder)
     .then(cleanClutter);
