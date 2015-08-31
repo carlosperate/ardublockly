@@ -9,15 +9,15 @@ var utils = require('./utils');
 var projectDir;
 var releasesDir;
 var tmpDir;
-var arduexecDir;
+var ardublocklyProjectDir;
 var finalAppDir;
 var manifest;
 
 var init = function () {
     projectDir = jetpack;
-    tmpDir = projectDir.dir('./tmp', { empty: true });
-    arduexecDir = projectDir.dir('../../arduexec.app');
     releasesDir = projectDir.dir('./releases');
+    tmpDir = projectDir.dir('./tmp', { empty: true });
+    ardublocklyProjectDir = projectDir.dir('../../');
     manifest = projectDir.read('app/package.json', 'json');
     finalAppDir = tmpDir.cwd(manifest.productName + '.app');
 
@@ -109,7 +109,12 @@ var packToDmgFile = function () {
 };
 
 var copyExecFolder = function () {
-    finalAppDir.copy(finalAppDir.cwd(), arduexecDir.cwd(), { overwrite: true });
+    // Because the python build file packs the entire arduexe folder as an app
+    // package with its respective 'Contents' folder, we want to copy that data
+    var finalAppContentDir = finalAppDir.dir('Contents');
+    gulpUtil.log('Copying from ' + finalAppDir.cwd() + ' ' +
+                 'folder: '+ finalAppContentDir.cwd());
+    finalAppDir.copy(finalAppContentDir.cwd(), ardublocklyProjectDir.cwd(), { overwrite: true });
     return Q();
 };
 

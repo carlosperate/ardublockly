@@ -39,8 +39,12 @@ from glob import glob
 
 spec_coll_name = "server"
 if platform.system() == "Darwin":
-    exec_folder = "arduexec.app"
+    # On MacOS the Electron app contents are dumped into the project root
+    # directory and the entire folder is contained in a
+    # 'ardublockly.app/Contents' folder.
+    exec_folder = ""
 else:
+    # In Windows and Linux the Electron files are located in this folder
     exec_folder = "arduexec"
 py_exec_folder = os.path.join(exec_folder, "server")
 script_tag = "[Ardublockly build] "

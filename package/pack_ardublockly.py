@@ -32,6 +32,7 @@ import time
 import shutil
 import struct
 import zipfile
+import platform
 
 
 script_tag = "[Ardublockly pack] "
@@ -54,17 +55,24 @@ def set_tag(tag):
     Sets the packaged zip file and copied folder tag to the input argument. So,
     the copied folder will be names "ardublockly_<tag>" and the zip file
     "ardublockly_<tag>.zip.
+    If Mac OS X the folder is packed in ardublockly_tag.app/Contents
     :tag: String to indicate the tag to use.
     """
     print(script_tag + "Setting the Ardublockly package tag to '%s'" % tag)
     global copy_dir_name
     global copied_project_dir
     copy_dir_name = "ardublockly_%s" % tag
+    # On OSX everything goes inside a folder structure ardublockly.app/Contents/
+    if platform.system() == "Darwin":
+        copy_dir_name = os.path.join(
+            copy_dir_name, 'ardublockly.app', 'Contents')
+        print(script_tab + 'Packing for Mac OS X, final folder structure: %s' %
+              copy_dir_name)
     copied_project_dir = os.path.join(os.path.dirname(project_root_dir),
                                       copy_dir_name)
 
 
-def get_tag():
+def get_build_tag():
     """
     The tag will always contain the timestamp and architecture version.
     If provided as a command line argument it will add an additional string,
@@ -211,10 +219,18 @@ def zip_ardublockly_copy(name_append):
     if not os.path.exists(zip_file_dir):
         os.makedirs(zip_file_dir)
 
+    app_folder = copied_project_dir
+    # In OS X the copied_project_dir is ardublockly_tag/Contents/ and we need
+    # to zip the .app folder
+    if platform.system() == "Darwin":
+        app_folder = os.path.dirname(os.path.dirname(app_folder))
+
+    old_cwd = os.getcwd()
     os.chdir(os.path.dirname(project_root_dir))
-    print(script_tab + "Working directory changed to %s" % os.getcwd())
-    print(script_tab + "Zipping the contents of %s\n" % copied_project_dir +
-          script_tab + "into                    %s\n" % zip_file_location)
+    print(script_tab + "Changing Working Directory from %s to %s" %
+          (old_cwd, os.getcwd()))
+    print(script_tab + "Zipping the contents of %s" % app_folder)
+    print(script_tab + "into                    %s" % zip_file_location)
 
     zip_file = zipfile.ZipFile(zip_file_location, "w", zipfile.ZIP_DEFLATED)
     for dir_name, sub_dirs, files in os.walk(copy_dir_name):
@@ -243,7 +259,7 @@ def pack_ardublockly(tag):
     print(script_tag + "Removing unnecessary Blockly files:")
     remove_unnecessary_blockly()
 
-    print(script_tag + "Removing an already zipped Ardublockly version:")
+    print(script_tag + "Removing any already zipped Ardublockly version:")
     remove_directory(os.path.join(copied_project_dir, "releases"))
 
     print(script_tag + "Removing CEF temporary files:")
@@ -256,8 +272,8 @@ def pack_ardublockly(tag):
 def main():
     print(script_tag + "Pack Ardublockly script started.")
     print(script_tag + "Checking for tag to attach to zip file:")
-    tag = get_tag()
-    pack_ardublockly(tag)
+    build_tag = get_build_tag()
+    pack_ardublockly(build_tag)
 
 
 if __name__ == "__main__":

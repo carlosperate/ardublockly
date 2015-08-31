@@ -63,7 +63,7 @@ function getServerExecLocation() {
 
     // Then, work out the location of the python executable files
     if (process.platform == "darwin") {
-        var arduexecDir = ardublocklyProjRootDir.dir('arduexec.app/server');
+        var arduexecDir = ardublocklyProjRootDir.dir('server');
     } else {
         var arduexecDir = ardublocklyProjRootDir.dir('arduexec/server');
     }
