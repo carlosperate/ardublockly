@@ -41,7 +41,7 @@ spec_coll_name = "server"
 if platform.system() == "Darwin":
     # On MacOS the Electron app contents are dumped into the project root
     # directory and the entire folder is contained in a
-    # 'ardublockly.app/Contents' folder.
+    # 'Ardublockly.app/Contents' folder.
     exec_folder = ""
 else:
     # In Windows and Linux the Electron files are located in this folder

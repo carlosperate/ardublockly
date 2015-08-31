@@ -62,10 +62,10 @@ def set_tag(tag):
     global copy_dir_name
     global copied_project_dir
     copy_dir_name = "ardublockly_%s" % tag
-    # On OSX everything goes inside a folder structure ardublockly.app/Contents/
+    # On OSX everything goes inside a folder structure Ardublockly.app/Contents/
     if platform.system() == "Darwin":
         copy_dir_name = os.path.join(
-            copy_dir_name, 'ardublockly.app', 'Contents')
+            copy_dir_name, 'Ardublockly.app', 'Contents')
         print(script_tab + 'Packing for Mac OS X, final folder structure: %s' %
               copy_dir_name)
     copied_project_dir = os.path.join(os.path.dirname(project_root_dir),
@@ -220,8 +220,8 @@ def zip_ardublockly_copy(name_append):
         os.makedirs(zip_file_dir)
 
     app_folder = copied_project_dir
-    # In OS X the copied_project_dir is ardublockly_tag/Contents/ and we need
-    # to zip the .app folder
+    # In OS X copied_project_dir is ardublockly_tag/Ardublockly.app/Contents/
+    # and we need to zip the .app folder
     if platform.system() == "Darwin":
         app_folder = os.path.dirname(os.path.dirname(app_folder))
 
