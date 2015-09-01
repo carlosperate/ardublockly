@@ -52,7 +52,7 @@ var finalize = function () {
     var copyrightString = 'Copyright (C) ' + new Date().getFullYear() + ' ' +
                           manifest.author + ' ' + manifest.homepage;
     var rcedit = require('rcedit');
-    rcedit(readyAppDir.path(manifest.name + '.exe'), {
+    rcedit(readyAppDir.path('electron.exe'), {
         icon: projectDir.path('resources/windows/icon.ico'),
         'file-version': manifest.version,
         'product-version': manifest.version,
