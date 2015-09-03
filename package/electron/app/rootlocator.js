@@ -12,7 +12,7 @@ var winston = require('winston');
 var jetpack = require('fs-jetpack');
 var env = require('./vendor/electron_boilerplate/env_config');
 
-var tag = '[Project Root Locator] '
+var tag = '[Project Root Locator] ';
 
 var ardublocklyRootDir = null;
 

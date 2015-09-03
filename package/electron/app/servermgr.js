@@ -27,7 +27,7 @@ function getServerExecLocation() {
     var ardublocklyProjRootDir = projectRootLocator.getProjectRootJetpack();
 
     // Then, work out the location of the python executable files
-    if (process.platform == "darwin") {
+    if (process.platform == 'darwin') {
         var arduexecDir = ardublocklyProjRootDir.dir('server');
     } else {
         var arduexecDir = ardublocklyProjRootDir.dir('arduexec/server');
@@ -35,25 +35,25 @@ function getServerExecLocation() {
 
     // Finally, work out the name of the executable
     var arduexecFileName = 'start';
-    if (process.platform == "win32") {
+    if (process.platform == 'win32') {
         arduexecFileName += '.exe';
     }
 
     var executableLocation = arduexecDir.path(arduexecFileName);
     winston.info(tag + 'Server executable: ' + executableLocation);
     return executableLocation;
-};
+}
 
 function ardublocklyNotFound(working_dir) {
     dialog.showMessageBox({
-        type: "warning",
-        title: "Server Error",
-        buttons: ["ok"],
-        message: "The Ardublockly folder could not be found within the " +
-                 "execution directory:\n" + working_dir + "\nThe application " +
-                 "won't be able to function properly."
+        type: 'warning',
+        title: 'Server Error',
+        buttons: ['ok'],
+        message: 'The Ardublockly folder could not be found within the ' +
+                 'execution directory:\n' + working_dir + '\nThe application ' +
+                 'will not be able to function properly.'
     });
-};
+}
 
 module.exports.startServer = function() {
     if (serverProcess === null) {
@@ -64,15 +64,15 @@ module.exports.startServer = function() {
                 serverExecLocation, ['--findprojectroot', '--nobrowser']);
 
         // Setting the listeners
-        serverProcess.stdout.on('data', function (data) {
+        serverProcess.stdout.on('data', function(data) {
             winston.info('[Ardublockly server] ' + data);
         });
 
-        serverProcess.stderr.on('data', function (data) {
+        serverProcess.stderr.on('data', function(data) {
             winston.error('[Ardublockly server] ' + data);
         });
 
-        serverProcess.on('close', function (code) {
+        serverProcess.on('close', function(code) {
             if (code !== 0) {
                 winston.info('[Ardublockly server] Process exited with code ' +
                              code);

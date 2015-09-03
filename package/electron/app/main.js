@@ -29,8 +29,7 @@ var mainWindowState = windowStateKeeper('main', {
     height: 765
 });
 
-app.on('ready', function () {
-    // Finding project path
+app.on('ready', function() {
     var projectRootPath = projectRootLocator.getProjectRootPath();
 
     // Setting up logging system
@@ -79,7 +78,7 @@ app.on('ready', function () {
     }
 
     mainWindow.webContents.on('did-fail-load',
-        function (event, errorCode, errorDescription) {
+        function(event, errorCode, errorDescription) {
             winston.warn('Page failed to load (' + errorCode + '). The ' +
                 'server is probably not yet running. Trying again in 200 ms.');
             setTimeout(function() {
@@ -88,7 +87,7 @@ app.on('ready', function () {
         }
     );
 
-    mainWindow.webContents.on('did-finish-load', function () {
+    mainWindow.webContents.on('did-finish-load', function() {
         mainWindow.show();
         if (splashWindow !== null) {
             splashWindow.close();
@@ -98,16 +97,16 @@ app.on('ready', function () {
 
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
 
-    mainWindow.on('close', function () {
+    mainWindow.on('close', function() {
         mainWindowState.saveState(mainWindow);
         mainWindow = null;
     });
 });
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', function() {
     server.stopServer();
     // Might need to add OS X exception
-    // https://github.com/atom/electron/issues/1357 
+    // https://github.com/atom/electron/issues/1357
     app.quit();
 });
 

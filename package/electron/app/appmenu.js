@@ -20,14 +20,14 @@ module.exports.setArdublocklyMenu = function(devMode) {
     if (typeof(devMode)==='undefined') devMode = false;
 
     var ardublocklyMenu = [];
-    if (process.platform == "darwin") {
+    if (process.platform == 'darwin') {
         ardublocklyMenu.push(getMacMenuData());
     }
     ardublocklyMenu.push(getFileMenuData());
     ardublocklyMenu.push(getEditMenuData());
     ardublocklyMenu.push(getProgramMenuData());
     ardublocklyMenu.push(getExamplesMenuData());
-    if (process.platform == "darwin") {
+    if (process.platform == 'darwin') {
         ardublocklyMenu.push(getWindowMenuData());
     }
     ardublocklyMenu.push(getHelpMenuData());
@@ -54,7 +54,7 @@ var getMacMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.openSettings()");
+                        .executeJavaScript('Ardublockly.openSettings()');
                 }
             }, {
                 type: 'separator'
@@ -100,13 +100,13 @@ var getFileMenuData = function() {
                 accelerator: 'CmdOrCtrl+O',
                 click: function() {
                     dialog.showMessageBox({
-                        type: "info",
-                        title: "Dialog",
-                        buttons: ["ok",],
-                        message: "This functionality has not yet been "+ 
-                                 "implemented in the window menu.\nYou can " +
-                                 "still open a blocks file using the 'Open' " +
-                                 "button on the main interface."
+                        type: 'info',
+                        title: 'Dialog',
+                        buttons: ['ok',],
+                        message: 'This functionality has not yet been '+ 
+                                 'implemented in the window menu.\nYou can ' +
+                                 'still open a blocks file using the "Open" ' +
+                                 'button on the main interface.'
                     });
                 }
             }, {
@@ -115,7 +115,7 @@ var getFileMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.saveXmlFileAs()");
+                        .executeJavaScript('Ardublockly.saveXmlFileAs()');
                 }
             }, {
                 label: 'Save Arduino Sketch as',
@@ -124,14 +124,14 @@ var getFileMenuData = function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
                         .executeJavaScript(
-                            "Ardublockly.saveSketchFileAs()");
+                            'Ardublockly.saveSketchFileAs()');
                 }
             }
         ]
     };
 
     // On MacOS the Quit option is in the app menu, so only add it if not mac
-    if (process.platform != "darwin") {
+    if (process.platform != 'darwin') {
         fileMenu.submenu.push(
             {
                 type: 'separator'
@@ -168,7 +168,7 @@ var getEditMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.blocklyCut()");
+                        .executeJavaScript('Ardublockly.blocklyCut()');
                 }
             }, {
                 label: 'Copy',
@@ -176,7 +176,7 @@ var getEditMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.blocklyCopy()");
+                        .executeJavaScript('Ardublockly.blocklyCopy()');
                 }
             }, {
                 label: 'Paste',
@@ -184,7 +184,7 @@ var getEditMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.blocklyPaste()");
+                        .executeJavaScript('Ardublockly.blocklyPaste()');
                 }
             }, {
                 label: 'Delete',
@@ -192,7 +192,7 @@ var getEditMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.blocklyDelete()");
+                        .executeJavaScript('Ardublockly.blocklyDelete()');
                 }
             }, {
                 label: 'Delete All',
@@ -200,14 +200,14 @@ var getEditMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.discardAllBlocks()");
+                        .executeJavaScript('Ardublockly.discardAllBlocks()');
                 }
             }
         ]
     };
 
     // On MacOS Preferences is in the app menu, so only add it if not mac
-    if (process.platform != "darwin") {
+    if (process.platform != 'darwin') {
         editMenud.submenu.push(
             {
                 type: 'separator'
@@ -217,7 +217,7 @@ var getEditMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.openSettings()");
+                        .executeJavaScript('Ardublockly.openSettings()');
                 }
             }
         );
@@ -290,7 +290,7 @@ var getProgramMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.ideSendOpen()");
+                        .executeJavaScript('Ardublockly.ideSendOpen()');
                 }
             }, {
                 label: 'Verify',
@@ -298,7 +298,7 @@ var getProgramMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.ideSendVerify()");
+                        .executeJavaScript('Ardublockly.ideSendVerify()');
                 }
             }, {
                 label: 'Upload program',
@@ -306,7 +306,7 @@ var getProgramMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript("Ardublockly.ideSendUpload()");
+                        .executeJavaScript('Ardublockly.ideSendUpload()');
                 }
             }
         ]
@@ -408,7 +408,7 @@ var getDevMenuData = function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
                         .executeJavaScript(
-                            "$('.button-collapse').sideNav('show')");
+                            '$(".button-collapse").sideNav("show")');
                 }
             }, {
                 type: 'separator'
@@ -422,10 +422,10 @@ var getDevMenuData = function() {
 
 var functionNotImplemented = function() {
     dialog.showMessageBox({
-        type: "info",
-        title: "Dialog",
-        buttons: ["ok",],
-        message: "This functionality has not yet been implemented."
+        type: 'info',
+        title: 'Dialog',
+        buttons: ['ok',],
+        message: 'This functionality has not yet been implemented.'
     });
 };
 
