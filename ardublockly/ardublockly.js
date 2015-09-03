@@ -29,13 +29,6 @@ window.addEventListener('load', function load(event) {
       document.location.hostname != '192.168.0.7') {
     Ardublockly.openNotConnectedModal();
   }
-
-  // Check if running on the Desktop app
-  if (navigator.userAgent.toLowerCase().indexOf('ardublockly') > -1) {
-    // It is, so remove container padding and side menu button
-    Ardublockly.containerFullWidth();
-    Ardublockly.hideSideMenuButton();
-  }
 });
 
 /** Binds functions to each of the buttons, nav links, and related. */

@@ -10,7 +10,7 @@ This project is based on the excellent [electron-boilerplate](https://github.com
 
 
 ## Quick start
-The only dependency of this project is [Node.js](https://nodejs.org).
+The only software installation required for this project is [Node.js](https://nodejs.org).
 
 To run, execute these commands from the Ardublockly project root directory:
 
@@ -43,6 +43,7 @@ The original boilerplate by Jakub Szwacz is release under the following license.
 The MIT License (MIT)
 
 Copyright (c) 2015 Jakub Szwacz
+
 Copyright (c) 2015 carlosperate https://github.com/carlosperate/
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

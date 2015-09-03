@@ -53,7 +53,7 @@ app.on('ready', function() {
         transparent: false,
         frame: true,
         show: false,
-        'node-integration': false,
+        'node-integration': true,
         'web-preferences': {
             'web-security': true,
             'java': false,

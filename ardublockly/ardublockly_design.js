@@ -341,20 +341,6 @@ Ardublockly.resetIdeOutputContent = function(bodyEl) {
       'the IDE output...</span>';
 };
 
-/** Hides the side menu button. */
-Ardublockly.hideSideMenuButton = function() {
-  var sideMenuButton = document.getElementById('button-collapse');
-  sideMenuButton.style.display = 'none';
-};
-
-/** Sets all the elements using the container class to have a width of 100%. */
-Ardublockly.containerFullWidth = function() {
-  var containers = $('.container');
-  for (var i = 0; i < containers.length; i++) {
-    containers[i].style.width = '100%';
-  }
-};
-
 /**
  * Initialises the sketch name input text JavaScript to dynamically adjust its
  * width to the width of its contents.
