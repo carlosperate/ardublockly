@@ -14,6 +14,7 @@ var winston = require('winston');
 var appMenu = require('./appmenu.js');
 var server = require('./servermgr.js');
 var BrowserWindow = require('browser-window');
+var projectRootLocator = require('./rootlocator.js');
 var env = require('./vendor/electron_boilerplate/env_config');
 var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
 
@@ -21,7 +22,6 @@ var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
 var splashWindow = null;
-var projectJetPath = null;
 
 // Preserver of the window size and position between app launches.
 var mainWindowState = windowStateKeeper('main', {
@@ -31,14 +31,15 @@ var mainWindowState = windowStateKeeper('main', {
 
 app.on('ready', function () {
     // Finding project path
-    projectJetPath = server.getProjectJetpack();
+    var projectRootPath = projectRootLocator.getProjectRootPath();
 
     // Setting up logging system
     winston.add(winston.transports.File, {
         json: false,
-        filename: projectJetPath.path() + '/ardublockly.log',
+        filename: projectRootPath + '/ardublockly.log',
         maxsize: 10485760,
-        maxFiles: 2 });
+        maxFiles: 2
+    });
 
     createSplashWindow();
 
@@ -112,6 +113,7 @@ app.on('window-all-closed', function () {
 
 function createSplashWindow() {
     if (splashWindow === null) {
+        var projectJetPath = projectRootLocator.getProjectRootJetpack();
         var imagePath = 'file://' + projectJetPath.path(
             'ardublockly', 'img', 'ardublockly_splash.png');
 
