@@ -56,7 +56,12 @@ Ardublockly.hideSideMenuButton = function() {
 window.addEventListener('load', function load(event) {
   window.removeEventListener('load', load, false);
   if (Ardublockly.isRunningElectron()) {
+    // Edit the page layout for better appearance on desktop
     Ardublockly.containerFullWidth();
     Ardublockly.hideSideMenuButton();
+
+    // Prevent browser zoom changes like pinch-to-zoom
+    var webFrame = require('web-frame');
+    webFrame.setZoomLevelLimits(1, 1);
   }
 });
