@@ -10,6 +10,7 @@
 'use strict';
 
 var app = require('app');
+var dialog = require('dialog');
 var winston = require('winston');
 var appMenu = require('./appmenu.js');
 var server = require('./servermgr.js');
@@ -56,17 +57,18 @@ app.on('ready', function() {
         'node-integration': true,
         'web-preferences': {
             'web-security': true,
+            'allow-displaying-insecure-content': false,
+            'allow-running-insecure-content': false,
             'java': false,
-            'text-areas-are-resizable': false,
             'webgl': false,
             'webaudio': true,
+            'plugins': false,
+            'overlay-scrollbars': true,
+            'text-areas-are-resizable': false,
             'subpixel-font-scaling': true,
-            'direct-write': true,
-            //'overlay-scrollbars': true,
-            'plugins': false
+            'direct-write': true
         }
     });
-
     if (mainWindowState.isMaximized) {
         mainWindow.maximize();
     }
@@ -88,12 +90,16 @@ app.on('ready', function() {
     );
 
     mainWindow.webContents.on('did-finish-load', function() {
-        mainWindow.show();
         if (splashWindow !== null) {
             splashWindow.close();
             splashWindow = null;
         }
+        mainWindow.show();
     });
+
+    // Set the download directory to the home folder
+    mainWindow.webContents.session.setDownloadPath(
+        process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']);
 
     mainWindow.loadUrl('http://localhost:8000/ardublockly');
 
@@ -124,6 +130,8 @@ function createSplashWindow() {
             transparent: true,
             images: true,
             center: true,
+            'always-on-top': true,
+            'skip-taskbar': true,
             'use-content-size': true
         });
         splashWindow.loadUrl(imagePath);
