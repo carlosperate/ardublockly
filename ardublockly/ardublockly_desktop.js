@@ -28,8 +28,8 @@ Ardublockly.isRunningElectron = function() {
  */
 Ardublockly.loadJsInElectron = function() {
   if (Ardublockly.isRunningElectron()) {
-    var projectRootLocator = require('remote').require('./rootlocator.js');
-    var projectRoot = projectRootLocator.getProjectRootPath();
+    var projectLocator = require('remote').require('./projectlocator.js');
+    var projectRoot = projectLocator.getProjectRootPath();
     window.$ = window.jQuery = require(projectRoot +
         '/ardublockly/js_libs/jquery-2.1.3.min.js');
     window.Hammer = require(projectRoot + '/ardublockly/js_libs/hammer.min.js');

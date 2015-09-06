@@ -38,15 +38,8 @@ from glob import glob
 
 
 spec_coll_name = "server"
-if platform.system() == "Darwin":
-    # On MacOS the Electron app contents are dumped into the project root
-    # directory and the entire folder is contained in a
-    # 'Ardublockly.app/Contents' folder.
-    exec_folder = ""
-else:
-    # In Windows and Linux the Electron files are located in this folder
-    exec_folder = "arduexec"
-py_exec_folder = os.path.join(exec_folder, "server")
+exec_folder_name = "arduexec"
+py_exec_folder = os.path.join(exec_folder_name, spec_coll_name)
 script_tag = "[Ardublockly build] "
 script_tab = "                    "
 
@@ -55,7 +48,6 @@ script_tab = "                    "
 project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
-
 
 # verbose_print = print if verbose else lambda *a, **k: None
 
@@ -176,7 +168,7 @@ def create_shell_file(os_type):
         shell_text = '#!/bin/bash\n' \
                      'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
                      'echo "[Shell Launch Script] Executing from: $DIR"\n' \
-                     './%s' % os.path.join(exec_folder, "ardublockly")
+                     './%s' % os.path.join(exec_folder_name, "ardublockly")
         shell_location = os.path.join(
             project_root_dir, "ardublockly_run.sh")
     else:

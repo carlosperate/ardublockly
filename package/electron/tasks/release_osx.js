@@ -122,8 +122,8 @@ var copyExecFolder = function () {
     // Because the python build file packs the entire arduexe folder as an app
     // package with its respective 'Contents' folder, we want to copy that data
     var finalAppContentDir = finalAppDir.dir('Contents');
-    gulpUtil.log('Copying from ' + finalAppDir.cwd() + ' ' +
-                 'folder: '+ finalAppContentDir.cwd());
+    gulpUtil.log('Copying from ' + finalAppDir.path() + ' ' +
+                 'folder: '+ finalAppContentDir.path());
     finalAppDir.copy(finalAppContentDir.cwd(), ardublocklyProjectDir.cwd(), { overwrite: true });
     return Q();
 };

@@ -8,56 +8,17 @@
  */
 'use strict';
 
-var os = require('os');
-var dialog = require('dialog');
 var winston = require('winston');
-var jetpack = require('fs-jetpack');
 var childProcess = require('child_process');
-var projectRootLocator = require('./rootlocator.js');
-var env = require('./vendor/electron_boilerplate/env_config');
+var projectLocator = require('./projectlocator.js');
 
 var tag = '[Server mgr] '
 
 var serverProcess = null;
 
-function getServerExecLocation() {
-    // Relevant OS could be win32, linux, darwin
-    winston.info(tag + 'OS detected: ' + process.platform);
-
-    var ardublocklyProjRootDir = projectRootLocator.getProjectRootJetpack();
-
-    // Then, work out the location of the python executable files
-    if (process.platform == 'darwin') {
-        var arduexecDir = ardublocklyProjRootDir.dir('server');
-    } else {
-        var arduexecDir = ardublocklyProjRootDir.dir('arduexec/server');
-    }
-
-    // Finally, work out the name of the executable
-    var arduexecFileName = 'start';
-    if (process.platform == 'win32') {
-        arduexecFileName += '.exe';
-    }
-
-    var executableLocation = arduexecDir.path(arduexecFileName);
-    winston.info(tag + 'Server executable: ' + executableLocation);
-    return executableLocation;
-}
-
-function ardublocklyNotFound(working_dir) {
-    dialog.showMessageBox({
-        type: 'warning',
-        title: 'Server Error',
-        buttons: ['ok'],
-        message: 'The Ardublockly folder could not be found within the ' +
-                 'execution directory:\n' + working_dir + '\nThe application ' +
-                 'will not be able to function properly.'
-    });
-}
-
 module.exports.startServer = function() {
     if (serverProcess === null) {
-        var serverExecLocation = getServerExecLocation();
+        var serverExecLocation = projectLocator.getServerExecPath();
         winston.info(tag + 'Command: ' + serverExecLocation +
                      ' --findprojectroot --nobrowser');
         serverProcess = childProcess.spawn(

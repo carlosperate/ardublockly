@@ -4,17 +4,35 @@
  * @license   Licensed under the The MIT License (MIT), a copy can be found in
  *            the electron project directory LICENSE file.
  *
- * @fileoverview Finds the Ardublockly root directory path.
+ * @fileoverview Finds the Ardublockly Project directory and files.
  */
 'use strict';
 
-var winston = require('winston');
+var dialog = require('dialog');
 var jetpack = require('fs-jetpack');
 var env = require('./vendor/electron_boilerplate/env_config');
+
+// Name of the folder containing the electron executable, needs to be synced
+// with the name set in the Python server and Electron build files.
+var execFolderName = 'arduexec';
+var serverExecFolderName = 'server';
+var serverExecName = 'start';
+module.exports.ardublocklyExecFolderName = execFolderName;
 
 var tag = '[Project Root Locator] ';
 
 var ardublocklyRootDir = null;
+
+function ardublocklyNotFound(working_dir) {
+    dialog.showMessageBox({
+        type: 'warning',
+        title: 'Unable to locate Ardublockly folder',
+        buttons: ['ok'],
+        message: 'The Ardublockly folder could not be found within the ' +
+                 'execution directory:\n\t' + working_dir + '\nThe ' +
+                 'application will not be able to function properly.'
+    });
+}
 
 module.exports.getProjectRootJetpack = function() {
     if (ardublocklyRootDir === null) {
@@ -28,8 +46,6 @@ module.exports.getProjectRootJetpack = function() {
             ardublocklyRootDir = jetpack.dir(__dirname);
             var oldArdublocklyRootDir = '';
             while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
-                //winston.log('info', tag + 'Search for Ardublockly project ' +
-                //            'dir: ' + ardublocklyRootDir.cwd());
                 // Check if /ardublokly/index.html exists within current path
                 if (jetpack.exists(
                         ardublocklyRootDir.path('ardublockly', 'index.html'))) {
@@ -45,12 +61,37 @@ module.exports.getProjectRootJetpack = function() {
                 ardublocklyNotFound(ardublocklyRootDir.path('.'));
             }
         }
-        winston.info(tag + 'Ardublockly root dir: ' + ardublocklyRootDir.cwd());
+        
     }
-
     return ardublocklyRootDir;
 };
 
 module.exports.getProjectRootPath = function() {
     return module.exports.getProjectRootJetpack().path();
+};
+
+module.exports.getExecDirJetpack = function() {
+    return module.exports.getProjectRootJetpack().cwd(execFolderName);
+};
+
+module.exports.getExecDirPath = function() {
+    return module.exports.getProjectRootJetpack().path(execFolderName);
+};
+
+module.exports.getServerExecDirJetpack = function() {
+    return module.exports.getProjectRootJetpack()
+            .cwd(execFolderName, serverExecFolderName);
+};
+
+module.exports.getServerExecDirPath = function() {
+    return module.exports.getProjectRootJetpack()
+            .path(execFolderName, serverExecFolderName);
+};
+
+module.exports.getServerExecPath = function() {
+    var finalServerExecName = serverExecName;
+    if (process.platform == 'win32') {
+        finalServerExecName += '.exe';
+    }
+    return module.exports.getServerExecDirJetpack().path(finalServerExecName);
 };

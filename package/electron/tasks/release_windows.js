@@ -6,10 +6,11 @@ var childProcess = require('child_process');
 var jetpack = require('fs-jetpack');
 var asar = require('asar');
 var utils = require('./utils');
+var projectLocator = require('../app/projectlocator.js');
 
 var projectDir;
 var tmpDir;
-var arduexecDir;
+var arduExecDir;
 var releasesDir;
 var readyAppDir;
 var manifest;
@@ -17,7 +18,8 @@ var manifest;
 var init = function () {
     projectDir = jetpack;
     tmpDir = projectDir.dir('./tmp', { empty: true });
-    arduexecDir = projectDir.dir('../../arduexec');
+    arduExecDir = projectDir.dir('../../' +
+                                 projectLocator.ardublocklyExecFolderName);
     releasesDir = projectDir.dir('./releases');
     manifest = projectDir.read('app/package.json', 'json');
     readyAppDir = tmpDir.cwd(manifest.name);
@@ -120,7 +122,7 @@ var createInstaller = function () {
 };
 
 var copyExecFolder = function () {
-    readyAppDir.copy(readyAppDir.cwd(), arduexecDir.cwd(), { overwrite: true });
+    readyAppDir.copy(readyAppDir.cwd(), arduExecDir.cwd(), { overwrite: true });
     return Q();
 };
 

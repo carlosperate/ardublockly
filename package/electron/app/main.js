@@ -10,14 +10,15 @@
 'use strict';
 
 var app = require('app');
-var dialog = require('dialog');
 var winston = require('winston');
 var appMenu = require('./appmenu.js');
 var server = require('./servermgr.js');
 var BrowserWindow = require('browser-window');
-var projectRootLocator = require('./rootlocator.js');
+var projectLocator = require('./projectlocator.js');
 var env = require('./vendor/electron_boilerplate/env_config');
 var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
+
+var tag = '[Ardublockly Electron] ';
 
 // Global reference of the window object must be maintain, or the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -31,17 +32,20 @@ var mainWindowState = windowStateKeeper('main', {
 });
 
 app.on('ready', function() {
-    var projectRootPath = projectRootLocator.getProjectRootPath();
+    createSplashWindow();
 
     // Setting up logging system
+    var projectRootPath = projectLocator.getProjectRootPath();
     winston.add(winston.transports.File, {
         json: false,
         filename: projectRootPath + '/ardublockly.log',
         maxsize: 10485760,
         maxFiles: 2
     });
+    winston.info(tag + 'Ardublockly root dir: ' + ardublocklyRootDir.cwd());
 
-    createSplashWindow();
+    // Relevant OS could be win32, linux, darwin
+    winston.info(tag + 'OS detected: ' + process.platform);
 
     server.startServer();
 
@@ -81,7 +85,7 @@ app.on('ready', function() {
 
     mainWindow.webContents.on('did-fail-load',
         function(event, errorCode, errorDescription) {
-            winston.warn('Page failed to load (' + errorCode + '). The ' +
+            winston.warn(tag + 'Page failed to load (' + errorCode + '). The ' +
                 'server is probably not yet running. Trying again in 200 ms.');
             setTimeout(function() {
                 mainWindow.webContents.reload();
@@ -118,7 +122,7 @@ app.on('window-all-closed', function() {
 
 function createSplashWindow() {
     if (splashWindow === null) {
-        var projectJetPath = projectRootLocator.getProjectRootJetpack();
+        var projectJetPath = projectLocator.getProjectRootJetpack();
         var imagePath = 'file://' + projectJetPath.path(
             'ardublockly', 'img', 'ardublockly_splash.png');
 
