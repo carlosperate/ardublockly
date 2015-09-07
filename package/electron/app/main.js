@@ -25,12 +25,23 @@ var tag = '[Ardublockly Electron] ';
 var mainWindow = null;
 var splashWindow = null;
 
+// Set up the app data directory within the Ardublockly root directory
+(function setAppData() {
+    var appDataPath = projectLocator.getExecDirJetpack().cwd('appdata');
+    app.setPath('appData', appDataPath.path());
+    app.setPath('userData', appDataPath.path());
+    app.setPath('cache', appDataPath.path('GenCache'));
+    app.setPath('userCache', appDataPath.path('AppCache'));
+    app.setPath('temp', appDataPath.path('temp'));
+})();
+
 // Preserver of the window size and position between app launches.
 var mainWindowState = windowStateKeeper('main', {
     width: 1200,
     height: 765
 });
 
+// Electron application entry point
 app.on('ready', function() {
     createSplashWindow();
 
@@ -42,7 +53,7 @@ app.on('ready', function() {
         maxsize: 10485760,
         maxFiles: 2
     });
-    winston.info(tag + 'Ardublockly root dir: ' + ardublocklyRootDir.cwd());
+    winston.info(tag + 'Ardublockly root dir: ' + projectRootPath);
 
     // Relevant OS could be win32, linux, darwin
     winston.info(tag + 'OS detected: ' + process.platform);

@@ -8,7 +8,6 @@
  */
 'use strict';
 
-var dialog = require('dialog');
 var jetpack = require('fs-jetpack');
 var env = require('./vendor/electron_boilerplate/env_config');
 
@@ -24,7 +23,7 @@ var tag = '[Project Root Locator] ';
 var ardublocklyRootDir = null;
 
 function ardublocklyNotFound(working_dir) {
-    dialog.showMessageBox({
+    require('dialog').showMessageBox({
         type: 'warning',
         title: 'Unable to locate Ardublockly folder',
         buttons: ['ok'],
