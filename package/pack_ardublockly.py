@@ -33,6 +33,7 @@ import shutil
 import struct
 import zipfile
 import platform
+import subprocess
 
 
 script_tag = "[Ardublockly pack] "
@@ -74,7 +75,7 @@ def set_tag(tag):
 
 def get_build_tag():
     """
-    The tag will always contain the timestamp and architecture version.
+    The tag will always contain the timestamp and platform architecture.
     If provided as a command line argument it will add an additional string,
     if not it will check for environmental variables set in build servers to
     create an identification tag.
@@ -82,8 +83,9 @@ def get_build_tag():
     """
     # All tags begging with architecture type (based on the Python version) and
     # the current time stamp
-    arch_time_stamp = "%sbit_%s" % ((struct.calcsize('P') * 8),
-                                    time.strftime("%Y-%m-%d_%H.%M.%S"))
+    arch_time_stamp = "%s%s_%s" % (platform.system(),
+                                   (struct.calcsize('P') * 8),
+                                   time.strftime("%Y-%m-%d_%H.%M"))
 
     # Check if a command line argument has been given
     if len(sys.argv) > 1:
@@ -149,14 +151,14 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
                   (pull_request_var, pull_request, ci_name))
 
     if branch and commit:
-        print(script_tab + "Branch and commit valid '%s' variables found: %s %s"
+        print(script_tab + "\tBranch and commit valid '%s' variables found: %s %s"
               % (ci_name, branch, commit))
         # We only return first 10 digits from the commit ID (normal length 40)
         commit = "%s" % commit
-        return "%s_%s" % (branch, commit[:10])
+        return "%s_%s" % (branch, commit[:5])
 
-    print(script_tab + "The environmental variables for %s " % ci_name +
-          "were deemed invalid:\n" +
+    print(script_tab + "\tThe environmental variables for %s " % ci_name +
+          "were deemed invalid.\n" +
           script_tab + "\t%s: %s\n" % (pull_request_var, pull_request) +
           script_tab + "\t%s: %s\n" % (branch_var, branch) +
           script_tab + "\t%s: %s" % (commit_var, commit))
@@ -181,14 +183,13 @@ def copy_ardublockly_folder():
     """
     ignore_pat = (".git*", ".svn", ".travis*", ".appveyor*", "circle.yml",
                   ".ruby-version", "TestTemp_*", "package")
-    test = shutil.ignore_patterns(*ignore_pat)
     if not os.path.exists(copied_project_dir):
-        print(script_tab + "Copying contents of %s\n" % project_root_dir +
-              script_tab + "into                %s" % copied_project_dir)
+        print(script_tab + "Copying contents of %s" % project_root_dir)
+        print(script_tab + "               into %s" % copied_project_dir)
         shutil.copytree(project_root_dir,
                         copied_project_dir,
-                        symlinks=False,
-                        ignore=test)
+                        symlinks=True,
+                        ignore=shutil.ignore_patterns(*ignore_pat))
     else:
         print(script_tab + "ERROR: %s directory already exists!" %
               copied_project_dir)
@@ -206,10 +207,31 @@ def remove_unnecessary_blockly():
     remove_directory(os.path.join(copied_project_dir, "blockly", "tests"))
 
 
+def remove_file_type_from(file_extension, scan_path):
+    """
+    Removes all files with an specific extension from a given directory.
+    :param file_extension: File extension of the files to remove
+    :param scan_path: Directory to scan for file removal.
+    """
+    source = os.listdir(scan_path)
+    for file_ in source:
+        if file_.endswith("." + file_extension):
+            file_path = os.path.join(scan_path, file_)
+            print(script_tab + "Deleting file: %s" % file_path)
+            os.remove(file_path)
+
+
 def zip_ardublockly_copy(name_append):
     """
     Zips the contents of the copied project folder into a subdirectory of
     the original project folder.
+    There is some weird zip module magic numbers:
+        zipfile.ZipInfo().create_system: Defines the system creating the zip
+            file set to 0 for Windows and to 3 for anything else (unix-y as
+            described by the Python source code).
+        zipfile.ZipInfo().external_attr: Is the External file attributes, the
+            value 2716663808L is the long representation of '0xA1ED0000L', some
+            symlink attribute magic...
     """
     zip_file_dir = os.path.join(project_root_dir, "releases")
     zip_file_location = os.path.join(
@@ -227,17 +249,26 @@ def zip_ardublockly_copy(name_append):
 
     old_cwd = os.getcwd()
     os.chdir(os.path.dirname(project_root_dir))
-    print(script_tab + "Changing Working Directory from %s to %s" %
-          (old_cwd, os.getcwd()))
-    print(script_tab + "Zipping the contents of %s" % app_folder)
-    print(script_tab + "into                    %s" % zip_file_location)
+    print(script_tab + "Changing cwd from %s" % old_cwd)
+    print(script_tab + "               to %s" % os.getcwd())
+    print(script_tab + "Zipping %s" % app_folder)
+    print(script_tab + "   into %s" % zip_file_location)
 
-    zip_file = zipfile.ZipFile(zip_file_location, "w", zipfile.ZIP_DEFLATED)
-    for dir_name, sub_dirs, files in os.walk(copy_dir_name):
-        zip_file.write(dir_name)
-        for filename in files:
-            zip_file.write(os.path.join(dir_name, filename))
-    zip_file.close()
+    if platform.system() == "Darwin":
+        # There are issues with zipfile and symlinks, so use zip command line
+        zip_process = subprocess.Popen(
+            ["zip", "--symlinks", "-r", zip_file_location, copy_dir_name],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        std_op, std_err_op = zip_process.communicate()
+        if std_err_op:
+            print(script_tab + "Error using zip command:\n%s" % std_err_op)
+    else:
+        zip_file = zipfile.ZipFile(zip_file_location, "w", zipfile.ZIP_DEFLATED)
+        for root_dir, sub_dirs, files in os.walk(copy_dir_name):
+            zip_file.write(root_dir)
+            for filename in files:
+                zip_file.write(os.path.join(root_dir, filename))
+        zip_file.close()
 
 
 def pack_ardublockly(tag):
@@ -259,11 +290,16 @@ def pack_ardublockly(tag):
     print(script_tag + "Removing unnecessary Blockly files:")
     remove_unnecessary_blockly()
 
+    print(script_tag + "Removing Python server .pyc files:")
+    remove_file_type_from(
+        file_extension="pyc",
+        scan_path=os.path.join(copied_project_dir, "ardublocklyserver"))
+
     print(script_tag + "Removing any already zipped Ardublockly version:")
     remove_directory(os.path.join(copied_project_dir, "releases"))
 
-    print(script_tag + "Removing CEF temporary files:")
-    remove_directory(os.path.join(copied_project_dir, "webcache"))
+    print(script_tag + "Removing Electron session app data files:")
+    remove_directory(os.path.join(copied_project_dir, "arduexec", "appdata"))
 
     print(script_tag + "Creating zip file of the new Ardublockly folder:")
     zip_ardublockly_copy(tag)
