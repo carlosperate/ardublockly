@@ -4,7 +4,7 @@
  *
  * @fileoverview Object that defines static objects and methods to assign
  *               Blockly types to Blockly blocks. These can then be converted to
- *               language specific type in each language generator.
+ *               language specific types in each language generator.
  */
 'use strict';
 
@@ -43,9 +43,9 @@ Blockly.StaticTyping.BlocklyType = {
 };
 
 /**
- * Navigates through the blocks collecting all variables and getting their type
- * into an associative array with the variable names as the keys and the type
- * as the values.
+ * Navigates through the top level blocks collecting all variables and getting
+ * their type into an associative array with the variable names as the keys and
+ * the type as the values.
  * @param {Blockly.Workspace} workspace Blockly Workspace to collect variables.
  * @return {Array<string>} Associative array with the variable names as the keys
  *     and the type as the values.
@@ -58,7 +58,7 @@ Blockly.StaticTyping.getAllVarsWithTypes = function(workspace) {
   }
 
   var varsWithTypes = Object.create(null);
-  var varSetTypeCallbacks = Object.create(null);
+  var varUndefBlockList = Object.create(null);
   for (var x = 0, xlength_ = blocks.length; x < xlength_; x++) {
     var block = blocks[x];
     do {
@@ -68,18 +68,32 @@ Blockly.StaticTyping.getAllVarsWithTypes = function(workspace) {
         var varName = blockVarsWithTypes[z][0];
         var varType = blockVarsWithTypes[z][1];
         Blockly.StaticTyping.manageVarsWithTypes(
-            block, varName, varType, varsWithTypes, varSetTypeCallbacks);
+            block, varName, varType, varsWithTypes, varUndefBlockList);
       }  // end loop for block variables
-      block = block.nextConnection && block.nextConnection.targetBlock();
+      var childBlocks = null;
+      if (block.nextConnection) {
+        block = block.nextConnection.targetBlock();
+      } else if (block.getProcedureDef &&
+                 (childBlocks = block.getChildren()).length > 0) {
+        // If the block is a function there is no connection, but a child block
+        block = childBlocks[0];
+      } else {
+        block = null;
+      }
     } while (block);
   }  // end loop for all top blocks
 
   return varsWithTypes;
 };
 
-/** Description */
+/**
+  * Retrieves the input argument block variables with their set type.
+  * @param {Blockly.Block} block Block to retrieve variables from.
+  * @return {Array<string>} Associative array with the block variable names as
+  *     the keys and the type as the values.
+  */
 Blockly.StaticTyping.getBlockVars = function(block) {
-  var varsWithTypes = [];
+  var blockVarsWithTypes = [];
   var getVars = block.getVars;
   if (getVars) {
     var blockVariables = getVars.call(block);
@@ -89,28 +103,39 @@ Blockly.StaticTyping.getBlockVars = function(block) {
       var getVarType = block.getVarType;
       if (getVarType) {
         var varType = getVarType.call(block, varName);
-        varsWithTypes.push([varName, varType]);
+        blockVarsWithTypes.push([varName, varType]);
       } else {
-        varsWithTypes.push(
+        blockVarsWithTypes.push(
             [varName, Blockly.StaticTyping.BlocklyType.UNSPECIFIED]);
       }
     }
-  } // else block.getVars() existence: Block does not define vars, do nothing
-  return varsWithTypes;
+  } // else: !(block.getVars), block does not define vars, so do nothing
+  return blockVarsWithTypes;
 };
 
-/** Description */
-Blockly.StaticTyping.manageVarsWithTypes =
-    function(block, varName, varType, varsWithTypes, varSetTypeCallbacks) {
+/**
+ * Manages the associative array of variables with their type.
+ * @param {Blockly.Block} block Blockly providing the variable to manage.
+ * @param {string} varName Name of the variable to manage.
+ * @param {string} varType Type assigned by the current block.
+ * @param {Array<string>} varsWithTypes Associative array containing the
+ *     currently processed variables, with the variable names as the keys and
+ *     the type as the values.
+ * @param {Array<Blockly.Block>} varUndefBlockList Associative array of blocks
+ *     to call back with a type for the variables (used as the key) that they
+ *      contain currently undefined.
+ */
+Blockly.StaticTyping.manageVarsWithTypes = function(
+    block, varName, varType, varsWithTypes, varUndefBlockList) {
   if (varsWithTypes[varName] === undefined) {
     // First time variable is encountered, so set type and callback list
     varsWithTypes[varName] = varType;
-    varSetTypeCallbacks[varName] = [];
+    varUndefBlockList[varName] = [];
 
     // If this block type is UNDEF it will need to know its type
     if ((varType === Blockly.StaticTyping.BlocklyType.UNDEF) &&
         (block.setBlockType)) {
-      varSetTypeCallbacks[varName].push(block);
+      varUndefBlockList[varName].push(block);
     }
   } else if (varsWithTypes[varName] ===
              Blockly.StaticTyping.BlocklyType.UNDEF) {
@@ -120,12 +145,12 @@ Blockly.StaticTyping.manageVarsWithTypes =
     // If this block type is UNDEF it will need to know its type
     if (varType === Blockly.StaticTyping.BlocklyType.UNDEF) {
       if (block.setBlockType) {
-        varSetTypeCallbacks[varName].push(block);
+        varUndefBlockList[varName].push(block);
       }
     } else {
       // Valid type added, so update all waiting blocks
-      for (var i = 0; i < varSetTypeCallbacks[varName].length; i++) {
-        varSetTypeCallbacks[varName][i].setBlockType(varType);
+      for (var i = 0; i < varUndefBlockList[varName].length; i++) {
+        varUndefBlockList[varName][i].setBlockType(varType);
       }
     }
   } else {
@@ -143,14 +168,20 @@ Blockly.StaticTyping.manageVarsWithTypes =
 
 /**
  * When a block uses a variable this function can compare its type with the
- * variable type and set a warning if they are not the same or compatible. 
+ * variable type and set a warning if they are not the same or compatible.
  * @param {!Blockly.Block} block The block to manage its warning.
  * @param {!string} bType The type of this block.
  * @param {!string} vName The variable name.
  * @param {!string} vType The type of the variable.
  */
 Blockly.StaticTyping.manageTypeWarning = function(block, bType, vName, vType) {
-  if ((vType !== bType) && (bType !== Blockly.StaticTyping.BlocklyType.UNDEF)) {
+  if ((bType === Blockly.StaticTyping.BlocklyType.CHILD_BLOCK_MISSING) ||
+      (vType === Blockly.StaticTyping.BlocklyType.CHILD_BLOCK_MISSING)) {
+    // User still has to attach a block to this variable or its first
+    // declaration, so for now do not display any warning
+    block.setWarningText(null, 'varType');
+  } else if ((vType !== bType) &&
+             (bType !== Blockly.StaticTyping.BlocklyType.UNDEF)) {
     block.setWarningText('The variable ' + vName +' has been first assigned' +
         'to the type "' + vType + '"" and this block needs it to be set to ' +
         'the type "' + bType + '" !', 'varType');
@@ -159,10 +190,14 @@ Blockly.StaticTyping.manageTypeWarning = function(block, bType, vName, vType) {
   }
 };
 
-
-/** Description */
+/**
+ * Iterates through the list of top level blocks and
+ * @param {Blockly.Workspace} workspace Blockly Workspace to collect variables.
+ * @param {Array<string>} Associative array with the variable names as the keys
+ *     and the type as the values.
+ */
 Blockly.StaticTyping.setProcedureArgs = function(workspace, varsWithTypes) {
-  var blocks = workspace.getAllBlocks();
+  var blocks = workspace.getTopBlocks();
   for (var i = 0, length_ = blocks.length; i < length_; i++) {
     var setArgsType = blocks[i].setArgsType;
     if (setArgsType) {
@@ -172,7 +207,7 @@ Blockly.StaticTyping.setProcedureArgs = function(workspace, varsWithTypes) {
 };
 
 /**
- * Navigates through the child blocks to get the block type.
+ * Navigates through the child blocks of the input block to get the block type.
  * @param {!Blockly.Block} block Block to navigate through children.
  * @return {string} Type of the input block.
  */
@@ -208,9 +243,8 @@ Blockly.StaticTyping.regExpInt_ = new RegExp(/^\d+$/);
 Blockly.StaticTyping.regExpFloat_ = new RegExp(/^[0-9]*[.][0-9]+$/);
 
 /**
- * Navigates through the blocks collecting all variables and getting their type
- * into an associative array with the variable names as the keys and the type
- * as the values.
+ * Uses regular expressions to identify if the input number is an integer or a
+ * floating point.
  * @param {string} numberString String of the number to identify.
  * @return {!Blockly.StaticTyping.BlocklyType} Blockly type.
  */
@@ -225,7 +259,7 @@ Blockly.StaticTyping.identifyNumber = function(numberString) {
 };
 
 /**
- * Converts the static types dictionary in to a an array with 2-item arrays. 
+ * Converts the static types dictionary in to a an array with 2-item arrays.
  * This array only contains the valid types, excluding any error or temp types.
  * @return {!array<array<string>>} Blockly types in the format described above.
  */
