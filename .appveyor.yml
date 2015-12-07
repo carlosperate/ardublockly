@@ -1,5 +1,5 @@
 environment:
-  nodejs_version: "0.12.4"
+  nodejs_version: "0.12.7"
   matrix:
     # First group is 32 bit python 2.7
     - PYTHON: "C:\\Python27"
@@ -20,7 +20,7 @@ init:
   - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
 
   # Ensure node x86 (appveyor powershell script to switch installed versions)
-  - ps: Install-Product node 0.12.4 x86
+  - ps: Install-Product node 0.12.7 x86
   - cmd: node --version
   - cmd: npm --version
 
