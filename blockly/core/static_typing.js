@@ -43,7 +43,7 @@ Blockly.StaticTyping.BlocklyType = {
 };
 
 /**
- * Navigates through the top level blocks collecting all variables and getting
+ * Navigates through all the blocks, collecting all variables and getting
  * their type into an associative array with the variable names as the keys and
  * the type as the values.
  * @param {Blockly.Workspace} workspace Blockly Workspace to collect variables.
@@ -51,39 +51,81 @@ Blockly.StaticTyping.BlocklyType = {
  *     and the type as the values.
  */
 Blockly.StaticTyping.getAllVarsWithTypes = function(workspace) {
-  if (workspace.getTopBlocks) {
-    var blocks = workspace.getTopBlocks(true);
-  } else {
-    throw 'Not a valid workspace: ' + workspace;
-  }
-
+  var blocks = Blockly.StaticTyping.getAllStatementsOrdered(workspace);
   var varsWithTypes = Object.create(null);
   var varUndefBlockList = Object.create(null);
   for (var x = 0, xlength_ = blocks.length; x < xlength_; x++) {
-    var block = blocks[x];
+    blocks[x].select();  // for step debugging, highlights block in workspace
+    // Each statement block iterates through its input children collecting vars
+    var blockVarsWithTypes = Blockly.StaticTyping.getBlockVars(blocks[x]);
+    for (var z = 0; z < blockVarsWithTypes.length; z++) {
+      var varName = blockVarsWithTypes[z][0];
+      var varType = blockVarsWithTypes[z][1];
+      Blockly.StaticTyping.manageVarsWithTypes(
+          blocks[x], varName, varType, varsWithTypes, varUndefBlockList);
+    }
+  }
+  return varsWithTypes;
+};
+
+/**
+ * Navigates through each top level block in the workspace to collect all
+ * statement blocks, in order from top left.
+ * @param {Blockly.Workspace} workspace Blockly Workspace to collect blocks.
+ * @return {Array<Blockly.Block>} Array containing all workspace statement
+ *     blocks.
+ */
+Blockly.StaticTyping.getAllStatementsOrdered = function(workspace) {
+  if (!workspace.getTopBlocks) {
+    throw 'Not a valid workspace: ' + workspace;
+  }
+
+  /**
+   * Navigates through each continous block to collect all  statement blocks.
+   * Function required to use recursion for block input statements.
+   * @param {Blockly.Block} startBlock Block to start iterating from..
+   * @return {Array<Blockly.Block>} Array containing all continuous statement
+   *     blocks.
+   */
+  var getAllContinuousStatements = function(startBlock) {
+    var block = startBlock;
+    var nextBlock = null;
+    var connections = null;
+    var blockNextConnection = null;
+    var blocks = [];
     do {
       block.select();  // for step debugging, highlights block in workspace
-      var blockVarsWithTypes = Blockly.StaticTyping.getBlockVars(block);
-      for (var z = 0; z < blockVarsWithTypes.length; z++) {
-        var varName = blockVarsWithTypes[z][0];
-        var varType = blockVarsWithTypes[z][1];
-        Blockly.StaticTyping.manageVarsWithTypes(
-            block, varName, varType, varsWithTypes, varUndefBlockList);
-      }  // end loop for block variables
-      var childBlocks = null;
-      if (block.nextConnection) {
-        block = block.nextConnection.targetBlock();
-      } else if (block.getProcedureDef &&
-                 (childBlocks = block.getChildren()).length > 0) {
-        // If the block is a function there is no connection, but a child block
-        block = childBlocks[0];
-      } else {
-        block = null;
+      blocks.push(block);
+      blockNextConnection = block.nextConnection;
+      connections = block.getConnections_();
+      block = null;
+      for (var j = 0; j < connections.length; j++) {
+        if (connections[j].type == Blockly.NEXT_STATEMENT) {
+          nextBlock = connections[j].targetBlock();
+          if (nextBlock) {
+            // If it is the next connection select it and move to the next block
+            if (connections[j] === blockNextConnection) {
+              block = nextBlock;
+            } else {
+              // Recursion as block children can have their own input statements
+              blocks = blocks.concat(getAllContinuousStatements(nextBlock));
+            }
+          }
+        }
       }
     } while (block);
-  }  // end loop for all top blocks
 
-  return varsWithTypes;
+    return blocks;
+  };
+
+  var allStatementBlocks = [];
+  var topBlocks = workspace.getTopBlocks(true);
+  for (var i = 0; i < topBlocks.length; i++) {
+    allStatementBlocks = allStatementBlocks.concat(
+        getAllContinuousStatements(topBlocks[i]));
+  }
+
+  return allStatementBlocks;
 };
 
 /**
@@ -191,7 +233,8 @@ Blockly.StaticTyping.manageTypeWarning = function(block, bType, vName, vType) {
 };
 
 /**
- * Iterates through the list of top level blocks and
+ * Iterates through the list of top level blocks and sets the function arguments
+ * types.
  * @param {Blockly.Workspace} workspace Blockly Workspace to collect variables.
  * @param {Array<string>} Associative array with the variable names as the keys
  *     and the type as the values.
