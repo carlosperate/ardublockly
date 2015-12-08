@@ -682,7 +682,7 @@ Blockly.Blocks['text_prompt_ext'] = {
   },
   /** @return {!string} Type of the block, prompt always returns a string. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.TEXT;
+    return this.getFieldValue('TYPE');
   }
 
 };
