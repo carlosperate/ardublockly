@@ -69,8 +69,8 @@ app.on('ready', function() {
         transparent: false,
         frame: true,
         show: false,
-        'node-integration': true,
         'web-preferences': {
+            'node-integration': true,
             'web-security': true,
             'allow-displaying-insecure-content': false,
             'allow-running-insecure-content': false,
