@@ -7,13 +7,14 @@ It adds the following features:
 
 * Arduino code generation
 * Arduino specific blocks
-* Arduino boards support
+* Different Arduino boards support
 * Static typing (working, but incomplete)
 * Code warnings
+* Arduino pin tracking
 * Arduino generator unit test (incomplete)
 * Procedures and flyout core classes modified to include the Arduino setup() and loop() functions
 
-All other changes and fixes have been submitted to the original blockly repository for inclusion into the upstream master branch.
+All other changes and fixes have been submitted to the original Blockly repository for inclusion into the upstream master branch.
 
 This fork gets frequent upstream pulls to maintain it up to date.
 
