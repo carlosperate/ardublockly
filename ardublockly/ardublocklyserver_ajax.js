@@ -158,7 +158,7 @@ ArdublocklyServer.createElementFromJson = function(json_data) {
       element.appendChild(el_err);
     }
   } else {
-    //TODO: Not recognised alert the user/developer somehow
+    //TODO: Not recognised, alert the user/developer somehow
   }
 
   return element;

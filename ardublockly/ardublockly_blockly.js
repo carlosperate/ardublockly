@@ -42,6 +42,8 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxPath) {
   // Once file is open, inject blockly into element with the toolbox string
   request.onreadystatechange = function() {
     if ((request.readyState == 4) && (request.status == 200)) {
+      var xmlTree = Blockly.Xml.textToDom(request.responseText);
+      Ardublockly.updateToolboxLanguage(xmlTree);
       Ardublockly.workspace = Blockly.inject(blocklyEl, {
             collapse: true,
             comments: true,
@@ -49,9 +51,10 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxPath) {
             media: '../blockly/media/',
             rtl: false,
             scrollbars: true,
-            toolbox: request.responseText,
+            toolbox: xmlTree,
             trashcan: true });
       Ardublockly.BLOCKLY_INJECTED_ = true;
+      Ardublockly.loadSessionStorageBlocks();
     }
   };
 
@@ -85,11 +88,11 @@ Ardublockly.bindBlocklyEventListeners = function() {
  * workspace.
  * @param {!string} xmlFile XML file path in a reachable server (no local path).
  * @param {!function} callbackFileLoaded Function to be called once the file is
- *                                       loaded.
+ *     loaded.
  * @param {!function} callbackConectonError Function to be called if there is a
- *                                          connection error to the XML server.
+ *     connection error to the XML server.
  */
-Ardublockly.loadXmlBlockFile = function(xmlFile, callbackFileLoaded, 
+Ardublockly.loadXmlBlockFile = function(xmlFile, callbackFileLoaded,
     callbackConectonError) {
   // Create a an XML HTTP request
   var request = Ardublockly.ajaxRequest();
@@ -171,6 +174,34 @@ Ardublockly.loadBlocksfromXmlDom = function(blocksXmlDom) {
   return true;
 };
 
+/**
+ * Save blocks into session storage. Note that MSIE 11 does not support
+ * sessionStorage on file:// URLs.
+ */
+Ardublockly.saveSessionStorageBlocks = function() {
+  if (window.sessionStorage) {
+    var xml = Blockly.Xml.workspaceToDom(Ardublockly.workspace);
+    var text = Blockly.Xml.domToText(xml);
+    window.sessionStorage.loadOnceBlocks = text;
+  }
+};
+
+/** Load blocks saved on session storage and deletes them from storage. */
+Ardublockly.loadSessionStorageBlocks = function() {
+  try {
+    var loadOnce = window.sessionStorage.loadOnceBlocks;
+  } catch(e) {
+    // Firefox sometimes throws a SecurityError when accessing sessionStorage.
+    // Restarting Firefox fixes this, so it looks like a bug.
+    var loadOnce = null;
+  }
+  if (loadOnce) {
+    delete window.sessionStorage.loadOnceBlocks;
+    var xml = Blockly.Xml.textToDom(loadOnce);
+    Blockly.Xml.domToWorkspace(Ardublockly.workspace, xml);
+  }
+};
+
 /** Discard all blocks from the workspace. */
 Ardublockly.discardAllBlocks = function() {
   var blockCount = Ardublockly.workspace.getAllBlocks().length;
@@ -190,13 +221,27 @@ Ardublockly.discardAllBlocks = function() {
   }
 };
 
-/** 
+/**
  * Changes the Arduino board profile if different from the currently set one.
  * @param {string} newBoard Name of the new profile to set.
  */
 Ardublockly.changeBlocklyArduinoBoard = function(newBoard) {
   if (Blockly.Arduino.Boards.selected !== Blockly.Arduino.Boards[newBoard]) {
     Blockly.Arduino.Boards.changeBoard(Ardublockly.workspace, newBoard);
+  }
+};
+
+/** Update the toolbox categories language. */
+Ardublockly.updateToolboxLanguage = function(xmlTree) {
+  var categories = ['catLogic', 'catLoops', 'catMath', 'catText',
+                    'catVariables', 'catFunctions', 'catInputOutput',
+                    'catTime', 'catMotors', 'catComms'];
+  var categoryNodes = xmlTree.getElementsByTagName('category');
+  for (var i = 0, cat; cat = categoryNodes[i]; i++) {
+    var catId = cat.getAttribute('id');
+    if (MSG[catId]) {
+      cat.setAttribute('name', MSG[catId]);
+    }
   }
 };
 

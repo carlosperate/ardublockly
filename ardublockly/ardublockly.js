@@ -9,10 +9,24 @@
 /** Create a namespace for the application. */
 var Ardublockly = Ardublockly || {};
 
+/** Lookup for names of supported languages. Keys in ISO 639 format. */
+Ardublockly.LANGUAGE_NAME = {
+  'en': 'English',
+  'es': 'Español'
+};
+
+/**
+ * Selected language, default English.
+ * @type {string}
+ */
+Ardublockly.LANG = 'en';
 
 /** Initialize function for Ardublockly on page load. */
 window.addEventListener('load', function load(event) {
   window.removeEventListener('load', load, false);
+  // Lang init must run first for the rest of the page to pick the right msgs
+  Ardublockly.initLanguage();
+
   // Inject Blockly into content_blocks
   Ardublockly.injectBlockly(
     document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
@@ -100,6 +114,100 @@ Ardublockly.bindActionFunctions = function() {
   });
 };
 
+/** Initialize the page language. */
+Ardublockly.initLanguage = function() {
+  // Save the current default state
+  var defaultLang = Ardublockly.LANG;
+
+  // Check server settings and url language, url gets priority
+  Ardublockly.LANG = Ardublockly.getUrlLanguage() ||
+      Ardublockly.getLanguageSetting();
+
+  Ardublockly.populateLanguageMenu(Ardublockly.LANG);
+
+  if (defaultLang !== Ardublockly.LANG) {
+      Ardublockly.injectLanguageJsSources();
+      Ardublockly.updateLanguageText();
+  }
+};
+
+/**
+ * Get the language previously set by the user from the server settings.
+ * @return {string} Language saved in the server settings.
+ */
+Ardublockly.getLanguageSetting = function() {
+  //TODO: Server feature still to be implemented, for now return default
+  return Ardublockly.LANG;
+};
+
+/**
+ * Get the language selected from the URL, format '?lang=en'.
+ * @return {string} Selected language.
+ */
+Ardublockly.getUrlLanguage = function() {
+  var langKey = 'lang';
+  var val = location.search.match(new RegExp('[?&]' + langKey + '=([^&]+)'));
+  var language = val ? decodeURIComponent(val[1].replace(/\+/g, '%20')) : '';
+  if (Ardublockly.LANGUAGE_NAME[language] === undefined) {
+    language = 'null';
+  }
+  return language;
+};
+
+/** Populates the settings language selection menu. */
+Ardublockly.populateLanguageMenu = function(selectedLang) {
+  var languageMenu = document.getElementById('language');
+  languageMenu.options.length = 0;
+
+  for (var lang in Ardublockly.LANGUAGE_NAME) {
+    var option = new Option(Ardublockly.LANGUAGE_NAME[lang], lang);
+    if (lang == selectedLang) {
+      option.selected = true;
+    }
+    languageMenu.options.add(option);
+  }
+  languageMenu.onchange = Ardublockly.changeLanguage;
+};
+
+/** Updates the page displayed text with the new language. */
+Ardublockly.updateLanguageText = function() {
+  //TODO: The page strings still need to be moved into language files
+  //document.getElementById('xxx').textContent = MSG['xxx'];
+  //document.getElementById('xxxButton').title = MSG['xxx'];
+};
+
+/** Injects the langauge javscript files into the html head element. */
+Ardublockly.injectLanguageJsSources = function() {
+  var head = document.getElementsByTagName('head')[0];
+  var appLangJsLoad = document.createElement('script');
+  appLangJsLoad.src = 'msg/' + Ardublockly.LANG + '.js';
+  head.appendChild(appLangJsLoad);
+  var blocklyLangJsLoad = document.createElement('script');
+  blocklyLangJsLoad.src = '../blockly/msg/js/' + Ardublockly.LANG + '.js';
+  head.appendChild(blocklyLangJsLoad);
+};
+
+/** Saves the blocks and reloads with a different language. */
+Ardublockly.changeLanguage = function() {
+  // Store the blocks for the duration of the reload only
+  Ardublockly.saveSessionStorageBlocks();
+
+  var languageMenu = document.getElementById('language');
+  var newLang = encodeURIComponent(
+      languageMenu.options[languageMenu.selectedIndex].value);
+  var search = window.location.search;
+  if (search.length <= 1) {
+    search = '?lang=' + newLang;
+  } else if (search.match(/[?&]lang=[^&]*/)) {
+    search = search.replace(/([?&]lang=)[^&]*/, '$1' + newLang);
+  } else {
+    search = search.replace(/\?/, '?lang=' + newLang + '&');
+  }
+
+  window.location = window.location.protocol + '//' +
+      window.location.host + window.location.pathname + search;
+};
+
 /** Sets the Ardublockly server IDE setting to upload and sends the code. */
 Ardublockly.ideSendUpload = function() {
   // Check if this is the currently selected option before edit sever setting
@@ -162,7 +270,7 @@ Ardublockly.initialiseIdeButtons = function() {
 /**
  * Changes the IDE launch buttons based on the option indicated in the argument.
  * @param {!string} value One of the 3 possible values from the drop down select
- *                        in the settings modal: 'upload', 'verify', or 'open'.
+ *     in the settings modal: 'upload', 'verify', or 'open'.
  */
 Ardublockly.changeIdeButtons = function(value) {
   if (value === 'upload') {
@@ -429,10 +537,9 @@ Ardublockly.setIdeHtml = function(jsonResponse) {
 /**
  * Sets the IDE settings data with the selected user input from the drop down.
  * @param {Event} e Event that triggered this function call. Required for link
- *                  it to the listeners, but not used.
+ *     it to the listeners, but not used.
  * @param {string} preset A value to set the IDE settings bypassing the drop
- *                        down selected value. Valid data: 'upload', 'verify',
- *                        or 'open'.
+ *     down selected value. Valid data: 'upload', 'verify', or 'open'.
  */
 Ardublockly.setIdeSettings = function(e, preset) {
   if (preset !== undefined) {

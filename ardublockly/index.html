@@ -8,9 +8,9 @@
   <title>Ardublockly</title>
 
   <!-- Materialize, Prettify, and Ardublockly CSS -->
-  <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection">
+  <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="prettify/arduino.css">
-  <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
+  <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
 
   <!-- Ardublockly - For now uncompressed files -->
   <!--script src="../blockly/blockly_compressed.js"></script-->
@@ -49,7 +49,9 @@
   <script src="../blockly/generators/arduino/text.js"></script>
   <script src="../blockly/generators/arduino/time.js"></script>
   <script src="../blockly/generators/arduino/variables.js"></script>
+  <!-- Default language js files, user selection appended to head -->
   <script src="../blockly/msg/js/en.js"></script>
+  <script src="msg/en.js"></script>
 </head>
 
 <body>
@@ -220,16 +222,18 @@
       <div class="settings_div">
         <label>COM Port:</label>
         <select name="settings_serial" id="serial_port">
-          <option value="COM4">COM unknown</option>
+          <option value="COMX">COM unknown</option>
         </select>
       </div>
       <div class="settings_div">
         <label>Default IDE button:</label> <br>
         <select name="settings_ide" id="ide_settings">
-          <option value="verify">Verify sketch</option>
-          <option value="open">Open sketch in IDE </option>
-          <option value="upload">Compile and Upload sketch</option>
+          <option value="verify">IDE ptions unknown</option> 
         </select>
+      </div>
+      <div class="settings_div">
+        <label>Language:</label> <br>
+        <select name="settings_language" id="language"></select>
       </div>
     </div>
     <div class="modal-footer">

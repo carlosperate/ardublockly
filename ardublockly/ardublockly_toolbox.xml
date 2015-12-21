@@ -1,6 +1,6 @@
 <xml>
   <sep></sep>
-  <category name="Logic">
+  <category id="catLogic" name="Logic">
     <block type="controls_if"></block>
     <block type="logic_compare"></block>
     <block type="logic_operation"></block>
@@ -10,7 +10,7 @@
     <block type="logic_ternary"></block>
   </category>
   <sep></sep>
-  <category name="Loops">
+  <category id="catLoops" name="Loops">
     <block type="controls_repeat_ext">
       <value name="TIMES">
         <block type="math_number">
@@ -39,7 +39,7 @@
     <block type="controls_flow_statements"></block>
   </category>
   <sep></sep>
-  <category name="Math">
+  <category id="catMath" name="Math">
     <block type="math_number"></block>
     <block type="math_arithmetic"></block>
     <block type="math_single"></block>
@@ -83,7 +83,7 @@
     <block type="base_map"></block>
   </category>
   <sep></sep>
-  <category name="Text">
+  <category id="catText" name="Text">
     <block type="text"></block>
     <block type="text_join"></block>
     <block type="text_append">
@@ -97,7 +97,7 @@
     <!--block type="text_print"></block Part of the serial comms -->
   </category>
   <sep></sep>
-  <category name="Variables">
+  <category id="catVariables" name="Variables">
     <block type="variables_get"></block>
     <block type="variables_set"></block>
     <block type="variables_set">
@@ -108,9 +108,9 @@
     <block type="variables_set_type"></block>
   </category>
   <sep></sep>
-  <category name="Functions" custom="PROCEDURE"></category>
+  <category id="catFunctions" name="Functions" custom="PROCEDURE"></category>
   <sep></sep>
-  <category name="Input/Output">
+  <category id="catInputOutput" name="Input/Output">
     <block type="io_digitalwrite">
       <value name="STATE">
         <block type="io_highlow"></block>
@@ -127,7 +127,7 @@
     <block type="io_highlow"></block>
   </category>
   <sep></sep>
-  <category name="Time">
+  <category id="catTime" name="Time">
     <block type="time_delay">
       <value name="DELAY_TIME_MILI">
         <block type="math_number">
@@ -147,7 +147,7 @@
     <block type="infinite_loop"></block>
   </category>
   <sep></sep>
-  <category name="Motors">
+  <category id="catMotors" name="Motors">
     <block type="servo_write">
       <value name="SERVO_ANGLE">
         <block type="math_number">
@@ -179,7 +179,7 @@
     </block>
   </category>
   <sep></sep>
-  <category name="Comms">
+  <category id="catComms" name="Comms">
     <block type="serial_setup"></block>
     <block type="serial_print"></block>
     <block type="text_prompt_ext">

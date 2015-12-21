@@ -26,7 +26,8 @@ Ardublockly.materializeJsInit = function() {
   $('.button-collapse').sideNav({
       menuWidth: 240,
       activationWidth: 70,
-      edge: 'left'});
+      edge: 'left'
+  });
   // Drop down menus
   $('.dropdown-button').dropdown({hover: false});
   // Overlay content panels using modals (android dialogs)
