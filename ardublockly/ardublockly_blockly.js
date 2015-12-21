@@ -190,7 +190,7 @@ Ardublockly.saveSessionStorageBlocks = function() {
 Ardublockly.loadSessionStorageBlocks = function() {
   try {
     var loadOnce = window.sessionStorage.loadOnceBlocks;
-  } catch(e) {
+  } catch (e) {
     // Firefox sometimes throws a SecurityError when accessing sessionStorage.
     // Restarting Firefox fixes this, so it looks like a bug.
     var loadOnce = null;
@@ -209,7 +209,7 @@ Ardublockly.discardAllBlocks = function() {
     Ardublockly.workspace.clear();
     Ardublockly.renderContent();
   } else if (blockCount > 1) {
-    Ardublockly.materialAlert(
+    Ardublockly.alertMessage(
         'Delete blocks?',
         'There are ' + blockCount + ' blocks on the workspace. Are you sure ' +
         'you want to delete them?',
@@ -231,7 +231,10 @@ Ardublockly.changeBlocklyArduinoBoard = function(newBoard) {
   }
 };
 
-/** Update the toolbox categories language. */
+/**
+ * Update the toolbox categories language.
+ * @param {!Element} xmlTree Toolbox tree of XML elements.
+ */
 Ardublockly.updateToolboxLanguage = function(xmlTree) {
   var categories = ['catLogic', 'catLoops', 'catMath', 'catText',
                     'catVariables', 'catFunctions', 'catInputOutput',

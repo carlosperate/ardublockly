@@ -153,7 +153,10 @@ Ardublockly.getUrlLanguage = function() {
   return language;
 };
 
-/** Populates the settings language selection menu. */
+/**
+ * Populates the settings language selection menu.
+ * @param {!string} selectedLang Language to be marked as selected.
+ */
 Ardublockly.populateLanguageMenu = function(selectedLang) {
   var languageMenu = document.getElementById('language');
   languageMenu.options.length = 0;
@@ -175,7 +178,7 @@ Ardublockly.updateLanguageText = function() {
   //document.getElementById('xxxButton').title = MSG['xxx'];
 };
 
-/** Injects the langauge javscript files into the html head element. */
+/** Injects the language JavaScript files into the html head element. */
 Ardublockly.injectLanguageJsSources = function() {
   var head = document.getElementsByTagName('head')[0];
   var appLangJsLoad = document.createElement('script');
@@ -214,7 +217,7 @@ Ardublockly.ideSendUpload = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'upload');
   }
-  Materialize.toast('Uploading sketch into Arduino...', 4000);
+  Ardublockly.shortMessage('Uploading sketch into Arduino...');
   Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
@@ -226,7 +229,7 @@ Ardublockly.ideSendVerify = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'verify');
   }
-  Materialize.toast('Verifying sketch...', 4000);
+  Ardublockly.shortMessage('Verifying sketch...');
   Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
@@ -238,7 +241,7 @@ Ardublockly.ideSendOpen = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'open');
   }
-  Materialize.toast('Opening sketch in the Arduino IDE...', 4000);
+  Ardublockly.shortMessage('Opening sketch in the Arduino IDE...');
   Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
@@ -301,7 +304,7 @@ Ardublockly.loadServerXmlFile = function(xmlFile) {
     if (sucess) {
       Ardublockly.renderContent();
     } else {
-      Ardublockly.materialAlert(
+      Ardublockly.alertMessage(
           'Invalid XML',
           'The XML file was not successfully parsed into blocks.' +
           'Please review the XML code and try again.',
@@ -329,7 +332,7 @@ Ardublockly.loadUserXmlFile = function() {
       if (success) {
         Ardublockly.renderContent();
       } else {
-        Ardublockly.materialAlert(
+        Ardublockly.alertMessage(
             'Invalid XML',
             'The XML file was not successfully parsed into blocks.' +
             'Please review the XML code and try again.',
@@ -585,7 +588,7 @@ Ardublockly.XmlTextareaToBlocks = function() {
   if (success) {
     Ardublockly.renderContent();
   } else {
-    Ardublockly.materialAlert(
+    Ardublockly.alertMessage(
         'Invalid XML',
         'The XML inputted into the text area was not successfully parsed into' +
         'blocks. Please review the XML code and try again.',
@@ -670,6 +673,32 @@ Ardublockly.isToolboxVisible = function() {
   return Ardublockly.TOOLBAR_SHOWING_;
 };
 
+/** Informs the user that the selected function is not yet implemented. */
+Ardublockly.functionNotImplemented = function() {
+  Ardublockly.shortMessage('Function not yet implemented');
+};
+
+/**
+ * Interface to display messages with a possible action.
+ * @param {!string} title HTML to include in title.
+ * @param {!element} body HTML to include in body.
+ * @param {boolean=} confirm Indicates if the user is shown a single option (ok)
+ *     or an option to cancel, with an action applied to the "ok".
+ * @param {string=|function=} callback If confirm option is selected this would
+ *     be the function called when clicked 'OK'.
+ */
+Ardublockly.alertMessage = function(title, body, confirm, callback) {
+  Ardublockly.materialAlert(title, body, confirm, callback);
+};
+
+/**
+ * Interface to displays a short message, which disappears after a time out.
+ * @param {!string} message Text to be temporarily displayed.
+ */
+Ardublockly.shortMessage = function(message) {
+  Ardublockly.MaterialToast(message);
+};
+
 /**
  * Bind a function to a button's click event.
  * On touch enabled browsers, ontouchend is treated as equivalent to onclick.
@@ -689,11 +718,4 @@ Ardublockly.bindClick_ = function(el, func) {
   };
   el.addEventListener('ontouchend', propagateOnce);
   el.addEventListener('click', propagateOnce);
-};
-
-/**
- * Populate the currently selected panel with content generated from the blocks.
- */
-Ardublockly.functionNotImplemented = function() {
-  Materialize.toast('Function not yet implemented', 4000);
 };

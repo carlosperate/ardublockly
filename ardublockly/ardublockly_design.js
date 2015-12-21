@@ -84,7 +84,7 @@ Ardublockly.buttonLoadXmlCodeDisplay = function() {
 /**
  * Changes the IDE launch buttons based on the option indicated in the argument.
  * @param {!string} value One of the 3 possible values from the drop down select
- *                        in the settings modal: 'upload', 'verify', or 'open'.
+ *     in the settings modal: 'upload', 'verify', or 'open'.
  */
 Ardublockly.changeIdeButtonsDesign = function(value) {
   var buttonLeft = document.getElementById('button_ide_left');
@@ -218,12 +218,12 @@ Ardublockly.displayToolbox = function(show) {
     toolbox.animate(
         {height: document.getElementById('content_blocks').style.height}, 300,
         function() {
-          toolboxTree.css("overflow-y", "auto");
+          toolboxTree.css('overflow-y', 'auto');
           Blockly.fireUiEvent(window, 'resize');
           $('#toolboxButtonScreen').remove();
         });
   } else {
-    toolboxTree.css("overflow-y", "hidden");
+    toolboxTree.css('overflow-y', 'hidden');
     buttonIcon.className = buttonIcon.className.replace(visOff, visOn);
     toolbox.animate({height: 38}, 300, function() {
       button.className = button.className.replace(classOff, classOn);
@@ -282,9 +282,9 @@ Ardublockly.resizeBlocklyWorkspace = function() {
  * @param {!string} title HTML to include in title.
  * @param {!element} body HTML to include in body.
  * @param {boolean=} confirm Indicates if the user is shown and option to just
- *                            'Ok' or 'Ok and cancel'.
+ *     'Ok' or 'Ok and cancel'.
  * @param {string=|function=} callback If confirm option is selected this would
- *                                     be the function called when clicked 'OK'.
+ *     be the function called when clicked 'OK'.
  */
 Ardublockly.materialAlert = function(title, body, confirm, callback) {
   $('#gen_alert_title').text(title);
@@ -324,6 +324,14 @@ Ardublockly.openSettingsModal = function() {
 };
 
 /**
+ * Displays a short message for 4 seconds in the form of a Materialize toast.
+ * @param {!string} message Text to be temporarily displayed.
+ */
+Ardublockly.MaterialToast = function(message) {
+  Materialize.toast(message, 4000);
+};
+
+/**
  * Populates the Arduino IDE output content area and triggers the visual
  * highlight to call for the user attention.
  * @param {!element} bodyEl HTML to include into IDE output content area.
@@ -335,7 +343,10 @@ Ardublockly.arduinoIdeOutput = function(bodyEl) {
   Ardublockly.highlightIdeOutputHeader();
 };
 
-/** Clears the content of the Arduino IDE output element to a default text. */
+/**
+ * Clears the content of the Arduino IDE output element to a default text.
+ * @param {!element} bodyEl HTML to include into IDE output content area.
+ */
 Ardublockly.resetIdeOutputContent = function(bodyEl) {
   var ideOuputContent = document.getElementById('content_ide_output');
   ideOuputContent.innerHTML = '<span class="arduino_dialog_out">Waiting for ' +
@@ -368,9 +379,7 @@ Ardublockly.sketchNameSizeEffect = function() {
   sketchNameInput.blur(correctInput);
 };
 
-/**
- * Creates a highlight animation to the Arduino IDE output header.
- */
+/** Creates a highlight animation to the Arduino IDE output header. */
 Ardublockly.highlightIdeOutputHeader = function() {
   var header = document.getElementById('ide_output_collapsible_header');
   var h = 'ide_output_header_highlight';
