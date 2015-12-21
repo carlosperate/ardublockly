@@ -228,7 +228,7 @@
       <div class="settings_div">
         <label>Default IDE button:</label> <br>
         <select name="settings_ide" id="ide_settings">
-          <option value="verify">IDE ptions unknown</option> 
+          <option value="verify">IDE ptions unknown</option>
         </select>
       </div>
       <div class="settings_div">
@@ -298,5 +298,11 @@
   <script src="ardublockly_design.js"></script>
   <script src="ardublockly_blockly.js"></script>
   <script src="ardublockly.js"></script>
+  <script>
+    window.addEventListener('load', function load(event) {
+      window.removeEventListener('load', load, false);
+      Ardublockly.init();
+    });
+  </script>
 </body>
 </html>

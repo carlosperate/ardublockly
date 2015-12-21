@@ -21,9 +21,8 @@ Ardublockly.LANGUAGE_NAME = {
  */
 Ardublockly.LANG = 'en';
 
-/** Initialize function for Ardublockly on page load. */
-window.addEventListener('load', function load(event) {
-  window.removeEventListener('load', load, false);
+/** Initialize function for Ardublockly, to be called on page load. */
+Ardublockly.init = function() {
   // Lang init must run first for the rest of the page to pick the right msgs
   Ardublockly.initLanguage();
 
@@ -43,7 +42,7 @@ window.addEventListener('load', function load(event) {
       document.location.hostname != '192.168.0.7') {
     Ardublockly.openNotConnectedModal();
   }
-});
+};
 
 /** Binds functions to each of the buttons, nav links, and related. */
 Ardublockly.bindActionFunctions = function() {
