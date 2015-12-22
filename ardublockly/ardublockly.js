@@ -48,7 +48,7 @@ Ardublockly.init = function() {
 Ardublockly.bindActionFunctions = function() {
   // Navigation buttons
   Ardublockly.bindClick_('button_load', Ardublockly.loadUserXmlFile);
-  Ardublockly.bindClick_('button_save', Ardublockly.saveXmlFileAs);
+  Ardublockly.bindClick_('button_save', Ardublockly.saveXmlFile);
   Ardublockly.bindClick_('button_delete', Ardublockly.discardAllBlocks);
 
   // Side menu buttons, they also close the side menu
@@ -57,7 +57,7 @@ Ardublockly.bindActionFunctions = function() {
     $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_save', function() {
-    Ardublockly.saveXmlFileAs();
+    Ardublockly.saveXmlFile();
     $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_delete', function() {
@@ -364,12 +364,10 @@ Ardublockly.loadUserXmlFile = function() {
  * Creates an XML file containing the blocks from the Blockly workspace and
  * prompts the users to save it into their local file system.
  */
-Ardublockly.saveXmlFileAs = function() {
-  var xmlName = document.getElementById('sketch_name').value;
-  var blob = new Blob(
-      [Ardublockly.generateXml()],
-      {type: 'text/plain;charset=utf-8'});
-  saveAs(blob, xmlName + '.xml');
+Ardublockly.saveXmlFile = function() {
+  Ardublockly.saveTextFileAs(
+      document.getElementById('sketch_name').value + '.xml',
+      Ardublockly.generateXml());
 };
 
 /**
@@ -377,12 +375,23 @@ Ardublockly.saveXmlFileAs = function() {
  * the Blockly workspace and prompts the users to save it into their local file
  * system.
  */
-Ardublockly.saveSketchFileAs = function() {
-  var sketchName = document.getElementById('sketch_name').value;
+Ardublockly.saveSketchFile = function() {
+  Ardublockly.saveTextFileAs(
+      document.getElementById('sketch_name').value + '.ino',
+      ArduBlockly.generateArduino());
+};
+
+/**
+ * Creates an text file with the input content and files name, and prompts the
+ * users to save it into their local file system.
+ * @param {!string} fileName Name for the file to be saved.
+ * @param {!string} content Text datd to be saved in to the file.
+ */
+Ardublockly.saveTextFileAs = function(fileName, content) {
   var blob = new Blob(
-      [Ardublockly.generateArduino()],
+      [content],
       {type: 'text/plain;charset=utf-8'});
-  saveAs(blob, sketchName + '.ino');
+  saveAs(blob, fileName);
 };
 
 /** Prepares and opens the settings modal. */
@@ -402,6 +411,7 @@ Ardublockly.populateSettings = function() {
   ArdublocklyServer.requestArduinoBoards(Ardublockly.setArduinoBoardsHtml);
   ArdublocklyServer.requestSerialPorts(Ardublockly.setSerialPortsHtml);
   ArdublocklyServer.requestIdeOptions(Ardublockly.setIdeHtml);
+  // Language menu only set on page load within Ardublockly.initLanguage()
 };
 
 /**
@@ -562,23 +572,24 @@ Ardublockly.setIdeSettings = function(e, preset) {
  */
 Ardublockly.sendCode = function() {
   Ardublockly.largeIdeButtonSpinner(true);
-  ArdublocklyServer.sendSketchToServer(
-      Ardublockly.generateArduino(), Ardublockly.sendCodeReturn);
-};
 
-/**
- * Receives the IDE data back to be displayed and stops spinner.
- * @param {element} jsonResponse JSON data coming back from the server.
- */
-Ardublockly.sendCodeReturn = function(jsonResponse) {
-  Ardublockly.largeIdeButtonSpinner(false);
-  if (jsonResponse != null) {
-    var dataBack = ArdublocklyServer.createElementFromJson(jsonResponse);
-    Ardublockly.arduinoIdeOutput(dataBack);
-  } else {
-    // If the element is Null, then Ardublockly server is not running
-    Ardublockly.openNotConnectedModal();
-  }
+  /**
+   * Receives the IDE data back to be displayed and stops spinner.
+   * @param {element} jsonResponse JSON data coming back from the server.
+   */
+  var sendCodeReturn = function(jsonResponse) {
+    Ardublockly.largeIdeButtonSpinner(false);
+    if (jsonResponse != null) {
+      var dataBack = ArdublocklyServer.createElementFromJson(jsonResponse);
+      Ardublockly.arduinoIdeOutput(dataBack);
+    } else {
+      // If the element is Null, then Ardublockly server is not running
+      Ardublockly.openNotConnectedModal();
+    }
+  };
+
+  ArdublocklyServer.sendSketchToServer(
+      Ardublockly.generateArduino(), sendCodeReturn);
 };
 
 /** Populate the workspace blocks with the XML written in the XML text area. */
