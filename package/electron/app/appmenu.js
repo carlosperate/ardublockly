@@ -103,7 +103,7 @@ var getFileMenuData = function() {
                         type: 'info',
                         title: 'Dialog',
                         buttons: ['ok',],
-                        message: 'This functionality has not yet been '+ 
+                        message: 'This functionality has not yet been '+
                                  'implemented in the window menu.\nYou can ' +
                                  'still open a blocks file using the "Open" ' +
                                  'button on the main interface.'
@@ -115,7 +115,7 @@ var getFileMenuData = function() {
                 click: function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
-                        .executeJavaScript('Ardublockly.saveXmlFileAs()');
+                        .executeJavaScript('Ardublockly.saveXmlFile()');
                 }
             }, {
                 label: 'Save Arduino Sketch as',
@@ -124,7 +124,7 @@ var getFileMenuData = function() {
                     BrowserWindow.getFocusedWindow()
                         .webContents
                         .executeJavaScript(
-                            'Ardublockly.saveSketchFileAs()');
+                            'Ardublockly.saveSketchFile()');
                 }
             }
         ]
