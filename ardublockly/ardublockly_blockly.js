@@ -27,8 +27,14 @@ Ardublockly.BLOCKLY_INJECTED_ = false;
  * file.
  * @param {!Element} blocklyEl Element to inject Blockly into.
  * @param {!string} toolboxPath String containing the toolbox XML file path.
+ * @param {!string} blocklyPath String containing the Blockly directory path.
  */
-Ardublockly.injectBlockly = function(blocklyEl, toolboxPath) {
+Ardublockly.injectBlockly = function(blocklyEl, toolboxPath, blocklyPath) {
+  // Remove any trailing slashes in the blockly path
+  if (blocklyPath.substr(-1) === '/') {
+    blocklyPath = blocklyPath.slice(0, -1);
+  }
+
   // Create a an XML HTTP request
   var request = Ardublockly.ajaxRequest();
 
@@ -48,7 +54,7 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxPath) {
             collapse: true,
             comments: true,
             disable: true,
-            media: '../blockly/media/',
+            media: blocklyPath + '/media/',
             rtl: false,
             scrollbars: true,
             toolbox: xmlTree,
@@ -286,7 +292,7 @@ Ardublockly.blocklyPaste = function() {
   }
 };
 
-/**  Wraps the blockly 'paste' functionality. */
+/** Wraps the blockly 'delete' functionality. */
 Ardublockly.blocklyDelete = function() {
   if (Blockly.selected && Blockly.selected.isDeletable()) {
     Blockly.hideChaff();

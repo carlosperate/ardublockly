@@ -27,8 +27,8 @@ Ardublockly.init = function() {
   Ardublockly.initLanguage();
 
   // Inject Blockly into content_blocks
-  Ardublockly.injectBlockly(
-    document.getElementById('content_blocks'), 'ardublockly_toolbox.xml');
+  Ardublockly.injectBlockly(document.getElementById('content_blocks'),
+      'ardublockly_toolbox.xml', '../blockly/');
 
   Ardublockly.designJsInit();
   Ardublockly.initialiseIdeButtons();
