@@ -50,7 +50,7 @@ var bundle = function (src, dest) {
     }).then(function (bundle) {
         var jsFile = pathUtil.basename(dest);
         var result = bundle.generate({
-            format: 'iife',
+            format: 'cjs',
             sourceMap: true,
             sourceMapFile: jsFile,
         });
@@ -72,6 +72,7 @@ var bundleApplication = function () {
         bundle(srcDir.path('main.js'), destDir.path('main.js')),
     ]);
 };
+
 
 var bundleTask = function () {
     return bundleApplication();

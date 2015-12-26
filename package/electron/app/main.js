@@ -7,8 +7,6 @@
  * @fileoverview Electron entry point continues here. Creates windows and
  *               handles system events.
  */
-'use strict';
-
 var app = require('app');
 var winston = require('winston');
 var appMenu = require('./appmenu.js');

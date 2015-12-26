@@ -139,5 +139,6 @@ module.exports = function () {
     .then(renameApp)
     //.then(createInstaller)
     .then(copyExecFolder)
-    .then(cleanClutter);
+    .then(cleanClutter)
+    .catch(console.error);
 };

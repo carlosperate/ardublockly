@@ -6,8 +6,6 @@
  *
  * @fileoverview Finds the Ardublockly Project directory and files.
  */
-'use strict';
-
 var jetpack = require('fs-jetpack');
 var env = require('./vendor/electron_boilerplate/env_config');
 

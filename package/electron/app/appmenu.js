@@ -6,8 +6,6 @@
  *
  * @fileoverview Generates the application menu bar.
  */
-'use strict';
-
 var app = require('app');
 var Menu = require('menu');
 var shell = require('shell');
