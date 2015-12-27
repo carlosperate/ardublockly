@@ -6,17 +6,16 @@
  *
  * @fileoverview Finds the Ardublockly Project directory and files.
  */
-var jetpack = require('fs-jetpack');
-var env = require('./vendor/electron_boilerplate/env_config');
+const jetpack = require('fs-jetpack');
 
 // Name of the folder containing the electron executable, needs to be synced
 // with the name set in the Python server and Electron build files.
-var execFolderName = 'arduexec';
-var serverExecFolderName = 'server';
-var serverExecName = 'start';
+const execFolderName = 'arduexec';
+const serverExecFolderName = 'server';
+const serverExecName = 'start';
 module.exports.ardublocklyExecFolderName = execFolderName;
 
-var tag = '[Project Root Locator] ';
+const tag = '[Project Root Locator] ';
 
 var ardublocklyRootDir = null;
 
@@ -33,32 +32,25 @@ function ardublocklyNotFound(working_dir) {
 
 module.exports.getProjectRootJetpack = function() {
     if (ardublocklyRootDir === null) {
-        // First, work out the project root directory
-        if (env.name === 'development') {
-            // In dev mode the file cwd is on the project/package/electron dir
-            ardublocklyRootDir = jetpack.dir('../../');
-        } else {
-            // Cannot use relative paths in build, so let's try to find the
-            // ardublockly folder in a node from the executable file path tree
-            ardublocklyRootDir = jetpack.dir(__dirname);
-            var oldArdublocklyRootDir = '';
-            while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
-                // Check if /ardublokly/index.html exists within current path
-                if (jetpack.exists(
-                        ardublocklyRootDir.path('ardublockly', 'index.html'))) {
-                    // Found the right folder, break with this dir loaded
-                    break;
-                }
-                oldArdublocklyRootDir = ardublocklyRootDir.path();
-                ardublocklyRootDir = ardublocklyRootDir.dir('../');
+        // Cannot use relative paths in build, so let's try to find the
+        // ardublockly folder in a node from the executable file path tree
+        ardublocklyRootDir = jetpack.dir(__dirname);
+        var oldArdublocklyRootDir = '';
+        while (ardublocklyRootDir.path() != oldArdublocklyRootDir) {
+            // Check if /ardublokly/index.html exists within current path
+            if (jetpack.exists(
+                    ardublocklyRootDir.path('ardublockly', 'index.html'))) {
+                // Found the right folder, break with this dir loaded
+                break;
             }
-
-            if (ardublocklyRootDir.path() == oldArdublocklyRootDir) {
-                ardublocklyRootDir = jetpack.dir('.');
-                ardublocklyNotFound(ardublocklyRootDir.path('.'));
-            }
+            oldArdublocklyRootDir = ardublocklyRootDir.path();
+            ardublocklyRootDir = ardublocklyRootDir.dir('../');
         }
-        
+
+        if (ardublocklyRootDir.path() == oldArdublocklyRootDir) {
+            ardublocklyRootDir = jetpack.dir('.');
+            ardublocklyNotFound(ardublocklyRootDir.path('.'));
+        }
     }
     return ardublocklyRootDir;
 };

@@ -82,9 +82,11 @@ var createInstaller = function () {
 
     var finalPackageName = manifest.name + '_' + manifest.version + '.exe';
     var installScript = projectDir.read('resources/windows/installer.nsi');
+
     installScript = utils.replace(installScript, {
         name: manifest.name,
         productName: manifest.productName,
+        author: manifest.author,
         version: manifest.version,
         src: readyAppDir.path(),
         dest: releasesDir.path(finalPackageName),

@@ -7,16 +7,19 @@
  * @fileoverview Electron entry point continues here. Creates windows and
  *               handles system events.
  */
-var app = require('app');
-var winston = require('winston');
-var appMenu = require('./appmenu.js');
-var server = require('./servermgr.js');
-var BrowserWindow = require('browser-window');
-var projectLocator = require('./projectlocator.js');
-var env = require('./vendor/electron_boilerplate/env_config');
-var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
 
-var tag = '[Ardublockly Electron] ';
+const winston = require('winston');
+
+const appMenu = require('./appmenu.js');
+const server = require('./servermgr.js');
+const projectLocator = require('./projectlocator.js');
+const windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
+const env = require('fs-jetpack').cwd(app.getAppPath()).read('package.json', 'json').env;
+
+const tag = '[Ardublockly Electron] ';
 
 // Global reference of the window object must be maintain, or the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -114,7 +117,7 @@ app.on('ready', function() {
     mainWindow.webContents.session.setDownloadPath(
         process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']);
 
-    mainWindow.loadUrl('http://localhost:8000/ardublockly');
+    mainWindow.loadURL('http://localhost:8000/ardublockly');
 
     mainWindow.on('close', function() {
         mainWindowState.saveState(mainWindow);
@@ -147,6 +150,6 @@ function createSplashWindow() {
             'skip-taskbar': true,
             'use-content-size': true
         });
-        splashWindow.loadUrl(imagePath);
+        splashWindow.loadURL(imagePath);
     }
 }

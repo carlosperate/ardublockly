@@ -6,13 +6,15 @@
  *
  * @fileoverview Generates the application menu bar.
  */
-var app = require('app');
-var Menu = require('menu');
-var shell = require('shell');
-var dialog = require('dialog');
-var MenuItem = require('menu-item');
-var server = require('./servermgr.js');
-var BrowserWindow = require('browser-window');
+const electron = require('electron');
+const app = electron.app;
+const Menu = electron.Menu;
+const shell = electron.shell;
+const dialog = electron.dialog;
+const MenuItem = electron.MenuItem;
+const BrowserWindow = electron.BrowserWindow;
+
+const server = require('./servermgr.js');
 
 module.exports.setArdublocklyMenu = function(devMode) {
     if (typeof(devMode)==='undefined') devMode = false;
@@ -380,7 +382,7 @@ var getDevMenuData = function() {
                 label: 'Reload',
                 accelerator: 'CmdOrCtrl+F5',
                 click: function() {
-                    BrowserWindow.getFocusedWindow().reloadIgnoringCache();
+                    BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
                 }
             }, {
                 label: 'Toggle DevTools',

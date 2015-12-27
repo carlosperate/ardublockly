@@ -15,11 +15,9 @@ var destDir = projectDir.cwd('./build');
 
 var paths = {
     copyFromAppDir: [
-        './main.js',   // maybe need to remove this one too
-        './*.js',
         './node_modules/**',
         './vendor/**',
-        './**/*.html'
+        './*.js'
     ],
 }
 
@@ -27,7 +25,7 @@ var paths = {
 // Tasks
 // -------------------------------------
 
-gulp.task('clean', function(callback) {
+gulp.task('clean', function (callback) {
     return destDir.dirAsync('.', { empty: true });
 });
 
@@ -46,7 +44,7 @@ var bundle = function (src, dest) {
     var deferred = Q.defer();
 
     rollup.rollup({
-        entry: src
+        entry: src,
     }).then(function (bundle) {
         var jsFile = pathUtil.basename(dest);
         var result = bundle.generate({
@@ -54,14 +52,17 @@ var bundle = function (src, dest) {
             sourceMap: true,
             sourceMapFile: jsFile,
         });
+        // Wrap code in self invoking function so the variables don't
+        // pollute the global namespace.
+        var isolatedCode = '(function () {' + result.code + '}());';
         return Q.all([
-            destDir.writeAsync(dest, result.code + '\n//# sourceMappingURL=' + jsFile + '.map'),
+            destDir.writeAsync(dest, isolatedCode + '\n//# sourceMappingURL=' + jsFile + '.map'),
             destDir.writeAsync(dest + '.map', result.map.toString()),
         ]);
     }).then(function () {
         deferred.resolve();
     }).catch(function (err) {
-        console.error(err);
+        console.error('Build: Error during rollup', err.stack);
     });
 
     return deferred.promise;
@@ -81,17 +82,9 @@ gulp.task('bundle', ['clean'], bundleTask);
 gulp.task('bundle-watch', bundleTask);
 
 
-var lessTask = function () {
-    return gulp.src('app/stylesheets/main.less')
-    .pipe(less())
-    .pipe(gulp.dest(destDir.path('stylesheets')));
-};
-gulp.task('less', ['clean'], lessTask);
-gulp.task('less-watch', lessTask);
-
-
 gulp.task('finalize', ['clean'], function () {
     var manifest = srcDir.read('package.json', 'json');
+
     // Add "dev" or "test" suffix to name, so Electron will write all data
     // like cookies and localStorage in separate places for each environment.
     switch (utils.getEnvName()) {
@@ -103,10 +96,13 @@ gulp.task('finalize', ['clean'], function () {
             throw "test build has been removed";
             break;
     }
-    destDir.write('package.json', manifest);
 
-    var configFilePath = projectDir.path('config/env_' + utils.getEnvName() + '.json');
-    destDir.copy(configFilePath, 'env_config.json');
+    // Copy environment variables to package.json file for easy use
+    // in the running application. This is not official way of doing
+    // things, but also isn't prohibited ;)
+    manifest.env = projectDir.read('config/env_' + utils.getEnvName() + '.json', 'json');
+
+    destDir.write('package.json', manifest);
 });
 
 
@@ -117,4 +113,4 @@ gulp.task('watch', function () {
 });
 
 
-gulp.task('build', ['bundle', 'less', 'copy', 'finalize']);
+gulp.task('build', ['bundle', 'copy', 'finalize']);

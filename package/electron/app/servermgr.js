@@ -6,11 +6,12 @@
  *
  * @fileoverview Manages the Ardublockly server.
  */
-var winston = require('winston');
-var childProcess = require('child_process');
-var projectLocator = require('./projectlocator.js');
+const winston = require('winston');
+const childProcess = require('child_process');
 
-var tag = '[Server mgr] '
+const projectLocator = require('./projectlocator.js');
+
+const tag = '[Server mgr] '
 
 var serverProcess = null;
 
