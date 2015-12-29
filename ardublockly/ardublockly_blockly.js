@@ -51,14 +51,26 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxPath, blocklyPath) {
       var xmlTree = Blockly.Xml.textToDom(request.responseText);
       Ardublockly.updateToolboxLanguage(xmlTree);
       Ardublockly.workspace = Blockly.inject(blocklyEl, {
-            collapse: true,
-            comments: true,
-            disable: true,
-            media: blocklyPath + '/media/',
-            rtl: false,
-            scrollbars: true,
-            toolbox: xmlTree,
-            trashcan: true });
+          collapse: true,
+          comments: true,
+          css: true,
+          disable: true,
+          grid: false,
+          media: blocklyPath + '/media/',
+          rtl: false,
+          scrollbars: true,
+          sounds: true,
+          toolbox: xmlTree,
+          trashcan: true,
+          zoom: {
+            enabled: true,
+            controls: true,
+            wheel: false,
+            startScale: 1.0,
+            maxScale: 3,
+            minScale: 0.3
+          }
+      });
       Ardublockly.BLOCKLY_INJECTED_ = true;
       Ardublockly.loadSessionStorageBlocks();
     }
