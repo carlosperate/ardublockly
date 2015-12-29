@@ -166,6 +166,16 @@ Blockly.Arduino.finish = function(code) {
     setups.push(userSetupCode);
   }
 
+  // Clean up temporary data
+  delete Blockly.Arduino.includes_;
+  delete Blockly.Arduino.definitions_;
+  delete Blockly.Arduino.codeFunctions_;
+  delete Blockly.Arduino.userFunctions_;
+  delete Blockly.Arduino.functionNames_;
+  delete Blockly.Arduino.setups_;
+  delete Blockly.Arduino.pins_;
+  Blockly.Arduino.variableDB_.reset();
+
   var allDefs = includes.join('\n') + definitions.join('\n') +
                 functions.join('\n\n');
   var setup = 'void setup() {' + setups.join('\n  ') + '\n}\n\n';
@@ -200,7 +210,7 @@ Blockly.Arduino.addDeclaration = function(declarationTag, code) {
 /**
  * Adds a string of code into the Arduino setup() function. It takes an
  * identifier to not repeat the same kind of initialisation code from several
- * blocks. If overwrite function is set to true it will overwrite whatever
+ * blocks. If overwrite option is set to true it will overwrite whatever
  * value the identifier held before.
  * @param {!string} setupTag Identifier for the type of set up code.
  * @param {!string} code Code to be included in the setup() function.
@@ -353,7 +363,9 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
     case Blockly.StaticTyping.BlocklyType.ERROR:
       return 'ErrorArdu';
     case Blockly.StaticTyping.BlocklyType.CHILD_BLOCK_MISSING:
+      // If no block connected default to int, change for easier debugging
       return 'ChildBlockMissing';
+      //return 'int';
     default:
       return 'Invalid Blockly Type';
     }
