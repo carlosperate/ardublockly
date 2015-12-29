@@ -120,7 +120,7 @@ Ardublockly.initLanguage = function() {
 
   // Check server settings and url language, url gets priority
   Ardublockly.LANG = Ardublockly.getUrlLanguage() ||
-      Ardublockly.getLanguageSetting();
+      Ardublockly.getLanguageSetting() || Ardublockly.LANG;
 
   Ardublockly.populateLanguageMenu(Ardublockly.LANG);
 
@@ -136,7 +136,7 @@ Ardublockly.initLanguage = function() {
  */
 Ardublockly.getLanguageSetting = function() {
   //TODO: Server feature still to be implemented, for now return default
-  return Ardublockly.LANG;
+  return null;
 };
 
 /**
@@ -148,7 +148,7 @@ Ardublockly.getUrlLanguage = function() {
   var val = location.search.match(new RegExp('[?&]' + langKey + '=([^&]+)'));
   var language = val ? decodeURIComponent(val[1].replace(/\+/g, '%20')) : '';
   if (Ardublockly.LANGUAGE_NAME[language] === undefined) {
-    language = 'null';
+    language = null;
   }
   return language;
 };
@@ -510,9 +510,7 @@ Ardublockly.setSerialPortsHtml = function(jsonResponse) {
   }
 };
 
-/**
- * Sets the Serial Port with the selected user input from the drop down.
- */
+/** Sets the Serial Port with the selected user input from the drop down. */
 Ardublockly.setSerial = function() {
   var el = document.getElementById('serial_port');
   var serialValue = el.options[el.selectedIndex].value;
@@ -676,10 +674,7 @@ Ardublockly.toogleToolbox = function() {
   Ardublockly.TOOLBAR_SHOWING_ = !Ardublockly.TOOLBAR_SHOWING_;
 };
 
-/**
- * Returns a boolean indicating if the toolbox is currently visible.
- * @return {boolean} Indicates if the toolbox is currently visible.
- */
+/** @return {boolean} Indicates if the toolbox is currently visible. */
 Ardublockly.isToolboxVisible = function() {
   return Ardublockly.TOOLBAR_SHOWING_;
 };
