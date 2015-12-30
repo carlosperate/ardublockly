@@ -13,6 +13,7 @@ It adds the following features:
 * Arduino pin tracking
 * Arduino generator unit test (incomplete)
 * Procedures and flyout core classes modified to include the Arduino setup() and loop() functions
+* Minor visual changes to the zoom icons
 
 All other changes and fixes have been submitted to the original Blockly repository for inclusion into the upstream master branch.
 
