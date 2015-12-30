@@ -39,17 +39,48 @@ goog.require('goog.dom');
 Blockly.Connection = function(source, type) {
   /** @type {!Blockly.Block} */
   this.sourceBlock_ = source;
-  /** @type {Blockly.Connection} */
-  this.targetConnection = null;
   /** @type {number} */
   this.type = type;
-  this.x_ = 0;
-  this.y_ = 0;
   // Shortcut for the databases for this connection's workspace.
-  this.dbList_ = source.workspace.connectionDBList;
-  this.hidden_ = !this.dbList_;
-  this.inDB_ = false;
+  this.db_ = source.workspace.connectionDBList[type];
+  this.dbOpposite_ =
+      source.workspace.connectionDBList[Blockly.OPPOSITE_TYPE[type]];
+  this.hidden_ = !this.db_;
 };
+
+/**
+ * Connection this connection connects to.  Null if not connected.
+ * @type {Blockly.Connection}
+ */
+Blockly.Connection.prototype.targetConnection = null;
+
+/**
+ * List of compatible value types.  Null if all types are compatible.
+ * @type {Array}
+ * @private
+ */
+Blockly.Connection.prototype.check_ = null;
+
+/**
+ * Horizontal location of this connection.
+ * @type {number}
+ * @private
+ */
+Blockly.Connection.prototype.x_ = 0;
+
+/**
+ * Vertical location of this connection.
+ * @type {number}
+ * @private
+ */
+Blockly.Connection.prototype.y_ = 0;
+
+/**
+ * Has this connection been added to the connection database?
+ * @type {boolean}
+ * @private
+ */
+Blockly.Connection.prototype.inDB_ = false;
 
 /**
  * Sever all links to this connection (not including from the source object).
@@ -59,7 +90,7 @@ Blockly.Connection.prototype.dispose = function() {
     throw 'Disconnect connection before disposing of it.';
   }
   if (this.inDB_) {
-    this.dbList_[this.type].removeConnection_(this);
+    this.db_.removeConnection_(this);
   }
   if (Blockly.highlightedConnection_ == this) {
     Blockly.highlightedConnection_ = null;
@@ -67,6 +98,8 @@ Blockly.Connection.prototype.dispose = function() {
   if (Blockly.localConnection_ == this) {
     Blockly.localConnection_ = null;
   }
+  this.db_ = null;
+  this.dbOpposite_ = null;
 };
 
 /**
@@ -213,8 +246,8 @@ Blockly.Connection.prototype.connect = function(otherConnection) {
  */
 Blockly.Connection.singleConnection_ = function(block, orphanBlock) {
   var connection = false;
-  for (var x = 0; x < block.inputList.length; x++) {
-    var thisConnection = block.inputList[x].connection;
+  for (var i = 0; i < block.inputList.length; i++) {
+    var thisConnection = block.inputList[i].connection;
     if (thisConnection && thisConnection.type == Blockly.INPUT_VALUE &&
         orphanBlock.outputConnection.checkType_(thisConnection)) {
       if (connection) {
@@ -322,13 +355,13 @@ Blockly.Connection.prototype.bumpAwayFrom_ = function(staticConnection) {
 Blockly.Connection.prototype.moveTo = function(x, y) {
   // Remove it from its old location in the database (if already present)
   if (this.inDB_) {
-    this.dbList_[this.type].removeConnection_(this);
+    this.db_.removeConnection_(this);
   }
   this.x_ = x;
   this.y_ = y;
   // Insert it into its new location in the database.
   if (!this.hidden_) {
-    this.dbList_[this.type].addConnection_(this);
+    this.db_.addConnection_(this);
   }
 };
 
@@ -412,8 +445,7 @@ Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
     return {connection: null, radius: maxLimit};
   }
   // Determine the opposite type of connection.
-  var oppositeType = Blockly.OPPOSITE_TYPE[this.type];
-  var db = this.dbList_[oppositeType];
+  var db = this.dbOpposite_;
 
   // Since this connection is probably being dragged, add the delta.
   var currentX = this.x_ + dx;
@@ -495,14 +527,14 @@ Blockly.Connection.prototype.closest = function(maxLimit, dx, dy) {
     } while (targetSourceBlock);
 
     // Only connections within the maxLimit radius.
-    var dx = currentX - db[yIndex].x_;
-    var dy = currentY - db[yIndex].y_;
+    var dx = currentX - connection.x_;
+    var dy = currentY - connection.y_;
     var r = Math.sqrt(dx * dx + dy * dy);
     if (r <= maxLimit) {
-      closestConnection = db[yIndex];
+      closestConnection = connection;
       maxLimit = r;
     }
-    return dy < maxLimit;
+    return Math.abs(dy) < maxLimit;
   }
   return {connection: closestConnection, radius: maxLimit};
 };
@@ -531,8 +563,8 @@ Blockly.Connection.prototype.checkType_ = function(otherConnection) {
     return true;
   }
   // Find any intersection in the check lists.
-  for (var x = 0; x < this.check_.length; x++) {
-    if (otherConnection.check_.indexOf(this.check_[x]) != -1) {
+  for (var i = 0; i < this.check_.length; i++) {
+    if (otherConnection.check_.indexOf(this.check_[i]) != -1) {
       return true;
     }
   }
@@ -579,8 +611,7 @@ Blockly.Connection.prototype.setCheck = function(check) {
  */
 Blockly.Connection.prototype.neighbours_ = function(maxLimit) {
   // Determine the opposite type of connection.
-  var oppositeType = Blockly.OPPOSITE_TYPE[this.type];
-  var db = this.dbList_[oppositeType];
+  var db = this.dbOpposite_;
 
   var currentX = this.x_;
   var currentY = this.y_;
@@ -639,9 +670,9 @@ Blockly.Connection.prototype.neighbours_ = function(maxLimit) {
 Blockly.Connection.prototype.setHidden = function(hidden) {
   this.hidden_ = hidden;
   if (hidden && this.inDB_) {
-    this.dbList_[this.type].removeConnection_(this);
+    this.db_.removeConnection_(this);
   } else if (!hidden && !this.inDB_) {
-    this.dbList_[this.type].addConnection_(this);
+    this.db_.addConnection_(this);
   }
 };
 
@@ -663,8 +694,8 @@ Blockly.Connection.prototype.hideAll = function() {
       }
       // Close all bubbles of all children.
       var icons = block.getIcons();
-      for (var x = 0; x < icons.length; x++) {
-        icons[x].setVisible(false);
+      for (var i = 0; i < icons.length; i++) {
+        icons[i].setVisible(false);
       }
     }
   }
@@ -770,6 +801,7 @@ Blockly.ConnectionDB.prototype.removeConnection_ = function(connection) {
   }
   connection.inDB_ = false;
   // Find the connection using a binary search.
+  // About 10% faster than a linear search using indexOf.
   var pointerMin = 0;
   var pointerMax = this.length - 2;
   var pointerMid = pointerMax;

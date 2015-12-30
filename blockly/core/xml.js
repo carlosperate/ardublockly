@@ -62,7 +62,10 @@ Blockly.Xml.workspaceToDom = function(workspace) {
 Blockly.Xml.blockToDom_ = function(block) {
   var element = goog.dom.createDom('block');
   element.setAttribute('type', block.type);
-  element.setAttribute('id', block.id);
+  if (Blockly.Realtime.isEnabled()) {
+    // Only used by realtime.
+    element.setAttribute('id', block.id);
+  }
   if (block.mutationToDom) {
     // Custom data for an advanced block.
     var mutation = block.mutationToDom();
@@ -224,6 +227,7 @@ Blockly.Xml.domToWorkspace = function(workspace, xml) {
   if (workspace.RTL) {
     width = workspace.getWidth();
   }
+  Blockly.Field.startCache();
   // Safari 7.1.3 is known to provide node lists with extra references to
   // children beyond the lists' length.  Trust the length, do not use the
   // looping pattern of checking the index for an object.
@@ -239,6 +243,7 @@ Blockly.Xml.domToWorkspace = function(workspace, xml) {
       }
     }
   }
+  Blockly.Field.stopCache();
 };
 
 /**
@@ -269,7 +274,9 @@ Blockly.Xml.domToBlock = function(workspace, xmlBlock, opt_reuseBlock) {
     // Populating the connection database may be defered until after the blocks
     // have renderend.
     setTimeout(function() {
-      topBlock.setConnectionsHidden(false);
+      if (topBlock.workspace) {  // Check that the block hasn't been deleted.
+        topBlock.setConnectionsHidden(false);
+      }
     }, 1);
     topBlock.updateDisabled();
     // Fire an event to allow scrollbars to resize.
@@ -297,6 +304,7 @@ Blockly.Xml.domToBlockHeadless_ =
   }
   var id = xmlBlock.getAttribute('id');
   if (opt_reuseBlock && id) {
+    // Only used by realtime.
     block = Blockly.Block.getById(id, workspace);
     // TODO: The following is for debugging.  It should never actually happen.
     if (!block) {
@@ -322,12 +330,14 @@ Blockly.Xml.domToBlockHeadless_ =
     }
     var input;
 
-    // Find the first 'real' grandchild node (that isn't whitespace).
-    var firstRealGrandchild = null;
+    // Find any enclosed blocks.
+    var childBlockNode = null;
     for (var j = 0, grandchildNode; grandchildNode = xmlChild.childNodes[j];
          j++) {
-      if (grandchildNode.nodeType != 3 || !grandchildNode.data.match(/^\s*$/)) {
-        firstRealGrandchild = grandchildNode;
+      if (grandchildNode.nodeType == 1) {
+        if (grandchildNode.nodeName.toLowerCase() == 'block') {
+          childBlockNode = grandchildNode;
+        }
       }
     }
 
@@ -371,18 +381,25 @@ Blockly.Xml.domToBlockHeadless_ =
         // Titles were renamed to field in December 2013.
         // Fall through.
       case 'field':
-        block.setFieldValue(xmlChild.textContent, name);
+        var field = block.getField(name);
+        if (!field) {
+          console.warn('Ignoring non-existent field ' + name + ' in block ' +
+                       prototypeName);
+          break;
+        }
+        field.setValue(xmlChild.textContent);
         break;
       case 'value':
       case 'statement':
         input = block.getInput(name);
         if (!input) {
-          throw 'Input ' + name + ' does not exist in block ' + prototypeName;
+          console.warn('Ignoring non-existent input ' + name + ' in block ' +
+                       prototypeName);
+          break;
         }
-        if (firstRealGrandchild &&
-            firstRealGrandchild.nodeName.toLowerCase() == 'block') {
+        if (childBlockNode) {
           blockChild = Blockly.Xml.domToBlockHeadless_(workspace,
-              firstRealGrandchild, opt_reuseBlock);
+              childBlockNode, opt_reuseBlock);
           if (blockChild.outputConnection) {
             input.connection.connect(blockChild.outputConnection);
           } else if (blockChild.previousConnection) {
@@ -393,8 +410,7 @@ Blockly.Xml.domToBlockHeadless_ =
         }
         break;
       case 'next':
-        if (firstRealGrandchild &&
-            firstRealGrandchild.nodeName.toLowerCase() == 'block') {
+        if (childBlockNode) {
           if (!block.nextConnection) {
             throw 'Next statement does not exist.';
           } else if (block.nextConnection.targetConnection) {
@@ -402,7 +418,7 @@ Blockly.Xml.domToBlockHeadless_ =
             throw 'Next statement is already connected.';
           }
           blockChild = Blockly.Xml.domToBlockHeadless_(workspace,
-              firstRealGrandchild, opt_reuseBlock);
+              childBlockNode, opt_reuseBlock);
           if (!blockChild.previousConnection) {
             throw 'Next block does not have previous statement.';
           }
@@ -411,7 +427,7 @@ Blockly.Xml.domToBlockHeadless_ =
         break;
       default:
         // Unknown tag; ignore.  Same principle as HTML parsers.
-        console.log('Ignoring unknown tag: ' + xmlChild.nodeName);
+        console.warn('Ignoring unknown tag: ' + xmlChild.nodeName);
     }
   }
 
@@ -438,6 +454,10 @@ Blockly.Xml.domToBlockHeadless_ =
   var collapsed = xmlBlock.getAttribute('collapsed');
   if (collapsed) {
     block.setCollapsed(collapsed == 'true');
+  }
+  // Give the block a chance to clean up any initial inputs.
+  if (block.validate) {
+    block.validate();
   }
   return block;
 };

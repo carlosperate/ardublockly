@@ -402,15 +402,23 @@ Blockly.Blocks['logic_boolean'] = {
    * @this Blockly.Block
    */
   init: function() {
-    var BOOLEANS =
-        [[Blockly.Msg.LOGIC_BOOLEAN_TRUE, 'TRUE'],
-         [Blockly.Msg.LOGIC_BOOLEAN_FALSE, 'FALSE']];
-    this.setHelpUrl(Blockly.Msg.LOGIC_BOOLEAN_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.BOOLEAN);
-    this.appendDummyInput()
-        .appendField(new Blockly.FieldDropdown(BOOLEANS), 'BOOL');
-    this.setTooltip(Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP);
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "BOOL",
+          "options": [
+            [Blockly.Msg.LOGIC_BOOLEAN_TRUE, "TRUE"],
+            [Blockly.Msg.LOGIC_BOOLEAN_FALSE, "FALSE"]
+          ]
+        }
+      ],
+      "output": Blockly.StaticTyping.BlocklyType.BOOLEAN,
+      "colour": Blockly.Blocks.logic.HUE,
+      "tooltip": Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP,
+      "helpUrl": Blockly.Msg.LOGIC_BOOLEAN_HELPURL
+    });
   },
   /** Assigns a type to the boolean block. */
   getBlockType: function() {
@@ -424,12 +432,13 @@ Blockly.Blocks['logic_null'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setHelpUrl(Blockly.Msg.LOGIC_NULL_HELPURL);
-    this.setColour(Blockly.Blocks.logic.HUE);
-    this.setOutput(true);
-    this.appendDummyInput()
-        .appendField(Blockly.Msg.LOGIC_NULL);
-    this.setTooltip(Blockly.Msg.LOGIC_NULL_TOOLTIP);
+    this.jsonInit({
+      "message0": Blockly.Msg.LOGIC_NULL,
+      "output": Blockly.Msg.LOGIC_NULL,
+      "colour": Blockly.Blocks.logic.HUE,
+      "tooltip": Blockly.Msg.LOGIC_NULL_TOOLTIP,
+      "helpUrl": Blockly.Msg.LOGIC_NULL_HELPURL
+    });
   },
   /** Assigns a type to the NULL block. */
   getBlockType: function() {
