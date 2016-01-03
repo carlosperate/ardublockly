@@ -239,22 +239,16 @@ Ardublockly.displayToolbox = function(show) {
 /**
  * Resizes the button to toggle the toolbox visibility to the width of the
  * toolbox.
- * The toolbox width does not change with workspace width, so safe to do once,
- * but it needs to be done after blockly has been injected.
+ * The toolbox width does not change with workspace width, so safe to do once.
  */
 Ardublockly.resizeToggleToolboxBotton = function() {
-  // As the toolbox inject is asynchronous we need to wait
-  if (Ardublockly.isBlocklyInjected() === false) {
-    setTimeout(Ardublockly.resizeToggleToolboxBotton, 50);
-  } else {
-    Blockly.fireUiEvent(window, 'resize');
-    var button = $('#button_toggle_toolbox');
-    // Sets the toolbox toggle button width to that of the toolbox
-    if (Ardublockly.isToolboxVisible() && Ardublockly.blocklyToolboxWidth()) {
-      // For some reason normal set style and getElementById didn't work
-      button.width(Ardublockly.blocklyToolboxWidth());
-      button[0].style.display = '';
-    }
+  Blockly.fireUiEvent(window, 'resize');
+  var button = $('#button_toggle_toolbox');
+  // Sets the toolbox toggle button width to that of the toolbox
+  if (Ardublockly.isToolboxVisible() && Ardublockly.blocklyToolboxWidth()) {
+    // For some reason normal set style and getElementById didn't work
+    button.width(Ardublockly.blocklyToolboxWidth());
+    button[0].style.display = '';
   }
 };
 

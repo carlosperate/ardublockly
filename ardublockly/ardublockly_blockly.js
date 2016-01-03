@@ -16,90 +16,48 @@ var Ardublockly = Ardublockly || {};
 Ardublockly.workspace = null;
 
 /**
- * Public variable that indicates if Blockly has been injected.
- * @type {!boolean}
- * @private
- */
-Ardublockly.BLOCKLY_INJECTED_ = false;
-
-/**
- * Injects Blockly into a given HTML element. Reads the toolbox from an XMl
- * file.
+ * Injects Blockly into a given HTML element. Toolbox XMl has to be a string.
  * @param {!Element} blocklyEl Element to inject Blockly into.
- * @param {!string} toolboxPath String containing the toolbox XML file path.
+ * @param {!string} toolboxXml String containing the toolbox XML content.
  * @param {!string} blocklyPath String containing the Blockly directory path.
  */
-Ardublockly.injectBlockly = function(blocklyEl, toolboxPath, blocklyPath) {
+Ardublockly.injectBlockly = function(blocklyEl, toolboxXml, blocklyPath) {
   // Remove any trailing slashes in the blockly path
   if (blocklyPath.substr(-1) === '/') {
     blocklyPath = blocklyPath.slice(0, -1);
   }
-
-  // Create a an XML HTTP request
-  var request = Ardublockly.ajaxRequest();
-
-  // If file run locally Internet explorer fails here
-  try {
-    request.open('GET', toolboxPath, true);
-  } catch (e) {
-    $('#not_running_dialog').openModal();
-  }
-
-  // Once file is open, inject blockly into element with the toolbox string
-  request.onreadystatechange = function() {
-    if ((request.readyState == 4) && (request.status == 200)) {
-      var xmlTree = Blockly.Xml.textToDom(request.responseText);
-      Ardublockly.updateToolboxLanguage(xmlTree);
-      Ardublockly.workspace = Blockly.inject(blocklyEl, {
-          collapse: true,
-          comments: true,
-          css: true,
-          disable: true,
-          grid: false,
-          maxBlocks: Infinity,
-          media: blocklyPath + '/media/',
-          rtl: false,
-          scrollbars: true,
-          sounds: true,
-          toolbox: xmlTree,
-          trashcan: true,
-          zoom: {
-            controls: true,
-            wheel: false,
-            startScale: 1.0,
-            maxScale: 2,
-            minScale: 0.2,
-            scaleSpeed: 1.2
-          }
-      });
-      Ardublockly.BLOCKLY_INJECTED_ = true;
-      Ardublockly.loadSessionStorageBlocks();
-    }
-  };
-
-  // If file run locally Chrome will fail here
-  try {
-    request.send(null);
-  } catch (e) {
-    $('#not_running_dialog').openModal();
-  }
-};
-
-/** @return {!boolean} Returns the state of Blockly injection. */
-Ardublockly.isBlocklyInjected = function() {
-  return Ardublockly.BLOCKLY_INJECTED_;
+  var xmlTree = Blockly.Xml.textToDom(toolboxXml);
+  // The Toolbox menu language is edited directly from the XML nodes.
+  Ardublockly.updateToolboxLanguage(xmlTree);
+  Ardublockly.workspace = Blockly.inject(blocklyEl, {
+      collapse: true,
+      comments: true,
+      css: true,
+      disable: true,
+      grid: false,
+      maxBlocks: Infinity,
+      media: blocklyPath + '/media/',
+      rtl: false,
+      scrollbars: true,
+      sounds: true,
+      toolbox: xmlTree,
+      trashcan: true,
+      zoom: {
+        controls: true,
+        wheel: false,
+        startScale: 1.0,
+        maxScale: 2,
+        minScale: 0.2,
+        scaleSpeed: 1.2
+      }
+  });
+  // On language change the blocks have been stored in session storage
+  Ardublockly.loadSessionStorageBlocks();
 };
 
 /** Binds the event listeners relevant to Blockly. */
 Ardublockly.bindBlocklyEventListeners = function() {
-  // As the toolbox inject is asynchronous we need to wait until done
-  if (Ardublockly.BLOCKLY_INJECTED_ == false) {
-    setTimeout(Ardublockly.bindBlocklyEventListeners, 50);
-  } else {
-    // All event listener should be bind in this else statement
-    // Renders the code and XML for every Blockly workspace event
-    Ardublockly.workspace.addChangeListener(Ardublockly.renderContent);
-  }
+  Ardublockly.workspace.addChangeListener(Ardublockly.renderContent);
 };
 
 /**

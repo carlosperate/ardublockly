@@ -28,7 +28,7 @@ Ardublockly.init = function() {
 
   // Inject Blockly into content_blocks
   Ardublockly.injectBlockly(document.getElementById('content_blocks'),
-      'ardublockly_toolbox.xml', '../blockly/');
+      Ardublockly.TOOLBOX_XML, '../blockly/');
 
   Ardublockly.designJsInit();
   Ardublockly.initialiseIdeButtons();
@@ -37,9 +37,8 @@ Ardublockly.init = function() {
   Ardublockly.bindActionFunctions();
   Ardublockly.bindBlocklyEventListeners();
 
-  // Check if not running locally (including developer's local network IP)
-  if (document.location.hostname != 'localhost' &&
-      document.location.hostname != '192.168.0.7') {
+  // Check if not running locally
+  if (document.location.hostname != 'localhost') {
     Ardublockly.openNotConnectedModal();
   }
 };
