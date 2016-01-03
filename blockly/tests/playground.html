@@ -93,9 +93,9 @@ function start() {
            scrollbars: true,
            toolbox: toolbox,
            zoom:
-             {enabled: true,
-              controls: true,
+             {controls: true,
               wheel: true,
+              startScale: 2.0,
               maxScale: 4,
               minScale: .25,
               scaleSpeed: 1.1
@@ -230,7 +230,7 @@ h1 {
   <div id="blocklyDiv"></div>
 
   <xml id="toolbox" style="display: none">
-    <category name="Logic">
+    <category name="Logic" colour="210">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
       <block type="logic_operation"></block>
@@ -239,7 +239,7 @@ h1 {
       <block type="logic_null"></block>
       <block type="logic_ternary"></block>
     </category>
-    <category name="Loops">
+    <category name="Loops" colour="120">
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -268,7 +268,7 @@ h1 {
       <block type="controls_forEach"></block>
       <block type="controls_flow_statements"></block>
     </category>
-    <category name="Math">
+    <category name="Math" colour="230">
       <block type="math_number"></block>
       <block type="math_arithmetic">
         <value name="A">
@@ -362,7 +362,7 @@ h1 {
       </block>
       <block type="math_random_float"></block>
     </category>
-    <category name="Text">
+    <category name="Text" colour="160">
       <block type="text"></block>
       <block type="text_join"></block>
       <block type="text_append">
@@ -439,7 +439,7 @@ h1 {
         </value>
       </block>
     </category>
-    <category name="Lists">
+    <category name="Lists" colour="260">
       <block type="lists_create_with">
         <mutation items="0"></mutation>
       </block>
@@ -489,7 +489,7 @@ h1 {
         </value>
       </block>
     </category>
-    <category name="Colour">
+    <category name="Colour" colour="20">
       <block type="colour_picker"></block>
       <block type="colour_random"></block>
       <block type="colour_rgb">
@@ -528,8 +528,8 @@ h1 {
       </block>
     </category>
     <sep></sep>
-    <category name="Variables" custom="VARIABLE"></category>
-    <category name="Functions" custom="PROCEDURE"></category>
+    <category name="Variables" colour="330" custom="VARIABLE"></category>
+    <category name="Functions" colour="290" custom="PROCEDURE"></category>
   </xml>
 
   <h1>Blockly Playground</h1>

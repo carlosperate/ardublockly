@@ -135,8 +135,12 @@ Blockly.Toolbox.prototype.init = function() {
   tree.setShowLines(false);
   tree.setShowExpandIcons(false);
   tree.setSelectedItem(null);
+  this.hasColours_ = false;
   this.populate_(workspace.options.languageTree);
   tree.render(this.HtmlDiv);
+  if (this.hasColours_) {
+    this.addColour_(tree);
+  }
   this.position();
 };
 
@@ -188,6 +192,7 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
   var rootOut = this.tree_;
   rootOut.removeChildren();  // Delete any existing content.
   rootOut.blocks = [];
+  var hasColours = false;
   function syncTrees(treeIn, treeOut) {
     for (var i = 0, childIn; childIn = treeIn.childNodes[i]; i++) {
       if (!childIn.tagName) {
@@ -206,6 +211,13 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
           } else {
             syncTrees(childIn, childOut);
           }
+          var hue = childIn.getAttribute('colour');
+          if (goog.isString(hue)) {
+            childOut.hexColour = Blockly.makeColour(hue);
+            hasColours = true;
+          } else {
+            childOut.hexColour = '';
+          }
           if (childIn.getAttribute('expanded') == 'true') {
             if (childOut.blocks.length) {
               rootOut.setSelectedItem(childOut);
@@ -223,6 +235,7 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
     }
   }
   syncTrees(newTree, this.tree_);
+  this.hasColours_ = hasColours;
 
   if (rootOut.blocks.length) {
     throw 'Toolbox cannot have both blocks and categories in the root level.';
@@ -230,6 +243,27 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
 
   // Fire a resize event since the toolbox may have changed width and height.
   Blockly.fireUiEvent(window, 'resize');
+};
+
+/**
+ * Recursively add colours to this toolbox.
+ * @param {!Blockly.Toolbox.TreeNode}
+ * @private
+ */
+Blockly.Toolbox.prototype.addColour_ = function(tree) {
+  var children = tree.getChildren();
+  for (var i = 0, child; child = children[i]; i++) {
+    var element = child.getRowElement();
+    if (element) {
+      var border = '8px solid ' + (child.hexColour || '#ddd');
+      if (this.workspace_.RTL) {
+        element.style.borderRight = border;
+      } else {
+        element.style.borderLeft = border;
+      }
+    }
+    this.addColour_(child);
+  }
 };
 
 /**
@@ -284,7 +318,7 @@ Blockly.Toolbox.TreeControl.prototype.enterDocument = function() {
 
   // Add touch handler.
   if (goog.events.BrowserFeature.TOUCH_ENABLED) {
-    var el = this.getElement();
+    var el = this.getRowElement();
     Blockly.bindEvent_(el, goog.events.EventType.TOUCHSTART, this,
         this.handleTouchEvent_);
   }
@@ -325,21 +359,33 @@ Blockly.Toolbox.TreeControl.prototype.createNode = function(opt_html) {
  */
 Blockly.Toolbox.TreeControl.prototype.setSelectedItem = function(node) {
   Blockly.removeAllRanges();
-  if (this.selectedItem_ == node) {
+  var toolbox = this.toolbox_;
+  if (node == this.selectedItem_ || node == toolbox.tree_) {
     return;
   }
+  if (toolbox.lastCategory_) {
+    toolbox.lastCategory_.getRowElement().style.backgroundColor = '';
+  }
+  if (node) {
+    var hexColour = node.hexColour || '#57e';
+    node.getRowElement().style.backgroundColor = hexColour;
+    // Add colours to child nodes which may have been collapsed and thus
+    // not rendered.
+    toolbox.addColour_(node);
+  }
   goog.ui.tree.TreeControl.prototype.setSelectedItem.call(this, node);
-  var toolbox = this.toolbox_;
   if (node && node.blocks && node.blocks.length) {
     toolbox.flyout_.show(node.blocks);
     // Scroll the flyout to the top if the category has changed.
     if (toolbox.lastCategory_ != node) {
       toolbox.flyout_.scrollToTop();
-      toolbox.lastCategory_ = node;
     }
   } else {
     // Hide the flyout.
     toolbox.flyout_.hide();
+  }
+  if (node) {
+    toolbox.lastCategory_ = node;
   }
 };
 
