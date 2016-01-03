@@ -56,6 +56,7 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxPath, blocklyPath) {
           css: true,
           disable: true,
           grid: false,
+          maxBlocks: Infinity,
           media: blocklyPath + '/media/',
           rtl: false,
           scrollbars: true,
@@ -63,12 +64,12 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxPath, blocklyPath) {
           toolbox: xmlTree,
           trashcan: true,
           zoom: {
-            enabled: true,
             controls: true,
             wheel: false,
             startScale: 1.0,
-            maxScale: 3,
-            minScale: 0.3
+            maxScale: 2,
+            minScale: 0.2,
+            scaleSpeed: 1.2
           }
       });
       Ardublockly.BLOCKLY_INJECTED_ = true;
