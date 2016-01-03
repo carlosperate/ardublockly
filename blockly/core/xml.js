@@ -99,8 +99,6 @@ Blockly.Xml.blockToDom_ = function(block) {
   }
 
   if (block.data) {
-    // Optional text data that round-trips beween blocks and XML.
-    // Has no effect.  May be used by 3rd parties for meta information.
     var dataElement = goog.dom.createDom('data', null, block.data);
     element.appendChild(dataElement);
   }
@@ -279,7 +277,8 @@ Blockly.Xml.domToWorkspace = function(workspace, xml) {
   var childCount = xml.childNodes.length;
   for (var i = 0; i < childCount; i++) {
     var xmlChild = xml.childNodes[i];
-    if (xmlChild.nodeName.toLowerCase() == 'block') {
+    var name = xmlChild.nodeName.toLowerCase();
+    if (name == 'block' || name == 'shadow') {
       var block = Blockly.Xml.domToBlock(workspace, xmlChild);
       var blockX = parseInt(xmlChild.getAttribute('x'), 10);
       var blockY = parseInt(xmlChild.getAttribute('y'), 10);
@@ -427,8 +426,6 @@ Blockly.Xml.domToBlockHeadless_ =
         }
         break;
       case 'data':
-        // Optional text data that round-trips beween blocks and XML.
-        // Has no effect.  May be used by 3rd parties for meta information.
         block.data = xmlChild.textContent;
         break;
       case 'title':
