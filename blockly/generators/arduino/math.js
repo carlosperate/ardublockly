@@ -23,6 +23,11 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['math_number'] = function(block) {
   // Numeric value.
   var code = parseFloat(block.getFieldValue('NUM'));
+  if (code == Infinity) {
+    code = 'INFINITY';
+  } else if (code == -Infinity) {
+    code = '-INFINITY';
+  }
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
