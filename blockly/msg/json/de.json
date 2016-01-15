@@ -5,7 +5,8 @@
 			"M165437",
 			"Dan-yell",
 			"아라",
-			"Octycs"
+			"Octycs",
+			"Cvanca"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "Element",
@@ -17,6 +18,7 @@
 	"INLINE_INPUTS": "interne Eingänge",
 	"DELETE_BLOCK": "Block löschen",
 	"DELETE_X_BLOCKS": "Block %1 löschen",
+	"DELETE_ALL_BLOCKS": "Alle %1 Bausteine löschen?",
 	"CLEAN_UP": "Blöcke aufräumen",
 	"COLLAPSE_BLOCK": "Block zusammenfalten",
 	"COLLAPSE_ALL": "Alle Blöcke zusammenfalten",
@@ -158,7 +160,7 @@
 	"MATH_ONLIST_TOOLTIP_AVERAGE": "Ist der Durchschnittswert aller Werte in einer Liste.",
 	"MATH_ONLIST_OPERATOR_MEDIAN": "Median einer Liste",
 	"MATH_ONLIST_TOOLTIP_MEDIAN": "Ist der Median aller Werte in einer Liste.",
-	"MATH_ONLIST_OPERATOR_MODE": "Modulo / Restwert einer Liste",
+	"MATH_ONLIST_OPERATOR_MODE": "am häufigsten in Liste",
 	"MATH_ONLIST_TOOLTIP_MODE": "Findet den am häufigsten vorkommenden Wert in einer Liste.  Falls kein Wert öfter vorkommt als alle anderen, wird die originale Liste zurückgeben",
 	"MATH_ONLIST_OPERATOR_STD_DEV": "Standardabweichung einer Liste",
 	"MATH_ONLIST_TOOLTIP_STD_DEV": "Ist die standardisierte Standardabweichung aller Werte in der Liste",
@@ -324,7 +326,6 @@
 	"PROCEDURES_ALLOW_STATEMENTS": "Aussagen erlauben",
 	"PROCEDURES_DEF_DUPLICATE_WARNING": "Warnung: dieser Funktionsblock hat zwei gleich benannte Parameter.",
 	"PROCEDURES_CALLNORETURN_HELPURL": "https://de.wikipedia.org/wiki/Prozedur_%28Programmierung%29",
-	"PROCEDURES_CALLNORETURN_CALL": "",
 	"PROCEDURES_CALLNORETURN_TOOLTIP": "Rufe einen Funktionsblock ohne Rückgabewert auf.",
 	"PROCEDURES_CALLRETURN_HELPURL": "https://de.wikipedia.org/wiki/Prozedur_%28Programmierung%29",
 	"PROCEDURES_CALLRETURN_TOOLTIP": "Rufe einen Funktionsblock mit Rückgabewert auf.",

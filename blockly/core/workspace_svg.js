@@ -150,28 +150,32 @@ Blockly.WorkspaceSvg.prototype.scrollbar = null;
  * @return {!Element} The workspace's SVG group.
  */
 Blockly.WorkspaceSvg.prototype.createDom = function(opt_backgroundClass) {
-  /*
-  <g class="blocklyWorkspace">
-    <rect class="blocklyMainBackground" height="100%" width="100%"></rect>
-    [Trashcan and/or flyout may go here]
-    <g class="blocklyBlockCanvas"></g>
-    <g class="blocklyBubbleCanvas"></g>
-    [Scrollbars may go here]
-  </g>
-  */
+  /**
+   * <g class="blocklyWorkspace">
+   *   <rect class="blocklyMainBackground" height="100%" width="100%"></rect>
+   *   [Trashcan and/or flyout may go here]
+   *   <g class="blocklyBlockCanvas"></g>
+   *   <g class="blocklyBubbleCanvas"></g>
+   *   [Scrollbars may go here]
+   * </g>
+   * @type {SVGElement}
+   */
   this.svgGroup_ = Blockly.createSvgElement('g',
       {'class': 'blocklyWorkspace'}, null);
   if (opt_backgroundClass) {
+    /** @type {SVGElement} */
     this.svgBackground_ = Blockly.createSvgElement('rect',
-        {'height': '100%', 'width': '100%',
-         'class': opt_backgroundClass}, this.svgGroup_);
+        {'height': '100%', 'width': '100%', 'class': opt_backgroundClass},
+        this.svgGroup_);
     if (opt_backgroundClass == 'blocklyMainBackground') {
       this.svgBackground_.style.fill =
           'url(#' + this.options.gridPattern.id + ')';
     }
   }
+  /** @type {SVGElement} */
   this.svgBlockCanvas_ = Blockly.createSvgElement('g',
       {'class': 'blocklyBlockCanvas'}, this.svgGroup_, this);
+  /** @type {SVGElement} */
   this.svgBubbleCanvas_ = Blockly.createSvgElement('g',
       {'class': 'blocklyBubbleCanvas'}, this.svgGroup_, this);
   var bottom = Blockly.Scrollbar.scrollbarThickness;
@@ -238,8 +242,20 @@ Blockly.WorkspaceSvg.prototype.dispose = function() {
   }
   if (!this.options.parentWorkspace) {
     // Top-most workspace.  Dispose of the SVG too.
-    goog.dom.removeNode(this.options.svg);
+    goog.dom.removeNode(this.getParentSvg());
   }
+};
+
+/**
+ * Obtain a newly created block.
+ * @param {?string} prototypeName Name of the language object containing
+ *     type-specific functions for this block.
+ * @param {=string} opt_id Optional ID.  Use this ID if provided, otherwise
+ *     create a new id.
+ * @return {!Blockly.BlockSvg} The created block.
+ */
+Blockly.WorkspaceSvg.prototype.newBlock = function(prototypeName, opt_id) {
+  return new Blockly.BlockSvg(this, prototypeName, opt_id);
 };
 
 /**
@@ -325,6 +341,25 @@ Blockly.WorkspaceSvg.prototype.getBubbleCanvas = function() {
 };
 
 /**
+ * Get the SVG element that contains this workspace.
+ * @return {!Element} SVG element.
+ */
+Blockly.WorkspaceSvg.prototype.getParentSvg = function() {
+  if (this.cachedParentSvg_) {
+    return this.cachedParentSvg_;
+  }
+  var element = this.svgGroup_;
+  while (element) {
+    if (element.tagName == 'svg') {
+      this.cachedParentSvg_ = element;
+      return element;
+    }
+    element = element.parentNode;
+  }
+  return null;
+};
+
+/**
  * Translate this workspace to new coordinates.
  * @param {number} x Horizontal translation.
  * @param {number} y Vertical translation.
@@ -334,28 +369,6 @@ Blockly.WorkspaceSvg.prototype.translate = function(x, y) {
       'scale(' + this.scale + ')';
   this.svgBlockCanvas_.setAttribute('transform', translation);
   this.svgBubbleCanvas_.setAttribute('transform', translation);
-};
-
-/**
- * Add a block to the list of top blocks.
- * @param {!Blockly.Block} block Block to remove.
- */
-Blockly.WorkspaceSvg.prototype.addTopBlock = function(block) {
-  Blockly.WorkspaceSvg.superClass_.addTopBlock.call(this, block);
-  if (Blockly.Realtime.isEnabled() && !this.options.parentWorkspace) {
-    Blockly.Realtime.addTopBlock(block);
-  }
-};
-
-/**
- * Remove a block from the list of top blocks.
- * @param {!Blockly.Block} block Block to remove.
- */
-Blockly.WorkspaceSvg.prototype.removeTopBlock = function(block) {
-  Blockly.WorkspaceSvg.superClass_.removeTopBlock.call(this, block);
-  if (Blockly.Realtime.isEnabled() && !this.options.parentWorkspace) {
-    Blockly.Realtime.removeTopBlock(block);
-  }
 };
 
 /**
@@ -373,7 +386,7 @@ Blockly.WorkspaceSvg.prototype.getWidth = function() {
  * @param {boolean} isVisible True if workspace should be visible.
  */
 Blockly.WorkspaceSvg.prototype.setVisible = function(isVisible) {
-  this.options.svg.style.display = isVisible ? 'block' : 'none';
+  this.getParentSvg().style.display = isVisible ? 'block' : 'none';
   if (this.toolbox_) {
     // Currently does not support toolboxes in mutators.
     this.toolbox_.HtmlDiv.style.display = isVisible ? 'block' : 'none';
@@ -431,7 +444,7 @@ Blockly.WorkspaceSvg.prototype.highlightBlock = function(id) {
   }
   var block = null;
   if (id) {
-    block = this.getBlockById(id);
+    block = Blockly.Block.getById(id);
     if (!block) {
       return;
     }
@@ -546,7 +559,7 @@ Blockly.WorkspaceSvg.prototype.recordDeleteAreas = function() {
  */
 Blockly.WorkspaceSvg.prototype.isDeleteArea = function(e) {
   var isDelete = false;
-  var mouseXY = Blockly.mouseToSvg(e, Blockly.mainWorkspace.options.svg);
+  var mouseXY = Blockly.mouseToSvg(e, Blockly.mainWorkspace.getParentSvg());
   var xy = new goog.math.Coordinate(mouseXY.x, mouseXY.y);
   if (this.deleteAreaTrash_) {
     if (this.deleteAreaTrash_.contains(xy)) {
@@ -624,7 +637,7 @@ Blockly.WorkspaceSvg.prototype.onMouseDown_ = function(e) {
  */
 Blockly.WorkspaceSvg.prototype.startDrag = function(e, x, y) {
   // Record the starting offset between the bubble's location and the mouse.
-  var point = Blockly.mouseToSvg(e, this.options.svg);
+  var point = Blockly.mouseToSvg(e, this.getParentSvg());
   // Fix scale of mouse event.
   point.x /= this.scale;
   point.y /= this.scale;
@@ -638,7 +651,7 @@ Blockly.WorkspaceSvg.prototype.startDrag = function(e, x, y) {
  * @return {!goog.math.Coordinate} New location of object.
  */
 Blockly.WorkspaceSvg.prototype.moveDrag = function(e) {
-  var point = Blockly.mouseToSvg(e, this.options.svg);
+  var point = Blockly.mouseToSvg(e, this.getParentSvg());
   // Fix scale of mouse event.
   point.x /= this.scale;
   point.y /= this.scale;
@@ -656,7 +669,7 @@ Blockly.WorkspaceSvg.prototype.onMouseWheel_ = function(e) {
   // TODO: Remove terminateDrag and compensate for coordinate skew during zoom.
   Blockly.terminateDrag_();
   var delta = e.deltaY > 0 ? -1 : 1;
-  var position = Blockly.mouseToSvg(e, this.options.svg);
+  var position = Blockly.mouseToSvg(e, this.getParentSvg());
   this.zoom(position.x, position.y, delta);
   e.preventDefault();
 };
@@ -686,7 +699,7 @@ Blockly.WorkspaceSvg.prototype.cleanUp_ = function() {
  * @private
  */
 Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
-  if (this.options.readOnly) {
+  if (this.options.readOnly || this.isFlyout) {
     return;
   }
   var menuOptions = [];
@@ -699,7 +712,7 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
   menuOptions.push(cleanOption);
 
   // Add a little animation to collapsing and expanding.
-  var COLLAPSE_DELAY = 10;
+  var DELAY = 10;
   if (this.options.collapse) {
     var hasCollapsedBlocks = false;
     var hasExpandedBlocks = false;
@@ -727,7 +740,7 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
         while (block) {
           setTimeout(block.setCollapsed.bind(block, shouldCollapse), ms);
           block = block.getNextBlock();
-          ms += COLLAPSE_DELAY;
+          ms += DELAY;
         }
       }
     };
@@ -748,6 +761,47 @@ Blockly.WorkspaceSvg.prototype.showContextMenu_ = function(e) {
     };
     menuOptions.push(expandOption);
   }
+
+  // Option to delete all blocks.
+  // Count the number of blocks that are deletable.
+  var deleteList = [];
+  function addDeletableBlocks(block) {
+    if (block.isDeletable()) {
+      deleteList = deleteList.concat(block.getDescendants());
+    } else {
+      var children = block.getChildren();
+      for (var i = 0; i < children.length; i++) {
+        addDeletableBlocks(children[i]);
+      }
+    }
+  }
+  for (var i = 0; i < topBlocks.length; i++) {
+    addDeletableBlocks(topBlocks[i]);
+  }
+  var deleteOption = {
+    text: deleteList.length <= 1 ? Blockly.Msg.DELETE_BLOCK :
+        Blockly.Msg.DELETE_X_BLOCKS.replace('%1', String(deleteList.length)),
+    enabled: deleteList.length > 0,
+    callback: function() {
+      if (deleteList.length < 2 ||
+          window.confirm(Blockly.Msg.DELETE_ALL_BLOCKS.replace('%1',
+          String(deleteList.length)))) {
+        deleteNext();
+      }
+    }
+  };
+  function deleteNext() {
+    var block = deleteList.shift();
+    if (block) {
+      if (block.workspace) {
+        block.dispose(false, true);
+        setTimeout(deleteNext, DELAY);
+      } else {
+        deleteNext();
+      }
+    }
+  }
+  menuOptions.push(deleteOption);
 
   Blockly.ContextMenu.show(e, menuOptions, this.RTL);
 };
@@ -854,6 +908,7 @@ Blockly.WorkspaceSvg.prototype.updateToolbox = function(tree) {
     }
     this.options.languageTree = tree;
     this.toolbox_.populate_(tree);
+    this.toolbox_.addColour_();
   } else {
     if (!this.flyout_) {
       throw 'Existing toolbox has categories.  Can\'t change mode.';
@@ -908,7 +963,7 @@ Blockly.WorkspaceSvg.prototype.markFocused = function() {
 Blockly.WorkspaceSvg.prototype.zoom = function(x, y, type) {
   var speed = this.options.zoomOptions.scaleSpeed;
   var metrics = this.getMetrics();
-  var center = this.options.svg.createSVGPoint();
+  var center = this.getParentSvg().createSVGPoint();
   center.x = x;
   center.y = y;
   center = center.matrixTransform(this.getCanvas().getCTM().inverse());

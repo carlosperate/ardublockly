@@ -48,23 +48,11 @@ Blockly.inject = function(container, opt_options) {
     throw 'Error: container is not in current document.';
   }
   var options = Blockly.parseOptions_(opt_options || {});
-  var workspace;
-  var startUi = function() {
-    var svg = Blockly.createDom_(container, options);
-    workspace = Blockly.createMainWorkspace_(svg, options);
-    Blockly.init_(workspace);
-    workspace.markFocused();
-    Blockly.bindEvent_(svg, 'focus', workspace, workspace.markFocused);
-  };
-  if (options.enableRealtime) {
-    var realtimeElement = document.getElementById('realtime');
-    if (realtimeElement) {
-      realtimeElement.style.display = 'block';
-    }
-    Blockly.Realtime.startRealtime(startUi, container, options.realtimeOptions);
-  } else {
-    startUi();
-  }
+  var svg = Blockly.createDom_(container, options);
+  var workspace = Blockly.createMainWorkspace_(svg, options);
+  Blockly.init_(workspace);
+  workspace.markFocused();
+  Blockly.bindEvent_(svg, 'focus', workspace, workspace.markFocused);
   return workspace;
 };
 
@@ -76,12 +64,16 @@ Blockly.inject = function(container, opt_options) {
  */
 Blockly.parseToolboxTree_ = function(tree) {
   if (tree) {
-    if (typeof tree != 'string' && typeof XSLTProcessor == 'undefined') {
-      // In this case the tree will not have been properly built by the
-      // browser. The HTML will be contained in the element, but it will
-      // not have the proper DOM structure since the browser doesn't support
-      // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
-      tree = tree.outerHTML;
+    if (typeof tree != 'string') {
+      if (typeof XSLTProcessor == 'undefined' && tree.outerHTML) {
+        // In this case the tree will not have been properly built by the
+        // browser. The HTML will be contained in the element, but it will
+        // not have the proper DOM structure since the browser doesn't support
+        // XSLTProcessor (XML -> HTML). This is the case in IE 9+.
+        tree = tree.outerHTML;
+      } else if (!(tree instanceof Element)) {
+        tree = null;
+      }
     }
     if (typeof tree == 'string') {
       tree = Blockly.Xml.textToDom(tree);
@@ -158,36 +150,6 @@ Blockly.parseOptions_ = function(options) {
     pathToMedia = options['path'] + 'media/';
   }
 
-/* TODO (fraser): Add documentation page:
- * https://developers.google.com/blockly/installation/zoom
- *
- * controls
- *
- * Set to `true` to show zoom-in and zoom-out buttons.  Defaults to `false`.
- *
- * wheel
- *
- * Set to `true` to allow the mouse wheel to zoom.  Defaults to `false`.
- *
- * startScale
- *
- * Initial magnification factor.  Defaults to `1.0`.
- *
- * maxScale
- *
- * Maximum multiplication factor for how far one can zoom in.  Defaults to `3`.
- *
- * minScale
- *
- * Minimum multiplication factor for how far one can zoom out.  Defaults to `0.3`.
- *
- * scaleSpeed
- *
- * For each zooming in-out step the scale is multiplied
- * or divided respectively by the scale speed, this means that:
- * `scale = scaleSpeed ^ steps`, note that in this formula
- * steps of zoom-out are subtracted and zoom-in steps are added.
- */
   // See zoom documentation at:
   // https://developers.google.com/blockly/installation/zoom
   var zoom = options['zoom'] || {};
@@ -358,7 +320,6 @@ Blockly.createDom_ = function(container, options) {
     // x1, y1, x1, x2 properties will be set later in updateGridPattern_.
   }
   options.gridPattern = gridPattern;
-  options.svg = svg;
   return svg;
 };
 
@@ -441,7 +402,7 @@ Blockly.createMainWorkspace_ = function(svg, options) {
  */
 Blockly.init_ = function(mainWorkspace) {
   var options = mainWorkspace.options;
-  var svg = mainWorkspace.options.svg;
+  var svg = mainWorkspace.getParentSvg();
   // Supress the browser's context menu.
   Blockly.bindEvent_(svg, 'contextmenu', null,
       function(e) {

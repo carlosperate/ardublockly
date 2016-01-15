@@ -116,8 +116,7 @@ Blockly.Toolbox.prototype.init = function() {
   var workspaceOptions = {
     disabledPatternId: workspace.options.disabledPatternId,
     parentWorkspace: workspace,
-    RTL: workspace.RTL,
-    svg: workspace.options.svg
+    RTL: workspace.RTL
   };
   /**
    * @type {!Blockly.Flyout}
@@ -136,12 +135,9 @@ Blockly.Toolbox.prototype.init = function() {
   tree.setShowLines(false);
   tree.setShowExpandIcons(false);
   tree.setSelectedItem(null);
-  this.hasColours_ = false;
   this.populate_(workspace.options.languageTree);
   tree.render(this.HtmlDiv);
-  if (this.hasColours_) {
-    this.addColour_(tree);
-  }
+  this.addColour_();
   this.position();
 };
 
@@ -165,7 +161,7 @@ Blockly.Toolbox.prototype.position = function() {
     // Not initialized yet.
     return;
   }
-  var svg = this.workspace_.options.svg;
+  var svg = this.workspace_.getParentSvg();
   var svgPosition = goog.style.getPageOffset(svg);
   var svgSize = Blockly.svgSize(svg);
   if (this.workspace_.RTL) {
@@ -212,9 +208,13 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
           } else {
             syncTrees(childIn, childOut);
           }
-          var hue = childIn.getAttribute('colour');
-          if (goog.isString(hue)) {
-            childOut.hexColour = Blockly.makeColour(hue);
+          var colour = childIn.getAttribute('colour');
+          if (goog.isString(colour)) {
+            if (colour.match(/^#[0-9a-fA-F]{6}$/)) {
+              childOut.hexColour = colour;
+            } else {
+              childOut.hexColour = Blockly.hueToRgb(colour);
+            }
             hasColours = true;
           } else {
             childOut.hexColour = '';
@@ -224,12 +224,15 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
               rootOut.setSelectedItem(childOut);
             }
             childOut.setExpanded(true);
+          } else {
+            childOut.setExpanded(false);
           }
           break;
         case 'SEP':
           treeOut.add(new Blockly.Toolbox.TreeSeparator());
           break;
         case 'BLOCK':
+        case 'SHADOW':
           treeOut.blocks.push(childIn);
           break;
       }
@@ -248,15 +251,21 @@ Blockly.Toolbox.prototype.populate_ = function(newTree) {
 
 /**
  * Recursively add colours to this toolbox.
- * @param {!Blockly.Toolbox.TreeNode}
+ * @param {Blockly.Toolbox.TreeNode} opt_tree Starting point of tree.
+ *     Defaults to the root node.
  * @private
  */
-Blockly.Toolbox.prototype.addColour_ = function(tree) {
+Blockly.Toolbox.prototype.addColour_ = function(opt_tree) {
+  var tree = opt_tree || this.tree_;
   var children = tree.getChildren();
   for (var i = 0, child; child = children[i]; i++) {
     var element = child.getRowElement();
     if (element) {
-      var border = '8px solid ' + (child.hexColour || '#ddd');
+      if (this.hasColours_) {
+        var border = '8px solid ' + (child.hexColour || '#ddd');
+      } else {
+        var border = 'none';
+      }
       if (this.workspace_.RTL) {
         element.style.borderRight = border;
       } else {
@@ -286,7 +295,7 @@ Blockly.Toolbox.prototype.getRect = function() {
   // Assumes that the toolbox is on the SVG edge.  If this changes
   // (e.g. toolboxes in mutators) then this code will need to be more complex.
   if (this.workspace_.RTL) {
-    var svgSize = Blockly.svgSize(this.workspace_.options.svg);
+    var svgSize = Blockly.svgSize(this.workspace_.getParentSvg());
     var x = svgSize.width - this.width;
   } else {
     var x = -BIG_NUM;

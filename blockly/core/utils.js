@@ -318,7 +318,7 @@ Blockly.getSvgXY_ = function(element, workspace) {
     x += xy.x * scale;
     y += xy.y * scale;
     element = element.parentNode;
-  } while (element && element != workspace.options.svg);
+  } while (element && element != workspace.getParentSvg());
   return new goog.math.Coordinate(x, y);
 };
 
@@ -551,3 +551,43 @@ Blockly.tokenizeInterpolation = function(message) {
   }
   return tokens;
 };
+
+/**
+ * Generate a unique ID.  This should be globally unique.
+ * 88 characters ^ 20 length ≈ 129 bits (one bit better than a UUID).
+ * @return {string}
+ */
+Blockly.genUid = function() {
+  var length = 20;
+  var soupLength = Blockly.genUid.soup_.length;
+  var id = [];
+  if (Blockly.genUid.crypto_) {
+    // Cryptographically strong randomness is supported.
+    var array = new Uint32Array(length);
+    Blockly.genUid.crypto_.getRandomValues(array);
+    for (var i = 0; i < length; i++) {
+      id[i] = Blockly.genUid.soup_.charAt(array[i] % soupLength);
+    }
+  } else {
+    // Fall back to Math.random for IE 10.
+    for (var i = 0; i < length; i++) {
+      id[i] = Blockly.genUid.soup_.charAt(Math.random() * soupLength);
+    }
+  }
+  return id.join('');
+};
+
+/**
+ * Determine if window.crypto or global.crypto exists.
+ * @type {=RandomSource}
+ * @private
+ */
+Blockly.genUid.crypto_ = this.crypto;
+
+/**
+ * Legal characters for the unique ID.
+ * Should be all on a US keyboard.  No XML special characters or control codes.
+ * @private
+ */
+Blockly.genUid.soup_ = '!#$%()*+,-./:;=?@[]^_`{|}~' +
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
