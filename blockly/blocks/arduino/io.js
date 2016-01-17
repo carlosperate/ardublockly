@@ -124,7 +124,7 @@ Blockly.Blocks['io_analogwrite'] = {
     this.appendDummyInput('')
         .appendField('set analogue pin#')
         .appendField(new Blockly.FieldDropdown(
-            Blockly.Arduino.Boards.selected.analogPins), 'PIN');
+            Blockly.Arduino.Boards.selected.pwmPins), 'PIN');
     this.appendValueInput('NUM', Blockly.StaticTyping.BlocklyType.NUMBER)
         .appendField('to')
         .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
@@ -138,7 +138,7 @@ Blockly.Blocks['io_analogwrite'] = {
    * @this Blockly.Block
    */
   updateFields: function() {
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, 'PIN', 'analogPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, 'PIN', 'pwmPins');
   },
   /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
