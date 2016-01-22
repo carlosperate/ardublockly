@@ -52,6 +52,27 @@ Ardublockly.hideSideMenuButton = function() {
   sideMenuButton.style.display = 'none';
 };
 
+/**
+ * Launches a materialize modal as a text prompt 
+ * @param {string} message Main text message for the window prompt.
+ * @param {string=} defaultValue Input string to be displayed by default.
+ * @param {function} callback To process the user input.
+ */
+Ardublockly.htmlPrompt = function(message, defaultValue, callback) {
+  $('#gen_prompt_message').text('');
+  $('#gen_prompt_message').append(message);
+  $('#gen_prompt_input').val(defaultValue);
+  // Bind callback events to buttons
+  $('#gen_prompt_ok_link').bind('click', function() {
+    callback($('#gen_prompt_input').val());
+  });
+  $('#gen_prompt_cancel_link').bind('click', function() {
+    callback(null);
+  });
+  $('#gen_prompt').openModal();
+  window.location.hash = '';
+};
+
 /** Initialize Ardublockly code required for Electron on page load. */
 window.addEventListener('load', function load(event) {
   window.removeEventListener('load', load, false);
@@ -63,5 +84,9 @@ window.addEventListener('load', function load(event) {
     // Prevent browser zoom changes like pinch-to-zoom
     var webFrame = require('web-frame');
     webFrame.setZoomLevelLimits(1, 1);
+
+    // Electron does not offer a prompt, so replace Blocks version with modal
+    // Original signature: function(message, opt_defaultInput, opt_callback)
+    Blockly.prompt = Ardublockly.htmlPrompt;
   }
 });

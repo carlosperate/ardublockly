@@ -253,6 +253,18 @@
     </div>
   </div>
 
+  <!-- Prompt: Content is loaded using JavaScript to display alerts -->
+  <div id="gen_prompt" class="modal modal_small modal-fixed-footer">
+    <div class="modal-content">
+      <p><span id="gen_prompt_message">Prompt message</span></p>
+      <p><input id="gen_prompt_input" value="test" /></p>
+    </div>
+    <div class="modal-footer">
+      <a id="gen_prompt_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
+      <a id="gen_prompt_cancel_link" href="#" class="waves-effect btn-flat modal-close">Cancel</a>
+    </div>
+  </div>
+
   <!-- Local Server Alert to be shown if Ardublockly Server is not running. -->
   <div id="not_running_dialog" class="modal">
     <div class="modal-content">

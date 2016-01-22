@@ -513,8 +513,11 @@ ul.side-nav li.side-menu-end {
 
 /* Small modal responsive design */
 .modal_small {
-  height: 30% !important;
+  height: auto !important;
   min-height: 200px;
+}
+.modal_small input {
+  width: 100%;
 }
 @media only screen and (min-width: 0) {
   .modal_small {
