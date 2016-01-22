@@ -365,6 +365,12 @@ var getHelpMenuData = function() {
                         'https://github.com/carlosperate/ardublockly');
                 }
             }, {
+                label: 'Report bug',
+                click: function() {
+                    shell.openExternal(
+                        'https://github.com/carlosperate/ardublockly/issues');
+                }
+            }, {
                 type: 'separator'
             },  {
                 label: 'About',
