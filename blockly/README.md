@@ -13,6 +13,7 @@ It adds the following features:
 * Arduino pin tracking
 * Arduino generator unit test (incomplete)
 * Procedures core class modified to include the Arduino setup() and loop() functions
+* Temporarily removed procedure's mutator responsible to add arguments
 * Minor visual changes to the zoom icons positioning
 
 The following features are planned to be push upstream (list will be updated as PR get accepted):
