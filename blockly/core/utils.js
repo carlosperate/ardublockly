@@ -591,3 +591,31 @@ Blockly.genUid.crypto_ = this.crypto;
  */
 Blockly.genUid.soup_ = '!#$%()*+,-./:;=?@[]^_`{|}~' +
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+/**
+ * Local prompt function created to allow blockly developers to overwrite it
+ * with a customised version. This version uses the default window.prompt
+ * functionality, but it has been designed to be easily replaced by an 
+ * asynchronous HTML based prompt.
+ * @param {string} message Main text message for the window prompt.
+ * @param {string=} opt_defaultInput Input string to be displayed by default.
+ * @param {function=} opt_callback Optional function callback to process the
+ *     user input.
+ * @return {undefined|null|string} If no callback is provided it returns the
+ *     value directly from window.prompt (null or string), otherwise it
+ *     returns undefined.
+ */
+Blockly.prompt = function(message, opt_defaultInput, opt_callback) {
+  if (opt_callback === undefined) {
+    // If no callback provided to revert back to the normal blockly prompt
+    return window.prompt(message, opt_defaultInput);
+  } else {
+    // window.prompt still a blocking function, but returns value via callback
+    if (typeof opt_callback == 'function') {
+      opt_callback(window.prompt(message, opt_defaultInput));
+    } else {
+      console.log('Blocky prompt callback needs to be a callable function.');
+    }
+  }
+  return undefined;
+};

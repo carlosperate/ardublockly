@@ -113,7 +113,7 @@ Blockly.FieldTextInput.prototype.showEditor_ = function(opt_quietInput) {
   if (!quietInput && (goog.userAgent.MOBILE || goog.userAgent.ANDROID ||
                       goog.userAgent.IPAD)) {
     // Mobile browsers have issues with in-line textareas (focus & keyboards).
-    var newValue = window.prompt(Blockly.Msg.CHANGE_VALUE_TITLE, this.text_);
+    var newValue = Blockly.prompt(Blockly.Msg.CHANGE_VALUE_TITLE,this.text_);
     if (this.sourceBlock_ && this.changeHandler_) {
       var override = this.changeHandler_(newValue);
       if (override !== undefined) {

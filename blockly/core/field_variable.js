@@ -29,6 +29,7 @@ goog.provide('Blockly.FieldVariable');
 goog.require('Blockly.FieldDropdown');
 goog.require('Blockly.Msg');
 goog.require('Blockly.Variables');
+goog.require('Blockly.utils');
 goog.require('goog.string');
 
 
@@ -159,39 +160,43 @@ Blockly.FieldVariable.dropdownCreate = function() {
  * @this {!Blockly.FieldVariable}
  */
 Blockly.FieldVariable.dropdownChange = function(text) {
-  function promptName(promptText, defaultText) {
+  function promptName(promptText, defaultText, callback) {
     Blockly.hideChaff();
-    var newVar = window.prompt(promptText, defaultText);
-    // Merge runs of whitespace.  Strip leading and trailing whitespace.
-    // Beyond this, all names are legal.
-    if (newVar) {
-      newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
-      if (newVar == Blockly.Msg.RENAME_VARIABLE ||
-          newVar == Blockly.Msg.NEW_VARIABLE) {
-        // Ok, not ALL names are legal...
-        newVar = null;
+    var newVar = Blockly.prompt(promptText, defaultText, function(newVar) {
+      // Merge runs of whitespace.  Strip leading and trailing whitespace.
+      // Beyond this, all names are legal.
+      if (newVar) {
+        newVar = newVar.replace(/[\s\xa0]+/g, ' ').replace(/^ | $/g, '');
+        if (newVar == Blockly.Msg.RENAME_VARIABLE ||
+            newVar == Blockly.Msg.NEW_VARIABLE) {
+          // Ok, not ALL names are legal...
+          newVar = null;
+        }
       }
-    }
-    return newVar;
+      callback(newVar);
+    });
   }
   var workspace = this.sourceBlock_.workspace;
   if (text == Blockly.Msg.RENAME_VARIABLE) {
     var oldVar = this.getText();
-    text = promptName(Blockly.Msg.RENAME_VARIABLE_TITLE.replace('%1', oldVar),
-                      oldVar);
-    if (text) {
-      Blockly.Variables.renameVariable(oldVar, text, workspace);
-    }
+    promptName(Blockly.Msg.RENAME_VARIABLE_TITLE.replace('%1', oldVar),
+               oldVar, function(text) {
+      if (text) {
+        Blockly.Variables.renameVariable(oldVar, text, workspace);
+      }
+    });
     return null;
   } else if (text == Blockly.Msg.NEW_VARIABLE) {
-    text = promptName(Blockly.Msg.NEW_VARIABLE_TITLE, '');
-    // Since variables are case-insensitive, ensure that if the new variable
-    // matches with an existing variable, the new case prevails throughout.
-    if (text) {
-      Blockly.Variables.renameVariable(text, text, workspace);
-      return text;
-    }
-    return null;
+    /*promptName(Blockly.Msg.NEW_VARIABLE_TITLE, '', function(text) {
+      // Since variables are case-insensitive, ensure that if the new variable
+      // matches with an existing variable, the new case prevails throughout.
+      if (text) {
+        Blockly.Variables.renameVariable(text, text, workspace);
+        //TODO: need to add here what too do with the newly created variable
+      }
+    });*/
+    //TODO: this return variable needs to be made redundant
+    return Blockly.Variables.generateUniqueName(workspace);
   }
   return undefined;
 };
