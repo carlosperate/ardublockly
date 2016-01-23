@@ -6,7 +6,6 @@
  *
  * @fileoverview Helper functions for generating Arduino language (C++) for
  *               blocks.
- *
  */
 'use strict';
 
@@ -17,17 +16,9 @@ goog.require('Blockly.Generator');
 
 /**
  * Arduino code generator.
- * @type !Blockly.Generator
+ * @type {!Blockly.Generator}
  */
 Blockly.Arduino = new Blockly.Generator('Arduino');
-
-/**
- * As this generator uses static typing, it is created as a member of the
- * generator.
- * @type !Blockly.StaticTyping
- */
-//Blockly.Arduino.StaticTyping = new Blockly.Generator('Arduino');
-
 
 /**
  * List of illegal variable names.
@@ -49,16 +40,14 @@ Blockly.Arduino.addReservedWords(
     'lowByte,highByte,bitRead,bitWrite,bitSet,bitClear,bit,attachInterrupt,' +
     'detachInterrupt,interrupts,noInterrupts');
 
-/**
- * Order of operation ENUMs.
- */
+/** Order of operation ENUMs. */
 Blockly.Arduino.ORDER_ATOMIC = 0;         // 0 "" ...
 Blockly.Arduino.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] .
 Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
 Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; // * / % ~/
 Blockly.Arduino.ORDER_ADDITIVE = 4;       // + -
-Blockly.Arduino.ORDER_SHIFT = 5;          // << >>  
-Blockly.Arduino.ORDER_RELATIONAL = 6;     // is is! >= > <= <
+Blockly.Arduino.ORDER_SHIFT = 5;          // << >>
+Blockly.Arduino.ORDER_RELATIONAL = 6;     // >= > <= <
 Blockly.Arduino.ORDER_EQUALITY = 7;       // == != === !==
 Blockly.Arduino.ORDER_BITWISE_AND = 8;    // &
 Blockly.Arduino.ORDER_BITWISE_XOR = 9;    // ^
@@ -70,21 +59,49 @@ Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= 
 Blockly.Arduino.ORDER_NONE = 99;          // (...)
 
 /**
+ * A list of types tasks that the pins can be assigned. Used to track usage and
+ * warn if the same pin has been assigned to more than one task.
+ */
+Blockly.Arduino.PinTypes = {
+  INPUT: 'INPUT',
+  OUTPUT: 'OUTPUT',
+  PWM: 'PWM',
+  SERVO: 'SERVO',
+  STEPPER: 'STEPPER',
+  SERIAL: 'SERIAL',
+  I2C: 'I2C/TWI',
+  SPI: 'SPI'
+};
+
+/**
+ * Arduino generator short name for
+ * Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_
+ * @type {!string}
+ */
+Blockly.Arduino.DEF_FUNC_NAME = Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_;
+
+/**
  * Initialises the database of global definitions, the setup function, function
  * names, and variable names.
  * @param {Blockly.Workspace} workspace Workspace to generate code from.
  */
 Blockly.Arduino.init = function(workspace) {
-  // Create a dictionary of definitions to be printed before setups
+  // Create a dictionary of definitions to be printed at the top of the sketch
+  Blockly.Arduino.includes_ = Object.create(null);
+  // Create a dictionary of definitions to be printed after variable definitions
   Blockly.Arduino.definitions_ = Object.create(null);
-  // Create a dictionary of setups to be printed before the code
-  Blockly.Arduino.setups_ = Object.create(null);
-  // Create a dictionary of pins to check if their use conflicts
-  Blockly.Arduino.pins_ = Object.create(null);
+  // Create a dictionary of functions from the code generator
+  Blockly.Arduino.codeFunctions_ = Object.create(null);
+  // Create a dictionary of functions created by the user
+  Blockly.Arduino.userFunctions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
   // to actual function names (to avoid collisions with user functions)
   Blockly.Arduino.functionNames_ = Object.create(null);
-  
+  // Create a dictionary of setups to be printed in the setup() function
+  Blockly.Arduino.setups_ = Object.create(null);
+  // Create a dictionary of pins to check if their use conflicts
+  Blockly.Arduino.pins_ = Object.create(null);
+
   if (!Blockly.Arduino.variableDB_) {
     Blockly.Arduino.variableDB_ =
         new Blockly.Names(Blockly.Arduino.RESERVED_WORDS_);
@@ -92,66 +109,166 @@ Blockly.Arduino.init = function(workspace) {
     Blockly.Arduino.variableDB_.reset();
   }
 
-  // Iterate through the blocks to capture variables with first instance type
-  var variableTypes = Blockly.StaticTyping.getAllVarsWithTypes(workspace);
+  // Iterate through to capture all blocks types and set the function arguments
+  var varsWithTypes = Blockly.StaticTyping.getAllVarsWithTypes(workspace);
+  Blockly.StaticTyping.setProcedureArgs(workspace, varsWithTypes);
 
-  // The procedure arguments need to have all the variables collected first
-  var blocks = workspace.getAllBlocks();
-  for (var x = 0; x < blocks.length; x++) {
-    var setArgsType = blocks[x].setArgsType;
-    if (setArgsType) {
-      setArgsType.call(blocks[x], variableTypes);
-    }
-  }
-
-  // Set variable declarations
+  // Set variable declarations with their Arduino type in the defines dictionary
   var variableDeclarations = [];
-  for (var varName in variableTypes) {
+  for (var varName in varsWithTypes) {
     variableDeclarations.push(
-        Blockly.Arduino.getArduinoType_(variableTypes[varName]) + ' ' +
+        Blockly.Arduino.getArduinoType_(varsWithTypes[varName]) + ' ' +
         varName + ';');
   }
-  Blockly.Arduino.definitions_['variables'] =
-      variableDeclarations.join('\n') + '\n';
+  Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n');
 };
 
 /**
- * Prepend the generated code with the variable definitions.
- * @param {string} code Generated code.
- * @return {string} Completed code.
+ * Prepare all generated code to be placed in the sketch specific locations.
+ * @param {string} code Generated main program (loop function) code.
+ * @return {string} Completed sketch code.
  */
 Blockly.Arduino.finish = function(code) {
-  // Indent every line.
-  code = '  ' + code.replace(/\n/g, '\n  ');
-  code = code.replace(/\n\s+$/, '\n');
-  code = 'void loop() {\n' + code + '\n}';
-
-  // Convert the definitions dictionary into a list
-  var imports = [];
-  var definitions = [];
+  // Convert the includes, definitions, and functions dictionaries into lists
+  var includes = [], definitions = [], functions = [];
+  for (var name in Blockly.Arduino.includes_) {
+    includes.push(Blockly.Arduino.includes_[name]);
+  }
+  if (includes.length) {
+    includes.push('\n');
+  }
   for (var name in Blockly.Arduino.definitions_) {
-    var def = Blockly.Arduino.definitions_[name];
-    if (def.match(/^#include/)) {
-      imports.push(def);
-    } else {
-      definitions.push(def);
-    }
+    definitions.push(Blockly.Arduino.definitions_[name]);
+  }
+  if (definitions.length) {
+    definitions.push('\n');
+  }
+  for (var name in Blockly.Arduino.codeFunctions_) {
+    functions.push(Blockly.Arduino.codeFunctions_[name]);
+  }
+  for (var name in Blockly.Arduino.userFunctions_) {
+    functions.push(Blockly.Arduino.userFunctions_[name]);
+  }
+  if (functions.length) {
+    functions.push('\n');
   }
 
-  // Convert the setups dictionary into a list
-  var setups = [];
+  // userSetupCode added at the end of the setup function without leading spaces
+  var setups = [''], userSetupCode= '';
+  if (Blockly.Arduino.setups_['userSetupCode'] !== undefined) {
+    userSetupCode = '\n' + Blockly.Arduino.setups_['userSetupCode'];
+    delete Blockly.Arduino.setups_['userSetupCode'];
+  }
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);
   }
+  if (userSetupCode) {
+    setups.push(userSetupCode);
+  }
 
-  var allDefs = imports.join('\n') + definitions.join('\n') +
-      '\n\nvoid setup() {\n  '+ setups.join('\n  ') + '\n}';
-  return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
+  // Clean up temporary data
+  delete Blockly.Arduino.includes_;
+  delete Blockly.Arduino.definitions_;
+  delete Blockly.Arduino.codeFunctions_;
+  delete Blockly.Arduino.userFunctions_;
+  delete Blockly.Arduino.functionNames_;
+  delete Blockly.Arduino.setups_;
+  delete Blockly.Arduino.pins_;
+  Blockly.Arduino.variableDB_.reset();
+
+  var allDefs = includes.join('\n') + definitions.join('\n') +
+                functions.join('\n\n');
+  var setup = 'void setup() {' + setups.join('\n  ') + '\n}\n\n';
+  var loop = 'void loop() {\n  ' + code.replace(/\n/g, '\n  ') + '\n}';
+  return allDefs + setup + loop;
+};
+
+/**
+ * Adds a string of "include" code to be added to the sketch.
+ * Once a include is added it will not get overwritten with new code.
+ * @param {!string} includeTag Identifier for this include code.
+ * @param {!string} code Code to be included at the very top of the sketch.
+ */
+Blockly.Arduino.addInclude = function(includeTag, code) {
+  if (Blockly.Arduino.includes_[includeTag] === undefined) {
+    Blockly.Arduino.includes_[includeTag] = code;
+  }
+};
+
+/**
+ * Adds a string of code to be declared globally to the sketch.
+ * Once it is added it will not get overwritten with new code.
+ * @param {!string} declarationTag Identifier for this declaration code.
+ * @param {!string} code Code to be added below the includes.
+ */
+Blockly.Arduino.addDeclaration = function(declarationTag, code) {
+  if (Blockly.Arduino.definitions_[declarationTag] === undefined) {
+    Blockly.Arduino.definitions_[declarationTag] = code;
+  }
+};
+
+/**
+ * Adds a string of code into the Arduino setup() function. It takes an
+ * identifier to not repeat the same kind of initialisation code from several
+ * blocks. If overwrite option is set to true it will overwrite whatever
+ * value the identifier held before.
+ * @param {!string} setupTag Identifier for the type of set up code.
+ * @param {!string} code Code to be included in the setup() function.
+ * @param {boolean=} overwrite Flag to ignore previously set value.
+ */
+Blockly.Arduino.addSetup = function(setupTag, code, overwrite) {
+  if (overwrite) {
+    Blockly.Arduino.setups_[setupTag] = code;
+  } else if (Blockly.Arduino.setups_[setupTag] === undefined) {
+    Blockly.Arduino.setups_[setupTag] = code;
+  }
+};
+
+/**
+ * Adds a string of code as a function. It takes an identifier (meant to be the
+ * function name) to only keep a single copy even if multiple blocks might
+ * request this function to be created.
+ * A function (and its code) will only be added on first request.
+ * @param {!string} preferedName Identifier for the function.
+ * @param {!string} code Code to be included in the setup() function.
+ * @return {!string} A unique function name based on input name.
+ */
+Blockly.Arduino.addFunction = function(preferedName, code) {
+  if (Blockly.Arduino.codeFunctions_[preferedName] === undefined) {
+    var uniqueName = Blockly.Arduino.variableDB_.getDistinctName(
+        preferedName, Blockly.Generator.NAME_TYPE);
+    Blockly.Arduino.codeFunctions_[preferedName] =
+        code.replace(Blockly.Arduino.DEF_FUNC_NAME, uniqueName);
+    Blockly.Arduino.functionNames_[preferedName] = uniqueName;
+  }
+  return Blockly.Arduino.functionNames_[preferedName];
+};
+
+/**
+ * Description.
+ * @param {!Blockly.Block} block Description.
+ * @param {!string} pin Description.
+ * @param {!string} pinType Description.
+ * @param {!string} warningTag Description.
+ */
+Blockly.Arduino.reservePin = function(block, pin, pinType, warningTag) {
+  if (Blockly.Arduino.pins_[pin] !== undefined) {
+    if (Blockly.Arduino.pins_[pin] != pinType) {
+      block.setWarningText(
+          'Pin ' + pin + ' is needed for ' + warningTag + ' as pin ' + pinType +
+          '. Already used as ' + Blockly.Arduino.pins_[pin] + '.', warningTag);
+    } else {
+      block.setWarningText(null, warningTag);
+    }
+  } else {
+    Blockly.Arduino.pins_[pin] = pinType;
+    block.setWarningText(null, warningTag);
+  }
 };
 
 /**
  * Naked values are top-level blocks with outputs that aren't plugged into
- * anything.  A trailing semicolon is needed to make this legal.
+ * anything. A trailing semicolon is needed to make this legal.
  * @param {string} line Line of generated code.
  * @return {string} Legal line of code.
  */
@@ -161,7 +278,8 @@ Blockly.Arduino.scrubNakedValue = function(line) {
 
 /**
  * Encode a string as a properly escaped Arduino string, complete with quotes.
- * @return {string} string Arduino string.
+ * @param {string} string Text to encode.
+ * @return {string} Arduino string.
  * @private
  */
 Blockly.Arduino.quote_ = function(string) {
@@ -184,10 +302,8 @@ Blockly.Arduino.quote_ = function(string) {
  * @private
  */
 Blockly.Arduino.scrub_ = function(block, code) {
-  if (code === null) {
-    // Block has handled code generation itself
-    return '';
-  }
+  if (code === null) { return ''; } // Block has handled code generation itself
+
   var commentCode = '';
   // Only collect comments for blocks that aren't inline
   if (!block.outputConnection || !block.outputConnection.targetConnection) {
@@ -217,37 +333,39 @@ Blockly.Arduino.scrub_ = function(block, code) {
 
 /**
  * Generates Arduino Types from a Blockly Type.
- * @param {!Blockly.StaticTyping.blocklyType} typeBlockly The Blockly type to be
- *                                                        converted.
+ * @param {!Blockly.StaticTyping.BlocklyType} typeBlockly The Blockly type to be
+ *     converted.
  * @return {string} Arduino type for the respective Blockly input type, in a
- *                  string format.
+ *     string format.
  * @this {Blockly.StaticTyping}
  * @private
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
   switch (typeBlockly) {
-    case Blockly.StaticTyping.blocklyType.UNDEF:
+    case Blockly.StaticTyping.BlocklyType.UNDEF:
       return 'undefined';
-    case Blockly.StaticTyping.blocklyType.UNSPECIFIED:
+    case Blockly.StaticTyping.BlocklyType.UNSPECIFIED:
+      return 'unspecified';
+    case Blockly.StaticTyping.BlocklyType.NULL:
       return 'void';
-    case Blockly.StaticTyping.blocklyType.NULL:
-      return 'NULL';
-    case Blockly.StaticTyping.blocklyType.NUMBER:
+    case Blockly.StaticTyping.BlocklyType.NUMBER:
       return 'int';
-    case Blockly.StaticTyping.blocklyType.INTEGER:
+    case Blockly.StaticTyping.BlocklyType.INTEGER:
       return 'int';
-    case Blockly.StaticTyping.blocklyType.DECIMAL:
+    case Blockly.StaticTyping.BlocklyType.DECIMAL:
       return 'float';
-    case Blockly.StaticTyping.blocklyType.TEXT:
+    case Blockly.StaticTyping.BlocklyType.TEXT:
       return 'String';
-    case Blockly.StaticTyping.blocklyType.CHARACTER:
+    case Blockly.StaticTyping.BlocklyType.CHARACTER:
       return 'char';
-    case Blockly.StaticTyping.blocklyType.BOOLEAN:
+    case Blockly.StaticTyping.BlocklyType.BOOLEAN:
       return 'boolean';
-    case Blockly.StaticTyping.blocklyType.ERROR:
+    case Blockly.StaticTyping.BlocklyType.ERROR:
       return 'ErrorArdu';
-    case Blockly.StaticTyping.blocklyType.CHILD_TYPE_MISSING:
-      return 'ChildBlockTypeMissingArdu';
+    case Blockly.StaticTyping.BlocklyType.CHILD_BLOCK_MISSING:
+      // If no block connected default to int, change for easier debugging
+      return 'ChildBlockMissing';
+      //return 'int';
     default:
       return 'Invalid Blockly Type';
     }

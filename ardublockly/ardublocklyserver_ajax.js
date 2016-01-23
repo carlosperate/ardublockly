@@ -17,8 +17,15 @@ var ArdublocklyServer = {};
  */
 ArdublocklyServer.ajaxPostForm = function(url, params, callback) {
   var request = ArdublocklyServer.createAjaxRequest();
-  request.open('POST', url, true);
-  request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  try {
+    request.open('POST', url, true);
+    request.setRequestHeader(
+        'Content-type', 'application/x-www-form-urlencoded');
+  } catch (e) {
+    // The request will fail if opening the html directly on a browser, so
+    // let's just send the callback nullified and the front end will deal.
+    callback(null);
+  }
 
   // The data received is JSON, so it needs to be converted into the right
   // format to be displayed in the page.
@@ -37,8 +44,7 @@ ArdublocklyServer.ajaxPostForm = function(url, params, callback) {
   try {
     request.send(params);
   } catch (e) {
-    // The request will fail if opening the html directly on a browser, so
-    // let's just send the callback nullified and the front end will deal.
+    // Nullify callback to indicate error
     callback(null);
   }
 };
@@ -158,7 +164,7 @@ ArdublocklyServer.createElementFromJson = function(json_data) {
       element.appendChild(el_err);
     }
   } else {
-    //TODO: Not recognised alert the user/developer somehow
+    //TODO: Not recognised, alert the user/developer somehow
   }
 
   return element;

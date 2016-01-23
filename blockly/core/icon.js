@@ -39,10 +39,9 @@ Blockly.Icon = function(block) {
 };
 
 /**
- * Icon in base64 format.
- * @private
+ * Does this icon get hidden when the block is collapsed.
  */
-Blockly.Icon.prototype.png_ = '';
+Blockly.Icon.prototype.collapseHidden = true;
 
 /**
  * Height and width of icons.
@@ -78,16 +77,12 @@ Blockly.Icon.prototype.createIcon = function() {
   }
   /* Here's the markup that will be generated:
   <g class="blocklyIconGroup">
-    <image width="17" height="17"
-     xlink:href="data:image/png;base64,iVBOR..."></image>
+    ...
   </g>
   */
   this.iconGroup_ = Blockly.createSvgElement('g',
       {'class': 'blocklyIconGroup'}, null);
-  var img = Blockly.createSvgElement('image',
-      {'width': this.SIZE, 'height': this.SIZE},
-      this.iconGroup_);
-  img.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', this.png_);
+  this.drawIcon_(this.iconGroup_);
 
   this.block_.getSvgRoot().appendChild(this.iconGroup_);
   Blockly.bindEvent_(this.iconGroup_, 'mouseup', this, this.iconClick_);
@@ -133,6 +128,10 @@ Blockly.Icon.prototype.isVisible = function() {
  * @private
  */
 Blockly.Icon.prototype.iconClick_ = function(e) {
+  if (Blockly.dragMode_ == 2) {
+    // Drag operation is concluding.  Don't open the editor.
+    return;
+  }
   if (!this.block_.isInFlyout && !Blockly.isRightButton(e)) {
     this.setVisible(!this.isVisible());
   }
@@ -143,8 +142,7 @@ Blockly.Icon.prototype.iconClick_ = function(e) {
  */
 Blockly.Icon.prototype.updateColour = function() {
   if (this.isVisible()) {
-    var hexColour = Blockly.makeColour(this.block_.getColour());
-    this.bubble_.setColour(hexColour);
+    this.bubble_.setColour(this.block_.getColour());
   }
 };
 
@@ -154,7 +152,7 @@ Blockly.Icon.prototype.updateColour = function() {
  * @return {number} Horizontal offset for next item to draw.
  */
 Blockly.Icon.prototype.renderIcon = function(cursorX) {
-  if (this.block_.isCollapsed()) {
+  if (this.collapseHidden && this.block_.isCollapsed()) {
     this.iconGroup_.setAttribute('display', 'none');
     return cursorX;
   }
@@ -166,7 +164,7 @@ Blockly.Icon.prototype.renderIcon = function(cursorX) {
     cursorX -= width;
   }
   this.iconGroup_.setAttribute('transform',
-      'translate(' + cursorX + ', ' + TOP_MARGIN + ')');
+      'translate(' + cursorX + ',' + TOP_MARGIN + ')');
   this.computeIconLocation();
   if (this.block_.RTL) {
     cursorX -= Blockly.BlockSvg.SEP_SPACE_X;

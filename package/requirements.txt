@@ -1,4 +1,2 @@
 mkdocs>=0.12.1
-cefpython3>=31.2
 py2exe>=0.6.9
-wxPython>=3.0.2.0

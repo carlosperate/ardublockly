@@ -59,16 +59,15 @@ Blockly.FieldAngle.prototype.setChangeHandler = function(handler) {
   var wrappedHandler;
   if (handler) {
     // Wrap the user's change handler together with the angle validator.
-    var thisObj = this;
     wrappedHandler = function(value) {
-      var v1 = handler.call(thisObj, value);
+      var v1 = handler.call(this, value);
       if (v1 === null) {
         var v2 = v1;
       } else {
         if (v1 === undefined) {
           v1 = value;
         }
-        var v2 = Blockly.FieldAngle.angleValidator.call(thisObj, v1);
+        var v2 = Blockly.FieldAngle.angleValidator.call(this, v1);
         if (v2 !== undefined) {
           v2 = v1;
         }
@@ -78,16 +77,7 @@ Blockly.FieldAngle.prototype.setChangeHandler = function(handler) {
   } else {
     wrappedHandler = Blockly.FieldAngle.angleValidator;
   }
-  Blockly.FieldAngle.superClass_.setChangeHandler(wrappedHandler);
-};
-
-/**
- * Clone this FieldAngle.
- * @return {!Blockly.FieldAngle} The result of calling the constructor again
- *   with the current values of the arguments used during construction.
- */
-Blockly.FieldAngle.prototype.clone = function() {
-  return new Blockly.FieldAngle(this.getText(), this.changeHandler_);
+  Blockly.FieldAngle.superClass_.setChangeHandler.call(this, wrappedHandler);
 };
 
 /**
@@ -172,11 +162,11 @@ Blockly.FieldAngle.prototype.showEditor_ = function() {
           (a % 45 == 0 ? 10 : 5),
       'y2': Blockly.FieldAngle.HALF,
       'class': 'blocklyAngleMarks',
-      'transform': 'rotate(' + a + ', ' +
-          Blockly.FieldAngle.HALF + ', ' + Blockly.FieldAngle.HALF + ')'
+      'transform': 'rotate(' + a + ',' +
+          Blockly.FieldAngle.HALF + ',' + Blockly.FieldAngle.HALF + ')'
     }, svg);
   }
-  svg.style.marginLeft = '-35px';
+  svg.style.marginLeft = (15 - Blockly.FieldAngle.RADIUS) + 'px';
   this.clickWrapper_ =
       Blockly.bindEvent_(svg, 'click', this, Blockly.WidgetDiv.hide);
   this.moveWrapper1_ =
@@ -217,6 +207,7 @@ Blockly.FieldAngle.prototype.onMouseMove = function(e) {
   angle = String(angle);
   Blockly.FieldTextInput.htmlInput_.value = angle;
   this.setText(angle);
+  this.validate_();
 };
 
 /**
@@ -251,7 +242,7 @@ Blockly.FieldAngle.prototype.updateGraph_ = function() {
   var angleRadians = goog.math.toRadians(Number(this.getText()));
   if (isNaN(angleRadians)) {
     this.gauge_.setAttribute('d',
-        'M ' + Blockly.FieldAngle.HALF + ', ' + Blockly.FieldAngle.HALF);
+        'M ' + Blockly.FieldAngle.HALF + ',' + Blockly.FieldAngle.HALF);
     this.line_.setAttribute('x2', Blockly.FieldAngle.HALF);
     this.line_.setAttribute('y2', Blockly.FieldAngle.HALF);
   } else {
@@ -261,7 +252,7 @@ Blockly.FieldAngle.prototype.updateGraph_ = function() {
         -Blockly.FieldAngle.RADIUS;
     var largeFlag = (angleRadians > Math.PI) ? 1 : 0;
     this.gauge_.setAttribute('d',
-        'M ' + Blockly.FieldAngle.HALF + ', ' + Blockly.FieldAngle.HALF +
+        'M ' + Blockly.FieldAngle.HALF + ',' + Blockly.FieldAngle.HALF +
         ' h ' + Blockly.FieldAngle.RADIUS +
         ' A ' + Blockly.FieldAngle.RADIUS + ',' + Blockly.FieldAngle.RADIUS +
         ' 0 ' + largeFlag + ' 0 ' + x + ',' + y + ' z');

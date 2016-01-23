@@ -72,15 +72,6 @@ Blockly.FieldDropdown.CHECKMARK_OVERHANG = 25;
 Blockly.FieldDropdown.ARROW_CHAR = goog.userAgent.ANDROID ? '\u25BC' : '\u25BE';
 
 /**
- * Clone this FieldDropdown.
- * @return {!Blockly.FieldDropdown} The result of calling the constructor again
- *   with the current values of the arguments used during construction.
- */
-Blockly.FieldDropdown.prototype.clone = function() {
-  return new Blockly.FieldDropdown(this.menuGenerator_, this.changeHandler_);
-};
-
-/**
  * Mouse cursor style when over the hotspot that initiates the editor.
  */
 Blockly.FieldDropdown.prototype.CURSOR = 'default';
@@ -128,6 +119,7 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
         }
       }
       if (value !== null) {
+        thisField.sourceBlock_.setShadow(false);
         thisField.setValue(value);
       }
     }
@@ -135,11 +127,13 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   }
 
   var menu = new goog.ui.Menu();
+  menu.setRightToLeft(this.sourceBlock_.RTL);
   var options = this.getOptions_();
   for (var x = 0; x < options.length; x++) {
     var text = options[x][0];  // Human-readable text.
     var value = options[x][1]; // Language-neutral value.
     var menuItem = new goog.ui.MenuItem(text);
+    menuItem.setRightToLeft(this.sourceBlock_.RTL);
     menuItem.setValue(value);
     menuItem.setCheckable(true);
     menu.addChild(menuItem, true);
@@ -167,19 +161,21 @@ Blockly.FieldDropdown.prototype.showEditor_ = function() {
   var windowSize = goog.dom.getViewportSize();
   var scrollOffset = goog.style.getViewportPageOffset(document);
   var xy = this.getAbsoluteXY_();
-  var borderBBox = this.borderRect_.getBBox();
+  var borderBBox = this.getScaledBBox_();
   var div = Blockly.WidgetDiv.DIV;
   menu.render(div);
   var menuDom = menu.getElement();
   Blockly.addClass_(menuDom, 'blocklyDropdownMenu');
   // Record menuSize after adding menu.
   var menuSize = goog.style.getSize(menuDom);
+  // Recalculate height for the total content, not only box height.
+  menuSize.height = menuDom.scrollHeight;
 
   // Position the menu.
   // Flip menu vertically if off the bottom.
   if (xy.y + menuSize.height + borderBBox.height >=
       windowSize.height + scrollOffset.y) {
-    xy.y -= menuSize.height;
+    xy.y -= menuSize.height + 2;
   } else {
     xy.y += borderBBox.height;
   }
@@ -291,7 +287,7 @@ Blockly.FieldDropdown.prototype.setValue = function(newValue) {
 Blockly.FieldDropdown.prototype.setText = function(text) {
   if (this.sourceBlock_ && this.arrow_) {
     // Update arrow's colour.
-    this.arrow_.style.fill = Blockly.makeColour(this.sourceBlock_.getColour());
+    this.arrow_.style.fill = this.sourceBlock_.getColour();
   }
   if (text === null || text === this.text_) {
     // No change if null.

@@ -6,20 +6,22 @@ var childProcess = require('child_process');
 var jetpack = require('fs-jetpack');
 var asar = require('asar');
 var utils = require('./utils');
+var projectLocator = require('../app/projectlocator.js');
 
 var projectDir;
 var releasesDir;
 var packName;
 var packDir;
 var tmpDir;
-var arduexecDir;
+var arduExecDir;
 var readyAppDir;
 var manifest;
 
 var init = function () {
     projectDir = jetpack;
     tmpDir = projectDir.dir('./tmp', { empty: true });
-    arduexecDir = projectDir.dir('../../arduexec');
+    arduExecDir = projectDir.dir('../../' +
+                                 projectLocator.ardublocklyExecFolderName);
     releasesDir = projectDir.dir('./releases');
     manifest = projectDir.read('app/package.json', 'json');
     packName = manifest.name + '_' + manifest.version;
@@ -36,7 +38,7 @@ var copyRuntime = function () {
 var packageBuiltApp = function () {
     var deferred = Q.defer();
 
-    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function() {
+    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function () {
         deferred.resolve();
     });
 
@@ -62,10 +64,11 @@ var finalize = function () {
     // Copy icon
     projectDir.copy('resources/icon.png', readyAppDir.path('icon.png'));
 
-    // Rename executable
-    readyAppDir.rename('electron', manifest.name);
-
     return Q();
+};
+
+var renameApp = function () {
+    return readyAppDir.renameAsync("electron", manifest.name);
 };
 
 var packToDebFile = function () {
@@ -91,7 +94,7 @@ var packToDebFile = function () {
     packDir.write('DEBIAN/control', control);
 
     // Build the package...
-    childProcess.exec('fakeroot dpkg-deb -Zxz --build ' + packDir.path() + ' ' + debPath,
+    childProcess.exec('fakeroot dpkg-deb -Zxz --build ' + packDir.path().replace(/\s/g, '\\ ') + ' ' + debPath.replace(/\s/g, '\\ '),
         function (error, stdout, stderr) {
             if (error || stderr) {
                 console.log("ERROR while building DEB package:");
@@ -107,7 +110,7 @@ var packToDebFile = function () {
 };
 
 var copyExecFolder = function () {
-    readyAppDir.copy(readyAppDir.cwd(), arduexecDir.cwd(), { overwrite: true });
+    readyAppDir.copy(readyAppDir.cwd(), arduExecDir.cwd(), { overwrite: true });
     return Q();
 };
 
@@ -121,7 +124,9 @@ module.exports = function () {
     .then(packageBuiltApp)
     //.then(createDesktopFile)
     .then(finalize)
+    .then(renameApp)
     //.then(packToDebFile)
     .then(copyExecFolder)
-    .then(cleanClutter);
+    .then(cleanClutter)
+    .catch(console.error);
 };

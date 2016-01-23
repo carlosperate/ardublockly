@@ -28,7 +28,9 @@
 
 goog.provide('Blockly.utils');
 
+goog.require('goog.dom');
 goog.require('goog.events.BrowserFeature');
+goog.require('goog.math.Coordinate');
 goog.require('goog.userAgent');
 
 
@@ -249,11 +251,11 @@ Blockly.isTargetInput_ = function(e) {
  * Return the coordinates of the top-left corner of this element relative to
  * its parent.  Only for SVG elements and children (e.g. rect, g, path).
  * @param {!Element} element SVG element to find the coordinates of.
- * @return {!Object} Object with .x and .y properties.
+ * @return {!goog.math.Coordinate} Object with .x and .y properties.
  * @private
  */
 Blockly.getRelativeXY_ = function(element) {
-  var xy = {x: 0, y: 0};
+  var xy = new goog.math.Coordinate(0, 0);
   // First, check for x and y attributes.
   var x = element.getAttribute('x');
   if (x) {
@@ -265,12 +267,7 @@ Blockly.getRelativeXY_ = function(element) {
   }
   // Second, check for transform="translate(...)" attribute.
   var transform = element.getAttribute('transform');
-  // Note that Firefox and IE (9,10) return 'translate(12)' instead of
-  // 'translate(12, 0)'.
-  // Note that IE (9,10) returns 'translate(16 8)' instead of
-  // 'translate(16, 8)'.
-  var r = transform &&
-          transform.match(/translate\(\s*([-\d.]+)([ ,]\s*([-\d.]+)\s*\))?/);
+  var r = transform && transform.match(Blockly.getRelativeXY_.XY_REGEXP_);
   if (r) {
     xy.x += parseFloat(r[1]);
     if (r[3]) {
@@ -281,33 +278,60 @@ Blockly.getRelativeXY_ = function(element) {
 };
 
 /**
- * Return the absolute coordinates of the top-left corner of this element.
- * The origin (0,0) is the top-left corner of the nearest SVG.
- * @param {!Element} element Element to find the coordinates of.
- * @return {!Object} Object with .x and .y properties.
+ * Static regex to pull the x,y values out of an SVG translate() directive.
+ * Note that Firefox and IE (9,10) return 'translate(12)' instead of
+ * 'translate(12, 0)'.
+ * Note that IE (9,10) returns 'translate(16 8)' instead of 'translate(16, 8)'.
+ * Note that IE has been reported to return scientific notation (0.123456e-42).
+ * @type {!RegExp}
  * @private
  */
-Blockly.getSvgXY_ = function(element) {
+Blockly.getRelativeXY_.XY_REGEXP_ =
+    /translate\(\s*([-+\d.e]+)([ ,]\s*([-+\d.e]+)\s*\))?/;
+
+/**
+ * Return the absolute coordinates of the top-left corner of this element,
+ * scales that after canvas SVG element, if it's a descendant.
+ * The origin (0,0) is the top-left corner of the Blockly SVG.
+ * @param {!Element} element Element to find the coordinates of.
+ * @param {!Blockly.Workspace} workspace Element must be in this workspace.
+ * @return {!goog.math.Coordinate} Object with .x and .y properties.
+ * @private
+ */
+Blockly.getSvgXY_ = function(element, workspace) {
   var x = 0;
   var y = 0;
+  var scale = 1;
+  if (goog.dom.contains(workspace.getCanvas(), element) ||
+      goog.dom.contains(workspace.getBubbleCanvas(), element)) {
+    // Before the SVG canvas, scale the coordinates.
+    scale = workspace.scale;
+  }
   do {
     // Loop through this block and every parent.
     var xy = Blockly.getRelativeXY_(element);
-    x += xy.x;
-    y += xy.y;
+    if (element == workspace.getCanvas() ||
+        element == workspace.getBubbleCanvas()) {
+      // After the SVG canvas, don't scale the coordinates.
+      scale = 1;
+    }
+    x += xy.x * scale;
+    y += xy.y * scale;
     element = element.parentNode;
-  } while (element && element.nodeName.toLowerCase() != 'svg');
-  return {x: x, y: y};
+  } while (element && element != workspace.getParentSvg());
+  return new goog.math.Coordinate(x, y);
 };
 
 /**
  * Helper method for creating SVG elements.
  * @param {string} name Element's tag name.
  * @param {!Object} attrs Dictionary of attribute names and values.
- * @param {Element=} opt_parent Optional parent on which to append the element.
+ * @param {Element} parent Optional parent on which to append the element.
+ * @param {Blockly.Workspace=} opt_workspace Optional workspace for access to
+ *     context (scale...).
  * @return {!SVGElement} Newly created SVG element.
  */
-Blockly.createSvgElement = function(name, attrs, opt_parent) {
+Blockly.createSvgElement = function(name, attrs, parent, opt_workspace) {
   var e = /** @type {!SVGElement} */ (
       document.createElementNS(Blockly.SVG_NS, name));
   for (var key in attrs) {
@@ -319,8 +343,8 @@ Blockly.createSvgElement = function(name, attrs, opt_parent) {
   if (document.body.runtimeStyle) {  // Indicates presence of IE-only attr.
     e.runtimeStyle = e.currentStyle = e.style;
   }
-  if (opt_parent) {
-    opt_parent.appendChild(e);
+  if (parent) {
+    parent.appendChild(e);
   }
   return e;
 };
@@ -331,10 +355,10 @@ Blockly.createSvgElement = function(name, attrs, opt_parent) {
  * Deselect this text, so that it doesn't mess up any subsequent drag.
  */
 Blockly.removeAllRanges = function() {
-  if (getSelection()) {
+  if (window.getSelection) {
     setTimeout(function() {
         try {
-          var selection = getSelection();
+          var selection = window.getSelection();
           if (!selection.isCollapsed) {
             selection.removeAllRanges();
           }
@@ -526,4 +550,72 @@ Blockly.tokenizeInterpolation = function(message) {
     tokens.push(text);
   }
   return tokens;
+};
+
+/**
+ * Generate a unique ID.  This should be globally unique.
+ * 88 characters ^ 20 length ≈ 129 bits (one bit better than a UUID).
+ * @return {string}
+ */
+Blockly.genUid = function() {
+  var length = 20;
+  var soupLength = Blockly.genUid.soup_.length;
+  var id = [];
+  if (Blockly.genUid.crypto_) {
+    // Cryptographically strong randomness is supported.
+    var array = new Uint32Array(length);
+    Blockly.genUid.crypto_.getRandomValues(array);
+    for (var i = 0; i < length; i++) {
+      id[i] = Blockly.genUid.soup_.charAt(array[i] % soupLength);
+    }
+  } else {
+    // Fall back to Math.random for IE 10.
+    for (var i = 0; i < length; i++) {
+      id[i] = Blockly.genUid.soup_.charAt(Math.random() * soupLength);
+    }
+  }
+  return id.join('');
+};
+
+/**
+ * Determine if window.crypto or global.crypto exists.
+ * @type {=RandomSource}
+ * @private
+ */
+Blockly.genUid.crypto_ = this.crypto;
+
+/**
+ * Legal characters for the unique ID.
+ * Should be all on a US keyboard.  No XML special characters or control codes.
+ * @private
+ */
+Blockly.genUid.soup_ = '!#$%()*+,-./:;=?@[]^_`{|}~' +
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+/**
+ * Local prompt function created to allow blockly developers to overwrite it
+ * with a customised version. This version uses the default window.prompt
+ * functionality, but it has been designed to be easily replaced by an 
+ * asynchronous HTML based prompt.
+ * @param {string} message Main text message for the window prompt.
+ * @param {string=} opt_defaultInput Input string to be displayed by default.
+ * @param {function=} opt_callback Optional function callback to process the
+ *     user input.
+ * @return {undefined|null|string} If no callback is provided it returns the
+ *     value directly from window.prompt (null or string), otherwise it
+ *     returns undefined.
+ */
+Blockly.prompt = function(message, opt_defaultInput, opt_callback) {
+  if (opt_callback === undefined) {
+    // If no callback provided to revert back to the normal blockly prompt
+    return window.prompt(message, opt_defaultInput);
+  } else {
+    // window.prompt still a blocking function, but returns value via callback
+    if (typeof opt_callback == 'function') {
+      opt_callback(window.prompt(message, opt_defaultInput));
+    } else {
+      console.log('Blocky prompt callback needs to be a callable function.');
+    }
+  }
+  return undefined;
 };

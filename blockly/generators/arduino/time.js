@@ -68,5 +68,5 @@ goog.require('Blockly.Arduino');
  * @return {string} Completed code.
  */
  Blockly.Arduino['infinite_loop'] = function(block) {
-  return 'while(true);';
+  return 'while(true);\n';
 };

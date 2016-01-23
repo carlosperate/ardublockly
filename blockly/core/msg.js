@@ -19,7 +19,7 @@
  */
 
 /**
- * @fileoverview Core JavaScript library for Blockly.
+ * @fileoverview Empty name space for the Message singleton.
  * @author scr@google.com (Sheridan Rawlins)
  */
 'use strict';
@@ -29,6 +29,7 @@
  * Msg gets populated in the message files.
  */
 goog.provide('Blockly.Msg');
+
 
 /**
  * Back up original getMsg function.

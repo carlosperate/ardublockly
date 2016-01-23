@@ -23,6 +23,11 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['math_number'] = function(block) {
   // Numeric value.
   var code = parseFloat(block.getFieldValue('NUM'));
+  if (code == Infinity) {
+    code = 'INFINITY';
+  } else if (code == -Infinity) {
+    code = '-INFINITY';
+  }
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -175,37 +180,35 @@ Blockly.Arduino['math_constant'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['math_number_property'] = function(block) {
-  // 
   var number_to_check = Blockly.Arduino.valueToCode(block, 'NUMBER_TO_CHECK',
       Blockly.Arduino.ORDER_MULTIPLICATIVE) || '0';
   var dropdown_property = block.getFieldValue('PROPERTY');
   var code;
   if (dropdown_property == 'PRIME') {
-    //FIXME: this doesn't work yet
-    // Prime is a special case as it is not a one-liner test.
-    var functionName = Blockly.Arduino.provideFunction_(
-        'math_isPrime',
-        [ 'function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ + '(n) {',
-          '  // https://en.wikipedia.org/wiki/Primality_test#Naive_methods',
-          '  if (n == 2 || n == 3) {',
-          '    return true;',
-          '  }',
-          '  // False if n is NaN, negative, is 1, or not whole.',
-          '  // And false if n is divisible by 2 or 3.',
-          '  if (isnan(n) || (n <= 1) || (n % 1 != 0) || (n % 2 == 0) ||' +
-            ' (n % 3 == 0)) {',
-          '    return false;',
-          '  }',
-          '  // Check all the numbers of form 6k +/- 1, up to sqrt(n).',
-          '  for (int x = 6; x <= sqrt(n) + 1; x += 6) {',
-          '    if (n % (x - 1) == 0 || n % (x + 1) == 0) {',
-          '      return false;',
-          '    }',
-          '  }',
-          '  return true;',
-          '}']);
-    code = functionName + '(' + number_to_check + ')';
-    return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+    var func = [
+        'boolean ' + Blockly.Arduino.DEF_FUNC_NAME + '(int n) {',
+        '  // https://en.wikipedia.org/wiki/Primality_test#Naive_methods',
+        '  if (n == 2 || n == 3) {',
+        '    return true;',
+        '  }',
+        '  // False if n is NaN, negative, is 1.',
+        '  // And false if n is divisible by 2 or 3.',
+        '  if (isnan(n) || (n <= 1) || (n == 1) || (n % 2 == 0) || ' +
+            '(n % 3 == 0)) {',
+        '    return false;',
+        '  }',
+        '  // Check all the numbers of form 6k +/- 1, up to sqrt(n).',
+        '  for (int x = 6; x <= sqrt(n) + 1; x += 6) {',
+        '    if (n % (x - 1) == 0 || n % (x + 1) == 0) {',
+        '      return false;',
+        '    }',
+        '  }',
+        '  return true;',
+        '}'];
+    var funcName = Blockly.Arduino.addFunction('mathIsPrime', func.join('\n'));
+    Blockly.Arduino.addInclude('math', '#include <math.h>');
+    code = funcName + '(' + number_to_check + ')';
+    return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
   }
   switch (dropdown_property) {
     case 'EVEN':
@@ -215,7 +218,8 @@ Blockly.Arduino['math_number_property'] = function(block) {
       code = number_to_check + ' % 2 == 1';
       break;
     case 'WHOLE':
-      code = number_to_check + ' % 1 == 0';
+      Blockly.Arduino.addInclude('math', '#include <math.h>');
+      code = '(floor(' + number_to_check + ') == ' + number_to_check + ')';
       break;
     case 'POSITIVE':
       code = number_to_check + ' > 0';
@@ -248,20 +252,17 @@ Blockly.Arduino['math_change'] = function(block) {
   return varName + ' += ' + argument0 + ';\n';
 };
 
-/**
- * Rounding functions have a single operand.
- */
+/** Rounding functions have a single operand. */
 Blockly.Arduino['math_round'] = Blockly.Arduino['math_single'];
 
-/**
- * Trigonometry functions have a single operand.
- */
+/** Trigonometry functions have a single operand. */
 Blockly.Arduino['math_trig'] = Blockly.Arduino['math_single'];
 
 /**
  * Generator for the math function to a list.
  * Arduino code: ???
  * TODO: List have to be implemented first. Removed from toolbox for now.
+ *       The first case has been done as an example, the other are still left.
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
@@ -272,19 +273,15 @@ Blockly.Arduino['math_on_list'] = function(block) {
   var code;
   switch (func) {
     case 'SUM':
-      if (!Blockly.Arduino.definitions_['math_sum']) {
-        var functionName = Blockly.Arduino.variableDB_.getDistinctName(
-            'math_sum', Blockly.Generator.NAME_TYPE);
-        Blockly.Arduino.math_on_list.math_sum = functionName;
-        var func = [];
-        func.push('num ' + functionName + '(List myList) {');
-        func.push('  num sumVal = 0;');
-        func.push('  myList.forEach((num entry) {sumVal += entry;});');
-        func.push('  return sumVal;');
-        func.push('}');
-        Blockly.Arduino.definitions_['math_sum'] = func.join('\n');
-      }
-      code = Blockly.Arduino.math_on_list.math_sum + '(' + list + ')';
+      var func = [
+          'num ' + Blockly.Arduino.DEF_FUNC_NAME + '(List myList) {',
+          '  num sumVal = 0;',
+          '  myList.forEach((num entry) {sumVal += entry;});',
+          '  return sumVal;',
+          '}'];
+      var functionName = Blockly.Arduino.addFunction(
+          'mathListSum', func.join('\n'));
+      code = functionName + '(' + list + ')';
       break;
     case 'MIN':
       if (!Blockly.Arduino.definitions_['math_min']) {
@@ -425,7 +422,8 @@ Blockly.Arduino['math_on_list'] = function(block) {
                   'Math.pow(x - mean, 2));');
         func.push('  return Math.sqrt(sumSquare / n);');
         func.push('}');
-        Blockly.Arduino.definitions_['math_standard_deviation'] = func.join('\n');
+        Blockly.Arduino.definitions_['math_standard_deviation'] =
+            func.join('\n');
       }
       code = Blockly.Arduino.math_on_list.math_standard_deviation +
           '(' + list + ')';
@@ -481,7 +479,7 @@ Blockly.Arduino['math_constrain'] = function(block) {
       Blockly.Arduino.ORDER_NONE) || '0';
   var code = '(' + argument0 + ' < ' + argument1 + ' ? ' + argument1 +
       ' : ( ' + argument0 + ' > ' + argument2 + ' ? ' + argument2 + ' : ' +
-      argument0 + '))'
+      argument0 + '))';
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
@@ -497,24 +495,21 @@ Blockly.Arduino['math_random_int'] = function(block) {
       Blockly.Arduino.ORDER_NONE) || '0';
   var argument1 = Blockly.Arduino.valueToCode(block, 'TO',
       Blockly.Arduino.ORDER_NONE) || '0';
-  if (!Blockly.Arduino.definitions_['math_random_int']) {
-    var functionName = Blockly.Arduino.variableDB_.getDistinctName(
-        'math_random_int', Blockly.Generator.NAME_TYPE);
-    Blockly.Arduino.math_random_int.random_function = functionName;
-    var func = [];
-    func.push('int ' + functionName + '(int min, int max) {');
-    func.push('  if (min > max) {');
-    func.push('    // Swap min and max to ensure min is smaller.');
-    func.push('    int temp = min;');
-    func.push('    min = max;');
-    func.push('    max = temp;');
-    func.push('  }');
-    func.push('  return min + (rand() % (max - min + 1));');
-    func.push('}');
-    Blockly.Arduino.definitions_['math_random_int'] = func.join('\n');
-  }
-  var code = Blockly.Arduino.math_random_int.random_function +
-      '(' + argument0 + ', ' + argument1 + ')';
+  var functionName = Blockly.Arduino.variableDB_.getDistinctName(
+      'math_random_int', Blockly.Generator.NAME_TYPE);
+  Blockly.Arduino.math_random_int.random_function = functionName;
+  var func = [
+      'int ' + Blockly.Arduino.DEF_FUNC_NAME + '(int min, int max) {',
+      '  if (min > max) {',
+      '    // Swap min and max to ensure min is smaller.',
+      '    int temp = min;',
+      '    min = max;',
+      '    max = temp;',
+      '  }',
+      '  return min + (rand() % (max - min + 1));',
+      '}'];
+  var funcName = Blockly.Arduino.addFunction('mathRandomInt', func.join('\n'));
+  var code = funcName + '(' + argument0 + ', ' + argument1 + ')';
   return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 

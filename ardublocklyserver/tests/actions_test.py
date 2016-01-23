@@ -45,7 +45,7 @@ class ActionsTestCase(unittest.TestCase):
             default_dir,
             ServerCompilerSettings._ServerCompilerSettings__settings_filename))
         if os.path.exists(settings_file):
-            print('Removing default settings file from %s' % settings_file)
+            print('Removing settings file from %s' % settings_file)
             os.remove(settings_file)
 
     #
@@ -294,3 +294,4 @@ class ActionsTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+

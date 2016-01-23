@@ -13,8 +13,10 @@
 goog.provide('Blockly.Blocks.Arduino.map');
 
 goog.require('Blockly.Arduino');
+goog.require('Blockly.StaticTyping');
 
 
+/** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.Arduino.map.HUE = 230;
 
 Blockly.Blocks['base_map'] = {
@@ -25,23 +27,20 @@ Blockly.Blocks['base_map'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/map');
     this.setColour(Blockly.Blocks.Arduino.map.HUE);
-    this.appendValueInput('NUM', Blockly.StaticTyping.blocklyType.NUMBER)
+    this.appendValueInput('NUM', Blockly.StaticTyping.BlocklyType.NUMBER)
         .appendField('Map ')
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER);
-    this.appendValueInput('DMAX', Blockly.StaticTyping.blocklyType.NUMBER)
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.appendValueInput('DMAX', Blockly.StaticTyping.BlocklyType.NUMBER)
         .appendField('value to [0-')
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER);
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
     this.appendDummyInput('')
         .appendField(']');
     this.setInputsInline(true);
     this.setOutput(true);
     this.setTooltip('Re-maps a number from [0-1024] to another range.');
   },
-  /**
-   * Assigns a type to the block, the current map implementation for Arduino
-   * takes the inputs a longs and returns a long, so automatic cast to int.
-   */
-  getType: function() {
-    return Blockly.StaticTyping.blocklyType.INTEGER;
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.StaticTyping.BlocklyType.INTEGER;
   }
 };

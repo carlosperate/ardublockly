@@ -41,55 +41,21 @@ goog.require('goog.string');
 
 
 /**
-* Class for one block.
-* @constructor
-*/
-Blockly.Block = function() {
-  // We assert this here because there may be users of the previous form of
-  // this constructor, which took arguments.
-  goog.asserts.assert(arguments.length == 0,
-      'Please use Blockly.Block.obtain.');
-};
-
-/**
- * Obtain a newly created block.
+ * Class for one block.
+ * Not normally called directly, workspace.newBlock() is preferred.
  * @param {!Blockly.Workspace} workspace The block's workspace.
  * @param {?string} prototypeName Name of the language object containing
  *     type-specific functions for this block.
- * @return {!Blockly.Block} The created block
+ * @param {=string} opt_id Optional ID.  Use this ID if provided, otherwise
+ *     create a new id.
+ * @constructor
  */
-Blockly.Block.obtain = function(workspace, prototypeName) {
-  if (Blockly.Realtime.isEnabled()) {
-    return Blockly.Realtime.obtainBlock(workspace, prototypeName);
-  } else {
-    if (workspace.rendered) {
-      var newBlock = new Blockly.BlockSvg();
-    } else {
-      var newBlock = new Blockly.Block();
-    }
-    newBlock.initialize(workspace, prototypeName);
-    return newBlock;
-  }
-};
-
-/**
- * Initialization for one block.
- * @param {!Blockly.Workspace} workspace The new block's workspace.
- * @param {?string} prototypeName Name of the language object containing
- *     type-specific functions for this block.
- */
-Blockly.Block.prototype.initialize = function(workspace, prototypeName) {
-  this.id = Blockly.Blocks.genUid();
-  workspace.addTopBlock(this);
-  this.fill(workspace, prototypeName);
-};
-
-/**
- * Fill a block with initial values.
- * @param {!Blockly.Workspace} workspace The workspace to use.
- * @param {string} prototypeName The typename of the block.
- */
-Blockly.Block.prototype.fill = function(workspace, prototypeName) {
+Blockly.Block = function(workspace, prototypeName, opt_id) {
+  /** @type {string} */
+  this.id = opt_id || Blockly.genUid();
+  goog.asserts.assert(!Blockly.Block.getById(this.id),
+      'Error: Block "%s" already exists.', this.id);
+  Blockly.Block.BlockDB_[this.id] = this;
   /** @type {Blockly.Connection} */
   this.outputConnection = null;
   /** @type {Blockly.Connection} */
@@ -120,6 +86,8 @@ Blockly.Block.prototype.fill = function(workspace, prototypeName) {
   /** @type {boolean} */
   this.editable_ = true;
   /** @type {boolean} */
+  this.isShadow_ = false;
+  /** @type {boolean} */
   this.collapsed_ = false;
 
   /** @type {string|Blockly.Comment} */
@@ -144,6 +112,9 @@ Blockly.Block.prototype.fill = function(workspace, prototypeName) {
         'Error: "%s" is an unknown language block.', prototypeName);
     goog.mixin(this, prototype);
   }
+
+  workspace.addTopBlock(this);
+
   // Call an initialization function, if it exists.
   if (goog.isFunction(this.init)) {
     this.init();
@@ -154,18 +125,32 @@ Blockly.Block.prototype.fill = function(workspace, prototypeName) {
 };
 
 /**
- * Get an existing block.
- * @param {string} id The block's id.
+ * Obtain a newly created block.
  * @param {!Blockly.Workspace} workspace The block's workspace.
- * @return {Blockly.Block} The found block, or null if not found.
+ * @param {?string} prototypeName Name of the language object containing
+ *     type-specific functions for this block.
+ * @return {!Blockly.Block} The created block.
+ * @deprecated December 2015
  */
-Blockly.Block.getById = function(id, workspace) {
-  if (Blockly.Realtime.isEnabled()) {
-    return Blockly.Realtime.getBlockById(id);
-  } else {
-    return workspace.getBlockById(id);
-  }
+Blockly.Block.obtain = function(workspace, prototypeName) {
+  console.warn('Deprecated call to Blockly.Block.obtain, ' +
+               'use workspace.newBlock instead.');
+  return workspace.newBlock(prototypeName);
 };
+
+/**
+ * Optional text data that round-trips beween blocks and XML.
+ * Has no effect. May be used by 3rd parties for meta information.
+ * @type {?string}
+ */
+Blockly.Block.prototype.data = null;
+
+/**
+ * Colour of the block in '#RRGGBB' format.
+ * @type {string}
+ * @private
+ */
+Blockly.Block.prototype.colour_ = '#000000';
 
 /**
  * Dispose of this block.
@@ -214,10 +199,8 @@ Blockly.Block.prototype.dispose = function(healStack, animate,
     }
     connections[i].dispose();
   }
-  // Remove from Realtime set of blocks.
-  if (Blockly.Realtime.isEnabled() && !Blockly.Realtime.withinSync) {
-    Blockly.Realtime.removeBlock(this);
-  }
+  // Remove from block database.
+  delete Blockly.Block.BlockDB_[this.id];
 };
 
 /**
@@ -258,30 +241,6 @@ Blockly.Block.prototype.unplug = function(healStack, bump) {
     var dy = Blockly.SNAP_RADIUS * 2;
     this.moveBy(dx, dy);
   }
-};
-
-/**
- * Duplicate this block and its children.
- * @return {!Blockly.Block} The duplicate.
- * @private
- */
-Blockly.Block.prototype.duplicate_ = function() {
-  // Create a duplicate via XML.
-  var xmlBlock = Blockly.Xml.blockToDom_(this);
-  Blockly.Xml.deleteNext(xmlBlock);
-  var newBlock = Blockly.Xml.domToBlock(
-      /** @type {!Blockly.Workspace} */ (this.workspace), xmlBlock);
-  // Move the duplicate next to the old block.
-  var xy = this.getRelativeToSurfaceXY();
-  if (this.RTL) {
-    xy.x -= Blockly.SNAP_RADIUS;
-  } else {
-    xy.x += Blockly.SNAP_RADIUS;
-  }
-  xy.y += Blockly.SNAP_RADIUS * 2;
-  newBlock.moveBy(xy.x, xy.y);
-  newBlock.select();
-  return newBlock;
 };
 
 /**
@@ -484,7 +443,7 @@ Blockly.Block.prototype.getDescendants = function() {
  * @return {boolean} True if deletable.
  */
 Blockly.Block.prototype.isDeletable = function() {
-  return this.deletable_ &&
+  return this.deletable_ && !this.isShadow_ &&
       !(this.workspace && this.workspace.options.readOnly);
 };
 
@@ -501,7 +460,8 @@ Blockly.Block.prototype.setDeletable = function(deletable) {
  * @return {boolean} True if movable.
  */
 Blockly.Block.prototype.isMovable = function() {
-  return this.movable_ && !(this.workspace && this.workspace.options.readOnly);
+  return this.movable_ && !this.isShadow_ &&
+      !(this.workspace && this.workspace.options.readOnly);
 };
 
 /**
@@ -510,6 +470,22 @@ Blockly.Block.prototype.isMovable = function() {
  */
 Blockly.Block.prototype.setMovable = function(movable) {
   this.movable_ = movable;
+};
+
+/**
+ * Get whether this block is a shadow block or not.
+ * @return {boolean} True if a shadow.
+ */
+Blockly.Block.prototype.isShadow = function() {
+  return this.isShadow_;
+};
+
+/**
+ * Set whether this block is a shadow block or not.
+ * @param {boolean} shadow True if a shadow.
+ */
+Blockly.Block.prototype.setShadow = function(shadow) {
+  this.isShadow_ = shadow;
 };
 
 /**
@@ -529,12 +505,6 @@ Blockly.Block.prototype.setEditable = function(editable) {
   for (var i = 0, input; input = this.inputList[i]; i++) {
     for (var j = 0, field; field = input.fieldRow[j]; j++) {
       field.updateEditable();
-    }
-  }
-  if (this.rendered) {
-    var icons = this.getIcons();
-    for (var i = 0; i < icons.length; i++) {
-      icons[i].updateEditable();
     }
   }
 };
@@ -593,18 +563,25 @@ Blockly.Block.prototype.setTooltip = function(newTip) {
 
 /**
  * Get the colour of a block.
- * @return {number} HSV hue value.
+ * @return {string} #RRGGBB string.
  */
 Blockly.Block.prototype.getColour = function() {
-  return this.colourHue_;
+  return this.colour_;
 };
 
 /**
  * Change the colour of a block.
- * @param {number} colourHue HSV hue value.
+ * @param {number|string} colour HSV hue value, or #RRGGBB string.
  */
-Blockly.Block.prototype.setColour = function(colourHue) {
-  this.colourHue_ = colourHue;
+Blockly.Block.prototype.setColour = function(colour) {
+  var hue = parseFloat(colour);
+  if (!isNaN(hue)) {
+    this.colour_ = Blockly.hueToRgb(hue);
+  } else if (goog.isString(colour) && colour.match(/^#[0-9a-fA-F]{6}$/)) {
+    this.colour_ = colour;
+  } else {
+    throw 'Invalid colour: ' + colour;
+  }
   if (this.rendered) {
     this.updateColour();
   }
@@ -756,20 +733,6 @@ Blockly.Block.prototype.setOutput = function(newBoolean, opt_check) {
     this.render();
     this.bumpNeighbours_();
   }
-};
-
-/**
- * Change the output type on a block.
- * @param {string|Array.<string>|null} check Returned type or list of
- *     returned types.  Null or undefined if any type could be returned
- *     (e.g. variable get).  It is fine if this is the same as the old type.
- * @throws {goog.asserts.AssertionError} if the block did not already have an
- *     output.
- */
-Blockly.Block.prototype.changeOutput = function(check) {
-  goog.asserts.assert(this.outputConnection,
-      'Only use changeOutput() on blocks that already have an output.');
-  this.outputConnection.setCheck(check);
 };
 
 /**
@@ -1031,7 +994,7 @@ Blockly.Block.prototype.interpolate_ = function(message, args, lastDummyAlign) {
             input = this.appendDummyInput(element['name']);
             break;
           case 'field_label':
-            field = new Blockly.FieldLabel(element['text']);
+            field = new Blockly.FieldLabel(element['text'], element['class']);
             break;
           case 'field_input':
             field = new Blockly.FieldTextInput(element['text']);
@@ -1208,7 +1171,7 @@ Blockly.Block.prototype.removeInput = function(name, opt_quiet) {
 /**
  * Fetches the named input object.
  * @param {string} name The name of the input.
- * @return {?Blockly.Input} The input object, or null of the input does not exist.
+ * @return {Blockly.Input} The input object, or null of the input does not exist.
  */
 Blockly.Block.prototype.getInput = function(name) {
   for (var i = 0, input; input = this.inputList[i]; i++) {
@@ -1279,4 +1242,19 @@ Blockly.Block.prototype.getRelativeToSurfaceXY = function() {
  */
 Blockly.Block.prototype.moveBy = function(dx, dy) {
   this.xy_.translate(dx, dy);
+};
+
+/**
+ * Database of all blocks.
+ * @private
+ */
+Blockly.Block.BlockDB_ = Object.create(null);
+
+/**
+ * Find the block with the specified ID.
+ * @param {string} id ID of block to find.
+ * @return {Blockly.Block} The sought after block or null if not found.
+ */
+Blockly.Block.getById = function(id) {
+  return Blockly.Block.BlockDB_[id] || null;
 };

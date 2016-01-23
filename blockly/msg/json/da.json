@@ -3,7 +3,8 @@
 		"authors": [
 			"Christian List",
 			"RickiRunge",
-			"MGA73"
+			"MGA73",
+			"Mads Haupt"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "element",
@@ -15,6 +16,8 @@
 	"INLINE_INPUTS": "Indlejrede inputs",
 	"DELETE_BLOCK": "Slet blok",
 	"DELETE_X_BLOCKS": "Slet %1 blokke",
+	"DELETE_ALL_BLOCKS": "Slet alle %1 blokke?",
+	"CLEAN_UP": "Ryd op i blokke",
 	"COLLAPSE_BLOCK": "Fold blokken sammen",
 	"COLLAPSE_ALL": "Fold blokkene sammen",
 	"EXPAND_BLOCK": "Fold blokken ud",
@@ -227,7 +230,7 @@
 	"LISTS_INLIST": "i listen",
 	"LISTS_INDEX_OF_FIRST": "find første forekomst af elementet",
 	"LISTS_INDEX_OF_LAST": "find sidste forekomst af elementet",
-	"LISTS_INDEX_OF_TOOLTIP": "Returnerer indeks for første/sidste forekomst af elementet i listen. Returnerer 0, hvis teksten ikke er fundet.",
+	"LISTS_INDEX_OF_TOOLTIP": "Returnerer indeks for første/sidste forekomst af elementet i listen. Returnerer 0, hvis elementet ikke kan findes.",
 	"LISTS_GET_INDEX_GET": "hent",
 	"LISTS_GET_INDEX_GET_REMOVE": "hent og fjern",
 	"LISTS_GET_INDEX_REMOVE": "fjern",

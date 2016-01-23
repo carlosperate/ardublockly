@@ -7,8 +7,21 @@ It adds the following features:
 
 * Arduino code generation
 * Arduino specific blocks
-* Static Typing
+* Different Arduino boards support
+* Static typing (working, but incomplete)
 * Code warnings
+* Arduino pin tracking
+* Arduino generator unit test (incomplete)
+* Procedures core class modified to include the Arduino setup() and loop() functions
+* Temporarily removed procedure's mutator responsible to add arguments
+* Minor visual changes to the zoom icons positioning
+
+The following features are planned to be push upstream (list will be updated as PR get accepted):
+
+* Fix toolbox XML nodes injected into blockly under IE (works on Chrome and Firefox)
+* Replaces window.prompt uses to a local version that can easily be replaced by an asynchronous HTML version
+
+All other changes and fixes have been submitted to the original Blockly repository for inclusion into the upstream master branch.
 
 This fork gets frequent upstream pulls to maintain it up to date.
 

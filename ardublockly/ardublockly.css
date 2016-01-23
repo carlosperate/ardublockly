@@ -126,9 +126,6 @@ ul.side-nav li.side-menu-end {
 #blocks_panel {
   padding: 0px;
   position: relative !important;
-  -webkit-border-radius: 4px !important;
-  -moz-border-radius: 4px !important;
-  border-radius: 4px !important;
   min-height: 480px;
 }
 .blocks_panel_large {
@@ -138,15 +135,19 @@ ul.side-nav li.side-menu-end {
   height: calc(100vh - 190px);          /* Standard */
 }
 .blocks_panel_small {
-  height: -moz-calc(100vh - 390px);     /* Firefox  */
-  height: -webkit-calc(100vh - 390px);  /* WebKit   */
-  height: -o-calc(100vh - 390px);       /* Opera    */
-  height: calc(100vh - 390px);          /* Standard */
+  height: -moz-calc(100vh - 350px);     /* Firefox  */
+  height: -webkit-calc(100vh - 350px);  /* WebKit   */
+  height: -o-calc(100vh - 350px);       /* Opera    */
+  height: calc(100vh - 350px);          /* Standard */
 }
 #content_blocks {
   margin: 0;
   padding: 0;
   min-height: 480px;
+  height: -moz-calc(100vh - 190px);     /* Firefox  */
+  height: -webkit-calc(100vh - 190px);  /* WebKit   */
+  height: -o-calc(100vh - 190px);       /* Opera    */
+  height: calc(100vh - 190px);          /* Standard */
 }
 
 #content_xml {
@@ -155,6 +156,7 @@ ul.side-nav li.side-menu-end {
   border: none;
   padding: 0px 5px;
   font-family: monospace;
+  font-size: smaller;
   overflow: scroll;
   font-style: 0.2em !important;
   min-height: 384px;
@@ -166,10 +168,10 @@ ul.side-nav li.side-menu-end {
   height: calc(100vh - 286px);          /* Standard */
 }
 .content_xml_small {
-  height: -moz-calc(100vh - 486px);     /* Firefox  */
-  height: -webkit-calc(100vh - 486px);  /* WebKit   */
-  height: -o-calc(100vh - 486px);       /* Opera    */
-  height: calc(100vh - 486px);          /* Standard */
+  height: -moz-calc(100vh - 446px);     /* Firefox  */
+  height: -webkit-calc(100vh - 446px);  /* WebKit   */
+  height: -o-calc(100vh - 446px);       /* Opera    */
+  height: calc(100vh - 446px);          /* Standard */
 }
 
 /* The materialize framework changes height of the div to show or hide */
@@ -196,10 +198,10 @@ ul.side-nav li.side-menu-end {
   height: calc(100vh - 280px);          /* Standard */
 }
 .content_arduino_small {
-  height: -moz-calc(100vh - 480px);     /* Firefox  */
-  height: -webkit-calc(100vh - 480px);  /* WebKit   */
-  height: -o-calc(100vh - 480px);       /* Opera    */
-  height: calc(100vh - 480px);          /* Standard */
+  height: -moz-calc(100vh - 440px);     /* Firefox  */
+  height: -webkit-calc(100vh - 440px);  /* WebKit   */
+  height: -o-calc(100vh - 440px);       /* Opera    */
+  height: calc(100vh - 440px);          /* Standard */
 }
 
 /****************/
@@ -247,10 +249,10 @@ ul.side-nav li.side-menu-end {
   border: none;
   padding: 0px 5px;
   font-family: monospace;
-  overflow: scroll;
+  overflow: auto;
   font-style: 0.2em !important;
-  min-height: 200px;
-  max-height: 200px;
+  min-height: 160px;
+  max-height: 160px;
   -moz-user-select: text;
   -khtml-user-select: text;
   -webkit-user-select: text;
@@ -366,6 +368,9 @@ ul.side-nav li.side-menu-end {
   bottom: 36px;
   display: none;
 }
+#button_load_xml .mdi-action-extension {
+  font-size: 2.1rem !important;
+}
 
 /* These floating buttons needs to be at a higher z index than card when */
 /* floating and lower when clicked.  */
@@ -390,10 +395,11 @@ ul.side-nav li.side-menu-end {
 .button_toggle_toolbox_on {
   position: absolute;
   margin: 0 !important;
-  padding: 0px !important;
+  padding: 0 !important;
   left: 12px;
-  top: 9px;
+  top: 8px;
   text-align: center;
+  font-size: 1.5rem !important;
   z-index: 5;
   border-color: #e0e0e0 !important;
   border-width: 1px !important;
@@ -414,8 +420,9 @@ ul.side-nav li.side-menu-end {
   margin: 0 !important;
   padding: 0px !important;
   left: 12px;
-  top: 9px;
+  top: 8px;
   text-align: center;
+  font-size: 1.5rem !important;
   z-index: 5;
 }
 
@@ -506,8 +513,11 @@ ul.side-nav li.side-menu-end {
 
 /* Small modal responsive design */
 .modal_small {
-  height: 30% !important;
+  height: auto !important;
   min-height: 200px;
+}
+.modal_small input {
+  width: 100%;
 }
 @media only screen and (min-width: 0) {
   .modal_small {
@@ -634,18 +644,15 @@ ul.side-nav li.side-menu-end {
 /* Entire Blockly area, Toolbox dranw on top */
 .blocklySvg {
   border-width: 0 !important;
-  -webkit-border-radius: 4px !important;
-  -moz-border-radius: 4px !important;
-  border-radius: 4px !important;
 }
 
 /* Toolbox */
 .blocklyToolboxDiv {
   border-color: #e0e0e0 !important;
   border-width: 0px 1px 0px 0px !important;
-  -webkit-border-radius: 4px 0px 0px 4px !important;
-  -moz-border-radius: 4px 0px 0px 4px !important;
-  border-radius: 4px 0px 0px 4px !important;
+  -webkit-border-radius: 0px 4px 4px 0px !important;
+  -moz-border-radius: 4px 4px 0px 0px !important;
+  border-radius: 0px 4px 4px 0px !important;
   border: none !important;
   margin: 0px !important;
   padding: 0px 0px 0px 0px !important;
@@ -658,21 +665,21 @@ ul.side-nav li.side-menu-end {
 .blocklyTreeRoot {
   background: none !important;
   border: none !important;
-  margin: 33px 0px 0px 0px !important;
-  padding: 5px 1px !important;
-  /* Vertical centre
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);*/
+  margin: 36px 0px 0px 0px !important;
+  padding: 0px 1px !important;
+  height: -moz-calc(100% - 37px);     /* Firefox  */
+  height: -webkit-calc(100% - 37px);  /* WebKit   */
+  height: -o-calc(100% - 37px);       /* Opera    */
+  height: calc(100% - 37px);          /* Standard */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .blocklyTreeRow {
   background: none !important;
   border: none !important;
   margin: 0px 0px !important;
-  padding: 8px 16px 8px 0px !important;
+  padding: 7px 16px 7px 0px !important;
   box-sizing: content-box !important;
-  /* line-height: 0.5rem !important;
-  vertical-align: middle !important;*/
 }
 .blocklyTreeSelected {
   background-color: #E47128 !important;  /* arduino orange */
@@ -703,17 +710,14 @@ ul.side-nav li.side-menu-end {
 }
 .blocklyScrollbarBackground {
   stroke-width: 0px !important;
+  fill: none !important;
 }
 
-/* Edit select yellow colour to Arduino yellow. */
-/* Edited out because it seems to be that colour already.
-.blocklyHighlightedConnectionPath {
-  stroke: rgba(255, 204, 51, 1) !important;
-}
+/* Edit select colour to Arduino yellow. (Edited out as already this colour)
+.blocklyHighlightedConnectionPath,
 .blocklySelected>.blocklyPath {
   stroke: rgba(255, 204, 51, 1) !important;
-}
- */
+} */
 
 /*********************************/
 /*  Overwriting Materialize CSS  */
@@ -815,22 +819,6 @@ ul.side-nav li ul li ul li {
     width: 80% !important;
     max-width: 80% !important;
   }
-}
-
-/* Need larger icons in buttons */
-.mdi-action-visibility {
-  font-size: 1.5rem !important;
-}
-.mdi-action-visibility-off {
-  font-size: 1.5rem !important;
-}
-#button_ide_large .mdi-av-play-arrow,
-#button_ide_large .mdi-navigation-check,
-#button_ide_large .mdi-action-open-in-browser {
-
-}
-#button_load_xml .mdi-action-extension {
-  font-size: 2rem !important;
 }
 
 /* Why the hell does button large has a predefined background colour !! */

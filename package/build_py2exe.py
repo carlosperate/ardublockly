@@ -31,7 +31,8 @@ except ImportError:
     raise SystemExit("You need to have py2exe installed!")
 
 
-exec_folder_name = os.path.join("arduexec", "server")
+exec_folder_name = "arduexec"
+server_exec_folder_name = "server"
 script_tag = "[Ardublockly build] "
 script_tab = "                    "
 
@@ -40,7 +41,8 @@ script_tab = "                    "
 project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
-executable_dir = os.path.join(project_root_dir, exec_folder_name)
+server_exec_dir = os.path.join(project_root_dir, exec_folder_name,
+                              server_exec_folder_name)
 
 # Enable the ardublocklyserver package access the sys path for py2exe to find
 sys.path.append(project_root_dir)
@@ -116,7 +118,7 @@ def get_py2exe_options():
 
     # Py2exe options: http://www.py2exe.org/index.cgi/ListOfOptions
     py2exe_options = {
-        "py2exe": {"dist_dir": executable_dir,
+        "py2exe": {"dist_dir": server_exec_dir,
                    "compressed": False,
                    "bundle_files": 3,
                    "skip_archive": True,
@@ -152,7 +154,7 @@ def create_run_batch_file():
     entry point built by Electron.
     """
     batch_text = "@echo off\n" + \
-                 "start %s" % os.path.join("arduexec", "ardublockly.exe")
+                 "start %s" % os.path.join(exec_folder_name, "ardublockly.exe")
     batch_location = os.path.join(project_root_dir, "ardublockly_run.bat")
     try:
         batch_file = open(batch_location, "w")
@@ -174,7 +176,7 @@ def main():
     remove_directory(os.path.join(os.getcwd(), "build"))
 
     print(script_tag + "Removing old executable directory.")
-    remove_directory(executable_dir)
+    remove_directory(server_exec_dir)
 
     print(script_tag + "Building Ardublockly using py2exe.")
     if len(sys.argv) <= 1:

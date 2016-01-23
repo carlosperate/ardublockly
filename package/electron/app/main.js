@@ -7,21 +7,34 @@
  * @fileoverview Electron entry point continues here. Creates windows and
  *               handles system events.
  */
-'use strict';
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
 
-var app = require('app');
-var shell = require('shell');
-var jetpack = require('fs-jetpack');
-var appMenu = require('./appmenu.js');
-var server = require('./servermgr.js');
-var BrowserWindow = require('browser-window');
-var env = require('./vendor/electron_boilerplate/env_config');
-var windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
+const winston = require('winston');
+
+const appMenu = require('./appmenu.js');
+const server = require('./servermgr.js');
+const projectLocator = require('./projectlocator.js');
+const windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
+const env = require('fs-jetpack').cwd(app.getAppPath()).read('package.json', 'json').env;
+
+const tag = '[Ardublockly Electron] ';
 
 // Global reference of the window object must be maintain, or the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
 var splashWindow = null;
+
+// Set up the app data directory within the Ardublockly root directory
+(function setAppData() {
+    var appDataPath = projectLocator.getExecDirJetpack().cwd('appdata');
+    app.setPath('appData', appDataPath.path());
+    app.setPath('userData', appDataPath.path());
+    app.setPath('cache', appDataPath.path('GenCache'));
+    app.setPath('userCache', appDataPath.path('AppCache'));
+    app.setPath('temp', appDataPath.path('temp'));
+})();
 
 // Preserver of the window size and position between app launches.
 var mainWindowState = windowStateKeeper('main', {
@@ -29,8 +42,22 @@ var mainWindowState = windowStateKeeper('main', {
     height: 765
 });
 
-app.on('ready', function () {
+// Electron application entry point
+app.on('ready', function() {
     createSplashWindow();
+
+    // Setting up logging system
+    var projectRootPath = projectLocator.getProjectRootPath();
+    winston.add(winston.transports.File, {
+        json: false,
+        filename: projectRootPath + '/ardublockly.log',
+        maxsize: 10485760,
+        maxFiles: 2
+    });
+    winston.info(tag + 'Ardublockly root dir: ' + projectRootPath);
+
+    // Relevant OS could be win32, linux, darwin
+    winston.info(tag + 'OS detected: ' + process.platform);
 
     server.startServer();
 
@@ -43,20 +70,21 @@ app.on('ready', function () {
         transparent: false,
         frame: true,
         show: false,
-        'node-integration': false,
         'web-preferences': {
+            'node-integration': true,
             'web-security': true,
+            'allow-displaying-insecure-content': false,
+            'allow-running-insecure-content': false,
             'java': false,
-            'text-areas-are-resizable': false,
             'webgl': false,
             'webaudio': true,
+            'plugins': false,
+            'overlay-scrollbars': true,
+            'text-areas-are-resizable': false,
             'subpixel-font-scaling': true,
-            'direct-write': true,
-            //'overlay-scrollbars': true,
-            'plugins': false
+            'direct-write': true
         }
     });
-
     if (mainWindowState.isMaximized) {
         mainWindow.maximize();
     }
@@ -68,41 +96,46 @@ app.on('ready', function () {
     }
 
     mainWindow.webContents.on('did-fail-load',
-        function (event, errorCode, errorDescription) {
-            console.log('Page failed to load (' + errorCode + '). The server ' +
-                'is probably not yet running. Trying again in 200 ms.');
+        function(event, errorCode, errorDescription) {
+            winston.warn(tag + 'Page failed to load (' + errorCode + '). The ' +
+                'server is probably not yet running. Trying again in 200 ms.');
             setTimeout(function() {
                 mainWindow.webContents.reload();
             }, 200);
         }
     );
 
-    mainWindow.webContents.on('did-finish-load', function () {
-        mainWindow.show();
+    mainWindow.webContents.on('did-finish-load', function() {
         if (splashWindow !== null) {
             splashWindow.close();
             splashWindow = null;
         }
+        mainWindow.show();
     });
 
-    mainWindow.loadUrl('http://localhost:8000/ardublockly');
+    // Set the download directory to the home folder
+    mainWindow.webContents.session.setDownloadPath(
+        process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']);
 
-    mainWindow.on('close', function () {
+    mainWindow.loadURL('http://localhost:8000/ardublockly');
+
+    mainWindow.on('close', function() {
         mainWindowState.saveState(mainWindow);
         mainWindow = null;
     });
 });
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', function() {
     server.stopServer();
     // Might need to add OS X exception
-    // https://github.com/atom/electron/issues/1357 
+    // https://github.com/atom/electron/issues/1357
     app.quit();
 });
 
 function createSplashWindow() {
     if (splashWindow === null) {
-        var imagePath = 'file://' + server.getProjectJetpack().path(
+        var projectJetPath = projectLocator.getProjectRootJetpack();
+        var imagePath = 'file://' + projectJetPath.path(
             'ardublockly', 'img', 'ardublockly_splash.png');
 
         splashWindow = new BrowserWindow({
@@ -113,8 +146,10 @@ function createSplashWindow() {
             transparent: true,
             images: true,
             center: true,
+            'always-on-top': true,
+            'skip-taskbar': true,
             'use-content-size': true
         });
-        splashWindow.loadUrl(imagePath);
+        splashWindow.loadURL(imagePath);
     }
 }

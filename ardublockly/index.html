@@ -8,9 +8,9 @@
   <title>Ardublockly</title>
 
   <!-- Materialize, Prettify, and Ardublockly CSS -->
-  <link href="materialize/materialize.css" rel="stylesheet" media="screen,projection">
+  <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="prettify/arduino.css">
-  <link href="ardublockly.css" rel="stylesheet" media="screen,projection">
+  <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
 
   <!-- Ardublockly - For now uncompressed files -->
   <!--script src="../blockly/blockly_compressed.js"></script-->
@@ -28,6 +28,7 @@
   <script src="../blockly/blocks/procedures.js"></script>
   <script src="../blockly/blocks/arduino/io.js"></script>
   <script src="../blockly/blocks/arduino/map.js"></script>
+  <script src="../blockly/blocks/arduino/procedures.js"></script>
   <script src="../blockly/blocks/arduino/serial.js"></script>
   <script src="../blockly/blocks/arduino/servo.js"></script>
   <script src="../blockly/blocks/arduino/spi.js"></script>
@@ -48,7 +49,9 @@
   <script src="../blockly/generators/arduino/text.js"></script>
   <script src="../blockly/generators/arduino/time.js"></script>
   <script src="../blockly/generators/arduino/variables.js"></script>
+  <!-- Default language js files, user selection appended to head -->
   <script src="../blockly/msg/js/en.js"></script>
+  <script src="msg/en.js"></script>
 </head>
 
 <body>
@@ -82,6 +85,7 @@
         <li id="menu_save"><a href="#">Save<i class="mdi-file-file-download left"></i></a></li>
         <li id="menu_delete"><a href="#">Delete All<i class="mdi-action-delete left"></i></a></li>
         <li id="menu_settings"><a href="#">Settings<i class="mdi-action-settings left"></i></a></li>
+        <li id="menu_bug"><a href="http://github.com/carlosperate/ardublockly/issues" target="_blank">Report Bug<i class="mdi-action-bug-report left"></i></a></li>
       </ul>
     <li class="no-padding">
       <ul class="collapsible collapsible-accordion">
@@ -91,8 +95,9 @@
             <ul>
               <li id="menu_example_1"><a href="#!">Blink</a></li>
               <li id="menu_example_2"><a href="#!">Serial print</a></li>
-              <li id="menu_example_3"><a href="#!">Servo knob</a></li>
-              <li id="menu_example_4"><a href="#!">Stepper knob</a></li>
+              <li id="menu_example_3"><a href="#!">Serial repeat game</a></li>
+              <li id="menu_example_4"><a href="#!">Servo knob</a></li>
+              <li id="menu_example_5"><a href="#!">Stepper knob</a></li>
             </ul>
           </div>
         </li>
@@ -218,16 +223,18 @@
       <div class="settings_div">
         <label>COM Port:</label>
         <select name="settings_serial" id="serial_port">
-          <option value="COM4">COM unknown</option>
+          <option value="COMX">COM unknown</option>
         </select>
       </div>
       <div class="settings_div">
         <label>Default IDE button:</label> <br>
         <select name="settings_ide" id="ide_settings">
-          <option value="verify">Verify sketch</option>
-          <option value="open">Open sketch in IDE </option>
-          <option value="upload">Compile and Upload sketch</option>
+          <option value="verify">IDE ptions unknown</option>
         </select>
+      </div>
+      <div class="settings_div">
+        <label>Language:</label> <br>
+        <select name="settings_language" id="language"></select>
       </div>
     </div>
     <div class="modal-footer">
@@ -235,17 +242,7 @@
     </div>
   </div>
 
-  <!-- Arduino IDE Modal: Content is loaded using Javascript to display dialog -->
-  <div id="arduino_dialog" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <div id="arduino_dialog_body">Empty Arduino modal.</div>
-    </div>
-    <div class="modal-footer">
-      <a href="#" class="waves-effect btn-flat modal-close">Return</a>
-    </div>
-  </div>
-
-  <!-- General Alert: Content is loaded using Javascript to display alerts -->
+  <!-- General Alert: Content is loaded using JavaScript to display alerts -->
   <div id="gen_alert" class="modal modal_small modal-fixed-footer">
     <div class="modal-content">
       <h4 id="gen_alert_title">Empty Alert</h4>
@@ -257,7 +254,19 @@
     </div>
   </div>
 
-  <!-- Local Server Alert: Content is loaded using Javascript to display alerts -->
+  <!-- Prompt: Content is loaded using JavaScript to display alerts -->
+  <div id="gen_prompt" class="modal modal_small modal-fixed-footer">
+    <div class="modal-content">
+      <p><span id="gen_prompt_message">Prompt message</span></p>
+      <p><input id="gen_prompt_input" value="test" /></p>
+    </div>
+    <div class="modal-footer">
+      <a id="gen_prompt_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
+      <a id="gen_prompt_cancel_link" href="#" class="waves-effect btn-flat modal-close">Cancel</a>
+    </div>
+  </div>
+
+  <!-- Local Server Alert to be shown if Ardublockly Server is not running. -->
   <div id="not_running_dialog" class="modal">
     <div class="modal-content">
       <h4 id="gen_alert_title">Ardublockly not running locally</h4>
@@ -276,6 +285,8 @@
     </div>
   </div>
 
+  <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
+  <script src="ardublockly_desktop.js"></script>
   <!-- jQuery and Materialize JS -->
   <script src="js_libs/jquery-2.1.3.min.js"></script>
   <script src="materialize/materialize.js"></script>
@@ -288,7 +299,14 @@
   <!-- Ardublockly app -->
   <script src="ardublocklyserver_ajax.js"></script>
   <script src="ardublockly_design.js"></script>
+  <script src="ardublockly_toolbox.js"></script>
   <script src="ardublockly_blockly.js"></script>
   <script src="ardublockly.js"></script>
+  <script>
+    window.addEventListener('load', function load(event) {
+      window.removeEventListener('load', load, false);
+      Ardublockly.init();
+    });
+  </script>
 </body>
 </html>

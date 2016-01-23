@@ -6,10 +6,11 @@ var childProcess = require('child_process');
 var jetpack = require('fs-jetpack');
 var asar = require('asar');
 var utils = require('./utils');
+var projectLocator = require('../app/projectlocator.js');
 
 var projectDir;
 var tmpDir;
-var arduexecDir;
+var arduExecDir;
 var releasesDir;
 var readyAppDir;
 var manifest;
@@ -17,7 +18,8 @@ var manifest;
 var init = function () {
     projectDir = jetpack;
     tmpDir = projectDir.dir('./tmp', { empty: true });
-    arduexecDir = projectDir.dir('../../arduexec');
+    arduExecDir = projectDir.dir('../../' +
+                                 projectLocator.ardublocklyExecFolderName);
     releasesDir = projectDir.dir('./releases');
     manifest = projectDir.read('app/package.json', 'json');
     readyAppDir = tmpDir.cwd(manifest.name);
@@ -29,10 +31,14 @@ var copyRuntime = function () {
     return projectDir.copyAsync('node_modules/electron-prebuilt/dist', readyAppDir.path(), { overwrite: true });
 };
 
+var cleanupRuntime = function () {
+    return readyAppDir.removeAsync('resources/default_app');
+};
+
 var packageBuiltApp = function () {
     var deferred = Q.defer();
 
-    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function() {
+    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function () {
         deferred.resolve();
     });
 
@@ -43,13 +49,12 @@ var finalize = function () {
     var deferred = Q.defer();
 
     projectDir.copy('resources/windows/icon.ico', readyAppDir.path('icon.ico'));
-    readyAppDir.rename('electron.exe', manifest.name + '.exe');
 
     // Replace Electron icon and versions
     var copyrightString = 'Copyright (C) ' + new Date().getFullYear() + ' ' +
                           manifest.author + ' ' + manifest.homepage;
     var rcedit = require('rcedit');
-    rcedit(readyAppDir.path(manifest.name + '.exe'), {
+    rcedit(readyAppDir.path('electron.exe'), {
         icon: projectDir.path('resources/windows/icon.ico'),
         'file-version': manifest.version,
         'product-version': manifest.version,
@@ -68,14 +73,20 @@ var finalize = function () {
     return deferred.promise;
 };
 
+var renameApp = function () {
+    return readyAppDir.renameAsync('electron.exe', manifest.name + '.exe');
+};
+
 var createInstaller = function () {
     var deferred = Q.defer();
 
     var finalPackageName = manifest.name + '_' + manifest.version + '.exe';
     var installScript = projectDir.read('resources/windows/installer.nsi');
+
     installScript = utils.replace(installScript, {
         name: manifest.name,
         productName: manifest.productName,
+        author: manifest.author,
         version: manifest.version,
         src: readyAppDir.path(),
         dest: releasesDir.path(finalPackageName),
@@ -96,6 +107,14 @@ var createInstaller = function () {
     ], {
         stdio: 'inherit'
     });
+    nsis.on('error', function (err) {
+        if (err.message === 'spawn makensis ENOENT') {
+            throw "Can't find NSIS. Are you sure you've installed it and"
+                + " added to PATH environment variable?";
+        } else {
+            throw err;
+        }
+    });
     nsis.on('close', function () {
         gulpUtil.log('Installer ready!', releasesDir.path(finalPackageName));
         deferred.resolve();
@@ -105,7 +124,7 @@ var createInstaller = function () {
 };
 
 var copyExecFolder = function () {
-    readyAppDir.copy(readyAppDir.cwd(), arduexecDir.cwd(), { overwrite: true });
+    readyAppDir.copy(readyAppDir.cwd(), arduExecDir.cwd(), { overwrite: true });
     return Q();
 };
 
@@ -116,9 +135,12 @@ var cleanClutter = function () {
 module.exports = function () {
     return init()
     .then(copyRuntime)
+    .then(cleanupRuntime)
     .then(packageBuiltApp)
     .then(finalize)
+    .then(renameApp)
     //.then(createInstaller)
     .then(copyExecFolder)
-    .then(cleanClutter);
+    .then(cleanClutter)
+    .catch(console.error);
 };

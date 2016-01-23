@@ -55,6 +55,7 @@ class ServerCompilerSettings(object):
     # Class dictionary to define Arduino board types, static content
     __arduino_types = {'Uno': 'arduino:avr:uno',
                        'Leonardo': 'arduino:avr:leonardo',
+                       'Yun': 'arduino:avr:leonardo',
                        'Mega': 'arduino:avr:mega',
                        'Duemilanove_328p': 'arduino:avr:diecimila',
                        'Duemilanove_168p':

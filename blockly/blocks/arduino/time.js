@@ -11,9 +11,11 @@
 goog.provide('Blockly.Blocks.Arduino.time');
 
 goog.require('Blockly.Arduino');
+goog.require('Blockly.StaticTyping');
 
 
-Blockly.Blocks.Arduino.time.HUE = 120;
+/** Common HSV hue for all blocks in this category. */
+Blockly.Blocks.Arduino.time.HUE = 140;
 
 Blockly.Blocks['time_delay'] = {
   /**
@@ -24,8 +26,8 @@ Blockly.Blocks['time_delay'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/Delay');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendValueInput(
-          'DELAY_TIME_MILI', Blockly.StaticTyping.blocklyType.NUMBER)
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
+          'DELAY_TIME_MILI', Blockly.StaticTyping.BlocklyType.NUMBER)
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
         .appendField('wait');
     this.appendDummyInput()
         .appendField('milliseconds');
@@ -45,8 +47,8 @@ Blockly.Blocks['time_delaymicros'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/DelayMicroseconds');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendValueInput(
-        'DELAY_TIME_MICRO', Blockly.StaticTyping.blocklyType.NUMBER)
-        .setCheck(Blockly.StaticTyping.blocklyType.NUMBER)
+        'DELAY_TIME_MICRO', Blockly.StaticTyping.BlocklyType.NUMBER)
+        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
         .appendField('wait');
     this.appendDummyInput()
         .appendField('microseconds');
@@ -66,17 +68,14 @@ Blockly.Blocks['time_millis'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/Millis');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendDummyInput('')
-        .appendField('elapsed Time (milliseconds)');
-    this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
+        .appendField('current elapsed Time (milliseconds)');
+    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
     this.setTooltip('Returns the number of milliseconds since the Arduino ' +
                     'board began running the current program.');
   },
-  /**
-   * Retrieves the type of the block, should be a long (32bit), but  for for
-   * now an int.
-   */
-  getType: function() {
-    return Blockly.StaticTyping.blocklyType.INTEGER;
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.StaticTyping.BlocklyType.INTEGER;
   }
 };
 
@@ -89,33 +88,17 @@ Blockly.Blocks['time_micros'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/Micros');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
     this.appendDummyInput('')
-        .appendField('elapsed Time (microseconds)');
-    this.setOutput(true, Blockly.StaticTyping.blocklyType.NUMBER);
+        .appendField('current elapsed Time (microseconds)');
+    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
     this.setTooltip('Returns the number of microseconds since the Arduino ' +
                     'board began running the current program.');
   },
   /**
-   * Retrieves the type of the block, should be a long (32bit), but  for for
-   * now an int.
+   * Should be a long (32bit), but  for for now an int.
+   * @return {string} The type of return value for the block, an integer.
    */
-  getType: function() {
-    return Blockly.StaticTyping.blocklyType.INTEGER;
-  }
-};
-
-Blockly.Blocks['infinite_loop'] = {
-  /**
-   * Waits forever, end of program.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.setHelpUrl('');
-    this.setColour(Blockly.Blocks.Arduino.time.HUE);
-    this.appendDummyInput()
-        .appendField('wait forever (end program)');
-    this.setInputsInline(true);
-    this.setPreviousStatement(true);
-    this.setTooltip('Wait indefinitely, stopping the program.');
+  getBlockType: function() {
+    return Blockly.StaticTyping.BlocklyType.INTEGER;
   }
 };
 

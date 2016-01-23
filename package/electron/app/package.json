@@ -7,11 +7,9 @@
   "author": "carlosperate",
   "homepage": "http://ardublockly.embeddedlog.com/",
   "main": "main.js",
-  "config": {
-    "target": "development"
-  },
   "dependencies": {
-    "fs-jetpack": "^0.6.5"
+    "fs-jetpack": "^0.7.1",
+    "winston": "^1.0.1"
   },
   "repository" : {
     "type" : "git",
