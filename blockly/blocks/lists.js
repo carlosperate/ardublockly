@@ -223,7 +223,7 @@ Blockly.Blocks['lists_repeat'] = {
         {
           "type": "input_value",
           "name": "NUM",
-          "check": Blockly.StaticTyping.BlocklyType.NUMBER
+          "check": Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles()
         }
       ],
       "output": "Array",
@@ -246,10 +246,11 @@ Blockly.Blocks['lists_length'] = {
         {
           "type": "input_value",
           "name": "VALUE",
-          "check": [Blockly.StaticTyping.BlocklyType.TEXT, 'Array']
+          "check": Blockly.StaticTyping.BlocklyTypes.TEXT
+                   .compatibles().concat('Array')
         }
       ],
-      "output": Blockly.StaticTyping.BlocklyType.NUMBER,
+      "output": Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType,
       "colour": Blockly.Blocks.lists.HUE,
       "tooltip": Blockly.Msg.LISTS_LENGTH_TOOLTIP,
       "helpUrl": Blockly.Msg.LISTS_LENGTH_HELPURL
@@ -269,10 +270,11 @@ Blockly.Blocks['lists_isEmpty'] = {
         {
           "type": "input_value",
           "name": "VALUE",
-          "check": [Blockly.StaticTyping.BlocklyType.TEXT, 'Array']
+          "check": Blockly.StaticTyping.BlocklyTypes.TEXT
+                   .compatibles().concat('Array')
         }
       ],
-      "output": Blockly.StaticTyping.BlocklyType.BOOLEAN,
+      "output": Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType,
       "colour": Blockly.Blocks.lists.HUE,
       "tooltip": Blockly.Msg.LISTS_ISEMPTY_TOOLTIP,
       "helpUrl": Blockly.Msg.LISTS_ISEMPTY_HELPURL
@@ -291,7 +293,7 @@ Blockly.Blocks['lists_indexOf'] = {
          [Blockly.Msg.LISTS_INDEX_OF_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.LISTS_INDEX_OF_HELPURL);
     this.setColour(Blockly.Blocks.lists.HUE);
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
     this.appendValueInput('VALUE')
         .setCheck('Array')
         .appendField(Blockly.Msg.LISTS_INDEX_OF_INPUT_IN_LIST);
@@ -408,7 +410,7 @@ Blockly.Blocks['lists_getIndex'] = {
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT').setCheck(
-          Blockly.StaticTyping.BlocklyType.NUMBER);
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL')
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -509,7 +511,7 @@ Blockly.Blocks['lists_setIndex'] = {
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT').setCheck(
-          Blockly.StaticTyping.BlocklyType.NUMBER);
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL')
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -609,7 +611,7 @@ Blockly.Blocks['lists_getSublist'] = {
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT' + n).setCheck(
-          Blockly.StaticTyping.BlocklyType.NUMBER);
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL' + n)
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -661,10 +663,10 @@ Blockly.Blocks['lists_split'] = {
     this.setHelpUrl(Blockly.Msg.LISTS_SPLIT_HELPURL);
     this.setColour(Blockly.Blocks.lists.HUE);
     this.appendValueInput('INPUT')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(dropdown, 'MODE');
     this.appendValueInput('DELIM')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(Blockly.Msg.LISTS_SPLIT_WITH_DELIMITER);
     this.setInputsInline(true);
     this.setOutput(true, 'Array');
@@ -687,9 +689,11 @@ Blockly.Blocks['lists_split'] = {
   updateType_: function(newMode) {
     if (newMode == 'SPLIT') {
       this.outputConnection.setCheck('Array');
-      this.getInput('INPUT').setCheck(Blockly.StaticTyping.BlocklyType.TEXT);
+      this.getInput('INPUT').setCheck(
+          Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles());
     } else {
-      this.outputConnection.setCheck(Blockly.StaticTyping.BlocklyType.TEXT);
+      this.outputConnection.setCheck(
+          Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles());
       this.getInput('INPUT').setCheck('Array');
     }
   },

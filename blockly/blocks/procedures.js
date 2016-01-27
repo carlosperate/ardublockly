@@ -341,7 +341,7 @@ Blockly.Blocks['procedures_defnoreturn'] = {
   callType_: 'procedures_callnoreturn',
   /** @return {!string} This block does not define type, so 'undefined' */
   getVarType: function(varName) {
-    return Blockly.StaticTyping.BlocklyType.UNDEF;
+    return Blockly.StaticTyping.BlocklyTypes.UNDEF;
   },
   /** Contains the type of the arguments added with mutators. */
   argsTypes: {},
@@ -441,7 +441,7 @@ Blockly.Blocks['procedures_defreturn'] = {
    * @return {string} String to indicate the type or NULL.
    */
   getReturnType: function() {
-    var returnType = Blockly.StaticTyping.BlocklyType.NULL;
+    var returnType = Blockly.StaticTyping.BlocklyTypes.NULL;
     var returnBlock = this.getInputTargetBlock('RETURN');
     if (returnBlock) {
       // First check if the block itself has a type already
@@ -765,7 +765,7 @@ Blockly.Blocks['procedures_ifreturn'] = {
    */
   init: function() {
     this.appendValueInput('CONDITION')
-        .setCheck(Blockly.StaticTyping.BlocklyType.BOOLEAN)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.BOOLEAN.compatibles())
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendValueInput('VALUE')
         .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);

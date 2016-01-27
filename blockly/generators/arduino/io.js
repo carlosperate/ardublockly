@@ -31,7 +31,7 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'digitalWrite(' + pin + ',' + stateOutput + ');\n';
+  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
 };
 
@@ -72,7 +72,7 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'digitalWrite(' + pin + ',' + stateOutput + ');\n';
+  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
 };
 
@@ -95,14 +95,14 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
   // Warn if the input value is out of range
-  if ( (stateOutput < 0) || (stateOutput > 255)) {
-    block.setWarningText('The analgue value must be between 0 and 255',
+  if ((stateOutput < 0) || (stateOutput > 255)) {
+    block.setWarningText('The analogue value set must be between 0 and 255',
                          'pwm_value');
   } else {
     block.setWarningText(null, 'pwm_value');
   }
 
-  var code = 'analogWrite(' + pin + ',' + stateOutput + ');\n';
+  var code = 'analogWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
 };
 

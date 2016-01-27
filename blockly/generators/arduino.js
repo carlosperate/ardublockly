@@ -341,28 +341,22 @@ Blockly.Arduino.scrub_ = function(block, code) {
  * @private
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
-  switch (typeBlockly) {
-    case Blockly.StaticTyping.BlocklyType.UNDEF:
-      return 'undefined';
-    case Blockly.StaticTyping.BlocklyType.UNSPECIFIED:
-      return 'unspecified';
-    case Blockly.StaticTyping.BlocklyType.NULL:
-      return 'void';
-    case Blockly.StaticTyping.BlocklyType.NUMBER:
+  switch (typeBlockly.typeName) {
+    case Blockly.StaticTyping.BlocklyTypes.NUMBER.typeName:
       return 'int';
-    case Blockly.StaticTyping.BlocklyType.INTEGER:
-      return 'int';
-    case Blockly.StaticTyping.BlocklyType.DECIMAL:
+    case Blockly.StaticTyping.BlocklyTypes.DECIMAL.typeName:
       return 'float';
-    case Blockly.StaticTyping.BlocklyType.TEXT:
+    case Blockly.StaticTyping.BlocklyTypes.TEXT.typeName:
       return 'String';
-    case Blockly.StaticTyping.BlocklyType.CHARACTER:
+    case Blockly.StaticTyping.BlocklyTypes.CHARACTER.typeName:
       return 'char';
-    case Blockly.StaticTyping.BlocklyType.BOOLEAN:
+    case Blockly.StaticTyping.BlocklyTypes.BOOLEAN.typeName:
       return 'boolean';
-    case Blockly.StaticTyping.BlocklyType.ERROR:
-      return 'ErrorArdu';
-    case Blockly.StaticTyping.BlocklyType.CHILD_BLOCK_MISSING:
+    case Blockly.StaticTyping.BlocklyTypes.NULL.typeName:
+      return 'void';
+    case Blockly.StaticTyping.BlocklyTypes.UNDEF.typeName:
+      return 'undefined';
+    case Blockly.StaticTyping.BlocklyTypes.CHILD_BLOCK_MISSING.typeName:
       // If no block connected default to int, change for easier debugging
       return 'ChildBlockMissing';
       //return 'int';

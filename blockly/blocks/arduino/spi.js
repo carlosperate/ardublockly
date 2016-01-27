@@ -89,11 +89,10 @@ Blockly.Blocks['spi_transfer'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
-    this.appendValueInput('SPI_DATA', '')
-        .setCheck([Blockly.StaticTyping.BlocklyType.NUMBER,
-                  Blockly.StaticTyping.BlocklyType.BOOLEAN])
+    this.appendValueInput('SPI_DATA')
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
         .appendField('transfer');
-    this.appendDummyInput('')
+    this.appendDummyInput()
         .appendField('to slave pin')
         .appendField(
             new Blockly.FieldDropdown(digitalPinsExtended), 'SPI_SS');
@@ -114,8 +113,8 @@ Blockly.Blocks['spi_transfer'] = {
     // Get the Serial instance from this block
     var thisInstanceName = this.getFieldValue('SPI_ID');
 
-   // Iterate through blocks to find a setup instance for the same SPI id.
-    var blocks = Blockly.mainWorkspace.getAllBlocks();
+    // Iterate through top level blocks to find a setup instance for the SPI id
+    var blocks = Blockly.mainWorkspace.getTopBlocks();
     var setupInstancePresent = false;
     for (var x = 0, length_ = blocks.length; x < length_; x++) {
       var func = blocks[x].getSpiSetupInstance;
@@ -141,7 +140,7 @@ Blockly.Blocks['spi_transfer'] = {
    * @return {!string} Blockly type.
    */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.INTEGER;
+    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
   },
   /**
    * Updates the content of the board SPI related fields.
@@ -187,9 +186,9 @@ Blockly.Blocks['spi_transfer_return'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
-    this.appendValueInput('SPI_DATA', '')
+    this.appendValueInput('SPI_DATA')
         .appendField('transfer');
-    this.appendDummyInput('')
+    this.appendDummyInput()
         .appendField('to slave pin')
         .appendField(
             new Blockly.FieldDropdown(digitalPinsExtended), 'SPI_SS');

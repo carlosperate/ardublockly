@@ -51,7 +51,7 @@ Blockly.Arduino['procedures_defreturn'] = function(block) {
   }
 
   // Get return type
-  var returnType = Blockly.StaticTyping.BlocklyType.NULL;
+  var returnType = Blockly.StaticTyping.BlocklyTypes.NULL;
   if (block.getReturnType) {
     returnType = block.getReturnType();
   }

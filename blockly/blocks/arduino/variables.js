@@ -27,8 +27,8 @@ Blockly.Blocks['variables_set_type'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/HomePage');
     this.setColour(Blockly.Blocks.Arduino.variables.HUE);
-    this.appendValueInput('VARIABLE_SETTYPE_INPUT', '');
-    this.appendDummyInput('')
+    this.appendValueInput('VARIABLE_SETTYPE_INPUT');
+    this.appendDummyInput()
         .appendField('as')
         .appendField(new Blockly.FieldDropdown(
                          Blockly.StaticTyping.blocklyValidTypeArray()),
@@ -44,6 +44,6 @@ Blockly.Blocks['variables_set_type'] = {
    */
   getBlockType: function() {
     var blocklyTypeKey = this.getFieldValue('VARIABLE_SETTYPE_TYPE');
-    return Blockly.StaticTyping.BlocklyType[blocklyTypeKey];
+    return Blockly.StaticTyping.BlocklyTypes[blocklyTypeKey];
   }
 };

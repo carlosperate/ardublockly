@@ -25,9 +25,8 @@ Blockly.Blocks['time_delay'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Delay');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
-    this.appendValueInput(
-          'DELAY_TIME_MILI', Blockly.StaticTyping.BlocklyType.NUMBER)
-        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
+    this.appendValueInput('DELAY_TIME_MILI')
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
         .appendField('wait');
     this.appendDummyInput()
         .appendField('milliseconds');
@@ -46,9 +45,8 @@ Blockly.Blocks['time_delaymicros'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/DelayMicroseconds');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
-    this.appendValueInput(
-        'DELAY_TIME_MICRO', Blockly.StaticTyping.BlocklyType.NUMBER)
-        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
+    this.appendValueInput('DELAY_TIME_MICRO')
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
         .appendField('wait');
     this.appendDummyInput()
         .appendField('microseconds');
@@ -67,15 +65,15 @@ Blockly.Blocks['time_millis'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Millis');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
-    this.appendDummyInput('')
+    this.appendDummyInput()
         .appendField('current elapsed Time (milliseconds)');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
     this.setTooltip('Returns the number of milliseconds since the Arduino ' +
                     'board began running the current program.');
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.INTEGER;
+    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
   }
 };
 
@@ -87,9 +85,9 @@ Blockly.Blocks['time_micros'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Micros');
     this.setColour(Blockly.Blocks.Arduino.time.HUE);
-    this.appendDummyInput('')
+    this.appendDummyInput()
         .appendField('current elapsed Time (microseconds)');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
     this.setTooltip('Returns the number of microseconds since the Arduino ' +
                     'board began running the current program.');
   },
@@ -98,7 +96,7 @@ Blockly.Blocks['time_micros'] = {
    * @return {string} The type of return value for the block, an integer.
    */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.INTEGER;
+    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
   }
 };
 

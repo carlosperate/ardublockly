@@ -73,8 +73,8 @@ Blockly.Blocks['serial_print'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
         .appendField('print');
-    this.appendValueInput('CONTENT', Blockly.StaticTyping.BlocklyType.TEXT)
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT);
+    this.appendValueInput('CONTENT')
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles());
     this.appendDummyInput()
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE')
         .appendField('add new line');
@@ -96,8 +96,8 @@ Blockly.Blocks['serial_print'] = {
     // Get the Serial instance from this block
     var thisInstanceName = this.getFieldValue('SERIAL_ID');
 
-   // Iterate through blocks to find a setup instance for the same serial id.
-    var blocks = Blockly.mainWorkspace.getAllBlocks();
+    // Iterate through top level blocks to find setup instance for the serial id
+    var blocks = Blockly.mainWorkspace.getTopBlocks();
     var setupInstancePresent = false;
     for (var x = 0; x < blocks.length; x++) {
       var func = blocks[x].getSerialSetupInstance;

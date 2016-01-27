@@ -27,13 +27,13 @@ Blockly.Blocks['base_map'] = {
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/map');
     this.setColour(Blockly.Blocks.Arduino.map.HUE);
-    this.appendValueInput('NUM', Blockly.StaticTyping.BlocklyType.NUMBER)
+    this.appendValueInput('NUM')
         .appendField('Map ')
-        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
-    this.appendValueInput('DMAX', Blockly.StaticTyping.BlocklyType.NUMBER)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
+    this.appendValueInput('DMAX')
         .appendField('value to [0-')
-        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
-    this.appendDummyInput('')
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
+    this.appendDummyInput()
         .appendField(']');
     this.setInputsInline(true);
     this.setOutput(true);
@@ -41,6 +41,6 @@ Blockly.Blocks['base_map'] = {
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.INTEGER;
+    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
   }
 };

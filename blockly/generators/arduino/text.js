@@ -192,7 +192,8 @@ Blockly.Arduino['text_prompt_ext'] = function(block) {
 
   // The function code changes based on reading a number or string
   var func = [];
-  var toNumber = returnType == Blockly.StaticTyping.BlocklyType.NUMBER;
+  var toNumber = returnType == Blockly.StaticTyping.BlocklyTypes
+                               .NUMBER.languageKeyword;
   if (toNumber) {
     func.push('int ' + Blockly.Arduino.DEF_FUNC_NAME + '(String msg) {');
   } else {
@@ -240,192 +241,29 @@ Blockly.Arduino['text_prompt_ext'] = function(block) {
 
 
 /* ***************************************************************** *
- * The rest of the blocks have been left as it is, as they have been *
- * block from the toolbox and not used for Arduino code.             *
+ * The rest of the blocks have been left unimplemented, as they have *
+ * been removed from the toolbox and not used for Arduino code.      *
  * ***************************************************************** */
-
 Blockly.Arduino['text_endString'] = function(block) {
-  // Return a leading or trailing substring.
-  var first = block.getFieldValue('END') == 'FIRST';
-  var code;
-  if (first) {
-    var argument0 = Blockly.Arduino.valueToCode(block, 'NUM',
-        Blockly.Arduino.ORDER_NONE) || '1';
-    var argument1 = Blockly.Arduino.valueToCode(block, 'TEXT',
-        Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
-    code = argument1 + '.substring(0, ' + argument0 + ')';
-  } else {
-    if (!Blockly.Arduino.definitions_['text_tailString']) {
-      var functionName = Blockly.Arduino.variableDB_.getDistinctName(
-          'text_tailString', Blockly.Generator.NAME_TYPE);
-      Blockly.Arduino.text_endString.text_tailString = functionName;
-      var func = [];
-      func.push('String ' + functionName + '(n, myString) {');
-      func.push('  // Return a trailing substring of n characters.');
-      func.push('  return myString.substring(myString.length - n);');
-      func.push('}');
-      Blockly.Arduino.definitions_['text_tailString'] = func.join('\n');
-    }
-    var argument0 = Blockly.Arduino.valueToCode(block, 'NUM',
-        Blockly.Arduino.ORDER_NONE) || '1';
-    var argument1 = Blockly.Arduino.valueToCode(block, 'TEXT',
-        Blockly.Arduino.ORDER_NONE) || '""';
-    code = Blockly.Arduino.text_endString.text_tailString +
-        '(' + argument0 + ', ' + argument1 + ')';
-  }
-  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+  return ['', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['text_indexOf'] = function(block) {
-  // Search the text for a substring.
-  var operator = block.getFieldValue('END') == 'FIRST' ?
-      'indexOf' : 'lastIndexOf';
-  var argument0 = Blockly.Arduino.valueToCode(block, 'FIND',
-      Blockly.Arduino.ORDER_NONE) || '""';
-  var argument1 = Blockly.Arduino.valueToCode(block, 'VALUE',
-      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
-  var code = argument1 + '.' + operator + '(' + argument0 + ') + 1';
-  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+  return ['', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['text_charAt'] = function(block) {
-  // Get letter at index.
-  var where = block.getFieldValue('WHERE') || 'FROM_START';
-  var at = Blockly.Arduino.valueToCode(block, 'AT',
-      Blockly.Arduino.ORDER_NONE) || '1';
-  var text = Blockly.Arduino.valueToCode(block, 'VALUE',
-      Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
-  switch (where) {
-    case 'FIRST':
-      var code = text + '.charAt(0)';
-      return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
-    case 'LAST':
-      var code = text + '.slice(-1)';
-      return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
-    case 'FROM_START':
-      // Blockly uses one-based indicies.
-      if (at.match(/^-?\d+$/)) {
-        // If the index is a naked number, decrement it right now.
-        at = parseInt(at, 10) - 1;
-      } else {
-        // If the index is dynamic, decrement it in code.
-        at += ' - 1';
-      }
-      var code = text + '[' + at + ']';
-      return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
-    case 'FROM_END':
-      var code = text + '.slice(-' + at + ').charAt(0)';
-      return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
-    case 'RANDOM':
-      var functionName = Blockly.Arduino.provideFunction_(
-          'text_random_letter',
-          ['function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
-               '(text) {',
-           '  var x = Math.floor(Math.random() * text.length);',
-           '  return text[x];',
-           '}']);
-      code = functionName + '(' + text + ')';
-      return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
-  }
-  throw 'Unhandled option (text_charAt).';
+  return ['', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['text_getSubstring'] = function(block) {
-  // Get substring.
-  var text = Blockly.Arduino.valueToCode(block, 'STRING',
-      Blockly.Arduino.ORDER_MEMBER) || '""';
-  var where1 = block.getFieldValue('WHERE1');
-  var where2 = block.getFieldValue('WHERE2');
-  var at1 = Blockly.Arduino.valueToCode(block, 'AT1',
-      Blockly.Arduino.ORDER_NONE) || '1';
-  var at2 = Blockly.Arduino.valueToCode(block, 'AT2',
-      Blockly.Arduino.ORDER_NONE) || '1';
-  if (where1 == 'FIRST' && where2 == 'LAST') {
-    var code = text;
-  } else {
-    var functionName = Blockly.Arduino.provideFunction_(
-        'text_get_substring',
-        ['function ' + Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_ +
-             '(text, where1, at1, where2, at2) {',
-         '  function getAt(where, at) {',
-         '    if (where == \'FROM_START\') {',
-         '      at--;',
-         '    } else if (where == \'FROM_END\') {',
-         '      at = text.length - at;',
-         '    } else if (where == \'FIRST\') {',
-         '      at = 0;',
-         '    } else if (where == \'LAST\') {',
-         '      at = text.length - 1;',
-         '    } else {',
-         '      throw \'Unhandled option (text_getSubstring).\';',
-         '    }',
-         '    return at;',
-         '  }',
-         '  at1 = getAt(where1, at1);',
-         '  at2 = getAt(where2, at2) + 1;',
-         '  return text.slice(at1, at2);',
-         '}']);
-    var code = functionName + '(' + text + ', \'' +
-        where1 + '\', ' + at1 + ', \'' + where2 + '\', ' + at2 + ')';
-  }
-  return [code, Blockly.Arduino.ORDER_FUNCTION_CALL];
+  return ['', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['text_changeCase'] = function(block) {
-  // Change capitalization.
-  var mode = block.getFieldValue('CASE');
-  Blockly.Arduino.text_changeCase.OPERATORS = {
-    UPPERCASE: '.toUpperCase()',
-    LOWERCASE: '.toLowerCase()',
-    TITLECASE: null
-  };
-  var operator = Blockly.Arduino.text_changeCase.OPERATORS[mode];
-  var code;
-  if (operator) {
-    // Upper and lower case are functions built into Arduino.
-    var argument0 = Blockly.Arduino.valueToCode(this, 'TEXT',
-        Blockly.Arduino.ORDER_UNARY_POSTFIX) || '""';
-    code = argument0 + operator;
-  } else {
-    if (!Blockly.Arduino.definitions_['toTitleCase']) {
-      // Title case is not a native Dart function.  Define one.
-      var functionName = Blockly.Arduino.variableDB_.getDistinctName(
-          'text_toTitleCase', Blockly.Generator.NAME_TYPE);
-      Blockly.Arduino.text_changeCase.toTitleCase = functionName;
-      var func = [];
-      func.push('String ' + functionName + '(str) {');
-      func.push('  RegExp exp = const RegExp(r\'\\b\');');
-      func.push('  List<String> list = str.split(exp);');
-      func.push('  String title = \'\';');
-      func.push('  for (String part in list) {');
-      func.push('    if (part.length > 0) {');
-      func.push('      title.add(part[0].toUpperCase());');
-      func.push('      if (part.length > 0) {');
-      func.push('        title.add(part.substring(1).toLowerCase());');
-      func.push('      }');
-      func.push('    }');
-      func.push('  }');
-      func.push('  return title.toString();');
-      func.push('}');
-      Blockly.Arduino.definitions_['toTitleCase'] = func.join('\n');
-    }
-    var argument0 = Blockly.Arduino.valueToCode(block, 'TEXT',
-        Blockly.Arduino.ORDER_NONE) || '""';
-    code = Blockly.Arduino.text_changeCase.toTitleCase + '(' + argument0 + ')';
-  }
-  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+  return ['', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Arduino['text_prompt'] = function(block) {
-  // Prompt function.
-  var serialId = Blockly.Arduino.Boards.selected.serial[0][1];
-  var setupCode = serialId + '.begin(9600);';
-  Blockly.Arduino.addSetup('serial_' + serialId, setupCode, false);
-  var msg = Blockly.Arduino.quote_(block.getFieldValue('TEXT'));
-  var code = 'Serial.print(' + msg + ');\n';
-  var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
-  if (toNumber) {
-    code = 'parseFloat(' + code + ')';
-  }
-  return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
+  return ['', Blockly.Arduino.ORDER_UNARY_POSTFIX];
 };

@@ -55,10 +55,10 @@ Blockly.Blocks['factory_base'] = {
         .appendField('colour');
     /*
     this.appendValueInput('TOOLTIP')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField('tooltip');
     this.appendValueInput('HELP')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField('help url');
     */
     this.setTooltip('Build a custom block by plugging\n' +
@@ -608,7 +608,7 @@ Blockly.Blocks['type_group_item'] = {
 
 Blockly.Blocks['type_null'] = {
   // Null type.
-  valueType: Blockly.StaticTyping.BlocklyType.NULL,
+  valueType: Blockly.StaticTyping.BlocklyTypes.NULL.basicType,
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -621,7 +621,7 @@ Blockly.Blocks['type_null'] = {
 
 Blockly.Blocks['type_boolean'] = {
   // Boolean type.
-  valueType: Blockly.StaticTyping.BlocklyType.BOOLEAN,
+  valueType: Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType,
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -634,7 +634,7 @@ Blockly.Blocks['type_boolean'] = {
 
 Blockly.Blocks['type_number'] = {
   // Number type.
-  valueType: Blockly.StaticTyping.BlocklyType.NUMBER,
+  valueType: Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType,
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -647,7 +647,7 @@ Blockly.Blocks['type_number'] = {
 
 Blockly.Blocks['type_string'] = {
   // String type.
-  valueType: Blockly.StaticTyping.BlocklyType.TEXT,
+  valueType: Blockly.StaticTyping.BlocklyTypes.TEXT.basicType,
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -660,7 +660,7 @@ Blockly.Blocks['type_string'] = {
 
 Blockly.Blocks['type_list'] = {
   // List type.
-  valueType: 'Array',
+  valueType: Blockly.StaticTyping.BlocklyTypes.ARRAY.basicType,
   init: function() {
     this.setColour(230);
     this.appendDummyInput()

@@ -47,7 +47,7 @@ Blockly.Blocks['text'] = {
         .appendField(this.newQuote_(true))
         .appendField(new Blockly.FieldTextInput(''), 'TEXT')
         .appendField(this.newQuote_(false));
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     this.setTooltip(Blockly.Msg.TEXT_TEXT_TOOLTIP);
   },
   /**
@@ -67,7 +67,7 @@ Blockly.Blocks['text'] = {
   },
   /** @return {!string} Type of the block, text block always a string. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.TEXT;
+    return Blockly.StaticTyping.BlocklyTypes.TEXT;
   }
 };
 
@@ -81,7 +81,7 @@ Blockly.Blocks['text_join'] = {
     this.setColour(Blockly.Blocks.texts.HUE);
     this.itemCount_ = 2;
     this.updateShape_();
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     this.setMutator(new Blockly.Mutator(['text_create_join_item']));
     this.setTooltip(Blockly.Msg.TEXT_JOIN_TOOLTIP);
   },
@@ -194,7 +194,7 @@ Blockly.Blocks['text_join'] = {
   newQuote_: Blockly.Blocks['text'].newQuote_,
   /** @return {!string} Type of the block, text join always a string. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.TEXT;
+    return Blockly.StaticTyping.BlocklyTypes.TEXT;
   }
 };
 
@@ -278,7 +278,7 @@ Blockly.Blocks['text_append'] = {
    * @return {string} String to indicate the variable type.
    */
   getVarType: function(varName) {
-    return Blockly.StaticTyping.BlocklyType.TEXT;
+    return Blockly.StaticTyping.BlocklyTypes.TEXT;
   }
 };
 
@@ -294,10 +294,11 @@ Blockly.Blocks['text_length'] = {
         {
           "type": "input_value",
           "name": "VALUE",
-          "check": [Blockly.StaticTyping.BlocklyType.TEXT, 'Array']
+          "check": Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles()
+                   .concat('Array'),
         }
       ],
-      "output": Blockly.StaticTyping.BlocklyType.NUMBER,
+      "output": Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType,
       "colour": Blockly.Blocks.texts.HUE,
       "tooltip": Blockly.Msg.TEXT_LENGTH_TOOLTIP,
       "helpUrl": Blockly.Msg.TEXT_LENGTH_HELPURL
@@ -305,7 +306,7 @@ Blockly.Blocks['text_length'] = {
   },
   /** @return {!string} Type of the block, text length always an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.INTEGER;
+    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
   }
 };
 
@@ -321,10 +322,11 @@ Blockly.Blocks['text_isEmpty'] = {
         {
           "type": "input_value",
           "name": "VALUE",
-          "check": [Blockly.StaticTyping.BlocklyType.TEXT, 'Array']
+          "check": Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles()
+                   .concat('Array'),
         }
       ],
-      "output": Blockly.StaticTyping.BlocklyType.BOOLEAN,
+      "output": Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType,
       "colour": Blockly.Blocks.texts.HUE,
       "tooltip": Blockly.Msg.TEXT_ISEMPTY_TOOLTIP,
       "helpUrl": Blockly.Msg.TEXT_ISEMPTY_HELPURL
@@ -332,7 +334,7 @@ Blockly.Blocks['text_isEmpty'] = {
   },
   /** @return {!string} Type of the block, check always returns a boolean. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.BOOLEAN;
+    return Blockly.StaticTyping.BlocklyTypes.BOOLEAN;
   }
 };
 
@@ -347,12 +349,12 @@ Blockly.Blocks['text_indexOf'] = {
          [Blockly.Msg.TEXT_INDEXOF_OPERATOR_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.TEXT_INDEXOF_HELPURL);
     this.setColour(Blockly.Blocks.texts.HUE);
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
     this.appendValueInput('VALUE')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(Blockly.Msg.TEXT_INDEXOF_INPUT_INTEXT);
     this.appendValueInput('FIND')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'END');
     if (Blockly.Msg.TEXT_INDEXOF_TAIL) {
       this.appendDummyInput().appendField(Blockly.Msg.TEXT_INDEXOF_TAIL);
@@ -376,9 +378,9 @@ Blockly.Blocks['text_charAt'] = {
          [Blockly.Msg.TEXT_CHARAT_RANDOM, 'RANDOM']];
     this.setHelpUrl(Blockly.Msg.TEXT_CHARAT_HELPURL);
     this.setColour(Blockly.Blocks.texts.HUE);
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     this.appendValueInput('VALUE')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(Blockly.Msg.TEXT_CHARAT_INPUT_INTEXT);
     this.appendDummyInput('AT');
     this.setInputsInline(true);
@@ -420,7 +422,7 @@ Blockly.Blocks['text_charAt'] = {
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT').setCheck(
-          Blockly.StaticTyping.BlocklyType.NUMBER);
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL')
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -465,8 +467,8 @@ Blockly.Blocks['text_getSubstring'] = {
          [Blockly.Msg.TEXT_GET_SUBSTRING_END_LAST, 'LAST']];
     this.setHelpUrl(Blockly.Msg.TEXT_GET_SUBSTRING_HELPURL);
     this.setColour(Blockly.Blocks.texts.HUE);
-    this.appendValueInput(Blockly.StaticTyping.BlocklyType.TEXT)
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+    this.appendValueInput('STRING')
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(Blockly.Msg.TEXT_GET_SUBSTRING_INPUT_IN_TEXT);
     this.appendDummyInput('AT1');
     this.appendDummyInput('AT2');
@@ -475,7 +477,7 @@ Blockly.Blocks['text_getSubstring'] = {
           .appendField(Blockly.Msg.TEXT_GET_SUBSTRING_TAIL);
     }
     this.setInputsInline(true);
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     this.updateAt_(1, true);
     this.updateAt_(2, true);
     this.setTooltip(Blockly.Msg.TEXT_GET_SUBSTRING_TOOLTIP);
@@ -520,7 +522,7 @@ Blockly.Blocks['text_getSubstring'] = {
     // Create either a value 'AT' input or a dummy input.
     if (isAt) {
       this.appendValueInput('AT' + n).setCheck(
-          Blockly.StaticTyping.BlocklyType.NUMBER);
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
       if (Blockly.Msg.ORDINAL_NUMBER_SUFFIX) {
         this.appendDummyInput('ORDINAL' + n)
             .appendField(Blockly.Msg.ORDINAL_NUMBER_SUFFIX);
@@ -568,9 +570,9 @@ Blockly.Blocks['text_changeCase'] = {
     this.setHelpUrl(Blockly.Msg.TEXT_CHANGECASE_HELPURL);
     this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('TEXT')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'CASE');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     this.setTooltip(Blockly.Msg.TEXT_CHANGECASE_TOOLTIP);
   }
 };
@@ -588,14 +590,14 @@ Blockly.Blocks['text_trim'] = {
     this.setHelpUrl(Blockly.Msg.TEXT_TRIM_HELPURL);
     this.setColour(Blockly.Blocks.texts.HUE);
     this.appendValueInput('TEXT')
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT)
+        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     this.setTooltip(Blockly.Msg.TEXT_TRIM_TOOLTIP);
   },
   /** Assigns a type to the block, trim always takes and returns a string. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.TEXT;
+    return Blockly.StaticTyping.BlocklyTypes.TEXT;
   }
 };
 
@@ -629,9 +631,10 @@ Blockly.Blocks['text_prompt_ext'] = {
    */
   init: function() {
     var TYPES =
-        [[Blockly.Msg.TEXT_PROMPT_TYPE_TEXT, 'TEXT'],
+        [[Blockly.Msg.TEXT_PROMPT_TYPE_TEXT,
+          Blockly.StaticTyping.BlocklyTypes.TEXT.basicType],
          [Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER,
-          Blockly.StaticTyping.BlocklyType.NUMBER]];
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType]];
     this.setHelpUrl(Blockly.Msg.TEXT_PROMPT_HELPURL);
     this.setColour(Blockly.Blocks.texts.HUE);
     // Assign 'this' to a variable for use in the closures below.
@@ -641,7 +644,7 @@ Blockly.Blocks['text_prompt_ext'] = {
     });
     this.appendValueInput('TEXT')
         .appendField(dropdown, 'TYPE');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     this.setTooltip(function() {
       return (thisBlock.getFieldValue('TYPE') == 'TEXT') ?
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_TEXT :
@@ -655,10 +658,12 @@ Blockly.Blocks['text_prompt_ext'] = {
    * @this Blockly.Block
    */
   updateType_: function(newOp) {
-    if (newOp == Blockly.StaticTyping.BlocklyType.NUMBER) {
-      this.outputConnection.setCheck(Blockly.StaticTyping.BlocklyType.NUMBER);
+    if (newOp == Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType) {
+      this.outputConnection.setCheck(
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
     } else {
-      this.outputConnection.setCheck(Blockly.StaticTyping.BlocklyType.TEXT);
+      this.outputConnection.setCheck(
+          Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles());
     }
   },
   /**
@@ -681,9 +686,10 @@ Blockly.Blocks['text_prompt_ext'] = {
   },
   /** @return {!string} Type of the block, prompt always returns a string. */
   getBlockType: function() {
-    return this.getFieldValue('TYPE');
+    return (this.getFieldValue('TYPE') == 'TEXT') ?
+        Blockly.StaticTyping.BlocklyTypes.TEXT :
+        Blockly.StaticTyping.BlocklyTypes.NUMBER;
   }
-
 };
 
 Blockly.Blocks['text_prompt'] = {
@@ -695,9 +701,9 @@ Blockly.Blocks['text_prompt'] = {
   init: function() {
     var TYPES =
         [[Blockly.Msg.TEXT_PROMPT_TYPE_TEXT,
-          Blockly.StaticTyping.BlocklyType.TEXT],
+          Blockly.StaticTyping.BlocklyTypes.TEXT.basicType],
          [Blockly.Msg.TEXT_PROMPT_TYPE_NUMBER,
-          Blockly.StaticTyping.BlocklyType.NUMBER]];
+          Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType]];
     // Assign 'this' to a variable for use in the closure below.
     var thisBlock = this;
     this.setHelpUrl(Blockly.Msg.TEXT_PROMPT_HELPURL);
@@ -710,11 +716,12 @@ Blockly.Blocks['text_prompt'] = {
         .appendField(this.newQuote_(true))
         .appendField(new Blockly.FieldTextInput(''), 'TEXT')
         .appendField(this.newQuote_(false));
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.TEXT);
+    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.TEXT.basicType);
     // Assign 'this' to a variable for use in the tooltip closure below.
     var thisBlock = this;
     this.setTooltip(function() {
-      return (thisBlock.getFieldValue('TYPE') == 'TEXT') ?
+      return (thisBlock.getFieldValue('TYPE') ==
+              Blockly.StaticTyping.BlocklyTypes.TEXT.basicType) ?
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_TEXT :
           Blockly.Msg.TEXT_PROMPT_TOOLTIP_NUMBER;
     });
@@ -725,6 +732,9 @@ Blockly.Blocks['text_prompt'] = {
   domToMutation: Blockly.Blocks['text_prompt_ext'].domToMutation,
   /** Assigns a type to the block, prompt always returns a string. */
   getBlockType: function() {
-    return this.getFieldValue('TYPE');
+    return (this.getFieldValue('TYPE') == 
+      Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType) ?
+          Blockly.StaticTyping.BlocklyTypes.NUMBER : 
+          Blockly.StaticTyping.BlocklyTypes.TEXT;
   }
 };

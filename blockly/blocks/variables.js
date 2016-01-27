@@ -91,7 +91,7 @@ Blockly.Blocks['variables_get'] = {
    * Contains the type of the variable selected from the block.
    * @type {!string} Type from the Static Typing class in string format.
    */
-  varType: Blockly.StaticTyping.BlocklyType.UNDEF,
+  varType: Blockly.StaticTyping.BlocklyTypes.UNDEF,
   /**
    * Set this block variable to a type.
    * @this Blockly.Block
