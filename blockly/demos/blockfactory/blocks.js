@@ -55,10 +55,10 @@ Blockly.Blocks['factory_base'] = {
         .appendField('colour');
     /*
     this.appendValueInput('TOOLTIP')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
+        .setCheck('String')
         .appendField('tooltip');
     this.appendValueInput('HELP')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles())
+        .setCheck('String')
         .appendField('help url');
     */
     this.setTooltip('Build a custom block by plugging\n' +
@@ -608,7 +608,7 @@ Blockly.Blocks['type_group_item'] = {
 
 Blockly.Blocks['type_null'] = {
   // Null type.
-  valueType: Blockly.StaticTyping.BlocklyTypes.NULL.basicType,
+  valueType: null,
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -621,7 +621,7 @@ Blockly.Blocks['type_null'] = {
 
 Blockly.Blocks['type_boolean'] = {
   // Boolean type.
-  valueType: Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType,
+  valueType: 'Boolean',
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -634,7 +634,7 @@ Blockly.Blocks['type_boolean'] = {
 
 Blockly.Blocks['type_number'] = {
   // Number type.
-  valueType: Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType,
+  valueType: 'Number',
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -647,7 +647,7 @@ Blockly.Blocks['type_number'] = {
 
 Blockly.Blocks['type_string'] = {
   // String type.
-  valueType: Blockly.StaticTyping.BlocklyTypes.TEXT.basicType,
+  valueType: 'String',
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
@@ -660,7 +660,7 @@ Blockly.Blocks['type_string'] = {
 
 Blockly.Blocks['type_list'] = {
   // List type.
-  valueType: Blockly.StaticTyping.BlocklyTypes.ARRAY.basicType,
+  valueType: 'Array',
   init: function() {
     this.setColour(230);
     this.appendDummyInput()
