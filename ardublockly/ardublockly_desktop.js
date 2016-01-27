@@ -49,7 +49,7 @@ Ardublockly.containerFullWidth = function() {
 /** Hides the side menu button. */
 Ardublockly.hideSideMenuButton = function() {
   var sideMenuButton = document.getElementById('button-collapse');
-  sideMenuButton.style.display = 'none';
+  sideMenuButton.style.setProperty ('display', 'none', 'important');
 };
 
 /**

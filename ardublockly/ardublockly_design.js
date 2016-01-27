@@ -414,7 +414,7 @@ Ardublockly.contentHeightToggle = function() {
   // Apart from checking if the output is visible, do not bother to shrink in
   // small screens as the minimum height of the content will kick in and cause
   // the content to be behind the IDE output data anyway.
-  if (outputHeader.className.match('active') && $(window).height() > 800) {
+  if (!outputHeader.className.match('active') && $(window).height() > 800) {
     blocks.className = 'content height_transition blocks_panel_small';
     arduino.className = 'content height_transition content_arduino_small';
     xml.className = 'content height_transition content_xml_small';
