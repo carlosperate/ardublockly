@@ -10,13 +10,13 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.io');
+goog.provide('Blockly.Blocks.io');
 
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 goog.require('Blockly.StaticTyping');
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.io.HUE = 250;
+Blockly.Blocks.io.HUE = 250;
 
 Blockly.Blocks['io_digitalwrite'] = {
   /**
@@ -25,7 +25,7 @@ Blockly.Blocks['io_digitalwrite'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
-    this.setColour(Blockly.Blocks.Arduino.io.HUE);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.appendValueInput('STATE')
         .appendField('set digital pin#')
         .appendField(new Blockly.FieldDropdown(
@@ -54,7 +54,7 @@ Blockly.Blocks['io_digitalread'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/DigitalRead');
-    this.setColour(Blockly.Blocks.Arduino.io.HUE);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.appendDummyInput()
         .appendField('read digital pin#')
         .appendField(new Blockly.FieldDropdown(
@@ -83,7 +83,7 @@ Blockly.Blocks['io_builtin_led'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
-    this.setColour(Blockly.Blocks.Arduino.io.HUE);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.appendValueInput('STATE')
         .appendField('set LED')
         .appendField(new Blockly.FieldDropdown(
@@ -116,7 +116,7 @@ Blockly.Blocks['io_analogwrite'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/AnalogWrite');
-    this.setColour(Blockly.Blocks.Arduino.io.HUE);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.appendValueInput('NUM')
         .appendField('set analogue pin#')
         .appendField(new Blockly.FieldDropdown(
@@ -148,7 +148,7 @@ Blockly.Blocks['io_analogread'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/AnalogRead');
-    this.setColour(Blockly.Blocks.Arduino.io.HUE);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.appendDummyInput()
         .appendField('read analogue pin#')
         .appendField(new Blockly.FieldDropdown(
@@ -176,7 +176,7 @@ Blockly.Blocks['io_highlow'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Constants');
-    this.setColour(Blockly.Blocks.Arduino.io.HUE);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.appendDummyInput()
         .appendField(
             new Blockly.FieldDropdown([['HIGH', 'HIGH'], ['LOW', 'LOW']]),

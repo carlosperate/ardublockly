@@ -10,14 +10,12 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.variables');
-
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.variables.HUE = 330;
+Blockly.Blocks.variables.HUE = 330;
 
 Blockly.Blocks['variables_set_type'] = {
   /**
@@ -26,7 +24,7 @@ Blockly.Blocks['variables_set_type'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/HomePage');
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.variables.HUE);
     this.appendValueInput('VARIABLE_SETTYPE_INPUT');
     this.appendDummyInput()
         .appendField('as')

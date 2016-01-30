@@ -10,13 +10,11 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.procedures');
-
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.procedures.HUE = 290;
+Blockly.Blocks.procedures.HUE = 290;
 
 Blockly.Blocks['arduino_functions'] = {
   /**
@@ -31,7 +29,7 @@ Blockly.Blocks['arduino_functions'] = {
         .appendField('Arduino loop forever:');
     this.appendStatementInput('LOOP_FUNC');
     this.setInputsInline(false);
-    this.setColour(Blockly.Blocks.Arduino.procedures.HUE);
+    this.setColour(Blockly.Blocks.procedures.HUE);
     this.setTooltip('Defines the Arduino setup() and loop() functions.');
     this.setHelpUrl('https://arduino.cc/en/Reference/Loop');
     this.contextMenu = false;

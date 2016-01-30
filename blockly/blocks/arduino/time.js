@@ -8,14 +8,14 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.time');
+goog.provide('Blockly.Blocks.time');
 
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.time.HUE = 140;
+Blockly.Blocks.time.HUE = 140;
 
 Blockly.Blocks['time_delay'] = {
   /**
@@ -24,7 +24,7 @@ Blockly.Blocks['time_delay'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Delay');
-    this.setColour(Blockly.Blocks.Arduino.time.HUE);
+    this.setColour(Blockly.Blocks.time.HUE);
     this.appendValueInput('DELAY_TIME_MILI')
         .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
         .appendField('wait');
@@ -44,7 +44,7 @@ Blockly.Blocks['time_delaymicros'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/DelayMicroseconds');
-    this.setColour(Blockly.Blocks.Arduino.time.HUE);
+    this.setColour(Blockly.Blocks.time.HUE);
     this.appendValueInput('DELAY_TIME_MICRO')
         .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
         .appendField('wait');
@@ -64,7 +64,7 @@ Blockly.Blocks['time_millis'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Millis');
-    this.setColour(Blockly.Blocks.Arduino.time.HUE);
+    this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField('current elapsed Time (milliseconds)');
     this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
@@ -84,7 +84,7 @@ Blockly.Blocks['time_micros'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/Micros');
-    this.setColour(Blockly.Blocks.Arduino.time.HUE);
+    this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField('current elapsed Time (microseconds)');
     this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
@@ -107,7 +107,7 @@ Blockly.Blocks['infinite_loop'] = {
    */
   init: function() {
     this.setHelpUrl('');
-    this.setColour(Blockly.Blocks.Arduino.time.HUE);
+    this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField('wait forever (end program)');
     this.setInputsInline(true);

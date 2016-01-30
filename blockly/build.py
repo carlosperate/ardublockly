@@ -30,6 +30,7 @@
 #
 # This script also generates:
 #   blocks_compressed.js: The compressed Blockly language blocks.
+#   arduino_compressed.js: The compressed Arduino generator.
 #   javascript_compressed.js: The compressed Javascript generator.
 #   python_compressed.js: The compressed Python generator.
 #   dart_compressed.js: The compressed Dart generator.
@@ -40,7 +41,7 @@ if sys.version_info[0] != 2:
   raise Exception("Blockly build only compatible with Python 2.x.\n"
                   "You are using: " + sys.version)
 
-import errno, glob, httplib, json, os, re, subprocess, threading, urllib
+import errno, glob, fnmatch, httplib, json, os, re, subprocess, threading, urllib
 
 
 def import_path(fullpath):
@@ -173,6 +174,7 @@ class Gen_compressed(threading.Thread):
   def run(self):
     self.gen_core()
     self.gen_blocks()
+    self.gen_generator("arduino")
     self.gen_generator("javascript")
     self.gen_generator("python")
     self.gen_generator("php")
@@ -202,7 +204,7 @@ class Gen_compressed(threading.Thread):
       params.append(("js_code", "".join(f.readlines())))
       f.close()
 
-    self.do_compile(params, target_filename, filenames, "")
+    self.do_compile(params, target_filename, filenames, [])
 
   def gen_blocks(self):
     target_filename = "blocks_compressed.js"
@@ -219,14 +221,18 @@ class Gen_compressed(threading.Thread):
     # Read in all the source files.
     # Add Blockly.Blocks to be compatible with the compiler.
     params.append(("js_code", "goog.provide('Blockly.Blocks');"))
-    filenames = glob.glob(os.path.join("blocks", "*.js"))
+    params.append(("js_code", "goog.provide('Blockly.StaticTyping');"))
+    filenames = []
+    for root, folders, files in os.walk("blocks"):
+        for filename in fnmatch.filter(files, "*.js"):
+            filenames.append(os.path.join(root, filename))
     for filename in filenames:
       f = open(filename)
       params.append(("js_code", "".join(f.readlines())))
       f.close()
 
     # Remove Blockly.Blocks to be compatible with Blockly.
-    remove = "var Blockly={Blocks:{}};"
+    remove = ["var Blockly={Blocks:{}};", "Blockly.StaticTyping={};"]
     self.do_compile(params, target_filename, filenames, remove)
 
   def gen_generator(self, language):
@@ -254,7 +260,7 @@ class Gen_compressed(threading.Thread):
     filenames.insert(0, "[goog.provide]")
 
     # Remove Blockly.Generator to be compatible with Blockly.
-    remove = "var Blockly={Generator:{}};"
+    remove = ["var Blockly={Generator:{}};"]
     self.do_compile(params, target_filename, filenames, remove)
 
   def do_compile(self, params, target_filename, filenames, remove):
@@ -309,7 +315,8 @@ class Gen_compressed(threading.Thread):
         sys.exit(1)
 
       code = HEADER + "\n" + json_data["compiledCode"]
-      code = code.replace(remove, "")
+      for code_statement in remove:
+          code = code.replace(code_statement, "")
 
       # Trim down Google's Apache licences.
       # The Closure Compiler used to preserve these until August 2015.

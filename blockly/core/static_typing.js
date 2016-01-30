@@ -15,12 +15,6 @@ goog.require('Blockly.Workspace');
 
 
 /**
- * Class for StaticTyping.
- * @constructor
- */
-Blockly.StaticTyping = function() {};
-
-/**
  * "Enum-like" object to create blockly variable types.
  * The number type is used to set a general number from the number block, the
  * block itself then analyses the contents and defines if it is an integer or
@@ -354,8 +348,8 @@ Blockly.StaticTyping.manageTypeWarning = function(block, bType, vName, vType) {
  * Iterates through the list of top level blocks and sets the function arguments
  * types.
  * @param {Blockly.Workspace} workspace Blockly Workspace to collect variables.
- * @param {Array<Blockly.StaticTyping.Type>} Associative array with the variable
- *     names as the keys and the type as the values.
+ * @param {Array<Blockly.StaticTyping.Type>} varsWithTypes Associative array
+ *     with the variable names as the keys and the type as the values.
  */
 Blockly.StaticTyping.setProcedureArgs = function(workspace, varsWithTypes) {
   var blocks = workspace.getTopBlocks();

@@ -10,14 +10,14 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.servo');
+goog.provide('Blockly.Blocks.servo');
 
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.servo.HUE = 60;
+Blockly.Blocks.servo.HUE = 60;
 
 Blockly.Blocks['servo_write'] = {
   /**
@@ -26,7 +26,7 @@ Blockly.Blocks['servo_write'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoWrite');
-    this.setColour(Blockly.Blocks.Arduino.servo.HUE);
+    this.setColour(Blockly.Blocks.servo.HUE);
     this.appendDummyInput()
         .appendField('Set SERVO from Pin')
         .appendField(new Blockly.FieldDropdown(
@@ -59,7 +59,7 @@ Blockly.Blocks['servo_read'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoRead');
-    this.setColour(Blockly.Blocks.Arduino.servo.HUE);
+    this.setColour(Blockly.Blocks.servo.HUE);
     this.appendDummyInput()
         .appendField('Read SERVO from PIN#')
         .appendField(new Blockly.FieldDropdown(

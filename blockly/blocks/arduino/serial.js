@@ -11,14 +11,14 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.serial');
+goog.provide('Blockly.Blocks.serial');
 
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.serial.HUE = 160;
+Blockly.Blocks.serial.HUE = 160;
 
 Blockly.Blocks['serial_setup'] = {
   /**
@@ -27,7 +27,7 @@ Blockly.Blocks['serial_setup'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Serial/Begin');
-    this.setColour(Blockly.Blocks.Arduino.serial.HUE);
+    this.setColour(Blockly.Blocks.serial.HUE);
     this.appendDummyInput()
         .appendField('Setup')
         .appendField(
@@ -68,7 +68,7 @@ Blockly.Blocks['serial_print'] = {
    */
   init: function() {
     this.setHelpUrl('http://www.arduino.cc/en/Serial/Print');
-    this.setColour(Blockly.Blocks.Arduino.serial.HUE);
+    this.setColour(Blockly.Blocks.serial.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')

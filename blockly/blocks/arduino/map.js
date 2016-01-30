@@ -10,14 +10,14 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.map');
+goog.provide('Blockly.Blocks.map');
 
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 goog.require('Blockly.StaticTyping');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.map.HUE = 230;
+Blockly.Blocks.map.HUE = 230;
 
 Blockly.Blocks['base_map'] = {
   /**
@@ -26,7 +26,7 @@ Blockly.Blocks['base_map'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/map');
-    this.setColour(Blockly.Blocks.Arduino.map.HUE);
+    this.setColour(Blockly.Blocks.map.HUE);
     this.appendValueInput('NUM')
         .appendField('Map ')
         .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
