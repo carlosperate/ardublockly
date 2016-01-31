@@ -155,12 +155,6 @@ Blockly.Blocks.variables_set={init:function(){this.jsonInit({message0:Blockly.Ms
 b){Blockly.Names.equals(a,this.getFieldValue("VAR"))&&this.setFieldValue(b,"VAR")},contextMenuType_:"variables_get",customContextMenu:Blockly.Blocks.variables_get.customContextMenu,getVarType:function(){return Blockly.StaticTyping.getChildBlockType(this)}};/*
  Licensed under the Apache License, Version 2.0 (the "License"):
           http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Blocks for Arduino Digital and Analogue input and output
-               functions. The Arduino function syntax can be found at
-               http://arduino.cc/en/Reference/HomePage
-
- TODO: maybe change this to a "PIN" BlocklyType
 */
 Blockly.Blocks.io={};Blockly.Blocks.io.HUE=250;
 Blockly.Blocks.io_digitalwrite={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/DigitalWrite");this.setColour(Blockly.Blocks.io.HUE);this.appendValueInput("STATE").appendField("set digital pin#").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),"PIN").appendField("to").setCheck(Blockly.StaticTyping.BlocklyTypes.BOOLEAN.compatibles());this.setInputsInline(!1);this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Write digital value to a specific Port.")},
@@ -172,75 +166,22 @@ Blockly.Blocks.io_builtin_led={init:function(){this.setHelpUrl("http://arduino.c
 Blockly.Blocks.io_analogwrite={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/AnalogWrite");this.setColour(Blockly.Blocks.io.HUE);this.appendValueInput("NUM").appendField("set analogue pin#").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.pwmPins),"PIN").appendField("to").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);this.setInputsInline(!1);this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Write analog value between 0 and 255 to a specific Port.")},
 updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,"PIN","pwmPins")},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER}};
 Blockly.Blocks.io_analogread={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/AnalogRead");this.setColour(Blockly.Blocks.io.HUE);this.appendDummyInput().appendField("read analogue pin#").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins),"PIN");this.setOutput(!0,Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);this.setTooltip("Return value between 0 and 1024.")},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER},updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,
-"PIN","analogPins")}};Blockly.Blocks.io_highlow={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/Constants");this.setColour(Blockly.Blocks.io.HUE);this.appendDummyInput().appendField(new Blockly.FieldDropdown([["HIGH","HIGH"],["LOW","LOW"]]),"STATE");this.setOutput(!0,Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType);this.setTooltip("Set a pin state logic High or Low.")},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.BOOLEAN}};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-*/
-Blockly.Blocks.logo={};Blockly.Blocks.logo.HUE=180;Blockly.Blocks.ardublockly_name_top={init:function(){this.appendDummyInput().appendField("Ardublockly");this.setPreviousStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};Blockly.Blocks.ardublockly_name_bottom={init:function(){this.appendDummyInput().appendField("Ardublockly");this.setNextStatement(!0);this.setColour(Blockly.Blocks.logo.HUE);this.setTooltip("")}};
+"PIN","analogPins")}};Blockly.Blocks.io_highlow={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/Constants");this.setColour(Blockly.Blocks.io.HUE);this.appendDummyInput().appendField(new Blockly.FieldDropdown([["HIGH","HIGH"],["LOW","LOW"]]),"STATE");this.setOutput(!0,Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType);this.setTooltip("Set a pin state logic High or Low.")},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.BOOLEAN}};Blockly.Blocks.logo={};Blockly.Blocks.logo.HUE=180;Blockly.Blocks.ardublockly_name_top={init:function(){this.appendDummyInput().appendField("Ardublockly");this.setPreviousStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};Blockly.Blocks.ardublockly_name_bottom={init:function(){this.appendDummyInput().appendField("Ardublockly");this.setNextStatement(!0);this.setColour(Blockly.Blocks.logo.HUE);this.setTooltip("")}};
 Blockly.Blocks.ardublockly_plus_top_large={init:function(){this.appendValueInput("NAME").appendField("     +");this.setNextStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};Blockly.Blocks.ardublockly_plus_top_small={init:function(){this.appendValueInput("NAME").appendField("  +");this.setNextStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};Blockly.Blocks.ardublockly_plus_bottom_large={init:function(){this.appendValueInput("NAME").appendField("     +");this.setPreviousStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};
 Blockly.Blocks.ardublockly_plus_bottom_small={init:function(){this.appendValueInput("NAME").appendField("  +");this.setPreviousStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};Blockly.Blocks.ardublockly_plus_both_small={init:function(){this.appendValueInput("NAME").appendField("  +");this.setPreviousStatement(!0);this.setNextStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};
 Blockly.Blocks.ardublockly_plus_both_large={init:function(){this.appendValueInput("NAME").appendField("     +");this.setPreviousStatement(!0);this.setNextStatement(!0);this.setColour(Blockly.Blocks.logo.HUE)}};Blockly.Blocks.ardublockly_minus_large={init:function(){this.appendDummyInput().appendField("-     ");this.setInputsInline(!1);this.setOutput(!0);this.setColour(Blockly.Blocks.logo.HUE)}};
-Blockly.Blocks.ardublockly_minus_small={init:function(){this.appendDummyInput().appendField("-  ");this.setInputsInline(!1);this.setOutput(!0);this.setColour(Blockly.Blocks.logo.HUE)}};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Block for the Arduino map functionality.
-               The Arduino built in functions syntax can be found at:
-               http://arduino.cc/en/Reference/HomePage
-
- TODO: This block can be improved to set the new range properly.
-*/
-Blockly.Blocks.map={};Blockly.Blocks.map.HUE=230;
+Blockly.Blocks.ardublockly_minus_small={init:function(){this.appendDummyInput().appendField("-  ");this.setInputsInline(!1);this.setOutput(!0);this.setColour(Blockly.Blocks.logo.HUE)}};Blockly.Blocks.map={};Blockly.Blocks.map.HUE=230;
 Blockly.Blocks.base_map={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/map");this.setColour(Blockly.Blocks.map.HUE);this.appendValueInput("NUM").appendField("Map ").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());this.appendValueInput("DMAX").appendField("value to [0-").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());this.appendDummyInput().appendField("]");this.setInputsInline(!0);this.setOutput(!0);this.setTooltip("Re-maps a number from [0-1024] to another range.")},
-getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER}};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Block for the Arduino functions.
-               The Arduino built in functions syntax can be found at:
-               https://arduino.cc/en/Reference/HomePage
-
- TODO: This block can be improved to set the new range properly.
-*/
-Blockly.Blocks.procedures.HUE=290;Blockly.Blocks.arduino_functions={init:function(){this.appendDummyInput().appendField("Arduino run once:");this.appendStatementInput("SETUP_FUNC");this.appendDummyInput().appendField("Arduino loop forever:");this.appendStatementInput("LOOP_FUNC");this.setInputsInline(!1);this.setColour(Blockly.Blocks.procedures.HUE);this.setTooltip("Defines the Arduino setup() and loop() functions.");this.setHelpUrl("https://arduino.cc/en/Reference/Loop");this.contextMenu=!1},getArduinoLoopsInstance:function(){return!0}};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Blocks for the Arduino serial communication functions.
-               The Arduino built in functions syntax can be found at:
-               http://arduino.cc/en/Reference/HomePage
-
- TODO: There are more function that can be added:
-       http://arduino.cc/en/Reference/Serial
-*/
-Blockly.Blocks.serial={};Blockly.Blocks.serial.HUE=160;
+getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER}};Blockly.Blocks.procedures.HUE=290;Blockly.Blocks.arduino_functions={init:function(){this.appendDummyInput().appendField("Arduino run once:");this.appendStatementInput("SETUP_FUNC");this.appendDummyInput().appendField("Arduino loop forever:");this.appendStatementInput("LOOP_FUNC");this.setInputsInline(!1);this.setColour(Blockly.Blocks.procedures.HUE);this.setTooltip("Defines the Arduino setup() and loop() functions.");this.setHelpUrl("https://arduino.cc/en/Reference/Loop");this.contextMenu=!1},getArduinoLoopsInstance:function(){return!0}};Blockly.Blocks.serial={};Blockly.Blocks.serial.HUE=160;
 Blockly.Blocks.serial_setup={init:function(){this.setHelpUrl("http://arduino.cc/en/Serial/Begin");this.setColour(Blockly.Blocks.serial.HUE);this.appendDummyInput().appendField("Setup").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.serial),"SERIAL_ID").appendField(":  speed to").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.serialSpeed),"SPEED").appendField("bps");this.setInputsInline(!0);this.setTooltip("Selects the speed for a specific Serial peripheral")},getSerialSetupInstance:function(){return this.getFieldValue("SERIAL_ID")},
 updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,"SERIAL_ID","serial");Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,"SPEED","serialSpeed")}};
 Blockly.Blocks.serial_print={init:function(){this.setHelpUrl("http://www.arduino.cc/en/Serial/Print");this.setColour(Blockly.Blocks.serial.HUE);this.appendDummyInput().appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.serial),"SERIAL_ID").appendField("print");this.appendValueInput("CONTENT").setCheck(Blockly.StaticTyping.BlocklyTypes.TEXT.compatibles());this.appendDummyInput().appendField(new Blockly.FieldCheckbox("TRUE"),"NEW_LINE").appendField("add new line");this.setInputsInline(!0);
 this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Prints data to the console/serial port as human-readable ASCII text.")},onchange:function(){if(this.workspace){for(var a=this.getFieldValue("SERIAL_ID"),b=Blockly.mainWorkspace.getTopBlocks(),c=!1,d=0;d<b.length;d++){var e=b[d].getSerialSetupInstance;e&&(e=e.call(b[d]),a==e&&(c=!0))}c?this.setWarningText(null,"serial_setup"):this.setWarningText("A setup block for "+a+" must be added to the workspace to use this block!",
-"serial_setup")}},updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,"SERIAL_ID","serial")}};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Arduino blocks for the Servo library.
-               The Arduino Servo functions can be found in
-               http://arduino.cc/en/reference/servo
-
- TODO: Add angle selector instead of block input.
-*/
-Blockly.Blocks.servo={};Blockly.Blocks.servo.HUE=60;
+"serial_setup")}},updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,"SERIAL_ID","serial")}};Blockly.Blocks.servo={};Blockly.Blocks.servo.HUE=60;
 Blockly.Blocks.servo_write={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/ServoWrite");this.setColour(Blockly.Blocks.servo.HUE);this.appendDummyInput().appendField("Set SERVO from Pin").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.pwmPins),"SERVO_PIN");this.setInputsInline(!1);this.appendValueInput("SERVO_ANGLE").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles()).appendField("to");this.appendDummyInput().appendField("Degrees (0-180)");this.setInputsInline(!0);
 this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Set a Servo to an specified angle")},updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,"SERVO_PIN","pwmPins")}};
 Blockly.Blocks.servo_read={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/ServoRead");this.setColour(Blockly.Blocks.servo.HUE);this.appendDummyInput().appendField("Read SERVO from PIN#").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.pwmPins),"SERVO_PIN");this.setOutput(!0,Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);this.setTooltip("Read a Servo angle")},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER},updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,
-"SERVO_PIN","pwmPins")}};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Blocks for Arduino SPI library.
-               The Arduino SPI functions syntax can be found in:
-               http://arduino.cc/en/Reference/SPI
-*/
-Blockly.Blocks.spi={};Blockly.Blocks.spi.HUE=170;
+"SERVO_PIN","pwmPins")}};Blockly.Blocks.spi={};Blockly.Blocks.spi.HUE=170;
 Blockly.Blocks.spi_setup={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/SPI");this.setColour(Blockly.Blocks.spi.HUE);this.appendDummyInput().appendField("Setup").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.spi),"SPI_ID").appendField("configuration:");this.appendDummyInput().appendField("data shift").appendField(new Blockly.FieldDropdown([["MSBFIRST","MSBFIRST"],["LSBFIRST","LSBFIRST"]]),"SPI_SHIFT_ORDER");this.appendDummyInput().appendField("clock divide").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.spiClockDivide),
 "SPI_CLOCK_DIVIDE");this.appendDummyInput().appendField("SPI mode (idle - edge)").appendField(new Blockly.FieldDropdown([["0 (Low - Falling)","SPI_MODE0"],["1 (Low - Rising)","SPI_MODE1"],["2 (High - Falling)","SPI_MODE2"],["3 (High - Rising)","SPI_MODE3"]]),"SPI_MODE");this.setTooltip("Configures the SPI peripheral.")},getSpiSetupInstance:function(){return this.getFieldValue("SPI_ID")},updateFields:function(){Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,"SPI_ID","spi");Blockly.Arduino.Boards.refreshBlockFieldDropdown(this,
 "SPI_CLOCK_DIVIDE","spiClockDivide")}};
@@ -248,24 +189,7 @@ Blockly.Blocks.spi_transfer={init:function(){var a=[["none","none"]].concat(Bloc
 this.setInputsInline(!0);this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Send a SPI message to an specified slave device.")},onchange:function(){if(this.workspace){for(var a=this.getFieldValue("SPI_ID"),b=Blockly.mainWorkspace.getTopBlocks(),c=!1,d=0,e=b.length;d<e;d++){var f=b[d].getSpiSetupInstance;f&&(f=f.call(b[d]),a==f&&(c=!0))}c?this.setWarningText(null,"spi_setup"):this.setWarningText("A setup block for "+a+" must be added to the workspace to use this block!",
 "spi_setup")}},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER},updateFields:function(){var a=this.getField("SPI_SS"),b=a.getValue();a.menuGenerator_=[["none","none"]].concat(Blockly.Arduino.Boards.selected.digitalPins);for(var c=!1,d=0,e=a.menuGenerator_.length;d<e;d++)b==a.menuGenerator_[d][1]&&(c=!0);c?this.setWarningText(null,"bPin"):this.setWarningText("Old pin value "+b+" is no longer available.","bPin")}};
 Blockly.Blocks.spi_transfer_return={init:function(){var a=[["none","none"]].concat(Blockly.Arduino.Boards.selected.digitalPins);this.setHelpUrl("http://arduino.cc/en/Reference/SPITransfer");this.setColour(Blockly.Blocks.spi.HUE);this.appendDummyInput().appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.spi),"SPI_ID");this.appendValueInput("SPI_DATA").appendField("transfer");this.appendDummyInput().appendField("to slave pin").appendField(new Blockly.FieldDropdown(a),"SPI_SS");this.setInputsInline(!0);
-this.setOutput(!0);this.setTooltip("Send a SPI message to an specified slave device and get data back.")},onchange:Blockly.Blocks.spi_transfer.onchange,getBlockType:Blockly.Blocks.spi_transfer.getBlockType,updateFields:Blockly.Blocks.spi_transfer.updateFields};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Blocks for Arduino Stepper library.
-               The Arduino Servo functions syntax can be found in the
-               following URL: http://arduino.cc/en/Reference/Stepper
-               Additional functions apart from the normal generators have
-               been added to be able to generate the 'set' drop down menu
-               with all current instances of the Stepper class:
-               Blockly.Blocks.stepper.stepperInstances
-               Blockly.Blocks.stepper.FieldStepperInstance
-               Blockly.Blocks.stepper.stepperDropdownList
-
- TODO: Still need to had some kind of handler to refresh the "set" drop down
-       menu values if an instance in a 'configure' block is renamed.
-*/
-Blockly.Blocks.stepper={};Blockly.Blocks.stepper.HUE=80;Blockly.Blocks.stepper.noInstance="No_Instances";Blockly.Blocks.stepper.noName="Empty_input_name";Blockly.Blocks.stepper.stepperInstances=function(){for(var a=[],b=Blockly.mainWorkspace.getTopBlocks(),c=0;c<b.length;c++){var d=b[c].getStepperSetupInstance;d&&(d=d.call(b[c]))&&a.push(d)}return a};
+this.setOutput(!0);this.setTooltip("Send a SPI message to an specified slave device and get data back.")},onchange:Blockly.Blocks.spi_transfer.onchange,getBlockType:Blockly.Blocks.spi_transfer.getBlockType,updateFields:Blockly.Blocks.spi_transfer.updateFields};Blockly.Blocks.stepper={};Blockly.Blocks.stepper.HUE=80;Blockly.Blocks.stepper.noInstance="No_Instances";Blockly.Blocks.stepper.noName="Empty_input_name";Blockly.Blocks.stepper.stepperInstances=function(){for(var a=[],b=Blockly.mainWorkspace.getTopBlocks(),c=0;c<b.length;c++){var d=b[c].getStepperSetupInstance;d&&(d=d.call(b[c]))&&a.push(d)}return a};
 Blockly.Blocks.stepper.stepperDropdownList=function(){var a=Blockly.Blocks.stepper.stepperInstances(),b=[];if(0<a.length){a.sort(goog.string.caseInsensitiveCompare);for(var c=0;c<a.length;c++)b[c]=[a[c],a[c]]}else b[0]=[Blockly.Blocks.stepper.noInstance,Blockly.Blocks.stepper.noInstance];return b};Blockly.Blocks.stepper.FieldStepperInstance=function(){Blockly.Blocks.stepper.FieldStepperInstance.superClass_.constructor.call(this,Blockly.Blocks.stepper.stepperDropdownList)};
 goog.inherits(Blockly.Blocks.stepper.FieldStepperInstance,Blockly.FieldDropdown);
 Blockly.Blocks.stepper_config={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/StepperConstructor");this.setColour(Blockly.Blocks.stepper.HUE);this.appendDummyInput().appendField("Setup").appendField(new Blockly.FieldTextInput("MyStepper"),"STEPPER_NAME").appendField("stepper motor:");this.appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField("pin1#").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),"STEPPER_PIN1").appendField("pin2#").appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),
@@ -273,15 +197,7 @@ Blockly.Blocks.stepper_config={init:function(){this.setHelpUrl("http://arduino.c
 a||(a=Blockly.Blocks.stepper.noName);return a.replace(/ /g,"_")},updateFields:function(){Blockly.Boards.refreshBlockFieldDropdown(this,"STEPPER_PIN1","digitalPins");Blockly.Boards.refreshBlockFieldDropdown(this,"STEPPER_PIN2","digitalPins")}};
 Blockly.Blocks.stepper_step={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/StepperStep");this.setColour(Blockly.Blocks.stepper.HUE);this.appendDummyInput().appendField("move stepper").appendField(new Blockly.Blocks.stepper.FieldStepperInstance,"STEPPER_NAME");this.appendValueInput("STEPPER_STEPS").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());this.appendDummyInput().appendField("steps");this.setPreviousStatement(!0);this.setNextStatement(!0);this.setTooltip("Turns the stepper motor a specific number of steps.")},
 onchange:function(){if(this.workspace){var a=this.getFieldValue("STEPPER_NAME"),b=Blockly.Blocks.stepper.stepperDropdownList();if(b[0][0]===Blockly.Blocks.stepper.noInstance)a!==Blockly.Blocks.stepper.noInstance&&this.setFieldValue(Blockly.Blocks.stepper.noInstance,"STEPPER_NAME"),this.setWarningText("A STEPPER configuration block must be added to use this block!");else{for(var c=!1,d=0;d<b.length;d++)if(b[d][0]===Blockly.Blocks.stepper.noName){if(a===Blockly.Blocks.stepper.noName){this.setWarningText("A Name input must be added to the Stepper configuration block!");
-return}}else b[d][0]===a&&(c=!0);c?this.setWarningText(null):a===Blockly.Blocks.stepper.noName||a===Blockly.Blocks.stepper.noInstance?(this.setFieldValue(b[0][0],"STEPPER_NAME"),this.setWarningText(null)):this.setWarningText("Selected stepper does not exist any more, please select a new one.")}}}};/*
- Licensed under the Apache License, Version 2.0 (the "License"):
-          http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Blocks for Arduino Time functions.
-               The arduino built in functions syntax can be found in
-               http://arduino.cc/en/Reference/HomePage
-*/
-Blockly.Blocks.time={};Blockly.Blocks.time.HUE=140;Blockly.Blocks.time_delay={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/Delay");this.setColour(Blockly.Blocks.time.HUE);this.appendValueInput("DELAY_TIME_MILI").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles()).appendField("wait");this.appendDummyInput().appendField("milliseconds");this.setInputsInline(!0);this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Wait specific time in milliseconds")}};
+return}}else b[d][0]===a&&(c=!0);c?this.setWarningText(null):a===Blockly.Blocks.stepper.noName||a===Blockly.Blocks.stepper.noInstance?(this.setFieldValue(b[0][0],"STEPPER_NAME"),this.setWarningText(null)):this.setWarningText("Selected stepper does not exist any more, please select a new one.")}}}};Blockly.Blocks.time={};Blockly.Blocks.time.HUE=140;Blockly.Blocks.time_delay={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/Delay");this.setColour(Blockly.Blocks.time.HUE);this.appendValueInput("DELAY_TIME_MILI").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles()).appendField("wait");this.appendDummyInput().appendField("milliseconds");this.setInputsInline(!0);this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Wait specific time in milliseconds")}};
 Blockly.Blocks.time_delaymicros={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/DelayMicroseconds");this.setColour(Blockly.Blocks.time.HUE);this.appendValueInput("DELAY_TIME_MICRO").setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles()).appendField("wait");this.appendDummyInput().appendField("microseconds");this.setInputsInline(!0);this.setPreviousStatement(!0,null);this.setNextStatement(!0,null);this.setTooltip("Wait specific time in microseconds")}};
 Blockly.Blocks.time_millis={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/Millis");this.setColour(Blockly.Blocks.time.HUE);this.appendDummyInput().appendField("current elapsed Time (milliseconds)");this.setOutput(!0,Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);this.setTooltip("Returns the number of milliseconds since the Arduino board began running the current program.")},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER}};
 Blockly.Blocks.time_micros={init:function(){this.setHelpUrl("http://arduino.cc/en/Reference/Micros");this.setColour(Blockly.Blocks.time.HUE);this.appendDummyInput().appendField("current elapsed Time (microseconds)");this.setOutput(!0,Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);this.setTooltip("Returns the number of microseconds since the Arduino board began running the current program.")},getBlockType:function(){return Blockly.StaticTyping.BlocklyTypes.NUMBER}};

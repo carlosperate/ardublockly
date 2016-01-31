@@ -3,9 +3,9 @@
  *          http://www.apache.org/licenses/LICENSE-2.0
  */
 
-/*
+/**
  * @fileoverview Blocks use for the Ardublockly logo creation.
- *               These are not mean to used at all.
+ *     These are not mean to used at all.
  *
  * Generator:
  *  var noCode = function(block) { return ''; };

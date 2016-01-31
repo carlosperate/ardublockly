@@ -1,9 +1,10 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Generating Arduino code for procedure (function) blocks.
- *               Based on the code generator for Dart
  *
  * TODO: For now all variables will stay at "int". Once type is implemented
  *       it needs to be captured on the functions with return.

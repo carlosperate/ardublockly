@@ -1,11 +1,12 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * Based on work of Fred Lin (gasolin@gmail.com) for Blocklyduino.
  *
- * @fileoverview Helper functions for generating Arduino language (C++) for
- *               blocks.
+ * @fileoverview Helper functions for generating Arduino language (C++).
  */
 'use strict';
 
@@ -364,3 +365,11 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
       return 'Invalid Blockly Type';
     }
 };
+
+/** Used for not-yet-implemented block code generators */
+Blockly.Arduino.noGeneratorCodeInline = function() {
+  return ['', Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/** Used for not-yet-implemented block code generators */
+Blockly.Arduino.noGeneratorCodeLine = function() { return ''; };

@@ -1,10 +1,12 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Blocks for Arduino Digital and Analogue input and output
- *               functions. The Arduino function syntax can be found at
- *               http://arduino.cc/en/Reference/HomePage
+ *     functions. The Arduino function syntax can be found at
+ *     http://arduino.cc/en/Reference/HomePage
  *
  * TODO: maybe change this to a "PIN" BlocklyType
  */

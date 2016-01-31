@@ -1,19 +1,21 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Blocks for Arduino Stepper library.
- *               The Arduino Servo functions syntax can be found in the
- *               following URL: http://arduino.cc/en/Reference/Stepper
- *               Additional functions apart from the normal generators have
- *               been added to be able to generate the 'set' drop down menu
- *               with all current instances of the Stepper class:
- *               Blockly.Blocks.stepper.stepperInstances
- *               Blockly.Blocks.stepper.FieldStepperInstance
- *               Blockly.Blocks.stepper.stepperDropdownList
+ *     The Arduino Servo functions syntax can be found in the following URL:
+ *     http://arduino.cc/en/Reference/Stepper
+ *     Additional functions apart from the normal generators have been added to
+ *     be able to generate the 'set' drop down menu with all current instances
+ *     of the Stepper class:
+ *         Blockly.Blocks.stepper.stepperInstances
+ *         Blockly.Blocks.stepper.FieldStepperInstance
+ *         Blockly.Blocks.stepper.stepperDropdownList
  *
  * TODO: Still need to had some kind of handler to refresh the "set" drop down
- *       menu values if an instance in a 'configure' block is renamed.
+ *     menu values if an instance in a 'configure' block is renamed.
  */
 'use strict';
 
@@ -160,30 +162,6 @@ Blockly.Blocks['stepper_step'] = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('Turns the stepper motor a specific number of steps.');
-
-    /* For now the FieldStepperInstance is required, will need to replicate
-       functionality for JSON implementation.
-    this.jsonInit({
-      "message0": "stepper %1 move %2 steps",
-      "args0": [
-        {
-          "type": "field_dropdown",
-          "name": "STEPPER_NAME",
-          "options": Blockly.Blocks.stepper.stepperDropdownList()
-        },
-        {
-          "type": "input_value",
-          "name": "STEPPER_STEPS",
-          "align": "RIGHT"
-        }
-      ],
-      "inputsInline": true,
-      "previousStatement": null,
-      "nextStatement": null,
-      "colour": Blockly.Blocks.stepper.HUE,
-      "tooltip": "Turns the stepper motor a specific number of steps.",
-      "helpUrl": "http://arduino.cc/en/Reference/StepperStep"
-    });*/
   },
   /**
    * Called whenever anything on the workspace changes.

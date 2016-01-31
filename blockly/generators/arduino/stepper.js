@@ -1,10 +1,11 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Arduino code generator for the Stepper library blocks.
- *               The Arduino Servo functions syntax can be found in the
- *               following URL: http://arduino.cc/en/Reference/Stepper
+ *     The Arduino Stepper library docs: http://arduino.cc/en/Reference/Stepper
  */
 'use strict';
 

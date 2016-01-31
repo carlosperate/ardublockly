@@ -1,10 +1,12 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Object that defines static objects and methods to assign
- *               Blockly types to Blockly blocks. These can then be converted to
- *               language specific types in each language generator.
+ *     Blockly types to Blockly blocks. These can then be converted to language
+ *     specific types in each language generator.
  */
 'use strict';
 

@@ -1,10 +1,11 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Code generator for the Arduino map functionality.
- *               The Arduino built in functions syntax can be found at:
- *               http://arduino.cc/en/Reference/HomePage
+ *     Arduino built-in function docs: http://arduino.cc/en/Reference/HomePage
  */
 'use strict';
 

@@ -1,10 +1,12 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Arduino blocks for the Servo library.
- *               The Arduino Servo functions can be found in
- *               http://arduino.cc/en/reference/servo
+ *     The Arduino Servo functions can be found in
+ *     http://arduino.cc/en/reference/servo
  *
  * TODO: Add angle selector instead of block input.
  */

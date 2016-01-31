@@ -1,10 +1,12 @@
   /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Blocks for Arduino SPI library.
- *               The Arduino SPI functions syntax can be found in:
- *               http://arduino.cc/en/Reference/SPI
+ *     The Arduino SPI functions syntax can be found in:
+ *     http://arduino.cc/en/Reference/SPI
  */
 'use strict';
 

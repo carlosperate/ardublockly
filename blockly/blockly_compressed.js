@@ -1215,10 +1215,6 @@ Blockly.Generator.prototype.statementToCode=function(a,b){var c=a.getInputTarget
 Blockly.Generator.prototype.INDENT="  ";Blockly.Generator.prototype.RESERVED_WORDS_="";Blockly.Generator.prototype.addReservedWords=function(a){this.RESERVED_WORDS_+=a+","};Blockly.Generator.prototype.FUNCTION_NAME_PLACEHOLDER_="{leCUI8hutHZI4480Dc}";Blockly.Generator.prototype.provideFunction_=function(a,b){if(!this.definitions_[a]){var c=this.variableDB_.getDistinctName(a,this.NAME_TYPE);this.functionNames_[a]=c;this.definitions_[a]=b.join("\n").replace(this.FUNCTION_NAME_PLACEHOLDER_REGEXP_,c)}return this.functionNames_[a]};/*
  Licensed under the Apache License, Version 2.0 (the "License"):
           http://www.apache.org/licenses/LICENSE-2.0
-
- @fileoverview Object that defines static objects and methods to assign
-               Blockly types to Blockly blocks. These can then be converted to
-               language specific types in each language generator.
 */
 Blockly.StaticTyping={};Blockly.StaticTyping.BasicTypes={TEXT:"String",BOOLEAN:"Boolean",NUMBER:"Number",DECIMAL:"Decimal",ARRAY:"Array",COLOUR:"Colour",NULL:null,UNDEF:"Undefined"};
 Blockly.StaticTyping.Type=function(a){if(void 0===a.typeName||void 0===a.languageKeyword||void 0===a.basicType||void 0===a.compatibleTypes)throw"Creating a Type requires the following format:\n{\n  typeName: string,\n  languageKeyword: string,\n  basicType: Blockly.StaticTyping.BasicTypes,\n  compatibleTypes: [Blockly.StaticTyping.BasicTypes,]\n}";if(Array.isArray&&!Array.isArray(a.compatibleTypes))throw"The compatible types for a Blockly Types needs to be a stringof Blockly.StaticTyping.BasicTypes items.";
