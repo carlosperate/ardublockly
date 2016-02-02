@@ -307,14 +307,21 @@ Ardublockly.openNotConnectedModal = function() {
   });
 };
 
+/** Tracks if the settings modal is currently opened. */
+Ardublockly.settingsOpen = false;
+
 /** Opens the modal that displays the Settings. */
 Ardublockly.openSettingsModal = function() {
-  $('#settings_dialog').openModal({
-    dismissible: true,
-    opacity: .5,
-    in_duration: 200,
-    out_duration: 250
-  });
+  if (!Ardublockly.settingsOpen) {
+    Ardublockly.settingsOpen = true;
+    $('#settings_dialog').openModal({
+      dismissible: true,
+      opacity: .5,
+      in_duration: 200,
+      out_duration: 250,
+      complete: function() { Ardublockly.settingsOpen = false; } 
+    });
+  }
 };
 
 /**
