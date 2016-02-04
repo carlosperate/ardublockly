@@ -13,6 +13,7 @@
 goog.provide('Blockly.Arduino');
 
 goog.require('Blockly.Generator');
+goog.require('Blockly.StaticTyping');
 
 
 /**
@@ -20,6 +21,7 @@ goog.require('Blockly.Generator');
  * @type {!Blockly.Generator}
  */
 Blockly.Arduino = new Blockly.Generator('Arduino');
+Blockly.Arduino.StaticTyping = new Blockly.StaticTyping();
 
 /**
  * List of illegal variable names.
@@ -111,8 +113,8 @@ Blockly.Arduino.init = function(workspace) {
   }
 
   // Iterate through to capture all blocks types and set the function arguments
-  var varsWithTypes = Blockly.StaticTyping.getAllVarsWithTypes(workspace);
-  Blockly.StaticTyping.setProcedureArgs(workspace, varsWithTypes);
+  var varsWithTypes = Blockly.Arduino.StaticTyping.collectVarsWithTypes(workspace);
+  Blockly.Arduino.StaticTyping.setProcedureArgs(workspace, varsWithTypes);
 
   // Set variable declarations with their Arduino type in the defines dictionary
   var variableDeclarations = [];
@@ -343,21 +345,21 @@ Blockly.Arduino.scrub_ = function(block, code) {
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
   switch (typeBlockly.typeName) {
-    case Blockly.StaticTyping.BlocklyTypes.NUMBER.typeName:
+    case Blockly.Types.NUMBER.typeName:
       return 'int';
-    case Blockly.StaticTyping.BlocklyTypes.DECIMAL.typeName:
+    case Blockly.Types.DECIMAL.typeName:
       return 'float';
-    case Blockly.StaticTyping.BlocklyTypes.TEXT.typeName:
+    case Blockly.Types.TEXT.typeName:
       return 'String';
-    case Blockly.StaticTyping.BlocklyTypes.CHARACTER.typeName:
+    case Blockly.Types.CHARACTER.typeName:
       return 'char';
-    case Blockly.StaticTyping.BlocklyTypes.BOOLEAN.typeName:
+    case Blockly.Types.BOOLEAN.typeName:
       return 'boolean';
-    case Blockly.StaticTyping.BlocklyTypes.NULL.typeName:
+    case Blockly.Types.NULL.typeName:
       return 'void';
-    case Blockly.StaticTyping.BlocklyTypes.UNDEF.typeName:
+    case Blockly.Types.UNDEF.typeName:
       return 'undefined';
-    case Blockly.StaticTyping.BlocklyTypes.CHILD_BLOCK_MISSING.typeName:
+    case Blockly.Types.CHILD_BLOCK_MISSING.typeName:
       // If no block connected default to int, change for easier debugging
       return 'ChildBlockMissing';
       //return 'int';

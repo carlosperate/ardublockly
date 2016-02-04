@@ -27,7 +27,7 @@
 goog.provide('Blockly.Blocks.variables');
 
 goog.require('Blockly.Blocks');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Types');
 
 
 /**
@@ -88,24 +88,11 @@ Blockly.Blocks['variables_get'] = {
     options.push(option);
   },
   /**
-   * Contains the type of the variable selected from the block.
-   * @type {!string} Type from the Static Typing class in string format.
-   */
-  varType: Blockly.StaticTyping.BlocklyTypes.UNDEF,
-  /**
-   * Set this block variable to a type.
-   * @this Blockly.Block
-   * @param {!string} varType Type that this block is to be set to.
-   */
-  setBlockType: function(varType) {
-    this.varType = varType;
-  },
-  /**
    * @return {!string} Retrieves the type (stored in varType) of this block.
    * @this Blockly.Block
    */
   getBlockType: function() {
-    return this.varType;
+    return [Blockly.Types.UNDEF, this.getFieldValue('VAR')];
   },
   /**
    * Gets the stored type of the variable indicated in the argument. As only one
@@ -115,7 +102,7 @@ Blockly.Blocks['variables_get'] = {
    * @return {!string} String to indicate the type of this block.
    */
   getVarType: function(varName) {
-    return this.varType;
+    return [Blockly.Types.UNDEF, this.getFieldValue('VAR')];
   },
 };
 
@@ -171,9 +158,10 @@ Blockly.Blocks['variables_set'] = {
   /**
    * Searches through the nested blocks to find a variable type.
    * @this Blockly.Block
+   * @param {!string} varName Name of this block variable to check type.
    * @return {string} String to indicate the type of this block.
    */
-  getVarType: function() {
-    return Blockly.StaticTyping.getChildBlockType(this);
+  getVarType: function(varName) {
+    return Blockly.Types.getChildBlockType(this);
   }
 };

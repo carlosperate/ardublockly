@@ -27,7 +27,7 @@
 goog.provide('Blockly.Blocks.loops');
 
 goog.require('Blockly.Blocks');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Types');
 
 
 /**
@@ -47,7 +47,7 @@ Blockly.Blocks['controls_repeat_ext'] = {
         {
           "type": "input_value",
           "name": "TIMES",
-          "check": Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles()
+          "check": Blockly.Types.NUMBER.compatibles()
         }
       ],
       "previousStatement": null,
@@ -74,7 +74,7 @@ Blockly.Blocks['controls_repeat'] = {
         {
           "type": "field_input",
           "name": "TIMES",
-          "check": Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.compatibles(),
           "text": "10"
         }
       ],
@@ -103,7 +103,7 @@ Blockly.Blocks['controls_whileUntil'] = {
     this.setHelpUrl(Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL);
     this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('BOOL')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.BOOLEAN.compatibles())
+        .setCheck(Blockly.Types.BOOLEAN.compatibles())
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_WHILEUNTIL_INPUT_DO);
@@ -139,19 +139,19 @@ Blockly.Blocks['controls_for'] = {
         {
           "type": "input_value",
           "name": "FROM",
-          "check": Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.compatibles(),
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "TO",
-          "check": Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.compatibles(),
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "BY",
-          "check": Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.compatibles(),
           "align": "RIGHT"
         }
       ],
@@ -214,7 +214,7 @@ Blockly.Blocks['controls_for'] = {
    *                  before.
    */
   getVarType: function(varName) {
-    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
+    return Blockly.Types.NUMBER;
   }
 };
 
@@ -235,7 +235,7 @@ Blockly.Blocks['controls_forEach'] = {
         {
           "type": "input_value",
           "name": "LIST",
-          "check": Blockly.StaticTyping.BlocklyTypes.ARRAY.compatibles()
+          "check": Blockly.Types.ARRAY.compatibles()
         }
       ],
       "previousStatement": null,
@@ -275,7 +275,7 @@ Blockly.Blocks['controls_forEach'] = {
   customContextMenu: Blockly.Blocks['controls_for'].customContextMenu,
   /** @returns {!string} The type of the variable used in this block */
   getVarType: function(varName) {
-    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
+    return Blockly.Types.NUMBER;
   }
 };
 

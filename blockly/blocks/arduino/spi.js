@@ -13,7 +13,7 @@
 goog.provide('Blockly.Blocks.spi');
 
 goog.require('Blockly.Blocks');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
@@ -92,7 +92,7 @@ Blockly.Blocks['spi_transfer'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
     this.appendValueInput('SPI_DATA')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.compatibles())
         .appendField('transfer');
     this.appendDummyInput()
         .appendField('to slave pin')
@@ -142,7 +142,7 @@ Blockly.Blocks['spi_transfer'] = {
    * @return {!string} Blockly type.
    */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
+    return Blockly.Types.NUMBER;
   },
   /**
    * Updates the content of the board SPI related fields.

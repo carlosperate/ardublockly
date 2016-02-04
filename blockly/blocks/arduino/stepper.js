@@ -22,7 +22,7 @@
 goog.provide('Blockly.Blocks.stepper');
 
 goog.require('Blockly.Blocks');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
@@ -108,11 +108,11 @@ Blockly.Blocks['stepper_config'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN2');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.compatibles())
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField('how many steps per revolution');
     this.appendValueInput('STEPPER_SPEED')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.compatibles())
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField('set speed (rpm) to');
     this.setTooltip('Configures a stepper motor pinout and other settings.');
@@ -156,7 +156,7 @@ Blockly.Blocks['stepper_step'] = {
         .appendField(new Blockly.Blocks.stepper.FieldStepperInstance(),
             'STEPPER_NAME');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
+        .setCheck(Blockly.Types.NUMBER.compatibles());
     this.appendDummyInput()
         .appendField('steps');
     this.setPreviousStatement(true);

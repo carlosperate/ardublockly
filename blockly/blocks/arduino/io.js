@@ -15,7 +15,7 @@
 goog.provide('Blockly.Blocks.io');
 
 goog.require('Blockly.Blocks');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Types');
 
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.io.HUE = 250;
@@ -33,7 +33,7 @@ Blockly.Blocks['io_digitalwrite'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
         .appendField('to')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.BOOLEAN.compatibles());
+        .setCheck(Blockly.Types.BOOLEAN.compatibles());
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -61,12 +61,12 @@ Blockly.Blocks['io_digitalread'] = {
         .appendField('read digital pin#')
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType);
+    this.setOutput(true, Blockly.Types.BOOLEAN.basicType);
     this.setTooltip('Reads the digital value of a pin.');
   },
   /** @return {!string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyTypes.BOOLEAN;
+    return Blockly.Types.BOOLEAN;
   },
   /**
    * Updates the content of the the pin related fields.
@@ -91,7 +91,7 @@ Blockly.Blocks['io_builtin_led'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.builtinLed), 'BUILT_IN_LED')
         .appendField('to')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.BOOLEAN.compatibles());
+        .setCheck(Blockly.Types.BOOLEAN.compatibles());
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -107,7 +107,7 @@ Blockly.Blocks['io_builtin_led'] = {
   },
   /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyTypes.BOOLEAN;
+    return Blockly.Types.BOOLEAN;
   },
 };
 
@@ -124,7 +124,7 @@ Blockly.Blocks['io_analogwrite'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.pwmPins), 'PIN')
         .appendField('to')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
+        .setCheck(Blockly.Types.NUMBER.basicType);
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -139,7 +139,7 @@ Blockly.Blocks['io_analogwrite'] = {
   },
   /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
+    return Blockly.Types.NUMBER;
   },
 };
 
@@ -155,12 +155,12 @@ Blockly.Blocks['io_analogread'] = {
         .appendField('read analogue pin#')
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.analogPins), 'PIN');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.NUMBER.basicType);
+    this.setOutput(true, Blockly.Types.NUMBER.basicType);
     this.setTooltip('Return value between 0 and 1024.');
   },
   /** @return {!string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
+    return Blockly.Types.NUMBER;
   },
   /**
    * Updates the content of the the pin related fields.
@@ -183,11 +183,11 @@ Blockly.Blocks['io_highlow'] = {
         .appendField(
             new Blockly.FieldDropdown([['HIGH', 'HIGH'], ['LOW', 'LOW']]),
            'STATE');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyTypes.BOOLEAN.basicType);
+    this.setOutput(true, Blockly.Types.BOOLEAN.basicType);
     this.setTooltip('Set a pin state logic High or Low.');
   },
   /** @return {!string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyTypes.BOOLEAN;
+    return Blockly.Types.BOOLEAN;
   }
 };

@@ -15,7 +15,7 @@
 goog.provide('Blockly.Blocks.map');
 
 goog.require('Blockly.Blocks');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
@@ -31,10 +31,10 @@ Blockly.Blocks['base_map'] = {
     this.setColour(Blockly.Blocks.map.HUE);
     this.appendValueInput('NUM')
         .appendField('Map ')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
+        .setCheck(Blockly.Types.NUMBER.compatibles());
     this.appendValueInput('DMAX')
         .appendField('value to [0-')
-        .setCheck(Blockly.StaticTyping.BlocklyTypes.NUMBER.compatibles());
+        .setCheck(Blockly.Types.NUMBER.compatibles());
     this.appendDummyInput()
         .appendField(']');
     this.setInputsInline(true);
@@ -43,6 +43,6 @@ Blockly.Blocks['base_map'] = {
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyTypes.NUMBER;
+    return Blockly.Types.NUMBER;
   }
 };
