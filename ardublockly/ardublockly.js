@@ -256,6 +256,10 @@ Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
 
 /** Initialises the IDE buttons with the default option from the server. */
 Ardublockly.initialiseIdeButtons = function() {
+  document.getElementById('button_ide_left').title = 'Open Sketch in IDE';
+  document.getElementById('button_ide_middle').title = 'Verify the Sketch';
+  document.getElementById('button_ide_large').title =
+      'Upload Sketch to the Arduino';
   ArdublocklyServer.requestIdeOptions(function(jsonResponse) {
     if (jsonResponse != null) {
       var parsedJson = JSON.parse(jsonResponse);
@@ -274,21 +278,36 @@ Ardublockly.initialiseIdeButtons = function() {
  *     in the settings modal: 'upload', 'verify', or 'open'.
  */
 Ardublockly.changeIdeButtons = function(value) {
+  var largeButton = document.getElementById('button_ide_large');
+  var middleButton = document.getElementById('button_ide_middle');
+  var leftButton = document.getElementById('button_ide_left');
+  var openTitle = 'Open Sketch in IDE';
+  var verifyTitle = 'Verify the Sketch';
+  var uploadTitle = 'Upload Sketch to the Arduino';
   if (value === 'upload') {
     Ardublockly.changeIdeButtonsDesign(value);
     Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
     Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendVerify;
     Ardublockly.ideButtonLargeAction = Ardublockly.ideSendUpload;
+    leftButton.title = openTitle;
+    middleButton.title = verifyTitle;
+    largeButton.title = uploadTitle;
   } else if (value === 'verify') {
     Ardublockly.changeIdeButtonsDesign(value);
     Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
     Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendUpload;
     Ardublockly.ideButtonLargeAction = Ardublockly.ideSendVerify;
+    leftButton.title = openTitle;
+    middleButton.title = uploadTitle;
+    largeButton.title = verifyTitle;
   } else if (value === 'open') {
     Ardublockly.changeIdeButtonsDesign(value);
     Ardublockly.ideButtonLeftAction = Ardublockly.ideSendVerify;
     Ardublockly.ideButtonMiddleAction = Ardublockly.ideSendUpload;
     Ardublockly.ideButtonLargeAction = Ardublockly.ideSendOpen;
+    leftButton.title = verifyTitle;
+    middleButton.title = uploadTitle;
+    largeButton.title = openTitle;
   }
 };
 
