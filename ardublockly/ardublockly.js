@@ -293,28 +293,36 @@ Ardublockly.changeIdeButtons = function(value) {
 };
 
 /**
- * Loads an XML file from the server and adds the blocks into the Blockly
- * workspace.
+ * Loads an XML file from the server and replaces the current blocks into the
+ * Blockly workspace.
  * @param {!string} xmlFile Server location of the XML file to load.
  */
 Ardublockly.loadServerXmlFile = function(xmlFile) {
-  // The loadXmlBlockFile loads the file asynchronously and needs a callback
-  var loadXmlCallback = function(sucess) {
-    if (sucess) {
-      Ardublockly.renderContent();
-    } else {
-      Ardublockly.alertMessage(
-          'Invalid XML',
-          'The XML file was not successfully parsed into blocks.' +
-          'Please review the XML code and try again.',
-          false);
-    }
+  var loadXmlfileAccepted = function() {
+    // loadXmlBlockFile loads the file asynchronously and needs a callback
+    var loadXmlCallback = function(sucess) {
+      if (sucess) {
+        Ardublockly.renderContent();
+      } else {
+        Ardublockly.alertMessage(
+            'Invalid XML',
+            'The XML file was not successfully parsed into blocks.' +
+            'Please review the XML code and try again.',
+            false);
+      }
+    };
+    var callbackConnectionError = function() {
+      Ardublockly.openNotConnectedModal();
+    };
+    Ardublockly.loadXmlBlockFile(
+        xmlFile, loadXmlCallback, callbackConnectionError);
   };
-  var callbackConnectionError = function() {
-    Ardublockly.openNotConnectedModal();
-  };
-  Ardublockly.loadXmlBlockFile(
-      xmlFile, loadXmlCallback, callbackConnectionError);
+
+  Ardublockly.alertMessage(
+      'Load new blocks?',
+      'Loading a new XML file will replace the current blocks from the ' +
+      'workspace.\nAre you sure you want to proceed?',
+      true, loadXmlfileAccepted);
 };
 
 /**

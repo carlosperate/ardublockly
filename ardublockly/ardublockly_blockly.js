@@ -61,8 +61,8 @@ Ardublockly.bindBlocklyEventListeners = function() {
 };
 
 /**
- * Loads an XML file from the server and adds the blocks into the Blockly
- * workspace.
+ * Loads an XML file from the server and replaces the current blocks into the
+ * Blockly workspace.
  * @param {!string} xmlFile XML file path in a reachable server (no local path).
  * @param {!function} callbackFileLoaded Function to be called once the file is
  *     loaded.
