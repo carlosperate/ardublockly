@@ -802,3 +802,16 @@ ul.side-nav li ul li ul li {
 .circle-clipper .circle {
   border-width: 4px !important;
 }
+
+/* Materialize messes with these, so reset them here */
+.blocklyHtmlInput {
+  border: none !important;
+  border-radius: 4px !important;
+  font-family: sans-serif !important;
+  height: 100% !important;
+  margin: 0 !important;
+  outline: none !important;
+  padding: 0 1px !important;
+  width: 100% !important;
+  background-color: white !important;
+}
