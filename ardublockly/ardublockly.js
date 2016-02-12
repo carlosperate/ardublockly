@@ -319,7 +319,7 @@ Ardublockly.changeIdeButtons = function(value) {
 Ardublockly.loadServerXmlFile = function(xmlFile) {
   var loadXmlfileAccepted = function() {
     // loadXmlBlockFile loads the file asynchronously and needs a callback
-    var loadXmlCallback = function(sucess) {
+    var loadXmlCb = function(sucess) {
       if (sucess) {
         Ardublockly.renderContent();
       } else {
@@ -330,18 +330,21 @@ Ardublockly.loadServerXmlFile = function(xmlFile) {
             false);
       }
     };
-    var callbackConnectionError = function() {
+    var connectionErrorCb = function() {
       Ardublockly.openNotConnectedModal();
     };
-    Ardublockly.loadXmlBlockFile(
-        xmlFile, loadXmlCallback, callbackConnectionError);
+    Ardublockly.loadXmlBlockFile(xmlFile, loadXmlCb, connectionErrorCb);
   };
 
-  Ardublockly.alertMessage(
-      'Load new blocks?',
-      'Loading a new XML file will replace the current blocks from the ' +
-      'workspace.\nAre you sure you want to proceed?',
-      true, loadXmlfileAccepted);
+  if (Ardublockly.isWorkspaceEmpty()) {
+    loadXmlfileAccepted();
+  } else {
+    Ardublockly.alertMessage(
+        'Load new blocks?',
+        'Loading a new XML file will replace the current blocks from the ' +
+        'workspace.\nAre you sure you want to proceed?',
+        true, loadXmlfileAccepted);
+  }
 };
 
 /**

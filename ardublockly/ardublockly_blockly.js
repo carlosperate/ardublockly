@@ -64,51 +64,38 @@ Ardublockly.bindBlocklyEventListeners = function() {
  * Loads an XML file from the server and replaces the current blocks into the
  * Blockly workspace.
  * @param {!string} xmlFile XML file path in a reachable server (no local path).
- * @param {!function} callbackFileLoaded Function to be called once the file is
- *     loaded.
- * @param {!function} callbackConectonError Function to be called if there is a
- *     connection error to the XML server.
+ * @param {!function} cbSuccess Function to be called once the file is loaded.
+ * @param {!function} cbError Function to be called if there is a connection
+ *     error to the XML server.
  */
-Ardublockly.loadXmlBlockFile = function(xmlFile, callbackFileLoaded,
-    callbackConectonError) {
+Ardublockly.loadXmlBlockFile = function(xmlFile, cbSuccess, cbError) {
   // Create a an XML HTTP request
   var request = Ardublockly.ajaxRequest();
-
-  // If file run locally Internet explorer fails here
-  try {
-    request.open('GET', xmlFile, true);
-  } catch (e) {
-    callbackConectonError();
-  }
-
-  // Once file is open, parse the XML into the workspace
-  request.onreadystatechange = function() {
-    if ((request.readyState == 4) && (request.status == 200)) {
-      var success = Ardublockly.replaceBlocksfromXml(request.responseText);
-      callbackFileLoaded(success);
+  var requestCb = function() {
+    if (request.readyState == 4) {
+      if (request.status == 200) {
+        var success = Ardublockly.replaceBlocksfromXml(request.responseText);
+        cbSuccess(success);
+      } else {
+        cbError();
+      }
     }
   };
-
-  // If file run locally Chrome will fail here
   try {
+    request.open('GET', xmlFile, true);
+    request.onreadystatechange = requestCb;
     request.send(null);
   } catch (e) {
-    callbackConectonError();
+    cbError();
   }
 };
 
-/**
- * Generates the Arduino code from the Blockly workspace.
- * @return {!string} Arduino code string.
- */
+/** @return {!string} Generated Arduino code from the Blockly workspace. */
 Ardublockly.generateArduino = function() {
   return Blockly.Arduino.workspaceToCode(Ardublockly.workspace);
 };
 
-/**
- * Generates the XML DOM and returns it as a string.
- * @return {!string} XML code string.
- */
+/** @return {!string} Generated XML code from the Blockly workspace. */
 Ardublockly.generateXml = function() {
   var xmlDom = Blockly.Xml.workspaceToDom(Ardublockly.workspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
@@ -196,6 +183,11 @@ Ardublockly.discardAllBlocks = function() {
           Ardublockly.renderContent();
         });
   }
+};
+
+/** @return {!boolean} Indicates if the Blockly workspace has blocks. */
+Ardublockly.isWorkspaceEmpty = function() {
+  return Ardublockly.workspace.getAllBlocks().length ? false : true;
 };
 
 /**
