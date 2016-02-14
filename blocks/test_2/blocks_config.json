@@ -1,0 +1,11 @@
+{
+    "name": "Another Test blocks Section 2",
+    "description": "Second test blocks to demonstrate the feature.",
+    "categoryName": "Test 2",
+    "languages": ["en", "es"],
+    "toolbox": [
+        "<block type=\"ardublockly_name_bottom\">",
+        "</block>"
+    ]
+}
+

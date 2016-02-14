@@ -417,6 +417,14 @@ var getDevMenuData = function() {
                             '$(".button-collapse").sideNav("show")');
                 }
             }, {
+                label: 'Open extra blocks menu',
+                click: function() {
+                    BrowserWindow.getFocusedWindow()
+                        .webContents
+                        .executeJavaScript(
+                            'Ardublockly.openExtraCategoriesSelect()');
+                }
+            }, {
                 type: 'separator'
             },  {
                 label: 'Test menu item',

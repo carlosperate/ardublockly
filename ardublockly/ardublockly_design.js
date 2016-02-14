@@ -319,9 +319,57 @@ Ardublockly.openSettingsModal = function() {
       opacity: .5,
       in_duration: 200,
       out_duration: 250,
-      complete: function() { Ardublockly.settingsOpen = false; } 
+      complete: function() { Ardublockly.settingsOpen = false; }
     });
   }
+};
+
+/**
+ * Opens the modal that allows selection on additional toolbox categories.
+ * @param {!element} htmlContent HTML to include in modal body.
+ */
+Ardublockly.openAdditionalBlocksModal = function(htmlContent) {
+  $('#blocks_menu_body').text('');
+  $('#blocks_menu_body').append(htmlContent);
+  $('#blocks_menu').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
+};
+
+/**
+ * Creates an HTML node with the blocks category information from arguments.
+ * @param {!string} title Text to include as category title.
+ * @param {!string} description TExt to include in as description.
+ * @param {!function} clickBind Function to bind to the tick box click.
+ * @return {!element} HTML element to display the category content.
+ */
+Ardublockly.createExtraBlocksCatHtml = function(title, description, clickBind) {
+  var tickId = title.replace(/\s+/g, '');
+  var tickHtml = document.createElement('input');
+  tickHtml.type = 'checkbox';
+  tickHtml.id = tickId;
+  tickHtml.addEventListener('click', function() {
+    clickBind(document.getElementById(tickId).checked);
+  });
+  var tickLabelHtml = document.createElement('label');
+  tickLabelHtml.htmlFor = tickId;
+  tickLabelHtml.className = 'modal_label_title';
+  tickLabelHtml.appendChild(document.createTextNode(title));
+  var separatorHtml = document.createElement('div');
+  separatorHtml.className = 'divider';
+  var descriptionHthml = document.createElement('div');
+  descriptionHthml.appendChild(document.createTextNode(description));
+
+  var htmlContent = document.createElement('div');
+  htmlContent.className = 'modal_section';
+  htmlContent.appendChild(tickHtml);
+  htmlContent.appendChild(tickLabelHtml);
+  htmlContent.appendChild(separatorHtml);
+  htmlContent.appendChild(descriptionHthml);
+  return htmlContent;
 };
 
 /**

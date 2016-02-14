@@ -207,36 +207,47 @@
   <div id="settings_dialog" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4>Settings</h4>
-      <div class="settings_div">
+      <div class="modal_section">
         <label>Compiler Location:</label>
         <input type="text" id="settings_compiler_location" readonly>
       </div>
-      <div class="settings_div">
+      <div class="modal_section">
         <label>Sketch Folder:</label>
         <input type="text" id="settings_sketch_location" readonly>
       </div>
-      <div class="settings_div">
+      <div class="modal_section">
         <label>Arduino Board:</label>
         <select name="settings_board" id="board">
           <option value="uno">Boards unknown</option>
         </select>
       </div>
-      <div class="settings_div">
+      <div class="modal_section">
         <label>COM Port:</label>
         <select name="settings_serial" id="serial_port">
           <option value="COMX">COM unknown</option>
         </select>
       </div>
-      <div class="settings_div">
+      <div class="modal_section">
         <label>Default IDE button:</label> <br>
         <select name="settings_ide" id="ide_settings">
           <option value="verify">IDE ptions unknown</option>
         </select>
       </div>
-      <div class="settings_div">
+      <div class="modal_section">
         <label>Language:</label> <br>
         <select name="settings_language" id="language"></select>
       </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="waves-effect btn-flat modal-close">Return</a>
+    </div>
+  </div>
+
+  <!-- Select Additional Blocks menu -->
+  <div id="blocks_menu" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <div><h4>Additional Blocks</h4></div>
+      <div id="blocks_menu_body"></div>
     </div>
     <div class="modal-footer">
       <a href="#" class="waves-effect btn-flat modal-close">Return</a>

@@ -483,10 +483,22 @@ ul.side-nav li.side-menu-end {
 /************************/
 /*  Modals and content  */
 /************************/
-/* Settings modal dialog */
-.settings_div {
+/* Large modal section blocks */
+.modal_section {
   margin: 24px 0px;
   width: 100%;
+}
+
+/* Blocks tick label as a title */
+.modal_label_title {
+  font-size: 1.6rem !important;
+  color: black;
+}
+
+/* Blocks modal divider */
+#blocks_menu_body .divider {
+  margin-top: 4px;
+  margin-bottom: 8px;
 }
 
 /* Arduino output modal dialog */
