@@ -59,7 +59,7 @@ Blockly.Arduino.Boards.profiles.uno = {
   pwmPins: [['3', '3'], ['5', '5'], ['6', '6'], ['9', '9'], ['10', '10'],
             ['11', '11']],
   serial: [['serial', 'Serial']],
-  serialPins: { serial: [['RX', '0'], ['TX', '1']] },
+  serialPins: { Serial: [['RX', '0'], ['TX', '1']] },
   serialSpeed: [['300', '300'], ['600', '600'], ['1200', '1200'],
                 ['2400', '2400'], ['4800', '4800'], ['9600', '9600'],
                 ['14400', '14400'], ['19200', '19200'], ['28800', '28800'],
@@ -121,10 +121,10 @@ Blockly.Arduino.Boards.profiles.mega = {
   serial: [['serial', 'Serial'], ['serial_1', 'Serial1'],
            ['serial_2', 'Serial2'], ['serial_3', 'Serial3']],
   serialPins: {
-    serial: [['TX', '0'], ['RX', '1']],
-    serial1: [['TX', '18'], ['TX', '19']],
-    serial2: [['TX', '16'], ['TX', '17']],
-    serial3: [['TX', '14'], ['TX', '15']]
+    Serial: [['TX', '0'], ['RX', '1']],
+    Serial1: [['TX', '18'], ['TX', '19']],
+    Serial2: [['TX', '16'], ['TX', '17']],
+    Serial3: [['TX', '14'], ['TX', '15']]
   },
   serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
   spi: [['SPI', 'SPI']],

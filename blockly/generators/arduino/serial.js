@@ -29,6 +29,12 @@ Blockly.Arduino['serial_print'] = function(block) {
       block, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var checkbox_name = (block.getFieldValue('NEW_LINE') == 'TRUE');
 
+  var serialPins = Blockly.Arduino.Boards.selected.serialPins[serialId];
+  for (var i = 0; i < serialPins.length; i++) {
+    Blockly.Arduino.reservePin(block, serialPins[i][1],
+        Blockly.Arduino.PinTypes.SERIAL, 'SERIAL ' + serialPins[i][0]);
+  }
+
   if (checkbox_name) {
     var code = serialId + '.println(' + content + ');\n';
   } else {
