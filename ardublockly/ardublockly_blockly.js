@@ -225,12 +225,10 @@ Ardublockly.updateToolboxLanguage = function() {
  * @param {!Element} categoryDom Toolbox category to add add the end of tree.
  */
 Ardublockly.addToolboxCategory = function(categoryTitle, categoryDom) {
-  var categoryNode = document.createElement('category');
-  categoryNode.id = 'cat' + categoryTitle.replace(/\s+/g, '');
-  categoryNode.setAttribute('name', categoryTitle);
-  categoryNode.appendChild(categoryDom.firstChild);
+  categoryDom.id = 'cat' + categoryTitle.replace(/\s+/g, '');
+  categoryDom.setAttribute('name', categoryTitle);
   Ardublockly.xmlTree.appendChild(document.createElement('sep'));
-  Ardublockly.xmlTree.appendChild(categoryNode);
+  Ardublockly.xmlTree.appendChild(categoryDom);
   Ardublockly.workspace.updateToolbox(Ardublockly.xmlTree);
 };
 

@@ -1,23 +1,25 @@
 {
     "categories": {
         "test": {
-            "name": "Test blocks",
+            "categoryName": "Test blocks",
             "description": "Test blocks to demonstrate the feature.",
-            "categoryName": "Test",
             "languages": ["en", "es"],
+            "toolboxName": "Test",
             "toolbox": [
-                "<block type=\"ardublockly_name_top\">",
-                "</block>"
+                "<category>",
+                "  <block type=\"ardublockly_name_top\"></block>",
+                "</category>"
             ]
         },
         "test_2": {
-            "name": "Another Test blocks Section 2",
+            "categoryName": "Another Test blocks Section 2",
             "description": "Second test blocks to demonstrate the feature.",
-            "categoryName": "Test 2",
             "languages": ["en", "es"],
+            "toolboxName": "Test 2",
             "toolbox": [
-                "<block type=\"ardublockly_name_bottom\">",
-                "</block>"
+                "<category>",
+                "  <block type=\"ardublockly_name_bottom\"></block>",
+                "</category>"
             ]
         }
     }

@@ -94,7 +94,14 @@ Ardublockly.getJsonData = function(fileLocation, jsonDataCb) {
   var requestCb = function() {
     if (request.readyState == 4) {
       if (request.status == 200) {
-        jsonDataCb(JSON.parse(request.responseText));
+        var jsonObj = null;
+        try {
+          jsonObj = JSON.parse(request.responseText);
+        } catch(e) {
+          console.error('Incorrectly formatted JSON data from ' + fileLocation);
+          throw e;
+        }
+        jsonDataCb(jsonObj);
       } else {
         jsonDataCb(null);
       }

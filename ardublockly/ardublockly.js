@@ -689,19 +689,52 @@ Ardublockly.importExtraBlocks = function() {
     if (jsonDataObj === null) return Ardublockly.openNotConnectedModal();
     if (jsonDataObj.categories !== undefined) {
       var head = document.getElementsByTagName('head')[0];
-      for (var categoryDir in jsonDataObj.categories) {
+      for (var catDir in jsonDataObj.categories) {
         var blocksJsLoad = document.createElement('script');
-        blocksJsLoad.src = '../blocks/' + categoryDir + '/blocks.js';
+        blocksJsLoad.src = '../blocks/' + catDir + '/blocks.js';
         head.appendChild(blocksJsLoad);
+
         var blocksLangJsLoad = document.createElement('script');
-        blocksLangJsLoad.src = '../blocks/' + categoryDir + '/msg/' +
+        blocksLangJsLoad.src = '../blocks/' + catDir + '/msg/' + 'messages.js';
             //'lang/' + Ardublockly.LANG + '.js';
-            'messages.js';
         head.appendChild(blocksLangJsLoad);
+
         var blocksGeneratorJsLoad = document.createElement('script');
-        blocksGeneratorJsLoad.src = '../blocks/' + categoryDir +
+        blocksGeneratorJsLoad.src = '../blocks/' + catDir +
             '/generator_arduino.js';
         head.appendChild(blocksGeneratorJsLoad);
+
+        // Check if the blocks add additional Ardublockly functionality
+        var extensions = jsonDataObj.categories[catDir].extensions
+        if (extensions) {
+          for (var i = 0; i < extensions.length; i++) {
+            var blockExtensionJsLoad = document.createElement('script');
+            blockExtensionJsLoad.src = '../blocks/' + catDir + '/extensions.js';
+            head.appendChild(blockExtensionJsLoad);
+            // Add function to scheduler as lazy loading has to complete first
+            setTimeout(function(category, extension) {
+              var extensionNamespaces = extension.split('.');
+              var extensionCall = window;
+              var invalidFunc = false;
+              for (var j = 0; j < extensionNamespaces.length; j++) {
+                extensionCall = extensionCall[extensionNamespaces[j]];
+                if (extensionCall === undefined) {
+                  invalidFunc = true;
+                  break;
+                }
+              }
+              if (typeof extensionCall != 'function') {
+                invalidFunc = true;
+              }
+              if (invalidFunc) {
+                throw 'Blocks ' + category.categoryName + ' extension "' +
+                      extension + '" is not a valid function.';
+              } else {
+                extensionCall();
+              }
+            }, 800, jsonDataObj.categories[catDir], extensions[i]);
+          }
+        }
       }
     }
   };
@@ -721,21 +754,21 @@ Ardublockly.openExtraCategoriesSelect = function() {
     if (jsonDataObj === null) return Ardublockly.openNotConnectedModal();
     var htmlContent = document.createElement('div');
     if (jsonDataObj.categories !== undefined) {
-      for (var categoryDir in jsonDataObj.categories) {
+      for (var catDir in jsonDataObj.categories) {
         // Function required to maintain each loop variable scope separated
         (function(cat) {
           var clickBind = function(tickValue) {
             if (tickValue) {
               var catDom = (new DOMParser()).parseFromString(
-                  cat.toolbox, 'text/xml');
-              Ardublockly.addToolboxCategory(cat.categoryName, catDom);
+                  cat.toolbox.join(''), 'text/xml').firstChild;
+              Ardublockly.addToolboxCategory(cat.toolboxName, catDom);
             } else {
-              Ardublockly.removeToolboxCategory(cat.categoryName);
+              Ardublockly.removeToolboxCategory(cat.toolboxName);
             }
           };
           htmlContent.appendChild(Ardublockly.createExtraBlocksCatHtml(
-              cat.name, cat.description, clickBind));
-        })(jsonDataObj.categories[categoryDir]);
+              cat.categoryName, cat.description, clickBind));
+        })(jsonDataObj.categories[catDir]);
       }
     }
     Ardublockly.openAdditionalBlocksModal(htmlContent);
