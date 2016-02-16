@@ -1,0 +1,28 @@
+{
+    "categoryName": "Grove",
+    "description": "Grove Modules.",
+    "languages": ["en", "es"],
+    "toolboxName": "Grove",
+    "toolbox": [
+        "<category>",
+        "  <block type=\"grove_led\">",
+        "    <field name=\"CONNECTOR\">2</field>",
+        "      <value name=\"STATE\">",
+        "        <block type=\"io_highlow\">",
+        "          <field name=\"STATE\">HIGH</field>",
+        "        </block>",
+        "      </value>",
+        "  </block>",
+        "  <block type=\"grove_button\"></block>",
+        "  <block type=\"grove_pir\"></block>",
+        "  <block type=\"grove_lcd_rgb\">",
+        "    <value name=\"LINE_1\">",
+        "      <block type=\"text\">",
+        "        <field name=\"TEXT\">Hello world!</field>",
+        "      </block>",
+        "    </value>",
+        "  </block>",
+        "</category>"
+    ],
+    "extensions": ["Blockly.Arduino.Groove.init"]
+}

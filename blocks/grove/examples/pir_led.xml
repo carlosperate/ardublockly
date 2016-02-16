@@ -1,0 +1,57 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" x="7" y="18">
+    <statement name="LOOP_FUNC">
+      <block type="controls_if">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="procedures_callreturn">
+            <mutation name="isPeopleDetected"></mutation>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="grove_led">
+            <field name="CONNECTOR">4</field>
+            <value name="STATE">
+              <block type="io_highlow">
+                <field name="STATE">HIGH</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="grove_led">
+            <field name="CONNECTOR">4</field>
+            <value name="STATE">
+              <block type="io_highlow">
+                <field name="STATE">LOW</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+  <block type="procedures_defreturn" x="12" y="317">
+    <field name="NAME">isPeopleDetected</field>
+    <statement name="STACK">
+      <block type="procedures_ifreturn">
+        <mutation value="1"></mutation>
+        <value name="CONDITION">
+          <block type="grove_pir">
+            <field name="CONNECTOR">2</field>
+          </block>
+        </value>
+        <value name="VALUE">
+          <block type="logic_boolean">
+            <field name="BOOL">TRUE</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <value name="RETURN">
+      <block type="logic_boolean">
+        <field name="BOOL">FALSE</field>
+      </block>
+    </value>
+  </block>
+</xml>
