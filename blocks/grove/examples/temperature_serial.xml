@@ -1,0 +1,39 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="serial_setup" x="81" y="18">
+    <field name="SERIAL_ID">Serial</field>
+    <field name="SPEED">9600</field>
+  </block>
+  <block type="serial_print" x="81" y="124">
+    <field name="SERIAL_ID">Serial</field>
+    <field name="NEW_LINE">TRUE</field>
+    <value name="CONTENT">
+      <block type="text_join">
+        <mutation items="3"></mutation>
+        <value name="ADD0">
+          <block type="text">
+            <field name="TEXT">Temperature is: </field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="grove_temperature">
+            <field name="CONNECTOR">A1</field>
+          </block>
+        </value>
+        <value name="ADD2">
+          <block type="text">
+            <field name="TEXT"> ºC</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="time_delay">
+        <value name="DELAY_TIME_MILI">
+          <block type="math_number">
+            <field name="NUM">500</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

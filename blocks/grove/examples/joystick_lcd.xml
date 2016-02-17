@@ -1,0 +1,40 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="grove_lcd_rgb" x="4" y="94">
+    <value name="LINE_1">
+      <block type="text_join">
+        <mutation items="4"></mutation>
+        <value name="ADD0">
+          <block type="text">
+            <field name="TEXT">x: </field>
+          </block>
+        </value>
+        <value name="ADD1">
+          <block type="grove_joystick">
+            <field name="CONNECTOR">A0</field>
+            <field name="AXIS">0</field>
+          </block>
+        </value>
+        <value name="ADD2">
+          <block type="text">
+            <field name="TEXT">; y: </field>
+          </block>
+        </value>
+        <value name="ADD3">
+          <block type="grove_joystick">
+            <field name="CONNECTOR">A0</field>
+            <field name="AXIS">1</field>
+          </block>
+        </value>
+      </block>
+    </value>
+    <next>
+      <block type="time_delay">
+        <value name="DELAY_TIME_MILI">
+          <block type="math_number">
+            <field name="NUM">500</field>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

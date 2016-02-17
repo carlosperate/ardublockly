@@ -24,13 +24,22 @@ Blockly.Msg.BLOCKS_GROVE_LED = 'set Grove LED on connector';
 Blockly.Msg.BLOCKS_GROVE_LED_TIP = 'Turns the LED On (HIGH) or Off (LOW).';
 
 /// Button block
-Blockly.Msg.BLOCKS_GROVE_BUTTON = 'read Grove Button on connector';
+Blockly.Msg.BLOCKS_GROVE_BUTTON = 'read Grove Button pressed state on connector';
 Blockly.Msg.BLOCKS_GROVE_BUTTON_TIP = 'Set to HIGH when the button is pressed, otherwise LOW.';
 
+/// Joystick block
+Blockly.Msg.BLOCKS_GROVE_JOYSTICK = 'read Grove Joystick axis';
+Blockly.Msg.BLOCKS_GROVE_JOYSTICK_2 = 'on connector';
+Blockly.Msg.BLOCKS_GROVE_JOYSTICK_TIP = 'Reads the joystick position value from 200-800.';
+
 /// PIR block
-Blockly.Msg.BLOCKS_GROVE_PIR = 'read Grove PIR on connector';
+Blockly.Msg.BLOCKS_GROVE_PIR = 'read Grove PIR state on connector';
 Blockly.Msg.BLOCKS_GROVE_PIR_TIP = 'On motion sense it outputs HIGH, otherwise LOW.';
 
+/// Temperature block
+Blockly.Msg.BLOCKS_GROVE_TEMPERATURE = 'read Grove Temperature on connector';
+Blockly.Msg.BLOCKS_GROVE_TEMPERATURE_TIP = 'Returns the temperate in ºC.';
+
 /// LCD RGB block
-Blockly.Msg.BLOCKS_GROVE_LCD_RGB = 'set LCD RGB text to';
+Blockly.Msg.BLOCKS_GROVE_LCD_RGB = 'set Grove LCD RGB text to';
 Blockly.Msg.BLOCKS_GROVE_LCD_RGB_TIP = 'Sets the text on the LCD display.';

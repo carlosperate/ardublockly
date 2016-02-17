@@ -44,7 +44,7 @@ Blockly.Blocks['grove_led'] = {
         this, 'CONNECTOR', 'groveDigital');
   },
   /**
-   * Returns a list with the connector used pins, either one or both.
+   * Returns a list with the connector used pins. For this block just the first.
    * @this Blockly.Block
    * @return {!Array<string>} List of used pins by this block.
    */
@@ -72,8 +72,48 @@ Blockly.Blocks['grove_button'] = {
   },
   /** Updates the content of the the pin related fields. */
   updateFields: Blockly.Blocks['grove_led'].updateFields,
-  /** Returns a list with the connector used pins, either one or both. */
+  /** Returns a list with the connector pins used. For this, just the first. */
   connectorPinUsage: Blockly.Blocks['grove_led'].connectorPinUsage,
+};
+
+Blockly.Blocks['grove_joystick'] = {
+  /**
+   * Grove Joystick module block definition.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('http://www.seeedstudio.com/wiki/Grove_-_Thumb_Joystick');
+    this.setColour(Blockly.Blocks.groove.HUE);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(
+            '/blocks/grove/img/joystick.png', 32, 32))
+        .appendField(Blockly.Msg.BLOCKS_GROVE_JOYSTICK)
+        .appendField(new Blockly.FieldDropdown(
+            [['x', '0'], ['y', '1']]), 'AXIS')
+        .appendField(Blockly.Msg.BLOCKS_GROVE_JOYSTICK_2)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.groveAnalog), 'CONNECTOR');
+    this.setOutput(true, Blockly.Types.NUMBER.basicType);
+    this.setTooltip(Blockly.Msg.BLOCKS_GROVE_JOYSTICK_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'CONNECTOR', 'groveAnalog');
+  },
+  /**
+   * Returns a list with the connector used pins. For this block both analogues.
+   * @this Blockly.Block
+   * @return {!Array<string>} List of used pins by this block.
+   */
+  connectorPinUsage: function() {
+    var x = this.getFieldValue('CONNECTOR');
+    var y = 'A' + (parseInt(x.replace(/^\D+/g, '')) + 1);
+    return [x, y];
+  }
 };
 
 Blockly.Blocks['grove_pir'] = {
@@ -95,7 +135,31 @@ Blockly.Blocks['grove_pir'] = {
   },
   /** Updates the content of the the pin related fields. */
   updateFields: Blockly.Blocks['grove_led'].updateFields,
-  /** Returns a list with the connector used pins, either one or both. */
+  /** Returns a list with the connector pins used. For this, just the first. */
+  connectorPinUsage: Blockly.Blocks['grove_led'].connectorPinUsage,
+};
+
+Blockly.Blocks['grove_temperature'] = {
+  /**
+   * Grove Temperature Sensor module block definition.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(
+          'http://www.seeedstudio.com/wiki/Grove_-_Temperature_Sensor_V1.2');
+    this.setColour(Blockly.Blocks.groove.HUE);
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldImage(
+            '/blocks/grove/img/temperature.png', 32, 32))
+        .appendField(Blockly.Msg.BLOCKS_GROVE_TEMPERATURE)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.groveAnalog), 'CONNECTOR');
+    this.setOutput(true, Blockly.Types.NUMBER.basicType);
+    this.setTooltip(Blockly.Msg.BLOCKS_GROVE_TEMPERATURE_TIP);
+  },
+  /** Updates the content of the the pin related fields.In this case analog. */
+  updateFields: Blockly.Blocks['grove_joystick'].updateFields,
+  /** Returns a list with the connector pins used. For this, just the first. */
   connectorPinUsage: Blockly.Blocks['grove_led'].connectorPinUsage,
 };
 

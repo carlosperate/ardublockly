@@ -56,9 +56,34 @@ Blockly.Arduino['grove_button'] = function(block) {
 };
 
 /**
+ * Function for reading Grove Joystick axis value. Connector uses both pins.
+ * Arduino code: setup { pinMode(X, INPUT);
+                         pinMode(Y, INPUT); }
+ *               loop  { digitalRead(X or Y);  }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['grove_joystick'] = function(block) {
+  var pins = block.connectorPinUsage();
+  var axis = block.getFieldValue('AXIS');
+  Blockly.Arduino.reservePin(block, pins[0],
+      Blockly.Arduino.PinTypes.GROVE_JOYSTICK, 'this Grove module');
+  Blockly.Arduino.reservePin(block, pins[1],
+      Blockly.Arduino.PinTypes.GROVE_JOYSTICK, 'this Grove module');
+
+  var pinSetupCode = 'pinMode(' + pins[0] + ', INPUT);';
+  Blockly.Arduino.addSetup('grove_joystic_' + pins[0], pinSetupCode, false);
+  pinSetupCode = 'pinMode(' + pins[1] + ', INPUT);';
+  Blockly.Arduino.addSetup('grove_joystick_' + pins[1], pinSetupCode, false);
+
+  var code = 'analogRead(' + pins[axis] + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/**
  * Function for reading Grove PIR sensor state. Connector uses only 1 pin.
  * Arduino code: setup { pinMode(X, INPUT); }
- *               loop  { digitalRead(X);     }
+ *               loop  { digitalRead(X);    }
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
@@ -75,9 +100,33 @@ Blockly.Arduino['grove_pir'] = function(block) {
 };
 
 /**
+ * Function for reading Grove Temperature sensor. Connector uses both one pin.
+ * Value is calculate on centigrades based on data sheet information.
+ * Arduino code: setup { pinMode(X, INPUT) }
+ *               loop  { 1.0/(log((1023.0/((float)analogRead(X))-1.0))/
+                         4275+1/298.15)-273.15;  }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['grove_temperature'] = function(block) {
+  var pins = block.connectorPinUsage();
+  Blockly.Arduino.reservePin(block, pins[0],
+      Blockly.Arduino.PinTypes.GROVE_TEMPERATURE, 'this Grove module');
+
+  var pinSetupCode = 'pinMode(' + pins[0] + ', INPUT);';
+  Blockly.Arduino.addSetup('grove_temperature_' + pins[0], pinSetupCode, false);
+
+  var code = '1.0/(log((1023.0/((float)analogRead(' + pins[0] + '))-1.0))' +
+             '/4275+1/298.15)-273.15';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/**
  * Function setting a Grove LCD RGB Backlight message. Connector uses I2C.
- * Arduino code: setup { pinMode(X, INPUT); }
- *               loop  { digitalRead(X);     }
+ * Arduino code: setup { lcd.begin(16, 2);
+                         lcd.setRGB(0, 255, 0); }
+ *               loop  { lcd.clear();
+                         lcd.print(X); }
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
@@ -98,6 +147,6 @@ Blockly.Arduino['grove_lcd_rgb'] = function(block) {
   Blockly.Arduino.addSetup('grove_lcd_rgb_init', 'lcd.begin(16, 2);', false);
   Blockly.Arduino.addSetup('grove_lcd_rgb_colour', 'lcd.setRGB(0, 255, 0);');
 
-  var code = 'lcd.clear();\nlcd.print(' + line1Text + ');';
+  var code = 'lcd.clear();\nlcd.print(' + line1Text + ');\n';
   return code;
 };
