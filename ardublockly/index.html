@@ -12,11 +12,12 @@
   <link rel="stylesheet" href="prettify/arduino.css">
   <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
 
-  <!-- Ardublockly - For now uncompressed files -->
-  <!--script src="../blockly/blockly_compressed.js"></script>
+  <!-- Ardublockly - These three files contain the compress version -->
+  <script src="../blockly/blockly_compressed.js"></script>
   <script src="../blockly/blocks_compressed.js"></script>
-  <script src="../blockly/arduino_compressed.js"></script-->
-  <script src="../blockly/blockly_uncompressed.js"></script>
+  <script src="../blockly/arduino_compressed.js"></script>
+  <!-- To use the uncompressed version comment out the above and comment in the ones below -->
+  <!--script src="../blockly/blockly_uncompressed.js"></script>
   <script src="../blockly/blocks/logic.js"></script>
   <script src="../blockly/blocks/loops.js"></script>
   <script src="../blockly/blocks/math.js"></script>
@@ -49,8 +50,9 @@
   <script src="../blockly/generators/arduino/stepper.js"></script>
   <script src="../blockly/generators/arduino/text.js"></script>
   <script src="../blockly/generators/arduino/time.js"></script>
-  <script src="../blockly/generators/arduino/variables.js"></script>
-  <!-- Default language js files, user selection appended to head -->
+  <script src="../blockly/generators/arduino/variables.js"></script-->
+
+  <!-- Default language js files, user selection appended to head on load -->
   <script src="../blockly/msg/js/en.js"></script>
   <script src="msg/en.js"></script>
 </head>
@@ -281,19 +283,15 @@
   <!-- Local Server Alert to be shown if Ardublockly Server is not running. -->
   <div id="not_running_dialog" class="modal">
     <div class="modal-content">
-      <h4 id="gen_alert_title">Ardublockly not running locally</h4>
-      <p>For Ardublockly to work correctly, the Ardublockly server must be
-      running locally on your computer.</p>
+      <h4 id="gen_alert_title">Ardublockly application not running</h4>
+      <p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>
       <p>If you are using an online version you will not be able to configure
       the settings nor load the blocks code into an Arduino.</p>
-      <p>Installation instruction can be found in the
-      <a href="https://github.com/carlosperate/ardublockly">Ardublockly
-      repository</a>.</p>
-      <p>If you have Ardublockly already installed, make sure the "<i>setup.py</i> or
-      the "<i>ardublockly_win.bat</i>" program is running.</p>
+      <p>Installation instruction can be found in the <a href="https://github.com/carlosperate/ardublockly">Ardublockly repository</a>.</p>
+      <p>If you have Ardublockly already installed, make sure the application is running correctly.</p>
     </div>
-    <div>
-      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close" style="float:right;margin-right:48px">Okay</a>
+    <div class="modal-footer">
+      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close">Okay</a>
     </div>
   </div>
 
