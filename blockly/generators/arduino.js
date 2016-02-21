@@ -91,7 +91,7 @@ Blockly.Arduino.DEF_FUNC_NAME = Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_;
 Blockly.Arduino.init = function(workspace) {
   // Create a dictionary of definitions to be printed at the top of the sketch
   Blockly.Arduino.includes_ = Object.create(null);
-  // Create a dictionary of definitions to be printed after variable definitions
+  // Create a dictionary of global definitions to be printed after variables
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of functions from the code generator
   Blockly.Arduino.codeFunctions_ = Object.create(null);
@@ -259,7 +259,7 @@ Blockly.Arduino.reservePin = function(block, pin, pinType, warningTag) {
     if (Blockly.Arduino.pins_[pin] != pinType) {
       block.setWarningText(
           'Pin ' + pin + ' is needed for ' + warningTag + ' as pin ' + pinType +
-          '. Already used as ' + Blockly.Arduino.pins_[pin] + '.', warningTag);
+          '.\nAlready used as ' + Blockly.Arduino.pins_[pin] + '.', warningTag);
     } else {
       block.setWarningText(null, warningTag);
     }
@@ -361,8 +361,8 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
       return 'undefined';
     case Blockly.Types.CHILD_BLOCK_MISSING.typeName:
       // If no block connected default to int, change for easier debugging
-      return 'ChildBlockMissing';
-      //return 'int';
+      //return 'ChildBlockMissing';
+      return 'int';
     default:
       return 'Invalid Blockly Type';
     }

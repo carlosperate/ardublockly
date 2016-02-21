@@ -29,7 +29,7 @@ Ardublockly.init = function() {
   // Inject Blockly into content_blocks and fetch additional blocks
   Ardublockly.injectBlockly(document.getElementById('content_blocks'),
       Ardublockly.TOOLBOX_XML, '../blockly/');
-  Ardublockly.importExtraBlocks();
+  //Ardublockly.importExtraBlocks();
 
   Ardublockly.designJsInit();
   Ardublockly.initialiseIdeButtons();
@@ -667,7 +667,11 @@ Ardublockly.isToolboxVisible = function() {
   return Ardublockly.TOOLBAR_SHOWING_;
 };
 
-/** Lazy loads the additional blocks from the ./block directory. */
+/**
+ * Lazy loads the additional block JS files from the ./block directory.
+ * Initialises any additional Ardublockly extensions.
+ * TODO: Loads the examples into the examples modal
+ */
 Ardublockly.importExtraBlocks = function() {
   /**
    * Parses the JSON data to find the block and languages js files.
