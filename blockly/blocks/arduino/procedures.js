@@ -23,7 +23,7 @@ Blockly.Blocks['arduino_functions'] = {
    */
   init: function() {
     this.appendDummyInput()
-        .appendField('Arduino run once:');
+        .appendField('Arduino run first:');
     this.appendStatementInput('SETUP_FUNC');
     this.appendDummyInput()
         .appendField('Arduino loop forever:');

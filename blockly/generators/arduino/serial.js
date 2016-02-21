@@ -40,7 +40,6 @@ Blockly.Arduino['serial_print'] = function(block) {
   } else {
     var code = serialId + '.print(' + content + ');\n';
   }
-
   return code;
 };
 

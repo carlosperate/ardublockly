@@ -30,7 +30,7 @@ Blockly.Blocks['servo_write'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoWrite');
     this.setColour(Blockly.Blocks.servo.HUE);
     this.appendDummyInput()
-        .appendField('Set SERVO from Pin')
+        .appendField('set SERVO from Pin')
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
     this.setInputsInline(false);
@@ -63,7 +63,7 @@ Blockly.Blocks['servo_read'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoRead');
     this.setColour(Blockly.Blocks.servo.HUE);
     this.appendDummyInput()
-        .appendField('Read SERVO from PIN#')
+        .appendField('read SERVO from PIN#')
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
     this.setOutput(true, Blockly.Types.NUMBER.basicType);

@@ -24,7 +24,7 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['io_digitalwrite'] = function(block) {
   var pin = block.getFieldValue('PIN');
   var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
@@ -65,7 +65,7 @@ Blockly.Arduino['io_digitalread'] = function(block) {
 Blockly.Arduino['io_builtin_led'] = function(block) {
   var pin = block.getFieldValue('BUILT_IN_LED');
   var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');

@@ -37,7 +37,7 @@ Blockly.Blocks['io_digitalwrite'] = {
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip('Write digital value to a specific Port.');
+    this.setTooltip('Write digital value to a specific pin.');
   },
   /**
    * Updates the content of the the pin related fields.
