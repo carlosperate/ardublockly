@@ -609,8 +609,7 @@ Ardublockly.XmlTextareaToBlocks = function() {
  * @type {!String}
  * @private
  */
-Ardublockly.PREVIOUS_ARDUINO_CODE_ =
-    'void setup() {\n\n}\n\n\nvoid loop() {\n\n}';
+Ardublockly.PREV_ARDUINO_CODE_ = 'void setup() {\n\n}\n\n\nvoid loop() {\n\n}';
 
 /**
  * Populate the Arduino Code and Blocks XML panels with content generated from
@@ -618,38 +617,28 @@ Ardublockly.PREVIOUS_ARDUINO_CODE_ =
  */
 Ardublockly.renderContent = function() {
   // Only regenerate the code if a block is not being dragged
-  if (Ardublockly.blocklyIsDragging()) {
-    return;
-  }
+  if (Ardublockly.blocklyIsDragging()) return;
 
   // Render Arduino Code with latest change highlight and syntax highlighting
   var arduinoCode = Ardublockly.generateArduino();
-  if (arduinoCode !== Ardublockly.PREVIOUS_ARDUINO_CODE_) {
-    var arduinoContent = document.getElementById('content_arduino');
-    // Sets content in case of no pretify and serves as a fast way to scape html
-    arduinoContent.textContent = arduinoCode;
-    arduinoCode = arduinoContent.innerHTML;
-    if (typeof prettyPrintOne == 'function') {
-      var diff = JsDiff.diffWords(Ardublockly.PREVIOUS_ARDUINO_CODE_,
-                                  arduinoCode);
-      var resultStringArray = [];
-      for (var i = 0; i < diff.length; i++) {
-        if (diff[i].added) {
-          resultStringArray.push(
+  if (arduinoCode !== Ardublockly.PREV_ARDUINO_CODE_) {
+    var diff = JsDiff.diffWords(Ardublockly.PREV_ARDUINO_CODE_, arduinoCode);
+    var resultStringArray = [];
+    for (var i = 0; i < diff.length; i++) {
+      if (diff[i].added) {
+        resultStringArray.push(
             '<span class="code_highlight_new">' + diff[i].value + '</span>');
-        } else if (!diff[i].removed) {
-          resultStringArray.push(diff[i].value);
-        }
+      } else if (!diff[i].removed) {
+        resultStringArray.push(diff[i].value);
       }
-      var codeHtml = prettyPrintOne(resultStringArray.join(''), 'cpp', false);
-      arduinoContent.innerHTML = codeHtml;
     }
-    Ardublockly.PREVIOUS_ARDUINO_CODE_ = arduinoCode;
+    document.getElementById('content_arduino').innerHTML =
+        prettyPrintOne(resultStringArray.join(''), 'cpp', false);
+    Ardublockly.PREV_ARDUINO_CODE_ = arduinoCode;
   }
 
   // Generate plain XML into element
-  var xmlContent = document.getElementById('content_xml');
-  xmlContent.value = Ardublockly.generateXml();
+  document.getElementById('content_xml').value = Ardublockly.generateXml();
 };
 
 /**
