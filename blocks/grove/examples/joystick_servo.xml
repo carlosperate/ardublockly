@@ -1,0 +1,75 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" x="11" y="42">
+    <statement name="LOOP_FUNC">
+      <block type="variables_set">
+        <field name="VAR">angle</field>
+        <value name="VALUE">
+          <block type="base_map">
+            <value name="NUM">
+              <block type="grove_joystick">
+                <field name="AXIS">0</field>
+                <field name="CONNECTOR">A0</field>
+              </block>
+            </value>
+            <value name="DMAX">
+              <block type="math_number">
+                <field name="NUM">180</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="servo_write">
+            <field name="SERVO_PIN">9</field>
+            <value name="SERVO_ANGLE">
+              <block type="variables_get">
+                <field name="VAR">angle</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="logic_compare">
+                    <field name="OP">GT</field>
+                    <value name="A">
+                      <block type="grove_joystick">
+                        <field name="AXIS">0</field>
+                        <field name="CONNECTOR">A0</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number">
+                        <field name="NUM">1000</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="grove_led">
+                    <field name="CONNECTOR">4</field>
+                    <value name="STATE">
+                      <block type="io_highlow">
+                        <field name="STATE">HIGH</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="grove_led">
+                    <field name="CONNECTOR">4</field>
+                    <value name="STATE">
+                      <block type="io_highlow">
+                        <field name="STATE">LOW</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

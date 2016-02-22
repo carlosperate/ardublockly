@@ -32,23 +32,12 @@
         },
         "test": {
             "categoryName": "Test blocks",
-            "description": "Test blocks to demonstrate the feature.",
+            "description": "Test blocks to demonstrate this feature.",
             "languages": ["en", "es"],
             "toolboxName": "Test",
             "toolbox": [
                 "<category>",
                 "  <block type=\"ardublockly_name_top\"></block>",
-                "</category>"
-            ]
-        },
-        "test_2": {
-            "categoryName": "Another Test blocks Section 2",
-            "description": "Second test blocks to demonstrate the feature.",
-            "languages": ["en", "es"],
-            "toolboxName": "Test 2",
-            "toolbox": [
-                "<category>",
-                "  <block type=\"ardublockly_name_bottom\"></block>",
                 "</category>"
             ]
         }
