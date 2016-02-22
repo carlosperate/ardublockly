@@ -1,22 +1,20 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Block for the Arduino functions.
- *               The Arduino built in functions syntax can be found at:
- *               https://arduino.cc/en/Reference/HomePage
- *
- * TODO: This block can be improved to set the new range properly.
+ *     The Arduino built in functions syntax can be found at:
+ *     https://arduino.cc/en/Reference/HomePage
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.procedures');
-
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.procedures.HUE = 290;
+Blockly.Blocks.procedures.HUE = 290;
 
 Blockly.Blocks['arduino_functions'] = {
   /**
@@ -25,13 +23,13 @@ Blockly.Blocks['arduino_functions'] = {
    */
   init: function() {
     this.appendDummyInput()
-        .appendField('Arduino run once:');
+        .appendField('Arduino run first:');
     this.appendStatementInput('SETUP_FUNC');
     this.appendDummyInput()
         .appendField('Arduino loop forever:');
     this.appendStatementInput('LOOP_FUNC');
     this.setInputsInline(false);
-    this.setColour(Blockly.Blocks.Arduino.procedures.HUE);
+    this.setColour(Blockly.Blocks.procedures.HUE);
     this.setTooltip('Defines the Arduino setup() and loop() functions.');
     this.setHelpUrl('https://arduino.cc/en/Reference/Loop');
     this.contextMenu = false;

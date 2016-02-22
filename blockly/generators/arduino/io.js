@@ -1,10 +1,11 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
- * @fileoverview Code generator Arduino Digital and Analogue input/output
- *               blocks. The Arduino built in functions syntax can be found at:
- *               http://arduino.cc/en/Reference/HomePage
+ */
+
+/**
+ * @fileoverview Code generator for Arduino Digital and Analogue input/output.
+ *     Arduino built in function docs: http://arduino.cc/en/Reference/HomePage
  */
 'use strict';
 
@@ -23,7 +24,7 @@ goog.require('Blockly.Arduino');
 Blockly.Arduino['io_digitalwrite'] = function(block) {
   var pin = block.getFieldValue('PIN');
   var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
@@ -31,7 +32,7 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'digitalWrite(' + pin + ',' + stateOutput + ');\n';
+  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
 };
 
@@ -64,7 +65,7 @@ Blockly.Arduino['io_digitalread'] = function(block) {
 Blockly.Arduino['io_builtin_led'] = function(block) {
   var pin = block.getFieldValue('BUILT_IN_LED');
   var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || '0';
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');
@@ -72,7 +73,7 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'digitalWrite(' + pin + ',' + stateOutput + ');\n';
+  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
 };
 
@@ -102,7 +103,7 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
     block.setWarningText(null, 'pwm_value');
   }
 
-  var code = 'analogWrite(' + pin + ',' + stateOutput + ');\n';
+  var code = 'analogWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
 };
 

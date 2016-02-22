@@ -16,6 +16,12 @@ var Ardublockly = Ardublockly || {};
 Ardublockly.workspace = null;
 
 /**
+ * Blockly workspace toolbox XML.
+ * @type Element
+ */
+Ardublockly.xmlTree = null;
+
+/**
  * Injects Blockly into a given HTML element. Toolbox XMl has to be a string.
  * @param {!Element} blocklyEl Element to inject Blockly into.
  * @param {!string} toolboxXml String containing the toolbox XML content.
@@ -26,9 +32,9 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxXml, blocklyPath) {
   if (blocklyPath.substr(-1) === '/') {
     blocklyPath = blocklyPath.slice(0, -1);
   }
-  var xmlTree = Blockly.Xml.textToDom(toolboxXml);
+  Ardublockly.xmlTree = Blockly.Xml.textToDom(toolboxXml);
   // The Toolbox menu language is edited directly from the XML nodes.
-  Ardublockly.updateToolboxLanguage(xmlTree);
+  Ardublockly.updateToolboxLanguage();
   Ardublockly.workspace = Blockly.inject(blocklyEl, {
       collapse: true,
       comments: true,
@@ -40,7 +46,7 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxXml, blocklyPath) {
       rtl: false,
       scrollbars: true,
       sounds: true,
-      toolbox: xmlTree,
+      toolbox: Ardublockly.xmlTree,
       trashcan: true,
       zoom: {
         controls: true,
@@ -60,59 +66,45 @@ Ardublockly.bindBlocklyEventListeners = function() {
   Ardublockly.workspace.addChangeListener(Ardublockly.renderContent);
 };
 
-/**
- * Loads an XML file from the server and adds the blocks into the Blockly
- * workspace.
- * @param {!string} xmlFile XML file path in a reachable server (no local path).
- * @param {!function} callbackFileLoaded Function to be called once the file is
- *     loaded.
- * @param {!function} callbackConectonError Function to be called if there is a
- *     connection error to the XML server.
- */
-Ardublockly.loadXmlBlockFile = function(xmlFile, callbackFileLoaded,
-    callbackConectonError) {
-  // Create a an XML HTTP request
-  var request = Ardublockly.ajaxRequest();
-
-  // If file run locally Internet explorer fails here
-  try {
-    request.open('GET', xmlFile, true);
-  } catch (e) {
-    callbackConectonError();
-  }
-
-  // Once file is open, parse the XML into the workspace
-  request.onreadystatechange = function() {
-    if ((request.readyState == 4) && (request.status == 200)) {
-      var success = Ardublockly.replaceBlocksfromXml(request.responseText);
-      callbackFileLoaded(success);
-    }
-  };
-
-  // If file run locally Chrome will fail here
-  try {
-    request.send(null);
-  } catch (e) {
-    callbackConectonError();
-  }
-};
-
-/**
- * Generates the Arduino code from the Blockly workspace.
- * @return {!string} Arduino code string.
- */
+/** @return {!string} Generated Arduino code from the Blockly workspace. */
 Ardublockly.generateArduino = function() {
   return Blockly.Arduino.workspaceToCode(Ardublockly.workspace);
 };
 
-/**
- * Generates the XML DOM and returns it as a string.
- * @return {!string} XML code string.
- */
+/** @return {!string} Generated XML code from the Blockly workspace. */
 Ardublockly.generateXml = function() {
   var xmlDom = Blockly.Xml.workspaceToDom(Ardublockly.workspace);
   var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
   return xmlText;
+};
+
+/**
+ * Loads an XML file from the server and replaces the current blocks into the
+ * Blockly workspace.
+ * @param {!string} xmlFile XML file path in a reachable server (no local path).
+ * @param {!function} cbSuccess Function to be called once the file is loaded.
+ * @param {!function} cbError Function to be called if there is a connection
+ *     error to the XML server.
+ */
+Ardublockly.loadXmlBlockFile = function(xmlFile, cbSuccess, cbError) {
+  var request = Ardublockly.ajaxRequest();
+  var requestCb = function() {
+    if (request.readyState == 4) {
+      if (request.status == 200) {
+        var success = Ardublockly.replaceBlocksfromXml(request.responseText);
+        cbSuccess(success);
+      } else {
+        cbError();
+      }
+    }
+  };
+  try {
+    request.open('GET', xmlFile, true);
+    request.onreadystatechange = requestCb;
+    request.send(null);
+  } catch (e) {
+    cbError();
+  }
 };
 
 /**
@@ -198,6 +190,11 @@ Ardublockly.discardAllBlocks = function() {
   }
 };
 
+/** @return {!boolean} Indicates if the Blockly workspace has blocks. */
+Ardublockly.isWorkspaceEmpty = function() {
+  return Ardublockly.workspace.getAllBlocks().length ? false : true;
+};
+
 /**
  * Changes the Arduino board profile if different from the currently set one.
  * @param {string} newBoard Name of the new profile to set.
@@ -208,21 +205,50 @@ Ardublockly.changeBlocklyArduinoBoard = function(newBoard) {
   }
 };
 
-/**
- * Update the toolbox categories language.
- * @param {!Element} xmlTree Toolbox tree of XML elements.
- */
-Ardublockly.updateToolboxLanguage = function(xmlTree) {
+/** Update the toolbox categories language. */
+Ardublockly.updateToolboxLanguage = function() {
   var categories = ['catLogic', 'catLoops', 'catMath', 'catText',
                     'catVariables', 'catFunctions', 'catInputOutput',
                     'catTime', 'catMotors', 'catComms'];
-  var categoryNodes = xmlTree.getElementsByTagName('category');
+  var categoryNodes = Ardublockly.xmlTree.getElementsByTagName('category');
   for (var i = 0, cat; cat = categoryNodes[i]; i++) {
     var catId = cat.getAttribute('id');
     if (MSG[catId]) {
       cat.setAttribute('name', MSG[catId]);
     }
   }
+};
+
+/**
+ * Adds a category to the current toolbox.
+ * @param {!string} categoryTitle Toolbox category title.
+ * @param {!Element} categoryDom Toolbox category to add add the end of tree.
+ */
+Ardublockly.addToolboxCategory = function(categoryTitle, categoryDom) {
+  categoryDom.id = 'cat' + categoryTitle.replace(/\s+/g, '');
+  categoryDom.setAttribute('name', categoryTitle);
+  Ardublockly.xmlTree.appendChild(document.createElement('sep'));
+  Ardublockly.xmlTree.appendChild(categoryDom);
+  Ardublockly.workspace.updateToolbox(Ardublockly.xmlTree);
+};
+
+/**
+ * Removes a category to the current toolbox.
+ * @param {!String} categoryTitle Toolbox category name to remove from tree.
+ */
+Ardublockly.removeToolboxCategory = function(categoryTitle) {
+  var categoryId = 'cat' + categoryTitle.replace(/\s+/g, '');
+  var categoryNodes = Ardublockly.xmlTree.getElementsByTagName('category');
+  for (var i = 0; i < categoryNodes.length; i++) {
+    if (categoryNodes[i].getAttribute('id') === categoryId) {
+      var previousNode = categoryNodes[i].previousElementSibling;
+      Ardublockly.xmlTree.removeChild(categoryNodes[i]);
+      if (previousNode && previousNode.nodeName == 'sep') {
+        Ardublockly.xmlTree.removeChild(previousNode);
+      }
+    }
+  }
+  Ardublockly.workspace.updateToolbox(Ardublockly.xmlTree);
 };
 
 /** Closes the toolbox block container sub-menu. */
@@ -237,10 +263,7 @@ Ardublockly.blocklyToolboxWidth = function() {
 
 /** @return {!boolean} Indicates if a block is currently being dragged. */
 Ardublockly.blocklyIsDragging = function() {
-  if (Blockly.dragMode_ != 0) {
-    return true;
-  }
-  return false;
+  return (Blockly.dragMode_ != 0) ? true : false;
 };
 
 /** Wraps the blockly 'cut' functionality. */
@@ -285,7 +308,7 @@ Ardublockly.ajaxRequest = function() {
       try {
         request = new ActiveXObject('Microsoft.XMLHTTP');
       } catch (e) {
-        throw 'Your browser does not support AJAX. Cannot load toolbox';
+        throw 'Your browser does not support AJAX';
         request = null;
       }
     }

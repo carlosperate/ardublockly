@@ -1,7 +1,9 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Generating Arduino code for the logic blocks.
  */
 'use strict';
@@ -130,6 +132,9 @@ Blockly.Arduino['logic_null'] = function(block) {
  * Arduino code: loop { NULL }
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
+ *
+ * TODO: Check types of THEN and ELSE blocks and add warning to this block if
+ *       they are different from each other.
  */
 Blockly.Arduino['logic_ternary'] = function(block) {
   var valueIf = Blockly.Arduino.valueToCode(block, 'IF',

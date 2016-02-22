@@ -1,17 +1,19 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * Based on work of Fred Lin (gasolin@gmail.com) for Blocklyduino.
  *
- * @fileoverview Helper functions for generating Arduino language (C++) for
- *               blocks.
+ * @fileoverview Helper functions for generating Arduino language (C++).
  */
 'use strict';
 
 goog.provide('Blockly.Arduino');
 
 goog.require('Blockly.Generator');
+goog.require('Blockly.StaticTyping');
 
 
 /**
@@ -19,6 +21,7 @@ goog.require('Blockly.Generator');
  * @type {!Blockly.Generator}
  */
 Blockly.Arduino = new Blockly.Generator('Arduino');
+Blockly.Arduino.StaticTyping = new Blockly.StaticTyping();
 
 /**
  * List of illegal variable names.
@@ -88,7 +91,7 @@ Blockly.Arduino.DEF_FUNC_NAME = Blockly.Arduino.FUNCTION_NAME_PLACEHOLDER_;
 Blockly.Arduino.init = function(workspace) {
   // Create a dictionary of definitions to be printed at the top of the sketch
   Blockly.Arduino.includes_ = Object.create(null);
-  // Create a dictionary of definitions to be printed after variable definitions
+  // Create a dictionary of global definitions to be printed after variables
   Blockly.Arduino.definitions_ = Object.create(null);
   // Create a dictionary of functions from the code generator
   Blockly.Arduino.codeFunctions_ = Object.create(null);
@@ -110,8 +113,8 @@ Blockly.Arduino.init = function(workspace) {
   }
 
   // Iterate through to capture all blocks types and set the function arguments
-  var varsWithTypes = Blockly.StaticTyping.getAllVarsWithTypes(workspace);
-  Blockly.StaticTyping.setProcedureArgs(workspace, varsWithTypes);
+  var varsWithTypes = Blockly.Arduino.StaticTyping.collectVarsWithTypes(workspace);
+  Blockly.Arduino.StaticTyping.setProcedureArgs(workspace, varsWithTypes);
 
   // Set variable declarations with their Arduino type in the defines dictionary
   var variableDeclarations = [];
@@ -256,7 +259,7 @@ Blockly.Arduino.reservePin = function(block, pin, pinType, warningTag) {
     if (Blockly.Arduino.pins_[pin] != pinType) {
       block.setWarningText(
           'Pin ' + pin + ' is needed for ' + warningTag + ' as pin ' + pinType +
-          '. Already used as ' + Blockly.Arduino.pins_[pin] + '.', warningTag);
+          '.\nAlready used as ' + Blockly.Arduino.pins_[pin] + '.', warningTag);
     } else {
       block.setWarningText(null, warningTag);
     }
@@ -341,32 +344,34 @@ Blockly.Arduino.scrub_ = function(block, code) {
  * @private
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
-  switch (typeBlockly) {
-    case Blockly.StaticTyping.BlocklyType.UNDEF:
-      return 'undefined';
-    case Blockly.StaticTyping.BlocklyType.UNSPECIFIED:
-      return 'unspecified';
-    case Blockly.StaticTyping.BlocklyType.NULL:
-      return 'void';
-    case Blockly.StaticTyping.BlocklyType.NUMBER:
+  switch (typeBlockly.typeName) {
+    case Blockly.Types.NUMBER.typeName:
       return 'int';
-    case Blockly.StaticTyping.BlocklyType.INTEGER:
-      return 'int';
-    case Blockly.StaticTyping.BlocklyType.DECIMAL:
+    case Blockly.Types.DECIMAL.typeName:
       return 'float';
-    case Blockly.StaticTyping.BlocklyType.TEXT:
+    case Blockly.Types.TEXT.typeName:
       return 'String';
-    case Blockly.StaticTyping.BlocklyType.CHARACTER:
+    case Blockly.Types.CHARACTER.typeName:
       return 'char';
-    case Blockly.StaticTyping.BlocklyType.BOOLEAN:
+    case Blockly.Types.BOOLEAN.typeName:
       return 'boolean';
-    case Blockly.StaticTyping.BlocklyType.ERROR:
-      return 'ErrorArdu';
-    case Blockly.StaticTyping.BlocklyType.CHILD_BLOCK_MISSING:
+    case Blockly.Types.NULL.typeName:
+      return 'void';
+    case Blockly.Types.UNDEF.typeName:
+      return 'undefined';
+    case Blockly.Types.CHILD_BLOCK_MISSING.typeName:
       // If no block connected default to int, change for easier debugging
-      return 'ChildBlockMissing';
-      //return 'int';
+      //return 'ChildBlockMissing';
+      return 'int';
     default:
       return 'Invalid Blockly Type';
     }
 };
+
+/** Used for not-yet-implemented block code generators */
+Blockly.Arduino.noGeneratorCodeInline = function() {
+  return ['', Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/** Used for not-yet-implemented block code generators */
+Blockly.Arduino.noGeneratorCodeLine = function() { return ''; };

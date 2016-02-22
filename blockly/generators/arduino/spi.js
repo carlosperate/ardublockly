@@ -1,10 +1,11 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Arduino ode generator for SPI library blocks.
- *               The Arduino SPI functions syntax can be found in:
- *               http://arduino.cc/en/Reference/SPI
+ *     The Arduino SPI library docs: http://arduino.cc/en/Reference/SPI
  */
 'use strict';
 
@@ -65,11 +66,10 @@ Blockly.Arduino['spi_transfer'] = function(block) {
   Blockly.Arduino.addSetup('spi_begin', spiId + '.begin();', false);
 
   // Reserve SPI pins MOSI, MISO, and SCK
-  for (var i = 0; i < Blockly.Arduino.Boards.selected.spiPins.length; i++) {
-    Blockly.Arduino.reservePin(block,
-        Blockly.Arduino.Boards.selected.spiPins[i][1],
-        Blockly.Arduino.PinTypes.SPI,
-        'SPI ' + Blockly.Arduino.Boards.selected.spiPins[i][0]);
+  var spiPins = Blockly.Arduino.Boards.selected.spiPins[spiId];
+  for (var i = 0; i < spiPins.length; i++) {
+    Blockly.Arduino.reservePin(block, spiPins[i][1],
+        Blockly.Arduino.PinTypes.SPI, 'SPI ' + spiPins[i][0]);
   }
 
   // Configure the Slave Select as a normal output if a pin is used

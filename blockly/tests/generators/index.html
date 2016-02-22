@@ -145,7 +145,7 @@ function toXml() {
 
 function toArduino() {
   var code = '\'use strict\';\n\n'
-  code += Blockly.Arduino.workspaceToCode();
+  code += Blockly.Arduino.workspaceToCode(workspace);
   setOutput(code);
 }
 

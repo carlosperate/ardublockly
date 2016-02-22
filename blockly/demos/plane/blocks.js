@@ -49,7 +49,7 @@ Blockly.Blocks['plane_get_rows'] = {
     this.setColour(330);
     this.appendDummyInput()
         .appendField(Plane.getMsg('Plane_getRows'), 'title');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, 'Number');
   },
   customUpdate: function() {
     this.setFieldValue(
@@ -69,7 +69,7 @@ Blockly.Blocks['plane_get_rows1st'] = {
     this.setColour(330);
     this.appendDummyInput()
         .appendField(Plane.getMsg('Plane_getRows1'), 'title');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, 'Number');
   },
   customUpdate: function() {
     this.setFieldValue(
@@ -89,7 +89,7 @@ Blockly.Blocks['plane_get_rows2nd'] = {
     this.setColour(330);
     this.appendDummyInput()
         .appendField(Plane.getMsg('Plane_getRows2'), 'title');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, 'Number');
   },
   customUpdate: function() {
     this.setFieldValue(

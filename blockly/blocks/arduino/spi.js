@@ -1,21 +1,23 @@
   /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Blocks for Arduino SPI library.
- *               The Arduino SPI functions syntax can be found in:
- *               http://arduino.cc/en/Reference/SPI
+ *     The Arduino SPI functions syntax can be found in:
+ *     http://arduino.cc/en/Reference/SPI
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.spi');
+goog.provide('Blockly.Blocks.spi');
 
-goog.require('Blockly.Arduino');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Blocks');
+goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.spi.HUE = 170;
+Blockly.Blocks.spi.HUE = 170;
 
 Blockly.Blocks['spi_setup'] = {
   /**
@@ -24,7 +26,7 @@ Blockly.Blocks['spi_setup'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/SPI');
-    this.setColour(Blockly.Blocks.Arduino.spi.HUE);
+    this.setColour(Blockly.Blocks.spi.HUE);
     this.appendDummyInput()
         .appendField('Setup')
         .appendField(new Blockly.FieldDropdown(
@@ -85,15 +87,14 @@ Blockly.Blocks['spi_transfer'] = {
         Blockly.Arduino.Boards.selected.digitalPins);
 
     this.setHelpUrl('http://arduino.cc/en/Reference/SPITransfer');
-    this.setColour(Blockly.Blocks.Arduino.spi.HUE);
+    this.setColour(Blockly.Blocks.spi.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
-    this.appendValueInput('SPI_DATA', '')
-        .setCheck([Blockly.StaticTyping.BlocklyType.NUMBER,
-                  Blockly.StaticTyping.BlocklyType.BOOLEAN])
+    this.appendValueInput('SPI_DATA')
+        .setCheck(Blockly.Types.NUMBER.compatibles())
         .appendField('transfer');
-    this.appendDummyInput('')
+    this.appendDummyInput()
         .appendField('to slave pin')
         .appendField(
             new Blockly.FieldDropdown(digitalPinsExtended), 'SPI_SS');
@@ -114,8 +115,8 @@ Blockly.Blocks['spi_transfer'] = {
     // Get the Serial instance from this block
     var thisInstanceName = this.getFieldValue('SPI_ID');
 
-   // Iterate through blocks to find a setup instance for the same SPI id.
-    var blocks = Blockly.mainWorkspace.getAllBlocks();
+    // Iterate through top level blocks to find a setup instance for the SPI id
+    var blocks = Blockly.mainWorkspace.getTopBlocks();
     var setupInstancePresent = false;
     for (var x = 0, length_ = blocks.length; x < length_; x++) {
       var func = blocks[x].getSpiSetupInstance;
@@ -141,7 +142,7 @@ Blockly.Blocks['spi_transfer'] = {
    * @return {!string} Blockly type.
    */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.INTEGER;
+    return Blockly.Types.NUMBER;
   },
   /**
    * Updates the content of the board SPI related fields.
@@ -183,13 +184,13 @@ Blockly.Blocks['spi_transfer_return'] = {
         Blockly.Arduino.Boards.selected.digitalPins);
 
     this.setHelpUrl('http://arduino.cc/en/Reference/SPITransfer');
-    this.setColour(Blockly.Blocks.Arduino.spi.HUE);
+    this.setColour(Blockly.Blocks.spi.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
-    this.appendValueInput('SPI_DATA', '')
+    this.appendValueInput('SPI_DATA')
         .appendField('transfer');
-    this.appendDummyInput('')
+    this.appendDummyInput()
         .appendField('to slave pin')
         .appendField(
             new Blockly.FieldDropdown(digitalPinsExtended), 'SPI_SS');

@@ -83,6 +83,39 @@ ArdublocklyServer.ajaxPostPlain = function(url, data, callback) {
   }
 };
 
+/**
+ * Reads JSON data from the server and forwards formatted JavaScript object.
+ * @param {!string} fileLocation Location for the JSON data.
+ * @param {!function} jsonDataCb Callback with JSON object or null for error.
+ */
+Ardublockly.getJsonData = function(fileLocation, jsonDataCb) {
+  var request = ArdublocklyServer.createAjaxRequest();
+  request.overrideMimeType("application/json");
+  var requestCb = function() {
+    if (request.readyState == 4) {
+      if (request.status == 200) {
+        var jsonObj = null;
+        try {
+          jsonObj = JSON.parse(request.responseText);
+        } catch(e) {
+          console.error('Incorrectly formatted JSON data from ' + fileLocation);
+          throw e;
+        }
+        jsonDataCb(jsonObj);
+      } else {
+        jsonDataCb(null);
+      }
+    }
+  };
+  try {
+    request.open('GET', fileLocation, true);
+    request.onreadystatechange = requestCb;
+    request.send(null);
+  } catch (e) {
+    jsonDataCb(null);
+  }
+};
+
 /** @return {XMLHttpRequest} An XML HTTP Request multi-browser compatible. */
 ArdublocklyServer.createAjaxRequest = function() {
   var request = false;
@@ -101,7 +134,7 @@ ArdublocklyServer.createAjaxRequest = function() {
       }
       catch (e) {
         throw 'Your browser does not support AJAX. You will not be able to' +
-              'Upload a sketch';
+              'use all of Ardublockly features.';
         request = null;
       }
     }

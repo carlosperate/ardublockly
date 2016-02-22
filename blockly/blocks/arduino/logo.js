@@ -1,10 +1,24 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Blocks use for the Ardublockly logo creation.
- *               These are not mean to used at all.
+ *     These are not mean to used at all.
  *
+ * Generator:
+ *  var noCode = function(block) { return ''; };
+ *  Blockly.Arduino['ardublockly_name_bottom'] = noCode;
+ *  Blockly.Arduino['ardublockly_plus_top_large'] = noCode;
+ *  Blockly.Arduino['ardublockly_plus_top_small'] = noCode;
+ *  Blockly.Arduino['ardublockly_plus_bottom_large'] = noCode;
+ *  Blockly.Arduino['ardublockly_plus_bottom_small'] = noCode;
+ *  Blockly.Arduino['ardublockly_plus_both_small'] = noCode;
+ *  Blockly.Arduino['ardublockly_plus_both_large'] = noCode;
+ *  Blockly.Arduino['ardublockly_minus_large'] = noCode;
+ *  Blockly.Arduino['ardublockly_minus_small'] = noCode;
+ *  
  * Toolbox:
  *  <sep></sep>
  *  <category name="Logo">
@@ -20,15 +34,12 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.logo');
+goog.provide('Blockly.Blocks.logo');
 
-goog.require('Blockly.Arduino');
+goog.require('Blockly.Blocks');
 
 
-var noCode = function(block) { return ''; };
-
-Blockly.Blocks.Arduino.variables.HUE = 180;
-
+Blockly.Blocks.logo.HUE = 180;
 
 /* Ardublockly block */
 Blockly.Blocks['ardublockly_name_top'] = {
@@ -36,22 +47,19 @@ Blockly.Blocks['ardublockly_name_top'] = {
     this.appendDummyInput()
         .appendField("Ardublockly");
     this.setPreviousStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_name_top'] = noCode;
 
 Blockly.Blocks['ardublockly_name_bottom'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("Ardublockly");
     this.setNextStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
     this.setTooltip('');
   }
 };
-Blockly.Arduino['ardublockly_name_bottom'] = noCode;
-
 
 /* Plus block */
 Blockly.Blocks['ardublockly_plus_top_large'] = {
@@ -59,40 +67,36 @@ Blockly.Blocks['ardublockly_plus_top_large'] = {
     this.appendValueInput("NAME")
         .appendField("     +");
     this.setNextStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_plus_top_large'] = noCode;
 
 Blockly.Blocks['ardublockly_plus_top_small'] = {
   init: function() {
     this.appendValueInput("NAME")
         .appendField("  +");
     this.setNextStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_plus_top_small'] = noCode;
 
 Blockly.Blocks['ardublockly_plus_bottom_large'] = {
   init: function() {
     this.appendValueInput("NAME")
         .appendField("     +");
     this.setPreviousStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_plus_bottom_large'] = noCode;
 
 Blockly.Blocks['ardublockly_plus_bottom_small'] = {
   init: function() {
     this.appendValueInput("NAME")
         .appendField("  +");
     this.setPreviousStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_plus_bottom_small'] = noCode;
 
 Blockly.Blocks['ardublockly_plus_both_small'] = {
   init: function() {
@@ -100,10 +104,9 @@ Blockly.Blocks['ardublockly_plus_both_small'] = {
         .appendField("  +");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_plus_both_small'] = noCode;
 
 Blockly.Blocks['ardublockly_plus_both_large'] = {
   init: function() {
@@ -111,11 +114,9 @@ Blockly.Blocks['ardublockly_plus_both_large'] = {
         .appendField("     +");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_plus_both_large'] = noCode;
-
 
 /* Minus block */
 Blockly.Blocks['ardublockly_minus_large'] = {
@@ -124,10 +125,9 @@ Blockly.Blocks['ardublockly_minus_large'] = {
         .appendField("-     ");
     this.setInputsInline(false);
     this.setOutput(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_minus_large'] = noCode;
 
 Blockly.Blocks['ardublockly_minus_small'] = {
   init: function() {
@@ -135,7 +135,6 @@ Blockly.Blocks['ardublockly_minus_small'] = {
         .appendField("-  ");
     this.setInputsInline(false);
     this.setOutput(true);
-    this.setColour(Blockly.Blocks.Arduino.variables.HUE);
+    this.setColour(Blockly.Blocks.logo.HUE);
   }
 };
-Blockly.Arduino['ardublockly_minus_small'] = noCode;

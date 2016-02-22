@@ -1,10 +1,11 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Code generator for the Arduino serial blocks.
- *               The Arduino built in functions syntax can be found at:
- *               http://arduino.cc/en/Reference/HomePage
+ *     Arduino Serial library docs: https://www.arduino.cc/en/Reference/Serial
  *
  * TODO: There are more functions that can be added:
  *       http://arduino.cc/en/Reference/Serial
@@ -28,12 +29,17 @@ Blockly.Arduino['serial_print'] = function(block) {
       block, 'CONTENT', Blockly.Arduino.ORDER_ATOMIC) || '0';
   var checkbox_name = (block.getFieldValue('NEW_LINE') == 'TRUE');
 
+  var serialPins = Blockly.Arduino.Boards.selected.serialPins[serialId];
+  for (var i = 0; i < serialPins.length; i++) {
+    Blockly.Arduino.reservePin(block, serialPins[i][1],
+        Blockly.Arduino.PinTypes.SERIAL, 'SERIAL ' + serialPins[i][0]);
+  }
+
   if (checkbox_name) {
     var code = serialId + '.println(' + content + ');\n';
   } else {
     var code = serialId + '.print(' + content + ');\n';
   }
-
   return code;
 };
 

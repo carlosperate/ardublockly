@@ -1,10 +1,11 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Arduino code generator for the Servo library blocks.
- *               The Arduino Servo functions syntax can be found in
- *               http://arduino.cc/en/reference/servo
+ *     The Arduino Servo library docs: http://arduino.cc/en/reference/servo
  *
  * TODO: If angle selector added to blocks edit code here.
  */

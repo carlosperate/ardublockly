@@ -1,23 +1,25 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Arduino blocks for the Servo library.
- *               The Arduino Servo functions can be found in
- *               http://arduino.cc/en/reference/servo
+ *     The Arduino Servo functions can be found in
+ *     http://arduino.cc/en/reference/servo
  *
  * TODO: Add angle selector instead of block input.
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.servo');
+goog.provide('Blockly.Blocks.servo');
 
-goog.require('Blockly.Arduino');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Blocks');
+goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.servo.HUE = 60;
+Blockly.Blocks.servo.HUE = 60;
 
 Blockly.Blocks['servo_write'] = {
   /**
@@ -26,17 +28,16 @@ Blockly.Blocks['servo_write'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoWrite');
-    this.setColour(Blockly.Blocks.Arduino.servo.HUE);
-    this.appendDummyInput('')
-        .appendField('Set SERVO from Pin')
+    this.setColour(Blockly.Blocks.servo.HUE);
+    this.appendDummyInput()
+        .appendField('set SERVO from Pin')
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
     this.setInputsInline(false);
-    this.appendValueInput(
-        'SERVO_ANGLE', Blockly.StaticTyping.BlocklyType.NUMBER)
-        .setCheck(Blockly.StaticTyping.BlocklyType.NUMBER)
+    this.appendValueInput('SERVO_ANGLE')
+        .setCheck(Blockly.Types.NUMBER.compatibles())
         .appendField('to');
-    this.appendDummyInput('')
+    this.appendDummyInput()
         .appendField('Degrees (0-180)');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
@@ -60,17 +61,17 @@ Blockly.Blocks['servo_read'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Reference/ServoRead');
-    this.setColour(Blockly.Blocks.Arduino.servo.HUE);
-    this.appendDummyInput('')
-        .appendField('Read SERVO from PIN#')
+    this.setColour(Blockly.Blocks.servo.HUE);
+    this.appendDummyInput()
+        .appendField('read SERVO from PIN#')
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
-    this.setOutput(true, Blockly.StaticTyping.BlocklyType.NUMBER);
+    this.setOutput(true, Blockly.Types.NUMBER.basicType);
     this.setTooltip('Read a Servo angle');
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.StaticTyping.BlocklyType.INTEGER;
+    return Blockly.Types.NUMBER;
   },
   /**
    * Updates the content of the the pin related fields.

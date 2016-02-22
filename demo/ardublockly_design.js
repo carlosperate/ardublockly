@@ -318,6 +318,54 @@ Ardublockly.openSettingsModal = function() {
 };
 
 /**
+ * Opens the modal that allows selection on additional toolbox categories.
+ * @param {!element} htmlContent HTML to include in modal body.
+ */
+Ardublockly.openAdditionalBlocksModal = function(htmlContent) {
+  $('#blocks_menu_body').text('');
+  $('#blocks_menu_body').append(htmlContent);
+  $('#blocks_menu').openModal({
+    dismissible: true,
+    opacity: .5,
+    in_duration: 200,
+    out_duration: 250
+  });
+};
+
+/**
+ * Creates an HTML node with the blocks category information from arguments.
+ * @param {!string} title Text to include as category title.
+ * @param {!string} description TExt to include in as description.
+ * @param {!function} clickBind Function to bind to the tick box click.
+ * @return {!element} HTML element to display the category content.
+ */
+Ardublockly.createExtraBlocksCatHtml = function(title, description, clickBind) {
+  var tickId = title.replace(/\s+/g, '');
+  var tickHtml = document.createElement('input');
+  tickHtml.type = 'checkbox';
+  tickHtml.id = tickId;
+  tickHtml.addEventListener('click', function() {
+    clickBind(document.getElementById(tickId).checked);
+  });
+  var tickLabelHtml = document.createElement('label');
+  tickLabelHtml.htmlFor = tickId;
+  tickLabelHtml.className = 'modal_label_title';
+  tickLabelHtml.appendChild(document.createTextNode(title));
+  var separatorHtml = document.createElement('div');
+  separatorHtml.className = 'divider';
+  var descriptionHthml = document.createElement('div');
+  descriptionHthml.appendChild(document.createTextNode(description));
+
+  var htmlContent = document.createElement('div');
+  htmlContent.className = 'modal_section';
+  htmlContent.appendChild(tickHtml);
+  htmlContent.appendChild(tickLabelHtml);
+  htmlContent.appendChild(separatorHtml);
+  htmlContent.appendChild(descriptionHthml);
+  return htmlContent;
+};
+
+/**
  * Displays a short message for 4 seconds in the form of a Materialize toast.
  * @param {!string} message Text to be temporarily displayed.
  */
@@ -414,7 +462,7 @@ Ardublockly.contentHeightToggle = function() {
   // Apart from checking if the output is visible, do not bother to shrink in
   // small screens as the minimum height of the content will kick in and cause
   // the content to be behind the IDE output data anyway.
-  if (outputHeader.className.match('active') && $(window).height() > 800) {
+  if (!outputHeader.className.match('active') && $(window).height() > 800) {
     blocks.className = 'content height_transition blocks_panel_small';
     arduino.className = 'content height_transition content_arduino_small';
     xml.className = 'content height_transition content_xml_small';

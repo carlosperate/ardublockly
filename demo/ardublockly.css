@@ -483,10 +483,22 @@ ul.side-nav li.side-menu-end {
 /************************/
 /*  Modals and content  */
 /************************/
-/* Sehttp://192.168.0.7:8000/ardublockly/apps/arduino_material/#ttings modal dialog */
-.settings_div {
+/* Large modal section blocks */
+.modal_section {
   margin: 24px 0px;
   width: 100%;
+}
+
+/* Blocks tick label as a title */
+.modal_label_title {
+  font-size: 1.6rem !important;
+  color: black;
+}
+
+/* Blocks modal divider */
+#blocks_menu_body .divider {
+  margin-top: 4px;
+  margin-bottom: 8px;
 }
 
 /* Arduino output modal dialog */
@@ -607,27 +619,6 @@ ul.side-nav li.side-menu-end {
 }
 .code_highlight_deleted {
   background-color: #FDBEBE;
-}
-
-/* Clean 50:50 same row divs */
-.two_halves_container {
-  width: 100%; 
-  padding: 0;
-  margin: 0;
-}
-.two_halves_left {
-  padding: 0;
-  margin: 0;
-  border: none;
-  width: 49%;
-  float: right;
-}
-.two_halves_right {
-  padding: 0;
-  margin: 0;
-  border: none;
-  width: 50%;
-  float: right;
 }
 
 
@@ -806,13 +797,6 @@ ul.side-nav li ul li ul li {
   margin-right: 16px;
 }
 
-/* button-collapse with show-on-large does not work in IE
-@media only screen and (min-width : 993px) {
-  .button-collapse {
-    display: block;
-  }
-} */
-
 /* Increase the size of Materialize Modal in small resolutions */
 @media only screen and (max-width : 600px) {
   .modal {
@@ -825,7 +809,21 @@ ul.side-nav li ul li ul li {
 .btn-large:hover {
   background-color: inherit;
 }
+
 /* Circle clipper (loading animation) thickness */
 .circle-clipper .circle {
   border-width: 4px !important;
+}
+
+/* Materialize messes with these, so reset them here */
+.blocklyHtmlInput {
+  border: none !important;
+  border-radius: 4px !important;
+  font-family: sans-serif !important;
+  height: 100% !important;
+  margin: 0 !important;
+  outline: none !important;
+  padding: 0 1px !important;
+  width: 100% !important;
+  background-color: white !important;
 }

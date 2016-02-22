@@ -1,24 +1,26 @@
 /**
  * @license Licensed under the Apache License, Version 2.0 (the "License"):
  *          http://www.apache.org/licenses/LICENSE-2.0
- *
+ */
+
+/**
  * @fileoverview Blocks for the Arduino serial communication functions.
- *               The Arduino built in functions syntax can be found at:
- *               http://arduino.cc/en/Reference/HomePage
+ *     The Arduino built in functions syntax can be found at:
+ *     http://arduino.cc/en/Reference/HomePage
  *
  * TODO: There are more function that can be added:
  *       http://arduino.cc/en/Reference/Serial
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.Arduino.serial');
+goog.provide('Blockly.Blocks.serial');
 
-goog.require('Blockly.Arduino');
-goog.require('Blockly.StaticTyping');
+goog.require('Blockly.Blocks');
+goog.require('Blockly.Types');
 
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.Arduino.serial.HUE = 160;
+Blockly.Blocks.serial.HUE = 160;
 
 Blockly.Blocks['serial_setup'] = {
   /**
@@ -27,7 +29,7 @@ Blockly.Blocks['serial_setup'] = {
    */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Serial/Begin');
-    this.setColour(Blockly.Blocks.Arduino.serial.HUE);
+    this.setColour(Blockly.Blocks.serial.HUE);
     this.appendDummyInput()
         .appendField('Setup')
         .appendField(
@@ -68,13 +70,13 @@ Blockly.Blocks['serial_print'] = {
    */
   init: function() {
     this.setHelpUrl('http://www.arduino.cc/en/Serial/Print');
-    this.setColour(Blockly.Blocks.Arduino.serial.HUE);
+    this.setColour(Blockly.Blocks.serial.HUE);
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
         .appendField('print');
-    this.appendValueInput('CONTENT', Blockly.StaticTyping.BlocklyType.TEXT)
-        .setCheck(Blockly.StaticTyping.BlocklyType.TEXT);
+    this.appendValueInput('CONTENT')
+        .setCheck(Blockly.Types.TEXT.compatibles());
     this.appendDummyInput()
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE')
         .appendField('add new line');
@@ -96,8 +98,8 @@ Blockly.Blocks['serial_print'] = {
     // Get the Serial instance from this block
     var thisInstanceName = this.getFieldValue('SERIAL_ID');
 
-   // Iterate through blocks to find a setup instance for the same serial id.
-    var blocks = Blockly.mainWorkspace.getAllBlocks();
+    // Iterate through top level blocks to find setup instance for the serial id
+    var blocks = Blockly.mainWorkspace.getTopBlocks();
     var setupInstancePresent = false;
     for (var x = 0; x < blocks.length; x++) {
       var func = blocks[x].getSerialSetupInstance;
