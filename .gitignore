@@ -99,7 +99,7 @@ TestTemp_*
 ardublockly_run.*
 
 # The documentation is built with the GitHub wiki data
-/Documentation
+/docs
 package/ardublocklydocs/site
 
 # Materialize uncompress source

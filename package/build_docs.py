@@ -1,9 +1,10 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*- #
 #
-# Builds the GitHub Wiki documentation into a static HTML site.
+# Builds the GitHub Wiki documentation into a static HTML site saved into the 
+# project root directory.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2016 carlosperate https://github.com/carlosperate/
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -48,21 +49,23 @@ GITHUB_WIKI_REPO = "github.com/%s/%s.git" % (GITHUB_USER, WIKI_NAME)
 MKDOCS_FOLDER = "ardublocklydocs"
 THIS_FILE_DIR = os.path.dirname(os.path.realpath(__file__))
 MKDOCS_DIR = os.path.join(THIS_FILE_DIR, MKDOCS_FOLDER)
+WIKI_DIR = os.path.join(MKDOCS_DIR, WIKI_NAME)
+DOCS_DIR = os.path.join(os.path.dirname(THIS_FILE_DIR), "docs")
 
+# Set the index page name for the static documentation
 DEFAULT_INDEX = 'Home'
 
 
 def pull_wiki_repo():
     """
-    Pulls latest changes from the wiki repo.
+    Pulls latest changes from the wiki repository.
     :return: Boolean indicating if the operation was successful.
     """
     # Set working directory to the wiki repository
-    wiki_folder = os.path.join(MKDOCS_DIR, WIKI_NAME)
-    if os.path.isdir(wiki_folder):
-        os.chdir(wiki_folder)
+    if os.path.isdir(WIKI_DIR):
+        os.chdir(WIKI_DIR)
     else:
-        print("ERROR: Wiki repo directory is not correct: %s" % wiki_folder)
+        print("ERROR: Wiki repo directory is not correct: %s" % WIKI_DIR)
         return False
 
     # Ensure the submodule is initialised, progress is printed to stderr so just
@@ -81,39 +84,25 @@ def pull_wiki_repo():
               "repository !\n%s" + std_err_op)
         return False
 
-    if not GITHUB_WIKI_REPO in std_op:
-        print(("ERROR: Wiki repository:\n\t%s\n" % GITHUB_WIKI_REPO) +
-              "not found in directory %s url:\n\t%s\n" % (wiki_folder, std_op))
+    if GITHUB_WIKI_REPO not in std_op:
+        print("ERROR: Wiki repository: %s\nnot found in directory %s: \n%s" %
+              (GITHUB_WIKI_REPO, WIKI_DIR, std_op))
         return False
 
-    # Git Fetch prints progress in stderr, so cannot check for erros that way
-    print("\nPull from Wiki repository...")
+    # Git Fetch prints progress in stderr, so cannot check for errors that way
+    print("Pull from Wiki repository...")
     subprocess.call(["git", "pull", "origin", "master"])
     print("")
 
     return True
 
 
-def edit_mkdocs_config():
+def edit_mkdocs_config(pages_str):
     """
-    Edits the mkdocs.yml MkDocs configuration file to include all markdown
-    files as part of the documentation.
-    These files are created by default with the '.md' extension and it is 
-    assumed no other file extensions are to be linked.
+    Edits the mkdocs.yml MkDocs configuration file to include the pages data.
+    :param pages_str: Text to append as the pages configuration.
     :return: Boolean indicating the success of the operation.
     """
-    path_list = []
-    for file in os.listdir(os.path.join(MKDOCS_DIR, WIKI_NAME)):
-        if file.endswith(".md"):
-            path_list.append("- ['%s', '%s']" %
-                             (file, file[:-3].replace("-", " ")))
-    if not path_list:
-        print(("ERROR: No markdown files found in %s ! " % MKDOCS_DIR) +
-              "Check if repository has been set up correctly.")
-        return False
-
-    pages_str = "pages:\n" + "\n".join(path_list) + "\n"
-
     # Replace the pages data, strategically located at the end of the file
     mkdocs_yml = os.path.join(MKDOCS_DIR, "mkdocs.yml")
     if not os.path.exists(mkdocs_yml):
@@ -125,16 +114,15 @@ def edit_mkdocs_config():
     with open(temp_abs_path, 'w') as temp_file:
         with open(mkdocs_yml) as original_file:
             for line in original_file:
-                if not "pages:" in line:
+                if "pages:" not in line:
                     temp_file.write(line)
                 else:
                     print("Replacing 'pages' property found in mkdocs.yml ...")
                     break
             else:
-                print("Did not find the 'pages' property in mkdocs.yml.\n" +
-                      "Attaching the property at the end of the file.")
+                print("Did not find the 'pages' property in mkdocs.yml file." +
+                      "Attaching the property at the end.")
             temp_file.write(pages_str)
-            print(pages_str)
 
     # Remove original file and move the new temp to replace it
     os.close(temp_file_handler)
@@ -147,6 +135,58 @@ def edit_mkdocs_config():
         shutil.move(temp_abs_path, mkdocs_yml)
     except shutil.Error:
         print("ERROR: Could move new config file to %s !" % mkdocs_yml)
+        return False
+
+    return True
+
+
+def generate_pages_from_sidebar():
+    """
+    The GitHub Wiki allows you to add a sidebar with a manual markdown code to
+    be used as a table of contents. This function reads the file and converts
+    it to the format require by MkDocs configuration file for its ToC.
+    :return: String with the pages configuration.
+    """
+    sidebar = os.path.join(WIKI_DIR, '_Sidebar.md')
+    if not os.path.exists(sidebar):
+        return None
+
+    # Let any file exception to stop execution
+    with open(sidebar, 'r') as sidebar_file:
+        sidebar_data = sidebar_file.readlines()
+        print("sidebar file data:\n\t%s\n" % "\t".join(sidebar_data))
+
+    yml_sections = ["pages:\n"]
+    for line in sidebar_data:
+        yml_sections.append(line.replace("[", "").replace("](", ": '")
+                            .replace(")", ".md'"))
+    print("Converted to MkDocs yml format:\n\t%s\n" % "\t".join(yml_sections))
+
+    return "".join(yml_sections)
+
+
+def build_mkdocs():
+    """
+    Invokes MkDocs to build the static documentation and moves the folder
+    into the project root folder.
+    :return: Boolean indicating the success of the operation.
+    """
+    # Setting the working directory
+    if os.path.isdir(MKDOCS_DIR):
+        os.chdir(MKDOCS_DIR)
+    else:
+        print("ERROR: MkDocs directory is not correct: %s" % MKDOCS_DIR)
+        return False
+
+    # Building the MkDocs project
+    print("\nClean and build the MkDocs project...")
+    pipe = subprocess.PIPE
+    mkdocs_process = subprocess.Popen(
+        ["mkdocs", "build", "--clean"], stdout=pipe, stderr=pipe)
+    std_op, std_err_op = mkdocs_process.communicate()
+    print("%s%s" % (std_op, std_err_op))
+    if "ERROR" in std_err_op:
+        print("ERROR: Could not build MkDocs !")
         return False
 
     return True
@@ -175,73 +215,18 @@ def create_index():
         "\t</body>\n" \
         "</html>\n"
 
-    print("Creating the index.html file...\n")
-    generated_site_dir = os.path.join(MKDOCS_DIR, "site")
-    if not os.path.exists(generated_site_dir):
-        try:
-            os.makedirs(generated_site_dir)
-        except IOError:
-            print("ERROR: Could not create site folder in %s !\n" %
-                  generated_site_dir)
-            return False
+    print("Creating the index.html file in %s ..." % DOCS_DIR)
+    if not os.path.exists(DOCS_DIR):
+        print("ERROR: Final docs directory does not exists: %s !" % DOCS_DIR)
+        return False
     try:
-        index_file = open(os.path.join(generated_site_dir, "index.html"), "w")
+        index_file = open(os.path.join(DOCS_DIR, "index.html"), "w")
         index_file.write(html_code)
         index_file.close()
         return True
     except IOError:
-        print("ERROR: Could not create index.html file in %s !\n" %
-              generated_site_dir)
+        print("ERROR: Could not create index.html file in %s !" % DOCS_DIR)
         return False
-
-
-def build_mkdocs():
-    """
-    Invokes MkDocs to build the static documentation and moves the folder
-    into the project root folder.
-    :return: Boolean indicating the success of the operation.
-    """
-    # Setting the working directory
-    if os.path.isdir(MKDOCS_DIR):
-        os.chdir(MKDOCS_DIR)
-    else:
-        print("ERROR: MkDocs directory is not correct: %s" % MKDOCS_DIR)
-        return False
-
-    # Building the MkDocs project
-    pipe = subprocess.PIPE
-    mkdocs_process = subprocess.Popen(
-        ["mkdocs", "build"], stdout=pipe, stderr=pipe)
-    std_op, std_err_op = mkdocs_process.communicate()
-
-    if std_err_op:
-        print("ERROR: Could not build MkDocs !\n%s" %
-              std_err_op)
-        return False
-    else:
-        print(std_op)
-
-    # Remove root Documentation folder and copy the new site files into it
-    generated_site_dir = os.path.join(MKDOCS_DIR, "site")
-    root_documentation_dir = os.path.join(
-            os.path.dirname(THIS_FILE_DIR), "documentation")
-    print("Copy folder %s into %s ...\n" %
-          (generated_site_dir, root_documentation_dir))
-
-    if os.path.exists(root_documentation_dir):
-        try:
-            shutil.rmtree(root_documentation_dir)
-        except shutil.Error:
-            print("ERROR: Could not remove root documentation folder !")
-            return False
-    try:
-        shutil.move(generated_site_dir, root_documentation_dir)
-    except shutil.Error:
-        print("ERROR: Could move new documentation files from " +
-              "%s to %s !" % (generated_site_dir, root_documentation_dir))
-        return False
-
-    return True
 
 
 def build_docs():
@@ -250,20 +235,23 @@ def build_docs():
     if success is False:
         sys.exit(1)
 
-    success = edit_mkdocs_config()
-    if success is False:
+    pages_str = generate_pages_from_sidebar()
+    if not pages_str:
         sys.exit(1)
 
-    # Create index.html before the MkDocs site is created in case the project
-    # already contains an index file.
-    success = create_index()
+    success = edit_mkdocs_config(pages_str)
     if success is False:
         sys.exit(1)
 
     success = build_mkdocs()
     if success is False:
         sys.exit(1)
-    print("Build process finished!")
+
+    success = create_index()
+    if success is False:
+        sys.exit(1)
+
+    print("\nBuild process finished!")
 
 
 if __name__ == "__main__":
