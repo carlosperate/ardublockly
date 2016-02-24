@@ -341,15 +341,14 @@ var getHelpMenuData = function() {
         submenu: [
             {
                 label: 'Quick Start',
-                click:  function() {
+                click: function() {
                     shell.openExternal(
-                        'http://localhost:8000/documentation/Quick-Start');
+                        'http://localhost:8000/docs/Quick-Start');
                 }
             }, {
                 label: 'Manual',
                 click: function() {
-                    shell.openExternal(
-                        'http://localhost:8000/documentation/Quick-Start');
+                    shell.openExternal('http://localhost:8000/docs/');
                 }
             }, {
                 type: 'separator'
@@ -365,7 +364,7 @@ var getHelpMenuData = function() {
                         'https://github.com/carlosperate/ardublockly');
                 }
             }, {
-                label: 'Report bug',
+                label: 'Report a bug',
                 click: function() {
                     shell.openExternal(
                         'https://github.com/carlosperate/ardublockly/issues');
@@ -374,7 +373,9 @@ var getHelpMenuData = function() {
                 type: 'separator'
             },  {
                 label: 'About',
-                click: functionNotImplemented
+                click: function() {
+                    shell.openExternal('http://localhost:8000/docs/About');
+                }
             }
         ]
     };
@@ -388,7 +389,8 @@ var getDevMenuData = function() {
                 label: 'Reload',
                 accelerator: 'CmdOrCtrl+F5',
                 click: function() {
-                    BrowserWindow.getFocusedWindow().webContents.reloadIgnoringCache();
+                    BrowserWindow.getFocusedWindow().webContents
+                                 .reloadIgnoringCache();
                 }
             }, {
                 label: 'Toggle DevTools',
