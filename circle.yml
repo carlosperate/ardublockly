@@ -5,7 +5,7 @@ machine:
 
   # Indicating node also offers advantage of bypassing virtual environments
   node:
-    version: 0.12.4
+    version: 5.1.0
 
   # Override /etc/hosts
   hosts:
@@ -21,22 +21,22 @@ checkout:
 # Customize dependencies
 dependencies:
   pre:
-    #- sudo apt-get update -qq
-
     # OS extra info
     - uname -a
     - ldd --version
+    - lsb_release -d
     - python --version
     - python -c "import struct; print(struct.calcsize('P') * 8)"
 
     # Install tkinker and mock
     - sudo apt-get install -y python-support
-    - sudo apt-get install python-tk
+    - sudo apt-get install -y python-tk
     - sudo pip install mock
+    - sudo pip install mkdocs
 
     # Install node.js
-    - curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
-    - sudo apt-get install -y nodejs
+    #- curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+    #- sudo apt-get install -y nodejs
     - node --version
     - npm --version
 
@@ -45,6 +45,7 @@ dependencies:
 
   override:
     # Build and pack
+    - python package/build_docs.py
     - python package/build_pyinstaller.py linux
     - cd package/electron && npm install
     - cd package/electron && npm run release

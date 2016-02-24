@@ -20,7 +20,7 @@ init:
   - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
 
   # Ensure node x86 (appveyor powershell script to switch installed versions)
-  - ps: Install-Product node 0.12.7 x86
+  - ps: Install-Product node 5.1.0 x86
   - cmd: node --version
   - cmd: npm --version
 
@@ -35,13 +35,15 @@ install:
   # Install python dependencies
   - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.6.10a1-cp27-none-win32.whl
   - cmd: pip install mock
+  - cmd: pip install mkdocs
 
   # Build Ardublockly
+  - cmd: python package\build_docs.py
   - cmd: python package\build_py2exe.py
   - cmd: cd package\electron
   - cmd: npm install
   - cmd: npm run release
-  - cmd: cd ..\..
+  - cmd: cd ..\..\
   - cmd: python package\pack_ardublockly.py
   - cmd: dir
 

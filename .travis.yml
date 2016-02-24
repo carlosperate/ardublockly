@@ -9,7 +9,7 @@ before_install:
 
   # Install python
   - brew update
-  - brew install python 
+  - brew install python2
   - brew link --overwrite python
   - pip install --upgrade pip
   - PATH=/usr/local/bin:$PATH
@@ -20,6 +20,7 @@ before_install:
   - brew install libcouchbase
 
   - pip install mock
+  - pip install mkdocs
 
   # Install node.js
   - brew unlink node
@@ -29,14 +30,12 @@ before_install:
 
 # Build and Pack ardublockly
 install:
-  #- cd package/pyinstaller/bootloader
-  #- python ./waf configure build install
-  #- cd ../../../
+  - python package/build_docs.py
   - python package/build_pyinstaller.py mac
   - cd package/electron
   - npm install
   - npm run release
-  - cd ../..
+  - cd ../../
   - python package/pack_ardublockly.py
   - du -sk releases/
 
@@ -58,7 +57,7 @@ deploy:
   acl: public_read
   on:
     repo: carlosperate/ardublockly
-    branch: [master, travisci, electron]
+    all_branches: true
 
 notifications:
   email:
