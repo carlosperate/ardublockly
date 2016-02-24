@@ -34,7 +34,6 @@ import sys
 import shutil
 import platform
 import subprocess
-from glob import glob
 
 
 spec_coll_name = "server"
@@ -53,7 +52,7 @@ project_root_dir = \
 
 
 def remove_directory(dir_to_remove):
-    """ Removes the a given directory. """
+    """ :param dir_to_remove: Directory to remove. """
     if os.path.exists(dir_to_remove):
         print(script_tab + "Removing directory %s" % dir_to_remove)
         shutil.rmtree(dir_to_remove)
@@ -109,10 +108,8 @@ def pyinstaller_build():
     package folder. Captures the output streams and checks for errors.
     :return: Boolean indicating the success state of the operation.
     """
-    process_args = [
-        "python",
-        "%s" % os.path.join("package", "pyinstaller", "pyinstaller.py"),
-        "%s" % os.path.join("package", "pyinstaller.spec")]
+    process_args = ["pyinstaller",
+                    "%s" % os.path.join("package", "pyinstaller.spec")]
     print(script_tab + "Command: %s" % process_args)
 
     pyinstaller_process = subprocess.Popen(process_args)
@@ -169,8 +166,7 @@ def create_shell_file(os_type):
                      'DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )\n' \
                      'echo "[Shell Launch Script] Executing from: $DIR"\n' \
                      './%s' % os.path.join(exec_folder_name, "ardublockly")
-        shell_location = os.path.join(
-            project_root_dir, "ardublockly_run.sh")
+        shell_location = os.path.join(project_root_dir, "ardublockly_run.sh")
     else:
         # No other OS expected, so just return. This should never happen
         return

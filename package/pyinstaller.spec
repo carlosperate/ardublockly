@@ -6,7 +6,7 @@
 
 block_cipher = None
 
-a = Analysis(['start.py'],
+a = Analysis(['../start.py'],
              pathex=None,
              hiddenimports=["ardublocklyserver"],
              hookspath=None,

@@ -9,7 +9,7 @@ before_install:
 
   # Install python
   - brew update
-  - brew install python2
+  - brew install python
   - brew link --overwrite python
   - pip install --upgrade pip
   - PATH=/usr/local/bin:$PATH
@@ -21,6 +21,8 @@ before_install:
 
   - pip install mock
   - pip install mkdocs
+  - pip install pyinstaller
+  - pyinstaller --version
 
   # Install node.js
   - brew unlink node
