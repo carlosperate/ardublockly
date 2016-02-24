@@ -365,7 +365,7 @@ Blockly.Blocks['logic_operation'] = {
   },
   /** Assigns a block type, logic comparison operations result in bools. */
   getBlockType: function() {
-    Blockly.Types.BOOLEAN;
+    return Blockly.Types.BOOLEAN;
   }
 };
 
