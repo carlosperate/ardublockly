@@ -32,12 +32,11 @@ before_install:
 
 # Build and Pack ardublockly
 install:
+  - cd blockly && python build.py && cd ../
   - python package/build_docs.py
   - python package/build_pyinstaller.py mac
-  - cd package/electron
-  - npm install
-  - npm run release
-  - cd ../../
+  - cd package/electron && npm install && cd ../../
+  - cd package/electron && npm run release && cd ../../
   - python package/pack_ardublockly.py
   - du -sk releases/
 

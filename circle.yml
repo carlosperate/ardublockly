@@ -46,7 +46,8 @@ dependencies:
     - sudo pip install awscli
 
   override:
-    # Build and pack
+    # Build and pack, each command executed from project root
+    - cd blockly && python build.py
     - python package/build_docs.py
     - python package/build_pyinstaller.py linux
     - cd package/electron && npm install

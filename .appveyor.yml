@@ -38,12 +38,11 @@ install:
   - cmd: pip install mkdocs
 
   # Build Ardublockly
+  - cmd: cd blockly && python build.py && cd ..\
   - cmd: python package\build_docs.py
   - cmd: python package\build_py2exe.py
-  - cmd: cd package\electron
-  - cmd: npm install
-  - cmd: npm run release
-  - cmd: cd ..\..\
+  - cmd: cd package\electron && npm install && cd ..\..\
+  - cmd: cd package\electron && npm run release && cd ..\..\
   - cmd: python package\pack_ardublockly.py
   - cmd: dir
 
