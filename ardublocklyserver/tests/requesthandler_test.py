@@ -21,7 +21,7 @@ except ImportError:
     from ardublocklyserver import requesthandler
 
 
-class BlocklyRequestHandlerTestCase(unittest.TestCase):
+class ArdublocklyRequestHandlerTestCase(unittest.TestCase):
     """
     Tests for BlocklyRequestHandler module
     """

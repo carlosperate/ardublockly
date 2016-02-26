@@ -2,11 +2,11 @@
 #
 # Receives and responds to the HTTP request from the Python server.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2016 carlosperate https://github.com/carlosperate/
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import json
 import cgi
 import sys
@@ -27,15 +27,11 @@ except ImportError:
 import ardublocklyserver.actions as actions
 
 
-class BlocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
-    """
-    Simple Python HTTP request handler to pass over the AJAX requests.
-    """
+class ArdublocklyRequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+    """ Simple Python HTTP request handler to pass over the AJAX requests. """
 
     def do_POST(self):
-        """
-        Serves the POST request, using form-like data
-        """
+        """ Serves the POST request, using form-like data. """
         message_back = None
         content_type, parameters_dict = cgi.parse_header(
             self.headers.get("Content-type"))
