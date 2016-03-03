@@ -136,3 +136,43 @@ Blockly.Arduino['io_highlow'] = function(block) {
   var code = block.getFieldValue('STATE');
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+/**
+ * Function for turning the tone library on on a given pin (X).
+ * Arduino code: setup { pinMode(X, OUTPUT) }
+ *               loop  { tone(X, frequency) }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+
+Blockly.Arduino['io_tone'] = function(block) {
+  var pin = block.getFieldValue('TONEPIN');
+  var freq = Blockly.Arduino.valueToCode(block, 'FREQUENCY', Blockly.Arduino.ORDER_ATOMIC);
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Tone Pin');
+
+  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);\n';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  var code = 'tone(' + pin + ',' + freq + ');\n';
+  return code;
+};
+
+Blockly.Arduino['io_notone'] = function(block) {
+  var pin = block.getFieldValue("TONEPIN");
+  var code = 'noTone(' + pin + ');\n';
+  return code;
+};
+
+Blockly.Arduino['io_pulsein'] = function(block) {
+  var pin = block.getFieldValue("PULSEPIN");
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+
+  var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  var code = 'pulseIn(' + pin + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
