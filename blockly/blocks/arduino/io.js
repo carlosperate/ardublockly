@@ -140,7 +140,7 @@ Blockly.Blocks['io_analogwrite'] = {
   /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
     return Blockly.Types.NUMBER;
-  },
+  }
 };
 
 Blockly.Blocks['io_analogread'] = {
@@ -189,5 +189,62 @@ Blockly.Blocks['io_highlow'] = {
   /** @return {!string} The type of return value for the block, an integer. */
   getBlockType: function() {
     return Blockly.Types.BOOLEAN;
+  }
+};
+
+Blockly.Blocks['io_tone'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set tone on pin #")
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "TONEPIN");
+    this.appendValueInput("FREQUENCY")
+        .setCheck("Number")
+        .appendField("at frequency (in range 31 - 65535)");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Set's tone on pin to specified frequency");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/tone');
+  },
+  /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_notone'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Turn off tone on pin #")
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "TONEPIN");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Turns the tone off on the selected pin");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/noTone');
+  },
+    /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_pulsein'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Read pulse on pin #")
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "PULSEPIN");
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Measures the pulse, either high or low, on the selected pin.");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
+  },
+      /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
   }
 };

@@ -137,6 +137,16 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="io_analogwrite"></block>' +
 '    <block type="io_analogread"></block>' +
 '    <block type="io_highlow"></block>' +
+'   <block type="io_tone">' +
+'       <field name="TONEPIN">0</field>' +
+'        <value name="FREQUENCY">' +
+'            <shadow type="math_number">' +
+'                <field name="NUM">220</field>' +
+'            </shadow>' +
+'        </value>' +
+'   </block>' +
+'   <block type="io_notone"></block>' +
+'   <block type="io_pulsein"></block>' +
 '  </category>' +
 '  <sep></sep>' +
 '  <category id="catTime" name="Time">' +
