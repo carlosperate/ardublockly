@@ -5,8 +5,8 @@ var gulpUtil = require('gulp-util');
 var childProcess = require('child_process');
 var jetpack = require('fs-jetpack');
 var asar = require('asar');
-var utils = require('./utils');
-var projectLocator = require('../app/projectlocator.js');
+var utils = require('../utils');
+var projectLocator = require('../../app/projectlocator.js');
 
 var projectDir;
 var tmpDir;
@@ -51,8 +51,6 @@ var finalize = function () {
     projectDir.copy('resources/windows/icon.ico', readyAppDir.path('icon.ico'));
 
     // Replace Electron icon and versions
-    var copyrightString = 'Copyright (C) ' + new Date().getFullYear() + ' ' +
-                          manifest.author + ' ' + manifest.homepage;
     var rcedit = require('rcedit');
     rcedit(readyAppDir.path('electron.exe'), {
         icon: projectDir.path('resources/windows/icon.ico'),
@@ -61,8 +59,10 @@ var finalize = function () {
         'version-string': {
             'ProductName': manifest.productName,
             'FileDescription': manifest.description,
-            'LegalCopyright': copyrightString,
-            'CompanyName': ' '
+            'ProductVersion': manifest.version,
+            'CompanyName': manifest.author, // it might be better to add another field to package.json for this
+            'LegalCopyright': manifest.copyright,
+            'OriginalFilename': manifest.productName + '.exe'
         }
     }, function (err) {
         if (!err) {
@@ -134,13 +134,13 @@ var cleanClutter = function () {
 
 module.exports = function () {
     return init()
-    .then(copyRuntime)
-    .then(cleanupRuntime)
-    .then(packageBuiltApp)
-    .then(finalize)
-    .then(renameApp)
-    //.then(createInstaller)
-    .then(copyExecFolder)
-    .then(cleanClutter)
-    .catch(console.error);
+        .then(copyRuntime)
+        .then(cleanupRuntime)
+        .then(packageBuiltApp)
+        .then(finalize)
+        .then(renameApp)
+        //.then(createInstaller)
+        .then(copyExecFolder)
+        .then(cleanClutter)
+        .catch(console.error);
 };
