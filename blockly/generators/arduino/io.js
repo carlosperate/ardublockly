@@ -172,7 +172,7 @@ Blockly.Arduino['io_pulsein'] = function(block) {
 
   var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
-  
+
   var code = 'pulseIn(' + pin + ')';
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
