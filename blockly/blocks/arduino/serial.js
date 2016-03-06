@@ -31,17 +31,17 @@ Blockly.Blocks['serial_setup'] = {
     this.setHelpUrl('http://arduino.cc/en/Serial/Begin');
     this.setColour(Blockly.Blocks.serial.HUE);
     this.appendDummyInput()
-        .appendField('Setup')
+        .appendField(Blockly.Msg.ARD_SERIAL_SETUP)
         .appendField(
             new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
-        .appendField(':  speed to')
+        .appendField(Blockly.Msg.ARD_SERIAL_SPEED)
         .appendField(
             new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serialSpeed), 'SPEED')
-        .appendField('bps');
+        .appendField(Blockly.Msg.ARD_SERIAL_BPS);
     this.setInputsInline(true);
-    this.setTooltip('Selects the speed for a specific Serial peripheral');
+    this.setTooltip(Blockly.Msg.ARD_SERIAL_SETUP_TIP);
   },
   /**
    * Returns the serial instance name.
@@ -74,17 +74,16 @@ Blockly.Blocks['serial_print'] = {
     this.appendDummyInput()
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
-        .appendField('print');
+        .appendField(Blockly.Msg.ARD_SERIAL_PRINT);
     this.appendValueInput('CONTENT')
         .setCheck(Blockly.Types.TEXT.compatibles());
     this.appendDummyInput()
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE')
-        .appendField('add new line');
+        .appendField(Blockly.Msg.ARD_SERIAL_PRINT_NEWLINE);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip('Prints data to the console/serial port as ' +
-                    'human-readable ASCII text.');
+    this.setTooltip(Blockly.Msg.ARD_SERIAL_PRINT_TIP);
   },
   /**
    * Called whenever anything on the workspace changes.
@@ -112,9 +111,8 @@ Blockly.Blocks['serial_print'] = {
     }
 
     if (!setupInstancePresent) {
-      this.setWarningText(
-          'A setup block for ' + thisInstanceName + ' must be added to the ' +
-          'workspace to use this block!', 'serial_setup');
+      this.setWarningText(Blockly.Msg.ARD_SERIAL_PRINT_WARN.replace('%1', 
+			    thisInstanceName), 'serial_setup');
     } else {
       this.setWarningText(null, 'serial_setup');
     }

@@ -1099,3 +1099,150 @@ Blockly.Msg.PROCEDURES_IFRETURN_TOOLTIP = 'If a value is true, then return a sec
 Blockly.Msg.PROCEDURES_IFRETURN_HELPURL = 'http://c2.com/cgi/wiki?GuardClause';
 /// warning - This appears if the user tries to use this block outside of a function definition.
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = 'Warning: This block may be used only within a function definition.';
+
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_BOOL_NUMBER = 'as boolean';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_INTEGER_NUMBER = 'as integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_UINT_NUMBER = 'as positive integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_LONG_NUMBER = 'as long integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_ULONG_NUMBER = 'as long positive integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_FLOAT_NUMBER = 'as decimal number';
+Blockly.Msg.ARD_AS_BOOL_NUMBER_TIP = 'Declare a variable as boolean with value true or false';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_INTEGER_NUMBER_TIP = 'Declare a variable as integer, -32768 to 32767';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_UINT_NUMBER_TIP = 'Declare a variable as a positive integer, 0 to 65535';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_LONG_NUMBER_TIP = 'Declare a variable as a long integer, -2,147,483,648 to 2,147,483,647';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_ULONG_NUMBER_TIP = 'Declare a variable as a long positive integer, 0 to 4,294,967,295';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_FLOAT_NUMBER_TIP = 'Declare a variable as a decimal number, eg 3.6 or 5e4 or -3.14';
+
+Blockly.Msg.ARD_AS_DIGINPUT_PIN = 'as digital input';
+Blockly.Msg.ARD_AS_DIGINPUT_PIN_TIP = 'Declare a variable as a digital input pin';
+Blockly.Msg.ARD_AS_DIGOUTPUT_PIN = 'as digital output';
+Blockly.Msg.ARD_AS_DIGOUTPUT_PIN_TIP = 'Declare a variable as a digital output pin';
+Blockly.Msg.ARD_AS_ANAINPUT_PIN = 'as analog input';
+Blockly.Msg.ARD_AS_ANAINPUT_PIN_TIP = 'Declare a variable as a analog input pin';
+Blockly.Msg.ARD_AS_ANAOUTPUT_PIN = 'as analg output';
+Blockly.Msg.ARD_AS_ANAOUTPUT_PIN_TIP = 'Declare a variable as a analog PWM output pin';
+
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_HIGH = 'HIGH';
+Blockly.Msg.ARD_LOW = 'LOW';
+Blockly.Msg.ARD_ANALOGREAD = 'read analog pin#';
+Blockly.Msg.ARD_ANALOGREAD_TIP = 'Return value between 0 and 1024';
+Blockly.Msg.ARD_ANALOGWRITE = 'set analog pin#';
+Blockly.Msg.ARD_VALUE = "value";
+Blockly.Msg.ARD_ANALOGWRITE_TIP = 'Write analog value between 0 and 255 to a specific PWM Port';
+Blockly.Msg.ARD_HIGHLOW_TIP = 'Set a pin state logic High or Low.';
+Blockly.Msg.ARD_DIGITALREAD = 'read digital pin#';
+Blockly.Msg.ARD_DIGITALREAD_TIP = 'Read digital value on a pin: HIGH or LOW';
+Blockly.Msg.ARD_DIGITALWRITE = 'set digitial pin#';
+Blockly.Msg.ARD_WRITE_TO = 'to';
+Blockly.Msg.ARD_DIGITALWRITE_TIP = 'Write digital value HIGH or LOW to a specific Port';
+Blockly.Msg.ARD_DIGITALWRITEVAR_TIP = 'Write digital value to a Port, the value and port can be computed variables';
+Blockly.Msg.ARD_BUILTIN_LED = 'set built-in LED';
+Blockly.Msg.ARD_BUILTIN_LED_TIP = 'Light on or off for the built-in LED of the Arduino';
+Blockly.Msg.ARD_DEFINE = 'Define';
+Blockly.Msg.ARD_TONE_PIN = 'Tone PIN#';
+Blockly.Msg.ARD_TONE_FREQ = 'frequency';
+Blockly.Msg.ARD_TONE_PIN_TIP = 'Generate audio tones on a pin';
+Blockly.Msg.ARD_NOTONE_PIN = 'No tone PIN#';
+Blockly.Msg.ARD_NOTONE_PIN_TIP = 'Stop generating a tone on a pin';
+Blockly.Msg.ARD_MAP = 'Map';
+Blockly.Msg.ARD_MAP_VAL = 'value to [0-';
+Blockly.Msg.ARD_MAP_TIP = 'Re-maps a number from [0-1024] to another.';
+Blockly.Msg.ARD_FUN_RUN_SETUP = 'Arduino run first:';
+Blockly.Msg.ARD_FUN_RUN_LOOP = 'Arduino loop forever:';
+Blockly.Msg.ARD_FUN_RUN_TIP = 'Defines the Arduino setup() and loop() functions.';
+Blockly.Msg.ARD_PIN_WARN1 = 'Pin %1 is needed for %2 as pin %3.\nAlready used as %4.';
+Blockly.Msg.ARD_SERIAL_SETUP = 'Setup';
+Blockly.Msg.ARD_SERIAL_SPEED = ':  speed to';
+Blockly.Msg.ARD_SERIAL_BPS = 'bps';
+Blockly.Msg.ARD_SERIAL_SETUP_TIP = 'Selects the speed for a specific Serial peripheral';
+Blockly.Msg.ARD_SERIAL_PRINT = 'print';
+Blockly.Msg.ARD_SERIAL_PRINT_NEWLINE = 'add new line';
+Blockly.Msg.ARD_SERIAL_PRINT_TIP = 'Prints data to the console/serial port as ' +
+                    'human-readable ASCII text.';
+Blockly.Msg.ARD_SERIAL_PRINT_WARN = 'A setup block for %1 must be added to the ' +
+          'workspace to use this block!'
+Blockly.Msg.ARD_SERVO_WRITE = 'set SERVO from Pin';
+Blockly.Msg.ARD_SERVO_WRITE_TO = 'to';
+Blockly.Msg.ARD_SERVO_WRITE_DEG_180 = 'Degrees (0~180)';
+Blockly.Msg.ARD_SERVO_WRITE_TIP = 'Set a Servo to an specified angle';
+Blockly.Msg.ARD_SERVO_READ = 'read SERVO from PIN#';
+Blockly.Msg.ARD_SERVO_READ_TIP = 'Read a Servo angle';
+Blockly.Msg.ARD_SPI_SETUP = 'Setup';
+Blockly.Msg.ARD_SPI_SETUP_CONF = 'configuration:';
+Blockly.Msg.ARD_SPI_SETUP_SHIFT = 'data shift';
+Blockly.Msg.ARD_SPI_SETUP_MSBFIRST = 'MSBFIRST';
+Blockly.Msg.ARD_SPI_SETUP_LSBFIRST = 'LSBFIRST';
+Blockly.Msg.ARD_SPI_SETUP_DIVIDE = 'clock divide';
+Blockly.Msg.ARD_SPI_SETUP_MODE = 'SPI mode (idle - edge)';
+Blockly.Msg.ARD_SPI_SETUP_MODE0 = '0 (Low - Falling)';
+Blockly.Msg.ARD_SPI_SETUP_MODE1 = '1 (Low - Rising)';
+Blockly.Msg.ARD_SPI_SETUP_MODE2 = '2 (High - Falling)';
+Blockly.Msg.ARD_SPI_SETUP_MODE3 = '3 (High - Rising)';
+Blockly.Msg.ARD_SPI_SETUP_TIP = 'Configures the SPI peripheral.';
+Blockly.Msg.ARD_SPI_TRANS_NONE = 'none';
+Blockly.Msg.ARD_SPI_TRANS_VAL = 'transfer';
+Blockly.Msg.ARD_SPI_TRANS_SLAVE = 'to slave pin';
+Blockly.Msg.ARD_SPI_TRANS_TIP = 'Send a SPI message to an specified slave device.';
+Blockly.Msg.ARD_SPI_TRANS_WARN1 = 'A setup block for %1 must be added to the ' +
+          'workspace to use this block!';
+Blockly.Msg.ARD_SPI_TRANS_WARN2 = 'Old pin value %1 is no longer available.';
+Blockly.Msg.ARD_SPI_TRANSRETURN_TIP = 'Send a SPI message to an specified slave device and get ' +
+                    'data back.';
+Blockly.Msg.ARD_STEPPER_SETUP = 'Setup';
+Blockly.Msg.ARD_STEPPER_MOTOR = 'stepper motor:';
+Blockly.Msg.ARD_STEPPER_PIN1 = 'pin1#';
+Blockly.Msg.ARD_STEPPER_PIN2 = 'pin2#';
+Blockly.Msg.ARD_STEPPER_REVOLVS = 'how many steps per revolution';
+Blockly.Msg.ARD_STEPPER_SPEED = 'set speed (rpm) to';
+Blockly.Msg.ARD_STEPPER_SETUP_TIP = 'Configures a stepper motor pinout and other settings.';
+Blockly.Msg.ARD_STEPPER_STEP = 'move stepper';
+Blockly.Msg.ARD_STEPPER_STEPS = 'steps';
+Blockly.Msg.ARD_STEPPER_STEP_TIP = 'Turns the stepper motor a specific number of steps.';
+Blockly.Msg.ARD_STEPPER_STEP_WARN1 = 'A STEPPER configuration block must be added to use ' +
+			      'this block!';
+Blockly.Msg.ARD_STEPPER_STEP_WARN2 = 'A Name input must be added to the Stepper ' +
+                              'configuration block!';
+Blockly.Msg.ARD_STEPPER_STEP_WARN3 = 'Selected stepper does not exist any more, ' +
+                              'please select a new one.';
+Blockly.Msg.ARD_TIME_DELAY = 'wait';
+Blockly.Msg.ARD_TIME_MS = 'milliseconds';
+Blockly.Msg.ARD_TIME_DELAY_TIP = 'Wait specific time in milliseconds';
+Blockly.Msg.ARD_TIME_DELAY_MICROS = 'microseconds';
+Blockly.Msg.ARD_TIME_DELAY_MICRO_TIP = 'Wait specific time in microseconds';
+Blockly.Msg.ARD_TIME_MILLIS = 'current elapsed Time (milliseconds)';
+Blockly.Msg.ARD_TIME_MILLIS_TIP = 'Returns the number of milliseconds since the Arduino ' +
+                    'board began running the current program. ' +
+		    'Has to be stored in a positive long integer';
+Blockly.Msg.ARD_TIME_MICROS = 'current elapsed Time (microseconds)';
+Blockly.Msg.ARD_TIME_MICROS_TIP = 'Returns the number of microseconds since the Arduino ' +
+                    'board began running the current program. ' +
+		    'Has to be stored in a positive long integer';
+Blockly.Msg.ARD_TIME_INF = 'wait forever (end program)';
+Blockly.Msg.ARD_TIME_INF_TIP = 'Wait indefinitely, stopping the program.'
+Blockly.Msg.ARD_VAR_AS = 'as';
+Blockly.Msg.ARD_VAR_AS_TIP = 'Sets a value to a specific type';
+Blockly.Msg.REPLACE_EXISTING_BLOCKS = 'Replace existing blocks? "Cancel" will merge.';
+Blockly.Msg.UPLOAD_CLICK_1 = 'To Upload your code to Arduino:';
+Blockly.Msg.UPLOAD_CLICK_2 = '  1. click on the Arduino tab';
+Blockly.Msg.UPLOAD_CLICK_3 = '  2. select all the code, and copy (CTRL+A and CTRL+C)';
+Blockly.Msg.UPLOAD_CLICK_4 = '  3. In the Arduino IDE or in a http://codebender.cc sketch, paste the code (CTRL+V)';
+Blockly.Msg.UPLOAD_CLICK_5 = '  4. Upload to your connected Arduino';
+Blockly.Msg.ARD_PIN_AN = 'analog pin';
+Blockly.Msg.ARD_PIN_DIG = 'digital pin';
+Blockly.Msg.ARD_PIN_PWM = 'PWM pin';
+Blockly.Msg.ARD_PIN_AN_TIP = 'One of the analog pins of the Arduino Board';
+Blockly.Msg.ARD_PIN_DIG_TIP = 'One of the digital pins of the Arduino Board';
+Blockly.Msg.ARD_PIN_PWM_TIP = 'One of the Pulse Width Modeling (PWM) pins of the Arduino Board';
+

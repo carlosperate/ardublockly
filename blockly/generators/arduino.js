@@ -257,9 +257,9 @@ Blockly.Arduino.addFunction = function(preferedName, code) {
 Blockly.Arduino.reservePin = function(block, pin, pinType, warningTag) {
   if (Blockly.Arduino.pins_[pin] !== undefined) {
     if (Blockly.Arduino.pins_[pin] != pinType) {
-      block.setWarningText(
-          'Pin ' + pin + ' is needed for ' + warningTag + ' as pin ' + pinType +
-          '.\nAlready used as ' + Blockly.Arduino.pins_[pin] + '.', warningTag);
+      block.setWarningText(Blockly.Msg.ARD_PIN_WARN1.replace('%1', pin)
+		.replace('%2', warningTag).replace('%3', pinType)
+		.replace('%4', Blockly.Arduino.pins_[pin]), warningTag);
     } else {
       block.setWarningText(null, warningTag);
     }
