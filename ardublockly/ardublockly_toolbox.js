@@ -122,20 +122,44 @@ Ardublockly.TOOLBOX_XML =
 '  <sep></sep>' +
 '  <category id="catFunctions" name="Functions" custom="PROCEDURE"></category>' +
 '  <sep></sep>' +
+'  <category name="Defines">' +
+'    <block type="declare_var_bool"></block>' +
+'    <block type="declare_var_int"></block>' +
+'    <block type="declare_var_uint"></block>' +
+'    <block type="declare_var_long"></block>' +
+'    <block type="declare_var_ulong"></block>' +
+'    <block type="declare_var_float"></block>' +
+'    <block type="declare_var_digin"></block>' +
+'    <block type="declare_var_digout"></block>' +
+'    <block type="declare_var_anain"></block>' +
+'    <block type="declare_var_anaout"></block>' +
+'  </category>' +
+'  <sep></sep>' +
 '  <category id="catInputOutput" name="Input/Output">' +
+'    <block type="io_pin_dig"></block>' +
+'    <block type="io_pin_an"></block>' +
+'    <block type="io_pin_pwm"></block>' +
 '    <block type="io_digitalwrite">' +
 '      <value name="STATE">' +
 '        <block type="io_highlow"></block>' +
 '      </value>' +
 '    </block>' +
+'    <block type="io_digitalwrite_var">' +
+'      <value name="STATE">' +
+'        <block type="io_highlow"></block>' +
+'      </value>' +
+'    </block>' +
 '    <block type="io_digitalread"></block>' +
+'    <block type="io_digitalread_var"></block>' +
 '    <block type="io_builtin_led">' +
 '      <value name="STATE">' +
 '        <block type="io_highlow"></block>' +
 '      </value>' +
 '    </block>' +
 '    <block type="io_analogwrite"></block>' +
+'    <block type="io_analogwrite_var"></block>' +
 '    <block type="io_analogread"></block>' +
+'    <block type="io_analogread_var"></block>' +
 '    <block type="io_highlow"></block>' +
 '  </category>' +
 '  <sep></sep>' +
