@@ -69,7 +69,7 @@ Blockly.HTML_NS = 'http://www.w3.org/1999/xhtml';
  * The richness of block colours, regardless of the hue.
  * Must be in the range of 0 (inclusive) to 1 (exclusive).
  */
-Blockly.HSV_SATURATION = 0.45;
+Blockly.HSV_SATURATION = 0.55;
 /**
  * The intensity of block colours, regardless of the hue.
  * Must be in the range of 0 (inclusive) to 1 (exclusive).
