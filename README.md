@@ -31,12 +31,12 @@ git submodule update --init --recursive
 
 
 ## Installing
-The desktop application is available for Windows/Mac/Linux and runs as a stand-alone executable that can be downloaded from the [Ardublockly repository releases page][4] (once it is stable enough for a first alpha release).
+The desktop application is available for Windows/Mac/Linux and runs as a stand-alone executable that can be downloaded from the [Ardublockly repository releases page][4].
 
 You will also need the [Arduino IDE version 1.6.x or higher][2].
 
 #### Development builds
-In the meantime, you can test __UNSTABLE__ development builds automatically generated on these CI build servers:
+You can also test __UNSTABLE__ development builds automatically generated every time an update is added to the GitHub repository:
 
 | Linux build         | Windows build       | Mac OS X build       |
 |:-------------------:|:-------------------:|:--------------------:|
@@ -44,7 +44,7 @@ In the meantime, you can test __UNSTABLE__ development builds automatically gene
 | [Download Link][12] | [Download Link][13] | [Download Link][14]  |
 
 #### "Core version" (Python server only)
-If you prefer, the core software can be used by running the Python server, which loads the web interface on your local browser (Chrome recommended).
+If you prefer, the core software can be used by running only the Python server, which loads the web interface on your local browser (Chrome recommended).
 
 Full installation instructions for this version can be found in [this Github repository Wiki][5].
 
@@ -54,18 +54,18 @@ The quick version: Clone this repository, initialise all submodules, and execute
 python start.py
 ```
 
-This will work on Windows, Linux (including ARM) and MacOS X, with Python >2.6 and >3.2.
+This will work on Windows, Linux (including ARM) and Mac OS X, with Python >2.7 or >3.4
 
 
 ## Running
 1. [Install Ardublockly][5].
-2. Install the [Arduino IDE][2] version 1.6.x or higher.
+2. Install the [Arduino IDE][2] version 1.6.x or higher (latest version is always recommended).
 3. Run Ardublockly as defined in your installation method.
 3. Configure Ardublockly to locate the Arduino IDE [following these instructions][6].
 
 
 ## Online Demos
-A demo of the current state of Ardublockly main interface can be found in the following two links (to load the code into an Arduino it requires the full Ardublockly application to be downloaded and run on your computer):
+A demo of the latest release of Ardublockly main interface can be found in the following two links (to load the code into an Arduino it requires the full Ardublockly application to be downloaded and run on your computer):
 
 #### [Ardublockly][10]
 ![WebApp screenshot responsive design][web_screenshot_responsive]
@@ -91,9 +91,20 @@ Blockly original source is Copyright of Google Inc. [https://developers.google.c
 
 
 ## License
-Licensed under the Apache License, Version 2.0 (the "License").
+Copyright (c) 2016 carlosperate https://github.com/carlosperate/
+
+Unless stated otherwise, the source code of this projects is
+licensed under the Apache License, Version 2.0 (the "License");
+you may not use any of the licensed files within this project
+except in compliance with the License.
 
 The full document can be found in the [LICENSE][9] file.
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 
 [1]: https://developers.google.com/blockly/

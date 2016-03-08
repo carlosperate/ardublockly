@@ -5,6 +5,7 @@
   "description": "Visual programming for Arduino",
   "version": "0.1.0",
   "author": "carlosperate",
+  "copyright": "© 2016, carlosperate",
   "homepage": "http://ardublockly.embeddedlog.com/",
   "main": "main.js",
   "dependencies": {
