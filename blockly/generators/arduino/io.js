@@ -164,7 +164,7 @@ Blockly.Arduino['io_notone'] = function(block) {
   return code;
 };
 
-Blockly.Arduino['io_pulsein'] = function(block) {
+Blockly.Arduino['io_pulsein_HIGH'] = function(block) {
   var pin = block.getFieldValue("PULSEPIN");
 
   Blockly.Arduino.reservePin(
@@ -173,7 +173,21 @@ Blockly.Arduino['io_pulsein'] = function(block) {
   var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'pulseIn(' + pin + ')';
+  var code = 'pulseIn(' + pin + ', HIGH)';
+
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino['io_pulsein_LOW'] = function(block) {
+  var pin = block.getFieldValue('PULSEPIN');
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+
+  var pinSetupCode = 'pinMode(' + pin + ', INPUT;\n';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  var code = 'pulseIn(' + pin + ', LOW)';
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };

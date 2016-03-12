@@ -146,7 +146,8 @@ Ardublockly.TOOLBOX_XML =
 '        </value>' +
 '   </block>' +
 '   <block type="io_notone"></block>' +
-'   <block type="io_pulsein"></block>' +
+'   <block type="io_pulsein_HIGH"></block>' +
+'   <block type="io_pulsein_LOW"></block>' +
 '  </category>' +
 '  <sep></sep>' +
 '  <category id="catTime" name="Time">' +

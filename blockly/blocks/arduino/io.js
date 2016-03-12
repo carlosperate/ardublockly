@@ -232,18 +232,34 @@ Blockly.Blocks['io_notone'] = {
   }
 };
 
-Blockly.Blocks['io_pulsein'] = {
+Blockly.Blocks['io_pulsein_HIGH'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Read pulse on pin #")
+        .appendField("Read high pulse on pin #")
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), "PULSEPIN");
     this.setOutput(true);
     this.setColour(Blockly.Blocks.io.HUE);
-    this.setTooltip("Measures the pulse, either high or low, on the selected pin.");
+    this.setTooltip("Measures high pulse on the selected pin.");
     this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
   },
       /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_pulsein_LOW'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField('Read low pulse on pin #')
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PULSEPIN');
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Measures low pulse on the selected pin");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
+  },
   getBlockType: function() {
     return Blockly.Types.NUMBER;
   }
