@@ -175,10 +175,9 @@ Blockly.Arduino.Boards.profiles.yun = Blockly.Arduino.Boards.profiles.leonardo;
 Blockly.Arduino.Boards.profiles.nano_328p = {
   name: 'Arduino Nano',
   description: 'Arduino Nano with ATMega168p or ATMega328p board',
-  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0,8),
-  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 14).concat(
-      Blockly.Arduino.Boards.generateAnalogIo(0,7)).concat(
-      Blockly.Arduino.Boards.generateAnalogIo(8)),
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0,7),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
+        Blockly.Arduino.Boards.generateAnalogIo(0,7)),
   pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
   serial: Blockly.Arduino.Boards.profiles.uno.serial,
   serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,

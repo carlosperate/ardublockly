@@ -146,8 +146,19 @@ Ardublockly.TOOLBOX_XML =
 '        </value>' +
 '   </block>' +
 '   <block type="io_notone"></block>' +
-'   <block type="io_pulsein_HIGH"></block>' +
-'   <block type="io_pulsein_LOW"></block>' +
+'   <block type="io_pulsein">' +
+'       <value name="PULSETYPE">' +
+'           <shadow type="io_highlow"></shadow>' +
+'       </value>' +
+'   </block>' +
+'  <block type="io_pulsetimeout">' +
+'    <value name="PULSETYPE">' +
+'       <shadow type="io_highlow"></shadow>' +
+'    </value>' +
+'    <value name="TIMEOUT">' +
+'       <block type="math_number"></block>' +
+'    </value>'+
+'  </block>' +
 '  </category>' +
 '  <sep></sep>' +
 '  <category id="catTime" name="Time">' +
