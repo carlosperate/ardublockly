@@ -119,11 +119,11 @@ Blockly.Arduino.init = function(workspace) {
   // Set variable declarations with their Arduino type in the defines dictionary
   var variableDeclarations = [];
   for (var varName in varsWithTypes) {
-    variableDeclarations.push(
-        Blockly.Arduino.getArduinoType_(varsWithTypes[varName]) + ' ' +
-        varName + ';');
+      if (Blockly.Arduino.definitions_[varName] === undefined) {
+        Blockly.Arduino.addDeclaration("auto_" + varName,  Blockly.Arduino.getArduinoType_(varsWithTypes[varName]) + " " + varName + ';');
+      }
   }
-  Blockly.Arduino.definitions_['variables'] = variableDeclarations.join('\n');
+  Blockly.Arduino.definitions_['variables'] = '';
 };
 
 /**
