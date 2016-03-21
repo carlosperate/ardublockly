@@ -13,6 +13,7 @@ It adds the following features:
 * Arduino generator unit test (incomplete)
 * Procedures core class modified to include the Arduino setup() and loop() functions
 * Temporarily removed procedure's mutator responsible to add arguments
+* Blocks HSV hue colour value slightly higher for more vibrant colours
 * Minor visual changes to the zoom icons positioning
 * Build file updated to include all these changes
 

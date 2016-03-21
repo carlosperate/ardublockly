@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*- #
 #
-# Builds the Ardublockly Python portion of the app for Windows.
+# Builds the Ardublockly Python server into a Windows executable.
 #
 # Copyright (c) 2015 carlosperate https://github.com/carlosperate/
 #
@@ -17,8 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# IMPORTANT: This script is designed to be located one directory level under the
-#            project root folder.
+# IMPORTANT: This script is designed to be executed from the project root
+# directory.
 #
 import os
 import sys

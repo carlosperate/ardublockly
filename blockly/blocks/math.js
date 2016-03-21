@@ -49,7 +49,13 @@ Blockly.Blocks['math_number'] = {
                 '0', Blockly.FieldTextInput.numberValidator),
             'NUM');
     this.setOutput(true, Blockly.Types.NUMBER.basicType);
-    this.setTooltip(Blockly.Msg.MATH_NUMBER_TOOLTIP);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    // Number block is trivial.  Use tooltip of parent block if it exists.
+    this.setTooltip(function() {
+      var parent = thisBlock.getParent();
+      return (parent && parent.tooltip) || Blockly.Msg.MATH_NUMBER_TOOLTIP;
+    });
   },
   /**
    * Reads the numerical value from the block and assigns a block type.

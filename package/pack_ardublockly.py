@@ -141,7 +141,7 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
 
     if pull_request and pull_request != "false":
         try:
-            int(pull_request)
+            int(filter(str.isdigit, pull_request))
             print(script_tab + "Pull request valid '%s' variable found: %s" %
                   (ci_name, pull_request))
             return "pull_%s" % pull_request
