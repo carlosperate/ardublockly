@@ -388,7 +388,7 @@
 	"ARD_SERIAL_SETUP_TIP": "Selecteer de snelheid voor een seriele connectie",
 	"ARD_SERIAL_PRINT": "print",
 	"ARD_SERIAL_PRINT_NEWLINE": "naar nieuwe lijn",
-	"ARD_SERIAL_PRINT_TIP": "Drukt de gegeven data naar de seriele poort als leesbare ASCII tekst (in Arduino IDE open de seriele poort met icoon rechtsboven.",
+	"ARD_SERIAL_PRINT_TIP": "Drukt de gegeven data naar de seriele poort als leesbare ASCII tekst (in Arduino IDE open de seriele poort met icoon rechtsboven).",
 	"ARD_SERIAL_PRINT_WARN": "Een setup blok voor %1 moet toegevoegd worden aan de canvas om dit block te kunnen gebruiken!",
 	"ARD_SERVO_WRITE": "positioneer Servo met pin",
 	"ARD_SERVO_WRITE_TO": "naar",
