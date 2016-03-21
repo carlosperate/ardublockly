@@ -1134,10 +1134,8 @@ Blockly.Msg.ARD_SERIAL_BPS = 'bps';
 Blockly.Msg.ARD_SERIAL_SETUP_TIP = 'Selects the speed for a specific Serial peripheral';
 Blockly.Msg.ARD_SERIAL_PRINT = 'print';
 Blockly.Msg.ARD_SERIAL_PRINT_NEWLINE = 'add new line';
-Blockly.Msg.ARD_SERIAL_PRINT_TIP = 'Prints data to the console/serial port as ' +
-                    'human-readable ASCII text.';
-Blockly.Msg.ARD_SERIAL_PRINT_WARN = 'A setup block for %1 must be added to the ' +
-          'workspace to use this block!'
+Blockly.Msg.ARD_SERIAL_PRINT_TIP = 'Prints data to the console/serial port as human-readable ASCII text.';
+Blockly.Msg.ARD_SERIAL_PRINT_WARN = 'A setup block for %1 must be added to the workspace to use this block!'
 Blockly.Msg.ARD_SERVO_WRITE = 'set SERVO from Pin';
 Blockly.Msg.ARD_SERVO_WRITE_TO = 'to';
 Blockly.Msg.ARD_SERVO_WRITE_DEG_180 = 'Degrees (0~180)';
@@ -1160,11 +1158,9 @@ Blockly.Msg.ARD_SPI_TRANS_NONE = 'none';
 Blockly.Msg.ARD_SPI_TRANS_VAL = 'transfer';
 Blockly.Msg.ARD_SPI_TRANS_SLAVE = 'to slave pin';
 Blockly.Msg.ARD_SPI_TRANS_TIP = 'Send a SPI message to an specified slave device.';
-Blockly.Msg.ARD_SPI_TRANS_WARN1 = 'A setup block for %1 must be added to the ' +
-          'workspace to use this block!';
+Blockly.Msg.ARD_SPI_TRANS_WARN1 = 'A setup block for %1 must be added to the workspace to use this block!';
 Blockly.Msg.ARD_SPI_TRANS_WARN2 = 'Old pin value %1 is no longer available.';
-Blockly.Msg.ARD_SPI_TRANSRETURN_TIP = 'Send a SPI message to an specified slave device and get ' +
-                    'data back.';
+Blockly.Msg.ARD_SPI_TRANSRETURN_TIP = 'Send a SPI message to an specified slave device and get data back.';
 Blockly.Msg.ARD_STEPPER_SETUP = 'Setup';
 Blockly.Msg.ARD_STEPPER_MOTOR = 'stepper motor:';
 Blockly.Msg.ARD_STEPPER_PIN1 = 'pin1#';
@@ -1175,25 +1171,18 @@ Blockly.Msg.ARD_STEPPER_SETUP_TIP = 'Configures a stepper motor pinout and other
 Blockly.Msg.ARD_STEPPER_STEP = 'move stepper';
 Blockly.Msg.ARD_STEPPER_STEPS = 'steps';
 Blockly.Msg.ARD_STEPPER_STEP_TIP = 'Turns the stepper motor a specific number of steps.';
-Blockly.Msg.ARD_STEPPER_STEP_WARN1 = 'A STEPPER configuration block must be added to use ' +
-			      'this block!';
-Blockly.Msg.ARD_STEPPER_STEP_WARN2 = 'A Name input must be added to the Stepper ' +
-                              'configuration block!';
-Blockly.Msg.ARD_STEPPER_STEP_WARN3 = 'Selected stepper does not exist any more, ' +
-                              'please select a new one.';
+Blockly.Msg.ARD_STEPPER_STEP_WARN1 = 'A STEPPER configuration block must be added to use this block!';
+Blockly.Msg.ARD_STEPPER_STEP_WARN2 = 'A Name input must be added to the Stepper configuration block!';
+Blockly.Msg.ARD_STEPPER_STEP_WARN3 = 'Selected stepper does not exist any more, please select a new one.';
 Blockly.Msg.ARD_TIME_DELAY = 'wait';
 Blockly.Msg.ARD_TIME_MS = 'milliseconds';
 Blockly.Msg.ARD_TIME_DELAY_TIP = 'Wait specific time in milliseconds';
 Blockly.Msg.ARD_TIME_DELAY_MICROS = 'microseconds';
 Blockly.Msg.ARD_TIME_DELAY_MICRO_TIP = 'Wait specific time in microseconds';
 Blockly.Msg.ARD_TIME_MILLIS = 'current elapsed Time (milliseconds)';
-Blockly.Msg.ARD_TIME_MILLIS_TIP = 'Returns the number of milliseconds since the Arduino ' +
-                    'board began running the current program. ' +
-		    'Has to be stored in a positive long integer';
+Blockly.Msg.ARD_TIME_MILLIS_TIP = 'Returns the number of milliseconds since the Arduino board began running the current program. Has to be stored in a positive long integer';
 Blockly.Msg.ARD_TIME_MICROS = 'current elapsed Time (microseconds)';
-Blockly.Msg.ARD_TIME_MICROS_TIP = 'Returns the number of microseconds since the Arduino ' +
-                    'board began running the current program. ' +
-		    'Has to be stored in a positive long integer';
+Blockly.Msg.ARD_TIME_MICROS_TIP = 'Returns the number of microseconds since the Arduino board began running the current program. Has to be stored in a positive long integer';
 Blockly.Msg.ARD_TIME_INF = 'wait forever (end program)';
 Blockly.Msg.ARD_TIME_INF_TIP = 'Wait indefinitely, stopping the program.'
 Blockly.Msg.ARD_VAR_AS = 'as';
