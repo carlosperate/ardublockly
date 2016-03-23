@@ -17,7 +17,7 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');
 
 /** Common HSV hue for all blocks in this category. */
-Blockly.Blocks.io.HUE = 250;
+Blockly.Blocks.tone.HUE = 250;
 
 Blockly.Blocks['io_tone'] = {
   init: function() {
@@ -31,7 +31,7 @@ Blockly.Blocks['io_tone'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(Blockly.Blocks.io.HUE);
+    this.setColour(Blockly.Blocks.tone.HUE);
     this.setTooltip("Sets tone on pin to specified frequency within range 31 - 65535");
     this.setHelpUrl('https://www.arduino.cc/en/Reference/tone');
   },
@@ -57,7 +57,7 @@ Blockly.Blocks['io_notone'] = {
             Blockly.Arduino.Boards.selected.digitalPins), "TONEPIN");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour(Blockly.Blocks.io.HUE);
+    this.setColour(Blockly.Blocks.tone.HUE);
     this.setTooltip("Turns the tone off on the selected pin");
     this.setHelpUrl('https://www.arduino.cc/en/Reference/noTone');
   },

@@ -22,7 +22,7 @@ goog.require('Blockly.Arduino');
  * @return {array} Completed code with order of operation.
  */
 
-Blockly.Arduino['tone'] = function(block) {
+Blockly.Arduino['io_tone'] = function(block) {
   var pin = block.getFieldValue('TONEPIN');
   var freq = Blockly.Arduino.valueToCode(block, 'FREQUENCY', Blockly.Arduino.ORDER_ATOMIC);
   Blockly.Arduino.reservePin(
@@ -35,8 +35,11 @@ Blockly.Arduino['tone'] = function(block) {
   return code;
 };
 
-Blockly.Arduino['notone'] = function(block) {
+Blockly.Arduino['io_notone'] = function(block) {
   var pin = block.getFieldValue("TONEPIN");
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Tone Pin');
+  
   var code = 'noTone(' + pin + ');\n';
   return code;
 };
