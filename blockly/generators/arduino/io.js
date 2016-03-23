@@ -136,3 +136,34 @@ Blockly.Arduino['io_highlow'] = function(block) {
   var code = block.getFieldValue('STATE');
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+Blockly.Arduino['io_pulsein'] = function(block) {
+  var pin = block.getFieldValue("PULSEPIN");
+  var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+
+  var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  var code = 'pulseIn(' + pin + ', ' + type + ')';
+
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino['io_pulsetimeout'] = function(block) {
+  var pin = block.getFieldValue("PULSEPIN");
+  var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
+  var timeout = Blockly.Arduino.valueToCode(block, "TIMEOUT", Blockly.Arduino.ORDER_ATOMIC);
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+
+  var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  var code = 'pulseIn(' + pin + ', ' + type + ', ' + timeout + ')';
+
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+}; 
