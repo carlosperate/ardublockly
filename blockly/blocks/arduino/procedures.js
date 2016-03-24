@@ -23,14 +23,14 @@ Blockly.Blocks['arduino_functions'] = {
    */
   init: function() {
     this.appendDummyInput()
-        .appendField('Arduino run first:');
+        .appendField(Blockly.Msg.ARD_FUN_RUN_SETUP);
     this.appendStatementInput('SETUP_FUNC');
     this.appendDummyInput()
-        .appendField('Arduino loop forever:');
+        .appendField(Blockly.Msg.ARD_FUN_RUN_LOOP);
     this.appendStatementInput('LOOP_FUNC');
     this.setInputsInline(false);
     this.setColour(Blockly.Blocks.procedures.HUE);
-    this.setTooltip('Defines the Arduino setup() and loop() functions.');
+    this.setTooltip(Blockly.Msg.ARD_FUN_RUN_TIP);
     this.setHelpUrl('https://arduino.cc/en/Reference/Loop');
     this.contextMenu = false;
   },
