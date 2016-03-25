@@ -6,11 +6,16 @@
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import os
 import sys
-import mock
 import unittest
+try:
+    import mock
+    from mock import patch
+except ImportError:
+    from unittest.mock import MagicMock as mock
+    from unittest.mock import patch
 
 try:
     from ardublocklyserver.compilersettings import ServerCompilerSettings
@@ -76,7 +81,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     #
     # Testing the compiler_dir accessors
     #
-    @mock.patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
     def test_compiler_dir_valid_accesor(self, mock_os_path_isfile):
         self.delete_default_settings_file()
         # Creating the instance will create the settings file
@@ -103,7 +108,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
             self.assertEqual(new_compiler_dir, instance.compiler_dir)
             self.assertNotEqual(old_compiler_dir, instance.compiler_dir)
 
-    @mock.patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
     def test_compiler_dir_invalid_accesor(self, mock_os_path_isfile):
         """
         Tests path doesn't get saved if:
@@ -135,8 +140,8 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         self.assertTrue(new_dir in ServerCompilerSettings().compiler_dir)
         self.assertNotEqual(original_dir, ServerCompilerSettings().compiler_dir)
 
-    @mock.patch('ardublocklyserver.compilersettings.os.path.isfile')
-    @mock.patch('ardublocklyserver.compilersettings.sys.platform')
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.compilersettings.sys.platform')
     def test_compiler_dir_platform_specific(
             self, mock_os_path_isfile, mock_sys_platform):
         """
@@ -165,7 +170,7 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
     #
     # Test the sketch name accessors
     #
-    @mock.patch('ardublocklyserver.compilersettings.os.path.isdir')
+    @patch('ardublocklyserver.compilersettings.os.path.isdir')
     def test_sketch_name_valid_accesor(self, mock_isdir):
         self.delete_default_settings_file()
         old_sketch_dir = ServerCompilerSettings().sketch_dir
@@ -256,7 +261,6 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
                 instance.load_ide_option,
                 instance._ServerCompilerSettings__load_ide_option)
             self.assertEqual(instance.load_ide_option, new_load_ide_option)
-            self.assertNotEqual(instance.load_ide_option, old_load_ide_option)
 
     def test_ide_invalid_accesor(self):
         # Creating the instance will create the settings file with defaults
