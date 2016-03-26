@@ -25,16 +25,26 @@ dependencies:
     - uname -a
     - ldd --version
     - lsb_release -d
+
+    # Install and check Python 2 and 3
+    - sudo apt-get install -y python-support
+    - sudo apt-get install -y python3-setuptools
+    - sudo apt-get install -y python3-dev
+    - sudo apt-get install -y python3-tk
+    - sudo easy_install3 pip
     - python --version
     - python -c "import struct; print(struct.calcsize('P') * 8)"
+    - python3 --version
+    - python3 -c "import struct; print(struct.calcsize('P') * 8)"
 
-    # Install tkinker and mock
-    - sudo apt-get install -y python-support
-    - sudo apt-get install -y python-tk
-    - sudo pip install mock
-    - sudo pip install mkdocs
-    - sudo pip install pyinstaller
+    # Python packages (built on Python 2, tests run both 2 and 3)
+    - sudo pip2 install mock
+    - sudo pip2 install awscli
+    - sudo pip3 install mkdocs
+    - sudo pip3 install pyinstaller
     - pyinstaller --version
+    - pip2 freeze
+    - pip3 freeze
 
     # Install node.js
     #- curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
@@ -42,27 +52,30 @@ dependencies:
     - node --version
     - npm --version
 
-    # Install AWS command line tool
-    - sudo pip install awscli
-
   override:
     # Build and pack, each command executed from project root
     - cd blockly && python build.py
-    - python package/build_docs.py
-    - python package/build_pyinstaller.py linux
+    - python3 package/build_docs.py
+    - python3 package/build_pyinstaller.py linux
     - cd package/electron && npm install
     - cd package/electron && npm run release
-    - python package/pack_ardublockly.py
-
-    # Get the releases files into the AWS S3 bucket
-    - export AWS_DEFAULT_REGION=us-west-2 && cd releases && for entry in *; do aws s3 cp $entry s3://ardublockly-builds/linux/$entry; done
+    - python3 package/pack_ardublockly.py
 
 # Customize test commands
 test:
   override:
-    - python ardublocklyserver/tests/sketchcreator_test.py
-    - python ardublocklyserver/tests/compilersettings_test.py
+    - python  ardublocklyserver/tests/sketchcreator_test.py
+    - python3 ardublocklyserver/tests/sketchcreator_test.py
+    - python  ardublocklyserver/tests/compilersettings_test.py
+    - python3 ardublocklyserver/tests/compilersettings_test.py
 
 general:
   artifacts:
     - "releases/*"
+
+# Get the releases files into the AWS S3 bucket
+deployment:
+  master:
+    branch: /.*/
+    commands:
+      - export AWS_DEFAULT_REGION=us-west-2 && cd releases && for entry in *; do aws s3 cp $entry s3://ardublockly-builds/linux/$entry; done

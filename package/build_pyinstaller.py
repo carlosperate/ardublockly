@@ -1,9 +1,9 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 #
 # Builds the Ardublockly Python portion of the app for Linux or OS X.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2016 carlosperate https://github.com/carlosperate/
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@
 # Due to all the debugging steps required to get a CI serve running properly
 # this script ended up being quite verbose. In might be updated in the future
 # to include a -v flag to select a verbose mode.
-from __future__ import unicode_literals, print_function
+from __future__ import unicode_literals, absolute_import, print_function
 import os
 import sys
 import shutil

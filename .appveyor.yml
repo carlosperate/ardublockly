@@ -5,6 +5,12 @@ environment:
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.9"
       PYTHON_ARCH: "32"
+      PYTHON3: "C:\\Python34"
+      PYTHON3_VERSION: "3.4.3"
+      PYTHON3_ARCH: "32"
+  # Add custom environmental variables for pip
+  PIP: C:\\Python27\Scripts\pip
+  PIP3: C:\\Python34\Scripts\pip
 
 platform: x86
 
@@ -14,49 +20,56 @@ init:
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
   - cmd: wmic OS get OSArchitecture
 
-  # As AppVeyor has multiple python install, verify which one uses by default
+  # As AppVeyor has multiple python install, verify which ones will be used
   - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
-  - cmd: python --version
-  - cmd: python -c "import struct; print(struct.calcsize('P') * 8)"
+  - cmd: "%PYTHON%\\python --version"
+  - cmd: "%PYTHON%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+  - cmd: ECHO %PYTHON3% %PYTHON3_VERSION% %PYTHON3_ARCH%
+  - cmd: "%PYTHON3%\\python --version"
+  - cmd: "%PYTHON3%\\python -c \"import struct; print(struct.calcsize('P') * 8)\""
+
+  # Prepare pip and pip3, PATH iterated left to right first hit wins
+  - cmd: set PATH=%PYTHON%\scripts;%PYTHON3%\scripts;%PATH%
+  - cmd: ECHO Path - %PATH%
 
   # Ensure node x86 (appveyor powershell script to switch installed versions)
   - ps: Install-Product node 5.1.0 x86
   - cmd: node --version
   - cmd: npm --version
 
-  # Set the relevant pip location to the path 
-  - cmd: set PATH=%PYTHON%\scripts;%PATH%
-  - cmd: ECHO Path - %PATH%
-
 install:
   # Git clone happens between init and install 
   - cmd: git submodule update --init --recursive
 
-  # Install python dependencies
-  - cmd: pip install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.6.10a1-cp27-none-win32.whl
-  - cmd: pip install mock
-  - cmd: pip install mkdocs
+  # Install Python packages
+  - cmd: "%PIP3% install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.9.2.2-cp34-none-win32.whl"
+  - cmd: "%PIP3% install mkdocs"
+  - cmd: "%PIP% install mock"
+  - cmd: "%PIP% freeze"
+  - cmd: "%PIP3% freeze"
 
-  # Build Ardublockly
-  - cmd: cd blockly && python build.py && cd ..\
-  - cmd: python package\build_docs.py
-  - cmd: python package\build_py2exe.py
+  # Build and pack Ardublockly
+  - cmd: cd blockly && %PYTHON%\python build.py && cd ..\
+  - cmd: "%PYTHON3%\\python package\\build_docs.py"
+  - cmd: "%PYTHON3%\\python package\\build_py2exe.py"
   - cmd: cd package\electron && npm install && cd ..\..\
   - cmd: cd package\electron && npm run release && cd ..\..\
-  - cmd: python package\pack_ardublockly.py
+  - cmd: "%PYTHON3%\\python package\\pack_ardublockly.py"
   - cmd: dir
 
 # Not a project with an msbuild file, build done at install.
 build: off 
 
-# For now a simple test that we know passes
+# CI testing on both Python 2 and 3
 test_script:
   - cmd: chcp 65001
   - cmd: set PYTHONIOENCODING=utf-8
-  - cmd: python ardublocklyserver\tests\sketchcreator_test.py
-  - cmd: python ardublocklyserver\tests\compilersettings_test.py
+  - cmd: "%PYTHON%\\python  ardublocklyserver\\tests\\sketchcreator_test.py"
+  - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\sketchcreator_test.py"
+  - cmd: "%PYTHON%\\python  ardublocklyserver\\tests\\compilersettings_test.py"
+  - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\compilersettings_test.py"
 
-# Push artifact to s3 bucket and list all
+# Push artefact to S3 bucket and list all
 before_deploy:
   - ps: Get-ChildItem .\releases\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName ardublockly-s3-deployment }
   - ps: foreach($artifactName in $artifacts.keys) { $artifacts[$artifactName] }
