@@ -35,7 +35,7 @@ Blockly.Blocks['servo_write'] = {
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
     this.setInputsInline(false);
     this.appendValueInput('SERVO_ANGLE')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField(Blockly.Msg.ARD_SERVO_WRITE_TO);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_SERVO_WRITE_DEG_180);
@@ -66,7 +66,7 @@ Blockly.Blocks['servo_read'] = {
         .appendField(Blockly.Msg.ARD_SERVO_READ)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.pwmPins), 'SERVO_PIN');
-    this.setOutput(true, Blockly.Types.NUMBER.basicType);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.ARD_SERVO_READ_TIP);
   },
   /** @return {string} The type of return value for the block, an integer. */

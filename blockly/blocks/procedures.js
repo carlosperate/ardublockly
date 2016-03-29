@@ -765,7 +765,7 @@ Blockly.Blocks['procedures_ifreturn'] = {
    */
   init: function() {
     this.appendValueInput('CONDITION')
-        .setCheck(Blockly.Types.BOOLEAN.compatibles())
+        .setCheck(Blockly.Types.BOOLEAN.checkList)
         .appendField(Blockly.Msg.CONTROLS_IF_MSG_IF);
     this.appendValueInput('VALUE')
         .appendField(Blockly.Msg.PROCEDURES_DEFRETURN_RETURN);

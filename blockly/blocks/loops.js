@@ -47,7 +47,7 @@ Blockly.Blocks['controls_repeat_ext'] = {
         {
           "type": "input_value",
           "name": "TIMES",
-          "check": Blockly.Types.NUMBER.compatibles()
+          "check": Blockly.Types.NUMBER.checkList
         }
       ],
       "previousStatement": null,
@@ -74,7 +74,7 @@ Blockly.Blocks['controls_repeat'] = {
         {
           "type": "field_input",
           "name": "TIMES",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "text": "10"
         }
       ],
@@ -103,7 +103,7 @@ Blockly.Blocks['controls_whileUntil'] = {
     this.setHelpUrl(Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL);
     this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('BOOL')
-        .setCheck(Blockly.Types.BOOLEAN.compatibles())
+        .setCheck(Blockly.Types.BOOLEAN.checkList)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_WHILEUNTIL_INPUT_DO);
@@ -139,19 +139,19 @@ Blockly.Blocks['controls_for'] = {
         {
           "type": "input_value",
           "name": "FROM",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "TO",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "BY",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "align": "RIGHT"
         }
       ],
@@ -235,7 +235,7 @@ Blockly.Blocks['controls_forEach'] = {
         {
           "type": "input_value",
           "name": "LIST",
-          "check": Blockly.Types.ARRAY.compatibles()
+          "check": Blockly.Types.ARRAY.checkList
         }
       ],
       "previousStatement": null,

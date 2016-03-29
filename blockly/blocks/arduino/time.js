@@ -28,7 +28,7 @@ Blockly.Blocks['time_delay'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/Delay');
     this.setColour(Blockly.Blocks.time.HUE);
     this.appendValueInput('DELAY_TIME_MILI')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField(Blockly.Msg.ARD_TIME_DELAY);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_TIME_MS);
@@ -48,7 +48,7 @@ Blockly.Blocks['time_delaymicros'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/DelayMicroseconds');
     this.setColour(Blockly.Blocks.time.HUE);
     this.appendValueInput('DELAY_TIME_MICRO')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField(Blockly.Msg.ARD_TIME_DELAY);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_TIME_DELAY_MICROS);
@@ -69,7 +69,7 @@ Blockly.Blocks['time_millis'] = {
     this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_TIME_MILLIS);
-    this.setOutput(true, Blockly.Types.NUMBER.basicType);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.ARD_TIME_MILLIS_TIP);
   },
   /** @return {string} The type of return value for the block, an integer. */
@@ -88,7 +88,7 @@ Blockly.Blocks['time_micros'] = {
     this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_TIME_MICROS);
-    this.setOutput(true, Blockly.Types.NUMBER.basicType);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.ARD_TIME_MICROS_TIP);
   },
   /**

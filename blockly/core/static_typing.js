@@ -200,7 +200,7 @@ Blockly.StaticTyping.prototype.setBlockTypeWarning =
   } else if ((this.varTypeDict[varName] !== blockType) &&
              (blockType !== Blockly.Types.UNDEF)) {
     block.setWarningText('The variable ' + varName + ' has been first ' +
-        'assigned to the "' + this.varTypeDict[varName].typeName + '"type\n' +
+        'assigned to the "' + this.varTypeDict[varName].typeName + '" type\n' +
         'and this block tries to assign the type "' + blockType.typeName + '"!',
         warningLabel);
   } else {

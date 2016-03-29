@@ -362,11 +362,9 @@ Blockly.Arduino.scrub_ = function(block, code) {
 
 /**
  * Generates Arduino Types from a Blockly Type.
- * @param {!Blockly.StaticTyping.BlocklyType} typeBlockly The Blockly type to be
- *     converted.
+ * @param {!Blockly.Type} typeBlockly The Blockly type to be converted.
  * @return {string} Arduino type for the respective Blockly input type, in a
  *     string format.
- * @this {Blockly.StaticTyping}
  * @private
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {

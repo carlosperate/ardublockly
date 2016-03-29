@@ -76,7 +76,7 @@ Blockly.Blocks['serial_print'] = {
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
         .appendField(Blockly.Msg.ARD_SERIAL_PRINT);
     this.appendValueInput('CONTENT')
-        .setCheck(Blockly.Types.TEXT.compatibles());
+        .setCheck(Blockly.Types.TEXT.checkList);
     this.appendDummyInput()
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE')
         .appendField(Blockly.Msg.ARD_SERIAL_PRINT_NEWLINE);

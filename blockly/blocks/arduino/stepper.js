@@ -108,11 +108,11 @@ Blockly.Blocks['stepper_config'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN2');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.ARD_STEPPER_REVOLVS);
     this.appendValueInput('STEPPER_SPEED')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.ARD_STEPPER_SPEED);
     this.setTooltip(Blockly.Msg.ARD_STEPPER_SETUP_TIP);
@@ -156,7 +156,7 @@ Blockly.Blocks['stepper_step'] = {
         .appendField(new Blockly.Blocks.stepper.FieldStepperInstance(),
             'STEPPER_NAME');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.Types.NUMBER.compatibles());
+        .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_STEPPER_STEPS);
     this.setPreviousStatement(true);

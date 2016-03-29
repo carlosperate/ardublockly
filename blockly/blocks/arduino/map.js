@@ -31,10 +31,10 @@ Blockly.Blocks['base_map'] = {
     this.setColour(Blockly.Blocks.map.HUE);
     this.appendValueInput('NUM')
         .appendField(Blockly.Msg.ARD_MAP)
-        .setCheck(Blockly.Types.NUMBER.compatibles());
+        .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendValueInput('DMAX')
         .appendField(Blockly.Msg.ARD_MAP_VAL)
-        .setCheck(Blockly.Types.NUMBER.compatibles());
+        .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendDummyInput()
         .appendField(']');
     this.setInputsInline(true);

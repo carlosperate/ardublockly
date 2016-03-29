@@ -93,7 +93,7 @@ Blockly.Blocks['spi_transfer'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
     this.appendValueInput('SPI_DATA')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField(Blockly.Msg.ARD_SPI_TRANS_VAL);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_SPI_TRANS_SLAVE)

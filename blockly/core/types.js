@@ -18,76 +18,66 @@ goog.require('Blockly.Type');
 /** Text string. */
 Blockly.Types.TEXT = new Blockly.Type({
   typeName: 'Text',
-  basicType: Blockly.Type.BasicTypes.TEXT,
-  compatibleTypes: [],
+  compatibleTypes: [Blockly.Types.CHARACTER]
 });
 
 /** Single character. */
 Blockly.Types.CHARACTER = new Blockly.Type({
   typeName: 'Character',
-  basicType: Blockly.Type.BasicTypes.TEXT,
-  compatibleTypes: [],
+  compatibleTypes: [Blockly.Types.TEXT]
 });
 
 /** Boolean. */
 Blockly.Types.BOOLEAN = new Blockly.Type({
   typeName: 'Boolean',
-  basicType: Blockly.Type.BasicTypes.BOOLEAN,
-  compatibleTypes: [Blockly.Type.BasicTypes.NUMBER],
+  compatibleTypes: [Blockly.Types.NUMBER]
 });
 
 /** Integer number. */
 Blockly.Types.NUMBER = new Blockly.Type({
   typeName: 'Number',
-  basicType: Blockly.Type.BasicTypes.NUMBER,
-  compatibleTypes: [Blockly.Type.BasicTypes.CHARACTER,
-                    Blockly.Type.BasicTypes.DECIMAL],
+  compatibleTypes: [Blockly.Types.CHARACTER,
+                    Blockly.Types.BOOLEAN,
+                    Blockly.Types.DECIMAL]
 });
 
 /** Decimal/floating point number. */
 Blockly.Types.DECIMAL = new Blockly.Type({
   typeName: 'Decimal',
-  basicType: Blockly.Type.BasicTypes.DECIMAL,
   compatibleTypes: [Blockly.Type.NUMBER],
 });
 
 /** Array/List of items. */
 Blockly.Types.ARRAY = new Blockly.Type({
   typeName: 'Array',
-  basicType: Blockly.Type.BasicTypes.ARRAY,
   compatibleTypes: [],
 });
 
 /** Null indicate there is no type. */
 Blockly.Types.NULL = new Blockly.Type({
   typeName: 'Null',
-  basicType: Blockly.Type.BasicTypes.NULL,
   compatibleTypes: [],
 });
 
 /** Type not defined, or not yet defined. */
 Blockly.Types.UNDEF = new Blockly.Type({
   typeName: 'Undefined',
-  basicType: Blockly.Type.BasicTypes.UNDEF,
   compatibleTypes: [],
 });
 
 /** Set when no child block (meant to define the variable type) is connected. */
 Blockly.Types.CHILD_BLOCK_MISSING = new Blockly.Type({
   typeName: 'ChildBlockMissing',
-  basicType: Blockly.Type.BasicTypes.UNDEF,
   compatibleTypes: [],
 });
 
 /**
  * Adds another type to the Blockly.Types collection.
  * @param {string} typeName_ Identifiable name of the type.
- * @param {Blockly.Type.BasicTypes} basicType_ Defines the basic type name this
- *     type refers to.
- * @param {Array<Blockly.Type.BasicTypes>} compatibleTypes_ List of other basic
- *     types this Type is compatible with.
+ * @param {Array<Blockly.Type>} compatibleTypes_ List of types this Type is
+ *     compatible with.
  */
-Blockly.Types.addType = function(typeName_, basicType_, compatibleTypes_) {
+Blockly.Types.addType = function(typeName_, compatibleTypes_) {
   // The name is used as the key from the value pair in the BlocklyTypes object
   var key = typeName.toUpperCase();
   if (Blockly.Types[key] !== undefined) {
@@ -95,7 +85,6 @@ Blockly.Types.addType = function(typeName_, basicType_, compatibleTypes_) {
   }
   Blockly.Types[key] = new Blockly.Type({
     typeName: typeName_,
-    basicType: basicType_,
     compatibleTypes: compatibleTypes_,
   });
 };
