@@ -1189,4 +1189,9 @@ Blockly.Msg.ARD_VAR_AS = 'as';
 Blockly.Msg.ARD_VAR_AS_TIP = 'Sets a value to a specific type';
 Blockly.Msg.REPLACE_EXISTING_BLOCKS = 'Replace existing blocks? "Cancel" will merge.';
 
-
+Blockly.Msg.ARD_PULSEREAD = 'Read';
+Blockly.Msg.ARD_PULSEON = 'pulse on pin #';
+Blockly.Msg.ARD_PULSETIMEOUT = 'timeout after';
+Blockly.Msg.ARD_PULSETIMEOUT_MS = '';
+Blockly.Msg.ARD_PULSE_TIP = 'Measures the duration of a pulse on the selected pin.';
+Blockly.Msg.ARD_PULSETIMEOUT_TIP = 'Measures the duration of a pulse on the selected pin, if it is within the timeout.';

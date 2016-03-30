@@ -440,6 +440,11 @@
 	"ARD_TIME_INF": "wacht voor eeuwig (beeindig programma)",
 	"ARD_TIME_INF_TIP": "Wacht voor altijd, stopt het programma waar deze lijn staat.",
 	"ARD_VAR_AS": "als",
-	"ARD_VAR_AS_TIP": "Wijzigt de waarde in het gegeven type"
-
+	"ARD_VAR_AS_TIP": "Wijzigt de waarde in het gegeven type",
+	"ARD_PULSEREAD": "Lees een",
+	"ARD_PULSEON": "puls op pin #",
+	"ARD_PULSETIMEOUT": "wacht maximaal",
+	"ARD_PULSETIMEOUT_MS": "milliseconden",
+	"ARD_PULSE_TIP": "Meet de duur van een puls op een geselecteerde pin.",
+	"ARD_PULSETIMEOUT_TIP": "Meet de duur van een puls op een geselecteerde pin, zolang het gebeurt binnen de opgegeven maximale duur (in milliseconden)."
 }
