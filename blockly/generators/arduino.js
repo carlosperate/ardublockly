@@ -369,8 +369,12 @@ Blockly.Arduino.scrub_ = function(block, code) {
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
   switch (typeBlockly.typeName) {
+    case Blockly.Types.SHORT_POSITIVE_NUMBER.typeName:
+      return 'byte';
     case Blockly.Types.NUMBER.typeName:
       return 'int';
+    case Blockly.Types.LARGE_NUMBER.typeName:
+      return 'long int';
     case Blockly.Types.DECIMAL.typeName:
       return 'float';
     case Blockly.Types.TEXT.typeName:

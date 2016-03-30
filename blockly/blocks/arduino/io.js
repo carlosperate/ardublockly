@@ -33,7 +33,7 @@ Blockly.Blocks['io_digitalwrite'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
         .appendField(Blockly.Msg.ARD_WRITE_TO)
-        .setCheck(Blockly.Types.BOOLEAN.check);
+        .setCheck(Blockly.Types.BOOLEAN.checkList);
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -91,7 +91,7 @@ Blockly.Blocks['io_builtin_led'] = {
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.builtinLed), 'BUILT_IN_LED')
         .appendField('to')
-        .setCheck(Blockly.Types.BOOLEAN.check);
+        .setCheck(Blockly.Types.BOOLEAN.checkList);
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);

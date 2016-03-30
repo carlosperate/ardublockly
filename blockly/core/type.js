@@ -73,15 +73,18 @@ Object.defineProperty(Blockly.Type.prototype, 'checkList', {
  */
 Blockly.Type.prototype.generateCheckList_ = function(compatibleType) {
   this.generatedCheckList_ = [];
-  for (var type_ in this.compatibleTypes_) {
+  for (var i = 0; i < this.compatibleTypes_.length; i++) {
     var unique = true;
-    for (var i = 0; i < this.generatedCheckList_.length; i++) {
-      if (this.generatedCheckList_[i] === type_.typeName) {
+    for (var j = 0; j < this.generatedCheckList_.length; j++) {
+      if (this.generatedCheckList_[j] === this.compatibleTypes_[i].typeName) {
         unique = false;
       }
     }
     if (unique) {
-      this.generatedCheckList_.push(type_.typeName);
+      if (!this.compatibleTypes_[i]) {
+        console.error('problem');
+      }
+      this.generatedCheckList_.push(this.compatibleTypes_[i].typeName);
     }
   }
 };
@@ -93,9 +96,30 @@ Blockly.Type.prototype.generateCheckList_ = function(compatibleType) {
 Blockly.Type.prototype.addCompatibleType = function(compatibleType) {
   if (!compatibleType || !compatibleType.constructor ||
       compatibleType.constructor.name !== 'BlocklyType') {
-    throw new Error('To add a compatible type to ' + this.typeName + ' you ' +
-                    'must point to a Blockly.Type object.');
+    throw new Error('To add a compatible type to ' + this.typeName +
+                    ' provide a Blockly.Type object.');
   }
   this.compatibleTypes_.push(compatibleType);
+  this.generateCheckList_();
+};
+
+/**
+ * Adds an array of new types to be compatible with this one.
+ * @param {!Array<Blockly.Type>} compatibleTypeArray Array of new type to add to
+ *     compatibility list.
+ */
+Blockly.Type.prototype.addCompatibleTypes = function(compatibleTypeArray) {
+  if (!goog.isArray(compatibleTypeArray)) {
+    throw new Error('To add compatible types to the Blockly Type ' +
+                    this.typeName +' provide an array of Blockly.Type items.');
+  }
+  for (var i = 0; i < compatibleTypeArray.length; i++) {
+    if (!compatibleTypeArray[i] || !compatibleTypeArray[i].constructor ||
+        compatibleTypeArray[i].constructor.name !== 'BlocklyType') {
+      throw new Error('To add a compatible type to ' + this.typeName + ' you ' +
+                      'must point to a Blockly.Type object.');
+    }
+    this.compatibleTypes_.push(compatibleTypeArray[i]);
+  }
   this.generateCheckList_();
 };
