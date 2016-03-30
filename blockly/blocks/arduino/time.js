@@ -69,12 +69,12 @@ Blockly.Blocks['time_millis'] = {
     this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_TIME_MILLIS);
-    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setOutput(true, Blockly.Types.LARGE_NUMBER.output);
     this.setTooltip(Blockly.Msg.ARD_TIME_MILLIS_TIP);
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.Types.NUMBER;
+    return Blockly.Types.LARGE_NUMBER;
   }
 };
 
@@ -88,7 +88,7 @@ Blockly.Blocks['time_micros'] = {
     this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_TIME_MICROS);
-    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setOutput(true, Blockly.Types.LARGE_NUMBER.output);
     this.setTooltip(Blockly.Msg.ARD_TIME_MICROS_TIP);
   },
   /**
@@ -96,7 +96,7 @@ Blockly.Blocks['time_micros'] = {
    * @return {string} The type of return value for the block, an integer.
    */
   getBlockType: function() {
-    return Blockly.Types.NUMBER;
+    return Blockly.Types.LARGE_NUMBER;
   }
 };
 
