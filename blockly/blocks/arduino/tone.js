@@ -22,23 +22,23 @@ Blockly.Blocks.tone.HUE = 250;
 Blockly.Blocks['io_tone'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Set tone on pin #")
+        .appendField(Blockly.Msg.ARD_SETTONE)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), "TONEPIN");
     this.appendValueInput("FREQUENCY")
-        .setCheck(Blockly.Types.NUMBER.compatibles())
-        .appendField("at frequency");
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField(Blockly.Msg.ARD_TONEFREQ);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(Blockly.Blocks.tone.HUE);
-    this.setTooltip("Sets tone on pin to specified frequency within range 31 - 65535");
+    this.setTooltip(Blockly.Msg.ARD_TONE_TIP);
     this.setHelpUrl('https://www.arduino.cc/en/Reference/tone');
   },
   onchange: function() {
     var freq = Blockly.Arduino.valueToCode(this, "FREQUENCY", Blockly.Arduino.ORDER_ATOMIC)
     if (freq < 31 || freq > 65535) {
-      this.setWarningText("Frequency must be in range 31 - 65535", 'io_tone');
+      this.setWarningText(Blockly.Msg.ARD_TONE_WARNING, 'io_tone');
     } else {
       this.setWarningText(null, 'io_tone');
     }
@@ -52,13 +52,13 @@ Blockly.Blocks['io_tone'] = {
 Blockly.Blocks['io_notone'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("Turn off tone on pin #")
+        .appendField(Blockly.Msg.ARD_NOTONE)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), "TONEPIN");
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setColour(Blockly.Blocks.tone.HUE);
-    this.setTooltip("Turns the tone off on the selected pin");
+    this.setTooltip(Blockly.Msg.ARD_NOTONE_TIP);
     this.setHelpUrl('https://www.arduino.cc/en/Reference/noTone');
   },
     /** @return {!string} The type of input value for the block, an integer. */

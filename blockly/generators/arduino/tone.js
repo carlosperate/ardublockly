@@ -40,6 +40,9 @@ Blockly.Arduino['io_notone'] = function(block) {
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Tone Pin');
   
+  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);\n';
+  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
   var code = 'noTone(' + pin + ');\n';
   return code;
 };
