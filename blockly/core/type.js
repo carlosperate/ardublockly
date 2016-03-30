@@ -4,9 +4,8 @@
  */
 
 /**
- * @fileoverview Object that defines static objects and methods to assign
- *     Blockly types to Blockly blocks. These can then be converted to language
- *     specific types in each language generator.
+ * @fileoverview Object that defines Types that can then be converted to
+ *     language specific types in each language generator.
  */
 'use strict';
 
@@ -81,9 +80,6 @@ Blockly.Type.prototype.generateCheckList_ = function(compatibleType) {
       }
     }
     if (unique) {
-      if (!this.compatibleTypes_[i]) {
-        console.error('problem');
-      }
       this.generatedCheckList_.push(this.compatibleTypes_[i].typeName);
     }
   }

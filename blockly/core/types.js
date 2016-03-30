@@ -32,7 +32,7 @@ Blockly.Types.BOOLEAN = new Blockly.Type({
 });
 
 /** Short integer number. */
-Blockly.Types.SHORT_POSITIVE_NUMBER = new Blockly.Type({
+Blockly.Types.SHORT_NUMBER = new Blockly.Type({
   typeName: 'Short Positive Number',
   compatibleTypes: []    // Circular dependencies, add after all declarations
 });
@@ -53,7 +53,7 @@ Blockly.Types.LARGE_NUMBER = new Blockly.Type({
 Blockly.Types.DECIMAL = new Blockly.Type({
   typeName: 'Decimal',
   compatibleTypes: [Blockly.Types.BOOLEAN,
-                    Blockly.Types.SHORT_POSITIVE_NUMBER,
+                    Blockly.Types.SHORT_NUMBER,
                     Blockly.Types.NUMBER,
                     Blockly.Types.LARGE_NUMBER]
 });
@@ -88,11 +88,11 @@ Blockly.Types.CHILD_BLOCK_MISSING = new Blockly.Type({
  */
 Blockly.Types.NUMBER.addCompatibleTypes([
     Blockly.Types.BOOLEAN,
-    Blockly.Types.SHORT_POSITIVE_NUMBER,
+    Blockly.Types.SHORT_NUMBER,
     Blockly.Types.LARGE_NUMBER,
     Blockly.Types.DECIMAL]);
 
-Blockly.Types.SHORT_POSITIVE_NUMBER.addCompatibleTypes([
+Blockly.Types.SHORT_NUMBER.addCompatibleTypes([
     Blockly.Types.BOOLEAN,
     Blockly.Types.NUMBER,
     Blockly.Types.LARGE_NUMBER,
@@ -100,7 +100,7 @@ Blockly.Types.SHORT_POSITIVE_NUMBER.addCompatibleTypes([
 
 Blockly.Types.LARGE_NUMBER.addCompatibleTypes([
     Blockly.Types.BOOLEAN,
-    Blockly.Types.SHORT_POSITIVE_NUMBER,
+    Blockly.Types.SHORT_NUMBER,
     Blockly.Types.NUMBER,
     Blockly.Types.DECIMAL]);
 
