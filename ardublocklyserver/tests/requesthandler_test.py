@@ -9,7 +9,10 @@
 from __future__ import unicode_literals, absolute_import
 import os
 import unittest
-import mock
+try:
+    import mock
+except ImportError:
+    from unittest.mock import MagicMock as mock
 
 try:
     from ardublocklyserver import requesthandler
