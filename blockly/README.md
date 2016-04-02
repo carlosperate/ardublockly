@@ -1,24 +1,24 @@
 # Blockly fork
 
-This is a fork of Google's Blockly visual programming editor:
-https://github.com/google/blockly
+This is a fork of Google's Blockly visual programming editor: https://github.com/google/blockly
 
 It adds the following features:
 
 * Arduino code generation
 * Arduino specific blocks
-* Different Arduino boards support
-* Static typing (working, but incomplete)
+* Multiple Arduino boards support
+* Static typing
 * Code warnings
 * Arduino pin tracking
 * Arduino generator unit test (incomplete)
 * Procedures core class modified to include the Arduino setup() and loop() functions
 * Temporarily removed procedure's mutator responsible to add arguments
+* Blocks HSV hue colour value slightly higher for more vibrant colours
 * Minor visual changes to the zoom icons positioning
+* Build file updated to include all these changes
 
-The following features are planned to be push upstream (list will be updated as PR get accepted):
+The following features are planned to be pushed upstream (list will be updated as PR get accepted):
 
-* Fix toolbox XML nodes injected into blockly under IE (works on Chrome and Firefox)
 * Replaces window.prompt uses to a local version that can easily be replaced by an asynchronous HTML version
 
 All other changes and fixes have been submitted to the original Blockly repository for inclusion into the upstream master branch.
@@ -33,13 +33,13 @@ This fork is configured as a Git Subtree, this is done to be able to pull all th
 
 ### Pulling from upstream
 
-Adding the blockly repository as a remote and fetching latest:
+Adding the Blockly repository as a remote and fetching latest:
 
 ```
 git remote add -f blockly https://github.com/google/blockly.git
 ```
 
-Pulling from blockly master, from the project root directory:
+Pulling from Blockly master, from the project root directory:
 
 ```
 git fetch blockly master

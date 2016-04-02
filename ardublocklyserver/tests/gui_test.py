@@ -6,10 +6,15 @@
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import os
 import unittest
-import mock
+try:
+    import mock
+    from mock import patch
+except ImportError:
+    from unittest.mock import MagicMock as mock
+    from unittest.mock import patch
 
 try:
     import ardublocklyserver.gui as gui
@@ -29,7 +34,7 @@ class GuiTestCase(unittest.TestCase):
     #
     # Tests for checking browsing for paths and files
     #
-    @mock.patch('ardublocklyserver.gui.tkFileDialog.askopenfilename')
+    @patch('ardublocklyserver.gui.tkFileDialog.askopenfilename')
     def test_browse_file(self, mock_file_select):
         test_file = os.path.join(os.getcwd(), 'test_file')
         mock_file_select.return_value = test_file
@@ -44,7 +49,7 @@ class GuiTestCase(unittest.TestCase):
         function_file = gui.browse_file_dialog()
         self.assertEqual(canceled_file, function_file)
 
-    @mock.patch('ardublocklyserver.gui.tkFileDialog.askdirectory')
+    @patch('ardublocklyserver.gui.tkFileDialog.askdirectory')
     def test_browse_path(self, mock_path_select):
         test_path = os.path.join(os.getcwd(), 'test_path')
         mock_path_select.return_value = test_path

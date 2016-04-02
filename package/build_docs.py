@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 #
 # Builds the GitHub Wiki documentation into a static HTML site saved into the 
@@ -26,7 +26,7 @@
 #    REMOVES the root Documentation folder
 #    Copies the generate content into the root Documentation folder
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import os
 import sys
 import shutil
@@ -84,7 +84,7 @@ def pull_wiki_repo():
               "repository !\n%s" + std_err_op)
         return False
 
-    if GITHUB_WIKI_REPO not in std_op:
+    if GITHUB_WIKI_REPO not in str(std_op):
         print("ERROR: Wiki repository: %s\nnot found in directory %s: \n%s" %
               (GITHUB_WIKI_REPO, WIKI_DIR, std_op))
         return False
@@ -185,7 +185,7 @@ def build_mkdocs():
         ["mkdocs", "build", "--clean"], stdout=pipe, stderr=pipe)
     std_op, std_err_op = mkdocs_process.communicate()
     print("%s%s" % (std_op, std_err_op))
-    if "ERROR" in std_err_op:
+    if "ERROR" in str(std_err_op):
         print("ERROR: Could not build MkDocs !")
         return False
 

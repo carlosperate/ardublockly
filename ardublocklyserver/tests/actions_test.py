@@ -6,12 +6,17 @@
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import os
 import sys
-import mock
 import codecs
 import unittest
+try:
+    import mock
+    from mock import patch
+except ImportError:
+    from unittest.mock import MagicMock as mock
+    from unittest.mock import patch
 
 try:
     import ardublocklyserver.actions as actions
@@ -51,8 +56,8 @@ class ActionsTestCase(unittest.TestCase):
     #
     # Command line tests
     #
-    @mock.patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
-    #@mock.patch.object(
+    @patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
+    #@patch.object(
     #    actions.ServerCompilerSettings, 'get_compiler_dir', autospec=True)
     def test_load_arduino_cli_valid(self, mock_popen):
         """
@@ -63,7 +68,7 @@ class ActionsTestCase(unittest.TestCase):
         sketch_path = actions.create_sketch_default()
 
         ServerCompilerSettings().load_ide_option = 'open'
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
                 new_callable=mock.PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'true'  # do nothing command
@@ -74,7 +79,7 @@ class ActionsTestCase(unittest.TestCase):
             self.assertTrue(success)
 
         ServerCompilerSettings().load_ide_option = 'verify'
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
                 new_callable=mock.PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'true'  # do nothing command
@@ -88,7 +93,7 @@ class ActionsTestCase(unittest.TestCase):
             self.assertTrue(success)
 
         ServerCompilerSettings().load_ide_option = 'upload'
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
                 new_callable=mock.PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'true'  # do nothing command
@@ -106,7 +111,7 @@ class ActionsTestCase(unittest.TestCase):
 
         # Test for unicode strings as Py2 can be susceptible to fail there
         ServerCompilerSettings().load_ide_option = 'upload'
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
                 new_callable=mock.PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'いろはにほへとちり'  # unicode
@@ -137,10 +142,10 @@ class ActionsTestCase(unittest.TestCase):
         self.assertEqual(conclusion, 'Unable to find Arduino IDE')
 
         # Test for error if compiler dir is not set
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
                 new_callable=mock.PropertyMock) as mock_compiler_dir:
-            with mock.patch(
+            with patch(
                     'ardublocklyserver.actions.ServerCompilerSettings.'
                     'load_ide_option', new_callable=mock.PropertyMock) as \
                     mock_load_ide_option:
@@ -154,10 +159,10 @@ class ActionsTestCase(unittest.TestCase):
 
         # Test for error if serial port unset, only required when set to upload
         ServerCompilerSettings().load_ide_option = 'upload'
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
                 new_callable=mock.PropertyMock) as mock_compiler_dir:
-            with mock.patch(
+            with patch(
                     'ardublocklyserver.actions.ServerCompilerSettings.'
                     'get_serial_port_flag') as mock_get_serial_port_flag:
                 mock_compiler_dir.return_value = 'true'  # do nothing command
@@ -169,10 +174,10 @@ class ActionsTestCase(unittest.TestCase):
 
         # Test for error if board type unset, only required when set to upload
         ServerCompilerSettings().load_ide_option = 'upload'
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
                 new_callable=mock.PropertyMock) as mock_compiler_dir:
-            with mock.patch(
+            with patch(
                     'ardublocklyserver.actions.ServerCompilerSettings.'
                     'get_arduino_board_flag') as mock_get_arduino_board_flag:
                 mock_compiler_dir.return_value = 'true'  # do nothing command
@@ -206,8 +211,8 @@ class ActionsTestCase(unittest.TestCase):
     #
     # Tests sketch creation
     #
-    @mock.patch('ardublocklyserver.gui.browse_file_dialog')
-    @mock.patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.gui.browse_file_dialog')
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
     def test_load_arduino_cli_valid(self, mock_isfile, mock_file_dialog):
         """
         Tests that the set_compiler_path method edits the settings based on the
@@ -230,11 +235,11 @@ class ActionsTestCase(unittest.TestCase):
 
         # If the dialog is cancelled, the ServerCompilerSettings class should
         # not be invoked at all
-        with mock.patch(
+        with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.__new__') \
                 as mock_settings:
             # Avoid call to ServerCompilerSettings() in get_compiler_path
-            with mock.patch('ardublocklyserver.actions.get_compiler_path') \
+            with patch('ardublocklyserver.actions.get_compiler_path') \
                     as mock_get_compiler_path:
                 mock_file_dialog.return_value = ''  # Dialog cancel return value
                 mock_get_compiler_path.return_vale = None  # Don't care

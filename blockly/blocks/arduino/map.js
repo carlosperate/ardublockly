@@ -30,16 +30,16 @@ Blockly.Blocks['base_map'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/map');
     this.setColour(Blockly.Blocks.map.HUE);
     this.appendValueInput('NUM')
-        .appendField('Map ')
-        .setCheck(Blockly.Types.NUMBER.compatibles());
+        .appendField(Blockly.Msg.ARD_MAP)
+        .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendValueInput('DMAX')
-        .appendField('value to [0-')
-        .setCheck(Blockly.Types.NUMBER.compatibles());
+        .appendField(Blockly.Msg.ARD_MAP_VAL)
+        .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendDummyInput()
         .appendField(']');
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setTooltip('Re-maps a number from [0-1024] to another range.');
+    this.setTooltip(Blockly.Msg.ARD_MAP_TIP);
   },
   /** @return {string} The type of return value for the block, an integer. */
   getBlockType: function() {

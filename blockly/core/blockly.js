@@ -28,6 +28,7 @@
 goog.provide('Blockly');
 
 goog.require('Blockly.BlockSvg');
+goog.require('Blockly.Events');
 goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldColour');
@@ -69,7 +70,7 @@ Blockly.HTML_NS = 'http://www.w3.org/1999/xhtml';
  * The richness of block colours, regardless of the hue.
  * Must be in the range of 0 (inclusive) to 1 (exclusive).
  */
-Blockly.HSV_SATURATION = 0.45;
+Blockly.HSV_SATURATION = 0.55;
 /**
  * The intensity of block colours, regardless of the hue.
  * Must be in the range of 0 (inclusive) to 1 (exclusive).
@@ -434,7 +435,7 @@ Blockly.longStop_ = function() {
  * @private
  */
 Blockly.copy_ = function(block) {
-  var xmlBlock = Blockly.Xml.blockToDom_(block);
+  var xmlBlock = Blockly.Xml.blockToDom(block);
   if (Blockly.dragMode_ != 2) {
     Blockly.Xml.deleteNext(xmlBlock);
   }

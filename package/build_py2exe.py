@@ -1,9 +1,9 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*- #
 #
-# Builds the Ardublockly Python portion of the app for Windows.
+# Builds the Ardublockly Python server into a Windows executable.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2016 carlosperate https://github.com/carlosperate/
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,9 +17,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# IMPORTANT: This script is designed to be located one directory level under the
-#            project root folder.
+# IMPORTANT: This script is designed to be executed from the project root
+# directory.
 #
+from __future__ import unicode_literals, absolute_import, print_function
 import os
 import sys
 import shutil
@@ -37,19 +38,19 @@ script_tag = "[Ardublockly build] "
 script_tab = "                    "
 
 # Set up directories, assumes this file is one level below project root:
-# (from project root) level1/build_windows.py
+# (from project root) package/build_py2exe.py
 project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 server_exec_dir = os.path.join(project_root_dir, exec_folder_name,
-                              server_exec_folder_name)
+                               server_exec_folder_name)
 
 # Enable the ardublocklyserver package access the sys path for py2exe to find
 sys.path.append(project_root_dir)
 
 
 def remove_directory(dir_to_remove):
-    """ Removes the a given directory. """
+    """ :param dir_to_remove: Directory to remove from system. """
     if os.path.exists(dir_to_remove):
         print(script_tab + "Removing directory %s" % dir_to_remove)
         shutil.rmtree(dir_to_remove)
@@ -60,21 +61,28 @@ def remove_directory(dir_to_remove):
 def get_py2exe_extra_data_files():
     """ Collects the required redistributable dlls and other files. """
     # Microsoft compiler redistributable dlls
-    data_files = [("Microsoft.VC90.CRT", glob(r"msvcm90\*.*"))]
+    data_files = [("Microsoft.VC90.CRT", glob(r"msvcm90\*.*")),
+                  ("", ["C:\\Windows\\System32\\msvcr100.dll"])]
     return data_files
 
 
 def get_py2exe_options():
     """ Prepares and returns the py2exe options dictionary. """
+    # Ensure this packages are included, usually added here out of necessity
+    includes = []
+    packages = ["ardublocklyserver"]
+    if sys.version_info.major == 3:
+        packages.extend(["tkinter", "urllib", "collections", "http"])
+
     # We don't really need a few of the pywin32 includes
     excludes = ["pywin", "pywin.debugger", "pywin.debugger.dbgcon",
                 "pywin.dialogs", "pywin.dialogs.list", "win32com.server",
-                "curses", "email"]
+                "curses"]
 
     # We don't need these two dlls from the msvcm90
     dll_excludes = ["msvcp90.dll", "msvcm90.dll"]
 
-    # We can't include these microsoft dlls, which get pulled with build
+    # We can't include these microsoft dlls, which get pulled with the build
     dll_excludes += ["api-ms-win-core-atoms-l1-1-0.dll",
                      "api-ms-win-core-crt-l1-1-0.dll",
                      "api-ms-win-core-crt-l2-1-0.dll",
@@ -114,7 +122,7 @@ def get_py2exe_options():
                      "USERENV.dll", "USP10.dll", "WININET.dll", "WTSAPI32.dll"]
 
     # We don't need these python packages either
-    excludes.extend(["unittest", "_ssl", "doctest", "pdb", "difflib", "email"])
+    excludes.extend(["unittest", "_ssl", "doctest", "pdb", "difflib"])
 
     # Py2exe options: http://www.py2exe.org/index.cgi/ListOfOptions
     py2exe_options = {
@@ -123,8 +131,9 @@ def get_py2exe_options():
                    "bundle_files": 3,
                    "skip_archive": True,
                    "optimize": 0,
-                   "packages": ["ardublocklyserver"],
+                   "packages": packages,
                    "dll_excludes": dll_excludes,
+                   "includes": includes,
                    "excludes": excludes}}
     return py2exe_options
 
@@ -138,8 +147,11 @@ def get_python_files_to_compile():
     return [start_file]
 
 
-def build_exe(args):
-    """ Sets up the disutils for py2exe and runs it to build project. """
+def build_exe(args=None):
+    """
+    Sets up the disutils for py2exe and runs it to build project.
+    :param args: Argument to pass to the Py2exe setup.
+    """
     setup(data_files=get_py2exe_extra_data_files(),
           console=get_python_files_to_compile(),
           options=get_py2exe_options(),
@@ -175,8 +187,10 @@ def main():
     print(script_tag + "Removing old build directory.")
     remove_directory(os.path.join(os.getcwd(), "build"))
 
-    print(script_tag + "Removing old executable directory.")
+    print(script_tag + "Cleaning old executable directory.")
     remove_directory(server_exec_dir)
+    if not os.path.exists(server_exec_dir):
+        os.makedirs(server_exec_dir)
 
     print(script_tag + "Building Ardublockly using py2exe.")
     if len(sys.argv) <= 1:

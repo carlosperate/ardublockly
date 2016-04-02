@@ -28,32 +28,33 @@ Blockly.Blocks['spi_setup'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/SPI');
     this.setColour(Blockly.Blocks.spi.HUE);
     this.appendDummyInput()
-        .appendField('Setup')
+        .appendField(Blockly.Msg.ARD_SPI_SETUP)
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID')
-        .appendField('configuration:');
+        .appendField(Blockly.Msg.ARD_SPI_SETUP_CONF);
     this.appendDummyInput()
-        .appendField('data shift')
+        .appendField(Blockly.Msg.ARD_SPI_SETUP_SHIFT)
         .appendField(
             new Blockly.FieldDropdown(
-                [['MSBFIRST', 'MSBFIRST'], ['LSBFIRST', 'LSBFIRST']]),
+                [[Blockly.Msg.ARD_SPI_SETUP_MSBFIRST, 'MSBFIRST'],
+		[Blockly.Msg.ARD_SPI_SETUP_LSBFIRST, 'LSBFIRST']]),
             'SPI_SHIFT_ORDER');
     this.appendDummyInput()
-        .appendField('clock divide')
+        .appendField(Blockly.Msg.ARD_SPI_SETUP_DIVIDE)
         .appendField(
           new Blockly.FieldDropdown(
               Blockly.Arduino.Boards.selected.spiClockDivide),
           'SPI_CLOCK_DIVIDE');
     this.appendDummyInput()
-        .appendField('SPI mode (idle - edge)')
+        .appendField(Blockly.Msg.ARD_SPI_SETUP_MODE)
         .appendField(
             new Blockly.FieldDropdown(
-                [['0 (Low - Falling)', 'SPI_MODE0'],
-                 ['1 (Low - Rising)', 'SPI_MODE1'],
-                 ['2 (High - Falling)', 'SPI_MODE2'],
-                 ['3 (High - Rising)', 'SPI_MODE3']]),
+                [[Blockly.Msg.ARD_SPI_SETUP_MODE0, 'SPI_MODE0'],
+                 [Blockly.Msg.ARD_SPI_SETUP_MODE1, 'SPI_MODE1'],
+                 [Blockly.Msg.ARD_SPI_SETUP_MODE2, 'SPI_MODE2'],
+                 [Blockly.Msg.ARD_SPI_SETUP_MODE3, 'SPI_MODE3']]),
             'SPI_MODE');
-    this.setTooltip('Configures the SPI peripheral.');
+    this.setTooltip(Blockly.Msg.ARD_SPI_SETUP_TIP);
   },
   /**
    * Returns the selected SPI instance.
@@ -82,7 +83,7 @@ Blockly.Blocks['spi_transfer'] = {
    */
   init: function() {
     // Drop down list to contain all digital pins plus an option for 'none'
-    var slaveNone = [['none', 'none']];
+    var slaveNone = [[Blockly.Msg.ARD_SPI_TRANS_NONE, 'none']];
     var digitalPinsExtended = slaveNone.concat(
         Blockly.Arduino.Boards.selected.digitalPins);
 
@@ -92,16 +93,16 @@ Blockly.Blocks['spi_transfer'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
     this.appendValueInput('SPI_DATA')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
-        .appendField('transfer');
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .appendField(Blockly.Msg.ARD_SPI_TRANS_VAL);
     this.appendDummyInput()
-        .appendField('to slave pin')
+        .appendField(Blockly.Msg.ARD_SPI_TRANS_SLAVE)
         .appendField(
             new Blockly.FieldDropdown(digitalPinsExtended), 'SPI_SS');
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip('Send a SPI message to an specified slave device.');
+    this.setTooltip(Blockly.Msg.ARD_SPI_TRANS_TIP);
   },
   /**
    * Called whenever anything on the workspace changes.
@@ -129,9 +130,8 @@ Blockly.Blocks['spi_transfer'] = {
     }
 
     if (!setupInstancePresent) {
-      this.setWarningText(
-          'A setup block for ' + thisInstanceName + ' must be added to the ' +
-          'workspace to use this block!', 'spi_setup');
+      this.setWarningText(Blockly.Msg.ARD_SPI_TRANS_WARN1.replace('%1', thisInstanceName),
+								  'spi_setup');
     } else {
       this.setWarningText(null, 'spi_setup');
     }
@@ -152,7 +152,7 @@ Blockly.Blocks['spi_transfer'] = {
     // Special case, otherwise Blockly.Arduino.Boards.refreshBlockFieldDropdown
     var field = this.getField('SPI_SS');
     var fieldValue = field.getValue();
-    var slaveNone = [['none', 'none']];
+    var slaveNone = [[Blockly.Msg.ARD_SPI_TRANS_NONE, 'none']];
     field.menuGenerator_ =
         slaveNone.concat(Blockly.Arduino.Boards.selected['digitalPins']);
 
@@ -164,8 +164,8 @@ Blockly.Blocks['spi_transfer'] = {
     }
     // If the old value is not present any more, add a warning to the block.
     if (!currentValuePresent) {
-      this.setWarningText(
-          'Old pin value ' + fieldValue + ' is no longer available.', 'bPin');
+      this.setWarningText(Blockly.Msg.ARD_SPI_TRANS_WARN2.replace('%1', fieldValue),
+			  'bPin');
     } else {
       this.setWarningText(null, 'bPin');
     }
@@ -179,7 +179,7 @@ Blockly.Blocks['spi_transfer_return'] = {
    */
   init: function() {
     // Drop down list to contain all digital pins plus an option for 'none'
-    var slaveNone = [['none', 'none']];
+    var slaveNone = [[Blockly.Msg.ARD_SPI_TRANS_NONE, 'none']];
     var digitalPinsExtended = slaveNone.concat(
         Blockly.Arduino.Boards.selected.digitalPins);
 
@@ -189,15 +189,14 @@ Blockly.Blocks['spi_transfer_return'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.spi), 'SPI_ID');
     this.appendValueInput('SPI_DATA')
-        .appendField('transfer');
+        .appendField(Blockly.Msg.ARD_SPI_TRANS_VAL);
     this.appendDummyInput()
-        .appendField('to slave pin')
+        .appendField(Blockly.Msg.ARD_SPI_TRANS_SLAVE)
         .appendField(
             new Blockly.FieldDropdown(digitalPinsExtended), 'SPI_SS');
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setTooltip('Send a SPI message to an specified slave device and get ' +
-                    'data back.');
+    this.setTooltip(Blockly.Msg.ARD_SPI_TRANSRETURN_TIP);
   },
   /** Same as spi_transfer block */
   onchange: Blockly.Blocks['spi_transfer'].onchange,

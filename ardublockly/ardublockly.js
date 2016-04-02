@@ -12,7 +12,8 @@ var Ardublockly = Ardublockly || {};
 /** Lookup for names of supported languages. Keys in ISO 639 format. */
 Ardublockly.LANGUAGE_NAME = {
   'en': 'English',
-  'es': 'Español'
+  'es': 'Español',
+  'nl': 'Nederlands'
 };
 
 /**

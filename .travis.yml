@@ -6,23 +6,30 @@ before_install:
   - uname -a
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
+  - pip freeze
 
-  # Install python
+  # Install Python 2 and 3 with pip and check versions
   - brew update
+  - brew install python3
+  - brew link --overwrite python3
   - brew install python
   - brew link --overwrite python
-  - pip install --upgrade pip
   - PATH=/usr/local/bin:$PATH
   - echo $PATH
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
+  - python3 --version
+  - python3 -c "import struct; print(struct.calcsize('P') * 8)"
 
   - brew install libcouchbase
 
+  # Install Python packages (built with Python 3, tests for 2 and 3)
   - pip install mock
-  - pip install mkdocs
-  - pip install pyinstaller
+  - pip3 install mkdocs
+  - pip3 install pyinstaller
   - pyinstaller --version
+  - pip freeze
+  - pip3 freeze
 
   # Install node.js
   - brew unlink node
@@ -30,20 +37,22 @@ before_install:
   - node --version
   - npm --version
 
-# Build and Pack ardublockly
+# Build and pack Ardublockly
 install:
   - cd blockly && python build.py && cd ../
-  - python package/build_docs.py
-  - python package/build_pyinstaller.py mac
+  - python3 package/build_docs.py
+  - python3 package/build_pyinstaller.py mac
   - cd package/electron && npm install && cd ../../
   - cd package/electron && npm run release && cd ../../
-  - python package/pack_ardublockly.py
+  - python3 package/pack_ardublockly.py
   - du -sk releases/
 
-# For now only running a known passing test, the others need to be updated
+# Run the tests in both Python 2 and 3
 script:
-  - python ardublocklyserver/tests/sketchcreator_test.py
-  - python ardublocklyserver/tests/compilersettings_test.py
+  - python  ardublocklyserver/tests/sketchcreator_test.py
+  - python3 ardublocklyserver/tests/sketchcreator_test.py
+  - python  ardublocklyserver/tests/compilersettings_test.py
+  - python3 ardublocklyserver/tests/compilersettings_test.py
 
 # Deploy the build version in an S3 bucket
 deploy:

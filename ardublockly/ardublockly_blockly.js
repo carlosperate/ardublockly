@@ -64,6 +64,10 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxXml, blocklyPath) {
 /** Binds the event listeners relevant to Blockly. */
 Ardublockly.bindBlocklyEventListeners = function() {
   Ardublockly.workspace.addChangeListener(Ardublockly.renderContent);
+
+  // Ensure the Blockly workspace resizes accordingly
+  window.addEventListener('resize',
+      function() { Blockly.svgResize(Ardublockly.workspace); }, false);
 };
 
 /** @return {!string} Generated Arduino code from the Blockly workspace. */
