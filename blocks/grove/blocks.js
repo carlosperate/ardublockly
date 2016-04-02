@@ -29,7 +29,7 @@ Blockly.Blocks['grove_led'] = {
         .appendField(Blockly.Msg.BLOCKS_GROVE_LED)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.groveDigital), 'CONNECTOR')
-        .setCheck(Blockly.Types.BOOLEAN.compatibles());
+        .setCheck(Blockly.Types.BOOLEAN.checkList);
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -67,7 +67,7 @@ Blockly.Blocks['grove_button'] = {
         .appendField(Blockly.Msg.BLOCKS_GROVE_BUTTON)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.groveDigital), 'CONNECTOR');
-    this.setOutput(true, Blockly.Types.BOOLEAN.basicType);
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setTooltip(Blockly.Msg.BLOCKS_GROVE_BUTTON_TIP);
   },
   /** Updates the content of the the pin related fields. */
@@ -93,7 +93,7 @@ Blockly.Blocks['grove_joystick'] = {
         .appendField(Blockly.Msg.BLOCKS_GROVE_JOYSTICK_2)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.groveAnalog), 'CONNECTOR');
-    this.setOutput(true, Blockly.Types.NUMBER.basicType);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.BLOCKS_GROVE_JOYSTICK_TIP);
   },
   /**
@@ -130,7 +130,7 @@ Blockly.Blocks['grove_pir'] = {
         .appendField(Blockly.Msg.BLOCKS_GROVE_PIR)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.groveDigital), 'CONNECTOR');
-    this.setOutput(true, Blockly.Types.BOOLEAN.basicType);
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setTooltip(Blockly.Msg.BLOCKS_GROVE_PIR_TIP);
   },
   /** Updates the content of the the pin related fields. */
@@ -154,7 +154,7 @@ Blockly.Blocks['grove_temperature'] = {
         .appendField(Blockly.Msg.BLOCKS_GROVE_TEMPERATURE)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.groveAnalog), 'CONNECTOR');
-    this.setOutput(true, Blockly.Types.NUMBER.basicType);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.BLOCKS_GROVE_TEMPERATURE_TIP);
   },
   /** Updates the content of the the pin related fields.In this case analog. */
@@ -175,7 +175,7 @@ Blockly.Blocks['grove_lcd_rgb'] = {
         .appendField(new Blockly.FieldImage(
             '/blocks/grove/img/lcd_rgb.png', 32, 32))
         .appendField(Blockly.Msg.BLOCKS_GROVE_LCD_RGB)
-        .setCheck(Blockly.Types.TEXT.compatibles());
+        .setCheck(Blockly.Types.TEXT.checkList);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.BLOCKS_GROVE_LCD_RGB_TIP);

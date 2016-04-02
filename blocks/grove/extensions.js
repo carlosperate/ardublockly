@@ -4,7 +4,9 @@
  */
 
 /**
- * @fileoverview Extends Ardublockly functionality for the Grove blocks
+ * @fileoverview Extends Ardublockly functionality for the Grove blocks.
+ *     These modules depend on an Arduino Shield, which should connected to the
+ *     same pins in all Arduino boards.
  */
 'use strict';
 
