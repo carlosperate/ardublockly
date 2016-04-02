@@ -2,11 +2,11 @@
 #
 # Collection of actions to the ardublocklyserver for relieved HTTP requests.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2016 carlosperate https://github.com/carlosperate/
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import subprocess
 import locale
 import time

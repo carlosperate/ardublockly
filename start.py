@@ -1,13 +1,13 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
 # Entry point for the ArdublocklyServer application.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2016 carlosperate https://github.com/carlosperate/
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import os
 import re
 import sys
@@ -24,6 +24,7 @@ import ardublocklyserver.compilersettings
 def open_browser(open_file):
     """
     Start a browser in a separate thread after waiting for half a second.
+    :param open_file: URL for the browser to open.
     """
     def _open_browser():
         webbrowser.get().open('http://localhost:%s/%s' %
@@ -41,7 +42,6 @@ def find_ardublockly_dir(search_path):
     This function is required because this script can end up in executable form
     in different locations of the project folder, and a literal relative path
     should not be assumed.
-
     :param search_path: Path in which to find the Ardublockly root project
                       folder.
     :return: Path to the Ardublockly root folder.
@@ -67,7 +67,6 @@ def parsing_cl_args():
     Processes the command line arguments. Arguments supported:
     -h / --help
     -s / --serverroot <working directory>
-
     :return: Dictionary with available options(keys) and value(value).
     """
     # Set option defaults
@@ -107,17 +106,17 @@ def parsing_cl_args():
                 arg = os.path.normpath(arg)
                 if os.path.isdir(arg):
                     server_root = arg
-                    print ('Parsed "%s" flag with "%s" value.' % (opt, arg))
+                    print('Parsed "%s" flag with "%s" value.' % (opt, arg))
                 else:
                     print('Invalid directory "' + arg + '".')
                     sys.exit(1)
             elif opt in ('-b', '--nobrowser'):
                 launch_browser = False
-                print ('Parsed "%s" flag. No browser will be opened.' % opt)
+                print('Parsed "%s" flag. No browser will be opened.' % opt)
             elif opt in ('-f', '--findprojectroot'):
                 find_project_root = True
-                print ('Parsed "%s" flag. The ardublockly project root will be '
-                       'set as the server root directory.' % opt)
+                print('Parsed "%s" flag. The ardublockly project root will be '
+                      'set as the server root directory.' % opt)
             else:
                 print('Flag ' + opt + ' not recognised.')
 
@@ -131,10 +130,10 @@ def main():
     print('Running Python %s (%s bit) on %s' % (platform.python_version(),
           (struct.calcsize('P') * 8), platform.platform()))
 
-    print('\n\n======= Parsing Command line arguments =======\n')
+    print('\n======= Parsing Command line arguments =======')
     find_project_root, launch_browser, server_root = parsing_cl_args()
 
-    print('\n\n======= Resolving server and project paths =======\n')
+    print('\n======= Resolving server and project paths =======')
     # Based on command line options, set the server root to the ardublockly
     # project root directory, a directory specified in the arguments, or by
     # default to the project root directory.
@@ -144,7 +143,7 @@ def main():
         print('The Ardublockly project root folder could not be found within '
               'the %s directory !' % this_file_dir)
         sys.exit(1)
-    print("Ardublockly root directory: %s" % ardublockly_root_dir)
+    print('Ardublockly root directory: %s' % ardublockly_root_dir)
 
     if find_project_root is True or server_root is None:
         server_root = ardublockly_root_dir
@@ -153,23 +152,23 @@ def main():
         if not os.path.commonprefix([server_root, ardublockly_root_dir]):
             print('The Ardublockly project folder needs to be accessible from '
                   'the server root directory !')
-    print("Selected server root: %s" % server_root)
+    print('Selected server root: %s' % server_root)
 
-    print('\n\n======= Loading Settings =======')
+    print('\n======= Loading Settings =======')
     # ServerCompilerSettings is a singleton, no need to save instance
     ardublocklyserver.compilersettings.ServerCompilerSettings(
         ardublockly_root_dir)
 
-    print('\n\n======= Starting Server =======\n')
+    print('\n======= Starting Server =======')
     if launch_browser:
         # Find the relative path from server root to ardublockly html
         ardublockly_html_dir = os.path.join(ardublockly_root_dir, 'ardublockly')
         relative_path = os.path.relpath(ardublockly_html_dir, server_root)
-        print("Ardublockly page relative path from server root: %s" %
+        print('Ardublockly page relative path from server root: %s' %
               relative_path)
         open_browser(relative_path)
 
-    ardublocklyserver.server.start_server(server_root)
+    ardublocklyserver.server.start_servers(server_root)
 
 
 if __name__ == '__main__':

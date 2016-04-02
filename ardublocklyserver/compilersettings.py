@@ -15,7 +15,7 @@ import os
 import re
 import sys
 import codecs
-
+# configparser port of the 3.5 version to support unicode across all versions
 from ardublocklyserver import configparser
 import ardublocklyserver.serialport
 
