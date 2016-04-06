@@ -166,6 +166,36 @@ Blockly.Arduino.Boards.profiles.leonardo = {
 /** Arduino Yun board profile is identical to Leonardo. */
 Blockly.Arduino.Boards.profiles.yun = Blockly.Arduino.Boards.profiles.leonardo;
 
+/**
+ * Arduino Nano board profile
+ * The individual nano_168p and nano_328p profiles are created
+ * because even though they have the same blockly implimentation there is
+ * a compilation distinction.
+ */
+Blockly.Arduino.Boards.profiles.nano_328p = {
+  name: 'Arduino Nano',
+  description: 'Arduino Nano with ATMega168p or ATMega328p board',
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0,7),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
+        Blockly.Arduino.Boards.generateAnalogIo(0,7)),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: { SPI: [['SS', '10'], ['MOSI', '11'], ['MISO', '12'], ['SCK', '13']] },
+  // TODO: confirm the clock divides are the same for the Nano and Uno
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  // TODO: confirm the i2c speed is the same for the Nano and Uno
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: Blockly.Arduino.Boards.profiles.uno.builtinLed,
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt
+};
+
+Blockly.Arduino.Boards.profiles.nano_168p = Blockly.Arduino.Boards.profiles.nano_328p;
+
 /** Set default profile to Arduino standard-compatible board */
 Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.uno;
 

@@ -140,7 +140,7 @@ Blockly.Blocks['io_analogwrite'] = {
   /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
     return Blockly.Types.NUMBER;
-  },
+  }
 };
 
 Blockly.Blocks['io_analogread'] = {
@@ -189,5 +189,101 @@ Blockly.Blocks['io_highlow'] = {
   /** @return {!string} The type of return value for the block, an integer. */
   getBlockType: function() {
     return Blockly.Types.BOOLEAN;
+  }
+};
+
+Blockly.Blocks['io_tone'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Set tone on pin #")
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "TONEPIN");
+    this.appendValueInput("FREQUENCY")
+        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .appendField("at frequency");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Sets tone on pin to specified frequency within range 31 - 65535");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/tone');
+  },
+  onchange: function() {
+    var freq = Blockly.Arduino.valueToCode(this, "FREQUENCY", Blockly.Arduino.ORDER_ATOMIC)
+    if (freq < 31 || freq > 65535) {
+      this.setWarningText("Frequency must be in range 31 - 65535");
+    } else {
+      this.setWarningText(null);
+    }
+  },
+  /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_notone'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Turn off tone on pin #")
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "TONEPIN");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Turns the tone off on the selected pin");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/noTone');
+  },
+    /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_pulsein'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Read");
+    this.appendValueInput("PULSETYPE")
+        .setCheck(Blockly.Types.BOOLEAN.compatibles());
+    this.appendDummyInput()
+        .appendField("pulse on pin #")
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "PULSEPIN");
+    this.setOutput(true);
+    this.setInputsInline(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Measures the duration of a pulse on the selected pin.");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
+  },
+      /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_pulsetimeout'] = {
+  init: function () {
+    this.appendDummyInput()
+        .appendField("Read");
+    this.appendValueInput("PULSETYPE")
+        .setCheck(Blockly.Types.BOOLEAN.compatibles());
+    this.appendDummyInput()
+        .appendField('pulse on pin #')
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "PULSEPIN");
+    this.appendDummyInput()
+        .appendField('timeout after');
+    this.appendValueInput('TIMEOUT')
+        .setCheck(Blockly.Types.NUMBER.compatibles());
+    this.setOutput(true);
+    this.setInputsInline(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip("Measures the duration of a pulse on the selected pin, if it is within the timeout.");
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
+  },
+        /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
   }
 };

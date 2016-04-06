@@ -18,7 +18,7 @@ except ImportError:
 from ardublocklyserver.requesthandler import BlocklyRequestHandler
 
 ADDRESS = '0.0.0.0'
-PORT = 8000
+PORT = 8080
 
 
 def start_server(document_root):

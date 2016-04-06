@@ -59,7 +59,9 @@ class ServerCompilerSettings(object):
                        'Mega': 'arduino:avr:mega',
                        'Duemilanove_328p': 'arduino:avr:diecimila',
                        'Duemilanove_168p':
-                               'arduino:avr:diecimila:cpu=atmega168'}
+                               'arduino:avr:diecimila:cpu=atmega168',
+                       'Nano_328p': 'arduino:avr:nano:cpu=atmega328',
+                       'Nano_168p': 'arduino:avr:nano:cpu=atmega168'}
 
     # Class dictionary to contain the computer COM ports, dynamic content
     __serial_ports = {'port0': 'COM1'}
