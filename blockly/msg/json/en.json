@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2016-03-24 01:45:41.906000",
+		"lastupdated": "2016-04-08 23:26:10.451000",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -447,5 +447,17 @@
 	"ARD_TIME_INF_TIP": "Wait indefinitely, stopping the program.",
 	"ARD_VAR_AS": "as",
 	"ARD_VAR_AS_TIP": "Sets a value to a specific type",
-	"REPLACE_EXISTING_BLOCKS": "Replace existing blocks? 'Cancel' will merge."
+	"REPLACE_EXISTING_BLOCKS": "Replace existing blocks? 'Cancel' will merge.",
+	"ARD_PULSEREAD": "Read",
+	"ARD_PULSEON": "pulse on pin #",
+	"ARD_PULSETIMEOUT": "timeout after",
+	"ARD_PULSETIMEOUT_MS": "",
+	"ARD_PULSE_TIP": "Measures the duration of a pulse on the selected pin.",
+	"ARD_PULSETIMEOUT_TIP": "Measures the duration of a pulse on the selected pin, if it is within the timeout.",
+	"ARD_SETTONE": "Set tone on pin #",
+	"ARD_TONEFREQ": "at frequency",
+	"ARD_TONE_TIP": "Sets tone on pin to specified frequency within range 31 - 65535",
+	"ARD_TONE_WARNING": "Frequency must be in range 31 - 65535",
+	"ARD_NOTONE": "Turn off tone on pin #",
+	"ARD_NOTONE_TIP": "Turns the tone off on the selected pin"
 }
