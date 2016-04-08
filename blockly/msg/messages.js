@@ -1189,4 +1189,15 @@ Blockly.Msg.ARD_VAR_AS = 'as';
 Blockly.Msg.ARD_VAR_AS_TIP = 'Sets a value to a specific type';
 Blockly.Msg.REPLACE_EXISTING_BLOCKS = 'Replace existing blocks? "Cancel" will merge.';
 
-
+Blockly.Msg.ARD_PULSEREAD = 'Read';
+Blockly.Msg.ARD_PULSEON = 'pulse on pin #';
+Blockly.Msg.ARD_PULSETIMEOUT = 'timeout after';
+Blockly.Msg.ARD_PULSETIMEOUT_MS = '';
+Blockly.Msg.ARD_PULSE_TIP = 'Measures the duration of a pulse on the selected pin.';
+Blockly.Msg.ARD_PULSETIMEOUT_TIP = 'Measures the duration of a pulse on the selected pin, if it is within the timeout.';
+Blockly.Msg.ARD_SETTONE = 'Set tone on pin #';
+Blockly.Msg.ARD_TONEFREQ = 'at frequency';
+Blockly.Msg.ARD_TONE_TIP = 'Sets tone on pin to specified frequency within range 31 - 65535';
+Blockly.Msg.ARD_TONE_WARNING = 'Frequency must be in range 31 - 65535';
+Blockly.Msg.ARD_NOTONE = 'Turn off tone on pin #';
+Blockly.Msg.ARD_NOTONE_TIP = 'Turns the tone off on the selected pin';

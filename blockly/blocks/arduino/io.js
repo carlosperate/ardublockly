@@ -191,3 +191,53 @@ Blockly.Blocks['io_highlow'] = {
     return Blockly.Types.BOOLEAN;
   }
 };
+
+Blockly.Blocks['io_pulsein'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PULSEREAD);
+    this.appendValueInput("PULSETYPE")
+        .setCheck(Blockly.Types.BOOLEAN.check);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PULSEON)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "PULSEPIN");
+    this.setOutput(true);
+    this.setInputsInline(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PULSE_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
+  },
+      /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_pulsetimeout'] = {
+  init: function () {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PULSEREAD);
+    this.appendValueInput("PULSETYPE")
+        .setCheck(Blockly.Types.BOOLEAN.check);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PULSEON)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), "PULSEPIN");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PULSETIMEOUT);
+    this.appendValueInput('TIMEOUT')
+        .setCheck(Blockly.Types.NUMBER.output);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PULSETIMEOUT_MS);
+    this.setOutput(true);
+    this.setInputsInline(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PULSETIMEOUT_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
+  },
+        /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  }
+};
