@@ -1124,6 +1124,7 @@ Blockly.Msg.ARD_NOTONE_PIN_TIP = 'Stop generating a tone on a pin';
 Blockly.Msg.ARD_MAP = 'Map';
 Blockly.Msg.ARD_MAP_VAL = 'value to [0-';
 Blockly.Msg.ARD_MAP_TIP = 'Re-maps a number from [0-1024] to another.';
+Blockly.Msg.ARD_FUN_RUN_DECL = 'Arduino define up front:';
 Blockly.Msg.ARD_FUN_RUN_SETUP = 'Arduino run first:';
 Blockly.Msg.ARD_FUN_RUN_LOOP = 'Arduino loop forever:';
 Blockly.Msg.ARD_FUN_RUN_TIP = 'Defines the Arduino setup() and loop() functions.';
