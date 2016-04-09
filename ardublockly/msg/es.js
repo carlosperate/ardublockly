@@ -15,6 +15,7 @@ var MSG = {
   catFunctions: "Funciones",
   catInputOutput: "Input/Output",
   catTime: "Tiempo",
+  catMusic: "Musica",
   catMotors: "Motores",
   catComms: "Comunicación",
   textVariable: "texto",
