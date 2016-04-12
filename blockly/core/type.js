@@ -20,9 +20,11 @@ goog.require('goog.asserts');
  * @constructor
  */
 Blockly.Type = function(args) {
-  if ((args.typeId === undefined) || (args.compatibleTypes === undefined)) {
+  if ((args.typeId === undefined) || (args.typeName === undefined) || 
+      (args.compatibleTypes === undefined)) {
     throw new Error('Creating a Type requires the following format:\n{\n' +
                     '  typeId: string,\n' +
+                    '  typeName: function returning a string,\n' +
                     '  compatibleTypes: [Blockly.Type,]\n}');
   }
   if (!goog.isArray(args.compatibleTypes)) {
@@ -31,6 +33,11 @@ Blockly.Type = function(args) {
   }
   /** @type {string} */
   this.typeId = args.typeId;
+  /** @type {function} 
+      This is the translatable name. As translation is only present past build, 
+      pass a function to return translated string.
+    */
+  this.typeName = args.typeName;
   /**
    * @type {Array<Blockly.Type>} 
    * @private
