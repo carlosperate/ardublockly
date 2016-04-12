@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2016-04-08 23:26:10.451000",
+		"lastupdated": "2016-04-12 23:07:10.146360",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -361,6 +361,17 @@
 	"PROCEDURES_IFRETURN_TOOLTIP": "If a value is true, then return a second value.",
 	"PROCEDURES_IFRETURN_HELPURL": "http://c2.com/cgi/wiki?GuardClause",
 	"PROCEDURES_IFRETURN_WARNING": "Warning: This block may be used only within a function definition.",
+	"ARD_TYPE_CHAR": "Character",
+	"ARD_TYPE_TEXT": "Text",
+	"ARD_TYPE_BOOL": "Boolean",
+	"ARD_TYPE_SHORTPOS": "Short Positive Number",
+	"ARD_TYPE_NUMBER": "Number",
+	"ARD_TYPE_LONG": "Large Number",
+	"ARD_TYPE_DECIMAL": "Decimal",
+	"ARD_TYPE_ARRAY": "Array",
+	"ARD_TYPE_NULL": "Null",
+	"ARD_TYPE_UNDEF": "Undefined",
+	"ARD_TYPE_CHILDBLOCKMISSING": "ChildBlockMissing",
 	"ARD_HIGH": "HIGH",
 	"ARD_LOW": "LOW",
 	"ARD_ANALOGREAD": "read analog pin#",
