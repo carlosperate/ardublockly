@@ -15,43 +15,50 @@ goog.require('Blockly.Type');
 
 /** Single character. */
 Blockly.Types.CHARACTER = new Blockly.Type({
-  typeName: 'Character',
+  typeId: 'Character',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_CHAR;},
   compatibleTypes: []
 });
 
 /** Text string. */
 Blockly.Types.TEXT = new Blockly.Type({
-  typeName: 'Text',
+  typeId: 'Text',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_TEXT;},
   compatibleTypes: [Blockly.Types.CHARACTER]
 });
 
 /** Boolean. */
 Blockly.Types.BOOLEAN = new Blockly.Type({
-  typeName: 'Boolean',
+  typeId: 'Boolean',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_BOOL;},
   compatibleTypes: []
 });
 
 /** Short integer number. */
 Blockly.Types.SHORT_NUMBER = new Blockly.Type({
-  typeName: 'Short Positive Number',
+  typeId: 'Short Positive Number',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_SHORTPOS;},
   compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Integer number. */
 Blockly.Types.NUMBER = new Blockly.Type({
-  typeName: 'Number',
+  typeId: 'Number',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_NUMBER;},
   compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Large integer number. */
 Blockly.Types.LARGE_NUMBER = new Blockly.Type({
-  typeName: 'Large Number',
+  typeId: 'Large Number',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_LONG;},
   compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Decimal/floating point number. */
 Blockly.Types.DECIMAL = new Blockly.Type({
-  typeName: 'Decimal',
+  typeId: 'Decimal',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_DECIMAL;},
   compatibleTypes: [Blockly.Types.BOOLEAN,
                     Blockly.Types.SHORT_NUMBER,
                     Blockly.Types.NUMBER,
@@ -60,26 +67,30 @@ Blockly.Types.DECIMAL = new Blockly.Type({
 
 /** Array/List of items. */
 Blockly.Types.ARRAY = new Blockly.Type({
-  typeName: 'Array',
-  compatibleTypes: [],
+  typeId: 'Array',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_ARRAY},
+  compatibleTypes: []
 });
 
 /** Null indicate there is no type. */
 Blockly.Types.NULL = new Blockly.Type({
-  typeName: 'Null',
-  compatibleTypes: [],
+  typeId: 'Null',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_NULL;},
+  compatibleTypes: []
 });
 
 /** Type not defined, or not yet defined. */
 Blockly.Types.UNDEF = new Blockly.Type({
-  typeName: 'Undefined',
-  compatibleTypes: [],
+  typeId: 'Undefined',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_UNDEF;},
+  compatibleTypes: []
 });
 
 /** Set when no child block (meant to define the variable type) is connected. */
 Blockly.Types.CHILD_BLOCK_MISSING = new Blockly.Type({
-  typeName: 'ChildBlockMissing',
-  compatibleTypes: [],
+  typeId: 'ChildBlockMissing',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_CHILDBLOCKMISSING;},
+  compatibleTypes: []
 });
 
 /**
@@ -107,19 +118,21 @@ Blockly.Types.LARGE_NUMBER.addCompatibleTypes([
 
 /**
  * Adds another type to the Blockly.Types collection.
- * @param {string} typeName_ Identifiable name of the type.
+ * @param {string} typeId_ Identifiable name of the type.
+ * @param {string} typeName_ Descriptive name of the type for use in the UI.
  * @param {Array<Blockly.Type>} compatibleTypes_ List of types this Type is
  *     compatible with.
  */
-Blockly.Types.addType = function(typeName_, compatibleTypes_) {
-  // The name is used as the key from the value pair in the BlocklyTypes object
-  var key = typeName.toUpperCase().replace(/ /g, '_');
+Blockly.Types.addType = function(typeId_, typeName_, compatibleTypes_) {
+  // The Id is used as the key from the value pair in the BlocklyTypes object
+  var key = typeId_.toUpperCase().replace(/ /g, '_');
   if (Blockly.Types[key] !== undefined) {
     throw 'The Blockly type ' + key + ' already exists.';
   }
   Blockly.Types[key] = new Blockly.Type({
-    typeName: typeName_,
-    compatibleTypes: compatibleTypes_,
+    typeId: typeId_,
+    typeName: function() {return typeName_;},
+    compatibleTypes: compatibleTypes_
   });
 };
 
@@ -135,7 +148,7 @@ Blockly.Types.getValidTypeArray = function() {
         (typeKey !== 'NULL') && (typeKey !== 'ARRAY') &&
         (typeof Blockly.Types[typeKey] !== 'function') &&
         !(Blockly.Types[typeKey] instanceof RegExp)) {
-      typesArray.push([Blockly.Types[typeKey].typeName, typeKey]);
+      typesArray.push([Blockly.Types[typeKey].typeName(), typeKey]);
     }
   }
   return typesArray;
