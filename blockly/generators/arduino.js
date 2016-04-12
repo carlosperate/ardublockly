@@ -368,26 +368,26 @@ Blockly.Arduino.scrub_ = function(block, code) {
  * @private
  */
 Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
-  switch (typeBlockly.typeName) {
-    case Blockly.Types.SHORT_NUMBER.typeName:
+  switch (typeBlockly.typeId) {
+    case Blockly.Types.SHORT_NUMBER.typeId:
       return 'char';
-    case Blockly.Types.NUMBER.typeName:
+    case Blockly.Types.NUMBER.typeId:
       return 'int';
-    case Blockly.Types.LARGE_NUMBER.typeName:
+    case Blockly.Types.LARGE_NUMBER.typeId:
       return 'long';
-    case Blockly.Types.DECIMAL.typeName:
+    case Blockly.Types.DECIMAL.typeId:
       return 'float';
-    case Blockly.Types.TEXT.typeName:
+    case Blockly.Types.TEXT.typeId:
       return 'String';
-    case Blockly.Types.CHARACTER.typeName:
+    case Blockly.Types.CHARACTER.typeId:
       return 'char';
-    case Blockly.Types.BOOLEAN.typeName:
+    case Blockly.Types.BOOLEAN.typeId:
       return 'boolean';
-    case Blockly.Types.NULL.typeName:
+    case Blockly.Types.NULL.typeId:
       return 'void';
-    case Blockly.Types.UNDEF.typeName:
+    case Blockly.Types.UNDEF.typeId:
       return 'undefined';
-    case Blockly.Types.CHILD_BLOCK_MISSING.typeName:
+    case Blockly.Types.CHILD_BLOCK_MISSING.typeId:
       // If no block connected default to int, change for easier debugging
       //return 'ChildBlockMissing';
       return 'int';
