@@ -93,6 +93,27 @@ Blockly.Types.CHILD_BLOCK_MISSING = new Blockly.Type({
   compatibleTypes: []
 });
 
+/** Pin Type: digital pin */
+Blockly.Types.DIGPIN = new Blockly.Type({
+  typeId: 'DIGPIN',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_DIGPIN;},
+  compatibleTypes: []
+});
+
+/** Pin Type: analog pin */
+Blockly.Types.ANAPIN = new Blockly.Type({
+  typeId: 'ANAPIN',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_ANAPIN;},
+  compatibleTypes: []
+});
+
+/** Pin Type: PWM pin */
+Blockly.Types.PWMPIN = new Blockly.Type({
+  typeId: 'PWMPIN',
+  typeName: function() {return Blockly.Msg.ARD_TYPE_PWMPIN;},
+  compatibleTypes: []
+});
+
 /**
  * Some Types have circular dependencies on their compatibilities, so add them
  * after declaration.
@@ -146,6 +167,8 @@ Blockly.Types.getValidTypeArray = function() {
   for (var typeKey in Blockly.Types) {
     if ((typeKey !== 'UNDEF') && (typeKey !== 'CHILD_BLOCK_MISSING') &&
         (typeKey !== 'NULL') && (typeKey !== 'ARRAY') &&
+        (typeKey !== 'DIGPIN') && (typeKey !== 'ANAPIN') &&
+        (typeKey !== 'PWMPIN') && 
         (typeof Blockly.Types[typeKey] !== 'function') &&
         !(Blockly.Types[typeKey] instanceof RegExp)) {
       typesArray.push([Blockly.Types[typeKey].typeName(), typeKey]);
