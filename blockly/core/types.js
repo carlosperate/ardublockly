@@ -15,43 +15,43 @@ goog.require('Blockly.Type');
 
 /** Single character. */
 Blockly.Types.CHARACTER = new Blockly.Type({
-  typeName: 'Character',
+  typeId: 'Character',
   compatibleTypes: []
 });
 
 /** Text string. */
 Blockly.Types.TEXT = new Blockly.Type({
-  typeName: 'Text',
+  typeId: 'Text',
   compatibleTypes: [Blockly.Types.CHARACTER]
 });
 
 /** Boolean. */
 Blockly.Types.BOOLEAN = new Blockly.Type({
-  typeName: 'Boolean',
+  typeId: 'Boolean',
   compatibleTypes: []
 });
 
 /** Short integer number. */
 Blockly.Types.SHORT_NUMBER = new Blockly.Type({
-  typeName: 'Short Positive Number',
+  typeId: 'Short Positive Number',
   compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Integer number. */
 Blockly.Types.NUMBER = new Blockly.Type({
-  typeName: 'Number',
+  typeId: 'Number',
   compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Large integer number. */
 Blockly.Types.LARGE_NUMBER = new Blockly.Type({
-  typeName: 'Large Number',
+  typeId: 'Large Number',
   compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Decimal/floating point number. */
 Blockly.Types.DECIMAL = new Blockly.Type({
-  typeName: 'Decimal',
+  typeId: 'Decimal',
   compatibleTypes: [Blockly.Types.BOOLEAN,
                     Blockly.Types.SHORT_NUMBER,
                     Blockly.Types.NUMBER,
@@ -60,25 +60,25 @@ Blockly.Types.DECIMAL = new Blockly.Type({
 
 /** Array/List of items. */
 Blockly.Types.ARRAY = new Blockly.Type({
-  typeName: 'Array',
+  typeId: 'Array',
   compatibleTypes: [],
 });
 
 /** Null indicate there is no type. */
 Blockly.Types.NULL = new Blockly.Type({
-  typeName: 'Null',
+  typeId: 'Null',
   compatibleTypes: [],
 });
 
 /** Type not defined, or not yet defined. */
 Blockly.Types.UNDEF = new Blockly.Type({
-  typeName: 'Undefined',
+  typeId: 'Undefined',
   compatibleTypes: [],
 });
 
 /** Set when no child block (meant to define the variable type) is connected. */
 Blockly.Types.CHILD_BLOCK_MISSING = new Blockly.Type({
-  typeName: 'ChildBlockMissing',
+  typeId: 'ChildBlockMissing',
   compatibleTypes: [],
 });
 
@@ -107,18 +107,18 @@ Blockly.Types.LARGE_NUMBER.addCompatibleTypes([
 
 /**
  * Adds another type to the Blockly.Types collection.
- * @param {string} typeName_ Identifiable name of the type.
+ * @param {string} typeId_ Identifiable name of the type.
  * @param {Array<Blockly.Type>} compatibleTypes_ List of types this Type is
  *     compatible with.
  */
-Blockly.Types.addType = function(typeName_, compatibleTypes_) {
+Blockly.Types.addType = function(typeId_, compatibleTypes_) {
   // The name is used as the key from the value pair in the BlocklyTypes object
-  var key = typeName.toUpperCase().replace(/ /g, '_');
+  var key = typeId.toUpperCase().replace(/ /g, '_');
   if (Blockly.Types[key] !== undefined) {
     throw 'The Blockly type ' + key + ' already exists.';
   }
   Blockly.Types[key] = new Blockly.Type({
-    typeName: typeName_,
+    typeId: typeId_,
     compatibleTypes: compatibleTypes_,
   });
 };
@@ -135,7 +135,7 @@ Blockly.Types.getValidTypeArray = function() {
         (typeKey !== 'NULL') && (typeKey !== 'ARRAY') &&
         (typeof Blockly.Types[typeKey] !== 'function') &&
         !(Blockly.Types[typeKey] instanceof RegExp)) {
-      typesArray.push([Blockly.Types[typeKey].typeName, typeKey]);
+      typesArray.push([Blockly.Types[typeKey].typeId, typeKey]);
     }
   }
   return typesArray;
