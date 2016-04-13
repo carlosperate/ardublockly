@@ -20,6 +20,19 @@ goog.require('Blockly.Types');
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.io.HUE = 250;
 
+function dynamicDigPins() {
+  var options = [];
+  var pins = Blockly.Arduino.Boards.selected.digitalPins;
+  // now we add variables of type DIGPIN
+  // how to obtain the workspace here ?? Hack it for now...
+  var workspace = Blockly.getMainWorkspace();
+  var typedvar = Blockly.StaticTypingArduino.typedVariables(workspace, Blockly.Types.DIGPIN);
+  for (var ind in typedvar) {
+    options.push([typedvar[ind], typedvar[ind]]);
+  }
+  return options.concat(pins);
+}
+
 Blockly.Blocks['io_digitalwrite'] = {
   /**
    * Block for creating a 'set pin' to a state.
@@ -30,8 +43,7 @@ Blockly.Blocks['io_digitalwrite'] = {
     this.setColour(Blockly.Blocks.io.HUE);
     this.appendValueInput('STATE')
         .appendField(Blockly.Msg.ARD_DIGITALWRITE)
-        .appendField(new Blockly.FieldDropdown(
-            Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
+        .appendField(new Blockly.FieldDropdown(dynamicDigPins), 'PIN')
         .appendField(Blockly.Msg.ARD_WRITE_TO)
         .setCheck(Blockly.Types.BOOLEAN.checkList);
     this.setInputsInline(false);
@@ -59,8 +71,7 @@ Blockly.Blocks['io_digitalread'] = {
     this.setColour(Blockly.Blocks.io.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_DIGITALREAD)
-        .appendField(new Blockly.FieldDropdown(
-            Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
+        .appendField(new Blockly.FieldDropdown(dynamicDigPins), 'PIN');
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setTooltip(Blockly.Msg.ARD_DIGITALREAD_TIP);
   },
