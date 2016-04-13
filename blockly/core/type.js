@@ -16,15 +16,17 @@ goog.require('goog.asserts');
 
 /**
  * Blockly Type class constructor.
- * @param {Object} args Object/dictionary with typeId, and compatibleTypes.
+ * @param {Object} args Object/dictionary with typeId, typeMsgName, and
+ *     compatibleTypes.
  * @constructor
  */
 Blockly.Type = function(args) {
-  if ((args.typeId === undefined) || (args.typeName === undefined) || 
+  if ((args.typeId === undefined) || (args.typeMsgName === undefined) ||
       (args.compatibleTypes === undefined)) {
     throw new Error('Creating a Type requires the following format:\n{\n' +
                     '  typeId: string,\n' +
-                    '  typeName: function returning a string,\n' +
+                    '  typeMsgName: Blockly.Msg string member var name to\n' +
+                    '               identify the translatable Type name.\n' +
                     '  compatibleTypes: [Blockly.Type,]\n}');
   }
   if (!goog.isArray(args.compatibleTypes)) {
@@ -33,11 +35,11 @@ Blockly.Type = function(args) {
   }
   /** @type {string} */
   this.typeId = args.typeId;
-  /** @type {function} 
-      This is the translatable name. As translation is only present past build, 
-      pass a function to return translated string.
-    */
-  this.typeName = args.typeName;
+  /** @type {string}
+   * This is the translatable Blockly.Msg member string name.
+   * @private
+   */
+  this.typeMsgName_ = args.typeMsgName;
   /**
    * @type {Array<Blockly.Type>} 
    * @private
@@ -51,6 +53,16 @@ Blockly.Type = function(args) {
   this.generatedCheckList_ = [];
   this.generateCheckList_();
 };
+
+/** Getter for the typeName property, used for translatable Type naming. */
+Object.defineProperty(Blockly.Type.prototype, 'typeName', {
+  get: function() {
+    return Blockly.Msg[this.typeMsgName_] || this.typeId;
+  },
+  set: function(value) {
+    console.warn('"Blockly.Type" property "typeName" is not allowed to be set.');
+  }
+});
 
 /** Getter for the output property, used for block output types. */
 Object.defineProperty(Blockly.Type.prototype, 'output', {

@@ -358,7 +358,7 @@
 	"ARD_TYPE_CHAR": "Letter",
 	"ARD_TYPE_TEXT": "Tekst",
 	"ARD_TYPE_BOOL": "Bool (0 of 1)",
-	"ARD_TYPE_SHORTPOS": "Kort Positief Nummer",
+	"ARD_TYPE_SHORT": "Kort Nummer",
 	"ARD_TYPE_NUMBER": "Nummer",
 	"ARD_TYPE_LONG": "Groot Nummer",
 	"ARD_TYPE_DECIMAL": "Decimaal Getal",
