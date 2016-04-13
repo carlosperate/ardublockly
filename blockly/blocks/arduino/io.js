@@ -252,3 +252,75 @@ Blockly.Blocks['io_pulsetimeout'] = {
     return Blockly.Types.NUMBER;
   }
 };
+
+Blockly.Blocks['io_pin_dig'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PIN_DIG)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN");
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PIN_DIG_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Board');
+  },
+  /** @return {!string} The type of return value for the block, a digital pin. */
+  getBlockType: function() {
+    return Blockly.Types.DIGPIN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['io_pin_an'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PIN_AN)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN");
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PIN_AN_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Board');
+  },
+  /** @return {!string} The type of return value for the block, an analog pin */
+  getBlockType: function() {
+    return Blockly.Types.ANAPIN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'analogPins');
+  }
+};
+
+Blockly.Blocks['io_pin_pwm'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PIN_PWM)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.pwmPins), "PIN");
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PIN_PWM_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Board');
+  },
+  /** @return {!string} The type of return value for the block, a PWM pin. */
+  getBlockType: function() {
+    return Blockly.Types.PWMPIN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'pwmPins');
+  }
+};

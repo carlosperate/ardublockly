@@ -167,3 +167,39 @@ Blockly.Arduino['io_pulsetimeout'] = function(block) {
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 }; 
+
+/**
+ * Function for assigning a variable a specific pin value.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['io_pin_dig'] = function(block) {
+  var pin = block.getFieldValue('PIN');
+
+  var code = pin;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/**
+ * Function for assigning a variable a specific pin value.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['io_pin_an'] = function(block) {
+  var pin = block.getFieldValue('PIN');
+
+  var code = pin;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/**
+ * Function for assigning a variable a specific pin value.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['io_pin_pwm'] = function(block) {
+  var pin = block.getFieldValue('PIN');
+
+  var code = pin;
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
