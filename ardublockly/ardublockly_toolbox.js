@@ -137,15 +137,19 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="io_analogwrite"></block>' +
 '    <block type="io_analogread"></block>' +
 '    <block type="io_highlow"></block>' +
-'    <block type="io_tone">' +
-'      <field name="TONEPIN">0</field>' +
-'      <value name="FREQUENCY">' +
-'        <shadow type="math_number">' +
-'          <field name="NUM">220</field>' +
-'        </shadow>' +
+'    <block type="io_pulsein">' +
+'      <value name="PULSETYPE">' +
+'        <shadow type="io_highlow"></shadow>' +
 '      </value>' +
 '    </block>' +
-'    <block type="io_notone"></block>' +
+'    <block type="io_pulsetimeout">' +
+'      <value name="PULSETYPE">' +
+'        <shadow type="io_highlow"></shadow>' +
+'      </value>' +
+'      <value name="TIMEOUT">' +
+'        <block type="math_number"></block>' +
+'      </value>'+
+'    </block>' +
 '  </category>' +
 '  <sep></sep>' +
 '  <category id="catTime" name="Time">' +
@@ -169,19 +173,15 @@ Ardublockly.TOOLBOX_XML =
 '  </category>' +
 '  <sep></sep>' +
 '  <category id="catMusic" name="Music">' +
-'    <block type="io_pulsein">' +
-'      <value name="PULSETYPE">' +
-'        <shadow type="io_highlow"></shadow>' +
+'    <block type="io_tone">' +
+'      <field name="TONEPIN">0</field>' +
+'      <value name="FREQUENCY">' +
+'        <shadow type="math_number">' +
+'          <field name="NUM">220</field>' +
+'        </shadow>' +
 '      </value>' +
 '    </block>' +
-'    <block type="io_pulsetimeout">' +
-'      <value name="PULSETYPE">' +
-'        <shadow type="io_highlow"></shadow>' +
-'      </value>' +
-'      <value name="TIMEOUT">' +
-'        <block type="math_number"></block>' +
-'      </value>'+
-'    </block>' +
+'    <block type="io_notone"></block>' +
 '  </category>' +
 '  <sep></sep>' +
 '  <category id="catMotors" name="Motors">' +
