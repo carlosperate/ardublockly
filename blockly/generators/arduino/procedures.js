@@ -167,6 +167,9 @@ Blockly.Arduino['arduino_functions'] = function(block) {
  */
 Blockly.Arduino['controls_effect'] = function(block) {
   
+  var funcName = Blockly.Arduino.variableDB_.getName(
+      block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
+  
   var duration = Blockly.Arduino.valueToCode(
       block, 'EFFECTDURATION', Blockly.Arduino.ORDER_ATOMIC) || '1000';
   var effectnr = 0;
@@ -175,14 +178,13 @@ Blockly.Arduino['controls_effect'] = function(block) {
   }
   var seffectnr = effectnr.toString();
   
-  var code = 'ard_effect' + seffectnr + '();';
-  
   var declare_effect_branch = '' +
 'int ard_effect' + seffectnr + '_status = -1;\n' +
 'unsigned long ard_effect' + seffectnr + '_start, ard_effect' + seffectnr + '_time;\n' +
 '#define EFFECT' + seffectnr + '_PERIOD ' + duration + '\n';
   var declare_effect_function = '\n' + 
-'void ard_effect' + seffectnr + '() {\n' +
+'void ' + funcName + '() {\n' +
+'  //Variables of this effect are reffered to with ard_effect' + seffectnr + '\n' +
 '  ard_effect' + seffectnr + '_time = millis() - ard_effect' + seffectnr + '_start;\n';
 
   declare_effect_function +=
@@ -232,5 +234,5 @@ Blockly.Arduino['controls_effect'] = function(block) {
 
   Blockly.Arduino.addDeclaration('ard_effect' + seffectnr, declare_effect_branch + declare_effect_function);
     
-  return code + '\n';
+  return '';
 };
