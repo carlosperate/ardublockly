@@ -1212,3 +1212,22 @@ Blockly.Msg.ARD_TONE_TIP = 'Sets tone on pin to specified frequency within range
 Blockly.Msg.ARD_TONE_WARNING = 'Frequency must be in range 31 - 65535';
 Blockly.Msg.ARD_NOTONE = 'Turn off tone on pin #';
 Blockly.Msg.ARD_NOTONE_TIP = 'Turns the tone off on the selected pin';
+
+//effect block
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_1 = 'At the start of an effect, do some statements';
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_2 = 'At the start of an effect, do some statements, and at the end of the effect too';
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_3 = 'At the start of an effect, do some statements, if the effect time becomes larger than the given time, do the next statements.';
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_4 = 'At the start of an effect, do some statements, if the effect time becomes larger than the given time, do the next statements. Ath end of the effect the final statements are done.';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_FIRST1 = 'Effect';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_FIRST2 = 'with total duration (ms) =';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_IF = 'at the start do';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSEIF = 'if effect time becomes greater than';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSE = 'at the end do';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_THEN = Blockly.Msg.CONTROLS_REPEAT_INPUT_DO;
+Blockly.Msg.ARD_CONTROLS_EFFECT_IF_TITLE_IF = Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_IF;
+Blockly.Msg.ARD_CONTROLS_EFFECT_IF_TOOLTIP = Blockly.Msg.CONTROLS_IF_IF_TOOLTIP;
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSEIF_TITLE_ELSEIF = Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSEIF;
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSEIF_TOOLTIP = 'Add an extra effect time at which statements must be done';
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSE_TITLE_ELSE = Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSE;
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSE_TOOLTIP = 'Add a block for statements when the effect is finished.';
+
