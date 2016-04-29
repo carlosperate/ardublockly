@@ -28,64 +28,6 @@ goog.require('Blockly.Types');
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.stepper.HUE = 80;
 
-/** Strings for easy reference. */
-Blockly.Blocks.stepper.noInstance = 'No_Instances';
-Blockly.Blocks.stepper.noName = 'Empty_input_name';
-
-/**
- * Finds all user-created instances of the Stepper block config.
- * @return {!Array.<string>} Array of instance names.
- */
-Blockly.Blocks.stepper.stepperInstances = function() {
-  var stepperList = [];
-  var blocks = Blockly.mainWorkspace.getTopBlocks();
-  for (var x = 0; x < blocks.length; x++) {
-    var getStepperSetupInstance = blocks[x].getStepperSetupInstance;
-    if (getStepperSetupInstance) {
-      var stepperInstance = getStepperSetupInstance.call(blocks[x]);
-        if (stepperInstance) {
-          stepperList.push(stepperInstance);
-        }
-    }
-  }
-  return stepperList;
-};
-
-/**
- * Return a sorted list of instances names for set dropdown menu.
- * @return {!Array.<string>} Array of stepper instances names.
- */
-Blockly.Blocks.stepper.stepperDropdownList = function() {
-  var stepperList = Blockly.Blocks.stepper.stepperInstances();
-  var options = [];
-  if (stepperList.length > 0) {
-    stepperList.sort(goog.string.caseInsensitiveCompare);
-    // Variables are not language-specific, use the name as both the
-    // user-facing text and the internal representation.
-    for (var x = 0; x < stepperList.length; x++) {
-      options[x] = [stepperList[x], stepperList[x]];
-    }
-  } else {
-    // There are no config blocks in the work area
-    options[0] = [Blockly.Blocks.stepper.noInstance,
-                  Blockly.Blocks.stepper.noInstance];
-  }
-  return options;
-};
-
-/**
- * Class for a variable's dropdown field.
- * @extends {Blockly.FieldDropdown}
- * @constructor
- */
-Blockly.Blocks.stepper.FieldStepperInstance = function() {
-  Blockly.Blocks.stepper.FieldStepperInstance.superClass_.constructor
-      .call(this, Blockly.Blocks.stepper.stepperDropdownList);
-};
-goog.inherits(
-    Blockly.Blocks.stepper.FieldStepperInstance, Blockly.FieldDropdown);
-
-
 Blockly.Blocks['stepper_config'] = {
   /**
    * Block for for the stepper generator configuration including creating
@@ -97,7 +39,8 @@ Blockly.Blocks['stepper_config'] = {
     this.setColour(Blockly.Blocks.stepper.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_STEPPER_SETUP)
-        .appendField(new Blockly.FieldTextInput('MyStepper'), 'STEPPER_NAME')
+        .appendField(new Blockly.Blocks.ComponentFieldVariable(
+        Blockly.Msg.ARD_STEPPER_DEFAULT_NAME, 'Stepper'), 'STEPPER_NAME')
         .appendField(Blockly.Msg.ARD_STEPPER_MOTOR);
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -118,18 +61,41 @@ Blockly.Blocks['stepper_config'] = {
     this.setTooltip(Blockly.Msg.ARD_STEPPER_SETUP_TIP);
   },
   /**
-   * Returns the stepper instance name, defined in the 'STEPPER_NAME' input
-   * String block attached to this block.
-   * @return {!string} List with the instance name.
+   * Return the name of the component defined in this block
+   * @return {!<string>} The name of the component
    * @this Blockly.Block
    */
-  getStepperSetupInstance: function() {
-    var InstanceName = this.getFieldValue('STEPPER_NAME');
-    if (!InstanceName) {
-      InstanceName = Blockly.Blocks.stepper.noName;
+  getComponentName: function() {
+    return 'Stepper';
+  },
+  /**
+   * Return all variables referenced by this block.
+   * @return {!Array.<string>} List of variable names.
+   * @this Blockly.Block
+   */
+  getVars: function() {
+    return [this.getFieldValue('STEPPER_NAME')];
+  },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getFieldValue('STEPPER_NAME'))) {
+      this.setFieldValue(newName, 'STEPPER_NAME');
     }
-    // Replace all spaces with underscores
-    return InstanceName.replace(/ /g, '_');
+  },
+  /**
+   * Gets the variable type required.
+   * @param {!string} varName Name of the variable selected in this block to
+   *     check.
+   * @return {string} String to indicate the variable type.
+   */
+  getVarType: function(varName) {
+    return Blockly.Types.ARRAY;
   },
   /**
    * Updates the content of the the pin related fields.
@@ -153,8 +119,8 @@ Blockly.Blocks['stepper_step'] = {
     this.setColour(Blockly.Blocks.stepper.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_STEPPER_STEP)
-        .appendField(new Blockly.Blocks.stepper.FieldStepperInstance(),
-            'STEPPER_NAME');
+        .appendField(new Blockly.Blocks.ComponentFieldVariable(
+        Blockly.Msg.ARD_STEPPER_DEFAULT_NAME, 'Stepper'), 'STEPPER_NAME')
     this.appendValueInput('STEPPER_STEPS')
         .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendDummyInput()
@@ -164,55 +130,32 @@ Blockly.Blocks['stepper_step'] = {
     this.setTooltip(Blockly.Msg.ARD_STEPPER_STEP_TIP);
   },
   /**
-   * Called whenever anything on the workspace changes.
-   * It checks the instances of stepper_config and attaches a warning to this
-   * block if not valid data is found.
+   * Return all variables referenced by this block.
+   * @return {!Array.<string>} List of variable names.
    * @this Blockly.Block
    */
-  onchange: function() {
-    if (!this.workspace) { return; }  // Block has been deleted.
-
-    var currentDropdown = this.getFieldValue('STEPPER_NAME');
-    var instances = Blockly.Blocks.stepper.stepperDropdownList();
-
-    // Check for configuration block presence
-    if (instances[0][0] === Blockly.Blocks.stepper.noInstance) {
-      // Ensure dropdown menu says there is no config block
-      if (currentDropdown !== Blockly.Blocks.stepper.noInstance) {
-        this.setFieldValue(Blockly.Blocks.stepper.noInstance, 'STEPPER_NAME');
-      }
-      this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN1);
-    } else {
-      // Configuration blocks present, check if any selected and contains name
-      var existingConfigSelected = false;
-      for (var x = 0; x < instances.length; x++) {
-        // Check if any of the config blocks does not have a name
-        if (instances[x][0] === Blockly.Blocks.stepper.noName) {
-          // If selected config has no name either, set warning and exit func
-          if (currentDropdown === Blockly.Blocks.stepper.noName) {
-            this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN2);
-            return;
-          }
-        } else if (instances[x][0] === currentDropdown) {
-          existingConfigSelected = true;
-        }
-      }
-
-      // At this point select config has a name, check if it exist
-      if (existingConfigSelected) {
-        // All good, just remove any warnings and exit the function
-        this.setWarningText(null);
-      } else {
-        if ((currentDropdown === Blockly.Blocks.stepper.noName) ||
-            (currentDropdown === Blockly.Blocks.stepper.noInstance)) {
-          // Just pick the first config block
-          this.setFieldValue(instances[0][0], 'STEPPER_NAME');
-          this.setWarningText(null);
-        } else {
-          // Al this point just set a warning to select a valid stepper config
-          this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN3);
-        }
-      }
+  getVars: function() {
+    return [this.getFieldValue('STEPPER_NAME')];
+  },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getFieldValue('STEPPER_NAME'))) {
+      this.setFieldValue(newName, 'STEPPER_NAME');
     }
+  },
+  /**
+   * Gets the variable type required.
+   * @param {!string} varName Name of the variable selected in this block to
+   *     check.
+   * @return {string} String to indicate the variable type.
+   */
+  getVarType: function(varName) {
+    return Blockly.Types.ARRAY;
   }
 };

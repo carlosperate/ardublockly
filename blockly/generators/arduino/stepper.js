@@ -28,7 +28,7 @@ Blockly.Arduino['stepper_config'] = function(block) {
   var pin1 = block.getFieldValue('STEPPER_PIN1');
   var pin2 = block.getFieldValue('STEPPER_PIN2');
   var pinType = Blockly.Arduino.PinTypes.STEPPER;
-  var stepperName = block.getStepperSetupInstance();
+  var stepperName = block.getFieldValue('STEPPER_NAME');
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '360';
   var stepperSpeed = Blockly.Arduino.valueToCode(block, 'STEPPER_SPEED',
