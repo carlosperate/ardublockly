@@ -40,11 +40,11 @@ goog.require('Blockly.Blocks');
  * @constructor
  */
 Blockly.Blocks.ComponentFieldVariable = function(varname, component_type, opt_validator) {
-  Blockly.Blocks.ComponentFieldVariable['component_type'] = component_type
+  this.component_type = component_type
   //override the dropdownCreate to use for this field
-  Blockly.FieldVariable.dropdownCreate = Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents;
+  this.dropdownCreate = Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents;
   Blockly.Blocks.ComponentFieldVariable.superClass_.constructor.call(this,
-      Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents, opt_validator);
+      varname, opt_validator);
   this.setValue(varname || '');
 };
 goog.inherits(Blockly.Blocks.ComponentFieldVariable, Blockly.FieldVariable);
@@ -106,7 +106,7 @@ Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents = function() {
   if (this.sourceBlock_ && this.sourceBlock_.workspace) {
     var variableList =
         Blockly.Blocks.ComponentFieldVariable.ComponentVariables(this.sourceBlock_.workspace, 
-                Blockly.Blocks.ComponentFieldVariable['component_type']);
+                this.component_type);
   } else {
     var variableList = [];
   }

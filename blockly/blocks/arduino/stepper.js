@@ -172,7 +172,7 @@ Blockly.Blocks['stepper_step'] = {
       this.setWarningText(null);
     } else {
       // Set a warning to select a valid stepper config
-      this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN1);
+      this.setWarningText(Blockly.Msg.ARD_COMPONENT_WARN1.replace('%1', Blockly.Msg.ARD_STEPPER_COMPONENT).replace('%1', Blockly.Msg.ARD_STEPPER_COMPONENT));
     }
   }
 };

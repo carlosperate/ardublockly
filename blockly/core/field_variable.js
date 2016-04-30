@@ -44,7 +44,7 @@ goog.require('goog.string');
  */
 Blockly.FieldVariable = function(varname, opt_validator) {
   Blockly.FieldVariable.superClass_.constructor.call(this,
-      Blockly.FieldVariable.dropdownCreate, opt_validator);
+      this.dropdownCreate, opt_validator);
   this.setValue(varname || '');
 };
 goog.inherits(Blockly.FieldVariable, Blockly.FieldDropdown);
@@ -124,7 +124,7 @@ Blockly.FieldVariable.prototype.setValue = function(newValue) {
  * @return {!Array.<string>} Array of variable names.
  * @this {!Blockly.FieldVariable}
  */
-Blockly.FieldVariable.dropdownCreate = function() {
+Blockly.FieldVariable.prototype.dropdownCreate = function() {
   if (this.sourceBlock_ && this.sourceBlock_.workspace) {
     var variableList =
         Blockly.Variables.allVariables(this.sourceBlock_.workspace);
