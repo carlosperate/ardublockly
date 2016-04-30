@@ -95,6 +95,7 @@ Blockly.Blocks.ComponentFieldVariable.ComponentVariables = function(root, compon
   return variableList;
 };
 
+
 /**
  * Return a sorted list of variable names for variable dropdown menus.
  * Include a special option at the end for creating a new variable name.
@@ -125,3 +126,47 @@ Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents = function() {
   }
   return options;
 };
+
+
+/**
+ * Finds all user-created instances of the ComponentFieldVariable block config.
+ * @return {!Array.<string>} Array of instance names.
+ */
+Blockly.Blocks.ComponentFieldVariable.Instances = function(component_type) {
+  var instList = [];
+  var blocks = Blockly.mainWorkspace.getAllBlocks();
+  for (var x = 0; x < blocks.length; x++) {
+    var getSetupInstance = blocks[x].getComponentName;
+    if (getSetupInstance) {
+      var Instances = getSetupInstance.call();
+      if (Instances) {
+        if (Instances == component_type) {
+          instList.push(blocks[x].getVars()[0]);
+        }
+      }
+    }
+  }
+  return instList;
+};
+
+Blockly.Blocks.ComponentFieldVariable.CheckSetupPresent = function(currentDropdown, component_type) {
+  var instances = Blockly.Blocks.ComponentFieldVariable.Instances(component_type);
+
+  // Check for configuration block presence
+  if (! instances) {
+    return false;
+  } else {
+    // Configuration blocks present, check if any selected in this block
+    var existingConfigSelected = false;
+    for (var x = 0; x < instances.length; x++) {
+      if (instances[x] === currentDropdown) {
+        existingConfigSelected = true;
+      }
+    }
+    if (existingConfigSelected) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+}

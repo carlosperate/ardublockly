@@ -157,5 +157,22 @@ Blockly.Blocks['stepper_step'] = {
    */
   getVarType: function(varName) {
     return Blockly.Types.ARRAY;
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * It checks the instances of stepper_config and attaches a warning to this
+   * block if not valid data is found.
+   * @this Blockly.Block
+   */
+  onchange: function() {
+    if (!this.workspace) { return; }  // Block has been deleted.
+
+    var currentDropdown = this.getFieldValue('STEPPER_NAME');
+    if (Blockly.Blocks.ComponentFieldVariable.CheckSetupPresent(currentDropdown, 'Stepper')) {
+      this.setWarningText(null);
+    } else {
+      // Set a warning to select a valid stepper config
+      this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN1);
+    }
   }
 };
