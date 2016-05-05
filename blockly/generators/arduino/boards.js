@@ -168,6 +168,7 @@ Blockly.Arduino.Boards.profiles.yun = Blockly.Arduino.Boards.profiles.leonardo;
 
 /** Set default profile to Arduino standard-compatible board */
 Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.uno;
+Blockly.Arduino.Boards.selected.profilename_ = 'uno';
 
 /**
  * Changes the Arduino board profile selected, which trigger a refresh of the
@@ -180,13 +181,16 @@ Blockly.Arduino.Boards.changeBoard = function(workspace, newBoard) {
     console.log('Tried to set non-existing Arduino board: ' + newBoard);
     return;
   }
-  Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles[newBoard];
-  // Update the pin out of all the blocks that uses them
-  var blocks = workspace.getAllBlocks();
-  for (var i = 0; i < blocks.length; i++) {
-    var updateFields = blocks[i].updateFields;
-    if (updateFields) {
-      updateFields.call(blocks[i]);
+  if (Blockly.Arduino.Boards.selected.profilename_ != newBoard) {
+    Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles[newBoard];
+    Blockly.Arduino.Boards.selected.profilename_ = newBoard;
+    // Update the pin out of all the blocks that uses them
+    var blocks = workspace.getAllBlocks();
+    for (var i = 0; i < blocks.length; i++) {
+      var updateFields = blocks[i].updateFields;
+      if (updateFields) {
+        updateFields.call(blocks[i]);
+      }
     }
   }
 };
