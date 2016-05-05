@@ -366,6 +366,7 @@
 	"ARD_TYPE_NULL": "Geen Type",
 	"ARD_TYPE_UNDEF": "Ongedefineerd",
 	"ARD_TYPE_CHILDBLOCKMISSING": "ChildBlockMissing",
+        "ARD_BOARD_WARN": "Dit blok vereist als chip %1, maar een ander blok is aanwezig welke een andere Arduino chip vereist",
 	"ARD_HIGH": "HOOG",
 	"ARD_LOW": "LAAG",
 	"ARD_ANALOGREAD": "lees analoge pin#",
