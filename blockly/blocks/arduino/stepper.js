@@ -168,7 +168,7 @@ Blockly.Blocks['stepper_step'] = {
     if (!this.workspace) { return; }  // Block has been deleted.
 
     var currentDropdown = this.getFieldValue('STEPPER_NAME');
-    if (Blockly.Blocks.ComponentFieldVariable.CheckSetupPresent(currentDropdown, 'Stepper')) {
+    if (Blockly.Blocks.ComponentFieldVariable.CheckSetupPresent(this.workspace, currentDropdown, 'Stepper')) {
       this.setWarningText(null);
     } else {
       // Set a warning to select a valid stepper config

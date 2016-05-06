@@ -27,39 +27,26 @@
 goog.provide('Blockly.Blocks.ComponentFieldVariable');
 
 goog.require('Blockly.Blocks');
-//goog.require('Blockly.FieldVariable');
 
 
 /**
  * Class for a variable's dropdown field.
  * @param {?string} varname The default name for the variable.  If null,
  *     a unique variable name will be generated.
+ * @param {?string} component_type The type of component to show in the dropdown list, eg 'Stepper'
  * @param {Function=} opt_validator A function that is executed when a new
  *     option is selected.  Its sole argument is the new option value.
  * @extends {Blockly.FieldVariable}
  * @constructor
  */
 Blockly.Blocks.ComponentFieldVariable = function(varname, component_type, opt_validator) {
-  this.component_type = component_type
-  //override the dropdownCreate to use for this field
-  this.dropdownCreate = Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents;
+  /** @type {string} */
+  this.component_type = component_type;
   Blockly.Blocks.ComponentFieldVariable.superClass_.constructor.call(this,
       varname, opt_validator);
   this.setValue(varname || '');
 };
 goog.inherits(Blockly.Blocks.ComponentFieldVariable, Blockly.FieldVariable);
-
-/**
- * Install this dropdown on a block.
- * @param {!Blockly.Block} block The block containing this text.
- */
-Blockly.Blocks.ComponentFieldVariable.prototype.init = function(block) {
-  if (this.sourceBlock_) {
-    // Dropdown has already been initialized once.
-    return;
-  }
-  Blockly.Blocks.ComponentFieldVariable.superClass_.init.call(this, block);
-};
 
 Blockly.Blocks.ComponentFieldVariable.ComponentVariables = function(root, component_type) {
   var blocks;
@@ -100,9 +87,9 @@ Blockly.Blocks.ComponentFieldVariable.ComponentVariables = function(root, compon
  * Return a sorted list of variable names for variable dropdown menus.
  * Include a special option at the end for creating a new variable name.
  * @return {!Array.<string>} Array of variable names.
- * @this {!Blockly.FieldVariable}
+ * @this {!ComponentFieldVariable}
  */
-Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents = function() {
+Blockly.Blocks.ComponentFieldVariable.prototype.dropdownCreate = function() {
   if (this.sourceBlock_ && this.sourceBlock_.workspace) {
     var variableList =
         Blockly.Blocks.ComponentFieldVariable.ComponentVariables(this.sourceBlock_.workspace, 
@@ -130,9 +117,11 @@ Blockly.Blocks.ComponentFieldVariable.dropdownCreateComponents = function() {
 
 /**
  * Finds all user-created instances of the ComponentFieldVariable block config.
+ * @param {!Blockly.Workspace} workspace The block's workspace.
+ * @param {?string} component_type The type of component setup block to obtain instances from
  * @return {!Array.<string>} Array of instance names.
  */
-Blockly.Blocks.ComponentFieldVariable.Instances = function(component_type) {
+Blockly.Blocks.ComponentFieldVariable.Instances = function(workspace, component_type) {
   var instList = [];
   var blocks = Blockly.mainWorkspace.getAllBlocks();
   for (var x = 0; x < blocks.length; x++) {
@@ -149,8 +138,17 @@ Blockly.Blocks.ComponentFieldVariable.Instances = function(component_type) {
   return instList;
 };
 
-Blockly.Blocks.ComponentFieldVariable.CheckSetupPresent = function(currentDropdown, component_type) {
-  var instances = Blockly.Blocks.ComponentFieldVariable.Instances(component_type);
+/**
+ * Check to know of a setup block (which sets pin number) is present for a used
+ * ComponentFieldVariable.
+ * @param {!Blockly.Workspace} workspace The block's workspace.
+ * @param {?string} currentDropdown The selected name in the dropdown for which to check
+ *              if setup block present
+ * @param {?string} component_type The type of component setup block must be checked
+ * @return {<boolean>} Wether setup block is present or not
+ */
+Blockly.Blocks.ComponentFieldVariable.CheckSetupPresent = function(workspace, currentDropdown, component_type) {
+  var instances = Blockly.Blocks.ComponentFieldVariable.Instances(workspace, component_type);
 
   // Check for configuration block presence
   if (! instances) {
@@ -163,10 +161,6 @@ Blockly.Blocks.ComponentFieldVariable.CheckSetupPresent = function(currentDropdo
         existingConfigSelected = true;
       }
     }
-    if (existingConfigSelected) {
-      return true;
-    } else {
-      return false;
-    }
+    return existingConfigSelected;
   }
 }
