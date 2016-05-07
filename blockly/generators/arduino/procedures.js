@@ -159,3 +159,88 @@ Blockly.Arduino['arduino_functions'] = function(block) {
   //var loopcode = Blockly.Arduino.scrub_(block, loopBranch); No comment block
   return loopBranch;
 };
+
+/**
+ * Code generator to create effect statement.
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['controls_effect'] = function(block) {
+  
+  var funcName = Blockly.Arduino.variableDB_.getName(
+      block.getFieldValue('NAME'), Blockly.Procedures.NAME_TYPE);
+  
+  var duration = Blockly.Arduino.valueToCode(
+      block, 'EFFECTDURATION', Blockly.Arduino.ORDER_ATOMIC) || '1000';
+  var effectnr = 0;
+  while (!(Blockly.Arduino.userFunctions_['ard_effect' + effectnr.toString()] === undefined)) {
+    effectnr += 1;
+  }
+  var seffectnr = effectnr.toString();
+  
+  var declare_effect_branch = '' +
+'int ard_effect' + seffectnr + '_status = -1;\n' +
+'unsigned long ard_effect' + seffectnr + '_start, ard_effect' + seffectnr + '_time;\n' +
+'#define EFFECT' + seffectnr + '_PERIOD ' + duration + '\n';
+  var declare_effect_function = '\n' + 
+'void ' + funcName + '() {\n' +
+'  //Variables of this effect are reffered to with ard_effect' + seffectnr + '\n' +
+'  boolean restart = false;\n' +
+'  ard_effect' + seffectnr + '_time = millis() - ard_effect' + seffectnr + '_start;\n';
+
+  declare_effect_function +=
+'  if (ard_effect' + seffectnr + '_time > EFFECT' + seffectnr + '_PERIOD) {\n' +
+'    //end effect, make sure it restarts\n' +
+'    if (ard_effect' + seffectnr + '_status > -1) {\n';
+  
+  if (block.elseCount_) {
+    branch = Blockly.Arduino.statementToCode(block, 'ELSE');
+    declare_effect_function += '' +
+'    //END STATEMENTS\n' +
+'    ' + branch;
+  }
+  
+  declare_effect_function += 
+'    }\n' +
+'    restart = true;\n' +
+'    ard_effect' + seffectnr + '_status = -1;\n' +
+'    ard_effect' + seffectnr + '_start = ard_effect' + seffectnr + '_start + ard_effect' + seffectnr + '_time;\n' +
+'    ard_effect' + seffectnr + '_time = 0;\n' +
+'  }\n' + 
+'  if (not restart && ard_effect' + seffectnr + '_status == -1) {\n' +
+'    ard_effect' + seffectnr + '_status = 0;\n' +
+'    ard_effect' + seffectnr + '_start = ard_effect' + seffectnr + '_start + ard_effect' + seffectnr + '_time;\n' +
+'    ard_effect' + seffectnr + '_time = 0;\n';
+
+
+  var setupCode = 'ard_effect' + seffectnr + '_status = -1;\n' +
+                '  ard_effect' + seffectnr + '_start = millis();\n'
+  Blockly.Arduino.addSetup('ard_effect' + seffectnr, setupCode, false);
+    
+  var n = 0;
+  var branch = Blockly.Arduino.statementToCode(block, 'DO' + n);
+  declare_effect_function += branch + '  }\n';
+  var extra = '  '
+  for (n = 1; n <= block.elseifCount_; n++) {
+    duration = Blockly.Arduino.valueToCode(block, 'IF' + n,
+        Blockly.Arduino.ORDER_NONE) || duration;
+    branch = Blockly.Arduino.statementToCode(block, 'DO' + n);
+    declare_effect_branch += '#define EFFECT' + seffectnr + '_' + n + '_DURATION ' + duration + '\n';
+    if (n != 1) {
+      extra = '  } else ';
+    }
+    declare_effect_function += extra + 
+'if (ard_effect' + seffectnr + '_time > EFFECT' + seffectnr + '_' + n + '_DURATION && ard_effect' + seffectnr + '_status < ' + n + ') {\n' +
+'   ard_effect' + seffectnr + '_status = ' + n + ';\n' + branch;
+  }
+  
+  //end reached of effect statements, finish up
+  if (n != 1) {
+    declare_effect_function += '  }\n'
+  }
+  declare_effect_function += '}\n';
+    
+  var code = Blockly.Arduino.scrub_(block, declare_effect_branch + declare_effect_function);
+  Blockly.Arduino.userFunctions_['ard_effect' + seffectnr] = code;
+  return '';
+};

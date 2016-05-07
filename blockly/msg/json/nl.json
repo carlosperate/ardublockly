@@ -329,7 +329,7 @@
 	"VARIABLES_SET_TOOLTIP": "Verandert de waarde van de variabele naar de waarde van de invoer.",
 	"VARIABLES_SET_CREATE_GET": "Maak 'opvragen van %1'",
 	"PROCEDURES_DEFNORETURN_HELPURL": "https://nl.wikipedia.org/wiki/Subprogramma",
-	"PROCEDURES_DEFNORETURN_TITLE": "om",
+	"PROCEDURES_DEFNORETURN_TITLE": "opdracht",
 	"PROCEDURES_DEFNORETURN_PROCEDURE": "doe iets",
 	"PROCEDURES_BEFORE_PARAMS": "met:",
 	"PROCEDURES_CALL_BEFORE_PARAMS": "met:",
@@ -463,5 +463,17 @@
 	"ARD_TONE_TIP": "Speelt een noot op de gegeven pin met de opgegeven frequentie binnen interval 31 - 65535",
 	"ARD_TONE_WARNING": "Frequentie moet in het interval 31 - 65535 liggen",
 	"ARD_NOTONE": "Stop afspelen noot op pin#",
-	"ARD_NOTONE_TIP": "Stopt met een noot af te spelen op de gegeven pin"
+	"ARD_NOTONE_TIP": "Stopt met een noot af te spelen op de gegeven pin",
+        "ARD_CONTROLS_EFFECT_TOOLTIP_1": "Aan de start van een effect doen we enkele opdrachten",
+        "ARD_CONTROLS_EFFECT_TOOLTIP_2": "Aan de start van een effect doen we enkele opdrachten, en aan het einde ook",
+        "ARD_CONTROLS_EFFECT_TOOLTIP_3": "Aan de start van een effect doen we enkele opdrachten, als de effect tijd groter wordt dan de gegeven waarde, worden de volgende opdrachten uitgevoerd.",
+        "ARD_CONTROLS_EFFECT_TOOLTIP_4": "Aan de start van een effect doen we enkele opdrachten, als de effect tijd groter wordt dan de gegeven waarde, worden de volgende opdrachten uitgevoerd. Aan het einde worden de laatste opdrachten uitgevoerd.",
+        "ARD_CONTROLS_EFFECT_MSG_FIRST1": "Effect",
+        "ARD_CONTROLS_EFFECT_MSG_FIRST2": "met totale duurtijd (ms) =",
+        "ARD_CONTROLS_EFFECT_MSG_IF": "bij start doe",
+        "ARD_CONTROLS_EFFECT_MSG_ELSEIF": "als effect tijd groter wordt dan",
+        "ARD_CONTROLS_EFFECT_MSG_ELSE": "op einde doe",
+        "ARD_CONTROLS_EFFECT_ELSEIF_TOOLTIP": "Voeg een extra effect tijd toe om opdrachten bij uit te voeren",
+        "ARD_CONTROLS_EFFECT_ELSE_TOOLTIP": "Voeg een blok toe voor als effect gedaan is",
+
 }
