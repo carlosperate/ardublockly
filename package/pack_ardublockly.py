@@ -27,6 +27,7 @@
 # executable application and zip the contents of the folder.
 #
 import os
+import re
 import sys
 import time
 import shutil
@@ -141,11 +142,11 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
 
     if pull_request and pull_request != "false":
         try:
-            int(filter(str.isdigit, pull_request))
+            pr_number = int(re.findall("\d+", pull_request)[0])
             print(script_tab + "Pull request valid '%s' variable found: %s" %
-                  (ci_name, pull_request))
-            return "pull_%s" % pull_request
-        except ValueError:
+                  (ci_name, pr_number))
+            return "pull_%s" % pr_number
+        except (ValueError, TypeError):
             print(script_tab + "The pull request environmental variable " +
                   "'%s' value '%s' from %s is not a valid number." %
                   (pull_request_var, pull_request, ci_name))
