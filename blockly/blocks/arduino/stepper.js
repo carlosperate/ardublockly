@@ -109,6 +109,78 @@ Blockly.Blocks['stepper_config'] = {
   }
 };
 
+Blockly.Blocks['stepper_config_hub'] = {
+  /**
+   * Block for for the stepper generator configuration including creating
+   * an object instance and setting up the speed. Info in the setHelpUrl link.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/StepperConstructor');
+    this.setColour(Blockly.Blocks.stepper.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_STEPPER_SETUP)
+        .appendField(new Blockly.Blocks.ComponentFieldVariable(
+        Blockly.Msg.ARD_STEPPER_DEFAULT_NAME, 'Stepper'), 'STEPPER_NAME')
+        .appendField(Blockly.Msg.ARD_STEPPER_MOTOR);
+    this.appendValueInput('STEPPER_STEPS')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.ARD_STEPPER_REVOLVS);
+    this.appendValueInput('STEPPER_SPEED')
+        .setCheck(Blockly.Types.NUMBER.checkList)
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.ARD_STEPPER_SPEED);
+    this.setTooltip(Blockly.Msg.ARD_STEPPER_SETUP_TIP);
+    this.setOutput(true, "HUB_DIGDIG");
+  },
+  /**
+   * Set the connection pins that the component connects to
+   * @param {array} array of the connections (as string, eg '1', 'SDA', 'A1', ...
+   * @this Blockly.Block
+   */
+  setHubConnector: function(connector) {
+    this['connector'] = connector;
+  },
+  /**
+   * Return the name of the component defined in this block
+   * @return {!<string>} The name of the component
+   * @this Blockly.Block
+   */
+  getComponentName: function() {
+    return 'Stepper';
+  },
+  /**
+   * Return all variables referenced by this block.
+   * @return {!Array.<string>} List of variable names.
+   * @this Blockly.Block
+   */
+  getVars: function() {
+    return [this.getFieldValue('STEPPER_NAME')];
+  },
+  /**
+   * Notification that a variable is renaming.
+   * If the name matches one of this block's variables, rename it.
+   * @param {string} oldName Previous name of variable.
+   * @param {string} newName Renamed variable.
+   * @this Blockly.Block
+   */
+  renameVar: function(oldName, newName) {
+    if (Blockly.Names.equals(oldName, this.getFieldValue('STEPPER_NAME'))) {
+      this.setFieldValue(newName, 'STEPPER_NAME');
+    }
+  },
+  /**
+   * Gets the variable type required.
+   * @param {!string} varName Name of the variable selected in this block to
+   *     check.
+   * @return {string} String to indicate the variable type.
+   */
+  getVarType: function(varName) {
+    return Blockly.Types.ARRAY;
+  }
+};
+
 Blockly.Blocks['stepper_step'] = {
   /**
    * Block for for the stepper 'step()' function.
