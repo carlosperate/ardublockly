@@ -172,6 +172,78 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="infinite_loop"></block>' +
 '  </category>' +
 '  <sep></sep>' +
+'  <category id="catComponent" name="Components">' +
+'    <block type="core_hub_component"></block>' +
+'    <block type="led_config_hub"></block>' +
+'    <block type="neopixel_config_hub">' +
+'      <value name="NUMBER">' +
+'        <block type="math_number">' +
+'          <field name="NUM">1</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="servo_config_hub"></block>' +
+'    <block type="stepper_config_hub">' +
+'      <value name="STEPPER_STEPS">' +
+'        <block type="math_number">' +
+'          <field name="NUM">100</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="STEPPER_SPEED">' +
+'        <block type="math_number">' +
+'          <field name="NUM">10</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="led_digitalwrite_onoff"></block>' +
+'    <block type="led_digitalwrite">' +
+'      <value name="STATE">' +
+'        <shadow type="io_highlow"></shadow>' +
+'      </value>' +
+'    </block>' +
+'    <block type="neopixel_colourpick_write">' +
+'      <value name="LEDPIXEL">' +
+'        <block type="math_number">' +
+'          <field name="NUM">1</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="neopixel_colourpick_dim_write">' +
+'      <value name="LEDPIXEL">' +
+'        <block type="math_number">' +
+'          <field name="NUM">1</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="BRIGHTNESS">' +
+'        <block type="math_number">' +
+'          <field name="NUM">100</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="neopixel_write">' +
+'      <value name="LEDPIXEL">' +
+'        <block type="math_number">' +
+'          <field name="NUM">1</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="RED">' +
+'        <block type="math_number">' +
+'          <field name="NUM">255</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="GREEN">' +
+'        <block type="math_number">' +
+'          <field name="NUM">0</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="BLUE">' +
+'        <block type="math_number">' +
+'          <field name="NUM">0</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'  </category>' +
+'  <sep></sep>' +
 '  <category id="catMusic" name="Music">' +
 '    <block type="io_tone">' +
 '      <field name="TONEPIN">0</field>' +
@@ -207,6 +279,41 @@ Ardublockly.TOOLBOX_XML =
 '        </block>' +
 '      </value>' +
 '    </block>' +
+'    <block type="stepper_step">' +
+'      <value name="STEPPER_STEPS">' +
+'        <block type="math_number">' +
+'          <field name="NUM">10</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="servo_config_hub"></block>' +
+'    <block type="stepper_config_hub">' +
+'      <value name="STEPPER_STEPS">' +
+'        <block type="math_number">' +
+'          <field name="NUM">100</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="STEPPER_SPEED">' +
+'        <block type="math_number">' +
+'          <field name="NUM">10</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="servohub_write">' +
+'      <value name="SERVO_ANGLE">' +
+'        <block type="math_number">' +
+'          <field name="NUM">90</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="servohub_write2">' +
+'      <value name="SERVO_SPEED">' +
+'        <block type="math_number">' +
+'          <field name="NUM">50</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="servohub_read"></block>' +
 '    <block type="stepper_step">' +
 '      <value name="STEPPER_STEPS">' +
 '        <block type="math_number">' +
