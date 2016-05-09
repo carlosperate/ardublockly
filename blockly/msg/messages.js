@@ -1317,9 +1317,19 @@ Blockly.Msg.ARD_ANASENSOR_READ = 'Read analog sensor';
 Blockly.Msg.ARD_ANASENSOR_COMPONENT = 'Analog Sensor';
 Blockly.Msg.ARD_DIGINPUT = 'Digital input';
 Blockly.Msg.ARD_DIGINPUT_TIP = 'Connect a digital input to a digital pin, so as to read its value. The digital state can then be read, corresponding to 0V or 5V on the pin for an Arduino UNO.';
-Blockly.Msg.ARD_DIGINPUT_DEFAULT_NAME = 'DigiInput1';
+Blockly.Msg.ARD_DIGINPUT_DEFAULT_NAME = 'DigInput1';
 Blockly.Msg.ARD_DIGINPUT_READ = 'Read digital input';
 Blockly.Msg.ARD_DIGINPUT_COMPONENT = 'Digital Input';
+Blockly.Msg.ARD_DIGOUTPUT = 'Digital output';
+Blockly.Msg.ARD_DIGOUTPUT_TIP = 'Connect a generic digital ouput to a digital pin, so as to write to that pin. The digital state can be set to LOW or HIGH, corresponding to 0V and 5V on the pin for an Arduino UNO.';
+Blockly.Msg.ARD_DIGOUTPUT_DEFAULT_NAME = 'DigOutput1';
+Blockly.Msg.ARD_DIGOUTPUT_WRITE = 'Write to digital output';
+Blockly.Msg.ARD_DIGOUTPUT_COMPONENT = 'Digital Output';
+Blockly.Msg.ARD_PWMOUTPUT = 'PWM output';
+Blockly.Msg.ARD_PWMOUTPUT_TIP = 'Connect a generic PWM (Pulse Width Modulation) ouput to a pwm pin, so as to write an analog value to that pin. The value written should be a number between 0 and 255, and will generate a block pulse over this pin.';
+Blockly.Msg.ARD_PWMOUTPUT_DEFAULT_NAME = 'PWMOutput1';
+Blockly.Msg.ARD_PWMOUTPUT_WRITE = 'Write to PWM output';
+Blockly.Msg.ARD_PWMOUTPUT_COMPONENT = 'PWM Output';
 
 //effect block
 Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_1 = 'At the start of an effect, do some statements';
