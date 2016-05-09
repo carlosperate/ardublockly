@@ -631,7 +631,7 @@ Blockly.Blocks['pwmoutput_config_hub'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_PWMOUTPUT)
         .appendField(new Blockly.Blocks.ComponentFieldVariable(
-        Blockly.Msg.ARD_DIGOUTPUT_DEFAULT_NAME, 'PWMOutput'), 'OUTPUTNAME')
+        Blockly.Msg.ARD_PWMOUTPUT_DEFAULT_NAME, 'PWMOutput'), 'OUTPUTNAME')
     this.setOutput(true, 'HUB_PWM');
     this.setColour(Blockly.Blocks.io.HUE);
     this.setTooltip(Blockly.Msg.ARD_PWMOUTPUT_TIP);
@@ -695,7 +695,7 @@ Blockly.Blocks['pwmoutput_write'] = {
     this.appendValueInput('NUM')
         .appendField(Blockly.Msg.ARD_PWMOUTPUT_WRITE)
         .appendField(new Blockly.Blocks.ComponentFieldVariable(
-        Blockly.Msg.ARD_DIGOUTPUT_DEFAULT_NAME, 'PWMOutput'), 'OUTPUTNAME')
+        Blockly.Msg.ARD_PWMOUTPUT_DEFAULT_NAME, 'PWMOutput'), 'OUTPUTNAME')
         .appendField(Blockly.Msg.ARD_WRITE_TO)
         .setCheck(Blockly.Types.NUMBER.output);
     this.setInputsInline(false);
