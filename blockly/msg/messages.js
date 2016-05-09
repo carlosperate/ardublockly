@@ -1330,7 +1330,7 @@ Blockly.Msg.ARD_PWMOUTPUT_TIP = 'Connect a generic PWM (Pulse Width Modulation) 
 Blockly.Msg.ARD_PWMOUTPUT_DEFAULT_NAME = 'PWMOutput1';
 Blockly.Msg.ARD_PWMOUTPUT_WRITE = 'Write to PWM output';
 Blockly.Msg.ARD_PWMOUTPUT_COMPONENT = 'PWM Output';
-Blockly.Msg.ARD_OUTPUT_WRITE_TO = 'waarde';
+Blockly.Msg.ARD_OUTPUT_WRITE_TO = 'value';
 
 //effect block
 Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_1 = 'At the start of an effect, do some statements';
