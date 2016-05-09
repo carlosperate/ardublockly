@@ -150,6 +150,16 @@ Ardublockly.TOOLBOX_XML =
 '        <block type="math_number"></block>' +
 '      </value>'+
 '    </block>' +
+'    <block type="analogsensor_config_hub"></block>' +
+'    <block type="analogsensor_read"></block>' +
+'    <block type="digitalinput_config_hub"></block>' +
+'    <block type="digitalinput_read"></block>' +
+'    <block type="button_setup"></block>' +
+'    <block type="button_input"></block>' +
+'    <block type="digitaloutput_config_hub"></block>' +
+'    <block type="digitaloutput_write"></block>' +
+'    <block type="pwmoutput_config_hub"></block>' +
+'    <block type="pwmoutput_write"></block>' +
 '  </category>' +
 '  <sep></sep>' +
 '  <category id="catTime" name="Time">' +
@@ -182,6 +192,11 @@ Ardublockly.TOOLBOX_XML =
 '        </block>' +
 '      </value>' +
 '    </block>' +
+'    <block type="analogsensor_config_hub"></block>' +
+'    <block type="digitalinput_config_hub"></block>' +
+'    <block type="button_setup"></block>' +
+'    <block type="digitaloutput_config_hub"></block>' +
+'    <block type="pwmoutput_config_hub"></block>' +
 '    <block type="servo_config_hub"></block>' +
 '    <block type="stepper_config_hub">' +
 '      <value name="STEPPER_STEPS">' +
