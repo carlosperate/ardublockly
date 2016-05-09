@@ -39,7 +39,7 @@ function hexToRgb(hex) {
 
 
 /**
- * The button setup block
+ * The led setup block
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {string} Completed code.
  */
@@ -53,18 +53,18 @@ Blockly.Arduino['led_config_hub'] = function(block) {
   //the hub saved the connector in the attached block
   var hubconnector = block['connector'] || ['0', '1']
   //compute the pins, normally only possible to attach at valid pins
-  var pintop = hubconnector[0];
+  var pin = hubconnector[0];
 
   Blockly.Arduino.reservePin(
-      block, pintop, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
 
   //LEDName is a variable containing the used pins
   Blockly.Arduino.addVariable(LEDName,
-      'int ' + LEDName + ' = ' + pintop + 
+      'int ' + LEDName + ' = ' + pin + 
       ';\nboolean ' + LEDName + '_ON = ' + LEDon + ';', true);
   
   var pinSetupCode = 'pinMode(' + LEDName + ', OUTPUT);';
-  Blockly.Arduino.addSetup('io_' + pintop, pinSetupCode, false);
+  Blockly.Arduino.addSetup('io_' + LEDName, pinSetupCode, false);
 
   return '';
 };
@@ -116,26 +116,26 @@ Blockly.Arduino['neopixel_config_hub'] = function(block) {
   //the hub saved the connector in the attached block
   var hubconnector = block['connector'] || ['0', '1']
   //compute the pins, normally only possible to attach at valid pins
-  var pintop = hubconnector[0];
+  var pin = hubconnector[0];
 
   Blockly.Arduino.reservePin(
-      block, pintop, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
 
   //NeoPixelName is a variable containing the used pins
   Blockly.Arduino.addVariable(NeoPixelName,
-      'int ' + NeoPixelName + ' = ' + pintop + ';', true);
+      'int ' + NeoPixelName + ' = ' + pin + ';', true);
   
   var NeoName = 'myNeo_' + NeoPixelName;
   
   var decl_code = '#include <Adafruit_NeoPixel.h>\n' +
         'Adafruit_NeoPixel ' + NeoName + ' = Adafruit_NeoPixel(' + number +
-        ', ' +pintop + ', ' + NeoType + ' + ' + KHz + ');';
+        ', ' +pin + ', ' + NeoType + ' + ' + KHz + ');';
         
   Blockly.Arduino.addDeclaration(NeoName, decl_code);
   
   var setupCode = NeoName + '.begin();\n' +
                   '  ' + NeoName + '.show();';
-  Blockly.Arduino.addSetup('io_' + pintop, setupCode, false);
+  Blockly.Arduino.addSetup('io_' + NeoName, setupCode, false);
   
   return '';
 
