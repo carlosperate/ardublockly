@@ -570,7 +570,7 @@ Blockly.Blocks['digitaloutput_write'] = {
         .appendField(Blockly.Msg.ARD_DIGOUTPUT_WRITE)
         .appendField(new Blockly.Blocks.ComponentFieldVariable(
         Blockly.Msg.ARD_DIGOUTPUT_DEFAULT_NAME, 'DigitalOutput'), 'OUTPUTNAME')
-        .appendField(Blockly.Msg.ARD_WRITE_TO)
+        .appendField(Blockly.Msg.ARD_OUTPUT_WRITE_TO)
         .setCheck(Blockly.Types.BOOLEAN.checkList);
     this.setInputsInline(false);
     this.setPreviousStatement(true, 'ARD_BLOCK');
@@ -696,7 +696,7 @@ Blockly.Blocks['pwmoutput_write'] = {
         .appendField(Blockly.Msg.ARD_PWMOUTPUT_WRITE)
         .appendField(new Blockly.Blocks.ComponentFieldVariable(
         Blockly.Msg.ARD_PWMOUTPUT_DEFAULT_NAME, 'PWMOutput'), 'OUTPUTNAME')
-        .appendField(Blockly.Msg.ARD_WRITE_TO)
+        .appendField(Blockly.Msg.ARD_OUTPUT_WRITE_TO)
         .setCheck(Blockly.Types.NUMBER.output);
     this.setInputsInline(false);
     this.setPreviousStatement(true, 'ARD_BLOCK');
