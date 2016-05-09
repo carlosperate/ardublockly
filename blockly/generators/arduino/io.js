@@ -206,3 +206,42 @@ Blockly.Arduino['analogsensor_read'] = function(block) {
   var code = 'analogRead(' + pin + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+
+/**
+ * The digitalinput setup block
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['digitalinput_config_hub'] = function(block) {
+  var SensorName = block.getFieldValue('SENSORNAME');
+  //the hub saved the connector in the attached block
+  var hubconnector = block['connector'] || ['0', '1']
+  //compute the pins, normally only possible to attach at valid pins
+  var pin = hubconnector[0];
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+
+  //SensorName is a variable containing the used pins
+  Blockly.Arduino.addVariable(SensorName,
+      'int ' + SensorName + ' = ' + pin + ';', true);
+  
+  var pinSetupCode = 'pinMode(' + SensorName + ', INPUT);';
+  Blockly.Arduino.addSetup('io_' + SensorName, pinSetupCode, false);
+
+  return '';
+};
+
+/**
+ * Function for reading an analogue pin value (X).
+ * Arduino code: setup { pinMode(X, INPUT); }
+ *               loop  { analogRead(X)      }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['digitalinput_read'] = function(block) {
+  var pin = block.getFieldValue('SENSORNAME');
+
+  var code = 'digitalRead(' + pin + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
