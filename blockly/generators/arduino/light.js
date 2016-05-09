@@ -56,7 +56,7 @@ Blockly.Arduino['led_config_hub'] = function(block) {
   var pin = hubconnector[0];
 
   Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write to LED');
 
   //LEDName is a variable containing the used pins
   Blockly.Arduino.addVariable(LEDName,
@@ -119,7 +119,7 @@ Blockly.Arduino['neopixel_config_hub'] = function(block) {
   var pin = hubconnector[0];
 
   Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write to Neopixel');
 
   //NeoPixelName is a variable containing the used pins
   Blockly.Arduino.addVariable(NeoPixelName,

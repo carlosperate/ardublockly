@@ -181,7 +181,7 @@ Blockly.Arduino['analogsensor_config_hub'] = function(block) {
   var pin = hubconnector[0];
 
   Blockly.Arduino.reservePin(
-      block, SensorName, Blockly.Arduino.PinTypes.INPUT, 'Analogue Read');
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Analogue Read');
 
   //SensorName is a variable containing the used pins
   Blockly.Arduino.addVariable(SensorName,
