@@ -1309,6 +1309,11 @@ Blockly.Msg.ARD_BUTTON_INPUT_LONGCLICK = 'is undergoing a long click';
 Blockly.Msg.ARD_BUTTON_INPUT_PRESSED = 'is being pressed';
 Blockly.Msg.ARD_BUTTON_INPUT_WAIT = 'wait for a click to happen';
 Blockly.Msg.ARD_BUTTON_INPUT_TIP = 'Check the input received on a button, and react to it. This function does not block your program if you do not check the checkbox to wait for a click. A click is a press and a release of the button, a long press a click and holding long time before you release, press is active as soon as the button is pressed down.';
+Blockly.Msg.ARD_ANASENSOR = 'Analog Sensor';
+Blockly.Msg.ARD_ANASENSOR_TIP = 'Connect an analog sensor to an analog pin, so as to read its value. On an Arduino UNO a value between 0 and 1024 is returned, corresponding to a measured value between 0 and 5V. Eg.: an LDR sensor, a potmeter, ...';
+Blockly.Msg.ARD_ANASENSOR_DEFAULT_NAME = 'AnaSensor1';
+Blockly.Msg.ARD_ANASENSOR_READ = 'Read analog sensor';
+Blockly.Msg.ARD_ANASENSOR_COMPONENT = 'Analog Sensor';
 
 //effect block
 Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_1 = 'At the start of an effect, do some statements';
