@@ -1111,6 +1111,7 @@ Blockly.Msg.ARD_TYPE_ARRAY = 'Array';
 Blockly.Msg.ARD_TYPE_NULL = 'Null';
 Blockly.Msg.ARD_TYPE_UNDEF = 'Undefined';
 Blockly.Msg.ARD_TYPE_CHILDBLOCKMISSING = 'ChildBlockMissing';
+Blockly.Msg.ARD_BOARD = 'Board';
 Blockly.Msg.ARD_BOARD_WARN = 'This block requires as board %1, but another block is present that requires another Arduino board!';
 Blockly.Msg.ARD_HIGH = 'HIGH';
 Blockly.Msg.ARD_LOW = 'LOW';

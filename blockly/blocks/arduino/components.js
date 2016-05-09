@@ -27,7 +27,7 @@ Blockly.Blocks['core_hub_component'] = {
     this.setHelpUrl(''); //Blockly.Msg.ARD_CONTROLS_EFFECT_HELPURL);
     this.setColour(Blockly.Blocks.components.HUE);
     this.appendDummyInput()
-        .appendField('Board')
+        .appendField(Blockly.Msg.ARD_BOARD)
         .appendField(
             new Blockly.FieldDropdown(
                 [['Arduino Uno', 'uno'],
