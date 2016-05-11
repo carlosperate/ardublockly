@@ -79,10 +79,10 @@ Blockly.Blocks['core_hub_component'] = {
     
     if (otherBoardPresent) {
       // Set a warning to select a valid stepper config
-      this.setWarningText(Blockly.Msg.ARD_BOARD_WARN.replace('%1', Blockly.Msg.ARD_COMPONENT_BOARD));
+      this.setWarningText(Blockly.Msg.ARD_BOARD_WARN.replace('%1', Blockly.Msg.ARD_COMPONENT_BOARD), 'board');
     } else {
       Blockly.Arduino.Boards.changeBoard(this.workspace, this.getBoardName());
-      this.setWarningText(null);
+      this.setWarningText(null, 'board');
     }
   },
   /**
@@ -110,7 +110,7 @@ Blockly.Blocks['core_hub_component'] = {
     return container;
   },
   /**
-   * Parse XML to restore the else-if and else inputs.
+   * Parse XML to restore the pin inputs.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
    */
@@ -193,27 +193,34 @@ Blockly.Blocks['core_hub_component'] = {
    */
   compose: function(containerBlock) {
     // Disconnect all the digpin input blocks and remove the inputs.
+    var oldInputs = {}
     for (var i = this.digCount_; i > 0; i--) {
+      oldInputs['DIG' + i] = this.getFieldValue('PIND' + i);
       this.removeInput('DIG' + i);
     }
     this.digCount_ = 0;
     // Disconnect all the anapin input blocks and remove the inputs.
     for (var i = this.anaCount_; i > 0; i--) {
+      oldInputs['ANA' + i] = this.getFieldValue('PINA' + i);
       this.removeInput('ANA' + i);
     }
     this.anaCount_ = 0;
     // Disconnect all the pwmpin input blocks and remove the inputs.
     for (var i = this.pwmCount_; i > 0; i--) {
+      oldInputs['PWM' + i] = this.getFieldValue('PINP' + i);
       this.removeInput('PWM' + i);
     }
     this.pwmCount_ = 0;
     // Disconnect all the double digpin input blocks and remove the inputs.
     for (var i = this.digdigCount_; i > 0; i--) {
+      oldInputs['DIGDIG' + i] = [this.getFieldValue('PINDD1_' + i),
+                              this.getFieldValue('PINDD2_' + i)];
       this.removeInput('DIGDIG' + i);
     }
     this.digdigCount_ = 0;
     // Rebuild the block's optional inputs.
     var clauseBlock = containerBlock.nextConnection.targetBlock();
+    console.log('inputs', oldInputs);
     while (clauseBlock) {
       switch (clauseBlock.type) {
         case 'core_hub_digpin':
@@ -223,8 +230,11 @@ Blockly.Blocks['core_hub_component'] = {
               .appendField(Blockly.Msg.ARD_PIN_DIG)
               .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIND" + this.digCount_)
               .setAlign(Blockly.ALIGN_RIGHT);
-          if (clauseBlock.valueConnection_) {
-            digInput.connection.connect(clauseBlock.valueConnection_);
+          if (! (oldInputs['DIG' + this.digCount_] == undefined)) {
+            this.setFieldValue(oldInputs['DIG' + this.digCount_], "PIND" + this.digCount_);
+          }
+          if (clauseBlock.valueDConnection_) {
+            digInput.connection.connect(clauseBlock.valueDConnection_);
           }
           break;
         case 'core_hub_anapin':
@@ -234,8 +244,11 @@ Blockly.Blocks['core_hub_component'] = {
               .appendField(Blockly.Msg.ARD_PIN_AN)
               .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PINA" + this.anaCount_)
               .setAlign(Blockly.ALIGN_RIGHT);
-          if (clauseBlock.valueConnection_) {
-            anaInput.connection.connect(clauseBlock.valueConnection_);
+          if (! (oldInputs['ANA' + this.anaCount_] == undefined)) {
+            this.setFieldValue(oldInputs['ANA' + this.anaCount_], "PINA" + this.anaCount_);
+          }
+          if (clauseBlock.valueAConnection_) {
+            anaInput.connection.connect(clauseBlock.valueAConnection_);
           }
           break;
         case 'core_hub_pwmpin':
@@ -245,21 +258,28 @@ Blockly.Blocks['core_hub_component'] = {
               .appendField(Blockly.Msg.ARD_PIN_PWM)
               .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.pwmPins), "PINP" + this.pwmCount_)
               .setAlign(Blockly.ALIGN_RIGHT);
-          if (clauseBlock.valueConnection_) {
-            pwmInput.connection.connect(clauseBlock.valueConnection_);
+          if (! (oldInputs['PWM' + this.pwmCount_] == undefined)) {
+            this.setFieldValue(oldInputs['PWM' + this.pwmCount_], "PINP" + this.pwmCount_);
+          }
+          if (clauseBlock.valuePConnection_) {
+            pwmInput.connection.connect(clauseBlock.valuePConnection_);
           }
           break;
         case 'core_hub_digdigpin':
           this.digdigCount_++;
-          var digInput = this.appendValueInput('DIGDIG' + this.digCount_)
+          var digInput = this.appendValueInput('DIGDIG' + this.digdigCount_)
               .setCheck(["HUB_DIGDIG"])
               .appendField(Blockly.Msg.ARD_PIN_DIGDIG1)
               .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PINDD1_" + this.digdigCount_)
               .appendField(Blockly.Msg.ARD_PIN_DIGDIG2)
               .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PINDD2_" + this.digdigCount_)
               .setAlign(Blockly.ALIGN_RIGHT);
-          if (clauseBlock.valueConnection_) {
-            digInput.connection.connect(clauseBlock.valueConnection_);
+          if (! (oldInputs['DIGDIG' + this.digdigCount_] == undefined)) {
+            this.setFieldValue(oldInputs['DIGDIG' + this.digdigCount_][0], "PINDD1_" + this.digdigCount_);
+            this.setFieldValue(oldInputs['DIGDIG' + this.digdigCount_][1], "PINDD2_" + this.digdigCount_);
+          }
+          if (clauseBlock.valueDDConnection_) {
+            digInput.connection.connect(clauseBlock.valueDDConnection_);
           }
           break;
         default:
@@ -281,26 +301,26 @@ Blockly.Blocks['core_hub_component'] = {
       switch (clauseBlock.type) {
         case 'core_hub_digpin':
           var inputDig = this.getInput('DIG' + i);
-          clauseBlock.valueConnection_ =
+          clauseBlock.valueDConnection_ =
               inputDig && inputDig.connection.targetConnection;
           i++;
           break;
         case 'core_hub_anapin':
           var inputAna = this.getInput('ANA' + j);
-          clauseBlock.valueConnection_ =
+          clauseBlock.valueAConnection_ =
               inputAna && inputAna.connection.targetConnection;
           j++;
           break;
         case 'core_hub_pwmpin':
-          var inputPwm = this.getInput('ANA' + k);
-          clauseBlock.valueConnection_ =
+          var inputPwm = this.getInput('PWM' + k);
+          clauseBlock.valuePConnection_ =
               inputPwm && inputPwm.connection.targetConnection;
           k++;
           break;
         case 'core_hub_digdigpin':
-          var inputDig = this.getInput('DIGDIG' + ii);
-          clauseBlock.valueConnection_ =
-              inputDig && inputDig.connection.targetConnection;
+          var inputDigDig = this.getInput('DIGDIG' + ii);
+          clauseBlock.valueDDConnection_ =
+              inputDigDig && inputDigDig.connection.targetConnection;
           ii++;
           break;
         default:
