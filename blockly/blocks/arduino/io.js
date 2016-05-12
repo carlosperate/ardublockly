@@ -443,12 +443,12 @@ Blockly.Blocks['digitalinput_read'] = {
         .appendField(Blockly.Msg.ARD_DIGINPUT_READ)
         .appendField(new Blockly.Blocks.ComponentFieldVariable(
         Blockly.Msg.ARD_DIGINPUT_DEFAULT_NAME, 'DigitalInput'), 'SENSORNAME')
-    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setTooltip(Blockly.Msg.ARD_DIGINPUT_TIP);
   },
   /** @return {!string} The type of return value for the block, an integer. */
   getBlockType: function() {
-    return Blockly.Types.NUMBER;
+    return Blockly.Types.BOOLEAN;
   },
   /**
    * Return all variables referenced by this block.
