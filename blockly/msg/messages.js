@@ -1111,6 +1111,8 @@ Blockly.Msg.ARD_TYPE_ARRAY = 'Array';
 Blockly.Msg.ARD_TYPE_NULL = 'Null';
 Blockly.Msg.ARD_TYPE_UNDEF = 'Undefined';
 Blockly.Msg.ARD_TYPE_CHILDBLOCKMISSING = 'ChildBlockMissing';
+Blockly.Msg.ARD_BOARD = 'Board';
+Blockly.Msg.ARD_BOARD_WARN = 'This block requires as board %1, but another block is present that requires another Arduino board!';
 Blockly.Msg.ARD_HIGH = 'HIGH';
 Blockly.Msg.ARD_LOW = 'LOW';
 Blockly.Msg.ARD_ANALOGREAD = 'read analog pin#';
@@ -1135,9 +1137,11 @@ Blockly.Msg.ARD_NOTONE_PIN_TIP = 'Stop generating a tone on a pin';
 Blockly.Msg.ARD_MAP = 'Map';
 Blockly.Msg.ARD_MAP_VAL = 'value to [0-';
 Blockly.Msg.ARD_MAP_TIP = 'Re-maps a number from [0-1024] to another.';
+Blockly.Msg.ARD_FUN_RUN_DECL = 'Arduino define up front:';
 Blockly.Msg.ARD_FUN_RUN_SETUP = 'Arduino run first:';
 Blockly.Msg.ARD_FUN_RUN_LOOP = 'Arduino loop forever:';
 Blockly.Msg.ARD_FUN_RUN_TIP = 'Defines the Arduino setup() and loop() functions.';
+Blockly.Msg.ARD_FUN_RUN_DECL_TIP = 'Code you want to declare up front (use this e.g. for variables you need in setup)';
 Blockly.Msg.ARD_PIN_WARN1 = 'Pin %1 is needed for %2 as pin %3. Already used as %4.';
 Blockly.Msg.ARD_SERIAL_SETUP = 'Setup';
 Blockly.Msg.ARD_SERIAL_SPEED = ':  speed to';
@@ -1153,6 +1157,12 @@ Blockly.Msg.ARD_SERVO_WRITE_DEG_180 = 'Degrees (0~180)';
 Blockly.Msg.ARD_SERVO_WRITE_TIP = 'Set a Servo to an specified angle';
 Blockly.Msg.ARD_SERVO_READ = 'read SERVO from PIN#';
 Blockly.Msg.ARD_SERVO_READ_TIP = 'Read a Servo angle';
+Blockly.Msg.ARD_SERVOHUB = 'Servo motor';
+Blockly.Msg.ARD_SERVO_DEFAULT_NAME = 'Servo1';
+Blockly.Msg.ARD_SERVO_TYPE = 'Type:';
+Blockly.Msg.ARD_180SERVO = '0~180 degree Servo (angle)';
+Blockly.Msg.ARD_360SERVO = '0~360 degree Servo (rotation)';
+Blockly.Msg.ARD_SERVOHUB_TIP = 'Servo Motor Connection, which can attach to a PWM pin. You have to give the servo a name, and what type it is (a 180 degree servo or a 360 degree servo.)';
 Blockly.Msg.ARD_SPI_SETUP = 'Setup';
 Blockly.Msg.ARD_SPI_SETUP_CONF = 'configuration:';
 Blockly.Msg.ARD_SPI_SETUP_SHIFT = 'data shift';
@@ -1172,8 +1182,9 @@ Blockly.Msg.ARD_SPI_TRANS_TIP = 'Send a SPI message to an specified slave device
 Blockly.Msg.ARD_SPI_TRANS_WARN1 = 'A setup block for %1 must be added to the workspace to use this block!';
 Blockly.Msg.ARD_SPI_TRANS_WARN2 = 'Old pin value %1 is no longer available.';
 Blockly.Msg.ARD_SPI_TRANSRETURN_TIP = 'Send a SPI message to an specified slave device and get data back.';
-Blockly.Msg.ARD_STEPPER_SETUP = 'Setup';
-Blockly.Msg.ARD_STEPPER_MOTOR = 'stepper motor:';
+Blockly.Msg.ARD_STEPPER_SETUP = 'Setup stepper motor';
+Blockly.Msg.ARD_STEPPER_MOTOR = '';
+Blockly.Msg.ARD_STEPPER_DEFAULT_NAME = 'MyStepper';
 Blockly.Msg.ARD_STEPPER_PIN1 = 'pin1#';
 Blockly.Msg.ARD_STEPPER_PIN2 = 'pin2#';
 Blockly.Msg.ARD_STEPPER_REVOLVS = 'how many steps per revolution';
@@ -1182,9 +1193,15 @@ Blockly.Msg.ARD_STEPPER_SETUP_TIP = 'Configures a stepper motor pinout and other
 Blockly.Msg.ARD_STEPPER_STEP = 'move stepper';
 Blockly.Msg.ARD_STEPPER_STEPS = 'steps';
 Blockly.Msg.ARD_STEPPER_STEP_TIP = 'Turns the stepper motor a specific number of steps.';
-Blockly.Msg.ARD_STEPPER_STEP_WARN1 = 'A STEPPER configuration block must be added to use this block!';
-Blockly.Msg.ARD_STEPPER_STEP_WARN2 = 'A Name input must be added to the Stepper configuration block!';
-Blockly.Msg.ARD_STEPPER_STEP_WARN3 = 'Selected stepper does not exist any more, please select a new one.';
+Blockly.Msg.ARD_STEPPER_COMPONENT = 'stepper';
+Blockly.Msg.ARD_SERVO_COMPONENT = 'servo';
+Blockly.Msg.ARD_SERVO_ROTATE360 = 'Rotate 360 degree Servo';
+Blockly.Msg.ARD_SERVO_ROTATESPEED = 'with speed';
+Blockly.Msg.ARD_SERVO_ROTATEPERC = '% (-100 to 100)';
+Blockly.Msg.ARD_SERVO_ROTATE_TIP = 'Turn a Servo with a specific speed';
+Blockly.Msg.ARD_SERVOHUB_WRITE = 'set 180 degree Servo ';
+Blockly.Msg.ARD_SERVOHUB_READ = 'read Servo ';
+Blockly.Msg.ARD_COMPONENT_WARN1 = 'A %1 configuration block with the same %1 name must be added to use this block!';
 Blockly.Msg.ARD_TIME_DELAY = 'wait';
 Blockly.Msg.ARD_TIME_MS = 'milliseconds';
 Blockly.Msg.ARD_TIME_DELAY_TIP = 'Wait specific time in milliseconds';
@@ -1200,6 +1217,48 @@ Blockly.Msg.ARD_VAR_AS = 'as';
 Blockly.Msg.ARD_VAR_AS_TIP = 'Sets a value to a specific type';
 Blockly.Msg.REPLACE_EXISTING_BLOCKS = 'Replace existing blocks? "Cancel" will merge.';
 
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_BOOL_NUMBER = 'as boolean';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_INTEGER_NUMBER = 'as integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_UINT_NUMBER = 'as positive integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_LONG_NUMBER = 'as long integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_ULONG_NUMBER = 'as long positive integer number';
+//Arduino blocks define as a specific type
+Blockly.Msg.ARD_AS_FLOAT_NUMBER = 'as decimal number';
+Blockly.Msg.ARD_AS_BOOL_NUMBER_TIP = 'Declare a variable as boolean with value true or false';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_INTEGER_NUMBER_TIP = 'Declare a variable as integer, -32768 to 32767';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_UINT_NUMBER_TIP = 'Declare a variable as a positive integer, 0 to 65535';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_LONG_NUMBER_TIP = 'Declare a variable as a long integer, -2,147,483,648 to 2,147,483,647';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_ULONG_NUMBER_TIP = 'Declare a variable as a long positive integer, 0 to 4,294,967,295';
+//Arduino blocks define as a specific type tip
+Blockly.Msg.ARD_AS_FLOAT_NUMBER_TIP = 'Declare a variable as a decimal number, eg 3.6 or 5e4 or -3.14';
+
+Blockly.Msg.ARD_AS_DIGINPUT_PIN = 'as digital input';
+Blockly.Msg.ARD_AS_DIGINPUT_PIN_TIP = 'Declare a variable as a digital input pin';
+Blockly.Msg.ARD_AS_DIGOUTPUT_PIN = 'as digital output';
+Blockly.Msg.ARD_AS_DIGOUTPUT_PIN_TIP = 'Declare a variable as a digital output pin';
+Blockly.Msg.ARD_AS_ANAINPUT_PIN = 'as analog input';
+Blockly.Msg.ARD_AS_ANAINPUT_PIN_TIP = 'Declare a variable as a analog input pin';
+Blockly.Msg.ARD_AS_ANAOUTPUT_PIN = 'as analg output';
+Blockly.Msg.ARD_AS_ANAOUTPUT_PIN_TIP = 'Declare a variable as a analog PWM output pin';
+
+
+Blockly.Msg.ARD_DIGITALWRITEVAR_TIP = 'Write digital value to a Port, the value and port can be computed variables';
+
+Blockly.Msg.ARD_PIN_AN = 'analog pin';
+Blockly.Msg.ARD_PIN_DIG = 'digital pin';
+Blockly.Msg.ARD_PIN_PWM = 'PWM pin';
+Blockly.Msg.ARD_PIN_AN_TIP = 'One of the analog pins of the Arduino Board';
+Blockly.Msg.ARD_PIN_DIG_TIP = 'One of the digital pins of the Arduino Board';
+Blockly.Msg.ARD_PIN_PWM_TIP = 'One of the Pulse Width Modeling (PWM) pins of the Arduino Board';
 Blockly.Msg.ARD_PULSEREAD = 'Read';
 Blockly.Msg.ARD_PULSEON = 'pulse on pin #';
 Blockly.Msg.ARD_PULSETIMEOUT = 'timeout after';
@@ -1212,3 +1271,88 @@ Blockly.Msg.ARD_TONE_TIP = 'Sets tone on pin to specified frequency within range
 Blockly.Msg.ARD_TONE_WARNING = 'Frequency must be in range 31 - 65535';
 Blockly.Msg.ARD_NOTONE = 'Turn off tone on pin #';
 Blockly.Msg.ARD_NOTONE_TIP = 'Turns the tone off on the selected pin';
+
+Blockly.Msg.ARD_LEDLEG_COMPONENT = 'LED';
+Blockly.Msg.ARD_LEDLEG_DEFAULT_NAME = 'Led1';
+Blockly.Msg.ARD_LEDLEG = 'LED';
+Blockly.Msg.ARD_LEDLEGPOL = 'leg polarity';
+Blockly.Msg.ARD_LEDLEGPOS = 'plus';
+Blockly.Msg.ARD_LEDLEGNEG = 'minus';
+Blockly.Msg.ARD_LEDLEG_TIP = 'A LED light, on of the legs (the positive or negative) is connected to the Arduino. Can be ON or OFF.';
+Blockly.Msg.ARD_LEDLEG_SET = 'Set LED';
+Blockly.Msg.ARD_LEDLEG_ON = 'ON';
+Blockly.Msg.ARD_LEDLEG_OFF = 'OFF';
+Blockly.Msg.ARD_NEOPIXEL = 'NeoPixel LED light';
+Blockly.Msg.ARD_NEOPIXEL_STRIP = 'Strip with';
+Blockly.Msg.ARD_NEOPIXEL_PIXELS = 'Pixels.';
+Blockly.Msg.ARD_NEOPIXEL_HZ = 'Frequency:';
+Blockly.Msg.ARD_NEOPIXEL_TYPE = 'Type:';
+Blockly.Msg.ARD_NEOPIXEL_TIP = 'A NEOPIXEL LED light or a strip with multiple neopixels.';
+Blockly.Msg.ARD_NEOPIXEL_SET = 'Set Neopixel';
+Blockly.Msg.ARD_NEOPIXEL_PIXEL = 'pixel';
+Blockly.Msg.ARD_NEOPIXEL_ONCOLOUR = 'on colour';
+Blockly.Msg.ARD_NEOPIXEL_BRIGHTNESS = ' brightness (%)';
+Blockly.Msg.ARD_NEOPIXEL_ONCOLOURVALRED = 'on colour (0-255) red:';
+Blockly.Msg.ARD_NEOPIXEL_ONCOLOURVALGREEN = 'green:';
+Blockly.Msg.ARD_NEOPIXEL_ONCOLOURVALBLUE = 'blue:';
+Blockly.Msg.ARD_NEOPIXEL_COMPONENT = 'Neopixel strip';
+Blockly.Msg.ARD_NEOPIXEL_DEFAULT_NAME = 'NeoPixel1';
+Blockly.Msg.ARD_BLOCKS = 'You have this block twice on the canvas. That is once too many!';
+Blockly.Msg.ARD_BUTTON_COMPONENT = 'Push Button';
+Blockly.Msg.ARD_BUTTON_DEFAULT_NAME = 'PushButton1';
+Blockly.Msg.ARD_BUTTON_IFPUSHED = 'If pushed we measure value';
+Blockly.Msg.ARD_BUTTON_TIP = 'Een drukknop die AAN of UIT kan zijn';
+Blockly.Msg.ARD_BUTTON_READ = 'Read value button';
+Blockly.Msg.ARD_BUTTON_INPUT_IF = 'If button';
+Blockly.Msg.ARD_BUTTON_INPUT_CLICK = ' is clicked';
+Blockly.Msg.ARD_BUTTON_INPUT_THEN = 'do';
+Blockly.Msg.ARD_BUTTON_INPUT_LONGCLICK = 'is undergoing a long click';
+Blockly.Msg.ARD_BUTTON_INPUT_PRESSED = 'is being pressed';
+Blockly.Msg.ARD_BUTTON_INPUT_WAIT = 'wait for a click to happen';
+Blockly.Msg.ARD_BUTTON_INPUT_TIP = 'Check the input received on a button, and react to it. This function does not block your program if you do not check the checkbox to wait for a click. A click is a press and a release of the button, a long press a click and holding long time before you release, press is active as soon as the button is pressed down.';
+Blockly.Msg.ARD_ANASENSOR = 'Analog Sensor';
+Blockly.Msg.ARD_ANASENSOR_TIP = 'Connect an analog sensor to an analog pin, so as to read its value. On an Arduino UNO a value between 0 and 1024 is returned, corresponding to a measured value between 0 and 5V. Eg.: an LDR sensor, a potmeter, ...';
+Blockly.Msg.ARD_ANASENSOR_DEFAULT_NAME = 'AnaSensor1';
+Blockly.Msg.ARD_ANASENSOR_READ = 'Read analog sensor';
+Blockly.Msg.ARD_ANASENSOR_COMPONENT = 'Analog Sensor';
+Blockly.Msg.ARD_DIGINPUT = 'Digital input';
+Blockly.Msg.ARD_DIGINPUT_TIP = 'Connect a digital input to a digital pin, so as to read its value. The digital state can then be read, corresponding to 0V or 5V on the pin for an Arduino UNO.';
+Blockly.Msg.ARD_DIGINPUT_DEFAULT_NAME = 'DigInput1';
+Blockly.Msg.ARD_DIGINPUT_READ = 'Read digital input';
+Blockly.Msg.ARD_DIGINPUT_COMPONENT = 'Digital Input';
+Blockly.Msg.ARD_DIGOUTPUT = 'Digital output';
+Blockly.Msg.ARD_DIGOUTPUT_TIP = 'Connect a generic digital ouput to a digital pin, so as to write to that pin. The digital state can be set to LOW or HIGH, corresponding to 0V and 5V on the pin for an Arduino UNO.';
+Blockly.Msg.ARD_DIGOUTPUT_DEFAULT_NAME = 'DigOutput1';
+Blockly.Msg.ARD_DIGOUTPUT_WRITE = 'Write to digital output';
+Blockly.Msg.ARD_DIGOUTPUT_COMPONENT = 'Digital Output';
+Blockly.Msg.ARD_PWMOUTPUT = 'PWM output';
+Blockly.Msg.ARD_PWMOUTPUT_TIP = 'Connect a generic PWM (Pulse Width Modulation) ouput to a pwm pin, so as to write an analog value to that pin. The value written should be a number between 0 and 255, and will generate a block pulse over this pin.';
+Blockly.Msg.ARD_PWMOUTPUT_DEFAULT_NAME = 'PWMOutput1';
+Blockly.Msg.ARD_PWMOUTPUT_WRITE = 'Write to PWM output';
+Blockly.Msg.ARD_PWMOUTPUT_COMPONENT = 'PWM Output';
+Blockly.Msg.ARD_OUTPUT_WRITE_TO = 'value';
+
+//effect block
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_1 = 'At the start of an effect, do some statements';
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_2 = 'At the start of an effect, do some statements, and at the end of the effect too';
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_3 = 'At the start of an effect, do some statements, if the effect time becomes larger than the given time, do the next statements.';
+Blockly.Msg.ARD_CONTROLS_EFFECT_TOOLTIP_4 = 'At the start of an effect, do some statements, if the effect time becomes larger than the given time, do the next statements. Ath end of the effect the final statements are done.';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_FIRST1 = 'Effect';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_FIRST2 = 'with total duration (ms) =';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_IF = 'at the start do';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSEIF = 'if effect time becomes greater than';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSE = 'at the end do';
+Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_THEN = Blockly.Msg.CONTROLS_REPEAT_INPUT_DO;
+Blockly.Msg.ARD_CONTROLS_EFFECT_IF_TITLE_IF = Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_IF;
+Blockly.Msg.ARD_CONTROLS_EFFECT_IF_TOOLTIP = Blockly.Msg.CONTROLS_IF_IF_TOOLTIP;
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSEIF_TITLE_ELSEIF = Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSEIF;
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSEIF_TOOLTIP = 'Add an extra effect time at which statements must be done';
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSE_TITLE_ELSE = Blockly.Msg.ARD_CONTROLS_EFFECT_MSG_ELSE;
+Blockly.Msg.ARD_CONTROLS_EFFECT_ELSE_TOOLTIP = 'Add a block for statements when the effect is finished.';
+Blockly.Msg.ARD_COMPONENT_BOARD = 'a specific Arduino Board';
+Blockly.Msg.ARD_COMPONENT_BOARD_TIP = 'Set which Arduino board you work with, and connect components to the pins.';
+Blockly.Msg.ARD_COMPONENT_BOARD_HUB_TIP = 'Set the Arduino board you work with, and to what it connects';
+Blockly.Msg.ARD_PIN_DIGDIG = 'digital pin1 and pin2';
+Blockly.Msg.ARD_PIN_DIGDIG_TIP = 'Component requiring two digital pins, pin1 and pin2';
+Blockly.Msg.ARD_PIN_DIGDIG1 = 'digital pin1#';
+Blockly.Msg.ARD_PIN_DIGDIG2 = 'pin2#';

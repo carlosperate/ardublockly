@@ -167,3 +167,171 @@ Blockly.Arduino['io_pulsetimeout'] = function(block) {
 
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 }; 
+
+/**
+ * The analogsensor setup block
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['analogsensor_config_hub'] = function(block) {
+  var SensorName = block.getFieldValue('SENSORNAME');
+  //the hub saved the connector in the attached block
+  var hubconnector = block['connector'] || ['0', '1']
+  //compute the pins, normally only possible to attach at valid pins
+  var pin = hubconnector[0];
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Analogue Read');
+
+  //SensorName is a variable containing the used pins
+  Blockly.Arduino.addVariable(SensorName,
+      'int ' + SensorName + ' = ' + pin + ';', true);
+  
+  var pinSetupCode = 'pinMode(' + SensorName + ', INPUT);';
+  Blockly.Arduino.addSetup('io_' + SensorName, pinSetupCode, false);
+
+  return '';
+};
+
+/**
+ * Function for reading an analogue pin value (X).
+ * Arduino code: setup { pinMode(X, INPUT); }
+ *               loop  { analogRead(X)      }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['analogsensor_read'] = function(block) {
+  var pin = block.getFieldValue('SENSORNAME');
+
+  var code = 'analogRead(' + pin + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/**
+ * The digitalinput setup block
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['digitalinput_config_hub'] = function(block) {
+  var SensorName = block.getFieldValue('SENSORNAME');
+  //the hub saved the connector in the attached block
+  var hubconnector = block['connector'] || ['0', '1']
+  //compute the pins, normally only possible to attach at valid pins
+  var pin = hubconnector[0];
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+
+  //SensorName is a variable containing the used pins
+  Blockly.Arduino.addVariable(SensorName,
+      'int ' + SensorName + ' = ' + pin + ';', true);
+  
+  var pinSetupCode = 'pinMode(' + SensorName + ', INPUT);';
+  Blockly.Arduino.addSetup('io_' + SensorName, pinSetupCode, false);
+
+  return '';
+};
+
+/**
+ * Function for reading an analogue pin value (X).
+ * Arduino code: setup { pinMode(X, INPUT); }
+ *               loop  { analogRead(X)      }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['digitalinput_read'] = function(block) {
+  var pin = block.getFieldValue('SENSORNAME');
+
+  var code = 'digitalRead(' + pin + ')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/**
+ * The digitaloutput setup block
+ * Arduino code: setup { pinMode(X, OUTPUT); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['digitaloutput_config_hub'] = function(block) {
+  var OutputName = block.getFieldValue('OUTPUTNAME');
+  //the hub saved the connector in the attached block
+  var hubconnector = block['connector'] || ['0', '1']
+  //compute the pins, normally only possible to attach at valid pins
+  var pin = hubconnector[0];
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+
+  //OutputName is a variable containing the used pins
+  Blockly.Arduino.addVariable(OutputName,
+      'int ' + OutputName + ' = ' + pin + ';', true);
+  
+  var pinSetupCode = 'pinMode(' + OutputName + ', OUTPUT);';
+  Blockly.Arduino.addSetup('io_' + OutputName, pinSetupCode, false);
+
+  return '';
+};
+
+/**
+ * Function for 'set pin' (X) to a state (Y).
+ * Arduino code: loop  { digitalWrite(X, Y); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['digitaloutput_write'] = function(block) {
+  var pin = block.getFieldValue('OUTPUTNAME');
+  var stateOutput = Blockly.Arduino.valueToCode(
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
+
+  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
+  return code;
+};
+
+/**
+ * The pwmoutput setup block
+ * Arduino code: setup { pinMode(X, OUTPUT); }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['pwmoutput_config_hub'] = function(block) {
+  var OutputName = block.getFieldValue('OUTPUTNAME');
+  //the hub saved the connector in the attached block
+  var hubconnector = block['connector'] || ['0', '1']
+  //compute the pins, normally only possible to attach at valid pins
+  var pin = hubconnector[0];
+
+  Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Analogue Write');
+
+  //OutputName is a variable containing the used pins
+  Blockly.Arduino.addVariable(OutputName,
+      'int ' + OutputName + ' = ' + pin + ';', true);
+  
+  var pinSetupCode = 'pinMode(' + OutputName + ', OUTPUT);';
+  Blockly.Arduino.addSetup('io_' + OutputName, pinSetupCode, false);
+
+  return '';
+};
+
+/**
+ * Function for setting the state (Y) of an analogue output (X).
+ *               loop  { analogWrite(X, Y);  }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['pwmoutput_write'] = function(block) {
+  var pin = block.getFieldValue('OUTPUTNAME');
+  var stateOutput = Blockly.Arduino.valueToCode(
+      block, 'NUM', Blockly.Arduino.ORDER_ATOMIC) || '0';
+
+  // Warn if the input value is out of range
+  if ((stateOutput < 0) || (stateOutput > 255)) {
+    block.setWarningText('The analogue value set must be between 0 and 255',
+                         'pwm_value');
+  } else {
+    block.setWarningText(null, 'pwm_value');
+  }
+
+  var code = 'analogWrite(' + pin + ', ' + stateOutput + ');\n';
+  return code;
+};
