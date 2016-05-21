@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="carlosperate">
+  
+  <title>Runninng Uncompressed Ardublockly - Ardublockly Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Runninng Uncompressed Ardublockly";
+    var mkdocs_page_input_path = "Runninng-Uncompressed-Ardublockly.md";
+    var mkdocs_page_url = "/Runninng-Uncompressed-Ardublockly/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../Home/" class="icon icon-home"> Ardublockly Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Home/">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Quick-Start/">Quick Start</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>User Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing-Ardublockly/">Installing Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Configure-Ardublockly/">Configure Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Arduino-Compiler-Settings/">Arduino Compiler Settings</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Developer Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Building-Ardublockly/">Building Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Runninng Uncompressed Ardublockly</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#runninng-uncompressed-ardublockly-blockly">Runninng Uncompressed Ardublockly Blockly</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Git-Settings/">Git Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>Create Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQs/">FAQs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>About</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../About/">About Ardublocly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../License/">License</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Credits/">Credits</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../Home/">Ardublockly Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Home/">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer Guide &raquo;</li>
+        
+      
+    
+    <li>Runninng Uncompressed Ardublockly</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="runninng-uncompressed-ardublockly-blockly">Runninng Uncompressed Ardublockly Blockly</h1>
+<p>During development you could implement your changes to the source files and re-build each time (using the <a href="../Building-Ardublockly">Building Ardublockly</a> instructions), however the code is minified and would be quite hard to debug. For that reason it is highly encouraged to use the uncompressed version of Blockly used in Ardublockly. </p>
+<p>To do so, the <code>/ardublockly/index.html</code> file already contains the required sources commented out. Simply modified the following from:</p>
+<pre><code class="html">  &lt;!-- Ardublockly - These three files contain the compress version --&gt;
+  &lt;script src=&quot;../blockly/blockly_compressed.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks_compressed.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/arduino_compressed.js&quot;&gt;&lt;/script&gt;
+  &lt;!-- To use the uncompressed version comment out the above and comment in the ones below --&gt;
+  &lt;!--script src=&quot;../blockly/blockly_uncompressed.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/logic.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/loops.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/math.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/text.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/lists.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/colour.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/variables.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/procedures.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/io.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/map.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/procedures.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/serial.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/servo.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/spi.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/stepper.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/time.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/tone.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/variables.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/boards.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/io.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/lists.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/logic.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/loops.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/map.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/math.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/procedures.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/serial.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/servo.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/spi.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/stepper.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/text.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/time.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/tone.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/variables.js&quot;&gt;&lt;/script--&gt;
+</code></pre>
+
+<p>To:</p>
+<pre><code class="html">  &lt;!-- Ardublockly - These three files contain the compress version --&gt;
+  &lt;!--script src=&quot;../blockly/blockly_compressed.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks_compressed.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/arduino_compressed.js&quot;&gt;&lt;/script--&gt;
+  &lt;!-- To use the uncompressed version comment out the above and comment in the ones below --&gt;
+  &lt;script src=&quot;../blockly/blockly_uncompressed.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/logic.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/loops.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/math.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/text.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/lists.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/colour.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/variables.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/procedures.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/io.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/map.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/procedures.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/serial.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/servo.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/spi.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/stepper.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/time.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/tone.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/blocks/arduino/variables.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/boards.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/io.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/lists.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/logic.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/loops.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/map.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/math.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/procedures.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/serial.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/servo.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/spi.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/stepper.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/text.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/time.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/tone.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../blockly/generators/arduino/variables.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+
+<p>Keep in mind that any additional block file would have to to be added as a new <code>&lt;script&gt;</code> import.</p>
+<p>Also remember to do hard refresh in-between changes to ensure your browser is not using cached old versions of the JavaScript files.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Git-Settings/" class="btn btn-neutral float-right" title="Git Settings">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Building-Ardublockly/" class="btn btn-neutral" title="Building Ardublockly"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Building-Ardublockly/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Git-Settings/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

@@ -12,7 +12,8 @@ var Ardublockly = Ardublockly || {};
 /** Lookup for names of supported languages. Keys in ISO 639 format. */
 Ardublockly.LANGUAGE_NAME = {
   'en': 'English',
-  'es': 'Español'
+  'es': 'Español',
+  'nl': 'Nederlands'
 };
 
 /**
@@ -29,7 +30,7 @@ Ardublockly.init = function() {
   // Inject Blockly into content_blocks and fetch additional blocks
   Ardublockly.injectBlockly(document.getElementById('content_blocks'),
       Ardublockly.TOOLBOX_XML, '../blockly/');
-  //Ardublockly.importExtraBlocks();
+  Ardublockly.importExtraBlocks();
 
   Ardublockly.designJsInit();
   Ardublockly.initialiseIdeButtons();
@@ -625,11 +626,15 @@ Ardublockly.renderContent = function() {
     var diff = JsDiff.diffWords(Ardublockly.PREV_ARDUINO_CODE_, arduinoCode);
     var resultStringArray = [];
     for (var i = 0; i < diff.length; i++) {
-      if (diff[i].added) {
-        resultStringArray.push(
-            '<span class="code_highlight_new">' + diff[i].value + '</span>');
-      } else if (!diff[i].removed) {
-        resultStringArray.push(diff[i].value);
+      if (!diff[i].removed) {
+        var escapedCode = diff[i].value.replace(/</g, "&lt;")
+                                       .replace(/>/g, "&gt;");
+        if (diff[i].added) {
+          resultStringArray.push(
+              '<span class="code_highlight_new">' + escapedCode + '</span>');
+        } else {
+          resultStringArray.push(escapedCode);
+        }
       }
     }
     document.getElementById('content_arduino').innerHTML =

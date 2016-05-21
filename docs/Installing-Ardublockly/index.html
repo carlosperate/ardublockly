@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="carlosperate">
+  
+  <title>Installing Ardublockly - Ardublockly Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Installing Ardublockly";
+    var mkdocs_page_input_path = "Installing-Ardublockly.md";
+    var mkdocs_page_url = "/Installing-Ardublockly/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../Home/" class="icon icon-home"> Ardublockly Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Home/">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Quick-Start/">Quick Start</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>User Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Installing Ardublockly</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#install-ardublockly">Install Ardublockly</a></li>
+                
+                    <li><a class="toctree-l4" href="#install-packaged-ardublockly">Install packaged Ardublockly</a></li>
+                
+                    <li><a class="toctree-l4" href="#install-from-ardublockly-source-code">Install from Ardublockly source code</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Configure-Ardublockly/">Configure Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Arduino-Compiler-Settings/">Arduino Compiler Settings</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Developer Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Building-Ardublockly/">Building Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Runninng-Uncompressed-Ardublockly/">Runninng Uncompressed Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Git-Settings/">Git Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>Create Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQs/">FAQs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>About</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../About/">About Ardublocly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../License/">License</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Credits/">Credits</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../Home/">Ardublockly Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Home/">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>User Guide &raquo;</li>
+        
+      
+    
+    <li>Installing Ardublockly</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="install-ardublockly">Install Ardublockly</h1>
+<p>There are two ways to run Ardublockly.</p>
+<p>a) Run the executable application: Simplest method, download a zip file which contains the pre-packaged Ardublockly executable software.</p>
+<p>b) Run the "core version": Running from source code, requires only Python and a browser (like Chrome or Firefox).</p>
+<p>Both these methods can be run from the "pre-packaged" download, and the GitHub repository source code.</p>
+<h2 id="install-packaged-ardublockly">Install packaged Ardublockly</h2>
+<p>The easiest way to use Ardublockly is to download the packaged version, which is a self-contained application that does not have any other dependencies (other than having the Arduino IDE installed).</p>
+<p>You can download the latest stable version in the <a href="https://github.com/carlosperate/ardublockly/releases">releases</a> section of this repository.</p>
+<h4 id="development-builds-of-packaged-ardublockly">Development builds of packaged Ardublockly</h4>
+<p>Additionally, development builds with the latest features still under development can be found in the links below. The Windows version works in both 32 and 64 bit of windows 7 and higher. The Linux version works only on x64, built on Ubuntu 12.04. The Mac OS X version works on 10.8 Mountain Lion or higher.</p>
+<p>http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html</p>
+<table>
+<thead>
+<tr>
+<th align="center">Linux build</th>
+<th align="center">Windows build</th>
+<th align="center">Mac OS X build</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"><a href="https://circleci.com/gh/carlosperate/ardublockly/tree/master"><img alt="Linux Build Status" src="https://circleci.com/gh/carlosperate/ardublockly/tree/master.svg?style=svg" /></a></td>
+<td align="center"><a href="https://ci.appveyor.com/project/carlosperate/ardublockly"><img alt="Windows Build status" src="https://ci.appveyor.com/api/projects/status/t877g920hdiifc2i?svg=true" /></a></td>
+<td align="center"><a href="https://travis-ci.org/carlosperate/ardublockly"><img alt="Mac Build Status" src="https://travis-ci.org/carlosperate/ardublockly.svg?branch=master" /></a></td>
+</tr>
+<tr>
+<td align="center"><a href="http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=linux/">Download Link</a></td>
+<td align="center"><a href="http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=windows/">Download Link</a></td>
+<td align="center"><a href="http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=mac/">Download Link</a></td>
+</tr>
+</tbody>
+</table>
+<p>For any these and other platforms, the "core version" should work on all operating systems with Python and a modern web browser. </p>
+<h3 id="run-the-packaged-ardublockly">Run the packaged Ardublockly</h3>
+<p>To run the application the steps are slightly different depending on the platform.</p>
+<ul>
+<li><strong>Windows</strong>: Double click on the <code>ardublockly_run.bat</code> file located on the Ardublockly folder.</li>
+<li><strong>Linux</strong>: Execute the <code>ardublockly_run.sh</code> shell script located on the Ardublockly folder.</li>
+<li><strong>OS X</strong>: Right click the <code>Ardublockly.app</code> file and click <code>open</code>.</li>
+</ul>
+<p><img alt="Ardublockly desktop application" src="http://carlosperate.github.io/ardublockly/images/screenshot_desktop_1.png" /></p>
+<p>The Arduino IDE is required to compile and load the programs into an Arduino board, more information can be found in the <a href="https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly">Configure Ardublockly page</a>.</p>
+<h2 id="install-from-ardublockly-source-code">Install from Ardublockly source code</h2>
+<p>Often referred as the "core version" of Ardublockly, this version is the main development environment for the application. You can easily run the latest updates using this method, and should still be able to work if there is an issue with the packed Ardublockly software on your environment. </p>
+<h3 id="required-software">Required Software</h3>
+<ul>
+<li><a href="https://www.python.org/download">Python 2.7.x</a>: Ardublockly is maintains compatibility with 3.x, but is mainly developed using Python 2</li>
+<li><a href="http://arduino.cc/en/main/software">Arduino IDE version 1.6 or higher</a>: The latest version is always recommended</li>
+<li>Modern browser of your choice: Currently supports Firefox, Chrome, IE10+, Opera and Safari; Chrome is recommended</li>
+<li>Ardublockly source code: The "Downloading Ardublockly" section details how to obtain it</li>
+<li><a href="https://git-scm.com/downloads">Git</a>: It is not strictly required for downloading the source code, but it simplifies the process</li>
+</ul>
+<h4 id="linux-only-requirement">Linux only requirement</h4>
+<p>Tkinter, which is used in Ardublockly, is not always part of standard Python environment on Linux and needs to be installed.</p>
+<p>Install Tkinter for Python 2 on Ubuntu:</p>
+<pre><code>sudo apt-get install python-tk
+</code></pre>
+
+<p>OR, install Tkinter for Python 3 on Ubuntu:</p>
+<pre><code>sudo apt-get install python3-tk
+</code></pre>
+
+<h3 id="downloading-ardublockly">Downloading Ardublockly</h3>
+<p>The easiest way to download a working copy of the repository is using git:</p>
+<pre><code>git clone https://github.com/carlosperate/ardublockly.git
+cd ardublockly
+git submodule update --init --recursive
+</code></pre>
+
+<p>When the repository is downloaded <a href="https://github.com/carlosperate/ardublockly/zipball/master">directly from github as zip file</a>, the internal git submodules are not included, which is why git is the best method to download a working copy.</p>
+<h5 id="download-without-git">Download without git</h5>
+<p>If for some reason you are unable to use git, you can download <a href="https://github.com/carlosperate/ardublockly/zipball/master">Ardublockly from GitHub as zip file</a> and the <a href="https://github.com/google/closure-library/archive/master.zip">Closure library as a zip file</a>. Uncompress the contents from the Ardublockly zip file and then unzip the Closure library into the <code>closure-library</code> folder within Ardublockly (make sure there is not an additional "closure-library" nested folder inside this one).</p>
+<p>If you also need to build Ardublockly locally (which is not necessary to run the development version), all the git submodules required are listed in the <a href="https://github.com/carlosperate/ardublockly/blob/master/.gitmodules">.gitmodules file in the repository</a>.</p>
+<h3 id="run-ardublockly-from-source-code">Run Ardublockly from source code</h3>
+<p>To run the "core version" execute the <code>start.py</code> python script file located on the the root of the Ardublockly folder (this also works on the "packaged" Ardublockly version):</p>
+<pre><code>python start.py
+</code></pre>
+
+<p>Your default browser should open a local web page to load the Ardublockly application.</p>
+<p><img alt="Ardublockly development" src="http://carlosperate.github.io/ardublockly/images/screenshot_browser_1.png" /></p>
+<p>The Arduino IDE is required to compile and load the programs into an Arduino board, more information can be found in the <a href="https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly">Configure Ardublockly page</a>.</p>
+<h4 id="run-the-full-ardublockly-desktop-application-from-source">Run the full Ardublockly desktop application from source</h4>
+<p>To run the full desktop version of the development Ardublockly you will also need to install <a href="https://nodejs.org/">node.js</a>.</p>
+<p>Navigate to the <code>electron</code> folder inside the <code>package</code> directory:</p>
+<pre><code>cd package\electron
+</code></pre>
+
+<p>Execute the following command to download all the dependencies required to for the desktop application, this might take a while:</p>
+<pre><code>npm install
+</code></pre>
+
+<p>Once that's done, run the following command to open the desktop application:</p>
+<pre><code>npm start
+</code></pre>
+
+<p>The Arduino IDE is still required to compile and load the programs into an Arduino board, more information can be found in the <a href="https://github.com/carlosperate/ardublockly/wiki/Configure-Ardublockly">Configure Ardublockly page</a>.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Configure-Ardublockly/" class="btn btn-neutral float-right" title="Configure Ardublockly">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Quick-Start/" class="btn btn-neutral" title="Quick Start"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Quick-Start/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Configure-Ardublockly/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

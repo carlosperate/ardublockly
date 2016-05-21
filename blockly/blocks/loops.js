@@ -47,7 +47,7 @@ Blockly.Blocks['controls_repeat_ext'] = {
         {
           "type": "input_value",
           "name": "TIMES",
-          "check": Blockly.Types.NUMBER.compatibles()
+          "check": Blockly.Types.NUMBER.checkList
         }
       ],
       "previousStatement": null,
@@ -74,7 +74,7 @@ Blockly.Blocks['controls_repeat'] = {
         {
           "type": "field_input",
           "name": "TIMES",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "text": "10"
         }
       ],
@@ -86,7 +86,7 @@ Blockly.Blocks['controls_repeat'] = {
     });
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_REPEAT_INPUT_DO);
-    this.getField('TIMES').setChangeHandler(
+    this.getField('TIMES').setValidator(
         Blockly.FieldTextInput.nonnegativeIntegerValidator);
   }
 };
@@ -103,7 +103,7 @@ Blockly.Blocks['controls_whileUntil'] = {
     this.setHelpUrl(Blockly.Msg.CONTROLS_WHILEUNTIL_HELPURL);
     this.setColour(Blockly.Blocks.loops.HUE);
     this.appendValueInput('BOOL')
-        .setCheck(Blockly.Types.BOOLEAN.compatibles())
+        .setCheck(Blockly.Types.BOOLEAN.checkList)
         .appendField(new Blockly.FieldDropdown(OPERATORS), 'MODE');
     this.appendStatementInput('DO')
         .appendField(Blockly.Msg.CONTROLS_WHILEUNTIL_INPUT_DO);
@@ -139,19 +139,19 @@ Blockly.Blocks['controls_for'] = {
         {
           "type": "input_value",
           "name": "FROM",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "TO",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "align": "RIGHT"
         },
         {
           "type": "input_value",
           "name": "BY",
-          "check": Blockly.Types.NUMBER.compatibles(),
+          "check": Blockly.Types.NUMBER.checkList,
           "align": "RIGHT"
         }
       ],
@@ -235,7 +235,7 @@ Blockly.Blocks['controls_forEach'] = {
         {
           "type": "input_value",
           "name": "LIST",
-          "check": Blockly.Types.ARRAY.compatibles()
+          "check": Blockly.Types.ARRAY.checkList
         }
       ],
       "previousStatement": null,
@@ -314,11 +314,7 @@ Blockly.Blocks['controls_flow_statements'] = {
     // Is the block nested in a loop?
     var block = this;
     do {
-      if (block.type == 'controls_repeat' ||
-          block.type == 'controls_repeat_ext' ||
-          block.type == 'controls_forEach' ||
-          block.type == 'controls_for' ||
-          block.type == 'controls_whileUntil') {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
         legal = true;
         break;
       }
@@ -329,5 +325,12 @@ Blockly.Blocks['controls_flow_statements'] = {
     } else {
       this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
     }
-  }
+  },
+  /**
+   * List of block types that are loops and thus do not need warnings.
+   * To add a new loop type add this to your code:
+   * Blockly.Blocks['controls_flow_statements'].LOOP_TYPES.push('custom_loop');
+   */
+  LOOP_TYPES: ['controls_repeat', 'controls_repeat_ext', 'controls_forEach',
+      'controls_for', 'controls_whileUntil']
 };

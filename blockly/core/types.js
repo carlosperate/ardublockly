@@ -4,9 +4,8 @@
  */
 
 /**
- * @fileoverview Object that defines static objects and methods to assign
- *     Blockly types to Blockly variables. These can then be converted to
- *     language specific types in each language generator.
+ * @fileoverview Blockly Types declarations and helper functions to identify
+ *     types.
  */
 'use strict';
 
@@ -14,89 +13,127 @@ goog.provide('Blockly.Types');
 
 goog.require('Blockly.Type');
 
+/** Single character. */
+Blockly.Types.CHARACTER = new Blockly.Type({
+  typeId: 'Character',
+  typeMsgName: 'ARD_TYPE_CHAR',
+  compatibleTypes: []
+});
 
 /** Text string. */
 Blockly.Types.TEXT = new Blockly.Type({
-  typeName: 'Text',
-  basicType: Blockly.Type.BasicTypes.TEXT,
-  compatibleTypes: [],
-});
-
-/** Single character. */
-Blockly.Types.CHARACTER = new Blockly.Type({
-  typeName: 'Character',
-  basicType: Blockly.Type.BasicTypes.TEXT,
-  compatibleTypes: [],
+  typeId: 'Text',
+  typeMsgName: 'ARD_TYPE_TEXT',
+  compatibleTypes: [Blockly.Types.CHARACTER]
 });
 
 /** Boolean. */
 Blockly.Types.BOOLEAN = new Blockly.Type({
-  typeName: 'Boolean',
-  basicType: Blockly.Type.BasicTypes.BOOLEAN,
-  compatibleTypes: [Blockly.Type.BasicTypes.NUMBER],
+  typeId: 'Boolean',
+  typeMsgName: 'ARD_TYPE_BOOL',
+  compatibleTypes: []
+});
+
+/** Short integer number. */
+Blockly.Types.SHORT_NUMBER = new Blockly.Type({
+  typeId: 'Short Number',
+  typeMsgName: 'ARD_TYPE_SHORT',
+  compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Integer number. */
 Blockly.Types.NUMBER = new Blockly.Type({
-  typeName: 'Number',
-  basicType: Blockly.Type.BasicTypes.NUMBER,
-  compatibleTypes: [Blockly.Type.BasicTypes.CHARACTER,
-                    Blockly.Type.BasicTypes.DECIMAL],
+  typeId: 'Number',
+  typeMsgName: 'ARD_TYPE_NUMBER',
+  compatibleTypes: []    // Circular dependencies, add after all declarations
+});
+
+/** Large integer number. */
+Blockly.Types.LARGE_NUMBER = new Blockly.Type({
+  typeId: 'Large Number',
+  typeMsgName: 'ARD_TYPE_LONG',
+  compatibleTypes: []    // Circular dependencies, add after all declarations
 });
 
 /** Decimal/floating point number. */
 Blockly.Types.DECIMAL = new Blockly.Type({
-  typeName: 'Decimal',
-  basicType: Blockly.Type.BasicTypes.DECIMAL,
-  compatibleTypes: [Blockly.Type.NUMBER],
+  typeId: 'Decimal',
+  typeMsgName: 'ARD_TYPE_DECIMAL',
+  compatibleTypes: [Blockly.Types.BOOLEAN,
+                    Blockly.Types.SHORT_NUMBER,
+                    Blockly.Types.NUMBER,
+                    Blockly.Types.LARGE_NUMBER]
 });
 
 /** Array/List of items. */
 Blockly.Types.ARRAY = new Blockly.Type({
-  typeName: 'Array',
-  basicType: Blockly.Type.BasicTypes.ARRAY,
-  compatibleTypes: [],
+  typeId: 'Array',
+  typeMsgName: 'ARD_TYPE_ARRAY',
+  compatibleTypes: []
 });
 
 /** Null indicate there is no type. */
 Blockly.Types.NULL = new Blockly.Type({
-  typeName: 'Null',
-  basicType: Blockly.Type.BasicTypes.NULL,
-  compatibleTypes: [],
+  typeId: 'Null',
+  typeMsgName: 'ARD_TYPE_NULL',
+  compatibleTypes: []
 });
 
 /** Type not defined, or not yet defined. */
 Blockly.Types.UNDEF = new Blockly.Type({
-  typeName: 'Undefined',
-  basicType: Blockly.Type.BasicTypes.UNDEF,
-  compatibleTypes: [],
+  typeId: 'Undefined',
+  typeMsgName: 'ARD_TYPE_UNDEF',
+  compatibleTypes: []
 });
 
 /** Set when no child block (meant to define the variable type) is connected. */
 Blockly.Types.CHILD_BLOCK_MISSING = new Blockly.Type({
-  typeName: 'ChildBlockMissing',
-  basicType: Blockly.Type.BasicTypes.UNDEF,
-  compatibleTypes: [],
+  typeId: 'ChildBlockMissing',
+  typeMsgName: 'ARD_TYPE_CHILDBLOCKMISSING',
+  compatibleTypes: []
 });
 
 /**
- * Adds another type to the Blockly.Types collection.
- * @param {string} typeName_ Identifiable name of the type.
- * @param {Blockly.Type.BasicTypes} basicType_ Defines the basic type name this
- *     type refers to.
- * @param {Array<Blockly.Type.BasicTypes>} compatibleTypes_ List of other basic
- *     types this Type is compatible with.
+ * Some Types have circular dependencies on their compatibilities, so add them
+ * after declaration.
  */
-Blockly.Types.addType = function(typeName_, basicType_, compatibleTypes_) {
-  // The name is used as the key from the value pair in the BlocklyTypes object
-  var key = typeName.toUpperCase();
+Blockly.Types.NUMBER.addCompatibleTypes([
+    Blockly.Types.BOOLEAN,
+    Blockly.Types.SHORT_NUMBER,
+    Blockly.Types.LARGE_NUMBER,
+    Blockly.Types.DECIMAL]);
+
+Blockly.Types.SHORT_NUMBER.addCompatibleTypes([
+    Blockly.Types.BOOLEAN,
+    Blockly.Types.NUMBER,
+    Blockly.Types.LARGE_NUMBER,
+    Blockly.Types.DECIMAL]);
+
+Blockly.Types.LARGE_NUMBER.addCompatibleTypes([
+    Blockly.Types.BOOLEAN,
+    Blockly.Types.SHORT_NUMBER,
+    Blockly.Types.NUMBER,
+    Blockly.Types.DECIMAL]);
+
+
+/**
+ * Adds another type to the Blockly.Types collection.
+ * @param {string} typeId_ Identifiable name of the type.
+ * @param {string} typeMsgName_ Name of the member variable from Blockly.Msg
+ *     object to identify the translateble string.for the Type name.
+ * @param {Array<Blockly.Type>} compatibleTypes_ List of types this Type is
+ *     compatible with.
+ */
+Blockly.Types.addType = function(typeId_, typeMsgName_, compatibleTypes_) {
+  // The Id is used as the key from the value pair in the BlocklyTypes object
+  var key = typeId_.toUpperCase().replace(/ /g, '_');
   if (Blockly.Types[key] !== undefined) {
     throw 'The Blockly type ' + key + ' already exists.';
   }
   Blockly.Types[key] = new Blockly.Type({
-    typeName: typeName_,
-    basicType: basicType_,
-    compatibleTypes: compatibleTypes_,
+    typeId: typeId_,
+    typeName: typeMsgName_,
+    compatibleTypes: compatibleTypes_
   });
 };
 
@@ -154,13 +191,13 @@ Blockly.Types.getChildBlockType = function(block) {
  * Regular expressions to identify an integer.
  * @private
  */
-Blockly.Types.regExpInt_ = new RegExp(/^\d+$/);
+Blockly.Types.regExpInt_ = new RegExp(/^-?\d+$/);
 
 /**
  * Regular expressions to identify a decimal.
  * @private
  */
-Blockly.Types.regExpFloat_ = new RegExp(/^[0-9]*[.][0-9]+$/);
+Blockly.Types.regExpFloat_ = new RegExp(/^-?[0-9]*[.][0-9]+$/);
 
 /**
  * Uses regular expressions to identify if the input number is an integer or a
@@ -170,9 +207,17 @@ Blockly.Types.regExpFloat_ = new RegExp(/^[0-9]*[.][0-9]+$/);
  */
 Blockly.Types.identifyNumber = function(numberString) {
     if (Blockly.Types.regExpInt_.test(numberString)) {
+      var intValue = parseInt(numberString);
+      if (isNaN(intValue)) {
+        return Blockly.Types.NULL;
+      }
+      if (intValue > 32767 || intValue < -32768) {
+        return Blockly.Types.LARGE_NUMBER;
+      }
       return Blockly.Types.NUMBER;
     } else if (Blockly.Types.regExpFloat_.test(numberString)) {
       return Blockly.Types.DECIMAL;
     }
     return Blockly.Types.NULL;
 };
+

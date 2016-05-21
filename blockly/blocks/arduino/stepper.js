@@ -96,26 +96,26 @@ Blockly.Blocks['stepper_config'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/StepperConstructor');
     this.setColour(Blockly.Blocks.stepper.HUE);
     this.appendDummyInput()
-        .appendField('Setup')
+        .appendField(Blockly.Msg.ARD_STEPPER_SETUP)
         .appendField(new Blockly.FieldTextInput('MyStepper'), 'STEPPER_NAME')
-        .appendField('stepper motor:');
+        .appendField(Blockly.Msg.ARD_STEPPER_MOTOR);
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField('pin1#')
+        .appendField(Blockly.Msg.ARD_STEPPER_PIN1)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN1')
-        .appendField('pin2#')
+        .appendField(Blockly.Msg.ARD_STEPPER_PIN2)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.digitalPins), 'STEPPER_PIN2');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField('how many steps per revolution');
+        .appendField(Blockly.Msg.ARD_STEPPER_REVOLVS);
     this.appendValueInput('STEPPER_SPEED')
-        .setCheck(Blockly.Types.NUMBER.compatibles())
+        .setCheck(Blockly.Types.NUMBER.checkList)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField('set speed (rpm) to');
-    this.setTooltip('Configures a stepper motor pinout and other settings.');
+        .appendField(Blockly.Msg.ARD_STEPPER_SPEED);
+    this.setTooltip(Blockly.Msg.ARD_STEPPER_SETUP_TIP);
   },
   /**
    * Returns the stepper instance name, defined in the 'STEPPER_NAME' input
@@ -152,16 +152,16 @@ Blockly.Blocks['stepper_step'] = {
     this.setHelpUrl('http://arduino.cc/en/Reference/StepperStep');
     this.setColour(Blockly.Blocks.stepper.HUE);
     this.appendDummyInput()
-        .appendField('move stepper')
+        .appendField(Blockly.Msg.ARD_STEPPER_STEP)
         .appendField(new Blockly.Blocks.stepper.FieldStepperInstance(),
             'STEPPER_NAME');
     this.appendValueInput('STEPPER_STEPS')
-        .setCheck(Blockly.Types.NUMBER.compatibles());
+        .setCheck(Blockly.Types.NUMBER.checkList);
     this.appendDummyInput()
-        .appendField('steps');
+        .appendField(Blockly.Msg.ARD_STEPPER_STEPS);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setTooltip('Turns the stepper motor a specific number of steps.');
+    this.setTooltip(Blockly.Msg.ARD_STEPPER_STEP_TIP);
   },
   /**
    * Called whenever anything on the workspace changes.
@@ -181,8 +181,7 @@ Blockly.Blocks['stepper_step'] = {
       if (currentDropdown !== Blockly.Blocks.stepper.noInstance) {
         this.setFieldValue(Blockly.Blocks.stepper.noInstance, 'STEPPER_NAME');
       }
-      this.setWarningText(
-          'A STEPPER configuration block must be added to use this block!');
+      this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN1);
     } else {
       // Configuration blocks present, check if any selected and contains name
       var existingConfigSelected = false;
@@ -191,8 +190,7 @@ Blockly.Blocks['stepper_step'] = {
         if (instances[x][0] === Blockly.Blocks.stepper.noName) {
           // If selected config has no name either, set warning and exit func
           if (currentDropdown === Blockly.Blocks.stepper.noName) {
-            this.setWarningText('A Name input must be added to the Stepper ' +
-                                'configuration block!');
+            this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN2);
             return;
           }
         } else if (instances[x][0] === currentDropdown) {
@@ -212,8 +210,7 @@ Blockly.Blocks['stepper_step'] = {
           this.setWarningText(null);
         } else {
           // Al this point just set a warning to select a valid stepper config
-          this.setWarningText('Selected stepper does not exist any more, ' +
-                              'please select a new one.');
+          this.setWarningText(Blockly.Msg.ARD_STEPPER_STEP_WARN3);
         }
       }
     }
