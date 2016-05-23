@@ -242,7 +242,7 @@ Ardublockly.displayToolbox = function(show) {
  * The toolbox width does not change with workspace width, so safe to do once.
  */
 Ardublockly.resizeToggleToolboxBotton = function() {
-  Blockly.fireUiEvent(window, 'resize');
+  window.dispatchEvent(new Event('resize'));
   var button = $('#button_toggle_toolbox');
   // Sets the toolbox toggle button width to that of the toolbox
   if (Ardublockly.isToolboxVisible() && Ardublockly.blocklyToolboxWidth()) {

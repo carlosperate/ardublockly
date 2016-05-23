@@ -252,6 +252,14 @@ Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_FROM_END = "يحدد العنصر في �
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_FROM_START = "يحدد العنصر في الموضع المحدد في قائمة ما.  #1 هو العنصر الأول.";
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_LAST = "يحدد العنصر الأخير في قائمة.";
 Blockly.Msg.LISTS_SET_INDEX_TOOLTIP_SET_RANDOM = "يحدد عنصرا عشوائيا في قائمة.";
+Blockly.Msg.LISTS_SORT_HELPURL = "https://github.com/google/blockly/wiki/Lists#sorting-a-list";  // untranslated
+Blockly.Msg.LISTS_SORT_ORDER_ASCENDING = "ascending";  // untranslated
+Blockly.Msg.LISTS_SORT_ORDER_DESCENDING = "descending";  // untranslated
+Blockly.Msg.LISTS_SORT_TITLE = "sort %1 %2 %3";  // untranslated
+Blockly.Msg.LISTS_SORT_TOOLTIP = "Sort a copy of a list.";  // untranslated
+Blockly.Msg.LISTS_SORT_TYPE_IGNORECASE = "alphabetic, ignore case";  // untranslated
+Blockly.Msg.LISTS_SORT_TYPE_NUMERIC = "numeric";  // untranslated
+Blockly.Msg.LISTS_SORT_TYPE_TEXT = "alphabetic";  // untranslated
 Blockly.Msg.LISTS_SPLIT_HELPURL = "https://github.com/google/blockly/wiki/Lists#splitting-strings-and-joining-lists";  // untranslated
 Blockly.Msg.LISTS_SPLIT_LIST_FROM_TEXT = "إعداد قائمة من النصوص";
 Blockly.Msg.LISTS_SPLIT_TEXT_FROM_LIST = "إعداد نص من القائمة";
@@ -398,6 +406,7 @@ Blockly.Msg.PROCEDURES_MUTATORARG_TITLE = "اسم الإدخال:";
 Blockly.Msg.PROCEDURES_MUTATORARG_TOOLTIP = "Add an input to the function.";  // untranslated
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TITLE = "المدخلات";
 Blockly.Msg.PROCEDURES_MUTATORCONTAINER_TOOLTIP = "Add, remove, or reorder inputs to this function.";  // untranslated
+Blockly.Msg.REDO = "Redo";  // untranslated
 Blockly.Msg.REMOVE_COMMENT = "ازل التعليق";
 Blockly.Msg.RENAME_VARIABLE = "إعادة تسمية المتغير...";
 Blockly.Msg.RENAME_VARIABLE_TITLE = "إعادة تسمية كافة المتغيرات '%1' إلى:";
@@ -464,6 +473,7 @@ Blockly.Msg.TEXT_TRIM_OPERATOR_LEFT = "إزالة الفراغات من الجا
 Blockly.Msg.TEXT_TRIM_OPERATOR_RIGHT = "إزالة الفراغات من الجانب الأيمن من";
 Blockly.Msg.TEXT_TRIM_TOOLTIP = "يرجع نسخة من النص مع حذف من أحد أو كلا الفراغات من أطرافه.";
 Blockly.Msg.TODAY = "اليوم";
+Blockly.Msg.UNDO = "Undo";  // untranslated
 Blockly.Msg.VARIABLES_DEFAULT_NAME = "البند";
 Blockly.Msg.VARIABLES_GET_CREATE_SET = "انشئ 'التعيين %1'";
 Blockly.Msg.VARIABLES_GET_HELPURL = "https://github.com/google/blockly/wiki/Variables#get";  // untranslated
