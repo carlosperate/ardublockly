@@ -61,7 +61,7 @@ ArdublocklyClassic.tabClick = function(clickedName) {
   }
   ArdublocklyClassic.renderContent();
 
-  Blockly.fireUiEvent(window, 'resize');
+  window.dispatchEvent(new Event('resize'));
 };
 
 /**
@@ -126,7 +126,7 @@ ArdublocklyClassic.init = function() {
       setTimeout(bindBlocklyEventListener, 50);
     } else {
       window.addEventListener('resize', onresize, false);
-      Blockly.fireUiEvent(window, 'resize');
+      window.dispatchEvent(new Event('resize'));
     }
   };
   bindBlocklyEventListener();
@@ -295,7 +295,7 @@ ArdublocklyClassic.sideContent = function(visible) {
         'content_' + ArdublocklyClassic.selected).style.display = 'block';
   }
 
-  Blockly.fireUiEvent(window, 'resize');
+  window.dispatchEvent(new Event('resize'));
   ArdublocklyClassic.renderContent();
 };
 
@@ -417,7 +417,7 @@ ArdublocklyClassic.replaceBlocksfromXml = function(blocksXml) {
   }
   if (xmlDom) {
     ArdublocklyClassic.workspace.clear();
-    Blockly.Xml.domToWorkspace(ArdublocklyClassic.workspace, xmlDom);
+    Blockly.Xml.domToWorkspace(xmlDom, ArdublocklyClassic.workspace);
   }
   return success;
 };

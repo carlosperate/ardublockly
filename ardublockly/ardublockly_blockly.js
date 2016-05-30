@@ -140,7 +140,7 @@ Ardublockly.replaceBlocksfromXml = function(blocksXml) {
  */
 Ardublockly.loadBlocksfromXmlDom = function(blocksXmlDom) {
   try {
-    Blockly.Xml.domToWorkspace(Ardublockly.workspace, blocksXmlDom);
+    Blockly.Xml.domToWorkspace(blocksXmlDom, Ardublockly.workspace);
   } catch (e) {
     return false;
   }
@@ -171,7 +171,7 @@ Ardublockly.loadSessionStorageBlocks = function() {
   if (loadOnce) {
     delete window.sessionStorage.loadOnceBlocks;
     var xml = Blockly.Xml.textToDom(loadOnce);
-    Blockly.Xml.domToWorkspace(Ardublockly.workspace, xml);
+    Blockly.Xml.domToWorkspace(xml, Ardublockly.workspace);
   }
 };
 
