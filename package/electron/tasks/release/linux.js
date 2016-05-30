@@ -24,11 +24,11 @@ var init = function () {
                                  projectLocator.ardublocklyExecFolderName);
     releasesDir = projectDir.dir('./releases');
     manifest = projectDir.read('app/package.json', 'json');
-    packName = manifest.name + '_' + manifest.version;
+    packName = utils.getReleasePackageName(manifest);
     packDir = tmpDir.dir(packName);
     readyAppDir = packDir.cwd('opt', manifest.name);
 
-    return Q();
+    return new Q();
 };
 
 var copyRuntime = function () {
@@ -38,7 +38,9 @@ var copyRuntime = function () {
 var packageBuiltApp = function () {
     var deferred = Q.defer();
 
-    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function () {
+    asar.createPackageWithOptions(projectDir.path('build'), readyAppDir.path('resources/app.asar'), {
+        dot: true
+    }, function () {
         deferred.resolve();
     });
 
@@ -57,27 +59,27 @@ var createDesktopFile = function () {
     });
     packDir.write('usr/share/applications/' + manifest.name + '.desktop', desktop);
 
-    return Q();
+    return new Q();
 };
 
 var finalize = function () {
     // Copy icon
     projectDir.copy('resources/icon.png', readyAppDir.path('icon.png'));
 
-    return Q();
+    return new Q();
 };
 
 var renameApp = function () {
-    return readyAppDir.renameAsync("electron", manifest.name);
+    return readyAppDir.renameAsync('electron', manifest.name);
 };
 
 var packToDebFile = function () {
     var deferred = Q.defer();
 
-    var debFileName = packName + '_amd64.deb';
+    var debFileName = packName + '.deb';
     var debPath = releasesDir.path(debFileName);
 
-    gulpUtil.log('Creating DEB package...');
+    gulpUtil.log('Creating DEB package... (' + debFileName + ')');
 
     // Counting size of the app in KiB
     var appSize = Math.round(readyAppDir.inspectTree('.').size / 1024);
@@ -97,7 +99,7 @@ var packToDebFile = function () {
     childProcess.exec('fakeroot dpkg-deb -Zxz --build ' + packDir.path().replace(/\s/g, '\\ ') + ' ' + debPath.replace(/\s/g, '\\ '),
         function (error, stdout, stderr) {
             if (error || stderr) {
-                console.log("ERROR while building DEB package:");
+                console.log('ERROR while building DEB package:');
                 console.log(error);
                 console.log(stderr);
             } else {
@@ -111,7 +113,7 @@ var packToDebFile = function () {
 
 var copyExecFolder = function () {
     readyAppDir.copy(readyAppDir.cwd(), arduExecDir.cwd(), { overwrite: true });
-    return Q();
+    return new Q();
 };
 
 var cleanClutter = function () {

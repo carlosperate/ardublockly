@@ -24,7 +24,7 @@ var init = function () {
     manifest = projectDir.read('app/package.json', 'json');
     readyAppDir = tmpDir.cwd(manifest.name);
 
-    return Q();
+    return new Q();
 };
 
 var copyRuntime = function () {
@@ -38,7 +38,9 @@ var cleanupRuntime = function () {
 var packageBuiltApp = function () {
     var deferred = Q.defer();
 
-    asar.createPackage(projectDir.path('build'), readyAppDir.path('resources/app.asar'), function () {
+    asar.createPackageWithOptions(projectDir.path('build'), readyAppDir.path('resources/app.asar'), {
+        dot: true
+    }, function () {
         deferred.resolve();
     });
 
@@ -53,7 +55,7 @@ var finalize = function () {
     // Replace Electron icon and versions
     var rcedit = require('rcedit');
     rcedit(readyAppDir.path('electron.exe'), {
-        icon: projectDir.path('resources/windows/icon.ico'),
+        'icon': projectDir.path('resources/windows/icon.ico'),
         'file-version': manifest.version,
         'product-version': manifest.version,
         'version-string': {
@@ -80,7 +82,7 @@ var renameApp = function () {
 var createInstaller = function () {
     var deferred = Q.defer();
 
-    var finalPackageName = manifest.name + '_' + manifest.version + '.exe';
+    var finalPackageName = utils.getReleasePackageName(manifest) + '.exe';
     var installScript = projectDir.read('resources/windows/installer.nsi');
 
     installScript = utils.replace(installScript, {
@@ -96,7 +98,7 @@ var createInstaller = function () {
     });
     tmpDir.write('installer.nsi', installScript);
 
-    gulpUtil.log('Building installer with NSIS...');
+    gulpUtil.log('Building installer with NSIS... (' + finalPackageName + ')');
 
     // Remove destination file if already exists.
     releasesDir.remove(finalPackageName);
@@ -125,7 +127,7 @@ var createInstaller = function () {
 
 var copyExecFolder = function () {
     readyAppDir.copy(readyAppDir.cwd(), arduExecDir.cwd(), { overwrite: true });
-    return Q();
+    return new Q();
 };
 
 var cleanClutter = function () {

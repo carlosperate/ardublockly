@@ -22,7 +22,7 @@ var init = function () {
     manifest = projectDir.read('app/package.json', 'json');
     finalAppDir = tmpDir.cwd(manifest.productName + '.app');
 
-    return Q();
+    return new Q();
 };
 
 var copyRuntime = function () {
@@ -32,13 +32,15 @@ var copyRuntime = function () {
 var cleanupRuntime = function () {
     finalAppDir.remove('Contents/Resources/default_app');
     finalAppDir.remove('Contents/Resources/atom.icns');
-    return Q();
+    return new Q();
 };
 
 var packageBuiltApp = function () {
     var deferred = Q.defer();
 
-    asar.createPackage(projectDir.path('build'), finalAppDir.path('Contents/Resources/app.asar'), function () {
+    asar.createPackageWithOptions(projectDir.path('build'), finalAppDir.path('Contents/Resources/app.asar'), {
+        dot: true
+    }, function () {
         deferred.resolve();
     });
 
@@ -50,9 +52,11 @@ var finalize = function () {
     var info = projectDir.read('resources/osx/Info.plist');
     info = utils.replace(info, {
         productName: manifest.productName,
-        identifier: manifest.identifier,
+        identifier: manifest.osx.identifier,
         version: manifest.version,
-        copyright: manifest.copyright
+        build: manifest.osx.build,
+        copyright: manifest.copyright,
+        LSApplicationCategoryType: manifest.osx.LSApplicationCategoryType
     });
     finalAppDir.write('Contents/Info.plist', info);
 
@@ -69,7 +73,7 @@ var finalize = function () {
     // Copy icon
     projectDir.copy('resources/osx/icon.icns', finalAppDir.path('Contents/Resources/icon.icns'));
 
-    return Q();
+    return new Q();
 };
 
 var renameApp = function () {
@@ -80,7 +84,7 @@ var renameApp = function () {
     });
     // Rename application
     finalAppDir.rename('Contents/MacOS/Electron', manifest.productName);
-    return Q();
+    return new Q();
 };
 
 var signApp = function () {
@@ -90,7 +94,7 @@ var signApp = function () {
         gulpUtil.log('Signing with:', cmd);
         return Q.nfcall(child_process.exec, cmd);
     } else {
-        return Q();
+        return new Q();
     }
 };
 
@@ -98,7 +102,7 @@ var packToDmgFile = function () {
     var deferred = Q.defer();
 
     var appdmg = require('appdmg');
-    var dmgName = manifest.name + '_' + manifest.version + '.dmg';
+    var dmgName = utils.getReleasePackageName(manifest) + '.dmg';
 
     // Prepare appdmg config
     var dmgManifest = projectDir.read('resources/osx/appdmg.json');
@@ -113,7 +117,7 @@ var packToDmgFile = function () {
     // Delete DMG file with this name if already exists
     releasesDir.remove(dmgName);
 
-    gulpUtil.log('Packaging to DMG file...');
+    gulpUtil.log('Packaging to DMG file... (' + dmgName + ')');
 
     var readyDmgPath = releasesDir.path(dmgName);
     appdmg({
@@ -138,7 +142,7 @@ var copyExecFolder = function () {
     gulpUtil.log('Copying from ' + finalAppDir.path() + ' ' +
                  'folder: '+ finalAppContentDir.path());
     finalAppDir.copy(finalAppContentDir.cwd(), ardublocklyProjectDir.cwd(), { overwrite: true });
-    return Q();
+    return new Q();
 };
 
 var cleanClutter = function () {

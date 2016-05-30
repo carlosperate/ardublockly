@@ -16,7 +16,8 @@ const winston = require('winston');
 const appMenu = require('./appmenu.js');
 const server = require('./servermgr.js');
 const projectLocator = require('./projectlocator.js');
-const windowStateKeeper = require('./vendor/electron_boilerplate/window_state');
+//import createWindow from './helpers/window';
+const createWindow = require('./helpers/window');
 const env = require('fs-jetpack').cwd(app.getAppPath()).read('package.json', 'json').env;
 
 const tag = '[Ardublockly Electron] ';
@@ -35,12 +36,6 @@ var splashWindow = null;
     app.setPath('userCache', appDataPath.path('AppCache'));
     app.setPath('temp', appDataPath.path('temp'));
 })();
-
-// Preserver of the window size and position between app launches.
-var mainWindowState = windowStateKeeper('main', {
-    width: 1200,
-    height: 765
-});
 
 // Electron application entry point
 app.on('ready', function() {
@@ -61,11 +56,9 @@ app.on('ready', function() {
 
     server.startServer();
 
-    mainWindow = new BrowserWindow({
-        x: mainWindowState.x,
-        y: mainWindowState.y,
-        width: mainWindowState.width,
-        height: mainWindowState.height,
+    mainWindow = createWindow('main', {
+        width: 1200,
+        height: 765,
         title: 'Ardublockly',
         transparent: false,
         frame: true,
@@ -85,9 +78,6 @@ app.on('ready', function() {
             'direct-write': true
         }
     });
-    if (mainWindowState.isMaximized) {
-        mainWindow.maximize();
-    }
 
     if (env.name === 'development') {
         appMenu.setArdublocklyMenu(true);
@@ -120,7 +110,6 @@ app.on('ready', function() {
     mainWindow.loadURL('http://localhost:8000/ardublockly');
 
     mainWindow.on('close', function() {
-        mainWindowState.saveState(mainWindow);
         mainWindow = null;
     });
 });
