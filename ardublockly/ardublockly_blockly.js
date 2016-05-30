@@ -272,14 +272,17 @@ Ardublockly.blocklyIsDragging = function() {
 
 /** Wraps the blockly 'cut' functionality. */
 Ardublockly.blocklyCut = function() {
-  Blockly.copy_(Blockly.selected);
-  Blockly.selected.dispose(true, true);
+  if (Blockly.selected) {
+    Blockly.copy_(Blockly.selected);
+    Blockly.selected.dispose(true, true);
+  }
 };
 
 /** Wraps the blockly 'copy' functionality. */
 Ardublockly.blocklyCopy = function() {
-  Blockly.hideChaff();
-  Blockly.copy_(Blockly.selected);
+  if (Blockly.selected) {
+    Blockly.copy_(Blockly.selected);
+  }
 };
 
 /** Wraps the blockly 'paste' functionality. */
