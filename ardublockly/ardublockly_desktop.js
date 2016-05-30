@@ -26,17 +26,16 @@ Ardublockly.isRunningElectron = function() {
  * of that this file must be called in the HTML before the Materialize library
  * is loaded.
  */
-Ardublockly.loadJsInElectron = function() {
+(function loadJsInElectron(){
   if (Ardublockly.isRunningElectron()) {
-    var projectLocator = require('remote').require('./projectlocator.js');
+    var projectLocator = require('electron').remote.require('./projectlocator.js');
     var projectRoot = projectLocator.getProjectRootPath();
     window.$ = window.jQuery = require(projectRoot +
         '/ardublockly/js_libs/jquery-2.1.3.min.js');
     window.Hammer = require(projectRoot + '/ardublockly/js_libs/hammer.min.js');
     window.JsDiff = require(projectRoot + '/ardublockly/js_libs/diff.js');
   }
-};
-Ardublockly.loadJsInElectron();
+})();
 
 /** Sets all the elements using the container class to have a width of 100%. */
 Ardublockly.containerFullWidth = function() {
@@ -82,7 +81,7 @@ window.addEventListener('load', function load(event) {
     Ardublockly.hideSideMenuButton();
 
     // Prevent browser zoom changes like pinch-to-zoom
-    var webFrame = require('web-frame');
+    var webFrame = require('electron').webFrame;
     webFrame.setZoomLevelLimits(1, 1);
 
     // Electron does not offer a prompt, so replace Blocks version with modal

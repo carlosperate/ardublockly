@@ -11,31 +11,31 @@ const childProcess = require('child_process');
 
 const projectLocator = require('./projectlocator.js');
 
-const tag = '[Server mgr] '
+const tagMgr = '[ServerMgr] ';
+const tagSrv = '[ArdublocklySrv] ';
 
 var serverProcess = null;
 
 module.exports.startServer = function() {
     if (serverProcess === null) {
         var serverExecLocation = projectLocator.getServerExecPath();
-        winston.info(tag + 'Command: ' + serverExecLocation +
+        winston.info(tagMgr + 'Command: ' + serverExecLocation +
                      ' --findprojectroot --nobrowser');
         serverProcess = childProcess.spawn(
                 serverExecLocation, ['--findprojectroot', '--nobrowser']);
 
         // Setting the listeners
         serverProcess.stdout.on('data', function(data) {
-            winston.info('[Ardublockly server] ' + data);
+            winston.info(tagSrv + data);
         });
 
         serverProcess.stderr.on('data', function(data) {
-            winston.error('[Ardublockly server] ' + data);
+            winston.error(tagSrv + data);
         });
 
         serverProcess.on('close', function(code) {
             if (code !== 0) {
-                winston.info('[Ardublockly server] Process exited with code ' +
-                             code);
+                winston.info(tagSrv + 'Process exited with code ' + code);
             }
             serverProcess = null;
         });
@@ -47,6 +47,7 @@ module.exports.stopServer = function() {
         // Server executable needs to clean up (kill child), so no SIGKILL
         serverProcess.kill('SIGTERM');
         serverProcess = null;
+        winston.info(tagMgr + 'Server stopped.');
     }
 };
 

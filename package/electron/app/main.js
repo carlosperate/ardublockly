@@ -11,16 +11,15 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-const winston = require('winston');
-
 const appMenu = require('./appmenu.js');
 const server = require('./servermgr.js');
 const projectLocator = require('./projectlocator.js');
-//import createWindow from './helpers/window';
 const createWindow = require('./helpers/window');
+
+const winston = require('winston');
 const env = require('fs-jetpack').cwd(app.getAppPath()).read('package.json', 'json').env;
 
-const tag = '[Ardublockly Electron] ';
+const tag = '[ArdublocklyElec] ';
 
 // Global reference of the window object must be maintain, or the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -37,23 +36,24 @@ var splashWindow = null;
     app.setPath('temp', appDataPath.path('temp'));
 })();
 
+// Ensure this is a single instance application
+const shouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory) {
+  // User tried to run a second instance, focus existing window.
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
+  }
+});
+
 // Electron application entry point
 app.on('ready', function() {
+    if (shouldQuit) {
+      app.quit();
+      return;
+    }
+
     createSplashWindow();
-
-    // Setting up logging system
-    var projectRootPath = projectLocator.getProjectRootPath();
-    winston.add(winston.transports.File, {
-        json: false,
-        filename: projectRootPath + '/ardublockly.log',
-        maxsize: 10485760,
-        maxFiles: 2
-    });
-    winston.info(tag + 'Ardublockly root dir: ' + projectRootPath);
-
-    // Relevant OS could be win32, linux, darwin
-    winston.info(tag + 'OS detected: ' + process.platform);
-
+    setupLogging();
     server.startServer();
 
     mainWindow = createWindow('main', {
@@ -61,21 +61,23 @@ app.on('ready', function() {
         height: 765,
         title: 'Ardublockly',
         transparent: false,
+        backgroundColor: '#EEEEEE',
         frame: true,
         show: false,
-        'web-preferences': {
-            'node-integration': true,
-            'web-security': true,
-            'allow-displaying-insecure-content': false,
-            'allow-running-insecure-content': false,
+        'webPreferences': {
+            'nodeIntegration': true,
+            'webSecurity': true,
+            'allowDisplayingInsecureContent': false,
+            'allowRunningInsecureContent': false,
             'java': false,
             'webgl': false,
             'webaudio': true,
             'plugins': false,
-            'overlay-scrollbars': true,
-            'text-areas-are-resizable': false,
-            'subpixel-font-scaling': true,
-            'direct-write': true
+            'experimentalFeatures': false,
+            'experimentalCanvasFeatures': false,
+            'overlayScrollbars': true,
+            'textAreasAreResizable': false,
+            'directWrite': true
         }
     });
 
@@ -91,7 +93,7 @@ app.on('ready', function() {
                 'server is probably not yet running. Trying again in 200 ms.');
             setTimeout(function() {
                 mainWindow.webContents.reload();
-            }, 200);
+            }, 350);
         }
     );
 
@@ -103,21 +105,19 @@ app.on('ready', function() {
         mainWindow.show();
     });
 
+    mainWindow.on('close', function() {
+        mainWindow = null;
+    });
+
     // Set the download directory to the home folder
     mainWindow.webContents.session.setDownloadPath(
         process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME']);
 
     mainWindow.loadURL('http://localhost:8000/ardublockly');
-
-    mainWindow.on('close', function() {
-        mainWindow = null;
-    });
 });
 
 app.on('window-all-closed', function() {
     server.stopServer();
-    // Might need to add OS X exception
-    // https://github.com/atom/electron/issues/1357
     app.quit();
 });
 
@@ -135,10 +135,25 @@ function createSplashWindow() {
             transparent: true,
             images: true,
             center: true,
-            'always-on-top': true,
-            'skip-taskbar': true,
-            'use-content-size': true
+            'alwaysOnTop': true,
+            'skipTaskbar': true,
+            'useContentSize': true
         });
         splashWindow.loadURL(imagePath);
     }
+}
+
+function setupLogging() {
+    // Setting up logging system
+    var projectRootPath = projectLocator.getProjectRootPath();
+    winston.add(winston.transports.File, {
+        json: false,
+        filename: projectRootPath + '/ardublockly.log',
+        maxsize: 10485760,
+        maxFiles: 2
+    });
+    winston.info(tag + 'Ardublockly root dir: ' + projectRootPath);
+
+    // Relevant OS could be win32, linux, darwin
+    winston.info(tag + 'OS detected: ' + process.platform);
 }
