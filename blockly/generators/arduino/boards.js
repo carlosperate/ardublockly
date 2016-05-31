@@ -170,6 +170,72 @@ Blockly.Arduino.Boards.profiles.yun = Blockly.Arduino.Boards.profiles.leonardo;
 Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.uno;
 
 /**
+ * Atmel atmega328p Xplained mini board profile.
+ * The individual board profiles are created
+ * because even though it they have the same blockly implementation there is a
+ * compilation distinction.
+ */
+Blockly.Arduino.Boards.profiles.atmel_atmega328p_xplained_mini = {
+  name: 'Atmel atmega328p Xplained mini',
+  description: 'Atmel atmega328p Xplained mini board (Arduino Uno standard-compatible board)',
+  analogPins: Blockly.Arduino.Boards.profiles.uno.analogPins,
+  digitalPins: Blockly.Arduino.Boards.profiles.uno.digitalPins.concat([['20', '20']]),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_LED', '13']],
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt,
+  builtinButton: [['BUILTIN_BUTTON', '20']]
+};
+
+Blockly.Arduino.Boards.profiles.atmel_atmega168pb_xplained_mini = {
+  name: 'Atmel atmega168pb Xplained mini',
+  description: 'Atmel atmega168pb Xplained mini board (Arduino Uno standard-compatible board)',
+  analogPins: Blockly.Arduino.Boards.profiles.uno.analogPins,
+  digitalPins: Blockly.Arduino.Boards.profiles.uno.digitalPins.concat([['20', '20']]),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_LED', '13']],
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt,
+  builtinButton: [['BUILTIN_BUTTON', '20']]
+};
+
+Blockly.Arduino.Boards.profiles.atmel_atmega328pb_xplained_mini = {
+  name: 'Atmel atmega328pb Xplained mini',
+  description: 'Atmel atmega328pb Xplained mini board (Arduino Uno standard-compatible board)',
+  analogPins: Blockly.Arduino.Boards.profiles.uno.analogPins,
+  digitalPins: Blockly.Arduino.Boards.profiles.uno.digitalPins.concat([['20', '20']]),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_LED', '13']],
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt,
+  builtinButton: [['BUILTIN_BUTTON', '20']]
+};
+
+/**
  * Changes the Arduino board profile selected, which trigger a refresh of the
  * blocks that use the profile.
  * @param {Blockly.Workspace} workspace Workspace to trigger the board change.
