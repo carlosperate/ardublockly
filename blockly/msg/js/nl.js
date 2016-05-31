@@ -72,6 +72,7 @@ Blockly.Msg.ARD_SPI_TRANS_TIP = "Stuurt een SPI bericht naar het opgegeven slaaf
 Blockly.Msg.ARD_SPI_TRANS_VAL = "stuur";
 Blockly.Msg.ARD_SPI_TRANS_WARN1 = "Een Defenitie blok voor %1 moet toegevoegd worden aan de canvas om dit blok te gebruiken!";
 Blockly.Msg.ARD_SPI_TRANS_WARN2 = "Oude pin waarde %1 is niet langer beschikbaar.";
+Blockly.Msg.ARD_STEPPER_DEFAULT_NAME = "MijnStappenMotor";
 Blockly.Msg.ARD_STEPPER_MOTOR = "stappenmotor:";
 Blockly.Msg.ARD_STEPPER_PIN1 = "pin1#";
 Blockly.Msg.ARD_STEPPER_PIN2 = "pin2#";
