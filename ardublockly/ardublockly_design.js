@@ -219,7 +219,7 @@ Ardublockly.displayToolbox = function(show) {
         {height: document.getElementById('content_blocks').style.height}, 300,
         function() {
           toolboxTree.css('overflow-y', 'auto');
-          Blockly.fireUiEvent(window, 'resize');
+          window.dispatchEvent(new Event('resize'));
           $('#toolboxButtonScreen').remove();
         });
   } else {
@@ -228,7 +228,7 @@ Ardublockly.displayToolbox = function(show) {
     toolbox.animate({height: 38}, 300, function() {
       button.className = button.className.replace(classOff, classOn);
       toolbox.fadeOut(350, 'linear', function() {
-        Blockly.fireUiEvent(window, 'resize');
+        window.dispatchEvent(new Event('resize'));
         setTimeout(function() { toolbox.height(38); }, 100);
         $('#toolboxButtonScreen').remove();
       });
@@ -453,7 +453,7 @@ Ardublockly.contentHeightToggle = function() {
 
   // Blockly doesn't resize with CSS3 transitions enabled, so do it manually
   var timerId = setInterval(function() {
-    Blockly.fireUiEvent(window, 'resize');
+    window.dispatchEvent(new Event('resize'));
   }, 15);
   setTimeout(function() {
     clearInterval(timerId);

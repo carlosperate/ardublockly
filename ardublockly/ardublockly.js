@@ -409,7 +409,7 @@ Ardublockly.saveXmlFile = function() {
 Ardublockly.saveSketchFile = function() {
   Ardublockly.saveTextFileAs(
       document.getElementById('sketch_name').value + '.ino',
-      ArduBlockly.generateArduino());
+      Ardublockly.generateArduino());
 };
 
 /**

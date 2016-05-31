@@ -98,15 +98,9 @@ var getFileMenuData = function() {
                 label: 'Open',
                 accelerator: 'CmdOrCtrl+O',
                 click: function() {
-                    dialog.showMessageBox({
-                        type: 'info',
-                        title: 'Dialog',
-                        buttons: ['ok',],
-                        message: 'This functionality has not yet been '+
-                                 'implemented in the window menu.\nYou can ' +
-                                 'still open a blocks file using the "Open" ' +
-                                 'button on the main interface.'
-                    });
+                    BrowserWindow.getFocusedWindow().webContents
+                        .executeJavaScript(
+                            'Ardublockly.loadUserXmlFile()', true);
                 }
             }, {
                 label: 'Save Blocks as',
@@ -120,8 +114,7 @@ var getFileMenuData = function() {
                 accelerator: 'Shift+CmdOrCtrl+S',
                 click:  function() {
                     BrowserWindow.getFocusedWindow().webContents
-                        .executeJavaScript(
-                            'Ardublockly.saveSketchFile()');
+                        .executeJavaScript('Ardublockly.saveSketchFile()');
                 }
             }
         ]

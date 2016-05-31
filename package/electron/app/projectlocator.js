@@ -15,7 +15,7 @@ const serverExecFolderName = 'server';
 const serverExecName = 'start';
 module.exports.ardublocklyExecFolderName = execFolderName;
 
-const tag = '[Project Root Locator] ';
+const tag = '[ProjectLocator] ';
 
 var ardublocklyRootDir = null;
 
