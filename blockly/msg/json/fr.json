@@ -9,7 +9,7 @@
 			"Grimault",
 			"Rixed",
 			"Frigory",
-      "Thibaut VIARD"
+			"Thibaut VIARD"
 		]
 	},
 	"VARIABLES_DEFAULT_NAME": "élément",
@@ -478,7 +478,7 @@
 	"ARD_TIME_MICROS_TIP": "Renvoie le temps en microseconds depuis le lancement de ce programme sur la carte Arduino. Doit être stocké dans un Entier long positif",
 	"ARD_TIME_INF": "Attente sans fin (fin du programme)",
 	"ARD_TIME_INF_TIP": "Attente indéfinie, arrêt du programme.",
-	"ARD_VAR_AS": "as",
+	"ARD_VAR_AS": "comme",
 	"ARD_VAR_AS_TIP": "Configure une valeur à un type précis",
 	"REPLACE_EXISTING_BLOCKS": "Remplacer le bloc actuel? 'Annuler' va les fusionner.",
 	"ARD_PULSEREAD": "Lecture",
