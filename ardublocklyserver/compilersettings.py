@@ -59,7 +59,13 @@ class ServerCompilerSettings(object):
                        'Mega': 'arduino:avr:mega',
                        'Duemilanove_328p': 'arduino:avr:diecimila',
                        'Duemilanove_168p':
-                               'arduino:avr:diecimila:cpu=atmega168'}
+                               'arduino:avr:diecimila:cpu=atmega168',
+                       'Atmel atmega328p Xplained mini':
+                               'atmel:avr:atmega328p_xplained_mini',
+                       'Atmel atmega168pb Xplained mini':
+                               'atmel:avr:atmega168pb_xplained_mini',
+                       'Atmel atmega328pb Xplained mini':
+                               'atmel:avr:atmega328pb_xplained_mini'}
 
     # Class dictionary to contain the computer COM ports, dynamic content
     __serial_ports = {'port0': 'COM1'}
