@@ -53,12 +53,15 @@ class ServerCompilerSettings(object):
     __settings_filename = 'ServerCompilerSettings.ini'
 
     # Class dictionary to define Arduino board types, static content
+    # TODO: This content will be moved from here and integrated completely
+    #       into 'blockly\generators\arduino\boards.js', which should then
+    #       send the selected flag to be saved as a single value
     __arduino_types = {'Uno': 'arduino:avr:uno',
                        'Leonardo': 'arduino:avr:leonardo',
                        'Yun': 'arduino:avr:leonardo',
                        'Mega': 'arduino:avr:mega',
-                       'Duemilanove_328p': 'arduino:avr:diecimila',
-                       'Duemilanove_168p':
+                       'Duemilanove 328p': 'arduino:avr:diecimila',
+                       'Duemilanove 168p':
                                'arduino:avr:diecimila:cpu=atmega168',
                        'Atmel atmega328p Xplained mini':
                                'atmel:avr:atmega328p_xplained_mini',

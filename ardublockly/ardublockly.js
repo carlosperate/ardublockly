@@ -495,7 +495,8 @@ Ardublockly.setBoard = function() {
   //TODO: Check how ArdublocklyServer deals with invalid data and sanitise
   ArdublocklyServer.setArduinoBoard(
       boardValue, Ardublockly.setArduinoBoardsHtml);
-  Ardublockly.changeBlocklyArduinoBoard(boardValue.toLowerCase());
+  Ardublockly.changeBlocklyArduinoBoard(
+      boardValue.toLowerCase().replace(/ /g, '_'));
 };
 
 /**
