@@ -44,7 +44,9 @@ dependencies:
     - sudo pip3 install pyinstaller
     - pyinstaller --version
     - pip2 freeze
-    - pip3 freeze
+    # A current issue with pip causes this command to fail
+    # https://github.com/pypa/pip/issues/3681
+    #- pip3 freeze
 
     # Install node.js
     #- curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -

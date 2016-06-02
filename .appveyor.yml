@@ -11,6 +11,8 @@ environment:
   # Add custom environmental variables for pip
   PIP: C:\\Python27\Scripts\pip
   PIP3: C:\\Python34\Scripts\pip
+  # Add custom environmental variables to ensure 32 bit electron
+  npm_config_arch: ia32
 
 platform: x86
 
