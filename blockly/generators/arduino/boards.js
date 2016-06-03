@@ -241,6 +241,52 @@ Blockly.Arduino.Boards.profiles.atmel_atmega168pb_xplained_mini =
         'Atmel Xplained mini board with atmega168pb (Arduino Uno compatible)',
         'atmel:avr:atmega168pb_xplained_mini');
 
+/** ESP8266 for the Adafruit Huzzah. */
+Blockly.Arduino.Boards.profiles.esp8266_huzzah = {
+  name: 'Adafruit Feather HUZZAH',
+  description: 'Adafruit HUZZAH ESP8266 compatible board',
+  compilerFlag: 'esp8266:esp8266:generic',
+  analogPins: [['A0', 'A0']],
+  digitalPins: [['0', '0'], ['2', '2'], ['4', '4'], ['5', '5'], ['12', '12'],
+                ['13', '13'], ['14', '14'], ['15', '15'], ['16', '16']],
+  pwmPins: [['2', '2']],
+  serial: [['serial', 'Serial']],
+  serialPins: { Serial: [['RX', 'RX'], ['TX', 'TX']] },
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serial,
+  spi: [['SPI', 'SPI']],
+  spiPins: { SPI: [['MOSI', '13'], ['MISO', '12'], ['SCK', '14']] },
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: [['I2C', 'Wire']],
+  i2cPins: { Wire: [['SDA', '4'], ['SCL', '5']] },
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_1', '0']],
+  interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
+};
+
+/** ESP8266 for the Wemos D1 R2. */
+Blockly.Arduino.Boards.profiles.esp8266_wemos_d1 = {
+  name: 'Wemos D1',
+  description: 'Wemos D1 R2 compatible board',
+  compilerFlag: 'esp8266:esp8266:generic',
+  analogPins: [['A0', 'A0']],
+  digitalPins: [['D0', 'D0'], ['D1', 'D1'], ['D2', 'D2'], ['D3', 'D3'],
+                ['D4', 'D4'], ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']],
+  pwmPins:  [['D1', 'D1'], ['D2', 'D2'], ['D3', 'D3'], ['D4', 'D4'],
+             ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']],
+  serial: [['serial', 'Serial']],
+  serialPins: { Serial: [['RX', 'RX'], ['TX', 'TX']] },
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: [['SPI', 'SPI']],
+  spiPins: { SPI: [['MOSI', 'D7'], ['MISO', 'D6'], ['SCK', 'D5']] },
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: [['I2C', 'Wire']],
+  i2cPins: { Wire: [['SDA', 'D2'], ['SCL', 'D1']] },
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_1', 'D4']],
+  interrupt: [['D0', 'D0'], ['D1', 'D1'], ['D2', 'D2'], ['D3', 'D3'],
+              ['D4', 'D4'], ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']]
+};
+
 /** Set default profile to Arduino standard-compatible board */
 Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.uno;
 
