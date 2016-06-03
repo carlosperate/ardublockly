@@ -17,7 +17,7 @@ const projectLocator = require('./projectlocator.js');
 const createWindow = require('./helpers/window');
 
 const winston = require('winston');
-const env = require('fs-jetpack').cwd(app.getAppPath()).read('package.json', 'json').env;
+const packageData = require('fs-jetpack').cwd(app.getAppPath()).read('package.json', 'json');
 
 const tag = '[ArdublocklyElec] ';
 
@@ -37,7 +37,7 @@ var splashWindow = null;
 })();
 
 // Ensure this is a single instance application
-const shouldQuit = app.makeSingleInstance(function(commandLine, workingDirectory) {
+const shouldQuit = app.makeSingleInstance(function(cmdLine, workingDirectory) {
   // User tried to run a second instance, focus existing window.
   if (mainWindow) {
     if (mainWindow.isMinimized()) mainWindow.restore();
@@ -52,8 +52,8 @@ app.on('ready', function() {
       return;
     }
 
-    createSplashWindow();
     setupLogging();
+    createSplashWindow();
     server.startServer();
 
     mainWindow = createWindow('main', {
@@ -81,7 +81,7 @@ app.on('ready', function() {
         }
     });
 
-    if (env.name === 'development') {
+    if (packageData.env.name === 'development') {
         appMenu.setArdublocklyMenu(true);
     } else {
         appMenu.setArdublocklyMenu();
@@ -144,7 +144,6 @@ function createSplashWindow() {
 }
 
 function setupLogging() {
-    // Setting up logging system
     var projectRootPath = projectLocator.getProjectRootPath();
     winston.add(winston.transports.File, {
         json: false,
@@ -152,6 +151,7 @@ function setupLogging() {
         maxsize: 10485760,
         maxFiles: 2
     });
+    winston.info(tag + 'Starting Ardublockly version: ' + packageData.version);
     winston.info(tag + 'Ardublockly root dir: ' + projectRootPath);
 
     // Relevant OS could be win32, linux, darwin
