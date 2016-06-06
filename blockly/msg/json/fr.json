@@ -394,7 +394,7 @@
 	"ARD_ANALOGREAD": "Lecture du signal analogique #",
 	"ARD_ANALOGREAD_TIP": "Valeur de retour entre 0 et 1024",
 	"ARD_ANALOGWRITE": "Ecriture du signal analogique #",
-	"ARD_ANALOGWRITE_TIP": "Write analog value between 0 and 255 to a specific PWM Port",
+	"ARD_ANALOGWRITE_TIP": "Ecrit une valeur analogique comprise entre 0 et 255 sur un port PWM spécifique",
 	"ARD_HIGHLOW_TIP": " Configuration d'un signal à l'état HAUT ou BAS",
 	"ARD_DIGITALREAD": "Lecture du signal numérique #",
 	"ARD_DIGITALREAD_TIP": "Lecture de la valeur d'un signal numérique: HAUT ou BAS",
