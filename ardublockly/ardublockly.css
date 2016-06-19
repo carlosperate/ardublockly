@@ -528,6 +528,12 @@ ul.side-nav li.side-menu-end {
   height: auto !important;
   min-height: 200px;
 }
+.modal_small .modal-content {
+  margin-top: 0;
+  padding-top: 12px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
 .modal_small input {
   width: 100%;
 }
@@ -601,7 +607,7 @@ ul.side-nav li.side-menu-end {
 /************/
 /*  Others  */
 /************/
-/* Edit logo for code and xml collapsibles*/
+/* Edit logo for code and xml collapsibles */
 .collapsible_logo {
   width: 3rem;
   font-size: 1.6rem;
