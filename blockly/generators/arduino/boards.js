@@ -114,7 +114,29 @@ Blockly.Arduino.Boards.profiles.uno = {
   interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
 };
 
-/** Arduino Duemilanove boards profile (ATmega168p, ATmega328p. */
+/** Arduino Nano board profile (ATmega328p). */
+Blockly.Arduino.Boards.profiles.nano = {
+  name: 'Arduino Nano',
+  description: 'Arduino Nano with ATmega328p board',
+  compilerFlag: 'arduino:avr:nano',
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 7),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
+                   Blockly.Arduino.Boards.generateAnalogIo(0, 7)),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: Blockly.Arduino.Boards.profiles.uno.builtinLed,
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt
+};
+
+/** Arduino Duemilanove boards profile (ATmega168p, ATmega328p). */
 Blockly.Arduino.Boards.profiles.duemilanove_168p = {
   name: 'Arduino Duemilanove 168p',
   description: 'Arduino Duemilanove with ATmega168p compatible board',
