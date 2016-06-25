@@ -355,14 +355,21 @@ Ardublockly.loadServerXmlFile = function(xmlFile) {
  * Blockly workspace.
  */
 Ardublockly.loadUserXmlFile = function() {
-  // Create event listener function
+  // Create File Reader event listener function
   var parseInputXMLfile = function(e) {
-    var files = e.target.files;
+    var xmlFile = e.target.files[0];
+    var filename = xmlFile.name;
+    var extensionPosition = filename.lastIndexOf('.');
+    if (extensionPosition !== -1) {
+      filename = filename.substr(0, extensionPosition);
+    }
+
     var reader = new FileReader();
     reader.onload = function() {
       var success = Ardublockly.replaceBlocksfromXml(reader.result);
       if (success) {
         Ardublockly.renderContent();
+        Ardublockly.sketchNameSet(filename);
       } else {
         Ardublockly.alertMessage(
             'Invalid XML',
@@ -371,11 +378,12 @@ Ardublockly.loadUserXmlFile = function() {
             false);
       }
     };
-    reader.readAsText(files[0]);
+    reader.readAsText(xmlFile);
   };
+
   // Create once invisible browse button with event listener, and click it
   var selectFile = document.getElementById('select_file');
-  if (selectFile == null) {
+  if (selectFile === null) {
     var selectFileDom = document.createElement('INPUT');
     selectFileDom.type = 'file';
     selectFileDom.id = 'select_file';

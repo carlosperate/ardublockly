@@ -15,6 +15,7 @@ Ardublockly.designJsInit = function() {
   Ardublockly.materializeJsInit();
   Ardublockly.resizeToggleToolboxBotton();
   Ardublockly.sketchNameSizeEffect();
+  Ardublockly.sketchNameSet();
 };
 
 /**
@@ -415,10 +416,22 @@ Ardublockly.sketchNameSizeEffect = function() {
   };
 
   var sketchNameInput = $('#sketch_name');
-  sketchNameInput.val('Sketch_Name');
-  sketchNameInput.attr('size', 10);
-  sketchNameInput.keyup(resizeInput).each(resizeInput);
+  sketchNameInput.keydown(resizeInput).each(resizeInput);
   sketchNameInput.blur(correctInput);
+};
+
+/**
+ * Sets a string to the SketchName input field and triggers the events set from
+ * Ardublockly.sketchNameSizeEffect().
+ * @param {string?} newName Optional string to place in the sketch_name input.
+ */
+Ardublockly.sketchNameSet = function(newName) {
+  var sketchNewName = newName || '';
+  var sketchNameInput = $('#sketch_name');
+  sketchNameInput.val(sketchNewName);
+  sketchNameInput.attr('size', sketchNewName.length);
+  sketchNameInput.keydown();
+  sketchNameInput.blur();
 };
 
 /** Creates a highlight animation to the Arduino IDE output header. */
