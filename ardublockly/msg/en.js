@@ -45,7 +45,7 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoOpErrorIdePortTitle: "Serial Port unavailable",
   arduinoOpErrorIdePortBody: "The Serial Port is not accessible.<br>" +
                              "Please check if the Arduino is correctly connected to the PC and select the Serial Port in the Settings.",
-  arduinoOpErrorIdeBoardTitle: "'Unknown Arduino Board",
+  arduinoOpErrorIdeBoardTitle: "Unknown Arduino Board",
   arduinoOpErrorIdeBoardBody: "The Arduino Board has not been set.<br>" +
                               "Please select the appropriate Arduino Board from the settings.",
   /* Modals */
@@ -67,7 +67,7 @@ Ardublockly.LOCALISED_TEXT = {
   invalidXmlBody: "The XML file was not successfully parsed into blocks. Please review the XML code and try again.",
   /* Tooltips */
   uploadingSketch: "Uploading Sketch into Arduino...",
-  uploadSketch: "UUpload Sketch to the Arduino",
+  uploadSketch: "Upload Sketch to the Arduino",
   verifyingSketch: "Verifying Sketch...",
   verifySketch: "Verify the Sketch",
   openingSketch: "Opening Sketch in the Arduino IDE...",
@@ -93,5 +93,4 @@ Ardublockly.LOCALISED_TEXT = {
   catMusic: "Music",
   catMotors: "Motors",
   catComms: "Comms",
-  textVariable: "text",
 };

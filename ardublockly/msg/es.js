@@ -93,5 +93,4 @@ Ardublockly.LOCALISED_TEXT = {
   catMusic: "Música",
   catMotors: "Motores",
   catComms: "Comunicación",
-  textVariable: "texto",
 };
