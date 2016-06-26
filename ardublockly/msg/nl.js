@@ -1,6 +1,6 @@
 var Ardublockly = Ardublockly || {};
 Ardublockly.LOCALISED_TEXT = {
-  language: "Nederlands",
+  translationLanguage: "Nederlands",
   title: "Ardublockly",
   blocks: "Blocks",
   /* Menu */
@@ -80,7 +80,7 @@ Ardublockly.LOCALISED_TEXT = {
   catFunctions: "Functies",
   catInputOutput: "In/Output",
   catTime: "Tijd",
-  catMusic: "Audio",
+  catAudio: "Audio",
   catMotors: "Motoren",
   catComms: "Comms",
 };
