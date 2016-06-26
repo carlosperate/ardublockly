@@ -392,8 +392,8 @@ Ardublockly.arduinoIdeOutput = function(bodyEl) {
  */
 Ardublockly.resetIdeOutputContent = function(bodyEl) {
   var ideOuputContent = document.getElementById('content_ide_output');
-  ideOuputContent.innerHTML = '<span class="arduino_dialog_out">Waiting for ' +
-      'the IDE output...</span>';
+  ideOuputContent.innerHTML = '<span class="arduino_dialog_out">' +
+      Ardublockly.getLocalStr('arduinoOpWaiting') + '</span>';
 };
 
 /**

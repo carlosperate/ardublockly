@@ -61,29 +61,22 @@ def load_arduino_cli(sketch_path=None):
     # Check if CLI flags have been set
     if not settings.compiler_dir:
         success = False
-        conclusion = 'Unable to find Arduino IDE'
-        error = 'The compiler directory has not been set.\n' + \
-                'Please set it in the Settings.'
+        conclusion = 'arduinoOpErrorIdeDirTitle'
+        error = 'arduinoOpErrorIdeDirBody'
     else:
         if not settings.load_ide_option:
             success = False
-            conclusion = 'What should we do with the Sketch?'
-            error = 'The launch IDE option has not been set.\n' + \
-                    'Please select an IDE option in the Settings.'
+            conclusion = 'arduinoOpErrorIdeOptionTitle'
+            error = 'arduinoOpErrorIdeOptionBody'
         elif settings.load_ide_option == 'upload':
             if not settings.get_serial_port_flag():
                 success = False
-                conclusion = 'Serial Port unavailable'
-                error = 'The Serial Port does not exist.\n' + \
-                        'Please check if the Arduino is correctly ' + \
-                        'connected to the PC and select the Serial Port in ' +\
-                        'the Settings.'
+                conclusion = 'arduinoOpErrorIdePortTitle'
+                error = 'arduinoOpErrorIdePortBody'
             if not settings.get_arduino_board_flag():
                 success = False
-                conclusion = 'Unknown Arduino Board'
-                error = 'The Arduino Board has not been set.\n' + \
-                        'Please select the appropriate Arduino Board from ' + \
-                        'the settings.'
+                conclusion = 'arduinoOpErrorIdeBoardTitle'
+                error = 'arduinoOpErrorIdeBoardBody'
 
     if success:
         # Concatenates the CLI command and execute if the flags are valid
@@ -91,7 +84,7 @@ def load_arduino_cli(sketch_path=None):
         if settings.load_ide_option == 'upload':
             print('\nUploading sketch to Arduino...')
             # This success conclusion message gets overwritten in case of error
-            conclusion = 'Successfully Uploaded Sketch'
+            conclusion = 'arduinoOpUploadedTitle'
             cli_command.append('--upload')
             cli_command.append('--port')
             cli_command.append(settings.get_serial_port_flag())
@@ -100,12 +93,12 @@ def load_arduino_cli(sketch_path=None):
         elif settings.load_ide_option == 'verify':
             print('\nVerifying the sketch...')
             # This success conclusion message gets overwritten in case of error
-            conclusion = 'Successfully Verified Sketch'
+            conclusion = 'arduinoOpVerifiedTitle'
             cli_command.append('--verify')
         elif settings.load_ide_option == 'open':
             print('\nOpening the sketch in the Arduino IDE...')
-            conclusion = 'Sketch opened in IDE'
-            out = 'The sketch should be loaded in the Arduino IDE.'
+            conclusion = 'arduinoOpOpenedTitle'
+            out = 'arduinoOpOpenedBody'
         cli_command.append("%s" % sketch_path)
         print('CLI command: %s' % ' '.join(cli_command))
         # Python 2 needs the input to subprocess.Popen to be in system encoding
@@ -135,14 +128,13 @@ def load_arduino_cli(sketch_path=None):
             if (process.returncode != 0) and (process.returncode != 256):
                 success = False
                 if exit_code == 1:
-                    conclusion = 'Build or Upload failed'
+                    conclusion = 'arduinoOpErrorUpVerTitle'
                 elif exit_code == 2:
-                    conclusion = 'Sketch not found'
+                    conclusion = 'arduinoOpErrorSketchTitle'
                 elif exit_code == 3:
-                    conclusion = 'Invalid command line argument'
+                    conclusion = 'arduinoOpErrorFlagTitle'
                 elif exit_code == 4:
-                    conclusion =\
-                        'Preference passed to "get-pref" flag does not exist'
+                    conclusion = 'arduinoOpErrorFlagPrefTitle'
                 else:
                     conclusion = 'Unexpected exit error code: %s' % exit_code
 

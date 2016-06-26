@@ -174,7 +174,7 @@ ArdublocklyServer.createElementFromJson = function(json_data) {
   } else if (parsed_json.element == 'div_ide_output') {
     // Formatted text for the Arduino IDE CLI output
     var el_title = document.createElement('h4');
-    el_title.innerHTML = parsed_json.conclusion;
+    el_title.innerHTML = Ardublockly.getLocalStr(parsed_json.conclusion);
     if (parsed_json.success == true) {
       el_title.className = 'arduino_dialog_success';
     } else {
@@ -183,7 +183,13 @@ ArdublocklyServer.createElementFromJson = function(json_data) {
 
     var el_out = document.createElement('span');
     el_out.className = 'arduino_dialog_out';
-    el_out.innerHTML = parsed_json.output.split('\n').join('<br />');
+    // If larger than 50 characters then don't bother looking for language key
+    if (parsed_json.output.length < 50) {
+      el_out.innerHTML = Ardublockly.getLocalStr(parsed_json.output) ||
+                         parsed_json.output.split('\n').join('<br />');
+    } else {
+      el_out.innerHTML = parsed_json.output.split('\n').join('<br />');
+    }
 
     element = document.createElement('div');
     element.appendChild(el_title);
@@ -193,7 +199,13 @@ ArdublocklyServer.createElementFromJson = function(json_data) {
     if (parsed_json.success == false) {
       var el_err = document.createElement('span');
       el_err.className = 'arduino_dialog_out_error';
-      el_err.innerHTML = parsed_json.error_output.split('\n').join('<br />');
+      // If larger than 50 characters then don't bother looking for language key
+      if (parsed_json.output.length < 50) {
+        el_err.innerHTML = Ardublockly.getLocalStr(parsed_json.error_output) ||
+                           parsed_json.error_output.split('\n').join('<br />');
+      } else {
+        el_err.innerHTML = parsed_json.error_output.split('\n').join('<br />');
+      }
       element.appendChild(el_err);
     }
   } else {

@@ -67,7 +67,7 @@ Ardublockly.bindBlocklyEventListeners = function() {
 
   // Ensure the Blockly workspace resizes accordingly
   window.addEventListener('resize',
-      function() { Blockly.svgResize(Ardublockly.workspace); }, false);
+      function() { Blockly.asyncSvgResize(Ardublockly.workspace); }, false);
 };
 
 /** @return {!string} Generated Arduino code from the Blockly workspace. */
@@ -183,9 +183,9 @@ Ardublockly.discardAllBlocks = function() {
     Ardublockly.renderContent();
   } else if (blockCount > 1) {
     Ardublockly.alertMessage(
-        'Delete blocks?',
-        'There are ' + blockCount + ' blocks on the workspace. Are you sure ' +
-        'you want to delete them?',
+        Ardublockly.getLocalStr('discardBlocksTitle'),
+        Ardublockly.getLocalStr('discardBlocksBody')
+            .replace('%1', blockCount),
         true,
         function() {
           Ardublockly.workspace.clear();
@@ -217,8 +217,9 @@ Ardublockly.updateToolboxLanguage = function() {
   var categoryNodes = Ardublockly.xmlTree.getElementsByTagName('category');
   for (var i = 0, cat; cat = categoryNodes[i]; i++) {
     var catId = cat.getAttribute('id');
-    if (MSG[catId]) {
-      cat.setAttribute('name', MSG[catId]);
+    var catText = Ardublockly.getLocalStr(catId);
+    if (catText) {
+      cat.setAttribute('name', catText);
     }
   }
 };

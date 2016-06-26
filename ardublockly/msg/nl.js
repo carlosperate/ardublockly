@@ -1,5 +1,7 @@
-var MSG = {
-  title: "Code",
+var Ardublockly = Ardublockly || {};
+Ardublockly.LOCALISED_TEXT = {
+  languge: "Nederlands",
+  title: "Ardublockly",
   blocks: "Blocks",
   linkTooltip: "Save and link to blocks.",
   runTooltip: "Run the program defined by the blocks in the workspace.",

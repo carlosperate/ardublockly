@@ -9,20 +9,6 @@
 /** Create a namespace for the application. */
 var Ardublockly = Ardublockly || {};
 
-/** Lookup for names of supported languages. Keys in ISO 639 format. */
-Ardublockly.LANGUAGE_NAME = {
-  'en': 'English',
-  'fr': 'Français',
-  'es': 'Español',
-  'nl': 'Nederlands'
-};
-
-/**
- * Selected language, default English.
- * @type {string}
- */
-Ardublockly.LANG = 'en';
-
 /** Initialize function for Ardublockly, to be called on page load. */
 Ardublockly.init = function() {
   // Lang init must run first for the rest of the page to pick the right msgs
@@ -30,7 +16,7 @@ Ardublockly.init = function() {
 
   // Inject Blockly into content_blocks and fetch additional blocks
   Ardublockly.injectBlockly(document.getElementById('content_blocks'),
-      Ardublockly.TOOLBOX_XML, '../blockly/');
+                            Ardublockly.TOOLBOX_XML, '../blockly/');
   Ardublockly.importExtraBlocks();
 
   Ardublockly.designJsInit();
@@ -115,103 +101,6 @@ Ardublockly.bindActionFunctions = function() {
   });
 };
 
-/** Initialize the page language. */
-Ardublockly.initLanguage = function() {
-  // Save the current default state
-  var defaultLang = Ardublockly.LANG;
-
-  // Check server settings and url language, url gets priority
-  Ardublockly.LANG = Ardublockly.getUrlLanguage() ||
-      Ardublockly.getLanguageSetting() || Ardublockly.LANG;
-
-  Ardublockly.populateLanguageMenu(Ardublockly.LANG);
-
-  if (defaultLang !== Ardublockly.LANG) {
-      Ardublockly.injectLanguageJsSources();
-      Ardublockly.updateLanguageText();
-  }
-};
-
-/**
- * Get the language previously set by the user from the server settings.
- * @return {string} Language saved in the server settings.
- */
-Ardublockly.getLanguageSetting = function() {
-  //TODO: Server feature still to be implemented, for now return default
-  return null;
-};
-
-/**
- * Get the language selected from the URL, format '?lang=en'.
- * @return {string} Selected language.
- */
-Ardublockly.getUrlLanguage = function() {
-  var langKey = 'lang';
-  var val = location.search.match(new RegExp('[?&]' + langKey + '=([^&]+)'));
-  var language = val ? decodeURIComponent(val[1].replace(/\+/g, '%20')) : '';
-  if (Ardublockly.LANGUAGE_NAME[language] === undefined) {
-    language = null;
-  }
-  return language;
-};
-
-/**
- * Populates the settings language selection menu.
- * @param {!string} selectedLang Language to be marked as selected.
- */
-Ardublockly.populateLanguageMenu = function(selectedLang) {
-  var languageMenu = document.getElementById('language');
-  languageMenu.options.length = 0;
-
-  for (var lang in Ardublockly.LANGUAGE_NAME) {
-    var option = new Option(Ardublockly.LANGUAGE_NAME[lang], lang);
-    if (lang == selectedLang) {
-      option.selected = true;
-    }
-    languageMenu.options.add(option);
-  }
-  languageMenu.onchange = Ardublockly.changeLanguage;
-};
-
-/** Updates the page displayed text with the new language. */
-Ardublockly.updateLanguageText = function() {
-  //TODO: The page strings still need to be moved into language files
-  //document.getElementById('xxx').textContent = MSG['xxx'];
-  //document.getElementById('xxxButton').title = MSG['xxx'];
-};
-
-/** Injects the language JavaScript files into the html head element. */
-Ardublockly.injectLanguageJsSources = function() {
-  var head = document.getElementsByTagName('head')[0];
-  var appLangJsLoad = document.createElement('script');
-  appLangJsLoad.src = 'msg/' + Ardublockly.LANG + '.js';
-  head.appendChild(appLangJsLoad);
-  var blocklyLangJsLoad = document.createElement('script');
-  blocklyLangJsLoad.src = '../blockly/msg/js/' + Ardublockly.LANG + '.js';
-  head.appendChild(blocklyLangJsLoad);
-};
-
-/** Saves the blocks and reloads with a different language. */
-Ardublockly.changeLanguage = function() {
-  // Store the blocks for the duration of the reload only
-  Ardublockly.saveSessionStorageBlocks();
-
-  var languageMenu = document.getElementById('language');
-  var newLang = encodeURIComponent(
-      languageMenu.options[languageMenu.selectedIndex].value);
-  var search = window.location.search;
-  if (search.length <= 1) {
-    search = '?lang=' + newLang;
-  } else if (search.match(/[?&]lang=[^&]*/)) {
-    search = search.replace(/([?&]lang=)[^&]*/, '$1' + newLang);
-  } else {
-    search = search.replace(/\?/, '?lang=' + newLang + '&');
-  }
-
-  window.location = window.location.protocol + '//' +
-      window.location.host + window.location.pathname + search;
-};
-
 /** Sets the Ardublockly server IDE setting to upload and sends the code. */
 Ardublockly.ideSendUpload = function() {
   // Check if this is the currently selected option before edit sever setting
@@ -219,7 +108,7 @@ Ardublockly.ideSendUpload = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'upload');
   }
-  Ardublockly.shortMessage('Uploading sketch into Arduino...');
+  Ardublockly.shortMessage(Ardublockly.getLocalStr('uploadingSketch'));
   Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
@@ -231,7 +120,7 @@ Ardublockly.ideSendVerify = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'verify');
   }
-  Ardublockly.shortMessage('Verifying sketch...');
+  Ardublockly.shortMessage(Ardublockly.getLocalStr('verifyingSketch'));
   Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
@@ -243,7 +132,7 @@ Ardublockly.ideSendOpen = function() {
     Ardublockly.showExtraIdeButtons(false);
     Ardublockly.setIdeSettings(null, 'open');
   }
-  Ardublockly.shortMessage('Opening sketch in the Arduino IDE...');
+  Ardublockly.shortMessage(Ardublockly.getLocalStr('openingSketch'));
   Ardublockly.resetIdeOutputContent();
   Ardublockly.sendCode();
 };
@@ -259,10 +148,12 @@ Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
 
 /** Initialises the IDE buttons with the default option from the server. */
 Ardublockly.initialiseIdeButtons = function() {
-  document.getElementById('button_ide_left').title = 'Open Sketch in IDE';
-  document.getElementById('button_ide_middle').title = 'Verify the Sketch';
+  document.getElementById('button_ide_left').title =
+      Ardublockly.getLocalStr('openSketch');
+  document.getElementById('button_ide_middle').title =
+      Ardublockly.getLocalStr('verifySketch');
   document.getElementById('button_ide_large').title =
-      'Upload Sketch to the Arduino';
+      Ardublockly.getLocalStr('uploadSketch');
   ArdublocklyServer.requestIdeOptions(function(jsonResponse) {
     if (jsonResponse != null) {
       var parsedJson = JSON.parse(jsonResponse);
@@ -284,9 +175,9 @@ Ardublockly.changeIdeButtons = function(value) {
   var largeButton = document.getElementById('button_ide_large');
   var middleButton = document.getElementById('button_ide_middle');
   var leftButton = document.getElementById('button_ide_left');
-  var openTitle = 'Open Sketch in IDE';
-  var verifyTitle = 'Verify the Sketch';
-  var uploadTitle = 'Upload Sketch to the Arduino';
+  var openTitle = Ardublockly.getLocalStr('openSketch');
+  var verifyTitle = Ardublockly.getLocalStr('verifySketch');
+  var uploadTitle = Ardublockly.getLocalStr('uploadSketch');
   if (value === 'upload') {
     Ardublockly.changeIdeButtonsDesign(value);
     Ardublockly.ideButtonLeftAction = Ardublockly.ideSendOpen;
@@ -327,9 +218,8 @@ Ardublockly.loadServerXmlFile = function(xmlFile) {
         Ardublockly.renderContent();
       } else {
         Ardublockly.alertMessage(
-            'Invalid XML',
-            'The XML file was not successfully parsed into blocks.' +
-            'Please review the XML code and try again.',
+            Ardublockly.getLocalStr('invalidXmlTitle'),
+            Ardublockly.getLocalStr('invalidXmlBody'),
             false);
       }
     };
@@ -343,9 +233,8 @@ Ardublockly.loadServerXmlFile = function(xmlFile) {
     loadXmlfileAccepted();
   } else {
     Ardublockly.alertMessage(
-        'Load new blocks?',
-        'Loading a new XML file will replace the current blocks from the ' +
-        'workspace.\nAre you sure you want to proceed?',
+        Ardublockly.getLocalStr('loadNewBlocksTitle'),
+        Ardublockly.getLocalStr('loadNewBlocksBody'),
         true, loadXmlfileAccepted);
   }
 };
@@ -372,9 +261,8 @@ Ardublockly.loadUserXmlFile = function() {
         Ardublockly.sketchNameSet(filename);
       } else {
         Ardublockly.alertMessage(
-            'Invalid XML',
-            'The XML file was not successfully parsed into blocks.' +
-            'Please review the XML code and try again.',
+            Ardublockly.getLocalStr('invalidXmlTitle'),
+            Ardublockly.getLocalStr('invalidXmlBody'),
             false);
       }
     };
@@ -450,6 +338,7 @@ Ardublockly.openSettings = function() {
 /**
  * Sets the compiler location form data retrieve from an updated element.
  * @param {element} jsonResponse JSON data coming back from the server.
+ * @return {undefined} Might exit early if response is null.
  */
 Ardublockly.setCompilerLocationHtml = function(jsonResponse) {
   if (jsonResponse === null) return Ardublockly.openNotConnectedModal();
@@ -463,6 +352,7 @@ Ardublockly.setCompilerLocationHtml = function(jsonResponse) {
 /**
  * Sets the sketch location form data retrieve from an updated element.
  * @param {element} jsonResponse JSON data coming back from the server.
+ * @return {undefined} Might exit early if response is null.
  */
 Ardublockly.setSketchLocationHtml = function(jsonResponse) {
   if (jsonResponse === null) return Ardublockly.openNotConnectedModal();
@@ -477,6 +367,7 @@ Ardublockly.setSketchLocationHtml = function(jsonResponse) {
  * Replaces the Arduino Boards form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
  * @param {element} jsonResponse JSON data coming back from the server.
+ * @return {undefined} Might exit early if response is null.
  */
 Ardublockly.setArduinoBoardsHtml = function(jsonResponse) {
   if (jsonResponse === null) return Ardublockly.openNotConnectedModal();
@@ -511,6 +402,7 @@ Ardublockly.setBoard = function() {
  * Replaces the Serial Port form data with a new HTMl element.
  * Ensures there is a change listener to call 'setSerialPort' function
  * @param {element} jsonResponse JSON data coming back from the server.
+ * @return {undefined} Might exit early if response is null.
  */
 Ardublockly.setSerialPortsHtml = function(jsonResponse) {
   if (jsonResponse === null) return Ardublockly.openNotConnectedModal();
@@ -541,6 +433,7 @@ Ardublockly.setSerial = function() {
  * Replaces IDE options form data with a new HTMl element.
  * Ensures there is a change listener to call 'setIdeSettings' function
  * @param {element} jsonResponse JSON data coming back from the server.
+ * @return {undefined} Might exit early if response is null.
  */
 Ardublockly.setIdeHtml = function(jsonResponse) {
   if (jsonResponse === null) return Ardublockly.openNotConnectedModal();
@@ -588,6 +481,7 @@ Ardublockly.sendCode = function() {
   /**
    * Receives the IDE data back to be displayed and stops spinner.
    * @param {element} jsonResponse JSON data coming back from the server.
+   * @return {undefined} Might exit early if response is null.
    */
   var sendCodeReturn = function(jsonResponse) {
     Ardublockly.largeIdeButtonSpinner(false);
@@ -608,9 +502,8 @@ Ardublockly.XmlTextareaToBlocks = function() {
     Ardublockly.renderContent();
   } else {
     Ardublockly.alertMessage(
-        'Invalid XML',
-        'The XML inputted into the text area was not successfully parsed into' +
-        'blocks. Please review the XML code and try again.',
+        Ardublockly.getLocalStr('invalidXmlTitle'),
+        Ardublockly.getLocalStr('invalidXmlBody'),
         false);
   }
 };
@@ -637,8 +530,8 @@ Ardublockly.renderContent = function() {
     var resultStringArray = [];
     for (var i = 0; i < diff.length; i++) {
       if (!diff[i].removed) {
-        var escapedCode = diff[i].value.replace(/</g, "&lt;")
-                                       .replace(/>/g, "&gt;");
+        var escapedCode = diff[i].value.replace(/</g, '&lt;')
+                                       .replace(/>/g, '&gt;');
         if (diff[i].added) {
           resultStringArray.push(
               '<span class="code_highlight_new">' + escapedCode + '</span>');
@@ -692,6 +585,7 @@ Ardublockly.importExtraBlocks = function() {
    * Parses the JSON data to find the block and languages js files.
    * @param {jsonDataObj} jsonDataObj JSON in JavaScript object format, null
    *     indicates an error occurred.
+   * @return {undefined} Might exit early if response is null.
    */
   var jsonDataCb = function(jsonDataObj) {
     if (jsonDataObj === null) return Ardublockly.openNotConnectedModal();
@@ -713,7 +607,7 @@ Ardublockly.importExtraBlocks = function() {
         head.appendChild(blocksGeneratorJsLoad);
 
         // Check if the blocks add additional Ardublockly functionality
-        var extensions = jsonDataObj.categories[catDir].extensions
+        var extensions = jsonDataObj.categories[catDir].extensions;
         if (extensions) {
           for (var i = 0; i < extensions.length; i++) {
             var blockExtensionJsLoad = document.createElement('script');
@@ -757,6 +651,7 @@ Ardublockly.openExtraCategoriesSelect = function() {
    * Parses the JSON data from the server into a list of additional categories.
    * @param {jsonDataObj} jsonDataObj JSON in JavaScript object format, null
    *     indicates an error occurred.
+   * @return {undefined} Might exit early if response is null.
    */
   var jsonDataCb = function(jsonDataObj) {
     if (jsonDataObj === null) return Ardublockly.openNotConnectedModal();

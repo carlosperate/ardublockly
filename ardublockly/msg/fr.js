@@ -1,6 +1,7 @@
-var MSG = {
-  language: 'Français',
-  title: "Code",
+var Ardublockly = Ardublockly || {};
+Ardublockly.LOCALISED_TEXT = {
+  language: "Français",
+  title: "Ardublockly",
   blocks: "Blocs",
   linkTooltip: "Sauve et lie aux blocs.",
   runTooltip: "Execute le programme défini par les blocs dans l'espace de travail.",
@@ -14,7 +15,7 @@ var MSG = {
   catText: "Texte",
   catVariables: "Variables",
   catFunctions: "Fonctions",
-  catInputOutput: "Entr&eacute;e/Sortie",
+  catInputOutput: "Entree/Sortie",
   catTime: "Temps",
   catMusic: "Sons",
   catMotors: "Moteurs",
