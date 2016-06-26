@@ -107,7 +107,7 @@ Ardublockly.updateLanguageText = function() {
   for (var textId in Ardublockly.LOCALISED_TEXT) {
     var textStrings = document.getElementsByClassName('translatable_' + textId);
     for (var i = 0; i < textStrings.length; i++) {
-      textStrings[i].innerHTML = Ardublockly.LOCALISED_TEXT[textId];
+      textStrings[i].innerHTML = Ardublockly.getLocalStr(textId);
     }
   }
 };
