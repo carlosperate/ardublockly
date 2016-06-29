@@ -20,6 +20,19 @@ goog.require('Blockly.Types');
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.io.HUE = 250;
 
+function dynamicDigPins() {
+  var options = [];
+  var pins = Blockly.Arduino.Boards.selected.digitalPins;
+  // now we add variables of type DIGPIN
+  // how to obtain the workspace here ?? Hack it for now...
+  var workspace = Blockly.getMainWorkspace();
+  var typedvar = Blockly.StaticTypingArduino.typedVariables(workspace, Blockly.Types.DIGPIN);
+  for (var ind in typedvar) {
+    options.push([typedvar[ind], typedvar[ind]]);
+  }
+  return options.concat(pins);
+}
+
 Blockly.Blocks['io_digitalwrite'] = {
   /**
    * Block for creating a 'set pin' to a state.
@@ -30,8 +43,7 @@ Blockly.Blocks['io_digitalwrite'] = {
     this.setColour(Blockly.Blocks.io.HUE);
     this.appendValueInput('STATE')
         .appendField(Blockly.Msg.ARD_DIGITALWRITE)
-        .appendField(new Blockly.FieldDropdown(
-            Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
+        .appendField(new Blockly.FieldDropdown(dynamicDigPins), 'PIN')
         .appendField(Blockly.Msg.ARD_WRITE_TO)
         .setCheck(Blockly.Types.BOOLEAN.checkList);
     this.setInputsInline(false);
@@ -59,8 +71,7 @@ Blockly.Blocks['io_digitalread'] = {
     this.setColour(Blockly.Blocks.io.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_DIGITALREAD)
-        .appendField(new Blockly.FieldDropdown(
-            Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
+        .appendField(new Blockly.FieldDropdown(dynamicDigPins), 'PIN');
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setTooltip(Blockly.Msg.ARD_DIGITALREAD_TIP);
   },
@@ -239,5 +250,77 @@ Blockly.Blocks['io_pulsetimeout'] = {
         /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
     return Blockly.Types.NUMBER;
+  }
+};
+
+Blockly.Blocks['io_pin_dig'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PIN_DIG)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN");
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PIN_DIG_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Board');
+  },
+  /** @return {!string} The type of return value for the block, a digital pin. */
+  getBlockType: function() {
+    return Blockly.Types.DIGPIN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['io_pin_an'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PIN_AN)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN");
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PIN_AN_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Board');
+  },
+  /** @return {!string} The type of return value for the block, an analog pin */
+  getBlockType: function() {
+    return Blockly.Types.ANAPIN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'analogPins');
+  }
+};
+
+Blockly.Blocks['io_pin_pwm'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PIN_PWM)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.pwmPins), "PIN");
+    this.setOutput(true);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PIN_PWM_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Board');
+  },
+  /** @return {!string} The type of return value for the block, a PWM pin. */
+  getBlockType: function() {
+    return Blockly.Types.PWMPIN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'pwmPins');
   }
 };

@@ -11,6 +11,7 @@
 'use strict';
 
 goog.provide('Blockly.Arduino');
+goog.provide('Blockly.StaticTypingArduino');
 
 goog.require('Blockly.Generator');
 goog.require('Blockly.StaticTyping');
@@ -21,7 +22,55 @@ goog.require('Blockly.StaticTyping');
  * @type {!Blockly.Generator}
  */
 Blockly.Arduino = new Blockly.Generator('Arduino');
-Blockly.Arduino.StaticTyping = new Blockly.StaticTyping();
+Blockly.StaticTypingArduino = new Blockly.StaticTyping();
+
+/**
+ * Find all user-created variables of a given type.
+ * @param {!Blockly.Block|!Blockly.Workspace} root Root block or workspace.
+ * @param {!Blockly.Type} type of the required variables.
+ * @return {!Array.<string>} Array of variable names.
+ */
+Blockly.StaticTypingArduino.typedVariables = function(root, type) {
+  var blocks;
+  
+  if (root.getDescendants) {
+    // Root is Block.
+    blocks = root.getDescendants();
+  } else if (root.getAllBlocks) {
+    // Root is Workspace.
+    blocks = root.getAllBlocks();
+  } else {
+    throw 'Not Block or Workspace: ' + root;
+  }
+  
+  // Iterate through to capture all blocks types and set the function arguments
+  if (root) {
+    var varsWithTypes = Blockly.StaticTypingArduino.collectVarsWithTypes(root);
+  } else {
+    var variableList = [];
+  }
+  
+  var variableHash = Object.create(null);
+  // Iterate through every block and add each variable to the hash.
+  for (var x = 0; x < blocks.length; x++) {
+    if (blocks[x].getVars) {
+      var blockVariables = blocks[x].getVars();
+      for (var y = 0; y < blockVariables.length; y++) {
+        var varName = blockVariables[y];
+        // Variable name may be null if the block is only half-built.
+        if (varName && (varsWithTypes[varName] === type)) {
+          variableHash[varName.toLowerCase()] = varName;
+        }
+      }
+    }
+  }
+  // Flatten the hash into a list.
+  var variableList = [];
+  for (var name in variableHash) {
+    variableList.push(variableHash[name]);
+  }
+  return variableList;
+};
 
 /**
  * List of illegal variable names.
@@ -115,8 +164,8 @@ Blockly.Arduino.init = function(workspace) {
   }
 
   // Iterate through to capture all blocks types and set the function arguments
-  var varsWithTypes = Blockly.Arduino.StaticTyping.collectVarsWithTypes(workspace);
-  Blockly.Arduino.StaticTyping.setProcedureArgs(workspace, varsWithTypes);
+  var varsWithTypes = Blockly.StaticTypingArduino.collectVarsWithTypes(workspace);
+  Blockly.StaticTypingArduino.setProcedureArgs(workspace, varsWithTypes);
 
   // Set variable declarations with their Arduino type in the defines dictionary
   for (var varName in varsWithTypes) {
@@ -390,6 +439,15 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
     case Blockly.Types.CHILD_BLOCK_MISSING.typeId:
       // If no block connected default to int, change for easier debugging
       //return 'ChildBlockMissing';
+      return 'int';
+    case Blockly.Types.DIGPIN.typeId:
+      // a pin type
+      return 'int';
+    case Blockly.Types.ANAPIN.typeId:
+      // a pin type
+      return 'int';
+    case Blockly.Types.PWMPIN.typeId:
+      // a pin type
       return 'int';
     default:
       return 'Invalid Blockly Type';
