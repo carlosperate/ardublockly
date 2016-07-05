@@ -502,3 +502,10 @@ Blockly.Msg.TEXT_APPEND_VARIABLE = Blockly.Msg.VARIABLES_DEFAULT_NAME;
 Blockly.Msg.TEXT_CREATE_JOIN_ITEM_TITLE_ITEM = Blockly.Msg.VARIABLES_DEFAULT_NAME;
 Blockly.Msg.LISTS_INDEX_OF_INPUT_IN_LIST = Blockly.Msg.LISTS_INLIST;
 Blockly.Msg.PROCEDURES_DEFRETURN_COMMENT = Blockly.Msg.PROCEDURES_DEFNORETURN_COMMENT;
+
+Blockly.Msg.NEW_INSTANCE = 'New instance...';
+Blockly.Msg.RENAME_INSTANCE = 'Rename instance...';
+Blockly.Msg.NEW_INSTANCE_TITLE = 'New instance name:';
+Blockly.Msg.RENAME_INSTANCE_TITLE = 'Rename all "%1" instances to:';
+Blockly.Msg.ARD_STEPPER_DEFAULT_NAME = 'MyStepper';
+Blockly.Msg.ARD_COMPONENT_WARN1 = 'A %1 configuration block with the same %2 name must be added to use this block!';

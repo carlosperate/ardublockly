@@ -687,6 +687,50 @@ Blockly.Block.prototype.renameVar = function(oldName, newName) {
 };
 
 /**
+ * Return all instances referenced by this block.
+ * @param {string=} opt_instanceType Optional type of the instances to collect,
+ *     if not defined it collects all instances.
+ * @return {!Array.<string>} List of instance names.
+ */
+Blockly.Block.prototype.getInstances = function(opt_instanceType) {
+  var vars = [];
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    for (var j = 0, field; field = input.fieldRow[j]; j++) {
+      if (field instanceof Blockly.FieldInstance) {
+        var validInstance = opt_instanceType ?
+            field.getInstanceTypeValue(opt_instanceType) :
+            field.getValue();
+        if (validInstance) {
+          vars.push(validInstance);
+        }
+      }
+    }
+  }
+  return vars;
+};
+
+/**
+ * Notification that a instance is renaming.
+ * If the name and type matches one of this block's instances, rename it.
+ * @param {string} oldName Previous name of the instance.
+ * @param {string} newName Renamed instance.
+ * @param {string} instanceType Type of the instances to rename.
+ */
+Blockly.Block.prototype.renameInstance = function(
+    oldName, newName, instanceType) {
+  for (var i = 0, input; input = this.inputList[i]; i++) {
+    for (var j = 0, field; field = input.fieldRow[j]; j++) {
+      if (field instanceof Blockly.FieldInstance) {
+        var validInstance = field.getInstanceTypeValue(instanceType);
+        if (validInstance && Blockly.Names.equals(oldName, validInstance)) {
+          field.setValue(newName);
+        }
+      }
+    }
+  }
+};
+
+/**
  * Returns the language-neutral value from the field of a block.
  * @param {string} name The name of the field.
  * @return {?string} Value from the field or null if field does not exist.
