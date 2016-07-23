@@ -169,19 +169,68 @@ Blockly.Instances.generateUniqueName = function(workspace) {
  * Return a version of the instance name that has not yet been used.
  * It does so by adding a number at the end of the name.
  * @param {string} instanceName Instance name to make unique.
- * @param {!Blockly.Workspace} workspace The workspace to be unique in.
+ * @param {!Blockly.Workspace|Blockly.Block} workspace The workspace to be unique in.
  * @return {string} Unique instance name based on name input.
  */
 Blockly.Instances.convertToUniqueName = function(instanceName, workspace) {
   var combinedList = Blockly.Variables.allVariables(workspace).concat(
       Blockly.Instances.allInstances(workspace));
+  return Blockly.Instances.appendToName_(instanceName, combinedList);
+};
 
+/** */
+Blockly.Instances.convertToUniqueNameBlock = function(instanceName, block) {
+  var blocks;
+  if (block.workspace) {
+    blocks = block.workspace.getAllBlocks();
+  } else {
+    throw 'Not a valid Workspace: ' + workspace;
+  }
+
+  var instanceHash = Object.create(null);
+  // Iterate through every block and add each instance to the hash.
+  for (var i = 0; i < blocks.length; i++) {
+    // Do not add to the list this block instance
+    if (blocks[i] !== block) {
+      var blockInstances = blocks[i].getInstances();
+      for (var j = 0; j < blockInstances.length; j++) {
+        var blockInstanceName = blockInstances[j];
+        // Instance name may be null if the block is only half-built.
+        if (blockInstanceName) {
+          instanceHash[blockInstanceName.toLowerCase()] = blockInstanceName;
+        }
+      }
+    }
+  }
+  // Flatten the hash into a list.
+  var instanceList = [];
+  for (var name in instanceHash) {
+    instanceList.push(instanceHash[name]);
+  }
+
+  var combinedList = Blockly.Variables.allVariables(block.workspace).concat(
+      instanceList);
+  return Blockly.Instances.appendToName_(instanceName, combinedList);
+};
+
+/** */
+Blockly.Instances.appendToName_ = function(instanceName, nameList) {
   if (!instanceName) {
     return Blockly.Instances.generateUniqueName(workspace);
   } else {
     var newName = instanceName;
     var nameSuffix = 2;
-    while (combinedList.indexOf(newName) !== -1) {
+
+    if (instanceName.match(/_\d+$/)) {
+      // instanceName ends with and underscore and a number, so increase count
+      var instanceNameSuffix = instanceName.match(/\d+$/)[0];
+      instanceName = instanceName.slice(
+          0, (instanceNameSuffix.length * -1) - 1);
+      nameSuffix = parseInt(instanceNameSuffix, 10) + 1;
+      newName = instanceName + '_' + nameSuffix;
+    }
+
+    while (nameList.indexOf(newName) !== -1) {
       newName = instanceName + '_' + nameSuffix++;
     }
     return newName;
