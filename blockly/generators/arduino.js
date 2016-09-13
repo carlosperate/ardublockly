@@ -122,7 +122,7 @@ Blockly.Arduino.init = function(workspace) {
   for (var varName in varsWithTypes) {
     Blockly.Arduino.addVariable(varName,
         Blockly.Arduino.getArduinoType_(varsWithTypes[varName]) +' ' +
-        varName + ';');
+        Blockly.Arduino.variableDB_.getName(varName, Blockly.Variables.NAME_TYPE) + ';');
   }
 };
 
