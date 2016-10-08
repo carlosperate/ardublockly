@@ -8,4 +8,4 @@
 #
 # Explicit imports will be used, only version included here.
 #
-__version__ = '0.1a'
+__version__ = '0.1.2'
