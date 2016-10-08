@@ -480,5 +480,9 @@
 	"ARD_TONE_TIP": "Sets tone on pin to specified frequency within range 31 - 65535",
 	"ARD_TONE_WARNING": "Frequency must be in range 31 - 65535",
 	"ARD_NOTONE": "Turn off tone on pin #",
-	"ARD_NOTONE_TIP": "Turns the tone off on the selected pin"
+	"ARD_NOTONE_TIP": "Turns the tone off on the selected pin",
+	"NEW_INSTANCE": "New instance...",
+	"RENAME_INSTANCE": "Rename instance...",
+	"NEW_INSTANCE_TITLE": "New instance name:",
+	"RENAME_INSTANCE_TITLE": "Rename all '%1' instances to:"
 }

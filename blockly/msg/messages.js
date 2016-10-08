@@ -1121,7 +1121,7 @@ Blockly.Msg.PROCEDURES_IFRETURN_HELPURL = 'http://c2.com/cgi/wiki?GuardClause';
 /// warning - This appears if the user tries to use this block outside of a function definition.
 Blockly.Msg.PROCEDURES_IFRETURN_WARNING = 'Warning: This block may be used only within a function definition.';
 
-// Ardublockly Types
+/// Ardublockly Types
 Blockly.Msg.ARD_TYPE_CHAR = 'Character';
 Blockly.Msg.ARD_TYPE_TEXT = 'Text';
 Blockly.Msg.ARD_TYPE_BOOL = 'Boolean';
@@ -1134,7 +1134,7 @@ Blockly.Msg.ARD_TYPE_NULL = 'Null';
 Blockly.Msg.ARD_TYPE_UNDEF = 'Undefined';
 Blockly.Msg.ARD_TYPE_CHILDBLOCKMISSING = 'ChildBlockMissing';
 
-// Arduino Blocks
+/// Arduino Blocks
 Blockly.Msg.ARD_HIGH = 'HIGH';
 Blockly.Msg.ARD_LOW = 'LOW';
 Blockly.Msg.ARD_ANALOGREAD = 'read analog pin#';
@@ -1235,7 +1235,7 @@ Blockly.Msg.ARD_TONE_WARNING = 'Frequency must be in range 31 - 65535';
 Blockly.Msg.ARD_NOTONE = 'Turn off tone on pin #';
 Blockly.Msg.ARD_NOTONE_TIP = 'Turns the tone off on the selected pin';
 
-// Ardublockly instances
+/// Ardublockly instances
 Blockly.Msg.NEW_INSTANCE = 'New instance...';
 Blockly.Msg.RENAME_INSTANCE = 'Rename instance...';
 Blockly.Msg.NEW_INSTANCE_TITLE = 'New instance name:';
