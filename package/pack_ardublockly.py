@@ -291,16 +291,14 @@ def pack_ardublockly(tag):
     print(script_tag + "Removing unnecessary Blockly files:")
     remove_unnecessary_blockly()
 
-    print(script_tag + "Removing Python server .pyc files:")
-    remove_file_type_from(
-        file_extension="pyc",
-        scan_path=os.path.join(copied_project_dir, "ardublocklyserver"))
-
     print(script_tag + "Removing any already zipped Ardublockly version:")
     remove_directory(os.path.join(copied_project_dir, "releases"))
 
     print(script_tag + "Removing Electron session app data files:")
     remove_directory(os.path.join(copied_project_dir, "arduexec", "appdata"))
+
+    print(script_tag + "Removing Python .pyc files:")
+    remove_file_type_from(file_extension="pyc", scan_path=copied_project_dir)
 
     print(script_tag + "Creating zip file of the new Ardublockly folder:")
     zip_ardublockly_copy(tag)
