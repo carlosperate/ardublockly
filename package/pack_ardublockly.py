@@ -3,7 +3,7 @@
 #
 # Creates a zip file of the self executable Ardublockly application.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2016 carlosperate https://github.com/carlosperate/
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# IMPORTANT: This script is designed to be located one directory level under the
-#            project root folder.
+# IMPORTANT: This script is designed to be located one directory level under
+#            the project root folder.
 #
-# This script file will create a copy of the project folder in its parent folder
-# So if project folder is located in ~/projects/ardublockly it will create a
-# copy in ~/projects/ardublockly_<timestamp>_<tag>.
+# This script file will create a copy of the project folder in its parent dir.
+# So if the project folder is located in ~/projects/ardublockly it will create
+# a copy in ~/projects/ardublockly_<timestamp>_<tag>.
 # It will then delete unnecessary files for a working version of the self
 # executable application and zip the contents of the folder.
 #
@@ -64,7 +64,7 @@ def set_tag(tag):
     global copy_dir_name
     global copied_project_dir
     copy_dir_name = "ardublockly_%s" % tag
-    # On OSX everything goes inside a folder structure Ardublockly.app/Contents/
+    # In OSX everything goes into the folder path Ardublockly.app/Contents/
     if platform.system() == "Darwin":
         copy_dir_name = os.path.join(
             copy_dir_name, 'Ardublockly.app', 'Contents')
@@ -152,8 +152,8 @@ def tag_from_ci_env_vars(ci_name, pull_request_var, branch_var, commit_var):
                   (pull_request_var, pull_request, ci_name))
 
     if branch and commit:
-        print(script_tab + "\tBranch and commit valid '%s' variables found: %s %s"
-              % (ci_name, branch, commit))
+        print(script_tab + "\tBranch and commit valid," +
+              "'%s' variables found: %s %s" % (ci_name, branch, commit))
         # We only return first 10 digits from the commit ID (normal length 40)
         commit = "%s" % commit
         return "%s_%s" % (branch, commit[:5])
@@ -200,9 +200,9 @@ def copy_ardublockly_folder():
 
 def remove_unnecessary_blockly():
     """ Removes unnecessary files from the blockly library. """
-    # The demos folder contains blockly applications
+    # The demos folder contains Blockly applications
     remove_directory(os.path.join(copied_project_dir, "blockly", "demos"))
-    # Only for setting blockly on Google's service
+    # Only for setting Blockly on Google's service
     remove_directory(os.path.join(copied_project_dir, "blockly", "appengine"))
     # Unit tests
     remove_directory(os.path.join(copied_project_dir, "blockly", "tests"))
@@ -214,12 +214,24 @@ def remove_file_type_from(file_extension, scan_path):
     :param file_extension: File extension of the files to remove
     :param scan_path: Directory to scan for file removal.
     """
-    source = os.listdir(scan_path)
-    for file_ in source:
-        if file_.endswith("." + file_extension):
-            file_path = os.path.join(scan_path, file_)
-            print(script_tab + "Deleting file: %s" % file_path)
-            os.remove(file_path)
+    for root, dirs, files in os.walk(scan_path, topdown=False):
+        for file_ in files:
+            if file_.endswith("." + file_extension):
+                file_path = os.path.join(root, file_)
+                print(script_tab + "Deleting file: %s" % file_path)
+                os.remove(file_path)
+
+
+def remove_pycache_dirs(scan_path):
+    """
+    Removes all folders named "__pycache__" from the given directory tree.
+    :param scan_path: Directory to scan for __pycache__ removal.
+    :return:
+    """
+    for root, dirs, files in os.walk(scan_path, topdown=False):
+        for name in dirs:
+            if name == "__pycache__":
+                remove_directory(os.path.join(root, name))
 
 
 def zip_ardublockly_copy(name_append):
@@ -264,7 +276,8 @@ def zip_ardublockly_copy(name_append):
         if std_err_op:
             print(script_tab + "Error using zip command:\n%s" % std_err_op)
     else:
-        zip_file = zipfile.ZipFile(zip_file_location, "w", zipfile.ZIP_DEFLATED)
+        zip_file = zipfile.ZipFile(zip_file_location, "w",
+                                   zipfile.ZIP_DEFLATED)
         for root_dir, sub_dirs, files in os.walk(copy_dir_name):
             zip_file.write(root_dir)
             for filename in files:
@@ -274,11 +287,11 @@ def zip_ardublockly_copy(name_append):
 
 def pack_ardublockly(tag):
     """
-    Copies the Ardublockly folder, removes unnecessary files and creates a zipped
-    version of this copied folder into the releases folder of the project
-    directory.
-    :tag: String tag to be attached to the zip file, used to distinguish
-          versions for archiving.
+    Copies the Ardublockly folder, removes unnecessary files and creates a
+    zipped version of this copied folder into the releases folder of the
+    project directory.
+    :param tag: String tag to be attached to the zip file, used to distinguish
+                versions for archiving.
     """
     # Set the copied folder name to the stamp
     set_tag(tag)
@@ -286,7 +299,7 @@ def pack_ardublockly(tag):
     print(script_tag + "Copying the project root folder:")
     success = copy_ardublockly_folder()
     if not success:
-        raise SystemExit(script_tab + "Exiting due to project root copy error.")
+        raise SystemExit(script_tab + "Exit: Project root copy error.")
 
     print(script_tag + "Removing unnecessary Blockly files:")
     remove_unnecessary_blockly()
@@ -299,6 +312,9 @@ def pack_ardublockly(tag):
 
     print(script_tag + "Removing Python .pyc files:")
     remove_file_type_from(file_extension="pyc", scan_path=copied_project_dir)
+
+    print(script_tag + "Removing Python 3 pycache directories:")
+    remove_pycache_dirs(scan_path=copied_project_dir)
 
     print(script_tag + "Creating zip file of the new Ardublockly folder:")
     zip_ardublockly_copy(tag)
