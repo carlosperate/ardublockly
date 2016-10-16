@@ -1,27 +1,30 @@
-# We are using the iOS build system to create Mac OS X python builds
-language: objective-c
+os: osx
+osx_image: beta-xcode6.1
+language: node_js
+node_js: '6'
 
 before_install:
   # OS extra info
+  - sw_vers
   - uname -a
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
-  - pip freeze
 
   # Install Python 2 and 3 with pip and check versions
   - brew update
-  - brew install python3
-  - brew link --overwrite python3
   - brew install python
-  - brew link --overwrite python
+  - brew unlink python && brew link python
+  - brew install python3
+  - brew unlink python3 && brew link python3
+  - brew install libcouchbase
   - PATH=/usr/local/bin:$PATH
   - echo $PATH
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
+  - pip --version
   - python3 --version
   - python3 -c "import struct; print(struct.calcsize('P') * 8)"
-
-  - brew install libcouchbase
+  - pip3 --version
 
   # Install Python packages (built with Python 3, tests for 2 and 3)
   - pip install mock
@@ -31,10 +34,11 @@ before_install:
   - pip freeze
   - pip3 freeze
 
-  # Install node.js
+  # Travis make takes > 10 minutes, so need to increase wait
   - brew unlink node
-  - brew install node
+  - travis_wait brew install node
   - node --version
+  - node -p "process.arch"
   - npm --version
 
 # Build and pack Ardublockly
