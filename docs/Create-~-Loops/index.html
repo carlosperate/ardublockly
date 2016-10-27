@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="carlosperate">
+  
+  <title>Loops - Ardublockly Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Loops";
+    var mkdocs_page_input_path = "Create-~-Loops.md";
+    var mkdocs_page_url = "/Create-~-Loops/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../Home/" class="icon icon-home"> Ardublockly Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Home/">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Quick-Start/">Quick Start</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>User Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing-Ardublockly/">Installing Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Configure-Ardublockly/">Configure Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Arduino-Compiler-Settings/">Arduino Compiler Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>General Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Logic/">Logic</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-IfElse/">Logic If/Else</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Loops</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#blocks-for-loop-creation">Blocks for Loop Creation</a></li>
+                
+                    <li><a class="toctree-l4" href="#repeat">repeat</a></li>
+                
+                    <li><a class="toctree-l4" href="#count-with">count with</a></li>
+                
+                    <li><a class="toctree-l4" href="#for-each">for each</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#loop-termination-blocks">Loop Termination Blocks</a></li>
+                
+                    <li><a class="toctree-l4" href="#continue-with-next-iteration">continue with next iteration</a></li>
+                
+                    <li><a class="toctree-l4" href="#break-out-of-loop">break out of loop</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Math/">Math</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Text/">Text</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Variables/">Variables</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Functions/">Functions</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Developer Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Building-Ardublockly/">Building Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Running-Uncompressed-Ardublockly/">Running Uncompressed Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Git-Settings/">Git Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>Create Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks/">Overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Arduino-Board/">Add a New Board</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Language/">Add a New Language</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQs/">FAQs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>About</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../About/">About Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../License/">License</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Credits/">Credits</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../Home/">Ardublockly Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Home/">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>User Guide &raquo;</li>
+        
+      
+        
+          <li>General Blocks &raquo;</li>
+        
+      
+    
+    <li>Loops</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>The <strong>Control</strong> category holds blocks that control whether other blocks placed in their <strong>body</strong> are run.  (For example, in the below "repeat" block, the body contains the "print" block and its input.)  There are two types of control blocks: <a href="../IfElse">IfElse</a> (described on their own page) and these, which control how many times the body is run and, in some cases, the value of a variable used within the body.  These structures are called <strong>loops</strong> since the body is repeated (possibly) multiple times, reminiscent of a rope containing loops.  Each pass through the loop is called an <strong>iteration</strong>.  For more information, see https://en.wikipedia.org/wiki/Control_flow#Loops.</p>
+<h1 id="blocks-for-loop-creation">Blocks for Loop Creation</h1>
+<h2 id="repeat">repeat</h2>
+<p>The simplest "repeat" block runs the code in its body the specified number of times.  For example, the following block will print "Hello!" ten times.</p>
+<p><img alt="" src="../img/blocks/control-repeat.png" /></p>
+<h3 id="repeat-while">repeat while</h3>
+<p>Imagine a game in which a player rolls a die and adds up all of the values rolled as long as the total is less than 30.  The following blocks implement that game:</p>
+<ol>
+<li>A variable named <strong>total</strong> gets an initial value of 0.</li>
+<li>The loop begins with a check that <strong>total</strong> is less than 30.  If so, the blocks in the body are run.</li>
+<li>A random number in the range 1 to 6 is generated (simulating a die roll) and stored in a variable named <strong>roll</strong>.</li>
+<li>The number rolled is printed.</li>
+<li>The variable <strong>total</strong> gets increased by <strong>roll</strong>.</li>
+<li>The end of the loop having been reached, control goes back to step 2.</li>
+</ol>
+<p><img alt="" src="../img/blocks/control-repeat-while.png" /></p>
+<p>When the loop completes, any subsequent blocks (not shown) would be run.  In our example, the loop would end after some number of random numbers in the range 1 to 6 had been printed, and the variable <strong>total</strong> would hold the sum of these numbers, which would be guaranteed to be at least 30.</p>
+<p>For more information, see https://en.wikipedia.org/wiki/While_loop.</p>
+<h3 id="repeat-until">repeat until</h3>
+<p>"Repeat while" loops repeat their bodies <em>while</em> some condition is true.  Repeat-until loops are similar except that they repeat their bodies <em>until</em> some condition is true.  The following blocks are equivalent to the previous example because the loop contains until <strong>total</strong> is greater than or equal to 30.</p>
+<p><img alt="" src="../img/blocks/control-repeat-until.png" /></p>
+<h2 id="count-with">count with</h2>
+<p>The <strong>count with</strong> block (called a <a href="https://en.wikipedia.org/wiki/For_loop">for loop</a> in most programming languages) advances a variable from the first value to the second value by the increment amount (third value), running the body once for each value.  For example, the following program prints the numbers 1, 3, and 5.</p>
+<p><img alt="" src="../img/blocks/control-count-with.png" /></p>
+<p>As shown by the two following loops, each of which prints the numbers 5, 3, and 1, the first input may be larger than the second.  The behavior is the same whether the increment amount (third value) is positive or negative.</p>
+<p><img alt="" src="../img/blocks/control-for-each-down.png" /></p>
+<h2 id="for-each">for each</h2>
+<p>The <strong>for each</strong> block (see https://en.wikipedia.org/wiki/Foreach) is similar, except instead of giving the loop variable values in a numeric sequence, it uses the values from a list in turn.  The following program prints each element of the list: "alpha", "beta", "gamma".</p>
+<p><img alt="" src="../img/blocks/control-for-each.png" /></p>
+<h1 id="loop-termination-blocks">Loop Termination Blocks</h1>
+<p>Most loops run until the terminating condition (in the case of  <strong>repeat</strong> blocks) is met or until all values have been taken by the loop variable (in the case of <strong>count with</strong> and <strong>for each</strong> loops).  Two rarely needed but occasionally useful blocks provide additional means for controlling loop behavior.  Although the below examples are for <strong>for each</strong> loops, they can be used with any type of loop.</p>
+<h2 id="continue-with-next-iteration">continue with next iteration</h2>
+<p>The <strong>continue with next iteration</strong> (called <a href="https://en.wikipedia.org/wiki/Control_flow#Continuation_with_next_iteration">continue</a> in most programming languages) causes the remaining code in the body to be skipped and for the next iteration (pass) of the loop to begin.</p>
+<p>The following program prints "alpha" on the first iteration of the loop.  On the second iteration, the <strong>continue with next iteration</strong> block is run, skipping the printing of "beta".  On the final iteration, "gamma" is printed.</p>
+<p><img alt="" src="../img/blocks/control-for-each-continue.png" /></p>
+<h2 id="break-out-of-loop">break out of loop</h2>
+<p>The <strong>break out of loop</strong> block provides <a href="https://en.wikipedia.org/wiki/Control_flow#Early_exit_from_loops">an early exit from a loop</a>.  The following program prints "alpha" on the first iteration and "breaks out" of the loop on the second iteration when the loop variable is equal to "beta".  The third item in the list is never reached.</p>
+<p><img alt="" src="../img/blocks/control-for-each-break.png" /></p>
+<p><em>This document has been based on the Blockly documentation under the same title by Neil Fraser released under <a href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a></em></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Create-%7E-Math/" class="btn btn-neutral float-right" title="Math">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Create-%7E-IfElse/" class="btn btn-neutral" title="Logic If/Else"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Create-%7E-IfElse/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Create-%7E-Math/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

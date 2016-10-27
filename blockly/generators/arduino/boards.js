@@ -46,13 +46,46 @@ Blockly.Arduino.Boards.generateAnalogIo = function(pinStart, pinEnd) {
   return analogIo;
 };
 
+/**
+ * Creates a new Board Profile copying all the attributes from an existing
+ * profile, with the exception of the name, and optionally the description and
+ * compiler flag.
+ * @param {!string} name_ Mandatory new name of the new board profile.
+ * @param {string=} description Optional new description of the new profile.
+ * @param {string=} compilerFlag Optional new description of the new profile.
+ * @return {!Object} Duplicated object with the different argument data.
+ */
+Blockly.Arduino.Boards.duplicateBoardProfile =
+    function(originalBoard, name_, description, compilerFlag) {
+  return {
+    name: name_,
+    description: description || originalBoard.description,
+    compilerFlag: compilerFlag || originalBoard.compilerFlag,
+    analogPins: originalBoard.analogPins,
+    digitalPins: originalBoard.digitalPins,
+    pwmPins: originalBoard.pwmPins,
+    serial: originalBoard.serial,
+    serialPins: originalBoard.serialPins,
+    serialSpeed: originalBoard.serialSpeed,
+    spi: originalBoard.spi,
+    spiPins: originalBoard.spiPins,
+    spiClockDivide: originalBoard.spiClockDivide,
+    i2c: originalBoard.i2c,
+    i2cPins: originalBoard.i2cPins,
+    i2cSpeed: originalBoard.i2cSpeed,
+    builtinLed: originalBoard.builtinLed,
+    interrupt: originalBoard.interrupt
+  }
+};
+
 /** Object to contain all Arduino board profiles. */
 Blockly.Arduino.Boards.profiles = new Object();
 
 /** Arduino Uno board profile. */
 Blockly.Arduino.Boards.profiles.uno = {
   name: 'Arduino Uno',
-  description: 'Arduino Uno standard-compatible board',
+  description: 'Arduino Uno standard compatible board',
+  compilerFlag: 'arduino:avr:uno',
   analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 5),
   digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
                    Blockly.Arduino.Boards.generateAnalogIo(0, 5)),
@@ -81,15 +114,33 @@ Blockly.Arduino.Boards.profiles.uno = {
   interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
 };
 
-/**
- * Arduino Duemilanove board profile.
- * The individual duemilanove_168p and duemilanove_328p profiles are created
- * because even though it they have the same blockly implementation there is a
- * compilation distinction.
- */
+/** Arduino Nano board profile (ATmega328p). */
+Blockly.Arduino.Boards.profiles.nano = {
+  name: 'Arduino Nano',
+  description: 'Arduino Nano with ATmega328p board',
+  compilerFlag: 'arduino:avr:nano',
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 7),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
+                   Blockly.Arduino.Boards.generateAnalogIo(0, 7)),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: Blockly.Arduino.Boards.profiles.uno.builtinLed,
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt
+};
+
+/** Arduino Duemilanove boards profile (ATmega168p, ATmega328p). */
 Blockly.Arduino.Boards.profiles.duemilanove_168p = {
-  name: 'Arduino Duemilanove',
-  description: 'Arduino Duemilanove with ATmega168p or ATmega328p board',
+  name: 'Arduino Duemilanove 168p',
+  description: 'Arduino Duemilanove with ATmega168p compatible board',
+  compilerFlag: 'arduino:avr:diecimila:cpu=atmega168',
   analogPins: Blockly.Arduino.Boards.profiles.uno.analogPins,
   digitalPins: Blockly.Arduino.Boards.profiles.uno.digitalPins,
   pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
@@ -106,12 +157,17 @@ Blockly.Arduino.Boards.profiles.duemilanove_168p = {
   interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt
 };
 Blockly.Arduino.Boards.profiles.duemilanove_328p =
-    Blockly.Arduino.Boards.profiles.duemilanove_168p;
+    Blockly.Arduino.Boards.duplicateBoardProfile(
+        Blockly.Arduino.Boards.profiles.duemilanove_168p,
+        'Arduino Duemilanove 328p',
+        'Arduino Duemilanove with ATmega328p compatible board',
+        'arduino:avr:diecimila');
 
 /** Arduino Mega board profile. */
 Blockly.Arduino.Boards.profiles.mega = {
   name: 'Arduino Mega',
   description: 'Arduino Mega-compatible board',
+  compilerFlag: 'arduino:avr:mega',
   analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 15),
   //TODO: Check if the Mega can use analogue pins as digital, it would be
   //      logical but it is not clear on the arduino.cc website
@@ -141,7 +197,9 @@ Blockly.Arduino.Boards.profiles.mega = {
 
 /** Arduino Leonardo board profile. */
 Blockly.Arduino.Boards.profiles.leonardo = {
+  name: 'Arduino Leonardo',
   description: 'Arduino Leonardo-compatible board',
+  compilerFlag: 'arduino:avr:leonardo',
   analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 5).concat(
                   [['A6', '4'], ['A7', '6'], ['A8', '8'], ['A9', '9'],
                    ['A10', '10'], ['A11', '12']]),
@@ -163,8 +221,93 @@ Blockly.Arduino.Boards.profiles.leonardo = {
               ['interrupt3', '1'], ['interrupt4', '17']]
 };
 
-/** Arduino Yun board profile is identical to Leonardo. */
-Blockly.Arduino.Boards.profiles.yun = Blockly.Arduino.Boards.profiles.leonardo;
+/** Arduino Yun board processor and profile is identical to Leonardo. */
+Blockly.Arduino.Boards.profiles.yun =
+    Blockly.Arduino.Boards.duplicateBoardProfile(
+        Blockly.Arduino.Boards.profiles.leonardo,
+        'Arduino Yun',
+        'Arduino Yun compatible board');
+
+/** Atmel Xplained mini boards profile (atmega328p, atmega328pb, atmega168pb).*/
+Blockly.Arduino.Boards.profiles.atmel_atmega328p_xplained_mini = {
+  name: 'Atmel atmega328p Xplained mini',
+  description: 'Atmel Xplained mini board with atmega328p (Uno compatible)',
+  compilerFlag: 'atmel:avr:atmega328p_xplained_mini',
+  analogPins: Blockly.Arduino.Boards.profiles.uno.analogPins,
+  digitalPins: Blockly.Arduino.Boards.profiles.uno.digitalPins.concat(
+      [['20', '20']]),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_LED', '13']],
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt,
+  builtinButton: [['BUILTIN_BUTTON', '20']]
+};
+Blockly.Arduino.Boards.profiles.atmel_atmega328pb_xplained_mini =
+    Blockly.Arduino.Boards.duplicateBoardProfile(
+        Blockly.Arduino.Boards.profiles.atmel_atmega328p_xplained_mini,
+        'Atmel atmega328pb Xplained mini',
+        'Atmel Xplained mini board with atmega328pb (Arduino Uno compatible)',
+        'atmel:avr:atmega328pb_xplained_mini');
+Blockly.Arduino.Boards.profiles.atmel_atmega168pb_xplained_mini =
+    Blockly.Arduino.Boards.duplicateBoardProfile(
+        Blockly.Arduino.Boards.profiles.atmel_atmega328p_xplained_mini,
+        'Atmel atmega168pb Xplained mini',
+        'Atmel Xplained mini board with atmega168pb (Arduino Uno compatible)',
+        'atmel:avr:atmega168pb_xplained_mini');
+
+/** ESP8266 for the Adafruit Huzzah. */
+Blockly.Arduino.Boards.profiles.esp8266_huzzah = {
+  name: 'Adafruit Feather HUZZAH',
+  description: 'Adafruit HUZZAH ESP8266 compatible board',
+  compilerFlag: 'esp8266:esp8266:generic',
+  analogPins: [['A0', 'A0']],
+  digitalPins: [['0', '0'], ['2', '2'], ['4', '4'], ['5', '5'], ['12', '12'],
+                ['13', '13'], ['14', '14'], ['15', '15'], ['16', '16']],
+  pwmPins: [['2', '2']],
+  serial: [['serial', 'Serial']],
+  serialPins: { Serial: [['RX', 'RX'], ['TX', 'TX']] },
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serial,
+  spi: [['SPI', 'SPI']],
+  spiPins: { SPI: [['MOSI', '13'], ['MISO', '12'], ['SCK', '14']] },
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: [['I2C', 'Wire']],
+  i2cPins: { Wire: [['SDA', '4'], ['SCL', '5']] },
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_1', '0']],
+  interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
+};
+
+/** ESP8266 for the Wemos D1 R2. */
+Blockly.Arduino.Boards.profiles.esp8266_wemos_d1 = {
+  name: 'Wemos D1',
+  description: 'Wemos D1 R2 compatible board',
+  compilerFlag: 'esp8266:esp8266:generic',
+  analogPins: [['A0', 'A0']],
+  digitalPins: [['D0', 'D0'], ['D1', 'D1'], ['D2', 'D2'], ['D3', 'D3'],
+                ['D4', 'D4'], ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']],
+  pwmPins:  [['D1', 'D1'], ['D2', 'D2'], ['D3', 'D3'], ['D4', 'D4'],
+             ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']],
+  serial: [['serial', 'Serial']],
+  serialPins: { Serial: [['RX', 'RX'], ['TX', 'TX']] },
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: [['SPI', 'SPI']],
+  spiPins: { SPI: [['MOSI', 'D7'], ['MISO', 'D6'], ['SCK', 'D5']] },
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: [['I2C', 'Wire']],
+  i2cPins: { Wire: [['SDA', 'D2'], ['SCL', 'D1']] },
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: [['BUILTIN_1', 'D4']],
+  interrupt: [['D0', 'D0'], ['D1', 'D1'], ['D2', 'D2'], ['D3', 'D3'],
+              ['D4', 'D4'], ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']]
+};
 
 /** Set default profile to Arduino standard-compatible board */
 Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.uno;

@@ -67,7 +67,7 @@ Ardublockly.bindBlocklyEventListeners = function() {
 
   // Ensure the Blockly workspace resizes accordingly
   window.addEventListener('resize',
-      function() { Blockly.svgResize(Ardublockly.workspace); }, false);
+      function() { Blockly.asyncSvgResize(Ardublockly.workspace); }, false);
 };
 
 /** @return {!string} Generated Arduino code from the Blockly workspace. */
@@ -140,7 +140,7 @@ Ardublockly.replaceBlocksfromXml = function(blocksXml) {
  */
 Ardublockly.loadBlocksfromXmlDom = function(blocksXmlDom) {
   try {
-    Blockly.Xml.domToWorkspace(Ardublockly.workspace, blocksXmlDom);
+    Blockly.Xml.domToWorkspace(blocksXmlDom, Ardublockly.workspace);
   } catch (e) {
     return false;
   }
@@ -171,7 +171,7 @@ Ardublockly.loadSessionStorageBlocks = function() {
   if (loadOnce) {
     delete window.sessionStorage.loadOnceBlocks;
     var xml = Blockly.Xml.textToDom(loadOnce);
-    Blockly.Xml.domToWorkspace(Ardublockly.workspace, xml);
+    Blockly.Xml.domToWorkspace(xml, Ardublockly.workspace);
   }
 };
 
@@ -183,9 +183,9 @@ Ardublockly.discardAllBlocks = function() {
     Ardublockly.renderContent();
   } else if (blockCount > 1) {
     Ardublockly.alertMessage(
-        'Delete blocks?',
-        'There are ' + blockCount + ' blocks on the workspace. Are you sure ' +
-        'you want to delete them?',
+        Ardublockly.getLocalStr('discardBlocksTitle'),
+        Ardublockly.getLocalStr('discardBlocksBody')
+            .replace('%1', blockCount),
         true,
         function() {
           Ardublockly.workspace.clear();
@@ -213,12 +213,13 @@ Ardublockly.changeBlocklyArduinoBoard = function(newBoard) {
 Ardublockly.updateToolboxLanguage = function() {
   var categories = ['catLogic', 'catLoops', 'catMath', 'catText',
                     'catVariables', 'catFunctions', 'catInputOutput',
-                    'catTime', 'catMusic', 'catMotors', 'catComms'];
+                    'catTime', 'catAudio', 'catMotors', 'catComms'];
   var categoryNodes = Ardublockly.xmlTree.getElementsByTagName('category');
   for (var i = 0, cat; cat = categoryNodes[i]; i++) {
     var catId = cat.getAttribute('id');
-    if (MSG[catId]) {
-      cat.setAttribute('name', MSG[catId]);
+    var catText = Ardublockly.getLocalStr(catId);
+    if (catText) {
+      cat.setAttribute('name', catText);
     }
   }
 };
@@ -272,14 +273,17 @@ Ardublockly.blocklyIsDragging = function() {
 
 /** Wraps the blockly 'cut' functionality. */
 Ardublockly.blocklyCut = function() {
-  Blockly.copy_(Blockly.selected);
-  Blockly.selected.dispose(true, true);
+  if (Blockly.selected) {
+    Blockly.copy_(Blockly.selected);
+    Blockly.selected.dispose(true, true);
+  }
 };
 
 /** Wraps the blockly 'copy' functionality. */
 Ardublockly.blocklyCopy = function() {
-  Blockly.hideChaff();
-  Blockly.copy_(Blockly.selected);
+  if (Blockly.selected) {
+    Blockly.copy_(Blockly.selected);
+  }
 };
 
 /** Wraps the blockly 'paste' functionality. */

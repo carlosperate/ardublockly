@@ -94,6 +94,63 @@
     </li>
 
         
+            
+    <ul class="subnav">
+    <li><span>General Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Logic/">Logic</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-IfElse/">Logic If/Else</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Loops/">Loops</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Math/">Math</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Text/">Text</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Variables/">Variables</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Functions/">Functions</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
     </ul>
 <li>
           
@@ -110,17 +167,13 @@
             
                 <li class="toctree-l3"><a href="#building-ardublockly">Building Ardublockly</a></li>
                 
-                    <li><a class="toctree-l4" href="#download-the-packaged-ardublockly">Download the packaged Ardublockly</a></li>
+                    <li><a class="toctree-l4" href="#build-servers">Build servers</a></li>
                 
                     <li><a class="toctree-l4" href="#ardublockly-executable-build-dependencies">Ardublockly executable build dependencies</a></li>
                 
+                    <li><a class="toctree-l4" href="#download-the-source-code">Download the Source Code</a></li>
+                
                     <li><a class="toctree-l4" href="#build-instructions">Build Instructions</a></li>
-                
-                    <li><a class="toctree-l4" href="#second-step-electron-platform-independent">Second step: Electron (platform independent)</a></li>
-                
-                    <li><a class="toctree-l4" href="#third-step-documentation-platform-independent">Third step: Documentation (platform independent)</a></li>
-                
-                    <li><a class="toctree-l4" href="#final-step-packing-all-ardublockly-platform-independent">Final Step: Packing all Ardublockly (platform independent)</a></li>
                 
             
             </ul>
@@ -130,7 +183,7 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../Runninng-Uncompressed-Ardublockly/">Runninng Uncompressed Ardublockly</a>
+        <a class="" href="../Running-Uncompressed-Ardublockly/">Running Uncompressed Ardublockly</a>
         
     </li>
 
@@ -149,12 +202,33 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks/">Overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
         
     </li>
 
         
     </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Arduino-Board/">Add a New Board</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Language/">Add a New Language</a>
+        
+    </li>
 
         
     </ul>
@@ -174,7 +248,7 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../About/">About Ardublocly</a>
+        <a class="" href="../About/">About Ardublockly</a>
         
     </li>
 
@@ -241,36 +315,20 @@
 <p>The application can be categorised in three main components: Python server, HTML/Javascript front end, and a desktop application wrapper.</p>
 <p>Currently the Python server is packaged using py2exe for Windows, and PyInstaller for Linux and Mac OS X. In the future PyInstaller might be updated to also create the Windows builds, for now the original py2exe script is pretty stable.</p>
 <p>The desktop wrapper is based on Electron, which uses node.js. The node.js component is only used where required for the application to integrate well with the individual desktop platforms. Originally the Chromium Embedded Framework Python bindings were used, but cross-platform maintenance proved to be problematic and Electron has provided a much smother alternative.</p>
-<h2 id="download-the-packaged-ardublockly">Download the packaged Ardublockly</h2>
-<p>The stable binaries for Windows, Linux, and Mac OS X are hosted in GitHub as part of the <a href="https://github.com/carlosperate/ardublockly/releases/">repository releases</a>.</p>
-<p>Development builds are triggered in the CI build servers on each git commit and are hosted in the following links:</p>
-<table>
-<thead>
-<tr>
-<th align="center">Linux build</th>
-<th align="center">Windows build</th>
-<th align="center">Mac OS X build</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center"><a href="https://circleci.com/gh/carlosperate/ardublockly/tree/master"><img alt="Linux Build Status" src="https://circleci.com/gh/carlosperate/ardublockly/tree/master.svg?style=svg" /></a></td>
-<td align="center"><a href="https://ci.appveyor.com/project/carlosperate/ardublockly"><img alt="Windows Build status" src="https://ci.appveyor.com/api/projects/status/t877g920hdiifc2i?svg=true" /></a></td>
-<td align="center"><a href="https://travis-ci.org/carlosperate/ardublockly"><img alt="Mac Build Status" src="https://travis-ci.org/carlosperate/ardublockly.svg?branch=master" /></a></td>
-</tr>
-<tr>
-<td align="center"><a href="http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=linux/">Download Link</a></td>
-<td align="center"><a href="http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=windows/">Download Link</a></td>
-<td align="center"><a href="http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/index.html?prefix=mac/">Download Link</a></td>
-</tr>
-</tbody>
-</table>
+<h2 id="build-servers">Build servers</h2>
+<p>Each commit to the <a href="https://github.com/carlosperate/ardublockly">Ardublockly GitHub repository</a> triggers the build servers to follow all these build steps and upload the build output to an <a href="http://ardublockly-builds.s3-website-us-west-2.amazonaws.com/">online server</a> to make them available for download.</p>
+<p>There is a server for each platform (Windows, macOS, and Linux) with their own build script. So it could be useful to have a look at these scripts if some of the instructions here are not completely clear:</p>
+<ul>
+<li>Windows AppVeyor script: https://github.com/carlosperate/ardublockly/blob/master/.appveyor.yml</li>
+<li>macOS Travis script: https://github.com/carlosperate/ardublockly/blob/master/.travis.yml</li>
+<li>Linux CircleCI script: https://github.com/carlosperate/ardublockly/blob/master/circle.yml</li>
+</ul>
 <h2 id="ardublockly-executable-build-dependencies">Ardublockly executable build dependencies</h2>
 <h3 id="git">Git</h3>
 <p>Git needs to be installed on the system and accessible through the command line interface.</p>
 <h3 id="python">Python</h3>
-<p>These build scripts have been developed and tested only on Python 2.7.</p>
-<p>While the non-GUI version of Ardublockly (command line server + browser-based GUI) is compatible with other Python versions (tested on Python 2.7 and 3.4), due to the individual quirks of the python libraries used here and initial unavailability of some Python 3 bindings, a single build environment based on Python 2.7 has been be targeted.</p>
+<p>The build scripts included in the <code>package</code> folder were originally developed and tested on Python 2.7, and later the build system was moved to use Python 3.4. Therefore, while these scripts should still be compatible with Python 2, on their current form they have only been tested on Python 3.</p>
+<p>While the "core version" of Ardublockly (command line server + browser-based GUI) should be fully compatible with both Python 2 and 3 (tested on Python 2.7 and 3.4), there is one particular step in this build process that requires Python 2.7.</p>
 <p>If you are using Python virtual environments on Windows this <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">collection of Python extensions binaries</a> is highly recommended.</p>
 <p>The specific versions of the Python dependencies can be found in the <a href="https://github.com/carlosperate/ardublockly/blob/master/package/requirements.txt">requirements.txt</a> file.</p>
 <h5 id="py2exe">py2exe</h5>
@@ -294,37 +352,49 @@
 <h3 id="nodejs">Node.js</h3>
 <p>Node.js is required to run <a href="http://electron.atom.io/">Electron</a>. It can be downloaded from the <a href="https://nodejs.org">official website</a>.</p>
 <p>The <code>npm</code> package manager should be included with node, which is used to deal with all the Electron application dependencies.</p>
-<h2 id="build-instructions">Build Instructions</h2>
+<h2 id="download-the-source-code">Download the Source Code</h2>
 <p>Download and initialise this project repository:</p>
 <pre><code>git clone https://github.com/carlosperate/ardublockly.git
 cd ardublockly
 git submodule update --init --recursive
 </code></pre>
 
-<p>If you have already downloaded the Ardublockly source code, make sure the submodules are initialised, in this case the 'closure-library' in the project root directory, and 'ardublockly.wiki' in the 'package/ardublocklydocs/' folder. You can run the last git command above in the project root directory to ensure this is the case, otherwise the submodules directories will be empty.</p>
-<h3 id="first-step-python-server-platform-dependent">First step: Python server (platform dependent)</h3>
+<p>If you have already downloaded the Ardublockly source code, make sure the submodules are initialised, in this case the 'closure-library' in the project root directory, and 'ardublockly.wiki' in the 'package/ardublocklydocs/' folder. You can run the last git command above in the project root directory to ensure this is the case, otherwise the submodule directories will be empty.</p>
+<h2 id="build-instructions">Build Instructions</h2>
+<h3 id="first-step-blockly">First step: Blockly</h3>
+<p>When Blockly is compiled, all the source code contained in the <code>blockly</code> folder is compressed in the <code>blockly/blockly_compressed.js</code>, <code>blockly/blocks_compressed.js</code>, and  <code>blockly/arduino_compressed.js</code> files (among others). The repository version of these compressed files might not be the most up-to-date, so the first step should be to compile Blockly to ensure the compressed files are up-to-date.  </p>
+<p>You will need Python 2.7 for this step, as the Blockly build script is not currently compatible with Python 3. You will also need to be online, as the Google's "Closure Compiler Service" is used. From the project root directory:</p>
+<pre><code>cd blockly
+python build.py
+</code></pre>
+
+<p>At this point, if continuing with the next steps, it is recommended to go back to the project root directory:</p>
+<pre><code>cd ../
+</code></pre>
+
+<h3 id="second-step-python-server-platform-dependent">Second step: Python server (platform dependent)</h3>
 <p>The build steps for the Ardublockly Server are slightly different depending on the platform.</p>
-<h3 id="windows-build">Windows Build</h3>
+<h4 id="windows-build">Windows Build</h4>
 <p>To build Ardublockly under Windows all you have to do is execute the <code>build_windows.py</code> file from the project root directory:</p>
 <pre><code>python package\build_py2exe.py
 </code></pre>
 
 <p>This will remove any previous build directory, rebuild, and create the <code>ardublockly_run.bat</code> file into the project root.</p>
-<h3 id="linux-build">Linux Build</h3>
+<h4 id="linux-build">Linux Build</h4>
 <p>To build Ardublockly under Linux all you have to do is execute the <code>build_pyinstaller.py</code> file from the project root directory:</p>
 <pre><code>python package/build_pyinstaller.py
 </code></pre>
 
 <p>The optional command line argument <code>linux</code> can be provided, but the operating systems should be automatically detected.</p>
 <p>This will remove any previous build directory, rebuild, and create the <code>ardublockly_run.sh</code> file into the project root.</p>
-<h3 id="mac-os-x-build">Mac OS X Build</h3>
+<h4 id="mac-os-x-build">Mac OS X Build</h4>
 <p>To build Ardublockly under Mac OS X all you have to do is execute the <code>build_pyinstaller.py</code> file from the project root directory:</p>
 <pre><code>python package/build_pyinstaller.py
 </code></pre>
 
 <p>The optional command line argument <code>mac</code> can be provided, but the operating systems should be automatically detected.</p>
 <p>This will remove any previous build directory, and rebuild it.</p>
-<h2 id="second-step-electron-platform-independent">Second step: Electron (platform independent)</h2>
+<h3 id="third-step-electron-platform-independent">Third step: Electron (platform independent)</h3>
 <p>Execute the following commands from the project root directory:</p>
 <pre><code>cd package\electron
 npm install
@@ -332,22 +402,22 @@ npm run release
 </code></pre>
 
 <p>The npm scripts will automatically detect and deal with the operating system different build requirements.</p>
-<p>At this point, if continuing with the next steps, is recommended to go back to the project root directory:</p>
+<p>At this point, if continuing with the next steps, it is recommended to go back to the project root directory:</p>
 <pre><code>cd ../../
 </code></pre>
 
-<h2 id="third-step-documentation-platform-independent">Third step: Documentation (platform independent)</h2>
+<h3 id="fourth-step-documentation-platform-independent">Fourth step: Documentation (platform independent)</h3>
 <p>Build the offline documentation by running the <code>build_docs.py</code> script from the project root directory:</p>
 <pre><code>python package\build_docs.py
 </code></pre>
 
 <p>This will remove any previous build directory, rebuild it, and remove any temporary files.</p>
-<h2 id="final-step-packing-all-ardublockly-platform-independent">Final Step: Packing all Ardublockly (platform independent)</h2>
+<h3 id="final-step-packing-all-ardublockly-platform-independent">Final Step: Packing all Ardublockly (platform independent)</h3>
 <p>This step is only meant if you wish to pack the Ardublockly application into a distributable form. You can pack Ardublockly running the following command from the project root directory:</p>
 <pre><code>python package/pack_ardublockly.py
 </code></pre>
 
-<p>The pack script is designed for the build servers to zip the required contents into a single file to be uploaded to cloud storage, so it does not pack all the repository source code. This script creates a new folder on the same level a the project root, and then zips it and saves it into the folder 'upload' within the project root.</p>
+<p>The pack script is designed for the build servers to zip the required contents into a single file to be uploaded to cloud storage, so it does not pack all the repository source code. This script creates a new folder on the same level a the project root, removes unnecessary files from this copied directory, and then zips it and saves it into the folder 'upload' within the original project root.</p>
               
             </div>
           </div>
@@ -355,10 +425,10 @@ npm run release
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Runninng-Uncompressed-Ardublockly/" class="btn btn-neutral float-right" title="Runninng Uncompressed Ardublockly">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Running-Uncompressed-Ardublockly/" class="btn btn-neutral float-right" title="Running Uncompressed Ardublockly">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Arduino-Compiler-Settings/" class="btn btn-neutral" title="Arduino Compiler Settings"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Create-%7E-Functions/" class="btn btn-neutral" title="Functions"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -386,10 +456,10 @@ npm run release
           <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Arduino-Compiler-Settings/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Create-%7E-Functions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../Runninng-Uncompressed-Ardublockly/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../Running-Uncompressed-Ardublockly/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

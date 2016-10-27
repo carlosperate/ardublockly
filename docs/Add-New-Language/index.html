@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="carlosperate">
+  
+  <title>Add a New Language - Ardublockly Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Add a New Language";
+    var mkdocs_page_input_path = "Add-New-Language.md";
+    var mkdocs_page_url = "/Add-New-Language/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../Home/" class="icon icon-home"> Ardublockly Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Home/">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Quick-Start/">Quick Start</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>User Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing-Ardublockly/">Installing Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Configure-Ardublockly/">Configure Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Arduino-Compiler-Settings/">Arduino Compiler Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>General Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Logic/">Logic</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-IfElse/">Logic If/Else</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Loops/">Loops</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Math/">Math</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Text/">Text</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Variables/">Variables</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Functions/">Functions</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Developer Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Building-Ardublockly/">Building Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Running-Uncompressed-Ardublockly/">Running Uncompressed Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Git-Settings/">Git Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>Create Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks/">Overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Arduino-Board/">Add a New Board</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Add a New Language</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#adding-a-new-language-to-ardublockly">Adding a New Language to Ardublockly</a></li>
+                
+                    <li><a class="toctree-l4" href="#translating-the-ardublockly-strings">Translating the Ardublockly strings</a></li>
+                
+                    <li><a class="toctree-l4" href="#generatingupdating-the-language-files">Generating/Updating the language files</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQs/">FAQs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>About</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../About/">About Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../License/">License</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Credits/">Credits</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../Home/">Ardublockly Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Home/">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer Guide &raquo;</li>
+        
+      
+    
+    <li>Add a New Language</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="adding-a-new-language-to-ardublockly">Adding a New Language to Ardublockly</h1>
+<p><em>(Work in Progress: This page should describe how to add new languages to Ardublockly)</em></p>
+<p>While Blockly has been translated to a large number of languages using TranslateWiki (more info <a href="https://developers.google.com/blockly/hacking/translating">here</a>), only a small subset of these translations has been expanded to cover the additional blocks and user interface text for Ardublockly. Ardublockly itself does not use TranslateWiki and to add a new language the JavaScript and JSON files have to be manually edited.</p>
+<p>There are 3 main files related to the localisation, but only one needs to be updated to add a new language:</p>
+<ul>
+<li>
+<p><code>blockly/msg/messages.js</code>: This file defines all the strings (in English) used by Ardublockly. If you are only adding a new language, then it can be ignored as everything required will already be present.
+Every time Blockly is built, the strings defined here are included in the <code>blockly/msg/&lt;language&gt;.js</code> JavaScript file, translated by the entries from the respective JSON file if they have been defined.</p>
+</li>
+<li>
+<p><code>blockly/msg/json/&lt;language&gt;.json</code>: An existing file for your language should already exists in this directory. This JSON file contains the string name and its translation, but for unsupported languages it will not include the entries required by Ardublockly (only those for Blockly). This is the file that will need to be updated (more details below).</p>
+</li>
+<li>
+<p><code>blockly/msg/&lt;language&gt;.js</code>: An existing file for your language should already exists in this directory. This file will be automatically generated and updated from the <code>blockly/msg/messages.js</code> and <code>blockly/msg/json/&lt;language&gt;.json</code> data when building Blockly, so this file should not be edited either.</p>
+</li>
+</ul>
+<h2 id="translating-the-ardublockly-strings">Translating the Ardublockly strings</h2>
+<p><em>(Description on how to do this should go here)</em></p>
+<h2 id="generatingupdating-the-language-files">Generating/Updating the language files</h2>
+<p>Once the translated entries have been added to the JSON file, Blockly needs to be built to convert them into strings in the respective JavaScript file. To do this, from the Ardublockly project folder on a terminal (make sure you are using Python 2):</p>
+<pre><code>cd blockly
+python build.py
+</code></pre>
+
+<p><em>(Mention that Blockly doesn't neccesarily have to be built and that just sending a PR with those two files should be fine)</em></p>
+<p><em>(Mention that the front end js file can be updated to include the new language on the settings menu.)</em></p>
+<p><em>(Indicate how to send a PR)</em></p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../FAQs/" class="btn btn-neutral float-right" title="FAQs">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Add-New-Arduino-Board/" class="btn btn-neutral" title="Add a New Board"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Add-New-Arduino-Board/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../FAQs/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

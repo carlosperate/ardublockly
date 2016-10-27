@@ -236,7 +236,6 @@ Blockly.FieldAngle.prototype.onMouseMove = function(e) {
   }
   angle = Blockly.FieldAngle.angleValidator(angle);
   Blockly.FieldTextInput.htmlInput_.value = angle;
-  this.sourceBlock_.setShadow(false);
   this.setValue(angle);
   this.validate_();
   this.resizeEditor_();
@@ -316,6 +315,6 @@ Blockly.FieldAngle.angleValidator = function(text) {
       n -= 360;
     }
     n = String(n);
-   }
+  }
   return n;
 };

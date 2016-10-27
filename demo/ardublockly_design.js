@@ -15,6 +15,7 @@ Ardublockly.designJsInit = function() {
   Ardublockly.materializeJsInit();
   Ardublockly.resizeToggleToolboxBotton();
   Ardublockly.sketchNameSizeEffect();
+  Ardublockly.sketchNameSet();
 };
 
 /**
@@ -219,7 +220,7 @@ Ardublockly.displayToolbox = function(show) {
         {height: document.getElementById('content_blocks').style.height}, 300,
         function() {
           toolboxTree.css('overflow-y', 'auto');
-          Blockly.fireUiEvent(window, 'resize');
+          window.dispatchEvent(new Event('resize'));
           $('#toolboxButtonScreen').remove();
         });
   } else {
@@ -228,7 +229,7 @@ Ardublockly.displayToolbox = function(show) {
     toolbox.animate({height: 38}, 300, function() {
       button.className = button.className.replace(classOff, classOn);
       toolbox.fadeOut(350, 'linear', function() {
-        Blockly.fireUiEvent(window, 'resize');
+        window.dispatchEvent(new Event('resize'));
         setTimeout(function() { toolbox.height(38); }, 100);
         $('#toolboxButtonScreen').remove();
       });
@@ -242,7 +243,7 @@ Ardublockly.displayToolbox = function(show) {
  * The toolbox width does not change with workspace width, so safe to do once.
  */
 Ardublockly.resizeToggleToolboxBotton = function() {
-  Blockly.fireUiEvent(window, 'resize');
+  window.dispatchEvent(new Event('resize'));
   var button = $('#button_toggle_toolbox');
   // Sets the toolbox toggle button width to that of the toolbox
   if (Ardublockly.isToolboxVisible() && Ardublockly.blocklyToolboxWidth()) {
@@ -391,8 +392,8 @@ Ardublockly.arduinoIdeOutput = function(bodyEl) {
  */
 Ardublockly.resetIdeOutputContent = function(bodyEl) {
   var ideOuputContent = document.getElementById('content_ide_output');
-  ideOuputContent.innerHTML = '<span class="arduino_dialog_out">Waiting for ' +
-      'the IDE output...</span>';
+  ideOuputContent.innerHTML = '<span class="arduino_dialog_out">' +
+      Ardublockly.getLocalStr('arduinoOpWaiting') + '</span>';
 };
 
 /**
@@ -415,10 +416,22 @@ Ardublockly.sketchNameSizeEffect = function() {
   };
 
   var sketchNameInput = $('#sketch_name');
-  sketchNameInput.val('Sketch_Name');
-  sketchNameInput.attr('size', 10);
-  sketchNameInput.keyup(resizeInput).each(resizeInput);
+  sketchNameInput.keydown(resizeInput).each(resizeInput);
   sketchNameInput.blur(correctInput);
+};
+
+/**
+ * Sets a string to the SketchName input field and triggers the events set from
+ * Ardublockly.sketchNameSizeEffect().
+ * @param {string?} newName Optional string to place in the sketch_name input.
+ */
+Ardublockly.sketchNameSet = function(newName) {
+  var sketchNewName = newName || '';
+  var sketchNameInput = $('#sketch_name');
+  sketchNameInput.val(sketchNewName);
+  sketchNameInput.attr('size', sketchNewName.length);
+  sketchNameInput.keydown();
+  sketchNameInput.blur();
 };
 
 /** Creates a highlight animation to the Arduino IDE output header. */
@@ -453,7 +466,7 @@ Ardublockly.contentHeightToggle = function() {
 
   // Blockly doesn't resize with CSS3 transitions enabled, so do it manually
   var timerId = setInterval(function() {
-    Blockly.fireUiEvent(window, 'resize');
+    window.dispatchEvent(new Event('resize'));
   }, 15);
   setTimeout(function() {
     clearInterval(timerId);

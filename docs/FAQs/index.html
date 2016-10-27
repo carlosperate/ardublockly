@@ -94,6 +94,63 @@
     </li>
 
         
+            
+    <ul class="subnav">
+    <li><span>General Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Logic/">Logic</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-IfElse/">Logic If/Else</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Loops/">Loops</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Math/">Math</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Text/">Text</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Variables/">Variables</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Functions/">Functions</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
     </ul>
 <li>
           
@@ -111,7 +168,7 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../Runninng-Uncompressed-Ardublockly/">Runninng Uncompressed Ardublockly</a>
+        <a class="" href="../Running-Uncompressed-Ardublockly/">Running Uncompressed Ardublockly</a>
         
     </li>
 
@@ -130,12 +187,33 @@
         
             
     <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks/">Overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
         <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
         
     </li>
 
         
     </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Arduino-Board/">Add a New Board</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Language/">Add a New Language</a>
+        
+    </li>
 
         
     </ul>
@@ -148,6 +226,10 @@
             <ul>
             
                 <li class="toctree-l3"><a href="#faqs">FAQs</a></li>
+                
+                    <li><a class="toctree-l4" href="#user-faqs">User FAQs</a></li>
+                
+                    <li><a class="toctree-l4" href="#developer-faqs">Developer FAQs</a></li>
                 
             
             </ul>
@@ -162,7 +244,7 @@
         
             
     <li class="toctree-l1 ">
-        <a class="" href="../About/">About Ardublocly</a>
+        <a class="" href="../About/">About Ardublockly</a>
         
     </li>
 
@@ -221,8 +303,22 @@
             <div class="section">
               
                 <h1 id="faqs">FAQs</h1>
-<p><em>This is a place holder page, the Frequently Asked Questions will be coming soon</em></p>
-<p><em>If you have an urgency to use this part of the documentation, please <a href="https://github.com/carlosperate/ardublockly/issues">create a new an issue</a> and I will prioritise it</em>.</p>
+<p>If you have any questions not covered here you can open a new issue in the <a href="https://github.com/carlosperate/ardublockly/issues">Ardublockly repository issue tracker</a>.</p>
+<h2 id="user-faqs">User FAQs</h2>
+<p><strong>Q: When I click on the settings field to change the compiler or sketch location no file browser window opens.</strong></p>
+<p><strong>A:</strong> Sometimes the file browser opens in the background and doesn't come into focus as expected, check all the opened windows on your desktop environment to see if this is the case.</p>
+<h3 id="windows-only">Windows Only</h3>
+<p><strong>Q: I don't see any/enough/expected data from the Arduino IDE/compiler in the "Arduino IDE output" box.</strong></p>
+<p><strong>A:</strong> Make sure you have selected the <code>arduino_debug.exe</code> file in the settings instead of <code>arduino.exe</code>. This is because on Windows the windowed programs cannot produce console output, so the two files have been generate to allow correct console support.</p>
+<hr />
+<p><strong>Q: Every time I click on verify or upload code the Arduino splash screen appears momentarily.</strong></p>
+<p><strong>A:</strong> Make sure you have selected the <code>arduino_debug.exe</code> file in the settings instead of <code>arduino.exe</code>.</p>
+<h2 id="developer-faqs">Developer FAQs</h2>
+<p><strong>Q: I have edited or created some blocks and followed the instructions to include them into Ardublockly, but I cannot see any changes.</strong></p>
+<p><strong>A:</strong> This could happen if your browser, or the Ardublockly desktop application, is using the old cached files. If you are using a web browser make sure you delete your cache and/or do a hard refresh, if using the desktop application you can achieve this by deleting the folder <code>appdata</code>, located inside the <code>arduexec</code> folder.</p>
+<hr />
+<p><strong>Q: I've got an error message saying "Error: Closure not found".</strong></p>
+<p><strong>A:</strong> This could happen if you are trying to run or build the uncompressed version of Blockly and the <code>closure-library</code> folder hasn't been populated correctly. Make sure you have initialised all git submodules as indicated in the "Download the Source Code" section from the <a href="../Building-Ardublockly#download-the-source-code">Building Ardublockly</a> document.</p>
               
             </div>
           </div>
@@ -230,10 +326,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../About/" class="btn btn-neutral float-right" title="About Ardublocly">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../About/" class="btn btn-neutral float-right" title="About Ardublockly">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Create-Blocks-%7E-Extending-Ardublockly/" class="btn btn-neutral" title="Extending Ardublockly"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Add-New-Language/" class="btn btn-neutral" title="Add a New Language"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -261,7 +357,7 @@
           <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../Create-Blocks-%7E-Extending-Ardublockly/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../Add-New-Language/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
         <span style="margin-left: 15px"><a href="../About/" style="color: #fcfcfc">Next &raquo;</a></span>

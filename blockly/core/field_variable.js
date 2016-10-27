@@ -44,7 +44,7 @@ goog.require('goog.string');
  */
 Blockly.FieldVariable = function(varname, opt_validator) {
   Blockly.FieldVariable.superClass_.constructor.call(this,
-      Blockly.FieldVariable.dropdownCreate, opt_validator);
+      this.dropdownCreate, opt_validator);
   this.setValue(varname || '');
 };
 goog.inherits(Blockly.FieldVariable, Blockly.FieldDropdown);
@@ -80,18 +80,19 @@ Blockly.FieldVariable.prototype.setValidator = function(handler) {
 
 /**
  * Install this dropdown on a block.
- * @param {!Blockly.Block} block The block containing this text.
  */
-Blockly.FieldVariable.prototype.init = function(block) {
-  if (this.sourceBlock_) {
+Blockly.FieldVariable.prototype.init = function() {
+  if (this.fieldGroup_) {
     // Dropdown has already been initialized once.
     return;
   }
-  Blockly.FieldVariable.superClass_.init.call(this, block);
+  Blockly.FieldVariable.superClass_.init.call(this);
   if (!this.getValue()) {
     // Variables without names get uniquely named for this workspace.
     var workspace =
-        block.isInFlyout ? block.workspace.targetWorkspace : block.workspace;
+        this.sourceBlock_.isInFlyout ?
+            this.sourceBlock_.workspace.targetWorkspace :
+            this.sourceBlock_.workspace;
     this.setValue(Blockly.Variables.generateUniqueName(workspace));
   }
 };
@@ -124,7 +125,7 @@ Blockly.FieldVariable.prototype.setValue = function(newValue) {
  * @return {!Array.<string>} Array of variable names.
  * @this {!Blockly.FieldVariable}
  */
-Blockly.FieldVariable.dropdownCreate = function() {
+Blockly.FieldVariable.prototype.dropdownCreate = function() {
   if (this.sourceBlock_ && this.sourceBlock_.workspace) {
     var variableList =
         Blockly.Variables.allVariables(this.sourceBlock_.workspace);

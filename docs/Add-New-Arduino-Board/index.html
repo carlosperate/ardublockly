@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="carlosperate">
+  
+  <title>Add a New Board - Ardublockly Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Add a New Board";
+    var mkdocs_page_input_path = "Add-New-Arduino-Board.md";
+    var mkdocs_page_url = "/Add-New-Arduino-Board/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../Home/" class="icon icon-home"> Ardublockly Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Home/">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Quick-Start/">Quick Start</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>User Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing-Ardublockly/">Installing Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Configure-Ardublockly/">Configure Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Arduino-Compiler-Settings/">Arduino Compiler Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>General Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Logic/">Logic</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-IfElse/">Logic If/Else</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Loops/">Loops</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Math/">Math</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Text/">Text</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Variables/">Variables</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Functions/">Functions</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Developer Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Building-Ardublockly/">Building Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Running-Uncompressed-Ardublockly/">Running Uncompressed Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Git-Settings/">Git Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>Create Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks/">Overview</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Add a New Board</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#adding-a-new-arduino-board-to-ardublockly">Adding a New Arduino Board to Ardublockly</a></li>
+                
+                    <li><a class="toctree-l4" href="#server-update">Server update</a></li>
+                
+                    <li><a class="toctree-l4" href="#blockly-update">Blockly update</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Language/">Add a New Language</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQs/">FAQs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>About</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../About/">About Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../License/">License</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Credits/">Credits</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../Home/">Ardublockly Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Home/">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer Guide &raquo;</li>
+        
+      
+    
+    <li>Add a New Board</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><em>(Work in Progress: This page should describe how to add a new Arduino Board to Ardublockly)</em></p>
+<h1 id="adding-a-new-arduino-board-to-ardublockly">Adding a New Arduino Board to Ardublockly</h1>
+<p>As long as the board you would like to add is supported by the Arduino IDE, adding support within Ardublockly is a simple task that only required two files to be modified:</p>
+<ul>
+<li><code>ardublocklyserver/compilersettings.py</code>: Needs a new entry onto the <code>ServerCompilerSettings.__arduino_types</code> dictionary. </li>
+<li><code>blockly/generators/arduino/boards.js</code>: Needs a new entry in the <code>Blockly.Arduino.Boards.profiles</code> object.</li>
+</ul>
+<p>In a near-future update Ardublockly will be refactored to require a single edit to the <code>blockly/generators/arduino/boards.js</code> to add a new board, removing the need to update the server code.</p>
+<p>You can have a look at <a href="https://github.com/carlosperate/ardublockly/commit/7cc6bc3fe310449b94e1160cc145876d82586e02">commit 7cc6bc3fe310449b94e1160cc145876d82586e02</a> as a simple example to add a new board.</p>
+<h2 id="server-update">Server update</h2>
+<p>Although this might change in the future (and the documentation updated with the change), the server contains a dictionary with the supported boards. Each "key-value" pair in this dictionary defines the name of the board and compiler flag respectively.</p>
+<p>The reason this dictionary exists is because the board data is retrieved from the server each time the settings are opened, dynamically generating the settings drop down, and sending each new selection to the server to be saved on the settings ini file. Then, when the front end sends the code to be compiled, it check this saved setting and appends the relevant compiler flag to the IDE command line invocation.</p>
+<p>It is important to ensure that the new key entry in this dictionary contains the same name as the new board profile added to <code>blockly/generators/arduino/boards.js</code>.</p>
+<p>An example with a couple of items can be seen below, to add a new board, the same format entry has to be added to this dictionary.</p>
+<pre><code class="python">__arduino_types = {'Uno': 'arduino:avr:uno',
+                   'Leonardo': 'arduino:avr:leonardo'}
+</code></pre>
+
+<h2 id="blockly-update">Blockly update</h2>
+<p>The Arduino code generator contains a list of Arduino Board profiles defining board characteristics like the pin, peripheral configuration, compiler flag, etc.</p>
+<p>The following is the board profile for the Arduino Uno, a similar profile will have to be created for the new board to support. It is important to note that the object name for the new board profile is the same as the key entered in the server dictionary (spaces should be replaced by underscores <code>_</code>).</p>
+<pre><code class="javascript">/** Arduino Uno board profile. */
+Blockly.Arduino.Boards.profiles.uno = {
+  name: 'Arduino Uno',
+  description: 'Arduino Uno standard compatible board',
+  compilerFlag: 'arduino:avr:uno',
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 5),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
+                   Blockly.Arduino.Boards.generateAnalogIo(0, 5)),
+  pwmPins: [['3', '3'], ['5', '5'], ['6', '6'], ['9', '9'], ['10', '10'],
+            ['11', '11']],
+  serial: [['serial', 'Serial']],
+  serialPins: { Serial: [['RX', '0'], ['TX', '1']] },
+  serialSpeed: [['300', '300'], ['600', '600'], ['1200', '1200'],
+                ['2400', '2400'], ['4800', '4800'], ['9600', '9600'],
+                ['14400', '14400'], ['19200', '19200'], ['28800', '28800'],
+                ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
+                ['115200', '115200']],
+  spi: [['SPI', 'SPI']],
+  spiPins: { SPI: [['MOSI', '11'], ['MISO', '12'], ['SCK', '13']] },
+  spiClockDivide: [['2 (8MHz)', 'SPI_CLOCK_DIV2'],
+                   ['4 (4MHz)', 'SPI_CLOCK_DIV4'],
+                   ['8 (2MHz)', 'SPI_CLOCK_DIV8'],
+                   ['16 (1MHz)', 'SPI_CLOCK_DIV16'],
+                   ['32 (500KHz)', 'SPI_CLOCK_DIV32'],
+                   ['64 (250KHz)', 'SPI_CLOCK_DIV64'],
+                   ['128 (125KHz)', 'SPI_CLOCK_DIV128']],
+  i2c: [['I2C', 'Wire']],
+  i2cPins: { Wire: [['SDA', 'A4'], ['SCL', 'A5']] },
+  i2cSpeed: [['100kHz', '100000L'], ['400kHz', '400000L']],
+  builtinLed: [['BUILTIN_1', '13']],
+  interrupt: [['interrupt0', '2'], ['interrupt1', '3']]
+};
+</code></pre>
+
+<p>You can see all the pins are grouped in an array, each item being a "2-item string array" on their own. This is because the first item is the pin description in a human-readable format, and the second is the pin string used in to generate the Arduino Code. So, for example, the SPI MOSI pin defined as <code>['MOSI', '11']</code>.</p>
+<p>There is also a couple of helper functions for generating an array of digital and analogue pins. These functions were created only because these pins follow a very simple format, and this saves the developer the time manually type the array:</p>
+<pre><code class="javascript">Blockly.Arduino.Boards.generateDigitalIo(pinStart, pinEnd)
+Blockly.Arduino.Boards.generateAnalogIo(pinStart, pinEnd)
+</code></pre>
+
+<p>So, the a call to <code>Blockly.Arduino.Boards.generateAnalogIo(0, 3)</code> generates the following array:</p>
+<pre><code class="javascript">[ ['A0', 'A0'], ['A1', 'A1'], ['A2', 'A2'], ['A3', 'A3'] ]
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Add-New-Language/" class="btn btn-neutral float-right" title="Add a New Language">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Create-Blocks-%7E-Extending-Ardublockly/" class="btn btn-neutral" title="Extending Ardublockly"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Create-Blocks-%7E-Extending-Ardublockly/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Add-New-Language/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

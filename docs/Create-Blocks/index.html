@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="carlosperate">
+  
+  <title>Overview - Ardublockly Documentation</title>
+  
+
+  <link rel="shortcut icon" href="../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Overview";
+    var mkdocs_page_input_path = "Create-Blocks.md";
+    var mkdocs_page_url = "/Create-Blocks/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../Home/" class="icon icon-home"> Ardublockly Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Home/">Home</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../Quick-Start/">Quick Start</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>User Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Installing-Ardublockly/">Installing Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Configure-Ardublockly/">Configure Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Arduino-Compiler-Settings/">Arduino Compiler Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>General Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Logic/">Logic</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-IfElse/">Logic If/Else</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Loops/">Loops</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Math/">Math</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Text/">Text</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Variables/">Variables</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-%7E-Functions/">Functions</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>Developer Guide</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Building-Ardublockly/">Building Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Running-Uncompressed-Ardublockly/">Running Uncompressed Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Git-Settings/">Git Settings</a>
+        
+    </li>
+
+        
+            
+    <ul class="subnav">
+    <li><span>Create Blocks</span></li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Overview</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#create-ardublockly-blocks">Create Ardublockly Blocks</a></li>
+                
+                    <li><a class="toctree-l4" href="#block-definition">Block Definition</a></li>
+                
+                    <li><a class="toctree-l4" href="#arduino-code-generator">Arduino Code Generator</a></li>
+                
+                    <li><a class="toctree-l4" href="#block-inclusion">Block Inclusion</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Create-Blocks-%7E-Extending-Ardublockly/">Extending Ardublockly</a>
+        
+    </li>
+
+        
+    </ul>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Arduino-Board/">Add a New Board</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Add-New-Language/">Add a New Language</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../FAQs/">FAQs</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>About</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../About/">About Ardublockly</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../License/">License</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../Credits/">Credits</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../Home/">Ardublockly Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../Home/">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Developer Guide &raquo;</li>
+        
+      
+        
+          <li>Create Blocks &raquo;</li>
+        
+      
+    
+    <li>Overview</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github"> Edit on GitHub</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p><em>(This is a stub of the documentation to create new Ardublockly blocks)</em></p>
+<h1 id="create-ardublockly-blocks">Create Ardublockly Blocks</h1>
+<p>One of the advantages of using Google's Blockly for the visual blocks framework is the simplicity to create new
+blocks capable to generate Arduino code. All the code is done in JavaScript and you can be even use Blockly itself
+to auto-generate some of the code.</p>
+<p>The process is divided in three steps:</p>
+<ul>
+<li><strong>Define the block:</strong> This includes its shape, connections, fields, etc</li>
+<li><strong>Create code generator:</strong> To generate the Arduino code based for the new block</li>
+<li><strong>Block inclusion:</strong> Add the block into the Ardublockly toolbox</li>
+</ul>
+<h2 id="block-definition">Block Definition</h2>
+<p><em>(A proper description still need to be included here, each line needs to be expanded into a proper paragraph)</em></p>
+<p>The blocks are defined in a JavaScript.</p>
+<p>You can have a look at the current blocks in the <code>blockly/blocks/arduino</code> directory.</p>
+<p>One good starting point is to go through the official Blockly documentation: <a href="https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks">Blockly's Define Blocks Documentation</a></p>
+<p>You can use <a href="https://blockly-demo.appspot.com/static/demos/blockfactory/index.html">Blockly Factory</a> to generate
+a lot of this code for you.</p>
+<h2 id="arduino-code-generator">Arduino Code Generator</h2>
+<p><em>(A proper description still need to be included here, each line needs to be expanded into a proper paragraph)</em></p>
+<p>The Arduino code gener is defined in a JavaScript.</p>
+<p>You can have a look at the current blocks in the <code>blockly/generators/arduino</code> directory.</p>
+<p>One good starting point is to go through the official Blockly documentation: <a href="https://developers.google.com/blockly/guides/create-custom-blocks/overview">Blockly's Generating Code Documentation</a></p>
+<p>For Arduino specific functionality I am currently working on an API to be able to easily extend the Ardublockly
+functionality to take advantage of board settings, pins, static typing, etc.
+For now a very crude version of the documentation can be found in the
+<a href="../Create-Blocks-~-Extending-Ardublockly">Extending-Ardublockly</a> page.</p>
+<h2 id="block-inclusion">Block Inclusion</h2>
+<p><em>(A proper description still need to be included here, each line needs to be expanded into a proper paragraph)</em></p>
+<p>The first you need to find out is if you are running the compressed or uncompressed version of Blockly.
+During development it is highly recommendable to run Blockly uncompressed, the instructions to do so can be found
+here: <a href="../Runninng-Uncompressed-Ardublockly">Run Uncompressed Blockly</a></p>
+<p>If you are running the compressed version you will have to build blockly first. <em>(Instruction should go here, or in the build page with a link here)</em></p>
+<p>To include the block in the toolbox include the XML code into the <code>ardublockly/ardublockly_toolbox.js</code> file.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Create-Blocks-%7E-Extending-Ardublockly/" class="btn btn-neutral float-right" title="Extending Ardublockly">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Git-Settings/" class="btn btn-neutral" title="Git Settings"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="http://github.com/carlosperate/ardublockly/wiki" class="icon icon-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../Git-Settings/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Create-Blocks-%7E-Extending-Ardublockly/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>
