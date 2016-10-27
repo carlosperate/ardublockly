@@ -17,7 +17,7 @@ goog.require('Blockly.Arduino');
 
 
 /**
- * Code generator to set an angle (Y) value to a servo PWM pin (X).
+ * Code generator to set an angle (Y) value to a servo pin (X).
  * Arduino code: #include <Servo.h>
  *               Servo myServoX;
  *               setup { myServoX.attach(X); }
@@ -45,7 +45,7 @@ Blockly.Arduino['servo_write'] = function(block) {
 };
 
 /**
- * Code generator to read an angle value from a servo PWM pin (X).
+ * Code generator to read an angle value from a servo pin (X).
  * Arduino code: #include <Servo.h>
  *               Servo myServoX;
  *               setup { myServoX.attach(X); }
