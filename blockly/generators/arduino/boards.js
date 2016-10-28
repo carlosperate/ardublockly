@@ -115,10 +115,10 @@ Blockly.Arduino.Boards.profiles.uno = {
 };
 
 /** Arduino Nano board profile (ATmega328p). */
-Blockly.Arduino.Boards.profiles.nano = {
-  name: 'Arduino Nano',
-  description: 'Arduino Nano with ATmega328p board',
-  compilerFlag: 'arduino:avr:nano',
+Blockly.Arduino.Boards.profiles.nano_328 = {
+  name: 'Arduino Nano 328',
+  description: 'Arduino Nano with ATmega328 board',
+  compilerFlag: 'arduino:avr:nano:cpu=atmega328',
   analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 7),
   digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 13).concat(
                    Blockly.Arduino.Boards.generateAnalogIo(0, 7)),
@@ -135,10 +135,16 @@ Blockly.Arduino.Boards.profiles.nano = {
   builtinLed: Blockly.Arduino.Boards.profiles.uno.builtinLed,
   interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt
 };
+Blockly.Arduino.Boards.profiles.nano_168 =
+    Blockly.Arduino.Boards.duplicateBoardProfile(
+        Blockly.Arduino.Boards.profiles.nano_328,
+        'Arduino Nano 168',
+        'Arduino Nano with ATmega168 compatible board',
+        'arduino:avr:nano:cpu=atmega168');
 
 /** Arduino Duemilanove boards profile (ATmega168p, ATmega328p). */
 Blockly.Arduino.Boards.profiles.duemilanove_168p = {
-  name: 'Arduino Duemilanove 168p',
+  name: 'Arduino Nano 168p',
   description: 'Arduino Duemilanove with ATmega168p compatible board',
   compilerFlag: 'arduino:avr:diecimila:cpu=atmega168',
   analogPins: Blockly.Arduino.Boards.profiles.uno.analogPins,
