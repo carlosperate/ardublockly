@@ -20,32 +20,51 @@ goog.require('Blockly.Types');
 /** Common HSV hue for all blocks in this category. */
 Blockly.Blocks.io.HUE = 250;
 
-Blockly.Blocks['io_digitalwrite'] = {
-  /**
-   * Block for creating a 'set pin' to a state.
-   * @this Blockly.Block
-   */
+Blockly.Blocks['io_pinmode'] = {
   init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
-    this.setColour(Blockly.Blocks.io.HUE);
-    this.appendValueInput('STATE')
-        .appendField(Blockly.Msg.ARD_DIGITALWRITE)
+    this.appendDummyInput()
+        .appendField("pinMode(")
+        .appendField("pin")
         .appendField(new Blockly.FieldDropdown(
-            Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
-        .appendField(Blockly.Msg.ARD_WRITE_TO)
-        .setCheck(Blockly.Types.BOOLEAN.checkList);
-    this.setInputsInline(false);
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
+    this.appendDummyInput()
+        .appendField(",");
+    this.appendDummyInput()
+        .appendField("value")
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.ARD_OUTPUT, 'OUTPUT'], [Blockly.Msg.ARD_INPUT, 'INPUT']]),
+            'MODE');
+    this.appendDummyInput()
+        .appendField(")");
+    this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.io.HUE);
     this.setTooltip(Blockly.Msg.ARD_DIGITALWRITE_TIP);
-  },
-  /**
-   * Updates the content of the the pin related fields.
-   * @this Blockly.Block
-   */
-  updateFields: function() {
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'PIN', 'digitalPins');
+    this.setHelpUrl('http://arduino.cc/en/Reference/PinMode');
+  }
+};
+
+Blockly.Blocks['io_digitalwrite'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("digitalWrite(")
+        .appendField("pin")
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
+    this.appendDummyInput()
+        .appendField(",");
+    this.appendDummyInput()
+        .appendField("value")
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.ARD_HIGH, 'HIGH'], [Blockly.Msg.ARD_LOW, 'LOW']]),
+            'STATE');
+    this.appendDummyInput()
+        .appendField(")");
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_DIGITALWRITE_TIP);
+    this.setHelpUrl('http://arduino.cc/en/Reference/DigitalWrite');
   }
 };
 
@@ -182,7 +201,7 @@ Blockly.Blocks['io_highlow'] = {
     this.appendDummyInput()
         .appendField(
             new Blockly.FieldDropdown([[Blockly.Msg.ARD_HIGH, 'HIGH'], [Blockly.Msg.ARD_LOW, 'LOW']]),
-           'STATE');
+            'STATE');
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setTooltip(Blockly.Msg.ARD_HIGHLOW_TIP);
   },
@@ -208,7 +227,7 @@ Blockly.Blocks['io_pulsein'] = {
     this.setTooltip(Blockly.Msg.ARD_PULSE_TIP);
     this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
   },
-      /** @return {!string} The type of input value for the block, an integer. */
+  /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
     return Blockly.Types.NUMBER;
   }
@@ -236,7 +255,7 @@ Blockly.Blocks['io_pulsetimeout'] = {
     this.setTooltip(Blockly.Msg.ARD_PULSETIMEOUT_TIP);
     this.setHelpUrl('https://www.arduino.cc/en/Reference/PulseIn');
   },
-        /** @return {!string} The type of input value for the block, an integer. */
+  /** @return {!string} The type of input value for the block, an integer. */
   getBlockType: function() {
     return Blockly.Types.NUMBER;
   }

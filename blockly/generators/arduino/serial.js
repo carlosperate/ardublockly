@@ -49,17 +49,8 @@ Blockly.Arduino['serial_print'] = function(block) {
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code.
  */
-// Blockly.Arduino['serial_setup'] = function(block) {
-//   var serialId = block.getFieldValue('SERIAL_ID');
-//   var serialSpeed = block.getFieldValue('SPEED');
-//   var serialSetupCode = serialId + '.begin(' + serialSpeed + ');';
-//   Blockly.Arduino.addSetup('serial_' + serialId, serialSetupCode, true);
-//   var code = '';
-//   return code;
-// };
-
 Blockly.Arduino['serial_setup'] = function(block) {
-  var serialId = 'Serial';
+  var serialId = block.getFieldValue('SERIAL_ID');
   var serialSpeed = block.getFieldValue('SPEED');
   var serialSetupCode = serialId + '.begin(' + serialSpeed + ');';
   Blockly.Arduino.addSetup('serial_' + serialId, serialSetupCode, true);
