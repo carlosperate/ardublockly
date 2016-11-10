@@ -23,41 +23,55 @@ goog.require('Blockly.Types');
 Blockly.Blocks.serial.HUE = 160;
 
 Blockly.Blocks['serial_setup'] = {
-  /**
-   * Block for setting the speed of the serial connection.
-   * @this Blockly.Block
-   */
   init: function() {
     this.setHelpUrl('http://arduino.cc/en/Serial/Begin');
     this.setColour(Blockly.Blocks.serial.HUE);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.ARD_SERIAL_SETUP)
-        .appendField(
-            new Blockly.FieldDropdown(
-                Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
-        .appendField(Blockly.Msg.ARD_SERIAL_SPEED)
+        .appendField("Serial begin ( bps")
         .appendField(
             new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serialSpeed), 'SPEED')
-        .appendField(Blockly.Msg.ARD_SERIAL_BPS);
-    this.setInputsInline(true);
+        .appendField(")");
+    this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_SERIAL_SETUP_TIP);
   },
+
+// Blockly.Blocks['serial_setup'] = {
+//   /**
+//    * Block for setting the speed of the serial connection.
+//    * @this Blockly.Block
+//    */
+//   init: function() {
+//     this.setHelpUrl('http://arduino.cc/en/Serial/Begin');
+//     this.setColour(Blockly.Blocks.serial.HUE);
+//     this.appendDummyInput()
+//         .appendField(Blockly.Msg.ARD_SERIAL_SETUP)
+//         .appendField(
+//             new Blockly.FieldDropdown(
+//                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
+//         .appendField(Blockly.Msg.ARD_SERIAL_SPEED)
+//         .appendField(
+//             new Blockly.FieldDropdown(
+//                 Blockly.Arduino.Boards.selected.serialSpeed), 'SPEED')
+//         .appendField(Blockly.Msg.ARD_SERIAL_BPS);
+//     this.setInputsInline(true);
+//     this.setTooltip(Blockly.Msg.ARD_SERIAL_SETUP_TIP);
+//   },
   /**
    * Returns the serial instance name.
    * @return {!string} Serial instance name.
    * @this Blockly.Block
    */
-  getSerialSetupInstance: function() {
-    return this.getFieldValue('SERIAL_ID');
-  },
+  // getSerialSetupInstance: function() {
+  //   return this.getFieldValue('SERIAL_ID');
+  // },
   /**
    * Updates the content of the the serial related fields.
    * @this Blockly.Block
    */
   updateFields: function() {
-    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
-        this, 'SERIAL_ID', 'serial');
+//    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+//        this, 'SERIAL_ID', 'serial');
     Blockly.Arduino.Boards.refreshBlockFieldDropdown(
         this, 'SPEED', 'serialSpeed');
   }

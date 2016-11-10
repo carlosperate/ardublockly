@@ -123,11 +123,11 @@ Ardublockly.TOOLBOX_XML =
 '  <category id="catFunctions" name="Functions" custom="PROCEDURE"></category>' +
 '  <sep></sep>' +
 '  <category id="catInputOutput" name="Input/Output">' +
-'    <block type="io_digitalwrite">' +
-'      <value name="STATE">' +
-'        <block type="io_highlow"></block>' +
-'      </value>' +
-'    </block>' +
+//'    <block type="io_digitalwrite">' +
+//'      <value name="STATE">' +
+//'        <block type="io_highlow"></block>' +
+//'      </value>' +
+//'    </block>' +
 '    <block type="io_digitalread"></block>' +
 '    <block type="io_builtin_led">' +
 '      <value name="STATE">' +
