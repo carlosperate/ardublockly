@@ -126,27 +126,34 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="io_pinmode"></block>' +
     '    <block type="io_digitalwrite"></block>' +
     '    <block type="io_digitalread"></block>' +
-    '    <block type="io_builtin_led">' +
-    '      <value name="STATE">' +
-    '        <block type="io_highlow"></block>' +
+    // '    <block type="io_builtin_led">' +
+    // '      <value name="STATE">' +
+    // '        <block type="io_highlow"></block>' +
+    // '      </value>' +
+    // '    </block>' +
+    '    <block type="io_analogwrite">' +
+    '      <value name="DELAY_TIME_MILI">' +
+    '        <block type="math_number">' +
+    '          <field name="NUM">1000</field>' +
+    '        </block>' +
     '      </value>' +
     '    </block>' +
-    '    <block type="io_analogwrite"></block>' +
     '    <block type="io_analogread"></block>' +
     '    <block type="io_highlow"></block>' +
-    '    <block type="io_pulsein">' +
-    '      <value name="PULSETYPE">' +
-    '        <shadow type="io_highlow"></shadow>' +
-    '      </value>' +
-    '    </block>' +
-    '    <block type="io_pulsetimeout">' +
-    '      <value name="PULSETYPE">' +
-    '        <shadow type="io_highlow"></shadow>' +
-    '      </value>' +
-    '      <value name="TIMEOUT">' +
-    '        <block type="math_number"></block>' +
-    '      </value>'+
-    '    </block>' +
+    '    <block type="io_inputoutput"></block>' +
+    // '    <block type="io_pulsein">' +
+    // '      <value name="PULSETYPE">' +
+    // '        <shadow type="io_highlow"></shadow>' +
+    // '      </value>' +
+    // '    </block>' +
+    // '    <block type="io_pulsetimeout">' +
+    // '      <value name="PULSETYPE">' +
+    // '        <shadow type="io_highlow"></shadow>' +
+    // '      </value>' +
+    // '      <value name="TIMEOUT">' +
+    // '        <block type="math_number"></block>' +
+    // '      </value>'+
+    // '    </block>' +
     '  </category>' +
     '  <sep></sep>' +
     '  <category id="catTime" name="Time">' +

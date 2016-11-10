@@ -16,9 +16,9 @@ goog.require('Blockly.Arduino');
 
 Blockly.Arduino['io_pinmode'] = function(block) {
   var pin = block.getFieldValue('PIN');
-  var stateOutput = block.getFieldValue('STATE');
+  var stateOutput = block.getFieldValue('MODE');
 
-  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+  var pinSetupCode = 'pinMode(' + pin + ', '+ stateOutput +');';
   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
   var code = '';
@@ -33,12 +33,7 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
 
-  // var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
-  // Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
-
   var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
-
-  console.log("@@@@@@@@1");
 
   return code;
 };
@@ -49,26 +44,8 @@ Blockly.Arduino['io_digitalread'] = function(block) {
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
 
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
-
   var code = 'digitalRead(' + pin + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-Blockly.Arduino['io_builtin_led'] = function(block) {
-  var pin = block.getFieldValue('BUILT_IN_LED');
-  var stateOutput = Blockly.Arduino.valueToCode(
-          block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
-
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');
-
-  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
-
-  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
-  return code;
 };
 
 
@@ -79,9 +56,6 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
 
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Analogue Write');
-
-  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
   // Warn if the input value is out of range
   if ((stateOutput < 0) || (stateOutput > 255)) {
@@ -101,9 +75,6 @@ Blockly.Arduino['io_analogread'] = function(block) {
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.INPUT, 'Analogue Read');
 
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
-
   var code = 'analogRead(' + pin + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
@@ -114,33 +85,55 @@ Blockly.Arduino['io_highlow'] = function(block) {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino['io_pulsein'] = function(block) {
-  var pin = block.getFieldValue("PULSEPIN");
-  var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
-
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
-
-  var code = 'pulseIn(' + pin + ', ' + type + ')';
-
+Blockly.Arduino['io_inputoutput'] = function(block) {
+  var code = block.getFieldValue('MODE');
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino['io_pulsetimeout'] = function(block) {
-  var pin = block.getFieldValue("PULSEPIN");
-  var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
-  var timeout = Blockly.Arduino.valueToCode(block, "TIMEOUT", Blockly.Arduino.ORDER_ATOMIC);
+// Blockly.Arduino['io_pulsein'] = function(block) {
+//   var pin = block.getFieldValue("PULSEPIN");
+//   var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
+//
+//   Blockly.Arduino.reservePin(
+//       block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+//
+//   var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
+//   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+//
+//   var code = 'pulseIn(' + pin + ', ' + type + ')';
+//
+//   return [code, Blockly.Arduino.ORDER_ATOMIC];
+// };
+//
+// Blockly.Arduino['io_pulsetimeout'] = function(block) {
+//   var pin = block.getFieldValue("PULSEPIN");
+//   var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
+//   var timeout = Blockly.Arduino.valueToCode(block, "TIMEOUT", Blockly.Arduino.ORDER_ATOMIC);
+//
+//   Blockly.Arduino.reservePin(
+//       block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+//
+//   var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
+//   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+//
+//   var code = 'pulseIn(' + pin + ', ' + type + ', ' + timeout + ')';
+//
+//   return [code, Blockly.Arduino.ORDER_ATOMIC];
+// };
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
 
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
-
-  var code = 'pulseIn(' + pin + ', ' + type + ', ' + timeout + ')';
-
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-}; 
+// Blockly.Arduino['io_builtin_led'] = function(block) {
+//   var pin = block.getFieldValue('BUILT_IN_LED');
+//   var stateOutput = Blockly.Arduino.valueToCode(
+//           block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
+//
+//   Blockly.Arduino.reservePin(
+//       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');
+//
+//   var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+//   Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+//
+//   var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
+//   return code;
+// };
