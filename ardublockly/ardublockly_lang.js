@@ -15,7 +15,8 @@ Ardublockly.LANGUAGE_NAME = {
   'en': 'English',
   'es': 'Español',
   'nl': 'Nederlands',
-  'pt': 'Português'
+  'pt': 'Português',
+  'ru': 'Русский'
 };
 
 /**

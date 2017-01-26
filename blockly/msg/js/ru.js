@@ -7,9 +7,9 @@ goog.provide('Blockly.Msg.ru');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Добавить комментарий";
-Blockly.Msg.ARD_ANALOGREAD = "read analog pin#";  // untranslated
-Blockly.Msg.ARD_ANALOGREAD_TIP = "Return value between 0 and 1024";  // untranslated
-Blockly.Msg.ARD_ANALOGWRITE = "set analog pin#";  // untranslated
+Blockly.Msg.ARD_ANALOGREAD = "считать значение аналогового входа №";  // untranslated
+Blockly.Msg.ARD_ANALOGREAD_TIP = "Возвращает значение от 0 до 1024";  // untranslated
+Blockly.Msg.ARD_ANALOGWRITE = "установить значение аналогового выхода#";  // untranslated
 Blockly.Msg.ARD_ANALOGWRITE_TIP = "Write analog value between 0 and 255 to a specific PWM Port";  // untranslated
 Blockly.Msg.ARD_BUILTIN_LED = "set built-in LED";  // untranslated
 Blockly.Msg.ARD_BUILTIN_LED_TIP = "Light on or off for the built-in LED of the Arduino";  // untranslated
