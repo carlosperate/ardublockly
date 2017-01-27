@@ -31,55 +31,55 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoOpUploadedTitle: "Sketch caricato con successo",
   arduinoOpVerifiedTitle: "Sketch verificato con successo",
   arduinoOpOpenedTitle: "Sketch aperto nell'IDE",
-  arduinoOpOpenedBody: "Lo schetch dovrebbe essere stato caricato nell'IDE Arduino.",
+  arduinoOpOpenedBody: "Lo sketch dovrebbe essere stato caricato nell'IDE Arduino.",
   arduinoOpErrorUpVerTitle: "Compilazione o Caricamento fallito",
   arduinoOpErrorSketchTitle: "Sketch non torvato",
   arduinoOpErrorFlagTitle: "Argomento a linea di comando non valido",
   arduinoOpErrorFlagPrefTitle: "L'opzione passata al flag 'get-pref' non esiste",
   arduinoOpErrorIdeDirTitle: "Impossibile trovare l'IDE Arduino",
-  arduinoOpErrorIdeDirBody: "The compiler directory has not been set.<br>" +
-                            "Please set it in the Settings.",
-  arduinoOpErrorIdeOptionTitle: "What should we do with the Sketch?",
-  arduinoOpErrorIdeOptionBody: "The launch IDE option has not been set.<br>" +
-                               "Please select an IDE option in the Settings.",
-  arduinoOpErrorIdePortTitle: "Serial Port unavailable",
-  arduinoOpErrorIdePortBody: "The Serial Port is not accessible.<br>" +
-                             "Please check if the Arduino is correctly connected to the PC and select the Serial Port in the Settings.",
-  arduinoOpErrorIdeBoardTitle: "Unknown Arduino Board",
-  arduinoOpErrorIdeBoardBody: "The Arduino Board has not been set.<br>" +
-                              "Please select the appropriate Arduino Board from the settings.",
+  arduinoOpErrorIdeDirBody: "La cartella del compilatore non è stata configurata.<br>" +
+                            "Per favore selezionala nelle impostazioni.",
+  arduinoOpErrorIdeOptionTitle: "Cosa dobbiamo fare con lo Sketch?",
+  arduinoOpErrorIdeOptionBody: "L'opzione per lanciare l'IDE non è stata impostata.<br>" +
+                               "Per favore configura l'opzione IDE nelle impostazioni.",
+  arduinoOpErrorIdePortTitle: "Porta seriale non disponibile",
+  arduinoOpErrorIdePortBody: "La porta seriale non è accessibile.<br>" +
+                             "Per favore controlla che Arduino sia collegato correttamente al PC e seleziona la porta seriale nelle impostazioni.",
+  arduinoOpErrorIdeBoardTitle: "Scheda Arduino sconosciuta",
+  arduinoOpErrorIdeBoardBody: "La scheda Arduino non è stata configurata.<br>" +
+                              "Per favore seleziona la scheda Arduino nelle opzioni.",
   /* Modals */
-  noServerTitle: "Ardublockly app not running",
-  noServerTitleBody: "<p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>" +
-                     "<p>If you are using an online version you will not be able to configure the settings nor load the blocks code into an Arduino.</p>" +
-                     "<p>Installation instruction can be found in the <a href=\"https://github.com/carlosperate/ardublockly\">Ardublockly repository</a>.</p>" +
-                     "<p>If you have Ardublockly already installed, make sure the application is running correctly.</p>",
-  noServerNoLangBody: "If the Ardublockly application is not running the language cannot be fully changed.",
-  addBlocksTitle: "Additional Blocks",
+  noServerTitle: "L'applicazione Ardublockly non sta girando",
+  noServerTitleBody: "<p>Affinché tutte le funzionalità di Ardublockly vengano abilitate, l'applicazione desktop di Ardublockly deve girare sul tuo computer.</p>" +
+                     "<p>Se stai usando una versione online, non potrai configurare le opzioni e nemmeno caricare il codice dei blocchi su una scheda Arduino collegata al tuo PC.</p>" +
+                     "<p>Le istruzioni di installazione si possono trovare nel <a href=\"https://github.com/carlosperate/ardublockly\">repository Ardublockly</a>.</p>" +
+                     "<p>Se hai già installato Ardublockly, accertati che l'applicazione stia girando correttamente.</p>",
+  noServerNoLangBody: "Se l'applicazione Ardublockly non sta girando, non si può cambiare lingua.",
+  addBlocksTitle: "Blocchi aggiuntivi",
   /* Alerts */
-  loadNewBlocksTitle: "Load new blocks?",
-  loadNewBlocksBody: "Loading a new XML file will replace the current blocks from the workspace.<br>" +
-                     "Are you sure you want to proceed?",
-  discardBlocksTitle: "Delete blocks?",
-  discardBlocksBody: "There are %1 blocks on the workspace.<br>" +
-                     "Are you sure you want to delete them?",
-  invalidXmlTitle: "Invalid XML",
-  invalidXmlBody: "The XML file was not successfully parsed into blocks. Please review the XML code and try again.",
+  loadNewBlocksTitle: "Confermi il caricamento dei nuovi blocchi?",
+  loadNewBlocksBody: "Caricando un nuovo file XML verranno sovrascritti i blocchi nell'area di lavoro attuale.<br>" +
+                     "Sei sicuro di voler continuare?",
+  discardBlocksTitle: "Confermi la cancellazione dei blocchi?",
+  discardBlocksBody: "Ci sono %1 blocchi nell'area di lavoro.<br>" +
+                     "Sei sicuro di volerli cancellare?",
+  invalidXmlTitle: "XML non valido",
+  invalidXmlBody: "Il file XML non è stato convertito correttamente. Per favore controlla il codice XML e riprova.",
   /* Tooltips */
-  uploadingSketch: "Uploading Sketch into Arduino...",
-  uploadSketch: "Carica lo sketch su Arduino",
-  verifyingSketch: "Verifying Sketch...",
+  uploadingSketch: "Caricamento dello Sketch sulla scheda Arduino in corso...",
+  uploadSketch: "Carica lo sketch sulla scheda Arduino",
+  verifyingSketch: "Verifica dello Sketch in corso...",
   verifySketch: "Verifica lo Sketch",
-  openingSketch: "Opening Sketch in the Arduino IDE...",
+  openingSketch: "Apertura dello Sketch nell'IDE di Arduino...",
   openSketch: "Apri lo Sketch nell'IDE",
-  notImplemented: "Function not yet implemented",
+  notImplemented: "Funzione non ancora implementata",
   /* Prompts */
   ok: "OK",
   okay: "Okay",
   cancel: "Annulla",
   return: "Ritorna",
   /* Cards */
-  arduinoSourceCode: "Arduino Source Code",
+  arduinoSourceCode: "Codice Sorgente Arduino",
   blocksXml: "XML dei blocchi",
   /* Toolbox Categories*/
   catLogic: "Logica",
@@ -92,5 +92,5 @@ Ardublockly.LOCALISED_TEXT = {
   catTime: "Tempo",
   catAudio: "Audio",
   catMotors: "Motori",
-  catComms: "Communicazione",
+  catComms: "Comunicazione",
 };
