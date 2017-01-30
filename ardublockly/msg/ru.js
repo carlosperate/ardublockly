@@ -2,7 +2,7 @@ var Ardublockly = Ardublockly || {};
 Ardublockly.LOCALISED_TEXT = {
   translationLanguage: "Русский",
   title: "Ardublockly",
-  blocks: "Blocks",
+  blocks: "Блоки",
   /* Menu */
   open: "Открыть",
   save: "Сохранить",
@@ -20,7 +20,7 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoBoardDefault: "Ардуино плата неизвестная",
   comPort: "COM Порт",
   comPortDefault: "COM Порт неизвестен",
-  defaultIdeButton: "Default IDE Button",
+  defaultIdeButton: "Кнопка IDE по умолчанию",
   defaultIdeButtonDefault: "IDE опции неизвестны",
   language: "Язык",
   languageDefault: "Язык неизвестен",
@@ -34,7 +34,7 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoOpOpenedBody: "Скетч должен быть загружен в Arduino IDE.",
   arduinoOpErrorUpVerTitle: "Компиляция или загрузка провалились",
   arduinoOpErrorSketchTitle: "Скетч не найден",
-  arduinoOpErrorFlagTitle: "Неправильный command line аргумент",
+  arduinoOpErrorFlagTitle: "Неправильный аргумент командной строки",
   arduinoOpErrorFlagPrefTitle: "Preference passed to 'get-pref' flag does not exist",
   arduinoOpErrorIdeDirTitle: "Невозможно найти Arduino IDE",
   arduinoOpErrorIdeDirBody: "Не задан путь к компилятору.<br>" +
@@ -55,32 +55,32 @@ Ardublockly.LOCALISED_TEXT = {
                      "<p>Installation instruction can be found in the <a href=\"https://github.com/carlosperate/ardublockly\">Ardublockly repository</a>.</p>" +
                      "<p>If you have Ardublockly already installed, make sure the application is running correctly.</p>",
   noServerNoLangBody: "If the Ardublockly application is not running the language cannot be fully changed.",
-  addBlocksTitle: "Additional Blocks",
+  addBlocksTitle: "Дополнительные блоки",
   /* Alerts */
-  loadNewBlocksTitle: "Load new blocks?",
+  loadNewBlocksTitle: "Загрузить новые блоки?",
   loadNewBlocksBody: "Loading a new XML file will replace the current blocks from the workspace.<br>" +
                      "Are you sure you want to proceed?",
-  discardBlocksTitle: "Delete blocks?",
+  discardBlocksTitle: "Удалить блоки?",
   discardBlocksBody: "There are %1 blocks on the workspace.<br>" +
                      "Are you sure you want to delete them?",
-  invalidXmlTitle: "Invalid XML",
+  invalidXmlTitle: "Неверный XML",
   invalidXmlBody: "The XML file was not successfully parsed into blocks. Please review the XML code and try again.",
   /* Tooltips */
-  uploadingSketch: "Uploading Sketch into Arduino...",
-  uploadSketch: "Upload Sketch to the Arduino",
-  verifyingSketch: "Verifying Sketch...",
-  verifySketch: "Verify the Sketch",
-  openingSketch: "Opening Sketch in the Arduino IDE...",
-  openSketch: "Open Sketch in IDE",
-  notImplemented: "Function not yet implemented",
+  uploadingSketch: "Загружаю код в Arduino...",
+  uploadSketch: "Загрузить код в Arduino",
+  verifyingSketch: "Проверка скетча...",
+  verifySketch: "Проверить скетч на ошибки",
+  openingSketch: "Открываем скетч в Arduino IDE...",
+  openSketch: "Открыть скетч в Arduino IDE",
+  notImplemented: "Функция еще не внедрена",
   /* Prompts */
   ok: "Ok",
   okay: "Okay",
   cancel: "Отменить",
   return: "Вернуться",
   /* Cards */
-  arduinoSourceCode: "Arduino Source Code",
-  blocksXml: "Blocks XML",
+  arduinoSourceCode: "Исходный код Arduino",
+  blocksXml: "Блоки в XML",
   /* Toolbox Categories*/
   catLogic: "Логика",
   catLoops: "Циклы",
