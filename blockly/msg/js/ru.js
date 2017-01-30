@@ -7,21 +7,21 @@ goog.provide('Blockly.Msg.ru');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Добавить комментарий";
-Blockly.Msg.ARD_ANALOGREAD = "считать значение аналогового входа №";  // untranslated
+Blockly.Msg.ARD_ANALOGREAD = "считать показания аналогового входа №";  // untranslated
 Blockly.Msg.ARD_ANALOGREAD_TIP = "Возвращает значение от 0 до 1024";  // untranslated
 Blockly.Msg.ARD_ANALOGWRITE = "установить значение аналогового выхода#";  // untranslated
-Blockly.Msg.ARD_ANALOGWRITE_TIP = "Write analog value between 0 and 255 to a specific PWM Port";  // untranslated
-Blockly.Msg.ARD_BUILTIN_LED = "set built-in LED";  // untranslated
+Blockly.Msg.ARD_ANALOGWRITE_TIP = "Записать значение от 0 до 255 в ШИМ порт";  // untranslated
+Blockly.Msg.ARD_BUILTIN_LED = "гастроить встроенный светодиод";  // untranslated
 Blockly.Msg.ARD_BUILTIN_LED_TIP = "Light on or off for the built-in LED of the Arduino";  // untranslated
-Blockly.Msg.ARD_COMPONENT_WARN1 = "A %1 configuration block with the same %2 name must be added to use this block!";  // untranslated
-Blockly.Msg.ARD_DEFINE = "Define";  // untranslated
-Blockly.Msg.ARD_DIGITALREAD = "read digital pin#";  // untranslated
-Blockly.Msg.ARD_DIGITALREAD_TIP = "Read digital value on a pin: HIGH or LOW";  // untranslated
-Blockly.Msg.ARD_DIGITALWRITE = "set digitial pin#";  // untranslated
-Blockly.Msg.ARD_DIGITALWRITE_TIP = "Write digital value HIGH or LOW to a specific Port";  // untranslated
-Blockly.Msg.ARD_FUN_RUN_LOOP = "Arduino loop forever:";  // untranslated
-Blockly.Msg.ARD_FUN_RUN_SETUP = "Arduino run first:";  // untranslated
-Blockly.Msg.ARD_FUN_RUN_TIP = "Defines the Arduino setup() and loop() functions.";  // untranslated
+Blockly.Msg.ARD_COMPONENT_WARN1 = "Чтобы использовать этот блок должен быть добавлен %1 конфигурационный блок с тем же названием %2!";  // untranslated
+Blockly.Msg.ARD_DEFINE = "Определить";  // untranslated
+Blockly.Msg.ARD_DIGITALREAD = "считать цифровой вывод#";  // untranslated
+Blockly.Msg.ARD_DIGITALREAD_TIP = "Считать высокое или низкое цифровые значения на выводе";  // untranslated
+Blockly.Msg.ARD_DIGITALWRITE = "установить значение цифрового вывода#";  // untranslated
+Blockly.Msg.ARD_DIGITALWRITE_TIP = "Записать высокое или низкое цифровые значения в порт";  // untranslated
+Blockly.Msg.ARD_FUN_RUN_LOOP = "Бесконечный цикл:";  // untranslated
+Blockly.Msg.ARD_FUN_RUN_SETUP = "Функция инициализации:";  // untranslated
+Blockly.Msg.ARD_FUN_RUN_TIP = "Определяет функции setup() и loop() платы Arduino.";  // untranslated
 Blockly.Msg.ARD_HIGH = "HIGH";  // untranslated
 Blockly.Msg.ARD_HIGHLOW_TIP = "Set a pin state logic High or Low.";  // untranslated
 Blockly.Msg.ARD_LOW = "LOW";  // untranslated
