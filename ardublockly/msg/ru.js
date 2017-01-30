@@ -36,20 +36,20 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoOpErrorSketchTitle: "Скетч не найден",
   arduinoOpErrorFlagTitle: "Неправильный command line аргумент",
   arduinoOpErrorFlagPrefTitle: "Preference passed to 'get-pref' flag does not exist",
-  arduinoOpErrorIdeDirTitle: "Unable to find Arduino IDE",
-  arduinoOpErrorIdeDirBody: "The compiler directory has not been set.<br>" +
-                            "Please set it in the Settings.",
-  arduinoOpErrorIdeOptionTitle: "What should we do with the Sketch?",
+  arduinoOpErrorIdeDirTitle: "Невозможно найти Arduino IDE",
+  arduinoOpErrorIdeDirBody: "Не задан путь к компилятору.<br>" +
+                            "Задайте путь в настройках.",
+  arduinoOpErrorIdeOptionTitle: "Что нам нужно сделать с этим Скетчем?",
   arduinoOpErrorIdeOptionBody: "The launch IDE option has not been set.<br>" +
                                "Please select an IDE option in the Settings.",
-  arduinoOpErrorIdePortTitle: "Serial Port unavailable",
-  arduinoOpErrorIdePortBody: "The Serial Port is not accessible.<br>" +
+  arduinoOpErrorIdePortTitle: "Последовательный порт не доступен",
+  arduinoOpErrorIdePortBody: "Последовательный порт не доступен.<br>" +
                              "Please check if the Arduino is correctly connected to the PC and select the Serial Port in the Settings.",
-  arduinoOpErrorIdeBoardTitle: "Unknown Arduino Board",
-  arduinoOpErrorIdeBoardBody: "The Arduino Board has not been set.<br>" +
+  arduinoOpErrorIdeBoardTitle: "Неизвестная плата Arduino",
+  arduinoOpErrorIdeBoardBody: "Плата Arduino не была задана.<br>" +
                               "Please select the appropriate Arduino Board from the settings.",
   /* Modals */
-  noServerTitle: "Ardublockly app not running",
+  noServerTitle: "Ardublockly не запущен",
   noServerTitleBody: "<p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>" +
                      "<p>If you are using an online version you will not be able to configure the settings nor load the blocks code into an Arduino.</p>" +
                      "<p>Installation instruction can be found in the <a href=\"https://github.com/carlosperate/ardublockly\">Ardublockly repository</a>.</p>" +
