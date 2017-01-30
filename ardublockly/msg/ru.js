@@ -2,7 +2,7 @@ var Ardublockly = Ardublockly || {};
 Ardublockly.LOCALISED_TEXT = {
   translationLanguage: "Русский",
   title: "Ardublockly",
-  blocks: "Blocks",
+  blocks: "Блоки",
   /* Menu */
   open: "Открыть",
   save: "Сохранить",
@@ -20,7 +20,7 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoBoardDefault: "Ардуино плата неизвестная",
   comPort: "COM Порт",
   comPortDefault: "COM Порт неизвестен",
-  defaultIdeButton: "Default IDE Button",
+  defaultIdeButton: "Кнопка IDE по умолчанию",
   defaultIdeButtonDefault: "IDE опции неизвестны",
   language: "Язык",
   languageDefault: "Язык неизвестен",
@@ -34,53 +34,53 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoOpOpenedBody: "Скетч должен быть загружен в Arduino IDE.",
   arduinoOpErrorUpVerTitle: "Компиляция или загрузка провалились",
   arduinoOpErrorSketchTitle: "Скетч не найден",
-  arduinoOpErrorFlagTitle: "Неправильный command line аргумент",
+  arduinoOpErrorFlagTitle: "Неправильный аргумент командной строки",
   arduinoOpErrorFlagPrefTitle: "Preference passed to 'get-pref' flag does not exist",
-  arduinoOpErrorIdeDirTitle: "Unable to find Arduino IDE",
-  arduinoOpErrorIdeDirBody: "The compiler directory has not been set.<br>" +
-                            "Please set it in the Settings.",
-  arduinoOpErrorIdeOptionTitle: "What should we do with the Sketch?",
+  arduinoOpErrorIdeDirTitle: "Невозможно найти Arduino IDE",
+  arduinoOpErrorIdeDirBody: "Не задан путь к компилятору.<br>" +
+                            "Задайте путь в настройках.",
+  arduinoOpErrorIdeOptionTitle: "Что нам нужно сделать с этим Скетчем?",
   arduinoOpErrorIdeOptionBody: "The launch IDE option has not been set.<br>" +
                                "Please select an IDE option in the Settings.",
-  arduinoOpErrorIdePortTitle: "Serial Port unavailable",
-  arduinoOpErrorIdePortBody: "The Serial Port is not accessible.<br>" +
+  arduinoOpErrorIdePortTitle: "Последовательный порт не доступен",
+  arduinoOpErrorIdePortBody: "Последовательный порт не доступен.<br>" +
                              "Please check if the Arduino is correctly connected to the PC and select the Serial Port in the Settings.",
-  arduinoOpErrorIdeBoardTitle: "Unknown Arduino Board",
-  arduinoOpErrorIdeBoardBody: "The Arduino Board has not been set.<br>" +
+  arduinoOpErrorIdeBoardTitle: "Неизвестная плата Arduino",
+  arduinoOpErrorIdeBoardBody: "Плата Arduino не была задана.<br>" +
                               "Please select the appropriate Arduino Board from the settings.",
   /* Modals */
-  noServerTitle: "Ardublockly app not running",
+  noServerTitle: "Ardublockly не запущен",
   noServerTitleBody: "<p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>" +
                      "<p>If you are using an online version you will not be able to configure the settings nor load the blocks code into an Arduino.</p>" +
                      "<p>Installation instruction can be found in the <a href=\"https://github.com/carlosperate/ardublockly\">Ardublockly repository</a>.</p>" +
                      "<p>If you have Ardublockly already installed, make sure the application is running correctly.</p>",
   noServerNoLangBody: "If the Ardublockly application is not running the language cannot be fully changed.",
-  addBlocksTitle: "Additional Blocks",
+  addBlocksTitle: "Дополнительные блоки",
   /* Alerts */
-  loadNewBlocksTitle: "Load new blocks?",
+  loadNewBlocksTitle: "Загрузить новые блоки?",
   loadNewBlocksBody: "Loading a new XML file will replace the current blocks from the workspace.<br>" +
                      "Are you sure you want to proceed?",
-  discardBlocksTitle: "Delete blocks?",
+  discardBlocksTitle: "Удалить блоки?",
   discardBlocksBody: "There are %1 blocks on the workspace.<br>" +
                      "Are you sure you want to delete them?",
-  invalidXmlTitle: "Invalid XML",
+  invalidXmlTitle: "Неверный XML",
   invalidXmlBody: "The XML file was not successfully parsed into blocks. Please review the XML code and try again.",
   /* Tooltips */
-  uploadingSketch: "Uploading Sketch into Arduino...",
-  uploadSketch: "Upload Sketch to the Arduino",
-  verifyingSketch: "Verifying Sketch...",
-  verifySketch: "Verify the Sketch",
-  openingSketch: "Opening Sketch in the Arduino IDE...",
-  openSketch: "Open Sketch in IDE",
-  notImplemented: "Function not yet implemented",
+  uploadingSketch: "Загружаю код в Arduino...",
+  uploadSketch: "Загрузить код в Arduino",
+  verifyingSketch: "Проверка скетча...",
+  verifySketch: "Проверить скетч на ошибки",
+  openingSketch: "Открываем скетч в Arduino IDE...",
+  openSketch: "Открыть скетч в Arduino IDE",
+  notImplemented: "Функция еще не внедрена",
   /* Prompts */
   ok: "Ok",
   okay: "Okay",
   cancel: "Отменить",
   return: "Вернуться",
   /* Cards */
-  arduinoSourceCode: "Arduino Source Code",
-  blocksXml: "Blocks XML",
+  arduinoSourceCode: "Исходный код Arduino",
+  blocksXml: "Блоки в XML",
   /* Toolbox Categories*/
   catLogic: "Логика",
   catLoops: "Циклы",
