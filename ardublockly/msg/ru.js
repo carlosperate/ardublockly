@@ -13,18 +13,18 @@ Ardublockly.LOCALISED_TEXT = {
   examples: "Примеры",
   /* Settings */
   compilerLocation: "Путь к компилятору",
-  compilerLocationDefault: "Путь к компилятору неизвестен",
+  compilerLocationDefault: "Путь к компилятору по умолчанию",
   sketchFolder: "Папка со скетчами",
-  sketchFolderDefault: "Папка со скетчами неизвестна",
-  arduinoBoard: "Ардуино плата",
-  arduinoBoardDefault: "Ардуино плата неизвестная",
+  sketchFolderDefault: "Папка со скетчами по умолчанию",
+  arduinoBoard: "Плата Arduino",
+  arduinoBoardDefault: "Плата Arduino по умолчанию",
   comPort: "COM Порт",
-  comPortDefault: "COM Порт неизвестен",
+  comPortDefault: "COM Порт по умолчанию",
   defaultIdeButton: "Кнопка IDE по умолчанию",
-  defaultIdeButtonDefault: "IDE опции неизвестны",
+  defaultIdeButtonDefault: "IDE опции по умолчанию",
   language: "Язык",
-  languageDefault: "Язык неизвестен",
-  sketchName: "Имя скетча",
+  languageDefault: "Язык по умолчанию",
+  sketchName: "Название скетча",
   /* Arduino console output */
   arduinoOpMainTitle: "Arduino IDE вывод",
   arduinoOpWaiting: "Ждем IDE вывод...",
@@ -40,31 +40,31 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoOpErrorIdeDirBody: "Не задан путь к компилятору.<br>" +
                             "Задайте путь в настройках.",
   arduinoOpErrorIdeOptionTitle: "Что нам нужно сделать с этим Скетчем?",
-  arduinoOpErrorIdeOptionBody: "The launch IDE option has not been set.<br>" +
-                               "Please select an IDE option in the Settings.",
+  arduinoOpErrorIdeOptionBody: "Параметры запуска IDE не были настроены.<br>" +
+                               "Выберите параметры закуска IDE в настройках.",
   arduinoOpErrorIdePortTitle: "Последовательный порт не доступен",
   arduinoOpErrorIdePortBody: "Последовательный порт не доступен.<br>" +
-                             "Please check if the Arduino is correctly connected to the PC and select the Serial Port in the Settings.",
+                             "Проверьте, правильно ли подключена плата Arduino и выберите последовательный порт в Настройках.",
   arduinoOpErrorIdeBoardTitle: "Неизвестная плата Arduino",
   arduinoOpErrorIdeBoardBody: "Плата Arduino не была задана.<br>" +
-                              "Please select the appropriate Arduino Board from the settings.",
+                              "Выберите соответствующую плату Arduino из списка.",
   /* Modals */
   noServerTitle: "Ardublockly не запущен",
-  noServerTitleBody: "<p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>" +
-                     "<p>If you are using an online version you will not be able to configure the settings nor load the blocks code into an Arduino.</p>" +
-                     "<p>Installation instruction can be found in the <a href=\"https://github.com/carlosperate/ardublockly\">Ardublockly repository</a>.</p>" +
-                     "<p>If you have Ardublockly already installed, make sure the application is running correctly.</p>",
-  noServerNoLangBody: "If the Ardublockly application is not running the language cannot be fully changed.",
+  noServerTitleBody: "<p>Чтобы воспользоваться всеми возможностями Ardublockly, приложение Ardublockly для рабочего стола должно быть запущено на пользовательском компьютере.</p>" +
+                     "<p>Если вы используете онлайн версию, вы не сможете изменять настройки а также загружать код в Arduino.</p>" +
+                     "<p>Инструкции по установке можно найти на <a href=\"https://github.com/carlosperate/ardublockly\">Ardublockly repository</a>.</p>" +
+                     "<p>Если Ardublockly уже установлен, убедитесь что приложение работает корректно.</p>",
+  noServerNoLangBody: "Если приложение Ardublockly не запущено, язык не может быть изменен.",
   addBlocksTitle: "Дополнительные блоки",
   /* Alerts */
   loadNewBlocksTitle: "Загрузить новые блоки?",
-  loadNewBlocksBody: "Loading a new XML file will replace the current blocks from the workspace.<br>" +
-                     "Are you sure you want to proceed?",
+  loadNewBlocksBody: "Загрузка нового XML файла заменит текущие блоки в рабочем поле.<br>" +
+                     "Вы уверены что хотите продолжить?",
   discardBlocksTitle: "Удалить блоки?",
-  discardBlocksBody: "There are %1 blocks on the workspace.<br>" +
-                     "Are you sure you want to delete them?",
+  discardBlocksBody: "Имеется %1 блоков в рабочем поле.<br>" +
+                     "Вы действительно хотите удалить их?",
   invalidXmlTitle: "Неверный XML",
-  invalidXmlBody: "The XML file was not successfully parsed into blocks. Please review the XML code and try again.",
+  invalidXmlBody: "XML файл не был загружен. Проверьте код XML и попробуйте снова.",
   /* Tooltips */
   uploadingSketch: "Загружаю код в Arduino...",
   uploadSketch: "Загрузить код в Arduino",

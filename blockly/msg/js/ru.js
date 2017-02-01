@@ -7,20 +7,20 @@ goog.provide('Blockly.Msg.ru');
 goog.require('Blockly.Msg');
 
 Blockly.Msg.ADD_COMMENT = "Добавить комментарий";
-Blockly.Msg.ARD_ANALOGREAD = "считать значение аналогового входа №";  // untranslated
+Blockly.Msg.ARD_ANALOGREAD = "считать показания аналогового входа №";  // untranslated
 Blockly.Msg.ARD_ANALOGREAD_TIP = "Возвращает значение от 0 до 1024";  // untranslated
 Blockly.Msg.ARD_ANALOGWRITE = "установить значение аналогового выхода#";  // untranslated
-Blockly.Msg.ARD_ANALOGWRITE_TIP = "Записать аналоговое значение между 0 и 255 в указанный ШИМ порт";  // untranslated
+Blockly.Msg.ARD_ANALOGWRITE_TIP = "Записать аналоговое значение от 0 и 255 в указанный ШИМ порт";  // untranslated
 Blockly.Msg.ARD_BUILTIN_LED = "установить встроенный светодиод";  // untranslated
 Blockly.Msg.ARD_BUILTIN_LED_TIP = "Включает и выключает встроенный светодиод на Arduino";  // untranslated
 Blockly.Msg.ARD_COMPONENT_WARN1 = "Блок настроек %1 с тем же именем %2 должен быть использован с этим блоком!";  // untranslated
-Blockly.Msg.ARD_DEFINE = "Определи";  // untranslated
+Blockly.Msg.ARD_DEFINE = "Определить";  // untranslated
 Blockly.Msg.ARD_DIGITALREAD = "считать цифровой пин#";  // untranslated
 Blockly.Msg.ARD_DIGITALREAD_TIP = "Считать цифровое значение с пина: HIGH или LOW";  // untranslated
 Blockly.Msg.ARD_DIGITALWRITE = "задать цифровой пин#";  // untranslated
-Blockly.Msg.ARD_DIGITALWRITE_TIP = "Запиши цифровое значение HIGH или LOW на указанный порт";  // untranslated
+Blockly.Msg.ARD_DIGITALWRITE_TIP = "Записать цифровое значение HIGH или LOW на указанный порт";  // untranslated
 Blockly.Msg.ARD_FUN_RUN_LOOP = "Запускается в бесконечном цикле:";  // untranslated
-Blockly.Msg.ARD_FUN_RUN_SETUP = "Запускается единожды вначале:";  // untranslated
+Blockly.Msg.ARD_FUN_RUN_SETUP = "Запускается один раз вначале:";  // untranslated
 Blockly.Msg.ARD_FUN_RUN_TIP = "Определяет Arduino-функции setup() и loop().";  // untranslated
 Blockly.Msg.ARD_HIGH = "HIGH";  // untranslated
 Blockly.Msg.ARD_HIGHLOW_TIP = "Устанавливает значения для пина High или Low.";  // untranslated
