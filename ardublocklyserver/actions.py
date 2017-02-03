@@ -120,8 +120,13 @@ def load_arduino_cli(sketch_path=None):
                 cli_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                 shell=False)
             out, error = process.communicate()
-            out = six.u(out)
-            error = six.u(error)
+            #out = six.u(out)
+            #error = six.u(error)
+            import locale
+            current_locale = locale.getdefaultlocale()[1]
+            out = out.decode(current_locale)
+            error = error.decode(current_locale)
+
             exit_code = process.returncode
             print('Arduino output:\n%s' % out)
             print('Arduino Error output:\n%s' % error)

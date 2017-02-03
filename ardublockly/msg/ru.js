@@ -26,8 +26,8 @@ Ardublockly.LOCALISED_TEXT = {
   languageDefault: "Язык по умолчанию",
   sketchName: "Название скетча",
   /* Arduino console output */
-  arduinoOpMainTitle: "Arduino IDE вывод",
-  arduinoOpWaiting: "Ждем IDE вывод...",
+  arduinoOpMainTitle: "Сообщения Arduino IDE",
+  arduinoOpWaiting: "Ждем сообщений от Arduino IDE...",
   arduinoOpUploadedTitle: "Скетч успешно загружен",
   arduinoOpVerifiedTitle: "Скетч успешно скомпилирован",
   arduinoOpOpenedTitle: "Скетч был открыт в Arduino IDE",
@@ -80,7 +80,7 @@ Ardublockly.LOCALISED_TEXT = {
   return: "Вернуться",
   /* Cards */
   arduinoSourceCode: "Исходный код Arduino",
-  blocksXml: "Блоки в XML",
+  blocksXml: "XML блоки",
   /* Toolbox Categories*/
   catLogic: "Логика",
   catLoops: "Циклы",
