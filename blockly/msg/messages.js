@@ -1234,7 +1234,8 @@ Blockly.Msg.ARD_TONE_TIP = 'Sets tone on pin to specified frequency within range
 Blockly.Msg.ARD_TONE_WARNING = 'Frequency must be in range 31 - 65535';
 Blockly.Msg.ARD_NOTONE = 'Turn off tone on pin #';
 Blockly.Msg.ARD_NOTONE_TIP = 'Turns the tone off on the selected pin';
-
+Blockly.Msg.ARD_PULLUP_TIP = 'Sets pin # into Pull Up mode';
+Blockly.Msg.ARD_PULLUP = 'INPUT_PULLUP';
 /// Ardublockly instances
 Blockly.Msg.NEW_INSTANCE = 'New instance...';
 Blockly.Msg.RENAME_INSTANCE = 'Rename instance...';

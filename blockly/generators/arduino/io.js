@@ -28,11 +28,19 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
 
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+  if(stateOutput == 'INPUT_PULLUP')
+  {
+    var pinSetupCode = 'pinMode(' + pin + ', INPUT_PULLUP);';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+  }
 
-  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+  else
+  {
+    var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+  
+    var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';}
 
-  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
   return code;
 };
 
@@ -65,7 +73,7 @@ Blockly.Arduino['io_digitalread'] = function(block) {
 Blockly.Arduino['io_builtin_led'] = function(block) {
   var pin = block.getFieldValue('BUILT_IN_LED');
   var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
+      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || Blockly.Arduino.valueToCode( block, 'INPUT_PULLUP', Blockly.Arduino.ORDER_ATOMIC) ||'LOW';
 
   Blockly.Arduino.reservePin(
       block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');
@@ -134,6 +142,11 @@ Blockly.Arduino['io_analogread'] = function(block) {
  */
 Blockly.Arduino['io_highlow'] = function(block) {
   var code = block.getFieldValue('STATE');
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino['io_input_pullup'] = function(block) {
+  var code = "INPUT_PULLUP";
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

@@ -137,6 +137,7 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="io_analogwrite"></block>' +
 '    <block type="io_analogread"></block>' +
 '    <block type="io_highlow"></block>' +
+'    <block type="io_input_pullup"></block>' +
 '    <block type="io_pulsein">' +
 '      <value name="PULSETYPE">' +
 '        <shadow type="io_highlow"></shadow>' +

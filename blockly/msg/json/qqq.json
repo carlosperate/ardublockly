@@ -474,6 +474,8 @@
 	"ARD_TONE_WARNING": "",
 	"ARD_NOTONE": "",
 	"ARD_NOTONE_TIP": "",
+	"ARD_PULLUP_TIP": "",
+	"ARD_PULLUP": "",
 	"NEW_INSTANCE": "Ardublockly instances",
 	"RENAME_INSTANCE": "",
 	"NEW_INSTANCE_TITLE": "",

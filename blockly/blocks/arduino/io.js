@@ -192,6 +192,20 @@ Blockly.Blocks['io_highlow'] = {
   }
 };
 
+Blockly.Blocks['io_input_pullup'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_PULLUP);
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PULLUP_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Constants');
+  },
+  getBlockType: function() {
+    return Blockly.Types.SHORT_NUMBER;
+  }
+};
+
 Blockly.Blocks['io_pulsein'] = {
   init: function() {
     this.appendDummyInput()

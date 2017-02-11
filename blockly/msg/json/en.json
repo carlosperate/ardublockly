@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "Ellen Spertus <ellen.spertus@gmail.com>",
-		"lastupdated": "2016-10-09 00:55:05.070000",
+		"lastupdated": "2017-02-10 23:55:40.611000",
 		"locale": "en",
 		"messagedocumentation" : "qqq"
 	},
@@ -480,6 +480,8 @@
 	"ARD_TONE_WARNING": "Frequency must be in range 31 - 65535",
 	"ARD_NOTONE": "Turn off tone on pin #",
 	"ARD_NOTONE_TIP": "Turns the tone off on the selected pin",
+	"ARD_PULLUP_TIP": "Sets pin # into Pull Up mode",
+	"ARD_PULLUP": "INPUT_PULLUP",
 	"NEW_INSTANCE": "New instance...",
 	"RENAME_INSTANCE": "Rename instance...",
 	"NEW_INSTANCE_TITLE": "New instance name:",
