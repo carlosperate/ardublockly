@@ -26,16 +26,18 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
   var stateOutput = Blockly.Arduino.valueToCode(
       block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
   if(stateOutput == 'INPUT_PULLUP')
   {
+    Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
     var pinSetupCode = 'pinMode(' + pin + ', INPUT_PULLUP);';
     Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
   }
 
   else
   {
+    Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
     var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
     Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
   
