@@ -29,24 +29,37 @@ Blockly.Arduino['stepper_config'] = function(block) {
   var pin2 = block.getFieldValue('STEPPER_PIN2');
   var pinType = Blockly.Arduino.PinTypes.STEPPER;
   var stepperName = block.getFieldValue('STEPPER_NAME');
+  var numberOfPins = block.getFieldValue('NUMBER_OF_PINS');
   var stepperSteps = Blockly.Arduino.valueToCode(block, 'STEPPER_STEPS',
       Blockly.Arduino.ORDER_ATOMIC) || '360';
   var stepperSpeed = Blockly.Arduino.valueToCode(block, 'STEPPER_SPEED',
       Blockly.Arduino.ORDER_ATOMIC) || '90';
-  
-  //stepper is a variable containing the used pins
-  Blockly.Arduino.addVariable(stepperName,
-      'int ' + stepperName + '[2] = {' + pin1 + ', ' + pin2 + '};', true);
-  stepperName = 'stepper_' + stepperName
 
   Blockly.Arduino.reservePin(block, pin1, pinType, 'Stepper');
   Blockly.Arduino.reservePin(block, pin2, pinType, 'Stepper');
 
+
+  if (numberOfPins == "FOUR") {
+      var pin3 = block.getFieldValue('STEPPER_PIN3');
+      var pin4 = block.getFieldValue('STEPPER_PIN4');
+      var pinArray = 'int ' + stepperName + '[4] = {' + pin1 + ', ' + pin2 + ', ' + pin3 + ', ' + pin4 + '};';
+      var globalCode = 'Stepper ' + stepperName + '(' + stepperSteps + ', ' + pin1 + ', ' + pin2 + ', ' + pin3 + ', ' + pin4 + '); ';
+      Blockly.Arduino.reservePin(block, pin3, pinType, 'Stepper');
+      Blockly.Arduino.reservePin(block, pin4, pinType, 'Stepper');
+    } else {
+      var pinArray = 'int ' + stepperName + '[2] = {' + pin1 + ', ' + pin2 + '};';
+      var globalCode = 'Stepper ' + stepperName + '(' + stepperSteps + ', ' +
+          pin1 + ', ' + pin2 + '); ';
+    }
+
+  //stepper is a variable containing the used pins
+  Blockly.Arduino.addVariable(stepperName,
+      pinArray, true);
+  stepperName = 'stepper_' + stepperName
+
   Blockly.Arduino.addInclude('stepper', '#include <Stepper.h>');
 
-  var globalCode = 'Stepper ' + stepperName + '(' + stepperSteps + ', ' +
-      pin1 + ', ' + pin2 + ');';
-  Blockly.Arduino.addDeclaration(stepperName, globalCode);
+  Blockly.Arduino.addDeclaration(stepperName, globalCode + "// " + numberOfPins);
 
   var setupCode = stepperName + '.setSpeed(' + stepperSpeed + ');';
   Blockly.Arduino.addSetup(stepperName, setupCode, true);
