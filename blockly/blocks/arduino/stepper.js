@@ -33,8 +33,8 @@ Blockly.Blocks['stepper_config'] = {
     this.setColour(Blockly.Blocks.stepper.HUE);
 
     var NUMBER_OF_PINS =
-      [[Blockly.Msg.ARD_STEPPER_FOUR_PINS, 'FOUR'],
-      [Blockly.Msg.ARD_STEPPER_TWO_PINS, 'TWO']];
+      [[Blockly.Msg.ARD_STEPPER_TWO_PINS, 'TWO'],
+      [Blockly.Msg.ARD_STEPPER_FOUR_PINS, 'FOUR']];
 
     var dropdown = new Blockly.FieldDropdown(NUMBER_OF_PINS, function(option) {
       var input = (option == "FOUR");

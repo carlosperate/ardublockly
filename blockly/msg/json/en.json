@@ -446,6 +446,8 @@
 	"ARD_STEPPER_MOTOR": "stepper motor:",
 	"ARD_STEPPER_DEFAULT_NAME": "MyStepper",
 	"ARD_STEPPER_NUMBER_OF_PINS": "Number of pins",
+	"ARD_STEPPER_TWO_PINS": "2",
+	"ARD_STEPPER_FOUR_PINS": "4",
 	"ARD_STEPPER_PIN1": "pin1#",
 	"ARD_STEPPER_PIN2": "pin2#",
 	"ARD_STEPPER_PIN3": "pin3#",
