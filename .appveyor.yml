@@ -1,15 +1,18 @@
 environment:
   nodejs_version: "Stable"
   matrix:
-    # First group is 32 bit python 2.7
-    - PYTHON: "C:\\Python27"
-      PYTHON_VERSION: "2.7.9"
+    # First group is 32 bit Python 2.7
+    # There is a bug in 2.7.13, so downgrate to 2.7.12
+    # http://bugs.python.org/issue29082
+    - PYTHON: "C:\\Python27.12"
+      PYTHON_VERSION: "2.7.12"
       PYTHON_ARCH: "32"
+    # Then 32 bit Python 3.4
       PYTHON3: "C:\\Python34"
-      PYTHON3_VERSION: "3.4.3"
+      PYTHON3_VERSION: "3.4.4"
       PYTHON3_ARCH: "32"
   # Add custom environmental variables for pip
-  PIP: C:\\Python27\Scripts\pip
+  PIP: C:\\Python27.12\Scripts\pip
   PIP3: C:\\Python34\Scripts\pip
   # Add custom environmental variables to ensure 32 bit electron
   npm_config_arch: ia32
@@ -21,6 +24,9 @@ configuration: Release
 init:
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
   - cmd: wmic OS get OSArchitecture
+
+  # Install 2.7.12 until 2.7.14 is released and integrated in AppVeyor
+  - cmd: msiexec.exe /qn /i https://www.python.org/ftp/python/2.7.12/python-2.7.12.msi TARGETDIR=C:\Python27.12
 
   # As AppVeyor has multiple python install, verify which ones will be used
   - cmd: ECHO %PYTHON% %PYTHON_VERSION% %PYTHON_ARCH%
@@ -47,7 +53,7 @@ install:
   - cmd: git submodule update --init --recursive
 
   # Install Python packages
-  - cmd: "%PIP3% install https://dl.dropboxusercontent.com/u/74034/ardublockly-dep/win/py2exe-0.9.2.2-cp34-none-win32.whl"
+  - cmd: "%PIP3% install https://www.dropbox.com/s/7wfgus1op7ga9ni/py2exe-0.9.2.2-cp34-none-win32.whl?raw=1"
   - cmd: "%PIP3% install mkdocs"
   - cmd: "%PIP% install mock"
   - cmd: "%PIP% freeze"
