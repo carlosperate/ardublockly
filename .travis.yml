@@ -1,5 +1,6 @@
+# Oldest OS X image in TravisCi at the moment is 10.10 Yosemite 
 os: osx
-osx_image: beta-xcode6.1
+osx_image: xcode6.4
 language: node_js
 node_js: '6'
 
@@ -7,32 +8,48 @@ before_install:
   # OS extra info
   - sw_vers
   - uname -a
-  - python --version
-  - python -c "import struct; print(struct.calcsize('P') * 8)"
 
-  # Install Python 2 and 3 with pip and check versions
+  # Install Python 2 pip, ensure pip installed packages are found first
+  # Python 2 installation and path priority in Travis OS X is a bit of a mess
+  # https://github.com/travis-ci/travis-ci/issues/4194 
+  - curl -O https://bootstrap.pypa.io/get-pip.py
+  - sudo python get-pip.py
+  - rm get-pip.py
+  - sudo pip install --upgrade pip setuptools wheel
+  # Original problem is old version of "six" package lingering around
+  # https://github.com/testing-cabal/mock/issues/337
+  - export PYTHONPATH=/Library/Python/2.7/site-packages:$PYTHONPATH
+  - python -c "import sys; print(sys.path)"
+  - python -c "from six import wraps"
+
+  # Install Python 3.5 with pip, and check versions
   - brew update
-  - brew install python
-  - brew unlink python && brew link python
-  - brew install python3
-  - brew unlink python3 && brew link python3
+  - brew tap zoidbergwill/python
+  - brew install python35
+  - cp -R /usr/local/bin/pip3.5 /usr/local/bin/pip3
+  - sudo pip3 install --upgrade pip
+
   - brew install libcouchbase
   - PATH=/usr/local/bin:$PATH
   - echo $PATH
+
+  # Install Python packages (built with Python 3, tests for 2 and 3)
+  - sudo python -m pip install mock
+  - pip3 install mkdocs
+  - pip3 install pyinstaller
+
+  # Check Python, pip and package versions
+  - python -c "import sys; print(sys.executable)"
   - python --version
   - python -c "import struct; print(struct.calcsize('P') * 8)"
-  - pip --version
+  - python -m pip --version
+  - python -m pip freeze
+  - python3 -c "import sys; print(sys.executable)"
   - python3 --version
   - python3 -c "import struct; print(struct.calcsize('P') * 8)"
   - pip3 --version
-
-  # Install Python packages (built with Python 3, tests for 2 and 3)
-  - pip install mock
-  - pip3 install mkdocs
-  - pip3 install pyinstaller
-  - pyinstaller --version
-  - pip freeze
   - pip3 freeze
+  - pyinstaller --version
 
   # Travis make takes > 10 minutes, so need to increase wait
   - brew unlink node
