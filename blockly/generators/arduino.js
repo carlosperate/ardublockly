@@ -162,11 +162,19 @@ Blockly.Arduino.finish = function(code) {
     functions.push('\n');
   }
 
+  // userDeclareCode added up front
   // userSetupCode added at the end of the setup function without leading spaces
-  var setups = [''], userSetupCode= '';
+  var setups = [''], userSetupCode= '', userDeclareCode= '';
+  if (Blockly.Arduino.setups_['userDeclareCode'] !== undefined) {
+    userDeclareCode = '\n' + Blockly.Arduino.setups_['userDeclareCode'];
+    delete Blockly.Arduino.setups_['userDeclareCode'];
+  }
   if (Blockly.Arduino.setups_['userSetupCode'] !== undefined) {
     userSetupCode = '\n' + Blockly.Arduino.setups_['userSetupCode'];
     delete Blockly.Arduino.setups_['userSetupCode'];
+  }
+  if (userDeclareCode) {
+    setups.push('declareUpFront();');
   }
   for (var name in Blockly.Arduino.setups_) {
     setups.push(Blockly.Arduino.setups_[name]);

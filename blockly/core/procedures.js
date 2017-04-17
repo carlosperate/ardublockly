@@ -152,7 +152,7 @@ Blockly.Procedures.rename = function(text) {
 
 /**
  * Construct the blocks required by the flyout for the procedure category.
- * @param {!Blockly.Workspace} workspace The workspace contianing procedures.
+ * @param {!Blockly.Workspace} workspace The workspace containing procedures.
  * @return {!Array.<!Element>} Array of XML block elements.
  */
 Blockly.Procedures.flyoutCategory = function(workspace) {
@@ -161,6 +161,21 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
     // <block type="arduino_functions" gap="16"></block>
     var block = goog.dom.createDom('block');
     block.setAttribute('type', 'arduino_functions');
+    block.setAttribute('gap', 16);
+    // If this parent block present already in the workspace show as disabled 
+    var workspaceTopBlocks = workspace.getTopBlocks();
+    for (var i = 0; i < workspaceTopBlocks.length; i++) {
+      if (workspaceTopBlocks[i].getArduinoLoopsInstance &&
+          workspaceTopBlocks[i].getArduinoLoopsInstance()) {
+        block.setAttribute('disabled', true);
+      }
+    }
+    xmlList.push(block);
+  }
+  if (Blockly.Blocks['arduino_functions_ext']) {
+    // <block type="arduino_functions" gap="16"></block>
+    var block = goog.dom.createDom('block');
+    block.setAttribute('type', 'arduino_functions_ext');
     block.setAttribute('gap', 16);
     // If this parent block present already in the workspace show as disabled 
     var workspaceTopBlocks = workspace.getTopBlocks();

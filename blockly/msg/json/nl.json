@@ -400,6 +400,7 @@
 	"ARD_MAP": "Herschaal",
 	"ARD_MAP_VAL": "waarde naar [0-",
 	"ARD_MAP_TIP": "Herschaalt een getal in interval [0-1024] naar een ander getal in de gegeven schaal.",
+	"ARD_FUN_RUN_DECL": "Arduino definieer vooraf:",
 	"ARD_FUN_RUN_SETUP": "Arduino doe eerst:",
 	"ARD_FUN_RUN_LOOP": "Arduino herhaal voor altijd:",
 	"ARD_FUN_RUN_TIP": "Definieer de Arduino setup() en loop() functies.",
