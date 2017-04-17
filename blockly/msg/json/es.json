@@ -319,9 +319,5 @@
 	"PROCEDURES_HIGHLIGHT_DEF": "Destacar definición de la función",
 	"PROCEDURES_CREATE_DO": "Crear '%1'",
 	"PROCEDURES_IFRETURN_TOOLTIP": "Si un valor es verdadero, entonces devuelve un segundo valor.",
-	"PROCEDURES_IFRETURN_WARNING": "Advertencia: Este bloque solo puede ser utilizado dentro de la definición de una función.",
-	"NEW_INSTANCE": "Nueva instancia...",
-	"RENAME_INSTANCE": "Renombrar la instancia...",
-	"NEW_INSTANCE_TITLE": "Nueva nombre de la instance:",
-	"RENAME_INSTANCE_TITLE": "Renombrar todas las instancias '%1' a:"
+	"PROCEDURES_IFRETURN_WARNING": "Advertencia: Este bloque solo puede ser utilizado dentro de la definición de una función."
 }
