@@ -55,6 +55,8 @@ def main():
                       help='relative path to input keys file')
   parser.add_argument('--quiet', action='store_true', default=False,
                       help='do not write anything to standard output')
+  parser.add_argument('--ardublockly', action='store_true', default=False,
+                      help='Attach Ardublockly strings to lang js files')
   parser.add_argument('files', nargs='+', help='input files')
   args = parser.parse_args()
   if not args.output_dir.endswith(os.path.sep):
@@ -80,10 +82,18 @@ def main():
 
   # Create each output file.
   for arg_file in args.files:
-    (_, filename) = os.path.split(arg_file)
+    (dir_, filename) = os.path.split(arg_file)
     target_lang = filename[:filename.index('.')]
     if target_lang not in ('qqq', 'keys', 'synonyms'):
-      target_defs = read_json_file(os.path.join(os.curdir, arg_file))
+      if args.ardublockly:
+        # For Ardublockly pass search for {lang}_ardublockly.json target file
+        target_defs = {}
+        ardu_json = os.path.join(dir_, target_lang + '_ardublockly.json')
+        if os.path.isfile(ardu_json):
+          target_defs = read_json_file(os.path.join(os.curdir, ardu_json))
+          print(u'Processed Ardublockly translation: {0}'.format(ardu_json))
+      else:
+        target_defs = read_json_file(os.path.join(os.curdir, arg_file))
 
       # Verify that keys are 'ascii'
       bad_keys = [key for key in target_defs if not string_is_ascii(key)]
@@ -99,19 +109,23 @@ def main():
                 format(key, arg_file))
           target_defs[key] = _NEWLINE_PATTERN.sub(' ', value)
 
+      # Prepare differences from parsing lang.json and lang_ardublockly.json
+      if args.ardublockly:
+        file_write_mode = 'a'
+        start_str = '\n\n// Ardublockly strings\n'
+      else:
+        file_write_mode = 'w'
+        start_str = ("// This file was automatically generated.  "
+                     "Do not modify.\n\n"
+                      "'use strict';\n\n"
+                      "goog.provide('Blockly.Msg.{0}');\n\n"
+                      "goog.require('Blockly.Msg');\n\n").format(
+                          target_lang.replace('-', '.'))
+
       # Output file.
       outname = os.path.join(os.curdir, args.output_dir, target_lang + '.js')
-      with codecs.open(outname, 'w', 'utf-8') as outfile:
-        outfile.write(
-            """// This file was automatically generated.  Do not modify.
-
-'use strict';
-
-goog.provide('Blockly.Msg.{0}');
-
-goog.require('Blockly.Msg');
-
-""".format(target_lang.replace('-', '.')))
+      with codecs.open(outname, file_write_mode, 'utf-8') as outfile:
+        outfile.write(start_str)
         # For each key in the source language file, output the target value
         # if present; otherwise, output the source language value with a
         # warning comment.

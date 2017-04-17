@@ -391,7 +391,7 @@ class Gen_langfiles(threading.Thread):
       else:
         print("Error checking file creation times: " + e)
 
-  def run(self):
+  def generate_blockly(self):
     # The files msg/json/{en,qqq,synonyms}.json depend on msg/messages.js.
     if self._rebuild([os.path.join("msg", "messages.js")],
                      [os.path.join("msg", "json", f) for f in
@@ -424,7 +424,8 @@ class Gen_langfiles(threading.Thread):
           "--quiet"]
       json_files = glob.glob(os.path.join("msg", "json", "*.json"))
       json_files = [file for file in json_files if not
-                    (file.endswith(("keys.json", "synonyms.json", "qqq.json")))]
+                    (file.endswith(("keys.json", "synonyms.json", "qqq.json",
+                                    "_ardublockly.json")))]
       cmd.extend(json_files)
       subprocess.check_call(cmd)
     except (subprocess.CalledProcessError, OSError) as e:
@@ -439,6 +440,62 @@ class Gen_langfiles(threading.Thread):
         print("SUCCESS: " + f)
       else:
         print("FAILED to create " + f)
+
+  def generate_ardublockly(self):
+    """
+    Recreates the msg/json/{en,qqq,synonyms}_ardublockly.json files if older
+    than msg/messages_ardublockly.js.
+    Then attaches the {lang}_ardublockly.json strings into the {lang}.js files.
+    """
+    # The files msg/json/{en,qqq,synonyms}.json depend on msg/messages.js.
+    if self._rebuild([os.path.join("msg", "messages_ardublockly.js")],
+                     [os.path.join("msg", "json", f) for f in
+                      ["en_ardublockly.json",
+                       "qqq_ardublockly.json",
+                       "synonyms_ardublockly.json"]]):
+      try:
+        subprocess.check_call([
+            "python",
+            os.path.join("i18n", "js_to_json.py"),
+            "--author", "carlosperate",
+            "--input_file", "msg/messages_ardublockly.js",
+            "--output_dir", "msg/json/",
+            "--ardublockly",
+            "--quiet"])
+      except (subprocess.CalledProcessError, OSError) as e:
+        print("Error running i18n/js_to_json.py for Ardublockly pass: ", e)
+        sys.exit(1)
+
+    try:
+      # Use create_messages.py to attach _ardublockly.json strings to .js files
+      cmd = [
+          "python",
+          os.path.join("i18n", "create_messages.py"),
+          "--source_lang_file", os.path.join("msg","json",
+                                             "en_ardublockly.json"),
+          "--source_synonym_file", os.path.join("msg", "json",
+                                                "synonyms_ardublockly.json"),
+          "--output_dir", os.path.join("msg", "js"),
+          "--ardublockly",
+          "--quiet"]
+      json_files = glob.glob(os.path.join("msg", "json", "*.json"))
+      json_files = [file for file in json_files if not
+                    (file.endswith(("keys.json", "synonyms.json", "qqq.json",
+                                    "_ardublockly.json")))]
+      cmd.extend(json_files)
+      subprocess.check_call(cmd)
+    except (subprocess.CalledProcessError, OSError) as e:
+      print("Error running i18n/create_messages.py for Ardublockly pass: ", e)
+      sys.exit(1)
+
+  def run(self):
+    """
+    Runs the thread to generate the Blockly JavaScript string files and append
+    the Ardublockly strings at the end as well.
+    """
+    self.generate_blockly()
+    # Ardublockly appends it's strings at the end of blockly output
+    self.generate_ardublockly()
 
 
 if __name__ == "__main__":
