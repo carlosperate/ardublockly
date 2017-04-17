@@ -61,7 +61,7 @@ Ardublockly.bindActionFunctions = function() {
     $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_example_2', function() {
-    Ardublockly.loadServerXmlFile('../examples/serial_print_ascii_.xml');
+    Ardublockly.loadServerXmlFile('../examples/serial_print_ascii.xml');
     $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_example_3', function() {

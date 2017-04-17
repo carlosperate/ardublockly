@@ -75,8 +75,7 @@ Blockly.Blocks['serial_print'] = {
         .appendField(new Blockly.FieldDropdown(
                 Blockly.Arduino.Boards.selected.serial), 'SERIAL_ID')
         .appendField(Blockly.Msg.ARD_SERIAL_PRINT);
-    this.appendValueInput('CONTENT')
-        .setCheck(Blockly.Types.TEXT.checkList);
+    this.appendValueInput('CONTENT');
     this.appendDummyInput()
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'NEW_LINE')
         .appendField(Blockly.Msg.ARD_SERIAL_PRINT_NEWLINE);
@@ -111,8 +110,8 @@ Blockly.Blocks['serial_print'] = {
     }
 
     if (!setupInstancePresent) {
-      this.setWarningText(Blockly.Msg.ARD_SERIAL_PRINT_WARN.replace('%1', 
-			    thisInstanceName), 'serial_setup');
+      this.setWarningText(Blockly.Msg.ARD_SERIAL_PRINT_WARN.replace('%1',
+          thisInstanceName), 'serial_setup');
     } else {
       this.setWarningText(null, 'serial_setup');
     }
