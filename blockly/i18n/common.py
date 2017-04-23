@@ -64,7 +64,7 @@ def read_json_file(filename):
     raise InputError(filename, str(e))
 
 
-def _create_qqq_file(output_dir):
+def _create_qqq_file(output_dir, ardublockly=False):
     """Creates a qqq.json file with message documentation for translatewiki.net.
 
     The file consists of key-value pairs, where the keys are message ids and
@@ -83,7 +83,8 @@ def _create_qqq_file(output_dir):
     Raises:
         IOError: An error occurred while opening or writing the file.
     """
-    qqq_file_name = os.path.join(os.curdir, output_dir, 'qqq.json')
+    qqq_file_name = 'qqq_ardublockly.json' if ardublockly else 'qqq.json'
+    qqq_file_name = os.path.join(os.curdir, output_dir, qqq_file_name)
     qqq_file = codecs.open(qqq_file_name, 'w', 'utf-8')
     print 'Created file: ' + qqq_file_name
     qqq_file.write('{\n')
@@ -105,7 +106,7 @@ def _close_qqq_file(qqq_file):
     qqq_file.close()
 
 
-def _create_lang_file(author, lang, output_dir):
+def _create_lang_file(author, lang, output_dir, ardublockly=False):
     """Creates a <lang>.json file for translatewiki.net.
 
     The file consists of metadata, followed by key-value pairs, where the keys
@@ -124,7 +125,8 @@ def _create_lang_file(author, lang, output_dir):
     Raises:
         IOError: An error occurred while opening or writing the file.
     """
-    lang_file_name = os.path.join(os.curdir, output_dir, lang + '.json')
+    lang_file_name = lang + ('_ardublockly.json' if ardublockly else '.json')
+    lang_file_name = os.path.join(os.curdir, output_dir, lang_file_name)
     lang_file = codecs.open(lang_file_name, 'w', 'utf-8')
     print 'Created file: ' + lang_file_name
     # string.format doesn't like printing braces, so break up our writes.
@@ -231,4 +233,28 @@ def write_files(author, lang, output_dir, units, write_key_file):
     _close_lang_file(lang_file)
     if write_key_file:
       _close_key_file(key_file)
+    _close_qqq_file(qqq_file)
+
+
+def write_files_ardublockly(author, lang, output_dir, units):
+    """
+    Same as write_files, but does not include the key_files and generates
+    lang_ardublockly.json and qqq_ardublockly.json instead.
+    """
+    lang_file = _create_lang_file(author, lang, output_dir, ardublockly=True)
+    qqq_file = _create_qqq_file(output_dir, ardublockly=True)
+    first_entry = True
+    for unit in units:
+        if not first_entry:
+            lang_file.write(',\n')
+            qqq_file.write(',\n')
+        lang_file.write(u'\t"{0}": "{1}"'.format(
+            unit['meaning'],
+            unit['source'].replace('"', "'")))
+        qqq_file.write(u'\t"{0}": "{1}"'.format(
+            unit['meaning'],
+            unit['description'].replace('"', "'").replace(
+                '{lb}', '{').replace('{rb}', '}')))
+        first_entry = False
+    _close_lang_file(lang_file)
     _close_qqq_file(qqq_file)

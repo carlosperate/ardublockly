@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"carlosperate"
+		]
+	},
+	"NEW_INSTANCE": "Nueva instancia...",
+	"RENAME_INSTANCE": "Renombrar la instancia...",
+	"NEW_INSTANCE_TITLE": "Nueva nombre de la instance:",
+	"RENAME_INSTANCE_TITLE": "Renombrar todas las instancias '%1' a:"
+}

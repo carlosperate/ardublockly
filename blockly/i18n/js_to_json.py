@@ -45,10 +45,11 @@ import codecs
 import json
 import os
 import re
-from common import write_files
+from common import write_files, write_files_ardublockly
 
 
-_INPUT_DEF_PATTERN = re.compile("""Blockly.Msg.(\w*)\s*=\s*'([^']*)';?$""")
+#_INPUT_DEF_PATTERN = re.compile("""Blockly.Msg.(\w*)\s*=\s*'([^']*)';?$""")
+_INPUT_DEF_PATTERN = re.compile("""Blockly.Msg.(\w*)\s*=\s*'([^']*)';[\r\n]+$""")
 
 _INPUT_SYN_PATTERN = re.compile(
     """Blockly.Msg.(\w*)\s*=\s*Blockly.Msg.(\w*);""")
@@ -68,6 +69,8 @@ def main():
                       help='input file')
   parser.add_argument('--quiet', action='store_true', default=False,
                       help='only display warnings, not routine info')
+  parser.add_argument('--ardublockly', action='store_true', default=False,
+                      help='Create files for Ardublockly messages')
   args = parser.parse_args()
   if (not args.output_dir.endswith(os.path.sep)):
     args.output_dir += os.path.sep
@@ -105,7 +108,10 @@ def main():
   infile.close()
 
   # Create <lang_file>.json, keys.json, and qqq.json.
-  write_files(args.author, args.lang, args.output_dir, results, False)
+  if args.ardublockly:
+    write_files_ardublockly(args.author, args.lang, args.output_dir, results)
+  else:
+    write_files(args.author, args.lang, args.output_dir, results, False)
 
   # Create synonyms.json.
   synonym_file_name = os.path.join(os.curdir, args.output_dir, 'synonyms.json')
