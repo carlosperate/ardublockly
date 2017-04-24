@@ -147,7 +147,9 @@ Ardublockly.TOOLBOX_XML =
 '        <shadow type="io_highlow"></shadow>' +
 '      </value>' +
 '      <value name="TIMEOUT">' +
-'        <block type="math_number"></block>' +
+'        <shadow type="math_number">' +
+'          <field name="NUM">100</field>' +
+'        </shadow>' +
 '      </value>'+
 '    </block>' +
 '  </category>' +

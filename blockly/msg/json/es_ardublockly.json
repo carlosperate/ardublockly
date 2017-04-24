@@ -4,6 +4,10 @@
 			"carlosperate"
 		]
 	},
+	"ARD_PULSE_READ": "mide pulso %1 en pin #%2",
+	"ARD_PULSE_READ_TIMEOUT": "mide pulso %1 en pin #%2 (agotar tiempo en %3 μs)",
+	"ARD_PULSE_TIP": "Mide la duración de un pulso en el pin especificado.",
+	"ARD_PULSETIMEOUT_TIP": "Mide la duración de un pulso en el pin especificado y configura el tiempo de espera en micro-segundos.",
 	"NEW_INSTANCE": "Nueva instancia...",
 	"RENAME_INSTANCE": "Renombrar la instancia...",
 	"NEW_INSTANCE_TITLE": "Nueva nombre de la instance:",

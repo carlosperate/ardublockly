@@ -4,7 +4,7 @@
  *
  * @fileoverview  Ardublockly specific English strings.
  *
- * After modifying this file, either run "build.py" from the parent directory,
+ * After modifying this file, either run "build.py" from the blockly directory,
  * or run (from this directory):
  * ../i18n/js_to_json.py
  * to regenerate json/{en,qqq,synonyms}.json.
@@ -25,24 +25,37 @@ goog.require('Blockly.Msg');
  */
 
 /**
- * Each message is preceded with a tripple-slash comment that becomes the
+ * Each message is preceded with a triple-slash comment that becomes the
  * message descriptor.  The build process extracts these descriptors, adds
  * them to msg/json/qqq_ardublockly.json, and they show up in the translation
  * console.
  * Note the strings have to be surrounded by single quotation marks: ''
  */
 
-/// Ardublockly Types
+/**
+ * Ardublockly Types
+ */
+/// Arduino Types - Character C type char
 Blockly.Msg.ARD_TYPE_CHAR = 'Character';
+/// Arduino Types - Text C type String
 Blockly.Msg.ARD_TYPE_TEXT = 'Text';
+/// Arduino Types - Boolean type
 Blockly.Msg.ARD_TYPE_BOOL = 'Boolean';
+/// Arduino Types - Short number C type char
 Blockly.Msg.ARD_TYPE_SHORT = 'Short Number';
+/// Arduino Types - Number C type integer
 Blockly.Msg.ARD_TYPE_NUMBER = 'Number';
+/// Arduino Types - Large number C type long integer
 Blockly.Msg.ARD_TYPE_LONG = 'Large Number';
+/// Arduino Types - Decimal number C type floating point
 Blockly.Msg.ARD_TYPE_DECIMAL = 'Decimal';
+/// Arduino Types - Array
 Blockly.Msg.ARD_TYPE_ARRAY = 'Array';
+/// Arduino Types - Null C type void
 Blockly.Msg.ARD_TYPE_NULL = 'Null';
+/// Arduino Types - Undefined type
 Blockly.Msg.ARD_TYPE_UNDEF = 'Undefined';
+/// Arduino Types - Place holder value, indicates block with type not connected
 Blockly.Msg.ARD_TYPE_CHILDBLOCKMISSING = 'ChildBlockMissing';
 
 /// Arduino Blocks
@@ -137,12 +150,14 @@ Blockly.Msg.ARD_TIME_INF = 'wait forever (end program)';
 Blockly.Msg.ARD_TIME_INF_TIP = 'Wait indefinitely, stopping the program.';
 Blockly.Msg.ARD_VAR_AS = 'as';
 Blockly.Msg.ARD_VAR_AS_TIP = 'Sets a value to a specific type';
-Blockly.Msg.ARD_PULSEREAD = 'Read';
-Blockly.Msg.ARD_PULSEON = 'pulse on pin #';
-Blockly.Msg.ARD_PULSETIMEOUT = 'timeout after';
-Blockly.Msg.ARD_PULSETIMEOUT_MS = '';
+/// IO blocks - pulseIn - Block for function pulseIn(), it measure a pulse duration in a given pin.
+Blockly.Msg.ARD_PULSE_READ = 'measure %1 pulse on pin #%2';
+/// IO blocks - pulseIn - Block similar to ARD_PULSE_READ, but it adds a time-out in microseconds.
+Blockly.Msg.ARD_PULSE_READ_TIMEOUT = 'measure %1 pulse on pin #%2 (timeout after %3 μs)';
+/// IO blocks - pulseIn - Tooltip for pulseIn() block.
 Blockly.Msg.ARD_PULSE_TIP = 'Measures the duration of a pulse on the selected pin.';
-Blockly.Msg.ARD_PULSETIMEOUT_TIP = 'Measures the duration of a pulse on the selected pin, if it is within the timeout.';
+/// IO blocks - pulseIn - Tooltip for pulseIn() block when it uses the optional argument for time-out.
+Blockly.Msg.ARD_PULSETIMEOUT_TIP = 'Measures the duration of a pulse on the selected pin, if it is within the time-out in microseconds.';
 Blockly.Msg.ARD_SETTONE = 'Set tone on pin #';
 Blockly.Msg.ARD_TONEFREQ = 'at frequency';
 Blockly.Msg.ARD_TONE_TIP = 'Sets tone on pin to specified frequency within range 31 - 65535';
@@ -150,8 +165,14 @@ Blockly.Msg.ARD_TONE_WARNING = 'Frequency must be in range 31 - 65535';
 Blockly.Msg.ARD_NOTONE = 'Turn off tone on pin #';
 Blockly.Msg.ARD_NOTONE_TIP = 'Turns the tone off on the selected pin';
 
-/// Ardublockly instances
+/**
+ * Ardublockly instances
+ */
+/// Instances - Menu item to indicate that it will create a new instance
 Blockly.Msg.NEW_INSTANCE = 'New instance...';
+/// Instances - Menu item to rename an instance name
 Blockly.Msg.RENAME_INSTANCE = 'Rename instance...';
+/// Instances - Menu item to create a new instance name and apply it to that block
 Blockly.Msg.NEW_INSTANCE_TITLE = 'New instance name:';
+/// Instances - Confirmation message that a number of instances will be renamed to a new name
 Blockly.Msg.RENAME_INSTANCE_TITLE = 'Rename all "%1" instances to:';
