@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "carlosperate",
-		"lastupdated": "2017-04-24 04:57:56.963000",
+		"lastupdated": "2017-04-24 19:27:01.120000",
 		"locale": "en",
 		"messagedocumentation" : "qqq_ardublockly"
 	},
@@ -107,12 +107,10 @@
 	"ARD_TIME_INF_TIP": "Wait indefinitely, stopping the program.",
 	"ARD_VAR_AS": "as",
 	"ARD_VAR_AS_TIP": "Sets a value to a specific type",
-	"ARD_PULSEREAD": "Read",
-	"ARD_PULSEON": "pulse on pin #",
-	"ARD_PULSETIMEOUT": "timeout after",
-	"ARD_PULSETIMEOUT_MS": "",
+	"ARD_PULSE_READ": "measure %1 pulse on pin #%2",
+	"ARD_PULSE_READ_TIMEOUT": "measure %1 pulse on pin #%2 (timeout after %3 μs)",
 	"ARD_PULSE_TIP": "Measures the duration of a pulse on the selected pin.",
-	"ARD_PULSETIMEOUT_TIP": "Measures the duration of a pulse on the selected pin, if it is within the timeout.",
+	"ARD_PULSETIMEOUT_TIP": "Measures the duration of a pulse on the selected pin, if it is within the time-out in microseconds.",
 	"ARD_SETTONE": "Set tone on pin #",
 	"ARD_TONEFREQ": "at frequency",
 	"ARD_TONE_TIP": "Sets tone on pin to specified frequency within range 31 - 65535",
