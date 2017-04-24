@@ -1,10 +1,9 @@
 {
 	"@metadata": {
-		"authors": [
-			"carlosperate"
-		],
+		"author": "carlosperate",
+		"lastupdated": "2017-04-24 04:57:56.963000",
 		"locale": "en",
-		"messagedocumentation" : "qqq"
+		"messagedocumentation" : "qqq_ardublockly"
 	},
 	"ARD_TYPE_CHAR": "Character",
 	"ARD_TYPE_TEXT": "Text",
