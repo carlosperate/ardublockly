@@ -29,6 +29,7 @@ goog.require('Blockly.Msg');
  * message descriptor.  The build process extracts these descriptors, adds
  * them to msg/json/qqq_ardublockly.json, and they show up in the translation
  * console.
+ * Note the strings have to be surrounded by single quotation marks: ''
  */
 
 /// Ardublockly Types
@@ -79,7 +80,7 @@ Blockly.Msg.ARD_SERIAL_SETUP_TIP = 'Selects the speed for a specific Serial peri
 Blockly.Msg.ARD_SERIAL_PRINT = 'print';
 Blockly.Msg.ARD_SERIAL_PRINT_NEWLINE = 'add new line';
 Blockly.Msg.ARD_SERIAL_PRINT_TIP = 'Prints data to the console/serial port as human-readable ASCII text.';
-Blockly.Msg.ARD_SERIAL_PRINT_WARN = 'A setup block for %1 must be added to the workspace to use this block!'
+Blockly.Msg.ARD_SERIAL_PRINT_WARN = 'A setup block for %1 must be added to the workspace to use this block!';
 Blockly.Msg.ARD_SERVO_WRITE = 'set SERVO from Pin';
 Blockly.Msg.ARD_SERVO_WRITE_TO = 'to';
 Blockly.Msg.ARD_SERVO_WRITE_DEG_180 = 'Degrees (0~180)';
@@ -108,13 +109,13 @@ Blockly.Msg.ARD_SPI_TRANSRETURN_TIP = 'Send a SPI message to an specified slave 
 Blockly.Msg.ARD_STEPPER_SETUP = 'Setup stepper motor';
 Blockly.Msg.ARD_STEPPER_MOTOR = 'stepper motor:';
 Blockly.Msg.ARD_STEPPER_DEFAULT_NAME = 'MyStepper';
-Blockly.Msg.ARD_STEPPER_NUMBER_OF_PINS = "Number of pins";
-Blockly.Msg.ARD_STEPPER_TWO_PINS = "2";
-Blockly.Msg.ARD_STEPPER_FOUR_PINS = "4";
+Blockly.Msg.ARD_STEPPER_NUMBER_OF_PINS = 'Number of pins';
+Blockly.Msg.ARD_STEPPER_TWO_PINS = '2';
+Blockly.Msg.ARD_STEPPER_FOUR_PINS = '4';
 Blockly.Msg.ARD_STEPPER_PIN1 = 'pin1#';
 Blockly.Msg.ARD_STEPPER_PIN2 = 'pin2#';
-Blockly.Msg.ARD_STEPPER_PIN3 = "pin3#";
-Blockly.Msg.ARD_STEPPER_PIN4 = "pin4#";
+Blockly.Msg.ARD_STEPPER_PIN3 = 'pin3#';
+Blockly.Msg.ARD_STEPPER_PIN4 = 'pin4#';
 Blockly.Msg.ARD_STEPPER_REVOLVS = 'how many steps per revolution';
 Blockly.Msg.ARD_STEPPER_SPEED = 'set speed (rpm) to';
 Blockly.Msg.ARD_STEPPER_SETUP_TIP = 'Configures a stepper motor pinout and other settings.';
@@ -133,7 +134,7 @@ Blockly.Msg.ARD_TIME_MILLIS_TIP = 'Returns the number of milliseconds since the 
 Blockly.Msg.ARD_TIME_MICROS = 'current elapsed Time (microseconds)';
 Blockly.Msg.ARD_TIME_MICROS_TIP = 'Returns the number of microseconds since the Arduino board began running the current program. Has to be stored in a positive long integer';
 Blockly.Msg.ARD_TIME_INF = 'wait forever (end program)';
-Blockly.Msg.ARD_TIME_INF_TIP = 'Wait indefinitely, stopping the program.'
+Blockly.Msg.ARD_TIME_INF_TIP = 'Wait indefinitely, stopping the program.';
 Blockly.Msg.ARD_VAR_AS = 'as';
 Blockly.Msg.ARD_VAR_AS_TIP = 'Sets a value to a specific type';
 Blockly.Msg.ARD_PULSEREAD = 'Read';

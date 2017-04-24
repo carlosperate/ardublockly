@@ -125,6 +125,7 @@ def _create_lang_file(author, lang, output_dir, ardublockly=False):
     Raises:
         IOError: An error occurred while opening or writing the file.
     """
+    qqq_name = 'qqq' + ('_ardublockly' if ardublockly else '')
     lang_file_name = lang + ('_ardublockly.json' if ardublockly else '.json')
     lang_file_name = os.path.join(os.curdir, output_dir, lang_file_name)
     lang_file = codecs.open(lang_file_name, 'w', 'utf-8')
@@ -135,8 +136,8 @@ def _create_lang_file(author, lang, output_dir, ardublockly=False):
 \t\t"author": "{0}",
 \t\t"lastupdated": "{1}",
 \t\t"locale": "{2}",
-\t\t"messagedocumentation" : "qqq"
-""".format(author, str(datetime.now()), lang))
+\t\t"messagedocumentation" : "{3}"
+""".format(author, str(datetime.now()), lang, qqq_name))
     lang_file.write('\t},\n')
     return lang_file
 

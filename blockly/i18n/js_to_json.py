@@ -47,9 +47,9 @@ import os
 import re
 from common import write_files, write_files_ardublockly
 
-
+# Original RegEx kept as a reminder that it'll conflict when upstreamed pulled
 #_INPUT_DEF_PATTERN = re.compile("""Blockly.Msg.(\w*)\s*=\s*'([^']*)';?$""")
-_INPUT_DEF_PATTERN = re.compile("""Blockly.Msg.(\w*)\s*=\s*'([^']*)';[\r\n]+$""")
+_INPUT_DEF_PATTERN = re.compile("""Blockly.Msg.(\w*)\s*=\s*'(.*)';?\r?$""")
 
 _INPUT_SYN_PATTERN = re.compile(
     """Blockly.Msg.(\w*)\s*=\s*Blockly.Msg.(\w*);""")
@@ -114,7 +114,9 @@ def main():
     write_files(args.author, args.lang, args.output_dir, results, False)
 
   # Create synonyms.json.
-  synonym_file_name = os.path.join(os.curdir, args.output_dir, 'synonyms.json')
+  synonym_name = 'synonyms' + \
+                 ('_ardublockly.json' if args.ardublockly else '.json')
+  synonym_file_name = os.path.join(os.curdir, args.output_dir, synonym_name)
   with open(synonym_file_name, 'w') as outfile:
     json.dump(synonyms, outfile)
   if not args.quiet:
