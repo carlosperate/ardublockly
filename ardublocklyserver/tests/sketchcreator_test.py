@@ -14,14 +14,14 @@ import shutil
 import unittest
 
 try:
-    from ardublocklyserver.sketchcreator import SketchCreator
+    from ardublocklyserver import sketchcreator
     from ardublocklyserver.compilersettings import ServerCompilerSettings
 except ImportError:
     import sys
     file_dir = os.path.dirname(os.path.realpath(__file__))
     package_dir = os.path.dirname(os.path.dirname(file_dir))
     sys.path.insert(0, package_dir)
-    from ardublocklyserver.sketchcreator import SketchCreator
+    from ardublocklyserver import sketchcreator
     from ardublocklyserver.compilersettings import ServerCompilerSettings
 
 
@@ -36,18 +36,17 @@ class SketchCreatorTestCase(unittest.TestCase):
     def test_create_sketch(self):
         """ Tests to see if an Arduino Sketch is created in a new location. """
         # First test with the default name
-        sketch_creator = SketchCreator()
         sketch_dir = os.getcwd()
         final_ino_path = os.path.join(
             sketch_dir,
-            sketch_creator._default_sketch_name,
-            '%s.ino' % sketch_creator._default_sketch_name)
-        # It should be save to create and delete the ino file in the test folder
+            sketchcreator.default_sketch_name,
+            '%s.ino' % sketchcreator.default_sketch_name)
+        # Should be safe to create and delete the ino file in the test folder
         if os.path.exists(final_ino_path):
             os.remove(final_ino_path)
         self.assertFalse(os.path.isfile(final_ino_path))
         # Checks the file is saved, and saved to the right location
-        created_sketch_path = sketch_creator.create_sketch(sketch_dir)
+        created_sketch_path = sketchcreator.create_sketch(sketch_dir)
         self.assertEqual(final_ino_path, created_sketch_path)
         self.assertTrue(os.path.isfile(final_ino_path))
 
@@ -70,7 +69,7 @@ class SketchCreatorTestCase(unittest.TestCase):
         self.assertFalse(os.path.isfile(final_ino_path))
 
         # Checks the file is saved, and saved to the right location
-        created_sketch_path = sketch_creator.create_sketch(
+        created_sketch_path = sketchcreator.create_sketch(
             sketch_dir_unicode, sketch_name=sketch_name)
         self.assertEqual(final_ino_path, created_sketch_path)
         self.assertTrue(os.path.isfile(final_ino_path))
@@ -85,20 +84,19 @@ class SketchCreatorTestCase(unittest.TestCase):
         # Test for failure on invalid sketch path
         random_invalid_path = os.path.join(os.getcwd(), 'raNd_dIr')
         self.assertFalse(os.path.isdir(random_invalid_path))
-        sketch_creator = SketchCreator()
-        created_sketch_path = sketch_creator.create_sketch(random_invalid_path)
+        created_sketch_path = sketchcreator.create_sketch(random_invalid_path)
         self.assertIsNone(created_sketch_path)
         self.assertFalse(os.path.isdir(random_invalid_path))
 
         # Test for failure on invalid sketch code
         sketch_path = os.getcwd()
         sketch_folder_path = os.path.join(
-            sketch_path, sketch_creator._default_sketch_name)
+            sketch_path, sketchcreator.default_sketch_name)
         if os.path.isdir(sketch_folder_path):
             shutil.rmtree(sketch_folder_path)
         self.assertFalse(os.path.isdir(sketch_folder_path))
         invalid_sketch_code = True
-        created_sketch_path = sketch_creator.create_sketch(
+        created_sketch_path = sketchcreator.create_sketch(
             sketch_path, sketch_code=invalid_sketch_code)
         self.assertIsNone(created_sketch_path)
         self.assertFalse(os.path.isdir(sketch_folder_path))
@@ -107,16 +105,15 @@ class SketchCreatorTestCase(unittest.TestCase):
     # File creation with code
     #
     def test_create_sketch_with_code(self):
-        sketch_creator = SketchCreator()
         sketch_dir = os.getcwd()
         sketch_ino_location = os.path.join(
             sketch_dir,
-            sketch_creator._default_sketch_name,
-            '%s.ino' % sketch_creator._default_sketch_name)
+            sketchcreator.default_sketch_name,
+            '%s.ino' % sketchcreator.default_sketch_name)
         sketch_code_write = 'Unicode test (ろΓαζςÂaé) on: %s' % \
                             time.strftime("%Y-%m-%d %H:%M:%S")
 
-        sketch_return_location = sketch_creator.create_sketch(
+        sketch_return_location = sketchcreator.create_sketch(
             sketch_dir, sketch_code=sketch_code_write)
         self.assertEqual(sketch_return_location, sketch_ino_location)
 

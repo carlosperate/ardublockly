@@ -2,11 +2,11 @@
 #
 # Collection of actions to the ardublocklyserver for relieved HTTP requests.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
-from __future__ import unicode_literals, absolute_import
+from __future__ import unicode_literals, absolute_import, print_function
 import subprocess
 import locale
 import time
@@ -25,7 +25,7 @@ except ImportError:
     import tkinter.filedialog as tkFileDialog
 
 from ardublocklyserver.compilersettings import ServerCompilerSettings
-from ardublocklyserver.sketchcreator import SketchCreator
+from ardublocklyserver import sketchcreator
 import ardublocklyserver.six.six.moves as six_moves
 from ardublocklyserver.six import six
 import ardublocklyserver.gui as gui
@@ -145,15 +145,15 @@ def load_arduino_cli(sketch_path=None):
 
 def create_sketch_default():
     settings = ServerCompilerSettings()
-    return SketchCreator().create_sketch(
-        settings.sketch_dir, sketch_name=settings.sketch_name)
+    return sketchcreator.create_sketch(
+            sketch_dir=settings.sketch_dir, sketch_name=settings.sketch_name)
 
 
 def create_sketch_from_string(sketch_code):
     settings = ServerCompilerSettings()
-    return SketchCreator().create_sketch(
-        settings.sketch_dir, sketch_name=settings.sketch_name,
-        sketch_code=sketch_code)
+    return sketchcreator.create_sketch(
+            sketch_dir=settings.sketch_dir, sketch_name=settings.sketch_name,
+            sketch_code=sketch_code)
 
 
 #
