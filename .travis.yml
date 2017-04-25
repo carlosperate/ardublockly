@@ -74,6 +74,8 @@ script:
   - python3 ardublocklyserver/tests/sketchcreator_test.py
   - python  ardublocklyserver/tests/compilersettings_test.py
   - python3 ardublocklyserver/tests/compilersettings_test.py
+  - python  ardublocklyserver/tests/actions_test.py
+  - python3 ardublocklyserver/tests/actions_test.py
 
 # Deploy the build version in an S3 bucket
 deploy:

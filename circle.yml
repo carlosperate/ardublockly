@@ -29,6 +29,7 @@ dependencies:
     # Install and check Python 2 and 3
     - sudo apt-get update
     - sudo apt-get install -y python-support
+    - sudo apt-get install -y python-tk
     - sudo apt-get install -y python3-setuptools
     - sudo apt-get install -y python3-dev
     - sudo apt-get install -y python3-tk
@@ -45,6 +46,7 @@ dependencies:
 
     # Python packages (built on Python 2, tests run both 2 and 3)
     - sudo pip2 install mock
+    - sudo pip2 install 
     - sudo pip2 install awscli
     - sudo pip3 install mkdocs
     - sudo pip3 install pyinstaller
@@ -76,6 +78,8 @@ test:
     - python3 ardublocklyserver/tests/sketchcreator_test.py
     - python  ardublocklyserver/tests/compilersettings_test.py
     - python3 ardublocklyserver/tests/compilersettings_test.py
+    - python  ardublocklyserver/tests/actions_test.py
+    - python3 ardublocklyserver/tests/actions_test.py
 
 general:
   artifacts:

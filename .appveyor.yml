@@ -79,6 +79,8 @@ test_script:
   - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\sketchcreator_test.py"
   - cmd: "%PYTHON%\\python  ardublocklyserver\\tests\\compilersettings_test.py"
   - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\compilersettings_test.py"
+  - cmd: "%PYTHON%\\python  ardublocklyserver\\tests\\actions_test.py"
+  - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\actions_test.py"
 
 # Push artefact to S3 bucket and list all
 before_deploy:

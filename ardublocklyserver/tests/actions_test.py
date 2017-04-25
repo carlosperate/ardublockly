@@ -14,8 +14,10 @@ import unittest
 try:
     import mock
     from mock import patch
+    from mock import PropertyMock
 except ImportError:
     from unittest.mock import MagicMock as mock
+    from unittest.mock import PropertyMock
     from unittest.mock import patch
 
 try:
@@ -70,7 +72,7 @@ class ActionsTestCase(unittest.TestCase):
         ServerCompilerSettings().load_ide_option = 'open'
         with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=mock.PropertyMock) as mock_compiler_dir:
+                new_callable=PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'true'  # do nothing command
             expected_command = ['true', sketch_path]
             success, conclusion, out, error, exit_code = \
@@ -81,7 +83,7 @@ class ActionsTestCase(unittest.TestCase):
         ServerCompilerSettings().load_ide_option = 'verify'
         with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=mock.PropertyMock) as mock_compiler_dir:
+                new_callable=PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'true'  # do nothing command
             mock_popen.return_value.communicate.return_value = ('test', 'test')
             mock_popen.return_value.returncode = 0
@@ -95,7 +97,7 @@ class ActionsTestCase(unittest.TestCase):
         ServerCompilerSettings().load_ide_option = 'upload'
         with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=mock.PropertyMock) as mock_compiler_dir:
+                new_callable=PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'true'  # do nothing command
             mock_popen.return_value.communicate.return_value = ('test', 'test')
             mock_popen.return_value.returncode = 0
@@ -113,7 +115,7 @@ class ActionsTestCase(unittest.TestCase):
         ServerCompilerSettings().load_ide_option = 'upload'
         with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=mock.PropertyMock) as mock_compiler_dir:
+                new_callable=PropertyMock) as mock_compiler_dir:
             mock_compiler_dir.return_value = 'いろはにほへとちり'  # unicode
             mock_popen.return_value.communicate.return_value = (
                 'Γαζέες καὶ μυρτιὲς', 'Âne ex aéquo au whist')
@@ -139,29 +141,28 @@ class ActionsTestCase(unittest.TestCase):
         self.delete_default_settings_file()
         success, conclusion, out, error, exit_code = actions.load_arduino_cli()
         self.assertFalse(success)
-        self.assertEqual(conclusion, 'Unable to find Arduino IDE')
+        self.assertEqual(conclusion, 'arduinoOpErrorIdeDirTitle')
 
         # Test for error if compiler dir is not set
         with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=mock.PropertyMock) as mock_compiler_dir:
+                new_callable=PropertyMock) as mock_compiler_dir:
             with patch(
                     'ardublocklyserver.actions.ServerCompilerSettings.'
-                    'load_ide_option', new_callable=mock.PropertyMock) as \
+                    'load_ide_option', new_callable=PropertyMock) as \
                     mock_load_ide_option:
                 mock_compiler_dir.return_value = 'true'  # do nothing command
                 mock_load_ide_option.return_value = None
                 success, conclusion, out, error, exit_code = \
                     actions.load_arduino_cli()
                 self.assertFalse(success)
-                self.assertEqual(conclusion,
-                                 'What should we do with the Sketch?')
+                self.assertEqual(conclusion, 'arduinoOpErrorIdeOptionTitle')
 
         # Test for error if serial port unset, only required when set to upload
         ServerCompilerSettings().load_ide_option = 'upload'
         with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=mock.PropertyMock) as mock_compiler_dir:
+                new_callable=PropertyMock) as mock_compiler_dir:
             with patch(
                     'ardublocklyserver.actions.ServerCompilerSettings.'
                     'get_serial_port_flag') as mock_get_serial_port_flag:
@@ -170,13 +171,13 @@ class ActionsTestCase(unittest.TestCase):
                 success, conclusion, out, error, exit_code = \
                     actions.load_arduino_cli()
                 self.assertFalse(success)
-                self.assertEqual(conclusion, 'Serial Port unavailable')
+                self.assertEqual(conclusion, 'arduinoOpErrorIdePortTitle')
 
         # Test for error if board type unset, only required when set to upload
         ServerCompilerSettings().load_ide_option = 'upload'
         with patch(
                 'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=mock.PropertyMock) as mock_compiler_dir:
+                new_callable=PropertyMock) as mock_compiler_dir:
             with patch(
                     'ardublocklyserver.actions.ServerCompilerSettings.'
                     'get_arduino_board_flag') as mock_get_arduino_board_flag:
@@ -185,7 +186,7 @@ class ActionsTestCase(unittest.TestCase):
                 success, conclusion, out, error, exit_code = \
                     actions.load_arduino_cli()
                 self.assertFalse(success)
-                self.assertEqual(conclusion, 'Unknown Arduino Board')
+                self.assertEqual(conclusion, 'arduinoOpErrorIdeBoardTitle')
 
     #
     # Tests sketch creation
