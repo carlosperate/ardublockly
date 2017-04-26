@@ -55,6 +55,8 @@ install:
   # Install Python packages
   - cmd: "%PIP3% install https://www.dropbox.com/s/7wfgus1op7ga9ni/py2exe-0.9.2.2-cp34-none-win32.whl?raw=1"
   - cmd: "%PIP3% install mkdocs"
+  - cmd: "%PIP3% install coverage"
+  - cmd: "%PIP% install coverage"
   - cmd: "%PIP% install mock"
   - cmd: "%PIP% freeze"
   - cmd: "%PIP3% freeze"
@@ -75,12 +77,10 @@ build: off
 test_script:
   - cmd: chcp 65001
   - cmd: set PYTHONIOENCODING=utf-8
-  - cmd: "%PYTHON%\\python  ardublocklyserver\\tests\\sketchcreator_test.py"
-  - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\sketchcreator_test.py"
-  - cmd: "%PYTHON%\\python  ardublocklyserver\\tests\\compilersettings_test.py"
-  - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\compilersettings_test.py"
-  - cmd: "%PYTHON%\\python  ardublocklyserver\\tests\\actions_test.py"
-  - cmd: "%PYTHON3%\\python ardublocklyserver\\tests\\actions_test.py"
+  - cmd: "%PYTHON%\\python -m coverage run ardublocklyserver\\tests\\run_all.py"
+  - cmd: "%PYTHON%\\python -m coverage report"
+  - cmd: "%PYTHON3%\\python -m coverage run ardublocklyserver\\tests\\run_all.py"
+  - cmd: "%PYTHON3%\\python -m coverage report"
 
 # Push artefact to S3 bucket and list all
 before_deploy:

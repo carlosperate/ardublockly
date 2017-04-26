@@ -35,6 +35,9 @@ before_install:
 
   # Install Python packages (built with Python 3, tests for 2 and 3)
   - sudo python -m pip install mock
+  - sudo python -m pip install coverage
+  - pip3 install coverage
+  - pip3 install coveralls
   - pip3 install mkdocs
   - pip3 install pyinstaller
 
@@ -70,12 +73,13 @@ install:
 
 # Run the tests in both Python 2 and 3
 script:
-  - python  ardublocklyserver/tests/sketchcreator_test.py
-  - python3 ardublocklyserver/tests/sketchcreator_test.py
-  - python  ardublocklyserver/tests/compilersettings_test.py
-  - python3 ardublocklyserver/tests/compilersettings_test.py
-  - python  ardublocklyserver/tests/actions_test.py
-  - python3 ardublocklyserver/tests/actions_test.py
+  - python -m coverage run ardublocklyserver/tests/run_all.py
+  - python -m coverage report
+  - python3 -m coverage run ardublocklyserver/tests/run_all.py
+  - python3 -m coverage report
+
+after_success:
+  - coveralls
 
 # Deploy the build version in an S3 bucket
 deploy:

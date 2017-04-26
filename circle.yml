@@ -44,10 +44,11 @@ dependencies:
     # The GLIBC version might have been updated with apt-get installs
     - ldd --version
 
-    # Python packages (built on Python 2, tests run both 2 and 3)
-    - sudo pip2 install mock
-    - sudo pip2 install 
+    # Python packages (built on Python 3, tests run both 2 and 3)
     - sudo pip2 install awscli
+    - sudo pip2 install mock
+    - sudo pip2 install coverage
+    - sudo pip3 install coverage
     - sudo pip3 install mkdocs
     - sudo pip3 install pyinstaller
     - pyinstaller --version
@@ -74,12 +75,10 @@ dependencies:
 # Customize test commands
 test:
   override:
-    - python  ardublocklyserver/tests/sketchcreator_test.py
-    - python3 ardublocklyserver/tests/sketchcreator_test.py
-    - python  ardublocklyserver/tests/compilersettings_test.py
-    - python3 ardublocklyserver/tests/compilersettings_test.py
-    - python  ardublocklyserver/tests/actions_test.py
-    - python3 ardublocklyserver/tests/actions_test.py
+    - python -m coverage run ardublocklyserver/tests/run_all.py
+    - python -m coverage report
+    - python3 -m coverage run ardublocklyserver/tests/run_all.py
+    - python3 -m coverage report
 
 general:
   artifacts:
