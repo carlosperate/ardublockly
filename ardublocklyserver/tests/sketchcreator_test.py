@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 #
-# Unit test for the sketchcreator module.
+# Unit test for the Sketch Creator module module.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
@@ -27,101 +27,120 @@ except ImportError:
 
 class SketchCreatorTestCase(unittest.TestCase):
     """
-    Tests for SketchCreator class
+    Tests for SketchCreator class.
+    Rather than mocking around with os module it creates 'safe' folder inside
+    the test directory where it can create and delete files.
     """
 
     #
-    # File creation without input code
+    # Test fixtures
     #
-    def test_create_sketch(self):
-        """ Tests to see if an Arduino Sketch is created in a new location. """
-        # First test with the default name
-        sketch_dir = os.getcwd()
+    @classmethod
+    def setUpClass(cls):
+        """Create a temporary folder to play round."""
+        cls.temp_folder = os.path.join(
+                os.path.abspath(os.path.dirname(__file__)),
+                'TestTemp_sketchcreator')
+        if os.path.isdir(cls.temp_folder):
+            raise Exception('Directory %s already exists.' % cls.temp_folder)
+        os.makedirs(cls.temp_folder)
+        # Put together the default sketch path
+        cls.default_sketch_path = os.path.join(
+            cls.temp_folder, sketchcreator.default_sketch_name,
+            '%s.ino' % sketchcreator.default_sketch_name)
+
+    @classmethod
+    def tearDownClass(cls):
+        """Deletes the previously created temporary folder."""
+        if os.path.isdir(cls.temp_folder):
+            shutil.rmtree(cls.temp_folder)
+
+    def setUp(self):
+        """Ensure the temp folder exists."""
+        if not os.path.isdir(self.__class__.temp_folder):
+            os.makedirs(self.__class__.temp_folder)
+
+    def tearDown(self):
+        """Delete any files created inside the temp directory"""
+        if os.path.isdir(self.__class__.temp_folder):
+            shutil.rmtree(self.__class__.temp_folder)
+
+    #
+    # Tests for file creation
+    #
+    def test_sketch_name_default(self):
+        """Test default sketch has created the file correctly."""
+        sketch_path = sketchcreator.create_sketch(self.temp_folder)
+
+        self.assertEqual(sketch_path, self.default_sketch_path)
+        self.assertTrue(os.path.isfile(self.default_sketch_path))
+
+    def test_sketch_name_non_default(self):
+        """Tests to see if an Arduino Sketch is created in a new location."""
+        filename_unicode = 'TestTemp_ろΓαζςÂé'
         final_ino_path = os.path.join(
-            sketch_dir,
-            sketchcreator.default_sketch_name,
-            '%s.ino' % sketchcreator.default_sketch_name)
-        # Should be safe to create and delete the ino file in the test folder
-        if os.path.exists(final_ino_path):
-            os.remove(final_ino_path)
-        self.assertFalse(os.path.isfile(final_ino_path))
-        # Checks the file is saved, and saved to the right location
-        created_sketch_path = sketchcreator.create_sketch(sketch_dir)
-        self.assertEqual(final_ino_path, created_sketch_path)
-        self.assertTrue(os.path.isfile(final_ino_path))
+            self.temp_folder, filename_unicode, filename_unicode + '.ino')
 
-        # Now test with a given sketch name and a unicode path
-        sketch_name = 'TestTemp_Sketch'
-        sketch_dir_unicode = os.path.join(os.getcwd(), 'TestTemp_ろΓαζςÂé')
-        final_ino_path = os.path.join(sketch_dir_unicode,
-                                      sketch_name,
-                                      sketch_name + '.ino')
-
-        # Test directory should be a safe place to create this unicode folder
-        if not os.path.exists(sketch_dir_unicode):
-            os.mkdir(sketch_dir_unicode)
-        else:
-            # We count on this specific folder name to be too unlikely
-            # created by a user and not this unit test, so remove contents
-            shutil.rmtree(sketch_dir_unicode)
-            os.mkdir(sketch_dir_unicode)
-
-        self.assertFalse(os.path.isfile(final_ino_path))
-
-        # Checks the file is saved, and saved to the right location
         created_sketch_path = sketchcreator.create_sketch(
-            sketch_dir_unicode, sketch_name=sketch_name)
+            self.temp_folder, sketch_name=filename_unicode)
+
         self.assertEqual(final_ino_path, created_sketch_path)
         self.assertTrue(os.path.isfile(final_ino_path))
 
-        # Remove created unicode dir
-        shutil.rmtree(sketch_dir_unicode)
+    def test_sketch_name_invalid(self):
+        """Test for invalid inputs in the create_sketch method."""
+        self.assertFalse(os.path.isdir(self.default_sketch_path))
+        invalid_sketch_name = True
 
-    def test_create_sketch_invalid(self):
-        """
-        Test for invalid inputs in the create_sketch method.
-        """
-        # Test for failure on invalid sketch path
-        random_invalid_path = os.path.join(os.getcwd(), 'raNd_dIr')
-        self.assertFalse(os.path.isdir(random_invalid_path))
-        created_sketch_path = sketchcreator.create_sketch(random_invalid_path)
+        created_sketch_path = sketchcreator.create_sketch(
+            self.temp_folder, sketch_name=invalid_sketch_name)
+
         self.assertIsNone(created_sketch_path)
-        self.assertFalse(os.path.isdir(random_invalid_path))
+        self.assertFalse(os.path.isdir(self.default_sketch_path))
 
-        # Test for failure on invalid sketch code
-        sketch_path = os.getcwd()
-        sketch_folder_path = os.path.join(
-            sketch_path, sketchcreator.default_sketch_name)
-        if os.path.isdir(sketch_folder_path):
-            shutil.rmtree(sketch_folder_path)
-        self.assertFalse(os.path.isdir(sketch_folder_path))
+    def test_sketch_path_invalid(self):
+        """Test for invalid inputs in the create_sketch method."""
+        invalid_path = os.path.join(self.temp_folder, 'raNd_dIr')
+        self.assertFalse(os.path.isdir(invalid_path))
+
+        created_sketch_path = sketchcreator.create_sketch(invalid_path)
+
+        self.assertIsNone(created_sketch_path)
+        self.assertFalse(os.path.isdir(invalid_path))
+
+    #
+    # Tests for code content
+    #
+    def test_sketch_code_default(self):
+        """Test default sketch has filled the sketch contents correctly."""
+        sketch_path = sketchcreator.create_sketch(self.temp_folder)
+
+        with codecs.open(sketch_path, 'r', encoding='utf-8') as sketch:
+            sketch_content = sketch.read()
+        self.assertEqual(sketch_content, sketchcreator.default_sketch_code)
+
+    def test_sketch_code_non_default(self):
+        """Test sketch is created correctly with the given code."""
+        sketch_code = 'Unicode test (ろΓαζςÂaé) on: %s' % \
+                      time.strftime("%Y-%m-%d %H:%M:%S")
+
+        sketch_path = sketchcreator.create_sketch(
+                self.temp_folder, sketch_code=sketch_code)
+
+        with codecs.open(sketch_path, 'r', encoding='utf-8') as sketch:
+            sketch_code_read = sketch.read()
+        self.assertEqual(sketch_code_read, sketch_code)
+
+    def test_sketch_code_invalid(self):
+        """Test for invalid inputs in the create_sketch method."""
+        self.assertFalse(os.path.isdir(self.default_sketch_path))
         invalid_sketch_code = True
+
         created_sketch_path = sketchcreator.create_sketch(
-            sketch_path, sketch_code=invalid_sketch_code)
+            self.temp_folder, sketch_code=invalid_sketch_code)
+
         self.assertIsNone(created_sketch_path)
-        self.assertFalse(os.path.isdir(sketch_folder_path))
-
-    #
-    # File creation with code
-    #
-    def test_create_sketch_with_code(self):
-        sketch_dir = os.getcwd()
-        sketch_ino_location = os.path.join(
-            sketch_dir,
-            sketchcreator.default_sketch_name,
-            '%s.ino' % sketchcreator.default_sketch_name)
-        sketch_code_write = 'Unicode test (ろΓαζςÂaé) on: %s' % \
-                            time.strftime("%Y-%m-%d %H:%M:%S")
-
-        sketch_return_location = sketchcreator.create_sketch(
-            sketch_dir, sketch_code=sketch_code_write)
-        self.assertEqual(sketch_return_location, sketch_ino_location)
-
-        arduino_sketch = codecs.open(
-            sketch_return_location, 'r', encoding='utf-8')
-        sketch_code_read = arduino_sketch.read()
-        arduino_sketch.close()
-        self.assertEqual(sketch_code_write, sketch_code_read)
+        self.assertFalse(os.path.isdir(self.default_sketch_path))
 
 
 if __name__ == '__main__':
