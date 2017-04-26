@@ -1,3 +1,2 @@
 mkdocs>=0.15.3
-py2exe>=0.9.2.2
 pyinstaller>=3.1.1

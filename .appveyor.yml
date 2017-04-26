@@ -53,18 +53,19 @@ install:
   - cmd: git submodule update --init --recursive
 
   # Install Python packages
-  - cmd: "%PIP3% install https://www.dropbox.com/s/7wfgus1op7ga9ni/py2exe-0.9.2.2-cp34-none-win32.whl?raw=1"
+  - cmd: "%PIP3% install pyinstaller"
   - cmd: "%PIP3% install mkdocs"
   - cmd: "%PIP3% install coverage"
   - cmd: "%PIP% install coverage"
   - cmd: "%PIP% install mock"
   - cmd: "%PIP% freeze"
   - cmd: "%PIP3% freeze"
+  - cmd: pyinstaller --version
 
   # Build and pack Ardublockly
   - cmd: cd blockly && %PYTHON%\python build.py && cd ..\
   - cmd: "%PYTHON3%\\python package\\build_docs.py"
-  - cmd: "%PYTHON3%\\python package\\build_py2exe.py"
+  - cmd: "%PYTHON3%\\python package\\build_pyinstaller.py windows"
   - cmd: cd package\electron && npm install && cd ..\..\
   - cmd: cd package\electron && npm run release && cd ..\..\
   - cmd: "%PYTHON3%\\python package\\pack_ardublockly.py"
@@ -95,5 +96,6 @@ deploy:
   secret_access_key:
     secure: PlLCQKTcf9IzBXpEnXUxbJifb0usS7qcghnM0VxBTX0IL3C975JPidrYjP39ge7P
   bucket: ardublockly-builds
+  region: us-west-2
   set_public: true
   folder: windows
