@@ -47,6 +47,9 @@ server_exec_dir = os.path.join(project_root_dir, exec_folder_name,
 
 # Enable the ardublocklyserver package access the sys path for py2exe to find
 sys.path.append(project_root_dir)
+# Add the local-packages to sys path
+from ardublocklyserver import local_packages_path
+sys.path.insert(0, local_packages_path)
 
 
 def remove_directory(dir_to_remove):

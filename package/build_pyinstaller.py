@@ -35,20 +35,21 @@ import shutil
 import platform
 import subprocess
 
+# The project_root_dir depends on the location of this file, so it cannot be
+# moved without updating this line
+project_root_dir = \
+    os.path.dirname(                                  # going up 1 level
+        os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
+sys.path.append(project_root_dir)
+# Add the local-packages to sys path
+from ardublocklyserver import local_packages_path
+sys.path.insert(0, local_packages_path)
 
 spec_coll_name = "server"
 exec_folder_name = "arduexec"
 py_exec_folder = os.path.join(exec_folder_name, spec_coll_name)
 script_tag = "[Ardublockly build] "
 script_tab = "                    "
-
-# The project_root_dir depends on the location of this file, so it cannot be
-# moved without updating this line
-project_root_dir = \
-    os.path.dirname(                                  # going up 1 level
-        os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
-
-# verbose_print = print if verbose else lambda *a, **k: None
 
 
 def remove_directory(dir_to_remove):

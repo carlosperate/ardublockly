@@ -13,21 +13,16 @@ import time
 import json
 import sys
 import os
-try:
-    # 2.x name
-    import Tkinter
-    import urlparse
-    import tkFileDialog
-except ImportError:
-    # 3.x name
-    import tkinter as Tkinter
-    import urllib.parse as urlparse
-    import tkinter.filedialog as tkFileDialog
-
+# local-packages imports
+import six
+# Python 2 and 3 compatibility imports
+from six.moves import range
+from six.moves import tkinter as Tkinter
+from six.moves.urllib import parse as urlparse
+from six.moves import tkinter_tkfiledialog as tkFileDialog
+# This package modules
 from ardublocklyserver.compilersettings import ServerCompilerSettings
 from ardublocklyserver import sketchcreator
-import ardublocklyserver.six.six.moves as six_moves
-from ardublocklyserver.six import six
 import ardublocklyserver.gui as gui
 
 
@@ -105,7 +100,7 @@ def load_arduino_cli(sketch_path=None):
         print('CLI command: %s' % ' '.join(cli_command))
         # Python 2 needs the input to subprocess.Popen to be in system encoding
         if sys.version_info[0] < 3:
-            for item in six_moves.range(len(cli_command)):
+            for item in range(len(cli_command)):
                 cli_command[item] = cli_command[item].encode(
                     locale.getpreferredencoding())
 

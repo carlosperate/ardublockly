@@ -9,8 +9,9 @@
 from __future__ import unicode_literals, absolute_import, print_function
 import codecs
 import os
+# local-packages imports
+import six
 
-from ardublocklyserver.six import six
 
 # Default blinky sketch
 default_sketch_code = """int led = 13;
@@ -43,8 +44,9 @@ def create_sketch(sketch_dir, sketch_name=default_sketch_name,
              Return None indicates an error has occurred.
     """
     # Check the code first, to not create sketch file if invalid
-    if not isinstance(sketch_code, six.string_types):
-        print('The sketch code given is not a valid string !!!')
+    if not isinstance(sketch_code, six.string_types) or \
+            not isinstance(sketch_name, six.string_types):
+        print('The sketch name or code given is not a valid string !!!')
         return None
     # Create the sketch path
     sketch_path = build_sketch_path(sketch_dir, sketch_name)

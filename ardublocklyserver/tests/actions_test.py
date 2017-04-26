@@ -2,7 +2,7 @@
 #
 # Unit test for the actions module.
 #
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
 # Licensed under the Apache License, Version 2.0 (the "License"):
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
@@ -24,7 +24,6 @@ try:
     import ardublocklyserver.actions as actions
     from ardublocklyserver.compilersettings import ServerCompilerSettings
 except ImportError:
-    import sys
     file_dir = os.path.dirname(os.path.realpath(__file__))
     package_dir = os.path.dirname(os.path.dirname(file_dir))
     sys.path.insert(0, package_dir)

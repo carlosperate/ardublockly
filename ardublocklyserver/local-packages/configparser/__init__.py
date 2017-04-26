@@ -134,9 +134,9 @@ import re
 import sys
 import warnings
 
-from ardublocklyserver.configparser.helpers import OrderedDict as _default_dict
-from ardublocklyserver.configparser.helpers import ChainMap as _ChainMap
-from ardublocklyserver.configparser.helpers import from_none, open, str, PY2
+from configparser.helpers import OrderedDict as _default_dict
+from configparser.helpers import ChainMap as _ChainMap
+from configparser.helpers import from_none, open, str, PY2
 
 __all__ = ["NoSectionError", "DuplicateOptionError", "DuplicateSectionError",
            "NoOptionError", "InterpolationError", "InterpolationDepthError",
