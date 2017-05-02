@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Entry point for the ArdublocklyServer application.
-#
-# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
-# Licensed under the Apache License, Version 2.0 (the "License"):
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
+"""Entry point for the ArdublocklyServer application.
+
+Copyright (c) 2017 carlosperate https://github.com/carlosperate/
+Licensed under the Apache License, Version 2.0 (the "License"):
+    http://www.apache.org/licenses/LICENSE-2.0
+"""
 from __future__ import unicode_literals, absolute_import, print_function
 import os
 import re
@@ -20,15 +19,21 @@ import webbrowser
 import ardublocklyserver.server
 import ardublocklyserver.compilersettings
 
+# Server IP and PORT settings
+SERVER_IP = '127.0.0.1'
+SERVER_PORT = 8000
 
-def open_browser(open_file):
+
+def open_browser(ip, port, file_path=''):
     """Start a browser in a separate thread after waiting for half a second.
 
-    :param open_file: URL for the browser to open.
+    :param ip: 
+    :param port: 
+    :param file_path: Path within domain for the browser to open.
+    :return: 
     """
     def _open_browser():
-        webbrowser.get().open('http://localhost:%s/%s' %
-                              (ardublocklyserver.server.PORT, open_file))
+        webbrowser.get().open('http://%s:%s/%s' % (ip, port, file_path))
 
     thread = threading.Timer(0.5, _open_browser)
     thread.start()
@@ -144,7 +149,9 @@ def main():
         print('The Ardublockly project root folder could not be found within '
               'the %s directory !' % this_file_dir)
         sys.exit(1)
-    print('Ardublockly root directory: %s' % ardublockly_root_dir)
+    print('Ardublockly root directory:\n\t%s' % ardublockly_root_dir)
+    os.chdir(ardublockly_root_dir)
+    print('Current working directory set to:\n\t%s' % os.getcwd())
 
     if find_project_root is True or server_root is None:
         server_root = ardublockly_root_dir
@@ -153,7 +160,9 @@ def main():
         if not os.path.commonprefix([server_root, ardublockly_root_dir]):
             print('The Ardublockly project folder needs to be accessible from '
                   'the server root directory !')
-    print('Selected server root: %s' % server_root)
+    print('Selected server root:\n\t%s' % server_root)
+    print('Selected server ip:\n\t%s' % SERVER_IP)
+    print('Selected server port:\n\t%s' % SERVER_PORT)
 
     print('\n======= Loading Settings =======')
     # ServerCompilerSettings is a singleton, no need to save instance
@@ -162,14 +171,10 @@ def main():
 
     print('\n======= Starting Server =======')
     if launch_browser:
-        # Find the relative path from server root to ardublockly html
-        ardublockly_html_dir = os.path.join(ardublockly_root_dir, 'ardublockly')
-        relative_path = os.path.relpath(ardublockly_html_dir, server_root)
-        print('Ardublockly page relative path from server root:\n\t/%s/' %
-              relative_path)
-        open_browser(relative_path)
+        open_browser(ip=SERVER_IP, port=SERVER_PORT)
 
-    ardublocklyserver.server.start_server(server_root)
+    ardublocklyserver.server.launch_server(
+            ip=SERVER_IP, port=SERVER_PORT, document_root_=server_root)
 
 
 if __name__ == '__main__':

@@ -310,10 +310,7 @@ class ServerCompilerSettings(object):
         return self.__arduino_board_value
 
     def get_arduino_board_types(self):
-        board_list = []
-        for key in self.__arduino_types:
-            board_list.append(key)
-        return board_list
+        return [key for key in self.__arduino_types]
 
     #
     # Serial Port and lists accessors
@@ -603,7 +600,7 @@ class ServerCompilerSettings(object):
         settings_dict = {}
         settings_parser = configparser.ConfigParser()
         try:
-            settings_parser.readfp(
+            settings_parser.read_file(
                 codecs.open(self.__settings_path, 'r', 'utf8'))
             settings_dict['arduino_exec_path'] =\
                 settings_parser.get('Arduino_IDE', 'arduino_exec_path')
