@@ -166,7 +166,8 @@ Blockly.Types.getChildBlockType = function(block) {
   // Only checks first input block, so it decides the type. Incoherences amongst
   // multiple inputs dealt at a per-block level with their own block warnings
   while (nextBlock && (nextBlock.getBlockType === undefined) &&
-         (nextBlock.inputList.length > 0)) {
+         (nextBlock.inputList.length > 0) &&
+         (nextBlock.inputList[0].connection)) {
     nextBlock = nextBlock.inputList[0].connection.targetBlock();
   }
   if (nextBlock === block) {
