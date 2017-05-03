@@ -63,8 +63,11 @@ Ardublockly.injectBlockly = function(blocklyEl, toolboxXml, blocklyPath) {
 
 /** Binds the event listeners relevant to Blockly. */
 Ardublockly.bindBlocklyEventListeners = function() {
-  Ardublockly.workspace.addChangeListener(Ardublockly.renderContent);
-
+  Ardublockly.workspace.addChangeListener(function(event) {
+    if (event.type != Blockly.Events.UI) {
+      Ardublockly.renderContent();
+    }
+  });
   // Ensure the Blockly workspace resizes accordingly
   window.addEventListener('resize',
       function() { Blockly.asyncSvgResize(Ardublockly.workspace); }, false);
@@ -78,8 +81,7 @@ Ardublockly.generateArduino = function() {
 /** @return {!string} Generated XML code from the Blockly workspace. */
 Ardublockly.generateXml = function() {
   var xmlDom = Blockly.Xml.workspaceToDom(Ardublockly.workspace);
-  var xmlText = Blockly.Xml.domToPrettyText(xmlDom);
-  return xmlText;
+  return Blockly.Xml.domToPrettyText(xmlDom);
 };
 
 /**
@@ -133,8 +135,7 @@ Ardublockly.replaceBlocksfromXml = function(blocksXml) {
 };
 
 /**
- * Parses the XML from its argument input to generate and add blocks to the
- * Blockly workspace.
+ * Parses the XML from its argument to add the blocks to the workspace.
  * @param {!string} blocksXmlDom String of XML DOM code for the blocks.
  * @return {!boolean} Indicates if the XML into blocks parse was successful.
  */

@@ -161,8 +161,11 @@ Blockly.Blocks['stepper_step'] = {
    * It checks/warns if the selected stepper instance has a config block.
    * @this Blockly.Block
    */
-  onchange: function() {
-    if (!this.workspace) return;  // Block has been deleted.
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+        return;  // Block deleted or irrelevant event
+    }
 
     var instanceName = this.getFieldValue('STEPPER_NAME')
     if (Blockly.Instances.isInstancePresent(instanceName, 'Stepper', this)) {

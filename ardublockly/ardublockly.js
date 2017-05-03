@@ -520,9 +520,6 @@ Ardublockly.PREV_ARDUINO_CODE_ = 'void setup() {\n\n}\n\n\nvoid loop() {\n\n}';
  * the blocks.
  */
 Ardublockly.renderContent = function() {
-  // Only regenerate the code if a block is not being dragged
-  if (Ardublockly.blocklyIsDragging()) return;
-
   // Render Arduino Code with latest change highlight and syntax highlighting
   var arduinoCode = Ardublockly.generateArduino();
   if (arduinoCode !== Ardublockly.PREV_ARDUINO_CODE_) {

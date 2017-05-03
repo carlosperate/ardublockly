@@ -90,12 +90,14 @@ Blockly.Blocks['serial_print'] = {
    * block if not valid data is found.
    * @this Blockly.Block
    */
-  onchange: function() {
-    if (!this.workspace) { return; }  // Block has been deleted.
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+        return;  // Block deleted or irrelevant event
+    }
 
     // Get the Serial instance from this block
     var thisInstanceName = this.getFieldValue('SERIAL_ID');
-
     // Iterate through top level blocks to find setup instance for the serial id
     var blocks = Blockly.mainWorkspace.getTopBlocks();
     var setupInstancePresent = false;
@@ -105,6 +107,7 @@ Blockly.Blocks['serial_print'] = {
         var setupBlockInstanceName = func.call(blocks[x]);
         if (thisInstanceName == setupBlockInstanceName) {
           setupInstancePresent = true;
+          break;
         }
       }
     }

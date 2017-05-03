@@ -110,8 +110,11 @@ Blockly.Blocks['spi_transfer'] = {
    * block if not valid data is found.
    * @this Blockly.Block
    */
-  onchange: function() {
-    if (!this.workspace) { return; }  // Block has been deleted.
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+        return;  // Block deleted or irrelevant event
+    }
 
     // Get the Serial instance from this block
     var thisInstanceName = this.getFieldValue('SPI_ID');
@@ -130,8 +133,9 @@ Blockly.Blocks['spi_transfer'] = {
     }
 
     if (!setupInstancePresent) {
-      this.setWarningText(Blockly.Msg.ARD_SPI_TRANS_WARN1.replace('%1', thisInstanceName),
-								  'spi_setup');
+      this.setWarningText(
+          Blockly.Msg.ARD_SPI_TRANS_WARN1.replace('%1', thisInstanceName),
+          'spi_setup');
     } else {
       this.setWarningText(null, 'spi_setup');
     }
@@ -164,8 +168,8 @@ Blockly.Blocks['spi_transfer'] = {
     }
     // If the old value is not present any more, add a warning to the block.
     if (!currentValuePresent) {
-      this.setWarningText(Blockly.Msg.ARD_SPI_TRANS_WARN2.replace('%1', fieldValue),
-			  'bPin');
+      this.setWarningText(
+          Blockly.Msg.ARD_SPI_TRANS_WARN2.replace('%1', fieldValue), 'bPin');
     } else {
       this.setWarningText(null, 'bPin');
     }
