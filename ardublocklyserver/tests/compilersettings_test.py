@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
-#
-# Unit test for the compilersettings module.
-#
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
-# Licensed under the Apache License, Version 2.0 (the "License"):
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
+"""Unit test for the ServerCompilerSettings class.
+
+Copyright (c) 2015 carlosperate https://github.com/carlosperate/
+Licensed under the Apache License, Version 2.0 (the "License"):
+    http://www.apache.org/licenses/LICENSE-2.0
+"""
 from __future__ import unicode_literals, absolute_import, print_function
 import os
+import gc
 import sys
+import shutil
 import unittest
 try:
     import mock
@@ -20,7 +21,6 @@ except ImportError:
 try:
     from ardublocklyserver.compilersettings import ServerCompilerSettings
 except ImportError:
-    import sys
     file_dir = os.path.dirname(os.path.realpath(__file__))
     package_dir = os.path.dirname(os.path.dirname(file_dir))
     sys.path.insert(0, package_dir)
@@ -28,21 +28,52 @@ except ImportError:
 
 
 class ServerCompilerSettingsTestCase(unittest.TestCase):
-    """
-    Tests for ServerCompilerSettings
-    """
+    """Tests for ServerCompilerSettings."""
+
+    settings = None
+    temp_folder = None
+
+    #
+    # Test fixtures
+    #
+    @classmethod
+    def setUpClass(cls):
+        """Create a temporary folder to play round."""
+        cls.temp_folder = os.path.join(
+            os.path.abspath(os.path.dirname(__file__)),
+            'TestTemp_compilersettings')
+        if os.path.isdir(cls.temp_folder):
+            raise Exception('Directory %s already exists.' % cls.temp_folder)
+        os.makedirs(cls.temp_folder)
+        # Create settings file and check it's a new instance by looking at path
+        cls.settings = ServerCompilerSettings(cls.temp_folder)
+        if cls.temp_folder not in cls.settings.get_settings_file_path():
+            raise Exception('Settings file not created in temp folder:\n'
+                            '\t%s' % cls.settings.get_settings_file_path())
+
+    @classmethod
+    def tearDownClass(cls):
+        """Deletes the previously created temporary folder and settings."""
+        cls.settings._drop()
+        del cls.settings
+        cls.settings = None
+        gc.collect()
+        if os.path.isdir(cls.temp_folder):
+            shutil.rmtree(cls.temp_folder)
 
     #
     # Helper functions
     #
     def get_default_settings_file_dir(self):
+        return os.path.normpath(
+            self.settings._ServerCompilerSettings__settings_path)
         # The default location from the ServerCompilerSettings class is the
         # following, so if that changes in the class it needs to change here !!!
-        default_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
+        #default_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
         # Accessing the class static variable does not initialise the singleton
-        return os.path.normpath(os.path.join(
-            default_dir,
-            ServerCompilerSettings._ServerCompilerSettings__settings_filename))
+        #return os.path.normpath(os.path.join(
+        #    default_dir,
+        #    ServerCompilerSettings._ServerCompilerSettings__settings_filename))
 
     def delete_default_settings_file(self):
         """
@@ -50,17 +81,16 @@ class ServerCompilerSettingsTestCase(unittest.TestCase):
         it if it finds it.
         This will DELETE a file from the directory this script is called !!!
         """
-        settings_file = self.get_default_settings_file_dir()
-        if os.path.exists(settings_file):
-            print('Removing settings file from %s' % settings_file)
-            os.remove(settings_file)
+        print('Removing settings file from %s' % os.path.normpath(
+                self.settings._ServerCompilerSettings__settings_filename))
+        self.settings.delete_settings_file()
 
     def new_ServerCompilerSettings_instance(self):
         """
         Drops the current ServerCompilerSettings instance and creates a new one.
         """
         ServerCompilerSettings()._drop()
-        return ServerCompilerSettings()
+        return ServerCompilerSettings(self.temp_folder)
 
     #
     # Testing the class singleton property

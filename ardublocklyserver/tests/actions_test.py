@@ -7,6 +7,7 @@ Licensed under the Apache License, Version 2.0 (the "License"):
 """
 from __future__ import unicode_literals, absolute_import, print_function
 import os
+import gc
 import sys
 import shutil
 import codecs
@@ -47,11 +48,19 @@ class ActionsTestCase(unittest.TestCase):
         if os.path.isdir(cls.temp_folder):
             raise Exception('Directory %s already exists.' % cls.temp_folder)
         os.makedirs(cls.temp_folder)
+        # Create settings file and check it's a new instance by looking at path
         cls.settings = ServerCompilerSettings(cls.temp_folder)
+        if cls.temp_folder not in cls.settings.get_settings_file_path():
+            raise Exception('Settings file not created in temp folder:\n'
+                            '\t%s' % cls.settings.get_settings_file_path())
 
     @classmethod
     def tearDownClass(cls):
         """Deletes the previously created temporary folder."""
+        cls.settings._drop()
+        del cls.settings
+        cls.settings = None
+        gc.collect()
         if os.path.isdir(cls.temp_folder):
             shutil.rmtree(cls.temp_folder)
 
@@ -66,23 +75,6 @@ class ActionsTestCase(unittest.TestCase):
         """Delete the temp folder and any files created inside."""
         if os.path.isdir(self.__class__.temp_folder):
             shutil.rmtree(self.__class__.temp_folder)
-
-    #
-    # Helper functions
-    #
-    def delete_default_settings_file(self):
-        """
-        Checks if there is a settings file in the default location and deletes
-        it if it finds it.
-        This will DELETE a file from the directory this script is called !!!
-        """
-        # Accessing the class static variable does not initialise the singleton
-        settings_file = os.path.normpath(os.path.join(
-            self.temp_folder,
-            ServerCompilerSettings._ServerCompilerSettings__settings_filename))
-        if os.path.exists(settings_file):
-            print('Removing settings file from %s' % settings_file)
-            os.remove(settings_file)
 
     #
     # Command line tests

@@ -8,6 +8,7 @@
 #
 from __future__ import unicode_literals, absolute_import
 import os
+import gc
 import time
 import codecs
 import shutil
@@ -21,15 +22,17 @@ except ImportError:
     package_dir = os.path.dirname(os.path.dirname(file_dir))
     sys.path.insert(0, package_dir)
     from ardublocklyserver import sketchcreator
+from ardublocklyserver.compilersettings import ServerCompilerSettings
 
 
 class SketchCreatorTestCase(unittest.TestCase):
-    """
-    Tests for SketchCreator class.
+    """Tests for SketchCreator class.
+
     Rather than mocking around with os module it creates 'safe' folder inside
     the test directory where it can create and delete files.
     """
 
+    settings = None
     temp_folder = None
 
     #
@@ -48,10 +51,19 @@ class SketchCreatorTestCase(unittest.TestCase):
         cls.default_sketch_path = os.path.join(
             cls.temp_folder, sketchcreator.default_sketch_name,
             '%s.ino' % sketchcreator.default_sketch_name)
+        # Create settings file and check it's a new instance by looking at path
+        cls.settings = ServerCompilerSettings(cls.temp_folder)
+        if cls.temp_folder not in cls.settings.get_settings_file_path():
+            raise Exception('Settings file not created in temp folder:\n'
+                            '\t%s' % cls.settings.get_settings_file_path())
 
     @classmethod
     def tearDownClass(cls):
         """Deletes the previously created temporary folder."""
+        cls.settings._drop()
+        del cls.settings
+        cls.settings = None
+        gc.collect()
         if os.path.isdir(cls.temp_folder):
             shutil.rmtree(cls.temp_folder)
 
