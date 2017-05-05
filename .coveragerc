@@ -1,0 +1,16 @@
+[run]
+branch = False
+cover_pylib = False
+source = ardublocklyserver/
+omit =
+    ardublocklyserver/tests/*
+    ardublocklyserver/local-packages/*
+    ardublocklyserver/pyserialports/*
+
+[report]
+show_missing = True
+skip_covered = False
+exclude_lines =
+    # Don't complain if non-runnable code isn't run:
+    if 0:
+    if __name__ == .__main__.:

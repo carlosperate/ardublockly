@@ -15,14 +15,12 @@ import unittest
 
 try:
     from ardublocklyserver import sketchcreator
-    from ardublocklyserver.compilersettings import ServerCompilerSettings
 except ImportError:
     import sys
     file_dir = os.path.dirname(os.path.realpath(__file__))
     package_dir = os.path.dirname(os.path.dirname(file_dir))
     sys.path.insert(0, package_dir)
     from ardublocklyserver import sketchcreator
-    from ardublocklyserver.compilersettings import ServerCompilerSettings
 
 
 class SketchCreatorTestCase(unittest.TestCase):
@@ -31,6 +29,8 @@ class SketchCreatorTestCase(unittest.TestCase):
     Rather than mocking around with os module it creates 'safe' folder inside
     the test directory where it can create and delete files.
     """
+
+    temp_folder = None
 
     #
     # Test fixtures
@@ -68,14 +68,14 @@ class SketchCreatorTestCase(unittest.TestCase):
     #
     # Tests for file creation
     #
-    def test_sketch_name_default(self):
+    def test_create_sketch_name_default(self):
         """Test default sketch has created the file correctly."""
         sketch_path = sketchcreator.create_sketch(self.temp_folder)
 
         self.assertEqual(sketch_path, self.default_sketch_path)
         self.assertTrue(os.path.isfile(self.default_sketch_path))
 
-    def test_sketch_name_non_default(self):
+    def test_create_sketch_name_non_default(self):
         """Tests to see if an Arduino Sketch is created in a new location."""
         filename_unicode = 'TestTemp_ろΓαζςÂé'
         final_ino_path = os.path.join(
@@ -87,7 +87,7 @@ class SketchCreatorTestCase(unittest.TestCase):
         self.assertEqual(final_ino_path, created_sketch_path)
         self.assertTrue(os.path.isfile(final_ino_path))
 
-    def test_sketch_name_invalid(self):
+    def test_create_sketch_name_invalid(self):
         """Test for invalid inputs in the create_sketch method."""
         self.assertFalse(os.path.isdir(self.default_sketch_path))
         invalid_sketch_name = True
@@ -98,7 +98,7 @@ class SketchCreatorTestCase(unittest.TestCase):
         self.assertIsNone(created_sketch_path)
         self.assertFalse(os.path.isdir(self.default_sketch_path))
 
-    def test_sketch_path_invalid(self):
+    def test_create_sketch_path_invalid(self):
         """Test for invalid inputs in the create_sketch method."""
         invalid_path = os.path.join(self.temp_folder, 'raNd_dIr')
         self.assertFalse(os.path.isdir(invalid_path))
@@ -111,7 +111,7 @@ class SketchCreatorTestCase(unittest.TestCase):
     #
     # Tests for code content
     #
-    def test_sketch_code_default(self):
+    def test_create_sketch_code_default(self):
         """Test default sketch has filled the sketch contents correctly."""
         sketch_path = sketchcreator.create_sketch(self.temp_folder)
 
@@ -119,7 +119,7 @@ class SketchCreatorTestCase(unittest.TestCase):
             sketch_content = sketch.read()
         self.assertEqual(sketch_content, sketchcreator.default_sketch_code)
 
-    def test_sketch_code_non_default(self):
+    def test_create_sketch_code_non_default(self):
         """Test sketch is created correctly with the given code."""
         sketch_code = 'Unicode test (ろΓαζςÂaé) on: %s' % \
                       time.strftime("%Y-%m-%d %H:%M:%S")
@@ -131,7 +131,7 @@ class SketchCreatorTestCase(unittest.TestCase):
             sketch_code_read = sketch.read()
         self.assertEqual(sketch_code_read, sketch_code)
 
-    def test_sketch_code_invalid(self):
+    def test_create_sketch_code_invalid(self):
         """Test for invalid inputs in the create_sketch method."""
         self.assertFalse(os.path.isdir(self.default_sketch_path))
         invalid_sketch_code = True
@@ -141,6 +141,26 @@ class SketchCreatorTestCase(unittest.TestCase):
 
         self.assertIsNone(created_sketch_path)
         self.assertFalse(os.path.isdir(self.default_sketch_path))
+
+    #
+    # Test for building sketch path
+    #
+    def test_build_sketch_path_sketch_name_invalid(self):
+        """Test for invalid sketch_name Type."""
+        returned_sketch_path = sketchcreator.build_sketch_path(
+            sketch_dir=self.temp_folder, sketch_name=True)
+
+        self.assertIsNone(returned_sketch_path)
+
+    def test_build_sketch_path_do_not_make_dir(self):
+        """Test when the sketch directory exists already."""
+        os.makedirs(os.path.join(self.temp_folder, 'sketch_name'))
+
+        returned_sketch_path = sketchcreator.build_sketch_path(
+            sketch_dir=self.temp_folder, sketch_name='sketch_name')
+
+        self.assertEqual(returned_sketch_path, os.path.join(
+                self.temp_folder, 'sketch_name', 'sketch_name.ino'))
 
 
 if __name__ == '__main__':

@@ -53,8 +53,8 @@ def load_arduino_cli(sketch_path):
     parameter.
 
     :param sketch_path: Path to the sketch to load into the Arduino IDE.
-    :return: A tuple with the following data (success, conclusion, out, error,
-            exit_code)
+    :return: A tuple with the following data (success, ide_mode, std_out,
+            err_out, exit_code)
     """
     success = True
     ide_mode = 'unknown'
@@ -79,15 +79,17 @@ def load_arduino_cli(sketch_path):
         success = False
         exit_code = 54
         err_out = 'Launch IDE option not configured in the Settings.'
-    elif settings.load_ide_option == 'upload':
-        if not settings.get_serial_port_flag():
-            success = False
-            exit_code = 55
-            err_out = 'Serial Port configured in Settings not accessible.'
-        if not settings.get_arduino_board_flag():
-            success = False
-            exit_code = 56
-            err_out = 'Arduino Board not configured in the Settings.'
+    elif not settings.get_arduino_board_flag() and (
+            settings.load_ide_option == 'upload' or
+            settings.load_ide_option == 'verify'):
+        success = False
+        exit_code = 56
+        err_out = 'Arduino Board not configured in the Settings.'
+    elif not settings.get_serial_port_flag() and \
+            settings.load_ide_option == 'upload':
+        success = False
+        exit_code = 55
+        err_out = 'Serial Port configured in Settings not accessible.'
 
     if success:
         ide_mode = settings.load_ide_option

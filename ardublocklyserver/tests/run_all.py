@@ -27,8 +27,8 @@ from compilersettings_test import ServerCompilerSettingsTestCase
 from actions_test import ActionsTestCase
 
 
-def run_all_tests():
+def run_tests():
     unittest.main()
 
 if __name__ == '__main__':
-    run_all_tests()
+    run_tests()
