@@ -1,42 +1,29 @@
 # -*- coding: utf-8 -*-
-#
-# Functions to retrieve the computer Serial Port list.
-#
-# Copyright (c) 2015 carlosperate https://github.com/carlosperate/
-# Licensed under the Apache License, Version 2.0 (the "License"):
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-from __future__ import unicode_literals, absolute_import
-import ardublocklyserver.pyserialports.list_ports
+"""Functions to retrieve the computer Serial Port list.
 
-
-def get_port_complete_list():
-    """
-    Creates a list of the available Serial Ports, including their descriptor
-    and hardware ID.
-    :return: List with the Port information. Each list item contains a tuple
-             three elements in this order: (port name, descriptor, hw id)
-    """
-    port_list = ardublocklyserver.pyserialports.list_ports.comports()
-    return sorted(port_list)
+Copyright (c) 2017 carlosperate https://github.com/carlosperate/
+Licensed under the Apache License, Version 2.0 (the "License"):
+    http://www.apache.org/licenses/LICENSE-2.0
+"""
+from __future__ import unicode_literals, absolute_import, print_function
+# local-packages imports
+from serial.tools import list_ports
 
 
 def get_port_list():
+    """Return a list with available Serial Ports.
+
+    :return: A list with the available serial ports only.
     """
-    :return: A list with the available serial ports only
-    """
-    iterator = get_port_complete_list()
-    port_list = []
-    for port, descriptor, hw_id in iterator:
-        port_list.append(port)
-    return port_list
+    return [port for port, descriptor, hw_id in sorted(list_ports.comports())]
 
 
 def print_ports():
+    """Print the available Serial Ports with their info into the console.
+
+    This includes the ports descriptor and hardware ID.
     """
-    Prints the available Serial Ports with their info into the console.
-    """
-    iterator = get_port_complete_list()
+    iterator = sorted(list_ports.comports())
     print('Found %s ports:' % len(iterator))
     for port, descriptor, hw_id in iterator:
         print('Port: %s\n\tDescriptor: %s\n\tHardware ID: %s' %
