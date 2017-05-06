@@ -7,6 +7,7 @@ Licensed under the Apache License, Version 2.0 (the "License"):
 """
 from __future__ import unicode_literals, absolute_import, print_function
 import os
+import sys
 # local-packages imports
 from bottle import request, response
 from bottle import static_file, run, default_app, redirect, abort
@@ -23,7 +24,7 @@ app = application = default_app()
 document_root = ''
 
 
-def launch_server(ip='127.0.0.1', port=8000, document_root_=''):
+def launch_server(ip='localhost', port=8000, document_root_=''):
     """Launch the Waitress server and Bottle framework with given settings.
 
     :param ip: IP address to serve. Default to localhost, set to '0.0.0.0' to
@@ -43,6 +44,18 @@ def launch_server(ip='127.0.0.1', port=8000, document_root_=''):
 def strip_path():
     """Bottle hook to strip trailing forward slashes from requests."""
     request.environ['PATH_INFO'] = request.environ['PATH_INFO'].rstrip('/')
+
+
+def set_header_no_cache():
+    """Set the HTTP response to no cache the data.
+
+    Implementation depends on Python version.
+    """
+    if sys.version_info[0] < 3:
+        response.headers[
+            'Cache-Control'.encode('ascii', 'ignore')] = 'no-cache'
+    else:
+        response.headers['Cache-Control'] = 'no-cache'
 
 
 #
@@ -155,7 +168,7 @@ def handler_settings_get_all():
                 'selected': actions.get_load_ide_selected()
             }]
         }
-    response.headers['Cache-Control'] = 'no-cache'
+    set_header_no_cache()
     return response_dict
 
 
@@ -197,19 +210,22 @@ def handler_settings_get_individual(name):
     else:
         success = False
         response_dict.update({
+            'settings_type': 'invalid',
             'errors': [{
                 'id': 61,
                 'description': 'Unexpected setting type requested.'
             }]})
     response_dict.update({'success': success})
-
-    response.headers['Cache-Control'] = 'no-cache'
+    set_header_no_cache()
     return response_dict
 
 
 @app.put('/settings')
 def handler_settings_update_all():
     """Handle the invalid PUT all settings requests.
+
+    There is no specific reason for this, is just not used by the client, and
+    so there is no need to implement it at the moment.
 
     Error codes:
     62 - Settings have to be individually updated.
@@ -292,12 +308,14 @@ def handler_settings_update_individual(name):
                 options = [{'value': k, 'display_text': v} for k, v in
                            iteritems(actions.get_load_ide_options())]
             else:
-                response_dict.update({'success': False})
+                response_dict.update({'success': False,
+                                      'settings_type': 'invalid'})
                 response_dict.setdefault('errors', []).append({
                     'id': 63,
                     'description': 'Unexpected setting type to update.'
                 })
-            if set_value and set_value == new_value:
+            if set_value and ((set_value == new_value)
+                              or name == 'compiler' or name == 'sketch'):
                 response_dict.update({
                     'success': True,
                     'selected': set_value
@@ -310,6 +328,7 @@ def handler_settings_update_individual(name):
                     'id': 67,
                     'description': 'New value could not be set.'
                 })
+    set_header_no_cache()
     return response_dict
 
 
@@ -364,7 +383,7 @@ def handler_code_post():
                 actions.arduino_ide_send_code(sketch_code)
         except Exception as e:
             exit_code = 52
-            err_out = 'Unexpected server error.'
+            err_out += 'Unexpected server error.'
             print('Error: Exception in arduino_ide_send_code:\n%s' % str(e))
 
     response_dict.update({'success': success,
@@ -380,8 +399,5 @@ def handler_code_post():
                 'description': 'More info available in the \'ide_data\' value.'
             }]
         })
+    set_header_no_cache()
     return response_dict
-
-
-if __name__ == '__main__':
-    launch_server('127.0.0.1', 8000, 'C:\\workspace\\git\\ardublockly')

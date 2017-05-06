@@ -36,8 +36,11 @@ before_install:
   # Install Python packages (built with Python 3, tests for 2 and 3)
   - sudo python -m pip install mock
   - sudo python -m pip install coverage
+  - sudo python -m pip install requests
   - pip3 install coverage
+  - pip3 install requests
   - pip3 install coveralls
+  #- pip3 install pydocstyle
   - pip3 install mkdocs
   - pip3 install pyinstaller
 
@@ -77,6 +80,7 @@ script:
   - python -m coverage report
   - python3 -m coverage run ardublocklyserver/tests/run_all.py
   - python3 -m coverage report
+  #- pydocstyle ardublocklyserver --match-dir='ardublocklyserver'
 
 after_success:
   - coveralls

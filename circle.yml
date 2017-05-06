@@ -47,7 +47,10 @@ dependencies:
     # Python packages (built on Python 3, tests run both 2 and 3)
     - sudo pip2 install awscli
     - sudo pip2 install mock
+    #- sudo pip2 install pydocstyle
+    - sudo pip2 install requests --upgrade
     - sudo pip2 install coverage
+    - sudo pip3 install requests --upgrade
     - sudo pip3 install coverage
     - sudo pip3 install mkdocs
     - sudo pip3 install pyinstaller
@@ -79,6 +82,7 @@ test:
     - python -m coverage report
     - python3 -m coverage run ardublocklyserver/tests/run_all.py
     - python3 -m coverage report
+    #- pydocstyle ardublocklyserver --match-dir='ardublocklyserver'
 
 general:
   artifacts:

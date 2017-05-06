@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Runs all the unit tests from this directory.
-#
-# This file manually adds the tests to be run.
-#
-# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
-# Licensed under the Apache License, Version 2.0 (the "License"):
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
+"""Runs all the unit tests from this directory.
+
+This file manually adds the tests to be run.
+
+Copyright (c) 2017 carlosperate https://github.com/carlosperate/
+Licensed under the Apache License, Version 2.0 (the "License"):
+    http://www.apache.org/licenses/LICENSE-2.0
+"""
 import os
 import sys
 import unittest
@@ -25,10 +24,12 @@ sys.path.insert(0, local_packages_path)
 from sketchcreator_test import SketchCreatorTestCase
 from compilersettings_test import ServerCompilerSettingsTestCase
 from actions_test import ActionsTestCase
+from server_test import ServerTestCase
 
 
 def run_tests():
     unittest.main()
+
 
 if __name__ == '__main__':
     run_tests()
