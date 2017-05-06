@@ -42,7 +42,8 @@ before_install:
   - pip3 install coveralls
   #- pip3 install pydocstyle
   - pip3 install mkdocs
-  - pip3 install pyinstaller
+  # We need a newer unreleased version of PyInstaller for Python 3.5
+  - pip3 install https://github.com/pyinstaller/pyinstaller/archive/964547cd92cabe28150d52c2ca809de74a5ddbaa.zip
 
   # Check Python, pip and package versions
   - python -c "import sys; print(sys.executable)"
