@@ -124,7 +124,7 @@ Ardublockly.injectLanguageJsSources = function(langKey) {
 
   // Retrieve and inject Ardublockly translations synchronously
   var appLangJsLoad = document.createElement('script');
-  var request = ArdublocklyServer.createAjaxRequest();
+  var request = ArdublocklyServer.createRequest();
   var appLangJdPath = 'msg/' + langKey + '.js';
   try {
     request.open('GET', appLangJdPath, false);

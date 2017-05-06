@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-#
-# Sketch Creator module creates an Arduino Sketch source code file.
-#
-# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
-# Licensed under the Apache License, Version 2.0 (the "License"):
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
+"""Sketch Creator module creates an Arduino Sketch source code file.
+
+Copyright (c) 2017 carlosperate https://github.com/carlosperate/
+Licensed under the Apache License, Version 2.0 (the "License"):
+    http://www.apache.org/licenses/LICENSE-2.0
+"""
 from __future__ import unicode_literals, absolute_import, print_function
 import codecs
 import os
@@ -72,7 +71,7 @@ def build_sketch_path(sketch_dir, sketch_name):
     if os.path.isdir(sketch_dir):
         try:
             sketch_path = os.path.join(sketch_dir, sketch_name)
-        except TypeError as e:
+        except (TypeError, AttributeError) as e:
             print('Error: %s\nSketch Name could not be processed.' % e)
         else:
             if not os.path.exists(sketch_path):

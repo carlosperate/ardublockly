@@ -55,8 +55,11 @@ install:
   # Install Python packages
   - cmd: "%PIP3% install pyinstaller"
   - cmd: "%PIP3% install mkdocs"
+  #- cmd: "%PIP3% install pydocstyle"
   - cmd: "%PIP3% install coverage"
+  - cmd: "%PIP3% install requests"
   - cmd: "%PIP% install coverage"
+  - cmd: "%PIP% install requests"
   - cmd: "%PIP% install mock"
   - cmd: "%PIP% freeze"
   - cmd: "%PIP3% freeze"
@@ -82,6 +85,7 @@ test_script:
   - cmd: "%PYTHON%\\python -m coverage report"
   - cmd: "%PYTHON3%\\python -m coverage run ardublocklyserver\\tests\\run_all.py"
   - cmd: "%PYTHON3%\\python -m coverage report"
+  #- cmd: pydocstyle ardublocklyserver --match-dir='ardublocklyserver'
 
 # Push artefact to S3 bucket and list all
 before_deploy:

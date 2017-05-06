@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
-#
-# Unit test for the actions module.
-#
-# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
-# Licensed under the Apache License, Version 2.0 (the "License"):
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
+"""Unit test for the actions module.
+
+Copyright (c) 2017 carlosperate https://github.com/carlosperate/
+Licensed under the Apache License, Version 2.0 (the "License"):
+    http://www.apache.org/licenses/LICENSE-2.0
+"""
 from __future__ import unicode_literals, absolute_import, print_function
 import os
+import gc
 import sys
+import shutil
 import codecs
 import unittest
 try:
-    import mock
+    from mock import MagicMock as mock
     from mock import patch
-    from mock import PropertyMock
 except ImportError:
     from unittest.mock import MagicMock as mock
-    from unittest.mock import PropertyMock
     from unittest.mock import patch
 
 try:
@@ -32,269 +31,747 @@ except ImportError:
 
 
 class ActionsTestCase(unittest.TestCase):
-    """
-    Tests for actions module
-    """
+    """Tests for actions module."""
+
+    settings = None
+    temp_folder = None
 
     #
-    # Helper functions
+    # Test fixtures
     #
-    def delete_default_settings_file(self):
-        """
-        Checks if there is a settings file in the default location and deletes
-        it if it finds it.
-        This will DELETE a file from the directory this script is called !!!
-        """
-        default_dir = os.path.dirname(os.path.realpath(sys.argv[0]))
-        # Accessing the class static variable does not initialise the singleton
-        settings_file = os.path.normpath(os.path.join(
-            default_dir,
-            ServerCompilerSettings._ServerCompilerSettings__settings_filename))
-        if os.path.exists(settings_file):
-            print('Removing settings file from %s' % settings_file)
-            os.remove(settings_file)
+    @classmethod
+    def setUpClass(cls):
+        """Create a temporary folder to play round."""
+        cls.temp_folder = os.path.join(
+                os.path.abspath(os.path.dirname(__file__)),
+                'TestTemp_actions')
+        if os.path.isdir(cls.temp_folder):
+            raise Exception('Directory %s already exists.' % cls.temp_folder)
+        os.makedirs(cls.temp_folder)
+        # Create settings file and check it's a new instance by looking at path
+        cls.settings = ServerCompilerSettings(cls.temp_folder)
+        if cls.temp_folder not in cls.settings.get_settings_file_path():
+            raise Exception('Settings file not created in temp folder:\n'
+                            '\t%s' % cls.settings.get_settings_file_path())
+
+    @classmethod
+    def tearDownClass(cls):
+        """Deletes the previously created temporary folder."""
+        cls.settings._drop()
+        del cls.settings
+        cls.settings = None
+        gc.collect()
+        if os.path.isdir(cls.temp_folder):
+            shutil.rmtree(cls.temp_folder)
+
+    def setUp(self):
+        """Ensure the temp folder and settings file exists."""
+        if not os.path.isdir(self.__class__.temp_folder):
+            os.makedirs(self.__class__.temp_folder)
+        # Create settings file in the TestTemp_actions folder
+        self.settings.set_default_settings()
+
+    def tearDown(self):
+        """Delete the temp folder and any files created inside."""
+        if os.path.isdir(self.__class__.temp_folder):
+            shutil.rmtree(self.__class__.temp_folder)
 
     #
     # Command line tests
     #
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
     @patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
-    #@patch.object(
-    #    actions.ServerCompilerSettings, 'get_compiler_dir', autospec=True)
-    def test_load_arduino_cli_valid(self, mock_popen):
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_open(
+            self, mock_settings, mock_popen, mock_isfile):
         """
         Tests that a compiler path and arduino sketch path can be set
         and that a command line can be launched to open the sketch in the
         Arduino IDE.
         """
-        sketch_path = actions.create_sketch_default()
+        sketch_path = os.path.join(self.temp_folder, 'sketch.ino')
+        compiler_dir = 'whatever/arduino'
+        mock_settings.return_value.compiler_dir = compiler_dir
+        mock_popen.return_value.communicate.return_value = ('out1', 'out2')
+        mock_isfile.return_value = True
+        mock_settings.return_value.load_ide_option = 'open'
 
-        ServerCompilerSettings().load_ide_option = 'open'
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=PropertyMock) as mock_compiler_dir:
-            mock_compiler_dir.return_value = 'true'  # do nothing command
-            expected_command = ['true', sketch_path]
-            success, conclusion, out, error, exit_code = \
-                actions.load_arduino_cli(sketch_path)
-            mock_popen.assert_called_with(expected_command, shell=False)
-            self.assertTrue(success)
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(sketch_path)
 
-        ServerCompilerSettings().load_ide_option = 'verify'
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=PropertyMock) as mock_compiler_dir:
-            mock_compiler_dir.return_value = 'true'  # do nothing command
-            mock_popen.return_value.communicate.return_value = ('test', 'test')
-            mock_popen.return_value.returncode = 0
-            expected_command = ['true', '--verify', sketch_path]
-            success, conclusion, out, error, exit_code = \
-                actions.load_arduino_cli(sketch_path)
-            mock_popen.assert_called_with(expected_command, shell=False,
-                                          stderr=-1, stdout=-1)
-            self.assertTrue(success)
+        mock_popen.assert_called_with([compiler_dir, sketch_path], shell=False)
+        self.assertTrue(success)
+        self.assertEqual(ide_mode, 'open')
+        self.assertNotEqual(std_out, 'out1')
+        self.assertNotEqual(err_out, 'out2')
+        self.assertEqual(exit_code, 0)
 
-        ServerCompilerSettings().load_ide_option = 'upload'
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=PropertyMock) as mock_compiler_dir:
-            mock_compiler_dir.return_value = 'true'  # do nothing command
-            mock_popen.return_value.communicate.return_value = ('test', 'test')
-            mock_popen.return_value.returncode = 0
-            expected_command = [
-                'true', '--upload', '--port',
-                ServerCompilerSettings().get_serial_port_flag(), '--board',
-                ServerCompilerSettings().get_arduino_board_flag(), sketch_path]
-            success, conclusion, out, error, exit_code = \
-                actions.load_arduino_cli(sketch_path)
-            mock_popen.assert_called_with(expected_command, shell=False,
-                                          stderr=-1, stdout=-1)
-            self.assertTrue(success)
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_verify(
+            self, mock_settings, mock_popen, mock_isfile):
+        """
+        Tests that a compiler path and arduino sketch path can be set
+        and that a command line can be launched to open the sketch in the
+        Arduino IDE.
+        """
+        sketch_path = os.path.join(self.temp_folder, 'sketch.ino')
+        compiler_dir = 'whatever/arduino'
+        board_flag = 'whatever:flag'
+        mock_settings.return_value.compiler_dir = compiler_dir
+        mock_settings.return_value.get_arduino_board_flag = mock()
+        mock_settings.return_value.get_arduino_board_flag.return_value =\
+            board_flag
+        mock_popen.return_value.communicate.return_value =\
+            ('out1'.encode('latin-1'), 'out2'.encode('latin-1'))
+        mock_popen.return_value.returncode = 0
+        mock_isfile.return_value = True
+        mock_settings.return_value.load_ide_option = 'verify'
 
-        # Test for unicode strings as Py2 can be susceptible to fail there
-        ServerCompilerSettings().load_ide_option = 'upload'
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=PropertyMock) as mock_compiler_dir:
-            mock_compiler_dir.return_value = 'いろはにほへとちり'  # unicode
-            mock_popen.return_value.communicate.return_value = (
-                'Γαζέες καὶ μυρτιὲς', 'Âne ex aéquo au whist')
-            mock_popen.return_value.returncode = 0
-            expected_command = [
-                mock_compiler_dir.return_value, '--upload', '--port',
-                ServerCompilerSettings().get_serial_port_flag(), '--board',
-                ServerCompilerSettings().get_arduino_board_flag(), sketch_path]
-            success, conclusion, out, error, exit_code = \
-                actions.load_arduino_cli(sketch_path)
-            mock_popen.assert_called_with(expected_command, shell=False,
-                                          stderr=-1, stdout=-1)
-            self.assertTrue(success)
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(sketch_path)
+
+        mock_popen.assert_called_with(
+                [compiler_dir, sketch_path, '--board', board_flag, '--verify'],
+                shell=False, stderr=-1, stdout=-1)
+        self.assertTrue(success)
+        self.assertEqual(ide_mode, 'verify')
+        self.assertEqual(std_out, 'out1')
+        self.assertEqual(err_out, 'out2')
+        self.assertEqual(exit_code, 0)
+
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_upload(
+            self, mock_settings, mock_popen, mock_isfile):
+        """
+        Tests that a compiler path and arduino sketch path can be set
+        and that a command line can be launched to open the sketch in the
+        Arduino IDE.
+        """
+        sketch_path = os.path.join(self.temp_folder, 'sketch.ino')
+        compiler_dir = 'whatever/arduino'
+        board_flag = 'whatever:flag'
+        port = 'whatever_port'
+        mock_settings.return_value.compiler_dir = compiler_dir
+        mock_settings.return_value.get_arduino_board_flag = mock()
+        mock_settings.return_value.get_arduino_board_flag.return_value = \
+            board_flag
+        mock_settings.return_value.get_serial_port_flag = mock()
+        mock_settings.return_value.get_serial_port_flag.return_value = port
+        mock_popen.return_value.communicate.return_value = \
+            ('out1'.encode('latin-1'), 'out2'.encode('latin-1'))
+        mock_popen.return_value.returncode = 0
+        mock_isfile.return_value = True
+        mock_settings.return_value.load_ide_option = 'upload'
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(sketch_path)
+
+        mock_popen.assert_called_with(
+            [compiler_dir, sketch_path, '--upload', '--port', port, '--board',
+             board_flag], shell=False, stderr=-1, stdout=-1)
+        self.assertTrue(success)
+        self.assertEqual(ide_mode, 'upload')
+        self.assertEqual(std_out, 'out1')
+        self.assertEqual(err_out, 'out2')
+        self.assertEqual(exit_code, 0)
+
+    @unittest.skip('Need to solve multiple locale std issue first')
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_upload_unicode(
+            self, mock_settings, mock_popen, mock_isfile):
+        sketch_path = os.path.join(self.temp_folder, 'sketch.ino')
+        compiler_dir = 'いろはにほへとちり'
+        board_flag = 'whatever:flag'
+        port = 'whatever_port'
+        mock_settings.return_value.compiler_dir = compiler_dir
+        mock_settings.return_value.get_arduino_board_flag = mock()
+        mock_settings.return_value.get_arduino_board_flag.return_value = \
+            board_flag
+        mock_settings.return_value.get_serial_port_flag = mock()
+        mock_settings.return_value.get_serial_port_flag.return_value = port
+        mock_popen.return_value.communicate.return_value = \
+            ('Γαζέες καὶ μυρτιὲς', 'Âne ex aéquo au whist')
+        mock_popen.return_value.returncode = 0
+        mock_isfile.return_value = True
+        mock_settings.return_value.load_ide_option = 'upload'
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(sketch_path)
+
+        mock_popen.assert_called_with(
+            [compiler_dir, sketch_path, '--upload', '--port', port, '--board',
+             board_flag], shell=False, stderr=-1, stdout=-1)
+        self.assertTrue(success)
+        self.assertEqual(ide_mode, 'upload')
+        self.assertEqual(std_out, 'out1')
+        self.assertEqual(err_out, 'out2')
+        self.assertEqual(exit_code, 0)
+
+    def test_load_arduino_cli_sketch_path_invalid(self):
+        invalid_sketch_path = os.path.join(self.temp_folder, 'bad.ino')
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(invalid_sketch_path)
+
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'unknown')
+        self.assertEqual(std_out, '')
+        self.assertTrue(invalid_sketch_path in err_out)
+        self.assertEqual(exit_code, 52)
+
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_compiler_dir_invalid(
+            self, mock_settings, mock_isfile):
+        mock_settings.return_value.compiler_dir = None
+        mock_isfile.return_value = True
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(os.path.join(self.temp_folder, 's.ino'))
+
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'unknown')
+        self.assertEqual(std_out, '')
+        self.assertEqual(exit_code, 53)
+
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_load_ide_invalid(
+            self, mock_settings, mock_isfile):
+        mock_settings.return_value.compiler_dir = 'compiler_dir'
+        mock_settings.return_value.load_ide_option = None
+        mock_isfile.return_value = True
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(os.path.join(self.temp_folder, 's.ino'))
+
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'unknown')
+        self.assertEqual(std_out, '')
+        self.assertEqual(exit_code, 54)
+
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_board_flag_invalid(
+            self, mock_settings, mock_isfile):
+        mock_isfile.return_value = True
+        mock_settings.return_value.compiler_dir = 'compiler_dir'
+        mock_settings.return_value.load_ide_option = 'upload'
+        mock_settings.return_value.get_arduino_board_flag = mock()
+        mock_settings.return_value.get_arduino_board_flag.return_value = None
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(os.path.join(self.temp_folder, 's.ino'))
+
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'unknown')
+        self.assertEqual(std_out, '')
+        self.assertEqual(exit_code, 56)
+
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_port_flag_invalid(
+            self, mock_settings, mock_isfile):
+        mock_isfile.return_value = True
+        mock_settings.return_value.compiler_dir = 'compiler_dir'
+        mock_settings.return_value.load_ide_option = 'upload'
+        mock_settings.return_value.get_arduino_board_flag = mock()
+        mock_settings.return_value.get_arduino_board_flag.return_value = 'avr'
+        mock_settings.return_value.get_serial_port_flag = mock()
+        mock_settings.return_value.get_serial_port_flag.return_value = None
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(os.path.join(self.temp_folder, 's.ino'))
+
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'unknown')
+        self.assertEqual(std_out, '')
+        self.assertEqual(exit_code, 55)
+
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_exit_code_error(
+            self, mock_settings, mock_popen, mock_isfile):
+        sketch_path = os.path.join(self.temp_folder, 'sketch.ino')
+        compiler_dir = 'whatever/arduino'
+        board_flag = 'whatever:flag'
+        mock_settings.return_value.compiler_dir = compiler_dir
+        mock_settings.return_value.get_arduino_board_flag = mock()
+        mock_settings.return_value.get_arduino_board_flag.return_value =\
+            board_flag
+        mock_popen.return_value.communicate.return_value =\
+            ('out1'.encode('latin-1'), 'out2'.encode('latin-1'))
+        mock_popen.return_value.returncode = 2
+        mock_isfile.return_value = True
+        mock_settings.return_value.load_ide_option = 'verify'
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(sketch_path)
+
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'verify')
+        self.assertEqual(std_out, 'out1')
+        self.assertTrue(err_out, 'out2')
+        self.assertEqual(exit_code, 2)
+
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    @patch('ardublocklyserver.actions.subprocess.Popen', autospec=True)
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_load_arduino_cli_exit_code_50(
+            self, mock_settings, mock_popen, mock_isfile):
+        sketch_path = os.path.join(self.temp_folder, 'sketch.ino')
+        compiler_dir = 'whatever/arduino'
+        board_flag = 'whatever:flag'
+        mock_settings.return_value.compiler_dir = compiler_dir
+        mock_settings.return_value.get_arduino_board_flag = mock()
+        mock_settings.return_value.get_arduino_board_flag.return_value =\
+            board_flag
+        mock_popen.return_value.communicate.return_value =\
+            ('out1'.encode('latin-1'), 'out2'.encode('latin-1'))
+        mock_popen.return_value.returncode = 51  # Will be replaced to 50
+        mock_isfile.return_value = True
+        mock_settings.return_value.load_ide_option = 'verify'
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.load_arduino_cli(sketch_path)
+
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'verify')
+        self.assertEqual(std_out, 'out1')
+        self.assertTrue('51' in err_out)
+        self.assertEqual(exit_code, 50)
 
     def test_load_arduino_cli_invalid(self):
-        # Test that an path that is not a file returns error
-        success, conclusion, out, error, exit_code =\
-            actions.load_arduino_cli(os.getcwd())
-        self.assertFalse(success)
-        self.assertTrue('Provided sketch path is not a valid' in conclusion)
-
-        # Test for error if compiler dir is not set, default is None
-        self.delete_default_settings_file()
-        success, conclusion, out, error, exit_code = actions.load_arduino_cli()
-        self.assertFalse(success)
-        self.assertEqual(conclusion, 'arduinoOpErrorIdeDirTitle')
-
-        # Test for error if compiler dir is not set
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=PropertyMock) as mock_compiler_dir:
-            with patch(
-                    'ardublocklyserver.actions.ServerCompilerSettings.'
-                    'load_ide_option', new_callable=PropertyMock) as \
-                    mock_load_ide_option:
-                mock_compiler_dir.return_value = 'true'  # do nothing command
-                mock_load_ide_option.return_value = None
-                success, conclusion, out, error, exit_code = \
-                    actions.load_arduino_cli()
-                self.assertFalse(success)
-                self.assertEqual(conclusion, 'arduinoOpErrorIdeOptionTitle')
-
-        # Test for error if serial port unset, only required when set to upload
-        ServerCompilerSettings().load_ide_option = 'upload'
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=PropertyMock) as mock_compiler_dir:
-            with patch(
-                    'ardublocklyserver.actions.ServerCompilerSettings.'
-                    'get_serial_port_flag') as mock_get_serial_port_flag:
-                mock_compiler_dir.return_value = 'true'  # do nothing command
-                mock_get_serial_port_flag.return_value = None
-                success, conclusion, out, error, exit_code = \
-                    actions.load_arduino_cli()
-                self.assertFalse(success)
-                self.assertEqual(conclusion, 'arduinoOpErrorIdePortTitle')
-
-        # Test for error if board type unset, only required when set to upload
-        ServerCompilerSettings().load_ide_option = 'upload'
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.compiler_dir',
-                new_callable=PropertyMock) as mock_compiler_dir:
-            with patch(
-                    'ardublocklyserver.actions.ServerCompilerSettings.'
-                    'get_arduino_board_flag') as mock_get_arduino_board_flag:
-                mock_compiler_dir.return_value = 'true'  # do nothing command
-                mock_get_arduino_board_flag.return_value = None
-                success, conclusion, out, error, exit_code = \
-                    actions.load_arduino_cli()
-                self.assertFalse(success)
-                self.assertEqual(conclusion, 'arduinoOpErrorIdeBoardTitle')
+        pass
 
     #
     # Tests sketch creation
     #
-    def test_create_sketch_default(self):
-        sketch_dir = actions.create_sketch_default()
-        self.assertTrue(os.path.isfile(sketch_dir))
+    @patch('ardublocklyserver.actions.create_sketch_from_string')
+    @patch('ardublocklyserver.actions.load_arduino_cli')
+    def test_arduino_ide_send_code_valid(
+            self, mock_load_arduino_cli, mock_create_sketch_from_string):
+        """Test a valid input to arduino_ide_send_code function.
 
-    def test_create_sketch_from_string(self):
-        sketch_content = 'test string sketch'
-        sketch_dir = actions.create_sketch_from_string(sketch_content)
-        self.assertTrue(os.path.isfile(sketch_dir))
-        f = codecs.open(sketch_dir, "r", "utf-8")
-        self.assertEqual(f.read(), sketch_content)
+        Because this function basically bridges two functions also tested here
+        we only need to test they've been called correctly.
 
-        # Test for unicode file
-        sketch_content = 'いろはにほへとちり Γαζέες καὶ μυρτς Âne aéquo au whist'
-        sketch_dir = actions.create_sketch_from_string(sketch_content)
-        self.assertTrue(os.path.isfile(sketch_dir))
-        f = codecs.open(sketch_dir, "r", "utf-8")
-        self.assertEqual(f.read(), sketch_content)
+        :param mock_load_arduino_cli: Mock for load_arduino_cli()
+        :param mock_create_sketch_from_string: Mock for
+                create_sketch_from_string()
+        :return: None.
+        """
+        actions.arduino_ide_send_code('dummy sketch content here')
+
+        self.assertTrue(mock_create_sketch_from_string.called)
+        self.assertTrue(mock_load_arduino_cli.called)
+
+    @patch('ardublocklyserver.actions.create_sketch_from_string')
+    @patch('ardublocklyserver.actions.load_arduino_cli')
+    def test_arduino_ide_send_code_invalid(
+            self, mock_load_arduino_cli, mock_create_sketch_from_string):
+        """Test an error occurring inside arduino_ide_send_code function call.
+
+        Because this function basically bridges two functions also tested here
+        we only need to test the error condiction caused if the
+        create_sketch_from_string() function fails.
+
+        :param mock_load_arduino_cli: Mock for load_arduino_cli()
+        :param mock_create_sketch_from_string: Mock for
+                create_sketch_from_string()
+        :return: None.
+        """
+        mock_create_sketch_from_string.return_value = None
+
+        success, ide_mode, std_out, err_out, exit_code = \
+            actions.arduino_ide_send_code('dummy sketch content here')
+
+        self.assertTrue(mock_create_sketch_from_string.called)
+        self.assertFalse(mock_load_arduino_cli.called)
+        self.assertFalse(success)
+        self.assertEqual(ide_mode, 'unknown')
+        self.assertIsNone(std_out)
+        self.assertIsNone(err_out)
+        self.assertEqual(exit_code, 51)
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_create_sketch_from_string_file(self, mock_settings):
+        """Test the create_sketch_from_string creates the file correctly.
+
+        :param mock_settings: Mock for ServerCompilerSettings class.
+        :return: None.
+        """
+        sketch_name = 'test_sketch'
+        mock_settings.return_value.sketch_dir = self.temp_folder
+        mock_settings.return_value.sketch_name = sketch_name
+        sketch_path = os.path.join(
+                self.temp_folder, sketch_name, sketch_name + '.ino')
+        self.assertFalse(os.path.exists(sketch_path))
+
+        returned_path = actions.create_sketch_from_string('')
+
+        self.assertEqual(returned_path, sketch_path)
+        self.assertTrue(os.path.exists(returned_path))
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_create_sketch_from_string_content(self, mock_settings):
+        """Test the create_sketch_from_string creates the file correctly.
+
+        :param mock_settings: Mock for ServerCompilerSettings class.
+        :return: None.
+        """
+        sketch_code = 'いろはにほへとちり Γαζέες καὶ μυρτς Âne aéquo au whist'
+        mock_settings.return_value.sketch_dir = self.temp_folder
+        mock_settings.return_value.sketch_name = 'test_sketch'
+
+        returned_path = actions.create_sketch_from_string(sketch_code)
+
+        with codecs.open(returned_path, 'r', encoding='utf-8') as sketch:
+            self.assertEqual(sketch.read(), sketch_code)
 
     #
-    # Tests sketch creation
+    # Tests for getting and setting compiler directory
     #
     @patch('ardublocklyserver.gui.browse_file_dialog')
     @patch('ardublocklyserver.compilersettings.os.path.isfile')
-    def test_load_arduino_cli_valid(self, mock_isfile, mock_file_dialog):
-        """
-        Tests that the set_compiler_path method edits the settings based on the
+    def test_set_compiler_path_valid(self, mock_isfile, mock_file_dialog):
+        """Test valid file dialog file selected in set_compiler_path function.
+
+        Tests that the set_compiler_path function edits the settings based on
         output from the gui.browse_file_dialog() function only if it has not
         been cancelled.
-        The return value is not tested as it is a direct call to the
-        actions.get_compiler_path() function and will be tested individually.
+
+        :param mock_isfile: Mock for gui.browse_file_dialog().
+        :param mock_file_dialog: Mock for os.path.isfile().
+        :return: None.
         """
-        self.delete_default_settings_file()
-        settings = ServerCompilerSettings()
-        new_compiler_dir = os.path.join(os.getcwd(), 'arduino_debug.exe')
+        old_compiler_dir = self.settings.compiler_dir
+        new_compiler_dir = os.path.join(self.temp_folder, 'arduino_debug.exe')
+        self.assertNotEqual(old_compiler_dir, new_compiler_dir)
         mock_file_dialog.return_value = new_compiler_dir
-        # The settings.compiler_dir checks for file validity
         mock_isfile.return_value = True
-        old_compiler_dir = settings.compiler_dir
-        actions.set_compiler_path()
-        self.assertNotEqual(old_compiler_dir, settings.compiler_dir)
+
+        returned_path = actions.set_compiler_path()
+
+        self.assertEqual(returned_path, self.settings.compiler_dir)
+        self.assertNotEqual(returned_path, old_compiler_dir)
+        self.assertNotEqual(self.settings.compiler_dir, old_compiler_dir)
         # Using in as each OSs will dealt with compiler path differently
-        self.assertTrue(new_compiler_dir in settings.compiler_dir)
+        self.assertTrue(new_compiler_dir in returned_path)
+        self.assertTrue(new_compiler_dir in self.settings.compiler_dir)
 
-        # If the dialog is cancelled, the ServerCompilerSettings class should
-        # not be invoked at all
-        with patch(
-                'ardublocklyserver.actions.ServerCompilerSettings.__new__') \
-                as mock_settings:
-            # Avoid call to ServerCompilerSettings() in get_compiler_path
-            with patch('ardublocklyserver.actions.get_compiler_path') \
-                    as mock_get_compiler_path:
-                mock_file_dialog.return_value = ''  # Dialog cancel return value
-                mock_get_compiler_path.return_vale = None  # Don't care
-                old_compiler_dir = settings.compiler_dir
-                actions.set_compiler_path()
-                self.assertEqual(old_compiler_dir, settings.compiler_dir)
-                self.assertFalse(mock_settings.called)
+    @patch('ardublocklyserver.gui.browse_file_dialog')
+    @patch('ardublocklyserver.compilersettings.os.path.isfile')
+    def test_set_compiler_path_invalid(self, mock_isfile, mock_file_dialog):
+        """Test invalid file dialog selected in set_compiler_path function.
 
-    def test_get_compiler_path(self):
-        #TODO: This test method
-        pass
+        Tests that the set_compiler_path() function does not edit the settings
+        based on a selected directory that is not valid.
+
+        :param mock_isfile: Mock for gui.browse_file_dialog().
+        :param mock_file_dialog: Mock for os.path.isfile().
+        :return: None.
+        """
+        old_compiler_dir = self.settings.compiler_dir
+        new_compiler_dir = os.path.join(self.temp_folder, 'arduino_debug.exe')
+        self.assertNotEqual(old_compiler_dir, new_compiler_dir)
+        mock_file_dialog.return_value = new_compiler_dir
+        mock_isfile.return_value = False
+
+        returned_path = actions.set_compiler_path()
+
+        self.assertEqual(returned_path, old_compiler_dir)
+        self.assertEqual(returned_path, self.settings.compiler_dir)
+        self.assertNotEqual(returned_path, new_compiler_dir)
+        self.assertEqual(self.settings.compiler_dir, old_compiler_dir)
+        self.assertNotEqual(self.settings.compiler_dir, new_compiler_dir)
+
+    @patch('ardublocklyserver.gui.browse_file_dialog')
+    @patch('ardublocklyserver.actions.get_compiler_path')
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_set_compiler_path_cancelled(
+            self, mock_settings, mock_get_compiler_path, mock_file_dialog):
+        """Test cancelled file dialog in set_compiler_path function.
+
+        Tests that the set_compiler_path() function does not edit the settings
+        if the gui.browse_file_dialog() has been cancelled.
+
+        :param mock_settings: Mock for ServerCompilerSettings constructor.
+        :param mock_get_compiler_path: Mock for actions.get_compiler_path().
+        :param mock_file_dialog: Mock for gui.browse_file_dialog().
+        :return: None.
+        """
+        old_compiler_dir = 'Random str for old compiler dir, easy to identify'
+        mock_file_dialog.return_value = ''
+        mock_get_compiler_path.return_value = old_compiler_dir
+
+        returned_path = actions.set_compiler_path()
+
+        self.assertFalse(mock_settings.called)
+        self.assertEqual(returned_path, old_compiler_dir)
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_get_compiler_path_valid(self, mock_settings):
+        """Test getting a valid compiler path in get_compiler_path.
+
+        :param mock_settings: Mock for ServerCompilerSettings constructor.
+        :return: None.
+        """
+        mock_settings.return_value.compiler_dir = 'Easy to identify str'
+
+        returned_path = actions.get_compiler_path()
+
+        self.assertEqual(returned_path, 'Easy to identify str')
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_get_compiler_path_invalid(self, mock_settings):
+        """Test getting an invalid compiler path in get_compiler_path.
+
+        :param mock_settings: Mock for ServerCompilerSettings constructor.
+        :return: None.
+        """
+        mock_settings.return_value.compiler_dir = ''
+
+        returned_path = actions.get_compiler_path()
+
+        self.assertIsNone(returned_path)
 
     #
     # Test sketch setting functions
     #
-    def test_set_sketch_path(self):
-        #TODO: This test method
-        pass
+    @patch('ardublocklyserver.gui.browse_dir_dialog')
+    @patch('ardublocklyserver.compilersettings.os.path.isdir')
+    def test_set_sketch_path_valid(self, mock_isdir, mock_dir_dialog):
+        """Test valid directory dialog selected in set_sketch_path function.
 
-    def test_get_sketch_path(self):
-        #TODO: This test method
-        pass
+        Tests that the set_sketch_path function edits the settings based on
+        output from the gui.browse_dir_dialog() function if it has not been
+        cancelled.
+
+        :param mock_isdir: Mock for os.path.isdir().
+        :param mock_dir_dialog: Mock for gui.browse_file_dialog().
+        :return: None.
+        """
+        old_sketch_dir = self.settings.sketch_dir
+        new_sketch_dir = os.path.join(self.temp_folder, 'folder')
+        self.assertNotEqual(old_sketch_dir, new_sketch_dir)
+        mock_dir_dialog.return_value = new_sketch_dir
+        mock_isdir.return_value = True
+
+        returned_path = actions.set_sketch_path()
+
+        self.assertEqual(returned_path, new_sketch_dir)
+        self.assertEqual(returned_path, self.settings.sketch_dir)
+        self.assertNotEqual(returned_path, old_sketch_dir)
+        self.assertEqual(self.settings.sketch_dir, new_sketch_dir)
+        self.assertNotEqual(self.settings.sketch_dir, old_sketch_dir)
+
+    @patch('ardublocklyserver.gui.browse_dir_dialog')
+    @patch('ardublocklyserver.compilersettings.os.path.isdir')
+    def test_set_sketch_path_invalid(self, mock_isdir, mock_dir_dialog):
+        """Test invalid directory dialog selected in set_sketch_path function.
+
+        Tests that the set_sketch_path function does not edit the settings if
+        the output from the gui.browse_dir_dialog() function is not valid.
+
+        :param mock_isdir: Mock for os.path.isdir().
+        :param mock_dir_dialog: Mock for gui.browse_file_dialog().
+        :return: None.
+        """
+        old_sketch_dir = self.settings.sketch_dir
+        new_sketch_dir = os.path.join(self.temp_folder, 'folder')
+        self.assertNotEqual(old_sketch_dir, new_sketch_dir)
+        mock_dir_dialog.return_value = new_sketch_dir
+        mock_isdir.return_value = False
+
+        returned_path = actions.set_sketch_path()
+
+        self.assertEqual(returned_path, old_sketch_dir)
+        self.assertEqual(returned_path, self.settings.sketch_dir)
+        self.assertNotEqual(returned_path, new_sketch_dir)
+        self.assertEqual(self.settings.sketch_dir, old_sketch_dir)
+        self.assertNotEqual(self.settings.sketch_dir, new_sketch_dir)
+
+    @patch('ardublocklyserver.gui.browse_dir_dialog')
+    @patch('ardublocklyserver.actions.get_sketch_path')
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_set_sketch_path_cancelled(
+            self, mock_settings, mock_get_sketch_path, mock_dir_dialog):
+        """Test cancelled directory dialog in set_sketch_path function.
+
+        Tests that the set_sketch_path() function does not edit the settings
+        if the gui.browse_dir_dialog() has been cancelled.
+
+        :param mock_settings: Mock for ServerCompilerSettings constructor.
+        :param mock_get_sketch_path: Mock for actions.get_sketch_path().
+        :param mock_dir_dialog: Mock for gui.browse_dir_dialog().
+        :return: None.
+        """
+        old_sketch_dir = 'Random str for old sketch dir, easy to identify'
+        mock_dir_dialog.return_value = ''
+        mock_get_sketch_path.return_value = old_sketch_dir
+
+        returned_path = actions.set_sketch_path()
+
+        self.assertFalse(mock_settings.called)
+        self.assertEqual(returned_path, old_sketch_dir)
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_get_sketch_path_valid(self, mock_settings):
+        """Test getting a valid sketch path in get_sketch_path.
+
+        :param mock_settings: Mock for ServerCompilerSettings constructor.
+        :return: None.
+        """
+        mock_settings.return_value.sketch_dir = 'Random easy to identify str'
+
+        returned_path = actions.get_sketch_path()
+
+        self.assertEqual(returned_path, 'Random easy to identify str')
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_get_sketch_path_invalid(self, mock_settings):
+        """Test getting an invalid sketch path in get_sketch_path.
+
+        :param mock_settings:  Mock for ServerCompilerSettings constructor.
+        :return: None.
+        """
+        mock_settings.return_value.sketch_dir = ''
+
+        returned_path = actions.get_sketch_path()
+
+        self.assertIsNone(returned_path)
 
     #
     # Test arduino Board setting functions
     #
-    def test_set_arduino_board(self):
-        #TODO: This test method
-        pass
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_set_arduino_board(self, mock_settings):
+        mock_settings.return_value.arduino_board = None
+        self.assertIsNone(ServerCompilerSettings().arduino_board)
 
-    def test_get_arduino_boards(self):
-        #TODO: This test method
-        pass
+        returned_board = actions.set_arduino_board('Uno')
+
+        self.assertEqual(returned_board, 'Uno')
+
+    def test_set_arduino_board_invalid(self):
+        old_board = self.settings.arduino_board
+        invalid_board = 'this is not a valid value'
+        self.assertNotEqual(old_board, invalid_board)
+
+        returned_board = actions.set_arduino_board(invalid_board)
+
+        self.assertEqual(returned_board, old_board)
+        self.assertNotEqual(returned_board, invalid_board)
+        self.assertEqual(ServerCompilerSettings().arduino_board, old_board)
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_get_arduino_board_selected(self, mock_settings):
+        fake_board = 'not really a board'
+        mock_settings.return_value.arduino_board = fake_board
+
+        returned_board = actions.get_arduino_board_selected()
+
+        self.assertEqual(returned_board, fake_board)
+
+    @patch.object(actions.ServerCompilerSettings, 'get_arduino_board_types')
+    def test_get_arduino_boards(self, mock_settings):
+        mock_settings.return_value = 'random string to test board return'
+
+        received_boards = actions.get_arduino_boards()
+
+        self.assertTrue(mock_settings.called)
+        self.assertEqual(received_boards, 'random string to test board return')
 
     #
     # Test serial Port setting functions
     #
-    def test_set_serial_port(self):
-        #TODO: This test method
-        pass
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_set_serial_port(self, mock_settings):
+        mock_settings.return_value.serial_port = None
+        self.assertIsNone(ServerCompilerSettings().serial_port)
 
-    def test_get_serial_ports(self):
-        #TODO: This test method
-        pass
+        returned_port = actions.set_serial_port('MyPort')
+
+        self.assertEqual(returned_port, 'MyPort')
+
+    def test_set_serial_port_invalid(self):
+        old_port = self.settings.serial_port
+        invalid_port = 'this is not a valid value'
+        self.assertNotEqual(old_port, invalid_port)
+
+        returned_port = actions.set_serial_port(invalid_port)
+
+        self.assertEqual(returned_port, old_port)
+        self.assertNotEqual(returned_port, invalid_port)
+        self.assertEqual(ServerCompilerSettings().serial_port, returned_port)
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_get_serial_port_selected(self, mock_settings):
+        fake_port = 'not really a board'
+        mock_settings.return_value.serial_port = fake_port
+
+        returned_port = actions.get_serial_port_selected()
+
+        self.assertEqual(returned_port, fake_port)
+
+    @patch.object(actions.ServerCompilerSettings, 'get_serial_ports')
+    def test_get_serial_ports(self, mock_settings):
+        mock_settings.return_value = 'random string to test port return'
+
+        received_ports = actions.get_serial_ports()
+
+        self.assertTrue(mock_settings.called)
+        self.assertEqual(received_ports, 'random string to test port return')
 
     #
     # Test load IDE setting functions
     #
-    def test_set_load_ide_only(self):
-        #TODO: This test method
-        pass
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_set_load_ide_only(self, mock_settings):
+        mock_settings.return_value.load_ide_option = None
+        self.assertIsNone(ServerCompilerSettings().load_ide_option)
 
-    def test_get_load_ide_only(self):
-        #TODO: This test method
-        pass
+        returned_load_ide = actions.set_load_ide_only('MyNewIdeLoadOption')
+
+        self.assertEqual(returned_load_ide, 'MyNewIdeLoadOption')
+
+    def test_set_load_ide_only_invalid(self):
+        old_ide_load = self.settings.load_ide_option
+        invalid_ide_load = 'this is not a valid value'
+        self.assertNotEqual(old_ide_load, invalid_ide_load)
+
+        returned_load_ide = actions.set_load_ide_only(invalid_ide_load)
+
+        self.assertEqual(returned_load_ide, old_ide_load)
+        self.assertNotEqual(returned_load_ide, invalid_ide_load)
+        self.assertEqual(
+                ServerCompilerSettings().load_ide_option, returned_load_ide)
+
+    @patch.object(actions.ServerCompilerSettings, '__new__')
+    def test_get_load_ide_selected(self, mock_settings):
+        fake_ide_load = 'not really an IDE load option'
+        mock_settings.return_value.load_ide_option = fake_ide_load
+
+        returned_load_ide = actions.get_load_ide_selected()
+
+        self.assertEqual(returned_load_ide, fake_ide_load)
+
+    @patch.object(actions.ServerCompilerSettings, 'get_load_ide_options')
+    def test_get_load_ide_options(self, mock_settings):
+        mock_settings.return_value = 'random str to test load IDE'
+
+        returned_load_ide = actions.get_load_ide_options()
+
+        self.assertTrue(mock_settings.called)
+        self.assertEqual(returned_load_ide, 'random str to test load IDE')
 
 
 if __name__ == '__main__':

@@ -32,22 +32,31 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoOpVerifiedTitle: "Successfully Verified Sketch",
   arduinoOpOpenedTitle: "Sketch opened in IDE",
   arduinoOpOpenedBody: "The sketch should be loaded in the Arduino IDE.",
-  arduinoOpErrorUpVerTitle: "Build or Upload failed",
-  arduinoOpErrorSketchTitle: "Sketch not found",
-  arduinoOpErrorFlagTitle: "Invalid command line argument",
-  arduinoOpErrorFlagPrefTitle: "Preference passed to 'get-pref' flag does not exist",
-  arduinoOpErrorIdeDirTitle: "Unable to find Arduino IDE",
-  arduinoOpErrorIdeDirBody: "The compiler directory has not been set.<br>" +
-                            "Please set it in the Settings.",
-  arduinoOpErrorIdeOptionTitle: "What should we do with the Sketch?",
-  arduinoOpErrorIdeOptionBody: "The launch IDE option has not been set.<br>" +
-                               "Please select an IDE option in the Settings.",
-  arduinoOpErrorIdePortTitle: "Serial Port unavailable",
-  arduinoOpErrorIdePortBody: "The Serial Port is not accessible.<br>" +
-                             "Please check if the Arduino is correctly connected to the PC and select the Serial Port in the Settings.",
-  arduinoOpErrorIdeBoardTitle: "Unknown Arduino Board",
-  arduinoOpErrorIdeBoardBody: "The Arduino Board has not been set.<br>" +
+  arduinoOpErrorTitle: "There has been an error",
+  arduinoOpErrorIdContext_0: "No error.",
+  arduinoOpErrorIdContext_1: "Build or Upload failed.",
+  arduinoOpErrorIdContext_2: "Sketch not found.",
+  arduinoOpErrorIdContext_3: "Invalid command line argument.",
+  arduinoOpErrorIdContext_4: "Preference passed to 'get-pref' flag does not exist.",
+  arduinoOpErrorIdContext_5: "Not Clear, but Arduino IDE sometimes errors with this.",
+  arduinoOpErrorIdContext_50: "Unexpected error code from Arduino IDE",
+  arduinoOpErrorIdContext_51: "Could not create sketch file",
+  arduinoOpErrorIdContext_52: "Invalid path to internally created sketch file",
+  arduinoOpErrorIdContext_53: "Unable to find Arduino IDE<br>" +
+                              "The compiler directory has not been set correctly.<br>" +
+                              "Please ensure the path is correct in the Settings.",
+  arduinoOpErrorIdContext_54: "What should we do with the Sketch?<br>" +
+                              "The launch IDE option has not been set.<br>" +
+                              "Please select an IDE option in the Settings.",
+  arduinoOpErrorIdContext_55: "Serial Port unavailable<br>" +
+                              "The Serial Port is not accessible.<br>" +
+                              "Please check if the Arduino is correctly connected to the PC and select the Serial Port in the Settings.",
+  arduinoOpErrorIdContext_56: "Unknown Arduino Board<br>" +
+                              "The Arduino Board has not been set.<br>" +
                               "Please select the appropriate Arduino Board from the settings.",
+  arduinoOpErrorIdContext_52: "Unexpected server error.",
+  arduinoOpErrorIdContext_64: "Unable to parse sent JSON.",
+  arduinoOpErrorUnknown: "Unexpected error",
   /* Modals */
   noServerTitle: "Ardublockly app not running",
   noServerTitleBody: "<p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>" +

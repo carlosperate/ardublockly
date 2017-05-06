@@ -1,15 +1,14 @@
 # -*- coding: utf-8 -*-
-#
-# Save and retrieve the compiler settings into a text file.
-#
-# Copyright (c) 2017 carlosperate https://github.com/carlosperate/
-# Licensed under the Apache License, Version 2.0 (the "License"):
-#   http://www.apache.org/licenses/LICENSE-2.0
-#
-# The ServerCompilerSettings is a singleton class maintains in memory, and
-# writes the Arduino IDE settings into a file.
-# On first invocation of the singleton it reads the settings from the file.
-#
+"""Save and retrieve the compiler settings into a text file.
+
+Copyright (c) 2017 carlosperate https://github.com/carlosperate/
+Licensed under the Apache License, Version 2.0 (the "License"):
+    http://www.apache.org/licenses/LICENSE-2.0
+
+The ServerCompilerSettings is a singleton class maintains in memory, and writes
+the Arduino IDE settings into a file.
+On first invocation of the singleton it reads the settings from the file.
+"""
 from __future__ import unicode_literals, absolute_import, print_function
 import os
 import re
@@ -28,7 +27,7 @@ class ServerCompilerSettings(object):
     The class on first invocation tries to read the settings from the file, it
     keeps them in memory, and every time they are modified the changes are also
     written into the file.
-    No compiler is part of the Python code, instead settings that 
+    No compiler is part of the Python code, instead settings that
     point to the local Arduino IDE and sketch are stored here.
     The public settings to set and get are:
         compiler_dir
@@ -105,8 +104,8 @@ class ServerCompilerSettings(object):
         self.__serial_port_key = None
         self.__serial_port_value = None
         if settings_dir:
-            self.__settings_path = os.path.join(
-                settings_dir, self.__settings_filename)
+            self.__settings_path = os.path.join(settings_dir,
+                                                self.__settings_filename)
         else:
             # If not set, the file path will be same location as the executed
             # python code that calls this class
@@ -212,7 +211,7 @@ class ServerCompilerSettings(object):
     sketch_name = property(get_sketch_name, set_sketch_name)
 
     def set_sketch_name_default(self):
-         self.__sketch_name = 'ArdublocklySketch'
+        self.__sketch_name = 'ArdublocklySketch'
 
     def set_sketch_name_from_file(self, new_sketch_name):
         """ Only accept letters, numbers, underscores and dashes. """
@@ -310,10 +309,7 @@ class ServerCompilerSettings(object):
         return self.__arduino_board_value
 
     def get_arduino_board_types(self):
-        board_list = []
-        for key in self.__arduino_types:
-            board_list.append(key)
-        return board_list
+        return [key for key in self.__arduino_types]
 
     #
     # Serial Port and lists accessors
@@ -549,18 +545,15 @@ class ServerCompilerSettings(object):
 
         # Set the path and create/overwrite the file
         try:
-            settings_file = codecs.open(
-                self.__settings_path, 'wb+', encoding='utf-8')
-            try:
-                settings_parser.write(settings_file)
-                print('Settings file saved to:\n\t%s' % self.__settings_path)
-                sys.stdout.flush()
-            finally:
-                settings_file.close()
+            with codecs.open(self.__settings_path, 'wb+', encoding='utf-8') as\
+                    config_file:
+                settings_parser.write(config_file)
         except Exception as e:
-            print(e)
-            print('Unable to write the settings file to:\n\t%s' %
-                  self.__settings_path)
+            print('%s\nUnable to write the settings file to:\n\t%s' %
+                  (self.__settings_path, str(e)))
+        else:
+            print('Settings file saved to:\n\t%s' % self.__settings_path)
+        sys.stdout.flush()
 
     def read_settings(self):
         """
@@ -603,8 +596,8 @@ class ServerCompilerSettings(object):
         settings_dict = {}
         settings_parser = configparser.ConfigParser()
         try:
-            settings_parser.readfp(
-                codecs.open(self.__settings_path, 'r', 'utf8'))
+            with codecs.open(self.__settings_path, 'r', 'utf8') as config_file:
+                settings_parser.read_file(config_file)
             settings_dict['arduino_exec_path'] =\
                 settings_parser.get('Arduino_IDE', 'arduino_exec_path')
             settings_dict['arduino_board'] =\
@@ -624,6 +617,12 @@ class ServerCompilerSettings(object):
             settings_dict = None
         return settings_dict
 
+    def get_settings_file_path(self):
+        return self.__settings_path
+
     def delete_settings_file(self):
+        success = False
         if os.path.exists(self.__settings_path):
             os.remove(self.__settings_path)
+            success = True
+        return success
