@@ -134,7 +134,10 @@ def main():
     """
     print('Running Python %s (%s bit) on %s' % (platform.python_version(),
           (struct.calcsize('P') * 8), platform.platform()))
-    print('Local packages path: %s' % ardublocklyserver.local_packages_path)
+    if os.path.isdir(ardublocklyserver.local_packages_path):
+        print('Local packages: %s' % ardublocklyserver.local_packages_path)
+    else:
+        print('Not using local-packages.')
 
     print('\n======= Parsing Command line arguments =======')
     find_project_root, launch_browser, server_root = parsing_cl_args()

@@ -27,8 +27,10 @@ Ardublockly.init = function() {
   Ardublockly.bindBlocklyEventListeners();
 
   // Hackish way to check if not running locally
-  if (document.location.hostname != '127.0.0.1') {
+  if (document.location.hostname != 'localhost') {
     Ardublockly.openNotConnectedModal();
+    console.log('Offline app modal opened as non localhost host name found: ' +
+                document.location.hostname)
   }
 };
 

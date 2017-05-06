@@ -31,9 +31,7 @@ project_root_dir = \
     os.path.dirname(                                  # going up 1 level
         os.path.dirname(os.path.realpath(__file__)))  # folder dir of this
 sys.path.append(project_root_dir)
-# Add the local-packages to sys path
-from ardublocklyserver import local_packages_path
-sys.path.insert(0, local_packages_path)
+
 
 spec_coll_name = "server"
 exec_folder_name = "arduexec"
