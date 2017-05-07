@@ -1,2 +1,2 @@
 mkdocs>=0.15.3
-pyinstaller>=3.1.1
+pyinstaller>=3.2.1
