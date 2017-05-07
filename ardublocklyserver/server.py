@@ -37,7 +37,7 @@ def launch_server(ip='localhost', port=8000, document_root_=''):
     print('Setting HTTP Server Document Root to:\n\t%s' % document_root_)
     document_root = document_root_
     print('Launch Server:')
-    run(app, server='waitress', host=ip, port=port, debug=True)
+    run(app, server='waitress', host=ip, port=port, debug=False)
 
 
 @app.hook('before_request')
@@ -118,6 +118,24 @@ def static_closure(file_path):
     """
     return static_file(file_path,
                        root=os.path.join(document_root, 'closure-library'))
+
+
+@app.route('/docs')
+def static_docs_index():
+    """Set a /docs/Home/index.html redirect from /docs/"""
+    redirect('/docs/Home/index.html')
+
+
+@app.route('/docs/<file_path:path>')
+def static_docs(file_path):
+    """Serve the 'docs' folder static files and redirect folders to index.html.
+
+    :param file_path: File path inside the 'docs' folder.
+    :return: Full HTTPResponse for the static file.
+    """
+    if os.path.isdir(os.path.join(document_root, 'docs', file_path)):
+        return redirect('/docs/%s/index.html' % file_path)
+    return static_file(file_path, root=os.path.join(document_root, 'docs'))
 
 
 #

@@ -20,17 +20,17 @@ import ardublocklyserver.server
 import ardublocklyserver.compilersettings
 
 # Server IP and PORT settings
-SERVER_IP = '127.0.0.1'
+SERVER_IP = 'localhost'
 SERVER_PORT = 8000
 
 
 def open_browser(ip, port, file_path=''):
     """Start a browser in a separate thread after waiting for half a second.
 
-    :param ip: 
-    :param port: 
+    :param ip: IP address or host name to build URL.
+    :param port: Server port to build the URL.
     :param file_path: Path within domain for the browser to open.
-    :return: 
+    :return: None.
     """
     def _open_browser():
         webbrowser.get().open('http://%s:%s/%s' % (ip, port, file_path))
@@ -128,7 +128,7 @@ def parsing_cl_args():
 
 
 def main():
-    """Main entry point for the application.
+    """Entry point for the application.
 
     Initialises the Settings singleton, resolves paths, and starts the server.
     """
@@ -137,7 +137,7 @@ def main():
     if os.path.isdir(ardublocklyserver.local_packages_path):
         print('Local packages: %s' % ardublocklyserver.local_packages_path)
     else:
-        print('Not using local-packages.')
+        print('Not using local-packages, likely running packaged.')
 
     print('\n======= Parsing Command line arguments =======')
     find_project_root, launch_browser, server_root = parsing_cl_args()

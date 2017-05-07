@@ -90,10 +90,10 @@ class ServerTestCase(unittest.TestCase):
         if not os.path.isdir(self.__class__.temp_folder):
             os.makedirs(self.__class__.temp_folder)
         reset_settings()
-        # The configurations in the Circle CI server are weird and it refuses
-        # HTTP localhost connections if done too quickly.
-        if os.environ.get('CIRCLECI'):
-            print("CircleCI detected, waiting 0.5 second...")
+        # The configurations in the Travis and Circle CI servers refuses HTTP
+        # localhost connections if done too quickly.
+        if os.environ.get('CIRCLECI') or os.environ.get('TRAVIS'):
+            print("Travis or CircleCI detected, waiting 1 second...")
             sleep(1)
 
     def tearDown(self):
@@ -152,6 +152,10 @@ class ServerTestCase(unittest.TestCase):
         """Test the files in /closure-library can be accessed."""
         self.helper_test_static_file('closure-library', 'index.js')
 
+    def test_static_docs(self):
+        """Test the files in /docs can be accessed."""
+        self.helper_test_static_file('docs', 'index.html')
+
     #
     # Test for entry point redirect
     #
@@ -191,6 +195,27 @@ class ServerTestCase(unittest.TestCase):
         self.assertEqual(response.history[0].status_code, 303)
         self.assertEqual(response.history[0].url.rstrip('/'),
                          self.SERVER_URL + '/ardublockly')
+        self.assertEqual(response.headers['content-type'],
+                         'text/html; charset=UTF-8')
+
+    def test_static_docs_redirect(self):
+        """Test docs access to folders redirects to its index.html page."""
+        docs_dir = os.path.join(self.temp_folder, 'docs')
+        inner_docs_dir = os.path.join(docs_dir, 'folder')
+        os.makedirs(docs_dir)
+        os.makedirs(inner_docs_dir)
+        open(os.path.join(inner_docs_dir, 'index.html'), 'w').close()
+
+        response = requests.get('%s/docs/folder/' % self.SERVER_URL)
+
+        self.assertTrue(response.ok)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.url,
+                         '%s/docs/folder/index.html' % self.SERVER_URL)
+        self.assertTrue(response.history[0].is_redirect)
+        self.assertEqual(response.history[0].status_code, 303)
+        self.assertEqual(response.history[0].url.rstrip('/'),
+                         self.SERVER_URL + '/docs/folder')
         self.assertEqual(response.headers['content-type'],
                          'text/html; charset=UTF-8')
 
