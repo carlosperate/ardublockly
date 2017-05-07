@@ -29,14 +29,16 @@ ArdublocklyServer.putJson = function(url, json, callback) {
 };
 
 /**
- * Sends a request to the Ardubloockly Server.
+ * Sends a request to the Ardubloockly Server that returns a JSON response.
  * @param {!string} url Requestor URL.
  * @param {!string} method HTTP method.
  * @param {!string} contentType HTTP content type.
- * @param {string} data Plain text JSON content to send.
- * @param {!function} cb Request callback function.
+ * @param {string} jsonObjSend JavaScript object to be parsed into JSON to send.
+ * @param {!function} cb Request callback function, takes a single input for a
+ *     parsed JSON object.
  */
-ArdublocklyServer.sendRequest = function(url, method, contentType, data, cb) {
+ArdublocklyServer.sendRequest = function(
+    url, method, contentType, jsonObjSend, cb) {
   var request = ArdublocklyServer.createRequest();
 
   // The data received is JSON, so it needs to be converted into the right
@@ -44,14 +46,14 @@ ArdublocklyServer.sendRequest = function(url, method, contentType, data, cb) {
   var onReady = function() {
     if (request.readyState == 4) {
       if (request.status == 200) {
-        var jsonObj = null;
+        var jsonObjReceived = null;
         try {
-          jsonObj = JSON.parse(request.responseText);
+          jsonObjReceived = JSON.parse(request.responseText);
         } catch(e) {
           console.error('Incorrectly formatted JSON data from ' + url);
           throw e;
         }
-        cb(jsonObj);
+        cb(jsonObjReceived);
       } else {
         // return a null element which will be dealt with in the front end
         cb(null);
@@ -63,7 +65,7 @@ ArdublocklyServer.sendRequest = function(url, method, contentType, data, cb) {
     request.open(method, url, true);
     request.setRequestHeader('Content-type', contentType);
     request.onreadystatechange = onReady;
-    request.send(data);
+    request.send(JSON.stringify(jsonObjSend));
   } catch (e) {
     // Nullify callback to indicate error
     cb(null);
@@ -171,8 +173,14 @@ ArdublocklyServer.jsonToHtmlTextInput = function(jsonObj) {
     // Simple text input
     element = document.createElement('input');
     element.setAttribute('type', 'text');
-    element.setAttribute(
-        'value', jsonObj.selected || 'Please insert valid input here.');
+    element.style.cssText = '';
+    if (jsonObj.errors) {
+      element.setAttribute('value', '');
+      element.style.cssText = 'border-bottom: 1px solid #f75c51;' +
+                              'box-shadow: 0 1px 0 0 #d73c30;';
+    } else {
+      element.setAttribute('value', jsonObj.selected || '');
+    }
   }
   return element;
 };
@@ -204,47 +212,41 @@ ArdublocklyServer.jsonToHtmlDropdown = function(jsonObj) {
 /**
  * Gets the current Compiler location from the ArdublocklyServer settings.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new location within
- *                             an HTML element of type input text.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.requestCompilerLocation = function(callback) {
   ArdublocklyServer.getJson('/settings/compiler', callback);
 };
 
 /**
- * Request to the Ardublockly Server to prompt the user for a new compiler
- * location. Done by the Python server because a 'file browse' triggered by
- * the browser with JS will obscure the user information for security reasons.
+ * Sends a string to the Ardublockly Server for a the Arduino IDE executable
+ * path.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new location within
- *                             an HTML element of type input text.
+ *     have one argument to receive the JSON response.
  */
-ArdublocklyServer.requestNewCompilerLocation = function(callback) {
+ArdublocklyServer.setCompilerLocation = function(new_path, callback) {
     ArdublocklyServer.putJson(
-      '/settings/compiler', '{ "new_value": "TODO replace this" }', callback);
+      '/settings/compiler', {"new_value": new_path}, callback);
 };
 
 /**
  * Gets the current Sketch location from the Ardublockly Server settings.
  * @param {!function} callback Callback function for the server request, must
- *                             one argument to receive the new location within
- *                             an HTML element of type input text.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.requestSketchLocation = function(callback) {
    ArdublocklyServer.getJson('/settings/sketch', callback);
 };
 
 /**
- * Request to the Ardublockly Server to prompt the user for a new sketch
- * location. Done by the Python server because a 'file browse' triggered by
- * the browser with JS will obscure the user information for security reasons.
+ * Sends a string to the Ardublockly Server for a the Arduino sketch folder.
+ * @param {!string} new_path New Sketch location path..
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new location
- *                             within an HTML element of type input text.
+ *     have one argument to receive the JSON response.
  */
-ArdublocklyServer.requestNewSketchLocation = function(callback) {
+ArdublocklyServer.setSketchLocation = function(new_path, callback) {
   ArdublocklyServer.putJson(
-      '/settings/sketch', '{ "new_value": "TODO replace this" }', callback);
+      '/settings/sketch', {"new_value": new_path}, callback);
 };
 
 /**
@@ -253,8 +255,7 @@ ArdublocklyServer.requestNewSketchLocation = function(callback) {
  * The data is then processed into an HTML element and sent to the callback
  * function as an argument.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new setting as
- *                             an HTML select element.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.requestArduinoBoards = function(callback) {
   ArdublocklyServer.getJson('/settings/board', callback);
@@ -266,12 +267,11 @@ ArdublocklyServer.requestArduinoBoards = function(callback) {
  * element and sent to the callback function as an argument.
  * @param {!string} new_board Indicates which board has been selected.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new setting as
- *                             an HTML select element.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.setArduinoBoard = function(new_board, callback) {
   ArdublocklyServer.putJson(
-      '/settings/board', '{ "new_value": "' + new_board + '" }', callback);
+      '/settings/board', {"new_value": new_board}, callback);
 };
 
 /**
@@ -280,8 +280,7 @@ ArdublocklyServer.setArduinoBoard = function(new_board, callback) {
  * settings. The data is then processed into an HTML element and sent to the
  * callback function as an argument.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new setting as
- *                             an HTML select element.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.requestSerialPorts = function(callback) {
   ArdublocklyServer.getJson('/settings/serial', callback);
@@ -293,12 +292,11 @@ ArdublocklyServer.requestSerialPorts = function(callback) {
  * and sent to the callback function as an argument.
  * @param {!string} new_port Indicates which port has been selected.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new setting as
- *                             an HTML select element.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.setSerialPort = function(new_port, callback) {
   ArdublocklyServer.putJson(
-      '/settings/serial','{ "new_value": "' + new_port + '" }', callback);
+      '/settings/serial', {"new_value": new_port}, callback);
 };
 
 /**
@@ -306,8 +304,7 @@ ArdublocklyServer.setSerialPort = function(new_port, callback) {
  * settings menu for the IDE options is then processed into an HTML element
  * and sent to the callback function as an argument.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new setting as
- *                             an HTML select element.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.requestIdeOptions = function(callback) {
   ArdublocklyServer.getJson('/settings/ide', callback);
@@ -319,12 +316,11 @@ ArdublocklyServer.requestIdeOptions = function(callback) {
  * and sent to the callback function as an argument.
  * @param {!string} ide_option Indicates which option has been selected.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new setting as
- *                             an HTML select element.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.setIdeOptions = function(ide_option, callback) {
   ArdublocklyServer.putJson(
-      '/settings/ide','{ "new_value": "' + ide_option + '" }', callback);
+      '/settings/ide', {"new_value": ide_option}, callback);
 };
 
 
@@ -333,11 +329,9 @@ ArdublocklyServer.setIdeOptions = function(ide_option, callback) {
  * by the settings.
  * @param {!string} code Arduino code in a single string format.
  * @param {!function} callback Callback function for the server request, must
- *                             have one argument to receive the new setting as
- *                             an HTML select element.
+ *     have one argument to receive the JSON response.
  */
 ArdublocklyServer.sendSketchToServer = function(code, callback) {
-  ArdublocklyServer.sendRequest('/code', 'POST', 'application/json',
-                                JSON.stringify({"sketch_code": code}),
-                                callback);
+  ArdublocklyServer.sendRequest(
+      '/code', 'POST', 'application/json', {"sketch_code": code}, callback);
 };

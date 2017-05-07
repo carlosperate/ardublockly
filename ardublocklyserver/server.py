@@ -37,7 +37,8 @@ def launch_server(ip='localhost', port=8000, document_root_=''):
     print('Setting HTTP Server Document Root to:\n\t%s' % document_root_)
     document_root = document_root_
     print('Launch Server:')
-    run(app, server='waitress', host=ip, port=port, debug=False)
+    sys.stdout.flush()
+    run(app, server='waitress', host=ip, port=port, debug=True)
 
 
 @app.hook('before_request')
@@ -298,7 +299,7 @@ def handler_settings_update_individual(name):
             }]
         })
     else:
-        if not new_value and name != 'compiler' and name != 'sketch':
+        if not new_value:
             response_dict.update({
                 'success': False,
                 'errors': [{
@@ -310,9 +311,9 @@ def handler_settings_update_individual(name):
             options = None
             set_value = None
             if name == 'compiler':
-                set_value = actions.set_compiler_path()
+                set_value = actions.set_compiler_path(new_value)
             elif name == 'sketch':
-                set_value = actions.set_sketch_path()
+                set_value = actions.set_sketch_path(new_value)
             elif name == 'board':
                 set_value = actions.set_arduino_board(new_value)
                 options = [{'value': board, 'display_text': board}
@@ -332,8 +333,7 @@ def handler_settings_update_individual(name):
                     'id': 63,
                     'description': 'Unexpected setting type to update.'
                 })
-            if set_value and ((set_value == new_value)
-                              or name == 'compiler' or name == 'sketch'):
+            if set_value == new_value:
                 response_dict.update({
                     'success': True,
                     'selected': set_value

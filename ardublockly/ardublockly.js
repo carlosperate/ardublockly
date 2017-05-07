@@ -93,18 +93,32 @@ Ardublockly.bindActionFunctions = function() {
   Ardublockly.bindClick_('button_toggle_toolbox', Ardublockly.toogleToolbox);
 
   // Settings modal input field listeners
-  Ardublockly.bindClick_('settings_compiler_location', function() {
-    ArdublocklyServer.requestNewCompilerLocation(function(jsonObj) {
-      Ardublockly.setCompilerLocationHtml(
-          ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
-    });
-  });
-  Ardublockly.bindClick_('settings_sketch_location', function() {
-    ArdublocklyServer.requestNewSketchLocation(function(jsonObj) {
-      Ardublockly.setSketchLocationHtml(
-          ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
-    });
-  });
+  var settingsPathInputListeners = function(elId, setValFunc, setHtmlCallback) {
+    var el = document.getElementById(elId);
+    // Event listener that send the data when the user presses 'Enter'
+    el.onkeypress = function(e) {
+      if (!e) e = window.event;
+      var keyCode = e.keyCode || e.which;
+      if (keyCode == '13') {
+        setValFunc(el.value, function(jsonObj) {
+          setHtmlCallback(ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
+        });
+        return false;
+      }
+    };
+    // Event listener that send the data when moving out of the input field
+    el.onblur = function(e) {
+      setValFunc(el.value, function(jsonObj) {
+        setHtmlCallback(ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
+      });
+    };
+  };
+  settingsPathInputListeners('settings_compiler_location',
+                             ArdublocklyServer.setCompilerLocation,
+                             Ardublockly.setCompilerLocationHtml);
+  settingsPathInputListeners('settings_sketch_location',
+                             ArdublocklyServer.setSketchLocation,
+                             Ardublockly.setSketchLocationHtml);
 };
 
 /** Sets the Ardublockly server IDE setting to upload and sends the code. */
@@ -358,8 +372,11 @@ Ardublockly.setCompilerLocationHtml = function(newEl) {
   if (newEl === null) return Ardublockly.openNotConnectedModal();
 
   var compLocIp = document.getElementById('settings_compiler_location');
-  if (compLocIp != null && newEl.value) {
-    compLocIp.value = newEl.value;
+  if (compLocIp != null) {
+    if (newEl.value) {
+      compLocIp.value = newEl.value;
+    }
+    compLocIp.style.cssText = newEl.style.cssText;
   }
 };
 
@@ -373,7 +390,10 @@ Ardublockly.setSketchLocationHtml = function(newEl) {
 
   var sketchLocIp = document.getElementById('settings_sketch_location');
   if (sketchLocIp != null) {
-    sketchLocIp.value = newEl.value;
+    if (newEl.value) {
+      sketchLocIp.value = newEl.value;
+    }
+    sketchLocIp.style.cssText = newEl.style.cssText;
   }
 };
 

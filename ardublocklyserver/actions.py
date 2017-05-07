@@ -15,7 +15,6 @@ import six
 # This package modules
 from ardublocklyserver.compilersettings import ServerCompilerSettings
 from ardublocklyserver import sketchcreator
-import ardublocklyserver.gui as gui
 
 
 #
@@ -146,16 +145,15 @@ def load_arduino_cli(sketch_path):
 #
 # Compiler Settings
 #
-def set_compiler_path():
+def set_compiler_path(new_path):
     """Open the file browser to select an Arduino IDE executable.
 
     The new file path is saved into ServerCompilerSettings.
 
+    :param new_path: New path for the Arduino IDE executable.
     :return: Same as get_compiler_path().
     """
-    new_path = gui.browse_file_dialog()
-    if new_path:
-        ServerCompilerSettings().compiler_dir = new_path
+    ServerCompilerSettings().compiler_dir = new_path
     return get_compiler_path()
 
 
@@ -174,16 +172,15 @@ def get_compiler_path():
 #
 # Sketch settings
 #
-def set_sketch_path():
+def set_sketch_path(new_path):
     """Open the file browser to select an folder to store the Arduino Sketch.
 
     The new file path is saved into ServerCompilerSettings.
 
+    :param new_path: New path to store the Arduino Sketch.
     :return: Same as get_sketch_path().
     """
-    new_directory = gui.browse_dir_dialog()
-    if new_directory != '':
-        ServerCompilerSettings().sketch_dir = new_directory
+    ServerCompilerSettings().sketch_dir = new_path
     return get_sketch_path()
 
 
@@ -206,8 +203,8 @@ def set_arduino_board(new_value):
     """Set new Arduino board value in the Settings.
 
     :param new_value: New Arduino board value, must be the board name, not the
-            flag (so 'Uno', not 'arduino:avr:uno')
-    :return: Same as the get_arduino_board_selected() function
+            flag (so 'Uno', not 'arduino:avr:uno').
+    :return: Same as the get_arduino_board_selected() function.
     """
     ServerCompilerSettings().arduino_board = new_value
     return get_arduino_board_selected()
@@ -265,7 +262,7 @@ def set_load_ide_only(new_value):
     """Set a new Arduino IDE load option.
 
     :param new_value: New IDE load option to save in the Settings.
-    :return: Same as the get_load_ide_selected() function
+    :return: Same as the get_load_ide_selected() function.
     """
     ServerCompilerSettings().load_ide_option = new_value
     return get_load_ide_selected()

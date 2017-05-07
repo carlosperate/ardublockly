@@ -8,18 +8,18 @@ Licensed under the Apache License, Version 2.0 (the "License"):
 from __future__ import unicode_literals, absolute_import, print_function
 import os
 import gc
+import sys
 import shutil
 import unittest
 import requests
 from time import sleep
-# local-packages imports, Python 2 and 3 compatibility imports
+# local-packages imports Python 2 and 3 compatibility imports
 from six.moves import _thread as thread
 from six import iteritems
 # This package modules
 try:
     from ardublocklyserver import server
 except ImportError:
-    import sys
     file_dir = os.path.dirname(os.path.realpath(__file__))
     package_dir = os.path.dirname(os.path.dirname(file_dir))
     sys.path.insert(0, package_dir)
@@ -442,8 +442,6 @@ class ServerTestCase(unittest.TestCase):
 
     #
     # Tests for Putting valid data in the settings and retrieving it
-    # TODO: Test compiler set, needs mocking gui module
-    # TODO: Test sketch set, needs mocking gui module
     # TODO: Test valid serial value, needs mocking serial module
     #
     def helper_test_put_settings_ide(self, new_value):
@@ -549,29 +547,78 @@ class ServerTestCase(unittest.TestCase):
         self.helper_test_put_settings_board('ESP8266 WeMos D1')
 
     def test_put_settings_sketch(self):
-        """Set the IDE load option and read it back."""
-        #url = self.SERVER_URL + '/settings/sketch'
+        """Set the location for the Arduino Sketch and read it back."""
+        url = self.SERVER_URL + '/settings/sketch'
+        new_sketch_path = os.path.abspath(
+            os.path.join(self.temp_folder, 'new_sketch_folder'))
+        os.makedirs(new_sketch_path)
 
-        # Set the Sketch path to a new directory
-        #new_sketch_path = os.path.abspath(
-        #        os.path.join(self.temp_folder, 'new_sketch_folder'))
-        #os.makedirs(new_sketch_path)
+        # First set the new value with a PUT request
+        first_response = requests.put(url, json={'new_value': new_sketch_path})
+        firs_response_json = first_response.json()
 
-        #first_response = requests.put(url, json={'new_value': new_sketch_path})
-        #firs_response_json = first_response.json()
+        self.helper_test_valid_json_response(first_response)
+        self.assertTrue(firs_response_json['success'])
+        self.assertEqual(firs_response_json['response_type'], 'settings')
+        self.assertEqual(firs_response_json['response_state'], 'full_response')
+        self.assertEqual(firs_response_json['settings_type'], 'sketch')
+        self.assertEqual(firs_response_json['selected'], new_sketch_path)
+        self.assertFalse('options' in firs_response_json)
+        self.assertFalse('errors' in firs_response_json)
 
-        #self.helper_test_valid_json_response(first_response)
-        #self.assertTrue(firs_response_json['success'])
-        #self.assertEqual(firs_response_json['response_type'], 'settings')
-        #self.assertEqual(firs_response_json['response_state'], 'full_response')
-        #self.assertEqual(firs_response_json['settings_type'], 'sketch')
-        #self.assertFalse(firs_response_json['selected'], new_sketch_path)
-        #self.assertFalse('options' in firs_response_json)
-        #self.assertFalse('errors' in firs_response_json)
+        # Now get it back with a GET request and verify it
+        get_response = requests.get(url, json={'new_value': new_sketch_path})
+        get_response_json = get_response.json()
 
-        #c_path = (os.path.join(self.temp_folder, 'arduino'))
-        #open(c_path, 'w').close()
-        self.assertTrue(True)
+        self.helper_test_valid_json_response(get_response)
+        self.assertTrue(get_response_json['success'])
+        self.assertFalse('errors' in get_response_json)
+        self.assertEqual(get_response_json['response_type'], 'settings')
+        self.assertEqual(get_response_json['response_state'], 'full_response')
+        self.assertEqual(get_response_json['settings_type'], 'sketch')
+        self.assertEqual(get_response_json['selected'], new_sketch_path)
+        self.assertFalse('options' in firs_response_json)
+        self.assertFalse('errors' in firs_response_json)
+
+    def test_put_settings_compiler(self):
+        """Set the Arduino IDE path and read it back."""
+        url = self.SERVER_URL + '/settings/compiler'
+        compiler_folder = self.temp_folder
+        if sys.platform == 'darwin':
+            # macOS needs executable file 'Arduino' to be in Contents/MacOS/
+            compiler_folder = os.path.join(compiler_folder, 'Contents')
+            os.makedirs(compiler_folder)
+            compiler_folder = os.path.join(compiler_folder, 'MacOS')
+            os.makedirs(compiler_folder)
+        c_path = os.path.abspath(os.path.join(compiler_folder, 'Arduino'))
+        open(c_path, 'w').close()
+
+        # First set the new value with a PUT request
+        first_response = requests.put(url, json={'new_value': c_path})
+        firs_response_json = first_response.json()
+
+        self.helper_test_valid_json_response(first_response)
+        self.assertTrue(firs_response_json['success'])
+        self.assertEqual(firs_response_json['response_type'], 'settings')
+        self.assertEqual(firs_response_json['response_state'], 'full_response')
+        self.assertEqual(firs_response_json['settings_type'], 'compiler')
+        self.assertEqual(firs_response_json['selected'], c_path)
+        self.assertFalse('options' in firs_response_json)
+        self.assertFalse('errors' in firs_response_json)
+
+        # Now get it back with a GET request and verify it
+        get_response = requests.get(url, json={'new_value': c_path})
+        get_response_json = get_response.json()
+
+        self.helper_test_valid_json_response(get_response)
+        self.assertTrue(get_response_json['success'])
+        self.assertFalse('errors' in get_response_json)
+        self.assertEqual(get_response_json['response_type'], 'settings')
+        self.assertEqual(get_response_json['response_state'], 'full_response')
+        self.assertEqual(get_response_json['settings_type'], 'compiler')
+        self.assertEqual(get_response_json['selected'], c_path)
+        self.assertFalse('options' in firs_response_json)
+        self.assertFalse('errors' in firs_response_json)
 
     #
     # Tests for putting invalid settings
@@ -631,8 +678,7 @@ class ServerTestCase(unittest.TestCase):
 
     #
     # Test code put request
-    # TODO: Test where compiler dir is mocked and exception is tested
-    # TODO: Test where compiler is complitely mocked and request is sucessful
+    # TODO: Test where compiler is completely mocked and request is successful
     #
     def test_post_data_not_json(self):
         """Test sending code to the server with invalid content type."""
@@ -690,26 +736,37 @@ class ServerTestCase(unittest.TestCase):
 
     def test_post_code_fake_compiler(self):
         """Create empty file as a compiler, send code, catch exception."""
-        #url = self.SERVER_URL + '/settings/compiler'
-        #c_path = os.path.abspath(os.path.join(self.temp_folder, 'arduino'))
-        #open(c_path, 'w').close()
-        #prep_response = requests.put(url, json={'new_value': c_path}).json()
-        #self.assertTrue(prep_response['success'])
-        #
-        #response = requests.post(url, json={'sketch_code': 'some code here'})
-        #response_json = response.json()
-        #
-        #self.helper_test_valid_json_response(response)
-        #self.assertFalse(response_json['success'])
-        #self.assertEqual(response_json['response_state'], 'full_response')
-        #self.assertEqual(response_json['response_type'], 'ide_output')
-        #self.assertEqual(response_json['ide_data']['exit_code'], 52)
-        #self.assertTrue('Unexpected server error' in
-        #                response_json['ide_data']['err_output'])
-        #self.assertEqual(response_json['errors'][0]['id'], 52)
-        #self.assertEqual(response_json['errors'][0]['description'],
-        #                 'More info available in the \'ide_data\' value.')
-        self.assertTrue(True)
+        url_compiler = self.SERVER_URL + '/settings/compiler'
+        url_code = self.SERVER_URL + '/code'
+        # First create an empty file and set it as a compiler path
+        compiler_folder = self.temp_folder
+        if sys.platform == 'darwin':
+            # macOS needs executable file 'Arduino' to be in Contents/MacOS/
+            compiler_folder = os.path.join(compiler_folder, 'Contents')
+            os.makedirs(compiler_folder)
+            compiler_folder = os.path.join(compiler_folder, 'MacOS')
+            os.makedirs(compiler_folder)
+        c_path = os.path.abspath(os.path.join(compiler_folder, 'Arduino'))
+        open(c_path, 'w').close()
+        prep_response = requests.put(url_compiler,
+                                     json={'new_value': c_path}).json()
+        self.assertTrue(prep_response['success'])
+
+        # Now run the request under test
+        response = requests.post(url_code,
+                                 json={'sketch_code': 'some code here'})
+        response_json = response.json()
+
+        self.helper_test_valid_json_response(response)
+        self.assertFalse(response_json['success'])
+        self.assertEqual(response_json['response_state'], 'full_response')
+        self.assertEqual(response_json['response_type'], 'ide_output')
+        self.assertEqual(response_json['ide_data']['exit_code'], 52)
+        self.assertTrue('Unexpected server error' in
+                        response_json['ide_data']['err_output'])
+        self.assertEqual(response_json['errors'][0]['id'], 52)
+        self.assertEqual(response_json['errors'][0]['description'],
+                         'More info available in the \'ide_data\' value.')
 
 
 if __name__ == '__main__':
