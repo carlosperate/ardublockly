@@ -234,7 +234,7 @@ var getExamplesMenuData = function() {
                      BrowserWindow.getFocusedWindow().webContents
                         .executeJavaScript(
                             'Ardublockly.loadServerXmlFile("../examples/' +
-                            'serial_print_ascii_.xml");');
+                            'serial_print_ascii.xml");');
                 }
             }, {
                 label: 'Serial Repeat Game',

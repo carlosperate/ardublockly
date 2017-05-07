@@ -28,7 +28,8 @@ Ardublockly.isRunningElectron = function() {
  */
 (function loadJsInElectron(){
   if (Ardublockly.isRunningElectron()) {
-    var projectLocator = require('electron').remote.require('./projectlocator.js');
+    var projectLocator = require('electron').remote.require(
+        './projectlocator.js');
     var projectRoot = projectLocator.getProjectRootPath();
     window.$ = window.jQuery = require(projectRoot +
         '/ardublockly/js_libs/jquery-2.1.3.min.js');
@@ -72,6 +73,49 @@ Ardublockly.htmlPrompt = function(message, defaultValue, callback) {
   window.location.hash = '';
 };
 
+/**
+ * Add click listeners to the Compiler and Sketch input fields to launch the 
+ * Electron file/folder browsers.
+ */
+Ardublockly.bindSettingsPathInputs = function() {
+  var dialog = require('electron').remote.dialog;
+
+  // Compiler path
+  var compilerEl = document.getElementById('settings_compiler_location');
+  compilerEl.readOnly = true;
+  Ardublockly.bindClick_(compilerEl, function() {
+    dialog.showOpenDialog({
+      title: 'Select the Arduino IDE executable',
+      buttonLabel: 'Select',
+      properties: ['openFile']
+    }, function (files) {
+      if (files && files[0]) {
+        ArdublocklyServer.setCompilerLocation(files[0], function(jsonObj) {
+          Ardublockly.setCompilerLocationHtml(
+              ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
+        });
+      }
+    })
+  });
+  // Sketch path
+  var sketchEl = document.getElementById('settings_sketch_location');
+  sketchEl.readOnly = true;
+  Ardublockly.bindClick_(sketchEl, function() {
+    dialog.showOpenDialog({
+      title: 'Select the Arduino IDE executable',
+      buttonLabel: 'Select',
+      properties: ['openDirectory']
+    }, function (folders) {
+      if (folders && folders[0]) {
+        ArdublocklyServer.setSketchLocation(folders[0], function(jsonObj) {
+          Ardublockly.setSketchLocationHtml(
+              ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
+        });
+      }
+    })
+  });
+};
+
 /** Initialize Ardublockly code required for Electron on page load. */
 window.addEventListener('load', function load(event) {
   window.removeEventListener('load', load, false);
@@ -79,6 +123,9 @@ window.addEventListener('load', function load(event) {
     // Edit the page layout for better appearance on desktop
     Ardublockly.containerFullWidth();
     Ardublockly.hideSideMenuButton();
+
+    // Open the file or directory browsers when clicking on the Settings inputs
+    Ardublockly.bindSettingsPathInputs();
 
     // Prevent browser zoom changes like pinch-to-zoom
     var webFrame = require('electron').webFrame;

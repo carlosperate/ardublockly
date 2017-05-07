@@ -92,32 +92,34 @@ Ardublockly.bindActionFunctions = function() {
   Ardublockly.bindClick_('button_load_xml', Ardublockly.XmlTextareaToBlocks);
   Ardublockly.bindClick_('button_toggle_toolbox', Ardublockly.toogleToolbox);
 
-  // Settings modal input field listeners
+  // Settings modal input field listeners only if they can be edited
   var settingsPathInputListeners = function(elId, setValFunc, setHtmlCallback) {
     var el = document.getElementById(elId);
-    // Event listener that send the data when the user presses 'Enter'
-    el.onkeypress = function(e) {
-      if (!e) e = window.event;
-      var keyCode = e.keyCode || e.which;
-      if (keyCode == '13') {
+    if (el.readOnly === false) {
+      // Event listener that send the data when the user presses 'Enter'
+      el.onkeypress = function(e) {
+        if (!e) e = window.event;
+        var keyCode = e.keyCode || e.which;
+        if (keyCode == '13') {
+          setValFunc(el.value, function(jsonObj) {
+            setHtmlCallback(ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
+          });
+          return false;
+        }
+      };
+      // Event listener that send the data when moving out of the input field
+      el.onblur = function() {
         setValFunc(el.value, function(jsonObj) {
           setHtmlCallback(ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
         });
-        return false;
-      }
-    };
-    // Event listener that send the data when moving out of the input field
-    el.onblur = function(e) {
-      setValFunc(el.value, function(jsonObj) {
-        setHtmlCallback(ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
-      });
-    };
+      };
+    }
   };
   settingsPathInputListeners('settings_compiler_location',
                              ArdublocklyServer.setCompilerLocation,
                              Ardublockly.setCompilerLocationHtml);
   settingsPathInputListeners('settings_sketch_location',
-                             ArdublocklyServer.setSketchLocation,
+                             ArdublocklyServer.setSketchLocationHtml,
                              Ardublockly.setSketchLocationHtml);
 };
 
