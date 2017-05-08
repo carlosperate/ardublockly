@@ -5,8 +5,8 @@ Copyright (c) 2017 carlosperate https://github.com/carlosperate/
 Licensed under the Apache License, Version 2.0 (the "License"):
     http://www.apache.org/licenses/LICENSE-2.0
 
-The ServerCompilerSettings is a singleton class maintains in memory, and writes
-the Arduino IDE settings into a file.
+The ServerCompilerSettings is a singleton class maintained in memory, and
+the the Ardublockly and Arduino IDE settings into a file.
 On first invocation of the singleton it reads the settings from the file.
 """
 from __future__ import unicode_literals, absolute_import, print_function
@@ -21,12 +21,11 @@ import ardublocklyserver.serialport
 
 
 class ServerCompilerSettings(object):
-    """
-    Singleton class that retrieves and saves the settings for the server side
-    compilation.
+    """Singleton class to store and save the Ardublockly settings.
+
     The class on first invocation tries to read the settings from the file, it
-    keeps them in memory, and every time they are modified the changes are also
-    written into the file.
+    keeps them in memory, and every time they are modified the changes are
+    written to the file again.
     No compiler is part of the Python code, instead settings that
     point to the local Arduino IDE and sketch are stored here.
     The public settings to set and get are:
@@ -79,8 +78,8 @@ class ServerCompilerSettings(object):
     # Singleton creator and destructor
     #
     def __new__(cls, settings_dir=None, *args, **kwargs):
-        """
-        Creating or returning the singleton instance.
+        """Create or returning the singleton instance.
+
         The argument settings_file_dir is only processed on first
         initialisation, and any future calls to the constructor will returned
         the already initialised instance with a set settings_file_dir.
@@ -88,7 +87,8 @@ class ServerCompilerSettings(object):
         if not cls.__singleton_instance:
             # Create the singleton instance
             cls.__singleton_instance =\
-                super(ServerCompilerSettings, cls).__new__(cls, *args, **kwargs)
+                super(ServerCompilerSettings, cls).__new__(
+                        cls, *args, **kwargs)
             # Initialise the instance, defaults if file not found
             cls.__singleton_instance.__initialise(settings_dir)
         return cls.__singleton_instance
@@ -117,7 +117,7 @@ class ServerCompilerSettings(object):
 
     @classmethod
     def _drop(cls):
-        """ Drop the instance. """
+        """Drop the instance."""
         cls.__singleton_instance = None
 
     #
@@ -127,29 +127,19 @@ class ServerCompilerSettings(object):
         return self.__compiler_dir
 
     def set_compiler_dir(self, new_compiler_dir):
-        """ The compiler dir must a valid file or directory """
+        """Set the compiler dir, must a valid file or directory."""
         # Mac only check, as apps are packaged directories
         if sys.platform == 'darwin':
             # Arduino version >1.6.0 has changed the binary name, so check both
-            if os.path.isfile(os.path.join(
-                    new_compiler_dir, 'Contents', 'MacOS',
-                    'JavaApplicationStub')):
-                new_compiler_dir = os.path.join(new_compiler_dir, 'Contents',
-                                                'MacOS', 'JavaApplicationStub')
+            bundle = os.path.join(new_compiler_dir, 'Contents', 'MacOS')
+            if os.path.isfile(os.path.join(bundle, 'JavaApplicationStub')):
+                new_compiler_dir = os.path.join(bundle, 'JavaApplicationStub')
                 print('Compiler file in OS X located within the app bundle.')
-            elif os.path.isfile(os.path.join(
-                    new_compiler_dir, 'Contents', 'MacOS', 'Arduino')):
-                new_compiler_dir = os.path.join(
-                    new_compiler_dir, 'Contents', 'MacOS', 'Arduino')
+            elif os.path.isfile(os.path.join(bundle, 'Arduino')):
+                new_compiler_dir = os.path.join(bundle, 'Arduino')
                 print('Compiler file in OS X located within the app bundle.')
             else:
-                print('Could not locate the Arduino executable within the OS '
-                      'X app bundle. These are the available files:')
-                try:
-                    print('%s' % os.listdir(
-                        '%s/Contents/MacOS/' % new_compiler_dir))
-                except OSError as e:
-                    print(e)
+                print('Could not find Arduino executable in OS X app bundle.')
 
         # Check directory
         if os.path.isfile(new_compiler_dir):
@@ -174,7 +164,7 @@ class ServerCompilerSettings(object):
         self.__compiler_dir = None
 
     def set_compiler_dir_from_file(self, new_compiler_dir):
-        """ The compiler dir must be full path to an existing file. """
+        """Set the compiler location, must be full path to an existing file."""
         if os.path.exists(new_compiler_dir):
             self.__compiler_dir = new_compiler_dir
         else:
@@ -191,7 +181,10 @@ class ServerCompilerSettings(object):
         return self.__sketch_name
 
     def set_sketch_name(self, new_sketch_name):
-        """ Only accept letters, numbers, underscores and dashes. """
+        """Set the Sketch name.
+
+        It only accepts letters, numbers, underscores and dashes.
+        """
         if re.match("^[\w\d_-]*$", new_sketch_name):
             self.__sketch_name = new_sketch_name
             print('Sketch name set to:\n\t%s' % self.__sketch_name)
@@ -214,7 +207,10 @@ class ServerCompilerSettings(object):
         self.__sketch_name = 'ArdublocklySketch'
 
     def set_sketch_name_from_file(self, new_sketch_name):
-        """ Only accept letters, numbers, underscores and dashes. """
+        """Set the Sketch name from a file read.
+
+        It only accepts letters, numbers, underscores and dashes.
+        """
         if re.match("^[\w\d_-]*$", new_sketch_name):
             self.__sketch_name = new_sketch_name
         else:
@@ -230,7 +226,7 @@ class ServerCompilerSettings(object):
         return self.__sketch_dir
 
     def set_sketch_dir(self, new_sketch_dir):
-        """ The sketch directory must be a folder """
+        """Set the sketch directory, which must be a folder."""
         if os.path.isdir(new_sketch_dir):
             self.__sketch_dir = new_sketch_dir
             print('Sketch directory set to:\n\t%s' % self.__sketch_dir)
@@ -250,11 +246,11 @@ class ServerCompilerSettings(object):
     sketch_dir = property(get_sketch_dir, set_sketch_dir)
 
     def set_sketch_dir_default(self):
-        """ Sketch default location the same as the settings file location. """
+        """Sketch default location the same as the settings file location."""
         self.__sketch_dir = os.path.dirname(self.__settings_path)
 
     def set_sketch_dir_from_file(self, new_sketch_dir):
-        """ The sketch directory must be a folder """
+        """Set the sketch directory from settings file, must be a folder."""
         if os.path.isdir(new_sketch_dir):
             self.__sketch_dir = new_sketch_dir
         else:
@@ -316,8 +312,8 @@ class ServerCompilerSettings(object):
     # Extra checks of the available Ports are required as states can change
     #
     def get_serial_port(self):
-        """
-        Checks available Serial Ports and populates the serial port dictionary.
+        """Check available Serial Ports and populates the port dictionary.
+
         Returns currently selected Serial Port key if available.
         Returns None if selected Serial Port is not available anymore.
         :return: Serial Port dictionary key
@@ -344,10 +340,11 @@ class ServerCompilerSettings(object):
         return self.__serial_port_key
 
     def set_serial_port(self, new_port):
-        """
-        Checks available Serial Ports and populates the serial port dictionary.
+        """Check available Serial Ports and populates the port dictionary.
+
         If the new serial port is not in the dictionary or the dictionary is
         empty it prints an error in the console.
+
         :param new_port: the new port to set
         """
         if new_port in self.__serial_ports:
@@ -380,8 +377,8 @@ class ServerCompilerSettings(object):
     serial_port = property(get_serial_port, set_serial_port)
 
     def set_serial_port_default(self):
-        """
-        Checks available Serial Ports and populates the serial port dictionary.
+        """Check available Serial Ports and populate the port dictionary.
+
         If there are no available serial ports is resets the variables.
         """
         self.populate_serial_port_list()
@@ -394,10 +391,11 @@ class ServerCompilerSettings(object):
                 self.__serial_ports[self.__serial_port_key]
 
     def set_serial_port_from_file(self, new_port_value):
-        """
-        Checks available Serial Ports and populates the serial port dictionary.
+        """Check available Serial Ports and populate the port dictionary.
+
         If the new serial port is not in the dictionary or the dictionary is
         empty it prints an error in the console.
+
         :param new_port_value: the new port to set
         """
         # Check if the settings file value is present in available ports list
@@ -416,10 +414,11 @@ class ServerCompilerSettings(object):
             print('Default Serial Port set:\n\t%s' % self.__serial_port_value)
 
     def get_serial_port_flag(self):
-        """
-        Checks available Serial Ports and populates the serial port dictionary.
+        """Check available Serial Ports and populates the port dictionary.
+
         Returns currently selected Serial Port value if available.
         Returns None if selected Serial Port is not available anymore.
+
         :return: Serial Port dictionary value
         """
         self.populate_serial_port_list()
@@ -449,10 +448,7 @@ class ServerCompilerSettings(object):
         return self.__serial_ports
 
     def populate_serial_port_list(self):
-        """
-        Populates the __serial_ports__ dictionary with the Serial Ports
-        available.
-        """
+        """Populate the serial ports dictionary with the available ports."""
         port_list = ardublocklyserver.serialport.get_port_list()
         self.__serial_ports = {}
         if port_list:
@@ -520,7 +516,7 @@ class ServerCompilerSettings(object):
     # Settings file
     #
     def save_settings(self):
-        """ Saves all the settings into a configuration file """
+        """Save all the settings into a configuration file."""
         settings_parser = configparser.ConfigParser()
         # IDE Section
         settings_parser.add_section('Arduino_IDE')
@@ -556,16 +552,17 @@ class ServerCompilerSettings(object):
         sys.stdout.flush()
 
     def read_settings(self):
-        """
-        Attempts to read the settings from a file and saves them to the
-        member variables. If it cannot read the file it sets the variables
+        """Read the settings from a file and load them into the instance.
+
+        If it cannot read the file it sets the variables
         to the default value.
         """
         settings_dict = self.get_settings_file_data()
         if settings_dict:
             self.set_compiler_dir_from_file(settings_dict['arduino_exec_path'])
             self.set_arduino_board_from_file(settings_dict['arduino_board'])
-            self.set_serial_port_from_file(settings_dict['arduino_serial_port'])
+            self.set_serial_port_from_file(
+                    settings_dict['arduino_serial_port'])
             self.set_sketch_name_from_file(settings_dict['sketch_name'])
             self.set_sketch_dir_from_file(settings_dict['sketch_directory'])
             self.set_load_ide_from_file(settings_dict['ide_load'])
@@ -588,8 +585,8 @@ class ServerCompilerSettings(object):
         self.save_settings()
 
     def get_settings_file_data(self):
-        """
-        Creates a dictionary from the settings stored in a file.
+        """Create a dictionary from the settings stored in a file.
+
         :return: A dictionary with all the options and values from the settings
                  file (sections are ignored during parsing).
         """
@@ -611,7 +608,7 @@ class ServerCompilerSettings(object):
             settings_dict['ide_load'] =\
                 settings_parser.get('Ardublockly', 'ide_load')
             print('Settings loaded from:\n\t%s' % self.__settings_path)
-        except Exception as e:
+        except Exception:
             print('Settings file corrupted or not found in:\n\t%s'
                   % self.__settings_path)
             settings_dict = None

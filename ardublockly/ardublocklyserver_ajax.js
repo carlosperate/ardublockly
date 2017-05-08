@@ -141,7 +141,7 @@ ArdublocklyServer.jsonToIdeModal = function(jsonObj) {
       }
       errStr.push('\nError id ' + jsonObj.errors[i].id + ': ' + errorContext);
     }
-    elErrOp.innerHTML += errStr.join('<br />');
+    elErrOp.innerHTML += '<br />' + errStr.join('<br />');
   } else if (jsonObj.success && jsonObj.ide_mode) {
     // Format a successful response
     if (jsonObj.ide_mode == 'upload') {
