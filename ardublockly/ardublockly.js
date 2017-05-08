@@ -375,9 +375,8 @@ Ardublockly.setCompilerLocationHtml = function(newEl) {
 
   var compLocIp = document.getElementById('settings_compiler_location');
   if (compLocIp != null) {
-    if (newEl.value) {
-      compLocIp.value = newEl.value;
-    }
+    compLocIp.value = newEl.value || compLocIp.value ||
+        'Please enter the location of the Arduino IDE executable';
     compLocIp.style.cssText = newEl.style.cssText;
   }
 };
@@ -392,9 +391,8 @@ Ardublockly.setSketchLocationHtml = function(newEl) {
 
   var sketchLocIp = document.getElementById('settings_sketch_location');
   if (sketchLocIp != null) {
-    if (newEl.value) {
-      sketchLocIp.value = newEl.value;
-    }
+    sketchLocIp.value = newEl.value || sketchLocIp.value ||
+        'Please enter a folder to store the Arduino Sketch';
     sketchLocIp.style.cssText = newEl.style.cssText;
   }
 };
