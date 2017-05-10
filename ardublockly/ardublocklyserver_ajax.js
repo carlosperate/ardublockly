@@ -178,6 +178,9 @@ ArdublocklyServer.jsonToHtmlTextInput = function(jsonObj) {
       element.setAttribute('value', '');
       element.style.cssText = 'border-bottom: 1px solid #f75c51;' +
                               'box-shadow: 0 1px 0 0 #d73c30;';
+      for (var i = 0; i < jsonObj.errors.length; i++) {
+        console.error(jsonObj.errors[i].description);
+      }
     } else {
       element.setAttribute('value', jsonObj.selected || '');
     }
@@ -192,6 +195,9 @@ ArdublocklyServer.jsonToHtmlDropdown = function(jsonObj) {
   } else if(jsonObj.errors) {
     console.error('There are errors in the JSON response from server.');
     console.error(jsonObj);
+    for (var i = 0; i < jsonObj.errors.length; i++) {
+      console.error(jsonObj.errors[i].description);
+    }
   } else {
     // Drop down list of unknown length with a selected item
     element = document.createElement('select');

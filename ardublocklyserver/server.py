@@ -334,7 +334,7 @@ def handler_settings_update_individual(name):
                     'description': 'Unexpected setting type to update.'
                 })
             # Check if sent value was set, might have been expanded in Settings
-            if set_value in new_value:
+            if new_value in set_value:
                 response_dict.update({
                     'success': True,
                     'selected': set_value
