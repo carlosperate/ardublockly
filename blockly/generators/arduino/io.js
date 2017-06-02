@@ -22,18 +22,18 @@ goog.require('Blockly.Arduino');
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_digitalwrite'] = function(block) {
-  var pin = block.getFieldValue('PIN');
-  var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
+    var pin = block.getFieldValue('PIN');
+    var stateOutput = Blockly.Arduino.valueToCode(
+        block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+    Blockly.Arduino.reservePin(
+        block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
 
-  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+    var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
-  return code;
+    var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
+    return code;
 };
 
 /**
@@ -44,15 +44,15 @@ Blockly.Arduino['io_digitalwrite'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['io_digitalread'] = function(block) {
-  var pin = block.getFieldValue('PIN');
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+    var pin = block.getFieldValue('PIN');
+    Blockly.Arduino.reservePin(
+        block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
 
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+    var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'digitalRead(' + pin + ')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+    var code = 'digitalRead(' + pin + ')';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 /**
@@ -63,18 +63,18 @@ Blockly.Arduino['io_digitalread'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_builtin_led'] = function(block) {
-  var pin = block.getFieldValue('BUILT_IN_LED');
-  var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
+    var pin = block.getFieldValue('BUILT_IN_LED');
+    var stateOutput = Blockly.Arduino.valueToCode(
+        block, 'STATE', Blockly.Arduino.ORDER_ATOMIC) || 'LOW';
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');
+    Blockly.Arduino.reservePin(
+        block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Set LED');
 
-  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+    var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
-  return code;
+    var code = 'digitalWrite(' + pin + ', ' + stateOutput + ');\n';
+    return code;
 };
 
 /**
@@ -85,26 +85,35 @@ Blockly.Arduino['io_builtin_led'] = function(block) {
  * @return {string} Completed code.
  */
 Blockly.Arduino['io_analogwrite'] = function(block) {
-  var pin = block.getFieldValue('PIN');
-  var stateOutput = Blockly.Arduino.valueToCode(
-      block, 'NUM', Blockly.Arduino.ORDER_ATOMIC) || '0';
+    var pin = block.getFieldValue('PIN');
+    var stateOutput = Blockly.Arduino.valueToCode(
+        block, 'NUM', Blockly.Arduino.ORDER_ATOMIC) || '0';
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Analogue Write');
+    Blockly.Arduino.reservePin(
+        block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Analogue Write');
 
-  var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+    var pinSetupCode = 'pinMode(' + pin + ', OUTPUT);';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  // Warn if the input value is out of range
-  if ((stateOutput < 0) || (stateOutput > 255)) {
-    block.setWarningText('The analogue value set must be between 0 and 255',
-                         'pwm_value');
-  } else {
-    block.setWarningText(null, 'pwm_value');
-  }
+    // Warn if the input value is out of range
+    if (Blockly.Arduino.Boards.selected == Blockly.Arduino.Boards.profiles.esp8266_nodemcu) {
+        if ((stateOutput < 0) || (stateOutput > 1023)) {
+            block.setWarningText('The analogue value set must be between 0 and 1023',
+                'pwm_value');
+        } else {
+            block.setWarningText(null, 'pwm_value');
+        }
+    } else {
+        if ((stateOutput < 0) || (stateOutput > 255)) {
+            block.setWarningText('The analogue value set must be between 0 and 255',
+                'pwm_value');
+        } else {
+            block.setWarningText(null, 'pwm_value');
+        }
+    }
 
-  var code = 'analogWrite(' + pin + ', ' + stateOutput + ');\n';
-  return code;
+    var code = 'analogWrite(' + pin + ', ' + stateOutput + ');\n';
+    return code;
 };
 
 /**
@@ -115,15 +124,15 @@ Blockly.Arduino['io_analogwrite'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['io_analogread'] = function(block) {
-  var pin = block.getFieldValue('PIN');
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Analogue Read');
+    var pin = block.getFieldValue('PIN');
+    Blockly.Arduino.reservePin(
+        block, pin, Blockly.Arduino.PinTypes.INPUT, 'Analogue Read');
 
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+    var pinSetupCode = 'pinMode(' + pin + ', INPUT);';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'analogRead(' + pin + ')';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+    var code = 'analogRead(' + pin + ')';
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 /**
@@ -133,37 +142,37 @@ Blockly.Arduino['io_analogread'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['io_highlow'] = function(block) {
-  var code = block.getFieldValue('STATE');
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+    var code = block.getFieldValue('STATE');
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino['io_pulsein'] = function(block) {
-  var pin = block.getFieldValue("PULSEPIN");
-  var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
+    var pin = block.getFieldValue("PULSEPIN");
+    var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+    Blockly.Arduino.reservePin(
+        block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
 
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+    var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'pulseIn(' + pin + ', ' + type + ')';
+    var code = 'pulseIn(' + pin + ', ' + type + ')';
 
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino['io_pulsetimeout'] = function(block) {
-  var pin = block.getFieldValue("PULSEPIN");
-  var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
-  var timeout = Blockly.Arduino.valueToCode(block, "TIMEOUT", Blockly.Arduino.ORDER_ATOMIC);
+    var pin = block.getFieldValue("PULSEPIN");
+    var type = Blockly.Arduino.valueToCode(block, "PULSETYPE", Blockly.Arduino.ORDER_ATOMIC);
+    var timeout = Blockly.Arduino.valueToCode(block, "TIMEOUT", Blockly.Arduino.ORDER_ATOMIC);
 
-  Blockly.Arduino.reservePin(
-      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
+    Blockly.Arduino.reservePin(
+        block, pin, Blockly.Arduino.PinTypes.INPUT, 'Pulse Pin');
 
-  var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
-  Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+    var pinSetupCode = 'pinMode(' + pin + ', INPUT);\n';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
 
-  var code = 'pulseIn(' + pin + ', ' + type + ', ' + timeout + ')';
+    var code = 'pulseIn(' + pin + ', ' + type + ', ' + timeout + ')';
 
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-}; 
+    return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
