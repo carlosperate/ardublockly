@@ -9,6 +9,8 @@ It fixes the following issues:
 - Fixed Wemos D1 R2 pin D6, D7
 - Changed input validation for analogwrite, value range 0-1023 for ESP8266 and 0-255 for the rest
 
+[Latest release download link][19]
+
 # Ardublockly
 Ardublockly is a visual programming editor for Arduino. It is based on Google's [Blockly][1], which has been forked to generate [Arduino][15] code.
 
@@ -136,6 +138,7 @@ limitations under the License.
 [16]: https://github.com/BlocklyDuino/BlocklyDuino
 [17]: blockly/README.md
 [18]: https://github.com/carlosperate/ardublockly
+[19]: https://github.com/flsg/ardublockly/releases/download/v0.1.3/ardublockly_Linux64_2017-06-03_02.44.zip
 
 [desktop_screeshot]: http://carlosperate.github.io/ardublockly/images/screenshot_desktop_1.png
 [web_screenshot_responsive]: http://carlosperate.github.io/ardublockly/images/screenshot_material_all_small.jpg
