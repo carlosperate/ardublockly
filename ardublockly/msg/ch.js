@@ -77,9 +77,9 @@ Ardublockly.LOCALISED_TEXT = {
   ok: "OK",
   okay: "Okay",
   cancel: "Cancel",
-  return: "Return",
+  return: "返回",
   /* Cards */
-  arduinoSourceCode: "Arduino Source Code",
+  arduinoSourceCode: "Arduino 源程序",
   blocksXml: "Blocks XML",
   /* Toolbox Categories*/
   catLogic: "逻辑",
