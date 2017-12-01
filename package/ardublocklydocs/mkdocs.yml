@@ -11,16 +11,33 @@ theme: 'readthedocs'
 # This is because the build file will delete everything after this line and
 # replace it with newly generated data.
 pages:
-- Home: 'home.md'
+- Home: 'Home.md'
 - Quick Start: 'Quick-Start.md'
 - User Guide:
     - Installing Ardublockly: 'Installing-Ardublockly.md'
     - Configure Ardublockly: 'Configure-Ardublockly.md'
     - Arduino Compiler Settings: 'Arduino-Compiler-Settings.md'
+    - General Blocks:
+        - Logic: 'Create-~-Logic.md'
+        - Logic If/Else: 'Create-~-IfElse.md'
+        - Loops: 'Create-~-Loops.md'
+        - Math: 'Create-~-Math.md'
+        - Text: 'Create-~-Text.md'
+        - Variables: 'Create-~-Variables.md'
+        - Functions: 'Create-~-Functions.md'
+- FAQs: 'FAQs.md'
+- Known Arduino IDE issues: 'Known-Arduino-IDE-issues.md'
 - Developer Guide:
     - Building Ardublockly: 'Building-Ardublockly.md'
-- FAQs: 'FAQs.md'
+    - Running Uncompressed Ardublockly: 'Running-Uncompressed-Ardublockly.md'
+    - Git Settings: 'Git-Settings.md'
+    - Create Blocks:
+        - Overview: 'Create-Blocks.md'
+        - Extending Ardublockly: 'Create-Blocks-~-Extending-Ardublockly.md'
+    - Add a New Board: 'Add-New-Arduino-Board.md'
+    - Add a New Language: 'Add-New-Language.md'
+    - To-do List: 'To-do-list.md'
 - About:
-    - About Ardublocly: 'About.md'
+    - About Ardublockly: 'About.md'
     - License: 'License.md'
     - Credits: 'Credits.md'
