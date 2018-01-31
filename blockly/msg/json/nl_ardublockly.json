@@ -114,5 +114,9 @@
 	"ARD_TONE_TIP": "Speelt een noot op de gegeven pin met de opgegeven frequentie binnen interval 31 - 65535",
 	"ARD_TONE_WARNING": "Frequentie moet in het interval 31 - 65535 liggen",
 	"ARD_NOTONE": "Stop afspelen noot op pin#",
-	"ARD_NOTONE_TIP": "Stopt met een noot af te spelen op de gegeven pin"
+	"ARD_NOTONE_TIP": "Stopt met een noot af te spelen op de gegeven pin",
+	"NEW_INSTANCE": "Nieuw object...",
+	"RENAME_INSTANCE": "Hernoem object...",
+	"NEW_INSTANCE_TITLE": "Nieuwe objectnaam:",
+	"RENAME_INSTANCE_TITLE": "Hernoem alle '%1' objecten als:"
 }
