@@ -90,7 +90,7 @@ Blockly.Blocks['io_builtin_led'] = {
         .appendField(Blockly.Msg.ARD_BUILTIN_LED)
         .appendField(new Blockly.FieldDropdown(
             Blockly.Arduino.Boards.selected.builtinLed), 'BUILT_IN_LED')
-        .appendField('to')
+        .appendField(Blockly.Msg.ARD_WRITE_TO)
         .setCheck(Blockly.Types.BOOLEAN.checkList);
     this.setInputsInline(false);
     this.setPreviousStatement(true, null);
