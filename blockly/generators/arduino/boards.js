@@ -280,7 +280,7 @@ Blockly.Arduino.Boards.profiles.esp8266_huzzah = {
   pwmPins: [['2', '2']],
   serial: [['serial', 'Serial']],
   serialPins: { Serial: [['RX', 'RX'], ['TX', 'TX']] },
-  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
   spi: [['SPI', 'SPI']],
   spiPins: { SPI: [['MOSI', '13'], ['MISO', '12'], ['SCK', '14']] },
   spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
