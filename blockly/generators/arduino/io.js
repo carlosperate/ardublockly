@@ -13,6 +13,32 @@ goog.provide('Blockly.Arduino.IO');
 
 goog.require('Blockly.Arduino');
 
+Blockly.Arduino['io_input_pullup'] = function(block) {
+  var pin = block.getFieldValue('PIN');
+  var stateOutput = block.getFieldValue('STATE');
+
+  if(stateOutput =='OUTPUT')
+  {
+    Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.OUTPUT, 'Digital Write');
+  }
+
+  else if(stateOutput =='INPUT')
+  {
+    Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+  }
+  else if(stateOutput == 'INPUT_PULLUP')
+  {
+    Blockly.Arduino.reservePin(
+      block, pin, Blockly.Arduino.PinTypes.INPUT, 'Digital Read');
+  }
+
+    var pinSetupCode = 'pinMode(' + pin + ','+stateOutput+');';
+    Blockly.Arduino.addSetup('io_' + pin, pinSetupCode, false);
+
+  return '';
+};
 
 /**
  * Function for 'set pin' (X) to a state (Y).

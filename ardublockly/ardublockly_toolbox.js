@@ -123,6 +123,7 @@ Ardublockly.TOOLBOX_XML =
 '  <category id="catFunctions" name="Functions" custom="PROCEDURE"></category>' +
 '  <sep></sep>' +
 '  <category id="catInputOutput" name="Input/Output">' +
+'    <block type="io_input_pullup"></block>' +
 '    <block type="io_digitalwrite">' +
 '      <value name="STATE">' +
 '        <block type="io_highlow"></block>' +
@@ -230,5 +231,52 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="spi_setup"></block>' +
 '    <block type="spi_transfer"></block>' +
 '    <block type="spi_transfer_return"></block>' +
+'  </category>' +
+'  <sep></sep>' +
+'  <category id="catDisplay" name="Display">' +
+'    <block type="liquidcrystal_config">' +
+'      <field name="LCD_RS">12</field>' +
+'      <field name="LCD_EN">11</field>' +
+'      <field name="LCD_D4">5</field>' +
+'      <field name="LCD_D5">4</field>' +
+'      <field name="LCD_D6">3</field>' +
+'      <field name="LCD_D7">2</field>' +
+'      <value name="LCD_COLUMN">' +
+'        <block type="math_number">' +
+'          <field name="NUM">16</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="LCD_ROW">' +
+'        <block type="math_number">' +
+'          <field name="NUM">2</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="liquidcrystal_variable"></block>' +
+'    <block type="liquidcrystal_clear">' +
+'      <value name="LCD_NAME">' +
+'        <block type="liquidcrystal_variable"></block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="liquidcrystal_print">' +
+'      <value name="LCD_NAME">' +
+'        <block type="liquidcrystal_variable"></block>' +
+'      </value>' +
+'    </block>' +
+'    <block type="liquidcrystal_set_cursor">' +
+'      <value name="LCD_NAME">' +
+'        <block type="liquidcrystal_variable"></block>' +
+'      </value>' +
+'      <value name="LCD_COLUMN">' +
+'        <block type="math_number">' +
+'          <field name="NUM">0</field>' +
+'        </block>' +
+'      </value>' +
+'      <value name="LCD_ROW">' +
+'        <block type="math_number">' +
+'          <field name="NUM">0</field>' +
+'        </block>' +
+'      </value>' +
+'    </block>' +
 '  </category>' +
 '</xml>';

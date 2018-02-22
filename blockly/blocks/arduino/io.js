@@ -260,3 +260,20 @@ Blockly.Blocks['io_pulsetimeout'] = {
     return Blockly.Types.NUMBER;
   }
 };
+
+Blockly.Blocks['io_input_pullup'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_SET_PIN)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
+        .appendField(Blockly.Msg.ARD_MODE_TO)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.ARD_PULLUP,"INPUT_PULLUP"],[Blockly.Msg.ARD_INPUT,"INPUT"], [Blockly.Msg.ARD_OUTPUT,"OUTPUT"]]), "STATE");
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.setTooltip(Blockly.Msg.ARD_PULLUP_TIP);
+    this.setHelpUrl('https://www.arduino.cc/en/Reference/Constants');
+  },
+  getBlockType: function() {
+    return Blockly.Types.SHORT_NUMBER;
+  }
+};

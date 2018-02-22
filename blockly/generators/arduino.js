@@ -73,7 +73,8 @@ Blockly.Arduino.PinTypes = {
   STEPPER: 'STEPPER',
   SERIAL: 'SERIAL',
   I2C: 'I2C/TWI',
-  SPI: 'SPI'
+  SPI: 'SPI',
+  LCD: 'LCD'
 };
 
 /**

@@ -102,4 +102,5 @@ Ardublockly.LOCALISED_TEXT = {
   catAudio: "Audio",
   catMotors: "Motors",
   catComms: "Comms",
+  catDisplay: "Display",
 };
