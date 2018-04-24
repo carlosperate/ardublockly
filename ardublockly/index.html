@@ -324,6 +324,18 @@
   <script src="ardublockly_toolbox.js"></script>
   <script src="ardublockly_blockly.js"></script>
   <script src="ardublockly.js"></script>
+  <!-- copy to clipboard stuff -->
+  <script src="js_libs/clipboard.min.js"></script>
+  <script>
+    var clipboard = new ClipboardJS('.copy-btn');
+    clipboard.on('success', function(e) {
+      console.log(e);
+      Ardublockly.MaterialToast(Ardublockly.getLocalStr('code_copied'));
+    });
+    clipboard.on('error', function(e) {
+      console.log(e);
+    });
+  </script>
   <script>
     window.addEventListener('load', function load(event) {
       window.removeEventListener('load', load, false);
