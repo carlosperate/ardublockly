@@ -315,6 +315,28 @@ Blockly.Arduino.Boards.profiles.esp8266_wemos_d1 = {
               ['D4', 'D4'], ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']]
 };
 
+/** Arduino Nano board profile (ATmega328p). */
+Blockly.Arduino.Boards.profiles.sensebox_mcu = {
+  name: 'senseBox MCU',
+  description: 'senseBox MCU is a Microchip SAMD21 based open-source board for sensors',
+  compilerFlag: 'arduino:avr:sensebox:cpu=atmega328',
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 9),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 11).concat(
+                   Blockly.Arduino.Boards.generateAnalogIo(0, 7)),
+  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
+  serial: Blockly.Arduino.Boards.profiles.uno.serial,
+  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
+  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
+  spi: Blockly.Arduino.Boards.profiles.uno.spi,
+  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
+  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
+  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
+  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
+  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
+  builtinLed: Blockly.Arduino.Boards.profiles.uno.builtinLed,
+  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt
+};
+
 /** Set default profile to Arduino standard-compatible board */
 Blockly.Arduino.Boards.selected = Blockly.Arduino.Boards.profiles.uno;
 
