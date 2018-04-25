@@ -13,11 +13,11 @@
   <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
 
   <!-- Ardublockly - These three files contain the compress version -->
-  <script src="../blockly/blockly_compressed.js"></script>
+  <!-- <script src="../blockly/blockly_compressed.js"></script>
   <script src="../blockly/blocks_compressed.js"></script>
-  <script src="../blockly/arduino_compressed.js"></script>
+  <script src="../blockly/arduino_compressed.js"></script> -->
   <!-- To use the uncompressed version comment out the above and comment in the ones below -->
-  <!--script src="../blockly/blockly_uncompressed.js"></script>
+  <script src="../blockly/blockly_uncompressed.js"></script>
   <script src="../blockly/blocks/logic.js"></script>
   <script src="../blockly/blocks/loops.js"></script>
   <script src="../blockly/blocks/math.js"></script>
@@ -52,7 +52,7 @@
   <script src="../blockly/generators/arduino/text.js"></script>
   <script src="../blockly/generators/arduino/time.js"></script>
   <script src="../blockly/generators/arduino/tone.js"></script>
-  <script src="../blockly/generators/arduino/variables.js"></script-->
+  <script src="../blockly/generators/arduino/variables.js"></script>
 
   <!-- Default language js files, user selection appended to head on load -->
   <script src="../blockly/msg/js/en.js"></script>
@@ -120,9 +120,15 @@
         <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off" style="display: none"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
         <!-- Arduino IDE action buttons -->
         <div id="ide_buttons_wrapper">
-          <a id="button_ide_left" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_yellow"><i id="button_ide_left_icon" class="mdi-action-open-in-browser"></i></a>
-          <a id="button_ide_middle" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_teal"><i id="button_ide_middle_icon" class="mdi-navigation-check"></i></a>
-          <a id="button_ide_large" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange"><i id="button_ide_large_icon" class="mdi-av-play-arrow"></i></a>
+          <div style="display: none;">
+            <a id="button_ide_left" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_yellow"><i id="button_ide_left_icon" class="mdi-action-open-in-browser"></i></a>
+            <a id="button_ide_middle" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_teal"><i id="button_ide_middle_icon" class="mdi-navigation-check"></i></a>
+            <a id="button_ide_large" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange"><i id="button_ide_large_icon" class="mdi-av-play-arrow"></i></a>
+          </div>
+
+          <a id="button_copy_clipboard" class="tooltipped copy-btn waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_blue" data-clipboard-action="copy" data-clipboard-target="#content_arduino" data-position="left" data-delay="750" data-tooltip="In Zwischenablage kopieren"><i id="button_copy_clipboard_icon" class="mdi-action-assignment"></i></a>
+          <a id="button_compile_sketch" class="tooltipped copy-btn waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange" data-position="left" data-delay="750" data-tooltip="Sketch kompilieren"><i id="button_compile_sketch_icon" class="mdi-action-assignment-turned-in"></i></a>
+
           <div id="button_ide_large_spinner" class="preloader-wrapper active ide_loader" style="display:none">
             <div class="spinner-layer spinner-orange">
               <div class="circle-clipper left">
@@ -326,20 +332,12 @@
   <script src="ardublockly.js"></script>
   <!-- copy to clipboard stuff -->
   <script src="js_libs/clipboard.min.js"></script>
-  <script>
-    var clipboard = new ClipboardJS('.copy-btn');
-    clipboard.on('success', function(e) {
-      console.log(e);
-      Ardublockly.MaterialToast(Ardublockly.getLocalStr('code_copied'));
-    });
-    clipboard.on('error', function(e) {
-      console.log(e);
-    });
-  </script>
+  <script src="sensebox_extensions.js"></script>
   <script>
     window.addEventListener('load', function load(event) {
       window.removeEventListener('load', load, false);
       Ardublockly.init();
+      SenseboxExtension.init();
     });
   </script>
 </body>
