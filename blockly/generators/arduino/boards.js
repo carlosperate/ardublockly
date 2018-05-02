@@ -315,26 +315,37 @@ Blockly.Arduino.Boards.profiles.esp8266_wemos_d1 = {
               ['D4', 'D4'], ['D5', 'D5'], ['D6', 'D7'], ['D8', 'D8']]
 };
 
-/** Arduino Nano board profile (ATmega328p). */
+/** senseBox MCU 1.2 profile. */
 Blockly.Arduino.Boards.profiles.sensebox_mcu = {
   name: 'senseBox MCU',
-  description: 'senseBox MCU is a Microchip SAMD21 based open-source board for sensors',
+  description: 'senseBox Microcontroller Unit based on Microchip SAMD21',
   compilerFlag: 'arduino:avr:sensebox:cpu=atmega328',
-  analogPins: Blockly.Arduino.Boards.generateAnalogIo(0, 9),
-  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(0, 11).concat(
-                   Blockly.Arduino.Boards.generateAnalogIo(0, 7)),
-  pwmPins: Blockly.Arduino.Boards.profiles.uno.pwmPins,
-  serial: Blockly.Arduino.Boards.profiles.uno.serial,
-  serialPins: Blockly.Arduino.Boards.profiles.uno.serialPins,
-  serialSpeed: Blockly.Arduino.Boards.profiles.uno.serialSpeed,
-  spi: Blockly.Arduino.Boards.profiles.uno.spi,
-  spiPins: Blockly.Arduino.Boards.profiles.uno.spiPins,
-  spiClockDivide: Blockly.Arduino.Boards.profiles.uno.spiClockDivide,
-  i2c: Blockly.Arduino.Boards.profiles.uno.i2c,
-  i2cPins: Blockly.Arduino.Boards.profiles.uno.i2cPins,
-  i2cSpeed: Blockly.Arduino.Boards.profiles.uno.i2cSpeed,
-  builtinLed: Blockly.Arduino.Boards.profiles.uno.builtinLed,
-  interrupt: Blockly.Arduino.Boards.profiles.uno.interrupt
+  analogPins: Blockly.Arduino.Boards.generateAnalogIo(1, 6),
+  digitalPins: Blockly.Arduino.Boards.generateDigitalIo(1, 6).concat(
+                   Blockly.Arduino.Boards.generateAnalogIo(1, 6)),
+  pwmPins: [['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5', '5'],
+            ['6', '6']],
+  serial: [['serial', 'Serial'], ['serial_1', 'Serial1'], ['serial_2', 'Serial2']],
+  serialPins: { Serial: [['RX', '31'], ['TX', '30']], Serial1: [['RX', '11'], ['TX', '10']], Serial2: [['RX', '13'], ['TX', '12']]},
+  serialSpeed: [['300', '300'], ['600', '600'], ['1200', '1200'],
+                ['2400', '2400'], ['4800', '4800'], ['9600', '9600'],
+                ['14400', '14400'], ['19200', '19200'], ['28800', '28800'],
+                ['31250', '31250'], ['38400', '38400'], ['57600', '57600'],
+                ['115200', '115200']],
+  spi: [['SPI', 'SPI']],
+  spiPins: { SPI: [['MOSI', '19'], ['MISO', '21'], ['SCK', '20']] },
+  spiClockDivide: [['2 (8MHz)', 'SPI_CLOCK_DIV2'],
+                   ['4 (4MHz)', 'SPI_CLOCK_DIV4'],
+                   ['8 (2MHz)', 'SPI_CLOCK_DIV8'],
+                   ['16 (1MHz)', 'SPI_CLOCK_DIV16'],
+                   ['32 (500KHz)', 'SPI_CLOCK_DIV32'],
+                   ['64 (250KHz)', 'SPI_CLOCK_DIV64'],
+                   ['128 (125KHz)', 'SPI_CLOCK_DIV128']],
+  i2c: [['I2C', 'Wire']],
+  i2cPins: { Wire: [['SDA', '17'], ['SCL', '16']] },
+  i2cSpeed: [['100kHz', '100000L'], ['400kHz', '400000L']],
+  builtinLed: [['BUILTIN_1', '7'], ['BUILTIN_2', '8']],
+  interrupt: [['interrupt0', '1'], ['interrupt1', '2'], , ['interrupt2', '3'], ['interrupt3', '4'], ['interrupt4', '5'], ['interrupt5', '6']]
 };
 
 /** Set default profile to Arduino standard-compatible board */
