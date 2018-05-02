@@ -102,4 +102,8 @@ Ardublockly.LOCALISED_TEXT = {
   catAudio: "Audio",
   catMotors: "Motors",
   catComms: "Comms",
+  code_copied: "Code was copied",
+  save_to_clipboard: "Copy to clipboard",
+  compile_sketch: "Compile sketch",
+  sketch_compiled: "Sketch was compiled"
 };

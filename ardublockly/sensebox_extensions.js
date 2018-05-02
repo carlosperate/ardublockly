@@ -21,6 +21,10 @@ SenseboxExtension.init = function() {
   //TODO hide old and new blocks depending on selected senseBox version
   switch (window.BOARD) {
     case 'sensebox':
+      // ArdublocklyServer.setArduinoBoard('Uno', function(jsonObj) {
+      //   var newEl = ArdublocklyServer.jsonToHtmlDropdown(jsonObj);
+      //   Ardublockly.setArduinoBoardsHtml(newEl);
+      // });
       window.EXTENSION = 'hex';
       break;
     case 'sensebox-mcu':
@@ -37,6 +41,7 @@ SenseboxExtension.init = function() {
   });
 
   document.getElementById("button_copy_clipboard").setAttribute("data-tooltip", Ardublockly.getLocalStr('save_to_clipboard'));
+  document.getElementById("button_compile_sketch").setAttribute("data-tooltip", Ardublockly.getLocalStr('compile_sketch'));
 
   var compile = document.getElementById('button_compile_sketch');
   compile.addEventListener('click', function () {
@@ -61,6 +66,7 @@ SenseboxExtension.init = function() {
             a.download = document.getElementById('sketch_name').value +'.'+window.EXTENSION;
             a.click();
             document.body.removeChild(a);
+            Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
           } catch(e) {
             throw e;
           }
