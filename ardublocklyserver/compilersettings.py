@@ -65,7 +65,7 @@ class ServerCompilerSettings(object):
                                'atmel:avr:atmega328pb_xplained_mini',
                        'ESP8266 Huzzah': 'esp8266:esp8266:generic',
                        'ESP8266 WeMos D1': 'esp8266:esp8266:generic',
-                       'senseBox MCU': 'arduino:avr:sensebox:cpu=atmega328'}
+                       'senseBox MCU': 'arduino:samd'}
 
     # Class dictionary to contain the computer COM ports, dynamic content
     __serial_ports = {'port0': 'COM1'}
