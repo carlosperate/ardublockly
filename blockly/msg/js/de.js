@@ -510,3 +510,48 @@ Blockly.Msg.NEW_INSTANCE = "New instance...";  // untranslated
 Blockly.Msg.NEW_INSTANCE_TITLE = "New instance name:";  // untranslated
 Blockly.Msg.RENAME_INSTANCE = "Rename instance...";  // untranslated
 Blockly.Msg.RENAME_INSTANCE_TITLE = "Rename all '%1' instances to:";  // untranslated
+
+/*senseBox Blockly Translations*/
+
+Blockly.Msg.senseBox_basic_blue = "Blau";
+Blockly.Msg.senseBox_basic_green = "Grün";
+Blockly.Msg.senseBox_basic_piezo = "Piezo Piepser";
+Blockly.Msg.senseBox_basic_red = "Rot";
+Blockly.Msg.senseBox_basic_state = "Status";
+Blockly.Msg.senseBox_off = "Aus";
+Blockly.Msg.senseBox_on = "Ein";
+Blockly.Msg.senseBox_output_filename = "Dateiname";
+Blockly.Msg.senseBox_output_format = "Format:";
+Blockly.Msg.senseBox_output_linebreak = "Zeilenumbruch";
+Blockly.Msg.senseBox_output_networkid = "NetzwerkID";
+Blockly.Msg.senseBox_output_password = "Passwort";
+Blockly.Msg.senseBox_output_safetosd = "Auf SD Karte speichern";
+Blockly.Msg.senseBox_output_serialprint = "Auf Kommandozeile ausgeben";
+Blockly.Msg.senseBox_output_timestamp = "Zeitstempel";
+Blockly.Msg.senseBox_sen_buzzer = "Drucktaster";
+Blockly.Msg.senseBox_sen_foto = "Fotowiderstand";
+Blockly.Msg.senseBox_sen_hum = "Luftfeuchtigkeit";
+Blockly.Msg.senseBox_sen_ir = "Infrarot Abstandssensor";
+Blockly.Msg.senseBox_sen_lux = "Helligkeitssensor";
+Blockly.Msg.senseBox_sen_poti = "Potenziometer";
+Blockly.Msg.senseBox_sen_pressure = "Luftdrucksensor";
+Blockly.Msg.senseBox_sen_sound = "Geräuschsensor";
+Blockly.Msg.senseBox_sen_temp = "Temperatur";
+Blockly.Msg.senseBox_sen_temp_hum = "Temperaturn und Luftfeuchte Sensor";
+Blockly.Msg.senseBox_sen_temp_hum_tip = "Sensor misst Temperatur und Luftfeuchtigkeit"
+Blockly.Msg.senseBox_sen_ultrasonic = "Ultraschall Abstandssensor";
+Blockly.Msg.senseBox_sen_uv = "Uv-Licht Sensor";
+Blockly.Msg.senseBox_sen_light = "Licht Sensor";
+Blockly.Msg.senseBox_sen_value = "Messwert:";
+Blockly.Msg.senseBox_sen_uv_light = "UV-Licht/Licht Sensor"
+Blockly.Msg.senseBox_sen_uv_light_tip = "Sensor misst UV-Licht oder Die Helligkeit"
+Blockly.Msg.senseBox_sen_uv = "UV-Licht"
+Blockly.Msg.senseBox_sen_light = "Helligkeit"
+Blockly.Msg.senseBox_sensor_bmx055 = "Lage Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_tip = "Lage Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_x = "X-Richtung"
+Blockly.Msg.senseBox_sensor_bmx055_y = "Y-Richtung"
+
+
+
+

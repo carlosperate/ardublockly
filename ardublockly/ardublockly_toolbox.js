@@ -12,7 +12,47 @@ var Ardublockly = Ardublockly || {};
 Ardublockly.TOOLBOX_XML =
 '<xml>' +
 '  <sep></sep>' +
-'  <category id="catLogic" name="Logic" colour="210">' +
+'   <category id="catSenseBox_Sensor" name="senseBox Sensors" colour="120">' +
+'      <block type="sensebox_sensor_temp_hum"></block>' +
+'      <block type="sensebox_sensor_uv_light"></block>' +
+'      <block type="sensebox_sensor_bmx055"></block>' +
+'      <block type="sensebox_sensor_pressure"></block>' +
+'      <block type="sensebox_sensor_ultrasonic_ranger"></block>' +
+'      <block type="sensebox_sensor_ir_dist"></block>' +
+'      <block type="sensebox_sensor_sound"></block>' +
+'      <block type="sensebox_foto"></block>' +
+'      <block type="sensebox_button"></block>' +
+'      <block type="sensebox_poti"></block>' +
+'      <block type="sensebox_time"></block>' +
+'    </category>' +
+'   <category id="catSenseBox_Output" name="senseBox Output" colour="120">' +
+'      <block type="sensebox_led"></block>' +
+'      <block type="sensebox_piezo_buzzer"></block>' +
+'      <block type="sensebox_rgb_led">' +
+'        <value name="RED">' +
+'          <block type="math_number">' +
+'            <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="GREEN">' +
+'          <block type="math_number">' +
+'            <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="BLUE">' +
+'          <block type="math_number">' +
+'            <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'      </block>' +
+'      <block type="sensebox_safe_to_sd"></block>' +
+'      <block type="sensebox_serial_print"></block>' +
+'      <block type="sensebox_shield_wifi"></block>' +
+'      <block type="sensebox_shield_ethernet"></block>'+
+'   </category>' +
+'  <sep></sep>' +
+'    <sep></sep>' +
+'   <category id="catLogic" name="Logic" colour="210">' +
 '    <block type="controls_if"></block>' +
 '    <block type="logic_compare"></block>' +
 '    <block type="logic_operation"></block>' +
@@ -20,15 +60,15 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="logic_boolean"></block>' +
 '    <block type="logic_null"></block>' +
 '    <block type="logic_ternary"></block>' +
-'  </category>' +
-'  <sep></sep>' +
-'  <category id="catLoops" name="Loops" colour="10">' +
-'    <block type="controls_repeat_ext">' +
-'      <value name="TIMES">' +
-'        <block type="math_number">' +
-'          <field name="NUM">10</field>' +
-'        </block>' +
-'      </value>' +
+'   </category>' +
+'   <sep></sep>' +
+'       <category id="catLoops" name="Loops" colour="10">' +
+'           <block type="controls_repeat_ext">' +
+'               <value name="TIMES">' +
+'           <block type="math_number">' +
+'               <field name="NUM">10</field>' +
+'           </block>' +
+'               </value>' +
 '    </block>' +
 '    <block type="controls_whileUntil"></block>' +
 '    <block type="controls_for">' +

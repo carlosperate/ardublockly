@@ -510,3 +510,44 @@ Blockly.Msg.NEW_INSTANCE = "New instance...";
 Blockly.Msg.NEW_INSTANCE_TITLE = "New instance name:";
 Blockly.Msg.RENAME_INSTANCE = "Rename instance...";
 Blockly.Msg.RENAME_INSTANCE_TITLE = "Rename all '%1' instances to:";
+/*
+senseBox Blockly Translations
+*/
+
+Blockly.Msg.senseBox_basic_blue = "Blue";
+Blockly.Msg.senseBox_basic_green = "Gree";
+Blockly.Msg.senseBox_basic_piezo = "Buzzer";
+Blockly.Msg.senseBox_basic_red = "Red";
+Blockly.Msg.senseBox_basic_state = "Status";
+Blockly.Msg.senseBox_off = "off";
+Blockly.Msg.senseBox_on = "on";
+Blockly.Msg.senseBox_output_filename = "filename";
+Blockly.Msg.senseBox_output_format = "format:";
+Blockly.Msg.senseBox_output_linebreak = "linebreak";
+Blockly.Msg.senseBox_output_networkid = "networkID";
+Blockly.Msg.senseBox_output_password = "password";
+Blockly.Msg.senseBox_output_safetosd = "safe to sd";
+Blockly.Msg.senseBox_output_serialprint = "print on serial Monitor";
+Blockly.Msg.senseBox_output_timestamp = "timestamp";
+Blockly.Msg.senseBox_sen_buzzer = "button";
+Blockly.Msg.senseBox_sen_foto = "lightresistor";
+Blockly.Msg.senseBox_sen_hum = "humidity";
+Blockly.Msg.senseBox_sen_ir = "infrared distance sensor";
+Blockly.Msg.senseBox_sen_lux = "lightsensor";
+Blockly.Msg.senseBox_sen_poti = "potentiometer";
+Blockly.Msg.senseBox_sen_pressure = "airpressure";
+Blockly.Msg.senseBox_sen_sound = "soundsensor";
+Blockly.Msg.senseBox_sen_temp = "temperatur";
+Blockly.Msg.senseBox_sen_temp_hum = "temperature and humidity sensor";
+Blockly.Msg.senseBox_sen_temp_hum_tip = "Sensor misst Temperatur und Luftfeuchtigkeit"
+Blockly.Msg.senseBox_sen_ultrasonic = "ultrasonic distance sensor";
+Blockly.Msg.senseBox_sen_value = "value:";
+Blockly.Msg.senseBox_sen_uv_light = "UV-light/light Sensor"
+Blockly.Msg.senseBox_sen_uv_light_tip = "Sensor misst UV-Licht oder Die Helligkeit"
+Blockly.Msg.senseBox_sen_uv = "UV-Light"
+Blockly.Msg.senseBox_sen_light = "Illuminance"
+Blockly.Msg.senseBox_sensor_bmx055 = "Orientation Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_tip = "Orientation Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_x = "X-Direction"
+Blockly.Msg.senseBox_sensor_bmx055_y = "Y-Direction"
+
