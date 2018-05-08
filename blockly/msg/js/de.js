@@ -547,11 +547,19 @@ Blockly.Msg.senseBox_sen_uv_light = "UV-Licht/Licht Sensor"
 Blockly.Msg.senseBox_sen_uv_light_tip = "Sensor misst UV-Licht oder Die Helligkeit"
 Blockly.Msg.senseBox_sen_uv = "UV-Licht"
 Blockly.Msg.senseBox_sen_light = "Helligkeit"
-Blockly.Msg.senseBox_sensor_bmx055 = "Lage Sensor"
-Blockly.Msg.senseBox_sensor_bmx055_tip = "Lage Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_compass= "Lage Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_accelerometer = "Beschleunigungs Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_gyroscope = "Lage Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_accelerometer_tip = "Lage Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_compass_tip = "Lage Sensor"
+Blockly.Msg.senseBox_sensor_bmx055_gyroscope_tip = "Lage Sensor"
 Blockly.Msg.senseBox_sensor_bmx055_x = "X-Richtung"
 Blockly.Msg.senseBox_sensor_bmx055_y = "Y-Richtung"
-
+Blockly.Msg.senseBox_led = "LED an Digital Pin"
+Blockly.Msg.sensbox_wifi_tooltip = "stellt eine Wlan verbindung her"
+Blockly.Msg.sensbox_osem_connection_tooltip = "stellt eine Wlan verbindung her"
+Blockly.Msg.sensbox_send_to_osem_tooltip = "sende Messwert an"
+Blockly.Msg.sensebox_send_to_osem = "sende Messwert an die openSenseMap"
 
 
 

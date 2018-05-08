@@ -154,10 +154,32 @@ Blockly.Arduino.sensebox_shield_wifi = function(block) {
   }
   return code;
 };
+
+Blockly.Arduino.sensebox_wifi = function(block) {
+  var pw = this.getFieldValue('Password');
+  var ssid = this.getFieldValue('SSID');
+  Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBoxMCU.h"';
+  Blockly.Arduino.definitions_['define_network'] = 'OpenSenseMap wifi;';
+  Blockly.Arduino.setups_['sensebox_network'] = 'wifi.beginWiFi("'+ ssid +'","'+ pw +'");';
+  var code = '';
+  return code;
+};
+
+Blockly.Arduino.sensebox_send_to_osem = function(block) {
+  var box_id = this.getFieldValue('box_id');
+  var sensor_id = this.getFieldValue('SensorID')
+  var code = '';
+      Blockly.Arduino.valueToCode(this, 'Value', Blockly.Arduino.ORDER_ATOMIC)
+      var sensor_id = this.getFieldValue('SensorID') || '90909';
+      var sensor_value = Blockly.Arduino.valueToCode(this, 'Value', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
+      code += ' shield.uploadValue(' + sensor_value + ',"' + sensor_id +'");\n';
+  return code;
+};
+
 Blockly.Arduino.sensebox_shield_ethernet = function(block) {
   Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBox.h"';
-  Blockly.Arduino.definitions_['define_network'] = 'OpenSenseMap shield("'+box_id+'");';
-  Blockly.Arduino.setups_['sensebox_network'] = 'shield.beginEthernet();';
+  Blockly.Arduino.definitions_['define_network'] = 'OpenSenseMap wifi("'+box_id+'");';
+  Blockly.Arduino.setups_['sensebox_network'] = 'wifi.beginEthernet();';
   var box_id = this.getFieldValue('box_id');
   var code = '';
   //extra blöcke sensor

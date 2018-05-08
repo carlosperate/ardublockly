@@ -15,7 +15,9 @@ Ardublockly.TOOLBOX_XML =
 '   <category id="catSenseBox_Sensor" name="senseBox Sensors" colour="120">' +
 '      <block type="sensebox_sensor_temp_hum"></block>' +
 '      <block type="sensebox_sensor_uv_light"></block>' +
-'      <block type="sensebox_sensor_bmx055"></block>' +
+'      <block type="sensebox_sensor_bmx055_accelerometer"></block>' +
+'      <block type="sensebox_sensor_bmx055_gyroscope"></block>' +
+'      <block type="sensebox_sensor_bmx055_compass"></block>' +
 '      <block type="sensebox_sensor_pressure"></block>' +
 '      <block type="sensebox_sensor_ultrasonic_ranger"></block>' +
 '      <block type="sensebox_sensor_ir_dist"></block>' +
@@ -47,8 +49,9 @@ Ardublockly.TOOLBOX_XML =
 '      </block>' +
 '      <block type="sensebox_safe_to_sd"></block>' +
 '      <block type="sensebox_serial_print"></block>' +
-'      <block type="sensebox_shield_wifi"></block>' +
-'      <block type="sensebox_shield_ethernet"></block>'+
+'      <block type="sensebox_wifi"></block>'+
+'      <block type="sensebox_osem_connection"></block>'+
+'      <block type="sensebox_send_to_osem"></block>'+
 '   </category>' +
 '  <sep></sep>' +
 '    <sep></sep>' +
