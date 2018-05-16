@@ -18,6 +18,7 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_sensor_bmx055_accelerometer"></block>' +
 '      <block type="sensebox_sensor_bmx055_gyroscope"></block>' +
 '      <block type="sensebox_sensor_bmx055_compass"></block>' +
+'      <block type="sensebox_sensor_sds011"></block>' +
 '      <block type="sensebox_sensor_pressure"></block>' +
 '      <block type="sensebox_sensor_ultrasonic_ranger"></block>' +
 '      <block type="sensebox_sensor_ir_dist"></block>' +
@@ -25,11 +26,10 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_foto"></block>' +
 '      <block type="sensebox_button"></block>' +
 '      <block type="sensebox_poti"></block>' +
-'      <block type="sensebox_time"></block>' +
 '    </category>' +
 '   <category id="catSenseBox_Output" name="senseBox Output" colour="120">' +
 '      <block type="sensebox_led"></block>' +
-'      <block type="sensebox_piezo_buzzer"></block>' +
+'      <block type="sensebox_piezo"></block>' +
 '      <block type="sensebox_rgb_led">' +
 '        <value name="RED">' +
 '          <block type="math_number">' +
