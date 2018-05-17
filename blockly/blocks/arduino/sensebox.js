@@ -350,15 +350,14 @@ Blockly.Blocks['sensebox_serial_print'] = {
     this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/der_serielle_monitor.html');
   }
 };
-Blockly.Blocks['sensebox_safe_to_sd'] = {
+Blockly.Blocks['sensebox_sd_open_file'] = {
   init: function() {
-    this.appendValueInput("TEXT")
-        .setCheck(null)
-        .appendField(Blockly.Msg.senseBox_output_safetosd);
     this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_sd_open_file)
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField(Blockly.Msg.senseBox_output_filename)
-        .appendField(new Blockly.FieldTextInput("TXT"), "txt");
+        .appendField(filename);
+    this.appendStatementInput('SD')
+        .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -366,3 +365,33 @@ Blockly.Blocks['sensebox_safe_to_sd'] = {
     this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
   }
 };
+
+Blockly.Blocks['sensebox_sd_create_file'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_sd_create_file)
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(Blockly.Msg.senseBox_output_filename)
+        .appendField( new Blockly.FieldTextInput('Filename'), 'Filename');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
+    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+  }
+};
+
+Blockly.Blocks['sensebox_sd_write_file'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_sd_write_file)
+        .setAlign(Blockly.ALIGN_LEFT)
+    this.appendValueInput('DATA');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
+    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+  }
+};
+

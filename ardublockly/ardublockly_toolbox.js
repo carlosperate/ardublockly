@@ -47,7 +47,9 @@ Ardublockly.TOOLBOX_XML =
 '          </block>' +
 '        </value>' +
 '      </block>' +
-'      <block type="sensebox_safe_to_sd"></block>' +
+'      <block type="sensebox_sd_create_file"></block>' +
+'      <block type="sensebox_sd_open_file"></block>' +
+'      <block type="sensebox_sd_write_file"></block>' +
 '      <block type="sensebox_serial_print"></block>' +
 '      <block type="sensebox_wifi"></block>'+
 '      <block type="sensebox_osem_connection"></block>'+

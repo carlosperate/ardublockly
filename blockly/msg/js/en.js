@@ -529,6 +529,9 @@ Blockly.Msg.senseBox_output_networkid = "networkID";
 Blockly.Msg.senseBox_output_password = "password";
 Blockly.Msg.senseBox_output_safetosd = "safe to sd";
 Blockly.Msg.senseBox_output_safetosd_tip = "Save Measurment to SD-Card"
+Blockly.Msg.senseBox_sd_create_file = "Create file on SD-Card"
+Blockly.Msg.senseBox_sd_write_file = " Write Data to SD-Card"
+Blockly.Msg.senseBox_sd_open_file = "Open a file from SD-Card"
 Blockly.Msg.senseBox_output_serialprint = "print on serial Monitor";
 Blockly.Msg.senseBox_output_timestamp = "timestamp";
 /*Basics */

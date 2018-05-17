@@ -11,6 +11,8 @@ goog.provide('Blockly.Arduino.sensebox');
 
 goog.require('Blockly.Arduino');
 
+var filename;
+
 /*
 ----------------------------------Sensoren--------------------------------------------------
 */
@@ -278,14 +280,27 @@ var code = 'postFloatValue((float)'+text+', 4, '+id+');';
 return code;
 };
 
-Blockly.Arduino.sensebox_safe_to_sd = function() {
-var filename =  this.getFieldValue('txt');
-Blockly.Arduino.definitions_['define_sd'] = '#include <SPI.h> // wichtige Libraries für das Speichern von Daten auf SD-Karte\n #include <SD.h>\n';
-Blockly.Arduino.definitions_['define_sd'+filename] = 'File dataFile'+filename+';'
-Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(4);';
+Blockly.Arduino.sensebox_sd_create_file = function() {
+  filename = this.getFieldValue('Filename');
+  Blockly.Arduino.definitions_['define_sd_start'] = '#include <SPI.h> // wichtige Libraries für das Speichern von Daten auf SD-Karte\n #include <SD.h>\n';
+  Blockly.Arduino.definitions_['define_sd'] = 'File dataFile'+filename+';'
+  Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28);\ndataFile'+filename+' = SD.open("'+filename+'.txt", FILE_WRITE);\ndataFile'+filename+'.close();\n';
+  var code = '';
+  return code;
+  };
+  
+
+Blockly.Arduino.sensebox_sd_open_file = function(block) {
 var text = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
+var branch = Blockly.Arduino.statementToCode(block, 'SD');
 var code ='dataFile'+filename+' = SD.open("'+filename+'.txt", FILE_WRITE);\n'
-code +='dataFile'+filename+'.println('+ text +');\n'
+code += branch;
 code +='dataFile'+filename+'.close();\n'
 return code;
 };
+
+Blockly.Arduino.sensebox_sd_write_file = function() {
+  var text = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
+  var code ='dataFile'+filename+'.println('+ text +');\n'
+  return code;
+  };
