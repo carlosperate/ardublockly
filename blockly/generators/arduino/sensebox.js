@@ -35,16 +35,15 @@ Blockly.Arduino.sensebox_sensor_temp_hum = function(){
 
 Blockly.Arduino.sensebox_sensor_uv_light = function(){
   var dropdown_name = this.getFieldValue('NAME');
+  Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBoxMCU.h"\n';
   if (dropdown_name == 'UvIntensity'){
-    Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBoxMCU.h"\n';
     Blockly.Arduino.definitions_['define_veml'] = 'VEML6070 veml;'
     Blockly.Arduino.setups_['sensebox_sensor_uv_light'] = 'veml.begin();\n'
     var code = 'veml.get'+dropdown_name+'()';
   }
-  if (dropdown_name == 'Illuminance'){
-    Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBoxMCU.h"\n';
-    Blockly.Arduino.definitions_['define_veml'] = 'TSL45315 tsl';
-    Blockly.Arduino.setups_['sensebox_sensor_uv_light'] = 'tsl.begin();\n'
+  if (dropdown_name == 'Illuminance'){  
+    Blockly.Arduino.definitions_['define_tsl'] = 'TSL45315 tsl;'
+    Blockly.Arduino.setups_['sensebox_sensor_illuminance'] = 'tsl.begin();\n'
     var code = 'tsl.get'+dropdown_name+'()';
   }
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
@@ -93,71 +92,16 @@ Blockly.Arduino.sensebox_sensor_ir_dist = function() {
 };
 
 /*
-----------------------------------Shields--------------------------------------------------
-*/
-Blockly.Arduino.sensebox_time = function() {
-  var dropdown_format = this.getFieldValue('FORMAT');
-  Blockly.Arduino.definitions_['define_senseBox'] = '#include <SenseBox.h>';
-  Blockly.Arduino.definitions_['define_rtc'] = 'RV8523 rtc;';
-  Blockly.Arduino.setups_['sensebox_rtc'] = ' rtc.begin();\n  rtc.setTime(__DATE__,__TIME__);'; //old rtc.set(10, 24, 8, 20, 4, 2016); // 08:24:10 20.04.2016\n
-  var code = '';
-  if(dropdown_format == "jjjj.mm.tt hh:mm:ss"){
-      code += '"" + (String) rtc.getYear() + "." + (String) rtc.getMonth() + "." + (String) rtc.getDay() + "  " + (String) rtc.getHour() + ":" + (String) rtc.getMin()+ ":" + (String) rtc.getSec()';
-  }else if(dropdown_format == "jjjj.mm.tt"){
-      code += '"" + (String) rtc.getYear() + "." + (String) rtc.getMonth(); + "." + (String) rtc.getDay()';
-  }else if(dropdown_format == "hh:mm:ss"){
-      code += '"" + (String) rtc.getHour() + ":" + (String) rtc.getMin() + ":" + (String) rtc.getSec()';
-  }else if(dropdown_format == "hh:mm"){
-      code += '"" + (String) rtc.getHour() + ":" + (String) rtc.getMin()';
-  }
-  return [code ,Blockly.Arduino.ORDER_ATOMIC];
-};
-/* funktioniert noch nicht
-Blockly.Arduino.sensebox_shield_wifi = function(block) {
-  var pw = this.getFieldValue('pw');
-  var net_id = this.getFieldValue('net_id');
-  var box_id = this.getFieldValue('box_id');
-  Blockly.Arduino.definitions_['define_senseBox'] = '#include <SenseBox.h>';
-  Blockly.Arduino.definitions_['define_network'] = 'Ehernet shield;';
-  Blockly.Arduino.setups_['sensebox_network'] = 'shield.begin('+ net_id +',"'+ pw +'"");';
-  var code = '';
-  //extra blöcke sensor
-  for (var n = 1; n <= block.osm_sensorCount_ ; n++) {
-    var sensor_id = Blockly.Arduino.valueToCode(block, 'ID' + n, Blockly.Arduino.ORDER_NONE) || '0000';
-    var sensor_value = Blockly.Arduino.statementToCode(block, 'TEXT' + n)|| '0000';
-    code += ' postFloatValue(' + sensor_value + ',"' + sensor_id +'","'+box_id+');\n';
-  }
-  return code;
-};
+----------------------------------Bees--------------------------------------------------
 */
 
-Blockly.Arduino.sensebox_shield_wifi = function(block) {
-  var pw = this.getFieldValue('pw');
-  var net_id = this.getFieldValue('net_id');
-  var box_id = this.getFieldValue('box_id');
-  Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBox.h"';
-  Blockly.Arduino.definitions_['define_network'] = 'OpenSenseMap shield("'+box_id+'");';
-  Blockly.Arduino.setups_['sensebox_network'] = 'shield.beginWiFi("'+ net_id +'","'+ pw +'");';
-  var code = '';
-  //extra blöcke sensor
-  for (var n = 1; n <= 5 ; n++) {
-      if(Blockly.Arduino.valueToCode(this, 'TEXT'+n, Blockly.Arduino.ORDER_ATOMIC)){
-      var sensor_id = this.getFieldValue('ID'+n) || '90909';
-      var sensor_value = Blockly.Arduino.valueToCode(this, 'TEXT'+n, Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
-      code += ' shield.uploadValue(' + sensor_value + ',"' + sensor_id +'");\n';
-    }else{
-      code += '//kein Sensor an Port '+ n +'\n';
-    }
-  }
-  return code;
-};
-
+/* Wifi connection and openSenseMap Blocks*/
 Blockly.Arduino.sensebox_wifi = function(block) {
   var pw = this.getFieldValue('Password');
   var ssid = this.getFieldValue('SSID');
   Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBoxMCU.h"';
   Blockly.Arduino.definitions_['define_network'] = 'Bee* b = new Bee();';
-  Blockly.Arduino.setups_['sensebox_network'] = 'b->connectToWiFi("'+ ssid +'","'+ pw +'");\ndelay(1000);';
+  Blockly.Arduino.setups_['sensebox_network'] = 'b->connectToWifi("'+ ssid +'","'+ pw +'");\ndelay(1000);';
   var code = '';
   return code;
 };
@@ -166,7 +110,7 @@ Blockly.Arduino.sensebox_osem_connection = function(block) {
   var box_id = this.getFieldValue('BoxID');
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
   Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.definitions_['define_osem'] = 'OpenSenseMap osem('+box_id+',b);';
+  Blockly.Arduino.definitions_['define_osem'] = 'OpenSenseMap osem("'+box_id+'",b);';
   Blockly.Arduino.setups_['sensebox_osem'] = '';
   var code = '';
       code += branch; 
@@ -273,12 +217,7 @@ var code ='Serial.print'+ linebreak +'(' + text + ');\n';
 return code;
 };
 
-Blockly.Arduino.sensebox_print_osm = function() {
-var id = this.getFieldValue('id');
-var text = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
-var code = 'postFloatValue((float)'+text+', 4, '+id+');';
-return code;
-};
+/* SD-Card Blocks using the Standard SD Library*/
 
 Blockly.Arduino.sensebox_sd_create_file = function() {
   filename = this.getFieldValue('Filename');
@@ -301,6 +240,12 @@ return code;
 
 Blockly.Arduino.sensebox_sd_write_file = function() {
   var text = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
-  var code ='dataFile'+filename+'.println('+ text +');\n'
+  var linebreak =  this.getFieldValue('linebreak');
+    if(linebreak =="TRUE"){
+      linebreak = "ln";
+      }else{
+        linebreak = "";
+      }
+  var code ='dataFile'+filename+'.print'+linebreak+'('+ text +');\n'
   return code;
   };

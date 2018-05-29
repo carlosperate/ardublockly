@@ -385,8 +385,12 @@ Blockly.Blocks['sensebox_sd_write_file'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_sd_write_file)
-        .setAlign(Blockly.ALIGN_LEFT)
-    this.appendValueInput('DATA');
+        .setAlign(Blockly.ALIGN_LEFT);
+    this.appendValueInput('DATA')
+        .setCheck(null);
+    this.appendDummyInput('CheckboxText')
+        .appendField(Blockly.Msg.senseBox_output_linebreak)
+        .appendField(new Blockly.FieldCheckbox('TRUE'), 'linebreak');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
