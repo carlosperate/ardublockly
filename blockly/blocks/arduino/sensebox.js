@@ -399,3 +399,47 @@ Blockly.Blocks['sensebox_sd_write_file'] = {
   }
 };
 
+/*senseBox Display Blocks*/
+
+Blockly.Blocks['sensebox_display_beginDisplay'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_display_beginDisplay)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.setTooltip(Blockly.Msg.senseBox_display_beginDisplay_tip);
+    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+  }
+};
+
+Blockly.Blocks['sensebox_display_clearDisplay'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_display_clearDisplay)
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.setTooltip(Blockly.Msg.senseBox_display_clearDisplay_tip);
+    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+  }
+};
+
+Blockly.Blocks['sensebox_display_printDisplay'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_display_printDisplay)
+        this.appendValueInput("X", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_printDisplay_x);
+        this.appendValueInput("Y", 'Number')
+              .appendField(Blockly.Msg.senseBox_display_printDisplay_x);
+    this.appendValueInput('printDisplay')
+        .appendField(Blockly.Msg.senseBox_display_printDisplay_value)
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.senseBox_display_printDisplay_tip);
+    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/rgb_led.html');
+  }
+};

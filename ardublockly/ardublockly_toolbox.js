@@ -26,7 +26,23 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_foto"></block>' +
 '      <block type="sensebox_button"></block>' +
 '      <block type="sensebox_poti"></block>' +
-'    </category>' +
+'   </category>' +
+'      <category id="catsenseBoxDisplay" name="senseBox Display" colour="120">' +  
+'      <block type="sensebox_display_beginDisplay"></block>' +
+'      <block type="sensebox_display_clearDisplay"></block>' +
+'      <block type="sensebox_display_printDisplay">' +
+'           <value name="X">' +
+'               <block type="math_number">' +
+'                 <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="Y">' +
+'          <block type="math_number">' +
+'            <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'      </block>' +
+'   </category>' +
 '   <category id="catSenseBox_Output" name="senseBox Output" colour="120">' +
 '      <block type="sensebox_led"></block>' +
 '      <block type="sensebox_piezo"></block>' +
@@ -54,7 +70,7 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_wifi"></block>'+
 '      <block type="sensebox_osem_connection"></block>'+
 '      <block type="sensebox_send_to_osem"></block>'+
-'   </category>' +
+'</category>' +
 '  <sep></sep>' +
 '    <sep></sep>' +
 '   <category id="catLogic" name="Logic" colour="210">' +

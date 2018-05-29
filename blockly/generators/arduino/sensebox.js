@@ -249,3 +249,27 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
   var code ='dataFile'+filename+'.print'+linebreak+'('+ text +');\n'
   return code;
   };
+
+  /*Display Blocks*/
+  Blockly.Arduino.sensebox_display_beginDisplay = function() {
+    Blockly.Arduino.definitions_['define_display_libraries'] = '#include <SPI.h>\n#include <Wire.h>\n#include <Adafruit_GFX.h>\n#include <Adafruit_SSD1306.h>\n#include <senseBoxIO.h>\n';
+    Blockly.Arduino.definitions_['define_display'] = '#define OLED_RESET 4\nAdafruit_SSD1306 display(OLED_RESET);';
+    Blockly.Arduino.setups_['sensebox_display_begin'] = 'senseBoxIO.powerI2C(true);\ndisplay.begin(SSD1306_SWITCHCAPVCC, 0x3D);\ndisplay.clearDisplay();';
+    var code = '';
+    return code;
+    };
+
+
+  Blockly.Arduino.sensebox_display_clearDisplay = function() {
+      var code = 'display.clearDisplay();\n';
+      return code;
+      };
+
+  Blockly.Arduino.sensebox_display_printDisplay = function() {
+        var x = Blockly.Arduino.valueToCode(this, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var y = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var printDisplay = Blockly.Arduino.valueToCode(this, 'printDisplay', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
+        var code = 'display.setCursor('+x+','+y+');\n';
+        code += 'display.print('+printDisplay+');';
+        return code;
+      };

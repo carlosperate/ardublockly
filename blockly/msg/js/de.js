@@ -586,6 +586,17 @@ Blockly.Msg.senseBox_sds011_pm10 = "PM10"
 Blockly.Msg.senseBox_sds011_tip = "Misst die Feinstaubbelastung"
 Blockly.Msg.senseBox_sds011_serial1 = "Serial1"
 Blockly.Msg.senseBox_sds011_serial2 = "Serial2"
+/*Display*/
+Blockly.Msg.senseBox_display_beginDisplay = "Display initialisieren"
+Blockly.Msg.senseBox_display_clearDisplay_tip ="Starten die Ausgabe auf dem Display"
 
+Blockly.Msg.senseBox_display_clearDisplay = "Display löschen"
+Blockly.Msg.senseBox_display_clearDisplay_tip ="Löscht den Inhalt des Displays"
+
+Blockly.Msg.senseBox_display_printDisplay = "print to Display"
+Blockly.Msg.senseBox_display_printDisplay_tip = "prints Values to the Display, set X and Y Location"
+Blockly.Msg.senseBox_display_printDisplay_x ="X"
+Blockly.Msg.senseBox_display_printDisplay_y ="Y"
+Blockly.Msg.senseBox_display_printDisplay_value = "Value"
 
 
