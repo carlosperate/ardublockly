@@ -560,6 +560,7 @@ Blockly.Msg.senseBox_temp = "temperatur";
 Blockly.Msg.senseBox_temp_hum = "temperature and humidity sensor";
 Blockly.Msg.senseBox_temp_hum_tip = "Sensor measuring temperature and humidity"
 Blockly.Msg.senseBox_ultrasonic = "ultrasonic distance sensor";
+Blockly.Msg.senseBox_ultrasonic_tip = "ultrasonic distance sensor";
 Blockly.Msg.senseBox_value = "value:";
 Blockly.Msg.senseBox_uv_light = "UV-light/light Sensor"
 Blockly.Msg.senseBox_uv_light_tip = "Sensor measuring the UV-light and the illuminance"
@@ -587,12 +588,14 @@ Blockly.Msg.senseBox_sds011_serial1 = "Serial1"
 Blockly.Msg.senseBox_sds011_serial2 = "Serial2"
 
 /*Display*/
-Blockly.Msg.senseBox_display_beginDisplay = "display initalisation"
+Blockly.Msg.senseBox_display_beginDisplay = "display initialize"
 Blockly.Msg.senseBox_display_clearDisplay_tip ="Starts the display"
 Blockly.Msg.senseBox_display_clearDisplay = "Clear Display"
 Blockly.Msg.senseBox_display_clearDisplay_tip ="Clear the display content"
 Blockly.Msg.senseBox_display_printDisplay = "print to Display"
 Blockly.Msg.senseBox_display_printDisplay_tip = "prints Values to the Display, set X and Y Location"
-Blockly.Msg.senseBox_display_printDisplay_x ="X"
-Blockly.Msg.senseBox_display_printDisplay_y ="Y"
-Blockly.Msg.senseBox_display_printDisplay_value = "Value"
+Blockly.Msg.senseBox_display_printDisplay_x ="row (x)"
+Blockly.Msg.senseBox_display_printDisplay_y ="column (y)"
+Blockly.Msg.senseBox_display_printDisplay_value = "value"
+Blockly.Msg.senseBox_display_setSize = "set fontsize to"
+Blockly.Msg.senseBox_display_setSize_tip = "Change the font size. Set a Value between 1-10."

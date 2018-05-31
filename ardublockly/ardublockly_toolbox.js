@@ -21,7 +21,6 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_sensor_sds011"></block>' +
 '      <block type="sensebox_sensor_pressure"></block>' +
 '      <block type="sensebox_sensor_ultrasonic_ranger"></block>' +
-'      <block type="sensebox_sensor_ir_dist"></block>' +
 '      <block type="sensebox_sensor_sound"></block>' +
 '      <block type="sensebox_foto"></block>' +
 '      <block type="sensebox_button"></block>' +
@@ -30,6 +29,13 @@ Ardublockly.TOOLBOX_XML =
 '      <category id="catsenseBoxDisplay" name="senseBox Display" colour="120">' +  
 '      <block type="sensebox_display_beginDisplay"></block>' +
 '      <block type="sensebox_display_clearDisplay"></block>' +
+'      <block type="sensebox_display_setSize">' +
+'       <value name="size">' +
+'           <block type="math_number">' +
+'               <field name="NUM">1</field>' +
+'           </block>' +
+'       </value>' +
+'      </block>'+
 '      <block type="sensebox_display_printDisplay">' +
 '           <value name="X">' +
 '               <block type="math_number">' +

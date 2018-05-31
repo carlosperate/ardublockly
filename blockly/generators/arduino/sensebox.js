@@ -85,11 +85,6 @@ Blockly.Arduino.sensebox_sensor_sound = function() {
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sensebox_sensor_ir_dist = function() {
-  var dropdown_pin = this.getFieldValue('PIN');
-  var code = '4800/(analogRead('+dropdown_pin+')-20)';
-  return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
 
 /*
 ----------------------------------Bees--------------------------------------------------
@@ -271,5 +266,11 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
         var printDisplay = Blockly.Arduino.valueToCode(this, 'printDisplay', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
         var code = 'display.setCursor('+x+','+y+');\n';
         code += 'display.print('+printDisplay+');';
+        return code;
+      };
+
+      Blockly.Arduino.sensebox_display_setSize = function() {
+        var size = Blockly.Arduino.valueToCode(this, 'size', Blockly.Arduino.ORDER_ATOMIC) || '1'
+        var code = 'display.setTextSize('+size+');\n';
         return code;
       };

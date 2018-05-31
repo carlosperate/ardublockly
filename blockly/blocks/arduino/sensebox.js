@@ -20,20 +20,6 @@ goog.require('Blockly.Blocks');
  Blockly.Blocks.sensebox.HUE = 120;
 
 
-
-Blockly.Blocks['sensebox_sensor_ir_dist'] = {
-  init: function() {
-    this.setColour(Blockly.Blocks.sensebox.HUE);
-    this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_ir)
-        .appendField("PIN:")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
-    this.setOutput(true, "Number");
-    this.setTooltip('Dieser Sensor misst die Entfernung zu Hindernissen mit infrarotem Licht');
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/irsensor.html');
-  }
-};
-
 Blockly.Blocks['sensebox_sensor_temp_hum'] = {
   init: function() {
     this.appendDummyInput()
@@ -135,7 +121,7 @@ Blockly.Blocks['sensebox_sensor_pressure'] = {
         .appendField(Blockly.Msg.senseBox_pressure);
        this.setOutput(true, "Number");
     this.setColour(Blockly.Blocks.sensebox.HUE);
-    this.setTooltip('Dieser Sensor misst den Luftdruck');
+    this.setTooltip(Blockly.Msg.senseBox_pressure_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/luftdruck.html');
   }
 };
@@ -152,8 +138,8 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
         .appendField("PIN_TX:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_TX")
     this.setOutput(true, 'Number');
-    this.setTooltip('Dieser Sensor mist durch Ultraschall die Entfernung zu einem Objekt.');
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/verkehrszaehler.html');
+    this.setTooltip(Blockly.Msg.senseBox_ultrasonic_tip);
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 Blockly.Blocks['sensebox_sensor_sound'] = {
@@ -164,7 +150,7 @@ Blockly.Blocks['sensebox_sensor_sound'] = {
         .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
     this.setOutput(true, "Number");
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/mikrofon.html');
+    this.setHelpUrl(Blockly.Msg.senseBox_sound_tip);
     this.setTooltip('Dieser Sensor mist den Geräuschpegel.');
   }
 };
@@ -267,7 +253,7 @@ Blockly.Blocks['sensebox_foto'] = {
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
     this.setOutput(true, "Number");
     this.setTooltip(Blockly.Msg.senseBox_foto_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/ldr.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 Blockly.Blocks['sensebox_rgb_led'] = {
@@ -286,7 +272,7 @@ Blockly.Blocks['sensebox_rgb_led'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.senseBox_rgb_led_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/rgb_led.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 
@@ -301,7 +287,7 @@ Blockly.Blocks['sensebox_led'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.senseBox_led_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/ampelButton.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 
@@ -314,7 +300,7 @@ Blockly.Blocks['sensebox_button'] = {
     this.setOutput(true, 'Boolean');
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_button_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/ampelButton.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 Blockly.Blocks['sensebox_piezo'] = {
@@ -329,7 +315,7 @@ Blockly.Blocks['sensebox_piezo'] = {
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_piezo_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/summer.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 /*
@@ -347,7 +333,7 @@ Blockly.Blocks['sensebox_serial_print'] = {
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_serial_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/der_serielle_monitor.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 Blockly.Blocks['sensebox_sd_open_file'] = {
@@ -362,7 +348,7 @@ Blockly.Blocks['sensebox_sd_open_file'] = {
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 
@@ -377,7 +363,7 @@ Blockly.Blocks['sensebox_sd_create_file'] = {
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 
@@ -395,7 +381,7 @@ Blockly.Blocks['sensebox_sd_write_file'] = {
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 
@@ -409,7 +395,7 @@ Blockly.Blocks['sensebox_display_beginDisplay'] = {
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_display_beginDisplay_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 
@@ -421,7 +407,7 @@ Blockly.Blocks['sensebox_display_clearDisplay'] = {
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_display_clearDisplay_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/grundlagen/datenlogger.html');
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };
 
@@ -433,13 +419,26 @@ Blockly.Blocks['sensebox_display_printDisplay'] = {
         this.appendValueInput("X", 'Number')
             .appendField(Blockly.Msg.senseBox_display_printDisplay_x);
         this.appendValueInput("Y", 'Number')
-              .appendField(Blockly.Msg.senseBox_display_printDisplay_x);
+              .appendField(Blockly.Msg.senseBox_display_printDisplay_y);
     this.appendValueInput('printDisplay')
         .appendField(Blockly.Msg.senseBox_display_printDisplay_value)
         .setCheck(null);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.senseBox_display_printDisplay_tip);
-    this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/rgb_led.html');
+    this.setHelpUrl('https://sensebox.de/books');
+  }
+};
+
+Blockly.Blocks['sensebox_display_setSize'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_display_setSize)
+        this.appendValueInput("size", 'Number')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.senseBox_display_setSize_tip);
+    this.setHelpUrl('https://sensebox.de/books');
   }
 };

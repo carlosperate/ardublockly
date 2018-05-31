@@ -93,6 +93,7 @@ Ardublockly.LOCALISED_TEXT = {
   /* Toolbox Categories*/
   catSenseBox_Sensor:"senseBox Sensoren",
   catSenseBox_Output:"senseBox Ausgabe",
+  catSenseBoxDisplay:"senseBox Display",
   catLogic: "Logik",
   catLoops: "Schleifen",
   catMath: "Mathematik",
