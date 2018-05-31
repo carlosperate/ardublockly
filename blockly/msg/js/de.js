@@ -599,7 +599,10 @@ Blockly.Msg.senseBox_display_printDisplay_tip = "zeigt Wert auf dem Display an."
 Blockly.Msg.senseBox_display_printDisplay_x ="Zeile (x)"
 Blockly.Msg.senseBox_display_printDisplay_y ="Spalte (y)"
 Blockly.Msg.senseBox_display_printDisplay_value = "Value"
-Blockly.Msg.senseBox_display_setSize = "Setzte Schriftgröße auf"
-Blockly.Msg.senseBox_display_setSize_tip = "Ändert die Schriftgröße. Wert zwischen 1-10 zulässig"
+Blockly.Msg.senseBox_display_color = "Schriftfarbe"
+Blockly.Msg.senseBox_display_white = "Weiß"
+Blockly.Msg.senseBox_display_black = "Schwarz"
+Blockly.Msg.display_show = "Zeige auf dem " 
+Blockly.Msg.display_show_tip = "Zeigt den Nachfolgenden Inhalt auf dem Bildschirm" 
 
 

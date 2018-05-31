@@ -249,7 +249,7 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
   Blockly.Arduino.sensebox_display_beginDisplay = function() {
     Blockly.Arduino.definitions_['define_display_libraries'] = '#include <SPI.h>\n#include <Wire.h>\n#include <Adafruit_GFX.h>\n#include <Adafruit_SSD1306.h>\n#include <senseBoxIO.h>\n';
     Blockly.Arduino.definitions_['define_display'] = '#define OLED_RESET 4\nAdafruit_SSD1306 display(OLED_RESET);';
-    Blockly.Arduino.setups_['sensebox_display_begin'] = 'senseBoxIO.powerI2C(true);\ndisplay.begin(SSD1306_SWITCHCAPVCC, 0x3D);\ndisplay.clearDisplay();';
+    Blockly.Arduino.setups_['sensebox_display_begin'] = 'senseBoxIO.powerI2C(true);\ndelay(2000);\ndisplay.begin(SSD1306_SWITCHCAPVCC, 0x3D);\ndisplay.display();\ndelay(100);\ndisplay.clearDisplay();';
     var code = '';
     return code;
     };
@@ -264,13 +264,18 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
         var x = Blockly.Arduino.valueToCode(this, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var y = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var printDisplay = Blockly.Arduino.valueToCode(this, 'printDisplay', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
+        var size = Blockly.Arduino.valueToCode(this, 'SIZE', Blockly.Arduino.ORDER_ATOMIC) || '1'
+        var color = this.getFieldValue('COLOR');
         var code = 'display.setCursor('+x+','+y+');\n';
-        code += 'display.print('+printDisplay+');';
+        code += 'display.setTextSize('+size+');\n';
+        code += 'display.setTextColor('+color+');\n';
+        code += 'display.println('+printDisplay+');\n';
         return code;
       };
-
-      Blockly.Arduino.sensebox_display_setSize = function() {
-        var size = Blockly.Arduino.valueToCode(this, 'size', Blockly.Arduino.ORDER_ATOMIC) || '1'
-        var code = 'display.setTextSize('+size+');\n';
+      Blockly.Arduino.sensebox_display_show = function(block) {
+        var show = Blockly.Arduino.statementToCode(block, 'SHOW');
+        var code = '';
+            code += show;
+            code += 'display.display();\n';
         return code;
       };

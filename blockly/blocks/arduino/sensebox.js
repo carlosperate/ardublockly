@@ -416,10 +416,14 @@ Blockly.Blocks['sensebox_display_printDisplay'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_display_printDisplay)
-        this.appendValueInput("X", 'Number')
+        .appendField(Blockly.Msg.senseBox_display_color)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_display_white, "WHITE,BLACK"], [Blockly.Msg.senseBox_display_black, "BLACK,WHITE"]]), "COLOR");
+    this.appendValueInput("SIZE", 'Number')
+        .appendField(Blockly.Msg.senseBox_display_setSize);
+    this.appendValueInput("X", 'Number')
             .appendField(Blockly.Msg.senseBox_display_printDisplay_x);
-        this.appendValueInput("Y", 'Number')
-              .appendField(Blockly.Msg.senseBox_display_printDisplay_y);
+    this.appendValueInput("Y", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_printDisplay_y);   
     this.appendValueInput('printDisplay')
         .appendField(Blockly.Msg.senseBox_display_printDisplay_value)
         .setCheck(null);
@@ -430,15 +434,18 @@ Blockly.Blocks['sensebox_display_printDisplay'] = {
   }
 };
 
-Blockly.Blocks['sensebox_display_setSize'] = {
+Blockly.Blocks['sensebox_display_show'] = {
   init: function() {
+    
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_display_setSize)
-        this.appendValueInput("size", 'Number')
+        .appendField(Blockly.Msg.display_show_tip);
+    this.appendStatementInput('SHOW')
+        .appendField(Blockly.Msg.senseBox_display_show)
+        .setCheck(null);
+    this.setTooltip(Blockly.Msg.display_show_tip);
+    this.setHelpUrl('');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-    this.setTooltip(Blockly.Msg.senseBox_display_setSize_tip);
-    this.setHelpUrl('https://sensebox.de/books');
-  }
-};
+        }
+  };
