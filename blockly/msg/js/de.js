@@ -594,15 +594,17 @@ Blockly.Msg.senseBox_display_clearDisplay_tip ="Starten die Ausgabe auf dem Disp
 Blockly.Msg.senseBox_display_clearDisplay = "Display löschen"
 Blockly.Msg.senseBox_display_clearDisplay_tip ="Löscht den Inhalt des Displays"
 
-Blockly.Msg.senseBox_display_printDisplay = "auf Display anzeigen"
+Blockly.Msg.senseBox_display_printDisplay = ""
 Blockly.Msg.senseBox_display_printDisplay_tip = "zeigt Wert auf dem Display an."
 Blockly.Msg.senseBox_display_printDisplay_x ="Zeile (x)"
 Blockly.Msg.senseBox_display_printDisplay_y ="Spalte (y)"
-Blockly.Msg.senseBox_display_printDisplay_value = "Value"
+Blockly.Msg.senseBox_display_printDisplay_value = "Wert"
+Blockly.Msg.senseBox_display_setSize = "Schriftgröße"
+Blockly.Msg.senseBox_display_setSize_tip = "Ändere die Schriftgröße auf einen Wert zwischen 1 und 10."
 Blockly.Msg.senseBox_display_color = "Schriftfarbe"
 Blockly.Msg.senseBox_display_white = "Weiß"
 Blockly.Msg.senseBox_display_black = "Schwarz"
-Blockly.Msg.display_show = "Zeige auf dem " 
+Blockly.Msg.display_show = "Zeige auf dem Display" 
 Blockly.Msg.display_show_tip = "Zeigt den Nachfolgenden Inhalt auf dem Bildschirm" 
 
 
