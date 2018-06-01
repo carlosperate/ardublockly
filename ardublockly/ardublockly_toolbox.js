@@ -26,7 +26,7 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_button"></block>' +
 '      <block type="sensebox_poti"></block>' +
 '   </category>' +
-'      <category id="catsenseBoxDisplay" name="senseBox Display" colour="120">' +  
+'      <category id="catsenseBoxDisplay" name="senseBox display" colour="120">' +  
 '      <block type="sensebox_display_beginDisplay"></block>' +
 '      <block type="sensebox_display_show"></block>' +
 '      <block type="sensebox_display_clearDisplay"></block>' +
