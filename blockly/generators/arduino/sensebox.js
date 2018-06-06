@@ -72,9 +72,9 @@ Blockly.Arduino.sensebox_sensor_ultrasonic_ranger = function() {
   var dropdown_pin_RX = this.getFieldValue('PIN_RX');
   var dropdown_pin_TX = this.getFieldValue('PIN_TX')
   Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBoxMCU.h"\n';
-  Blockly.Arduino.definitions_['var_ultrasonic'+dropdown_pin_RX] = 'HCSR04 HCSR04 ('+dropdown_pin_RX+','+dropdown_pin_TX+')';
+  Blockly.Arduino.definitions_['var_ultrasonic'+dropdown_pin_RX] = 'Ultrasonic Ultrasonic('+dropdown_pin_RX+','+dropdown_pin_TX+');';
   var code;
-  code = 'HCSR04.getDistance()';
+  code = 'Ultrasonic.getDistance()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
