@@ -606,5 +606,12 @@ Blockly.Msg.senseBox_display_white = "Weiß"
 Blockly.Msg.senseBox_display_black = "Schwarz"
 Blockly.Msg.display_show = "Zeige auf dem Display" 
 Blockly.Msg.display_show_tip = "Zeigt den Nachfolgenden Inhalt auf dem Bildschirm" 
-
+Blockly.Msg.senseBox_display_plotDisplay = "plot Diagram"
+Blockly.Msg.senseBox_display_plotXLabel = "X-Axis Label"
+Blockly.Msg.senseBox_display_plotYLabel = "Y-Axis Label"
+Blockly.Msg.senseBox_display_plotXRange = "X-Range"
+Blockly.Msg.senseBox_display_plotYRange = "Y-Range"
+Blockly.Msg.senseBox_display_plotXTick = "X-Tick"
+Blockly.Msg.senseBox_display_plotYTick = "Y-Tick"
+Blockly.Msg.senseBox_display_plotTimeFrame = "TimeFrame"
 

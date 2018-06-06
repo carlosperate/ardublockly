@@ -434,6 +434,35 @@ Blockly.Blocks['sensebox_display_printDisplay'] = {
   }
 };
 
+Blockly.Blocks['sensebox_display_plotDisplay'] = {
+  init: function() {
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_display_plotDisplay)
+    this.appendValueInput("YLabel", 'Text')
+        .appendField(Blockly.Msg.senseBox_display_plotYLabel);
+    this.appendValueInput("XLabel", 'Text')
+        .appendField(Blockly.Msg.senseBox_display_plotXLabel);
+    this.appendValueInput("XRange", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotXRange);
+    this.appendValueInput("YRange", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotYRange);
+    this.appendValueInput("XTick", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotXTick);
+    this.appendValueInput("YTick", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotYTick);
+    this.appendValueInput("TimeFrame", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotTimeFrame);     
+    this.appendValueInput('plotDisplay')
+        .appendField(Blockly.Msg.senseBox_display_printDisplay_value)
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.senseBox_display_printDisplay_tip);
+    this.setHelpUrl('https://sensebox.de/books');
+  }
+};
+
 Blockly.Blocks['sensebox_display_show'] = {
   init: function() {
     
