@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Questrial);
+@import url(http://fonts.googleapis.com/css?family=Dancing+Script:700);
+
+html,
+body {
+    width: 70%;
+    height: 70%;
+}
+
+body {
+    font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
+    background-color: #28288;
+    color: #d3d3d3;
+    webkit-tap-highlight-color: #222;
+}
+
+
+
+header {
+    position: absolute;
+   
+    min-height: auto;
+    text-align: center;
+    color: #ffff;
+    width: 100%;
+    background-image: url('http://www.uni-muenster.de/news/data/img/2016/03/8200-FEm232H4.jpg');
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+
+
+
+.header-content{
+     
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+
+
+}
+ 
+
+
+ .button {
+
+    position: relative;
+    margin: auto;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px ;
+    transition: all 0.5s;
+    cursor: pointer;
+  
+
+}
+
+
+.wrapper{
+
+    float:right;
+    text-align: center;
+    align-items: middle;
+
+} 
+
+ 
