@@ -79,7 +79,7 @@ SenseboxExtension.init = function() {
       request.open('POST', 'https://compiler.sensebox.de/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
-      request.send(data);
+      request.send({"board":data.board, "sketch": data.sketch});
     } catch (e) {
       console.log('Error: ', e);
       throw e;
