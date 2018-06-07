@@ -45,7 +45,7 @@ SenseboxExtension.init = function() {
 
   var compile = document.getElementById('button_compile_sketch');
   compile.addEventListener('click', function () {
-    var sketch = JSON.stringify(Ardublockly.generateArduino()).slice(1, -1);
+    var sketch = Ardublockly.generateArduino();
     var data = {
       "board": window.BOARD,
       "sketch": sketch
@@ -61,7 +61,7 @@ SenseboxExtension.init = function() {
             dataReceived = request.responseText;
             var a = document.createElement('a');
             document.body.appendChild(a);
-            var blob = new Blob([dataReceived], {type: 'application/octet-stream'});
+            var blob = new Blob([dataReceived], {type: 'octet/stream'});
             a.href = window.URL.createObjectURL(blob);
             a.download = document.getElementById('sketch_name').value +'.'+window.EXTENSION;
             a.click();
@@ -79,7 +79,7 @@ SenseboxExtension.init = function() {
       request.open('POST', 'https://compiler.sensebox.de/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
-      request.send({"board":data.board, "sketch": data.sketch});
+      request.send(JSON.stringify(data));
     } catch (e) {
       console.log('Error: ', e);
       throw e;
