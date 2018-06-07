@@ -61,7 +61,7 @@ SenseboxExtension.init = function() {
             dataReceived = request.responseText;
             var a = document.createElement('a');
             document.body.appendChild(a);
-            var blob = new Blob([dataReceived]);
+            var blob = new Blob([dataReceived], {type: 'application/octet-stream'});
             a.href = window.URL.createObjectURL(blob);
             a.download = document.getElementById('sketch_name').value +'.'+window.EXTENSION;
             a.click();
