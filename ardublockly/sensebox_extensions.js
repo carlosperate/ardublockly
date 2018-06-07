@@ -45,7 +45,7 @@ SenseboxExtension.init = function() {
 
   var compile = document.getElementById('button_compile_sketch');
   compile.addEventListener('click', function () {
-    var sketch = JSON.stringify(Ardublockly.generateArduino()).slice(1,-1);
+    var sketch = Ardublockly.generateArduino();
     var data = {
       "board": window.BOARD,
       "sketch": sketch
