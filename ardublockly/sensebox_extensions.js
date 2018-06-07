@@ -45,7 +45,7 @@ SenseboxExtension.init = function() {
 
   var compile = document.getElementById('button_compile_sketch');
   compile.addEventListener('click', function () {
-    var sketch = Ardublockly.generateArduino();
+    var sketch = JSON.stringify(Ardublockly.generateArduino()).slice(1, -1);
     var data = {
       "board": window.BOARD,
       "sketch": sketch
@@ -76,10 +76,10 @@ SenseboxExtension.init = function() {
       }
     };
     try {
-      request.open('POST', 'https://compiler.sensebox.de/compile', true);
+      request.open('POST', 'localhost:3000/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
-      request.send(JSON.stringify(data));
+      request.send(data);
     } catch (e) {
       console.log('Error: ', e);
       throw e;
