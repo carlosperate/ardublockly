@@ -76,7 +76,7 @@ SenseboxExtension.init = function() {
       }
     };
     try {
-      request.open('POST', 'localhost:3000/compile', true);
+      request.open('POST', 'https://compiler.sensebox.de/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
       request.send(data);
