@@ -468,9 +468,9 @@ Blockly.Blocks['sensebox_display_show'] = {
     
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.display_show);
+        .appendField(Blockly.Msg.sensebox_display_show);
     this.appendStatementInput('SHOW');
-    this.setTooltip(Blockly.Msg.display_show_tip);
+    this.setTooltip(Blockly.Msg.sensebox_display_show_tip);
     this.setHelpUrl('');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
