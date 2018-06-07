@@ -48,7 +48,7 @@ SenseboxExtension.init = function() {
     var sketch = Ardublockly.generateArduino();
     var data = {
       "board": window.BOARD,
-      "sketch": sketch
+      "sketch": JSON.stringify(sketch)
     };
     var request = ArdublocklyServer.createRequest();
     // The data received is JSON, so it needs to be converted into the right
