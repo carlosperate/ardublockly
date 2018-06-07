@@ -61,9 +61,9 @@ SenseboxExtension.init = function() {
             dataReceived = request.responseText;
             var a = document.createElement('a');
             document.body.appendChild(a);
-            var blob = new Blob([dataReceived], {type: 'octet/stream'});
+            var blob = new Blob([dataReceived], {type: 'application/octet-stream'});
             a.href = window.URL.createObjectURL(blob);
-            a.download = document.getElementById('sketch_name').value +'.'+window.EXTENSION;
+            a.download = blob;
             a.click();
             document.body.removeChild(a);
             Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
@@ -78,6 +78,7 @@ SenseboxExtension.init = function() {
     try {
       request.open('POST', 'https://compiler.sensebox.de/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
+      request.responseType = "blob";
       request.onreadystatechange = onReady;
       request.send(JSON.stringify(data));
     } catch (e) {
