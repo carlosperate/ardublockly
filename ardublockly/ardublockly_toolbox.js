@@ -30,6 +30,7 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_display_beginDisplay"></block>' +
 '      <block type="sensebox_display_show"></block>' +
 '      <block type="sensebox_display_clearDisplay"></block>' +
+'      <block type="sensebox_display_plotDisplay"></block>' +
 '      <block type="sensebox_display_printDisplay">' +
 '           <value name="X">' +
 '               <block type="math_number">' +
