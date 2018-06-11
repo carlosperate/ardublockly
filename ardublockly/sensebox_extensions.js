@@ -56,16 +56,10 @@ SenseboxExtension.init = function() {
     var onReady = function() {
       if (request.readyState == 4) {
         if (request.status == 200) {
-          var dataReceived = null;
+          var response = null;
           try {
-            dataReceived = request.responseText;
-            var a = document.createElement('a');
-            document.body.appendChild(a);
-            // var blob = new Blob([dataReceived], {type: 'application/octet-stream'});
-            a.href = "data:application/octet-stream,"+dataReceived;
-            a.download = document.getElementById('sketch_name').value +'.'+window.EXTENSION;
-            a.click();
-            document.body.removeChild(a);
+            response = JSON.parse(request.response);
+            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD);
             Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
           } catch(e) {
             throw e;
