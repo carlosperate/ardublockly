@@ -24,7 +24,7 @@ SenseboxExtension.init = function() {
       element.classList.add('hidden');
     }
     var settings_offline = document.getElementsByClassName('modal_section offline')[0];
-    settings.offline.classList.remove('hidden');
+    settings_offline.classList.remove('hidden');
     var settings_board_online = document.getElementById('board-online');
     settings_board_online.onchange = SenseboxExtension.selectBoard; 
     settings_board_online.value = window.BOARD;
