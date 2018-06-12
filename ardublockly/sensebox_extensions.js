@@ -7,7 +7,7 @@ var SenseboxExtension = SenseboxExtension || {};
 SenseboxExtension.init = function() {
   var location = window.location;
   var urlParams = new URLSearchParams(location.search);
-
+  Ardublockly.loadServerXmlFile('../ardublockly/start.xml');
   if (location.hostname !== 'localhost') {
     //TODO hide all features of running ardublockly locally
   }
