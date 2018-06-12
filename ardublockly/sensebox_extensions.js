@@ -20,7 +20,7 @@ SenseboxExtension.init = function() {
     window.BOARD = 'sensebox';
   }
 
-  if (location.hostname !== 'localhost') {
+  if (location.hostname == 'localhost') {
     //TODO hide all features of running ardublockly locally
     //Hide offline settings
     var settings_online = document.getElementsByClassName('modal_section online');
@@ -101,6 +101,7 @@ SenseboxExtension.changeBoard = function (event) {
 }
 
 SenseboxExtension.populateBoards = function () {
+  $('#boards-online').material_select('destroy');
   var boardsMenu = document.getElementById('boards-online');
   boardsMenu.options.length = 0;
 
@@ -112,4 +113,5 @@ SenseboxExtension.populateBoards = function () {
     boardsMenu.options.add(option);
   }
   boardsMenu.onchange = SenseboxExtension.changeBoard;
+  $('#boards-online').material_select();
 }

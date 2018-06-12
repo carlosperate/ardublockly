@@ -20,7 +20,7 @@ Ardublockly.init = function() {
   Ardublockly.importExtraBlocks();
 
   Ardublockly.designJsInit();
-  // Ardublockly.initialiseIdeButtons();
+  Ardublockly.initialiseIdeButtons();
 
   Ardublockly.bindDesignEventListeners();
   Ardublockly.bindActionFunctions();
