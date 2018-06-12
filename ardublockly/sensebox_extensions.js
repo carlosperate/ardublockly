@@ -27,7 +27,7 @@ SenseboxExtension.init = function() {
     settings_offline.classList.remove('hidden');
     var settings_board_online = document.getElementById('board-online');
     settings_board_online.onchange = SenseboxExtension.selectBoard; 
-    document.getElementById('board-online').value=window.BOARD;
+    document.getElementById('board-online').value='mcu';
   }
 
   //TODO hide old and new blocks depending on selected senseBox version
