@@ -59,7 +59,7 @@ SenseboxExtension.init = function() {
           var response = null;
           try {
             response = JSON.parse(request.response);
-            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD);
+            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
             Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
           } catch(e) {
             throw e;
