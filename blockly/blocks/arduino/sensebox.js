@@ -226,6 +226,26 @@ Blockly.Blocks['sensebox_wifi'] = {
             }
       };
 
+      Blockly.Blocks['sensebox_send_mobile_to_osem'] = {
+        init: function() {
+          this.setTooltip(Blockly.Msg.senseBox_send_mobile_to_osem_tip);
+          this.setHelpUrl('');
+          this.setColour(Blockly.Blocks.sensebox.HUE);
+          this.appendDummyInput()
+              .appendField(Blockly.Msg.senseBox_send_mobile_to_osem);
+          this.appendValueInput('lat', 'Number')
+              .appendField(Blockly.Msg.senseBox_gps_lat);
+          this.appendValueInput('lng', 'Number')
+              .appendField(Blockly.Msg.senseBox_gps_lng);
+          this.appendValueInput('Value')
+              .setCheck(null)
+              .appendField('SensorID')
+              .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+              }
+        };
+
 
 
 /*
