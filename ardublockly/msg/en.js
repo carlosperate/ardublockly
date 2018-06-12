@@ -4,8 +4,9 @@ Ardublockly.LOCALISED_TEXT = {
   title: "Ardublockly",
   blocks: "Blocks",
   /* Menu */
-  open: "Open",
-  save: "Save",
+  open: "open Blocks",
+  save: "save Blocks",
+  saveino: "save .ino",
   deleteAll: "Delete All",
   settings: "Settings",
   documentation: "Documentation",
