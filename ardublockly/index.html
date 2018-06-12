@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="prettify/arduino.css">
   <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
+  <link rel="stylesheet" href="prettify/styles.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
 
   <!-- Ardublockly - These three files contain the compress version -->
   <!-- <script src="../blockly/blockly_compressed.js"></script>
@@ -61,7 +64,49 @@
   <script src="msg/en.js"></script>
 </head>
 
+
+          <!-- Modal -->
+
 <body>
+
+<div class="modal show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    
+         <header>
+
+            <h1 text-align = "center"> Wähle deine senseBox Version</h1>
+            <h1 text-align = "center"> für ArduBlockly</h1>
+
+
+     <div class="header-content">
+        <div class = "container carousel-container background-gradient-products">
+          <div class="row">  
+
+
+            <div class="col-sm-3 blockly-links" align = "center">
+        <img src="/ardublockly/img/Genuino.png" class = "mx-auto" style="height: 100px;" >
+        <div>
+          <a class="btn" href="https://sensebox.github.io/blockly/" target="_blank" role="button">Arduino UNO »</a>
+        </div> 
+
+     </div>
+    
+
+
+            <div class="col-sm-3 blockly-links" align = "center">
+        <img src="/ardublockly/img/mcu_one_top.png" class = "mx-auto" style="height: 100px;">
+        <div>
+          <a class="btn" href="https://blockly.sensebox.de/ardublockly/?lang=de&amp;board=sensebox-mcu" target="_blank" role="button"> senseBox MCU »</a>
+        </div> 
+
+     </div>
+            </div>
+          </div>
+      </div>
+         </header>
+        </div>
+        
+
   <!-- Horizontal Navigation bar -->
   <nav class="nav-fixed sensebox_green">
     <div class="nav-wrapper container">
@@ -202,7 +247,6 @@
       </div>
     </div>
   </div>
-
   <!-- IDE Output content -->
   <div class="ide_output_wrapper">
     <ul class="collapsible ide_output_collapsible" data-collapsible="expandable">
@@ -258,7 +302,6 @@
       <a href="#" class="waves-effect btn-flat modal-close"><span class="translatable_return">Return</span></a>
     </div>
   </div>
-
   <!-- Select Additional Blocks menu -->
   <div id="blocks_menu" class="modal modal-fixed-footer">
     <div class="modal-content">
@@ -314,6 +357,7 @@
     </div>
   </div>
 
+
   <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
   <script src="ardublockly_desktop.js"></script>
   <!-- jQuery and Materialize JS -->
@@ -344,3 +388,7 @@
   </script>
 </body>
 </html>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

@@ -3,8 +3,8 @@
 
 html,
 body {
-    width: 70%;
-    height: 70%;
+    width: 100%;
+    height: 100%;
 }
 
 body {
@@ -24,31 +24,33 @@ body {
   }
 }
 
-.head {
+header {
 
-     animation: 1s ease-out 0s 1 slideInFromLeft;
-    position: absolute;
-   
+    animation: 1s ease-out 0s 1 slideInFromLeft; 
     min-height: auto;
     text-align: center;
     color: #ffff;
     width: 100%;
-    background-image: url('http://www.uni-muenster.de/news/data/img/2016/03/8200-FEm232H4.jpg');
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    -o-background-size: cover;
-    margin-top: 10%;
-    margin-right: 40%
-    margin-left:40%;
-    padding: 19px;
+    height: 100% !important;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
 }
+
+
+.modal{
+
+    max-height: 50% !important;
+}
+
 
 
 
 .header-content{
      
+
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -58,52 +60,5 @@ body {
 
 }
  
-
-
- .button {
-
- 
-    filter: alpha(opacity=50);
-    position: relative;
-    margin: auto;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px ;
-    transition: all 0.5s;
-    cursor: pointer;
-  
-
-}
-    
-        .btn1 {
-
-        opacity: 0.5;
-    filter: alpha(opacity=100);
-    }
-    .btn1:hover{
-
-        opacity: 1.0;
-    filter: alpha(opacity=100);
-    }
-
-
-    .btn2 {
-
-        opacity: 0.7;
-    filter: alpha(opacity=100);
-    }
-    .btn2:hover{
-
-        opacity: 1.0;
-    filter: alpha(opacity=100);
-    }
-.wrapper{
-
-    float:right;
-    text-align: center;
-    align-items: middle;
-
-} 
 
  

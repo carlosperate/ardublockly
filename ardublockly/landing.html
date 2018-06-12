@@ -9,63 +9,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Codeply">
     <link rel="stylesheet" href="prettify/styles.css" />
+    <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
+    <link rel="stylesheet" href="prettify/arduino.css">
+    <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
   </head>
   <body>
 
 
-    <header>
+ 
+          <!-- Modal -->
+  <div class="modal show" id="myModal" role="dialog">
+
+    
+         <header>
+
+            <h1 text-align = "center"> Wähle deine senseBox Version</h1>
+            <h1 text-align = "center"> für ArduBlockly</h1>
 
 
-        <div class = "head">
-
-          <h1>Wähle deine Version</h1>
      <div class="header-content">
+        <div class = "container">
+          <div class="row">  
 
 
-    <div class = "wrapper">    
+            <div class="col-sm-3 blockly-links" align = "center">
+        <img src="/ardublockly/img/Genuino.png" class = "mx-auto" style="height: 100px;" >
+        <div>
+          <a class="btn" href="https://sensebox.github.io/blockly/" target="_blank" role="button">Arduino/Genuino UNO »</a>
+        </div> 
 
-        <div class="button ">  
+     </div>
+    
 
 
-             <div class = "btn1">   
-        <a  id = "Btn1" > 
-          <img src="/ardublockly/img/Genuino.png" title = "SenseBox v1" style="max-width:40%" />
-        </a> 
-  
-               </div>
-               <div class  ="btn2"> 
-         <a  id = "Btn2" >
-           <img src="/ardublockly/img/mcu_one_top.png" title = "SenseBox v2" style="max-width:40%"   />
-        </a> 
+            <div class="col-sm-3 blockly-links" align = "center">
+        <img src="/ardublockly/img/mcu_one_top.png" class = "mx-auto" style="height: 100px;">
+        <div>
+          <a class="btn" href="https://blockly.sensebox.de/ardublockly/?lang=de&amp;board=sensebox-mcu" target="_blank" role="button"> senseBox MCU »</a>
+        </div> 
+
+     </div>
             </div>
-         </div>
-    </div>
-   
-    </div>
+          </div>
+      </div>
+         </header>
 
-       </div>
+        </div>
+        
 
-   </header>
 
-  
 
-    <script type="text/javascript">
-    document.getElementById("Btn1").onclick = function () {
-        location.href = "https://sensebox.github.io/blockly/";
-    };
-</script>
-<script type="text/javascript">
-document.getElementById("Btn2").onclick = function () {
-    location.href = "https://sensebox.github.io/blockly/";
-};
-</script>
+
+
     <!--scripts loaded here -->
 
-  <!--  <script src="../blockly/jquery.min.js"></script> -->
-    <script src="../blockly/bootstrap.min.js"></script>
 
 
   </body>
 </html>
 
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+
+
+
+  <!-- Trigger the modal with a button -->
+
+
+  
 
