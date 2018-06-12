@@ -555,6 +555,7 @@ Blockly.Msg.senseBox_gps_getValues = "get Value from GPS";
 Blockly.Msg.senseBox_gps_getValues_tip = "gets the specific Value from the GPS Sensor";
 Blockly.Msg.senseBox_gps_lat = "latitude";
 Blockly.Msg.senseBox_gps_lng = "longitude";
+Blockly.Msg.senseBox_gps_speed = "speed";
 Blockly.Msg.senseBox_hum  = "humidity";
 Blockly.Msg.senseBox_hum_tip  = "Measures humidity in %";
 Blockly.Msg.senseBox_ir  = "infrared distance sensor";

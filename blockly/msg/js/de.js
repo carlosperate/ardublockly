@@ -617,6 +617,7 @@ Blockly.Msg.senseBox_gps_getValues_tip =  "ruft das GPS Signal ab";
 Blockly.Msg.senseBox_gps_lat = "Breitengrad";
 Blockly.Msg.senseBox_gps_lng =  "Längengrad";
 Blockly.Msg.senseBox_gps_alt = "Höhe";
+Blockly.Msg.senseBox_gps_speed = "Geschwindigkeit";
 Blockly.Msg.senseBox_send_mobile_to_osem = "sende Messwert und Standort"; 
 Blockly.Msg.senseBox_send_mobile_to_osem_tip = "sende Messwert und Standort an die openSenseMap";
 

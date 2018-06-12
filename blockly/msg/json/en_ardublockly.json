@@ -224,6 +224,7 @@
 "senseBox_gps_lat": "latitude",
 "senseBox_gps_lng": "longitude",
 "senseBox_gps_alt": "altitude",
+"senseBox_gps_speed": "speed",
 "senseBox_send_mobile_to_osem": "send Value and Location",
 "senseBox_send_mobile_to_osem_tip":"send Value and Location to openSenseMap"
 }
