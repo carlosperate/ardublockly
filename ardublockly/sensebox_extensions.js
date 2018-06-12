@@ -20,7 +20,7 @@ SenseboxExtension.init = function() {
     window.BOARD = 'sensebox';
   }
 
-  if (location.hostname == 'localhost') {
+  if (location.hostname !== 'localhost') {
     //TODO hide all features of running ardublockly locally
     //Hide offline settings
     var settings_online = document.getElementsByClassName('modal_section online');
