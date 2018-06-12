@@ -216,12 +216,5 @@
 "senseBox_display_plotYRange ": "Y-Range",
 "senseBox_display_plotXTick ": "X-Tick",
 "senseBox_display_plotYTick ": "Y-Tick",
-"senseBox_display_plotTimeFrame": "TimeFrame",
-"senseBox_gps_begin": "initialize GPS",
-"senseBox_gps_begin_tip": "initialize GPS Sensor",
-"senseBox_gps_getValues": "get Value from GPS",
-"senseBox_gps_getValues_tip": "gets the specific Value from the GPS Sensor",
-"senseBox_gps_lat": "latitude",
-"senseBox_gps_lng": "longitude",
-"senseBox_gps_alt": "altitude"
+"senseBox_display_plotTimeFrame": "TimeFrame"
 }
