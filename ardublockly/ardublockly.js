@@ -343,25 +343,25 @@ Ardublockly.saveTextFileAs = function(fileName, content) {
  * and opens the Settings modal dialog.
  */
 Ardublockly.openSettings = function() {
-  // ArdublocklyServer.requestCompilerLocation(function(jsonObj) {
-  //   Ardublockly.setCompilerLocationHtml(
-  //       ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
-  // });
-  // ArdublocklyServer.requestSketchLocation(function(jsonObj) {
-  //   Ardublockly.setSketchLocationHtml(
-  //       ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
-  // });
-  // ArdublocklyServer.requestArduinoBoards(function(jsonObj) {
-  //   Ardublockly.setArduinoBoardsHtml(
-  //       ArdublocklyServer.jsonToHtmlDropdown(jsonObj));
-  // });
-  // ArdublocklyServer.requestSerialPorts(function(jsonObj) {
-  //   Ardublockly.setSerialPortsHtml(
-  //       ArdublocklyServer.jsonToHtmlDropdown(jsonObj));
-  // });
-  // ArdublocklyServer.requestIdeOptions(function(jsonObj) {
-  //   Ardublockly.setIdeHtml(ArdublocklyServer.jsonToHtmlDropdown(jsonObj));
-  // });
+  ArdublocklyServer.requestCompilerLocation(function(jsonObj) {
+    Ardublockly.setCompilerLocationHtml(
+        ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
+  });
+  ArdublocklyServer.requestSketchLocation(function(jsonObj) {
+    Ardublockly.setSketchLocationHtml(
+        ArdublocklyServer.jsonToHtmlTextInput(jsonObj));
+  });
+  ArdublocklyServer.requestArduinoBoards(function(jsonObj) {
+    Ardublockly.setArduinoBoardsHtml(
+        ArdublocklyServer.jsonToHtmlDropdown(jsonObj));
+  });
+  ArdublocklyServer.requestSerialPorts(function(jsonObj) {
+    Ardublockly.setSerialPortsHtml(
+        ArdublocklyServer.jsonToHtmlDropdown(jsonObj));
+  });
+  ArdublocklyServer.requestIdeOptions(function(jsonObj) {
+    Ardublockly.setIdeHtml(ArdublocklyServer.jsonToHtmlDropdown(jsonObj));
+  });
   // Language menu only set on page load within Ardublockly.initLanguage()
   Ardublockly.openSettingsModal();
 };
