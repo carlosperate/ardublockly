@@ -25,7 +25,6 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_foto"></block>' +
 '      <block type="sensebox_button"></block>' +
 '      <block type="sensebox_poti"></block>' +
-'      <block type="sensebox_gps_begin"></block>' +
 '      <block type="sensebox_gps_getValues"></block>' +
 '   </category>' +
 '      <category id="catsenseBoxDisplay" name="senseBox display" colour="120">' +  

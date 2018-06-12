@@ -63,9 +63,9 @@ Blockly.Arduino.sensebox_sensor_sds011 = function(){
   var serial_name = this.getFieldValue('SERIAL');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
   Blockly.Arduino.userFunctions_['define_sds011'] = 'SDS011 my_sds('+serial_name+');';
-  Blockly.Arduino.variables_['variables_sds011'] = 'float p10,p25;\n int error;';
+  Blockly.Arduino.variables_['variables_sds011'] = 'float p10,p25;\n';
   Blockly.Arduino.setups_['sensebox_sensor_sds011'] = serial_name+'.begin();';
-  var code = serial_name+'.get'+dropdown_name+'()';
+  var code = 'my_sds.get'+dropdown_name+'()';
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -307,16 +307,10 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
 
       //--GPS--//
 
-      Blockly.Arduino.sensebox_gps_begin = function() {
-        Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-        Blockly.Arduino.userFunctions_['define_gps'] = 'GPS gps;';
-        Blockly.Arduino.variables_['define_gps_variables'] = 'float lat;\nfloat lng;\nfloat alt;'
-        Blockly.Arduino.setups_['sensebox_gps_begin'] = 'gps.begin();';
-        var code = '';
-        return code;
-        };
-
         Blockly.Arduino.sensebox_gps_getValues = function(){
+          Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+          Blockly.Arduino.userFunctions_['define_gps'] = 'GPS gps;';
+          Blockly.Arduino.setups_['sensebox_gps_begin'] = 'gps.begin();';
           var dropdown_name = this.getFieldValue("Values");
           var code = 'gps.get'+dropdown_name+'()';
           return [code ,Blockly.Arduino.ORDER_ATOMIC];

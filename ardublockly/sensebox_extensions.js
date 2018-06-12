@@ -3,6 +3,11 @@
 /** Create a namespace for the application. */
 var SenseboxExtension = SenseboxExtension || {};
 
+SenseboxExtension.SUPPORTED_BOARDS = {
+  'sensebox': 'Arduino/Genuino UNO',
+  'sensebox-mcu': 'senseBox MCU'
+};
+
 /** Initialize function for senseBox extensions, to be called on page load. */
 SenseboxExtension.init = function() {
   var location = window.location;
@@ -25,9 +30,7 @@ SenseboxExtension.init = function() {
     }
     var settings_offline = document.getElementsByClassName('modal_section offline')[0];
     settings_offline.classList.remove('hidden');
-    var settings_board_online = document.getElementById('board-online');
-    settings_board_online.onchange = SenseboxExtension.selectBoard; 
-    settings_board_online.value = window.BOARD;
+    SenseboxExtension.populateBoards();
   }
 
   //TODO hide old and new blocks depending on selected senseBox version
@@ -93,6 +96,22 @@ SenseboxExtension.init = function() {
   });
 };
 
-SenseboxExtension.selectBoard = function (event) {
+SenseboxExtension.changeBoard = function (event) {
   window.BOARD = event.target.value;
+}
+
+SenseboxExtension.populateBoards = function () {
+  $('#boards-online').material_select('destroy');
+  var boardsMenu = document.getElementById('boards-online');
+  boardsMenu.options.length = 0;
+
+  for (var board in SenseboxExtension.SUPPORTED_BOARDS) {
+    var option = new Option(SenseboxExtension.SUPPORTED_BOARDS[board], board);
+    if (board == window.BOARD) {
+      option.selected = true;
+    }
+    boardsMenu.options.add(option);
+  }
+  boardsMenu.onchange = SenseboxExtension.changeBoard;
+  $('#boards-online').material_select();
 }
