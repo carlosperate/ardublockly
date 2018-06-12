@@ -166,6 +166,8 @@
 "senseBox_temp_hum_tip ": "Sensor measuring temperature and humidity",
 "senseBox_ultrasonic ": "ultrasonic distance sensor",
 "senseBox_ultrasonic_tip ": "ultrasonic distance sensor",
+"senseBox_ultrasonic_echo": "Echo",
+"senseBox_ultrasonic_trigger":"Trigger",
 "senseBox_value ": "value:",
 "senseBox_uv_light ": "UV-light/light Sensor",
 "senseBox_uv_light_tip ": "Sensor measuring the UV-light and the illuminance",

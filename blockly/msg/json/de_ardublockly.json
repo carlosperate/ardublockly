@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "mariopesch",
-		"lastupdated": "2018-06-07",
+		"lastupdated": "2018-06-12",
 		"locale": "de",
 		"messagedocumentation" : "qqq_ardublockly"
 	
@@ -509,6 +509,8 @@
 "senseBox_temp_hum_tip ": "Sensor misst Temperatur und Luftfeuchtigkeit",
 "senseBox_ultrasonic ": "Ultraschall Abstandssensor",
 "senseBox_ultrasonic_tip ": "Ultraschall Abstandssensor",
+"senseBox_ultrasonic_echo": "Echo",
+"senseBox_ultrasonic_trigger":"Trigger",
 "senseBox_uv ": "UV-Licht Sensor",
 "senseBox_light ": "Licht Sensor",
 "senseBox_value ": "Messwert:",

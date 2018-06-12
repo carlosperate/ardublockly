@@ -133,9 +133,9 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
     this.appendDummyInput()
 	      .appendField(Blockly.Msg.senseBox_ultrasonic)
     this.appendDummyInput()
-        .appendField("PIN_RX:")
+        .appendField(Blockly.Msg.senseBox_ultrasonic_echo)
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_RX")
-        .appendField("PIN_TX:")
+        .appendField(Blockly.Msg.senseBox_ultrasonic_trigger)
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_TX")
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.senseBox_ultrasonic_tip);
