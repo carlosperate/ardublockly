@@ -23,7 +23,7 @@ SenseboxExtension.init = function() {
       const element = settings_online[index];
       element.classList.add('hidden');
     }
-    var settings_offline = document.getElementsByClassName('modal_section offline');
+    var settings_offline = document.getElementsByClassName('modal_section offline')[0];
     settings.offline.classList.remove('hidden');
     var settings_board_online = document.getElementById('board-online');
     settings_board_online.onchange = SenseboxExtension.selectBoard; 
