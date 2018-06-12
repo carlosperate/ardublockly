@@ -3,6 +3,11 @@
 /** Create a namespace for the application. */
 var SenseboxExtension = SenseboxExtension || {};
 
+SenseboxExtension.SUPPORTED_BOARDS = {
+  'sensebox': 'Arduino/Genuino UNO',
+  'sensebox-mcu': 'senseBox MCU'
+};
+
 /** Initialize function for senseBox extensions, to be called on page load. */
 SenseboxExtension.init = function() {
   var location = window.location;
@@ -25,9 +30,7 @@ SenseboxExtension.init = function() {
     }
     var settings_offline = document.getElementsByClassName('modal_section offline')[0];
     settings_offline.classList.remove('hidden');
-    var settings_board_online = document.getElementById('board-online');
-    settings_board_online.onchange = SenseboxExtension.selectBoard; 
-    document.getElementById('board-online').value='mcu';
+    SenseboxExtension.populateBoards();
   }
 
   //TODO hide old and new blocks depending on selected senseBox version
@@ -71,7 +74,7 @@ SenseboxExtension.init = function() {
           var response = null;
           try {
             response = JSON.parse(request.response);
-            window.open('http://localhost:3000/download?id='+response.data.id+'&board='+window.BOARD, '_self');
+            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
             Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
           } catch(e) {
             throw e;
@@ -82,7 +85,7 @@ SenseboxExtension.init = function() {
       }
     };
     try {
-      request.open('POST', 'http://localhost:3000/compile', true);
+      request.open('POST', 'https://compiler.sensebox.de/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
       request.send(JSON.stringify(data));
@@ -93,6 +96,20 @@ SenseboxExtension.init = function() {
   });
 };
 
-SenseboxExtension.selectBoard = function (event) {
+SenseboxExtension.changeBoard = function (event) {
   window.BOARD = event.target.value;
+}
+
+SenseboxExtension.populateBoards = function () {
+  var boardsMenu = document.getElementById('boards-online');
+  boardsMenu.options.length = 0;
+
+  for (var board in SenseboxExtension.SUPPORTED_BOARDS) {
+    var option = new Option(SenseboxExtension.SUPPORTED_BOARDS[board], board);
+    if (board == window.BOARD) {
+      option.selected = true;
+    }
+    boardsMenu.options.add(option);
+  }
+  boardsMenu.onchange = SenseboxExtension.changeBoard;
 }
