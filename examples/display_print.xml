@@ -1,0 +1,36 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="cDDOn+Cd14pY=)8iy5Oi" x="159" y="100">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_display_beginDisplay" id="!w;wG_4=@kMn~T@T?8-#"></block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="sensebox_display_show" id="8#%CFWhx3OE/#@JBO{,t">
+        <statement name="SHOW">
+          <block type="sensebox_display_printDisplay" id="imkhY}k0N-DXe2]ro8?,">
+            <field name="COLOR">WHITE,BLACK</field>
+            <value name="SIZE">
+              <block type="math_number" id="vAeb,%7y|?a4%Hi|lPf1">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="X">
+              <block type="math_number" id="U+kFv(!xA+h]~m2)y3g]">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="Y">
+              <block type="math_number" id="SoVhkN39fCP-yR4/T-ys">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="printDisplay">
+              <block type="text" id="AK^*=Y!,G8pIS7c8zMi=">
+                <field name="TEXT"></field>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -300,12 +300,13 @@ Ardublockly.materialAlert = function(title, body, confirm, callback) {
 
 /** Opens the modal that displays the "not connected to server" message. */
 Ardublockly.openNotConnectedModal = function() {
-  $('#not_running_dialog').openModal({
+  /*$('#not_running_dialog').openModal({
     dismissible: true,
     opacity: .5,
     in_duration: 200,
     out_duration: 250
   });
+};*/
 };
 
 /** Opens the modal that displays the Settings. */
@@ -516,3 +517,4 @@ Ardublockly.getBBox_ = function(element) {
     y: y
   };
 };
+

@@ -4,8 +4,9 @@ Ardublockly.LOCALISED_TEXT = {
   title: "Ardublockly",
   blocks: "Blocks",
   /* Menu */
-  open: "Open",
-  save: "Save",
+  open: "Open Blocks",
+  save: "Save Blocks",
+  save_ino: "Save Sketch",
   deleteAll: "Delete All",
   settings: "Settings",
   documentation: "Documentation",
@@ -91,6 +92,9 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoSourceCode: "Arduino Source Code",
   blocksXml: "Blocks XML",
   /* Toolbox Categories*/
+  catSenseBox_Sensor:"senseBox sensors",
+  catSenseBox_Output:"senseBox output",
+  catsenseBoxDisplay:"senseBox display",
   catLogic: "Logic",
   catLoops: "Loops",
   catMath: "Math",
@@ -102,4 +106,8 @@ Ardublockly.LOCALISED_TEXT = {
   catAudio: "Audio",
   catMotors: "Motors",
   catComms: "Comms",
+  code_copied: "Code was copied",
+  save_to_clipboard: "Copy to clipboard",
+  compile_sketch: "Compile sketch",
+  sketch_compiled: "Sketch was compiled"
 };
