@@ -71,7 +71,7 @@ SenseboxExtension.init = function() {
           var response = null;
           try {
             response = JSON.parse(request.response);
-            window.open('http://localhost:3000/download?id='+response.data.id+'&board='+window.BOARD, '_self');
+            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
             Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
           } catch(e) {
             throw e;
@@ -82,7 +82,7 @@ SenseboxExtension.init = function() {
       }
     };
     try {
-      request.open('POST', 'http://localhost:3000/compile', true);
+      request.open('POST', 'https://compiler.sensebox.de/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
       request.send(JSON.stringify(data));
