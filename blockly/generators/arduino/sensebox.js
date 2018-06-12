@@ -304,3 +304,20 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
         code += 'DataPlot.addDataPoint(t,value);\n}\n';
         return code;
       };
+
+      //--GPS--//
+
+      Blockly.Arduino.sensebox_gps_begin = function() {
+        Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+        Blockly.Arduino.userFunctions_['define_gps'] = 'GPS gps;';
+        Blockly.Arduino.variables_['define_gps_variables'] = 'float lat;\nfloat lng;\nfloat alt;'
+        Blockly.Arduino.setups_['sensebox_gps_begin'] = 'gps.begin();';
+        var code = '';
+        return code;
+        };
+
+        Blockly.Arduino.sensebox_gps_getValues = function(){
+          var dropdown_name = this.getFieldValue("Values");
+          var code = 'gps.get'+dropdown_name+'()';
+          return [code ,Blockly.Arduino.ORDER_ATOMIC];
+        };

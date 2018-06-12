@@ -476,3 +476,31 @@ Blockly.Blocks['sensebox_display_show'] = {
     this.setNextStatement(true, null);
         }
   };
+
+  //---GPS---//
+
+  Blockly.Blocks['sensebox_gps_begin'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.senseBox_gps_begin)
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+      this.setColour(Blockly.Blocks.sensebox.HUE);
+      this.setTooltip(Blockly.Msg.senseBox_gps_begin_tip);
+      this.setHelpUrl('https://sensebox.de/books');
+    }
+  };
+
+  Blockly.Blocks['sensebox_gps_getValues'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.senseBox_gps_getValues);
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_gps_lat,"Latitude"], [Blockly.Msg.senseBox_gps_lng,"Longitude"], [Blockly.Msg.senseBox_gps_alt,"Altitude"]]), "Values");
+      this.setOutput(true, "Number");
+      this.setColour(Blockly.Blocks.sensebox.HUE);
+      this.setTooltip(Blockly.Msg.senseBox_gps_getValues_tip);
+      this.setHelpUrl('https://edu.books.sensebox.de/de/');
+    }
+  };
