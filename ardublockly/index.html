@@ -224,36 +224,46 @@
   <div id="settings_dialog" class="modal modal-fixed-footer">
     <div class="modal-content">
       <h4><span class="translatable_settings">Settings</span></h4>
-      <div class="modal_section">
+      <div class="modal_section online">
         <label><span class="translatable_compilerLocation">Compiler Location</span>:</label>
         <input type="text" id="settings_compiler_location">
       </div>
-      <div class="modal_section">
+      <div class="modal_section online">
         <label><span class="translatable_sketchFolder">Sketch Folder</span>:</label>
         <input type="text" id="settings_sketch_location">
       </div>
-      <div class="modal_section">
+      <div class="modal_section online">
         <label><span class="translatable_arduinoBoard">Arduino Board</span>:</label>
         <select name="settings_board" id="board">
           <option value="uno" class="translatable_arduinoBoardDefault">Arduino Board unknown</option>
         </select>
       </div>
-      <div class="modal_section">
+      <div class="modal_section online">
         <label><span class="translatable_comPort">COM Port<span>:</label>
         <select name="settings_serial" id="serial_port">
           <option value="COMX" class="translatable_comPortDefault">COM Port unknown</option>
         </select>
       </div>
-      <div class="modal_section">
+      <div class="modal_section online">
         <label><span class="translatable_defaultIdeButton">Default IDE button</span>:</label>
         <select name="settings_ide" id="ide_settings">
           <option value="verify" class="translatable_defaultIdeButtonDefault">IDE options unknown</option>
+        </select>
+      </div>
+      <div class="modal_section offline hidden">
+        <label><span class="translatable_arduinoBoard">Arduino Board</span>:</label>
+        <select name="settings_board" id="board-online">
+          <option value="sensebox" class="translatable_arduinoBoardDefault">Arduino/Genuino UNO</option>
+          <option value="sensebox-mcu" class="translatable_arduinoBoardDefault">senseBox MCU</option>
         </select>
       </div>
       <div class="modal_section">
         <label><span class="translatable_language">Language</span>:</label>
         <select name="settings_language" id="language"></select>
       </div>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="waves-effect btn-flat modal-close"><span class="translatable_return">Return</span></a>
     </div>
     <div class="modal-footer">
       <a href="#" class="waves-effect btn-flat modal-close"><span class="translatable_return">Return</span></a>

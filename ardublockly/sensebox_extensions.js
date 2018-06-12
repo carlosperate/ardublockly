@@ -8,14 +8,26 @@ SenseboxExtension.init = function() {
   var location = window.location;
   var urlParams = new URLSearchParams(location.search);
   Ardublockly.loadServerXmlFile('../ardublockly/start.xml');
-  if (location.hostname !== 'localhost') {
-    //TODO hide all features of running ardublockly locally
-  }
 
   if (urlParams.has('board')) {
     window.BOARD = urlParams.get('board');
   } else {
     window.BOARD = 'sensebox';
+  }
+
+  if (location.hostname !== 'localhost') {
+    //TODO hide all features of running ardublockly locally
+    //Hide offline settings
+    var settings_online = document.getElementsByClassName('modal_section online');
+    for (let index = 0; index < settings_online.length; index++) {
+      const element = settings_online[index];
+      element.classList.add('hidden');
+    }
+    var settings_offline = document.getElementsByClassName('modal_section offline');
+    settings.offline.classList.remove('hidden');
+    var settings_board_online = document.getElementById('board-online');
+    settings_board_online.onchange = SenseboxExtension.selectBoard; 
+    settings_board_online.value = window.BOARD;
   }
 
   //TODO hide old and new blocks depending on selected senseBox version
@@ -59,7 +71,7 @@ SenseboxExtension.init = function() {
           var response = null;
           try {
             response = JSON.parse(request.response);
-            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
+            window.open('http://localhost:3000/download?id='+response.data.id+'&board='+window.BOARD, '_self');
             Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
           } catch(e) {
             throw e;
@@ -70,7 +82,7 @@ SenseboxExtension.init = function() {
       }
     };
     try {
-      request.open('POST', 'https://compiler.sensebox.de/compile', true);
+      request.open('POST', 'http://localhost:3000/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
       request.send(JSON.stringify(data));
@@ -80,3 +92,7 @@ SenseboxExtension.init = function() {
     }
   });
 };
+
+SenseboxExtension.selectBoard = function (event) {
+  window.BOARD = event.target.value;
+}
