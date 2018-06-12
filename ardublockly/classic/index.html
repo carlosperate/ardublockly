@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google" value="notranslate">
+  <link rel="icon" href="../img/favicon.ico">
+  <title>Ardublockly: Arduino Code</title>
+  <link rel="stylesheet" href="ardublockly_classic.css">
+  <!-- Ardublockly - For now uncompressed files -->
+  <!--script src="../../blockly/blockly_compressed.js"></script-->
+  <script src="../../blockly/blockly_uncompressed.js"></script>
+  <!--script src="../../blockly/blocks_compressed.js"></script-->
+  <script src="../../blockly/generators/arduino.js"></script>
+  <script src="../../blockly/blocks/arduino/io.js"></script>
+  <script src="../../blockly/blocks/arduino/map.js"></script>
+  <script src="../../blockly/blocks/arduino/serial.js"></script>
+  <script src="../../blockly/blocks/arduino/servo.js"></script>
+  <script src="../../blockly/blocks/arduino/spi.js"></script>
+  <script src="../../blockly/blocks/arduino/stepper.js"></script>
+  <script src="../../blockly/blocks/arduino/time.js"></script>
+  <script src="../../blockly/blocks/arduino/variables.js"></script>
+  <script src="../../blockly/blocks/logic.js"></script>
+  <script src="../../blockly/blocks/loops.js"></script>
+  <script src="../../blockly/blocks/math.js"></script>
+  <script src="../../blockly/blocks/text.js"></script>
+  <script src="../../blockly/blocks/lists.js"></script>
+  <script src="../../blockly/blocks/colour.js"></script>
+  <script src="../../blockly/blocks/variables.js"></script>
+  <script src="../../blockly/blocks/procedures.js"></script>
+  <script src="../../blockly/generators/arduino/io.js"></script>
+  <script src="../../blockly/generators/arduino/lists.js"></script>
+  <script src="../../blockly/generators/arduino/logic.js"></script>
+  <script src="../../blockly/generators/arduino/loops.js"></script>
+  <script src="../../blockly/generators/arduino/map.js"></script>
+  <script src="../../blockly/generators/arduino/math.js"></script>
+  <script src="../../blockly/generators/arduino/procedures.js"></script>
+  <script src="../../blockly/generators/arduino/serial.js"></script>
+  <script src="../../blockly/generators/arduino/servo.js"></script>
+  <script src="../../blockly/generators/arduino/spi.js"></script>
+  <script src="../../blockly/generators/arduino/stepper.js"></script>
+  <script src="../../blockly/generators/arduino/text.js"></script>
+  <script src="../../blockly/generators/arduino/time.js"></script>
+  <script src="../../blockly/generators/arduino/variables.js"></script>
+  <!-- Load Blockly's language strings -->
+  <script src="../../blockly/msg/js/en.js"></script>
+  <!-- Prettify -->
+  <link rel="stylesheet" href="../../blockly/demos/prettify.css">
+  <script src="../../blockly/demos/prettify.js"></script>
+  <!-- FileSaver from arduino materia app -->
+  <script src="../js_libs/FileSaver.min.js"></script>
+</head>
+
+<body>
+  <div class="table_wrapper">
+    <table>
+      <tr>
+        <td colspan=2>
+          <table width="100%">
+            <tr id="tabRow" height="1em">
+              <td id="tab_blocks" class="tabon">Blocks</td>
+              <td class="tabmin">&nbsp;</td>
+              <td id="tab_arduino" class="taboff">Arduino</td>
+              <td class="tabmin">&nbsp;</td>
+              <td id="tab_xml" class="taboff">XML</td>
+              <td class="tabmax">
+                <button id="peek_code" class="button_text" title="Toggle the code view on the side">
+                  Code peek <img src="../../blockly/media/1x1.gif">
+                </button>
+                <button id="openButton" title="Load blocks">
+                  <img src="../../blockly/media/1x1.gif" class="icon21 load">
+                </button>
+                <button id="saveButton" title="Save blocks">
+                  <img src="../../blockly/media/1x1.gif" class="icon21 save">
+                </button>
+                <button id="trashButton" title="Discard all blocks">
+                  <img src="../../blockly/media/1x1.gif" class="icon21 trash">
+                </button>
+                <button id="settingsButton" title="Open the Settings">
+                  <img src="../../blockly/media/1x1.gif" class="icon21 settings">
+                </button>
+                <button id="runButton" class="primary" title="Run the program defined by the blocks in the workspace">
+                  <img src='../../blockly/media/1x1.gif' class="icon21 run">
+                </button>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="td_wrapper">
+          <div id="content_wrapper" class="content_wrapper">
+            <div id="content_blocks" class="content content_blocks"></div>
+            <div id="side_content" class="side_content">
+              <div id="arduino_code_peek" class="arduino_code_peek">
+                <pre id="arduino_pre" class="arduino_pre">
+                  <!--code id="arduino_code" class="language-arduino">code goes here</code-->
+                </pre>
+              </div>
+            </div>
+            <pre id="content_arduino" class="content content_arduino"></pre>
+            <textarea id="content_xml" class="content content_xml" wrap="off"></textarea>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <input type="checkbox" id="modal_toggle" />
+  <div class="modal">
+    <div id="modal_content"></div>
+    <p>
+      <button onclick="document.getElementById('modal_toggle').checked=false" class="primary">
+        Okay
+      </button>
+    <p>
+  </div>
+
+  <!-- Arduino Server Compiler -->
+  <script src="../ardublocklyserver_ajax.js"></script>
+  <!-- Webapp js -->
+  <script src="ardublockly_classic.js"></script>
+</body>
+</html>

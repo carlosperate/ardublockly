@@ -1,0 +1,49 @@
+/* General HTML */
+html {
+  height: 100%;
+}
+body {
+  background-color: #fff;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 100%;
+}
+h1 {
+  font-weight: normal;
+  font-size: 140%;
+  margin: 0px;
+}
+select,
+input {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+/* Table */
+.settings_wrapper {
+  height: -moz-calc(100% - 40px);
+  width: -moz-calc(100% - 40px);
+  /* WebKit */
+  height: -webkit-calc(100% - 40px);
+  width: -webkit-calc(100% - 40px);
+  /* Opera */
+  height: -o-calc(100% - 40px);
+  width: -o-calc(100% - 40px);
+  /* Standard */
+  height: calc(100% - 40px);
+  width: calc(100% - 40px);
+  padding: 20px;
+}
+
+.settings_div {
+  margin: 24px 0px;
+  width: 100%;
+}
+
+.settings_div input,
+.settings_div select {
+  width: 100%;
+}
