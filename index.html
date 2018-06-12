@@ -1,27 +1,71 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>senseBox Blockly</title>
-  <link rel="stylesheet" href="https://unpkg.com/normalizecss@3.0.0/normalize.css">
-  <style>
-    body {
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-  <h1>Herzlich Willkomen bei blockly für senseBox</h1>
-  <h3>Bitte wähle dein senseBox Model</h3>
-  <div>
-    <div>
-      <a href="/ardublockly/?board=sensebox">senseBox Arduino/Genuino Uno</a>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ArduBlockly</title>
+    <meta name="description" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Codeply">
+    <link rel="stylesheet" href="ardublockly/prettify/styles.css" />
+  </head>
+  <body>
+
+
+    <header>
+
+
+        <div class = "head">
+
+          <h1>Wähle deine Version</h1>
+     <div class="header-content">
+
+
+    <div class = "wrapper">    
+
+        <div class="button ">  
+
+
+             <div class = "btn1">   
+        <a  id = "Btn1" > 
+          <img src="/ardublockly/img/Genuino.png" title = "SenseBox v1" style="max-width:40%" />
+        </a> 
+  
+               </div>
+               <div class  ="btn2"> 
+         <a  id = "Btn2" >
+           <img src="/ardublockly/img/mcu_one_top.png" title = "SenseBox v2" style="max-width:40%"   />
+        </a> 
+            </div>
+         </div>
     </div>
-    <div>
-      <a href="/ardublockly/?board=sensebox-mcu">senseBox MCU</a>
+   
     </div>
-  </div>
-</body>
+
+       </div>
+
+   </header>
+
+  
+
+    <script type="text/javascript">
+    document.getElementById("Btn1").onclick = function () {
+        location.href = "https://sensebox.github.io/blockly/";
+    };
+</script>
+<script type="text/javascript">
+document.getElementById("Btn2").onclick = function () {
+    location.href = "https://sensebox.github.io/blockly/";
+};
+</script>
+    <!--scripts loaded here -->
+
+  <!--  <script src="../blockly/jquery.min.js"></script> -->
+    <script src="blockly/bootstrap.min.js"></script>
+
+
+  </body>
 </html>
+
+
