@@ -133,9 +133,9 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
     this.appendDummyInput()
 	      .appendField(Blockly.Msg.senseBox_ultrasonic)
     this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_ultrasonic_echo)
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_RX")
         .appendField(Blockly.Msg.senseBox_ultrasonic_trigger)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_RX")
+        .appendField(Blockly.Msg.senseBox_ultrasonic_echo)
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_TX")
     this.setOutput(true, 'Number');
     this.setTooltip(Blockly.Msg.senseBox_ultrasonic_tip);
@@ -524,3 +524,21 @@ Blockly.Blocks['sensebox_display_show'] = {
       this.setHelpUrl('https://edu.books.sensebox.de/de/');
     }
   };
+
+  Blockly.Blocks['sensebox_interval_timer'] = {
+    init: function() {
+      this.setTooltip(Blockly.Msg.senseBox_interval_timer_tip);
+      this.setHelpUrl('');
+      this.setColour(Blockly.Blocks.sensebox.HUE);
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.senseBox_interval_timer);
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_LEFT)
+          .appendField(Blockly.Msg.senseBox_interval)
+          .appendField(new Blockly.FieldTextInput("time"), "interval");
+      this.appendStatementInput('DO')
+          .setCheck(null);
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+          }
+    };

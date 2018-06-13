@@ -226,5 +226,8 @@
 "senseBox_gps_alt": "altitude",
 "senseBox_gps_speed": "speed",
 "senseBox_send_mobile_to_osem": "send Value and Location",
-"senseBox_send_mobile_to_osem_tip":"send Value and Location to openSenseMap"
+"senseBox_send_mobile_to_osem_tip":"send Value and Location to openSenseMap",
+"senseBox_interval_timer": "measuring interval",
+"senseBox_interval" : "in ms",
+"senseBox_interval_timer_tip": "Setup an Intervall"
 }

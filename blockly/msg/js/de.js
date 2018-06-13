@@ -620,4 +620,6 @@ Blockly.Msg.senseBox_gps_alt = "Höhe";
 Blockly.Msg.senseBox_gps_speed = "Geschwindigkeit";
 Blockly.Msg.senseBox_send_mobile_to_osem = "sende Messwert und Standort"; 
 Blockly.Msg.senseBox_send_mobile_to_osem_tip = "sende Messwert und Standort an die openSenseMap";
-
+Blockly.Msg.senseBox_interval_timer = "Messintervall";
+Blockly.Msg.senseBox_interval = "in (ms)"
+Blockly.Msg.senseBox_interval_timer_tip = "Intervall";

@@ -78,6 +78,7 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_osem_connection"></block>'+
 '      <block type="sensebox_send_to_osem"></block>'+
 '      <block type="sensebox_send_mobile_to_osem"></block>'+
+'      <block type="sensebox_interval_timer"></block>'+
 '</category>' +
 '  <sep></sep>' +
 '    <sep></sep>' +
