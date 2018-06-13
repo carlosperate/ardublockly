@@ -5,13 +5,7 @@ html,
 body {
     width: 100%;
     height: 100%;
- 
-
-}
-
-body {
-
- 
+    font-family: BrixSlab-Bold !important;
     color: #d3d3d3;
     webkit-tap-highlight-color: #222;
 }
@@ -26,21 +20,31 @@ body {
   }
 }
 
-header {
-    font-family: "BrixSlab-Regular";
-    animation: 1s ease-out 0s 1 slideInFromLeft; 
-    min-height: auto;
-    text-align: center;
-    color: #ffff;
-    width: 100%;
-    height: 100% !important;
- 
-}
+ h1{
+    font-family: BrixSlab-Regular !important;
+    color: #4EAF47 !important;
+    text-align:center;
+
+ }
+
+  h2{
+    font-family: BrixSlab-Regular !important;
+    color: black !important;
+    text-align:center;
+    
+ }
 
 
 .modal{
 
-    max-height: 50% !important;
+    animation: 1s ease-out 0s 1 slideInFromLeft; 
+    min-height: auto;
+    text-align: center;
+    color: #ffff;
+    width: 70%; 
+    max-height: 60% !important;
+    padding-top: 1em;
+
 }
 
 
@@ -48,7 +52,6 @@ header {
 
 .header-content{
      
-
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -59,14 +62,14 @@ header {
 }
  
 
- 
-.ardu{
-
-    float:right;
-}
 
 
 .btn {
 
-    background-color: #4EAF47 !important;
+    background-color: #4EAF47 ;
+}
+
+.help-section{
+
+    text-align: center;
 }
