@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>senseBox Blockly</title>
   <link rel="stylesheet" href="https://unpkg.com/normalizecss@3.0.0/normalize.css">
+  <link rel="stylesheet" href="assets/index.css">
   <style>
     body {
       text-align: center;
@@ -13,14 +14,42 @@
   </style>
 </head>
 <body>
-  <h1>Herzlich Willkomen bei blockly für senseBox</h1>
-  <h3>Bitte wähle dein senseBox Model</h3>
-  <div>
-    <div>
-      <a href="/ardublockly/?board=sensebox">senseBox Arduino/Genuino Uno</a>
-    </div>
-    <div>
-      <a href="/ardublockly/?board=sensebox-mcu">senseBox MCU</a>
+  <div class="contain-everything">
+    <div class="inner-contain">
+      <h1>Herzlich Willkomen bei blockly für senseBox</h1>
+      <div class="link-container-outer">
+        <h2>Bitte wähle dein senseBox Model</h2>
+        <div class="link-container">
+          <div class="selector">
+            <a href="/ardublockly/?board=sensebox">
+              <img src="assets/img/Genuino.png">
+              <div>
+                  <h3>senseBox Arduino/Genuino Uno</h3>
+              </div>
+            </a>
+          </div>
+          <div class="selector">
+            <a href="/ardublockly/?board=sensebox-mcu">
+              <div>
+                <img src="assets/img/mcu.png">
+                <div>
+                    <h3>senseBox MCU</h3>
+                </div>
+              </div>
+            </a>
+        </div>
+      </div>
+
+      <div class="help-section">
+        <p>Oder brauchst du Hilfe?</p>
+        <div class="link-list">
+          <a target="_blank" href="https://sensebox.github.io/books-v2/edu/">Gitbook</a>
+          <a target="_blank" href="https://forum.sensebox.de/">Forum</a>
+          <a target="_blank" href="https://sensebox.github.io/books-v2/edu/hilfe/hilfe.html">FAQ</a>
+        </div>
+      </div>
+
+    
     </div>
   </div>
 </body>

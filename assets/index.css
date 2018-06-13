@@ -1,0 +1,76 @@
+@font-face {
+    font-family: BrixSlab;
+    src: url(fonts/BrixSlab-Regular.otf);
+}
+
+@font-face {
+    font-family: BrixSlab;
+    font-weight: bold;
+    src: url(fonts/BrixSlab-Bold.otf);  
+}
+html, body {
+    height: 100%;
+    padding: 0;
+}
+
+h1 {
+    margin: 0;
+    padding-top: 3em;
+    color: #4EAF47;
+}
+
+.contain-everything {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.inner-contain {
+    width: 100%;
+}
+
+.link-container {
+    display: -webkit-box; 
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex; 
+    display: flex;
+    background: #f2f2f2;
+    padding: 2em 0;
+    justify-content: space-around;
+    -ms-flex-wrap: wrap;
+	-webkit-flex-wrap: wrap; 
+    flex-wrap: wrap;   
+}
+
+.selector {
+    padding: 2em 0;
+}
+
+@media only screen and (max-width: 450px){
+    .selector img {
+        max-width: 250px !important;
+    }
+}
+@media only screen and (min-width: 450px){
+    .selector img {
+        max-width: 400px;
+    }
+}
+
+.selector:hover a {
+    color:  #4EAF47;
+}
+
+.selector a {
+    text-decoration: none;
+    color: black;
+}
+
+.help-section {
+    padding: 2em 0;
+}
+
+.link-list a {
+    padding: 0 0.5em;
+}
