@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "carlosperate",
-		"lastupdated": "2018-06-07 12:59:57.756497",
+		"lastupdated": "2018-06-12 22:19:15.114740",
 		"locale": "en",
 		"messagedocumentation" : "qqq_ardublockly"
 	},
@@ -223,5 +223,8 @@
 "senseBox_gps_getValues_tip": "gets the specific Value from the GPS Sensor",
 "senseBox_gps_lat": "latitude",
 "senseBox_gps_lng": "longitude",
-"senseBox_gps_alt": "altitude"
+"senseBox_gps_alt": "altitude",
+"senseBox_gps_speed": "speed",
+"senseBox_send_mobile_to_osem": "send Value and Location",
+"senseBox_send_mobile_to_osem_tip":"send Value and Location to openSenseMap"
 }

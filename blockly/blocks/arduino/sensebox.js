@@ -226,6 +226,26 @@ Blockly.Blocks['sensebox_wifi'] = {
             }
       };
 
+      Blockly.Blocks['sensebox_send_mobile_to_osem'] = {
+        init: function() {
+          this.setTooltip(Blockly.Msg.senseBox_send_mobile_to_osem_tip);
+          this.setHelpUrl('');
+          this.setColour(Blockly.Blocks.sensebox.HUE);
+          this.appendDummyInput()
+              .appendField(Blockly.Msg.senseBox_send_mobile_to_osem);
+          this.appendValueInput('lat', 'Number')
+              .appendField(Blockly.Msg.senseBox_gps_lat);
+          this.appendValueInput('lng', 'Number')
+              .appendField(Blockly.Msg.senseBox_gps_lng);
+          this.appendValueInput('Value')
+              .setCheck(null)
+              .appendField('SensorID')
+              .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+              }
+        };
+
 
 
 /*
@@ -497,7 +517,7 @@ Blockly.Blocks['sensebox_display_show'] = {
           .appendField(Blockly.Msg.senseBox_gps_getValues);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
-          .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_gps_lat,"Latitude"], [Blockly.Msg.senseBox_gps_lng,"Longitude"], [Blockly.Msg.senseBox_gps_alt,"Altitude"]]), "Values");
+          .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_gps_lat,"Latitude"], [Blockly.Msg.senseBox_gps_lng,"Longitude"], [Blockly.Msg.senseBox_gps_alt,"Altitude"], [Blockly.Msg.senseBox_gps_speed, "Speed"]]), "Values");
       this.setOutput(true, "Number");
       this.setColour(Blockly.Blocks.sensebox.HUE);
       this.setTooltip(Blockly.Msg.senseBox_gps_getValues_tip);

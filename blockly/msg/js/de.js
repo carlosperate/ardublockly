@@ -612,4 +612,12 @@ Blockly.Msg.senseBox_display_plotYRange = "Y-Range";
 Blockly.Msg.senseBox_display_plotXTick = "X-Tick";
 Blockly.Msg.senseBox_display_plotYTick = "Y-Tick";
 Blockly.Msg.senseBox_display_plotTimeFrame = "TimeFrame";
+Blockly.Msg.senseBox_gps_getValues =  "Standort (GPS) abrufen";
+Blockly.Msg.senseBox_gps_getValues_tip =  "ruft das GPS Signal ab";
+Blockly.Msg.senseBox_gps_lat = "Breitengrad";
+Blockly.Msg.senseBox_gps_lng =  "Längengrad";
+Blockly.Msg.senseBox_gps_alt = "Höhe";
+Blockly.Msg.senseBox_gps_speed = "Geschwindigkeit";
+Blockly.Msg.senseBox_send_mobile_to_osem = "sende Messwert und Standort"; 
+Blockly.Msg.senseBox_send_mobile_to_osem_tip = "sende Messwert und Standort an die openSenseMap";
 

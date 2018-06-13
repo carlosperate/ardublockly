@@ -124,6 +124,17 @@ Blockly.Arduino.sensebox_send_to_osem = function(block) {
   return code;
 };
 
+Blockly.Arduino.sensebox_send_mobile_to_osem = function(block) {
+  var box_id = this.getFieldValue('BoxID');
+  var sensor_id = this.getFieldValue('SensorID') || '90909';
+  var sensor_value = Blockly.Arduino.valueToCode(this, 'Value', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
+  var lat = Blockly.Arduino.valueToCode(this, 'lat', Blockly.Arduino.ORDER_ATOMIC) || '0'
+  var lng = Blockly.Arduino.valueToCode(this, 'lng', Blockly.Arduino.ORDER_ATOMIC) || '0'
+  var code = '';
+      code += 'osem.uploadMobileMeasurement(' + sensor_value + ',"' + sensor_id +'",' + lat + ',' + lng + ');\n';
+  return code;
+};
+
 Blockly.Arduino.sensebox_shield_ethernet = function(block) {
   Blockly.Arduino.definitions_['define_senseBox'] = '#include "SenseBox.h"';
   Blockly.Arduino.definitions_['define_network'] = 'OpenSenseMap wifi("'+box_id+'");';
