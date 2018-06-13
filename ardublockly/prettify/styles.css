@@ -5,10 +5,12 @@ html,
 body {
     width: 100%;
     height: 100%;
+ 
+
 }
 
 body {
-    font-family: 'Questrial','Helvetica Neue',Arial,sans-serif;
+
  
     color: #d3d3d3;
     webkit-tap-highlight-color: #222;
@@ -25,7 +27,7 @@ body {
 }
 
 header {
-
+    font-family: "BrixSlab-Regular";
     animation: 1s ease-out 0s 1 slideInFromLeft; 
     min-height: auto;
     text-align: center;
@@ -61,4 +63,10 @@ header {
 .ardu{
 
     float:right;
+}
+
+
+.btn {
+
+    background-color: #4EAF47 !important;
 }
