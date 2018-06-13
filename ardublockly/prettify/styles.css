@@ -3,6 +3,7 @@
 
 html,
 body {
+    overflow:scroll;
     width: 100%;
     height: 100%;
     font-family: BrixSlab-Bold !important;
@@ -42,8 +43,8 @@ body {
     text-align: center;
     color: #ffff;
     width: 70%; 
-    max-height: 60% !important;
     padding-top: 1em;
+    max-height: 55%;
 
 }
 
@@ -72,4 +73,9 @@ body {
 .help-section{
 
     text-align: center;
+}
+
+.wrap{
+min-width: auto;
+min-height:auto; 
 }
