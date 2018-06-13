@@ -69,7 +69,7 @@
 
 <body>
 
-<div class="modal show" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal show" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
 
     
          <header>
@@ -83,7 +83,7 @@
           <div class="row">  
 
 
-            <div class="col-sm-3 blockly-links" align = "center">
+            <div class="col-sm-3 blockly-links"  >
         <img src="/ardublockly/img/Genuino.png" class = "mx-auto" style="height: 100px;" >
         <div>
           <a class="btn" href="https://sensebox.github.io/blockly/" target="_blank" role="button">Arduino UNO »</a>
@@ -93,7 +93,7 @@
     
 
 
-            <div class="col-sm-3 blockly-links" align = "center">
+            <div class="col-sm-3 blockly-links" >
         <img src="/ardublockly/img/mcu_one_top.png" class = "mx-auto" style="height: 100px;">
         <div>
           <a class="btn" href="https://blockly.sensebox.de/ardublockly/?lang=de&amp;board=sensebox-mcu" target="_blank" role="button"> senseBox MCU »</a>
@@ -103,7 +103,11 @@
             </div>
           </div>
       </div>
+                 
          </header>
+
+
+
         </div>
         
 
@@ -385,6 +389,14 @@
       Ardublockly.init();
       SenseboxExtension.init();
     });
+  </script>
+
+
+
+  <script type="text/javascript">
+      window.onload = function(){
+    $('#myModal').modal({backdrop: 'static', keyboard: false})  ;
+                                  }
   </script>
 </body>
 </html>
