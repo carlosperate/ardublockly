@@ -22,6 +22,11 @@ SenseboxExtension.init = function() {
 
   if (location.hostname !== 'localhost') {
     //TODO hide all features of running ardublockly locally
+    var buttons_offline = document.getElementById('buttons_offline');
+    var buttons_online = document.getElementById('buttons_online');
+    buttons_offline.classList.add('hidden');
+    buttons_online.classList.remove('hidden');
+
     //Hide offline settings
     var settings_online = document.getElementsByClassName('modal_section online');
     for (let index = 0; index < settings_online.length; index++) {
