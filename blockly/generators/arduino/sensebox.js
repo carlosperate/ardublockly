@@ -64,7 +64,7 @@ Blockly.Arduino.sensebox_sensor_sds011 = function(){
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
   Blockly.Arduino.userFunctions_['define_sds011'] = 'SDS011 my_sds('+serial_name+');';
   Blockly.Arduino.variables_['variables_sds011'] = 'float p10,p25;\n';
-  Blockly.Arduino.setups_['sensebox_sensor_sds011'] = serial_name+'.begin();';
+  Blockly.Arduino.setups_['sensebox_sensor_sds011'] = serial_name+'.begin(9600);';
   var code = 'my_sds.get'+dropdown_name+'()';
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
