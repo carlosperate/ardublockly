@@ -79,12 +79,29 @@ SenseboxExtension.init = function() {
           } catch(e) {
             throw e;
           }
+        } else if (request.status == 500) {
+          response = JSON.parse(request.response);
+          var data = {
+            ide_data: {
+              std_output: '',
+              err_output: response.message
+            },
+            errors: [{id: 1}]
+          }
+          var dataBack = ArdublocklyServer.jsonToIdeModal(data);
+          Ardublockly.arduinoIdeOutput(dataBack);
+          var outputHeader = document.getElementById('ide_output_collapsible_header');
+          if (!outputHeader.className.match('active')) {
+            outputHeader.click();
+          }
         } else {
+          Ardublockly.MaterialToast(Ardublockly.getLocalStr('arduinoOpErrorTitle'));
           return null;
         }
       }
     };
     try {
+      Ardublockly.resetIdeOutputContent();
       request.open('POST', 'https://compiler.sensebox.de/compile', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
