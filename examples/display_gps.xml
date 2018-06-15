@@ -1,0 +1,214 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="30" y="34">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_display_beginDisplay" id="IR5vIETbPH@9O2:={01m"></block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="Co_s%}`8EO1g2,dq(YnV">
+        <field name="VAR">lat</field>
+        <value name="VALUE">
+          <block type="variables_set_type" id="ZCWVL6vG-@]~(4kKoVio">
+            <field name="VARIABLE_SETTYPE_TYPE">DECIMAL</field>
+            <value name="VARIABLE_SETTYPE_INPUT">
+              <block type="sensebox_gps_getValues" id="TIvzV_zB`xBovl5)SX4i">
+                <field name="Values">Latitude</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="tL|nDq;.(i4*{/)!ewD)">
+            <field name="VAR">lng</field>
+            <value name="VALUE">
+              <block type="variables_set_type" id="z]DPs_.{dU#@_[~AiL:.">
+                <field name="VARIABLE_SETTYPE_TYPE">DECIMAL</field>
+                <value name="VARIABLE_SETTYPE_INPUT">
+                  <block type="sensebox_gps_getValues" id="8y:9E~{KW#kA5%zh?^P_">
+                    <field name="Values">Longitude</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="*C{Qfw`VN[*^p1QD(O+:">
+                <field name="VAR">alt</field>
+                <value name="VALUE">
+                  <block type="variables_set_type" id="Q6!(rZ6d9*vGTgln|sEv">
+                    <field name="VARIABLE_SETTYPE_TYPE">DECIMAL</field>
+                    <value name="VARIABLE_SETTYPE_INPUT">
+                      <block type="sensebox_gps_getValues" id="AM3SI[GT4P}8~-}zP2F^">
+                        <field name="Values">Altitude</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="|e)[LI._7u7Z*:{d%y`E">
+                    <field name="VAR">speed</field>
+                    <value name="VALUE">
+                      <block type="variables_set_type" id="+vX*zlMQqxF-!Q%6iDou">
+                        <field name="VARIABLE_SETTYPE_TYPE">DECIMAL</field>
+                        <value name="VARIABLE_SETTYPE_INPUT">
+                          <block type="sensebox_gps_getValues" id="O?oy3(sm(DT{t)4+dWs=">
+                            <field name="Values">Speed</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="sensebox_display_show" id="^d3Ye[iNb7MkUmiER{yR">
+                        <statement name="SHOW">
+                          <block type="sensebox_display_printDisplay" id="5E8UiLX#cY}~%q^pwz;f">
+                            <field name="COLOR">WHITE,BLACK</field>
+                            <value name="SIZE">
+                              <block type="math_number" id="v-,oa.^0xKf3OcqKH80Q">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                            <value name="X">
+                              <block type="math_number" id="h49p[_CfBKjZmI[kf@XT">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="Y">
+                              <block type="math_number" id="UN8)Vm;)JZ9bHHg)TZp0">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="printDisplay">
+                              <block type="text_join" id="D%Fwfya(X5TZ(yQ.}yJ+">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id="kU_Lnnos?#/(mC*wCSMX">
+                                    <field name="TEXT">Breitengrad:</field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="_/t[9%:_o3*blh%`yVXl">
+                                    <field name="VAR">lat</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="sensebox_display_printDisplay" id="s2}50P.th9m#3a|%T_Cd">
+                                <field name="COLOR">WHITE,BLACK</field>
+                                <value name="SIZE">
+                                  <block type="math_number" id="/ahym)HEdpl:8ptcLF3Q">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                                <value name="X">
+                                  <block type="math_number" id="7wOOhV:7k||0c`*}N25y">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <value name="Y">
+                                  <block type="math_number" id=".XCRIHjgC]h{wTwy;D}r">
+                                    <field name="NUM">8</field>
+                                  </block>
+                                </value>
+                                <value name="printDisplay">
+                                  <block type="text_join" id="ZPMyPW,rbvI%,i#~74WF">
+                                    <mutation items="2"></mutation>
+                                    <value name="ADD0">
+                                      <block type="text" id="bF@wZVvvlZ5j^1|t|S}-">
+                                        <field name="TEXT">Längengrad:</field>
+                                      </block>
+                                    </value>
+                                    <value name="ADD1">
+                                      <block type="variables_get" id="S7axwhu)OfR~/b4;7Sf4">
+                                        <field name="VAR">lng</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="sensebox_display_printDisplay" id="dW]C88OCA{oZ]V~=6w.I">
+                                    <field name="COLOR">WHITE,BLACK</field>
+                                    <value name="SIZE">
+                                      <block type="math_number" id="jqtg2i76@S3O@mdv%5nB">
+                                        <field name="NUM">1</field>
+                                      </block>
+                                    </value>
+                                    <value name="X">
+                                      <block type="math_number" id="-X*@*jf8EmWTYv#d@Cqf">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                    <value name="Y">
+                                      <block type="math_number" id="Dg9)-cEZfNO`;u?G]Q|{">
+                                        <field name="NUM">16</field>
+                                      </block>
+                                    </value>
+                                    <value name="printDisplay">
+                                      <block type="text_join" id="2)vOd7HAT,_GqSZ};pe+">
+                                        <mutation items="2"></mutation>
+                                        <value name="ADD0">
+                                          <block type="text" id="R!Z5iWQ-W5`QND2COCHT">
+                                            <field name="TEXT">Höhe:</field>
+                                          </block>
+                                        </value>
+                                        <value name="ADD1">
+                                          <block type="variables_get" id="-VSOcQTFn[7!{k3bP?n0">
+                                            <field name="VAR">lat</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="sensebox_display_printDisplay" id="(JyAJuc3Xk3n/J5`pvTn">
+                                        <field name="COLOR">WHITE,BLACK</field>
+                                        <value name="SIZE">
+                                          <block type="math_number" id="0hT],;nltFZ%h,i]qK=I">
+                                            <field name="NUM">1</field>
+                                          </block>
+                                        </value>
+                                        <value name="X">
+                                          <block type="math_number" id="-mFyz]+D]%KD3K{n`{u{">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                        <value name="Y">
+                                          <block type="math_number" id="E0i!#Mdj)9z`wzg:W=a_">
+                                            <field name="NUM">24</field>
+                                          </block>
+                                        </value>
+                                        <value name="printDisplay">
+                                          <block type="text_join" id="]RA;EhHz{P`mlvbk4_FY">
+                                            <mutation items="2"></mutation>
+                                            <value name="ADD0">
+                                              <block type="text" id="bPew/pN95CoZ+~rCSR%[">
+                                                <field name="TEXT">Geschwindigkeit:</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD1">
+                                              <block type="variables_get" id="n;{972%qk|JZaAv@p,,7">
+                                                <field name="VAR">speed</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="sensebox_display_clearDisplay" id="t9d]6A?}fITcLe1tH0P!"></block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
