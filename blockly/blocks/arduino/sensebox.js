@@ -28,11 +28,14 @@ Blockly.Blocks['sensebox_sensor_temp_hum'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME");
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_temp_hum_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
 };
 
 Blockly.Blocks['sensebox_sensor_uv_light'] = {
@@ -43,11 +46,14 @@ Blockly.Blocks['sensebox_sensor_uv_light'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_uv,"UvIntensity"], [Blockly.Msg.senseBox_light,"Illuminance"]]), "NAME");
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_uv_light_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
 };
 
 /*
@@ -62,11 +68,14 @@ Blockly.Blocks['sensebox_sensor_bmx055_accelerometer'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "NAME");
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_bmx055_accelerometer_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
 };
 
 Blockly.Blocks['sensebox_sensor_bmx055_gyroscope'] = {
@@ -77,11 +86,14 @@ Blockly.Blocks['sensebox_sensor_bmx055_gyroscope'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "NAME");
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_bmx055_gyroscope_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
 };
 
 Blockly.Blocks['sensebox_sensor_bmx055_compass'] = {
@@ -92,11 +104,14 @@ Blockly.Blocks['sensebox_sensor_bmx055_compass'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "NAME");
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.DECIMAL.output);    
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_bmx055_compass_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
 };
 
 Blockly.Blocks['sensebox_sensor_sds011'] = {
@@ -108,11 +123,14 @@ Blockly.Blocks['sensebox_sensor_sds011'] = {
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_pm25,"Pm25"], [Blockly.Msg.senseBox_sds011_pm10,"Pm10"]]), "NAME")
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_serial1,"Serial1"], [Blockly.Msg.senseBox_sds011_serial2,"Serial2"]]), "SERIAL");
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_sds011_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
 };
 
 Blockly.Blocks['sensebox_sensor_pressure'] = {
@@ -121,9 +139,13 @@ Blockly.Blocks['sensebox_sensor_pressure'] = {
         .appendField(Blockly.Msg.senseBox_pressure);
        this.setOutput(true, "Number");
     this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.setOutput(true, Blockly.Types.DECIMAL.output);
     this.setTooltip(Blockly.Msg.senseBox_pressure_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/luftdruck.html');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  },
 };
 
 
@@ -137,10 +159,13 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_RX")
         .appendField(Blockly.Msg.senseBox_ultrasonic_echo)
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_TX")
-    this.setOutput(true, 'Number');
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_ultrasonic_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
 };
 Blockly.Blocks['sensebox_sensor_sound'] = {
   init: function() {
@@ -149,10 +174,13 @@ Blockly.Blocks['sensebox_sensor_sound'] = {
         .appendField(Blockly.Msg.senseBox_sound)
         .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
-    this.setOutput(true, "Number");
+        this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setHelpUrl(Blockly.Msg.senseBox_sound_tip);
     this.setTooltip('Dieser Sensor mist den Geräuschpegel.');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
 };
 /*
 ----------------------------------Bees--------------------------------------------------
@@ -259,9 +287,12 @@ Blockly.Blocks['sensebox_poti'] = {
         .appendField(Blockly.Msg.senseBox_poti)
         .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_poti_tip);
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
 };
 
 Blockly.Blocks['sensebox_foto'] = {
@@ -271,10 +302,13 @@ Blockly.Blocks['sensebox_foto'] = {
         .appendField(Blockly.Msg.senseBox_foto)
         .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
-    this.setOutput(true, "Number");
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_foto_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
 };
 Blockly.Blocks['sensebox_rgb_led'] = {
   init: function() {
@@ -317,11 +351,14 @@ Blockly.Blocks['sensebox_button'] = {
         .appendField(Blockly.Msg.senseBox_button)
         .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN");
-    this.setOutput(true, 'Boolean');
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_button_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  getBlockType: function() {
+    return Blockly.Types.BOOLEAN;
+  },
 };
 Blockly.Blocks['sensebox_piezo'] = {
   init: function() {
@@ -518,11 +555,14 @@ Blockly.Blocks['sensebox_display_show'] = {
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
           .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_gps_lat,"Latitude"], [Blockly.Msg.senseBox_gps_lng,"Longitude"], [Blockly.Msg.senseBox_gps_alt,"Altitude"], [Blockly.Msg.senseBox_gps_speed, "Speed"]]), "Values");
-      this.setOutput(true, "Number");
+      this.setOutput(true, Blockly.Types.DECIMAL.output);
       this.setColour(Blockly.Blocks.sensebox.HUE);
       this.setTooltip(Blockly.Msg.senseBox_gps_getValues_tip);
       this.setHelpUrl('https://edu.books.sensebox.de/de/');
-    }
+    },
+    getBlockType: function() {
+        return Blockly.Types.DECIMAL;
+      },
   };
 
   Blockly.Blocks['sensebox_interval_timer'] = {
