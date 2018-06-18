@@ -1,3 +1,5 @@
+image:
+  - Visual Studio 2015
 environment:
   nodejs_version: "Stable"
   matrix:
@@ -20,6 +22,8 @@ environment:
 platform: x86
 
 configuration: Release
+
+skip_tags: true
 
 init:
   - cmd: ECHO Processor architecture - %PROCESSOR_ARCHITECTURE%
@@ -47,12 +51,16 @@ init:
   - cmd: node --version
   - cmd: node -p "process.arch"
   - cmd: npm --version
+  - cmd: "%PIP3% search pywin32"
+  - cmd: "%PIP% search pywin32"
 
 install:
   # Git clone happens between init and install 
   - cmd: git submodule update --init --recursive
 
   # Install Python packages
+  - cmd: "%PIP% install pywin32"
+  - cmd: "%PIP3% install https://pypi.python.org/packages/68/76/c3457dfe31c5a6c4fc3687d012a89c769d52129f19584415309aa0339a31/pypiwin32-219-cp34-none-win32.whl#md5=d1064ebb932294271b883ffdb369c640"
   - cmd: "%PIP3% install pyinstaller"
   - cmd: "%PIP3% install mkdocs"
   #- cmd: "%PIP3% install pydocstyle"
@@ -67,7 +75,6 @@ install:
 
   # Build and pack Ardublockly
   - cmd: cd blockly && %PYTHON%\python build.py && cd ..\
-  - cmd: "%PYTHON3%\\python package\\build_docs.py"
   - cmd: "%PYTHON3%\\python package\\build_pyinstaller.py windows"
   - cmd: cd package\electron && npm install && cd ..\..\
   - cmd: cd package\electron && npm run release && cd ..\..\
@@ -89,17 +96,18 @@ test_script:
 
 # Push artefact to S3 bucket and list all
 before_deploy:
-  - ps: Get-ChildItem .\releases\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name -DeploymentName ardublockly-s3-deployment }
+  - ps: Get-ChildItem .\releases\*.zip | % { Push-AppveyorArtifact $_.FullName -FileName "blockly-for-sensebox_v$($env:APPVEYOR_BUILD_VERSION)_windows.zip" -DeploymentName ardublockly-github-release }
   - ps: foreach($artifactName in $artifacts.keys) { $artifacts[$artifactName] }
 
-# Deploy build to Amazon S3 bucket
 deploy:
-  name: ardublockly-s3-deployment
-  provider: S3
-  access_key_id: AKIAJYJV7NN6HVHCX5NQ
-  secret_access_key:
-    secure: PlLCQKTcf9IzBXpEnXUxbJifb0usS7qcghnM0VxBTX0IL3C975JPidrYjP39ge7P
-  bucket: ardublockly-builds
-  region: us-west-2
-  set_public: true
-  folder: windows
+  name: ardublockly-github-release
+  tag: v$(appveyor_build_version)
+  release: blockly-for-sensebox-v$(appveyor_build_version)
+  description: 'Windows Release'
+  provider: GitHub
+  auth_token:
+    secure: IczSQzH76tWcuFUXXEhrkZ2fBpHgcLblRtRWYV/vCpQbhWeJKZjby2Yvymr//rpH # your encrypted token from GitHub
+  draft: false
+  prerelease: false
+  on:
+    branch: master                 # release from master branch only
