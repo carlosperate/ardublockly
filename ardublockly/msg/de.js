@@ -12,6 +12,10 @@ Ardublockly.LOCALISED_TEXT = {
   documentation: "Dokumentation",
   reportBug: "Fehler melden",
   examples: "Beispiele",
+  Blink: "Blinken einer LED",
+  Display_print: "Displayausgabe",
+  GPS: "GPS + Display",
+  send_osem: "Sende an oSeM",
   /* Settings */
   compilerLocation: "Compiler Verzeichnis",
   compilerLocationDefault: "Compiler Verzeichnis unbekannt",

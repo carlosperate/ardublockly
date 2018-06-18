@@ -1,0 +1,45 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="30" y="34">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_wifi" id="^A;Hxw(a!T=,j`~*k-eC">
+        <field name="SSID">SSID</field>
+        <field name="Password">Password</field>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="(_a1@6#`*Mfo@Gx[1W]j">
+        <field name="VAR">Temperatur</field>
+        <value name="VALUE">
+          <block type="variables_set_type" id="fyx4g[:=PH+bMo[Lg:X/">
+            <field name="VARIABLE_SETTYPE_TYPE">DECIMAL</field>
+            <value name="VARIABLE_SETTYPE_INPUT">
+              <block type="sensebox_sensor_temp_hum" id="6x:}%N12r83u~suorm[]">
+                <field name="NAME">Temperature</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="sensebox_interval_timer" id="Q2@Rq0[4-Od@t#3yD)RY">
+            <field name="interval">time</field>
+            <statement name="DO">
+              <block type="sensebox_osem_connection" id="O^,^^(mOD~tR[kRe3{dp">
+                <field name="BoxID">BoxID</field>
+                <statement name="DO">
+                  <block type="sensebox_send_to_osem" id="uINwDUae*[tVT|t9F1lz">
+                    <field name="SensorID">SensorID</field>
+                    <value name="Value">
+                      <block type="variables_get" id="AS;?J:w|0rsG`R.oI)ZQ">
+                        <field name="VAR">Temperatur</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
