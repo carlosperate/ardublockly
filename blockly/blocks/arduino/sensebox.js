@@ -213,7 +213,7 @@ Blockly.Blocks['sensebox_wifi'] = {
         .appendField(new Blockly.FieldTextInput("SSID"), "SSID");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField("Password")
+        .appendField(Blockly.Msg.senseBox_output_password)
         .appendField(new Blockly.FieldTextInput("Password"), "Password");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
