@@ -28,7 +28,7 @@ Blockly.Blocks['sensebox_sensor_temp_hum'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME");
-    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_temp_hum_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
@@ -46,7 +46,7 @@ Blockly.Blocks['sensebox_sensor_uv_light'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_uv,"UvIntensity"], [Blockly.Msg.senseBox_light,"Illuminance"]]), "NAME");
-    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_uv_light_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
@@ -68,7 +68,7 @@ Blockly.Blocks['sensebox_sensor_bmx055_accelerometer'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "NAME");
-    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_bmx055_accelerometer_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
@@ -86,7 +86,7 @@ Blockly.Blocks['sensebox_sensor_bmx055_gyroscope'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "NAME");
-    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_bmx055_gyroscope_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
@@ -123,7 +123,7 @@ Blockly.Blocks['sensebox_sensor_sds011'] = {
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_pm25,"Pm25"], [Blockly.Msg.senseBox_sds011_pm10,"Pm10"]]), "NAME")
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_serial1,"Serial1"], [Blockly.Msg.senseBox_sds011_serial2,"Serial2"]]), "SERIAL");
-    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_sds011_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/temp_und_luftfeuchte.html');
@@ -139,12 +139,12 @@ Blockly.Blocks['sensebox_sensor_pressure'] = {
         .appendField(Blockly.Msg.senseBox_pressure);
        this.setOutput(true, "Number");
     this.setColour(Blockly.Blocks.sensebox.HUE);
-    this.setOutput(true, Blockly.Types.DECIMAL.output);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_pressure_tip);
     this.setHelpUrl('https://edu.books.sensebox.de/de/projekte/diy_umweltstation/luftdruck.html');
   },
   getBlockType: function() {
-    return Blockly.Types.DECIMAL;
+    return Blockly.Types.LARGE_NUMBER;
   },
 };
 
@@ -555,7 +555,7 @@ Blockly.Blocks['sensebox_display_show'] = {
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
           .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_gps_lat,"Latitude"], [Blockly.Msg.senseBox_gps_lng,"Longitude"], [Blockly.Msg.senseBox_gps_alt,"Altitude"], [Blockly.Msg.senseBox_gps_speed, "Speed"]]), "Values");
-      this.setOutput(true, Blockly.Types.DECIMAL.output);
+      this.setOutput(true, Blockly.Types.NUMBER.output);
       this.setColour(Blockly.Blocks.sensebox.HUE);
       this.setTooltip(Blockly.Msg.senseBox_gps_getValues_tip);
       this.setHelpUrl('https://edu.books.sensebox.de/de/');

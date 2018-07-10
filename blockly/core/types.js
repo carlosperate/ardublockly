@@ -60,9 +60,9 @@ Blockly.Types.DECIMAL = new Blockly.Type({
   typeId: 'Decimal',
   typeMsgName: 'ARD_TYPE_DECIMAL',
   compatibleTypes: [Blockly.Types.BOOLEAN,
-                    Blockly.Types.SHORT_NUMBER,
-                    Blockly.Types.NUMBER,
-                    Blockly.Types.LARGE_NUMBER]
+        Blockly.Types.NUMBER,
+        Blockly.Types.SHORT_NUMBER,
+        Blockly.Types.LARGE_NUMBER]
 });
 
 /** Array/List of items. */
@@ -114,7 +114,6 @@ Blockly.Types.LARGE_NUMBER.addCompatibleTypes([
     Blockly.Types.SHORT_NUMBER,
     Blockly.Types.NUMBER,
     Blockly.Types.DECIMAL]);
-
 
 /**
  * Adds another type to the Blockly.Types collection.
