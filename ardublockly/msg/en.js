@@ -70,9 +70,6 @@ Ardublockly.LOCALISED_TEXT = {
                      "<p>If you have Ardublockly already installed, make sure the application is running correctly.</p>",
   noServerNoLangBody: "If the Ardublockly application is not running the language cannot be fully changed.",
   addBlocksTitle: "Additional Blocks",
-  copy_paste_mcu: "Copy the .BIN Datei to your senseBox MCU. <br> If your senseBox MCU is not shown do a fast double push to the reset button.<br>"+
-                  "<img src=\"img/copy_to_mcu.gif\"> <br>" +
-                  "You need more help? See here <a href=\"https://sensebox.github.io/books-v2/blockly/uebersicht/blockly_online.html\">Blockly for senseBox Book</a>",
   /* Alerts */
   loadNewBlocksTitle: "Load new blocks?",
   loadNewBlocksBody: "Loading a new XML file will replace the current blocks from the workspace.<br>" +
