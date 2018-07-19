@@ -78,9 +78,18 @@ SenseboxExtension.init = function() {
         if (request.status == 200) {
           var response = null;
           try {
-            response = JSON.parse(request.response);
+            var openDownload = function () {
+                            response = JSON.parse(request.response);
+                            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
+                          }
+                            Ardublockly.alertMessage(
+                            Ardublockly.getLocalStr('sketch_compiled'),
+                            Ardublockly.getLocalStr('copy_paste_mcu'),
+                            true, openDownload
+                          );
+            /*response = JSON.parse(request.response);
             window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
-            Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));
+            Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));*/
           } catch(e) {
             throw e;
           }

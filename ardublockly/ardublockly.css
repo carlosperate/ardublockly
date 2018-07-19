@@ -555,7 +555,11 @@ ul.side-nav li.side-menu-end {
 /* Small modal responsive design */
 .modal_small {
   height: auto !important;
-  min-height: 200px;
+  display: table; /* This is important */ 
+  overflow-y: auto;    
+  overflow-x: auto;
+  width: auto;
+  min-height: 600px;
 }
 .modal_small .modal-content {
   margin-top: 0;
