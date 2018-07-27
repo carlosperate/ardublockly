@@ -1,7 +1,7 @@
 var Ardublockly = Ardublockly || {};
 Ardublockly.LOCALISED_TEXT = {
   translationLanguage: "Deutsch",
-  title: "Ardublockly",
+  title: "senseBox",
   blocks: "Blöcke",
   /* Menu */
   open: "Blöcke öffnen",
@@ -72,7 +72,7 @@ Ardublockly.LOCALISED_TEXT = {
   addBlocksTitle: "Zusätzliche Blöcke",
   copy_paste_mcu: "Kopiere die .BIN Datei auf deine senseBox MCU. <br> Wird die senseBox MCU im Explorer nicht angezeigt mache eine Doppelklick auf den Roten Reset Button.<br>"+
                   "<img src=\"img/copy_to_mcu.gif\"> <br>" +
-                  "Benötigst du mehr Information und Hilfe schau ins <a href=\"https://sensebox.github.io/books-v2/blockly/uebersicht/blockly_online.html\">Blockly für senseBox Buch</a>",
+                  "Benötigst du mehr Information und Hilfe schau ins <a href=\"https://sensebox.github.io/books-v2/blockly/de/\">Blockly für senseBox Buch</a>",
   
   /* Alerts */
   loadNewBlocksTitle: "Neue Blöcke laden?",
