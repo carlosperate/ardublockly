@@ -73,7 +73,7 @@ def index_redirect():
 def static_ardublockly(file_path):
     """Serve the 'ardublockly' folder static files.
 
-    :param file_path: File path inside the 'ardublockly' folder.
+    :param file_path: Filebutton_compile_sketch_icon path inside the 'ardublockly' folder.
     :return: Full HTTPResponse for the static file.
     """
     return static_file(file_path,

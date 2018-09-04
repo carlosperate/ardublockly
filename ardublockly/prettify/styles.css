@@ -1,0 +1,94 @@
+@import url(https://fonts.googleapis.com/css?family=Questrial);
+@import url(http://fonts.googleapis.com/css?family=Dancing+Script:700);
+
+html,
+body {
+    overflow:scroll;
+    width: 100%;
+    height: 100%;
+   
+    color: #d3d3d3;
+    webkit-tap-highlight-color: #222;
+}
+
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+ h1{
+    font-family: BrixSlab-Regular !important;
+    color: #4EAF47 !important;
+    text-align:center;
+
+ }
+
+  h2{
+    font-family: Helvetica !important;
+    color: black !important;
+    text-align:center;
+    
+ }
+
+
+.modal{
+
+    animation: 1s ease-out 0s 1 slideInFromLeft; 
+    min-height: auto;
+    text-align: center;
+    color: #ffff;
+    width: 70%; 
+    padding-top: 1em;
+   
+
+}
+
+
+
+
+.header-content{
+     
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+
+
+}
+ 
+
+
+
+.btn {
+
+    background-color: #4EAF47 ;
+ 
+    border-radius: 5px;
+}
+
+.help-section{
+
+    text-align: center;
+}
+
+.wrap{
+min-width: auto;
+min-height:auto; 
+}
+
+
+.topright {
+
+ 
+    top: 0px;
+    right: 0px;    
+    width: 10%;
+    height: 10%;
+
+}

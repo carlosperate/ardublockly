@@ -11,13 +11,16 @@
   <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="prettify/arduino.css">
   <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
+  <link rel="stylesheet" href="prettify/styles.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300" type="text/css" />
 
   <!-- Ardublockly - These three files contain the compress version -->
-  <script src="../blockly/blockly_compressed.js"></script>
+  <!-- <script src="../blockly/blockly_compressed.js"></script>
   <script src="../blockly/blocks_compressed.js"></script>
-  <script src="../blockly/arduino_compressed.js"></script>
+  <script src="../blockly/arduino_compressed.js"></script> -->
   <!-- To use the uncompressed version comment out the above and comment in the ones below -->
-  <!--script src="../blockly/blockly_uncompressed.js"></script>
+  <script src="../blockly/blockly_uncompressed.js"></script>
   <script src="../blockly/blocks/logic.js"></script>
   <script src="../blockly/blocks/loops.js"></script>
   <script src="../blockly/blocks/math.js"></script>
@@ -36,6 +39,7 @@
   <script src="../blockly/blocks/arduino/time.js"></script>
   <script src="../blockly/blocks/arduino/tone.js"></script>
   <script src="../blockly/blocks/arduino/variables.js"></script>
+  <script src="../blockly/blocks/arduino/sensebox.js"></script>
   <script src="../blockly/generators/arduino.js"></script>
   <script src="../blockly/generators/arduino/boards.js"></script>
   <script src="../blockly/generators/arduino/io.js"></script>
@@ -52,16 +56,66 @@
   <script src="../blockly/generators/arduino/text.js"></script>
   <script src="../blockly/generators/arduino/time.js"></script>
   <script src="../blockly/generators/arduino/tone.js"></script>
-  <script src="../blockly/generators/arduino/variables.js"></script-->
+  <script src="../blockly/generators/arduino/variables.js"></script>
+  <script src="../blockly/generators/arduino/sensebox.js"></script>
 
   <!-- Default language js files, user selection appended to head on load -->
   <script src="../blockly/msg/js/en.js"></script>
   <script src="msg/en.js"></script>
 </head>
 
+
+          <!-- Modal -->
+
 <body>
+
+   <div class="modal"  id="myModal" tabindex="-1" role="dialog"  aria-hidden="false">
+
+          
+            <h1  > Herzlich Willkomen bei Blockly für die senseBox 
+              <img   class="topright" style = "position: "src="/ardublockly/img/sensebox_logo_raute.png"  class = "mx-auto" > </h1>
+            <h2  >Bitte wähle dein senseBox-Model</h2>
+            
+
+    <div class="modal-body">      
+      <div class="header-content">
+
+       <div class ="wrap">
+         <div class="row">  
+            <div class="col-md-6 blockly-links" >
+                   <img  src="/ardublockly/img/Genuino.png" style="height: 150px;" >
+                     <div>
+                       <a  style = "color: #4EAF47" href="https://sensebox.github.io/blockly/"  role="button">Arduino/Genuino Uno »</a>
+                     </div> 
+                </div>
+
+            <div class="col-md-6 blockly-links" >
+              <img src="/ardublockly/img/mcu_one_top.png"  style="height: 150px;">
+             <div>
+                 <a  style = "color: #4EAF47" href="https://blockly.sensebox.de/ardublockly/?lang=de&amp;board=sensebox-mcu" role="button"> senseBox MCU »</a>
+             </div>
+            </div> 
+          </div>
+                     <div class="modal-footer">
+              <div class="help-section">
+                <p style = "color: #4EAF47"  > Oder brauchst du Hilfe?</p>
+               <div class="link-list"  >
+                <a target="_blank" href="https://sensebox.github.io/books-v2/edu/" >Gitbook </a>
+                <a target="_blank" href="https://forum.sensebox.de/">Forum</a>
+                <a target="_blank" href="https://sensebox.github.io/books-v2/edu/hilfe/hilfe.html">FAQ</a>
+              </div>
+             </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
   <!-- Horizontal Navigation bar -->
-  <nav class="nav-fixed arduino_teal">
+  <nav class="nav-fixed sensebox_green">
     <div class="nav-wrapper container">
       <a class="show-on-large button-collapse" href="#" data-activates="slide-out" id="button-collapse"><i class="mdi-navigation-menu"></i></a>
       <a id="logo-container" class="brand-logo">
@@ -90,8 +144,8 @@
         <li id="menu_save"><a href="#"><span class="translatable_save">Save</span><i class="mdi-file-file-download left"></i></a></li>
         <li id="menu_delete"><a href="#"><span class="translatable_deleteAll">Delete All</span><i class="mdi-action-delete left"></i></a></li>
         <li id="menu_settings"><a href="#"><span class="translatable_settings">Settings</span><i class="mdi-action-settings left"></i></a></li>
-        <li id="menu_bug"><a href="https://github.com/carlosperate/ardublockly/wiki" target="_blank"><span class="translatable_documentation">Documentation</span><i class="mdi-action-help left"></i></a></li>
-        <li id="menu_bug"><a href="http://github.com/carlosperate/ardublockly/issues" target="_blank"><span class="translatable_reportBug">Report Bug</span><i class="mdi-action-bug-report left"></i></a></li>
+        <li id="menu_bug"><a href="https://github.com/sensebox/ardublockly/wiki" target="_blank"><span class="translatable_documentation">Documentation</span><i class="mdi-action-help left"></i></a></li>
+        <li id="menu_bug"><a href="http://github.com/sensebox/ardublockly/issues" target="_blank"><span class="translatable_reportBug">Report Bug</span><i class="mdi-action-bug-report left"></i></a></li>
       </ul>
     <li class="no-padding">
       <ul class="collapsible collapsible-accordion">
@@ -120,9 +174,15 @@
         <a id="button_toggle_toolbox" class="waves-effect waves-light btn-flat button_toggle_toolbox_off" style="display: none"><i id="button_toggle_toolbox_icon" class="mdi-action-visibility-off"></i></a>
         <!-- Arduino IDE action buttons -->
         <div id="ide_buttons_wrapper">
-          <a id="button_ide_left" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_yellow"><i id="button_ide_left_icon" class="mdi-action-open-in-browser"></i></a>
-          <a id="button_ide_middle" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_teal"><i id="button_ide_middle_icon" class="mdi-navigation-check"></i></a>
-          <a id="button_ide_large" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange"><i id="button_ide_large_icon" class="mdi-av-play-arrow"></i></a>
+          <div style="display: none;">
+            <a id="button_ide_left" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_yellow"><i id="button_ide_left_icon" class="mdi-action-open-in-browser"></i></a>
+            <a id="button_ide_middle" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_teal"><i id="button_ide_middle_icon" class="mdi-navigation-check"></i></a>
+            <a id="button_ide_large" class="waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange"><i id="button_ide_large_icon" class="mdi-av-play-arrow"></i></a>
+          </div>
+
+          <a id="button_copy_clipboard" class="tooltipped copy-btn waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_blue" data-clipboard-action="copy" data-clipboard-target="#content_arduino" data-position="left" data-delay="750" data-tooltip="In Zwischenablage kopieren"><i id="button_copy_clipboard_icon" class="mdi-action-assignment"></i></a>
+          <a id="button_compile_sketch" class="tooltipped copy-btn waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange" data-position="left" data-delay="750" data-tooltip="Sketch kompilieren"><i id="button_compile_sketch_icon" class="mdi-action-assignment-turned-in"></i></a>
+
           <div id="button_ide_large_spinner" class="preloader-wrapper active ide_loader" style="display:none">
             <div class="spinner-layer spinner-orange">
               <div class="circle-clipper left">
@@ -194,7 +254,6 @@
       </div>
     </div>
   </div>
-
   <!-- IDE Output content -->
   <div class="ide_output_wrapper">
     <ul class="collapsible ide_output_collapsible" data-collapsible="expandable">
@@ -250,7 +309,6 @@
       <a href="#" class="waves-effect btn-flat modal-close"><span class="translatable_return">Return</span></a>
     </div>
   </div>
-
   <!-- Select Additional Blocks menu -->
   <div id="blocks_menu" class="modal modal-fixed-footer">
     <div class="modal-content">
@@ -297,7 +355,7 @@
       <div class="translatable_noServerBody">
         <p>For all the Ardublockly features to be enabled, the Ardublockly desktop application must be running locally on your computer.</p>
         <p>If you are using an online version you will not be able to configure the settings nor load the blocks code into an Arduino.</p>
-        <p>Installation instruction can be found in the <a href="https://github.com/carlosperate/ardublockly">Ardublockly repository</a>.</p>
+        <p>Installation instruction can be found in the <a href="https://github.com/sensebox/ardublockly">Ardublockly repository</a>.</p>
         <p>If you have Ardublockly already installed, make sure the application is running correctly.</p>
       </div>
     </div>
@@ -305,6 +363,7 @@
       <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_okay">Okay</span></a>
     </div>
   </div>
+
 
   <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
   <script src="ardublockly_desktop.js"></script>
@@ -324,11 +383,26 @@
   <script src="ardublockly_toolbox.js"></script>
   <script src="ardublockly_blockly.js"></script>
   <script src="ardublockly.js"></script>
+  <!-- copy to clipboard stuff -->
+  <script src="js_libs/clipboard.min.js"></script>
+  <script src="sensebox_extensions.js"></script>
   <script>
     window.addEventListener('load', function load(event) {
       window.removeEventListener('load', load, false);
       Ardublockly.init();
+      SenseboxExtension.init();
     });
+  </script>
+
+
+
+  <script type="text/javascript">
+      window.onload = function(){
+    $('#myModal').modal({backdrop: 'static', keyboard: false})  ;
+                                  }
   </script>
 </body>
 </html>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

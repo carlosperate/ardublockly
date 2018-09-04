@@ -61,6 +61,9 @@ body {
   background-color: #8C7965;
 }
 
+.sensebox_green {
+  background-color: #4EAF47;
+}
 
 /********************/
 /*  Navigation bar  */
@@ -222,7 +225,7 @@ ul.side-nav li.side-menu-end {
   border-right: 0;
 }
 .ide_output_header_normal {
-  background-color: #006468;
+  background-color: #4EAF47;
   color: #ffffff;
   -moz-transition: background-color 0.6s ease-in;;
   -o-transition: background-color 0.6s ease-in;
@@ -314,6 +317,28 @@ ul.side-nav li.side-menu-end {
   height: 55px;
   width: 160px;
   z-index: 12;
+}
+#button_compile_sketch {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 55px;
+  height: 55px;
+}
+#button_compile_sketch i {
+  font-size: 2.4rem !important;
+  line-height: 55px;
+}
+#button_copy_clipboard {
+  position: absolute;
+  right: 72px;
+  top: 10px;
+  visibility: visible;
+  opacity: 1;
+  -moz-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -webkit-transition: visibility 0.3s linear, opacity 0.3s linear;
+  -o-transition: visibility 0.3s linear, opacity 0.3s linear;
+  transition: visibility 0.3s linear, opacity 0.3s linear;
 }
 #button_ide_large {
   position: absolute;
@@ -673,7 +698,7 @@ ul.side-nav li.side-menu-end {
 }
 .blocklyTreeRow {
   background: none !important;
-  border: none !important;
+  /* border: none !important; */
   margin: 0px 0px !important;
   padding: 7px 16px 7px 0px !important;
   box-sizing: content-box !important;
