@@ -151,21 +151,90 @@ Blockly.Blocks['sensebox_sensor_pressure'] = {
 
 Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
   init: function() {
+
+    var dropdownOptions = [[Blockly.Msg.senseBox_ultrasonic_port_A, 'A'],
+    [Blockly.Msg.senseBox_ultrasonic_port_B, 'B'],[Blockly.Msg.senseBox_ultrasonic_port_C, 'C']];
+    var dropdown = new Blockly.FieldDropdown(dropdownOptions, function(option) {
+    var input = (option == 'B');
+    this.sourceBlock_.updateShape_(input);
+    });
+
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
-	      .appendField(Blockly.Msg.senseBox_ultrasonic)
-    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_ultrasonic)
+        .appendField(dropdown, "port");
+    this.appendDummyInput('TrigEcho')
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_ultrasonic_trigger)
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_RX")
+        .appendField(new Blockly.FieldDropdown(
+        Blockly.Arduino.Boards.selected.digitalPins), 'ultrasonic_trigger')
         .appendField(Blockly.Msg.senseBox_ultrasonic_echo)
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_TX")
+        .appendField(new Blockly.FieldDropdown(
+          Blockly.Arduino.Boards.selected.digitalPins), 'ultrasonic_echo');
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_ultrasonic_tip);
     this.setHelpUrl('https://sensebox.de/books');
   },
+  /**
+   * Parse XML to restore the number of pins available.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   */
+  domToMutation: function(xmlElement) {
+    var input = (xmlElement.getAttribute('port') == 'B');
+    this.updateShape_(input);
+  },
+  /**
+   * Create XML to represent number of pins selection.
+   * @return {!Element} XML storage element.
+   * @this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var input = this.getFieldValue('port');
+    container.setAttribute("port", input);
+    return container;
+  },
+  /**
+   * Modify this block to have the correct number of pins available.
+   * @param {boolean} B True if this block has a 4 or 2 stepper pins.
+   * @private
+   * @this Blockly.Block
+   */
+  updateShape_: function(B) {
+    if (B) {
+         this.getInput("TrigEcho")
+            .updateFields(new Blockly.FieldDropdown(
+                Blockly.Arduino.Boards.selected.digitalPins), '3')
+            .appendField(new Blockly.FieldDropdown(
+                Blockly.Arduino.Boards.selected.digitalPins), '4');
+  }},
+
+  updateShape_: function(C) {
+    if (C) {
+         this.getInput("TrigEcho")
+            .appendField(new Blockly.FieldDropdown(
+                Blockly.Arduino.Boards.selected.digitalPins), '5')
+            .appendField(new Blockly.FieldDropdown(
+                Blockly.Arduino.Boards.selected.digitalPins), '6');
+  }},
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Boards.refreshBlockFieldDropdown(
+        this, '3', 'digitalPins');
+    Blockly.Boards.refreshBlockFieldDropdown(
+        this, '4', 'digitalPins');
+    Blockly.Boards.refreshBlockFieldDropdown(
+        this, '5', 'digitalPins');
+    Blockly.Boards.refreshBlockFieldDropdown(
+        this, '6', 'digitalPins');
+  },
   getBlockType: function() {
     return Blockly.Types.NUMBER;
-  },
+  }
 };
 Blockly.Blocks['sensebox_sensor_sound'] = {
   init: function() {

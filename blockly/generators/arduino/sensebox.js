@@ -70,11 +70,12 @@ Blockly.Arduino.sensebox_sensor_sds011 = function(){
 
 Blockly.Arduino.sensebox_sensor_ultrasonic_ranger = function() {
   var dropdown_pin_RX = this.getFieldValue('PIN_RX');
-  var dropdown_pin_TX = this.getFieldValue('PIN_TX')
+  var dropdown_pin_TX = this.getFieldValue('PIN_TX');
+  var port = this.getFieldValue('port');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.userFunctions_['var_ultrasonic'+dropdown_pin_RX] = 'Ultrasonic Ultrasonic('+dropdown_pin_RX+','+dropdown_pin_TX+');';
+  Blockly.Arduino.userFunctions_['var_ultrasonic'+port] = 'Ultrasonic Ultrasonic'+port+'('+dropdown_pin_RX+','+dropdown_pin_TX+');';
   var code;
-  code = 'Ultrasonic.getDistance()';
+  code = 'Ultrasonic'+port+'.getDistance()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
