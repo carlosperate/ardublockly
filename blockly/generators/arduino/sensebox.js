@@ -69,8 +69,8 @@ Blockly.Arduino.sensebox_sensor_sds011 = function(){
 };
 
 Blockly.Arduino.sensebox_sensor_ultrasonic_ranger = function() {
-  var dropdown_pin_RX = this.getFieldValue('PIN_RX');
-  var dropdown_pin_TX = this.getFieldValue('PIN_TX');
+  var dropdown_pin_RX = this.getFieldValue('ultrasonic_trigger');
+  var dropdown_pin_TX = this.getFieldValue('ultrasonic_echo');
   var port = this.getFieldValue('port');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
   Blockly.Arduino.userFunctions_['var_ultrasonic'+port] = 'Ultrasonic Ultrasonic'+port+'('+dropdown_pin_RX+','+dropdown_pin_TX+');';

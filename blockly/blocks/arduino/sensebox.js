@@ -155,7 +155,7 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
     var dropdownOptions = [[Blockly.Msg.senseBox_ultrasonic_port_A, 'A'],
     [Blockly.Msg.senseBox_ultrasonic_port_B, 'B'],[Blockly.Msg.senseBox_ultrasonic_port_C, 'C']];
     var dropdown = new Blockly.FieldDropdown(dropdownOptions, function(option) {
-    var input = (option == 'B');
+    var input = (option == 'A') || (option ==  'B') || (option == 'C');
     this.sourceBlock_.updateShape_(input);
     });
 
@@ -181,7 +181,7 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
    * @this Blockly.Block
    */
   domToMutation: function(xmlElement) {
-    var input = (xmlElement.getAttribute('port') == 'B');
+    var input = (xmlElement.getAttribute('port'));
     this.updateShape_(input);
   },
   /**
@@ -197,41 +197,28 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
   },
   /**
    * Modify this block to have the correct number of pins available.
-   * @param {boolean} B True if this block has a 4 or 2 stepper pins.
+   * @param {boolean}
    * @private
    * @this Blockly.Block
    */
-  updateShape_: function(B) {
-    if (B) {
-         this.getInput("TrigEcho")
-            .updateFields(new Blockly.FieldDropdown(
-                Blockly.Arduino.Boards.selected.digitalPins), '3')
-            .appendField(new Blockly.FieldDropdown(
-                Blockly.Arduino.Boards.selected.digitalPins), '4');
-  }},
+  updateShape_: function() {
+    var input = this.getFieldValue('port');
+    switch (input){
+      case 'A':
+      this.setFieldValue('1','ultrasonic_trigger');  
+      this.setFieldValue('2','ultrasonic_echo');
+      break;
+      case 'B':
+      this.setFieldValue('3','ultrasonic_trigger');  
+      this.setFieldValue('4','ultrasonic_echo');
+      break;
+      case 'C':
+      this.setFieldValue('5','ultrasonic_trigger');  
+      this.setFieldValue('6','ultrasonic_echo');
+      break;
+    }
+   },
 
-  updateShape_: function(C) {
-    if (C) {
-         this.getInput("TrigEcho")
-            .appendField(new Blockly.FieldDropdown(
-                Blockly.Arduino.Boards.selected.digitalPins), '5')
-            .appendField(new Blockly.FieldDropdown(
-                Blockly.Arduino.Boards.selected.digitalPins), '6');
-  }},
-  /**
-   * Updates the content of the the pin related fields.
-   * @this Blockly.Block
-   */
-  updateFields: function() {
-    Blockly.Boards.refreshBlockFieldDropdown(
-        this, '3', 'digitalPins');
-    Blockly.Boards.refreshBlockFieldDropdown(
-        this, '4', 'digitalPins');
-    Blockly.Boards.refreshBlockFieldDropdown(
-        this, '5', 'digitalPins');
-    Blockly.Boards.refreshBlockFieldDropdown(
-        this, '6', 'digitalPins');
-  },
   getBlockType: function() {
     return Blockly.Types.NUMBER;
   }
@@ -467,7 +454,8 @@ Blockly.Blocks['sensebox_sd_open_file'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_sd_open_file)
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField( new Blockly.FieldVariable('Filename'), 'Filename');
+        .appendField(
+        new Blockly.FieldInstance('file',Blockly.Msg.sensebox_sd_filename,true, true, false),'Filename');
     this.appendStatementInput('SD')
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -475,6 +463,23 @@ Blockly.Blocks['sensebox_sd_open_file'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
     this.setHelpUrl('https://sensebox.de/books');
+  },
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+        return;  // Block deleted or irrelevant event
+    }
+
+    var instanceName = this.getFieldValue('Filename')
+    if (Blockly.Instances.isInstancePresent(instanceName, 'file', this)) {
+      this.setWarningText(null);
+    } else {
+      // Set a warning to select a valid stepper config block
+      this.setWarningText(
+        Blockly.Msg.ARD_COMPONENT_WARN1.replace(
+            '%1', Blockly.Msg.senseBox_SD_COMPONENT).replace(
+                '%2', Blockly.Msg.sensebox_sd_filename));
+    }
   }
 };
 
@@ -484,7 +489,7 @@ Blockly.Blocks['sensebox_sd_create_file'] = {
         .appendField(Blockly.Msg.senseBox_sd_create_file)
         .setAlign(Blockly.ALIGN_LEFT)
         .appendField(Blockly.Msg.senseBox_output_filename)
-        .appendField( new Blockly.FieldVariable('Filename'), 'Filename');
+        .appendField( new Blockly.FieldInstance('file',Blockly.Msg.sensebox_sd_filename,true, true, false),'Filename');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
