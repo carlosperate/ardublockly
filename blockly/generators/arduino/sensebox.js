@@ -11,7 +11,6 @@ goog.provide('Blockly.Arduino.sensebox');
 
 goog.require('Blockly.Arduino');
 
-var filename;
 
 /*
 ----------------------------------Sensoren--------------------------------------------------
@@ -225,24 +224,32 @@ return code;
 };
 
 /* SD-Card Blocks using the Standard SD Library*/
+/**
+ * Code generator for variable (X) getter.
+ * Arduino code: loop { X }
+ * @param {Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
 
-Blockly.Arduino.sensebox_sd_create_file = function() {
-  filename = this.getFieldValue('Filename');
+Blockly.Arduino.sensebox_sd_create_file = function(block) {
+  var filename = Blockly.Arduino.variableDB_.getName(block.getFieldValue('Filename'),Blockly.Variables.NAME_TYPE);
   Blockly.Arduino.includes_['library_spi'] = '#include <SPI.h>';
   Blockly.Arduino.includes_['library_sd'] = '#include <SD.h>';
-  Blockly.Arduino.userFunctions_['define_sd'] = 'File dataFile'+filename+';'
-  Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28);\ndataFile'+filename+' = SD.open("'+filename+'.txt", FILE_WRITE);\ndataFile'+filename+'.close();\n';
+  Blockly.Arduino.userFunctions_['define_sd' + filename] = 'File dataFile' + filename +';';
+  Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28)';
+  Blockly.Arduino.setups_['sensebox_sd' + filename] = 'dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\ndataFile' + filename +'.close();\n';
   var code = '';
   return code;
   };
   
 
 Blockly.Arduino.sensebox_sd_open_file = function(block) {
+var filename = Blockly.Arduino.variableDB_.getName(block.getFieldValue('Filename'),Blockly.Variables.NAME_TYPE);
 var text = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
 var branch = Blockly.Arduino.statementToCode(block, 'SD');
-var code ='dataFile'+filename+' = SD.open("'+filename+'.txt", FILE_WRITE);\n'
+var code ='dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\n'
 code += branch;
-code +='dataFile'+filename+'.close();\n'
+code +='dataFile' + filename +'.close();\n'
 return code;
 };
 
@@ -254,7 +261,7 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
       }else{
         linebreak = "";
       }
-  var code ='dataFile'+filename+'.print'+linebreak+'('+ text +');\n'
+  var code ='dataFile.print'+linebreak+'('+ text +');\n'
   return code;
   };
 
@@ -299,8 +306,10 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
     Blockly.Arduino.sensebox_display_plotDisplay = function() {
       var YLabel = Blockly.Arduino.valueToCode(this, 'YLabel', Blockly.Arduino.ORDER_ATOMIC) || 'Y'
       var XLabel = Blockly.Arduino.valueToCode(this, 'XLabel', Blockly.Arduino.ORDER_ATOMIC) || 'X'
-        var XRange = Blockly.Arduino.valueToCode(this, 'XRange', Blockly.Arduino.ORDER_ATOMIC) || '0'
-        var YRange = Blockly.Arduino.valueToCode(this, 'YRange', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var XRange1 = Blockly.Arduino.valueToCode(this, 'XRange1', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var XRange2 = Blockly.Arduino.valueToCode(this, 'XRange2', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var YRange1 = Blockly.Arduino.valueToCode(this, 'YRange1', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var YRange2 = Blockly.Arduino.valueToCode(this, 'YRange2', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var XTick = Blockly.Arduino.valueToCode(this, 'XTick', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var YTick = Blockly.Arduino.valueToCode(this, 'YTick', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var TimeFrame = Blockly.Arduino.valueToCode(this, 'TimeFrame', Blockly.Arduino.ORDER_ATOMIC) || '0'
@@ -309,7 +318,7 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
         Blockly.Arduino.includes_['library_senseBoxIO'] = '#include <senseBoxIO.h>';
         Blockly.Arduino.userFunctions_['define_plot_class'] = 'Plot DataPlot(&display);\n';
         Blockly.Arduino.variables_['define_plot_class'] = 'const double TIMEFRAME = '+TimeFrame+';\n';
-        Blockly.Arduino.setups_['sensebox_plot_setup'] = 'DataPlot.setXLabel('+XLabel+');\nDataPlot.setYLabel('+YLabel+');\nDataPlot.setXRange(0,'+TimeFrame+');\nDataPlot.setYRange(0,'+YRange+');\nDataPlot.setXTick('+XTick+');\nDataPlot.setYTick('+YTick+');\nDataPlot.setXPrecision(0);\nDataPlot.setYPrecision(0);\n';
+        Blockly.Arduino.setups_['sensebox_plot_setup'] = 'DataPlot.setXLabel('+XLabel+');\nDataPlot.setYLabel('+YLabel+');\nDataPlot.setXRange('+ XRange1+ ',' +XRange2+');\nDataPlot.setYRange('+ YRange1+ ','+YRange2+');\nDataPlot.setXTick('+XTick+');\nDataPlot.setYTick('+YTick+');\nDataPlot.setXPrecision(0);\nDataPlot.setYPrecision(0);\n';
         var code = 'DataPlot.clear();'
         code += 'double starttime = millis();\ndouble t = 0;\nwhile (t <= TIMEFRAME) {\nt = (millis() - starttime) / 1000.0;\nfloat value = '+plotDisplay+';\n';
         code += 'DataPlot.addDataPoint(t,value);\n}\n';

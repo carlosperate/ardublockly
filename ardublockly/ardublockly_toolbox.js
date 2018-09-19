@@ -31,7 +31,51 @@ Ardublockly.TOOLBOX_XML =
 '      <block type="sensebox_display_beginDisplay"></block>' +
 '      <block type="sensebox_display_show"></block>' +
 '      <block type="sensebox_display_clearDisplay"></block>' +
-'      <block type="sensebox_display_plotDisplay"></block>' +
+'      <block type="sensebox_display_plotDisplay">' +
+'           <value name="YLabel">' +
+'               <block type="text">' +
+'          </block>' +
+'           </value>' +
+'           <value name="XLabel">' +
+'               <block type="text">' +
+'          </block>' +
+'        </value>' +
+'        <value name="XRange1">' +
+'          <block type="math_number">' +
+'            <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="XRange2">' +
+'          <block type="math_number">' +
+'            <field name="NUM">15</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="YRange1">' +
+'          <block type="math_number">' +
+'            <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="YRange2">' +
+'          <block type="math_number">' +
+'            <field name="NUM">50</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="XTick">' +
+'          <block type="math_number">' +
+'            <field name="NUM">5</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="YTick">' +
+'          <block type="math_number">' +
+'            <field name="NUM">0</field>' +
+'          </block>' +
+'        </value>' +
+'        <value name="TimeFrame">' +
+'          <block type="math_number">' +
+'            <field name="NUM">15</field>' +
+'          </block>' +
+'        </value>' +
+'       </block>' +
 '      <block type="sensebox_display_printDisplay">' +
 '           <value name="X">' +
 '               <block type="math_number">' +
@@ -42,11 +86,6 @@ Ardublockly.TOOLBOX_XML =
 '          <block type="math_number">' +
 '            <field name="NUM">0</field>' +
 '          </block>' +
-'        </value>' +
-'           <value name="SIZE">' +
-'           <block type="math_number">' +
-'               <field name="NUM">1</field>' +
-'           </block>' +
 '       </value>' +
 '      </block>' +
 '   </category>' +

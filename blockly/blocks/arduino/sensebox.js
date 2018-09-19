@@ -398,7 +398,7 @@ Blockly.Blocks['sensebox_sd_open_file'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_sd_open_file)
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField(filename);
+        .appendField( new Blockly.FieldVariable('Filename'), 'Filename');
     this.appendStatementInput('SD')
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -415,7 +415,7 @@ Blockly.Blocks['sensebox_sd_create_file'] = {
         .appendField(Blockly.Msg.senseBox_sd_create_file)
         .setAlign(Blockly.ALIGN_LEFT)
         .appendField(Blockly.Msg.senseBox_output_filename)
-        .appendField( new Blockly.FieldTextInput('Filename'), 'Filename');
+        .appendField( new Blockly.FieldVariable('Filename'), 'Filename');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -500,10 +500,15 @@ Blockly.Blocks['sensebox_display_plotDisplay'] = {
         .appendField(Blockly.Msg.senseBox_display_plotYLabel);
     this.appendValueInput("XLabel", 'Text')
         .appendField(Blockly.Msg.senseBox_display_plotXLabel);
-    this.appendValueInput("XRange", 'Number')
-            .appendField(Blockly.Msg.senseBox_display_plotXRange);
-    this.appendValueInput("YRange", 'Number')
-            .appendField(Blockly.Msg.senseBox_display_plotYRange);
+    this.appendValueInput("XRange1", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotXRange1);
+    this.appendValueInput("XRange2", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotXRange2)
+    this.appendValueInput("YRange1", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotYRange1);
+    this.appendValueInput("YRange2", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotYRange2);
+    this.setInputsInline(false);
     this.appendValueInput("XTick", 'Number')
             .appendField(Blockly.Msg.senseBox_display_plotXTick);
     this.appendValueInput("YTick", 'Number')
