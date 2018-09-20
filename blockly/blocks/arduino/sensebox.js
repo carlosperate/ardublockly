@@ -179,11 +179,11 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
    * Parse XML to restore the number of pins available.
    * @param {!Element} xmlElement XML storage element.
    * @this Blockly.Block
-   */
+   
   domToMutation: function(xmlElement) {
     var input = (xmlElement.getAttribute('port'));
-    this.updateShape_(input);
-  },
+    
+  },*/
   /**
    * Create XML to represent number of pins selection.
    * @return {!Element} XML storage element.
@@ -192,6 +192,7 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
   mutationToDom: function() {
     var container = document.createElement('mutation');
     var input = this.getFieldValue('port');
+    this.updateShape_(input);
     container.setAttribute("port", input);
     return container;
   },

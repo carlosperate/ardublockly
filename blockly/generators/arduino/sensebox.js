@@ -237,7 +237,7 @@ Blockly.Arduino.sensebox_sd_create_file = function(block) {
   Blockly.Arduino.includes_['library_spi'] = '#include <SPI.h>';
   Blockly.Arduino.includes_['library_sd'] = '#include <SD.h>';
   Blockly.Arduino.userFunctions_['define_sd' + filename] = 'File dataFile' + filename +';';
-  Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28)';
+  Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28);';
   Blockly.Arduino.setups_['sensebox_sd' + filename] = 'dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\ndataFile' + filename +'.close();\n';
   var code = '';
   return code;
