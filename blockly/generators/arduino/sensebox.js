@@ -233,7 +233,7 @@ return code;
  */
 
 Blockly.Arduino.sensebox_sd_create_file = function(block) {
-  var filename = Blockly.Arduino.variableDB_.getName(block.getFieldValue('Filename'),Blockly.Variables.NAME_TYPE);
+  var filename = this.getFieldValue('Filename');
   Blockly.Arduino.includes_['library_spi'] = '#include <SPI.h>';
   Blockly.Arduino.includes_['library_sd'] = '#include <SD.h>';
   Blockly.Arduino.userFunctions_['define_sd' + filename] = 'File dataFile' + filename +';';
@@ -245,7 +245,7 @@ Blockly.Arduino.sensebox_sd_create_file = function(block) {
   
 
 Blockly.Arduino.sensebox_sd_open_file = function(block) {
-var filename = Blockly.Arduino.variableDB_.getName(block.getFieldValue('Filename'),Blockly.Variables.NAME_TYPE);
+var filename = this.getFieldValue('Filename');
 var text = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
 var branch = Blockly.Arduino.statementToCode(block, 'SD');
 var code ='dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\n'
@@ -254,7 +254,10 @@ code +='dataFile' + filename +'.close();\n'
 return code;
 };
 
-Blockly.Arduino.sensebox_sd_write_file = function() {
+Blockly.Arduino.sensebox_sd_write_file = function(block) {
+  if (this.parentBlock_ != null){
+    var filename = this.getSurroundParent().getFieldValue('Filename');
+  }
   var text = Blockly.Arduino.valueToCode(this, 'DATA', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
   var linebreak =  this.getFieldValue('linebreak');
     if(linebreak =="TRUE"){
@@ -262,7 +265,7 @@ Blockly.Arduino.sensebox_sd_write_file = function() {
       }else{
         linebreak = "";
       }
-  var code ='dataFile.print'+linebreak+'('+ text +');\n'
+  var code ='dataFile' + filename +'.print'+linebreak+'('+ text +');\n'
   return code;
   };
 

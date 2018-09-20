@@ -183,7 +183,7 @@ Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
   domToMutation: function(xmlElement) {
     var input = (xmlElement.getAttribute('port'));
     
-  },*/
+  },*
   /**
    * Create XML to represent number of pins selection.
    * @return {!Element} XML storage element.
@@ -456,7 +456,7 @@ Blockly.Blocks['sensebox_sd_open_file'] = {
         .appendField(Blockly.Msg.senseBox_sd_open_file)
         .setAlign(Blockly.ALIGN_LEFT)
         .appendField(
-        new Blockly.FieldInstance('file',Blockly.Msg.sensebox_sd_filename,true, true, false),'Filename');
+         new Blockly.FieldInstance('file',Blockly.Msg.sensebox_sd_filename,false, true, false),'Filename');
     this.appendStatementInput('SD')
         .setCheck(null);
     this.setPreviousStatement(true, null);
