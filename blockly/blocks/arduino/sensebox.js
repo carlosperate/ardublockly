@@ -308,8 +308,32 @@ Blockly.Blocks['sensebox_wifi'] = {
             .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-            }
-      };
+            },
+             /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_osem_connection'],
+};
 
       Blockly.Blocks['sensebox_send_mobile_to_osem'] = {
         init: function() {
@@ -328,8 +352,32 @@ Blockly.Blocks['sensebox_wifi'] = {
               .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
           this.setPreviousStatement(true, null);
           this.setNextStatement(true, null);
-              }
-        };
+              },
+               /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_osem_connection'],
+};
 
 
 
@@ -514,7 +562,31 @@ Blockly.Blocks['sensebox_sd_write_file'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_sd_open_file'],
 };
 
 /*senseBox Display Blocks*/
@@ -544,7 +616,7 @@ Blockly.Blocks['sensebox_display_clearDisplay'] = {
 };
 
 Blockly.Blocks['sensebox_display_printDisplay'] = {
-  init: function() {
+  init: function(block) {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_display_printDisplay)
@@ -563,8 +635,33 @@ Blockly.Blocks['sensebox_display_printDisplay'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.senseBox_display_printDisplay_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_display_show'],
 };
+
 
 Blockly.Blocks['sensebox_display_plotDisplay'] = {
   init: function() {
@@ -597,7 +694,31 @@ Blockly.Blocks['sensebox_display_plotDisplay'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.senseBox_display_printDisplay_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_display_show'],
 };
 
 Blockly.Blocks['sensebox_display_show'] = {
