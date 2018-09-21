@@ -12,6 +12,7 @@ goog.provide('Blockly.Blocks.sensebox');
 
 goog.require('Blockly.Blocks');
 
+var wifiDepend = null;
 
 /**
  * Common HSV hue for all blocks in this category.
@@ -274,7 +275,27 @@ Blockly.Blocks['sensebox_wifi'] = {
         .appendField(new Blockly.FieldTextInput("Password"), "Password");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-        }
+        },
+        onchange: function(e) {
+          var legal = false;
+          // Is the block nested in a loop?
+          var block = this;
+          do {
+            if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+              legal = true;
+              break;
+            }
+            block = block.getSurroundParent();
+          } while (block);
+          if (legal) {
+            this.setWarningText(null);
+            wifiDepend = true;
+          } else {
+            this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+            wifiDepend = null;
+          }
+        },
+        LOOP_TYPES: ['arduino_functions'],
   };
 
   Blockly.Blocks['sensebox_osem_connection'] = {
@@ -364,7 +385,7 @@ Blockly.Blocks['sensebox_wifi'] = {
     // Is the block nested in a loop?
     var block = this;
     do {
-      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1 && wifiDepend != null) {
         legal = true;
         break;
       }
