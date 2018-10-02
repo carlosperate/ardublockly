@@ -161,6 +161,7 @@
 "senseBox_sound_tip ": "sound sensor gives you a value which reflects the loudness",
 "senseBox_piezo_tip ": "simple piezo to make sound",
 "senseBox_serial_tip ": "prints the values to the serial monitor in the arduino IDE. Good way to have a fast and easy feedback for your programm",
+"senseBox_rgb_led ": "RGB-LED",
 "senseBox_rgb_led_tip ": "RGB-LED",
 "senseBox_led_tip ": "simple LED. Don't forget the resistor",
 "senseBox_temp ": "temperatur",

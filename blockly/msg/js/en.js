@@ -590,6 +590,7 @@ Blockly.Msg.senseBox_poti  = "pots";
 Blockly.Msg.senseBox_poti_tip  = "Pots";
 Blockly.Msg.senseBox_pressure  = "airpressure";
 Blockly.Msg.senseBox_pressure_tip  = "airpressure sensor can measure the airpressure in Pa";
+Blockly.Msg.senseBox_rgb_led  = "RGB-LED";
 Blockly.Msg.senseBox_rgb_led_tip  = "RGB-LED";
 Blockly.Msg.senseBox_sd_create_file  = "Create file on SD-Card";
 Blockly.Msg.senseBox_sd_open_file  = "Open a file from SD-Card";
