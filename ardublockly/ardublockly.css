@@ -710,6 +710,9 @@ ul.side-nav li.side-menu-end {
   margin: 0px 0px !important;
   padding: 7px 16px 7px 0px !important;
   box-sizing: content-box !important;
+  }
+  [aria-level = "2"]{
+    margin-left: 16px !important;
 }
 .blocklyTreeSelected {
   background-color: #E47128 !important;  /* arduino orange */

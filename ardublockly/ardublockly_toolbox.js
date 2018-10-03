@@ -122,6 +122,7 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_send_to_osem"></block>' +
     '      <block type="sensebox_send_mobile_to_osem"></block>' +
     '       </category>' +
+    '  <sep></sep>' +
     '      <category id="catsenseBoxOutput_SD" name="   SD" colour="120">' +
     '      <block type="sensebox_sd_create_file"></block>' +
     '      <block type="sensebox_sd_open_file"></block>' +
