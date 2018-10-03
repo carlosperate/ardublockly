@@ -146,3 +146,22 @@ Blockly.Arduino['logic_ternary'] = function(block) {
   var code = valueIf + ' ? ' + valueThen + ' : ' + valueElse;
   return [code, Blockly.Arduino.ORDER_CONDITIONAL];
 };
+
+Blockly.Arduino['switch_case'] = function(block) {
+  var n = 0;
+  var argument = Blockly.Arduino.valueToCode(this, 'CONDITION',
+      Blockly.Arduino.ORDER_NONE) || '';
+  var branch = Blockly.Arduino.statementToCode(block, 'CASECONDITON0' + n);
+  var cases= '';
+  var DO = Blockly.Arduino.statementToCode(block, ('CASE' + n));
+  for (n = 0; n <= block.caseCount_; n++) {
+    cases += 'case' + branch + ':'
+    cases += DO + '\nbreak;';
+  }
+  if (block.elseCount_) {
+    branch = Blockly.Arduino.statementToCode(block, 'ELSE');
+    code += ' else {\n' + branch + '}';
+  }
+  var code = 'switch (' + argument + ') {\n' + cases + '}';
+  return code + '\n';
+};
