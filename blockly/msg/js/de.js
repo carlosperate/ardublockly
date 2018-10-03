@@ -630,3 +630,8 @@ Blockly.Msg.senseBox_send_mobile_to_osem_tip = "sende Messwert und Standort an d
 Blockly.Msg.senseBox_interval_timer = "Messintervall";
 Blockly.Msg.senseBox_interval = "in (ms)"
 Blockly.Msg.senseBox_interval_timer_tip = "Intervall";
+// Cases
+Blockly.Msg.cases_do = "Führe aus";
+Blockly.Msg.cases_condition = "Fall (Variable) = ";
+Blockly.Msg.cases_switch = "Variable";
+Blockly.Msg.cases_add = "Fall";

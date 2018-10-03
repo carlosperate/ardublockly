@@ -515,11 +515,11 @@ Blockly.Blocks['switch_case'] = {
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.appendValueInput('CONDITION')
-        .appendField('the case is');
+        .appendField(Blockly.Msg.cases_switch);
     this.appendValueInput('CASECONDITION0')
-        .appendField('in case of');
+        .appendField(Blockly.Msg.cases_condition);
     this.appendStatementInput('CASE0')
-        .appendField('do');
+        .appendField(Blockly.Msg.cases_do);
     this.setMutator(new Blockly.Mutator(['case_incaseof','case_default']));
     this.setTooltip('Does something if the condition is true. If there isn\'t a matching case the default function will be executed.');
     this.caseCount_ = 0;
@@ -545,9 +545,9 @@ Blockly.Blocks['switch_case'] = {
     this.defaultCount_ = parseInt(xmlElement.getAttribute('default'), 10);
     for (var x = 0; x <= this.caseCount_; x++) {
         this.appendValueInput('CASECONDITION' + x)
-            .appendField('in case of');
+            .appendField(Blockly.Msg.cases_condition);
         this.appendStatementInput('CASE' + x)
-            .appendField('do');
+            .appendField(Blockly.Msg.cases_do);
     }
     if (this.defaultCount_) {
         this.appendStatementInput('ONDEFAULT')
@@ -590,9 +590,9 @@ Blockly.Blocks['switch_case'] = {
             case 'case_incaseof':
                 this.caseCount_++;
                 var caseconditionInput = this.appendValueInput('CASECONDITION' + this.caseCount_)
-                                             .appendField('in case of');   
+                                             .appendField(Blockly.Msg.cases_condition);   
                 var caseInput = this.appendStatementInput('CASE' + this.caseCount_)
-                                    .appendField('do');
+                                    .appendField(Blockly.Msg.cases_do);
                 if (caseBlock.valueConnection_) {
                     caseconditionInput.connection.connect(caseBlock.valueConnection_);
                 }
@@ -645,7 +645,7 @@ Blockly.Blocks['control_case'] = {
   init: function() {
     this.setColour(180);
     this.appendDummyInput()
-        .appendField('the case is');
+        .appendField(Blockly.Msg.cases_switch);
     this.appendStatementInput('STACK');
     this.setTooltip('--Placeholder--');
     this.contextMenu = false;
@@ -656,7 +656,7 @@ Blockly.Blocks['case_incaseof'] = {
   init: function() {
     this.setColour(180);
     this.appendDummyInput()
-        .appendField('in case of');
+        .appendField(Blockly.Msg.cases_add);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip('--Placeholder--');

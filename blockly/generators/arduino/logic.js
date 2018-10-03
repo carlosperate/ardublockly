@@ -155,8 +155,10 @@ Blockly.Arduino['switch_case'] = function(block) {
   var cases= '';
   var DO = Blockly.Arduino.statementToCode(block, ('CASE' + n));
   for (n = 0; n <= block.caseCount_; n++) {
-    cases += 'case' + branch + ':'
-    cases += DO + '\nbreak;';
+    var DO = Blockly.Arduino.statementToCode(block, ('CASE' + n));
+    var branch = Blockly.Arduino.valueToCode(block, ('CASECONDITION' + n), Blockly.Arduino.ORDER_NONE) || '0';
+    cases += 'case ' + branch + ':\n';
+    cases += DO + '\nbreak;\n';
   }
   var code = 'switch (' + argument + ') {\n' + cases + '}';
   return code + '\n';

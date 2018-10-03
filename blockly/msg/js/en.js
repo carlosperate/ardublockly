@@ -627,3 +627,10 @@ Blockly.Msg.senseBox_wifi_tip  = "Establishes a wifi connection";
 Blockly.Msg.sensebox_display_show  = "Print on Display";
 Blockly.Msg.sensebox_display_show_tip  = "Print on Display";
 Blockly.Msg.sensebox_sd_filename = "Filename";
+
+// Cases
+Blockly.Msg.cases_do = "Do";
+Blockly.Msg.cases_condition = "Case (Variable) =";
+Blockly.Msg.cases_switch = "Variable";
+Blockly.Msg.cases_add = "Case";
+
