@@ -158,10 +158,6 @@ Blockly.Arduino['switch_case'] = function(block) {
     cases += 'case' + branch + ':'
     cases += DO + '\nbreak;';
   }
-  if (block.elseCount_) {
-    branch = Blockly.Arduino.statementToCode(block, 'ELSE');
-    code += ' else {\n' + branch + '}';
-  }
   var code = 'switch (' + argument + ') {\n' + cases + '}';
   return code + '\n';
 };
