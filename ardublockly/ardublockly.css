@@ -559,7 +559,7 @@ ul.side-nav li.side-menu-end {
   overflow-y: auto;    
   overflow-x: auto;
   width: auto;
-  min-height: 600px;
+  min-height: 450px;
 }
 .modal_small .modal-content {
   margin-top: 0;
@@ -868,4 +868,8 @@ ul.side-nav li ul li ul li {
   padding: 0 1px !important;
   width: 100% !important;
   background-color: white !important;
+}
+img.animated-gif{
+  width: auto;
+  height: 200px;
 }
