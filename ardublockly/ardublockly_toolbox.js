@@ -31,7 +31,29 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_gps_getValues"></block>' +
     '   </category>' +
     '  <sep></sep>' +
-    '      <category id="catsenseBoxDisplay" name="senseBox display" colour="120">' +
+    '   <category id="catSenseBox_Output" name="senseBox Output" colour="120">' +
+    '       <block type="sensebox_led"></block>' +
+    '      <block type="sensebox_piezo"></block>' +
+    '      <block type="sensebox_rgb_led">' +
+    '        <value name="RED">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '        <value name="GREEN">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '        <value name="BLUE">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '      </block>' +
+    '      <block type="sensebox_serial_print"></block>' +
+    '      <block type="sensebox_interval_timer"></block>' +
+    '      <category id="catsenseBoxDisplay" name="Display" colour="120">' +
     '      <block type="sensebox_display_beginDisplay"></block>' +
     '      <block type="sensebox_display_show"></block>' +
     '      <block type="sensebox_display_clearDisplay"></block>' +
@@ -94,28 +116,6 @@ Ardublockly.TOOLBOX_XML =
     '      </block>' +
     '   </category>' +
     '  <sep></sep>' +
-    '   <category id="catSenseBox_Output" name="senseBox Output" colour="120">' +
-    '       <block type="sensebox_led"></block>' +
-    '      <block type="sensebox_piezo"></block>' +
-    '      <block type="sensebox_rgb_led">' +
-    '        <value name="RED">' +
-    '          <block type="math_number">' +
-    '            <field name="NUM">0</field>' +
-    '          </block>' +
-    '        </value>' +
-    '        <value name="GREEN">' +
-    '          <block type="math_number">' +
-    '            <field name="NUM">0</field>' +
-    '          </block>' +
-    '        </value>' +
-    '        <value name="BLUE">' +
-    '          <block type="math_number">' +
-    '            <field name="NUM">0</field>' +
-    '          </block>' +
-    '        </value>' +
-    '      </block>' +
-    '      <block type="sensebox_serial_print"></block>' +
-    '      <block type="sensebox_interval_timer"></block>' +
     '      <category id="catsenseBoxOutput_Web" name="  web" colour="120">' +
     '      <block type="sensebox_wifi"></block>' +
     '      <block type="sensebox_osem_connection"></block>' +

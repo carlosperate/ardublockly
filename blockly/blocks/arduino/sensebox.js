@@ -28,7 +28,7 @@ Blockly.Blocks['sensebox_sensor_temp_hum'] = {
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME");
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME")
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_temp_hum_tip);
@@ -123,6 +123,7 @@ Blockly.Blocks['sensebox_sensor_sds011'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_pm25,"Pm25"], [Blockly.Msg.senseBox_sds011_pm10,"Pm10"]]), "NAME")
+        .appendField(Blockly.Msg.senseBox_sds011_dimension)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_serial1,"Serial1"], [Blockly.Msg.senseBox_sds011_serial2,"Serial2"]]), "SERIAL");
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -137,8 +138,12 @@ Blockly.Blocks['sensebox_sensor_sds011'] = {
 Blockly.Blocks['sensebox_sensor_pressure'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_pressure);
+        .appendField(Blockly.Msg.senseBox_pressure_sensor);
        this.setOutput(true, "Number");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.senseBox_value)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_pressure,"Pressure"], [Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_gps_alt,"Altitude"]]), "NAME");
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_pressure_tip);
@@ -776,6 +781,7 @@ Blockly.Blocks['sensebox_display_show'] = {
           .appendField(Blockly.Msg.senseBox_gps_getValues);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.senseBox_value)
           .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_gps_lat,"Latitude"], [Blockly.Msg.senseBox_gps_lng,"Longitude"], [Blockly.Msg.senseBox_gps_alt,"Altitude"], [Blockly.Msg.senseBox_gps_speed, "Speed"]]), "Values");
       this.setOutput(true, Blockly.Types.NUMBER.output);
       this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -796,8 +802,8 @@ Blockly.Blocks['sensebox_display_show'] = {
           .appendField(Blockly.Msg.senseBox_interval_timer);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_LEFT)
-          .appendField(Blockly.Msg.senseBox_interval)
-          .appendField(new Blockly.FieldTextInput("time"), "interval");
+          .appendField(new Blockly.FieldTextInput("1000"), "interval")
+          .appendField(Blockly.Msg.senseBox_interval);
       this.appendStatementInput('DO')
           .setCheck(null);
       this.setPreviousStatement(true, null);

@@ -16,10 +16,11 @@ goog.require('Blockly.Arduino');
 ----------------------------------Sensoren--------------------------------------------------
 */
 Blockly.Arduino.sensebox_sensor_pressure = function() {
+var dropdown_name = this.getFieldValue('NAME');
 Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
 Blockly.Arduino.userFunctions_['define_pressure'] = 'BMP280 bmp_sensor;';
 Blockly.Arduino.setups_['sensebox_bmp_sensor'] = 'bmp_sensor.begin();';
-  var code ='bmp_sensor.getPressure()';
+  var code ='bmp_sensor.get' + dropdown_name + '()';
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
 
