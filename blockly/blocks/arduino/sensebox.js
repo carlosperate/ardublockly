@@ -466,6 +466,7 @@ Blockly.Blocks['sensebox_led'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_led)
+        .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN")
         .appendField(Blockly.Msg.senseBox_basic_state)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_on, "HIGH"], [Blockly.Msg.senseBox_off, "LOW"]]), "STAT");

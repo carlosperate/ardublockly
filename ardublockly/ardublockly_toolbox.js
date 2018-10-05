@@ -103,7 +103,12 @@ Ardublockly.TOOLBOX_XML =
     '        </value>' +
     '       </block>' +
     '      <block type="sensebox_display_printDisplay">' +
-    '           <value name="X">' +
+    '         <value name="SIZE">' +
+    '       <block type="math_number">' +
+    '            <field name="NUM">1</field>' +
+    '          </block>' +
+    '        </value>' +    
+    '       <value name="X">' +
     '               <block type="math_number">' +
     '                 <field name="NUM">0</field>' +
     '          </block>' +
