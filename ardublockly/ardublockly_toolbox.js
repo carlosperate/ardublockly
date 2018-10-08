@@ -107,7 +107,7 @@ Ardublockly.TOOLBOX_XML =
     '       <block type="math_number">' +
     '            <field name="NUM">1</field>' +
     '          </block>' +
-    '        </value>' +    
+    '        </value>' +
     '       <value name="X">' +
     '               <block type="math_number">' +
     '                 <field name="NUM">0</field>' +
@@ -134,7 +134,6 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_sd_write_file"></block>' +
     '      </category>' +
     '</category>' +
-    '  <sep></sep>' +
     '    <sep></sep>' +
     '   <category id="catLogic" name="Logic" colour="210">' +
     '    <block type="controls_if"></block>' +
@@ -150,7 +149,7 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="case_default"></block>' +
     '   </category>' +
     '   <sep></sep>' +
-    '       <category id="catLoops" name="Loops" colour="10">' +
+    '    <category id="catLoops" name="Loops" colour="10">' +
     '           <block type="controls_repeat_ext">' +
     '               <value name="TIMES">' +
     '           <block type="math_number">' +
@@ -359,5 +358,5 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="spi_transfer_return"></block>' +
     '  </category>' +
     '  <category id="catFunctions" name="Functions" custom="PROCEDURE" colour="290"></category>' +
-    '  </categroy>' +
+    '  </category>' +
     '</xml>';
