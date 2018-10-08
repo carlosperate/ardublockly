@@ -80,7 +80,7 @@ SenseboxExtension.init = function() {
           try {
             var openDownload = function () {
                             response = JSON.parse(request.response);
-                            window.open('http://blox.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
+                            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
                           }
                             Ardublockly.alertMessage(
                             Ardublockly.getLocalStr('sketch_compiled'),
@@ -116,7 +116,7 @@ SenseboxExtension.init = function() {
     };
     try {
       Ardublockly.resetIdeOutputContent();
-      request.open('POST', 'http://blox.sensebox.de/compile', true);
+      request.open('POST', 'https://compiler.sensebox.de/', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
       request.send(JSON.stringify(data));
