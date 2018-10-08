@@ -1,71 +1,23 @@
-# Ardublockly
-Ardublockly is a visual programming editor for Arduino. It is based on Google's [Blockly][1], which has been forked to generate [Arduino][15] code.
-
-The `ArdublocklyServer` Python package initialises a local server to be able to compile and load the Arduino code using the [Arduino IDE][2].
-
-This is all packaged in a self contained executable desktop application for Windows, Mac OS X, and Linux.
-
-![Ardublockly desktop program screenshot][desktop_screeshot]
-
+# Blockly for senseBox
+Blockly for senseBox is a visual programming editor for the senseBox:edu. It is based on Google's [Blockly](https://developers.google.com/blockly/) and carlosperates [Ardublockly](https://github.com/carlosperate/ardublockly), which has been forked.
 
 ## Features
 * Generates Arduino code with visual drag-and-drop blocks
-* Uploads the code to an Arduino Board
+* online Compiler for the senseBox MCU
 * Useful "code block warnings"
-* Compatible with a wide range of official Arduino Boards
-* Works on Windows / Linux / Mac OS X
+* Works online without Installation and offline on Windows / Linux / Mac OS X (testing purpose only at the moment!)
+* 
 
-Ardublockly is still under development and a few features are not yet implemented. A to-do list can be found in the [TODO.md][3] file.
-
-Currently tested under Windows with Python 2.7 and 3.4 and in Linux and MacOS X with Python 2.7.
+If you find erros, enhancement or want to request new features submit a new issue. 
 
 
-## Cloning the repository
-Please note that there are submodules in the repository that need initialisation. So, to correctly clone the Ardublockly repository:
-
-```
-git clone https://github.com/carlosperate/ardublockly.git
-cd ardublockly
-git submodule update --init --recursive
-```
-
-
-## Installing
-The desktop application is available for Windows/Mac/Linux and runs as a stand-alone executable that can be downloaded from the [Ardublockly repository releases page][4].
-
-You will also need the [Arduino IDE version 1.6.x or higher][2].
-
-#### Development builds
-You can also test __UNSTABLE__ development builds automatically generated every time an update is added to the GitHub repository:
-
-| Linux build         | Windows build       | Mac OS X build       |
-|:-------------------:|:-------------------:|:--------------------:|
-| [![Linux Build Status](https://circleci.com/gh/carlosperate/ardublockly/tree/master.svg?style=svg)](https://circleci.com/gh/carlosperate/ardublockly/tree/master) | [![Windows Build status](https://ci.appveyor.com/api/projects/status/t877g920hdiifc2i?svg=true)](https://ci.appveyor.com/project/carlosperate/ardublockly) | [![Mac Build Status](https://travis-ci.org/carlosperate/ardublockly.svg?branch=master)](https://travis-ci.org/carlosperate/ardublockly) |
-| [Download Link][12] | [Download Link][13] | [Download Link][14]  |
-
-#### "Core version" (Python server only)
-If you prefer, the core software can be used by running only the Python server, which loads the web interface on your local browser (Chrome recommended).
-
-Full installation instructions for this version can be found in [this Github repository Wiki][5].
-
-The quick version: Clone this repository, initialise all submodules, and execute:
-
-```
-python start.py
-```
-
-This will work on Windows, Linux (including ARM) and Mac OS X, with Python >2.7 or >3.4
-
-
-## Running
-1. [Install Ardublockly][5].
-2. Install the [Arduino IDE][2] version 1.6.x or higher (latest version is always recommended).
+## Running Online
+1. Go to [Blockly for senseBox](https://blockly.sensebox.de/) and choose between Arduino and the senseBox MCU.
+2. 
 3. Run Ardublockly as defined in your installation method.
 3. Configure Ardublockly to locate the Arduino IDE [following these instructions][6].
 
 
-## Online Demos
-A demo of the latest release of Ardublockly main interface can be found in the following two links (to load the code into an Arduino it requires the full Ardublockly application to be downloaded and run on your computer):
 
 #### [Ardublockly][10]
 ![WebApp screenshot responsive design][web_screenshot_responsive]
@@ -75,19 +27,13 @@ A demo of the latest release of Ardublockly main interface can be found in the f
 
 
 ## Documentation
-The documentation, including installation instructions, configuration instructions, and developer information can be found in the [Ardublockly GitHub repository Wiki][7].
-
-To download the documentation you can git clone the wiki data:
-
-```
-git clone https://github.com/carlosperate/ardublockly.wiki.git
-```
+Documentation can be found online in Germany and English: [https://developers.google.com/blockly/](https://sensebox.github.io/books-v2/blockly/)
 
 
-## Credit
+## Credits
 This project has been inspired by [BlocklyDuino][16].
 
-Blockly original source is Copyright of Google Inc. [https://developers.google.com/blockly/][1]. A list of changes to the Blockly fork can be found in the [Blockly subdirectory README][17] file.
+Blockly original source is Copyright of Google Inc. [https://developers.google.com/blockly/][1].
 
 
 ## License
@@ -107,8 +53,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 
-[1]: https://developers.google.com/blockly/
-[2]: http://www.arduino.cc/en/main/software/
+[1]: 
+[2]: 
 [3]: TODO.md
 [4]: https://github.com/carlosperate/ardublockly/releases/
 [5]: https://github.com/carlosperate/ardublockly/wiki/Installing-Ardublockly
