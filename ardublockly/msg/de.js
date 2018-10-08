@@ -71,7 +71,7 @@ Ardublockly.LOCALISED_TEXT = {
   noServerNoLangBody: "Solang das Ardublocky Programm nicht läuft kann die Sprache nicht vollständig geändert werden.",
   addBlocksTitle: "Zusätzliche Blöcke",
   copy_paste_mcu: "Kopiere die .BIN Datei auf deine senseBox MCU. <br> Wird die senseBox MCU im Explorer nicht angezeigt mache eine Doppelklick auf den Roten Reset Button.<br>"+
-                  "<img src=\"img/copy_to_mcu.gif\"> <br>" +
+                  "<img class='animated-gif' src=\"img/copy_to_mcu.gif\"> <br>" +
                   "Benötigst du mehr Information und Hilfe schau ins <a href=\"https://sensebox.github.io/books-v2/blockly/de/\" target=\"_blank\">Blockly für senseBox Buch</a>",
   
   /* Alerts */
@@ -102,7 +102,9 @@ Ardublockly.LOCALISED_TEXT = {
   /* Toolbox Categories*/
   catSenseBox_Sensor:"senseBox Sensoren",
   catSenseBox_Output:"senseBox Ausgabe",
-  catsenseBoxDisplay:"senseBox Display",
+  catsenseBoxDisplay:"Display",
+  catsenseBoxOutput_SD:"SD",
+  catsenseBoxOutput_Web:"Web",
   catLogic: "Logik",
   catLoops: "Schleifen",
   catMath: "Mathematik",
@@ -114,6 +116,7 @@ Ardublockly.LOCALISED_TEXT = {
   catAudio: "Audio",
   catMotors: "Motoren",
   catComms: "Kommunikation",
+  catAdvanced: "Erweitert",
   code_copied: "Code wurde kopiert",
   save_to_clipboard: "In Zwischenablage kopieren",
   compile_sketch: "Sketch kompilieren",

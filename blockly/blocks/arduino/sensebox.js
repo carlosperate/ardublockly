@@ -12,6 +12,7 @@ goog.provide('Blockly.Blocks.sensebox');
 
 goog.require('Blockly.Blocks');
 
+var wifiDepend = null;
 
 /**
  * Common HSV hue for all blocks in this category.
@@ -27,7 +28,7 @@ Blockly.Blocks['sensebox_sensor_temp_hum'] = {
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME");
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME")
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_temp_hum_tip);
@@ -122,6 +123,7 @@ Blockly.Blocks['sensebox_sensor_sds011'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_pm25,"Pm25"], [Blockly.Msg.senseBox_sds011_pm10,"Pm10"]]), "NAME")
+        .appendField(Blockly.Msg.senseBox_sds011_dimension)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_sds011_serial1,"Serial1"], [Blockly.Msg.senseBox_sds011_serial2,"Serial2"]]), "SERIAL");
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -136,8 +138,12 @@ Blockly.Blocks['sensebox_sensor_sds011'] = {
 Blockly.Blocks['sensebox_sensor_pressure'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_pressure);
+        .appendField(Blockly.Msg.senseBox_pressure_sensor);
        this.setOutput(true, "Number");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(Blockly.Msg.senseBox_value)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_pressure,"Pressure"], [Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_gps_alt,"Altitude"]]), "NAME");
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_pressure_tip);
@@ -151,21 +157,78 @@ Blockly.Blocks['sensebox_sensor_pressure'] = {
 
 Blockly.Blocks['sensebox_sensor_ultrasonic_ranger'] = {
   init: function() {
+
+    var dropdownOptions = [[Blockly.Msg.senseBox_ultrasonic_port_A, 'A'],
+    [Blockly.Msg.senseBox_ultrasonic_port_B, 'B'],[Blockly.Msg.senseBox_ultrasonic_port_C, 'C']];
+    var dropdown = new Blockly.FieldDropdown(dropdownOptions, function(option) {
+    var input = (option == 'A') || (option ==  'B') || (option == 'C');
+    this.sourceBlock_.updateShape_(input);
+    });
+
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
-	      .appendField(Blockly.Msg.senseBox_ultrasonic)
-    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_ultrasonic)
+        .appendField(dropdown, "port");
+    this.appendDummyInput('TrigEcho')
+        .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_ultrasonic_trigger)
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_RX")
+        .appendField(new Blockly.FieldDropdown(
+        Blockly.Arduino.Boards.selected.digitalPins), 'ultrasonic_trigger')
         .appendField(Blockly.Msg.senseBox_ultrasonic_echo)
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN_TX")
+        .appendField(new Blockly.FieldDropdown(
+          Blockly.Arduino.Boards.selected.digitalPins), 'ultrasonic_echo');
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_ultrasonic_tip);
     this.setHelpUrl('https://sensebox.de/books');
   },
+  /**
+   * Parse XML to restore the number of pins available.
+   * @param {!Element} xmlElement XML storage element.
+   * @this Blockly.Block
+   
+  domToMutation: function(xmlElement) {
+    var input = (xmlElement.getAttribute('port'));
+    
+  },*
+  /**
+   * Create XML to represent number of pins selection.
+   * @return {!Element} XML storage element.
+   * @this Blockly.Block
+   */
+  mutationToDom: function() {
+    var container = document.createElement('mutation');
+    var input = this.getFieldValue('port');
+    this.updateShape_(input);
+    container.setAttribute("port", input);
+    return container;
+  },
+  /**
+   * Modify this block to have the correct number of pins available.
+   * @param {boolean}
+   * @private
+   * @this Blockly.Block
+   */
+  updateShape_: function() {
+    var input = this.getFieldValue('port');
+    switch (input){
+      case 'A':
+      this.setFieldValue('1','ultrasonic_trigger');  
+      this.setFieldValue('2','ultrasonic_echo');
+      break;
+      case 'B':
+      this.setFieldValue('3','ultrasonic_trigger');  
+      this.setFieldValue('4','ultrasonic_echo');
+      break;
+      case 'C':
+      this.setFieldValue('5','ultrasonic_trigger');  
+      this.setFieldValue('6','ultrasonic_echo');
+      break;
+    }
+   },
+
   getBlockType: function() {
     return Blockly.Types.NUMBER;
-  },
+  }
 };
 Blockly.Blocks['sensebox_sensor_sound'] = {
   init: function() {
@@ -217,7 +280,27 @@ Blockly.Blocks['sensebox_wifi'] = {
         .appendField(new Blockly.FieldTextInput("Password"), "Password");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
-        }
+        },
+        onchange: function(e) {
+          var legal = false;
+          // Is the block nested in a loop?
+          var block = this;
+          do {
+            if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+              legal = true;
+              break;
+            }
+            block = block.getSurroundParent();
+          } while (block);
+          if (legal) {
+            this.setWarningText(null);
+            wifiDepend = true;
+          } else {
+            this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+            wifiDepend = null;
+          }
+        },
+        LOOP_TYPES: ['arduino_functions'],
   };
 
   Blockly.Blocks['sensebox_osem_connection'] = {
@@ -251,8 +334,32 @@ Blockly.Blocks['sensebox_wifi'] = {
             .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-            }
-      };
+            },
+             /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_osem_connection'],
+};
 
       Blockly.Blocks['sensebox_send_mobile_to_osem'] = {
         init: function() {
@@ -271,8 +378,32 @@ Blockly.Blocks['sensebox_wifi'] = {
               .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
           this.setPreviousStatement(true, null);
           this.setNextStatement(true, null);
-              }
-        };
+              },
+               /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1 && wifiDepend != null) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_osem_connection'],
+};
 
 
 
@@ -335,6 +466,7 @@ Blockly.Blocks['sensebox_led'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_led)
+        .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN")
         .appendField(Blockly.Msg.senseBox_basic_state)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_on, "HIGH"], [Blockly.Msg.senseBox_off, "LOW"]]), "STAT");
@@ -398,7 +530,8 @@ Blockly.Blocks['sensebox_sd_open_file'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_sd_open_file)
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField(filename);
+        .appendField(
+         new Blockly.FieldInstance('file',Blockly.Msg.sensebox_sd_filename,false, true, false),'Filename');
     this.appendStatementInput('SD')
         .setCheck(null);
     this.setPreviousStatement(true, null);
@@ -406,6 +539,23 @@ Blockly.Blocks['sensebox_sd_open_file'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
     this.setHelpUrl('https://sensebox.de/books');
+  },
+  onchange: function(event) {
+    if (!this.workspace || event.type == Blockly.Events.MOVE ||
+        event.type == Blockly.Events.UI) {
+        return;  // Block deleted or irrelevant event
+    }
+
+    var instanceName = this.getFieldValue('Filename')
+    if (Blockly.Instances.isInstancePresent(instanceName, 'file', this)) {
+      this.setWarningText(null);
+    } else {
+      // Set a warning to select a valid stepper config block
+      this.setWarningText(
+        Blockly.Msg.ARD_COMPONENT_WARN1.replace(
+            '%1', Blockly.Msg.senseBox_SD_COMPONENT).replace(
+                '%2', Blockly.Msg.sensebox_sd_filename));
+    }
   }
 };
 
@@ -415,7 +565,7 @@ Blockly.Blocks['sensebox_sd_create_file'] = {
         .appendField(Blockly.Msg.senseBox_sd_create_file)
         .setAlign(Blockly.ALIGN_LEFT)
         .appendField(Blockly.Msg.senseBox_output_filename)
-        .appendField( new Blockly.FieldTextInput('Filename'), 'Filename');
+        .appendField( new Blockly.FieldInstance('file',Blockly.Msg.sensebox_sd_filename,true, true, false),'Filename');
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -439,7 +589,31 @@ Blockly.Blocks['sensebox_sd_write_file'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_sd_open_file'],
 };
 
 /*senseBox Display Blocks*/
@@ -469,7 +643,7 @@ Blockly.Blocks['sensebox_display_clearDisplay'] = {
 };
 
 Blockly.Blocks['sensebox_display_printDisplay'] = {
-  init: function() {
+  init: function(block) {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_display_printDisplay)
@@ -488,8 +662,33 @@ Blockly.Blocks['sensebox_display_printDisplay'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.senseBox_display_printDisplay_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_display_show'],
 };
+
 
 Blockly.Blocks['sensebox_display_plotDisplay'] = {
   init: function() {
@@ -500,10 +699,15 @@ Blockly.Blocks['sensebox_display_plotDisplay'] = {
         .appendField(Blockly.Msg.senseBox_display_plotYLabel);
     this.appendValueInput("XLabel", 'Text')
         .appendField(Blockly.Msg.senseBox_display_plotXLabel);
-    this.appendValueInput("XRange", 'Number')
-            .appendField(Blockly.Msg.senseBox_display_plotXRange);
-    this.appendValueInput("YRange", 'Number')
-            .appendField(Blockly.Msg.senseBox_display_plotYRange);
+    this.appendValueInput("XRange1", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotXRange1);
+    this.appendValueInput("XRange2", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotXRange2)
+    this.appendValueInput("YRange1", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotYRange1);
+    this.appendValueInput("YRange2", 'Number')
+            .appendField(Blockly.Msg.senseBox_display_plotYRange2);
+    this.setInputsInline(false);
     this.appendValueInput("XTick", 'Number')
             .appendField(Blockly.Msg.senseBox_display_plotXTick);
     this.appendValueInput("YTick", 'Number')
@@ -517,7 +721,31 @@ Blockly.Blocks['sensebox_display_plotDisplay'] = {
     this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.senseBox_display_printDisplay_tip);
     this.setHelpUrl('https://sensebox.de/books');
-  }
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_display_show'],
 };
 
 Blockly.Blocks['sensebox_display_show'] = {
@@ -554,6 +782,7 @@ Blockly.Blocks['sensebox_display_show'] = {
           .appendField(Blockly.Msg.senseBox_gps_getValues);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_RIGHT)
+          .appendField(Blockly.Msg.senseBox_value)
           .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_gps_lat,"Latitude"], [Blockly.Msg.senseBox_gps_lng,"Longitude"], [Blockly.Msg.senseBox_gps_alt,"Altitude"], [Blockly.Msg.senseBox_gps_speed, "Speed"]]), "Values");
       this.setOutput(true, Blockly.Types.NUMBER.output);
       this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -574,8 +803,8 @@ Blockly.Blocks['sensebox_display_show'] = {
           .appendField(Blockly.Msg.senseBox_interval_timer);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_LEFT)
-          .appendField(Blockly.Msg.senseBox_interval)
-          .appendField(new Blockly.FieldTextInput("time"), "interval");
+          .appendField(new Blockly.FieldTextInput("1000"), "interval")
+          .appendField(Blockly.Msg.senseBox_interval);
       this.appendStatementInput('DO')
           .setCheck(null);
       this.setPreviousStatement(true, null);

@@ -108,3 +108,5 @@ package/ardublocklydocs/site
 
 # The electron package needs the build folder (to be changed in the near future)
 !/package/electron/tasks/build/
+.vscode/arduino.json
+.vscode/c_cpp_properties.json

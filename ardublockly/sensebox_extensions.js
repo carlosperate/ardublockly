@@ -116,7 +116,7 @@ SenseboxExtension.init = function() {
     };
     try {
       Ardublockly.resetIdeOutputContent();
-      request.open('POST', 'https://compiler.sensebox.de/compile', true);
+      request.open('POST', 'https://compiler.sensebox.de/', true);
       request.setRequestHeader('Content-Type', 'application/json');
       request.onreadystatechange = onReady;
       request.send(JSON.stringify(data));

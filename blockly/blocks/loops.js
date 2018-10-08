@@ -292,6 +292,6 @@ Blockly.Blocks['controls_flow_statements'] = {
    * To add a new loop type add this to your code:
    * Blockly.Blocks['controls_flow_statements'].LOOP_TYPES.push('custom_loop');
    */
-  LOOP_TYPES: ['controls_repeat', 'controls_repeat_ext', 'controls_forEach',
+  LOOP_TYPES: ['controls_repeat','controls_repeat_ext', 'controls_forEach',
       'controls_for', 'controls_whileUntil']
 };
