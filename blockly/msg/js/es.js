@@ -510,6 +510,10 @@ Blockly.Msg.NEW_INSTANCE = "Nueva instancia...";
 Blockly.Msg.NEW_INSTANCE_TITLE = "Nueva nombre de la instance:";
 Blockly.Msg.RENAME_INSTANCE = "Renombrar la instancia...";
 Blockly.Msg.RENAME_INSTANCE_TITLE = "Renombrar todas las instancias '%1' a:";
+Blockly.Msg.cases_add = "Case";  // untranslated
+Blockly.Msg.cases_condition = "Case (Variable) = ";  // untranslated
+Blockly.Msg.cases_do = "Do";  // untranslated
+Blockly.Msg.cases_switch = "Variable";  // untranslated
 Blockly.Msg.senseBox_SD_COMPONENT = "SD-Block";  // untranslated
 Blockly.Msg.senseBox_basic_blue  = "Blue";  // untranslated
 Blockly.Msg.senseBox_basic_green  = "Gree";  // untranslated

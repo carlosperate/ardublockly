@@ -510,6 +510,10 @@ Blockly.Msg.NEW_INSTANCE = "Nuova istanza...";
 Blockly.Msg.NEW_INSTANCE_TITLE = "Nuovo nome dell'istanza:";
 Blockly.Msg.RENAME_INSTANCE = "Rinomina istanza...";
 Blockly.Msg.RENAME_INSTANCE_TITLE = "Rinomina tutte le '%1' istanze a:";
+Blockly.Msg.cases_add = "Case";  // untranslated
+Blockly.Msg.cases_condition = "Case (Variable) = ";  // untranslated
+Blockly.Msg.cases_do = "Do";  // untranslated
+Blockly.Msg.cases_switch = "Variable";  // untranslated
 Blockly.Msg.senseBox_SD_COMPONENT = "SD-Block";  // untranslated
 Blockly.Msg.senseBox_basic_blue  = "Blue";  // untranslated
 Blockly.Msg.senseBox_basic_green  = "Gree";  // untranslated

@@ -510,6 +510,10 @@ Blockly.Msg.NEW_INSTANCE = "Новый экземпляр...";
 Blockly.Msg.NEW_INSTANCE_TITLE = "Название нового экземпляра:";
 Blockly.Msg.RENAME_INSTANCE = "Переименовать экземпляры...";
 Blockly.Msg.RENAME_INSTANCE_TITLE = "Переименовать все '%1' экземпляры в:";
+Blockly.Msg.cases_add = "Case";  // untranslated
+Blockly.Msg.cases_condition = "Case (Variable) = ";  // untranslated
+Blockly.Msg.cases_do = "Do";  // untranslated
+Blockly.Msg.cases_switch = "Variable";  // untranslated
 Blockly.Msg.senseBox_SD_COMPONENT = "SD-Block";  // untranslated
 Blockly.Msg.senseBox_basic_blue  = "Blue";  // untranslated
 Blockly.Msg.senseBox_basic_green  = "Gree";  // untranslated

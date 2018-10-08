@@ -578,5 +578,9 @@
 "senseBox_send_mobile_to_osem_tip":"Sende Messwert und Standort an die openSenseMap",
 "senseBox_interval_timer": "Messintervall",
 "senseBox_interval" : "ms",
-"senseBox_interval_timer_tip" : "Intervall"
+"senseBox_interval_timer_tip" : "Intervall",
+"cases_do" : "Führe aus",
+"cases_condition" : "Fall (Variable) = ",
+"cases_switch" : "Variable",
+"cases_add" : "Fall"
 }
