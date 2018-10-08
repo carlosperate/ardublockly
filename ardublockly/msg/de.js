@@ -6,7 +6,7 @@ Ardublockly.LOCALISED_TEXT = {
   /* Menu */
   open: "Öffnen",
   save: "Speichern",
-  deleteAll: "Alle löschen",
+  deleteAll: "Alles löschen",
   settings: "Einstellungen",
   documentation: "Dokumentation",
   reportBug: "Fehler melden",
