@@ -873,3 +873,7 @@ img.animated-gif{
   width: auto;
   height: 200px;
 }
+
+.sb-disabled {
+  background: rgb(168, 167, 167) !important;
+}
