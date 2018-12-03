@@ -10,13 +10,17 @@
 var Ardublockly = Ardublockly || {};
 
 /** Initialize function for Ardublockly, to be called on page load. */
-Ardublockly.init = function() {
+Ardublockly.init = function(options) {
+  var opts = options || {};
+  var blocklyDivId = opts.blocklyDiv || 'content_blocks';
+  var blocklyPath = opts.blocklyPath || '../blockly/';
+
   // Lang init must run first for the rest of the page to pick the right msgs
   Ardublockly.initLanguage();
 
   // Inject Blockly into content_blocks and fetch additional blocks
-  Ardublockly.injectBlockly(document.getElementById('content_blocks'),
-                            Ardublockly.TOOLBOX_XML, '../blockly/');
+  Ardublockly.injectBlockly(document.getElementById(blocklyDivId),
+                            Ardublockly.TOOLBOX_XML, blocklyPath);
   Ardublockly.importExtraBlocks();
 
   Ardublockly.designJsInit();
@@ -75,7 +79,7 @@ Ardublockly.bindActionFunctions = function() {
     Ardublockly.loadServerXmlFile('../examples/send_osem.xml');
     $('.button-collapse').sideNav('hide');
   });
- 
+
   // Floating buttons
   Ardublockly.bindClick_('button_ide_large', function() {
     Ardublockly.ideButtonLargeAction();
