@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
   <link rel="stylesheet" href="prettify/arduino.css">
   <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
+  <link rel="stylesheet" type="text/css" href="prettify/loading.css"/>
+  <link rel="stylesheet" type="text/css" href="prettify/loading-btn.css"/>
 
   <!-- Ardublockly - These three files contain the compress version-->
   <script src="../blockly/blockly_compressed.js"></script>
@@ -130,7 +132,7 @@
 
           <div id="buttons_online" class="hidden">
             <a id="button_copy_clipboard" class="tooltipped copy-btn waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_blue" data-clipboard-action="copy" data-clipboard-target="#content_arduino" data-position="left" data-delay="750" data-tooltip="In Zwischenablage kopieren"><i id="button_copy_clipboard_icon" class="mdi-action-assignment"></i></a>
-            <a id="button_compile_sketch" class="tooltipped copy-btn waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange" data-position="left" data-delay="750" data-tooltip="Sketch kompilieren"><i id="button_compile_sketch_icon" class="mdi-action-assignment-turned-in"></i></a>
+            <a id="button_compile_sketch" class="tooltipped copy-btn waves-effect waves-light waves-circle btn-floating z-depth-1-half arduino_orange ld-over-inverse" data-position="left" data-delay="750" data-tooltip="Sketch kompilieren"> <div class="ld ld-ring ld-spin"></div> <i id="button_compile_sketch_icon" class="mdi-action-assignment-turned-in"></i></a>
           </div>
 
           <div id="button_ide_large_spinner" class="preloader-wrapper active ide_loader" style="display:none">

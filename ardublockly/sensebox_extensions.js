@@ -68,6 +68,7 @@ SenseboxExtension.init = function() {
   compile.addEventListener('click', function () {
     if(!compiling) {
       addClass(compile, "sb-disabled");
+      addClass(compile, "running");
       compiling = true;
   
       var sketch = Ardublockly.generateArduino();
@@ -81,6 +82,7 @@ SenseboxExtension.init = function() {
       var onReady = function() {
         compiling = false;
         removeClass(compile, "sb-disabled");
+        removeClass(compile, "running");
         if (request.readyState == 4) {
           if (request.status == 200) {
             var response = null;
