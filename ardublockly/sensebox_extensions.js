@@ -89,7 +89,8 @@ SenseboxExtension.init = function () {
             try {
               var openDownload = function () {
                 response = JSON.parse(request.response);
-                window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD, '_self');
+                var filename = document.getElementById('sketch_name').value;
+                window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self');
               }
               Ardublockly.alertMessage(
                 Ardublockly.getLocalStr('sketch_compiled'),
