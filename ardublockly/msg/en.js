@@ -82,6 +82,7 @@ Ardublockly.LOCALISED_TEXT = {
                      "Are you sure you want to delete them?",
   invalidXmlTitle: "Invalid XML",
   invalidXmlBody: "The XML file was not successfully parsed into blocks. Please review the XML code and try again.",
+  errorFilename: "The Filename should not contain more than 8 characters",
   /* Tooltips */
   uploadingSketch: "Uploading Sketch into Arduino...",
   uploadSketch: "Upload Sketch to the Arduino",

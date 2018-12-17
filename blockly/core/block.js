@@ -727,7 +727,7 @@ Blockly.Block.prototype.renameInstance = function(
           var found = newName.match(regex);
           console.log(found);
           if (found == null) {
-              alert("Maximal 8 Zeichen");
+              alert(Ardublockly.getLocalStr('errorFilename'));
           }
           else {
           field.setValue(newName);
