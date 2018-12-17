@@ -723,7 +723,15 @@ Blockly.Block.prototype.renameInstance = function(
       if (field instanceof Blockly.FieldInstance) {
         var validInstance = field.getInstanceTypeValue(instanceType);
         if (validInstance && Blockly.Names.equals(oldName, validInstance)) {
+          var regex = /(^[\w,\s-]{0,8})$/;
+          var found = newName.match(regex);
+          console.log(found);
+          if (found == null) {
+              alert("Maximal 8 Zeichen");
+          }
+          else {
           field.setValue(newName);
+          }
         }
       }
     }
