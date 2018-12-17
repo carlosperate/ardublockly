@@ -9,7 +9,7 @@ SenseboxExtension.SUPPORTED_BOARDS = {
 };
 
 /** Initialize function for senseBox extensions, to be called on page load. */
-SenseboxExtension.init = function() {
+SenseboxExtension.init = function () {
   var location = window.location;
   var urlParams = new URLSearchParams(location.search);
   Ardublockly.loadServerXmlFile('../ardublockly/start.xml');
@@ -52,11 +52,11 @@ SenseboxExtension.init = function() {
       break;
   }
   var clipboard = new ClipboardJS('.copy-btn');
-  clipboard.on('success', function(e) {
+  clipboard.on('success', function (e) {
     console.log(e);
     Ardublockly.MaterialToast(Ardublockly.getLocalStr('code_copied'));
   });
-  clipboard.on('error', function(e) {
+  clipboard.on('error', function (e) {
     console.log(e);
   });
 
@@ -66,11 +66,11 @@ SenseboxExtension.init = function() {
   var compile = document.getElementById('button_compile_sketch');
   var compiling = false;
   compile.addEventListener('click', function () {
-    if(!compiling) {
+    if (!compiling) {
       addClass(compile, "sb-disabled");
       addClass(compile, "running");
       compiling = true;
-  
+
       var sketch = Ardublockly.generateArduino();
       var data = {
         "board": window.BOARD,
@@ -79,7 +79,7 @@ SenseboxExtension.init = function() {
       var request = ArdublocklyServer.createRequest();
       // The data received is JSON, so it needs to be converted into the right
       // format to be displayed in the page.
-      var onReady = function() {
+      var onReady = function () {
         compiling = false;
         removeClass(compile, "sb-disabled");
         removeClass(compile, "running");
@@ -89,17 +89,17 @@ SenseboxExtension.init = function() {
             try {
               var openDownload = function () {
                 response = JSON.parse(request.response);
-                window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
+                window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD, '_self');
               }
               Ardublockly.alertMessage(
                 Ardublockly.getLocalStr('sketch_compiled'),
                 Ardublockly.getLocalStr('copy_paste_mcu'),
                 true, openDownload
-                );
-                /*response = JSON.parse(request.response);
+              );
+              /*response = JSON.parse(request.response);
               window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
               Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));*/
-            } catch(e) {
+            } catch (e) {
               throw e;
             }
           } else if (request.status == 500) {
@@ -109,7 +109,9 @@ SenseboxExtension.init = function() {
                 std_output: '',
                 err_output: response.message
               },
-              errors: [{id: 1}]
+              errors: [{
+                id: 1
+              }]
             }
             var dataBack = ArdublocklyServer.jsonToIdeModal(data);
             Ardublockly.arduinoIdeOutput(dataBack);
@@ -134,7 +136,8 @@ SenseboxExtension.init = function() {
         throw e;
       }
     }
-  });};
+  });
+};
 
 SenseboxExtension.changeBoard = function (event) {
   window.BOARD = event.target.value;
@@ -156,28 +159,24 @@ SenseboxExtension.populateBoards = function () {
   $('#boards-online').material_select();
 }
 
-function hasClass(el, className)
-{
-    if (el.classList)
-        return el.classList.contains(className);
-    return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+function hasClass(el, className) {
+  if (el.classList)
+    return el.classList.contains(className);
+  return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
 }
 
-function addClass(el, className)
-{
-    if (el.classList)
-        el.classList.add(className)
-    else if (!hasClass(el, className))
-        el.className += " " + className;
+function addClass(el, className) {
+  if (el.classList)
+    el.classList.add(className)
+  else if (!hasClass(el, className))
+    el.className += " " + className;
 }
 
-function removeClass(el, className)
-{
-    if (el.classList)
-        el.classList.remove(className)
-    else if (hasClass(el, className))
-    {
-        var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
-        el.className = el.className.replace(reg, ' ');
-    }
+function removeClass(el, className) {
+  if (el.classList)
+    el.classList.remove(className)
+  else if (hasClass(el, className)) {
+    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+    el.className = el.className.replace(reg, ' ');
+  }
 }
