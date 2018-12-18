@@ -92,7 +92,7 @@ SenseboxExtension.init = function () {
               Ardublockly.getLocalStr('copy_paste_mcu'));
               response = JSON.parse(request.response);
               var filename = document.getElementById('sketch_name').value;
-              window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_blank');
+              window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self');
               }
               /*response = JSON.parse(request.response);
               window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
