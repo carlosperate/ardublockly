@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="ardublockly.css" media="screen,projection">
   <link rel="stylesheet" type="text/css" href="prettify/loading.css"/>
   <link rel="stylesheet" type="text/css" href="prettify/loading-btn.css"/>
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
 
   <!-- Ardublockly - These three files contain the compress version-->
   <script src="../blockly/blockly_compressed.js"></script>
@@ -291,6 +292,9 @@
     </div>
     <div class="modal-footer">
       <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_okay">Okay</span></a>
+      <div class="form-check"></div>
+        <input type="checkbox" class="form-check-input nothanks" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1"><span class="translatable_notshow">Do not show again</span></label>
       <a id="gen_alert_cancel_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_cancel">Cancel</span></a>
     </div>
   </div>
@@ -325,11 +329,12 @@
     </div>
   </div>
 
-
   <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
   <script src="ardublockly_desktop.js"></script>
   <!-- jQuery and Materialize JS -->
   <script src="js_libs/jquery-2.1.3.min.js"></script>
+  <!-- Cookie JS for Modal -->
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
   <script src="materialize/materialize.js"></script>
   <!-- FileSaver JS -->
   <script src="js_libs/FileSaver.min.js"></script>
@@ -346,6 +351,26 @@
   <script src="ardublockly.js"></script>
   <!-- copy to clipboard stuff -->
   <script src="js_libs/clipboard.min.js"></script>
+  <!-- Cookie consent -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+    window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "#4eaf47"
+        },
+        "button": {
+          "background": "transparent",
+          "border": "#000000",
+          "text": "#000000"
+        }
+      },
+      "content": {
+        "href": "https://sensebox.de/de/privacy"
+      }
+    })});
+    </script>
   <script src="sensebox_extensions.js"></script>
   <script>
     window.addEventListener('load', function load(event) {
