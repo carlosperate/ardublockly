@@ -86,21 +86,18 @@ SenseboxExtension.init = function () {
         if (request.readyState == 4) {
           if (request.status == 200) {
             var response = null;
-            try {
-              var openDownload = function () {
-                response = JSON.parse(request.response);
-                var filename = document.getElementById('sketch_name').value;
-                window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self');
+            try{
+            Ardublockly.alertMessage(
+              Ardublockly.getLocalStr('sketch_compiled'),
+              Ardublockly.getLocalStr('copy_paste_mcu'));
+              response = JSON.parse(request.response);
+              var filename = document.getElementById('sketch_name').value;
+              window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_blank');
               }
-              Ardublockly.alertMessage(
-                Ardublockly.getLocalStr('sketch_compiled'),
-                Ardublockly.getLocalStr('copy_paste_mcu'),
-                true, openDownload
-              );
               /*response = JSON.parse(request.response);
               window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
               Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));*/
-            } catch (e) {
+             catch (e) {
               throw e;
             }
           } else if (request.status == 500) {
