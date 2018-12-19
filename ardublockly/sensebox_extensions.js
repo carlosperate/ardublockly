@@ -10,7 +10,7 @@ SenseboxExtension.SUPPORTED_BOARDS = {
 
 /** Initialize function for senseBox extensions, to be called on page load. */
 SenseboxExtension.init = function () {
-  Cookies.set ("no_thanks", "true", { expires: 7, path: '' });
+  sessionStorage.setItem('no_thanks', 'false');
   var location = window.location;
   var urlParams = new URLSearchParams(location.search);
   Ardublockly.loadServerXmlFile('../ardublockly/start.xml');
@@ -88,23 +88,20 @@ SenseboxExtension.init = function () {
           if (request.status == 200) {
             var response = null;
             try{
-              // Delayed Modal Display + Cookie On Click
-              $(document).ready(function() {
-                console.log(Cookies.get("no_thanks"));
+              
+              var no_thanks = sessionStorage.getItem('no_thanks');
               // If no cookie with our chosen name (e.g. no_thanks)...
-              if (Cookies.get("no_thanks") == "true") {
+              if (no_thanks == "false") {
 
                 Ardublockly.alertMessage(
                   Ardublockly.getLocalStr('sketch_compiled'),
                   Ardublockly.getLocalStr('copy_paste_mcu'));
               }
-              // On click of specified class (e.g. 'nothanks'), trigger cookie, with expiration in year 9999
               $(".nothanks").click(function() {
-              Cookies.set ("no_thanks", "false", { expires: 7, path: '' });
-
-                });
+              sessionStorage.setItem('no_thanks', document.getElementById("checkbox").checked);
+              console.log(sessionStorage.getItem('no_thanks'));
               });
-            
+              
               response = JSON.parse(request.response);
               var filename = document.getElementById('sketch_name').value;
               window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self');
