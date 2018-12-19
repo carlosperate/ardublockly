@@ -96,6 +96,7 @@ Ardublockly.LOCALISED_TEXT = {
   okay: "Okay",
   cancel: "Abbrechen",
   return: "Zurück",
+  notshow: "Diesen Hinweis nicht mehr anzeigen",
   /* Cards */
   arduinoSourceCode: "Arduino Quellcode",
   blocksXml: "XML Blöcke",
