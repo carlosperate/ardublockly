@@ -28,6 +28,9 @@ This project has been inspired by [BlocklyDuino](https://github.com/BlocklyDuino
 
 Blockly original source is Copyright of Google Inc. [https://developers.google.com/blockly/][1].
 
+For the nice loading Animations:
+[Loading.io](https://loading.io/button/)
+
 
 ## License
 

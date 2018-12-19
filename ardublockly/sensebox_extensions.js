@@ -9,7 +9,8 @@ SenseboxExtension.SUPPORTED_BOARDS = {
 };
 
 /** Initialize function for senseBox extensions, to be called on page load. */
-SenseboxExtension.init = function() {
+SenseboxExtension.init = function () {
+  sessionStorage.setItem('no_thanks', 'false');
   var location = window.location;
   var urlParams = new URLSearchParams(location.search);
   Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
@@ -52,11 +53,11 @@ SenseboxExtension.init = function() {
       break;
   }
   var clipboard = new ClipboardJS('.copy-btn');
-  clipboard.on('success', function(e) {
+  clipboard.on('success', function (e) {
     console.log(e);
     Ardublockly.MaterialToast(Ardublockly.getLocalStr('code_copied'));
   });
-  clipboard.on('error', function(e) {
+  clipboard.on('error', function (e) {
     console.log(e);
   });
 
@@ -64,65 +65,86 @@ SenseboxExtension.init = function() {
   document.getElementById("button_compile_sketch").setAttribute("data-tooltip", Ardublockly.getLocalStr('compile_sketch'));
 
   var compile = document.getElementById('button_compile_sketch');
+  var compiling = false;
   compile.addEventListener('click', function () {
-    var sketch = Ardublockly.generateArduino();
-    var data = {
-      "board": window.BOARD,
-      "sketch": sketch
-    };
-    var request = ArdublocklyServer.createRequest();
-    // The data received is JSON, so it needs to be converted into the right
-    // format to be displayed in the page.
-    var onReady = function() {
-      if (request.readyState == 4) {
-        if (request.status == 200) {
-          var response = null;
-          try {
-            var openDownload = function () {
-                            response = JSON.parse(request.response);
-                            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
-                          }
-                            Ardublockly.alertMessage(
-                            Ardublockly.getLocalStr('sketch_compiled'),
-                            Ardublockly.getLocalStr('copy_paste_mcu'),
-                            true, openDownload
-                          );
-            /*response = JSON.parse(request.response);
-            window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
-            Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));*/
-          } catch(e) {
-            throw e;
+    if (!compiling) {
+      addClass(compile, "sb-disabled");
+      addClass(compile, "running");
+      compiling = true;
+
+      var sketch = Ardublockly.generateArduino();
+      var data = {
+        "board": window.BOARD,
+        "sketch": sketch
+      };
+      var request = ArdublocklyServer.createRequest();
+      // The data received is JSON, so it needs to be converted into the right
+      // format to be displayed in the page.
+      var onReady = function () {
+        compiling = false;
+        removeClass(compile, "sb-disabled");
+        removeClass(compile, "running");
+        if (request.readyState == 4) {
+          if (request.status == 200) {
+            var response = null;
+            try{
+              
+              var no_thanks = sessionStorage.getItem('no_thanks');
+              // If no cookie with our chosen name (e.g. no_thanks)...
+              if (no_thanks == "false") {
+
+                Ardublockly.alertMessage(
+                  Ardublockly.getLocalStr('sketch_compiled'),
+                  Ardublockly.getLocalStr('copy_paste_mcu'));
+              }
+              $(".nothanks").click(function() {
+              sessionStorage.setItem('no_thanks', document.getElementById("checkbox").checked);
+              console.log(sessionStorage.getItem('no_thanks'));
+              });
+              
+              response = JSON.parse(request.response);
+              var filename = document.getElementById('sketch_name').value;
+              window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self');
+              }
+              /*response = JSON.parse(request.response);
+              window.open('https://compiler.sensebox.de/download?id='+response.data.id+'&board='+window.BOARD, '_self');
+              Ardublockly.MaterialToast(Ardublockly.getLocalStr('sketch_compiled'));*/
+             catch (e) {
+              throw e;
+            }
+          } else if (request.status == 500) {
+            response = JSON.parse(request.response);
+            var data = {
+              ide_data: {
+                std_output: '',
+                err_output: response.message
+              },
+              errors: [{
+                id: 1
+              }]
+            }
+            var dataBack = ArdublocklyServer.jsonToIdeModal(data);
+            Ardublockly.arduinoIdeOutput(dataBack);
+            var outputHeader = document.getElementById('ide_output_collapsible_header');
+            if (!outputHeader.className.match('active')) {
+              outputHeader.click();
+            }
+          } else {
+            Ardublockly.MaterialToast(Ardublockly.getLocalStr('arduinoOpErrorTitle'));
+            return null;
           }
-        } else if (request.status == 500) {
-          response = JSON.parse(request.response);
-          var data = {
-            ide_data: {
-              std_output: '',
-              err_output: response.message
-            },
-            errors: [{id: 1}]
-          }
-          var dataBack = ArdublocklyServer.jsonToIdeModal(data);
-          Ardublockly.arduinoIdeOutput(dataBack);
-          var outputHeader = document.getElementById('ide_output_collapsible_header');
-          if (!outputHeader.className.match('active')) {
-            outputHeader.click();
-          }
-        } else {
-          Ardublockly.MaterialToast(Ardublockly.getLocalStr('arduinoOpErrorTitle'));
-          return null;
         }
+      };
+      try {
+        Ardublockly.resetIdeOutputContent();
+        request.open('POST', 'https://compiler.sensebox.de/compile', true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.onreadystatechange = onReady;
+        request.send(JSON.stringify(data));
+      } catch (e) {
+        console.log('Error: ', e);
+        throw e;
       }
-    };
-    try {
-      Ardublockly.resetIdeOutputContent();
-      request.open('POST', 'https://compiler.sensebox.de/compile', true);
-      request.setRequestHeader('Content-Type', 'application/json');
-      request.onreadystatechange = onReady;
-      request.send(JSON.stringify(data));
-    } catch (e) {
-      console.log('Error: ', e);
-      throw e;
     }
   });
 };
@@ -145,4 +167,26 @@ SenseboxExtension.populateBoards = function () {
   }
   boardsMenu.onchange = SenseboxExtension.changeBoard;
   $('#boards-online').material_select();
+}
+
+function hasClass(el, className) {
+  if (el.classList)
+    return el.classList.contains(className);
+  return !!el.className.match(new RegExp('(\\s|^)' + className + '(\\s|$)'));
+}
+
+function addClass(el, className) {
+  if (el.classList)
+    el.classList.add(className)
+  else if (!hasClass(el, className))
+    el.className += " " + className;
+}
+
+function removeClass(el, className) {
+  if (el.classList)
+    el.classList.remove(className)
+  else if (hasClass(el, className)) {
+    var reg = new RegExp('(\\s|^)' + className + '(\\s|$)');
+    el.className = el.className.replace(reg, ' ');
+  }
 }

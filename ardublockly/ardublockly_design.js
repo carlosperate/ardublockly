@@ -44,6 +44,7 @@ Ardublockly.materializeJsInit = function() {
   $('select').material_select();
 };
 
+
 /** Binds the event listeners relevant to the page design. */
 Ardublockly.bindDesignEventListeners = function() {
   // Resize blockly workspace on window resize

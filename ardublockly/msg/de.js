@@ -83,6 +83,7 @@ Ardublockly.LOCALISED_TEXT = {
                      "Möchtest du diese wirklich löschen?",
   invalidXmlTitle: "Ungültige XML",
   invalidXmlBody: "Die XML-Datei konnte nicht in Blöcke zerlegt werden. Bitte überprüfe den XML-Code und versuche es erneut.",
+  errorFilename: "Der Dateiname darf maximal aus 8 Zeichen bestehen",
   /* Tooltips */
   uploadingSketch: "Sketch wird übertragen...",
   uploadSketch: "Sketch erfolgreich übertragen!",
@@ -96,6 +97,7 @@ Ardublockly.LOCALISED_TEXT = {
   okay: "Okay",
   cancel: "Abbrechen",
   return: "Zurück",
+  notshow: "Diesen Hinweis nicht mehr anzeigen",
   /* Cards */
   arduinoSourceCode: "Arduino Quellcode",
   blocksXml: "XML Blöcke",
@@ -120,5 +122,5 @@ Ardublockly.LOCALISED_TEXT = {
   code_copied: "Code wurde kopiert",
   save_to_clipboard: "In Zwischenablage kopieren",
   compile_sketch: "Sketch kompilieren",
-  sketch_compiled: "Sketch wurde kompiliert"
+  sketch_compiled: "Sketch wurde kompiliert",
 };
