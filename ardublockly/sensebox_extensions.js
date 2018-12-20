@@ -93,9 +93,9 @@ SenseboxExtension.init = function () {
               // If no cookie with our chosen name (e.g. no_thanks)...
               if (no_thanks == "false") {
 
-                Ardublockly.alertMessage(
+                window.setTimeout(Ardublockly.alertMessage(
                   Ardublockly.getLocalStr('sketch_compiled'),
-                  Ardublockly.getLocalStr('copy_paste_mcu'));
+                  Ardublockly.getLocalStr('copy_paste_mcu')),1);
               }
               $(".nothanks").click(function() {
               sessionStorage.setItem('no_thanks', document.getElementById("checkbox").checked);
