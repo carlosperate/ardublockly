@@ -88,22 +88,21 @@ SenseboxExtension.init = function () {
           if (request.status == 200) {
             var response = null;
             try{
-              window.setTimeout(download, 1000);
               var download = function(){
                 response = JSON.parse(request.response);
                 var filename = document.getElementById('sketch_name').value;
                 window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self');
               }
-              
-
               var no_thanks = sessionStorage.getItem('no_thanks');
               // If no cookie with our chosen name (e.g. no_thanks)...
               if (no_thanks == "false") {
 
                 window.setTimeout(Ardublockly.alertMessage(
                   Ardublockly.getLocalStr('sketch_compiled'),
-                  Ardublockly.getLocalStr('copy_paste_mcu')),10);
+                  Ardublockly.getLocalStr('copy_paste_mcu')),1000);
               }
+              window.setTimeout(download, 1000);
+              
               $(".nothanks").click(function() {
               sessionStorage.setItem('no_thanks', document.getElementById("checkbox").checked);
               console.log(sessionStorage.getItem('no_thanks'));
