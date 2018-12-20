@@ -13,7 +13,7 @@ SenseboxExtension.init = function () {
   sessionStorage.setItem('no_thanks', 'false');
   var location = window.location;
   var urlParams = new URLSearchParams(location.search);
-  Ardublockly.loadServerXmlFile('../ardublockly/start.xml');
+  Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
 
   if (urlParams.has('board')) {
     window.BOARD = urlParams.get('board');

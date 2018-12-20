@@ -10,13 +10,17 @@
 var Ardublockly = Ardublockly || {};
 
 /** Initialize function for Ardublockly, to be called on page load. */
-Ardublockly.init = function() {
+Ardublockly.init = function(options) {
+  this.options = options || {};
+  this.options.blocklyDivId = this.options.blocklyDivId || 'content_blocks'
+  this.options.blocklyPath = this.options.blocklyPath || '..'
+
   // Lang init must run first for the rest of the page to pick the right msgs
   Ardublockly.initLanguage();
 
   // Inject Blockly into content_blocks and fetch additional blocks
-  Ardublockly.injectBlockly(document.getElementById('content_blocks'),
-                            Ardublockly.TOOLBOX_XML, '../blockly/');
+  Ardublockly.injectBlockly(document.getElementById(this.options.blocklyDivId),
+                            Ardublockly.TOOLBOX_XML, this.options.blocklyPath + '/blockly');
   Ardublockly.importExtraBlocks();
 
   Ardublockly.designJsInit();
@@ -75,7 +79,7 @@ Ardublockly.bindActionFunctions = function() {
     Ardublockly.loadServerXmlFile('../examples/send_osem.xml');
     $('.button-collapse').sideNav('hide');
   });
- 
+
   // Floating buttons
   Ardublockly.bindClick_('button_ide_large', function() {
     Ardublockly.ideButtonLargeAction();
@@ -624,16 +628,16 @@ Ardublockly.importExtraBlocks = function() {
       var head = document.getElementsByTagName('head')[0];
       for (var catDir in jsonDataObj.categories) {
         var blocksJsLoad = document.createElement('script');
-        blocksJsLoad.src = '../blocks/' + catDir + '/blocks.js';
+        blocksJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir + '/blocks.js';
         head.appendChild(blocksJsLoad);
 
         var blocksLangJsLoad = document.createElement('script');
-        blocksLangJsLoad.src = '../blocks/' + catDir + '/msg/' + 'messages.js';
+        blocksLangJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir + '/msg/' + 'messages.js';
             //'lang/' + Ardublockly.LANG + '.js';
         head.appendChild(blocksLangJsLoad);
 
         var blocksGeneratorJsLoad = document.createElement('script');
-        blocksGeneratorJsLoad.src = '../blocks/' + catDir +
+        blocksGeneratorJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir +
             '/generator_arduino.js';
         head.appendChild(blocksGeneratorJsLoad);
 
@@ -642,7 +646,7 @@ Ardublockly.importExtraBlocks = function() {
         if (extensions) {
           for (var i = 0; i < extensions.length; i++) {
             var blockExtensionJsLoad = document.createElement('script');
-            blockExtensionJsLoad.src = '../blocks/' + catDir + '/extensions.js';
+            blockExtensionJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir + '/extensions.js';
             head.appendChild(blockExtensionJsLoad);
             // Add function to scheduler as lazy loading has to complete first
             setTimeout(function(category, extension) {
@@ -673,7 +677,7 @@ Ardublockly.importExtraBlocks = function() {
   };
   // Reads the JSON data containing all block categories from ./blocks directory
   // TODO: Now reading a local file, to be replaced by server generated JSON
-  ArdublocklyServer.getJson('../blocks/blocks_data.json', jsonDataCb);
+  ArdublocklyServer.getJson(this.options.blocklyPath + '/blocks/blocks_data.json', jsonDataCb);
 };
 
 /** Opens a modal with a list of categories to add or remove to the toolbox */
@@ -709,7 +713,7 @@ Ardublockly.openExtraCategoriesSelect = function() {
   };
   // Reads the JSON data containing all block categories from ./blocks directory
   // TODO: Now reading a local file, to be replaced by server generated JSON
-  ArdublocklyServer.getJson('../blocks/blocks_data.json', jsonDataCb);
+  ArdublocklyServer.getJson(this.options.blocklyPath + '/blocks/blocks_data.json', jsonDataCb);
 };
 
 /** Informs the user that the selected function is not yet implemented. */
