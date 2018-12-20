@@ -88,9 +88,13 @@ SenseboxExtension.init = function () {
           if (request.status == 200) {
             var response = null;
             try{
-              response = JSON.parse(request.response);
-              var filename = document.getElementById('sketch_name').value;
-              window.setTimeout(window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self'),100);
+              window.setTimeout(download, 1000);
+              var download = function(){
+                response = JSON.parse(request.response);
+                var filename = document.getElementById('sketch_name').value;
+                window.open('https://compiler.sensebox.de/download?id=' + response.data.id + '&board=' + window.BOARD + '&filename=' + filename, '_self');
+              }
+              
 
               var no_thanks = sessionStorage.getItem('no_thanks');
               // If no cookie with our chosen name (e.g. no_thanks)...
