@@ -88,6 +88,20 @@ Blockly.Arduino.sensebox_sensor_sound = function() {
 };
 
 
+Blockly.Arduino.sensebox_sensor_soil = function() {
+
+  var dropdown_pin = this.getFieldValue('Port');
+  var code = 'analogRead('+dropdown_pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.sensebox_sensor_watertemperature = function() {
+
+  var dropdown_pin = this.getFieldValue('Port');
+  var code = 'analogRead('+dropdown_pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 /*
 ----------------------------------Bees--------------------------------------------------
 */

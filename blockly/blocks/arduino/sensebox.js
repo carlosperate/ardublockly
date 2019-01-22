@@ -507,6 +507,52 @@ Blockly.Blocks['sensebox_piezo'] = {
     this.setHelpUrl('https://sensebox.de/books');
   }
 };
+
+/**
+ * Block for Sparkfun Soil Moisture Sensor 
+ * 
+ * 
+ */
+Blockly.Blocks['sensebox_sensor_soil'] = {
+  init: function() {
+    var dropdownOptions = [[Blockly.Msg.senseBox_ultrasonic_port_A, 'A'],
+    [Blockly.Msg.senseBox_ultrasonic_port_B, 'B'],[Blockly.Msg.senseBox_ultrasonic_port_C, 'C']];
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_soil)
+        .appendField("Port:")
+        .appendField(new Blockly.FieldDropdown(dropdownOptions), "Port")
+        this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setTooltip(Blockly.Msg.senseBox_soil_tip);
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+};
+
+/**
+ * Block for DS1820B Watertemperature Sensor
+ * 
+ * 
+ */
+Blockly.Blocks['sensebox_sensor_watertemperature'] = {
+  init: function() {
+    var dropdownOptions = [[Blockly.Msg.senseBox_ultrasonic_port_A, 'A'],
+    [Blockly.Msg.senseBox_ultrasonic_port_B, 'B'],[Blockly.Msg.senseBox_ultrasonic_port_C, 'C']];
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_watertemperature)
+        .appendField("Port:")
+        .appendField(new Blockly.FieldDropdown(dropdownOptions), "Port")
+        this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setTooltip(Blockly.Msg.senseBox_watertemperature_tip);
+  },
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+};
+
+
 /*
 ----------------------------------Ausgabe--------------------------------------------------
 */

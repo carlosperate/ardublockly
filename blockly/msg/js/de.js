@@ -631,6 +631,8 @@ Blockly.Msg.senseBox_send_mobile_to_osem_tip = "Sende Messwert und Standort an d
 Blockly.Msg.senseBox_interval_timer = "Messintervall";
 Blockly.Msg.senseBox_interval = "ms"
 Blockly.Msg.senseBox_interval_timer_tip = "Intervall";
+Blockly.Msg.senseBox_soil = "Bodenfeuchte";
+Blockly.Msg.senseBox_watertemperature = "Wassertemperatur"
 // Cases
 Blockly.Msg.cases_do = "Führe aus";
 Blockly.Msg.cases_condition = "Fall (Variable) = ";
