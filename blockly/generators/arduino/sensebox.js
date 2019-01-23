@@ -118,7 +118,12 @@ Blockly.Arduino.sensebox_sensor_watertemperature = function() {
   if (dropdown_port == 'C'){
     dropdown_pin = 5;
   }
-  var code = 'analogRead('+dropdown_pin+')';
+  Blockly.Arduino.includes_['library_oneWire'] = '#include "OneWire.h"';
+  Blockly.Arduino.includes_['library_oneDallasTemperature'] = '#include "DallasTemperature.h"';
+  Blockly.Arduino.userFunctions_['define_OneWire'] = '#define ONE_WIRE_BUS' + dropdown_pin + '\nOneWire oneWire(ONE_WIRE_BUS);\nDallasTemperature sensors(&oneWire);';
+  Blockly.Arduino.setups_['sensebox_oneWireSetup'] = 'sensors.begin();';
+  var code = 'sensors.requestTemperatures();\n';
+  code += 'sensors.getTempCByIndex(0);';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -147,7 +152,9 @@ Blockly.Arduino.sensebox_osem_connection = function(block) {
       code += branch; 
   return code;
 };
-
+/**
+ * Block send Data to the openSenseMap
+ */
 Blockly.Arduino.sensebox_send_to_osem = function(block) {
   var box_id = this.getFieldValue('BoxID');
   var sensor_id = this.getFieldValue('SensorID');
