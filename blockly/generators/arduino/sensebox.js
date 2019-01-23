@@ -90,14 +90,34 @@ Blockly.Arduino.sensebox_sensor_sound = function() {
 
 Blockly.Arduino.sensebox_sensor_soil = function() {
 
-  var dropdown_pin = this.getFieldValue('Port');
+  var dropdown_port = this.getFieldValue('Port');
+  var dropdown_pin = 1;
+  if (dropdown_port == 'A'){
+    dropdown_pin = 1;
+  }
+  if (dropdown_port == 'B'){
+    dropdown_pin = 3;
+  }
+  if (dropdown_port == 'C'){
+    dropdown_pin = 5;
+  }
   var code = 'analogRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.sensebox_sensor_watertemperature = function() {
 
-  var dropdown_pin = this.getFieldValue('Port');
+  var dropdown_port = this.getFieldValue('Port');
+  var dropdown_pin = 1;
+  if (dropdown_port == 'A'){
+    dropdown_pin = 1;
+  }
+  if (dropdown_port == 'B'){
+    dropdown_pin = 3;
+  }
+  if (dropdown_port == 'C'){
+    dropdown_pin = 5;
+  }
   var code = 'analogRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
