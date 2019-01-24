@@ -13,7 +13,7 @@ SenseboxExtension.init = function () {
   sessionStorage.setItem('no_thanks', 'false');
   var location = window.location;
   var urlParams = new URLSearchParams(location.search);
-  Blockly.Arduino.Boards.changeBoard(workspace,sensebox_mcu);
+  Ardublockly.changeBlocklyArduinoBoard('sensebox_mcu');
   Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
 
   if (urlParams.has('board')) {
