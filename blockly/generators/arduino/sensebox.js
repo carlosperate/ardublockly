@@ -122,8 +122,8 @@ Blockly.Arduino.sensebox_sensor_watertemperature = function() {
   Blockly.Arduino.includes_['library_oneDallasTemperature'] = '#include "DallasTemperature.h"';
   Blockly.Arduino.userFunctions_['define_OneWire'] = '#define ONE_WIRE_BUS ' + dropdown_pin + '\nOneWire oneWire(ONE_WIRE_BUS);\nDallasTemperature sensors(&oneWire);';
   Blockly.Arduino.setups_['sensebox_oneWireSetup'] = 'sensors.begin();';
-  var code = 'sensors.requestTemperatures();\n';
-  code += 'sensors.getTempCByIndex(0);';
+  Blockly.Arduino.codeFunctions_['sensebox_requestTemp'] = 'sensors.requestTemperatures()';
+  var code = 'sensors.getTempCByIndex(0)';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

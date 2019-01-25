@@ -28,7 +28,7 @@ Blockly.Blocks['sensebox_sensor_temp_hum'] = {
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME")
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_temp,"Temperature"], [Blockly.Msg.senseBox_hum,"Humidity"]]), "NAME");
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_temp_hum_tip);
