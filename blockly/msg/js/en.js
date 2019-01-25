@@ -633,3 +633,5 @@ Blockly.Msg.senseBox_wifi_tip  = "Establishes a wifi connection";
 Blockly.Msg.sensebox_display_show  = "Print on Display";
 Blockly.Msg.sensebox_display_show_tip  = "Print on Display";
 Blockly.Msg.sensebox_sd_filename = "Filename";
+Blockly.Msg.senseBox_button_isPressed = "is Pressed";
+Blockly.Msg.senseBox_button_switch = "as Switch";

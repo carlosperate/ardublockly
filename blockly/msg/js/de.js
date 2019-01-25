@@ -636,3 +636,6 @@ Blockly.Msg.cases_do = "Führe aus";
 Blockly.Msg.cases_condition = "Fall (Variable) = ";
 Blockly.Msg.cases_switch = "Variable";
 Blockly.Msg.cases_add = "Fall";
+//Button
+Blockly.Msg.senseBox_button_isPressed = "ist gedrückt";
+Blockly.Msg.senseBox_button_switch = "als Schalter";

@@ -481,6 +481,7 @@ Blockly.Blocks['sensebox_button'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_button)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_button_isPressed, "isPressed"], [Blockly.Msg.senseBox_button_switch, "Switch"]]), "FUNCTION")
         .appendField("PIN:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN");
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
