@@ -181,6 +181,10 @@ Blockly.Arduino.sensebox_button = function() {
   {
     code += 'button.getSwitch()';
   }
+  else if (dropown_function == 'wasPressed')
+  {
+    code += 'button.wasPressed()';
+  }
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 

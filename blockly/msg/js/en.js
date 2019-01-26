@@ -635,3 +635,4 @@ Blockly.Msg.sensebox_display_show_tip  = "Print on Display";
 Blockly.Msg.sensebox_sd_filename = "Filename";
 Blockly.Msg.senseBox_button_isPressed = "is Pressed";
 Blockly.Msg.senseBox_button_switch = "as Switch";
+Blockly.Msg.senseBox_button_wasPressed = "was Pressed";

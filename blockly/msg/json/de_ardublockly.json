@@ -582,5 +582,8 @@
 "cases_do" : "Führe aus",
 "cases_condition" : "Fall (Variable) = ",
 "cases_switch" : "Variable",
-"cases_add" : "Fall"
+"cases_add" : "Fall",
+"senseBox_button_isPressed" : "ist gedrückt",
+"senseBox_button_switch" : "als Schalter",
+"senseBox_button_wasPressed": "wurde gedrückt"
 }

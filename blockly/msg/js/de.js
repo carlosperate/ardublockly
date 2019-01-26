@@ -639,3 +639,4 @@ Blockly.Msg.cases_add = "Fall";
 //Button
 Blockly.Msg.senseBox_button_isPressed = "ist gedrückt";
 Blockly.Msg.senseBox_button_switch = "als Schalter";
+Blockly.Msg.senseBox_button_wasPressed = "wurde gedrückt";
