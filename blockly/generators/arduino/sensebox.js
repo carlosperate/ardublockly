@@ -171,8 +171,9 @@ Blockly.Arduino.sensebox_led = function() {
 Blockly.Arduino.sensebox_button = function() {
   var dropdown_pin = this.getFieldValue('PIN');
   var dropown_function = this.getFieldValue('FUNCTION');
-  Blockly.Arduino.definitions_['define_button'] = 'Button button(' + dropdown_pin + ')';
-  Blockly.Arduino.setups_['setup_button'] = 'button.begin()';
+  Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+  Blockly.Arduino.definitions_['define_button'] = 'Button button(' + dropdown_pin + ');';
+  Blockly.Arduino.setups_['setup_button'] = 'button.begin();';
   var code = '';
   if (dropown_function == 'isPressed'){
      code += 'button.isPressed()';
