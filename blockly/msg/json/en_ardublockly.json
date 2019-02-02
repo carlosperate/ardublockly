@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "carlosperate",
-		"lastupdated": "2018-06-12 22:19:15.114740",
+		"lastupdated": "2019-01-24 09:19:32.824295",
 		"locale": "en",
 		"messagedocumentation" : "qqq_ardublockly"
 	},
@@ -243,5 +243,7 @@
 	"cases_do" : "Do",
 	"cases_condition" : "Case (Variable) = ",
 	"cases_switch" : "Variable",
-	"cases_add" : "Case"
-	}
+	"cases_add" : "Case",
+	"senseBox_soil": "Soil Moisture",
+	"senseBox_watertemperature": "Water Temperature"
+}

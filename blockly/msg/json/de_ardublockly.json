@@ -579,6 +579,8 @@
 "senseBox_interval_timer": "Messintervall",
 "senseBox_interval" : "ms",
 "senseBox_interval_timer_tip" : "Intervall",
+"senseBox_soil": "Bodenfeuchte",
+"senseBox_watertemperature": "Wassertemperatur",
 "cases_do" : "Führe aus",
 "cases_condition" : "Fall (Variable) = ",
 "cases_switch" : "Variable",
