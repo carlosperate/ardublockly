@@ -25,6 +25,8 @@ Ardublockly.TOOLBOX_XML =
     '           <field name="ultrasonic_echo">2</field>' +
     '      </block>' +
     '      <block type="sensebox_sensor_sound"></block>' +
+    '      <block type="sensebox_sensor_soil"></block>' +
+    '      <block type="sensebox_sensor_watertemperature"></block>' +
     '      <block type="sensebox_foto"></block>' +
     '      <block type="sensebox_button"></block>' +
     '      <block type="sensebox_poti"></block>' +

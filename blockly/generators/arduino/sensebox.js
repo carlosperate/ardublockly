@@ -88,6 +88,45 @@ Blockly.Arduino.sensebox_sensor_sound = function() {
 };
 
 
+Blockly.Arduino.sensebox_sensor_soil = function() {
+
+  var dropdown_port = this.getFieldValue('Port');
+  var dropdown_pin = 1;
+  if (dropdown_port == 'A'){
+    dropdown_pin = 1;
+  }
+  if (dropdown_port == 'B'){
+    dropdown_pin = 3;
+  }
+  if (dropdown_port == 'C'){
+    dropdown_pin = 5;
+  }
+  var code = 'analogRead('+dropdown_pin+')';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+Blockly.Arduino.sensebox_sensor_watertemperature = function() {
+
+  var dropdown_port = this.getFieldValue('Port');
+  var dropdown_pin = 1;
+  if (dropdown_port == 'A'){
+    dropdown_pin = 1;
+  }
+  if (dropdown_port == 'B'){
+    dropdown_pin = 3;
+  }
+  if (dropdown_port == 'C'){
+    dropdown_pin = 5;
+  }
+  Blockly.Arduino.includes_['library_oneWire'] = '#include "OneWire.h"';
+  Blockly.Arduino.includes_['library_oneDallasTemperature'] = '#include "DallasTemperature.h"';
+  Blockly.Arduino.definitions_['define_OneWire'] = '#define ONE_WIRE_BUS ' + dropdown_pin + '\nOneWire oneWire(ONE_WIRE_BUS);\nDallasTemperature sensors(&oneWire);';
+  Blockly.Arduino.setups_['sensebox_oneWireSetup'] = 'sensors.begin();';
+  Blockly.Arduino.userFunctions_['sensebox_requestTemp'] = 'float getWaterTemp(){\nsensors.requestTemperatures();\nsensors.getTempCByIndex(0);\n}';
+  var code = 'getWaterTemp()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
 /*
 ----------------------------------Bees--------------------------------------------------
 */
@@ -113,7 +152,9 @@ Blockly.Arduino.sensebox_osem_connection = function(block) {
       code += branch; 
   return code;
 };
-
+/**
+ * Block send Data to the openSenseMap
+ */
 Blockly.Arduino.sensebox_send_to_osem = function(block) {
   var box_id = this.getFieldValue('BoxID');
   var sensor_id = this.getFieldValue('SensorID');
@@ -170,6 +211,7 @@ Blockly.Arduino.sensebox_led = function() {
 
 Blockly.Arduino.sensebox_button = function() {
   var dropdown_pin = this.getFieldValue('PIN');
+<<<<<<< HEAD
   var dropown_function = this.getFieldValue('FUNCTION');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
   Blockly.Arduino.definitions_['define_button'] = 'Button button(' + dropdown_pin + ');';
@@ -186,6 +228,10 @@ Blockly.Arduino.sensebox_button = function() {
   {
     code += 'button.wasPressed()';
   }
+=======
+  Blockly.Arduino.setups_['setup_button_'+ dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT_PULLUP);';
+  var code = 'digitalRead(' + dropdown_pin + ')';
+>>>>>>> master
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -199,14 +245,14 @@ Blockly.Arduino.sensebox_piezo = function() {
 
 Blockly.Arduino.sensebox_poti = function() {
   var dropdown_pin = this.getFieldValue('PIN');
-  Blockly.Arduino.setups_['setup_button_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_poti'] = 'pinMode('+dropdown_pin+', INPUT);';
   var code = 'analogRead('+dropdown_pin+')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.sensebox_foto = function() {
   var dropdown_pin = this.getFieldValue('PIN');
-  Blockly.Arduino.setups_['setup_button_'+dropdown_pin] = 'pinMode('+dropdown_pin+', INPUT);';
+  Blockly.Arduino.setups_['setup_foto'] = 'pinMode('+dropdown_pin+', INPUT);';
   var code = 'analogRead('+dropdown_pin+')';
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
