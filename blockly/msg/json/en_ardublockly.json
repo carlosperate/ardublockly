@@ -244,6 +244,9 @@
 	"cases_condition" : "Case (Variable) = ",
 	"cases_switch" : "Variable",
 	"cases_add" : "Case",
+	"senseBox_button_isPressed" : "is Pressed",
+	"senseBox_button_switch" : "as Switch",
+	"senseBox_button_wasPressed": "was Pressed",
 	"senseBox_soil": "Soil Moisture",
 	"senseBox_watertemperature": "Water Temperature"
 }

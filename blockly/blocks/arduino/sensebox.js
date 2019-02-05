@@ -467,7 +467,7 @@ Blockly.Blocks['sensebox_led'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_led)
         .appendField("PIN:")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN")
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPinsLED), "PIN")
         .appendField(Blockly.Msg.senseBox_basic_state)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_on, "HIGH"], [Blockly.Msg.senseBox_off, "LOW"]]), "STAT");
     this.setPreviousStatement(true, null);
@@ -481,8 +481,9 @@ Blockly.Blocks['sensebox_button'] = {
   init: function() {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_button)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_button_isPressed, "isPressed"], [Blockly.Msg.senseBox_button_wasPressed, "wasPressed"], [Blockly.Msg.senseBox_button_switch, "Switch"]]), "FUNCTION")
         .appendField("PIN:")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN");
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPinsButton), "PIN");
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_button_tip);
