@@ -88,6 +88,8 @@ Blockly.Arduino.Boards.profiles.sensebox_mcu = {
   compilerFlag: 'arduino:samd',
   analogPins: [['A1', 'A1'], ['A2', 'A2'], ['A3', 'A3'], ['A4', 'A4'], ['A5', 'A5'], ['A6', 'A6']],
   digitalPins: [['D1', '1'], ['D2', '2'], ['D3', '3'], ['D4', '4'], ['D5', '5'], ['D6', '6']],
+  digitalPinsLED: [['BUILTIN_1', '7'], ['BUILTIN_2', '8'],['D1', '1'], ['D2', '2'], ['D3', '3'], ['D4', '4'], ['D5', '5'], ['D6', '6']],
+  digitalPinsButton: [['on Board', '0'],['D1', '1'], ['D2', '2'], ['D3', '3'], ['D4', '4'], ['D5', '5'], ['D6', '6']],
   pwmPins: [['D1', '1'], ['D2', '2'], ['D3', '3'], ['D4', '4'], ['D5', '5'], ['D6', '6']],
   serial: [['serial','SerialUSB'],['serial_1', 'Serial1'], ['serial_2', 'Serial2']],
   serialPins: { 
