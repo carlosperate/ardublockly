@@ -227,8 +227,6 @@ Blockly.Arduino.sensebox_button = function() {
   {
     code += 'button.wasPressed()';
   }
-  Blockly.Arduino.setups_['setup_button_'+ dropdown_pin] = 'pinMode(' + dropdown_pin + ', INPUT_PULLUP);';
-  var code = 'digitalRead(' + dropdown_pin + ')';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
