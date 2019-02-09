@@ -622,23 +622,25 @@ Ardublockly.importExtraBlocks = function() {
    *     indicates an error occurred.
    * @return {undefined} Might exit early if response is null.
    */
+
+  var blockPath = this.options.blocklyPath + '/blocks/';
+
   var jsonDataCb = function(jsonDataObj) {
     if (jsonDataObj === null) return Ardublockly.openNotConnectedModal();
     if (jsonDataObj.categories !== undefined) {
       var head = document.getElementsByTagName('head')[0];
       for (var catDir in jsonDataObj.categories) {
         var blocksJsLoad = document.createElement('script');
-        blocksJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir + '/blocks.js';
+        blocksJsLoad.src = blockPath + catDir + '/blocks.js';
         head.appendChild(blocksJsLoad);
 
         var blocksLangJsLoad = document.createElement('script');
-        blocksLangJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir + '/msg/' + 'messages.js';
+        blocksLangJsLoad.src = blockPath + catDir + '/msg/' + 'messages.js';
             //'lang/' + Ardublockly.LANG + '.js';
         head.appendChild(blocksLangJsLoad);
 
         var blocksGeneratorJsLoad = document.createElement('script');
-        blocksGeneratorJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir +
-            '/generator_arduino.js';
+        blocksGeneratorJsLoad.src = blockPath + catDir + '/generator_arduino.js';
         head.appendChild(blocksGeneratorJsLoad);
 
         // Check if the blocks add additional Ardublockly functionality
@@ -646,7 +648,7 @@ Ardublockly.importExtraBlocks = function() {
         if (extensions) {
           for (var i = 0; i < extensions.length; i++) {
             var blockExtensionJsLoad = document.createElement('script');
-            blockExtensionJsLoad.src = this.options.blocklyPath + '/blockly/' + catDir + '/extensions.js';
+            blockExtensionJsLoad.src = blockPath + catDir + '/extensions.js';
             head.appendChild(blockExtensionJsLoad);
             // Add function to scheduler as lazy loading has to complete first
             setTimeout(function(category, extension) {
@@ -677,7 +679,7 @@ Ardublockly.importExtraBlocks = function() {
   };
   // Reads the JSON data containing all block categories from ./blocks directory
   // TODO: Now reading a local file, to be replaced by server generated JSON
-  ArdublocklyServer.getJson(this.options.blocklyPath + '/blocks/blocks_data.json', jsonDataCb);
+  ArdublocklyServer.getJson(blockPath + '/blocks_data.json', jsonDataCb);
 };
 
 /** Opens a modal with a list of categories to add or remove to the toolbox */
