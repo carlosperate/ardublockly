@@ -1,10 +1,13 @@
-<!--- New Feature. You have an idea for a new feature? Please describe below -->
-## New Feature
-
-### What kind of feature are you missing? Is a new Block necessary? 
 <!--- Provide a general summary of the issue in the Title above -->
 
+
+
+## New Feature
+<!--- New Feature. You have an idea for a new feature? Please describe below -->
+### What kind of feature are you missing? Is a new Block necessary? 
+
 ## Reporting a Bug
+<!-- If you found a Bug, please describe below, which helps us to solve it -->
 
 ### Expected Behavior
 <!--- If you're describing a bug, tell us what should happen -->
