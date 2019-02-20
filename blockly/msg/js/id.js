@@ -540,6 +540,7 @@ Blockly.Msg.senseBox_display_clearDisplay_tip  = "Clear the display content";  /
 Blockly.Msg.senseBox_display_color  = "Font color";  // untranslated
 Blockly.Msg.senseBox_display_plotDisplay  = "Plot Diagram";  // untranslated
 Blockly.Msg.senseBox_display_plotTimeFrame = "TimeFrame";  // untranslated
+Blockly.Msg.senseBox_display_plotTitle = "Title";  // untranslated
 Blockly.Msg.senseBox_display_plotXLabel  = "X-Axis Label";  // untranslated
 Blockly.Msg.senseBox_display_plotXRange1  = "X-Range Begin";  // untranslated
 Blockly.Msg.senseBox_display_plotXRange2  = "X-Range End";  // untranslated

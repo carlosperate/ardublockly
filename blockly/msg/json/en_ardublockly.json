@@ -217,6 +217,7 @@
 	"senseBox_display_black ": "Black",
 	"sensebox_display_show ": "Print on Display", 
 	"sensebox_display_show_tip ": "Print on Display",
+	"senseBox_display_plotTitle": "Title",
 	"senseBox_display_plotDisplay ": "Plot Diagram",
 	"senseBox_display_plotXLabel ": "X-Axis Label",
 	"senseBox_display_plotYLabel ": "Y-Axis Label",

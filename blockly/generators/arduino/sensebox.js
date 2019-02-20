@@ -366,6 +366,7 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
     Blockly.Arduino.sensebox_display_plotDisplay = function() {
       var YLabel = Blockly.Arduino.valueToCode(this, 'YLabel', Blockly.Arduino.ORDER_ATOMIC) || 'Y'
       var XLabel = Blockly.Arduino.valueToCode(this, 'XLabel', Blockly.Arduino.ORDER_ATOMIC) || 'X'
+      var Title = Blockly.Arduino.valueToCode(this, 'Title', Blockly.Arduino.ORDER_ATOMIC) || 'Title'
         var XRange1 = Blockly.Arduino.valueToCode(this, 'XRange1', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var XRange2 = Blockly.Arduino.valueToCode(this, 'XRange2', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var YRange1 = Blockly.Arduino.valueToCode(this, 'YRange1', Blockly.Arduino.ORDER_ATOMIC) || '0'
@@ -378,7 +379,7 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
         Blockly.Arduino.includes_['library_senseBoxIO'] = '#include <senseBoxIO.h>';
         Blockly.Arduino.userFunctions_['define_plot_class'] = 'Plot DataPlot(&display);\n';
         Blockly.Arduino.variables_['define_plot_class'] = 'const double TIMEFRAME = '+TimeFrame+';\n';
-        Blockly.Arduino.setups_['sensebox_plot_setup'] = 'DataPlot.setXLabel('+XLabel+');\nDataPlot.setYLabel('+YLabel+');\nDataPlot.setXRange('+ XRange1+ ',' +XRange2+');\nDataPlot.setYRange('+ YRange1+ ','+YRange2+');\nDataPlot.setXTick('+XTick+');\nDataPlot.setYTick('+YTick+');\nDataPlot.setXPrecision(0);\nDataPlot.setYPrecision(0);\n';
+        Blockly.Arduino.setups_['sensebox_plot_setup'] = 'DataPlot.setTitle('+Title+');\nDataPlot.setXLabel('+XLabel+');\nDataPlot.setYLabel('+YLabel+');\nDataPlot.setXRange('+ XRange1+ ',' +XRange2+');\nDataPlot.setYRange('+ YRange1+ ','+YRange2+');\nDataPlot.setXTick('+XTick+');\nDataPlot.setYTick('+YTick+');\nDataPlot.setXPrecision(0);\nDataPlot.setYPrecision(0);\n';
         var code = 'DataPlot.clear();'
         code += 'double starttime = millis();\ndouble t = 0;\nwhile (t <= TIMEFRAME) {\nt = (millis() - starttime) / 1000.0;\nfloat value = '+plotDisplay+';\n';
         code += 'DataPlot.addDataPoint(t,value);\n}\n';

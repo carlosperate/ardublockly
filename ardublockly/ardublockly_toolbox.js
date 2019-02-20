@@ -60,6 +60,10 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_display_show"></block>' +
     '      <block type="sensebox_display_clearDisplay"></block>' +
     '      <block type="sensebox_display_plotDisplay">' +
+    '           <value name="Title">' +
+    '               <block type="text">' +
+    '          </block>' +
+    '           </value>' +
     '           <value name="YLabel">' +
     '               <block type="text">' +
     '          </block>' +

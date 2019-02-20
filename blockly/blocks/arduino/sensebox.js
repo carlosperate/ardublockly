@@ -742,6 +742,8 @@ Blockly.Blocks['sensebox_display_plotDisplay'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_display_plotDisplay)
+    this.appendValueInput("Title", 'Text')
+        .appendField(Blockly.Msg.senseBox_display_plotTitle);
     this.appendValueInput("YLabel", 'Text')
         .appendField(Blockly.Msg.senseBox_display_plotYLabel);
     this.appendValueInput("XLabel", 'Text')

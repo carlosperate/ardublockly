@@ -540,6 +540,7 @@ Blockly.Msg.senseBox_display_clearDisplay_tip  = "Clear the display content";
 Blockly.Msg.senseBox_display_color  = "Font color";
 Blockly.Msg.senseBox_display_plotDisplay  = "Plot Diagram";
 Blockly.Msg.senseBox_display_plotTimeFrame = "TimeFrame";
+Blockly.Msg.senseBox_display_plotTitle = "Title";
 Blockly.Msg.senseBox_display_plotXLabel  = "X-Axis Label";
 Blockly.Msg.senseBox_display_plotXRange1  = "X-Range Begin";
 Blockly.Msg.senseBox_display_plotXRange2  = "X-Range End";

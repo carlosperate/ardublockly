@@ -610,6 +610,7 @@ Blockly.Msg.senseBox_display_white = "Weiß";
 Blockly.Msg.senseBox_display_black = "Schwarz";
 Blockly.Msg.sensebox_display_show = "Zeige auf dem Display"; 
 Blockly.Msg.sensebox_display_show_tip = "Zeigt den Nachfolgenden Inhalt auf dem Bildschirm";
+Blockly.Msg.senseBox_dipslay_plotTitle = "Titel";
 Blockly.Msg.senseBox_display_plotDisplay = "Diagram zeichnen";
 Blockly.Msg.senseBox_display_plotXLabel = "X-Achsen Beschriftung";
 Blockly.Msg.senseBox_display_plotYLabel = "Y-Achsen Beschriftung";
