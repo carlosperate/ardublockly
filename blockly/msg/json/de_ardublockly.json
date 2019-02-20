@@ -1,7 +1,7 @@
 {
 	"@metadata": {
 		"author": "mariopesch",
-		"lastupdated": "2018-06-12",
+		"lastupdated": "2019-02-20",
 		"locale": "de",
 		"messagedocumentation" : "qqq_ardublockly"
 	
@@ -575,6 +575,8 @@
 	"senseBox_gps_lng": "Längengrad",
 	"senseBox_gps_alt": "Höhe über NN in m",
 	"senseBox_gps_speed" : "Geschwindigkeit in km/h",
+	"senseBox_gps_date" : "Datum",
+	"senseBox_gps_time" : "Uhrzeit",
 	"senseBox_send_mobile_to_osem": "Sende Messwert und Standort",
 	"senseBox_send_mobile_to_osem_tip":"Sende Messwert und Standort an die openSenseMap",
 	"senseBox_interval_timer": "Messintervall",

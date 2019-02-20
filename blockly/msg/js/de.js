@@ -620,12 +620,16 @@ Blockly.Msg.senseBox_display_plotYRange2 = "Y-Wertebereich Ende";
 Blockly.Msg.senseBox_display_plotXTick = "X-Linienabstand";
 Blockly.Msg.senseBox_display_plotYTick = "Y-Linienabstand";
 Blockly.Msg.senseBox_display_plotTimeFrame = "Zeitabschnitt";
+// GPS
 Blockly.Msg.senseBox_gps_getValues =  "GPS Modul";
 Blockly.Msg.senseBox_gps_getValues_tip =  "ruft das GPS Signal ab";
 Blockly.Msg.senseBox_gps_lat = "Breitengrad";
 Blockly.Msg.senseBox_gps_lng =  "Längengrad";
 Blockly.Msg.senseBox_gps_alt = "Höhe über NN in m";
 Blockly.Msg.senseBox_gps_speed = "Geschwindigkeit in km/h";
+Blockly.Msg.senseBox_gps_date = "Datum";
+Blockly.Msg.senseBox_gps_time = "Uhrzeit";
+// openSenseMap
 Blockly.Msg.senseBox_send_mobile_to_osem = "Sende Messwert und Standort"; 
 Blockly.Msg.senseBox_send_mobile_to_osem_tip = "Sende Messwert und Standort an die openSenseMap";
 Blockly.Msg.senseBox_interval_timer = "Messintervall";

@@ -235,6 +235,8 @@
 	"senseBox_gps_lng": "longitude",
 	"senseBox_gps_alt": "altitude",
 	"senseBox_gps_speed": "speed",
+	"senseBox_gps_date": "date",
+	"senseBox_gps_time": "time",
 	"senseBox_send_mobile_to_osem": "Send Value and Location",
 	"senseBox_send_mobile_to_osem_tip":"Send Value and Location to openSenseMap",
 	"senseBox_interval_timer": "Measuring interval",
