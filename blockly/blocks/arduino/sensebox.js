@@ -13,7 +13,6 @@ goog.provide('Blockly.Blocks.sensebox');
 goog.require('Blockly.Blocks');
 
 var wifiDepend = null;
-var extraFieldExist = 'false';
 /**
  * Common HSV hue for all blocks in this category.
  * "senseBox green"
@@ -186,9 +185,10 @@ Blockly.Blocks['sensebox_sensor_pressure'] = {
    * @this Blockly.Block
    */
   updateShape_: function() {
+    var extraFieldExist = this.getFieldValue('referencePressure');
+    console.log(extraFieldExist);
     var input = this.getFieldValue('NAME');
-    if (input == 'Altitude' && extraFieldExist == 'false'){
-      extraFieldExist = 'true';
+    if (input == 'Altitude' && extraFieldExist == null){
       console.log('update shape');
       this.appendDummyInput('extraField')
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -196,11 +196,10 @@ Blockly.Blocks['sensebox_sensor_pressure'] = {
         .appendField(new Blockly.FieldTextInput("1013"), "referencePressure")
         .appendField(Blockly.Msg.senseBox_pressure_referencePressure_dim);
     }
-    if ((input == 'Pressure' || input == 'Temperature') && (extraFieldExist == 'true')){
-      this.removeInput('extraField');
-      extraFieldExist = 'false';
-    }
-
+  
+    if ((input == 'Pressure' || input == 'Temperature') && extraFieldExist != null){
+        this.removeInput('extraField');
+    }  
    },
   getBlockType: function() {
     return Blockly.Types.LARGE_NUMBER;
