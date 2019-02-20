@@ -151,6 +151,8 @@
 	"senseBox_poti ": "Potentiometer",
 	"senseBox_pressure_sensor ": "Airpressure/Temperature Sensor (BMP280)",
 	"senseBox_pressure ": "Airpressure in Pa",
+	"senseBox_pressure_referencePressure": "Pressure at Sea Level",
+	"senseBox_pressure_referencePressure_dim": "hPa",
 	"senseBox_sound ": "Soundsensor",
 	"senseBox_button_tip ": "Button",
 	"senseBox_foto_tip ": "simple light depending resistor, gives values between 0 and 1023",
