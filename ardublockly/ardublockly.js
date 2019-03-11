@@ -558,6 +558,7 @@ Ardublockly.PREV_ARDUINO_CODE_ = 'void setup() {\n\n}\n\n\nvoid loop() {\n\n}';
  * the blocks.
  */
 Ardublockly.renderContent = function() {
+  Ardublockly.workspace.addChangeListener(Blockly.Events.disableOrphans);
   // Render Arduino Code with latest change highlight and syntax highlighting
   var arduinoCode = Ardublockly.generateArduino();
   if (arduinoCode !== Ardublockly.PREV_ARDUINO_CODE_) {
