@@ -45,7 +45,7 @@ Blockly.Blocks['sensebox_sensor_uv_light'] = {
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_uv,"UvIntensity"], [Blockly.Msg.senseBox_light,"Illuminance"]]), "NAME");
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_light,"Illuminance"], [Blockly.Msg.senseBox_uv,"UvIntensity"]]), "NAME");
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_uv_light_tip);
