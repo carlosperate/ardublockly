@@ -119,6 +119,7 @@ Blockly.Mutator.prototype.createEditor_ = function() {
   }
   var workspaceOptions = {
     languageTree: quarkXml,
+    disabledPatternId: this.block_.workspace.options.disabledPatternId,
     parentWorkspace: this.block_.workspace,
     pathToMedia: this.block_.workspace.options.pathToMedia,
     RTL: this.block_.RTL,
