@@ -749,7 +749,8 @@ Blockly.Blocks['sensebox_display_printDisplay'] = {
   init: function(block) {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_display_printDisplay)
+        .appendField(Blockly.Msg.senseBox_display_printDisplay);
+    this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_display_color)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_display_white, "WHITE,BLACK"], [Blockly.Msg.senseBox_display_black, "BLACK,WHITE"]]), "COLOR");
     this.appendValueInput("SIZE", 'Number')

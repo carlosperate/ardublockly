@@ -221,7 +221,7 @@
 	"senseBox_display_beginDisplay_tip ":"Starts the display",
 	"senseBox_display_clearDisplay ": "Clear Display",
 	"senseBox_display_clearDisplay_tip ":"Clear the display content",
-	"senseBox_display_printDisplay ": "",
+	"senseBox_display_printDisplay ": "Show Text/Number",
 	"senseBox_display_printDisplay_tip ": "Prints Values to the Display, set X and Y Location",
 	"senseBox_display_printDisplay_x ":"x",
 	"senseBox_display_printDisplay_y ":"y",

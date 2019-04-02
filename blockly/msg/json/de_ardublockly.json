@@ -562,7 +562,7 @@
 	"senseBox_display_beginDisplay_tip ":"Starten die Ausgabe auf dem Display",
 	"senseBox_display_clearDisplay ": "Display löschen",
 	"senseBox_display_clearDisplay_tip ":"Löscht den Inhalt des Displays",
-	"senseBox_display_printDisplay ": "",
+	"senseBox_display_printDisplay ": "Zeige Text/Zahl",
 	"senseBox_display_printDisplay_tip ": "zeigt Wert auf dem Display an.",
 	"senseBox_display_printDisplay_x ":"x",
 	"senseBox_display_printDisplay_y ":"y",
