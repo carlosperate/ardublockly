@@ -55,12 +55,13 @@ Blockly.Arduino.sensebox_sensor_uv_light = function(){
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sensebox_sensor_bmx055 = function(){
-  var dropdown_name = this.getFieldValue('NAME');
+Blockly.Arduino.sensebox_sensor_bmx055_accelerometer = function(){
+  var dropdown_value = this.getFieldValue('VALUE');
+  var range = this.getFieldValue('RANGE');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.userFunctions_['define_hdc'] = 'HDC100X hdc;';
-  Blockly.Arduino.setups_['sensebox_sensor_bmx055'] = 'hdc.begin();';
-  var code = 'hdc.get'+dropdown_name+'()';
+  Blockly.Arduino.userFunctions_['define_bmx'] = ' BMX055 bmx;';
+  Blockly.Arduino.setups_['sensebox_sensor_bmx055'] = 'bmx.beginAcc('+range+');';
+  var code = 'bmx.getAcceleration'+dropdown_value+'()';
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -312,7 +313,7 @@ var text = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMI
 var branch = Blockly.Arduino.statementToCode(block, 'SD');
 var code ='dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\n'
 code += branch;
-code +='dataFile' + filename +'.close();\n'
+code +='dataFile' + filename +'.close();\n' 
 return code;
 };
 
