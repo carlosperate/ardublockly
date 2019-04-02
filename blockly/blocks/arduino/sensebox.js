@@ -65,9 +65,13 @@ Blockly.Blocks['sensebox_sensor_bmx055_accelerometer'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_bmx055_accelerometer);
     this.appendDummyInput()
-        .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg.senseBox_value)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "NAME");
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(Blockly.Msg.senseBox_bmx055_accelerometer_direction)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_accelerometer_direction_x,"X"], [Blockly.Msg.senseBox_bmx055_accelerometer_direction_y,"Y"], [Blockly.Msg.senseBox_bmx055_accelerometer_direction_z,"Z"], [Blockly.Msg.senseBox_bmx055_accelerometer_direction_total,"Total"]]), "VALUE");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(Blockly.Msg.senseBox_bmx055_accelerometer_range)
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_accelerometer_range_2g,"0x3"], [Blockly.Msg.senseBox_bmx055_accelerometer_range_4g,"0x5"], [Blockly.Msg.senseBox_bmx055_accelerometer_range_8g,"0x8"], [Blockly.Msg.senseBox_bmx055_accelerometer_range_16g,"0x0C"]]), "RANGE");
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_bmx055_accelerometer_tip);
@@ -85,7 +89,7 @@ Blockly.Blocks['sensebox_sensor_bmx055_gyroscope'] = {
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.senseBox_value)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "NAME");
+        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_bmx055_x,"X"], [Blockly.Msg.senseBox_bmx055_y,"Y"]]), "VALUE");
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.setTooltip(Blockly.Msg.senseBox_bmx055_gyroscope_tip);
