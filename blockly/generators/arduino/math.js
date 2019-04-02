@@ -318,6 +318,7 @@ Blockly.Arduino['math_random_int'] = function(block) {
       Blockly.Arduino.ORDER_NONE) || '0';
   var functionName = Blockly.Arduino.variableDB_.getDistinctName(
       'math_random_int', Blockly.Generator.NAME_TYPE);
+  Blockly.Arduino.setups_['init_rand'] = 'randomSeed(analogRead(0));';    
   Blockly.Arduino.math_random_int.random_function = functionName;
   var func = [
       'int ' + Blockly.Arduino.DEF_FUNC_NAME + '(int min, int max) {',

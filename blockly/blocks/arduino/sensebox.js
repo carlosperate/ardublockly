@@ -867,6 +867,103 @@ Blockly.Blocks['sensebox_display_show'] = {
         }
   };
 
+Blockly.Blocks['sensebox_display_fillCircle'] = {
+  init: function () {
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.sensebox_display_fillCircle);
+    this.appendValueInput('X')
+        .appendField(Blockly.Msg.senseBox_display_printDisplay_x)
+        .setCheck(Blockly.Types.NUMBER.checkList); 
+    this.appendValueInput('Y')
+        .appendField(Blockly.Msg.senseBox_display_printDisplay_y)
+        .setCheck(Blockly.Types.NUMBER.checkList);     
+    this.appendValueInput('Radius')
+        .appendField(Blockly.Msg.sensebox_display_fillCircle_radius)
+        .setCheck(Blockly.Types.NUMBER.checkList);
+    this.appendDummyInput('fill')
+        .appendField(Blockly.Msg.senseBox_display_filled)
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "FILL");
+    this.setInputsInline(false);       
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);   
+    },
+    /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_display_show'],
+};
+
+Blockly.Blocks['sensebox_display_drawRectangle'] = {
+  init: function () {
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.sensebox_display_drawRectangle);
+    this.appendValueInput('X')
+        .appendField(Blockly.Msg.senseBox_display_printDisplay_x)
+        .setCheck(Blockly.Types.NUMBER.checkList); 
+    this.appendValueInput('Y')
+        .appendField(Blockly.Msg.senseBox_display_printDisplay_y)
+        .setCheck(Blockly.Types.NUMBER.checkList);     
+    this.appendValueInput('width')
+        .appendField(Blockly.Msg.sensebox_display_drawRectangle_width)
+        .setCheck(Blockly.Types.NUMBER.checkList);
+    this.appendValueInput('height')
+        .appendField(Blockly.Msg.sensebox_display_drawRectangle_height)
+        .setCheck(Blockly.Types.NUMBER.checkList);  
+    this.appendDummyInput('fill')
+        .appendField(Blockly.Msg.senseBox_display_filled)
+        .appendField(new Blockly.FieldCheckbox("TRUE"), "FILL"); 
+    this.setInputsInline(false);           
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);   
+    },
+    /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_display_show'],
+};
+
   //---GPS---//
 
   Blockly.Blocks['sensebox_gps_begin'] = {
