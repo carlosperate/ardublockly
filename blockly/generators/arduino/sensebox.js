@@ -363,7 +363,8 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
         code += 'display.println('+printDisplay+');\n';
         return code;
       };
-      Blockly.Arduino.sensebox_display_show = function(block) {
+
+  Blockly.Arduino.sensebox_display_show = function(block) {
         var show = Blockly.Arduino.statementToCode(block, 'SHOW');
         var code = '';
             code += show;
@@ -392,6 +393,35 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
         code += 'DataPlot.addDataPoint(t,value);\n}\n';
         return code;
       };
+
+      Blockly.Arduino.sensebox_display_fillCircle = function() {
+        var x = Blockly.Arduino.valueToCode(this, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var y = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var radius = Blockly.Arduino.valueToCode(this, 'Radius', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var fill = this.getFieldValue('FILL');
+        if (fill == 'TRUE'){
+        var code = 'display.fillCircle('+x+','+y+','+radius+',1);\n';
+        }
+        else{
+        var code = 'display.drawCircle('+x+','+y+','+radius+',1);\n';
+        }
+        return code;
+      }
+
+      Blockly.Arduino.sensebox_display_drawRectangle = function() {
+        var x = Blockly.Arduino.valueToCode(this, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var y = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var width = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var height = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var fill = this.getFieldValue('FILL');
+        if (fill == 'TRUE'){
+          var code = 'display.fillRect('+x+','+y+','+width+','+height+',1);\n';
+        }
+        else {
+          var code = 'display.drawRect('+x+','+y+','+width+','+height+',1);\n';
+        }
+        return code;
+      }
 
       //--GPS--//
 
