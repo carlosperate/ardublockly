@@ -59,10 +59,10 @@ Blockly.Arduino.sensebox_sensor_bmx055_accelerometer = function(){
   var dropdown_value = this.getFieldValue('VALUE');
   var range = this.getFieldValue('RANGE');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.userFunctions_['define_bmx'] = ' BMX055 bmx;';
+  Blockly.Arduino.userFunctions_['define_bmx'] = 'BMX055 bmx;';
   Blockly.Arduino.setups_['sensebox_sensor_bmx055'] = 'bmx.beginAcc('+range+');';
   var code = 'bmx.getAcceleration'+dropdown_value+'()';
-  return [code ,Blockly.Arduino.ORDER_ATOMIC];
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.sensebox_sensor_sds011 = function(){
@@ -73,7 +73,7 @@ Blockly.Arduino.sensebox_sensor_sds011 = function(){
   Blockly.Arduino.variables_['variables_sds011'] = 'float p10,p25;\n';
   Blockly.Arduino.setups_['sensebox_sensor_sds011'] = serial_name+'.begin(9600);';
   var code = 'my_sds.get'+dropdown_name+'()';
-  return [code ,Blockly.Arduino.ORDER_ATOMIC];
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.sensebox_sensor_ultrasonic_ranger = function() {
