@@ -325,7 +325,7 @@ Blockly.Blocks['sensebox_wifi'] = {
     this.setHelpUrl('');
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
-        .appendField("Wifi");
+        .appendField(Blockly.Msg.senseBox_wifi_connect);
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_LEFT)
         .appendField("SSID")
@@ -357,6 +357,22 @@ Blockly.Blocks['sensebox_wifi'] = {
           }
         },
         LOOP_TYPES: ['arduino_functions'],
+  };
+
+  Blockly.Blocks['sensebox_startap'] = {
+    init: function() {
+      this.setTooltip(Blockly.Msg.senseBox_wifi_tip);
+      this.setHelpUrl('');
+      this.setColour(Blockly.Blocks.sensebox.HUE);
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.senseBox_wifi_startap);
+      this.appendDummyInput()
+          .setAlign(Blockly.ALIGN_LEFT)
+          .appendField("SSID")
+          .appendField(new Blockly.FieldTextInput("SSID"), "SSID");
+      this.setPreviousStatement(true, null);
+      this.setNextStatement(true, null);
+    }
   };
 
   Blockly.Blocks['sensebox_osem_connection'] = {

@@ -149,6 +149,15 @@ Blockly.Arduino.sensebox_wifi = function(block) {
   return code;
 };
 
+Blockly.Arduino.sensebox_startap = function(block) {
+  var ssid = this.getFieldValue('SSID');
+  Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+  Blockly.Arduino.userFunctions_['define_network'] = 'WebServer accessPoint;';
+  Blockly.Arduino.setups_['sensebox_network'] = 'accessPoint.startAP("'+ ssid +'");'
+  var code = '';
+  return code;
+};
+
 Blockly.Arduino.sensebox_osem_connection = function(block) {
   var box_id = this.getFieldValue('BoxID');
   var branch = Blockly.Arduino.statementToCode(block, 'DO');
