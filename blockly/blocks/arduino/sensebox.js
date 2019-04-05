@@ -375,6 +375,17 @@ Blockly.Blocks['sensebox_wifi'] = {
     }
   };
 
+  Blockly.Blocks['sensebox_ip_address'] = {
+    init: function() {
+      this.appendDummyInput()
+          .appendField(Blockly.Msg.senseBox_ip_address);
+      this.setTooltip(Blockly.Msg.senseBox_ip_address_tip);
+      this.setHelpUrl('');
+      this.setOutput(true, Blockly.Types.TEXT.output);
+      this.setColour(Blockly.Blocks.sensebox.HUE);
+    }
+  };
+
   Blockly.Blocks['sensebox_osem_connection'] = {
     init: function() {
       this.setTooltip(Blockly.Msg.senseBox_osem_connection_tip);

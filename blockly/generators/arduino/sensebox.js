@@ -522,6 +522,11 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
           var code = 'client.println(buildNotFoundResponse(request));\n';
           return code;
         };
+
+        Blockly.Arduino.sensebox_ip_address = function(block) {
+          var code = "b->getIpAddress()";
+          return [code, Blockly.Arduino.ORDER_ATOMIC];
+      };
         
          Blockly.Arduino.sensebox_general_html_tag = function(block) {
           var tag = this.getFieldValue('TAG');

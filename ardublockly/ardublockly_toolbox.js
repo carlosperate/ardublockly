@@ -138,6 +138,7 @@ Ardublockly.TOOLBOX_XML =
     '      <category id="catsenseBoxOutput_Webserver" name="  webserver" colour="120">' +
     '      <block type="sensebox_initialize_http_server"></block>' +
     '      <block type="sensebox_http_on_client_connect"></block>' +
+    '      <block type="sensebox_ip_address"></block>' +
     '      <block type="sensebox_http_method"></block>' +
     '      <block type="sensebox_http_uri"></block>' +
     '      <block type="sensebox_http_protocol_version"></block>' +
