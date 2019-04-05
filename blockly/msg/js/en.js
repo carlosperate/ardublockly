@@ -694,3 +694,5 @@ Blockly.Msg.senseBox_html_general_tag_tip  = "A general HTML tag building block.
 Blockly.Msg.senseBox_html_document_tip = "A block for generating a HTML document.";
 Blockly.Msg.senseBox_tag_first_mutator_tip = "Mandatory children to this block.";
 Blockly.Msg.senseBox_tag_optional_mutator_tip = "Add more children to the block.";
+Blockly.Msg.senseBox_sd_web_readHTML = "Read HTML from SD-Card";
+Blockly.Msg.sensebox_web_readHTML_filename = "File:";

@@ -640,5 +640,7 @@
 	"senseBox_html_general_tag_tip" : "Ein allgemeiner HTML-Tag-Baustein.",
 	"senseBox_html_document_tip" : "Ein Block zum Erzeugen eines HTML-Dokuments.",
 	"senseBox_tag_first_mutator_tip" : "Obligatorische Kinder zu diesem Block.",
-	"senseBox_tag_optional_mutator_tip" : "Fügt dem Block mehr Kinder hinzu."
+	"senseBox_tag_optional_mutator_tip" : "Fügt dem Block mehr Kinder hinzu.",
+	"senseBox_sd_web_readHTML" : "Lese HTML von SD Karte",
+	"sensebox_web_readHTML_filename" : "Datei:"
 	}

@@ -1172,6 +1172,7 @@ Blockly.Blocks['sensebox_display_drawRectangle'] = {
         this.appendDummyInput()
             .appendField(Blockly.Msg.senseBox_http_success_l2);
         this.appendValueInput('CONTENT')
+            .appendField(Blockly.Msg.senseBox_http_success_buildhtml)
             .setCheck(Blockly.Types.TEXT.checkList);
         this.setTooltip(Blockly.Msg.senseBox_http_success_tip);
         this.setInputsInline(false);
@@ -1330,7 +1331,7 @@ Blockly.Blocks['sensebox_display_drawRectangle'] = {
       init: function() {
         this.setColour(Blockly.Blocks.logic.HUE);
         this.appendDummyInput()
-            .appendField("First Block");
+            .appendField("<Tag>");
         this.setNextStatement(true);
         this.setInputsInline(true);
         this.setTooltip(Blockly.Msg.senseBox_tag_first_mutator_tip);
@@ -1343,11 +1344,29 @@ Blockly.Blocks['sensebox_display_drawRectangle'] = {
       init: function() {
         this.setColour(Blockly.Blocks.logic.HUE);
         this.appendDummyInput()
-            .appendField("Additional Block");
+            .appendField("<Tag>");
         this.setPreviousStatement(true);
         this.setInputsInline(true);
         this.setNextStatement(true);
         this.setTooltip(Blockly.Msg.senseBox_tag_optional_mutator_tip);
         this.contextMenu = false;
+      }
+    };
+
+    // Additional Webserver Blocks
+
+    Blockly.Blocks['sensebox_web_readHTML'] = {
+      init: function() {
+        this.appendDummyInput()
+            .appendField(Blockly.Msg.senseBox_sd_web_readHTML)
+            .setAlign(Blockly.ALIGN_LEFT);
+        this.appendDummyInput()
+            .setAlign(Blockly.ALIGN_LEFT)
+            .appendField(Blockly.Msg.sensebox_web_readHTML_filename)
+            .appendField(new Blockly.FieldTextInput("index.htm"), "FILENAME");
+        this.setOutput(true, Blockly.Types.TEXT.output);
+        this.setColour(Blockly.Blocks.sensebox.HUE);
+        this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);
+        this.setHelpUrl('https://sensebox.de/books');
       }
     };

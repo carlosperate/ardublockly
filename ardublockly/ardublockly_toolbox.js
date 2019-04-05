@@ -146,6 +146,7 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_generate_http_not_found_response"></block>' +
     '      <block type="sensebox_generate_html_doc"></block>' +
     '      <block type="sensebox_general_html_tag"></block>' +
+    '      <block type="sensebox_web_readHTML"></block>'   +
     '       </category>' +
     '       </category>' +
     '  <sep></sep>' +

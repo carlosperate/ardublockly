@@ -69,7 +69,7 @@ Blockly.Arduino.sensebox_sensor_sds011 = function(){
   var dropdown_name = this.getFieldValue('NAME');
   var serial_name = this.getFieldValue('SERIAL');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.userFunctions_['define_sds011'] = 'SDS011 my_sds('+serial_name+');';
+  Blockly.Arduino.codeFunctions_['define_sds011'] = 'SDS011 my_sds('+serial_name+');';
   Blockly.Arduino.variables_['variables_sds011'] = 'float p10,p25;\n';
   Blockly.Arduino.setups_['sensebox_sensor_sds011'] = serial_name+'.begin(9600);';
   var code = 'my_sds.get'+dropdown_name+'()';
@@ -152,7 +152,7 @@ Blockly.Arduino.sensebox_wifi = function(block) {
 Blockly.Arduino.sensebox_startap = function(block) {
   var ssid = this.getFieldValue('SSID');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.userFunctions_['define_network'] = 'WebServer accessPoint;';
+  Blockly.Arduino.codeFunctions_['define_network'] = 'WebServer accessPoint;';
   Blockly.Arduino.setups_['sensebox_network'] = 'accessPoint.startAP("'+ ssid +'");'
   var code = '';
   return code;
@@ -308,7 +308,7 @@ Blockly.Arduino.sensebox_sd_create_file = function(block) {
   var filename = this.getFieldValue('Filename');
   Blockly.Arduino.includes_['library_spi'] = '#include <SPI.h>';
   Blockly.Arduino.includes_['library_sd'] = '#include <SD.h>';
-  Blockly.Arduino.userFunctions_['define_sd' + filename] = 'File dataFile' + filename +';';
+  Blockly.Arduino.codeFunctions_['define_sd'] = 'File dataFile' + filename +';';
   Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28);';
   Blockly.Arduino.setups_['sensebox_sd' + filename] = 'dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\ndataFile' + filename +'.close();\n';
   var code = '';
@@ -461,14 +461,9 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
 
         Blockly.Arduino.sensebox_initialize_http_server = function(block) {
           var box_id = this.getFieldValue('Port');
-          Blockly.Arduino.includes_['library_senseBoxMCU_http'] = '#include "WiFiServer.h"\n';
-          Blockly.Arduino.includes_['library_senseBoxMCU_http'] += '#include "WebUtil.h"\n';
-          //Blockly.Arduino.includes_['library_senseBoxMCU_http'] += '#include "WiFi101.h"';
-          Blockly.Arduino.userFunctions_['define_wifi_server'] = 'WiFiServer server('+box_id+');';
-          Blockly.Arduino.setups_['sensebox_wifi_server'] = 'IPAddress ip = WiFi.localIP();\n  ';
-          Blockly.Arduino.setups_['sensebox_wifi_server'] += 'Serial.print("IP Address: ");\n  ';
-          Blockly.Arduino.setups_['sensebox_wifi_server'] += 'Serial.println(ip);\n';
-          Blockly.Arduino.setups_['sensebox_wifi_server'] += 'server.begin();';
+          Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+          Blockly.Arduino.codeFunctions_['define_wifi_server'] = 'WiFiServer server('+box_id+');';
+          Blockly.Arduino.setups_['sensebox_wifi_server_beging'] = 'server.begin();';
           return '';
         };
         
@@ -543,4 +538,26 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
             code += ' +' + branch;
           }
           return [code + ')', Blockly.Arduino.ORDER_ATOMIC];
+        };
+
+        Blockly.Arduino.sensebox_web_readHTML = function(block) {
+          var filename =  this.getFieldValue('FILENAME');
+          Blockly.Arduino.includes_['library_spi'] = '#include <SPI.h>';
+          Blockly.Arduino.includes_['library_sd'] = '#include <SD.h>';
+          Blockly.Arduino.codeFunctions_['define_sd' + filename] = 'File webFile;';
+          Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28);';
+          var func = [
+            'String generateHTML(){',
+              ' webFile = SD.open("' + filename + '", FILE_READ);',
+              ' String finalString ="";',
+              ' while (webFile.available())',
+              '   {',
+              '   finalString+=(char)webFile.read();',
+              '   }',
+              ' return finalString;',
+            '}'];
+        var functionName = Blockly.Arduino.addFunction(
+            'generateHTML', func.join('\n'));
+        var code = functionName + '()';  
+        return [code, Blockly.Arduino.ORDER_ATOMIC];
         };
