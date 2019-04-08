@@ -347,7 +347,6 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
     Blockly.Arduino.includes_['library_wire'] = '#include <Wire.h>';
     Blockly.Arduino.includes_['library_AdafruitGFX'] = '#include <Adafruit_GFX.h>';
     Blockly.Arduino.includes_['library_AdafruitSSD1306'] = '#include <Adafruit_SSD1306.h>';
-    Blockly.Arduino.includes_['library_senseBoxIO'] = '#include <senseBoxIO.h>';
     Blockly.Arduino.userFunctions_['define_display'] = '#define OLED_RESET 4\nAdafruit_SSD1306 display(OLED_RESET);';
     Blockly.Arduino.setups_['sensebox_display_begin'] = 'senseBoxIO.powerI2C(true);\ndelay(2000);\ndisplay.begin(SSD1306_SWITCHCAPVCC, 0x3D);\ndisplay.display();\ndelay(100);\ndisplay.clearDisplay();';
     var code = '';
@@ -393,7 +392,6 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
         var TimeFrame = Blockly.Arduino.valueToCode(this, 'TimeFrame', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var plotDisplay = Blockly.Arduino.valueToCode(this, 'plotDisplay', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
         Blockly.Arduino.includes_['library_plot'] = '#include <Plot.h>';
-        Blockly.Arduino.includes_['library_senseBoxIO'] = '#include <senseBoxIO.h>';
         Blockly.Arduino.userFunctions_['define_plot_class'] = 'Plot DataPlot(&display);\n';
         Blockly.Arduino.variables_['define_plot_class'] = 'const double TIMEFRAME = '+TimeFrame+';\n';
         Blockly.Arduino.setups_['sensebox_plot_setup'] = 'DataPlot.setTitle('+Title+');\nDataPlot.setXLabel('+XLabel+');\nDataPlot.setYLabel('+YLabel+');\nDataPlot.setXRange('+ XRange1+ ',' +XRange2+');\nDataPlot.setYRange('+ YRange1+ ','+YRange2+');\nDataPlot.setXTick('+XTick+');\nDataPlot.setYTick('+YTick+');\nDataPlot.setXPrecision(0);\nDataPlot.setYPrecision(0);\n';
