@@ -88,9 +88,10 @@ Blockly.Arduino.sensebox_sensor_ultrasonic_ranger = function() {
 };
 
 Blockly.Arduino.sensebox_sensor_sound = function() {
-
   var dropdown_pin = this.getFieldValue('PIN');
-  var code = 'analogRead('+dropdown_pin+')';
+  Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+  Blockly.Arduino.userFunctions_['define_microphone'] = 'Microphone microphone('+dropdown_pin+');'
+  var code = 'microphone.getValue()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
