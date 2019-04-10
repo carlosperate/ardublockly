@@ -1374,7 +1374,7 @@ Blockly.Blocks['sensebox_display_drawRectangle'] = {
         this.appendDummyInput()
             .setAlign(Blockly.ALIGN_LEFT)
             .appendField(Blockly.Msg.sensebox_web_readHTML_filename)
-            .appendField(new Blockly.FieldTextInput("index.htm"), "FILENAME");
+            .appendField(new Blockly.FieldTextInput("index.txt"), "FILENAME");
         this.setOutput(true, Blockly.Types.TEXT.output);
         this.setColour(Blockly.Blocks.sensebox.HUE);
         this.setTooltip(Blockly.Msg.senseBox_output_safetosd_tip);

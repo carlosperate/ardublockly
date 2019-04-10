@@ -279,7 +279,7 @@
 	"senseBox_ip_address"  : "IP-Address",
 	"senseBox_ip_address_tip"  : "Returns the IP address as a string.",
 	"senseBox_init_http_server_tip"  : "Initializes a http server on the specified port.",
-	"senseBox_init_http_server"  : "nitialize HTTP-Server",
+	"senseBox_init_http_server"  : "Initialize HTTP-Server",
 	"senseBox_http_on_client_connect"  : "If client is connected:",
 	"senseBox_http_on_client_connect_tip"  : "Checks if a client is connected and executes given statement in that case.",
 	"senseBox_http_method"  : "Method",
