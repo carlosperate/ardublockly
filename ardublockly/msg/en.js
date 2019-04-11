@@ -106,6 +106,7 @@ Ardublockly.LOCALISED_TEXT = {
   catsenseBoxDisplay:"Display",
   catsenseBoxOutput_SD:"SD",
   catsenseBoxOutput_Web:"Web",
+  catsenseBoxOutput_Webserver:"Webserver",
   catLogic: "Logic",
   catLoops: "Loops",
   catMath: "Math",

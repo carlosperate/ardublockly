@@ -55,24 +55,25 @@ Blockly.Arduino.sensebox_sensor_uv_light = function(){
   return [code ,Blockly.Arduino.ORDER_ATOMIC];
 };
 
-Blockly.Arduino.sensebox_sensor_bmx055 = function(){
-  var dropdown_name = this.getFieldValue('NAME');
+Blockly.Arduino.sensebox_sensor_bmx055_accelerometer = function(){
+  var dropdown_value = this.getFieldValue('VALUE');
+  var range = this.getFieldValue('RANGE');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.userFunctions_['define_hdc'] = 'HDC100X hdc;';
-  Blockly.Arduino.setups_['sensebox_sensor_bmx055'] = 'hdc.begin();';
-  var code = 'hdc.get'+dropdown_name+'()';
-  return [code ,Blockly.Arduino.ORDER_ATOMIC];
+  Blockly.Arduino.userFunctions_['define_bmx'] = 'BMX055 bmx;';
+  Blockly.Arduino.setups_['sensebox_sensor_bmx055'] = 'bmx.beginAcc('+range+');';
+  var code = 'bmx.getAcceleration'+dropdown_value+'()';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.sensebox_sensor_sds011 = function(){
   var dropdown_name = this.getFieldValue('NAME');
   var serial_name = this.getFieldValue('SERIAL');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.userFunctions_['define_sds011'] = 'SDS011 my_sds('+serial_name+');';
+  Blockly.Arduino.codeFunctions_['define_sds011'] = 'SDS011 my_sds('+serial_name+');';
   Blockly.Arduino.variables_['variables_sds011'] = 'float p10,p25;\n';
   Blockly.Arduino.setups_['sensebox_sensor_sds011'] = serial_name+'.begin(9600);';
   var code = 'my_sds.get'+dropdown_name+'()';
-  return [code ,Blockly.Arduino.ORDER_ATOMIC];
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
 Blockly.Arduino.sensebox_sensor_ultrasonic_ranger = function() {
@@ -87,9 +88,10 @@ Blockly.Arduino.sensebox_sensor_ultrasonic_ranger = function() {
 };
 
 Blockly.Arduino.sensebox_sensor_sound = function() {
-
   var dropdown_pin = this.getFieldValue('PIN');
-  var code = 'analogRead('+dropdown_pin+')';
+  Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+  Blockly.Arduino.userFunctions_['define_microphone'] = 'Microphone microphone('+dropdown_pin+');'
+  var code = 'microphone.getValue()';
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 
@@ -144,6 +146,15 @@ Blockly.Arduino.sensebox_wifi = function(block) {
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
   Blockly.Arduino.userFunctions_['define_network'] = 'Bee* b = new Bee();';
   Blockly.Arduino.setups_['sensebox_network'] = 'b->connectToWifi("'+ ssid +'","'+ pw +'");\ndelay(1000);';
+  var code = '';
+  return code;
+};
+
+Blockly.Arduino.sensebox_startap = function(block) {
+  var ssid = this.getFieldValue('SSID');
+  Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+  Blockly.Arduino.userFunctions_['define_network'] = 'Bee* b = new Bee();';
+  Blockly.Arduino.setups_['sensebox_network'] = 'b->startAP("'+ ssid +'");'
   var code = '';
   return code;
 };
@@ -263,7 +274,7 @@ Blockly.Arduino.sensebox_rgb_led = function() {
   var red = Blockly.Arduino.valueToCode(this, 'RED', Blockly.Arduino.ORDER_ATOMIC) || '0'
   var green = Blockly.Arduino.valueToCode(this, 'GREEN', Blockly.Arduino.ORDER_ATOMIC) || '0'
   var blue = Blockly.Arduino.valueToCode(this, 'BLUE', Blockly.Arduino.ORDER_ATOMIC) || '0'
-  Blockly.Arduino.definitions_['define_rgb_led'+dropdown_pin] = '#include <Adafruit_NeoPixel.h>\n Adafruit_NeoPixel rgb_led_'+ dropdown_pin +' = Adafruit_NeoPixel(1,'+ dropdown_pin +',NEO_GRB + NEO_KHZ800);\n';
+  Blockly.Arduino.definitions_['define_rgb_led'+dropdown_pin] = '#include <Adafruit_NeoPixel.h>\n Adafruit_NeoPixel rgb_led_'+ dropdown_pin +' = Adafruit_NeoPixel(1,'+ dropdown_pin +',NEO_RGB + NEO_KHZ800);\n';
   Blockly.Arduino.setups_['setup_rgb_led'+dropdown_pin] = 'rgb_led_'+ dropdown_pin+ '.begin();';
 
     var code = 'rgb_led_'+ dropdown_pin +'.setPixelColor(0,rgb_led_'+ dropdown_pin +'.Color('+ red +',' + green +',' + blue +'));\n';
@@ -298,7 +309,7 @@ Blockly.Arduino.sensebox_sd_create_file = function(block) {
   var filename = this.getFieldValue('Filename');
   Blockly.Arduino.includes_['library_spi'] = '#include <SPI.h>';
   Blockly.Arduino.includes_['library_sd'] = '#include <SD.h>';
-  Blockly.Arduino.userFunctions_['define_sd' + filename] = 'File dataFile' + filename +';';
+  Blockly.Arduino.codeFunctions_['define_sd'] = 'File dataFile' + filename +';';
   Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28);';
   Blockly.Arduino.setups_['sensebox_sd' + filename] = 'dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\ndataFile' + filename +'.close();\n';
   var code = '';
@@ -312,7 +323,7 @@ var text = Blockly.Arduino.valueToCode(this, 'TEXT', Blockly.Arduino.ORDER_ATOMI
 var branch = Blockly.Arduino.statementToCode(block, 'SD');
 var code ='dataFile' + filename +' = SD.open("'+filename+'.txt", FILE_WRITE);\n'
 code += branch;
-code +='dataFile' + filename +'.close();\n'
+code +='dataFile' + filename +'.close();\n' 
 return code;
 };
 
@@ -337,7 +348,7 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
     Blockly.Arduino.includes_['library_wire'] = '#include <Wire.h>';
     Blockly.Arduino.includes_['library_AdafruitGFX'] = '#include <Adafruit_GFX.h>';
     Blockly.Arduino.includes_['library_AdafruitSSD1306'] = '#include <Adafruit_SSD1306.h>';
-    Blockly.Arduino.includes_['library_senseBoxIO'] = '#include <senseBoxIO.h>';
+    Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
     Blockly.Arduino.userFunctions_['define_display'] = '#define OLED_RESET 4\nAdafruit_SSD1306 display(OLED_RESET);';
     Blockly.Arduino.setups_['sensebox_display_begin'] = 'senseBoxIO.powerI2C(true);\ndelay(2000);\ndisplay.begin(SSD1306_SWITCHCAPVCC, 0x3D);\ndisplay.display();\ndelay(100);\ndisplay.clearDisplay();';
     var code = '';
@@ -362,7 +373,8 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
         code += 'display.println('+printDisplay+');\n';
         return code;
       };
-      Blockly.Arduino.sensebox_display_show = function(block) {
+
+  Blockly.Arduino.sensebox_display_show = function(block) {
         var show = Blockly.Arduino.statementToCode(block, 'SHOW');
         var code = '';
             code += show;
@@ -382,7 +394,6 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
         var TimeFrame = Blockly.Arduino.valueToCode(this, 'TimeFrame', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var plotDisplay = Blockly.Arduino.valueToCode(this, 'plotDisplay', Blockly.Arduino.ORDER_ATOMIC) || '"Keine Eingabe"';
         Blockly.Arduino.includes_['library_plot'] = '#include <Plot.h>';
-        Blockly.Arduino.includes_['library_senseBoxIO'] = '#include <senseBoxIO.h>';
         Blockly.Arduino.userFunctions_['define_plot_class'] = 'Plot DataPlot(&display);\n';
         Blockly.Arduino.variables_['define_plot_class'] = 'const double TIMEFRAME = '+TimeFrame+';\n';
         Blockly.Arduino.setups_['sensebox_plot_setup'] = 'DataPlot.setTitle('+Title+');\nDataPlot.setXLabel('+XLabel+');\nDataPlot.setYLabel('+YLabel+');\nDataPlot.setXRange('+ XRange1+ ',' +XRange2+');\nDataPlot.setYRange('+ YRange1+ ','+YRange2+');\nDataPlot.setXTick('+XTick+');\nDataPlot.setYTick('+YTick+');\nDataPlot.setXPrecision(0);\nDataPlot.setYPrecision(0);\n';
@@ -391,6 +402,35 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
         code += 'DataPlot.addDataPoint(t,value);\n}\n';
         return code;
       };
+
+      Blockly.Arduino.sensebox_display_fillCircle = function() {
+        var x = Blockly.Arduino.valueToCode(this, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var y = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var radius = Blockly.Arduino.valueToCode(this, 'Radius', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var fill = this.getFieldValue('FILL');
+        if (fill == 'TRUE'){
+        var code = 'display.fillCircle('+x+','+y+','+radius+',1);\n';
+        }
+        else{
+        var code = 'display.drawCircle('+x+','+y+','+radius+',1);\n';
+        }
+        return code;
+      }
+
+      Blockly.Arduino.sensebox_display_drawRectangle = function() {
+        var x = Blockly.Arduino.valueToCode(this, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var y = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var width = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var height = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var fill = this.getFieldValue('FILL');
+        if (fill == 'TRUE'){
+          var code = 'display.fillRect('+x+','+y+','+width+','+height+',1);\n';
+        }
+        else {
+          var code = 'display.drawRect('+x+','+y+','+width+','+height+',1);\n';
+        }
+        return code;
+      }
 
       //--GPS--//
 
@@ -412,4 +452,117 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
               code += branch; 
               code += '}\n'
           return code;
+        };
+
+        /**
+         * Webserver Blocks by Lucas Steinmann
+         * 
+         */
+
+        Blockly.Arduino.sensebox_initialize_http_server = function(block) {
+          var box_id = this.getFieldValue('Port');
+          Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
+          Blockly.Arduino.codeFunctions_['define_wifi_server'] = 'WiFiServer server('+box_id+');';
+          Blockly.Arduino.setups_['sensebox_wifi_server_beging'] = 'server.begin();';
+          return '';
+        };
+        
+         Blockly.Arduino.sensebox_http_on_client_connect = function(block) {
+          var onConnect = Blockly.Arduino.statementToCode(block, 'ON_CONNECT');
+          var code = '';
+          code += 'WiFiClient client = server.available();\n';
+          code += 'if (client && client.available()) {\n';
+          code += '  String request_string = listenClient(client);\n';
+          code += '  Request request;\n';
+          code += '  if (parseRequestSafe(request_string, request)) {\n';
+          code += onConnect;
+          code += '  }\n';
+          code += '  delay(1);\n';
+          code += '  client.stop();\n';
+          code += '  delay(1);\n';
+          code += '}\n';
+          return code;
+        };
+        
+         Blockly.Arduino.sensebox_http_method = function(block) {
+            var code = "request.method";
+            return [code, Blockly.Arduino.ORDER_ATOMIC];
+        };
+        
+        
+         Blockly.Arduino.sensebox_http_uri = function(block) {
+            var code = "request.uri";
+            return [code, Blockly.Arduino.ORDER_ATOMIC];
+        };
+        
+         Blockly.Arduino.sensebox_http_protocol_version = function(block) {
+            var code = "request.protocol_version";
+            return [code, Blockly.Arduino.ORDER_ATOMIC];
+        };
+        
+         Blockly.Arduino.sensebox_http_user_agent = function(block) {
+            var code = "request.user_agent";
+            return [code, Blockly.Arduino.ORDER_ATOMIC];
+        };
+        
+         Blockly.Arduino.sensebox_generate_html_doc = function(block) {
+          var header = Blockly.Arduino.valueToCode(block, 'HEADER', Blockly.Arduino.ORDER_NONE) || '""';
+          var body = Blockly.Arduino.valueToCode(block, 'BODY', Blockly.Arduino.ORDER_NONE) || '""';
+          var code = 'buildHTML(' + header + ', ' + body + ')';
+          return [code, Blockly.Arduino.ORDER_ATOMIC];
+        };
+        
+         Blockly.Arduino.sensebox_generate_http_succesful_response = function(block) {
+          var content = Blockly.Arduino.valueToCode(block, 'CONTENT', Blockly.Arduino.ORDER_NONE) || '""';
+          var code = 'client.println(buildSuccessfulResponse(request, ' + content + '));\n';
+          return code;
+        };
+        
+         Blockly.Arduino.sensebox_generate_http_not_found_response = function(block) {
+          var code = 'client.println(buildNotFoundResponse(request));\n';
+          return code;
+        };
+
+        Blockly.Arduino.sensebox_ip_address = function(block) {
+          var code = "b->getIpAddress()";
+          return [code, Blockly.Arduino.ORDER_ATOMIC];
+      };
+        
+         Blockly.Arduino.sensebox_general_html_tag = function(block) {
+          var tag = this.getFieldValue('TAG');
+          var code = 'buildTag("' + tag + '",';
+          var n = 0;
+          var branch = Blockly.Arduino.valueToCode(block, 'DO' + n, Blockly.Arduino.ORDER_NONE);
+          if (branch.length > 0) {
+              code += '\n ' + branch;
+          } else {
+              code += '""';
+          }
+          for (n = 1; n <= block.additionalChildCount_; n++) {
+            branch = Blockly.Arduino.valueToCode(block, 'DO' + n, Blockly.Arduino.ORDER_NONE);
+            code += ' +' + branch;
+          }
+          return [code + ')', Blockly.Arduino.ORDER_ATOMIC];
+        };
+
+        Blockly.Arduino.sensebox_web_readHTML = function(block) {
+          var filename =  this.getFieldValue('FILENAME');
+          Blockly.Arduino.includes_['library_spi'] = '#include <SPI.h>';
+          Blockly.Arduino.includes_['library_sd'] = '#include <SD.h>';
+          Blockly.Arduino.codeFunctions_['define_sd' + filename] = 'File webFile;';
+          Blockly.Arduino.setups_['sensebox_sd'] = 'SD.begin(28);';
+          var func = [
+            'String generateHTML(){',
+              ' webFile = SD.open("' + filename + '", FILE_READ);',
+              ' String finalString ="";',
+              ' while (webFile.available())',
+              '   {',
+              '   finalString+=(char)webFile.read();',
+              '   }',
+              ' return finalString;',
+            '}'];
+        var functionName = Blockly.Arduino.addFunction(
+            'generateHTML', func.join('\n'));
+        var code = functionName + '()';  
+        return [code, Blockly.Arduino.ORDER_ATOMIC];
         };

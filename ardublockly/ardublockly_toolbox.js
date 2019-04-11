@@ -15,9 +15,9 @@ Ardublockly.TOOLBOX_XML =
     '   <category id="catSenseBox_Sensor" name="senseBox Sensors" colour="120">' +
     '      <block type="sensebox_sensor_temp_hum"></block>' +
     '      <block type="sensebox_sensor_uv_light"></block>' +
-    /*'      <block type="sensebox_sensor_bmx055_accelerometer"></block>' +
-    '      <block type="sensebox_sensor_bmx055_gyroscope"></block>' +
-    '      <block type="sensebox_sensor_bmx055_compass"></block>' + */
+    '      <block type="sensebox_sensor_bmx055_accelerometer"></block>' +
+   // '      <block type="sensebox_sensor_bmx055_gyroscope"></block>' +
+   // '      <block type="sensebox_sensor_bmx055_compass"></block>' +
     '      <block type="sensebox_sensor_sds011"></block>' +
     '      <block type="sensebox_sensor_pressure"></block>' +
     '      <block type="sensebox_sensor_ultrasonic_ranger">' +
@@ -76,6 +76,8 @@ Ardublockly.TOOLBOX_XML =
     '          </block>' +
     '       </value>' +
     '      </block>' +
+    '      <block type="sensebox_display_fillCircle"></block>' +
+    '      <block type="sensebox_display_drawRectangle"></block>' +
     '      <block type="sensebox_display_plotDisplay">' +
     '           <value name="Title">' +
     '               <block type="text">' +
@@ -127,11 +129,26 @@ Ardublockly.TOOLBOX_XML =
     '       </block>' +
     '   </category>' +
     '  <sep></sep>' +
-    '      <category id="catsenseBoxOutput_Web" name="  web" colour="120">' +
+    '      <category id="catsenseBoxOutput_Web" name="  web" colour="120">' +   
     '      <block type="sensebox_wifi"></block>' +
+    '      <block type="sensebox_startap"></block>' +
     '      <block type="sensebox_osem_connection"></block>' +
     '      <block type="sensebox_send_to_osem"></block>' +
     '      <block type="sensebox_send_mobile_to_osem"></block>' +
+    '      <category id="catsenseBoxOutput_Webserver" name="  webserver" colour="120">' +
+    '      <block type="sensebox_initialize_http_server"></block>' +
+    '      <block type="sensebox_http_on_client_connect"></block>' +
+    '      <block type="sensebox_ip_address"></block>' +
+    '      <block type="sensebox_http_method"></block>' +
+    '      <block type="sensebox_http_uri"></block>' +
+    '      <block type="sensebox_http_protocol_version"></block>' +
+    '      <block type="sensebox_http_user_agent"></block>' +
+    '      <block type="sensebox_generate_http_succesful_response"></block>' +
+    '      <block type="sensebox_generate_http_not_found_response"></block>' +
+    '      <block type="sensebox_generate_html_doc"></block>' +
+    '      <block type="sensebox_general_html_tag"></block>' +
+    '      <block type="sensebox_web_readHTML"></block>'   +
+    '       </category>' +
     '       </category>' +
     '  <sep></sep>' +
     '      <category id="catsenseBoxOutput_SD" name="   SD" colour="120">' +

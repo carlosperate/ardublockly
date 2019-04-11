@@ -32,13 +32,20 @@ Blockly.Blocks['base_map'] = {
     this.appendValueInput('NUM')
         .appendField(Blockly.Msg.ARD_MAP)
         .setCheck(Blockly.Types.NUMBER.checkList);
+    this.appendValueInput('FMIN')
+        .appendField(Blockly.Msg.ARD_MAP_FROMMIN)
+        .setCheck(Blockly.Types.NUMBER.checkList); 
+    this.appendValueInput('FMAX')
+        .appendField(Blockly.Msg.ARD_MAP_FROMMAX)
+        .setCheck(Blockly.Types.NUMBER.checkList);     
+    this.appendValueInput('DMIN')
+        .appendField(Blockly.Msg.ARD_MAP_TOMIN)
+        .setCheck(Blockly.Types.NUMBER.checkList);    
     this.appendValueInput('DMAX')
-        .appendField(Blockly.Msg.ARD_MAP_VAL)
+        .appendField(Blockly.Msg.ARD_MAP_TOMAX)
         .setCheck(Blockly.Types.NUMBER.checkList);
-    this.appendDummyInput()
-        .appendField(']');
-    this.setInputsInline(true);
     this.setOutput(true);
+    this.setInputsInline(false);
     this.setTooltip(Blockly.Msg.ARD_MAP_TIP);
   },
   /** @return {string} The type of return value for the block, an integer. */
