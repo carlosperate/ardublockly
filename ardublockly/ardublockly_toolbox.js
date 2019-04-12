@@ -76,8 +76,45 @@ Ardublockly.TOOLBOX_XML =
     '          </block>' +
     '       </value>' +
     '      </block>' +
-    '      <block type="sensebox_display_fillCircle"></block>' +
-    '      <block type="sensebox_display_drawRectangle"></block>' +
+    '      <block type="sensebox_display_fillCircle">' +
+    '       <value name="X">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '      <value name="Y">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '       <value name="Radius">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '      </block>' +
+    '      <block type="sensebox_display_drawRectangle">' + 
+    '       <value name="X">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '      <value name="Y">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '       <value name="height">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '       <value name="width">' +
+    '          <block type="math_number">' +
+    '            <field name="NUM">0</field>' +
+    '          </block>' +
+    '        </value>' +
+    '      </block>' +
     '      <block type="sensebox_display_plotDisplay">' +
     '           <value name="Title">' +
     '               <block type="text">' +
