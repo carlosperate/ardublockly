@@ -420,8 +420,8 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
       Blockly.Arduino.sensebox_display_drawRectangle = function() {
         var x = Blockly.Arduino.valueToCode(this, 'X', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var y = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
-        var width = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
-        var height = Blockly.Arduino.valueToCode(this, 'Y', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var width = Blockly.Arduino.valueToCode(this, 'width', Blockly.Arduino.ORDER_ATOMIC) || '0'
+        var height = Blockly.Arduino.valueToCode(this, 'height', Blockly.Arduino.ORDER_ATOMIC) || '0'
         var fill = this.getFieldValue('FILL');
         if (fill == 'TRUE'){
           var code = 'display.fillRect('+x+','+y+','+width+','+height+',1);\n';
