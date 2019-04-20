@@ -230,19 +230,19 @@ Blockly.Arduino.sensebox_button = function() {
   var dropdown_pin = this.getFieldValue('PIN');
   var dropown_function = this.getFieldValue('FUNCTION');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.definitions_['define_button'] = 'Button button(' + dropdown_pin + ');';
-  Blockly.Arduino.setups_['setup_button'] = 'button.begin();';
+  Blockly.Arduino.definitions_['define_button' + dropdown_pin +''] = 'Button button_'+dropdown_pin+'(' + dropdown_pin + ');';
+  Blockly.Arduino.setups_['setup_button' + dropdown_pin +''] = 'button_'+dropdown_pin+'.begin();';
   var code = '';
   if (dropown_function == 'isPressed'){
-     code += 'button.isPressed()';
+     code += 'button_'+dropdown_pin+'.isPressed()';
   } 
   else if (dropown_function == 'Switch')
   {
-    code += 'button.getSwitch()';
+    code += 'button_'+dropdown_pin+'.getSwitch()';
   }
   else if (dropown_function == 'wasPressed')
   {
-    code += 'button.wasPressed()';
+    code += 'button_'+dropdown_pin+'.wasPressed()';
   }
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
