@@ -35,7 +35,6 @@ Ardublockly.TOOLBOX_XML =
     '  <sep></sep>' +
     '   <category id="catSenseBox_Output" name="senseBox Output" colour="120">' +
     '       <block type="sensebox_led"></block>' +
-    '      <block type="sensebox_piezo"></block>' +
     '      <block type="sensebox_rgb_led">' +
     '        <value name="RED">' +
     '          <block type="math_number">' +
@@ -362,7 +361,6 @@ Ardublockly.TOOLBOX_XML =
     '  <category id="catAdvanced" name="Advanced" colour="230">' +
     '  <category id="catAudio" name="Audio" colour="250">' +
     '    <block type="io_tone">' +
-    '      <field name="TONEPIN">0</field>' +
     '      <value name="FREQUENCY">' +
     '        <shadow type="math_number">' +
     '          <field name="NUM">220</field>' +
