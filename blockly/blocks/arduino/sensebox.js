@@ -576,22 +576,6 @@ Blockly.Blocks['sensebox_button'] = {
     return Blockly.Types.BOOLEAN;
   },
 };
-Blockly.Blocks['sensebox_piezo'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_piezo)
-        .appendField("PIN:")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN")
-        .appendField(Blockly.Msg.senseBox_basic_state)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_on, "HIGH"], [Blockly.Msg.senseBox_off, "LOW"]]), "STAT");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.sensebox.HUE);
-    this.setTooltip(Blockly.Msg.senseBox_piezo_tip);
-    this.setHelpUrl('https://sensebox.de/books');
-  }
-};
-
 /**
  * Block for Sparkfun Soil Moisture Sensor 
  * 

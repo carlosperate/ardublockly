@@ -492,8 +492,6 @@
 	"senseBox_button_tip ": "Drucktaster",
 	"senseBox_led ": "LED an digital",
 	"senseBox_led_tip ": "Einfache LED. Beim Anschluss sollte immer ein Vorwiderstand verwendet werden",
-	"senseBox_piezo ": "Piezo an digital",
-	"senseBox_piezo_tip ": "Piezo an digital PIN. Beim Anschluss sollte immer ein Vorwiderstand verwendet werden",
 	"senseBox_foto ": "Fotowiderstand",
 	"senseBox_foto_tip ": "Fotowiderstand",
 	"senseBox_hum ": "Luftfeuchtigkeit",

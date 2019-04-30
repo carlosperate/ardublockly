@@ -519,7 +519,6 @@ Blockly.Msg.RENAME_INSTANCE_TITLE = "Benenne alle '%1' Instanzen zu:";
 
 Blockly.Msg.senseBox_basic_blue = "Blau";
 Blockly.Msg.senseBox_basic_green = "Grün";
-Blockly.Msg.senseBox_piezo = "Piezo Piepser";
 Blockly.Msg.senseBox_basic_red = "Rot";
 Blockly.Msg.senseBox_basic_state = "Status";
 Blockly.Msg.senseBox_off = "Aus";

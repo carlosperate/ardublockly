@@ -147,7 +147,6 @@
 	"senseBox_output_serialprint ": "Print on Serial Monitor",
 	"senseBox_output_timestamp ": "timestamp",
 	"senseBox_button ": "Button",
-	"senseBox_piezo ": "Piezo",
 	"senseBox_foto ": "Light Dependent Resistor",
 	"senseBox_hum ": "humidity in %",
 	"senseBox_ir ": "infrared distance sensor",
