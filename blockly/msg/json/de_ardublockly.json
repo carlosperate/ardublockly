@@ -68,7 +68,7 @@
 	"ARD_MAP": "Map Value",
 	"ARD_MAP_VAL": "value to [0-",
 	"ARD_MAP_FROMMIN" : "von Minimum",
-	"ARD_MAP_FROMMAX" : "bis Maximun",
+	"ARD_MAP_FROMMAX" : "bis maximum",
 	"ARD_MAP_TOMIN" : "auf Minimum",
 	"ARD_MAP_TOMAX" : "bis Maximum",	
 	"ARD_MAP_TIP": "Re-maps a number from [0-1024] to another.",
