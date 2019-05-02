@@ -1007,25 +1007,6 @@ Blockly.Blocks['sensebox_display_drawRectangle'] = {
         return Blockly.Types.DECIMAL;
       },
   };
-
-  Blockly.Blocks['sensebox_interval_timer'] = {
-    init: function() {
-      this.setTooltip(Blockly.Msg.senseBox_interval_timer_tip);
-      this.setHelpUrl('');
-      this.setColour(Blockly.Blocks.sensebox.HUE);
-      this.appendDummyInput()
-          .appendField(Blockly.Msg.senseBox_interval_timer);
-      this.appendDummyInput()
-          .setAlign(Blockly.ALIGN_LEFT)
-          .appendField(new Blockly.FieldTextInput("1000"), "interval")
-          .appendField(Blockly.Msg.senseBox_interval);
-      this.appendStatementInput('DO')
-          .setCheck(null);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-          }
-    };
-
     /** 
      * Webserver Blocks By Lucas Steinmann
      *  */ 
