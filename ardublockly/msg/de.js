@@ -102,7 +102,7 @@ Ardublockly.LOCALISED_TEXT = {
   arduinoSourceCode: "Arduino Quellcode",
   blocksXml: "XML Blöcke",
   /* Toolbox Categories*/
-  catsenseBox_Sensor:"Sensoren",
+  catSenseBox_Sensor:"Sensoren",
   catsenseBox_Output:"Ausgabe",
   catSenseBox_Display:"Display",
   catSenseBoxOutput_SD:"SD",
