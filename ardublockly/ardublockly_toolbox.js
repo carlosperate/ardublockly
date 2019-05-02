@@ -33,7 +33,7 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_gps_getValues"></block>' +
     '   </category>' +
     '  <sep></sep>' +
-    '   <category id="catSenseBox_Output" name="senseBox Output" colour="120">' +
+    '   <category id="catSenseBox_Led" name="LED" colour="120">' +
     '       <block type="sensebox_led"></block>' +
     '      <block type="sensebox_rgb_led">' +
     '        <value name="RED">' +
@@ -52,9 +52,9 @@ Ardublockly.TOOLBOX_XML =
     '          </block>' +
     '        </value>' +
     '      </block>' +
-    '      <block type="sensebox_serial_print"></block>' +
-    '      <block type="sensebox_interval_timer"></block>' +
-    '      <category id="catsenseBoxDisplay" name="Display" colour="120">' +
+    '   </category>' +
+    '  <sep></sep>' +
+    '      <category id="catSenseBox_Display" name="Display" colour="120">' +
     '      <block type="sensebox_display_beginDisplay"></block>' +
     '      <block type="sensebox_display_show"></block>' +
     '      <block type="sensebox_display_clearDisplay"></block>' +
@@ -165,13 +165,13 @@ Ardublockly.TOOLBOX_XML =
     '       </block>' +
     '   </category>' +
     '  <sep></sep>' +
-    '      <category id="catsenseBoxOutput_Web" name="  web" colour="120">' +   
+    '      <category id="catSenseBoxOutput_Web" name="  web" colour="120">' +   
     '      <block type="sensebox_wifi"></block>' +
     '      <block type="sensebox_startap"></block>' +
     '      <block type="sensebox_osem_connection"></block>' +
     '      <block type="sensebox_send_to_osem"></block>' +
     '      <block type="sensebox_send_mobile_to_osem"></block>' +
-    '      <category id="catsenseBoxOutput_Webserver" name="  webserver" colour="120">' +
+    '      <category id="catSenseBoxOutput_Webserver" name="  webserver" colour="120">' +
     '      <block type="sensebox_initialize_http_server"></block>' +
     '      <block type="sensebox_http_on_client_connect"></block>' +
     '      <block type="sensebox_ip_address"></block>' +
@@ -187,12 +187,11 @@ Ardublockly.TOOLBOX_XML =
     '       </category>' +
     '       </category>' +
     '  <sep></sep>' +
-    '      <category id="catsenseBoxOutput_SD" name="   SD" colour="120">' +
+    '      <category id="catSenseBoxOutput_SD" name="   SD" colour="120">' +
     '      <block type="sensebox_sd_create_file"></block>' +
     '      <block type="sensebox_sd_open_file"></block>' +
     '      <block type="sensebox_sd_write_file"></block>' +
     '      </category>' +
-    '</category>' +
     '    <sep></sep>' +
     '   <category id="catLogic" name="Logic" colour="210">' +
     '    <block type="controls_if"></block>' +
@@ -356,6 +355,7 @@ Ardublockly.TOOLBOX_XML =
     '    <block type="time_millis"></block>' +
     '    <block type="time_micros"></block>' +
     '    <block type="infinite_loop"></block>' +
+    '    <block type="sensebox_interval_timer"></block>' +
     '  </category>' +
     '  <sep>gap="32"</sep>' +
     '  <category id="catAdvanced" name="Advanced" colour="230">' +
