@@ -395,8 +395,8 @@ Blockly.Blocks['sensebox_wifi'] = {
           .appendField(Blockly.Msg.senseBox_osem_connection);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_LEFT)
-          .appendField("BoxID")
-          .appendField(new Blockly.FieldTextInput("BoxID"), "BoxID");
+          .appendField("senseBox ID")
+          .appendField(new Blockly.FieldTextInput("senseBox ID"), "BoxID");
       this.appendStatementInput('DO')
           .appendField(Blockly.Msg.senseBox_sensor)
           .setCheck(null);
@@ -413,8 +413,8 @@ Blockly.Blocks['sensebox_wifi'] = {
             .appendField(Blockly.Msg.senseBox_send_to_osem);
         this.appendValueInput('Value')
             .setCheck(null)
-            .appendField('SensorID')
-            .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
+            .appendField('Sensor ID')
+            .appendField(new Blockly.FieldTextInput('Sensor ID'), 'SensorID');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
             },
