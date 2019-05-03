@@ -171,7 +171,7 @@
 	"COLOUR_BLEND_RATIO": "im Verhältnis",
 	"COLOUR_BLEND_TOOLTIP": "Vermische 2 Farben mit konfigurierbaren Farbverhältnis (0.0 - 1.0).",
 	"CONTROLS_REPEAT_HELPURL": "https://de.wikipedia.org/wiki/For-Schleife",
-	"CONTROLS_REPEAT_TITLE": "wiederhole %1 mal",
+	"CONTROLS_REPEAT_TITLE": "Wiederhole %1 mal",
 	"CONTROLS_REPEAT_INPUT_DO": "mache",
 	"CONTROLS_REPEAT_TOOLTIP": "Eine Anweisung mehrfach ausführen.",
 	"CONTROLS_WHILEUNTIL_HELPURL": "https://de.wikipedia.org/wiki/Schleife_%28Programmierung%29",
