@@ -291,7 +291,7 @@ Blockly.Blocks['sensebox_sensor_sound'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_sound)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
         this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setHelpUrl(Blockly.Msg.senseBox_sound_tip);
@@ -328,7 +328,7 @@ Blockly.Blocks['sensebox_wifi'] = {
         .appendField(Blockly.Msg.senseBox_wifi_connect);
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField("SSID")
+        .appendField(Blockly.Msg.senseBox_wifi_ssid)
         .appendField(new Blockly.FieldTextInput("SSID"), "SSID");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_LEFT)
@@ -368,7 +368,7 @@ Blockly.Blocks['sensebox_wifi'] = {
           .appendField(Blockly.Msg.senseBox_wifi_startap);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_LEFT)
-          .appendField("SSID")
+          .appendField(Blockly.Msg.senseBox_wifi_ssid)
           .appendField(new Blockly.FieldTextInput("SSID"), "SSID");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
@@ -499,7 +499,7 @@ Blockly.Blocks['sensebox_poti'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_poti)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_poti_tip);
@@ -514,7 +514,7 @@ Blockly.Blocks['sensebox_foto'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_foto)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_foto_tip);
@@ -529,7 +529,7 @@ Blockly.Blocks['sensebox_rgb_led'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_rgb_led)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN")
         this.appendValueInput("RED", 'Number')
             .appendField(Blockly.Msg.COLOUR_RGB_RED);//Blockly.Msg.senseBox_basic_red
@@ -549,7 +549,7 @@ Blockly.Blocks['sensebox_led'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_led)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPinsLED), "PIN")
         .appendField(Blockly.Msg.senseBox_basic_state)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_on, "HIGH"], [Blockly.Msg.senseBox_off, "LOW"]]), "STAT");
@@ -565,7 +565,7 @@ Blockly.Blocks['sensebox_button'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_button)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_button_isPressed, "isPressed"], [Blockly.Msg.senseBox_button_wasPressed, "wasPressed"], [Blockly.Msg.senseBox_button_switch, "Switch"]]), "FUNCTION")
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPinsButton), "PIN");
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
