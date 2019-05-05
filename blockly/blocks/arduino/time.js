@@ -119,13 +119,14 @@ Blockly.Blocks['infinite_loop'] = {
 Blockly.Blocks['sensebox_interval_timer'] = {
   init: function() {
     this.setTooltip(Blockly.Msg.senseBox_interval_timer_tip);
+    this.setInputsInline(true);
     this.setHelpUrl('');
     this.setColour(Blockly.Blocks.time.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_interval_timer);
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField(new Blockly.FieldTextInput("1000"), "interval")
+        .appendField(new Blockly.FieldTextInput("10000"), "interval")
         .appendField(Blockly.Msg.senseBox_interval);
     this.appendStatementInput('DO')
         .setCheck(null);
