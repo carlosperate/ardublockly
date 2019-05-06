@@ -19,7 +19,7 @@ Ardublockly.LANGUAGE_NAME = {
  * Selected language, default English.
  * @type {string}
  */
-Ardublockly.LANG = 'en';
+Ardublockly.LANG = 'de';
 
 /**
  * We keep a local copy of the default language in case translations cannot
