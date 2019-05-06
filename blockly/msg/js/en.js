@@ -635,6 +635,7 @@ Blockly.Msg.senseBox_output_safetosd  = "safe to sd";
 Blockly.Msg.senseBox_output_safetosd_tip  = "Save Measurment to SD-Card";
 Blockly.Msg.senseBox_output_serialprint  = "Print on Serial Monitor";
 Blockly.Msg.senseBox_output_timestamp  = "timestamp";
+Blockly.Msg.senseBox_piezo_tip  = "simple piezo to make sound";
 Blockly.Msg.senseBox_poti  = "Potentiometer";
 Blockly.Msg.senseBox_poti_tip  = "Potentiometer";
 Blockly.Msg.senseBox_pressure  = "Airpressure in Pa";
