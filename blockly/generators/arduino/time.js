@@ -71,3 +71,14 @@ goog.require('Blockly.Arduino');
  Blockly.Arduino['infinite_loop'] = function(block) {
   return 'while(true);\n';
 };
+
+Blockly.Arduino.sensebox_interval_timer = function(block) {
+  var interval = this.getFieldValue('interval');
+  Blockly.Arduino.variables_['define_interval_variables'] = 'const long interval = '+interval+';\nlong time_start = 0;\nlong time_actual = 0;';
+  var branch = Blockly.Arduino.statementToCode(block, 'DO');
+  var code = 'time_start = millis();\n';
+      code += 'if (time_start > time_actual + interval) {\n  time_actual = millis();\n'
+      code += branch; 
+      code += '}\n'
+  return code;
+};

@@ -291,7 +291,7 @@ Blockly.Blocks['sensebox_sensor_sound'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_sound)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
         this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setHelpUrl(Blockly.Msg.senseBox_sound_tip);
@@ -328,7 +328,7 @@ Blockly.Blocks['sensebox_wifi'] = {
         .appendField(Blockly.Msg.senseBox_wifi_connect);
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_LEFT)
-        .appendField("SSID")
+        .appendField(Blockly.Msg.senseBox_wifi_ssid)
         .appendField(new Blockly.FieldTextInput("SSID"), "SSID");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_LEFT)
@@ -368,7 +368,7 @@ Blockly.Blocks['sensebox_wifi'] = {
           .appendField(Blockly.Msg.senseBox_wifi_startap);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_LEFT)
-          .appendField("SSID")
+          .appendField(Blockly.Msg.senseBox_wifi_ssid)
           .appendField(new Blockly.FieldTextInput("SSID"), "SSID");
       this.setPreviousStatement(true, null);
       this.setNextStatement(true, null);
@@ -395,8 +395,8 @@ Blockly.Blocks['sensebox_wifi'] = {
           .appendField(Blockly.Msg.senseBox_osem_connection);
       this.appendDummyInput()
           .setAlign(Blockly.ALIGN_LEFT)
-          .appendField("BoxID")
-          .appendField(new Blockly.FieldTextInput("BoxID"), "BoxID");
+          .appendField("senseBox ID")
+          .appendField(new Blockly.FieldTextInput("senseBox ID"), "BoxID");
       this.appendStatementInput('DO')
           .appendField(Blockly.Msg.senseBox_sensor)
           .setCheck(null);
@@ -413,8 +413,8 @@ Blockly.Blocks['sensebox_wifi'] = {
             .appendField(Blockly.Msg.senseBox_send_to_osem);
         this.appendValueInput('Value')
             .setCheck(null)
-            .appendField('SensorID')
-            .appendField(new Blockly.FieldTextInput('SensorID'), 'SensorID');
+            .appendField('Sensor ID')
+            .appendField(new Blockly.FieldTextInput('Sensor ID'), 'SensorID');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
             },
@@ -499,7 +499,7 @@ Blockly.Blocks['sensebox_poti'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_poti)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_poti_tip);
@@ -514,7 +514,7 @@ Blockly.Blocks['sensebox_foto'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_foto)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.analogPins), "PIN")
     this.setOutput(true, Blockly.Types.NUMBER.output);
     this.setTooltip(Blockly.Msg.senseBox_foto_tip);
@@ -529,7 +529,7 @@ Blockly.Blocks['sensebox_rgb_led'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_rgb_led)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN")
         this.appendValueInput("RED", 'Number')
             .appendField(Blockly.Msg.COLOUR_RGB_RED);//Blockly.Msg.senseBox_basic_red
@@ -549,7 +549,7 @@ Blockly.Blocks['sensebox_led'] = {
     this.setColour(Blockly.Blocks.sensebox.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_led)
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPinsLED), "PIN")
         .appendField(Blockly.Msg.senseBox_basic_state)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_on, "HIGH"], [Blockly.Msg.senseBox_off, "LOW"]]), "STAT");
@@ -565,7 +565,7 @@ Blockly.Blocks['sensebox_button'] = {
     this.appendDummyInput()
         .appendField(Blockly.Msg.senseBox_button)
         .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_button_isPressed, "isPressed"], [Blockly.Msg.senseBox_button_wasPressed, "wasPressed"], [Blockly.Msg.senseBox_button_switch, "Switch"]]), "FUNCTION")
-        .appendField("PIN:")
+        .appendField("Pin:")
         .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPinsButton), "PIN");
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
     this.setColour(Blockly.Blocks.sensebox.HUE);
@@ -576,22 +576,6 @@ Blockly.Blocks['sensebox_button'] = {
     return Blockly.Types.BOOLEAN;
   },
 };
-Blockly.Blocks['sensebox_piezo'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField(Blockly.Msg.senseBox_piezo)
-        .appendField("PIN:")
-        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "PIN")
-        .appendField(Blockly.Msg.senseBox_basic_state)
-        .appendField(new Blockly.FieldDropdown([[Blockly.Msg.senseBox_on, "HIGH"], [Blockly.Msg.senseBox_off, "LOW"]]), "STAT");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(Blockly.Blocks.sensebox.HUE);
-    this.setTooltip(Blockly.Msg.senseBox_piezo_tip);
-    this.setHelpUrl('https://sensebox.de/books');
-  }
-};
-
 /**
  * Block for Sparkfun Soil Moisture Sensor 
  * 
@@ -1023,25 +1007,6 @@ Blockly.Blocks['sensebox_display_drawRectangle'] = {
         return Blockly.Types.DECIMAL;
       },
   };
-
-  Blockly.Blocks['sensebox_interval_timer'] = {
-    init: function() {
-      this.setTooltip(Blockly.Msg.senseBox_interval_timer_tip);
-      this.setHelpUrl('');
-      this.setColour(Blockly.Blocks.sensebox.HUE);
-      this.appendDummyInput()
-          .appendField(Blockly.Msg.senseBox_interval_timer);
-      this.appendDummyInput()
-          .setAlign(Blockly.ALIGN_LEFT)
-          .appendField(new Blockly.FieldTextInput("1000"), "interval")
-          .appendField(Blockly.Msg.senseBox_interval);
-      this.appendStatementInput('DO')
-          .setCheck(null);
-      this.setPreviousStatement(true, null);
-      this.setNextStatement(true, null);
-          }
-    };
-
     /** 
      * Webserver Blocks By Lucas Steinmann
      *  */ 

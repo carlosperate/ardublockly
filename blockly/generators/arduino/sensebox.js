@@ -230,29 +230,21 @@ Blockly.Arduino.sensebox_button = function() {
   var dropdown_pin = this.getFieldValue('PIN');
   var dropown_function = this.getFieldValue('FUNCTION');
   Blockly.Arduino.includes_['library_senseBoxMCU'] = '#include "SenseBoxMCU.h"';
-  Blockly.Arduino.definitions_['define_button'] = 'Button button(' + dropdown_pin + ');';
-  Blockly.Arduino.setups_['setup_button'] = 'button.begin();';
+  Blockly.Arduino.definitions_['define_button' + dropdown_pin +''] = 'Button button_'+dropdown_pin+'(' + dropdown_pin + ');';
+  Blockly.Arduino.setups_['setup_button' + dropdown_pin +''] = 'button_'+dropdown_pin+'.begin();';
   var code = '';
   if (dropown_function == 'isPressed'){
-     code += 'button.isPressed()';
+     code += 'button_'+dropdown_pin+'.isPressed()';
   } 
   else if (dropown_function == 'Switch')
   {
-    code += 'button.getSwitch()';
+    code += 'button_'+dropdown_pin+'.getSwitch()';
   }
   else if (dropown_function == 'wasPressed')
   {
-    code += 'button.wasPressed()';
+    code += 'button_'+dropdown_pin+'.wasPressed()';
   }
   return [code, Blockly.Arduino.ORDER_ATOMIC];
-};
-
-Blockly.Arduino.sensebox_piezo = function() {
-  var dropdown_pin = this.getFieldValue('PIN');
-  var dropdown_stat = this.getFieldValue('STAT');
-  Blockly.Arduino.setups_['setup_piezo_buzzer_'+dropdown_pin] = 'pinMode('+dropdown_pin+', OUTPUT);';
-  var code = 'digitalWrite('+dropdown_pin+','+dropdown_stat+');\n'
-  return code;
 };
 
 Blockly.Arduino.sensebox_poti = function() {
@@ -441,17 +433,6 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
           var dropdown_name = this.getFieldValue("Values");
           var code = 'gps.get'+dropdown_name+'()';
           return [code ,Blockly.Arduino.ORDER_ATOMIC];
-        };
-
-        Blockly.Arduino.sensebox_interval_timer = function(block) {
-          var interval = this.getFieldValue('interval');
-          Blockly.Arduino.variables_['define_interval_variables'] = 'const long interval = '+interval+';\nlong time_start = 0;\nlong time_actual = 0;';
-          var branch = Blockly.Arduino.statementToCode(block, 'DO');
-          var code = 'time_start = millis();\n';
-              code += 'if (time_start > time_actual + interval) {\n  time_actual = millis();\n'
-              code += branch; 
-              code += '}\n'
-          return code;
         };
 
         /**

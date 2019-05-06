@@ -115,3 +115,22 @@ Blockly.Blocks['infinite_loop'] = {
     this.setTooltip(Blockly.Msg.ARD_TIME_INF_TIP);
   }
 };
+
+Blockly.Blocks['sensebox_interval_timer'] = {
+  init: function() {
+    this.setTooltip(Blockly.Msg.senseBox_interval_timer_tip);
+    this.setInputsInline(true);
+    this.setHelpUrl('');
+    this.setColour(Blockly.Blocks.time.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_interval_timer);
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(new Blockly.FieldTextInput("10000"), "interval")
+        .appendField(Blockly.Msg.senseBox_interval);
+    this.appendStatementInput('DO')
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+        }
+  };

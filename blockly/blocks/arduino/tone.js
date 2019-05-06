@@ -28,6 +28,8 @@ Blockly.Blocks['io_tone'] = {
     this.appendValueInput("FREQUENCY")
         .setCheck(Blockly.Types.NUMBER.checkList)
         .appendField(Blockly.Msg.ARD_TONEFREQ);
+    this.appendDummyInput()    
+        .appendField("Hz");
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
