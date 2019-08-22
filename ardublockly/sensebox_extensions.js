@@ -23,6 +23,15 @@ SenseboxExtension.init = function () {
   } else{
     Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
   }
+
+  if (urlParams.has('xml')){
+    window.XML_URL = urlParams.get('xml')
+    console.log(window.XML_URL);
+    Ardublockly.loadServerXmlFile(window.XML_URL);
+  } else{
+    Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
+  }
+ 
  
 
   if (urlParams.has('board')) {
