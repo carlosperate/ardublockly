@@ -1,0 +1,181 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-375" y="-88">
+    <statement name="LOOP_FUNC">
+      <block type="controls_for" id="ZkN0E;rlh3(#x=O[I,O_">
+        <field name="VAR">i</field>
+        <value name="FROM">
+          <block type="math_number" id="FfplZ_EXvi{~pvrP3rDb">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <value name="TO">
+          <block type="math_number" id="oK#eKyz.tGLns~,WuKz}">
+            <field name="NUM">255</field>
+          </block>
+        </value>
+        <value name="BY">
+          <block type="math_number" id="`jmy}UqCXVf6b@#I;AT/">
+            <field name="NUM">1</field>
+          </block>
+        </value>
+        <statement name="DO">
+          <block type="sensebox_rgb_led" id="-GjNuskDGnFF{LkHwj3#">
+            <field name="PIN">1</field>
+            <value name="RED">
+              <block type="math_arithmetic" id="UbbLU_;,uOPW]pPKn+/S">
+                <field name="OP">MINUS</field>
+                <value name="A">
+                  <block type="math_number" id="Ns:Q!.YtR4A4W6x_%@lz">
+                    <field name="NUM">255</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="variables_get" id="i+EgCrFa,*qAEZrese+U">
+                    <field name="VAR">i</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="GREEN">
+              <block type="variables_get" id="Mt)S[%PP/g+DG`T!qX19">
+                <field name="VAR">i</field>
+              </block>
+            </value>
+            <value name="BLUE">
+              <block type="math_number" id="[us*2rwf(sT,~W[:xDqo">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <next>
+              <block type="time_delay" id="{R^@u5dx!ttxwSM8|![#">
+                <value name="DELAY_TIME_MILI">
+                  <block type="math_number" id="DHG%6`Z217n{~*WfRCQa">
+                    <field name="NUM">10</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="controls_for" id="xYdjO;y,^=oUJwl*/P^f">
+            <field name="VAR">j</field>
+            <value name="FROM">
+              <block type="math_number" id="XJ[ZCzKYj:K;CwW,:j-G">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="TO">
+              <block type="math_number" id="6CFwClW|]4x=5||F|K?R">
+                <field name="NUM">255</field>
+              </block>
+            </value>
+            <value name="BY">
+              <block type="math_number" id="-{2@Ol/pR0}.iTDZjV?s">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <statement name="DO">
+              <block type="sensebox_rgb_led" id="cbb[:4#gNk6qF9[BghaB">
+                <field name="PIN">1</field>
+                <value name="RED">
+                  <block type="variables_get" id="LhyU,-Nw=ei(yyny=JJr">
+                    <field name="VAR">i</field>
+                  </block>
+                </value>
+                <value name="GREEN">
+                  <block type="math_arithmetic" id="]Na:o*9-4;.byEruz059">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <block type="math_number" id="hAO%+vgDS]#vU.yi8Cra">
+                        <field name="NUM">255</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="1H(LY]1c2Nw;oC0!!{sN">
+                        <field name="VAR">j</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="BLUE">
+                  <block type="variables_get" id="OWKq`nPjhf}l}jRX7992">
+                    <field name="VAR">j</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="time_delay" id="]Os=Ho|eFBh|8BoCde|I">
+                    <value name="DELAY_TIME_MILI">
+                      <block type="math_number" id="fc6p9d:%^**`,[5yW:a7">
+                        <field name="NUM">10</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_for" id="4lcN-/9?dI6]U++.CgdO">
+                <field name="VAR">k</field>
+                <value name="FROM">
+                  <block type="math_number" id="n2:DXmTtqMpIgFU^2|z~">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number" id="Zdn)f`8jkorRkH4Ej7jH">
+                    <field name="NUM">255</field>
+                  </block>
+                </value>
+                <value name="BY">
+                  <block type="math_number" id=":PVnbja}B?|=W0W,9|{)">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="sensebox_rgb_led" id="+}fI774RTlp*L=l^jU9`">
+                    <field name="PIN">1</field>
+                    <value name="RED">
+                      <block type="variables_get" id="E!wVG2hP0%/2/pBP%O/#">
+                        <field name="VAR">k</field>
+                      </block>
+                    </value>
+                    <value name="GREEN">
+                      <block type="variables_get" id="*1Aamq~#Cs#pCt+,0bxY">
+                        <field name="VAR">j</field>
+                      </block>
+                    </value>
+                    <value name="BLUE">
+                      <block type="math_arithmetic" id="^_g6G*~CT3?FMS*.?:hn">
+                        <field name="OP">MINUS</field>
+                        <value name="A">
+                          <block type="math_number" id="V]qyyskOSbVwyVD].~q2">
+                            <field name="NUM">255</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="variables_get" id="Z*5iXexLa]*}9e:TNFfr">
+                            <field name="VAR">k</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="time_delay" id="NB=cH-,LPECv^?Bcigp/">
+                        <value name="DELAY_TIME_MILI">
+                          <block type="math_number" id="IE~In)s8`]{;pB_|T||e">
+                            <field name="NUM">10</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -1,0 +1,121 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-48" y="-230">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_wifi" id="J4_G2U,6UVTKuKtPJW##">
+        <field name="SSID">Netzwerkname</field>
+        <field name="Password">Passwort1234</field>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="/I}r=PPm]NOQo93U5]6j">
+        <field name="VAR">Temperatur</field>
+        <value name="VALUE">
+          <block type="sensebox_sensor_temp_hum" id="Wgz,Zg|_|c0rqw#xb7K`">
+            <field name="NAME">Temperature</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="4R2_b.1p13?h#Ras#!,c">
+            <field name="VAR">Luftfeuchtigkeit</field>
+            <value name="VALUE">
+              <block type="sensebox_sensor_temp_hum" id="*xBYV{%1sE=]yMKy[?:/">
+                <field name="NAME">Humidity</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="8bB`Mg|WHOpaw+e:49[4">
+                <field name="VAR">Luftdruck</field>
+                <value name="VALUE">
+                  <block type="sensebox_sensor_pressure" id=".O^xkOhsr^/]6bzAmgG+">
+                    <mutation name="Pressure"></mutation>
+                    <field name="NAME">Pressure</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="d2CL^6jm;TA%4|+Yr[zq">
+                    <field name="VAR">Helligkeit</field>
+                    <value name="VALUE">
+                      <block type="sensebox_sensor_uv_light" id="k+ni35q}oiP#,6bm`r?x">
+                        <field name="NAME">Illuminance</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="^[FV*-DPs[.zJhEavn`_">
+                        <field name="VAR">UV</field>
+                        <value name="VALUE">
+                          <block type="sensebox_sensor_uv_light" id="MCKOSx9!W4gb]5Pu/5wX">
+                            <field name="NAME">UvIntensity</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="sensebox_interval_timer" id="FUIIs27zXEr-OUMH:{[J">
+                            <field name="interval">60000</field>
+                            <statement name="DO">
+                              <block type="sensebox_osem_connection" id="(I}NnLxXuKzU`y)%2SX-">
+                                <field name="BoxID">5cc5a9a4facf70001a929e8f</field>
+                                <statement name="DO">
+                                  <block type="sensebox_send_to_osem" id="z9:kC-BcLV+4(0sF?srs">
+                                    <field name="SensorID">5cc5a9a4facf70001a929e94</field>
+                                    <value name="Value">
+                                      <block type="variables_get" id="Tt7RifGNP=mnJW36bZu3">
+                                        <field name="VAR">Temperatur</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="sensebox_send_to_osem" id="aDbyw_)%u}|oRyj^#])m">
+                                        <field name="SensorID">5cc5a9a4facf70001a929e93</field>
+                                        <value name="Value">
+                                          <block type="variables_get" id="-{w]61-VK{vErf8#koSk">
+                                            <field name="VAR">Luftfeuchtigkeit</field>
+                                          </block>
+                                        </value>
+                                        <next>
+                                          <block type="sensebox_send_to_osem" id="P_i=g8y|4uk~/([3(MWm">
+                                            <field name="SensorID">5cc5a9a4facf70001a929e92</field>
+                                            <value name="Value">
+                                              <block type="variables_get" id="6KUo1lHk|MUDc,%U~h}[">
+                                                <field name="VAR">Luftdruck</field>
+                                              </block>
+                                            </value>
+                                            <next>
+                                              <block type="sensebox_send_to_osem" id="/;4/N_HH1cZ6~lfoo]5u">
+                                                <field name="SensorID">5cc5a9a4facf70001a929e91</field>
+                                                <value name="Value">
+                                                  <block type="variables_get" id="@fj{uDs29_*IYr-w8ZEE">
+                                                    <field name="VAR">Helligkeit</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="sensebox_send_to_osem" id="ng)(ZQK5xf0ruDQH`Hg-">
+                                                    <field name="SensorID">5cc5a9a4facf70001a929e90</field>
+                                                    <value name="Value">
+                                                      <block type="variables_get" id="`],+aZQ=;*7~wpp2~vWe">
+                                                        <field name="VAR">UV</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </statement>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

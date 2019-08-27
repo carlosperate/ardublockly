@@ -1,0 +1,34 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="30" y="34">
+    <statement name="LOOP_FUNC">
+      <block type="sensebox_led" id="Y(DUYI_.t1V!_9Qf7lgl">
+        <field name="PIN">1</field>
+        <field name="STAT">HIGH</field>
+        <next>
+          <block type="time_delay" id="C2.adlos#1/Ns)1@K!Or">
+            <value name="DELAY_TIME_MILI">
+              <block type="math_number" id=")uPzh6_L+SQaIr`+v8B,">
+                <field name="NUM">1000</field>
+              </block>
+            </value>
+            <next>
+              <block type="sensebox_led" id="w215h=etDdQ(Aao86qG2">
+                <field name="PIN">1</field>
+                <field name="STAT">LOW</field>
+                <next>
+                  <block type="time_delay" id="1pPNxT#ag6fFP|=fy(,%">
+                    <value name="DELAY_TIME_MILI">
+                      <block type="math_number" id="%xCj(nr,]@f{ALe^{vH}">
+                        <field name="NUM">1000</field>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

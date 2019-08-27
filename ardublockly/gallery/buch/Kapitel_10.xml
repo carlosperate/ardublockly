@@ -1,0 +1,147 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="{E^S?Q}LbR}Ijo}-H;qO" x="-58" y="-86">
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="WVtzhFeQh!PD~qMq%YGT">
+        <field name="VAR">wartezeit</field>
+        <value name="VALUE">
+          <block type="base_map" id="G7I9z,]5xXCY5vmLKDQ[">
+            <value name="NUM">
+              <block type="sensebox_poti" id="Q/)uto`/^)f^_iOpZ3OR">
+                <field name="PIN">A6</field>
+              </block>
+            </value>
+            <value name="FMIN">
+              <block type="math_number" id="B1JTqx=4WF%);]cn9#kZ">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="FMAX">
+              <block type="math_number" id="2zxAQbzA!!EZZptsCd*,">
+                <field name="NUM">1023</field>
+              </block>
+            </value>
+            <value name="DMIN">
+              <block type="math_number" id="~2JK=^KTvuHUb}iRzG^C">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="DMAX">
+              <block type="math_number" id="^n+nXw}m~-KElg}J+bG@">
+                <field name="NUM">600</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="g;,cM93nB!FsyrJ[Of{e">
+            <field name="VAR">distanz</field>
+            <value name="VALUE">
+              <block type="sensebox_sensor_ultrasonic_ranger" id="ah|kWW+~(L|AT)jfk#Yy">
+                <mutation port="A"></mutation>
+                <field name="port">A</field>
+                <field name="ultrasonic_trigger">1</field>
+                <field name="ultrasonic_echo">2</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="A7E?(haZ5}@_L0nbM[YB">
+                <field name="VAR">frequenz</field>
+                <value name="VALUE">
+                  <block type="base_map" id="i84_^YizK#_VsPam02KB">
+                    <value name="NUM">
+                      <block type="variables_get" id="Pc3YTdJ/7_WtVcsV5Y|}">
+                        <field name="VAR">distanz</field>
+                      </block>
+                    </value>
+                    <value name="FMIN">
+                      <block type="math_number" id=",}f^0`y4}iVcUuYmhX,J">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <value name="FMAX">
+                      <block type="math_number" id="D4{@|kO1KyH1u7W1^Tbh">
+                        <field name="NUM">50</field>
+                      </block>
+                    </value>
+                    <value name="DMIN">
+                      <block type="math_number" id="kpe){AOcDv7d9/]2;J/6">
+                        <field name="NUM">40</field>
+                      </block>
+                    </value>
+                    <value name="DMAX">
+                      <block type="math_number" id="IvgAhG/BMX~:u0Kebq9^">
+                        <field name="NUM">440</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="F%oyoj;LG1dHMmxC0+uc">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_operation" id=";/QmNa3+@c|0NBfD?OOb">
+                        <field name="OP">AND</field>
+                        <value name="A">
+                          <block type="logic_negate" id="+Ep}XbdPMypV|q9]X`5D">
+                            <value name="BOOL">
+                              <block type="sensebox_button" id=",HI:LD2?P3D#%-qwGL~Z">
+                                <field name="FUNCTION">isPressed</field>
+                                <field name="PIN">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="logic_compare" id="fl8w6+Id`NbtY1b*u(%+">
+                            <field name="OP">LT</field>
+                            <value name="A">
+                              <block type="variables_get" id="*JafwGm]faN`QGg8RnI2">
+                                <field name="VAR">distanz</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="qO(U_;3Sgx]TN1L!aVTk">
+                                <field name="NUM">50</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="io_tone" id="x7YtaYOL7-Yd;j/(./GI">
+                        <field name="TONEPIN">5</field>
+                        <value name="FREQUENCY">
+                          <shadow type="math_number" id="!cn|lkBjJO{gV9yuQQeK">
+                            <field name="NUM">220</field>
+                          </shadow>
+                          <block type="variables_get" id="HHx^mF!HZ*~n[8njjDZ]">
+                            <field name="VAR">frequenz</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="io_notone" id="Qb2aHj|Z#T0F;lece.E0">
+                        <field name="TONEPIN">5</field>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="time_delay" id="t]dnA=nd~q]O3Q`Oqej0">
+                        <value name="DELAY_TIME_MILI">
+                          <block type="variables_get" id="`~MuAq8MP%%K))L-F!:N">
+                            <field name="VAR">wartezeit</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

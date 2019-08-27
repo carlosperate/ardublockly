@@ -1,0 +1,228 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-371" y="-124">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_display_beginDisplay" id="?WQOw!Rb|J7iHwGCRS6-"></block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="controls_if" id="}ZX/4Vi?H_W|Tzy+Fh0S">
+        <value name="IF0">
+          <block type="sensebox_button" id="IN+]IGqBvc?0qG(Mh!jF">
+            <field name="FUNCTION">isPressed</field>
+            <field name="PIN">0</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="[S)@m_[,rN3tWq?wiT#-">
+            <field name="VAR">zufallszahl</field>
+            <value name="VALUE">
+              <block type="math_random_int" id="8s@-p3:1m}K[iY7-dCU^">
+                <value name="FROM">
+                  <block type="math_number" id="77gO@@Kty`Qm,sM0CE?C">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="TO">
+                  <block type="math_number" id="|_E*rc%I5V,K8ZvWzPGO">
+                    <field name="NUM">4</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="switch_case" id="PGpUthi_1:s`#-`JK6ys">
+                <mutation case="3" default="1"></mutation>
+                <value name="CONDITION">
+                  <block type="variables_get" id="JG38=eU%1o~4]kA+S=#w">
+                    <field name="VAR">zufallszahl</field>
+                  </block>
+                </value>
+                <value name="CASECONDITION0">
+                  <block type="math_number" id="=Oe~=!gwG84Ge,]Ta)%T">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <statement name="CASE0">
+                  <block type="sensebox_display_show" id="Fb@?Wc;t0/4PqWV|h1Eb">
+                    <statement name="SHOW">
+                      <block type="sensebox_display_printDisplay" id="PKkg,2bAVw|m-d;Wo{9R">
+                        <field name="COLOR">WHITE,BLACK</field>
+                        <value name="SIZE">
+                          <block type="math_number" id="l[;eLw2,diOBf[/,:HWT">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <value name="X">
+                          <block type="math_number" id=")j_n3NUGAb[RmkV%4gI(">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="Y">
+                          <block type="math_number" id="(WLG[qP0[iys27qmvjD4">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="printDisplay">
+                          <block type="text" id="nvGT}~*{Jum8}!/nfW:[">
+                            <field name="TEXT">Auf gar keinen Fall!</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+                <value name="CASECONDITION1">
+                  <block type="math_number" id="#Q`op]IrB4Br}unx~l_P">
+                    <field name="NUM">2</field>
+                  </block>
+                </value>
+                <statement name="CASE1">
+                  <block type="sensebox_display_show" id="AH}~jKc|5_1_wpo01Ebd">
+                    <statement name="SHOW">
+                      <block type="sensebox_display_printDisplay" id="76P=|*MLl#|2d_,3-YF{">
+                        <field name="COLOR">WHITE,BLACK</field>
+                        <value name="SIZE">
+                          <block type="math_number" id="EzUw/)i!(g~zN?FZ}K?2">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <value name="X">
+                          <block type="math_number" id="Wg;BoomX8==etnxi:JzY">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="Y">
+                          <block type="math_number" id="*]tSNqr2Ui/Ty;Echh9r">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="printDisplay">
+                          <block type="text" id="H:KpUWxR|kC)#kL[6*z}">
+                            <field name="TEXT">Ja, Klar!</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+                <value name="CASECONDITION2">
+                  <block type="math_number" id="]uE`5K0Y9FighV78-j0f">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+                <statement name="CASE2">
+                  <block type="sensebox_display_show" id="MUpZlU4cL.L~d@Os}o4;">
+                    <statement name="SHOW">
+                      <block type="sensebox_display_printDisplay" id="?owVHs(oQ5/otSrYnVmM">
+                        <field name="COLOR">WHITE,BLACK</field>
+                        <value name="SIZE">
+                          <block type="math_number" id="?OS811b};37B#roq~]uz">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <value name="X">
+                          <block type="math_number" id="e5cnR-IJ7u3jpNCNx,4g">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="Y">
+                          <block type="math_number" id="lI:^GZ}0vN(![[te){qW">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="printDisplay">
+                          <block type="text" id="43:Gk,}#-KVK=`T@w{W_">
+                            <field name="TEXT">Vermutlich schon</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+                <value name="CASECONDITION3">
+                  <block type="math_number" id="2R0KAB*SbJt,}O`K8][_">
+                    <field name="NUM">4</field>
+                  </block>
+                </value>
+                <statement name="CASE3">
+                  <block type="sensebox_display_show" id="7rCkF:`8+(Yie2xCWCi,">
+                    <statement name="SHOW">
+                      <block type="sensebox_display_printDisplay" id="(xkPaNOn~]yf^oBw#x,;">
+                        <field name="COLOR">WHITE,BLACK</field>
+                        <value name="SIZE">
+                          <block type="math_number" id="B2_2u63#o_z*x/M6c#_^">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <value name="X">
+                          <block type="math_number" id=")Ml;Wr!K7_+!X|:.bA:g">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="Y">
+                          <block type="math_number" id="_(:cEI@F2,Q0rH]F-KDU">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="printDisplay">
+                          <block type="text" id="yewQ+X=Z%a^)nIbTovol">
+                            <field name="TEXT">Unwahrscheinlich</field>
+                          </block>
+                        </value>
+                      </block>
+                    </statement>
+                  </block>
+                </statement>
+                <statement name="ONDEFAULT">
+                  <block type="sensebox_display_clearDisplay" id="5_7==rskZ1F2j39pr9NW">
+                    <next>
+                      <block type="sensebox_display_show" id="Qo]cH.NB^1rHoH%H{DX7">
+                        <statement name="SHOW">
+                          <block type="sensebox_display_printDisplay" id="+q?CECXiDo2w5]DY{|(v">
+                            <field name="COLOR">WHITE,BLACK</field>
+                            <value name="SIZE">
+                              <block type="math_number" id="pxBOb;#k9jBzwaNaPXJv">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                            <value name="X">
+                              <block type="math_number" id="PQ8bqDsMYLLlE_F8ke!)">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="Y">
+                              <block type="math_number" id="]V5,5d=:0QS]0J@t]Cge">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="printDisplay">
+                              <block type="text_join" id="GW*@?-MwT1Cc?69BJgiM">
+                                <mutation items="2"></mutation>
+                                <value name="ADD0">
+                                  <block type="text" id="#_N_5boL9@qx}+~aV7B.">
+                                    <field name="TEXT">Dieser Fall wurde nicht beachtet: </field>
+                                  </block>
+                                </value>
+                                <value name="ADD1">
+                                  <block type="variables_get" id="iOH^.V~[H;fKAi%?bipM">
+                                    <field name="VAR">zufallszahl</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="sensebox_display_clearDisplay" id="M(nsg]`1*9viJ~co@Z6I"></block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

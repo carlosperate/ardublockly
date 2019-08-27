@@ -1,0 +1,60 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-48" y="-70">
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="By61E@LJuh1rLWvchh1g">
+        <field name="VAR">Abstand</field>
+        <value name="VALUE">
+          <block type="sensebox_sensor_ultrasonic_ranger" id="vJ=%%m7g;S#PIS*D`G_c">
+            <mutation port="A"></mutation>
+            <field name="port">A</field>
+            <field name="ultrasonic_trigger">1</field>
+            <field name="ultrasonic_echo">2</field>
+          </block>
+        </value>
+        <next>
+          <block type="io_tone" id="3P0Q,F}-dtWBhs/Q2vWN">
+            <field name="TONEPIN">5</field>
+            <value name="FREQUENCY">
+              <shadow type="math_number" id="uS(8/iMWq{oo^)lK#}M@">
+                <field name="NUM">220</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="time_delay" id="8N(yjFpA1Vhk2!|8Q[@a">
+                <value name="DELAY_TIME_MILI">
+                  <block type="math_number" id="Z@SCIh+,kI6l:e*lb7gy">
+                    <field name="NUM">100</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="io_notone" id="3zP;X.cG@=sNxCH[=_]m">
+                    <field name="TONEPIN">5</field>
+                    <next>
+                      <block type="time_delay" id="%_pLI9Edhpp]a*soe3Hn">
+                        <value name="DELAY_TIME_MILI">
+                          <block type="math_arithmetic" id="@f+4}sGDhQHdIY47PV|/">
+                            <field name="OP">MULTIPLY</field>
+                            <value name="A">
+                              <block type="math_number" id="/18F}sK(D?KHRj#Q)l~y">
+                                <field name="NUM">10</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="73qyr?Mui]2p(V:KR3J1">
+                                <field name="VAR">Abstand</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

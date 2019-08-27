@@ -1,0 +1,46 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="30" y="34">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_display_beginDisplay" id=")Z4]CI*ibRqWkqLr^pjb"></block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="sensebox_display_show" id="r)I#b]xjcH,b@8g*,Pf^">
+        <statement name="SHOW">
+          <block type="sensebox_display_printDisplay" id="o{6DR6H4f;Qj%n=@XgaW">
+            <field name="COLOR">WHITE,BLACK</field>
+            <value name="SIZE">
+              <block type="math_number" id="u}2t2rIa6Wx2)42.Ij]}">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <value name="X">
+              <block type="math_number" id="6n/}z0xXtJLhHm0E9kF/">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="Y">
+              <block type="math_number" id="Y-NwVU`0,j73ON)ODL^Y">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+            <value name="printDisplay">
+              <block type="text_join" id="t*`nvkah#B@JrGRge`u[">
+                <mutation items="2"></mutation>
+                <value name="ADD0">
+                  <block type="text" id="*n^fD@DZEq^eLPc|CvJ[">
+                    <field name="TEXT">Helligkeit:</field>
+                  </block>
+                </value>
+                <value name="ADD1">
+                  <block type="sensebox_sensor_uv_light" id="tT8cG:UHho:SUKZQLVG{">
+                    <field name="NAME">Illuminance</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

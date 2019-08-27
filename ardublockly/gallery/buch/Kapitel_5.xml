@@ -1,0 +1,167 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-135" y="-111">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_display_beginDisplay" id="X.5bsfEw`)4FohrmsRxf">
+        <next>
+          <block type="variables_set" id="c{@j`O04@vM:C]GC3zwP">
+            <field name="VAR">status</field>
+            <value name="VALUE">
+              <block type="logic_boolean" id="/DPzGl|Hw?*yq_=W`gRa">
+                <field name="BOOL">TRUE</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="St3(|!R}oQ.UG(Q.?D:e">
+        <field name="VAR">mikro</field>
+        <value name="VALUE">
+          <block type="sensebox_sensor_sound" id="N8[2GgxI_kv+;-w)%9bY">
+            <field name="PIN">A1</field>
+          </block>
+        </value>
+        <next>
+          <block type="sensebox_display_show" id="{FtAG?eU#?R7A_Pu[9]`">
+            <statement name="SHOW">
+              <block type="sensebox_display_printDisplay" id=";BEi|59+YSUD+uIx4G9X">
+                <field name="COLOR">WHITE,BLACK</field>
+                <value name="SIZE">
+                  <block type="math_number" id="muEyZFk3m9BgC0/*|:AL">
+                    <field name="NUM">1</field>
+                  </block>
+                </value>
+                <value name="X">
+                  <block type="math_number" id="pjJr64GtWNtW^{Yu-DET">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="Y">
+                  <block type="math_number" id="_%;56[.E^v1Vc]T.fS/5">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="printDisplay">
+                  <block type="variables_get" id="N9i.y^iD,joVeSCuuv2#">
+                    <field name="VAR">mikro</field>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="x)3X*M/WeW)YL{|-v3iE">
+                <value name="IF0">
+                  <block type="logic_operation" id="1(cq/u2|7M)PI5TbL4J|">
+                    <field name="OP">AND</field>
+                    <value name="A">
+                      <block type="logic_compare" id="faqXZ|Wj%D{DAXxfC.qY">
+                        <field name="OP">GT</field>
+                        <value name="A">
+                          <block type="variables_get" id="dER#B-Uwn=0,aJ@mh+))">
+                            <field name="VAR">mikro</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="Bb]!C^nJ3E4dD^v_j/WT">
+                            <field name="NUM">4</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="logic_compare" id="`Hr!V{{Bm[S)qC/+#)ev">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="YYtO6MJ^kg,%dKR59g0V">
+                            <field name="VAR">status</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="logic_boolean" id="t_fsDA/|)0SLs7oWJJ)T">
+                            <field name="BOOL">FALSE</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="sensebox_led" id=":nW^|0wf}zrX^HeGRJE/">
+                    <field name="PIN">2</field>
+                    <field name="STAT">HIGH</field>
+                    <next>
+                      <block type="variables_set" id="kz,CNQ8q)7VhF({uu;Vr">
+                        <field name="VAR">status</field>
+                        <value name="VALUE">
+                          <block type="logic_boolean" id="M5sV)~Y2voYG`~lY}lyf">
+                            <field name="BOOL">TRUE</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="(GcaPe{r[5d(W9`~5H~D">
+                    <value name="IF0">
+                      <block type="logic_operation" id="%`m}1UjH7l{(a.}[YDpb">
+                        <field name="OP">AND</field>
+                        <value name="A">
+                          <block type="logic_compare" id="P+N}X=8eqZ7BP+NBY|IV">
+                            <field name="OP">GT</field>
+                            <value name="A">
+                              <block type="variables_get" id="+%X!A!;AvI,X^(:Cg?(,">
+                                <field name="VAR">mikro</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="9l-|/[w?|K6xkbLdfMKk">
+                                <field name="NUM">4</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="logic_compare" id="mertQ9911CW(m%rjifKJ">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="CcAi8G-0G/(^nm?-kf2[">
+                                <field name="VAR">status</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="logic_boolean" id="z-M2kXb[U[xQ*n%:r=A4">
+                                <field name="BOOL">TRUE</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="sensebox_led" id="m+7td0jKY.Q%_gthA:JW">
+                        <field name="PIN">2</field>
+                        <field name="STAT">HIGH</field>
+                        <next>
+                          <block type="variables_set" id="5dwtYUoS!@q63qnRap0L">
+                            <field name="VAR">status</field>
+                            <value name="VALUE">
+                              <block type="logic_boolean" id="ayW(0/Q)tj(F{VMY_F/7">
+                                <field name="BOOL">FALSE</field>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

@@ -15,14 +15,22 @@ SenseboxExtension.init = function () {
   const compilerOnline = 'https://compiler.sensebox.de';
   //const compilerOnline = 'http://localhost:3000'
   var urlParams = new URLSearchParams(location.search);
+  console.log(urlParams);
   Ardublockly.changeBlocklyArduinoBoard('sensebox_mcu');
-  Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
-
+  if (urlParams.has('gallery')){
+    window.XML = urlParams.get('gallery')
+    Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/gallery/'+ window.XML + '.xml');
+  } else{
+    Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
+  }
+ 
   if (urlParams.has('board')) {
     window.BOARD = urlParams.get('board');
   } else {
     window.BOARD = 'sensebox';
   }
+
+
 
   if (location.hostname !== 'localhost') {
     //TODO hide all features of running ardublockly locally
