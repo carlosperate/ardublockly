@@ -1,0 +1,175 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="16" y="59">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_wifi" id="`VyTivKil^8A`V!=BSAu">
+        <field name="SSID">Netzwerkname</field>
+        <field name="Password">Passwort123</field>
+        <next>
+          <block type="sensebox_initialize_http_server" id="71Zke(K^T#@+IYsPqOL4">
+            <field name="Port">80</field>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="sensebox_http_on_client_connect" id=":i6J5-eQ)|-klD:.;c8f">
+        <statement name="ON_CONNECT">
+          <block type="controls_if" id="U9hh`WniH2O]s93Hgkt1">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_operation" id="#;D+#L07?|aRzm6Jd?;e">
+                <field name="OP">AND</field>
+                <value name="A">
+                  <block type="logic_compare" id="tl.^H*ScO.~`18nxbM6|">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="sensebox_http_method" id="usTZPJQYf^7Te2t8ZW~i"></block>
+                    </value>
+                    <value name="B">
+                      <block type="text" id="Y#dT~))sT2}yO].liD_s">
+                        <field name="TEXT">GET</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_compare" id="pY(5+SYb]D!_gU0Uybtm">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="sensebox_http_uri" id="/8+d|3{fc1*Qo5[+Vu}L"></block>
+                    </value>
+                    <value name="B">
+                      <block type="text" id="Y!KB%N}pGB5sl.iyc0jw">
+                        <field name="TEXT">/sensoren.html</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="sensebox_generate_http_succesful_response" id="1da^+w3j|vuIU;}w}xz_">
+                <value name="CONTENT">
+                  <block type="sensebox_generate_html_doc" id="5~ntK.R^:!Qe~EHg)EA.">
+                    <value name="BODY">
+                      <block type="sensebox_general_html_tag" id="rA5;Q[H%I2.dTtYWyaL^">
+                        <mutation add_child="2"></mutation>
+                        <field name="TAG">table</field>
+                        <value name="DO0">
+                          <block type="sensebox_general_html_tag" id="B^Q=#SKct!6d8W`mZi^A">
+                            <field name="TAG">tr</field>
+                            <value name="DO0">
+                              <block type="sensebox_general_html_tag" id="AcV5C!P7)a*3/Csp1e`.">
+                                <mutation add_child="1"></mutation>
+                                <field name="TAG">tr</field>
+                                <value name="DO0">
+                                  <block type="sensebox_general_html_tag" id="wn{FTpmZ#O}wQ`bR~TPc">
+                                    <field name="TAG">td</field>
+                                    <value name="DO0">
+                                      <block type="sensebox_general_html_tag" id="?;1dOrXw{qbg5or06GHA">
+                                        <field name="TAG">b</field>
+                                        <value name="DO0">
+                                          <block type="text" id="%Ntf}nvIC361PTFzSlu6">
+                                            <field name="TEXT">Sensor</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <value name="DO1">
+                                  <block type="sensebox_general_html_tag" id="rT]f%;IBs_rx%l%g2ZEc">
+                                    <field name="TAG">td</field>
+                                    <value name="DO0">
+                                      <block type="sensebox_general_html_tag" id="h{jsz|K27~^Z+AJo(1om">
+                                        <field name="TAG">b</field>
+                                        <value name="DO0">
+                                          <block type="text" id="MzZ},RSPNam4:5W1R:;x">
+                                            <field name="TEXT">Messwert</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="DO1">
+                          <block type="sensebox_general_html_tag" id="Lw.sp/{bghsDH5UguHeM">
+                            <mutation add_child="1"></mutation>
+                            <field name="TAG">tr</field>
+                            <value name="DO0">
+                              <block type="sensebox_general_html_tag" id="6B[)%Q0fw5V`6gj%,[=c">
+                                <field name="TAG">td</field>
+                                <value name="DO0">
+                                  <block type="text" id="`%ORT_+,Jjt;%FyBsWBF">
+                                    <field name="TEXT">Lichtsensor</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="DO1">
+                              <block type="sensebox_general_html_tag" id="o1]Si7F5jaYC)%0IxvI]">
+                                <field name="TAG">td</field>
+                                <value name="DO0">
+                                  <block type="text_join" id="-6#.Zn!hQgCK}9auj3M6">
+                                    <mutation items="1"></mutation>
+                                    <value name="ADD0">
+                                      <block type="sensebox_sensor_uv_light" id="Uv~M?adh_c#|U.)Aabhy">
+                                        <field name="NAME">Illuminance</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="DO2">
+                          <block type="sensebox_general_html_tag" id="oPJF0|rI_]t3+bFg[w5n">
+                            <mutation add_child="1"></mutation>
+                            <field name="TAG">tr</field>
+                            <value name="DO0">
+                              <block type="sensebox_general_html_tag" id="b9Bp0ibo9|uBV3XK)HsL">
+                                <field name="TAG">td</field>
+                                <value name="DO0">
+                                  <block type="text" id="s4Vi+BbGMQ-`*uQ1Rrt~">
+                                    <field name="TEXT">Temperatursensor</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <value name="DO1">
+                              <block type="sensebox_general_html_tag" id="02}+[cy[bjQ)B:gjkskW">
+                                <field name="TAG">td</field>
+                                <value name="DO0">
+                                  <block type="text_join" id="~yK#;6QXpRvCNeX{@Ey%">
+                                    <mutation items="1"></mutation>
+                                    <value name="ADD0">
+                                      <block type="sensebox_sensor_temp_hum" id="uc?Qa5?mD#Y-6-?#N%}Q">
+                                        <field name="NAME">Temperature</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="sensebox_generate_http_not_found_response" id="VR3V]9J!L{Y(h;7(hGw5"></block>
+            </statement>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

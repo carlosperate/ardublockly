@@ -24,7 +24,6 @@ SenseboxExtension.init = function () {
     Ardublockly.loadServerXmlFile(Ardublockly.options.blocklyPath + '/ardublockly/start.xml');
   }
  
-
   if (urlParams.has('board')) {
     window.BOARD = urlParams.get('board');
   } else {

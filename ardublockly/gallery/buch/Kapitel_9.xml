@@ -1,0 +1,309 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-47" y="-97">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_display_beginDisplay" id="!dTvEZkfU?|9DQVdx5T`">
+        <next>
+          <block type="sensebox_sd_create_file" id="EPS:L|7-_MRQ1oRzu9~{">
+            <field name="Filename">Verkehr_2</field>
+            <next>
+              <block type="sensebox_sd_open_file" id="1gpL6#X#L_gA/_!E=*QR">
+                <field name="Filename">Verkehr</field>
+                <statement name="SD">
+                  <block type="sensebox_sd_write_file" id=";LzEC4^s%/-+GOm.T|wh">
+                    <field name="linebreak">TRUE</field>
+                    <value name="DATA">
+                      <block type="text_join" id="OnuO^n7h@1nbJdR?d7Jn">
+                        <mutation items="5"></mutation>
+                        <value name="ADD0">
+                          <block type="text" id=";7Qftw)DBuqx6;w:;!2t">
+                            <field name="TEXT">Zeit</field>
+                          </block>
+                        </value>
+                        <value name="ADD1">
+                          <block type="text" id="bsYv9w_fNPWiy%2QXh{e">
+                            <field name="TEXT">;</field>
+                          </block>
+                        </value>
+                        <value name="ADD2">
+                          <block type="text" id="ODzV7v1MUU06,6r)iW.f">
+                            <field name="TEXT">Anzahl Fahrzeuge pro Minute</field>
+                          </block>
+                        </value>
+                        <value name="ADD3">
+                          <block type="text" id="?2(s6lonG~0Ss?-ez/J^">
+                            <field name="TEXT">;</field>
+                          </block>
+                        </value>
+                        <value name="ADD4">
+                          <block type="text" id="?YDFS%9PP:Rp6SBo1^=3">
+                            <field name="TEXT">Breite der Fahrspur in cm</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="variables_set" id="d^?P)54kZb].90x;tVt(">
+        <field name="VAR">Distanz</field>
+        <value name="VALUE">
+          <block type="sensebox_sensor_ultrasonic_ranger" id="|jv(dI7dOOP?+=cl%sP^">
+            <mutation port="A"></mutation>
+            <field name="port">A</field>
+            <field name="ultrasonic_trigger">1</field>
+            <field name="ultrasonic_echo">2</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="d2PB4h%;?|Y/YzE[r.s.">
+            <field name="VAR">Grenzwert_in_cm</field>
+            <value name="VALUE">
+              <block type="base_map" id="h/n9JWl3p=CvEbLag{Le">
+                <value name="NUM">
+                  <block type="sensebox_poti" id="vpGy!OLA@Sm?@O+nni|U">
+                    <field name="PIN">A5</field>
+                  </block>
+                </value>
+                <value name="FMIN">
+                  <block type="math_number" id="x5lyD?rgavP~Z-f3rR;c">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="FMAX">
+                  <block type="math_number" id="n@o1S2AMox!NF49RnpSA">
+                    <field name="NUM">1023</field>
+                  </block>
+                </value>
+                <value name="DMIN">
+                  <block type="math_number" id="ynH#+tz#2bk%=}if6hv6">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <value name="DMAX">
+                  <block type="math_number" id="m![Tm%D2KWP5dHDTWwo0">
+                    <field name="NUM">300</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <next>
+              <block type="controls_if" id="|2G6~WC?g+Zeb1;oGN]U">
+                <value name="IF0">
+                  <block type="logic_compare" id="Bxi:8XA;`br4RZa+I]]b">
+                    <field name="OP">GT</field>
+                    <value name="A">
+                      <block type="variables_get" id="d,isNXyA:lFe/x1W,NA]">
+                        <field name="VAR">Distanz</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="variables_get" id="{Bk-NOYVk[-5]#1S+3G~">
+                        <field name="VAR">Grenzwert_in_cm</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="j02ZN?hHwrhYh,S.@ru~">
+                    <field name="VAR">SpurFrei</field>
+                    <value name="VALUE">
+                      <block type="variables_set_type" id="}7yh%Fmp5?w^89N.Knhv">
+                        <field name="VARIABLE_SETTYPE_TYPE">BOOLEAN</field>
+                        <value name="VARIABLE_SETTYPE_INPUT">
+                          <block type="logic_boolean" id=")kBsjfj}f[u9@f*n5x)_">
+                            <field name="BOOL">TRUE</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="m^sahNvV{^a}h63MO*]A">
+                    <value name="IF0">
+                      <block type="logic_operation" id="YN_FKsvY8y:K%xoM)beq">
+                        <field name="OP">AND</field>
+                        <value name="A">
+                          <block type="logic_compare" id="txv=,7s(B+*fqt^{W[Mu">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="y8,Isa/d5k0UZV#hSfbS">
+                                <field name="VAR">SpurFrei</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="logic_boolean" id="a{Bm]E1Az#/9KMNNE6?k">
+                                <field name="BOOL">TRUE</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="logic_compare" id="K;1b{n[3~@mVRw3IOdPi">
+                            <field name="OP">LTE</field>
+                            <value name="A">
+                              <block type="variables_get" id="ku`0H1kIyFJ[HbS(LBxh">
+                                <field name="VAR">Distanz</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="variables_get" id="U3Ji_jQv/@a{7BKSO+X:">
+                                <field name="VAR">Grenzwert_in_cm</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="math_change" id="4xPAOx}?Tf!cPS~Y?x]Q">
+                        <field name="VAR">Fahrzeuge</field>
+                        <value name="DELTA">
+                          <block type="math_number" id="dxl.`,cHcuDhiG^p;Bu[">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id=",`k;aPEF^EZipA8%n+B[">
+                            <field name="VAR">SpurFrei</field>
+                            <value name="VALUE">
+                              <block type="variables_set_type" id="AQ~mv(v-NEBni%1DiN{F">
+                                <field name="VARIABLE_SETTYPE_TYPE">BOOLEAN</field>
+                                <value name="VARIABLE_SETTYPE_INPUT">
+                                  <block type="logic_boolean" id=":P:F-6DDz1~.6S9O%u#v">
+                                    <field name="BOOL">FALSE</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="sensebox_display_show" id="-.;W/d(%vU6+8IlkPkA_">
+                        <statement name="SHOW">
+                          <block type="sensebox_display_printDisplay" id="!gN4`gy6~Q4Gja5|y|sH">
+                            <field name="COLOR">WHITE,BLACK</field>
+                            <value name="SIZE">
+                              <block type="math_number" id="P}zt;I{dn2/tR9T~7*HZ">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                            <value name="X">
+                              <block type="math_number" id="M9wxH+Gxi~ibvA76[QHe">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="Y">
+                              <block type="math_number" id="t3LZo7{%H_Ke~{)vR#?B">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                            <value name="printDisplay">
+                              <block type="variables_get" id=")g.L^K+i`YUu]roYpwyo">
+                                <field name="VAR">Fahrzeuge</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="sensebox_display_printDisplay" id=".Q889B48Dp1h@90!Z=qJ">
+                                <field name="COLOR">WHITE,BLACK</field>
+                                <value name="SIZE">
+                                  <block type="math_number" id="w};ghzKil_?rST,60{@0">
+                                    <field name="NUM">1</field>
+                                  </block>
+                                </value>
+                                <value name="X">
+                                  <block type="math_number" id="J`,JZ*Lub*A0?dg[##[4">
+                                    <field name="NUM">0</field>
+                                  </block>
+                                </value>
+                                <value name="Y">
+                                  <block type="math_number" id="FLfW#O%R#.P{{h2LU3AK">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                                <value name="printDisplay">
+                                  <block type="variables_get" id="cNs3d=ICSJN5BjL@H.Q@">
+                                    <field name="VAR">Grenzwert_in_cm</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="sensebox_display_clearDisplay" id="H,uiu[B^S,h9@JX[o^YQ">
+                            <next>
+                              <block type="sensebox_interval_timer" id="!00*{OIcVc1lI=q/emj@">
+                                <field name="interval">60000</field>
+                                <statement name="DO">
+                                  <block type="sensebox_sd_open_file" id="T{5wgRBG:;1Sdva.,zIM">
+                                    <field name="Filename">Verkehr</field>
+                                    <statement name="SD">
+                                      <block type="sensebox_sd_write_file" id="/W97)!X0LE^;aR:rnsLE">
+                                        <field name="linebreak">TRUE</field>
+                                        <value name="DATA">
+                                          <block type="text_join" id="]7@eOzf`0U_Gw+c(LfjG">
+                                            <mutation items="5"></mutation>
+                                            <value name="ADD0">
+                                              <block type="time_millis" id="!#Rq`f5/WG+!mVABzt1R"></block>
+                                            </value>
+                                            <value name="ADD1">
+                                              <block type="text" id="4+E8X@8Q(c~M6s]E[mnt">
+                                                <field name="TEXT">;</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD2">
+                                              <block type="variables_get" id="nnH9AUAhTBeYf8Y:Rqx1">
+                                                <field name="VAR">Fahrzeuge</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD3">
+                                              <block type="text" id="vT6}hD{v:G8Z9E(z=hfM">
+                                                <field name="TEXT">;</field>
+                                              </block>
+                                            </value>
+                                            <value name="ADD4">
+                                              <block type="variables_get" id="Z#*X=d=}oFrKo/1YvaS!">
+                                                <field name="VAR">Grenzwert_in_cm</field>
+                                              </block>
+                                            </value>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                    <next>
+                                      <block type="variables_set" id=")7C+,Zr[/6Dx-;DjQLzn">
+                                        <field name="VAR">Fahrzeuge</field>
+                                        <value name="VALUE">
+                                          <block type="math_number" id=",Vw9)qVEyVZa}zzq[02m">
+                                            <field name="NUM">0</field>
+                                          </block>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>

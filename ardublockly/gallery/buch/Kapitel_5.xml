@@ -1,5 +1,5 @@
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="267" y="80">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-135" y="-111">
     <statement name="SETUP_FUNC">
       <block type="sensebox_display_beginDisplay" id="X.5bsfEw`)4FohrmsRxf">
         <next>
