@@ -1,0 +1,58 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="30" y="34">
+    <statement name="LOOP_FUNC">
+      <block type="controls_if" id="8)3NbBcE,UN)=+07;MHA">
+        <mutation else="1"></mutation>
+        <value name="IF0">
+          <block type="logic_operation" id="|cpa%4TwVNNyH8:-F4vc">
+            <field name="OP">AND</field>
+            <value name="A">
+              <block type="logic_compare" id="q2e[/jyCQK74E+UB@(E)">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="sensebox_button" id="]NKb~_Y2ja=dXcN0)0%K">
+                    <field name="FUNCTION">isPressed</field>
+                    <field name="PIN">1</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_boolean" id="Tq5XticB@4+AC6~`8m~/">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <value name="B">
+              <block type="logic_compare" id="-hI9=d:}!w`}2]o5PlRw">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="sensebox_button" id=":D(vyw3X^Pg2.7Zk2d`a">
+                    <field name="FUNCTION">isPressed</field>
+                    <field name="PIN">2</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="logic_boolean" id=":5Y!K5~nfa?]:!i*aNae">
+                    <field name="BOOL">TRUE</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="sensebox_led" id="o*m%/Dw`*[zEfr;~qvyP">
+            <field name="PIN">3</field>
+            <field name="STAT">HIGH</field>
+          </block>
+        </statement>
+        <statement name="ELSE">
+          <block type="sensebox_led" id="SZ4pPcqmrP9(R4F)FFPP">
+            <field name="PIN">3</field>
+            <field name="STAT">LOW</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

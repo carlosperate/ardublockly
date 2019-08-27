@@ -1,0 +1,121 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="arduino_functions" id="5KebY,-ltvxB7K^El}1(" x="-203" y="-26">
+    <statement name="SETUP_FUNC">
+      <block type="sensebox_wifi" id="l]+fY)?d_k86P?YWd|qL">
+        <field name="SSID">Netzwerkname</field>
+        <field name="Password">Passwort1234</field>
+        <next>
+          <block type="variables_set" id="`Bqw?!9_-2TOTjN6dVU:">
+            <field name="VAR">alarmAusgeloest</field>
+            <value name="VALUE">
+              <block type="math_number" id="KPQiU6jBZ6.T-_iDj:is">
+                <field name="NUM">0</field>
+              </block>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="controls_if" id="s];I{t~aA{[l{1o6]?8B">
+        <value name="IF0">
+          <block type="logic_compare" id="sB^WD{*lgmJ?Ome}Wvem">
+            <field name="OP">GT</field>
+            <value name="A">
+              <block type="sensebox_sensor_uv_light" id="s{6QHGi4pex(?h.Z[S0y">
+                <field name="NAME">Illuminance</field>
+              </block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="wx%6.^Ci@}c8[xoP};^8">
+                <field name="NUM">150</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="jOL7j}Sux[c*6,0aG@-E">
+            <field name="VAR">alarmAusgeloest</field>
+            <value name="VALUE">
+              <block type="math_number" id="4veVQJu5l`))4dn7o[Nh">
+                <field name="NUM">1</field>
+              </block>
+            </value>
+            <next>
+              <block type="controls_repeat_ext" id="}sDxdRP;uyTTk5BN0;{5">
+                <value name="TIMES">
+                  <block type="math_number" id="u^5]vthbj_?~%vH?jaof">
+                    <field name="NUM">3</field>
+                  </block>
+                </value>
+                <statement name="DO">
+                  <block type="io_tone" id="^1eH#iHKF{RO)WeYMI`-">
+                    <field name="TONEPIN">5</field>
+                    <value name="FREQUENCY">
+                      <shadow type="math_number" id="|KQ~grH}7GhOHZzWp=N=">
+                        <field name="NUM">220</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="time_delay" id="XIUb?z3(ee)_dEm)tp?y">
+                        <value name="DELAY_TIME_MILI">
+                          <block type="math_number" id="?2(fg;G/D[b_?t/Uk%oE">
+                            <field name="NUM">1000</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="io_notone" id="l(TS/y4lj~aQ/*Jkx4_`">
+                            <field name="TONEPIN">1</field>
+                            <next>
+                              <block type="time_delay" id="xidYZGLjd04NpNsN%`jd">
+                                <value name="DELAY_TIME_MILI">
+                                  <block type="math_number" id="y+Q~sk7|mz,~lcAXAL^6">
+                                    <field name="NUM">1000</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="sensebox_interval_timer" id="9+r4sT?fQ*-khj7W8fmG">
+            <field name="interval">10000</field>
+            <statement name="DO">
+              <block type="sensebox_osem_connection" id="C?4}y-={zJ8U^XInJu0Z">
+                <field name="BoxID">SensorID</field>
+                <statement name="DO">
+                  <block type="sensebox_send_to_osem" id="`ycU^awspIKup5FLQ;*,">
+                    <field name="SensorID">SensorID</field>
+                    <value name="Value">
+                      <block type="variables_get" id="gkDxXTEOK1-eJ%;PvCh5">
+                        <field name="VAR">alarmAusgeloest</field>
+                      </block>
+                    </value>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+            <next>
+              <block type="variables_set" id="RXPc_@PAC`Z-}^J*JCso">
+                <field name="VAR">alarmAusgeloest</field>
+                <value name="VALUE">
+                  <block type="math_number" id="_9e*vzGooB?(=KE-.o#?">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
