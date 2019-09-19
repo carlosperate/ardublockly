@@ -480,6 +480,7 @@
 	"senseBox_sd_open_file ": "Öffne eine Datei auf der SD-Karte",
 	"sensebox_sd_filename" : "Daten",
 	"senseBox_SD_COMPONENT" : "SD-Block",
+	"senseBox_sd_decimals" : "Dezimalen",
 	"senseBox_output_linebreak ": "Zeilenumbruch",
 	"senseBox_output_networkid ": "NetzwerkID",
 	"senseBox_output_password": "Passwort",
