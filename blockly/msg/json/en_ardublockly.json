@@ -144,6 +144,7 @@
 	"senseBox_sd_open_file ": "Open a file from SD-Card",
 	"sensebox_sd_filename" : "Filename",
 	"senseBox_SD_COMPONENT" : "SD-Block",
+	"senseBox_sd_decimals" : "decimals",
 	"senseBox_output_serialprint ": "Print on Serial Monitor",
 	"senseBox_output_timestamp ": "timestamp",
 	"senseBox_button ": "Button",

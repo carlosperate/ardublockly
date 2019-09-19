@@ -330,7 +330,11 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
       }else{
         linebreak = "";
       }
-  var code ='dataFile' + filename +'.print'+linebreak+'('+ text +');\n'
+  if (text == "gps.getLongitude()" || text == "gps.getLatitude()"){
+  var code ='dataFile' + filename +'.print'+linebreak+'('+ text +',5);\n'
+  }
+  else {
+  var code ='dataFile' + filename +'.print'+linebreak+'('+ text +');\n'}
   return code;
   };
 

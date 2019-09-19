@@ -531,6 +531,7 @@ Blockly.Msg.senseBox_sd_write_file = " Schreibe Daten auf SD-Karte";
 Blockly.Msg.senseBox_sd_open_file = "Öffne eine Datei auf der SD-Karte";
 Blockly.Msg.sensebox_sd_filename = "Daten";
 Blockly.Msg.senseBox_SD_COMPONENT = "SD-Block";
+Blockly.Msg.senseBox_sd_decimals = "Dezimalen";
 Blockly.Msg.senseBox_output_linebreak = "Zeilenumbruch";
 Blockly.Msg.senseBox_output_networkid = "NetzwerkID";
 Blockly.Msg.senseBox_output_password = "Passwort";
