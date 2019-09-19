@@ -330,7 +330,7 @@ Blockly.Arduino.sensebox_sd_write_file = function(block) {
       }else{
         linebreak = "";
       }
-  var code ='dataFile' + filename +'.print'+linebreak+'('+ text +');\n'
+  var code ='dataFile' + filename +'.print'+linebreak+'('+ text +',6);\n'
   return code;
   };
 
