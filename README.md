@@ -5,7 +5,7 @@ Blockly for senseBox is a visual programming editor for the senseBox:edu. It is 
 * Generates Arduino code with visual drag-and-drop blocks
 * online Compiler for the senseBox MCU
 * Useful "code block warnings"
-* Works online without Installation and offline on Windows / Linux / Mac OS X (testing purpose only at the moment!) 
+* Works online without Installation
 
 If you find erros, enhancement or want to request new features submit a new [issue](https://github.com/sensebox/ardublockly-1/issues). 
 
