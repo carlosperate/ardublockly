@@ -696,3 +696,8 @@ Blockly.Msg.sensebox_display_show  = "Print on Display";
 Blockly.Msg.sensebox_display_show_tip  = "Print on Display";
 Blockly.Msg.sensebox_sd_filename = "Filename";
 Blockly.Msg.sensebox_web_readHTML_filename = "File:";
+// LoRa
+Blockly.Msg.senseBox_LoRa_connect = "Send to TTN"
+Blockly.Msg.senseBox_LoRa_device_id = "Device ID"
+Blockly.Msg.senseBox_LoRa_app_id = "App ID"
+Blockly.Msg.senseBox_LoRa_app_key = "App Key"

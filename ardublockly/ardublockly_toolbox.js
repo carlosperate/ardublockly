@@ -16,8 +16,8 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_sensor_temp_hum"></block>' +
     '      <block type="sensebox_sensor_uv_light"></block>' +
     '      <block type="sensebox_sensor_bmx055_accelerometer"></block>' +
-   // '      <block type="sensebox_sensor_bmx055_gyroscope"></block>' +
-   // '      <block type="sensebox_sensor_bmx055_compass"></block>' +
+    // '      <block type="sensebox_sensor_bmx055_gyroscope"></block>' +
+    // '      <block type="sensebox_sensor_bmx055_compass"></block>' +
     '      <block type="sensebox_sensor_sds011"></block>' +
     '      <block type="sensebox_sensor_pressure"></block>' +
     '      <block type="sensebox_sensor_ultrasonic_ranger">' +
@@ -71,7 +71,7 @@ Ardublockly.TOOLBOX_XML =
     '          </block>' +
     '        </value>' +
     '      </block>' +
-    '      <block type="sensebox_display_drawRectangle">' + 
+    '      <block type="sensebox_display_drawRectangle">' +
     '       <value name="X">' +
     '          <block type="math_number">' +
     '            <field name="NUM">0</field>' +
@@ -166,12 +166,12 @@ Ardublockly.TOOLBOX_XML =
     '   </category>' +
     '  <sep></sep>' +
     '      <category id="catSenseBoxOutput_Web" name="Web" colour="120">' +
-    '      <category id="catSenseBox_Wifi" name="Wifi" colour="120">' +     
+    '      <category id="catSenseBox_Wifi" name="Wifi" colour="120">' +
     '      <block type="sensebox_wifi"></block>' +
     '      <block type="sensebox_startap"></block>' +
     '       </category>' +
     '       <sep></sep>' +
-    '      <category id="catSenseBox_osem" name="openSenseMap" colour="120">' +    
+    '      <category id="catSenseBox_osem" name="openSenseMap" colour="120">' +
     '      <block type="sensebox_osem_connection"></block>' +
     '      <block type="sensebox_send_to_osem"></block>' +
     '      <block type="sensebox_send_mobile_to_osem"></block>' +
@@ -189,7 +189,12 @@ Ardublockly.TOOLBOX_XML =
     '      <block type="sensebox_generate_http_not_found_response"></block>' +
     '      <block type="sensebox_generate_html_doc"></block>' +
     '      <block type="sensebox_general_html_tag"></block>' +
-    '      <block type="sensebox_web_readHTML"></block>'   +
+    '      <block type="sensebox_web_readHTML"></block>' +
+    '       </category>' +
+    '       <sep></sep>' +
+    '      <category id="catSenseBoxOutput_LoRa" name="  LoRa" colour="120">' +
+    '      <block type="sensebox_initialize_lora"></block>' +
+    '      <block type="sensebox_send_lora_sensor_value"></block>' +
     '       </category>' +
     '       </category>' +
     '  <sep></sep>' +

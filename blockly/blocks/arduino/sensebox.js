@@ -489,6 +489,75 @@ Blockly.Blocks['sensebox_wifi'] = {
 };
 
 
+/*
+----------------------------------LoRa--------------------------------------------------
+*/
+
+Blockly.Blocks['sensebox_initialize_lora'] = {
+  init: function() {
+    this.setTooltip(Blockly.Msg.senseBox_wifi_tip);
+    this.setHelpUrl('');
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.senseBox_LoRa_connect);
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(Blockly.Msg.senseBox_LoRa_device_id)
+        .appendField(new Blockly.FieldTextInput("DEVICE ID"), "DEVICE ID");
+        this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(Blockly.Msg.senseBox_LoRa_app_id)
+        .appendField(new Blockly.FieldTextInput("APP ID"), "APP ID");
+    this.appendDummyInput()
+        .setAlign(Blockly.ALIGN_LEFT)
+        .appendField(Blockly.Msg.senseBox_LoRa_app_key)
+        .appendField(new Blockly.FieldTextInput("APP KEY"), "APP KEY");
+        this.appendStatementInput('DO')
+        .appendField(Blockly.Msg.senseBox_sensor)
+        .setCheck(null);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+        },
+  };
+
+Blockly.Blocks['sensebox_send_lora_sensor_value'] = {
+  init: function() {
+    this.setTooltip(Blockly.Msg.senseBox_send_to_osem_tip);
+    this.setHelpUrl('');
+    this.setColour(Blockly.Blocks.sensebox.HUE);
+    this.appendValueInput('Value')
+        .setCheck(null)
+        .appendField('Sensor')
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if block is not nested inside a the correct loop.
+   * @param {!Blockly.Events.Abstract} e Change event.
+   * @this Blockly.Block
+   */
+  onchange: function(e) {
+    var legal = false;
+    // Is the block nested in a loop?
+    var block = this;
+    do {
+      if (this.LOOP_TYPES.indexOf(block.type) != -1) {
+        legal = true;
+        break;
+      }
+      block = block.getSurroundParent();
+    } while (block);
+    if (legal) {
+      this.setWarningText(null);
+    } else {
+      this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING);
+    }
+  },
+  LOOP_TYPES: ['sensebox_initialize_lora'],
+};
+
+
 
 /*
 ----------------------------------Basics--------------------------------------------------
