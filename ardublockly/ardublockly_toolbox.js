@@ -222,6 +222,8 @@ Ardublockly.TOOLBOX_XML =
 '  <category id="catComms" name="Comms">' +
 '    <block type="serial_setup"></block>' +
 '    <block type="serial_print"></block>' +
+'    <block type="serial_boolean"></block>' +
+'    <block type="serial_read"></block>' +
 '    <block type="text_prompt_ext">' +
 '      <value name="TEXT">' +
 '        <block type="text"></block>' +

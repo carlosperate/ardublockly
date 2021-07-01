@@ -140,3 +140,91 @@ Blockly.Blocks['serial_print'] = {
         this, 'SERIAL_ID', 'serial');
   }
 };
+
+
+
+
+Blockly.Blocks['serial_boolean'] = {
+  /**
+   * Block for boolean data type: true and false.
+   * @this Blockly.Block
+   */
+  init: function() {
+
+    this.jsonInit({
+      //"message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "BOOL",
+/*           "options": [
+            [Blockly.Msg.LOGIC_BOOLEAN_TRUE, "TRUE"],
+            [Blockly.Msg.LOGIC_BOOLEAN_FALSE, "FALSE"]
+          ] */
+        }
+      ],
+      "output": Blockly.Types.BOOLEAN.output,
+/*       "colour": Blockly.Blocks.serial.HUE,
+      "tooltip": Blockly.Msg.LOGIC_BOOLEAN_TOOLTIP,
+      "helpUrl": Blockly.Msg.LOGIC_BOOLEAN_HELPURL */
+    });
+	this.setColour(Blockly.Blocks.serial.HUE);
+
+	this.appendDummyInput()
+	.appendField(
+		new Blockly.FieldInstance('Serial',
+								  Blockly.Msg.ARD_SERIAL_DEFAULT_NAME,
+								  false, true, false),
+		'SERIAL_ID')
+	.appendField(Blockly.Msg.ARD_SERIAL_IS_ACTIVE);
+  },
+  /** Assigns a type to the boolean block. */
+  getBlockType: function() {
+    return Blockly.Types.BOOLEAN;
+  }
+};
+
+
+
+Blockly.Blocks['serial_read'] = {
+  /**
+   * Block for numeric value.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
+    this.setColour(Blockly.Blocks.math.HUE);
+/*     this.appendDummyInput()
+        .appendField(
+            new Blockly.FieldTextInput(
+                '0', Blockly.FieldTextInput.numberValidator),
+            'NUM'); */
+	this.setColour(Blockly.Blocks.serial.HUE);
+
+	this.appendDummyInput()
+	.appendField(Blockly.Msg.ARD_SERIAL_READ)
+	.appendField(
+		new Blockly.FieldInstance('Serial',
+								  Blockly.Msg.ARD_SERIAL_DEFAULT_NAME,
+								  false, true, false),
+		'SERIAL_ID');
+		
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    // Number block is trivial.  Use tooltip of parent block if it exists.
+    this.setTooltip(function() {
+      var parent = thisBlock.getParent();
+      return (parent && parent.getInputsInline() && parent.tooltip) ||
+          Blockly.Msg.MATH_NUMBER_TOOLTIP;
+    });
+  },
+  /**
+   * Reads the numerical value from the block and assigns a block type.
+   * @this Blockly.Block
+   */
+  getBlockType: function() {
+    var numString = this.getFieldValue('NUM');
+    return Blockly.Types.identifyNumber(numString);
+  }
+};

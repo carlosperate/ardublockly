@@ -77,3 +77,32 @@ Blockly.Arduino['serial_setup'] = function(block) {
   var code = '';
   return code;
 };
+
+/**
+ * Code generator for serial active.
+ * Arduino code: loop { true/false }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['serial_boolean'] = function(block) {
+  var serialId = block.getFieldValue('SERIAL_ID');
+  var code = serialId + '.available()'
+ // var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
+/**
+ * Code generator for the boolean values true and false.
+ * Arduino code: loop { true/false }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {array} Completed code with order of operation.
+ */
+Blockly.Arduino['serial_read'] = function(block) {
+  var serialId = block.getFieldValue('SERIAL_ID');
+  var code = serialId + '.read()';
+ // var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
+   //var code = parseFloat(block.getFieldValue('NUM'));
+  //code = '441';
+  return [code, Blockly.Arduino.ORDER_ATOMIC];
+};
+
