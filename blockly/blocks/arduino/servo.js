@@ -54,6 +54,39 @@ Blockly.Blocks['servo_write'] = {
   }
 };
 
+
+Blockly.Blocks['servo_write_usec'] = {
+  /**
+   * Block for creating a 'set pin' to an analogue value.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('http://arduino.cc/en/Reference/AnalogWrite');
+    this.setColour(Blockly.Blocks.servo.HUE);
+    this.appendValueInput('NUM')
+        .appendField(Blockly.Msg.ARD_SERVO_WRITE)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'SERVO_PIN')
+        .appendField(Blockly.Msg.ARD_WRITE_TO)
+        .setCheck(Blockly.Types.NUMBER.output);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_SERVO_WRITE_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(this, 'PIN', 'pwmPins');
+  },
+  /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+};
+
 Blockly.Blocks['servo_read'] = {
   /**
    * Block for reading an angle value of a servo pin.

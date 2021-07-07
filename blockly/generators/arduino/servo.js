@@ -45,6 +45,36 @@ Blockly.Arduino['servo_write'] = function(block) {
 };
 
 /**
+ * Code generator to set an angle (Y) value to a servo pin (X).
+ * Arduino code: #include <Servo.h>
+ *               Servo myServoX;
+ *               setup { myServoX.attach(X); }
+ *               loop  { myServoX.write(Y);  }
+ * @param {!Blockly.Block} block Block to generate the code from.
+ * @return {string} Completed code.
+ */
+Blockly.Arduino['servo_write_usec'] = function(block) {
+  var pinKey = block.getFieldValue('SERVO_PIN');
+  var stateOutput = Blockly.Arduino.valueToCode(
+      block, 'NUM', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var servoAngle = Blockly.Arduino.valueToCode(
+      block, 'SERVO_TIME', Blockly.Arduino.ORDER_ATOMIC) || '90';
+  var servoName = 'myServo' + pinKey;
+
+  Blockly.Arduino.reservePin(
+      block, pinKey, Blockly.Arduino.PinTypes.SERVO, 'Servo Write');
+
+  Blockly.Arduino.addInclude('servo', '#include <Servo.h>');
+  Blockly.Arduino.addDeclaration('servo_' + pinKey, 'Servo ' + servoName + ';');
+
+  var setupCode = servoName + '.attach(' + pinKey + ');';
+  Blockly.Arduino.addSetup('servo_' + pinKey, setupCode, true);
+
+  var code = servoName + '.writeMicroseconds(' + stateOutput + ');\n';
+  return code;
+};
+
+/**
  * Code generator to read an angle value from a servo pin (X).
  * Arduino code: #include <Servo.h>
  *               Servo myServoX;

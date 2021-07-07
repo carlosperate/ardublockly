@@ -192,13 +192,6 @@ Blockly.Blocks['serial_read'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setHelpUrl(Blockly.Msg.MATH_NUMBER_HELPURL);
-    this.setColour(Blockly.Blocks.math.HUE);
-/*     this.appendDummyInput()
-        .appendField(
-            new Blockly.FieldTextInput(
-                '0', Blockly.FieldTextInput.numberValidator),
-            'NUM'); */
 	this.setColour(Blockly.Blocks.serial.HUE);
 
 	this.appendDummyInput()
@@ -211,20 +204,15 @@ Blockly.Blocks['serial_read'] = {
 		
     this.setOutput(true, Blockly.Types.NUMBER.output);
     // Assign 'this' to a variable for use in the tooltip closure below.
-    var thisBlock = this;
-    // Number block is trivial.  Use tooltip of parent block if it exists.
-    this.setTooltip(function() {
-      var parent = thisBlock.getParent();
-      return (parent && parent.getInputsInline() && parent.tooltip) ||
-          Blockly.Msg.MATH_NUMBER_TOOLTIP;
-    });
+
   },
   /**
    * Reads the numerical value from the block and assigns a block type.
    * @this Blockly.Block
    */
   getBlockType: function() {
-    var numString = this.getFieldValue('NUM');
+    //var numString = this.getFieldValue('NUM');
+	var numString = '44';
     return Blockly.Types.identifyNumber(numString);
   }
 };
