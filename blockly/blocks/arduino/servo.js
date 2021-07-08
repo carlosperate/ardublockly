@@ -55,6 +55,69 @@ Blockly.Blocks['servo_write'] = {
 };
 
 
+
+Blockly.Blocks['servo_detach'] = {
+  /**
+   * Block for writing an angle value into a servo pin.
+   * @this Blockly.Block
+   */
+  init: function() {
+    //this.setHelpUrl('http://arduino.cc/en/Reference/ServoWrite');
+    this.setColour(Blockly.Blocks.servo.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_SERVO_DETACH)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'SERVO_PIN');
+    this.setInputsInline(false);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_SERVO_WRITE_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'SERVO_PIN', 'digitalPins');
+  }
+};
+
+
+
+Blockly.Blocks['servo_attach'] = {
+  /**
+   * Block for attaching a servo pin.
+   * Note that this is handled automatically as part 
+   */
+  init: function() {
+    //this.setHelpUrl('http://arduino.cc/en/Reference/ServoWrite');
+    this.setColour(Blockly.Blocks.servo.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_SERVO_ATTACH)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'SERVO_PIN');
+    this.setInputsInline(false);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_SERVO_WRITE_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'SERVO_PIN', 'digitalPins');
+  }
+};
+
+
+
+
+
 Blockly.Blocks['servo_write_usec'] = {
   /**
    * Block for creating a 'set pin' to an analogue value.
@@ -86,6 +149,8 @@ Blockly.Blocks['servo_write_usec'] = {
     return Blockly.Types.NUMBER;
   },
 };
+
+
 
 Blockly.Blocks['servo_read'] = {
   /**

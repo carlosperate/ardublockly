@@ -44,6 +44,31 @@ Blockly.Arduino['servo_write'] = function(block) {
   return code;
 };
 
+
+/**
+ * Code generator to detach a servo pin (X).
+ */
+Blockly.Arduino['servo_detach'] = function(block) {
+  var pinKey = block.getFieldValue('SERVO_PIN');
+  var servoName = 'myServo' + pinKey;
+
+  var code = servoName + '.detach();\n';
+  return code;
+};
+
+
+/**
+ * Code generator to attach a servo pin (X).
+ */
+Blockly.Arduino['servo_attach'] = function(block) {
+  var pinKey = block.getFieldValue('SERVO_PIN');
+  var servoName = 'myServo' + pinKey;
+
+  var code = servoName + '.attach(' + pinKey + ');\n';
+  return code;
+};
+
+
 /**
  * Code generator to set an angle (Y) value to a servo pin (X).
  * Arduino code: #include <Servo.h>

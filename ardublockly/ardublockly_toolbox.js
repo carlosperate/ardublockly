@@ -202,6 +202,8 @@ Ardublockly.TOOLBOX_XML =
 '      </value>' +
 '    </block>' +
 '    <block type="servo_read"></block>' +
+'    <block type="servo_detach"></block>' +
+'    <block type="servo_attach"></block>' +
 '    <block type="stepper_config">' +
 '      <field name="STEPPER_NUMBER_OF_PINS">2</field>' +
 '      <field name="STEPPER_PIN1">1</field>' +
