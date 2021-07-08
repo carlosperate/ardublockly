@@ -55,14 +55,14 @@ Blockly.Arduino['serial_setup'] = function(block) {
   Blockly.Arduino.addInclude('serial', '#include <SoftwareSerial.h>');
   var serialId = block.getFieldValue('SERIAL_ID');
   var serialSpeed = block.getFieldValue('SPEED');
-  var serialSetupCode = serialId + '.begin_(' + serialSpeed + ');';
+  var serialSetupCode = serialId + '.begin(' + serialSpeed + ');';
   //var serialDeclaration = 'SotwareSerial ' + serialId ;
   //Blockly.Arduino.addDeclaration(serialDeclaration, globalCode);
   var pins = [block.getFieldValue('ARD_SERIAL_RX_PIN'),
 			  block.getFieldValue('ARD_SERIAL_TX_PIN')];
 			  
 
-  var globalCode = 'SotwareSerial ' + serialId + '(';
+  var globalCode = 'SoftwareSerial ' + serialId + '(';
   for (var i = 0; i < pins.length; i++) {
 	  
   //  need to get the following working:
