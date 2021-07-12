@@ -84,7 +84,7 @@ Blockly.Arduino['serial_setup'] = function(block) {
  * @param {!Blockly.Block} block Block to generate the code from.
  * @return {array} Completed code with order of operation.
  */
-Blockly.Arduino['serial_boolean'] = function(block) {
+Blockly.Arduino['serial_available'] = function(block) {
   var serialId = block.getFieldValue('SERIAL_ID');
   var code = serialId + '.available()'
  // var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
