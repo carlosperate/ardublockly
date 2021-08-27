@@ -1,0 +1,4 @@
+git clone -b SteppingStone_001 https://github.com/AlanMThomason/ardublockly_at.git
+cd ardublockly_at
+git submodule update --init --recursive
+python start.py
