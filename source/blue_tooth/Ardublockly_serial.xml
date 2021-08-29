@@ -1,0 +1,453 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <block type="serial_setup" id="R^dT!@!R~m([Z`C]7n/k" x="86" y="22">
+    <field name="SERIAL_ID">MyBlue</field>
+    <field name="SPEED">9600</field>
+    <field name="ARD_SERIAL_RX_PIN">2</field>
+    <field name="ARD_SERIAL_TX_PIN">3</field>
+  </block>
+  <block type="arduino_functions" id="#yJth?Yl6Ux~1~Ol^-.j" x="110" y="157">
+    <statement name="SETUP_FUNC">
+      <block type="variables_set" id="GB``iSXrd%mFgd;OF?*m">
+        <field name="VAR">flag</field>
+        <value name="VALUE">
+          <block type="math_number" id="7VqIUy[nU`Oli0jK%XZP">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="variables_set" id="FX+AqlR_%Ew8TIm]*Aga">
+            <field name="VAR">STOPPED_SERVO_LEFT</field>
+            <value name="VALUE">
+              <block type="math_number" id="IgAOYwW)C7E-lxl5LULC">
+                <field name="NUM">1470</field>
+              </block>
+            </value>
+            <next>
+              <block type="variables_set" id="KV@4Ge#uRpu;Cw)XSZ1X">
+                <field name="VAR">STOPPED_SERVO_RIGHT</field>
+                <value name="VALUE">
+                  <block type="math_number" id="ixxPROs58bioDdAc?dX+">
+                    <field name="NUM">1470</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="EcbNuW1ON6Qd1gu#M4RE">
+                    <field name="VAR">speed_left</field>
+                    <value name="VALUE">
+                      <block type="variables_get" id="X??^.c3.;Hr6DLEwh_S0">
+                        <field name="VAR">STOPPED_SERVO_LEFT</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="2ym={CS%MEmAOC]9+}=I">
+                        <field name="VAR">speed_right</field>
+                        <value name="VALUE">
+                          <block type="variables_get" id="]`WG8?znB3cfutSbT^|-">
+                            <field name="VAR">STOPPED_SERVO_RIGHT</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="servo_write_usec" id="`UzEhnWEV^sf5Qjd5dA+">
+                            <field name="SERVO_PIN">10</field>
+                            <value name="NUM">
+                              <block type="variables_get" id="!rMv%2i[TmCaY-xyk;|F">
+                                <field name="VAR">speed_left</field>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="servo_write_usec" id="/^iX,sNLEQk-3@Y;kfj4">
+                                <field name="SERVO_PIN">11</field>
+                                <value name="NUM">
+                                  <block type="variables_get" id=")GKs1irS~nb:V8LztxAC">
+                                    <field name="VAR">speed_right</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="LOOP_FUNC">
+      <block type="controls_if" id="LC#T-/*n./6}2)RC0Wp2">
+        <value name="IF0">
+          <block type="serial_available" id="2A5LAc-}%wh?50Tbcp,=">
+            <field name="SERIAL_ID">MyBlue</field>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="variables_set" id="vL!uw#@Gk:i^`^V_nHJh">
+            <field name="VAR">flag</field>
+            <value name="VALUE">
+              <block type="serial_read" id="g.54{_[?bnTfVJ;.R!mF">
+                <field name="SERIAL_ID">MyBlue</field>
+              </block>
+            </value>
+          </block>
+        </statement>
+        <next>
+          <block type="controls_if" id="8,m:rVozFr}:e{0bgnCU">
+            <value name="IF0">
+              <block type="logic_compare" id="T:g,b0{_0mz_eo.QDeYv">
+                <field name="OP">EQ</field>
+                <value name="A">
+                  <block type="variables_get" id="Hl!_]8k%FkHWIPb2U{`)">
+                    <field name="VAR">flag</field>
+                  </block>
+                </value>
+                <value name="B">
+                  <block type="math_number" id="oq|~Nrnq|3A_uuUOjB{Z">
+                    <field name="NUM">75</field>
+                  </block>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="0x++4FqEjx4`,C]qQ|)3">
+                <field name="VAR">speed_left</field>
+                <value name="VALUE">
+                  <block type="math_arithmetic" id="Wz{D=^|{2m6Mx[pm|%U;">
+                    <field name="OP">MINUS</field>
+                    <value name="A">
+                      <block type="variables_get" id="^s5Z,S83#3N{msDb|_7c">
+                        <field name="VAR">speed_left</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="N#H3sPI-Ph1ih[Dn|dml">
+                        <field name="NUM">10</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set" id="(jJN8)ms9F[93n+|m|]X">
+                    <field name="VAR">speed_right</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic" id="+f;=XAn~?f?_QCAy+~E|">
+                        <field name="OP">MINUS</field>
+                        <value name="A">
+                          <block type="variables_get" id=")u0eM%3!.RlGQKY9Iul3">
+                            <field name="VAR">speed_right</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="uBx0x~UqcuT0uJx)jFz_">
+                            <field name="NUM">10</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <next>
+              <block type="controls_if" id="`aL2vh0}Zznr@B~7J{dI">
+                <value name="IF0">
+                  <block type="logic_compare" id="X0/rL.e)-ro,|;W6KmaZ">
+                    <field name="OP">EQ</field>
+                    <value name="A">
+                      <block type="variables_get" id="GheDTr:GXX7qccIcP@7.">
+                        <field name="VAR">flag</field>
+                      </block>
+                    </value>
+                    <value name="B">
+                      <block type="math_number" id="Ae/V.`pdTgRN@L~9kL;Z">
+                        <field name="NUM">77</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id=".f5KQ@iXkf*_NfUd+f^_">
+                    <field name="VAR">speed_left</field>
+                    <value name="VALUE">
+                      <block type="math_arithmetic" id="I9r^YD)XN49dJ)JzQu3x">
+                        <field name="OP">ADD</field>
+                        <value name="A">
+                          <block type="variables_get" id="Z8=i`~x^802VtbhXp9:2">
+                            <field name="VAR">speed_left</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="+l3ADH0km[U^c?U1Xc*F">
+                            <field name="NUM">10</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set" id="v]~lwECDc54?l*Y4:aC1">
+                        <field name="VAR">speed_right</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id=":6K3rRrtT2y1|HG)1TPX">
+                            <field name="OP">ADD</field>
+                            <value name="A">
+                              <block type="variables_get" id="`}9%NGN9B:ocYFW=Br4J">
+                                <field name="VAR">speed_right</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="IjIv^#EHsEv0Y_6usS3_">
+                                <field name="NUM">10</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="L}MS}tDR2jvUO!XT|dDJ">
+                    <value name="IF0">
+                      <block type="logic_compare" id="n@0?Y?{l:-vu4Q`%f0.3">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="p+O3x#u@i3o#ZZxbI{TE">
+                            <field name="VAR">flag</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <block type="math_number" id="#3B/ypgq#w!72_=!/H]N">
+                            <field name="NUM">80</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="variables_set" id="D[fzQHARila`U?ca?ZWC">
+                        <field name="VAR">speed_left</field>
+                        <value name="VALUE">
+                          <block type="math_arithmetic" id="tHd#Si04+z|mnIq(M4!`">
+                            <field name="OP">MINUS</field>
+                            <value name="A">
+                              <block type="variables_get" id="^1.Pp_MnqQkdT0_PXBF3">
+                                <field name="VAR">speed_left</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="+RMkXQ(}M8kn-BO[oBXx">
+                                <field name="NUM">10</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="variables_set" id="Dr*UD-A5B8O*Ojy+jm@V">
+                            <field name="VAR">speed_right</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic" id="Uh:O0M#wcxYrJKl|lEe1">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="O2MA~76{,bH7g{Ir((FR">
+                                    <field name="VAR">speed_right</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="?:w8=SH!3-z+mR}U#~#^">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <next>
+                      <block type="controls_if" id="*H9q}.}U_gp*f#8{SYb3">
+                        <value name="IF0">
+                          <block type="logic_compare" id="JO7L59FH%LsHR!Vdii!e">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="YJAdn:H.nc?;!NB}oXDL">
+                                <field name="VAR">flag</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <block type="math_number" id="Am,_^iGJ~jdbd1zCk%M.">
+                                <field name="NUM">72</field>
+                              </block>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="x)b1.Rbx=nuLlY[44^#*">
+                            <field name="VAR">speed_left</field>
+                            <value name="VALUE">
+                              <block type="math_arithmetic" id="Vkvb89H~6{tNty[WC)3,">
+                                <field name="OP">ADD</field>
+                                <value name="A">
+                                  <block type="variables_get" id="t?)ZC!Cxjuw170I6BTX%">
+                                    <field name="VAR">speed_left</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="yu`_)9F,|c~wN=^c`~/|">
+                                    <field name="NUM">10</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="yoSGZHN(9:OdR7f9tdeF">
+                                <field name="VAR">speed_right</field>
+                                <value name="VALUE">
+                                  <block type="math_arithmetic" id="}1@~|M^?Exh@jONTUsw*">
+                                    <field name="OP">MINUS</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="Yo=ws|2}=!.I24x#Qg19">
+                                        <field name="VAR">speed_right</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="{u.7YS^[xcCU6@@GSdm#">
+                                        <field name="NUM">10</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                        <next>
+                          <block type="controls_if" id="w80rt#3,UMkgKg7r^H-%">
+                            <value name="IF0">
+                              <block type="logic_compare" id="P,k?!A*P(B?jQ@.n@(,n">
+                                <field name="OP">EQ</field>
+                                <value name="A">
+                                  <block type="variables_get" id="d7nYbl6b(=]YL@aV[[nC">
+                                    <field name="VAR">flag</field>
+                                  </block>
+                                </value>
+                                <value name="B">
+                                  <block type="math_number" id="POIkd!J~1CP#!0v30{wh">
+                                    <field name="NUM">32</field>
+                                  </block>
+                                </value>
+                              </block>
+                            </value>
+                            <statement name="DO0">
+                              <block type="variables_set" id="mwPvX|Jmzr}F|-ggiBfr">
+                                <field name="VAR">speed_left</field>
+                                <value name="VALUE">
+                                  <block type="variables_get" id=",v{[hA@NTAr^cYb+4GZb">
+                                    <field name="VAR">STOPPED_SERVO_LEFT</field>
+                                  </block>
+                                </value>
+                                <next>
+                                  <block type="variables_set" id="C[3hwW1Tkyz;]Y,|kY/o">
+                                    <field name="VAR">speed_right</field>
+                                    <value name="VALUE">
+                                      <block type="variables_get" id="ggVNS1jk/i%!(Q(A4YZb">
+                                        <field name="VAR">STOPPED_SERVO_RIGHT</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="servo_detach" id="0(LbB2EeK[kWr4[~5V_z">
+                                        <field name="SERVO_PIN">10</field>
+                                        <next>
+                                          <block type="servo_detach" id="oZr:VnlMxlcm+=rcRABG">
+                                            <field name="SERVO_PIN">11</field>
+                                            <next>
+                                              <block type="variables_set" id="(H^e0]lZF()P)!sqIn3^">
+                                                <field name="VAR">flag</field>
+                                                <value name="VALUE">
+                                                  <block type="math_number" id="%s.0}4,qFC%cQMr*xe{?">
+                                                    <field name="NUM">0</field>
+                                                  </block>
+                                                </value>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </statement>
+                            <next>
+                              <block type="controls_if" id="f@!eNJDJwnoqcm%r8=T?">
+                                <value name="IF0">
+                                  <block type="logic_compare" id="yp2*jI*`[]us-Uq{R)z-">
+                                    <field name="OP">GT</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="L7!uT4IwspnevP`IxX)t">
+                                        <field name="VAR">flag</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <block type="math_number" id="gqQ)7CR}G=UcT+sZBEFo">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="variables_set" id="%l3^(Ed~C}Hqy_:ughL=">
+                                    <field name="VAR">flag</field>
+                                    <value name="VALUE">
+                                      <block type="math_number" id="NdEq.qZJ6t;x~n;cP3;[">
+                                        <field name="NUM">0</field>
+                                      </block>
+                                    </value>
+                                    <next>
+                                      <block type="servo_attach" id="9D+,Qc1UXVm~cu?TW-9j">
+                                        <field name="SERVO_PIN">10</field>
+                                        <next>
+                                          <block type="servo_attach" id="b@FIG/s0B@cr(3ch6LzA">
+                                            <field name="SERVO_PIN">11</field>
+                                            <next>
+                                              <block type="servo_write_usec" id="Jy}u3I{!!~d_ga+I}Q~e">
+                                                <field name="SERVO_PIN">10</field>
+                                                <value name="NUM">
+                                                  <block type="variables_get" id="TwMV`ma+UzN+hV6GDgWJ">
+                                                    <field name="VAR">speed_left</field>
+                                                  </block>
+                                                </value>
+                                                <next>
+                                                  <block type="servo_write_usec" id="/UZ?ltt2k(kc1b:]@`Lm">
+                                                    <field name="SERVO_PIN">11</field>
+                                                    <value name="NUM">
+                                                      <block type="variables_get" id="creKoV3@5I+d~*3{OR:J">
+                                                        <field name="VAR">speed_right</field>
+                                                      </block>
+                                                    </value>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+  </block>
+</xml>
