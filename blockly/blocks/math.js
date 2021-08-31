@@ -226,6 +226,50 @@ Blockly.Blocks['math_trig'] = {
   }
 };
 
+Blockly.Blocks['math_ang'] = {
+  /**
+   * Block for angle operators.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 %2",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "OP",
+          "options": [
+            [Blockly.Msg.MATH_ANG_DEG, 'DEG'],
+            [Blockly.Msg.MATH_ANG_RAD, 'RAD']
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "NUM",
+          "check": Blockly.Types.DECIMAL.checkList
+        }
+      ],
+      "output": Blockly.Types.DECIMAL.output,
+      "colour": Blockly.Blocks.math.HUE,
+      "helpUrl": Blockly.Msg.MATH_AND_HELPURL
+    });
+    // Assign 'this' to a variable for use in the tooltip closure below.
+    var thisBlock = this;
+    this.setTooltip(function() {
+      var mode = thisBlock.getFieldValue('OP');
+      var TOOLTIPS = {
+        'DEG': Blockly.Msg.MATH_ANG_TOOLTIP_DEG,
+        'RAD': Blockly.Msg.MATH_ANG_TOOLTIP_RAD
+      };
+      return TOOLTIPS[mode];
+    });
+  },
+  /** @return {!string} Type of the block, all these operations are floats. */
+  getBlockType: function() {
+    return Blockly.Types.DECIMAL;
+  }
+};
+
 Blockly.Blocks['math_constant'] = {
   /**
    * Block for constants: PI, E, the Golden Ratio, sqrt(2), 1/sqrt(2), INFINITY.

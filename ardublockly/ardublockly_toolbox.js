@@ -56,6 +56,7 @@ Ardublockly.TOOLBOX_XML =
 '    <block type="math_arithmetic"></block>' +
 '    <block type="math_single"></block>' +
 '    <block type="math_trig"></block>' +
+'    <block type="math_ang"></block>' +
 '    <block type="math_constant"></block>' +
 '    <block type="math_number_property"></block>' +
 '    <block type="math_change">' +

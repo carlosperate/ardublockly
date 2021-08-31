@@ -129,6 +129,9 @@ Blockly.Arduino['math_single'] = function(block) {
     case 'TAN':
       code = 'tan(' + arg + ' / 180 * Math.PI)';
       break;
+    case 'RAD':
+      code = 'rad(' + arg + ' / 180 * Math.PI)';
+      break;
   }
   if (code) {
     return [code, Blockly.Arduino.ORDER_UNARY_POSTFIX];
@@ -146,6 +149,9 @@ Blockly.Arduino['math_single'] = function(block) {
       break;
     case 'ATAN':
       code = 'atan(' + arg + ') / M_PI * 180';
+      break;
+    case 'DEG':
+      code = 'deg(' + arg + ') / M_PI * 180';
       break;
     default:
       throw 'Unknown math operator: ' + operator;
