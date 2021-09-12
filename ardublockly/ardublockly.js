@@ -62,7 +62,7 @@ Ardublockly.bindActionFunctions = function() {
     Ardublockly.loadServerXmlFile('../examples/blink.xml');
     $('.button-collapse').sideNav('hide');
   });
-  Ardublockly.bindClick_('menu_example_2', function() {
+/*   Ardublockly.bindClick_('menu_example_2', function() {
     Ardublockly.loadServerXmlFile('../examples/serial_print_ascii.xml');
     $('.button-collapse').sideNav('hide');
   });
@@ -77,7 +77,7 @@ Ardublockly.bindActionFunctions = function() {
   Ardublockly.bindClick_('menu_example_5', function() {
     Ardublockly.loadServerXmlFile('../examples/stepper_knob.xml');
     $('.button-collapse').sideNav('hide');
-  });
+  }); */
 
   // Floating buttons
   Ardublockly.bindClick_('button_ide_large', function() {
