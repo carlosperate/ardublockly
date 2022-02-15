@@ -36,9 +36,9 @@ class CResistor extends CComponentBase
 	static m_ImageObjectBlown_270 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\RBlown_270.png");
 
 	static m_ImageObject1_0_0 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_0.png");
-	static m_ImageObject1_90 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_90.png");
-	static m_ImageObject1_180 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_180.png");
-	static m_ImageObject1_270 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_270.png");
+	static m_ImageObject1_0_90 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_90.png");
+	static m_ImageObject1_0_180 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_180.png");
+	static m_ImageObject1_0_270 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_270.png");
 	
 	static m_ImageObject1_2_0 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_2.png");
 	static m_ImageObject1_2_90 = CComponentBase.doGetImageObject("img\\Components\\Resistors\\R1_2_90.png");
@@ -583,18 +583,18 @@ class CResistor extends CComponentBase
 
 			CResistor.m_mapImageObjects.set("120_0", CResistor.m_ImageObject120_0);
 			CResistor.m_mapImageObjects.set("120_90", CResistor.m_ImageObject120_90);
-			CResistor.m_mapImageObjects.set("120_180", CResistor.m_ImageObject120_0_180);
-			CResistor.m_mapImageObjects.set("120_270", CResistor.m_ImageObject120_0_270);
+			CResistor.m_mapImageObjects.set("120_180", CResistor.m_ImageObject120_180);
+			CResistor.m_mapImageObjects.set("120_270", CResistor.m_ImageObject120_270);
 				
 			CResistor.m_mapImageObjects.set("150_0", CResistor.m_ImageObject150_0);
 			CResistor.m_mapImageObjects.set("150_90", CResistor.m_ImageObject150_90);
-			CResistor.m_mapImageObjects.set("150_180", CResistor.m_ImageObject150_0_180);
-			CResistor.m_mapImageObjects.set("150_270", CResistor.m_ImageObject150_0_270);
+			CResistor.m_mapImageObjects.set("150_180", CResistor.m_ImageObject150_180);
+			CResistor.m_mapImageObjects.set("150_270", CResistor.m_ImageObject150_270);
 				
 			CResistor.m_mapImageObjects.set("180_0", CResistor.m_ImageObject180_0);
 			CResistor.m_mapImageObjects.set("180_90", CResistor.m_ImageObject180_90);
-			CResistor.m_mapImageObjects.set("180_180", CResistor.m_ImageObject180_0_180);
-			CResistor.m_mapImageObjects.set("180_270", CResistor.m_ImageObject180_0_270);
+			CResistor.m_mapImageObjects.set("180_180", CResistor.m_ImageObject180_180);
+			CResistor.m_mapImageObjects.set("180_270", CResistor.m_ImageObject180_270);
 				
 			CResistor.m_mapImageObjects.set("220_0", CResistor.m_ImageObject220_0);
 			CResistor.m_mapImageObjects.set("220_90", CResistor.m_ImageObject220_90);
@@ -808,68 +808,68 @@ class CResistor extends CComponentBase
 
 			CResistor.m_mapImageObjects.set("1000000_0", CResistor.m_ImageObject1M_0);
 			CResistor.m_mapImageObjects.set("1000000_90", CResistor.m_ImageObject1M_90);
-			CResistor.m_mapImageObjects.set("1000000_180", CResistor.m_ImageObject1M_0_180);
-			CResistor.m_mapImageObjects.set("1000000_270", CResistor.m_ImageObject1M_0_270);
+			CResistor.m_mapImageObjects.set("1000000_180", CResistor.m_ImageObject1M_180);
+			CResistor.m_mapImageObjects.set("1000000_270", CResistor.m_ImageObject1M_270);
 
 			CResistor.m_mapImageObjects.set("1200000_0", CResistor.m_ImageObject1_2M_0);
 			CResistor.m_mapImageObjects.set("1200000_90", CResistor.m_ImageObject1_2M_90);
-			CResistor.m_mapImageObjects.set("1200000_180", CResistor.m_ImageObject1_2M_0_180);
-			CResistor.m_mapImageObjects.set("1200000_270", CResistor.m_ImageObject1_2M_0_270);
+			CResistor.m_mapImageObjects.set("1200000_180", CResistor.m_ImageObject1_2M_180);
+			CResistor.m_mapImageObjects.set("1200000_270", CResistor.m_ImageObject1_2M_270);
 
 			CResistor.m_mapImageObjects.set("1500000_0", CResistor.m_ImageObject1_5M_0);
 			CResistor.m_mapImageObjects.set("1500000_90", CResistor.m_ImageObject1_5M_90);
-			CResistor.m_mapImageObjects.set("1500000_180", CResistor.m_ImageObject1_5M_0_180);
-			CResistor.m_mapImageObjects.set("1500000_270", CResistor.m_ImageObject1_5M_0_270);
+			CResistor.m_mapImageObjects.set("1500000_180", CResistor.m_ImageObject1_5M_180);
+			CResistor.m_mapImageObjects.set("1500000_270", CResistor.m_ImageObject1_5M_270);
 
 			CResistor.m_mapImageObjects.set("1800000_0", CResistor.m_ImageObject1_8M_0);
 			CResistor.m_mapImageObjects.set("1800000_90", CResistor.m_ImageObject1_8M_90);
-			CResistor.m_mapImageObjects.set("1800000_180", CResistor.m_ImageObject1_8M_0_180);
-			CResistor.m_mapImageObjects.set("1800000_270", CResistor.m_ImageObject1_8M_0_270);
+			CResistor.m_mapImageObjects.set("1800000_180", CResistor.m_ImageObject1_8M_180);
+			CResistor.m_mapImageObjects.set("1800000_270", CResistor.m_ImageObject1_8M_270);
 
 			CResistor.m_mapImageObjects.set("2200000_0", CResistor.m_ImageObject2_2M_0);
 			CResistor.m_mapImageObjects.set("2200000_90", CResistor.m_ImageObject2_2M_90);
-			CResistor.m_mapImageObjects.set("2200000_180", CResistor.m_ImageObject2_2M_0_180);
-			CResistor.m_mapImageObjects.set("2200000_270", CResistor.m_ImageObject2_2M_0_270);
+			CResistor.m_mapImageObjects.set("2200000_180", CResistor.m_ImageObject2_2M_180);
+			CResistor.m_mapImageObjects.set("2200000_270", CResistor.m_ImageObject2_2M_270);
 
 			CResistor.m_mapImageObjects.set("2700000_0", CResistor.m_ImageObject2_7M_0);
 			CResistor.m_mapImageObjects.set("2700000_90", CResistor.m_ImageObject2_7M_90);
-			CResistor.m_mapImageObjects.set("2700000_180", CResistor.m_ImageObject2_7M_0_180);
-			CResistor.m_mapImageObjects.set("2700000_270", CResistor.m_ImageObject2_7M_0_270);
+			CResistor.m_mapImageObjects.set("2700000_180", CResistor.m_ImageObject2_7M_180);
+			CResistor.m_mapImageObjects.set("2700000_270", CResistor.m_ImageObject2_7M_270);
 
 			CResistor.m_mapImageObjects.set("3300000_0", CResistor.m_ImageObject3_3M_0);
 			CResistor.m_mapImageObjects.set("3300000_90", CResistor.m_ImageObject3_3M_90);
-			CResistor.m_mapImageObjects.set("3300000_180", CResistor.m_ImageObject3_3M_0_180);
-			CResistor.m_mapImageObjects.set("3300000_270", CResistor.m_ImageObject3_3M_0_270);
+			CResistor.m_mapImageObjects.set("3300000_180", CResistor.m_ImageObject3_3M_180);
+			CResistor.m_mapImageObjects.set("3300000_270", CResistor.m_ImageObject3_3M_270);
 
 			CResistor.m_mapImageObjects.set("3900000_0", CResistor.m_ImageObject3_9M_0);
 			CResistor.m_mapImageObjects.set("3900000_90", CResistor.m_ImageObject3_9M_90);
-			CResistor.m_mapImageObjects.set("3900000_180", CResistor.m_ImageObject3_9M_0_180);
-			CResistor.m_mapImageObjects.set("3900000_270", CResistor.m_ImageObject3_9M_0_270);
+			CResistor.m_mapImageObjects.set("3900000_180", CResistor.m_ImageObject3_9M_180);
+			CResistor.m_mapImageObjects.set("3900000_270", CResistor.m_ImageObject3_9M_270);
 
 			CResistor.m_mapImageObjects.set("4700000_0", CResistor.m_ImageObject4_7M_0);
 			CResistor.m_mapImageObjects.set("4700000_90", CResistor.m_ImageObject4_7M_90);
-			CResistor.m_mapImageObjects.set("4700000_180", CResistor.m_ImageObject4_7M_0_180);
-			CResistor.m_mapImageObjects.set("4700000_270", CResistor.m_ImageObject4_7M_0_270);
+			CResistor.m_mapImageObjects.set("4700000_180", CResistor.m_ImageObject4_7M_180);
+			CResistor.m_mapImageObjects.set("4700000_270", CResistor.m_ImageObject4_7M_270);
 
 			CResistor.m_mapImageObjects.set("5600000_0", CResistor.m_ImageObject5_6M_0);
 			CResistor.m_mapImageObjects.set("5600000_90", CResistor.m_ImageObject5_6M_90);
-			CResistor.m_mapImageObjects.set("5600000_180", CResistor.m_ImageObject5_6M_0_180);
-			CResistor.m_mapImageObjects.set("5600000_270", CResistor.m_ImageObject5_6M_0_270);
+			CResistor.m_mapImageObjects.set("5600000_180", CResistor.m_ImageObject5_6M_180);
+			CResistor.m_mapImageObjects.set("5600000_270", CResistor.m_ImageObject5_6M_270);
 
 			CResistor.m_mapImageObjects.set("6800000_0", CResistor.m_ImageObject6_8M_0);
 			CResistor.m_mapImageObjects.set("6800000_90", CResistor.m_ImageObject6_8M_90);
-			CResistor.m_mapImageObjects.set("6800000_180", CResistor.m_ImageObject6_8M_0_180);
-			CResistor.m_mapImageObjects.set("6800000_270", CResistor.m_ImageObject6_8M_0_270);
+			CResistor.m_mapImageObjects.set("6800000_180", CResistor.m_ImageObject6_8M_180);
+			CResistor.m_mapImageObjects.set("6800000_270", CResistor.m_ImageObject6_8M_270);
 
 			CResistor.m_mapImageObjects.set("8200000_0", CResistor.m_ImageObject8_2M_0);
 			CResistor.m_mapImageObjects.set("8200000_90", CResistor.m_ImageObject8_2M_90);
-			CResistor.m_mapImageObjects.set("8200000_180", CResistor.m_ImageObject8_2M_0_180);
-			CResistor.m_mapImageObjects.set("8200000_270", CResistor.m_ImageObject8_2M_0_270);
+			CResistor.m_mapImageObjects.set("8200000_180", CResistor.m_ImageObject8_2M_180);
+			CResistor.m_mapImageObjects.set("8200000_270", CResistor.m_ImageObject8_2M_270);
 
 			CResistor.m_mapImageObjects.set("10000000_0", CResistor.m_ImageObject10M_0);
 			CResistor.m_mapImageObjects.set("10000000_90", CResistor.m_ImageObject10M_90);
-			CResistor.m_mapImageObjects.set("10000000_180", CResistor.m_ImageObject10M_0_180);
-			CResistor.m_mapImageObjects.set("10000000_270", CResistor.m_ImageObject10M_0_270);
+			CResistor.m_mapImageObjects.set("10000000_180", CResistor.m_ImageObject10M_180);
+			CResistor.m_mapImageObjects.set("10000000_270", CResistor.m_ImageObject10M_270);
 		}
 	}
 
@@ -878,17 +878,18 @@ class CResistor extends CComponentBase
 		super("RESISTOR");
 		CResistor.doCreateImageObjectMap();
 		super.setDeviceName("RESISTOR1");		
-		this.m_fScale = 8.2;
+		this.m_fScale = this.m_fDefaultScale = 8.2;
 		this.m_bIsBlown = false;
+		this.m_fResistance = 0;
 
-		this.m_arrayPins.add(new CPin(0, false, false, "pin 1", this.getDeviceName()));
-		this.m_arrayPins.add(new CPin(1, false, false, "pin 2", this.getDeviceName()));
+		this.doAddPin(new CPin(0, false, false, "pin 1", this.getDeviceName()));
+		this.doAddPin(new CPin(1, false, false, "pin 2", this.getDeviceName()));
 		this.doSetResistance(10000);
 		this.doRotate(0);
 
 		this.m_strEditHTML += "&nbsp;&nbsp;<div style=\"" + g_strSecondDivDisplayStyle + "\" id=\"fix\"><input type=\"button\" style=\"" + 
-								g_strButtonStyle + "\" value=\"REPLACE\" onclick=\"doClick('YYYY')\">&nbsp;&nbsp;" + 
-								"<select id=\"resistance\" style=\"" + g_strSelectStyle + "width:60Px;\">" + 
+								g_strButtonStyle + "position:relative;top:6Px;\" value=\"REPLACE\" onclick=\"doClick('YYYY')\">&nbsp;&nbsp;" + 
+								"<select id=\"resistance\" style=\"" + g_strSelectStyle + "position:relative;top:5Px;width:60Px;\">" + 
 									"<option value=\"1\">1.0</option>" + 
 									"<option value=\"1.2\">1.2</option>" + 
 									"<option value=\"1.5\">1.5</option>" + 
@@ -903,16 +904,20 @@ class CResistor extends CComponentBase
 									"<option value=\"8.2\">8.2</option>" + 
 									"<option value=\"10\">10</option>" + 
 								"</select>&nbsp;" +
-								"<select id=\"resistance_multiplier\" style=\"" + g_strSelectStyle + "width:100Px;\">" + 
+								"<select id=\"resistance_multiplier\" style=\"" + g_strSelectStyle + "position:relative;top:5Px;width:100Px;\">" + 
 									"<option value=\"1\">Ω</option>" + 
 									"<option value=\"10\">x10 Ω</option>" + 
 									"<option value=\"100\">x100 Ω</option>" + 
 									"<option selected value=\"1000\">kΩ</option>" + 
 									"<option value=\"1000000\">MΩ</option>" + 
-								"</select></div>" + 
-								"<input type=\"button\" style=\"" + g_strButtonStyle + "\" value=\"CHANGE\" onclick=\"doChangeResistance('ZZZZ', doGetResistance())\">";
+								"</select>&nbsp;" + 
+								"<input type=\"button\" style=\"" + g_strButtonStyle + "position:relative;top:5Px;\" value=\"CHANGE\" onclick=\"doChangeResistance('ZZZZ', doGetResistance())\"></div>";
 	}
 
+	doRun()
+	{
+	}
+	
 	doWrite()
 	{
 		var strFileContents = super.doWrite();
@@ -925,14 +930,40 @@ class CResistor extends CComponentBase
 	
 	getResistance()
 	{
-		return this.m_nResistance;
+		return this.m_fResistance;
+	}
+	
+	getVoltage(strDeviceNameIn, strPinIDIn)
+	{
+		var strDeviceNameOut = this.getDeviceName(), strPinIDOut = "", strWireName = "";
+		var fVoltage = 0;
+		
+		if (this.m_arrayPins[0].getPinID() != strPinIDIn)
+		{
+			strWireName = this.m_arrayPins[0].getWire();
+			strPinIDOut = this.m_arrayPins[0].getPinID();
+		}
+		else if (this.m_arrayPins[1].getPinID() != strPinIDIn)
+		{
+			strWireName = this.m_arrayPins[1].getWire();
+			strPinIDOut = this.m_arrayPins[1].getPinID();
+		}
+		if ((strWireName != "") && g_mapPlacedComponents.get(strWireName))
+			fVoltage = g_mapPlacedComponents.get(strWireName).getVoltage(strDeviceNameOut, strPinIDOut);
+			
+		return fVoltage;
 	}
 	
 	doSetResistance(fResistance)
 	{
-		var strKey = fResistance.toString()
+		var strKey = "";
 		
-		strKey.replace(".", "_");
+		if (fResistance == 1)
+			strKey = fResistance.toString() + ".0";
+		else
+			strKey = fResistance.toString();
+		
+		strKey = strKey.replace(".", "_");
 		strKey += "_";
 		
 		this.m_ImageObject0 = CResistor.m_mapImageObjects.get(strKey + "0");
@@ -943,31 +974,27 @@ class CResistor extends CComponentBase
 		this.m_fResistance = fResistance;
 	}
 	
-	doRotate(nAngleAdd)
-	{
-		super.doRotate(nAngleAdd);
-		this.doSetPinPositions();
-	}
-	
-	doMove(pointMousePos)
-	{
-		super.doMove(pointMousePos);
-		this.doSetPinPositions();
-	}
-	
 	doSetPinPositions()
 	{
 		if (this.m_nRotationAngle == 0)
 		{
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(0, 4));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(48, 4));
 		}
 		else if (this.m_nRotationAngle == 90)
 		{
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(4, 0));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(4, 48));
 		}
 		else if (this.m_nRotationAngle == 180)
 		{
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(0, 4));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(48, 4));
 		}
 		else if (this.m_nRotationAngle == 270)
 		{
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(4, 0));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(4, 48));
 		}
 	}
 	
@@ -1002,307 +1029,3 @@ class CResistor extends CComponentBase
 
 }
 
-
-
-
-//*************************************************************************
-//*
-//* WIRE
-//*
-//*************************************************************************
-
-function doChangeWireColor(strNewColor)
-{
-	var strName = doFindSelectedComponentNoMouse();
-	
-	if ((strName != "") && (g_mapPlacedComponents.get(strName) != null) && (g_mapPlacedComponents.get(strName).getType() == "WIRE"))
-	{
-		g_mapPlacedComponents.get(strName).doSetColor(strNewColor);
-		doDisplayAllComponents();
-	}	
-}
-
-class CWire
-{
-	static m_nWireCount = 1;
-	static m_nNodeRadius = 4;
-	
-	constructor(strColor)
-	{
-		this.m_arrayPoints = [];
-		this.m_strColor = strColor;
-		this.m_strType = "WIRE";
-		this.m_strDeviceName = this.m_strType + CWire.m_nWireCount;
-		this.m_nWidth = 3;
-		this.m_bSelected = false;
-		this.m_pointLastMousePos = new CPoint(0, 0);
-		this.m_nIndexGrabbedPoint = 0;
-		CWire.m_nWireCount++;
-		this.doAppendNode(new CPoint(0, 0));
-	}
-
-	getType()
-	{
-		return "WIRE";
-	}
-	
-	doGetColor()
-	{
-		return this.m_strColor;
-	}
-	
-	doSetColor(strNewColor)
-	{
-		this.m_strColor = strNewColor;
-	}
-	
-	doGetDeviceName()
-	{
-		return this.m_strDeviceName;
-	}
-	
-	doAppendNode(pointNew)
-	{
-		pointNew.m_nX -= (pointNew.m_nX % g_nGridSize);
-		pointNew.m_nY -= (pointNew.m_nY % g_nGridSize);
-		this.m_arrayPoints[this.m_arrayPoints.length] = pointNew;
-	}
-	
-	doDeleteNode(nIndex)
-	{
-		var arrayNew = [];
-		
-		for (let nI = 0; nI < nIndex; nI++)
-			arrayNew.push(this.m_arrayPoints[nI]);
-			
-		for (let nI = nIndex + 1; nI < this.m_arrayPoints.length; nI++)
-			arrayNew.push(this.m_arrayPoints[nI]);
-			
-		this.m_arrayPoints = arrayNew;
-	}
-	
-	doInsertNode(pointNew)
-	{
-		var arrayNew = [];
-		
-		pointNew.m_nX -= (pointNew.m_nX % g_nGridSize);
-		pointNew.m_nY -= (pointNew.m_nY % g_nGridSize);
-		
-		if (this.m_arrayPoints.length == 2)
-		{
-			if ((pointNew.isGreater(this.m_arrayPoints[0]) || pointNew.isLesser(this.m_arrayPoints[1])) ||
-				 (pointNew.isGreater(this.m_arrayPoints[1]) || pointNew.isLesser(this.m_arrayPoints[0])))
-			{
-				//this.m_arrayPoints.splice(1, 0, pointNew);
-				arrayNew.push(this.m_arrayPoints[0]);
-				arrayNew.push(pointNew);
-				arrayNew.push(this.m_arrayPoints[1]);
-				this.m_arrayPoints = arrayNew;
-			}
-		}
-		else
-		{
-			for (var nI = 0; nI <= (this.m_arrayPoints.length - 1); nI++)
-			{
-				if (pointNew.isGreater(this.m_arrayPoints[nI]))
-				{
-					for (let nJ = 0; nJ < nI; nJ++)
-						arrayNew.push(this.m_arrayPoints[nJ]);
-						
-					arrayNew.push(pointNew);
-					
-					for (let nJ = nI; nJ < this.m_arrayPoints.length; nJ++)
-						arrayNew.push(this.m_arrayPoints[nJ]);
-					this.m_arrayPoints = arrayNew;
-					break;
-				}
-			}
-		}
-	}
-
-	doesNodeContain(pointMouse, pointNode, nRadius) 
-	{
-		var nDistancePoints = (pointMouse.m_nX - pointNode.m_nX) * (pointMouse.m_nX - pointNode.m_nX) + 
-								(pointMouse.m_nY - pointNode.m_nY) * (pointMouse.m_nY - pointNode.m_nY);
-		var bContains = false;
-		
-		nRadius *= nRadius;
-		if (nDistancePoints < nRadius) 
-			bContains = true;
-
-		return bContains;
-	}
-
-	doesLineContain(pointStart, pointEnd, pointMouse, nLineWidth)
-	{
-		var pointTemp = new CPoint(0, 0);
-		var bContains = false;
-
-		// Normalize start/end to left right to make the nOffset calc simpler.
-		if (pointStart.m_nX > pointEnd.m_nX)
-		{
-			pointTemp = pointStart;
-			pointStart = pointEnd;
-			pointEnd  = pointTemp;
-		}
-
-		// If pointMouse is out of bounds, no need to do further checks.                  
-		if (pointMouse.m_nX + nLineWidth < pointStart.m_nX || pointEnd.m_nX < pointMouse.m_nX - nLineWidth)
-			bContains = false;
-		else if (pointMouse.m_nY + nLineWidth < Math.min(pointStart.m_nY, pointEnd.m_nY) || Math.max(pointStart.m_nY, pointEnd.m_nY) < pointMouse.m_nY - nLineWidth)
-			bContains = false;
-		else
-		{
-			var nDeltaX = pointEnd.m_nX - pointStart.m_nX;
-			var nDeltaY = pointEnd.m_nY - pointStart.m_nY;
-
-			// If the line is straight, the earlier boundary check is enough to determine that the pointMouse is on the line.
-			// Also prevents division by zero exceptions.
-			if (nDeltaX == 0 || nDeltaY == 0) 
-				bContains = true;
-			else
-			{
-				var nSlope = nDeltaY / nDeltaX;
-				var nOffset = pointStart.m_nY - pointStart.m_nX * nSlope;
-				var nCalculatedY  = pointMouse.m_nX * nSlope + nOffset;
-
-				// Check calculated Y matches the points Y coord with some easing.
-				bContains = pointMouse.m_nY - nLineWidth <= nCalculatedY && nCalculatedY <= pointMouse.m_nY + nLineWidth;
-			}
-		}
-		return bContains;            
-	}
-	
-	isMouseInNode(pointMousePos)
-	{
-		for (var nI = 0; nI < this.m_arrayPoints.length; nI++)
-		{
-			if (this.doesNodeContain(pointMousePos, this.m_arrayPoints[nI], CWire.m_nNodeRadius))
-				break;
-		}
-		if (nI >= this.m_arrayPoints.length)
-			nI = -1;
-			
-		return nI;
-	}
-
-	isMouseIn(pointMousePos)
-	{
-		var bResult = false;
-		
-		if (this.m_arrayPoints.length == 2)
-		{
-			bResult = this.doesLineContain(this.m_arrayPoints[0], this.m_arrayPoints[1], pointMousePos, this.m_nWidth);
-		}
-		else
-		{
-			for (let nI = 1; nI < this.m_arrayPoints.length; nI++)
-			{
-				bResult = this.doesLineContain(this.m_arrayPoints[nI - 1], this.m_arrayPoints[nI], pointMousePos, this.m_nWidth);
-				if (bResult)
-					break;
-			}
-		}
-		return bResult;
-	}
-	isEmpty()
-	{
-		return this.m_arrayPoints.length < 2;
-	}
-	
-	isSelected()
-	{
-		return this.m_bSelected;
-	}
-	
-	doSelect()
-	{
-		this.m_bSelected = true;
-		doDisplayInfo("Click the right mouse button on the wire to add or remove nodes & hold the left mouse button on a node to drag it...");
-		var strHTML = "&nbsp;&nbsp;<div style=\"display:inline-block;position:relative;top:2Px;\">WIRE COLORS: </div><div style=\"" + g_strSecondDivDisplayStyle + "position:relative;top:4Px;\" id=\"fix\">" + 
-
-		"<div onclick=\"doChangeWireColor(document.getElementById('red_wire').style.backgroundColor)\" id=\"red_wire\" class=\"change_wire_color\" style=\"background-color:#DD0000\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('orange_wire').style.backgroundColor)\" id=\"orange_wire\" class=\"change_wire_color\" style=\"background-color:#CA6000\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('yellow_wire').style.backgroundColor)\" id=\"yellow_wire\" class=\"change_wire_color\" style=\"background-color:#FFFF00\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('green_wire').style.backgroundColor)\" id=\"green_wire\" class=\"change_wire_color\" style=\"background-color:#008000\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('purple_wire').style.backgroundColor)\" id=\"purple_wire\" class=\"change_wire_color\" style=\"background-color:#800080\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('brown_wire').style.backgroundColor)\" id=\"brown_wire\" class=\"change_wire_color\" style=\"background-color:#A52A2A\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('blue_wire').style.backgroundColor)\" id=\"blue_wire\" class=\"change_wire_color\" style=\"background-color:#000080\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('grey_wire').style.backgroundColor)\" id=\"grey_wire\" class=\"change_wire_color\" style=\"background-color:#606060\"></div>" +
-		"<div onclick=\"doChangeWireColor(document.getElementById('black_wire').style.backgroundColor)\" id=\"black_wire\" class=\"change_wire_color\" style=\"background-color:#000000\"></div>" +
-		
-		"</div>";
-		doShowEditFields(strHTML);
-	}
-	
-	doUnselect()
-	{
-		this.m_bSelected = false;
-	}
-	
-	doDrop(pointMousePos)
-	{
-		this.m_nIndexGrabbedPoint = -1;
-	}
-	
-	doGrab(pointMousePos)
-	{
-		this.doSelect();
-		this.m_pointLastMousePos.m_nX = pointMousePos.m_nX;
-		this.m_pointLastMousePos.m_nY = pointMousePos.m_nY;
-		this.m_nIndexGrabbedPoint = this.isMouseInNode(pointMousePos);
-		g_Canvas.style.cursor = "grabbing";
-	}
-	
-	doMove(pointMousePos)
-	{
-		if (this.m_nIndexGrabbedPoint > -1)
-		{
-			this.m_arrayPoints[this.m_nIndexGrabbedPoint] = new CPoint(pointMousePos.m_nX - (pointMousePos.m_nX % 10), pointMousePos.m_nY - (pointMousePos.m_nY % 10));
-			doDisplayAllComponents();
-		}
-	}
-	
-	doMouseOver(pointMousePos)
-	{
-		if (this.isMouseInNode(pointMousePos) > -1)
-			g_Canvas.style.cursor = "grab";
-		else if (this.isMouseIn(pointMousePos))
-			g_Canvas.style.cursor = "pointer";
-		else 
-			g_Canvas.style.cursor = "default";
-	}
-	
-	doDisplayNode(pointMouse, strColor)
-	{
-		g_CanvasContext.fillStyle = this.m_strColor;
-		g_CanvasContext.arc(pointMouse.m_nX, pointMouse.m_nY, CWire.m_nNodeRadius, 0, 2 * Math.PI);
-	}
-
-	doDisplay()
-	{
-		var nX = 0, nY = 0;
-		
-		g_CanvasContext.strokeStyle = this.m_strColor;
-		g_CanvasContext.lineWidth = this.m_nWidth;
-		
-		g_CanvasContext.beginPath();
-		if (this.m_bSelected)
-		{
-			for (let nI = 0; nI < this.m_arrayPoints.length; nI++)	
-				this.doDisplayNode(this.m_arrayPoints[nI], this.m_strColor);
-		}
-		for (let nI = 0; nI < this.m_arrayPoints.length; nI++)
-		{
-			nX = this.m_arrayPoints[nI].m_nX - (CWire.m_nNodeRadius / 2);
-			nY = this.m_arrayPoints[nI].m_nY;
-			
-			if (nI == 0)
-				g_CanvasContext.moveTo(nX, nY);
-			else 
-				g_CanvasContext.lineTo(nX, nY);
-		}
-		g_CanvasContext.stroke();		
-	}
-
-}

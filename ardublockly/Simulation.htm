@@ -142,6 +142,8 @@
 				border-style:solid;
 				border-width:2Px;
 				height:30Px;
+				font-weight:bold;
+				text-weight:bold;
 				font-size:14Px;
 				border-top-color:#208488;
 				border-left-color:#208488;
@@ -159,6 +161,8 @@
 				border-style:solid;
 				border-width:2Px;
 				height:30Px;
+				font-weight:bold;
+				text-weight:bold;
 				font-size:14Px;
 				border-bottom-color:#004448;
 				border-right-color:#004448;
@@ -221,8 +225,8 @@
 			{
 				display:none;
 				background-color:white;
-				overflow-x:serial_mon_scroll;
-				overflow-y:serial_mon_scroll;
+				overflow-x:scroll;
+				overflow-y:scroll;
 				display:none;
 				height:150Px;
 			}
@@ -298,7 +302,7 @@
 				background-color: #99BBAA;
 				color: #006468;
 				height: 100%;
-				width: 48%;
+				width: 50%;
 			}
 			
 			.large_message_area
@@ -313,7 +317,7 @@
 				background-color: #99BBAA;
 				color: black;
 				height: 100%;
-				width: 42%;
+				width: 40%;
 				float: right;
 				color: #006468;
 				font-size:12Px;
@@ -413,29 +417,32 @@
 
 	</head>
 
-	<body style="overflow:hidden" id="body" oncontextmenu="return false;" onmousemove="" onload="doAddEvenListeners()">
+	<body style="overflow:hidden" id="body" oncontextmenu="return false;" onmousemove="" onload="doAddEvenListeners()" onkeydown="doKeyDown(event)">
 		<div id="loading" class="loading">
 			LOADING...
 		</div>
 		<div id="simulator" style="display:none">
 			<!-- Horizontal Navigation bar -->
-			<nav class="nav-fixed arduino_teal">
+			<nav class="nav-fixed arduino_teal" id="navigation">
 				<div class="nav-wrapper" onclick="doClearPopupMenus(event)">
 					<span class="brand-logo app_title translatable_title">Ardublockly Simulator</span>
 					<span style="float: right;">
-					
-					
+
 						<input type="file" id="open_file" accept=".absim," style="display:none;" onchange="doOpenFile(event)">
-						
-						
-						<input type="button" class="button_top" value="OPEN" id="open" onmousedown="doTopButtonMouseDown('open')" onclick="doTopButtonClick('open')"></input>
-						<input type="button" class="button_top" value="SAVE" id="save" onmousedown="doTopButtonMouseDown('save')" onclick="doTopButtonClick('save')"></input>
-						<input type="button" class="button_top" value="WIRE" id="wire" onmousedown="doTopButtonMouseDown('wire')" onclick="doTopButtonClick('wire')"></input>
-						<input type="button" class="button_top" value="ROTATE LEFT 90°" id="rotate_left" onmousedown="doTopButtonMouseDown('rotate_left')" onclick="doTopButtonClick('rotate_left')"></input>
-						<input type="button" class="button_top" value="ROTATE RIGHT 90°" id="rotate_right" onmousedown="doTopButtonMouseDown('rotate_right')" onclick="doTopButtonClick('rotate_right')"></input>
-						<input type="button" class="button_top" value="DELETE" id="delete" onmousedown="doTopButtonMouseDown('delete')" onclick="doTopButtonClick('delete')"></input>
-						<input type="button" class="button_top" value="START" id="start_simulation" onclick="doClickStartButton()"></input>
-						<input type="button" class="button_top_pressed" value="STOP" id="stop_simulation" onclick="doClickStopButton()"></input>
+
+						<input type="button" class="button_top" value="↑" id="open" onmouseover="doTopButtonMouseOver('Open a circuit file...')" onmousedown="doTopButtonMouseDown('open')" onclick="doTopButtonClick('open')"></input>
+						<input type="button" class="button_top" value="↓" id="save" onmouseover="doTopButtonMouseOver('Save this circuit to file...')" onmousedown="doTopButtonMouseDown('save')" onclick="doTopButtonClick('save')"></input>
+						<!--
+						<input type="button" class="button_top" value="+" id="zoom_in" onmouseover="doTopButtonMouseOver('Zoom in...')" onmousedown="doTopButtonMouseDown('zoom_in')" onclick="doTopButtonClick('zoom_in')"></input>
+						<input type="button" class="button_top" value="=" id="zoom_default" onmouseover="doTopButtonMouseOver('Default zoom...')" onmousedown="doTopButtonMouseDown('zoom_default')" onclick="doTopButtonClick('zoom_default')"></input>
+						<input type="button" class="button_top" value="-" id="zoom_out" onmouseover="doTopButtonMouseOver('Zoom out...')" onmousedown="doTopButtonMouseDown('zoom_out')" onclick="doTopButtonClick('zoom_out')"></input>
+						-->
+						<input type="button" class="button_top" value="┌" id="wire" onmouseover="doTopButtonMouseOver('Add a wire...')" onmousedown="doTopButtonMouseDown('wire')" onclick="doTopButtonClick('wire')"></input>
+						<input type="button" class="button_top" value="← 90°" id="rotate_left" onmouseover="doTopButtonMouseOver('Rotate component 90 degree left...')" onmousedown="doTopButtonMouseDown('rotate_left')" onclick="doTopButtonClick('rotate_left')"></input>
+						<input type="button" class="button_top" value="→ 90°" id="rotate_right" onmouseover="doTopButtonMouseOver('Rotate component 90 degrees right...')" onmousedown="doTopButtonMouseDown('rotate_right')" onclick="doTopButtonClick('rotate_right')"></input>
+						<input type="button" class="button_top" value="X" id="delete" onmouseover="doTopButtonMouseOver('Delete selected component..')" onmousedown="doTopButtonMouseDown('delete')" onclick="doTopButtonClick('delete')"></input>
+						<input type="button" class="button_top" value="START" id="start_simulation" onmouseover="doTopButtonMouseOver('Start simulating...')" onclick="doClickStartButton()"></input>
+						<input type="button" class="button_top_pressed" value="STOP" id="stop_simulation" onmouseover="doTopButtonMouseOver('Stop simulating...')" onclick="doClickStopButton()"></input>
 					</span>
 				</div>
 				<div id="menu" class="menu">
@@ -740,7 +747,7 @@
 				</div>
 			</div>
 			<!-- Serial Monitor Output content -->
-			<div class="ide_output_wrapper"" onclick="doClearPopupMenus(event)">
+			<div class="ide_output_wrapper"" onclick="doClearPopupMenus(event)" style="display:block;">
 				<ul data-collapsible="expandable">
 					<div id="ide_output_collapsible_header" class="collapsible-header ide_output_header_normal">
 						<span class="mdi-action-swap-vert Medium" style="font-size: 2.2rem;" onclick="doOpenSerialMonitor()"></span>
@@ -758,23 +765,23 @@
 							&nbsp;&nbsp;
 							<input type="button" id="Send" value="SEND" class="button_bottom" onmousedown="doSendButtonMouseDown()" onclick="doClickSendButton('LineEnding', 'SerialText')"></input>
 							&nbsp;&nbsp
-							<input type="button" id="serial_mon_scroll" value="SCROLL" class="button_serial_mon_scroll" onclick="doClickScrollButton()"></input>
+							<input type="button" id="serial_mon_scroll" value="SCROLL" class="button_serial_mon_scroll" onclick="doClickScrollButton('serial_mon_scroll')"></input>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							Baud rate: 
 							<select id="Baud" name="Baud" class="select_baud" onchange="doChangeBaudSelection('Baud')">
-								<option value="">300 bps</option>
-								<option value="\r">600 bps</option>
-								<option value="\n">1200 bps</option>
-								<option value="\r\n">2400 bps</option>
-								<option value="\r\n">4800 bps</option>
-								<option value="\r\n">9600 bps</option>
-								<option value="\r\n">14400 bps</option>
-								<option value="\r\n">19200 bps</option>
-								<option value="\r\n">28800 bps</option>
-								<option value="\r\n">31250 bps</option>
-								<option value="\r\n">38400 bps</option>
-								<option value="\r\n">56700 bps</option>
-								<option selected value="\r\n">115200 bps</option>
+								<option value="300">300 bps</option>
+								<option value="600">600 bps</option>
+								<option value="1200">1200 bps</option>
+								<option value="2400">2400 bps</option>
+								<option value="4800">4800 bps</option>
+								<option value="9600">9600 bps</option>
+								<option value="14400">14400 bps</option>
+								<option value="19200">19200 bps</option>
+								<option value="28800">28800 bps</option>
+								<option value="31250">31250 bps</option>
+								<option value="38400">38400 bps</option>
+								<option value="56700">56700 bps</option>
+								<option value="115200">115200 bps</option>
 							</select>
 						</span>
 					</div>
@@ -805,21 +812,6 @@
 				return Element;
 			}
 						
-			function doErrorMessage(strErrorMessage)
-			{
-				alert(strErrorMessage);
-			}
-			
-			function doDisplayInfo(strMessage)
-			{
-				var LargeMessageDiv = document.getElementById("large_message_area");
-				
-				if (LargeMessageDiv != null)
-				{
-					LargeMessageDiv.innerHTML = strMessage;
-				}
-			}
-			
 			function doClearPopupMenus(event)
 			{
 				doShowHideElement(g_strLastPopupID, false);
@@ -832,114 +824,21 @@
 		<script src="CodeDataStructures.js"></script> 
 		<script src="CodeParsing.js"></script>
 		<script src="CodeFormatting.js"></script>
-		<script src="GeneralDataStructures.js"></script>
-		<script src="CanvasDataStructures.js"></script>
 		<script src="SerialMonitorDataStructures.js"></script>
-		<script src="PinDataStructures.js"></script>
 		<script src="CommonComponentDataStructures.js"></script>
+		<script src="GeneralDataStructures.js"></script>
+		<script src="PinDataStructures.js"></script>
 		<script src="PortDataStructures.js"></script>
 		<script src="MCUDataStructures.js"></script>
+		<script src="CanvasDataStructures.js"></script>
 		<script src="LEDDataStructures.js"></script>
 		<script src="PassiveDataStructures.js"></script>
+		<script src="WireDataStructures.js"></script>
 		<script src="FileSaver.js"></script>
 		<script src="FileReader.js"></script>
 		
 		<script type="text/javascript"> 
 
-
-			//*************************************************************************
-			//*
-			//* COMPONENT PLACEMENT FUNCTIONS
-			//*
-			//*************************************************************************
-
-			function doGetUniqueName(strName)
-			{
-				var strFind = "";
-				
-				for (let nI = 1; nI <= 1000; nI++)
-				{
-					strFind = strName + nI;
-					if (!g_mapPlacedComponents.has(strFind))
-					{
-						break;
-					}
-				}
-				return strFind;
-			}
-
-			function doCreateComponent(strComponentType)
-			{
-				var strComponentName = doGetUniqueName(strComponentType);
-				var Component = null;
-
-				if (strComponentType == "UNO")
-				{
-					if (g_nMCUCount == 0)
-					{
-						Component = new CArduinoUno();
-						g_nMCUCount++;
-					}
-					else
-						doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
-				}
-				else if (strComponentType == "MEGA")
-				{
-					if (g_nMCUCount == 0)
-					{
-						Component = new CArduinoMega();
-						g_nMCUCount++;
-					}
-					else
-						doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
-				}
-				else if (strComponentType == "MICROBIT")
-				{
-					if (g_nMCUCount == 0)
-					{
-						Component = new CMicrobit();
-						g_nMCUCount++;
-					}
-					else
-						doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
-				}
-				else if (strComponentType == "MICROBIT_BREAKOUT")
-				{
-					if (g_nMCUCount == 0)
-					{
-						Component = new CMicrobitBreakout();
-						g_nMCUCount++;
-					}
-					else
-						doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
-				}
-				else if (strComponentType == "LED")
-					Component = new CLED();
-				else if (strComponentType == "RESISTOR")
-					Component = new CResistor();
-				else
-					alert(strComponentType);
-					
-				// *******************************
-				// *******************************
-				// *******************************
-				// TO DO
-				// *******************************
-				// *******************************
-				// *******************************
-				
-				if (Component != null)
-				{
-					Component.setDeviceName(strComponentName);
-					Component.doSelect();
-					g_mapPlacedComponents.set(strComponentName, Component);
-				}
-				return Component;
-			}
-			
-			
-			
-			
 			//*************************************************************************
 			//*
 			//* GLOBAL VARIABLES
@@ -948,7 +847,8 @@
 			
 			var g_bSerialMonOpen = false;
 			var g_strLastPopupID = "";
-			var g_bScrollButton = true;
+			var g_bScrollButton = false;
+			doClickScrollButton("serial_mon_scroll");
 			var g_strFilename = "";
 				
 				
@@ -960,28 +860,6 @@
 			//*
 			//*************************************************************************
 
-			function doShowEditFields(strHTMLEditField)
-			{
-				var ComponentEdit = document.getElementById("component_edit");
-				
-				if (ComponentEdit != null)
-				{
-					ComponentEdit.innerHTML = strHTMLEditField;
-				}
-			}
-			
-			function doShowInfo(strHeading, strInfo)
-			{
-				var Info = getElement("info");
-				var InfoHeading = getElement("info_heading");
-
-				if (Info && InfoHeading)
-				{
-					InfoHeading.innerText = strHeading;
-					Info.innerText = strInfo;
-				}
-			}
-			
 			function doShowMousePos(event)
 			{
 				var Info = getElement("info");
@@ -1030,14 +908,21 @@
 				
 				var Component = new CWire(strHexColor);
 				
+				doUnselectAllComponents();
 				Component.doSelect();
-				g_strSelectedComponentName = Component.doGetDeviceName();
+				g_strSelectedComponentName = Component.getDeviceName();
 				g_mapPlacedComponents.set(g_strSelectedComponentName, Component);
 			}
 			
 			function doAddWire()
 			{
-				document.getElementById("line_dialog_box").style.display = "block";
+				//document.getElementById("line_dialog_box").style.display = "block";
+				doMakeWire("rgb(0, 0, 0)");
+			}
+			
+			function doZoom(strInOut)
+			{
+				doZoomAllDrawingObjects(strInOut)
 			}
 			
 			function doSaveFile()
@@ -1120,7 +1005,6 @@
 
 					strAngle = doReadNextToken(strFileContents);
 					strFileContents = doClearToken(strFileContents, strAngle);
-					
 					
 					if (strType == "MEGA")
 					{
@@ -1209,7 +1093,7 @@
 			{
 				var strName = doFindSelectedComponentNoMouse();
 				
-				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null))
+				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null) && (g_mapPlacedComponents.get(strName) != "WIRE"))
 				{
 					g_mapPlacedComponents.get(strName).doRotate(90);
 					doDisplayAllComponents();
@@ -1220,7 +1104,7 @@
 			{
 				var strName = doFindSelectedComponentNoMouse();
 				
-				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null))
+				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null) && (g_mapPlacedComponents.get(strName) != "WIRE"))
 				{
 					g_mapPlacedComponents.get(strName).doRotate(-90);
 					doDisplayAllComponents();
@@ -1230,18 +1114,20 @@
 			function doDelete()
 			{
 				var strName = doFindSelectedComponentNoMouse();
+				var arrayDeviceName = [];
+				var strDeviceName = "";
+	
+				g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
 				
 				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null))
 				{
-					if (g_mapPlacedComponents.get(strName).isMCU())
-					{
+					if (g_mapPlacedComponents.get(strName).getType() == "MCU")
 						g_nMCUCount--;
-						g_mapPlacedComponents.get(strName).doDeleteAllConnections();
-					}
+					g_mapPlacedComponents.get(strName).doDelete();
 					g_mapPlacedComponents.delete(strName);
 					doDisplayAllComponents();
 					doShowEditFields("");
-					doShowInfo("", "");
+					doDisplayHint("", "");
 				}
 			}
 	
@@ -1268,8 +1154,22 @@
 					doSaveFile();
 				else if (strButtonID == "wire")
 					doAddWire();
+				else if (strButtonID == "zoom_in")
+					doZoom("+");
+				else if (strButtonID == "zoom_out")
+					doZoom("-");
+				else if (strButtonID == "zoom_default")
+					doZoom("100");
 			}
 
+			function doTopButtonMouseOver(strMessage)
+			{
+				var MessageArea = getElement("large_message_area");
+				
+				if (MessageArea)
+					MessageArea.innerText = strMessage;
+			}
+			
 			function doTopButtonMouseDown(strButtonID)
 			{
 				var Button = getElement(strButtonID);
@@ -1292,6 +1192,35 @@
 			//*
 			//*************************************************************************
 			
+			var g_bSimulationStarted = false;
+			var g_arrayDeviceName = [];
+			var g_Delay = new CDelay(0);
+			/*
+			var g_arrayFunctions = new CFunctionArray();
+			var g_SetupFunc = null, g_LoopFunc = null;
+			var g_arrayGlobalVariables = new CVariableArray();
+			*/
+			
+			function simulate(nTimeStamp)
+			{
+				if (g_bSimulationStarted)
+				{
+					if (g_LoopFunc && g_Delay.isExpired())
+					{
+						g_LoopFunc.evaluate();
+
+						for (let nI = 0; nI < g_arrayDeviceName.length; nI++)
+						{
+							if ((g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "MCU")) &&
+								(g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "WIRE")))
+								g_mapPlacedComponents.get(g_arrayDeviceName[nI]).doRun();
+						}
+						doDisplayAllComponents();
+					}
+					window.requestAnimationFrame(simulate);
+				}
+			}
+			
 			function doClickStartButton()
 			{
 				var ButtonStart = getElement("start_simulation");
@@ -1309,6 +1238,12 @@
 					ButtonStop.style.borderRightColor = "#00777C";
 					ButtonStop.style.borderBottomColor = "#00777C";
 				}
+				g_bSimulationStarted = true;
+				g_arrayDeviceName = [];
+				g_mapPlacedComponents.forEach(function(strValue, strKey, map){g_arrayDeviceName.push(strKey)});
+				if (g_SetupFunc)
+					g_SetupFunc.evaluate();
+				window.requestAnimationFrame(simulate);
 			}
 			
 			function doClickStopButton()
@@ -1328,6 +1263,7 @@
 					ButtonStop.style.borderRightColor = "#20B7BC";
 					ButtonStop.style.borderBottomColor = "#20B7BC";
 				}
+				g_bSimulationStarted = false;
 			}
 			
 			
@@ -1385,6 +1321,19 @@
 				doDisplayAllComponents();
 			}
 	
+			function doKeyDown(event)
+			{
+				if (event.ctrlKey)
+				{
+					if ((event.which == 61) || (event.which == 173))
+						event.preventDefault();
+				}
+				else if ((event.code == "Delete") || (event.code == "Backspace"))
+				{
+					doDelete();
+				}
+			}
+			
 			function doMouseMoveCanvas(event)
 			{
 				var pointMousePos = new CPoint(0, 0);
@@ -1407,15 +1356,17 @@
 				pointMousePos.initEvent(event);
 				pointMousePos.relativeTo(g_DrawSpace);
 				
-				if ((g_strSelectedComponentName != "") && (g_mapPlacedComponents.get(g_strSelectedComponentName) != null) && 
-					(g_mapPlacedComponents.get(g_strSelectedComponentName).getType() == "WIRE") && 
-					!g_mapPlacedComponents.get(g_strSelectedComponentName).isEmpty())
+				if ((g_strSelectedComponentName != "") && (g_mapPlacedComponents.get(g_strSelectedComponentName) != null))
 				{
-					if (event.which == 1)
+					if (((g_mapPlacedComponents.get(g_strSelectedComponentName).getType() == "WIRE") && !g_mapPlacedComponents.get(g_strSelectedComponentName).isEmpty()) ||
+						(g_mapPlacedComponents.get(g_strSelectedComponentName).getType() != "WIRE"))
 					{
-						g_mapPlacedComponents.get(g_strSelectedComponentName).doDrop(pointMousePos);
-						g_strSelectedComponentName = "";
-						doDisplayAllComponents();
+						if (event.which == 1)
+						{
+							g_mapPlacedComponents.get(g_strSelectedComponentName).doDrop(pointMousePos);
+							g_strSelectedComponentName = "";
+							doDisplayAllComponents();
+						}
 					}
 				}
 			}
@@ -1478,6 +1429,7 @@
 				var Component = doCreateComponent(strPopupMenuItemText);
 				
 				doShowHideElement(g_strLastPopupID, false);
+				doUnselectAllComponents();
 				if (Component != null)
 					Component.doSelect();
 			}
@@ -1506,11 +1458,13 @@
 					{
 						g_bSerialMonOpen = true;
 						SerialMonitorDiv.style.display = "block";
+						g_SerialMonitor.setOpen();
 					}
 					else
 					{
 						g_bSerialMonOpen = false;
 						SerialMonitorDiv.style.display = "none";
+						g_SerialMonitor.setClose();
 					}
 				}
 			}
@@ -1519,11 +1473,8 @@
 			{
 				var Select = getElement(strID);
 				
-				if (Select == null)
-				{
-					g_nSelectedBaud = Select.options[Select.selectedIndex].text;
-					g_MCU.selectBaud(g_nSelectedBaud);
-				}
+				if (Select)
+					g_SerialMonitor.select(Select.options[Select.selectedIndex].value);
 			}
 			
 			function doChangeLineEndingSelection(strID)
@@ -1578,9 +1529,9 @@
 				}
 			}
 
-			function doClickScrollButton()
+			function doClickScrollButton(strID)
 			{
-				var ButtonScroll = getElement("serial_mon_scroll");
+				var ButtonScroll = getElement(strID);
 				
 				g_bScrollButton = !g_bScrollButton;
 				
@@ -1601,7 +1552,7 @@
 						ButtonScroll.style.borderBottomColor = "#004448";
 					}
 				}
-				SerialMonitor.setAutoScroll(g_bScrollButton);
+				g_SerialMonitor.setAutoScroll(g_bScrollButton);
 			}
 		
 			//*************************************************************************
@@ -1630,6 +1581,7 @@
 			doDrawCanvasGrid(g_CanvasContext, g_Canvas.offsetWidth, g_Canvas.offsetHeight);
 			doDrawCanvasGrid(g_BlankCanvasCloneContext, g_BlankCanvasClone.offsetWidth, g_BlankCanvasClone.offsetHeight);
 			doScrollToMiddle();
+			doCreateMCU(g_strSelectedMCUType);
 
 		</script>
 		

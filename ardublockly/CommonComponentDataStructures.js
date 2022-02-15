@@ -9,7 +9,136 @@ var INPUT = "INPUT", INPUT_HIGH = "INPUT_HIGH", OUTPUT = "OUTPUT", HIGH = "HIGH"
 var g_strErrorMessage = "ERROR: ";
 var g_BUILT_IN_LED = 13;
 var g_nMCUCount = 0;
-var g_strSelectedComponentName = "";
+var g_strSelectedComponentName = "", g_strMCUName = "";
+
+function doCreateComponent(strComponentType)
+{
+	var strComponentName = doGetUniqueName(strComponentType);
+	var Component = null;
+
+	if (strComponentType == "UNO")
+	{
+		if (g_nMCUCount == 0)
+		{
+			Component = new CArduinoUno();
+			g_nMCUCount++;
+		}
+		else
+			doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
+	}
+	else if (strComponentType == "MEGA")
+	{
+		if (g_nMCUCount == 0)
+		{
+			Component = new CArduinoMega();
+			g_nMCUCount++;
+		}
+		else
+			doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
+	}
+	else if (strComponentType == "MICROBIT")
+	{
+		if (g_nMCUCount == 0)
+		{
+			Component = new CMicrobit();
+			g_nMCUCount++;
+		}
+		else
+			doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
+	}
+	else if (strComponentType == "MICROBIT_BREAKOUT")
+	{
+		if (g_nMCUCount == 0)
+		{
+			Component = new CMicrobit(true);
+			g_nMCUCount++;
+		}
+		else
+			doErrorMessage(g_strErrorMessage + " only one MCU is permitted!");
+	}
+	else if (strComponentType == "LED")
+		Component = new CLED();
+	else if (strComponentType == "RESISTOR")
+		Component = new CResistor();
+	else
+		alert(strComponentType);
+		
+	// *******************************
+	// *******************************
+	// *******************************
+	// TO DO
+	// *******************************
+	// *******************************
+	// *******************************
+	
+	if (Component != null)
+	{
+		Component.setDeviceName(strComponentName);
+		Component.doSelect();
+		g_mapPlacedComponents.set(strComponentName, Component);
+	}
+	return Component;
+}
+
+function doGetUniqueName(strName)
+{
+	var strFind = "";
+	
+	for (let nI = 1; nI <= 1000; nI++)
+	{
+		strFind = strName + nI;
+		if (!g_mapPlacedComponents.has(strFind))
+		{
+			break;
+		}
+	}
+	return strFind;
+}
+
+function doCreateMCU(strMCUType)
+{
+	var Component = doCreateComponent(strMCUType);
+	var strMCUName = Component.getDeviceName();
+	g_mapPlacedComponents.set(strMCUName, Component);
+	doDisplayAllComponents();
+}
+
+function doShowEditFields(strHTMLEditField)
+{
+	var ComponentEdit = document.getElementById("component_edit");
+	
+	if (ComponentEdit != null)
+	{
+		ComponentEdit.innerHTML = strHTMLEditField;
+	}
+}
+
+function doErrorMessage(strErrorMessage)
+{
+	doDisplayInfo(strErrorMessage);
+}
+
+function doDisplayInfo(strMessage)
+{
+	var LargeMessageDiv = document.getElementById("large_message_area");
+	
+	if (LargeMessageDiv != null)
+	{
+		LargeMessageDiv.innerHTML = strMessage;
+	}
+}
+
+function doDisplayHint(strHeading, strInfo)
+{
+	var Info = getElement("info");
+	var InfoHeading = getElement("info_heading");
+
+	if (Info && InfoHeading)
+	{
+		InfoHeading.innerText = strHeading;
+		Info.innerText = strInfo;
+	}
+}
 
 
 
@@ -20,16 +149,37 @@ var g_strSelectedComponentName = "";
 //*
 //*************************************************************************
 
-function doFindSelectedComponent(pointMousePos)
+function doZoomAllDrawingObjects(strInOut)
 {
-	var arrayComponentName = [];
+	var arrayDeviceName = [];
 	var strDeviceName = "", strSelectedDeviceName = "";
 	
-	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayComponentName.push(strKey)});
+	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
 	
-	for (let nI = 0; nI < arrayComponentName.length; nI++)
+	for (let nI = 0; nI < arrayDeviceName.length; nI++)
 	{
-		strDeviceName = arrayComponentName[nI];
+		strDeviceName = arrayDeviceName[nI];
+		if (strInOut == "+")
+			g_mapPlacedComponents.get(strDeviceName).doZoomIn();
+		else if (strInOut == "-")
+			g_mapPlacedComponents.get(strDeviceName).doZoomOut();
+		else if (strInOut == "100")
+			g_mapPlacedComponents.get(strDeviceName).doDefaultZoom();
+		g_mapPlacedComponents.get(strDeviceName).doRotate(0);
+	}
+	doDisplayAllComponents();
+}
+
+function doFindSelectedComponent(pointMousePos)
+{
+	var arrayDeviceName = [];
+	var strDeviceName = "", strSelectedDeviceName = "";
+	
+	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
+	
+	for (let nI = 0; nI < arrayDeviceName.length; nI++)
+	{
+		strDeviceName = arrayDeviceName[nI];
 		if (g_mapPlacedComponents.get(strDeviceName).isMouseIn(pointMousePos))
 		{
 			strSelectedDeviceName = strDeviceName;
@@ -41,14 +191,14 @@ function doFindSelectedComponent(pointMousePos)
 
 function doFindSelectedComponentNoMouse()
 {
-	var arrayComponentName = [];
+	var arrayDeviceName = [];
 	var strDeviceName = "", strSelectedDeviceName = "";
 	
-	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayComponentName.push(strKey)});
+	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
 	
-	for (let nI = 0; nI < arrayComponentName.length; nI++)
+	for (let nI = 0; nI < arrayDeviceName.length; nI++)
 	{
-		strDeviceName = arrayComponentName[nI];
+		strDeviceName = arrayDeviceName[nI];
 		if (g_mapPlacedComponents.get(strDeviceName).isSelected())
 		{
 			strSelectedDeviceName = strDeviceName;
@@ -60,122 +210,51 @@ function doFindSelectedComponentNoMouse()
 
 function doUnselectAllComponents()
 {
-	var arrayComponentName = [];
+	var arrayDeviceName = [];
 	var strDeviceName = "";
 	
-	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayComponentName.push(strKey)});
+	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
 	
-	for (let nI = 0; nI < arrayComponentName.length; nI++)
+	for (let nI = 0; nI < arrayDeviceName.length; nI++)
 	{
-		strDeviceName = arrayComponentName[nI];
+		strDeviceName = arrayDeviceName[nI];
 		g_mapPlacedComponents.get(strDeviceName).doUnselect();
 	}
 }
 
 function doDisplayAllComponents()
 {
-	var arrayComponentName = [];
+	var arrayDeviceName = [];
 	var strDeviceName = "";
 	
-	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayComponentName.push(strKey)});
+	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
 	
 	doEraseCanvas();
-	for (let nI = 0; nI < arrayComponentName.length; nI++)
+	for (let nI = 0; nI < arrayDeviceName.length; nI++)
 	{
-		strDeviceName = arrayComponentName[nI];
+		strDeviceName = arrayDeviceName[nI];
 		g_mapPlacedComponents.get(strDeviceName).doDisplay();
 	}
 }
 
 function doMouseOverAllComponents(pointMousePos)
 {
-	var arrayComponentName = [];
+	var arrayDeviceName = [];
 	var strDeviceName = "";
 	var nI = 0;
 	
-	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayComponentName.push(strKey)});
+	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
+	g_Canvas.style.cursor = "default";
 	
-	for (nI = 0; nI < arrayComponentName.length; nI++)
+	for (nI = 0; nI < arrayDeviceName.length; nI++)
 	{
-		strDeviceName = arrayComponentName[nI];
+		strDeviceName = arrayDeviceName[nI];
 		if (g_mapPlacedComponents.get(strDeviceName).doMouseOver(pointMousePos))
 			break;
 	}
 }
 
 
-
-
-//*************************************************************************
-//*
-//* CONNECTED COMPONENT DETAILS
-//*
-//*************************************************************************
-
-class CConnectedComponent
-{
-	constructor(strComponentName, strPinID)
-	{
-		this.m_strComponentName = strComponentName;
-		this.m_strPinID = strPinID;
-	}
-	
-	getComponentName()
-	{
-		return this.m_strComponentName;
-	}
-	
-	getPinID()
-	{
-		return this.m_strPinID;
-	}
-	
-}
-
-
-
-
-//*************************************************************************
-//*
-//* CONNECTED COMPONENT ARRAY
-//*
-//*************************************************************************
-
-class CConnectedComponentArray
-{
-	constructor(strParentComponent)
-	{
-		this.m_arrayConnectedComponents = [];
-		this.m_strParentComponent = strParentComponent;
-	}
-	
-	getLength()
-	{
-		return this.m_arrayConnectedComponents.length;
-	}
-	
-	add(strComponentName, strPinID)
-	{
-		var ConnectedComponent = new CConnectedComponent(strComponentName, strPinID);
-		this.m_arrayConnectedComponents.push(ConnectedComponent);
-	}
-	
-	get(nIndex)
-	{
-		var ConnectedComponent = null;
-		
-		if ((nIndex >= 0) && (nIndex < this.m_arrayConnectedComponents.lengthdi))
-		if ((nIndex >= 0) && (nIndex < this.m_arrayConnectedComponents.length))
-		{
-			ConnectedComponent = this.m_arrayConnectedComponents[nIndex];
-		}
-		else
-		{
-			doErrorMessage(g_strErrorMessage + "index '" + nIndex + "' for '" + this.m_strParentComponent + " pin array is invalid for length '" + getLength() + "'!");
-		}
-		return ConnectedComponent;
-	}
-}
 
 
 
@@ -201,7 +280,7 @@ var g_strSecondDivDisplayStyle = "display:inline-block;height:100%;vertical-alig
 //*************************************************************************
 
 //var g_strRename = "<div style=\"" + g_strLabelStyle + "\">NEW NAME</div><div><input id=\"TextRenameMCU\" maxlength=\"16\" type=\"text\" style=\"" + g_strTextStyle + "\" />&nbsp;<input id=\"ButtonRenameMCU\" type=\"button\" value=\"RENAME\" style=\"" + g_strButtonStyle + "\" onclick=\"doRename(document.getElementById('TextRenameMCU').value)\"/></div>";
-var g_strRename = "<div style=\"display:inline-block;\"><div style=\"" + g_strLabelStyle + "\">NEW NAME&nbsp;</div><div style=\"display:inline-block;\"><input value=\"XXXX\" id=\"TextRenameMCU\" maxlength=\"16\" type=\"text\" style=\"" + g_strTextStyle + "\" />&nbsp;<input id=\"ButtonRenameMCU\" type=\"button\" value=\"RENAME\" style=\"" + g_strButtonStyle + "\" onclick=\"doRename(document.getElementById('TextRenameMCU').value)\"/></div></div>";
+var g_strRename = "<div style=\"display:inline-block;\"><div style=\"" + g_strLabelStyle + "\">NEW NAME&nbsp;</div><div style=\"display:inline-block;\"><input value=\"XXXX\" id=\"TextRenameMCU\" maxlength=\"16\" type=\"text\" style=\"" + g_strTextStyle + "\" />&nbsp;<input id=\"ButtonRenameMCU\" type=\"button\" value=\"RENAME\" style=\"" + g_strButtonStyle + "position:relative;top:2Px;\" onclick=\"doRename(document.getElementById('TextRenameMCU').value)\"/></div></div>";
 
 
 
@@ -225,6 +304,7 @@ function doRename(strNewName)
 
 
 
+
 class CComponentBase
 {
 	constructor(strType)
@@ -233,16 +313,62 @@ class CComponentBase
 		this.m_ImageObject90 = null;
 		this.m_ImageObject180 = null;
 		this.m_ImageObject270 = null;
-		this.m_arrayPins = new CPinArray();
+		this.m_arrayPins = [];
 		this.m_strDeviceName = "";
 		this.m_rectangle = new CRectangle(new CPoint(g_pointCanvasScrollPos.m_nX + 50, g_pointCanvasScrollPos.m_nY + 50), new CSize(0, 0));
-		this.m_fScale = 1;
+		this.m_fScale = this.m_fDefaultScale = 1;
 		this.m_nRotationAngle = 0;
 		this.m_bSelected = false;
 		this.m_pointLastMousePos = new CPoint(0, 0);
 		this.m_strEditHTML = "";
 		this.m_strType = strType;
 		this.m_strEditHTML = g_strRename;
+		this.m_nZoom = 0;
+	}
+
+	getZoom()
+	{
+		return this.m_nZoom;
+	}
+	
+	getZoomScaledValue(nValue)
+	{
+		return (this.m_fDefaultScale / this.m_fScale) * nValue;
+	}
+	
+	doDefaultZoom()
+	{
+		this.m_fScale = this.m_fDefaultScale;
+		this.m_nZoom = 1;
+	}
+	
+	doZoomIn()
+	{
+		if (this.m_nZoom < 10)
+		{
+			this.m_nZoom++;
+			this.m_fScale -= 0.1;
+		}
+	}
+	
+	doZoomOut()
+	{
+		if (this.m_nZoom > -10)
+		{
+			this.m_nZoom--;
+			this.m_fScale += 0.1;
+		}
+	}
+	
+	doAddPin(Pin)
+	{
+		this.m_arrayPins[this.m_arrayPins.length] = Pin;
+	}
+	
+	doSetPinPos(nIndex, pointPos, sizeDimen)
+	{
+		if ((nIndex >= 0) && (nIndex < this.m_arrayPins.length))
+			this.m_arrayPins[nIndex].set(pointPos, sizeDimen);
 	}
 	
 	doWrite()
@@ -263,11 +389,6 @@ class CComponentBase
 		return this.m_strType;
 	}
 	
-	isMCU()
-	{
-		return this.m_strType == "MCU";
-	}
-	
 	doRotate(nAddAngle)
 	{
 		this.m_nRotationAngle += nAddAngle;
@@ -276,7 +397,7 @@ class CComponentBase
 			this.m_nRotationAngle -= 360;
 		else if (this.m_nRotationAngle < 0)
 			this.m_nRotationAngle += 360;
-		
+
 		if (this.m_nRotationAngle == 0)
 		{
 			this.m_rectangle.m_size.m_nWidth = this.m_ImageObject0.naturalWidth / this.m_fScale;
@@ -297,8 +418,9 @@ class CComponentBase
 			this.m_rectangle.m_size.m_nWidth = this.m_ImageObject270.naturalWidth / this.m_fScale;
 			this.m_rectangle.m_size.m_nHeight = this.m_ImageObject270.naturalHeight / this.m_fScale;
 		}
+		this.doSetPinPositions();
 	}
-	
+
 	static doGetImageObject(strImageFileName)
 	{
 		var ImageObject = new Image();
@@ -308,7 +430,7 @@ class CComponentBase
 		
 		return ImageObject;
 	}
-	
+
 	setDeviceName(strDeviceName)
 	{
 		this.m_strDeviceName = strDeviceName;
@@ -338,6 +460,16 @@ class CComponentBase
 		this.m_bSelected = false;
 	}
 	
+	doDelete()
+	{
+	}
+	
+	doDeleteWire(strWireName)
+	{
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+			this.m_arrayPins[nI].doDeleteWire(strWireName);
+	}
+
 	doDrawBorder()
 	{
 		g_CanvasContext.beginPath();
@@ -352,6 +484,12 @@ class CComponentBase
 		g_CanvasContext.font = "bold 20px Arial"; 
 		g_CanvasContext.fillStyle = "#000000";	
 		g_CanvasContext.fillText(this.m_strDeviceName, this.m_rectangle.m_pointTL.m_nX, this.m_rectangle.m_pointTL.m_nY - 2);
+	}
+	
+	doDisplayPins()
+	{
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+			this.m_arrayPins[nI].doDisplay();
 	}
 	
 	doDisplay()
@@ -369,7 +507,7 @@ class CComponentBase
 			this.doDrawBorder();
 		
 		this.doDisplayName();
-		this.m_arrayPins.doDisplay();
+		this.doDisplayPins();
 	}
 	
 	doGrab(pointMousePos)
@@ -385,8 +523,13 @@ class CComponentBase
 		this.m_rectangle.m_pointTL.m_nX = pointMousePos.m_nX;
 		this.m_rectangle.m_pointTL.m_nY = pointMousePos.m_nY;
 		this.m_bSelected = true;
+		this.doSetPinPositions();
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+		{
+			this.m_arrayPins[nI].doConnectedMove(this.m_strDeviceName);
+		}
 	}
-	
+
 	hasMouseMoved(pointMousePos)
 	{
 		var bResult = (pointMousePos.m_nX != this.m_pointLastMousePos.m_nX) || (pointMousePos.m_nY != this.m_pointLastMousePos.m_nY);
@@ -410,28 +553,24 @@ class CComponentBase
 	doMouseOver(pointMousePos)
 	{	
 		var bResult = false;
+		var OldCursor = g_Canvas.style.cursor;
 		
 		if (this.isMouseIn(pointMousePos))
-			g_Canvas.style.cursor = "pointer";
-		else
-			g_Canvas.style.cursor = "default";
-
-		if (this.isMouseIn(pointMousePos))
 		{
+			g_Canvas.style.cursor = "pointer";
 			bResult = true;
-			for (var nI = 0; nI < this.m_arrayPins.getLength(); nI++)
+			
+			for (var nI = 0; nI < this.m_arrayPins.length; nI++)
 			{
-				if (this.m_arrayPins.get(nI).doMouseOver(pointMousePos))
-				{
+				if (this.m_arrayPins[nI].doMouseOver(pointMousePos))
 					break;
-				}
 			}
-			if (nI >= this.m_arrayPins.getLength())
+			if (nI >= this.m_arrayPins.length)
 				this.doDisplay();
 		}
 		else
 		{
-			doShowInfo("", "");
+			doDisplayHint("", "");
 			doDisplayAllComponents();
 		}
 		return bResult;
@@ -441,14 +580,84 @@ class CComponentBase
 	{	
 		return this.m_rectangle.isMouseIn(pointMousePos);
 	}
-
-	doDeleteAllConnections()
+	
+	isMouseInPin(pointMousePos)
 	{
-		this.m_arrayPins.doDeleteAllConnections();
+		var nPinNum = -1;
+		
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+		{
+			if (this.m_arrayPins[nI].canAcceptConection() && this.m_arrayPins[nI].isMouseIn(pointMousePos))
+			{
+				nPinNum = nI;
+				break;
+			}
+		}
+		return nPinNum;
 	}
 	
-	doDeleteConnection(strPinID)
+	getPinID(nPinNum)
 	{
+		var strPindID = "";
+		
+		if ((nPinNum >= 0) && (nPinNum < this.m_arrayPins.length))
+		{
+			strPindID = this.m_arrayPins[nPinNum].getPinID();
+		}
+		return strPindID;
+	}
+	
+	getPinPos(strPinID)
+	{
+		var point = new CPoint(0, 0);
+		
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+		{
+			if (this.m_arrayPins[nI].getPinID() == strPinID)
+			{
+				point = this.m_arrayPins[nI].getPosition();
+			}
+		}
+		return point;
+	}
+	
+	getPinState(strPinID)
+	{
+		var nState = LOW;
+		
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+		{
+			if (this.m_arrayPins[nI].getPinID() == strPinID)
+			{
+				nState = this.m_arrayPins[nI].getState();
+			}
+		}
+		return nState;
+	}
+	
+	setWire(strPinID, strWireName)
+	{
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+		{
+			if (this.m_arrayPins[nI].getPinID() == strPinID)
+			{
+				this.m_arrayPins[nI].setWire(strWireName);
+			}
+		}
+	}
+
+	doRun()
+	{
+	}
+	
+	getVoltage()
+	{
+		return 0;
+	}
+	
+	getResistance()
+	{
+		return 0;
 	}
 	
 }
@@ -468,9 +677,27 @@ class CMCUBase extends CComponentBase
 	{
 		super("MCU");
 		this.m_mapAnalogPins = new Map();
-		this.m_arrayPins = new CPinArray();
 		this.m_nMaxPin = 0;
 		this.m_strMCUType = strType;
+		this.m_fVoltage = 0;
+	}
+	
+	getVoltage(strDeviceName, strPinID)
+	{
+		var fVoltage = 0;
+		
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+		{
+			if (strPinID == this.m_arrayPins[nI].getPinID())
+			{
+				if (this.m_arrayPins[nI].getState() == HIGH)
+					fVoltage = this.m_fVoltage;
+				else
+					fVoltage = 0;
+				break;
+			}
+		}
+		return fVoltage;
 	}
 	
 	doWrite()
@@ -483,7 +710,8 @@ class CMCUBase extends CComponentBase
 	setDeviceName(strDeviceName)
 	{
 		super.setDeviceName(strDeviceName);
-		this.m_arrayPins.setDeviceName(strDeviceName);
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+			this.m_arrayPins[nI].doSetDeviceName(strDeviceName);
 	}
 
 	getImageFileName()
@@ -567,15 +795,46 @@ class CMCUBase extends CComponentBase
 	{
 		super.doDisplay();
 	}
-
-	doDeleteAllConnections()
-	{
-		super.doDeleteAllConnections();
-	}
 	
 	doRotate(nAngleAdd)
 	{
 		super.doRotate(nAngleAdd);
 	}
 }
+
+
+
+
+//*************************************************************************
+//*
+//* DELAY CLASSES
+//*
+//*************************************************************************
+
+class CDelay
+{
+	constructor(nMillisDelay)
+	{
+		this.set(nMillisDelay);
+	}
+	
+	set(nMillisDelay)
+	{
+		this.m_timeStart = performance.now();
+		this.m_millisDelay = nMillisDelay;
+		console.log("%%%%%" + this.m_timeStart + ", " + this.m_millisDelay + "%%%%%");
+	}
+	
+	isExpired()
+	{
+		var bResult = false;
+		var timeNow = performance.now();
+		
+		if ((timeNow - this.m_timeStart) >= this.m_millisDelay)
+			bResult = true;
+
+		return bResult;
+	}
+}
+
 

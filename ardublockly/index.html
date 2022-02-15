@@ -63,8 +63,11 @@
 	{
 		var strCode = document.getElementById('content_arduino').innerText
 		var SimulateForm = document.getElementById("SimulateForm");
-		var Hidden = document.getElementById("Code");
-		Hidden.value = strCode;
+		var HiddenCode = document.getElementById("Code");
+		var HiddenSelectedBoard = document.getElementById("SelectedBoard");
+		var BoardSelect = document.getElementById("board");
+		HiddenCode.value = strCode;
+		HiddenSelectedBoard.value = BoardSelect.options[BoardSelect.selectedIndex].value;
 		SimulateForm.submit();
 	}
   </script>
@@ -92,6 +95,7 @@
 					style="font-size:17Px;background-color: #00979C;padding: 10px 25px;border-radius: 10px;border-left: 2px solid #20B7BC;border-top: 2px solid #20B7BC;border-bottom: 2px solid #00777C;border-right: 2px solid #00777C;" 
 					onclick="doSubmitClicked()" value="Simulate" />
 				<input name="Code" id="Code" type="hidden" value="Code" />
+				<input name="SelectedBoard" id="SelectedBoard" type="hidden" value="" />
 			</form>
 		</span></li>
         <li><a href="#" id="button_load"><span class="translatable_open">Open</span><i class="mdi-file-file-upload left"></i></a></li>

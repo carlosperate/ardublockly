@@ -12,6 +12,7 @@ class CSerialMonitor
 		this.m_nBeginBaudRate = 0;
 		this.m_strTextWaiting = "";
 		this.m_bAutoScroll = true;
+		this.m_bIsOpen = false;
 	}
 	
 	begin(nBaudRate)
@@ -19,23 +20,42 @@ class CSerialMonitor
 		this.m_nBeginBaudRate = nBaudRate;
 	}
 	
+	setOpen()
+	{
+		this.m_bIsOpen = true;
+	}
+	
+	setClose()
+	{
+		this.m_bIsOpen = false;
+	}
+	
 	select(nBaudRate)
 	{
 		this.m_nSelectedBaudRate = nBaudRate;
+	}
+	
+	doBaudRatesMatch()
+	{
+		var bMatch = false;
+		
+		if (this.m_nSelectedBaudRate != this.m_nBeginBaudRate)
+			doErrorMessage("Selected baud rate (" + this.m_nSelectedBaudRate + ") and programatic baud rate (" + this.m_nBeginBaudRate + ") do not match!")
+		else
+			bMatch = true;
+		
+		return bMatch;
 	}
 	
 	setTextWaiting(strTextWaiting)
 	{
 		var bResult = false;
 		
-		if ((this.m_nSelectedBaudRate > 0) && (this.m_nBeginBaudRate > 0) && (this.m_nSelectedBaudRate == this.m_nBeginBaudRate))
+		if (this.doBaudRatesMatch())
 		{
 			this.m_strTextWaiting = strTextWaiting;
 			bResult = true;
-		}
-		else
-			doErrorMessage(g_strErrorMessage + "begin(...) and selected baud rates don't match!");
-			
+		}			
 		return bResult;
 	}
 	
@@ -44,33 +64,35 @@ class CSerialMonitor
 		var bResult = false;
 		var SerialMonitorDiv = getElement("content_serial_monitor");
 		
-		if (SerialMonitorDiv != null)
+		if ((SerialMonitorDiv != null) && this.m_bIsOpen)
 		{
-			if ((this.m_nSelectedBaudRate > 0) && (this.m_nBeginBaudRate > 0) && (this.m_nSelectedBaudRate == this.m_nBeginBaudRate))
+			if (this.doBaudRatesMatch())
 			{
-				if (SerialMonitorDiv.innerText.length > 1000)
+				if ((strText[0] == "\"") || (strText[0] == "'"))
+					strText = strText.substring(1, strText.length - 1);
+				
+				if (SerialMonitorDiv.innerText.length > 10000)
 					SerialMonitorDiv.innerText = strText;
 				else
 					SerialMonitorDiv.innerText += strText;
 				
-				if (this.m_bAutoScroll)
-					SerialMonitorDiv.scrollTop = 10000;
-				else
+				if (!this.m_bAutoScroll)
 					SerialMonitorDiv.scrollTop = 0;
+				else 
+					SerialMonitorDiv.scrollTop = SerialMonitorDiv.scrollHeight;
+				
 				bResult = true;
 			}
-			else
-				doErrorMessage(g_strErrorMessage + "begin(...) and selected baud rates don't match!");
 		}
 		return bResult;
 	}
 	
 	printlnText(strText)
 	{
-		var bResult = printText(strText);
+		var bResult = this.printText(strText);
 		
 		if (bResult)
-			printText("\n");
+			this.printText("\n");
 		
 		return bResult;
 	}
@@ -88,7 +110,7 @@ class CSerialMonitor
 		else if (strBase == "BIN")
 			strText = nVal.toString(2);
 
-		return print(strText);
+		return this.print(strText);
 	}
 	
 	printlnInt(nVal, strBase)
@@ -115,6 +137,17 @@ class CSerialMonitor
 //*************************************************************************
 
 var g_SerialMonitor = new CSerialMonitor();
+
+function setSerialMonitorBaudRate()
+{
+	var SelectBaudRate = document.getElementById("Baud");
+	SelectBaudRate.selectedIndex = 12;
+	var nBaud = SelectBaudRate.options[SelectBaudRate.selectedIndex].value;
+	
+	g_SerialMonitor.select(nBaud);
+}
+
+setSerialMonitorBaudRate();
 
 
 

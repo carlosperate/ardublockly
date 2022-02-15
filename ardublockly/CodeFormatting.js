@@ -4,143 +4,57 @@
 //*
 //*************************************************************************
 
-function doGetCode(strNewLine, strSpace)
+function doProcessGetData(strNewLine, strSpace)
 {
-	var g_strCode = window.location.search;
-
+	var strGetData = window.location.search;
 	var arrayASCII = [["%21", "!"], ["%22", "\""], ["%23", "#"], ["%24", "$"], ["%25", "%"], ["%26", "&"], ["%27", "'"], ["%28", "("],
 					  ["%29", ")"], ["%2A", "*"], ["%2B", "+"], ["%2C", ","], ["%2D", "-"], ["%2E", "."], ["%2F", "/"], ["%3A", ":"],
 					  ["%3B", ";"], ["%3C", "<"], ["%3D", "="], ["%3E", ">"], ["%3F", "?"], ["%40", "@"], ["%5B", "["], ["%5C", "\\"],
 					  ["%5D", "]"], ["%5E", "^"], ["%5F", "_"], ["%60", "`"], ["%7B", "{"], ["%7C", "|"], [ "%7D", "}"], ["%7E", "~"]];			
-	
-	g_strCode = g_strCode.substring(6);
+		
+	strGetData = strGetData.substring(1);
 	
 	// void+setup%28%29%0D%0A%7B%0D%0A%7D%0D%0A%0D%0A%0D%0Avoid+loop%28%29%0D%0A%7B%0D%0A++if+%28false%29%0D%0A++%7B%0D%0A++%7D%0D%0A%7D
-	while (g_strCode.includes("%0D%0A"))
-		g_strCode = g_strCode.replace("%0D%0A", strNewLine);
+	while (strGetData.includes("%0D%0A"))
+		strGetData = strGetData.replace("%0D%0A", strNewLine);
 		
-	while (g_strCode.includes("+"))
-		g_strCode = g_strCode.replace("+", strSpace);
+	while (strGetData.includes("+"))
+		strGetData = strGetData.replace("+", strSpace);
 		
 	for (let nI = 0; nI < arrayASCII.length; nI++)
 	{
-		while (g_strCode.includes(arrayASCII[nI][0]))
-			g_strCode = g_strCode.replace(arrayASCII[nI][0], arrayASCII[nI][1]);
-	}
-	g_strCode = "/*\n" + 
-			  "ReadAnalogVoltage\n" + 
-			  "\n" +
-			  "Reads an analog input on pin 0, converts it to voltage, and prints the result to the Serial Monitor.\n" +
-			  "Graphical representation is available using Serial Plotter (Tools > Serial Plotter menu).\n" + 
-			  "Attach the center pin of a potentiometer to pin A0, and the outside pins to +5V and ground.\n" + 
-			  "\n" + 
-			  "This example code is in the public domain.\n" + 
-			  "\n" + 
-			  "https://www.arduino.cc/en/Tutorial/BuiltInExamples/ReadAnalogVoltage\n" + 
-			  "*\/\n" + 
-			  "\n" + 
+		while (strGetData.includes(arrayASCII[nI][0]))
+			strGetData = strGetData.replace(arrayASCII[nI][0], arrayASCII[nI][1]);
+	}	
+	return strGetData;
+}
 
-			  "int sensorValue = 0;\n" +
-			  "float voltage = 0.0;\n" +
-
-			 "// the setup routine runs once when you press reset:\n" + 
-			 
-			 "void setup() {\n" + 
-			 "// initialize serial communication at 9600 bits per second:\n" + 
-			 "Serial.begin(9600);\n" +
-			 "}\n" + 
-			 "\n" + 
-			 "// the loop routine runs over and over again forever:\n" + 
-
-			 "void loop() {\n" + 
-
-			  "// read the input on analog pin 0:\n" + 
-			  "sensorValue = analogRead(A0);\n" + 
-			  "sensorValue = analogRead(A0) + !analogRead(A0) + analogRead(A0);\n" + 
-			  "sensorValue = ((sensorValue >= 'A') && (sensorValue >= 'Z')) || ((sensorValue >= 'a') && (sensorValue >= 'z'));\n" + 
-			  "sensorValue = (sensorValue >= 0) && (sensorValue >= 10) || (sensorValue >= 20) && (sensorValue >= 30);\n" + 
-
-			  "while (sensorValue > 0)\n" + 
-			  "{\n" + 
-			  "sensorValue--;\n" + 
-			  "sensorValue = sensorValue + 1;\n" + 
-			  "}\n" + 
-
-			  "while (sensorValue > 0)\n" + 
-			  "{\n" + 
-			  "sensorValue--;\n" + 
-			  "}\n" + 
-
-			  "repeat\n" + 
-			  "{\n" + 
-			  "sensorValue--;\n" + 
-			  "sensorValue = sensorValue + 1;\n" + 
-			  "}\n" + 
-			  "until (sensorValue > 0);\n" + 
-
-			  "repeat\n" + 
-			  "{\n" + 
-			  "sensorValue--;\n" + 
-			  "}\n" + 
-			  "until (sensorValue > 0);\n" + 
-
-			  "if (sensorValue > 0\n" + 
-			  "{\n" + 
-			  "sensorValue--;\n" + 
-			  "}\n" + 
-
-			  "if (sensorValue > 0)\n" + 
-			  "{\n" + 
-			  "sensorValue--;\n" + 
-			  "}\n" + 
-			  "else if (sensorValue == 0)\n" + 
-			  "{\n" + 
-			  "sensorValue++;\n" + 
-			  "}\n" + 
-
-			  "if (sensorValue > 0)\n" + 
-			  "{\n" + 
-			  "sensorValue--;\n" + 
-			  "}\n" + 
-			  "else if (sensorValue == 0)\n" + 
-			  "{\n" + 
-			  "sensorValue++;\n" + 
-			  "}\n" + 
-			  "else\n" + 
-			  "{\n" + 
-			  "sensorValue = 0;\n" + 
-			  "}\n" + 
-
-			  "switch (sensorValue)\n" + 
-			  "{\n" + 
-			  "case 0:\n" + 
-			  "{\n" + 
-			  "sensorValue = 0;\n" + 
-			  "break;\n" + 
-			  "}\n" + 
-			  "case 1:\n" + 
-			  "{\n" + 
-			  "sensorValue = 1;\n" + 
-			  "break;\n" + 
-			  "}\n" + 
-			  "default:\n" + 
-			  "{\n" + 
-			  "sensorValue = -1;\n" + 
-			  "break;\n" + 
-			  "}\n" +
-			  "}\n" + 
-
-			  "// Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V):\n" + 
-			  "voltage = sensorValue * (5.0 / 1023.0);\n" + 
-			  "// print out the value you read:\n" + 
-			  "Serial.println(voltage);\n" + 
-
-			  "}\n";
+function doGetCode(strGetData)
+{
+	var nIndexCode = strGetData.indexOf("Code"),
+		nIndexBoard = strGetData.indexOf("SelectedBoard");
+	var strCode = "";
 	
+	if (nIndexBoard > nIndexCode)
+		strCode = strGetData.substring(nIndexCode + 5, nIndexBoard - 1);
+	else
+		strCode = strGetData.substring(nIndexCode + 5);
 	
+	return strCode;
+}
+
+function doGetMCU(strGetData)
+{
+	var nIndexCode = strGetData.indexOf("Code"),
+		nIndexBoard = strGetData.indexOf("SelectedBoard");
+	var strBoard = "";
+
+	if (nIndexCode > nIndexBoard)
+		strBoard = strGetData.substring(nIndexBoard + 14, nIndexCode);
+	else
+		strBoard = strGetData.substring(nIndexBoard + 14);
 	
-	
-	return g_strCode;
+	return strBoard;
 }
 
 function doRemoveComments(strCode)
@@ -228,17 +142,29 @@ function doRemoveSpaces(strCode)
 	return strCodeTemp;
 }
 
-var	g_strRawCode = doGetCode("\n", " ");
+var g_strGetData = doProcessGetData("\n", " ");
+var	g_strRawCode = doGetCode(g_strGetData);
 var	g_strNoComments = doRemoveComments(g_strRawCode);
 var	g_strNoNewLines = doRemoveNewLines(g_strNoComments);
 var	g_strNoSpaces = doRemoveSpaces(g_strNoNewLines);
-var	g_strCode = g_strNoSpaces;
+g_strCode = g_strNoSpaces;
+var g_strSelectedMCUType = doGetMCU(g_strGetData);
 
-g_arrayTokens = doParse(g_strCode);
 /*
-alert("\n\n============================================\n\nRAW CODE\n\n" + g_strRawCode + 
-		"\n\n============================================\n\nCOMMENTS REMOVED\n\n" + g_strNoComments + 
-		"\n\n============================================\n\NEW LINES REMOVED\n\n" + g_strNoNewLines + 
-		"\n\n============================================\n\SPACES REMOVED\n\n" + g_strNoSpaces + 
-		"\n\n============================================\n\nRE-CREATED CODE\n\n" + doReproduceCode() + "\n\n");
+alert("\n\n============================================\n\nCODE\n\n" + g_strCode + 
+		"\n\n============================================\n\nMCU\n\n" + g_strSelectedMCUType + "\n\n");
 */
+g_strCode = "void setup(){" +  
+		 "Serial.begin(9600);" +
+		 "Serial.println(\"In setup()...\");" +
+		 "}" + 
+		 "void loop(){" + 
+		  "Serial.println(\"In loop()...\");" + 
+		  "delay(2000);" + 
+		  "}";
+g_strSelectedMCUType = "Mega";
+
+g_strSelectedMCUType = g_strSelectedMCUType.toUpperCase();
+doParse(g_strCode);
+
+

@@ -38,7 +38,7 @@ class CLED extends CComponentBase
 	static m_ImageObjectBlown180 = CComponentBase.doGetImageObject("img\\Components\\LEDs\\LED_BLOWN180.png");
 	static m_ImageObjectBlown270 = CComponentBase.doGetImageObject("img\\Components\\LEDs\\LED_BLOWN270.png");
 	
-	constructor(bBreakout)
+	constructor()
 	{
 		super("LED");		
 		this.m_bIsBlown = false;
@@ -48,14 +48,15 @@ class CLED extends CComponentBase
 		this.m_ImageObject90 = CLED.m_ImageObjectOff90;
 		this.m_ImageObject180 = CLED.m_ImageObjectOff180;
 		this.m_ImageObject270 = CLED.m_ImageObjectOff270;
-		this.m_fScale = 8.2;
-
-		this.m_arrayPins.add(new CPin(0, false, false, "anode", this.getDeviceName()));
-		this.m_arrayPins.add(new CPin(1, false, false, "cathode", this.getDeviceName()));
+		this.m_fScale = this.m_fDefaultScale = 8.2;
+		this.m_fLEDVoltage = 2.4;
+		
+		this.doAddPin(new CPin(0, false, false, "anode", this.getDeviceName()));
+		this.doAddPin(new CPin(1, false, false, "cathode", this.getDeviceName()));
 		this.doRotate(0);
 
 		this.m_strEditHTML += "&nbsp;&nbsp;<div style=\"" + g_strSecondDivDisplayStyle + "\" id=\"fix\"><input type=\"button\" style=\"" + 
-								g_strButtonStyle + "\" value=\"REPLACE\" onclick=\"doClick('YYYY')\"></div>";
+								g_strButtonStyle + "position:relative;top:6Px;\" value=\"REPLACE\" onclick=\"doClick('YYYY')\"></div>";
 	}
 
 	doWrite()
@@ -67,39 +68,27 @@ class CLED extends CComponentBase
 		return strFileContents;
 	}
 	
-	doRotate(nAngleAdd)
-	{
-		super.doRotate(nAngleAdd);
-		this.doSetPinPositions();
-	}
-	
-	doMove(pointMousePos)
-	{
-		super.doMove(pointMousePos);
-		this.doSetPinPositions();
-	}
-	
 	doSetPinPositions()
 	{
 		if (this.m_nRotationAngle == 0)
 		{
-			this.m_arrayPins.get(0).set(this.m_rectangle.m_pointTL, new CSize(13, 32));
-			this.m_arrayPins.get(1).set(this.m_rectangle.m_pointTL, new CSize(2, 32));
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(13, 32));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(2, 32));
 		}
 		else if (this.m_nRotationAngle == 90)
 		{
-			this.m_arrayPins.get(0).set(this.m_rectangle.m_pointTL, new CSize(2, 13));
-			this.m_arrayPins.get(1).set(this.m_rectangle.m_pointTL, new CSize(2, 2));
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(2, 13));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(2, 2));
 		}
 		else if (this.m_nRotationAngle == 180)
 		{
-			this.m_arrayPins.get(0).set(this.m_rectangle.m_pointTL, new CSize(2, 2));
-			this.m_arrayPins.get(1).set(this.m_rectangle.m_pointTL, new CSize(13, 2));
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(2, 2));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(13, 2));
 		}
 		else if (this.m_nRotationAngle == 270)
 		{
-			this.m_arrayPins.get(0).set(this.m_rectangle.m_pointTL, new CSize(32, 2));
-			this.m_arrayPins.get(1).set(this.m_rectangle.m_pointTL, new CSize(32, 13));
+			this.m_arrayPins[0].set(this.m_rectangle.m_pointTL, new CSize(32, 2));
+			this.m_arrayPins[1].set(this.m_rectangle.m_pointTL, new CSize(32, 13));
 		}
 	}
 	
@@ -152,6 +141,28 @@ class CLED extends CComponentBase
 	getBlown()
 	{
 		return this.m_bIsBlown;
+	}
+
+	doRun()
+	{
+		var fAnodeVoltage = this.m_arrayPins[0].getVoltage();
+		var fCathodVoltage = this.m_arrayPins[1].getVoltage();
+		var fAnodeResistance = 0;
+		var fCathodeResistance = 0;
+		var fCurrent = 0;
+		
+		if (!this.m_bIsBlown && ((fAnodeVoltage - fCathodVoltage) >= 2.4))
+		{
+			fAnodeResistance = this.m_arrayPins[0].getResistance();
+			fCathodeResistance = this.m_arrayPins[1].getResistance();
+			fCurrent = (fAnodeVoltage - this.m_fLEDVoltage)  / (fAnodeResistance + fCathodeResistance);
+			if (fCurrent > 0.035)
+				this.doBlown();
+			else if (fCurrent >= 0.01)
+				this.doTurnOn();
+			else
+				this.doTurnOff();
+		}
 	}
 }
 

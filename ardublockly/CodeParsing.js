@@ -70,27 +70,43 @@ function doGetNextToken(strExpecting)
 {
 	var strIdentifier = "", strTemp = "", strOrigCode = g_strCode;
 
-	while (isAlphaNumeric(g_strCode.charCodeAt(0)) || (g_strCode.charCodeAt(0) == 46/* . */))
+	if ((g_strCode[0] == "\"") || (g_strCode[0] == "'"))
 	{
+		strIdentifier = g_strCode[0];
+		g_strCode = g_strCode.substring(1);
+		
+		while ((g_strCode.charCodeAt(0) != 34/* " */) && (g_strCode.charCodeAt(0) != 39/* ' */))
+		{
+			strIdentifier += g_strCode[0];
+			g_strCode = g_strCode.substring(1);
+		}
 		strIdentifier += g_strCode[0];
 		g_strCode = g_strCode.substring(1);
 	}
-	g_strCode = g_strCode.trim();
-	if (strIdentifier == "else")
+	else
 	{
-		strTemp = g_strCode.substring(0, 2);
-		if (strTemp == "if")
+		while (isAlphaNumeric(g_strCode.charCodeAt(0)) || (g_strCode.charCodeAt(0) == 46/* . */))
 		{
-			strIdentifier += " " + strTemp;
-			g_strCode = g_strCode.substring(2);
+			strIdentifier += g_strCode[0];
+			g_strCode = g_strCode.substring(1);
 		}
-	}
-	g_strCode = g_strCode.trim();
+		g_strCode = g_strCode.trim();
+		if (strIdentifier == "else")
+		{
+			strTemp = g_strCode.substring(0, 2);
+			if (strTemp == "if")
+			{
+				strIdentifier += " " + strTemp;
+				g_strCode = g_strCode.substring(2);
+			}
+		}
+		g_strCode = g_strCode.trim();
 
-	if ((strExpecting != null) && !strIdentifier.includes(strExpecting))
-	{
-		g_strCode = strOrigCode;
-		strIdentifier = "";
+		if ((strExpecting != null) && !strIdentifier.includes(strExpecting))
+		{
+			g_strCode = strOrigCode;
+			strIdentifier = "";
+		}
 	}
 	return strIdentifier;
 }
@@ -447,6 +463,22 @@ function doGetArduinoFunctionParamType(strFuncName, nParamNum)
 		else
 			doErrorMessage("doGetArduinoFunctionParamType, parameter '" + nParamNum + "' not expected for function '" + strFuncName + "'!");
 	}
+	else if (strFuncName == "delay")
+	{
+		if (nParamNum == 0)
+			strType = "int";
+		else
+			doErrorMessage("doGetArduinoFunctionParamType, parameter '" + nParamNum + "' not expected for function '" + strFuncName + "'!");
+	}
+	else if (strFuncName == "pinMode")
+	{
+		if (nParamNum == 0)
+			strType = "int";
+		else if (nParamNum == 1)
+			strType = "int";
+		else
+			doErrorMessage("doGetArduinoFunctionParamType, parameter '" + nParamNum + "' not expected for function '" + strFuncName + "'!");
+	}
 	else
 	{
 		doErrorMessage("doGetArduinoFunctionParamType, no type available for function '" + strFuncName + "', parameter " + nParamNum + "!");
@@ -607,13 +639,12 @@ function doParseArduinoFunctionCall(strFuncName)
 				}
 				else // Must be a literal value
 				{
-					
 					strType = getLiteralType(strParam);
 					Variable = new CLiteral();
 					Variable.init(strType, strParam);
 				}
 				FuncCall.addParameter(Variable);
-			
+				
 				if (strLastCode == g_strCode)
 					strLastCode = doInfiniteLoopErrorMessage("doParseArduinoFunctionCall", g_strCode, strLastCode);
 			}
