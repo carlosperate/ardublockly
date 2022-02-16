@@ -16,6 +16,7 @@
   <script src="../blockly/blockly_compressed.js"></script>
   <script src="../blockly/blocks_compressed.js"></script>
   <script src="../blockly/arduino_compressed.js"></script>
+
   <!-- To use the uncompressed version comment out the above and comment in the ones below -->
   <!--script src="../blockly/blockly_uncompressed.js"></script>
   <script src="../blockly/blocks/logic.js"></script>
@@ -57,7 +58,21 @@
   <!-- Default language js files, user selection appended to head on load -->
   <script src="../blockly/msg/js/en.js"></script>
   <script src="msg/en.js"></script>
-</head>
+  <script>
+	function doSubmitClicked()
+	{
+		var strCode = document.getElementById('content_arduino').innerText
+		var SimulateForm = document.getElementById("SimulateForm");
+		var HiddenCode = document.getElementById("Code");
+		var HiddenSelectedBoard = document.getElementById("SelectedBoard");
+		var BoardSelect = document.getElementById("board");
+		HiddenCode.value = strCode;
+		HiddenSelectedBoard.value = BoardSelect.options[BoardSelect.selectedIndex].value;
+		SimulateForm.submit();
+	}
+  </script>
+
+  </head>
 
 <body>
   <!-- Horizontal Navigation bar -->
@@ -74,6 +89,15 @@
       </a>
       <!-- Horizontal Navbar links only shown on large resolutions -->
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><span>
+			<form method="get" target="_blank" name="SimulateForm" id="SimulateForm" action="Simulation.htm">
+				<input name="Simulate" tabindex="1" type="button" 
+					style="font-size:17Px;background-color: #00979C;padding: 10px 25px;border-radius: 10px;border-left: 2px solid #20B7BC;border-top: 2px solid #20B7BC;border-bottom: 2px solid #00777C;border-right: 2px solid #00777C;" 
+					onclick="doSubmitClicked()" value="Simulate" />
+				<input name="Code" id="Code" type="hidden" value="Code" />
+				<input name="SelectedBoard" id="SelectedBoard" type="hidden" value="" />
+			</form>
+		</span></li>
         <li><a href="#" id="button_load"><span class="translatable_open">Open</span><i class="mdi-file-file-upload left"></i></a></li>
         <li><a href="#" id="button_save"><span class="translatable_save">Save</span><i class="mdi-file-file-download left"></i></a></li>
         <li><a href="#" id="button_delete"><span class="translatable_deleteAll">Delete All</span><i class="mdi-action-delete left"></i></a></li>
@@ -302,11 +326,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_okay">Okay</span></a>
-    </div>
-  </div>
-
-  <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
+      <a id="gen_alert_ok_link" href="#" class="waves-effect btn-flat modal-close"><span class="translatable_okay">Oka  <!-- Desktop version of Ardublockly JS, needs to be loaded first. -->
   <script src="ardublockly_desktop.js"></script>
   <!-- jQuery and Materialize JS -->
   <script src="js_libs/jquery-2.1.3.min.js"></script>
@@ -330,5 +350,9 @@
       Ardublockly.init();
     });
   </script>
+y</span></a>
+    </div>
+  </div>
+
 </body>
 </html>

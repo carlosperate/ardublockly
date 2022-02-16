@@ -1,0 +1,1546 @@
+<!DOCTYPE HTML>
+<html>
+	
+	<head>
+  
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="theme-color" content="#00878F">
+		<link rel="icon" href="img/favicon.ico">
+		<title class="translatable_title">Ardublockly Simulator</title>
+
+		<!-- Materialize, Prettify, and Ardublockly CSS -->
+		<link rel="stylesheet" href="materialize/materialize.css" media="screen,projection">
+		<link rel="stylesheet" href="prettify/arduino.css">
+		<link rel="stylesheet" href="ardublockly.css" media="screen,projection">
+		
+		<style>
+		
+			.menu
+			{
+				background-color: teal;
+				height: 64Px;
+			}
+			
+			.menu_item
+			{
+				padding-left: 10Px;
+				display: inline-block;
+				color: white;
+			}
+
+			.menu_item_container
+			{
+				background-color: teal;
+				border-style: none;
+				border-width: 1Px;
+				border-color: black;
+				display: inline-block;
+				vertical-align: top;
+				width: 140Px;
+				font-size: 16Px;
+			}
+			
+			.clickable
+			{
+				cursor: pointer;
+			}
+			
+			.popup_menu
+			{
+				background-color: teal;
+				border-style: solid;
+				border-width: 1Px;
+				border-color: #006060;
+				display: none;
+				width: auto;
+				vertical-align: top;
+				width: 200Px;
+				overflow-y: serial_mon_scroll;
+				overflow-x: hidden;
+				height: 345Px;
+			}
+		
+			.popup_menu_item
+			{
+				background-color: teal;
+				border-style: solid;
+				border-width: 1Px;
+				border-color: #006060;
+				display: block;
+				padding-left: 5Px;
+				padding-right: 5Px;
+				height: auto;
+			}
+			
+			.popup_menu_item_text
+			{
+				display: inline;
+				border-style: none;
+				border-color: black;
+				border-width: 1Px;
+				height: auto;
+				position: relative;
+				top: -16Px;
+			}
+			
+			.popup_menu_item_image
+			{
+				display: block;
+				height: 80Px;
+				border-style: none;
+				border-color: black;
+				border-width: 1Px;
+				margin-left: auto;
+				margin-right: auto;
+				position: relative;
+			}
+			
+			.rotate
+			{
+				transform: rotate(90deg);
+			}
+						
+			.select_baud
+			{
+				display:inline;
+				width:110Px;
+				height:30Px;
+				color:black;
+				border-radius:5Px;
+				border-style:solid;
+				border-width:2Px;
+				border-bottom-color:#208488;
+				border-right-color:#208488;
+				border-top-color:#004448;
+				border-left-color:#004448;
+				font-size:14Px
+			}
+			
+			.select_line_ending
+			{
+				display:inline;
+				width:150Px;
+				height:30Px;
+				color:black;
+				border-radius:5Px;
+				border-style:solid;
+				border-width:2Px;
+				border-bottom-color:#208488;
+				border-right-color:#208488;
+				border-top-color:#004448;
+				border-left-color:#004448;
+				font-size:14Px
+			}
+
+			.button_serial_mon_scroll
+			{
+				display:inline;
+				color:white;
+				padding:2px 20px;
+				border-radius:5Px;
+				border-style:solid;
+				border-width:2Px;
+				height:30Px;
+				font-weight:bold;
+				text-weight:bold;
+				font-size:14Px;
+				border-top-color:#208488;
+				border-left-color:#208488;
+				border-bottom-color:#004448;
+				border-right-color:#004448;
+				background-color:#006468;
+			}
+			
+			.button_bottom
+			{
+				display:inline;
+				color:white;
+				padding:2px 20px;
+				border-radius:5Px;
+				border-style:solid;
+				border-width:2Px;
+				height:30Px;
+				font-weight:bold;
+				text-weight:bold;
+				font-size:14Px;
+				border-bottom-color:#004448;
+				border-right-color:#004448;
+				border-top-color:#208488;
+				border-left-color:#208488;
+				background-color:#006468;
+			}
+
+			.button_top
+			{
+				display:inline;
+				color:white;
+				padding:2px 20px;
+				border-radius:5Px;
+				border-style:solid;
+				border-width:2Px;
+				height:30Px;
+				font-size:14Px;
+				border-bottom-color:#00777C;
+				border-right-color:#00777C;
+				border-top-color:#20B9BC;
+				border-left-color:#20B9BC;
+				background-color:#00979C;
+			}
+			
+			.button_top_pressed
+			{
+				display:inline;
+				color:white;
+				padding:2px 20px;
+				border-radius:5Px;
+				border-style:solid;
+				border-width:2Px;
+				height:30Px;
+				font-size:14Px;
+				border-top-color:#00777C;
+				border-left-color:#00777C;
+				border-bottom-color:#20B7BC;
+				border-right-color:#20B7BC;
+				background-color:#00979C
+			}
+
+			.serial_text_send 
+			{
+				border-style:solid;
+				border-radius:5Px;
+				border-width:2Px;
+				border-bottom-color:#208488;
+				border-right-color:#208488;
+				border-top-color:#004448;
+				border-left-color:#004448;
+				background-color:white;
+				color:black;
+				height:30Px;
+				width:30%;
+				font-size:14Px
+			}
+
+			.serial_monitor_output
+			{
+				display:none;
+				background-color:white;
+				overflow-x:scroll;
+				overflow-y:scroll;
+				display:none;
+				height:150Px;
+			}
+			
+			.work_space
+			{
+				display: block;
+				background-color: white;
+				margin-top: 28Px;
+				border-style: none;
+				border-width: 2Px;
+				border-color: blue;
+				height: 380Px;
+				margin-top: 100Px;
+				position: relative;
+				top: -72Px;
+			}
+			
+			.draw_space
+			{
+				display: block;
+				background-color: white;
+				border-style: none;
+				border-width: 2Px;
+				border-color: red;
+				overflow: scroll;
+				position: relative;
+				top: 0Px;
+				height: 88%;
+			}
+			
+			.bottom_area
+			{
+				display: block;
+				border-style: none;
+				border-color: blue;
+				border-width: 2Px;
+				background-color: white;
+				height: 12%;
+				width: 100%;
+			}
+			
+			.small_message_area
+			{
+				display: inline-block;
+				border-style: solid;
+				border-color: #006468;
+				border-top-width: 2Px;
+				border-left-width: 1Px;
+				border-bottom-width: 2Px;
+				border-right-width: 2Px;
+				background-color: #99BBAA;
+				color: #006468;
+				height: 100%;
+				width: 10%;
+				float: right;
+				font-size: 10Px;
+				text-align: left;
+				vertical-align: top;
+				padding-top: 2Px;
+				padding-left: 2Px;
+			}
+			
+			.component_edit
+			{
+				display: inline-block;
+				border-style: solid;
+				border-color: teal;
+				border-top-width: 2Px;
+				border-left-width: 2Px;
+				border-bottom-width: 2Px;
+				border-right-width: 1Px;
+				background-color: #99BBAA;
+				color: #006468;
+				height: 100%;
+				width: 50%;
+			}
+			
+			.large_message_area
+			{
+				display: inline-block;
+				border-style: solid;
+				border-color: teal;
+				border-top-width: 2Px;
+				border-left-width: 1Px;
+				border-bottom-width: 2Px;
+				border-right-width: 1Px;
+				background-color: #99BBAA;
+				color: black;
+				height: 100%;
+				width: 40%;
+				float: right;
+				color: #006468;
+				font-size:12Px;
+				padding-top: 2Px;
+				padding-left: 2Px;
+			}
+						
+			input["text"]
+			{
+				all: unset;
+			}
+			
+			.loading
+			{
+				display:block;
+				position:absolute;
+				top:0Px;
+				left:0Px;
+				font-size:200Px;
+				color:white;
+				font-weight:bold;
+				text-align:center;
+				padding-top:120Px;
+				background-color:teal;
+				width:100%;
+				height:100%;
+			}
+
+			.modal 
+			{
+			  display: none; /* Hidden by default */
+			  position: fixed; /* Stay in place */
+			  z-index: 1; /* Sit on top */
+			  padding-top: 200px; /* Location of the box */
+			  left: 0;
+			  top: 0;
+			  width: 100%; /* Full width */
+			  height: 100%; /* Full height */
+			  overflow: hidden;
+			  background-color: rgb(0,0,0); /* Fallback color */
+			  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+			}
+
+			.modal_content 
+			{
+				display:inline-block;
+				background-color: teal;
+				margin: auto;
+				padding: 20px;
+				border-width:5Px;
+				border-style:solid;
+				border-left-color:#20A0A0;
+				border-top-color:#20A0A0;
+				border-right-color:#006060;
+				border-bottom-color:#006060;
+				border-radius:10Px;
+				width:auto;
+				margin-left:300Px;
+				margin-right:300Px;
+			}
+			
+			.wire_color
+			{
+				display:inline-block;
+				width:50Px;
+				height:50Px;
+				margin:5Px;
+				border-radius:10Px;
+				border-width:2Px;
+				border-color:teal;
+				border-style:solid;
+			}
+			
+			.change_wire_color
+			{
+				display:inline-block;
+				width:30Px;
+				height:30Px;
+				margin:2Px;
+				border-radius:5Px;
+				border-width:2Px;
+				border-color:teal;
+				border-style:solid;
+			}
+			
+			.wire_color:hover
+			{
+				border-color:#00B0B0;
+			}
+									
+			.change_wire_color:hover
+			{
+				border-color:#00B0B0;
+			}
+									
+		</style>
+
+	</head>
+
+	<body style="overflow:hidden" id="body" oncontextmenu="return false;" onmousemove="" onload="doAddEvenListeners()" onkeydown="doKeyDown(event)">
+		<div id="loading" class="loading">
+			LOADING...
+		</div>
+		<div id="simulator" style="display:none">
+			<!-- Horizontal Navigation bar -->
+			<nav class="nav-fixed arduino_teal" id="navigation">
+				<div class="nav-wrapper" onclick="doClearPopupMenus(event)">
+					<span class="brand-logo app_title translatable_title">Ardublockly Simulator</span>
+					<span style="float: right;">
+
+						<input type="file" id="open_file" accept=".absim," style="display:none;" onchange="doOpenFile(event)">
+
+						<input type="button" class="button_top" value="↑" id="open" onmouseover="doTopButtonMouseOver('Open a circuit file...')" onmousedown="doTopButtonMouseDown('open')" onclick="doTopButtonClick('open')"></input>
+						<input type="button" class="button_top" value="↓" id="save" onmouseover="doTopButtonMouseOver('Save this circuit to file...')" onmousedown="doTopButtonMouseDown('save')" onclick="doTopButtonClick('save')"></input>
+						<!--
+						<input type="button" class="button_top" value="+" id="zoom_in" onmouseover="doTopButtonMouseOver('Zoom in...')" onmousedown="doTopButtonMouseDown('zoom_in')" onclick="doTopButtonClick('zoom_in')"></input>
+						<input type="button" class="button_top" value="=" id="zoom_default" onmouseover="doTopButtonMouseOver('Default zoom...')" onmousedown="doTopButtonMouseDown('zoom_default')" onclick="doTopButtonClick('zoom_default')"></input>
+						<input type="button" class="button_top" value="-" id="zoom_out" onmouseover="doTopButtonMouseOver('Zoom out...')" onmousedown="doTopButtonMouseDown('zoom_out')" onclick="doTopButtonClick('zoom_out')"></input>
+						-->
+						<input type="button" class="button_top" value="┌" id="wire" onmouseover="doTopButtonMouseOver('Add a wire...')" onmousedown="doTopButtonMouseDown('wire')" onclick="doTopButtonClick('wire')"></input>
+						<input type="button" class="button_top" value="← 90°" id="rotate_left" onmouseover="doTopButtonMouseOver('Rotate component 90 degree left...')" onmousedown="doTopButtonMouseDown('rotate_left')" onclick="doTopButtonClick('rotate_left')"></input>
+						<input type="button" class="button_top" value="→ 90°" id="rotate_right" onmouseover="doTopButtonMouseOver('Rotate component 90 degrees right...')" onmousedown="doTopButtonMouseDown('rotate_right')" onclick="doTopButtonClick('rotate_right')"></input>
+						<input type="button" class="button_top" value="X" id="delete" onmouseover="doTopButtonMouseOver('Delete selected component..')" onmousedown="doTopButtonMouseDown('delete')" onclick="doTopButtonClick('delete')"></input>
+						<input type="button" class="button_top" value="START" id="start_simulation" onmouseover="doTopButtonMouseOver('Start simulating...')" onclick="doClickStartButton()"></input>
+						<input type="button" class="button_top_pressed" value="STOP" id="stop_simulation" onmouseover="doTopButtonMouseOver('Stop simulating...')" onclick="doClickStopButton()"></input>
+					</span>
+				</div>
+				<div id="menu" class="menu">
+					<div id="mcu_menu_container" class="menu_item_container"> 
+						<div id="resistors_menu_item" class="clickable menu_item" onclick="doDisplayPopup('mcu_popup')">MCUs</div>
+						<div id="mcu_popup" class="popup_menu clickable">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('UNO')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Arduino Uno</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;left:-10Px;" src="img\Components\MCUs\ArduinoUno.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('MEGA')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Arduino Mega</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.8);top:-20Px;left:-22Px;" src="img\Components\MCUs\ArduinoMega.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('MICROBIT')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Microbit</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;" src="img\Components\MCUs\Microbit.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('MICROBIT_BREAKOUT')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Microbit with Breakout</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2);top:-20Px;" src="img\Components\MCUs\MicrobitBreakout.png">
+							</div>
+						</div>
+					</div>
+
+					<div id="resistors_menu_container" class="menu_item_container"> 
+						<div id="resistors_menu_item" class="clickable menu_item" onclick="doDisplayPopup('passive_popup')">PASSIVE</div>
+						<div id="passive_popup" class="popup_menu clickable">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('RESISTOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Fixed Resistor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.5);top:-20Px;left:-88Px" src="img\Components\Resistors\R10k.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('POTENTIOMETER')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Potentiometer</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2);top:-20Px;" src="img\Components\Resistors\Potentiometer.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('LDR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">LDR</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2);top:-20Px;" src="img\Components\Resistors\LDR.png">
+							</div>
+	<!--
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('CAPACITOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Capacitor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;" src="img\Components\Passive\Capacitor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('ELECTROLYTIC_CAPACITOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Electrolytic Capacitor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;" src="img\Components\Passive\ElectrolyticCapacitor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('INDUCTOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Inductor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.5);top:-20Px;left:-88Px;" src="img\Components\Passive\Inductor.png">
+							</div>
+	-->
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('SWITCH')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Switch</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;" src="img\Components\Switch\Switch.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('DIP_SWITCH_4')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">DIP Switch x 4</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;" src="img\Components\Switch\DIPSwitch4.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('DIP_SWITCH_6')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">DIP Switch x 6</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;" src="img\Components\Switch\DIPSwitch6.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('PUSH_BUTTON')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Push Button</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-20Px;" src="img\Components\Switch\PushButton.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('LIGHT_BULB')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Light Bulb</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.5)rotate(90deg);top:-20Px;" src="img\Components\Passive\LightBulb.png">
+							</div>
+						</div>
+					</div>
+
+					<div id="leds_menu_container" class="menu_item_container"> 
+						<div id="leds_menu_item" class="clickable menu_item" onclick="doDisplayPopup('leds_popup')">ACTIVE</div>
+						<div id="leds_popup" class="popup_menu">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('LED')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">LED</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\LEDs\LED_OFF.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('RGB_LED')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">RGB LED</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\LEDs\RGB_LED.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('NPN_TRANSISTOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">NPN Transistor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Active\NPNTransistor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('PNP_TRANSISTOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">PNP Transistor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Active\PNPTransistor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('N_FET')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">N Channel FET</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Active\NChannelFET.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('P_FET')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">P Channel FET</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Active\PChannelFET.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('N_POWER_FET')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">N Channel Power FET</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2)rotate(90deg);top:-20Px;" src="img\Components\Active\NChannelPowerFET.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('P_POWER_FET')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">P Channel Power FET</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2)rotate(90deg);top:-20Px;" src="img\Components\Active\PChannelPowerFeT.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('PHOTO_DIODE')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Photo Diode</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Active\PhotoDiode.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('DIODE')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Diode</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2)rotate(90deg);top:-24Px;" src="img\Components\Active\Diode.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('OPTOCOUPLER')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Optocoupler</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9);top:-24Px;" src="img\Components\Active\OptoCoupler4N35.png">
+							</div>
+						</div>
+					</div>
+
+					<div id="active_menu_container" class="menu_item_container" style="margin-right:45Px;"> 
+						<div id="breadboards_menu_item" class="clickable menu_item" onclick="doDisplayPopup('breadboards_popup')">BREADBOARDS</div>
+						<div id="breadboards_popup" class="popup_menu">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('LARGE_BREADBOARD')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Large</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.7);top:-20Px;left:-38Px;" src="img\Components\Breadboard\LargeBreadboard.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('MEDIUM__BREADBOARD')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Medium</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.7);top:-20Px;" src="img\Components\Breadboard\MediumBreadboard.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('SMALL__BREADBOARD')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Small</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.7);top:-20Px;" src="img\Components\Breadboard\SmallBreadboard.png">
+							</div>
+						</div>
+					</div>
+
+					<div id="motors_menu_container" class="menu_item_container"> 
+						<div id="motors_menu_item" class="clickable menu_item" onclick="doDisplayPopup('motors_popup')">MOTORS</div> 
+						<div id="motors_popup" class="popup_menu">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('DC_MOTOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">DC Motor</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2)rotate(90deg);top:-20Px;" src="img\Components\Motors\DCMotor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('DC_GEAR_MOTOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">DC Gear Motor</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.5)rotate(90deg);top:-20Px;" style="width: 70Px;top: -64Px;" src="img\Components\Motors\DCGearMotor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('SERVO')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Servo</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.5)rotate(90deg);top:-20Px;" style="width: 40Px;top: -64Px;" src="img\Components\Motors\Servo.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('MICRO_SERVO')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Micro Servo</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.5)rotate(90deg);top:-20Px;" style="width: 40Px;top: -64Px;" src="img\Components\Motors\MicroServo.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('VIBRATION_MOTOR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Vibration Motor</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.5)rotate(90deg);top:-20Px;" style="width: 40Px;top: -64Px;" src="img\Components\Motors\VibrationMotor.png">
+							</div>			
+						</div>
+					</div>
+
+					<div id="sensors_menu_container" class="menu_item_container"> 
+						<span  id="sensors_menu_item" class="clickable menu_item" onclick="doDisplayPopup('sensor_popup')">SENSORS</span> 
+						<div id="sensor_popup" class="popup_menu">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('ULTRASONIC')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Ultrasonic</span>
+								<img class="popup_menu_item_image" style="transform:scale(1);top: -20Px;" src="img\Components\Sensors\UltrasonicSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('MOTION')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">PIR Motion</span>
+								<img class="popup_menu_item_image" style="transform:scale(1);top: -20Px;" src="img\Components\Sensors\MotionSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('TEMPERATURE')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Temperature</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Sensors\TemperatureSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('IR')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">IR Sensor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Sensors\IRSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('AMBIANT_LIGHT')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Ambiant Light Sensor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Sensors\AmbiantLightSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('FORCE')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Force Sensor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.6);top:-25Px;left:-48Px" src="img\Components\Sensors\ForceSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('FLEX')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Flex Sensor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.18);top:-25Px;left:-392Px" src="img\Components\Sensors\FlexSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('TILT')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Tilt Sensor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.4);top:-20Px;left:-126Px" src="img\Components\Sensors\TiltSensor.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('GAS')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Gas Sensor</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\Sensors\GasSensor.png">
+							</div>
+						</div>
+					</div>
+
+					<div id="output_menu_container" class="menu_item_container"> 
+						<span  id="output_menu_item" class="clickable menu_item" onclick="doDisplayPopup('output_popup')">OUTPUT</span> 
+						<div id="output_popup" class="popup_menu">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('LCD')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">LCD Screen (16 x 2)</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.8);top: -20Px;" src="img\Components\Output\LCDScreen.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('SEVEN_SEGMENT')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Seven Segment Display</span>
+								<img class="popup_menu_item_image" style="transform:scale(1);top: -20Px;" src="img\Components\Output\SevenSegementDisplay.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('PIEZO_SPEAKER')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Piezo Speaker</span>
+								<img class="popup_menu_item_image" style="transform:scale(1);top: -20Px;" src="img\Components\Output\PiezoSpeaker.png">
+							</div>
+	<!--
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('NEO_PIXEL_STRIP')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Neo Pixel Strip</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.35);top:-20Px;left:-170Px" src="img\Components\NeoPixel\NeoPixelStrip4.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('NEW_PIXEL_JEWEL')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Neo Pixel Jewel</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\NeoPixel\NeoPixelJewel.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('NEO_PIXEL_RING12')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Neo Pixel Ring 12</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\NeoPixel\NeoPixelRing12.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('NEO_PIXEL_RING16')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Neo Pixel Ring 16</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\NeoPixel\NeoPixelRing16.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('NEO_PIXEL_RING24')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Neo Pixel Ring 24</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.9)rotate(90deg);top:-20Px;" src="img\Components\NeoPixel\NeoPixelRing24.png">
+							</div>
+	-->
+						</div>
+					</div>
+
+					<div id="power_supply_menu_container" class="menu_item_container"> 
+						<span  id="power_supply_menu_item" class="clickable menu_item" onclick="doDisplayPopup('power_supply_popup')">POWER</span> 
+						<div id="power_supply_popup" class="popup_menu">
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('POWER_SUPPLY')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Power Supply</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2);top:-20Px;" src="img\Components\Power\PowerSupply.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('MULTIMETER')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Multimeter</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.8);top:-18Px;left:-18Px;" src="img\Components\Power\Multimeter.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('OSCILLOSCOPE')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Oscilloscope</span>
+								<img class="popup_menu_item_image" style="transform:scale(1.2);top:-20Px;" src="img\Components\Power\Oscilloscope.png">
+							</div>
+							<div class="popup_menu_item" onmouseover="doMouseOverPopupMenuItem(this)" onclick="doMouseClickPopupMenuItem('FUNCTION')" onmouseout="doMouseOutPopupMenuItem(this)">
+								<span class="popup_menu_item_text">Function Generator</span>
+								<img class="popup_menu_item_image" style="transform:scale(0.8);top:-18Px;" src="img\Components\Power\FunctionGenerator.png">
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+
+			<!-- Content -->
+			<div id="work_space" class="work_space" onclick="doClearPopupMenus(event)">
+			
+				<div id="line_dialog_box" class="modal">
+				  <div class="modal_content">
+					<div onclick="doMakeWire(document.getElementById('red_wire').style.backgroundColor)" id="red_wire" class="wire_color" style="background-color:#DD0000"></div>
+					<div onclick="doMakeWire(document.getElementById('orange_wire').style.backgroundColor)" id="orange_wire" class="wire_color" style="background-color:#CA6000"></div>
+					<div onclick="doMakeWire(document.getElementById('yellow_wire').style.backgroundColor)" id="yellow_wire" class="wire_color" style="background-color:#FFFF00"></div>
+					<div onclick="doMakeWire(document.getElementById('green_wire').style.backgroundColor)" id="green_wire" class="wire_color" style="background-color:#008000"></div>
+					<div onclick="doMakeWire(document.getElementById('purple_wire').style.backgroundColor)" id="purple_wire" class="wire_color" style="background-color:#800080"></div>
+					<div onclick="doMakeWire(document.getElementById('brown_wire').style.backgroundColor)" id="brown_wire" class="wire_color" style="background-color:#A52A2A"></div>
+					<div onclick="doMakeWire(document.getElementById('blue_wire').style.backgroundColor)" id="blue_wire" class="wire_color" style="background-color:#000080"></div>
+					<div onclick="doMakeWire(document.getElementById('grey_wire').style.backgroundColor)" id="grey_wire" class="wire_color" style="background-color:#606060"></div>
+					<div onclick="doMakeWire(document.getElementById('black_wire').style.backgroundColor)" id="black_wire" class="wire_color" style="background-color:#000000"></div>
+				  </div>
+				</div>
+				
+				<div id="draw_space" class="draw_space" onscroll="">		
+					<canvas id="canvas" width="5000" height="5000" oncontextmenu="doRightClickCanvas(event)" onclick="doMouseClickCanvas(event)" onmousedown="doMouseDownCanvas(event)"  onmousemove=""  onmouseup="doMouseUpCanvas(event)"></canvas>
+				</div>
+				<div id="bottom_area" class="bottom_area">
+					<div id="component_edit" class="component_edit"></div>
+					<div id="small_message_area" class="small_message_area"><span><b><u><span id="info_heading"></span></u></b></span><br><span id="info"></span></div>
+					<div id="large_message_area" class="large_message_area"></div>
+				</div>
+			</div>
+			<!-- Serial Monitor Output content -->
+			<div class="ide_output_wrapper"" onclick="doClearPopupMenus(event)" style="display:block;">
+				<ul data-collapsible="expandable">
+					<div id="ide_output_collapsible_header" class="collapsible-header ide_output_header_normal">
+						<span class="mdi-action-swap-vert Medium" style="font-size: 2.2rem;" onclick="doOpenSerialMonitor()"></span>
+						<span style="padding-right:2%;">Serial Monitor</span>
+						<span>
+							&nbsp;Text:
+							<input type="text" size="20" id="SerialText" style="border-style:solid;border-radius:5Px;border-width:2Px;border-bottom-color:#208488;border-right-color:#208488;border-top-color:#004448;border-left-color:#004448;background-color:white;color:black;height:30Px;width:30%;font-size:14Px"></input>
+							&nbsp;&nbsp;Line Ending:
+							<select id="LineEnding" name="LineEnding" class="select_line_ending" onchange="doChangeLineEndingSelection('LineEnding')">
+								<option value="">No line ending</option>
+								<option value="\r">Carriage return \r</option>
+								<option value="\n">Line feed \n</option>
+								<option value="\r\n">Both \r\n</option>
+							</select>
+							&nbsp;&nbsp;
+							<input type="button" id="Send" value="SEND" class="button_bottom" onmousedown="doSendButtonMouseDown()" onclick="doClickSendButton('LineEnding', 'SerialText')"></input>
+							&nbsp;&nbsp
+							<input type="button" id="serial_mon_scroll" value="SCROLL" class="button_serial_mon_scroll" onclick="doClickScrollButton('serial_mon_scroll')"></input>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							Baud rate: 
+							<select id="Baud" name="Baud" class="select_baud" onchange="doChangeBaudSelection('Baud')">
+								<option value="300">300 bps</option>
+								<option value="600">600 bps</option>
+								<option value="1200">1200 bps</option>
+								<option value="2400">2400 bps</option>
+								<option value="4800">4800 bps</option>
+								<option value="9600">9600 bps</option>
+								<option value="14400">14400 bps</option>
+								<option value="19200">19200 bps</option>
+								<option value="28800">28800 bps</option>
+								<option value="31250">31250 bps</option>
+								<option value="38400">38400 bps</option>
+								<option value="56700">56700 bps</option>
+								<option value="115200">115200 bps</option>
+							</select>
+						</span>
+					</div>
+					<div id="content_serial_monitor" class="serial_monitor_output">
+					</div>
+				</ul>
+			</div>
+		</div>
+	</body>
+	
+	<footer>
+		
+		<script type="text/javascript"> 	
+
+			//*************************************************************************
+			//*
+			//* UNIVERSAL FUNCTIONS
+			//*
+			//*************************************************************************
+
+			function getElement(strID)
+			{
+				var Element = document.getElementById(strID);
+				
+				if (Element == null)
+					alert("ERROR: element with ID '" + strID + "' was not found!");
+					
+				return Element;
+			}
+						
+			function doClearPopupMenus(event)
+			{
+				doShowHideElement(g_strLastPopupID, false);
+				g_strLastPopupID = "";
+			}			
+	
+		</script>
+		
+		<!-- My scripts -->
+		<script src="CodeDataStructures.js"></script> 
+		<script src="CodeParsing.js"></script>
+		<script src="CodeFormatting.js"></script>
+		<script src="SerialMonitorDataStructures.js"></script>
+		<script src="CommonComponentDataStructures.js"></script>
+		<script src="GeneralDataStructures.js"></script>
+		<script src="PinDataStructures.js"></script>
+		<script src="PortDataStructures.js"></script>
+		<script src="MCUDataStructures.js"></script>
+		<script src="CanvasDataStructures.js"></script>
+		<script src="LEDDataStructures.js"></script>
+		<script src="PassiveDataStructures.js"></script>
+		<script src="WireDataStructures.js"></script>
+		<script src="FileSaver.js"></script>
+		<script src="FileReader.js"></script>
+		
+		<script type="text/javascript"> 
+
+			//*************************************************************************
+			//*
+			//* GLOBAL VARIABLES
+			//*
+			//*************************************************************************
+			
+			var g_bSerialMonOpen = false;
+			var g_strLastPopupID = "";
+			var g_bScrollButton = false;
+			doClickScrollButton("serial_mon_scroll");
+			var g_strFilename = "";
+				
+				
+				
+				
+			//*************************************************************************
+			//*
+			//* GENERAL FUNCTIONS
+			//*
+			//*************************************************************************
+
+			function doShowMousePos(event)
+			{
+				var Info = getElement("info");
+				var InfoHeading = getElement("info_heading");
+				var pointMousePos = new CPoint(0, 0);
+				
+				if (Info && InfoHeading)
+				{
+					InfoHeading.innerText = "MOUSE POS";
+					pointMousePos.initEventU(event);
+					pointMousePos.relativeTo(g_DrawSpace);
+					Info.innerText = "GLOBAL: " + event.clientX + ", " + event.clientY + "\nRELATIVE: " + 
+												pointMousePos.m_nX + ", " + pointMousePos.m_nY;
+				}
+			}
+
+			function doShowHideElement(strID, bShow)
+			{
+				var Div = document.getElementById(strID);
+				
+				if (Div)
+				{
+					if (bShow)
+						Div.style.display = "block";
+					else
+						Div.style.display = "none";
+				}
+				else if (strID != "")
+				{
+					alert("ERROR: " + "div with ID '" + strID + "' was not found!");
+				}
+			}
+			
+			
+			
+			
+			//*************************************************************************
+			//*
+			//* TOP FUNCTION BUTTONS
+			//*
+			//*************************************************************************
+			
+			function doMakeWire(strHexColor)
+			{
+				document.getElementById("line_dialog_box").style.display = "none";
+				
+				var Component = new CWire(strHexColor);
+				
+				doUnselectAllComponents();
+				Component.doSelect();
+				g_strSelectedComponentName = Component.getDeviceName();
+				g_mapPlacedComponents.set(g_strSelectedComponentName, Component);
+			}
+			
+			function doAddWire()
+			{
+				//document.getElementById("line_dialog_box").style.display = "block";
+				doMakeWire("rgb(0, 0, 0)");
+			}
+			
+			function doZoom(strInOut)
+			{
+				doZoomAllDrawingObjects(strInOut)
+			}
+			
+			function doSaveFile()
+			{
+				var strFileContent = "";
+				var arrayComponentName = [];
+				var strDeviceName = "";
+				var strFileName = window.prompt("Please enter a file name: ", ".absim");
+				
+				g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayComponentName.push(strKey)});
+	
+				for (let nI = 0; nI < arrayComponentName.length; nI++)
+				{
+					strDeviceName = arrayComponentName[nI];
+					if (g_mapPlacedComponents.get(strDeviceName) != null)
+						strFileContent += g_mapPlacedComponents.get(strDeviceName).doWrite(strFileContent)
+				}
+				saveAs(new File([strFileContent], strFileName, {type: "text/plain;charset=utf-8"}));
+			}
+					
+			function doReadNextToken(strFileContents)
+			{
+				var nPos = strFileContents.indexOf("\r\n");
+				var strToken = strFileContents.substring(0, nPos);
+				return strToken;
+			}
+			
+			function doDeleteToken(strFileContents, strToken)
+			{
+				var nPos = strFileContents.indexOf(strToken) + strToken.length + 2;
+				strFileContents = strFileContents.substring(nPos);
+				return strFileContents;
+			}
+			
+			function doReadFile(strFileContents)
+			{
+				var strType = "", strName = "", strX = "", strY = "", strAngle = "", strBreakout = "", strBlown = "", strResistance = "";
+				var Component = null;
+				
+				// E.G.
+				// MCU
+				// UNO
+				// UNO1
+				// 460 
+				// 170 
+				// 0
+				// RESISTOR
+				// RESISTOR1
+				// 190 
+				// 160 
+				// 0
+				// false
+				// 10000
+				// LED
+				// LED1
+				// 60 
+				// 100 
+				// 0
+				// false
+				g_mapPlacedComponents.clear();
+				
+				while (strFileContents.length > 0)
+				{
+					strType = doReadNextToken(strFileContents);
+					strFileContents = doDeleteToken(strFileContents, strType);
+
+					if (strType.includes("MCU"))
+						strType = strType.substring(4)
+						
+					if (strType == "MEGA")
+						Component = new CArduinoMega();
+					else if (strType == "UNO")
+						Component = new CArduinoUno();
+					else if (strType == "MICROBIT")
+						Component = new CMicrobit(strBreakout == "true");
+					else if (strType == "LED")
+						Component = new CLED();
+					else if (strType == "RESISTOR")
+						Component = new CResistor();
+
+					//*************************
+					//*************************
+					//*************************
+					// TO DO
+					//*************************
+					//*************************
+					//*************************
+					
+					if (Component != null)
+					{
+						strFileContents = Component.doRead(strFileContents);
+						if (Component.getType() == "MCU")
+							g_strMCUName = Component.getDeviceName();
+						g_mapPlacedComponents.set(Component.getDeviceName(), Component);
+					}
+				}
+				doDisplayAllComponents();
+			}
+			
+			function doOpenFile(event)
+			{
+				var FileInput = document.getElementById("open_file");
+				var strFileName = null;
+				var File = null;
+				
+				if (FileInput != null)
+				{
+					strFileName = FileInput.files.item(0).name;
+					File = FileInput.files[0];
+					
+					var fileReader = new FileReader();
+					fileReader.readAsText(File);
+					fileReader.onload = function() {doReadFile(fileReader.result);};
+				}
+			}
+			
+			function doOpenBrowseFile()
+			{
+				document.getElementById("open_file").click();
+			}
+
+			function doRotateRight()
+			{
+				var strName = doFindSelectedComponentNoMouse();
+				
+				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null) && (g_mapPlacedComponents.get(strName) != "WIRE"))
+				{
+					g_mapPlacedComponents.get(strName).doRotate(90);
+					doDisplayAllComponents();
+				}
+			}
+			
+			function doRotateLeft()
+			{
+				var strName = doFindSelectedComponentNoMouse();
+				
+				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null) && (g_mapPlacedComponents.get(strName) != "WIRE"))
+				{
+					g_mapPlacedComponents.get(strName).doRotate(-90);
+					doDisplayAllComponents();
+				}
+			}
+			
+			function doDelete()
+			{
+				var strName = doFindSelectedComponentNoMouse();
+				var arrayDeviceName = [];
+				var strDeviceName = "";
+	
+				g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
+				
+				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null))
+				{
+					if (g_mapPlacedComponents.get(strName).getType() == "MCU")
+						g_nMCUCount--;
+					g_mapPlacedComponents.get(strName).doDelete();
+					g_mapPlacedComponents.delete(strName);
+					doDisplayAllComponents();
+					doShowEditFields("");
+					doDisplayHint("", "");
+				}
+			}
+	
+			function doTopButtonClick(strButtonID)
+			{
+				var Button = getElement(strButtonID);
+				
+				if (Button)
+				{
+					Button.style.borderLeftColor = "#20B9BC";
+					Button.style.borderTopColor = "#20B9BC";
+					Button.style.borderRightColor = "#00777C";
+					Button.style.borderBottomColor = "#00777C";
+				}
+				if (strButtonID == "rotate_right")
+					doRotateRight();
+				else if (strButtonID == "rotate_left")
+					doRotateLeft();
+				else if (strButtonID == "delete")
+					doDelete();
+				else if (strButtonID == "open")
+					doOpenBrowseFile();
+				else if (strButtonID == "save")
+					doSaveFile();
+				else if (strButtonID == "wire")
+					doAddWire();
+				else if (strButtonID == "zoom_in")
+					doZoom("+");
+				else if (strButtonID == "zoom_out")
+					doZoom("-");
+				else if (strButtonID == "zoom_default")
+					doZoom("100");
+			}
+
+			function doTopButtonMouseOver(strMessage)
+			{
+				var MessageArea = getElement("large_message_area");
+				
+				if (MessageArea)
+					MessageArea.innerText = strMessage;
+			}
+			
+			function doTopButtonMouseDown(strButtonID)
+			{
+				var Button = getElement(strButtonID);
+				
+				if (Button)
+				{
+					Button.style.borderLeftColor = "#00777C";
+					Button.style.borderTopColor = "#00777C";
+					Button.style.borderRightColor = "#20B9BC";
+					Button.style.borderBottomColor = "#20B9BC";
+				}
+			}
+
+
+
+
+			//*************************************************************************
+			//*
+			//* STOP AND START SIMULATOR FUNCTIONS
+			//*
+			//*************************************************************************
+			
+			var g_bSimulationStarted = false;
+			var g_arrayDeviceName = [];
+			var g_Delay = new CDelay(0);
+			/*
+			var g_arrayFunctions = new CFunctionArray();
+			var g_SetupFunc = null, g_LoopFunc = null;
+			var g_arrayGlobalVariables = new CVariableArray();
+			*/
+			
+			function simulate(nTimeStamp)
+			{
+				if (g_bSimulationStarted)
+				{
+					if (g_LoopFunc && g_Delay.isExpired())
+					{
+						g_LoopFunc.evaluate();
+					}
+					for (let nI = 0; nI < g_arrayDeviceName.length; nI++)
+					{
+						if ((g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "MCU")) &&
+							(g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "WIRE")))
+							g_mapPlacedComponents.get(g_arrayDeviceName[nI]).doRun();
+					}
+					doDisplayAllComponents();
+					window.requestAnimationFrame(simulate);
+				}
+			}
+			
+			function doClickStartButton()
+			{
+				var ButtonStart = getElement("start_simulation");
+				var ButtonStop = getElement("stop_simulation");
+
+				if (ButtonStart && ButtonStop)
+				{
+					ButtonStart.style.borderLeftColor = "#00777C";
+					ButtonStart.style.borderTopColor = "#00777C";
+					ButtonStart.style.borderRightColor = "#20B7BC";
+					ButtonStart.style.borderBottomColor = "#20B7BC";
+
+					ButtonStop.style.borderLeftColor = "#20B7BC";
+					ButtonStop.style.borderTopColor = "#20B7BC";
+					ButtonStop.style.borderRightColor = "#00777C";
+					ButtonStop.style.borderBottomColor = "#00777C";
+				}
+				g_bSimulationStarted = true;
+				g_arrayDeviceName = [];
+				g_mapPlacedComponents.forEach(function(strValue, strKey, map){g_arrayDeviceName.push(strKey)});
+				if (g_SetupFunc)
+					g_SetupFunc.evaluate();
+				window.requestAnimationFrame(simulate);
+			}
+			
+			function doClickStopButton()
+			{
+				var ButtonStart = getElement("start_simulation");
+				var ButtonStop = getElement("stop_simulation");
+
+				if (ButtonStart && ButtonStop)
+				{
+					ButtonStart.style.borderLeftColor = "#20B7BC";
+					ButtonStart.style.borderTopColor = "#20B7BC";
+					ButtonStart.style.borderRightColor = "#00777C";
+					ButtonStart.style.borderBottomColor = "#00777C";
+
+					ButtonStop.style.borderLeftColor = "#00777C";
+					ButtonStop.style.borderTopColor = "#00777C";
+					ButtonStop.style.borderRightColor = "#20B7BC";
+					ButtonStop.style.borderBottomColor = "#20B7BC";
+				}
+				g_bSimulationStarted = false;
+				doStopRunAllComponents();
+			}
+			
+			
+			
+			
+			//*************************************************************************
+			//*
+			//* POPUP MENU FUNCTIONS
+			//*
+			//*************************************************************************
+			
+			function doDisplayPopup(strPopupID)
+			{
+				if (strPopupID == "")
+				{
+					doShowHideElement(g_strLastPopupID, false);
+					g_strLastPopupID = "";
+				}
+				else if (strPopupID == g_strLastPopupID)
+				{
+					doShowHideElement(strPopupID, false);
+					g_strLastPopupID = "";
+				}
+				else 
+				{
+					if (g_strLastPopupID != "")
+						doShowHideElement(g_strLastPopupID, false);
+					doShowHideElement(strPopupID, true);
+					g_strLastPopupID = strPopupID;
+				}
+			}
+			
+			function doMouseDownCanvas(event)
+			{
+				var pointMousePos = new CPoint(0, 0);
+				pointMousePos.initEvent(event);
+				pointMousePos.relativeTo(g_DrawSpace);
+				
+				if ((g_strSelectedComponentName != "") && (g_mapPlacedComponents.get(g_strSelectedComponentName) != null) &&
+					(g_mapPlacedComponents.get(g_strSelectedComponentName).getType() == "WIRE"))
+				{
+					// Do nothing
+				}
+				else
+				{
+					if (event.which == 1)
+					{
+						doUnselectAllComponents();
+						g_strSelectedComponentName = doFindSelectedComponent(pointMousePos);
+				
+						if (g_strSelectedComponentName != "")
+							g_mapPlacedComponents.get(g_strSelectedComponentName).doGrab(pointMousePos);
+					}
+				}
+				doDisplayAllComponents();
+			}
+	
+			function doKeyDown(event)
+			{
+				if (event.ctrlKey)
+				{
+					if ((event.which == 61) || (event.which == 173))
+						event.preventDefault();
+				}
+				else if ((event.code == "Delete") || (event.code == "Backspace"))
+				{
+					doDelete();
+				}
+			}
+			
+			function doMouseMoveCanvas(event)
+			{
+				var pointMousePos = new CPoint(0, 0);
+				
+				pointMousePos.initEvent(event);
+				pointMousePos.relativeTo(g_DrawSpace);
+
+				if ((g_strSelectedComponentName != "") && (g_mapPlacedComponents.get(g_strSelectedComponentName) != null))
+				{
+					g_mapPlacedComponents.get(g_strSelectedComponentName).doMove(pointMousePos);
+					doDisplayAllComponents();
+				}
+				else
+					doMouseOverAllComponents(pointMousePos);
+			}
+			
+			function doMouseUpCanvas(event)
+			{
+				var pointMousePos = new CPoint(0, 0);
+				pointMousePos.initEvent(event);
+				pointMousePos.relativeTo(g_DrawSpace);
+				
+				if ((g_strSelectedComponentName != "") && (g_mapPlacedComponents.get(g_strSelectedComponentName) != null))
+				{
+					if (((g_mapPlacedComponents.get(g_strSelectedComponentName).getType() == "WIRE") && !g_mapPlacedComponents.get(g_strSelectedComponentName).isEmpty()) ||
+						(g_mapPlacedComponents.get(g_strSelectedComponentName).getType() != "WIRE"))
+					{
+						if (event.which == 1)
+						{
+							g_mapPlacedComponents.get(g_strSelectedComponentName).doDrop(pointMousePos);
+							g_strSelectedComponentName = "";
+							doDisplayAllComponents();
+						}
+					}
+				}
+			}
+			
+			function doMouseClickCanvas(event)
+			{
+				var pointMousePos = new CPoint(0, 0);
+				
+				pointMousePos.initEvent(event);
+				pointMousePos.relativeTo(g_DrawSpace);
+				
+				doShowHideElement(g_strLastPopupID, false);
+				g_strLastPopupID = "";
+				
+				if ((g_strSelectedComponentName != "") && (g_mapPlacedComponents.get(g_strSelectedComponentName) != null) &&
+					(g_mapPlacedComponents.get(g_strSelectedComponentName).getType() == "WIRE") && g_mapPlacedComponents.get(g_strSelectedComponentName).isEmpty())
+				{
+					if (event.which == 1)
+					{
+						g_mapPlacedComponents.get(g_strSelectedComponentName).doAppendNode(pointMousePos);
+						doDisplayAllComponents();
+					}
+				}
+			}
+			
+			function doRightClickCanvas(event)
+			{
+				var pointMousePos = new CPoint(0, 0);
+				pointMousePos.initEvent(event);
+				pointMousePos.relativeTo(g_DrawSpace);
+
+				g_strSelectedComponentName = "";
+
+				var strName = doFindSelectedComponent(pointMousePos);
+				if ((strName != "") && (g_mapPlacedComponents.get(strName) != null) && (g_mapPlacedComponents.get(strName).getType() == "WIRE"))
+				{
+					var nNodeIndex = g_mapPlacedComponents.get(strName).isMouseInNode(pointMousePos);
+					if (nNodeIndex >= 0)
+						g_mapPlacedComponents.get(strName).doDeleteNode(nNodeIndex);
+					else if (g_mapPlacedComponents.get(strName).isMouseIn(pointMousePos))
+						g_mapPlacedComponents.get(strName).doInsertNode(pointMousePos);
+				}
+				doDisplayAllComponents();
+			}
+			
+			function doCanvasKeyPress(event)
+			{
+				if (event.code = 13)
+				{
+				}
+			}
+			
+			function doMouseOverPopupMenuItem(PopupMenuItem)
+			{
+				PopupMenuItem.style.borderColor = "#00A0A0";
+			}
+			
+			function doMouseClickPopupMenuItem(strPopupMenuItemText)
+			{
+				var Component = doCreateComponent(strPopupMenuItemText);
+				
+				doShowHideElement(g_strLastPopupID, false);
+				doUnselectAllComponents();
+				if (Component != null)
+					Component.doSelect();
+			}
+			
+			function doMouseOutPopupMenuItem(PopupMenuItem)
+			{
+				PopupMenuItem.style.borderColor = "#006060";
+			}
+				
+				
+				
+				
+			//*************************************************************************
+			//*
+			//* SERIAL MONITOR FUNCTIONS
+			//*
+			//*************************************************************************
+			
+			function doOpenSerialMonitor()
+			{
+				var SerialMonitorDiv = document.getElementById("content_serial_monitor");
+				
+				if (SerialMonitorDiv)
+				{
+					if (!g_bSerialMonOpen)
+					{
+						g_bSerialMonOpen = true;
+						SerialMonitorDiv.style.display = "block";
+						g_SerialMonitor.setOpen();
+					}
+					else
+					{
+						g_bSerialMonOpen = false;
+						SerialMonitorDiv.style.display = "none";
+						g_SerialMonitor.setClose();
+					}
+				}
+			}
+			
+			function doChangeBaudSelection(strID)
+			{
+				var Select = getElement(strID);
+				
+				if (Select)
+					g_SerialMonitor.select(Select.options[Select.selectedIndex].value);
+			}
+			
+			function doChangeLineEndingSelection(strID)
+			{
+				var pointMousePos = new CPos(event, "canvas");
+	
+				if ((g_strSelectedComponentName != "") && (g_mapPlacedComponents.get(g_strSelectedComponentName) != null))
+				{
+					g_mapPlacedComponents.get(g_strSelectedComponentName).doDrop(pointMousePos);
+					g_strSelectedComponentName = "";
+				}
+			}
+			
+			function doClickSendButton(strSelectLineEndingID, strTextID)
+			{
+				var Select = getElement(strSelectLineEndingID);
+				var Text = getElement(strTextID);
+				var strLineEnding = "", strText = "";
+				var Button = getElement("Send");
+				
+				if (Button)
+				{
+					Button.style.borderLeftColor = "#208488";
+					Button.style.borderTopColor = "#208488";
+					Button.style.borderRightColor = "#004448";
+					Button.style.borderBottomColor = "#004448";
+				}
+				if ((Select != null) && (Text != null))
+				{
+					if (Select.selectedIndex == 1)
+						strLineEnding = "\r";
+					else if (Select.selectedIndex == 2)
+						strLineEnding = "\n";
+					else if (Select.selectedIndex == 3)
+						strLineEnding = "\r\n";
+					
+					strText = Text.value + strLineEnding;
+					g_SerialMonitor.setTextWaiting(strText);
+				}
+			}
+						
+			function doSendButtonMouseDown()
+			{
+				var Button = getElement("Send");
+				
+				if (Button)
+				{
+					Button.style.borderLeftColor = "#004448";
+					Button.style.borderTopColor = "#004448";
+					Button.style.borderRightColor = "#208488";
+					Button.style.borderBottomColor = "#208488";
+				}
+			}
+
+			function doClickScrollButton(strID)
+			{
+				var ButtonScroll = getElement(strID);
+				
+				g_bScrollButton = !g_bScrollButton;
+				
+				if (ButtonScroll)
+				{
+					if (g_bScrollButton)
+					{
+						ButtonScroll.style.borderLeftColor = "#004448";
+						ButtonScroll.style.borderTopColor = "#004448";
+						ButtonScroll.style.borderRightColor = "#208488";
+						ButtonScroll.style.borderBottomColor = "#208488";
+					}
+					else
+					{
+						ButtonScroll.style.borderLeftColor = "#208488";
+						ButtonScroll.style.borderTopColor = "#208488";
+						ButtonScroll.style.borderRightColor = "#004448";
+						ButtonScroll.style.borderBottomColor = "#004448";
+					}
+				}
+				g_SerialMonitor.setAutoScroll(g_bScrollButton);
+			}
+		
+			//*************************************************************************
+			//*
+			//* CANVAS FUNCTIONS
+			//*
+			//*************************************************************************
+			
+			function doMouseMoveBody(event)
+			{
+			}
+			
+			function doDrawSpaceScroll()
+			{
+				g_pointCanvasScrollPos = new CPoint(g_DrawSpace.scrollLeft, g_DrawSpace.scrollTop);
+			}
+			
+			function doAddEvenListeners()
+			{
+				g_Canvas.addEventListener("mousemove", doMouseMoveCanvas);
+				getElement("draw_space").addEventListener("scroll", doDrawSpaceScroll);
+				getElement("body").addEventListener("mousemove", doMouseMoveBody);
+			}
+			document.getElementById("loading").style.display = "none";
+			document.getElementById("simulator").style.display = "block";
+			doDrawCanvasGrid(g_CanvasContext, g_Canvas.offsetWidth, g_Canvas.offsetHeight);
+			doDrawCanvasGrid(g_BlankCanvasCloneContext, g_BlankCanvasClone.offsetWidth, g_BlankCanvasClone.offsetHeight);
+			doScrollToMiddle();
+			g_strMCUName = doCreateMCU(g_strSelectedMCUType);
+
+		</script>
+		
+	</footer>
+
+</html>
+
