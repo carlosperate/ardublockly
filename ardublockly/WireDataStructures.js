@@ -14,6 +14,34 @@ class CConnectedDevice
 		this.m_nNodeIndex = nNodeIndex;
 	}
 	
+	doRead(strFileContents)
+	{
+		this.m_strDeviceName = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, this.m_strDeviceName);
+
+		this.m_strPinID = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, this.m_strPinID);
+
+		this.m_strType = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, this.m_strType);
+		
+		var strTemp = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, strTemp);
+		this.m_nNodeIndex = parseInt(strTemp);
+		
+		return strFileContents;
+	}
+	
+	doWrite(strFileContents)
+	{
+		strFileContents += this.m_strDeviceName + "\r\n";
+		strFileContents += this.m_strPinID + "\r\n";
+		strFileContents += this.m_strType + "\r\n";
+		strFileContents += this.m_nNodeIndex + "\r\n";
+		
+		return strFileContents;
+	}
+	
 	getDeviceName()
 	{
 		return this.m_strDeviceName;
@@ -118,7 +146,19 @@ class CWire
 		"</div>";
 	}
 	
+	doWrite(strFileContents)
+	{
+		strFileContents += this.m_strDeviceName + "\r\n";
+		for (let nI = 0; nI < this.m_arrayConnectedDevices.length; nI++)
+			strFileContents += this.m_arrayConnectedDevices.doWrite(strFileContents);
+		return strFileContents;
+	}
+	
 	doRun()
+	{
+	}
+	
+	doStopRun()
 	{
 	}
 	

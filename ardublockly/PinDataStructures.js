@@ -23,6 +23,25 @@ class CPin
 		this.m_rectangle = new CRectangle(point, size);
 	}
 
+	doRead(strFileContents)
+	{
+		this.m_strPinID = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, this.m_strPinID);
+		
+		this.m_strWireName = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, this.m_strWireName);
+		
+		return strFileContents;
+	}
+	
+	doWrite(strFileContents)
+	{
+		strFileContents += this.m_strPinID + "\r\n";
+		strFileContents += this.m_strWireName + "\r\n";
+		
+		return strFileContents; 
+	}
+	
 	canAcceptConection()
 	{
 		return this.m_strWireName == "";
@@ -36,6 +55,11 @@ class CPin
 	isDataPin()
 	{
 		return true;
+	}
+	
+	getState()
+	{
+		return this.m_nState;
 	}
 	
 	getType()
@@ -162,11 +186,11 @@ class CPin
 			this.m_strMode = strMode;
 	}
 	
-	digitalread()
+	digitalRead()
 	{
 		var nState = 0;
 		
-		if ((this.m_nState == INPUT) || (this.m_nState == INPUT_HIGH))
+		if ((this.m_strMode == INPUT) || (this.m_strMode == INPUT_HIGH))
 			nState = this.m_nState;
 		else
 			doErrorMessage(g_strErrorMessage + "attempting to read from pin '" + this.m_nPinNum + "' which is in '" + this.m_strMode + "' mode!");
@@ -174,29 +198,38 @@ class CPin
 		return nState;
 	}
 	
-	digitalWrite(nState)
+	digitalWrite(strState)
 	{
-		if (nState > HIGH)
-			nState = HIGH;
-		else if (nState < LOW)
-			nState = LOW;
-		else if (NaN(nState))
-			doErrorMessage(g_strErrorMessage + "attempting to write to pin '" + this.m_nPinNum + "' a non numeric value '" + this.nState + "'!");
-
 		if (this.m_strMode == OUTPUT)
-			this.m_nState = nState;
+		{
+			if ((strState == "true") || (strState == "1") || (strState == HIGH))
+				this.m_nState = 1;
+			else if ((strState == "false") || (strState == "0") || (strState == LOW))
+				this.m_nState = 0;
+			else
+			{
+				let nState = parseInt(strState);
+				if (isNAN(nState))
+					doErrorMessage(g_strErrorMessage + "attempting to write to pin '" + this.m_nPinNum + "' an invalid value '" + strState + "'!");
+				else
+					this.m_nState = 1;
+			}
+//console.log("Pin " + this.m_strPinID + ": " + this.m_nState);
+		}
 		else
 			doErrorMessage(g_strErrorMessage + "attempting to write to pin '" + this.m_nPinNum + "' which is in '" + this.m_strMode + "' mode!");
 	}
 	
-	analogWrite(nPWMVal)
+	analogWrite(strPWMVal)
 	{
+		var nState = parseInt(strState);
+
 		if (this.m_strMode != OUTPUT)
 			doErrorMessage(g_strErrorMessage + "attempting to analog write to pin '" + this.m_nPinNum + "' which is in '" + this.m_strMode + "' mode!");
 		else if (!this.m_bIsPWM)
 			doErrorMessage(g_strErrorMessage + "attempting to analog write to pin '" + this.m_nPinNum + "' which is not a PWM pin!");
 		else
-			this.m_nState = nPWMVal
+			this.m_nState = nState
 	}
 	
 	analogRead()

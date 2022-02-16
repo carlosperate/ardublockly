@@ -25,9 +25,11 @@ class CLiteral
 	{
 		var Value = null;
 		
-		if (this.m_strType == "char")
+		if (isArduinoConstant(this.m_strValue))
+			Value = this.m_strValue;
+		else if (this.m_strType == "char")
 			Value = this.m_strValue[0];
-		else if (this.m_strType == "boolean")
+		else if ((this.m_strType == "boolean") || (this.m_strType == "bool"))
 		{
 			if ((this.m_strValue == "true") || (this.m_strValue == "1"))
 				Value = true;
@@ -39,7 +41,7 @@ class CLiteral
 		else if (this.m_strType == "String")
 			Value = this.m_strValue;
 		else
-			Value = parseInt(this.m_strType[0], 10);
+			Value = parseInt(this.m_strValue, 10);
 		
 		return Value;
 	}
@@ -148,6 +150,19 @@ class CVariable
 		return strText;
 	}
 	
+	evaluate()
+	{
+		var nI = g_arrayGlobalVariables.indexOf(this.m_strName);
+		var strValue = "";
+		
+		if (nI > -1)
+			strValue = g_arrayGlobalVariables.getValue(nI);
+		else
+			strValue = this.m_strValue;
+		
+		return strValue;
+	}
+	
 };
 
 class CVariableArray
@@ -170,29 +185,46 @@ class CVariableArray
 	
 	setValue(nI, Value)
 	{
-		if (nI >= this.m_arrayVariables.length)
+		if ((nI < 0) ||(nI >= this.m_arrayVariables.length))
 			alert("ERROR: CVariableArray:setValue, nI = " + nI + ", m_arrayVariables.length = " + this.m_arrayVariables.length + "!");
-		
-		this.m_arrayVariables[nI].setValue(Value);
+		else
+			this.m_arrayVariables[nI].setValue(Value);
 	}
-	setValue(strVariableName, Value)
-	{
-		var nI = this.indexOf(strName);
-		this.setValue(nI, Value);
-	}
-	
+
 	getValue(nI)
 	{
-		if (nI >= this.m_arrayVariables.length)
+		var nResult = 0;
+		
+		if ((nI < 0) ||(nI >= this.m_arrayVariables.length))
 			alert("ERROR: CVariableArray:getValue, nI = " + nI + ", m_arrayVariables.length = " + this.m_arrayVariables.length + "!");
-		return this.m_arrayVariables[nI].getValue();
+		else
+			nResult = this.m_arrayVariables[nI].getValue();
+		
+		return nResult;
+	}
+	
+	evaluate(nI)
+	{
+		var nResult = 0;
+		
+		if ((nI < 0) ||(nI >= this.m_arrayVariables.length))
+			alert("ERROR: CVariableArray:evaluate, nI = " + nI + ", m_arrayVariables.length = " + this.m_arrayVariables.length + "!");
+		else
+			nResult = this.m_arrayVariables[nI].evaluate();
+		
+		return nResult;
 	}
 	
 	getType(nI)
 	{
-		if (nI >= this.m_arrayVariables.length)
+		var nResult = 0;
+		
+		if ((nI < 0) ||(nI >= this.m_arrayVariables.length))
 			alert("ERROR: CVariableArray:getType, nI = " + nI + ", m_arrayVariables.length = " + this.m_arrayVariables.length + "!");
-		return this.m_arrayVariables[nI].getType();
+		else
+			nResult = this.m_arrayVariables[nI].getType();
+		
+		return nResult;
 	}
 	
 	find(strName)
@@ -446,6 +478,33 @@ class CVariableStatement
 			strText += this.m_Expression.toString("", "") + ";" + strNewLine;
 		
 		return strText;
+	}
+	
+	evaluate()
+	{
+		var nIndex = g_arrayGlobalVariables.indexOf(this.m_strVariableName);
+		var nCurrentValue = 0;
+		var nNewValue = this.m_Expression.evaluate();
+		
+		if (nIndex > -1)
+		{
+			nCurrentValue = g_arrayGlobalVariables.getValue(nIndex);
+			
+			if (this.m_strOperator == "=")
+				g_arrayGlobalVariables.setValue(nIndex, nNewValue);
+			else if (this.m_strOperator == "+=")
+				g_arrayGlobalVariables.setValue(nIndex, nCurrentValue + nNewValue);
+			else if (this.m_strOperator == "-=")
+				g_arrayGlobalVariables.setValue(nIndex, nCurrentValue - nNewValue);
+			else if (this.m_strOperator == "*=")
+				g_arrayGlobalVariables.setValue(nIndex, nCurrentValue * nNewValue);
+			else if (this.m_strOperator == "/=")
+				g_arrayGlobalVariables.setValue(nIndex, nCurrentValue / nNewValue);
+			else if (this.m_strOperator == "|=")
+				g_arrayGlobalVariables.setValue(nIndex, nCurrentValue | nNewValue);
+			else if (this.m_strOperator == "&=")
+				g_arrayGlobalVariables.setValue(nIndex, nCurrentValue & nNewValue);
+		}
 	}
 	
 };
@@ -1045,7 +1104,7 @@ class CFunctionArray
 	
 };
 
-g_arrayArduinoFunctions = ["Serial.print", "Serial.println", "Serial.begin", "digtalRead", "digtalWrite", 
+g_arrayArduinoFunctions = ["Serial.print", "Serial.println", "Serial.begin", "digitalRead", "digitalWrite", 
 							"analogRead", "analogWrite", "pinMode", "setup", "loop", "delay"];
 							
 function isArduinoFunctionCall(strFuncName)
@@ -1112,118 +1171,62 @@ class CFunctionCall
 	
 	evaluate()
 	{
+		var ReturnValue = null;
+		
 		if ((this.m_strFuncName == "Serial.print") || (this.m_strFuncName == "Serial.println"))
 		{
 			if (this.m_arrayParams.getLength() == 1)
 			{
 				if (this.m_arrayParams.getType(0) == "char")
-					g_SerialMonitor.printText("" + this.m_arrayParams.getValue(0));
+					g_SerialMonitor.printText("" + this.m_arrayParams.evaluate(0));
 				else if ((this.m_arrayParams.getType(0) == "String") || (this.m_arrayParams.getType(0) == "string"))
-					g_SerialMonitor.printText(this.m_arrayParams.getValue(0));
+					g_SerialMonitor.printText(this.m_arrayParams.evaluate(0));
 				else if (this.m_arrayParams.getType(0) == "int")
-					g_SerialMonitor.printInt(this.m_arrayParams.getValue(0), "DEC");
+					g_SerialMonitor.printInt(this.m_arrayParams.evaluate(0), "DEC");
 			}
 			else if (this.m_arrayParams.getLength() == 2)
 			{
 				if (this.m_arrayParams.getType(0) == "int")
-					g_SerialMonitor.printInt(this.m_arrayParams.getValue(0), this.m_arrayParams.getValue(1));
+					g_SerialMonitor.printInt(this.m_arrayParams.evaluate(0), this.m_arrayParams.evaluate(1));
 			}
 			if (this.m_strFuncName == "Serial.println")
 				g_SerialMonitor.printlnText("");
 		}
 		else if (this.m_strFuncName == "Serial.begin")
 		{
-			g_SerialMonitor.begin(this.m_arrayParams.getValue(0));
+			g_SerialMonitor.begin(this.m_arrayParams.evaluate(0));
 		}
-		else if (this.m_strFuncName == "digtalRead")
+		else if (this.m_strFuncName == "digitalRead")
 		{
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			// TO DO
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
+			if (g_mapPlacedComponents.get(g_strMCUName))
+				ReturnValue = g_mapPlacedComponents.get(g_strMCUName).digitalRead(this.m_arrayParams.evaluate(0));
 		}
-		else if (this.m_strFuncName == "digtalWrite")
+		else if (this.m_strFuncName == "digitalWrite")
 		{
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			// TO DO
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
+			if (g_mapPlacedComponents.get(g_strMCUName))
+				g_mapPlacedComponents.get(g_strMCUName).digitalWrite(this.m_arrayParams.evaluate(0), this.m_arrayParams.evaluate(1));
 		}
 		else if (this.m_strFuncName == "analogRead")
 		{
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			// TO DO
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
+			if (g_mapPlacedComponents.get(g_strMCUName))
+				ReturnValue = g_mapPlacedComponents.get(g_strMCUName).analogRead(this.m_arrayParams.evaluate(0));
 		}
 		else if (this.m_strFuncName == "analogWrite")
 		{
-				//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			// TO DO
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
+			if (g_mapPlacedComponents.get(g_strMCUName))
+				g_mapPlacedComponents.get(g_strMCUName).analogWrite(this.m_arrayParams.evaluate(0), this.m_arrayParams.evaluate(1));
 		}
 		else if (this.m_strFuncName == "pinMode")
 		{
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			// TO DO
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
+			if (g_mapPlacedComponents.get(g_strMCUName))
+				g_mapPlacedComponents.get(g_strMCUName).pinMode(this.m_arrayParams.evaluate(0), this.m_arrayParams.evaluate(1));
 		}
 		else if (this.m_strFuncName == "delay")
 		{
 			if (g_Delay.isExpired())
-				g_Delay.set(parseInt(this.m_arrayParams.getValue(0)));
+				g_Delay.set(parseInt(this.m_arrayParams.evaluate(0)));
 		}
-		else
-		{
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			// TO DO
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-			//*****************************************
-		}
+		return ReturnValue;
 	}
 	
 };

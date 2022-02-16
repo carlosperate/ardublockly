@@ -154,13 +154,20 @@ var g_strSelectedMCUType = doGetMCU(g_strGetData);
 alert("\n\n============================================\n\nCODE\n\n" + g_strCode + 
 		"\n\n============================================\n\nMCU\n\n" + g_strSelectedMCUType + "\n\n");
 */
-g_strCode = "void setup(){" +  
+g_strCode = "bool bState=true;" + 
+			"int nVal=0;" + 
+		 "void setup(){" +  
 		 "Serial.begin(9600);" +
 		 "Serial.println(\"In setup()...\");" +
+		 "pinMode(10,OUTPUT);" + 
+		 "pinMode(11,INPUT);" + 
 		 "}" + 
 		 "void loop(){" + 
 		  "Serial.println(\"In loop()...\");" + 
-		  "delay(2000);" + 
+		  "digitalWrite(10,bState);" + 
+		  "bState=!bState;" + 
+		  "nVal=digitalRead(11);" + 
+		  //"delay(1000);" + 
 		  "}";
 g_strSelectedMCUType = "Mega";
 

@@ -59,11 +59,16 @@ class CLED extends CComponentBase
 								g_strButtonStyle + "position:relative;top:6Px;\" value=\"REPLACE\" onclick=\"doClick('YYYY')\"></div>";
 	}
 
+	doRead(strFileContents)
+	{
+		strFileContents = super.doRead(strFileContents);
+		
+		return strFileContents;
+	}
+	
 	doWrite()
 	{
 		var strFileContents = super.doWrite();
-		
-		strFileContents += this.m_bIsBlown + "\r\n";
 		
 		return strFileContents;
 	}
@@ -143,9 +148,15 @@ class CLED extends CComponentBase
 		return this.m_bIsBlown;
 	}
 
+	doStopRun()
+	{
+		doTurnOff();
+	}
+	
 	doRun()
 	{
 		var fAnodeVoltage = this.m_arrayPins[0].getVoltage();
+		console.log("LED '" + this.getDeviceName() + "', anode voltage: " + fAnodeVoltage);
 		var fCathodVoltage = this.m_arrayPins[1].getVoltage();
 		var fAnodeResistance = 0;
 		var fCathodeResistance = 0;
@@ -163,6 +174,8 @@ class CLED extends CComponentBase
 			else
 				this.doTurnOff();
 		}
+		else
+			this.doTurnOff();
 	}
 }
 

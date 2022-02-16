@@ -950,7 +950,7 @@
 				return strToken;
 			}
 			
-			function doClearToken(strFileContents, strToken)
+			function doDeleteToken(strFileContents, strToken)
 			{
 				var nPos = strFileContents.indexOf(strToken) + strToken.length + 2;
 				strFileContents = strFileContents.substring(nPos);
@@ -987,54 +987,22 @@
 				while (strFileContents.length > 0)
 				{
 					strType = doReadNextToken(strFileContents);
-					strFileContents = doClearToken(strFileContents, strType);
+					strFileContents = doDeleteToken(strFileContents, strType);
 
-					if (strType == "MCU")
-					{
-						strType = doReadNextToken(strFileContents);
-						strFileContents = doClearToken(strFileContents, strType);
-					}
-					strName = doReadNextToken(strFileContents);
-					strFileContents = doClearToken(strFileContents, strName);
-
-					strX = doReadNextToken(strFileContents);
-					strFileContents = doClearToken(strFileContents, strX);
-
-					strY = doReadNextToken(strFileContents);
-					strFileContents = doClearToken(strFileContents, strY);
-
-					strAngle = doReadNextToken(strFileContents);
-					strFileContents = doClearToken(strFileContents, strAngle);
-					
+					if (strType.includes("MCU"))
+						strType = strType.substring(4)
+						
 					if (strType == "MEGA")
-					{
 						Component = new CArduinoMega();
-					}
 					else if (strType == "UNO")
-					{
 						Component = new CArduinoUno();
-					}
 					else if (strType == "MICROBIT")
-					{
-						strBreakout = doReadNextToken(strFileContents);
-						strFileContents = strFileContents.replace(strBreakout, "");
-							
 						Component = new CMicrobit(strBreakout == "true");
-					}
 					else if (strType == "LED")
-					{
-						strBlown = doReadNextToken(strFileContents);
-						strFileContents = doClearToken(strFileContents, strBlown);
 						Component = new CLED();
-					}
 					else if (strType == "RESISTOR")
-					{
-						strBlown = doReadNextToken(strFileContents);
-						strFileContents = doClearToken(strFileContents, strBlown);
-						strResistance = doReadNextToken(strFileContents);
-						strFileContents = doClearToken(strFileContents, strResistance);
 						Component = new CResistor();
-					}
+
 					//*************************
 					//*************************
 					//*************************
@@ -1045,28 +1013,16 @@
 					
 					if (Component != null)
 					{
-						Component.setDeviceName(strName);
-						Component.doRotate(parseInt(strAngle));
-						Component.doMove(new CPoint(parseInt(strX), parseInt(strY)));
-						Component.doUnselect();
-						if (strType == "RESISTOR")
-						{
-							if (strBlown == "true")
-								Component.doBlown();
-							Component.doSetResistance(parseFloat(strResistance));
-						}
-						else if (strType == "LED")
-						{
-							if (strBlown == "true")
-								Component.doBlown();
-						}
-						g_mapPlacedComponents.set(strName, Component);
+						strFileContents = Component.doRead(strFileContents);
+						if (Component.getType() == "MCU")
+							g_strMCUName = Component.getDeviceName();
+						g_mapPlacedComponents.set(Component.getDeviceName(), Component);
 					}
 				}
 				doDisplayAllComponents();
 			}
 			
-			function doOpenFile()
+			function doOpenFile(event)
 			{
 				var FileInput = document.getElementById("open_file");
 				var strFileName = null;
@@ -1086,7 +1042,6 @@
 			function doOpenBrowseFile()
 			{
 				document.getElementById("open_file").click();
-				doOpenFile();
 			}
 
 			function doRotateRight()
@@ -1208,15 +1163,14 @@
 					if (g_LoopFunc && g_Delay.isExpired())
 					{
 						g_LoopFunc.evaluate();
-
-						for (let nI = 0; nI < g_arrayDeviceName.length; nI++)
-						{
-							if ((g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "MCU")) &&
-								(g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "WIRE")))
-								g_mapPlacedComponents.get(g_arrayDeviceName[nI]).doRun();
-						}
-						doDisplayAllComponents();
 					}
+					for (let nI = 0; nI < g_arrayDeviceName.length; nI++)
+					{
+						if ((g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "MCU")) &&
+							(g_mapPlacedComponents.get(g_arrayDeviceName[nI]) && (g_mapPlacedComponents.get(g_arrayDeviceName[nI]).getType() != "WIRE")))
+							g_mapPlacedComponents.get(g_arrayDeviceName[nI]).doRun();
+					}
+					doDisplayAllComponents();
 					window.requestAnimationFrame(simulate);
 				}
 			}
@@ -1264,6 +1218,7 @@
 					ButtonStop.style.borderBottomColor = "#20B7BC";
 				}
 				g_bSimulationStarted = false;
+				doStopRunAllComponents();
 			}
 			
 			
@@ -1581,7 +1536,7 @@
 			doDrawCanvasGrid(g_CanvasContext, g_Canvas.offsetWidth, g_Canvas.offsetHeight);
 			doDrawCanvasGrid(g_BlankCanvasCloneContext, g_BlankCanvasClone.offsetWidth, g_BlankCanvasClone.offsetHeight);
 			doScrollToMiddle();
-			doCreateMCU(g_strSelectedMCUType);
+			g_strMCUName = doCreateMCU(g_strSelectedMCUType);
 
 		</script>
 		

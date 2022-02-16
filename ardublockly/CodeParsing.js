@@ -128,7 +128,7 @@ function doGetNextValue(bFloat)
 {
 	var strIdentifier = "";
 
-	while (isNumeric(g_strCode.charCodeAt(0)) || (bFloat && (g_strCode.charCodeAt(0) == 46/* . */)))
+	while (isAlphaNumeric(g_strCode.charCodeAt(0)) || (bFloat && (g_strCode.charCodeAt(0) == 46/* . */)))
 	{
 		strIdentifier += g_strCode[0];
 		g_strCode = g_strCode.substring(1);
@@ -627,7 +627,10 @@ function doParseArduinoFunctionCall(strFuncName)
 				if (GlobalVar != null)
 				{
 					if (GlobalVar != null)
+					{
+						Variable = new CVariable();
 						Variable.init(GlobalVar.getName(), GlobalVar.getType(), GlobalVar.getValue());
+					}
 					else	
 						doErrorMessage("doParseArduinoFunctionCall, cannot find global variable '" + strParam + ",!");
 				}
@@ -635,6 +638,7 @@ function doParseArduinoFunctionCall(strFuncName)
 				{	
 					strType = doGetArduinoFunctionParamType(strFuncName, nParamNum);
 					strVal = strParam;	
+					Variable = new CVariable();
 					Variable.init("strParam" + nParamNum.toString(), strType, strVal);
 				}
 				else // Must be a literal value
@@ -644,6 +648,8 @@ function doParseArduinoFunctionCall(strFuncName)
 					Variable.init(strType, strParam);
 				}
 				FuncCall.addParameter(Variable);
+				if (g_strCode[0] == ',')
+					g_strCode = g_strCode.substring(1);
 				
 				if (strLastCode == g_strCode)
 					strLastCode = doInfiniteLoopErrorMessage("doParseArduinoFunctionCall", g_strCode, strLastCode);
@@ -691,6 +697,8 @@ function doParseFunctionCall(strFuncName)
 				else
 					doErrorMessage("doParseFunctionCall, parameter '" + nI + "' for function '" + strFuncName + "' is null!");
 			}
+			if (g_strCode[0] == ',')
+				g_strCode = g_strCode.substring(1);
 			nI++
 			if (strLastCode == g_strCode)
 				strLastCode = doInfiniteLoopErrorMessage("doParseFunctionCall", g_strCode, strLastCode);
@@ -1122,7 +1130,8 @@ function doParse()
 
 			if ((strIdentifier1 == 'char') || (strIdentifier1 == 'float') || (strIdentifier1 == 'int') || (strIdentifier1 == 'long') || 
 					 (strIdentifier1 == 'byte') || (strIdentifier1 == 'uint8_t') || (strIdentifier1 == 'int8_t') || (strIdentifier1 == 'uint16_t') || 
-					 (strIdentifier1 == 'int16_t') || (strIdentifier1 == 'uint32_t') || (strIdentifier1 == 'int32_t') || (strIdentifier1 == 'void')) 
+					 (strIdentifier1 == 'int16_t') || (strIdentifier1 == 'uint32_t') || (strIdentifier1 == 'int32_t') || (strIdentifier1 == 'void') ||
+					 (strIdentifier1 == 'bool') || (strIdentifier1 == 'boolean')) 
 			{
 				strIdentifier2 = doGetNextToken();			
 
@@ -1172,3 +1181,4 @@ function doReproduceCode()
 var g_arrayFunctions = new CFunctionArray();
 var g_SetupFunc = null, g_LoopFunc = null;
 var g_arrayGlobalVariables = new CVariableArray();
+

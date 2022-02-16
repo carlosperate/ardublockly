@@ -11,6 +11,11 @@ var g_BUILT_IN_LED = 13;
 var g_nMCUCount = 0;
 var g_strSelectedComponentName = "", g_strMCUName = "";
 
+function isArduinoConstant(strVal)
+{
+	return (strVal == INPUT) || (strVal == INPUT_HIGH) || (strVal == OUTPUT) || (strVal == HIGH) || (strVal == LOW) || (strVal == "true") || (strVal == "false");
+}
+
 function doCreateComponent(strComponentType)
 {
 	var strComponentName = doGetUniqueName(strComponentType);
@@ -97,10 +102,16 @@ function doGetUniqueName(strName)
 
 function doCreateMCU(strMCUType)
 {
+	if ((strMCUType != "UNO") && (strMCUType != "MEGA"))
+	{
+		alert("'" + strMCUType + "' is not supported at this time!");
+		strMCUType = "UNO";
+	}
 	var Component = doCreateComponent(strMCUType);
 	var strMCUName = Component.getDeviceName();
 	g_mapPlacedComponents.set(strMCUName, Component);
 	doDisplayAllComponents();
+	return strMCUName;
 }
 
 function doShowEditFields(strHTMLEditField)
@@ -148,6 +159,20 @@ function doDisplayHint(strHeading, strInfo)
 //* PLACED COMPONENTS MAP FUNCTIONS
 //*
 //*************************************************************************
+
+function doStopRunAllComponents()
+{
+	var arrayDeviceName = [];
+	var strDeviceName = "", strSelectedDeviceName = "";
+	
+	g_mapPlacedComponents.forEach(function(strValue, strKey, map){arrayDeviceName.push(strKey)});
+	
+	for (let nI = 0; nI < arrayDeviceName.length; nI++)
+	{
+		if (g_mapPlacedComponents.get(arrayDeviceName[nI]))
+			g_mapPlacedComponents.get(arrayDeviceName[nI]).doStopRun();
+	}
+}
 
 function doZoomAllDrawingObjects(strInOut)
 {
@@ -371,15 +396,43 @@ class CComponentBase
 			this.m_arrayPins[nIndex].set(pointPos, sizeDimen);
 	}
 	
-	doWrite()
+	doRead(strFileContents)
 	{
-		var strFileContents = "";
+		var strTemp = "";
 		
+		this.m_strDeviceName = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, this.m_strDeviceName);
+		
+		strTemp = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, strTemp);
+		this.m_nRotationAngle = parseInt(strTemp);
+		
+		strTemp = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, strTemp);
+		this.m_rectangle.m_pointTL.m_nX = parseInt(strTemp);
+		
+		strTemp = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, strTemp);
+		this.m_rectangle.m_pointTL.m_nY = parseInt(strTemp);
+		
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+			strFileContents = this.m_arrayPins[nI].doRead(strFileContents);
+		
+		this.doMove(this.m_rectangle.m_pointTL);
+		this.doRotate(this.m_rectangle.m_nRotationAngle);
+		
+		return strFileContents;
+	}
+	
+	doWrite(strFileContents)
+	{	
 		strFileContents = this.m_strType + "\r\n";
 		strFileContents += this.m_strDeviceName + "\r\n";
 		strFileContents += this.m_nRotationAngle + "\r\n";
 		strFileContents += this.m_rectangle.m_pointTL.m_nX + "\r\n";
 		strFileContents += this.m_rectangle.m_pointTL.m_nY + "\r\n";
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+			strFileContents = this.m_arrayPins[nI].doWrite(strFileContents);
 		
 		return strFileContents;
 	}
@@ -650,6 +703,10 @@ class CComponentBase
 	{
 	}
 	
+	doStopRun()
+	{
+	}
+	
 	getVoltage()
 	{
 		return 0;
@@ -675,10 +732,9 @@ class CMCUBase extends CComponentBase
 {
 	constructor(strType)
 	{
-		super("MCU");
+		super("MCU " + strType);
 		this.m_mapAnalogPins = new Map();
 		this.m_nMaxPin = 0;
-		this.m_strMCUType = strType;
 		this.m_fVoltage = 0;
 	}
 	
@@ -690,7 +746,7 @@ class CMCUBase extends CComponentBase
 		{
 			if (strPinID == this.m_arrayPins[nI].getPinID())
 			{
-				if (this.m_arrayPins[nI].getState() == HIGH)
+				if (this.m_arrayPins[nI].getState() == 1)
 					fVoltage = this.m_fVoltage;
 				else
 					fVoltage = 0;
@@ -703,8 +759,15 @@ class CMCUBase extends CComponentBase
 	doWrite()
 	{
 		var strFileContents = super.doWrite();
-		strFileContents += this.m_strMCUType + "\r\n";
 		return strFileContents;
+	}
+	
+	getType()
+	{
+		var strType = super.getType();
+		strType = strType.substring(0, 3);
+		
+		return strType;
 	}
 	
 	setDeviceName(strDeviceName)
@@ -722,73 +785,80 @@ class CMCUBase extends CComponentBase
 	getPin(PinID)
 	{
 		var nPinNum = -1;
-		var mapAnalogPins = null;
 		
-		mapAnalogPins = MCU.getAnalogPinMap();
-		if (mapAnalogPins != null)
+		if (isNaN(PinID))
 		{
-			if (NaN(PinID))
-			{
-				if (mapAnalogPins.has(PinID))
-					nPinNum = mapAnalogPins[PinID];
-				else
-					doErrorMessage(g_strErrorMessage + "'" + strDeviceName + "' does not have pin '" + PinID + "'!");
-			}	
-			if (nPinNum == 0)
-			{
-				doErrorMessage(g_strErrorMessage + "shouldn't digital read from pin '0' as it belongs to Serial Monitor!");
-				nPinNum = -1;
-			}
-			else if (nPinNum == 1)
-			{
-				doErrorMessage(g_strErrorMessage + "shouldn't digital read from pin '1' as it belongs to Serial Monitor!");
-				nPinNum = -1;
-			}
-			else if (nPinNum > this.m_nMaxPin)
-			{
-				doErrorMessage(g_strErrorMessage + "no such pin '" + nPinNum + "'!");
-				nPinNum = -1;
-			}
+			if (this.m_mapAnalogPins.has(PinID))
+				nPinNum = m_mapAnalogPins.get(PinID);
+			else
+				doErrorMessage(g_strErrorMessage + "'" + this.getDeviceName() + "' does not have pin '" + PinID + "'!");
+		}
+		else
+			nPinNum = PinID;
+		
+		if (nPinNum == 0)
+		{
+			doErrorMessage(g_strErrorMessage + "shouldn't digital read from pin '0' as it belongs to Serial Monitor!");
+			nPinNum = -1;
+		}
+		else if (nPinNum == 1)
+		{
+			doErrorMessage(g_strErrorMessage + "shouldn't digital read from pin '1' as it belongs to Serial Monitor!");
+			nPinNum = -1;
+		}
+		else if (nPinNum > this.m_nMaxPin)
+		{
+			doErrorMessage(g_strErrorMessage + "no such pin '" + nPinNum + "'!");
+			nPinNum = -1;
 		}
 		return nPinNum;
 	}
 	
-	digitalRead(PinID)
+	pinMode(PinID, strMode)
 	{
-		var nPinNum = getPin(PinID, this);
-		var nState = 0;
+		var nPinNum = this.getPin(PinID, this);
 		
 		if (nPinNum != -1)
-			nState = m_arrayPins.digitRead(nPinNum);
+			this.m_arrayPins[nPinNum].pinMode(strMode);
 
-		return nState;
 	}
 	
-	digitalWrite(PinID, nState)
+	digitalRead(PinID)
 	{
-		var nPinNum = getPin(PinID, this);
+		var nPinNum = this.getPin(PinID, this);
+		var strState = "";
 		
 		if (nPinNum != -1)
-			m_arrayPins.digitWrite(nPinNum, nState);
+			strState = this.m_arrayPins[nPinNum].digitalRead();
+
+		return strState;
+	}
+	
+	digitalWrite(PinID, strState)
+	{
+		var nPinNum = this.getPin(PinID, this);
+		
+		if (nPinNum != -1)
+			this.m_arrayPins[nPinNum].digitalWrite(strState);
 	}
 	
 	analogRead(nPinNum)
 	{
-		var nPinNum = getPin(PinID, this);
-		var nState = 0;
+		var nPinNum = this.getPin(PinID, this);
+		var strState = "";
 		
 		if (nPinNum != -1)
-			nState = m_arrayPins.analogRead(nPinNum);
+			strState = this.m_arrayPins[nPinNum].analogRead();
 
-		return nState;
+		return strState;
 	}
 	
-	analogWrite(nPinNum, nPWMVal)
+	analogWrite(nPinNum, strPWMVal)
 	{
-		var nPinNum = getPin(PinID, this);
+		var nPinNum = this.getPin(PinID, this);
 		
 		if (nPinNum != -1)
-			m_arrayPins.analogWrite(nPinNum, nPWMVal);
+			this.m_arrayPins[nPinNum].analogWrite(strPWMVal);
 	}
 	
 	doDisplay()
@@ -822,7 +892,6 @@ class CDelay
 	{
 		this.m_timeStart = performance.now();
 		this.m_millisDelay = nMillisDelay;
-		console.log("%%%%%" + this.m_timeStart + ", " + this.m_millisDelay + "%%%%%");
 	}
 	
 	isExpired()

@@ -1005,9 +1005,19 @@ class CMicrobit extends CMCUBase
 		this.m_mapDigitalPinNames.set("P20", 20);
 	}
 	
-	doWrite()
+	doRead(strFileContents)
 	{
-		var strFileContents = super.doWrite();
+		strFileContents = super.doRead(strFileContents);
+		var strTemp = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, strTemp);
+		this.m_bBreakout = strTemp == "true";
+		
+		return strFileContents;
+	}
+	
+	doWrite(strFileContents)
+	{
+		strFileContents = super.doWrite(strFileContents);
 		strFileContents += this.m_bBreakout + "\r\n";
 		return strFileContents;
 	}

@@ -914,16 +914,30 @@ class CResistor extends CComponentBase
 								"<input type=\"button\" style=\"" + g_strButtonStyle + "position:relative;top:5Px;\" value=\"CHANGE\" onclick=\"doChangeResistance('ZZZZ', doGetResistance())\"></div>";
 	}
 
+	doStopRun()
+	{
+	}
+	
 	doRun()
 	{
 	}
 	
-	doWrite()
+	doRead(strFileContents)
 	{
-		var strFileContents = super.doWrite();
+		strFileContents = super.doRead(strFileContents);
 		
-		strFileContents += this.m_bIsBlown + "\nRadius\n";
-		strFileContents += this.m_fResistance + "\nRadius\n";
+		var strTemp = doReadNextToken(strFileContents);
+		strFileContents = doDeleteToken(strFileContents, strTemp);
+		this.m_fResistance = parseFloat(strTemp);
+		
+		return strFileContents;
+	}
+	
+	doWrite(strFileContents)
+	{
+		strFileContents = super.doWrite(strFileContents);
+		
+		strFileContents += this.m_fResistance + "\r\n";
 		
 		return strFileContents;
 	}

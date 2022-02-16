@@ -80,7 +80,7 @@ class CSerialMonitor
 					SerialMonitorDiv.scrollTop = 0;
 				else 
 					SerialMonitorDiv.scrollTop = SerialMonitorDiv.scrollHeight;
-				
+			
 				bResult = true;
 			}
 		}
