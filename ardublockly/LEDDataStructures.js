@@ -192,7 +192,7 @@ class CLED extends CComponentBase
 	
 	doDisplay()
 	{
-		var fAnodeVoltage = 4.5;//this.m_arrayPins[0].getVoltage();
+		var fAnodeVoltage = this.m_arrayPins[0].getVoltage();
 		var fMaxVoltage = g_mapPlacedComponents.get(g_strMCUName).getLogicVoltage();
 		
 		if (fAnodeVoltage == fMaxVoltage)
