@@ -920,6 +920,20 @@ class CResistor extends CComponentBase
 	
 	doRun()
 	{
+		if (!this.m_bIsBlown)
+		{
+			var fPin1Voltage = this.m_arrayPins[0].getVoltage();
+			var fPin2Voltage = this.m_arrayPins[1].getVoltage();
+			var fTotalVoltage = Math.abs(fPin1Voltage - fPin2Voltage);
+			var fResistance = this.m_arrayPins[0].getResistance() + this.m_arrayPins[0].getResistance() + this.m_fResistance;
+			var fCurrent = fTotalVoltage / fResistance, fPower = 0;
+				
+			fCurrent = fTotalVoltage / fResistance;
+			fPower = fCurrent * fTotalVoltage;
+			
+			if (fPower > 0.5)
+				this.doBlown();
+		}
 	}
 	
 	doRead(strFileContents)

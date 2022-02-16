@@ -59,6 +59,16 @@ class CLED extends CComponentBase
 								g_strButtonStyle + "position:relative;top:6Px;\" value=\"REPLACE\" onclick=\"doClick('YYYY')\"></div>";
 	}
 
+	getVoltage(strDeviceNameIn, strPinIDIn)
+	{
+		return -this.m_fLEDVoltage;
+	}
+	
+	getResistance(strDeviceNameIn, strPinIDIn)
+	{
+		return 0;
+	}
+	
 	doRead(strFileContents)
 	{
 		strFileContents = super.doRead(strFileContents);
@@ -155,27 +165,87 @@ class CLED extends CComponentBase
 	
 	doRun()
 	{
-		var fAnodeVoltage = this.m_arrayPins[0].getVoltage();
-		console.log("LED '" + this.getDeviceName() + "', anode voltage: " + fAnodeVoltage);
-		var fCathodVoltage = this.m_arrayPins[1].getVoltage();
-		var fAnodeResistance = 0;
-		var fCathodeResistance = 0;
-		var fCurrent = 0;
-		
-		if (!this.m_bIsBlown && ((fAnodeVoltage - fCathodVoltage) >= 2.4))
+		if (!this.m_bIsBlown)
 		{
-			fAnodeResistance = this.m_arrayPins[0].getResistance();
-			fCathodeResistance = this.m_arrayPins[1].getResistance();
-			fCurrent = (fAnodeVoltage - this.m_fLEDVoltage)  / (fAnodeResistance + fCathodeResistance);
-			if (fCurrent > 0.035)
-				this.doBlown();
-			else if (fCurrent >= 0.01)
-				this.doTurnOn();
+			var fAnodeVoltage = this.m_arrayPins[0].getVoltage();
+			var fCathodVoltage = this.m_arrayPins[1].getVoltage();
+			var fAnodeVoltage = this.m_arrayPins[0].getVoltage();
+			var fCathodeResistance = 0;
+			var fCurrent = 0;
+			
+			if (!this.m_bIsBlown && ((fAnodeVoltage - fCathodVoltage) >= 2.4))
+			{
+				fAnodeResistance = this.m_arrayPins[0].getResistance();
+				fCathodeResistance = this.m_arrayPins[1].getResistance();
+				fCurrent = (fAnodeVoltage - this.m_fLEDVoltage)  / (fAnodeResistance + fCathodeResistance);
+				if (fCurrent > 0.035)
+					this.doBlown();
+				else if (fCurrent >= 0.01)
+					this.doTurnOn();
+				else
+					this.doTurnOff();
+			}
 			else
 				this.doTurnOff();
 		}
-		else
-			this.doTurnOff();
 	}
+	
+	doDisplay()
+	{
+		var fAnodeVoltage = 4.5;//this.m_arrayPins[0].getVoltage();
+		var fMaxVoltage = g_mapPlacedComponents.get(g_strMCUName).getLogicVoltage();
+		
+		if (fAnodeVoltage == fMaxVoltage)
+		{
+			this.doTurnOn();
+			super.doDisplay();
+		}
+		else
+		{
+			this.doTurnOff();
+			super.doDisplay();
+			
+			var point = new CPoint(this.m_rectangle.m_pointTL.m_nX, this.m_rectangle.m_pointTL.m_nY);
+			var nRadius = 8;
+			var strColor = "";
+			
+			if (fAnodeVoltage < 1)
+				strColor = "#802020";
+			else if ((fAnodeVoltage >= 1) && (fAnodeVoltage <= 1.5))
+				strColor = "#8D2323";
+			else if ((fAnodeVoltage >= 1.5) && (fAnodeVoltage < 2))
+				strColor = "#9A2626";
+			else if ((fAnodeVoltage >= 2) && (fAnodeVoltage < 2.5))
+				strColor = "#A72929";
+			else if ((fAnodeVoltage >= 2.5) && (fAnodeVoltage < 3))
+				strColor = "#B42D2D";
+			else if ((fAnodeVoltage >= 3) && (fAnodeVoltage < 3.5))
+				strColor = "#C13030";
+			else if ((fAnodeVoltage >= 3.5) && (fAnodeVoltage < 4))
+				strColor = "#CE3333";
+			else if ((fAnodeVoltage >= 4.5) && (fAnodeVoltage < 5))
+				strColor = "#D83636";
+			else
+				strColor = "#E83A3A";
+
+			if (this.m_nRotationAngle == 0)
+				point.move(9, 8);
+			else if (this.m_nRotationAngle == 90)
+				point.move(0, 0);
+			else if (this.m_nRotationAngle == 180)
+				point.move(0, 0);
+			else if (this.m_nRotationAngle == 270)
+				point.move(0, 0);
+
+			g_CanvasContext.fillStyle = strColor;
+			g_CanvasContext.strokeStyle = strColor;
+			g_CanvasContext.beginPath();
+			g_CanvasContext.arc(point.m_nX, point.m_nY, nRadius, 0, 2 * Math.PI);
+			g_CanvasContext.fillRect(point.m_nX - 8, point.m_nY + 3, 16, 11);
+			g_CanvasContext.stroke();
+			g_CanvasContext.fill();
+		}
+	}
+	
 }
 

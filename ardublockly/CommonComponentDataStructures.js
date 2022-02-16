@@ -472,6 +472,8 @@ class CComponentBase
 			this.m_rectangle.m_size.m_nHeight = this.m_ImageObject270.naturalHeight / this.m_fScale;
 		}
 		this.doSetPinPositions();
+		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
+			this.m_arrayPins[nI].doConnectedMove(this.m_strDeviceName);
 	}
 
 	static doGetImageObject(strImageFileName)
@@ -578,9 +580,7 @@ class CComponentBase
 		this.m_bSelected = true;
 		this.doSetPinPositions();
 		for (let nI = 0; nI < this.m_arrayPins.length; nI++)
-		{
 			this.m_arrayPins[nI].doConnectedMove(this.m_strDeviceName);
-		}
 	}
 
 	hasMouseMoved(pointMousePos)
@@ -738,6 +738,11 @@ class CMCUBase extends CComponentBase
 		this.m_fVoltage = 0;
 	}
 	
+	getLogicVoltage()
+	{
+		return this.m_fVoltage;
+	}
+	
 	getVoltage(strDeviceName, strPinID)
 	{
 		var fVoltage = 0;
@@ -748,6 +753,8 @@ class CMCUBase extends CComponentBase
 			{
 				if (this.m_arrayPins[nI].getState() == 1)
 					fVoltage = this.m_fVoltage;
+				else if (this.m_arrayPins[nI].getPWM() > -1)
+					fVoltage = this.m_fVoltage * (this.m_arrayPins[nI].getPWM() / 255)
 				else
 					fVoltage = 0;
 				break;

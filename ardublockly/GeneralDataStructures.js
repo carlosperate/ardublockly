@@ -71,6 +71,12 @@ class CPoint
 	{
 		return isLesser(pointOther) || isEqual(pointOther);
 	}
+	
+	move(nX, nY)
+	{
+		this.m_nX += nX;
+		this.m_nY += nY;
+	}
 
 }
 

@@ -10,6 +10,7 @@ class CPin
 	{
 		this.m_nPinNum = nPinNum;
 		this.m_nState = 0;
+		this.m_nPWM = 0;
 		this.m_strMode = INPUT;
 		this.m_bIsPWM = bIsPWM;
 		this.m_bIsAnalog = bIsAnalog;
@@ -55,6 +56,11 @@ class CPin
 	isDataPin()
 	{
 		return true;
+	}
+	
+	getPWM()
+	{
+		return this.m_nPWM;
 	}
 	
 	getState()
@@ -202,6 +208,8 @@ class CPin
 	{
 		if (this.m_strMode == OUTPUT)
 		{
+			this.m_nPWM = -1;
+			
 			if ((strState == "true") || (strState == "1") || (strState == HIGH))
 				this.m_nState = 1;
 			else if ((strState == "false") || (strState == "0") || (strState == LOW))
@@ -222,14 +230,19 @@ class CPin
 	
 	analogWrite(strPWMVal)
 	{
-		var nState = parseInt(strState);
-
+		var nPWM = parseInt(strPWMVal);
+		
 		if (this.m_strMode != OUTPUT)
 			doErrorMessage(g_strErrorMessage + "attempting to analog write to pin '" + this.m_nPinNum + "' which is in '" + this.m_strMode + "' mode!");
 		else if (!this.m_bIsPWM)
 			doErrorMessage(g_strErrorMessage + "attempting to analog write to pin '" + this.m_nPinNum + "' which is not a PWM pin!");
+		else if (isNaN(nPWM))
+			doErrorMessage(g_strErrorMessage + "attempting to analog write an invalid value '" + strPWMVal + "'!");
 		else
-			this.m_nState = nState
+		{
+			this.m_nState = -1;
+			this.m_nPWM = nPWM;
+		}
 	}
 	
 	analogRead()
@@ -309,7 +322,7 @@ class C5VPin extends CPin
 	{
 		super(nPinNum, false, false, "5V_" + C5VPin.m_nPinIDCounter, strParentDeviceName);
 		C5VPin.m_nPinIDCounter++;
-		this.m_nState = HIGH;
+		this.m_nState = 1;
 		this.m_strMode = OUTPUT;
 	}
 
@@ -320,7 +333,7 @@ class C5VPin extends CPin
 	
 	getState()
 	{
-		return HIGH;
+		return 1;
 	}
 	
 }
@@ -342,7 +355,7 @@ class C3_3VPin extends CPin
 	{
 		super(nPinNum, false, false, "3.3V_" + C3_3VPin.m_nPinIDCounter, strParentDeviceName);
 		C3_3VPin.m_nPinIDCounter++;
-		this.m_nState = HIGH;
+		this.m_nState = 1;
 		this.m_strMode = OUTPUT;
 	}
 	
@@ -353,7 +366,7 @@ class C3_3VPin extends CPin
 	
 	getState()
 	{
-		return HIGH;
+		return 1;
 	}
 	
 }
@@ -375,7 +388,7 @@ class CGNDPin extends CPin
 	{
 		super(nPinNum, false, false, "GND_" + CGNDPin.m_nPinIDCounter, strParentDeviceName);
 		CGNDPin.m_nPinIDCounter++;
-		this.m_nState = LOW;
+		this.m_nState = 0;
 		this.m_strMode = OUTPUT;
 	}
 
@@ -386,7 +399,7 @@ class CGNDPin extends CPin
 	
 	getState()
 	{
-		return LOW;
+		return 0;
 	}
 	
 }
