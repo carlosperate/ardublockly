@@ -84,6 +84,8 @@
 	"LOGIC_OPERATION_AND": "e",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Rësponde ver se almanch un-a d'imission a l'é vera.",
 	"LOGIC_OPERATION_OR": "o",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "nen %1",
 	"LOGIC_NEGATE_TOOLTIP": "A rëspond ver se l'imission a l'é fàussa. A rëspond fàuss se l'imission a l'é vera.",
 	"LOGIC_BOOLEAN_TRUE": "ver",

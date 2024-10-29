@@ -48,6 +48,8 @@
 	"CONTROLS_IF_MSG_ELSE": "siquenon",
 	"LOGIC_OPERATION_AND": "e",
 	"LOGIC_OPERATION_OR": "o",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "pas %1",
 	"LOGIC_BOOLEAN_TRUE": "verai",
 	"LOGIC_BOOLEAN_FALSE": "fals",

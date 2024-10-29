@@ -89,6 +89,8 @@
 	"LOGIC_OPERATION_AND": "そして",
 	"LOGIC_OPERATION_TOOLTIP_OR": "最低少なくとも 1 つの入力が true の場合は true を返します。",
 	"LOGIC_OPERATION_OR": "または",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_HELPURL": "https://ja.wikipedia.org/wiki/否定",
 	"LOGIC_NEGATE_TITLE": "%1 ではないです。",
 	"LOGIC_NEGATE_TOOLTIP": "入力が false の場合は、true を返します。入力が true の場合は false を返します。",

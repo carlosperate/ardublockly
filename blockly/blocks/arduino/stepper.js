@@ -40,11 +40,7 @@ Blockly.Blocks['stepper_config'] = {
     this.setColour(Blockly.Blocks.stepper.HUE);
     this.appendDummyInput()
         .appendField(Blockly.Msg.ARD_STEPPER_SETUP)
-        .appendField(
-            new Blockly.FieldInstance('Stepper',
-                                      Blockly.Msg.ARD_STEPPER_DEFAULT_NAME,
-                                      true, true, false),
-            'STEPPER_NAME')
+        .appendField(new Blockly.FieldInstance('Stepper',Blockly.Msg.ARD_STEPPER_DEFAULT_NAME,true, true, false),'STEPPER_NAME')
         .appendField(Blockly.Msg.ARD_STEPPER_MOTOR);
     this.appendDummyInput('PINS_DROPDOWN')
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -66,6 +62,8 @@ Blockly.Blocks['stepper_config'] = {
         .setCheck(Blockly.Types.NUMBER.checkList)
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Msg.ARD_STEPPER_SPEED);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
     this.setTooltip(Blockly.Msg.ARD_STEPPER_SETUP_TIP);
   },
   /**

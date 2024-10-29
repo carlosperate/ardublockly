@@ -84,7 +84,10 @@ if py3k:
     from urllib.parse import urlencode, quote as urlquote, unquote as urlunquote
     urlunquote = functools.partial(urlunquote, encoding='latin1')
     from http.cookies import SimpleCookie
-    from collections import MutableMapping as DictMixin
+    try:
+        from _collections_abc import MutableMapping as DictMixin
+    except ImportError:
+        from collections import MutableMapping as DictMixin
     import pickle
     from io import BytesIO
     from configparser import ConfigParser
@@ -111,7 +114,10 @@ else: # 2.x
         def next(it): return it.next()
         bytes = str
     else: # 2.6, 2.7
-        from collections import MutableMapping as DictMixin
+        try:
+            from _collections_abc import MutableMapping as DictMixin
+        except ImportError:
+            from collections import MutableMapping as DictMixin
     unicode = unicode
     json_loads = json_lds
     eval(compile('def _raise(*a): raise a[0], a[1], a[2]', '<py3fix>', 'exec'))

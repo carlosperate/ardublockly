@@ -89,6 +89,8 @@
 	"LOGIC_OPERATION_AND": "a",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Vrátí hodnotu pravda, pokud alespoň jeden ze vstupů má hodnotu pravda.",
 	"LOGIC_OPERATION_OR": "nebo",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "ne %1",
 	"LOGIC_NEGATE_TOOLTIP": "Navrátí hodnotu pravda, pokud je vstup nepravda. Navrátí hodnotu nepravda, pokud je vstup pravda.",
 	"LOGIC_BOOLEAN_TRUE": "pravda",

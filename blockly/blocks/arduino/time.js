@@ -115,3 +115,86 @@ Blockly.Blocks['infinite_loop'] = {
     this.setTooltip(Blockly.Msg.ARD_TIME_INF_TIP);
   }
 };
+
+Blockly.Blocks['ds3231_setup'] = {
+  /**
+   * Block for setting up a real-time clock to receive time and date
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/ds3231/');
+    this.setColour(Blockly.Blocks.time.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_DS3231_SETUP);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_DS3231_SETUP_TIP);
+  }
+};
+
+Blockly.Blocks['ds3231_setclock'] = {
+  /**
+   * Block for manually adjusting time and date
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/ds3231/');
+    this.setColour(Blockly.Blocks.time.HUE);
+    this.appendDummyInput()
+	.appendField(new Blockly.FieldCheckbox("TRUE"), "SETCLOCK");
+        .appendField(Blockly.Msg.ARD_DS3231_SETCLOCK);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_DS3231_SETDATE)
+        .appendField(new Blockly.FieldTextInput("31"), "SETDAY")
+        .appendField(new Blockly.FieldTextInput("12"), "SETMONTH")
+        .appendField(new Blockly.FieldTextInput("2021"), "SETYEAR");
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_DS3231_SETTIME)
+        .appendField(new Blockly.FieldTextInput("12"), "SETHOUR")
+        .appendField(new Blockly.FieldTextInput("00"), "SETMINUTE");
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_DS3231_SETCLOCK_TIP);
+  }
+};
+
+Blockly.Blocks['ds3231_read'] = {
+  /**
+   * Block for writing 1st and 2nd row to the display
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/ds3231/');
+    this.setColour(Blockly.Blocks.time.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_DS3231_READ);
+    this.appendValueInput("YEAR")
+	.appendField(Blockly.Msg.ARD_DS3231_READYEAR)
+	.setAlign(Blockly.ALIGN_RIGHT),
+    this.appendValueInput("MONTH")
+	.appendField(Blockly.Msg.ARD_DS3231_READMONTH)
+	.setAlign(Blockly.ALIGN_RIGHT)
+    this.appendValueInput("DAY")
+	.appendField(Blockly.Msg.ARD_DS3231_READDAY)
+	.setAlign(Blockly.ALIGN_RIGHT),
+    this.appendValueInput("HOUR")
+	.appendField(Blockly.Msg.ARD_DS3231_READHOUR)
+	.setAlign(Blockly.ALIGN_RIGHT),
+    this.appendValueInput("MINUTE")
+	.appendField(Blockly.Msg.ARD_DS3231_READMINUTE)
+	.setAlign(Blockly.ALIGN_RIGHT),
+    this.appendValueInput("SECOND")
+	.appendField(Blockly.Msg.ARD_DS3231_READSECOND)
+	.setAlign(Blockly.ALIGN_RIGHT);
+    this.setInputsInline(false);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_DS3221_READ_TIP);
+  },
+  /** @return {string} The type of return value for the block, a string. */
+  getBlockType: function() {
+    return Blockly.Types.TEXT;
+  }
+};

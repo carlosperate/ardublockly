@@ -81,6 +81,11 @@
 	"LOGIC_OPERATION_TOOLTIP_AND": "ರಡ್ಡ್ ಸೂಚನೆಲಾ ನಿಜೊ ಆದಿತ್ತ್ಂಡ ನಿಜವಾತ್ ಪಿರಕೊರ್ಲೆ",
 	"LOGIC_OPERATION_AND": "ಬುಕ್ಕೊ",
 	"LOGIC_OPERATION_OR": "ಅತ್ತಂಡ",
+
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+
+	"LOGIC_OPERATION_NOT": "not",
+
 	"LOGIC_BOOLEAN_TRUE": "ಸತ್ಯೊ",
 	"LOGIC_BOOLEAN_FALSE": "ಸುಲ್ಲು",
 	"LOGIC_NULL": "ಸೊನ್ನೆ",

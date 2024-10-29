@@ -100,6 +100,8 @@
 	"LOGIC_OPERATION_AND": "그리고",
 	"LOGIC_OPERATION_TOOLTIP_OR": "적어도 하나의 값이 참일 경우 참을 반환합니다.",
 	"LOGIC_OPERATION_OR": "또는",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_HELPURL": "https://ko.wikipedia.org/wiki/%EB%B6%80%EC%A0%95",
 	"LOGIC_NEGATE_TITLE": "%1 의 반대",
 	"LOGIC_NEGATE_TOOLTIP": "입력값이 거짓이라면 참을 반환합니다. 참이라면 거짓을 반환합니다.",

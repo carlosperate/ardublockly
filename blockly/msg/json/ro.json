@@ -86,6 +86,8 @@
 	"LOGIC_OPERATION_AND": "şi",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Returnează adevărat dacă cel puţin una din intrări este adevărată.",
 	"LOGIC_OPERATION_OR": "sau",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "non %1",
 	"LOGIC_NEGATE_TOOLTIP": "Returnează adevărat dacă intrarea este falsă.  Returnează fals dacă intrarea este adevărată.",
 	"LOGIC_BOOLEAN_TRUE": "adevărat",

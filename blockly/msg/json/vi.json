@@ -84,6 +84,8 @@
 	"LOGIC_OPERATION_AND": "và",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Hoàn trả \"đúng\" (true) nếu ít nhất một trong hai đầu vào đúng.",
 	"LOGIC_OPERATION_OR": "hoặc",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "không %1",
 	"LOGIC_NEGATE_TOOLTIP": "Hoàn trả \"đúng\" (true) nếu đầu vào sai.  Hoàn trả \"sai\" (false) nếu đầu vào đúng.",
 	"LOGIC_BOOLEAN_TRUE": "đúng",

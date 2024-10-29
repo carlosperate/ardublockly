@@ -39,6 +39,7 @@ Ardublockly.bindActionFunctions = function() {
   // Navigation buttons
   Ardublockly.bindClick_('button_load', Ardublockly.loadUserXmlFile);
   Ardublockly.bindClick_('button_save', Ardublockly.saveXmlFile);
+  Ardublockly.bindClick_('button_savesketch', Ardublockly.saveSketchFile);
   Ardublockly.bindClick_('button_delete', Ardublockly.discardAllBlocks);
 
   // Side menu buttons, they also close the side menu
@@ -48,6 +49,10 @@ Ardublockly.bindActionFunctions = function() {
   });
   Ardublockly.bindClick_('menu_save', function() {
     Ardublockly.saveXmlFile();
+    $('.button-collapse').sideNav('hide');
+  });
+  Ardublockly.bindClick_('menu_savesketch', function() {
+    Ardublockly.saveSketchFile();
     $('.button-collapse').sideNav('hide');
   });
   Ardublockly.bindClick_('menu_delete', function() {

@@ -96,6 +96,8 @@
 	"LOGIC_OPERATION_AND": "und",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Ist wahr (true), wenn einer der beiden Werte wahr (true) ist.",
 	"LOGIC_OPERATION_OR": "oder",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Ist wahr (true), wenn keiner der beiden Werte wahr (true) ist.",
+	"LOGIC_OPERATION_NOT": "nicht",
 	"LOGIC_NEGATE_TITLE": "nicht %1",
 	"LOGIC_NEGATE_TOOLTIP": "Ist wahr (true), wenn der Eingabewert falsch (false) ist.  Ist falsch (false), wenn der Eingabewert wahr (true) ist.",
 	"LOGIC_BOOLEAN_TRUE": "wahr",

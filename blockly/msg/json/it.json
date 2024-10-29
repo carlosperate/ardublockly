@@ -90,6 +90,8 @@
 	"LOGIC_OPERATION_AND": "e",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Restituisce vero se almeno uno degli input è vero.",
 	"LOGIC_OPERATION_OR": "o",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "non %1",
 	"LOGIC_NEGATE_TOOLTIP": "Restituisce vero se l'input è falso. Restituisce falso se l'input è vero.",
 	"LOGIC_BOOLEAN_TRUE": "vero",

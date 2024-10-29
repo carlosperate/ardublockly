@@ -253,13 +253,29 @@ Blockly.Msg.LOGIC_COMPARE_TOOLTIP_GTE = 'Return true if the first input is great
 /// url - Information about the Boolean conjunction ("and") and disjunction ("or") operators.  Consider using the translation of [https://en.wikipedia.org/wiki/Boolean_logic https://en.wikipedia.org/wiki/Boolean_logic], if it exists in your language.
 Blockly.Msg.LOGIC_OPERATION_HELPURL = 'https://github.com/google/blockly/wiki/Logic#logical-operations';
 /// tooltip - See [https://en.wikipedia.org/wiki/Logical_conjunction https://en.wikipedia.org/wiki/Logical_conjunction].
-Blockly.Msg.LOGIC_OPERATION_TOOLTIP_AND = 'Return true if both inputs are true.';
 /// block text - See [https://en.wikipedia.org/wiki/Logical_conjunction https://en.wikipedia.org/wiki/Logical_conjunction].\n{{Identical|And}}
-Blockly.Msg.LOGIC_OPERATION_AND = 'and';
 /// block text - See [https://en.wikipedia.org/wiki/Disjunction https://en.wikipedia.org/wiki/Disjunction].
-Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR = 'Return true if at least one of the inputs is true.';
 /// block text - See [https://en.wikipedia.org/wiki/Disjunction https://en.wikipedia.org/wiki/Disjunction].\n{{Identical|Or}}
+Blockly.Msg.LOGIC_OPERATION_AND = 'and';
 Blockly.Msg.LOGIC_OPERATION_OR = 'or';
+Blockly.Msg.LOGIC_OPERATION_NOT = 'not';
+Blockly.Msg.LOGIC_OPERATION_TOOLTIP_AND = 'Return true if both inputs are true.';
+Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR = 'Return true if at least one of the inputs is true.';
+Blockly.Msg.LOGIC_OPERATION_TOOLTIP_NOT = "Return true if both inputs are false.";
+
+/// Bitwise operators and "&", or "|", xor "^", not "~", shift left "<<", and shift right ">>"
+Blockly.Msg.BITWISE_OPERATION_AND = '&';
+Blockly.Msg.BITWISE_OPERATION_OR = '|';
+Blockly.Msg.BITWISE_OPERATION_XOR = '^';
+Blockly.Msg.BITWISE_OPERATION_NOT = '~';
+Blockly.Msg.BITWISE_OPERATION_SHIFTLEFT = '<<';
+Blockly.Msg.BITWISE_OPERATION_SHIFTRIGHT = '>>';
+Blockly.Msg.BITWISE_OPERATION_TOOLTIP_AND = "Binary AND Operator copies a bit to the result if it exists in both operands.";
+Blockly.Msg.BITWISE_OPERATION_TOOLTIP_OR = "Binary OR Operator copies a bit if it exists in either operand";
+Blockly.Msg.BITWISE_OPERATION_TOOLTIP_XOR = "Binary XOR Operator copies the bit if it is set in one operand but not both.";
+Blockly.Msg.BITWISE_OPERATION_TOOLTIP_NOT = "Binary Ones Complement Operator is unary and has the effect of flipping bits.";
+Blockly.Msg.BITWISE_OPERATION_TOOLTIP_SHIFTLEFT = "The left operands value is moved left by the number of bits specified by the right operand.";
+Blockly.Msg.BITWISE_OPERATION_TOOLTIP_SHIFTRIGHT = "The left operands value is moved right by the number of bits specified by the right operand.";
 
 /// url - Information about logical negation.  The translation of [https://en.wikipedia.org/wiki/Logical_negation https://en.wikipedia.org/wiki/Logical_negation] is recommended if it exists in the target language.
 Blockly.Msg.LOGIC_NEGATE_HELPURL = 'https://github.com/google/blockly/wiki/Logic#not';

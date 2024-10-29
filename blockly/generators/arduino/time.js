@@ -71,3 +71,45 @@ goog.require('Blockly.Arduino');
  Blockly.Arduino['infinite_loop'] = function(block) {
   return 'while(true);\n';
 };
+
+/**
+ * Code generator to setup realtime clock RTC DS3231.
+ */
+Blockly.Arduino['ds3231_setup'] = function(block) {
+  Blockly.Arduino.addInclude('rtc', '#include <Wire.h>\n#include <RTClib.h>');
+  Blockly.Arduino.addDeclaration('rtc_d', 'RTC_DS3231 rtc;');
+  Blockly.Arduino.addVariable('rtc_v', 'int vYear;\nint vMonth;\nint vDay;\nint vHours;\nint vMinutes;\nint vSecs;');
+  Blockly.Arduino.addSetup('rtc_s', 'rtc.begin();');
+
+};
+
+/**
+ * Code generator to set clock of RTC DS3231.
+ */
+Blockly.Arduino['ds3231_setclock'] = function(block) {
+  var set = if (block.getFieldValue('SETCLOCK') === 'TRUE') {true} else {false}
+  var year = block.getFieldValue('SETYEAR');
+  var month = block.getFieldValue('SETMONTH');
+  var day = block.getFieldValue('SETDAY');
+  var hour = block.getFieldValue('SETHOUR');
+  var minute = block.getFieldValue('SETMINUTE');
+  Blockly.Arduino.addSetup('rtc_set', 'bool setclock = '+set+';\n  if(setclock == TRUE) {\n    rtc.adjust(DateTime('+year+', '+month+', '+day+', '+hour+', '+minute+', 0));\n  }');
+  return '';
+};
+
+/**
+ * Code generator to read date and time from RTC DS3231
+ */
+Blockly.Arduino['ds3231_read'] = function(block) {
+  var year = Blockly.Arduino.valueToCode(block, 'YEAR', Blockly.Arduino.ORDER_ATOMIC);
+  var month = Blockly.Arduino.valueToCode(block, 'MONTH', Blockly.Arduino.ORDER_ATOMIC);
+  var day = Blockly.Arduino.valueToCode(block, 'DAY', Blockly.Arduino.ORDER_ATOMIC);
+  var hour = Blockly.Arduino.valueToCode(block, 'HOUR', Blockly.Arduino.ORDER_ATOMIC);
+  var minute = Blockly.Arduino.valueToCode(block, 'MINUTE', Blockly.Arduino.ORDER_ATOMIC);
+  var second = Blockly.Arduino.valueToCode(block, 'SECOND', Blockly.Arduino.ORDER_ATOMIC);
+  Blockly.Arduino.addVariable('rtc_var', 'int '+year+';\nint '+month+';\nint '+day+';\nint '+hour+';\nint '+minute+';\nint '+second+';\n');
+  var code = 'DateTime now = rtc.now();\nvYear = now.year();\nvMonth = now.month();\nvDay = now.day();\nvHours = now.hour();\nvMinutes = now.minute();\nvSecs = now.second();\n'+year+' = vYear;\n'+month+' = vMonth;\n'+day+' = vDay;\n'+hour+' = vHours;\n'+minute+' = vMinutes;\n'+second+' = vSecs;\ndelay(1000);\n';
+  return code;
+};
+
+

@@ -95,6 +95,8 @@
 	"LOGIC_OPERATION_AND": "i",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Zwróć \"prawda\" jeśli co najmniej jeden dany element ma wartość \"prawda\".",
 	"LOGIC_OPERATION_OR": "lub",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "nie %1",
 	"LOGIC_NEGATE_TOOLTIP": "Zwraca \"prawda\", jeśli dane wejściowe są fałszywe.  Zwraca \"fałsz\", jeśli dana wejściowa jest prawdziwa.",
 	"LOGIC_BOOLEAN_TRUE": "prawda",

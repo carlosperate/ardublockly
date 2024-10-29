@@ -77,6 +77,8 @@
 	"LOGIC_OPERATION_TOOLTIP_AND": "Bus teisinga, kai abi sąlygos bus tenkinamos.",
 	"LOGIC_OPERATION_AND": "ir",
 	"LOGIC_OPERATION_OR": "arba",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "ne %1",
 	"LOGIC_BOOLEAN_TRUE": "tiesa",
 	"LOGIC_BOOLEAN_FALSE": "klaidinga",

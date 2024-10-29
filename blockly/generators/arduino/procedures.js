@@ -150,12 +150,13 @@ Blockly.Arduino['arduino_functions'] = function(block) {
   }
 
   var setupBranch = Blockly.Arduino.statementToCode(block, 'SETUP_FUNC');
-  //var setupCode = Blockly.Arduino.scrub_(block, setupBranch); No comment block
+  //var setupCode = Blockly.Arduino.scrub_(block, setupBranch); //No comment block
   if (setupBranch) {
     Blockly.Arduino.addSetup('userSetupCode', setupBranch, true);
   }
 
   var loopBranch = statementToCodeNoTab(block, 'LOOP_FUNC');
-  //var loopcode = Blockly.Arduino.scrub_(block, loopBranch); No comment block
+  //No comment block
+  //var loopcode = Blockly.Arduino.scrub_(block, loopBranch); 
   return loopBranch;
 };

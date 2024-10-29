@@ -93,6 +93,8 @@
 	"LOGIC_OPERATION_AND": "ja",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Palauttaa tosi, jos ainakin yksi syötteistä on tosi.",
 	"LOGIC_OPERATION_OR": "tai",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "ei %1",
 	"LOGIC_NEGATE_TOOLTIP": "Palauttaa tosi, jos syöte on epätosi. Palauttaa epätosi, jos syöte on tosi.",
 	"LOGIC_BOOLEAN_TRUE": "tosi",

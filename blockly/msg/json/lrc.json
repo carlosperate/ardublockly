@@ -53,6 +53,8 @@
 	"CONTROLS_IF_MSG_ELSE": "هنی",
 	"LOGIC_OPERATION_AND": "و",
 	"LOGIC_OPERATION_OR": "یا",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "نه %1",
 	"LOGIC_BOOLEAN_TRUE": "راست و دوروست",
 	"LOGIC_BOOLEAN_FALSE": "غلط",

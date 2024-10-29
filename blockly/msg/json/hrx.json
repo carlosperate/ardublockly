@@ -80,6 +80,8 @@
 	"LOGIC_OPERATION_AND": "und",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Ist woahr (true) wenn en von der beide Wearte woahr (true) ist.",
 	"LOGIC_OPERATION_OR": "orrer",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "net %1",
 	"LOGIC_NEGATE_TOOLTIP": "Ist woahr (true) wenn der Ingäweweart falsch (false) ist.  Ist falsch (false) wenn der Ingäweweart woahr (true) ist.",
 	"LOGIC_BOOLEAN_TRUE": "woahr",

@@ -27,21 +27,43 @@ Blockly.Blocks['base_map'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setHelpUrl('http://arduino.cc/en/Reference/map');
-    this.setColour(Blockly.Blocks.map.HUE);
-    this.appendValueInput('NUM')
-        .appendField(Blockly.Msg.ARD_MAP)
-        .setCheck(Blockly.Types.NUMBER.checkList);
-    this.appendValueInput('DMAX')
-        .appendField(Blockly.Msg.ARD_MAP_VAL)
-        .setCheck(Blockly.Types.NUMBER.checkList);
-    this.appendDummyInput()
-        .appendField(']');
-    this.setInputsInline(true);
-    this.setOutput(true);
-    this.setTooltip(Blockly.Msg.ARD_MAP_TIP);
+    this.jsonInit({
+      "message0": Blockly.Msg.ARD_MAP,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NUM",
+          "check": Blockly.Types.NUMBER.checkList
+        },
+        {
+          "type": "input_value",
+          "name": "FROML",
+          "check": Blockly.Types.NUMBER.checkList
+        },
+        {
+          "type": "input_value",
+          "name": "FROMH",
+          "check": Blockly.Types.NUMBER.checkList
+        },
+        {
+          "type": "input_value",
+          "name": "TOL",
+          "check": Blockly.Types.NUMBER.checkList
+        },
+        {
+          "type": "input_value",
+          "name": "TOH",
+          "check": Blockly.Types.NUMBER.checkList
+        }
+      ],
+      "inputsInline": true,
+      "output": Blockly.Types.NUMBER.output,
+      "colour": Blockly.Blocks.map.HUE,
+      "tooltip": Blockly.Msg.ARD_MAP_TIP,
+      "helpUrl": 'http://arduino.cc/en/Reference/map'
+    });
   },
-  /** @return {string} The type of return value for the block, an integer. */
+  /** @return {!string} Type of the block, by definition always an integer. */
   getBlockType: function() {
     return Blockly.Types.NUMBER;
   }

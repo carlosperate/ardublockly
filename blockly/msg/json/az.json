@@ -83,6 +83,8 @@
 	"LOGIC_OPERATION_AND": "və",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Girişlərdən heç olmasa biri \"doğru\"-dursa \"doğru\" cavabını qaytarır.",
 	"LOGIC_OPERATION_OR": "və ya",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "%1 deyil",
 	"LOGIC_NEGATE_TOOLTIP": "Giriş \"yalan\"-dursa \"doğru\" cavabını qaytarır. Giriş \"doğru\"-dursa \"səhf\" cavabını qaytarır.",
 	"LOGIC_BOOLEAN_TRUE": "doğru",

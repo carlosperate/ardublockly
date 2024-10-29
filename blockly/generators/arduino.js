@@ -36,7 +36,7 @@ Blockly.Arduino.addReservedWords(
     'setup,loop,if,else,for,switch,case,while,do,break,continue,return,goto,' +
     'define,include,HIGH,LOW,INPUT,OUTPUT,INPUT_PULLUP,true,false,integer,' +
     'constants,floating,point,void,boolean,char,unsigned,byte,int,word,long,' +
-    'float,double,string,String,array,static,volatile,const,sizeof,pinMode,' +
+    'float,double,Byte,string,String,array,static,volatile,const,sizeof,pinMode,' +
     'digitalWrite,digitalRead,analogReference,analogRead,analogWrite,tone,' +
     'noTone,shiftOut,shitIn,pulseIn,millis,micros,delay,delayMicroseconds,' +
     'min,max,abs,constrain,map,pow,sqrt,sin,cos,tan,randomSeed,random,' +
@@ -44,22 +44,25 @@ Blockly.Arduino.addReservedWords(
     'detachInterrupt,interrupts,noInterrupts');
 
 /** Order of operation ENUMs. */
-Blockly.Arduino.ORDER_ATOMIC = 0;         // 0 "" ...
-Blockly.Arduino.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] .
-Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
-Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; // * / % ~/
-Blockly.Arduino.ORDER_ADDITIVE = 4;       // + -
-Blockly.Arduino.ORDER_SHIFT = 5;          // << >>
-Blockly.Arduino.ORDER_RELATIONAL = 6;     // >= > <= <
-Blockly.Arduino.ORDER_EQUALITY = 7;       // == != === !==
-Blockly.Arduino.ORDER_BITWISE_AND = 8;    // &
-Blockly.Arduino.ORDER_BITWISE_XOR = 9;    // ^
-Blockly.Arduino.ORDER_BITWISE_OR = 10;    // |
-Blockly.Arduino.ORDER_LOGICAL_AND = 11;   // &&
-Blockly.Arduino.ORDER_LOGICAL_OR = 12;    // ||
-Blockly.Arduino.ORDER_CONDITIONAL = 13;   // expr ? expr : expr
-Blockly.Arduino.ORDER_ASSIGNMENT = 14;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
-Blockly.Arduino.ORDER_NONE = 99;          // (...)
+Blockly.Arduino.ORDER_ATOMIC = 0;         	// 0 "" ...
+Blockly.Arduino.ORDER_UNARY_POSTFIX = 1;  	// expr++ expr-- () [] .
+Blockly.Arduino.ORDER_UNARY_PREFIX = 2;   	// -expr !expr ~expr ++expr --expr
+Blockly.Arduino.ORDER_MULTIPLICATIVE = 3; 	// * / % ~/
+Blockly.Arduino.ORDER_ADDITIVE = 4;       	// + -
+Blockly.Arduino.ORDER_SHIFT = 5;          	// << >>
+Blockly.Arduino.ORDER_RELATIONAL = 6;     	// >= > <= <
+Blockly.Arduino.ORDER_EQUALITY = 7;       	// == != === !==
+Blockly.Arduino.ORDER_BITWISE_AND = 8;    	// &
+Blockly.Arduino.ORDER_BITWISE_XOR = 9;    	// ^
+Blockly.Arduino.ORDER_BITWISE_OR = 10;    	// |
+Blockly.Arduino.ORDER_LOGICAL_AND = 11;   	// &&
+Blockly.Arduino.ORDER_LOGICAL_OR = 12;    	// ||
+Blockly.Arduino.ORDER_CONDITIONAL = 13;   	// expr ? expr : expr
+Blockly.Arduino.ORDER_ASSIGNMENT = 14;    	// = *= /= ~/= %= += -= <<= >>= &= ^= |=
+Blockly.Arduino.ORDER_LOGICAL_NOT = 15;   	// !
+Blockly.Arduino.ORDER_BITWISE_SHIFTLEFT = 16;   // <<
+Blockly.Arduino.ORDER_BITWISE_SHIFTRIGHT = 17;  // >>
+Blockly.Arduino.ORDER_NONE = 99;          	// (...)
 
 /**
  * A list of types tasks that the pins can be assigned. Used to track usage and
@@ -73,7 +76,9 @@ Blockly.Arduino.PinTypes = {
   STEPPER: 'STEPPER',
   SERIAL: 'SERIAL',
   I2C: 'I2C/TWI',
-  SPI: 'SPI'
+  SPI: 'SPI',
+  SENSOR: 'SENSOR',
+  DISPLAY: 'DISPLAY'
 };
 
 /**
@@ -377,10 +382,14 @@ Blockly.Arduino.getArduinoType_ = function(typeBlockly) {
       return 'long';
     case Blockly.Types.DECIMAL.typeId:
       return 'float';
+    case Blockly.Types.DOUBLE.typeId:
+      return 'double';
     case Blockly.Types.TEXT.typeId:
       return 'String';
     case Blockly.Types.CHARACTER.typeId:
       return 'char';
+    case Blockly.Types.BYTE.typeId:
+      return 'byte';
     case Blockly.Types.BOOLEAN.typeId:
       return 'boolean';
     case Blockly.Types.NULL.typeId:

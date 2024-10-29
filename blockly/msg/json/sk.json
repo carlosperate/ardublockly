@@ -84,6 +84,8 @@
 	"LOGIC_OPERATION_AND": "a",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Vráť hodnotu pravda, ak je aspoň jeden vstup pravda.",
 	"LOGIC_OPERATION_OR": "alebo",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "nie je %1",
 	"LOGIC_NEGATE_TOOLTIP": "Vráti hodnotu pravda, ak je vstup nepravda. Vráti hodnotu nepravda ak je vstup pravda.",
 	"LOGIC_BOOLEAN_TRUE": "pravda",

@@ -83,6 +83,8 @@
 	"LOGIC_OPERATION_AND": "و",
 	"LOGIC_OPERATION_TOOLTIP_OR": "بازگرداندن صحیح اگر یکی از دو ورودی صحیح باشد.",
 	"LOGIC_OPERATION_OR": "یا",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "نه %1",
 	"LOGIC_NEGATE_TOOLTIP": "صجیج باز می‌گرداند اگر ورودی نا صحیح باشند. ناصحیح بازمی‌گرداند اگر ورودی صحیح باشد.",
 	"LOGIC_BOOLEAN_TRUE": "درست",

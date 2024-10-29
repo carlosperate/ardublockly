@@ -99,6 +99,8 @@
 	"LOGIC_OPERATION_AND": "en",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Geeft \"waar\" terug als in ieder geval één van de waarden waar is.",
 	"LOGIC_OPERATION_OR": "of",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_HELPURL": "https://github.com/google/blockly/wiki/Logic#not",
 	"LOGIC_NEGATE_TITLE": "niet %1",
 	"LOGIC_NEGATE_TOOLTIP": "Geeft \"waar\" terug als de invoer \"onwaar\" is. Geeft \"onwaar\" als de invoer \"waar\" is.",

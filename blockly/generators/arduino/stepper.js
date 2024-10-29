@@ -50,8 +50,7 @@ Blockly.Arduino['stepper_config'] = function(block) {
   globalCode = globalCode.slice(0, -2) + ');';
 
   //stepper is a variable containing the used pins
-  Blockly.Arduino.addVariable(stepperName,
-      pinArray, true);
+  Blockly.Arduino.addVariable(stepperName,pinArray, true);
   stepperName = 'stepper_' + stepperName;
 
   Blockly.Arduino.addInclude('stepper', '#include <Stepper.h>');

@@ -85,6 +85,11 @@
 	"LOGIC_OPERATION_AND": "மற்றும்",
 	"LOGIC_OPERATION_TOOLTIP_OR": "ஏதேனும் ஒரு மதிப்பு மெய் ஆனால், மெய் பின்கொடு",
 	"LOGIC_OPERATION_OR": "அல்லது",
+
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+
+	"LOGIC_OPERATION_NOT": "not",
+
 	"LOGIC_NEGATE_TITLE": "%1 இல்லை",
 	"LOGIC_NEGATE_TOOLTIP": "மெய் ஆனால், பொய் பின்கொடு. பொய் ஆனால், மெய் பின்கொடு.",
 	"LOGIC_BOOLEAN_TRUE": "மெய்",

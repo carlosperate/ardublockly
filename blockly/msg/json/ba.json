@@ -88,6 +88,8 @@
 	"LOGIC_OPERATION_AND": "һәм",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Өҫтәлмәләрҙең береһе генә дөрөҫ булһа, дөрөҫ аңлатманы ҡайтара.",
 	"LOGIC_OPERATION_OR": "йәки",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "%1 түгел",
 	"LOGIC_NEGATE_TOOLTIP": "Өҫтәлмә ялған булһа, дөрөҫ аңлатманы ҡайтара. Өҫтәлмә дөрөҫ булһа, ялған аңлатманы ҡайтара.",
 	"LOGIC_BOOLEAN_TRUE": "дөрөҫ",

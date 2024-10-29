@@ -84,6 +84,8 @@
 	"LOGIC_OPERATION_TOOLTIP_AND": "Returnere sand, hvis begge inputs er sande.",
 	"LOGIC_OPERATION_AND": "og",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Returnere sand, hvis mindst et af inputtene er sande.",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_OPERATION_OR": "eller",
 	"LOGIC_NEGATE_TITLE": "ikke %1",
 	"LOGIC_NEGATE_TOOLTIP": "Returnerer sand, hvis input er falsk. Returnerer falsk, hvis input er sandt.",

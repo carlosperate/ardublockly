@@ -91,6 +91,8 @@
 	"LOGIC_OPERATION_AND": "και",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Επιστρέφει αληθής αν τουλάχιστον μια από τις εισόδους είναι αληθής.",
 	"LOGIC_OPERATION_OR": "ή",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "όχι %1",
 	"LOGIC_NEGATE_TOOLTIP": "Επιστρέφει αληθής αν η είσοδος είναι ψευδής. Επιστρέφει ψευδής αν η είσοδος είναι αληθής.",
 	"LOGIC_BOOLEAN_TRUE": "αληθής",

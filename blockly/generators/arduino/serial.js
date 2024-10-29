@@ -53,7 +53,6 @@ Blockly.Arduino['serial_setup'] = function(block) {
   var serialId = block.getFieldValue('SERIAL_ID');
   var serialSpeed = block.getFieldValue('SPEED');
   var serialSetupCode = serialId + '.begin(' + serialSpeed + ');';
-  Blockly.Arduino.addSetup('serial_' + serialId, serialSetupCode, true);
-  var code = '';
-  return code;
+  Blockly.Arduino.addSetup('serial_' + serialId, serialSetupCode);
+  return '';
 };

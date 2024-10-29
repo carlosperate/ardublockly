@@ -97,6 +97,8 @@
 	"LOGIC_OPERATION_AND": "ve",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Girilen iki değerden en az biri doğruysa \"True\" değerini verir.",
 	"LOGIC_OPERATION_OR": "veya",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "%1 değil",
 	"LOGIC_NEGATE_TOOLTIP": "Girilen değer yanlışsa \"True\" değerini verir.Girilen değer doğruysa \"False\" değerini verir.",
 	"LOGIC_BOOLEAN_TRUE": "Olumlu",

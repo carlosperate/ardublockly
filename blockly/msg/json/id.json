@@ -88,6 +88,8 @@
 	"LOGIC_OPERATION_AND": "dan",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Kembalikan benar jika minimal satu input nilainya benar.",
 	"LOGIC_OPERATION_OR": "atau",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "bukan (not) %1",
 	"LOGIC_NEGATE_TOOLTIP": "Kembalikan benar jika input salah. Kembalikan salah jika input benar.",
 	"LOGIC_BOOLEAN_TRUE": "benar",

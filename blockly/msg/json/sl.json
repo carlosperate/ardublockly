@@ -84,6 +84,8 @@
 	"LOGIC_OPERATION_AND": "in",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Vrne resnično, če je vsaj eden od vnosov resničen.",
 	"LOGIC_OPERATION_OR": "ali",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "ne %1",
 	"LOGIC_NEGATE_TOOLTIP": "Vrne resnično, če je vnos neresničen. Vrne neresnično, če je vnos resničen.",
 	"LOGIC_BOOLEAN_TRUE": "resnično",

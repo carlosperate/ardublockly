@@ -62,6 +62,8 @@
 	"LOGIC_OPERATION_AND": "এবং",
 	"LOGIC_OPERATION_TOOLTIP_OR": "পাঠাবে সত্য যদি অন্ততপক্ষে যেকোন একটি ইনপুট সত্য হয়।",
 	"LOGIC_OPERATION_OR": "অথবা",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "%1 নয়",
 	"LOGIC_NEGATE_TOOLTIP": "পাঠাবে সত্য যদি ইনপুট মিথ্যা হয়। পাঠাবে মিথ্যা যদি ইনপুট সত্য হয়।",
 	"LOGIC_BOOLEAN_TRUE": "সত্য",

@@ -84,6 +84,8 @@
 	"LOGIC_OPERATION_AND": "ha(g)",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Distreiñ gwir m'eo gwir unan eus an daou voned da nebeutañ.",
 	"LOGIC_OPERATION_OR": "pe",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "nann %1",
 	"LOGIC_NEGATE_TOOLTIP": "Distreiñ gwir m'eo faos ar moned. Distreiñ faos m'eo gwir ar moned.",
 	"LOGIC_BOOLEAN_TRUE": "gwir",

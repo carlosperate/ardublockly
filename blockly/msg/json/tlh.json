@@ -55,6 +55,8 @@
 	"CONTROLS_IF_MSG_ELSE": "pagh",
 	"LOGIC_OPERATION_AND": "'ej",
 	"LOGIC_OPERATION_OR": "qoj",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "yoymoH %1",
 	"LOGIC_BOOLEAN_TRUE": "teH",
 	"LOGIC_BOOLEAN_FALSE": "teHbe'",

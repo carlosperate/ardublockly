@@ -84,6 +84,8 @@
 	"LOGIC_OPERATION_AND": "e",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Retornar ver si al minus un del entratas es ver.",
 	"LOGIC_OPERATION_OR": "o",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "non %1",
 	"LOGIC_NEGATE_TOOLTIP": "Retornar ver si le entrata es false. Retornar false si le entrata es ver.",
 	"LOGIC_BOOLEAN_TRUE": "ver",

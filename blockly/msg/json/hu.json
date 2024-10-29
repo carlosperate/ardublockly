@@ -94,6 +94,8 @@
 	"LOGIC_OPERATION_AND": "és",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Igaz, ha legalább az egyik kifejezés igaz.",
 	"LOGIC_OPERATION_OR": "vagy",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "nem %1",
 	"LOGIC_NEGATE_TOOLTIP": "Igaz, ha a kifejezés hamis.  Hamis, ha a kifejezés igaz.",
 	"LOGIC_BOOLEAN_TRUE": "igaz",

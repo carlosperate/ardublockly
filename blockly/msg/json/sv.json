@@ -90,6 +90,8 @@
 	"LOGIC_OPERATION_AND": "och",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Ger tillbaka sant om minst ett av värdena är sant.",
 	"LOGIC_OPERATION_OR": "eller",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "inte %1",
 	"LOGIC_NEGATE_TOOLTIP": "Ger tillbaka sant om inmatningen är falsk. Ger tillbaka falskt och inmatningen är sann.",
 	"LOGIC_BOOLEAN_TRUE": "sant",

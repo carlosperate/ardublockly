@@ -91,6 +91,8 @@
 	"LOGIC_OPERATION_AND": "和",
 	"LOGIC_OPERATION_TOOLTIP_OR": "如果至少有一个输入结果为真，则返回真。",
 	"LOGIC_OPERATION_OR": "或",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_HELPURL": "https://github.com/google/blockly/wiki/Logic#not",
 	"LOGIC_NEGATE_TITLE": "非%1",
 	"LOGIC_NEGATE_TOOLTIP": "如果输入结果为假，则返回真；如果输入结果为真，则返回假。",

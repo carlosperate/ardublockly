@@ -21,11 +21,17 @@ goog.require('Blockly.Arduino');
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['base_map'] = function(block) {
-  var valueNum = Blockly.Arduino.valueToCode(
-      block, 'NUM', Blockly.Arduino.ORDER_NONE) || '0';
-  var valueDmax = Blockly.Arduino.valueToCode(
-      block, 'DMAX', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var vNum = Blockly.Arduino.valueToCode(
+      block, 'NUM', Blockly.Arduino.ORDER_NONE) || '10';
+  var vFromL = Blockly.Arduino.valueToCode(
+      block, 'FROML', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var vFromH = Blockly.Arduino.valueToCode(
+      block, 'FROMH', Blockly.Arduino.ORDER_ATOMIC) || '100';
+  var vToL = Blockly.Arduino.valueToCode(
+      block, 'TOL', Blockly.Arduino.ORDER_ATOMIC) || '0';
+  var vToH = Blockly.Arduino.valueToCode(
+      block, 'TOH', Blockly.Arduino.ORDER_ATOMIC) || '1000';
 
-  var code = 'map(' + valueNum + ', 0, 1024, 0, ' + valueDmax + ')';
+  var code = 'map(' + vNum + ', ' + vFromL + ', ' + vFromH + ', ' + vToL + ', ' + vToH + ')';
   return [code, Blockly.Arduino.ORDER_NONE];
 };

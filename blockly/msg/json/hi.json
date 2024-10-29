@@ -78,6 +78,8 @@
 	"LOGIC_OPERATION_AND": "AND (तथा)",
 	"LOGIC_OPERATION_TOOLTIP_OR": "ट्रू रिटर्न करें यदि दोनो मे से इक इनपुट ट्रू हो।",
 	"LOGIC_OPERATION_OR": "OR (अथवा)",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "NOT (पूरक) %1",
 	"LOGIC_NEGATE_TOOLTIP": "ट्रू रिटर्न करता है यदि इनपुट फॉल्स है। फॉल्स रिटर्न करता है यदि इनपुट ट्रू है।",
 	"LOGIC_BOOLEAN_TRUE": "ट्रू",

@@ -126,7 +126,10 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from collections import MutableMapping
+try:
+    from _collections_abc import MutableMapping
+except ImportError:
+    from collections import MutableMapping
 import functools
 import io
 import itertools

@@ -91,6 +91,8 @@
 	"LOGIC_OPERATION_AND": "та",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Повертає істину, якщо принаймні один з входів істинний.",
 	"LOGIC_OPERATION_OR": "або",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "не %1",
 	"LOGIC_NEGATE_TOOLTIP": "Повертає істину, якщо вхідне значення хибне. Повертає хибність, якщо вхідне значення істинне.",
 	"LOGIC_BOOLEAN_TRUE": "істина",

@@ -6,16 +6,16 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from collections import MutableMapping
+from _collections_abc import MutableMapping
 try:
-    from collections import UserDict
+    from _collections_abc import UserDict
 except ImportError:
-    from UserDict import UserDict
+    from collections import UserDict
 
 try:
-    from collections import OrderedDict
+    from _collections_abc import OrderedDict
 except ImportError:
-    from ordereddict import OrderedDict
+    from collections import OrderedDict
 
 from io import open
 import sys

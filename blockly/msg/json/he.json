@@ -92,6 +92,8 @@
 	"LOGIC_OPERATION_AND": "ו",
 	"LOGIC_OPERATION_TOOLTIP_OR": "תחזיר נכון אם מתקיים לפחות אחד מהקלטים נכונים.",
 	"LOGIC_OPERATION_OR": "או",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "לא %1",
 	"LOGIC_NEGATE_TOOLTIP": "החזר אמת אם הקלט הוא שקר. החזר שקר אם הקלט אמת.",
 	"LOGIC_BOOLEAN_TRUE": "נכון",

@@ -345,13 +345,14 @@ Blockly.Blocks['logic_compare'] = {
 
 Blockly.Blocks['logic_operation'] = {
   /**
-   * Block for logical operations: 'and', 'or'.
+   * Block for logical operations: 'and', 'or', 'not'.
    * @this Blockly.Block
    */
   init: function() {
-    var OPERATORS =
-        [[Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
-         [Blockly.Msg.LOGIC_OPERATION_OR, 'OR']];
+    var OPERATORS = [
+         [Blockly.Msg.LOGIC_OPERATION_AND, 'AND'],
+         [Blockly.Msg.LOGIC_OPERATION_OR, 'OR'],
+	 [Blockly.Msg.LOGIC_OPERATION_NOT, 'NOT']];
     this.setHelpUrl(Blockly.Msg.LOGIC_OPERATION_HELPURL);
     this.setColour(Blockly.Blocks.logic.HUE);
     this.setOutput(true, Blockly.Types.BOOLEAN.output);
@@ -367,14 +368,11 @@ Blockly.Blocks['logic_operation'] = {
       var op = thisBlock.getFieldValue('OP');
       var TOOLTIPS = {
         'AND': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_AND,
-        'OR': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR
+        'OR': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_OR,
+	'NOT': Blockly.Msg.LOGIC_OPERATION_TOOLTIP_NOT
       };
       return TOOLTIPS[op];
     });
-  },
-  /** Assigns a block type, logic comparison operations result in bools. */
-  getBlockType: function() {
-    return Blockly.Types.BOOLEAN;
   }
 };
 

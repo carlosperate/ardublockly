@@ -69,7 +69,12 @@ Blockly.Arduino['logic_compare'] = function(block) {
  * @return {array} Completed code with order of operation.
  */
 Blockly.Arduino['logic_operation'] = function(block) {
-  var operator = (block.getFieldValue('OP') == 'AND') ? '&&' : '||';
+  var OPERATORS = {
+    'AND': '&&',
+    'OR': '||',
+    'NOT': '!'
+  };
+  var operator = OPERATORS[block.getFieldValue('OP')];
   var order = (operator == '&&') ? Blockly.Arduino.ORDER_LOGICAL_AND :
       Blockly.Arduino.ORDER_LOGICAL_OR;
   var argument0 = Blockly.Arduino.valueToCode(block, 'A', order) || 'false';

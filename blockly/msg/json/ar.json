@@ -86,6 +86,8 @@
 	"LOGIC_OPERATION_AND": "و",
 	"LOGIC_OPERATION_TOOLTIP_OR": "ترجع صحيح إذا كان واحد على الأقل من المدخلات صحيح.",
 	"LOGIC_OPERATION_OR": "أو",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "ليس من %1",
 	"LOGIC_NEGATE_TOOLTIP": "يرجع صحيح إذا كان الإدخال خاطئ .  يرجع خاطئ إذا كان الإدخال صحيح.",
 	"LOGIC_BOOLEAN_TRUE": "صحيح",

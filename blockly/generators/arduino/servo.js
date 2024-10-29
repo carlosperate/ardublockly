@@ -57,8 +57,7 @@ Blockly.Arduino['servo_read'] = function(block) {
   var pinKey = block.getFieldValue('SERVO_PIN');
   var servoName = 'myServo' + pinKey;
 
-  Blockly.Arduino.reservePin(
-      block, pinKey, Blockly.Arduino.PinTypes.SERVO, 'Servo Read');
+  Blockly.Arduino.reservePin(block, pinKey, Blockly.Arduino.PinTypes.SERVO, 'Servo Read');
 
   Blockly.Arduino.addInclude('servo', '#include <Servo.h>');
   Blockly.Arduino.addDeclaration('servo_' + pinKey, 'Servo ' + servoName + ';');

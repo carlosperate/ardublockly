@@ -78,6 +78,35 @@ Blockly.Blocks['io_digitalread'] = {
   }
 };
 
+Blockly.Blocks['io_digitalread_pullup'] = {
+  /**
+   * Block for creating a 'read pin'.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl("https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/");
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_DIGITALREAD_PULLUP)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
+    this.setOutput(true, Blockly.Types.BOOLEAN.output);
+    this.setTooltip(Blockly.Msg.ARD_DIGITALREAD_PULLUP_TIP);
+  },
+  /** @return {!string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.BOOLEAN;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
+
 Blockly.Blocks['io_builtin_led'] = {
   /**
    * Block for setting built-in LED to a state.
@@ -260,3 +289,260 @@ Blockly.Blocks['io_pulsetimeout'] = {
     return Blockly.Types.NUMBER;
   }
 };
+
+Blockly.Blocks['mkpad_setup'] = {
+  /**
+   * Block for setup 4 x 4 Membrane Key Pad with 4 Row pins and 4 Column pins
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/keypad/');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_MKPAD_SETUP);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_MKPAD_ROW1)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'ROW1')
+        .appendField(Blockly.Msg.ARD_MKPAD_ROW2)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'ROW2')
+        .appendField(Blockly.Msg.ARD_MKPAD_ROW3)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'ROW3')
+        .appendField(Blockly.Msg.ARD_MKPAD_ROW4)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'ROW4');
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_MKPAD_COL1)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'COL1')
+        .appendField(Blockly.Msg.ARD_MKPAD_COL2)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'COL2')
+        .appendField(Blockly.Msg.ARD_MKPAD_COL3)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'COL3')
+        .appendField(Blockly.Msg.ARD_MKPAD_COL4)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'COL4');
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_MKPAD_SETUP_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'ROW1', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'ROW2', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'ROW3', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'ROW4', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'COL1', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'COL2', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'COL3', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'COL4', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['mkpad_getkey'] = {
+  /**
+   * Block for getting the pressed key from a 4x4 Membrane Keypad.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/keypad/');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_MKPAD_SETUP)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'ROW1');
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+    this.setTooltip(Blockly.Msg.ARD_MKPAD_GETKEY_TIP);
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'ROW1', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['irrecv_setup'] = {
+  /**
+   * Block for setup KY-022 Infrared Receiver Sensor Module.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/irremote/');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_IRRECV_SETUP)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN')
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_IRRECV_SETUP_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['irrecv_read'] = {
+  /**
+   * Block for receiving values from remote by KY-022 Infrared Receiver Sensor Module.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/irremote/');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_IRRECV_READ)
+        .appendField(new Blockly.FieldDropdown(
+            Blockly.Arduino.Boards.selected.digitalPins), 'PIN');
+    this.setInputsInline(false);
+    this.setTooltip(Blockly.Msg.ARD_IRRECV_READ_TIP);
+    this.setPreviousStatement(false, null);
+    this.setNextStatement(false, null);
+    this.setOutput(true, Blockly.Types.NUMBER.output);
+  },
+  /** @return {!string} The type of input value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.NUMBER;
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'PIN', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['rc522_setup'] = {
+  /**
+   * Block for setup RFID MFRC522 Radio-Frequency IDentification (RFID) Scanner Module.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/mfrc522/');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendDummyInput()
+        .appendField(Blockly.Msg.ARD_RC522_SETUP)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), 'RST')
+        .appendField(Blockly.Msg.ARD_RC522_SETUP_SS)
+        .appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), 'SS');
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_RC522_SETUP_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'RST', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'SS', 'digitalPins');
+  }
+};
+
+Blockly.Blocks['rc522_getuid'] = {
+  /**
+   * Block for getting uid from a card or pad using RFID RC522.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/mfrc522/');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendValueInput('VAR').appendField(Blockly.Msg.ARD_RC522_GETUID);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_RC522_GETUID_TIP);
+  },
+  /** @return {string} The type of return value for the block, an integer. */
+  getBlockType: function() {
+    return Blockly.Types.TEXT;
+  }
+};
+
+Blockly.Blocks['rc522_adduid'] = {
+  /**
+   * Block for adding uid to code
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/libraries/mfrc522/');
+    this.setColour(Blockly.Blocks.io.HUE);
+    this.appendValueInput("NUID").appendField(Blockly.Msg.ARD_RC522_ADDUID);
+    this.appendValueInput("VAR").appendField(Blockly.Msg.ARD_RC522_ADDUID_AS);
+    this.setInputsInline(true);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.ARD_RC522_ADDUID_TIP);
+  } ,
+  /** @return {string} The type of return value for the block, a string. */
+  getBlockType: function() {
+    return Blockly.Types.TEXT;
+  }
+};
+
+Blockly.Blocks['io_shiftout'] = {
+  /**
+   * Block for shiftOut() function of Arduino 
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.setHelpUrl('https://www.arduino.cc/reference/en/language/functions/advanced-io/shiftout/');
+    this.setColour(Blockly.Blocks.various.HUE);
+    this.appendDummyInput().appendField(Blockly.Msg.ARD_SHIFTOUT)
+	.appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins), "DATA")
+	.appendField(Blockly.Msg.ARD_SHIFTOUT_C)
+	.appendField(new Blockly.FieldDropdown(Blockly.Arduino.Boards.selected.digitalPins),"CLK")
+	.appendField(Blockly.Msg.ARD_SHIFTOUT_O)
+	.appendField(new Blockly.FieldDropdown([["MSBFIRST","MSBFIRST"],["LSBFIRST","LSBFIRST"]]), "BO");
+    this.appendValueInput("BVAL").appendField(Blockly.Msg.ARD_SHIFTOUT_B);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setInputsInline(true);
+    this.setTooltip(Blockly.Msg.ARD_SHIFTOUT_TIP);
+  },
+  /**
+   * Updates the content of the the pin related fields.
+   * @this Blockly.Block
+   */
+  updateFields: function() {
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'DATA', 'digitalPins');
+    Blockly.Arduino.Boards.refreshBlockFieldDropdown(
+        this, 'CLK', 'digitalPins');
+  }
+};
+
+

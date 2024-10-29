@@ -97,6 +97,8 @@
 	"LOGIC_OPERATION_AND": "e",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Retorna verdadeiro se uma das estradas for verdadeira.",
 	"LOGIC_OPERATION_OR": "ou",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "não %1",
 	"LOGIC_NEGATE_TOOLTIP": "Retorna verdadeiro se a entrada for falsa.  Retorna falsa se a entrada for verdadeira.",
 	"LOGIC_BOOLEAN_TRUE": "verdadeiro",

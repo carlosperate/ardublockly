@@ -95,6 +95,8 @@
 	"LOGIC_OPERATION_AND": "og",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Skila sönnu ef að minnsta kosti eitt inntak er satt.",
 	"LOGIC_OPERATION_OR": "eða",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_HELPURL": "https://github.com/google/blockly/wiki/Logic#not",
 	"LOGIC_NEGATE_TITLE": "ekki %1",
 	"LOGIC_NEGATE_TOOLTIP": "Skilar sönnu ef inntakið er ósatt. Skilar ósönnu ef inntakið er satt.",

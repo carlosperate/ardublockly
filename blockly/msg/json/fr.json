@@ -100,6 +100,8 @@
 	"LOGIC_OPERATION_AND": "et",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Renvoyer vrai si au moins une des entrées est vraie.",
 	"LOGIC_OPERATION_OR": "ou",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_HELPURL": "https://github.com/google/blockly/wiki/Logic#not",
 	"LOGIC_NEGATE_TITLE": "pas %1",
 	"LOGIC_NEGATE_TOOLTIP": "Renvoie vrai si l’entrée est fausse. Renvoie faux si l’entrée est vraie.",

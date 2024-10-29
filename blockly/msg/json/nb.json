@@ -87,6 +87,8 @@
 	"LOGIC_OPERATION_AND": "og",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Returnerer sant hvis minst ett av argumentene er sant.",
 	"LOGIC_OPERATION_OR": "eller",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "ikke %1",
 	"LOGIC_NEGATE_TOOLTIP": "Returnerer sant hvis argumentet er usant. Returnerer usant hvis argumentet er sant.",
 	"LOGIC_BOOLEAN_TRUE": "sann",

@@ -77,6 +77,8 @@
 	"LOGIC_OPERATION_AND": "လႄႈ",
 	"LOGIC_OPERATION_TOOLTIP_OR": "သင်ဝႃႈ ဢၼ်ၽိူမ်ႉသႂ်ႇ ၵမ်းလိုၼ်းသုတ်း မၢၼ်ႇမႅၼ်ႈၸိုင် မႄးၶိုၼ်း ႁႂ်ႈမၢၼ်ႇမႅၼ်ႈ",
 	"LOGIC_OPERATION_OR": "ဢမ်ႇၼၼ်",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "ဢမ်ႇၸႂ်ႈ %1",
 	"LOGIC_NEGATE_TOOLTIP": "သင်ဝႃႈ ဢၼ်ၽိူမ်ႉသႂ်ႇ ဢမ်ႇၼႅၼ်ႈၼႃၸိုင် မႄးၶိုၼ်း ႁႂ်ႈမၢၼ်ႇမႅၼ်ႈ။ သင်ဝႃႈ ဢၼ်ၽိူမ်ႉသႂ်ႇ မၢၼ်ႇမႅၼ်ႈၸိုင် ၶိုၼ်းမူၼ်ႉမႄး ႁႂ်ႈၼႅၼ်ႈၼႃ",
 	"LOGIC_BOOLEAN_TRUE": "မၢၼ်ႇမႅၼ်ႈ",

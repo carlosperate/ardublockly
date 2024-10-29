@@ -72,6 +72,8 @@
 	"LOGIC_OPERATION_AND": "и",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Дава вистина ако барем еден од вносовите е вистинит.",
 	"LOGIC_OPERATION_OR": "или",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "не %1",
 	"LOGIC_NEGATE_TOOLTIP": "Дава вистина ако вносот е невистинит. Дава невистина ако вносот е вистинит.",
 	"LOGIC_BOOLEAN_TRUE": "вистина",

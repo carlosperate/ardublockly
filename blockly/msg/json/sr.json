@@ -86,6 +86,8 @@
 	"LOGIC_OPERATION_AND": "и",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Враћа вредност „тачно“ ако је бар један од улаза тачан.",
 	"LOGIC_OPERATION_OR": "или",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "није %1",
 	"LOGIC_NEGATE_TOOLTIP": "Враћа вредност „тачно“ ако је улаз нетачан. Враћа вредност „нетачно“ ако је улаз тачан.",
 	"LOGIC_BOOLEAN_TRUE": "тачно",

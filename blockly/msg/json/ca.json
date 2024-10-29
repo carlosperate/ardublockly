@@ -83,6 +83,8 @@
 	"LOGIC_OPERATION_AND": "i",
 	"LOGIC_OPERATION_TOOLTIP_OR": "Retorna cert si almenys una de les entrades és certa.",
 	"LOGIC_OPERATION_OR": "o",
+	"LOGIC_OPERATION_TOOLTIP_NOT": "Return true if none of the inputs are true.",
+	"LOGIC_OPERATION_NOT": "not",
 	"LOGIC_NEGATE_TITLE": "no %1",
 	"LOGIC_NEGATE_TOOLTIP": "Retorna cert si l'entrada és falsa. Retorna fals si l'entrada és certa.",
 	"LOGIC_BOOLEAN_TRUE": "cert",
