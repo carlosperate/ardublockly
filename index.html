@@ -53,13 +53,13 @@ Embedded Log            </a>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Projects<span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li class="active"><a href="//www.embeddedlog.com/ardublockly/index.html">
+                            <li class="active"><a href="//ardublockly.embeddedlog.com">
                              Ardublockly
                             </a></li>
-                            <li><a href="//www.embeddedlog.com/LightUpPi-Alarm/index.html">
+                            <li><a href="//lightupalarm.embeddedlog.com">
                              LightUp Alarm
                             </a></li>
-                            <li><a href="//www.embeddedlog.com/PebbleQuickHue/index.html">
+                            <li><a href="//quickhue.embeddedlog.com">
                              QuickHue for Pebble
                             </a></li>
                         </ul>
@@ -401,5 +401,11 @@ Embedded Log            </a>
         });
     </script>
     <!-- End Banner carousel control -->
+    <script>
+        window.beforeSendHandler = (t, p) => { try { if (p.url) p.url = '/ardublockly' + new URL(p.url, location.origin).pathname; } catch (e) {} return p };
+        window.goatcounter = { path: (p) => (location.host + p) };
+    </script>
+    <script data-goatcounter="https://angc.embeddedlog.com/count" async src="//angc.embeddedlog.com/count.js"></script>
+    <script defer src="https://an.embeddedlog.com/script.js" data-website-id="b1cd7313-ad40-491d-9748-71f6789dee42" data-before-send="beforeSendHandler"></script>
 </body>
 </html>
